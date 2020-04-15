@@ -1,0 +1,33 @@
+<!-- 
+feilongWeb.cfg.xml file-based configuration document.
+<!DOCTYPE feilong-config PUBLIC "-//feilong/feilongWeb Configuration DTD 3.0//EN" "http://java.feilong.com/feilongWeb-configuration-1.0.dtd">
+<!DOCTYPE feilong-config SYSTEM "feilongWeb-configuration-1.0.dtd"> 
+-->
+
+<!-- ========== Defined Types ============================================= -->
+
+<!ENTITY % Boolean "(true|false|yes|no)">
+
+<!-- ========== Top Level Elements ======================================== -->
+<!-- The "feilong-config" element is the root of the configuration file
+     hierarchy, and contains nested elements for all of the other
+     configuration settings.
+-->
+<!ELEMENT feilong-config (system-web)>
+
+<!-- The "system-web" element-->
+<!ELEMENT system-web (siteMap)>
+
+<!-- The "siteMap" element-->
+<!ELEMENT siteMap (providers)>
+<!ATTLIST siteMap    enabled             %Boolean;   #IMPLIED>
+<!ATTLIST siteMap    defaultProvider     CDATA      #IMPLIED>
+
+<!-- The "providers" element-->
+<!ELEMENT providers (add+)>
+
+<!-- The "add" element-->
+<!ELEMENT add EMPTY>
+<!ATTLIST add    name           CDATA   #REQUIRED>
+<!ATTLIST add    siteMapFile    CDATA   #REQUIRED>
+

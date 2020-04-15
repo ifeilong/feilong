@@ -1,0 +1,41 @@
+#**
+    这是个示例或者默认的模板,通过这个模板,可以看到哪些变量可以使用
+    每个商城可以使用这个模板,也可以自定义模板来使用
+	
+	该VM 可以取到两个变量:
+	
+    	pagerVMParam	:	包含各种显示数字/链接 参数
+    	i18nMap			:	包含国际化信息
+*#
+
+Page 
+
+<select class="pagerSelect">
+	#foreach($i in [1..${pagerVMParam.allPageNo}])
+		<option value="$i" #if($i == ${pagerVMParam.currentPageNo}) selected="selected" #end>$i</option>
+	#end
+<select>
+
+of ${pagerVMParam.allPageNo} <a pageNoValue="${pagerVMParam.prePageNo}" title="${i18nMap.get('feilong-pager.text.goto.pre')}" href="${pagerVMParam.preUrl}"><</a> <a pageNoValue="${pagerVMParam.nextPageNo}" title="${i18nMap.get('feilong-pager.text.goto.next')}" href="${pagerVMParam.nextUrl}">></a>
+
+
+<script type="text/javascript">
+
+	var pagerUrlTemplateHref="${pagerVMParam.pagerUrlTemplate.href}";
+	var templateValue="${pagerVMParam.pagerUrlTemplate.templateValue}"; 
+	var pageParamName="${pagerVMParam.pageParamName}";
+	
+    $(function() {
+		##选择下拉框
+		$(".pagerSelect").change(function(){
+			pagerJump(this.options[this.selectedIndex].value);
+		});
+    });
+    
+    function pagerJump(pageNoValue){
+		console.log(pageNoValue);
+		if(""!=pageNoValue&&pageNoValue>0){
+			location.href=pagerUrlTemplateHref.replace(pageParamName+"="+templateValue,pageParamName+"="+pageNoValue);
+		}
+    }
+</script>

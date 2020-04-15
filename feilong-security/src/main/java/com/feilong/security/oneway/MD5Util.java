@@ -1,0 +1,139 @@
+/*
+ * Copyright (C) 2008 feilong
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.feilong.security.oneway;
+
+import com.feilong.core.CharsetType;
+
+/**
+ * Message Digest algorithm 5,信息摘要算法.
+ * 
+ * <p>
+ * 将任意长度的"字节串"变换成一个128bit的大整数.
+ * </p>
+ * 
+ * <p style="color:red">
+ * MD5加密非常不安全,建议使用 {@link SHA1Util}
+ * </p>
+ * 
+ * <pre class="code">
+ * 检验你的实现是否正确:
+ * MD5Util.encode(&quot;&quot;) = d41d8cd98f00b204e9800998ecf8427e
+ * MD5Util.encode(&quot;a&quot;) = 0cc175b9c0f1b6a831c399e269772661
+ * </pre>
+ * 
+ * @author 腾讯通
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @version 1.0.0 2010年10月26日 17:13:58
+ * @version 1.0.1 2011-10-18 16:49
+ * @version 1.0.7 2014-7-10 14:28 update javadoc and remove extends
+ * 
+ * @see <a href="http://www.cmd5.com/">MD5解密网站</a>
+ * @see com.feilong.security.oneway.OnewayEncryption
+ * @see com.feilong.security.oneway.OnewayType
+ * @see org.apache.commons.codec.digest.Md5Crypt#md5Crypt(byte[])
+ * @see "org.springframework.util.DigestUtils"
+ * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(String)
+ * @since 1.0.0
+ */
+public final class MD5Util{
+
+    /** The oneway type. */
+    private static final OnewayType ONEWAYTYPE = OnewayType.MD5;
+
+    //---------------------------------------------------------------
+
+    /** Don't let anyone instantiate this class. */
+    private MD5Util(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 使用md5算法 单向加密字符串.
+     * 
+     * <p>
+     * 加密之后的转成<span style="color:green">小写的</span>16进制,长度32位的字符串
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+    MD5Util.encode("") = "d41d8cd98f00b204e9800998ecf8427e"
+    MD5Util.encode("123456") = "e10adc3949ba59abbe56e057f20f883e"
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param origin
+     *            原始字符串,将使用默认的 {@link String#getBytes()} 转成字节数组<br>
+     * @return 加密之后的转成<span style="color:green">小写的</span>16进制字符串
+     * @see OnewayEncryption#encode(OnewayType, String)
+     * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(String)
+     */
+    public static String encode(String origin){
+        return OnewayEncryption.encode(ONEWAYTYPE, origin);
+    }
+
+    /**
+     * 使用md5算法 单向加密字符串.
+     * 
+     * <p>
+     * 加密之后的转成<span style="color:green">小写的</span>16进制,长度32位的字符串
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * assertEquals("7eca689f0d3389d9dea66ae112e5cfd7", MD5Util.encode("你好", UTF8));
+     * assertEquals("670b14728ad9902aecba32e22fa4f6bd", MD5Util.encode("000000", UTF8));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param origin
+     *            原始字符串,将使用默认的 value.getBytes() 转成字节数组<br>
+     *            如果需要string 转码,请自行调用value.getBytes(string chartsetname),再调用{@link #encode(String, String)}
+     * @param charsetName
+     *            受支持的 {@link CharsetType} 名称,比如 utf-8
+     * @return 加密之后的转成 <span style="color:green">小写的</span>16进制字符串
+     * @see OnewayEncryption#encode(OnewayType, String, String)
+     * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(byte[])
+     */
+    public static String encode(String origin,String charsetName){
+        return OnewayEncryption.encode(ONEWAYTYPE, origin, charsetName);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 计算文件的单向加密值.
+     *
+     * @param filePath
+     *            文件路径 {@link java.io.File#File(String)}
+     * @return the string
+     * @see OnewayEncryption#encodeFile(OnewayType, String)
+     * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(java.io.InputStream)
+     */
+    public static String encodeFile(String filePath){
+        return OnewayEncryption.encodeFile(ONEWAYTYPE, filePath);
+    }
+}

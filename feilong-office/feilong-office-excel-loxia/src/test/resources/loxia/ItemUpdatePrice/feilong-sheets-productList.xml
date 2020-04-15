@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+
+	<sheet name="productListSheet">
+
+		<block start="A3" end="G3" dataName="productList" loop="true" loopClass="com.feilong.office.excel.itemupdateprice.ItemUpdatePriceCommand">
+			<cell position="A3" dataName="itemId" />
+			<cell position="B3" dataName="code" />
+			<cell position="C3" dataName="style" />
+			<cell position="D3" dataName="title" />
+			<cell position="E3" dataName="subTitle" />
+			<cell position="F3" dataName="itemListPrice" />
+			<cell position="G3" dataName="itemSalePrice" />
+		</block>
+	</sheet>
+</sheets>

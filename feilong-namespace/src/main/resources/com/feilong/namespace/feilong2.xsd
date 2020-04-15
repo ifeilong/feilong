@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.springframework.org/schema/feilong" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
+	targetNamespace="http://www.feilong.com/schema/feilong" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+
+	<!-- http-responseStringBuilder -->
+	<xsd:element name="http-responseStringBuilder">
+
+		<xsd:annotation>
+			<xsd:documentation source="java:com.feilong.context.invoker.http.HttpResponseStringBuilder">
+				<![CDATA[
+					Defines a com.feilong.context.invoker.http.HttpResponseStringBuilder bean. 
+				]]>
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="uri" type="xsd:string" use="required" />
+					<xsd:attribute name="method" type="xsd:string" />
+					<!-- -->
+					<xsd:attribute name="userName" type="xsd:string" />
+					<xsd:attribute name="password" type="xsd:string" />
+
+					<xsd:attribute name="proxyAddress" type="xsd:string" />
+					<xsd:attribute name="proxyPort" type="xsd:string" />
+					<xsd:attribute name="connectTimeout" type="xsd:string" />
+					<xsd:attribute name="readTimeout" type="xsd:string" />
+					<xsd:attribute name="contentCharset" type="xsd:string" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>  

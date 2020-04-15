@@ -1,0 +1,23 @@
+模板引擎 Velocity Engine 2.0 已发布，更新如下：
+
+主要的新功能和增强：
+
+改用 SLF4J 日志库
+
+可配置的对空白内容进行去除
+
+方法参数和数组下标可以使用算数表达式
+
+可配置方法参数的数据类型转换处理器，支持 booleans, numbers, strings 和 enums 之间的转换
+
+显著降低内存的消耗
+
+JSR-223 脚本引擎实现
+
+有关更改的完整列表，请参阅 Velocity Engine 2.0 更改部分和 JIRA 更改日志。
+
+有关从 Velocity 1.x 升级的注意事项，请参阅 Velocity Engine 2.0 升级部分。
+
+Velocity Tools 用户注意：Velocity Tools 3.0 即将推出。同时，鼓励使用 Velocity Tools 3.x 最新的快照（查看 Velocity Tools 3.x 升级说明）。
+
+发布主页和下载地址

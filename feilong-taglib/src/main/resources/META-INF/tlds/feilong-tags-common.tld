@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1">
+
+	<!-- author ****feilong -->
+
+	<tlib-version>1.1</tlib-version>
+	<short-name>feilong</short-name>
+	<uri>http://java.feilong.com/tags-common</uri>
+	<description>飞龙java自定义标签</description>
+
+	<!-- 判断一个日期,是否在一个时间区间内 -->
+	<tag>
+		<name>isInTime</name>
+		<tag-class>com.feilong.taglib.common.IsInTimeTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[判断一个日期,是否在一个时间区间内]]></description>
+		
+		<attribute>
+			<name>date</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>一个时间,如果为null,则使用当前时间</description>
+		</attribute>
+		<attribute>
+			<name>beginDate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>开始时间,beginDate和 beginDateString 二者只能选择其一</description>
+		</attribute>
+		<attribute>
+			<name>endDate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>结束时间,endDate和 endDateString 二者只能选择其一</description>
+		</attribute>
+
+		<attribute>
+			<name>beginDateString</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>开始时间,beginDate和 beginDateString 二者只能选择其一</description>
+		</attribute>
+		<attribute>
+			<name>endDateString</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>结束时间,endDate和 endDateString 二者只能选择其一</description>
+		</attribute>
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>如果 使用的 beginDateString 和 endDateString ,其format模式</description>
+		</attribute>
+	</tag>
+
+
+	<!-- 判断一个值是否在一个集合当中 -->
+	<tag>
+		<name>isContains</name>
+		<tag-class>com.feilong.taglib.common.IsContainsTag</tag-class>
+		<description>判断一个值是否在一个集合当中</description>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>collection</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator</description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>任意类型的值,最终toString 判断比较</description>
+		</attribute>
+	</tag>
+
+	<!-- 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中) -->
+	<tag>
+		<name>isNotContains</name>
+		<tag-class>com.feilong.taglib.common.IsNotContainsTag</tag-class>
+		<description>判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中)</description>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>collection</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator</description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>任意类型的值,最终toString 判断比较</description>
+		</attribute>
+	</tag>
+
+	<!-- *******************************switch ***************************** -->
+	<!-- switch -->
+	<tag>
+		<name>swicth</name>
+		<tag-class>com.feilong.taglib.common.SwitchTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>switch</description>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- switch case -->
+	<tag>
+		<name>case</name>
+		<tag-class>com.feilong.taglib.common.SwitchCaseTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>switch case</description>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- switch default -->
+	<tag>
+		<name>default</name>
+		<tag-class>com.feilong.taglib.common.SwitchDefaultTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>switch default</description>
+	</tag>
+</taglib>

@@ -1,0 +1,30 @@
+<!-- 
+feilongWeb.cfg.xml file-based configuration document.
+<!DOCTYPE feilong-config PUBLIC "-//feilong/feilongWeb Configuration DTD 3.0//EN" "http://java.feilong.com/feilongWeb-configuration-1.0.dtd">
+<!DOCTYPE feilong-config SYSTEM "feilongWeb-configuration-1.0.dtd"> 
+-->
+
+<!-- ========== Defined Types ============================================= -->
+
+<!ENTITY % Boolean "(true|false|yes|no)">
+
+<!-- ========== Top Level Elements ======================================== -->
+<!-- The "feilong-config" element is the root of the configuration file
+     hierarchy, and contains nested elements for all of the other
+     configuration settings.
+-->
+<!ELEMENT siteMapNode (siteMapNode+)>
+<!ATTLIST siteMapNode    url            CDATA   #IMPLIED>
+<!ATTLIST siteMapNode    title     		CDATA   #IMPLIED>
+<!ATTLIST siteMapNode    description    CDATA   #IMPLIED>
+
+<!-- The "siteMapNode" element-->
+<!ELEMENT siteMapNode (siteMapNode*)>
+<!ATTLIST siteMapNode    url            CDATA   #IMPLIED>
+<!ATTLIST siteMapNode    title     		CDATA   #IMPLIED>
+<!ATTLIST siteMapNode    description    CDATA   #IMPLIED>
+
+ 
+ 
+
+ 

@@ -1,0 +1,23 @@
+<toolbox>
+	<tool>
+		<key>date</key>
+		<scope>request</scope>
+		<class>org.apache.velocity.tools.generic.DateTool</class>
+		<parameter name="format" value="yyyy-MM-dd" />
+	</tool>
+	<tool>
+  		<key>render</key>
+  		<scope>application</scope>
+  		<class>org.apache.velocity.tools.generic.RenderTool</class>
+	</tool>
+	<tool>
+		<key>cookie</key>
+		<scope>request</scope>
+		<class>org.apache.velocity.tools.view.tools.CookieTool</class>
+	</tool>
+	 <tool>
+        <key>ctx</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.VelocityContext</class>
+    </tool>
+</toolbox>

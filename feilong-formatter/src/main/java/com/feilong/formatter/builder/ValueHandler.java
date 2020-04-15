@@ -1,0 +1,79 @@
+/*
+ * Copyright (C) 2008 feilong
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.feilong.formatter.builder;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+
+import java.util.Map;
+
+import org.apache.commons.collections4.Transformer;
+
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.formatter.entity.BeanFormatterConfig;
+
+/**
+ * 处理值转换.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.10.7
+ */
+public final class ValueHandler{
+
+    //---------------------------------------------------------------
+
+    /** Don't let anyone instantiate this class. */
+    private ValueHandler(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Gets the value.
+     *
+     * @param propertyName
+     *            the property name
+     * @param value
+     *            the value
+     * @param beanFormatterConfig
+     *            the bean formatter config
+     * @return the value
+     */
+    public static String getValue(String propertyName,Object value,BeanFormatterConfig beanFormatterConfig){
+        if (null == beanFormatterConfig){
+            return ConvertUtil.toString(value);
+        }
+
+        //---------------------------------------------------------------
+
+        Map<String, Transformer<Object, String>> propertyNameAndConverterMap = beanFormatterConfig.getPropertyNameAndTransformerMap();
+        if (isNullOrEmpty(propertyNameAndConverterMap)){
+            return ConvertUtil.toString(value);
+        }
+
+        //---------------------------------------------------------------
+        Transformer<Object, String> converter = propertyNameAndConverterMap.get(propertyName);
+        if (isNullOrEmpty(converter)){
+            return ConvertUtil.toString(value);
+        }
+
+        //---------------------------------------------------------------
+        return converter.transform(value);
+    }
+
+}

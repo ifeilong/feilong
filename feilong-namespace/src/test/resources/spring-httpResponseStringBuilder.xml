@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:feilong="http://www.feilong.com/schema/feilong"
+
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd  
+    http://www.feilong.com/schema/feilong http://www.feilong.com/schema/feilong/feilong.xsd
+    ">
+
+	<!-- com.feilong.context.invoker.http.HttpResponseStringBuilder -->
+	<feilong:http-responseStringBuilder id="httpResponseStringBuilder" uri="https://blog.csdn.net/fighterandknight/article/details/50126329"
+		method="get" connectTimeout="#{T(com.feilong.core.TimeInterval).MILLISECOND_PER_MINUTE}" />
+
+	<!-- userName="" password="" proxyAddress="" proxyPort="" connectTimeout="" readTimeout="" contentCharset="" -->
+
+	<!-- <property name="headerMap">
+		<map>
+		<entry key="Content-Type" value="application/json" />
+		</map>
+		</property> -->
+
+	<!-- </feilong:http-responseStringBuilder> -->
+</beans>  

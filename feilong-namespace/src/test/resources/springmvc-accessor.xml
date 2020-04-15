@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        ">
+        
+    <!-- ******************************* session accessor begin ******************************* -->
+    <!-- 便于session key的统一管理 -->
+
+    <!-- 信用卡支付token -->
+    <bean name="ccpayTokenSessionKeyAccessor" class="com.feilong.accessor.session.SessionKeyAccessor">
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="guestKeySessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${guest.key}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="guestAllowedSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${guest.allowed}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="shopDogFlagSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${shopdog.flag}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="checkoutLoginEmailSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${checkout.login.email}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="memberDetailsSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${member.context}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="formTokenSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${form.token}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="memeberResetPasswordMobileSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${memeber.reset.password.mobile}" />
+    </bean>
+
+    <!-- 重置密码的发送时间 -->
+    <bean name="sessionSendSmsTimeSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${session.send.sms.time}" />
+    </bean>
+
+    <!-- 注册的mobile校验码的发送时间 -->
+    <bean name="registerSessionSendSmsTimeSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${register.session.send.sms.time}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="memberSendsmsMobileSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${member.sendsms.mobile}" />
+    </bean>
+
+    <!-- 重置密码的手机校验码 -->
+    <bean name="mobileVerificationCodeSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${mobile.verification.code}" />
+    </bean>
+
+    <!-- 注册的手机校验码 -->
+    <bean name="registerMobileVerificationCodeSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${register.mobile.verification.code}" />
+    </bean>
+
+    <!-- 重置密码的mobile -->
+    <bean name="mobileVerificationCodeSentSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${mobile.verification.code.sent}" />
+    </bean>
+
+    <!-- 注册的mobile -->
+    <bean name="registerMobileVerificationCodeSentSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${register.mobile.verification.code.sent}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="memeberSendShortMessageServiceSuccessSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${memeber.send.short.message.service.success}" />
+    </bean>
+
+    <!-- TODO:说明这个属性是干什么的 -->
+    <bean name="sessionThirdpartyRegisterFormSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+        <property name="key" value="${session.third.party.register.form}" />
+    </bean>
+
+    <!-- 作为一个公共的session Accessor -->
+    <bean name="sessionIdKeySessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
+    </bean>
+
+
+
+
+    <!-- 立即购买 存储器 -->
+    <bean name="buyNowAutoKeyAccessor" class="com.feilong.accessor.session.SessionAutoKeyAccessor">
+        <property name="keyGenerator">
+            <bean class="com.feilong.accessor.keygenerator.UUIDKeyGenerator" />
+        </property>
+    </bean>
+
+    <!-- ******************************* session accessor end ******************************* -->
+
+    <!-- shopdog memberlogin后持久化页面 -->
+    <bean id="pathReturnBackCookieAccessor" class="com.feilong.accessor.cookie.CookieAccessor">
+        <property name="cookieEntity">
+            <bean class="com.feilong.servlet.http.entity.CookieEntity">
+                <property name="name" value="pathReturnBack" /><!-- SHOPPING_CART_ids -->
+                <property name="maxAge" value="#{T(com.feilong.core.TimeInterval).SECONDS_PER_YEAR}"></property>
+                <property name="httpOnly" value="false"></property>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!-- 购物车ids持久 -->
+    <bean id="shoppingcartIdsCookieAccessor" class="com.feilong.accessor.cookie.CookieAccessor">
+        <property name="cookieEntity">
+            <bean class="com.feilong.servlet.http.entity.CookieEntity">
+                <property name="name" value="s_c_ids" /><!-- SHOPPING_CART_ids -->
+                <property name="maxAge" value="#{T(com.feilong.core.TimeInterval).SECONDS_PER_YEAR}"></property>
+                <property name="httpOnly" value="false"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 心愿单数量持久 -->
+    <bean id="wishListCountCookieAccessor" class="com.feilong.accessor.cookie.CookieAccessor">
+        <property name="cookieEntity">
+            <bean class="com.feilong.servlet.http.entity.CookieEntity">
+                <property name="name" value="w_l_c" /><!-- WISH_LIST_COUNT -->
+                <!-- <property name="maxAge" value="#{T(com.feilong.core.TimeInterval).SECONDS_PER_YEAR}"></property> -->
+                <property name="httpOnly" value="false"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 购物车数量持久 -->
+    <bean id="shoppingcartCountCookieAccessor" class="com.feilong.accessor.cookie.CookieAccessor">
+        <property name="cookieEntity">
+            <bean class="com.feilong.servlet.http.entity.CookieEntity">
+                <property name="name" value="s_c_c_n" /><!-- SHOPPING_CART_COUNT_new -->
+                <!-- <property name="maxAge" value="#{T(com.feilong.core.TimeInterval).SECONDS_PER_YEAR}"></property> -->
+                <property name="httpOnly" value="false"></property>
+            </bean>
+        </property>
+    </bean>
+    <!-- 菜单按钮配置数量持久 -->
+    <bean id="menuButtonCookieAccessor" class="com.feilong.accessor.cookie.CookieAccessor">
+        <property name="cookieEntity">
+            <bean class="com.feilong.servlet.http.entity.CookieEntity">
+                <property name="name" value="menu_button" />
+                <property name="httpOnly" value="false"></property>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

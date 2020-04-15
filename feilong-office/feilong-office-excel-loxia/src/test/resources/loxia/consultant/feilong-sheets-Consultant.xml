@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+
+	<!-- 咨询列表导出 -->
+	<sheet name="consultantExport">
+		<block start="A4" end="I4" dataName="consultantList" loop="true" loopClass="com.feilong.office.excel.consultant.ConsultantCommand">
+			<cell position="A4" dataName="itemCode" />
+			<cell position="B4" dataName="itemName" />
+			<cell position="C4" dataName="memberName" />
+			<cell position="D4" dataName="content" />
+			<cell position="E4" dataName="createTime" />
+			<cell position="F4" dataName="resolveNote" />
+			<cell position="G4" dataName="resolveTime" />
+			<cell position="H4" dataName="resolveName" />
+			<cell position="I4" dataName="publishMark" />
+		</block>
+	</sheet>
+
+
+
+</sheets>

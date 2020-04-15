@@ -1,0 +1,13 @@
+$effective 
+
+=======================
+
+#if($effective)
+	:effective false 不进
+#end
+
+=======================
+
+#if("$effective" != "")
+	:effective false 进
+#end

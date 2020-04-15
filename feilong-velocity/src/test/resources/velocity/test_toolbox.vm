@@ -1,0 +1,13 @@
+$date.getSystemTime()
+$date.get('yyyy-M-d H:m:s')
+$date.format('星期F',$date.getDate())
+$date.format('EEEE',$date.getDate())
+$date.format('EEEE',$date.toDate('yyyy-MM-dd','2015-06-02'))
+$date.full_date
+$date
+$math.random
+$sorter.sort(['d','a','b','c'])
+$number.percent("0.3547")
+code=$code
+$date.toCalendar($date.toDate('HH:mm',$courseTime))
+$DateUtil.addHour($date.toDate('HH:mm',$courseTime),1)

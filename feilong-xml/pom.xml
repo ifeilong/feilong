@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.venusdrogon</groupId>
+		<artifactId>feilong-parent</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>feilong-xml-parent</artifactId>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>feilong-xml-dom</module>
+		<module>feilong-xml-xstream</module>
+		<module>feilong-xml-api</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-formatter</artifactId>
+		</dependency>
+
+		<!-- feilong-json-jsonlib -->
+		<dependency>
+		<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-json-jsonlib</artifactId>
+		</dependency>
+
+		<!-- commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<!-- <optional>true</optional> -->
+		</dependency>
+
+		<!-- **********************log日志************************************ -->
+
+		<!-- slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
+	</dependencies>
+</project>

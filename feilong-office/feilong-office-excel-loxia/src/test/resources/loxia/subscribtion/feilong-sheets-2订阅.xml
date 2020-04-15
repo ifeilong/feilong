@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+
+	<sheet name="aSheet">
+
+		<!-- loopClass="com.feilong.tools.office.excel.loxia.subscribtion.SubscribtionCommand" -->
+		<block start="A2" end="B2" dataName="aList" loop="true">
+			<cell position="A2" dataName="email" />
+			<cell position="B2" dataName="mobile" />
+		</block>
+	</sheet>
+
+	<sheet name="bSheet">
+		<!-- loopClass="com.feilong.tools.office.excel.loxia.subscribtion.SubscribtionCommand" -->
+		<block start="A1" end="A1" dataName="bList" loop="true">
+			<cell position="A1" dataName="email" />
+		</block>
+	</sheet>
+</sheets>

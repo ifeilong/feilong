@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd	
+		">
+
+	<util:properties id="p_ftp" location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-ftp.properties"></util:properties>
+
+	<!-- ftp -->
+	<bean id="ftpFileTransfer" class="com.feilong.net.filetransfer.ftp.FTPFileTransfer" scope="prototype">
+		<property name="ftpFileTransferConfig">
+			<bean class="com.feilong.net.filetransfer.ftp.FTPFileTransferConfig">
+				<property name="hostName" value="#{p_ftp['ftpFileTransfer.ftp.hostName']}" />
+				<property name="userName" value="#{p_ftp['ftpFileTransfer.ftp.userName']}" />
+				<property name="password">
+					<value><![CDATA[#{p_ftp['ftpFileTransfer.ftp.password']}]]></value>
+				</property>
+			</bean>
+		</property>
+
+		<property name="ftpClient">
+			<!-- FTPClient -->
+			<bean class="org.apache.commons.net.ftp.FTPClient">
+				<property name="controlEncoding" value="#{p_ftp['ftpFileTransfer.ftp.FTPClient.controlEncoding']}" />
+				<property name="defaultPort" value="#{p_ftp['ftpFileTransfer.ftp.FTPClient.defaultPort']}" />
+				<property name="dataTimeout" value="#{p_ftp['ftpFileTransfer.ftp.FTPClient.dataTimeout']}" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- ******************************************************************************* -->
+</beans>

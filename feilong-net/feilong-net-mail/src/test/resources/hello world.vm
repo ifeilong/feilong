@@ -1,0 +1,15 @@
+<div>
+	<p style="margin: 0px 0px 1.2em !important;">Hello World :tada:</p>
+	<p style="margin: 0px 0px 1.2em !important;">
+		<em>just do test~</em>
+	</p>
+	<p style="margin: 0px 0px 1.2em !important;">
+		-I’m send by
+		<code
+			style="font-size: 0.85em; font-family: '微软雅黑', Consolas; margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); border-radius: 3px; display: inline; background-color: rgb(248, 248, 248);">feilong-tools-mail</code>
+		(You can call me
+		<code
+			style="font-size: 0.85em; font-family: '微软雅黑', Consolas; margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); border-radius: 3px; display: inline; background-color: rgb(248, 248, 248);">java email 小精灵</code>
+		,用来发测试邮件,那是杠杠的)
+	</p>
+</div>

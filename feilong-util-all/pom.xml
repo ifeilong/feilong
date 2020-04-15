@@ -1,0 +1,237 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.venusdrogon</groupId>
+		<artifactId>feilong-parent</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>feilong-util-all</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+
+		<!--feilong-core -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core</artifactId>
+		</dependency>
+
+		<!--feilong-context -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-context</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-servlet -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-servlet</artifactId>
+		</dependency>
+
+		<!--feilong-taglib -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-taglib</artifactId>
+		</dependency>
+
+		<!--feilong-formatter -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-formatter</artifactId>
+		</dependency>
+
+		<!-- feilong-accessor -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-accessor</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-io -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-io</artifactId>
+		</dependency>
+
+		<!--feilong-httpclient4 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-httpclient4</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-velocity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-velocity-extension</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-json-jsonlib -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-json-jsonlib</artifactId>
+		</dependency>
+
+		<!--feilong-validator -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-validator</artifactId>
+		</dependency>
+
+		<!-- ******************** net ************************************* -->
+
+		<!--feilong-net-filetransfer -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-filetransfer</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+
+		<!-- feilong-net-jsoup -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-jsoup</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- ****************tools ******************************************* -->
+
+		<!-- feilong-tools-mobile -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-mobile</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- feilong-tools-money -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-money</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-tools-iplookup -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-iplookup</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- feilong-tools-barcode -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-barcode</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-tools-emailaddress -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-emailaddress</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-tools-zip-compress -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-zip-compress</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-tools-pinyin -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-pinyin</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- ***************end*********************************** -->
+
+		<!-- feilong-security -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-security</artifactId>
+		</dependency>
+
+		<!-- feilong-office-csv -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-office-csv</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- feilong-xml-xstream -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-xml-xstream</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- feilong-webservice-cxf -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-webservice-cxf</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!-- feilong-namespace -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-namespace</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>${v.maven-shade-plugin}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<!-- With version 2.2 of the maven-shade-plugin, they added a "shadeTestJar" option (see MSHADE-158): http://maven.apache.org/plugins/maven-shade-plugin/shade-mojo.html#shadeTestJar -->
+							<shadeTestJar>true</shadeTestJar>
+
+							<!-- When true, it will attempt to create a sources jar as well -->
+							<createSourcesJar>true</createSourcesJar>
+
+							<!-- 如果不加这个参数,那么生成的pom会少很多依赖,商城依赖这个feilong-util-all,会发现少 velocity等jar
+
+								When true, transitive deps of removed dependencies are promoted to direct dependencies.
+								This should allow the drop in replacement of the removed deps with the new shaded jar and everything should still work. -->
+							<promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+
+							<!-- 使用maven的maven-shade-plugin插件时需要注意的一个问题 -->
+							<!-- http://blog.csdn.net/thc1987/article/details/44176481 -->
+							<createDependencyReducedPom>true</createDependencyReducedPom>
+
+							<artifactSet>
+								<includes>
+									<!-- <include>${project.groupId}:*:*</include> -->
+									<include>com.github.venusdrogon:*:*</include>
+								</includes>
+							</artifactSet>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

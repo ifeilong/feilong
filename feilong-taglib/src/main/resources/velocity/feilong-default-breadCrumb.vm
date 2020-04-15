@@ -1,0 +1,1 @@
+#foreach(${breadCrumbEntity} in ${breadCrumbVMParams.breadCrumbEntityList})<a href="${breadCrumbEntity.path}" title="${breadCrumbEntity.title}">${breadCrumbEntity.name}</a> #if(${velocityCount}!=${breadCrumbVMParams.breadCrumbEntityList.size()}) ${breadCrumbVMParams.connector} #end#end

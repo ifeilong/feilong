@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="query">
+    	<xs:complexType>    		
+    		<xs:sequence>
+    			<xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string"/>
+    			<xs:element minOccurs="1" maxOccurs="1" name="description" type="xs:string"/>
+    			<xs:element minOccurs="1" maxOccurs="1" name="ql" type="xs:string"/>
+    		</xs:sequence> 
+    	</xs:complexType>    	
+    </xs:element>
+    <xs:element name="package">
+    	<xs:complexType>    		
+    		<xs:sequence>
+    			<xs:element maxOccurs="unbounded" ref="query"/>
+    		</xs:sequence>   
+    		<xs:attribute name="name" use="required" type="xs:NCName"/>
+    	</xs:complexType>    	
+    </xs:element>
+    <xs:element name="namedquerys">
+    	<xs:complexType>
+    		<xs:sequence>
+	    		<xs:element maxOccurs="unbounded" ref="package"/>
+	    	</xs:sequence>    
+    	</xs:complexType>    		
+    </xs:element>
+</xs:schema>

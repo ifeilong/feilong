@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+PRODID:-//Beisen Corporation//Recruit Interview//CN
+VERSION:2.0
+X-WR-TIMEZONE:GMT+8
+METHOD:REQUEST
+BEGIN:VEVENT
+ORGANIZER;CN=施诗:MAILTO:venusdrogon@163.com
+ATTENDEE;CN=金鑫;ROLE=Attendee;RSVP=True:MAILTO:venusdrogon@163.com
+DTSTART:20170314T060000Z
+DTEND:20170314T060000Z
+LOCATION:
+UID:beisen_interview_350190312
+STATUS:Tentative
+DTSTAMP:20170312T094959Z
+DESCRIPTION:金鑫： \n 你好！ \n 下面是您的面试安排，请
+	规划好您的时间，提前准备，准时参加。 \n面试时间：2017
+	-03-14 14:00:00 \n面试地点： \n 应聘者： \n   陈雪莲  简
+	历：http://bsurl.cn/TDmUHOOJwmqmv \n招聘职位：Java软件工程师(J11715) \n面试官：
+	金鑫 \n面试主题：Java软件工程师面试 \n面试说明： \n
+	\n   此致 \n 敬礼！  \n 人力资源部  \n 
+SUMMARY:面试安排：陈雪莲-Java软件工程师面试
+PRIORITY:5
+CLASS:Public
+END:VEVENT
+END:VCALENDAR

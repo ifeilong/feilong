@@ -1,0 +1,6 @@
+$memberId
+
+#foreach($foo in $list)$foo#if($velocityCount!=${list.size()}),#end 
+#end
+
+$a

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1">
+
+	<tlib-version>1.0</tlib-version>
+	<short-name>fl</short-name>
+	<uri>http://java.feilong.com/el-common</uri>
+
+
+	<!-- 判断一个值是否在一个集合(或者可以被转成Iterator)当中 -->
+	<function>
+		<name>contains</name>
+
+		<function-class>com.feilong.taglib.functions.ELFunctions</function-class>
+		<function-signature>String contains(java.lang.Object,java.lang.Object)</function-signature>
+
+		<description>判断一个值是否在一个集合(或者可以被转成Iterator)当中. 
+			<![CDATA[
+				支持以下类型:
+					<ul>
+						 <li>逗号分隔的字符串,ConvertUtil.toStrings(Object) 转成数组 </li>
+						 <li>数组 </li>
+						 <li>java.util.Map,将 java.util.Map.values() 转成java.util.Iterator </li>
+						 <li>java.util.Collection</li>
+						 <li>java.util.Iterator</li>
+						 <li>java.util.Enumeration</li>
+						 <li>java.util.Dictionary</li>
+						 <li>org.w3c.dom.Node</li>
+						 <li>org.w3c.dom.NodeList</li>
+					 </ul>
+			]]>
+		</description>
+		<example>${fl:contains("a,b,c","a")}</example>
+	</function>
+
+	<!-- 将对象format成json字符串(不会有pretty输出,会连在一起) -->
+	<function>
+		<name>toJsonString</name>
+
+		<function-class>com.feilong.taglib.functions.ELFunctions</function-class>
+		<function-signature>String toJsonString(java.lang.Object)</function-signature>
+
+		<description>将对象format成json字符串(不会有pretty输出,会连在一起)</description>
+		<example>${fl:toJsonString(value)}</example>
+	</function>
+</taglib>

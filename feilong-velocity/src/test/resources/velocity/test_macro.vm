@@ -1,0 +1,3 @@
+#t("a")
+	trade/js/payment/memberAddress.js
+	trade/js/payment/order.js

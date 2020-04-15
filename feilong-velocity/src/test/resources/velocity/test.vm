@@ -1,0 +1,37 @@
+select count(comment) from com.erry.model.master.Comment as comment
+where comment.lifeCycleStatus=5 and comment.member.id=$memberId
+${list.size()}
+${list.get(1)}
+#foreach($foo in $list)$foo#if($velocityCount!=${list.size()}),#end 
+#end
+
+
+select 
+sku.id as sku_id,
+sku.code as sku_code,
+sku.name as name,
+min(price.price) as price,
+min(cost.list_price) as list_price
+from t_ma_sku sku 
+inner join t_ma_sku_cost cost on sku.id = cost.id
+inner join v_ma_channel_sku_price_mat price on sku.id = price.sku_id
+where 
+#if($channelIds.size()==1)
+	price.channel_id=$channelIds.get(0) 
+#else
+	price.channel_id in (
+		#foreach($channelId in $channelIds)$channelId#if($velocityCount!=$channelIds.size()),#end 
+		#end
+	)
+#end				
+and sku.code = :skuCode 
+and sku.life_cycle_status = 5 
+group by 
+sku.id, 
+sku.name, 
+sku.code
+
+=============================
+#set ($a = "jinxin" )
+#parse("velocity/include1.vm")
+

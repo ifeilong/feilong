@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.venusdrogon</groupId>
+		<artifactId>feilong-parent</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>feilong-taglib</artifactId>
+
+	<name>feilong-taglib</name>
+
+	<description>${project.name} ${project.version} API</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-servlet</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-security</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
+		<!--feilong-velocity -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-velocity</artifactId>
+		</dependency>
+
+		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-tools-barcode</artifactId>
+			<version>${version.feilong-platform}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-accessor</artifactId>
+			<version>${version.feilong-platform}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!--*******************servlet-api && jsp-api************************* -->
+		<!-- servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core-extension</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+
+			<!-- maven-surefire-plugin -->
+			<plugin>
+				<inherited>false</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<includes>
+						<include>**/FeiLongTaglibSuiteTests</include>
+					</includes>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR##第一行必须是“BEGIN:VCALENDAR”
+
+PRODID:-//Beisen Corporation//Recruit Interview//CN##创建该对象的标志符
+
+VERSION:2.0##版本
+
+X-WR-TIMEZONE:GMT+8
+METHOD:REQUEST
+BEGIN:VEVENT##事件开始
+
+##ORGANIZER;CN=feilongtestemail:MAILTO:feilongtestemail@163.com
+##ATTENDEE;CN=xin.jin;ROLE=Attendee;RSVP=True:MAILTO:venusdrogon@163.com
+DTSTART:${beginDate}##事件起始时间 20170228T053000Z
+
+DTEND:${endDate}##事件结束时间
+
+##LOCATION:${location}
+UID:${uuid}
+##STATUS:Tentative
+##In the case of an iCalendar object that specifies a "METHOD" property, 
+##this property specifies the date and time that the instance of the iCalendar object was created.  
+##In the case of an iCalendar object that doesn't specify a "METHOD" property, 
+##this property specifies the date and time that the information associated with the calendar component was last revised in the calendar store.
+DTSTAMP:${now}
+DESCRIPTION:${description}
+##SUMMARY:${summary}##事件概要
+##PRIORITY:5
+##CLASS:Public
+END:VEVENT##事件结束
+
+END:VCALENDAR##最后行必须是“END:VCALENDAR”

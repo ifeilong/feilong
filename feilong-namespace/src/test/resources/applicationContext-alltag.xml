@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:feilong="http://www.feilong.com/schema/feilong"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd  
+    http://www.feilong.com/schema/feilong http://www.feilong.com/schema/feilong/feilong.xsd
+    ">
+
+	<feilong:accessor-cookie id="cookieAccessor" name="aaa" httpOnly="true" maxAge="#{T(com.feilong.core.TimeInterval).SECONDS_PER_YEAR}" />
+
+	<feilong:accessor-sessionkey id="sessionKeyAccessor" />
+
+	<feilong:accessor-session id="sessionAccessor" key="#{T(com.feilong.core.TimeInterval).SECONDS_PER_YEAR}" />
+
+
+</beans>  

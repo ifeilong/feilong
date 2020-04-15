@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<body>
+		<div>
+    			you can confirm in 
+                <a href="ftp://210.51.21.109/webstore/InlineSales">ftp://210.51.21.109/webstore/InlineSales</a>
+				<br>
+					XiaoK monitor has check in ftp
+    		</div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr> 
+<td> 
+		<table style="border:1px solid #E3E197;background-color: #FFFFDD ;border-collapse:collapse;">
+			<tr>
+				<td style="border:1px solid #E3E197;background-color: #FFFFDD;text-align:center">文件名称</td>
+				<td style="border:1px solid #E3E197;background-color: #FFFFDD;text-align:center">最后修改时间</td>
+				<td style="border:1px solid #E3E197;background-color: #FFFFDD;text-align:center">文件大小</td>
+            </tr>
+			
+		#foreach($fileInfoEntity in $fileInfoEntityList)
+    		<tr>
+				<td style="border:1px solid #E3E197;background-color: #FFFFDD;">$fileInfoEntity.name</td>
+				<td style="border:1px solid #E3E197;background-color: #FFFFDD;">$fileInfoEntity.formatLastModified</td>
+				<td style="border:1px solid #E3E197;background-color: #FFFFDD;text-align:center">$fileInfoEntity.formatSize</td>
+            </tr>
+    	#end
+        </table> 
+ </td>
+</tr>
+
+
+ <tr>
+<td>
+	<img src="cid:${PREFIX_CONTENTID}0"/>啦啦啦<br>
+    <img src="http://img.nikestore.com.cn/images/kobe/kobe2-product-img.jpg" />啦啦啦<br>
+</td>
+
+</tr>
+</table>
+	</body>
+</html>

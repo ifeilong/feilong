@@ -1,0 +1,90 @@
+#**
+    这是个示例或者默认的模板,通过这个模板,可以看到哪些变量可以使用
+    每个商城可以使用这个模板,也可以自定义模板来使用
+	
+	该VM 可以取到两个变量:
+	
+    	pagerVMParam	:	包含各种显示数字/链接 参数
+    	i18nMap			:	包含国际化信息
+*#
+<div class="div_feilongPager ${pagerVMParam.skin}">
+	##总数
+	<span class="span_pagerInfo">${i18nMap.get('feilong-pager.text.totalCount')}${pagerVMParam.totalCount}</span>
+	##当前第${pagerVMParam.currentPageNo}页/共${pagerVMParam.allPageNo}页
+	<span class="span_pagerInfo" title="${i18nMap.get('feilong-pager.text.current')}${pagerVMParam.currentPageNo}${i18nMap.get('feilong-pager.text.pager')}/${i18nMap.get('feilong-pager.text.total')}${pagerVMParam.allPageNo}${i18nMap.get('feilong-pager.text.pager')}">${pagerVMParam.currentPageNo}/${pagerVMParam.allPageNo}</span>
+
+##第一页不显示首页和上一页
+#if(1 != ${pagerVMParam.currentPageNo})
+	<a pageNoValue="${pagerVMParam.prePageNo}" title="${i18nMap.get('feilong-pager.text.goto.pre')}" href="${pagerVMParam.preUrl}">${i18nMap.get('feilong-pager.text.prev')}</a>
+    ##// 如果导航编号里面没有首页 则添加首页
+	##// 导航里面 是否有第一页, 如果从开始1索引 则已经包含的首页包含
+	
+	#if (${pagerVMParam.startIteratorIndex} != 1)
+		<a pageNoValue="1" title="${i18nMap.get('feilong-pager.text.goto.first')}" href="${pagerVMParam.firstUrl}">1</a>
+	#end
+#end
+
+##开始迭代索引不等于1,并且开始迭代索引不等于2,显示3点
+#if (${pagerVMParam.startIteratorIndex} != 1 && ${pagerVMParam.startIteratorIndex} != 2)
+	<span class="color_666">...</span>
+#end
+
+##循环所有的页码 显示导航编号
+#foreach( ${entry} in ${pagerVMParam.iteratorIndexMap.entrySet()} )
+	##当前 直接是数字编号
+    #if(${entry.key}==${pagerVMParam.currentPageNo})
+		<span class="current">${entry.key}</span>
+    #else
+		##不是当前页面
+		<a pageNoValue="${entry.key}" title="${i18nMap.get('feilong-pager.text.goto')}${entry.key}${i18nMap.get('feilong-pager.text.pager')}" href="${entry.value}">${entry.key}</a>
+    #end
+#end
+
+##如果最后一个迭代索引不等于总页数,且最后一个迭代索引不等于总也是-1,那么 显示3点
+#set($allPageNoTo1=${pagerVMParam.allPageNo} - 1)
+#if (${pagerVMParam.endIteratorIndex} != ${pagerVMParam.allPageNo} && ${pagerVMParam.endIteratorIndex} != $allPageNoTo1)
+	<span class="color_666">...</span>
+#end
+
+##最后一页不显示下一页和末页
+#if(${pagerVMParam.allPageNo}!=${pagerVMParam.currentPageNo})
+	## 如果导航编号里面没有尾页 则添加尾页
+	##导航里面是否有最后一页, 如果结束的位置是allPageNo 则已经包含的尾页
+	#if(${pagerVMParam.endIteratorIndex} != ${pagerVMParam.allPageNo})
+		##跳转到最后一页
+		<a pageNoValue="$!{pagerVMParam.allPageNo}" title="${i18nMap.get('feilong-pager.text.goto.last')}" href="${pagerVMParam.lastUrl}">$!{pagerVMParam.allPageNo}</a>
+	#end
+
+	##跳转到下一页
+	<a pageNoValue="${pagerVMParam.nextPageNo}" title="${i18nMap.get('feilong-pager.text.goto.next')}" href="${pagerVMParam.nextUrl}">${i18nMap.get('feilong-pager.text.next')}</a>
+#end
+
+	<input type="text" value="${pagerVMParam.currentPageNo}" class="feilongGotoInput" pagerUrlTemplateHref="${pagerVMParam.pagerUrlTemplate.href}" templateValue="${pagerVMParam.pagerUrlTemplate.templateValue}" pageParamName="${pagerVMParam.pageParamName}"/>/${pagerVMParam.allPageNo}<button class="pagerButton" value="go">Go</button>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+		##快速跳转文本框的回车事件
+		$(".feilongGotoInput").keydown( function() { 
+			if (event.keyCode == 13) { 
+				pagerJump($(this));
+			}
+		});
+		
+		##快速跳转按钮的点击事件
+		$(".pagerButton").click(function(){
+			pagerJump($(".feilongGotoInput"));
+		});
+    });
+    
+    function pagerJump(feilongGotoInputJquery){
+		var pageNoValue=feilongGotoInputJquery.val();
+		console.log(pageNoValue);
+		if(""!=pageNoValue&&pageNoValue>0){
+			var templateValue=feilongGotoInputJquery.attr("templateValue");
+			var pageParamName=feilongGotoInputJquery.attr("pageParamName");
+			var pagerUrlTemplateHref=feilongGotoInputJquery.attr("pagerUrlTemplateHref");
+			location.href=pagerUrlTemplateHref.replace(pageParamName+"="+templateValue,pageParamName+"="+pageNoValue);
+		}
+    }
+</script>
