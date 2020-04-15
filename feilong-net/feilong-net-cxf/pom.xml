@@ -17,25 +17,10 @@
 
 	<dependencies>
 
-
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-net-api</artifactId>
 			<version>${version.feilong-platform}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-net-httpclient4</artifactId>
-			<version>${version.feilong-platform}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-xml-dom</artifactId>
-			<version>${version.feilong-platform}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>

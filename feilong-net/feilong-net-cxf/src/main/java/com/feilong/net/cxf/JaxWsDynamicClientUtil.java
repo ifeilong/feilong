@@ -54,16 +54,22 @@ import com.feilong.json.jsonlib.JsonUtil;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.0.5 2014年5月5日 下午11:48:14
  * @see <a href=
  *      "https://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/">SunCertPathBuilderException:
  *      unable to find valid certification path to requested target</a>
- * @since 1.0.5
+ * @since 3.0.0
  */
 public class JaxWsDynamicClientUtil{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JaxWsDynamicClientUtil.class);
+
+    /** Don't let anyone instantiate this class. */
+    private JaxWsDynamicClientUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     //------------为了调试方便-------------------
     static{

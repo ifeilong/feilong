@@ -20,6 +20,19 @@
 			<artifactId>feilong-io</artifactId>
 		</dependency>
 
+		<!--feilong-velocity -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-velocity</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- feilong-json-jsonlib -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-json-jsonlib</artifactId>
+		</dependency>
+		
 		<!-- -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
@@ -42,18 +55,7 @@
 			<version>${version.commons-email}</version>
 			</dependency> -->
 
-		<!--feilong-velocity -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-velocity</artifactId>
-			<scope>test</scope>
-		</dependency>
 
-		<!-- feilong-json-jsonlib -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-json-jsonlib</artifactId>
-		</dependency>
 
 	</dependencies>
 

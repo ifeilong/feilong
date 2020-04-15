@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOReaderUtil;
 
 public class ReadToStringInputStreamTest{
@@ -33,12 +32,12 @@ public class ReadToStringInputStreamTest{
 
     //---------------------------------------------------------------
 
-    @Test
-    public void testGetContent(){
-        String spec = "https://www.jd.com/robots.txt";
-        InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
-        LOGGER.debug(IOReaderUtil.readToString(openStream, UTF8));
-    }
+    //    @Test
+    //    public void testGetContent(){
+    //        String spec = "https://www.jd.com/robots.txt";
+    //        InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
+    //        LOGGER.debug(IOReaderUtil.readToString(openStream, UTF8));
+    //    }
 
     @Test(expected = NullPointerException.class)
     public void testGetContentNull(){

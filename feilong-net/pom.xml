@@ -34,7 +34,6 @@
 			<artifactId>feilong-json-jsonlib</artifactId>
 		</dependency>
 
-
 		<!-- 用于 IOUtils.close -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
