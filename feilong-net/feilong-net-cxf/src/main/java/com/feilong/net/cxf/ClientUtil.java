@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.webservice.cxf;
+package com.feilong.net.cxf;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 

@@ -19,7 +19,7 @@ import com.feilong.context.beanproperty.JaxWsTypeBeanProperty;
 import com.feilong.context.invoker.AbstractResponseStringBuilder;
 import com.feilong.context.invoker.RequestArrayParamsBuilder;
 import com.feilong.context.invoker.ResponseStringBuilder;
-import com.feilong.webservice.cxf.JaxWsDynamicClientUtil;
+import com.feilong.net.cxf.JaxWsDynamicClientUtil;
 
 /**
  * Http 类型的 {@link ResponseStringBuilder}.

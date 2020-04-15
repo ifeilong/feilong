@@ -14,12 +14,6 @@
 
 	<url>https://github.com/venusdrogon/feilong-servlet</url>
 
-	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/venusdrogon/feilong-servlet/issues</url>
-	</issueManagement>
-
 	<dependencies>
 		<!-- 下载要使用 -->
 		<dependency>

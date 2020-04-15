@@ -176,10 +176,10 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!-- feilong-webservice-cxf -->
+		<!-- feilong-net-cxf -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-webservice-cxf</artifactId>
+			<artifactId>feilong-net-cxf</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

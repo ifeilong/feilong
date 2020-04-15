@@ -51,7 +51,6 @@
 		<module>feilong-security</module>
 		<module>feilong-taglib</module>
 		<module>feilong-tools</module>
-		<module>feilong-webservice</module>
 
 		<module>feilong-office</module>
 
