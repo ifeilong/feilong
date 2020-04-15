@@ -43,11 +43,6 @@
 		</dependency>
 
 		<!-- poi-ooxml-schemas是ooxml-schemas的精简版 -->
-		<!-- <dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>${version.poi}</version>
-			</dependency> -->
 
 		<!---->
 		<dependency>
@@ -85,10 +80,6 @@
 					<artifactId>spymemcached</artifactId>
 					<groupId>spy</groupId>
 				</exclusion>
-				<!-- <exclusion>
-					<artifactId>ognl</artifactId>
-					<groupId>ognl</groupId>
-					</exclusion> -->
 				<exclusion>
 					<groupId>com.sun.javax.media</groupId>
 					<artifactId>jai_codec</artifactId>
@@ -114,7 +105,6 @@
 			<artifactId>feilong-core-extension</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework</groupId>

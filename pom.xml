@@ -1595,10 +1595,8 @@
 		<developer>
 			<id>feilong</id>
 			<name>金鑫</name>
-			<!-- <email>${developer.feilong.email}</email> -->
 			<url>https://github.com/venusdrogon/feilong</url>
 			<organization>feilong</organization>
-			<!-- <organizationUrl>https://github.com/venusdrogon/feilong</organizationUrl> -->
 			<roles>
 				<role>architect</role>
 				<role>developer</role>
@@ -1632,7 +1630,6 @@
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
-				<!-- <updatePolicy>always</updatePolicy> -->
 				<checksumPolicy>warn</checksumPolicy>
 			</snapshots>
 		</repository>

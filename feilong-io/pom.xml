@@ -34,7 +34,6 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<!-- <optional>true</optional> -->
 		</dependency>
 
 		<!-- **********************log日志************************************ -->

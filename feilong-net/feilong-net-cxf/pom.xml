@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -37,8 +36,6 @@
 					<groupId>org.apache.cxf</groupId>
 					<artifactId>cxf-rt-ws-addr</artifactId>
 				</exclusion>
-				<!-- <exclusion> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-frontend-simple</artifactId> 
-					</exclusion> -->
 				<exclusion>
 					<groupId>org.apache.cxf</groupId>
 					<artifactId>cxf-rt-bindings-xml</artifactId>
@@ -62,8 +59,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-bundle</artifactId> 
-			<version>${version.cxf}</version> </dependency> -->
 
 	</dependencies>
 </project>

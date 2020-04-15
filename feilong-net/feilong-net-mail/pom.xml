@@ -47,15 +47,12 @@
 			<version>1.6.0</version>
 			</dependency> -->
 
-
 		<!-- commons-email -->
 		<!-- <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>${version.commons-email}</version>
 			</dependency> -->
-
-
 
 	</dependencies>
 
