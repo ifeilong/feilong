@@ -24,7 +24,7 @@ public class SimpleHttpTypeBeanPropertyTagTest extends AbstractJUnit4SpringConte
 
     @Test
     public void test(){
-        assertThat(simpleHttpTypeBeanProperty, allOf(hasProperty("method", is("get")), hasProperty("uri", is("www.nike.com"))));
+        assertThat(simpleHttpTypeBeanProperty, allOf(hasProperty("method", is("get")), hasProperty("uri", is("www.baidu.com"))));
     }
 
 }

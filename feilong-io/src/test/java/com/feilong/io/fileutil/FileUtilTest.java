@@ -40,7 +40,7 @@ public class FileUtilTest{
     private static final Logger LOGGER  = LoggerFactory.getLogger(FileUtilTest.class);
 
     /** The string. */
-    private final String        fString = "/home/webuser/nike_int/johnData/${date}/nikeid_pix_${typeName}.csv";
+    private final String        fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
 
     /**
      * TestFileUtilTest.

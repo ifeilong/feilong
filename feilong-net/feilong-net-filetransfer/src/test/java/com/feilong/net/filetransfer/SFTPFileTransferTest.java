@@ -96,7 +96,7 @@ public class SFTPFileTransferTest extends FileTransferTest{
     @Override
     @Test
     public void deleteDir() throws Exception{
-        String remoteAbsolutePath = "/home/niketest/out/test/2011-07-07";
+        String remoteAbsolutePath = "/home/feilongtest/out/test/2011-07-07";
         fileTransfer.delete(remoteAbsolutePath);
     }
 

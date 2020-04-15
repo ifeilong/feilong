@@ -26,7 +26,7 @@ public class InetAddressTest{
 
     @Test
     public void domainName2IpAddress(){
-        String domainName = "www.nikestore.com.cn";
+        String domainName = "www.baidu.com";
         LOGGER.debug("ip:" + InetAddressUtil.domainName2Ip(domainName));
         LOGGER.debug("ip:" + InetAddressUtil.domainName2Ip("127.0.0.1"));
     }

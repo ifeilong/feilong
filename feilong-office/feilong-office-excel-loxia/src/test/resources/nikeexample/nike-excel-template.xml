@@ -197,8 +197,6 @@
 			<cell position="AC3" dataName="idealityDeliveryTime" />
 			<!-- 商品订购件数  -->
 			<cell position="AG3" dataName="requestQty" />
-			<!-- nike结算运费  -->
-			<cell position="AI3" dataName="nikeTransFree" />
 			<!-- 是否全退  -->
 			<cell position="AJ3" dataName="isFullyReturn" />
 			<!-- 订单签收时间  -->

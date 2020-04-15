@@ -289,7 +289,6 @@ public final class SortUtil{
      *                     list,
      *                     new FixedOrderComparator<>(
      *                                     StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
-     *                                     StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
      *                                     StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_VIP_CODE,
@@ -309,7 +308,6 @@ public final class SortUtil{
      * com.feilong.core.util.SortUtil.sortListByFixedOrderArray(
      *                 list,
      *                 StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
-     *                 StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
      *                 StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
      *                 StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
      *                 StoPropertyConstants.PRPT_ITEM_VIP_CODE,
@@ -373,7 +371,6 @@ public final class SortUtil{
      *                     list,
      *                     new FixedOrderComparator<>(
      *                                     StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
-     *                                     StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
      *                                     StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_VIP_CODE,
@@ -394,7 +391,6 @@ public final class SortUtil{
      *                 list,
      *                 toList(
      *                                 StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
-     *                                 StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
      *                                 StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
      *                                 StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
      *                                 StoPropertyConstants.PRPT_ITEM_VIP_CODE,

@@ -73,7 +73,7 @@ public class JaxWsDynamicClientUtil{
     //---------------------------------------------------------------
 
     /**
-     * 如果没有这段代码, 对于 https://203.94.12.226:58443/adidas_official_ws/OfficialWebservice?wsdl 这么一段 ip+https 的wsdl 的调用, 将会出现 以下异常信息
+     * 如果没有这段代码, 对于 https://203.94.12.226:58443/***_official_ws/OfficialWebservice?wsdl 这么一段 ip+https 的wsdl 的调用, 将会出现 以下异常信息
      * 
      * <pre>
      * 
@@ -82,7 +82,7 @@ public class JaxWsDynamicClientUtil{
      * at org.apache.cxf.jaxws.ServiceImpl.initialize(ServiceImpl.java:160)
      * ... 28 more
      * Caused by: javax.wsdl.WSDLException: WSDLException: faultCode=PARSER_ERROR: Problem parsing
-     * 'https://203.94.12.226:58443/adidas_official_ws/OfficialWebservice?wsdl'.: javax.net.ssl.SSLHandshakeException:
+     * 'https://203.94.12.226:58443/****_official_ws/OfficialWebservice?wsdl'.: javax.net.ssl.SSLHandshakeException:
      * java.security.cert.CertificateException: No subject alternative names present
      * at com.ibm.wsdl.xml.WSDLReaderImpl.getDocument(WSDLReaderImpl.java:2198)
      * at com.ibm.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:2422)

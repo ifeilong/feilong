@@ -256,7 +256,7 @@ public interface CsvWrite{
      * <pre class="code">
      * 
      * public void testWrite(){
-     *     String path = "/home/webuser/nike_int/johnData/${date}/nikeid_pix_demand.csv";
+     *     String path = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_demand.csv";
      *     path = path.replace("${date}", DateUtil.toString(DateUtil.addDay(now(), -1), DatePattern.COMMON_DATE));
      *     LOGGER.info(path);
      * 
@@ -271,7 +271,7 @@ public interface CsvWrite{
      * 
      * </pre>
      * 
-     * <b>返回:</b> E:\home\webuser\nike_int\johnData\2016-06-13\nikeid_pix_demand.csv 文件 内容如下:
+     * <b>返回:</b> E:\home\webuser\feilong_int\johnData\2016-06-13\feilongid_pix_demand.csv 文件 内容如下:
      * 
      * 
      * <pre class="code">

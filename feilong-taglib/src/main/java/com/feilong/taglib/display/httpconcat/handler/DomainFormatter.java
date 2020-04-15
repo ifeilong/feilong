@@ -60,7 +60,7 @@ public final class DomainFormatter{
 
         //---------------------------------------------------------------
         //since 1.10.5
-        //<script type="text/javascript" src="http://www.feilong.com/??http://img.adidas.com.cn/scripts/pdp/common.js,scripts/pdp/sub_salesProperties.js,scripts/pdp/pdp.js?2017"></script>
+        //<script type="text/javascript" src="http://www.feilong.com/??http://img.aaa.com.cn/scripts/pdp/common.js,scripts/pdp/sub_salesProperties.js,scripts/pdp/pdp.js?2017"></script>
 
         //如果域名是以双斜杆结尾, 那么转成单斜杆
         if (domain.endsWith("//")){

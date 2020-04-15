@@ -59,7 +59,7 @@ public final class ClientUtil{
     //---------------------------------------------------------------
 
     /**
-     * 如果没有这段代码,对于 以下 wsdl(https://203.94.12.226:58443/adidas_official_ws/OfficialWebservice?wsdl) 的调用, 将会出现 以下异常
+     * 如果没有这段代码,对于 以下 wsdl(https://203.94.12.226:58443/***_official_ws/OfficialWebservice?wsdl) 的调用, 将会出现 以下异常
      * 
      * <pre>
      *     javax.xml.ws.WebServiceException: org.apache.cxf.interceptor.Fault: Could not send Message.
@@ -70,7 +70,7 @@ public final class ClientUtil{
      *     at org.apache.cxf.endpoint.ClientImpl.invoke(ClientImpl.java:283)
      *     at com.feilong.webservice.cxf.JaxWsDynamicClientUtil.call(JaxWsDynamicClientUtil.java:133)
      *     ... 24 more
-     *     Caused by: java.io.IOException: IOException invoking https://203.94.12.226:58443/adidas_official_ws/OfficialWebservice: The https URL hostname does not match the Common Name (CN) on the server certificate in the client's truststore.  Make sure server certificate is correct, or to disable this check (NOT recommended for production) set the CXF client TLS configuration property "disableCNCheck" to true.
+     *     Caused by: java.io.IOException: IOException invoking https://203.94.12.226:58443/adi****ficial_ws/OfficialWebservice: The https URL hostname does not match the Common Name (CN) on the server certificate in the client's truststore.  Make sure server certificate is correct, or to disable this check (NOT recommended for production) set the CXF client TLS configuration property "disableCNCheck" to true.
      *     at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
      *     at org.apache.cxf.interceptor.MessageSenderInterceptor$MessageSenderEndingInterceptor.handleMessage(MessageSenderInterceptor.java:62)
      *     ... 32 more

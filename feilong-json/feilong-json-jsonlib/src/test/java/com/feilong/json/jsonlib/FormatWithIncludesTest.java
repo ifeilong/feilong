@@ -30,35 +30,33 @@ import com.feilong.store.member.User;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.12.6
  */
-public class FormatWithIncludesTest extends AbstractJsonTest{
+public class FormatWithIncludesTest extends AbstractJsonTest {
 
-    @Test
-    @SuppressWarnings("static-method")
-    public void testFormatWithIncludes1(){
-        User user1 = new User("feilong1", 24);
-        user1.setNickNames(toArray("xin.jin", "shuai.ge"));
-        User user2 = new User("feilong2", 240);
-        user2.setNickNames(toArray("xin.jin", "shuai.ge"));
+	@Test
+	public void testFormatWithIncludes1() {
+		User user1 = new User("feilong1", 24);
+		user1.setNickNames(toArray("xin.jin", "shuai.ge"));
+		User user2 = new User("feilong2", 240);
+		user2.setNickNames(toArray("xin.jin", "shuai.ge"));
 
-        List<User> list = toList(user1, user2);
+		List<User> list = toList(user1, user2);
 
-        LOGGER.debug(JsonUtil.formatWithIncludes(list, "name", "age"));
+		LOGGER.debug(JsonUtil.formatWithIncludes(list, "name", "age"));
 
-        String[] array = { "id", "name" };
-        LOGGER.debug(JsonUtil.formatWithIncludes(toArray(user1, user2), array));
+		String[] array = { "id", "name" };
+		LOGGER.debug(JsonUtil.formatWithIncludes(toArray(user1, user2), array));
 
-        LOGGER.debug(JsonUtil.formatWithIncludes(toList("2,5,8", "2,5,9")));
-        LOGGER.debug(JsonUtil.formatWithIncludes(user1));
-    }
+		LOGGER.debug(JsonUtil.formatWithIncludes(toList("2,5,8", "2,5,9")));
+		LOGGER.debug(JsonUtil.formatWithIncludes(user1));
+	}
 
-    /**
-     * TestJsonUtilTest.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testFormatWithIncludes(){
-        Object[][] objects = { { "nike shoe", "500", 1 }, { "nike shoe2", "5000", 1 } };
-        LOGGER.debug(JsonUtil.formatWithIncludes(objects));
-    }
+	/**
+	 * TestJsonUtilTest.
+	 */
+	@Test
+	public void testFormatWithIncludes() {
+		Object[][] objects = { { "feilong shoe", "500", 1 }, { "feilong shoe2", "5000", 1 } };
+		LOGGER.debug(JsonUtil.formatWithIncludes(objects));
+	}
 
 }

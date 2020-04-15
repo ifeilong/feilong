@@ -63,7 +63,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Override
     @Test(expected = NullPointerException.class)
     public void downloadNullLocalAbsoluteDirectoryPath(){
-        fileTransfer.download(null, "/home/niketest/out/test");
+        fileTransfer.download(null, "/home/feilongtest/out/test");
     }
 
     /*
@@ -74,7 +74,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Override
     @Test(expected = IllegalArgumentException.class)
     public void downloadEmptyLocalAbsoluteDirectoryPath(){
-        fileTransfer.download("", "/home/niketest/out/test");
+        fileTransfer.download("", "/home/feilongtest/out/test");
     }
 
     /*
@@ -85,7 +85,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
     @Override
     @Test(expected = IllegalArgumentException.class)
     public void downloadBlankLocalAbsoluteDirectoryPath(){
-        fileTransfer.download(" ", "/home/niketest/out/test");
+        fileTransfer.download(" ", "/home/feilongtest/out/test");
 
     }
 

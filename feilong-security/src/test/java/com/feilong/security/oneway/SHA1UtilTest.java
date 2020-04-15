@@ -73,7 +73,6 @@ public class SHA1UtilTest extends AbstractSecurityTest{
     @Test
     public void encode1(){
         LOGGER.debug(debugSecurityValue(SHA1Util.encode("521000")));
-        LOGGER.debug(debugSecurityValue(SHA1Util.encode("2" + "5000" + "200000" + "nikejdistore")));
         String origin = "sdadadadadaadasasdasdadas" + "dasdadasdadadasdasdasdadasdasdadadadadasdadadadad"
                         + "aaadasdasdasdasdadadadadaadasasdasdadasdasda" + "dasdadadasdasdasdadas"
                         + "dasdadadadadasdadadadadaaadasdasdasdasasda" + "sdasdasdasdasdasdasdadasaddssadsaadsasdsdadadadadaa"

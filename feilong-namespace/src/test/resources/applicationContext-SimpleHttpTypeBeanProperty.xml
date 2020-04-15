@@ -11,7 +11,7 @@
 		<bean id="alipaySimpleHttpTypeBeanProperty" class="com.feilong.context.beanproperty.SimpleHttpTypeBeanProperty" p:uri="#{p_AlipayAdvance['gateway']}"
 		p:method="get" />
 	-->
-	<feilong:httpTypeBeanProperty id="httpTypeBeanProperty" method="get" uri="www.nike.com" />
+	<feilong:httpTypeBeanProperty id="httpTypeBeanProperty" method="get" uri="www.baidu.com" />
 
 
 </beans>  

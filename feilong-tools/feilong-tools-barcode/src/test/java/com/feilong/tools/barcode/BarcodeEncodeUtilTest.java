@@ -67,11 +67,6 @@ public class BarcodeEncodeUtilTest{
     public void testEncode(){
         barcodeConfig = new BarcodeConfig();
         barcodeConfig.setBarcodeFormat(BarcodeFormat.UPC_A);
-        //11或者12
-        //nike 00883419590795
-        contents = "3489367913312";
-        contents = "01234567890";
-        contents = "886060721815";
         contents = "883419590795";
         outputImageFile = "d:/test" + barcodeConfig.getBarcodeFormat() + contents + ".png";
     }

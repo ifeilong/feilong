@@ -39,8 +39,6 @@ public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
 
     @Override
     protected String getConfigFile(){
-        //return "mail-adidas-test.properties";
-        //return "mail-bztest-test.properties";
         return "mail-feilongtestemail.properties";
     }
 }

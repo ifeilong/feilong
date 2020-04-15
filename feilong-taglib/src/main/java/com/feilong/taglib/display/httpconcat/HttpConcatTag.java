@@ -75,7 +75,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     /**
      * 根目录.
      * <p>
-     * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
+     * 如果设置root为'/script' 会拼成http://staging.feilongstore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
      * </p>
      */
     private String              root;

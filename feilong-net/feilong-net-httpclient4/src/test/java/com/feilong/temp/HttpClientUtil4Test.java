@@ -33,70 +33,39 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.net.httpclient4.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
-public class HttpClientUtil4Test extends AbstractTest{
+public class HttpClientUtil4Test extends AbstractTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil4Test.class);
-    //    "fullEncodedUrl": "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934",
-    //    "requestBody": "",
-    //    "httpMethodType": "GET",
-    //    "paramMap":         {
-    //        "storeId": "9",
-    //        "secret": "991d110bc99aa4c9f151525f49eb6934"
-    //    },
-    //    "headerMap": null,
-    //    "uri": "https://cps.wecommerce.com.cn/cps/broker/getToken"
+	private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil4Test.class);
+	// "fullEncodedUrl":
+	// "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934",
+	// "requestBody": "",
+	// "httpMethodType": "GET",
+	// "paramMap": {
+	// "storeId": "9",
+	// "secret": "991d110bc99aa4c9f151525f49eb6934"
+	// },
+	// "headerMap": null,
+	// "uri": "https://cps.wecommerce.com.cn/cps/broker/getToken"
 
-    @Test
-    public void testGetResponseBodyAsString1(){
-        String uri = "";
-        //uri = "https://www.adidas.com.cn/error-traffic-control";
-        uri = "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934";
+	@Test
+	public void testGetResponseBodyAsString1() {
+		String uri = "";
+		uri = "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934";
 
-        LOGGER.debug(HttpClientUtil.get(uri));
-    }
+		LOGGER.debug(HttpClientUtil.get(uri));
+	}
 
-    @Test
-    public void testGetResponseBodyAsString(){
-        String uri = "https://stage.adidas.com.cn/item/BA8900";
-        //uri = "https://www.adidas.com.cn/error-traffic-control";
-        uri = "http://127.0.0.1:8084";
+	@Test
+	public void testGetResponseBodyAsString() {
+		String uri = "http://127.0.0.1:8084";
 
-        LOGGER.debug(HttpClientUtil.get(uri));
-    }
+		LOGGER.debug(HttpClientUtil.get(uri));
+	}
 
-    @Test
-    public void testHttpClientUtilTest(){
-        // 执行一个get方法,设置超时时间,并且将结果变成字符串
-        //Request.Get("http://www.yeetrack.com/").connectTimeout(1000).socketTimeout(1000).execute().returnContent().asString();
-    }
+	@Test
+	public void testHttpClientUtilTest() {
+		// 执行一个get方法,设置超时时间,并且将结果变成字符串
+		// Request.Get("http://www.yeetrack.com/").connectTimeout(1000).socketTimeout(1000).execute().returnContent().asString();
+	}
 
-    /**
-     * TestHttpClientUtilTest.
-     * 
-     * @throws IOException
-     * @throws ClientProtocolException
-     */
-    @Test
-    public void testHttpClientUtilTest1() throws ClientProtocolException,IOException{
-        String uri = "https://pts.adidas.com.cn/login.htm";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(uri);
-
-        HttpResponse httpResponse = httpclient.execute(httpGet);
-        Header[] headers = httpResponse.getHeaders("Set-Cookie");
-
-        //---------------------------------------------------------------
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("{},{}", HttpClientUtil.get(uri), JsonUtil.format(headers));
-        }
-
-        if (isNotNullOrEmpty(headers)){
-            Header header = headers[0];
-            String cookie = header.getValue();
-            httpGet.releaseConnection();
-
-            LOGGER.info(cookie);
-        }
-    }
 }
