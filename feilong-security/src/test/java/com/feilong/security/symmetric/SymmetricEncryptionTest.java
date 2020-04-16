@@ -109,7 +109,6 @@ public class SymmetricEncryptionTest extends AbstractSecurityTest{
         for (int i = 0; i < byteTemp.length && i < keyByteLenth; ++i){
             byteTemp[i] = keyByte[i];
         }
-        Key _key = new SecretKeySpec(byteTemp, algorithm);
-        return _key;
+        return new SecretKeySpec(byteTemp, algorithm);
     }
 }

@@ -42,7 +42,6 @@ public class AESUtilTest extends AbstractSecurityTest{
      * Decrypt base64.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void decryptBase64(){
         assertEquals(testString, SYMMETRIC_ENCRYPTION.decryptBase64("NvHLVz3ADOlx3K2dMa8TZjjP5fkAPus2ienTEkOdUX4=", UTF8));
     }
@@ -51,7 +50,6 @@ public class AESUtilTest extends AbstractSecurityTest{
      * Encryp base64.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void encrypBase64(){
         assertEquals("NvHLVz3ADOlx3K2dMa8TZjjP5fkAPus2ienTEkOdUX4=", SYMMETRIC_ENCRYPTION.encryptBase64(testString, UTF8));
     }

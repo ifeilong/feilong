@@ -16,7 +16,7 @@
 package com.feilong.security.symmetric.builder;
 
 /**
- * The Class KeyConfig.
+ * 构造key的配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
@@ -26,6 +26,10 @@ public class KeyBuilderConfig{
     /** The algorithm. */
     private String algorithm;
 
+    /** The key string. */
+    private String keyString;
+
+    //---------------------------------------------------------------
     /**
      * The secure random algorithm.
      * 
@@ -39,8 +43,7 @@ public class KeyBuilderConfig{
      */
     private String secureRandomAlgorithm = "SHA1PRNG";
 
-    /** The key string. */
-    private String keyString;
+    //---------------------------------------------------------------
 
     /** 密钥大小。这是特定于算法的一种规格，是以位数为单位指定的. */
     private int    keySize;

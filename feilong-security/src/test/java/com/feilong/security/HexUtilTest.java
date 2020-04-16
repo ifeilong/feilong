@@ -15,15 +15,12 @@
  */
 package com.feilong.security;
 
+import static com.feilong.core.CharsetType.UTF8;
+
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.security.ByteUtil;
-import com.feilong.security.HexUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  *
@@ -38,9 +35,6 @@ public class HexUtilTest{
     /** <code>{@value}</code>. */
     private static final String TEXT   = "jinxin.feilong";
 
-    /**
-     * To hex string upper case.
-     */
     @Test
     public void toHexStringUpperCase(){
         LOGGER.debug(HexUtil.toHexStringUpperCase(TEXT, UTF8));

@@ -116,7 +116,7 @@ import com.feilong.security.ByteUtil;
  * @see #encryptHex(String, String)
  * @see #decryptHex(String, String)
  */
-public final class SymmetricEncryption extends AbstractSymmetricEncryption{
+public class SymmetricEncryption extends AbstractSymmetricEncryption{
 
     /**
      * 构造函数(固定枚举支持范围).
@@ -154,7 +154,6 @@ public final class SymmetricEncryption extends AbstractSymmetricEncryption{
         Validate.notNull(symmetricType, "symmetricType can't be null!");
 
         //---------------------------------------------------------------
-
         SymmetricEncryptionConfig config = new SymmetricEncryptionConfig();
         config.setSymmetricType(symmetricType);
         config.setKeyString(keyString);
@@ -166,14 +165,14 @@ public final class SymmetricEncryption extends AbstractSymmetricEncryption{
     /**
      * 构造函数.
      *
-     * @param symmetricEncryptionConfig
+     * @param config
      *            the symmetric encryption config
      * @see SymmetricType
      * @see "javax.crypto.Cipher#tokenizeTransformation(String)"
      * @since 1.11.0
      */
-    public SymmetricEncryption(SymmetricEncryptionConfig symmetricEncryptionConfig){
-        init(symmetricEncryptionConfig);
+    public SymmetricEncryption(SymmetricEncryptionConfig config){
+        init(config);
     }
 
     //---------------------------------------------------------------

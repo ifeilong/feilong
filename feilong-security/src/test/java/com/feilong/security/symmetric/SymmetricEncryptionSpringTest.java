@@ -101,12 +101,6 @@ public class SymmetricEncryptionSpringTest extends AbstractJUnit4SpringContextTe
         LOGGER.debug(symmetricEncryption.decryptHex(hexString, UTF8));
     }
 
-    /**
-     * Name.
-     * 
-     * @throws NoSuchAlgorithmException
-     *             the no such algorithm exception
-     */
     @Test
     public void name() throws NoSuchAlgorithmException{
         KeyGenerator kg = KeyGenerator.getInstance("Blowfish");

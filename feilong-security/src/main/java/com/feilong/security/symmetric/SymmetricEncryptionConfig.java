@@ -53,6 +53,8 @@ public class SymmetricEncryptionConfig implements Serializable{
     /** The cipher padding. */
     private CipherPadding     cipherPadding;
 
+    //---------------------------------------------------------------
+
     /**
      * The key string.
      * <p>
