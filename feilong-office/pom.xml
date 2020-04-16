@@ -12,7 +12,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>feilong-office-excel</module>
 		<module>feilong-office-csv</module>
 		<module>feilong-office-excel-loxia</module>
 	</modules>

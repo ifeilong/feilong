@@ -38,33 +38,41 @@ import com.feilong.core.util.RandomUtil;
 public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCodeCreator{
 
     /** The Constant LOGGER. */
-    private static final Logger  LOGGER  = LoggerFactory.getLogger(SimpleSequenceTypeOrderCodeCreator.class);
+    private static final Logger LOGGER  = LoggerFactory.getLogger(SimpleSequenceTypeOrderCodeCreator.class);
 
-    /**
-     * <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">13</span>
-     * </p>
-     * 
-     * @since 1.11.0 move from DatePattern
-     */
-    public static final String   yy      = "yy";
-
-    /**
-     * <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">2156</span>
-     * </p>
-     * 
-     * @since 1.11.0 move from DatePattern
-     */
-    public static final String   mmss    = "mmss";
-
-    private static final boolean isDebug = false;
+    /** The is debug. */
+    private boolean             isDebug = false;
 
     //---------------------------------------------------------------
+
+    /**
+     * Instantiates a new simple sequence type order code creator.
+     */
+    public SimpleSequenceTypeOrderCodeCreator(){
+        super();
+    }
+
+    /**
+     * Instantiates a new simple sequence type order code creator.
+     *
+     * @param isDebug
+     *            the is debug
+     */
+    public SimpleSequenceTypeOrderCodeCreator(boolean isDebug){
+        super();
+        this.isDebug = isDebug;
+    }
+
+    //---------------------------------------------------------------
+    /**
+     * 创建.
+     *
+     * @param sequence
+     *            the sequence
+     * @param maxLength
+     *            the max length
+     * @return the string
+     */
     /*
      * (non-Javadoc)
      * 
@@ -76,23 +84,19 @@ public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCode
         Validate.isTrue(maxLength > 0, "maxLength: [%s] must > 0", maxLength);
 
         int sequenceLength = String.valueOf(sequence).length();
-
         //---------------------------------------------------------------
-
         if (sequenceLength > maxLength){
             return String.valueOf(sequence);
         }
-
         //---------------------------------------------------------------
         //FIXME
         Validate.isTrue(maxLength == 11, "maxLength == 11");
 
         //---------------------------------------------------------------
-
         Date now = now();
 
         // 时间戳
-        String yyString = DateUtil.toString(now, yy);
+        String yyString = DateUtil.toString(now, "yy");
 
         String hourOfYear = StringUtil.format("%04d", DateUtil.getHourOfYear(now));
 
@@ -100,18 +104,14 @@ public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCode
         String randomString = "" + RandomUtil.createRandomWithLength(2);
 
         //---------------------------------------------------------------
-
         StringBuilder sb = new StringBuilder();
-
         if (11 == maxLength){
             sb.append(create11Code(sequence, sequenceLength, yyString, hourOfYear));
         }
         sb.append(CodeCreatorHelper.debugSeparator(isDebug) + randomString);// randomNumberLength
 
-        //风险  服务器时间不同步
-
+        //FIXME 风险 服务器时间不同步
         //---------------------------------------------------------------
-
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("{}", sb.toString() + CodeCreatorHelper.debugLength(sb, isDebug));
         }
@@ -136,7 +136,7 @@ public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCode
      *             the number format exception
      * @since 1.11.0
      */
-    private static StringBuilder create11Code(long sequence,int sequenceLength,String yy,String hourOfYear){
+    private StringBuilder create11Code(long sequence,int sequenceLength,String yy,String hourOfYear){
         StringBuilder sb = new StringBuilder();
         if (sequenceLength <= 3){
             sb.append(CodeCreatorHelper.debugSeparator(isDebug) + yy);// 2
@@ -148,5 +148,17 @@ public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCode
             sb.append(CodeCreatorHelper.debugSeparator(isDebug) + (vString + sequence));// 4
         }
         return sb;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Sets the checks if is debug.
+     *
+     * @param isDebug
+     *            the isDebug to set
+     */
+    public void setIsDebug(boolean isDebug){
+        this.isDebug = isDebug;
     }
 }

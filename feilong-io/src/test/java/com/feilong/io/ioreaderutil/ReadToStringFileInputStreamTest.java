@@ -16,34 +16,24 @@
 package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static org.junit.Assert.assertEquals;
 
 import java.io.FileInputStream;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOReaderUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.5
- */
 public class ReadToStringFileInputStreamTest extends AbstractReadFileToStringTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReadToStringFileInputStreamTest.class);
-
-    //---------------------------------------------------------------
 
     @Test
     public void testReadFile(){
         String readFileToString = IOReaderUtil.readToString(FileUtil.getFileInputStream(filePath), UTF8);
-        LOGGER.debug(readFileToString);
-
+        assertEquals("feilong 我爱你\n" + "feilong", readFileToString);
     }
+
+    //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testGetContent(){

@@ -66,7 +66,10 @@ class URIBuilderBuilder{
 
             Map<String, String> paramMap = httpRequest.getParamMap();
             if (isNullOrEmpty(paramMap)){
-                LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest));
+
+                if (LOGGER.isTraceEnabled()){
+                    LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest));
+                }
                 return uriBuilder;
             }
             return buildWithParameters(uriBuilder, paramMap);

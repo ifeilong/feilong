@@ -16,12 +16,11 @@
 package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOReaderUtil;
@@ -33,17 +32,13 @@ import com.feilong.io.IOReaderUtil;
  */
 public class ReadToStringFileAndCharsetNameTest extends AbstractReadFileToStringTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReadToStringFileAndCharsetNameTest.class);
-
-    //---------------------------------------------------------------
-
     @Test
     public void testReadFile(){
         String readFileToString = IOReaderUtil.readToString(new File(filePath), UTF8);
-        LOGGER.debug(readFileToString);
-
+        assertEquals("feilong 我爱你\n" + "feilong", readFileToString);
     }
+
+    //---------------------------------------------------------------
 
     @Test(expected = UncheckedIOException.class)
     public void testReadFile1(){

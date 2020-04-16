@@ -81,7 +81,10 @@ public class HttpClientBuilder{
         //---------------------------------------------------------------
         HttpClient httpClient = CACHE.get(useConnectionConfig);
         if (null != httpClient){
-            LOGGER.debug(StringUtils.center("loader from cache,cache size:[" + CACHE.size() + "]", 80, "="));
+
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug(StringUtils.center("loader from cache,cache size:[" + CACHE.size() + "]", 80, "="));
+            }
             return httpClient;
         }
 
@@ -93,7 +96,9 @@ public class HttpClientBuilder{
                 httpClient = build(useConnectionConfig, null);
                 CACHE.put(useConnectionConfig, httpClient);
 
-                LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + CACHE.size() + "]", 120, "-"));
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + CACHE.size() + "]", 120, "-"));
+                }
             }
         }
 
@@ -155,16 +160,5 @@ public class HttpClientBuilder{
         //CloseableHttpClient
         return customHttpClientBuilder.build();
     }
-
-    //
-    //customHttpClientBuilder.setConnectionManagerShared(true);
-
-    //org.apache.http.impl.client.DefaultConnectionKeepAliveStrategy.INSTANCE
-    //customHttpClientBuilder.setKeepAliveStrategy(keepAliveStrategy);
-
-    // 配置出错重试
-    //org.apache.http.impl.client.DefaultHttpRequestRetryHandler.INSTANCE
-    //        customHttpClientBuilder.disableAutomaticRetries();
-    //        customHttpClientBuilder.setRetryHandler(new StandardHttpRequestRetryHandler(3, true));
 
 }

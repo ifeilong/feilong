@@ -108,7 +108,11 @@ public final class URLDownloadUtil{
         //---------------------------------------------------------------
         try (InputStream inputStream = URLUtil.openStream(url)){
             IOWriteUtil.write(inputStream, directoryName, createFileName(urlString));
-            LOGGER.info("end download,url:[{}],directoryName:[{}],use time: [{}]", urlString, directoryName, formatDuration(beginDate));
+
+            //---------------------------------------------------------------
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info("end download,url:[{}],directoryName:[{}],use time: [{}]", urlString, directoryName, formatDuration(beginDate));
+            }
         }catch (IOException e){
             throw new UncheckedHttpException(Slf4jUtil.format("urlString:[{}],directoryName:[{}]", urlString, directoryName), e);
         }

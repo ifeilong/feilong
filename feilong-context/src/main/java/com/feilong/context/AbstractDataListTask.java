@@ -63,12 +63,12 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
         //查询需要处理的数据
         List<T> dataList = dataListQuery.query();
         if (isNullOrEmpty(dataList)){
+
             //如果没有,那么就简单的日志
-            LOGGER.info(
-                            "[{}],use dataListQuery:[{}] query no data list,use time: [{}]",
-                            taskName,
-                            dataListQuery.getClass().getName(),
-                            formatDuration(beginDate));
+            if (LOGGER.isInfoEnabled()){
+                String name = dataListQuery.getClass().getName();
+                LOGGER.info("[{}],use dataListQuery:[{}] query no data list,use time: [{}]", taskName, name, formatDuration(beginDate));
+            }
             return null;
         }
 
@@ -77,7 +77,9 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
         handle(dataList);
 
         //---------------------------------------------------------------
-        LOGGER.info("[{}],dataList size:[{}],use time: [{}]", taskName, dataList.size(), formatDuration(beginDate));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("[{}],dataList size:[{}],use time: [{}]", taskName, dataList.size(), formatDuration(beginDate));
+        }
         return null;
     }
 
