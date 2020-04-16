@@ -144,15 +144,6 @@ public class BeanDefinitionParserUtil{
 
     //    /**
     //     * 添加.
-    //     *
-    //     * @param element
-    //     *            the element
-    //     * @param beanDefinitionBuilder
-    //     *            the bean definition builder
-    //     * @param attributeNameList
-    //     *            the attribute name list
-    //     * @param required
-    //     *            the required
     //     */
     //    private static void add(Element element,BeanDefinitionBuilder beanDefinitionBuilder,List<String> attributeNameList,boolean required){
     //        for (String attributeName : attributeNameList){

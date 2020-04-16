@@ -84,14 +84,11 @@ public class SessionPropertiesBuilder{
         //---------------------------------------------------------------
 
         //        if(mailConfig.getTimeout() > 0)
-        //        {
         //            javaMailProperties.put("mail.smtp.connectiontimeout", mailConfig.getTimeout() * 1000);
         //            javaMailProperties.put("mail.smtp.timeout", mailConfig.getTimeout() * 1000);
         //        }else
-        //        {
         //            javaMailProperties.put("mail.smtp.connectiontimeout", MailConfig.TIMEOUT);
         //            javaMailProperties.put("mail.smtp.timeout", MailConfig.TIMEOUT);
-        //        }
 
         //---------------------------------------------------------------
 

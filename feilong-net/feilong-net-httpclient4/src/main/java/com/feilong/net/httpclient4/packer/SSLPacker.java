@@ -61,8 +61,7 @@ public final class SSLPacker{
             customHttpClientBuilder.setSSLSocketFactory(layeredConnectionSocketFactory);
         }
         //---------------------------------------------------------------
-        // SSLContext sslContext = buildHttpClient4SSLContext();
-        //这代码比上面简洁
+        //这代码比 SSLContext sslContext = buildHttpClient4SSLContext() 简洁
         SSLContext sslContext = com.feilong.net.ssl.SSLContextBuilder.build(SSLProtocol.TLSv12);
         customHttpClientBuilder.setSSLContext(sslContext);
 
