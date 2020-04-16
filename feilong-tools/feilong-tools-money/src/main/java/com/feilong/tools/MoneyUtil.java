@@ -15,11 +15,10 @@
  */
 package com.feilong.tools;
 
-import static com.feilong.core.bean.ConvertUtil.toLong;
-
 /**
  * 钱工具类,可以将 人民币转成大写,目前只能处理万亿级别.
  * 
+ * @author 徐新望
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.2
  */
@@ -150,30 +149,5 @@ public final class MoneyUtil{
         result = result.replaceAll("零$", "");
         result = result.replaceAll("元$", "元整");
         return result;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 元转换成分 1元==100分 对于0.011元转换成为1分,小数点后面第3位以后的(包含第三位)将舍弃. 作者:徐新望
-     * 
-     * @param money
-     *            the money
-     * @return long
-     */
-    public static long yuan2Fen(double money){
-        String strFen = (money * 100) + "";
-        return toLong(strFen.substring(0, strFen.indexOf('.')));
-    }
-
-    /**
-     * 分转换成元 100分==1元 作者:徐新望.
-     * 
-     * @param money
-     *            the money
-     * @return double
-     */
-    public static double fen2Yuan(long money){
-        return (double) money / 100;
     }
 }
