@@ -25,11 +25,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * The Class CodeGeneratorTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class SimpleMultiSellerOrderCodeCreatorTest{
 
     /** The Constant LOGGER. */
@@ -59,9 +54,8 @@ public class SimpleMultiSellerOrderCodeCreatorTest{
         multiSellerOrderCodeCreator = simpleMultiSellerOrderCodeCreator;
     }
 
-    /**
-     * Creates the order code.
-     */
+    //---------------------------------------------------------------
+
     @Test
     public void createOrderCode(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(35191L, 555L));
@@ -72,9 +66,6 @@ public class SimpleMultiSellerOrderCodeCreatorTest{
         LOGGER.debug(multiSellerOrderCodeCreator.create(1161L, 5555555L));
     }
 
-    /**
-     * Creates the order code1.
-     */
     @Test
     public void createOrderCode1(){
         for (int i = 0, j = 100; i < j; ++i){
@@ -86,9 +77,6 @@ public class SimpleMultiSellerOrderCodeCreatorTest{
         }
     }
 
-    /**
-     * Creates the return order code.
-     */
     @Test
     public void createReturnOrderCode(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(111121L, 5555555L));

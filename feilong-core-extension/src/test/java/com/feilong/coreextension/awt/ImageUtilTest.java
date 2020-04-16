@@ -57,10 +57,8 @@ public class ImageUtilTest{
      * @param outputFileName
      *            the output file name
      */
-
     //这样就可以完成转化,但是有一个不好的地方就是生成生颜色失真比较严重.从美工那得知他们本来就是不一样的格式,失真比较正常.[此实例参考了国外的文章.] 
     private static void cmyk2rgb(String cmykImageFilename,String outputFileName,String format){
-
         BufferedImage cmykBufferedImage = ImageUtil.getBufferedImage(cmykImageFilename);
 
         if (isCMYKType(cmykImageFilename)){

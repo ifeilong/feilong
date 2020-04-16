@@ -15,33 +15,33 @@
  */
 package com.feilong.context.codecreator;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
-import com.feilong.context.codecreator.DefaultGuestShoppingcartLineIdCreator;
-import com.feilong.context.codecreator.GuestShoppingcartLineIdCreator;
-
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.6
- */
 public class DefaultGuestShoppingcartLineIdCreatorTest{
 
-    private static final Set<Long> SET = new HashSet<>();
+    private static final Set<Long>                SET                            = new HashSet<>();
 
+    private static GuestShoppingcartLineIdCreator guestShoppingcartLineIdCreator = new DefaultGuestShoppingcartLineIdCreator();
+
+    //---------------------------------------------------------------
     @Test
-    public void testDefaultGuestShoppingcartLineIdCreatorTest(){
-        GuestShoppingcartLineIdCreator guestShoppingcartLineIdCreator = new DefaultGuestShoppingcartLineIdCreator();
+    public void test(){
+        int size = 1000;
 
-        for (int i = 0; i < 1000; ++i){
+        for (int i = 0; i < size; ++i){
             long id = guestShoppingcartLineIdCreator.create();
             if (SET.contains(id)){
                 throw new IllegalArgumentException("contains(" + i + " " + id + ")");
             }
             SET.add(id);
         }
+
+        assertEquals(size, SET.size());
+
     }
 }

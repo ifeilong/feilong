@@ -15,6 +15,8 @@
  */
 package com.feilong.coreextension.util;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -23,22 +25,11 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class CartesianProductTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.7.2
- */
 public class CartesianProductUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CartesianProductUtilTest.class);
 
-    /**
-     * TestCollectionUtilTest.
-     */
     @Test
     public void testCollectionUtilTest1(){
         Integer[] array1 = { 1, 2, 3 };
@@ -66,9 +57,6 @@ public class CartesianProductUtilTest{
 
     }
 
-    /**
-     * Test collection util test11.
-     */
     @Test
     public void testCollectionUtilTest112(){
         List<List<Integer>> result = CartesianProductUtil.cartesianProduct(toList(1, 2, 3), toList(1, 2), toList(5), toList(4, 8));

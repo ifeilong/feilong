@@ -19,11 +19,6 @@ import org.junit.Test;
 
 import com.feilong.tools.slf4j.Slf4jUtil;
 
-/**
- * The Class DesktopUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class DesktopUtilTest{
 
     /** The test file. */

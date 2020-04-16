@@ -19,11 +19,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.13.0
- */
 public class RuntimeUtilTest{
 
     /** The Constant log. */
