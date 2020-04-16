@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
  * 常用字符编码.
  * 
  * <p>
- * 建议不要自己硬编码,直接调用这里预声明的常量.
+ * 建议不要自己硬编码,可以直接调用此处声明的常量.
  * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
  * @see java.nio.charset.Charset#availableCharsets()
  * @see java.nio.charset.Charset#isSupported(String)
  * @see java.nio.charset.Charset#defaultCharset()
+ * @see java.nio.charset.StandardCharsets
  * @since 1.4.0
  */
 public final class CharsetType{

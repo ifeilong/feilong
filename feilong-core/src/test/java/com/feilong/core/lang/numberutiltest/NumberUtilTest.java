@@ -26,7 +26,7 @@ import com.feilong.core.lang.NumberUtil;
 public class NumberUtilTest{
 
     @Test
-    public void testIsEqualsTestNull1(){
+    public void test(){
         assertEquals(1, NumberUtil.ONE);
         assertEquals(10, NumberUtil.TEN);
         assertEquals(100, NumberUtil.HUNDRED);

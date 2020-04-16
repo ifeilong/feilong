@@ -363,10 +363,11 @@ public final class DomParser{
         Validate.notNull(node, "node can't be null!");
         Validate.notBlank(attributeName, "attributeName can't be null/empty!");
 
+        //---------------------------------------------------------------
         NamedNodeMap namedNodeMap = node.getAttributes();
-        Node node_current = namedNodeMap.getNamedItem(attributeName);
-        if (null != node_current){
-            return node_current.getNodeValue();
+        Node currentNode = namedNodeMap.getNamedItem(attributeName);
+        if (null != currentNode){
+            return currentNode.getNodeValue();
         }
         return EMPTY;
     }

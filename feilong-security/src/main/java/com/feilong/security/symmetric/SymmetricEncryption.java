@@ -155,12 +155,12 @@ public final class SymmetricEncryption extends AbstractSymmetricEncryption{
 
         //---------------------------------------------------------------
 
-        SymmetricEncryptionConfig SymmetricEncryptionConfig = new SymmetricEncryptionConfig();
-        SymmetricEncryptionConfig.setSymmetricType(symmetricType);
-        SymmetricEncryptionConfig.setKeyString(keyString);
-        SymmetricEncryptionConfig.setCipherMode(cipherMode);
-        SymmetricEncryptionConfig.setCipherPadding(cipherPadding);
-        init(SymmetricEncryptionConfig);
+        SymmetricEncryptionConfig config = new SymmetricEncryptionConfig();
+        config.setSymmetricType(symmetricType);
+        config.setKeyString(keyString);
+        config.setCipherMode(cipherMode);
+        config.setCipherPadding(cipherPadding);
+        init(config);
     }
 
     /**
