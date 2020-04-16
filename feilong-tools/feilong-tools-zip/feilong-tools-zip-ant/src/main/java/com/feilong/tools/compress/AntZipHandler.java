@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.io.FileUtil;
-import com.feilong.tools.compress.AbstractZipHandler;
 
 /**
  * 压缩工具类.

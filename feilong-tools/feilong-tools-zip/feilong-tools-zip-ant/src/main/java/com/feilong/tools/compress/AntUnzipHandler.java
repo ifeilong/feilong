@@ -22,8 +22,6 @@ import java.util.Enumeration;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 
-import com.feilong.tools.compress.AbstractUnzipHandler;
-
 /**
  * 解压缩工具类.
  * 

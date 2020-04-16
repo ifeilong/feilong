@@ -25,8 +25,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.accessor.KeyAccessor;
 import com.feilong.accessor.session.SessionKeyAccessor;
@@ -87,10 +85,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 public class BarcodeServlet extends HttpServlet{
 
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = 231074760785325078L;
-
-    /** The Constant log. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(BarcodeServlet.class);
+    private static final long serialVersionUID = 231074760785325078L;
 
     /*
      * (non-Javadoc)

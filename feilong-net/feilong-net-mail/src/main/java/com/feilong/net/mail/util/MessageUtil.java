@@ -281,7 +281,12 @@ public final class MessageUtil{
     private static String doWithMultipartAll(Part part) throws IOException,MessagingException{
         Multipart multipart = (Multipart) part.getContent();
         int count = multipart.getCount();
-        LOGGER.debug("content mimeType:[{}],match with:--->[{}],count:[{}]", multipart.getContentType(), MimeType.MULTIPART_ALL, count);
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("content mimeType:[{}],match with:--->[{}],count:[{}]", multipart.getContentType(), MimeType.MULTIPART_ALL, count);
+        }
+        //---------------------------------------------------------------
 
         boolean alternativeFlag = part.isMimeType(MimeType.MULTIPART_ALTERNATIVE);
 

@@ -25,9 +25,6 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.security.EncryptionException;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -39,11 +36,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @since 1.5.0
  */
 public class CipherUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CipherUtil.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private CipherUtil(){

@@ -164,7 +164,6 @@ public class JaxWsDynamicClientUtil{
             Object[] obj = client.invoke(operationName, params);
             return (T) obj[0];
         }catch (Exception e){
-            LOGGER.error("", e);
             throw new WebServiceException(e);
         }
     }
