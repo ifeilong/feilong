@@ -148,7 +148,7 @@ public class JaxWsDynamicClientUtil{
      *             the web service exception
      */
     @SuppressWarnings("unchecked")
-    public static <T> T call(String wsdlUrl,String operationName,Object...params) throws WebServiceException{
+    public static <T> T call(String wsdlUrl,String operationName,Object...params){
         Validate.notBlank(wsdlUrl, "wsdlUrl can't be blank!");
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){

@@ -18,7 +18,7 @@ package com.feilong.net.httpclient4.packer;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
@@ -118,7 +118,8 @@ public final class HttpRequestHeadersPacker{
 
         if (isNotNullOrEmpty(userName) && isNotNullOrEmpty(password)){
             String auth = userName + ":" + password;
-            String authHeader = "Basic " + new String(Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII"))));
+
+            String authHeader = "Basic " + new String(Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII)));
 
             httpUriRequest.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
         }

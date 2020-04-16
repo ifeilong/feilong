@@ -1221,7 +1221,7 @@ public final class RequestUtil{
      *             the unchecked IO exception
      * @since 1.14.2
      */
-    private static String parseBody(HttpServletRequest request) throws UncheckedIOException{
+    private static String parseBody(HttpServletRequest request){
         try{
             //Retrieves the body of the request as character data using a BufferedReader. 
 

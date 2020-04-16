@@ -267,7 +267,7 @@ public class LoxiaExcelWriteUtil{
                     String xmlSheetConfigurations,
                     String[] sheetNames,
                     OutputStream outputStream,
-                    WriteStatus writeStatus) throws UncheckedIOException{
+                    WriteStatus writeStatus){
         Map<String, Object> map = newLinkedHashMap();
         map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
         map.put("xmlSheetConfigurations", xmlSheetConfigurations);
