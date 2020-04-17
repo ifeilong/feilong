@@ -27,31 +27,12 @@ import com.feilong.security.symmetric.builder.KeyBuilderConfig;
  */
 public class SymmetricEncryptionConfig implements Serializable{
 
-    private static final long serialVersionUID      = 1588283689479766708L;
+    private static final long serialVersionUID = 1588283689479766708L;
 
     //---------------------------------------------------------------
 
     /** The symmetric type. */
     private SymmetricType     symmetricType;
-
-    /**
-     * The secure random algorithm.
-     * 
-     * <p>
-     * 默认 SHA1PRNG
-     * </p>
-     * 
-     * <p>
-     * 用于 {@link java.security.SecureRandom#getInstance(String)}
-     * </p>
-     */
-    private String            secureRandomAlgorithm = "SHA1PRNG";
-
-    /** The cipher mode. */
-    private CipherMode        cipherMode;
-
-    /** The cipher padding. */
-    private CipherPadding     cipherPadding;
 
     //---------------------------------------------------------------
 
@@ -63,8 +44,18 @@ public class SymmetricEncryptionConfig implements Serializable{
      */
     private String            keyString;
 
-    /** 密钥大小。这是特定于算法的一种规格，是以位数为单位指定的. */
-    private int               keySize;
+    //---------------------------------------------------------------
+
+    /** The cipher mode. */
+    private CipherMode        cipherMode;
+
+    /** The cipher padding. */
+    private CipherPadding     cipherPadding;
+
+    //---------------------------------------------------------------
+
+    //    /** 密钥大小。这是特定于算法的一种规格，是以位数为单位指定的. */
+    //    private int               keySize;
 
     //---------------------------------------------------------------
 
@@ -90,10 +81,6 @@ public class SymmetricEncryptionConfig implements Serializable{
     /**
      * Gets the key string.
      * 
-     * <p>
-     * 用于 {@link com.feilong.security.symmetric.builder.KeyBuilder#buildSecureRandom(KeyBuilderConfig)}
-     * </p>
-     * 
      * @return the keyString
      * 
      */
@@ -103,10 +90,6 @@ public class SymmetricEncryptionConfig implements Serializable{
 
     /**
      * Sets the key string.
-     * 
-     * <p>
-     * 用于 {@link com.feilong.security.symmetric.builder.KeyBuilder#buildSecureRandom(KeyBuilderConfig)}
-     * </p>
      * 
      * @param keyString
      *            the keyString to set
@@ -154,55 +137,20 @@ public class SymmetricEncryptionConfig implements Serializable{
     }
 
     //---------------------------------------------------------------p
-
-    /**
-     * The secure random algorithm.
-     * 
-     * <p>
-     * 默认 SHA1PRNG
-     * </p>
-     * 
-     * <p>
-     * 用于 {@link java.security.SecureRandom#getInstance(String)}
-     * </p>
-     *
-     * @return the secureRandomAlgorithm
-     */
-    public String getSecureRandomAlgorithm(){
-        return secureRandomAlgorithm;
-    }
-
-    /**
-     * The secure random algorithm.
-     * 
-     * <p>
-     * 默认 SHA1PRNG
-     * </p>
-     * 
-     * <p>
-     * 用于 {@link java.security.SecureRandom#getInstance(String)}
-     * </p>
-     *
-     * @param secureRandomAlgorithm
-     *            the secureRandomAlgorithm to set
-     */
-    public void setSecureRandomAlgorithm(String secureRandomAlgorithm){
-        this.secureRandomAlgorithm = secureRandomAlgorithm;
-    }
-
-    /**
-     * @return the keySize
-     */
-    public int getKeySize(){
-        return keySize;
-    }
-
-    /**
-     * @param keySize
-     *            the keySize to set
-     */
-    public void setKeySize(int keySize){
-        this.keySize = keySize;
-    }
+    //
+    //    /**
+    //     * @return the keySize
+    //     */
+    //    public int getKeySize(){
+    //        return keySize;
+    //    }
+    //
+    //    /**
+    //     * @param keySize
+    //     *            the keySize to set
+    //     */
+    //    public void setKeySize(int keySize){
+    //        this.keySize = keySize;
+    //    }
 
 }
