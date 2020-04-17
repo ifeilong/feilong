@@ -26,7 +26,6 @@ import com.feilong.security.oneway.SHA1UtilTest;
 import com.feilong.security.oneway.SHA256UtilTest;
 import com.feilong.security.oneway.SHA384UtilTest;
 import com.feilong.security.oneway.SHA512UtilTest;
-import com.feilong.security.symmetric.AESUtilTest;
 
 /**
  * The Class FeiLongSecuritySuiteTests.
@@ -42,7 +41,7 @@ import com.feilong.security.symmetric.AESUtilTest;
                 SHA384UtilTest.class,
                 SHA512UtilTest.class,
 
-                AESUtilTest.class,
+                //AESUtilTest.class,
 
                 OnewayEncryptionParameterizedTest.class,
         //                

@@ -46,12 +46,26 @@ public class CipherUtil{
     //---------------------------------------------------------------
 
     /**
-     * Encrypt.
+     * 加密.
      *
      * @param bytes
      *            the bytes
      * @param transformation
-     *            the transformation
+     *            <p>
+     *            转换transformation始终包括加密算法的名称(例如,DES),后面可能跟有一个反馈模式和填充方案.
+     *            </p>
+     * 
+     *            <p>
+     *            使用 CFB 和 OFB 之类的模式,Cipher 块可以加密单元中小于该 Cipher 的实际块大小的数据.<br>
+     *            请求这样一个模式时,可以指定一次处理的位数(可选):将此数添加到模式名称中,正如 "DES/CFB8/NoPadding" 和 "DES/OFB32/PKCS5Padding" 转换所示.
+     *            </p>
+     * 
+     *            <p>
+     *            如果未指定该数,则将使用特定于提供者的默认值.(例如,SunJCE 提供者对 DES 使用默认的 64 位).
+     *            </p>
+     *            <p>
+     *            因此,通过使用如 CFB8 或 OFB8 的 8 位模式,Cipher 块可以被转换为面向字节的 Cipher 流.
+     *            </p>
      * @param key
      *            the key
      * @return the byte[]
@@ -62,12 +76,26 @@ public class CipherUtil{
     }
 
     /**
-     * Decrypt.
+     * 解密.
      *
      * @param bytes
      *            the bytes
      * @param transformation
-     *            the transformation
+     *            <p>
+     *            转换transformation始终包括加密算法的名称(例如,DES),后面可能跟有一个反馈模式和填充方案.
+     *            </p>
+     * 
+     *            <p>
+     *            使用 CFB 和 OFB 之类的模式,Cipher 块可以加密单元中小于该 Cipher 的实际块大小的数据.<br>
+     *            请求这样一个模式时,可以指定一次处理的位数(可选):将此数添加到模式名称中,正如 "DES/CFB8/NoPadding" 和 "DES/OFB32/PKCS5Padding" 转换所示.
+     *            </p>
+     * 
+     *            <p>
+     *            如果未指定该数,则将使用特定于提供者的默认值.(例如,SunJCE 提供者对 DES 使用默认的 64 位).
+     *            </p>
+     *            <p>
+     *            因此,通过使用如 CFB8 或 OFB8 的 8 位模式,Cipher 块可以被转换为面向字节的 Cipher 流.
+     *            </p>
      * @param key
      *            the key
      * @return the byte[]
@@ -87,7 +115,21 @@ public class CipherUtil{
      * @param opmode
      *            模式,{@link Cipher#ENCRYPT_MODE} or {@link Cipher#DECRYPT_MODE}
      * @param transformation
-     *            the transformation
+     *            <p>
+     *            转换transformation始终包括加密算法的名称(例如,DES),后面可能跟有一个反馈模式和填充方案.
+     *            </p>
+     * 
+     *            <p>
+     *            使用 CFB 和 OFB 之类的模式,Cipher 块可以加密单元中小于该 Cipher 的实际块大小的数据.<br>
+     *            请求这样一个模式时,可以指定一次处理的位数(可选):将此数添加到模式名称中,正如 "DES/CFB8/NoPadding" 和 "DES/OFB32/PKCS5Padding" 转换所示.
+     *            </p>
+     * 
+     *            <p>
+     *            如果未指定该数,则将使用特定于提供者的默认值.(例如,SunJCE 提供者对 DES 使用默认的 64 位).
+     *            </p>
+     *            <p>
+     *            因此,通过使用如 CFB8 或 OFB8 的 8 位模式,Cipher 块可以被转换为面向字节的 Cipher 流.
+     *            </p>
      * @param key
      *            the key
      * @return the new buffer with the result
@@ -97,13 +139,6 @@ public class CipherUtil{
      * @see Cipher#doFinal(byte[])
      */
     private static byte[] opBytes(byte[] bytes,int opmode,String transformation,Key key){
-        // 转换transformation始终包括加密算法的名称(例如,DES),后面可能跟有一个反馈模式和填充方案.
-
-        // 使用 CFB 和 OFB 之类的模式,Cipher 块可以加密单元中小于该 Cipher 的实际块大小的数据.
-        // 请求这样一个模式时,可以指定一次处理的位数(可选):将此数添加到模式名称中,正如 "DES/CFB8/NoPadding" 和 "DES/OFB32/PKCS5Padding" 转换所示.
-
-        // 如果未指定该数,则将使用特定于提供者的默认值.(例如,SunJCE 提供者对 DES 使用默认的 64 位).
-        // 因此,通过使用如 CFB8 或 OFB8 的 8 位模式,Cipher 块可以被转换为面向字节的 Cipher 流.
         try{
             Cipher cipher = Cipher.getInstance(transformation);
 

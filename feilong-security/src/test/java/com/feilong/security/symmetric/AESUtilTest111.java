@@ -29,7 +29,7 @@ import com.feilong.security.AbstractSecurityTest;
  * @version 1.2.2 2015年7月19日 下午6:36:00
  * @since 1.2.2
  */
-public class AESUtilTest extends AbstractSecurityTest{
+public class AESUtilTest111 extends AbstractSecurityTest{
 
     /** The Constant SYMMETRIC_TYPE. */
     private static final SymmetricType       SYMMETRIC_TYPE       = SymmetricType.AES;

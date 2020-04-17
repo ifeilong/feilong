@@ -15,11 +15,23 @@
  */
 package com.feilong.security.symmetric;
 
+import static com.feilong.security.symmetric.LogBuilder.errorMessage;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+
+import java.security.Key;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.security.ByteUtil;
+import com.feilong.security.EncryptionException;
+import com.feilong.security.symmetric.builder.DefaultKeyBuilder;
+import com.feilong.security.symmetric.builder.KeyBuilder;
+import com.feilong.security.symmetric.builder.TransformationBuilder;
 
 /**
  * 对称加密解密工具
@@ -116,7 +128,36 @@ import com.feilong.security.ByteUtil;
  * @see #encryptHex(String, String)
  * @see #decryptHex(String, String)
  */
-public class SymmetricEncryption extends AbstractSymmetricEncryption{
+public class SymmetricEncryption{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricEncryption.class);
+
+    //---------------------------------------------------------------
+    /** 算法. */
+    private String              algorithm;
+
+    /** key值. */
+    private String              keyString;
+
+    //---------------------------------------------------------------
+
+    /** 对称加密key. */
+    private Key                 key;
+
+    //---------------------------------------------------------------
+
+    /**
+     * 转换的名称,例如 DES/CBC/PKCS5Padding.
+     * <p>
+     * 有关标准转换名称的信息,请参见 Java Cryptography Architecture Reference Guide 的附录 A.
+     * </p>
+     * 
+     * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html">StandardNames</a>
+     */
+    private String              transformation;
+
+    //---------------------------------------------------------------
 
     /**
      * 构造函数(固定枚举支持范围).
@@ -157,6 +198,7 @@ public class SymmetricEncryption extends AbstractSymmetricEncryption{
         SymmetricEncryptionConfig config = new SymmetricEncryptionConfig();
         config.setSymmetricType(symmetricType);
         config.setKeyString(keyString);
+
         config.setCipherMode(cipherMode);
         config.setCipherPadding(cipherPadding);
         init(config);
@@ -177,50 +219,194 @@ public class SymmetricEncryption extends AbstractSymmetricEncryption{
 
     //---------------------------------------------------------------
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.security.symmetric.AbstractSymmetricEncryption#doEncryptBase64(java.lang.String, java.lang.String)
-     */
-    @Override
-    protected String doEncryptBase64(String original,String charsetName){
-        byte[] encryptBytes = toEncryptBytes(original, charsetName);
-        return Base64.encodeBase64String(encryptBytes);
-    }
+    private void init(SymmetricEncryptionConfig config){
+        Validate.notNull(config, "symmetricEncryptionConfig can't be null!");
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.security.symmetric.AbstractSymmetricEncryption#doDecryptBase64(java.lang.String, java.lang.String)
-     */
-    @Override
-    protected String doDecryptBase64(String base64String,String charsetName){
-        byte[] byteMi = Base64.decodeBase64(base64String);
-        return toDecryptString(byteMi, charsetName);
+        SymmetricType symmetricType = config.getSymmetricType();
+        Validate.notNull(symmetricType, "symmetricEncryptionConfig.getSymmetricType() can't be null!");
+
+        //---------------------------------------------------------------
+        this.keyString = config.getKeyString();
+        Validate.notBlank(keyString, "keyString can't be blank!");
+
+        //---------------------------------------------------------------
+        this.algorithm = symmetricType.getAlgorithm();
+        this.transformation = TransformationBuilder.build(algorithm, config.getCipherMode(), config.getCipherPadding());
+        LOGGER.debug("algorithm:[{}],keyString:[{}],transformation:[{}]", algorithm, keyString, transformation);
+
+        //---------------------------------------------------------------
+        KeyBuilder keyBuilder = defaultIfNull(config.getKeyBuilder(), DefaultKeyBuilder.INSTANCE);
+        this.key = keyBuilder.build(algorithm, keyString);
     }
 
     //---------------------------------------------------------------
 
-    /*
-     * (non-Javadoc)
+    /**
+     * 将加密之后的字节码,使用 Base64封装返回.
      * 
-     * @see com.feilong.security.symmetric.AbstractSymmetricEncryption#doEncryptHex(java.lang.String, java.lang.String)
+     * <pre class="code">
+     * keyString=feilong
+     * encrypBase64("鑫哥爱feilong") ---->BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
+     * </pre>
+     *
+     * @param original
+     *            原字符串
+     * @param charsetName
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
+     * @return 加密之后的字符串 <br>
+     *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see "sun.misc.BASE64Encoder"
+     * @see org.apache.commons.codec.binary.Base64
      */
-    @Override
-    protected String doEncryptHex(String original,String charsetName){
-        byte[] encryptBytes = toEncryptBytes(original, charsetName);
-        return ByteUtil.bytesToHexStringUpperCase(encryptBytes);
+    public String encryptBase64(String original,String charsetName){
+        Validate.notBlank(charsetName, "charsetName can't be blank!");
+
+        //---------------------------------------------------------------
+        try{
+            byte[] encryptBytes = toEncryptBytes(original, charsetName);
+            String value = Base64.encodeBase64String(encryptBytes);
+
+            LogBuilder.logEncrypt("encrypBase64", original, value, algorithm, keyString);
+            return value;
+        }catch (Exception e){
+            throw new EncryptionException(errorMessage("original", original, algorithm, keyString, charsetName), e);
+        }
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * des Base64解密.
      * 
-     * @see com.feilong.security.symmetric.AbstractSymmetricEncryption#doDecryptHex(java.lang.String, java.lang.String)
+     * <pre class="code">
+     * keyString=feilong
+     * decryptBase64("BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2") ---->鑫哥爱feilong
+     * 
+     * </pre>
+     *
+     * @param base64String
+     *            加密后的字符串
+     * @param charsetName
+     *            编码集 {@link CharsetType}
+     * @return 解密返回的原始密码<br>
+     *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see "sun.misc.BASE64Decoder"
+     * @see "sun.misc.BASE64Decoder#decodeBuffer(String)"
+     * @see org.apache.commons.codec.binary.Base64
+     * @see org.apache.commons.codec.binary.Base64#decodeBase64(byte[])
      */
-    @Override
-    protected String doDecryptHex(String hexString,String charsetName){
-        byte[] bs = ByteUtil.hexBytesToBytes(StringUtil.getBytes(hexString, charsetName));
-        return toDecryptString(bs, charsetName);
+    public String decryptBase64(String base64String,String charsetName){
+        Validate.notBlank(charsetName, "charsetName can't be blank!");
+
+        //---------------------------------------------------------------
+        try{
+            byte[] byteMi = Base64.decodeBase64(base64String);
+            String original = toDecryptString(byteMi, charsetName);
+
+            LogBuilder.logDecrypt("base64String", base64String, original, algorithm, keyString);
+            return original;
+        }catch (Exception e){
+            throw new EncryptionException(errorMessage("base64String", base64String, algorithm, keyString, charsetName), e);
+        }
+    }
+
+    /**
+     * 将加密之后的字节码,使用大写的 Hex形式封装返回.
+     * 
+     * 
+     * <pre class="code">
+     * 例如:key=feilong
+     * encryptHex("鑫哥爱feilong")---->055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
+     * </pre>
+     *
+     * @param original
+     *            明文,原始内容
+     * @param charsetName
+     *            编码集 {@link CharsetType}
+     * @return 加密String明文输入,String密文输出<br>
+     *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see StringUtil#getBytes(String, String)
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @see ByteUtil#bytesToHexStringUpperCase(byte[])
+     * 
+     * @since 1.11.0 change original type to String
+     */
+    public String encryptHex(String original,String charsetName){
+        Validate.notBlank(charsetName, "charsetName can't be blank!");
+
+        //---------------------------------------------------------------
+        try{
+            byte[] encryptBytes = toEncryptBytes(original, charsetName);
+            String value = ByteUtil.bytesToHexStringUpperCase(encryptBytes);
+
+            LogBuilder.logEncrypt("hexStringUpperCase", original, value, algorithm, keyString);
+            return value;
+        }catch (Exception e){
+            throw new EncryptionException(errorMessage("original", original, algorithm, keyString, charsetName), e);
+        }
+    }
+
+    /**
+     * 16进制 des 解密,解密 以String密文输入,String明文输出.
+     * 
+     * <pre class="code">
+     * 例如:key=feilong
+     * decryptHex("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6")---->"鑫哥爱feilong"
+     * </pre>
+     *
+     * @param hexString
+     *            一串经过加密的16进制形式字符串,例如 055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
+     * @param charsetName
+     *            编码集 {@link CharsetType}
+     * @return 解密 String明文输出<br>
+     *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     */
+    public String decryptHex(String hexString,String charsetName){
+        Validate.notBlank(charsetName, "charsetName can't be blank!");
+
+        //---------------------------------------------------------------
+        try{
+            byte[] bs = ByteUtil.hexBytesToBytes(StringUtil.getBytes(hexString, charsetName));
+            String original = toDecryptString(bs, charsetName);
+
+            LogBuilder.logDecrypt("hexString", hexString, original, algorithm, keyString);
+            return original;
+        }catch (Exception e){
+            throw new EncryptionException(errorMessage("hexString", hexString, algorithm, keyString, charsetName), e);
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * To encrypt bytes.
+     *
+     * @param original
+     *            the original
+     * @param charsetName
+     *            the charset name
+     * @return the byte[]
+     */
+    private byte[] toEncryptBytes(String original,String charsetName){
+        byte[] bs = StringUtil.getBytes(original, charsetName);
+        return CipherUtil.encrypt(bs, transformation, key);
+    }
+
+    /**
+     * To decrypt string.
+     *
+     * @param bs
+     *            the bs
+     * @param charsetName
+     *            the charset name
+     * @return the string
+     */
+    private String toDecryptString(byte[] bs,String charsetName){
+        byte[] decryptBytes = CipherUtil.decrypt(bs, transformation, key);
+        return StringUtil.newString(decryptBytes, charsetName);
     }
 
 }

@@ -35,19 +35,10 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
-/**
- * The Class SymmetricEncryptionTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.0 2011-12-26 上午10:50:59
- */
 public class SymmetricEncryptionTest extends AbstractSecurityTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricEncryptionTest.class);
-
-    /** The symmetric encryption. */
-    private SymmetricEncryption symmetricEncryption;
 
     //---------------------------------------------------------------
     /**
@@ -60,15 +51,6 @@ public class SymmetricEncryptionTest extends AbstractSecurityTest{
         LOGGER.debug("SymmetricType.Blowfish:{}", new SymmetricEncryption(Blowfish, KEY).encryptBase64(testString, UTF8));
         LOGGER.debug("SymmetricType.DES:{}", new SymmetricEncryption(DES, KEY).encryptBase64(testString, UTF8));
         LOGGER.debug("SymmetricType.DESede:{}", new SymmetricEncryption(DESede, KEY).encryptBase64(testString, UTF8));
-    }
-
-    /**
-     * Decrypt hex string.
-     */
-    @Test
-    public void decryptHexString(){
-        String hexString = "055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6";
-        LOGGER.debug(symmetricEncryption.decryptHex(hexString, UTF8));
     }
 
     /**

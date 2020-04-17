@@ -29,32 +29,21 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
-/**
- * The Class MD5UtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.0 2011-2-7 上午01:12:36
- */
 public class MD5UtilTest extends AbstractSecurityTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MD5UtilTest.class);
 
-    /**
-     * Encode file.
-     * 
-     * @throws IOException
-     */
     @Test
     public void encodeFile() throws IOException{
         String filepath = "/Users/feilong/.gitconfig";
         String encodeFile = MD5Util.encodeFile(filepath);
-        LOGGER.debug(debugSecurityValue(encodeFile));//df03c9cf37c5fbc5a7894e04297127d7
 
         File file = new File(filepath);
         FileInputStream fileInputStream = new FileInputStream(file);
         String md5Hex = DigestUtils.md5Hex(fileInputStream);
 
+        assertEquals("cbc5db20a011961d6c72cb4f84b2a9b2", md5Hex);
         assertEquals(encodeFile, md5Hex);
 
     }

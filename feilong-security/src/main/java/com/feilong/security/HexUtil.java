@@ -28,7 +28,9 @@ import com.feilong.core.lang.StringUtil;
  * @version 1.4.0 2015年8月24日 上午10:49:21
  * @see org.apache.commons.codec.binary.Hex
  * @since 1.4.0
+ * @deprecated 不需要使用了
  */
+@Deprecated
 public class HexUtil{
 
     /** The Constant LOGGER. */

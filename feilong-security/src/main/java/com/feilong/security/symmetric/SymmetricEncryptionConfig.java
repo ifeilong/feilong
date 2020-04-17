@@ -17,10 +17,11 @@ package com.feilong.security.symmetric;
 
 import java.io.Serializable;
 
-import com.feilong.security.symmetric.builder.KeyBuilderConfig;
+import com.feilong.security.symmetric.builder.DefaultKeyBuilder;
+import com.feilong.security.symmetric.builder.KeyBuilder;
 
 /**
- * The Class SymmetricEncryptionConfig.
+ * 参数配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
@@ -38,11 +39,15 @@ public class SymmetricEncryptionConfig implements Serializable{
 
     /**
      * The key string.
-     * <p>
-     * 用于 {@link com.feilong.security.symmetric.builder.KeyBuilder#buildSecureRandom(KeyBuilderConfig)}
-     * </p>
      */
     private String            keyString;
+
+    /**
+     * 支持设置特殊的 {@link Key} , 默认使用 {@link DefaultKeyBuilder},
+     * 
+     * @since 3.0.0
+     */
+    private KeyBuilder        keyBuilder;
 
     //---------------------------------------------------------------
 
@@ -134,6 +139,21 @@ public class SymmetricEncryptionConfig implements Serializable{
      */
     public void setCipherPadding(CipherPadding cipherPadding){
         this.cipherPadding = cipherPadding;
+    }
+
+    /**
+     * @return the keyBuilder
+     */
+    public KeyBuilder getKeyBuilder(){
+        return keyBuilder;
+    }
+
+    /**
+     * @param keyBuilder
+     *            the keyBuilder to set
+     */
+    public void setKeyBuilder(KeyBuilder keyBuilder){
+        this.keyBuilder = keyBuilder;
     }
 
     //---------------------------------------------------------------p

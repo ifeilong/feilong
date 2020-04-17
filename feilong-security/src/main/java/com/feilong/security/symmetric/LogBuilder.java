@@ -26,9 +26,9 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 
-class SymmetricLog{
+class LogBuilder{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricLog.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogBuilder.class);
 
     static void logDecrypt(String typeName,String needDecryptValue,String original,String algorithm,String keyString){
         if (LOGGER.isDebugEnabled()){
@@ -56,6 +56,8 @@ class SymmetricLog{
             LOGGER.debug(JsonUtil.format(map));
         }
     }
+
+    //---------------------------------------------------------------
 
     static String errorMessage(String typeName,String value,String algorithm,String keyString,String charsetName){
         Map<String, Object> map = newLinkedHashMap();
