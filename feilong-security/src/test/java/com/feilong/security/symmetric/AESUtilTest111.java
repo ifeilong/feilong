@@ -80,7 +80,6 @@ public class AESUtilTest111 extends AbstractSecurityTest{
      * Encrypt hex.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void testEncryptHex(){
         assertEquals("36F1CB573DC00CE971DCAD9D31AF136638CFE5F9003EEB3689E9D312439D517E", SYMMETRIC_ENCRYPTION.encryptHex(testString, UTF8));
     }
@@ -89,7 +88,6 @@ public class AESUtilTest111 extends AbstractSecurityTest{
      * Test decrypt hex.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void testDecryptHex(){
         assertEquals(testString, SYMMETRIC_ENCRYPTION.decryptHex("36F1CB573DC00CE971DCAD9D31AF136638CFE5F9003EEB3689E9D312439D517E", UTF8));
     }

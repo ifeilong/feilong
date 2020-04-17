@@ -16,7 +16,19 @@
 package com.feilong.security.symmetric;
 
 /**
- * The Class AesUtil.
+ * <span style="color:red">(对称加密首选)</span> <span style="color:red">A</span>dvanced <span style="color:red">E</span>ncryption
+ * <span style="color:red">S</span>tandard as specified by NIST in a draft FIPS.
+ * 
+ * <p>
+ * 是替代DES算法的新算法,可提供很好的安全性.
+ * </p>
+ * 
+ * <p>
+ * 数据示例: <span style="color:green">MKNbK/ieTaepCk8SefgPMw==</span>
+ * </p>
+ * 
+ * Based on the Rijndael algorithm by Joan Daemen and Vincent Rijmen<br>
+ * AES is a 128-bit block cipher supporting keys of 128, 192, and 256 bits<br>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
@@ -24,7 +36,7 @@ package com.feilong.security.symmetric;
 public class AesUtil extends SymmetricEncryption{
 
     /**
-     * 构造函数(固定枚举支持范围).
+     * 构造函数.
      *
      * @param keyString
      *            自定义密钥字符串

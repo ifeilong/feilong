@@ -22,12 +22,11 @@ import org.junit.Test;
 
 public class AesUtilTest{
 
-    String              keyString           = "qHK2yTd3ZB==ECTM";
-
-    SymmetricEncryption symmetricEncryption = new SymmetricEncryption(SymmetricType.AES, keyString);
+    String keyString = "qHK2yTd3ZB==ECTM";
 
     @Test
     public void test(){
+        SymmetricEncryption symmetricEncryption = new SymmetricEncryption(SymmetricType.AES, keyString);
         assertEquals("tAgqYO5A48in5mwTtzXkwg==", symmetricEncryption.encryptBase64("feilong", UTF8));
     }
 

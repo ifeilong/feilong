@@ -15,6 +15,7 @@
  */
 package com.feilong.security.symmetric;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.security.symmetric.LogBuilder.errorMessage;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
@@ -240,6 +241,26 @@ public class SymmetricEncryption{
     }
 
     //---------------------------------------------------------------
+    /**
+     * 将加密之后的字节码,使用 Base64封装返回.
+     * 
+     * <pre class="code">
+     * keyString=feilong
+     * encrypBase64("鑫哥爱feilong") ---->BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
+     * </pre>
+     *
+     * @param original
+     *            原字符串
+     * @return 加密之后的字符串 <br>
+     *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see "sun.misc.BASE64Encoder"
+     * @see org.apache.commons.codec.binary.Base64
+     * @since 3.0.0
+     */
+    public String encryptBase64(String original){
+        return encryptBase64(original, UTF8);
+    }
 
     /**
      * 将加密之后的字节码,使用 Base64封装返回.
@@ -254,6 +275,8 @@ public class SymmetricEncryption{
      * @param charsetName
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return 加密之后的字符串 <br>
+     *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see "sun.misc.BASE64Encoder"
@@ -285,11 +308,37 @@ public class SymmetricEncryption{
      *
      * @param base64String
      *            加密后的字符串
+     * @return 解密返回的原始密码<br>
+     *         如果 <code>base64String</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>base64String</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see "sun.misc.BASE64Decoder"
+     * @see "sun.misc.BASE64Decoder#decodeBuffer(String)"
+     * @see org.apache.commons.codec.binary.Base64
+     * @see org.apache.commons.codec.binary.Base64#decodeBase64(byte[])
+     * @since 3.0.0
+     */
+    public String decryptBase64(String base64String){
+        return decryptBase64(base64String, UTF8);
+    }
+
+    /**
+     * des Base64解密.
+     * 
+     * <pre class="code">
+     * keyString=feilong
+     * decryptBase64("BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2") ---->鑫哥爱feilong
+     * 
+     * </pre>
+     *
+     * @param base64String
+     *            加密后的字符串
      * @param charsetName
      *            编码集 {@link CharsetType}
      * @return 解密返回的原始密码<br>
      *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>base64String</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>base64String</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see "sun.misc.BASE64Decoder"
      * @see "sun.misc.BASE64Decoder#decodeBuffer(String)"
      * @see org.apache.commons.codec.binary.Base64
@@ -321,11 +370,36 @@ public class SymmetricEncryption{
      *
      * @param original
      *            明文,原始内容
+     * @return 加密String明文输入,String密文输出<br>
+     *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see StringUtil#getBytes(String, String)
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @see ByteUtil#bytesToHexStringUpperCase(byte[])
+     * @since 3.0.0
+     */
+    public String encryptHex(String original){
+        return encryptHex(original, UTF8);
+    }
+
+    /**
+     * 将加密之后的字节码,使用大写的 Hex形式封装返回.
+     * 
+     * 
+     * <pre class="code">
+     * 例如:key=feilong
+     * encryptHex("鑫哥爱feilong")---->055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
+     * </pre>
+     *
+     * @param original
+     *            明文,原始内容
      * @param charsetName
      *            编码集 {@link CharsetType}
      * @return 加密String明文输入,String密文输出<br>
      *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see StringUtil#getBytes(String, String)
      * @see CipherUtil#opBytes(byte[], int, String, Key)
      * @see ByteUtil#bytesToHexStringUpperCase(byte[])
@@ -357,11 +431,33 @@ public class SymmetricEncryption{
      *
      * @param hexString
      *            一串经过加密的16进制形式字符串,例如 055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
+     * @return 解密 String明文输出<br>
+     *         如果 <code>hexString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>hexString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see CipherUtil#opBytes(byte[], int, String, Key)
+     * @since 3.0.0
+     */
+    public String decryptHex(String hexString){
+        return decryptHex(hexString, UTF8);
+    }
+
+    /**
+     * 16进制 des 解密,解密 以String密文输入,String明文输出.
+     * 
+     * <pre class="code">
+     * 例如:key=feilong
+     * decryptHex("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6")---->"鑫哥爱feilong"
+     * </pre>
+     *
+     * @param hexString
+     *            一串经过加密的16进制形式字符串,例如 055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
      * @param charsetName
      *            编码集 {@link CharsetType}
      * @return 解密 String明文输出<br>
      *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>hexString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>hexString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see CipherUtil#opBytes(byte[], int, String, Key)
      */
     public String decryptHex(String hexString,String charsetName){
