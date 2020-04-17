@@ -17,7 +17,6 @@ package com.feilong.security.symmetric;
 
 import java.io.Serializable;
 
-import com.feilong.security.symmetric.builder.DefaultKeyBuilder;
 import com.feilong.security.symmetric.builder.KeyBuilder;
 
 /**
@@ -28,6 +27,7 @@ import com.feilong.security.symmetric.builder.KeyBuilder;
  */
 public class SymmetricEncryptionConfig implements Serializable{
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1588283689479766708L;
 
     //---------------------------------------------------------------
@@ -43,8 +43,8 @@ public class SymmetricEncryptionConfig implements Serializable{
     private String            keyString;
 
     /**
-     * 支持设置特殊的 {@link Key} , 默认使用 {@link DefaultKeyBuilder},
-     * 
+     * 支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
+     *
      * @since 3.0.0
      */
     private KeyBuilder        keyBuilder;
@@ -56,11 +56,6 @@ public class SymmetricEncryptionConfig implements Serializable{
 
     /** The cipher padding. */
     private CipherPadding     cipherPadding;
-
-    //---------------------------------------------------------------
-
-    //    /** 密钥大小。这是特定于算法的一种规格，是以位数为单位指定的. */
-    //    private int               keySize;
 
     //---------------------------------------------------------------
 
@@ -142,6 +137,8 @@ public class SymmetricEncryptionConfig implements Serializable{
     }
 
     /**
+     * 获得 支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
+     *
      * @return the keyBuilder
      */
     public KeyBuilder getKeyBuilder(){
@@ -149,28 +146,13 @@ public class SymmetricEncryptionConfig implements Serializable{
     }
 
     /**
+     * 设置 支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
+     *
      * @param keyBuilder
      *            the keyBuilder to set
      */
     public void setKeyBuilder(KeyBuilder keyBuilder){
         this.keyBuilder = keyBuilder;
     }
-
-    //---------------------------------------------------------------p
-    //
-    //    /**
-    //     * @return the keySize
-    //     */
-    //    public int getKeySize(){
-    //        return keySize;
-    //    }
-    //
-    //    /**
-    //     * @param keySize
-    //     *            the keySize to set
-    //     */
-    //    public void setKeySize(int keySize){
-    //        this.keySize = keySize;
-    //    }
 
 }
