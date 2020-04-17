@@ -135,30 +135,37 @@ public class SymmetricEncryption{
     private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricEncryption.class);
 
     //---------------------------------------------------------------
-    /** 算法. */
-    private String              algorithm;
-
-    /** key值. */
-    private String              keyString;
-
-    //---------------------------------------------------------------
-
-    /** 对称加密key. */
-    private Key                 key;
-
-    //---------------------------------------------------------------
+    private SymmetricType       symmetricType;
 
     /**
-     * 转换的名称,例如 DES/CBC/PKCS5Padding.
-     * <p>
-     * 有关标准转换名称的信息,请参见 Java Cryptography Architecture Reference Guide 的附录 A.
-     * </p>
-     * 
-     * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html">StandardNames</a>
+     * The key string.
      */
-    private String              transformation;
+
+    private String              keyString;
+
+    /**
+     * 支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
+     *
+     * @since 3.0.0
+     */
+    private KeyBuilder          keyBuilder;
 
     //---------------------------------------------------------------
+
+    /** The cipher mode. */
+    private CipherMode          cipherMode;
+
+    /** The cipher padding. */
+    private CipherPadding       cipherPadding;
+
+    //---------------------------------------------------------------
+
+    public SymmetricEncryption(){
+    }
+
+    public SymmetricEncryption(SymmetricType symmetricType){
+        this.symmetricType = symmetricType;
+    }
 
     /**
      * 构造函数(固定枚举支持范围).
@@ -171,10 +178,23 @@ public class SymmetricEncryption{
      * @see #SymmetricEncryption(SymmetricType, String, CipherMode, CipherPadding)
      */
     public SymmetricEncryption(SymmetricType symmetricType, String keyString){
-        this(symmetricType, keyString, null, null);
+        this.symmetricType = symmetricType;
+        this.keyString = keyString;
     }
 
-    //---------------------------------------------------------------
+    /**
+     * @param symmetricType
+     * @param keyString
+     * @param keyBuilder
+     * 
+     * @since 3.0.0
+     */
+    public SymmetricEncryption(SymmetricType symmetricType, String keyString, KeyBuilder keyBuilder){
+        super();
+        this.symmetricType = symmetricType;
+        this.keyString = keyString;
+        this.keyBuilder = keyBuilder;
+    }
 
     /**
      * 构造函数.
@@ -189,55 +209,30 @@ public class SymmetricEncryption{
      *            the cipher padding
      * @see SymmetricType
      * @see "javax.crypto.Cipher#tokenizeTransformation(String)"
-     * @since 1.0.7
      */
     public SymmetricEncryption(SymmetricType symmetricType, String keyString, CipherMode cipherMode, CipherPadding cipherPadding){
-        Validate.notBlank(keyString, "keyString can't be null/empty!");
-        Validate.notNull(symmetricType, "symmetricType can't be null!");
-
-        //---------------------------------------------------------------
-        SymmetricEncryptionConfig config = new SymmetricEncryptionConfig();
-        config.setSymmetricType(symmetricType);
-        config.setKeyString(keyString);
-
-        config.setCipherMode(cipherMode);
-        config.setCipherPadding(cipherPadding);
-        init(config);
+        this.symmetricType = symmetricType;
+        this.keyString = keyString;
+        this.cipherMode = cipherMode;
+        this.cipherPadding = cipherPadding;
     }
 
     /**
-     * 构造函数.
-     *
-     * @param config
-     *            the symmetric encryption config
-     * @see SymmetricType
-     * @see "javax.crypto.Cipher#tokenizeTransformation(String)"
-     * @since 1.11.0
+     * @param symmetricType
+     * @param keyString
+     * @param keyBuilder
+     * @param cipherMode
+     * @param cipherPadding
+     * @since 3.0.0
      */
-    public SymmetricEncryption(SymmetricEncryptionConfig config){
-        init(config);
-    }
-
-    //---------------------------------------------------------------
-
-    private void init(SymmetricEncryptionConfig config){
-        Validate.notNull(config, "symmetricEncryptionConfig can't be null!");
-
-        SymmetricType symmetricType = config.getSymmetricType();
-        Validate.notNull(symmetricType, "symmetricEncryptionConfig.getSymmetricType() can't be null!");
-
-        //---------------------------------------------------------------
-        this.keyString = config.getKeyString();
-        Validate.notBlank(keyString, "keyString can't be blank!");
-
-        //---------------------------------------------------------------
-        this.algorithm = symmetricType.getAlgorithm();
-        this.transformation = TransformationBuilder.build(algorithm, config.getCipherMode(), config.getCipherPadding());
-        LOGGER.debug("algorithm:[{}],keyString:[{}],transformation:[{}]", algorithm, keyString, transformation);
-
-        //---------------------------------------------------------------
-        KeyBuilder keyBuilder = defaultIfNull(config.getKeyBuilder(), DefaultKeyBuilder.INSTANCE);
-        this.key = keyBuilder.build(algorithm, keyString);
+    public SymmetricEncryption(SymmetricType symmetricType, String keyString, KeyBuilder keyBuilder, CipherMode cipherMode,
+                    CipherPadding cipherPadding){
+        super();
+        this.symmetricType = symmetricType;
+        this.keyString = keyString;
+        this.keyBuilder = keyBuilder;
+        this.cipherMode = cipherMode;
+        this.cipherPadding = cipherPadding;
     }
 
     //---------------------------------------------------------------
@@ -290,10 +285,10 @@ public class SymmetricEncryption{
             byte[] encryptBytes = toEncryptBytes(original, charsetName);
             String value = Base64.encodeBase64String(encryptBytes);
 
-            LogBuilder.logEncrypt("encrypBase64", original, value, algorithm, keyString);
+            LogBuilder.logEncrypt("encrypBase64", original, value, symmetricType.getAlgorithm(), keyString);
             return value;
         }catch (Exception e){
-            throw new EncryptionException(errorMessage("original", original, algorithm, keyString, charsetName), e);
+            throw new EncryptionException(errorMessage("original", original, symmetricType.getAlgorithm(), keyString, charsetName), e);
         }
     }
 
@@ -352,10 +347,12 @@ public class SymmetricEncryption{
             byte[] byteMi = Base64.decodeBase64(base64String);
             String original = toDecryptString(byteMi, charsetName);
 
-            LogBuilder.logDecrypt("base64String", base64String, original, algorithm, keyString);
+            LogBuilder.logDecrypt("base64String", base64String, original, symmetricType.getAlgorithm(), keyString);
             return original;
         }catch (Exception e){
-            throw new EncryptionException(errorMessage("base64String", base64String, algorithm, keyString, charsetName), e);
+            throw new EncryptionException(
+                            errorMessage("base64String", base64String, symmetricType.getAlgorithm(), keyString, charsetName),
+                            e);
         }
     }
 
@@ -414,10 +411,10 @@ public class SymmetricEncryption{
             byte[] encryptBytes = toEncryptBytes(original, charsetName);
             String value = ByteUtil.bytesToHexStringUpperCase(encryptBytes);
 
-            LogBuilder.logEncrypt("hexStringUpperCase", original, value, algorithm, keyString);
+            LogBuilder.logEncrypt("hexStringUpperCase", original, value, symmetricType.getAlgorithm(), keyString);
             return value;
         }catch (Exception e){
-            throw new EncryptionException(errorMessage("original", original, algorithm, keyString, charsetName), e);
+            throw new EncryptionException(errorMessage("original", original, symmetricType.getAlgorithm(), keyString, charsetName), e);
         }
     }
 
@@ -468,10 +465,10 @@ public class SymmetricEncryption{
             byte[] bs = ByteUtil.hexBytesToBytes(StringUtil.getBytes(hexString, charsetName));
             String original = toDecryptString(bs, charsetName);
 
-            LogBuilder.logDecrypt("hexString", hexString, original, algorithm, keyString);
+            LogBuilder.logDecrypt("hexString", hexString, original, symmetricType.getAlgorithm(), keyString);
             return original;
         }catch (Exception e){
-            throw new EncryptionException(errorMessage("hexString", hexString, algorithm, keyString, charsetName), e);
+            throw new EncryptionException(errorMessage("hexString", hexString, symmetricType.getAlgorithm(), keyString, charsetName), e);
         }
     }
 
@@ -488,7 +485,7 @@ public class SymmetricEncryption{
      */
     private byte[] toEncryptBytes(String original,String charsetName){
         byte[] bs = StringUtil.getBytes(original, charsetName);
-        return CipherUtil.encrypt(bs, transformation, key);
+        return CipherUtil.encrypt(bs, buildTransformation(), buildKey());
     }
 
     /**
@@ -501,8 +498,59 @@ public class SymmetricEncryption{
      * @return the string
      */
     private String toDecryptString(byte[] bs,String charsetName){
-        byte[] decryptBytes = CipherUtil.decrypt(bs, transformation, key);
+        byte[] decryptBytes = CipherUtil.decrypt(bs, buildTransformation(), buildKey());
         return StringUtil.newString(decryptBytes, charsetName);
+    }
+
+    private String buildTransformation(){
+        String transformation = TransformationBuilder.build(symmetricType.getAlgorithm(), cipherMode, cipherPadding);
+        LOGGER.debug("algorithm:[{}],keyString:[{}],transformation:[{}]", symmetricType.getAlgorithm(), keyString, transformation);
+        return transformation;
+    }
+
+    private Key buildKey(){
+        KeyBuilder useKeyBuilder = defaultIfNull(keyBuilder, DefaultKeyBuilder.INSTANCE);
+        return useKeyBuilder.build(symmetricType.getAlgorithm(), keyString);
+    }
+
+    /**
+     * @param keyString
+     *            the keyString to set
+     */
+    public void setKeyString(String keyString){
+        this.keyString = keyString;
+    }
+
+    /**
+     * @param keyBuilder
+     *            the keyBuilder to set
+     */
+    public void setKeyBuilder(KeyBuilder keyBuilder){
+        this.keyBuilder = keyBuilder;
+    }
+
+    /**
+     * @param cipherMode
+     *            the cipherMode to set
+     */
+    public void setCipherMode(CipherMode cipherMode){
+        this.cipherMode = cipherMode;
+    }
+
+    /**
+     * @param cipherPadding
+     *            the cipherPadding to set
+     */
+    public void setCipherPadding(CipherPadding cipherPadding){
+        this.cipherPadding = cipherPadding;
+    }
+
+    /**
+     * @param symmetricType
+     *            the symmetricType to set
+     */
+    public void setSymmetricType(SymmetricType symmetricType){
+        this.symmetricType = symmetricType;
     }
 
 }

@@ -24,16 +24,22 @@ public class AesUtilTest{
 
     String keyString = "qHK2yTd3ZB==ECTM";
 
+    String base64    = "tAgqYO5A48in5mwTtzXkwg==";
+
+    String original  = "feilong";
+
     @Test
     public void test(){
         SymmetricEncryption symmetricEncryption = new SymmetricEncryption(SymmetricType.AES, keyString);
-        assertEquals("tAgqYO5A48in5mwTtzXkwg==", symmetricEncryption.encryptBase64("feilong", UTF8));
+        assertEquals(base64, symmetricEncryption.encryptBase64(original, UTF8));
+        assertEquals(original, symmetricEncryption.decryptBase64(base64, UTF8));
     }
 
     @Test
     public void test1(){
         AesUtil aesUtil = new AesUtil(keyString);
-        assertEquals("tAgqYO5A48in5mwTtzXkwg==", aesUtil.encryptBase64("feilong", UTF8));
+        assertEquals(base64, aesUtil.encryptBase64(original, UTF8));
+        assertEquals(original, aesUtil.decryptBase64(base64, UTF8));
     }
 
 }

@@ -27,8 +27,6 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public abstract class AbstractSecretKeySpecBuilder implements KeyBuilder{
 
-    //---------------------------------------------------------------
-
     @Override
     public Key build(String algorithm,String keyString){
         byte[] keyBytes = buildKeyBytes(keyString);

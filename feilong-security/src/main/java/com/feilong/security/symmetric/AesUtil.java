@@ -15,6 +15,8 @@
  */
 package com.feilong.security.symmetric;
 
+import com.feilong.security.symmetric.builder.KeyBuilder;
+
 /**
  * <span style="color:red">(对称加密首选)</span> <span style="color:red">A</span>dvanced <span style="color:red">E</span>ncryption
  * <span style="color:red">S</span>tandard as specified by NIST in a draft FIPS.
@@ -35,6 +37,10 @@ package com.feilong.security.symmetric;
  */
 public class AesUtil extends SymmetricEncryption{
 
+    public AesUtil(){
+        super(SymmetricType.AES);
+    }
+
     /**
      * 构造函数.
      *
@@ -46,6 +52,9 @@ public class AesUtil extends SymmetricEncryption{
         this(keyString, null, null);
     }
 
+    public AesUtil(String keyString, KeyBuilder keyBuilder){
+        super(SymmetricType.AES, keyString, keyBuilder);
+    }
     //---------------------------------------------------------------
 
     /**
@@ -64,15 +73,21 @@ public class AesUtil extends SymmetricEncryption{
     }
 
     /**
-     * 构造函数.
-     *
-     * @param config
-     *            the config
-     * @see SymmetricType
-     * @see "javax.crypto.Cipher#tokenizeTransformation(String)"
+     * @param symmetricType
+     * @param keyString
+     * @param keyBuilder
+     * @param cipherMode
+     * @param cipherPadding
      */
-    public AesUtil(SymmetricEncryptionConfig config){
-        super(config);
+    public AesUtil(String keyString, KeyBuilder keyBuilder, CipherMode cipherMode, CipherPadding cipherPadding){
+        super(SymmetricType.AES, keyString, keyBuilder, cipherMode, cipherPadding);
+    }
+
+    //---------------------------------------------------------------
+
+    @Override
+    public void setSymmetricType(SymmetricType symmetricType){
+        super.setSymmetricType(SymmetricType.AES);
     }
 
 }

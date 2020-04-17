@@ -22,7 +22,12 @@ import com.feilong.security.symmetric.CipherPadding;
 
 /**
  * The Class TransformationBuilder.
- *
+ * 转换的名称,例如 DES/CBC/PKCS5Padding.
+ * <p>
+ * 有关标准转换名称的信息,请参见 Java Cryptography Architecture Reference Guide 的附录 A.
+ * </p>
+ * 
+ * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html">StandardNames</a>
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
@@ -38,7 +43,12 @@ public class TransformationBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the.
+     * 转换的名称,例如 DES/CBC/PKCS5Padding.
+     * <p>
+     * 有关标准转换名称的信息,请参见 Java Cryptography Architecture Reference Guide 的附录 A.
+     * </p>
+     * 
+     * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html">StandardNames</a>
      *
      * @param algorithm
      *            the algorithm
@@ -55,13 +65,11 @@ public class TransformationBuilder{
         Validate.notBlank(algorithm, "algorithm can't be blank!");
 
         //---------------------------------------------------------------
-
         if (null == cipherMode && null == cipherPadding){
             return algorithm;
         }
 
         //---------------------------------------------------------------
-
         String transformation = algorithm;
         if (null != cipherMode){
             transformation += "/" + cipherMode;
