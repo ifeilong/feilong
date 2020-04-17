@@ -15,24 +15,22 @@
  */
 package com.feilong.security.symmetric.builder;
 
-import java.security.Key;
-
 /**
- * 基于 algorithm 算法来生成 {@link Key}.
+ * 默认的 KeyBuilder,直接使用 {@link String#getBytes()}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-public interface KeyBuilder{
+public class DefaultKeyBuilder extends AbstractSecretKeySpecBuilder{
 
-    /**
-     * Builds the.
-     *
-     * @param algorithm
-     *            the algorithm
-     * @param keyString
-     *            the key string
-     * @return the key
-     */
-    Key build(String algorithm,String keyString);
+    /** Static instance. */
+    // the static instance works for all types
+    public static final KeyBuilder INSTANCE = new DefaultKeyBuilder();
+
+    //---------------------------------------------------------------
+
+    @Override
+    protected byte[] buildKeyBytes(String keyString){
+        return keyString.getBytes();
+    }
 }

@@ -17,22 +17,30 @@ package com.feilong.security.symmetric.builder;
 
 import java.security.Key;
 
+import javax.crypto.spec.SecretKeySpec;
+
 /**
- * 基于 algorithm 算法来生成 {@link Key}.
+ * The Class DefaultKeyBuilder.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-public interface KeyBuilder{
+public abstract class AbstractSecretKeySpecBuilder implements KeyBuilder{
+
+    //---------------------------------------------------------------
+
+    @Override
+    public Key build(String algorithm,String keyString){
+        byte[] keyBytes = buildKeyBytes(keyString);
+        return new SecretKeySpec(keyBytes, algorithm);
+    }
 
     /**
-     * Builds the.
+     * Builds the key bytes.
      *
-     * @param algorithm
-     *            the algorithm
      * @param keyString
      *            the key string
-     * @return the key
+     * @return the byte[]
      */
-    Key build(String algorithm,String keyString);
+    protected abstract byte[] buildKeyBytes(String keyString);
 }

@@ -15,24 +15,22 @@
  */
 package com.feilong.security.symmetric.builder;
 
-import java.security.Key;
+import org.apache.commons.codec.binary.Base64;
 
 /**
- * 基于 algorithm 算法来生成 {@link Key}.
+ * The Class Base64KeyBuilder.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-public interface KeyBuilder{
+public class Base64KeyBuilder extends AbstractSecretKeySpecBuilder{
 
-    /**
-     * Builds the.
-     *
-     * @param algorithm
-     *            the algorithm
-     * @param keyString
-     *            the key string
-     * @return the key
-     */
-    Key build(String algorithm,String keyString);
+    /** Static instance. */
+    public static final KeyBuilder INSTANCE = new Base64KeyBuilder();
+
+    //---------------------------------------------------------------
+    @Override
+    protected byte[] buildKeyBytes(String keyString){
+        return Base64.decodeBase64(keyString);
+    }
 }
