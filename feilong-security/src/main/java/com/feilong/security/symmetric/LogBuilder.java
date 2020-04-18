@@ -30,19 +30,6 @@ class LogBuilder{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogBuilder.class);
 
-    static void logDecrypt(String typeName,String needDecryptValue,String original,String algorithm,String keyString){
-        if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = newLinkedHashMap();
-            map.put("algorithm", algorithm);
-            map.put("keyString", hided(keyString));
-
-            map.put(typeName, needDecryptValue);
-            map.put("original", original);
-
-            LOGGER.debug(JsonUtil.format(map));
-        }
-    }
-
     static void logEncrypt(String typeName,String original,String value,String algorithm,String keyString){
         if (LOGGER.isDebugEnabled()){
             Map<String, String> map = newLinkedHashMap();
@@ -57,10 +44,23 @@ class LogBuilder{
         }
     }
 
+    static void logDecrypt(String typeName,String needDecryptValue,String original,String algorithm,String keyString){
+        if (LOGGER.isDebugEnabled()){
+            Map<String, String> map = newLinkedHashMap();
+            map.put("algorithm", algorithm);
+            map.put("keyString", hided(keyString));
+
+            map.put(typeName, needDecryptValue);
+            map.put("original", original);
+
+            LOGGER.debug(JsonUtil.format(map));
+        }
+    }
+
     //---------------------------------------------------------------
 
     static String errorMessage(String typeName,String value,String algorithm,String keyString,String charsetName){
-        Map<String, Object> map = newLinkedHashMap();
+        Map<String, String> map = newLinkedHashMap();
         map.put("algorithm", algorithm);
         map.put("keyString", hided(keyString));
         map.put(typeName, value);
