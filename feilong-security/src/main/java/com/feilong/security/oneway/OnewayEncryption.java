@@ -121,17 +121,14 @@ final class OnewayEncryption{
      */
     public static String encode(OnewayType onewayType,byte[] inputBytes){
         MessageDigest messageDigest = getMessageDigest(onewayType);
-
-        // 对于给定数量的更新数据,digest 方法只能被调用一次.
+        //对于给定数量的更新数据,digest 方法只能被调用一次.
         //在调用 digest 之后,MessageDigest 对象被重新设置成其初始状态.
 
         // 使用指定的 byte 数组对摘要进行最后更新,然后完成摘要计算.
         // 也就是说,此方法首先调用 update(input),向 update 方法传递 input 数组,然后调用 digest().
 
-        // 和自己先写 update(input) ,再调用 digest()效果一样的
+        // 和自己先写 update(input),再调用 digest()效果一样的
         byte[] bs = messageDigest.digest(inputBytes);
-
-        //---------------------------------------------------------------
         return ByteUtil.bytesToHexStringLowerCase(bs);
     }
 
@@ -186,10 +183,6 @@ final class OnewayEncryption{
      */
     private static final MessageDigest getMessageDigest(OnewayType onewayType){
         Validate.notNull(onewayType, "onewayType can't be null!");
-
-        String algorithm = onewayType.getAlgorithm();
-        Validate.notBlank(algorithm, "algorithm can't be null/empty!");
-
-        return DigestUtils.getDigest(algorithm);
+        return DigestUtils.getDigest(onewayType.getAlgorithm());
     }
 }

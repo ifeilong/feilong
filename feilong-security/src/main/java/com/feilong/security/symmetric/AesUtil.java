@@ -37,8 +37,11 @@ import com.feilong.security.symmetric.builder.KeyBuilder;
  */
 public class AesUtil extends SymmetricEncryption{
 
+    /**
+     * Instantiates a new aes util.
+     */
     public AesUtil(){
-        super(SymmetricType.AES);
+        this(null);
     }
 
     /**
@@ -52,8 +55,16 @@ public class AesUtil extends SymmetricEncryption{
         this(keyString, null, null);
     }
 
+    /**
+     * Instantiates a new aes util.
+     *
+     * @param keyString
+     *            the key string
+     * @param keyBuilder
+     *            the key builder
+     */
     public AesUtil(String keyString, KeyBuilder keyBuilder){
-        super(SymmetricType.AES, keyString, keyBuilder);
+        this(keyString, keyBuilder, null, null);
     }
     //---------------------------------------------------------------
 
@@ -69,15 +80,20 @@ public class AesUtil extends SymmetricEncryption{
      * @see "javax.crypto.Cipher#tokenizeTransformation(String)"
      */
     public AesUtil(String keyString, CipherMode cipherMode, CipherPadding cipherPadding){
-        super(SymmetricType.AES, keyString, cipherMode, cipherPadding);
+        this(keyString, null, cipherMode, cipherPadding);
     }
 
     /**
-     * @param symmetricType
+     * Instantiates a new aes util.
+     *
      * @param keyString
+     *            the key string
      * @param keyBuilder
+     *            the key builder
      * @param cipherMode
+     *            the cipher mode
      * @param cipherPadding
+     *            the cipher padding
      */
     public AesUtil(String keyString, KeyBuilder keyBuilder, CipherMode cipherMode, CipherPadding cipherPadding){
         super(SymmetricType.AES, keyString, keyBuilder, cipherMode, cipherPadding);
@@ -85,6 +101,12 @@ public class AesUtil extends SymmetricEncryption{
 
     //---------------------------------------------------------------
 
+    /**
+     * Sets the symmetric type.
+     *
+     * @param symmetricType
+     *            the new symmetric type
+     */
     @Override
     public void setSymmetricType(SymmetricType symmetricType){
         super.setSymmetricType(SymmetricType.AES);

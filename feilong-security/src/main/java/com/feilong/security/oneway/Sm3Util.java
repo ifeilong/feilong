@@ -38,7 +38,7 @@ import com.feilong.security.EncryptionException;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see OnewayEncryption
- * @see OnewayType
+ * @see OnewayType#SM3
  * @see <a href="https://tools.ietf.org/html/draft-shen-sm3-hash-00">SM3 Hash function draft-shen-sm3-hash-00</a>
  * @see org.bouncycastle.crypto.digests.SM3Digest
  * @since 2.0.1

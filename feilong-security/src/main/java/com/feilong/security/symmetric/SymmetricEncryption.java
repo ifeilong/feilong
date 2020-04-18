@@ -134,6 +134,7 @@ public class SymmetricEncryption{
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricEncryption.class);
 
+    /** The symmetric type. */
     //---------------------------------------------------------------
     private SymmetricType       symmetricType;
 
@@ -160,9 +161,18 @@ public class SymmetricEncryption{
 
     //---------------------------------------------------------------
 
+    /**
+     * Instantiates a new symmetric encryption.
+     */
     public SymmetricEncryption(){
     }
 
+    /**
+     * Instantiates a new symmetric encryption.
+     *
+     * @param symmetricType
+     *            the symmetric type
+     */
     public SymmetricEncryption(SymmetricType symmetricType){
         this.symmetricType = symmetricType;
     }
@@ -183,10 +193,14 @@ public class SymmetricEncryption{
     }
 
     /**
+     * Instantiates a new symmetric encryption.
+     *
      * @param symmetricType
+     *            the symmetric type
      * @param keyString
+     *            the key string
      * @param keyBuilder
-     * 
+     *            the key builder
      * @since 3.0.0
      */
     public SymmetricEncryption(SymmetricType symmetricType, String keyString, KeyBuilder keyBuilder){
@@ -218,11 +232,18 @@ public class SymmetricEncryption{
     }
 
     /**
+     * Instantiates a new symmetric encryption.
+     *
      * @param symmetricType
+     *            the symmetric type
      * @param keyString
+     *            the key string
      * @param keyBuilder
+     *            the key builder
      * @param cipherMode
+     *            the cipher mode
      * @param cipherPadding
+     *            the cipher padding
      * @since 3.0.0
      */
     public SymmetricEncryption(SymmetricType symmetricType, String keyString, KeyBuilder keyBuilder, CipherMode cipherMode,
@@ -502,18 +523,30 @@ public class SymmetricEncryption{
         return StringUtil.newString(decryptBytes, charsetName);
     }
 
+    /**
+     * Builds the transformation.
+     *
+     * @return the string
+     */
     private String buildTransformation(){
         String transformation = TransformationBuilder.build(symmetricType.getAlgorithm(), cipherMode, cipherPadding);
         LOGGER.debug("algorithm:[{}],keyString:[{}],transformation:[{}]", symmetricType.getAlgorithm(), keyString, transformation);
         return transformation;
     }
 
+    /**
+     * Builds the key.
+     *
+     * @return the key
+     */
     private Key buildKey(){
         KeyBuilder useKeyBuilder = defaultIfNull(keyBuilder, DefaultKeyBuilder.INSTANCE);
         return useKeyBuilder.build(symmetricType.getAlgorithm(), keyString);
     }
 
     /**
+     * 设置 key string.
+     *
      * @param keyString
      *            the keyString to set
      */
@@ -522,6 +555,8 @@ public class SymmetricEncryption{
     }
 
     /**
+     * 设置 支持设置特殊的 {@link java.
+     *
      * @param keyBuilder
      *            the keyBuilder to set
      */
@@ -530,6 +565,8 @@ public class SymmetricEncryption{
     }
 
     /**
+     * 设置 cipher mode.
+     *
      * @param cipherMode
      *            the cipherMode to set
      */
@@ -538,6 +575,8 @@ public class SymmetricEncryption{
     }
 
     /**
+     * 设置 cipher padding.
+     *
      * @param cipherPadding
      *            the cipherPadding to set
      */
@@ -546,6 +585,8 @@ public class SymmetricEncryption{
     }
 
     /**
+     * Sets the symmetric type.
+     *
      * @param symmetricType
      *            the symmetricType to set
      */

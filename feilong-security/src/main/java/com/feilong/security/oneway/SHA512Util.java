@@ -22,6 +22,7 @@ import com.feilong.security.EncryptionException;
  * The Class SHA512Util.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see OnewayType#SHA512
  * @since 1.14.2
  */
 public final class SHA512Util{
