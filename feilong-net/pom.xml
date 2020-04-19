@@ -28,10 +28,10 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
-		<!-- feilong-json-jsonlib -->
+		<!-- feilong-json -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-json-jsonlib</artifactId>
+			<artifactId>feilong-json</artifactId>
 		</dependency>
 
 		<!-- 用于 IOUtils.close -->
