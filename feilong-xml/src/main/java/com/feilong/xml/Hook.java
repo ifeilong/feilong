@@ -13,31 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.context.format;
+package com.feilong.xml;
 
-import com.feilong.xml.XmlUtil;
+import java.util.Map;
+
+import org.w3c.dom.Node;
 
 /**
- * 将字符串转成xml格式化输出.
+ * The Interface Hook.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.2
+ * @since 3.0.0
  */
-public class XMLStringFormatter extends AbstractStringFormatter{
+public interface Hook{
 
-    /** Static instance. */
-    // the static instance works for all types
-    public static final StringFormatter INSTANCE = new XMLStringFormatter();
-
-    //---------------------------------------------------------------
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.context.format.AbstractStringFormatter#doFormat(java.lang.String)
+    /**
+     * Put.
+     *
+     * @param map
+     *            the map
+     * @param node
+     *            the node
      */
-    @Override
-    protected String doFormat(String str){
-        return XmlUtil.format(str);
-    }
+    void hook(Map<String, String> map,Node node);
+
 }

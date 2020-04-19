@@ -169,10 +169,10 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!-- feilong-xml-xstream -->
+		<!-- feilong-xml -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-xml-xstream</artifactId>
+			<artifactId>feilong-xml</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

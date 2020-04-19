@@ -29,7 +29,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-xml-dom</artifactId>
+			<artifactId>feilong-xml</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
@@ -41,13 +41,6 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-velocity</artifactId>
-		</dependency>
-
-		<!-- feilong-xml-xstream -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-xml-xstream</artifactId>
-			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>

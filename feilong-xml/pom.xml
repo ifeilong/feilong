@@ -1,24 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>com.github.venusdrogon</groupId>
 		<artifactId>feilong-parent</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>feilong-xml-parent</artifactId>
+	<artifactId>feilong-xml</artifactId>
 
-	<packaging>pom</packaging>
-
-	<modules>
-		<module>feilong-xml-dom</module>
-		<module>feilong-xml-xstream</module>
-		<module>feilong-xml-api</module>
-	</modules>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core</artifactId>
@@ -31,16 +24,21 @@
 
 		<!-- feilong-json-jsonlib -->
 		<dependency>
-		<groupId>${project.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-json-jsonlib</artifactId>
 		</dependency>
 
-		<!-- commons-io -->
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<!-- <optional>true</optional> -->
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-io</artifactId>
+			<!-- <scope>test</scope> -->
+		</dependency>
+
 
 		<!-- **********************log日志************************************ -->
 
@@ -59,4 +57,22 @@
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- maven-surefire-plugin -->
+			<plugin>
+				<inherited>false</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<includes>
+						<include>**/XmlUtilSuiteTests</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

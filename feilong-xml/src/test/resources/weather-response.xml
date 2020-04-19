@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soap:Body>
+		<getWeatherbyCityNameResponse xmlns="http://WebXml.com.cn/">
+			<getWeatherbyCityNameResult>
+				<string>江苏</string>
+				<string>南通</string>
+				<string>58259</string>
+				<string>58259.jpg</string>
+				<string>2020/4/19 18:57:19</string>
+				<string>9℃/16℃</string>
+				<string>4月19日 小雨转多云</string>
+				<string>东北风4-5级转小于3级</string>
+				<string>7.gif</string>
+				<string>1.gif</string>
+				<string>今日天气实况：气温：13℃；风向/风力：西风 2级；湿度：83%；紫外线强度：最弱。空气质量：良。</string>
+				<string>紫外线指数：最弱，辐射弱，涂擦SPF8-12防晒护肤品。
+					健臻·血糖指数：不易波动，天气条件不易引起血糖波动。
+					穿衣指数：较冷，建议着厚外套加毛衣等服装。
+					洗车指数：不宜，有雨，雨水和泥水会弄脏爱车。
+					空气污染指数：良，气象条件有利于空气污染物扩散。
+				</string>
+				<string>9℃/21℃</string>
+				<string>4月20日 小雨</string>
+				<string>西南风转东北风小于3级</string>
+				<string>7.gif</string>
+				<string>7.gif</string>
+				<string>7℃/17℃</string>
+				<string>4月21日 多云</string>
+				<string>东北风4-5级转小于3级</string>
+				<string>1.gif</string>
+				<string>1.gif</string>
+				<string>南通地处江苏省东南部、南临长江、东濒黄海，面向上海与苏州、无锡、常州，背依广袤的苏北平原、素有“江海门户”之称。南通是长江流域进出物资的转运枢纽和长江三角洲地区的重要港口城市。市区的五山（即：狼山、剑山、军山、黄泥山，马鞍山）为喜马拉雅山造山运动江南古陆下沉后残留于地面的高顶。南通全市地势平坦，沿江、近海与中北部地区至里下河区略有起伏。境内沟河纵横交错，使江、海、河连成一片。南通属亚热带和暖温带季风气候、气候温和、四季分明。这里土地肥沃，沟河纵横，雨水充沛，是适宜农林牧副渔综合发展的江海平原，全市拥有耕地707万亩，耕地产出率高于全省平均水平。这里以粮棉为主，盛产棉花和特种经济作物，为全国重要的商品棉生产基地。景观：南通博物苑、水绘园、定慧禅寺、支云塔、光孝塔等旅游点临山面水，各具特色。城南的狼山，为全国佛教八小名山之首，是南通最值得一去的地方。南通作为我国14个沿海开放城市之一，是长江流域进出物资的转运枢纽港和长江三角洲地区的重要港口城市，素有“扬子第一窗口”之称。每天，世界各国的万吨级轮船在这里川流不息，随处可见，这也算是南通的另一特色景观吧。
+				</string>
+			</getWeatherbyCityNameResult>
+		</getWeatherbyCityNameResponse>
+	</soap:Body>
+</soap:Envelope>

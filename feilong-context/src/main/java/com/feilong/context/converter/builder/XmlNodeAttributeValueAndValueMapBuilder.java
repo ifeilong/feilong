@@ -15,13 +15,11 @@
  */
 package com.feilong.context.converter.builder;
 
-import static com.feilong.core.CharsetType.UTF8;
-
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.xml.dom.DomParser;
+import com.feilong.xml.XmlUtil;
 
 /**
  * 提取xml node属性值和string value 填充到bean里面去.
@@ -131,7 +129,7 @@ public class XmlNodeAttributeValueAndValueMapBuilder implements NameAndValueMapB
     @Override
     public Map<String, String> build(String xml){
         Validate.notBlank(xml, "xml can't be blank!");
-        return new DomParser(xml, UTF8).getNodeAttributeValueAndStringValueMap(xpathExpression, nodeAttributeName);
+        return XmlUtil.getNodeAttributeValueAndStringValueMap(xml, xpathExpression, nodeAttributeName);
     }
 
     //---------------------------------------------------------------

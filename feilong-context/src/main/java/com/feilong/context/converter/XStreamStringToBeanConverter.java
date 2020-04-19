@@ -15,7 +15,7 @@
  */
 package com.feilong.context.converter;
 
-import com.feilong.xml.xstream.XStreamUtil;
+import com.feilong.xml.XmlUtil;
 
 /**
  * 使用 Xstream 来将 字符串转换成对象.
@@ -23,7 +23,7 @@ import com.feilong.xml.xstream.XStreamUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.xml.xstream.XStreamUtil#fromXML(String, Class)
+ * @see XmlUtil#fromXML(String, Class)
  * @since 1.11.3
  */
 public class XStreamStringToBeanConverter<T> extends AbstractBeanClassStringToBeanConverter<T>{
@@ -35,6 +35,6 @@ public class XStreamStringToBeanConverter<T> extends AbstractBeanClassStringToBe
      */
     @Override
     protected T handler(String inputString){
-        return XStreamUtil.fromXML(inputString, beanClass);
+        return XmlUtil.fromXML(inputString, beanClass);
     }
 }

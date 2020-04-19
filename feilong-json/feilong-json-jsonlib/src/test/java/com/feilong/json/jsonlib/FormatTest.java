@@ -22,18 +22,9 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.store.system.Menu;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.12.6
- */
 public class FormatTest extends AbstractJsonTest{
 
-    /**
-     * Test json menu.
-     */
     @Test
-    @SuppressWarnings("static-method")
     public void testJsonMenu(){
         Menu menu = new Menu(4L);
         menu.setChildren(toList(new Menu(5L)));
@@ -41,11 +32,7 @@ public class FormatTest extends AbstractJsonTest{
         LOGGER.debug(JsonUtil.format(menu));
     }
 
-    /**
-     * Test json string.
-     */
     @Test
-    @SuppressWarnings("static-method")
     public void testJsonString(){
         LOGGER.debug("{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
     }

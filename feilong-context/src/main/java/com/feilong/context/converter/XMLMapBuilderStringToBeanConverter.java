@@ -15,13 +15,11 @@
  */
 package com.feilong.context.converter;
 
-import static com.feilong.core.CharsetType.UTF8;
-
 import com.feilong.context.converter.builder.BeanBuilder;
 import com.feilong.context.converter.builder.CommonBeanBuilder;
 import com.feilong.context.converter.builder.NameAndValueMapBuilder;
 import com.feilong.context.converter.builder.XmlNodeNameAndValueMapBuilder;
-import com.feilong.xml.dom.DomParser;
+import com.feilong.xml.XmlUtil;
 
 /**
  * xml的转换.
@@ -95,7 +93,7 @@ public class XMLMapBuilderStringToBeanConverter<T> extends MapBuilderStringToBea
      */
     @Override
     protected String formatValue(String value){
-        return new DomParser(value, UTF8).format();
+        return XmlUtil.format(value);
     }
 
 }
