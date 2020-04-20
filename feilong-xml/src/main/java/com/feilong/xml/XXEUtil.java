@@ -50,13 +50,11 @@ public final class XXEUtil{
      * see:
      * https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#JAXP_DocumentBuilderFactory.2C_SAXParserFactory_and_DOM4J
      * 
-     * 
      * <p>
      * Note: The above defenses require Java 7 update 67, Java 8 update 20, or above,<br>
      * because the above countermeasures for DocumentBuilderFactory and SAXParserFactory are broken in earlier Java versions, per:
      * CVE-2014-6517.
      * </p>
-     * 
      * 
      * @param documentBuilderFactory
      *            DocumentBuilderFactory
@@ -91,6 +89,9 @@ public final class XXEUtil{
             // and these as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and Entity Attacks"
             documentBuilderFactory.setXIncludeAware(false);
             documentBuilderFactory.setExpandEntityReferences(false);
+
+            //            documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, ""); // Compliant
+            //            documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
         }catch (ParserConfigurationException e){
             // This should catch a failed setFeature feature
             LOGGER.info(

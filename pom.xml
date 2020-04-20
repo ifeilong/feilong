@@ -78,6 +78,17 @@
 		<!--****************************第三方************************************ -->
 
 		<!--*********************begin dependency plugins version************************************ -->
+		<!-- The Apache Ant team currently maintains two lines of development.
+			The 1.9.x releases require Java5 at runtime and 1.10.x requires Java8 at runtime.
+
+			Both lines are
+			based off of Ant 1.9.7 and the 1.9.x releases are mostly bug fix releases while additional new features are developed for 1.10.x.
+		-->
+		<version.ant>1.9.11</version.ant>
+
+		<!-- http://www.bouncycastle.org/java.html -->
+		<version.bcprov-jdk15on>1.55</version.bcprov-jdk15on>
+
 
 		<!-- http://commons.apache.org/proper/commons-beanutils/changes-report.html -->
 		<version.commons-beanutils>1.9.4</version.commons-beanutils>
@@ -168,6 +179,8 @@
 		<version.jsoup>1.11.3</version.jsoup>
 
 		<version.javamail>1.4.7</version.javamail>
+		<version.javax.mail>1.6.0</version.javax.mail>
+		<version.commons-email>1.5</version.commons-email>
 
 		<version.servlet-api>3.0.1</version.servlet-api>
 		<version.jsp-api>2.2</version.jsp-api>
@@ -197,6 +210,10 @@
 		<version.xml-apis>1.4.01</version.xml-apis>
 		<!-- https://xerces.apache.org/xerces2-j/releases.html -->
 		<version.xercesImpl>2.12.0</version.xercesImpl>
+
+		<!-- <version.velocity-engine>2.0</version.velocity-engine> -->
+		<version.velocity>1.7</version.velocity>
+		<version.velocity-tools>2.0</version.velocity-tools>
 
 		<!--
 			http://tiles.apache.org/framework/whats-new.html
@@ -497,6 +514,19 @@
 				<version>${version.javamail}</version>
 			</dependency>
 
+			<!-- -->
+			<dependency>
+				<groupId>com.sun.mail</groupId>
+				<artifactId>javax.mail</artifactId>
+				<version>${version.javax.mail}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-email</artifactId>
+				<version>${version.commons-email}</version>
+			</dependency>
+
 			<!-- *********************apache******************************* -->
 			<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
 			<dependency>
@@ -524,6 +554,13 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-compress</artifactId>
 				<version>${version.commons-compress}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15on</artifactId>
+				<version>${version.bcprov-jdk15on}</version>
 			</dependency>
 
 			<!-- commons-validator -->
@@ -665,6 +702,19 @@
 				</exclusions>
 			</dependency>
 
+			<!-- ant -->
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>${version.ant}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-launcher</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
 			<!-- commons-codec -->
 			<dependency>
 				<groupId>commons-codec</groupId>
@@ -715,6 +765,82 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-configuration2</artifactId>
 				<version>${version.commons-configuration2}</version>
+			</dependency>
+
+			<!-- velocity -->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>${version.velocity}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>commons-lang</artifactId>
+						<groupId>commons-lang</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>commons-collections</artifactId>
+						<groupId>commons-collections</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-tools</artifactId>
+				<version>${version.velocity-tools}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.velocity</groupId>
+						<artifactId>velocity</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.struts</groupId>
+						<artifactId>struts-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.struts</groupId>
+						<artifactId>struts-taglib</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.struts</groupId>
+						<artifactId>struts-tiles</artifactId>
+					</exclusion>
+
+					<exclusion>
+						<groupId>dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>sslext</groupId>
+						<artifactId>sslext</artifactId>
+					</exclusion>
+
+					<exclusion>
+						<groupId>commons-beanutils</groupId>
+						<artifactId>commons-beanutils</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-collections</groupId>
+						<artifactId>commons-collections</artifactId>
+					</exclusion>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-validator</groupId>
+						<artifactId>commons-validator</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-chain</groupId>
+						<artifactId>commons-chain</artifactId>
+					</exclusion>
+
+				</exclusions>
 			</dependency>
 
 			<!-- commons-collections Requires Java 1.2+ 仅仅 统一下版本 feilong platform 不直接使用这个jar -->

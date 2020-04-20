@@ -10,9 +10,6 @@
 
 	<artifactId>feilong-net-mail</artifactId>
 
-	<properties>
-		<version.commons-email>1.5</version.commons-email>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -37,7 +34,6 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
-			<version>1.6.0</version>
 		</dependency>
 
 
@@ -51,7 +47,6 @@
 		<!-- <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
-			<version>${version.commons-email}</version>
 			</dependency> -->
 
 	</dependencies>
