@@ -29,12 +29,6 @@ import com.feilong.store.member.User;
 
 import net.sf.json.processors.JsonValueProcessor;
 
-/**
- * The Class SensitiveWordsJsonValueProcessorTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.5
- */
 public class SensitiveWordsJsonValueProcessorTest{
 
     /** The Constant LOGGER. */

@@ -28,12 +28,6 @@ import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
 import com.feilong.store.member.UserInfo;
 
-/**
- * The Class BaseJsonTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.2.2
- */
 public abstract class AbstractJsonTest{
 
     /** The Constant LOGGER. */

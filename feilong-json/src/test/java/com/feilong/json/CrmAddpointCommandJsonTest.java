@@ -29,11 +29,6 @@ import com.feilong.json.jsonlib.processor.CapitalizePropertyNameProcessor;
 
 import net.sf.json.processors.PropertyNameProcessor;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.9.2
- */
 public class CrmAddpointCommandJsonTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CrmAddpointCommandJsonTest.class);
