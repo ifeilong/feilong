@@ -19,6 +19,12 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core-extension</artifactId>
+		</dependency>
+
 		<!--feilong-context -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -61,6 +67,13 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-net-httpclient4</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-net-mail -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-mail</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
