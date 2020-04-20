@@ -411,7 +411,7 @@
 
 			<!-- feilong-util-all -->
 			<dependency>
-				<groupId>${project.groupId}</groupId>
+				<groupId>com.github.venusdrogon</groupId>
 				<artifactId>feilong-util-all</artifactId>
 				<version>${version.feilong-platform}</version>
 			</dependency>
