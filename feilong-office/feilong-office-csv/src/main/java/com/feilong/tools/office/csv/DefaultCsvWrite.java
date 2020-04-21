@@ -195,7 +195,6 @@ public class DefaultCsvWrite implements CsvWrite{
         List<CsvColumnEntity> csvColumnEntityList = CsvColumnEntityListBuilder.build(useBeanCsvConfig);
 
         //---------------------------------------------------------------
-
         String[] columnTitles = ConvertUtil.toStrings(getPropertyValueList(csvColumnEntityList, "name"));
         List<Object[]> dataList = DataListBuilder.build(iterable, csvColumnEntityList);
         write(fileName, columnTitles, dataList, useBeanCsvConfig);
@@ -256,6 +255,7 @@ public class DefaultCsvWrite implements CsvWrite{
      */
     private static <T> BeanCsvConfig<T> buildBeanCsvConfig(Iterable<T> iterable){
         T t = IterableUtils.get(iterable, 0);
+        @SuppressWarnings("unchecked")
         Class<T> klass = (Class<T>) t.getClass();
         return new BeanCsvConfig<>(klass);
     }

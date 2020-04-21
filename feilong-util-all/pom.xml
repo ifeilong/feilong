@@ -182,6 +182,13 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<!-- feilong-office-excel-loxia -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-office-excel-loxia</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
 		<!-- feilong-xml -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

@@ -54,7 +54,7 @@ public class CsvColumnEntityListBuilder{
      * @param beanCsvConfig
      *            the bean csv config
      * @return the csv column entity list
-     * @see com.feilong.core.lang.reflect.FieldUtil#getAllFieldList(Object, String[])
+     * @see com.feilong.core.lang.reflect.FieldUtil#getAllFieldList(Class, String...)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getAllFieldsList(Class)
      * @since 1.7.1
      */
@@ -62,7 +62,6 @@ public class CsvColumnEntityListBuilder{
         Validate.notNull(beanCsvConfig, "beanCsvConfig can't be null!");
 
         //---------------------------------------------------------------
-
         List<CsvColumnEntity> csvColumnEntityList = buildCsvColumnEntityList(beanCsvConfig);
         if (isNotNullOrEmpty(beanCsvConfig.getIncludePropertyNames())){
             csvColumnEntityList = select(csvColumnEntityList, "name", beanCsvConfig.getIncludePropertyNames());
@@ -90,7 +89,4 @@ public class CsvColumnEntityListBuilder{
         }
         return list;
     }
-
-    //---------------------------------------------------------------
-
 }
