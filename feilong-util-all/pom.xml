@@ -153,10 +153,10 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!--feilong-tools-zip-compress -->
+		<!--feilong-office-zip -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-zip-compress</artifactId>
+			<artifactId>feilong-office-zip</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

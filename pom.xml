@@ -79,13 +79,6 @@
 		<!--****************************第三方************************************ -->
 
 		<!--*********************begin dependency plugins version************************************ -->
-		<!-- The Apache Ant team currently maintains two lines of development.
-			The 1.9.x releases require Java5 at runtime and 1.10.x requires Java8 at runtime.
-
-			Both lines are
-			based off of Ant 1.9.7 and the 1.9.x releases are mostly bug fix releases while additional new features are developed for 1.10.x.
-		-->
-		<version.ant>1.9.11</version.ant>
 
 		<!-- http://www.bouncycastle.org/java.html -->
 		<version.bcprov-jdk15on>1.55</version.bcprov-jdk15on>
@@ -699,19 +692,6 @@
 					<exclusion>
 						<artifactId>commons-collections</artifactId>
 						<groupId>commons-collections</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<!-- ant -->
-			<dependency>
-				<groupId>org.apache.ant</groupId>
-				<artifactId>ant</artifactId>
-				<version>${version.ant}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.apache.ant</groupId>
-						<artifactId>ant-launcher</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>

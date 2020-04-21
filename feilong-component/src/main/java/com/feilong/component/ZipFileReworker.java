@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.context.FileReworker;
 import com.feilong.io.FilenameUtil;
-import com.feilong.tools.compress.AntZipHandler;
-import com.feilong.tools.compress.ZipHandler;
+import com.feilong.office.zip.CompressZipHandler;
+import com.feilong.office.zip.ZipHandler;
 
 /**
  * The Class ZipFileReworker.
@@ -38,7 +38,7 @@ public class ZipFileReworker implements FileReworker{
 
     //---------------------------------------------------------------
     /** The zip handler. */
-    private ZipHandler          zipHandler = new AntZipHandler();
+    private ZipHandler          zipHandler = new CompressZipHandler();
 
     /** The output zip path expression. */
     private String              outputZipPathExpression;
@@ -112,6 +112,7 @@ public class ZipFileReworker implements FileReworker{
      * @param filePath
      *            the file path
      * @param outputZipPathExpression
+     *            the output zip path expression
      * @return the string
      */
     private static String build(String filePath,String outputZipPathExpression){

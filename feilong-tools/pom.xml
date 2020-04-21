@@ -17,8 +17,6 @@
 		<module>feilong-tools-emailaddress</module>
 		<module>feilong-tools-money</module>
 		<module>feilong-tools-mobile</module>
-		<module>feilong-tools-zip</module>
-		<module>feilong-tools-pinyin</module>
 	</modules>
 
 	<dependencies>
