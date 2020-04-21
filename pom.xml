@@ -53,6 +53,7 @@
 		<module>feilong-tools</module>
 
 		<module>feilong-office</module>
+		<module>feilong-component</module>
 
 		<module>feilong-util-all</module>
 	</modules>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<!-- 常用不改的参数 -->
+	<util:properties id="p_config" location="classpath:config.properties" />
+
+	<import resource="classpath:feilong-spring-mailconfig.xml" />
+	<import resource="classpath:feilong-spring-listDataFileCreator.xml" />
+
+	<bean id="component" class="com.feilong.component.DataFileZipEmailComponent">
+		<property name="dataListQuery">
+			<bean class="com.feilong.component.TradeDataDataListQuery" />
+		</property>
+		<property name="listDataFileCreator" ref="loxiaSimpleListLoopExcelFileCreator" />
+		<property name="mailSenderConfig">
+			<bean class="com.feilong.net.mail.entity.MailSenderConfig" parent="mailSenderConfig">
+				<property name="subject" value="✨ ️hello report" />
+			</bean>
+		</property>
+		<!-- <property name="outputZipPathExpression" value="#{p_config['zip.outputPathExpression']}" /> -->
+	</bean>
+</beans>

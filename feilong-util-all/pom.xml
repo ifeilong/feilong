@@ -210,6 +210,13 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<!-- feilong-component -->
+		<dependency>
+			<groupId>com.github.venusdrogon</groupId>
+			<artifactId>feilong-component</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

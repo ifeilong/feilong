@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
+
+	<sheet name="sheet">
+		<block start="A4" end="I4" dataName="list" loop="true" loopClass="com.feilong.component.DefaultTradeData">
+			<cell position="A4" dataName="tradeNo" />
+			<cell position="B4" dataName="paymentType" />
+		</block>
+	</sheet>
+
+</sheets>
