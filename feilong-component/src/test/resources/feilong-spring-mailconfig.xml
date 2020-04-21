@@ -9,19 +9,19 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
 	<!-- 常用不改的参数 -->
-	<!-- <util:properties id="p_config" location="classpath:config.properties" /> -->
+	<context:property-placeholder location="file:/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties" />
 
 	<bean id="mailSenderConfig" class="com.feilong.net.mail.entity.MailSenderConfig">
-		<property name="serverHost" value="smtp.163.com" />
-		<property name="serverPort" value="25" />
+		<property name="serverHost" value="${serverHost}" />
+		<property name="serverPort" value="${serverPort}" />
 
-		<property name="userName" value="feilongtestemail@163.com" />
-		<property name="password" value="521000" />
+		<property name="userName" value="${userName}" />
+		<property name="password" value="${password}" />
 
-		<property name="personal" value="adidas邮件使者" />
+		<property name="personal" value="test邮件使者" />
 
-		<property name="fromAddress" value="feilongtestemail@163.com" />
-		<property name="tos" value="venusdrogon@163.com,xin.jin@baozun.com" />
+		<property name="fromAddress" value="${fromAddress}" />
+		<property name="tos" value="${tos}" />
 
 		<!-- 554是邮件被网易默认为垃圾邮件，解决办法只要发邮件的时候抄送自己一份就可以了 -->
 		<!-- <property name="ccs" value="feilongtestemail@163.com" /> -->

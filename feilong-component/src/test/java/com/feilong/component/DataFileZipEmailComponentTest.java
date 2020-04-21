@@ -58,7 +58,7 @@ public class DataFileZipEmailComponentTest{
 
     @Test
     public void run(){
-        mailSenderConfig.setTos("venusdrogon@163.com", "xin.jin@baozun.com");
+        mailSenderConfig.setTos("venusdrogon@163.com");
         mailSenderConfig.setSubject("hello report");
         mailSenderConfig.setContent("heelo");
 
