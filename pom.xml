@@ -1740,27 +1740,6 @@
 		</license>
 	</licenses>
 
-	<repositories>
-
-		<repository>
-			<!-- A unique identifier for a repository. -->
-			<id>feilong-platform-repository</id>
-
-			<!--Human readable name of the repository. -->
-			<name>feilong platform repository</name>
-
-			<url>https://raw.github.com/venusdrogon/feilong-platform/repository</url>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<checksumPolicy>warn</checksumPolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-
 	<!-- 项目的贡献者,但不属于开发小组 -->
 	<contributors>
 		<contributor>
