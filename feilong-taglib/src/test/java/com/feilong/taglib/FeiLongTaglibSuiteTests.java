@@ -19,14 +19,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.taglib.display.httpconcat.FeiLongConcatSuiteTests;
-import com.feilong.taglib.display.sensitive.FeiLongSensitiveUtilSuiteTests;
+import com.feilong.taglib.display.httpconcat.ConcatSuiteTests;
+import com.feilong.taglib.display.sensitive.SensitiveUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                FeiLongSensitiveUtilSuiteTests.class,
-                FeiLongConcatSuiteTests.class,
+                SensitiveUtilSuiteTests.class,
+                ConcatSuiteTests.class,
 
                 TagUtilsFindAttributeValueTest.class,
 

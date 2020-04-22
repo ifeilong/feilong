@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.comparator.propertycomparator;
+package com.feilong.core.util.comparator.sorthelpertest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -26,12 +26,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                PropertyNameTest.class,
-                PropertyNameAndComparatorTest.class,
-                PropertyNameAndValueConvertToClassTest.class,
-                PropertyNameAndValueConvertToClassAndComparatorTest.class,
+                ParsePropertyNameAndOrderTest.class,
+                IsAscTest.class,
         //
 })
-public class FeiLongPropertyComparatorSuiteTests{
+public class SortHelperSuiteTests{
 
 }

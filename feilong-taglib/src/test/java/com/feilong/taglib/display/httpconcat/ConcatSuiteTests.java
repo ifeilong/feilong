@@ -54,6 +54,6 @@ import com.feilong.taglib.display.httpconcat.handler.VersionFormatterTest;
                 ItemSrcListResolverTest.class,
         //                
 })
-public class FeiLongConcatSuiteTests{
+public class ConcatSuiteTests{
 
 }

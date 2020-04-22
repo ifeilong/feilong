@@ -13,29 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.sensitive;
+package com.feilong.core.util.comparator.beancomparatorutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongSensitiveUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-                SensitiveUtilAddressParameterizedTest.class,
-                SensitiveUtilChineseNameParameterizedTest.class,
-                SensitiveUtilEmailParameterizedTest.class,
+@SuiteClasses({ //
 
-                SensitiveUtilMobileParameterizedTest.class,
-                SensitiveUtilMobile33ParameterizedTest.class,
-
-                SensitiveUtilTest.class,
-        //                
+                PropertyComparatorTest.class,
+                ChainedComparatorTest.class,
+        //
 })
-public class FeiLongSensitiveUtilSuiteTests{
+public class BeanComparatorUtilSuiteTests{
 
 }

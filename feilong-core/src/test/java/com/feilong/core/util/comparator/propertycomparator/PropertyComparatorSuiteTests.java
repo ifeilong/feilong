@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.comparator.beancomparatorutiltest;
+package com.feilong.core.util.comparator.propertycomparator;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -26,10 +26,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                PropertyComparatorTest.class,
-                ChainedComparatorTest.class,
+                PropertyNameTest.class,
+                PropertyNameAndComparatorTest.class,
+                PropertyNameAndValueConvertToClassTest.class,
+                PropertyNameAndValueConvertToClassAndComparatorTest.class,
         //
 })
-public class FeiLongBeanComparatorUtilSuiteTests{
+public class PropertyComparatorSuiteTests{
 
 }
