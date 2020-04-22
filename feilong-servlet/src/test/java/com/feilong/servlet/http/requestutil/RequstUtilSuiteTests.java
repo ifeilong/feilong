@@ -27,6 +27,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 IncludeTest.class
         //
 })
-public class FeiLongRequstUtilSuiteTests{
+public class RequstUtilSuiteTests{
 
 }

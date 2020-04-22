@@ -19,10 +19,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.servlet.http.requestutil.FeiLongRequstUtilSuiteTests;
+import com.feilong.servlet.http.requestutil.RequstUtilSuiteTests;
 
 @RunWith(Suite.class)
-@SuiteClasses({ FeiLongRequstUtilSuiteTests.class
+@SuiteClasses({ //
+                RequstUtilSuiteTests.class
         //
 })
 public class FeiLongServletSuiteTests{
