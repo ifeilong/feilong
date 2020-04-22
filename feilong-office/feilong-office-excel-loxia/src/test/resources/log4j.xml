@@ -19,23 +19,6 @@
 		</filter>
 	</appender>
 
-	<appender name="htmlFile" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="DatePattern" value="'.'yyyy-MM-dd'.html'" />
-		<param name="File" value="${user.home}/feilong/logs/feilong/feilong-office-excel/log.html" />
-		<layout class="org.apache.log4j.HTMLLayout">
-			<param name="LocationInfo" value="true" />
-			<param name="Title" value="feilong-common log" />
-		</layout>
-	</appender>
-
-	<appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
-		<param name="File" value="${user.home}/feilong/logs/feilong/feilong-office-excel/log.log" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %t (%F:%L) [%M()] - %m%n" />
-		</layout>
-	</appender>
-
 	<category name="com.feilong">
 		<priority value="debug" />
 	</category>
@@ -55,8 +38,6 @@
 	<!-- 设置接收所有输出的通道 -->
 	<root>
 		<level value="debug" />
-		<appender-ref ref="htmlFile" />
 		<appender-ref ref="stdout" />
-		<appender-ref ref="logFile" />
 	</root>
 </log4j:configuration>
