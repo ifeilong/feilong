@@ -16,24 +16,19 @@
 package com.feilong.tools.iplookup;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
-public class SinaIpLookupUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SinaIpLookupUtilTest.class);
+public class SinaIpLookupUtilTest extends AbstractTest{
 
     @Test
     public void test(){
-
-        LOGGER.debug(JsonUtil.format(SinaIpLookupUtilUtil.getIpInfoEntity("210.75.225.254")));
-
+        LOGGER.debug(JsonUtil.format(SinaIpLookupUtil.getIpInfoEntity("210.75.225.254")));
     }
 }

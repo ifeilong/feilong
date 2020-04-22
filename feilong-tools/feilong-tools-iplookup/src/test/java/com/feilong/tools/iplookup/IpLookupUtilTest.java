@@ -16,19 +16,16 @@
 package com.feilong.tools.iplookup;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
-public class IpLookupUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(IpLookupUtilTest.class);
+public class IpLookupUtilTest extends AbstractTest{
 
     @Test
     public void test(){

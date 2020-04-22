@@ -21,13 +21,12 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonToJavaConfig;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.transformer.CustomJavaIdentifierTransformer;
 import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 import net.sf.json.util.JavaIdentifierTransformer;
@@ -39,12 +38,7 @@ import net.sf.json.util.JavaIdentifierTransformer;
  * @see <a href="http://ip.taobao.com/instructions.php">ip.taobao</a>
  * @since 1.11.0
  */
-public final class SinaIpLookupUtilUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER              = LoggerFactory.getLogger(SinaIpLookupUtilUtil.class);
-
-    //---------------------------------------------------------------
+public final class SinaIpLookupUtil extends AbstractTest{
 
     /** <code>{@value}</code>. */
     private static final String SINA_IP_URI_PATTERN = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip={}";
