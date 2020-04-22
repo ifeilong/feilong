@@ -13,20 +13,20 @@
 
 	<description>Reduce development, Release ideas</description>
 
-	<url>https://github.com/venusdrogon/feilong</url>
+	<url>https://github.com/ifeilong/feilong</url>
 
 	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
 	<!-- The scm url must start with 'scm:' -->
 	<scm>
-		<url>https://github.com/venusdrogon/feilong</url>
-		<connection>scm:git:https://github.com/venusdrogon/feilong</connection>
-		<developerConnection>scm:git:git@github.com:venusdrogon/feilong.git</developerConnection>
+		<url>https://github.com/ifeilong/feilong</url>
+		<connection>scm:git:https://github.com/ifeilong/feilong</connection>
+		<developerConnection>scm:git:git@github.com:ifeilong/feilong.git</developerConnection>
 	</scm>
 
 	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/venusdrogon/feilong/issues</url>
+		<url>https://github.com/ifeilong/feilong/issues</url>
 	</issueManagement>
 
 	<modules>
@@ -318,7 +318,7 @@
 
 		<!-- **********************begin site-maven-plugin config******************************************* -->
 		<site-maven-plugin.repositoryName>feilong-platform</site-maven-plugin.repositoryName>
-		<site-maven-plugin.repositoryOwner>venusdrogon</site-maven-plugin.repositoryOwner>
+		<site-maven-plugin.repositoryOwner>ifeilong</site-maven-plugin.repositoryOwner>
 		<site-maven-plugin.branch>refs/heads/repository</site-maven-plugin.branch>
 		<!-- git commit message -->
 		<site-maven-plugin.message>:rocket: deploy ${project.name} ${project.version}</site-maven-plugin.message>
@@ -359,7 +359,6 @@
 
 		<!-- **********************end maven-javadoc-plugin config******************************************* -->
 		<developer.feilong.name>feilong</developer.feilong.name>
-		<!-- <developer.feilong.email>venusdrogon@163.com</developer.feilong.email> -->
 	</properties>
 
 	<!-- 项目发布管理 -->
@@ -1150,7 +1149,6 @@
 					<properties>
 						<owner>${developer.feilong.name}</owner>
 						<year>${project.inceptionYear}</year>
-						<!-- <email>${developer.feilong.email}</email> -->
 					</properties>
 					<!-- -->
 					<excludes>
@@ -1346,10 +1344,6 @@
 						<link>http://commons.apache.org/proper/commons-beanutils/javadocs/v${version.commons-beanutils}/apidocs/</link>
 						<link>http://ezmorph.sourceforge.net/apidocs/</link>
 						<link>http://docs.spring.io/spring/docs/${version.spring}/javadoc-api/</link>
-
-						<!-- <link>https://github.com/venusdrogon/feilongjavadocs/feilong-core/</link>
-							<link>https://github.com/venusdrogon/feilongjavadocs/feilong-servlet/</link>
-							<link>https://github.com/venusdrogon/feilongjavadocs/feilong-io/</link> -->
 					</links>
 				</configuration>
 			</plugin>
@@ -1700,7 +1694,7 @@
 	<!-- 指定这个项目的组织机构信息 -->
 	<organization>
 		<name>feiLong</name>
-		<url>https://github.com/venusdrogon/feilong</url>
+		<url>https://github.com/ifeilong</url>
 	</organization>
 
 	<!-- 项目提交者信息 -->
@@ -1708,7 +1702,7 @@
 		<developer>
 			<id>feilong</id>
 			<name>金鑫</name>
-			<url>https://github.com/venusdrogon/feilong</url>
+			<url>https://github.com/venusdrogon</url>
 			<organization>feilong</organization>
 			<roles>
 				<role>architect</role>
