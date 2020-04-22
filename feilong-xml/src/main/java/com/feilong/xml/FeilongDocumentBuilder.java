@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
+ * 用来构造 {@link Document}.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
@@ -46,6 +47,15 @@ class FeilongDocumentBuilder{
     /** Static instance. */
     // the static instance works for all types
     private static final DocumentBuilder DEFAULT_DOCUMENTBUILDER = buildDefaultDocumentBuilder();
+
+    //---------------------------------------------------------------
+
+    /** Don't let anyone instantiate this class. */
+    private FeilongDocumentBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     //---------------------------------------------------------------
 
