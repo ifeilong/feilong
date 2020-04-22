@@ -313,6 +313,7 @@
 
 		<!-- **********************begin maven-surefire-plugin config******************************************* -->
 		<maven-surefire-plugin.skip>true</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
 		<!-- **********************end maven-surefire-plugin config******************************************* -->
 
 		<!-- **********************begin site-maven-plugin config******************************************* -->
@@ -354,7 +355,7 @@
 		-->
 		<maven-javadoc-plugin.stylesheet>java</maven-javadoc-plugin.stylesheet>
 
-		<maven-site-plugin.outputDirectory>${folder.gh-pages}/site/${project.name}</maven-site-plugin.outputDirectory>
+		<maven-site-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/site/${project.name}</maven-site-plugin.outputDirectory>
 
 		<!-- **********************end maven-javadoc-plugin config******************************************* -->
 		<developer.feilong.name>feilong</developer.feilong.name>
@@ -1360,7 +1361,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${v.maven-surefire-plugin}</version>
 				<configuration>
-					<skip>${maven-surefire-plugin.skip}</skip><!-- 跳过测试 -->
+					<!-- 跳过测试 -->
+					<skip>${maven-surefire-plugin.skip}</skip>
+
+					<includes>
+						<include>${maven-surefire-plugin.include}</include>
+					</includes>
 
 					<!-- Option to print summary of test suites or just print the test cases that have errors. Default value is: true. -->
 					<printSummary>true</printSummary>

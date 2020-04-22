@@ -11,6 +11,8 @@
 
 	<properties>
 		<v.commons-csv>1.3</v.commons-csv>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/FeiLongCvsSuiteTests</maven-surefire-plugin.include>
 	</properties>
 
 	<dependencies>
@@ -34,23 +36,4 @@
 	</dependencies>
 
 
-
-	<build>
-
-		<plugins>
-			<!-- maven-surefire-plugin -->
-			<plugin>
-				<inherited>false</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>false</skip>
-					<includes>
-						<include>**/FeiLongCvsSuiteTests</include>
-					</includes>
-				</configuration>
-			</plugin>
-		</plugins>
-
-	</build>
 </project>

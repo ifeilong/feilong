@@ -10,7 +10,7 @@
 		<fluidoSkin>
 
 			<gitHub>
-				<projectId>venusdrogon/feilong-platform</projectId>
+				<projectId>venusdrogon/feilong</projectId>
 				<ribbonOrientation>right</ribbonOrientation>
 				<ribbonColor>orange</ribbonColor><!-- it is the the ribbon color, red/green/black/darkblue/orange/gray only accepted only accepted (red by default) -->
 			</gitHub>
@@ -67,7 +67,6 @@
 
 		<!-- <head>head</head>
 			<footer>foter</footer> -->
-
 	</body>
 
 

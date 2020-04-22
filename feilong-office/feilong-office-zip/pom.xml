@@ -9,6 +9,11 @@
 
 	<artifactId>feilong-office-zip</artifactId>
 
+	<properties>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/FeiLongCompressSuiteTests</maven-surefire-plugin.include>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
@@ -24,21 +29,4 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-
-			<!-- maven-surefire-plugin -->
-			<plugin>
-				<inherited>false</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>false</skip>
-					<includes>
-						<include>**/FeiLongCompressSuiteTests</include>
-					</includes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

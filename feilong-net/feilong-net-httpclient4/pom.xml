@@ -10,6 +10,11 @@
 
 	<artifactId>feilong-net-httpclient4</artifactId>
 
+	<properties>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/FeiLongHttpclient4SuiteTests</maven-surefire-plugin.include>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
@@ -35,21 +40,5 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
 
-			<!-- maven-surefire-plugin -->
-			<plugin>
-				<inherited>false</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>false</skip>
-					<includes>
-						<include>**/FeiLongHttpclient4SuiteTests</include>
-					</includes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

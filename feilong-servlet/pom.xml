@@ -12,7 +12,10 @@
 	<name>feilong-servlet</name>
 	<description>${project.name} ${project.version} API</description>
 
-	<url>https://github.com/venusdrogon/feilong-servlet</url>
+	<properties>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/FeiLongServletSuiteTests</maven-surefire-plugin.include>
+	</properties>
 
 	<dependencies>
 		<!-- 下载要使用 -->
@@ -73,21 +76,5 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
 
-			<!-- maven-surefire-plugin -->
-			<plugin>
-				<inherited>false</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>false</skip>
-					<includes>
-						<include>**/FeiLongServletSuiteTests</include>
-					</includes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

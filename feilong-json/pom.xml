@@ -10,8 +10,11 @@
 
 	<artifactId>feilong-json</artifactId>
 
+	<!-- <version.xom>1.2.5</version.xom> -->
+
 	<properties>
-		<!-- <version.xom>1.2.5</version.xom> -->
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/FeiLongJsonUtilSuiteTests</maven-surefire-plugin.include>
 	</properties>
 
 	<dependencies>
@@ -38,22 +41,22 @@
 
 		<!-- java.lang.NoClassDefFoundError: nu/xom/Serializer -->
 		<!-- 使用 jsonlib xml功能的时候 需要这个 -->
-	<!-- 	<dependency>
+		<!-- <dependency>
 			<groupId>xom</groupId>
 			<artifactId>xom</artifactId>
 			<version>${version.xom}</version>
 			<optional>true</optional>
 			<exclusions>
-				<exclusion>
-					<artifactId>xml-apis</artifactId>
-					<groupId>xml-apis</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>xercesImpl</artifactId>
-					<groupId>xerces</groupId>
-				</exclusion>
+			<exclusion>
+			<artifactId>xml-apis</artifactId>
+			<groupId>xml-apis</groupId>
+			</exclusion>
+			<exclusion>
+			<artifactId>xercesImpl</artifactId>
+			<groupId>xerces</groupId>
+			</exclusion>
 			</exclusions>
-		</dependency> -->
+			</dependency> -->
 
 		<!-- **********************log日志************************************ -->
 
@@ -73,23 +76,6 @@
 
 	</dependencies>
 
-	<build>
 
-		<plugins>
 
-			<!-- maven-surefire-plugin -->
-			<plugin>
-				<inherited>false</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>false</skip>
-					<includes>
-						<include>**/FeiLongJsonUtilSuiteTests</include>
-					</includes>
-				</configuration>
-			</plugin>
-		</plugins>
-
-	</build>
 </project>

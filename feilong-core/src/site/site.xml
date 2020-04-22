@@ -21,7 +21,7 @@
 		<!-- http://maven.apache.org/skins/maven-fluido-skin/ -->
 		<fluidoSkin>
 			<gitHub>
-				<projectId>venusdrogon/feilong-core</projectId>
+				<projectId>venusdrogon/feilong</projectId>
 				<ribbonOrientation>right</ribbonOrientation>
 				<ribbonColor>orange</ribbonColor><!-- it is the the ribbon color, red/green/black/darkblue/orange/gray only accepted only accepted (red by default) -->
 			</gitHub>
