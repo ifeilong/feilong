@@ -45,20 +45,6 @@ import net.sf.json.JsonConfig;
 public class JsonHelperTest extends AbstractJsonTest{
 
     @Test
-    public void isCommonStringTest(){
-        String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
-        assertEquals(false, JsonHelper.isCommonString(json_test));
-    }
-
-    @Test
-    public void isCommonStringTest1(){
-        String json_test = "[name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]]";
-        assertEquals(false, JsonHelper.isCommonString(json_test));
-    }
-
-    //---------------------------------------------------------------
-
-    @Test
     @SuppressWarnings("static-method")
     public void name(){
         String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";

@@ -149,15 +149,19 @@ public final class IpLookupUtil{
 
         //---------------------------------------------------------------
         String uri = Slf4jUtil.format(TAOBAO_IP_URI_PATTERN, ip);
-        String responseString = HttpClientUtil.get(uri);
-        Validate.notBlank(responseString, "responseString can't be blank!");
 
-        //---------------------------------------------------------------
-
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("result format :[{}]", JsonUtil.format(responseString));
+        try{
+            String responseString = HttpClientUtil.get(uri);
+            Validate.notBlank(responseString, "responseString can't be blank!");
+            //---------------------------------------------------------------
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("result format :[{}]", JsonUtil.format(responseString));
+            }
+            return toIpInfoEntity(responseString);
+        }catch (Exception e){
+            LOGGER.warn("[ipInfo]:" + uri, e);
+            return null;
         }
-        return toIpInfoEntity(responseString);
     }
 
     //---------------------------------------------------------------

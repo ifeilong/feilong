@@ -34,16 +34,8 @@ import com.feilong.store.member.Person;
 
 import net.sf.json.JSONObject;
 
-/**
- * The Class JsonUtilToMapWithJsonToJavaConfigTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToMapWithJsonToJavaConfigTest{
 
-    /**
-     * To map.
-     */
     @Test
     public void toMap(){
         String json = "{'data1':{'name':'get'}}";
@@ -64,9 +56,6 @@ public class ToMapWithJsonToJavaConfigTest{
                                         hasEntry(is("data2"), hasProperty("name", is("set")))));
     }
 
-    /**
-     * Test to map.
-     */
     @Test
     public void testToMap(){
         JSONObject json1 = JSONObject.fromObject("{'name':'get'}");
@@ -80,9 +69,6 @@ public class ToMapWithJsonToJavaConfigTest{
                                         hasEntry("data2", json2)));
     }
 
-    /**
-     * To map 3.
-     */
     @Test
     public void toMap3(){
         String json = "{'mybean':{'data':[{'name':'get'}]}}";
@@ -99,6 +85,11 @@ public class ToMapWithJsonToJavaConfigTest{
 
         Object object = data.get(0);
         assertThat(object, hasProperty("name", is("get")));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testToCommonString(){
+        JsonUtil.toMap("<aaaaaa>", new JsonToJavaConfig(MyBean.class));
     }
 
     //---------------------------------------------------------------
@@ -119,9 +110,6 @@ public class ToMapWithJsonToJavaConfigTest{
         assertEquals(emptyMap(), JsonUtil.toMap("", new JsonToJavaConfig(Person.class)));
     }
 
-    /**
-     * Test to map blank json.
-     */
     @Test
     public void testToMapBlankJson(){
         assertEquals(emptyMap(), JsonUtil.toMap(" ", new JsonToJavaConfig(Person.class)));

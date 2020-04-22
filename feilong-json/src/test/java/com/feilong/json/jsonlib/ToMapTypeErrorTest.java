@@ -21,18 +21,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-/**
- * The Class JsonUtilToMapTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToMapTypeErrorTest{
 
     /**
      * Test 3.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void test3(){
         Map<String, String> map = newHashMap();
         map.put("1", "2");

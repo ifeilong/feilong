@@ -59,7 +59,9 @@ import com.feilong.json.jsonlib.processor.DateJsonValueProcessorTest;
 
                 FormatStringTest.class,
 
-                JsonHelperTest.class,
+                //JsonHelperTest.class,
+                JsonHelperIsKeyValueJsonStringTest.class,
+                JsonHelperIsCommonStringTest.class,
 
         //
 })

@@ -207,6 +207,36 @@ public final class JsonHelper{
         return true;
     }
 
+    /**
+     * 是否是 <code>{}</code> key-value 格式的字符串.
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>如果不是字符串,返回 false</li>
+     * <li>如果是null,返回false</li>
+     * <li>如果是字符串,以"{"符号开头,"}"符号结尾的时候,返回 true</li>
+     * <li>其他,返回 false</li>
+     * </ol>
+     * </blockquote>.
+     *
+     * @param obj
+     *            the obj
+     * @return 如果是字符串,以"{"符号开头,"}"符号结尾的时候,返回 true
+     * @since 3.0.0
+     */
+    static boolean isKeyValueJsonString(Object obj){
+        if (!ClassUtil.isInstance(obj, String.class)){
+            return false;
+        }
+        if (null == obj){
+            return false;
+        }
+
+        //---------------------------------------------------------------
+        String str = (String) obj;
+        return str.startsWith("{") && str.endsWith("}");
+    }
+
     // [end]
 
     //---------------------------------------------------------------

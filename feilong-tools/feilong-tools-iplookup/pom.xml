@@ -17,4 +17,24 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<!-- maven-surefire-plugin -->
+			<plugin>
+				<inherited>false</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<includes>
+						<include>**/IpLookupUtilTest</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
 </project>

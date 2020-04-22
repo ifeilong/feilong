@@ -26,11 +26,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-/**
- * The Class JsonUtilToMapTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToMapTest{
 
     /**
@@ -71,15 +66,21 @@ public class ToMapTest{
         assertEquals(null, map.get("brandCode"));
     }
 
-    /**
-     * Test to map 122.
-     */
+    //---------------------------------------------------------------
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testToCommonString(){
+        JsonUtil.toMap("<aaaaaa>");
+    }
+
     @Test
     public void testToMap122(){
         //泛型擦除
         Map<String, Long> map3 = JsonUtil.toMap("{'brandCode':55.555}");
         assertThat(map3, allOf(hasEntry("brandCode", (Object) 55.555)));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test to map null json.

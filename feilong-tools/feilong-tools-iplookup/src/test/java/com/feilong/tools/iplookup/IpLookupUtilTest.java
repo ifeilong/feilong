@@ -15,6 +15,12 @@
  */
 package com.feilong.tools.iplookup;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 import com.feilong.json.jsonlib.JsonUtil;
@@ -29,8 +35,22 @@ public class IpLookupUtilTest extends AbstractTest{
 
     @Test
     public void test(){
+        //{"code":0,"data":{"ip":"210.75.225.254","country":"中国","area":"","region":"北京","city":"北京","county":"XX","isp":"科技网","country_id":"CN","area_id":"","region_id":"110000","city_id":"110100","county_id":"xx","isp_id":"1000114"}}
+        String ip = "210.75.225.254";
+        IpInfoEntity ipInfoEntity = IpLookupUtil.getIpInfoEntity(ip);
+        LOGGER.debug(JsonUtil.format(ipInfoEntity));
 
-        LOGGER.debug(JsonUtil.format(IpLookupUtil.getIpInfoEntity("210.75.225.254")));
-
+        if (null != ipInfoEntity){
+            assertThat(
+                            ipInfoEntity,
+                            allOf(
+                                            hasProperty("country", is("中国")),
+                                            hasProperty("region", is("北京")),
+                                            hasProperty("cityId", is("110100")),
+                                            hasProperty("city", is("北京")),
+                                            hasProperty("ip", is(ip))));
+        }else{
+            assertNull(ipInfoEntity);
+        }
     }
 }

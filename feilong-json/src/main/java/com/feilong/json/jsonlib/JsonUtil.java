@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.JsonToJavaException;
 import com.feilong.json.SensitiveWords;
@@ -1110,7 +1111,8 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            the json
-     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      * @see #toMap(Object, JsonToJavaConfig)
      * @since 1.5.0
      */
@@ -1170,6 +1172,7 @@ public final class JsonUtil{
      * @param jsonToJavaConfig
      *            the json to java config
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, JsonToJavaConfig)
@@ -1179,9 +1182,13 @@ public final class JsonUtil{
     @SuppressWarnings("unchecked")
     public static <T> Map<String, T> toMap(Object json,JsonToJavaConfig jsonToJavaConfig){
         LOGGER.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
-
         if (isNullOrEmpty(json)){
             return emptyMap();
+        }
+
+        //如果 json 是字符串 ,但是不是对象类型的字符串
+        if (ClassUtil.isInstance(json, String.class) && !JsonHelper.isKeyValueJsonString(json)){
+            throw new IllegalArgumentException("[" + json + "] can't convert to map");
         }
         //---------------------------------------------------------------
         Map<String, T> map = newLinkedHashMap();
