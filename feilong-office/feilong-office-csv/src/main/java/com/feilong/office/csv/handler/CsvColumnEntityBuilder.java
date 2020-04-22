@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv.handler;
+package com.feilong.office.csv.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.lang.reflect.Field;
 
-import com.feilong.tools.office.csv.entity.CsvColumn;
-import com.feilong.tools.office.csv.entity.CsvColumnEntity;
+import com.feilong.office.csv.entity.CsvColumn;
+import com.feilong.office.csv.entity.CsvColumnEntity;
 
 /**
  * The Class CsvColumnEntityBuilder.

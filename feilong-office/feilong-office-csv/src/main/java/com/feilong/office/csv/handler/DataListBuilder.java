@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv.handler;
+package com.feilong.office.csv.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.tools.office.csv.entity.CsvColumnEntity;
+import com.feilong.office.csv.entity.CsvColumnEntity;
 
 /**
  * 

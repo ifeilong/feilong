@@ -13,45 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv;
+package com.feilong.office.csv;
 
 import static java.util.Collections.emptyList;
 
 import org.junit.Test;
+
+import com.feilong.office.csv.CsvWrite;
+import com.feilong.office.csv.DefaultCsvWrite;
+import com.feilong.office.csv.entity.BeanCsvConfig;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.0
  */
-public class DefaultCsvWriteWriteDataTest{
+public class DefaultCsvWriteWriteDataWithBeanCsvConfigTest{
 
     private final CsvWrite csvWrite = new DefaultCsvWrite();
 
     @Test(expected = NullPointerException.class)
     public void testDefaultCsvWriteTestNull(){
-        csvWrite.write(null, emptyList());
+        csvWrite.write(null, emptyList(), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDefaultCsvWriteTestEmpty(){
-        csvWrite.write("", emptyList());
+        csvWrite.write("", emptyList(), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDefaultCsvWriteTestBlank(){
-        csvWrite.write(" ", emptyList());
+        csvWrite.write(" ", emptyList(), null);
     }
 
     //---------------------------------------------------------------
 
     @Test(expected = IllegalArgumentException.class)
     public void testDefaultCsvWriteTestNullData(){
-        csvWrite.write("1.cvs", null);
+        csvWrite.write("1.cvs", null, (BeanCsvConfig) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDefaultCsvWriteTestEmptyData(){
-        csvWrite.write("1.cvs", emptyList());
+        csvWrite.write("1.cvs", emptyList(), null);
     }
+
 }

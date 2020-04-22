@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv.handler;
+package com.feilong.office.csv.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
@@ -26,8 +26,8 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.lang.reflect.FieldUtil;
-import com.feilong.tools.office.csv.entity.BeanCsvConfig;
-import com.feilong.tools.office.csv.entity.CsvColumnEntity;
+import com.feilong.office.csv.entity.BeanCsvConfig;
+import com.feilong.office.csv.entity.CsvColumnEntity;
 
 /**
  * The Class CsvColumnEntityListBuilder.

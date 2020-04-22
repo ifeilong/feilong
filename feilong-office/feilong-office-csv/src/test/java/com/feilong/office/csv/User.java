@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv;
+package com.feilong.office.csv;
 
 import java.io.Serializable;
 
-import com.feilong.tools.office.csv.entity.CsvColumn;
+import com.feilong.office.csv.entity.CsvColumn;
 
 /**
  * The Class User.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv.entity;
+package com.feilong.office.csv.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -26,7 +26,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.tools.office.csv.entity.CsvColumn
+ * @see com.feilong.office.csv.entity.CsvColumn
  * @since 1.7.1
  */
 public class CsvColumnEntity{

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv;
+package com.feilong.office.csv;
 
 import static com.feilong.core.CharsetType.GBK;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -26,7 +26,9 @@ import org.junit.Test;
 
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FileUtil;
-import com.feilong.tools.office.csv.entity.BeanCsvConfig;
+import com.feilong.office.csv.CsvWrite;
+import com.feilong.office.csv.DefaultCsvWrite;
+import com.feilong.office.csv.entity.BeanCsvConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

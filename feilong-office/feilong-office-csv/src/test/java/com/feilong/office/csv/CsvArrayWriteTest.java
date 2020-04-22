@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv;
+package com.feilong.office.csv;
 
 import static com.feilong.core.CharsetType.GBK;
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -31,7 +31,9 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.SpecialFolder;
-import com.feilong.tools.office.csv.entity.CsvConfig;
+import com.feilong.office.csv.CsvWrite;
+import com.feilong.office.csv.DefaultCsvWrite;
+import com.feilong.office.csv.entity.CsvConfig;
 
 /**
  * The Class CSVUtilTest.

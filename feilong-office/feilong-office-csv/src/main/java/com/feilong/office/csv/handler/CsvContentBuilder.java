@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv.handler;
+package com.feilong.office.csv.handler;
 
 import static java.lang.System.lineSeparator;
 
@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.tools.office.csv.entity.CsvConfig;
+import com.feilong.office.csv.entity.CsvConfig;
 
 /**
  * 构造 csv 输出内容.

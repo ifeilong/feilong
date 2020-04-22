@@ -1,4 +1,4 @@
-package com.feilong.tools.office.csv.commons;
+package com.feilong.office.csv.commons;
 
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
@@ -10,7 +10,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import com.feilong.tools.office.csv.User;
+import com.feilong.office.csv.User;
 
 /**
  * @author ashraf_sarhan

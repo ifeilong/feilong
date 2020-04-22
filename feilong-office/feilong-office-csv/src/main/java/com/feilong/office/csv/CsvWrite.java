@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv;
+package com.feilong.office.csv;
 
 import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.tools.office.csv.entity.BeanCsvConfig;
-import com.feilong.tools.office.csv.entity.CsvConfig;
+import com.feilong.office.csv.entity.BeanCsvConfig;
+import com.feilong.office.csv.entity.CsvConfig;
 
 /**
  * cvs工具类.

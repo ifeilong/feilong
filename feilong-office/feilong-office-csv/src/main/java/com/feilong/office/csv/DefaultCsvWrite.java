@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.office.csv;
+package com.feilong.office.csv;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
@@ -29,12 +29,12 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.tools.office.csv.entity.BeanCsvConfig;
-import com.feilong.tools.office.csv.entity.CsvColumnEntity;
-import com.feilong.tools.office.csv.entity.CsvConfig;
-import com.feilong.tools.office.csv.handler.CsvColumnEntityListBuilder;
-import com.feilong.tools.office.csv.handler.CsvContentBuilder;
-import com.feilong.tools.office.csv.handler.DataListBuilder;
+import com.feilong.office.csv.entity.BeanCsvConfig;
+import com.feilong.office.csv.entity.CsvColumnEntity;
+import com.feilong.office.csv.entity.CsvConfig;
+import com.feilong.office.csv.handler.CsvColumnEntityListBuilder;
+import com.feilong.office.csv.handler.CsvContentBuilder;
+import com.feilong.office.csv.handler.DataListBuilder;
 
 /**
  * cvs工具类.
