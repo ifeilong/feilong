@@ -13,31 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.core.bean.propertyValueobtainer;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.net.paramutiltest.FeiLongParamUtilSuiteTests;
-import com.feilong.core.net.uriutiltest.FeiLongURIUtilSuiteTests;
-import com.feilong.core.net.urlutiltest.FeiLongURLUtilSuiteTests;
-
 /**
- * The Class FeiLongNetSuiteTests.
+ * The Class FeiLongPropertyUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                FeiLongParamUtilSuiteTests.class,
-                FeiLongURLUtilSuiteTests.class,
-                FeiLongURIUtilSuiteTests.class,
-
-        //                
+                GetValueTest.class
+        //
 })
-public class FeiLongNetSuiteTests{
+public class PropertyValueObtainerSuiteTests{
 
 }

@@ -52,6 +52,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetIntervalTimeParameterizedTest.class,
         //
 })
-public class FeiLongDateExtensionUtilSuiteTests{
+public class DateExtensionUtilSuiteTests{
 
 }

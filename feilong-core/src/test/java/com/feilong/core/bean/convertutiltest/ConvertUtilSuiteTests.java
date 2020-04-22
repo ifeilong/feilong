@@ -73,6 +73,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToSetVarargsTest.class,
         //
 })
-public class FeiLongConvertUtilSuiteTests{
+public class ConvertUtilSuiteTests{
 
 }

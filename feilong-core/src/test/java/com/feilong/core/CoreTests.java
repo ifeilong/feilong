@@ -13,28 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean.propertyutiltest;
+package com.feilong.core;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongPropertyUtilSuiteTests.
+ * The Class FeiLongCoreTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.8.3
  */
 @RunWith(Suite.class)
-@SuiteClasses({ //
-                CopyPropertiesTest.class,
-                DescribeTest.class,
-                FindValueOfTypeTest.class,
-                GetPropertyTest.class,
-                SetPropertyIfValueNotNullOrEmptyTest.class,
-                SetPropertyIfValueNotNullTest.class,
-                SetPropertyTest.class
-        //
-})
-public class FeiLongPropertyUtilSuiteTests{
+@SuiteClasses({
+                AlphabetTest.class,
+                CharsetTypeTest.class,
+
+                TimeIntervalTest.class,
+
+                DefaultRuntimeExceptionTest.class,
+
+                ValidatorTest.class,
+                ValidatorIsNullOrEmptyParameterizedTest.class,
+                ValidatorIsNotNullOrEmptyParameterizedTest.class, })
+public class CoreTests{
 
 }

@@ -19,8 +19,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.date.dateextensionutiltest.FeiLongDateExtensionUtilSuiteTests;
-import com.feilong.core.date.dateutiltest.FeiLongDateUtilSuiteTests;
+import com.feilong.core.date.dateextensionutiltest.DateExtensionUtilSuiteTests;
+import com.feilong.core.date.dateutiltest.DateUtilSuiteTests;
 
 /**
  * The Class FeiLongDateSuiteTests.
@@ -32,11 +32,11 @@ import com.feilong.core.date.dateutiltest.FeiLongDateUtilSuiteTests;
 @SuiteClasses({
                 CalendarUtilTest.class, //
 
-                FeiLongDateExtensionUtilSuiteTests.class,
-                FeiLongDateUtilSuiteTests.class,
+                DateExtensionUtilSuiteTests.class,
+                DateUtilSuiteTests.class,
 
         //
 })
-public class FeiLongDateSuiteTests{
+public class DateSuiteTests{
 
 }

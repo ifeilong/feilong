@@ -19,12 +19,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.FeiLongCoreTests;
-import com.feilong.core.bean.FeiLongBeanSuiteTests;
-import com.feilong.core.date.FeiLongDateSuiteTests;
+import com.feilong.core.CoreTests;
+import com.feilong.core.bean.BeanSuiteTests;
+import com.feilong.core.date.DateSuiteTests;
 import com.feilong.core.lang.LangSuiteTests;
-import com.feilong.core.net.FeiLongNetSuiteTests;
-import com.feilong.core.text.FeiLongTextSuiteTests;
+import com.feilong.core.net.NetSuiteTests;
+import com.feilong.core.text.TextSuiteTests;
 import com.feilong.core.util.UtilSuiteTests;
 import com.feilong.tools.slf4j.Slf4jUtilTest;
 
@@ -36,16 +36,16 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-                FeiLongCoreTests.class,
+                CoreTests.class,
 
                 Slf4jUtilTest.class,
                 //FeiLongJsonUtilSuiteTests.class,
 
-                FeiLongBeanSuiteTests.class,
-                FeiLongDateSuiteTests.class,
+                BeanSuiteTests.class,
+                DateSuiteTests.class,
                 LangSuiteTests.class,
-                FeiLongTextSuiteTests.class,
-                FeiLongNetSuiteTests.class,
+                TextSuiteTests.class,
+                NetSuiteTests.class,
                 UtilSuiteTests.class
         //
 })

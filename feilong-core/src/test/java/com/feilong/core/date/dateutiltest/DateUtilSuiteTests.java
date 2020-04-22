@@ -96,6 +96,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
         //                
 })
-public class FeiLongDateUtilSuiteTests{
+public class DateUtilSuiteTests{
 
 }

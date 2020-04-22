@@ -19,10 +19,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.bean.beanutiltest.FeiLongBeanUtilSuiteTests;
-import com.feilong.core.bean.convertutiltest.FeiLongConvertUtilSuiteTests;
-import com.feilong.core.bean.propertyValueobtainer.FeiLongPropertyValueObtainerSuiteTests;
-import com.feilong.core.bean.propertyutiltest.FeiLongPropertyUtilSuiteTests;
+import com.feilong.core.bean.beanutiltest.BeanUtilSuiteTests;
+import com.feilong.core.bean.convertutiltest.ConvertUtilSuiteTests;
+import com.feilong.core.bean.propertyValueobtainer.PropertyValueObtainerSuiteTests;
+import com.feilong.core.bean.propertyutiltest.PropertyUtilSuiteTests;
 
 /**
  * The Class FeiLongBeanSuiteTests.
@@ -32,12 +32,12 @@ import com.feilong.core.bean.propertyutiltest.FeiLongPropertyUtilSuiteTests;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FeiLongBeanUtilSuiteTests.class,
-                FeiLongConvertUtilSuiteTests.class,
-                FeiLongPropertyUtilSuiteTests.class,
-                FeiLongPropertyValueObtainerSuiteTests.class,
+                BeanUtilSuiteTests.class,
+                ConvertUtilSuiteTests.class,
+                PropertyUtilSuiteTests.class,
+                PropertyValueObtainerSuiteTests.class,
         //
 })
-public class FeiLongBeanSuiteTests{
+public class BeanSuiteTests{
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean.propertyValueobtainer;
+package com.feilong.core.bean.propertyutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -26,10 +26,15 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-
-                GetValueTest.class
+                CopyPropertiesTest.class,
+                DescribeTest.class,
+                FindValueOfTypeTest.class,
+                GetPropertyTest.class,
+                SetPropertyIfValueNotNullOrEmptyTest.class,
+                SetPropertyIfValueNotNullTest.class,
+                SetPropertyTest.class
         //
 })
-public class FeiLongPropertyValueObtainerSuiteTests{
+public class PropertyUtilSuiteTests{
 
 }

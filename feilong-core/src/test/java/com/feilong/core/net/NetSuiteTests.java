@@ -13,32 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean.beanutiltest;
+package com.feilong.core.net;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.net.paramutiltest.FeiLongParamUtilSuiteTests;
+import com.feilong.core.net.uriutiltest.FeiLongURIUtilSuiteTests;
+import com.feilong.core.net.urlutiltest.FeiLongURLUtilSuiteTests;
+
 /**
- * The Class FeiLongBeanUtilSuiteTests.
+ * The Class FeiLongNetSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.8.3
  */
-//@Ignore
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                CloneBeanTest.class,
-                CopyPropertiesTest.class,
-                CopyPropertiesExceptionTest.class,
 
-                //GetPropertyExceptionTest.class,
+                FeiLongParamUtilSuiteTests.class,
+                FeiLongURLUtilSuiteTests.class,
+                FeiLongURIUtilSuiteTests.class,
 
-                NewDynaBeanTest.class,
-                PopulateAliasBeanTest.class,
-                PopulateTest.class,
-                PopulateBigDecimalTest.class,
-        //
+        //                
 })
-public class FeiLongBeanUtilSuiteTests{
+public class NetSuiteTests{
 
 }
