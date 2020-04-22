@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -539,13 +538,12 @@ public class XmlUtil{
      */
     private static String format(Node node){
         try{
-            DOMSource domSource = new DOMSource(node);
-
             Writer writer = new StringWriter();
             StreamResult streamResult = new StreamResult(writer);
 
-            Transformer transformer = TransformerBuilder.build();
-            transformer.transform(domSource, streamResult);
+            TransformerBuilder.DEFAULT_TRANSFORMER.transform(//
+                            new DOMSource(node),
+                            streamResult);
 
             return writer.toString();
         }catch (TransformerException e){

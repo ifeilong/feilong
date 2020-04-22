@@ -29,6 +29,8 @@ import javax.xml.transform.TransformerFactory;
  */
 class TransformerBuilder{
 
+    public static final Transformer DEFAULT_TRANSFORMER = build();
+
     /** Don't let anyone instantiate this class. */
     private TransformerBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -44,7 +46,7 @@ class TransformerBuilder{
      * @return the transformer
      * @see javax.xml.transform.Transformer#setOutputProperty(String, String)
      */
-    static Transformer build(){
+    private static Transformer build(){
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         try{
             Transformer transformer = transformerFactory.newTransformer();
