@@ -19,12 +19,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.tools.emailaddress.FeiLongEmailAddressUtilSuiteTests;
+import com.feilong.tools.emailaddress.GetDomainTest;
+import com.feilong.tools.emailaddress.GetEmailProviderTest;
+import com.feilong.tools.emailaddress.GetUserTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                FeiLongEmailAddressUtilSuiteTests.class,
+                GetEmailProviderTest.class,
+                GetUserTest.class,
+                GetDomainTest.class,
         //                
 })
 public class FeiLongEmailProviderSuiteTests{

@@ -33,10 +33,11 @@ import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.tools.emailaddress.EmailAddressUtil;
 
-public class CompareTest2{
+public class CompareTemp{
 
-    private static final Logger        LOGGER            = LoggerFactory.getLogger(CompareTest2.class);
+    private static final Logger        LOGGER            = LoggerFactory.getLogger(CompareTemp.class);
 
     private static Map<String, String> EMAIL_ADDRESS_MAP = toMap(getResourceBundle("email-address"));
 
