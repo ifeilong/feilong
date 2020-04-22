@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.github.venusdrogon</groupId>
+		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-parent</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
@@ -16,25 +16,25 @@
 			</dependency> -->
 
 		<dependency>
-			<groupId>com.github.venusdrogon</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-context</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.venusdrogon</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-excel-loxia</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.venusdrogon</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-mail</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.venusdrogon</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-zip</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
