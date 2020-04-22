@@ -16,20 +16,20 @@
 package com.feilong.context.converter;
 
 import static com.feilong.core.DatePattern.TO_STRING_STYLE;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.feilong.context.converter.XMLMapBuilderStringToBeanConverter;
 import com.feilong.core.bean.ConvertUtil;
 
 /**
  * The Class ItemDtoXMLConverterTest.
  */
-public class ItemDtoXMLConverterTest{
+public class XMLMapBuilderStringToBeanConverterTest{
 
-    /**
-     * Convert.
-     */
     @Test
     @SuppressWarnings("static-method")
     public void convert(){
@@ -47,6 +47,18 @@ public class ItemDtoXMLConverterTest{
         XMLMapBuilderStringToBeanConverter<ItemDto> converter = new XMLMapBuilderStringToBeanConverter<>("/item/*");
         converter.setBeanClass(ItemDto.class);
 
-        converter.convert(xml);
+        ItemDto itemDto = converter.convert(xml);
+
+        assertThat(
+                        itemDto,
+                        allOf(//
+                                        hasProperty("buyerObtainPoint", is(20)),
+                                        hasProperty("district", is("101004")),
+                                        hasProperty("freightPayer", is("buyer")),
+                                        hasProperty("properties", is("1004:2586,12536:15248,58746:2546")),
+                                        hasProperty("title", is("test pro<duct name")),
+                                        hasProperty("city", is("1010"))
+
+                        ));
     }
 }
