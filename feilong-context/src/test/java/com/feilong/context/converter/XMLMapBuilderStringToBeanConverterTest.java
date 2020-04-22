@@ -25,9 +25,6 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 
-/**
- * The Class ItemDtoXMLConverterTest.
- */
 public class XMLMapBuilderStringToBeanConverterTest{
 
     @Test

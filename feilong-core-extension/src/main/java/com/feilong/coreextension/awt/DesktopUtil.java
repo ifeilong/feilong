@@ -73,6 +73,8 @@ public final class DesktopUtil{
         desktopAction(url, Action.OPEN);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 发送邮件.
      *

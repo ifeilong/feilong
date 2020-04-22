@@ -29,10 +29,6 @@ import javax.xml.transform.TransformerFactory;
  */
 class TransformerBuilder{
 
-    /** Static instance. */
-    // the static instance works for all types
-    public static final TransformerBuilder INSTANCE = new TransformerBuilder();
-
     /** Don't let anyone instantiate this class. */
     private TransformerBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
