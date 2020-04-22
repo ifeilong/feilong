@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io.readerutil;
+package com.feilong.context.codecreator;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                NewStringReaderTest.class,
-                ReadLineTest.class,
-                ToStringTest.class
-
+                SimpleSequenceTypeOrderCodeCreatorTest.class,
+                DefaultGuestShoppingcartLineIdCreatorTest.class
+        //                
 })
-public class FeiLongReaderUtilSuiteTests{
+public class CodeSuiteTests{
 
 }

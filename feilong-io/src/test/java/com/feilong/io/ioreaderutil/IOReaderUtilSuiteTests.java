@@ -13,25 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io.iowriteutil;
+package com.feilong.io.ioreaderutil;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * IOWriteUtil相关测试套餐.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                IOWriteUtilInputStreamTest.class,
-                WriteDirectoryAndFileTest.class,
+                ReadToStringFileInputStreamTest.class,
+                ReadToStringInputStreamTest.class,
+
+                ReadToStringFileAndCharsetNameTest.class,
+                ReadToStringStringFilePathAndCharsetNameTest.class,
+
+                ResolverFileAndLineNumberReaderTest.class,
+                ResolverFilePathAndLineNumberReaderTest.class,
+                ResolverReaderAndLineNumberReaderTest.class,
+
+                ReadToStringReaderAndReaderConfigTest.class,
+
+                ReadToSetTest.class,
+                ReadToSetFilePathAndReaderConfigTest.class,
+
+                ReadToSetFileAndReaderConfigTest.class,
 
 })
-public class FeiLongIOWriteUtilSuiteTests{
+public class IOReaderUtilSuiteTests{
 
 }

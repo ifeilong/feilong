@@ -19,10 +19,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.lang.reflect.constructorutiltest.FeiLongConstructorUtilSuiteTests;
-import com.feilong.core.lang.reflect.fieldutiltest.FeiLongFieldUtilSuiteTests;
-import com.feilong.core.lang.reflect.methodutiltest.FeiLongMethodUtilSuiteTests;
-import com.feilong.core.lang.reflect.typeutiltest.FeiLongTypeUtilSuiteTests;
+import com.feilong.core.lang.reflect.constructorutiltest.ConstructorUtilSuiteTests;
+import com.feilong.core.lang.reflect.fieldutiltest.FieldUtilSuiteTests;
+import com.feilong.core.lang.reflect.methodutiltest.MethodUtilSuiteTests;
+import com.feilong.core.lang.reflect.typeutiltest.TypeUtilSuiteTests;
 
 /**
  * The Class FeiLongReflectSuiteTests.
@@ -31,10 +31,10 @@ import com.feilong.core.lang.reflect.typeutiltest.FeiLongTypeUtilSuiteTests;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FeiLongConstructorUtilSuiteTests.class,
-                FeiLongFieldUtilSuiteTests.class,
-                FeiLongMethodUtilSuiteTests.class,
-                FeiLongTypeUtilSuiteTests.class,
+                ConstructorUtilSuiteTests.class,
+                FieldUtilSuiteTests.class,
+                MethodUtilSuiteTests.class,
+                TypeUtilSuiteTests.class,
         //
 })
 public class ReflectSuiteTests{

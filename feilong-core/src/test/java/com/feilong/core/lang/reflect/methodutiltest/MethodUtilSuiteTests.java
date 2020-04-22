@@ -13,19 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.context.codecreator;
+package com.feilong.core.lang.reflect.methodutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * The Class FeiLongMethodUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
+                InvokeMethodWithParamsTest.class,
+                InvokeMethodWithParamsAndClassTest.class,
 
-                SimpleSequenceTypeOrderCodeCreatorTest.class,
-                DefaultGuestShoppingcartLineIdCreatorTest.class
-        //                
+                InvokeStaticMethodWithParamsTest.class,
+                InvokeStaticMethodWithParamsAndClassTest.class,
+                InvokeStaticMethodWithParamsPrivateTest.class,
+        //
 })
-public class FeiLongCodeSuiteTests{
+
+public class MethodUtilSuiteTests{
 
 }

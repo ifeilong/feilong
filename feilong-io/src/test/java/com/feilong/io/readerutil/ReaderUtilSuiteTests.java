@@ -13,28 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.reflect.methodutiltest;
+package com.feilong.io.readerutil;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongMethodUtilSuiteTests.
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.11.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                InvokeMethodWithParamsTest.class,
-                InvokeMethodWithParamsAndClassTest.class,
 
-                InvokeStaticMethodWithParamsTest.class,
-                InvokeStaticMethodWithParamsAndClassTest.class,
-                InvokeStaticMethodWithParamsPrivateTest.class,
-        //
+                NewStringReaderTest.class,
+                ReadLineTest.class,
+                ToStringTest.class
+
 })
-
-public class FeiLongMethodUtilSuiteTests{
+public class ReaderUtilSuiteTests{
 
 }

@@ -32,6 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetFieldValueTest.class,
         //
 })
-public class FeiLongFieldUtilSuiteTests{
+public class FieldUtilSuiteTests{
 
 }

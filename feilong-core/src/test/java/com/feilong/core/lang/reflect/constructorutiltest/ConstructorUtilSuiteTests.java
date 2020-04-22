@@ -32,6 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
         //
 })
-public class FeiLongConstructorUtilSuiteTests{
+public class ConstructorUtilSuiteTests{
 
 }

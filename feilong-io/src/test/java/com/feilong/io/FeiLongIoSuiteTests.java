@@ -19,12 +19,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.io.filenameutil.FeiLongFilenameUtilSuiteTests;
-import com.feilong.io.fileutil.FeiLongFileUtilSuiteTests;
-import com.feilong.io.inputstreamutil.FeiLongInputStreamUtilSuiteTests;
-import com.feilong.io.ioreaderutil.FeiLongIOReaderUtilSuiteTests;
-import com.feilong.io.iowriteutil.FeiLongIOWriteUtilSuiteTests;
-import com.feilong.io.readerutil.FeiLongReaderUtilSuiteTests;
+import com.feilong.io.filenameutil.FilenameUtilSuiteTests;
+import com.feilong.io.fileutil.FileUtilSuiteTests;
+import com.feilong.io.inputstreamutil.InputStreamUtilSuiteTests;
+import com.feilong.io.ioreaderutil.IOReaderUtilSuiteTests;
+import com.feilong.io.iowriteutil.IOWriteUtilSuiteTests;
+import com.feilong.io.readerutil.ReaderUtilSuiteTests;
 
 /**
  * The Class FeiLongIoSuiteTests.
@@ -34,14 +34,14 @@ import com.feilong.io.readerutil.FeiLongReaderUtilSuiteTests;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FeiLongFilenameUtilSuiteTests.class,
-                FeiLongFileUtilSuiteTests.class,
+                FilenameUtilSuiteTests.class,
+                FileUtilSuiteTests.class,
 
-                FeiLongInputStreamUtilSuiteTests.class,
+                InputStreamUtilSuiteTests.class,
 
-                FeiLongIOWriteUtilSuiteTests.class,
-                FeiLongIOReaderUtilSuiteTests.class,
-                FeiLongReaderUtilSuiteTests.class
+                IOWriteUtilSuiteTests.class,
+                IOReaderUtilSuiteTests.class,
+                ReaderUtilSuiteTests.class
 
 })
 

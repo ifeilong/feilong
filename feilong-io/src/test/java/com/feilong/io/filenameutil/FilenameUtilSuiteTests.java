@@ -13,33 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io.ioreaderutil;
+package com.feilong.io.filenameutil;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.11.0
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                ReadToStringFileInputStreamTest.class,
-                ReadToStringInputStreamTest.class,
+                GetParentPathListTest.class,
+                GetExtensionParameterizedTest.class,
 
-                ReadToStringFileAndCharsetNameTest.class,
-                ReadToStringStringFilePathAndCharsetNameTest.class,
-
-                ResolverFileAndLineNumberReaderTest.class,
-                ResolverFilePathAndLineNumberReaderTest.class,
-                ResolverReaderAndLineNumberReaderTest.class,
-
-                ReadToStringReaderAndReaderConfigTest.class,
-
-                ReadToSetTest.class,
-                ReadToSetFilePathAndReaderConfigTest.class,
-
-                ReadToSetFileAndReaderConfigTest.class,
+                GetExtensionLowerCaseTest.class,
+                GetExtensionLowerCaseParameterizedTest.class
 
 })
-public class FeiLongIOReaderUtilSuiteTests{
+public class FilenameUtilSuiteTests{
 
 }

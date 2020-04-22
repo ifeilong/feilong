@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.reflect.typeutiltest;
+package com.feilong.io.iowriteutil;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongTypeUtilSuiteTests.
- *
+ * IOWriteUtil相关测试套餐.
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.11.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                GetGenericInterfacesParameterizedRawTypesTest.class,
-                GetGenericSuperclassParameterizedRawTypesTest.class,
-        //
-})
 
-public class FeiLongTypeUtilSuiteTests{
+                IOWriteUtilInputStreamTest.class,
+                WriteDirectoryAndFileTest.class,
+
+})
+public class IOWriteUtilSuiteTests{
 
 }

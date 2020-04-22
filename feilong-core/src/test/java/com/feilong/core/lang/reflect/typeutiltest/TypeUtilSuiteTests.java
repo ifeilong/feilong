@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io.filenameutil;
+package com.feilong.core.lang.reflect.typeutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * 
+ * The Class FeiLongTypeUtilSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-
-                GetParentPathListTest.class,
-                GetExtensionParameterizedTest.class,
-
-                GetExtensionLowerCaseTest.class,
-                GetExtensionLowerCaseParameterizedTest.class
-
+                GetGenericInterfacesParameterizedRawTypesTest.class,
+                GetGenericSuperclassParameterizedRawTypesTest.class,
+        //
 })
-public class FeiLongFilenameUtilSuiteTests{
+
+public class TypeUtilSuiteTests{
 
 }

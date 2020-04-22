@@ -32,6 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToStringWithChartNameTest.class
 
 })
-public class FeiLongInputStreamUtilSuiteTests{
+public class InputStreamUtilSuiteTests{
 
 }

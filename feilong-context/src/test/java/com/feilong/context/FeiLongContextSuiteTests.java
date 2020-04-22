@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.context.codecreator.FeiLongCodeSuiteTests;
+import com.feilong.context.codecreator.CodeSuiteTests;
 import com.feilong.context.condition.SimpleParamNameConfigConditionTest;
 import com.feilong.context.converter.XMLMapBuilderStringToBeanConverterTest;
 import com.feilong.context.format.JsonStringFormatterTest;
@@ -38,7 +38,7 @@ import com.feilong.context.valueloader.SimpleParamNameValueLoaderTest;
                 HttpRequestUriResolverTest.class,
                 ReturnResultBuilderTest.class,
 
-                FeiLongCodeSuiteTests.class,
+                CodeSuiteTests.class,
 
                 XMLMapBuilderStringToBeanConverterTest.class,
 

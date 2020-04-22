@@ -55,6 +55,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToByteArrayFileTest.class
 
 })
-public class FeiLongFileUtilSuiteTests{
+public class FileUtilSuiteTests{
 
 }
