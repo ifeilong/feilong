@@ -15,7 +15,6 @@
 		<module>feilong-tools-barcode</module>
 		<module>feilong-tools-iplookup</module>
 		<module>feilong-tools-emailaddress</module>
-		<module>feilong-tools-money</module>
 		<module>feilong-tools-mobile</module>
 	</modules>
 

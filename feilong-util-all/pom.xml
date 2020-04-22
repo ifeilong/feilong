@@ -125,13 +125,6 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!-- feilong-tools-money -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-money</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
-
 		<!--feilong-tools-iplookup -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
