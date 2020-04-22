@@ -13,39 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.aggregateutiltest;
+package com.feilong.core.lang.annotation;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongAggregateUtilSuiteTests.
+ * The Class FeiLongArrayUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                AvgArrayTest.class,
-                AvgTest.class,
-
-                GroupCountTest.class,
-                GroupCountPredicateTest.class,
-
-                GroupSumTest.class,
-                GroupSumPredicateTest.class,
-
-                GroupCountArrayTest.class,
-                GroupCountArrayPredicateTest.class,
-                GroupCountArrayAndTransformerTest.class,
-                GroupCountArrayAndTransformerPredicateTest.class,
-
-                SumArrayPredicateTest.class,
-                SumArrayTest.class,
-                SumPredicateTest.class,
-                SumTest.class,
+                DefaultAnnotationToStringBuilderTest.class,
         //
 })
-public class FeiLongAggregateUtilSuiteTests{
+public class AnnotationToStringBuilderSuiteTests{
 
 }

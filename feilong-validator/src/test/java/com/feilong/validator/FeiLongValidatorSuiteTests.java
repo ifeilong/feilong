@@ -20,12 +20,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.util.regexutiltest.FeiLongRegexUtilSuiteTests;
+import com.feilong.core.util.regexutiltest.RegexPatternSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                FeiLongRegexUtilSuiteTests.class })
+                RegexPatternSuiteTests.class })
 public class FeiLongValidatorSuiteTests{
 
 }

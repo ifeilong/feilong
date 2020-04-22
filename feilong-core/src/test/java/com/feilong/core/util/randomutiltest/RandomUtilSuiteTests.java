@@ -13,29 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.resourcebundleutiltest;
+package com.feilong.core.util.randomutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongResourceBundleUtilSuiteTests.
+ * The Class FeiLongRandomUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                GetResourceBundleWithBaseNameAndLocaleTest.class,
-                GetResourceBundleWithBaseNameTest.class,
-                GetResourceBundleWithInputStreamTest.class,
-                GetValueWithResourceBundleTest.class,
-                GetValueWithResourceBundleParameterizedTest.class,
-                ToAliasBeanTest.class,
-                ToMapTest.class,
-                ToPropertiesTest.class
+                CreateRandomFromStringTest.class,
+                CreateRandomStringTest.class,
+                CreateRandomWithLengthTest.class,
         //
 })
-public class FeiLongResourceBundleUtilSuiteTests{
+public class RandomUtilSuiteTests{
 
 }

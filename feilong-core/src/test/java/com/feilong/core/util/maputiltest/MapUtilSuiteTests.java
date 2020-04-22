@@ -56,6 +56,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetTest.class,
         //
 })
-public class FeiLongMapUtilSuiteTests{
+public class MapUtilSuiteTests{
 
 }

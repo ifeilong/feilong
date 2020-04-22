@@ -13,36 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.stringutiltest;
+package com.feilong.core.lang.reflect;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.lang.reflect.constructorutiltest.FeiLongConstructorUtilSuiteTests;
+import com.feilong.core.lang.reflect.fieldutiltest.FeiLongFieldUtilSuiteTests;
+import com.feilong.core.lang.reflect.methodutiltest.FeiLongMethodUtilSuiteTests;
+import com.feilong.core.lang.reflect.typeutiltest.FeiLongTypeUtilSuiteTests;
+
 /**
- * The Class FeiLongStringUtilSuiteTests.
+ * The Class FeiLongReflectSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FormatParameterizedTest.class,
-
-                GetBytesTest.class,
-                GetBytesAndCharsetNameTest.class,
-
-                ReplaceAllParameterizedTest.class,
-                ReplaceParameterizedTest.class,
-                ReplaceValuesMapTest.class,
-                SubstringBeginIndexTest.class,
-                SubstringLastTest.class,
-                SubstringStartIndexAndLengthParameterizedTest.class,
-                SubstringWithoutLastLastLengthTest.class,
-                SubstringWithoutLastLastStringTest.class,
-                TokenizeToStringArrayTest.class,
-                TokenizeToStringArrayWithArgsTest.class,
+                FeiLongConstructorUtilSuiteTests.class,
+                FeiLongFieldUtilSuiteTests.class,
+                FeiLongMethodUtilSuiteTests.class,
+                FeiLongTypeUtilSuiteTests.class,
         //
 })
-public class FeiLongStringUtilSuiteTests{
+public class ReflectSuiteTests{
 
 }

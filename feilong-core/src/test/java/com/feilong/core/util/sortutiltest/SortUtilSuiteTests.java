@@ -46,6 +46,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 SortMapComparatorTest.class,
         //
 })
-public class FeiLongSortUtilSuiteTests{
+public class SortUtilSuiteTests{
 
 }

@@ -13,24 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.objectutiltest;
+package com.feilong.core.util.aggregateutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongObjectUtilSuiteTests.
+ * The Class FeiLongAggregateUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-                IsArrayParameterizedTest.class,
-                IsPrimitiveArrayParameterizedTest.class,
-                DefaultIfNullOrEmptyParameterizedTest.class,
+@SuiteClasses({ //
+                AvgArrayTest.class,
+                AvgTest.class,
 
-                ObjectUtilTest.class, })
-public class FeiLongObjectUtilSuiteTests{
+                GroupCountTest.class,
+                GroupCountPredicateTest.class,
+
+                GroupSumTest.class,
+                GroupSumPredicateTest.class,
+
+                GroupCountArrayTest.class,
+                GroupCountArrayPredicateTest.class,
+                GroupCountArrayAndTransformerTest.class,
+                GroupCountArrayAndTransformerPredicateTest.class,
+
+                SumArrayPredicateTest.class,
+                SumArrayTest.class,
+                SumPredicateTest.class,
+                SumTest.class,
+        //
+})
+public class AggregateUtilSuiteTests{
 
 }

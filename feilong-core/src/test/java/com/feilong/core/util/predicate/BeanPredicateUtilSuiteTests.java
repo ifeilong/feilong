@@ -50,6 +50,6 @@ import com.feilong.core.util.predicate.beanpredicateutil.EqualPredicateTest;
                 ContainsPredicateTest.class
         //
 })
-public class FeiLongBeanPredicateUtilSuiteTests{
+public class BeanPredicateUtilSuiteTests{
 
 }

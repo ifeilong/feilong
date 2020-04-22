@@ -32,6 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
         //
 })
-public class FeiLongTransformerSuiteTests{
+public class TransformerSuiteTests{
 
 }

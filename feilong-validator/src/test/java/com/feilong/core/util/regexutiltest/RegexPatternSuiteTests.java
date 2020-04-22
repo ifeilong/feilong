@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.classloaderutiltest;
+package com.feilong.core.util.regexutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongClassLoaderUtilSuiteTests.
+ * The Class FeiLongRegexPatternSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                GetResourceTest.class,
-                GetResourceInAllClassLoaderTest.class,
-                GetResourceAsStreamTest.class,
-        //
-})
-public class FeiLongClassLoaderUtilSuiteTests{
+
+                MobilephonePatternParameterizedTest.class,
+                TelephonePatternParameterizedTest.class,
+                TelephoneMustAreaCodePatternParameterizedTest.class, })
+public class RegexPatternSuiteTests{
 
 }

@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.randomutiltest;
+package com.feilong.core.util.closure;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongRandomUtilSuiteTests.
- *
+ * 
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.10.7
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                CreateRandomFromStringTest.class,
-                CreateRandomStringTest.class,
-                CreateRandomWithLengthTest.class,
+
+                BeanPropertyValueChangeClosureTest.class,
         //
 })
-public class FeiLongRandomUtilSuiteTests{
+public class ClosureSuiteTests{
 
 }

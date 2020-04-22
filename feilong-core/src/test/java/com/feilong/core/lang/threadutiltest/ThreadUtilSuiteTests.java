@@ -13,27 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.classutiltest;
+package com.feilong.core.lang.threadutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongClassUtilSuiteTests.
+ * The Class FeiLongThreadUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                GetClassTest.class,
-                IsAssignableFromParameterizedTest.class,
-                IsInstanceAnyClassParameterizedTest.class,
-                IsInstanceParameterizedTest.class,
-                IsInterfaceParameterizedTest.class,
-                ClassUtilToClassTest.class,
-        //                
+                SleepTest.class,
+
+                ExecuteWithPartitionPerHandlerTest.class,
+                ExecuteWithPartitionRunnableBuilderTest.class,
+
+                ExecuteWithPartitionRunnableBuilderParamMapTest.class,
+
+                ExecuteConfigWithParamMapTest.class,
+                ExecuteCountTest.class,
+
+                PartitionEachSizeBuilderParameterizedTest.class,
+                PartitionEachSizeBuilderTest.class
+        //
 })
-public class FeiLongClassUtilSuiteTests{
+public class ThreadUtilSuiteTests{
 
 }

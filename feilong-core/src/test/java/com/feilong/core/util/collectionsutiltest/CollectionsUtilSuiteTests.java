@@ -76,6 +76,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 SelectNotNullOrEmptyStringPredicateTest.class,
         //
 })
-public class FeiLongCollectionsUtilSuiteTests{
+public class CollectionsUtilSuiteTests{
 
 }

@@ -13,33 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.threadutiltest;
+package com.feilong.core.util.comparator;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.util.comparator.beancomparatorutiltest.FeiLongBeanComparatorUtilSuiteTests;
+import com.feilong.core.util.comparator.propertycomparator.FeiLongPropertyComparatorSuiteTests;
+import com.feilong.core.util.comparator.regexgroupnumbercomparator.RegexGroupNumberComparatorTest;
+import com.feilong.core.util.comparator.sorthelpertest.FeiLongSortHelperSuiteTests;
+
 /**
- * The Class FeiLongThreadUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                SleepTest.class,
 
-                ExecuteWithPartitionPerHandlerTest.class,
-                ExecuteWithPartitionRunnableBuilderTest.class,
+                FeiLongBeanComparatorUtilSuiteTests.class,
+                FeiLongSortHelperSuiteTests.class,
 
-                ExecuteWithPartitionRunnableBuilderParamMapTest.class,
+                ComparatorUtilTest.class,
 
-                ExecuteConfigWithParamMapTest.class,
-                ExecuteCountTest.class,
+                FeiLongPropertyComparatorSuiteTests.class,
 
-                PartitionEachSizeBuilderParameterizedTest.class,
-                PartitionEachSizeBuilderTest.class
+                RegexGroupNumberComparatorTest.class,
         //
 })
-public class FeiLongThreadUtilSuiteTests{
+public class ComparatorSuiteTests{
 
 }

@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.annotation;
+package com.feilong.core.lang.enumutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongArrayUtilSuiteTests.
+ * The Class FeiLongEnumUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                DefaultAnnotationToStringBuilderTest.class,
+                GetEnumByPropertyValueTest.class,
+                GetEnumByPropertyValueParameterizedTest.class,
+
+                GetEnumByPropertyValueIgnoreCaseTest.class,
+                GetEnumByPropertyValueIgnoreCaseParameterizedTest.class,
         //
 })
-public class FeiLongAnnotationToStringBuilderSuiteTests{
+public class EnumUtilSuiteTests{
 
 }

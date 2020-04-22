@@ -22,10 +22,10 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.feilong.core.FeiLongCoreTests;
 import com.feilong.core.bean.FeiLongBeanSuiteTests;
 import com.feilong.core.date.FeiLongDateSuiteTests;
-import com.feilong.core.lang.FeiLongLangSuiteTests;
+import com.feilong.core.lang.LangSuiteTests;
 import com.feilong.core.net.FeiLongNetSuiteTests;
 import com.feilong.core.text.FeiLongTextSuiteTests;
-import com.feilong.core.util.FeiLongUtilSuiteTests;
+import com.feilong.core.util.UtilSuiteTests;
 import com.feilong.tools.slf4j.Slf4jUtilTest;
 
 /**
@@ -43,10 +43,10 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
 
                 FeiLongBeanSuiteTests.class,
                 FeiLongDateSuiteTests.class,
-                FeiLongLangSuiteTests.class,
+                LangSuiteTests.class,
                 FeiLongTextSuiteTests.class,
                 FeiLongNetSuiteTests.class,
-                FeiLongUtilSuiteTests.class
+                UtilSuiteTests.class
         //
 })
 public class FeiLongSuiteTests{

@@ -13,26 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.enumutiltest;
+package com.feilong.core.lang.classutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongEnumUtilSuiteTests.
+ * The Class FeiLongClassUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                GetEnumByPropertyValueTest.class,
-                GetEnumByPropertyValueParameterizedTest.class,
-
-                GetEnumByPropertyValueIgnoreCaseTest.class,
-                GetEnumByPropertyValueIgnoreCaseParameterizedTest.class,
-        //
+                GetClassTest.class,
+                IsAssignableFromParameterizedTest.class,
+                IsInstanceAnyClassParameterizedTest.class,
+                IsInstanceParameterizedTest.class,
+                IsInterfaceParameterizedTest.class,
+                ClassUtilToClassTest.class,
+        //                
 })
-public class FeiLongEnumUtilSuiteTests{
+public class ClassUtilSuiteTests{
 
 }

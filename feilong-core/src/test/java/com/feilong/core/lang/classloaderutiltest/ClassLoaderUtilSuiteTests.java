@@ -13,34 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.comparator;
+package com.feilong.core.lang.classloaderutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.util.comparator.beancomparatorutiltest.FeiLongBeanComparatorUtilSuiteTests;
-import com.feilong.core.util.comparator.propertycomparator.FeiLongPropertyComparatorSuiteTests;
-import com.feilong.core.util.comparator.regexgroupnumbercomparator.RegexGroupNumberComparatorTest;
-import com.feilong.core.util.comparator.sorthelpertest.FeiLongSortHelperSuiteTests;
-
 /**
+ * The Class FeiLongClassLoaderUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-
-                FeiLongBeanComparatorUtilSuiteTests.class,
-                FeiLongSortHelperSuiteTests.class,
-
-                ComparatorUtilTest.class,
-
-                FeiLongPropertyComparatorSuiteTests.class,
-
-                RegexGroupNumberComparatorTest.class,
+                GetResourceTest.class,
+                GetResourceInAllClassLoaderTest.class,
+                GetResourceAsStreamTest.class,
         //
 })
-public class FeiLongComparatorSuiteTests{
+public class ClassLoaderUtilSuiteTests{
 
 }

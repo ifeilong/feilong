@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.regexutiltest;
+package com.feilong.core.lang.objectutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongRegexPatternSuiteTests.
+ * The Class FeiLongObjectUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
-@SuiteClasses({ //
+@SuiteClasses({
+                IsArrayParameterizedTest.class,
+                IsPrimitiveArrayParameterizedTest.class,
+                DefaultIfNullOrEmptyParameterizedTest.class,
 
-                MobilephonePatternParameterizedTest.class,
-                TelephonePatternParameterizedTest.class,
-                TelephoneMustAreaCodePatternParameterizedTest.class, })
-public class FeiLongRegexUtilSuiteTests{
+                ObjectUtilTest.class, })
+public class ObjectUtilSuiteTests{
 
 }

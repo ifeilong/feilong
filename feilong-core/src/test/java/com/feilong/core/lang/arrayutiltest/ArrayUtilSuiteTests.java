@@ -30,6 +30,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 NewArrayTest.class,
         //
 })
-public class FeiLongArrayUtilSuiteTests{
+public class ArrayUtilSuiteTests{
 
 }

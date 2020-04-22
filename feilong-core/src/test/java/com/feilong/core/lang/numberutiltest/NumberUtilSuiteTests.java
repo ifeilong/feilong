@@ -62,6 +62,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsEqualsParameterizedTest.class,
         //
 })
-public class FeiLongNumberUtilSuiteTests{
+public class NumberUtilSuiteTests{
 
 }

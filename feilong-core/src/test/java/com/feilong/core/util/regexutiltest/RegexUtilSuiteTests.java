@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.closure;
+package com.feilong.core.util.regexutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * 
- * 
+ * The Class FeiLongRegexPatternSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.7
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                BeanPropertyValueChangeClosureTest.class,
-        //
+                GroupIntTest.class,
+                GroupTest.class,
+                MatchesTest.class,
+
 })
-public class FeiLongClosureSuiteTests{
+public class RegexUtilSuiteTests{
 
 }
