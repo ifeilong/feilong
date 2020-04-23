@@ -62,7 +62,7 @@
 	<properties>
 		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
 		<version.feilong-platform>3.0.0-SNAPSHOT</version.feilong-platform>
-		<version.feilong-common-test>3.0.0</version.feilong-common-test>
+		<version.feilong-common-test>4.0.0</version.feilong-common-test>
 
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -395,10 +395,12 @@
 
 		<!-- feilong-common-test -->
 		<dependency>
-			<groupId>com.feilong.test</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-common-test</artifactId>
+			<version>${version.feilong-common-test}</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<!--*********************dependencyManagement****************************** -->
@@ -1008,14 +1010,6 @@
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest-library</artifactId>
 				<version>${version.hamcrest-library}</version>
-				<scope>test</scope>
-			</dependency>
-
-			<!-- feilong-common-test -->
-			<dependency>
-				<groupId>com.feilong.test</groupId>
-				<artifactId>feilong-common-test</artifactId>
-				<version>${version.feilong-common-test}</version>
 				<scope>test</scope>
 			</dependency>
 
