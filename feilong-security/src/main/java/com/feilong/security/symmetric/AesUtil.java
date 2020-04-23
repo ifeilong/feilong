@@ -24,6 +24,9 @@ import com.feilong.security.symmetric.builder.KeyBuilder;
  * <p>
  * 是替代DES算法的新算法,可提供很好的安全性.
  * </p>
+ * <p>
+ * AES,默认 AES/ECB/PKCS5Padding
+ * </p>
  * 
  * <p>
  * 数据示例: <span style="color:green">MKNbK/ieTaepCk8SefgPMw==</span>
