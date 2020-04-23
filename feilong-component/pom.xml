@@ -9,12 +9,6 @@
 	<artifactId>feilong-component</artifactId>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>com.feilong.platform.spring</groupId>
-			<artifactId>feilong-spring-all</artifactId>
-			<version>4.2.0</version>
-			</dependency> -->
-
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-context</artifactId>
