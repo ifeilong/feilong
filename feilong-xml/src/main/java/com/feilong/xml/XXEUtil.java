@@ -22,13 +22,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 普通的 XXEUtil.
+ * XML外部实体注入漏洞(XML External Entity Injection，简称XXE)，该安全问题是由XML组件默认没有禁用外部实体引用导致.
  * 
+ * <ul>
+ * <li>XXE的攻击原理：外界攻击者通过模拟回调通知，在回调通知中引入不安全的XML，商户服务器上执行系统命令</li>
+ * <li>XXE漏洞可能带来的危害：可读取任意文件；执行系统命令；探测内网端口；攻击内网网站</li>
+ * </ul>
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.12.1
  */
 public final class XXEUtil{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(XXEUtil.class);
 
     /** Don't let anyone instantiate this class. */
@@ -44,7 +50,7 @@ public final class XXEUtil{
      * 关闭XXE，避免漏洞攻击.
      * 
      * <p>
-     * XML外部实体注入漏洞(XML External Entity Injection，简称 XXE)，该安全问题是由XML组件默认没有禁用外部实体引用导致，非微信支付系统存在漏洞。
+     * XML外部实体注入漏洞(XML External Entity Injection，简称XXE)，该安全问题是由XML组件默认没有禁用外部实体引用导致。
      * </p>
      * 
      * see:
@@ -59,6 +65,9 @@ public final class XXEUtil{
      * @param documentBuilderFactory
      *            DocumentBuilderFactory
      * @return DocumentBuilderFactory
+     * @see <a href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=23_5">关于XML解析存在的安全问题指引</a>
+     * @see <a href=
+     *      "https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#C.2FC.2B.2B">https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#C.2FC.2B.2B</a>
      */
     public static DocumentBuilderFactory disableXXE(DocumentBuilderFactory documentBuilderFactory){
         String feature = "";
