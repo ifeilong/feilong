@@ -339,7 +339,7 @@ public class LoxiaExcelWriteUtil{
         try{
             return resource.getInputStream();
         }catch (IOException e){
-            throw new UncheckedIOException(e);
+            throw new UncheckedIOException("location:[" + location + "]", e);
         }
     }
 }

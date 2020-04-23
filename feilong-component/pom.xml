@@ -8,6 +8,15 @@
 	</parent>
 	<artifactId>feilong-component</artifactId>
 
+	<properties>
+		<version.loxia>2.5.2</version.loxia>
+
+		<version.poi>3.16</version.poi>
+
+		<!-- 新版poi需要这个jar -->
+		<version.ooxml-schemas>1.1</version.ooxml-schemas>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
@@ -67,6 +76,81 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
+
+
+		<!-- ***************************** poi ***************************** -->
+		<!-- poi HSSF is our port of the Microsoft Excel 97(-2007) file format (BIFF8) to pure Java. -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${version.poi}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- poi-ooxml XSSF is our port of the Microsoft Excel XML (2007+) file format (OOXML) to pure Java -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${version.poi}</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>com.github.virtuald</groupId>
+					<artifactId>curvesapi</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- poi-ooxml-schemas是ooxml-schemas的精简版 -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>ooxml-schemas</artifactId>
+			<version>${version.ooxml-schemas}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>loxia2</groupId>
+			<artifactId>loxia2-support</artifactId>
+			<version>${version.loxia}</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>spy</groupId>
+					<artifactId>spymemcached</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.javax.media</groupId>
+					<artifactId>jai_codec</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.javax.media</groupId>
+					<artifactId>jai_core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jsoup</groupId>
+					<artifactId>jsoup</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
 		</dependency>
 
 

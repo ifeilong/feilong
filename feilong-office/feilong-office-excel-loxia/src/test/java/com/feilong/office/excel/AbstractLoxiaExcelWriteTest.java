@@ -25,59 +25,57 @@ import java.util.Map;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FilenameUtil;
 import com.feilong.office.excel.loxia.LoxiaExcelWriteUtil;
+import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
-public abstract class AbstractLoxiaExcelWriteTest{
+/**
+ * The Class AbstractLoxiaExcelWriteTest.
+ */
+public abstract class AbstractLoxiaExcelWriteTest extends AbstractTest{
 
-    private static String templateFloder = "/Users/feilong/workspace/feilong/feilong/feilong-office/feilong-office-excel-loxia/src/test/resources/loxia/";
-
+    /**
+     * Builds the.
+     *
+     * @param <T>
+     *            the generic type
+     * @param templateFileName
+     *            the template file name
+     * @param configurations
+     *            the configurations
+     * @param sheetName
+     *            the sheet name
+     * @param dataName
+     *            the data name
+     * @param list
+     *            the list
+     */
     protected static <T> void build(String templateFileName,String configurations,String sheetName,String dataName,List<T> list){
-        build(templateFloder, templateFileName, configurations, sheetName, dataName, list);
-    }
-
-    protected static void build(String templateFileName,String configurations,String[] sheetNames,Map<String, Object> beans){
-        build(templateFloder, templateFileName, configurations, sheetNames, beans);
-    }
-    //---------------------------------------------------------------
-
-    private static <T> void build(
-                    String templateFloder,
-                    String templateFileName,
-                    String configurations,
-                    String sheetName,
-                    String dataName,
-                    List<T> list){
         Map<String, Object> beans = toMap(dataName, (Object) list);
 
-        build(templateFloder, templateFileName, configurations, sheetName, beans);
+        build(templateFileName, configurations, toArray(sheetName), beans);
     }
 
-    //---------------------------------------------------------------
-
-    private static void build(
-                    String templateFloder,
-                    String templateFileName,
-                    String configurations,
-                    String sheetName,
-                    Map<String, Object> beans){
-
-        build(templateFloder, templateFileName, configurations, toArray(sheetName), beans);
-    }
-
-    private static void build(
-                    String templateFloder,
-                    String templateFileName,
-                    String configurations,
-                    String[] sheetNames,
-                    Map<String, Object> beans){
-
+    /**
+     * Builds the.
+     *
+     * @param templateFileName
+     *            the template file name
+     * @param configurations
+     *            the configurations
+     * @param sheetNames
+     *            the sheet names
+     * @param beans
+     *            the beans
+     */
+    protected static void build(String templateFileName,String configurations,String[] sheetNames,Map<String, Object> beans){
         String outputFileName = Slf4jUtil.format(
                         "/Users/feilong/Downloads/{}{}.{}",
                         sheetNames,
                         nowTimestamp(),
                         FilenameUtil.getExtension(templateFileName));
 
-        LoxiaExcelWriteUtil.write(templateFloder + templateFileName, configurations, sheetNames, beans, outputFileName);
+        String excelTemplateLocation = "classpath:loxia/" + templateFileName;
+        LoxiaExcelWriteUtil.write(excelTemplateLocation, configurations, sheetNames, beans, outputFileName);
 
         DesktopUtil.open(outputFileName);
     }

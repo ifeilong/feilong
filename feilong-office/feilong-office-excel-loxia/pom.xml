@@ -9,8 +9,6 @@
 	<artifactId>feilong-office-excel-loxia</artifactId>
 
 	<properties>
-		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
 		<version.loxia>2.5.2</version.loxia>
 
 		<version.poi>3.16</version.poi>
@@ -31,6 +29,7 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>${version.poi}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- poi-ooxml XSSF is our port of the Microsoft Excel XML (2007+) file format (OOXML) to pure Java -->
@@ -38,6 +37,13 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>${version.poi}</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>com.github.virtuald</groupId>
+					<artifactId>curvesapi</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- poi-ooxml-schemas是ooxml-schemas的精简版 -->
@@ -45,12 +51,6 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>ooxml-schemas</artifactId>
 			<version>${version.ooxml-schemas}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-examples</artifactId>
-			<version>${version.poi}</version>
 			<optional>true</optional>
 		</dependency>
 
@@ -58,6 +58,7 @@
 			<groupId>loxia2</groupId>
 			<artifactId>loxia2-support</artifactId>
 			<version>${version.loxia}</version>
+			<optional>true</optional>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>

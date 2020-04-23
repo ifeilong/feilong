@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
 
-public class ExcelWriteConsultantTest extends AbstractLoxiaExcelWriteTest{
+public class ConsultantExcelWriteTest extends AbstractLoxiaExcelWriteTest{
 
     @Test
     public void test(){

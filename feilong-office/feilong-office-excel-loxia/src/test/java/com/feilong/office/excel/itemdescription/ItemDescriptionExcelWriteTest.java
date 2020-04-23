@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
 
-public class ExcelWriteItemDescriptionCommandTest extends AbstractLoxiaExcelWriteTest{
+public class ItemDescriptionExcelWriteTest extends AbstractLoxiaExcelWriteTest{
 
     @Test
     public void test(){

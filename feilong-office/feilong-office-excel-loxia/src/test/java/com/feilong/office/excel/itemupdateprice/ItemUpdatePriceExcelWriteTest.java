@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
 
-public class ExcelWriteItemUpdatePriceCommandTest extends AbstractLoxiaExcelWriteTest{
+public class ItemUpdatePriceExcelWriteTest extends AbstractLoxiaExcelWriteTest{
 
     @Test
     public void test(){
