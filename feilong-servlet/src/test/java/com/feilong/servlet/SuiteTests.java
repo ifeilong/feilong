@@ -19,13 +19,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.servlet.http.CookieUtilTest;
 import com.feilong.servlet.http.requestutil.RequstUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
+                CookieUtilTest.class,
                 RequstUtilSuiteTests.class
         //
 })
-public class FeiLongServletSuiteTests{
+public class SuiteTests{
 
 }

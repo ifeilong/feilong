@@ -298,7 +298,6 @@ public final class CookieUtil{
         }
 
         //---------------------------------------------------------------
-
         Map<String, String> map = new TreeMap<>();
         for (Cookie cookie : cookies){
             map.put(cookie.getName(), getReadValue(cookie));

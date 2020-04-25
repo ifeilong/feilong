@@ -21,14 +21,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.servlet.http.RequestUtil;
 
 public class IsSupportMethodTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(IsSupportMethodTest.class);
 
     @Test
     public void testIsSupportMethod(){

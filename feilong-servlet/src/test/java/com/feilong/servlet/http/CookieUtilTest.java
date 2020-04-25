@@ -15,28 +15,24 @@
  */
 package com.feilong.servlet.http;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import javax.servlet.http.Cookie;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.servlet.http.entity.CookieEntity;
+import com.feilong.test.AbstractTest;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.5.4
- */
-public class CookieUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CookieUtilTest.class);
+public class CookieUtilTest extends AbstractTest{
 
     @Test
-    public final void test(){
+    public void test(){
         CookieEntity cookieEntity = new CookieEntity("name", "jinxin");
         cookieEntity.setHttpOnly(false);
 
@@ -46,21 +42,34 @@ public class CookieUtilTest{
                         , "httpOnly"//@since Servlet 3.0
         );
 
-        LOGGER.debug(JsonUtil.format(cookie));
+        assertThat(
+                        cookie,
+                        allOf(//
+                                        hasProperty("name", is("name")),
+                                        hasProperty("httpOnly", is(false)),
+                                        hasProperty("value", is("jinxin"))));
     }
 
     @Test
-    public final void test1(){
+    public void test1(){
         CookieEntity cookieEntity = new CookieEntity("name", "jinxin");
-        LOGGER.debug("cookieEntity:{}", JsonUtil.format(cookieEntity));
 
         CookieEntity cloneCookieEntity = BeanUtil.cloneBean(cookieEntity);
-        LOGGER.debug("cloneCookieEntity:{}", JsonUtil.format(cloneCookieEntity));
-
         cloneCookieEntity.setMaxAge(8888);
         cloneCookieEntity.setName("feilong");
 
-        LOGGER.debug("cookieEntity:{}", JsonUtil.format(cookieEntity));
-        LOGGER.debug("cloneCookieEntity:{}", JsonUtil.format(cloneCookieEntity));
+        assertThat(
+                        cloneCookieEntity,
+                        allOf(//
+                                        hasProperty("name", is("feilong")),
+                                        hasProperty("maxAge", is(8888)),
+                                        hasProperty("value", is("jinxin"))));
+
+        assertThat(
+                        cookieEntity,
+                        allOf(//
+                                        hasProperty("name", is("name")),
+                                        hasProperty("value", is("jinxin"))));
+
     }
 }

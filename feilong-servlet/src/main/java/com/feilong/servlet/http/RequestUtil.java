@@ -23,17 +23,15 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static com.feilong.servlet.http.HttpHeaders.ORIGIN;
-import static com.feilong.servlet.http.HttpHeaders.PROXY_CLIENT_IP;
 import static com.feilong.servlet.http.HttpHeaders.REFERER;
 import static com.feilong.servlet.http.HttpHeaders.USER_AGENT;
-import static com.feilong.servlet.http.HttpHeaders.WL_PROXY_CLIENT_IP;
-import static com.feilong.servlet.http.HttpHeaders.X_FORWARDED_FOR;
-import static com.feilong.servlet.http.HttpHeaders.X_REAL_IP;
 import static com.feilong.servlet.http.HttpHeaders.X_REQUESTED_WITH;
 import static com.feilong.servlet.http.HttpHeaders.X_REQUESTED_WITH_VALUE_AJAX;
 import static java.util.Collections.emptyMap;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -60,6 +58,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.EnumerationUtil;
 import com.feilong.core.util.MapUtil;
+import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.ReaderUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
@@ -269,6 +268,14 @@ public final class RequestUtil{
      */
     private static String       REQUEST_BODY_SCOPE_ATTRIBUTE_NAME = RequestUtil.class.getName() + ".REQUEST_BODY";
 
+    /**
+     * 获得用户真实IP 循环的IP头.
+     * 
+     * @since 3.0.0
+     */
+    private static String[]     IP_HEADER_NAMES                   = StringUtil.tokenizeToStringArray(
+                    ResourceBundleUtil.getValue(getResourceBundle("config/feilong-request-clientIP-headers"), "clientIP.headerNames"),
+                    ",");
     //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
@@ -830,6 +837,10 @@ public final class RequestUtil{
     /**
      * 获得客户端真实ip地址.
      * 
+     * <p>
+     * 这样做的好处是,对开发透明
+     * </p>
+     * 
      * @param request
      *            the request
      * @return 获得客户端ip地址
@@ -839,60 +850,24 @@ public final class RequestUtil{
      * @see <a href="http://lavafree.iteye.com/blog/1559183">nginx做负载CDN加速获取端真实ip</a>
      */
     public static String getClientIp(HttpServletRequest request){
-        // WL-Proxy-Client-IP=215.4.1.29
-        // Proxy-Client-IP=215.4.1.29
-        // X-Forwarded-For=215.4.1.29
-
-        //ip header可控制的, 以后如果有新增加在这里(比如多CDN 可能是cdn_real_ip),而不是通过传参的形式
-        //这样做的好处是,对开发透明
-        String[] ipHeaderNames = { X_FORWARDED_FOR, X_REAL_IP, PROXY_CLIENT_IP, WL_PROXY_CLIENT_IP };
-        return getClientIp(request, ipHeaderNames);
-    }
-
-    /**
-     * 获得客户端真实ip地址.
-     * 
-     * @param request
-     * @param ipHeaderNames
-     * @return
-     * @since 2.0.1
-     */
-    private static String getClientIp(HttpServletRequest request,String...ipHeaderNames){
-        String ipAddress = "";
-
-        //---------------------------------------------------------------
         Map<String, String> map = newLinkedHashMap();
-        //先在代理里面找一找
-        for (String ipHeaderName : ipHeaderNames){
-            String ipHeaderValue = request.getHeader(ipHeaderName);//The header name is case insensitive (不区分大小写)
-            map.put(ipHeaderName, ipHeaderValue);
-            if (isNotNullOrEmpty(ipHeaderValue) && !"unknown".equalsIgnoreCase(ipHeaderValue)){
-                ipAddress = ipHeaderValue;
-                break;
+        for (String ipHeaderName : IP_HEADER_NAMES){
+            //The header name is case insensitive (不区分大小写)
+            map.put(ipHeaderName, request.getHeader(ipHeaderName));
+        }
+        //----------------------getRemoteAddr-----------------------------------------
+        map.put("request.getRemoteAddr()", request.getRemoteAddr());
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("ips:{}", JsonUtil.format(map));
+        }
+        //---------------------------------------------------------------
+        for (Map.Entry<String, String> entry : map.entrySet()){
+            String value = entry.getValue();
+            if (isNotNullOrEmpty(value) && !"unknown".equalsIgnoreCase(value)){
+                return value;
             }
         }
-
-        //----------------------getRemoteAddr-----------------------------------------
-        //如果都没有,那么读取 request.getRemoteAddr()
-        if (isNullOrEmpty(ipAddress)){
-            ipAddress = request.getRemoteAddr();
-            map.put("request.getRemoteAddr()", ipAddress);
-        }
-
-        //---------------------------------------------------------------
-
-        // 对于通过多个代理的情况,第一个IP为客户端真实IP,多个IP按照','分割
-        if (ipAddress != null && ipAddress.indexOf(',') > 0){
-            //如果通过了多级反向代理的话,X-Forwarded-For的值并不止一个,而是一串ip值,取第一个非unknown的有效IP字符串. 
-            ipAddress = ipAddress.substring(0, ipAddress.indexOf(','));
-            map.put("firstIp", ipAddress);
-        }
-
-        //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("client real ips:{}", JsonUtil.format(map));
-        }
-        return ipAddress;
+        return EMPTY;
     }
 
     //---------------------------------------------------------------

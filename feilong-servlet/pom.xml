@@ -9,15 +9,20 @@
 	</parent>
 
 	<artifactId>feilong-servlet</artifactId>
-	<name>feilong-servlet</name>
-	<description>${project.name} ${project.version} API</description>
+	<description>和servlet相关的api,比如request,response,seesion等的封装</description>
 
 	<properties>
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/FeiLongServletSuiteTests</maven-surefire-plugin.include>
+		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core</artifactId>
+		</dependency>
+
 		<!-- 下载要使用 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -29,11 +34,6 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-json</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-core</artifactId>
 		</dependency>
 
 		<!-- servlet-api -->
@@ -75,6 +75,5 @@
 		</dependency>
 
 	</dependencies>
-
 
 </project>
