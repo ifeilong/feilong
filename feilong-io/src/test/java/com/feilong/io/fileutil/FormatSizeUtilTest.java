@@ -23,20 +23,17 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.FileUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class FormatSizeUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatSizeUtilTest.class);
+public class FormatSizeUtilTest extends AbstractTest{
 
     @Test
     public void formatFileSize1(){

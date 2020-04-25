@@ -24,8 +24,6 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
@@ -41,10 +39,7 @@ import com.feilong.test.AbstractTest;
  */
 public class CsvArrayWriteTest extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER   = LoggerFactory.getLogger(CsvArrayWriteTest.class);
-
-    private final CsvWrite      csvWrite = new DefaultCsvWrite();
+    private final CsvWrite csvWrite = new DefaultCsvWrite();
 
     //---------------------------------------------------------------
 

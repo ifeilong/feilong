@@ -18,22 +18,19 @@ package com.feilong.io.filenameutil;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FilenameUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
-public class GetNewFileNameTest{
-
-    private static final Logger LOGGER    = LoggerFactory.getLogger(GetNewFileNameTest.class);
+public class GetNewFileNameTest extends AbstractTest{
 
     /** <code>{@value}</code>. */
-    private static String       FILE_NAME = "F:/pie2.png";
+    private static String FILE_NAME = "F:/pie2.png";
 
     /**
      * Test get new file name.

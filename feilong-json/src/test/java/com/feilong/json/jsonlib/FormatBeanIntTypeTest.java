@@ -16,15 +16,11 @@
 package com.feilong.json.jsonlib;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.BeanInt;
+import com.feilong.test.AbstractTest;
 
-public class FormatBeanIntTypeTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatBeanIntTypeTest.class);
+public class FormatBeanIntTypeTest extends AbstractTest{
 
     @Test
     public void test1(){

@@ -16,8 +16,6 @@
 package com.feilong.taglib.display.httpconcat.command;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
 
@@ -28,9 +26,6 @@ import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
  * @since 1.0.7
  */
 public class HttpConcatParamTest extends BaseHttpConcatTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatParamTest.class);
 
     /** The domain. */
     private static final String domain = "http://www.feilong.com";

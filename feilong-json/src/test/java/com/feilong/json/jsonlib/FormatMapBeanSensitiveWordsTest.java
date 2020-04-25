@@ -20,15 +20,11 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.BeanWithSensitiveWords;
+import com.feilong.test.AbstractTest;
 
-public class FormatMapBeanSensitiveWordsTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatMapBeanSensitiveWordsTest.class);
+public class FormatMapBeanSensitiveWordsTest extends AbstractTest{
 
     @Test
     public void test(){

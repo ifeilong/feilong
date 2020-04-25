@@ -16,15 +16,10 @@
 package com.feilong.coreextension.lang;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class RuntimeUtilTest{
+import com.feilong.test.AbstractTest;
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RuntimeUtilTest.class);
-
-    //---------------------------------------------------------------
+public class RuntimeUtilTest extends AbstractTest{
 
     @Test
     public void test(){

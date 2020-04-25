@@ -19,19 +19,15 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.BeanIntIgnoreNull;
 import com.feilong.json.jsonlib.entity.BeanIntIgnoreNullNests;
 import com.feilong.json.jsonlib.entity.BeanIntIgnoreNullParent;
+import com.feilong.test.AbstractTest;
 
 import net.sf.json.JSONObject;
 
-public class FormatBeanIgnoreNullTest{
-
-    /** The Constant log. */
-    private static final Logger     LOGGER            = LoggerFactory.getLogger(FormatBeanIgnoreNullTest.class);
+public class FormatBeanIgnoreNullTest extends AbstractTest{
 
     private final BeanIntIgnoreNull beanIntIgnoreNull = new BeanIntIgnoreNull(16, null);
 

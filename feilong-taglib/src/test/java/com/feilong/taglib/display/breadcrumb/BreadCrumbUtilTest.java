@@ -21,23 +21,19 @@ import static com.feilong.core.util.SortUtil.sortList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.comparator.BreadCrumbEntityComparator;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class SiteMapTagTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class BreadCrumbUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger                   LOGGER               = LoggerFactory.getLogger(BreadCrumbUtilTest.class);
+public class BreadCrumbUtilTest extends AbstractTest{
 
     /** The site map entities. */
     private static List<BreadCrumbEntity<Number>> breadCrumbEntityList = newArrayList();

@@ -22,15 +22,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.BeanWithSensitiveWords;
+import com.feilong.test.AbstractTest;
 
-public class FormatIterableBeanSensitiveWordsTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatIterableBeanSensitiveWordsTest.class);
+public class FormatIterableBeanSensitiveWordsTest extends AbstractTest{
 
     @Test
     public void testList(){

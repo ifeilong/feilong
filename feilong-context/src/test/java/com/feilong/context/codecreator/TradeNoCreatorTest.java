@@ -16,17 +16,15 @@
 package com.feilong.context.codecreator;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
  */
-public class TradeNoCreatorTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TradeNoCreatorTest.class);
+public class TradeNoCreatorTest extends AbstractTest{
 
     /**
      * Creates the trade no.

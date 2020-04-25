@@ -21,20 +21,17 @@ import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.Address;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-public class FormatterUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatterUtilTest.class);
+public class FormatterUtilTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("static-method")

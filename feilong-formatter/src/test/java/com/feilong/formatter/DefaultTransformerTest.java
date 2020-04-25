@@ -25,10 +25,9 @@ import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class DefaultTransformerTest.
@@ -36,10 +35,7 @@ import com.feilong.store.member.User;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
  */
-public class DefaultTransformerTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransformerTest.class);
+public class DefaultTransformerTest extends AbstractTest{
 
     /**
      * Test format to simple table 2.

@@ -22,19 +22,16 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.Person;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-public class FormatterUtilBeanWithSortTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatterUtilBeanWithSortTest.class);
+public class FormatterUtilBeanWithSortTest extends AbstractTest{
 
     @Test
     public final void testFormatToSimpleTable1(){

@@ -21,16 +21,12 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
-public class FromXmlXStreamConfigTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FromXmlXStreamConfigTest.class);
+public class FromXmlXStreamConfigTest extends AbstractTest{
 
     @Test
     public void test(){

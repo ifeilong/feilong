@@ -20,15 +20,11 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.test.AbstractTest;
 
-public class CartesianProductUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CartesianProductUtilTest.class);
+public class CartesianProductUtilTest extends AbstractTest{
 
     @Test
     public void testCollectionUtilTest1(){

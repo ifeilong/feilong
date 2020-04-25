@@ -18,15 +18,11 @@ package com.feilong.json.jsonlib;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.BeanWithSensitiveWords;
+import com.feilong.test.AbstractTest;
 
-public class FormatBeanSensitiveWordsTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatBeanSensitiveWordsTest.class);
+public class FormatBeanSensitiveWordsTest extends AbstractTest{
 
     /**
      * Name1.

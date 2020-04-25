@@ -19,8 +19,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * 泛型.
@@ -28,10 +28,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0
  */
-public class GenericTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GenericTest.class);
+public class GenericTest extends AbstractTest{
 
     /**
      * Test generic test.

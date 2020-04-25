@@ -20,19 +20,15 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 
 import net.sf.json.processors.JsonValueProcessor;
 
-public class SensitiveWordsJsonValueProcessorTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SensitiveWordsJsonValueProcessorTest.class);
+public class SensitiveWordsJsonValueProcessorTest extends AbstractTest{
 
     /**
      * Test sensitive words json value processor 1.

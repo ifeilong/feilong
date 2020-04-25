@@ -16,13 +16,10 @@
 package com.feilong.net.filetransfer;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.net.filetransfer.FileTransfer;
 
 /**
  * The Class SFTPUtilTest.
@@ -31,18 +28,15 @@ import com.feilong.net.filetransfer.FileTransfer;
  */
 public class SFTPFileTransferTest extends FileTransferTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER          = LoggerFactory.getLogger(SFTPFileTransferTest.class);
-
     /** The file transfer. */
     @Autowired
     @Qualifier("sftpFileTransfer")
-    private FileTransfer        fileTransfer;
+    private FileTransfer fileTransfer;
 
     /** The remote directory. */
     //private final String        remoteDirectory = "/home/bzuser/test";
     //    private final String        remoteDirectory = "/home/sftp-speedo/test/20160616/201606160101";
-    private final String        remoteDirectory = "/upload/Inbound/BuyableandDisplayable/";
+    private final String remoteDirectory = "/upload/Inbound/BuyableandDisplayable/";
 
     @Override
     @Test

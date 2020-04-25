@@ -23,17 +23,15 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.6
  */
-public class URLEncodedUtilsTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(URLEncodedUtilsTest.class);
+public class URLEncodedUtilsTest extends AbstractTest{
 
     @Test
     public final void test(){

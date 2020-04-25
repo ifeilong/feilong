@@ -22,19 +22,16 @@ import java.util.Set;
 import org.apache.commons.lang3.Validate;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class SimpleMultiSellerOrderCodeCreatorTest{
+import com.feilong.test.AbstractTest;
 
-    /** The Constant LOGGER. */
-    private static final Logger         LOGGER = LoggerFactory.getLogger(SimpleMultiSellerOrderCodeCreatorTest.class);
+public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
 
     /** The code creator. */
     private MultiSellerOrderCodeCreator multiSellerOrderCodeCreator;
 
     /** The Constant SET. */
-    private static final Set<String>    SET    = newLinkedHashSet();
+    private static final Set<String>    SET = newLinkedHashSet();
 
     //---------------------------------------------------------------
 

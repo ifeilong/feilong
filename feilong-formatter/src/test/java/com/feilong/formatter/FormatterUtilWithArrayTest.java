@@ -19,19 +19,16 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-public class FormatterUtilWithArrayTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatterUtilWithArrayTest.class);
+public class FormatterUtilWithArrayTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("static-method")

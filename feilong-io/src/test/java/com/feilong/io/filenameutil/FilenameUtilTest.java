@@ -20,10 +20,9 @@ import static org.junit.Assert.assertEquals;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FilenameUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class FilenameUtilTest.
@@ -31,13 +30,10 @@ import com.feilong.io.FilenameUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
-public class FilenameUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER    = LoggerFactory.getLogger(FilenameUtilTest.class);
+public class FilenameUtilTest extends AbstractTest{
 
     /** <code>{@value}</code>. */
-    private static String       FILE_NAME = "F:/pie2.png";
+    private static String FILE_NAME = "F:/pie2.png";
 
     /**
      * Test get file name.

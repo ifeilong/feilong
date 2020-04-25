@@ -25,17 +25,15 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-public class FormatterUtilMapTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatterUtilMapTest.class);
+public class FormatterUtilMapTest extends AbstractTest{
 
     @Test
     public final void testFormatToSimpleTable(){

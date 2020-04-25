@@ -26,6 +26,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
 import com.feilong.io.IOReaderUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class BaseHttpConcatTest.
@@ -33,7 +34,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public abstract class BaseHttpConcatTest{
+public abstract class BaseHttpConcatTest extends AbstractTest{
 
     protected static final String vmFloder = "/Users/feilong/workspace/feilong/feilong/feilong-taglib/src/test/resources/velocity/";
 

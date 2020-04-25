@@ -16,19 +16,16 @@
 package com.feilong.taglib.display.httpconcat.builder;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.1
  */
-public class HttpConcatGlobalConfigBuilderTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatGlobalConfigBuilderTest.class);
+public class HttpConcatGlobalConfigBuilderTest extends AbstractTest{
 
     @Test
     public void test(){

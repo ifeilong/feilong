@@ -16,18 +16,12 @@
 package com.feilong.component;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.feilong.test.AbstractTest;
 import com.feilong.velocity.VelocityUtil;
 
 //@ContextConfiguration(value = { "classpath:feilong-spring-DataFileEmailComponent.xml" })
-public class SpelTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SpelTest.class);
-
-    //---------------------------------------------------------------
+public class SpelTest extends AbstractTest{
 
     @Test
     public void run(){

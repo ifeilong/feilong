@@ -18,22 +18,17 @@ package com.feilong.io.filenameutil;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FilenameUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
-public class GetFileTopParentNameTest{
+public class GetFileTopParentNameTest extends AbstractTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetFileTopParentNameTest.class);
-
-    //---------------------------------------------------------------
     /**
      * Test get file top parent name.
      */

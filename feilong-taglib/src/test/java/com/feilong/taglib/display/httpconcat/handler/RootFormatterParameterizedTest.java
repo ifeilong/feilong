@@ -21,8 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
@@ -32,8 +30,6 @@ import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
  * @since 1.10.5
  */
 public class RootFormatterParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RootFormatterParameterizedTest.class);
 
     @Parameters(name = "index:{index}: RootFormatter.resolver({0})={1}")
     public static Iterable<Object[]> data(){

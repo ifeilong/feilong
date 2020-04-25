@@ -21,26 +21,22 @@ import java.net.URI;
 import java.net.URL;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class FileUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class FileUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER  = LoggerFactory.getLogger(FileUtilTest.class);
+public class FileUtilTest extends AbstractTest{
 
     /** The string. */
-    private final String        fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
+    private final String fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
 
     /**
      * TestFileUtilTest.

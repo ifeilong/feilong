@@ -20,11 +20,10 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class MapMemoryTest.
@@ -32,10 +31,7 @@ import com.feilong.store.member.User;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public class PagerCachePerformanceTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerCachePerformanceTest.class);
+public class PagerCachePerformanceTest extends AbstractTest{
 
     /**
      * Name.

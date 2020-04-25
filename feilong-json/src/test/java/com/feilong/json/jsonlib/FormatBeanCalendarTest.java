@@ -18,15 +18,10 @@ package com.feilong.json.jsonlib;
 import java.util.Calendar;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class FormatBeanCalendarTest{
+import com.feilong.test.AbstractTest;
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatBeanCalendarTest.class);
-
-    //---------------------------------------------------------------
+public class FormatBeanCalendarTest extends AbstractTest{
 
     @Test
     public void test(){

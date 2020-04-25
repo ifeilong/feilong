@@ -16,20 +16,16 @@
 package com.feilong.taglib.display.pager.command;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class PagerTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class PagerTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerTest.class);
+public class PagerTest extends AbstractTest{
 
     /**
      * Test.

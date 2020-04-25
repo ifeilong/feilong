@@ -19,17 +19,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
-public class SerializableUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SerializableUtilTest.class);
+public class SerializableUtilTest extends AbstractTest{
 
     /**
      * Name.

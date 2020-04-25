@@ -20,22 +20,18 @@ import static org.junit.Assert.assertEquals;
 import java.net.URL;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class URLUtilGetUnionUrlTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class GetUnionUrlTest{
+public class GetUnionUrlTest extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetUnionUrlTest.class);
-
-    private final URL           url    = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
+    private final URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
 
     /**
      * Test get union url 1.

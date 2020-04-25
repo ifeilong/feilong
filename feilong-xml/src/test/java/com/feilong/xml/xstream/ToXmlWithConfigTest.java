@@ -21,16 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
-public class ToXmlWithConfigTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToXmlWithConfigTest.class);
+public class ToXmlWithConfigTest extends AbstractTest{
 
     @Test
     public void name2(){

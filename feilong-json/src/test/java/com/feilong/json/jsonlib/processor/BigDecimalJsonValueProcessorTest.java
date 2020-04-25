@@ -21,19 +21,15 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.User;
+import com.feilong.test.AbstractTest;
 
 import net.sf.json.processors.JsonValueProcessor;
 
-public class BigDecimalJsonValueProcessorTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(BigDecimalJsonValueProcessorTest.class);
+public class BigDecimalJsonValueProcessorTest extends AbstractTest{
 
     @Test
     public void test(){

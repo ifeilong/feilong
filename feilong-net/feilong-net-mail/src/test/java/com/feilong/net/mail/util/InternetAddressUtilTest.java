@@ -22,13 +22,10 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.internet.InternetAddress;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class InternetAddressUtilTest{
+import com.feilong.test.AbstractTest;
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(InternetAddressUtilTest.class);
+public class InternetAddressUtilTest extends AbstractTest{
 
     /**
      * Test.

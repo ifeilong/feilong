@@ -19,8 +19,8 @@ import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class PagerParamsTest.
@@ -28,10 +28,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public class PagerParamsTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerParamsTest.class);
+public class PagerParamsTest extends AbstractTest{
 
     /**
      * Test hash code.

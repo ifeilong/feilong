@@ -20,20 +20,13 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.now;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
 import com.feilong.store.member.UserInfo;
+import com.feilong.test.AbstractTest;
 
-public abstract class AbstractJsonTest{
-
-    /** The Constant LOGGER. */
-    protected static final Logger LOGGER           = LoggerFactory.getLogger(AbstractJsonTest.class);
-
-    //---------------------------------------------------------------
+public abstract class AbstractJsonTest extends AbstractTest{
 
     /** The Constant USER. */
     protected static final User   USER             = getUserForJsonTest();

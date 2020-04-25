@@ -25,21 +25,17 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.store.order.OrderLine;
+import com.feilong.test.AbstractTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SimpleBeanFormattterTest{
-
-    /** The Constant log. */
-    private static final Logger        LOGGER              = LoggerFactory.getLogger(SimpleBeanFormattterTest.class);
+public class SimpleBeanFormattterTest extends AbstractTest{
 
     private static Iterable<OrderLine> ITERABLE_DATA       = null;
 

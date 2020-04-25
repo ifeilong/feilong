@@ -16,20 +16,16 @@
 package com.feilong.core.net.urlutiltest;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class URLUtilToURLTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToURLTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToURLTest.class);
+public class ToURLTest extends AbstractTest{
 
     /**
      * Test to URL.
