@@ -16,15 +16,10 @@
 package com.feilong.security.oneway;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
 public class Sm3UtilTest extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Sm3UtilTest.class);
 
     /**
      * Encode11.

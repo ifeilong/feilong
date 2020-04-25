@@ -19,16 +19,11 @@ import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.EncryptionException;
 
 public class RC2Test extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger        LOGGER               = LoggerFactory.getLogger(RC2Test.class);
 
     private static final SymmetricType SYMMETRIC_TYPE       = SymmetricType.RC2;
 

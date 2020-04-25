@@ -20,10 +20,8 @@ import static com.feilong.core.date.DateUtil.getTime;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.net.mail.entity.ICalendar;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class ICalendarBuilder.
@@ -31,17 +29,8 @@ import com.feilong.net.mail.entity.ICalendar;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.2
  */
-public class ICalendarBuilder{
+public class ICalendarBuilder extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ICalendarBuilder.class);
-
-    /**
-     * Builds the.
-     *
-     * @return the i calendar
-     * @since 1.10.2
-     */
     public static ICalendar build(){
         ICalendar iCalendar = new ICalendar();
 

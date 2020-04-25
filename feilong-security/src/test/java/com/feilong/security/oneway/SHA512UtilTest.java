@@ -19,19 +19,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.14.2
- */
 public class SHA512UtilTest extends AbstractSecurityTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SHA512UtilTest.class);
 
     @Test
     public void encode121(){

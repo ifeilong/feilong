@@ -18,16 +18,13 @@ package com.feilong.velocity;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class VelocityUtilTest.
  */
-public class VelocityUtilMacroTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VelocityUtilMacroTest.class);
+public class VelocityUtilMacroTest extends AbstractTest{
 
     /**
      * Parses the vm template with classpath resource loader.

@@ -21,11 +21,10 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import org.junit.After;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.IOReaderUtil;
+import com.feilong.test.AbstractTest;
 import com.google.zxing.BarcodeFormat;
 
 /**
@@ -34,16 +33,13 @@ import com.google.zxing.BarcodeFormat;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.1
  */
-public class BarcodeEncodeUtilTest{
+public class BarcodeEncodeUtilTest extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER          = LoggerFactory.getLogger(BarcodeEncodeUtilTest.class);
+    private String        contents        = "";
 
-    private String              contents        = "";
+    private String        outputImageFile = "";
 
-    private String              outputImageFile = "";
-
-    private BarcodeConfig       barcodeConfig;
+    private BarcodeConfig barcodeConfig;
 
     @Test
     public void test(){

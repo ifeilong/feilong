@@ -16,13 +16,10 @@
 package com.feilong.net;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class InetAddressTest{
+import com.feilong.test.AbstractTest;
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(InetAddressTest.class);
+public class InetAddressTest extends AbstractTest{
 
     @Test
     public void domainName2IpAddress(){

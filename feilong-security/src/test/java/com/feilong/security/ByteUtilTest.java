@@ -15,16 +15,13 @@
  */
 package com.feilong.security;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.Validate;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.security.ByteUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class ByteUtilTest.
@@ -32,10 +29,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @version 1.0 2012-4-10 下午11:55:36
  */
-public class ByteUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ByteUtilTest.class);
+public class ByteUtilTest extends AbstractTest{
 
     /**
      * Test byte to hex string lower case.

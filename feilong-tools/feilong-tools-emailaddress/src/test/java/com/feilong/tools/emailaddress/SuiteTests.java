@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib;
+package com.feilong.tools.emailaddress;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.taglib.display.httpconcat.ConcatSuiteTests;
-import com.feilong.taglib.display.sensitive.SensitiveUtilSuiteTests;
-
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                SensitiveUtilSuiteTests.class,
-                ConcatSuiteTests.class,
-
-                TagUtilsFindAttributeValueTest.class,
-
-                TagUtilsGetScopeTest.class,
-                TagUtilsGetScopeParameterizedTest.class,
+                GetEmailProviderTest.class,
+                GetUserTest.class,
+                GetDomainTest.class,
         //                
 })
-public class FeiLongTaglibSuiteTests{
+public class SuiteTests{
 
 }

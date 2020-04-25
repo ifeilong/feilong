@@ -23,8 +23,6 @@ import java.io.IOException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
@@ -35,9 +33,6 @@ import com.feilong.security.AbstractSecurityTest;
  * @version 1.0 2011-2-7 上午01:12:36
  */
 public class SHA1UtilTest extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SHA1UtilTest.class);
 
     /**
      * Encode file.

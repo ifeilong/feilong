@@ -28,9 +28,6 @@ import com.feilong.security.oneway.SHA384UtilTest;
 import com.feilong.security.oneway.SHA512UtilTest;
 import com.feilong.security.symmetric.AesUtilTest;
 
-/**
- * The Class FeiLongSecuritySuiteTests.
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
@@ -49,6 +46,6 @@ import com.feilong.security.symmetric.AesUtilTest;
                 AesUtilTest.class,
         //                
 })
-public class FeiLongSecuritySuiteTests{
+public class SuiteTests{
 
 }

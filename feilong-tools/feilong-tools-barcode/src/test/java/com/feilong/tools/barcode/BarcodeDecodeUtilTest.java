@@ -16,17 +16,15 @@
 package com.feilong.tools.barcode;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
-public class BarcodeDecodeUtilTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BarcodeDecodeUtilTest.class);
+public class BarcodeDecodeUtilTest extends AbstractTest{
 
     /**
      * Test decode.

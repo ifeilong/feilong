@@ -18,12 +18,10 @@ package com.feilong.net.jsoup;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class MyTestMain{
+import com.feilong.test.AbstractTest;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyTestMain.class);
+public class MyTestMain extends AbstractTest{
 
     public static void main(String[] args){
         // 直接从字符串中输入 HTML 文档

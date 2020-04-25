@@ -24,20 +24,14 @@ import java.util.Map;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.net.jsoup.JsoupUtil;
-import com.feilong.net.jsoup.JsoupUtilException;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class JsoupUtilTest.
  */
-public class JsoupUtilTest2{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsoupUtilTest2.class);
+public class JsoupUtilTest2 extends AbstractTest{
 
     @Test
     public void getDocument1() throws JsoupUtilException{

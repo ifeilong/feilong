@@ -24,15 +24,10 @@ import java.io.IOException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
 public class MD5UtilTest extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MD5UtilTest.class);
 
     @Test
     public void encodeFile() throws IOException{

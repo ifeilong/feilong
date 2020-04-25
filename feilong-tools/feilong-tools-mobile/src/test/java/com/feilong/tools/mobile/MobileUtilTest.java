@@ -19,23 +19,18 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.mobile.MobileUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * 手机相关测试.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class MobileUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER       = LoggerFactory.getLogger(MobileUtilTest.class);
+public class MobileUtilTest extends AbstractTest{
 
     /** The mobile number. */
-    private final String        mobileNumber = "15000001318";
+    private final String mobileNumber = "15000001318";
 
     @Test
     public void testGetMobileNumberHided(){

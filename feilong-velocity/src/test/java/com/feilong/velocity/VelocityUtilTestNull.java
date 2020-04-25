@@ -20,16 +20,13 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class VelocityUtilTest.
  */
-public class VelocityUtilTestNull{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VelocityUtilTestNull.class);
+public class VelocityUtilTestNull extends AbstractTest{
 
     /**
      * Test null.

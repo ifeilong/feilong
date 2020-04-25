@@ -30,15 +30,11 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
+import com.feilong.test.AbstractTest;
 
-public class JsoupUtilTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsoupUtilTest.class);
+public class JsoupUtilTest extends AbstractTest{
 
     @Test
     public void testJsoupUtilTest(){

@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools;
+package com.feilong.office.csv;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.tools.emailaddress.GetDomainTest;
-import com.feilong.tools.emailaddress.GetEmailProviderTest;
-import com.feilong.tools.emailaddress.GetUserTest;
-
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                GetEmailProviderTest.class,
-                GetUserTest.class,
-                GetDomainTest.class,
-        //                
+                DefaultCsvWriteWriteDataTest.class,
+                DefaultCsvWriteWriteDataWithBeanCsvConfigTest.class
+        //
 })
-public class FeiLongEmailProviderSuiteTests{
+public class SuiteTests{
 
 }

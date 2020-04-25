@@ -27,8 +27,9 @@ import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.test.AbstractTest;
 
-public abstract class AbstractMailSenderTest{
+public abstract class AbstractMailSenderTest extends AbstractTest{
 
     /** The Constant folder. */
     private static final String folder  = "/Users/feilong/Development/DataCommon/Files/Java/config/";

@@ -19,8 +19,6 @@ import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.EncryptionException;
@@ -32,9 +30,6 @@ import com.feilong.security.EncryptionException;
  * @version 1.0 Mar 21, 2011 4:55:43 PM
  */
 public class DESedeUtilTest extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger        LOGGER               = LoggerFactory.getLogger(DESedeUtilTest.class);
 
     /** The Constant SYMMETRIC_TYPE. */
     private static final SymmetricType SYMMETRIC_TYPE       = SymmetricType.DESede;

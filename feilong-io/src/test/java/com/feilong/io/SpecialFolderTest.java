@@ -16,22 +16,16 @@
 package com.feilong.io;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class SpecialFolderTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SpecialFolderTest{
+public class SpecialFolderTest extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SpecialFolderTest.class);
-
-    /**
-     * Test get desktop.
-     */
     @Test
     public void testGetDesktop(){
         LOGGER.debug("桌面地址:" + SpecialFolder.getDesktop());

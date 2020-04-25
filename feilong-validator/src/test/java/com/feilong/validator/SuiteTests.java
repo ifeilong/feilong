@@ -26,6 +26,6 @@ import com.feilong.core.util.regexutiltest.RegexPatternSuiteTests;
 @SuiteClasses({ //
 
                 RegexPatternSuiteTests.class })
-public class FeiLongValidatorSuiteTests{
+public class SuiteTests{
 
 }

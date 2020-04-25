@@ -15,6 +15,7 @@
  */
 package com.feilong.security;
 
+import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -23,7 +24,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @version 1.0 Apr 17, 2014 10:27:27 AM
  */
-public abstract class AbstractSecurityTest{
+public abstract class AbstractSecurityTest extends AbstractTest{
 
     /** <code>{@value}</code>. */
     public static final String    testString = "鑫哥爱feilong";

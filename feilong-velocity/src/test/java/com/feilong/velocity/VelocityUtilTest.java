@@ -24,18 +24,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class VelocityUtilTest.
  */
-public class VelocityUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VelocityUtilTest.class);
+public class VelocityUtilTest extends AbstractTest{
 
     /**
      * Parses the vm template with classpath resource loader.

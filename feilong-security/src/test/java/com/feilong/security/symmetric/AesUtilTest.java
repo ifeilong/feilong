@@ -20,7 +20,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class AesUtilTest{
+import com.feilong.security.AbstractSecurityTest;
+
+public class AesUtilTest extends AbstractSecurityTest{
 
     String keyString = "qHK2yTd3ZB==ECTM";
 

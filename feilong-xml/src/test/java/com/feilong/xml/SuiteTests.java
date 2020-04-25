@@ -42,6 +42,6 @@ import com.feilong.xml.xstream.ToXmlWithConfigTest;
 
         //
 })
-public class XmlUtilSuiteTests{
+public class SuiteTests{
 
 }

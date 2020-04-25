@@ -31,16 +31,15 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.SpecialFolder;
-import com.feilong.office.csv.CsvWrite;
-import com.feilong.office.csv.DefaultCsvWrite;
 import com.feilong.office.csv.entity.CsvConfig;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class CSVUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class CsvArrayWriteTest{
+public class CsvArrayWriteTest extends AbstractTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER   = LoggerFactory.getLogger(CsvArrayWriteTest.class);

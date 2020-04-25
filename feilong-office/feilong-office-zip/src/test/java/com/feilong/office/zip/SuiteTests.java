@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.csv;
+package com.feilong.office.zip;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -22,10 +22,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                DefaultCsvWriteWriteDataTest.class,
-                DefaultCsvWriteWriteDataWithBeanCsvConfigTest.class
-        //
+                CompressUnzipHandlerTest.class,
+        //                
 })
-public class FeiLongCvsSuiteTests{
+public class SuiteTests{
 
 }

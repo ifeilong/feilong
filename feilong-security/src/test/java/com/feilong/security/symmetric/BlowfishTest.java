@@ -19,8 +19,6 @@ import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 import com.feilong.security.EncryptionException;
@@ -33,9 +31,6 @@ import com.feilong.security.EncryptionException;
  * @since 1.0.7
  */
 public class BlowfishTest extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger        LOGGER               = LoggerFactory.getLogger(BlowfishTest.class);
 
     /** The Constant SYMMETRIC_TYPE. */
     private static final SymmetricType SYMMETRIC_TYPE       = SymmetricType.Blowfish;

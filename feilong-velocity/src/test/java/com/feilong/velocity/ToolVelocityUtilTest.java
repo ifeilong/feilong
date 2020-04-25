@@ -20,10 +20,9 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class ToolVelocityUtilTest.
@@ -31,10 +30,7 @@ import com.feilong.core.date.DateUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.1
  */
-public class ToolVelocityUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToolVelocityUtilTest.class);
+public class ToolVelocityUtilTest extends AbstractTest{
 
     /**
      * Test tool.

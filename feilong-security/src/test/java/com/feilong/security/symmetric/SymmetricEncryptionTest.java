@@ -23,17 +23,11 @@ import static com.feilong.security.symmetric.SymmetricType.DES;
 import static com.feilong.security.symmetric.SymmetricType.DESede;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.security.AbstractSecurityTest;
 
 public class SymmetricEncryptionTest extends AbstractSecurityTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SymmetricEncryptionTest.class);
-
-    //---------------------------------------------------------------
     @Test
     public void base64String(){
         LOGGER.debug("SymmetricType.ARCFOUR:{}", new SymmetricEncryption(ARCFOUR, KEY).encryptBase64(testString, UTF8));

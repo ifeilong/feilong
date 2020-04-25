@@ -13,18 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.zip;
+package com.feilong.taglib;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.taglib.display.httpconcat.ConcatSuiteTests;
+import com.feilong.taglib.display.sensitive.SensitiveUtilSuiteTests;
+
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                CompressUnzipHandlerTest.class,
+                SensitiveUtilSuiteTests.class,
+                ConcatSuiteTests.class,
+
+                TagUtilsFindAttributeValueTest.class,
+
+                TagUtilsGetScopeTest.class,
+                TagUtilsGetScopeParameterizedTest.class,
         //                
 })
-public class FeiLongCompressSuiteTests{
+public class SuiteTests{
 
 }
