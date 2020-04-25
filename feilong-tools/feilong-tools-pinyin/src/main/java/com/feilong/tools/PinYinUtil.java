@@ -35,7 +35,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 public class PinYinUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger            LOGGER                             = LoggerFactory.getLogger(PinYinUtil.class);
+    private static final Logger                  LOGGER                             = LoggerFactory.getLogger(PinYinUtil.class);
 
     //---------------------------------------------------------------
 
@@ -44,7 +44,7 @@ public class PinYinUtil{
      * 
      * @since 1.13.0
      */
-    private static HanyuPinyinOutputFormat DEFAULT_HANYU_PINYIN_OUTPUT_FORMAT = buildDefaultHanyuPinyinOutputFormat();
+    private static final HanyuPinyinOutputFormat DEFAULT_HANYU_PINYIN_OUTPUT_FORMAT = buildDefaultHanyuPinyinOutputFormat();
 
     //---------------------------------------------------------------
 

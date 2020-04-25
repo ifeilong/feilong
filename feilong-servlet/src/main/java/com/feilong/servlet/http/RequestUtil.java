@@ -256,7 +256,7 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
 public final class RequestUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                            = LoggerFactory.getLogger(RequestUtil.class);
+    private static final Logger   LOGGER                            = LoggerFactory.getLogger(RequestUtil.class);
 
     //---------------------------------------------------------------
 
@@ -266,24 +266,16 @@ public final class RequestUtil{
      * @since 1.14.2
      * @see #getRequestBody(HttpServletRequest)
      */
-    private static String       REQUEST_BODY_SCOPE_ATTRIBUTE_NAME = RequestUtil.class.getName() + ".REQUEST_BODY";
+    private static final String   REQUEST_BODY_SCOPE_ATTRIBUTE_NAME = RequestUtil.class.getName() + ".REQUEST_BODY";
 
     /**
      * 获得用户真实IP 循环的IP头.
      * 
      * @since 3.0.0
      */
-    private static String[]     IP_HEADER_NAMES                   = StringUtil.tokenizeToStringArray(
+    private static final String[] IP_HEADER_NAMES                   = StringUtil.tokenizeToStringArray(
                     ResourceBundleUtil.getValue(getResourceBundle("config/feilong-request-clientIP-headers"), "clientIP.headerNames"),
                     ",");
-    //---------------------------------------------------------------
-
-    /** Don't let anyone instantiate this class. */
-    private RequestUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 
     //---------------------------------------------------------------
 
@@ -294,7 +286,7 @@ public final class RequestUtil{
      * @see com.feilong.io.entity.MimeType
      * @since 1.12.0
      */
-    private static final String[] STATIC_RESOURCE_SUFFIX = toArray(
+    private static final String[] STATIC_RESOURCE_SUFFIX            = toArray(
                     ".bmp",
                     ".jpe",
                     ".jpg",
@@ -314,6 +306,15 @@ public final class RequestUtil{
                     ".mp3",
                     ".zip",
                     ".tar");
+
+    //---------------------------------------------------------------
+
+    /** Don't let anyone instantiate this class. */
+    private RequestUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     //---------------------------------------------------------------
 
