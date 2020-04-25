@@ -25,7 +25,7 @@ import org.w3c.dom.Node;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-public interface Hook{
+interface Hook{
 
     /**
      * Put.

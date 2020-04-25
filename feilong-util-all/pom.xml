@@ -243,7 +243,6 @@
 
 							<artifactSet>
 								<includes>
-									<!-- <include>${project.groupId}:*:*</include> -->
 									<include>com.github.ifeilong:*:*</include>
 								</includes>
 							</artifactSet>

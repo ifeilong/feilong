@@ -18,8 +18,8 @@ package com.feilong.io;
 import static com.feilong.io.MimeTypeUtil.getContentTypeByFileName;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class MimeTypeUtilTest.
@@ -27,14 +27,8 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
-public class MimeTypeUtilTest{
+public class MimeTypeUtilTest extends AbstractTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MimeTypeUtilTest.class);
-
-    /**
-     * Test get content type by file name.
-     */
     @Test
     public void testGetContentTypeByFileName(){
         LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.mkv"));

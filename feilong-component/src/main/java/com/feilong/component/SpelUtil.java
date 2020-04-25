@@ -52,7 +52,7 @@ final class SpelUtil{
      * 
      * @since 4.0.6
      */
-    private final static Map<String, Expression> EXPRESSION_STRING_AND_EXPRESSION_MAP = newConcurrentHashMap();
+    private static final Map<String, Expression> EXPRESSION_STRING_AND_EXPRESSION_MAP = newConcurrentHashMap();
 
     //---------------------------------------------------------------
 

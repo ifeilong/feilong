@@ -16,18 +16,15 @@
 package com.feilong.coreextension.awt;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class ClipboardUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ClipboardUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClipboardUtilTest.class);
+public class ClipboardUtilTest extends AbstractTest{
 
     /**
      * Test set clipboard contents.

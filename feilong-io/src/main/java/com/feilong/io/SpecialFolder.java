@@ -68,7 +68,9 @@ public final class SpecialFolder{
      * 
      * @return 桌面地址
      * @see FileSystemView#getHomeDirectory()
+     * @deprecated MAC不准,下面一直返回的是 /Users/feilong
      */
+    @Deprecated
     public static String getDesktop(){
         FileSystemView fileSystemView = FileSystemView.getFileSystemView();
         File file = fileSystemView.getHomeDirectory();
@@ -86,7 +88,9 @@ public final class SpecialFolder{
      * 
      * @return 我的文档地址
      * @see FileSystemView#getDefaultDirectory()
+     * @deprecated MAC不准,下面一直返回的是 /Users/feilong
      */
+    @Deprecated
     public static String getMyDocuments(){
         FileSystemView fileSystemView = FileSystemView.getFileSystemView();
         File file = fileSystemView.getDefaultDirectory();

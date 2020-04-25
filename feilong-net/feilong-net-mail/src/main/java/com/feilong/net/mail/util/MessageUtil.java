@@ -287,19 +287,23 @@ public final class MessageUtil{
             LOGGER.debug("content mimeType:[{}],match with:--->[{}],count:[{}]", multipart.getContentType(), MimeType.MULTIPART_ALL, count);
         }
         //---------------------------------------------------------------
-
         boolean alternativeFlag = part.isMimeType(MimeType.MULTIPART_ALTERNATIVE);
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++){
             BodyPart bodyPart = multipart.getBodyPart(i);
-
-            //不是 alternative 或者(是 alternative且是html)
-            boolean isAppend = !alternativeFlag || (alternativeFlag && bodyPart.isMimeType(MimeType.TEXT_HTML));
-            if (isAppend){
+            if (isNeedAppend(bodyPart, alternativeFlag)){
                 sb.append(getContent(bodyPart));
             }
         }
         return sb.toString();
+    }
+
+    private static boolean isNeedAppend(BodyPart bodyPart,boolean alternativeFlag) throws MessagingException{
+        //不是 alternative 或者(是 alternative且是html)
+        if (!alternativeFlag){
+            return true;
+        }
+        return bodyPart.isMimeType(MimeType.TEXT_HTML);
     }
 }

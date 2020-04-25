@@ -167,7 +167,6 @@ public final class DesktopUtil{
         }
 
         //---------------------------------------------------------------
-
         Desktop desktop = Desktop.getDesktop();// 获取当前系统桌面扩展
         boolean supported = desktop.isSupported(action);// 判断系统桌面是否支持要执行的功能
         if (!supported){
