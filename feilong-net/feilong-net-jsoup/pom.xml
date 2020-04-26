@@ -16,6 +16,7 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

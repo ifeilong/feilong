@@ -17,7 +17,6 @@ package com.feilong.taglib;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.taglibs.standard.lang.jstl.test.PageContextImpl;
 import org.junit.Test;
 
 /**
@@ -27,24 +26,26 @@ import org.junit.Test;
  */
 public class TagUtilsFindAttributeValueTest{
 
+    TestPageContext pageContext = new TestPageContext();
+
     @Test
     public void test(){
-        assertEquals(null, TagUtils.findAttributeValue(new PageContextImpl(), "name", "request"));
+        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", "request"));
     }
 
     @Test
     public void test1(){
-        assertEquals(null, TagUtils.findAttributeValue(new PageContextImpl(), "name", null));
+        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", null));
     }
 
     @Test
     public void test2(){
-        assertEquals(null, TagUtils.findAttributeValue(new PageContextImpl(), "name", ""));
+        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", ""));
     }
 
     @Test
     public void test3(){
-        assertEquals(null, TagUtils.findAttributeValue(new PageContextImpl(), "name", " "));
+        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", " "));
     }
 
     //---------------------------------------------------------------
@@ -58,16 +59,16 @@ public class TagUtilsFindAttributeValueTest{
 
     @Test(expected = NullPointerException.class)
     public void testTagUtilsTestNullFindAttributeValue(){
-        TagUtils.findAttributeValue(new PageContextImpl(), null, "request");
+        TagUtils.findAttributeValue(pageContext, null, "request");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testTagUtilsTestEmptyFindAttributeValue(){
-        TagUtils.findAttributeValue(new PageContextImpl(), "", "request");
+        TagUtils.findAttributeValue(pageContext, "", "request");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testTagUtilsTestBlankFindAttributeValue(){
-        TagUtils.findAttributeValue(new PageContextImpl(), " ", "request");
+        TagUtils.findAttributeValue(pageContext, " ", "request");
     }
 }

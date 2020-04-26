@@ -36,6 +36,13 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<!-- -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-zip</artifactId>

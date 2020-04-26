@@ -19,14 +19,10 @@ import static com.feilong.core.bean.ConvertUtil.toLong;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.apache.taglibs.standard.lang.jstl.test.PageContextImpl;
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.1
- */
+import com.feilong.taglib.TestPageContext;
+
 public class VersionRebuilderTest{
 
     @Test
@@ -43,7 +39,7 @@ public class VersionRebuilderTest{
     @Test
     public void test12(){
         String version = "123456";
-        assertEquals(version, VersionRebuilder.rebuild(version, new PageContextImpl()));
+        assertEquals(version, VersionRebuilder.rebuild(version, new TestPageContext()));
     }
 
 }

@@ -47,17 +47,6 @@
 			<artifactId>jsp-api</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
-		</dependency>
-
-		<!-- jstl -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-
 		<!-- **********************log日志************************************ -->
 
 		<!-- slf4j-log4j12 -->

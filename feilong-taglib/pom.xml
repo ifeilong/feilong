@@ -80,6 +80,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core-extension</artifactId>
 			<scope>test</scope>
