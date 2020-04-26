@@ -43,6 +43,7 @@
 			<artifactId>feilong-formatter</artifactId>
 		</dependency>
 
+		<!-- com.feilong.context.invoker.http.HttpRequestUriResolver.resolveTemplate(String, T) 需要 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-velocity</artifactId>
@@ -51,6 +52,25 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-security</artifactId>
+		</dependency>
+
+		<!-- velocity -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<artifactId>commons-chain</artifactId>
+			<groupId>commons-chain</groupId>
+			<optional>true</optional>
 		</dependency>
 
 		<!--*******************servlet-api && jsp-api************************* -->

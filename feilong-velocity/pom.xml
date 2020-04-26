@@ -11,7 +11,6 @@
 	<artifactId>feilong-velocity</artifactId>
 
 	<properties>
-		<version.commons-chain>1.2</version.commons-chain>
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
 	</properties>
@@ -40,17 +39,19 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<artifactId>commons-chain</artifactId>
 			<groupId>commons-chain</groupId>
-			<version>${version.commons-chain}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

@@ -82,7 +82,7 @@
 
 		<!-- http://www.bouncycastle.org/java.html -->
 		<version.bcprov-jdk15on>1.55</version.bcprov-jdk15on>
-
+		<version.commons-chain>1.2</version.commons-chain>
 
 		<!-- http://commons.apache.org/proper/commons-beanutils/changes-report.html -->
 		<version.commons-beanutils>1.9.4</version.commons-beanutils>
@@ -768,6 +768,12 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-configuration2</artifactId>
 				<version>${version.commons-configuration2}</version>
+			</dependency>
+
+			<dependency>
+				<artifactId>commons-chain</artifactId>
+				<groupId>commons-chain</groupId>
+				<version>${version.commons-chain}</version>
 			</dependency>
 
 			<!-- velocity -->
