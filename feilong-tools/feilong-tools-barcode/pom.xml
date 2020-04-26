@@ -20,6 +20,7 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
 			<version>${version.zxing}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- 用于 decode -->

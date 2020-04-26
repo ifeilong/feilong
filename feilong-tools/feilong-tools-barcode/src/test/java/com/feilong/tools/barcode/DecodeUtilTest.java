@@ -19,12 +19,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.5.4
- */
-public class BarcodeDecodeUtilTest extends AbstractTest{
+public class DecodeUtilTest extends AbstractTest{
 
     /**
      * Test decode.

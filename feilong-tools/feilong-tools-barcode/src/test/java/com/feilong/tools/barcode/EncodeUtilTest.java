@@ -16,7 +16,6 @@
 package com.feilong.tools.barcode;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import org.junit.After;
@@ -27,13 +26,7 @@ import com.feilong.io.IOReaderUtil;
 import com.feilong.test.AbstractTest;
 import com.google.zxing.BarcodeFormat;
 
-/**
- * The Class QRCodeUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.2.1
- */
-public class BarcodeEncodeUtilTest extends AbstractTest{
+public class EncodeUtilTest extends AbstractTest{
 
     private String        contents        = "";
 
@@ -48,12 +41,6 @@ public class BarcodeEncodeUtilTest extends AbstractTest{
 
         barcodeConfig = new BarcodeConfig();
         barcodeConfig.setEncodeHintTypeMargin(0);
-    }
-
-    @Test
-    public void test1(){
-        outputImageFile = "d:/test1" + now().getTime() + ".png";
-        contents = "李景生日快乐~";
     }
 
     /**
