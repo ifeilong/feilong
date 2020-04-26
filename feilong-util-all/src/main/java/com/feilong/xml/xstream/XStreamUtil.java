@@ -27,8 +27,10 @@ import com.feilong.xml.xstream.converters.SimpleMapConverter;
 import com.thoughtworks.xstream.XStream;
 
 /**
- * @deprecated pls use {@link XmlUtil} ,方法名字相同
+ * The Class XStreamUtil.
+ *
  * @since 3.0.0 make deprecated
+ * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
  */
 @Deprecated
 public final class XStreamUtil{
@@ -157,6 +159,7 @@ public final class XStreamUtil{
      * @see com.thoughtworks.xstream.XStream#addImplicitCollection(Class, String)
      * @since 1.10.7
      * @deprecated 现实中很少用, 主要 rootElementName 不好
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
     @Deprecated
     public static String toXML(Object bean){
@@ -219,7 +222,9 @@ public final class XStreamUtil{
      * 
      * @see SimpleMapConverter
      * @since 1.10.7
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static <K, V> String toXML(Map<K, V> map,String rootElementName){
         return toXML(map, rootElementName, true);
     }
@@ -301,7 +306,9 @@ public final class XStreamUtil{
      *         如果 <code>map</code> 有 null value,将转成 {@link StringUtils#EMPTY}代替<br>
      * @see SimpleMapConverter
      * @since 1.10.7
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static <K, V> String toXML(Map<K, V> map,String rootElementName,boolean isPrettyPrint){
         return XmlUtil.toXML(map, rootElementName, isPrettyPrint);
     }
@@ -404,7 +411,9 @@ public final class XStreamUtil{
      * @see com.thoughtworks.xstream.XStream#toXML(Object)
      * @see com.thoughtworks.xstream.XStream#alias(String, Class)
      * @see com.thoughtworks.xstream.XStream#addImplicitCollection(Class, String)
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static String toXML(Object bean,XStreamConfig xStreamConfig){
         return XmlUtil.toXML(bean, xStreamConfig);
     }
@@ -426,7 +435,9 @@ public final class XStreamUtil{
      * @param xml
      *            the xml
      * @return 如果 <code>xml</code> 是null或者是empty,返回 null<br>
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static <T> T fromXML(String xml){
         return fromXML(xml, (XStreamConfig) null);
     }
@@ -480,7 +491,9 @@ public final class XStreamUtil{
      *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>xml</code> 是null,返回 null<br>
      * @since 1.10.7
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static Map<String, String> fromXML(String xml,String rootElementName){
         return XmlUtil.fromXML(xml, rootElementName);
     }
@@ -610,7 +623,9 @@ public final class XStreamUtil{
      * @return 如果 <code>processAnnotationsType</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>xml</code> 是null,返回 null<br>
      * @since 1.10.7
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static <T> T fromXML(String xml,Class<T> processAnnotationsType){
         return XmlUtil.fromXML(xml, processAnnotationsType);
     }
@@ -632,7 +647,9 @@ public final class XStreamUtil{
      * @param xStreamConfig
      *            the x stream config
      * @return 如果 <code>xml</code> 是null或者是empty,返回 null<br>
+     * @deprecated pls use {@link XmlUtil} ,方法名字相同 since 3.0.0 make deprecated
      */
+    @Deprecated
     public static <T> T fromXML(String xml,XStreamConfig xStreamConfig){
         return XmlUtil.fromXML(xml, xStreamConfig);
     }
