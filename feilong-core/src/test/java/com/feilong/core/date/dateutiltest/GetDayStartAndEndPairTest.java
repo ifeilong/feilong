@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date.dateextensionutiltest;
+package com.feilong.core.date.dateutiltest;
 
-import static com.feilong.core.date.DateExtensionUtil.getDayStartAndEndPair;
-import static com.feilong.core.date.DateExtensionUtil.getTodayStartAndEndPair;
-import static com.feilong.core.date.DateExtensionUtil.getYesterdayStartAndEndPair;
+import static com.feilong.core.date.DateUtil.getDayStartAndEndPair;
+import static com.feilong.core.date.DateUtil.getTodayStartAndEndPair;
+import static com.feilong.core.date.DateUtil.getYesterdayStartAndEndPair;
 import static com.feilong.core.date.DateUtil.addDay;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;

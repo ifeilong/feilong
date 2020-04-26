@@ -26,11 +26,6 @@ import java.util.Date;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.6
- */
 public class GetYearStartAndEndPairTest{
 
     @Test

@@ -15,33 +15,27 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
-import org.junit.Test;
-
-import static com.feilong.core.date.DateExtensionUtil.getIntervalSecond;
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalDay;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
+import org.junit.Test;
 
-/**
- * The Class DateExtensionUtilGetIntervalSecondTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class GetIntervalSecondTest{
+public class GetIntervalDayTest{
 
     /**
-     * Test get interval second null.
+     * Test get interval day null.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalSecondNull(){
-        getIntervalSecond(null, toDate("2008-9-29", COMMON_DATE));
+    public void testGetIntervalDayNull(){
+        getIntervalDay(null, toDate("2008-9-29", COMMON_DATE));
     }
 
     /**
-     * Test get interval second null 1.
+     * Test get interval day null 1.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalSecondNull1(){
-        getIntervalSecond(toDate("2008-12-1", COMMON_DATE), null);
+    public void testGetIntervalDayNull1(){
+        getIntervalDay(toDate("2008-12-1", COMMON_DATE), null);
     }
 }

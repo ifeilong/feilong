@@ -18,7 +18,7 @@ package com.feilong.net.httpclient4.callback;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newTreeMap;
 import static java.util.Collections.emptyMap;

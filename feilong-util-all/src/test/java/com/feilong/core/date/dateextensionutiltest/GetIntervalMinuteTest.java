@@ -15,33 +15,27 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
-import org.junit.Test;
-
-import static com.feilong.core.date.DateExtensionUtil.getIntervalHour;
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalMinute;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
+import org.junit.Test;
 
-/**
- * The Class DateExtensionUtilGetIntervalHourTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class GetIntervalHourTest{
+public class GetIntervalMinuteTest{
 
     /**
-     * Test get interval hour null.
+     * Test get interval minute null.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalHourNull(){
-        getIntervalHour(null, toDate("2008-9-29", COMMON_DATE));
+    public void testGetIntervalMinuteNull(){
+        getIntervalMinute(null, toDate("2008-9-29", COMMON_DATE));
     }
 
     /**
-     * Test get interval hour null 1.
+     * Test get interval minute null 1.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalHourNull1(){
-        getIntervalHour(toDate("2008-12-1", COMMON_DATE), null);
+    public void testGetIntervalMinuteNull1(){
+        getIntervalMinute(toDate("2008-12-1", COMMON_DATE), null);
     }
 }

@@ -13,35 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date.dateextensionutiltest;
+package com.feilong.core.date.dateutiltest;
+
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.date.DateUtil.getIntervalTime;
+import static com.feilong.core.date.DateUtil.toDate;
 
 import org.junit.Test;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalMinute;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-
-/**
- * The Class DateExtensionUtilGetIntervalMinuteTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class GetIntervalMinuteTest{
+public class GetIntervalTimeTest{
 
     /**
-     * Test get interval minute null.
+     * Test get interval time1.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalMinuteNull(){
-        getIntervalMinute(null, toDate("2008-9-29", COMMON_DATE));
+    public void testGetIntervalTime1(){
+        getIntervalTime(null, toDate("2016-07-16 15:51:00", COMMON_DATE_AND_TIME));
     }
 
     /**
-     * Test get interval minute null 1.
+     * Test get interval time2.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalMinuteNull1(){
-        getIntervalMinute(toDate("2008-12-1", COMMON_DATE), null);
+    public void testGetIntervalTime2(){
+        getIntervalTime(toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME), null);
     }
+
 }

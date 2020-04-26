@@ -29,11 +29,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
-/**
- * The Class DateExtensionUtilGetIntervalDayParameterizedTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class GetIntervalDayParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, Integer>{
 
     /**
@@ -52,6 +47,7 @@ public class GetIntervalDayParameterizedTest extends Abstract3ParamsAndResultPar
 
                         toArray("2016-02-28", "2016-03-02", COMMON_DATE, 3),
                         toArray("2016-08-31", "2016-09-02", COMMON_DATE, 2),
+                        toArray("2020-01-01", "2019-12-25", COMMON_DATE, 7),
 
                         toArray("2016-08-21 12:00:00", "2016-08-22 11:00:00", COMMON_DATE_AND_TIME, 0),
 
@@ -60,11 +56,8 @@ public class GetIntervalDayParameterizedTest extends Abstract3ParamsAndResultPar
         );
     }
 
-    /**
-     * Test get interval day.
-     */
     @Test
-    public void testGetIntervalDay(){
+    public void test(){
         assertEquals(expectedValue, (Integer) getIntervalDay(toDate(input1, input3), toDate(input2, input3)));
     }
 }

@@ -15,7 +15,7 @@
  */
 package com.feilong.core.lang.thread;
 
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static org.apache.commons.lang3.ClassUtils.getSimpleName;

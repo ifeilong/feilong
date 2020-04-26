@@ -16,7 +16,7 @@
 package com.feilong.context;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDuration;
 
 import java.util.Date;
 import java.util.List;

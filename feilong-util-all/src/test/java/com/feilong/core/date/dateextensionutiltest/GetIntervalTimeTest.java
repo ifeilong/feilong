@@ -15,18 +15,12 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
-import org.junit.Test;
-
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import org.junit.Test;
 
-/**
- * The Class DateExtensionUtilGetIntervalTimeTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class GetIntervalTimeTest{
 
     /**

@@ -13,22 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.toDate;
 
-import com.feilong.core.date.dateutiltest.DateUtilSuiteTests;
+import java.util.Date;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-                CalendarUtilTest.class, //
+import org.junit.Test;
 
-                DateUtilSuiteTests.class,
+public class FormatDurationDateTest{
 
-        //
-})
-public class DateSuiteTests{
+    @Test
+    public void testFormatDuration1(){
+        Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
+        formatDuration(date);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testFormatDuration2(){
+        formatDuration(null);
+    }
 
 }

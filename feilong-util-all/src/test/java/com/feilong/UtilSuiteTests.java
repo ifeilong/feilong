@@ -1,3 +1,4 @@
+package com.feilong;
 /*
  * Copyright (C) 2008 feilong
  *
@@ -13,22 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.date.dateutiltest.DateUtilSuiteTests;
+import com.feilong.core.date.dateextensionutiltest.DateExtensionUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-                CalendarUtilTest.class, //
 
-                DateUtilSuiteTests.class,
-
+                DateExtensionUtilSuiteTests.class,
         //
 })
-public class DateSuiteTests{
+public class UtilSuiteTests{
 
 }

@@ -16,7 +16,7 @@
 package com.feilong.net.filetransfer;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static org.apache.commons.lang3.StringUtils.EMPTY;

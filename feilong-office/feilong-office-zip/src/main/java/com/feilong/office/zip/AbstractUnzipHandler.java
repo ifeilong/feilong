@@ -15,7 +15,7 @@
  */
 package com.feilong.office.zip;
 
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
 

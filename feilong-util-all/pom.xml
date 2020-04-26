@@ -11,6 +11,12 @@
 	<artifactId>feilong-util-all</artifactId>
 	<packaging>jar</packaging>
 
+
+	<properties>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/UtilSuiteTests</maven-surefire-plugin.include>
+	</properties>
+
 	<dependencies>
 
 		<!--feilong-core -->
@@ -209,6 +215,23 @@
 			<artifactId>feilong-component</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
+
+		<!-- **********************log日志************************************ -->
+
+		<!-- slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
+		</dependency>
+
 
 	</dependencies>
 

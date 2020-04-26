@@ -15,24 +15,8 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_DAY;
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_WEEK;
-import static com.feilong.core.date.DateUtil.addDay;
-import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
-import static com.feilong.core.date.DateUtil.getFirstDateOfThisMonth;
-import static com.feilong.core.date.DateUtil.getFirstDateOfThisYear;
-import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
-import static com.feilong.core.date.DateUtil.getLastDateOfThisMonth;
-import static com.feilong.core.date.DateUtil.getLastDateOfThisYear;
-import static com.feilong.core.date.DateUtil.getTime;
-import static com.feilong.core.date.DateUtil.now;
-
 import java.util.Date;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.feilong.core.TimeInterval;
@@ -84,27 +68,10 @@ import com.feilong.core.TimeInterval;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
+ * @deprecated pls use DateUtil since 3.0.0
  */
+@Deprecated
 public final class DateExtensionUtil{
-
-    //---------------------------------------------------------------
-
-    /** 天. */
-    private static final String DAY         = "天";
-
-    /** 小时. */
-    private static final String HOUR        = "小时";
-
-    /** 分钟. */
-    private static final String MINUTE      = "分钟";
-
-    /** 秒. */
-    private static final String SECOND      = "秒";
-
-    /** 毫秒. */
-    private static final String MILLISECOND = "毫秒";
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private DateExtensionUtil(){
@@ -141,10 +108,11 @@ public final class DateExtensionUtil{
      * @see "java.time.LocalDate#atStartOfDay()"
      * @see "java.time.LocalDate#atStartOfDay()"
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getTodayStartAndEndPair(){
-        Date date = now();
-        return getDayStartAndEndPair(date);
+        return DateUtil.getTodayStartAndEndPair();
     }
 
     /**
@@ -169,11 +137,11 @@ public final class DateExtensionUtil{
      * @return 左边,昨天的开始时间 <code>00:00:00.000</code> <br>
      *         右边,昨天的结束时间 <code>23:59:59.999</code> <br>
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getYesterdayStartAndEndPair(){
-        Date date = now();
-        Date yesteday = addDay(date, -1);
-        return getDayStartAndEndPair(yesteday);
+        return DateUtil.getYesterdayStartAndEndPair();
     }
 
     /**
@@ -201,10 +169,11 @@ public final class DateExtensionUtil{
      *         左边,指定日的开始时间 <code>00:00:00.000</code> <br>
      *         右边,指定日的结束时间 <code>23:59:59.999</code> <br>
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getDayStartAndEndPair(Date date){
-        Validate.notNull(date, "date can't be null!");
-        return Pair.of(getFirstDateOfThisDay(date), getLastDateOfThisDay(date));
+        return DateUtil.getDayStartAndEndPair(date);
     }
 
     //---------------------------------------------------------------
@@ -231,9 +200,11 @@ public final class DateExtensionUtil{
      * @return 左边,当前月的第一天 <code>00:00:00.000</code> <br>
      *         右边,当前月最后一天 <code>23:59:59.999</code> <br>
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getMonthStartAndEndPair(){
-        return getMonthStartAndEndPair(now());
+        return DateUtil.getMonthStartAndEndPair();
     }
 
     /**
@@ -261,10 +232,11 @@ public final class DateExtensionUtil{
      *         左边,当前月的第一天 <code>00:00:00.000</code> <br>
      *         右边,当前月最后一天 <code>23:59:59.999</code> <br>
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getMonthStartAndEndPair(Date date){
-        Validate.notNull(date, "date can't be null!");
-        return Pair.of(getFirstDateOfThisMonth(date), getLastDateOfThisMonth(date));
+        return DateUtil.getMonthStartAndEndPair(date);
     }
 
     /**
@@ -289,9 +261,11 @@ public final class DateExtensionUtil{
      * @return 左边,当前年的第一天 <code>00:00:00.000</code> <br>
      *         右边,当前年最后一天 <code>23:59:59.999</code> <br>
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getYearStartAndEndPair(){
-        return getYearStartAndEndPair(now());
+        return DateUtil.getYearStartAndEndPair();
     }
 
     /**
@@ -319,11 +293,11 @@ public final class DateExtensionUtil{
      *         左边,当前年的第一天 <code>00:00:00.000</code> <br>
      *         右边,当前年最后一天 <code>23:59:59.999</code> <br>
      * @since 1.10.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static Pair<Date, Date> getYearStartAndEndPair(Date date){
-        Validate.notNull(date, "date can't be null!");
-
-        return Pair.of(getFirstDateOfThisYear(date), getLastDateOfThisYear(date));
+        return DateUtil.getYearStartAndEndPair(date);
     }
 
     // [end]
@@ -397,9 +371,11 @@ public final class DateExtensionUtil{
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static String formatDuration(Date beginDate){
-        return formatDuration(beginDate, now());
+        return DateUtil.formatDuration(beginDate);
     }
 
     /**
@@ -463,9 +439,11 @@ public final class DateExtensionUtil{
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static String formatDuration(Date beginDate,Date endDate){
-        return formatDuration(getIntervalTime(beginDate, endDate));
+        return DateUtil.formatDuration(beginDate, endDate);
     }
 
     /**
@@ -505,52 +483,15 @@ public final class DateExtensionUtil{
      *            总共相差的毫秒数
      * @return 如果 spaceMilliseconds 是0 直接返回0<br>
      *         如果 {@code spaceMilliseconds < 0},抛出 {@link IllegalArgumentException}
-     * @see #getIntervalDay(long)
-     * @see #getIntervalHour(long)
-     * @see #getIntervalMinute(long)
-     * @see #getIntervalSecond(long)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static String formatDuration(long spaceMilliseconds){
-        Validate.isTrue(spaceMilliseconds >= 0, "spaceMilliseconds can't <0");
-
-        if (0 == spaceMilliseconds){
-            return "0";
-        }
-        //---------------------------------------------------------------
-
-        // 间隔天数
-        long spaceDay = getIntervalDay(spaceMilliseconds);
-        // 间隔小时 减去间隔天数后,
-        long spaceHour = getIntervalHour(spaceMilliseconds) - spaceDay * 24;
-        // 间隔分钟 减去间隔天数及间隔小时后,
-        long spaceMinute = getIntervalMinute(spaceMilliseconds) - (spaceDay * 24 + spaceHour) * 60;
-        // 间隔秒 减去间隔天数及间隔小时,间隔分钟后,
-        long spaceSecond = getIntervalSecond(spaceMilliseconds) - ((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60;
-        // 间隔毫秒 减去间隔天数及间隔小时,间隔分钟,间隔秒后,
-        long spaceMillisecond = spaceMilliseconds - (((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60 + spaceSecond) * 1000;
-
-        //---------------------------------------------------------------
-        StringBuilder sb = new StringBuilder();
-        if (0 != spaceDay){
-            sb.append(spaceDay + DAY);
-        }
-        if (0 != spaceHour){
-            sb.append(spaceHour + HOUR);
-        }
-        if (0 != spaceMinute){
-            sb.append(spaceMinute + MINUTE);
-        }
-        if (0 != spaceSecond){
-            sb.append(spaceSecond + SECOND);
-        }
-        if (0 != spaceMillisecond){
-            sb.append(spaceMillisecond + MILLISECOND);
-        }
-        return sb.toString();
+        return DateUtil.formatDuration(spaceMilliseconds);
     }
 
     //---------------------------------------------------------------
@@ -599,24 +540,12 @@ public final class DateExtensionUtil{
      *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalWeek(long)
      * @since 1.6.0
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static int getIntervalWeek(Date date1,Date date2){
-        return getIntervalWeek(getIntervalTime(date1, date2));
-    }
-
-    /**
-     * 获得相差的星期数.
-     *
-     * @param spaceTime
-     *            the space time
-     * @return the interval week
-     * @see com.feilong.core.TimeInterval#SECONDS_PER_WEEK
-     * @since 1.6.0
-     */
-    private static int getIntervalWeek(long spaceTime){
-        return (int) (spaceTime / (MILLISECOND_PER_WEEK));
+        return DateUtil.getIntervalWeek(date1, date2);
     }
 
     //---------------------------------------------------------------
@@ -671,24 +600,12 @@ public final class DateExtensionUtil{
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalDay(long)
      * @since 1.6.0
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static int getIntervalDay(Date date1,Date date2){
-        return getIntervalDay(getIntervalTime(date1, date2));
-    }
-
-    /**
-     * 两个时间相差的天数.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的天数
-     * @see TimeInterval#SECONDS_PER_DAY
-     * @since 1.6.0
-     */
-    static int getIntervalDay(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (MILLISECOND_PER_DAY));
+        return DateUtil.getIntervalDay(date1, date2);
     }
 
     //---------------------------------------------------------------
@@ -738,24 +655,12 @@ public final class DateExtensionUtil{
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalHour(long)
      * @since 1.6.0
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static int getIntervalHour(Date date1,Date date2){
-        return getIntervalHour(getIntervalTime(date1, date2));
-    }
-
-    /**
-     * 两个时间相差的小时数.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的小时数
-     * @see TimeInterval#MILLISECOND_PER_HOUR
-     * @since 1.6.0
-     */
-    static int getIntervalHour(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (MILLISECOND_PER_HOUR));
+        return DateUtil.getIntervalHour(date1, date2);
     }
 
     //---------------------------------------------------------------
@@ -804,24 +709,12 @@ public final class DateExtensionUtil{
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalMinute(long)
      * @since 1.8.6
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static int getIntervalMinute(Date date1,Date date2){
-        return getIntervalMinute(getIntervalTime(date1, date2));
-    }
-
-    /**
-     * 两个时间相差的分钟.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的分钟
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
-     * @since 1.6.0
-     */
-    static int getIntervalMinute(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (MILLISECOND_PER_MINUTE));
+        return DateUtil.getIntervalMinute(date1, date2);
     }
 
     //---------------------------------------------------------------
@@ -861,27 +754,12 @@ public final class DateExtensionUtil{
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalSecond(long)
      * @since 1.6.0
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static int getIntervalSecond(Date date1,Date date2){
-        return getIntervalSecond(getIntervalTime(date1, date2));
-    }
-
-    /**
-     * 两个时间相差的秒数.
-     * 
-     * <p>
-     * 不足1秒返回0
-     * </p>
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的秒数
-     * @since 1.6.0
-     */
-    static int getIntervalSecond(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / MILLISECOND_PER_SECONDS);
+        return DateUtil.getIntervalSecond(date1, date2);
     }
 
     //---------------------------------------------------------------
@@ -914,12 +792,10 @@ public final class DateExtensionUtil{
      * @see DateUtil#getTime(Date)
      * @see Math#abs(long)
      * @since 1.6.0
+     * @deprecated pls use DateUtil since 3.0.0
      */
+    @Deprecated
     public static long getIntervalTime(Date date1,Date date2){
-        Validate.notNull(date1, "date1 can't be null!");
-        Validate.notNull(date2, "date2 can't be null!");
-        return Math.abs(getTime(date2) - getTime(date1));
+        return DateUtil.getIntervalTime(date1, date2);
     }
-
-    // [end]
 }

@@ -16,7 +16,7 @@
 package com.feilong.formatter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ArrayUtil.newArray;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;

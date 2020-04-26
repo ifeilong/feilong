@@ -94,6 +94,34 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 NowStringTest.class,
 
+                //---------------------------------------------------------------
+
+                GetDayStartAndEndPairTest.class,
+                GetMonthStartAndEndPairTest.class,
+                GetYearStartAndEndPairTest.class,
+
+                FormatDurationBeginAndEndDateTest.class,
+                FormatDurationLongTest.class,
+                FormatDurationDateTest.class,
+
+                GetIntervalWeekTest.class,
+                GetIntervalWeekParameterizedTest.class,
+
+                GetIntervalDayTest.class,
+                GetIntervalDayParameterizedTest.class,
+
+                GetIntervalHourTest.class,
+                GetIntervalHourParameterizedTest.class,
+
+                GetIntervalMinuteTest.class,
+                GetIntervalMinuteParameterizedTest.class,
+
+                GetIntervalSecondTest.class,
+                GetIntervalSecondParameterizedTest.class,
+
+                GetIntervalTimeTest.class,
+                GetIntervalTimeParameterizedTest.class,
+
         //                
 })
 public class DateUtilSuiteTests{

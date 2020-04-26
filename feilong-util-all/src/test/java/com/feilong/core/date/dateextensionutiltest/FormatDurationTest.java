@@ -28,12 +28,6 @@ import org.junit.Test;
 
 import com.feilong.core.TimeInterval;
 
-/**
- * The Class DateExtensionUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.8
- */
 public class FormatDurationTest{
 
     /**
@@ -52,7 +46,7 @@ public class FormatDurationTest{
     /**
      * Test format duration 1.
      */
-    //**************com.feilong.core.date.DateExtensionUtil.formatDuration(Date)*****************
+    //**************com.feilong.core.date.DateUtil.formatDuration(Date)*****************
     @Test
     public void testFormatDuration1(){
         Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
@@ -67,7 +61,7 @@ public class FormatDurationTest{
         formatDuration(null);
     }
 
-    //***************com.feilong.core.date.DateExtensionUtil.formatDuration(Date, Date)*****************
+    //***************com.feilong.core.date.DateUtil.formatDuration(Date, Date)*****************
 
     /**
      * Test format duration 23.
@@ -96,7 +90,6 @@ public class FormatDurationTest{
     /**
      * Test format duration 3.
      */
-    //***************com.feilong.core.date.DateExtensionUtil.formatDuration(long)****************
     @Test(expected = IllegalArgumentException.class)
     public void testFormatDuration3(){
         formatDuration(-1);

@@ -29,9 +29,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
-/**
- * The Class GetIntervalSecondParameterizedTest.
- */
 public class GetIntervalSecondParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, Integer>{
 
     /**

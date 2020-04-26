@@ -17,7 +17,7 @@ package com.feilong.context.codecreator;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.bean.ConvertUtil.toLong;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.date.DateUtil.toDate;
 

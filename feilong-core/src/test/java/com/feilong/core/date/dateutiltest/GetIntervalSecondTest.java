@@ -13,35 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date.dateextensionutiltest;
+package com.feilong.core.date.dateutiltest;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.date.DateUtil.getIntervalSecond;
+import static com.feilong.core.date.DateUtil.toDate;
 
 import org.junit.Test;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalDay;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-
-/**
- * The Class DateExtensionUtilGetIntervalDayTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class GetIntervalDayTest{
+public class GetIntervalSecondTest{
 
     /**
-     * Test get interval day null.
+     * Test get interval second null.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalDayNull(){
-        getIntervalDay(null, toDate("2008-9-29", COMMON_DATE));
+    public void testGetIntervalSecondNull(){
+        getIntervalSecond(null, toDate("2008-9-29", COMMON_DATE));
     }
 
     /**
-     * Test get interval day null 1.
+     * Test get interval second null 1.
      */
     @Test(expected = NullPointerException.class)
-    public void testGetIntervalDayNull1(){
-        getIntervalDay(toDate("2008-12-1", COMMON_DATE), null);
+    public void testGetIntervalSecondNull1(){
+        getIntervalSecond(toDate("2008-12-1", COMMON_DATE), null);
     }
 }
