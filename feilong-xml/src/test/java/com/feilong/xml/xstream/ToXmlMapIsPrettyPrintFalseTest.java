@@ -15,33 +15,16 @@
  */
 package com.feilong.xml.xstream;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.feilong.xml.XmlUtil;
 
 public class ToXmlMapIsPrettyPrintFalseTest{
-
-    @Test
-    @Ignore
-    public void testToXMLConcurrentHashMap(){
-        Map<String, String> map = new ConcurrentHashMap<>();
-        map.put("out_trade_no", "112122212");
-        map.put("total_fee", "125.00");
-        map.put("call_back_url", "");
-        map.put("notify_url", "");
-
-        assertEquals(
-                        "<xml><out_trade_no>112122212</out_trade_no><call_back_url></call_back_url><notify_url></notify_url><total_fee>125.00</total_fee></xml>",
-                        XmlUtil.toXML(map, "xml", false));
-    }
 
     @Test
     public void testToXMLLinkedHashMap(){
@@ -58,17 +41,4 @@ public class ToXmlMapIsPrettyPrintFalseTest{
                         XmlUtil.toXML(map, "xml", false));
     }
 
-    @Test()
-    @Ignore
-    public void testToXMLHashMap(){
-        Map<String, String> map = newHashMap();
-        map.put("out_trade_no", "112122212");
-        map.put("total_fee", "125.00");
-        map.put("call_back_url", "");
-        map.put("notify_url", "");
-
-        assertEquals(
-                        "<xml><call_back_url></call_back_url><total_fee>125.00</total_fee><notify_url></notify_url><out_trade_no>112122212</out_trade_no></xml>",
-                        XmlUtil.toXML(map, "xml", false));
-    }
 }
