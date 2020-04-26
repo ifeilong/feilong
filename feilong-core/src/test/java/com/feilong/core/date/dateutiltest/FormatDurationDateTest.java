@@ -18,6 +18,7 @@ package com.feilong.core.date.dateutiltest;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.toDate;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class FormatDurationDateTest{
     @Test
     public void testFormatDuration1(){
         Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
-        formatDuration(date);
+        assertNotNull(formatDuration(date));
     }
 
     @Test(expected = NullPointerException.class)

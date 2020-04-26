@@ -17,27 +17,37 @@ package com.feilong.io.filenameutil;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
 
 import com.feilong.io.FilenameUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class FilenameUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.4.0
- */
-public class FilenameUtilTest extends AbstractTest{
+public class GetFileNameTest extends AbstractTest{
 
     /** <code>{@value}</code>. */
     private static String FILE_NAME = "F:/pie2.png";
 
     @Test
-    public void testGetFilePreName(){
-        assertEquals("F:/pie2", FilenameUtil.getFilePreName(FILE_NAME));
-        assertEquals("pie2", FilenameUtils.getBaseName(FILE_NAME));
+    public void testGetFileName(){
+        assertEquals("pie2.png", FilenameUtil.getFileName(FILE_NAME));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testGetFileNameTestNull(){
+        FilenameUtil.getFileName(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetFileNameTestEmpty(){
+        FilenameUtil.getFileName("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetFileNameTestBlank(){
+        FilenameUtil.getFileName(" ");
+
     }
 
 }

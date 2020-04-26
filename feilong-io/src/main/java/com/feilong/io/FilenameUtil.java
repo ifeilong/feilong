@@ -116,11 +116,14 @@ public final class FilenameUtil{
      * 
      * @param fileName
      *            the file name
-     * @return the file name
+     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#getName()
      * @see org.apache.commons.io.FilenameUtils#getName(String)
      */
     public static String getFileName(String fileName){
+        Validate.notBlank(fileName, "fileName can't be blank!");
+
         File file = new File(fileName);
         return file.getName();
     }

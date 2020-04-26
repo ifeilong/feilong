@@ -19,13 +19,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
+
+                GetFileNameTest.class,
+                FilenameUtilTest.class,
 
                 GetParentPathListTest.class,
                 GetExtensionParameterizedTest.class,
