@@ -23,12 +23,12 @@ public class RuntimeUtilTest extends AbstractTest{
 
     @Test
     public void test(){
-        System.out.println(RuntimeUtil.execCmd("ll"));//TODO:remove;
+        LOGGER.debug(RuntimeUtil.execCmd("ll"));
     }
 
     @Test
     public void test12(){
-        System.out.println(RuntimeUtil.execCmd("mvn -v"));//TODO:remove;
+        LOGGER.debug(RuntimeUtil.execCmd("mvn -v"));
     }
 
     //---------------------------------------------------------------

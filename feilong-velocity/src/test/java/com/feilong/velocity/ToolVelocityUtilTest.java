@@ -24,17 +24,8 @@ import org.junit.Test;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class ToolVelocityUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.2.1
- */
 public class ToolVelocityUtilTest extends AbstractTest{
 
-    /**
-     * Test tool.
-     */
     @Test
     public void testTool(){
         Map<String, Object> map = newHashMap();

@@ -28,14 +28,8 @@ import org.junit.Test;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class VelocityUtilTest.
- */
 public class VelocityUtilTest extends AbstractTest{
 
-    /**
-     * Parses the vm template with classpath resource loader.
-     */
     @Test
     public void parseVMTemplateWithClasspathResourceLoader(){
         // Properties properties = new Properties();

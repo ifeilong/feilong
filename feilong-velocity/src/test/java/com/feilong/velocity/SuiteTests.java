@@ -25,6 +25,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 ParseStringTest.class,
         //
 })
-public class FeiLongVelocitySuiteTests{
+public class SuiteTests{
 
 }

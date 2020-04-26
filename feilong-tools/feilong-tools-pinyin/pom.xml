@@ -26,6 +26,7 @@
 			<groupId>com.belerweb</groupId>
 			<artifactId>pinyin4j</artifactId>
 			<version>${version.pinyin4j}</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 </project>

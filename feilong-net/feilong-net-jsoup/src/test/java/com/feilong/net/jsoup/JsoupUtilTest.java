@@ -45,7 +45,7 @@ public class JsoupUtilTest extends AbstractTest{
                         + "            <responsequeue>Cleanresponse</responsequeue>\n" + "        </Request>\n" + "    </config>";
         Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
         for (Element e : doc.select("requestqueue")){
-            System.out.println(e);
+            LOGGER.debug("" + e);
         }
     }
 

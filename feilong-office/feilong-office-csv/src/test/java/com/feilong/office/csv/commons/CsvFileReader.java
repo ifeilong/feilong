@@ -9,6 +9,8 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.office.csv.User;
 
@@ -18,6 +20,10 @@ import com.feilong.office.csv.User;
  */
 public class CsvFileReader{
 
+    /** The Constant log. */
+    private static final Logger   LOGGER      = LoggerFactory.getLogger(CsvFileReader.class);
+
+    //---------------------------------------------------------------
     //CSV文件头
     private static final String[] FILE_HEADER = { "用户名", "密码", "名称", "年龄" };
 
@@ -49,7 +55,7 @@ public class CsvFileReader{
             }
             // 遍历打印
             for (User user : userList){
-                System.out.println(user.toString());
+                LOGGER.debug(user.toString());
             }
         }catch (Exception e){
             e.printStackTrace();

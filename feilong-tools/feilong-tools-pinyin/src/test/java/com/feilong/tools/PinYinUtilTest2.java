@@ -17,24 +17,26 @@ package com.feilong.tools;
 
 import org.junit.Test;
 
+import com.feilong.test.AbstractTest;
+
 /**
  * The Class PinYinUtilTest.
  */
-public class PinYinUtilTest2{
+public class PinYinUtilTest2 extends AbstractTest{
 
     @Test
     public void test2(){
-        System.out.println(PinYinUtil.toPinYin("Badge of Sport T裇 爱情 T 裇"));
+        LOGGER.debug(PinYinUtil.toPinYin("Badge of Sport T裇 爱情 T 裇"));
     }
 
     @Test
     public void test22(){
-        System.out.println(PinYinUtil.toPinYin("裇"));
+        LOGGER.debug(PinYinUtil.toPinYin("裇"));
     }
 
     @Test
     public void test22333(){
-        System.out.println(PinYinUtil.toPinYin("金鑫"));
+        LOGGER.debug(PinYinUtil.toPinYin("金鑫"));
     }
 
 }

@@ -20,11 +20,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.feilong.test.AbstractTest;
+
 import loxia.support.excel.convertor.IntegerConvertor;
 import loxia.support.excel.definition.ExcelCell;
 import loxia.support.excel.exception.ExcelManipulateException;
 
-public class IntegerConvertorTest{
+public class IntegerConvertorTest extends AbstractTest{
 
     private final ExcelCell                                   cellDefinition          = new ExcelCell();
 
@@ -52,13 +54,13 @@ public class IntegerConvertorTest{
     @Test
     public void testIntegerConvertorTest22() throws ExcelManipulateException{
         Integer convert = feilongIntegerConvertor.convert("1.0", 1, "F2", cellDefinition);
-        System.out.println(convert);
+        LOGGER.debug("" + convert);
     }
 
     //---------------------------------------------------------------
 
     @Test
     public void testIntegerConvertorTest1(){
-        System.out.println(toInteger("1.0"));//TODO:remove
+        LOGGER.debug("" + toInteger("1.0"));//TODO:remove
     }
 }

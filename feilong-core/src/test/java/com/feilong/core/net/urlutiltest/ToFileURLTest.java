@@ -18,6 +18,8 @@ package com.feilong.core.net.urlutiltest;
 import java.net.URL;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.net.URLUtil;
@@ -29,6 +31,11 @@ import com.feilong.core.net.URLUtil;
  */
 public class ToFileURLTest{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ToFileURLTest.class);
+
+    //---------------------------------------------------------------
+
     // @Test(expected = InvocationTargetException.class)
     @Test
     @SuppressWarnings("static-method")
@@ -39,6 +46,6 @@ public class ToFileURLTest{
         // string = "/a/b";
         URL invoke = MethodUtil.invokeStaticMethod(URLUtil.class, "toFileURL", string);
 
-        System.out.println(invoke);//TODO:remove
+        LOGGER.debug("" + invoke);//TODO:remove
     }
 }

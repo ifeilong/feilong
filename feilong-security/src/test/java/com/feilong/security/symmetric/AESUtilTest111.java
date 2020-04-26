@@ -67,10 +67,10 @@ public class AESUtilTest111 extends AbstractSecurityTest{
 
         String plainText = "Base64是一种基于64个可打印字符来表示二进制数据的表示方法.";
         String cipherText = symmetricEncryption1.encryptBase64(plainText, UTF8);
-        System.out.println("Cipher:" + cipherText);
+        LOGGER.debug("Cipher:" + cipherText);
 
         String decipherText = symmetricEncryption1.decryptBase64(cipherText, UTF8);
-        System.out.println("Decipher:" + decipherText);
+        LOGGER.debug("Decipher:" + decipherText);
         assert plainText.equals(decipherText) : "Encrypt is not correct";
     }
 
