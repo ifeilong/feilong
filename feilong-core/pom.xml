@@ -59,6 +59,7 @@
 
 		<!-- **********************仅仅 统一下版本************************************** -->
 		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
+		<!-- commons beanutils 需要使用 -->
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
