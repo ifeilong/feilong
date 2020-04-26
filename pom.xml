@@ -164,9 +164,6 @@
 
 		<version.commons-validator>1.6</version.commons-validator>
 
-		<!-- net.sf.json-lib -->
-		<version.json-lib>2.4</version.json-lib>
-
 		<!-- http://www.jcraft.com/jsch/ChangeLog -->
 		<version.jsch>0.1.55</version.jsch>
 
@@ -599,34 +596,6 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-
-			<!-- net.sf.json-lib -->
-			<dependency>
-				<groupId>net.sf.json-lib</groupId>
-				<artifactId>json-lib</artifactId>
-				<version>${version.json-lib}</version>
-				<classifier>jdk15</classifier>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-beanutils</artifactId>
-						<groupId>commons-beanutils</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-collections</artifactId>
-						<groupId>commons-collections</groupId>
-					</exclusion>
-					<!-- 2.5 -->
-					<exclusion>
-						<artifactId>commons-lang</artifactId>
-						<groupId>commons-lang</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
 
 			<!-- jsch 用于sftp 传输 -->
 			<dependency>
