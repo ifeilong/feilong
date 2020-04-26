@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<digester-rules>
+	<pattern value="sheets">
+		<object-create-rule classname="java.util.ArrayList" />
+	</pattern>
+
+	<pattern value="sheets/sheet">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelSheet" />
+		<set-properties-rule>
+			<alias attr-name="name" prop-name="name" />
+			<alias attr-name="disp-name" prop-name="displayName" />
+		</set-properties-rule>
+		<set-next-rule methodname="add" />
+	</pattern>
+
+	<pattern value="sheets/sheet/block">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelBlock" />
+		<set-properties-rule>
+			<alias attr-name="start" prop-name="startCellIndex" />
+			<alias attr-name="end" prop-name="endCellIndex" />
+			<alias attr-name="dataName" prop-name="dataName" />
+			<alias attr-name="loop" prop-name="loop" />
+			<alias attr-name="direction" prop-name="direction" />
+		</set-properties-rule>
+		<call-method-rule methodname="setLoopClassByClassName" paramcount="1" />
+		<call-param-rule paramnumber="0" attrname="loopClass" />
+		<set-next-rule methodname="addExcelBlock" />
+	</pattern>
+
+	<pattern value="sheets/sheet/block/loopbreakcondition">
+		<object-create-rule classname="loxia.support.excel.definition.LoopBreakCondition" />
+		<set-properties-rule>
+			<alias attr-name="rowOffset" prop-name="rowOffset" />
+			<alias attr-name="colOffset" prop-name="colOffset" />
+		</set-properties-rule>
+		<call-method-rule methodname="setFlagString" paramcount="0" />
+		<set-next-rule methodname="setBreakCondition" />
+	</pattern>
+
+	<pattern value="sheets/sheet/block/childblock">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelBlock" />
+		<set-properties-rule>
+			<alias attr-name="start" prop-name="startCellIndex" />
+			<alias attr-name="dataName" prop-name="dataName" />
+		</set-properties-rule>
+		<set-next-rule methodname="setChildBlock" />
+	</pattern>
+
+	<pattern value="*/cell/expr">
+		<call-method-rule methodname="setDataExpr" paramcount="0" />
+	</pattern>
+
+	<pattern value="*/cell">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelCell" />
+		<set-properties-rule>
+			<alias attr-name="position" prop-name="cellIndex" />
+			<alias attr-name="dataName" prop-name="dataName" />
+			<alias attr-name="type" prop-name="type" />
+			<alias attr-name="mandatory" prop-name="mandatory" />
+			<alias attr-name="pattern" prop-name="pattern" />
+			<alias attr-name="choice" prop-name="choiceString" />
+		</set-properties-rule>
+		<set-next-rule methodname="addCell" />
+	</pattern>
+
+	<pattern value="*/block/cellstyle">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelCellConditionStyle" />
+		<set-properties-rule>
+			<alias attr-name="start" prop-name="startCellIndex" />
+			<alias attr-name="end" prop-name="endCellIndex" />
+			<alias attr-name="position" prop-name="cellIndex" />
+		</set-properties-rule>
+		<call-method-rule methodname="setCondition" paramcount="0" />
+		<set-next-rule methodname="addStyle" />
+	</pattern>
+
+	<pattern value="*/childblock/cellstyle">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelCellConditionStyle" />
+		<set-properties-rule>
+			<alias attr-name="start" prop-name="startCellIndex" />
+			<alias attr-name="end" prop-name="endCellIndex" />
+			<alias attr-name="position" prop-name="cellIndex" />
+		</set-properties-rule>
+		<call-method-rule methodname="setCondition" paramcount="0" />
+		<set-next-rule methodname="addStyle" />
+	</pattern>
+
+	<pattern value="*/cell/cellstyle">
+		<object-create-rule classname="loxia.support.excel.definition.ExcelCellConditionStyle" />
+		<set-properties-rule>
+			<alias attr-name="position" prop-name="cellIndex" />
+		</set-properties-rule>
+		<call-method-rule methodname="setCondition" paramcount="0" />
+		<set-next-rule methodname="addStyle" />
+	</pattern>
+</digester-rules>

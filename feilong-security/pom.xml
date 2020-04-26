@@ -28,19 +28,6 @@
 			<artifactId>feilong-json</artifactId>
 		</dependency>
 
-		<!-- slf4j-log4j12 -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
-		</dependency>
-
-		<!-- log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
-		</dependency>
 
 		<dependency>
 			<groupId>commons-codec</groupId>

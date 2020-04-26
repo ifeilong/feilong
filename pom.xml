@@ -117,6 +117,7 @@
 		<!-- http://commons.apache.org/proper/commons-compress/ -->
 		<version.commons-compress>1.19</version.commons-compress>
 
+		<!-- http://commons.apache.org/proper/commons-digester/ -->
 		<version.commons-digester>2.1</version.commons-digester>
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
@@ -190,6 +191,10 @@
 
 		<!-- https://logback.qos.ch/news.html -->
 		<version.logback>1.2.3</version.logback>
+
+		<version.poi>3.16</version.poi>
+		<!-- 新版poi需要这个jar -->
+		<version.ooxml-schemas>1.1</version.ooxml-schemas>
 
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.30</version.slf4j>
@@ -379,6 +384,7 @@
 		</dependency>
 
 		<!--******************** test************************* -->
+
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -398,6 +404,20 @@
 			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-common-test</artifactId>
 			<version>${version.feilong-common-test}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -508,7 +528,7 @@
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
 				<version>${version.javamail}</version>
-			</dependency> -->
+				</dependency> -->
 
 			<!-- -->
 			<dependency>
@@ -852,6 +872,34 @@
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>${version.commons-io}</version>
+			</dependency>
+
+			<!-- ***************************** poi ***************************** -->
+			<!-- poi HSSF is our port of the Microsoft Excel 97(-2007) file format (BIFF8) to pure Java. -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+
+			<!-- poi-ooxml XSSF is our port of the Microsoft Excel XML (2007+) file format (OOXML) to pure Java -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${version.poi}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.github.virtuald</groupId>
+						<artifactId>curvesapi</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- poi-ooxml-schemas是ooxml-schemas的精简版 -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>ooxml-schemas</artifactId>
+				<version>${version.ooxml-schemas}</version>
 			</dependency>
 
 			<!-- *********************json******************************* -->

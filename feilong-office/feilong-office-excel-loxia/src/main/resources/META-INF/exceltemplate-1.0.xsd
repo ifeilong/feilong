@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="blockcellstyle">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="start" use="required" type="xs:NCName" />
+				<xs:attribute name="end" use="required" type="xs:NCName" />
+				<xs:attribute name="position" use="required" type="xs:NCName" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="cellstyle">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="position" use="required" type="xs:NCName" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="directions">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="horizontal" />
+			<xs:enumeration value="vertical" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="cell">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="cellstyle" type="cellstyle" />
+			</xs:sequence>
+			<xs:attribute name="position" use="required" type="xs:NCName" />
+			<xs:attribute name="dataName" use="required" type="xs:string" />
+			<xs:attribute name="type" use="optional" type="xs:string" />
+			<xs:attribute name="mandatory" use="optional" default="false" type="xs:boolean" />
+			<xs:attribute name="pattern" use="optional" type="xs:string" />
+			<xs:attribute name="choice" use="optional" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="childblock">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="cellstyle" type="blockcellstyle" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="cell" />
+			</xs:sequence>
+			<xs:attribute name="start" use="required" type="xs:NCName" />
+			<xs:attribute name="dataName" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="loopbreakcondition">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="rowOffset" use="required" type="xs:int" />
+					<xs:attribute name="colOffset" use="required" type="xs:int" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="block">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="cellstyle" type="blockcellstyle" />
+				<xs:element maxOccurs="unbounded" ref="cell" />
+				<xs:choice>
+					<xs:element minOccurs="0" maxOccurs="1" ref="childblock" />
+					<xs:element minOccurs="0" maxOccurs="1" ref="loopbreakcondition" />
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="start" use="required" type="xs:NCName" />
+			<xs:attribute name="end" use="required" type="xs:NCName" />
+			<xs:attribute name="dataName" use="optional" type="xs:NCName" />
+			<xs:attribute name="loop" use="optional" default="false" type="xs:boolean" />
+			<xs:attribute name="direction" use="optional" default="horizontal" type="directions" />
+			<xs:attribute name="loopClass" use="optional" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sheet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="block" />
+			</xs:sequence>
+			<xs:attribute name="name" use="required" type="xs:NCName" />
+			<xs:attribute name="disp-name" use="optional" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sheets">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="sheet" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
