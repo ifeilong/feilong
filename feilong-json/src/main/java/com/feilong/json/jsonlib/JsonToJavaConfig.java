@@ -36,14 +36,14 @@ public class JsonToJavaConfig extends AbstractConfig{
     /**
      * The root class.
      * 
-     * @see net.sf.json.JsonConfig#setRootClass(Class)
+     * @see com.feilong.json.lib.json.JsonConfig#setRootClass(Class)
      */
     private Class<?>                  rootClass;
 
     /**
      * The class map.
      * 
-     * @see net.sf.json.JsonConfig#setClassMap(Map)
+     * @see com.feilong.json.lib.json.JsonConfig#setClassMap(Map)
      */
     private Map<String, Class<?>>     classMap;
 
@@ -129,7 +129,7 @@ public class JsonToJavaConfig extends AbstractConfig{
      * 
      * </blockquote>
      * 
-     * @see net.sf.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
+     * @see com.feilong.json.lib.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
      */
     private JavaIdentifierTransformer javaIdentifierTransformer;
 
@@ -345,7 +345,7 @@ public class JsonToJavaConfig extends AbstractConfig{
      * </blockquote>
      *
      * @return java标识符号转换器
-     * @see net.sf.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
+     * @see com.feilong.json.lib.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
      */
     public JavaIdentifierTransformer getJavaIdentifierTransformer(){
         return javaIdentifierTransformer;
@@ -435,7 +435,7 @@ public class JsonToJavaConfig extends AbstractConfig{
      *
      * @param javaIdentifierTransformer
      *            java标识符号转换器
-     * @see net.sf.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
+     * @see com.feilong.json.lib.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
      */
     public void setJavaIdentifierTransformer(JavaIdentifierTransformer javaIdentifierTransformer){
         this.javaIdentifierTransformer = javaIdentifierTransformer;
