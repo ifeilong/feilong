@@ -21,7 +21,7 @@ public class LoxiaSupportSettings{
 
     private static final String[]       CONFIGS = new String[] { "loxiasupport", "loxia/support-default" };
 
-    private final List<Properties>      props   = new ArrayList<Properties>();
+    private final List<Properties>      props   = new ArrayList<>();
 
     private LoxiaSupportSettings(){
         for (String config : CONFIGS){

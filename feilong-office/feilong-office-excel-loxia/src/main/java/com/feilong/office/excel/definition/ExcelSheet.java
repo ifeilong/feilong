@@ -34,7 +34,7 @@ public class ExcelSheet{
     private String           displayName;
 
     /** The excel blocks. */
-    private List<ExcelBlock> excelBlocks = new ArrayList<ExcelBlock>();
+    private List<ExcelBlock> excelBlocks = new ArrayList<>();
 
     /** The is ordered. */
     private Boolean          isOrdered   = false;

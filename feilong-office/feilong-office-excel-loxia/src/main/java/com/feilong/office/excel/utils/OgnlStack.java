@@ -143,7 +143,7 @@ public class OgnlStack{
         }
 
         stack.add(obj);
-        this.context = context == null ? new HashMap<String, Object>() : context;
+        this.context = context == null ? new HashMap<>() : context;
         this.context.put(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
     }
 

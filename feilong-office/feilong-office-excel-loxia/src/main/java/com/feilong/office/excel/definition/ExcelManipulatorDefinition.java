@@ -29,7 +29,7 @@ public class ExcelManipulatorDefinition{
     private Integer          styleSheetPosition;
 
     /** The excel sheets. */
-    private List<ExcelSheet> excelSheets = new ArrayList<ExcelSheet>();
+    private List<ExcelSheet> excelSheets = new ArrayList<>();
 
     /**
      * Gets the excel sheets.

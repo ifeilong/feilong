@@ -51,7 +51,7 @@ public class ExcelCell{
     private String                        pattern;
 
     /** The styles. */
-    private List<ExcelCellConditionStyle> styles = new ArrayList<ExcelCellConditionStyle>();
+    private List<ExcelCellConditionStyle> styles = new ArrayList<>();
 
     /**
      * Gets the row.

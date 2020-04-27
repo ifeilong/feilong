@@ -155,7 +155,7 @@ public class DefaultExcelWriter implements ExcelWriter{
             writeStatus.setStatus(WriteStatus.STATUS_SETTING_ERROR);
             writeStatus.setMessage("No sheet definition found or Sheet Number in definition is more than number in template file.");
         }else{
-            Map<String, CellStyle> styleMap = new HashMap<String, CellStyle>();
+            Map<String, CellStyle> styleMap = new HashMap<>();
             if (definition.getStyleSheetPosition() != null){
                 if (definition.getStyleSheetPosition().intValue() < definition.getExcelSheets().size()){
                     writeStatus.setStatus(WriteStatus.STATUS_SETTING_ERROR);
@@ -265,7 +265,7 @@ public class DefaultExcelWriter implements ExcelWriter{
             writeStatus.setStatus(WriteStatus.STATUS_SETTING_ERROR);
             writeStatus.setMessage("No sheet definition found or template file contains no sheet.");
         }else{
-            Map<String, CellStyle> styleMap = new HashMap<String, CellStyle>();
+            Map<String, CellStyle> styleMap = new HashMap<>();
             if (definition.getStyleSheetPosition() != null){
                 if (definition.getStyleSheetPosition().intValue() < definition.getExcelSheets().size()){
                     writeStatus.setStatus(WriteStatus.STATUS_SETTING_ERROR);
@@ -433,7 +433,7 @@ public class DefaultExcelWriter implements ExcelWriter{
             wb.setSheetName(wb.getSheetIndex(sheet), sheetName);
         }
 
-        Map<ExcelBlock, List<CellRangeAddress>> mergedRegions = new HashMap<ExcelBlock, List<CellRangeAddress>>();
+        Map<ExcelBlock, List<CellRangeAddress>> mergedRegions = new HashMap<>();
         for (int i = 0; i < sheet.getNumMergedRegions(); i++){
             CellRangeAddress cra = sheet.getMergedRegion(i);
             LOGGER.debug(
@@ -445,7 +445,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                                 && cra.getLastRow() <= blockDefinition.getEndRow() && cra.getLastColumn() <= blockDefinition.getEndCol()){
                     List<CellRangeAddress> cras = mergedRegions.get(blockDefinition);
                     if (cras == null){
-                        cras = new ArrayList<CellRangeAddress>();
+                        cras = new ArrayList<>();
                         mergedRegions.put(blockDefinition, cras);
                     }
                     cras.add(cra);
@@ -560,7 +560,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                     if (value.getClass().isArray()){
                         listValue = Arrays.asList(value);
                     }else{
-                        ArrayList<Object> list = new ArrayList<Object>();
+                        ArrayList<Object> list = new ArrayList<>();
                         list.add(value);
                         listValue = list;
                     }
@@ -640,7 +640,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                     if (value.getClass().isArray()){
                         listValue = Arrays.asList(value);
                     }else{
-                        ArrayList<Object> list = new ArrayList<Object>();
+                        ArrayList<Object> list = new ArrayList<>();
                         list.add(value);
                         listValue = list;
                     }
@@ -776,7 +776,7 @@ public class DefaultExcelWriter implements ExcelWriter{
             }
             List<CellRangeAddress> childMergedRegions = null;
             if (mergedRegions != null){
-                childMergedRegions = new ArrayList<CellRangeAddress>();
+                childMergedRegions = new ArrayList<>();
                 for (CellRangeAddress cra : mergedRegions){
                     if (cra.getFirstRow() >= blockDefinition.getChildBlock().getStartRow()
                                     && cra.getFirstColumn() >= blockDefinition.getChildBlock().getStartCol()

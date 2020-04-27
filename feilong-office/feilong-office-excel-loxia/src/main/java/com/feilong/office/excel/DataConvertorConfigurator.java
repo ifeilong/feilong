@@ -37,10 +37,10 @@ public class DataConvertorConfigurator implements Serializable{
     private static final long                     serialVersionUID = -6172555487692156540L;
 
     /** The supports map. */
-    private final Map<String, Class<?>>           supportsMap      = new HashMap<String, Class<?>>();
+    private final Map<String, Class<?>>           supportsMap      = new HashMap<>();
 
     /** The convertor map. */
-    private final Map<Class<?>, DataConvertor<?>> convertorMap     = new HashMap<Class<?>, DataConvertor<?>>();
+    private final Map<Class<?>, DataConvertor<?>> convertorMap     = new HashMap<>();
 
     /** The instance. */
     private static DataConvertorConfigurator      instance;

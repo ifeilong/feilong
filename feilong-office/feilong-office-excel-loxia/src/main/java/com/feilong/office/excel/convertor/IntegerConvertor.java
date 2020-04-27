@@ -53,7 +53,7 @@ public class IntegerConvertor extends ChoiceConvertor<Integer>{
         if (cellDefinition.getAvailableChoices() == null || cellDefinition.getAvailableChoices().length == 0){
             return null;
         }
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (String str : cellDefinition.getAvailableChoices()){
             result.add(Integer.parseInt(str));
         }

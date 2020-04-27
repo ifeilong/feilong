@@ -116,7 +116,7 @@ public class DefaultExcelReader implements ExcelReader{
                 //Only first ExcelSheet Definition will be used
                 ExcelSheet sheetDefinition = definition.getExcelSheets().iterator().next();
 
-                Map<String, List<Object>> cacheMap = new HashMap<String, List<Object>>();
+                Map<String, List<Object>> cacheMap = new HashMap<>();
                 for (String key : beans.keySet()){
                     if (beans.get(key) != null){
                         cacheMap.put(key, new ArrayList<Object>());
@@ -354,7 +354,7 @@ public class DefaultExcelReader implements ExcelReader{
         FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         if (blockDefinition.getLoopClass() == null){
-            Map<String, Object> result = new HashMap<String, Object>();
+            Map<String, Object> result = new HashMap<>();
 
             for (ExcelCell cellDefinition : blockDefinition.getCells()){
                 int rowOffSet = cellDefinition.getRow() - blockDefinition.getStartRow();

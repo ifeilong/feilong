@@ -1844,8 +1844,8 @@ public final class ConvertUtil{
             return emptyMap();
         }
 
-        Transformer<K, I> keyTransformer = null == keyTargetType ? null : new SimpleClassTransformer<K, I>(keyTargetType);
-        Transformer<V, J> valueTransformer = null == valueTargetType ? null : new SimpleClassTransformer<V, J>(valueTargetType);
+        Transformer<K, I> keyTransformer = null == keyTargetType ? null : new SimpleClassTransformer<>(keyTargetType);
+        Transformer<V, J> valueTransformer = null == valueTargetType ? null : new SimpleClassTransformer<>(valueTargetType);
 
         return toMap(inputMap, keyTransformer, valueTransformer);
     }
@@ -2342,7 +2342,7 @@ public final class ConvertUtil{
         if (null == collection){
             return Collections.<T> emptyList();
         }
-        return collection instanceof List ? (List<T>) collection : new ArrayList<T>(collection);
+        return collection instanceof List ? (List<T>) collection : new ArrayList<>(collection);
     }
 
     /**

@@ -59,10 +59,10 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     private Class<? extends Object>       loopClass;
 
     /** The cells. */
-    private List<ExcelCell>               cells                    = new ArrayList<ExcelCell>();
+    private List<ExcelCell>               cells                    = new ArrayList<>();
 
     /** The styles. */
-    private List<ExcelCellConditionStyle> styles                   = new ArrayList<ExcelCellConditionStyle>();
+    private List<ExcelCellConditionStyle> styles                   = new ArrayList<>();
 
     /** The is child block. */
     private boolean                       isChildBlock             = false;

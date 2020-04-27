@@ -32,23 +32,22 @@ public class LongConvertor extends ChoiceConvertor<Long>{
                                                    null,
                                                    cellDefinition.getPattern(),
                                                    cellDefinition.getChoiceString() });
-                }else{
-                    return null;
                 }
-            }else{
-                try{
-                    Long v = Long.parseLong((String) value);
-                    return v;
-                }catch (NumberFormatException e){
-                    throw new ExcelManipulateException(
-                                    ErrorCode.WRONG_DATA_TYPE_NUMBER,
-                                    new Object[] {
-                                                   sheetNo + 1,
-                                                   cellIndex,
-                                                   value,
-                                                   cellDefinition.getPattern(),
-                                                   cellDefinition.getChoiceString() });
-                }
+                return null;
+            }
+
+            try{
+                Long v = Long.parseLong((String) value);
+                return v;
+            }catch (NumberFormatException e){
+                throw new ExcelManipulateException(
+                                ErrorCode.WRONG_DATA_TYPE_NUMBER,
+                                new Object[] {
+                                               sheetNo + 1,
+                                               cellIndex,
+                                               value,
+                                               cellDefinition.getPattern(),
+                                               cellDefinition.getChoiceString() });
             }
         }else if (value instanceof Double){
             return Math.round((Double) value);
@@ -64,7 +63,7 @@ public class LongConvertor extends ChoiceConvertor<Long>{
         if (cellDefinition.getAvailableChoices() == null || cellDefinition.getAvailableChoices().length == 0){
             return null;
         }
-        List<Long> result = new ArrayList<Long>();
+        List<Long> result = new ArrayList<>();
         for (String str : cellDefinition.getAvailableChoices()){
             result.add(Long.parseLong(str));
         }
