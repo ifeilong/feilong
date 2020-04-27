@@ -342,20 +342,16 @@ public final class XStreamUtil{
      * }
      * </pre>
      * 
-     * <p>
-     * 
      * <b>2.设置 Alias 参数</b> <br>
      * 可以看到上面的结果中,XML Root元素名字是 com.feilong.test.User,如果只是显示成 {@code <user>}怎么做呢？<br>
      * 使用
      * 
-     * <code>
      * <pre class="code">
-     *     User user = new User(1L);
-     *     XStreamConfig xStreamConfig = new XStreamConfig();
-     *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
-     *     LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
+     * User user = new User(1L);
+     * XStreamConfig xStreamConfig = new XStreamConfig();
+     * xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
+     * LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
      * </pre>
-     * </code>
      * 
      * ,则返回
      * 
@@ -370,22 +366,17 @@ public final class XStreamUtil{
      * }
      * </pre>
      * 
-     * </p>
-     * <p>
-     * 
      * <b>3.设置 ImplicitCollection 参数</b><br>
      * 如果我在结果不想出现 {@code <userAddresseList/>}怎么做呢？<br>
      * 使用
      * 
-     * <code>
      * <pre class="code">
-     *     User user = new User(1L);
-     *     XStreamConfig xStreamConfig = new XStreamConfig();
-     *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
-     *     xStreamConfig.getImplicitCollectionMap().put(&quot;userAddresseList&quot;, User.class);
-     *     LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
+     * User user = new User(1L);
+     * XStreamConfig xStreamConfig = new XStreamConfig();
+     * xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
+     * xStreamConfig.getImplicitCollectionMap().put(&quot;userAddresseList&quot;, User.class);
+     * LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
      * </pre>
-     * </code>
      * 
      * ,则返回
      * 
@@ -399,7 +390,6 @@ public final class XStreamUtil{
      * }
      * </pre>
      * 
-     * </p>
      * </blockquote>
      * 
      * @param bean

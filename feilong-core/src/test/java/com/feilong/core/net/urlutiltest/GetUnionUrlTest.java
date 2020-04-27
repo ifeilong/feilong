@@ -33,9 +33,6 @@ public class GetUnionUrlTest extends AbstractTest{
 
     private final URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
 
-    /**
-     * Test get union url 1.
-     */
     @Test
     public void testGetUnionUrl1(){
         LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("E:\\test"), "sanguo"));
