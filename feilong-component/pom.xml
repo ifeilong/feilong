@@ -8,6 +8,11 @@
 	</parent>
 	<artifactId>feilong-component</artifactId>
 
+	<properties>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
@@ -94,6 +99,17 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- velocity -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<optional>true</optional>
+		</dependency>
 
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>

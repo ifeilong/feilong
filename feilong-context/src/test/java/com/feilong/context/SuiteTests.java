@@ -46,6 +46,6 @@ import com.feilong.context.valueloader.SimpleParamNameValueLoaderTest;
                 XMLStringFormatterTest.class
         //
 })
-public class FeiLongContextSuiteTests{
+public class SuiteTests{
 
 }
