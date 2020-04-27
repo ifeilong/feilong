@@ -65,7 +65,7 @@ public final class MessageUtil{
      *
      * @param messages
      *            the messages
-     * @return the list< mail info>
+     * @return the list
      * @throws MessagingException
      *             the messaging exception
      */
@@ -299,6 +299,17 @@ public final class MessageUtil{
         return sb.toString();
     }
 
+    /**
+     * Checks if is need append.
+     *
+     * @param bodyPart
+     *            the body part
+     * @param alternativeFlag
+     *            the alternative flag
+     * @return true, if is need append
+     * @throws MessagingException
+     *             the messaging exception
+     */
     private static boolean isNeedAppend(BodyPart bodyPart,boolean alternativeFlag) throws MessagingException{
         //不是 alternative 或者(是 alternative且是html)
         if (!alternativeFlag){

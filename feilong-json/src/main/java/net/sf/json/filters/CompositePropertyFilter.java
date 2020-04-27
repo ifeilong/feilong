@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,16 +23,28 @@ import java.util.List;
 import net.sf.json.util.PropertyFilter;
 
 /**
+ * The Class CompositePropertyFilter.
+ *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 public class CompositePropertyFilter implements PropertyFilter{
 
+    /** The filters. */
     private final List filters = new ArrayList();
 
+    /**
+     * Instantiates a new composite property filter.
+     */
     public CompositePropertyFilter(){
         this(null);
     }
 
+    /**
+     * Instantiates a new composite property filter.
+     *
+     * @param filters
+     *            the filters
+     */
     public CompositePropertyFilter(List filters){
         if (filters != null){
             for (Iterator i = filters.iterator(); i.hasNext();){
@@ -44,12 +56,29 @@ public class CompositePropertyFilter implements PropertyFilter{
         }
     }
 
+    /**
+     * 添加 property filter.
+     *
+     * @param filter
+     *            the filter
+     */
     public void addPropertyFilter(PropertyFilter filter){
         if (filter != null){
             filters.add(filter);
         }
     }
 
+    /**
+     * Apply.
+     *
+     * @param source
+     *            the source
+     * @param name
+     *            the name
+     * @param value
+     *            the value
+     * @return true, if successful
+     */
     @Override
     public boolean apply(Object source,String name,Object value){
         for (Iterator i = filters.iterator(); i.hasNext();){
@@ -61,6 +90,12 @@ public class CompositePropertyFilter implements PropertyFilter{
         return false;
     }
 
+    /**
+     * 删除 property filter.
+     *
+     * @param filter
+     *            the filter
+     */
     public void removePropertyFilter(PropertyFilter filter){
         if (filter != null){
             filters.remove(filter);

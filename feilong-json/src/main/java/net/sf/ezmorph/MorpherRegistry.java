@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,10 +40,15 @@ import net.sf.ezmorph.object.IdentityObjectMorpher;
  */
 public class MorpherRegistry implements Serializable{
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3894767123320768419L;
 
-    private Map               morphers         = new HashMap();
+    /** The morphers. */
+    private final Map         morphers         = new HashMap();
 
+    /**
+     * Instantiates a new morpher registry.
+     */
     public MorpherRegistry(){
 
     }
@@ -58,8 +63,8 @@ public class MorpherRegistry implements Serializable{
     /**
      * Deregister all Morphers of a type.<br>
      *
-     * @param class
-     *            the target type the Morphers morph to
+     * @param type
+     *            the type
      */
     public synchronized void clear(Class type){
         List registered = (List) morphers.get(type);
@@ -93,6 +98,7 @@ public class MorpherRegistry implements Serializable{
      *
      * @param clazz
      *            the target class for which a Morpher may be associated
+     * @return the morpher for
      */
     public synchronized Morpher getMorpherFor(Class clazz){
         List registered = (List) morphers.get(clazz);
@@ -112,6 +118,7 @@ public class MorpherRegistry implements Serializable{
      * @param clazz
      *            the target class for which a Morpher or Morphers may be
      *            associated
+     * @return the morphers for
      */
     public synchronized Morpher[] getMorphersFor(Class clazz){
         List registered = (List) morphers.get(clazz);

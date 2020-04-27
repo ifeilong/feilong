@@ -74,9 +74,9 @@ public class CodeCreatorHelper{
      *            the last length
      * @return
      *         <ul>
-     *         <li>如果 value 的长度> lastLength,那么截取后lastLength 位数</li>
-     *         <li>如果 value 的长度= lastLength,那么直接返回value字符串格式</li>
-     *         <li>如果 value 的长度< lastLength,那么数字前面补0返回</li>
+     *         <li>如果 value 的长度{@code >} lastLength,那么截取后lastLength 位数</li>
+     *         <li>如果 value 的长度{@code =} lastLength,那么直接返回value字符串格式</li>
+     *         <li>如果 value 的长度{@code <} lastLength,那么数字前面补0返回</li>
      *         </ul>
      */
     public static String formatLastValue(Long value,int lastLength){

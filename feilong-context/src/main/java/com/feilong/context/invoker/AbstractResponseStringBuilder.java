@@ -214,7 +214,6 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
      * 支持在获得 responseString 之后,再次加工
      * </p>
      * 
-     * <p>
      * 典型应用,cc 视频, 返回
      * 
      * <pre>
@@ -223,7 +222,6 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
      * 
      * <br>
      * 这时候, 我只想得到 playurl 的值
-     * </p>
      *
      * @param responseStringRebuilder
      *            the new 再加工器

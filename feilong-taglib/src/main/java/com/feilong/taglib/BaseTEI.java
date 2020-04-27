@@ -65,11 +65,11 @@ import javax.servlet.jsp.tagext.VariableInfo;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see javax.servlet.jsp.tagext.TagExtraInfo
- * @see org.apache.taglibs.standard.tei.DeclareTEI
- * @see org.apache.taglibs.standard.tei.ForEachTEI
- * @see org.apache.taglibs.standard.tei.ImportTEI
- * @see org.apache.taglibs.standard.tei.XmlParseTEI
- * @see org.apache.taglibs.standard.tei.XmlTransformTEI
+ * @see "org.apache.taglibs.standard.tei.DeclareTEI"
+ * @see "org.apache.taglibs.standard.tei.ForEachTEI"
+ * @see "org.apache.taglibs.standard.tei.ImportTEI"
+ * @see "org.apache.taglibs.standard.tei.XmlParseTEI"
+ * @see "org.apache.taglibs.standard.tei.XmlTransformTEI"
  * @since 1.0.3
  */
 public abstract class BaseTEI extends TagExtraInfo{

@@ -134,7 +134,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     /** url前缀, 用来拼接 {@link BreadCrumbEntity#getPath()},可以不设置,那么原样输出{@link BreadCrumbEntity#getPath()}. */
     private String                         urlPrefix        = EMPTY;
 
-    /** 连接符,默认>. */
+    /** 连接符,默认{@code >}. */
     private String                         connector        = BreadCrumbConstants.DEFAULT_CONNECTOR;
 
     /** vm的路径. */
@@ -177,7 +177,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * 设置 连接符,默认>.
+     * 设置 连接符,默认{@code >}.
      *
      * @param connector
      *            the connector to set

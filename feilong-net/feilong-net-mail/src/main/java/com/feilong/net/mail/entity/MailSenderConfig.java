@@ -462,7 +462,6 @@ public class MailSenderConfig extends BaseConfig{
      *
      * @param isDefaultCcSelf
      *            the new 是否默认抄送给自己
-     * @return the isDefaultCcSelf
      * @see <a href="https://blog.csdn.net/jerry11112/article/details/81213162">彻底解决 163邮箱转发邮件提示报错554 DT:SPM smtp12</a>
      * @since 2.1.0
      */

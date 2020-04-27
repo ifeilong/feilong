@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,12 +29,15 @@ public interface JSON extends Serializable{
 
     /**
      * Returns true if this object is a JSONArray, false otherwise.
+     *
+     * @return true, if is array
      */
     boolean isArray();
 
     /**
      * Returns true if this object has no elements or keys.
      *
+     * @return true, if is empty
      * @throws JSONException
      *             if called on a 'null' object
      */
@@ -90,8 +93,11 @@ public interface JSON extends Serializable{
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer
+     *            the writer
      * @return The writer.
      * @throws JSONException
+     *             the JSON exception
      */
     Writer write(Writer writer);
 }

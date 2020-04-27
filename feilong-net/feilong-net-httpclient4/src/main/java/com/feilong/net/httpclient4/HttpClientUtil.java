@@ -800,7 +800,7 @@ public final class HttpClientUtil{
      * private static String getResult(String city){
      *     String soap = buildSoapString(city);
      * 
-     *     Map<String, String> mapUseEntrys = toMapUseEntrys(
+     *     Map{@code <String, String>} mapUseEntrys = toMapUseEntrys(
      *                     Pair.of("Content-Type", "text/xml; charset=utf-8"), //
      *                     Pair.of("SOAPAction", SOAP_ACTION));
      *     return HttpClientUtil.post(URL_WEATHER_SERVICE, soap, mapUseEntrys);

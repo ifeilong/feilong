@@ -42,6 +42,14 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractUnzipHandler.class);
 
+    /**
+     * Unzip.
+     *
+     * @param unZipFilePath
+     *            the un zip file path
+     * @param outputDirectory
+     *            the output directory
+     */
     /*
      * (non-Javadoc)
      * 
@@ -82,6 +90,8 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
      *            the un zip file path
      * @param outputDirectory
      *            the output directory
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      * @since 1.11.4
      */
     protected abstract void handle(String unZipFilePath,String outputDirectory) throws IOException;

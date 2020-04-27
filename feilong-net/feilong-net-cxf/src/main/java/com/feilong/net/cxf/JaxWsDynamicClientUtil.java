@@ -45,8 +45,8 @@ import com.feilong.json.jsonlib.JsonUtil;
  * 对于 {@link <a href=
  * "https://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/">SunCertPathBuilderException:
  * unable to find valid certification path to requested target</a>}
- * 
  * </h3>
+ * 
  * <blockquote>
  * 参见 {@link <a href=
  * "https://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/">SunCertPathBuilderException:
@@ -84,14 +84,12 @@ public class JaxWsDynamicClientUtil{
      * <pre>
      * 
      * Caused by: org.apache.cxf.service.factory.<span style="color:red">ServiceConstructionException: Failed to create service.</span>
-     * at org.apache.cxf.wsdl11.WSDLServiceFactory.<init>(WSDLServiceFactory.java:87)
-     * at org.apache.cxf.jaxws.ServiceImpl.initialize(ServiceImpl.java:160)
+     * at org.apache.cxf.wsdl11.WSDLServiceFactory.{@code <init>}(WSDLServiceFactory.java:87)
      * ... 28 more
      * Caused by: javax.wsdl.WSDLException: WSDLException: faultCode=PARSER_ERROR: Problem parsing
      * 'https://203.94.12.226:58443/****_official_ws/OfficialWebservice?wsdl'.: javax.net.ssl.SSLHandshakeException:
      * java.security.cert.CertificateException: No subject alternative names present
      * at com.ibm.wsdl.xml.WSDLReaderImpl.getDocument(WSDLReaderImpl.java:2198)
-     * at com.ibm.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:2422)
      * ... 30 more
      * Caused by: javax.net.ssl.SSLHandshakeException: java.security.cert.CertificateException: No subject alternative names present
      * at sun.security.ssl.Alerts.getSSLException(Alerts.java:192)

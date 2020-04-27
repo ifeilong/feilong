@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -93,9 +93,7 @@ import net.sf.json.util.JSONUtils;
  */
 public final class JSONArray extends AbstractJSON implements JSON,List,Comparable{
 
-    /**
-     * 
-     */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1663435868052425703L;
 
     /**
@@ -104,6 +102,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * Accepts JSON formatted strings, arrays, Collections and Enums.
      *
      * @param object
+     *            the object
+     * @return the JSON array
      * @throws JSONException
      *             if the object can not be converted to a proper
      *             JSONArray.
@@ -118,6 +118,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * Accepts JSON formatted strings, arrays, Collections and Enums.
      *
      * @param object
+     *            the object
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      * @throws JSONException
      *             if the object can not be converted to a proper
      *             JSONArray.
@@ -184,6 +188,14 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * Get the collection type from a getter or setter, or null if no type was
      * found.<br/>
      * Contributed by [Matt Small @ WaveMaker].
+     *
+     * @param pd
+     *            the pd
+     * @param useGetter
+     *            the use getter
+     * @return the collection type
+     * @throws JSONException
+     *             the JSON exception
      */
     public static Class[] getCollectionType(PropertyDescriptor pd,boolean useGetter) throws JSONException{
 
@@ -220,6 +232,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Returns the number of dimensions suited for a java array.
+     *
+     * @param jsonArray
+     *            the json array
+     * @return the dimensions
      */
     public static int[] getDimensions(JSONArray jsonArray){
         // short circuit for empty arrays
@@ -239,6 +255,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Creates a java array from a JSONArray.
+     *
+     * @param jsonArray
+     *            the json array
+     * @return the object
      */
     public static Object toArray(JSONArray jsonArray){
         return toArray(jsonArray, new JsonConfig());
@@ -246,6 +266,12 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Creates a java array from a JSONArray.
+     *
+     * @param jsonArray
+     *            the json array
+     * @param objectClass
+     *            the object class
+     * @return the object
      */
     public static Object toArray(JSONArray jsonArray,Class objectClass){
         JsonConfig jsonConfig = new JsonConfig();
@@ -263,6 +289,14 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * <li>Every value must be a Class.</li>
      * <li>A key may be a regular expression.</li>
      * </ul>
+     *
+     * @param jsonArray
+     *            the json array
+     * @param objectClass
+     *            the object class
+     * @param classMap
+     *            the class map
+     * @return the object
      */
     public static Object toArray(JSONArray jsonArray,Class objectClass,Map classMap){
         JsonConfig jsonConfig = new JsonConfig();
@@ -273,6 +307,12 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Creates a java array from a JSONArray.<br>
+     *
+     * @param jsonArray
+     *            the json array
+     * @param jsonConfig
+     *            the json config
+     * @return the object
      */
     public static Object toArray(JSONArray jsonArray,JsonConfig jsonConfig){
         Class objectClass = jsonConfig.getRootClass();
@@ -325,6 +365,14 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Creates a java array from a JSONArray.<br>
+     *
+     * @param jsonArray
+     *            the json array
+     * @param root
+     *            the root
+     * @param jsonConfig
+     *            the json config
+     * @return the object
      */
     public static Object toArray(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
         Class objectClass = root.getClass();
@@ -366,6 +414,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Returns a List or a Set taking generics into account.<br/>
+     *
+     * @param jsonArray
+     *            the json array
+     * @return the collection
      */
     public static Collection toCollection(JSONArray jsonArray){
         return toCollection(jsonArray, new JsonConfig());
@@ -373,6 +425,12 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Returns a List or a Set taking generics into account.<br/>
+     *
+     * @param jsonArray
+     *            the json array
+     * @param objectClass
+     *            the object class
+     * @return the collection
      */
     public static Collection toCollection(JSONArray jsonArray,Class objectClass){
         JsonConfig jsonConfig = new JsonConfig();
@@ -383,6 +441,12 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     /**
      * Returns a List or a Set taking generics into account.<br/>
      * Contributed by [Matt Small @ WaveMaker].
+     *
+     * @param jsonArray
+     *            the json array
+     * @param jsonConfig
+     *            the json config
+     * @return the collection
      */
     public static Collection toCollection(JSONArray jsonArray,JsonConfig jsonConfig){
         Collection collection = null;
@@ -527,8 +591,11 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     /**
      * Creates a List from a JSONArray.<br>
      *
-     * @deprecated replaced by toCollection
+     * @param jsonArray
+     *            the json array
+     * @return the list
      * @see #toCollection(JSONArray)
+     * @deprecated replaced by toCollection
      */
     @Deprecated
     public static List toList(JSONArray jsonArray){
@@ -538,8 +605,13 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     /**
      * Creates a List from a JSONArray.
      *
-     * @deprecated replaced by toCollection
+     * @param jsonArray
+     *            the json array
+     * @param objectClass
+     *            the object class
+     * @return the list
      * @see #toCollection(JSONArray,Class)
+     * @deprecated replaced by toCollection
      */
     @Deprecated
     public static List toList(JSONArray jsonArray,Class objectClass){
@@ -559,8 +631,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * <li>A key may be a regular expression.</li>
      * </ul>
      *
-     * @deprecated replaced by toCollection
+     * @param jsonArray
+     *            the json array
+     * @param objectClass
+     *            the object class
+     * @param classMap
+     *            the class map
+     * @return the list
      * @see #toCollection(JSONArray,Class,Map)
+     * @deprecated replaced by toCollection
      */
     @Deprecated
     public static List toList(JSONArray jsonArray,Class objectClass,Map classMap){
@@ -573,8 +652,13 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     /**
      * Creates a List from a JSONArray.<br>
      *
-     * @deprecated replaced by toCollection
+     * @param jsonArray
+     *            the json array
+     * @param jsonConfig
+     *            the json config
+     * @return the list
      * @see #toCollection(JSONArray,JsonConfig)
+     * @deprecated replaced by toCollection
      */
     @Deprecated
     public static List toList(JSONArray jsonArray,JsonConfig jsonConfig){
@@ -618,6 +702,14 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Creates a List from a JSONArray.<br>
+     *
+     * @param jsonArray
+     *            the json array
+     * @param root
+     *            the root
+     * @param jsonConfig
+     *            the json config
+     * @return the list
      */
     public static List toList(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
         if (jsonArray.size() == 0 || root == null){
@@ -657,6 +749,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An boolean[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(boolean[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -691,6 +786,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An byte[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(byte[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -725,6 +823,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An char[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(char[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -759,6 +860,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An double[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(double[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -800,6 +904,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param e
      *            A enum value.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      * @throws JSONException
      *             If there is a syntax error.
      */
@@ -840,6 +947,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An float[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(float[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -881,6 +991,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An int[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(int[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -915,6 +1028,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An long[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(long[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -946,6 +1062,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     // ------------------------------------------------------
 
+    /**
+     * From array.
+     *
+     * @param array
+     *            the array
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     private static JSONArray _fromArray(Object[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
             try{
@@ -990,6 +1115,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param array
      *            An short[] array.
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
      */
     private static JSONArray _fromArray(short[] array,JsonConfig jsonConfig){
         if (!addInstance(array)){
@@ -1019,6 +1147,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return jsonArray;
     }
 
+    /**
+     * From collection.
+     *
+     * @param collection
+     *            the collection
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     private static JSONArray _fromCollection(Collection collection,JsonConfig jsonConfig){
         if (!addInstance(collection)){
             try{
@@ -1059,6 +1196,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return jsonArray;
     }
 
+    /**
+     * From JSON array.
+     *
+     * @param array
+     *            the array
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     private static JSONArray _fromJSONArray(JSONArray array,JsonConfig jsonConfig){
         if (!addInstance(array)){
             try{
@@ -1088,10 +1234,28 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return jsonArray;
     }
 
+    /**
+     * From JSON string.
+     *
+     * @param string
+     *            the string
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     private static JSONArray _fromJSONString(JSONString string,JsonConfig jsonConfig){
         return _fromJSONTokener(new JSONTokener(string.toJSONString()), jsonConfig);
     }
 
+    /**
+     * From JSON tokener.
+     *
+     * @param tokener
+     *            the tokener
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     private static JSONArray _fromJSONTokener(JSONTokener tokener,JsonConfig jsonConfig){
 
         JSONArray jsonArray = new JSONArray();
@@ -1176,10 +1340,29 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         }
     }
 
+    /**
+     * From string.
+     *
+     * @param string
+     *            the string
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     private static JSONArray _fromString(String string,JsonConfig jsonConfig){
         return _fromJSONTokener(new JSONTokener(string), jsonConfig);
     }
 
+    /**
+     * Process array dimensions.
+     *
+     * @param jsonArray
+     *            the json array
+     * @param dims
+     *            the dims
+     * @param index
+     *            the index
+     */
     private static void processArrayDimensions(JSONArray jsonArray,List dims,int index){
         if (dims.size() <= index){
             dims.add(new Integer(jsonArray.size()));
@@ -1216,30 +1399,80 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         this.elements = new ArrayList();
     }
 
+    /**
+     * 添加.
+     *
+     * @param index
+     *            the index
+     * @param value
+     *            the value
+     */
     @Override
     public void add(int index,Object value){
         add(index, value, new JsonConfig());
     }
 
+    /**
+     * 添加.
+     *
+     * @param index
+     *            the index
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     */
     public void add(int index,Object value,JsonConfig jsonConfig){
         this.elements.add(index, processValue(value, jsonConfig));
     }
 
+    /**
+     * 添加.
+     *
+     * @param value
+     *            the value
+     * @return true, if successful
+     */
     @Override
     public boolean add(Object value){
         return add(value, new JsonConfig());
     }
 
+    /**
+     * 添加.
+     *
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean add(Object value,JsonConfig jsonConfig){
         element(value, jsonConfig);
         return true;
     }
 
+    /**
+     * 添加 all.
+     *
+     * @param collection
+     *            the collection
+     * @return true, if successful
+     */
     @Override
     public boolean addAll(Collection collection){
         return addAll(collection, new JsonConfig());
     }
 
+    /**
+     * 添加 all.
+     *
+     * @param collection
+     *            the collection
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean addAll(Collection collection,JsonConfig jsonConfig){
         if (collection == null || collection.size() == 0){
             return false;
@@ -1250,11 +1483,31 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return true;
     }
 
+    /**
+     * 添加 all.
+     *
+     * @param index
+     *            the index
+     * @param collection
+     *            the collection
+     * @return true, if successful
+     */
     @Override
     public boolean addAll(int index,Collection collection){
         return addAll(index, collection, new JsonConfig());
     }
 
+    /**
+     * 添加 all.
+     *
+     * @param index
+     *            the index
+     * @param collection
+     *            the collection
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean addAll(int index,Collection collection,JsonConfig jsonConfig){
         if (collection == null || collection.size() == 0){
             return false;
@@ -1266,11 +1519,21 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return true;
     }
 
+    /**
+     * 清除.
+     */
     @Override
     public void clear(){
         elements.clear();
     }
 
+    /**
+     * Compare to.
+     *
+     * @param obj
+     *            the obj
+     * @return the int
+     */
     @Override
     public int compareTo(Object obj){
         if (obj != null && (obj instanceof JSONArray)){
@@ -1288,20 +1551,52 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return -1;
     }
 
+    /**
+     * Contains.
+     *
+     * @param o
+     *            the o
+     * @return true, if successful
+     */
     @Override
     public boolean contains(Object o){
         return contains(o, new JsonConfig());
     }
 
+    /**
+     * Contains.
+     *
+     * @param o
+     *            the o
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean contains(Object o,JsonConfig jsonConfig){
         return elements.contains(processValue(o, jsonConfig));
     }
 
+    /**
+     * Contains all.
+     *
+     * @param collection
+     *            the collection
+     * @return true, if successful
+     */
     @Override
     public boolean containsAll(Collection collection){
         return containsAll(collection, new JsonConfig());
     }
 
+    /**
+     * Contains all.
+     *
+     * @param collection
+     *            the collection
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean containsAll(Collection collection,JsonConfig jsonConfig){
         return elements.containsAll(fromObject(collection, jsonConfig));
     }
@@ -1321,8 +1616,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     /**
      * Remove an element, if present.
      *
-     * @param index
-     *            the element.
+     * @param o
+     *            the o
      * @return this.
      */
     public JSONArray discard(Object o){
@@ -1359,6 +1654,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param value
      *            A Collection value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      */
     public JSONArray element(Collection value,JsonConfig jsonConfig){
@@ -1375,9 +1672,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param value
      *            A double value.
+     * @return this.
      * @throws JSONException
      *             if the value is not finite.
-     * @return this.
      */
     public JSONArray element(double value){
         Double d = new Double(value);
@@ -1438,6 +1735,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            The subscript.
      * @param value
      *            A Collection value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the index is negative or if the value is not
@@ -1539,6 +1838,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            The subscript.
      * @param value
      *            The Map value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the index is negative or if the the value is an
@@ -1594,6 +1895,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            An object value. The value should be a Boolean, Double,
      *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
      *            JSONString or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the index is negative or if the the value is an
@@ -1646,6 +1949,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            The subscript.
      * @param value
      *            A String value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the index is negative or if the the value is an
@@ -1729,6 +2034,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param value
      *            A Map value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      */
     public JSONArray element(Map value,JsonConfig jsonConfig){
@@ -1760,6 +2067,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            An object value. The value should be a Boolean, Double,
      *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
      *            JSONString or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      */
     public JSONArray element(Object value,JsonConfig jsonConfig){
@@ -1786,6 +2095,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param value
      *            A String value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      */
     public JSONArray element(String value,JsonConfig jsonConfig){
@@ -1813,6 +2124,13 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return this;
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (obj == this){
@@ -2062,6 +2380,11 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         throw new JSONException("JSONArray[" + index + "] not found.");
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         int hashcode = 29;
@@ -2073,27 +2396,51 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return hashcode;
     }
 
+    /**
+     * Index of.
+     *
+     * @param o
+     *            the o
+     * @return the int
+     */
     @Override
     public int indexOf(Object o){
         return elements.indexOf(o);
     }
 
+    /**
+     * Checks if is array.
+     *
+     * @return true, if is array
+     */
     @Override
     public boolean isArray(){
         return true;
     }
 
+    /**
+     * Checks if is empty.
+     *
+     * @return true, if is empty
+     */
     @Override
     public boolean isEmpty(){
         return this.elements.isEmpty();
     }
 
+    /**
+     * Checks if is a flag for XML processing.
+     *
+     * @return the a flag for XML processing
+     */
     public boolean isExpandElements(){
         return expandElements;
     }
 
     /**
-     * Returns an Iterator for this JSONArray
+     * Returns an Iterator for this JSONArray.
+     *
+     * @return the iterator
      */
     @Override
     public Iterator iterator(){
@@ -2122,6 +2469,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *
      * @param separator
      *            A string that will be inserted between the elements.
+     * @param stripQuotes
+     *            the strip quotes
      * @return a string.
      * @throws JSONException
      *             If the array contains an invalid number.
@@ -2140,16 +2489,35 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return sb.toString();
     }
 
+    /**
+     * Last index of.
+     *
+     * @param o
+     *            the o
+     * @return the int
+     */
     @Override
     public int lastIndexOf(Object o){
         return elements.lastIndexOf(o);
     }
 
+    /**
+     * List iterator.
+     *
+     * @return the list iterator
+     */
     @Override
     public ListIterator listIterator(){
         return listIterator(0);
     }
 
+    /**
+     * List iterator.
+     *
+     * @param index
+     *            the index
+     * @return the list iterator
+     */
     @Override
     public ListIterator listIterator(int index){
         if (index < 0 || index > size()){
@@ -2353,45 +2721,117 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return o != null ? o.toString() : defaultValue;
     }
 
+    /**
+     * 删除.
+     *
+     * @param index
+     *            the index
+     * @return the object
+     */
     @Override
     public Object remove(int index){
         return elements.remove(index);
     }
 
+    /**
+     * 删除.
+     *
+     * @param o
+     *            the o
+     * @return true, if successful
+     */
     @Override
     public boolean remove(Object o){
         return elements.remove(o);
     }
 
+    /**
+     * 删除 all.
+     *
+     * @param collection
+     *            the collection
+     * @return true, if successful
+     */
     @Override
     public boolean removeAll(Collection collection){
         return removeAll(collection, new JsonConfig());
     }
 
+    /**
+     * 删除 all.
+     *
+     * @param collection
+     *            the collection
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean removeAll(Collection collection,JsonConfig jsonConfig){
         return elements.removeAll(fromObject(collection, jsonConfig));
     }
 
+    /**
+     * Retain all.
+     *
+     * @param collection
+     *            the collection
+     * @return true, if successful
+     */
     @Override
     public boolean retainAll(Collection collection){
         return retainAll(collection, new JsonConfig());
     }
 
+    /**
+     * Retain all.
+     *
+     * @param collection
+     *            the collection
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean retainAll(Collection collection,JsonConfig jsonConfig){
         return elements.retainAll(fromObject(collection, jsonConfig));
     }
 
+    /**
+     * 设置.
+     *
+     * @param index
+     *            the index
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object set(int index,Object value){
         return set(index, value, new JsonConfig());
     }
 
+    /**
+     * 设置.
+     *
+     * @param index
+     *            the index
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     */
     public Object set(int index,Object value,JsonConfig jsonConfig){
         Object previous = get(index);
         element(index, value, jsonConfig);
         return previous;
     }
 
+    /**
+     * 设置 a flag for XML processing.
+     *
+     * @param expandElements
+     *            the new a flag for XML processing
+     */
     public void setExpandElements(boolean expandElements){
         this.expandElements = expandElements;
     }
@@ -2406,6 +2846,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return this.elements.size();
     }
 
+    /**
+     * Sub list.
+     *
+     * @param fromIndex
+     *            the from index
+     * @param toIndex
+     *            the to index
+     * @return the list
+     */
     @Override
     public List subList(int fromIndex,int toIndex){
         return elements.subList(fromIndex, toIndex);
@@ -2413,12 +2862,21 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Produce an Object[] with the contents of this JSONArray.
+     *
+     * @return the object[]
      */
     @Override
     public Object[] toArray(){
         return this.elements.toArray();
     }
 
+    /**
+     * To array.
+     *
+     * @param array
+     *            the array
+     * @return the object[]
+     */
     @Override
     public Object[] toArray(Object[] array){
         return elements.toArray(array);
@@ -2479,6 +2937,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *         bracket)</small> and ending with <code>]</code>&nbsp;<small>(right
      *         bracket)</small>.
      * @throws JSONException
+     *             the JSON exception
      */
     @Override
     public String toString(int indentFactor){
@@ -2500,6 +2959,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * @return a printable, displayable, transmittable representation of the
      *         array.
      * @throws JSONException
+     *             the JSON exception
      */
     @Override
     public String toString(int indentFactor,int indent){
@@ -2544,8 +3004,11 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer
+     *            the writer
      * @return The writer.
      * @throws JSONException
+     *             the JSON exception
      */
     @Override
     public Writer write(Writer writer){
@@ -2578,6 +3041,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
     /**
      * Adds a String without performing any conversion on it.
+     *
+     * @param str
+     *            the str
+     * @return the JSON array
      */
     protected JSONArray addString(String str){
         if (str != null){
@@ -2593,6 +3060,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            An object value. The value should be a Boolean, Double,
      *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
      *            JSONString or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      */
     private JSONArray _addValue(Object value,JsonConfig jsonConfig){
@@ -2600,6 +3069,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return this;
     }
 
+    /**
+     * Process value.
+     *
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     */
     @Override
     protected Object _processValue(Object value,JsonConfig jsonConfig){
         if (value instanceof JSONTokener){
@@ -2619,12 +3097,23 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            An object value. The value should be a Boolean, Double,
      *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
      *            JSONString or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      */
     private JSONArray addValue(Object value,JsonConfig jsonConfig){
         return _addValue(processValue(value, jsonConfig), jsonConfig);
     }
 
+    /**
+     * Process value.
+     *
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     */
     private Object processValue(Object value,JsonConfig jsonConfig){
         if (value != null){
             JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(value.getClass());
@@ -2638,25 +3127,49 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return _processValue(value, jsonConfig);
     }
 
+    /**
+     * The Class JSONArrayListIterator.
+     */
     private class JSONArrayListIterator implements ListIterator{
 
+        /** The current index. */
         int currentIndex = 0;
 
+        /** The last index. */
         int lastIndex    = -1;
 
+        /**
+         * Instantiates a new JSON array list iterator.
+         */
         JSONArrayListIterator(){
 
         }
 
+        /**
+         * Instantiates a new JSON array list iterator.
+         *
+         * @param index
+         *            the index
+         */
         JSONArrayListIterator(int index){
             currentIndex = index;
         }
 
+        /**
+         * Checks for next.
+         *
+         * @return true, if successful
+         */
         @Override
         public boolean hasNext(){
             return currentIndex != size();
         }
 
+        /**
+         * Next.
+         *
+         * @return the object
+         */
         @Override
         public Object next(){
             try{
@@ -2668,6 +3181,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             }
         }
 
+        /**
+         * 删除.
+         */
         @Override
         public void remove(){
             if (lastIndex == -1){
@@ -2684,11 +3200,21 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             }
         }
 
+        /**
+         * Checks for previous.
+         *
+         * @return true, if successful
+         */
         @Override
         public boolean hasPrevious(){
             return currentIndex != 0;
         }
 
+        /**
+         * Previous.
+         *
+         * @return the object
+         */
         @Override
         public Object previous(){
             try{
@@ -2701,16 +3227,32 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             }
         }
 
+        /**
+         * Next index.
+         *
+         * @return the int
+         */
         @Override
         public int nextIndex(){
             return currentIndex;
         }
 
+        /**
+         * Previous index.
+         *
+         * @return the int
+         */
         @Override
         public int previousIndex(){
             return currentIndex - 1;
         }
 
+        /**
+         * 设置.
+         *
+         * @param obj
+         *            the obj
+         */
         @Override
         public void set(Object obj){
             if (lastIndex == -1){
@@ -2724,6 +3266,12 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             }
         }
 
+        /**
+         * 添加.
+         *
+         * @param obj
+         *            the obj
+         */
         @Override
         public void add(Object obj){
             try{

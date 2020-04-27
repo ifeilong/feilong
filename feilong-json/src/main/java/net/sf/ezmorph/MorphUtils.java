@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,16 +49,17 @@ import net.sf.ezmorph.primitive.ShortMorpher;
  */
 public class MorphUtils{
 
-    /** Constant value for BigDecimal(1) */
+    /** Constant value for BigDecimal(1). */
     public static final BigDecimal BIGDECIMAL_ONE  = new BigDecimal("1");
 
-    /** Constant value for BigDecimal(0) */
+    /** Constant value for BigDecimal(0). */
     public static final BigDecimal BIGDECIMAL_ZERO = new BigDecimal("0");
 
     /**
      * Clears and registers all standard morpehrs.
      *
      * @param morpherRegistry
+     *            the morpher registry
      */
     public static void registerStandardMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.clear();
@@ -86,6 +87,7 @@ public class MorphUtils{
      * </ul>
      *
      * @param morpherRegistry
+     *            the morpher registry
      */
     public static void registerStandardObjectArrayMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new BooleanObjectMorpher(Boolean.FALSE)));
@@ -119,6 +121,7 @@ public class MorphUtils{
      * </ul>
      *
      * @param morpherRegistry
+     *            the morpher registry
      */
     public static void registerStandardObjectMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanObjectMorpher(Boolean.FALSE));
@@ -149,6 +152,7 @@ public class MorphUtils{
      * </ul>
      *
      * @param morpherRegistry
+     *            the morpher registry
      */
     public static void registerStandardPrimitiveArrayMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanArrayMorpher(false));
@@ -175,6 +179,7 @@ public class MorphUtils{
      * </ul>
      *
      * @param morpherRegistry
+     *            the morpher registry
      */
     public static void registerStandardPrimitiveMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanMorpher(false));
@@ -187,6 +192,9 @@ public class MorphUtils{
         morpherRegistry.registerMorpher(new DoubleMorpher(0));
     }
 
+    /**
+     * Instantiates a new morph utils.
+     */
     private MorphUtils(){
 
     }

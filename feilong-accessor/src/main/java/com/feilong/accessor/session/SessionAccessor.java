@@ -65,13 +65,16 @@ public class SessionAccessor extends AbstractSessionKeyAccessor{
     //---------------------------------------------------------------
 
     /**
-     * 
+     * Instantiates a new session accessor.
      */
     public SessionAccessor(){
     }
 
     /**
+     * Instantiates a new session accessor.
+     *
      * @param key
+     *            the key
      */
     public SessionAccessor(String key){
         this.key = key;

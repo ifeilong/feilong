@@ -38,11 +38,11 @@ public abstract class AbstractLocaleSupportTag extends AbstractStartWriteContent
     /**
      * 设置{@link Locale} 环境, 支持 <code>java.util.Locale</code> 或 String 类型的实例 ,如果是null,将默认使用 <code>request.getLocale()</code>.
      *
-     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
-     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
-     * @see org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale
-     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)
-     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)
+     * @see "org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value"
+     * @see "org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)"
+     * @see "org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale"
+     * @see "org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)"
+     * @see "org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)"
      */
     protected Object          locale;
 

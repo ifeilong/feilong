@@ -100,17 +100,16 @@ public final class ByteUtil{
      * 字节转成16进制小写字符串.
      * 
      * <p>
+     * Example:
+     * </p>
      * 
      * <pre class="code">
      * {@code
-     * Example:
      *  byteToHexStringLowerCase(new Byte(1))====> 01
      *  byteToHexStringLowerCase(new Byte(32))====> 20
      *  byteToHexStringLowerCase(new Byte(127))====> 7f
      * }
      * </pre>
-     * 
-     * </p>
      * 
      * @param b
      *            the b

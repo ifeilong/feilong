@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,119 +53,172 @@ import net.sf.json.util.PropertySetStrategy;
  */
 public class JsonConfig{
 
+    /** The Constant DEFAULT_DEFAULT_VALUE_PROCESSOR_MATCHER. */
     public static final DefaultValueProcessorMatcher  DEFAULT_DEFAULT_VALUE_PROCESSOR_MATCHER  = DefaultValueProcessorMatcher.DEFAULT;
 
+    /** The Constant DEFAULT_JSON_BEAN_PROCESSOR_MATCHER. */
     public static final JsonBeanProcessorMatcher      DEFAULT_JSON_BEAN_PROCESSOR_MATCHER      = JsonBeanProcessorMatcher.DEFAULT;
 
+    /** The Constant DEFAULT_JSON_VALUE_PROCESSOR_MATCHER. */
     public static final JsonValueProcessorMatcher     DEFAULT_JSON_VALUE_PROCESSOR_MATCHER     = JsonValueProcessorMatcher.DEFAULT;
 
+    /** The Constant DEFAULT_NEW_BEAN_INSTANCE_STRATEGY. */
     public static final NewBeanInstanceStrategy       DEFAULT_NEW_BEAN_INSTANCE_STRATEGY       = NewBeanInstanceStrategy.DEFAULT;
 
+    /** The Constant DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER. */
     public static final PropertyExclusionClassMatcher DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER = PropertyExclusionClassMatcher.DEFAULT;
 
+    /** The Constant DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER. */
     public static final PropertyNameProcessorMatcher  DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER  = PropertyNameProcessorMatcher.DEFAULT;
 
+    /** The Constant MODE_LIST. */
     public static final int                           MODE_LIST                                = 1;
 
+    /** The Constant MODE_OBJECT_ARRAY. */
     public static final int                           MODE_OBJECT_ARRAY                        = 2;
 
+    /** The Constant MODE_SET. */
     public static final int                           MODE_SET                                 = 2;
 
+    /** The Constant DEFAULT_COLLECTION_TYPE. */
     private static final Class                        DEFAULT_COLLECTION_TYPE                  = List.class;
 
+    /** The Constant DEFAULT_CYCLE_DETECTION_STRATEGY. */
     private static final CycleDetectionStrategy       DEFAULT_CYCLE_DETECTION_STRATEGY         = CycleDetectionStrategy.STRICT;
 
+    /** The Constant DEFAULT_EXCLUDES. */
     private static final String[]                     DEFAULT_EXCLUDES                         = new String[] {
                                                                                                                 "class",
                                                                                                                 "declaringClass",
                                                                                                                 "metaClass" };
 
+    /** The Constant DEFAULT_JAVA_IDENTIFIER_TRANSFORMER. */
     private static final JavaIdentifierTransformer    DEFAULT_JAVA_IDENTIFIER_TRANSFORMER      = JavaIdentifierTransformer.NOOP;
 
+    /** The Constant DEFAULT_VALUE_PROCESSOR. */
     private static final DefaultValueProcessor        DEFAULT_VALUE_PROCESSOR                  = new DefaultDefaultValueProcessor();
 
+    /** The Constant EMPTY_EXCLUDES. */
     private static final String[]                     EMPTY_EXCLUDES                           = new String[0];
 
-    /** Array conversion mode */
+    /** Array conversion mode. */
     private int                                       arrayMode                                = MODE_LIST;
 
-    private MultiKeyMap                               beanKeyMap                               = new MultiKeyMap();
+    /** The bean key map. */
+    private final MultiKeyMap                         beanKeyMap                               = new MultiKeyMap();
 
-    private Map                                       beanProcessorMap                         = new HashMap();
+    /** The bean processor map. */
+    private final Map                                 beanProcessorMap                         = new HashMap();
 
-    private MultiKeyMap                               beanTypeMap                              = new MultiKeyMap();
+    /** The bean type map. */
+    private final MultiKeyMap                         beanTypeMap                              = new MultiKeyMap();
 
-    /** Map of attribute/class */
+    /** Map of attribute/class. */
     private Map                                       classMap;
 
+    /** The collection type. */
     private Class                                     collectionType                           = DEFAULT_COLLECTION_TYPE;
 
+    /** The cycle detection strategy. */
     private CycleDetectionStrategy                    cycleDetectionStrategy                   = DEFAULT_CYCLE_DETECTION_STRATEGY;
 
-    private Map                                       defaultValueMap                          = new HashMap();
+    /** The default value map. */
+    private final Map                                 defaultValueMap                          = new HashMap();
 
+    /** The default value processor matcher. */
     private DefaultValueProcessorMatcher              defaultValueProcessorMatcher             = DEFAULT_DEFAULT_VALUE_PROCESSOR_MATCHER;
 
+    /** The enclosed type. */
     private Class                                     enclosedType;
 
-    private List                                      eventListeners                           = new ArrayList();
+    /** The event listeners. */
+    private final List                                eventListeners                           = new ArrayList();
 
+    /** The excludes. */
     private String[]                                  excludes                                 = EMPTY_EXCLUDES;
 
-    private Map                                       exclusionMap                             = new HashMap();
+    /** The exclusion map. */
+    private final Map                                 exclusionMap                             = new HashMap();
 
+    /** The handle jettison empty element. */
     private boolean                                   handleJettisonEmptyElement;
 
+    /** The handle jettison single element array. */
     private boolean                                   handleJettisonSingleElementArray;
 
+    /** The ignore default excludes. */
     private boolean                                   ignoreDefaultExcludes;
 
+    /** The ignore transient fields. */
     //private boolean ignoreJPATransient;
     private boolean                                   ignoreTransientFields;
 
+    /** The ignore public fields. */
     private boolean                                   ignorePublicFields                       = true;
 
+    /** The javascript compliant. */
     private boolean                                   javascriptCompliant;
 
+    /** The java identifier transformer. */
     private JavaIdentifierTransformer                 javaIdentifierTransformer                = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
 
+    /** The java property filter. */
     private PropertyFilter                            javaPropertyFilter;
 
-    private Map                                       javaPropertyNameProcessorMap             = new HashMap();
+    /** The java property name processor map. */
+    private final Map                                 javaPropertyNameProcessorMap             = new HashMap();
 
+    /** The java property name processor matcher. */
     private PropertyNameProcessorMatcher              javaPropertyNameProcessorMatcher         = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
 
+    /** The json bean processor matcher. */
     private JsonBeanProcessorMatcher                  jsonBeanProcessorMatcher                 = DEFAULT_JSON_BEAN_PROCESSOR_MATCHER;
 
+    /** The json property filter. */
     private PropertyFilter                            jsonPropertyFilter;
 
-    private Map                                       jsonPropertyNameProcessorMap             = new HashMap();
+    /** The json property name processor map. */
+    private final Map                                 jsonPropertyNameProcessorMap             = new HashMap();
 
+    /** The json property name processor matcher. */
     private PropertyNameProcessorMatcher              jsonPropertyNameProcessorMatcher         = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
 
+    /** The json value processor matcher. */
     private JsonValueProcessorMatcher                 jsonValueProcessorMatcher                = DEFAULT_JSON_VALUE_PROCESSOR_MATCHER;
 
-    private Map                                       keyMap                                   = new HashMap();
+    /** The key map. */
+    private final Map                                 keyMap                                   = new HashMap();
 
+    /** The new bean instance strategy. */
     private NewBeanInstanceStrategy                   newBeanInstanceStrategy                  = DEFAULT_NEW_BEAN_INSTANCE_STRATEGY;
 
+    /** The property exclusion class matcher. */
     private PropertyExclusionClassMatcher             propertyExclusionClassMatcher            = DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER;
 
+    /** The property set strategy. */
     private PropertySetStrategy                       propertySetStrategy;
 
-    /** Root class used when converting to an specific bean */
+    /** Root class used when converting to an specific bean. */
     private Class                                     rootClass;
 
+    /** The skip java identifier transformation in map keys. */
     private boolean                                   skipJavaIdentifierTransformationInMapKeys;
 
+    /** The trigger events. */
     private boolean                                   triggerEvents;
 
-    private Map                                       typeMap                                  = new HashMap();
+    /** The type map. */
+    private final Map                                 typeMap                                  = new HashMap();
 
-    private List                                      ignoreFieldAnnotations                   = new ArrayList();
+    /** The ignore field annotations. */
+    private final List                                ignoreFieldAnnotations                   = new ArrayList();
 
+    /** The allow non string keys. */
     private boolean                                   allowNonStringKeys                       = false;
 
+    /**
+     * Instantiates a new json config.
+     */
     public JsonConfig(){
     }
 
@@ -174,12 +227,12 @@ public class JsonConfig{
      * The events will be triggered only when using the static builders and if event triggering is
      * enabled.<br>
      * [Java -&gt; JSON]
-     * 
+     *
+     * @param listener
+     *            a listener for events
      * @see #enableEventTriggering
      * @see #disableEventTriggering
      * @see #removeJsonEventListener(JsonEventListener)
-     * @param listener
-     *            a listener for events
      */
     public synchronized void addJsonEventListener(JsonEventListener listener){
         if (!eventListeners.contains(listener)){
@@ -249,6 +302,11 @@ public class JsonConfig{
         clearJavaPropertyNameProcessors();
     }
 
+    /**
+     * Copy.
+     *
+     * @return the json config
+     */
     public JsonConfig copy(){
         JsonConfig jsc = new JsonConfig();
         jsc.beanKeyMap.putAll(beanKeyMap);
@@ -320,9 +378,10 @@ public class JsonConfig{
      * Finds a DefaultValueProcessor registered to the target class.<br>
      * Returns null if none is registered.<br>
      * [Java -&gt; JSON]
-     * 
+     *
      * @param target
      *            a class used for searching a DefaultValueProcessor.
+     * @return the default value processor
      */
     public DefaultValueProcessor findDefaultValueProcessor(Class target){
         if (!defaultValueMap.isEmpty()){
@@ -339,9 +398,10 @@ public class JsonConfig{
      * Finds a PropertyNameProcessor registered to the target class.<br>
      * Returns null if none is registered.<br>
      * [JSON -&gt; Java]
-     * 
-     * @param propertyType
-     *            a class used for searching a PropertyNameProcessor.
+     *
+     * @param beanClass
+     *            the bean class
+     * @return the property name processor
      */
     public PropertyNameProcessor findJavaPropertyNameProcessor(Class beanClass){
         if (!javaPropertyNameProcessorMap.isEmpty()){
@@ -356,9 +416,10 @@ public class JsonConfig{
      * Finds a JsonBeanProcessor registered to the target class.<br>
      * Returns null if none is registered.<br>
      * [Java -&gt; JSON]
-     * 
+     *
      * @param target
      *            a class used for searching a JsonBeanProcessor.
+     * @return the json bean processor
      */
     public JsonBeanProcessor findJsonBeanProcessor(Class target){
         if (!beanProcessorMap.isEmpty()){
@@ -372,9 +433,10 @@ public class JsonConfig{
      * Finds a PropertyNameProcessor registered to the target class.<br>
      * Returns null if none is registered.<br>
      * [Java -&gt; JSON]
-     * 
-     * @param propertyType
-     *            a class used for searching a PropertyNameProcessor.
+     *
+     * @param beanClass
+     *            the bean class
+     * @return the property name processor
      */
     public PropertyNameProcessor findJsonPropertyNameProcessor(Class beanClass){
         if (!jsonPropertyNameProcessorMap.isEmpty()){
@@ -389,9 +451,10 @@ public class JsonConfig{
      * Finds a JsonValueProcessor registered to the target type.<br>
      * Returns null if none is registered.<br>
      * [Java -&gt; JSON]
-     * 
+     *
      * @param propertyType
      *            a class used for searching a JsonValueProcessor.
+     * @return the json value processor
      */
     public JsonValueProcessor findJsonValueProcessor(Class propertyType){
         if (!typeMap.isEmpty()){
@@ -413,13 +476,14 @@ public class JsonConfig{
      * </ol>
      * Returns null if none is registered.<br>
      * [Java -&gt; JSON]
-     * 
+     *
      * @param beanClass
      *            the class to which the property may belong
      * @param propertyType
      *            the type of the property
      * @param key
      *            the name of the property which may belong to the target class
+     * @return the json value processor
      */
     public JsonValueProcessor findJsonValueProcessor(Class beanClass,Class propertyType,String key){
         JsonValueProcessor jsonValueProcessor = null;
@@ -456,11 +520,12 @@ public class JsonConfig{
      * </ol>
      * Returns null if none is registered.<br>
      * [Java -&gt; JSON]
-     * 
+     *
      * @param propertyType
      *            the type of the property
      * @param key
      *            the name of the property which may belong to the target class
+     * @return the json value processor
      */
     public JsonValueProcessor findJsonValueProcessor(Class propertyType,String key){
         JsonValueProcessor jsonValueProcessor = null;
@@ -482,10 +547,10 @@ public class JsonConfig{
      * Finds a PropertyNameProcessor registered to the target class.<br>
      * Returns null if none is registered. <br>
      * [JSON -&gt; Java]
-     * 
-     * @param propertyType
-     *            a class used for searching a PropertyNameProcessor.
-     * 
+     *
+     * @param beanClass
+     *            the bean class
+     * @return the property name processor
      * @deprecated use findJavaPropertyNameProcessor() instead
      */
     @Deprecated
@@ -527,6 +592,8 @@ public class JsonConfig{
      * Returns the configured CycleDetectionStrategy.<br>
      * Default value is CycleDetectionStrategy.STRICT<br>
      * [Java -&gt; JSON]
+     *
+     * @return the cycle detection strategy
      */
     public CycleDetectionStrategy getCycleDetectionStrategy(){
         return cycleDetectionStrategy;
@@ -536,6 +603,8 @@ public class JsonConfig{
      * Returns the configured DefaultValueProcessorMatcher.<br>
      * Default value is DefaultValueProcessorMatcher.DEFAULT<br>
      * [Java -&gt; JSON]
+     *
+     * @return the default value processor matcher
      */
     public DefaultValueProcessorMatcher getDefaultValueProcessorMatcher(){
         return defaultValueProcessorMatcher;
@@ -554,6 +623,8 @@ public class JsonConfig{
     /**
      * Returns the configured properties for exclusion. <br>
      * [Java -&gt; JSON]
+     *
+     * @return the excludes
      */
     public String[] getExcludes(){
         return excludes;
@@ -563,6 +634,8 @@ public class JsonConfig{
      * Returns the configured JavaIdentifierTransformer. <br>
      * Default value is JavaIdentifierTransformer.NOOP<br>
      * [JSON -&gt; Java]
+     *
+     * @return the java identifier transformer
      */
     public JavaIdentifierTransformer getJavaIdentifierTransformer(){
         return javaIdentifierTransformer;
@@ -571,6 +644,8 @@ public class JsonConfig{
     /**
      * Returns the configured property filter when serializing to Java.<br>
      * [JSON -&gt; Java]
+     *
+     * @return the java property filter
      */
     public PropertyFilter getJavaPropertyFilter(){
         return javaPropertyFilter;
@@ -580,6 +655,8 @@ public class JsonConfig{
      * Returns the configured PropertyNameProcessorMatcher.<br>
      * Default value is PropertyNameProcessorMatcher.DEFAULT<br>
      * [JSON -&gt; Java]
+     *
+     * @return the java property name processor matcher
      */
     public PropertyNameProcessorMatcher getJavaPropertyNameProcessorMatcher(){
         return javaPropertyNameProcessorMatcher;
@@ -589,6 +666,8 @@ public class JsonConfig{
      * Returns the configured JsonBeanProcessorMatcher.<br>
      * Default value is JsonBeanProcessorMatcher.DEFAULT<br>
      * [JSON -&gt; Java]
+     *
+     * @return the json bean processor matcher
      */
     public JsonBeanProcessorMatcher getJsonBeanProcessorMatcher(){
         return jsonBeanProcessorMatcher;
@@ -597,6 +676,8 @@ public class JsonConfig{
     /**
      * Returns a list of registered listeners for JSON events.<br>
      * [JSON -&gt; Java]
+     *
+     * @return the json event listeners
      */
     public synchronized List getJsonEventListeners(){
         return eventListeners;
@@ -605,6 +686,8 @@ public class JsonConfig{
     /**
      * Returns the configured property filter when serializing to JSON.<br>
      * [Java -&gt; JSON]
+     *
+     * @return the json property filter
      */
     public PropertyFilter getJsonPropertyFilter(){
         return jsonPropertyFilter;
@@ -614,6 +697,8 @@ public class JsonConfig{
      * Returns the configured PropertyNameProcessorMatcher.<br>
      * Default value is PropertyNameProcessorMatcher.DEFAULT<br>
      * [Java -&gt; JSON]
+     *
+     * @return the json property name processor matcher
      */
     public PropertyNameProcessorMatcher getJsonPropertyNameProcessorMatcher(){
         return javaPropertyNameProcessorMatcher;
@@ -623,6 +708,8 @@ public class JsonConfig{
      * Returns the configured JsonValueProcessorMatcher.<br>
      * Default value is JsonValueProcessorMatcher.DEFAULT<br>
      * [Java -&gt; JSON]
+     *
+     * @return the json value processor matcher
      */
     public JsonValueProcessorMatcher getJsonValueProcessorMatcher(){
         return jsonValueProcessorMatcher;
@@ -631,6 +718,8 @@ public class JsonConfig{
     /**
      * Returns a set of default excludes with user-defined excludes.<br>
      * [Java -&gt; JSON]
+     *
+     * @return the merged excludes
      */
     public Collection getMergedExcludes(){
         Collection exclusions = new HashSet();
@@ -656,6 +745,10 @@ public class JsonConfig{
      * Returns a set of default excludes with user-defined excludes.<br>
      * Takes into account any additional excludes per matching class.
      * [Java -&gt; JSON]
+     *
+     * @param target
+     *            the target
+     * @return the merged excludes
      */
     public Collection getMergedExcludes(Class target){
         if (target == null){
@@ -683,6 +776,8 @@ public class JsonConfig{
      * Returns the configured NewBeanInstanceStrategy.<br>
      * Default value is NewBeanInstanceStrategy.DEFAULT<br>
      * [JSON -&gt; Java]
+     *
+     * @return the new bean instance strategy
      */
     public NewBeanInstanceStrategy getNewBeanInstanceStrategy(){
         return newBeanInstanceStrategy;
@@ -692,6 +787,8 @@ public class JsonConfig{
      * Returns the configured PropertyExclusionClassMatcher.<br>
      * Default value is PropertyExclusionClassMatcher.DEFAULT<br>
      * [JSON -&gt; Java]
+     *
+     * @return the property exclusion class matcher
      */
     public PropertyExclusionClassMatcher getPropertyExclusionClassMatcher(){
         return propertyExclusionClassMatcher;
@@ -701,7 +798,8 @@ public class JsonConfig{
      * Returns the configured PropertyNameProcessorMatcher.<br>
      * Default value is PropertyNameProcessorMatcher.DEFAULT<br>
      * [JSON -&gt; Java]
-     * 
+     *
+     * @return the property name processor matcher
      * @deprecated use getJavaPropertyNameProcessorMatcher() instead
      */
     @Deprecated
@@ -713,6 +811,8 @@ public class JsonConfig{
      * Returns the configured PropertySetStrategy.<br>
      * Default value is PropertySetStrategy.DEFAULT<br>
      * [JSON -&gt; Java]
+     *
+     * @return the property set strategy
      */
     public PropertySetStrategy getPropertySetStrategy(){
         return propertySetStrategy;
@@ -732,6 +832,8 @@ public class JsonConfig{
      * Returns true if non-String keys are allowed on JSONObject.<br>
      * Default value is false<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is allow non string keys
      */
     public boolean isAllowNonStringKeys(){
         return allowNonStringKeys;
@@ -741,6 +843,8 @@ public class JsonConfig{
      * Returns true if event triggering is enabled during building.<br>
      * Default value is false<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is event triggering enabled
      */
     public boolean isEventTriggeringEnabled(){
         return triggerEvents;
@@ -751,6 +855,8 @@ public class JsonConfig{
      * Jettison assumes that "" (empty string) can be assigned to empty elements (objects), which
      * clearly violates the JSON spec.<br>
      * [JSON -&gt; Java]
+     *
+     * @return true, if is handle jettison empty element
      */
     public boolean isHandleJettisonEmptyElement(){
         return handleJettisonEmptyElement;
@@ -761,6 +867,8 @@ public class JsonConfig{
      * Jettison states the following JSON {'media':{'title':'hello'}} can be set as a single element
      * JSONArray (media is the array).<br>
      * [JSON -&gt; Java]
+     *
+     * @return true, if is handle jettison single element array
      */
     public boolean isHandleJettisonSingleElementArray(){
         return handleJettisonSingleElementArray;
@@ -770,6 +878,8 @@ public class JsonConfig{
      * Returns true if default excludes will not be used.<br>
      * Default value is false.<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is ignore default excludes
      */
     public boolean isIgnoreDefaultExcludes(){
         return ignoreDefaultExcludes;
@@ -779,6 +889,8 @@ public class JsonConfig{
      * Returns true if JPA Transient annotated methods should be ignored.<br>
      * Default value is false.<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is ignore JPA transient
      */
     public boolean isIgnoreJPATransient(){
         return ignoreFieldAnnotations.contains("javax.persistence.Transient");
@@ -788,6 +900,8 @@ public class JsonConfig{
      * Returns true if transient fields of a bean will be ignored.<br>
      * Default value is false.<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is ignore transient fields
      */
     public boolean isIgnoreTransientFields(){
         return ignoreTransientFields;
@@ -797,6 +911,8 @@ public class JsonConfig{
      * Returns true if public fields of a bean will be ignored.<br>
      * Default value is true.<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is ignore public fields
      */
     public boolean isIgnorePublicFields(){
         return ignorePublicFields;
@@ -806,6 +922,8 @@ public class JsonConfig{
      * Returns true if Javascript compatibility is turned on.<br>
      * Default value is false.<br>
      * [Java -&gt; JSON]
+     *
+     * @return true, if is javascript compliant
      */
     public boolean isJavascriptCompliant(){
         return javascriptCompliant;
@@ -815,6 +933,8 @@ public class JsonConfig{
      * Returns true if map keys will not be transformed.<br>
      * Default value is false.<br>
      * [JSON -&gt; Java]
+     *
+     * @return true, if is skip java identifier transformation in map keys
      */
     public boolean isSkipJavaIdentifierTransformationInMapKeys(){
         return skipJavaIdentifierTransformationInMapKeys;
@@ -1009,10 +1129,10 @@ public class JsonConfig{
     /**
      * Removes a listener for JSON events.<br>
      * [Java -&gt; JSON]
-     * 
-     * @see #addJsonEventListener(JsonEventListener)
+     *
      * @param listener
      *            a listener for events
+     * @see #addJsonEventListener(JsonEventListener)
      */
     public synchronized void removeJsonEventListener(JsonEventListener listener){
         eventListeners.remove(listener);
@@ -1065,6 +1185,9 @@ public class JsonConfig{
     /**
      * Sets if non-String keys are allowed on JSONObject.<br>
      * [Java -&gt; JSON]
+     *
+     * @param allowNonStringKeys
+     *            the new allow non string keys
      */
     public void setAllowNonStringKeys(boolean allowNonStringKeys){
         this.allowNonStringKeys = allowNonStringKeys;
@@ -1092,8 +1215,8 @@ public class JsonConfig{
 
     /**
      * Sets the current attribute/Class Map<br>
-     * [JSON -&gt; Java]
-     * 
+     * [JSON -&gt; Java].
+     *
      * @param classMap
      *            a Map of classes, every key identifies a property or a regexp
      */
@@ -1123,6 +1246,9 @@ public class JsonConfig{
      * Sets a CycleDetectionStrategy to use.<br>
      * Will set default value (CycleDetectionStrategy.STRICT) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param cycleDetectionStrategy
+     *            the new cycle detection strategy
      */
     public void setCycleDetectionStrategy(CycleDetectionStrategy cycleDetectionStrategy){
         this.cycleDetectionStrategy = cycleDetectionStrategy == null ? DEFAULT_CYCLE_DETECTION_STRATEGY : cycleDetectionStrategy;
@@ -1132,6 +1258,9 @@ public class JsonConfig{
      * Sets a DefaultValueProcessorMatcher to use.<br>
      * Will set default value (DefaultValueProcessorMatcher.DEFAULT) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param defaultValueProcessorMatcher
+     *            the new default value processor matcher
      */
     public void setDefaultValueProcessorMatcher(DefaultValueProcessorMatcher defaultValueProcessorMatcher){
         this.defaultValueProcessorMatcher = defaultValueProcessorMatcher == null ? DEFAULT_DEFAULT_VALUE_PROCESSOR_MATCHER
@@ -1153,6 +1282,9 @@ public class JsonConfig{
      * Sets the excludes to use.<br>
      * Will set default value ([]) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param excludes
+     *            the new excludes
      */
     public void setExcludes(String[] excludes){
         this.excludes = excludes == null ? EMPTY_EXCLUDES : excludes;
@@ -1163,6 +1295,9 @@ public class JsonConfig{
      * Jettison states that "" (empty string) can be assigned to empty elements (objects), which
      * clearly violates the JSON spec.<br>
      * [JSON -&gt; Java]
+     *
+     * @param handleJettisonEmptyElement
+     *            the new handle jettison empty element
      */
     public void setHandleJettisonEmptyElement(boolean handleJettisonEmptyElement){
         this.handleJettisonEmptyElement = handleJettisonEmptyElement;
@@ -1174,6 +1309,9 @@ public class JsonConfig{
      * states the following JSON {'media':{'title':'hello'}} can be set as a single element JSONArray
      * (media is the array).<br>
      * [JSON -&gt; Java]
+     *
+     * @param handleJettisonSingleElementArray
+     *            the new handle jettison single element array
      */
     public void setHandleJettisonSingleElementArray(boolean handleJettisonSingleElementArray){
         this.handleJettisonSingleElementArray = handleJettisonSingleElementArray;
@@ -1182,6 +1320,9 @@ public class JsonConfig{
     /**
      * Sets if default excludes would be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param ignoreDefaultExcludes
+     *            the new ignore default excludes
      */
     public void setIgnoreDefaultExcludes(boolean ignoreDefaultExcludes){
         this.ignoreDefaultExcludes = ignoreDefaultExcludes;
@@ -1190,6 +1331,9 @@ public class JsonConfig{
     /**
      * Sets if JPA Transient annotated methods would be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param ignoreJPATransient
+     *            the new ignore JPA transient
      */
     public void setIgnoreJPATransient(boolean ignoreJPATransient){
         if (ignoreJPATransient){
@@ -1202,6 +1346,9 @@ public class JsonConfig{
     /**
      * Adds an annotation that marks a field to be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param annotationClassName
+     *            the annotation class name
      */
     public void addIgnoreFieldAnnotation(String annotationClassName){
         if (annotationClassName != null && !ignoreFieldAnnotations.contains(annotationClassName)){
@@ -1212,6 +1359,9 @@ public class JsonConfig{
     /**
      * Adds an annotation that marks a field to be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param annotationClassName
+     *            the annotation class name
      */
     public void removeIgnoreFieldAnnotation(String annotationClassName){
         if (annotationClassName != null){
@@ -1222,6 +1372,9 @@ public class JsonConfig{
     /**
      * Removes an annotation that marks a field to be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param annotationClass
+     *            the annotation class
      */
     public void addIgnoreFieldAnnotation(Class annotationClass){
         if (annotationClass != null && !ignoreFieldAnnotations.contains(annotationClass.getName())){
@@ -1232,6 +1385,9 @@ public class JsonConfig{
     /**
      * Removes an annotation that marks a field to be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param annotationClass
+     *            the annotation class
      */
     public void removeIgnoreFieldAnnotation(Class annotationClass){
         if (annotationClass != null){
@@ -1242,6 +1398,8 @@ public class JsonConfig{
     /**
      * Returns a List of all annotations that mark a field to be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @return the ignore field annotations
      */
     public List getIgnoreFieldAnnotations(){
         return Collections.unmodifiableList(ignoreFieldAnnotations);
@@ -1250,6 +1408,9 @@ public class JsonConfig{
     /**
      * Sets if transient fields would be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param ignoreTransientFields
+     *            the new ignore transient fields
      */
     public void setIgnoreTransientFields(boolean ignoreTransientFields){
         this.ignoreTransientFields = ignoreTransientFields;
@@ -1258,6 +1419,9 @@ public class JsonConfig{
     /**
      * Sets if public fields would be skipped when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param ignorePublicFields
+     *            the new ignore public fields
      */
     public void setIgnorePublicFields(boolean ignorePublicFields){
         this.ignorePublicFields = ignorePublicFields;
@@ -1266,6 +1430,9 @@ public class JsonConfig{
     /**
      * Sets if Javascript compatibility is enabled when building.<br>
      * [Java -&gt; JSON]
+     *
+     * @param javascriptCompliant
+     *            the new javascript compliant
      */
     public void setJavascriptCompliant(boolean javascriptCompliant){
         this.javascriptCompliant = javascriptCompliant;
@@ -1275,6 +1442,9 @@ public class JsonConfig{
      * Sets the JavaIdentifierTransformer to use.<br>
      * Will set default value (JavaIdentifierTransformer.NOOP) if null.<br>
      * [JSON -&gt; Java]
+     *
+     * @param javaIdentifierTransformer
+     *            the new java identifier transformer
      */
     public void setJavaIdentifierTransformer(JavaIdentifierTransformer javaIdentifierTransformer){
         this.javaIdentifierTransformer = javaIdentifierTransformer == null ? DEFAULT_JAVA_IDENTIFIER_TRANSFORMER
@@ -1296,6 +1466,9 @@ public class JsonConfig{
      * Sets a PropertyNameProcessorMatcher to use.<br>
      * Will set default value (PropertyNameProcessorMatcher.DEFAULT) if null.<br>
      * [JSON -&gt; Java]
+     *
+     * @param propertyNameProcessorMatcher
+     *            the new java property name processor matcher
      */
     public void setJavaPropertyNameProcessorMatcher(PropertyNameProcessorMatcher propertyNameProcessorMatcher){
         this.javaPropertyNameProcessorMatcher = propertyNameProcessorMatcher == null ? DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER
@@ -1306,6 +1479,9 @@ public class JsonConfig{
      * Sets a JsonBeanProcessorMatcher to use.<br>
      * Will set default value (JsonBeanProcessorMatcher.DEFAULT) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param jsonBeanProcessorMatcher
+     *            the new json bean processor matcher
      */
     public void setJsonBeanProcessorMatcher(JsonBeanProcessorMatcher jsonBeanProcessorMatcher){
         this.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher == null ? DEFAULT_JSON_BEAN_PROCESSOR_MATCHER : jsonBeanProcessorMatcher;
@@ -1326,6 +1502,9 @@ public class JsonConfig{
      * Sets a PropertyNameProcessorMatcher to use.<br>
      * Will set default value (PropertyNameProcessorMatcher.DEFAULT) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param propertyNameProcessorMatcher
+     *            the new json property name processor matcher
      */
     public void setJsonPropertyNameProcessorMatcher(PropertyNameProcessorMatcher propertyNameProcessorMatcher){
         this.jsonPropertyNameProcessorMatcher = propertyNameProcessorMatcher == null ? DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER
@@ -1336,6 +1515,9 @@ public class JsonConfig{
      * Sets a JsonValueProcessorMatcher to use.<br>
      * Will set default value (JsonValueProcessorMatcher.DEFAULT) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param jsonValueProcessorMatcher
+     *            the new json value processor matcher
      */
     public void setJsonValueProcessorMatcher(JsonValueProcessorMatcher jsonValueProcessorMatcher){
         this.jsonValueProcessorMatcher = jsonValueProcessorMatcher == null ? DEFAULT_JSON_VALUE_PROCESSOR_MATCHER
@@ -1346,6 +1528,9 @@ public class JsonConfig{
      * Sets the NewBeanInstanceStrategy to use.<br>
      * Will set default value (NewBeanInstanceStrategy.DEFAULT) if null.<br>
      * [JSON -&gt; Java]
+     *
+     * @param newBeanInstanceStrategy
+     *            the new new bean instance strategy
      */
     public void setNewBeanInstanceStrategy(NewBeanInstanceStrategy newBeanInstanceStrategy){
         this.newBeanInstanceStrategy = newBeanInstanceStrategy == null ? DEFAULT_NEW_BEAN_INSTANCE_STRATEGY : newBeanInstanceStrategy;
@@ -1355,6 +1540,9 @@ public class JsonConfig{
      * Sets a PropertyExclusionClassMatcher to use.<br>
      * Will set default value (PropertyExclusionClassMatcher.DEFAULT) if null.<br>
      * [Java -&gt; JSON]
+     *
+     * @param propertyExclusionClassMatcher
+     *            the new property exclusion class matcher
      */
     public void setPropertyExclusionClassMatcher(PropertyExclusionClassMatcher propertyExclusionClassMatcher){
         this.propertyExclusionClassMatcher = propertyExclusionClassMatcher == null ? DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER
@@ -1365,7 +1553,9 @@ public class JsonConfig{
      * Sets a PropertyNameProcessorMatcher to use.<br>
      * Will set default value (PropertyNameProcessorMatcher.DEFAULT) if null.<br>
      * [JSON -&gt; Java]
-     * 
+     *
+     * @param propertyNameProcessorMatcher
+     *            the new property name processor matcher
      * @deprecated use setJavaPropertyNameProcessorMatcher() instead
      */
     @Deprecated
@@ -1377,6 +1567,9 @@ public class JsonConfig{
      * Sets a PropertySetStrategy to use.<br>
      * Will set default value (PropertySetStrategy.DEFAULT) if null.<br>
      * [JSON -&gt; Java]
+     *
+     * @param propertySetStrategy
+     *            the new property set strategy
      */
     public void setPropertySetStrategy(PropertySetStrategy propertySetStrategy){
         this.propertySetStrategy = propertySetStrategy;
@@ -1396,6 +1589,9 @@ public class JsonConfig{
     /**
      * Sets if property name as JavaIndetifier transformations would be skipped.<br>
      * [JSON -&gt; Java]
+     *
+     * @param skipJavaIdentifierTransformationInMapKeys
+     *            the new skip java identifier transformation in map keys
      */
     public void setSkipJavaIdentifierTransformationInMapKeys(boolean skipJavaIdentifierTransformationInMapKeys){
         this.skipJavaIdentifierTransformationInMapKeys = skipJavaIdentifierTransformationInMapKeys;

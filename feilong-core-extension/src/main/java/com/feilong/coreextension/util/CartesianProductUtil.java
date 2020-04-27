@@ -110,7 +110,7 @@ public final class CartesianProductUtil{
      * 
      * <pre class="code">
      * 
-     * List<List<Integer>> result = cartesianProduct(toList(1, 2, 3), toList(1, 2), toList(5), toList(4, 8));
+     * List{@code <List<Integer>>} result = cartesianProduct(toList(1, 2, 3), toList(1, 2), toList(5), toList(4, 8));
      * LOGGER.debug(JsonUtil.format(result, 0, 4));
      * 
      * </pre>

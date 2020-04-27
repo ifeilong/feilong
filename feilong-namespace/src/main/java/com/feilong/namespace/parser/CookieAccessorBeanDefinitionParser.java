@@ -30,7 +30,7 @@ import com.feilong.namespace.RuntimeBeanReferenceBuilder;
  * CookieAccessorBeanDefinitionParser.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser
+ * @see "org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser"
  * @since 2.0.0
  */
 public class CookieAccessorBeanDefinitionParser extends AbstractBeanDefinitionParser{

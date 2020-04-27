@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,12 +27,10 @@ import java.io.Writer;
  */
 public final class JSONNull implements JSON{
 
-    /**
-     * 
-     */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7216124736163645852L;
 
-    /** singleton instance */
+    /** singleton instance. */
     private static JSONNull   instance;
 
     static{
@@ -40,12 +38,17 @@ public final class JSONNull implements JSON{
     }
 
     /**
-     * Returns the singleton instance of JSONNull
+     * Returns the singleton instance of JSONNull.
+     *
+     * @return the singleton instance
      */
     public static JSONNull getInstance(){
         return instance;
     }
 
+    /**
+     * Instantiates a new JSON null.
+     */
     private JSONNull(){
 
     }
@@ -64,21 +67,41 @@ public final class JSONNull implements JSON{
                         || (object instanceof JSONObject && ((JSONObject) object).isNullObject()) || "null".equals(object);
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         return 37 + "null".hashCode();
     }
 
+    /**
+     * Checks if is array.
+     *
+     * @return true, if is array
+     */
     @Override
     public boolean isArray(){
         return false;
     }
 
+    /**
+     * Checks if is empty.
+     *
+     * @return true, if is empty
+     */
     @Override
     public boolean isEmpty(){
         throw new JSONException("Object is null");
     }
 
+    /**
+     * Size.
+     *
+     * @return the int
+     */
     @Override
     public int size(){
         throw new JSONException("Object is null");
@@ -94,11 +117,27 @@ public final class JSONNull implements JSON{
         return "null";
     }
 
+    /**
+     * To string.
+     *
+     * @param indentFactor
+     *            the indent factor
+     * @return the string
+     */
     @Override
     public String toString(int indentFactor){
         return toString();
     }
 
+    /**
+     * To string.
+     *
+     * @param indentFactor
+     *            the indent factor
+     * @param indent
+     *            the indent
+     * @return the string
+     */
     @Override
     public String toString(int indentFactor,int indent){
         StringBuffer sb = new StringBuffer();
@@ -109,6 +148,13 @@ public final class JSONNull implements JSON{
         return sb.toString();
     }
 
+    /**
+     * Write.
+     *
+     * @param writer
+     *            the writer
+     * @return the writer
+     */
     @Override
     public Writer write(Writer writer){
         try{

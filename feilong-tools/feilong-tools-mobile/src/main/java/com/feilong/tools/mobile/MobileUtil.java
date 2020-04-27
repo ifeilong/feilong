@@ -96,7 +96,7 @@ public final class MobileUtil{
      * @param mobileNo
      *            11位mobileNumber,不能为空
      * @param count
-     *            Segment后面几个电话数需要隐藏,必须>=0
+     *            Segment后面几个电话数需要隐藏,必须{@code >=}0
      * @return <blockquote>
      *         <table border="1" cellspacing="0" cellpadding="4" summary="">
      *         <tr>
@@ -112,7 +112,7 @@ public final class MobileUtil{
      *         <td>throw {@link IllegalArgumentException}</td>
      *         </tr>
      *         <tr>
-     *         <td>mobileNumber.length()<= 3</td>
+     *         <td>mobileNumber.length(){@code <=} 3</td>
      *         <td>mobileNumber</td>
      *         </tr>
      *         <tr>

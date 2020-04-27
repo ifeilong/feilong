@@ -126,7 +126,7 @@ public final class InternetAddressUtil{
      *
      * @param internetAddresses
      *            the internet addresses
-     * @return the list< string>
+     * @return the list
      */
     public static final List<String> toUnicodeStringList(InternetAddress[] internetAddresses){
         Validate.notEmpty(internetAddresses, "internetAddresses can't be null/empty!");

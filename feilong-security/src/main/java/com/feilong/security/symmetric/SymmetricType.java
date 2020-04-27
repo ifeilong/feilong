@@ -106,7 +106,7 @@ public enum SymmetricType{
      * </p>
      * <p>
      * DES算法把64位的明文输入块变为64位的密文输出块,它所使用的密钥也是64位<br>
-     * DES共有四种工作模式-->>ECB:电子密码本模式、CBC:加密分组链接模式、CFB:加密反馈模式、OFB:输出反馈模式
+     * DES共有四种工作模式{@code -->>}ECB:电子密码本模式、CBC:加密分组链接模式、CFB:加密反馈模式、OFB:输出反馈模式
      * </p>
      * 最常用的对称加密算法,安全性较差,<br>
      * The Digital Encryption Standard as described in FIPS PUB 46-2.

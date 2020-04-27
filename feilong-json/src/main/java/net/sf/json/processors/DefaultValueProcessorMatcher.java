@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ import java.util.Set;
  */
 public abstract class DefaultValueProcessorMatcher{
 
-    /** Matches the target with equals() */
+    /** Matches the target with equals(). */
     public static final DefaultValueProcessorMatcher DEFAULT = new DefaultDefaultValueProcessorMatcher();
 
     /**
@@ -39,11 +39,24 @@ public abstract class DefaultValueProcessorMatcher{
      *            the target class to match
      * @param set
      *            a set of possible matches
+     * @return the match
      */
     public abstract Object getMatch(Class target,Set set);
 
+    /**
+     * The Class DefaultDefaultValueProcessorMatcher.
+     */
     private static final class DefaultDefaultValueProcessorMatcher extends DefaultValueProcessorMatcher{
 
+        /**
+         * Gets the match.
+         *
+         * @param target
+         *            the target
+         * @param set
+         *            the set
+         * @return the match
+         */
         @Override
         public Object getMatch(Class target,Set set){
             if (target != null && set != null && set.contains(target)){

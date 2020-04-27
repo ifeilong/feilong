@@ -46,6 +46,7 @@ import com.feilong.json.jsonlib.JsonUtil;
  * <blockquote>
  * 
  * 用于 {@link javax.imageio.ImageIO.CanEncodeImageAndFormatFilter#CanEncodeImageAndFormatFilter(ImageTypeSpecifier, String)}
+ * 
  * <ul>
  * <li>{@link com.sun.imageio.plugins.bmp.BMPImageWriterSpi}</li>
  * <li>{@link com.sun.imageio.plugins.gif.GIFImageWriterSpi}</li>

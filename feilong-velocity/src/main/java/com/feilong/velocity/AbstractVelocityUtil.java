@@ -146,14 +146,12 @@ abstract class AbstractVelocityUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * Map<String, Object> map = newHashMap();
+     * Map{@code <String, Object>} map = newHashMap();
      * map.put("memberId", "5");
      * 
      * String vmContent = "${memberId},feilong";
      * 
      * assertEquals("5,feilong", VelocityUtil.INSTANCE.parseString(vmContent, map));
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -170,7 +168,7 @@ abstract class AbstractVelocityUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map<String, Object> map = newHashMap();
+     * Map{@code <String, Object>} map = newHashMap();
      * map.put("memberId1", "5");
      * 
      * String vmContent = "${memberId},${memberId1},feilong";

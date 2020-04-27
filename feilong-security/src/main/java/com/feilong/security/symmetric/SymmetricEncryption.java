@@ -200,7 +200,8 @@ public class SymmetricEncryption{
      * @param keyString
      *            the key string
      * @param keyBuilder
-     *            the key builder
+     *            支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
+     *
      * @since 3.0.0
      */
     public SymmetricEncryption(SymmetricType symmetricType, String keyString, KeyBuilder keyBuilder){
@@ -239,7 +240,7 @@ public class SymmetricEncryption{
      * @param keyString
      *            the key string
      * @param keyBuilder
-     *            the key builder
+     *            支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
      * @param cipherMode
      *            the cipher mode
      * @param cipherPadding
@@ -262,7 +263,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * keyString=feilong
-     * encrypBase64("鑫哥爱feilong") ---->BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
+     * encrypBase64("鑫哥爱feilong") {@code ---->}BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
      * </pre>
      *
      * @param original
@@ -283,7 +284,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * keyString=feilong
-     * encrypBase64("鑫哥爱feilong") ---->BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
+     * encrypBase64("鑫哥爱feilong") {@code ---->}BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2
      * </pre>
      *
      * @param original
@@ -318,7 +319,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * keyString=feilong
-     * decryptBase64("BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2") ---->鑫哥爱feilong
+     * decryptBase64("BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2") {@code ---->}鑫哥爱feilong
      * 
      * </pre>
      *
@@ -342,7 +343,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * keyString=feilong
-     * decryptBase64("BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2") ---->鑫哥爱feilong
+     * decryptBase64("BVl2k0U5+qokOeI6ufFlVS8XnkwEwff2") {@code ---->}鑫哥爱feilong
      * 
      * </pre>
      *
@@ -383,7 +384,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * 例如:key=feilong
-     * encryptHex("鑫哥爱feilong")---->055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
+     * encryptHex("鑫哥爱feilong"){@code ---->}055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
      * </pre>
      *
      * @param original
@@ -406,7 +407,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * 例如:key=feilong
-     * encryptHex("鑫哥爱feilong")---->055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
+     * encryptHex("鑫哥爱feilong"){@code ---->}055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6
      * </pre>
      *
      * @param original
@@ -444,7 +445,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * 例如:key=feilong
-     * decryptHex("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6")---->"鑫哥爱feilong"
+     * decryptHex("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6"){@code ---->}"鑫哥爱feilong"
      * </pre>
      *
      * @param hexString
@@ -464,7 +465,7 @@ public class SymmetricEncryption{
      * 
      * <pre class="code">
      * 例如:key=feilong
-     * decryptHex("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6")---->"鑫哥爱feilong"
+     * decryptHex("055976934539FAAA2439E23AB9F165552F179E4C04C1F7F6"){@code ---->}"鑫哥爱feilong"
      * </pre>
      *
      * @param hexString
@@ -555,10 +556,11 @@ public class SymmetricEncryption{
     }
 
     /**
-     * 设置 支持设置特殊的 {@link java.
+     * 支持设置特殊的 {@link java.security.Key} , 默认使用 {@link com.feilong.security.symmetric.builder.DefaultKeyBuilder},.
      *
      * @param keyBuilder
      *            the keyBuilder to set
+     * @since 3.0.0
      */
     public void setKeyBuilder(KeyBuilder keyBuilder){
         this.keyBuilder = keyBuilder;

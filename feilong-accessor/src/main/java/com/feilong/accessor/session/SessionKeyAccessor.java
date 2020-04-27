@@ -25,7 +25,8 @@ import com.feilong.accessor.KeyAccessor;
  * 基于session的 指定 key 方式的寄存器实现.
  * 
  * <p>
- * <b>场景:</b> 适用于 <br>
+ * <b>场景:</b> 适用于:<br>
+ * </p>
  * 
  * <pre>
  * String s = PaymentSecureBuilder.buildS(memberId.toString(), transactionInfo.getAmount(), transactionId);
@@ -33,13 +34,22 @@ import com.feilong.accessor.KeyAccessor;
  * </pre>
  * 
  * 这种非固定 key,且 key 动态的场景
- * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
 public class SessionKeyAccessor extends AbstractSessionKeyAccessor implements KeyAccessor{
 
+    /**
+     * Save.
+     *
+     * @param key
+     *            the key
+     * @param serializable
+     *            the serializable
+     * @param request
+     *            the request
+     */
     /*
      * (non-Javadoc)
      * 

@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -120,9 +120,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     private static final Logger LOGGER           = LoggerFactory.getLogger(JSONObject.class);
 
     //---------------------------------------------------------------
-    /**
-     * 
-     */
+    /** The Constant serialVersionUID. */
     private static final long   serialVersionUID = -7895449812672706822L;
 
     /**
@@ -131,6 +129,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
      *
      * @param object
+     *            the object
+     * @return the JSON object
      * @throws JSONException
      *             if the object can not be converted to a proper
      *             JSONObject.
@@ -146,6 +146,10 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
      *
      * @param object
+     *            the object
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
      * @throws JSONException
      *             if the object can not be converted to a proper
      *             JSONObject.
@@ -180,6 +184,10 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     /**
      * Creates a JSONDynaBean from a JSONObject.
+     *
+     * @param jsonObject
+     *            the json object
+     * @return the object
      */
     public static Object toBean(JSONObject jsonObject){
         if (jsonObject == null || jsonObject.isNullObject()){
@@ -227,6 +235,12 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     /**
      * Creates a bean from a JSONObject, with a specific target class.<br>
+     *
+     * @param jsonObject
+     *            the json object
+     * @param beanClass
+     *            the bean class
+     * @return the object
      */
     public static Object toBean(JSONObject jsonObject,Class beanClass){
         JsonConfig jsonConfig = new JsonConfig();
@@ -245,6 +259,14 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * <li>Every value must be a Class.</li>
      * <li>A key may be a regular expression.</li>
      * </ul>
+     *
+     * @param jsonObject
+     *            the json object
+     * @param beanClass
+     *            the bean class
+     * @param classMap
+     *            the class map
+     * @return the object
      */
     public static Object toBean(JSONObject jsonObject,Class beanClass,Map classMap){
         JsonConfig jsonConfig = new JsonConfig();
@@ -255,6 +277,12 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     /**
      * Creates a bean from a JSONObject, with the specific configuration.
+     *
+     * @param jsonObject
+     *            the json object
+     * @param jsonConfig
+     *            the json config
+     * @return the object
      */
     public static Object toBean(JSONObject jsonObject,JsonConfig jsonConfig){
         if (jsonObject == null || jsonObject.isNullObject()){
@@ -482,6 +510,14 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     /**
      * Creates a bean from a JSONObject, with the specific configuration.
+     *
+     * @param jsonObject
+     *            the json object
+     * @param root
+     *            the root
+     * @param jsonConfig
+     *            the json config
+     * @return the object
      */
     public static Object toBean(JSONObject jsonObject,Object root,JsonConfig jsonConfig){
         if (jsonObject == null || jsonObject.isNullObject() || root == null){
@@ -635,6 +671,9 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *
      * @param bean
      *            An object with POJO conventions
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
      * @throws JSONException
      *             if the bean can not be converted to a proper
      *             JSONObject.
@@ -688,6 +727,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return jsonObject;
     }
 
+    /**
+     * Default bean processing.
+     *
+     * @param bean
+     *            the bean
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject defaultBeanProcessing(Object bean,JsonConfig jsonConfig){
         Class beanClass = bean.getClass();
         PropertyNameProcessor propertyNameProcessor = jsonConfig.findJsonPropertyNameProcessor(beanClass);
@@ -809,6 +857,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return jsonObject;
     }
 
+    /**
+     * From dyna bean.
+     *
+     * @param bean
+     *            the bean
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject _fromDynaBean(DynaBean bean,JsonConfig jsonConfig){
         if (bean == null){
             fireObjectStartEvent(jsonConfig);
@@ -875,6 +932,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return jsonObject;
     }
 
+    /**
+     * From JSON object.
+     *
+     * @param object
+     *            the object
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject _fromJSONObject(JSONObject object,JsonConfig jsonConfig){
         if (object == null || object.isNullObject()){
             fireObjectStartEvent(jsonConfig);
@@ -935,10 +1001,28 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return jsonObject;
     }
 
+    /**
+     * From JSON string.
+     *
+     * @param string
+     *            the string
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject _fromJSONString(JSONString string,JsonConfig jsonConfig){
         return _fromJSONTokener(new JSONTokener(string.toJSONString()), jsonConfig);
     }
 
+    /**
+     * From JSON tokener.
+     *
+     * @param tokener
+     *            the tokener
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject _fromJSONTokener(JSONTokener tokener,JsonConfig jsonConfig){
 
         try{
@@ -1086,6 +1170,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
     }
 
+    /**
+     * From map.
+     *
+     * @param map
+     *            the map
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject _fromMap(Map map,JsonConfig jsonConfig){
         if (map == null){
             fireObjectStartEvent(jsonConfig);
@@ -1170,6 +1263,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return jsonObject;
     }
 
+    /**
+     * From string.
+     *
+     * @param str
+     *            the str
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private static JSONObject _fromString(String str,JsonConfig jsonConfig){
         if (str == null || "null".equals(str)){
             fireObjectStartEvent(jsonConfig);
@@ -1179,6 +1281,21 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return _fromJSONTokener(new JSONTokener(str), jsonConfig);
     }
 
+    /**
+     * Convert property value to array.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param targetType
+     *            the target type
+     * @param jsonConfig
+     *            the json config
+     * @param classMap
+     *            the class map
+     * @return the object
+     */
     private static Object convertPropertyValueToArray(String key,Object value,Class targetType,JsonConfig jsonConfig,Map classMap){
         Class innerType = JSONUtils.getInnerComponentType(targetType);
         Class targetInnerType = findTargetClass(key, classMap);
@@ -1205,6 +1322,21 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return array;
     }
 
+    /**
+     * Convert property value to list.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @param name
+     *            the name
+     * @param classMap
+     *            the class map
+     * @return the list
+     */
     private static List convertPropertyValueToList(String key,Object value,JsonConfig jsonConfig,String name,Map classMap){
         Class targetClass = findTargetClass(key, classMap);
         targetClass = targetClass == null ? findTargetClass(name, classMap) : targetClass;
@@ -1215,6 +1347,23 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return list;
     }
 
+    /**
+     * Convert property value to collection.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @param name
+     *            the name
+     * @param classMap
+     *            the class map
+     * @param collectionType
+     *            the collection type
+     * @return the collection
+     */
     private static Collection convertPropertyValueToCollection(
                     String key,
                     Object value,
@@ -1265,6 +1414,19 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * }
      */
 
+    /**
+     * Resolve class.
+     *
+     * @param classMap
+     *            the class map
+     * @param key
+     *            the key
+     * @param name
+     *            the name
+     * @param type
+     *            the type
+     * @return the class
+     */
     private static Class resolveClass(Map classMap,String key,String name,Class type){
         Class targetClass = findTargetClass(key, classMap);
         if (targetClass == null){
@@ -1287,6 +1449,12 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     /**
      * Locates a Class associated to a specifi key.<br>
      * The key may be a regexp.
+     *
+     * @param key
+     *            the key
+     * @param classMap
+     *            the class map
+     * @return the class
      */
     private static Class findTargetClass(String key,Map classMap){
         // try get first
@@ -1307,6 +1475,17 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return targetClass;
     }
 
+    /**
+     * Checks if is transient field.
+     *
+     * @param name
+     *            the name
+     * @param beanClass
+     *            the bean class
+     * @param jsonConfig
+     *            the json config
+     * @return true, if is transient field
+     */
     private static boolean isTransientField(String name,Class beanClass,JsonConfig jsonConfig){
         try{
             Field field = beanClass.getDeclaredField(name);
@@ -1320,6 +1499,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return false;
     }
 
+    /**
+     * Checks if is transient.
+     *
+     * @param element
+     *            the element
+     * @param jsonConfig
+     *            the json config
+     * @return true, if is transient
+     */
     private static boolean isTransient(AnnotatedElement element,JsonConfig jsonConfig){
         for (Iterator annotations = jsonConfig.getIgnoreFieldAnnotations().iterator(); annotations.hasNext();){
             try{
@@ -1334,6 +1522,19 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return false;
     }
 
+    /**
+     * Morph property value.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param type
+     *            the type
+     * @param targetType
+     *            the target type
+     * @return the object
+     */
     private static Object morphPropertyValue(String key,Object value,Class type,Class targetType){
         Morpher morpher = JSONUtils.getMorpherRegistry().getMorpherFor(targetType);
         if (IdentityObjectMorpher.getInstance().equals(morpher)){
@@ -1354,6 +1555,17 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     /**
      * Sets a property on the target bean.<br>
      * Bean may be a Map or a POJO.
+     *
+     * @param bean
+     *            the bean
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @throws Exception
+     *             the exception
      */
     private static void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig) throws Exception{
         PropertySetStrategy propertySetStrategy = jsonConfig.getPropertySetStrategy() != null ? jsonConfig.getPropertySetStrategy()
@@ -1361,6 +1573,22 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         propertySetStrategy.setProperty(bean, key, value, jsonConfig);
     }
 
+    /**
+     * 设置 value.
+     *
+     * @param jsonObject
+     *            the json object
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param type
+     *            the type
+     * @param jsonConfig
+     *            the json config
+     * @param bypass
+     *            the bypass
+     */
     private static void setValue(JSONObject jsonObject,String key,Object value,Class type,JsonConfig jsonConfig,boolean bypass){
         boolean accumulated = false;
         if (value == null){
@@ -1399,7 +1627,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     // ------------------------------------------------------
 
-    /** identifies this object as null */
+    /** identifies this object as null. */
     private boolean   nullObject;
 
     /**
@@ -1416,6 +1644,9 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     /**
      * Creates a JSONObject that is null.
+     *
+     * @param isNull
+     *            the is null
      */
     public JSONObject(boolean isNull){
         this();
@@ -1533,6 +1764,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            A key string.
      * @param value
      *            An object to be accumulated under the key.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the value is an invalid number or if the key is
@@ -1542,10 +1775,24 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return _accumulate(key, value, jsonConfig);
     }
 
+    /**
+     * Accumulate all.
+     *
+     * @param map
+     *            the map
+     */
     public void accumulateAll(Map map){
         accumulateAll(map, new JsonConfig());
     }
 
+    /**
+     * Accumulate all.
+     *
+     * @param map
+     *            the map
+     * @param jsonConfig
+     *            the json config
+     */
     public void accumulateAll(Map map,JsonConfig jsonConfig){
         if (map instanceof JSONObject){
             for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
@@ -1564,11 +1811,21 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
     }
 
+    /**
+     * 清除.
+     */
     @Override
     public void clear(){
         properties.clear();
     }
 
+    /**
+     * Compare to.
+     *
+     * @param obj
+     *            the obj
+     * @return the int
+     */
     @Override
     public int compareTo(Object obj){
         if (obj != null && (obj instanceof JSONObject)){
@@ -1586,16 +1843,39 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return -1;
     }
 
+    /**
+     * Contains key.
+     *
+     * @param key
+     *            the key
+     * @return true, if successful
+     */
     @Override
     public boolean containsKey(Object key){
         return properties.containsKey(key);
     }
 
+    /**
+     * Contains value.
+     *
+     * @param value
+     *            the value
+     * @return true, if successful
+     */
     @Override
     public boolean containsValue(Object value){
         return containsValue(value, new JsonConfig());
     }
 
+    /**
+     * Contains value.
+     *
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return true, if successful
+     */
     public boolean containsValue(Object value,JsonConfig jsonConfig){
         try{
             value = processValue(value, jsonConfig);
@@ -1644,6 +1924,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            A Collection value.
      * @return this.
      * @throws JSONException
+     *             the JSON exception
      */
     public JSONObject element(String key,Collection value){
         return element(key, value, new JsonConfig());
@@ -1657,8 +1938,11 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            A key string.
      * @param value
      *            A Collection value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
+     *             the JSON exception
      */
     public JSONObject element(String key,Collection value,JsonConfig jsonConfig){
         if (!(value instanceof JSONArray)){
@@ -1727,6 +2011,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            A Map value.
      * @return this.
      * @throws JSONException
+     *             the JSON exception
      */
     public JSONObject element(String key,Map value){
         return element(key, value, new JsonConfig());
@@ -1740,8 +2025,11 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            A key string.
      * @param value
      *            A Map value.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
+     *             the JSON exception
      */
     public JSONObject element(String key,Map value,JsonConfig jsonConfig){
         verifyIsNull();
@@ -1783,6 +2071,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            An object which is the value. It should be of one of these
      *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the value is non-finite number or if the key is
@@ -1830,6 +2120,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            An object which is the value. It should be of one of these
      *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the value is a non-finite number.
@@ -1842,11 +2134,23 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return this;
     }
 
+    /**
+     * Entry set.
+     *
+     * @return the 设置
+     */
     @Override
     public Set entrySet(){
         return Collections.unmodifiableSet(properties.entrySet());
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (obj == this){
@@ -1949,6 +2253,13 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return true;
     }
 
+    /**
+     * 获得.
+     *
+     * @param key
+     *            the key
+     * @return the object
+     */
     @Override
     public Object get(Object key){
         if (key instanceof String){
@@ -2127,6 +2438,11 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return this.properties.containsKey(key);
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         int hashcode = 19;
@@ -2142,11 +2458,21 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return hashcode;
     }
 
+    /**
+     * Checks if is array.
+     *
+     * @return true, if is array
+     */
     @Override
     public boolean isArray(){
         return false;
     }
 
+    /**
+     * Checks if is empty.
+     *
+     * @return true, if is empty
+     */
     @Override
     public boolean isEmpty(){
         // verifyIsNull();
@@ -2155,6 +2481,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
     /**
      * Returs if this object is a null JSONObject.
+     *
+     * @return the identifies this object as null
      */
     public boolean isNullObject(){
         return nullObject;
@@ -2170,6 +2498,11 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return keySet().iterator();
     }
 
+    /**
+     * Key set.
+     *
+     * @return the 设置
+     */
     @Override
     public Set keySet(){
         return Collections.unmodifiableSet(properties.keySet());
@@ -2196,6 +2529,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * Produce a JSONArray containing the names of the elements of this
      * JSONObject.
      *
+     * @param jsonConfig
+     *            the json config
      * @return A JSONArray containing the key strings, or null if the JSONObject
      *         is empty.
      */
@@ -2415,6 +2750,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return o != null ? o.toString() : defaultValue;
     }
 
+    /**
+     * Put.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object put(Object key,Object value){
         if (key == null){
@@ -2425,11 +2769,25 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return previous;
     }
 
+    /**
+     * Put all.
+     *
+     * @param map
+     *            the map
+     */
     @Override
     public void putAll(Map map){
         putAll(map, new JsonConfig());
     }
 
+    /**
+     * Put all.
+     *
+     * @param map
+     *            the map
+     * @param jsonConfig
+     *            the json config
+     */
     public void putAll(Map map,JsonConfig jsonConfig){
         if (map instanceof JSONObject){
             for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
@@ -2448,6 +2806,13 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
     }
 
+    /**
+     * 删除.
+     *
+     * @param key
+     *            the key
+     * @return the object
+     */
     @Override
     public Object remove(Object key){
         return properties.remove(key);
@@ -2630,6 +2995,11 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return sb.toString();
     }
 
+    /**
+     * Values.
+     *
+     * @return the collection
+     */
     @Override
     public Collection values(){
         return Collections.unmodifiableCollection(properties.values());
@@ -2641,8 +3011,11 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer
+     *            the writer
      * @return The writer.
      * @throws JSONException
+     *             the JSON exception
      */
     @Override
     public Writer write(Writer writer){
@@ -2680,6 +3053,17 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
     }
 
+    /**
+     * Accumulate.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     */
     private JSONObject _accumulate(String key,Object value,JsonConfig jsonConfig){
         if (isNullObject()){
             throw new JSONException("Can't accumulate on null object");
@@ -2699,6 +3083,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return this;
     }
 
+    /**
+     * Process value.
+     *
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     */
     @Override
     protected Object _processValue(Object value,JsonConfig jsonConfig){
         if (value instanceof JSONTokener){
@@ -2718,6 +3111,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            An object which is the value. It should be of one of these
      *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the value is non-finite number or if the key is
@@ -2751,6 +3146,15 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return this;
     }
 
+    /**
+     * Process value.
+     *
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     */
     private Object processValue(Object value,JsonConfig jsonConfig){
         if (value != null){
             JsonValueProcessor processor = jsonConfig.findJsonValueProcessor(value.getClass());
@@ -2764,6 +3168,17 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return _processValue(value, jsonConfig);
     }
 
+    /**
+     * Process value.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     */
     private Object processValue(String key,Object value,JsonConfig jsonConfig){
         if (value != null){
             JsonValueProcessor processor = jsonConfig.findJsonValueProcessor(value.getClass(), key);
@@ -2786,6 +3201,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            An object which is the value. It should be of one of these
      *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
+     * @param jsonConfig
+     *            the json config
      * @return this.
      * @throws JSONException
      *             If the value is non-finite number or if the key is

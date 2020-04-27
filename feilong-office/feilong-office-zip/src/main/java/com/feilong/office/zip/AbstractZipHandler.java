@@ -39,6 +39,14 @@ public abstract class AbstractZipHandler implements ZipHandler{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractZipHandler.class);
 
+    /**
+     * Zip.
+     *
+     * @param tobeZipFilePath
+     *            the tobe zip file path
+     * @param outputZipPath
+     *            the output zip path
+     */
     /*
      * (non-Javadoc)
      * 
@@ -77,6 +85,8 @@ public abstract class AbstractZipHandler implements ZipHandler{
      *            the un zip file path
      * @param outputZipPath
      *            the output directory
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     protected abstract void handle(String tobeZipFilePath,String outputZipPath) throws IOException;
 

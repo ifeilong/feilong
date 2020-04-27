@@ -20,7 +20,7 @@ import com.feilong.core.lang.EnumUtil;
 /**
  * http请求方法.
  * 
- * <h3>get && post区别:</h3>
+ * <h3>get {@code &&} post区别:</h3>
  * 
  * <blockquote>
  * 

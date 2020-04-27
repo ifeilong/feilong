@@ -32,6 +32,16 @@ import org.apache.commons.compress.archivers.zip.ZipFile;
  */
 public class CompressUnzipHandler extends AbstractUnzipHandler{
 
+    /**
+     * Handle.
+     *
+     * @param unZipFilePath
+     *            the un zip file path
+     * @param outputDirectory
+     *            the output directory
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     /*
      * (non-Javadoc)
      * 

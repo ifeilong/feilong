@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,21 @@
 
 package net.sf.json.processors;
 
-
 /**
  * Base interface for mutating property names of a Bean.
  *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface PropertyNameProcessor {
-   /**
-    * Processes the property name.
-    *
-    * @param beanClass the input bean's class
-    * @param name the current property name
-    * @return an updated property name
-    */
-   String processPropertyName( Class beanClass, String name );
+public interface PropertyNameProcessor{
+
+    /**
+     * Processes the property name.
+     *
+     * @param beanClass
+     *            the input bean's class
+     * @param name
+     *            the current property name
+     * @return an updated property name
+     */
+    String processPropertyName(Class beanClass,String name);
 }

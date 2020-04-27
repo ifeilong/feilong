@@ -44,6 +44,16 @@ public class CompressZipHandler extends AbstractZipHandler{
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CompressZipHandler.class);
 
+    /**
+     * Handle.
+     *
+     * @param tobeZipFilePath
+     *            the tobe zip file path
+     * @param outputZipPath
+     *            the output zip path
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     //---------------------------------------------------------------
     @Override
     protected void handle(String tobeZipFilePath,String outputZipPath) throws IOException{
@@ -66,13 +76,15 @@ public class CompressZipHandler extends AbstractZipHandler{
 
     /**
      * 由doZip调用,递归完成目录文件读取.
-     * 
-     * @param zipOutputStream
-     *            the zip output stream
+     *
+     * @param zipArchiveOutputStream
+     *            the zip archive output stream
      * @param willFile
      *            the zip file
      * @param dirName
      *            这个主要是用来记录压缩文件的一个目录层次结构的
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     private static void zip(ZipArchiveOutputStream zipArchiveOutputStream,File willFile,String dirName) throws IOException{
         String fileName = willFile.getName();
@@ -106,6 +118,14 @@ public class CompressZipHandler extends AbstractZipHandler{
 
     }
 
+    /**
+     * Put archive entry.
+     *
+     * @param zipArchiveOutputStream
+     *            the zip archive output stream
+     * @param name
+     *            the name
+     */
     private static void putArchiveEntry(ZipArchiveOutputStream zipArchiveOutputStream,String name){
         try{
             zipArchiveOutputStream.putArchiveEntry(new ZipArchiveEntry(name));

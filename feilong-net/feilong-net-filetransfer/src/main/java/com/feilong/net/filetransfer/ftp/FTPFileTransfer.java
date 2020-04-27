@@ -47,6 +47,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * <p>
  * 注:依赖于
+ * </p>
  * 
  * <pre class="code">
 {@code
@@ -56,15 +57,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
         </dependency>
 }
  * </pre>
+ * 
+ * <p>
+ * 包括以下常用功能:
  * </p>
  * 
- * 包括以下常用功能:
  * <ul>
  * <li>单个文件上传</li>
  * <li>整个文件夹上传</li>
  * <li>多个不定路径文件上传</li>
  * <li>多个不定路径文件夹上传</li>
  * </ul>
+ * 
  * <p>
  * FTP(File Transfer Protocol, FTP)是TCP/IP网络上两台计算机传送文件的协议,FTP是在TCP/IP网络和INTERNET上最早使用的协议之一,它属于网络协议组的应用层.
  * </p>

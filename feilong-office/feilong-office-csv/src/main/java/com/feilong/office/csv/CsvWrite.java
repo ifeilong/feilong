@@ -41,8 +41,7 @@ import com.feilong.office.csv.entity.CsvConfig;
  * </p>
  * </blockquote>
  * 
- * 
- * <h3>基本规则及举例</h3>
+ * <h3>基本规则及举例:</h3>
  * 
  * <blockquote>
  * 
@@ -51,7 +50,6 @@ import com.feilong.office.csv.entity.CsvConfig;
  * (Shafranovich 2005)另一个相关规范由含字段文本提供。Creativyst (2010)提供了一个概述,说明了在最广泛使用的应用程序中所使用的变体,并解释了CSV怎样才能最好地被使用和支持。
  * </p>
  * 
- * <p>
  * 这些和其它“CSV”规范及实现的典型规则如下:
  * 
  * <ul>
@@ -142,7 +140,6 @@ import com.feilong.office.csv.entity.CsvConfig;
  * 
  * </ul>
  * 
- * </p>
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>

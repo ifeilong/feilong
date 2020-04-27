@@ -36,6 +36,7 @@ package com.feilong.net.mail.util;
  * <h3>type有下面的形式:</h3>
  * 
  * <blockquote>
+ * 
  * <p>
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4" summary="">

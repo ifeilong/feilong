@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,16 +31,18 @@ import net.sf.json.util.JSONUtils;
  */
 public class JSONFunction implements Serializable{
 
-    /**
-     * 
-     */
+    /** The Constant serialVersionUID. */
     private static final long     serialVersionUID  = 5015216572386679201L;
 
-    /** constant array for empty parameters */
+    /** constant array for empty parameters. */
     private static final String[] EMPTY_PARAM_ARRAY = new String[0];
 
     /**
-     * Constructs a JSONFunction from a text representation
+     * Constructs a JSONFunction from a text representation.
+     *
+     * @param str
+     *            the str
+     * @return the JSON function
      */
     public static JSONFunction parse(String str){
         if (!JSONUtils.isFunction(str)){
@@ -52,10 +54,10 @@ public class JSONFunction implements Serializable{
         }
     }
 
-    /** the parameters of this function */
+    /** the parameters of this function. */
     private String[]     params;
 
-    /** the text of this function */
+    /** the text of this function. */
     private final String text;
 
     /**
@@ -94,6 +96,13 @@ public class JSONFunction implements Serializable{
         }
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -130,6 +139,8 @@ public class JSONFunction implements Serializable{
 
     /**
      * Returns the parameters of this function.
+     *
+     * @return the parameters of this function
      */
     public String[] getParams(){
         return params;
@@ -137,11 +148,18 @@ public class JSONFunction implements Serializable{
 
     /**
      * Reeturns the text of this function.
+     *
+     * @return the text of this function
      */
     public String getText(){
         return text;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -154,6 +172,8 @@ public class JSONFunction implements Serializable{
 
     /**
      * Returns the string representation of this function.
+     *
+     * @return the string
      */
     @Override
     public String toString(){

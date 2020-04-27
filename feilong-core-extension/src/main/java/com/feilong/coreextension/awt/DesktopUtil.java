@@ -125,7 +125,6 @@ public final class DesktopUtil{
         Validate.notNull(action, "action can't be null!");
 
         //---------------------------------------------------------------
-
         Desktop desktop = getDesktop(action);
 
         try{

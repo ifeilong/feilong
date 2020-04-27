@@ -25,8 +25,6 @@ package com.feilong.office.csv.entity;
  */
 public class BeanCsvConfig<T> extends CsvConfig{
 
-    //---------------------------------------------------------------
-
     //通常二者选其一设置
     /** 排除的属性名字, 会提取所有的属性, 然后剔除 exclude部分. */
     private String[] excludePropertyNames;

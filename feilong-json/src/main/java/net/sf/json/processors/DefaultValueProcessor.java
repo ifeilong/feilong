@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,12 +21,14 @@ package net.sf.json.processors;
  *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface DefaultValueProcessor {
-   /**
-    * Returns an appropriate default value for a type.
-    *
-    * @param type
-    * @return the default value for instances of type
-    */
-   Object getDefaultValue( Class type );
+public interface DefaultValueProcessor{
+
+    /**
+     * Returns an appropriate default value for a type.
+     *
+     * @param type
+     *            the type
+     * @return the default value for instances of type
+     */
+    Object getDefaultValue(Class type);
 }

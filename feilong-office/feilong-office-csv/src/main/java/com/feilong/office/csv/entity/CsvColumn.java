@@ -51,11 +51,15 @@ public @interface CsvColumn{
 
     /**
      * (Optional) The name of the column. Defaults to the property or field name.
+     *
+     * @return the string
      */
     String name() default "";
 
     /**
      * (Optional) 排序 数值从小到大排序.
+     *
+     * @return the int
      */
     int order() default 0;
 
