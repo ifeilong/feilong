@@ -67,8 +67,6 @@
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- javadoc 和site 的生成目录 -->
-		<folder.gh-pages>/Users/feilong/workspace/feilong/else/feilong-platform-gh-pages</folder.gh-pages>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
@@ -123,19 +121,8 @@
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
 		<version.commons-fileupload>1.4</version.commons-fileupload>
 
-		<!-- The Commons HttpClient project is now end of life, and is no longer being developed. It has been replaced by the Apache HttpComponents project in its HttpClient
-			and HttpCore modules, which offer better performance and more flexibility. -->
-		<!-- HttpClient was started in 2001 as a subproject of the Jakarta Commons, based on code developed by the Jakarta Slide project. It was promoted out of the Commons
-			in 2004, graduating to a separate Jakarta project. In 2005, the HttpComponents project at Jakarta was created, with the task of developing a successor to HttpClient
-			3.x and to maintain the existing codebase until the new one is ready to take over. The Commons project, cradle of HttpClient, left Jakarta in 2007 to become an
-			independent
-			Top Level Project. Later in the same year, the HttpComponents project also left Jakarta to become an independent Top Level Project, taking the responsibility
-			for
-			maintaining HttpClient with it. -->
-		<version.commons-httpclient>3.1</version.commons-httpclient>
-
 		<!-- http://hc.apache.org/downloads.cgi -->
-		<version.httpcomponents>4.5.8</version.httpcomponents>
+		<version.httpcomponents>4.5.12</version.httpcomponents>
 
 		<!-- base on jdk1.2 legacy(won't update) -->
 		<version.commons-lang>2.6</version.commons-lang>
@@ -171,7 +158,7 @@
 		<version.jsoup>1.11.3</version.jsoup>
 
 		<version.javamail>1.4.7</version.javamail>
-		<version.javax.mail>1.6.0</version.javax.mail>
+		<version.javax.mail>1.6.2</version.javax.mail>
 		<version.commons-email>1.5</version.commons-email>
 
 		<version.servlet-api>3.0.1</version.servlet-api>
@@ -189,19 +176,21 @@
 		<!-- https://logback.qos.ch/news.html -->
 		<version.logback>1.2.3</version.logback>
 
-		<version.poi>3.16</version.poi>
+		<!-- http://poi.apache.org/ -->
+		<!-- http://poi.apache.org/devel/history/changes-3x.html -->
+		<!-- 4.0.1 之后需要 jdk8 -->
+		<version.poi>3.17</version.poi>
 		<!-- 新版poi需要这个jar -->
-		<version.ooxml-schemas>1.1</version.ooxml-schemas>
+		<version.ooxml-schemas>1.3</version.ooxml-schemas>
 
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.30</version.slf4j>
 
 		<version.spring>3.2.18.RELEASE</version.spring>
 
-		<!-- http://x-stream.github.io/ -->
-		<!-- https://github.com/x-stream/xstream/releases -->
+		<!-- http://x-stream.github.io/news.html -->
 		<!-- #133: XStream 1.4.11 fails to run on a Java Runtime < 8. -->
-		<version.xstream>1.4.11.1</version.xstream>
+		<version.xstream>1.4.12</version.xstream>
 
 		<version.xml-apis>1.4.01</version.xml-apis>
 		<!-- https://xerces.apache.org/xerces2-j/releases.html -->
@@ -279,6 +268,7 @@
 
 		<!-- https://issues.apache.org/jira/browse/MRESOURCES/?selectedTab=com.atlassian.jira.jira-projects-plugin:changelog-panel -->
 		<v.maven-resources-plugin>3.1.0</v.maven-resources-plugin>
+		<v.maven-gpg-plugin>1.6</v.maven-gpg-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-war-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MWAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
@@ -318,17 +308,6 @@
 		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
 		<!-- **********************end maven-surefire-plugin config******************************************* -->
 
-		<!-- **********************begin site-maven-plugin config******************************************* -->
-		<site-maven-plugin.repositoryName>feilong-platform</site-maven-plugin.repositoryName>
-		<site-maven-plugin.repositoryOwner>ifeilong</site-maven-plugin.repositoryOwner>
-		<site-maven-plugin.branch>refs/heads/repository</site-maven-plugin.branch>
-		<!-- git commit message -->
-		<site-maven-plugin.message>:rocket: deploy ${project.name} ${project.version}</site-maven-plugin.message>
-
-		<!-- github server corresponds to entry in ~/.m2/settings.xml -->
-		<github.global.server>github</github.global.server>
-		<!-- **********************end site-maven-plugin config******************************************* -->
-
 		<!-- **********************begin maven-javadoc-plugin config******************************************* -->
 		<!-- 用来编译生成文档 -->
 		<maven-javadoc-plugin.encoding>${project.build.sourceEncoding}</maven-javadoc-plugin.encoding>
@@ -338,8 +317,8 @@
 		<!-- 用于读取javadoc 内部使用的 配置文件, 比如 描述文字为 描述,英文环境为description -->
 		<maven-javadoc-plugin.locale>en_US</maven-javadoc-plugin.locale>
 
-		<maven-javadoc-plugin.outputDirectory>${folder.gh-pages}/javadocs</maven-javadoc-plugin.outputDirectory>
-		<maven-javadoc-plugin.reportOutputDirectory>${folder.gh-pages}/javadocs</maven-javadoc-plugin.reportOutputDirectory>
+		<maven-javadoc-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.name}</maven-javadoc-plugin.outputDirectory>
+		<maven-javadoc-plugin.reportOutputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.name}</maven-javadoc-plugin.reportOutputDirectory>
 		<maven-javadoc-plugin.destDir>${project.name}</maven-javadoc-plugin.destDir>
 		<maven-javadoc-plugin.javadocVersion>1.8</maven-javadoc-plugin.javadocVersion>
 		<maven-javadoc-plugin.javadocDirectory>/Users/feilong/Development/DataCommon/Files/Java/Apache Maven/javadoc/springframework</maven-javadoc-plugin.javadocDirectory>
@@ -363,15 +342,6 @@
 		<developer.feilong.name>feilong</developer.feilong.name>
 	</properties>
 
-	<!-- 项目发布管理 -->
-	<distributionManagement>
-		<!-- <url>file://${user.home}/feilong/repository</url> -->
-		<repository>
-			<id>internal.repo</id>
-			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/mvn-repo</url>
-		</repository>
-	</distributionManagement>
 
 	<dependencies>
 		<!--******** slf4j******** -->
@@ -616,13 +586,6 @@
 				<groupId>commons-net</groupId>
 				<artifactId>commons-net</artifactId>
 				<version>${version.commons-net}</version>
-			</dependency>
-
-			<!-- commons-httpclient -->
-			<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>${version.commons-httpclient}</version>
 			</dependency>
 
 			<!--
@@ -1075,44 +1038,6 @@
 				<version>${v.sonar-maven-plugin}</version>
 			</plugin>
 
-			<!-- site-maven-plugin -->
-			<plugin>
-				<groupId>com.github.github</groupId>
-				<artifactId>site-maven-plugin</artifactId>
-				<version>${v.site-maven-plugin}</version>
-				<configuration>
-					<!-- git commit message -->
-					<message>${site-maven-plugin.message}</message>
-					<!-- disable webpage processing -->
-					<noJekyll>true</noJekyll>
-
-					<merge>true</merge>
-
-					<!-- remote branch name -->
-					<branch>${site-maven-plugin.branch}</branch>
-
-					<!-- github repo name -->
-					<repositoryName>${site-maven-plugin.repositoryName}</repositoryName>
-					<!-- github username -->
-					<repositoryOwner>${site-maven-plugin.repositoryOwner}</repositoryOwner>
-
-					<!-- matches distribution management repository url above -->
-					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-					<includes>
-						<include>**/*</include>
-					</includes>
-				</configuration>
-				<executions>
-					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
-					<execution>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<phase>deploy</phase>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- native2ascii-maven-plugin 国际化插件 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -1152,40 +1077,6 @@
 								<include>${native2ascii-maven-plugin.pattern}</include>
 							</includes>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- license-maven-plugin license插件 -->
-			<plugin>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>${v.license-maven-plugin}</version>
-				<configuration>
-					<header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-					<properties>
-						<owner>${developer.feilong.name}</owner>
-						<year>${project.inceptionYear}</year>
-					</properties>
-					<!-- -->
-					<excludes>
-						<exclude>**/README</exclude>
-						<exclude>src/test/resources/**</exclude>
-						<exclude>**/src/main/resources/**</exclude>
-					</excludes>
-					<includes>
-						<includes>**/src/main/java/**/*.java</includes>
-					</includes>
-
-					<headerDefinitions>
-						<headerDefinition>${env._FEILONGTAGLIB}\Apache Maven\javadoc_style.xml</headerDefinition>
-					</headerDefinitions>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>format</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
@@ -1283,88 +1174,6 @@
 				</executions>
 			</plugin>
 
-			<!-- maven-javadoc-plugin -->
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${v.maven-javadoc-plugin}</version>
-				<configuration>
-					<!-- <additionalparam>-Xdoclint:none</additionalparam> -->
-
-					<!-- <verbose>true</verbose> -->
-					<destDir>${maven-javadoc-plugin.destDir}</destDir>
-
-					<outputDirectory>${maven-javadoc-plugin.outputDirectory}</outputDirectory>
-					<reportOutputDirectory>${maven-javadoc-plugin.reportOutputDirectory}</reportOutputDirectory>
-
-					<stylesheet>${maven-javadoc-plugin.stylesheet}</stylesheet>
-					<stylesheetfile>${maven-javadoc-plugin.stylesheetfile}</stylesheetfile>
-
-					<overview>src/main/java/overview.html</overview>
-
-					<docfilessubdirs>true</docfilessubdirs>
-					<!---->
-					<javadocDirectory>${maven-javadoc-plugin.javadocDirectory}</javadocDirectory>
-					<javadocVersion>${maven-javadoc-plugin.javadocVersion}</javadocVersion>
-
-					<!-- Specifies the title to be placed in the HTML title tag.  -->
-					<windowtitle>${project.name} ${project.version} API create by feilong</windowtitle>
-
-					<!-- Specifies whether or not the author text is included in the generated Javadocs.  -->
-					<author>true</author>
-					<!-- Includes the version text in the generated docs.  -->
-					<version>true</version>
-
-					<failOnError>false</failOnError>
-
-					<locale>${maven-javadoc-plugin.locale}</locale>
-
-					<charset>${maven-javadoc-plugin.charset}</charset>
-					<docencoding>${maven-javadoc-plugin.docencoding}</docencoding>
-					<encoding>${maven-javadoc-plugin.encoding}</encoding>
-
-					<header>${project.name} ${project.version} API</header>
-					<footer>${project.name} ${project.version} API</footer>
-
-					<bottom>
-						<![CDATA[Copyright &copy; {inceptionYear}-{currentYear} by feilong]]>
-					</bottom>
-
-					<groups>
-						<group>
-							<title>Date package 日期</title>
-							<packages>com.feilong.core.date</packages>
-						</group>
-
-						<group>
-							<title>util package</title>
-							<packages>com.feilong.core.util*</packages>
-						</group>
-					</groups>
-
-					<!-- Detect the Javadoc links for all dependencies defined in the project. -->
-					<detectLinks>true</detectLinks>
-					<detectOfflineLinks>true</detectOfflineLinks>
-
-					<!-- By default, the goal detects the Javadoc API link depending the value of the source parameter in theorg.apache.maven.plugins:maven-compiler-plugin (defined
-						in ${project.build.plugins} or in${project.build.pluginManagement}),
-					-->
-					<detectJavaApiLink>true</detectJavaApiLink>
-					<links>
-						<!-- <link>http://docs.oracle.com/javase/7/docs/api/</link> -->
-						<link>https://docs.oracle.com/javaee/7/api/</link>
-
-						<link>http://commons.apache.org/proper/commons-lang/javadocs/api-release/</link>
-						<link>http://commons.apache.org/proper/commons-collections/javadocs/api-release/</link>
-						<link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
-						<link>http://commons.apache.org/proper/commons-beanutils/javadocs/v${version.commons-beanutils}/apidocs/</link>
-						<link>http://ezmorph.sourceforge.net/apidocs/</link>
-						<link>http://docs.spring.io/spring/docs/${version.spring}/javadoc-api/</link>
-					</links>
-				</configuration>
-			</plugin>
-
 			<!-- maven-surefire-plugin -->
 			<plugin>
 				<inherited>true</inherited>
@@ -1405,11 +1214,6 @@
 				<inherited>true</inherited>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>${v.maven-deploy-plugin}</version>
-				<configuration>
-					<!-- Format: id::layout::url -->
-					<!-- <altDeploymentRepository>internal.repo::default::file://${user.home}/feilong/repository</altDeploymentRepository> -->
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-				</configuration>
 				<executions>
 					<execution>
 						<id>default-deploy</id>
@@ -1760,4 +1564,49 @@
 			<url>https://github.com/ijiangtao</url>
 		</contributor>
 	</contributors>
+
+
+	<profiles>
+		<profile>
+			<id>release</id>
+
+			<build>
+				<plugins>
+
+					<!-- Gpg Signature -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${v.maven-gpg-plugin}</version>
+						<executions>
+							<execution>
+								<id>oss</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
+	<!-- 项目发布管理 -->
+	<distributionManagement>
+		<repository>
+			<id>oss</id>
+			<name>sonatype Staging Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>oss</id>
+			<name>sonatype snapshots Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 </project>

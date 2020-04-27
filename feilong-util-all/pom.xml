@@ -225,6 +225,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${v.maven-javadoc-plugin}</version>
 				<executions>
 					<execution>
 						<phase>package</phase>

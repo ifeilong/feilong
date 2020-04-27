@@ -42,12 +42,12 @@
 			<optional>true</optional>
 		</dependency>
 
-
-		<!-- <dependency>
+		<!---->
+	<!-- 	<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.0</version>
-			</dependency> -->
+			<version>1.6.2</version>
+		</dependency> -->
 
 		<!-- commons-email -->
 		<!-- <dependency>
