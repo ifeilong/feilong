@@ -24,49 +24,42 @@ import com.feilong.json.lib.ezmorph.ObjectMorpher;
  * 
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class IdentityObjectMorpher implements ObjectMorpher
-{
-   private static final IdentityObjectMorpher INSTANCE = new IdentityObjectMorpher();
+public final class IdentityObjectMorpher implements ObjectMorpher{
 
-   /**
-    * Returns the singleton instance
-    */
-   public static IdentityObjectMorpher getInstance()
-   {
-      return INSTANCE;
-   }
+    private static final IdentityObjectMorpher INSTANCE = new IdentityObjectMorpher();
 
-   private IdentityObjectMorpher()
-   {
-   }
+    /**
+     * Returns the singleton instance
+     */
+    public static IdentityObjectMorpher getInstance(){
+        return INSTANCE;
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      return INSTANCE == obj;
-   }
+    private IdentityObjectMorpher(){
+    }
 
-   @Override
-public int hashCode()
-   {
-      return 42 + getClass().hashCode();
-   }
+    @Override
+    public boolean equals(Object obj){
+        return INSTANCE == obj;
+    }
 
-   @Override
-public Object morph( Object value )
-   {
-      return value;
-   }
+    @Override
+    public int hashCode(){
+        return 42 + getClass().hashCode();
+    }
 
-   @Override
-public Class morphsTo()
-   {
-      return Object.class;
-   }
+    @Override
+    public Object morph(Object value){
+        return value;
+    }
 
-   @Override
-public boolean supports( Class clazz )
-   {
-      return true;
-   }
+    @Override
+    public Class morphsTo(){
+        return Object.class;
+    }
+
+    @Override
+    public boolean supports(Class clazz){
+        return true;
+    }
 }

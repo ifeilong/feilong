@@ -56,8 +56,9 @@ public abstract class PropertySetStrategy{
                 if (!jsonConfig.isIgnorePublicFields()){
                     try{
                         Field field = bean.getClass().getField(key);
-                        if (field != null)
+                        if (field != null){
                             field.set(bean, value);
+                        }
                     }catch (Exception e){
                         _setProperty(bean, key, value);
                     }

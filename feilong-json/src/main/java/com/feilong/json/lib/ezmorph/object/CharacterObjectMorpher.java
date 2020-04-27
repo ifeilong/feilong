@@ -26,98 +26,92 @@ import com.feilong.json.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class CharacterObjectMorpher extends AbstractObjectMorpher
-{
-   private Character defaultValue;
+public final class CharacterObjectMorpher extends AbstractObjectMorpher{
 
-   public CharacterObjectMorpher()
-   {
-      super();
-   }
+    private Character defaultValue;
 
-   /**
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public CharacterObjectMorpher( Character defaultValue )
-   {
-      super( true );
-      this.defaultValue = defaultValue;
-   }
+    public CharacterObjectMorpher(){
+        super();
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    /**
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public CharacterObjectMorpher(Character defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+    }
 
-      if( !(obj instanceof CharacterObjectMorpher) ){
-         return false;
-      }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-      CharacterObjectMorpher other = (CharacterObjectMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+        if (!(obj instanceof CharacterObjectMorpher)){
+            return false;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public Character getDefaultValue()
-   {
-      return defaultValue;
-   }
+        CharacterObjectMorpher other = (CharacterObjectMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public Character getDefaultValue(){
+        return defaultValue;
+    }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value == null ){
-         if( isUseDefault() ){
-            return defaultValue;
-         }else{
-            throw new MorphException( "value is null" );
-         }
-      }
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      if( value instanceof Character ){
-         return (Character) value;
-      }else{
-         String s = String.valueOf( value );
-         if( s.length() > 0 ){
-            return new Character( s.charAt( 0 ) );
-         }else{
-            if( isUseDefault() ){
-               return defaultValue;
+    @Override
+    public Object morph(Object value){
+        if (value == null){
+            if (isUseDefault()){
+                return defaultValue;
             }else{
-               throw new MorphException( "Can't morph value: " + value );
+                throw new MorphException("value is null");
             }
-         }
-      }
-   }
+        }
 
-   @Override
-public Class morphsTo()
-   {
-      return Character.class;
-   }
+        if (value instanceof Character){
+            return value;
+        }else{
+            String s = String.valueOf(value);
+            if (s.length() > 0){
+                return new Character(s.charAt(0));
+            }else{
+                if (isUseDefault()){
+                    return defaultValue;
+                }else{
+                    throw new MorphException("Can't morph value: " + value);
+                }
+            }
+        }
+    }
+
+    @Override
+    public Class morphsTo(){
+        return Character.class;
+    }
 }

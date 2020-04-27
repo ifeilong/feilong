@@ -23,50 +23,47 @@ import com.feilong.json.lib.ezmorph.ObjectMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public abstract class AbstractObjectMorpher implements ObjectMorpher
-{
-   private boolean useDefault;
+public abstract class AbstractObjectMorpher implements ObjectMorpher{
 
-   public AbstractObjectMorpher()
-   {
+    private boolean useDefault;
 
-   }
+    public AbstractObjectMorpher(){
 
-   /**
-    * @param useDefault if morph() should return a default value if the value to
-    *        be morphed is null
-    */
-   public AbstractObjectMorpher( boolean useDefault )
-   {
-      this.useDefault = useDefault;
-   }
+    }
 
-   /**
-    * Returns if this morpher will use a default value.
-    */
-   public boolean isUseDefault()
-   {
-      return useDefault;
-   }
+    /**
+     * @param useDefault
+     *            if morph() should return a default value if the value to
+     *            be morphed is null
+     */
+    public AbstractObjectMorpher(boolean useDefault){
+        this.useDefault = useDefault;
+    }
 
-   /**
-    * Sets if this morpher will use a default value.
-    */
-   public void setUseDefault( boolean useDefault )
-   {
-      this.useDefault = useDefault;
-   }
+    /**
+     * Returns if this morpher will use a default value.
+     */
+    public boolean isUseDefault(){
+        return useDefault;
+    }
 
-   /**
-    * Returns true if the Morpher supports conversion from this Class.<br>
-    * Supports any type that is not an Array.
-    *
-    * @param clazz the source Class
-    * @return true if clazz is supported by this morpher, false otherwise.
-    */
-   @Override
-public boolean supports( Class clazz )
-   {
-      return !clazz.isArray();
-   }
+    /**
+     * Sets if this morpher will use a default value.
+     */
+    public void setUseDefault(boolean useDefault){
+        this.useDefault = useDefault;
+    }
+
+    /**
+     * Returns true if the Morpher supports conversion from this Class.<br>
+     * Supports any type that is not an Array.
+     *
+     * @param clazz
+     *            the source Class
+     * @return true if clazz is supported by this morpher, false otherwise.
+     */
+    @Override
+    public boolean supports(Class clazz){
+        return !clazz.isArray();
+    }
 }

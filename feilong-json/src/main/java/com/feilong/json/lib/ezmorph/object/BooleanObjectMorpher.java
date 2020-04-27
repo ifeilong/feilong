@@ -26,101 +26,93 @@ import com.feilong.json.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class BooleanObjectMorpher extends AbstractObjectMorpher
-{
-   private Boolean defaultValue;
+public final class BooleanObjectMorpher extends AbstractObjectMorpher{
 
-   public BooleanObjectMorpher()
-   {
-      super();
-   }
+    private Boolean defaultValue;
 
-   /**
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public BooleanObjectMorpher( Boolean defaultValue )
-   {
-      super( true );
-      this.defaultValue = defaultValue;
-   }
+    public BooleanObjectMorpher(){
+        super();
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    /**
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public BooleanObjectMorpher(Boolean defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+    }
 
-      if( !(obj instanceof BooleanObjectMorpher) ){
-         return false;
-      }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-      BooleanObjectMorpher other = (BooleanObjectMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+        if (!(obj instanceof BooleanObjectMorpher)){
+            return false;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public Boolean getDefaultValue()
-   {
-      return defaultValue;
-   }
+        BooleanObjectMorpher other = (BooleanObjectMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public Boolean getDefaultValue(){
+        return defaultValue;
+    }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value == null ){
-         if( isUseDefault() ){
-            return defaultValue;
-         }else{
-            throw new MorphException( "value is null" );
-         }
-      }
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      if( value instanceof Boolean ){
-         return (Boolean) value;
-      }else{
-         String s = String.valueOf( value );
+    @Override
+    public Object morph(Object value){
+        if (value == null){
+            if (isUseDefault()){
+                return defaultValue;
+            }else{
+                throw new MorphException("value is null");
+            }
+        }
 
-         if( s.equalsIgnoreCase( "true" ) || s.equalsIgnoreCase( "yes" )
-               || s.equalsIgnoreCase( "on" ) ){
-            return Boolean.TRUE;
-         }else if( s.equalsIgnoreCase( "false" ) || s.equalsIgnoreCase( "no" )
-               || s.equalsIgnoreCase( "off" ) ){
-            return Boolean.FALSE;
-         }else if( isUseDefault() ){
-            return defaultValue;
-         }
-      }
+        if (value instanceof Boolean){
+            return value;
+        }else{
+            String s = String.valueOf(value);
 
-      throw new MorphException( "Can't morph value: " + value );
-   }
+            if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")){
+                return Boolean.TRUE;
+            }else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
+                return Boolean.FALSE;
+            }else if (isUseDefault()){
+                return defaultValue;
+            }
+        }
 
-   @Override
-public Class morphsTo()
-   {
-      return Boolean.class;
-   }
+        throw new MorphException("Can't morph value: " + value);
+    }
+
+    @Override
+    public Class morphsTo(){
+        return Boolean.class;
+    }
 }

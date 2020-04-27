@@ -29,107 +29,100 @@ import com.feilong.json.lib.ezmorph.primitive.FloatMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class FloatArrayMorpher extends AbstractArrayMorpher
-{
-   private static final Class FLOAT_ARRAY_CLASS = float[].class;
-   private float defaultValue;
+public final class FloatArrayMorpher extends AbstractArrayMorpher{
 
-   public FloatArrayMorpher()
-   {
-      super( false );
-   }
+    private static final Class FLOAT_ARRAY_CLASS = float[].class;
 
-   /**
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public FloatArrayMorpher( float defaultValue )
-   {
-      super( true );
-      this.defaultValue = defaultValue;
-   }
+    private float              defaultValue;
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    public FloatArrayMorpher(){
+        super(false);
+    }
 
-      if( !(obj instanceof FloatArrayMorpher) ){
-         return false;
-      }
+    /**
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public FloatArrayMorpher(float defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+    }
 
-      FloatArrayMorpher other = (FloatArrayMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public float getDefaultValue()
-   {
-      return defaultValue;
-   }
+        if (!(obj instanceof FloatArrayMorpher)){
+            return false;
+        }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+        FloatArrayMorpher other = (FloatArrayMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-   @Override
-public Object morph( Object array )
-   {
-      if( array == null ){
-         return null;
-      }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public float getDefaultValue(){
+        return defaultValue;
+    }
 
-      if( FLOAT_ARRAY_CLASS.isAssignableFrom( array.getClass() ) ){
-         // no conversion needed
-         return (float[]) array;
-      }
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      if( array.getClass()
-            .isArray() ){
-         int length = Array.getLength( array );
-         int dims = getDimensions( array.getClass() );
-         int[] dimensions = createDimensions( dims, length );
-         Object result = Array.newInstance( float.class, dimensions );
-         FloatMorpher morpher = isUseDefault() ? new FloatMorpher( defaultValue )
-               : new FloatMorpher();
-         if( dims == 1 ){
-            for( int index = 0; index < length; index++ ){
-               Array.set( result, index, new Float( morpher.morph( Array.get( array, index ) ) ) );
+    @Override
+    public Object morph(Object array){
+        if (array == null){
+            return null;
+        }
+
+        if (FLOAT_ARRAY_CLASS.isAssignableFrom(array.getClass())){
+            // no conversion needed
+            return array;
+        }
+
+        if (array.getClass().isArray()){
+            int length = Array.getLength(array);
+            int dims = getDimensions(array.getClass());
+            int[] dimensions = createDimensions(dims, length);
+            Object result = Array.newInstance(float.class, dimensions);
+            FloatMorpher morpher = isUseDefault() ? new FloatMorpher(defaultValue) : new FloatMorpher();
+            if (dims == 1){
+                for (int index = 0; index < length; index++){
+                    Array.set(result, index, new Float(morpher.morph(Array.get(array, index))));
+                }
+            }else{
+                for (int index = 0; index < length; index++){
+                    Array.set(result, index, morph(Array.get(array, index)));
+                }
             }
-         }else{
-            for( int index = 0; index < length; index++ ){
-               Array.set( result, index, morph( Array.get( array, index ) ) );
-            }
-         }
-         return result;
-      }else{
-         throw new MorphException( "argument is not an array: " + array.getClass() );
-      }
-   }
+            return result;
+        }else{
+            throw new MorphException("argument is not an array: " + array.getClass());
+        }
+    }
 
-   @Override
-public Class morphsTo()
-   {
-      return FLOAT_ARRAY_CLASS;
-   }
+    @Override
+    public Class morphsTo(){
+        return FLOAT_ARRAY_CLASS;
+    }
 }

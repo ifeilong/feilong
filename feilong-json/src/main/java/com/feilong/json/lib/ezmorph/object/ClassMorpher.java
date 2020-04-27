@@ -25,66 +25,58 @@ import com.feilong.json.lib.ezmorph.ObjectMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class ClassMorpher implements ObjectMorpher
-{
-   private static final ClassMorpher INSTANCE = new ClassMorpher();
+public final class ClassMorpher implements ObjectMorpher{
 
-   /**
-    * Returns the singleton instance
-    */
-   public static ClassMorpher getInstance()
-   {
-      return INSTANCE;
-   }
+    private static final ClassMorpher INSTANCE = new ClassMorpher();
 
-   private ClassMorpher()
-   {
-   }
+    /**
+     * Returns the singleton instance
+     */
+    public static ClassMorpher getInstance(){
+        return INSTANCE;
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      return INSTANCE == obj;
-   }
+    private ClassMorpher(){
+    }
 
-   @Override
-public int hashCode()
-   {
-      return 42 + getClass().hashCode();
-   }
+    @Override
+    public boolean equals(Object obj){
+        return INSTANCE == obj;
+    }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value == null ){
-         return null;
-      }
+    @Override
+    public int hashCode(){
+        return 42 + getClass().hashCode();
+    }
 
-      if( value instanceof Class ){
-         return (Class) value;
-      }
+    @Override
+    public Object morph(Object value){
+        if (value == null){
+            return null;
+        }
 
-      if( "null".equals( value ) ){
-         return null;
-      }
+        if (value instanceof Class){
+            return value;
+        }
 
-      try{
-         return Class.forName( value.toString() );
-      }
-      catch( Exception e ){
-         throw new MorphException( e );
-      }
-   }
+        if ("null".equals(value)){
+            return null;
+        }
 
-   @Override
-public Class morphsTo()
-   {
-      return Class.class;
-   }
+        try{
+            return Class.forName(value.toString());
+        }catch (Exception e){
+            throw new MorphException(e);
+        }
+    }
 
-   @Override
-public boolean supports( Class clazz )
-   {
-      return true;
-   }
+    @Override
+    public Class morphsTo(){
+        return Class.class;
+    }
+
+    @Override
+    public boolean supports(Class clazz){
+        return true;
+    }
 }

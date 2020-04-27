@@ -31,122 +31,112 @@ import com.feilong.json.lib.ezmorph.Morpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class ObjectListMorpher extends AbstractObjectMorpher
-{
-   private Object defaultValue;
-   private Morpher morpher;
-   private Method morphMethod;
+public final class ObjectListMorpher extends AbstractObjectMorpher{
 
-   /**
-    * Creates a new ArrayMorpher which will use another Morpher for its inner
-    * type.<br>
-    * The inner morpher can not morph to an array. Multiple dimension arrays are
-    * already handled by this class.
-    *
-    * @param morpher the Morpher that will handle the array's inner type.
-    */
-   public ObjectListMorpher( Morpher morpher )
-   {
-      setMorpher( morpher );
-   }
+    private Object  defaultValue;
 
-   public ObjectListMorpher( Morpher morpher, Object defaultValue )
-   {
-      super(true);
-      this.defaultValue = defaultValue;
-      setMorpher( morpher );
-   }
+    private Morpher morpher;
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    private Method  morphMethod;
 
-      if( !(obj instanceof ObjectListMorpher) ){
-         return false;
-      }
+    /**
+     * Creates a new ArrayMorpher which will use another Morpher for its inner
+     * type.<br>
+     * The inner morpher can not morph to an array. Multiple dimension arrays are
+     * already handled by this class.
+     *
+     * @param morpher
+     *            the Morpher that will handle the array's inner type.
+     */
+    public ObjectListMorpher(Morpher morpher){
+        setMorpher(morpher);
+    }
 
-      ObjectListMorpher other = (ObjectListMorpher) obj;
-      return morpher.equals( other.morpher );
-   }
+    public ObjectListMorpher(Morpher morpher, Object defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+        setMorpher(morpher);
+    }
 
-   @Override
-public int hashCode()
-   {
-      return new HashCodeBuilder().append( morpher )
-            .toHashCode();
-   }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value == null ){
-         return null;
-      }
+        if (!(obj instanceof ObjectListMorpher)){
+            return false;
+        }
 
-      if( !supports( value.getClass() ) ){
-         throw new MorphException( value.getClass() + " is not supported" );
-      }
+        ObjectListMorpher other = (ObjectListMorpher) obj;
+        return morpher.equals(other.morpher);
+    }
 
-      List list = new ArrayList();
-      for( Iterator i = ((List) value).iterator(); i.hasNext(); ){
-         Object object = i.next();
-         if( object == null ){
-            if( isUseDefault() ){
-               list.add( defaultValue );
+    @Override
+    public int hashCode(){
+        return new HashCodeBuilder().append(morpher).toHashCode();
+    }
+
+    @Override
+    public Object morph(Object value){
+        if (value == null){
+            return null;
+        }
+
+        if (!supports(value.getClass())){
+            throw new MorphException(value.getClass() + " is not supported");
+        }
+
+        List list = new ArrayList();
+        for (Iterator i = ((List) value).iterator(); i.hasNext();){
+            Object object = i.next();
+            if (object == null){
+                if (isUseDefault()){
+                    list.add(defaultValue);
+                }else{
+                    list.add(object);
+                }
             }else{
-               list.add( object );
+                if (!morpher.supports(object.getClass())){
+                    throw new MorphException(object.getClass() + " is not supported");
+                }
+                try{
+                    list.add(morphMethod.invoke(morpher, new Object[] { object }));
+                }catch (MorphException me){
+                    throw me;
+                }catch (Exception e){
+                    throw new MorphException(e);
+                }
             }
-         }else{
-            if( !morpher.supports( object.getClass() ) ){
-               throw new MorphException( object.getClass() + " is not supported" );
-            }
-            try{
-               list.add( morphMethod.invoke( morpher, new Object[] { object } ) );
-            }
-            catch( MorphException me ){
-               throw me;
-            }
-            catch( Exception e ){
-               throw new MorphException( e );
-            }
-         }
-      }
+        }
 
-      return list;
-   }
+        return list;
+    }
 
-   @Override
-public Class morphsTo()
-   {
-      return List.class;
-   }
+    @Override
+    public Class morphsTo(){
+        return List.class;
+    }
 
-   @Override
-public boolean supports( Class clazz )
-   {
-      return clazz != null && List.class.isAssignableFrom( clazz );
-   }
+    @Override
+    public boolean supports(Class clazz){
+        return clazz != null && List.class.isAssignableFrom(clazz);
+    }
 
-   private void setMorpher( Morpher morpher )
-   {
-      if( morpher == null ){
-         throw new IllegalArgumentException( "morpher can not be null" );
-      }
-      this.morpher = morpher;
+    private void setMorpher(Morpher morpher){
+        if (morpher == null){
+            throw new IllegalArgumentException("morpher can not be null");
+        }
+        this.morpher = morpher;
 
-      // cache the morph method
-      try{
-         morphMethod = morpher.getClass()
-               .getDeclaredMethod( "morph", new Class[] { Object.class } );
-      }
-      catch( NoSuchMethodException nsme ){
-         throw new IllegalArgumentException( nsme.getMessage() );
-      }
-   }
+        // cache the morph method
+        try{
+            morphMethod = morpher.getClass().getDeclaredMethod("morph", new Class[] { Object.class });
+        }catch (NoSuchMethodException nsme){
+            throw new IllegalArgumentException(nsme.getMessage());
+        }
+    }
 }

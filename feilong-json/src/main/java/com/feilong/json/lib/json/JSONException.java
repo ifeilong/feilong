@@ -30,13 +30,6 @@ public class JSONException extends NestableRuntimeException{
 
     /**
      * Instantiates a new JSON exception.
-     */
-    public JSONException(){
-        super();
-    }
-
-    /**
-     * Instantiates a new JSON exception.
      *
      * @param msg
      *            the msg

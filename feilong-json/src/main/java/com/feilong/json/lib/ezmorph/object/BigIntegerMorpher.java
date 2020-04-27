@@ -30,144 +30,134 @@ import com.feilong.json.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class BigIntegerMorpher extends AbstractObjectMorpher
-{
-   private BigInteger defaultValue;
+public final class BigIntegerMorpher extends AbstractObjectMorpher{
 
-   public BigIntegerMorpher()
-   {
-      super();
-   }
+    private BigInteger defaultValue;
 
-   /**
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public BigIntegerMorpher( BigInteger defaultValue )
-   {
-      super( true );
-      this.defaultValue = defaultValue;
-   }
+    public BigIntegerMorpher(){
+        super();
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    /**
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public BigIntegerMorpher(BigInteger defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+    }
 
-      if( !(obj instanceof BigIntegerMorpher) ){
-         return false;
-      }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-      BigIntegerMorpher other = (BigIntegerMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+        if (!(obj instanceof BigIntegerMorpher)){
+            return false;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public BigInteger getDefaultValue()
-   {
-      return defaultValue;
-   }
+        BigIntegerMorpher other = (BigIntegerMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public BigInteger getDefaultValue(){
+        return defaultValue;
+    }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value instanceof BigInteger ){
-         return value;
-      }
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      if( value == null ){
-         if( isUseDefault() ){
-            return defaultValue;
-         }else{
-            return (BigInteger) null;
-         }
-      }
+    @Override
+    public Object morph(Object value){
+        if (value instanceof BigInteger){
+            return value;
+        }
 
-      if( value instanceof Number ){
-         if( value instanceof Float ){
-            Float f = ((Float) value);
-            if( f.isInfinite() || f.isNaN() ){
-               throw new MorphException( "BigInteger can not be infinite or NaN" );
-            }
-         }else if( value instanceof Double ){
-            Double d = ((Double) value);
-            if( d.isInfinite() || d.isNaN() ){
-               throw new MorphException( "BigInteger can not be infinite or NaN" );
-            }
-         }else if( value instanceof BigDecimal ){
-            return ((BigDecimal) value).toBigInteger();
-         }
-         return BigInteger.valueOf( ((Number) value).longValue() );
-      }else{
-         try{
-            String str = getIntegerValue( value );
-            if( str.length() == 0 || str.equalsIgnoreCase( "null" ) ){
-               return (BigInteger) null;
+        if (value == null){
+            if (isUseDefault()){
+                return defaultValue;
             }else{
-               return new BigInteger( str );
+                return null;
             }
-         }
-         catch( NumberFormatException nfe ){
-            if( isUseDefault() ){
-               return defaultValue;
-            }else{
-               throw new MorphException( nfe );
+        }
+
+        if (value instanceof Number){
+            if (value instanceof Float){
+                Float f = ((Float) value);
+                if (f.isInfinite() || f.isNaN()){
+                    throw new MorphException("BigInteger can not be infinite or NaN");
+                }
+            }else if (value instanceof Double){
+                Double d = ((Double) value);
+                if (d.isInfinite() || d.isNaN()){
+                    throw new MorphException("BigInteger can not be infinite or NaN");
+                }
+            }else if (value instanceof BigDecimal){
+                return ((BigDecimal) value).toBigInteger();
             }
-         }
-      }
-   }
+            return BigInteger.valueOf(((Number) value).longValue());
+        }else{
+            try{
+                String str = getIntegerValue(value);
+                if (str.length() == 0 || str.equalsIgnoreCase("null")){
+                    return null;
+                }else{
+                    return new BigInteger(str);
+                }
+            }catch (NumberFormatException nfe){
+                if (isUseDefault()){
+                    return defaultValue;
+                }else{
+                    throw new MorphException(nfe);
+                }
+            }
+        }
+    }
 
-   @Override
-public Class morphsTo()
-   {
-      return BigInteger.class;
-   }
+    @Override
+    public Class morphsTo(){
+        return BigInteger.class;
+    }
 
-   /**
-    * Trims the String from the begining to the first "."
-    */
-   protected String getIntegerValue( Object obj )
-   {
-      // use en_US Locale
-      Locale defaultLocale = Locale.getDefault();
-      String str = null;
-      try{
-         Locale.setDefault( Locale.US );
-         str = String.valueOf( obj )
-               .trim();
-      }
-      finally{
-         Locale.setDefault( defaultLocale );
-      }
+    /**
+     * Trims the String from the begining to the first "."
+     */
+    protected String getIntegerValue(Object obj){
+        // use en_US Locale
+        Locale defaultLocale = Locale.getDefault();
+        String str = null;
+        try{
+            Locale.setDefault(Locale.US);
+            str = String.valueOf(obj).trim();
+        }finally{
+            Locale.setDefault(defaultLocale);
+        }
 
-      int index = str.indexOf( "." );
-      if( index != -1 ){
-         str = str.substring( 0, index );
-      }
-      return str;
-   }
+        int index = str.indexOf(".");
+        if (index != -1){
+            str = str.substring(0, index);
+        }
+        return str;
+    }
 }

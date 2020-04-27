@@ -29,106 +29,100 @@ import com.feilong.json.lib.ezmorph.primitive.IntMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class IntArrayMorpher extends AbstractArrayMorpher
-{
-   private static final Class INT_ARRAY_CLASS = int[].class;
-   private int defaultValue;
+public final class IntArrayMorpher extends AbstractArrayMorpher{
 
-   public IntArrayMorpher()
-   {
-      super( false );
-   }
+    private static final Class INT_ARRAY_CLASS = int[].class;
 
-   /**
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public IntArrayMorpher( int defaultValue )
-   {
-      super( true );
-      this.defaultValue = defaultValue;
-   }
+    private int                defaultValue;
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    public IntArrayMorpher(){
+        super(false);
+    }
 
-      if( !(obj instanceof IntArrayMorpher) ){
-         return false;
-      }
+    /**
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public IntArrayMorpher(int defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+    }
 
-      IntArrayMorpher other = (IntArrayMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public int getDefaultValue()
-   {
-      return defaultValue;
-   }
+        if (!(obj instanceof IntArrayMorpher)){
+            return false;
+        }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+        IntArrayMorpher other = (IntArrayMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-   @Override
-public Object morph( Object array )
-   {
-      if( array == null ){
-         return null;
-      }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public int getDefaultValue(){
+        return defaultValue;
+    }
 
-      if( INT_ARRAY_CLASS.isAssignableFrom( array.getClass() ) ){
-         // no conversion needed
-         return (int[]) array;
-      }
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      if( array.getClass()
-            .isArray() ){
-         int length = Array.getLength( array );
-         int dims = getDimensions( array.getClass() );
-         int[] dimensions = createDimensions( dims, length );
-         Object result = Array.newInstance( int.class, dimensions );
-         IntMorpher morpher = isUseDefault() ? new IntMorpher( defaultValue ) : new IntMorpher();
-         if( dims == 1 ){
-            for( int index = 0; index < length; index++ ){
-               Array.set( result, index, new Integer( morpher.morph( Array.get( array, index ) ) ) );
+    @Override
+    public Object morph(Object array){
+        if (array == null){
+            return null;
+        }
+
+        if (INT_ARRAY_CLASS.isAssignableFrom(array.getClass())){
+            // no conversion needed
+            return array;
+        }
+
+        if (array.getClass().isArray()){
+            int length = Array.getLength(array);
+            int dims = getDimensions(array.getClass());
+            int[] dimensions = createDimensions(dims, length);
+            Object result = Array.newInstance(int.class, dimensions);
+            IntMorpher morpher = isUseDefault() ? new IntMorpher(defaultValue) : new IntMorpher();
+            if (dims == 1){
+                for (int index = 0; index < length; index++){
+                    Array.set(result, index, new Integer(morpher.morph(Array.get(array, index))));
+                }
+            }else{
+                for (int index = 0; index < length; index++){
+                    Array.set(result, index, morph(Array.get(array, index)));
+                }
             }
-         }else{
-            for( int index = 0; index < length; index++ ){
-               Array.set( result, index, morph( Array.get( array, index ) ) );
-            }
-         }
-         return result;
-      }else{
-         throw new MorphException( "argument is not an array: " + array.getClass() );
-      }
-   }
+            return result;
+        }else{
+            throw new MorphException("argument is not an array: " + array.getClass());
+        }
+    }
 
-   @Override
-public Class morphsTo()
-   {
-      return INT_ARRAY_CLASS;
-   }
+    @Override
+    public Class morphsTo(){
+        return INT_ARRAY_CLASS;
+    }
 }

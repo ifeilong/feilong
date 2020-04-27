@@ -29,106 +29,100 @@ import com.feilong.json.lib.ezmorph.primitive.LongMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class LongArrayMorpher extends AbstractArrayMorpher
-{
-   private static final Class LONG_ARRAY_CLASS = long[].class;
-   private long defaultValue;
+public final class LongArrayMorpher extends AbstractArrayMorpher{
 
-   public LongArrayMorpher()
-   {
-      super( false );
-   }
+    private static final Class LONG_ARRAY_CLASS = long[].class;
 
-   /**
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public LongArrayMorpher( long defaultValue )
-   {
-      super( true );
-      this.defaultValue = defaultValue;
-   }
+    private long               defaultValue;
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    public LongArrayMorpher(){
+        super(false);
+    }
 
-      if( !(obj instanceof LongArrayMorpher) ){
-         return false;
-      }
+    /**
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public LongArrayMorpher(long defaultValue){
+        super(true);
+        this.defaultValue = defaultValue;
+    }
 
-      LongArrayMorpher other = (LongArrayMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public long getDefaultValue()
-   {
-      return defaultValue;
-   }
+        if (!(obj instanceof LongArrayMorpher)){
+            return false;
+        }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+        LongArrayMorpher other = (LongArrayMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-   @Override
-public Object morph( Object array )
-   {
-      if( array == null ){
-         return null;
-      }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public long getDefaultValue(){
+        return defaultValue;
+    }
 
-      if( LONG_ARRAY_CLASS.isAssignableFrom( array.getClass() ) ){
-         // no conversion needed
-         return (long[]) array;
-      }
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      if( array.getClass()
-            .isArray() ){
-         int length = Array.getLength( array );
-         int dims = getDimensions( array.getClass() );
-         int[] dimensions = createDimensions( dims, length );
-         Object result = Array.newInstance( long.class, dimensions );
-         LongMorpher morpher = isUseDefault() ? new LongMorpher( defaultValue ) : new LongMorpher();
-         if( dims == 1 ){
-            for( int index = 0; index < length; index++ ){
-               Array.set( result, index, new Long( morpher.morph( Array.get( array, index ) ) ) );
+    @Override
+    public Object morph(Object array){
+        if (array == null){
+            return null;
+        }
+
+        if (LONG_ARRAY_CLASS.isAssignableFrom(array.getClass())){
+            // no conversion needed
+            return array;
+        }
+
+        if (array.getClass().isArray()){
+            int length = Array.getLength(array);
+            int dims = getDimensions(array.getClass());
+            int[] dimensions = createDimensions(dims, length);
+            Object result = Array.newInstance(long.class, dimensions);
+            LongMorpher morpher = isUseDefault() ? new LongMorpher(defaultValue) : new LongMorpher();
+            if (dims == 1){
+                for (int index = 0; index < length; index++){
+                    Array.set(result, index, new Long(morpher.morph(Array.get(array, index))));
+                }
+            }else{
+                for (int index = 0; index < length; index++){
+                    Array.set(result, index, morph(Array.get(array, index)));
+                }
             }
-         }else{
-            for( int index = 0; index < length; index++ ){
-               Array.set( result, index, morph( Array.get( array, index ) ) );
-            }
-         }
-         return result;
-      }else{
-         throw new MorphException( "argument is not an array: " + array.getClass() );
-      }
-   }
+            return result;
+        }else{
+            throw new MorphException("argument is not an array: " + array.getClass());
+        }
+    }
 
-   @Override
-public Class morphsTo()
-   {
-      return LONG_ARRAY_CLASS;
-   }
+    @Override
+    public Class morphsTo(){
+        return LONG_ARRAY_CLASS;
+    }
 }

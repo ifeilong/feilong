@@ -35,205 +35,209 @@ import com.feilong.json.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class DateMorpher extends AbstractObjectMorpher
-{
-   private Date defaultValue;
-   private String[] formats;
-   private boolean lenient;
-   private Locale locale;
+public final class DateMorpher extends AbstractObjectMorpher{
 
-   /**
-    * @param formats a list of formats this morpher supports.
-    */
-   public DateMorpher( String[] formats )
-   {
-      this( formats, Locale.getDefault(), false );
-   }
+    private Date     defaultValue;
 
-   /**
-    * @param formats a list of formats this morpher supports.
-    * @param lenient if the parsing should be lenient or not.
-    */
-   public DateMorpher( String[] formats, boolean lenient )
-   {
-      this( formats, Locale.getDefault(), lenient );
-   }
+    private String[] formats;
 
-   /**
-    * @param formats a list of formats this morpher supports.
-    * @param defaultValue return value if the value to be morphed is null.
-    */
-   public DateMorpher( String[] formats, Date defaultValue )
-   {
-      this( formats, defaultValue, Locale.getDefault(), false );
-   }
+    private boolean  lenient;
 
-   /**
-    * @param formats a list of formats this morpher supports.
-    * @param defaultValue return value if the value to be morphed is null.
-    * @param locale the Locale used to parse each format.
-    * @param lenient if the parsing should be lenient or not.
-    */
-   public DateMorpher( String[] formats, Date defaultValue, Locale locale, boolean lenient )
-   {
-      super( true );
-      if( formats == null || formats.length == 0 ){
-         throw new MorphException( "invalid array of formats" );
-      }
-      // should use defensive copying ?
-      this.formats = formats;
+    private Locale   locale;
 
-      if( locale == null ){
-         this.locale = Locale.getDefault();
-      }else{
-         this.locale = locale;
-      }
+    /**
+     * @param formats
+     *            a list of formats this morpher supports.
+     */
+    public DateMorpher(String[] formats){
+        this(formats, Locale.getDefault(), false);
+    }
 
-      this.lenient = lenient;
-      setDefaultValue( defaultValue );
-   }
+    /**
+     * @param formats
+     *            a list of formats this morpher supports.
+     * @param lenient
+     *            if the parsing should be lenient or not.
+     */
+    public DateMorpher(String[] formats, boolean lenient){
+        this(formats, Locale.getDefault(), lenient);
+    }
 
-   /**
-    * @param formats a list of formats this morpher supports.
-    * @param locale the Locale used to parse each format.
-    */
-   public DateMorpher( String[] formats, Locale locale )
-   {
-      this( formats, locale, false );
-   }
+    /**
+     * @param formats
+     *            a list of formats this morpher supports.
+     * @param defaultValue
+     *            return value if the value to be morphed is null.
+     */
+    public DateMorpher(String[] formats, Date defaultValue){
+        this(formats, defaultValue, Locale.getDefault(), false);
+    }
 
-   /**
-    * @param formats a list of formats this morpher supports.
-    * @param locale the Locale used to parse each format.
-    * @param lenient if the parsing should be lenient or not.
-    */
-   public DateMorpher( String[] formats, Locale locale, boolean lenient )
-   {
-      if( formats == null || formats.length == 0 ){
-         throw new MorphException( "invalid array of formats" );
-      }
-      // should use defensive copying ?
-      this.formats = formats;
+    /**
+     * @param formats
+     *            a list of formats this morpher supports.
+     * @param defaultValue
+     *            return value if the value to be morphed is null.
+     * @param locale
+     *            the Locale used to parse each format.
+     * @param lenient
+     *            if the parsing should be lenient or not.
+     */
+    public DateMorpher(String[] formats, Date defaultValue, Locale locale, boolean lenient){
+        super(true);
+        if (formats == null || formats.length == 0){
+            throw new MorphException("invalid array of formats");
+        }
+        // should use defensive copying ?
+        this.formats = formats;
 
-      if( locale == null ){
-         this.locale = Locale.getDefault();
-      }else{
-         this.locale = locale;
-      }
+        if (locale == null){
+            this.locale = Locale.getDefault();
+        }else{
+            this.locale = locale;
+        }
 
-      this.lenient = lenient;
-   }
+        this.lenient = lenient;
+        setDefaultValue(defaultValue);
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      if( this == obj ){
-         return true;
-      }
-      if( obj == null ){
-         return false;
-      }
+    /**
+     * @param formats
+     *            a list of formats this morpher supports.
+     * @param locale
+     *            the Locale used to parse each format.
+     */
+    public DateMorpher(String[] formats, Locale locale){
+        this(formats, locale, false);
+    }
 
-      if( !(obj instanceof DateMorpher) ){
-         return false;
-      }
+    /**
+     * @param formats
+     *            a list of formats this morpher supports.
+     * @param locale
+     *            the Locale used to parse each format.
+     * @param lenient
+     *            if the parsing should be lenient or not.
+     */
+    public DateMorpher(String[] formats, Locale locale, boolean lenient){
+        if (formats == null || formats.length == 0){
+            throw new MorphException("invalid array of formats");
+        }
+        // should use defensive copying ?
+        this.formats = formats;
 
-      DateMorpher other = (DateMorpher) obj;
-      EqualsBuilder builder = new EqualsBuilder();
-      builder.append( formats, other.formats );
-      builder.append( locale, other.locale );
-      builder.append( lenient, other.lenient );
-      if( isUseDefault() && other.isUseDefault() ){
-         builder.append( getDefaultValue(), other.getDefaultValue() );
-         return builder.isEquals();
-      }else if( !isUseDefault() && !other.isUseDefault() ){
-         return builder.isEquals();
-      }else{
-         return false;
-      }
-   }
+        if (locale == null){
+            this.locale = Locale.getDefault();
+        }else{
+            this.locale = locale;
+        }
 
-   /**
-    * Returns the default value for this Morpher.
-    */
-   public Date getDefaultValue()
-   {
-      return (Date) defaultValue.clone();
-   }
+        this.lenient = lenient;
+    }
 
-   @Override
-public int hashCode()
-   {
-      HashCodeBuilder builder = new HashCodeBuilder();
-      builder.append( formats );
-      builder.append( locale );
-      builder.append( lenient );
-      if( isUseDefault() ){
-         builder.append( getDefaultValue() );
-      }
-      return builder.toHashCode();
-   }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value == null ){
-         return null;
-      }
+        if (!(obj instanceof DateMorpher)){
+            return false;
+        }
 
-      if( Date.class.isAssignableFrom( value.getClass() ) ){
-         return (Date) value;
-      }
+        DateMorpher other = (DateMorpher) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        builder.append(formats, other.formats);
+        builder.append(locale, other.locale);
+        builder.append(lenient, other.lenient);
+        if (isUseDefault() && other.isUseDefault()){
+            builder.append(getDefaultValue(), other.getDefaultValue());
+            return builder.isEquals();
+        }else if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }else{
+            return false;
+        }
+    }
 
-      if( !supports( value.getClass() ) ){
-         throw new MorphException( value.getClass() + " is not supported" );
-      }
+    /**
+     * Returns the default value for this Morpher.
+     */
+    public Date getDefaultValue(){
+        return (Date) defaultValue.clone();
+    }
 
-      String strValue = (String) value;
-      SimpleDateFormat dateParser = null;
+    @Override
+    public int hashCode(){
+        HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(formats);
+        builder.append(locale);
+        builder.append(lenient);
+        if (isUseDefault()){
+            builder.append(getDefaultValue());
+        }
+        return builder.toHashCode();
+    }
 
-      for( int i = 0; i < formats.length; i++ ){
-         if( dateParser == null ){
-            dateParser = new SimpleDateFormat( formats[i], locale );
-         }else{
-            dateParser.applyPattern( formats[i] );
-         }
-         dateParser.setLenient( lenient );
-         try{
-            return dateParser.parse( strValue.toLowerCase() );
-         }
-         catch( ParseException pe ){
-            // ignore exception, try the next format
-         }
-      }
+    @Override
+    public Object morph(Object value){
+        if (value == null){
+            return null;
+        }
 
-      // unable to parse the date
-      if( isUseDefault() ){
-         return defaultValue;
-      }else{
-         throw new MorphException( "Unable to parse the date " + value );
-      }
-   }
+        if (Date.class.isAssignableFrom(value.getClass())){
+            return value;
+        }
 
-   @Override
-public Class morphsTo()
-   {
-      return Date.class;
-   }
+        if (!supports(value.getClass())){
+            throw new MorphException(value.getClass() + " is not supported");
+        }
 
-   /**
-    * Sets the defaultValue to use if the value to be morphed is null.
-    *
-    * @param defaultValue return value if the value to be morphed is null
-    */
-   public void setDefaultValue( Date defaultValue )
-   {
-      this.defaultValue = (Date) defaultValue.clone();
-   }
+        String strValue = (String) value;
+        SimpleDateFormat dateParser = null;
 
-   @Override
-public boolean supports( Class clazz )
-   {
-      return String.class.isAssignableFrom( clazz );
-   }
+        for (int i = 0; i < formats.length; i++){
+            if (dateParser == null){
+                dateParser = new SimpleDateFormat(formats[i], locale);
+            }else{
+                dateParser.applyPattern(formats[i]);
+            }
+            dateParser.setLenient(lenient);
+            try{
+                return dateParser.parse(strValue.toLowerCase());
+            }catch (ParseException pe){
+                // ignore exception, try the next format
+            }
+        }
+
+        // unable to parse the date
+        if (isUseDefault()){
+            return defaultValue;
+        }else{
+            throw new MorphException("Unable to parse the date " + value);
+        }
+    }
+
+    @Override
+    public Class morphsTo(){
+        return Date.class;
+    }
+
+    /**
+     * Sets the defaultValue to use if the value to be morphed is null.
+     *
+     * @param defaultValue
+     *            return value if the value to be morphed is null
+     */
+    public void setDefaultValue(Date defaultValue){
+        this.defaultValue = (Date) defaultValue.clone();
+    }
+
+    @Override
+    public boolean supports(Class clazz){
+        return String.class.isAssignableFrom(clazz);
+    }
 }

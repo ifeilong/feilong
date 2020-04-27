@@ -21,19 +21,18 @@ package com.feilong.json.lib.ezmorph.primitive;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public abstract class AbstractDecimalMorpher extends AbstractPrimitiveMorpher
-{
-   public AbstractDecimalMorpher()
-   {
-      super();
-   }
+public abstract class AbstractDecimalMorpher extends AbstractPrimitiveMorpher{
 
-   /**
-    * @param useDefault if morph() should return a default value if the value to
-    *        be morphed is null
-    */
-   public AbstractDecimalMorpher( boolean useDefault )
-   {
-      super( useDefault );
-   }
+    public AbstractDecimalMorpher(){
+        super();
+    }
+
+    /**
+     * @param useDefault
+     *            if morph() should return a default value if the value to
+     *            be morphed is null
+     */
+    public AbstractDecimalMorpher(boolean useDefault){
+        super(useDefault);
+    }
 }

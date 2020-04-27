@@ -25,61 +25,54 @@ import com.feilong.json.lib.ezmorph.ObjectMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class StringMorpher implements ObjectMorpher
-{
-   private static final StringMorpher INSTANCE = new StringMorpher();
+public final class StringMorpher implements ObjectMorpher{
 
-   /**
-    * Returns the singleton instance
-    */
-   public static StringMorpher getInstance()
-   {
-      return INSTANCE;
-   }
+    private static final StringMorpher INSTANCE = new StringMorpher();
 
-   private StringMorpher()
-   {
-   }
+    /**
+     * Returns the singleton instance
+     */
+    public static StringMorpher getInstance(){
+        return INSTANCE;
+    }
 
-   @Override
-public boolean equals( Object obj )
-   {
-      return INSTANCE == obj;
-   }
+    private StringMorpher(){
+    }
 
-   @Override
-public int hashCode()
-   {
-      return 42 + getClass().hashCode();
-   }
+    @Override
+    public boolean equals(Object obj){
+        return INSTANCE == obj;
+    }
 
-   @Override
-public Object morph( Object value )
-   {
-      if( value == null ){
-         return null;
-      }
+    @Override
+    public int hashCode(){
+        return 42 + getClass().hashCode();
+    }
 
-      if( !supports( value.getClass() ) ){
-         throw new MorphException( "Class not supported. " + value.getClass() );
-      }
+    @Override
+    public Object morph(Object value){
+        if (value == null){
+            return null;
+        }
 
-      if( String.class.isAssignableFrom( value.getClass() ) ){
-         return (String) value;
-      }
+        if (!supports(value.getClass())){
+            throw new MorphException("Class not supported. " + value.getClass());
+        }
 
-      return String.valueOf( value );
-   }
+        if (String.class.isAssignableFrom(value.getClass())){
+            return value;
+        }
 
-   @Override
-public Class morphsTo()
-   {
-      return String.class;
-   }
+        return String.valueOf(value);
+    }
 
-   @Override
-public boolean supports( Class clazz )
-   {
-      return !clazz.isArray();
-   }
+    @Override
+    public Class morphsTo(){
+        return String.class;
+    }
+
+    @Override
+    public boolean supports(Class clazz){
+        return !clazz.isArray();
+    }
 }

@@ -23,56 +23,63 @@ import com.feilong.json.lib.json.JSONException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public interface JsonEventListener {
+public interface JsonEventListener{
 
-   /**
-    * Ttriggered when reaching the end of an array.
-    */
-   void onArrayEnd();
+    /**
+     * Ttriggered when reaching the end of an array.
+     */
+    void onArrayEnd();
 
-   /**
-    * triggered when the start of an array is encountered.
-    */
-   void onArrayStart();
+    /**
+     * triggered when the start of an array is encountered.
+     */
+    void onArrayStart();
 
-   /**
-    * Triggered when an element has been added to the current array.
-    *
-    * @param index the index where the element was added
-    * @param element the added element
-    */
-   void onElementAdded( int index, Object element );
+    /**
+     * Triggered when an element has been added to the current array.
+     *
+     * @param index
+     *            the index where the element was added
+     * @param element
+     *            the added element
+     */
+    void onElementAdded(int index,Object element);
 
-   /**
-    * Triggered when an exception is thrown.
-    *
-    * @param jsone the thrown exception
-    */
-   void onError( JSONException jsone );
+    /**
+     * Triggered when an exception is thrown.
+     *
+     * @param jsone
+     *            the thrown exception
+     */
+    void onError(JSONException jsone);
 
-   /**
-    * triggered when reaching the end of an object.
-    */
-   void onObjectEnd();
+    /**
+     * triggered when reaching the end of an object.
+     */
+    void onObjectEnd();
 
-   /**
-    * Triggered when the start of an object is encountered.
-    */
-   void onObjectStart();
+    /**
+     * Triggered when the start of an object is encountered.
+     */
+    void onObjectStart();
 
-   /**
-    * Triggered when a property is set on an object
-    *
-    * @param key the name of the property
-    * @param value the value of the property
-    * @param accumulated if the value has been accumulated over 'key'
-    */
-   void onPropertySet( String key, Object value, boolean accumulated );
+    /**
+     * Triggered when a property is set on an object
+     *
+     * @param key
+     *            the name of the property
+     * @param value
+     *            the value of the property
+     * @param accumulated
+     *            if the value has been accumulated over 'key'
+     */
+    void onPropertySet(String key,Object value,boolean accumulated);
 
-   /**
-    * Triggered when a warning is encountered.
-    *
-    * @param warning the warning message
-    */
-   void onWarning( String warning );
+    /**
+     * Triggered when a warning is encountered.
+     *
+     * @param warning
+     *            the warning message
+     */
+    void onWarning(String warning);
 }
