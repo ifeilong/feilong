@@ -15,6 +15,8 @@
  */
 package com.feilong.json.lib.json;
 
+import static java.util.Collections.emptyMap;
+
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.Writer;
@@ -297,7 +299,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             return toBean(jsonObject);
         }
         if (classMap == null){
-            classMap = Collections.EMPTY_MAP;
+            classMap = emptyMap();
         }
 
         Object bean = null;
@@ -305,9 +307,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             if (beanClass.isInterface()){
                 if (!Map.class.isAssignableFrom(beanClass)){
                     throw new JSONException("beanClass is an interface. " + beanClass);
-                }else{
-                    bean = new HashMap();
                 }
+                bean = new HashMap();
             }else{
                 bean = jsonConfig.getNewBeanInstanceStrategy().newInstance(beanClass, jsonObject);
             }
@@ -362,17 +363,17 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                         }
                     }
                 }else{
-                    PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(bean, key);
-                    if (pd != null && pd.getWriteMethod() == null){
+                    PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, key);
+                    if (propertyDescriptor != null && propertyDescriptor.getWriteMethod() == null){
                         LOGGER.info("Property '" + key + "' of " + bean.getClass() + " has no write method. SKIPPED.");
                         continue;
                     }
 
-                    if (pd != null){
-                        Class targetType = pd.getPropertyType();
+                    if (propertyDescriptor != null){
+                        Class targetType = propertyDescriptor.getPropertyType();
                         if (!JSONUtils.isNull(value)){
                             if (value instanceof JSONArray){
-                                if (List.class.isAssignableFrom(pd.getPropertyType())){
+                                if (List.class.isAssignableFrom(propertyDescriptor.getPropertyType())){
                                     setProperty(
                                                     bean,
                                                     key,
@@ -382,9 +383,9 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                                                                     jsonConfig,
                                                                     name,
                                                                     classMap,
-                                                                    pd.getPropertyType()),
+                                                                    propertyDescriptor.getPropertyType()),
                                                     jsonConfig);
-                                }else if (Set.class.isAssignableFrom(pd.getPropertyType())){
+                                }else if (Set.class.isAssignableFrom(propertyDescriptor.getPropertyType())){
                                     setProperty(
                                                     bean,
                                                     key,
@@ -394,7 +395,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                                                                     jsonConfig,
                                                                     name,
                                                                     classMap,
-                                                                    pd.getPropertyType()),
+                                                                    propertyDescriptor.getPropertyType()),
                                                     jsonConfig);
                                 }else{
                                     setProperty(
@@ -405,7 +406,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                                 }
                             }else if (String.class.isAssignableFrom(type) || JSONUtils.isBoolean(type) || JSONUtils.isNumber(type)
                                             || JSONUtils.isString(type) || JSONFunction.class.isAssignableFrom(type)){
-                                if (pd != null){
+                                if (propertyDescriptor != null){
                                     if (jsonConfig.isHandleJettisonEmptyElement() && "".equals(value)){
                                         setProperty(bean, key, null, jsonConfig);
                                     }else if (!targetType.isInstance(value)){
@@ -415,11 +416,10 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                                     }
                                 }else if (beanClass == null || bean instanceof Map){
                                     setProperty(bean, key, value, jsonConfig);
-                                }else{
-                                    LOGGER.warn(
-                                                    "Tried to assign property " + key + ":" + type.getName() + " to bean of class "
-                                                                    + bean.getClass().getName());
                                 }
+                                LOGGER.warn(
+                                                "Tried to assign property " + key + ":" + type.getName() + " to bean of class "
+                                                                + bean.getClass().getName());
                             }else{
                                 if (jsonConfig.isHandleJettisonSingleElementArray()){
                                     JSONArray array = new JSONArray().element(value, jsonConfig);
@@ -532,7 +532,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
 
         Map classMap = jsonConfig.getClassMap();
         if (classMap == null){
-            classMap = Collections.EMPTY_MAP;
+            classMap = emptyMap();
         }
 
         Map props = JSONUtils.getProperties(jsonObject);
@@ -767,19 +767,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                     continue;
                 }
                 if (pds[i].getReadMethod() != null){
-                    /*
-                     * if( jsonConfig.isIgnoreJPATransient() ){
-                     * try{
-                     * Class transientClass = Class.forName( "javax.persistence.Transient" );
-                     * if( pds[i].getReadMethod()
-                     * .getAnnotation( transientClass ) != null ){
-                     * continue;
-                     * }
-                     * }catch( ClassNotFoundException cnfe ){
-                     * // ignore
-                     * }
-                     * }
-                     */
                     if (isTransient(pds[i].getReadMethod(), jsonConfig)){
                         continue;
                     }

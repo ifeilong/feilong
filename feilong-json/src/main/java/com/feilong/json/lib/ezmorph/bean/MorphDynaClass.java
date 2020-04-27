@@ -54,17 +54,17 @@ public final class MorphDynaClass implements DynaClass,Serializable{
 
     private static final long       serialVersionUID       = -613214016860871560L;
 
-    private Map                     attributes;
+    private final Map               attributes;
 
     private Class                   beanClass;
 
-    private DynaProperty            dynaProperties[];
+    private DynaProperty[]          dynaProperties;
 
-    private String                  name;
+    private final String            name;
 
-    private Map                     properties             = new HashMap();
+    private final Map               properties             = new HashMap();
 
-    private Class                   type;
+    private final Class             type;
 
     public MorphDynaClass(Map attributes){
         this(null, null, attributes);

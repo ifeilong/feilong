@@ -73,7 +73,7 @@ public class JSONBuilder{
     /**
      * The object/array stack.
      */
-    private final char       stack[];
+    private final char[]     stack;
 
     /**
      * The stack top index. A value of 0 indicates that the stack is empty.
@@ -85,6 +85,8 @@ public class JSONBuilder{
      */
     protected Writer         writer;
 
+    //---------------------------------------------------------------
+
     /**
      * Make a fresh JSONBuilder. It can be used to build one JSON text.
      */
@@ -95,6 +97,8 @@ public class JSONBuilder{
         this.top = 0;
         this.writer = w;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Append a value.

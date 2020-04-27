@@ -96,9 +96,8 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                return null;
             }
+            return null;
         }
 
         if (value instanceof Number){
@@ -117,21 +116,19 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
             }
 
             return new BigDecimal(((Number) value).doubleValue());
-        }else{
-            try{
-                String str = String.valueOf(value).trim();
-                if (str.length() == 0 || str.equalsIgnoreCase("null")){
-                    return null;
-                }else{
-                    return new BigDecimal(str);
-                }
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+
+        try{
+            String str = String.valueOf(value).trim();
+            if (str.length() == 0 || str.equalsIgnoreCase("null")){
+                return null;
             }
+            return new BigDecimal(str);
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
+            }
+            throw new MorphException(nfe);
         }
     }
 

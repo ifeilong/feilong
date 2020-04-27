@@ -16,11 +16,18 @@ import org.slf4j.LoggerFactory;
 public class ExcelUtil{
 
     /** The Constant log. */
-    private static final Logger LOGGER               = LoggerFactory.getLogger(ExcelUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelUtil.class);
+
+    /** Don't let anyone instantiate this class. */
+    private ExcelUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     //---------------------------------------------------------------
 
-    public static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
+    private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
 
     public static String getCellIndex(int row,int col){
         CellReference cell = new CellReference(row, col);
@@ -32,13 +39,13 @@ public class ExcelUtil{
         return new int[] { cell.getRow(), cell.getCol() };
     }
 
-    public static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
+    static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
         CellReference cell = new CellReference(cellIndex);
         CellReference newCell = new CellReference(cell.getRow() + rowOffset, cell.getCol() + colOffset);
         return newCell.formatAsString().replaceAll("\\$", "");
     }
 
-    public static String offsetFormula(String formula,int rowOffset,int colOffset){
+    static String offsetFormula(String formula,int rowOffset,int colOffset){
         StringBuffer sb = new StringBuffer();
         Matcher matcher = DYNAMIC_CELL_PATTREN.matcher(formula);
         int head = 0, start = 0, end = -1;
@@ -53,7 +60,7 @@ public class ExcelUtil{
         return sb.toString();
     }
 
-    public static void copySheet(Sheet sheet,Sheet newSheet){
+    static void copySheet(Sheet sheet,Sheet newSheet){
         int maxCol = 0;
         for (int row = 0; row <= sheet.getLastRowNum(); row++){
             Row oldRow = sheet.getRow(row);
@@ -91,7 +98,7 @@ public class ExcelUtil{
         }
     }
 
-    public static void copyBlock(
+    static void copyBlock(
                     Sheet sheet,
                     int startRow,
                     int startCol,
@@ -146,7 +153,7 @@ public class ExcelUtil{
         }
     }
 
-    public static void copyCell(Cell oldCell,Cell newCell,boolean copyStyle,int rowOffset,int colOffset){
+    static void copyCell(Cell oldCell,Cell newCell,boolean copyStyle,int rowOffset,int colOffset){
         if (copyStyle){
             newCell.setCellStyle(oldCell.getCellStyle());
         }

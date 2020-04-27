@@ -30,6 +30,15 @@ import com.feilong.json.lib.json.util.JSONUtils;
  */
 public class JSONSerializer{
 
+    /** Don't let anyone instantiate this class. */
+    private JSONSerializer(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Transform a JSON value to a java object.<br>
      * Depending on the configured values for conversion this will return a
