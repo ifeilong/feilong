@@ -77,8 +77,8 @@ public class DefaultExcelReader implements ExcelReader{
     public ReadStatus readAll(InputStream is,Map<String, Object> beans){
         ReadStatus readStatus = new DefaultReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
-        try{
-            Workbook wb = WorkbookFactory.create(is);
+
+        try (Workbook wb = WorkbookFactory.create(is)){
             if (definition.getExcelSheets().size() == 0 || wb.getNumberOfSheets() < definition.getExcelSheets().size()){
                 readStatus.setStatus(ReadStatus.STATUS_SETTING_ERROR);
                 readStatus.setMessage("No sheet definition found or Sheet Number in definition is more than number in file.");
@@ -107,8 +107,8 @@ public class DefaultExcelReader implements ExcelReader{
     public ReadStatus readAllPerSheet(InputStream is,Map<String, Object> beans){
         ReadStatus readStatus = new DefaultReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
-        try{
-            Workbook wb = WorkbookFactory.create(is);
+
+        try (Workbook wb = WorkbookFactory.create(is)){
             if (definition.getExcelSheets().size() == 0){
                 readStatus.setStatus(ReadStatus.STATUS_SETTING_ERROR);
                 readStatus.setMessage("No sheet definition found");
@@ -119,7 +119,7 @@ public class DefaultExcelReader implements ExcelReader{
                 Map<String, List<Object>> cacheMap = new HashMap<>();
                 for (String key : beans.keySet()){
                     if (beans.get(key) != null){
-                        cacheMap.put(key, new ArrayList<Object>());
+                        cacheMap.put(key, new ArrayList<>());
                     }
                 }
                 for (int i = 0; i < wb.getNumberOfSheets(); i++){
@@ -167,8 +167,7 @@ public class DefaultExcelReader implements ExcelReader{
         ReadStatus readStatus = new DefaultReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
         OgnlStack stack = new OgnlStack(beans);
-        try{
-            Workbook wb = WorkbookFactory.create(is);
+        try (Workbook wb = WorkbookFactory.create(is)){
             readSheet(wb, sheetNo, definition.getExcelSheets().iterator().next(), stack, readStatus);
         }catch (IOException e){
             readStatus.setStatus(ReadStatus.STATUS_READ_FILE_ERROR);
