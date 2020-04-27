@@ -140,11 +140,11 @@ public class DefaultExcelReader implements ExcelReader{
         }catch (IOException e){
             readStatus.setStatus(ReadStatus.STATUS_READ_FILE_ERROR);
         }catch (InstantiationException e){
-            e.printStackTrace();
+            LOGGER.error("", e);
             readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
             readStatus.setMessage("New Instance Error");
         }catch (IllegalAccessException e){
-            e.printStackTrace();
+            LOGGER.error("", e);
             readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
             readStatus.setMessage("New Instance Error");
         }
@@ -273,7 +273,7 @@ public class DefaultExcelReader implements ExcelReader{
                 }
                 readStatus.addException(e);
             }catch (Exception e){
-                e.printStackTrace();
+                LOGGER.error("", e);
                 readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
                 readStatus.setMessage(e.getMessage());
             }
@@ -326,7 +326,7 @@ public class DefaultExcelReader implements ExcelReader{
                 startRow += step;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            LOGGER.error("", e);
             readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
             readStatus.setMessage(e.getMessage());
         }

@@ -627,8 +627,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                                     false);
                 }
             }catch (Exception e){
-                e.printStackTrace();
-                //do nothing
+                LOGGER.error("", e);
             }
         }else{
             try{
@@ -671,8 +670,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                 stack.removeContext("preLine");
                 stack.removeContext("lineNum");
             }catch (Exception e){
-                e.printStackTrace();
-                //do nothing
+                LOGGER.error("", e);
             }
         }
     }

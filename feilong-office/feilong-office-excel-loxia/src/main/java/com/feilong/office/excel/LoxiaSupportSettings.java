@@ -12,7 +12,10 @@ import org.slf4j.LoggerFactory;
 
 public class LoxiaSupportSettings{
 
-    final static Logger                 logger  = LoggerFactory.getLogger(LoxiaSupportSettings.class);
+    /** The Constant log. */
+    private static final Logger         LOGGER  = LoggerFactory.getLogger(LoxiaSupportSettings.class);
+
+    //---------------------------------------------------------------
 
     private static LoxiaSupportSettings instance;
 
@@ -29,11 +32,10 @@ public class LoxiaSupportSettings{
                     prop.load(is);
                     props.add(prop);
                 }catch (IOException e){
-                    e.printStackTrace();
-                    logger.warn("Error occurs when loading {}.properties", config);
+                    LOGGER.warn("Error occurs when loading " + config + ".properties");
                 }
             }else{
-                logger.warn("Could not find {}.properties", config);
+                LOGGER.warn("Could not find {}.properties", config);
             }
         }
     }

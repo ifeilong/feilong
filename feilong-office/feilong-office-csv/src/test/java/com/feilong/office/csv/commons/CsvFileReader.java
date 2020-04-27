@@ -57,15 +57,11 @@ public class CsvFileReader{
             for (User user : userList){
                 LOGGER.debug(user.toString());
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally{
+        }catch (Exception e){}finally{
             try{
                 fileReader.close();
                 csvFileParser.close();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            }catch (IOException e){}
         }
     }
 

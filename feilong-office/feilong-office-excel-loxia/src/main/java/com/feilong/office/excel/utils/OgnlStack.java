@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ognl.NullHandler;
 import ognl.Ognl;
 import ognl.OgnlException;
@@ -30,6 +33,11 @@ import ognl.OgnlRuntime;
  * The Class OgnlStack.
  */
 public class OgnlStack{
+
+    /** The Constant log. */
+    private static final Logger       LOGGER      = LoggerFactory.getLogger(OgnlStack.class);
+
+    //---------------------------------------------------------------
 
     /** The stack. */
     private final List<Object>        stack       = new ArrayList<>();
@@ -130,7 +138,7 @@ public class OgnlStack{
                     OgnlRuntime.setNullHandler(Object.class, new InstantiatingNullHandler(nullHandler, Arrays.asList("java")));
                 }
             }catch (OgnlException e){
-                e.printStackTrace();
+                LOGGER.error("", e);
             }
         }
 
