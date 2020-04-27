@@ -350,26 +350,10 @@ public final class DateExtensionUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
-     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 的区别:
-     * </h3>
-     * <blockquote>
-     * <ol>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
-     * </ol>
-     * </blockquote>
-     * 
+     *
      * @param beginDate
-     *            开始日期
-     * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #formatDuration(Date, Date)
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
-     * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
-     *      in-java-e-g-format-hmmss</a>
+     *            the begin date
+     * @return the string
      * @since 1.8.4 change name from getIntervalForView
      * @deprecated pls use DateUtil since 3.0.0
      */
@@ -415,17 +399,6 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 的区别:
-     * </h3>
-     * <blockquote>
-     * <ol>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
-     * </ol>
-     * </blockquote>
      * 
      * @param beginDate
      *            开始日期
@@ -435,7 +408,6 @@ public final class DateExtensionUtil{
      *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
      * @see #formatDuration(long)
      * @see #getIntervalTime(Date, Date)
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
@@ -467,23 +439,10 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 的区别:
-     * </h3>
-     * <blockquote>
-     * <ol>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
-     * </ol>
-     * </blockquote>
-     * 
      * @param spaceMilliseconds
      *            总共相差的毫秒数
      * @return 如果 spaceMilliseconds 是0 直接返回0<br>
      *         如果 {@code spaceMilliseconds < 0},抛出 {@link IllegalArgumentException}
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
