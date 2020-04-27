@@ -17,28 +17,22 @@ package com.feilong.office.excel.loxia.convertor;
 
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+import com.feilong.office.excel.ExcelManipulateException;
+import com.feilong.office.excel.convertor.IntegerConvertor;
+import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.test.AbstractTest;
-
-import loxia.support.excel.convertor.IntegerConvertor;
-import loxia.support.excel.definition.ExcelCell;
-import loxia.support.excel.exception.ExcelManipulateException;
 
 public class IntegerConvertorTest extends AbstractTest{
 
-    private final ExcelCell                                   cellDefinition          = new ExcelCell();
+    private final ExcelCell cellDefinition          = new ExcelCell();
 
-    com.feilong.office.excel.loxia.convertor.IntegerConvertor feilongIntegerConvertor = new com.feilong.office.excel.loxia.convertor.IntegerConvertor();
+    IntegerConvertor        feilongIntegerConvertor = new IntegerConvertor();
     {
         cellDefinition.setMandatory(true);
-    }
-
-    @Test(expected = ExcelManipulateException.class)
-    public void testIntegerConvertorTest() throws ExcelManipulateException{
-        IntegerConvertor integerConvertor = new IntegerConvertor();
-        integerConvertor.convert("1.0", 1, "F2", cellDefinition);
     }
 
     //---------------------------------------------------------------
@@ -52,15 +46,15 @@ public class IntegerConvertorTest extends AbstractTest{
     //---------------------------------------------------------------
 
     @Test
-    public void testIntegerConvertorTest22() throws ExcelManipulateException{
+    public void testString() throws ExcelManipulateException{
         Integer convert = feilongIntegerConvertor.convert("1.0", 1, "F2", cellDefinition);
-        LOGGER.debug("" + convert);
+        assertNull(convert);
     }
 
     //---------------------------------------------------------------
 
     @Test
     public void testIntegerConvertorTest1(){
-        LOGGER.debug("" + toInteger("1.0"));//TODO:remove
+        assertNull(toInteger("1.0"));
     }
 }

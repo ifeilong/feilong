@@ -24,7 +24,6 @@ import java.util.Map;
 
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FilenameUtil;
-import com.feilong.office.excel.loxia.LoxiaExcelWriteUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

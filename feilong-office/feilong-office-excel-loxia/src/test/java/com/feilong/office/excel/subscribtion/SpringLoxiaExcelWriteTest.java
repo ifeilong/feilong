@@ -30,9 +30,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
+import com.feilong.office.excel.ExcelWriter;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import loxia.support.excel.ExcelWriter;
 
 @ContextConfiguration(locations = { "classpath*:loxia/subscribtion/spring-excel-2sheet.xml" })
 public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{

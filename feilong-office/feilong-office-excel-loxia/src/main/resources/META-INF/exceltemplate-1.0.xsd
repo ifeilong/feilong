@@ -9,7 +9,7 @@
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="cellstyle">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">

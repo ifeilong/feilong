@@ -8,6 +8,11 @@
 	</parent>
 	<artifactId>feilong-office-excel-loxia</artifactId>
 
+	<properties>
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -35,43 +40,6 @@
 			<artifactId>ooxml-schemas</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- <dependency>
-			<groupId>loxia2</groupId>
-			<artifactId>loxia2-support</artifactId>
-			<version>${version.loxia}</version>
-			<optional>true</optional>
-			<exclusions>
-			<exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			</exclusion>
-			<exclusion>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			</exclusion>
-			<exclusion>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			</exclusion>
-			<exclusion>
-			<groupId>spy</groupId>
-			<artifactId>spymemcached</artifactId>
-			</exclusion>
-			<exclusion>
-			<groupId>com.sun.javax.media</groupId>
-			<artifactId>jai_codec</artifactId>
-			</exclusion>
-			<exclusion>
-			<groupId>com.sun.javax.media</groupId>
-			<artifactId>jai_core</artifactId>
-			</exclusion>
-			<exclusion>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			</exclusion>
-			</exclusions>
-			</dependency> -->
 
 		<dependency>
 			<groupId>ognl</groupId>

@@ -164,7 +164,7 @@
 		<!-- http://poi.apache.org/ -->
 		<!-- http://poi.apache.org/devel/history/changes-3x.html -->
 		<!-- 4.0.1 之后需要 jdk8 -->
-		<version.poi>3.17</version.poi>
+		<version.poi>4.1.2</version.poi>
 		<!-- 新版poi需要这个jar -->
 		<version.ooxml-schemas>1.4</version.ooxml-schemas>
 
