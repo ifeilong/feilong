@@ -21,9 +21,10 @@ import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.getValue;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static com.feilong.servlet.http.HttpHeaders.ORIGIN;
 import static com.feilong.servlet.http.HttpHeaders.REFERER;
@@ -58,7 +59,6 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.EnumerationUtil;
 import com.feilong.core.util.MapUtil;
-import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.ReaderUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
@@ -268,13 +268,15 @@ public final class RequestUtil{
      */
     private static final String   REQUEST_BODY_SCOPE_ATTRIBUTE_NAME = RequestUtil.class.getName() + ".REQUEST_BODY";
 
+    //---------------------------------------------------------------
+
     /**
      * 获得用户真实IP 循环的IP头.
      * 
      * @since 3.0.0
      */
-    private static final String[] IP_HEADER_NAMES                   = StringUtil.tokenizeToStringArray(
-                    ResourceBundleUtil.getValue(getResourceBundle("config/feilong-request-clientIP-headers"), "clientIP.headerNames"),
+    private static final String[] IP_HEADER_NAMES                   = tokenizeToStringArray(
+                    getValue(getResourceBundle("config/feilong-request-clientIP-headers"), "clientIP.headerNames"),
                     ",");
 
     //---------------------------------------------------------------
@@ -285,27 +287,11 @@ public final class RequestUtil{
      *
      * @see com.feilong.io.entity.MimeType
      * @since 1.12.0
+     * @since 3.0.0 change to config
      */
-    private static final String[] STATIC_RESOURCE_SUFFIX            = toArray(
-                    ".bmp",
-                    ".jpe",
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".gif",
-                    ".ico",
-                    ".js",
-                    ".css",
-                    //  ".html",  since 1.12.4 排除, 很多 restful 的地址 会伪装成 htm和html ,导致误判断
-                    //  ".htm", since 1.12.4 排除, 很多 restful 的地址 会伪装成 htm和html ,导致误判断
-                    ".xml",
-                    ".swf",
-                    ".woff",
-                    ".woff2",
-                    ".ttf",
-                    ".mp3",
-                    ".zip",
-                    ".tar");
+    private static final String[] STATIC_RESOURCE_SUFFIX            = tokenizeToStringArray(
+                    getValue(getResourceBundle("config/feilong-request-staticResourceSuffix"), "request.staticResourceSuffix"),
+                    ",");
 
     //---------------------------------------------------------------
 

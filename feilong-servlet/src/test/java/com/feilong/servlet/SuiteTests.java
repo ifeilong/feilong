@@ -20,11 +20,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.servlet.http.CookieUtilTest;
+import com.feilong.servlet.http.requestutil.IsStaticResourceParameterizedTest;
 import com.feilong.servlet.http.requestutil.RequstUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 CookieUtilTest.class,
+                IsStaticResourceParameterizedTest.class,
                 RequstUtilSuiteTests.class
         //
 })
