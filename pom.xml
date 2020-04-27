@@ -155,7 +155,7 @@
 		<version.jsch>0.1.55</version.jsch>
 
 		<!-- https://jsoup.org/news/ -->
-		<version.jsoup>1.11.3</version.jsoup>
+		<version.jsoup>1.13.1</version.jsoup>
 
 		<version.javamail>1.4.7</version.javamail>
 		<version.javax.mail>1.6.2</version.javax.mail>
@@ -181,7 +181,7 @@
 		<!-- 4.0.1 之后需要 jdk8 -->
 		<version.poi>3.17</version.poi>
 		<!-- 新版poi需要这个jar -->
-		<version.ooxml-schemas>1.3</version.ooxml-schemas>
+		<version.ooxml-schemas>1.4</version.ooxml-schemas>
 
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.30</version.slf4j>
@@ -191,10 +191,6 @@
 		<!-- http://x-stream.github.io/news.html -->
 		<!-- #133: XStream 1.4.11 fails to run on a Java Runtime < 8. -->
 		<version.xstream>1.4.12</version.xstream>
-
-		<version.xml-apis>1.4.01</version.xml-apis>
-		<!-- https://xerces.apache.org/xerces2-j/releases.html -->
-		<version.xercesImpl>2.12.0</version.xercesImpl>
 
 		<!-- <version.velocity-engine>2.0</version.velocity-engine> -->
 		<version.velocity>1.7</version.velocity>
@@ -841,20 +837,6 @@
 			</dependency>
 
 			<!-- *********************json******************************* -->
-			<!-- xercesImpl 解决This parser does not support specification "null" version "null" -->
-			<dependency>
-				<groupId>xerces</groupId>
-				<artifactId>xercesImpl</artifactId>
-				<version>${version.xercesImpl}</version>
-			</dependency>
-
-			<!-- xml-apis -->
-			<dependency>
-				<groupId>xml-apis</groupId>
-				<artifactId>xml-apis</artifactId>
-				<version>${version.xml-apis}</version>
-			</dependency>
-
 			<!-- xstream -->
 			<dependency>
 				<groupId>com.thoughtworks.xstream</groupId>
