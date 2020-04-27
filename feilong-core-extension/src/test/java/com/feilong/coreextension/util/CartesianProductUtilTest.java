@@ -38,9 +38,6 @@ public class CartesianProductUtilTest extends AbstractTest{
         }
     }
 
-    /**
-     * Test collection util test11.
-     */
     @Test
     public void testCollectionUtilTest11(){
         Integer[] array1 = { 1, 2, 3 };
@@ -49,7 +46,6 @@ public class CartesianProductUtilTest extends AbstractTest{
         Integer[] array4 = { 4, 8 };
 
         LOGGER.debug(JsonUtil.format(CartesianProductUtil.cartesianProduct(array1, array2, array3, array4), 0, 4));
-        LOGGER.debug(JsonUtil.format(CartesianProductUtil.cartesianProduct(array1)));
 
     }
 

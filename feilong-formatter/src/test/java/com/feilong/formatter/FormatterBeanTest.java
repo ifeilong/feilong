@@ -26,12 +26,7 @@ import org.junit.Test;
 import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
- */
-public class FormatterUtilBeanTest extends AbstractTest{
+public class FormatterBeanTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("static-method")
@@ -44,6 +39,7 @@ public class FormatterUtilBeanTest extends AbstractTest{
         user.setMoney(toBigDecimal(999));
         user.setName("xinge");
         user.setNickNames(toArray("jinxin", "feilong"));
+
         LOGGER.debug(formatToSimpleTable(user));
     }
 

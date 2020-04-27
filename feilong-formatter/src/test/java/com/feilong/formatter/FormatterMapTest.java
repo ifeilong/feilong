@@ -28,12 +28,7 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
- */
-public class FormatterUtilMapTest extends AbstractTest{
+public class FormatterMapTest extends AbstractTest{
 
     @Test
     public final void testFormatToSimpleTable(){

@@ -26,16 +26,11 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.Address;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
- */
 public class FormatterUtilTest extends AbstractTest{
 
     @Test
     @SuppressWarnings("static-method")
-    public final void testFormatToSimpleTable2(){
+    public final void test(){
         List<Address> list = toList(
                         new Address("china", "shanghai", "216000", "wenshui wanrong.lu 888"),
                         new Address("china", "beijing", "216001", "wenshui wanrong.lu 666"),
@@ -43,12 +38,7 @@ public class FormatterUtilTest extends AbstractTest{
                         new Address("china", "tianjing", "216600", "wenshui wanrong.lu 999"));
 
         //---------------------------------------------------------------
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(list));
-        }
-
-        //---------------------------------------------------------------
+        LOGGER.debug(JsonUtil.format(list));
 
         LOGGER.debug(formatToSimpleTable(list));
     }

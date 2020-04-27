@@ -53,7 +53,6 @@ public class DefaultTransformerTest extends AbstractTest{
 
         List<User> list = toList(//
                         user
-
         //
         );
 

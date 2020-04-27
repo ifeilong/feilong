@@ -49,6 +49,6 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 UtilSuiteTests.class
         //
 })
-public class FeiLongSuiteTests{
+public class SuiteTests{
 
 }
