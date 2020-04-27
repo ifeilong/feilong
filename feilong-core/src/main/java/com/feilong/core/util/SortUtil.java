@@ -287,7 +287,7 @@ public final class SortUtil{
      * try{
      *     Collections.sort(
      *                     list,
-     *                     new FixedOrderComparator<>(
+     *                     new FixedOrderComparator{@code <>}(
      *                                     StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
      *                                     StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
@@ -369,7 +369,7 @@ public final class SortUtil{
      * try{
      *     Collections.sort(
      *                     list,
-     *                     new FixedOrderComparator<>(
+     *                     new FixedOrderComparator{@code <>}(
      *                                     StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
      *                                     StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
      *                                     StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,

@@ -38,7 +38,7 @@ import com.feilong.net.mail.MailSender;
 import com.feilong.net.mail.entity.MailSenderConfig;
 
 /**
- * 这是一个一体化 数据-->转成Excel/CVS-->保存文件到硬盘-->变成附件发邮件给相关人员 的组件.
+ * 这是一个一体化 数据{@code -->}转成Excel/CVS{@code -->}保存文件到硬盘{@code -->}变成附件发邮件给相关人员 的组件.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>

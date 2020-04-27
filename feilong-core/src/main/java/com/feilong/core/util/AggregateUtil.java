@@ -503,7 +503,9 @@ public final class AggregateUtil{
      * </blockquote>
      *
      * @param <O>
-     *            the generic type
+     *            bean对象 或者可以被提取属性的对象
+     * @param <T>
+     *            keyPropertyName对应的属性值
      * @param beanIterable
      *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param keyPropertyName
@@ -557,8 +559,6 @@ public final class AggregateUtil{
      *                                 hasEntry("张飞", toBigDecimal(20)),
      *                                 hasEntry("关羽", toBigDecimal(20))));
      * </pre>
-     * 
-     * </blockquote>
      *
      * @param <O>
      *            the generic type

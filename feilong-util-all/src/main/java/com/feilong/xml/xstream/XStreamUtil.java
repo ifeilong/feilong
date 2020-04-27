@@ -329,6 +329,8 @@ public final class XStreamUtil{
      * <b>1.不带XStreamConfig参数</b> <br>
      * 使用 {@code com.feilong.tools.xstream.XStreamUtil.toXML(user, null)},则返回
      * 
+     * </p>
+     * 
      * <pre class="code">
      * {@code
      *  <com.feilong.test.User>
@@ -339,9 +341,6 @@ public final class XStreamUtil{
      * </com.feilong.test.User>
      * }
      * </pre>
-     * 
-     * </p>
-     * 
      * 
      * <p>
      * 

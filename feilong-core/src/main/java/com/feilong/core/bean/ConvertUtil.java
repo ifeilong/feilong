@@ -2525,7 +2525,7 @@ public final class ConvertUtil{
      *         
      *         <span style="color:green">//-------------------------------------------------</span>
      * 
-     *         Set{@code <User>} set = new LinkedHashSet<>();
+     *         Set{@code <User>} set = new LinkedHashSet{@code <>}();
      *         set.add(null);
      * 
      *         assertEquals(list, toSet(<span style="color:red">(User) null</span>));
