@@ -151,7 +151,7 @@ public final class URLUtil{
             return new URL(spec);
         }catch (Exception e){
             // no URL -> treat as file path
-            LOGGER.info("[new URL(\"{}\")] exception,cause by :[{}],will try call [toFileURL(\"{}\")]", spec, e.getMessage(), spec);
+            LOGGER.trace("[new URL(\"{}\")] exception,cause by :[{}],will try call [toFileURL(\"{}\")]", spec, e.getMessage(), spec);
             return toFileURL(spec);
         }
     }

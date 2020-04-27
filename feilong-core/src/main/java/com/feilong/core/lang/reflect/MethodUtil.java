@@ -597,8 +597,8 @@ public final class MethodUtil{
 
             //---------------------------------------------------------------
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("bingo,from class:[{}],find name [{}] method", klass.getSimpleName(), staticMethodName);
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("bingo,from class:[{}],find name [{}] method", klass.getSimpleName(), staticMethodName);
             }
 
             //---------------------------------------------------------------

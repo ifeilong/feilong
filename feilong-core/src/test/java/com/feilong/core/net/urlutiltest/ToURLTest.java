@@ -20,21 +20,15 @@ import org.junit.Test;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class URLUtilToURLTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToURLTest extends AbstractTest{
 
-    /**
-     * Test to URL.
-     */
     @Test
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
         LOGGER.debug("" + URLUtil.toURL(spec));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test to URL null.
