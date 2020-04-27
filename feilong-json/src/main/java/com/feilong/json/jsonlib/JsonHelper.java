@@ -27,16 +27,16 @@ import org.apache.commons.lang3.ClassUtils;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
+import com.feilong.json.lib.json.JSON;
+import com.feilong.json.lib.json.JSONArray;
+import com.feilong.json.lib.json.JSONNull;
+import com.feilong.json.lib.json.JSONObject;
+import com.feilong.json.lib.json.JSONString;
+import com.feilong.json.lib.json.JsonConfig;
+import com.feilong.json.lib.json.util.JSONTokener;
+import com.feilong.json.lib.json.util.JSONUtils;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONNull;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONString;
-import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
-import net.sf.json.util.JSONTokener;
-import net.sf.json.util.JSONUtils;
 
 /**
  * json处理的辅助类.
@@ -117,14 +117,14 @@ public final class JsonHelper{
      * @param jsonConfig
      *            the json config
      * @return the json
-     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.util.JSONUtils#isArray(Object)
+     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object, JsonConfig)
+     * @see com.feilong.json.lib.json.JSONObject#fromObject(Object, JsonConfig)
+     * @see com.feilong.json.lib.json.util.JSONUtils#isArray(Object)
      * @see java.lang.Class#isEnum()
-     * @see net.sf.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
+     * @see com.feilong.json.lib.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
      * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator)
      * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)
-     * @see net.sf.json.JSONSerializer#toJSON(Object)
+     * @see com.feilong.json.lib.json.JSONSerializer#toJSON(Object)
      */
     static JSON toJSON(Object obj,JsonConfig jsonConfig){
         JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JAVA_TO_JSON_CONFIG);
@@ -155,8 +155,8 @@ public final class JsonHelper{
      * @param obj
      *            the obj
      * @return true, if is need convert to JSON array
-     * @see net.sf.json.JSONArray#_fromJSONTokener(net.sf.json.util.JSONTokener, JsonConfig)
-     * @see net.sf.json.util.JSONUtils#isArray(Object)
+     * @see com.feilong.json.lib.json.JSONArray#_fromJSONTokener(com.feilong.json.lib.json.util.JSONTokener, JsonConfig)
+     * @see com.feilong.json.lib.json.util.JSONUtils#isArray(Object)
      */
     private static boolean isNeedConvertToJSONArray(Object obj){
         if (obj instanceof String){
@@ -249,7 +249,7 @@ public final class JsonHelper{
      * @param useJsonConfig
      *            如果是null,将使用 {@link #DEFAULT_JSON_CONFIG_INSTANCE}
      * @return the JSON array
-     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
+     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object, JsonConfig)
      */
     static JSONArray toJSONArray(Object obj,JsonConfig useJsonConfig){
         return JSONArray.fromObject(obj, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
@@ -267,7 +267,7 @@ public final class JsonHelper{
      * @param useJsonConfig
      *            如果是null,将使用 {@link #DEFAULT_JSON_CONFIG_INSTANCE}
      * @return the JSON object
-     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
+     * @see com.feilong.json.lib.json.JSONObject#fromObject(Object, JsonConfig)
      */
     static JSONObject toJSONObject(Object object,JsonConfig useJsonConfig){
         return JSONObject.fromObject(object, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));

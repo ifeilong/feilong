@@ -23,9 +23,8 @@ import org.junit.Test;
 import com.feilong.json.jsonlib.entity.BeanIntIgnoreNull;
 import com.feilong.json.jsonlib.entity.BeanIntIgnoreNullNests;
 import com.feilong.json.jsonlib.entity.BeanIntIgnoreNullParent;
+import com.feilong.json.lib.json.JSONObject;
 import com.feilong.test.AbstractTest;
-
-import net.sf.json.JSONObject;
 
 public class FormatBeanIgnoreNullTest extends AbstractTest{
 

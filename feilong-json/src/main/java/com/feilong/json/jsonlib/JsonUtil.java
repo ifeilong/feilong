@@ -46,15 +46,14 @@ import com.feilong.json.jsonlib.builder.JavaToJsonConfigBuilder;
 import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
 import com.feilong.json.jsonlib.builder.JsonToJavaConfigBuilder;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
+import com.feilong.json.lib.ezmorph.MorpherRegistry;
+import com.feilong.json.lib.ezmorph.object.DateMorpher;
+import com.feilong.json.lib.json.JSON;
+import com.feilong.json.lib.json.JSONArray;
+import com.feilong.json.lib.json.JSONObject;
+import com.feilong.json.lib.json.JsonConfig;
+import com.feilong.json.lib.json.util.JSONUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import net.sf.ezmorph.MorpherRegistry;
-import net.sf.ezmorph.object.DateMorpher;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.JSONUtils;
 
 /**
  * json处理工具类.
@@ -80,7 +79,7 @@ import net.sf.json.util.JSONUtils;
  * 
  * <blockquote>
  * <p>
- * see {@link net.sf.json.JSONObject#_fromMap(Map, JsonConfig)}
+ * see {@link com.feilong.json.lib.json.JSONObject#_fromMap(Map, JsonConfig)}
  * </p>
  * <ul>
  * <li>key不能是null</li>
@@ -111,11 +110,11 @@ import net.sf.json.util.JSONUtils;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
+ * @see com.feilong.json.lib.json.JSONSerializer#toJSON(Object, JsonConfig)
  * 
- * @see net.sf.json.JSONObject
- * @see net.sf.json.JSONArray
- * @see net.sf.json.JSONNull
+ * @see com.feilong.json.lib.json.JSONObject
+ * @see com.feilong.json.lib.json.JSONArray
+ * @see com.feilong.json.lib.json.JSONNull
  * @since 1.0.5
  */
 //XXX @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
@@ -840,8 +839,8 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see net.sf.json.JSONArray#fromObject(Object)
-     * @see net.sf.json.JSONArray#getJSONObject(int)
+     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
+     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
@@ -926,7 +925,7 @@ public final class JsonUtil{
      * @param json
      *            e.g. [{'name':'get'},{'name':'set'}]
      * @param rootClass
-     *            the klass,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
+     *            the klass,see {@link com.feilong.json.lib.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(Object, JsonToJavaConfig)
@@ -1015,8 +1014,8 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
-     * @see net.sf.json.JSONArray#getJSONObject(int)
-     * @see net.sf.json.JSONArray#fromObject(Object)
+     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
+     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
      */
     public static <T> List<T> toList(Object json,JsonToJavaConfig jsonToJavaConfig){
@@ -1174,7 +1173,7 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
-     * @see net.sf.json.JSONObject#keys()
+     * @see com.feilong.json.lib.json.JSONObject#keys()
      * @see #toBean(Object, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
      * @since 1.9.4
@@ -1258,11 +1257,11 @@ public final class JsonUtil{
      *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
      *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
      * @param rootClass
-     *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
+     *            e.g. Person.class,see {@link com.feilong.json.lib.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null <br>
      *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JsonConfig#setRootClass(Class)
+     * @see com.feilong.json.lib.json.JsonConfig#setRootClass(Class)
      * @see #toBean(Object, JsonToJavaConfig)
      */
     public static <T> T toBean(Object json,Class<T> rootClass){
@@ -1345,7 +1344,7 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JsonConfig#setRootClass(Class)
+     * @see com.feilong.json.lib.json.JsonConfig#setRootClass(Class)
      * @since 1.9.4
      */
     @SuppressWarnings("unchecked")

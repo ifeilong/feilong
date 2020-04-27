@@ -18,7 +18,7 @@ package net.sf.json.util;
 
 import org.apache.commons.lang.StringUtils;
 
-import net.sf.json.JSONException;
+import com.feilong.json.lib.json.JSONException;
 
 /**
  * Transforms a string into a valid Java identifier.<br>
@@ -33,7 +33,7 @@ import net.sf.json.JSONException;
  * <li>STRICT: always throws a JSONException, does not perform transformation.</li>
  * </ul>
  * 
- * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 public abstract class JavaIdentifierTransformer{
 

@@ -15,11 +15,11 @@
  */
 package com.feilong.json.jsonlib.processor.defaultvalue;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONNull;
-import net.sf.json.processors.DefaultDefaultValueProcessor;
-import net.sf.json.processors.DefaultValueProcessor;
-import net.sf.json.util.JSONUtils;
+import com.feilong.json.lib.json.JSONArray;
+import com.feilong.json.lib.json.JSONNull;
+import com.feilong.json.lib.json.processors.DefaultDefaultValueProcessor;
+import com.feilong.json.lib.json.processors.DefaultValueProcessor;
+import com.feilong.json.lib.json.util.JSONUtils;
 
 /**
  * 通用的默认值处理.
@@ -42,7 +42,7 @@ import net.sf.json.util.JSONUtils;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see net.sf.json.processors.DefaultDefaultValueProcessor
+ * @see com.feilong.json.lib.json.processors.DefaultDefaultValueProcessor
  * @since 1.11.5
  */
 public class CommonDefaultValueProcessor implements DefaultValueProcessor{

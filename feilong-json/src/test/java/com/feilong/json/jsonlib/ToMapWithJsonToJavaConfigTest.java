@@ -30,9 +30,8 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.json.jsonlib.entity.MyBean;
+import com.feilong.json.lib.json.JSONObject;
 import com.feilong.store.member.Person;
-
-import net.sf.json.JSONObject;
 
 public class ToMapWithJsonToJavaConfigTest{
 

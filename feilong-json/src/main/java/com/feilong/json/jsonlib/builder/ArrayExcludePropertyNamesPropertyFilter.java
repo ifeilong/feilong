@@ -15,7 +15,7 @@
  */
 package com.feilong.json.jsonlib.builder;
 
-import net.sf.json.util.PropertyFilter;
+import com.feilong.json.lib.json.util.PropertyFilter;
 
 /**
  * 排除属性过滤器, {@code json ---> java} 的时候,想排除某个属性.

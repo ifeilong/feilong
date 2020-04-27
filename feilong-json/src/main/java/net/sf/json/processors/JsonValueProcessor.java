@@ -16,13 +16,13 @@
 
 package net.sf.json.processors;
 
-import net.sf.json.JSONException;
-import net.sf.json.JsonConfig;
+import com.feilong.json.lib.json.JSONException;
+import com.feilong.json.lib.json.JsonConfig;
 
 /**
  * Base interface for custom serialization per property.
  *
- * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 public interface JsonValueProcessor{
 

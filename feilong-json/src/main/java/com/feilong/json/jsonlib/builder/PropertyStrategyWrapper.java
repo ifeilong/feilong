@@ -19,9 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
-
-import net.sf.json.JSONException;
-import net.sf.json.util.PropertySetStrategy;
+import com.feilong.json.lib.json.JSONException;
+import com.feilong.json.lib.json.util.PropertySetStrategy;
 
 /**
  * Ignore missing properties with Json-Lib.
@@ -34,7 +33,7 @@ import net.sf.json.util.PropertySetStrategy;
  *      href="http://javaskeleton.blogspot.com/2011/05/ignore-missing-properties-with-json-lib.html">ignore-missing-properties-with-json-lib
  *      </a>
  * @see <a href="http://envy2002.iteye.com/blog/1682738">envy2002.iteye.com</a>
- * @see net.sf.json.util.PropertySetStrategy
+ * @see com.feilong.json.lib.json.util.PropertySetStrategy
  * @since 1.0.5
  * @since 1.11.0 change package
  */

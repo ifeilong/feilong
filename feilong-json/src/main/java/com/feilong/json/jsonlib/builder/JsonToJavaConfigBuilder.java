@@ -20,11 +20,11 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import java.util.Map;
 
 import com.feilong.json.jsonlib.JsonToJavaConfig;
+import com.feilong.json.lib.json.JsonConfig;
+import com.feilong.json.lib.json.util.PropertyFilter;
+import com.feilong.json.lib.json.util.PropertySetStrategy;
 
-import net.sf.json.JsonConfig;
 import net.sf.json.util.JavaIdentifierTransformer;
-import net.sf.json.util.PropertyFilter;
-import net.sf.json.util.PropertySetStrategy;
 
 /**
  * 

@@ -20,8 +20,8 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import java.util.Calendar;
 
 import com.feilong.core.date.DateUtil;
+import com.feilong.json.lib.json.JsonConfig;
 
-import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**

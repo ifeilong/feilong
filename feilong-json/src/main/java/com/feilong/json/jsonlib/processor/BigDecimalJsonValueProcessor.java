@@ -21,8 +21,8 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import java.math.BigDecimal;
 
 import com.feilong.core.lang.NumberUtil;
+import com.feilong.json.lib.json.JsonConfig;
 
-import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
@@ -30,7 +30,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * 
  * <p>
  * 如果不使用这个处理器,对于 BigDecimal格式输出成json,在json to string 字符串的时候,会剔除末尾的0和小数点,会出现循环截断的情况,参见
- * {@link net.sf.json.util.JSONUtils#numberToString(Number)}:
+ * {@link com.feilong.json.lib.json.util.JSONUtils#numberToString(Number)}:
  * </p>
  * 
  * <h3>示例:</h3>
@@ -98,7 +98,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see net.sf.json.util.JSONUtils#numberToString(Number)
+ * @see com.feilong.json.lib.json.util.JSONUtils#numberToString(Number)
  * @since 1.2.2
  */
 public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{

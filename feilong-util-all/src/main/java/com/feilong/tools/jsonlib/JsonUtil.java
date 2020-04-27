@@ -26,10 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonToJavaConfig;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
+import com.feilong.json.lib.json.JSONArray;
+import com.feilong.json.lib.json.JSONObject;
 
 /**
  * Json 工具类.
@@ -634,8 +632,8 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see net.sf.json.JSONArray#fromObject(Object)
-     * @see net.sf.json.JSONArray#getJSONObject(int)
+     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
+     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
@@ -700,7 +698,6 @@ public final class JsonUtil{
      * @param json
      *            e.g. [{'name':'get'},{'name':'set'}]
      * @param rootClass
-     *            the klass,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(Object, JsonToJavaConfig)
@@ -784,8 +781,8 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
-     * @see net.sf.json.JSONArray#getJSONObject(int)
-     * @see net.sf.json.JSONArray#fromObject(Object)
+     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
+     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toList(Object,
      *             JsonToJavaConfig)}
@@ -928,7 +925,7 @@ public final class JsonUtil{
      *            the json to java config
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
-     * @see net.sf.json.JSONObject#keys()
+     * @see com.feilong.json.lib.json.JSONObject#keys()
      * @see #toBean(Object, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
      * @since 1.9.4
@@ -988,13 +985,8 @@ public final class JsonUtil{
      *            e.g. {'name':'get','dateAttr':'2009-11-12'}<br>
      *            可以是 json字符串,也可以是JSONObject<br>
      *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
-     *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
-     * @param rootClass
-     *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null <br>
      *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JsonConfig#setRootClass(Class)
      * @see #toBean(Object, JsonToJavaConfig)
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toBean(Object, Class) }
      */
@@ -1072,8 +1064,6 @@ public final class JsonUtil{
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JsonConfig#setRootClass(Class)
      * @since 1.9.4
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use
      *             {@link com.feilong.json.jsonlib.JsonUtil#toBean(Object, JsonToJavaConfig)}

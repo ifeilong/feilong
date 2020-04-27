@@ -17,8 +17,8 @@ package com.feilong.json.jsonlib.processor;
 
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
+import com.feilong.json.lib.json.JsonConfig;
 
-import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**

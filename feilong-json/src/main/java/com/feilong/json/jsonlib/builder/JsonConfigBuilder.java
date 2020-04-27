@@ -30,12 +30,12 @@ import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.ToStringJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.defaultvalue.CommonDefaultValueProcessor;
+import com.feilong.json.lib.json.JsonConfig;
+import com.feilong.json.lib.json.util.CycleDetectionStrategy;
+import com.feilong.json.lib.json.util.PropertyFilter;
 
-import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
-import net.sf.json.util.CycleDetectionStrategy;
-import net.sf.json.util.PropertyFilter;
 
 /**
  * {@link JsonConfig} 构造器.
@@ -189,7 +189,7 @@ public final class JsonConfigBuilder{
      *
      * @return the default json config
      * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-     * @see net.sf.json.util.CycleDetectionStrategy#LENIENT
+     * @see com.feilong.json.lib.json.util.CycleDetectionStrategy#LENIENT
      * 
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">通过setAllowNonStringKeys解决java.lang.ClassCastException: JSON keys must be
      *      strings</a>

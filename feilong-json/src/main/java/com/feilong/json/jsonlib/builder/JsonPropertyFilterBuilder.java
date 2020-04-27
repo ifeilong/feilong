@@ -19,9 +19,8 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 import com.feilong.json.jsonlib.JavaToJsonConfig;
-
-import net.sf.json.filters.OrPropertyFilter;
-import net.sf.json.util.PropertyFilter;
+import com.feilong.json.lib.json.filters.OrPropertyFilter;
+import com.feilong.json.lib.json.util.PropertyFilter;
 
 /**
  * The Class JsonPropertyFilterBuilder.
@@ -46,7 +45,7 @@ class JsonPropertyFilterBuilder{
      * @param useJavaToJsonConfig
      *            the use java to json config
      * @return the property filter
-     * @see net.sf.json.filters.AndPropertyFilter
+     * @see com.feilong.json.lib.json.filters.AndPropertyFilter
      */
     static PropertyFilter build(JavaToJsonConfig useJavaToJsonConfig){
         boolean isIgnoreNullValueElement = useJavaToJsonConfig.getIsIgnoreNullValueElement();

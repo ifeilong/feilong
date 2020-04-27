@@ -33,14 +33,13 @@ import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.HttpMethodTestType;
 import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
 import com.feilong.json.jsonlib.entity.MyBean;
+import com.feilong.json.lib.json.JSON;
+import com.feilong.json.lib.json.JSONArray;
+import com.feilong.json.lib.json.JSONObject;
+import com.feilong.json.lib.json.JsonConfig;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserInfo;
-
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 public class JsonHelperTest extends AbstractJsonTest{
 
