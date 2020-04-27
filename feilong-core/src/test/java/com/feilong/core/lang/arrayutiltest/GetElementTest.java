@@ -29,11 +29,6 @@ import com.feilong.core.lang.ArrayUtil;
  */
 public class GetElementTest{
 
-    //***************com.feilong.core.lang.ArrayUtil.getElement(Object, int)**************************************
-
-    /**
-     * Test get by array.
-     */
     @Test
     public void testGetElement(){
         assertEquals("1", ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 2));
@@ -44,7 +39,8 @@ public class GetElementTest{
      */
     @Test
     public void testGetElementPrimitiveType(){
-        assertEquals(2, ArrayUtil.getElement(new int[] { 5, 8, 2, 0 }, 2));
+        Object element = ArrayUtil.getElement(new int[] { 5, 8, 2, 0 }, 2);
+        assertEquals(2, element);
     }
 
     /**

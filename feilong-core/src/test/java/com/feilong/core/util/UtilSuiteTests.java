@@ -33,11 +33,6 @@ import com.feilong.core.util.resourcebundleutiltest.ResourceBundleUtilSuiteTests
 import com.feilong.core.util.sortutiltest.SortUtilSuiteTests;
 import com.feilong.core.util.transformer.TransformerSuiteTests;
 
-/**
- * The Class FeiLongUtilSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 EnumerationUtilParameterizedTest.class,

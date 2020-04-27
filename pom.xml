@@ -15,20 +15,6 @@
 
 	<url>https://github.com/ifeilong/feilong</url>
 
-	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
-	<!-- The scm url must start with 'scm:' -->
-	<scm>
-		<url>https://github.com/ifeilong/feilong</url>
-		<connection>scm:git:https://github.com/ifeilong/feilong</connection>
-		<developerConnection>scm:git:git@github.com:ifeilong/feilong.git</developerConnection>
-	</scm>
-
-	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/ifeilong/feilong/issues</url>
-	</issueManagement>
-
 	<modules>
 		<module>feilong-core</module>
 		<module>feilong-validator</module>
@@ -67,10 +53,9 @@
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
-		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
+		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
+		<maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>
 		<maven-compiler-plugin.encoding>${project.build.sourceEncoding}</maven-compiler-plugin.encoding>
 		<!-- **********************end maven-compiler-plugin config******************************************* -->
 
@@ -1575,6 +1560,19 @@
 		</profile>
 	</profiles>
 
+	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
+	<!-- The scm url must start with 'scm:' -->
+	<scm>
+		<url>https://github.com/ifeilong/feilong</url>
+		<connection>scm:git:https://github.com/ifeilong/feilong</connection>
+		<developerConnection>scm:git:git@github.com:ifeilong/feilong.git</developerConnection>
+	</scm>
+
+	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/ifeilong/feilong/issues</url>
+	</issueManagement>
 
 	<!-- 项目发布管理 -->
 	<distributionManagement>

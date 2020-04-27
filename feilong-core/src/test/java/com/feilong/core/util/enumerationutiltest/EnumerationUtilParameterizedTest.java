@@ -15,6 +15,9 @@
  */
 package com.feilong.core.util.enumerationutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toEnumeration;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Enumeration;
@@ -22,19 +25,10 @@ import java.util.Enumeration;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.EnumerationUtil;
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toEnumeration;
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class EnumerationUtilParameterizedTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.8
- */
 public class EnumerationUtilParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Enumeration<Object>, Object, Boolean>{
 
     /**
@@ -45,20 +39,17 @@ public class EnumerationUtilParameterizedTest extends Abstract2ParamsAndResultPa
     @Parameters(name = "index:{index}:EnumerationUtil.contains({0}, {1})={2}")
     public static Iterable<Object[]> data(){
         return toList(
-                        toArray(null, "a", false),
-                        toArray(toEnumeration(toList("4", "5")), "a", false),
-                        toArray(toEnumeration(toList("4", "5")), "4", true),
-                        toArray(toEnumeration(toList("4", "5", "")), "", true),
-                        toArray(toEnumeration(toList("4", "5", "", null)), null, true)
+                        (Object[]) toArray(null, "a", false),
+                        toArray(toEnumeration(ConvertUtil.<String> toList("4", "5")), "a", false),
+                        toArray(toEnumeration(ConvertUtil.<String> toList("4", "5")), "4", true),
+                        toArray(toEnumeration(ConvertUtil.<String> toList("4", "5", "")), "", true),
+                        toArray(toEnumeration(ConvertUtil.<String> toList("4", "5", "", null)), null, true)
         //
         );
     }
 
-    /**
-     * Test contains.
-     */
     @Test
-    public void testContains(){
+    public void test(){
         assertEquals(expectedValue, EnumerationUtil.contains(input1, input2));
     }
 }

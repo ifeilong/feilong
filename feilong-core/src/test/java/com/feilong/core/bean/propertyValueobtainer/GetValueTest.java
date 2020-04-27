@@ -38,7 +38,8 @@ public class GetValueTest{
         Member member = new Member();
         member.setId(1L);
 
-        assertEquals(1L, PropertyValueObtainer.getValue(member, new PropertyDescriptor("id", Member.class)));
+        Object value = PropertyValueObtainer.getValue(member, new PropertyDescriptor("id", Member.class));
+        assertEquals(1L, value);
     }
 
     @Test(expected = NullPointerException.class)

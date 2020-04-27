@@ -26,7 +26,7 @@ public class SpelTest extends AbstractTest{
     @Test
     public void run(){
         String expressionString = "#{T(com.feilong.velocity.VelocityUtil).INSTANCE.parseTemplateWithClasspathResourceLoader('content.vm',null)}";
-        LOGGER.debug("{}", SpelUtil.getTemplateValue(expressionString));
+        LOGGER.debug("" + SpelUtil.getTemplateValue(expressionString));
 
     }
 

@@ -47,7 +47,8 @@ public class InvokeMethodWithParamsTest{
      */
     @Test
     public void testInvokeMethodNoParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId"));
+        Object invokeMethod = MethodUtil.invokeMethod(new User(), "getId");
+        assertEquals(0L, invokeMethod);
     }
 
     /**
@@ -55,7 +56,8 @@ public class InvokeMethodWithParamsTest{
      */
     @Test
     public void testInvokeMethodNullParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", null));
+        Object invokeMethod = MethodUtil.invokeMethod(new User(), "getId", null);
+        assertEquals(0L, invokeMethod);
     }
 
     /**
@@ -63,16 +65,18 @@ public class InvokeMethodWithParamsTest{
      */
     @Test
     public void testInvokeMethodEmptyParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", EMPTY_OBJECT_ARRAY));
+        Object invokeMethod = MethodUtil.invokeMethod(new User(), "getId", EMPTY_OBJECT_ARRAY);
+        assertEquals(0L, invokeMethod);
     }
+    //*******************PrivateMethod********************************************************
 
     /**
      * Test invoke method private empty params.
      */
-    //*******************PrivateMethod********************************************************
     @Test(expected = ReflectException.class)
     public void testInvokeMethodPrivateEmptyParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new PrivateMethod(), "name"));
+        Object invokeMethod = MethodUtil.invokeMethod(new PrivateMethod(), "name");
+        assertEquals(0L, invokeMethod);
     }
 
     /**

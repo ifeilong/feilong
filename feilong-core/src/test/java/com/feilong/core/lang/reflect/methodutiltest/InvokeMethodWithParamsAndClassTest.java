@@ -28,16 +28,8 @@ import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.store.member.User;
 
-/**
- * The Class MethodUtilInvokeMethodWithParamsAndClassTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class InvokeMethodWithParamsAndClassTest{
 
-    /**
-     * Test invoke method all pack type.
-     */
     @Test
     public void testInvokeMethodAllPackType(){
         Class<?>[] parameterTypes1 = { Integer.TYPE };
@@ -54,7 +46,8 @@ public class InvokeMethodWithParamsAndClassTest{
      */
     @Test
     public void testInvokeMethodNullParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", null, EMPTY_CLASS_ARRAY));
+        Object invokeMethod = MethodUtil.invokeMethod(new User(), "getId", null, EMPTY_CLASS_ARRAY);
+        assertEquals(0L, invokeMethod);
     }
 
     /**
@@ -62,7 +55,8 @@ public class InvokeMethodWithParamsAndClassTest{
      */
     @Test
     public void testInvokeMethodNullParamsAndNullClasss(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", null, null));
+        Object invokeMethod = MethodUtil.invokeMethod(new User(), "getId", null, null);
+        assertEquals(0L, invokeMethod);
     }
 
     /**
@@ -70,16 +64,18 @@ public class InvokeMethodWithParamsAndClassTest{
      */
     @Test
     public void testInvokeMethodEmptyParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
+        Object invokeMethod = MethodUtil.invokeMethod(new User(), "getId", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
+        assertEquals(0L, invokeMethod);
     }
 
+    //*******************PrivateMethod********************************************************
     /**
      * Test invoke method private empty params.
      */
-    //*******************PrivateMethod********************************************************
     @Test(expected = ReflectException.class)
     public void testInvokeMethodPrivateEmptyParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
+        Object invokeMethod = MethodUtil.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
+        assertEquals(0L, invokeMethod);
     }
 
     /**
