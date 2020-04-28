@@ -21,9 +21,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
+import com.feilong.office.excel.AbstractLoxiaWriteTest;
 
-public class ItemDescriptionExcelWriteTest extends AbstractLoxiaExcelWriteTest{
+public class ItemDescriptionExcelWriteTest extends AbstractLoxiaWriteTest{
 
     @Test
     public void test(){

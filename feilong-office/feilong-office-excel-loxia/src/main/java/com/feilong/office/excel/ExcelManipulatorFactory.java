@@ -15,13 +15,19 @@
  */
 package com.feilong.office.excel;
 
+import static com.feilong.core.date.DateUtil.formatDuration;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.xmlrules.DigesterLoader;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 import com.feilong.office.excel.definition.ExcelSheet;
@@ -30,6 +36,11 @@ import com.feilong.office.excel.definition.ExcelSheet;
  * A factory for creating ExcelManipulator objects.
  */
 public class ExcelManipulatorFactory{
+
+    /** The Constant log. */
+    private static final Logger           LOGGER           = LoggerFactory.getLogger(ExcelManipulatorFactory.class);
+
+    //---------------------------------------------------------------
 
     /** The Constant RULE_FILE. */
     private static final String           RULE_FILE        = "config/loxia/excel-definition-rule.xml";
@@ -52,6 +63,8 @@ public class ExcelManipulatorFactory{
     public void setConfig(String...configurations){
         try{
             for (String config : configurations){
+                Date beginDate = new Date();
+
                 Digester digester = DigesterLoader.createDigester(
                                 new InputSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(RULE_FILE)));
                 digester.setValidating(false);
@@ -62,6 +75,16 @@ public class ExcelManipulatorFactory{
                 for (ExcelSheet excelSheet : list){
                     sheetDefinitions.put(excelSheet.getName(), excelSheet);
                 }
+
+                //---------------------------------------------------------------
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug(
+                                    "parse config:[{}],list size:[{}],use time: [{}]",
+                                    config,
+                                    CollectionUtils.size(list),
+                                    formatDuration(beginDate));
+                }
+
             }
         }catch (Exception e){
             throw new RuntimeException("Read excel config failed.", e);

@@ -30,7 +30,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * The Class AbstractLoxiaExcelWriteTest.
  */
-public abstract class AbstractLoxiaExcelWriteTest extends AbstractTest{
+public abstract class AbstractLoxiaWriteTest extends AbstractTest{
 
     /**
      * Builds the.
@@ -68,13 +68,13 @@ public abstract class AbstractLoxiaExcelWriteTest extends AbstractTest{
      */
     protected static void build(String templateFileName,String configurations,String[] sheetNames,Map<String, Object> beans){
         String outputFileName = Slf4jUtil.format(
-                        "/Users/feilong/Downloads/{}{}.{}",
+                        "/Users/feilong/feilong/excel/{}{}.{}",
                         sheetNames,
                         nowTimestamp(),
                         FilenameUtil.getExtension(templateFileName));
 
         String excelTemplateLocation = "classpath:loxia/" + templateFileName;
-        LoxiaExcelWriteUtil.write(excelTemplateLocation, configurations, sheetNames, beans, outputFileName);
+        ExcelWriteUtil.write(excelTemplateLocation, configurations, sheetNames, beans, outputFileName);
 
         DesktopUtil.open(outputFileName);
     }

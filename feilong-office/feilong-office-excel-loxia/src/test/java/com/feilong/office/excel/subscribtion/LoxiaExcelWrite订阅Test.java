@@ -24,9 +24,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
+import com.feilong.office.excel.AbstractLoxiaWriteTest;
 
-public class LoxiaExcelWrite订阅Test extends AbstractLoxiaExcelWriteTest{
+public class LoxiaExcelWrite订阅Test extends AbstractLoxiaWriteTest{
 
     @Test
     public void test(){

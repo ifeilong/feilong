@@ -22,7 +22,7 @@ import java.util.Map;
 
 import com.feilong.context.Data;
 import com.feilong.context.filecreator.ListDataFileCreator;
-import com.feilong.office.excel.LoxiaExcelWriteUtil;
+import com.feilong.office.excel.ExcelWriteUtil;
 
 /**
  * The Class LoxiaSimpleListLoopExcelFileCreator.
@@ -75,7 +75,7 @@ public class LoxiaSimpleListLoopExcelFileCreator<T extends Data> implements List
 
         //---------------------------------------------------------------
         String filePath = SpelUtil.getTemplateValue(outputFilePathExpression);
-        LoxiaExcelWriteUtil.write(excelTemplateLocation, xmlSheetConfigurations, sheetName, beans, filePath);
+        ExcelWriteUtil.write(excelTemplateLocation, xmlSheetConfigurations, sheetName, beans, filePath);
 
         return filePath;
     }

@@ -72,8 +72,8 @@ public class ExcelUtil{
      * @return the cell position
      */
     public static int[] getCellPosition(String cellIndex){
-        CellReference cell = new CellReference(cellIndex);
-        return new int[] { cell.getRow(), cell.getCol() };
+        CellReference cellReference = new CellReference(cellIndex);
+        return new int[] { cellReference.getRow(), cellReference.getCol() };
     }
 
     /**
@@ -88,8 +88,8 @@ public class ExcelUtil{
      * @return the string
      */
     static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
-        CellReference cell = new CellReference(cellIndex);
-        CellReference newCell = new CellReference(cell.getRow() + rowOffset, cell.getCol() + colOffset);
+        CellReference cellReference = new CellReference(cellIndex);
+        CellReference newCell = new CellReference(cellReference.getRow() + rowOffset, cellReference.getCol() + colOffset);
         return newCell.formatAsString().replaceAll("\\$", "");
     }
 

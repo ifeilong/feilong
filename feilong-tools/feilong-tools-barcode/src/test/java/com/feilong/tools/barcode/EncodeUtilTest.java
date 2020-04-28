@@ -60,7 +60,7 @@ public class EncodeUtilTest extends AbstractTest{
         barcodeConfig.setBarcodeFormat(BarcodeFormat.UPC_A);
         //11或者12
         contents = "https://qr.95516.com/48020000/42171909246221001152996469";
-        outputImageFile = "/Users/feilong/Downloads/" + nowTimestamp() + ".pdf";
+        outputImageFile = "/Users/feilong/feilong/" + nowTimestamp() + ".pdf";
     }
 
     @Test
@@ -78,7 +78,7 @@ public class EncodeUtilTest extends AbstractTest{
         //        contents = "smsto:13800138000:你好,我来自志文工作室";
 
         LOGGER.debug("the param contents:{}", contents);
-        outputImageFile = "/Users/feilong/Downloads/test2.png";
+        outputImageFile = "/Users/feilong/feilong/test2.png";
     }
 
     /**

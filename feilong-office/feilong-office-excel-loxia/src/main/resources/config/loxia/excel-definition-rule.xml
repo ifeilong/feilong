@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <digester-rules>
+	<!-- sheets -->
 	<pattern value="sheets">
 		<object-create-rule classname="java.util.ArrayList" />
 	</pattern>
 
+	<!-- sheets/sheet -->
 	<pattern value="sheets/sheet">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelSheet" />
 		<set-properties-rule>
@@ -13,6 +15,7 @@
 		<set-next-rule methodname="add" />
 	</pattern>
 
+	<!-- sheets/sheet/block -->
 	<pattern value="sheets/sheet/block">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelBlock" />
 		<set-properties-rule>
@@ -22,11 +25,14 @@
 			<alias attr-name="loop" prop-name="loop" />
 			<alias attr-name="direction" prop-name="direction" />
 		</set-properties-rule>
+
 		<call-method-rule methodname="setLoopClassByClassName" paramcount="1" />
 		<call-param-rule paramnumber="0" attrname="loopClass" />
+
 		<set-next-rule methodname="addExcelBlock" />
 	</pattern>
 
+	<!-- sheets/sheet/block/loopbreakcondition -->
 	<pattern value="sheets/sheet/block/loopbreakcondition">
 		<object-create-rule classname="com.feilong.office.excel.definition.LoopBreakCondition" />
 		<set-properties-rule>
@@ -37,6 +43,7 @@
 		<set-next-rule methodname="setBreakCondition" />
 	</pattern>
 
+	<!-- sheets/sheet/block/childblock -->
 	<pattern value="sheets/sheet/block/childblock">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelBlock" />
 		<set-properties-rule>
@@ -46,10 +53,13 @@
 		<set-next-rule methodname="setChildBlock" />
 	</pattern>
 
+	<!-- */cell/expr -->
 	<pattern value="*/cell/expr">
 		<call-method-rule methodname="setDataExpr" paramcount="0" />
 	</pattern>
 
+
+	<!-- */cell -->
 	<pattern value="*/cell">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelCell" />
 		<set-properties-rule>
@@ -63,6 +73,7 @@
 		<set-next-rule methodname="addCell" />
 	</pattern>
 
+	<!-- */block/cellstyle -->
 	<pattern value="*/block/cellstyle">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelCellConditionStyle" />
 		<set-properties-rule>
@@ -74,6 +85,7 @@
 		<set-next-rule methodname="addStyle" />
 	</pattern>
 
+	<!-- */childblock/cellstyle -->
 	<pattern value="*/childblock/cellstyle">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelCellConditionStyle" />
 		<set-properties-rule>
@@ -85,6 +97,7 @@
 		<set-next-rule methodname="addStyle" />
 	</pattern>
 
+	<!-- */cell/cellstyle -->
 	<pattern value="*/cell/cellstyle">
 		<object-create-rule classname="com.feilong.office.excel.definition.ExcelCellConditionStyle" />
 		<set-properties-rule>

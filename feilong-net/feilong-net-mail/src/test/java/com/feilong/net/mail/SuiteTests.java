@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.net.mail;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.office.excel.consultant.ConsultantReadTest;
-import com.feilong.office.excel.consultant.ConsultantWriteTest;
-import com.feilong.office.excel.loxia.convertor.IntegerConvertorTest;
+import com.feilong.net.mail.setter.RecipientsSetterTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                IntegerConvertorTest.class,
-                ConsultantWriteTest.class,
-
-                ConsultantReadTest.class,
-        //
+                RecipientsSetterTest.class,
+                MailAttachFileSenderSimpleTest.class,
+        //                
 })
 public class SuiteTests{
 

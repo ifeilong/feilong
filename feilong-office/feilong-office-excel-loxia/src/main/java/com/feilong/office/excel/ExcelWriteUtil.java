@@ -46,13 +46,13 @@ import com.feilong.json.jsonlib.JsonUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.0
  */
-public class LoxiaExcelWriteUtil{
+public class ExcelWriteUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoxiaExcelWriteUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelWriteUtil.class);
 
     /** Don't let anyone instantiate this class. */
-    private LoxiaExcelWriteUtil(){
+    private ExcelWriteUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");

@@ -16,19 +16,24 @@
 package com.feilong.office.excel;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.io.FileUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -37,13 +42,13 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.0
  */
-public class LoxiaExcelReaderUtil{
+public class ExcelReaderUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoxiaExcelReaderUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelReaderUtil.class);
 
     /** Don't let anyone instantiate this class. */
-    private LoxiaExcelReaderUtil(){
+    private ExcelReaderUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -56,9 +61,9 @@ public class LoxiaExcelReaderUtil{
      *
      * @param <T>
      *            the generic type
-     * @param configuration
-     *            配置文件, 如 sheets/train-course.xml
-     * @param sheet
+     * @param xmlSheetConfiguration
+     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
+     * @param sheetName
      *            sheet 比如 trainCourseSheet
      * @param dataName
      *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
@@ -68,8 +73,8 @@ public class LoxiaExcelReaderUtil{
      *            第几个sheet,从0开始,比如1
      * @return the list
      */
-    public static <T> List<T> getList(String configuration,String sheet,String dataName,String fileName,int sheetNo){
-        return getList(toArray(configuration), sheet, dataName, fileName, sheetNo);
+    public static <T> List<T> getList(String xmlSheetConfiguration,String sheetName,String dataName,String fileName,int sheetNo){
+        return getList(toArray(xmlSheetConfiguration), sheetName, dataName, fileName, sheetNo);
     }
 
     /**
@@ -77,9 +82,9 @@ public class LoxiaExcelReaderUtil{
      *
      * @param <T>
      *            the generic type
-     * @param configuration
-     *            配置文件, 如 sheets/train-course.xml
-     * @param sheet
+     * @param xmlSheetConfiguration
+     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
+     * @param sheetName
      *            sheet 比如 trainCourseSheet
      * @param dataName
      *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
@@ -89,8 +94,8 @@ public class LoxiaExcelReaderUtil{
      *            the sheet no
      * @return the list
      */
-    public static <T> List<T> getList(String configuration,String sheet,String dataName,InputStream inputStream,int sheetNo){
-        ExcelReader excelReader = getExcelReader(toArray(configuration), sheet);
+    public static <T> List<T> getList(String xmlSheetConfiguration,String sheetName,String dataName,InputStream inputStream,int sheetNo){
+        ExcelReader excelReader = getExcelReader(toArray(xmlSheetConfiguration), sheetName);
         return getList(excelReader, dataName, inputStream, sheetNo);
     }
 
@@ -99,9 +104,9 @@ public class LoxiaExcelReaderUtil{
      *
      * @param <T>
      *            the generic type
-     * @param configurations
-     *            配置文件, 如 {"sheets/train-course.xml"}
-     * @param sheet
+     * @param xmlSheetConfigurations
+     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
+     * @param sheetName
      *            sheet 比如 trainCourseSheet
      * @param dataName
      *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
@@ -111,8 +116,8 @@ public class LoxiaExcelReaderUtil{
      *            the sheet no
      * @return the list
      */
-    public static <T> List<T> getList(String[] configurations,String sheet,String dataName,String fileName,int sheetNo){
-        ExcelReader excelReader = getExcelReader(configurations, sheet);
+    public static <T> List<T> getList(String[] xmlSheetConfigurations,String sheetName,String dataName,String fileName,int sheetNo){
+        ExcelReader excelReader = getExcelReader(xmlSheetConfigurations, sheetName);
         return getList(excelReader, dataName, fileName, sheetNo);
     }
 
@@ -121,18 +126,21 @@ public class LoxiaExcelReaderUtil{
     /**
      * 获得 excel reader.
      *
-     * @param configurations
-     *            the configurations
-     * @param sheet
+     * @param xmlSheetConfigurations
+     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
+     * @param sheetName
      *            the sheet
      * @return the excel reader
      * @since 1.0.9
      */
-    private static ExcelReader getExcelReader(String[] configurations,String sheet){
+    private static ExcelReader getExcelReader(String[] xmlSheetConfigurations,String sheetName){
         ExcelManipulatorFactory excelManipulatorFactory = new ExcelManipulatorFactory();
-        excelManipulatorFactory.setConfig(configurations);
-        return excelManipulatorFactory.createExcelReader(sheet);
+        excelManipulatorFactory.setConfig(xmlSheetConfigurations);
+
+        return excelManipulatorFactory.createExcelReader(sheetName);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 list.
@@ -172,28 +180,40 @@ public class LoxiaExcelReaderUtil{
      */
     @SuppressWarnings("unchecked")
     private static <T> List<T> getList(ExcelReader excelReader,String dataName,InputStream inputStream,int sheetNo){
+        Date beginDate = new Date();
+
         Map<String, Object> beans = newHashMap();
         beans.put(dataName, new ArrayList<T>());
 
         ReadStatus readStatus = excelReader.readSheet(inputStream, sheetNo, beans);
 
         int status = readStatus.getStatus();
-        if (status == ReadStatus.STATUS_SUCCESS){
-            return (List<T>) beans.get(dataName);
+        if (status != ReadStatus.STATUS_SUCCESS){
+
+            List<Exception> exceptions = readStatus.getExceptions();
+
+            String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
+            String message = Slf4jUtil.format(
+                            pattern,
+                            readStatus.getStatus(),
+                            readStatus.getMessage(),
+                            exceptions.size(),
+                            exceptions.get(0).getStackTrace());
+            LOGGER.error(message);
+            throw new UncheckedIOException(new IOException(message));
         }
 
-        //---------------------------------------------------------------
-        List<Exception> exceptions = readStatus.getExceptions();
-
-        String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
-        String message = Slf4jUtil.format(
-                        pattern,
-                        readStatus.getStatus(),
-                        readStatus.getMessage(),
-                        exceptions.size(),
-                        exceptions.get(0).getStackTrace());
-        LOGGER.error(message);
-        throw new UncheckedIOException(new IOException(message));
+        //--------------------------------------------------------------- 
+        List<T> list = (List<T>) beans.get(dataName);
+        if (LOGGER.isInfoEnabled()){
+            Map<String, Object> map = newLinkedHashMap();
+            map.put("sheetNo", sheetNo);
+            map.put("dataName", dataName);
+            map.put("list size", CollectionUtils.size(list));
+            map.put("use time", formatDuration(beginDate));
+            LOGGER.info("use time: [{}]", JsonUtil.format(map));
+        }
+        return list;
     }
 
 }

@@ -411,7 +411,9 @@ public class DefaultExcelReader implements ExcelReader{
                                 value,
                                 cellDefinition,
                                 getPropertyType(result, cellDefinition));
-                LOGGER.debug("{}[Checked]:{}", ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
+                if (LOGGER.isTraceEnabled()){
+                    LOGGER.trace("{}[Checked]:{}", ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
+                }
                 ognlStack.setValue(cellDefinition.getDataName(), value);
             }catch (ExcelManipulateException e){
                 if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
@@ -468,12 +470,17 @@ public class DefaultExcelReader implements ExcelReader{
         if (cell == null){
             return null;
         }
+        //---------------------------------------------------------------
         Object value = null;
         CellValue cellValue = evaluator.evaluate(cell);
         if (cellValue == null){
-            LOGGER.debug("{}: null", ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("{}: null", ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
+            }
             return null;
         }
+
+        //---------------------------------------------------------------
         switch (cellValue.getCellType()) {
             case BLANK:
             case ERROR:
@@ -491,7 +498,12 @@ public class DefaultExcelReader implements ExcelReader{
             case STRING:
                 value = cellValue.getStringValue();
         }
-        LOGGER.debug("{}: {}", ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()), value);
+
+        //---------------------------------------------------------------
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("{}: {}", ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()), value);
+        }
+
         return value;
     }
 
@@ -563,7 +575,6 @@ public class DefaultExcelReader implements ExcelReader{
      */
     @SuppressWarnings("unchecked")
     private Class<? extends Object> getPropertyType(Object object,String dataName) throws Exception{
-        //log.debug("Get Class for '" + dataName +"' in " + object.getClass());
         if (object instanceof Map){
             LOGGER.debug("getPropertyType for Map[{}] with Key {}.", object, dataName);
             if (object == null){
@@ -576,7 +587,13 @@ public class DefaultExcelReader implements ExcelReader{
             }
             return map.get(dataName).getClass();
         }
-        LOGGER.debug("getPropertyType for Object[{}] with property {}.", object, dataName);
+
+        //---------------------------------------------------------------
+
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("getPropertyType [{}] property {}.", object, dataName);
+        }
+
         return getPropertyTypeWithClass(object.getClass(), dataName);
     }
 

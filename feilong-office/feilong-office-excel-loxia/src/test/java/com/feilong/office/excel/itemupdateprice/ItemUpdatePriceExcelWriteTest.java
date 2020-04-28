@@ -22,9 +22,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
+import com.feilong.office.excel.AbstractLoxiaWriteTest;
 
-public class ItemUpdatePriceExcelWriteTest extends AbstractLoxiaExcelWriteTest{
+public class ItemUpdatePriceExcelWriteTest extends AbstractLoxiaWriteTest{
 
     @Test
     public void test(){

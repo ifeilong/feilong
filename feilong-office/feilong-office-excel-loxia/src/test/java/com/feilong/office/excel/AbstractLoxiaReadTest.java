@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail;
+package com.feilong.office.excel;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.util.List;
 
-import com.feilong.net.mail.setter.RecipientsSetterTest;
+import com.feilong.test.AbstractTest;
 
-@RunWith(Suite.class)
-@SuiteClasses({ //
+/**
+ * The Class AbstractLoxiaExcelWriteTest.
+ */
+public abstract class AbstractLoxiaReadTest extends AbstractTest{
 
-                RecipientsSetterTest.class,
-        //                
-})
-public class FeiLongEmailSuiteTests{
+    protected static <T> List<T> build(String xmlSheetConfigurations,String sheetName,String dataName,String fileName){
+        return ExcelReaderUtil.getList(xmlSheetConfigurations, sheetName, dataName, fileName, 0);
+
+    }
 
 }

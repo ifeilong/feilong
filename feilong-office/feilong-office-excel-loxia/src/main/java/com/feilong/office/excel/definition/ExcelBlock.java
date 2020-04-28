@@ -255,6 +255,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         this.direction = direction;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 loop class.
      *
@@ -274,24 +276,24 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         this.loopClass = loopClass;
     }
 
-    /**
-     * Gets the cell.
-     *
-     * @param position
-     *            the position
-     * @return the cell
-     */
-    public ExcelCell getCell(String position){
-        if (cells.size() == 0){
-            return null;
-        }
-        for (ExcelCell cell : cells){
-            if (ExcelUtil.getCellIndex(cell.getRow(), cell.getCol()).equalsIgnoreCase(position.trim())){
-                return cell;
-            }
-        }
-        return null;
-    }
+    //    /**
+    //     * Gets the cell.
+    //     *
+    //     * @param position
+    //     *            the position
+    //     * @return the cell
+    //     */
+    //    public ExcelCell getCell(String position){
+    //        if (cells.size() == 0){
+    //            return null;
+    //        }
+    //        for (ExcelCell cell : cells){
+    //            if (ExcelUtil.getCellIndex(cell.getRow(), cell.getCol()).equalsIgnoreCase(position.trim())){
+    //                return cell;
+    //            }
+    //        }
+    //        return null;
+    //    }
 
     /**
      * Gets the cells.
@@ -482,29 +484,27 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      * @return the excel block
      */
     public ExcelBlock cloneBlock(){
-        ExcelBlock block = new ExcelBlock();
-        block.setBreakCondition(breakCondition == null ? null : breakCondition.cloneCondition());
-        block.setChild(isChildBlock);
-        block.setDataName(dataName);
-        block.setEndCol(endCol);
-        block.setEndRow(endRow);
-        block.setLoop(isLoop);
-        block.setDirection(direction);
-        block.setLoopClass(loopClass);
-        block.setStartCol(startCol);
-        block.setStartRow(startRow);
+        ExcelBlock excelBlock = new ExcelBlock();
+        excelBlock.setBreakCondition(breakCondition == null ? null : breakCondition.cloneCondition());
+        excelBlock.setChild(isChildBlock);
+        excelBlock.setDataName(dataName);
+        excelBlock.setEndCol(endCol);
+        excelBlock.setEndRow(endRow);
+        excelBlock.setLoop(isLoop);
+        excelBlock.setDirection(direction);
+        excelBlock.setLoopClass(loopClass);
+        excelBlock.setStartCol(startCol);
+        excelBlock.setStartRow(startRow);
 
-        for (ExcelCellConditionStyle style : getStyles()){
-            block.addStyle(style.cloneStyle());
+        //---------------------------------------------------------------
+        for (ExcelCellConditionStyle excelCellConditionStyle : getStyles()){
+            excelBlock.addStyle(excelCellConditionStyle.cloneStyle());
         }
-
-        for (ExcelCell cell : getCells()){
-            block.addCell(cell.cloneCell());
+        for (ExcelCell excelCell : getCells()){
+            excelBlock.addCell(excelCell.cloneCell());
         }
-
-        block.setChildBlock(childBlock == null ? null : childBlock.cloneBlock());
-
-        return block;
+        excelBlock.setChildBlock(childBlock == null ? null : childBlock.cloneBlock());
+        return excelBlock;
     }
 
 }

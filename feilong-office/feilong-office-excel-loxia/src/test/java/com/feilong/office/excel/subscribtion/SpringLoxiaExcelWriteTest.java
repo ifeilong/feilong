@@ -50,7 +50,7 @@ public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{
         List<SubscribtionCommand> blist = alist;
 
         String outputFileName = Slf4jUtil
-                        .format("/Users/feilong/Downloads/{}{}.{}", "111", nowTimestamp(), FilenameUtil.getExtension(templateFileName));
+                        .format("/Users/feilong/feilong/excel/{}{}.{}", "111", nowTimestamp(), FilenameUtil.getExtension(templateFileName));
 
         Map<String, Object> beans = toMap(//
                         "alist",
