@@ -118,9 +118,8 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Character){

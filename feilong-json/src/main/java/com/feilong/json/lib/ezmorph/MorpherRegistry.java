@@ -168,6 +168,8 @@ public class MorpherRegistry implements Serializable{
             }
         }
 
+        //---------------------------------------------------------------
+
         Morpher[] morphers = getMorphersFor(target);
         for (int i = 0; i < morphers.length; i++){
             Morpher morpher = morphers[i];

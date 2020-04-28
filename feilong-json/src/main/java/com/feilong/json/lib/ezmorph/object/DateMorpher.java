@@ -235,6 +235,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
             throw new MorphException(value.getClass() + " is not supported");
         }
 
+        //---------------------------------------------------------------
+
         String strValue = (String) value;
         SimpleDateFormat dateParser = null;
 

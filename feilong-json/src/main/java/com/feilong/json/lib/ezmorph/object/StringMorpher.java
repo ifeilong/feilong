@@ -84,6 +84,8 @@ public final class StringMorpher implements ObjectMorpher{
             throw new MorphException("Class not supported. " + value.getClass());
         }
 
+        //---------------------------------------------------------------
+
         if (String.class.isAssignableFrom(value.getClass())){
             return value;
         }

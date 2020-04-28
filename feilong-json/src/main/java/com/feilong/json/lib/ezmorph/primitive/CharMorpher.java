@@ -123,6 +123,8 @@ public final class CharMorpher extends AbstractPrimitiveMorpher{
             throw new MorphException("value is null");
         }
 
+        //---------------------------------------------------------------
+
         if (value instanceof Character){
             return ((Character) value).charValue();
         }

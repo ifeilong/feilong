@@ -125,6 +125,8 @@ public final class DoubleMorpher extends AbstractDecimalMorpher{
             throw new MorphException("value is null");
         }
 
+        //---------------------------------------------------------------
+
         if (value instanceof Number){
             return ((Number) value).doubleValue();
         }

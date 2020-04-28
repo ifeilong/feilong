@@ -124,6 +124,8 @@ public final class LongMorpher extends AbstractIntegerMorpher{
             throw new MorphException("value is null");
         }
 
+        //---------------------------------------------------------------
+
         if (value instanceof Number){
             return ((Number) value).longValue();
         }

@@ -54,6 +54,8 @@ public final class JSONUtils{
     /** Constant for char '. */
     public static final String           SINGLE_QUOTE            = "'";
 
+    //---------------------------------------------------------------
+
     /** The Constant FUNCTION_BODY_PATTERN. */
     private static final String          FUNCTION_BODY_PATTERN   = "^function[ ]?\\(.*?\\)[ \n\t]*\\{(.*?)\\}$";
 
@@ -69,27 +71,29 @@ public final class JSONUtils{
     /** The Constant FUNCTION_PREFIX. */
     private static final String          FUNCTION_PREFIX         = "function";
 
+    //---------------------------------------------------------------
+
     /** The Constant morpherRegistry. */
     private static final MorpherRegistry morpherRegistry         = new MorpherRegistry();
+
+    //---------------------------------------------------------------
 
     static{
         // register standard morphers
         MorphUtils.registerStandardMorphers(morpherRegistry);
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * Transforms the string into a valid Java Identifier.<br>
-     * The default strategy is JavaIdentifierTransformer.NOOP
+     * Returns the singleton MorpherRegistry.
      *
-     * @param key
-     *            the key
-     * @return the string
-     * @throws JSONException
-     *             if the string can not be transformed.
+     * @return the morpher registry
      */
-    public static String convertToJavaIdentifier(String key){
-        return convertToJavaIdentifier(key, new JsonConfig());
+    public static MorpherRegistry getMorpherRegistry(){
+        return morpherRegistry;
     }
+    //---------------------------------------------------------------
 
     /**
      * Transforms the string into a valid Java Identifier.<br>
@@ -174,15 +178,6 @@ public final class JSONUtils{
             return type;
         }
         return getInnerComponentType(type.getComponentType());
-    }
-
-    /**
-     * Returns the singleton MorpherRegistry.
-     *
-     * @return the morpher registry
-     */
-    public static MorpherRegistry getMorpherRegistry(){
-        return morpherRegistry;
     }
 
     /**

@@ -97,6 +97,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1663435868052425703L;
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a JSONArray.<br>
      * Inspects the object type to call the correct JSONArray factory method.
@@ -328,38 +330,41 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         int[] dimensions = JSONArray.getDimensions(jsonArray);
         Object array = Array.newInstance(objectClass == null ? Object.class : objectClass, dimensions);
         int size = jsonArray.size();
+
+        //---------------------------------------------------------------
         for (int i = 0; i < size; i++){
             Object value = jsonArray.get(i);
             if (JSONUtils.isNull(value)){
                 Array.set(array, i, null);
-            }else{
-                Class type = value.getClass();
-                if (JSONArray.class.isAssignableFrom(type)){
-                    Array.set(array, i, toArray((JSONArray) value, objectClass, classMap));
-                }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type)
-                                || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-                    if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                        value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                    }
-                    Array.set(array, i, value);
-                }else if (JSONUtils.isNumber(type)){
-                    if (objectClass != null && (Byte.class.isAssignableFrom(objectClass) || Byte.TYPE.isAssignableFrom(objectClass))){
-                        Array.set(array, i, Byte.valueOf(String.valueOf(value)));
-                    }else if (objectClass != null
-                                    && (Short.class.isAssignableFrom(objectClass) || Short.TYPE.isAssignableFrom(objectClass))){
-                        Array.set(array, i, Short.valueOf(String.valueOf(value)));
-                    }else{
-                        Array.set(array, i, value);
-                    }
+                continue;
+            }
+
+            //---------------------------------------------------------------
+            Class type = value.getClass();
+            if (JSONArray.class.isAssignableFrom(type)){
+                Array.set(array, i, toArray((JSONArray) value, objectClass, classMap));
+            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || Character.class.isAssignableFrom(type)
+                            || JSONFunction.class.isAssignableFrom(type)){
+                if (objectClass != null && !objectClass.isAssignableFrom(type)){
+                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
+                }
+                Array.set(array, i, value);
+            }else if (JSONUtils.isNumber(type)){
+                if (objectClass != null && (Byte.class.isAssignableFrom(objectClass) || Byte.TYPE.isAssignableFrom(objectClass))){
+                    Array.set(array, i, Byte.valueOf(String.valueOf(value)));
+                }else if (objectClass != null && (Short.class.isAssignableFrom(objectClass) || Short.TYPE.isAssignableFrom(objectClass))){
+                    Array.set(array, i, Short.valueOf(String.valueOf(value)));
                 }else{
-                    if (objectClass != null){
-                        JsonConfig jsc = jsonConfig.copy();
-                        jsc.setRootClass(objectClass);
-                        jsc.setClassMap(classMap);
-                        Array.set(array, i, JSONObject.toBean((JSONObject) value, jsc));
-                    }else{
-                        Array.set(array, i, JSONObject.toBean((JSONObject) value));
-                    }
+                    Array.set(array, i, value);
+                }
+            }else{
+                if (objectClass != null){
+                    JsonConfig jsc = jsonConfig.copy();
+                    jsc.setRootClass(objectClass);
+                    jsc.setClassMap(classMap);
+                    Array.set(array, i, JSONObject.toBean((JSONObject) value, jsc));
+                }else{
+                    Array.set(array, i, JSONObject.toBean((JSONObject) value));
                 }
             }
         }
@@ -390,25 +395,25 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             Object value = jsonArray.get(i);
             if (JSONUtils.isNull(value)){
                 Array.set(array, i, null);
+                continue;
+            }
+            Class type = value.getClass();
+            if (JSONArray.class.isAssignableFrom(type)){
+                Array.set(array, i, toArray((JSONArray) value, root, jsonConfig));
+            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
+                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
+                if (objectClass != null && !objectClass.isAssignableFrom(type)){
+                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
+                }
+                Array.set(array, i, value);
             }else{
-                Class type = value.getClass();
-                if (JSONArray.class.isAssignableFrom(type)){
-                    Array.set(array, i, toArray((JSONArray) value, root, jsonConfig));
-                }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                                || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-                    if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                        value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                    }
-                    Array.set(array, i, value);
-                }else{
-                    try{
-                        Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(root.getClass(), null);
-                        Array.set(array, i, JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                    }catch (JSONException jsone){
-                        throw jsone;
-                    }catch (Exception e){
-                        throw new JSONException(e);
-                    }
+                try{
+                    Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(root.getClass(), null);
+                    Array.set(array, i, JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
+                }catch (JSONException jsone){
+                    throw jsone;
+                }catch (Exception e){
+                    throw new JSONException(e);
                 }
             }
         }
@@ -484,26 +489,26 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
             if (JSONUtils.isNull(value)){
                 collection.add(null);
-            }else{
-                Class type = value.getClass();
-                if (JSONArray.class.isAssignableFrom(value.getClass())){
-                    collection.add(toCollection((JSONArray) value, jsonConfig));
-                }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                                || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
+                continue;
+            }
+            Class type = value.getClass();
+            if (JSONArray.class.isAssignableFrom(value.getClass())){
+                collection.add(toCollection((JSONArray) value, jsonConfig));
+            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
+                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
 
-                    if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                        value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                    }
-                    collection.add(value);
+                if (objectClass != null && !objectClass.isAssignableFrom(type)){
+                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
+                }
+                collection.add(value);
+            }else{
+                if (objectClass != null){
+                    JsonConfig jsc = jsonConfig.copy();
+                    jsc.setRootClass(objectClass);
+                    jsc.setClassMap(classMap);
+                    collection.add(JSONObject.toBean((JSONObject) value, jsc));
                 }else{
-                    if (objectClass != null){
-                        JsonConfig jsc = jsonConfig.copy();
-                        jsc.setRootClass(objectClass);
-                        jsc.setClassMap(classMap);
-                        collection.add(JSONObject.toBean((JSONObject) value, jsc));
-                    }else{
-                        collection.add(JSONObject.toBean((JSONObject) value));
-                    }
+                    collection.add(JSONObject.toBean((JSONObject) value));
                 }
             }
         }
@@ -535,22 +540,22 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             Object value = jsonArray.get(i);
             if (JSONUtils.isNull(value)){
                 list.add(null);
+                continue;
+            }
+            Class type = value.getClass();
+            if (JSONArray.class.isAssignableFrom(type)){
+                list.add(toList((JSONArray) value, root, jsonConfig));
+            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
+                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
+                list.add(value);
             }else{
-                Class type = value.getClass();
-                if (JSONArray.class.isAssignableFrom(type)){
-                    list.add(toList((JSONArray) value, root, jsonConfig));
-                }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                                || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-                    list.add(value);
-                }else{
-                    try{
-                        Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(root.getClass(), null);
-                        list.add(JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                    }catch (JSONException jsone){
-                        throw jsone;
-                    }catch (Exception e){
-                        throw new JSONException(e);
-                    }
+                try{
+                    Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(root.getClass(), null);
+                    list.add(JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
+                }catch (JSONException jsone){
+                    throw jsone;
+                }catch (Exception e){
+                    throw new JSONException(e);
                 }
             }
         }
@@ -1248,20 +1253,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      */
     @Override
     public boolean add(Object value){
-        return add(value, new JsonConfig());
-    }
-
-    /**
-     * 添加.
-     *
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean add(Object value,JsonConfig jsonConfig){
-        element(value, jsonConfig);
+        element(value, new JsonConfig());
         return true;
     }
 
@@ -1475,9 +1467,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (value instanceof JSONArray){
             elements.add(value);
             return this;
-        }else{
-            return element(_fromCollection(value, jsonConfig));
         }
+        return element(_fromCollection(value, jsonConfig));
     }
 
     /**
@@ -1569,9 +1560,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 element(value, jsonConfig);
             }
             return this;
-        }else{
-            return element(index, _fromCollection(value, jsonConfig));
         }
+        return element(index, _fromCollection(value, jsonConfig));
     }
 
     /**
@@ -1672,9 +1662,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 element(value, jsonConfig);
             }
             return this;
-        }else{
-            return element(index, JSONObject.fromObject(value, jsonConfig));
         }
+        return element(index, JSONObject.fromObject(value, jsonConfig));
     }
 
     /**
@@ -1855,9 +1844,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (value instanceof JSONObject){
             elements.add(value);
             return this;
-        }else{
-            return element(JSONObject.fromObject(value, jsonConfig));
         }
+        return element(JSONObject.fromObject(value, jsonConfig));
     }
 
     /**
@@ -1972,13 +1960,11 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             if (JSONNull.getInstance().equals(o1)){
                 if (JSONNull.getInstance().equals(o2)){
                     continue;
-                }else{
-                    return false;
                 }
-            }else{
-                if (JSONNull.getInstance().equals(o2)){
-                    return false;
-                }
+                return false;
+            }
+            if (JSONNull.getInstance().equals(o2)){
+                return false;
             }
 
             if (o1 instanceof JSONArray && o2 instanceof JSONArray){
@@ -2049,10 +2035,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      */
     @Override
     public Object get(int index){
-        /*
-         * Object o = opt( index ); if( o == null ){ throw new JSONException(
-         * "JSONArray[" + index + "] not found." ); } return o;
-         */
         return this.elements.get(index);
     }
 

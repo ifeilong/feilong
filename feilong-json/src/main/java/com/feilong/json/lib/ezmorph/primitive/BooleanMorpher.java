@@ -121,6 +121,7 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
             throw new MorphException("value is null");
         }
 
+        //---------------------------------------------------------------
         if (value instanceof Boolean){
             return ((Boolean) value).booleanValue();
         }else if (value instanceof Number){

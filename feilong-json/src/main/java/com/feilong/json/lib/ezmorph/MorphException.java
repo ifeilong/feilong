@@ -30,13 +30,7 @@ public class MorphException extends NestableRuntimeException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -540093801787033824L;
 
-    // ----------------------------------------------------------- Constructors
-
-    /**
-     * The root cause of this <code>ConversionException</code>, compatible
-     * with JDK 1.4's extensions to <code>java.lang.Throwable</code>.
-     */
-    protected Throwable       cause            = null;
+    //---------------------------------------------------------------
 
     /**
      * Construct a new exception with the specified message.
@@ -57,30 +51,17 @@ public class MorphException extends NestableRuntimeException{
      *            The root cause of this exception
      */
     public MorphException(String message, Throwable cause){
-        super(message);
-        this.cause = cause;
+        super(message, cause);
     }
 
-    // ------------------------------------------------------------- Properties
-
     /**
-     * Construct a new exception with the specified root cause.
+     * Instantiates a new morph exception.
      *
      * @param cause
-     *            The root cause of this exception
+     *            the cause
      */
     public MorphException(Throwable cause){
-        super(cause.getMessage());
-        this.cause = cause;
+        super(cause);
     }
 
-    /**
-     * Returns the cause of this exception.
-     *
-     * @return a Throwable that represents the cause of this exception
-     */
-    @Override
-    public Throwable getCause(){
-        return this.cause;
-    }
 }
