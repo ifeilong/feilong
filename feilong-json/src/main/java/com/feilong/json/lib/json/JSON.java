@@ -52,6 +52,8 @@ public interface JSON extends Serializable{
      */
     int size();
 
+    //---------------------------------------------------------------
+
     /**
      * Make a prettyprinted JSON text.
      * <p>
@@ -86,6 +88,8 @@ public interface JSON extends Serializable{
      *             If the object contains an invalid number.
      */
     String toString(int indentFactor,int indent);
+
+    //---------------------------------------------------------------
 
     /**
      * Write the contents as JSON text to a writer. For compactness, no

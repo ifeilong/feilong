@@ -48,7 +48,6 @@ public class RegexpUtils{
      * @return the matcher
      */
     public static RegexpMatcher getMatcher(String pattern,boolean multiline){
-
         return new JdkRegexpMatcher(pattern, true);
     }
 

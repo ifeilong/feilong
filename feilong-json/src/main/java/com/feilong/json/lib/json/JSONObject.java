@@ -160,29 +160,38 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     public static JSONObject fromObject(Object object,JsonConfig jsonConfig){
         if (object == null || JSONUtils.isNull(object)){
             return new JSONObject(true);
-        }else if (object instanceof Enum){
-            throw new JSONException("'object' is an Enum. Use JSONArray instead");
-        }else if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
-            throw new JSONException("'object' is an Annotation.");
-        }else if (object instanceof JSONObject){
-            return _fromJSONObject((JSONObject) object, jsonConfig);
-        }else if (object instanceof DynaBean){
-            return _fromDynaBean((DynaBean) object, jsonConfig);
-        }else if (object instanceof JSONTokener){
-            return _fromJSONTokener((JSONTokener) object, jsonConfig);
-        }else if (object instanceof JSONString){
-            return _fromJSONString((JSONString) object, jsonConfig);
-        }else if (object instanceof Map){
-            return _fromMap((Map) object, jsonConfig);
-        }else if (object instanceof String){
-            return _fromString((String) object, jsonConfig);
-        }else if (JSONUtils.isNumber(object) || JSONUtils.isBoolean(object) || JSONUtils.isString(object)){
-            return new JSONObject();
-        }else if (JSONUtils.isArray(object)){
-            throw new JSONException("'object' is an array. Use JSONArray instead");
-        }else{
-            return _fromBean(object, jsonConfig);
         }
+        if (object instanceof Enum){
+            throw new JSONException("'object' is an Enum. Use JSONArray instead");
+        }
+        if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
+            throw new JSONException("'object' is an Annotation.");
+        }
+        if (object instanceof JSONObject){
+            return _fromJSONObject((JSONObject) object, jsonConfig);
+        }
+        if (object instanceof DynaBean){
+            return _fromDynaBean((DynaBean) object, jsonConfig);
+        }
+        if (object instanceof JSONTokener){
+            return _fromJSONTokener((JSONTokener) object, jsonConfig);
+        }
+        if (object instanceof JSONString){
+            return _fromJSONString((JSONString) object, jsonConfig);
+        }
+        if (object instanceof Map){
+            return _fromMap((Map) object, jsonConfig);
+        }
+        if (object instanceof String){
+            return _fromString((String) object, jsonConfig);
+        }
+        if (JSONUtils.isNumber(object) || JSONUtils.isBoolean(object) || JSONUtils.isString(object)){
+            return new JSONObject();
+        }
+        if (JSONUtils.isArray(object)){
+            throw new JSONException("'object' is an array. Use JSONArray instead");
+        }
+        return _fromBean(object, jsonConfig);
     }
 
     /**
@@ -292,15 +301,19 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             return null;
         }
 
+        //---------------------------------------------------------------
         Class beanClass = jsonConfig.getRootClass();
-        Map classMap = jsonConfig.getClassMap();
-
         if (beanClass == null){
             return toBean(jsonObject);
         }
+
+        //---------------------------------------------------------------
+        Map classMap = jsonConfig.getClassMap();
         if (classMap == null){
             classMap = emptyMap();
         }
+
+        //---------------------------------------------------------------
 
         Object bean = null;
         try{
@@ -318,21 +331,28 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             throw new JSONException(e);
         }
 
+        //---------------------------------------------------------------
+
         Map props = JSONUtils.getProperties(jsonObject);
+
         PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
             Class type = (Class) props.get(name);
             Object value = jsonObject.get(name);
+
             if (javaPropertyFilter != null && javaPropertyFilter.apply(bean, name, value)){
                 continue;
             }
+
             String key = Map.class.isAssignableFrom(beanClass) && jsonConfig.isSkipJavaIdentifierTransformationInMapKeys() ? name
                             : JSONUtils.convertToJavaIdentifier(name, jsonConfig);
+
             PropertyNameProcessor propertyNameProcessor = jsonConfig.findJavaPropertyNameProcessor(beanClass);
             if (propertyNameProcessor != null){
                 key = propertyNameProcessor.processPropertyName(beanClass, key);
             }
+
             try{
                 if (Map.class.isAssignableFrom(beanClass)){
                     // no type info available for conversion
@@ -417,9 +437,12 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
                                 }else if (beanClass == null || bean instanceof Map){
                                     setProperty(bean, key, value, jsonConfig);
                                 }
+
                                 LOGGER.warn(
-                                                "Tried to assign property " + key + ":" + type.getName() + " to bean of class "
-                                                                + bean.getClass().getName());
+                                                "Tried to assign property {}:{} to bean of class {}",
+                                                key,
+                                                type.getName(),
+                                                bean.getClass().getName());
                             }else{
                                 if (jsonConfig.isHandleJettisonSingleElementArray()){
                                     JSONArray array = new JSONArray().element(value, jsonConfig);
@@ -728,6 +751,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return jsonObject;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Default bean processing.
      *
@@ -844,6 +869,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
         return jsonObject;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * From dyna bean.
@@ -1002,6 +1029,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return _fromJSONTokener(new JSONTokener(string.toJSONString()), jsonConfig);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * From JSON tokener.
      *
@@ -1157,6 +1186,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             throw jsone;
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * From map.
@@ -1368,40 +1399,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         return JSONArray.toCollection((JSONArray) value, jsc);
     }
 
-    /*
-     * private static Collection convertPropertyValueToCollection( String key, Object value, JsonConfig jsonConfig,
-     * String name, Map classMap, Object bean ) {
-     * Class targetClass = findTargetClass( key, classMap );
-     * targetClass = targetClass == null ? findTargetClass( name, classMap ) : targetClass;
-     * 
-     * PropertyDescriptor pd;
-     * try{
-     * pd = PropertyUtils.getPropertyDescriptor( bean, key );
-     * }catch( IllegalAccessException e ){
-     * throw new JSONException( e );
-     * }catch( InvocationTargetException e ){
-     * throw new JSONException( e );
-     * }catch( NoSuchMethodException e ){
-     * throw new JSONException( e );
-     * }
-     * 
-     * if( null == targetClass ){
-     * Class[] cType = JSONArray.getCollectionType( pd, false );
-     * if( null != cType && cType.length == 1 ){
-     * targetClass = cType[0];
-     * }
-     * }
-     * 
-     * JsonConfig jsc = jsonConfig.copy();
-     * jsc.setRootClass( targetClass );
-     * jsc.setClassMap( classMap );
-     * jsc.setCollectionType( pd.getPropertyType() );
-     * jsc.setEnclosedType( targetClass );
-     * Collection collection = JSONArray.toCollection( (JSONArray) value, jsonConfig );
-     * return collection;
-     * }
-     */
-
     /**
      * Resolve class.
      *
@@ -1447,6 +1444,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     private static Class findTargetClass(String key,Map classMap){
         // try get first
         Class targetClass = (Class) classMap.get(key);
+
         if (targetClass == null){
             // try with regexp
             // this will hit performance as it must iterate over all the keys
@@ -1536,8 +1534,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             }
         }
 
-        value = JSONUtils.getMorpherRegistry().morph(targetType, value);
-        return value;
+        return JSONUtils.getMorpherRegistry().morph(targetType, value);
     }
 
     /**
@@ -2870,6 +2867,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         if (isNullObject()){
             return JSONNull.getInstance().toString();
         }
+
+        //---------------------------------------------------------------
         try{
             Iterator keys = keys();
             StringBuffer sb = new StringBuffer("{");
@@ -2915,6 +2914,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
         return toString(indentFactor, 0);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Make a prettyprinted JSON text of this JSONObject.
@@ -3115,15 +3116,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         if (JSONUtils.isString(value) && JSONUtils.mayBeJSON(String.valueOf(value))){
             this.properties.put(key, value);
         }else{
-            /*
-             * Object jo = _processValue( value, jsonConfig );
-             * if( CycleDetectionStrategy.IGNORE_PROPERTY_OBJ == jo
-             * || CycleDetectionStrategy.IGNORE_PROPERTY_ARR == jo ){
-             * // do nothing
-             * }else{
-             * this.properties.put( key, jo );
-             * }
-             */
             if (CycleDetectionStrategy.IGNORE_PROPERTY_OBJ == value || CycleDetectionStrategy.IGNORE_PROPERTY_ARR == value){
                 // do nothing
             }else{

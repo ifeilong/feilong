@@ -21,6 +21,7 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class JsonHelperTest extends AbstractJsonTest{
         assertEquals(jsonObject.get("int"), PropertyUtil.getProperty(bean, "int"));
         assertEquals(jsonObject.get("double"), PropertyUtil.getProperty(bean, "double"));
         assertEquals(jsonObject.get("func"), PropertyUtil.getProperty(bean, "func"));
-        List<?> expected = JSONArray.toList(jsonObject.getJSONArray("array"));
+        Collection<?> expected = JSONArray.toCollection(jsonObject.getJSONArray("array"));
         assertEquals(expected, PropertyUtil.getProperty(bean, "array"));
     }
 

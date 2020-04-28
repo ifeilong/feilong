@@ -28,6 +28,8 @@ public class JSONException extends NestableRuntimeException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6995087065217051815L;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new JSON exception.
      *

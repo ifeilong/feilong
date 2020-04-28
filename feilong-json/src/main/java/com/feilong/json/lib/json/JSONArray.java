@@ -130,39 +130,43 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
         if (object instanceof JSONString){
             return _fromJSONString((JSONString) object, jsonConfig);
-        }else if (object instanceof JSONArray){
+        }
+        if (object instanceof JSONArray){
             return _fromJSONArray((JSONArray) object, jsonConfig);
-        }else if (object instanceof Collection){
+        }
+        if (object instanceof Collection){
             return _fromCollection((Collection) object, jsonConfig);
-        }else if (object instanceof JSONTokener){
+        }
+        if (object instanceof JSONTokener){
             return _fromJSONTokener((JSONTokener) object, jsonConfig);
-        }else if (object instanceof String){
+        }
+        if (object instanceof String){
             return _fromString((String) object, jsonConfig);
-        }else if (object != null && object.getClass().isArray()){
+        }
+        if (object != null && object.getClass().isArray()){
             Class type = object.getClass().getComponentType();
             if (!type.isPrimitive()){
                 return _fromArray((Object[]) object, jsonConfig);
-            }else{
-                if (type == Boolean.TYPE){
-                    return _fromArray((boolean[]) object, jsonConfig);
-                }else if (type == Byte.TYPE){
-                    return _fromArray((byte[]) object, jsonConfig);
-                }else if (type == Short.TYPE){
-                    return _fromArray((short[]) object, jsonConfig);
-                }else if (type == Integer.TYPE){
-                    return _fromArray((int[]) object, jsonConfig);
-                }else if (type == Long.TYPE){
-                    return _fromArray((long[]) object, jsonConfig);
-                }else if (type == Float.TYPE){
-                    return _fromArray((float[]) object, jsonConfig);
-                }else if (type == Double.TYPE){
-                    return _fromArray((double[]) object, jsonConfig);
-                }else if (type == Character.TYPE){
-                    return _fromArray((char[]) object, jsonConfig);
-                }else{
-                    throw new JSONException("Unsupported type");
-                }
             }
+            if (type == Boolean.TYPE){
+                return _fromArray((boolean[]) object, jsonConfig);
+            }else if (type == Byte.TYPE){
+                return _fromArray((byte[]) object, jsonConfig);
+            }else if (type == Short.TYPE){
+                return _fromArray((short[]) object, jsonConfig);
+            }else if (type == Integer.TYPE){
+                return _fromArray((int[]) object, jsonConfig);
+            }else if (type == Long.TYPE){
+                return _fromArray((long[]) object, jsonConfig);
+            }else if (type == Float.TYPE){
+                return _fromArray((float[]) object, jsonConfig);
+            }else if (type == Double.TYPE){
+                return _fromArray((double[]) object, jsonConfig);
+            }else if (type == Character.TYPE){
+                return _fromArray((char[]) object, jsonConfig);
+            }
+
+            throw new JSONException("Unsupported type");
         }else if (JSONUtils.isBoolean(object) || JSONUtils.isFunction(object) || JSONUtils.isNumber(object) || JSONUtils.isNull(object)
                         || JSONUtils.isString(object) || object instanceof JSON){
             fireArrayStartEvent(jsonConfig);
@@ -180,9 +184,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             fireElementAddedEvent(0, jsonArray.get(0), jsonConfig);
             fireArrayStartEvent(jsonConfig);
             return jsonArray;
-        }else{
-            throw new JSONException("Unsupported type");
         }
+        throw new JSONException("Unsupported type");
     }
 
     /**
@@ -199,7 +202,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *             the JSON exception
      */
     public static Class[] getCollectionType(PropertyDescriptor pd,boolean useGetter) throws JSONException{
-
         Type type;
         if (useGetter){
             Method m = pd.getReadMethod();
@@ -216,8 +218,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
         if (!(type instanceof ParameterizedType)){
             return null;
-            // throw new JSONException("type not instanceof ParameterizedType:
-            // "+type.getClass());
         }
 
         ParameterizedType pType = (ParameterizedType) type;
@@ -253,6 +253,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         }
         return dimensions;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Creates a java array from a JSONArray.
@@ -471,6 +473,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             }
         }
 
+        //---------------------------------------------------------------
+
         Class objectClass = jsonConfig.getRootClass();
         Map classMap = jsonConfig.getClassMap();
 
@@ -506,200 +510,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
 
         return collection;
     }
-    /*
-     * public static Collection toCollection( JSONArray jsonArray, JsonConfig jsonConfig ) {
-     * Collection collection = null;
-     * Class collectionType = jsonConfig.getCollectionType();
-     * Class enclosedType = jsonConfig.getEnclosedType();
-     * 
-     * if( collectionType.isInterface() ){
-     * if( collectionType.equals( List.class ) ){
-     * collection = new ArrayList();
-     * }else if( collectionType.equals( Set.class ) ){
-     * collection = new HashSet();
-     * }else{
-     * throw new JSONException( "unknown interface: " + collectionType );
-     * }
-     * }else{
-     * try{
-     * collection = (Collection) collectionType.newInstance();
-     * }catch( InstantiationException e ){
-     * throw new JSONException( e );
-     * }catch( IllegalAccessException e ){
-     * throw new JSONException( e );
-     * }
-     * }
-     * 
-     * Class objectClass = jsonConfig.getRootClass();
-     * Map classMap = jsonConfig.getClassMap();
-     * 
-     * int size = jsonArray.size();
-     * for( int i = 0; i < size; i++ ){
-     * Object value = jsonArray.get( i );
-     * Class enclosedTypeE = enclosedType;
-     * 
-     * if( null == enclosedTypeE ){
-     * enclosedTypeE = value.getClass();
-     * }
-     * 
-     * if( JSONUtils.isNull( value ) ){
-     * collection.add( null );
-     * }else{
-     * if( JSONArray.class.isAssignableFrom( value.getClass() ) ){
-     * //throw new RuntimeException( "can't have nested collections" );
-     * collection.add( toCollection( (JSONArray) value, jsonConfig ) );
-     * }else if( String.class.isAssignableFrom( enclosedTypeE )
-     * || Boolean.class.isAssignableFrom( enclosedTypeE )
-     * || JSONUtils.isNumber( enclosedTypeE )
-     * || Character.class.isAssignableFrom( enclosedTypeE )
-     * || JSONFunction.class.isAssignableFrom( enclosedTypeE ) ){
-     * 
-     * if( !value.getClass()
-     * .isAssignableFrom( enclosedTypeE ) ){
-     * throw new JSONException( "can't assign value " + value + " of type "
-     * + value.getClass() + " to Collection of type " + enclosedTypeE );
-     * }
-     * collection.add( value );
-     * }else{
-     * try{
-     * if( JSON.class.isAssignableFrom( enclosedTypeE ) ){
-     * ret.add( JSONObject.toBean( (JSONObject) value ) );
-     * }else{
-     * Object newRoot = enclosedTypeE.newInstance();
-     * ret.add( JSONObject.toBean( (JSONObject) value, newRoot, jsonConfig ) );
-     * }
-     * }catch( JSONException jsone ){
-     * throw jsone;
-     * }catch( Exception e ){
-     * throw new JSONException( e );
-     * }
-     * if( objectClass != null ){
-     * JsonConfig jsc = jsonConfig.copy();
-     * jsc.setRootClass( objectClass );
-     * jsc.setClassMap( classMap );
-     * collection.add( JSONObject.toBean( (JSONObject) value, jsc ) );
-     * }else{
-     * collection.add( JSONObject.toBean( (JSONObject) value ) );
-     * }
-     * }
-     * }
-     * }
-     * 
-     * return collection;
-     * }
-     */
 
-    /**
-     * Creates a List from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @return the list
-     * @see #toCollection(JSONArray)
-     * @deprecated replaced by toCollection
-     */
-    @Deprecated
-    public static List toList(JSONArray jsonArray){
-        return toList(jsonArray, new JsonConfig());
-    }
-
-    /**
-     * Creates a List from a JSONArray.
-     *
-     * @param jsonArray
-     *            the json array
-     * @param objectClass
-     *            the object class
-     * @return the list
-     * @see #toCollection(JSONArray,Class)
-     * @deprecated replaced by toCollection
-     */
-    @Deprecated
-    public static List toList(JSONArray jsonArray,Class objectClass){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(objectClass);
-        return toList(jsonArray, jsonConfig);
-    }
-
-    /**
-     * Creates a List from a JSONArray.<br>
-     * Any attribute is a JSONObject and matches a key in the classMap, it will
-     * be converted to that target class.<br>
-     * The classMap has the following conventions:
-     * <ul>
-     * <li>Every key must be an String.</li>
-     * <li>Every value must be a Class.</li>
-     * <li>A key may be a regular expression.</li>
-     * </ul>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param objectClass
-     *            the object class
-     * @param classMap
-     *            the class map
-     * @return the list
-     * @see #toCollection(JSONArray,Class,Map)
-     * @deprecated replaced by toCollection
-     */
-    @Deprecated
-    public static List toList(JSONArray jsonArray,Class objectClass,Map classMap){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(objectClass);
-        jsonConfig.setClassMap(classMap);
-        return toList(jsonArray, jsonConfig);
-    }
-
-    /**
-     * Creates a List from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param jsonConfig
-     *            the json config
-     * @return the list
-     * @see #toCollection(JSONArray,JsonConfig)
-     * @deprecated replaced by toCollection
-     */
-    @Deprecated
-    public static List toList(JSONArray jsonArray,JsonConfig jsonConfig){
-        if (jsonArray.size() == 0){
-            return new ArrayList();
-        }
-
-        Class objectClass = jsonConfig.getRootClass();
-        Map classMap = jsonConfig.getClassMap();
-
-        List list = new ArrayList();
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                list.add(null);
-            }else{
-                Class type = value.getClass();
-                if (JSONArray.class.isAssignableFrom(type)){
-                    list.add(toList((JSONArray) value, objectClass, classMap));
-                }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                                || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-                    if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                        value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                    }
-                    list.add(value);
-                }else{
-                    if (objectClass != null){
-                        JsonConfig jsc = jsonConfig.copy();
-                        jsc.setRootClass(objectClass);
-                        jsc.setClassMap(classMap);
-                        list.add(JSONObject.toBean((JSONObject) value, jsc));
-                    }else{
-                        list.add(JSONObject.toBean((JSONObject) value));
-                    }
-                }
-            }
-        }
-        return list;
-    }
+    //---------------------------------------------------------------
 
     /**
      * Creates a List from a JSONArray.<br>
@@ -2971,6 +2783,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (indentFactor == 0){
             return this.toString();
         }
+
+        //---------------------------------------------------------------
         int i;
         StringBuffer sb = new StringBuffer("[");
         if (len == 1){
@@ -2998,6 +2812,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         sb.append(']');
         return sb.toString();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Write the contents of the JSONArray as JSON text to a writer. For

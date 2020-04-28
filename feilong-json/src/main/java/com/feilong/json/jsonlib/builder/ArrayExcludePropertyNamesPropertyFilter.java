@@ -78,12 +78,6 @@ import com.feilong.json.lib.json.util.PropertyFilter;
  *     at com.feilong.json.jsonlib.JsonUtil.toBean(JsonUtil.java:1275)
  *     at com.feilong.tools.IpUtil.toIpInfoEntity(IpUtil.java:162)
  *     at com.feilong.tools.IpUtil.getIpInfoEntity(IpUtil.java:138)
- *     at com.feilong.tools.IpUtilTest.test(IpUtilTest.java:36)
- *     at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
- *     at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
- *     at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
- *     at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
- *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
  *     at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
  * Caused by: java.lang.NoSuchMethodException: Unknown property 'county' on class 'class com.feilong.tools.IpInfoEntity'
  *     at org.apache.commons.beanutils.PropertyUtilsBean.setSimpleProperty(PropertyUtilsBean.java:2091)

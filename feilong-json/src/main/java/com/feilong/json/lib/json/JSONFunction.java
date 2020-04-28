@@ -37,6 +37,8 @@ public class JSONFunction implements Serializable{
     /** constant array for empty parameters. */
     private static final String[] EMPTY_PARAM_ARRAY = new String[0];
 
+    //---------------------------------------------------------------
+
     /**
      * Constructs a JSONFunction from a text representation.
      *
@@ -59,6 +61,7 @@ public class JSONFunction implements Serializable{
     /** the text of this function. */
     private final String text;
 
+    //---------------------------------------------------------------
     /**
      * Constructs a JSONFunction with no parameters.
      *

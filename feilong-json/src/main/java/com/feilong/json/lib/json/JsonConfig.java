@@ -217,6 +217,8 @@ public class JsonConfig{
     /** The allow non string keys. */
     private boolean                                   allowNonStringKeys                       = false;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new json config.
      */
@@ -303,61 +305,65 @@ public class JsonConfig{
         clearJavaPropertyNameProcessors();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Copy.
      *
      * @return the json config
      */
     public JsonConfig copy(){
-        JsonConfig jsc = new JsonConfig();
-        jsc.beanKeyMap.putAll(beanKeyMap);
-        jsc.beanTypeMap.putAll(beanTypeMap);
-        jsc.classMap = new HashMap();
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.beanKeyMap.putAll(beanKeyMap);
+        jsonConfig.beanTypeMap.putAll(beanTypeMap);
+        jsonConfig.classMap = new HashMap();
         if (classMap != null){
-            jsc.classMap.putAll(classMap);
+            jsonConfig.classMap.putAll(classMap);
         }
-        jsc.cycleDetectionStrategy = cycleDetectionStrategy;
+        jsonConfig.cycleDetectionStrategy = cycleDetectionStrategy;
         if (eventListeners != null){
-            jsc.eventListeners.addAll(eventListeners);
+            jsonConfig.eventListeners.addAll(eventListeners);
         }
         if (excludes != null){
-            jsc.excludes = new String[excludes.length];
-            System.arraycopy(excludes, 0, jsc.excludes, 0, excludes.length);
+            jsonConfig.excludes = new String[excludes.length];
+            System.arraycopy(excludes, 0, jsonConfig.excludes, 0, excludes.length);
         }
-        jsc.handleJettisonEmptyElement = handleJettisonEmptyElement;
-        jsc.handleJettisonSingleElementArray = handleJettisonSingleElementArray;
-        jsc.ignoreDefaultExcludes = ignoreDefaultExcludes;
-        jsc.ignoreTransientFields = ignoreTransientFields;
-        jsc.ignorePublicFields = ignorePublicFields;
-        jsc.javaIdentifierTransformer = javaIdentifierTransformer;
-        jsc.javascriptCompliant = javascriptCompliant;
-        jsc.keyMap.putAll(keyMap);
-        jsc.beanProcessorMap.putAll(beanProcessorMap);
-        jsc.rootClass = rootClass;
-        jsc.skipJavaIdentifierTransformationInMapKeys = skipJavaIdentifierTransformationInMapKeys;
-        jsc.triggerEvents = triggerEvents;
-        jsc.typeMap.putAll(typeMap);
-        jsc.jsonPropertyFilter = jsonPropertyFilter;
-        jsc.javaPropertyFilter = javaPropertyFilter;
-        jsc.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher;
-        jsc.newBeanInstanceStrategy = newBeanInstanceStrategy;
-        jsc.defaultValueProcessorMatcher = defaultValueProcessorMatcher;
-        jsc.defaultValueMap.putAll(defaultValueMap);
-        jsc.propertySetStrategy = propertySetStrategy;
+        jsonConfig.handleJettisonEmptyElement = handleJettisonEmptyElement;
+        jsonConfig.handleJettisonSingleElementArray = handleJettisonSingleElementArray;
+        jsonConfig.ignoreDefaultExcludes = ignoreDefaultExcludes;
+        jsonConfig.ignoreTransientFields = ignoreTransientFields;
+        jsonConfig.ignorePublicFields = ignorePublicFields;
+        jsonConfig.javaIdentifierTransformer = javaIdentifierTransformer;
+        jsonConfig.javascriptCompliant = javascriptCompliant;
+        jsonConfig.keyMap.putAll(keyMap);
+        jsonConfig.beanProcessorMap.putAll(beanProcessorMap);
+        jsonConfig.rootClass = rootClass;
+        jsonConfig.skipJavaIdentifierTransformationInMapKeys = skipJavaIdentifierTransformationInMapKeys;
+        jsonConfig.triggerEvents = triggerEvents;
+        jsonConfig.typeMap.putAll(typeMap);
+        jsonConfig.jsonPropertyFilter = jsonPropertyFilter;
+        jsonConfig.javaPropertyFilter = javaPropertyFilter;
+        jsonConfig.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher;
+        jsonConfig.newBeanInstanceStrategy = newBeanInstanceStrategy;
+        jsonConfig.defaultValueProcessorMatcher = defaultValueProcessorMatcher;
+        jsonConfig.defaultValueMap.putAll(defaultValueMap);
+        jsonConfig.propertySetStrategy = propertySetStrategy;
         //jsc.ignoreJPATransient = ignoreJPATransient;
-        jsc.collectionType = collectionType;
-        jsc.enclosedType = enclosedType;
-        jsc.jsonValueProcessorMatcher = jsonValueProcessorMatcher;
-        jsc.javaPropertyNameProcessorMatcher = javaPropertyNameProcessorMatcher;
-        jsc.javaPropertyNameProcessorMap.putAll(javaPropertyNameProcessorMap);
-        jsc.jsonPropertyNameProcessorMatcher = jsonPropertyNameProcessorMatcher;
-        jsc.jsonPropertyNameProcessorMap.putAll(jsonPropertyNameProcessorMap);
-        jsc.propertyExclusionClassMatcher = propertyExclusionClassMatcher;
-        jsc.exclusionMap.putAll(exclusionMap);
-        jsc.ignoreFieldAnnotations.addAll(ignoreFieldAnnotations);
-        jsc.allowNonStringKeys = allowNonStringKeys;
-        return jsc;
+        jsonConfig.collectionType = collectionType;
+        jsonConfig.enclosedType = enclosedType;
+        jsonConfig.jsonValueProcessorMatcher = jsonValueProcessorMatcher;
+        jsonConfig.javaPropertyNameProcessorMatcher = javaPropertyNameProcessorMatcher;
+        jsonConfig.javaPropertyNameProcessorMap.putAll(javaPropertyNameProcessorMap);
+        jsonConfig.jsonPropertyNameProcessorMatcher = jsonPropertyNameProcessorMatcher;
+        jsonConfig.jsonPropertyNameProcessorMap.putAll(jsonPropertyNameProcessorMap);
+        jsonConfig.propertyExclusionClassMatcher = propertyExclusionClassMatcher;
+        jsonConfig.exclusionMap.putAll(exclusionMap);
+        jsonConfig.ignoreFieldAnnotations.addAll(ignoreFieldAnnotations);
+        jsonConfig.allowNonStringKeys = allowNonStringKeys;
+        return jsonConfig;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Disables event triggering when building.<br>
@@ -543,6 +549,8 @@ public class JsonConfig{
 
         return null;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Finds a PropertyNameProcessor registered to the target class.<br>
@@ -741,6 +749,8 @@ public class JsonConfig{
 
         return exclusions;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns a set of default excludes with user-defined excludes.<br>
@@ -1110,6 +1120,8 @@ public class JsonConfig{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Registers a PropertyNameProcessor.<br>
@@ -1741,6 +1753,8 @@ public class JsonConfig{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Removes a PropertyNameProcessor.<br>

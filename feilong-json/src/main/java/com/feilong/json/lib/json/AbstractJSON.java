@@ -72,6 +72,8 @@ abstract class AbstractJSON{
     /** The cycle set. */
     private static CycleSet cycleSet = new CycleSet();
 
+    //---------------------------------------------------------------
+
     /**
      * Adds a reference for cycle detection check.
      *
@@ -83,6 +85,8 @@ abstract class AbstractJSON{
     protected static boolean addInstance(Object instance){
         return getCycleSet().add(instance);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Fires an end of array event.
@@ -341,6 +345,8 @@ abstract class AbstractJSON{
         }
         return jsonObject;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the cycle set.

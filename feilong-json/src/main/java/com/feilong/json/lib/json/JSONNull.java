@@ -37,6 +37,8 @@ public final class JSONNull implements JSON{
         instance = new JSONNull();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the singleton instance of JSONNull.
      *
@@ -67,6 +69,8 @@ public final class JSONNull implements JSON{
                         || (object instanceof JSONObject && ((JSONObject) object).isNullObject()) || "null".equals(object);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Hash code.
      *
@@ -96,6 +100,8 @@ public final class JSONNull implements JSON{
     public boolean isEmpty(){
         throw new JSONException("Object is null");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Size.
@@ -147,6 +153,8 @@ public final class JSONNull implements JSON{
         sb.append(toString());
         return sb.toString();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Write.

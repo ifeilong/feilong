@@ -38,6 +38,8 @@ public class NotPropertyFilter implements PropertyFilter{
         this.filter = filter;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Apply.
      *

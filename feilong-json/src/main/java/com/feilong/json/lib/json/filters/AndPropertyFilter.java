@@ -31,6 +31,8 @@ public class AndPropertyFilter implements PropertyFilter{
     /** The filter 2. */
     private final PropertyFilter filter2;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new and property filter.
      *
@@ -43,6 +45,8 @@ public class AndPropertyFilter implements PropertyFilter{
         this.filter1 = filter1;
         this.filter2 = filter2;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Apply.
