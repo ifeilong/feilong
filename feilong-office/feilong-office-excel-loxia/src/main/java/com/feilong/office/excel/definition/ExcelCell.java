@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.feilong.office.excel.ExcelUtil;
+import com.feilong.office.excel.CellReferenceUtil;
 
 /**
  * The Class ExcelCell.
@@ -209,7 +209,7 @@ public class ExcelCell{
      * @return the cell index
      */
     public String getCellIndex(){
-        return ExcelUtil.getCellIndex(row, col);
+        return CellReferenceUtil.getCellIndex(row, col);
     }
 
     /**
@@ -219,7 +219,7 @@ public class ExcelCell{
      *            the new cell index
      */
     public void setCellIndex(String cellIndex){
-        int[] value = ExcelUtil.getCellPosition(cellIndex);
+        int[] value = CellReferenceUtil.getCellPosition(cellIndex);
         this.row = value[0];
         this.col = value[1];
     }

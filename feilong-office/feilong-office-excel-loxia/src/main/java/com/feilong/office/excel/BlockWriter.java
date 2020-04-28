@@ -195,8 +195,8 @@ class BlockWriter{
                         sheet.removeMergedRegion(i);
                         LOGGER.debug(
                                         "Removed Merged Region:[{}-{}]",
-                                        ExcelUtil.getCellIndex(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
-                                        ExcelUtil.getCellIndex(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
+                                        CellReferenceUtil.getCellIndex(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
+                                        CellReferenceUtil.getCellIndex(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
                     }
                 }
                 //[2013-2-22]if with data, still need to remove dummy one, otherwise xlsx will have error if there are formulas in block.

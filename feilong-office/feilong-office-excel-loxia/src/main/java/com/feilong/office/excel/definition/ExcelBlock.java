@@ -18,7 +18,7 @@ package com.feilong.office.excel.definition;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.feilong.office.excel.ExcelUtil;
+import com.feilong.office.excel.CellReferenceUtil;
 
 /**
  * The Class ExcelBlock.
@@ -86,7 +86,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      * @return the start cell index
      */
     public String getStartCellIndex(){
-        return ExcelUtil.getCellIndex(startRow, startCol);
+        return CellReferenceUtil.getCellIndex(startRow, startCol);
     }
 
     /**
@@ -96,7 +96,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      *            the new start cell index
      */
     public void setStartCellIndex(String startCellIndex){
-        int[] value = ExcelUtil.getCellPosition(startCellIndex);
+        int[] value = CellReferenceUtil.getCellPosition(startCellIndex);
         this.startRow = value[0];
         this.startCol = value[1];
     }
@@ -107,7 +107,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      * @return the end cell index
      */
     public String getEndCellIndex(){
-        return ExcelUtil.getCellIndex(endRow, endCol);
+        return CellReferenceUtil.getCellIndex(endRow, endCol);
     }
 
     /**
@@ -117,7 +117,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      *            the new end cell index
      */
     public void setEndCellIndex(String endCellIndex){
-        int[] value = ExcelUtil.getCellPosition(endCellIndex);
+        int[] value = CellReferenceUtil.getCellPosition(endCellIndex);
         this.endRow = value[0];
         this.endCol = value[1];
     }

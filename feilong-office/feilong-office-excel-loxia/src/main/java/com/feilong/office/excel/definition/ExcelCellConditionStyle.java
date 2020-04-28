@@ -15,7 +15,7 @@
  */
 package com.feilong.office.excel.definition;
 
-import com.feilong.office.excel.ExcelUtil;
+import com.feilong.office.excel.CellReferenceUtil;
 
 /**
  * The Class ExcelCellConditionStyle.
@@ -164,7 +164,7 @@ public class ExcelCellConditionStyle{
      * @return the start cell index
      */
     public String getStartCellIndex(){
-        return ExcelUtil.getCellIndex(startRow, startCol);
+        return CellReferenceUtil.getCellIndex(startRow, startCol);
     }
 
     /**
@@ -174,7 +174,7 @@ public class ExcelCellConditionStyle{
      *            the new start cell index
      */
     public void setStartCellIndex(String startCellIndex){
-        int[] value = ExcelUtil.getCellPosition(startCellIndex);
+        int[] value = CellReferenceUtil.getCellPosition(startCellIndex);
         this.startRow = value[0];
         this.startCol = value[1];
     }
@@ -185,7 +185,7 @@ public class ExcelCellConditionStyle{
      * @return the end cell index
      */
     public String getEndCellIndex(){
-        return ExcelUtil.getCellIndex(endRow, endCol);
+        return CellReferenceUtil.getCellIndex(endRow, endCol);
     }
 
     /**
@@ -195,7 +195,7 @@ public class ExcelCellConditionStyle{
      *            the new end cell index
      */
     public void setEndCellIndex(String endCellIndex){
-        int[] value = ExcelUtil.getCellPosition(endCellIndex);
+        int[] value = CellReferenceUtil.getCellPosition(endCellIndex);
         this.endRow = value[0];
         this.endCol = value[1];
     }

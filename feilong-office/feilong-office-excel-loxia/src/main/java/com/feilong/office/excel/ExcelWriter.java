@@ -34,7 +34,7 @@ public interface ExcelWriter extends ExcelConfig{
      *            the beans
      * @return the write status
      */
-    WriteStatus write(OutputStream outputStream,Map<String, Object> beans);
+    void write(OutputStream outputStream,Map<String, Object> beans);
 
     /**
      * Write.
@@ -47,7 +47,7 @@ public interface ExcelWriter extends ExcelConfig{
      *            the beans
      * @return the write status
      */
-    WriteStatus write(String template,OutputStream outputStream,Map<String, Object> beans);
+    void write(String template,OutputStream outputStream,Map<String, Object> beans);
 
     /**
      * Write.
@@ -60,7 +60,7 @@ public interface ExcelWriter extends ExcelConfig{
      *            the beans
      * @return the write status
      */
-    WriteStatus write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans);
+    void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans);
 
     //---------------------------------------------------------------
 
@@ -73,7 +73,7 @@ public interface ExcelWriter extends ExcelConfig{
      *            the beans list
      * @return the write status
      */
-    WriteStatus writePerSheet(OutputStream outputStream,List<Map<String, Object>> beansList);
+    void writePerSheet(OutputStream outputStream,List<Map<String, Object>> beansList);
 
     /**
      * Write per sheet.
@@ -86,7 +86,7 @@ public interface ExcelWriter extends ExcelConfig{
      *            the beans list
      * @return the write status
      */
-    WriteStatus writePerSheet(String template,OutputStream outputStream,List<Map<String, Object>> beansList);
+    void writePerSheet(String template,OutputStream outputStream,List<Map<String, Object>> beansList);
 
     /**
      * Write per sheet.
@@ -99,6 +99,6 @@ public interface ExcelWriter extends ExcelConfig{
      *            the beans list
      * @return the write status
      */
-    WriteStatus writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList);
+    void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList);
 
 }

@@ -73,7 +73,7 @@ class BlockStyleSetter{
             }
             //---------------------------------------------------------------
             for (int columnIndex = startColumnIndex; columnIndex <= endColumnIndex; columnIndex++){
-                String cIdx = ExcelUtil.offsetCellIndex(cellIndex, rowIndex - startRowIndex, columnIndex - startColumnIndex);
+                String cIdx = CellReferenceUtil.offsetCellIndex(cellIndex, rowIndex - startRowIndex, columnIndex - startColumnIndex);
                 CellStyle cellStyle = styleMap.get(cIdx);
                 if (cellStyle == null){
                     continue;

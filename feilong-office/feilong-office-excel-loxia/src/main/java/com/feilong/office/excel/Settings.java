@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * The Class LoxiaSupportSettings.
  */
-public class LoxiaSupportSettings{
+public class Settings{
 
     /** The Constant LOXIA_EXCEL_MAP. */
     private static final Map<String, String> LOXIA_EXCEL_MAP = toMap("loxiasupport", "loxia/support-default");
@@ -30,7 +30,7 @@ public class LoxiaSupportSettings{
     //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
-    private LoxiaSupportSettings(){
+    private Settings(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");

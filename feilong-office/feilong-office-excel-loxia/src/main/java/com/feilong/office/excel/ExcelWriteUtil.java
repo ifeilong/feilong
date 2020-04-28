@@ -249,10 +249,10 @@ public class ExcelWriteUtil{
 
         //---------------------------------------------------------------
         ExcelWriter excelWriter = excelManipulatorFactory.createExcelWriter(sheetNames);
-        WriteStatus writeStatus = excelWriter.write(excelTemplateLocationInputStream, outputStream, beans);
+        excelWriter.write(excelTemplateLocationInputStream, outputStream, beans);
 
         //---------------------------------------------------------------
-        log(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetNames, beans, outputStream, writeStatus, beginDate);
+        log(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetNames, beans, outputStream, beginDate);
     }
 
     private static void log(
@@ -261,7 +261,6 @@ public class ExcelWriteUtil{
                     String[] sheetNames,
                     Map<String, Object> beans,
                     OutputStream outputStream,
-                    WriteStatus writeStatus,
                     Date beginDate){
         Map<String, Object> map = build(
                         excelTemplateLocationInputStream,
@@ -270,15 +269,7 @@ public class ExcelWriteUtil{
                         beans,
                         outputStream,
                         beginDate);
-        if (writeStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
-            }
-        }else{
-            throw new UncheckedIOException(
-                            JsonUtil.format(map),
-                            new IOException("write excel exception,and writeStatus is :[" + JsonUtil.format(writeStatus) + "]"));
-        }
+        LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
     }
 
     //---------------------------------------------------------------

@@ -110,7 +110,7 @@ class ExcelCellConditionStyleIniter{
         }
 
         //---------------------------------------------------------------
-        int[] position = ExcelUtil.getCellPosition(cellIndex);
+        int[] position = CellReferenceUtil.getCellPosition(cellIndex);
         int rows = endRow - startRow;
         int cols = endCol - startCol;
         for (int i = position[0]; i <= position[0] + rows; i++){
@@ -123,9 +123,11 @@ class ExcelCellConditionStyleIniter{
                 if (cell == null){
                     return;
                 }
-                styleMap.put(ExcelUtil.getCellIndex(i, j), cell.getCellStyle());
+
+                String cellIndex2 = CellReferenceUtil.getCellIndex(i, j);
+                styleMap.put(cellIndex2, cell.getCellStyle());
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("Condition Style [{}]", ExcelUtil.getCellIndex(i, j));
+                    LOGGER.debug("Condition Style [{}]", cellIndex2);
                 }
             }
         }

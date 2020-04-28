@@ -272,11 +272,11 @@ public class DefaultExcelReader implements ExcelReader{
                 Object value = getCellValue(cell, evaluator);
                 value = checkValue(
                                 sheetNo,
-                                ExcelUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()),
+                                CellReferenceUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()),
                                 value,
                                 cellDefinition,
                                 getPropertyType(stack.peek(), cellDefinition));
-                LOGGER.debug("{}[Checked]:{}", ExcelUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()), value);
+                LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()), value);
                 stack.setValue(cellDefinition.getDataName(), value);
             }catch (ExcelManipulateException e){
                 if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
@@ -380,11 +380,11 @@ public class DefaultExcelReader implements ExcelReader{
                     Object value = getCellValue(cell, evaluator);
                     value = checkValue(
                                     sheetNo,
-                                    ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
+                                    CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
                                     value,
                                     cellDefinition,
                                     getPropertyType(result, cellDefinition));
-                    LOGGER.debug("{}[Checked]:{}", ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
+                    LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
                     result.put(cellDefinition.getDataName(), value);
                 }catch (ExcelManipulateException e){
                     if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
@@ -407,12 +407,12 @@ public class DefaultExcelReader implements ExcelReader{
                 Object value = getCellValue(cell, evaluator);
                 value = checkValue(
                                 sheetNo,
-                                ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
+                                CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
                                 value,
                                 cellDefinition,
                                 getPropertyType(result, cellDefinition));
                 if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("{}[Checked]:{}", ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
+                    LOGGER.trace("{}[Checked]:{}", CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
                 }
                 ognlStack.setValue(cellDefinition.getDataName(), value);
             }catch (ExcelManipulateException e){
@@ -475,7 +475,7 @@ public class DefaultExcelReader implements ExcelReader{
         CellValue cellValue = evaluator.evaluate(cell);
         if (cellValue == null){
             if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("{}: null", ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
+                LOGGER.trace("{}: null", CellReferenceUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
             }
             return null;
         }
@@ -501,7 +501,7 @@ public class DefaultExcelReader implements ExcelReader{
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("{}: {}", ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()), value);
+            LOGGER.trace("{}: {}", CellReferenceUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()), value);
         }
 
         return value;

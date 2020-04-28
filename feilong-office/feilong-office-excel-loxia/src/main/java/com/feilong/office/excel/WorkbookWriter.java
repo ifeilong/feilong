@@ -42,12 +42,7 @@ import com.feilong.office.excel.utils.OgnlStack;
  */
 class WorkbookWriter{
 
-    private static final Logger LOGGER               = LoggerFactory.getLogger(WorkbookWriter.class);
-
-    //---------------------------------------------------------------
-
-    /** The Constant STATUS_SETTING_ERROR. */
-    private static final int    STATUS_SETTING_ERROR = 2;
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkbookWriter.class);
 
     //---------------------------------------------------------------
 
@@ -59,97 +54,80 @@ class WorkbookWriter{
     }
 
     //---------------------------------------------------------------
-    static WriteStatus writePerSheetNative(
+    static void writePerSheet(
                     Workbook workbook,
                     OutputStream outputStream,
-                    List<Map<String, Object>> beansList,
-                    ExcelManipulatorDefinition excelManipulatorDefinition){
-
-        List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
+                    ExcelManipulatorDefinition definition,
+                    List<Map<String, Object>> beansList){
+        List<ExcelSheet> excelSheets = definition.getExcelSheets();
         int numberOfSheets = workbook.getNumberOfSheets();
-        int size = excelSheets.size();
-        Validate.isTrue(
-                        size > 0 && numberOfSheets >= size,
-                        "No sheet definition found or Sheet Number in definition is more than number in template file.");
-        //---------------------------------------------------------------
+        int excelSheetsSize = excelSheets.size();
+        validate(excelSheetsSize, numberOfSheets);
 
-        Map<String, CellStyle> styleMap = new HashMap<>();
-        if (excelManipulatorDefinition.getStyleSheetPosition() != null){
-            if (excelManipulatorDefinition.getStyleSheetPosition().intValue() < size){
-                return new WriteStatus(STATUS_SETTING_ERROR, "Style Sheet can not be one Template Sheet.");
-            }
-            ExcelCellConditionStyleIniter
-                            .init(workbook.getSheetAt(excelManipulatorDefinition.getStyleSheetPosition()), excelSheets.get(0), styleMap);
-            workbook.removeSheetAt(excelManipulatorDefinition.getStyleSheetPosition());
-        }
+        Map<String, CellStyle> styleMap = buildStyleMap(workbook, definition, excelSheets, excelSheetsSize);
+
+        //---------------------------------------------------------------
         //remove sheets except the first one
         for (int i = numberOfSheets - 1; i > 0; i--){
             workbook.removeSheetAt(i);
         }
         for (int i = 0; i < beansList.size(); i++){
             Sheet newSheet = workbook.createSheet("Auto Generated Sheet " + i);
-            ExcelUtil.copySheet(workbook.getSheetAt(0), newSheet);
+            SheetCopyer.copy(workbook.getSheetAt(0), newSheet);
             writeSheet(newSheet, excelSheets.iterator().next(), new OgnlStack(beansList.get(i)), styleMap);
         }
-
         //---------------------------------------------------------------
         //remove template sheet
         workbook.removeSheetAt(0);
-
-        return pack(workbook, outputStream);
+        pack(workbook, outputStream);
     }
 
-    static WriteStatus writeNative(
-                    Workbook workbook,
-                    OutputStream outputStream,
-                    Map<String, Object> beans,
-                    ExcelManipulatorDefinition excelManipulatorDefinition){
-        List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
-        int size = excelSheets.size();
+    static void write(Workbook workbook,OutputStream outputStream,ExcelManipulatorDefinition definition,Map<String, Object> beans){
+        List<ExcelSheet> excelSheets = definition.getExcelSheets();
+        int excelSheetsSize = excelSheets.size();
         int numberOfSheets = workbook.getNumberOfSheets();
+        validate(excelSheetsSize, numberOfSheets);
 
-        Validate.isTrue(
-                        size > 0 && numberOfSheets >= size,
-                        "No sheet definition found or Sheet Number in definition is more than number in template file.");
+        Map<String, CellStyle> styleMap = buildStyleMap(workbook, definition, excelSheets, excelSheetsSize);
+        for (int i = 0; i < excelSheetsSize; i++){
+            writeSheet(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap);
+        }
+        pack(workbook, outputStream);
+    }
 
-        //---------------------------------------------------------------
+    private static Map<String, CellStyle> buildStyleMap(
+                    Workbook workbook,
+                    ExcelManipulatorDefinition definition,
+                    List<ExcelSheet> excelSheets,
+                    int excelSheetsSize){
         Map<String, CellStyle> styleMap = new HashMap<>();
-        Integer styleSheetPosition = excelManipulatorDefinition.getStyleSheetPosition();
-
+        Integer styleSheetPosition = definition.getStyleSheetPosition();
         if (styleSheetPosition != null){
-            if (styleSheetPosition.intValue() < size){
-                return new WriteStatus(STATUS_SETTING_ERROR, "Style Sheet can not be one Template Sheet.");
-            }
-            for (int i = 0; i < size; i++){
+            Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
+            for (int i = 0; i < excelSheetsSize; i++){
                 ExcelCellConditionStyleIniter.init(workbook.getSheetAt(styleSheetPosition), excelSheets.get(i), styleMap);
             }
             workbook.removeSheetAt(styleSheetPosition);
             LOGGER.debug("{} styles found", styleMap.keySet().size());
         }
-
-        //---------------------------------------------------------------
-        for (int i = 0; i < size; i++){
-            writeSheet(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap);
-        }
-        return pack(workbook, outputStream);
+        return styleMap;
     }
 
-    /**
-     * @param workbook
-     * @param outputStream
-     * @return
-     * @throws UncheckedIOException
-     * @since 3.0.0
-     */
-    private static WriteStatus pack(Workbook workbook,OutputStream outputStream) throws UncheckedIOException{
+    private static void validate(int excelSheetsSize,int numberOfSheets){
+        Validate.isTrue(
+                        excelSheetsSize > 0 && numberOfSheets >= excelSheetsSize,
+                        "No sheet definition found or Sheet Number in definition is more than number in template file.");
+    }
+
+    private static void pack(Workbook workbook,OutputStream outputStream) throws UncheckedIOException{
         FormulaEvaluatorUtil.reCalculate(workbook);
+
         workbook.setActiveSheet(0);
         try{
             workbook.write(outputStream);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
-        return new WriteStatus(WriteStatus.STATUS_SUCCESS);
     }
 
     /**
@@ -189,8 +167,8 @@ class WorkbookWriter{
 
             LOGGER.debug(
                             "Merged Region:[{}-{}]",
-                            ExcelUtil.getCellIndex(firstRow, firstColumn),
-                            ExcelUtil.getCellIndex(lastRow, lastColumn));
+                            CellReferenceUtil.getCellIndex(firstRow, firstColumn),
+                            CellReferenceUtil.getCellIndex(lastRow, lastColumn));
 
             for (ExcelBlock blockDefinition : sortedExcelBlocks){
                 int startRow = blockDefinition.getStartRow();
@@ -210,7 +188,6 @@ class WorkbookWriter{
         }
 
         //---------------------------------------------------------------
-
         for (ExcelBlock excelBlock : sortedExcelBlocks){
             if (excelBlock.isLoop()){
                 BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, mergedRegions.get(excelBlock), styleMap);

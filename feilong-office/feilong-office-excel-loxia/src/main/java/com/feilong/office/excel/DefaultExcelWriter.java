@@ -57,8 +57,8 @@ public class DefaultExcelWriter implements ExcelWriter{
      * @return the write status
      */
     @Override
-    public WriteStatus write(String template,OutputStream os,Map<String, Object> beans){
-        return write(build(template), os, beans);
+    public void write(String template,OutputStream os,Map<String, Object> beans){
+        write(build(template), os, beans);
     }
 
     /**
@@ -71,20 +71,20 @@ public class DefaultExcelWriter implements ExcelWriter{
      * @return the write status
      */
     @Override
-    public WriteStatus write(OutputStream outputStream,Map<String, Object> beans){
+    public void write(OutputStream outputStream,Map<String, Object> beans){
         if (bufferedTemplate == null){
             throw new IllegalArgumentException("bufferedTemplate is null");
         }
 
         //---------------------------------------------------------------
         InputStream inputStream = new ByteArrayInputStream(bufferedTemplate);
-        return write(inputStream, outputStream, beans);
+        write(inputStream, outputStream, beans);
     }
 
     @Override
-    public WriteStatus write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans){
+    public void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans){
         Workbook workbook = WorkbookCreater.create(inputStream);
-        return WorkbookWriter.writeNative(workbook, outputStream, beans, excelManipulatorDefinition);
+        WorkbookWriter.write(workbook, outputStream, excelManipulatorDefinition, beans);
     }
 
     /**
@@ -99,8 +99,8 @@ public class DefaultExcelWriter implements ExcelWriter{
      * @return the write status
      */
     @Override
-    public WriteStatus writePerSheet(String template,OutputStream os,List<Map<String, Object>> beansList){
-        return writePerSheet(build(template), os, beansList);
+    public void writePerSheet(String template,OutputStream os,List<Map<String, Object>> beansList){
+        writePerSheet(build(template), os, beansList);
     }
 
     /**
@@ -110,7 +110,7 @@ public class DefaultExcelWriter implements ExcelWriter{
      * @deprecated use feilong
      */
     @Deprecated
-    private InputStream build(String template){
+    private static InputStream build(String template){
         return Thread.currentThread().getContextClassLoader().getResourceAsStream(template);
     }
 
@@ -124,19 +124,19 @@ public class DefaultExcelWriter implements ExcelWriter{
      * @return the write status
      */
     @Override
-    public WriteStatus writePerSheet(OutputStream os,List<Map<String, Object>> beansList){
+    public void writePerSheet(OutputStream os,List<Map<String, Object>> beansList){
         if (bufferedTemplate == null){
             throw new IllegalArgumentException("bufferedTemplate is null");
         }
         //---------------------------------------------------------------
         InputStream inputStream = new ByteArrayInputStream(bufferedTemplate);
-        return writePerSheet(inputStream, os, beansList);
+        writePerSheet(inputStream, os, beansList);
     }
 
     @Override
-    public WriteStatus writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList){
+    public void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList){
         Workbook workbook = WorkbookCreater.create(inputStream);
-        return WorkbookWriter.writePerSheetNative(workbook, outputStream, beansList, excelManipulatorDefinition);
+        WorkbookWriter.writePerSheet(workbook, outputStream, excelManipulatorDefinition, beansList);
     }
 
     //---------------------------------------------------------------

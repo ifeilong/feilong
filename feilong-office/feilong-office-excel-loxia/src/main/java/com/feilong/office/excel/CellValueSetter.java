@@ -119,7 +119,7 @@ class CellValueSetter{
                     cellStyle.cloneStyleFrom(cell.getCellStyle());
                 }
                 cellStyle.setDataFormat(
-                                workbook.getCreationHelper().createDataFormat().getFormat(LoxiaSupportSettings.get("date.pattern")));
+                                workbook.getCreationHelper().createDataFormat().getFormat(Settings.get("date.pattern")));
                 cell.setCellStyle(cellStyle);
             }
         }
