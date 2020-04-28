@@ -15,24 +15,23 @@
  */
 package com.feilong.office.excel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Map;
 
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.definition.ExcelCellConditionStyle;
+import com.feilong.office.excel.definition.ExcelSheet;
+import com.feilong.office.excel.definition.LoopBreakCondition;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class ExcelBlockClone{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelBlockClone.class);
+class CloneUtil{
 
     /** Don't let anyone instantiate this class. */
-    private ExcelBlockClone(){
+    private CloneUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -51,7 +50,7 @@ class ExcelBlockClone{
         }
         //---------------------------------------------------------------
         ExcelBlock excelBlock = new ExcelBlock();
-        excelBlock.setBreakCondition(LoopBreakConditionClone.clone(aexcelBlock.getBreakCondition()));
+        excelBlock.setBreakCondition(cloneLoopBreakCondition(aexcelBlock.getBreakCondition()));
         excelBlock.setChild(aexcelBlock.isChild());
         excelBlock.setDataName(aexcelBlock.getDataName());
         excelBlock.setEndCol(aexcelBlock.getEndCol());
@@ -72,4 +71,68 @@ class ExcelBlockClone{
         excelBlock.setChildBlock(cloneBlock(aexcelBlock.getChildBlock()));
         return excelBlock;
     }
+
+    /**
+     * Clone condition.
+     *
+     * @param loopBreakCondition
+     *            the loop break condition
+     * @return the loop break condition
+     */
+    static LoopBreakCondition cloneLoopBreakCondition(LoopBreakCondition loopBreakCondition){
+        if (null == loopBreakCondition){
+            return null;
+        }
+
+        LoopBreakCondition condition = new LoopBreakCondition();
+        condition.setRowOffset(loopBreakCondition.getRowOffset());
+        condition.setColOffset(loopBreakCondition.getColOffset());
+        condition.setFlagString(loopBreakCondition.getFlagString());
+        return condition;
+    }
+
+    /**
+     * Clone sheet.
+     *
+     * @param aexcelSheet
+     *            the aexcel sheet
+     * @return the excel sheet
+     */
+    static ExcelSheet cloneSheet(ExcelSheet aexcelSheet){
+        ExcelSheet excelSheet = new ExcelSheet();
+        excelSheet.setName(aexcelSheet.getName());
+        excelSheet.setDisplayName(aexcelSheet.getDisplayName());
+        for (ExcelBlock block : aexcelSheet.getSortedExcelBlocks()){
+            excelSheet.addExcelBlock(cloneBlock(block));
+        }
+        return excelSheet;
+    }
+
+    /**
+     * Clone map.
+     *
+     * @param map
+     *            the map
+     * @return the map
+     * @throws InstantiationException
+     *             the instantiation exception
+     * @throws IllegalAccessException
+     *             the illegal access exception
+     */
+    static Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
+        Map<String, Object> result = map.getClass().newInstance();
+        for (String key : map.keySet()){
+            Object obj = map.get(key);
+            if (obj == null){
+                continue;
+            }
+            if (obj instanceof Map){
+                result.put(key, cloneMap((Map<String, Object>) obj));
+            }else{
+                result.put(key, obj.getClass().newInstance());
+            }
+        }
+        return result;
+    }
+
 }

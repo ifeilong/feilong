@@ -200,6 +200,6 @@ public class ExcelManipulatorFactory{
         }
         ExcelSheet excelSheet = sheetDefinitions.get(sheet);
         Validate.notNull(excelSheet, "No sheet defintion found with name: " + sheet);
-        return ExcelSheetClone.cloneSheet(excelSheet);
+        return CloneUtil.cloneSheet(excelSheet);
     }
 }

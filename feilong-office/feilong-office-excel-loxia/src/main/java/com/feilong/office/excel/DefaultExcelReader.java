@@ -106,7 +106,7 @@ public class DefaultExcelReader implements ExcelReader{
             ReadStatus readStatus = new ReadStatus();
             readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
             for (int i = 0; i < workbook.getNumberOfSheets(); i++){
-                Map<String, Object> clonedBeans = cloneMap(beans);
+                Map<String, Object> clonedBeans = CloneUtil.cloneMap(beans);
                 SheetReader.readSheet(workbook, i, excelSheet, new OgnlStack(clonedBeans), readStatus, skipErrors);
                 for (String key : clonedBeans.keySet()){
                     cacheMap.get(key).add(clonedBeans.get(key));
@@ -144,33 +144,6 @@ public class DefaultExcelReader implements ExcelReader{
             throw new UncheckedIOException(e);
         }
 
-    }
-
-    /**
-     * Clone map.
-     *
-     * @param map
-     *            the map
-     * @return the map
-     * @throws InstantiationException
-     *             the instantiation exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     */
-    private Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
-        Map<String, Object> result = map.getClass().newInstance();
-        for (String key : map.keySet()){
-            Object obj = map.get(key);
-            if (obj == null){
-                continue;
-            }
-            if (obj instanceof Map){
-                result.put(key, cloneMap((Map<String, Object>) obj));
-            }else{
-                result.put(key, obj.getClass().newInstance());
-            }
-        }
-        return result;
     }
 
     //---------------------------------------------------------------
