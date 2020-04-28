@@ -15,37 +15,23 @@
  */
 package com.feilong.office.excel;
 
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
-
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.commons.lang3.Validate;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.office.excel.convertor.DataConvertor;
 import com.feilong.office.excel.definition.ExcelBlock;
-import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.definition.ExcelSheet;
-import com.feilong.office.excel.definition.LoopBreakCondition;
 import com.feilong.office.excel.utils.OgnlStack;
-
-import ognl.OgnlRuntime;
 
 /**
  * The Class DefaultExcelReader.
@@ -54,8 +40,6 @@ public class DefaultExcelReader implements ExcelReader{
 
     /** The Constant log. */
     private static final Logger        LOGGER                       = LoggerFactory.getLogger(DefaultExcelReader.class);
-
-    private static final int           UNSUPPORTING_DATA_TYPE       = 2;
 
     //---------------------------------------------------------------
 
@@ -95,17 +79,17 @@ public class DefaultExcelReader implements ExcelReader{
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
         try (Workbook wb = WorkbookFactory.create(is)){
-            if (definition.getExcelSheets().size() == 0 || wb.getNumberOfSheets() < definition.getExcelSheets().size()){
-                readStatus.setStatus(STATUS_SETTING_ERROR);
-                readStatus.setMessage("No sheet definition found or Sheet Number in definition is more than number in file.");
-            }else{
-                OgnlStack stack = new OgnlStack(beans);
-                for (int i = 0; i < definition.getExcelSheets().size(); i++){
-                    readSheet(wb, i, definition.getExcelSheets().get(i), stack, readStatus);
-                }
+            List<ExcelSheet> excelSheets = definition.getExcelSheets();
+            int size = excelSheets.size();
+            Validate.isTrue(
+                            size > 0 && wb.getNumberOfSheets() >= size,
+                            "No sheet definition found or Sheet Number in definition is more than number in file.");
+            OgnlStack stack = new OgnlStack(beans);
+            for (int i = 0; i < size; i++){
+                readSheet(wb, i, excelSheets.get(i), stack, readStatus);
             }
         }catch (IOException e){
-            readStatus.setStatus(STATUS_READ_FILE_ERROR);
+            throw new UncheckedIOException(e);
         }
         return readStatus;
     }
@@ -236,397 +220,12 @@ public class DefaultExcelReader implements ExcelReader{
                             && (loopBlock < 1 || !blockDefinition.isLoop())){
                 if (blockDefinition.isLoop()){
                     loopBlock++;
-                    readLoopBlock(wb, sheetNo, blockDefinition, stack, readStatus);
+                    BlockReader.readLoopBlock(wb, sheetNo, blockDefinition, stack, readStatus);
                 }else{
-                    readSimpleBlock(wb, sheetNo, blockDefinition, stack, readStatus);
+                    BlockReader.readSimpleBlock(wb, sheetNo, blockDefinition, stack, readStatus);
                 }
             }
         }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Read simple block.
-     *
-     * @param wb
-     *            the wb
-     * @param sheetNo
-     *            the sheet no
-     * @param blockDefinition
-     *            the block definition
-     * @param stack
-     *            the stack
-     * @param readStatus
-     *            the read status
-     */
-    private void readSimpleBlock(Workbook wb,int sheetNo,ExcelBlock blockDefinition,OgnlStack stack,ReadStatus readStatus){
-        //Simple Block will only care about cells in these Block
-        Sheet sheet = wb.getSheetAt(sheetNo);
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
-
-        for (ExcelCell cellDefinition : blockDefinition.getCells()){
-            Row row = sheet.getRow(cellDefinition.getRow());
-            Cell cell = row == null ? null : row.getCell(cellDefinition.getCol());
-            try{
-                Object value = getCellValue(cell, evaluator);
-                value = checkValue(
-                                sheetNo,
-                                CellReferenceUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()),
-                                value,
-                                cellDefinition,
-                                getPropertyType(stack.peek(), cellDefinition));
-                LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()), value);
-                stack.setValue(cellDefinition.getDataName(), value);
-            }catch (ExcelManipulateException e){
-                if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-                    readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
-                }
-                readStatus.addException(e);
-            }catch (Exception e){
-                LOGGER.error("", e);
-                readStatus.setStatus(STATUS_SYSTEM_ERROR);
-                readStatus.setMessage(e.getMessage());
-            }
-        }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Read loop block.
-     *
-     * @param wb
-     *            the wb
-     * @param sheetNo
-     *            the sheet no
-     * @param blockDefinition
-     *            the block definition
-     * @param stack
-     *            the stack
-     * @param readStatus
-     *            the read status
-     */
-    private void readLoopBlock(Workbook wb,int sheetNo,ExcelBlock blockDefinition,OgnlStack stack,ReadStatus readStatus){
-        //Loop Block will only care about row loop
-        String dataName = blockDefinition.getDataName();
-        if (dataName == null || dataName.length() == 0){
-            readStatus.setStatus(STATUS_SETTING_ERROR);
-            readStatus.setMessage("dataName for block[" + blockDefinition.toString() + "] is not set");
-            return;
-        }
-
-        //---------------------------------------------------------------
-
-        try{
-            Object obj = stack.getValue(dataName);
-            Collection dataList;
-            if (obj == null){
-                dataList = new ArrayList();
-                stack.setValue(dataName, dataList);
-            }else if (!(obj instanceof Collection)){
-                readStatus.setStatus(STATUS_SETTING_ERROR);
-                readStatus.setMessage("Property " + dataName + " is not a Collection");
-                return;
-            }else{
-                dataList = (Collection) obj;
-            }
-
-            //---------------------------------------------------------------
-
-            int startRow = blockDefinition.getStartRow();
-            int step = blockDefinition.getEndRow() - blockDefinition.getStartRow() + 1;
-            while (!checkBreak(wb.getSheetAt(sheetNo), startRow, blockDefinition.getStartCol(), blockDefinition.getBreakCondition())){
-                Object value = readBlock(wb, sheetNo, blockDefinition, startRow, readStatus);
-                dataList.add(value);
-                startRow += step;
-            }
-        }catch (Exception e){
-            LOGGER.error("", e);
-            readStatus.setStatus(STATUS_SYSTEM_ERROR);
-            readStatus.setMessage(e.getMessage());
-        }
-    }
-
-    /**
-     * Read Block in loop condition.
-     *
-     * @param wb
-     *            the wb
-     * @param sheetNo
-     *            the sheet no
-     * @param blockDefinition
-     *            the block definition
-     * @param startRow
-     *            the start row
-     * @param readStatus
-     *            the read status
-     * @return the object
-     * @throws Exception
-     *             the exception
-     */
-    private Object readBlock(Workbook wb,int sheetNo,ExcelBlock blockDefinition,int startRow,ReadStatus readStatus) throws Exception{
-        Sheet sheet = wb.getSheetAt(sheetNo);
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
-
-        if (blockDefinition.getLoopClass() == null){
-            Map<String, Object> result = new HashMap<>();
-
-            for (ExcelCell cellDefinition : blockDefinition.getCells()){
-                int rowOffSet = cellDefinition.getRow() - blockDefinition.getStartRow();
-                Row row = sheet.getRow(startRow + rowOffSet);
-                Cell cell = row == null ? null : row.getCell(cellDefinition.getCol());
-                try{
-                    Object value = getCellValue(cell, evaluator);
-                    value = checkValue(
-                                    sheetNo,
-                                    CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
-                                    value,
-                                    cellDefinition,
-                                    getPropertyType(result, cellDefinition));
-                    LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
-                    result.put(cellDefinition.getDataName(), value);
-                }catch (ExcelManipulateException e){
-                    if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-                        readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
-                    }
-                    readStatus.addException(e);
-                }
-            }
-            return result;
-        }
-
-        //---------------------------------------------------------------
-        Object result = blockDefinition.getLoopClass().newInstance();
-        OgnlStack ognlStack = new OgnlStack(result);
-        for (ExcelCell cellDefinition : blockDefinition.getCells()){
-            int rowOffSet = cellDefinition.getRow() - blockDefinition.getStartRow();
-            Row row = sheet.getRow(startRow + rowOffSet);
-            Cell cell = row == null ? null : row.getCell(cellDefinition.getCol());
-            try{
-                Object value = getCellValue(cell, evaluator);
-                value = checkValue(
-                                sheetNo,
-                                CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
-                                value,
-                                cellDefinition,
-                                getPropertyType(result, cellDefinition));
-                if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("{}[Checked]:{}", CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
-                }
-                ognlStack.setValue(cellDefinition.getDataName(), value);
-            }catch (ExcelManipulateException e){
-                if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-                    readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
-                }
-                readStatus.addException(e);
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Check value.
-     *
-     * @param sheetNo
-     *            the sheet no
-     * @param cellIndex
-     *            the cell index
-     * @param value
-     *            the value
-     * @param cellDefinition
-     *            the cell definition
-     * @param clazz
-     *            the clazz
-     * @return the object
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
-     */
-    private static Object checkValue(int sheetNo,String cellIndex,Object value,ExcelCell cellDefinition,Class<? extends Object> clazz)
-                    throws ExcelManipulateException{
-        DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
-        //primitive type should be mandatory
-        if (clazz.isPrimitive()){
-            cellDefinition.setMandatory(true);
-        }
-        if (dataConvertor == null){
-            throw build(value, sheetNo, cellIndex, cellDefinition, UNSUPPORTING_DATA_TYPE);
-        }
-        return dataConvertor.convert(value, sheetNo, cellIndex, cellDefinition);
-    }
-
-    /**
-     * Gets the cell value.
-     *
-     * @param cell
-     *            the cell
-     * @param evaluator
-     *            the evaluator
-     * @return the cell value
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
-     */
-    private static Object getCellValue(Cell cell,FormulaEvaluator evaluator) throws ExcelManipulateException{
-        if (cell == null){
-            return null;
-        }
-        //---------------------------------------------------------------
-        Object value = null;
-        CellValue cellValue = evaluator.evaluate(cell);
-        if (cellValue == null){
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("{}: null", CellReferenceUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
-            }
-            return null;
-        }
-
-        //---------------------------------------------------------------
-        switch (cellValue.getCellType()) {
-            case BLANK:
-            case ERROR:
-                break;
-            case BOOLEAN:
-                value = cellValue.getBooleanValue();
-                break;
-            case NUMERIC:
-                if (DateUtil.isCellDateFormatted(cell)){
-                    value = DateUtil.getJavaDate(cellValue.getNumberValue());
-                }else{
-                    value = cellValue.getNumberValue();
-                }
-                break;
-            case STRING:
-                value = cellValue.getStringValue();
-        }
-
-        //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("{}: {}", CellReferenceUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()), value);
-        }
-
-        return value;
-    }
-
-    /**
-     * Check break.
-     *
-     * @param sheet
-     *            the sheet
-     * @param row
-     *            the row
-     * @param col
-     *            the col
-     * @param condition
-     *            the condition
-     * @return true, if successful
-     */
-    private static boolean checkBreak(Sheet sheet,int row,int col,LoopBreakCondition condition){
-        //no break condition defined		
-        if (sheet.getLastRowNum() < row){
-            return true;
-        }
-
-        //---------------------------------------------------------------
-        if (condition != null){
-            Row hrow = sheet.getRow(row + condition.getRowOffset());
-            if (hrow == null){
-                return false;
-            }
-            Cell cell = hrow.getCell(col + condition.getColOffset());
-            if (cell == null || cell.getCellType() != CellType.STRING){
-                return false;
-            }
-            if (condition.getFlagString().equals(cell.getRichStringCellValue().getString())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 获得 property type.
-     *
-     * @param object
-     *            the object
-     * @param cellDefinition
-     *            the cell definition
-     * @return the property type
-     * @throws Exception
-     *             the exception
-     */
-    private Class<? extends Object> getPropertyType(Object object,ExcelCell cellDefinition) throws Exception{
-        Class<?> clazz = DataConvertorConfigurator.getInstance().getSupportedClass(cellDefinition.getType());
-        if (clazz != null){
-            return clazz;
-        }
-        return getPropertyType(object, cellDefinition.getDataName());
-    }
-
-    /**
-     * 获得 property type.
-     *
-     * @param object
-     *            the object
-     * @param dataName
-     *            the data name
-     * @return the property type
-     * @throws Exception
-     *             the exception
-     */
-    @SuppressWarnings("unchecked")
-    private Class<? extends Object> getPropertyType(Object object,String dataName) throws Exception{
-        if (object instanceof Map){
-            LOGGER.debug("getPropertyType for Map[{}] with Key {}.", object, dataName);
-            if (object == null){
-                return null;
-            }
-            Map<String, Object> map = (Map<String, Object>) object;
-            int delim = dataName.indexOf('.');
-            if (delim > 0){
-                return getPropertyType(map.get(dataName.substring(0, delim)), dataName.substring(delim + 1));
-            }
-            return map.get(dataName).getClass();
-        }
-
-        //---------------------------------------------------------------
-
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("getPropertyType [{}] property {}.", object, dataName);
-        }
-
-        return getPropertyTypeWithClass(object.getClass(), dataName);
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 获得 property type with class.
-     *
-     * @param clazz
-     *            the clazz
-     * @param dataName
-     *            the data name
-     * @return the property type with class
-     * @throws Exception
-     *             the exception
-     */
-    private Class<? extends Object> getPropertyTypeWithClass(Class<? extends Object> clazz,String dataName) throws Exception{
-        if (clazz == null){
-            throw new IllegalArgumentException();
-        }
-        int delim = dataName.indexOf('.');
-        if (delim < 0){
-            PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(clazz, dataName);
-            if (pd == null){
-                throw new IllegalArgumentException();
-            }
-            return pd.getPropertyType();
-        }
-        PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(clazz, dataName.substring(0, delim));
-        if (pd == null){
-            throw new IllegalArgumentException();
-        }
-        return getPropertyTypeWithClass(pd.getPropertyType(), dataName.substring(delim + 1));
     }
 
     //---------------------------------------------------------------

@@ -22,6 +22,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.zip.Deflater;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -30,7 +31,6 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.io.FileUtil;
 
 /**

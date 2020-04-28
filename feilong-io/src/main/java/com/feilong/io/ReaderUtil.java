@@ -19,11 +19,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.io.UncheckedIOException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
-
-import com.feilong.core.UncheckedIOException;
 
 /**
  * {@link java.io.Reader} 工具类.

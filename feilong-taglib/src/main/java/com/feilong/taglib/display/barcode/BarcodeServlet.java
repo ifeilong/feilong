@@ -16,6 +16,7 @@
 package com.feilong.taglib.display.barcode;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -28,7 +29,6 @@ import org.apache.commons.lang3.Validate;
 
 import com.feilong.accessor.KeyAccessor;
 import com.feilong.accessor.session.SessionKeyAccessor;
-import com.feilong.core.UncheckedIOException;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.tools.barcode.BarcodeEncodeUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;

@@ -105,7 +105,7 @@ class RowWriter{
         for (ExcelCell excelCell : excelBlock.getCells()){
             String dataName = excelCell.getDataExpr() == null ? excelCell.getDataName() : excelCell.getDataExpr();
             if (dataName.startsWith("=")){
-                dataName = ExcelUtil.offsetFormula(dataName, rowOffset, 0);
+                dataName = FormulaEvaluatorUtil.offsetFormula(dataName, rowOffset, 0);
             }
             CellValueSetter.set(sheet, excelCell.getRow() + rowOffset, excelCell.getCol(), dataName, ognlStack);
             if (styleMap.keySet().size() > 0){

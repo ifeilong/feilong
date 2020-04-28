@@ -21,11 +21,11 @@ import java.awt.Desktop;
 import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.URI;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.net.URIUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

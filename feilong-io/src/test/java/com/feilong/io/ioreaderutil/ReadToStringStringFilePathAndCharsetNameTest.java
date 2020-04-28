@@ -19,10 +19,10 @@ import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.UncheckedIOException;
 
 import org.junit.Test;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOReaderUtil;
 
 public class ReadToStringStringFilePathAndCharsetNameTest extends AbstractReadFileToStringTest{

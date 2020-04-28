@@ -20,6 +20,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
+import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -33,7 +34,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.UncheckedIOException;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

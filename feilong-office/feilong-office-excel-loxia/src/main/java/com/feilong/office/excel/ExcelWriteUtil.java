@@ -23,6 +23,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -35,7 +36,6 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.jsonlib.JsonUtil;

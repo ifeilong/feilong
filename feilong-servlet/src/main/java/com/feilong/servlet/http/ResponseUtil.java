@@ -22,6 +22,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -36,7 +37,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
-import com.feilong.core.UncheckedIOException;
 import com.feilong.io.entity.MimeType;
 
 /**

@@ -21,11 +21,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOWriteUtil;
 
 public class WriteDirectoryAndFileTest{

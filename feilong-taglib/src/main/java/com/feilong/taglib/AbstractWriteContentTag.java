@@ -22,6 +22,7 @@ import static com.feilong.core.date.DateUtil.now;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,6 @@ import javax.servlet.jsp.JspWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.servlet.http.RequestUtil;
 

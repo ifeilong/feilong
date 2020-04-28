@@ -26,7 +26,9 @@ import java.io.IOException;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
+ * @deprecated pls use jdk1.8 自带了 <code>java.io.UncheckedIOException</code> since 3.0.0 Deprecated
  */
+@Deprecated
 public class UncheckedIOException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
@@ -41,7 +43,9 @@ public class UncheckedIOException extends DefaultRuntimeException{
      *            the detail message, can be null
      * @param cause
      *            the <code>IOException</code>
+     * @deprecated pls use jdk1.8 自带了 <code>java.io.UncheckedIOException</code> since 3.0.0 Deprecated
      */
+    @Deprecated
     public UncheckedIOException(String message, IOException cause){
         super(message, cause);
     }
@@ -51,7 +55,9 @@ public class UncheckedIOException extends DefaultRuntimeException{
      *
      * @param cause
      *            the <code>IOException</code>
+     * @deprecated pls use jdk1.8 自带了 <code>java.io.UncheckedIOException</code> since 3.0.0 Deprecated
      */
+    @Deprecated
     public UncheckedIOException(IOException cause){
         super(cause);
     }

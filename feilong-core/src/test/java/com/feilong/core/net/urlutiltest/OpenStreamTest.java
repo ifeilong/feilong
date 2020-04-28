@@ -17,9 +17,10 @@ package com.feilong.core.net.urlutiltest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.UncheckedIOException;
+
 import org.junit.Test;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.net.URLUtil;
 
 public class OpenStreamTest{

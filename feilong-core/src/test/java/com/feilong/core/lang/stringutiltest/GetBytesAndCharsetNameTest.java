@@ -17,9 +17,10 @@ package com.feilong.core.lang.stringutiltest;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+import java.io.UncheckedIOException;
+
 import org.junit.Test;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.lang.StringUtil;
 
 public class GetBytesAndCharsetNameTest{

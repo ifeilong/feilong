@@ -18,6 +18,8 @@ package com.feilong.office.excel;
 import static com.feilong.core.date.DateUtil.formatDuration;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -46,6 +48,9 @@ class FormulaEvaluatorUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    /** The Constant DYNAMIC_CELL_PATTREN. */
+    private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
+
     //---------------------------------------------------------------
 
     /**
@@ -73,5 +78,33 @@ class FormulaEvaluatorUtil{
             LOGGER.debug("reCalculate use time: [{}]", formatDuration(beginDate));
         }
 
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Offset formula.
+     *
+     * @param formula
+     *            the formula
+     * @param rowOffset
+     *            the row offset
+     * @param colOffset
+     *            the col offset
+     * @return the string
+     */
+    static String offsetFormula(String formula,int rowOffset,int colOffset){
+        StringBuffer sb = new StringBuffer();
+        Matcher matcher = DYNAMIC_CELL_PATTREN.matcher(formula);
+        int head = 0, start = 0, end = -1;
+        while (matcher.find()){
+            start = matcher.start();
+            end = matcher.end();
+            sb.append(formula.substring(head, start));
+            sb.append(CellReferenceUtil.offsetCellIndex(formula.substring(start, end), rowOffset, colOffset));
+            head = end;
+        }
+        sb.append(formula.substring(head));
+        return sb.toString();
     }
 }

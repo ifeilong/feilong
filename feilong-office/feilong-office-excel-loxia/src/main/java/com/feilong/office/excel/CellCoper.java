@@ -79,7 +79,7 @@ class CellCoper{
                 newCell.setCellErrorValue(oldCell.getErrorCellValue());
                 break;
             case FORMULA:
-                newCell.setCellFormula(ExcelUtil.offsetFormula(oldCell.getCellFormula(), rowOffset, colOffset));
+                newCell.setCellFormula(FormulaEvaluatorUtil.offsetFormula(oldCell.getCellFormula(), rowOffset, colOffset));
                 break;
             default:
                 break;

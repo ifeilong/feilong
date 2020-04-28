@@ -20,6 +20,7 @@ import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -27,8 +28,6 @@ import java.net.URL;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.UncheckedIOException;
 
 /**
  * {@link URL} 工具类.

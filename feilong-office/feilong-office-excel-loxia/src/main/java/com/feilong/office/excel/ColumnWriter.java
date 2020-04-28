@@ -84,7 +84,7 @@ class ColumnWriter{
             String dataExpr = excelCell.getDataExpr();
             String dataName = dataExpr == null ? excelCell.getDataName() : dataExpr;
             if (dataName.startsWith("=")){
-                dataName = ExcelUtil.offsetFormula(dataName, rowOffset, colOffset);
+                dataName = FormulaEvaluatorUtil.offsetFormula(dataName, rowOffset, colOffset);
             }
             int row = excelCell.getRow();
             int col = excelCell.getCol();

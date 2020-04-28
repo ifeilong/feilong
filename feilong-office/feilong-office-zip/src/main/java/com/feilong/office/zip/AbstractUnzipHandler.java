@@ -22,13 +22,13 @@ import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.Date;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOWriteUtil;
 
 /**

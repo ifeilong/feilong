@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.net.URIUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
