@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,17 +36,34 @@ import com.feilong.json.lib.ezmorph.MorphException;
  */
 public class MapToDateMorpher extends AbstractObjectMorpher{
 
+    /** The default value. */
     private Date defaultValue;
 
+    /**
+     * Instantiates a new map to date morpher.
+     */
     public MapToDateMorpher(){
         super();
     }
 
+    /**
+     * Instantiates a new map to date morpher.
+     *
+     * @param defaultValue
+     *            the default value
+     */
     public MapToDateMorpher(Date defaultValue){
         super(true);
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -74,11 +91,18 @@ public class MapToDateMorpher extends AbstractObjectMorpher{
 
     /**
      * Returns the default value for this Morpher.
+     *
+     * @return the default value
      */
     public Date getDefaultValue(){
         return (Date) defaultValue.clone();
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -88,6 +112,13 @@ public class MapToDateMorpher extends AbstractObjectMorpher{
         return builder.toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object morph(Object value){
         if (value == null){
@@ -122,6 +153,11 @@ public class MapToDateMorpher extends AbstractObjectMorpher{
         return c.getTime();
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return Date.class;
@@ -137,11 +173,27 @@ public class MapToDateMorpher extends AbstractObjectMorpher{
         this.defaultValue = (Date) defaultValue.clone();
     }
 
+    /**
+     * Supports.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if successful
+     */
     @Override
     public boolean supports(Class clazz){
         return clazz != null && Map.class.isAssignableFrom(clazz);
     }
 
+    /**
+     * Gets the value.
+     *
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @return the value
+     */
     private int getValue(Map map,String key){
         Object value = map.get(key);
         if (value == null || !(value instanceof Number)){

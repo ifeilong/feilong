@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,15 +37,21 @@ import com.feilong.json.lib.ezmorph.MorphException;
  */
 public final class DateMorpher extends AbstractObjectMorpher{
 
-    private Date     defaultValue;
+    /** The default value. */
+    private Date           defaultValue;
 
-    private String[] formats;
+    /** The formats. */
+    private final String[] formats;
 
-    private boolean  lenient;
+    /** The lenient. */
+    private final boolean  lenient;
 
-    private Locale   locale;
+    /** The locale. */
+    private Locale         locale;
 
     /**
+     * Instantiates a new date morpher.
+     *
      * @param formats
      *            a list of formats this morpher supports.
      */
@@ -54,6 +60,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
     }
 
     /**
+     * Instantiates a new date morpher.
+     *
      * @param formats
      *            a list of formats this morpher supports.
      * @param lenient
@@ -64,6 +72,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
     }
 
     /**
+     * Instantiates a new date morpher.
+     *
      * @param formats
      *            a list of formats this morpher supports.
      * @param defaultValue
@@ -74,6 +84,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
     }
 
     /**
+     * Instantiates a new date morpher.
+     *
      * @param formats
      *            a list of formats this morpher supports.
      * @param defaultValue
@@ -102,6 +114,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
     }
 
     /**
+     * Instantiates a new date morpher.
+     *
      * @param formats
      *            a list of formats this morpher supports.
      * @param locale
@@ -112,6 +126,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
     }
 
     /**
+     * Instantiates a new date morpher.
+     *
      * @param formats
      *            a list of formats this morpher supports.
      * @param locale
@@ -135,6 +151,13 @@ public final class DateMorpher extends AbstractObjectMorpher{
         this.lenient = lenient;
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -165,11 +188,18 @@ public final class DateMorpher extends AbstractObjectMorpher{
 
     /**
      * Returns the default value for this Morpher.
+     *
+     * @return the default value
      */
     public Date getDefaultValue(){
         return (Date) defaultValue.clone();
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -182,6 +212,13 @@ public final class DateMorpher extends AbstractObjectMorpher{
         return builder.toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object morph(Object value){
         if (value == null){
@@ -221,6 +258,11 @@ public final class DateMorpher extends AbstractObjectMorpher{
         }
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return Date.class;
@@ -236,6 +278,13 @@ public final class DateMorpher extends AbstractObjectMorpher{
         this.defaultValue = (Date) defaultValue.clone();
     }
 
+    /**
+     * Supports.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if successful
+     */
     @Override
     public boolean supports(Class clazz){
         return String.class.isAssignableFrom(clazz);

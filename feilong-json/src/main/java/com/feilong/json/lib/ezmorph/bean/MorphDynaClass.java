@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,10 +35,13 @@ import com.feilong.json.lib.ezmorph.MorphUtils;
 import com.feilong.json.lib.ezmorph.MorpherRegistry;
 
 /**
+ * The Class MorphDynaClass.
+ *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 public final class MorphDynaClass implements DynaClass,Serializable{
 
+    /** The Constant dynaPropertyComparator. */
     private static final Comparator dynaPropertyComparator = new Comparator(){
 
                                                                @Override
@@ -52,32 +55,75 @@ public final class MorphDynaClass implements DynaClass,Serializable{
                                                                }
                                                            };
 
+    /** The Constant serialVersionUID. */
     private static final long       serialVersionUID       = -613214016860871560L;
 
+    /** The attributes. */
     private final Map               attributes;
 
+    /** The bean class. */
     private Class                   beanClass;
 
+    /** The dyna properties. */
     private DynaProperty[]          dynaProperties;
 
+    /** The name. */
     private final String            name;
 
+    /** The properties. */
     private final Map               properties             = new HashMap();
 
+    /** The type. */
     private final Class             type;
 
+    /**
+     * Instantiates a new morph dyna class.
+     *
+     * @param attributes
+     *            the attributes
+     */
     public MorphDynaClass(Map attributes){
         this(null, null, attributes);
     }
 
+    /**
+     * Instantiates a new morph dyna class.
+     *
+     * @param attributes
+     *            the attributes
+     * @param exceptionOnEmptyAttributes
+     *            the exception on empty attributes
+     */
     public MorphDynaClass(Map attributes, boolean exceptionOnEmptyAttributes){
         this(null, null, attributes, exceptionOnEmptyAttributes);
     }
 
+    /**
+     * Instantiates a new morph dyna class.
+     *
+     * @param name
+     *            the name
+     * @param type
+     *            the type
+     * @param attributes
+     *            the attributes
+     */
     public MorphDynaClass(String name, Class type, Map attributes){
         this(name, type, attributes, false);
     }
 
+    /**
+     * Instantiates a new morph dyna class.
+     *
+     * @param name
+     *            the name
+     * @param type
+     *            the type
+     * @param attributes
+     *            the attributes
+     * @param exceptionOnEmptyAttributes
+     *            the exception on empty attributes
+     */
     public MorphDynaClass(String name, Class type, Map attributes, boolean exceptionOnEmptyAttributes){
         if (name == null){
             name = "MorphDynaClass";
@@ -101,6 +147,13 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         process();
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -129,11 +182,23 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return builder.isEquals();
     }
 
+    /**
+     * Gets the dyna properties.
+     *
+     * @return the dyna properties
+     */
     @Override
     public DynaProperty[] getDynaProperties(){
         return dynaProperties;
     }
 
+    /**
+     * Gets the dyna property.
+     *
+     * @param propertyName
+     *            the property name
+     * @return the dyna property
+     */
     @Override
     public DynaProperty getDynaProperty(String propertyName){
         if (propertyName == null){
@@ -143,11 +208,21 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return (DynaProperty) properties.get(propertyName);
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     @Override
     public String getName(){
         return this.name;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder().append(name).append(type);
@@ -158,11 +233,31 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return builder.toHashCode();
     }
 
+    /**
+     * New instance.
+     *
+     * @return the dyna bean
+     * @throws IllegalAccessException
+     *             the illegal access exception
+     * @throws InstantiationException
+     *             the instantiation exception
+     */
     @Override
     public DynaBean newInstance() throws IllegalAccessException,InstantiationException{
         return newInstance(null);
     }
 
+    /**
+     * New instance.
+     *
+     * @param morpherRegistry
+     *            the morpher registry
+     * @return the dyna bean
+     * @throws IllegalAccessException
+     *             the illegal access exception
+     * @throws InstantiationException
+     *             the instantiation exception
+     */
     public DynaBean newInstance(MorpherRegistry morpherRegistry) throws IllegalAccessException,InstantiationException{
         if (morpherRegistry == null){
             morpherRegistry = new MorpherRegistry();
@@ -179,12 +274,22 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return dynaBean;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString(){
         return new ToStringBuilder(this).append("name", this.name).append("type", this.type).append("attributes", this.attributes)
                         .toString();
     }
 
+    /**
+     * Gets the bean class.
+     *
+     * @return the bean class
+     */
     protected Class getBeanClass(){
         if (this.beanClass == null){
             process();
@@ -192,6 +297,9 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return this.beanClass;
     }
 
+    /**
+     * Process.
+     */
     private void process(){
         this.beanClass = this.type;
 

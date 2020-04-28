@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,10 +36,20 @@ import com.feilong.json.lib.ezmorph.ObjectMorpher;
  */
 public class SwitchingMorpher implements ObjectMorpher{
 
-    private Map             classMap = new HashMap();
+    /** The class map. */
+    private final Map             classMap = new HashMap();
 
-    private MorpherRegistry morpherRegistry;
+    /** The morpher registry. */
+    private final MorpherRegistry morpherRegistry;
 
+    /**
+     * Instantiates a new switching morpher.
+     *
+     * @param classMap
+     *            the class map
+     * @param morpherRegistry
+     *            the morpher registry
+     */
     public SwitchingMorpher(Map classMap, MorpherRegistry morpherRegistry){
         this.morpherRegistry = morpherRegistry;
         if (classMap == null || classMap.isEmpty()){
@@ -48,6 +58,13 @@ public class SwitchingMorpher implements ObjectMorpher{
         this.classMap.putAll(classMap);
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -77,6 +94,11 @@ public class SwitchingMorpher implements ObjectMorpher{
         return true;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -88,6 +110,13 @@ public class SwitchingMorpher implements ObjectMorpher{
         return builder.toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object morph(Object value){
         if (value == null){
@@ -98,11 +127,23 @@ public class SwitchingMorpher implements ObjectMorpher{
         return morpherRegistry.morph(target, value);
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return Object.class;
     }
 
+    /**
+     * Supports.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if successful
+     */
     @Override
     public boolean supports(Class clazz){
         return true;

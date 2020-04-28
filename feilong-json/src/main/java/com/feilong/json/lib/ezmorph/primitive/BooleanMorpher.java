@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,13 +28,19 @@ import com.feilong.json.lib.ezmorph.MorphException;
  */
 public final class BooleanMorpher extends AbstractPrimitiveMorpher{
 
+    /** The default value. */
     private boolean defaultValue;
 
+    /**
+     * Instantiates a new boolean morpher.
+     */
     public BooleanMorpher(){
         super();
     }
 
     /**
+     * Instantiates a new boolean morpher.
+     *
      * @param defaultValue
      *            return value if the value to be morphed is null
      */
@@ -43,6 +49,13 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -70,11 +83,18 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
 
     /**
      * Returns the default value for this Morpher.
+     *
+     * @return the default value
      */
     public boolean getDefaultValue(){
         return defaultValue;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -89,6 +109,7 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
      *
      * @param value
      *            The input value to be morphed
+     * @return true, if successful
      * @exception MorphException
      *                if conversion cannot be performed successfully
      */
@@ -128,6 +149,11 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
         throw new MorphException("Can't morph value: " + value);
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return Boolean.TYPE;

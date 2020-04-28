@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,12 +31,16 @@ import com.feilong.json.lib.ezmorph.Morpher;
  */
 public final class ObjectArrayMorpher extends AbstractArrayMorpher{
 
+    /** The morpher. */
     private Morpher morpher;
 
+    /** The morph method. */
     private Method  morphMethod;
 
+    /** The target. */
     private Class   target;
 
+    /** The target array class. */
     private Class   targetArrayClass;
 
     /**
@@ -53,6 +57,13 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
         setMorpher(morpher);
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -70,11 +81,23 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
         return morpher.equals(other.morpher);
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         return new HashCodeBuilder().append(morpher).toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param array
+     *            the array
+     * @return the object
+     */
     @Override
     public Object morph(Object array){
         if (array == null){
@@ -114,11 +137,23 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
         }
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return targetArrayClass;
     }
 
+    /**
+     * Supports.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if successful
+     */
     @Override
     public boolean supports(Class clazz){
         if (clazz != null && !clazz.isArray()){
@@ -130,6 +165,12 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
         return morpher.supports(clazz);
     }
 
+    /**
+     * Sets the morpher.
+     *
+     * @param morpher
+     *            the new morpher
+     */
     private void setMorpher(Morpher morpher){
         if (morpher == null){
             throw new IllegalArgumentException("morpher can not be null");

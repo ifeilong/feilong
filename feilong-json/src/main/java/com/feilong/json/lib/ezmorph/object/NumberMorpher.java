@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,9 +39,11 @@ import com.feilong.json.lib.ezmorph.primitive.ShortMorpher;
  */
 public final class NumberMorpher extends AbstractObjectMorpher{
 
-    private Number defaultValue;
+    /** The default value. */
+    private Number      defaultValue;
 
-    private Class  type;
+    /** The type. */
+    private final Class type;
 
     /**
      * Creates a new morpher for the target type.
@@ -101,6 +103,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         setDefaultValue(defaultValue);
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -129,11 +138,18 @@ public final class NumberMorpher extends AbstractObjectMorpher{
 
     /**
      * Returns the default value for this Morpher.
+     *
+     * @return the default value
      */
     public Number getDefaultValue(){
         return defaultValue;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -144,6 +160,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return builder.toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object morph(Object value){
         if (value != null && type.isAssignableFrom(value.getClass())){
@@ -181,6 +204,11 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         }
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return type;
@@ -201,11 +229,25 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * Checks if is decimal number.
+     *
+     * @param type
+     *            the type
+     * @return true, if is decimal number
+     */
     private boolean isDecimalNumber(Class type){
         return (Double.class.isAssignableFrom(type) || Float.class.isAssignableFrom(type) || Double.TYPE == type || Float.TYPE == type
                         || BigDecimal.class.isAssignableFrom(type));
     }
 
+    /**
+     * Morph to big decimal.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToBigDecimal(String str){
         Object result = null;
         if (isUseDefault()){
@@ -216,6 +258,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to big integer.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToBigInteger(String str){
         Object result = null;
         if (isUseDefault()){
@@ -226,6 +275,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to byte.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToByte(String str){
         Object result = null;
         if (isUseDefault()){
@@ -240,6 +296,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to double.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToDouble(String str){
         Object result = null;
         if (isUseDefault()){
@@ -254,6 +317,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to float.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToFloat(String str){
         Object result = null;
         if (isUseDefault()){
@@ -268,6 +338,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to integer.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToInteger(String str){
         Object result = null;
         if (isUseDefault()){
@@ -282,6 +359,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to long.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToLong(String str){
         Object result = null;
         if (isUseDefault()){
@@ -296,6 +380,13 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         return result;
     }
 
+    /**
+     * Morph to short.
+     *
+     * @param str
+     *            the str
+     * @return the object
+     */
     private Object morphToShort(String str){
         Object result = null;
         if (isUseDefault()){

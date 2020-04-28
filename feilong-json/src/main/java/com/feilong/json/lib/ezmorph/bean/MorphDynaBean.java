@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,26 +36,50 @@ import com.feilong.json.lib.ezmorph.MorphUtils;
 import com.feilong.json.lib.ezmorph.MorpherRegistry;
 
 /**
+ * The Class MorphDynaBean.
+ *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 public final class MorphDynaBean implements DynaBean,Serializable{
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -605547389232706344L;
 
+    /** The dyna class. */
     private MorphDynaClass    dynaClass;
 
-    private Map               dynaValues       = new HashMap();
+    /** The dyna values. */
+    private final Map         dynaValues       = new HashMap();
 
+    /** The morpher registry. */
     private MorpherRegistry   morpherRegistry;
 
+    /**
+     * Instantiates a new morph dyna bean.
+     */
     public MorphDynaBean(){
         this(null);
     }
 
+    /**
+     * Instantiates a new morph dyna bean.
+     *
+     * @param morpherRegistry
+     *            the morpher registry
+     */
     public MorphDynaBean(MorpherRegistry morpherRegistry){
         setMorpherRegistry(morpherRegistry);
     }
 
+    /**
+     * Contains.
+     *
+     * @param name
+     *            the name
+     * @param key
+     *            the key
+     * @return true, if successful
+     */
     @Override
     public boolean contains(String name,String key){
         DynaProperty dynaProperty = getDynaProperty(name);
@@ -73,6 +97,13 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return ((Map) value).containsKey(key);
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -97,6 +128,13 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return builder.isEquals();
     }
 
+    /**
+     * 获得.
+     *
+     * @param name
+     *            the name
+     * @return the object
+     */
     @Override
     public Object get(String name){
         Object value = dynaValues.get(name);
@@ -113,6 +151,15 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         }
     }
 
+    /**
+     * 获得.
+     *
+     * @param name
+     *            the name
+     * @param index
+     *            the index
+     * @return the object
+     */
     @Override
     public Object get(String name,int index){
         DynaProperty dynaProperty = getDynaProperty(name);
@@ -133,6 +180,15 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return value;
     }
 
+    /**
+     * 获得.
+     *
+     * @param name
+     *            the name
+     * @param key
+     *            the key
+     * @return the object
+     */
     @Override
     public Object get(String name,String key){
         DynaProperty dynaProperty = getDynaProperty(name);
@@ -150,15 +206,30 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return ((Map) value).get(key);
     }
 
+    /**
+     * Gets the dyna class.
+     *
+     * @return the dyna class
+     */
     @Override
     public DynaClass getDynaClass(){
         return this.dynaClass;
     }
 
+    /**
+     * Gets the morpher registry.
+     *
+     * @return the morpher registry
+     */
     public MorpherRegistry getMorpherRegistry(){
         return morpherRegistry;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder().append(dynaClass);
@@ -170,6 +241,14 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return builder.toHashCode();
     }
 
+    /**
+     * 删除.
+     *
+     * @param name
+     *            the name
+     * @param key
+     *            the key
+     */
     @Override
     public void remove(String name,String key){
         DynaProperty dynaProperty = getDynaProperty(name);
@@ -187,6 +266,16 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         ((Map) value).remove(key);
     }
 
+    /**
+     * 设置.
+     *
+     * @param name
+     *            the name
+     * @param index
+     *            the index
+     * @param value
+     *            the value
+     */
     @Override
     public void set(String name,int index,Object value){
         DynaProperty dynaProperty = getDynaProperty(name);
@@ -225,6 +314,14 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         }
     }
 
+    /**
+     * 设置.
+     *
+     * @param name
+     *            the name
+     * @param value
+     *            the value
+     */
     @Override
     public void set(String name,Object value){
         DynaProperty property = getDynaProperty(name);
@@ -236,6 +333,16 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         dynaValues.put(name, value);
     }
 
+    /**
+     * 设置.
+     *
+     * @param name
+     *            the name
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     */
     @Override
     public void set(String name,String key,Object value){
         DynaProperty dynaProperty = getDynaProperty(name);
@@ -253,12 +360,24 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         ((Map) prop).put(key, value);
     }
 
+    /**
+     * Sets the dyna bean class.
+     *
+     * @param dynaClass
+     *            the new dyna bean class
+     */
     public synchronized void setDynaBeanClass(MorphDynaClass dynaClass){
         if (this.dynaClass == null){
             this.dynaClass = dynaClass;
         }
     }
 
+    /**
+     * Sets the morpher registry.
+     *
+     * @param morpherRegistry
+     *            the new morpher registry
+     */
     public void setMorpherRegistry(MorpherRegistry morpherRegistry){
         if (morpherRegistry == null){
             this.morpherRegistry = new MorpherRegistry();
@@ -268,11 +387,23 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         }
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString(){
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append(dynaValues).toString();
     }
 
+    /**
+     * Gets the dyna property.
+     *
+     * @param name
+     *            the name
+     * @return the dyna property
+     */
     protected DynaProperty getDynaProperty(String name){
         DynaProperty property = getDynaClass().getDynaProperty(name);
         if (property == null){
@@ -281,6 +412,15 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return property;
     }
 
+    /**
+     * Checks if is dyna assignable.
+     *
+     * @param dest
+     *            the dest
+     * @param src
+     *            the src
+     * @return true, if is dyna assignable
+     */
     protected boolean isDynaAssignable(Class dest,Class src){
         boolean assignable = dest.isAssignableFrom(src);
         if (assignable){
@@ -314,22 +454,57 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         return assignable;
     }
 
+    /**
+     * Checks if is byte.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is byte
+     */
     private boolean isByte(Class clazz){
         return Byte.class.isAssignableFrom(clazz) || clazz == Byte.TYPE;
     }
 
+    /**
+     * Checks if is float.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is float
+     */
     private boolean isFloat(Class clazz){
         return Float.class.isAssignableFrom(clazz) || clazz == Float.TYPE;
     }
 
+    /**
+     * Checks if is integer.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is integer
+     */
     private boolean isInteger(Class clazz){
         return Integer.class.isAssignableFrom(clazz) || clazz == Integer.TYPE;
     }
 
+    /**
+     * Checks if is long.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is long
+     */
     private boolean isLong(Class clazz){
         return Long.class.isAssignableFrom(clazz) || clazz == Long.TYPE;
     }
 
+    /**
+     * Checks if is short.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is short
+     */
     private boolean isShort(Class clazz){
         return Short.class.isAssignableFrom(clazz) || clazz == Short.TYPE;
     }

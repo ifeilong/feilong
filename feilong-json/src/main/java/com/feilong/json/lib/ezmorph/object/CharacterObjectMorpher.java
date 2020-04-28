@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,13 +28,19 @@ import com.feilong.json.lib.ezmorph.MorphException;
  */
 public final class CharacterObjectMorpher extends AbstractObjectMorpher{
 
+    /** The default value. */
     private Character defaultValue;
 
+    /**
+     * Instantiates a new character object morpher.
+     */
     public CharacterObjectMorpher(){
         super();
     }
 
     /**
+     * Instantiates a new character object morpher.
+     *
      * @param defaultValue
      *            return value if the value to be morphed is null
      */
@@ -43,6 +49,13 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -70,11 +83,18 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
 
     /**
      * Returns the default value for this Morpher.
+     *
+     * @return the default value
      */
     public Character getDefaultValue(){
         return defaultValue;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -84,6 +104,13 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
         return builder.toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object morph(Object value){
         if (value == null){
@@ -110,6 +137,11 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
         }
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return Character.class;

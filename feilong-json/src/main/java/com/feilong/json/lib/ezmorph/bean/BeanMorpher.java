@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -50,13 +50,18 @@ public final class BeanMorpher implements ObjectMorpher{
 
     //---------------------------------------------------------------
 
+    /** The bean class. */
     private final Class           beanClass;
 
+    /** The lenient. */
     private final boolean         lenient;
 
+    /** The morpher registry. */
     private final MorpherRegistry morpherRegistry;
 
     /**
+     * Instantiates a new bean morpher.
+     *
      * @param beanClass
      *            the target class to morph to
      * @param morpherRegistry
@@ -67,6 +72,8 @@ public final class BeanMorpher implements ObjectMorpher{
     }
 
     /**
+     * Instantiates a new bean morpher.
+     *
      * @param beanClass
      *            the target class to morph to
      * @param morpherRegistry
@@ -85,6 +92,13 @@ public final class BeanMorpher implements ObjectMorpher{
         this.lenient = lenient;
     }
 
+    /**
+     * Morph.
+     *
+     * @param sourceBean
+     *            the source bean
+     * @return the object
+     */
     @Override
     public Object morph(Object sourceBean){
         if (sourceBean == null){
@@ -141,16 +155,48 @@ public final class BeanMorpher implements ObjectMorpher{
         return targetBean;
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return beanClass;
     }
 
+    /**
+     * Supports.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if successful
+     */
     @Override
     public boolean supports(Class clazz){
         return !clazz.isArray();
     }
 
+    /**
+     * 设置 property.
+     *
+     * @param targetBean
+     *            the target bean
+     * @param name
+     *            the name
+     * @param sourceType
+     *            the source type
+     * @param targetType
+     *            the target type
+     * @param value
+     *            the value
+     * @throws IllegalAccessException
+     *             the illegal access exception
+     * @throws InvocationTargetException
+     *             the invocation target exception
+     * @throws NoSuchMethodException
+     *             the no such method exception
+     */
     private void setProperty(Object targetBean,String name,Class sourceType,Class targetType,Object value)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
         if (targetType.isAssignableFrom(sourceType)){
@@ -182,6 +228,12 @@ public final class BeanMorpher implements ObjectMorpher{
         }
     }
 
+    /**
+     * Validate class.
+     *
+     * @param clazz
+     *            the clazz
+     */
     private void validateClass(Class clazz){
         if (clazz == null){
             throw new MorphException("target class is null");

@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,15 +31,22 @@ import com.feilong.json.lib.ezmorph.primitive.ByteMorpher;
  */
 public final class ByteArrayMorpher extends AbstractArrayMorpher{
 
+    /** The Constant BYTE_ARRAY_CLASS. */
     private static final Class BYTE_ARRAY_CLASS = byte[].class;
 
+    /** The default value. */
     private byte               defaultValue;
 
+    /**
+     * Instantiates a new byte array morpher.
+     */
     public ByteArrayMorpher(){
         super(false);
     }
 
     /**
+     * Instantiates a new byte array morpher.
+     *
      * @param defaultValue
      *            return value if the value to be morphed is null
      */
@@ -48,6 +55,13 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
         this.defaultValue = defaultValue;
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -73,10 +87,20 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
         }
     }
 
+    /**
+     * Gets the default value.
+     *
+     * @return the default value
+     */
     public byte getDefaultValue(){
         return defaultValue;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder();
@@ -86,6 +110,13 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
         return builder.toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param array
+     *            the array
+     * @return the object
+     */
     @Override
     public Object morph(Object array){
         if (array == null){
@@ -118,6 +149,11 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
         }
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return BYTE_ARRAY_CLASS;

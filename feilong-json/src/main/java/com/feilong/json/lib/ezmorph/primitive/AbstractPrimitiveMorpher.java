@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,13 +25,19 @@ import com.feilong.json.lib.ezmorph.Morpher;
  */
 public abstract class AbstractPrimitiveMorpher implements Morpher{
 
+    /** The use default. */
     private boolean useDefault = false;
 
+    /**
+     * Instantiates a new abstract primitive morpher.
+     */
     public AbstractPrimitiveMorpher(){
 
     }
 
     /**
+     * Instantiates a new abstract primitive morpher.
+     *
      * @param useDefault
      *            if morph() should return a default value if the value to
      *            be morphed is null
@@ -42,7 +48,9 @@ public abstract class AbstractPrimitiveMorpher implements Morpher{
 
     /**
      * Returns if this morpher will use a default value if the value to be
-     * morphed is null
+     * morphed is null.
+     *
+     * @return true, if is use default
      */
     public boolean isUseDefault(){
         return useDefault;

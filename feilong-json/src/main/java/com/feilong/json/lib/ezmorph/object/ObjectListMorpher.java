@@ -1,11 +1,11 @@
 /*
- * Copyright 2006-2007 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,10 +33,13 @@ import com.feilong.json.lib.ezmorph.Morpher;
  */
 public final class ObjectListMorpher extends AbstractObjectMorpher{
 
+    /** The default value. */
     private Object  defaultValue;
 
+    /** The morpher. */
     private Morpher morpher;
 
+    /** The morph method. */
     private Method  morphMethod;
 
     /**
@@ -52,12 +55,27 @@ public final class ObjectListMorpher extends AbstractObjectMorpher{
         setMorpher(morpher);
     }
 
+    /**
+     * Instantiates a new object list morpher.
+     *
+     * @param morpher
+     *            the morpher
+     * @param defaultValue
+     *            the default value
+     */
     public ObjectListMorpher(Morpher morpher, Object defaultValue){
         super(true);
         this.defaultValue = defaultValue;
         setMorpher(morpher);
     }
 
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj){
@@ -75,11 +93,23 @@ public final class ObjectListMorpher extends AbstractObjectMorpher{
         return morpher.equals(other.morpher);
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode(){
         return new HashCodeBuilder().append(morpher).toHashCode();
     }
 
+    /**
+     * Morph.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
     @Override
     public Object morph(Object value){
         if (value == null){
@@ -116,16 +146,34 @@ public final class ObjectListMorpher extends AbstractObjectMorpher{
         return list;
     }
 
+    /**
+     * Morphs to.
+     *
+     * @return the class
+     */
     @Override
     public Class morphsTo(){
         return List.class;
     }
 
+    /**
+     * Supports.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if successful
+     */
     @Override
     public boolean supports(Class clazz){
         return clazz != null && List.class.isAssignableFrom(clazz);
     }
 
+    /**
+     * Sets the morpher.
+     *
+     * @param morpher
+     *            the new morpher
+     */
     private void setMorpher(Morpher morpher){
         if (morpher == null){
             throw new IllegalArgumentException("morpher can not be null");
