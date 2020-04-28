@@ -26,10 +26,8 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.office.excel.definition.ExcelBlock;
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.OgnlStack;
 
@@ -38,60 +36,44 @@ import com.feilong.office.excel.utils.OgnlStack;
  */
 public class DefaultExcelReader implements ExcelReader{
 
-    /** The Constant log. */
-    private static final Logger        LOGGER                       = LoggerFactory.getLogger(DefaultExcelReader.class);
-
-    //---------------------------------------------------------------
-
-    /** The Constant STATUS_READ_FILE_ERROR. */
-    private static final int           STATUS_READ_FILE_ERROR       = 1;
-
-    /** The Constant STATUS_SETTING_ERROR. */
-    private static final int           STATUS_SETTING_ERROR         = 2;
-
-    /** The Constant STATUS_SYSTEM_ERROR. */
-    private static final int           STATUS_SYSTEM_ERROR          = 5;
-
-    /** The Constant STATUS_DATA_COLLECTION_ERROR. */
-    private static final int           STATUS_DATA_COLLECTION_ERROR = 10;
-    //---------------------------------------------------------------
-
     /** The definition. */
     private ExcelManipulatorDefinition definition;
 
     /** The skip errors. */
-    private boolean                    skipErrors                   = true;
+    private boolean                    skipErrors = true;
 
     //---------------------------------------------------------------
 
     /**
      * Read all.
      *
-     * @param is
+     * @param inputStream
      *            the is
      * @param beans
      *            the beans
      * @return the read status
      */
     @Override
-    public ReadStatus readAll(InputStream is,Map<String, Object> beans){
+    public ReadStatus readAll(InputStream inputStream,Map<String, Object> beans){
         ReadStatus readStatus = new ReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
-        try (Workbook wb = WorkbookFactory.create(is)){
+        try (Workbook workbook = WorkbookFactory.create(inputStream)){
             List<ExcelSheet> excelSheets = definition.getExcelSheets();
             int size = excelSheets.size();
             Validate.isTrue(
-                            size > 0 && wb.getNumberOfSheets() >= size,
+                            size > 0 && workbook.getNumberOfSheets() >= size,
                             "No sheet definition found or Sheet Number in definition is more than number in file.");
+
             OgnlStack stack = new OgnlStack(beans);
             for (int i = 0; i < size; i++){
-                readSheet(wb, i, excelSheets.get(i), stack, readStatus);
+                SheetReader.readSheet(workbook, i, excelSheets.get(i), stack, readStatus, skipErrors);
             }
+            return readStatus;
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
-        return readStatus;
+
     }
 
     /**
@@ -105,66 +87,63 @@ public class DefaultExcelReader implements ExcelReader{
      */
     @Override
     public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
-        ReadStatus readStatus = new ReadStatus();
-        readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
-
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            if (definition.getExcelSheets().size() == 0){
-                readStatus.setStatus(STATUS_SETTING_ERROR);
-                readStatus.setMessage("No sheet definition found");
-            }else{
-                //Only first ExcelSheet Definition will be used
-                ExcelSheet sheetDefinition = definition.getExcelSheets().iterator().next();
+            List<ExcelSheet> excelSheets = definition.getExcelSheets();
+            int size = excelSheets.size();
+            Validate.isTrue(size > 0, "No sheet definition found");
 
-                Map<String, List<Object>> cacheMap = new HashMap<>();
-                for (String key : beans.keySet()){
-                    if (beans.get(key) != null){
-                        cacheMap.put(key, new ArrayList<>());
-                    }
-                }
-                for (int i = 0; i < workbook.getNumberOfSheets(); i++){
-                    Map<String, Object> clonedBeans = cloneMap(beans);
-                    readSheet(workbook, i, sheetDefinition, new OgnlStack(clonedBeans), readStatus);
-                    for (String key : clonedBeans.keySet()){
-                        cacheMap.get(key).add(clonedBeans.get(key));
-                    }
-                }
-                for (String key : beans.keySet()){
-                    if (cacheMap.containsKey(key)){
-                        beans.put(key, cacheMap.get(key));
-                    }else{
-                        beans.put(key, null);
-                    }
+            //Only first ExcelSheet Definition will be used
+            ExcelSheet excelSheet = excelSheets.iterator().next();
+
+            Map<String, List<Object>> cacheMap = new HashMap<>();
+            for (String key : beans.keySet()){
+                if (beans.get(key) != null){
+                    cacheMap.put(key, new ArrayList<>());
                 }
             }
-        }catch (IOException e){
-            readStatus.setStatus(STATUS_READ_FILE_ERROR);
-        }catch (InstantiationException e){
-            LOGGER.error("", e);
-            readStatus.setStatus(STATUS_SYSTEM_ERROR);
-            readStatus.setMessage("New Instance Error");
-        }catch (IllegalAccessException e){
-            LOGGER.error("", e);
-            readStatus.setStatus(STATUS_SYSTEM_ERROR);
-            readStatus.setMessage("New Instance Error");
+
+            //---------------------------------------------------------------
+            ReadStatus readStatus = new ReadStatus();
+            readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++){
+                Map<String, Object> clonedBeans = cloneMap(beans);
+                SheetReader.readSheet(workbook, i, excelSheet, new OgnlStack(clonedBeans), readStatus, skipErrors);
+                for (String key : clonedBeans.keySet()){
+                    cacheMap.get(key).add(clonedBeans.get(key));
+                }
+            }
+            for (String key : beans.keySet()){
+                if (cacheMap.containsKey(key)){
+                    beans.put(key, cacheMap.get(key));
+                }else{
+                    beans.put(key, null);
+                }
+            }
+            return readStatus;
+        }catch (Exception e){
+            throw new DefaultRuntimeException(e);
         }
-        return readStatus;
     }
 
     //---------------------------------------------------------------
 
     @Override
-    public ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans){
-        ReadStatus readStatus = new ReadStatus();
-        readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
-
+    public ReadStatus readSheet(InputStream inputStream,int sheetNo,Map<String, Object> beans){
         OgnlStack ognlStack = new OgnlStack(beans);
-        try (Workbook workbook = WorkbookFactory.create(is)){
-            readSheet(workbook, sheetNo, definition.getExcelSheets().iterator().next(), ognlStack, readStatus);
+        try (Workbook workbook = WorkbookFactory.create(inputStream)){
+            List<ExcelSheet> excelSheets = definition.getExcelSheets();
+
+            ReadStatus readStatus = new ReadStatus();
+            readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
+
+            SheetReader.readSheet(workbook, sheetNo, excelSheets.iterator().next(), ognlStack, readStatus, skipErrors);
+
+            return readStatus;
+
         }catch (IOException e){
-            readStatus.setStatus(STATUS_READ_FILE_ERROR);
+            throw new UncheckedIOException(e);
         }
-        return readStatus;
+
     }
 
     /**
@@ -192,40 +171,6 @@ public class DefaultExcelReader implements ExcelReader{
             }
         }
         return result;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Read sheet.
-     *
-     * @param wb
-     *            the wb
-     * @param sheetNo
-     *            the sheet no
-     * @param sheetDefinition
-     *            the sheet definition
-     * @param stack
-     *            the stack
-     * @param readStatus
-     *            the read status
-     */
-    private void readSheet(Workbook wb,int sheetNo,ExcelSheet sheetDefinition,OgnlStack stack,ReadStatus readStatus){
-        //In Read Operation only the first loopBlock will be read
-        int loopBlock = 0;
-
-        int status = readStatus.getStatus();
-        for (ExcelBlock blockDefinition : sheetDefinition.getExcelBlocks()){
-            if (((skipErrors && status == STATUS_DATA_COLLECTION_ERROR) || status == ReadStatus.STATUS_SUCCESS)
-                            && (loopBlock < 1 || !blockDefinition.isLoop())){
-                if (blockDefinition.isLoop()){
-                    loopBlock++;
-                    BlockReader.readLoopBlock(wb, sheetNo, blockDefinition, stack, readStatus);
-                }else{
-                    BlockReader.readSimpleBlock(wb, sheetNo, blockDefinition, stack, readStatus);
-                }
-            }
-        }
     }
 
     //---------------------------------------------------------------

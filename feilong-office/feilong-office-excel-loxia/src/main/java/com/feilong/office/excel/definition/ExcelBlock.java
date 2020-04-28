@@ -482,33 +482,4 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         this.styles.add(style);
     }
 
-    /**
-     * Clone block.
-     *
-     * @return the excel block
-     */
-    public ExcelBlock cloneBlock(){
-        ExcelBlock excelBlock = new ExcelBlock();
-        excelBlock.setBreakCondition(breakCondition == null ? null : breakCondition.cloneCondition());
-        excelBlock.setChild(isChildBlock);
-        excelBlock.setDataName(dataName);
-        excelBlock.setEndCol(endCol);
-        excelBlock.setEndRow(endRow);
-        excelBlock.setLoop(isLoop);
-        excelBlock.setDirection(direction);
-        excelBlock.setLoopClass(loopClass);
-        excelBlock.setStartCol(startCol);
-        excelBlock.setStartRow(startRow);
-
-        //---------------------------------------------------------------
-        for (ExcelCellConditionStyle excelCellConditionStyle : getStyles()){
-            excelBlock.addStyle(excelCellConditionStyle.cloneStyle());
-        }
-        for (ExcelCell excelCell : getCells()){
-            excelBlock.addCell(excelCell.cloneCell());
-        }
-        excelBlock.setChildBlock(childBlock == null ? null : childBlock.cloneBlock());
-        return excelBlock;
-    }
-
 }

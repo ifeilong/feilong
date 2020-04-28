@@ -47,7 +47,7 @@ class CellValueChecker{
      *            the cell index
      * @param value
      *            the value
-     * @param cellDefinition
+     * @param excelCell
      *            the cell definition
      * @param clazz
      *            the clazz
@@ -55,16 +55,18 @@ class CellValueChecker{
      * @throws ExcelManipulateException
      *             the excel manipulate exception
      */
-    static Object check(int sheetNo,String cellIndex,Object value,ExcelCell cellDefinition,Class<? extends Object> clazz)
+    static Object check(int sheetNo,String cellIndex,Object value,ExcelCell excelCell,Class<? extends Object> clazz)
                     throws ExcelManipulateException{
-        DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
         //primitive type should be mandatory
         if (clazz.isPrimitive()){
-            cellDefinition.setMandatory(true);
+            excelCell.setMandatory(true);
         }
+
+        //---------------------------------------------------------------
+        DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
         if (dataConvertor == null){
-            throw build(value, sheetNo, cellIndex, cellDefinition, UNSUPPORTING_DATA_TYPE);
+            throw build(value, sheetNo, cellIndex, excelCell, UNSUPPORTING_DATA_TYPE);
         }
-        return dataConvertor.convert(value, sheetNo, cellIndex, cellDefinition);
+        return dataConvertor.convert(value, sheetNo, cellIndex, excelCell);
     }
 }

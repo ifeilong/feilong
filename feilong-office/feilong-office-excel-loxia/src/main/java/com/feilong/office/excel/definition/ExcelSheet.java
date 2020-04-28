@@ -178,21 +178,6 @@ public class ExcelSheet{
     }
 
     /**
-     * Clone sheet.
-     *
-     * @return the excel sheet
-     */
-    public ExcelSheet cloneSheet(){
-        ExcelSheet excelSheet = new ExcelSheet();
-        excelSheet.setName(name);
-        excelSheet.setDisplayName(displayName);
-        for (ExcelBlock block : getSortedExcelBlocks()){
-            excelSheet.addExcelBlock(block.cloneBlock());
-        }
-        return excelSheet;
-    }
-
-    /**
      * To string.
      *
      * @return the string

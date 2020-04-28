@@ -88,16 +88,4 @@ public class LoopBreakCondition{
         this.flagString = flagString;
     }
 
-    /**
-     * Clone condition.
-     *
-     * @return the loop break condition
-     */
-    public LoopBreakCondition cloneCondition(){
-        LoopBreakCondition condition = new LoopBreakCondition();
-        condition.setRowOffset(rowOffset);
-        condition.setColOffset(colOffset);
-        condition.setFlagString(flagString);
-        return condition;
-    }
 }

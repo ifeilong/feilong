@@ -26,29 +26,29 @@ public interface ExcelReader extends ExcelConfig{
     /**
      * Read All sheets infos into one beans scope with multiple sheet definitions.
      *
-     * @param is
+     * @param inputStream
      *            the is
      * @param beans
      *            the beans
      * @return the read status
      */
-    ReadStatus readAll(InputStream is,Map<String, Object> beans);
+    ReadStatus readAll(InputStream inputStream,Map<String, Object> beans);
 
     /**
      * Read All sheets using one sheet definition to get colletion infos.
      *
-     * @param is
+     * @param inputStream
      *            the is
      * @param beans
      *            the beans
      * @return the read status
      */
-    ReadStatus readAllPerSheet(InputStream is,Map<String, Object> beans);
+    ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans);
 
     /**
      * Read specific sheet using one sheet definition.
      *
-     * @param is
+     * @param inputStream
      *            the is
      * @param sheetNo
      *            the sheet no
@@ -56,6 +56,6 @@ public interface ExcelReader extends ExcelConfig{
      *            the beans
      * @return the read status
      */
-    ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans);
+    ReadStatus readSheet(InputStream inputStream,int sheetNo,Map<String, Object> beans);
 
 }

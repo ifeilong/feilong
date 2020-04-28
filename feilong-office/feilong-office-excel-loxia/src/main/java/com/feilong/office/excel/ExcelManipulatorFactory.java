@@ -198,8 +198,8 @@ public class ExcelManipulatorFactory{
         if ("blank".equalsIgnoreCase(sheet)){
             return BLANK_SHEET;
         }
-        ExcelSheet sheetDefinition = sheetDefinitions.get(sheet);
-        Validate.notNull(sheetDefinition, "No sheet defintion found with name: " + sheet);
-        return sheetDefinition.cloneSheet();
+        ExcelSheet excelSheet = sheetDefinitions.get(sheet);
+        Validate.notNull(excelSheet, "No sheet defintion found with name: " + sheet);
+        return ExcelSheetClone.cloneSheet(excelSheet);
     }
 }
