@@ -18,10 +18,52 @@ package com.feilong.office.excel;
 /**
  * The Interface WriteStatus.
  */
-public interface WriteStatus{
+public class WriteStatus{
 
     /** The Constant STATUS_SUCCESS. */
     public static final int STATUS_SUCCESS = 0;
+
+    //---------------------------------------------------------------
+
+    /** The status. */
+    private int             status         = STATUS_SUCCESS;
+
+    /** The message. */
+    private String          message;
+
+    //---------------------------------------------------------------
+
+    /**
+     * Instantiates a new write status.
+     */
+    public WriteStatus(){
+        super();
+    }
+
+    /**
+     * Instantiates a new write status.
+     *
+     * @param status
+     *            the status
+     */
+    public WriteStatus(int status){
+        super();
+        this.status = status;
+    }
+
+    /**
+     * Instantiates a new write status.
+     *
+     * @param status
+     *            the status
+     * @param message
+     *            the message
+     */
+    public WriteStatus(int status, String message){
+        super();
+        this.status = status;
+        this.message = message;
+    }
 
     //---------------------------------------------------------------
 
@@ -30,7 +72,10 @@ public interface WriteStatus{
      *
      * @return the status
      */
-    int getStatus();
+
+    public int getStatus(){
+        return status;
+    }
 
     /**
      * Sets the status.
@@ -38,14 +83,22 @@ public interface WriteStatus{
      * @param status
      *            the new status
      */
-    void setStatus(int status);
+
+    public void setStatus(int status){
+        this.status = status;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the message.
      *
      * @return the message
      */
-    String getMessage();
+
+    public String getMessage(){
+        return message;
+    }
 
     /**
      * Sets the message.
@@ -53,5 +106,8 @@ public interface WriteStatus{
      * @param message
      *            the new message
      */
-    void setMessage(String message);
+
+    public void setMessage(String message){
+        this.message = message;
+    }
 }

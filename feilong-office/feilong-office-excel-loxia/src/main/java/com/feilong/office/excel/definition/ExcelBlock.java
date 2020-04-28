@@ -217,6 +217,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         this.dataName = dataName;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Checks if is loop.
      *
@@ -235,6 +237,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     public void setLoop(boolean isLoop){
         this.isLoop = isLoop;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the direction.

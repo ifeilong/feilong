@@ -28,77 +28,77 @@ public interface ExcelWriter extends ExcelConfig{
     /**
      * Write.
      *
-     * @param os
+     * @param outputStream
      *            the os
      * @param beans
      *            the beans
      * @return the write status
      */
-    WriteStatus write(OutputStream os,Map<String, Object> beans);
-
-    /**
-     * Write per sheet.
-     *
-     * @param os
-     *            the os
-     * @param beansList
-     *            the beans list
-     * @return the write status
-     */
-    WriteStatus writePerSheet(OutputStream os,List<Map<String, Object>> beansList);
+    WriteStatus write(OutputStream outputStream,Map<String, Object> beans);
 
     /**
      * Write.
      *
      * @param template
      *            the template
-     * @param os
+     * @param outputStream
      *            the os
      * @param beans
      *            the beans
      * @return the write status
      */
-    WriteStatus write(String template,OutputStream os,Map<String, Object> beans);
+    WriteStatus write(String template,OutputStream outputStream,Map<String, Object> beans);
 
     /**
      * Write.
      *
-     * @param is
+     * @param inputStream
      *            the is
-     * @param os
+     * @param outputStream
      *            the os
      * @param beans
      *            the beans
      * @return the write status
      */
-    WriteStatus write(InputStream is,OutputStream os,Map<String, Object> beans);
+    WriteStatus write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans);
 
     //---------------------------------------------------------------
 
     /**
      * Write per sheet.
      *
-     * @param template
-     *            the template
-     * @param os
+     * @param outputStream
      *            the os
      * @param beansList
      *            the beans list
      * @return the write status
      */
-    WriteStatus writePerSheet(String template,OutputStream os,List<Map<String, Object>> beansList);
+    WriteStatus writePerSheet(OutputStream outputStream,List<Map<String, Object>> beansList);
 
     /**
      * Write per sheet.
      *
-     * @param is
-     *            the is
-     * @param os
+     * @param template
+     *            the template
+     * @param outputStream
      *            the os
      * @param beansList
      *            the beans list
      * @return the write status
      */
-    WriteStatus writePerSheet(InputStream is,OutputStream os,List<Map<String, Object>> beansList);
+    WriteStatus writePerSheet(String template,OutputStream outputStream,List<Map<String, Object>> beansList);
+
+    /**
+     * Write per sheet.
+     *
+     * @param inputStream
+     *            the is
+     * @param outputStream
+     *            the os
+     * @param beansList
+     *            the beans list
+     * @return the write status
+     */
+    WriteStatus writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList);
 
 }

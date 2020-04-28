@@ -15,15 +15,58 @@
  */
 package com.feilong.office.excel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Interface ReadStatus.
  */
-public interface ReadStatus{
+public class ReadStatus{
 
     /** The Constant STATUS_SUCCESS. */
     public static final int STATUS_SUCCESS = 0;
+
+    //---------------------------------------------------------------
+
+    /** The status. */
+    private int             status         = STATUS_SUCCESS;
+
+    /** The message. */
+    private String          message;
+
+    /** The exceptions. */
+    private List<Exception> exceptions     = new ArrayList<>();
+
+    //---------------------------------------------------------------
+
+    /**
+     * 
+     */
+    public ReadStatus(){
+        super();
+    }
+
+    /**
+     * @param status
+     * @param message
+     */
+    public ReadStatus(int status, String message){
+        super();
+        this.status = status;
+        this.message = message;
+    }
+
+    /**
+     * @param status
+     * @param message
+     * @param exceptions
+     */
+    public ReadStatus(int status, String message, List<Exception> exceptions){
+        super();
+        this.status = status;
+        this.message = message;
+        this.exceptions = exceptions;
+    }
 
     //---------------------------------------------------------------
 
@@ -32,7 +75,10 @@ public interface ReadStatus{
      *
      * @return the status
      */
-    int getStatus();
+
+    public int getStatus(){
+        return status;
+    }
 
     /**
      * Sets the status.
@@ -40,14 +86,20 @@ public interface ReadStatus{
      * @param status
      *            the new status
      */
-    void setStatus(int status);
+
+    public void setStatus(int status){
+        this.status = status;
+    }
 
     /**
      * Gets the message.
      *
      * @return the message
      */
-    String getMessage();
+
+    public String getMessage(){
+        return message;
+    }
 
     /**
      * Sets the message.
@@ -55,14 +107,20 @@ public interface ReadStatus{
      * @param message
      *            the new message
      */
-    void setMessage(String message);
+
+    public void setMessage(String message){
+        this.message = message;
+    }
 
     /**
      * Gets the exceptions.
      *
      * @return the exceptions
      */
-    List<Exception> getExceptions();
+
+    public List<Exception> getExceptions(){
+        return exceptions;
+    }
 
     /**
      * Sets the exceptions.
@@ -70,7 +128,10 @@ public interface ReadStatus{
      * @param exceptions
      *            the new exceptions
      */
-    void setExceptions(List<Exception> exceptions);
+
+    public void setExceptions(List<Exception> exceptions){
+        this.exceptions = exceptions;
+    }
 
     /**
      * 添加 exception.
@@ -78,5 +139,8 @@ public interface ReadStatus{
      * @param exception
      *            the exception
      */
-    void addException(Exception exception);
+
+    public void addException(Exception exception){
+        this.exceptions.add(exception);
+    }
 }

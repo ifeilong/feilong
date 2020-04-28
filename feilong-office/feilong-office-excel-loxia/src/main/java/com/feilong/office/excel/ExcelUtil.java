@@ -15,26 +15,19 @@
  */
 package com.feilong.office.excel;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class ExcelUtil.
  */
 public class ExcelUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ExcelUtil(){
@@ -155,7 +148,7 @@ public class ExcelUtil{
                 if (newCell == null){
                     newCell = newRow.createCell(col);
                 }
-                copyCell(oldCell, newCell, true);
+                CellCoper.copy(oldCell, newCell);
             }
         }
         for (int col = 0; col <= maxCol; col++){
@@ -171,161 +164,4 @@ public class ExcelUtil{
 
     //---------------------------------------------------------------
 
-    /**
-     * Copy block.
-     *
-     * @param sheet
-     *            the sheet
-     * @param startRow
-     *            the start row
-     * @param startCol
-     *            the start col
-     * @param endRow
-     *            the end row
-     * @param endCol
-     *            the end col
-     * @param copyStyle
-     *            the copy style
-     * @param rowOffset
-     *            the row offset
-     * @param colOffset
-     *            the col offset
-     * @param mergedRegions
-     *            the merged regions
-     */
-    static void copyBlock(
-                    Sheet sheet,
-                    int startRow,
-                    int startCol,
-                    int endRow,
-                    int endCol,
-                    boolean copyStyle,
-                    int rowOffset,
-                    int colOffset,
-                    List<CellRangeAddress> mergedRegions){
-        for (int row = startRow; row <= endRow; row++){
-            Row oldRow = sheet.getRow(row);
-            if (oldRow == null){
-                continue;
-            }
-            Row newRow = sheet.getRow(row + rowOffset);
-            if (newRow == null){
-                newRow = sheet.createRow(row + rowOffset);
-            }
-            if (oldRow.getHeight() >= 0){
-                newRow.setHeight(oldRow.getHeight());
-            }
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("copy row [{}] to [{}],Set row height :{}", row, row + rowOffset, newRow.getHeightInPoints());
-            }
-            for (int col = startCol; col <= endCol; col++){
-                Cell oldCell = oldRow.getCell(col);
-                if (oldCell == null){
-                    continue;
-                }
-                Cell newCell = newRow.getCell(col + colOffset);
-                if (newCell == null){
-                    newCell = newRow.createCell(col + colOffset);
-                }
-                copyCell(oldCell, newCell, copyStyle, rowOffset, colOffset);
-            }
-        }
-        for (int col = startCol; col <= endCol; col++){
-            if (sheet.getColumnWidth(col) >= 0){
-                sheet.setColumnWidth(col + colOffset, sheet.getColumnWidth(col));
-            }
-        }
-        if (mergedRegions != null){
-            for (CellRangeAddress cra : mergedRegions){
-                CellRangeAddress craNew = new CellRangeAddress(
-                                cra.getFirstRow() + rowOffset,
-                                cra.getLastRow() + rowOffset,
-                                cra.getFirstColumn() + colOffset,
-                                cra.getLastColumn() + colOffset);
-                sheet.addMergedRegion(craNew);
-            }
-        }
-    }
-
-    /**
-     * Copy cell.
-     *
-     * @param oldCell
-     *            the old cell
-     * @param newCell
-     *            the new cell
-     * @param copyStyle
-     *            the copy style
-     * @param rowOffset
-     *            the row offset
-     * @param colOffset
-     *            the col offset
-     */
-    static void copyCell(Cell oldCell,Cell newCell,boolean copyStyle,int rowOffset,int colOffset){
-        if (copyStyle){
-            newCell.setCellStyle(oldCell.getCellStyle());
-        }
-        switch (oldCell.getCellType()) {
-            case STRING:
-                newCell.setCellValue(oldCell.getRichStringCellValue());
-                break;
-            case NUMERIC:
-                newCell.setCellValue(oldCell.getNumericCellValue());
-                break;
-            case BLANK:
-                newCell.setCellType(CellType.BLANK);
-                break;
-            case BOOLEAN:
-                newCell.setCellValue(oldCell.getBooleanCellValue());
-                break;
-            case ERROR:
-                newCell.setCellErrorValue(oldCell.getErrorCellValue());
-                break;
-            case FORMULA:
-                newCell.setCellFormula(offsetFormula(oldCell.getCellFormula(), rowOffset, colOffset));
-                break;
-            default:
-                break;
-        }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Copy cell.
-     *
-     * @param oldCell
-     *            the old cell
-     * @param newCell
-     *            the new cell
-     * @param copyStyle
-     *            the copy style
-     */
-    public static void copyCell(Cell oldCell,Cell newCell,boolean copyStyle){
-        if (copyStyle){
-            newCell.setCellStyle(oldCell.getCellStyle());
-        }
-        switch (oldCell.getCellType()) {
-            case STRING:
-                newCell.setCellValue(oldCell.getRichStringCellValue());
-                break;
-            case NUMERIC:
-                newCell.setCellValue(oldCell.getNumericCellValue());
-                break;
-            case BLANK:
-                newCell.setCellType(CellType.BLANK);
-                break;
-            case BOOLEAN:
-                newCell.setCellValue(oldCell.getBooleanCellValue());
-                break;
-            case ERROR:
-                newCell.setCellErrorValue(oldCell.getErrorCellValue());
-                break;
-            case FORMULA:
-                newCell.setCellFormula(oldCell.getCellFormula());
-                break;
-            default:
-                break;
-        }
-    }
 }

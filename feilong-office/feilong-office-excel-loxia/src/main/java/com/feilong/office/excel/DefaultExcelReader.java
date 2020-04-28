@@ -91,7 +91,7 @@ public class DefaultExcelReader implements ExcelReader{
      */
     @Override
     public ReadStatus readAll(InputStream is,Map<String, Object> beans){
-        ReadStatus readStatus = new DefaultReadStatus();
+        ReadStatus readStatus = new ReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
         try (Workbook wb = WorkbookFactory.create(is)){
@@ -113,18 +113,18 @@ public class DefaultExcelReader implements ExcelReader{
     /**
      * Read all per sheet.
      *
-     * @param is
+     * @param inputStream
      *            the is
      * @param beans
      *            the beans
      * @return the read status
      */
     @Override
-    public ReadStatus readAllPerSheet(InputStream is,Map<String, Object> beans){
-        ReadStatus readStatus = new DefaultReadStatus();
+    public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
+        ReadStatus readStatus = new ReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
-        try (Workbook wb = WorkbookFactory.create(is)){
+        try (Workbook workbook = WorkbookFactory.create(inputStream)){
             if (definition.getExcelSheets().size() == 0){
                 readStatus.setStatus(STATUS_SETTING_ERROR);
                 readStatus.setMessage("No sheet definition found");
@@ -138,9 +138,9 @@ public class DefaultExcelReader implements ExcelReader{
                         cacheMap.put(key, new ArrayList<>());
                     }
                 }
-                for (int i = 0; i < wb.getNumberOfSheets(); i++){
+                for (int i = 0; i < workbook.getNumberOfSheets(); i++){
                     Map<String, Object> clonedBeans = cloneMap(beans);
-                    readSheet(wb, i, sheetDefinition, new OgnlStack(clonedBeans), readStatus);
+                    readSheet(workbook, i, sheetDefinition, new OgnlStack(clonedBeans), readStatus);
                     for (String key : clonedBeans.keySet()){
                         cacheMap.get(key).add(clonedBeans.get(key));
                     }
@@ -171,7 +171,7 @@ public class DefaultExcelReader implements ExcelReader{
 
     @Override
     public ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans){
-        ReadStatus readStatus = new DefaultReadStatus();
+        ReadStatus readStatus = new ReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
         OgnlStack ognlStack = new OgnlStack(beans);
