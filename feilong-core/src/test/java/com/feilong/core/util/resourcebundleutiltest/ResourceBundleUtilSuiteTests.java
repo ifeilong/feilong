@@ -19,11 +19,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * The Class FeiLongResourceBundleUtilSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 GetResourceBundleWithBaseNameAndLocaleTest.class,
@@ -31,8 +26,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetResourceBundleWithInputStreamTest.class,
                 GetValueWithResourceBundleTest.class,
                 GetValueWithResourceBundleParameterizedTest.class,
+
                 ToAliasBeanTest.class,
                 ToMapTest.class,
+                ToMapBaseNamesTest.class,
                 ToPropertiesTest.class
         //
 })

@@ -96,9 +96,9 @@ public class DefaultExcelWriter implements ExcelWriter{
 
         //---------------------------------------------------------------
 
-        Workbook wb = createWookBook(new ByteArrayInputStream(bufferedTemplate), writeStatus);
-        if (wb != null){
-            writeNative(wb, os, beans, writeStatus);
+        Workbook workbook = createWookBook(new ByteArrayInputStream(bufferedTemplate), writeStatus);
+        if (workbook != null){
+            writeNative(workbook, os, beans, writeStatus);
         }
         return writeStatus;
 
@@ -1035,6 +1035,8 @@ public class DefaultExcelWriter implements ExcelWriter{
             cell.setCellValue((String) null);
             return;
         }
+
+        //---------------------------------------------------------------
         if (value instanceof Date){
             //if current cell do not formatted as date, set is as one date			
             if (cell.getCellType() != CellType.NUMERIC){
@@ -1047,7 +1049,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                 }
                 style.setDataFormat(
                                 cell.getSheet().getWorkbook().getCreationHelper().createDataFormat()
-                                                .getFormat(LoxiaSupportSettings.getInstance().get("date.pattern")));
+                                                .getFormat(LoxiaSupportSettings.get("date.pattern")));
                 cell.setCellStyle(style);
             }
         }

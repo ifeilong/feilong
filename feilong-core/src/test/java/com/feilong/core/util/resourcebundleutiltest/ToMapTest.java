@@ -15,17 +15,17 @@
  */
 package com.feilong.core.util.resourcebundleutiltest;
 
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import org.junit.Test;
-
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
  * The Class ResourceBundleUtilToMapTest.
@@ -57,6 +57,6 @@ public class ToMapTest{
      */
     @Test(expected = NullPointerException.class)
     public void testToMapNullResourceBundle(){
-        toMap(null);
+        toMap((ResourceBundle) null);
     }
 }

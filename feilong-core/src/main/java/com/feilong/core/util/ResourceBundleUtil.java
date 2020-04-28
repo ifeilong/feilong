@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 import static java.util.Collections.emptyMap;
@@ -151,7 +152,6 @@ public final class ResourceBundleUtil{
         }
 
         //---------------------------------------------------------------
-
         String value = resourceBundle.getString(key);
         if (isNullOrEmpty(value)){
             LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
@@ -160,6 +160,112 @@ public final class ResourceBundleUtil{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 解析 <code>baseNamess</code> 成map.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>JDK默认使用的是{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span></li>
+     * </ol>
+     * <li>后面的配置文件会覆盖前面的配置文件</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
+     * </p>
+     * 
+     * <pre class="code">
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
+     * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
+     * memcached.poolname=sidsock2
+     * <span style="color:green">#单位分钟</span>
+     * memcached.expiretime=180
+     * 
+     * memcached.serverweight=2
+     * 
+     * memcached.initconnection=10
+     * memcached.minconnection=5
+     * memcached.maxconnection=250
+     * 
+     * <span style="color:green">#设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小</span>
+     * memcached.maintSleep=30
+     * 
+     * <span style="color:green">#关闭套接字缓存</span>
+     * memcached.nagle=false
+     * 
+     * <span style="color:green">#连接建立后的超时时间</span>
+     * memcached.socketto=3000
+     * memcached.alivecheck=false
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = toMap("messages/memcached");
+     * LOGGER.debug(JsonUtil.format(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "memcached.alivecheck": "false",
+     * "memcached.expiretime": "180",
+     * "memcached.initconnection": "10",
+     * "memcached.maintSleep": "30",
+     * "memcached.maxconnection": "250",
+     * "memcached.minconnection": "5",
+     * "memcached.nagle": "false",
+     * "memcached.poolname": "sidsock2",
+     * "memcached.serverlist": "172.20.3-1.23:11211,172.20.31.22:11211",
+     * "memcached.serverweight": "2",
+     * "memcached.socketto": "3000"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param baseNames
+     *            the base names
+     * @return 如果 <code>baseNames</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>baseNames</code> 中有元素是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseNames</code> 中有元素是blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则,解析所有的key和value转成 {@link TreeMap}<br>
+     * @since 3.0.0
+     */
+    public static Map<String, String> toMap(String...baseNames){
+        Validate.notEmpty(baseNames, "baseNames can't be null/empty!");
+
+        //---------------------------------------------------------------
+        Map<String, String> map = new TreeMap<>();//为了log方便,使用 treeMap
+        for (String baseName : baseNames){
+            Validate.notBlank(baseName, "baseName is null or empty,[%s]", ConvertUtil.toString(baseNames, ","));
+            //---------------------------------------------------------------
+            try{
+                ResourceBundle resourceBundle = getResourceBundle(baseName);
+                Map<String, String> littleMap = toMap(resourceBundle);
+                if (isNotNullOrEmpty(littleMap)){
+                    map.putAll(littleMap);
+                }
+            }catch (Exception e){
+                LOGGER.warn("baseName:[{}],message", baseName, e.getMessage());
+                continue;
+            }
+        }
+        return map;
+    }
 
     /**
      * 将 <code>resourceBundle</code> 转成map.
@@ -242,14 +348,12 @@ public final class ResourceBundleUtil{
      */
     public static Map<String, String> toMap(ResourceBundle resourceBundle){
         Validate.notNull(resourceBundle, "resourceBundle can't be null!");
-
         Enumeration<String> keysEnumeration = resourceBundle.getKeys();
         if (isNullOrEmpty(keysEnumeration)){
             return emptyMap();
         }
 
         //---------------------------------------------------------------
-
         Map<String, String> map = new TreeMap<>();//为了log方便,使用 treeMap
         while (keysEnumeration.hasMoreElements()){
             String key = keysEnumeration.nextElement();

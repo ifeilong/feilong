@@ -185,9 +185,10 @@ public class DefaultExcelReader implements ExcelReader{
     public ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans){
         ReadStatus readStatus = new DefaultReadStatus();
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
-        OgnlStack stack = new OgnlStack(beans);
-        try (Workbook wb = WorkbookFactory.create(is)){
-            readSheet(wb, sheetNo, definition.getExcelSheets().iterator().next(), stack, readStatus);
+
+        OgnlStack ognlStack = new OgnlStack(beans);
+        try (Workbook workbook = WorkbookFactory.create(is)){
+            readSheet(workbook, sheetNo, definition.getExcelSheets().iterator().next(), ognlStack, readStatus);
         }catch (IOException e){
             readStatus.setStatus(STATUS_READ_FILE_ERROR);
         }
@@ -220,6 +221,8 @@ public class DefaultExcelReader implements ExcelReader{
         }
         return result;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Read sheet.

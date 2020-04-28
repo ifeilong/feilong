@@ -38,7 +38,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
     //---------------------------------------------------------------
 
     /** The date pattern. */
-    private String           datePattern          = LoxiaSupportSettings.getInstance().get("date.pattern");
+    private String           datePattern          = LoxiaSupportSettings.get("date.pattern");
 
     /**
      * Gets the date pattern.
