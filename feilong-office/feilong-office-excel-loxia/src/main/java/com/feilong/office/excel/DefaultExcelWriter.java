@@ -1047,7 +1047,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                 }
                 style.setDataFormat(
                                 cell.getSheet().getWorkbook().getCreationHelper().createDataFormat()
-                                                .getFormat(LoxiaSupportSettings.getInstance().get(LoxiaSupportConstants.DATE_PATTERN)));
+                                                .getFormat(LoxiaSupportSettings.getInstance().get("date.pattern")));
                 cell.setCellStyle(style);
             }
         }

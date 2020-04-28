@@ -38,9 +38,6 @@ public class ExcelManipulatorFactory{
     //---------------------------------------------------------------
     private final Map<String, ExcelSheet> sheetDefinitions = new HashMap<>();
 
-    /** The Constant BLANK_SHEET_DEF. */
-    private static final String           BLANK_SHEET_DEF  = "blank";
-
     /** The Constant BLANK_SHEET. */
     private static final ExcelSheet       BLANK_SHEET      = new ExcelSheet();
 
@@ -238,6 +235,8 @@ public class ExcelManipulatorFactory{
                 throw new RuntimeException("Initiate ExcelReader[" + clazz + "] failure");
             }
         }
+
+        //---------------------------------------------------------------
         ExcelManipulatorDefinition definition = new ExcelManipulatorDefinition();
         for (String sheet : sheets){
             ExcelSheet sheetDefinition = getExcelSheet(sheet);
@@ -247,6 +246,8 @@ public class ExcelManipulatorFactory{
         return excelReader;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the excel sheet.
      *
@@ -255,7 +256,7 @@ public class ExcelManipulatorFactory{
      * @return the excel sheet
      */
     private ExcelSheet getExcelSheet(String sheet){
-        if (BLANK_SHEET_DEF.equalsIgnoreCase(sheet)){
+        if ("blank".equalsIgnoreCase(sheet)){
             return BLANK_SHEET;
         }
         ExcelSheet sheetDefinition = sheetDefinitions.get(sheet);

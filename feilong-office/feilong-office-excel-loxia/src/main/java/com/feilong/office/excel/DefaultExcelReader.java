@@ -239,9 +239,10 @@ public class DefaultExcelReader implements ExcelReader{
         //In Read Operation only the first loopBlock will be read
         int loopBlock = 0;
 
+        int status = readStatus.getStatus();
         for (ExcelBlock blockDefinition : sheetDefinition.getExcelBlocks()){
-            if (((skipErrors && readStatus.getStatus() == STATUS_DATA_COLLECTION_ERROR)
-                            || readStatus.getStatus() == ReadStatus.STATUS_SUCCESS) && (loopBlock < 1 || !blockDefinition.isLoop())){
+            if (((skipErrors && status == STATUS_DATA_COLLECTION_ERROR) || status == ReadStatus.STATUS_SUCCESS)
+                            && (loopBlock < 1 || !blockDefinition.isLoop())){
                 if (blockDefinition.isLoop()){
                     loopBlock++;
                     readLoopBlock(wb, sheetNo, blockDefinition, stack, readStatus);
@@ -339,6 +340,8 @@ public class DefaultExcelReader implements ExcelReader{
             }else{
                 dataList = (Collection) obj;
             }
+
+            //---------------------------------------------------------------
 
             int startRow = blockDefinition.getStartRow();
             int step = blockDefinition.getEndRow() - blockDefinition.getStartRow() + 1;

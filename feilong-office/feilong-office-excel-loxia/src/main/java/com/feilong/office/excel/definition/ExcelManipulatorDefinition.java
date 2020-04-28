@@ -31,6 +31,8 @@ public class ExcelManipulatorDefinition{
     /** The excel sheets. */
     private List<ExcelSheet> excelSheets = new ArrayList<>();
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the excel sheets.
      *

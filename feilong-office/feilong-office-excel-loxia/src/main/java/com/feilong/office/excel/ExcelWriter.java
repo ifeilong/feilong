@@ -75,6 +75,8 @@ public interface ExcelWriter{
      */
     WriteStatus write(InputStream is,OutputStream os,Map<String, Object> beans);
 
+    //---------------------------------------------------------------
+
     /**
      * Write per sheet.
      *
@@ -100,6 +102,8 @@ public interface ExcelWriter{
      * @return the write status
      */
     WriteStatus writePerSheet(InputStream is,OutputStream os,List<Map<String, Object>> beansList);
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the definition.

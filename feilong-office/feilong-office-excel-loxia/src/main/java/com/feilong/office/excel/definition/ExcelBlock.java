@@ -67,6 +67,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     /** The child block. */
     private ExcelBlock                    childBlock;
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the start cell index.
      *

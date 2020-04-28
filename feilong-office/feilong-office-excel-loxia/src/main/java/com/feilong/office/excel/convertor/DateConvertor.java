@@ -25,7 +25,6 @@ import java.util.Date;
 import org.apache.poi.ss.usermodel.DateUtil;
 
 import com.feilong.office.excel.ExcelManipulateException;
-import com.feilong.office.excel.LoxiaSupportConstants;
 import com.feilong.office.excel.LoxiaSupportSettings;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -39,7 +38,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
     //---------------------------------------------------------------
 
     /** The date pattern. */
-    private String           datePattern          = LoxiaSupportSettings.getInstance().get(LoxiaSupportConstants.DATE_PATTERN);
+    private String           datePattern          = LoxiaSupportSettings.getInstance().get("date.pattern");
 
     /**
      * Gets the date pattern.

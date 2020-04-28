@@ -40,6 +40,8 @@ public class ExcelCellConditionStyle{
     /** The cell index. */
     private String cellIndex;
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the condition.
      *

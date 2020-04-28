@@ -53,6 +53,8 @@ public class ExcelCell{
     /** The styles. */
     private List<ExcelCellConditionStyle> styles = new ArrayList<>();
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the row.
      *

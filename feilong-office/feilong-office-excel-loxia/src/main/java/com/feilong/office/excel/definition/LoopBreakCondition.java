@@ -29,6 +29,8 @@ public class LoopBreakCondition{
     /** The flag string. */
     private String flagString;
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the row offset.
      *

@@ -91,6 +91,8 @@ public class ExcelUtil{
         return newCell.formatAsString().replaceAll("\\$", "");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Offset formula.
      *
@@ -116,6 +118,8 @@ public class ExcelUtil{
         sb.append(formula.substring(head));
         return sb.toString();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Copy sheet.

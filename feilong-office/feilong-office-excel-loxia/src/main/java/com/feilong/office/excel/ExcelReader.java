@@ -60,6 +60,8 @@ public interface ExcelReader{
      */
     ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans);
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the definition.
      *

@@ -101,6 +101,8 @@ public class DataConvertorConfigurator implements Serializable{
         return supportsMap.get(name);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the single instance of DataConvertorConfigurator.
      *
