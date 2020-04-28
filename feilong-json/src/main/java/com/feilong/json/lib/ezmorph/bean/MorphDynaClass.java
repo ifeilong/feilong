@@ -76,6 +76,8 @@ public final class MorphDynaClass implements DynaClass,Serializable{
     /** The type. */
     private final Class             type;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new morph dyna class.
      *
@@ -137,9 +139,8 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         if (attributes == null || attributes.isEmpty()){
             if (exceptionOnEmptyAttributes){
                 throw new MorphException("Attributes map is null or empty.");
-            }else{
-                attributes = new HashMap();
             }
+            attributes = new HashMap();
         }
         this.name = name;
         this.type = type;

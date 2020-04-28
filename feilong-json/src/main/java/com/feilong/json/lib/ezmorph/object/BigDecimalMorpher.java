@@ -34,6 +34,8 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
     /** The default value. */
     private BigDecimal defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new big decimal morpher.
      */
@@ -51,6 +53,8 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
         super(true);
         this.defaultValue = defaultValue;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Equals.

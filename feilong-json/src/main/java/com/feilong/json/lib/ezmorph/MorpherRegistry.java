@@ -46,6 +46,8 @@ public class MorpherRegistry implements Serializable{
     /** The morphers. */
     private final Map         morphers         = new HashMap();
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new morpher registry.
      */
@@ -91,6 +93,8 @@ public class MorpherRegistry implements Serializable{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns a morpher for <code>clazz</code>.<br>
      * If several morphers are found for that class, it returns the first. If no
@@ -105,9 +109,8 @@ public class MorpherRegistry implements Serializable{
         if (registered == null || registered.isEmpty()){
             // no morpher registered for clazz
             return IdentityObjectMorpher.getInstance();
-        }else{
-            return (Morpher) registered.get(0);
         }
+        return (Morpher) registered.get(0);
     }
 
     /**
@@ -125,14 +128,15 @@ public class MorpherRegistry implements Serializable{
         if (registered == null || registered.isEmpty()){
             // no morphers registered for clazz
             return new Morpher[] { IdentityObjectMorpher.getInstance() };
-        }else{
-            Morpher[] morphs = new Morpher[registered.size()];
-            int k = 0;
-            for (Iterator i = registered.iterator(); i.hasNext();){
-                morphs[k++] = (Morpher) i.next();
-            }
-            return morphs;
         }
+
+        //---------------------------------------------------------------
+        Morpher[] morphs = new Morpher[registered.size()];
+        int k = 0;
+        for (Iterator i = registered.iterator(); i.hasNext();){
+            morphs[k++] = (Morpher) i.next();
+        }
+        return morphs;
     }
 
     /**
@@ -155,13 +159,12 @@ public class MorpherRegistry implements Serializable{
             Morpher morpher = getMorpherFor(target);
             if (morpher instanceof ObjectMorpher){
                 return ((ObjectMorpher) morpher).morph(value);
-            }else{
-                try{
-                    Method morphMethod = morpher.getClass().getDeclaredMethod("morph", new Class[] { Object.class });
-                    return morphMethod.invoke(morpher, new Object[] { value });
-                }catch (Exception e){
-                    throw new MorphException(e);
-                }
+            }
+            try{
+                Method morphMethod = morpher.getClass().getDeclaredMethod("morph", new Class[] { Object.class });
+                return morphMethod.invoke(morpher, new Object[] { value });
+            }catch (Exception e){
+                throw new MorphException(e);
             }
         }
 
@@ -171,18 +174,21 @@ public class MorpherRegistry implements Serializable{
             if (morpher.supports(value.getClass())){
                 if (morpher instanceof ObjectMorpher){
                     return ((ObjectMorpher) morpher).morph(value);
-                }else{
-                    try{
-                        Method morphMethod = morpher.getClass().getDeclaredMethod("morph", new Class[] { Object.class });
-                        return morphMethod.invoke(morpher, new Object[] { value });
-                    }catch (Exception e){
-                        throw new MorphException(e);
-                    }
+                }
+
+                //---------------------------------------------------------------
+                try{
+                    Method morphMethod = morpher.getClass().getDeclaredMethod("morph", new Class[] { Object.class });
+                    return morphMethod.invoke(morpher, new Object[] { value });
+                }catch (Exception e){
+                    throw new MorphException(e);
                 }
             }
         }
         return value;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Register a Morpher for a target <code>Class</code>.<br>

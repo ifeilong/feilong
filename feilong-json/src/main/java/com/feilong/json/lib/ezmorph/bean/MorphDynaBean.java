@@ -54,6 +54,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     /** The morpher registry. */
     private MorpherRegistry   morpherRegistry;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new morph dyna bean.
      */

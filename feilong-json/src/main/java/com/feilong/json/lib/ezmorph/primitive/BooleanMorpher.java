@@ -117,9 +117,8 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Boolean){
@@ -148,6 +147,8 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
 
         throw new MorphException("Can't morph value: " + value);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Morphs to.

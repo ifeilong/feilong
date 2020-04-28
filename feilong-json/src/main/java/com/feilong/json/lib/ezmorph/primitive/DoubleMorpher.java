@@ -31,6 +31,8 @@ public final class DoubleMorpher extends AbstractDecimalMorpher{
     /** The default value. */
     private double defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new double morpher.
      */
@@ -48,6 +50,8 @@ public final class DoubleMorpher extends AbstractDecimalMorpher{
         super(true);
         this.defaultValue = defaultValue;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Equals.
@@ -117,25 +121,22 @@ public final class DoubleMorpher extends AbstractDecimalMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Number){
             return ((Number) value).doubleValue();
-        }else{
-            double i = 0;
-            try{
-                i = Double.parseDouble(String.valueOf(value));
-                return i;
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+        double i = 0;
+        try{
+            i = Double.parseDouble(String.valueOf(value));
+            return i;
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
             }
+            throw new MorphException(nfe);
         }
     }
 

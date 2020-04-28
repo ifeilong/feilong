@@ -59,6 +59,8 @@ public final class BeanMorpher implements ObjectMorpher{
     /** The morpher registry. */
     private final MorpherRegistry morpherRegistry;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new bean morpher.
      *
@@ -91,6 +93,8 @@ public final class BeanMorpher implements ObjectMorpher{
         this.morpherRegistry = morpherRegistry;
         this.lenient = lenient;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Morph.
@@ -217,9 +221,8 @@ public final class BeanMorpher implements ObjectMorpher{
                     if (IdentityObjectMorpher.getInstance() == morpherRegistry.getMorpherFor(targetType)){
                         if (!lenient){
                             throw new MorphException("Can't find a morpher for target class " + targetType.getName() + " (" + name + ")");
-                        }else{
-                            LOGGER.info("Can't find a morpher for target class " + targetType.getName() + " (" + name + ") SKIPPED");
                         }
+                        LOGGER.info("Can't find a morpher for target class " + targetType.getName() + " (" + name + ") SKIPPED");
                     }else{
                         PropertyUtils.setProperty(targetBean, name, morpherRegistry.morph(targetType, value));
                     }

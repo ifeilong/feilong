@@ -117,25 +117,22 @@ public final class ByteMorpher extends AbstractIntegerMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Number){
             return ((Number) value).byteValue();
-        }else{
-            byte i = 0;
-            try{
-                i = Byte.parseByte(getIntegerValue(value));
-                return i;
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+        byte i = 0;
+        try{
+            i = Byte.parseByte(getIntegerValue(value));
+            return i;
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
             }
+            throw new MorphException(nfe);
         }
     }
 

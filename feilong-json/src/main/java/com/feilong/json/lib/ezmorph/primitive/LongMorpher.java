@@ -31,6 +31,8 @@ public final class LongMorpher extends AbstractIntegerMorpher{
     /** The default value. */
     private long defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new long morpher.
      */
@@ -49,6 +51,7 @@ public final class LongMorpher extends AbstractIntegerMorpher{
         this.defaultValue = defaultValue;
     }
 
+    //---------------------------------------------------------------
     /**
      * Equals.
      *
@@ -117,25 +120,22 @@ public final class LongMorpher extends AbstractIntegerMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Number){
             return ((Number) value).longValue();
-        }else{
-            long i = 0;
-            try{
-                i = Long.parseLong(getIntegerValue(value));
-                return i;
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+        long i = 0;
+        try{
+            i = Long.parseLong(getIntegerValue(value));
+            return i;
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
             }
+            throw new MorphException(nfe);
         }
     }
 

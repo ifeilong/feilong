@@ -49,11 +49,14 @@ import com.feilong.json.lib.ezmorph.primitive.ShortMorpher;
  */
 public class MorphUtils{
 
-    /** Constant value for BigDecimal(1). */
-    public static final BigDecimal BIGDECIMAL_ONE  = new BigDecimal("1");
+    /**
+     * Instantiates a new morph utils.
+     */
+    private MorphUtils(){
 
-    /** Constant value for BigDecimal(0). */
-    public static final BigDecimal BIGDECIMAL_ZERO = new BigDecimal("0");
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Clears and registers all standard morpehrs.
@@ -100,7 +103,7 @@ public class MorphUtils{
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Float.class, new Float(0))));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Double.class, new Double(0))));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigInteger.class, BigInteger.ZERO)));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigDecimal.class, MorphUtils.BIGDECIMAL_ZERO)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigDecimal.class, BigDecimal.ZERO)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(ClassMorpher.getInstance()));
     }
 
@@ -134,7 +137,7 @@ public class MorphUtils{
         morpherRegistry.registerMorpher(new NumberMorpher(Float.class, new Float(0)));
         morpherRegistry.registerMorpher(new NumberMorpher(Double.class, new Double(0)));
         morpherRegistry.registerMorpher(new NumberMorpher(BigInteger.class, BigInteger.ZERO));
-        morpherRegistry.registerMorpher(new NumberMorpher(BigDecimal.class, MorphUtils.BIGDECIMAL_ZERO));
+        morpherRegistry.registerMorpher(new NumberMorpher(BigDecimal.class, BigDecimal.ZERO));
         morpherRegistry.registerMorpher(ClassMorpher.getInstance());
     }
 
@@ -192,10 +195,4 @@ public class MorphUtils{
         morpherRegistry.registerMorpher(new DoubleMorpher(0));
     }
 
-    /**
-     * Instantiates a new morph utils.
-     */
-    private MorphUtils(){
-
-    }
 }

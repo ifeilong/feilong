@@ -49,6 +49,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
     /** The locale. */
     private Locale         locale;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new date morpher.
      *

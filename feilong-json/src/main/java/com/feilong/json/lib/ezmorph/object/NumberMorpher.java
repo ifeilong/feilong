@@ -45,6 +45,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
     /** The type. */
     private final Class type;
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a new morpher for the target type.
      *
@@ -189,18 +191,17 @@ public final class NumberMorpher extends AbstractObjectMorpher{
             }else{
                 return morphToBigDecimal(str);
             }
+        }
+        if (Byte.class.isAssignableFrom(type) || Byte.TYPE == type){
+            return morphToByte(str);
+        }else if (Short.class.isAssignableFrom(type) || Short.TYPE == type){
+            return morphToShort(str);
+        }else if (Integer.class.isAssignableFrom(type) || Integer.TYPE == type){
+            return morphToInteger(str);
+        }else if (Long.class.isAssignableFrom(type) || Long.TYPE == type){
+            return morphToLong(str);
         }else{
-            if (Byte.class.isAssignableFrom(type) || Byte.TYPE == type){
-                return morphToByte(str);
-            }else if (Short.class.isAssignableFrom(type) || Short.TYPE == type){
-                return morphToShort(str);
-            }else if (Integer.class.isAssignableFrom(type) || Integer.TYPE == type){
-                return morphToInteger(str);
-            }else if (Long.class.isAssignableFrom(type) || Long.TYPE == type){
-                return morphToLong(str);
-            }else{
-                return morphToBigInteger(str);
-            }
+            return morphToBigInteger(str);
         }
     }
 
@@ -287,9 +288,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         if (isUseDefault()){
             if (defaultValue == null){
                 return null;
-            }else{
-                result = new Byte(new ByteMorpher(defaultValue.byteValue()).morph(str));
             }
+            result = new Byte(new ByteMorpher(defaultValue.byteValue()).morph(str));
         }else{
             result = new Byte(new ByteMorpher().morph(str));
         }
@@ -308,9 +308,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         if (isUseDefault()){
             if (defaultValue == null){
                 return null;
-            }else{
-                result = new Double(new DoubleMorpher(defaultValue.doubleValue()).morph(str));
             }
+            result = new Double(new DoubleMorpher(defaultValue.doubleValue()).morph(str));
         }else{
             result = new Double(new DoubleMorpher().morph(str));
         }
@@ -329,9 +328,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         if (isUseDefault()){
             if (defaultValue == null){
                 return null;
-            }else{
-                result = new Float(new FloatMorpher(defaultValue.floatValue()).morph(str));
             }
+            result = new Float(new FloatMorpher(defaultValue.floatValue()).morph(str));
         }else{
             result = new Float(new FloatMorpher().morph(str));
         }
@@ -350,9 +348,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         if (isUseDefault()){
             if (defaultValue == null){
                 return null;
-            }else{
-                result = new Integer(new IntMorpher(defaultValue.intValue()).morph(str));
             }
+            result = new Integer(new IntMorpher(defaultValue.intValue()).morph(str));
         }else{
             result = new Integer(new IntMorpher().morph(str));
         }
@@ -371,9 +368,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         if (isUseDefault()){
             if (defaultValue == null){
                 return null;
-            }else{
-                result = new Long(new LongMorpher(defaultValue.longValue()).morph(str));
             }
+            result = new Long(new LongMorpher(defaultValue.longValue()).morph(str));
         }else{
             result = new Long(new LongMorpher().morph(str));
         }
@@ -392,9 +388,8 @@ public final class NumberMorpher extends AbstractObjectMorpher{
         if (isUseDefault()){
             if (defaultValue == null){
                 return null;
-            }else{
-                result = new Short(new ShortMorpher(defaultValue.shortValue()).morph(str));
             }
+            result = new Short(new ShortMorpher(defaultValue.shortValue()).morph(str));
         }else{
             result = new Short(new ShortMorpher().morph(str));
         }

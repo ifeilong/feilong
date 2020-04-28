@@ -30,6 +30,8 @@ public final class ClassMorpher implements ObjectMorpher{
     /** The Constant INSTANCE. */
     private static final ClassMorpher INSTANCE = new ClassMorpher();
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the singleton instance.
      *

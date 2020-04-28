@@ -28,6 +28,8 @@ public abstract class AbstractPrimitiveMorpher implements Morpher{
     /** The use default. */
     private boolean useDefault = false;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new abstract primitive morpher.
      */
@@ -55,6 +57,8 @@ public abstract class AbstractPrimitiveMorpher implements Morpher{
     public boolean isUseDefault(){
         return useDefault;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns true if the Morpher supports conversion from this Class.<br>

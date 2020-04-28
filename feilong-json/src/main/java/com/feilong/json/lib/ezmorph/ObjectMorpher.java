@@ -16,10 +16,13 @@
 
 package com.feilong.json.lib.ezmorph;
 
+import org.apache.commons.beanutils.Converter;
+
 /**
  * Marker interface for morphers that return an Object.<br>
  * 
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
+ * @see Converter
  */
 public interface ObjectMorpher extends Morpher{
 

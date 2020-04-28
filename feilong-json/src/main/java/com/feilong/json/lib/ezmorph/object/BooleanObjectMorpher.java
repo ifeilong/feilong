@@ -31,6 +31,8 @@ public final class BooleanObjectMorpher extends AbstractObjectMorpher{
     /** The default value. */
     private Boolean defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new boolean object morpher.
      */
@@ -116,23 +118,21 @@ public final class BooleanObjectMorpher extends AbstractObjectMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Boolean){
             return value;
-        }else{
-            String s = String.valueOf(value);
+        }
+        String s = String.valueOf(value);
 
-            if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")){
-                return Boolean.TRUE;
-            }else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
-                return Boolean.FALSE;
-            }else if (isUseDefault()){
-                return defaultValue;
-            }
+        if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")){
+            return Boolean.TRUE;
+        }else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
+            return Boolean.FALSE;
+        }else if (isUseDefault()){
+            return defaultValue;
         }
 
         throw new MorphException("Can't morph value: " + value);

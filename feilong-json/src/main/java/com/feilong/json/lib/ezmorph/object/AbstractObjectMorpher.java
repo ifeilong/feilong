@@ -28,6 +28,8 @@ public abstract class AbstractObjectMorpher implements ObjectMorpher{
     /** The use default. */
     private boolean useDefault;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new abstract object morpher.
      */
@@ -64,6 +66,8 @@ public abstract class AbstractObjectMorpher implements ObjectMorpher{
     public void setUseDefault(boolean useDefault){
         this.useDefault = useDefault;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns true if the Morpher supports conversion from this Class.<br>

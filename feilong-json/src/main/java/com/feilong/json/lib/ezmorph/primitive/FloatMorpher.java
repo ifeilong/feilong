@@ -31,6 +31,8 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
     /** The default value. */
     private float defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new float morpher.
      */
@@ -117,25 +119,22 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Number){
             return ((Number) value).floatValue();
-        }else{
-            float i = 0;
-            try{
-                i = Float.parseFloat(String.valueOf(value));
-                return i;
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+        float i = 0;
+        try{
+            i = Float.parseFloat(String.valueOf(value));
+            return i;
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
             }
+            throw new MorphException(nfe);
         }
     }
 

@@ -35,6 +35,8 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
     /** The default value. */
     private BigInteger defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new big integer morpher.
      */

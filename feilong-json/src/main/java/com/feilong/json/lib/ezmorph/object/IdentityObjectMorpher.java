@@ -44,6 +44,8 @@ public final class IdentityObjectMorpher implements ObjectMorpher{
     private IdentityObjectMorpher(){
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Equals.
      *

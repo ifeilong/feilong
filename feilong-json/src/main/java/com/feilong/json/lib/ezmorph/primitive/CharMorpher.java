@@ -31,6 +31,8 @@ public final class CharMorpher extends AbstractPrimitiveMorpher{
     /** The default value. */
     private char defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new char morpher.
      */
@@ -117,25 +119,21 @@ public final class CharMorpher extends AbstractPrimitiveMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Character){
             return ((Character) value).charValue();
-        }else{
-            String s = String.valueOf(value);
-            if (s.length() > 0){
-                return s.charAt(0);
-            }else{
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException("Can't morph value: " + value);
-                }
-            }
         }
+        String s = String.valueOf(value);
+        if (s.length() > 0){
+            return s.charAt(0);
+        }
+        if (isUseDefault()){
+            return defaultValue;
+        }
+        throw new MorphException("Can't morph value: " + value);
     }
 
     /**

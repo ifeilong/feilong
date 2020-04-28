@@ -49,6 +49,8 @@ public final class IntMorpher extends AbstractIntegerMorpher{
         this.defaultValue = defaultValue;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Equals.
      *
@@ -117,25 +119,22 @@ public final class IntMorpher extends AbstractIntegerMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                throw new MorphException("value is null");
             }
+            throw new MorphException("value is null");
         }
 
         if (value instanceof Number){
             return ((Number) value).intValue();
-        }else{
-            int i = 0;
-            try{
-                i = Integer.parseInt(getIntegerValue(value));
-                return i;
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+        int i = 0;
+        try{
+            i = Integer.parseInt(getIntegerValue(value));
+            return i;
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
             }
+            throw new MorphException(nfe);
         }
     }
 

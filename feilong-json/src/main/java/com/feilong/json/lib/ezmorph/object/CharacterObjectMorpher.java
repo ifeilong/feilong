@@ -31,6 +31,8 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
     /** The default value. */
     private Character defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new character object morpher.
      */
