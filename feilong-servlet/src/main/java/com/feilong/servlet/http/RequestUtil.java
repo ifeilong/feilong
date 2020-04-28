@@ -326,7 +326,6 @@ public final class RequestUtil{
         }
         //---------------------------------------------------------------
         for (String uriSuffix : STATIC_RESOURCE_SUFFIX){
-            //XXX 性能
             if (StringUtils.endsWithIgnoreCase(requestURI, uriSuffix)){
                 return true;
             }

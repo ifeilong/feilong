@@ -17,7 +17,6 @@ package com.feilong.office.excel.convertor;
 
 import java.util.List;
 
-import com.feilong.office.excel.ErrorCode;
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -29,21 +28,8 @@ import com.feilong.office.excel.definition.ExcelCell;
  */
 public abstract class ChoiceConvertor<T> implements DataConvertor<T>{
 
-    /**
-     * Convert.
-     *
-     * @param value
-     *            the value
-     * @param sheetNo
-     *            the sheet no
-     * @param cellIndex
-     *            the cell index
-     * @param cellDefinition
-     *            the cell definition
-     * @return the t
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
-     */
+    private static final int OUT_OF_CHOICES = 3;
+
     @Override
     public T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
         T convertedValue = convertValue(value, sheetNo, cellIndex, cellDefinition);
@@ -53,7 +39,7 @@ public abstract class ChoiceConvertor<T> implements DataConvertor<T>{
             return convertedValue;
         }
         throw new ExcelManipulateException(
-                        ErrorCode.OUT_OF_CHOICES,
+                        OUT_OF_CHOICES,
                         new Object[] {
                                        sheetNo + 1,
                                        cellIndex,

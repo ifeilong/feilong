@@ -27,6 +27,8 @@ public class DefaultReadStatus implements ReadStatus,Serializable{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 567602698187676255L;
 
+    //---------------------------------------------------------------
+
     /** The status. */
     private int               status           = STATUS_SUCCESS;
 

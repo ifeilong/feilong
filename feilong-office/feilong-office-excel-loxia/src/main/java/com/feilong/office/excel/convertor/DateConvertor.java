@@ -33,8 +33,10 @@ import com.feilong.office.excel.definition.ExcelCell;
  */
 public class DateConvertor implements DataConvertor<Date>{
 
+    private static final int WRONG_DATA_TYPE_DATE = 13;
+
     /** The date pattern. */
-    private String datePattern = LoxiaSupportSettings.getInstance().get(LoxiaSupportConstants.DATE_PATTERN);
+    private String           datePattern          = LoxiaSupportSettings.getInstance().get(LoxiaSupportConstants.DATE_PATTERN);
 
     /**
      * Gets the date pattern.
@@ -86,7 +88,7 @@ public class DateConvertor implements DataConvertor<Date>{
                 return df.parse((String) value);
             }catch (ParseException e){
                 throw new ExcelManipulateException(
-                                ErrorCode.WRONG_DATA_TYPE_DATE,
+                                WRONG_DATA_TYPE_DATE,
                                 new Object[] {
                                                sheetNo + 1,
                                                cellIndex,
@@ -100,7 +102,7 @@ public class DateConvertor implements DataConvertor<Date>{
             return DateUtil.getJavaDate((Double) value);
         }else{
             throw new ExcelManipulateException(
-                            ErrorCode.WRONG_DATA_TYPE_DATE,
+                            WRONG_DATA_TYPE_DATE,
                             new Object[] { sheetNo + 1, cellIndex, value, cellDefinition.getPattern(), cellDefinition.getChoiceString() });
         }
     }

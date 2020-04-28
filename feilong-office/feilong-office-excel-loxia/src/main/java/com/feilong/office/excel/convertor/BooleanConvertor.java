@@ -40,6 +40,8 @@ import com.feilong.office.excel.definition.ExcelCell;
  */
 public class BooleanConvertor implements DataConvertor<Boolean>{
 
+    private static final int WRONG_DATA_FORMAT = 50;
+
     /*
      * (non-Javadoc)
      * 
@@ -66,7 +68,7 @@ public class BooleanConvertor implements DataConvertor<Boolean>{
             Number value2 = (Number) value;
             return BooleanUtils.toBooleanObject(value2.intValue());
         }
-        throw build(value, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_FORMAT);
+        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_FORMAT);
     }
 
     //---------------------------------------------------------------

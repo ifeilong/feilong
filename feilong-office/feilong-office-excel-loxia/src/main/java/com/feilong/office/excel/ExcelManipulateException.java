@@ -31,6 +31,8 @@ public class ExcelManipulateException extends Exception{
     /** [SheetNo,Position,CurrentValue,Pattern,ChoiceList]. */
     private Object[]          args;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new excel manipulate exception.
      *

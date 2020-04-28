@@ -87,7 +87,6 @@ public class DefaultExcelWriter implements ExcelWriter{
         }
 
         Workbook wb = createWookBook(new ByteArrayInputStream(bufferedTemplate), writeStatus);
-
         if (wb != null){
             writeNative(wb, os, beans, writeStatus);
         }

@@ -52,15 +52,16 @@ import ognl.OgnlRuntime;
 public class DefaultExcelReader implements ExcelReader{
 
     /** The Constant log. */
-    private static final Logger        LOGGER     = LoggerFactory.getLogger(DefaultExcelReader.class);
+    private static final Logger        LOGGER                 = LoggerFactory.getLogger(DefaultExcelReader.class);
 
+    private static final int           UNSUPPORTING_DATA_TYPE = 2;
     //---------------------------------------------------------------
 
     /** The definition. */
     private ExcelManipulatorDefinition definition;
 
     /** The skip errors. */
-    private boolean                    skipErrors = true;
+    private boolean                    skipErrors             = true;
 
     //---------------------------------------------------------------
 
@@ -431,7 +432,7 @@ public class DefaultExcelReader implements ExcelReader{
         }
         if (dc == null){
             throw new ExcelManipulateException(
-                            ErrorCode.UNSUPPORTING_DATA_TYPE,
+                            UNSUPPORTING_DATA_TYPE,
                             new Object[] { sheetNo + 1, cellIndex, null, cellDefinition.getPattern(), cellDefinition.getChoiceString() });
         }
         return dc.convert(value, sheetNo, cellIndex, cellDefinition);
@@ -448,11 +449,10 @@ public class DefaultExcelReader implements ExcelReader{
      * @throws ExcelManipulateException
      *             the excel manipulate exception
      */
-    private Object getCellValue(Cell cell,FormulaEvaluator evaluator) throws ExcelManipulateException{
+    private static Object getCellValue(Cell cell,FormulaEvaluator evaluator) throws ExcelManipulateException{
         if (cell == null){
             return null;
         }
-        //log.debug("Read Value for: " + ExcelUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
         Object value = null;
         CellValue cellValue = evaluator.evaluate(cell);
         if (cellValue == null){
@@ -556,13 +556,11 @@ public class DefaultExcelReader implements ExcelReader{
             int delim = dataName.indexOf('.');
             if (delim > 0){
                 return getPropertyType(map.get(dataName.substring(0, delim)), dataName.substring(delim + 1));
-            }else{
-                return map.get(dataName).getClass();
             }
-        }else{
-            LOGGER.debug("getPropertyType for Object[{}] with property {}.", object, dataName);
-            return getPropertyTypeWithClass(object.getClass(), dataName);
+            return map.get(dataName).getClass();
         }
+        LOGGER.debug("getPropertyType for Object[{}] with property {}.", object, dataName);
+        return getPropertyTypeWithClass(object.getClass(), dataName);
     }
 
     /**
@@ -587,13 +585,12 @@ public class DefaultExcelReader implements ExcelReader{
                 throw new IllegalArgumentException();
             }
             return pd.getPropertyType();
-        }else{
-            PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(clazz, dataName.substring(0, delim));
-            if (pd == null){
-                throw new IllegalArgumentException();
-            }
-            return getPropertyTypeWithClass(pd.getPropertyType(), dataName.substring(delim + 1));
         }
+        PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(clazz, dataName.substring(0, delim));
+        if (pd == null){
+            throw new IllegalArgumentException();
+        }
+        return getPropertyTypeWithClass(pd.getPropertyType(), dataName.substring(delim + 1));
     }
 
     /**
