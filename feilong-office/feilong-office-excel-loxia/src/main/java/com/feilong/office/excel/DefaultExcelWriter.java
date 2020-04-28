@@ -83,7 +83,7 @@ public class DefaultExcelWriter implements ExcelWriter{
 
     @Override
     public void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans){
-        Workbook workbook = WorkbookCreater.create(inputStream);
+        Workbook workbook = WorkbookUtil.create(inputStream);
         WorkbookWriter.write(workbook, outputStream, excelManipulatorDefinition, beans);
     }
 
@@ -135,7 +135,7 @@ public class DefaultExcelWriter implements ExcelWriter{
 
     @Override
     public void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList){
-        Workbook workbook = WorkbookCreater.create(inputStream);
+        Workbook workbook = WorkbookUtil.create(inputStream);
         WorkbookWriter.writePerSheet(workbook, outputStream, excelManipulatorDefinition, beansList);
     }
 

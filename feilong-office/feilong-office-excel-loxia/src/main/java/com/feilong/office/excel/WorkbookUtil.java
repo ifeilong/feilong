@@ -15,23 +15,33 @@
  */
 package com.feilong.office.excel;
 
+import static com.feilong.core.date.DateUtil.formatDuration;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UncheckedIOException;
+import java.util.Date;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class WorkbookCreater{
+class WorkbookUtil{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkbookUtil.class);
+
+    //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
-    private WorkbookCreater(){
+    private WorkbookUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -42,15 +52,42 @@ class WorkbookCreater{
     /**
      * 创建 wook book.
      *
-     * @param is
+     * @param inputStream
      *            the is
      * @return the workbook
      */
-    static Workbook create(InputStream is){
+    static Workbook create(InputStream inputStream){
         try{
-            return WorkbookFactory.create(is);
+            Date beginDate = new Date();
+
+            Workbook workbook = WorkbookFactory.create(inputStream);
+
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("create Workbook use time: [{}]", formatDuration(beginDate));
+            }
+            return workbook;
         }catch (EncryptedDocumentException e){
             throw new RuntimeException(e);
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * @param workbook
+     * @param outputStream
+     * @throws UncheckedIOException
+     * @since 3.0.0
+     */
+    static void write(Workbook workbook,OutputStream outputStream){
+        try{
+            Date beginDate = new Date();
+
+            workbook.write(outputStream);
+
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info("write outputStream use time: [{}]", formatDuration(beginDate));
+            }
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }

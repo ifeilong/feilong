@@ -26,7 +26,7 @@ import com.feilong.office.excel.AbstractLoxiaWriteTest;
 
 public class ConsultantWriteTest extends AbstractLoxiaWriteTest{
 
-    int count = 300;
+    int count = 1000;
 
     @Test
     public void test(){

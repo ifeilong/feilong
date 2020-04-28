@@ -69,7 +69,7 @@ class RowWriter{
                     OgnlStack ognlStack,
                     int rowOffset,
                     List<CellRangeAddress> mergedRegions,
-                    Map<String, CellStyle> styleMap) throws Exception{
+                    Map<String, CellStyle> styleMap){
         if (rowOffset > 0){
             BlockCopyer.copy(
                             sheet,

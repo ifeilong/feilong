@@ -15,10 +15,12 @@
  */
 package com.feilong.office.excel;
 
-import java.io.IOException;
+import static com.feilong.core.date.DateUtil.formatDuration;
+
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +92,9 @@ class WorkbookWriter{
 
         Map<String, CellStyle> styleMap = buildStyleMap(workbook, definition, excelSheets, excelSheetsSize);
         for (int i = 0; i < excelSheetsSize; i++){
+
             writeSheet(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap);
+
         }
         pack(workbook, outputStream);
     }
@@ -100,6 +104,8 @@ class WorkbookWriter{
                     ExcelManipulatorDefinition definition,
                     List<ExcelSheet> excelSheets,
                     int excelSheetsSize){
+        Date beginDate = new Date();
+
         Map<String, CellStyle> styleMap = new HashMap<>();
         Integer styleSheetPosition = definition.getStyleSheetPosition();
         if (styleSheetPosition != null){
@@ -110,7 +116,12 @@ class WorkbookWriter{
             workbook.removeSheetAt(styleSheetPosition);
             LOGGER.debug("{} styles found", styleMap.keySet().size());
         }
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("buildStyleMap use time: [{}],StyleMap size:[{}]", formatDuration(beginDate), styleMap.size());
+        }
         return styleMap;
+
     }
 
     private static void validate(int excelSheetsSize,int numberOfSheets){
@@ -121,13 +132,8 @@ class WorkbookWriter{
 
     private static void pack(Workbook workbook,OutputStream outputStream) throws UncheckedIOException{
         FormulaEvaluatorUtil.reCalculate(workbook);
-
         workbook.setActiveSheet(0);
-        try{
-            workbook.write(outputStream);
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
+        WorkbookUtil.write(workbook, outputStream);
     }
 
     /**
@@ -141,8 +147,13 @@ class WorkbookWriter{
      *            the stack
      * @param styleMap
      *            the style map
+     * @throws Exception
      */
     private static void writeSheet(Sheet sheet,ExcelSheet excelSheet,OgnlStack ognlStack,Map<String, CellStyle> styleMap){
+        Date beginDate = new Date();
+
+        //---------------------------------------------------------------
+
         Workbook workbook = sheet.getWorkbook();
         String sheetName = excelSheet.getDisplayName();
         Object value = ognlStack.getValue("sheetName");
@@ -165,11 +176,15 @@ class WorkbookWriter{
             int lastRow = cellRangeAddress.getLastRow();
             int lastColumn = cellRangeAddress.getLastColumn();
 
-            LOGGER.debug(
-                            "Merged Region:[{}-{}]",
-                            CellReferenceUtil.getCellIndex(firstRow, firstColumn),
-                            CellReferenceUtil.getCellIndex(lastRow, lastColumn));
+            //---------------------------------------------------------------
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace(
+                                "Merged Region:[{}-{}]",
+                                CellReferenceUtil.getCellIndex(firstRow, firstColumn),
+                                CellReferenceUtil.getCellIndex(lastRow, lastColumn));
+            }
 
+            //---------------------------------------------------------------
             for (ExcelBlock blockDefinition : sortedExcelBlocks){
                 int startRow = blockDefinition.getStartRow();
                 int endRow = blockDefinition.getEndRow();
@@ -188,13 +203,26 @@ class WorkbookWriter{
         }
 
         //---------------------------------------------------------------
+
         for (ExcelBlock excelBlock : sortedExcelBlocks){
+            Date BlockBeginDate = new Date();
+
             if (excelBlock.isLoop()){
                 BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, mergedRegions.get(excelBlock), styleMap);
             }else{
                 BlockWriter.writeSimpleBlock(sheet, excelBlock, ognlStack, styleMap);
             }
+
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("writeBlock:[{}] use time: [{}]", excelBlock.getDataName(), formatDuration(BlockBeginDate));
+            }
         }
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("writeSheet use time: [{}]", formatDuration(beginDate));
+        }
+
     }
 
 }

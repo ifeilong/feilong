@@ -252,16 +252,6 @@ public class ExcelWriteUtil{
         excelWriter.write(excelTemplateLocationInputStream, outputStream, beans);
 
         //---------------------------------------------------------------
-        log(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetNames, beans, outputStream, beginDate);
-    }
-
-    private static void log(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
-                    String[] sheetNames,
-                    Map<String, Object> beans,
-                    OutputStream outputStream,
-                    Date beginDate){
         Map<String, Object> map = build(
                         excelTemplateLocationInputStream,
                         xmlSheetConfigurations,

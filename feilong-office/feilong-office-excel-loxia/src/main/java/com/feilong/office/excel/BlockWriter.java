@@ -121,6 +121,7 @@ class BlockWriter{
      *            the merged regions
      * @param styleMap
      *            the style map
+     * @throws Exception
      */
     static void writeLoopBlock(
                     Sheet sheet,
@@ -128,138 +129,154 @@ class BlockWriter{
                     OgnlStack ognlStack,
                     List<CellRangeAddress> mergedRegions,
                     Map<String, CellStyle> styleMap){
-
         boolean isHorizontal = excelBlock.getDirection().equalsIgnoreCase(ExcelBlock.LOOP_DIRECTION_HORIZONAL);
         if (isHorizontal){
-            try{
-                Object value = ognlStack.getValue(excelBlock.getDataName());
-                if (value == null){
-                    //if no data, just remove the dummy data
-                    for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
-                        sheet.removeRow(sheet.getRow(i));
-                    }
-                }
-                Collection<? extends Object> listValue;
-                if (!(value instanceof Collection)){
-                    if (value.getClass().isArray()){
-                        listValue = Arrays.asList(value);
-                    }else{
-                        ArrayList<Object> list = new ArrayList<>();
-                        list.add(value);
-                        listValue = list;
-                    }
-                }else{
-                    listValue = (Collection<? extends Object>) value;
-                }
+            writeLoopHorizontal(sheet, excelBlock, ognlStack, mergedRegions, styleMap);
+            return;
+        }
+        writeLoopVertical(sheet, excelBlock, ognlStack, mergedRegions, styleMap);
+    }
 
-                //---------------------------------------------------------------
-
-                int step = 1;
-                Object preObj = null;
-                for (Object obj : listValue){
-                    ognlStack.push(obj);
-                    ognlStack.addContext("preLine", preObj);
-                    ognlStack.addContext("lineNum", step - 1);
-                    //shiftrow and prepare write new row
-                    int nextStartRow = excelBlock.getStartRow() + step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1);
-                    if (nextStartRow <= sheet.getLastRowNum()){
-                        sheet.shiftRows(
-                                        nextStartRow,
-                                        sheet.getLastRowNum(),
-                                        excelBlock.getEndRow() - excelBlock.getStartRow() + 1,
-                                        true,
-                                        false);
-                    }
-
-                    RowWriter.write(
-                                    sheet,
-                                    excelBlock,
-                                    ognlStack,
-                                    step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1),
-                                    mergedRegions,
-                                    styleMap);
-                    step++;
-                    preObj = ognlStack.pop();
-                }
-                ognlStack.removeContext("preLine");
-                ognlStack.removeContext("lineNum");
-
-                //if no data, just remove the dummy data        
-                //[2013-2-26]it seems that we also need to remove all merged regions for shift      
-                for (int i = sheet.getNumMergedRegions() - 1; i >= 0; i--){
-                    CellRangeAddress cellRangeAddress = sheet.getMergedRegion(i);
-                    if (cellRangeAddress.getFirstRow() >= excelBlock.getStartRow()
-                                    && cellRangeAddress.getFirstColumn() >= excelBlock.getStartCol()
-                                    && cellRangeAddress.getLastRow() <= excelBlock.getEndRow()
-                                    && cellRangeAddress.getLastColumn() <= excelBlock.getEndCol()){
-                        sheet.removeMergedRegion(i);
-                        LOGGER.debug(
-                                        "Removed Merged Region:[{}-{}]",
-                                        CellReferenceUtil.getCellIndex(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
-                                        CellReferenceUtil.getCellIndex(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
-                    }
-                }
-                //[2013-2-22]if with data, still need to remove dummy one, otherwise xlsx will have error if there are formulas in block.
-                for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
-                    sheet.removeRow(sheet.getRow(i));
-                }
-                if (listValue.size() > 0){
-                    sheet.shiftRows(
-                                    excelBlock.getEndRow() + 1,
-                                    sheet.getLastRowNum(),
-                                    excelBlock.getStartRow() - excelBlock.getEndRow() - 1,
-                                    true,
-                                    false);
-                }
-            }catch (Exception e){
-                LOGGER.error("", e);
+    private static void writeLoopHorizontal(
+                    Sheet sheet,
+                    ExcelBlock excelBlock,
+                    OgnlStack ognlStack,
+                    List<CellRangeAddress> mergedRegions,
+                    Map<String, CellStyle> styleMap){
+        Object value = ognlStack.getValue(excelBlock.getDataName());
+        if (value == null){
+            //if no data, just remove the dummy data
+            for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
+                sheet.removeRow(sheet.getRow(i));
+            }
+        }
+        Collection<? extends Object> listValue;
+        if (!(value instanceof Collection)){
+            if (value.getClass().isArray()){
+                listValue = Arrays.asList(value);
+            }else{
+                ArrayList<Object> list = new ArrayList<>();
+                list.add(value);
+                listValue = list;
             }
         }else{
-            try{
-                Object value = ognlStack.getValue(excelBlock.getDataName());
-                if (value == null){
-                    return;
-                }
+            listValue = (Collection<? extends Object>) value;
+        }
 
-                //---------------------------------------------------------------
-                Collection<? extends Object> listValue;
-                if (!(value instanceof Collection)){
-                    if (value.getClass().isArray()){
-                        listValue = Arrays.asList(value);
-                    }else{
-                        ArrayList<Object> list = new ArrayList<>();
-                        list.add(value);
-                        listValue = list;
-                    }
-                }else{
-                    listValue = (Collection<? extends Object>) value;
-                }
+        //---------------------------------------------------------------
 
-                //---------------------------------------------------------------
-
-                int step = 0;
-                Object preObj = null;
-                for (Object obj : listValue){
-                    ognlStack.push(obj);
-                    ognlStack.addContext("preLine", preObj);
-                    ognlStack.addContext("lineNum", step - 1);
-
-                    ColumnWriter.write(
-                                    sheet,
-                                    excelBlock,
-                                    ognlStack,
-                                    0,
-                                    step * (excelBlock.getEndCol() - excelBlock.getStartCol() + 1),
-                                    mergedRegions,
-                                    styleMap);
-                    step++;
-                    preObj = ognlStack.pop();
-                }
-                ognlStack.removeContext("preLine");
-                ognlStack.removeContext("lineNum");
-            }catch (Exception e){
-                LOGGER.error("", e);
+        int step = 1;
+        Object preObj = null;
+        for (Object obj : listValue){
+            ognlStack.push(obj);
+            ognlStack.addContext("preLine", preObj);
+            ognlStack.addContext("lineNum", step - 1);
+            //shiftrow and prepare write new row
+            int nextStartRow = excelBlock.getStartRow() + step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1);
+            if (nextStartRow <= sheet.getLastRowNum()){
+                sheet.shiftRows(nextStartRow, sheet.getLastRowNum(), excelBlock.getEndRow() - excelBlock.getStartRow() + 1, true, false);
             }
+
+            RowWriter.write(
+                            sheet,
+                            excelBlock,
+                            ognlStack,
+                            step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1),
+                            mergedRegions,
+                            styleMap);
+            step++;
+            preObj = ognlStack.pop();
+        }
+        ognlStack.removeContext("preLine");
+        ognlStack.removeContext("lineNum");
+
+        //if no data, just remove the dummy data        
+        //[2013-2-26]it seems that we also need to remove all merged regions for shift      
+        for (int i = sheet.getNumMergedRegions() - 1; i >= 0; i--){
+            CellRangeAddress cellRangeAddress = sheet.getMergedRegion(i);
+            if (cellRangeAddress.getFirstRow() >= excelBlock.getStartRow() && cellRangeAddress.getFirstColumn() >= excelBlock.getStartCol()
+                            && cellRangeAddress.getLastRow() <= excelBlock.getEndRow()
+                            && cellRangeAddress.getLastColumn() <= excelBlock.getEndCol()){
+                sheet.removeMergedRegion(i);
+                LOGGER.debug(
+                                "Removed Merged Region:[{}-{}]",
+                                CellReferenceUtil.getCellIndex(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
+                                CellReferenceUtil.getCellIndex(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
+            }
+        }
+        //[2013-2-22]if with data, still need to remove dummy one, otherwise xlsx will have error if there are formulas in block.
+        for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
+            sheet.removeRow(sheet.getRow(i));
+        }
+        if (listValue.size() > 0){
+            sheet.shiftRows(
+                            excelBlock.getEndRow() + 1,
+                            sheet.getLastRowNum(),
+                            excelBlock.getStartRow() - excelBlock.getEndRow() - 1,
+                            true,
+                            false);
+        }
+
+    }
+
+    /**
+     * @param sheet
+     * @param excelBlock
+     * @param ognlStack
+     * @param mergedRegions
+     * @param styleMap
+     * @since 3.0.0
+     */
+    private static void writeLoopVertical(
+                    Sheet sheet,
+                    ExcelBlock excelBlock,
+                    OgnlStack ognlStack,
+                    List<CellRangeAddress> mergedRegions,
+                    Map<String, CellStyle> styleMap){
+        try{
+            Object value = ognlStack.getValue(excelBlock.getDataName());
+            if (value == null){
+                return;
+            }
+
+            //---------------------------------------------------------------
+            Collection<? extends Object> listValue;
+            if (!(value instanceof Collection)){
+                if (value.getClass().isArray()){
+                    listValue = Arrays.asList(value);
+                }else{
+                    ArrayList<Object> list = new ArrayList<>();
+                    list.add(value);
+                    listValue = list;
+                }
+            }else{
+                listValue = (Collection<? extends Object>) value;
+            }
+
+            //---------------------------------------------------------------
+
+            int step = 0;
+            Object preObj = null;
+            for (Object obj : listValue){
+                ognlStack.push(obj);
+                ognlStack.addContext("preLine", preObj);
+                ognlStack.addContext("lineNum", step - 1);
+
+                ColumnWriter.write(
+                                sheet,
+                                excelBlock,
+                                ognlStack,
+                                0,
+                                step * (excelBlock.getEndCol() - excelBlock.getStartCol() + 1),
+                                mergedRegions,
+                                styleMap);
+                step++;
+                preObj = ognlStack.pop();
+            }
+            ognlStack.removeContext("preLine");
+            ognlStack.removeContext("lineNum");
+        }catch (Exception e){
+            LOGGER.error("", e);
         }
     }
 

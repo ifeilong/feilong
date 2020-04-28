@@ -50,7 +50,7 @@ class ColumnWriter{
                     int rowOffset,
                     int colOffset,
                     List<CellRangeAddress> mergedRegions,
-                    Map<String, CellStyle> styleMap) throws Exception{
+                    Map<String, CellStyle> styleMap){
         if (rowOffset > 0 || colOffset > 0){
             BlockCopyer.copy(
                             sheet,
