@@ -37,6 +37,8 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private byte               defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new byte array morpher.
      */

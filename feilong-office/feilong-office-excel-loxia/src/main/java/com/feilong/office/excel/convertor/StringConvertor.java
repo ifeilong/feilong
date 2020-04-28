@@ -35,6 +35,8 @@ public class StringConvertor extends ChoiceConvertor<String>{
         return Arrays.asList(cellDefinition.getAvailableChoices());
     }
 
+    //---------------------------------------------------------------
+
     @Override
     public String getDataTypeAbbr(){
         return "string";

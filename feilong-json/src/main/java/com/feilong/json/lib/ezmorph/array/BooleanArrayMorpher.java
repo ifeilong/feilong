@@ -37,6 +37,8 @@ public final class BooleanArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private boolean            defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new boolean array morpher.
      */
@@ -86,6 +88,8 @@ public final class BooleanArrayMorpher extends AbstractArrayMorpher{
             return false;
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the default value.

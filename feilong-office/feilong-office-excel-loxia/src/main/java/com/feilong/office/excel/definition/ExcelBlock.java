@@ -20,9 +20,6 @@ import java.util.List;
 
 import com.feilong.office.excel.ExcelUtil;
 
-/**
- * The Class ExcelBlock.
- */
 public class ExcelBlock implements Comparable<ExcelBlock>{
 
     /** The Constant LOOP_DIRECTION_HORIZONAL. */
@@ -496,4 +493,5 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
 
         return block;
     }
+
 }

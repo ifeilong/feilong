@@ -141,9 +141,8 @@ public final class CharacterObjectArrayMorpher extends AbstractArrayMorpher{
                             Array.set(result, index, null);
                         }
                         return result;
-                    }else{
-                        morpher = new CharMorpher(defaultValue.charValue());
                     }
+                    morpher = new CharMorpher(defaultValue.charValue());
                 }else{
                     morpher = new CharMorpher();
                 }

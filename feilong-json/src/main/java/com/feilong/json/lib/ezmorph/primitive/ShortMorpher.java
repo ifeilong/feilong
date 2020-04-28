@@ -121,7 +121,6 @@ public final class ShortMorpher extends AbstractIntegerMorpher{
         }
 
         //---------------------------------------------------------------
-
         if (value instanceof Number){
             return ((Number) value).shortValue();
         }

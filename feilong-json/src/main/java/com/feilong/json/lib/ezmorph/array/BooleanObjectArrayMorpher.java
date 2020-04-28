@@ -37,6 +37,8 @@ public final class BooleanObjectArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private Boolean            defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new boolean object array morpher.
      */
@@ -141,9 +143,8 @@ public final class BooleanObjectArrayMorpher extends AbstractArrayMorpher{
                             Array.set(result, index, null);
                         }
                         return result;
-                    }else{
-                        morpher = new BooleanMorpher(defaultValue.booleanValue());
                     }
+                    morpher = new BooleanMorpher(defaultValue.booleanValue());
                 }else{
                     morpher = new BooleanMorpher();
                 }
@@ -156,9 +157,8 @@ public final class BooleanObjectArrayMorpher extends AbstractArrayMorpher{
                 }
             }
             return result;
-        }else{
-            throw new MorphException("argument is not an array: " + array.getClass());
         }
+        throw new MorphException("argument is not an array: " + array.getClass());
     }
 
     /**

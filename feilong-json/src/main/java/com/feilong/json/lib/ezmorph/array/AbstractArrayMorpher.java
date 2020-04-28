@@ -30,6 +30,8 @@ public abstract class AbstractArrayMorpher implements ObjectMorpher{
     /** The use default. */
     private boolean useDefault = false;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new abstract array morpher.
      */
@@ -65,6 +67,8 @@ public abstract class AbstractArrayMorpher implements ObjectMorpher{
     public void setUseDefault(boolean useDefault){
         this.useDefault = useDefault;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Supports.

@@ -43,6 +43,8 @@ public abstract class AbstractIntegerMorpher extends AbstractPrimitiveMorpher{
         super(useDefault);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Trims the String from the begining to the first "."
      *

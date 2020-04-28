@@ -55,21 +55,6 @@ public class DateConvertor implements DataConvertor<Date>{
         this.datePattern = datePattern;
     }
 
-    /**
-     * Convert.
-     *
-     * @param value
-     *            the value
-     * @param sheetNo
-     *            the sheet no
-     * @param cellIndex
-     *            the cell index
-     * @param cellDefinition
-     *            the cell definition
-     * @return the date
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
-     */
     @Override
     public Date convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
         if (value == null && cellDefinition.isMandatory()){
@@ -92,24 +77,22 @@ public class DateConvertor implements DataConvertor<Date>{
                                                    null,
                                                    cellDefinition.getPattern(),
                                                    cellDefinition.getChoiceString() });
-                }else{
-                    return null;
                 }
-            }else{
-                String pattern = cellDefinition.getPattern() == null ? datePattern : cellDefinition.getPattern();
-                try{
-                    DateFormat df = new SimpleDateFormat(pattern);
-                    return df.parse((String) value);
-                }catch (ParseException e){
-                    throw new ExcelManipulateException(
-                                    ErrorCode.WRONG_DATA_TYPE_DATE,
-                                    new Object[] {
-                                                   sheetNo + 1,
-                                                   cellIndex,
-                                                   value,
-                                                   cellDefinition.getPattern(),
-                                                   cellDefinition.getChoiceString() });
-                }
+                return null;
+            }
+            String pattern = cellDefinition.getPattern() == null ? datePattern : cellDefinition.getPattern();
+            try{
+                DateFormat df = new SimpleDateFormat(pattern);
+                return df.parse((String) value);
+            }catch (ParseException e){
+                throw new ExcelManipulateException(
+                                ErrorCode.WRONG_DATA_TYPE_DATE,
+                                new Object[] {
+                                               sheetNo + 1,
+                                               cellIndex,
+                                               value,
+                                               cellDefinition.getPattern(),
+                                               cellDefinition.getChoiceString() });
             }
         }else if (value instanceof Date){
             return (Date) value;
@@ -121,6 +104,8 @@ public class DateConvertor implements DataConvertor<Date>{
                             new Object[] { sheetNo + 1, cellIndex, value, cellDefinition.getPattern(), cellDefinition.getChoiceString() });
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the data type abbr.

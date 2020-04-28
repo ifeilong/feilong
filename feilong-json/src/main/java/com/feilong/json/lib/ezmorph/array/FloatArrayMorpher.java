@@ -37,6 +37,8 @@ public final class FloatArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private float              defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new float array morpher.
      */
@@ -144,9 +146,8 @@ public final class FloatArrayMorpher extends AbstractArrayMorpher{
                 }
             }
             return result;
-        }else{
-            throw new MorphException("argument is not an array: " + array.getClass());
         }
+        throw new MorphException("argument is not an array: " + array.getClass());
     }
 
     /**

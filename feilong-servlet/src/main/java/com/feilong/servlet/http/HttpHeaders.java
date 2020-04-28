@@ -549,13 +549,23 @@ public final class HttpHeaders{
      */
     public static final String ORIGIN                      = "origin";
 
+    //---------------------------------------------------------------
+
     /**
-     * <code>{@value}</code>.
+     * X-Forwarded-For:简称XFF头,它代表客户端,也就是HTTP的请求端真实的IP <code>{@value}</code>.
+     * 
      * <p>
-     * X-Forwarded-For:简称XFF头,它代表客户端,也就是HTTP的请求端真实的IP,只有在通过了HTTP代理或者负载均衡服务器时才会添加该项.<br>
-     * 它不是RFC中定义的标准请求头信息,在squid缓存代理服务器开发文档中可以找到该项的详细介绍. <br>
-     * 标准格式如下:<br>
+     * <b>标准格式如下:</b><br>
+     * 
      * X-Forwarded-For: client1, proxy1, proxy2.
+     * </p>
+     * 
+     * <p>
+     * 只有在通过了<b>HTTP代理或者负载均衡服务器时</b>才会添加该项.<br>
+     * </p>
+     * 
+     * <p>
+     * 它不是RFC中定义的标准请求头信息,在squid缓存代理服务器开发文档中可以找到该项的详细介绍.
      * </p>
      */
     public static final String X_FORWARDED_FOR             = "x-forwarded-for";

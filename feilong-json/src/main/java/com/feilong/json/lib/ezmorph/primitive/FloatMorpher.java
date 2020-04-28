@@ -124,7 +124,6 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
         }
 
         //---------------------------------------------------------------
-
         if (value instanceof Number){
             return ((Number) value).floatValue();
         }

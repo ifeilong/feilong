@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2008 feilong
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.feilong.office.excel;
 
 import java.util.List;
@@ -13,6 +28,9 @@ import org.apache.poi.ss.util.CellReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The Class ExcelUtil.
+ */
 public class ExcelUtil{
 
     /** The Constant log. */
@@ -27,24 +45,63 @@ public class ExcelUtil{
 
     //---------------------------------------------------------------
 
+    /** The Constant DYNAMIC_CELL_PATTREN. */
     private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
 
+    /**
+     * Gets the cell index.
+     *
+     * @param row
+     *            the row
+     * @param col
+     *            the col
+     * @return the cell index
+     */
     public static String getCellIndex(int row,int col){
         CellReference cell = new CellReference(row, col);
         return cell.formatAsString().replaceAll("\\$", "");
     }
 
+    /**
+     * Gets the cell position.
+     *
+     * @param cellIndex
+     *            the cell index
+     * @return the cell position
+     */
     public static int[] getCellPosition(String cellIndex){
         CellReference cell = new CellReference(cellIndex);
         return new int[] { cell.getRow(), cell.getCol() };
     }
 
+    /**
+     * Offset cell index.
+     *
+     * @param cellIndex
+     *            the cell index
+     * @param rowOffset
+     *            the row offset
+     * @param colOffset
+     *            the col offset
+     * @return the string
+     */
     static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
         CellReference cell = new CellReference(cellIndex);
         CellReference newCell = new CellReference(cell.getRow() + rowOffset, cell.getCol() + colOffset);
         return newCell.formatAsString().replaceAll("\\$", "");
     }
 
+    /**
+     * Offset formula.
+     *
+     * @param formula
+     *            the formula
+     * @param rowOffset
+     *            the row offset
+     * @param colOffset
+     *            the col offset
+     * @return the string
+     */
     static String offsetFormula(String formula,int rowOffset,int colOffset){
         StringBuffer sb = new StringBuffer();
         Matcher matcher = DYNAMIC_CELL_PATTREN.matcher(formula);
@@ -60,6 +117,14 @@ public class ExcelUtil{
         return sb.toString();
     }
 
+    /**
+     * Copy sheet.
+     *
+     * @param sheet
+     *            the sheet
+     * @param newSheet
+     *            the new sheet
+     */
     static void copySheet(Sheet sheet,Sheet newSheet){
         int maxCol = 0;
         for (int row = 0; row <= sheet.getLastRowNum(); row++){
@@ -98,6 +163,28 @@ public class ExcelUtil{
         }
     }
 
+    /**
+     * Copy block.
+     *
+     * @param sheet
+     *            the sheet
+     * @param startRow
+     *            the start row
+     * @param startCol
+     *            the start col
+     * @param endRow
+     *            the end row
+     * @param endCol
+     *            the end col
+     * @param copyStyle
+     *            the copy style
+     * @param rowOffset
+     *            the row offset
+     * @param colOffset
+     *            the col offset
+     * @param mergedRegions
+     *            the merged regions
+     */
     static void copyBlock(
                     Sheet sheet,
                     int startRow,
@@ -153,6 +240,20 @@ public class ExcelUtil{
         }
     }
 
+    /**
+     * Copy cell.
+     *
+     * @param oldCell
+     *            the old cell
+     * @param newCell
+     *            the new cell
+     * @param copyStyle
+     *            the copy style
+     * @param rowOffset
+     *            the row offset
+     * @param colOffset
+     *            the col offset
+     */
     static void copyCell(Cell oldCell,Cell newCell,boolean copyStyle,int rowOffset,int colOffset){
         if (copyStyle){
             newCell.setCellStyle(oldCell.getCellStyle());
@@ -181,6 +282,16 @@ public class ExcelUtil{
         }
     }
 
+    /**
+     * Copy cell.
+     *
+     * @param oldCell
+     *            the old cell
+     * @param newCell
+     *            the new cell
+     * @param copyStyle
+     *            the copy style
+     */
     public static void copyCell(Cell oldCell,Cell newCell,boolean copyStyle){
         if (copyStyle){
             newCell.setCellStyle(oldCell.getCellStyle());

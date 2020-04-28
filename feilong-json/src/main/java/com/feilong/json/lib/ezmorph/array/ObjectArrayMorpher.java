@@ -43,6 +43,8 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
     /** The target array class. */
     private Class   targetArrayClass;
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a new ArrayMorpher which will use another Morpher for its inner
      * type.<br>
@@ -132,9 +134,8 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
             }
 
             return result;
-        }else{
-            throw new MorphException("argument is not an array: " + array.getClass());
         }
+        throw new MorphException("argument is not an array: " + array.getClass());
     }
 
     /**

@@ -146,21 +146,18 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
                 return ((BigDecimal) value).toBigInteger();
             }
             return BigInteger.valueOf(((Number) value).longValue());
-        }else{
-            try{
-                String str = getIntegerValue(value);
-                if (str.length() == 0 || str.equalsIgnoreCase("null")){
-                    return null;
-                }else{
-                    return new BigInteger(str);
-                }
-            }catch (NumberFormatException nfe){
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException(nfe);
-                }
+        }
+        try{
+            String str = getIntegerValue(value);
+            if (str.length() == 0 || str.equalsIgnoreCase("null")){
+                return null;
             }
+            return new BigInteger(str);
+        }catch (NumberFormatException nfe){
+            if (isUseDefault()){
+                return defaultValue;
+            }
+            throw new MorphException(nfe);
         }
     }
 

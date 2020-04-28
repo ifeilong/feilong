@@ -91,6 +91,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
             throw new MorphException("Non-Mapped property name: " + name + " key: " + key);
         }
 
+        //---------------------------------------------------------------
+
         Object value = dynaValues.get(name);
         if (value == null){
             value = new HashMap();
@@ -120,6 +122,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
             return false;
         }
 
+        //---------------------------------------------------------------
+
         MorphDynaBean other = (MorphDynaBean) obj;
         EqualsBuilder builder = new EqualsBuilder().append(this.dynaClass, other.dynaClass);
         DynaProperty[] props = dynaClass.getDynaProperties();
@@ -148,9 +152,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         Class type = getDynaProperty(name).getType();
         if (!type.isPrimitive()){
             return value;
-        }else{
-            return morpherRegistry.morph(type, value);
         }
+        return morpherRegistry.morph(type, value);
     }
 
     /**

@@ -19,9 +19,13 @@ public class LoxiaSupportSettings{
 
     private static LoxiaSupportSettings instance;
 
+    //---------------------------------------------------------------
+
     private static final String[]       CONFIGS = new String[] { "loxiasupport", "loxia/support-default" };
 
     private final List<Properties>      props   = new ArrayList<>();
+
+    //---------------------------------------------------------------
 
     private LoxiaSupportSettings(){
         for (String config : CONFIGS){
@@ -40,12 +44,16 @@ public class LoxiaSupportSettings{
         }
     }
 
+    //---------------------------------------------------------------
+
     public static LoxiaSupportSettings getInstance(){
         if (instance == null){
             instance = new LoxiaSupportSettings();
         }
         return instance;
     }
+
+    //---------------------------------------------------------------
 
     public String get(String name){
         String result = null;
@@ -58,6 +66,7 @@ public class LoxiaSupportSettings{
         return result;
     }
 
+    @Deprecated
     private InputStream getResourceAsStream(String resourceName,Class<?> callingClass){
         URL url = getResource(resourceName, callingClass);
         try{
@@ -67,6 +76,9 @@ public class LoxiaSupportSettings{
         }
     }
 
+    //---------------------------------------------------------------
+
+    @Deprecated
     private URL getResource(String resourceName,Class<?> callingClass){
         URL url = null;
         url = Thread.currentThread().getContextClassLoader().getResource(resourceName);

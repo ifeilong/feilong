@@ -262,9 +262,9 @@ public final class RequestUtil{
 
     /**
      * 存放到 request 作用域中的 requestbody 名字.
-     * 
-     * @since 1.14.2
+     *
      * @see #getRequestBody(HttpServletRequest)
+     * @since 1.14.2
      */
     private static final String   REQUEST_BODY_SCOPE_ATTRIBUTE_NAME = RequestUtil.class.getName() + ".REQUEST_BODY";
 
@@ -842,17 +842,38 @@ public final class RequestUtil{
             //The header name is case insensitive (不区分大小写)
             map.put(ipHeaderName, request.getHeader(ipHeaderName));
         }
-        //----------------------getRemoteAddr-----------------------------------------
         map.put("request.getRemoteAddr()", request.getRemoteAddr());
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("ips:{}", JsonUtil.format(map));
+        return getClientIp(map);
+    }
+
+    /**
+     * Gets the client ip.
+     *
+     * @param map
+     *            the map
+     * @return the client ip
+     * @since 3.0.0
+     */
+    private static String getClientIp(Map<String, String> map){
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("ips:{}", JsonUtil.format(map));
         }
         //---------------------------------------------------------------
         for (Map.Entry<String, String> entry : map.entrySet()){
             String value = entry.getValue();
-            if (isNotNullOrEmpty(value) && !"unknown".equalsIgnoreCase(value)){
-                return value;
+            if (isNullOrEmpty(value)){
+                continue;
             }
+            //IPV4 127.0.0.1
+            //IPV6 2610:00f8:0c34:67f9:0200:83ff:fe94:4c36
+            if ("unknown".equalsIgnoreCase(value)){
+                continue;
+            }
+
+            //取非空值里面第一个 ,比如 X-Forwarded-For: client1, proxy1, proxy2.
+            //已去空格 忽略empty元素
+            String[] ips = tokenizeToStringArray(value, ",");
+            return ips[0];
         }
         return EMPTY;
     }

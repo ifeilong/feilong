@@ -1109,6 +1109,8 @@ public class DefaultExcelWriter implements ExcelWriter{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the definition.
      *

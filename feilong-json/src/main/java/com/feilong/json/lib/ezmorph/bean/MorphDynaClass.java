@@ -148,6 +148,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         process();
     }
 
+    //---------------------------------------------------------------
     /**
      * Equals.
      *

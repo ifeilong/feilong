@@ -85,11 +85,9 @@ public final class StringMorpher implements ObjectMorpher{
         }
 
         //---------------------------------------------------------------
-
         if (String.class.isAssignableFrom(value.getClass())){
             return value;
         }
-
         return String.valueOf(value);
     }
 

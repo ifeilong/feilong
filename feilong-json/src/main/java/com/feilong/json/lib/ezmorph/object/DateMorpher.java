@@ -257,9 +257,8 @@ public final class DateMorpher extends AbstractObjectMorpher{
         // unable to parse the date
         if (isUseDefault()){
             return defaultValue;
-        }else{
-            throw new MorphException("Unable to parse the date " + value);
         }
+        throw new MorphException("Unable to parse the date " + value);
     }
 
     /**

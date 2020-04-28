@@ -37,6 +37,8 @@ public final class LongArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private long               defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new long array morpher.
      */

@@ -29,22 +29,20 @@ public class DoubleConvertor implements DataConvertor<Double>{
                                                    null,
                                                    cellDefinition.getPattern(),
                                                    cellDefinition.getChoiceString() });
-                }else{
-                    return null;
                 }
-            }else{
-                try{
-                    return new Double((String) value);
-                }catch (NumberFormatException e){
-                    throw new ExcelManipulateException(
-                                    ErrorCode.WRONG_DATA_TYPE_NUMBER,
-                                    new Object[] {
-                                                   sheetNo + 1,
-                                                   cellIndex,
-                                                   value,
-                                                   cellDefinition.getPattern(),
-                                                   cellDefinition.getChoiceString() });
-                }
+                return null;
+            }
+            try{
+                return new Double((String) value);
+            }catch (NumberFormatException e){
+                throw new ExcelManipulateException(
+                                ErrorCode.WRONG_DATA_TYPE_NUMBER,
+                                new Object[] {
+                                               sheetNo + 1,
+                                               cellIndex,
+                                               value,
+                                               cellDefinition.getPattern(),
+                                               cellDefinition.getChoiceString() });
             }
         }else if (value instanceof Double){
             return (Double) value;

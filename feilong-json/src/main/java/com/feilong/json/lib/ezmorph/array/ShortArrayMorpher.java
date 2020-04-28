@@ -37,6 +37,8 @@ public final class ShortArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private short              defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new short array morpher.
      */

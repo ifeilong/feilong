@@ -37,6 +37,8 @@ public final class DoubleArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private double             defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new double array morpher.
      */
@@ -144,9 +146,8 @@ public final class DoubleArrayMorpher extends AbstractArrayMorpher{
                 }
             }
             return result;
-        }else{
-            throw new MorphException("argument is not an array: " + array.getClass());
         }
+        throw new MorphException("argument is not an array: " + array.getClass());
     }
 
     /**

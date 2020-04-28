@@ -37,6 +37,8 @@ public final class CharArrayMorpher extends AbstractArrayMorpher{
     /** The default value. */
     private char               defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new char array morpher.
      */
@@ -144,9 +146,8 @@ public final class CharArrayMorpher extends AbstractArrayMorpher{
                 }
             }
             return result;
-        }else{
-            throw new MorphException("argument is not an array: " + array.getClass());
         }
+        throw new MorphException("argument is not an array: " + array.getClass());
     }
 
     /**

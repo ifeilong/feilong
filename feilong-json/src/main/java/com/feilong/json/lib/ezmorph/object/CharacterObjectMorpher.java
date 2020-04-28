@@ -124,18 +124,15 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
 
         if (value instanceof Character){
             return value;
-        }else{
-            String s = String.valueOf(value);
-            if (s.length() > 0){
-                return new Character(s.charAt(0));
-            }else{
-                if (isUseDefault()){
-                    return defaultValue;
-                }else{
-                    throw new MorphException("Can't morph value: " + value);
-                }
-            }
         }
+        String s = String.valueOf(value);
+        if (s.length() > 0){
+            return new Character(s.charAt(0));
+        }
+        if (isUseDefault()){
+            return defaultValue;
+        }
+        throw new MorphException("Can't morph value: " + value);
     }
 
     /**

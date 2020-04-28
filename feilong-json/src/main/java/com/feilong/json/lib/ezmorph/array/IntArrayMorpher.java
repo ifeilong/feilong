@@ -144,9 +144,8 @@ public final class IntArrayMorpher extends AbstractArrayMorpher{
                 }
             }
             return result;
-        }else{
-            throw new MorphException("argument is not an array: " + array.getClass());
         }
+        throw new MorphException("argument is not an array: " + array.getClass());
     }
 
     /**
