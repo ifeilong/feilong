@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2009 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,22 +48,28 @@ import com.feilong.json.lib.json.regexp.RegexpUtils;
  */
 public final class JSONUtils{
 
-    /** Constant for char " */
+    /** Constant for char ". */
     public static final String           DOUBLE_QUOTE            = "\"";
 
-    /** Constant for char ' */
+    /** Constant for char '. */
     public static final String           SINGLE_QUOTE            = "'";
 
+    /** The Constant FUNCTION_BODY_PATTERN. */
     private static final String          FUNCTION_BODY_PATTERN   = "^function[ ]?\\(.*?\\)[ \n\t]*\\{(.*?)\\}$";
 
+    /** The Constant FUNCTION_HEADER_PATTERN. */
     private static final String          FUNCTION_HEADER_PATTERN = "^function[ ]?\\(.*?\\)$";
 
+    /** The Constant FUNCTION_PARAMS_PATTERN. */
     private static final String          FUNCTION_PARAMS_PATTERN = "^function[ ]?\\((.*?)\\).*";
 
+    /** The Constant FUNCTION_PATTERN. */
     private static final String          FUNCTION_PATTERN        = "^function[ ]?\\(.*?\\)[ \n\t]*\\{.*?\\}$";
 
+    /** The Constant FUNCTION_PREFIX. */
     private static final String          FUNCTION_PREFIX         = "function";
 
+    /** The Constant morpherRegistry. */
     private static final MorpherRegistry morpherRegistry         = new MorpherRegistry();
 
     static{
@@ -75,6 +81,9 @@ public final class JSONUtils{
      * Transforms the string into a valid Java Identifier.<br>
      * The default strategy is JavaIdentifierTransformer.NOOP
      *
+     * @param key
+     *            the key
+     * @return the string
      * @throws JSONException
      *             if the string can not be transformed.
      */
@@ -86,6 +95,11 @@ public final class JSONUtils{
      * Transforms the string into a valid Java Identifier.<br>
      * The default strategy is JavaIdentifierTransformer.NOOP
      *
+     * @param key
+     *            the key
+     * @param jsonConfig
+     *            the json config
+     * @return the string
      * @throws JSONException
      *             if the string can not be transformed.
      */
@@ -128,6 +142,10 @@ public final class JSONUtils{
 
     /**
      * Returns the body of a function literal.
+     *
+     * @param function
+     *            the function
+     * @return the function body
      */
     public static String getFunctionBody(String function){
         return RegexpUtils.getMatcher(FUNCTION_BODY_PATTERN, true).getGroupIfMatches(function, 1);
@@ -135,6 +153,10 @@ public final class JSONUtils{
 
     /**
      * Returns the params of a function literal.
+     *
+     * @param function
+     *            the function
+     * @return the function params
      */
     public static String getFunctionParams(String function){
         return RegexpUtils.getMatcher(FUNCTION_PARAMS_PATTERN, true).getGroupIfMatches(function, 1);
@@ -142,6 +164,10 @@ public final class JSONUtils{
 
     /**
      * Returns the inner-most component type of an Array.
+     *
+     * @param type
+     *            the type
+     * @return the inner component type
      */
     public static Class getInnerComponentType(Class type){
         if (!type.isArray()){
@@ -152,6 +178,8 @@ public final class JSONUtils{
 
     /**
      * Returns the singleton MorpherRegistry.
+     *
+     * @return the morpher registry
      */
     public static MorpherRegistry getMorpherRegistry(){
         return morpherRegistry;
@@ -159,6 +187,10 @@ public final class JSONUtils{
 
     /**
      * Creates a Map with all the properties of the JSONObject.
+     *
+     * @param jsonObject
+     *            the json object
+     * @return the properties
      */
     public static Map getProperties(JSONObject jsonObject){
         Map properties = new HashMap();
@@ -176,17 +208,25 @@ public final class JSONUtils{
     /**
      * Returns the JSON type.<br>
      * Values are Object, String, Boolean, Number(subclasses) &amp; JSONFunction.
+     *
+     * @param obj
+     *            the obj
+     * @return the type class
      */
     public static Class getTypeClass(Object obj){
         if (isNull(obj)){
             return Object.class;
-        }else if (isArray(obj)){
+        }
+        if (isArray(obj)){
             return List.class;
-        }else if (isFunction(obj)){
+        }
+        if (isFunction(obj)){
             return JSONFunction.class;
-        }else if (isBoolean(obj)){
+        }
+        if (isBoolean(obj)){
             return Boolean.class;
-        }else if (isNumber(obj)){
+        }
+        if (isNumber(obj)){
             Number n = (Number) obj;
             if (isInteger(n)){
                 return Integer.class;
@@ -203,13 +243,14 @@ public final class JSONUtils{
             }else{
                 throw new JSONException("Unsupported type");
             }
-        }else if (isString(obj)){
-            return String.class;
-        }else if (isObject(obj)){
-            return Object.class;
-        }else{
-            throw new JSONException("Unsupported type");
         }
+        if (isString(obj)){
+            return String.class;
+        }
+        if (isObject(obj)){
+            return Object.class;
+        }
+        throw new JSONException("Unsupported type");
     }
 
     /**
@@ -218,6 +259,10 @@ public final class JSONUtils{
      * If value is JSON, JSONFunction or String, value.hashCode is returned,
      * otherwise the value is transformed to a String an its hashcode is
      * returned.
+     *
+     * @param value
+     *            the value
+     * @return the int
      */
     public static int hashCode(Object value){
         if (value == null){
@@ -231,6 +276,10 @@ public final class JSONUtils{
 
     /**
      * Tests if a Class represents an array or Collection.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is array
      */
     public static boolean isArray(Class clazz){
         return clazz != null && (clazz.isArray() || Collection.class.isAssignableFrom(clazz) || (JSONArray.class.isAssignableFrom(clazz)));
@@ -238,6 +287,10 @@ public final class JSONUtils{
 
     /**
      * Tests if obj is an array or Collection.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is array
      */
     public static boolean isArray(Object obj){
         if ((obj != null && obj.getClass().isArray()) || (obj instanceof Collection) || (obj instanceof JSONArray)){
@@ -247,14 +300,22 @@ public final class JSONUtils{
     }
 
     /**
-     * Tests if Class represents a Boolean or primitive boolean
+     * Tests if Class represents a Boolean or primitive boolean.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is boolean
      */
     public static boolean isBoolean(Class clazz){
         return clazz != null && (Boolean.TYPE.isAssignableFrom(clazz) || Boolean.class.isAssignableFrom(clazz));
     }
 
     /**
-     * Tests if obj is a Boolean or primitive boolean
+     * Tests if obj is a Boolean or primitive boolean.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is boolean
      */
     public static boolean isBoolean(Object obj){
         if ((obj instanceof Boolean) || (obj != null && obj.getClass() == Boolean.TYPE)){
@@ -265,6 +326,10 @@ public final class JSONUtils{
 
     /**
      * Tests if Class represents a primitive double or wrapper.<br>
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is double
      */
     public static boolean isDouble(Class clazz){
         return clazz != null && (Double.TYPE.isAssignableFrom(clazz) || Double.class.isAssignableFrom(clazz));
@@ -274,6 +339,10 @@ public final class JSONUtils{
      * Tests if obj is javaScript function.<br>
      * Obj must be a non-null String and match <nowrap>"^function[ ]?\\(.*\\)[
      * ]?\\{.*\\}$"</nowrap>
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is function
      */
     public static boolean isFunction(Object obj){
         if (obj instanceof String){
@@ -289,6 +358,10 @@ public final class JSONUtils{
     /**
      * Tests if obj is javaScript function header.<br>
      * Obj must be a non-null String and match "^function[ ]?\\(.*\\)$"
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is function header
      */
     public static boolean isFunctionHeader(Object obj){
         if (obj instanceof String){
@@ -300,6 +373,10 @@ public final class JSONUtils{
 
     /**
      * Returns trus if str represents a valid Java identifier.
+     *
+     * @param str
+     *            the str
+     * @return true, if is java identifier
      */
     public static boolean isJavaIdentifier(String str){
         if (str.length() == 0 || !Character.isJavaIdentifierStart(str.charAt(0))){
@@ -315,6 +392,10 @@ public final class JSONUtils{
 
     /**
      * Tests if the obj is a javaScript null.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is null
      */
     public static boolean isNull(Object obj){
         if (obj instanceof JSONObject){
@@ -325,6 +406,10 @@ public final class JSONUtils{
 
     /**
      * Tests if Class represents a primitive number or wrapper.<br>
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is number
      */
     public static boolean isNumber(Class clazz){
         return clazz != null && (Byte.TYPE.isAssignableFrom(clazz) || Short.TYPE.isAssignableFrom(clazz)
@@ -334,6 +419,10 @@ public final class JSONUtils{
 
     /**
      * Tests if obj is a primitive number or wrapper.<br>
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is number
      */
     public static boolean isNumber(Object obj){
         if ((obj != null && obj.getClass() == Byte.TYPE) || (obj != null && obj.getClass() == Short.TYPE)
@@ -347,13 +436,21 @@ public final class JSONUtils{
 
     /**
      * Tests if obj is not a boolean, number, string or array.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is object
      */
     public static boolean isObject(Object obj){
         return !isNumber(obj) && !isString(obj) && !isBoolean(obj) && !isArray(obj) && !isFunction(obj) || isNull(obj);
     }
 
     /**
-     * Tests if Class represents a String or a char
+     * Tests if Class represents a String or a char.
+     *
+     * @param clazz
+     *            the clazz
+     * @return true, if is string
      */
     public static boolean isString(Class clazz){
         return clazz != null && (String.class.isAssignableFrom(clazz)
@@ -361,7 +458,11 @@ public final class JSONUtils{
     }
 
     /**
-     * Tests if obj is a String or a char
+     * Tests if obj is a String or a char.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is string
      */
     public static boolean isString(Object obj){
         if ((obj instanceof String) || (obj instanceof Character)
@@ -379,6 +480,10 @@ public final class JSONUtils{
      * <li>starts with "[" and ends with "]"</li>
      * <li>starts with "{" and ends with "}"</li>
      * </ul>
+     *
+     * @param string
+     *            the string
+     * @return true, if successful
      */
     public static boolean mayBeJSON(String string){
         return string != null && ("null".equals(string) || (string.startsWith("[") && string.endsWith("]"))
@@ -389,6 +494,10 @@ public final class JSONUtils{
      * Creates a new MorphDynaBean from a JSONObject. The MorphDynaBean will have
      * all the properties of the original JSONObject with the most accurate type.
      * Values of properties are not copied.
+     *
+     * @param jsonObject
+     *            the json object
+     * @return the dyna bean
      */
     public static DynaBean newDynaBean(JSONObject jsonObject){
         return newDynaBean(jsonObject, new JsonConfig());
@@ -398,6 +507,12 @@ public final class JSONUtils{
      * Creates a new MorphDynaBean from a JSONObject. The MorphDynaBean will have
      * all the properties of the original JSONObject with the most accurate type.
      * Values of properties are not copied.
+     *
+     * @param jsonObject
+     *            the json object
+     * @param jsonConfig
+     *            the json config
+     * @return the dyna bean
      */
     public static DynaBean newDynaBean(JSONObject jsonObject,JsonConfig jsonConfig){
         Map props = getProperties(jsonObject);
@@ -546,6 +661,10 @@ public final class JSONUtils{
 
     /**
      * Strips any single-quotes or double-quotes from both sides of the string.
+     *
+     * @param input
+     *            the input
+     * @return the string
      */
     public static String stripQuotes(String input){
         if (input.length() < 2){
@@ -561,6 +680,10 @@ public final class JSONUtils{
 
     /**
      * Returns true if the input has single-quotes or double-quotes at both sides.
+     *
+     * @param input
+     *            the input
+     * @return true, if successful
      */
     public static boolean hasQuotes(String input){
         if (input == null || input.length() < 2){
@@ -570,6 +693,15 @@ public final class JSONUtils{
                         || input.startsWith(DOUBLE_QUOTE) && input.endsWith(DOUBLE_QUOTE);
     }
 
+    /**
+     * Checks if is json keyword.
+     *
+     * @param input
+     *            the input
+     * @param jsonConfig
+     *            the json config
+     * @return true, if is json keyword
+     */
     public static boolean isJsonKeyword(String input,JsonConfig jsonConfig){
         if (input == null){
             return false;
@@ -608,6 +740,10 @@ public final class JSONUtils{
      * Float gets promoted to Double.<br>
      * Byte and Short get promoted to Integer.<br>
      * Long gets downgraded to Integer if possible.<br>
+     *
+     * @param input
+     *            the input
+     * @return the number
      */
     public static Number transformNumber(Number input){
         if (input instanceof Float){
@@ -715,8 +851,10 @@ public final class JSONUtils{
     }
 
     /**
-     * Finds out if n represents a BigInteger
+     * Finds out if n represents a BigInteger.
      *
+     * @param n
+     *            the n
      * @return true if n is instanceOf BigInteger or the literal value can be
      *         evaluated as a BigInteger
      */
@@ -733,8 +871,10 @@ public final class JSONUtils{
     }
 
     /**
-     * Finds out if n represents a BigInteger
+     * Finds out if n represents a BigInteger.
      *
+     * @param n
+     *            the n
      * @return true if n is instanceOf BigInteger or the literal value can be
      *         evaluated as a BigInteger
      */
@@ -753,6 +893,8 @@ public final class JSONUtils{
     /**
      * Finds out if n represents a Double.
      *
+     * @param n
+     *            the n
      * @return true if n is instanceOf Double or the literal value can be
      *         evaluated as a Double.
      */
@@ -771,6 +913,8 @@ public final class JSONUtils{
     /**
      * Finds out if n represents a Float.
      *
+     * @param n
+     *            the n
      * @return true if n is instanceOf Float or the literal value can be
      *         evaluated as a Float.
      */
@@ -789,6 +933,8 @@ public final class JSONUtils{
     /**
      * Finds out if n represents an Integer.
      *
+     * @param n
+     *            the n
      * @return true if n is instanceOf Integer or the literal value can be
      *         evaluated as an Integer.
      */
@@ -807,6 +953,8 @@ public final class JSONUtils{
     /**
      * Finds out if n represents a Long.
      *
+     * @param n
+     *            the n
      * @return true if n is instanceOf Long or the literal value can be evaluated
      *         as a Long.
      */
@@ -822,6 +970,9 @@ public final class JSONUtils{
         }
     }
 
+    /**
+     * Instantiates a new JSON utils.
+     */
     private JSONUtils(){
         super();
     }

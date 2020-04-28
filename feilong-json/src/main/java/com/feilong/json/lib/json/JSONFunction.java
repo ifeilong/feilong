@@ -47,11 +47,10 @@ public class JSONFunction implements Serializable{
     public static JSONFunction parse(String str){
         if (!JSONUtils.isFunction(str)){
             throw new JSONException("String is not a function. " + str);
-        }else{
-            String params = JSONUtils.getFunctionParams(str);
-            String text = JSONUtils.getFunctionBody(str);
-            return new JSONFunction((params != null) ? StringUtils.split(params, ",") : null, text != null ? text : "");
         }
+        String params = JSONUtils.getFunctionParams(str);
+        String text = JSONUtils.getFunctionBody(str);
+        return new JSONFunction((params != null) ? StringUtils.split(params, ",") : null, text != null ? text : "");
     }
 
     /** the parameters of this function. */

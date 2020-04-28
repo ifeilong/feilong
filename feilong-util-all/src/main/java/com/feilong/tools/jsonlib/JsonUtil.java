@@ -30,7 +30,6 @@ import com.feilong.json.lib.json.JSONArray;
 import com.feilong.json.lib.json.JSONObject;
 
 /**
- * Json 工具类.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5

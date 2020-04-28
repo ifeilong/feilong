@@ -70,19 +70,13 @@ public class JSONSerializer{
             return null;
         }
 
-        Object object = null;
-
         if (json instanceof JSONArray){
             if (jsonConfig.getArrayMode() == JsonConfig.MODE_OBJECT_ARRAY){
-                object = JSONArray.toArray((JSONArray) json, jsonConfig);
-            }else{
-                object = JSONArray.toCollection((JSONArray) json, jsonConfig);
+                return JSONArray.toArray((JSONArray) json, jsonConfig);
             }
-        }else{
-            object = JSONObject.toBean((JSONObject) json, jsonConfig);
+            return JSONArray.toCollection((JSONArray) json, jsonConfig);
         }
-
-        return object;
+        return JSONObject.toBean((JSONObject) json, jsonConfig);
     }
 
     /**
@@ -114,27 +108,24 @@ public class JSONSerializer{
      *             if the object can not be converted
      */
     public static JSON toJSON(Object object,JsonConfig jsonConfig){
-        JSON json = null;
         if (object == null){
-            json = JSONNull.getInstance();
+            return JSONNull.getInstance();
         }else if (object instanceof JSONString){
-            json = toJSON((JSONString) object, jsonConfig);
+            return toJSON((JSONString) object, jsonConfig);
         }else if (object instanceof String){
-            json = toJSON((String) object, jsonConfig);
+            return toJSON((String) object, jsonConfig);
         }else if (JSONUtils.isArray(object)){
-            json = JSONArray.fromObject(object, jsonConfig);
-        }else{
-            try{
-                json = JSONObject.fromObject(object, jsonConfig);
-            }catch (JSONException e){
-                if (object instanceof JSONTokener){
-                    ((JSONTokener) object).reset();
-                }
-                json = JSONArray.fromObject(object, jsonConfig);
-            }
+            return JSONArray.fromObject(object, jsonConfig);
         }
 
-        return json;
+        try{
+            return JSONObject.fromObject(object, jsonConfig);
+        }catch (JSONException e){
+            if (object instanceof JSONTokener){
+                ((JSONTokener) object).reset();
+            }
+            return JSONArray.fromObject(object, jsonConfig);
+        }
     }
 
     /**
@@ -164,17 +155,13 @@ public class JSONSerializer{
      *             if the string is not a valid JSON string
      */
     private static JSON toJSON(String string,JsonConfig jsonConfig){
-        JSON json = null;
         if (string.startsWith("[")){
-            json = JSONArray.fromObject(string, jsonConfig);
+            return JSONArray.fromObject(string, jsonConfig);
         }else if (string.startsWith("{")){
-            json = JSONObject.fromObject(string, jsonConfig);
+            return JSONObject.fromObject(string, jsonConfig);
         }else if ("null".equals(string)){
-            json = JSONNull.getInstance();
-        }else{
-            throw new JSONException("Invalid JSON String");
+            return JSONNull.getInstance();
         }
-
-        return json;
+        throw new JSONException("Invalid JSON String");
     }
 }

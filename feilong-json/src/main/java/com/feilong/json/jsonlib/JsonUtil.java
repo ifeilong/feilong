@@ -87,23 +87,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ul>
  * </blockquote>
  * 
- * <h3>依赖于下面的jar:</h3>
- * 
- * <blockquote>
- * 
- * <pre class="code">
- * {@code
- * <groupId>net.sf.json-lib</groupId>
- * <artifactId>json-lib</artifactId>
- * }
- * 
- * 如果要使用 xml部分功能,需要
- * 
- * {@code
- * <groupId>xom</groupId> 
- * <artifactId>xom</artifactId>
- * }
- * 
  * 目前本工具类不再提供处理XML的方法, 请使用 xstream或者原生的XML来处理
  * </pre>
  * 
@@ -111,13 +94,8 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see com.feilong.json.lib.json.JSONSerializer#toJSON(Object, JsonConfig)
- * 
- * @see com.feilong.json.lib.json.JSONObject
- * @see com.feilong.json.lib.json.JSONArray
- * @see com.feilong.json.lib.json.JSONNull
  * @since 1.0.5
  */
-//XXX @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
 public final class JsonUtil{
 
     /** The Constant LOGGER. */
@@ -839,8 +817,6 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
-     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
