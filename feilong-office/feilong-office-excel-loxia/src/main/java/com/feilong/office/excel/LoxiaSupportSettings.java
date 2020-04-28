@@ -15,17 +15,17 @@
  */
 package com.feilong.office.excel;
 
-import java.util.Map;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
-import com.feilong.core.util.ResourceBundleUtil;
+import java.util.Map;
 
 /**
  * The Class LoxiaSupportSettings.
  */
 public class LoxiaSupportSettings{
 
-    /** The props. */
-    private static final Map<String, String> map = ResourceBundleUtil.toMap("loxiasupport", "loxia/support-default");
+    /** The Constant LOXIA_EXCEL_MAP. */
+    private static final Map<String, String> LOXIA_EXCEL_MAP = toMap("loxiasupport", "loxia/support-default");
 
     //---------------------------------------------------------------
 
@@ -46,7 +46,7 @@ public class LoxiaSupportSettings{
      * @return the string
      */
     public static String get(String name){
-        return map.get(name);
+        return LOXIA_EXCEL_MAP.get(name);
     }
 
 }

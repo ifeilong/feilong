@@ -19,12 +19,23 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.ClassUtil;
+
 public class ToMapBaseNamesTest{
+
+    @Test
+    public void testToMapCoverNotExsit(){
+        Map<String, String> map = toMap("messages/memcached", "messages/memcached-cover111");
+        assertEquals("false", map.get("memcached.alivecheck"));
+        assertTrue(ClassUtil.isInstance(map, TreeMap.class));
+    }
 
     @Test
     public void testToMapCover(){

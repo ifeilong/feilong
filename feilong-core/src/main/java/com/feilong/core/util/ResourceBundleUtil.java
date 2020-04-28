@@ -169,8 +169,8 @@ public final class ResourceBundleUtil{
      * <ol>
      * <li>JDK默认使用的是{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
      * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span></li>
-     * </ol>
      * <li>后面的配置文件会覆盖前面的配置文件</li>
+     * <li>如果文件不存在,将会被忽略</li>
      * </ol>
      * </blockquote>
      * 
@@ -260,7 +260,7 @@ public final class ResourceBundleUtil{
                     map.putAll(littleMap);
                 }
             }catch (Exception e){
-                LOGGER.warn("baseName:[{}],message", baseName, e.getMessage());
+                LOGGER.warn("baseName:[{}],message:[{}]", baseName, e.getMessage());
                 continue;
             }
         }
