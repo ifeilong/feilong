@@ -15,6 +15,8 @@
  */
 package com.feilong.office.excel.convertor;
 
+import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+
 import java.util.List;
 
 import com.feilong.office.excel.ExcelManipulateException;
@@ -26,27 +28,23 @@ import com.feilong.office.excel.definition.ExcelCell;
  * @param <T>
  *            the generic type
  */
-public abstract class ChoiceConvertor<T> implements DataConvertor<T>{
+public abstract class ChoiceConvertor<T> extends AbstractDataConvertor<T>{
 
     private static final int OUT_OF_CHOICES = 3;
 
     @Override
-    public T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
-        T convertedValue = convertValue(value, sheetNo, cellIndex, cellDefinition);
+    protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
+        T t = convertValue(value, sheetNo, cellIndex, cellDefinition);
 
         List<? extends T> choices = getChoices(cellDefinition);
-        if (convertedValue == null || choices == null || choices.contains(convertedValue)){
-            return convertedValue;
+        if (t == null || choices == null || choices.contains(t)){
+            return t;
         }
-        throw new ExcelManipulateException(
-                        OUT_OF_CHOICES,
-                        new Object[] {
-                                       sheetNo + 1,
-                                       cellIndex,
-                                       convertedValue,
-                                       cellDefinition.getPattern(),
-                                       cellDefinition.getChoiceString() });
+
+        throw build(value, sheetNo, cellIndex, cellDefinition, OUT_OF_CHOICES);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 choices.

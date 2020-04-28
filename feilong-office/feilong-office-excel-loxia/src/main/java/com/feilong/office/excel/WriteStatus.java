@@ -21,19 +21,7 @@ package com.feilong.office.excel;
 public interface WriteStatus{
 
     /** The Constant STATUS_SUCCESS. */
-    public static final int STATUS_SUCCESS                  = 0;
-
-    /** The Constant STATUS_READ_TEMPLATE_FILE_ERROR. */
-    public static final int STATUS_READ_TEMPLATE_FILE_ERROR = 1;
-
-    /** The Constant STATUS_SETTING_ERROR. */
-    public static final int STATUS_SETTING_ERROR            = 2;
-
-    /** The Constant STATUS_WRITE_FILE_ERROR. */
-    public static final int STATUS_WRITE_FILE_ERROR         = 3;
-
-    /** The Constant STATUS_SYSTEM_ERROR. */
-    public static final int STATUS_SYSTEM_ERROR             = 5;
+    public static final int STATUS_SUCCESS = 0;
 
     //---------------------------------------------------------------
 

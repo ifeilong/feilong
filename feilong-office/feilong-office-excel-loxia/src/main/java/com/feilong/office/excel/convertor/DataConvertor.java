@@ -33,12 +33,16 @@ public interface DataConvertor<T> {
      */
     Class<T> supportClass();
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the data type abbr.
      *
      * @return the data type abbr
      */
     String getDataTypeAbbr();
+
+    //---------------------------------------------------------------
 
     /**
      * Convert.

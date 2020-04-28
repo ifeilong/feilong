@@ -19,7 +19,6 @@ import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 
 import org.apache.commons.lang3.BooleanUtils;
 
-import com.feilong.office.excel.ErrorCode;
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -38,39 +37,28 @@ import com.feilong.office.excel.definition.ExcelCell;
  * @version 1.0.8 2014年9月20日 下午8:54:47
  * @since 1.0.8
  */
-public class BooleanConvertor implements DataConvertor<Boolean>{
+public class BooleanConvertor extends AbstractDataConvertor<Boolean>{
 
     private static final int WRONG_DATA_FORMAT = 50;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see loxia.support.excel.convertor.DataConvertor#convert(java.lang.Object, int, java.lang.String,
-     * loxia.support.excel.definition.ExcelCell)
-     */
-    @Override
-    public Boolean convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
-        if (value == null && cellDefinition.isMandatory()){
-            throw build(null, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_NULL);
-        }
-        if (value == null){
-            return null;
-        }
+    //---------------------------------------------------------------
 
-        //---------------------------------------------------------------
+    @Override
+    protected Boolean handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
         if (value instanceof Boolean){
             return (Boolean) value;
-        }else if (value instanceof String){
+        }
+        if (value instanceof String){
             String str = (String) value;
             //TODO 字符串是 1
             return BooleanUtils.toBooleanObject(str);
-        }else if (value instanceof Number){
+        }
+        if (value instanceof Number){
             Number value2 = (Number) value;
             return BooleanUtils.toBooleanObject(value2.intValue());
         }
         throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_FORMAT);
     }
-
     //---------------------------------------------------------------
 
     /*
@@ -92,4 +80,5 @@ public class BooleanConvertor implements DataConvertor<Boolean>{
     public Class<Boolean> supportClass(){
         return Boolean.class;
     }
+
 }

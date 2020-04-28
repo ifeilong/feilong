@@ -15,6 +15,8 @@
  */
 package com.feilong.office.excel;
 
+import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,16 +54,30 @@ import ognl.OgnlRuntime;
 public class DefaultExcelReader implements ExcelReader{
 
     /** The Constant log. */
-    private static final Logger        LOGGER                 = LoggerFactory.getLogger(DefaultExcelReader.class);
+    private static final Logger        LOGGER                       = LoggerFactory.getLogger(DefaultExcelReader.class);
 
-    private static final int           UNSUPPORTING_DATA_TYPE = 2;
+    private static final int           UNSUPPORTING_DATA_TYPE       = 2;
+
+    //---------------------------------------------------------------
+
+    /** The Constant STATUS_READ_FILE_ERROR. */
+    private static final int           STATUS_READ_FILE_ERROR       = 1;
+
+    /** The Constant STATUS_SETTING_ERROR. */
+    private static final int           STATUS_SETTING_ERROR         = 2;
+
+    /** The Constant STATUS_SYSTEM_ERROR. */
+    private static final int           STATUS_SYSTEM_ERROR          = 5;
+
+    /** The Constant STATUS_DATA_COLLECTION_ERROR. */
+    private static final int           STATUS_DATA_COLLECTION_ERROR = 10;
     //---------------------------------------------------------------
 
     /** The definition. */
     private ExcelManipulatorDefinition definition;
 
     /** The skip errors. */
-    private boolean                    skipErrors             = true;
+    private boolean                    skipErrors                   = true;
 
     //---------------------------------------------------------------
 
@@ -81,7 +97,7 @@ public class DefaultExcelReader implements ExcelReader{
 
         try (Workbook wb = WorkbookFactory.create(is)){
             if (definition.getExcelSheets().size() == 0 || wb.getNumberOfSheets() < definition.getExcelSheets().size()){
-                readStatus.setStatus(ReadStatus.STATUS_SETTING_ERROR);
+                readStatus.setStatus(STATUS_SETTING_ERROR);
                 readStatus.setMessage("No sheet definition found or Sheet Number in definition is more than number in file.");
             }else{
                 OgnlStack stack = new OgnlStack(beans);
@@ -90,7 +106,7 @@ public class DefaultExcelReader implements ExcelReader{
                 }
             }
         }catch (IOException e){
-            readStatus.setStatus(ReadStatus.STATUS_READ_FILE_ERROR);
+            readStatus.setStatus(STATUS_READ_FILE_ERROR);
         }
         return readStatus;
     }
@@ -111,7 +127,7 @@ public class DefaultExcelReader implements ExcelReader{
 
         try (Workbook wb = WorkbookFactory.create(is)){
             if (definition.getExcelSheets().size() == 0){
-                readStatus.setStatus(ReadStatus.STATUS_SETTING_ERROR);
+                readStatus.setStatus(STATUS_SETTING_ERROR);
                 readStatus.setMessage("No sheet definition found");
             }else{
                 //Only first ExcelSheet Definition will be used
@@ -139,18 +155,20 @@ public class DefaultExcelReader implements ExcelReader{
                 }
             }
         }catch (IOException e){
-            readStatus.setStatus(ReadStatus.STATUS_READ_FILE_ERROR);
+            readStatus.setStatus(STATUS_READ_FILE_ERROR);
         }catch (InstantiationException e){
             LOGGER.error("", e);
-            readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
+            readStatus.setStatus(STATUS_SYSTEM_ERROR);
             readStatus.setMessage("New Instance Error");
         }catch (IllegalAccessException e){
             LOGGER.error("", e);
-            readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
+            readStatus.setStatus(STATUS_SYSTEM_ERROR);
             readStatus.setMessage("New Instance Error");
         }
         return readStatus;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Read sheet.
@@ -171,7 +189,7 @@ public class DefaultExcelReader implements ExcelReader{
         try (Workbook wb = WorkbookFactory.create(is)){
             readSheet(wb, sheetNo, definition.getExcelSheets().iterator().next(), stack, readStatus);
         }catch (IOException e){
-            readStatus.setStatus(ReadStatus.STATUS_READ_FILE_ERROR);
+            readStatus.setStatus(STATUS_READ_FILE_ERROR);
         }
         return readStatus;
     }
@@ -187,7 +205,6 @@ public class DefaultExcelReader implements ExcelReader{
      * @throws IllegalAccessException
      *             the illegal access exception
      */
-    @SuppressWarnings("unchecked")
     private Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
         Map<String, Object> result = map.getClass().newInstance();
         for (String key : map.keySet()){
@@ -223,7 +240,7 @@ public class DefaultExcelReader implements ExcelReader{
         int loopBlock = 0;
 
         for (ExcelBlock blockDefinition : sheetDefinition.getExcelBlocks()){
-            if (((skipErrors && readStatus.getStatus() == ReadStatus.STATUS_DATA_COLLECTION_ERROR)
+            if (((skipErrors && readStatus.getStatus() == STATUS_DATA_COLLECTION_ERROR)
                             || readStatus.getStatus() == ReadStatus.STATUS_SUCCESS) && (loopBlock < 1 || !blockDefinition.isLoop())){
                 if (blockDefinition.isLoop()){
                     loopBlock++;
@@ -234,6 +251,8 @@ public class DefaultExcelReader implements ExcelReader{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Read simple block.
@@ -269,16 +288,18 @@ public class DefaultExcelReader implements ExcelReader{
                 stack.setValue(cellDefinition.getDataName(), value);
             }catch (ExcelManipulateException e){
                 if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-                    readStatus.setStatus(ReadStatus.STATUS_DATA_COLLECTION_ERROR);
+                    readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
                 }
                 readStatus.addException(e);
             }catch (Exception e){
                 LOGGER.error("", e);
-                readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
+                readStatus.setStatus(STATUS_SYSTEM_ERROR);
                 readStatus.setMessage(e.getMessage());
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Read loop block.
@@ -294,15 +315,16 @@ public class DefaultExcelReader implements ExcelReader{
      * @param readStatus
      *            the read status
      */
-    @SuppressWarnings("unchecked")
     private void readLoopBlock(Workbook wb,int sheetNo,ExcelBlock blockDefinition,OgnlStack stack,ReadStatus readStatus){
         //Loop Block will only care about row loop
         String dataName = blockDefinition.getDataName();
         if (dataName == null || dataName.length() == 0){
-            readStatus.setStatus(ReadStatus.STATUS_SETTING_ERROR);
+            readStatus.setStatus(STATUS_SETTING_ERROR);
             readStatus.setMessage("dataName for block[" + blockDefinition.toString() + "] is not set");
             return;
         }
+
+        //---------------------------------------------------------------
 
         try{
             Object obj = stack.getValue(dataName);
@@ -311,7 +333,7 @@ public class DefaultExcelReader implements ExcelReader{
                 dataList = new ArrayList();
                 stack.setValue(dataName, dataList);
             }else if (!(obj instanceof Collection)){
-                readStatus.setStatus(ReadStatus.STATUS_SETTING_ERROR);
+                readStatus.setStatus(STATUS_SETTING_ERROR);
                 readStatus.setMessage("Property " + dataName + " is not a Collection");
                 return;
             }else{
@@ -327,7 +349,7 @@ public class DefaultExcelReader implements ExcelReader{
             }
         }catch (Exception e){
             LOGGER.error("", e);
-            readStatus.setStatus(ReadStatus.STATUS_SYSTEM_ERROR);
+            readStatus.setStatus(STATUS_SYSTEM_ERROR);
             readStatus.setMessage(e.getMessage());
         }
     }
@@ -372,38 +394,39 @@ public class DefaultExcelReader implements ExcelReader{
                     result.put(cellDefinition.getDataName(), value);
                 }catch (ExcelManipulateException e){
                     if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-                        readStatus.setStatus(ReadStatus.STATUS_DATA_COLLECTION_ERROR);
-                    }
-                    readStatus.addException(e);
-                }
-            }
-            return result;
-        }else{
-            Object result = blockDefinition.getLoopClass().newInstance();
-            OgnlStack ognlStack = new OgnlStack(result);
-            for (ExcelCell cellDefinition : blockDefinition.getCells()){
-                int rowOffSet = cellDefinition.getRow() - blockDefinition.getStartRow();
-                Row row = sheet.getRow(startRow + rowOffSet);
-                Cell cell = row == null ? null : row.getCell(cellDefinition.getCol());
-                try{
-                    Object value = getCellValue(cell, evaluator);
-                    value = checkValue(
-                                    sheetNo,
-                                    ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
-                                    value,
-                                    cellDefinition,
-                                    getPropertyType(result, cellDefinition));
-                    LOGGER.debug("{}[Checked]:{}", ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
-                    ognlStack.setValue(cellDefinition.getDataName(), value);
-                }catch (ExcelManipulateException e){
-                    if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
-                        readStatus.setStatus(ReadStatus.STATUS_DATA_COLLECTION_ERROR);
+                        readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
                     }
                     readStatus.addException(e);
                 }
             }
             return result;
         }
+
+        //---------------------------------------------------------------
+        Object result = blockDefinition.getLoopClass().newInstance();
+        OgnlStack ognlStack = new OgnlStack(result);
+        for (ExcelCell cellDefinition : blockDefinition.getCells()){
+            int rowOffSet = cellDefinition.getRow() - blockDefinition.getStartRow();
+            Row row = sheet.getRow(startRow + rowOffSet);
+            Cell cell = row == null ? null : row.getCell(cellDefinition.getCol());
+            try{
+                Object value = getCellValue(cell, evaluator);
+                value = checkValue(
+                                sheetNo,
+                                ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()),
+                                value,
+                                cellDefinition,
+                                getPropertyType(result, cellDefinition));
+                LOGGER.debug("{}[Checked]:{}", ExcelUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
+                ognlStack.setValue(cellDefinition.getDataName(), value);
+            }catch (ExcelManipulateException e){
+                if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
+                    readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
+                }
+                readStatus.addException(e);
+            }
+        }
+        return result;
     }
 
     /**
@@ -423,19 +446,17 @@ public class DefaultExcelReader implements ExcelReader{
      * @throws ExcelManipulateException
      *             the excel manipulate exception
      */
-    private Object checkValue(int sheetNo,String cellIndex,Object value,ExcelCell cellDefinition,Class<? extends Object> clazz)
+    private static Object checkValue(int sheetNo,String cellIndex,Object value,ExcelCell cellDefinition,Class<? extends Object> clazz)
                     throws ExcelManipulateException{
-        DataConvertor<?> dc = DataConvertorConfigurator.getInstance().getConvertor(clazz);
+        DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
         //primitive type should be mandatory
         if (clazz.isPrimitive()){
             cellDefinition.setMandatory(true);
         }
-        if (dc == null){
-            throw new ExcelManipulateException(
-                            UNSUPPORTING_DATA_TYPE,
-                            new Object[] { sheetNo + 1, cellIndex, null, cellDefinition.getPattern(), cellDefinition.getChoiceString() });
+        if (dataConvertor == null){
+            throw build(value, sheetNo, cellIndex, cellDefinition, UNSUPPORTING_DATA_TYPE);
         }
-        return dc.convert(value, sheetNo, cellIndex, cellDefinition);
+        return dataConvertor.convert(value, sheetNo, cellIndex, cellDefinition);
     }
 
     /**
@@ -493,11 +514,13 @@ public class DefaultExcelReader implements ExcelReader{
      *            the condition
      * @return true, if successful
      */
-    private boolean checkBreak(Sheet sheet,int row,int col,LoopBreakCondition condition){
+    private static boolean checkBreak(Sheet sheet,int row,int col,LoopBreakCondition condition){
         //no break condition defined		
         if (sheet.getLastRowNum() < row){
             return true;
         }
+
+        //---------------------------------------------------------------
         if (condition != null){
             Row hrow = sheet.getRow(row + condition.getRowOffset());
             if (hrow == null){
@@ -563,6 +586,8 @@ public class DefaultExcelReader implements ExcelReader{
         return getPropertyTypeWithClass(object.getClass(), dataName);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 property type with class.
      *
@@ -592,6 +617,8 @@ public class DefaultExcelReader implements ExcelReader{
         }
         return getPropertyTypeWithClass(pd.getPropertyType(), dataName.substring(delim + 1));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the definition.

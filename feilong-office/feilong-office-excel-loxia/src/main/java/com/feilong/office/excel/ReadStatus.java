@@ -23,19 +23,7 @@ import java.util.List;
 public interface ReadStatus{
 
     /** The Constant STATUS_SUCCESS. */
-    public static final int STATUS_SUCCESS               = 0;
-
-    /** The Constant STATUS_READ_FILE_ERROR. */
-    public static final int STATUS_READ_FILE_ERROR       = 1;
-
-    /** The Constant STATUS_SETTING_ERROR. */
-    public static final int STATUS_SETTING_ERROR         = 2;
-
-    /** The Constant STATUS_SYSTEM_ERROR. */
-    public static final int STATUS_SYSTEM_ERROR          = 5;
-
-    /** The Constant STATUS_DATA_COLLECTION_ERROR. */
-    public static final int STATUS_DATA_COLLECTION_ERROR = 10;
+    public static final int STATUS_SUCCESS = 0;
 
     //---------------------------------------------------------------
 

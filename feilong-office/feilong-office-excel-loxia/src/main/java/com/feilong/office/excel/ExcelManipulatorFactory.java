@@ -15,7 +15,6 @@
  */
 package com.feilong.office.excel;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,6 @@ import java.util.Map;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.xmlrules.DigesterLoader;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import com.feilong.office.excel.definition.ExcelManipulatorDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
@@ -56,24 +54,24 @@ public class ExcelManipulatorFactory{
      */
     @SuppressWarnings("unchecked")
     public void setConfig(String...configurations){
-        for (String config : configurations){
-            Digester digester = DigesterLoader
-                            .createDigester(new InputSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(RULE_FILE)));
-            digester.setValidating(false);
+        try{
+            for (String config : configurations){
+                Digester digester = DigesterLoader.createDigester(
+                                new InputSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(RULE_FILE)));
+                digester.setValidating(false);
 
-            try{
                 List<ExcelSheet> list = (List<ExcelSheet>) digester
                                 .parse(Thread.currentThread().getContextClassLoader().getResourceAsStream(config));
                 for (ExcelSheet es : list){
                     sheetDefinitions.put(es.getName(), es);
                 }
-            }catch (IOException e){
-                throw new RuntimeException("Read excel config failed.", e);
-            }catch (SAXException e){
-                throw new RuntimeException("Read excel config failed.", e);
             }
+        }catch (Exception e){
+            throw new RuntimeException("Read excel config failed.", e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Creates a new ExcelManipulator object.
@@ -163,6 +161,8 @@ public class ExcelManipulatorFactory{
         return createExcelWriterInner(null, null, sheets);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a new ExcelManipulator object.
      *
@@ -187,6 +187,8 @@ public class ExcelManipulatorFactory{
                 throw new RuntimeException("Initiate ExcelWriter[" + clazz + "] failure");
             }
         }
+
+        //---------------------------------------------------------------
         ExcelManipulatorDefinition definition = new ExcelManipulatorDefinition();
         for (String sheet : sheets){
             ExcelSheet sheetDefinition = getExcelSheet(sheet);

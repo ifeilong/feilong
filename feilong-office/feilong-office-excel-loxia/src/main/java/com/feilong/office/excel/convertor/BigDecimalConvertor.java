@@ -20,7 +20,6 @@ import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 
 import java.math.BigDecimal;
 
-import com.feilong.office.excel.ErrorCode;
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -30,24 +29,10 @@ import com.feilong.office.excel.definition.ExcelCell;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2
  */
-public class BigDecimalConvertor implements DataConvertor<BigDecimal>{
+public class BigDecimalConvertor extends AbstractDataConvertor<BigDecimal>{
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see loxia.support.excel.convertor.BigDecimalConvertor#convert(java.lang.Object, int, java.lang.String,
-     * loxia.support.excel.definition.ExcelCell)
-     */
     @Override
-    public BigDecimal convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
-        if (value == null && cellDefinition.isMandatory()){
-            throw build(null, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_NULL);
-        }
-        //---------------------------------------------------------------
-        if (value == null){
-            return null;
-        }
-        //---------------------------------------------------------------
+    protected BigDecimal handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
         if (value instanceof String){
             String str = (String) value;
             str = str.trim();
@@ -55,21 +40,23 @@ public class BigDecimalConvertor implements DataConvertor<BigDecimal>{
                 if (!cellDefinition.isMandatory()){
                     return null;
                 }
-                throw build(null, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_NULL);
+                throw build(null, sheetNo, cellIndex, cellDefinition, WRONG_DATA_NULL);
             }
             try{
                 return toBigDecimal(value);
                 //  return new BigDecimal((String) value);
             }catch (NumberFormatException e){
-                throw build(value, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_TYPE_NUMBER);
+                throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
             }
         }else if (value instanceof Double){
             //解决 loxia 中 将 236796.83  解析成  236796.82999999998719431459903717041015625
             return toBigDecimal(value);
             //return new BigDecimal((Double)value);
         }
-        throw build(value, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_TYPE_NUMBER);
+        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
     }
+
+    //---------------------------------------------------------------
 
     @Override
     public String getDataTypeAbbr(){

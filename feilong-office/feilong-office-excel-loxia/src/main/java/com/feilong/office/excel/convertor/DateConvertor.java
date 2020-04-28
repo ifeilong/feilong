@@ -15,6 +15,8 @@
  */
 package com.feilong.office.excel.convertor;
 
+import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +24,6 @@ import java.util.Date;
 
 import org.apache.poi.ss.usermodel.DateUtil;
 
-import com.feilong.office.excel.ErrorCode;
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.LoxiaSupportConstants;
 import com.feilong.office.excel.LoxiaSupportSettings;
@@ -31,9 +32,11 @@ import com.feilong.office.excel.definition.ExcelCell;
 /**
  * The Class DateConvertor.
  */
-public class DateConvertor implements DataConvertor<Date>{
+public class DateConvertor extends AbstractDataConvertor<Date>{
 
     private static final int WRONG_DATA_TYPE_DATE = 13;
+
+    //---------------------------------------------------------------
 
     /** The date pattern. */
     private String           datePattern          = LoxiaSupportSettings.getInstance().get(LoxiaSupportConstants.DATE_PATTERN);
@@ -57,28 +60,14 @@ public class DateConvertor implements DataConvertor<Date>{
         this.datePattern = datePattern;
     }
 
+    //---------------------------------------------------------------
     @Override
-    public Date convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
-        if (value == null && cellDefinition.isMandatory()){
-            throw new ExcelManipulateException(
-                            ErrorCode.WRONG_DATA_NULL,
-                            new Object[] { sheetNo + 1, cellIndex, null, cellDefinition.getPattern(), cellDefinition.getChoiceString() });
-        }
-        if (value == null){
-            return null;
-        }
+    protected Date handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
         if (value instanceof String){
             String str = (String) value;
             if (str.length() == 0){
                 if (cellDefinition.isMandatory()){
-                    throw new ExcelManipulateException(
-                                    ErrorCode.WRONG_DATA_NULL,
-                                    new Object[] {
-                                                   sheetNo + 1,
-                                                   cellIndex,
-                                                   null,
-                                                   cellDefinition.getPattern(),
-                                                   cellDefinition.getChoiceString() });
+                    throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_NULL);
                 }
                 return null;
             }
@@ -87,24 +76,17 @@ public class DateConvertor implements DataConvertor<Date>{
                 DateFormat df = new SimpleDateFormat(pattern);
                 return df.parse((String) value);
             }catch (ParseException e){
-                throw new ExcelManipulateException(
-                                WRONG_DATA_TYPE_DATE,
-                                new Object[] {
-                                               sheetNo + 1,
-                                               cellIndex,
-                                               value,
-                                               cellDefinition.getPattern(),
-                                               cellDefinition.getChoiceString() });
+                throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_DATE);
             }
-        }else if (value instanceof Date){
-            return (Date) value;
-        }else if (value instanceof Double){
-            return DateUtil.getJavaDate((Double) value);
-        }else{
-            throw new ExcelManipulateException(
-                            WRONG_DATA_TYPE_DATE,
-                            new Object[] { sheetNo + 1, cellIndex, value, cellDefinition.getPattern(), cellDefinition.getChoiceString() });
         }
+        if (value instanceof Date){
+            return (Date) value;
+        }
+        if (value instanceof Double){
+            return DateUtil.getJavaDate((Double) value);
+        }
+
+        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
     }
 
     //---------------------------------------------------------------

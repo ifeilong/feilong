@@ -36,6 +36,8 @@ public class DataConvertorConfigurator implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long                     serialVersionUID = -6172555487692156540L;
 
+    //---------------------------------------------------------------
+
     /** The supports map. */
     private final Map<String, Class<?>>           supportsMap      = new HashMap<>();
 
@@ -64,13 +66,15 @@ public class DataConvertorConfigurator implements Serializable{
     /**
      * Register data convertor.
      *
-     * @param dc
+     * @param dataConvertor
      *            the dc
      */
-    public void registerDataConvertor(DataConvertor<?> dc){
-        supportsMap.put(dc.getDataTypeAbbr(), dc.supportClass());
-        convertorMap.put(dc.supportClass(), dc);
+    public void registerDataConvertor(DataConvertor<?> dataConvertor){
+        supportsMap.put(dataConvertor.getDataTypeAbbr(), dataConvertor.supportClass());
+        convertorMap.put(dataConvertor.supportClass(), dataConvertor);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the convertor.

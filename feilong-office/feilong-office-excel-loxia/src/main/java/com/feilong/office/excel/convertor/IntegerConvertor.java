@@ -6,7 +6,6 @@ import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.feilong.office.excel.ErrorCode;
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -20,13 +19,6 @@ public class IntegerConvertor extends ChoiceConvertor<Integer>{
 
     @Override
     protected Integer convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
-        if (value == null && cellDefinition.isMandatory()){
-            throw build(null, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_NULL);
-        }
-        if (value == null){
-            return null;
-        }
-        //---------------------------------------------------------------
         if (value instanceof String){
             String str = (String) value;
             str = str.trim();
@@ -34,18 +26,18 @@ public class IntegerConvertor extends ChoiceConvertor<Integer>{
                 if (!cellDefinition.isMandatory()){
                     return null;
                 }
-                throw build(null, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_NULL);
+                throw build(null, sheetNo, cellIndex, cellDefinition, WRONG_DATA_NULL);
             }
             //---------------------------------------------------------------
             try{
                 return toInteger(value);
             }catch (Exception e){
-                throw build(value, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_TYPE_NUMBER);
+                throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
             }
         }else if (value instanceof Double){
             return (int) Math.rint((Double) value);
         }
-        throw build(value, sheetNo, cellIndex, cellDefinition, ErrorCode.WRONG_DATA_TYPE_NUMBER);
+        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
     }
 
     @Override
@@ -59,6 +51,8 @@ public class IntegerConvertor extends ChoiceConvertor<Integer>{
         }
         return result;
     }
+
+    //---------------------------------------------------------------
 
     @Override
     public String getDataTypeAbbr(){

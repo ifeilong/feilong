@@ -248,15 +248,6 @@ public class LoxiaExcelWriteUtil{
         log(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetNames, outputStream, writeStatus);
     }
 
-    /**
-     * @param excelTemplateLocationInputStream
-     * @param xmlSheetConfigurations
-     * @param sheetNames
-     * @param outputStream
-     * @param writeStatus
-     * @throws UncheckedIOException
-     * @since 2.1.0
-     */
     private static void log(
                     InputStream excelTemplateLocationInputStream,
                     String xmlSheetConfigurations,
@@ -268,9 +259,6 @@ public class LoxiaExcelWriteUtil{
         map.put("xmlSheetConfigurations", xmlSheetConfigurations);
         map.put("sheetNames", sheetNames);
 
-        //        if (ClassUtil.isInstance(excelTemplateLocationInputStream, FileInputStream.class)){
-        //            map.put("excelTemplateLocationInputStream class", ((FileInputStream) excelTemplateLocationInputStream).getClass());
-        //        }
         map.put("outputFileOutputStream class", outputStream.getClass());
 
         if (writeStatus.getStatus() == ReadStatus.STATUS_SUCCESS){

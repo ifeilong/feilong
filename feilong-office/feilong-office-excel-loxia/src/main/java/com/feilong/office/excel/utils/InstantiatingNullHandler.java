@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ognl.NullHandler;
 import ognl.Ognl;
@@ -34,17 +34,19 @@ import ognl.OgnlRuntime;
  */
 public class InstantiatingNullHandler implements NullHandler{
 
-    /** The Constant LOG. */
-    private static final Log   LOG                      = LogFactory.getLog(InstantiatingNullHandler.class);
+    /** The Constant log. */
+    private static final Logger LOGGER                   = LoggerFactory.getLogger(InstantiatingNullHandler.class);
+
+    //---------------------------------------------------------------
 
     /** The Constant USING_LOXIA_NULL_HANDLER. */
-    public static final String USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
+    public static final String  USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
 
     /** The ignore list. */
-    private List<String>       ignoreList               = new ArrayList<>();
+    private List<String>        ignoreList               = new ArrayList<>();
 
     /** The handler wrapper. */
-    private final NullHandler  handlerWrapper;
+    private final NullHandler   handlerWrapper;
 
     //---------------------------------------------------------------
 
@@ -90,6 +92,8 @@ public class InstantiatingNullHandler implements NullHandler{
         this.ignoreList = ignoreList;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Null method result.
      *
@@ -104,16 +108,12 @@ public class InstantiatingNullHandler implements NullHandler{
      * @return the object
      */
     @Override
-    @SuppressWarnings("unchecked")
     public Object nullMethodResult(Map context,Object target,String methodName,Object[] args){
         Boolean flag = (Boolean) context.get(USING_LOXIA_NULL_HANDLER);
         if (handlerWrapper != null && ((flag == null) || !flag)){
             return handlerWrapper.nullMethodResult(context, target, methodName, args);
         }
-        if (LOG.isDebugEnabled()){
-            LOG.debug("Entering nullMethodResult ");
-        }
-
+        LOGGER.debug("Entering nullMethodResult ");
         return null;
     }
 
@@ -129,19 +129,18 @@ public class InstantiatingNullHandler implements NullHandler{
      * @return the object
      */
     @Override
-    @SuppressWarnings("unchecked")
     public Object nullPropertyValue(Map context,Object target,Object property){
         Boolean flag = (Boolean) context.get(USING_LOXIA_NULL_HANDLER);
         if (handlerWrapper != null && ((flag == null) || !flag)){
             return handlerWrapper.nullPropertyValue(context, target, property);
         }
-        if (LOG.isDebugEnabled()){
-            LOG.debug("Entering nullPropertyValue [target=" + target + ", property=" + property + "]");
-        }
+        LOGGER.debug("Entering nullPropertyValue [target={}, property={}]", target, property);
 
+        //---------------------------------------------------------------
         if ((target == null) || (property == null)){
             return null;
         }
+        //---------------------------------------------------------------
 
         try{
             String propName = property.toString();
@@ -152,7 +151,6 @@ public class InstantiatingNullHandler implements NullHandler{
                 if (pd == null){
                     return null;
                 }
-
                 clazz = pd.getPropertyType();
             }
 
@@ -167,16 +165,15 @@ public class InstantiatingNullHandler implements NullHandler{
             }
 
             Object param = createObject(clazz, target, propName, context);
-
             Ognl.setValue(propName, context, target, param);
-
             return param;
         }catch (Exception e){
-            LOG.error("Could not create and/or set value back on to object", e);
+            LOGGER.error("Could not create and/or set value back on to object", e);
         }
-
         return null;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Ignore class.
@@ -198,6 +195,8 @@ public class InstantiatingNullHandler implements NullHandler{
         return false;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 创建 object.
      *
@@ -213,13 +212,12 @@ public class InstantiatingNullHandler implements NullHandler{
      * @throws Exception
      *             the exception
      */
-    private Object createObject(Class clazz,Object target,String property,Map context) throws Exception{
+    private static Object createObject(Class clazz,Object target,String property,Map context) throws Exception{
         if (Collection.class.isAssignableFrom(clazz)){
             return new ArrayList<>();
         }else if (clazz == Map.class){
             return new HashMap<>();
         }
-
         return clazz.newInstance();
     }
 }

@@ -25,6 +25,8 @@ public class ExcelManipulateException extends Exception{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 478553091122313602L;
 
+    //---------------------------------------------------------------
+
     /** The error code. */
     private int               errorCode;
 
@@ -38,16 +40,6 @@ public class ExcelManipulateException extends Exception{
      *
      * @param errorCode
      *            the error code
-     */
-    public ExcelManipulateException(int errorCode){
-        this.errorCode = errorCode;
-    }
-
-    /**
-     * Instantiates a new excel manipulate exception.
-     *
-     * @param errorCode
-     *            the error code
      * @param args
      *            the args
      */
@@ -55,6 +47,8 @@ public class ExcelManipulateException extends Exception{
         this.errorCode = errorCode;
         this.args = args;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the error code.
@@ -93,6 +87,8 @@ public class ExcelManipulateException extends Exception{
     public void setArgs(Object[] args){
         this.args = args;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * To string.

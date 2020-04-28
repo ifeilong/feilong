@@ -147,6 +147,8 @@ public class OgnlStack{
         this.context.put(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Push.
      *
@@ -213,6 +215,8 @@ public class OgnlStack{
     public Object getContext(String key){
         return this.context.get(key);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the context map.
