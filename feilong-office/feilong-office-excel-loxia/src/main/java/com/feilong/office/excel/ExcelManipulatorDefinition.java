@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel.definition;
+package com.feilong.office.excel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.office.excel.definition.ExcelSheet;
 
 /**
  * The Class ExcelManipulatorDefinition.
@@ -52,6 +53,8 @@ public class ExcelManipulatorDefinition{
         this.excelSheets = excelSheets;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the style sheet position.
      *
@@ -70,6 +73,8 @@ public class ExcelManipulatorDefinition{
     public void setStyleSheetPosition(Integer styleSheetPosition){
         this.styleSheetPosition = styleSheetPosition;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * To string.

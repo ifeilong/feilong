@@ -20,6 +20,9 @@ import java.util.List;
 
 import com.feilong.office.excel.ExcelUtil;
 
+/**
+ * The Class ExcelBlock.
+ */
 public class ExcelBlock implements Comparable<ExcelBlock>{
 
     /** The Constant LOOP_DIRECTION_HORIZONAL. */
@@ -27,6 +30,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
 
     /** The Constant LOOP_DIRECTION_VERTICAL. */
     public static final String            LOOP_DIRECTION_VERTICAL  = "vertical";
+
+    //---------------------------------------------------------------
 
     /** The start row. */
     private int                           startRow                 = 0;
@@ -40,6 +45,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     /** The end col. */
     private int                           endCol                   = 0;
 
+    //---------------------------------------------------------------
+
     /** The data name. */
     private String                        dataName;
 
@@ -52,6 +59,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     /** The break condition. */
     private LoopBreakCondition            breakCondition;
 
+    //---------------------------------------------------------------
+
     /** The loop class. */
     private Class<? extends Object>       loopClass;
 
@@ -63,6 +72,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
 
     /** The is child block. */
     private boolean                       isChildBlock             = false;
+
+    //---------------------------------------------------------------
 
     /** The child block. */
     private ExcelBlock                    childBlock;

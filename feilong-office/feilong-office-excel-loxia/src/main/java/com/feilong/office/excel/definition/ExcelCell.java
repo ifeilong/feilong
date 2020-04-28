@@ -32,6 +32,8 @@ public class ExcelCell{
     /** The col. */
     private int                           col;
 
+    //---------------------------------------------------------------
+
     /** The data name. */
     private String                        dataName;
 
@@ -44,11 +46,15 @@ public class ExcelCell{
     /** The is mandatory. */
     private boolean                       isMandatory;
 
+    //---------------------------------------------------------------
+
     /** The available choices. */
     private String[]                      availableChoices;
 
     /** The pattern. */
     private String                        pattern;
+
+    //---------------------------------------------------------------
 
     /** The styles. */
     private List<ExcelCellConditionStyle> styles = new ArrayList<>();

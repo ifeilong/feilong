@@ -26,6 +26,8 @@ import com.feilong.office.excel.AbstractLoxiaExcelWriteTest;
 
 public class ConsultantExcelWriteTest extends AbstractLoxiaExcelWriteTest{
 
+    int count = 300;
+
     @Test
     public void test(){
         String templateFileName = "consultant/consultant-list-export.xlsx";
@@ -41,7 +43,7 @@ public class ConsultantExcelWriteTest extends AbstractLoxiaExcelWriteTest{
     private List<ConsultantCommand> buildList(){
         List<ConsultantCommand> list = newArrayList();
 
-        for (int i = 1; i <= 100; ++i){
+        for (int i = 1; i <= count; ++i){
             ConsultantCommand consultantCommand = new ConsultantCommand();
 
             consultantCommand.setItemId((long) i);

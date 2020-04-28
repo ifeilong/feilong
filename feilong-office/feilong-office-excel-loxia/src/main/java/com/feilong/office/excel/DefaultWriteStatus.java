@@ -15,21 +15,16 @@
  */
 package com.feilong.office.excel;
 
-import java.io.Serializable;
-
 /**
  * The Class DefaultWriteStatus.
  */
-public class DefaultWriteStatus implements WriteStatus,Serializable{
-
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -5736231901454798780L;
+public class DefaultWriteStatus implements WriteStatus{
 
     /** The status. */
-    private int               status           = STATUS_SUCCESS;
+    private int    status = STATUS_SUCCESS;
 
     /** The message. */
-    private String            message;
+    private String message;
 
     //---------------------------------------------------------------
 

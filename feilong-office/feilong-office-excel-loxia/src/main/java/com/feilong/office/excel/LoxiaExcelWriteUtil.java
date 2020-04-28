@@ -15,14 +15,19 @@
  */
 package com.feilong.office.excel;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +36,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import com.feilong.core.UncheckedIOException;
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 
@@ -108,16 +114,14 @@ public class LoxiaExcelWriteUtil{
                     String[] sheetNames,
                     Map<String, Object> beans,
                     String outputFileName){
+        Date beginDate = new Date();
+
         InputStream inputStream = getInputStream(excelTemplateLocation);
         write(inputStream, xmlSheetConfigurations, sheetNames, beans, outputFileName);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            Map<String, Object> map = newLinkedHashMap();
-            map.put("excelTemplateLocation", excelTemplateLocation);
-            map.put("xmlSheetConfigurations", xmlSheetConfigurations);
-            map.put("sheetName", sheetNames);
-            map.put("outputFileName", outputFileName);
+            Map<String, Object> map = buildMap(excelTemplateLocation, xmlSheetConfigurations, sheetNames, beans, outputFileName, beginDate);
             LOGGER.info("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
@@ -168,16 +172,20 @@ public class LoxiaExcelWriteUtil{
                     String[] sheetName,
                     Map<String, Object> beans,
                     String outputFileName){
+        Date beginDate = new Date();
+
         OutputStream outputStream = FileUtil.getFileOutputStream(outputFileName);
         write(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetName, beans, outputStream);
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = newLinkedHashMap();
-            map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
-            map.put("xmlSheetConfigurations", xmlSheetConfigurations);
-            map.put("sheetName", sheetName);
-            map.put("outputFileName", outputFileName);
+            Map<String, Object> map = build(
+                            excelTemplateLocationInputStream,
+                            xmlSheetConfigurations,
+                            sheetName,
+                            beans,
+                            outputFileName,
+                            beginDate);
             LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
@@ -228,6 +236,7 @@ public class LoxiaExcelWriteUtil{
                     String[] sheetNames,
                     Map<String, Object> beans,
                     OutputStream outputStream){
+        Date beginDate = new Date();
 
         Validate.notNull(excelTemplateLocationInputStream, "excelTemplateLocationInputStream can't be null!");
         Validate.notNull(outputStream, "outputStream can't be null!");
@@ -235,32 +244,32 @@ public class LoxiaExcelWriteUtil{
         Validate.notBlank(xmlSheetConfigurations, "xmlSheetConfigurations can't be blank!");
 
         //---------------------------------------------------------------
-
         ExcelManipulatorFactory excelManipulatorFactory = new ExcelManipulatorFactory();
         excelManipulatorFactory.setConfig(xmlSheetConfigurations);
 
         //---------------------------------------------------------------
-
         ExcelWriter excelWriter = excelManipulatorFactory.createExcelWriter(sheetNames);
         WriteStatus writeStatus = excelWriter.write(excelTemplateLocationInputStream, outputStream, beans);
 
         //---------------------------------------------------------------
-        log(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetNames, outputStream, writeStatus);
+        log(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetNames, beans, outputStream, writeStatus, beginDate);
     }
 
     private static void log(
                     InputStream excelTemplateLocationInputStream,
                     String xmlSheetConfigurations,
                     String[] sheetNames,
+                    Map<String, Object> beans,
                     OutputStream outputStream,
-                    WriteStatus writeStatus){
-        Map<String, Object> map = newLinkedHashMap();
-        map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
-        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
-        map.put("sheetNames", sheetNames);
-
-        map.put("outputFileOutputStream class", outputStream.getClass());
-
+                    WriteStatus writeStatus,
+                    Date beginDate){
+        Map<String, Object> map = build(
+                        excelTemplateLocationInputStream,
+                        xmlSheetConfigurations,
+                        sheetNames,
+                        beans,
+                        outputStream,
+                        beginDate);
         if (writeStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
@@ -271,6 +280,84 @@ public class LoxiaExcelWriteUtil{
                             new IOException("write excel exception,and writeStatus is :[" + JsonUtil.format(writeStatus) + "]"));
         }
     }
+
+    //---------------------------------------------------------------
+
+    private static Map<String, Object> build(
+                    InputStream excelTemplateLocationInputStream,
+                    String xmlSheetConfigurations,
+                    String[] sheetNames,
+                    Map<String, Object> beans,
+                    OutputStream outputStream,
+                    Date beginDate){
+        Map<String, Object> map = newLinkedHashMap();
+        map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
+        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
+        map.put("sheetNames", sheetNames);
+
+        map.put("outputFileOutputStream class", outputStream.getClass());
+        map.put("data info", toDataInfo(beans));
+        map.put("useTime", formatDuration(beginDate));
+        return map;
+    }
+
+    /**
+     * @param beans
+     * @return
+     * @since 3.0.0
+     */
+    private static Map<String, Integer> toDataInfo(Map<String, Object> beans){
+        Map<String, Integer> map = newLinkedHashMap();
+
+        if (isNotNullOrEmpty(beans)){
+            for (Map.Entry<String, Object> entry : beans.entrySet()){
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                if (ClassUtil.isInstance(value, Collection.class)){
+                    map.put(key + " size", CollectionUtils.size(value));
+                }
+            }
+        }
+        return map;
+    }
+
+    //---------------------------------------------------------------
+
+    private static Map<String, Object> buildMap(
+                    String excelTemplateLocation,
+                    String xmlSheetConfigurations,
+                    String[] sheetNames,
+                    Map<String, Object> beans,
+                    String outputFileName,
+                    Date beginDate){
+        Map<String, Object> map = newLinkedHashMap();
+        map.put("excelTemplateLocation", excelTemplateLocation);
+        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
+        map.put("sheetName", sheetNames);
+        map.put("outputFileName", outputFileName);
+        map.put("data info", toDataInfo(beans));
+        map.put("useTime", formatDuration(beginDate));
+        return map;
+    }
+
+    private static Map<String, Object> build(
+                    InputStream excelTemplateLocationInputStream,
+                    String xmlSheetConfigurations,
+                    String[] sheetName,
+                    Map<String, Object> beans,
+                    String outputFileName,
+                    Date beginDate){
+        Map<String, Object> map = newLinkedHashMap();
+        map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
+        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
+        map.put("sheetName", sheetName);
+        map.put("outputFileName", outputFileName);
+        map.put("data info", toDataInfo(beans));
+        map.put("useTime", formatDuration(beginDate));
+        return map;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Return a Resource handle for the specified resource location.
@@ -325,4 +412,5 @@ public class LoxiaExcelWriteUtil{
             throw new UncheckedIOException("location:[" + location + "]", e);
         }
     }
+
 }

@@ -20,12 +20,10 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.office.excel.definition.ExcelManipulatorDefinition;
-
 /**
  * The Interface ExcelWriter.
  */
-public interface ExcelWriter{
+public interface ExcelWriter extends ExcelConfig{
 
     /**
      * Write.
@@ -103,20 +101,4 @@ public interface ExcelWriter{
      */
     WriteStatus writePerSheet(InputStream is,OutputStream os,List<Map<String, Object>> beansList);
 
-    //---------------------------------------------------------------
-
-    /**
-     * Gets the definition.
-     *
-     * @return the definition
-     */
-    ExcelManipulatorDefinition getDefinition();
-
-    /**
-     * Sets the definition.
-     *
-     * @param definition
-     *            the new definition
-     */
-    void setDefinition(ExcelManipulatorDefinition definition);
 }

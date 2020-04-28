@@ -15,9 +15,11 @@
  */
 package com.feilong.office.excel.convertor;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 
-import java.util.List;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
@@ -28,7 +30,7 @@ import com.feilong.office.excel.definition.ExcelCell;
  * @param <T>
  *            the generic type
  */
-public abstract class ChoiceConvertor<T> extends AbstractDataConvertor<T>{
+public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T>{
 
     private static final int OUT_OF_CHOICES = 3;
 
@@ -36,8 +38,8 @@ public abstract class ChoiceConvertor<T> extends AbstractDataConvertor<T>{
     protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
         T t = convertValue(value, sheetNo, cellIndex, cellDefinition);
 
-        List<? extends T> choices = getChoices(cellDefinition);
-        if (t == null || choices == null || choices.contains(t)){
+        T[] choices = getChoices(cellDefinition);
+        if (t == null || choices == null || ArrayUtils.contains(choices, t)){
             return t;
         }
 
@@ -53,7 +55,13 @@ public abstract class ChoiceConvertor<T> extends AbstractDataConvertor<T>{
      *            the cell definition
      * @return the choices
      */
-    protected abstract List<? extends T> getChoices(ExcelCell cellDefinition);
+    private T[] getChoices(ExcelCell cellDefinition){
+        String[] availableChoices = cellDefinition.getAvailableChoices();
+        if (isNullOrEmpty(availableChoices)){
+            return null;
+        }
+        return toArray(availableChoices, supportClass());
+    }
 
     /**
      * Convert value.

@@ -3,9 +3,6 @@ package com.feilong.office.excel.convertor;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -15,7 +12,7 @@ import com.feilong.office.excel.definition.ExcelCell;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2
  */
-public class IntegerConvertor extends ChoiceConvertor<Integer>{
+public class IntegerConvertor extends AbstractChoiceConvertor<Integer>{
 
     @Override
     protected Integer convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
@@ -38,18 +35,6 @@ public class IntegerConvertor extends ChoiceConvertor<Integer>{
             return (int) Math.rint((Double) value);
         }
         throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
-    }
-
-    @Override
-    protected List<? extends Integer> getChoices(ExcelCell cellDefinition){
-        if (cellDefinition.getAvailableChoices() == null || cellDefinition.getAvailableChoices().length == 0){
-            return null;
-        }
-        List<Integer> result = new ArrayList<>();
-        for (String str : cellDefinition.getAvailableChoices()){
-            result.add(Integer.parseInt(str));
-        }
-        return result;
     }
 
     //---------------------------------------------------------------

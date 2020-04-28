@@ -34,6 +34,8 @@ public class ExcelCellConditionStyle{
     /** The end col. */
     private int    endCol   = 0;
 
+    //---------------------------------------------------------------
+
     /** The condition. */
     private String condition;
 

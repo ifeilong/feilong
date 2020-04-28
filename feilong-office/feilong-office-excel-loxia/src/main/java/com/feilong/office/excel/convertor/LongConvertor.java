@@ -2,13 +2,10 @@ package com.feilong.office.excel.convertor;
 
 import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
-public class LongConvertor extends ChoiceConvertor<Long>{
+public class LongConvertor extends AbstractChoiceConvertor<Long>{
 
     @Override
     protected Long convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
@@ -33,20 +30,6 @@ public class LongConvertor extends ChoiceConvertor<Long>{
             return Math.round((Double) value);
         }
         throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
-    }
-
-    //---------------------------------------------------------------
-
-    @Override
-    protected List<? extends Long> getChoices(ExcelCell cellDefinition){
-        if (cellDefinition.getAvailableChoices() == null || cellDefinition.getAvailableChoices().length == 0){
-            return null;
-        }
-        List<Long> result = new ArrayList<>();
-        for (String str : cellDefinition.getAvailableChoices()){
-            result.add(Long.parseLong(str));
-        }
-        return result;
     }
 
     //---------------------------------------------------------------

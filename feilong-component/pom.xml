@@ -89,7 +89,6 @@
 		<dependency>
 			<groupId>ognl</groupId>
 			<artifactId>ognl</artifactId>
-			<version>2.7.3</version>
 			<optional>true</optional>
 		</dependency>
 

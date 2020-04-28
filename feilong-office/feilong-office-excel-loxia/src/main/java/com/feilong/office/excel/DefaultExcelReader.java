@@ -41,7 +41,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.office.excel.convertor.DataConvertor;
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelCell;
-import com.feilong.office.excel.definition.ExcelManipulatorDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.definition.LoopBreakCondition;
 import com.feilong.office.excel.utils.OgnlStack;
@@ -170,17 +169,6 @@ public class DefaultExcelReader implements ExcelReader{
 
     //---------------------------------------------------------------
 
-    /**
-     * Read sheet.
-     *
-     * @param is
-     *            the is
-     * @param sheetNo
-     *            the sheet no
-     * @param beans
-     *            the beans
-     * @return the read status
-     */
     @Override
     public ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans){
         ReadStatus readStatus = new DefaultReadStatus();

@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
@@ -45,7 +47,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.definition.ExcelCellConditionStyle;
-import com.feilong.office.excel.definition.ExcelManipulatorDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.OgnlStack;
 
@@ -68,12 +69,28 @@ public class DefaultExcelWriter implements ExcelWriter{
     //---------------------------------------------------------------
 
     /** The definition. */
-    private ExcelManipulatorDefinition definition;
+    private ExcelManipulatorDefinition excelManipulatorDefinition;
 
     /** The buffered template. */
     private byte[]                     bufferedTemplate;
 
     //---------------------------------------------------------------
+
+    /**
+     * Write.
+     *
+     * @param template
+     *            the template
+     * @param os
+     *            the os
+     * @param beans
+     *            the beans
+     * @return the write status
+     */
+    @Override
+    public WriteStatus write(String template,OutputStream os,Map<String, Object> beans){
+        return write(Thread.currentThread().getContextClassLoader().getResourceAsStream(template), os, beans);
+    }
 
     /**
      * Write.
@@ -96,10 +113,8 @@ public class DefaultExcelWriter implements ExcelWriter{
 
         //---------------------------------------------------------------
 
-        Workbook workbook = createWookBook(new ByteArrayInputStream(bufferedTemplate), writeStatus);
-        if (workbook != null){
-            writeNative(workbook, os, beans, writeStatus);
-        }
+        Workbook workbook = createWookBook(new ByteArrayInputStream(bufferedTemplate));
+        writeNative(workbook, os, beans, writeStatus);
         return writeStatus;
 
     }
@@ -107,23 +122,21 @@ public class DefaultExcelWriter implements ExcelWriter{
     /**
      * Write.
      *
-     * @param is
+     * @param inputStream
      *            the is
-     * @param os
+     * @param outputStream
      *            the os
      * @param beans
      *            the beans
      * @return the write status
      */
     @Override
-    public WriteStatus write(InputStream is,OutputStream os,Map<String, Object> beans){
+    public WriteStatus write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans){
         WriteStatus writeStatus = new DefaultWriteStatus();
         writeStatus.setStatus(WriteStatus.STATUS_SUCCESS);
 
-        Workbook workbook = createWookBook(is, writeStatus);
-        if (workbook != null){
-            writeNative(workbook, os, beans, writeStatus);
-        }
+        Workbook workbook = createWookBook(inputStream);
+        writeNative(workbook, outputStream, beans, writeStatus);
         return writeStatus;
     }
 
@@ -132,19 +145,19 @@ public class DefaultExcelWriter implements ExcelWriter{
      *
      * @param is
      *            the is
-     * @param writeStatus
-     *            the write status
      * @return the workbook
      */
-    private static Workbook createWookBook(InputStream is,WriteStatus writeStatus){
-        Workbook workbook = null;
+    private static Workbook createWookBook(InputStream is){
         try{
-            workbook = WorkbookFactory.create(is);
+            return WorkbookFactory.create(is);
+        }catch (EncryptedDocumentException e){
+            throw new RuntimeException(e);
         }catch (IOException e){
-            writeStatus.setStatus(STATUS_READ_TEMPLATE_FILE_ERROR);
+            throw new UncheckedIOException(e);
         }
-        return workbook;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Write native.
@@ -159,53 +172,45 @@ public class DefaultExcelWriter implements ExcelWriter{
      *            the write status
      */
     private void writeNative(Workbook workbook,OutputStream os,Map<String, Object> beans,WriteStatus writeStatus){
-        if (definition.getExcelSheets().size() == 0 || workbook.getNumberOfSheets() < definition.getExcelSheets().size()){
+        List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
+
+        int size = excelSheets.size();
+        if (size == 0 || workbook.getNumberOfSheets() < size){
             writeStatus.setStatus(STATUS_SETTING_ERROR);
             writeStatus.setMessage("No sheet definition found or Sheet Number in definition is more than number in template file.");
-        }else{
-            Map<String, CellStyle> styleMap = new HashMap<>();
-            if (definition.getStyleSheetPosition() != null){
-                if (definition.getStyleSheetPosition().intValue() < definition.getExcelSheets().size()){
-                    writeStatus.setStatus(STATUS_SETTING_ERROR);
-                    writeStatus.setMessage("Style Sheet can not be one Template Sheet.");
-                    return;
-                }
-                for (int i = 0; i < definition.getExcelSheets().size(); i++){
-                    initConditionalStyle(
-                                    workbook.getSheetAt(definition.getStyleSheetPosition()),
-                                    definition.getExcelSheets().get(i),
-                                    styleMap);
-                }
-                workbook.removeSheetAt(definition.getStyleSheetPosition());
-                LOGGER.debug("{} styles found", styleMap.keySet().size());
-            }
-            for (int i = 0; i < definition.getExcelSheets().size(); i++){
-                writeSheet(workbook.getSheetAt(i), definition.getExcelSheets().get(i), new OgnlStack(beans), styleMap, writeStatus);
-            }
-            reCalculateWorkbook(workbook);
-            workbook.setActiveSheet(0);
-            try{
-                workbook.write(os);
-            }catch (IOException e){
-                writeStatus.setStatus(STATUS_WRITE_FILE_ERROR);
-            }
+            return;
         }
-    }
 
-    /**
-     * Write.
-     *
-     * @param template
-     *            the template
-     * @param os
-     *            the os
-     * @param beans
-     *            the beans
-     * @return the write status
-     */
-    @Override
-    public WriteStatus write(String template,OutputStream os,Map<String, Object> beans){
-        return write(Thread.currentThread().getContextClassLoader().getResourceAsStream(template), os, beans);
+        //---------------------------------------------------------------
+        Map<String, CellStyle> styleMap = new HashMap<>();
+        Integer styleSheetPosition = excelManipulatorDefinition.getStyleSheetPosition();
+
+        if (styleSheetPosition != null){
+            if (styleSheetPosition.intValue() < size){
+                writeStatus.setStatus(STATUS_SETTING_ERROR);
+                writeStatus.setMessage("Style Sheet can not be one Template Sheet.");
+                return;
+            }
+            for (int i = 0; i < size; i++){
+                initConditionalStyle(workbook.getSheetAt(styleSheetPosition), excelSheets.get(i), styleMap);
+            }
+            workbook.removeSheetAt(styleSheetPosition);
+            LOGGER.debug("{} styles found", styleMap.keySet().size());
+        }
+
+        //---------------------------------------------------------------
+        for (int i = 0; i < size; i++){
+            writeSheet(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap, writeStatus);
+        }
+
+        //---------------------------------------------------------------
+        reCalculateWorkbook(workbook);
+        workbook.setActiveSheet(0);
+        try{
+            workbook.write(os);
+        }catch (IOException e){
+            writeStatus.setStatus(STATUS_WRITE_FILE_ERROR);
+        }
     }
 
     /**
@@ -228,10 +233,8 @@ public class DefaultExcelWriter implements ExcelWriter{
         }
 
         //---------------------------------------------------------------
-        Workbook workbook = createWookBook(new ByteArrayInputStream(bufferedTemplate), writeStatus);
-        if (workbook != null){
-            writePerSheetNative(workbook, os, beansList, writeStatus);
-        }
+        Workbook workbook = createWookBook(new ByteArrayInputStream(bufferedTemplate));
+        writePerSheetNative(workbook, os, beansList, writeStatus);
         return writeStatus;
     }
 
@@ -251,10 +254,8 @@ public class DefaultExcelWriter implements ExcelWriter{
         WriteStatus writeStatus = new DefaultWriteStatus();
         writeStatus.setStatus(WriteStatus.STATUS_SUCCESS);
 
-        Workbook workbook = createWookBook(is, writeStatus);
-        if (workbook != null){
-            writePerSheetNative(workbook, os, beansList, writeStatus);
-        }
+        Workbook workbook = createWookBook(is);
+        writePerSheetNative(workbook, os, beansList, writeStatus);
         return writeStatus;
     }
 
@@ -271,19 +272,22 @@ public class DefaultExcelWriter implements ExcelWriter{
      *            the write status
      */
     private void writePerSheetNative(Workbook workbook,OutputStream os,List<Map<String, Object>> beansList,WriteStatus writeStatus){
-        if (definition.getExcelSheets().size() == 0 || workbook.getNumberOfSheets() < 1){
+        if (excelManipulatorDefinition.getExcelSheets().size() == 0 || workbook.getNumberOfSheets() < 1){
             writeStatus.setStatus(STATUS_SETTING_ERROR);
             writeStatus.setMessage("No sheet definition found or template file contains no sheet.");
         }else{
             Map<String, CellStyle> styleMap = new HashMap<>();
-            if (definition.getStyleSheetPosition() != null){
-                if (definition.getStyleSheetPosition().intValue() < definition.getExcelSheets().size()){
+            if (excelManipulatorDefinition.getStyleSheetPosition() != null){
+                if (excelManipulatorDefinition.getStyleSheetPosition().intValue() < excelManipulatorDefinition.getExcelSheets().size()){
                     writeStatus.setStatus(STATUS_SETTING_ERROR);
                     writeStatus.setMessage("Style Sheet can not be one Template Sheet.");
                     return;
                 }
-                initConditionalStyle(workbook.getSheetAt(definition.getStyleSheetPosition()), definition.getExcelSheets().get(0), styleMap);
-                workbook.removeSheetAt(definition.getStyleSheetPosition());
+                initConditionalStyle(
+                                workbook.getSheetAt(excelManipulatorDefinition.getStyleSheetPosition()),
+                                excelManipulatorDefinition.getExcelSheets().get(0),
+                                styleMap);
+                workbook.removeSheetAt(excelManipulatorDefinition.getStyleSheetPosition());
             }
             //remove sheets except the first one
             for (int i = workbook.getNumberOfSheets() - 1; i > 0; i--){
@@ -292,7 +296,12 @@ public class DefaultExcelWriter implements ExcelWriter{
             for (int i = 0; i < beansList.size(); i++){
                 Sheet newSheet = workbook.createSheet("Auto Generated Sheet " + i);
                 ExcelUtil.copySheet(workbook.getSheetAt(0), newSheet);
-                writeSheet(newSheet, definition.getExcelSheets().iterator().next(), new OgnlStack(beansList.get(i)), styleMap, writeStatus);
+                writeSheet(
+                                newSheet,
+                                excelManipulatorDefinition.getExcelSheets().iterator().next(),
+                                new OgnlStack(beansList.get(i)),
+                                styleMap,
+                                writeStatus);
             }
 
             //---------------------------------------------------------------
@@ -356,12 +365,12 @@ public class DefaultExcelWriter implements ExcelWriter{
      *            the style map
      */
     private static void initConditionalStyle(Sheet styleSheet,ExcelBlock blockDefinition,Map<String, CellStyle> styleMap){
-        for (ExcelCellConditionStyle style : blockDefinition.getStyles()){
-            initConditionalStyle(styleSheet, style, styleMap);
+        for (ExcelCellConditionStyle excelCellConditionStyle : blockDefinition.getStyles()){
+            initConditionalStyle(styleSheet, excelCellConditionStyle, styleMap);
         }
-        for (ExcelCell cellDefinition : blockDefinition.getCells()){
-            for (ExcelCellConditionStyle style : cellDefinition.getStyles()){
-                initConditionalStyle(styleSheet, style, styleMap);
+        for (ExcelCell excelCell : blockDefinition.getCells()){
+            for (ExcelCellConditionStyle excelCellConditionStyle : excelCell.getStyles()){
+                initConditionalStyle(styleSheet, excelCellConditionStyle, styleMap);
             }
         }
     }
@@ -371,20 +380,28 @@ public class DefaultExcelWriter implements ExcelWriter{
      *
      * @param styleSheet
      *            the style sheet
-     * @param style
+     * @param excelCellConditionStyle
      *            the style
      * @param styleMap
      *            the style map
      */
-    private static void initConditionalStyle(Sheet styleSheet,ExcelCellConditionStyle style,Map<String, CellStyle> styleMap){
+    private static void initConditionalStyle(
+                    Sheet styleSheet,
+                    ExcelCellConditionStyle excelCellConditionStyle,
+                    Map<String, CellStyle> styleMap){
         //ignore existed style
-        if (style.getStartRow() == 0 && style.getEndRow() == 0 && style.getStartCol() == 0 && style.getEndCol() == 0
-                        && styleMap.containsKey(style.getCellIndex())){
+        int startRow = excelCellConditionStyle.getStartRow();
+        int endRow = excelCellConditionStyle.getEndRow();
+        int startCol = excelCellConditionStyle.getStartCol();
+        String cellIndex = excelCellConditionStyle.getCellIndex();
+        int endCol = excelCellConditionStyle.getEndCol();
+
+        if (startRow == 0 && endRow == 0 && startCol == 0 && endCol == 0 && styleMap.containsKey(cellIndex)){
             return;
         }
-        int[] position = ExcelUtil.getCellPosition(style.getCellIndex());
-        int rows = style.getEndRow() - style.getStartRow();
-        int cols = style.getEndCol() - style.getStartCol();
+        int[] position = ExcelUtil.getCellPosition(cellIndex);
+        int rows = endRow - startRow;
+        int cols = endCol - startCol;
         for (int i = position[0]; i <= position[0] + rows; i++){
             Row row = styleSheet.getRow(i);
             if (row == null){
@@ -406,17 +423,17 @@ public class DefaultExcelWriter implements ExcelWriter{
     /**
      * Re calculate workbook.
      *
-     * @param wb
+     * @param workbook
      *            the wb
      */
-    private static void reCalculateWorkbook(Workbook wb){
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
-        for (int sheetNum = 0; sheetNum < wb.getNumberOfSheets(); sheetNum++){
-            Sheet sheet = wb.getSheetAt(sheetNum);
-            for (Row r : sheet){
-                for (Cell c : r){
-                    if (c.getCellType() == CellType.FORMULA){
-                        evaluator.evaluateFormulaCell(c);
+    private static void reCalculateWorkbook(Workbook workbook){
+        FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
+        for (int sheetNum = 0; sheetNum < workbook.getNumberOfSheets(); sheetNum++){
+            Sheet sheet = workbook.getSheetAt(sheetNum);
+            for (Row row : sheet){
+                for (Cell cell : row){
+                    if (cell.getCellType() == CellType.FORMULA){
+                        formulaEvaluator.evaluateFormulaCell(cell);
                     }
                 }
             }
@@ -430,7 +447,7 @@ public class DefaultExcelWriter implements ExcelWriter{
      *            the sheet
      * @param sheetDefinition
      *            the sheet definition
-     * @param stack
+     * @param ognlStack
      *            the stack
      * @param styleMap
      *            the style map
@@ -440,43 +457,61 @@ public class DefaultExcelWriter implements ExcelWriter{
     private static void writeSheet(
                     Sheet sheet,
                     ExcelSheet sheetDefinition,
-                    OgnlStack stack,
+                    OgnlStack ognlStack,
                     Map<String, CellStyle> styleMap,
                     WriteStatus writeStatus){
-        Workbook wb = sheet.getWorkbook();
+
+        Workbook workbook = sheet.getWorkbook();
         String sheetName = sheetDefinition.getDisplayName();
-        if (stack.getValue("sheetName") != null){
-            sheetName = (String) stack.getValue("sheetName");
+        Object value = ognlStack.getValue("sheetName");
+
+        if (value != null){
+            sheetName = (String) value;
         }
         if (sheetName != null){
-            wb.setSheetName(wb.getSheetIndex(sheet), sheetName);
+            workbook.setSheetName(workbook.getSheetIndex(sheet), sheetName);
         }
 
+        //---------------------------------------------------------------
         Map<ExcelBlock, List<CellRangeAddress>> mergedRegions = new HashMap<>();
+        List<ExcelBlock> sortedExcelBlocks = sheetDefinition.getSortedExcelBlocks();
         for (int i = 0; i < sheet.getNumMergedRegions(); i++){
-            CellRangeAddress cra = sheet.getMergedRegion(i);
+            CellRangeAddress cellRangeAddress = sheet.getMergedRegion(i);
+            int firstRow = cellRangeAddress.getFirstRow();
+            int firstColumn = cellRangeAddress.getFirstColumn();
+
+            int lastRow = cellRangeAddress.getLastRow();
+            int lastColumn = cellRangeAddress.getLastColumn();
+
             LOGGER.debug(
                             "Merged Region:[{}-{}]",
-                            ExcelUtil.getCellIndex(cra.getFirstRow(), cra.getFirstColumn()),
-                            ExcelUtil.getCellIndex(cra.getLastRow(), cra.getLastColumn()));
-            for (ExcelBlock blockDefinition : sheetDefinition.getSortedExcelBlocks()){
-                if (cra.getFirstRow() >= blockDefinition.getStartRow() && cra.getFirstColumn() >= blockDefinition.getStartCol()
-                                && cra.getLastRow() <= blockDefinition.getEndRow() && cra.getLastColumn() <= blockDefinition.getEndCol()){
-                    List<CellRangeAddress> cras = mergedRegions.get(blockDefinition);
-                    if (cras == null){
-                        cras = new ArrayList<>();
-                        mergedRegions.put(blockDefinition, cras);
+                            ExcelUtil.getCellIndex(firstRow, firstColumn),
+                            ExcelUtil.getCellIndex(lastRow, lastColumn));
+
+            for (ExcelBlock blockDefinition : sortedExcelBlocks){
+                int startRow = blockDefinition.getStartRow();
+                int endRow = blockDefinition.getEndRow();
+                int startCol = blockDefinition.getStartCol();
+                int endCol = blockDefinition.getEndCol();
+
+                if (firstRow >= startRow && firstColumn >= startCol && lastRow <= endRow && lastColumn <= endCol){
+                    List<CellRangeAddress> cellRangeAddressList = mergedRegions.get(blockDefinition);
+                    if (cellRangeAddressList == null){
+                        cellRangeAddressList = new ArrayList<>();
+                        mergedRegions.put(blockDefinition, cellRangeAddressList);
                     }
-                    cras.add(cra);
+                    cellRangeAddressList.add(cellRangeAddress);
                 }
             }
         }
 
-        for (ExcelBlock blockDefinition : sheetDefinition.getSortedExcelBlocks()){
+        //---------------------------------------------------------------
+
+        for (ExcelBlock blockDefinition : sortedExcelBlocks){
             if (blockDefinition.isLoop()){
-                writeLoopBlock(sheet, blockDefinition, stack, mergedRegions.get(blockDefinition), styleMap, writeStatus);
+                writeLoopBlock(sheet, blockDefinition, ognlStack, mergedRegions.get(blockDefinition), styleMap, writeStatus);
             }else{
-                writeSimpleBlock(sheet, blockDefinition, stack, styleMap);
+                writeSimpleBlock(sheet, blockDefinition, ognlStack, styleMap);
             }
         }
     }
@@ -496,19 +531,19 @@ public class DefaultExcelWriter implements ExcelWriter{
     private static void writeSimpleBlock(Sheet sheet,ExcelBlock blockDefinition,OgnlStack stack,Map<String, CellStyle> styleMap){
         //block style
         if (styleMap.keySet().size() > 0){
-            for (ExcelCellConditionStyle style : blockDefinition.getStyles()){
-                Object obj = stack.getValue(style.getCondition());
+            for (ExcelCellConditionStyle excelCellConditionStyle : blockDefinition.getStyles()){
+                Object obj = stack.getValue(excelCellConditionStyle.getCondition());
                 if (obj == null || !(obj instanceof Boolean)){
                     continue;
                 }
                 if (((Boolean) obj).booleanValue()){
                     setBlockStyle(
                                     sheet,
-                                    style.getStartRow(),
-                                    style.getEndRow(),
-                                    style.getStartCol(),
-                                    style.getEndCol(),
-                                    style.getCellIndex(),
+                                    excelCellConditionStyle.getStartRow(),
+                                    excelCellConditionStyle.getEndRow(),
+                                    excelCellConditionStyle.getStartCol(),
+                                    excelCellConditionStyle.getEndCol(),
+                                    excelCellConditionStyle.getCellIndex(),
                                     styleMap);
                 }
             }
@@ -558,6 +593,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                     List<CellRangeAddress> mergedRegions,
                     Map<String, CellStyle> styleMap,
                     WriteStatus writeStatus){
+
         if (blockDefinition.getDirection().equalsIgnoreCase(ExcelBlock.LOOP_DIRECTION_HORIZONAL)){
             try{
                 Object value = stack.getValue(blockDefinition.getDataName());
@@ -579,6 +615,8 @@ public class DefaultExcelWriter implements ExcelWriter{
                 }else{
                     listValue = (Collection<? extends Object>) value;
                 }
+
+                //---------------------------------------------------------------
 
                 int step = 1;
                 Object preObj = null;
@@ -604,8 +642,7 @@ public class DefaultExcelWriter implements ExcelWriter{
                                     stack,
                                     step * (blockDefinition.getEndRow() - blockDefinition.getStartRow() + 1),
                                     mergedRegions,
-                                    styleMap,
-                                    writeStatus);
+                                    styleMap);
                     step++;
                     preObj = stack.pop();
                 }
@@ -701,20 +738,16 @@ public class DefaultExcelWriter implements ExcelWriter{
      *            the merged regions
      * @param styleMap
      *            the style map
-     * @param writeStatus
-     *            the write status
      * @throws Exception
      *             the exception
      */
-    @SuppressWarnings("unchecked")
     private static void writeRow(
                     Sheet sheet,
                     ExcelBlock blockDefinition,
                     OgnlStack stack,
                     int rowOffset,
                     List<CellRangeAddress> mergedRegions,
-                    Map<String, CellStyle> styleMap,
-                    WriteStatus writeStatus) throws Exception{
+                    Map<String, CellStyle> styleMap) throws Exception{
         if (rowOffset > 0){
             ExcelUtil.copyBlock(
                             sheet,
@@ -746,6 +779,8 @@ public class DefaultExcelWriter implements ExcelWriter{
                 }
             }
         }
+
+        //---------------------------------------------------------------
         for (ExcelCell cellDefinition : blockDefinition.getCells()){
             String dataName = cellDefinition.getDataExpr() == null ? cellDefinition.getDataName() : cellDefinition.getDataExpr();
             if (dataName.startsWith("=")){
@@ -768,6 +803,8 @@ public class DefaultExcelWriter implements ExcelWriter{
                 }
             }
         }
+
+        //---------------------------------------------------------------
         if (blockDefinition.getChildBlock() != null){
             Object colValue = stack.getValue(blockDefinition.getChildBlock().getDataName());
             if (colValue == null){
@@ -818,6 +855,8 @@ public class DefaultExcelWriter implements ExcelWriter{
             stack.removeContext("columnNum");
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Write col.
@@ -900,6 +939,8 @@ public class DefaultExcelWriter implements ExcelWriter{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置 block style.
@@ -1127,7 +1168,7 @@ public class DefaultExcelWriter implements ExcelWriter{
      */
     @Override
     public ExcelManipulatorDefinition getDefinition(){
-        return definition;
+        return excelManipulatorDefinition;
     }
 
     /**
@@ -1138,6 +1179,6 @@ public class DefaultExcelWriter implements ExcelWriter{
      */
     @Override
     public void setDefinition(ExcelManipulatorDefinition definition){
-        this.definition = definition;
+        this.excelManipulatorDefinition = definition;
     }
 }

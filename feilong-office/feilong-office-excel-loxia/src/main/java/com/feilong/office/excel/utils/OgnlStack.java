@@ -40,13 +40,51 @@ public class OgnlStack{
     //---------------------------------------------------------------
 
     /** The stack. */
-    private final List<Object>        stack       = new ArrayList<>();
+    private final List<Object>        stackList       = new ArrayList<>();
 
     /** The context. */
     private final Map<String, Object> context;
 
     /** The expressions. */
     private final Map<String, Object> expressions = new HashMap<>();
+
+    //---------------------------------------------------------------
+
+    /**
+     * Instantiates a new ognl stack.
+     *
+     * @param obj
+     *            the obj
+     */
+    public OgnlStack(Object obj){
+        this(obj, new HashMap<>());
+    }
+
+    /**
+     * Instantiates a new ognl stack.
+     *
+     * @param obj
+     *            the obj
+     * @param context
+     *            the context
+     */
+    public OgnlStack(Object obj, Map<String, Object> context){
+        NullHandler nullHandler = null;
+        synchronized (OgnlStack.class){
+            try{
+                nullHandler = OgnlRuntime.getNullHandler(Object.class);
+                if (nullHandler == null || !(nullHandler instanceof InstantiatingNullHandler)){
+                    OgnlRuntime.setNullHandler(Object.class, new InstantiatingNullHandler(nullHandler, Arrays.asList("java")));
+                }
+            }catch (OgnlException e){
+                LOGGER.error("", e);
+            }
+        }
+
+        stackList.add(obj);
+        this.context = context == null ? new HashMap<>() : context;
+        this.context.put(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
+    }
 
     //---------------------------------------------------------------
 
@@ -61,12 +99,12 @@ public class OgnlStack{
      */
     private Object getExpression(String expr) throws OgnlException{
         synchronized (expressions){
-            Object o = expressions.get(expr);
-            if (o == null){
-                o = Ognl.parseExpression(expr);
-                expressions.put(expr, o);
+            Object object = expressions.get(expr);
+            if (object == null){
+                object = Ognl.parseExpression(expr);
+                expressions.put(expr, object);
             }
-            return o;
+            return object;
         }
     }
 
@@ -78,7 +116,7 @@ public class OgnlStack{
      * @return the value
      */
     public Object getValue(String expr){
-        for (Object obj : stack){
+        for (Object obj : stackList){
             try{
                 if (expr.indexOf("top") >= 0){
                     //contains top evaluation
@@ -104,47 +142,11 @@ public class OgnlStack{
      *             the ognl exception
      */
     public void setValue(String expr,Object value) throws OgnlException{
-        Object root = stack.get(0);
+        Object root = stackList.get(0);
         if (root == null){
             throw new IllegalArgumentException();
         }
         Ognl.setValue(getExpression(expr), context, root, value);
-    }
-
-    /**
-     * Instantiates a new ognl stack.
-     *
-     * @param obj
-     *            the obj
-     */
-    public OgnlStack(Object obj){
-        this(obj, new HashMap<String, Object>());
-    }
-
-    /**
-     * Instantiates a new ognl stack.
-     *
-     * @param obj
-     *            the obj
-     * @param context
-     *            the context
-     */
-    public OgnlStack(Object obj, Map<String, Object> context){
-        NullHandler nullHandler = null;
-        synchronized (OgnlStack.class){
-            try{
-                nullHandler = OgnlRuntime.getNullHandler(Object.class);
-                if (nullHandler == null || !(nullHandler instanceof InstantiatingNullHandler)){
-                    OgnlRuntime.setNullHandler(Object.class, new InstantiatingNullHandler(nullHandler, Arrays.asList("java")));
-                }
-            }catch (OgnlException e){
-                LOGGER.error("", e);
-            }
-        }
-
-        stack.add(obj);
-        this.context = context == null ? new HashMap<>() : context;
-        this.context.put(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
     }
 
     //---------------------------------------------------------------
@@ -156,7 +158,7 @@ public class OgnlStack{
      *            the obj
      */
     public void push(Object obj){
-        stack.add(0, obj);
+        stackList.add(0, obj);
     }
 
     /**
@@ -165,10 +167,10 @@ public class OgnlStack{
      * @return the object
      */
     public Object pop(){
-        if (stack.size() == 0){
+        if (stackList.size() == 0){
             throw new RuntimeException("No elements to pop");
         }
-        return stack.remove(0);
+        return stackList.remove(0);
     }
 
     /**
@@ -177,10 +179,10 @@ public class OgnlStack{
      * @return the object
      */
     public Object peek(){
-        if (stack.size() == 0){
+        if (stackList.size() == 0){
             throw new RuntimeException("No elements in stack");
         }
-        return stack.get(0);
+        return stackList.get(0);
     }
 
     /**

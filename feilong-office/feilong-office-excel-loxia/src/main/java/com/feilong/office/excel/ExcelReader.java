@@ -18,12 +18,10 @@ package com.feilong.office.excel;
 import java.io.InputStream;
 import java.util.Map;
 
-import com.feilong.office.excel.definition.ExcelManipulatorDefinition;
-
 /**
  * The Interface ExcelReader.
  */
-public interface ExcelReader{
+public interface ExcelReader extends ExcelConfig{
 
     /**
      * Read All sheets infos into one beans scope with multiple sheet definitions.
@@ -60,20 +58,4 @@ public interface ExcelReader{
      */
     ReadStatus readSheet(InputStream is,int sheetNo,Map<String, Object> beans);
 
-    //---------------------------------------------------------------
-
-    /**
-     * Gets the definition.
-     *
-     * @return the definition
-     */
-    ExcelManipulatorDefinition getDefinition();
-
-    /**
-     * Sets the definition.
-     *
-     * @param definition
-     *            the new definition
-     */
-    void setDefinition(ExcelManipulatorDefinition definition);
 }

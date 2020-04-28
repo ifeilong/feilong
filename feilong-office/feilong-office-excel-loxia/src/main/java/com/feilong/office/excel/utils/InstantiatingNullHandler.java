@@ -40,10 +40,10 @@ public class InstantiatingNullHandler implements NullHandler{
     //---------------------------------------------------------------
 
     /** The Constant USING_LOXIA_NULL_HANDLER. */
-    public static final String  USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
+    static final String         USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
 
     /** The ignore list. */
-    private List<String>        ignoreList               = new ArrayList<>();
+    private final List<String>  ignoreList               = new ArrayList<>();
 
     /** The handler wrapper. */
     private final NullHandler   handlerWrapper;
@@ -55,41 +55,12 @@ public class InstantiatingNullHandler implements NullHandler{
      *
      * @param nullHandler
      *            the null handler
-     */
-    public InstantiatingNullHandler(NullHandler nullHandler){
-        this.handlerWrapper = nullHandler;
-    }
-
-    /**
-     * Instantiates a new instantiating null handler.
-     *
-     * @param nullHandler
-     *            the null handler
      * @param ignoreList
      *            the ignore list
      */
     public InstantiatingNullHandler(NullHandler nullHandler, List<String> ignoreList){
-        this(nullHandler);
+        this.handlerWrapper = nullHandler;
         this.ignoreList.addAll(ignoreList);
-    }
-
-    /**
-     * Gets the ignore list.
-     *
-     * @return the ignore list
-     */
-    public List<String> getIgnoreList(){
-        return ignoreList;
-    }
-
-    /**
-     * Sets the ignore list.
-     *
-     * @param ignoreList
-     *            the new ignore list
-     */
-    public void setIgnoreList(List<String> ignoreList){
-        this.ignoreList = ignoreList;
     }
 
     //---------------------------------------------------------------
@@ -134,7 +105,7 @@ public class InstantiatingNullHandler implements NullHandler{
         if (handlerWrapper != null && ((flag == null) || !flag)){
             return handlerWrapper.nullPropertyValue(context, target, property);
         }
-        LOGGER.debug("Entering nullPropertyValue [target={}, property={}]", target, property);
+        LOGGER.trace("Entering nullPropertyValue [target={}, property={}]", target, property);
 
         //---------------------------------------------------------------
         if ((target == null) || (property == null)){
@@ -164,7 +135,7 @@ public class InstantiatingNullHandler implements NullHandler{
                 return null;
             }
 
-            Object param = createObject(clazz, target, propName, context);
+            Object param = createObject(clazz);
             Ognl.setValue(propName, context, target, param);
             return param;
         }catch (Exception e){
@@ -202,17 +173,11 @@ public class InstantiatingNullHandler implements NullHandler{
      *
      * @param clazz
      *            the clazz
-     * @param target
-     *            the target
-     * @param property
-     *            the property
-     * @param context
-     *            the context
      * @return the object
      * @throws Exception
      *             the exception
      */
-    private static Object createObject(Class clazz,Object target,String property,Map context) throws Exception{
+    private static Object createObject(Class clazz) throws Exception{
         if (Collection.class.isAssignableFrom(clazz)){
             return new ArrayList<>();
         }else if (clazz == Map.class){

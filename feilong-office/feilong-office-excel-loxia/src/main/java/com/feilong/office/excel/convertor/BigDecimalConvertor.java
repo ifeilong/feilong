@@ -44,14 +44,11 @@ public class BigDecimalConvertor extends AbstractDataConvertor<BigDecimal>{
             }
             try{
                 return toBigDecimal(value);
-                //  return new BigDecimal((String) value);
-            }catch (NumberFormatException e){
+            }catch (Exception e){
                 throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
             }
         }else if (value instanceof Double){
-            //解决 loxia 中 将 236796.83  解析成  236796.82999999998719431459903717041015625
             return toBigDecimal(value);
-            //return new BigDecimal((Double)value);
         }
         throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
     }

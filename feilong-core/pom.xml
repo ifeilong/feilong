@@ -101,19 +101,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- [ERROR] 'git' 不是内部或外部命令，也不是可运行的程序 或批处理文件。 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<type>range</type>
-					<range>30</range>
-					<headingDateFormat>MM-dd</headingDateFormat>
-					<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
-				</configuration>
-			</plugin>
-
 		</plugins>
 	</build>
 

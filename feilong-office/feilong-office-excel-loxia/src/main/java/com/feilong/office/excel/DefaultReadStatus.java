@@ -15,28 +15,22 @@
  */
 package com.feilong.office.excel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Class DefaultReadStatus.
  */
-public class DefaultReadStatus implements ReadStatus,Serializable{
-
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 567602698187676255L;
-
-    //---------------------------------------------------------------
+public class DefaultReadStatus implements ReadStatus{
 
     /** The status. */
-    private int               status           = STATUS_SUCCESS;
+    private int             status     = STATUS_SUCCESS;
 
     /** The message. */
-    private String            message;
+    private String          message;
 
     /** The exceptions. */
-    private List<Exception>   exceptions       = new ArrayList<>();
+    private List<Exception> exceptions = new ArrayList<>();
 
     //---------------------------------------------------------------
 

@@ -40,6 +40,8 @@ public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{
     @Qualifier("all订阅Writer")
     private ExcelWriter allWriter;
 
+    //---------------------------------------------------------------
+
     @Test
     public void test(){
         String templateFileName = "loxia/subscribtion/template-list-2sheet.xlsx";

@@ -1,12 +1,9 @@
 package com.feilong.office.excel.convertor;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
-public class StringConvertor extends ChoiceConvertor<String>{
+public class StringConvertor extends AbstractChoiceConvertor<String>{
 
     @Override
     protected String convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
@@ -19,16 +16,6 @@ public class StringConvertor extends ChoiceConvertor<String>{
             str = str.substring(0, str.length() - 2);
         }
         return str;
-    }
-
-    //---------------------------------------------------------------
-
-    @Override
-    protected List<? extends String> getChoices(ExcelCell cellDefinition){
-        if (cellDefinition.getAvailableChoices() == null || cellDefinition.getAvailableChoices().length == 0){
-            return null;
-        }
-        return Arrays.asList(cellDefinition.getAvailableChoices());
     }
 
     //---------------------------------------------------------------

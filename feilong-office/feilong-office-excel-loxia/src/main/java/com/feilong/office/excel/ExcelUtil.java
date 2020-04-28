@@ -62,6 +62,8 @@ public class ExcelUtil{
         return cell.formatAsString().replaceAll("\\$", "");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the cell position.
      *
@@ -213,9 +215,8 @@ public class ExcelUtil{
             if (oldRow.getHeight() >= 0){
                 newRow.setHeight(oldRow.getHeight());
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("copy row {} to {}", row, row + rowOffset);
-                LOGGER.debug("Set row height :{}", newRow.getHeightInPoints());
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("copy row [{}] to [{}],Set row height :{}", row, row + rowOffset, newRow.getHeightInPoints());
             }
             for (int col = startCol; col <= endCol; col++){
                 Cell oldCell = oldRow.getCell(col);
