@@ -15,7 +15,6 @@
  */
 package com.feilong.office.excel.convertor;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -56,8 +55,6 @@ public interface DataConvertor<T> {
      * @param cellDefinition
      *            the cell definition
      * @return the t
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
      */
-    T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException;
+    T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition);
 }

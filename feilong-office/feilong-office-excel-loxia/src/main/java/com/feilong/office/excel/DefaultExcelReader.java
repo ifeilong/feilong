@@ -36,13 +36,10 @@ import com.feilong.office.excel.utils.OgnlStack;
 /**
  * The Class DefaultExcelReader.
  */
-public class DefaultExcelReader implements ExcelReader{
-
-    /** The definition. */
-    private ExcelManipulatorDefinition definition;
+public class DefaultExcelReader extends AbstractExcelConfig implements ExcelReader{
 
     /** The skip errors. */
-    private boolean                    skipErrors = true;
+    private boolean skipErrors = true;
 
     //---------------------------------------------------------------
 
@@ -61,15 +58,15 @@ public class DefaultExcelReader implements ExcelReader{
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            List<ExcelSheet> excelSheets = definition.getExcelSheets();
+            List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
             int size = excelSheets.size();
             Validate.isTrue(
                             size > 0 && workbook.getNumberOfSheets() >= size,
                             "No sheet definition found or Sheet Number in definition is more than number in file.");
 
-            OgnlStack stack = new OgnlStack(beans);
+            OgnlStack ognlStack = new OgnlStack(beans);
             for (int i = 0; i < size; i++){
-                SheetReader.readSheet(workbook, i, excelSheets.get(i), stack, readStatus, skipErrors);
+                SheetReader.readSheet(workbook, i, excelSheets.get(i), ognlStack, readStatus, skipErrors);
             }
             return readStatus;
         }catch (IOException e){
@@ -90,7 +87,7 @@ public class DefaultExcelReader implements ExcelReader{
     @Override
     public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            List<ExcelSheet> excelSheets = definition.getExcelSheets();
+            List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
             int size = excelSheets.size();
             Validate.isTrue(size > 0, "No sheet definition found");
 
@@ -133,15 +130,13 @@ public class DefaultExcelReader implements ExcelReader{
     public ReadStatus readSheet(InputStream inputStream,int sheetNo,Map<String, Object> beans){
         OgnlStack ognlStack = new OgnlStack(beans);
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            List<ExcelSheet> excelSheets = definition.getExcelSheets();
+            List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
 
             ReadStatus readStatus = new ReadStatus();
             readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
             SheetReader.readSheet(workbook, sheetNo, excelSheets.iterator().next(), ognlStack, readStatus, skipErrors);
-
             return readStatus;
-
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -149,27 +144,6 @@ public class DefaultExcelReader implements ExcelReader{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Gets the definition.
-     *
-     * @return the definition
-     */
-    @Override
-    public ExcelManipulatorDefinition getDefinition(){
-        return definition;
-    }
-
-    /**
-     * Sets the definition.
-     *
-     * @param definition
-     *            the new definition
-     */
-    @Override
-    public void setDefinition(ExcelManipulatorDefinition definition){
-        this.definition = definition;
-    }
 
     /**
      * Checks if is skip errors.

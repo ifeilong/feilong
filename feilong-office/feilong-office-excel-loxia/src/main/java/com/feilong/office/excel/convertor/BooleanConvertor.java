@@ -15,11 +15,10 @@
  */
 package com.feilong.office.excel.convertor;
 
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
 import org.apache.commons.lang3.BooleanUtils;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -44,7 +43,7 @@ public class BooleanConvertor extends AbstractDataConvertor<Boolean>{
     //---------------------------------------------------------------
 
     @Override
-    protected Boolean handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
+    protected Boolean handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
         if (value instanceof Boolean){
             return (Boolean) value;
         }
@@ -57,7 +56,7 @@ public class BooleanConvertor extends AbstractDataConvertor<Boolean>{
             Number value2 = (Number) value;
             return BooleanUtils.toBooleanObject(value2.intValue());
         }
-        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_FORMAT);
+        throw build(WRONG_DATA_FORMAT, value, sheetNo, cellIndex, cellDefinition);
     }
     //---------------------------------------------------------------
 

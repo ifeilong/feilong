@@ -15,7 +15,7 @@
  */
 package com.feilong.office.excel.convertor;
 
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,7 +24,6 @@ import java.util.Date;
 
 import org.apache.poi.ss.usermodel.DateUtil;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.utils.Settings;
 
@@ -61,12 +60,12 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
 
     //---------------------------------------------------------------
     @Override
-    protected Date handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
+    protected Date handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
         if (value instanceof String){
             String str = (String) value;
             if (str.length() == 0){
                 if (cellDefinition.isMandatory()){
-                    throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_NULL);
+                    throw build(WRONG_DATA_NULL, value, sheetNo, cellIndex, cellDefinition);
                 }
                 return null;
             }
@@ -75,7 +74,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
                 DateFormat df = new SimpleDateFormat(pattern);
                 return df.parse((String) value);
             }catch (ParseException e){
-                throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_DATE);
+                throw build(WRONG_DATA_TYPE_DATE, value, sheetNo, cellIndex, cellDefinition);
             }
         }
         if (value instanceof Date){
@@ -85,7 +84,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
             return DateUtil.getJavaDate((Double) value);
         }
 
-        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
+        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
     }
 
     //---------------------------------------------------------------

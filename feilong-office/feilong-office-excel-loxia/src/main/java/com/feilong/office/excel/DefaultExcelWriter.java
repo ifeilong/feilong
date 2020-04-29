@@ -33,18 +33,15 @@ import com.feilong.office.excel.writer.WorkbookWriter;
 /**
  * The Class DefaultExcelWriter.
  */
-public class DefaultExcelWriter implements ExcelWriter{
+public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWriter{
 
     /** The Constant log. */
-    private static final Logger        LOGGER = LoggerFactory.getLogger(DefaultExcelWriter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExcelWriter.class);
 
     //---------------------------------------------------------------
 
-    /** The definition. */
-    private ExcelManipulatorDefinition excelManipulatorDefinition;
-
     /** The buffered template. */
-    private byte[]                     bufferedTemplate;
+    private byte[]              bufferedTemplate;
 
     //---------------------------------------------------------------
 
@@ -165,26 +162,4 @@ public class DefaultExcelWriter implements ExcelWriter{
         }
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Gets the definition.
-     *
-     * @return the definition
-     */
-    @Override
-    public ExcelManipulatorDefinition getDefinition(){
-        return excelManipulatorDefinition;
-    }
-
-    /**
-     * Sets the definition.
-     *
-     * @param definition
-     *            the new definition
-     */
-    @Override
-    public void setDefinition(ExcelManipulatorDefinition definition){
-        this.excelManipulatorDefinition = definition;
-    }
 }

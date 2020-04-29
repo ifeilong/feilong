@@ -15,20 +15,21 @@
  */
 package com.feilong.office.excel.reader;
 
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
 import com.feilong.office.excel.DataConvertorConfigurator;
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.convertor.DataConvertor;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
- * 
+ * The Class CellValueChecker.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
 class CellValueChecker{
 
+    /** The Constant UNSUPPORTING_DATA_TYPE. */
     private static final int UNSUPPORTING_DATA_TYPE = 2;
 
     /** Don't let anyone instantiate this class. */
@@ -54,11 +55,8 @@ class CellValueChecker{
      * @param clazz
      *            the clazz
      * @return the object
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
      */
-    static Object check(int sheetNo,String cellIndex,Object value,ExcelCell excelCell,Class<? extends Object> clazz)
-                    throws ExcelManipulateException{
+    static Object check(int sheetNo,String cellIndex,Object value,ExcelCell excelCell,Class<? extends Object> clazz){
         //primitive type should be mandatory
         if (clazz.isPrimitive()){
             excelCell.setMandatory(true);
@@ -67,7 +65,7 @@ class CellValueChecker{
         //---------------------------------------------------------------
         DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
         if (dataConvertor == null){
-            throw build(value, sheetNo, cellIndex, excelCell, UNSUPPORTING_DATA_TYPE);
+            throw build(UNSUPPORTING_DATA_TYPE, value, sheetNo, cellIndex, excelCell);
         }
         return dataConvertor.convert(value, sheetNo, cellIndex, excelCell);
     }

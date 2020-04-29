@@ -22,16 +22,17 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.utils.CellReferenceUtil;
 
 /**
- * 
+ * The Class CellValueGetter.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
 class CellValueGetter{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CellValueGetter.class);
 
     /**
@@ -42,8 +43,6 @@ class CellValueGetter{
      * @param formulaEvaluator
      *            the evaluator
      * @return the cell value
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
      */
     static Object get(Cell cell,FormulaEvaluator formulaEvaluator){
         if (cell == null){

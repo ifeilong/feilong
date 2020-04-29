@@ -37,12 +37,14 @@ import com.feilong.office.excel.utils.OgnlStack;
 import com.feilong.office.excel.utils.WorkbookUtil;
 
 /**
- * 
+ * The Class WorkbookWriter.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
 public class WorkbookWriter{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(WorkbookWriter.class);
 
     //---------------------------------------------------------------
@@ -55,6 +57,18 @@ public class WorkbookWriter{
     }
 
     //---------------------------------------------------------------
+    /**
+     * Write per sheet.
+     *
+     * @param workbook
+     *            the workbook
+     * @param outputStream
+     *            the output stream
+     * @param definition
+     *            the definition
+     * @param beansList
+     *            the beans list
+     */
     public static void writePerSheet(
                     Workbook workbook,
                     OutputStream outputStream,
@@ -83,6 +97,18 @@ public class WorkbookWriter{
         pack(workbook, outputStream);
     }
 
+    /**
+     * Write.
+     *
+     * @param workbook
+     *            the workbook
+     * @param outputStream
+     *            the output stream
+     * @param definition
+     *            the definition
+     * @param beans
+     *            the beans
+     */
     public static void write(Workbook workbook,OutputStream outputStream,ExcelManipulatorDefinition definition,Map<String, Object> beans){
         List<ExcelSheet> excelSheets = definition.getExcelSheets();
         int excelSheetsSize = excelSheets.size();
@@ -96,6 +122,19 @@ public class WorkbookWriter{
         pack(workbook, outputStream);
     }
 
+    /**
+     * Builds the style map.
+     *
+     * @param workbook
+     *            the workbook
+     * @param definition
+     *            the definition
+     * @param excelSheets
+     *            the excel sheets
+     * @param excelSheetsSize
+     *            the excel sheets size
+     * @return the map
+     */
     private static Map<String, CellStyle> buildStyleMap(
                     Workbook workbook,
                     ExcelManipulatorDefinition definition,
@@ -113,7 +152,6 @@ public class WorkbookWriter{
             workbook.removeSheetAt(styleSheetPosition);
             LOGGER.debug("{} styles found", styleMap.keySet().size());
         }
-
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("buildStyleMap use time: [{}],StyleMap size:[{}]", formatDuration(beginDate), styleMap.size());
@@ -122,12 +160,30 @@ public class WorkbookWriter{
 
     }
 
+    /**
+     * Validate.
+     *
+     * @param excelSheetsSize
+     *            the excel sheets size
+     * @param numberOfSheets
+     *            the number of sheets
+     */
     private static void validate(int excelSheetsSize,int numberOfSheets){
         Validate.isTrue(
                         excelSheetsSize > 0 && numberOfSheets >= excelSheetsSize,
                         "No sheet definition found or Sheet Number in definition is more than number in template file.");
     }
 
+    /**
+     * Pack.
+     *
+     * @param workbook
+     *            the workbook
+     * @param outputStream
+     *            the output stream
+     * @throws UncheckedIOException
+     *             the unchecked IO exception
+     */
     private static void pack(Workbook workbook,OutputStream outputStream) throws UncheckedIOException{
         FormulaEvaluatorUtil.reCalculate(workbook);
         workbook.setActiveSheet(0);

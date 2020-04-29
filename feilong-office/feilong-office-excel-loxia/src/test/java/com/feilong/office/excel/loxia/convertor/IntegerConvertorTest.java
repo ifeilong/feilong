@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.convertor.IntegerConvertor;
 import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.test.AbstractTest;
@@ -38,7 +37,7 @@ public class IntegerConvertorTest extends AbstractTest{
     //---------------------------------------------------------------
 
     @Test
-    public void testIntegerConvertorDouble() throws ExcelManipulateException{
+    public void testIntegerConvertorDouble(){
         Integer convert = feilongIntegerConvertor.convert(1.0, 1, "F2", cellDefinition);
         assertEquals(toInteger(1), convert);
     }
@@ -46,7 +45,7 @@ public class IntegerConvertorTest extends AbstractTest{
     //---------------------------------------------------------------
 
     @Test
-    public void testString() throws ExcelManipulateException{
+    public void testString(){
         Integer convert = feilongIntegerConvertor.convert("1.0", 1, "F2", cellDefinition);
         assertNull(convert);
     }

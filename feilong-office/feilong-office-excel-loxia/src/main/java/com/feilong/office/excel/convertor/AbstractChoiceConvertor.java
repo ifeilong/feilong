@@ -17,11 +17,10 @@ package com.feilong.office.excel.convertor;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -35,7 +34,7 @@ public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T
     private static final int OUT_OF_CHOICES = 3;
 
     @Override
-    protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
+    protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
         T t = convertValue(value, sheetNo, cellIndex, cellDefinition);
 
         T[] choices = getChoices(cellDefinition);
@@ -43,7 +42,7 @@ public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T
             return t;
         }
 
-        throw build(value, sheetNo, cellIndex, cellDefinition, OUT_OF_CHOICES);
+        throw build(OUT_OF_CHOICES, value, sheetNo, cellIndex, cellDefinition);
     }
 
     //---------------------------------------------------------------
@@ -63,21 +62,6 @@ public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T
         return toArray(availableChoices, supportClass());
     }
 
-    /**
-     * Convert value.
-     *
-     * @param value
-     *            the value
-     * @param sheetNo
-     *            the sheet no
-     * @param cellIndex
-     *            the cell index
-     * @param cellDefinition
-     *            the cell definition
-     * @return the t
-     * @throws ExcelManipulateException
-     *             the excel manipulate exception
-     */
-    protected abstract T convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException;
+    protected abstract T convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition);
 
 }

@@ -17,10 +17,7 @@ package com.feilong.office.excel;
 
 import java.util.Arrays;
 
-/**
- * The Class ExcelManipulateException.
- */
-public class ExcelManipulateException extends Exception{
+public class ExcelException extends RuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 478553091122313602L;
@@ -28,10 +25,10 @@ public class ExcelManipulateException extends Exception{
     //---------------------------------------------------------------
 
     /** The error code. */
-    private int               errorCode;
+    private final int         errorCode;
 
     /** [SheetNo,Position,CurrentValue,Pattern,ChoiceList]. */
-    private Object[]          args;
+    private final Object[]    args;
 
     //---------------------------------------------------------------
 
@@ -43,48 +40,8 @@ public class ExcelManipulateException extends Exception{
      * @param args
      *            the args
      */
-    public ExcelManipulateException(int errorCode, Object[] args){
+    public ExcelException(int errorCode, Object...args){
         this.errorCode = errorCode;
-        this.args = args;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Gets the error code.
-     *
-     * @return the error code
-     */
-    public int getErrorCode(){
-        return errorCode;
-    }
-
-    /**
-     * Sets the error code.
-     *
-     * @param errorCode
-     *            the new error code
-     */
-    public void setErrorCode(int errorCode){
-        this.errorCode = errorCode;
-    }
-
-    /**
-     * 获得 [SheetNo,Position,CurrentValue,Pattern,ChoiceList].
-     *
-     * @return the [SheetNo,Position,CurrentValue,Pattern,ChoiceList]
-     */
-    public Object[] getArgs(){
-        return args;
-    }
-
-    /**
-     * 设置 [SheetNo,Position,CurrentValue,Pattern,ChoiceList].
-     *
-     * @param args
-     *            the new [SheetNo,Position,CurrentValue,Pattern,ChoiceList]
-     */
-    public void setArgs(Object[] args){
         this.args = args;
     }
 

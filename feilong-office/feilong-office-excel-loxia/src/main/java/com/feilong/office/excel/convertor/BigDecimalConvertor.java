@@ -16,11 +16,10 @@
 package com.feilong.office.excel.convertor;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
 import java.math.BigDecimal;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -32,7 +31,7 @@ import com.feilong.office.excel.definition.ExcelCell;
 public class BigDecimalConvertor extends AbstractDataConvertor<BigDecimal>{
 
     @Override
-    protected BigDecimal handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
+    protected BigDecimal handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
         if (value instanceof String){
             String str = (String) value;
             str = str.trim();
@@ -40,17 +39,17 @@ public class BigDecimalConvertor extends AbstractDataConvertor<BigDecimal>{
                 if (!cellDefinition.isMandatory()){
                     return null;
                 }
-                throw build(null, sheetNo, cellIndex, cellDefinition, WRONG_DATA_NULL);
+                throw build(WRONG_DATA_NULL, null, sheetNo, cellIndex, cellDefinition);
             }
             try{
                 return toBigDecimal(value);
             }catch (Exception e){
-                throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
+                throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
             }
         }else if (value instanceof Double){
             return toBigDecimal(value);
         }
-        throw build(value, sheetNo, cellIndex, cellDefinition, WRONG_DATA_TYPE_NUMBER);
+        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
     }
 
     //---------------------------------------------------------------

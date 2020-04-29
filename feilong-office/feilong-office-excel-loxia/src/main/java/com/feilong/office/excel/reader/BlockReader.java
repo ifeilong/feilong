@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.office.excel.DataConvertorConfigurator;
-import com.feilong.office.excel.ExcelManipulateException;
+import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.ReadStatus;
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelCell;
@@ -41,12 +41,14 @@ import com.feilong.office.excel.utils.OgnlStack;
 import ognl.OgnlRuntime;
 
 /**
- * 
+ * The Class BlockReader.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
 class BlockReader{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER                       = LoggerFactory.getLogger(BlockReader.class);
 
     /** The Constant STATUS_SETTING_ERROR. */
@@ -152,7 +154,7 @@ class BlockReader{
                                     getPropertyType(result, cellDefinition));
                     LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellIndex(startRow + rowOffSet, cellDefinition.getCol()), value);
                     result.put(cellDefinition.getDataName(), value);
-                }catch (ExcelManipulateException e){
+                }catch (ExcelException e){
                     if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
                         readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
                     }
@@ -184,7 +186,7 @@ class BlockReader{
                     LOGGER.trace("{}[Checked]:{}", CellReferenceUtil.getCellIndex(startRow + rowOffSet, col), value);
                 }
                 ognlStack.setValue(excelCell.getDataName(), value);
-            }catch (ExcelManipulateException e){
+            }catch (ExcelException e){
                 if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
                     readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
                 }
@@ -226,7 +228,7 @@ class BlockReader{
                                 getPropertyType(stack.peek(), cellDefinition));
                 LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellIndex(cellDefinition.getRow(), cellDefinition.getCol()), value);
                 stack.setValue(cellDefinition.getDataName(), value);
-            }catch (ExcelManipulateException e){
+            }catch (ExcelException e){
                 if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
                     readStatus.setStatus(STATUS_DATA_COLLECTION_ERROR);
                 }

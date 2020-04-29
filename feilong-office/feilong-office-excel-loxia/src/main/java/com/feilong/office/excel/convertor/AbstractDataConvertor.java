@@ -15,9 +15,8 @@
  */
 package com.feilong.office.excel.convertor;
 
-import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
+import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
-import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -34,9 +33,9 @@ public abstract class AbstractDataConvertor<T> implements DataConvertor<T>{
     protected static final int WRONG_DATA_TYPE_NUMBER = 11;
 
     @Override
-    public T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException{
+    public T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
         if (value == null && cellDefinition.isMandatory()){
-            throw build(null, sheetNo, cellIndex, cellDefinition, WRONG_DATA_NULL);
+            throw build(WRONG_DATA_NULL, null, sheetNo, cellIndex, cellDefinition);
         }
         if (value == null){
             return null;
@@ -48,5 +47,5 @@ public abstract class AbstractDataConvertor<T> implements DataConvertor<T>{
         return t;
     }
 
-    protected abstract T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition) throws ExcelManipulateException;
+    protected abstract T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition);
 }
