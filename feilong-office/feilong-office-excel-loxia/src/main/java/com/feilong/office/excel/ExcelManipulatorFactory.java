@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 import com.feilong.office.excel.definition.ExcelSheet;
+import com.feilong.office.excel.utils.CloneUtil;
 
 /**
  * A factory for creating ExcelManipulator objects.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.writer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.definition.ExcelCellConditionStyle;
+import com.feilong.office.excel.utils.CellReferenceUtil;
 import com.feilong.office.excel.utils.OgnlStack;
 
 /**

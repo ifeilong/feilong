@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.reader;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.feilong.office.excel.ReadStatus;
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.OgnlStack;
@@ -26,7 +27,7 @@ import com.feilong.office.excel.utils.OgnlStack;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class SheetReader{
+public class SheetReader{
 
     /** The Constant STATUS_DATA_COLLECTION_ERROR. */
     private static final int STATUS_DATA_COLLECTION_ERROR = 10;
@@ -54,7 +55,13 @@ class SheetReader{
      * @param readStatus
      *            the read status
      */
-    static void readSheet(Workbook workbook,int sheetNo,ExcelSheet sheetDefinition,OgnlStack stack,ReadStatus readStatus,boolean skipErrors){
+    public static void readSheet(
+                    Workbook workbook,
+                    int sheetNo,
+                    ExcelSheet sheetDefinition,
+                    OgnlStack stack,
+                    ReadStatus readStatus,
+                    boolean skipErrors){
         //In Read Operation only the first loopBlock will be read
         int loopBlock = 0;
 

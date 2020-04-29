@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.reader;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
@@ -21,6 +21,9 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.office.excel.ExcelManipulateException;
+import com.feilong.office.excel.utils.CellReferenceUtil;
 
 /**
  * 

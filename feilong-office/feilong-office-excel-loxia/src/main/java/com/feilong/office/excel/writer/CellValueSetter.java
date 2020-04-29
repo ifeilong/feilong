@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.writer;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,6 +27,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import com.feilong.office.excel.utils.OgnlStack;
+import com.feilong.office.excel.utils.Settings;
 
 /**
  * 

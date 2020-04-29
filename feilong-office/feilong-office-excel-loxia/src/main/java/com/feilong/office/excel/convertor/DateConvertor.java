@@ -25,8 +25,8 @@ import java.util.Date;
 import org.apache.poi.ss.usermodel.DateUtil;
 
 import com.feilong.office.excel.ExcelManipulateException;
-import com.feilong.office.excel.Settings;
 import com.feilong.office.excel.definition.ExcelCell;
+import com.feilong.office.excel.utils.Settings;
 
 /**
  * The Class DateConvertor.

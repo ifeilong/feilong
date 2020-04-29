@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.writer;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -25,7 +25,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class SheetCopyer{
+public class SheetCopyer{
 
     /** Don't let anyone instantiate this class. */
     private SheetCopyer(){
@@ -43,7 +43,7 @@ class SheetCopyer{
      * @param newSheet
      *            the new sheet
      */
-    static void copy(Sheet sheet,Sheet newSheet){
+    public static void copy(Sheet sheet,Sheet newSheet){
         int maxCol = 0;
         for (int row = 0; row <= sheet.getLastRowNum(); row++){
             Row oldRow = sheet.getRow(row);

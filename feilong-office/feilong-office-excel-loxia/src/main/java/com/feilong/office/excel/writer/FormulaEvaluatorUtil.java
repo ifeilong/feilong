@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.writer;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 
@@ -30,12 +30,14 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.office.excel.utils.CellReferenceUtil;
+
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class FormulaEvaluatorUtil{
+public class FormulaEvaluatorUtil{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FormulaEvaluatorUtil.class);
@@ -59,7 +61,7 @@ class FormulaEvaluatorUtil{
      * @param workbook
      *            the wb
      */
-    static void reCalculate(Workbook workbook){
+    public static void reCalculate(Workbook workbook){
         Date beginDate = new Date();
 
         FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();

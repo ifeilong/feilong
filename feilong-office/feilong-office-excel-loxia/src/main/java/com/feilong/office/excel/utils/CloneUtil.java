@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.utils;
 
 import java.util.Map;
 
@@ -24,11 +24,12 @@ import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.definition.LoopBreakCondition;
 
 /**
- * 
+ * The Class CloneUtil.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class CloneUtil{
+public class CloneUtil{
 
     /** Don't let anyone instantiate this class. */
     private CloneUtil(){
@@ -42,9 +43,11 @@ class CloneUtil{
     /**
      * Clone block.
      *
+     * @param aexcelBlock
+     *            the aexcel block
      * @return the excel block
      */
-    static ExcelBlock cloneBlock(ExcelBlock aexcelBlock){
+    public static ExcelBlock cloneBlock(ExcelBlock aexcelBlock){
         if (null == aexcelBlock){
             return null;
         }
@@ -98,7 +101,7 @@ class CloneUtil{
      *            the aexcel sheet
      * @return the excel sheet
      */
-    static ExcelSheet cloneSheet(ExcelSheet aexcelSheet){
+    public static ExcelSheet cloneSheet(ExcelSheet aexcelSheet){
         ExcelSheet excelSheet = new ExcelSheet();
         excelSheet.setName(aexcelSheet.getName());
         excelSheet.setDisplayName(aexcelSheet.getDisplayName());
@@ -119,7 +122,7 @@ class CloneUtil{
      * @throws IllegalAccessException
      *             the illegal access exception
      */
-    static Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
+    public static Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
         Map<String, Object> result = map.getClass().newInstance();
         for (String key : map.keySet()){
             Object obj = map.get(key);

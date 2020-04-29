@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.reader;
 
 import static com.feilong.office.excel.ExcelManipulateExceptionBuilder.build;
 
+import com.feilong.office.excel.DataConvertorConfigurator;
+import com.feilong.office.excel.ExcelManipulateException;
 import com.feilong.office.excel.convertor.DataConvertor;
 import com.feilong.office.excel.definition.ExcelCell;
 

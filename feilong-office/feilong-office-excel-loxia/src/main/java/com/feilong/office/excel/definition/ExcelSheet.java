@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.office.excel.CellReferenceUtil;
 
 /**
  * The Class ExcelSheet.
@@ -101,27 +100,7 @@ public class ExcelSheet{
         }
     }
 
-    /**
-     * Gets the excel block.
-     *
-     * @param start
-     *            the start
-     * @param end
-     *            the end
-     * @return the excel block
-     */
-    public ExcelBlock getExcelBlock(String start,String end){
-        if (excelBlocks.size() == 0){
-            return null;
-        }
-        for (ExcelBlock excelBlock : excelBlocks){
-            if (CellReferenceUtil.getCellIndex(excelBlock.getStartRow(), excelBlock.getStartCol()).equalsIgnoreCase(start.trim())
-                            && CellReferenceUtil.getCellIndex(excelBlock.getEndRow(), excelBlock.getEndCol()).equalsIgnoreCase(end.trim())){
-                return excelBlock;
-            }
-        }
-        return null;
-    }
+    //---------------------------------------------------------------
 
     /**
      * Gets the excel block.

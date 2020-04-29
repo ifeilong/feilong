@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.feilong.office.excel.CellReferenceUtil;
+import com.feilong.office.excel.utils.CellReferenceUtil;
 
 /**
  * The Class ExcelCell.

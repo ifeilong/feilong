@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.reader;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+
+import com.feilong.office.excel.definition.LoopBreakCondition;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class CellStyleSetter{
+class BlockReaderLoopBreaker{
 
     /** Don't let anyone instantiate this class. */
-    private CellStyleSetter(){
+    private BlockReaderLoopBreaker(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -39,42 +39,40 @@ class CellStyleSetter{
     //---------------------------------------------------------------
 
     /**
-     * 设置 cell style.
+     * Check break.
      *
      * @param sheet
      *            the sheet
      * @param rowIndex
-     *            the row index
-     * @param cellIndex
-     *            the cell index
-     * @param cellStyle
-     *            the style
+     *            the row
+     * @param columnIndex
+     *            the col
+     * @param loopBreakCondition
+     *            the condition
+     * @return true, if successful
      */
-    static void set(Sheet sheet,int rowIndex,int cellIndex,CellStyle cellStyle){
-        if (cellStyle == null){
-            return;
+    static boolean checkBreak(Sheet sheet,int rowIndex,int columnIndex,LoopBreakCondition loopBreakCondition){
+        //no break condition defined        
+        if (sheet.getLastRowNum() < rowIndex){
+            return true;
         }
 
         //---------------------------------------------------------------
-        Row row = sheet.getRow(rowIndex);
-        if (row == null){
-            row = sheet.createRow(rowIndex);
-        }
-        Cell cell = row.getCell(cellIndex);
-        if (cell == null){
-            cell = row.createCell(cellIndex);
-        }
+        if (loopBreakCondition != null){
+            Row row = sheet.getRow(rowIndex + loopBreakCondition.getRowOffset());
+            if (row == null){
+                return false;
+            }
 
-        //---------------------------------------------------------------
-        CellStyle currentCellStyle = cell.getCellStyle();
-        if (currentCellStyle == null || (cell.getCellType() != CellType.NUMERIC) || (!DateUtil.isCellDateFormatted(cell))
-                        || DateUtil.isADateFormat(cellStyle.getDataFormat(), cellStyle.getDataFormatString())){
-            cell.setCellStyle(cellStyle);
-        }else{
-            CellStyle newCellStyle = sheet.getWorkbook().createCellStyle();
-            newCellStyle.cloneStyleFrom(cellStyle);
-            newCellStyle.setDataFormat(currentCellStyle.getDataFormat());
-            cell.setCellStyle(newCellStyle);
+            //---------------------------------------------------------------
+            Cell cell = row.getCell(columnIndex + loopBreakCondition.getColOffset());
+            if (cell == null || cell.getCellType() != CellType.STRING){
+                return false;
+            }
+            if (loopBreakCondition.getFlagString().equals(cell.getRichStringCellValue().getString())){
+                return true;
+            }
         }
+        return false;
     }
 }

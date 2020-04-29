@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.utils;
 
 import org.apache.poi.ss.util.CellReference;
 
@@ -63,7 +63,7 @@ public class CellReferenceUtil{
      *            the col offset
      * @return the string
      */
-    static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
+    public static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
         CellReference cellReference = new CellReference(cellIndex);
         CellReference newCell = new CellReference(cellReference.getRow() + rowOffset, cellReference.getCol() + colOffset);
         return newCell.formatAsString().replaceAll("\\$", "");

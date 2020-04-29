@@ -29,6 +29,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.office.excel.definition.ExcelSheet;
+import com.feilong.office.excel.reader.SheetReader;
+import com.feilong.office.excel.utils.CloneUtil;
 import com.feilong.office.excel.utils.OgnlStack;
 
 /**

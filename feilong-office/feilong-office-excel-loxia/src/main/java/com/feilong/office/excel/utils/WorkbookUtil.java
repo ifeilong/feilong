@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.office.excel;
+package com.feilong.office.excel.utils;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 
@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class WorkbookUtil{
+public class WorkbookUtil{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(WorkbookUtil.class);
@@ -56,7 +56,7 @@ class WorkbookUtil{
      *            the is
      * @return the workbook
      */
-    static Workbook create(InputStream inputStream){
+    public static Workbook create(InputStream inputStream){
         try{
             Date beginDate = new Date();
 
@@ -73,13 +73,15 @@ class WorkbookUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * @param workbook
      * @param outputStream
      * @throws UncheckedIOException
      * @since 3.0.0
      */
-    static void write(Workbook workbook,OutputStream outputStream){
+    public static void write(Workbook workbook,OutputStream outputStream){
         try{
             Date beginDate = new Date();
 
