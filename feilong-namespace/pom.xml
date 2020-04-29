@@ -42,13 +42,6 @@
 			<artifactId>jsp-api</artifactId>
 		</dependency>
 
-		<!-- spring-beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -172,7 +172,7 @@
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.30</version.slf4j>
 
-		<version.spring>3.2.18.RELEASE</version.spring>
+		<version.spring>4.3.27.RELEASE</version.spring>
 
 		<!-- http://x-stream.github.io/news.html -->
 		<!-- #133: XStream 1.4.11 fails to run on a Java Runtime < 8. -->

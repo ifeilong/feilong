@@ -36,13 +36,6 @@
 
 		<!-- ************************************************************** -->
 
-		<!-- spring-beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -63,7 +56,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-
 
 </project>

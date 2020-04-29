@@ -81,27 +81,6 @@
 		</dependency>
 
 		<!-- *******************spring********************************* -->
-		<!-- spring-core -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- spring-beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- spring-expression -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-expression</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
