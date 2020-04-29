@@ -205,7 +205,7 @@ public final class BeanComparatorUtil{
      * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 排序的 {@link Comparator}.
      * 
      * <p>
-     * 调用 {@link #propertyComparator(String, List, UnknownObjectBehavior)},默认 {@link UnknownObjectBehavior#AFTER}
+     * 调用 #propertyComparator(String, List, UnknownObjectBehavior),默认 {@link UnknownObjectBehavior#AFTER}
      * </p>
      *
      * @param <T>
@@ -222,7 +222,6 @@ public final class BeanComparatorUtil{
      *             如果 <code>propertyName</code> 是null,或者<code>propertyValues</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see #propertyComparator(String, List, UnknownObjectBehavior)
      */
     public static <T, V> Comparator<T> propertyComparator(String propertyName,List<V> propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");

@@ -61,7 +61,7 @@ import com.feilong.core.util.transformer.BeanTransformer;
  * 
  * <blockquote>
  * <p>
- * <img src="http://venusdrogon.github.io/feilong-platform/mysource/Collections-Framework.png"/>
+ * <img src="http://venusdrogon.github.io/feilong-platform/mysource/Collections-Framework.png" alt="Collections Framework关系图">
  * </p>
  * </blockquote>
  * 

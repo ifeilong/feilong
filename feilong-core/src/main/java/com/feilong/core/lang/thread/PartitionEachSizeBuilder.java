@@ -28,7 +28,7 @@ public interface PartitionEachSizeBuilder{
      *
      * @param totalSize
      *            the total size
-     * @return 如果 <code>totalSize<=0</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 totalSize{@code <=}0 是empty,抛出 {@link IllegalArgumentException}<br>
      */
     int build(int totalSize);
 }

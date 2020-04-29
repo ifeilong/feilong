@@ -61,7 +61,7 @@ import com.feilong.core.lang.NumberUtil;
  * 在Java中hashCode的实现总是伴随着equals,他们是紧密配合的,你要是自己设计了其中一个,就要设计另外一个。
  * </p>
  * <p>
- * <img src="http://venusdrogon.github.io/feilong-platform/mysource/hashCode-and-equals.jpg"/>
+ * <img src="http://venusdrogon.github.io/feilong-platform/mysource/hashCode-and-equals.jpg" alt="hashCode重要么">
  * </p>
  * 
  * 整个处理流程是:

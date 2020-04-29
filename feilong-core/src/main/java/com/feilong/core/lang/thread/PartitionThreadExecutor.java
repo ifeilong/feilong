@@ -41,7 +41,7 @@ import java.util.Map;
  * <p>
  * 目前已知快速调用有 {@link com.feilong.core.lang.ThreadUtil#execute(List, int, Map, PartitionRunnableBuilder) }, 或者调用
  * {@link com.feilong.core.lang.thread.DefaultPartitionThreadExecutor}, 或者调用
- * {@link "com.feilong.spring.scheduling.concurrent.AsyncTaskExecutorPartitionThreadExecutor"}
+ * com.feilong.spring.scheduling.concurrent.AsyncTaskExecutorPartitionThreadExecutor
  * </p>
  * 
  * </blockquote>

@@ -554,7 +554,6 @@ public final class BeanPredicateUtil{
      * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see ComparatorUtils#naturalComparator()
-     * @see #comparatorPredicate(String, Comparable, Comparator, Criterion)
      * @since commons-collections 4
      */
     public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(

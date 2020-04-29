@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * 
  * <blockquote>
  * <p>
- * <img src="http://venusdrogon.github.io/feilong-platform/mysource/url-parts.png"/>
+ * <img src="http://venusdrogon.github.io/feilong-platform/mysource/url-parts.png" alt="URL组成部分">
  * </p>
  * </blockquote>
  * 

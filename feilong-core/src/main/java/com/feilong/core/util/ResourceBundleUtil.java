@@ -62,7 +62,7 @@ import com.feilong.core.text.MessageFormatUtil;
  * 
  * <p>
  * 解析原理,参见:<br>
- * {@link "java.util.ResourceBundle#loadBundle(CacheKey, List, Control, boolean)"}<br>
+ * java.util.ResourceBundle#loadBundle(CacheKey, List, Control, boolean)<br>
  * {@link java.util.ResourceBundle.Control#newBundle(String, Locale, String, ClassLoader, boolean)}
  * </p>
  * </blockquote>

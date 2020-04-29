@@ -187,7 +187,7 @@ public final class ThreadUtil{
      * ThreadUtil.execute(new Runnable(){
      * 
      *     public void run(){
-     *         String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
+     *         String uri = "http://127.0.0.1:8084?name=jinxin{@code &}age=18";
      *         LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
      *     }
      * }, 20);
@@ -787,16 +787,16 @@ public final class ThreadUtil{
      * 上述事例,可以从 14 行代码, 精简到 7 行代码
      * 
      * </blockquote>
-     * <h3>适用场景:</h3>
-     * <blockquote>
      * 
+     * <h3>适用场景:</h3>
+     * 
+     * <blockquote>
      * <p>
      * 比如同步库存,一次从MQ或者其他接口中得到了5000条数据,如果使用单线程做5000次循环,势必会比较慢,并且影响性能; 如果调用这个方法,传入eachSize=100, 那么自动会开启5000/100=50 个线程来跑功能,大大提高同步库存的速度
      * </p>
      * <p>
      * 其他的适用场景还有诸如同步商品主档数据,同步订单等等这类每个独立对象之间没有相关联关系的数据,能提高执行速度和效率
      * </p>
-     * 
      * </blockquote>
      * 
      * <p>
@@ -810,7 +810,6 @@ public final class ThreadUtil{
      * <p>
      * 可见 调用该方法,使用多线程能节省执行时间,提高效率; 但是也需要酌情考虑eachSize大小,合理的开启线程数量
      * </p>
-     * </blockquote>
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -818,7 +817,6 @@ public final class ThreadUtil{
      * 需要注意合理的评估<code>list</code> 的大小和<code>eachSize</code> 比率;<br>
      * 不建议<code>list</code> size很大,比如 20W,而<code>eachSize</code>值很小,比如2 ,那么会开启20W/2=10W个线程;此时建议考虑 线程池的实现方案
      * </blockquote>
-     * 
      * 
      * <h3>异常:</h3>
      * <blockquote>
@@ -1121,7 +1119,7 @@ public final class ThreadUtil{
      * 
      * @param threads
      *            the threads
-     * @see java.lang.ApplicationShutdownHooks#runHooks()
+     * @see "java.lang.ApplicationShutdownHooks#runHooks()"
      */
     public static void startAndJoin(Thread[] threads){
         Validate.notEmpty(threads, "threads can't be null/empty!");
