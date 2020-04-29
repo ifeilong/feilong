@@ -338,7 +338,7 @@
 	</tag>
 
 	<!-- **********************BarcodeTag*********************************** -->
-	<tag>
+<!-- 	<tag>
 		<name>barcode</name>
 		<tag-class>com.feilong.taglib.display.barcode.BarcodeTag</tag-class>
 		<body-content>empty</body-content>
@@ -388,7 +388,7 @@
 				<![CDATA[指定边距,单位像素 ,参见 com.google.zxing.EncodeHintType#MARGIN]]>
 			</description>
 		</attribute>
-	</tag>
+	</tag> -->
 
 	<!-- **********************SensitiveTag*********************************** -->
 	<tag>

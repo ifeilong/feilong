@@ -12,8 +12,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>feilong-tools-barcode</module>
-		<module>feilong-tools-iplookup</module>
+
+
 		<module>feilong-tools-emailaddress</module>
 		<module>feilong-tools-mobile</module>
 		<module>feilong-tools-pinyin</module>

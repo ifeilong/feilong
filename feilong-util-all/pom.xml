@@ -131,20 +131,6 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!--feilong-tools-iplookup -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-iplookup</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
-
-		<!-- feilong-tools-barcode -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-barcode</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
-
 		<!--feilong-tools-emailaddress -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

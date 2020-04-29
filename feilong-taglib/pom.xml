@@ -37,22 +37,6 @@
 			<artifactId>feilong-velocity</artifactId>
 		</dependency>
 
-		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-barcode</artifactId>
-			<version>${version.feilong-platform}</version>
-			<optional>true</optional>
-		</dependency>
-
-		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-accessor</artifactId>
-			<version>${version.feilong-platform}</version>
-			<optional>true</optional>
-		</dependency>
-
 		<!--*******************servlet-api && jsp-api************************* -->
 		<!-- servlet-api -->
 		<dependency>
