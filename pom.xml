@@ -195,7 +195,8 @@
 		<!--*********************end dependency plugins version************************************ -->
 
 		<!--*********************begin plugins version************************************ -->
-		<v.maven-antrun-plugin>1.8</v.maven-antrun-plugin>
+		<!-- http://maven.apache.org/plugins/maven-antrun-plugin/ -->
+		<v.maven-antrun-plugin>3.0.0</v.maven-antrun-plugin>
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
 		<v.maven-assembly-plugin>3.2.0</v.maven-assembly-plugin>
@@ -207,6 +208,8 @@
 		<v.maven-compiler-plugin>3.8.1</v.maven-compiler-plugin>
 
 		<v.maven-changes-plugin>2.12.1</v.maven-changes-plugin>
+
+		<!-- http://maven.apache.org/plugins/maven-changelog-plugin/changelog-mojo.html -->
 		<v.maven-changelog-plugin>2.3</v.maven-changelog-plugin>
 
 		<!-- CheckStyle能够帮助Java开发人员准守某些编码规范的工具。它能够自动检查代码。 -->
@@ -225,7 +228,8 @@
 		<v.maven-jar-plugin>3.2.0</v.maven-jar-plugin>
 
 		<v.maven-jxr-plugin>2.5</v.maven-jxr-plugin>
-		<v.maven-pmd-plugin>3.8</v.maven-pmd-plugin>
+		<!-- http://maven.apache.org/plugins/maven-pmd-plugin/check-mojo.html -->
+		<v.maven-pmd-plugin>3.13.0</v.maven-pmd-plugin>
 
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
@@ -1397,11 +1401,12 @@
 			</plugin>
 
 			<!-- 代码格式检查 -->
-			<!-- <plugin>
+			<!-- -->
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${v.maven-checkstyle-plugin}</version>
-				</plugin> -->
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -1410,6 +1415,7 @@
 			</plugin>
 
 			<!--源码分析 -->
+			<!-- -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -1484,7 +1490,10 @@
 				<artifactId>maven-changelog-plugin</artifactId>
 				<version>${v.maven-changelog-plugin}</version>
 				<configuration>
+					<!-- -->
+					<skip>true</skip>
 					<type>range</type>
+					<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
 					<range>30</range>
 					<headingDateFormat>MM-dd</headingDateFormat>
 					<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
