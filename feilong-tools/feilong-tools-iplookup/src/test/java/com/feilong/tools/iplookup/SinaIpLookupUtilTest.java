@@ -20,15 +20,10 @@ import org.junit.Test;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 public class SinaIpLookupUtilTest extends AbstractTest{
 
     @Test
     public void test(){
-        LOGGER.debug(JsonUtil.format(SinaIpLookupUtil.getIpInfoEntity("210.75.225.254")));
+        LOGGER.debug(JsonUtil.format(SinaIpLookupUtil.getIpInfo("210.75.225.254")));
     }
 }

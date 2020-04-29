@@ -21,7 +21,7 @@ package com.feilong.tools.iplookup;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
-public class IpInfoEntity{
+public class IpInfo{
 
     /**
      * ip比如 210.75.225.254.

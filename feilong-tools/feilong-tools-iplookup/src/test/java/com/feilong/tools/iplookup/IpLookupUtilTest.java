@@ -26,23 +26,18 @@ import org.junit.Test;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 public class IpLookupUtilTest extends AbstractTest{
 
     @Test
     public void test(){
         //{"code":0,"data":{"ip":"210.75.225.254","country":"中国","area":"","region":"北京","city":"北京","county":"XX","isp":"科技网","country_id":"CN","area_id":"","region_id":"110000","city_id":"110100","county_id":"xx","isp_id":"1000114"}}
         String ip = "210.75.225.254";
-        IpInfoEntity ipInfoEntity = IpLookupUtil.getIpInfoEntity(ip);
-        LOGGER.debug(JsonUtil.format(ipInfoEntity));
+        IpInfo ipInfo = IpLookupUtil.getIpInfo(ip);
+        LOGGER.debug(JsonUtil.format(ipInfo));
 
-        if (null != ipInfoEntity){
+        if (null != ipInfo){
             assertThat(
-                            ipInfoEntity,
+                            ipInfo,
                             allOf(
                                             hasProperty("country", is("中国")),
                                             hasProperty("region", is("北京")),
@@ -50,7 +45,7 @@ public class IpLookupUtilTest extends AbstractTest{
                                             hasProperty("city", is("北京")),
                                             hasProperty("ip", is(ip))));
         }else{
-            assertNull(ipInfoEntity);
+            assertNull(ipInfo);
         }
     }
 }

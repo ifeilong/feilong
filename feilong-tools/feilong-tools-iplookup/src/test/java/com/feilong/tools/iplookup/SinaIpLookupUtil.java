@@ -116,7 +116,7 @@ public final class SinaIpLookupUtil extends AbstractTest{
      *         如果 <code>ip</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see <a href="http://ip.taobao.com/instructions.php">ip.taobao</a>
      */
-    public static IpInfoEntity getIpInfoEntity(String ip){
+    public static IpInfo getIpInfo(String ip){
         Validate.notBlank(ip, "ip can't be blank!");
 
         //---------------------------------------------------------------
@@ -139,7 +139,7 @@ public final class SinaIpLookupUtil extends AbstractTest{
      *            the response string
      * @return the ip info entity
      */
-    private static IpInfoEntity toIpInfoEntity(String responseString){
+    private static IpInfo toIpInfoEntity(String responseString){
 
         //var remote_ip_info = {"ret":1,"start":-1,"end":-1,"country":"\u4e2d\u56fd","province":"\u5317\u4eac","city":"\u5317\u4eac","district":"","isp":"","type":"","desc":""};
 
@@ -155,7 +155,7 @@ public final class SinaIpLookupUtil extends AbstractTest{
         Validate.notNull(data, "data can't be null!,responseString:%s", responseString);
 
         //---------------------------------------------------------------
-        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(IpInfoEntity.class, build());
+        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(IpInfo.class, build());
 
         //历史错误的属性名字
         jsonToJavaConfig.setExcludes("county", "county_id");

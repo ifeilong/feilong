@@ -144,7 +144,7 @@ public final class IpLookupUtil{
      *         如果 <code>ip</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see <a href="http://ip.taobao.com/instructions.php">ip.taobao</a>
      */
-    public static IpInfoEntity getIpInfoEntity(String ip){
+    public static IpInfo getIpInfo(String ip){
         Validate.notBlank(ip, "ip can't be blank!");
 
         //---------------------------------------------------------------
@@ -157,7 +157,7 @@ public final class IpLookupUtil{
             if (LOGGER.isTraceEnabled()){
                 LOGGER.trace("result format :[{}]", JsonUtil.format(responseString));
             }
-            return toIpInfoEntity(responseString);
+            return toIpInfo(responseString);
         }catch (Exception e){
             LOGGER.warn("[ipInfo]:" + uri, e);
             return null;
@@ -174,7 +174,7 @@ public final class IpLookupUtil{
      * @return 如果json中 <code>code</code> 是0,抛出 {@link IllegalArgumentException}<br>
      *         如果json中 <code>data</code> 是null,抛出 {@link NullPointerException}<br>
      */
-    private static IpInfoEntity toIpInfoEntity(String responseString){
+    private static IpInfo toIpInfo(String responseString){
         Map<String, Object> map = JsonUtil.toMap(responseString);
 
         Object code = map.get("code");//0：成功，1：失败
@@ -184,7 +184,7 @@ public final class IpLookupUtil{
         Validate.notNull(data, "data can't be null!,responseString:%s", responseString);
 
         //---------------------------------------------------------------
-        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(IpInfoEntity.class, TAOBAO_IPLOOKUP_JAVA_IDENTIFIER_TRANSFORMER);
+        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(IpInfo.class, TAOBAO_IPLOOKUP_JAVA_IDENTIFIER_TRANSFORMER);
 
         //历史错误的属性名字
         jsonToJavaConfig.setExcludes("county", "county_id");
