@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>feilong-xml</artifactId>
-	
+
 	<properties>
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
@@ -35,6 +35,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

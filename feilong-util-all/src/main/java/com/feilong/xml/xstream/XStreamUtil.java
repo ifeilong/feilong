@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.xml.XmlUtil;
 import com.feilong.xml.xstream.converters.SimpleMapConverter;
-import com.thoughtworks.xstream.XStream;
 
 /**
  * The Class XStreamUtil.
