@@ -45,6 +45,12 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 
 		<!-- spring-test -->
 		<dependency>
