@@ -16,6 +16,7 @@
 package com.feilong.office.excel.writer;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
+import static java.util.Collections.emptyMap;
 
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
@@ -140,18 +141,25 @@ public class WorkbookWriter{
                     ExcelManipulatorDefinition definition,
                     List<ExcelSheet> excelSheets,
                     int excelSheetsSize){
+        Integer styleSheetPosition = definition.getStyleSheetPosition();
+        if (null == styleSheetPosition){
+            LOGGER.debug("ExcelManipulatorDefinition styleSheetPosition is null, renturn empty styleMap");
+            return emptyMap();
+        }
+
+        //---------------------------------------------------------------
         Date beginDate = new Date();
 
         Map<String, CellStyle> styleMap = new HashMap<>();
-        Integer styleSheetPosition = definition.getStyleSheetPosition();
-        if (styleSheetPosition != null){
-            Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
-            for (int i = 0; i < excelSheetsSize; i++){
-                ExcelCellConditionStyleIniter.init(workbook.getSheetAt(styleSheetPosition), excelSheets.get(i), styleMap);
-            }
-            workbook.removeSheetAt(styleSheetPosition);
-            LOGGER.debug("{} styles found", styleMap.keySet().size());
+        Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
+
+        for (int i = 0; i < excelSheetsSize; i++){
+            ExcelCellConditionStyleIniter.init(workbook.getSheetAt(styleSheetPosition), excelSheets.get(i), styleMap);
         }
+
+        //---------------------------------------------------------------
+        workbook.removeSheetAt(styleSheetPosition);
+        LOGGER.debug("{} styles found", styleMap.keySet().size());
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("buildStyleMap use time: [{}],StyleMap size:[{}]", formatDuration(beginDate), styleMap.size());

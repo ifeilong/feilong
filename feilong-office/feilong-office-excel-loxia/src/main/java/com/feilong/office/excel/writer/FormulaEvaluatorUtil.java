@@ -76,8 +76,9 @@ public class FormulaEvaluatorUtil{
             }
         }
 
+        //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("reCalculate use time: [{}]", formatDuration(beginDate));
+            LOGGER.debug("reCalculate workbook use time: [{}]", formatDuration(beginDate));
         }
 
     }

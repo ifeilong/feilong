@@ -55,6 +55,8 @@ public class SheetWriter{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Write sheet.
      *
@@ -71,22 +73,44 @@ public class SheetWriter{
         Date beginDate = new Date();
 
         //---------------------------------------------------------------
-
         Workbook workbook = sheet.getWorkbook();
-        String sheetName = excelSheet.getDisplayName();
-        Object value = ognlStack.getValue("sheetName");
 
-        if (value != null){
-            sheetName = (String) value;
-        }
-        if (sheetName != null){
-            workbook.setSheetName(workbook.getSheetIndex(sheet), sheetName);
+        setSheetName(workbook, sheet, excelSheet, ognlStack);
+
+        //---------------------------------------------------------------
+        List<ExcelBlock> sortedExcelBlocks = excelSheet.getSortedExcelBlocks();
+
+        Map<ExcelBlock, List<CellRangeAddress>> mergedRegions = buildMergedRegions(sheet, sortedExcelBlocks);
+
+        //---------------------------------------------------------------
+        for (ExcelBlock excelBlock : sortedExcelBlocks){
+            Date blockBeginDate = new Date();
+
+            if (excelBlock.isLoop()){
+                BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, mergedRegions.get(excelBlock), styleMap);
+            }else{
+                BlockWriter.writeSimpleBlock(sheet, excelBlock, ognlStack, styleMap);
+            }
+
+            //---------------------------------------------------------------
+            if (LOGGER.isDebugEnabled()){
+                String pattern = "write sheet block:[{}]-[{}], use time: [{}]";
+                LOGGER.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDuration(blockBeginDate));
+            }
         }
 
         //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("writeSheet:[{}] use time: [{}]", excelSheet.getName(), formatDuration(beginDate));
+        }
+
+    }
+
+    private static Map<ExcelBlock, List<CellRangeAddress>> buildMergedRegions(Sheet sheet,List<ExcelBlock> sortedExcelBlocks){
+        int numMergedRegions = sheet.getNumMergedRegions();
+
         Map<ExcelBlock, List<CellRangeAddress>> mergedRegions = new HashMap<>();
-        List<ExcelBlock> sortedExcelBlocks = excelSheet.getSortedExcelBlocks();
-        for (int i = 0; i < sheet.getNumMergedRegions(); i++){
+        for (int i = 0; i < numMergedRegions; i++){
             CellRangeAddress cellRangeAddress = sheet.getMergedRegion(i);
             int firstRow = cellRangeAddress.getFirstRow();
             int firstColumn = cellRangeAddress.getFirstColumn();
@@ -119,27 +143,18 @@ public class SheetWriter{
                 }
             }
         }
+        return mergedRegions;
+    }
 
-        //---------------------------------------------------------------
+    private static void setSheetName(Workbook workbook,Sheet sheet,ExcelSheet excelSheet,OgnlStack ognlStack){
+        String sheetName = excelSheet.getDisplayName();
+        Object value = ognlStack.getValue("sheetName");
 
-        for (ExcelBlock excelBlock : sortedExcelBlocks){
-            Date BlockBeginDate = new Date();
-
-            if (excelBlock.isLoop()){
-                BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, mergedRegions.get(excelBlock), styleMap);
-            }else{
-                BlockWriter.writeSimpleBlock(sheet, excelBlock, ognlStack, styleMap);
-            }
-
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("writeBlock:[{}] use time: [{}]", excelBlock.getDataName(), formatDuration(BlockBeginDate));
-            }
+        if (value != null){
+            sheetName = (String) value;
         }
-
-        //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("writeSheet [{}] use time: [{}]", excelSheet.getName(), formatDuration(beginDate));
+        if (sheetName != null){
+            workbook.setSheetName(workbook.getSheetIndex(sheet), sheetName);
         }
-
     }
 }

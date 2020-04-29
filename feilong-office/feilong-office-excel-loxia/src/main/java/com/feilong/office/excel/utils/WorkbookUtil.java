@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Date;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -30,7 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ * The Class WorkbookUtil.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
@@ -57,13 +59,15 @@ public class WorkbookUtil{
      * @return the workbook
      */
     public static Workbook create(InputStream inputStream){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+
+        //---------------------------------------------------------------
+
         try{
             Date beginDate = new Date();
-
             Workbook workbook = WorkbookFactory.create(inputStream);
-
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("create Workbook use time: [{}]", formatDuration(beginDate));
+                LOGGER.debug("create workbook from [{}] use time: [{}]", inputStream.toString(), formatDuration(beginDate));
             }
             return workbook;
         }catch (EncryptedDocumentException e){
@@ -76,19 +80,26 @@ public class WorkbookUtil{
     //---------------------------------------------------------------
 
     /**
+     * Write.
+     *
      * @param workbook
+     *            the workbook
      * @param outputStream
+     *            the output stream
      * @throws UncheckedIOException
+     *             the unchecked IO exception
      * @since 3.0.0
      */
     public static void write(Workbook workbook,OutputStream outputStream){
+        Validate.notNull(workbook, "workbook can't be null!");
+        Validate.notNull(outputStream, "outputStream can't be null!");
+
+        //---------------------------------------------------------------
         try{
             Date beginDate = new Date();
-
             workbook.write(outputStream);
-
             if (LOGGER.isInfoEnabled()){
-                LOGGER.info("write outputStream use time: [{}]", formatDuration(beginDate));
+                LOGGER.info("write workbook to outputStream use time: [{}]", formatDuration(beginDate));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);
