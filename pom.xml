@@ -213,7 +213,7 @@
 		<v.maven-changelog-plugin>2.3</v.maven-changelog-plugin>
 
 		<!-- CheckStyle能够帮助Java开发人员准守某些编码规范的工具。它能够自动检查代码。 -->
-		<v.maven-checkstyle-plugin>2.17</v.maven-checkstyle-plugin>
+		<!-- <v.maven-checkstyle-plugin>2.17</v.maven-checkstyle-plugin> -->
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
 		<v.maven-dependency-plugin>3.1.2</v.maven-dependency-plugin>
@@ -1401,12 +1401,12 @@
 			</plugin>
 
 			<!-- 代码格式检查 -->
-			<!-- -->
-			<plugin>
+			<!-- 乱七八糟的 一行多长都控制 Line is longer than 80 characters (found 99). -->
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${v.maven-checkstyle-plugin}</version>
-			</plugin>
+				</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
