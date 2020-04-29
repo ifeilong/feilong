@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.regexutiltest;
+package com.feilong.validator;
 
 import static com.feilong.validator.RegexPattern.MOBILEPHONE;
 import static org.junit.Assert.assertEquals;

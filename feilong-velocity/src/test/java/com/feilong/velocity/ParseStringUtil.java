@@ -16,25 +16,26 @@
 package com.feilong.velocity;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class VelocityUtilTest.
- */
-public class VelocityUtilTestFalse extends AbstractTest{
+public class ParseStringUtil extends AbstractTest{
+
+    String templateInClassPath = "velocity/test_stringutil.vm";
 
     @Test
-    public void test(){
+    public void parse(){
         Map<String, Object> map = newHashMap();
-        map.put("effective", false);
+        map.put("StringUtil", StringUtil.class);
+        map.put("code", "橘黄色/米黄色");
 
-        String templateInClassPath = "velocity/test_false.vm";
         String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
+        assertEquals("橘黄色_米黄色", parseVMTemplate);
     }
 }

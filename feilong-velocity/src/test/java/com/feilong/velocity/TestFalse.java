@@ -16,6 +16,7 @@
 package com.feilong.velocity;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -23,20 +24,16 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class VelocityUtilTest.
- */
-public class VelocityUtilTestNull extends AbstractTest{
+public class TestFalse extends AbstractTest{
 
-    /**
-     * Test null.
-     */
+    String templateInClassPath = "velocity/test_false.vm";
+
     @Test
-    public void testNull(){
+    public void test(){
         Map<String, Object> map = newHashMap();
-        map.put("code", null);
-        String templateInClassPath = "velocity/test_null.vm";
+        map.put("effective", false);
+
         String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
+        assertTrue(parseVMTemplate.contains(":effective false 进"));
     }
 }

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.regexutiltest;
+package com.feilong.validator;
 
-import static com.feilong.validator.RegexPattern.TELEPHONE;
+import static com.feilong.validator.RegexPattern.TELEPHONE_MUST_AREACODE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -26,12 +26,12 @@ import com.feilong.test.AbstractBooleanParameterizedTest;
 import com.feilong.test.TestUtil;
 
 /**
- * The Class TelephonePatternTest.
+ * The Class TelephoneMustAreaCodePatternTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
  */
-public class TelephonePatternParameterizedTest extends AbstractBooleanParameterizedTest<String, Boolean>{
+public class TelephoneMustAreaCodePatternParameterizedTest extends AbstractBooleanParameterizedTest<String, Boolean>{
 
     /**
      * Data.
@@ -39,15 +39,19 @@ public class TelephonePatternParameterizedTest extends AbstractBooleanParameteri
      * @return the collection
      */
     //@Parameters(name = "index:{index}: matches({0})={1}")
-    @Parameters(name = "RegexUtil.matches(RegexPattern.TELEPHONE, {0})={1}")
+    @Parameters(name = "RegexUtil.matches(RegexPattern.TELEPHONE_MUST_AREACODE, {0})={1}")
     public static Iterable<Object[]> data(){
-        String[] valids = { "86771588", "021-86771588", "021-867715", "86771588-888", "021-86771588-888" };
+        String[] valids = { "021-86771588", "021-867715", "021-86771588-888" };
         String[] invalids = {
+                              //null,
                               "",
                               "   ",
+                              "86771588", //没有区号
                               "02021-86771588-888", //区号3-4位 太长了
+                              "86771588-888", //没有区号
                               "020-86771588888", //电话号码6-8位 太长了
-                              "021-86775", };
+                              "021-86775" //电话号码 需要 6-8位
+        };
         return TestUtil.toDataList(valids, invalids);
     }
 
@@ -56,6 +60,6 @@ public class TelephonePatternParameterizedTest extends AbstractBooleanParameteri
      */
     @Test
     public void matches(){
-        assertEquals(expectedValue, RegexUtil.matches(TELEPHONE, input));
+        assertEquals(expectedValue, RegexUtil.matches(TELEPHONE_MUST_AREACODE, input));
     }
 }

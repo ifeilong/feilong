@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractTest;
 
 public class VelocityUtilTest extends AbstractTest{
@@ -51,22 +50,6 @@ public class VelocityUtilTest extends AbstractTest{
         LOGGER.debug(parseVMTemplate);
     }
 
-    /**
-     * Parses the vm template with classpath resource loader1.
-     */
-    @Test
-    public void parseVMTemplateWithClasspathResourceLoader1(){
-        Map<String, Object> map = newHashMap();
-        map.put("StringUtil", StringUtil.class);
-        map.put("code", "橘黄色/米黄色");
-        String templateInClassPath = "velocity/test_stringutil.vm";
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
-    }
-
-    /**
-     * Parses the vm template with classpath resource loader122.
-     */
     @Test
     public void parseVMTemplateWithClasspathResourceLoader122(){
         Map<String, Object> map = newHashMap();

@@ -304,10 +304,10 @@
 		<!-- 用于读取javadoc 内部使用的 配置文件, 比如 描述文字为 描述,英文环境为description -->
 		<maven-javadoc-plugin.locale>en_US</maven-javadoc-plugin.locale>
 
-		<maven-javadoc-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.name}</maven-javadoc-plugin.outputDirectory>
-		<maven-javadoc-plugin.reportOutputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.name}</maven-javadoc-plugin.reportOutputDirectory>
-		<maven-javadoc-plugin.destDir>${project.name}</maven-javadoc-plugin.destDir>
-		<maven-javadoc-plugin.javadocVersion>1.8</maven-javadoc-plugin.javadocVersion>
+		<maven-javadoc-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.artifactId}</maven-javadoc-plugin.outputDirectory>
+		<maven-javadoc-plugin.reportOutputDirectory>/Users/feilong/workspace/feilong/else/javadoc/${project.artifactId}</maven-javadoc-plugin.reportOutputDirectory>
+		<maven-javadoc-plugin.destDir>${project.artifactId}</maven-javadoc-plugin.destDir>
+		<maven-javadoc-plugin.javadocVersion>1.8.0</maven-javadoc-plugin.javadocVersion>
 		<maven-javadoc-plugin.javadocDirectory>/Users/feilong/Development/DataCommon/Files/Java/Apache Maven/javadoc/springframework</maven-javadoc-plugin.javadocDirectory>
 
 		<maven-javadoc-plugin.stylesheetfile>${maven-javadoc-plugin.javadocDirectory}/stylesheet.css</maven-javadoc-plugin.stylesheetfile>
@@ -323,7 +323,7 @@
 		-->
 		<maven-javadoc-plugin.stylesheet>java</maven-javadoc-plugin.stylesheet>
 
-		<maven-site-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/site/${project.name}</maven-site-plugin.outputDirectory>
+		<maven-site-plugin.outputDirectory>/Users/feilong/workspace/feilong/else/site/${project.artifactId}</maven-site-plugin.outputDirectory>
 
 		<!-- **********************end maven-javadoc-plugin config******************************************* -->
 		<developer.feilong.name>feilong</developer.feilong.name>
@@ -1115,6 +1115,88 @@
 					<encoding>${maven-compiler-plugin.encoding}</encoding>
 					<!-- <verbose>true</verbose> -->
 					<detail>true</detail>
+				</configuration>
+			</plugin>
+
+			<!-- maven-javadoc-plugin -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${v.maven-javadoc-plugin}</version>
+				<configuration>
+					<!-- <additionalparam>-Xdoclint:none</additionalparam> -->
+
+					<!-- <verbose>true</verbose> -->
+					<destDir>${maven-javadoc-plugin.destDir}</destDir>
+
+					<outputDirectory>${maven-javadoc-plugin.outputDirectory}</outputDirectory>
+					<reportOutputDirectory>${maven-javadoc-plugin.reportOutputDirectory}</reportOutputDirectory>
+
+					<stylesheet>${maven-javadoc-plugin.stylesheet}</stylesheet>
+					<stylesheetfile>${maven-javadoc-plugin.stylesheetfile}</stylesheetfile>
+
+					<!-- <overview>src/main/java/overview.html</overview> -->
+
+					<docfilessubdirs>true</docfilessubdirs>
+					<!---->
+					<javadocDirectory>${maven-javadoc-plugin.javadocDirectory}</javadocDirectory>
+					<javadocVersion>${maven-javadoc-plugin.javadocVersion}</javadocVersion>
+
+					<!-- Specifies the title to be placed in the HTML title tag.  -->
+					<windowtitle>${project.name} ${project.version} API create by feilong</windowtitle>
+
+					<!-- Specifies whether or not the author text is included in the generated Javadocs.  -->
+					<author>true</author>
+					<!-- Includes the version text in the generated docs.  -->
+					<version>true</version>
+
+					<failOnError>false</failOnError>
+
+					<locale>${maven-javadoc-plugin.locale}</locale>
+
+					<charset>${maven-javadoc-plugin.charset}</charset>
+					<docencoding>${maven-javadoc-plugin.docencoding}</docencoding>
+					<encoding>${maven-javadoc-plugin.encoding}</encoding>
+
+					<header>${project.name} ${project.version} API</header>
+					<footer>${project.name} ${project.version} API</footer>
+
+					<bottom>
+						<![CDATA[Copyright &copy; {inceptionYear}-{currentYear} by feilong]]>
+					</bottom>
+
+					<!-- Detect the Javadoc links for all dependencies defined in the project. -->
+					<detectLinks>true</detectLinks>
+					<detectOfflineLinks>true</detectOfflineLinks>
+
+					<!-- By default, the goal detects the Javadoc API link depending the value of the source parameter in theorg.apache.maven.plugins:maven-compiler-plugin (defined
+						in ${project.build.plugins} or in${project.build.pluginManagement}),
+					-->
+					<detectJavaApiLink>true</detectJavaApiLink>
+					<links>
+						<!-- <link>http://docs.oracle.com/javase/7/docs/api/</link> -->
+						<link>https://docs.oracle.com/javaee/7/api/</link>
+
+						<link>http://commons.apache.org/proper/commons-lang/javadocs/api-release/</link>
+
+						<link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
+						<link>http://commons.apache.org/proper/commons-beanutils/javadocs/v${version.commons-beanutils}/apidocs/</link>
+
+
+						<!-- <link>http://docs.spring.io/spring/docs/${version.spring}/javadoc-api/</link> -->
+
+						<!-- <link>https://github.com/venusdrogon/feilongjavadocs/feilong-core/</link>
+							<link>https://github.com/venusdrogon/feilongjavadocs/feilong-servlet/</link>
+							<link>https://github.com/venusdrogon/feilongjavadocs/feilong-io/</link> -->
+
+
+						<!-- 404 not find -->
+						<!-- <link>http://commons.apache.org/proper/commons-collections/javadocs/api-release/</link> -->
+						
+						<!-- 404 not find -->
+						<!-- <link>http://ezmorph.sourceforge.net/apidocs/</link> -->
+					</links>
 				</configuration>
 			</plugin>
 

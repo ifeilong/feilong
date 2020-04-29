@@ -164,9 +164,9 @@ public final class SensitiveUtil{
      * @since 1.14.0
      */
     public static String parse(String value,char maskChar,int leftNoMaskLength,int rightNoMaskLength){
-        if (LOGGER.isDebugEnabled()){
+        if (LOGGER.isTraceEnabled()){
             String format = "will parse:[{}],maskChar:[{}],leftNoMaskLength:[{}],rightNoMaskLength:[{}]";
-            LOGGER.debug(format, value, maskChar, leftNoMaskLength, rightNoMaskLength);
+            LOGGER.trace(format, value, maskChar, leftNoMaskLength, rightNoMaskLength);
         }
 
         //---------------------------------------------------------------

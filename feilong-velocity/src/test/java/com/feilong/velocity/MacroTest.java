@@ -21,7 +21,9 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
-public class VelocityUtilMacroTest extends AbstractTest{
+public class MacroTest extends AbstractTest{
+
+    String templateInClassPath = "velocity/test_macro.vm";
 
     @Test
     public void parseVMTemplateWithClasspathResourceLoader(){
@@ -29,7 +31,6 @@ public class VelocityUtilMacroTest extends AbstractTest{
         // //设置模板的路径
         // properties.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, "target/test-classes/scripts");
 
-        String templateInClassPath = "velocity/test_macro.vm";
         Map<String, Object> contextKeyValues = null;
         String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
         LOGGER.debug(parseVMTemplate);

@@ -16,30 +16,29 @@
 package com.feilong.velocity;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.core.date.DateUtil;
 import com.feilong.test.AbstractTest;
 
-public class ToolVelocityUtilTest extends AbstractTest{
+/**
+ * The Class VelocityUtilTest.
+ */
+public class TestNull extends AbstractTest{
 
-    String templateInClassPath = "velocity/test_toolbox.vm";
+    String templateInClassPath = "velocity/test_null.vm";
 
     @Test
-    public void testTool(){
+    public void testNull(){
         Map<String, Object> map = newHashMap();
-        map.put("code", "SH123456");
-        map.put("courseDate", "2015-06-02");
-        map.put("courseTime", "14:00");
-        map.put("DateUtil", DateUtil.class);
+        map.put("code", null);
 
-        //        String toolboxPath = "/lib/toolbox.xml";
-        //String toolboxPath = ConfigurationUtils.GENERIC_DEFAULTS_PATH;
-
-        String parseVMTemplate = ToolVelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
         LOGGER.debug(parseVMTemplate);
+
+        assertTrue(parseVMTemplate.contains("jinxin"));
     }
 }

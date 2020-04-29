@@ -20,12 +20,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.util.regexutiltest.RegexPatternSuiteTests;
-
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                RegexPatternSuiteTests.class })
+                MobilephonePatternParameterizedTest.class,
+                TelephonePatternParameterizedTest.class,
+                TelephoneMustAreaCodePatternParameterizedTest.class,
+
+})
 public class SuiteTests{
 
 }

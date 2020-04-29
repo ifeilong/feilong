@@ -224,7 +224,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
      * 
      * <p>
-     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png"/>
+     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png" alt="json">
      * </p>
      * 
      * 此时,你可以使用
@@ -491,7 +491,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
      * 
      * <p>
-     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png"/>
+     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png" alt="json">
      * </p>
      * 
      * 此时,你可以使用
@@ -601,7 +601,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
      * 
      * <p>
-     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png"/>
+     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png" alt="json">
      * </p>
      * 
      * 此时,你可以使用

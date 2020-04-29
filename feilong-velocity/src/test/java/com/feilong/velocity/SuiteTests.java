@@ -22,7 +22,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                TestNull.class,
+                TestFalse.class,
                 ParseStringTest.class,
+                ParseStringUtil.class,
         //
 })
 public class SuiteTests{
