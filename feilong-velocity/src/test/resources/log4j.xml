@@ -18,6 +18,9 @@
 		</filter>
 	</appender>
 
+	<category name="feilongVelocityLogger">
+		<priority value="info" />
+	</category>
 	<category name="com.feilong">
 		<priority value="debug" />
 	</category>

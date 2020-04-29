@@ -30,6 +30,7 @@ import com.feilong.json.lib.json.JSONArray;
 import com.feilong.json.lib.json.JSONObject;
 
 /**
+ * The Class JsonUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
@@ -679,15 +680,15 @@ public final class JsonUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-       [{
-               "dateAttr": null,
-               "name": "get"
-           },
-                   {
-               "dateAttr": null,
-               "name": "set"
-           }
-       ]
+     *        [{
+     *                "dateAttr": null,
+     *                "name": "get"
+     *            },
+     *                    {
+     *                "dateAttr": null,
+     *                "name": "set"
+     *            }
+     *        ]
      * </pre>
      * 
      * </blockquote>
@@ -697,6 +698,7 @@ public final class JsonUtil{
      * @param json
      *            e.g. [{'name':'get'},{'name':'set'}]
      * @param rootClass
+     *            the root class
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(Object, JsonToJavaConfig)
@@ -984,6 +986,8 @@ public final class JsonUtil{
      *            e.g. {'name':'get','dateAttr':'2009-11-12'}<br>
      *            可以是 json字符串,也可以是JSONObject<br>
      *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
+     * @param rootClass
+     *            the root class
      * @return 如果<code>json</code> 是null,那么返回 null <br>
      *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toBean(Object, JsonToJavaConfig)
