@@ -66,12 +66,12 @@ public class ExcelManipulatorFactory{
             for (String config : configurations){
                 Date beginDate = new Date();
 
-                Digester digester = DigesterLoader.createDigester(
-                                new InputSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(RULE_FILE)));
+                ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+
+                Digester digester = DigesterLoader.createDigester(new InputSource(contextClassLoader.getResourceAsStream(RULE_FILE)));
                 digester.setValidating(false);
 
-                List<ExcelSheet> list = (List<ExcelSheet>) digester
-                                .parse(Thread.currentThread().getContextClassLoader().getResourceAsStream(config));
+                List<ExcelSheet> list = (List<ExcelSheet>) digester.parse(contextClassLoader.getResourceAsStream(config));
 
                 for (ExcelSheet excelSheet : list){
                     sheetDefinitions.put(excelSheet.getName(), excelSheet);

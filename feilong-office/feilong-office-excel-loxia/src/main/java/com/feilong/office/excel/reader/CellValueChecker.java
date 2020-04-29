@@ -65,7 +65,7 @@ class CellValueChecker{
         //---------------------------------------------------------------
         DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
         if (dataConvertor == null){
-            throw build(UNSUPPORTING_DATA_TYPE, value, sheetNo, cellIndex, excelCell);
+            throw build(UNSUPPORTING_DATA_TYPE, sheetNo, cellIndex, value, excelCell);
         }
         return dataConvertor.convert(value, sheetNo, cellIndex, excelCell);
     }

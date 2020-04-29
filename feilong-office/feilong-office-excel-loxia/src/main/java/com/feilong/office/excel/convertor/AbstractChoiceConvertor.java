@@ -42,7 +42,7 @@ public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T
             return t;
         }
 
-        throw build(OUT_OF_CHOICES, value, sheetNo, cellIndex, cellDefinition);
+        throw build(OUT_OF_CHOICES, sheetNo, cellIndex, value, cellDefinition);
     }
 
     //---------------------------------------------------------------

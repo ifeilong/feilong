@@ -39,24 +39,25 @@ public class ExcelExceptionBuilder{
      * 
      * @param wrongDataTypeNumber
      *            the wrong data type number
-     * @param value
-     *            the value
      * @param sheetNo
      *            the sheet no
      * @param cellIndex
      *            the cell index
-     * @param cellDefinition
+     * @param value
+     *            the value
+     * @param excelCell
      *            the cell definition
      * @return the excel manipulate exception
      */
-    public static ExcelException build(int wrongDataTypeNumber,Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
+    public static ExcelException build(int wrongDataTypeNumber,int sheetNo,String cellIndex,Object value,ExcelCell excelCell){
         return new ExcelException(
                         wrongDataTypeNumber,
 
                         sheetNo + 1,
                         cellIndex,
                         value,
-                        cellDefinition.getPattern(),
-                        cellDefinition.getChoiceString());
+
+                        excelCell.getPattern(),
+                        excelCell.getChoiceString());
     }
 }

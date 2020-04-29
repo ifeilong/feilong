@@ -39,17 +39,17 @@ public class BigDecimalConvertor extends AbstractDataConvertor<BigDecimal>{
                 if (!cellDefinition.isMandatory()){
                     return null;
                 }
-                throw build(WRONG_DATA_NULL, null, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_NULL, sheetNo, cellIndex, null, cellDefinition);
             }
             try{
                 return toBigDecimal(value);
             }catch (Exception e){
-                throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
             }
         }else if (value instanceof Double){
             return toBigDecimal(value);
         }
-        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
     }
 
     //---------------------------------------------------------------

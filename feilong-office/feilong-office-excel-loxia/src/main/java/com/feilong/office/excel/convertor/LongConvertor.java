@@ -44,7 +44,7 @@ public class LongConvertor extends AbstractChoiceConvertor<Long>{
             str = str.trim();
             if (str.length() == 0){
                 if (cellDefinition.isMandatory()){
-                    throw build(WRONG_DATA_NULL, value, sheetNo, cellIndex, cellDefinition);
+                    throw build(WRONG_DATA_NULL, sheetNo, cellIndex, value, cellDefinition);
                 }
                 return null;
             }
@@ -54,12 +54,12 @@ public class LongConvertor extends AbstractChoiceConvertor<Long>{
                 return v;
             }catch (NumberFormatException e){
 
-                throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
             }
         }else if (value instanceof Double){
             return Math.round((Double) value);
         }
-        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
     }
 
     //---------------------------------------------------------------

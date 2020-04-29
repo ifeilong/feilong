@@ -13,20 +13,20 @@ public class DoubleConvertor extends AbstractDataConvertor<Double>{
             str = str.trim();
             if (str.length() == 0){
                 if (cellDefinition.isMandatory()){
-                    throw build(WRONG_DATA_NULL, null, sheetNo, cellIndex, cellDefinition);
+                    throw build(WRONG_DATA_NULL, sheetNo, cellIndex, null, cellDefinition);
                 }
                 return null;
             }
             try{
                 return new Double((String) value);
             }catch (NumberFormatException e){
-                throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
             }
         }else if (value instanceof Double){
             return (Double) value;
         }
 
-        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
     }
 
     @Override

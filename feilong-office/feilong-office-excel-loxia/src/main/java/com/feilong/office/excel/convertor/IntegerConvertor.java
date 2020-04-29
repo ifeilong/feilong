@@ -22,18 +22,18 @@ public class IntegerConvertor extends AbstractChoiceConvertor<Integer>{
                 if (!cellDefinition.isMandatory()){
                     return null;
                 }
-                throw build(WRONG_DATA_NULL, null, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_NULL, sheetNo, cellIndex, null, cellDefinition);
             }
             //---------------------------------------------------------------
             try{
                 return toInteger(value);
             }catch (Exception e){
-                throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
             }
         }else if (value instanceof Double){
             return (int) Math.rint((Double) value);
         }
-        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
     }
 
     //---------------------------------------------------------------

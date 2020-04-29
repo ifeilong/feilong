@@ -56,7 +56,7 @@ public class BooleanConvertor extends AbstractDataConvertor<Boolean>{
             Number value2 = (Number) value;
             return BooleanUtils.toBooleanObject(value2.intValue());
         }
-        throw build(WRONG_DATA_FORMAT, value, sheetNo, cellIndex, cellDefinition);
+        throw build(WRONG_DATA_FORMAT, sheetNo, cellIndex, value, cellDefinition);
     }
     //---------------------------------------------------------------
 

@@ -35,7 +35,7 @@ public abstract class AbstractDataConvertor<T> implements DataConvertor<T>{
     @Override
     public T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
         if (value == null && cellDefinition.isMandatory()){
-            throw build(WRONG_DATA_NULL, null, sheetNo, cellIndex, cellDefinition);
+            throw build(WRONG_DATA_NULL, sheetNo, cellIndex, null, cellDefinition);
         }
         if (value == null){
             return null;

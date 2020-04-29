@@ -65,7 +65,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
             String str = (String) value;
             if (str.length() == 0){
                 if (cellDefinition.isMandatory()){
-                    throw build(WRONG_DATA_NULL, value, sheetNo, cellIndex, cellDefinition);
+                    throw build(WRONG_DATA_NULL, sheetNo, cellIndex, value, cellDefinition);
                 }
                 return null;
             }
@@ -74,7 +74,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
                 DateFormat df = new SimpleDateFormat(pattern);
                 return df.parse((String) value);
             }catch (ParseException e){
-                throw build(WRONG_DATA_TYPE_DATE, value, sheetNo, cellIndex, cellDefinition);
+                throw build(WRONG_DATA_TYPE_DATE, sheetNo, cellIndex, value, cellDefinition);
             }
         }
         if (value instanceof Date){
@@ -84,7 +84,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
             return DateUtil.getJavaDate((Double) value);
         }
 
-        throw build(WRONG_DATA_TYPE_NUMBER, value, sheetNo, cellIndex, cellDefinition);
+        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
     }
 
     //---------------------------------------------------------------
