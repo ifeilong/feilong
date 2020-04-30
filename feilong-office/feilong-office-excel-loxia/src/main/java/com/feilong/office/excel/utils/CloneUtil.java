@@ -15,6 +15,7 @@
  */
 package com.feilong.office.excel.utils;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import com.feilong.office.excel.definition.ExcelBlock;
@@ -69,7 +70,7 @@ public class CloneUtil{
             excelBlock.addStyle(excelCellConditionStyle.cloneStyle());
         }
         for (ExcelCell excelCell : aexcelBlock.getCells()){
-            excelBlock.addCell(excelCell.cloneCell());
+            excelBlock.addCell(cloneCell(excelCell));
         }
         excelBlock.setChildBlock(cloneBlock(aexcelBlock.getChildBlock()));
         return excelBlock;
@@ -136,6 +137,32 @@ public class CloneUtil{
             }
         }
         return result;
+    }
+
+    /**
+     * Clone cell.
+     *
+     * @param excelCell
+     *            the excel cell
+     * @return the excel cell
+     */
+    public static ExcelCell cloneCell(ExcelCell excelCell){
+        ExcelCell cell = new ExcelCell();
+
+        String[] availableChoices = excelCell.getAvailableChoices();
+        cell.setAvailableChoices(availableChoices == null ? null : Arrays.asList(availableChoices).toArray(new String[0]));
+        cell.setCol(excelCell.getCol());
+        cell.setDataExpr(excelCell.getDataExpr());
+        cell.setDataName(excelCell.getDataName());
+        cell.setMandatory(excelCell.isMandatory());
+        cell.setPattern(excelCell.getPattern());
+        cell.setRow(excelCell.getRow());
+        cell.setType(excelCell.getType());
+
+        for (ExcelCellConditionStyle style : excelCell.getStyles()){
+            cell.addStyle(style.cloneStyle());
+        }
+        return cell;
     }
 
 }

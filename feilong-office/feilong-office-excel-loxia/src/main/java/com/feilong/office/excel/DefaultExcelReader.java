@@ -58,7 +58,7 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
         readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
 
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
+            List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
             int size = excelSheets.size();
             Validate.isTrue(
                             size > 0 && workbook.getNumberOfSheets() >= size,
@@ -87,7 +87,7 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
     @Override
     public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
+            List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
             int size = excelSheets.size();
             Validate.isTrue(size > 0, "No sheet definition found");
 
@@ -130,7 +130,7 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
     public ReadStatus readSheet(InputStream inputStream,int sheetNo,Map<String, Object> beans){
         OgnlStack ognlStack = new OgnlStack(beans);
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
-            List<ExcelSheet> excelSheets = excelManipulatorDefinition.getExcelSheets();
+            List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
 
             ReadStatus readStatus = new ReadStatus();
             readStatus.setStatus(ReadStatus.STATUS_SUCCESS);

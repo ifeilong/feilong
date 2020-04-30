@@ -15,8 +15,6 @@
  */
 package com.feilong.office.excel.convertor;
 
-import static com.feilong.office.excel.ExcelExceptionBuilder.build;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +22,7 @@ import java.util.Date;
 
 import org.apache.poi.ss.usermodel.DateUtil;
 
+import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.utils.Settings;
 
@@ -38,6 +37,8 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
 
     /** The date pattern. */
     private String           datePattern          = Settings.get("date.pattern");
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the date pattern.
@@ -60,21 +61,21 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
 
     //---------------------------------------------------------------
     @Override
-    protected Date handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
+    protected Date handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
         if (value instanceof String){
             String str = (String) value;
             if (str.length() == 0){
-                if (cellDefinition.isMandatory()){
-                    throw build(WRONG_DATA_NULL, sheetNo, cellIndex, value, cellDefinition);
+                if (excelCell.isMandatory()){
+                    throw new ExcelException(WRONG_DATA_NULL, sheetNo, cellIndex, value, excelCell);
                 }
                 return null;
             }
-            String pattern = cellDefinition.getPattern() == null ? datePattern : cellDefinition.getPattern();
+            String pattern = excelCell.getPattern() == null ? datePattern : excelCell.getPattern();
             try{
                 DateFormat df = new SimpleDateFormat(pattern);
                 return df.parse((String) value);
             }catch (ParseException e){
-                throw build(WRONG_DATA_TYPE_DATE, sheetNo, cellIndex, value, cellDefinition);
+                throw new ExcelException(WRONG_DATA_TYPE_DATE, sheetNo, cellIndex, value, excelCell);
             }
         }
         if (value instanceof Date){
@@ -84,7 +85,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
             return DateUtil.getJavaDate((Double) value);
         }
 
-        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
+        throw new ExcelException(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, excelCell);
     }
 
     //---------------------------------------------------------------

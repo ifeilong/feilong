@@ -104,12 +104,12 @@ public class ExcelManipulatorFactory{
      *
      * @param styleSheetPosition
      *            the style sheet position
-     * @param sheets
+     * @param sheetNames
      *            the sheets
      * @return the excel writer
      */
-    public ExcelWriter createExcelWriter(Integer styleSheetPosition,String[] sheets){
-        ExcelWriter excelWriter = createExcelWriterInner(null, sheets);
+    public ExcelWriter createExcelWriter(Integer styleSheetPosition,String[] sheetNames){
+        ExcelWriter excelWriter = createExcelWriterInner(null, sheetNames);
         excelWriter.getDefinition().setStyleSheetPosition(styleSheetPosition);
         return excelWriter;
     }
@@ -121,12 +121,12 @@ public class ExcelManipulatorFactory{
      *            the style sheet position
      * @param writeTemplateName
      *            the write template name
-     * @param sheets
+     * @param sheetNames
      *            the sheets
      * @return the excel writer
      */
-    public ExcelWriter createExcelWriter(Integer styleSheetPosition,String writeTemplateName,String[] sheets){
-        ExcelWriter excelWriter = createExcelWriterInner(writeTemplateName, sheets);
+    public ExcelWriter createExcelWriter(Integer styleSheetPosition,String writeTemplateName,String[] sheetNames){
+        ExcelWriter excelWriter = createExcelWriterInner(writeTemplateName, sheetNames);
         excelWriter.getDefinition().setStyleSheetPosition(styleSheetPosition);
         return excelWriter;
     }
@@ -136,12 +136,12 @@ public class ExcelManipulatorFactory{
      *
      * @param writeTemplateName
      *            the write template name
-     * @param sheets
+     * @param sheetNames
      *            the sheets
      * @return the excel writer
      */
-    public ExcelWriter createExcelWriter(String writeTemplateName,String[] sheets){
-        return createExcelWriterInner(writeTemplateName, sheets);
+    public ExcelWriter createExcelWriter(String writeTemplateName,String[] sheetNames){
+        return createExcelWriterInner(writeTemplateName, sheetNames);
     }
 
     /**
@@ -162,13 +162,13 @@ public class ExcelManipulatorFactory{
      *
      * @param writeTemplateName
      *            the write template name
-     * @param sheets
+     * @param sheetNames
      *            the sheets
      * @return the excel writer
      */
-    private ExcelWriter createExcelWriterInner(String writeTemplateName,String...sheets){
+    private ExcelWriter createExcelWriterInner(String writeTemplateName,String...sheetNames){
         ExcelWriter excelWriter = new DefaultExcelWriter();
-        excelWriter.setDefinition(toExcelManipulatorDefinition(sheets));
+        excelWriter.setDefinition(toExcelManipulatorDefinition(sheetNames));
 
         if (writeTemplateName != null){
             DefaultExcelWriter dew = (DefaultExcelWriter) excelWriter;
@@ -202,13 +202,13 @@ public class ExcelManipulatorFactory{
      *            the sheets
      * @return the excel manipulator definition
      */
-    private ExcelManipulatorDefinition toExcelManipulatorDefinition(String...sheetNames){
-        ExcelManipulatorDefinition excelManipulatorDefinition = new ExcelManipulatorDefinition();
+    private ExcelDefinition toExcelManipulatorDefinition(String...sheetNames){
+        ExcelDefinition excelDefinition = new ExcelDefinition();
         for (String sheetName : sheetNames){
             ExcelSheet excelSheet = toExcelSheet(sheetName);
-            excelManipulatorDefinition.getExcelSheets().add(excelSheet);
+            excelDefinition.getExcelSheets().add(excelSheet);
         }
-        return excelManipulatorDefinition;
+        return excelDefinition;
     }
 
     //---------------------------------------------------------------

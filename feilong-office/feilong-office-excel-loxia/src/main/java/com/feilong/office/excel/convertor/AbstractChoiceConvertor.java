@@ -17,10 +17,10 @@ package com.feilong.office.excel.convertor;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.office.excel.ExcelExceptionBuilder.build;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -34,15 +34,15 @@ public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T
     private static final int OUT_OF_CHOICES = 3;
 
     @Override
-    protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
-        T t = convertValue(value, sheetNo, cellIndex, cellDefinition);
+    protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
+        T t = convertValue(value, sheetNo, cellIndex, excelCell);
 
-        T[] choices = getChoices(cellDefinition);
+        T[] choices = getChoices(excelCell);
         if (t == null || choices == null || ArrayUtils.contains(choices, t)){
             return t;
         }
 
-        throw build(OUT_OF_CHOICES, sheetNo, cellIndex, value, cellDefinition);
+        throw new ExcelException(OUT_OF_CHOICES, sheetNo, cellIndex, value, excelCell);
     }
 
     //---------------------------------------------------------------

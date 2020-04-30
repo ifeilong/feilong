@@ -22,7 +22,7 @@ interface ExcelConfig{
      *
      * @return the definition
      */
-    ExcelManipulatorDefinition getDefinition();
+    ExcelDefinition getDefinition();
 
     /**
      * Sets the definition.
@@ -30,5 +30,5 @@ interface ExcelConfig{
      * @param definition
      *            the new definition
      */
-    void setDefinition(ExcelManipulatorDefinition definition);
+    void setDefinition(ExcelDefinition definition);
 }

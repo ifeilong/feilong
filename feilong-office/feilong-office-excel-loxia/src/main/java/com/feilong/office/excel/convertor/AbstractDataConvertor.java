@@ -15,37 +15,30 @@
  */
 package com.feilong.office.excel.convertor;
 
-import static com.feilong.office.excel.ExcelExceptionBuilder.build;
-
+import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.definition.ExcelCell;
 
-/**
- * The Class AbstractDataConvertor.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @param <T>
- * @since 3.0.0
- */
 public abstract class AbstractDataConvertor<T> implements DataConvertor<T>{
 
     protected static final int WRONG_DATA_NULL        = 1;
 
     protected static final int WRONG_DATA_TYPE_NUMBER = 11;
 
+    //---------------------------------------------------------------
+
     @Override
-    public T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
-        if (value == null && cellDefinition.isMandatory()){
-            throw build(WRONG_DATA_NULL, sheetNo, cellIndex, null, cellDefinition);
+    public T convert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
+        if (value == null && excelCell.isMandatory()){
+            throw new ExcelException(WRONG_DATA_NULL, sheetNo, cellIndex, null, excelCell);
         }
         if (value == null){
             return null;
         }
 
         //---------------------------------------------------------------
-        T t = handleConvert(value, sheetNo, cellIndex, cellDefinition);
-
+        T t = handleConvert(value, sheetNo, cellIndex, excelCell);
         return t;
     }
 
-    protected abstract T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition);
+    protected abstract T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell);
 }

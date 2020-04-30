@@ -15,9 +15,8 @@
  */
 package com.feilong.office.excel.reader;
 
-import static com.feilong.office.excel.ExcelExceptionBuilder.build;
-
 import com.feilong.office.excel.DataConvertorConfigurator;
+import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.convertor.DataConvertor;
 import com.feilong.office.excel.definition.ExcelCell;
 
@@ -45,7 +44,7 @@ class CellValueConverter{
         //---------------------------------------------------------------
         DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(propertyClass);
         if (dataConvertor == null){
-            throw build(UNSUPPORTING_DATA_TYPE, sheetNo, cellIndex, value, excelCell);
+            throw new ExcelException(UNSUPPORTING_DATA_TYPE, sheetNo, cellIndex, value, excelCell);
         }
         return dataConvertor.convert(value, sheetNo, cellIndex, excelCell);
     }

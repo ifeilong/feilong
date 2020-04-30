@@ -29,7 +29,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.office.excel.ExcelManipulatorDefinition;
+import com.feilong.office.excel.ExcelDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
 
 class StyleMapBuilder{
@@ -38,10 +38,10 @@ class StyleMapBuilder{
 
     static Map<String, CellStyle> build(
                     Workbook workbook,
-                    ExcelManipulatorDefinition excelManipulatorDefinition,
+                    ExcelDefinition excelDefinition,
                     List<ExcelSheet> excelSheets,
                     int excelSheetsSize){
-        Integer styleSheetPosition = excelManipulatorDefinition.getStyleSheetPosition();
+        Integer styleSheetPosition = excelDefinition.getStyleSheetPosition();
         if (null == styleSheetPosition){
             LOGGER.debug("ExcelManipulatorDefinition styleSheetPosition is null, renturn empty styleMap");
             return emptyMap();

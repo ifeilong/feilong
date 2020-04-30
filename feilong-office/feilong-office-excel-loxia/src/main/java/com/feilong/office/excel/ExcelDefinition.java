@@ -24,7 +24,7 @@ import com.feilong.office.excel.definition.ExcelSheet;
 /**
  * The Class ExcelManipulatorDefinition.
  */
-public class ExcelManipulatorDefinition{
+public class ExcelDefinition{
 
     /** The style sheet position. */
     private Integer          styleSheetPosition;

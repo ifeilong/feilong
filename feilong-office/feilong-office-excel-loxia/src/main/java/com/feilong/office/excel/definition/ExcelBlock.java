@@ -81,15 +81,6 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     //---------------------------------------------------------------
 
     /**
-     * Gets the start cell index.
-     *
-     * @return the start cell index
-     */
-    public String getStartCellIndex(){
-        return CellReferenceUtil.getCellIndex(startRow, startCol);
-    }
-
-    /**
      * Sets the start cell index.
      *
      * @param startCellIndex
@@ -348,6 +339,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
             this.childBlock = null;
             return;
         }
+
+        //---------------------------------------------------------------
         childBlock.setLoop(true);
         childBlock.setEndCellIndex(this.getEndCellIndex());
         this.childBlock = childBlock;
@@ -412,7 +405,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      */
     @Override
     public String toString(){
-        return "ExcelBlock[" + getStartCellIndex() + ":" + getEndCellIndex() + "]";
+        return "ExcelBlock[" + CellReferenceUtil.getCellIndex(startRow, startCol) + ":" + getEndCellIndex() + "]";
     }
 
     /**
@@ -437,18 +430,20 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         return this.toString().equals(eb.toString());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Compare to.
      *
-     * @param eb
+     * @param excelBlock
      *            the eb
      * @return the int
      */
     @Override
-    public int compareTo(ExcelBlock eb){
-        int result = eb.getStartRow() - this.getStartRow();
+    public int compareTo(ExcelBlock excelBlock){
+        int result = excelBlock.getStartRow() - this.getStartRow();
         if (result == 0){
-            result = eb.getStartCol() - this.getStartCol();
+            return excelBlock.getStartCol() - this.getStartCol();
         }
         return result;
     }

@@ -52,9 +52,9 @@ public interface DataConvertor<T> {
      *            the sheet no
      * @param cellIndex
      *            the cell index
-     * @param cellDefinition
+     * @param excelCell
      *            the cell definition
      * @return the t
      */
-    T convert(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition);
+    T convert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell);
 }

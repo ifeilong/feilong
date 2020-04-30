@@ -25,7 +25,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.feilong.office.excel.ExcelManipulatorDefinition;
+import com.feilong.office.excel.ExcelDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.OgnlStack;
 import com.feilong.office.excel.utils.WorkbookUtil;
@@ -61,7 +61,7 @@ public class WorkbookWriter{
     public static void writePerSheet(
                     Workbook workbook,
                     OutputStream outputStream,
-                    ExcelManipulatorDefinition definition,
+                    ExcelDefinition definition,
                     List<Map<String, Object>> beansList){
         List<ExcelSheet> excelSheets = definition.getExcelSheets();
         int numberOfSheets = workbook.getNumberOfSheets();
@@ -98,7 +98,7 @@ public class WorkbookWriter{
      * @param beans
      *            the beans
      */
-    public static void write(Workbook workbook,OutputStream outputStream,ExcelManipulatorDefinition definition,Map<String, Object> beans){
+    public static void write(Workbook workbook,OutputStream outputStream,ExcelDefinition definition,Map<String, Object> beans){
         List<ExcelSheet> excelSheets = definition.getExcelSheets();
         int excelSheetsSize = excelSheets.size();
         int numberOfSheets = workbook.getNumberOfSheets();

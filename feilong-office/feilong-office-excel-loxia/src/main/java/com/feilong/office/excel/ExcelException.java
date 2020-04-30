@@ -15,7 +15,10 @@
  */
 package com.feilong.office.excel;
 
-import java.util.Arrays;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.feilong.office.excel.definition.ExcelCell;
 
 public class ExcelException extends RuntimeException{
 
@@ -24,37 +27,44 @@ public class ExcelException extends RuntimeException{
 
     //---------------------------------------------------------------
 
-    /** The error code. */
     private final int         errorCode;
 
-    /** [SheetNo,Position,CurrentValue,Pattern,ChoiceList]. */
-    private final Object[]    args;
+    //---------------------------------------------------------------
+
+    private final int         sheetNo;
+
+    private final String      cellIndex;
+
+    private final Object      value;
+
+    private final ExcelCell   excelCell;
 
     //---------------------------------------------------------------
 
     /**
-     * Instantiates a new excel manipulate exception.
-     *
      * @param errorCode
-     *            the error code
-     * @param args
-     *            the args
+     * @param sheetNo
+     * @param cellIndex
+     * @param value
+     * @param excelCell
      */
-    public ExcelException(int errorCode, Object...args){
+    public ExcelException(int errorCode, int sheetNo, String cellIndex, Object value, ExcelCell excelCell){
+        super();
         this.errorCode = errorCode;
-        this.args = args;
+        this.sheetNo = sheetNo;
+        this.cellIndex = cellIndex;
+        this.value = value;
+        this.excelCell = excelCell;
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * To string.
-     *
-     * @return the string
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
      */
     @Override
     public String toString(){
-        return "ExcelManipulateException[" + this.errorCode + "]" + (this.args == null ? "" : Arrays.asList(this.args).toString());
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
-
 }

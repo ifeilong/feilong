@@ -32,7 +32,6 @@ public interface ExcelWriter extends ExcelConfig{
      *            the os
      * @param beans
      *            the beans
-     * @return the write status
      */
     void write(OutputStream outputStream,Map<String, Object> beans);
 
@@ -45,7 +44,6 @@ public interface ExcelWriter extends ExcelConfig{
      *            the os
      * @param beans
      *            the beans
-     * @return the write status
      */
     void write(String template,OutputStream outputStream,Map<String, Object> beans);
 
@@ -58,7 +56,6 @@ public interface ExcelWriter extends ExcelConfig{
      *            the os
      * @param beans
      *            the beans
-     * @return the write status
      */
     void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans);
 
@@ -71,7 +68,6 @@ public interface ExcelWriter extends ExcelConfig{
      *            the os
      * @param beansList
      *            the beans list
-     * @return the write status
      */
     void writePerSheet(OutputStream outputStream,List<Map<String, Object>> beansList);
 
@@ -84,9 +80,10 @@ public interface ExcelWriter extends ExcelConfig{
      *            the os
      * @param beansList
      *            the beans list
-     * @return the write status
      */
     void writePerSheet(String template,OutputStream outputStream,List<Map<String, Object>> beansList);
+
+    //---------------------------------------------------------------
 
     /**
      * Write per sheet.
@@ -97,7 +94,6 @@ public interface ExcelWriter extends ExcelConfig{
      *            the os
      * @param beansList
      *            the beans list
-     * @return the write status
      */
     void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList);
 

@@ -23,7 +23,7 @@ package com.feilong.office.excel;
 abstract class AbstractExcelConfig implements ExcelConfig{
 
     /** The definition. */
-    protected ExcelManipulatorDefinition excelManipulatorDefinition;
+    protected ExcelDefinition excelDefinition;
 
     //---------------------------------------------------------------
 
@@ -33,8 +33,8 @@ abstract class AbstractExcelConfig implements ExcelConfig{
      * @return the definition
      */
     @Override
-    public ExcelManipulatorDefinition getDefinition(){
-        return excelManipulatorDefinition;
+    public ExcelDefinition getDefinition(){
+        return excelDefinition;
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class AbstractExcelConfig implements ExcelConfig{
      *            the new definition
      */
     @Override
-    public void setDefinition(ExcelManipulatorDefinition definition){
-        this.excelManipulatorDefinition = definition;
+    public void setDefinition(ExcelDefinition definition){
+        this.excelDefinition = definition;
     }
 }

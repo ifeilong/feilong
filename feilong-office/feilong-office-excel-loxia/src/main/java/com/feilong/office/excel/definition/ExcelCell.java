@@ -16,7 +16,6 @@
 package com.feilong.office.excel.definition;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.feilong.office.excel.utils.CellReferenceUtil;
@@ -191,6 +190,8 @@ public class ExcelCell{
         return sb.substring(1);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Sets the choice string.
      *
@@ -293,28 +294,5 @@ public class ExcelCell{
         }else{
             this.dataExpr = dataExpr;
         }
-    }
-
-    /**
-     * Clone cell.
-     *
-     * @return the excel cell
-     */
-    public ExcelCell cloneCell(){
-        ExcelCell cell = new ExcelCell();
-
-        cell.setAvailableChoices(availableChoices == null ? null : Arrays.asList(availableChoices).toArray(new String[0]));
-        cell.setCol(col);
-        cell.setDataExpr(dataExpr);
-        cell.setDataName(dataName);
-        cell.setMandatory(isMandatory);
-        cell.setPattern(pattern);
-        cell.setRow(row);
-        cell.setType(type);
-
-        for (ExcelCellConditionStyle style : getStyles()){
-            cell.addStyle(style.cloneStyle());
-        }
-        return cell;
     }
 }

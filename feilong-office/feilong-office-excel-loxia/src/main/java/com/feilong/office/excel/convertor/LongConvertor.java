@@ -15,8 +15,7 @@
  */
 package com.feilong.office.excel.convertor;
 
-import static com.feilong.office.excel.ExcelExceptionBuilder.build;
-
+import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
@@ -33,18 +32,18 @@ public class LongConvertor extends AbstractChoiceConvertor<Long>{
      *            the sheet no
      * @param cellIndex
      *            the cell index
-     * @param cellDefinition
+     * @param excelCell
      *            the cell definition
      * @return the long
      */
     @Override
-    protected Long convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
+    protected Long convertValue(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
         if (value instanceof String){
             String str = (String) value;
             str = str.trim();
             if (str.length() == 0){
-                if (cellDefinition.isMandatory()){
-                    throw build(WRONG_DATA_NULL, sheetNo, cellIndex, value, cellDefinition);
+                if (excelCell.isMandatory()){
+                    throw new ExcelException(WRONG_DATA_NULL, sheetNo, cellIndex, value, excelCell);
                 }
                 return null;
             }
@@ -54,12 +53,12 @@ public class LongConvertor extends AbstractChoiceConvertor<Long>{
                 return v;
             }catch (NumberFormatException e){
 
-                throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
+                throw new ExcelException(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, excelCell);
             }
         }else if (value instanceof Double){
             return Math.round((Double) value);
         }
-        throw build(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, cellDefinition);
+        throw new ExcelException(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, excelCell);
     }
 
     //---------------------------------------------------------------

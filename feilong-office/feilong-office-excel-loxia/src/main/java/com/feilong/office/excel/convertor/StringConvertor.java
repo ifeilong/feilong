@@ -31,12 +31,12 @@ public class StringConvertor extends AbstractChoiceConvertor<String>{
      *            the sheet no
      * @param cellIndex
      *            the cell index
-     * @param cellDefinition
+     * @param excelCell
      *            the cell definition
      * @return the string
      */
     @Override
-    protected String convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition){
+    protected String convertValue(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
         String str = (value == null ? null : value.toString());
         if (str != null && str.length() == 0){
             str = null;
