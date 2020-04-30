@@ -83,7 +83,7 @@ public class ExcelDefinition{
      */
     @Override
     public String toString(){
-        return "ExcelManipulatorDefinition [styleSheetPosition=" + (styleSheetPosition == null ? "Undefined" : styleSheetPosition)
+        return "ExcelDefinition [styleSheetPosition=" + (styleSheetPosition == null ? "Undefined" : styleSheetPosition)
                         + ",\r\n excelSheets=\r\n\t" + ConvertUtil.toString(excelSheets, "\r\n\t") + "]";
     }
 

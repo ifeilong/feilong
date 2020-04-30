@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,30 +33,47 @@ import org.slf4j.LoggerFactory;
 import com.feilong.office.excel.ExcelDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
 
+/**
+ * The Class StyleMapBuilder.
+ */
 class StyleMapBuilder{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(StyleMapBuilder.class);
 
-    static Map<String, CellStyle> build(
-                    Workbook workbook,
-                    ExcelDefinition excelDefinition,
-                    List<ExcelSheet> excelSheets,
-                    int excelSheetsSize){
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the.
+     *
+     * @param workbook
+     *            the workbook
+     * @param excelDefinition
+     *            the excel definition
+     * @param excelSheetList
+     *            the excel sheets
+     * @return the map
+     */
+    static Map<String, CellStyle> build(Workbook workbook,ExcelDefinition excelDefinition,List<ExcelSheet> excelSheetList){
         Integer styleSheetPosition = excelDefinition.getStyleSheetPosition();
         if (null == styleSheetPosition){
-            LOGGER.debug("ExcelManipulatorDefinition styleSheetPosition is null, renturn empty styleMap");
+            LOGGER.debug("ExcelDefinition styleSheetPosition is null, renturn empty styleMap");
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
+        int excelSheetsSize = excelSheetList.size();
+        Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
 
         //---------------------------------------------------------------
         Date beginDate = new Date();
 
         Map<String, CellStyle> styleMap = new HashMap<>();
-        Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
+        Sheet sheet = workbook.getSheetAt(styleSheetPosition);
 
-        //---------------------------------------------------------------
         for (int i = 0; i < excelSheetsSize; i++){
-            ExcelCellConditionStyleIniter.init(workbook.getSheetAt(styleSheetPosition), excelSheets.get(i), styleMap);
+            ExcelSheet excelSheet = excelSheetList.get(i);
+            styleMap.putAll(ExcelCellConditionStyleInitializer.init(sheet, excelSheet));
         }
 
         //---------------------------------------------------------------

@@ -48,7 +48,7 @@ public class CloneUtil{
      *            the aexcel block
      * @return the excel block
      */
-    public static ExcelBlock cloneBlock(ExcelBlock aexcelBlock){
+    private static ExcelBlock cloneBlock(ExcelBlock aexcelBlock){
         if (null == aexcelBlock){
             return null;
         }
@@ -83,11 +83,12 @@ public class CloneUtil{
      *            the loop break condition
      * @return the loop break condition
      */
-    static LoopBreakCondition cloneLoopBreakCondition(LoopBreakCondition loopBreakCondition){
+    private static LoopBreakCondition cloneLoopBreakCondition(LoopBreakCondition loopBreakCondition){
         if (null == loopBreakCondition){
             return null;
         }
 
+        //---------------------------------------------------------------
         LoopBreakCondition condition = new LoopBreakCondition();
         condition.setRowOffset(loopBreakCondition.getRowOffset());
         condition.setColOffset(loopBreakCondition.getColOffset());
@@ -146,7 +147,7 @@ public class CloneUtil{
      *            the excel cell
      * @return the excel cell
      */
-    public static ExcelCell cloneCell(ExcelCell excelCell){
+    private static ExcelCell cloneCell(ExcelCell excelCell){
         ExcelCell cell = new ExcelCell();
 
         String[] availableChoices = excelCell.getAvailableChoices();

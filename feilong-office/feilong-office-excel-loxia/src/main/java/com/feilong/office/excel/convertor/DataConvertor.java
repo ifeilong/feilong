@@ -18,7 +18,7 @@ package com.feilong.office.excel.convertor;
 import com.feilong.office.excel.definition.ExcelCell;
 
 /**
- * The Interface DataConvertor.
+ * 数据类型转换.
  *
  * @param <T>
  *            the generic type

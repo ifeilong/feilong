@@ -29,8 +29,12 @@ public class ExcelSheet{
     /** The name. */
     private String           name;
 
+    //---------------------------------------------------------------
+
     /** The display name. */
     private String           displayName;
+
+    //---------------------------------------------------------------
 
     /** The excel blocks. */
     private List<ExcelBlock> excelBlocks = new ArrayList<>();
@@ -155,6 +159,8 @@ public class ExcelSheet{
         }
         return excelBlocks;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * To string.

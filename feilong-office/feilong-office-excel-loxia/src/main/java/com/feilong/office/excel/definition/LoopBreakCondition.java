@@ -69,6 +69,8 @@ public class LoopBreakCondition{
         this.colOffset = colOffset;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the flag string.
      *

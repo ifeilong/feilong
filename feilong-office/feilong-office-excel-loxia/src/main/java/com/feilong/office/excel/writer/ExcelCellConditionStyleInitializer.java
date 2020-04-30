@@ -15,6 +15,8 @@
  */
 package com.feilong.office.excel.writer;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -30,49 +32,33 @@ import com.feilong.office.excel.definition.ExcelCellConditionStyle;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.CellReferenceUtil;
 
-class ExcelCellConditionStyleIniter{
+class ExcelCellConditionStyleInitializer{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelCellConditionStyleIniter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelCellConditionStyleInitializer.class);
 
     /** Don't let anyone instantiate this class. */
-    private ExcelCellConditionStyleIniter(){
+    private ExcelCellConditionStyleInitializer(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
     //---------------------------------------------------------------
-    /**
-     * Inits the conditional style.
-     *
-     * @param sheet
-     *            the style sheet
-     * @param excelSheet
-     *            the sheet definition
-     * @param styleMap
-     *            the style map
-     */
-    static void init(Sheet sheet,ExcelSheet excelSheet,Map<String, CellStyle> styleMap){
-        for (ExcelBlock excelBlock : excelSheet.getExcelBlocks()){
-            init(sheet, excelBlock, styleMap);
+    static Map<String, CellStyle> init(Sheet sheet,ExcelSheet excelSheet){
+        Map<String, CellStyle> returnMap = new HashMap<>();
+
+        List<ExcelBlock> excelBlocks = excelSheet.getExcelBlocks();
+        for (ExcelBlock excelBlock : excelBlocks){
+            init(sheet, excelBlock, returnMap);
 
             ExcelBlock childBlock = excelBlock.getChildBlock();
             if (childBlock != null){
-                init(sheet, childBlock, styleMap);
+                init(sheet, childBlock, returnMap);
             }
         }
+        return returnMap;
     }
 
-    /**
-     * Inits the conditional style.
-     *
-     * @param sheet
-     *            the style sheet
-     * @param excelBlock
-     *            the block definition
-     * @param styleMap
-     *            the style map
-     */
     private static void init(Sheet sheet,ExcelBlock excelBlock,Map<String, CellStyle> styleMap){
         for (ExcelCellConditionStyle excelCellConditionStyle : excelBlock.getStyles()){
             init(sheet, excelCellConditionStyle, styleMap);
@@ -84,23 +70,17 @@ class ExcelCellConditionStyleIniter{
         }
     }
 
-    /**
-     * Inits the conditional style.
-     *
-     * @param sheet
-     *            the style sheet
-     * @param excelCellConditionStyle
-     *            the style
-     * @param styleMap
-     *            the style map
-     */
+    //---------------------------------------------------------------
+
     private static void init(Sheet sheet,ExcelCellConditionStyle excelCellConditionStyle,Map<String, CellStyle> styleMap){
         //ignore existed style
         int startRow = excelCellConditionStyle.getStartRow();
         int endRow = excelCellConditionStyle.getEndRow();
+
         int startCol = excelCellConditionStyle.getStartCol();
-        String cellIndex = excelCellConditionStyle.getCellIndex();
         int endCol = excelCellConditionStyle.getEndCol();
+
+        String cellIndex = excelCellConditionStyle.getCellIndex();
 
         if (startRow == 0 && endRow == 0 && startCol == 0 && endCol == 0 && styleMap.containsKey(cellIndex)){
             return;
@@ -110,11 +90,15 @@ class ExcelCellConditionStyleIniter{
         int[] position = CellReferenceUtil.getCellPosition(cellIndex);
         int rows = endRow - startRow;
         int cols = endCol - startCol;
+
+        //---------------------------------------------------------------
         for (int i = position[0]; i <= position[0] + rows; i++){
             Row row = sheet.getRow(i);
             if (row == null){
                 return;
             }
+
+            //---------------------------------------------------------------
             for (int j = position[1]; j <= position[1] + cols; j++){
                 Cell cell = row.getCell(j);
                 if (cell == null){

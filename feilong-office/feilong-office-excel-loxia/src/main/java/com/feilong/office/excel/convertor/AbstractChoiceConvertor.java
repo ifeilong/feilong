@@ -33,6 +33,8 @@ public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T
 
     private static final int OUT_OF_CHOICES = 3;
 
+    //---------------------------------------------------------------
+
     @Override
     protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
         T t = convertValue(value, sheetNo, cellIndex, excelCell);

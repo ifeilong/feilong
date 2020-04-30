@@ -168,7 +168,7 @@ public class ExcelManipulatorFactory{
      */
     private ExcelWriter createExcelWriterInner(String writeTemplateName,String...sheetNames){
         ExcelWriter excelWriter = new DefaultExcelWriter();
-        excelWriter.setDefinition(toExcelManipulatorDefinition(sheetNames));
+        excelWriter.setDefinition(toExcelDefinition(sheetNames));
 
         if (writeTemplateName != null){
             DefaultExcelWriter dew = (DefaultExcelWriter) excelWriter;
@@ -189,7 +189,7 @@ public class ExcelManipulatorFactory{
      */
     public ExcelReader createExcelReader(String...sheetNames){
         ExcelReader excelReader = new DefaultExcelReader();
-        excelReader.setDefinition(toExcelManipulatorDefinition(sheetNames));
+        excelReader.setDefinition(toExcelDefinition(sheetNames));
         return excelReader;
     }
 
@@ -202,7 +202,7 @@ public class ExcelManipulatorFactory{
      *            the sheets
      * @return the excel manipulator definition
      */
-    private ExcelDefinition toExcelManipulatorDefinition(String...sheetNames){
+    private ExcelDefinition toExcelDefinition(String...sheetNames){
         ExcelDefinition excelDefinition = new ExcelDefinition();
         for (String sheetName : sheetNames){
             ExcelSheet excelSheet = toExcelSheet(sheetName);

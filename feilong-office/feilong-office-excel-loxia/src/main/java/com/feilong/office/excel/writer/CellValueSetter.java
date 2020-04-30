@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import com.feilong.office.excel.utils.OgnlStack;
-import com.feilong.office.excel.utils.Settings;
+import com.feilong.office.excel.utils.Config;
 
 class CellValueSetter{
 
@@ -114,7 +114,7 @@ class CellValueSetter{
                 if (cell.getCellStyle() == null){
                     cellStyle.cloneStyleFrom(cell.getCellStyle());
                 }
-                cellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat(Settings.get("date.pattern")));
+                cellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat(Config.get("date.pattern")));
                 cell.setCellStyle(cellStyle);
             }
         }

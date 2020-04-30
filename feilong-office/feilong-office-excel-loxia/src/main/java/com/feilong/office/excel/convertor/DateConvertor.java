@@ -24,7 +24,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 
 import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.definition.ExcelCell;
-import com.feilong.office.excel.utils.Settings;
+import com.feilong.office.excel.utils.Config;
 
 /**
  * The Class DateConvertor.
@@ -36,7 +36,7 @@ public class DateConvertor extends AbstractDataConvertor<Date>{
     //---------------------------------------------------------------
 
     /** The date pattern. */
-    private String           datePattern          = Settings.get("date.pattern");
+    private String           datePattern          = Config.get("date.pattern");
 
     //---------------------------------------------------------------
 

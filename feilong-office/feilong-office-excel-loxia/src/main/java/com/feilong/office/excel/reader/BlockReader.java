@@ -32,6 +32,7 @@ import com.feilong.office.excel.ExcelException;
 import com.feilong.office.excel.ReadStatus;
 import com.feilong.office.excel.definition.ExcelBlock;
 import com.feilong.office.excel.definition.ExcelCell;
+import com.feilong.office.excel.definition.LoopBreakCondition;
 import com.feilong.office.excel.utils.CellReferenceUtil;
 import com.feilong.office.excel.utils.OgnlStack;
 
@@ -102,8 +103,10 @@ class BlockReader{
 
             int startRow = excelBlock.getStartRow();
             int step = excelBlock.getEndRow() - excelBlock.getStartRow() + 1;
-            while (!BlockReaderLoopBreaker
-                            .checkBreak(workbook.getSheetAt(sheetNo), startRow, excelBlock.getStartCol(), excelBlock.getBreakCondition())){
+
+            LoopBreakCondition breakCondition = excelBlock.getBreakCondition();
+            int startCol = excelBlock.getStartCol();
+            while (!BlockReaderLoopBreaker.checkBreak(workbook.getSheetAt(sheetNo), startRow, startCol, breakCondition)){
                 Object value = readBlock(workbook, sheetNo, excelBlock, startRow, readStatus);
                 dataList.add(value);
                 startRow += step;

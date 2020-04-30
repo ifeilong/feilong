@@ -68,7 +68,7 @@ public class WorkbookWriter{
         int excelSheetsSize = excelSheets.size();
         validate(excelSheetsSize, numberOfSheets);
 
-        Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, definition, excelSheets, excelSheetsSize);
+        Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, definition, excelSheets);
 
         //---------------------------------------------------------------
         //remove sheets except the first one
@@ -93,18 +93,18 @@ public class WorkbookWriter{
      *            the workbook
      * @param outputStream
      *            the output stream
-     * @param definition
+     * @param excelDefinition
      *            the definition
      * @param beans
      *            the beans
      */
-    public static void write(Workbook workbook,OutputStream outputStream,ExcelDefinition definition,Map<String, Object> beans){
-        List<ExcelSheet> excelSheets = definition.getExcelSheets();
+    public static void write(Workbook workbook,OutputStream outputStream,ExcelDefinition excelDefinition,Map<String, Object> beans){
+        List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
         int excelSheetsSize = excelSheets.size();
         int numberOfSheets = workbook.getNumberOfSheets();
         validate(excelSheetsSize, numberOfSheets);
 
-        Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, definition, excelSheets, excelSheetsSize);
+        Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, excelDefinition, excelSheets);
         for (int i = 0; i < excelSheetsSize; i++){
             SheetWriter.write(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap);
         }

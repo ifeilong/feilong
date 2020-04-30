@@ -20,6 +20,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.feilong.office.excel.definition.ExcelCell;
 
+/**
+ * The Class ExcelException.
+ */
 public class ExcelException extends RuntimeException{
 
     /** The Constant serialVersionUID. */
@@ -27,26 +30,38 @@ public class ExcelException extends RuntimeException{
 
     //---------------------------------------------------------------
 
+    /** The error code. */
     private final int         errorCode;
 
     //---------------------------------------------------------------
 
+    /** The sheet no. */
     private final int         sheetNo;
 
+    /** The cell index. */
     private final String      cellIndex;
 
+    /** The value. */
     private final Object      value;
 
+    /** The excel cell. */
     private final ExcelCell   excelCell;
 
     //---------------------------------------------------------------
 
     /**
+     * Instantiates a new excel exception.
+     *
      * @param errorCode
+     *            the error code
      * @param sheetNo
+     *            the sheet no
      * @param cellIndex
+     *            the cell index
      * @param value
+     *            the value
      * @param excelCell
+     *            the excel cell
      */
     public ExcelException(int errorCode, int sheetNo, String cellIndex, Object value, ExcelCell excelCell){
         super();
@@ -58,6 +73,11 @@ public class ExcelException extends RuntimeException{
     }
 
     //---------------------------------------------------------------
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     /*
      * (non-Javadoc)
      * 

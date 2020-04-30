@@ -398,6 +398,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * To string.
      *
