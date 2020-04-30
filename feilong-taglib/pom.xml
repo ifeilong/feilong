@@ -31,6 +31,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!--feilong-velocity -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

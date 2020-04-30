@@ -54,6 +54,12 @@
 			<artifactId>feilong-security</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
