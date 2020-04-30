@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import com.feilong.context.converter.JsonStringToBeanConverter;
 import com.feilong.context.converter.StringToBeanConverter;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * The Class ItemDtoJsonConverterTest.

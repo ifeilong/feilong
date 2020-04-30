@@ -15,7 +15,7 @@
  */
 package com.feilong.context.format;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * json格式的格式化.

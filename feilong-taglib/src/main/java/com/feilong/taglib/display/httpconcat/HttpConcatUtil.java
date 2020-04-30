@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.ResourceBundleUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.taglib.display.httpconcat.builder.ResultBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;

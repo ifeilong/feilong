@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * 格式化构造器的父类, 含有公共方法.

@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.context.InputParamsValidateable;
 import com.feilong.context.converter.StringToBeanConverter;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * 默认的 {@link RequestResultInvoker}.

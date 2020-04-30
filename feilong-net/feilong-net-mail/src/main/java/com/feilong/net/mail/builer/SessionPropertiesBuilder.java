@@ -21,7 +21,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import java.util.Properties;
 
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.entity.SessionConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;

@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.store.member.Address;
 import com.feilong.test.AbstractTest;
 

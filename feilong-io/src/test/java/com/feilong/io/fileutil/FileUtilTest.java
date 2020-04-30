@@ -25,7 +25,7 @@ import org.junit.Test;
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.FileUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
 /**

@@ -29,7 +29,7 @@ import org.apache.http.client.HttpClient;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 

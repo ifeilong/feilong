@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.comparator.BreadCrumbEntityComparator;

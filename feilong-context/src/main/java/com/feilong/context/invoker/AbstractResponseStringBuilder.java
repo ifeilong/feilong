@@ -24,7 +24,7 @@ import com.feilong.context.Rebuilder;
 import com.feilong.context.format.JsonStringFormatter;
 import com.feilong.context.format.StringFormatter;
 import com.feilong.context.format.XMLStringFormatter;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * 抽象的响应结果字符串构造器.

@@ -38,7 +38,7 @@ import org.springframework.core.io.ResourceLoader;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.io.FileUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * 使用 loxia 来进行 excel 输出的工具类.

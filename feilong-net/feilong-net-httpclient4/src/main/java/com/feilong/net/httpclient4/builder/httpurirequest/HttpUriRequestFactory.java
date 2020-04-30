@@ -27,7 +27,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.entity.ConnectionConfig;

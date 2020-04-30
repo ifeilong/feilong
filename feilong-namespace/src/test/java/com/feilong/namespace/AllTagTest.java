@@ -14,7 +14,7 @@ import com.feilong.accessor.cookie.CookieAccessor;
 import com.feilong.accessor.session.SessionAccessor;
 import com.feilong.accessor.session.SessionKeyAccessor;
 import com.feilong.core.TimeInterval;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 @ContextConfiguration(locations = { "classpath*:applicationContext-alltag.xml" })
 public class AllTagTest extends AbstractJUnit4SpringContextTests{

@@ -30,7 +30,7 @@ import javax.mail.search.SearchTerm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailInfo;
 import com.feilong.net.mail.entity.MailReaderConfig;
 import com.feilong.net.mail.exception.MailReaderException;

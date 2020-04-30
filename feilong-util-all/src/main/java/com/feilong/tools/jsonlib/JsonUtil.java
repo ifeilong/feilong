@@ -23,18 +23,18 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.json.jsonlib.JavaToJsonConfig;
-import com.feilong.json.jsonlib.JsonToJavaConfig;
-import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
-import com.feilong.json.lib.json.JSONArray;
-import com.feilong.json.lib.json.JSONObject;
+import com.feilong.json.JavaToJsonConfig;
+import com.feilong.json.JsonToJavaConfig;
+import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
+import com.feilong.lib.json.JSONArray;
+import com.feilong.lib.json.JSONObject;
 
 /**
  * The Class JsonUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
- * @deprecated 保留只为兼容,pls use {@link com.feilong.json.jsonlib.JsonUtil}
+ * @deprecated 保留只为兼容,pls use {@link com.feilong.json.JsonUtil}
  */
 @Deprecated
 public final class JsonUtil{
@@ -111,11 +111,11 @@ public final class JsonUtil{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#format(Object)}
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#format(Object)}
      */
     @Deprecated
     public static String format(Object obj){
-        return com.feilong.json.jsonlib.JsonUtil.format(obj);
+        return com.feilong.json.JsonUtil.format(obj);
     }
 
     /**
@@ -147,11 +147,11 @@ public final class JsonUtil{
      *            the input map
      * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.3.0
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#formatSimpleMap(Map)}
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#formatSimpleMap(Map)}
      */
     @Deprecated
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
-        return com.feilong.json.jsonlib.JsonUtil.formatSimpleMap(inputMap);
+        return com.feilong.json.JsonUtil.formatSimpleMap(inputMap);
     }
 
     /**
@@ -186,11 +186,11 @@ public final class JsonUtil{
      * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.3.0
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use
-     *             {@link com.feilong.json.jsonlib.JsonUtil#formatSimpleMap(Map, Class...)}
+     *             {@link com.feilong.json.JsonUtil#formatSimpleMap(Map, Class...)}
      */
     @Deprecated
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
-        return com.feilong.json.jsonlib.JsonUtil.formatSimpleMap(inputMap, allowFormatClassTypes);
+        return com.feilong.json.JsonUtil.formatSimpleMap(inputMap, allowFormatClassTypes);
     }
 
     /**
@@ -253,11 +253,11 @@ public final class JsonUtil{
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use
-     *             {@link com.feilong.json.jsonlib.JsonUtil#format(Object, String[])}
+     *             {@link com.feilong.json.JsonUtil#format(Object, String[])}
      */
     @Deprecated
     public static String format(Object obj,String[] excludes){
-        return com.feilong.json.jsonlib.JsonUtil.format(obj, excludes);
+        return com.feilong.json.JsonUtil.format(obj, excludes);
     }
 
     /**
@@ -312,12 +312,12 @@ public final class JsonUtil{
      *            the indent
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#format(Object, String[],
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#format(Object, String[],
      *             int, int)}
      */
     @Deprecated
     public static String format(Object obj,String[] excludes,int indentFactor,int indent){
-        return com.feilong.json.jsonlib.JsonUtil.format(obj, excludes, indentFactor, indent);
+        return com.feilong.json.JsonUtil.format(obj, excludes, indentFactor, indent);
     }
 
     /**
@@ -368,11 +368,11 @@ public final class JsonUtil{
      * @see #format(Object, JavaToJsonConfig)
      * @since 1.0.8
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use
-     *             {@link com.feilong.json.jsonlib.JsonUtil#formatWithIncludes(Object, String...)}
+     *             {@link com.feilong.json.JsonUtil#formatWithIncludes(Object, String...)}
      */
     @Deprecated
     public static String formatWithIncludes(Object obj,final String...includes){
-        return com.feilong.json.jsonlib.JsonUtil.formatWithIncludes(obj, includes);
+        return com.feilong.json.JsonUtil.formatWithIncludes(obj, includes);
     }
 
     /**
@@ -425,12 +425,12 @@ public final class JsonUtil{
      *            the indent
      * @return the string
      * @since 1.2.2
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#format(Object, int,
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#format(Object, int,
      *             int)}
      */
     @Deprecated
     public static String format(Object obj,int indentFactor,int indent){
-        return com.feilong.json.jsonlib.JsonUtil.format(obj, indentFactor, indent);
+        return com.feilong.json.JsonUtil.format(obj, indentFactor, indent);
     }
 
     /**
@@ -488,12 +488,12 @@ public final class JsonUtil{
      *            the json format config
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.2.2
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#format(Object,
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#format(Object,
      *             JavaToJsonConfig)}
      */
     @Deprecated
     public static String format(Object obj,JavaToJsonConfig javaToJsonConfig){
-        return com.feilong.json.jsonlib.JsonUtil.format(obj, javaToJsonConfig);
+        return com.feilong.json.JsonUtil.format(obj, javaToJsonConfig);
     }
 
     /**
@@ -509,28 +509,28 @@ public final class JsonUtil{
      *            the indent
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.2.2
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#format(Object,
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#format(Object,
      *             JavaToJsonConfig, int, int)}
      */
     @Deprecated
     public static String format(Object obj,JavaToJsonConfig javaToJsonConfig,int indentFactor,int indent){
-        return com.feilong.json.jsonlib.JsonUtil.format(obj, javaToJsonConfig, indentFactor, indent);
+        return com.feilong.json.JsonUtil.format(obj, javaToJsonConfig, indentFactor, indent);
     }
 
     /**
      * since 1.10.7 change package 'com.feilong.json', pls use
-     * {@link com.feilong.json.jsonlib.JsonUtil#formatObjectFieldsNameAndValueMap(Object)}.
+     * {@link com.feilong.json.JsonUtil#formatObjectFieldsNameAndValueMap(Object)}.
      *
      * @param obj
      *            可以是Java bean
      * @return the string
      * @since 1.5.6
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use
-     *             {@link com.feilong.json.jsonlib.JsonUtil#formatObjectFieldsNameAndValueMap(Object)}
+     *             {@link com.feilong.json.JsonUtil#formatObjectFieldsNameAndValueMap(Object)}
      */
     @Deprecated
     public static String formatObjectFieldsNameAndValueMap(Object obj){
-        return com.feilong.json.jsonlib.JsonUtil.formatObjectFieldsNameAndValueMap(obj);
+        return com.feilong.json.JsonUtil.formatObjectFieldsNameAndValueMap(obj);
     }
 
     // [end]
@@ -632,17 +632,17 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
-     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
+     * @see com.feilong.lib.json.JSONArray#fromObject(Object)
+     * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toArray(Object,
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toArray(Object,
      *             JsonToJavaConfig)}
      */
     @Deprecated
     public static <T> T[] toArray(Object json,JsonToJavaConfig jsonToJavaConfig){
-        return com.feilong.json.jsonlib.JsonUtil.toArray(json, jsonToJavaConfig);
+        return com.feilong.json.JsonUtil.toArray(json, jsonToJavaConfig);
     }
 
     // [end]
@@ -702,11 +702,11 @@ public final class JsonUtil{
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(Object, JsonToJavaConfig)
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toList(Object, Class) }
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toList(Object, Class) }
      */
     @Deprecated
     public static <T> List<T> toList(Object json,Class<T> rootClass){
-        return com.feilong.json.jsonlib.JsonUtil.toList(json, rootClass);
+        return com.feilong.json.JsonUtil.toList(json, rootClass);
     }
 
     /**
@@ -782,15 +782,15 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
-     * @see com.feilong.json.lib.json.JSONArray#getJSONObject(int)
-     * @see com.feilong.json.lib.json.JSONArray#fromObject(Object)
+     * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
+     * @see com.feilong.lib.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toList(Object,
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toList(Object,
      *             JsonToJavaConfig)}
      */
     @Deprecated
     public static <T> List<T> toList(Object json,JsonToJavaConfig jsonToJavaConfig){
-        return com.feilong.json.jsonlib.JsonUtil.toList(json, jsonToJavaConfig);
+        return com.feilong.json.JsonUtil.toList(json, jsonToJavaConfig);
     }
 
     // [end]
@@ -866,11 +866,11 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
      * @see #toMap(Object, JsonToJavaConfig)
      * @since 1.5.0
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toMap(Object)}
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toMap(Object)}
      */
     @Deprecated
     public static <T> Map<String, T> toMap(Object json){
-        return com.feilong.json.jsonlib.JsonUtil.toMap(json);
+        return com.feilong.json.JsonUtil.toMap(json);
     }
 
     /**
@@ -926,16 +926,16 @@ public final class JsonUtil{
      *            the json to java config
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
-     * @see com.feilong.json.lib.json.JSONObject#keys()
+     * @see com.feilong.lib.json.JSONObject#keys()
      * @see #toBean(Object, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
      * @since 1.9.4
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toMap(Object,
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toMap(Object,
      *             JsonToJavaConfig)}
      */
     @Deprecated
     public static <T> Map<String, T> toMap(Object json,JsonToJavaConfig jsonToJavaConfig){
-        return com.feilong.json.jsonlib.JsonUtil.toMap(json, jsonToJavaConfig);
+        return com.feilong.json.JsonUtil.toMap(json, jsonToJavaConfig);
     }
 
     // [end]
@@ -991,11 +991,11 @@ public final class JsonUtil{
      * @return 如果<code>json</code> 是null,那么返回 null <br>
      *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toBean(Object, JsonToJavaConfig)
-     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.jsonlib.JsonUtil#toBean(Object, Class) }
+     * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toBean(Object, Class) }
      */
     @Deprecated
     public static <T> T toBean(Object json,Class<T> rootClass){
-        return com.feilong.json.jsonlib.JsonUtil.toBean(json, rootClass);
+        return com.feilong.json.JsonUtil.toBean(json, rootClass);
     }
 
     /**
@@ -1069,11 +1069,11 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.9.4
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use
-     *             {@link com.feilong.json.jsonlib.JsonUtil#toBean(Object, JsonToJavaConfig)}
+     *             {@link com.feilong.json.JsonUtil#toBean(Object, JsonToJavaConfig)}
      */
     @Deprecated
     public static <T> T toBean(Object json,JsonToJavaConfig jsonToJavaConfig){
-        return com.feilong.json.jsonlib.JsonUtil.toBean(json, jsonToJavaConfig);
+        return com.feilong.json.JsonUtil.toBean(json, jsonToJavaConfig);
     }
 
     // [end]

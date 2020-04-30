@@ -41,7 +41,7 @@ import com.feilong.formatter.builder.FormatterBuilder;
 import com.feilong.formatter.builder.FormatterBuilderFactory;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * Formatter相关父类.

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RandomUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * 订单编号生成器(要确保每个订单不编码不重复).

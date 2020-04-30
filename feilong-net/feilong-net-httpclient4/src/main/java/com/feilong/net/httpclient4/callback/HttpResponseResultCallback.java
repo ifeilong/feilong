@@ -35,14 +35,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.formatter.FormatterUtil;
-import com.feilong.json.jsonlib.JavaToJsonConfig;
-import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.json.jsonlib.processor.StringOverLengthJsonValueProcessor;
+import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
+import com.feilong.lib.json.processors.JsonValueProcessor;
+import com.feilong.json.JavaToJsonConfig;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.entity.ConnectionConfig;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.builder.HttpResponseUtil;
-
-import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * 用来解析 全数据 {@link com.feilong.net.entity.HttpResponse} 的 {@link ResultCallback}.

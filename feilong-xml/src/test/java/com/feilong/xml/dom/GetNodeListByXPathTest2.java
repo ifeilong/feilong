@@ -19,7 +19,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 

@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.filetransfer.AbstractFileTransfer;
 import com.feilong.net.filetransfer.FileTransferException;
 import com.feilong.tools.slf4j.Slf4jUtil;

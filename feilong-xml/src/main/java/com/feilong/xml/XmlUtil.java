@@ -45,7 +45,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.xml.xstream.XStreamBuilder;
 import com.feilong.xml.xstream.XStreamConfig;
 import com.feilong.xml.xstream.XStreamConfigBuilder;

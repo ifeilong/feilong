@@ -20,7 +20,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.SessionFactory;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.exception.MailSenderException;

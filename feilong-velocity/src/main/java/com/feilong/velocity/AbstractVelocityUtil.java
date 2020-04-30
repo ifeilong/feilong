@@ -31,7 +31,7 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 
 /**
  * base Velocity 工具类.

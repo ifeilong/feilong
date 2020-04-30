@@ -21,12 +21,10 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JavaToJsonConfig;
-import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.json.jsonlib.processor.CapitalizePropertyNameProcessor;
+import com.feilong.json.processor.CapitalizePropertyNameProcessor;
+import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
-
-import net.sf.json.processors.PropertyNameProcessor;
 
 public class CrmAddpointCommandJsonTest extends AbstractTest{
 

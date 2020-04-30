@@ -17,7 +17,7 @@ package com.feilong.taglib.display.pager.command;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
 /**

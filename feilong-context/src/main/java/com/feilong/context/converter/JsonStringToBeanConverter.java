@@ -15,8 +15,8 @@
  */
 package com.feilong.context.converter;
 
-import com.feilong.json.jsonlib.JsonToJavaConfig;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonToJavaConfig;
+import com.feilong.json.JsonUtil;
 
 /**
  * json的转换.

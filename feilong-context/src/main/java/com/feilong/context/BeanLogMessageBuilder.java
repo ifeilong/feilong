@@ -20,7 +20,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.lang.reflect.FieldUtil;
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

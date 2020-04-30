@@ -20,7 +20,7 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.now;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
 import com.feilong.store.member.UserInfo;

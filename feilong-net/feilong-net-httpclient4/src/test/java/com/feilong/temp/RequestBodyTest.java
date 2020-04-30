@@ -19,7 +19,7 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.HttpMethodType;
 import com.feilong.net.entity.HttpRequest;
 import com.feilong.net.httpclient4.HttpClientUtil;

@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
 public class CartesianProductUtilTest extends AbstractTest{
