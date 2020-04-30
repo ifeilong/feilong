@@ -4,7 +4,7 @@
 		<block start="A3" end="C3">
 			<cell position="C3" dataName="code" mandatory="true" />
 		</block>
-		<block start="A7" end="Y7" dataName="skulist" loop="true" loopClass="com.erry.service.master.SkuUploadCommand">
+		<block start="A7" end="Y7" dataName="skulist" loop="true" loopClass="com.feilong.service.master.SkuUploadCommand">
 			<cell position="A7" dataName="manufacture.code" />
 			<cell position="B7" dataName="supplier.code" mandatory="true" />
 			<cell position="C7" dataName="code" mandatory="true" />
@@ -12,22 +12,7 @@
 			<cell position="E7" dataName="name" mandatory="true" />
 			<cell position="F7" dataName="logisticType" mandatory="true" choice="01" />
 			<cell position="G7" dataName="reserved1" mandatory="true" />
-			<cell position="H7" dataName="reserved2" />
-			<cell position="I7" dataName="reserved3" />
-			<cell position="J7" dataName="reserved11" />
-			<cell position="K7" dataName="reserved12" />
-			<cell position="L7" dataName="reserved13" />
-			<cell position="M7" dataName="reserved14" />
-			<cell position="N7" dataName="reserved4" />
-			<cell position="O7" dataName="hugePic2" />
-			<cell position="P7" dataName="hugePic3" />
-			<cell position="Q7" dataName="hugePic4" />
-			<cell position="R7" dataName="hugePic5" />
-			<cell position="S7" dataName="supplierSkuCode" mandatory="true" />
 			<cell position="T7" dataName="grossWeight" />
-			<cell position="U7" dataName="netWeight" />
-			<cell position="V7" dataName="length" />
-			<cell position="W7" dataName="width" />
 			<cell position="X7" dataName="height" />
 			<cell position="Y7" dataName="lifeCycleStatus" mandatory="true" choice="0,1,5" />
 		</block>
@@ -39,104 +24,9 @@
 		</block>
 		<block start="A4" end="Z6" loop="true" dataName="list">
 			<childblock start="Z4" dataName="fieldlist">
-				<cell position="Z4" dataName="dataType" />
 				<cell position="Z5" dataName="name" />
 				<cell position="Z6" dataName="=VLOOKUP(Z4,Sheet2!$A$1:$B$15,2,FALSE)" />
 			</childblock>
-		</block>
-	</sheet>
-	<sheet name="skucostdownload">
-		<block start="A4" end="I4" dataName="list" loop="true" loopClass="com.erry.service.master.SkuCostCommand">
-			<cell position="A4" dataName="code" />
-			<cell position="B4" dataName="supplierName" />
-			<cell position="C4" dataName="supplierSkuCode" />
-			<cell position="D4" dataName="name" />
-			<cell position="E4" dataName="lifeCycleStatusName" />
-			<cell position="F4" dataName="fob" mandatory="true" />
-			<cell position="G4" dataName="sundry" mandatory="true" />
-			<cell position="H4" dataName="listPrice" mandatory="true" />
-			<cell position="I4" dataName="currencyName" />
-		</block>
-	</sheet>
-
-	<sheet name="memberupload">
-		<block start="A2" end="E2" dataName="memberlist" loop="true" loopClass="com.erry.service.member.MemberImportCommand">
-			<cell position="A2" dataName="loginName" />
-			<cell position="B2" dataName="passWord" />
-			<cell position="C2" dataName="realName" />
-			<cell position="D2" dataName="telePhone" />
-			<cell position="E2" dataName="mobile" />
-		</block>
-	</sheet>
-
-	<sheet name="cashcardexport">
-		<block start="A2" end="I2" dataName="list" loop="true" loopClass="com.erry.model.master.CashCard">
-			<cell position="A2" dataName="code" />
-			<cell position="B2" dataName="pwd" />
-			<cell position="C2" dataName="useLimit" />
-			<cell position="D2" dataName="cardTypeName" />
-			<cell position="E2" dataName="lifeCycleStatusName" />
-			<cell position="F2" dataName="createTime" />
-			<cell position="G2" dataName="expireTime" />
-			<cell position="H2" dataName="name" />
-			<cell position="I2" dataName="description" />
-		</block>
-	</sheet>
-
-	<sheet name="skuspgroupdownload">
-		<block start="A4" end="D4" dataName="splist" loop="true" loopClass="com.erry.service.master.SkuSpCommand">
-			<cell position="A4" dataName="code" />
-			<cell position="B4" dataName="name" />
-			<cell position="C4" dataName="listPrice" />
-			<cell position="D4" dataName="unitPrice" mandatory="true" />
-		</block>
-	</sheet>
-
-
-	<sheet name="skuCategoryupload">
-		<block start="A2" end="A2" dataName="pastelist" loop="true" loopClass="com.erry.model.master.Sku">
-			<cell position="A2" dataName="code" />
-		</block>
-	</sheet>
-
-	<sheet name="skunostoragedownload">
-		<block start="A2" end="D2" loop="true" dataName="skulist" loopClass="com.erry.service.report.command.SkuNoStorageCommand">
-			<cell position="A2" dataName="code" />
-			<cell position="B2" dataName="skuName" />
-			<cell position="C2" dataName="color" />
-			<cell position="D2" dataName="skuSize" />
-		</block>
-	</sheet>
-
-	<sheet name="skunostoragesubdownload">
-		<block start="A2" end="C2" loop="true" dataName="skusublist" loopClass="com.erry.service.report.command.SkuNoStorageCommand">
-			<cell position="A2" dataName="code" />
-			<cell position="B2" dataName="skuSize" />
-			<cell position="C2" dataName="upc" />
-		</block>
-	</sheet>
-
-	<sheet name="areaDateupload">
-		<block start="A3" end="D3" dataName="arealist" loop="true" loopClass="com.erry.model.system.Area">
-			<cell position="A3" dataName="country" />
-			<cell position="B3" dataName="province" />
-			<cell position="C3" dataName="city" />
-			<cell position="D3" dataName="district" />
-		</block>
-	</sheet>
-
-	<sheet name="soTransCodeupload">
-		<block start="A2" end="C2" dataName="list" loop="true">
-			<cell position="A2" dataName="salesOrderCode" type="string" />
-			<cell position="B2" dataName="transCode" type="string" />
-			<cell position="C2" dataName="transType" type="string" />
-		</block>
-	</sheet>
-
-	<sheet name="memberCarddownload">
-		<block start="A2" end="B2" dataName="cardlist" loop="true">
-			<cell position="A2" dataName="cardNo" type="string" />
-			<cell position="B2" dataName="tokenStr" type="string" />
 		</block>
 	</sheet>
 
@@ -145,13 +35,9 @@
 			<cell position="B1" dataName="fromDate" />
 			<cell position="D1" dataName="toDate" />
 		</block>
-		<block start="A3" end="J3" loop="true" dataName="accountlist" loopClass="com.erry.service.report.command.SoInvoiceCommand">
+		<block start="A3" end="J3" loop="true" dataName="accountlist" loopClass="com.feilong.service.report.command.SoInvoiceCommand">
 			<cell position="A3" dataName="skuName" />
 			<cell position="B3" dataName="skuCode" />
-			<cell position="C3" dataName="skuListPrice" />
-			<cell position="D3" dataName="suggestedretailPrice" />
-			<cell position="E3" dataName="sapDivision" />
-			<cell position="F3" dataName="categoryCode" />
 			<cell position="G3" dataName="Memo" />
 			<cell position="H3" dataName="unitPrice" />
 			<cell position="I3" dataName="confirmedQty" />
@@ -168,76 +54,33 @@
 			<cell position="B1" dataName="fromDate" />
 			<cell position="D1" dataName="toDate" />
 		</block>
-		<block start="A3" end="AJ3" loop="true" dataName="headlist" loopClass="com.erry.service.report.command.SoStatMonthCommand">
+		<block start="A3" end="AJ3" loop="true" dataName="headlist" loopClass="com.feilong.service.report.command.SoStatMonthCommand">
 			<cell position="A3" dataName="salCode" />
 			<cell position="B3" dataName="createTime" />
 			<!-- 付款时间 -->
 			<cell position="C3" dataName="commitTime" />
 			<cell position="D3" dataName="deliveryTime" />
-			<cell position="E3" dataName="province" />
-			<cell position="F3" dataName="city" />
-			<cell position="G3" dataName="address" />
-			<cell position="H3" dataName="lastreceiveTime" />
-			<cell position="I3" dataName="cancelTime" />
-			<cell position="J3" dataName="transCode" />
-			<cell position="K3" dataName="sysCancelReason" />
-			<cell position="L3" dataName="statusName" />
-			<cell position="M3" dataName="paytypeName" />
-			<cell position="N3" dataName="pmDiscount" />
-			<cell position="O3" dataName="totalActual" />
-			<cell position="P3" dataName="totalActual_afterDiscount" />
-			<cell position="Q3" dataName="actualTransferFee" />
 			<cell position="R3" dataName="=O3+Q3" />
 			<cell position="S3" dataName="paymentType" />
 			<cell position="T3" dataName="discount" />
-			<cell position="V3" dataName="transportator" />
-			<cell position="X3" dataName="roCode" />
-			<!-- 确认收货时间-发货时间  -->
-			<cell position="Y3" dataName="confirmTime" />
-			<cell position="AC3" dataName="idealityDeliveryTime" />
-			<!-- 商品订购件数  -->
+			<!-- 确认收货时间-发货时间 -->
+			<!-- 商品订购件数 -->
 			<cell position="AG3" dataName="requestQty" />
-			<!-- 是否全退  -->
+			<!-- 是否全退 -->
 			<cell position="AJ3" dataName="isFullyReturn" />
-			<!-- 订单签收时间  -->
+			<!-- 订单签收时间 -->
 			<cell position="AK3" dataName="signTime" />
 		</block>
 	</sheet>
 
-	<sheet name="salesOrderLinedownload">
-		<block start="A2" end="V2" loop="true" dataName="linelist" loopClass="com.erry.service.report.command.SalesSolineCommand">
-			<cell position="A2" dataName="Code" />
-			<cell position="B2" dataName="skuName" />
-			<cell position="C2" dataName="skuCode" />
-			<cell position="D2" dataName="Memo" />
-			<cell position="E2" dataName="suggestedretailPrice" />
-			<cell position="F2" dataName="category1" />
-			<cell position="G2" dataName="category2	" />
-			<cell position="H2" dataName="category3" />
-			<cell position="I2" dataName="category4" />
-			<cell position="J2" dataName="priceBfDiscount" />
-			<cell position="K2" dataName="unitPrice" />
-			<cell position="L2" dataName="confirmedQty" />
-			<cell position="M2" dataName="departure" />
-			<cell position="N2" dataName="preferential" />
-			<cell position="O2" dataName="prepaidCardTotal" />
-			<cell position="Q2" dataName="totalActual" />
-			<cell position="R2" dataName="prepaidCard" />
-			<cell position="S2" dataName="prepaidCardDiscount" />
-			<cell position="T2" dataName="promotionMatching" />
-		</block>
-	</sheet>
 
 	<sheet name="transFeeupload">
 		<block start="A2" end="C2">
 			<cell position="C2" dataName="transferType" />
 		</block>
-		<block start="A5" end="E5" dataName="transfeelist" loop="true" loopClass="com.erry.model.master.TransferFee">
+		<block start="A5" end="E5" dataName="transfeelist" loop="true" loopClass="com.feilong.model.master.TransferFee">
 			<cell position="A5" dataName="province" mandatory="true" />
 			<cell position="B5" dataName="city" />
-			<cell position="C5" dataName="district" />
-			<cell position="D5" dataName="transferFee" />
-			<cell position="E5" dataName="codPlus" />
 		</block>
 	</sheet>
 
@@ -246,208 +89,49 @@
 			<cell position="B1" dataName="fromDate" />
 			<cell position="D1" dataName="toDate" />
 		</block>
-		<block start="A3" end="U3" loop="true" dataName="rolist" loopClass="com.erry.service.report.command.SoReturnReportCommand">
+		<block start="A3" end="U3" loop="true" dataName="rolist" loopClass="com.feilong.service.report.command.SoReturnReportCommand">
 			<cell position="A3" dataName="returnCode" />
-			<cell position="B3" dataName="inboundTime" />
-			<cell position="C3" dataName="approvedTime" />
-			<cell position="D3" dataName="refundFinishTime" />
 			<cell position="E3" dataName="oldCode" />
-			<cell position="F3" dataName="backTotalAcutal" />
-			<!--退货金额（预付卡折后价）			-->
-			<cell position="T3" dataName="backTotalAcutal_discount" />
-			<cell position="H3" dataName="returnReason" />
-			<cell position="I3" dataName="newCode" />
-			<cell position="J3" dataName="newTotalActual" />
-			<!--新订单金额（预付卡折后价）-->
-			<cell position="K3" dataName="newTotalActual_discount" />
-			<cell position="L3" dataName="payTypeName" />
-			<cell position="M3" dataName="onlineTotal" />
-			<cell position="N3" dataName="prepaidCardTotal" />
-			<cell position="O3" dataName="originalOrderTotal" />
-			<cell position="P3" dataName="originalOrderTotal_discount" />
-			<cell position="Q3" dataName="payTypeName" />
-			<cell position="R3" dataName="returnPay" />
-			<cell position="S3" dataName="paymentTypeName" />
-			<!-- 原始订单创建时间 -->
-			<cell position="U3" dataName="oldTime" />
-		</block>
-	</sheet>
-
-	<sheet name="soReturnOrderLinedownload">
-		<block start="A2" end="T2" loop="true" dataName="rolinelist" loopClass="com.erry.service.report.command.SalesSolineCommand">
-			<cell position="A2" dataName="Code" />
-			<cell position="B2" dataName="skuName" />
-			<cell position="C2" dataName="skuCode" />
-			<cell position="D2" dataName="Memo" />
-			<cell position="E2" dataName="suggestedretailPrice" />
-			<cell position="F2" dataName="sapDivision" />
-			<cell position="G2" dataName="categoryCode" />
-			<cell position="H2" dataName="priceBfDiscount" />
-			<cell position="I2" dataName="unitPrice" />
-			<cell position="J2" dataName="confirmedQty" />
-			<cell position="K2" dataName="departure" />
-			<cell position="L2" dataName="preferential" />
-			<cell position="M2" dataName="prepaidCardTotal" />
-			<cell position="O2" dataName="totalActual" />
-			<cell position="P2" dataName="prepaidCard" />
-			<cell position="Q2" dataName="prepaidCardDiscount" />
-			<cell position="R2" dataName="promotionMatching" />
-			<!-- <cell position="P2" dataName="customerTypes" /> -->
-
 		</block>
 	</sheet>
 
 	<sheet name="createHtmlFile">
 		<block start="C4" end="C8">
 			<cell position="C4" dataName="stytleNo" />
-			<cell position="C6" dataName="name" />
-			<cell position="C8" dataName="feature" />
 		</block>
-		<block start="C10" end="C10" loop="true" dataName="htmlList" loopClass="com.erry.service.report.command.CreateHtmlCommand">
+		<block start="C10" end="C10" loop="true" dataName="htmlList" loopClass="com.feilong.service.report.command.CreateHtmlCommand">
 			<cell position="C10" dataName="spec" />
 		</block>
 	</sheet>
 
-	<sheet name="importRepertory">
-		<block start="A2" end="B2" loop="true" dataName="repertoryList" loopClass="com.erry.model.master.SkuInventory">
-			<cell position="A2" dataName="upc" mandatory="true" />
-			<cell position="B2" dataName="availableQty" mandatory="true" />
-		</block>
-	</sheet>
-
-   <sheet name="importGroupWmsRepertoryReader">
-   	  <block start="A2"  end="D2" loop="true" dataName="groupWmsRepertoryList" loopClass="com.erry.service.report.command.SkuInventoryAttachmentCommand">
-            <cell position="A2" dataName="skuCode"  mandatory="true" />  	  	
-            <cell position="B2" dataName="sizeRef"  mandatory="true" />  	  	
-            <cell position="C2" dataName="upc"  mandatory="true" />  	  	
-           <cell position="D2" dataName="availableQty"  mandatory="true" />  	  	
-     </block>
-   </sheet>
-  
-
-
-   <sheet name="importFinanceAmount">
-   	  <block start="A2"  end="B2" loop="true" dataName="soFinanceList" loopClass="com.erry.service.report.command.SoFinanceAmountCommand">
-            <cell position="A2" dataName="code"  mandatory="true" />  	  	
-            <cell position="B2" dataName="financeAmount"  mandatory="true" />  	  	  	
-     </block>
-   </sheet>
-
 
 	<sheet name="importWMSRepertory">
-		<block start="A8" end="E8" loop="true" dataName="wmsRepertoryList" loopClass="com.erry.service.report.command.ImportWMSRepertoryCommand">
+		<block start="A8" end="E8" loop="true" dataName="wmsRepertoryList" loopClass="com.feilong.service.report.command.ImportWMSRepertoryCommand">
 			<cell position="A8" dataName="code" mandatory="true" />
 			<cell position="B8" dataName="upc" mandatory="true" />
-			<cell position="C8" dataName="act" mandatory="true" />
-			<cell position="D8" dataName="avail" mandatory="true" />
-			<cell position="E8" dataName="state" mandatory="true" />
 			<loopbreakcondition rowOffset="0" colOffset="1">合计：</loopbreakcondition>
 		</block>
 	</sheet>
-	
+
 	<sheet name="importPosRepertory">
-		<block start="A9" end="B9" loop="true" dataName="posRepertoryList" loopClass="com.erry.service.report.command.ReplenishmentCommand">
+		<block start="A9" end="B9" loop="true" dataName="posRepertoryList" loopClass="com.feilong.service.report.command.ReplenishmentCommand">
 			<cell position="A9" dataName="sku" mandatory="true" />
 			<cell position="B9" dataName="shippCount" mandatory="true" />
 			<cell position="D9" dataName="actualCount" mandatory="true" />
 			<loopbreakcondition rowOffset="0" colOffset="0">合计</loopbreakcondition>
 		</block>
 	</sheet>
-	<sheet name="soRepertoryInfo">
-		<block start="A2" end="G2" dataName="datalist" loop="true" loopClass="com.erry.service.report.command.ImportWMSRepertoryCommand">
-			<cell position="A2" dataName="codeKh" />
-			<cell position="B2" dataName="codeSize" />
-			<cell position="C2" dataName="grade" />
-			<cell position="D2" dataName="act" />
-			<cell position="E2" dataName="avail" />
-			<cell position="F2" dataName="intransit" />
-			<cell position="G2" dataName="bu" />
-		</block>
-	</sheet>
-
-	<sheet name="replenishmentInfo">
-		<block start="A2" end="J2" dataName="replist" loop="true" loopClass="com.erry.service.report.command.ReplenishmentCommand">
-			<cell position="A2" dataName="category" />
-			<cell position="B2" dataName="sku" />
-			<cell position="C2" dataName="description" />
-			<cell position="D2" dataName="bu" />
-			<cell position="E2" dataName="shippedQty" />
-			<cell position="F2" dataName="shellThrough" />
-			<cell position="G2" dataName="wos" />
-			<cell position="H2" dataName="status" />
-			<cell position="I2" dataName="sizes" />
-			<cell position="J2" dataName="qty" />
-			<cell position="K2" dataName="sku_color_size" />
-		</block>
-	</sheet>
-	<sheet name="soRepertoryStatdownload">
-		<block start="A2" end="G2" dataName="statlist" loop="true" loopClass="com.erry.service.report.command.RepertoryStatCommand">
-			<cell position="A2" dataName="skuName" />
-			<cell position="B2" dataName="skuCode" />
-			<cell position="C2" dataName="Memo" />
-			<cell position="D2" dataName="" />
-			<cell position="E2" dataName="confirmedQty" />
-			<cell position="F2" dataName="sapDivision" />
-			<cell position="G2" dataName="categoryCode" />
-		</block>
-	</sheet>
 
 	<sheet name="importOverSize">
-		<block start="A2" end="D2" loop="true" dataName="sizelist" loopClass="com.erry.model.system.SizeRef">
+		<block start="A2" end="D2" loop="true" dataName="sizelist" loopClass="com.feilong.model.system.SizeRef">
 			<cell position="A2" dataName="size" mandatory="true" />
 			<cell position="B2" dataName="category" mandatory="true" />
 			<cell position="C2" dataName="gender" />
 			<cell position="D2" dataName="ref" />
 		</block>
 	</sheet>
-	<sheet name="importOrderInfo">
-		<block start="A2" end="O2" dataName="list" loop="true" loopClass="com.erry.service.report.command.SoInfoReportCommand">
-			<cell position="A2" dataName="code" />
-			<cell position="B2" dataName="createTime" />
-			<cell position="C2" dataName="paymentCompleteTime" />
-			<cell position="D2" dataName="deliveryTime" />
-			<cell position="E2" dataName="province" />
-			<cell position="F2" dataName="city" />
-			<cell position="G2" dataName="address" mandatory="true" />
-			<cell position="H2" dataName="lastReceiveTime" mandatory="true" />
-			<cell position="I2" dataName="transCode" mandatory="true" />
-			<cell position="J2" dataName="cancelTime" />
-			<cell position="K2" dataName="lifeStatusName" />
-			<cell position="L2" dataName="paymentName" />
-			<cell position="M2" dataName="totalActual" />
-			<cell position="N2" dataName="actualTransferFee" />
-			<cell position="O2" dataName="=M2+N2" />
-		</block>
-	</sheet>
-    <sheet name="importCodInfo">
-		<block start="A2" end="O2" dataName="list" loop="true" loopClass="com.erry.service.report.command.CodInfoReportCommand">
-			<cell position="A2" dataName="id" />
-			<cell position="B2" dataName="store" />
-			<cell position="C2" dataName="code" />
-			<cell position="D2" dataName="transCode" />
-			<cell position="E2" dataName="transportator" />
-			<cell position="F2" dataName="deliveryTime" />
-			<cell position="G2" dataName="codtotalActual"  />
-			<cell position="H2" dataName="lastReceiveTime"  />
-			<cell position="I2" dataName="status"/>
-			<cell position="J2" dataName="financeStatus" />
-			<cell position="K2" dataName="totalActual" />
-		</block>
-	</sheet>
-	<sheet name="importCommentInfo">
-		<block start="A2" end="G2" dataName="list" loop="true" loopClass="com.erry.service.report.command.CommentInfoReportCommand">
-			<cell position="A2" dataName="skuCode" />
-			<cell position="B2" dataName="skuName" />
-			<cell position="C2" dataName="commentTitle" />
-			<cell position="D2" dataName="commentContent" />
-			<cell position="E2" dataName="loginName" />
-			<cell position="F2" dataName="createTime" />
-			<cell position="G2" dataName="lifeStatusName" />
-		</block>
-	</sheet>
 
 	<!-- so reconciliations start -->
-	<!---->
 	<sheet name="soReconciliationsSummaryDownload">
 		<block start="A3" end="C3">
 			<cell position="A3" dataName="dataScrope" />
@@ -460,169 +144,9 @@
 		</block>
 	</sheet>
 
-
-	<sheet name="soReconciliationsActualListDownload">
-		<block start="A2" end="J2" dataName="actuallist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="wcsj" />
-			<cell position="D2" dataName="je" />
-			<cell position="E2" dataName="yfkzh" />
-			<cell position="F2" dataName="xgdd" />
-			<cell position="H2" dataName="fkfs" />
-			<cell position="I2" dataName="wlgs" />
-		</block>
-	</sheet>
-
-	<sheet name="soReconciliationsCODDownload">
-		<block start="A2" end="J2" dataName="codlist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="wcsj" />
-			<cell position="D2" dataName="je" />
-			<cell position="E2" dataName="yfkzh" />
-			<cell position="F2" dataName="xgdd" />
-			<cell position="H2" dataName="fkfs" />
-			<cell position="I2" dataName="wlgs" />
-		</block>
-	</sheet>
-
-	<sheet name="soReconciliationsPrepaidCardDownload">
-		<block start="A2" end="J2" dataName="prepaidcardlist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="wcsj" />
-			<cell position="D2" dataName="je" />
-			<cell position="E2" dataName="yfkzh" />
-			<cell position="F2" dataName="xgdd" />
-			<cell position="H2" dataName="fkfs" />
-			<cell position="I2" dataName="wlgs" />
-		</block>
-	</sheet>
-
-
-	<sheet name="soReconciliationsActualParDownload">
-		<block start="A2" end="G2" dataName="actualparlist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="spbm" />
-			<cell position="C2" dataName="spmc" />
-			<cell position="D2" dataName="cm" />
-			<cell position="E2" dataName="sl" />
-			<cell position="F2" dataName="dj" />
-			<cell position="G2" dataName="zj" />
-		</block>
-	</sheet>
-
-	<sheet name="soReconciliationsPosListDownload">
-		<block start="A2" end="J2" dataName="poslist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="wcsj" />
-			<cell position="D2" dataName="je" />
-			<cell position="E2" dataName="yfkzh" />
-			<cell position="F2" dataName="xgdd" />
-			<cell position="H2" dataName="fkfs" />
-			<cell position="I2" dataName="wlgs" />
-			<cell position="K2" dataName="odtp" />
-			<!-- 
-			<cell position="E2" dataName="wcrq" />
-			 -->
-		</block>
-	</sheet>
-
-	<sheet name="soReconciliationsPosParDownload">
-		<block start="A2" end="M2" dataName="posparlist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="spbm" />
-			<cell position="C2" dataName="spmc" />
-			<cell position="D2" dataName="cm" />
-			<cell position="E2" dataName="sl" />
-			<cell position="F2" dataName="dj" />
-			<cell position="G2" dataName="zje" />
-			<cell position="H2" dataName="wyzf" />
-			<cell position="I2" dataName="yfkzf" />
-			<cell position="J2" dataName="codjk" />
-			<cell position="K2" dataName="wlgs" />
-			<cell position="L2" dataName="fhsj" />
-			<cell position="M2" dataName="sksj" />
-		</block>
-	</sheet>
-
-	<sheet name="soReconciliationsSentDownload">
-		<block start="A2" end="G2" dataName="sentlist" loop="true" loopClass="com.erry.service.report.command.SoReconciliationsCommand">
-			<cell position="A2" dataName="ddbh" />
-			<cell position="B2" dataName="fhsj" />
-		</block>
-	</sheet>
-
-	<sheet name="soPrepaidCardDownload">
-		<block start="A2" end="U2" dataName="pclist" loop="true" loopClass="com.erry.service.report.command.SoPrepaidCardCommand">
-			<cell position="A2" dataName="kh" />
-			<cell position="B2" dataName="kmm" />
-			<cell position="C2" dataName="khmc" />
-			<cell position="D2" dataName="activationTime"/>
-			<cell position="E2" dataName="fkr" />
-			<cell position="F2" dataName="gqsj" />
-			<cell position="G2" dataName="yxqksr" />
-			<cell position="H2" dataName="dqr" />
-			<cell position="I2" dataName="status" />
-			<cell position="J2" dataName="pmje" />
-			<cell position="K2" dataName="=J2*L2" />
-			<cell position="L2" dataName="zkl" />
-			<cell position="M2" dataName="syrq" />
-			<cell position="N2" dataName="syddh" />
-			<cell position="P2" dataName="syjeZq" />
-			<cell position="Q2" dataName="currentValue" />
-			<cell position="R2" dataName="ddwlztMc" />
-			<cell position="S2" dataName="bussinesType" />
-			<cell position="T2" dataName="oldOrderCode" />
-			<cell position="U2" dataName="last_receive_time" />
-		</block>
-	</sheet>
-		<sheet name="soPrepaidCardLineDownload">
-		<block start="A2" end="N2" dataName="lnlist" loop="true" loopClass="com.erry.service.report.command.SoPrepaidCardLineCommand">
-		    <cell position="A2" dataName="kh" />
-			<cell position="B2" dataName="khmc" />
-			<cell position="C2" dataName="activationTime"/>
-			<cell position="D2" dataName="fkr" />
-			<cell position="E2" dataName="gqsj" />
-			<cell position="F2" dataName="yxqksr" />
-			<cell position="G2" dataName="dqr" />
-			<cell position="H2" dataName="status" />
-			<cell position="I2" dataName="pmje" />
-			<cell position="J2" dataName="=I2*K2" />
-			<cell position="K2" dataName="zkl" />
-			<cell position="L2" dataName="currentValue" />
-			<cell position="M2" dataName="cardAging" />
-			<cell position="N2" dataName="lastUsedTime" />
-		</block>
-	</sheet>
-	<sheet name="skuInventoryBySkuRead">
-		<block start="A2" end="A2" dataName="skuInventory" loop="true" loopClass="com.erry.service.report.command.SkuInventoryCommand">
-		    <cell position="A2" dataName="skuCode" />
-		</block>
-	</sheet>
-	<sheet name="skuInventorySnapshotReport">
-		<block start="A2" end="K2" dataName="skuInventory" loop="true" loopClass="com.erry.service.report.command.InventorySnapshotCommand">
-			<cell position="A2" dataName="skuCode" />
-			<cell position="B2" dataName="currentQty" />
-			<cell position="C2" dataName="initQty" />
-			<cell position="D2" dataName="supplementQty" />
-			<cell position="E2" dataName="backStorageQty" />
-			<cell position="F2" dataName="moveStorageQty" />
-			<cell position="G2" dataName="transitSalesQty" />
-			<cell position="H2" dataName="deliveriedQty" />
-			<cell position="I2" dataName="directlyFinishQty" />
-			<cell position="J2" dataName="transitFinishQty" />
-		</block>
-	</sheet>
-
-
-	<sheet name="skuCodeDownload">
-		<block start="A2" end="A2" dataName="skuCodeRefreshList" loop="true" loopClass="com.erry.model.master.Sku">
-			<cell position="A2" dataName="code" />
-		</block>
-	</sheet>
-
 	<!--**************** 上传流量******************** -->
 	<sheet name="flowUploadSheet">
-		<block start="A2" end="C2" dataName="flowList" loop="true" loopClass="com.erry.service.report.command.FlowCommand">
+		<block start="A2" end="C2" dataName="flowList" loop="true" loopClass="com.feilong.service.report.command.FlowCommand">
 			<cell position="A2" dataName="date" type="date" pattern="yyyy-MM-dd" />
 			<cell position="B2" dataName="flowNumber" />
 			<cell position="C2" dataName="adviceNumber" />
@@ -718,96 +242,19 @@
 		</block>
 	</sheet>
 
-	<!--**************** trackIngCode ******************** -->
-	<sheet name="exportSalesTrackIngCode">
-		<block start="A2" end="O2" dataName="list" loop="true" loopClass="com.erry.model.system.InternalCampaignTracking">
-			<cell position="A2" dataName="trackingCode" />
-			<cell position="B2" dataName="fileName" />
-			<cell position="C2" dataName="position" />
-			<cell position="D2" dataName="description" />
-			<cell position="E2" dataName="startDate" />
-			<cell position="F2" dataName="endDate" mandatory="true" />
-			<cell position="G2" dataName="ownerName" mandatory="true" />
-			<cell position="H2" dataName="category" mandatory="true" />
-			<cell position="I2" dataName="productType" />
-			<cell position="J2" dataName="creaTives" />
-			<cell position="K2" dataName="productModel" />
-			<cell position="L2" dataName="seasonality" />
-			<cell position="M2" dataName="discount" />
-			<cell position="N2" dataName="fileFormat" />
-			<cell position="O2" dataName="agency" />
-		</block>
-	</sheet>
-
-
-
-	<!--****************到货通知******************** -->
-	<sheet name="exportMemberRplenishment">
-		<block start="A2" end="O2" dataName="list" loop="true" loopClass="com.erry.model.member.MemberReplenishment">
-			<cell position="A2" dataName="sku_code" />
-			<cell position="B2" dataName="size" />
-			<cell position="C2" dataName="create_time" />
-			<cell position="D2" dataName="finish_time" />
-			<cell position="E2" dataName="status " />
-			<cell position="F2" dataName="member_code" mandatory="true" />
-			<cell position="G2" dataName="user_name" mandatory="true" />
-			<cell position="H2" dataName="gender" mandatory="true" />
-			<cell position="I2" dataName="quantity" />
-			<cell position="J2" dataName="emai" />
-			<cell position="K2" dataName="mobile_phone" />
-		</block>
-	</sheet>
-
-
-	<!-- jdi商品积分导入 -->
-	<sheet name="jdiSkuIntegralReport">
-		<block start="A2" end="B2" dataName="jdiSkuList" loop="true" loopClass="com.erry.service.report.command.JDISkuCommand">
-			<cell position="A2" dataName="code" />
-			<cell position="B2" dataName="integral" />
-		</block>
-	</sheet>
-
-
 	<!--****************jdi商品限制******************** -->
 	<sheet name="jdiSkuIntegralIntReport">
-		<block start="A2" end="F2" dataName="interllist" loop="true" loopClass="com.erry.service.report.command.SkuJdiInternalCommand">
+		<block start="A2" end="F2" dataName="interllist" loop="true" loopClass="com.feilong.service.report.command.SkuJdiInternalCommand">
 			<cell position="A2" dataName="skuCode" />
-			<cell position="B2" dataName="skuSize" />
 			<cell position="C2" dataName="begin_time" type="date" pattern="yyyy-MM-dd HH:mm:ss" />
 			<cell position="D2" dataName="end_time" type="date" pattern="yyyy-MM-dd HH:mm:ss" />
-			<cell position="E2" dataName="count" />
-			<cell position="F2" dataName="type" />
 		</block>
 	</sheet>
+	<!--*************************************同步库存***************************************************** -->
 
-
-	<!--****************邮件发送数量******************** -->
-	<sheet name="exportMailSendLog">
-		<block start="A2" end="O2" dataName="list" loop="true" loopClass="com.erry.service.report.command.MailSendLogCommand">
-			<cell position="A2" dataName="name" />
-			<cell position="B2" dataName="allNum" />
-			<cell position="C2" dataName="sucNum" />
-		</block>
-	</sheet>
-
-	<!-- -->
-	<!-- so reconciliations end -->
-
-
-	<!--*************************************同步库存*****************************************************-->
-	<!--同步库存 概述  create by jinxin 2011-9-16 16:57-->
-	<sheet name="syscInventorySummaryDownload">
-		<block start="A1" end="E1">
-			<cell position="C1" dataName="beginTime" />
-			<cell position="C2" dataName="endTime" />
-			<cell position="C3" dataName="timeUse" />
-			<cell position="C5" dataName="wmsInventoryListCount" />
-		</block>
-	</sheet>
-
-	<!--未同步到库存OMS商品 create by jinxin 2011-9-16 16:57-->
+	<!--未同步到库存OMS商品 create by jinxin 2011-9-16 16:57 -->
 	<sheet name="syscInventoryOMSYesWMSNoDownload">
-		<block start="B3" end="C3" dataName="allOmsHasWmsNoList" loop="true" loopClass="com.erry.model.master.SkuInventory">
+		<block start="B3" end="C3" dataName="allOmsHasWmsNoList" loop="true" loopClass="com.feilong.model.master.SkuInventory">
 			<cell position="B3" dataName="upc" />
 			<cell position="C3" dataName="availableQty" />
 			<cell position="D3" dataName="sku.code" />
@@ -816,40 +263,12 @@
 		</block>
 	</sheet>
 
-	<!--WMS存在,OMS库存不存在的upc  create by jinxin 2011-9-22 09:29-->
-	<sheet name="syscInventoryWmsYesOmsNoDownload">
-		<block start="B3" end="C3" dataName="allWmsYesOmsNoList" loop="true" loopClass="com.erry.model.master.SkuInventory">
-			<cell position="B3" dataName="upc" />
-			<cell position="C3" dataName="availableQty" />
-		</block>
-	</sheet>
-
-	<!--wms为0,oms已上架sku code  create by jinxin 2011-9-22 10:22-->
+	<!--wms为0,oms已上架sku code create by jinxin 2011-9-22 10:22 -->
 	<sheet name="syscInventoryWmsZeroOmsSellingDownload">
-		<block start="B3" end="C3" dataName="allWmsZeroOmsSellingList" loop="true" loopClass="com.erry.model.master.SkuInventory">
+		<block start="B3" end="C3" dataName="allWmsZeroOmsSellingList" loop="true" loopClass="com.feilong.model.master.SkuInventory">
 			<cell position="B3" dataName="sku.code" />
 			<cell position="C3" dataName="sku.lifeCycleStatus" />
 			<cell position="D3" dataName="=VLOOKUP(C3,sku状态!$A$1:$B$3,2,false)" />
 		</block>
 	</sheet>
-
-	<sheet name="kpiReportDownload">
-		<block start="B4" end="H20">
-			<cell position="B4" dataName="sfOrderCount" />
-			<cell position="B5" dataName="emsOrderCount" />
-			<cell position="B6" dataName="otherOrderCount" />
-			<cell position="C4" dataName="sfOrderDelay" />
-			<cell position="C5" dataName="emsOrderDelay" />
-			<cell position="C6" dataName="otherOrderDelay" />
-			<cell position="D4" dataName="sfProductCount" />
-			<cell position="D5" dataName="emsProductCount" />
-			<cell position="D6" dataName="otherProductCount" />
-			<cell position="E4" dataName="sfProductDelay" />
-			<cell position="E5" dataName="emsProductDelay" />
-			<cell position="E6" dataName="otherProductDelay" />
-			<cell position="G20" dataName="inThisYearCount" />
-			<cell position="H20" dataName="inBeforeYearCount" />
-		</block>
-	</sheet>
-	<!--******************************************************************************************-->
 </sheets>

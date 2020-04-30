@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,7 @@ public class OgnlStack{
     //---------------------------------------------------------------
 
     /** The stack. */
-    private final List<Object>        stackList       = new ArrayList<>();
+    private final List<Object>        stackList   = new ArrayList<>();
 
     /** The context. */
     private final Map<String, Object> context;
@@ -125,7 +126,7 @@ public class OgnlStack{
                 }
                 return Ognl.getValue(getExpression(expr), context, obj);
             }catch (OgnlException e){
-
+                LOGGER.warn("expr:" + expr, e);
             }
         }
         return null;
@@ -143,9 +144,8 @@ public class OgnlStack{
      */
     public void setValue(String expr,Object value) throws OgnlException{
         Object root = stackList.get(0);
-        if (root == null){
-            throw new IllegalArgumentException();
-        }
+        Validate.notNull(root, "root can't be null!");
+
         Ognl.setValue(getExpression(expr), context, root, value);
     }
 
@@ -167,9 +167,7 @@ public class OgnlStack{
      * @return the object
      */
     public Object pop(){
-        if (stackList.size() == 0){
-            throw new RuntimeException("No elements to pop");
-        }
+        Validate.isTrue(stackList.size() > 0, "stackList.size() must > 0");
         return stackList.remove(0);
     }
 
@@ -179,11 +177,11 @@ public class OgnlStack{
      * @return the object
      */
     public Object peek(){
-        if (stackList.size() == 0){
-            throw new RuntimeException("No elements in stack");
-        }
+        Validate.isTrue(stackList.size() > 0, "stackList.size() must > 0");
         return stackList.get(0);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 添加 context.

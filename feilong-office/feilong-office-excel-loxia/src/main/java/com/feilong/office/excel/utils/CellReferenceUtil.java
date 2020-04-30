@@ -65,7 +65,10 @@ public class CellReferenceUtil{
      */
     public static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
         CellReference cellReference = new CellReference(cellIndex);
-        CellReference newCell = new CellReference(cellReference.getRow() + rowOffset, cellReference.getCol() + colOffset);
+
+        CellReference newCell = new CellReference(//
+                        cellReference.getRow() + rowOffset,
+                        cellReference.getCol() + colOffset);
         return newCell.formatAsString().replaceAll("\\$", "");
     }
 

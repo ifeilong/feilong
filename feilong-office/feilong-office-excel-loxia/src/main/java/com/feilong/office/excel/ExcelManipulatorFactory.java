@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.CloneUtil;
 
@@ -62,18 +63,23 @@ public class ExcelManipulatorFactory{
      *            the new config
      */
     public void setConfig(String...configurations){
-        try{
-            for (String config : configurations){
+        Validate.notEmpty(configurations, "configurations can't be null/empty!");
+
+        //---------------------------------------------------------------
+
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        Digester digester = DigesterLoader.createDigester(new InputSource(contextClassLoader.getResourceAsStream(RULE_FILE)));
+        digester.setValidating(false);
+
+        //---------------------------------------------------------------
+
+        for (String configuration : configurations){
+            Validate.notBlank(configuration, "config can't be blank!");
+            try{
                 Date beginDate = new Date();
+                List<ExcelSheet> excelSheetList = (List<ExcelSheet>) digester.parse(contextClassLoader.getResourceAsStream(configuration));
 
-                ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-                Digester digester = DigesterLoader.createDigester(new InputSource(contextClassLoader.getResourceAsStream(RULE_FILE)));
-                digester.setValidating(false);
-
-                List<ExcelSheet> list = (List<ExcelSheet>) digester.parse(contextClassLoader.getResourceAsStream(config));
-
-                for (ExcelSheet excelSheet : list){
+                for (ExcelSheet excelSheet : excelSheetList){
                     sheetDefinitions.put(excelSheet.getName(), excelSheet);
                 }
 
@@ -81,14 +87,13 @@ public class ExcelManipulatorFactory{
                 if (LOGGER.isDebugEnabled()){
                     LOGGER.debug(
                                     "parse config:[{}],list size:[{}],use time: [{}]",
-                                    config,
-                                    CollectionUtils.size(list),
+                                    configuration,
+                                    CollectionUtils.size(excelSheetList),
                                     formatDuration(beginDate));
                 }
-
+            }catch (Exception e){
+                throw new DefaultRuntimeException("parse [" + configuration + "] fail", e);
             }
-        }catch (Exception e){
-            throw new RuntimeException("Read excel config failed.", e);
         }
     }
 
@@ -152,6 +157,15 @@ public class ExcelManipulatorFactory{
 
     //---------------------------------------------------------------
 
+    /**
+     * Creates a new ExcelManipulator object.
+     *
+     * @param writeTemplateName
+     *            the write template name
+     * @param sheets
+     *            the sheets
+     * @return the excel writer
+     */
     private ExcelWriter createExcelWriterInner(String writeTemplateName,String...sheets){
         ExcelWriter excelWriter = new DefaultExcelWriter();
         excelWriter.setDefinition(toExcelManipulatorDefinition(sheets));
@@ -164,24 +178,35 @@ public class ExcelManipulatorFactory{
         return excelWriter;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a new ExcelManipulator object.
      *
-     * @param sheets
+     * @param sheetNames
      *            the sheets
      * @return the excel reader
      */
-    public ExcelReader createExcelReader(String...sheets){
+    public ExcelReader createExcelReader(String...sheetNames){
         ExcelReader excelReader = new DefaultExcelReader();
-        excelReader.setDefinition(toExcelManipulatorDefinition(sheets));
+        excelReader.setDefinition(toExcelManipulatorDefinition(sheetNames));
         return excelReader;
     }
 
-    private ExcelManipulatorDefinition toExcelManipulatorDefinition(String...sheets){
+    //---------------------------------------------------------------
+
+    /**
+     * To excel manipulator definition.
+     *
+     * @param sheetNames
+     *            the sheets
+     * @return the excel manipulator definition
+     */
+    private ExcelManipulatorDefinition toExcelManipulatorDefinition(String...sheetNames){
         ExcelManipulatorDefinition excelManipulatorDefinition = new ExcelManipulatorDefinition();
-        for (String sheet : sheets){
-            ExcelSheet sheetDefinition = toExcelSheet(sheet);
-            excelManipulatorDefinition.getExcelSheets().add(sheetDefinition);
+        for (String sheetName : sheetNames){
+            ExcelSheet excelSheet = toExcelSheet(sheetName);
+            excelManipulatorDefinition.getExcelSheets().add(excelSheet);
         }
         return excelManipulatorDefinition;
     }
@@ -191,16 +216,16 @@ public class ExcelManipulatorFactory{
     /**
      * Gets the excel sheet.
      *
-     * @param sheet
+     * @param sheetName
      *            the sheet
      * @return the excel sheet
      */
-    private ExcelSheet toExcelSheet(String sheet){
-        if ("blank".equalsIgnoreCase(sheet)){
+    private ExcelSheet toExcelSheet(String sheetName){
+        if ("blank".equalsIgnoreCase(sheetName)){
             return BLANK_SHEET;
         }
-        ExcelSheet excelSheet = sheetDefinitions.get(sheet);
-        Validate.notNull(excelSheet, "No sheet defintion found with name: " + sheet);
+        ExcelSheet excelSheet = sheetDefinitions.get(sheetName);
+        Validate.notNull(excelSheet, "No sheet defintion found with name: " + sheetName);
         return CloneUtil.cloneSheet(excelSheet);
     }
 }

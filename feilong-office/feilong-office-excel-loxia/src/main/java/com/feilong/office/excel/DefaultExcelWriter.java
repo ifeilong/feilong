@@ -135,8 +135,11 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
 
     @Override
     public void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList){
-        Workbook workbook = WorkbookUtil.create(inputStream);
-        WorkbookWriter.writePerSheet(workbook, outputStream, excelManipulatorDefinition, beansList);
+        try (Workbook workbook = WorkbookUtil.create(inputStream)){
+            WorkbookWriter.writePerSheet(workbook, outputStream, excelManipulatorDefinition, beansList);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     //---------------------------------------------------------------

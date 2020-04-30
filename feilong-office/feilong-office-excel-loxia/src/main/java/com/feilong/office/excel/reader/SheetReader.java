@@ -23,14 +23,14 @@ import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.OgnlStack;
 
 /**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
+ * The Class SheetReader.
  */
 public class SheetReader{
 
     /** The Constant STATUS_DATA_COLLECTION_ERROR. */
     private static final int STATUS_DATA_COLLECTION_ERROR = 10;
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private SheetReader(){
@@ -54,6 +54,8 @@ public class SheetReader{
      *            the stack
      * @param readStatus
      *            the read status
+     * @param skipErrors
+     *            the skip errors
      */
     public static void readSheet(
                     Workbook workbook,

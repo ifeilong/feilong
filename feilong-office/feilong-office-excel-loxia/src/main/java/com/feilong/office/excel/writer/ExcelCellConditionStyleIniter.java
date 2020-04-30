@@ -30,11 +30,6 @@ import com.feilong.office.excel.definition.ExcelCellConditionStyle;
 import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.CellReferenceUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class ExcelCellConditionStyleIniter{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExcelCellConditionStyleIniter.class);
@@ -61,8 +56,9 @@ class ExcelCellConditionStyleIniter{
         for (ExcelBlock excelBlock : excelSheet.getExcelBlocks()){
             init(sheet, excelBlock, styleMap);
 
-            if (excelBlock.getChildBlock() != null){
-                init(sheet, excelBlock.getChildBlock(), styleMap);
+            ExcelBlock childBlock = excelBlock.getChildBlock();
+            if (childBlock != null){
+                init(sheet, childBlock, styleMap);
             }
         }
     }
@@ -127,9 +123,8 @@ class ExcelCellConditionStyleIniter{
 
                 String cellIndex2 = CellReferenceUtil.getCellIndex(i, j);
                 styleMap.put(cellIndex2, cell.getCellStyle());
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("Condition Style [{}]", cellIndex2);
-                }
+
+                LOGGER.debug("Condition Style [{}]", cellIndex2);
             }
         }
     }

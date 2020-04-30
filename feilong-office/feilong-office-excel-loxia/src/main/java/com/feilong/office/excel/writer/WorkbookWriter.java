@@ -15,13 +15,8 @@
  */
 package com.feilong.office.excel.writer;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static java.util.Collections.emptyMap;
-
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +24,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.office.excel.ExcelManipulatorDefinition;
 import com.feilong.office.excel.definition.ExcelSheet;
@@ -44,11 +37,6 @@ import com.feilong.office.excel.utils.WorkbookUtil;
  * @since 3.0.0
  */
 public class WorkbookWriter{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkbookWriter.class);
-
-    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private WorkbookWriter(){
@@ -80,7 +68,7 @@ public class WorkbookWriter{
         int excelSheetsSize = excelSheets.size();
         validate(excelSheetsSize, numberOfSheets);
 
-        Map<String, CellStyle> styleMap = buildStyleMap(workbook, definition, excelSheets, excelSheetsSize);
+        Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, definition, excelSheets, excelSheetsSize);
 
         //---------------------------------------------------------------
         //remove sheets except the first one
@@ -116,57 +104,14 @@ public class WorkbookWriter{
         int numberOfSheets = workbook.getNumberOfSheets();
         validate(excelSheetsSize, numberOfSheets);
 
-        Map<String, CellStyle> styleMap = buildStyleMap(workbook, definition, excelSheets, excelSheetsSize);
+        Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, definition, excelSheets, excelSheetsSize);
         for (int i = 0; i < excelSheetsSize; i++){
             SheetWriter.write(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap);
         }
         pack(workbook, outputStream);
     }
 
-    /**
-     * Builds the style map.
-     *
-     * @param workbook
-     *            the workbook
-     * @param definition
-     *            the definition
-     * @param excelSheets
-     *            the excel sheets
-     * @param excelSheetsSize
-     *            the excel sheets size
-     * @return the map
-     */
-    private static Map<String, CellStyle> buildStyleMap(
-                    Workbook workbook,
-                    ExcelManipulatorDefinition definition,
-                    List<ExcelSheet> excelSheets,
-                    int excelSheetsSize){
-        Integer styleSheetPosition = definition.getStyleSheetPosition();
-        if (null == styleSheetPosition){
-            LOGGER.debug("ExcelManipulatorDefinition styleSheetPosition is null, renturn empty styleMap");
-            return emptyMap();
-        }
-
-        //---------------------------------------------------------------
-        Date beginDate = new Date();
-
-        Map<String, CellStyle> styleMap = new HashMap<>();
-        Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
-
-        for (int i = 0; i < excelSheetsSize; i++){
-            ExcelCellConditionStyleIniter.init(workbook.getSheetAt(styleSheetPosition), excelSheets.get(i), styleMap);
-        }
-
-        //---------------------------------------------------------------
-        workbook.removeSheetAt(styleSheetPosition);
-        LOGGER.debug("{} styles found", styleMap.keySet().size());
-        //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("buildStyleMap use time: [{}],StyleMap size:[{}]", formatDuration(beginDate), styleMap.size());
-        }
-        return styleMap;
-
-    }
+    //---------------------------------------------------------------
 
     /**
      * Validate.
@@ -182,6 +127,8 @@ public class WorkbookWriter{
                         "No sheet definition found or Sheet Number in definition is more than number in template file.");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Pack.
      *
@@ -192,7 +139,7 @@ public class WorkbookWriter{
      * @throws UncheckedIOException
      *             the unchecked IO exception
      */
-    private static void pack(Workbook workbook,OutputStream outputStream) throws UncheckedIOException{
+    private static void pack(Workbook workbook,OutputStream outputStream){
         FormulaEvaluatorUtil.reCalculate(workbook);
         workbook.setActiveSheet(0);
         WorkbookUtil.write(workbook, outputStream);

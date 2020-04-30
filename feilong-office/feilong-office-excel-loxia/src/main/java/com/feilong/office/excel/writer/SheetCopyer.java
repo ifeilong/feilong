@@ -20,11 +20,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 public class SheetCopyer{
 
     /** Don't let anyone instantiate this class. */
@@ -35,15 +30,7 @@ public class SheetCopyer{
     }
 
     //---------------------------------------------------------------
-    /**
-     * Copy sheet.
-     *
-     * @param sheet
-     *            the sheet
-     * @param newSheet
-     *            the new sheet
-     */
-    public static void copy(Sheet sheet,Sheet newSheet){
+    static void copy(Sheet sheet,Sheet newSheet){
         int maxCol = 0;
         for (int row = 0; row <= sheet.getLastRowNum(); row++){
             Row oldRow = sheet.getRow(row);
@@ -70,6 +57,8 @@ public class SheetCopyer{
                 CellCoper.copy(oldCell, newCell);
             }
         }
+
+        //---------------------------------------------------------------
         for (int col = 0; col <= maxCol; col++){
             if (sheet.getColumnWidth(col) >= 0){
                 newSheet.setColumnWidth(col, sheet.getColumnWidth(col));

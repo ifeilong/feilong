@@ -29,11 +29,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import com.feilong.office.excel.utils.OgnlStack;
 import com.feilong.office.excel.utils.Settings;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class CellValueSetter{
 
     /** Don't let anyone instantiate this class. */
@@ -119,8 +114,7 @@ class CellValueSetter{
                 if (cell.getCellStyle() == null){
                     cellStyle.cloneStyleFrom(cell.getCellStyle());
                 }
-                cellStyle.setDataFormat(
-                                workbook.getCreationHelper().createDataFormat().getFormat(Settings.get("date.pattern")));
+                cellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat(Settings.get("date.pattern")));
                 cell.setCellStyle(cellStyle);
             }
         }
@@ -144,12 +138,16 @@ class CellValueSetter{
             return;
         }
 
+        //---------------------------------------------------------------
+
         if (cellType == CellType.BOOLEAN){
             if (value instanceof Boolean){
                 cell.setCellValue((Boolean) value);
             }
             return;
         }
+
+        //---------------------------------------------------------------
         if (cellType == CellType.NUMERIC){
             if (value instanceof Date){
                 cell.setCellValue((Date) value);
@@ -172,6 +170,8 @@ class CellValueSetter{
             }
             return;
         }
+
+        //---------------------------------------------------------------
         cell.setCellValue(value.toString());
     }
 }

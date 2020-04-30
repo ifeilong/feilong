@@ -35,6 +35,8 @@ class CellValueGetter{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CellValueGetter.class);
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the cell value.
      *
@@ -75,6 +77,9 @@ class CellValueGetter{
                 break;
             case STRING:
                 value = cellValue.getStringValue();
+                break;
+            default:
+                throw new UnsupportedOperationException("default not support!");
         }
 
         //---------------------------------------------------------------

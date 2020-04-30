@@ -21,49 +21,29 @@ import com.feilong.office.excel.DataConvertorConfigurator;
 import com.feilong.office.excel.convertor.DataConvertor;
 import com.feilong.office.excel.definition.ExcelCell;
 
-/**
- * The Class CellValueChecker.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
-class CellValueChecker{
+class CellValueConverter{
 
     /** The Constant UNSUPPORTING_DATA_TYPE. */
     private static final int UNSUPPORTING_DATA_TYPE = 2;
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
-    private CellValueChecker(){
+    private CellValueConverter(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Check value.
-     *
-     * @param sheetNo
-     *            the sheet no
-     * @param cellIndex
-     *            the cell index
-     * @param value
-     *            the value
-     * @param excelCell
-     *            the cell definition
-     * @param clazz
-     *            the clazz
-     * @return the object
-     */
-    static Object check(int sheetNo,String cellIndex,Object value,ExcelCell excelCell,Class<? extends Object> clazz){
+    static Object convert(int sheetNo,String cellIndex,Object value,ExcelCell excelCell,Class<? extends Object> propertyClass){
         //primitive type should be mandatory
-        if (clazz.isPrimitive()){
+        if (propertyClass.isPrimitive()){
             excelCell.setMandatory(true);
         }
 
         //---------------------------------------------------------------
-        DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(clazz);
+        DataConvertor<?> dataConvertor = DataConvertorConfigurator.getInstance().getConvertor(propertyClass);
         if (dataConvertor == null){
             throw build(UNSUPPORTING_DATA_TYPE, sheetNo, cellIndex, value, excelCell);
         }

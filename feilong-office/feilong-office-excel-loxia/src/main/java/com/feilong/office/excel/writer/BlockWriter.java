@@ -33,11 +33,6 @@ import com.feilong.office.excel.definition.ExcelCellConditionStyle;
 import com.feilong.office.excel.utils.CellReferenceUtil;
 import com.feilong.office.excel.utils.OgnlStack;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class BlockWriter{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockWriter.class);
@@ -83,6 +78,8 @@ class BlockWriter{
                 }
             }
         }
+
+        //---------------------------------------------------------------
         for (ExcelCell excelCell : blockDefinition.getCells()){
             String dataExpr = excelCell.getDataExpr();
             CellValueSetter.set(
@@ -91,6 +88,8 @@ class BlockWriter{
                             excelCell.getCol(),
                             dataExpr == null ? excelCell.getDataName() : dataExpr,
                             stack);
+
+            //---------------------------------------------------------------
             if (styleMap.keySet().size() > 0){
                 for (ExcelCellConditionStyle excelCellConditionStyle : excelCell.getStyles()){
                     Object obj = stack.getValue(excelCellConditionStyle.getCondition());
@@ -108,6 +107,8 @@ class BlockWriter{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Write loop block.
@@ -151,6 +152,8 @@ class BlockWriter{
                 sheet.removeRow(sheet.getRow(i));
             }
         }
+
+        //---------------------------------------------------------------
         Collection<? extends Object> listValue;
         if (!(value instanceof Collection)){
             if (value.getClass().isArray()){
@@ -178,6 +181,7 @@ class BlockWriter{
                 sheet.shiftRows(nextStartRow, sheet.getLastRowNum(), excelBlock.getEndRow() - excelBlock.getStartRow() + 1, true, false);
             }
 
+            //---------------------------------------------------------------
             RowWriter.write(
                             sheet,
                             excelBlock,
@@ -185,6 +189,8 @@ class BlockWriter{
                             step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1),
                             mergedRegions,
                             styleMap);
+
+            //---------------------------------------------------------------
             step++;
             preObj = ognlStack.pop();
         }
@@ -205,6 +211,8 @@ class BlockWriter{
                                 CellReferenceUtil.getCellIndex(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
             }
         }
+
+        //---------------------------------------------------------------
         //[2013-2-22]if with data, still need to remove dummy one, otherwise xlsx will have error if there are formulas in block.
         for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
             sheet.removeRow(sheet.getRow(i));
@@ -220,14 +228,6 @@ class BlockWriter{
 
     }
 
-    /**
-     * @param sheet
-     * @param excelBlock
-     * @param ognlStack
-     * @param mergedRegions
-     * @param styleMap
-     * @since 3.0.0
-     */
     private static void writeLoopVertical(
                     Sheet sheet,
                     ExcelBlock excelBlock,

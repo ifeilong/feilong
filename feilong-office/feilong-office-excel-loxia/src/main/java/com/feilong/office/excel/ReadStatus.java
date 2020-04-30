@@ -40,15 +40,19 @@ public class ReadStatus{
     //---------------------------------------------------------------
 
     /**
-     * 
+     * Instantiates a new read status.
      */
     public ReadStatus(){
         super();
     }
 
     /**
+     * Instantiates a new read status.
+     *
      * @param status
+     *            the status
      * @param message
+     *            the message
      */
     public ReadStatus(int status, String message){
         super();
@@ -57,9 +61,14 @@ public class ReadStatus{
     }
 
     /**
+     * Instantiates a new read status.
+     *
      * @param status
+     *            the status
      * @param message
+     *            the message
      * @param exceptions
+     *            the exceptions
      */
     public ReadStatus(int status, String message, List<Exception> exceptions){
         super();
@@ -133,13 +142,14 @@ public class ReadStatus{
         this.exceptions = exceptions;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 添加 exception.
      *
      * @param exception
      *            the exception
      */
-
     public void addException(Exception exception){
         this.exceptions.add(exception);
     }

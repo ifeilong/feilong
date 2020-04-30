@@ -36,6 +36,7 @@ class CellCoper{
 
     static void copy(Cell oldCell,Cell newCell){
         newCell.setCellStyle(oldCell.getCellStyle());
+
         switch (oldCell.getCellType()) {
             case STRING:
                 newCell.setCellValue(oldCell.getRichStringCellValue());
@@ -62,6 +63,7 @@ class CellCoper{
 
     static void copy(Cell oldCell,Cell newCell,int rowOffset,int colOffset){
         newCell.setCellStyle(oldCell.getCellStyle());
+
         switch (oldCell.getCellType()) {
             case STRING:
                 newCell.setCellValue(oldCell.getRichStringCellValue());

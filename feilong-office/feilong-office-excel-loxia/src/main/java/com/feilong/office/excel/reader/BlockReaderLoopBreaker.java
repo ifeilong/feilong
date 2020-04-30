@@ -22,11 +22,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import com.feilong.office.excel.definition.LoopBreakCondition;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class BlockReaderLoopBreaker{
 
     /** Don't let anyone instantiate this class. */

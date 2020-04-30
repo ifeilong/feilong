@@ -27,11 +27,6 @@ import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.definition.ExcelCellConditionStyle;
 import com.feilong.office.excel.utils.OgnlStack;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class ColumnWriter{
 
     /** Don't let anyone instantiate this class. */
@@ -45,42 +40,49 @@ class ColumnWriter{
 
     static void write(
                     Sheet sheet,
-                    ExcelBlock blockDefinition,
-                    OgnlStack stack,
+                    ExcelBlock excelBlock,
+                    OgnlStack ognlStack,
                     int rowOffset,
                     int colOffset,
+
                     List<CellRangeAddress> mergedRegions,
                     Map<String, CellStyle> styleMap){
         if (rowOffset > 0 || colOffset > 0){
             BlockCopyer.copy(
                             sheet,
-                            blockDefinition.getStartRow(),
-                            blockDefinition.getStartCol(),
-                            blockDefinition.getEndRow(),
-                            blockDefinition.getEndCol(),
+                            excelBlock.getStartRow(),
+                            excelBlock.getStartCol(),
+                            excelBlock.getEndRow(),
+                            excelBlock.getEndCol(),
                             rowOffset,
                             colOffset,
                             mergedRegions);
         }
+
+        //---------------------------------------------------------------
         if (styleMap.keySet().size() > 0){
-            for (ExcelCellConditionStyle style : blockDefinition.getStyles()){
-                Object obj = stack.getValue(style.getCondition());
+            for (ExcelCellConditionStyle excelCellConditionStyle : excelBlock.getStyles()){
+                Object obj = ognlStack.getValue(excelCellConditionStyle.getCondition());
                 if (obj == null || !(obj instanceof Boolean)){
                     continue;
                 }
+
+                //---------------------------------------------------------------
                 if (((Boolean) obj).booleanValue()){
                     BlockStyleSetter.set(
                                     sheet,
-                                    style.getStartRow() + rowOffset,
-                                    style.getEndRow() + rowOffset,
-                                    style.getStartCol() + colOffset,
-                                    style.getEndCol() + colOffset,
-                                    style.getCellIndex(),
+                                    excelCellConditionStyle.getStartRow() + rowOffset,
+                                    excelCellConditionStyle.getEndRow() + rowOffset,
+                                    excelCellConditionStyle.getStartCol() + colOffset,
+                                    excelCellConditionStyle.getEndCol() + colOffset,
+                                    excelCellConditionStyle.getCellIndex(),
                                     styleMap);
                 }
             }
         }
-        for (ExcelCell excelCell : blockDefinition.getCells()){
+
+        //---------------------------------------------------------------
+        for (ExcelCell excelCell : excelBlock.getCells()){
             String dataExpr = excelCell.getDataExpr();
             String dataName = dataExpr == null ? excelCell.getDataName() : dataExpr;
             if (dataName.startsWith("=")){
@@ -89,10 +91,12 @@ class ColumnWriter{
             int row = excelCell.getRow();
             int col = excelCell.getCol();
 
-            CellValueSetter.set(sheet, row + rowOffset, col + colOffset, dataName, stack);
+            //---------------------------------------------------------------
+
+            CellValueSetter.set(sheet, row + rowOffset, col + colOffset, dataName, ognlStack);
             if (styleMap.keySet().size() > 0){
                 for (ExcelCellConditionStyle excelCellConditionStyle : excelCell.getStyles()){
-                    Object obj = stack.getValue(excelCellConditionStyle.getCondition());
+                    Object obj = ognlStack.getValue(excelCellConditionStyle.getCondition());
                     if (obj == null || !(obj instanceof Boolean)){
                         continue;
                     }

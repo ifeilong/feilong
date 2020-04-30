@@ -30,11 +30,6 @@ import com.feilong.office.excel.definition.ExcelCell;
 import com.feilong.office.excel.definition.ExcelCellConditionStyle;
 import com.feilong.office.excel.utils.OgnlStack;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class RowWriter{
 
     /** Don't let anyone instantiate this class. */

@@ -292,7 +292,9 @@ public final class ClassLoaderUtil{
      * @since 1.6.2
      */
     private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
-        List<ClassLoader> list = toList(getClassLoaderByCurrentThread(), getClassLoaderByClass(ClassLoaderUtil.class));
+        List<ClassLoader> list = toList(//
+                        getClassLoaderByCurrentThread(),
+                        getClassLoaderByClass(ClassLoaderUtil.class));
         if (null != callingClass){
             list.add(getClassLoaderByClass(callingClass));
         }
@@ -328,6 +330,8 @@ public final class ClassLoaderUtil{
         }
         return classLoader;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 log info.

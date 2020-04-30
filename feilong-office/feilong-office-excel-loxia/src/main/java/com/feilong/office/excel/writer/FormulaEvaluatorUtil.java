@@ -32,11 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.office.excel.utils.CellReferenceUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 public class FormulaEvaluatorUtil{
 
     /** The Constant log. */

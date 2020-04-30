@@ -1,41 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<bean id="optionHelperWrapper" class="com.erry.OptionHelperWrapper" />
-
-	<bean id="threeOptionHelperWrapper" class="com.erry.ThreeTierOptionHelperWrapper">
-		<property name="optionHelperWrapper" ref="optionHelperWrapper" />
-	</bean>
-
-	<!--******************************************************************** -->
 	<bean id="excelDownloadService" class="com.erry.service.ExcelDownloadService">
-		<property name="skuUploadTemplateWriter" ref="skuUploadTemplateWriter" />
-		<property name="skuCostMaintainWriter" ref="skuCostMaintainWriter" />
-		<property name="cashCardExportTemplateWriter" ref="cashCardExportTemplateWriter"></property>
-		<property name="spUploadGroupRefresWriter" ref="spUploadGroupRefresWriter" />
-		<property name="memberCardMaintainWriter" ref="memberCardMaintainWriter" />
-		<property name="saleCompleteWriter" ref="saleCompleteWriter" />
-		<property name="saleSoByMonthWriter" ref="saleSoByMonthWriter" />
-		<property name="soReturnReportWriter" ref="soReturnReportWriter" />
-		<property name="skuNoStorageWriter" ref="skuNoStorageWriter"></property>
-		<property name="soRepertoryStatWriter" ref="soRepertoryStatWriter" />
-		<property name="soReconciliationsWriter" ref="soReconciliationsWriter" />
-		<property name="soPrepaidCardWriter" ref="soPrepaidCardWriter" />
-		<property name="soRepertoryInfoWriter" ref="soRepertoryInfoWriter" />
-		<property name="replenishmentInfoWriter" ref="replenishmentInfoWriter" />
-		<property name="soInfoReportWriter" ref="soInfoReportWriter" />
-		<property name="commentInfoReportWriter" ref="commentInfoReportWriter" />
-		<property name="skuInventorySnapshotWriter" ref="skuInventorySnapshotWriter" />
-		<!--**********************销售报表****************** -->
-		<property name="dailySalesReportWriter" ref="dailySalesReportWriter" />
-		<!--**********************trackIngCode报表****************** -->
-		<property name="salesTrackingCodeWriter" ref="salesTrackingCodeWriter" />
-		<!--**********************到货通知报表****************** -->
-		<property name="memberReplenishmentWriter" ref="memberReplenishmentWriter" />
-		<!--**********************邮件发送数量统计报表****************** -->
-		<property name="mailLogSendTotalWriter" ref="mailLogSendTotalWriter" />
 
 		<!--**********************同步库存日志****************** -->
 		<property name="syscInventoryWriter" ref="syscInventoryWriter" />
@@ -49,12 +18,6 @@
 	<bean id="dailySalesReportWriter" factory-bean="excelManipulatorFactory" factory-method="createExcelWriter">
 		<constructor-arg>
 			<value>exportDailySalesReport</value>
-		</constructor-arg>
-	</bean>
-
-	<bean id="jdiSkuIntegralReader" factory-bean="excelManipulatorFactory" factory-method="createExcelReader">
-		<constructor-arg>
-			<value>jdiSkuIntegralReport</value>
 		</constructor-arg>
 	</bean>
 </beans>

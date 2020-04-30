@@ -24,11 +24,6 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class BlockCopyer{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockCopyer.class);
@@ -44,6 +39,7 @@ class BlockCopyer{
 
     static void copy(
                     Sheet sheet,
+
                     int startRow,
                     int startCol,
                     int endRow,
@@ -64,9 +60,13 @@ class BlockCopyer{
             if (oldRow.getHeight() >= 0){
                 newRow.setHeight(oldRow.getHeight());
             }
+
+            //---------------------------------------------------------------
             if (LOGGER.isTraceEnabled()){
                 LOGGER.trace("copy row [{}] to [{}],Set row height :{}", row, row + rowOffset, newRow.getHeightInPoints());
             }
+
+            //---------------------------------------------------------------
             for (int col = startCol; col <= endCol; col++){
                 Cell oldCell = oldRow.getCell(col);
                 if (oldCell == null){
@@ -79,20 +79,29 @@ class BlockCopyer{
                 CellCoper.copy(oldCell, newCell, rowOffset, colOffset);
             }
         }
+
+        //---------------------------------------------------------------
         for (int col = startCol; col <= endCol; col++){
             if (sheet.getColumnWidth(col) >= 0){
                 sheet.setColumnWidth(col + colOffset, sheet.getColumnWidth(col));
             }
         }
+
+        //---------------------------------------------------------------
         if (mergedRegions != null){
             for (CellRangeAddress cellRangeAddress : mergedRegions){
-                CellRangeAddress craNew = new CellRangeAddress(
-                                cellRangeAddress.getFirstRow() + rowOffset,
-                                cellRangeAddress.getLastRow() + rowOffset,
-                                cellRangeAddress.getFirstColumn() + colOffset,
-                                cellRangeAddress.getLastColumn() + colOffset);
+                CellRangeAddress craNew = buildCellRangeAddress(rowOffset, colOffset, cellRangeAddress);
                 sheet.addMergedRegion(craNew);
             }
         }
+    }
+
+    private static CellRangeAddress buildCellRangeAddress(int rowOffset,int colOffset,CellRangeAddress cellRangeAddress){
+        return new CellRangeAddress(
+                        cellRangeAddress.getFirstRow() + rowOffset,
+                        cellRangeAddress.getLastRow() + rowOffset,
+
+                        cellRangeAddress.getFirstColumn() + colOffset,
+                        cellRangeAddress.getLastColumn() + colOffset);
     }
 }

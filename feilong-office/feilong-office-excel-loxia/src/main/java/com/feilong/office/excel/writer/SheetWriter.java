@@ -35,13 +35,7 @@ import com.feilong.office.excel.definition.ExcelSheet;
 import com.feilong.office.excel.utils.CellReferenceUtil;
 import com.feilong.office.excel.utils.OgnlStack;
 
-/**
- * The Class SheetWriter.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
-public class SheetWriter{
+class SheetWriter{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SheetWriter.class);

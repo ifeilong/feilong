@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Date;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -62,7 +63,6 @@ public class WorkbookUtil{
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         //---------------------------------------------------------------
-
         try{
             Date beginDate = new Date();
             Workbook workbook = WorkbookFactory.create(inputStream);
@@ -103,6 +103,9 @@ public class WorkbookUtil{
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);
+        }finally{
+            IOUtils.closeQuietly(workbook);
+            IOUtils.closeQuietly(outputStream);
         }
     }
 }

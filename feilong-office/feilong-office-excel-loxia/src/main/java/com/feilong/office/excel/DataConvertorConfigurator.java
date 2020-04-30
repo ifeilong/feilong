@@ -41,6 +41,8 @@ public class DataConvertorConfigurator implements Serializable{
     /** The supports map. */
     private final Map<String, Class<?>>           supportsMap      = new HashMap<>();
 
+    //---------------------------------------------------------------
+
     /** The convertor map. */
     private final Map<Class<?>, DataConvertor<?>> convertorMap     = new HashMap<>();
 
