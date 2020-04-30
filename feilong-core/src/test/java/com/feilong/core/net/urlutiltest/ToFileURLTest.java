@@ -38,7 +38,6 @@ public class ToFileURLTest{
 
     // @Test(expected = InvocationTargetException.class)
     @Test
-    @SuppressWarnings("static-method")
     public void testBeanUtilNullFromBean(){
 
         String string = "https://www.zhihu.com/";

@@ -23,7 +23,7 @@ import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 import java.util.Set;

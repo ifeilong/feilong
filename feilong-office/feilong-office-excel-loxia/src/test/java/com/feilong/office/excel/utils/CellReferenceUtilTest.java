@@ -13,41 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.sortutiltest;
+package com.feilong.office.excel.utils;
 
-import static java.util.Collections.emptyList;
-import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.util.List;
 
 import org.junit.Test;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sortList;
+import com.feilong.test.AbstractTest;
 
 /**
- * The Class SortUtilSortListTest.
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 3.0.0
  */
-public class SortListTest{
+public class CellReferenceUtilTest extends AbstractTest{
 
-    /**
-     * Test sort list.
-     */
     @Test
-    public void testSortList(){
-        List<Integer> list = toList(5, 10, 3, 2);
-        assertThat(sortList(list), contains(2, 3, 5, 10));
+    public void test(){
+        assertEquals("B3", CellReferenceUtil.getCellRef(2, 1));
+        assertEquals("A1", CellReferenceUtil.getCellRef(0, 0));
     }
 
-    /**
-     * Test sort list null list.
-     */
     @Test
-    public final void testSortListNullList(){
-        assertEquals(emptyList(), sortList((List) null));
+    public void test1(){
+        assertEquals("C5", CellReferenceUtil.getCellRef("B3", 2, 1));
+        assertEquals("A1", CellReferenceUtil.getCellRef("A1", 0, 0));
+    }
+
+    @Test
+    public void test21(){
+        int[] cellPosition = CellReferenceUtil.getCellPosition("B3");
+        assertEquals(2, cellPosition[0]);
+        assertEquals(1, cellPosition[1]);
     }
 }

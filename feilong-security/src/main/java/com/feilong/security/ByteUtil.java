@@ -94,8 +94,6 @@ public final class ByteUtil{
         return new String(tmpData);
     }
 
-    // XXX UpperCase
-    // XXX LowerCase
     /**
      * 字节转成16进制小写字符串.
      * 

@@ -17,7 +17,7 @@ package com.feilong.core.util.resourcebundleutiltest;
 
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Locale;
 import java.util.Map;

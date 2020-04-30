@@ -1,9 +1,9 @@
 package com.feilong.namespace;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,11 @@ public class SimpleHttpTypeBeanPropertyTagTest extends AbstractJUnit4SpringConte
 
     @Test
     public void test(){
-        assertThat(simpleHttpTypeBeanProperty, allOf(hasProperty("method", is("get")), hasProperty("uri", is("www.baidu.com"))));
+        assertThat(
+                        simpleHttpTypeBeanProperty,
+                        allOf(//
+                                        hasProperty("method", is("get")),
+                                        hasProperty("uri", is("www.baidu.com"))));
     }
 
 }

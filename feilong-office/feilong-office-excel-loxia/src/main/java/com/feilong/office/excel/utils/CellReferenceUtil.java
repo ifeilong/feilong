@@ -33,7 +33,7 @@ public class CellReferenceUtil{
      *            the col
      * @return the cell index
      */
-    public static String getCellIndex(int row,int col){
+    public static String getCellRef(int row,int col){
         CellReference cellReference = new CellReference(row, col);
         return cellReference.formatAsString().replaceAll("\\$", "");
     }
@@ -41,21 +41,9 @@ public class CellReferenceUtil{
     //---------------------------------------------------------------
 
     /**
-     * Gets the cell position.
-     *
-     * @param cellIndex
-     *            the cell index
-     * @return the cell position
-     */
-    public static int[] getCellPosition(String cellIndex){
-        CellReference cellReference = new CellReference(cellIndex);
-        return new int[] { cellReference.getRow(), cellReference.getCol() };
-    }
-
-    /**
      * Offset cell index.
      *
-     * @param cellIndex
+     * @param cellRef
      *            the cell index
      * @param rowOffset
      *            the row offset
@@ -63,13 +51,26 @@ public class CellReferenceUtil{
      *            the col offset
      * @return the string
      */
-    public static String offsetCellIndex(String cellIndex,int rowOffset,int colOffset){
-        CellReference cellReference = new CellReference(cellIndex);
+    public static String getCellRef(String cellRef,int rowOffset,int colOffset){
+        CellReference cellReference = new CellReference(cellRef);
 
-        CellReference newCell = new CellReference(//
-                        cellReference.getRow() + rowOffset,
-                        cellReference.getCol() + colOffset);
-        return newCell.formatAsString().replaceAll("\\$", "");
+        int pRow = cellReference.getRow() + rowOffset;
+        int pCol = cellReference.getCol() + colOffset;
+        return getCellRef(pRow, pCol);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Gets the cell position.
+     *
+     * @param cellRef
+     *            the cell index
+     * @return the cell position
+     */
+    public static int[] getCellPosition(String cellRef){
+        CellReference cellReference = new CellReference(cellRef);
+        return new int[] { cellReference.getRow(), cellReference.getCol() };
     }
 
 }

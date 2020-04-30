@@ -15,9 +15,9 @@
  */
 package com.feilong.core.bean.propertyutiltest;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
@@ -25,11 +25,6 @@ import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class PropertyUtilSetPropertyIfValueNotNullOrEmptyTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class SetPropertyIfValueNotNullOrEmptyTest{
 
     /**

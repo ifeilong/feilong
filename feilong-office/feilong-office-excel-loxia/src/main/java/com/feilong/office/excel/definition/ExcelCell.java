@@ -210,7 +210,7 @@ public class ExcelCell{
      * @return the cell index
      */
     public String getCellIndex(){
-        return CellReferenceUtil.getCellIndex(row, col);
+        return CellReferenceUtil.getCellRef(row, col);
     }
 
     /**

@@ -98,7 +98,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      * @return the end cell index
      */
     public String getEndCellIndex(){
-        return CellReferenceUtil.getCellIndex(endRow, endCol);
+        return CellReferenceUtil.getCellRef(endRow, endCol);
     }
 
     /**
@@ -407,7 +407,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      */
     @Override
     public String toString(){
-        return "ExcelBlock[" + CellReferenceUtil.getCellIndex(startRow, startCol) + ":" + getEndCellIndex() + "]";
+        return "ExcelBlock[" + CellReferenceUtil.getCellRef(startRow, startCol) + ":" + getEndCellIndex() + "]";
     }
 
     /**

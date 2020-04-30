@@ -164,7 +164,7 @@ public class ExcelCellConditionStyle{
      * @return the start cell index
      */
     public String getStartCellIndex(){
-        return CellReferenceUtil.getCellIndex(startRow, startCol);
+        return CellReferenceUtil.getCellRef(startRow, startCol);
     }
 
     /**
@@ -185,7 +185,7 @@ public class ExcelCellConditionStyle{
      * @return the end cell index
      */
     public String getEndCellIndex(){
-        return CellReferenceUtil.getCellIndex(endRow, endCol);
+        return CellReferenceUtil.getCellRef(endRow, endCol);
     }
 
     /**

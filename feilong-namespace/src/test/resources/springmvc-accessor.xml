@@ -15,37 +15,37 @@
     <bean name="ccpayTokenSessionKeyAccessor" class="com.feilong.accessor.session.SessionKeyAccessor">
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="guestKeySessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${guest.key}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="guestAllowedSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${guest.allowed}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="shopDogFlagSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${shopdog.flag}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="checkoutLoginEmailSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${checkout.login.email}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="memberDetailsSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${member.context}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="formTokenSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${form.token}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="memeberResetPasswordMobileSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${memeber.reset.password.mobile}" />
     </bean>
@@ -60,7 +60,7 @@
         <property name="key" value="${register.session.send.sms.time}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="memberSendsmsMobileSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${member.sendsms.mobile}" />
     </bean>
@@ -85,12 +85,12 @@
         <property name="key" value="${register.mobile.verification.code.sent}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="memeberSendShortMessageServiceSuccessSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${memeber.send.short.message.service.success}" />
     </bean>
 
-    <!-- TODO:说明这个属性是干什么的 -->
+    <!--  -->
     <bean name="sessionThirdpartyRegisterFormSessionAccessor" class="com.feilong.accessor.session.SessionAccessor">
         <property name="key" value="${session.third.party.register.form}" />
     </bean>

@@ -116,8 +116,8 @@ class SheetWriter{
             if (LOGGER.isTraceEnabled()){
                 LOGGER.trace(
                                 "Merged Region:[{}-{}]",
-                                CellReferenceUtil.getCellIndex(firstRow, firstColumn),
-                                CellReferenceUtil.getCellIndex(lastRow, lastColumn));
+                                CellReferenceUtil.getCellRef(firstRow, firstColumn),
+                                CellReferenceUtil.getCellRef(lastRow, lastColumn));
             }
 
             //---------------------------------------------------------------

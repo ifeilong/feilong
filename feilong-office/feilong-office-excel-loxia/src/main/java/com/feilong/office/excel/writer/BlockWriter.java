@@ -207,8 +207,8 @@ class BlockWriter{
                 sheet.removeMergedRegion(i);
                 LOGGER.debug(
                                 "Removed Merged Region:[{}-{}]",
-                                CellReferenceUtil.getCellIndex(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
-                                CellReferenceUtil.getCellIndex(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
+                                CellReferenceUtil.getCellRef(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
+                                CellReferenceUtil.getCellRef(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
             }
         }
 

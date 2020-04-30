@@ -13,31 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.systemutiltest;
+package com.feilong.office.excel;
 
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.SystemUtil;
+import com.feilong.office.excel.definition.ExcelSheet;
+import com.feilong.test.AbstractTest;
 
-public class GetPropertiesMapTest{
+/**
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 3.0.0
+ */
+public class ExcelSheetMapBuilderTest extends AbstractTest{
 
-    /**
-     * Test get properties map for log.
-     */
     @Test
-    public void testGetPropertiesMap(){
-        assertThat(
-                        SystemUtil.getPropertiesMap(),
-                        allOf(//
-                                        hasKey("file.encoding"),
-                                        hasKey("user.dir"),
-                                        hasKey("user.home"),
-                                        hasKey("java.home"),
-                                        hasKey("java.version"),
-                                        hasKey("user.name")));
+    public void test(){
+        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("loxia/consultant/feilong-sheets-Consultant.xml");
+        assertTrue(map.size() == 1);
+
+        assertThat(map, allOf(hasKey("consultantExport")));
+
     }
 }

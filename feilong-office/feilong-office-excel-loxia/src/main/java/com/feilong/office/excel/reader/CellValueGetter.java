@@ -55,7 +55,7 @@ class CellValueGetter{
         CellValue cellValue = formulaEvaluator.evaluate(cell);
         if (cellValue == null){
             if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("{}: null", CellReferenceUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()));
+                LOGGER.trace("{}: null", CellReferenceUtil.getCellRef(cell.getRowIndex(), cell.getColumnIndex()));
             }
             return null;
         }
@@ -84,7 +84,7 @@ class CellValueGetter{
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("{}: {}", CellReferenceUtil.getCellIndex(cell.getRowIndex(), cell.getColumnIndex()), value);
+            LOGGER.trace("{}: {}", CellReferenceUtil.getCellRef(cell.getRowIndex(), cell.getColumnIndex()), value);
         }
 
         return value;

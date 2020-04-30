@@ -17,7 +17,7 @@ package com.feilong.core.util.collectionsutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 

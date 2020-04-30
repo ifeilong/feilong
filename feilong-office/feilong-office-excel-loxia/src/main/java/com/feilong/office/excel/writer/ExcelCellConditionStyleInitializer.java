@@ -105,7 +105,7 @@ class ExcelCellConditionStyleInitializer{
                     return;
                 }
 
-                String cellIndex2 = CellReferenceUtil.getCellIndex(i, j);
+                String cellIndex2 = CellReferenceUtil.getCellRef(i, j);
                 styleMap.put(cellIndex2, cell.getCellStyle());
 
                 LOGGER.debug("Condition Style [{}]", cellIndex2);

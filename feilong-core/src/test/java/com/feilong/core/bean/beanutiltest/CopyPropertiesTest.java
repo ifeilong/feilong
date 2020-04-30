@@ -19,12 +19,12 @@ import static com.feilong.core.DatePattern.TO_STRING_STYLE;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateUtil.now;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Date;

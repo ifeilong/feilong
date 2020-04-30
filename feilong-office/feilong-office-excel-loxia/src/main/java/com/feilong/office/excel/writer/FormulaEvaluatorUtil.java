@@ -98,8 +98,9 @@ public class FormulaEvaluatorUtil{
         while (matcher.find()){
             start = matcher.start();
             end = matcher.end();
+
             sb.append(formula.substring(head, start));
-            sb.append(CellReferenceUtil.offsetCellIndex(formula.substring(start, end), rowOffset, colOffset));
+            sb.append(CellReferenceUtil.getCellRef(formula.substring(start, end), rowOffset, colOffset));
             head = end;
         }
         sb.append(formula.substring(head));
