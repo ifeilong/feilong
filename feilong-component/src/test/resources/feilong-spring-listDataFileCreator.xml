@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-	<bean id="loxiaSimpleListLoopExcelFileCreator" class="com.feilong.component.LoxiaSimpleListLoopExcelFileCreator">
+	<bean id="simpleListLoopExcelFileCreator" class="com.feilong.component.SimpleListLoopExcelFileCreator">
 		<property name="excelTemplateLocation" value="classpath:loxia/TradeData/TradeData-list-export.xlsx" />
 		<property name="xmlSheetConfigurations" value="loxia/TradeData/feilong-sheets-TradeData.xml" />
 		<!-- <property name="sheetName" value="sheet" />

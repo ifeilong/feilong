@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 
 import com.feilong.context.invoker.http.ConnectionConfigBuilder;
 import com.feilong.namespace.RuntimeBeanReferenceBuilder;
-import com.feilong.net.entity.ConnectionConfig;
+import com.feilong.net.http.ConnectionConfig;
 
 /**
  * The Class HttpRequestBuilderParserUtil.

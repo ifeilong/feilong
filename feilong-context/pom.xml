@@ -17,7 +17,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-net-httpclient4</artifactId>
+			<artifactId>feilong-net-http</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

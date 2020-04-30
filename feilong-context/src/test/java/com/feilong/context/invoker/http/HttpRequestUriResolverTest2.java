@@ -19,7 +19,7 @@ import static com.feilong.context.invoker.http.HttpRequestUriResolver.resolve;
 
 import org.junit.Test;
 
-import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.net.http.HttpClientUtil;
 import com.feilong.store.member.Member;
 
 public class HttpRequestUriResolverTest2{

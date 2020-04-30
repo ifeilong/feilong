@@ -18,6 +18,7 @@ package com.feilong.net;
 import org.junit.Test;
 
 import com.feilong.io.SpecialFolder;
+import com.feilong.net.http.URLDownloadUtil;
 
 /**
  *

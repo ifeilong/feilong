@@ -23,7 +23,7 @@ import java.util.Map;
 import com.feilong.context.Rebuilder;
 import com.feilong.context.beanproperty.HttpTypeBeanProperty;
 import com.feilong.context.invoker.RequestParamsBuilder;
-import com.feilong.net.entity.HttpRequest;
+import com.feilong.net.http.HttpRequest;
 
 /**
  * 默认的 {@link HttpRequest} 构造器.

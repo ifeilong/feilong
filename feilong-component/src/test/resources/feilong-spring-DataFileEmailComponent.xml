@@ -18,7 +18,7 @@
 		<property name="dataListQuery">
 			<bean class="com.feilong.component.TradeDataDataListQuery" />
 		</property>
-		<property name="listDataFileCreator" ref="loxiaSimpleListLoopExcelFileCreator" />
+		<property name="listDataFileCreator" ref="simpleListLoopExcelFileCreator" />
 		<property name="mailSenderConfig" ref="mailSenderConfig" />
 	</bean>
 </beans>

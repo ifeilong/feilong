@@ -17,7 +17,7 @@
 
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
-			<artifactId>feilong-office-excel-loxia</artifactId>
+			<artifactId>feilong-office-excel</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

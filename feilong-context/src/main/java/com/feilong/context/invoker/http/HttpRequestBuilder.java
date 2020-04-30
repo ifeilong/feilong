@@ -15,7 +15,7 @@
  */
 package com.feilong.context.invoker.http;
 
-import com.feilong.net.entity.HttpRequest;
+import com.feilong.net.http.HttpRequest;
 
 /**
  * 请求参数构造器.

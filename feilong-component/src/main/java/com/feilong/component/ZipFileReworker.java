@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.context.FileReworker;
 import com.feilong.io.FilenameUtil;
-import com.feilong.office.zip.CompressZipHandler;
-import com.feilong.office.zip.ZipHandler;
+import com.feilong.zip.CompressZipHandler;
+import com.feilong.zip.ZipHandler;
 
 /**
  * The Class ZipFileReworker.

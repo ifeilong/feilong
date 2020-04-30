@@ -19,7 +19,7 @@ package com.feilong.context.beanproperty;
  * http请求类型的bean属性.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.net.HttpMethodType
+ * @see com.feilong.net.http.HttpMethodType
  * @since 1.11.0
  */
 public interface HttpTypeBeanProperty extends BeanProperty{

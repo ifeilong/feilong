@@ -17,9 +17,9 @@ package com.feilong.context.invoker.http;
 
 import com.feilong.context.invoker.AbstractResponseStringBuilder;
 import com.feilong.context.invoker.ResponseStringBuilder;
-import com.feilong.net.entity.ConnectionConfig;
-import com.feilong.net.entity.HttpRequest;
-import com.feilong.net.httpclient4.HttpClientUtil;
+import com.feilong.net.http.ConnectionConfig;
+import com.feilong.net.http.HttpClientUtil;
+import com.feilong.net.http.HttpRequest;
 
 /**
  * Http 类型的 {@link ResponseStringBuilder}.

@@ -15,7 +15,7 @@
  */
 package com.feilong.context.invoker.http;
 
-import com.feilong.net.entity.ConnectionConfig;
+import com.feilong.net.http.ConnectionConfig;
 
 /**
  * 配置构造器.

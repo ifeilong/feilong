@@ -13,7 +13,7 @@
 
 	<modules>
 		<module>feilong-net-api</module>
-		<module>feilong-net-httpclient4</module>
+		<module>feilong-net-http</module>
 		<module>feilong-net-jsoup</module>
 		<module>feilong-net-filetransfer</module>
 		<module>feilong-net-mail</module>
