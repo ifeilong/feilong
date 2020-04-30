@@ -11,12 +11,6 @@
 	<artifactId>feilong-util-all</artifactId>
 	<packaging>jar</packaging>
 
-
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/UtilSuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 
 		<!--feilong-core -->
@@ -24,8 +18,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core</artifactId>
 		</dependency>
-
-
+		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core-extension</artifactId>

@@ -9,11 +9,6 @@
 
 	<artifactId>feilong-namespace</artifactId>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/FeiLongSpringNamespaceSuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 
 		<!--feilong-context -->

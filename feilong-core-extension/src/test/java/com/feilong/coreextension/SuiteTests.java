@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.httpclient4;
+package com.feilong.coreextension;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.coreextension.io.SerializableUtilTest;
+
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                GetTest.class,
-                GetResponseStatusCodeTest.class,
-                GetResponseTest.class,
+                SerializableUtilTest.class,
 
-                PutTest.class,
-                PutWithParamsTest.class,
-
-                HttpClientUtilUriSpaceTest.class,
-        //                
+        //
 })
-public class FeiLongHttpclient4SuiteTests{
+public class SuiteTests{
 
 }

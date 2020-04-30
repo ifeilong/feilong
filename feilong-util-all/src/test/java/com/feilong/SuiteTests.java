@@ -1,3 +1,4 @@
+package com.feilong;
 /*
  * Copyright (C) 2008 feilong
  *
@@ -13,27 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.namespace.AllTagTest;
-import com.feilong.namespace.CookieAccessorTagTest;
-import com.feilong.namespace.SimpleHttpTypeBeanPropertyTagTest;
+import com.feilong.core.date.dateextensionutiltest.DateExtensionUtilSuiteTests;
 
 @RunWith(Suite.class)
-@SuiteClasses({ //
+@SuiteClasses({
 
-                CookieAccessorTagTest.class,
-                SimpleHttpTypeBeanPropertyTagTest.class,
-                AllTagTest.class,
-
-        //---------------------------------------------------------------
-
+                DateExtensionUtilSuiteTests.class,
         //
 })
-public class FeiLongNamespaceSuiteTests{
+public class SuiteTests{
 
 }

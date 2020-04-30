@@ -45,6 +45,6 @@ import com.feilong.io.readerutil.ReaderUtilSuiteTests;
 
 })
 
-public class FeiLongIoSuiteTests{
+public class SuiteTests{
 
 }

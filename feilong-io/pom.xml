@@ -9,11 +9,6 @@
 
 	<artifactId>feilong-io</artifactId>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/FeiLongIoSuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>

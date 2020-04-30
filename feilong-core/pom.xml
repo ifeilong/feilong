@@ -17,11 +17,6 @@
 	<!-- 会出现在site 界面 -->
 	<description>${project.name} ${project.version} API</description>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>

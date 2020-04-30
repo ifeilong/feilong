@@ -11,8 +11,6 @@
 
 	<properties>
 		<v.commons-csv>1.3</v.commons-csv>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
 	</properties>
 
 	<dependencies>

@@ -10,11 +10,6 @@
 
 	<artifactId>feilong-tools-emailaddress</artifactId>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 
 		<dependency>

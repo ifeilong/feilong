@@ -11,11 +11,6 @@
 	<artifactId>feilong-servlet</artifactId>
 	<description>和servlet相关的api,比如request,response,seesion等的封装</description>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 
 		<dependency>

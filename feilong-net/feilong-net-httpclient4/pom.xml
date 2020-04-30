@@ -10,11 +10,6 @@
 
 	<artifactId>feilong-net-httpclient4</artifactId>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/FeiLongHttpclient4SuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 
 		<dependency>

@@ -9,11 +9,6 @@
 
 	<artifactId>feilong-context</artifactId>
 
-	<properties>
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
