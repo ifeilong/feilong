@@ -16,7 +16,7 @@
 
 package com.feilong.json.lib.ezmorph;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
+import com.feilong.core.DefaultRuntimeException;
 
 /**
  * A <strong>MorphException</strong> indicates that a call to
@@ -25,7 +25,7 @@ import org.apache.commons.lang.exception.NestableRuntimeException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public class MorphException extends NestableRuntimeException{
+public class MorphException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -540093801787033824L;

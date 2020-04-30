@@ -16,7 +16,7 @@
 
 package net.sf.json.util;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.json.lib.json.JSONException;
 

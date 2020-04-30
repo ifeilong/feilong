@@ -43,6 +43,13 @@
 			<artifactId>feilong-velocity</artifactId>
 		</dependency>
 
+		<!-- velocity need -->
+		<dependency>
+			<artifactId>commons-lang</artifactId>
+			<groupId>commons-lang</groupId>
+			<optional>true</optional>
+		</dependency>
+
 		<!--*******************servlet-api && jsp-api************************* -->
 		<!-- servlet-api -->
 		<dependency>

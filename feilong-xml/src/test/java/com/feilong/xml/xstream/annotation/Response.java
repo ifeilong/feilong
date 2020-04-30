@@ -2,8 +2,8 @@ package com.feilong.xml.xstream.annotation;
 
 import java.sql.Timestamp;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 

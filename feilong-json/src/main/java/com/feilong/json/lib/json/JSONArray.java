@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.json.lib.ezmorph.Morpher;
 import com.feilong.json.lib.ezmorph.object.IdentityObjectMorpher;

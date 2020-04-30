@@ -27,6 +27,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- commons-lang3 -->
@@ -66,6 +72,7 @@
 		</dependency>
 
 		<!-- commons-collections 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
+		<!-- commons-beanutils 需要 -->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>

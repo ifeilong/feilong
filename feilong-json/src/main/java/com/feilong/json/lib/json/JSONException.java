@@ -15,7 +15,7 @@
  */
 package com.feilong.json.lib.json;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
+import com.feilong.core.DefaultRuntimeException;
 
 /**
  * The JSONException is thrown when things are amiss.
@@ -23,7 +23,7 @@ import org.apache.commons.lang.exception.NestableRuntimeException;
  * @author JSON.org
  * @version 4
  */
-public class JSONException extends NestableRuntimeException{
+public class JSONException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6995087065217051815L;
@@ -37,7 +37,7 @@ public class JSONException extends NestableRuntimeException{
      *            the msg
      */
     public JSONException(String msg){
-        super(msg, null);
+        super(msg);
     }
 
     /**

@@ -19,7 +19,7 @@ package com.feilong.json.lib.ezmorph.array;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.feilong.json.lib.ezmorph.MorphException;
 import com.feilong.json.lib.ezmorph.Morpher;

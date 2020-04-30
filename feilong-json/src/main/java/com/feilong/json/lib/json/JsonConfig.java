@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.map.MultiKeyMap;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.collections4.map.MultiKeyMap;
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.json.lib.json.processors.DefaultDefaultValueProcessor;
 import com.feilong.json.lib.json.processors.DefaultValueProcessor;

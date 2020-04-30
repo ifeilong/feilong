@@ -15,7 +15,7 @@
  */
 package com.feilong.json.lib.json.util;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.feilong.json.lib.json.JSONArray;
 import com.feilong.json.lib.json.JSONException;

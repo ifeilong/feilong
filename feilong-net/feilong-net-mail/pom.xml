@@ -29,6 +29,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- velocity need -->
+		<dependency>
+			<artifactId>commons-lang</artifactId>
+			<groupId>commons-lang</groupId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- feilong-json -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -43,11 +50,11 @@
 		</dependency>
 
 		<!---->
-	<!-- 	<dependency>
+		<!-- <dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.6.2</version>
-		</dependency> -->
+			</dependency> -->
 
 		<!-- commons-email -->
 		<!-- <dependency>
