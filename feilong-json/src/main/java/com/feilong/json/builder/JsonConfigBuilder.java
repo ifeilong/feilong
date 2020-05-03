@@ -96,8 +96,9 @@ public final class JsonConfigBuilder{
         //---------------------------------------------------------------
 
         //排除
-        if (isNotNullOrEmpty(useJavaToJsonConfig.getExcludes())){
-            jsonConfig.setExcludes(useJavaToJsonConfig.getExcludes());
+        String[] excludes = useJavaToJsonConfig.getExcludes();
+        if (isNotNullOrEmpty(excludes)){
+            jsonConfig.setExcludes(excludes);
         }
 
         //---------------------------------------------------------------

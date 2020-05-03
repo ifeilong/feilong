@@ -33,6 +33,8 @@ public final class JSONNull implements JSON{
     /** singleton instance. */
     private static JSONNull   instance;
 
+    //---------------------------------------------------------------
+
     static{
         instance = new JSONNull();
     }
@@ -112,6 +114,8 @@ public final class JSONNull implements JSON{
     public int size(){
         throw new JSONException("Object is null");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Get the "null" string value.

@@ -52,6 +52,8 @@ public abstract class JavaIdentifierTransformer{
     /** Whitespace transformer 'white space' => 'whitespace' */
     public static final JavaIdentifierTransformer WHITESPACE = new WhiteSpaceJavaIdentifierTransformer();
 
+    //---------------------------------------------------------------
+
     public abstract String transformToJavaIdentifier(String str);
 
     /**

@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail.entity;
 
+import com.feilong.json.SensitiveWords;
+
 /**
  * 父类配置.
  *
@@ -52,6 +54,7 @@ public abstract class BaseConfig implements SessionConfig{
      * example:******.
      * </p>
      */
+    @SensitiveWords
     private String  password;
 
     //---------------------------------------------------------------

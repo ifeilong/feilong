@@ -18,14 +18,12 @@ package com.feilong.lib.json;
 
 import java.lang.ref.SoftReference;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.json.util.JSONUtils;
-import com.feilong.lib.json.util.JsonEventListener;
 
 /**
  * Base class for JSONObject and JSONArray.
@@ -87,172 +85,6 @@ abstract class AbstractJSON{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Fires an end of array event.
-     *
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireArrayEndEvent(JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onArrayEnd();
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires a start of array event.
-     *
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireArrayStartEvent(JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onArrayStart();
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires an element added event.
-     *
-     * @param index
-     *            the index where the element was added
-     * @param element
-     *            the added element
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireElementAddedEvent(int index,Object element,JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onElementAdded(index, element);
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires an error event.
-     *
-     * @param jsone
-     *            the thrown exception
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireErrorEvent(JSONException jsone,JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onError(jsone);
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires an end of object event.
-     *
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireObjectEndEvent(JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onObjectEnd();
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires a start of object event.
-     *
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireObjectStartEvent(JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onObjectStart();
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires a property set event.
-     *
-     * @param key
-     *            the name of the property
-     * @param value
-     *            the value of the property
-     * @param accumulated
-     *            if the value has been accumulated over 'key'
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void firePropertySetEvent(String key,Object value,boolean accumulated,JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onPropertySet(key, value, accumulated);
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
-
-    /**
-     * Fires a warning event.
-     *
-     * @param warning
-     *            the warning message
-     * @param jsonConfig
-     *            the json config
-     */
-    protected static void fireWarnEvent(String warning,JsonConfig jsonConfig){
-        if (jsonConfig.isEventTriggeringEnabled()){
-            for (Iterator listeners = jsonConfig.getJsonEventListeners().iterator(); listeners.hasNext();){
-                JsonEventListener listener = (JsonEventListener) listeners.next();
-                try{
-                    listener.onWarning(warning);
-                }catch (RuntimeException e){
-                    LOGGER.warn("", e);
-                }
-            }
-        }
-    }
 
     /**
      * Removes a reference for cycle detection check.

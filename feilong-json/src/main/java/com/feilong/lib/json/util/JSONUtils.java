@@ -460,11 +460,10 @@ public final class JSONUtils{
      * @return true, if is string
      */
     public static boolean isString(Object obj){
-        if ((obj instanceof String) || (obj instanceof Character)
-                        || (obj != null && (obj.getClass() == Character.TYPE || String.class.isAssignableFrom(obj.getClass())))){
-            return true;
-        }
-        return false;
+        return obj instanceof String || //
+                        obj instanceof Character || //
+                        obj != null && (obj.getClass() == Character.TYPE || //
+                                        String.class.isAssignableFrom(obj.getClass()));
     }
 
     /**
@@ -481,9 +480,13 @@ public final class JSONUtils{
      * @return true, if successful
      */
     public static boolean mayBeJSON(String string){
-        return string != null && ("null".equals(string) || (string.startsWith("[") && string.endsWith("]"))
-                        || (string.startsWith("{") && string.endsWith("}")));
+        return string != null && //
+                        ("null".equals(string) || //
+                                        (string.startsWith("[") && string.endsWith("]")) || //
+                                        (string.startsWith("{") && string.endsWith("}")));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Creates a new MorphDynaBean from a JSONObject. The MorphDynaBean will have
@@ -531,6 +534,8 @@ public final class JSONUtils{
         }
         return dynaBean;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Produce a string from a Number.
@@ -964,6 +969,8 @@ public final class JSONUtils{
             return false;
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Instantiates a new JSON utils.

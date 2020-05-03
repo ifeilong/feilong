@@ -55,6 +55,8 @@ public class JSONFunction implements Serializable{
         return new JSONFunction((params != null) ? StringUtils.split(params, ",") : null, text != null ? text : "");
     }
 
+    //---------------------------------------------------------------
+
     /** the parameters of this function. */
     private String[]     params;
 
@@ -98,6 +100,8 @@ public class JSONFunction implements Serializable{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Equals.
      *
@@ -139,6 +143,8 @@ public class JSONFunction implements Serializable{
         return builder.isEquals();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the parameters of this function.
      *
@@ -171,6 +177,8 @@ public class JSONFunction implements Serializable{
         builder.append(text);
         return builder.toHashCode();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns the string representation of this function.

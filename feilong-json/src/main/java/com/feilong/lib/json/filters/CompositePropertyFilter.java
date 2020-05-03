@@ -32,6 +32,8 @@ public class CompositePropertyFilter implements PropertyFilter{
     /** The filters. */
     private final List filters = new ArrayList();
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new composite property filter.
      */
@@ -55,6 +57,8 @@ public class CompositePropertyFilter implements PropertyFilter{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 添加 property filter.
@@ -89,6 +93,8 @@ public class CompositePropertyFilter implements PropertyFilter{
         }
         return false;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 删除 property filter.

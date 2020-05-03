@@ -68,6 +68,8 @@ public abstract class CycleDetectionStrategy{
      */
     public abstract JSONObject handleRepeatedReferenceAsObject(Object reference);
 
+    //---------------------------------------------------------------
+
     private static final class LenientCycleDetectionStrategy extends CycleDetectionStrategy{
 
         @Override

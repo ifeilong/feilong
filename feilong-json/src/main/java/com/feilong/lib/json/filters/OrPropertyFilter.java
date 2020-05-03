@@ -31,6 +31,8 @@ public class OrPropertyFilter implements PropertyFilter{
     /** The filter 2. */
     private final PropertyFilter filter2;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new or property filter.
      *

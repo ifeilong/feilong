@@ -60,6 +60,8 @@ public class JSONStringer extends JSONBuilder{
         super(new StringWriter());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Return the JSON text. This method is used to obtain the product of the
      * JSONStringer instance. It will return <code>null</code> if there was a

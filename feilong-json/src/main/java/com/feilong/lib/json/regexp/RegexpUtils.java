@@ -51,6 +51,8 @@ public class RegexpUtils{
         return new JdkRegexpMatcher(pattern, true);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new regexp utils.
      */

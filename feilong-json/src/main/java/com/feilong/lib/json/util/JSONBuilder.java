@@ -58,6 +58,8 @@ public class JSONBuilder{
 
     private static final int MAXDEPTH = 20;
 
+    //---------------------------------------------------------------
+
     /**
      * The comma flag determines if a comma should be output before the next
      * value.

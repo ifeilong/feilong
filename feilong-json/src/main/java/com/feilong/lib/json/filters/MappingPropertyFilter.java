@@ -32,6 +32,8 @@ public abstract class MappingPropertyFilter implements PropertyFilter{
     /** The filters. */
     private final Map filters = new HashMap();
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new mapping property filter.
      */

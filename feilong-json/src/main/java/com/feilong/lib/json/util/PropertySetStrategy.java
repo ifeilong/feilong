@@ -36,6 +36,8 @@ public abstract class PropertySetStrategy{
     /** The Constant DEFAULT. */
     public static final PropertySetStrategy DEFAULT = new DefaultPropertySetStrategy();
 
+    //---------------------------------------------------------------
+
     /**
      * 设置 property.
      *
@@ -67,6 +69,8 @@ public abstract class PropertySetStrategy{
     public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig) throws JSONException{
         setProperty(bean, key, value);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * The Class DefaultPropertySetStrategy.
@@ -134,7 +138,7 @@ public abstract class PropertySetStrategy{
          * @param value
          *            the value
          */
-        private void _setProperty(Object bean,String key,Object value){
+        private static void _setProperty(Object bean,String key,Object value){
             try{
                 PropertyUtils.setSimpleProperty(bean, key, value);
             }catch (Exception e){

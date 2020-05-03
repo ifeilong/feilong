@@ -29,6 +29,8 @@ public class JdkRegexpMatcher implements RegexpMatcher{
     /** The pattern. */
     private final Pattern pattern;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new jdk regexp matcher.
      *
@@ -72,6 +74,8 @@ public class JdkRegexpMatcher implements RegexpMatcher{
         }
         return "";
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Matches.

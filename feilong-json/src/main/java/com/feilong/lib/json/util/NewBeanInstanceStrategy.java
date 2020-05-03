@@ -34,6 +34,8 @@ public abstract class NewBeanInstanceStrategy{
     /** Calls Class.newInstance() */
     public static final NewBeanInstanceStrategy DEFAULT = new DefaultNewBeanInstanceStrategy();
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a new instance.
      *

@@ -44,6 +44,8 @@ public class EnumMorpher implements ObjectMorpher{
         this.enumClass = enumClass;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Morph.
      *
@@ -68,6 +70,8 @@ public class EnumMorpher implements ObjectMorpher{
     public Class morphsTo(){
         return enumClass;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Supports.
