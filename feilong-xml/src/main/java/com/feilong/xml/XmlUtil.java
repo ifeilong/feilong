@@ -24,11 +24,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
@@ -40,7 +36,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -70,7 +65,7 @@ import com.thoughtworks.xstream.XStream;
  * </p>
  * <p>
  * <b>1.不带XStreamConfig参数</b> <br>
- * 使用 {@code com.feilong.tools.xstream.XStreamUtil.toXML(user, null)},则返回
+ * 使用 {@code com.feilong.tools.xstream.XmlUtil.toXML(user, null)},则返回
  * 
  * <pre class="code">
  * {@code
@@ -97,7 +92,7 @@ import com.thoughtworks.xstream.XStream;
  *     User user = new User(1L);
  *     XStreamConfig xStreamConfig = new XStreamConfig();
  *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
- *     LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
+ *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
  * </pre>
  * </code>
  * 
@@ -127,7 +122,7 @@ import com.thoughtworks.xstream.XStream;
  *     XStreamConfig xStreamConfig = new XStreamConfig();
  *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
  *     xStreamConfig.getImplicitCollectionMap().put(&quot;userAddresseList&quot;, User.class);
- *     LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
+ *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
  * </pre>
  * </code>
  * 
@@ -253,6 +248,8 @@ public class XmlUtil{
         return map;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得node属性值.
      * 
@@ -264,7 +261,7 @@ public class XmlUtil{
      *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
-    public static String getAttributeValue(Node node,String attributeName){
+    private static String getAttributeValue(Node node,String attributeName){
         Validate.notNull(node, "node can't be null!");
         Validate.notBlank(attributeName, "attributeName can't be null/empty!");
 
@@ -276,240 +273,6 @@ public class XmlUtil{
         }
         return EMPTY;
     }
-
-    /**
-     * 获得 元素 <code>element</code> 指定的属性名字 <code>attributeName</code> 的值.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * 比如有以下的xml片段
-     * 
-     * <pre class="code">
-    {@code 
-    <novel ID="偷香">
-                <lastedCatalogName>第1020节 迷失空间</lastedCatalogName>
-                <beginType>next</beginType>
-    </novel>
-    
-    }
-     * 
-     * </pre>
-     * 
-     * 此时你可以使用
-     * 
-     * <pre class="code">
-     * 
-     * String id = DomParser.getAttributeValue(novelElement, "ID");
-     * 
-     * </pre>
-     * 
-     * 来获得字符串 "偷香"
-     * 
-     * </blockquote>
-     * 
-     * @param element
-     *            the element
-     * @param attributeName
-     *            属性名字
-     * @return 如果 <code>element</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         the empty string if that attribute does not have a specified or default value.
-     */
-    public static String getAttributeValue(Element element,String attributeName){
-        Validate.notNull(element, "element can't be null!");
-        Validate.notBlank(attributeName, "attributeName can't be null/empty!");
-        //---------------------------------------------------------------
-        return element.getAttribute(attributeName);
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 获得 <code>element</code> 元素指定的 子元素 <code>childElementName</code> 的文字.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * 比如有以下的xml片段
-     * 
-     * <pre class="code">
-    {@code 
-    <novel ID="偷香">
-                <lastedCatalogName>第1020节 迷失空间</lastedCatalogName>
-                <beginType>next</beginType>
-    </novel>
-    
-    }
-     * 
-     * </pre>
-     * 
-     * 此时你可以使用
-     * 
-     * <pre class="code">
-     * 
-     * String beginType = DomParser.getChildElementText(novelElement, "beginType");
-     * 
-     * </pre>
-     * 
-     * 来获得字符串 next
-     * 
-     * </blockquote>
-     *
-     * @param element
-     *            the element
-     * @param childElementName
-     *            子元素的元素名称
-     * @return 如果 <code>element</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>childElementName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>childElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>element</code> 找不到指定名字<code>childElementName</code>的子元素 ,那么返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>element</code> 找到指定名字<code>childElementName</code>的子元素 ,那么返回元素的 {@link org.w3c.dom.Node#getTextContent()}
-     */
-    public static String getChildElementText(Element element,String childElementName){
-        Validate.notNull(element, "element can't be null!");
-        Validate.notBlank(childElementName, "childElementName can't be null/empty!");
-
-        //---------------------------------------------------------------
-        NodeList nodeList = element.getElementsByTagName(childElementName);
-        if (null == nodeList){
-            return EMPTY;
-        }
-        //---------------------------------------------------------------
-        Node item = nodeList.item(0);
-        if (null == item){
-            return EMPTY;
-        }
-        return item.getTextContent();
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 获得 element text.
-     *
-     * @param element
-     *            the element
-     * @return the element text
-     */
-    public static String getElementText(Element element){
-        Validate.notNull(element, "element can't be null!");
-        return element.getTextContent();
-    }
-
-    /**
-     * 获得 parent by tag name.
-     *
-     * @param element
-     *            the element
-     * @param parentTagName
-     *            the parent tag name
-     * @return 如果 <code>parentTagName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>parentTagName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     */
-    public static Element getParentByTagName(Element element,String parentTagName){
-        Validate.notNull(element, "element can't be null!");
-        Validate.notBlank(parentTagName, "parentTagName can't be null/empty!");
-        //---------------------------------------------------------------
-        Element parentElement = (Element) element.getParentNode();
-        if (null == parentElement){
-            return null;
-        }
-        if (parentTagName.equals(parentElement.getTagName())){
-            return parentElement;
-        }
-        //递归
-        return getParentByTagName(parentElement, parentTagName);
-    }
-
-    /**
-     * 获得 child by tag name.
-     *
-     * @param element
-     *            the element
-     * @param childTagName
-     *            the child tag name
-     * @return 如果 <code>childTagName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>childTagName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     */
-    public static Element getChildElementByTagName(Element element,String childTagName){
-        Validate.notNull(element, "element can't be null!");
-        Validate.notBlank(childTagName, "childTagName can't be null/empty!");
-
-        NodeList childNodes = element.getChildNodes();
-        for (int i = 0, j = childNodes.getLength(); i < j; ++i){
-            Node node = childNodes.item(i);
-            if (Node.ELEMENT_NODE != node.getNodeType()){
-                continue;
-            }
-            //---------------------------------------------------------------
-            Element childElement = (Element) node;
-            if (childTagName.equals(childElement.getTagName())){
-                return childElement;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 获得 children by tag name.
-     *
-     * @param element
-     *            the element
-     * @param childTagName
-     *            the child tag name
-     * @return 如果 <code>childTagName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>childTagName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     */
-    public static List<Element> getChildrenElementsByTagName(Element element,String childTagName){
-        Validate.notNull(element, "element can't be null!");
-        Validate.notBlank(childTagName, "childTagName can't be null/empty!");
-
-        NodeList childNodes = element.getChildNodes();
-
-        List<Element> list = new LinkedList<>();
-        for (int i = 0, j = childNodes.getLength(); i < j; ++i){
-            Node node = childNodes.item(i);
-            if (Node.ELEMENT_NODE != node.getNodeType()){
-                continue;
-            }
-
-            Element element2 = (Element) node;
-            if (childTagName.equals(element2.getTagName())){
-                list.add(element2);
-            }
-        }
-        return list;
-    }
-
-    //    /**
-    //     * 获取节点及其后代的文本内容.
-    //     * 
-    //     * @param nodeTagName
-    //     *            节点名称
-    //     * @return 节点及其后代的文本内容
-    //     */
-    //    public String getNodeTextContent(String nodeTagName){
-    //        Node node = getNodeByTagName(nodeTagName);
-    //        return getNodeTextContent(node);
-    //    }
-
-    //---------------------------------------------------------------
-    //
-    //    /**
-    //     * 获得节点内容.
-    //     * 
-    //     * @param node
-    //     *            节点
-    //     * @return the node text content
-    //     */
-    //    private static String getNodeTextContent(Node node){
-    //        Validate.notNull(node, "element can't be null!");
-    //        return node.getTextContent();
-    //    }
 
     //---------------------------------------------------------------
 
@@ -556,13 +319,6 @@ public class XmlUtil{
     /**
      * 将 map 转成 xml string.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>支持 {@link HashMap},{@link LinkedHashMap},{@link ConcurrentHashMap}等map子类 按照 <code>rootElementName</code> 根元素名称输出</li>
-     * </ol>
-     * </blockquote>
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -574,7 +330,7 @@ public class XmlUtil{
      * map.put("call_back_url", "");
      * map.put("notify_url", "");
      * 
-     * LOGGER.debug(XStreamUtil.toXML(map, "xml"));
+     * LOGGER.debug(XmlUtil.toXML(map, "xml"));
      * </pre>
      * 
      * <b>返回:</b>
@@ -617,13 +373,6 @@ public class XmlUtil{
     /**
      * 将 map 转成 xml 字符串.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>支持 {@link HashMap},{@link LinkedHashMap},{@link ConcurrentHashMap}等map子类 按照 <code>rootElementName</code> 根元素名称输出</li>
-     * </ol>
-     * </blockquote>
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -635,7 +384,7 @@ public class XmlUtil{
      * map.put("call_back_url", "");
      * map.put("notify_url", "");
      * 
-     * LOGGER.debug(XStreamUtil.toXML(map, "xml",true));
+     * LOGGER.debug(XmlUtil.toXML(map, "xml",true));
      * </pre>
      * 
      * <b>返回:</b>
@@ -660,7 +409,7 @@ public class XmlUtil{
      * map.put("call_back_url", "");
      * map.put("notify_url", "");
      * 
-     * LOGGER.debug(XStreamUtil.toXML(map, "xml",false));
+     * LOGGER.debug(XmlUtil.toXML(map, "xml",false));
      * </pre>
      * 
      * <b>返回:</b>
@@ -701,7 +450,6 @@ public class XmlUtil{
         if (map.getClass() != HashMap.class){
             xStreamConfig.getAliasMap().put(rootElementName, map.getClass());
         }
-
         return toXML(map, xStreamConfig);
     }
 
@@ -719,7 +467,7 @@ public class XmlUtil{
      * 
      * <p>
      * <b>1.不带XStreamConfig参数</b> <br>
-     * 使用 {@code com.feilong.tools.xstream.XStreamUtil.toXML(user, null)},则返回
+     * 使用 {@code com.feilong.tools.xstream.XmlUtil.toXML(user, null)},则返回
      * 
      * <pre class="code">
      * {@code
@@ -746,7 +494,7 @@ public class XmlUtil{
      *     User user = new User(1L);
      *     XStreamConfig xStreamConfig = new XStreamConfig();
      *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
-     *     LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
+     *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
      * </pre>
      * </code>
      * 
@@ -776,7 +524,7 @@ public class XmlUtil{
      *     XStreamConfig xStreamConfig = new XStreamConfig();
      *     xStreamConfig.getAliasMap().put(&quot;user&quot;, User.class);
      *     xStreamConfig.getImplicitCollectionMap().put(&quot;userAddresseList&quot;, User.class);
-     *     LOGGER.info(XStreamUtil.toXML(user, xStreamConfig));
+     *     LOGGER.info(XmlUtil.toXML(user, xStreamConfig));
      * </pre>
      * </code>
      * 
@@ -839,7 +587,7 @@ public class XmlUtil{
      *                 + "<sign><![CDATA[288AE0E455273102147B9CF95F43D222]]></sign>\r\n" + "<result_code><![CDATA[SUCCESS]]></result_code>\r\n"
      *                 + "</xml>}";
      * 
-     * Map{@code <String, String>} map = XStreamUtil.fromXML(xml, "xml");
+     * Map{@code <String, String>} map = XmlUtil.fromXML(xml, "xml");
      * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
@@ -867,13 +615,14 @@ public class XmlUtil{
      * @return 如果 <code>rootElementName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>rootElementName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>xml</code> 是null,返回 null<br>
+     * @since 3.0.0 change name from fromXMl
      */
-    public static Map<String, String> fromXML(String xml,String rootElementName){
+    public static Map<String, String> toMap(String xml,String rootElementName){
         Validate.notBlank(rootElementName, "rootElementName can't be blank!");
         if (isNullOrEmpty(xml)){
             return null;
         }
-        return fromXML(xml, XStreamConfigBuilder.buildSimpleMapXStreamConfig(rootElementName));
+        return toBean(xml, XStreamConfigBuilder.buildSimpleMapXStreamConfig(rootElementName));
     }
 
     /**
@@ -969,7 +718,7 @@ public class XmlUtil{
      *                     + "<sign><![CDATA[288AE0E455273102147B9CF95F43D222]]></sign>\r\n"
      *                     + "<result_code><![CDATA[SUCCESS]]></result_code>\r\n" + "</xml>";}
      * 
-     * <span style="color:red">WechatCloseResponse map = XStreamUtil.fromXML(xml, WechatCloseResponse.class);</span>
+     * <span style="color:red">WechatCloseResponse map = XmlUtil.fromXML(xml, WechatCloseResponse.class);</span>
      * LOGGER.debug("{}", JsonUtil.format(map));
      * </pre>
      * 
@@ -998,15 +747,16 @@ public class XmlUtil{
      *            the xml
      * @param processAnnotationsType
      *            the process annotations type
-     * @return 如果 <code>processAnnotationsType</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>xml</code> 是null,返回 null<br>
+     * @return 如果 <code>xml</code> 是null,返回 null<br>
+     *         如果 <code>processAnnotationsType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 3.0.0 change name from fromXMl
      */
-    public static <T> T fromXML(String xml,Class<T> processAnnotationsType){
+    public static <T> T toBean(String xml,Class<T> processAnnotationsType){
         Validate.notNull(processAnnotationsType, "processAnnotationsType can't be blank!");
         if (isNullOrEmpty(xml)){
             return null;
         }
-        return fromXML(xml, new XStreamConfig(processAnnotationsType));
+        return toBean(xml, new XStreamConfig(processAnnotationsType));
     }
 
     /**
@@ -1026,8 +776,9 @@ public class XmlUtil{
      * @param xStreamConfig
      *            the x stream config
      * @return 如果 <code>xml</code> 是null或者是empty,返回 null<br>
+     * @since 3.0.0 change name from fromXMl
      */
-    public static <T> T fromXML(String xml,XStreamConfig xStreamConfig){
+    public static <T> T toBean(String xml,XStreamConfig xStreamConfig){
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("input params info,xml:[{}],xStreamConfig:[{}]", xml, JsonUtil.format(xStreamConfig));
         }

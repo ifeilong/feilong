@@ -1,4 +1,4 @@
-package com.feilong.xml.xstream.annotation;
+package com.feilong.xml.temp.annotation;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -24,43 +24,36 @@ public class Request{
     private String reqTime;
 
     public String getReturnCode(){
-
         return returnCode;
 
     }
 
     public void setReturnCode(String returnCode){
-
         this.returnCode = returnCode;
 
     }
 
     public String getReturnMessage(){
-
         return returnMessage;
 
     }
 
     public void setReturnMessage(String returnMessage){
-
         this.returnMessage = returnMessage;
 
     }
 
     public int getStatus(){
-
         return status;
 
     }
 
     public void setStatus(int status){
-
         this.status = status;
 
     }
 
     public String getReqTime(){
-
         return reqTime;
 
     }

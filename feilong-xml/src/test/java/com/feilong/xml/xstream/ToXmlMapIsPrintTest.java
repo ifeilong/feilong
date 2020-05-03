@@ -17,6 +17,7 @@ package com.feilong.xml.xstream;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -80,7 +81,12 @@ public class ToXmlMapIsPrintTest extends AbstractTest{
         map.put("call_back_url", "");
         map.put("notify_url", null);
 
-        LOGGER.debug(XmlUtil.toXML(map, "xml"));
+        String xml = XmlUtil.toXML(map, "xml");
+
+        assertTrue(xml.startsWith("<xml>"));
+        assertTrue(xml.endsWith("</xml>"));
+        assertTrue(xml.contains("<total_fee>&lt;name&gt;</total_fee>"));
+        assertTrue(xml.contains("<notify_url></notify_url>"));
     }
 
     @Test

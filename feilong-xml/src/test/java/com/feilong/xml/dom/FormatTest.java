@@ -15,12 +15,17 @@
  */
 package com.feilong.xml.dom;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
+import com.feilong.core.CharsetType;
+import com.feilong.core.lang.ClassLoaderUtil;
+import com.feilong.io.IOReaderUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
-public class XmlStringFormatTest extends AbstractTest{
+public class FormatTest extends AbstractTest{
 
     @Test
     public void test(){
@@ -36,6 +41,13 @@ public class XmlStringFormatTest extends AbstractTest{
                         + "        <TXN_CHNL_CD>DAX1</TXN_CHNL_CD>\r\n" + "        <TXN_CHNL_NM />\r\n" + "        <TXN_ETC1 />\r\n"
                         + "        <TXN_ETC2 />\r\n" + "        <TXN_ETC3 />\r\n" + "        <TXN_ETC4 />\r\n" + "        <TXN_ETC5 />\r\n"
                         + "    </INPOLIST>    \r\n" + "</RESULT>";
-        LOGGER.debug(XmlUtil.format(xmlString));
+        //LOGGER.debug(XmlUtil.format(xmlString));
+
+        //---------------------------------------------------------------
+
+        String readToString = IOReaderUtil
+                        .readToString(ClassLoaderUtil.getResourceAsStream("formattest.xml", FormatTest.class), CharsetType.UTF8);
+
+        assertEquals(readToString, XmlUtil.format(xmlString));
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RESULT>
+    <INPOLIST>
+        <TXN_ID>2014000000000004</TXN_ID>
+        <TYPE1>ACC</TYPE1>
+        <TYPE2>001</TYPE2>
+        <TXN_DT>2014-06-30</TXN_DT>
+        <TXN_AMT>129.86</TXN_AMT>
+        <TXN_STATCD>003</TXN_STATCD>
+        <TXN_CHNL_CD>DAX1</TXN_CHNL_CD>
+        <TXN_CHNL_NM/>
+        <TXN_ETC1/>
+        <TXN_ETC2/>
+        <TXN_ETC3/>
+        <TXN_ETC4/>
+        <TXN_ETC5/>
+    </INPOLIST>
+    <INPOLIST>
+        <TXN_ID>2014000000000005</TXN_ID>
+        <TYPE1>ACC</TYPE1>
+        <TYPE2>001</TYPE2>
+        <TXN_DT>2014-06-30</TXN_DT>
+        <TXN_AMT>10250.88</TXN_AMT>
+        <TXN_STATCD>003</TXN_STATCD>
+        <TXN_CHNL_CD>DAX1</TXN_CHNL_CD>
+        <TXN_CHNL_NM/>
+        <TXN_ETC1/>
+        <TXN_ETC2/>
+        <TXN_ETC3/>
+        <TXN_ETC4/>
+        <TXN_ETC5/>
+    </INPOLIST>    
+</RESULT>

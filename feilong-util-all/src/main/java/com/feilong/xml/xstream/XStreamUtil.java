@@ -483,7 +483,7 @@ public final class XStreamUtil{
      */
     @Deprecated
     public static Map<String, String> fromXML(String xml,String rootElementName){
-        return XmlUtil.fromXML(xml, rootElementName);
+        return XmlUtil.toMap(xml, rootElementName);
     }
 
     /**
@@ -615,7 +615,7 @@ public final class XStreamUtil{
      */
     @Deprecated
     public static <T> T fromXML(String xml,Class<T> processAnnotationsType){
-        return XmlUtil.fromXML(xml, processAnnotationsType);
+        return XmlUtil.toBean(xml, processAnnotationsType);
     }
 
     /**
@@ -639,7 +639,7 @@ public final class XStreamUtil{
      */
     @Deprecated
     public static <T> T fromXML(String xml,XStreamConfig xStreamConfig){
-        return XmlUtil.fromXML(xml, xStreamConfig);
+        return XmlUtil.toBean(xml, xStreamConfig);
     }
 
 }

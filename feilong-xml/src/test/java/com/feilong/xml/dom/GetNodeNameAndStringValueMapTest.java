@@ -15,15 +15,18 @@
  */
 package com.feilong.xml.dom;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+
 import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
-public class GetNodeListByXPathTest extends AbstractTest{
+public class GetNodeNameAndStringValueMapTest extends AbstractTest{
 
     @Test
     public void test(){
@@ -41,7 +44,25 @@ public class GetNodeListByXPathTest extends AbstractTest{
                         + "    </INPOLIST>    \r\n" + "</RESULT>";
 
         Map<String, String> map = XmlUtil.getNodeNameAndStringValueMap(xmlString, "/RESULT/INPOLIST/*");
-        LOGGER.debug(JsonUtil.format(map));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("TXN_ID", "2014000000000005"),
+                                        hasEntry("TYPE2", "001"),
+                                        hasEntry("TYPE1", "ACC"),
+                                        hasEntry("TXN_DT", "2014-06-30"),
+                                        hasEntry("TXN_AMT", "10250.88"),
+                                        hasEntry("TXN_STATCD", "003"),
+                                        hasEntry("TXN_CHNL_CD", "DAX1"),
+                                        hasEntry("TXN_CHNL_NM", ""),
+                                        hasEntry("TXN_ETC1", ""),
+                                        hasEntry("TXN_ETC2", ""),
+                                        hasEntry("TXN_ETC3", ""),
+                                        hasEntry("TXN_ETC4", ""),
+                                        hasEntry("TXN_ETC5", "")
+                        //     
+                        ));
+
     }
 
 }

@@ -23,7 +23,7 @@ import com.feilong.xml.XmlUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see XmlUtil#fromXML(String, Class)
+ * @see XmlUtil#toBean(String, Class)
  * @since 1.11.3
  */
 public class XStreamStringToBeanConverter<T> extends AbstractBeanClassStringToBeanConverter<T>{
@@ -35,6 +35,6 @@ public class XStreamStringToBeanConverter<T> extends AbstractBeanClassStringToBe
      */
     @Override
     protected T handler(String inputString){
-        return XmlUtil.fromXML(inputString, beanClass);
+        return XmlUtil.toBean(inputString, beanClass);
     }
 }

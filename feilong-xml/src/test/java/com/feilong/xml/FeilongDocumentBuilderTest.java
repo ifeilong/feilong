@@ -23,11 +23,6 @@ import java.io.File;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 public class FeilongDocumentBuilderTest{
 
     @Test(expected = NullPointerException.class)

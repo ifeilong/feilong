@@ -19,8 +19,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.xml.xstream.FromXmlMapTest;
-import com.feilong.xml.xstream.FromXmlXStreamConfigTest;
+import com.feilong.xml.dom.FormatTest;
+import com.feilong.xml.dom.GetNodeNameAndStringValueMapTest;
+import com.feilong.xml.xstream.ToBeanTest;
+import com.feilong.xml.xstream.ToBeanXStreamConfigTest;
+import com.feilong.xml.xstream.ToMapTest;
 import com.feilong.xml.xstream.ToXmlMapIsPrettyPrintFalseTest;
 import com.feilong.xml.xstream.ToXmlMapIsPrintTest;
 import com.feilong.xml.xstream.ToXmlTest;
@@ -30,13 +33,17 @@ import com.feilong.xml.xstream.ToXmlWithConfigTest;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-                FromXmlMapTest.class,
-                FromXmlXStreamConfigTest.class,
+                ToBeanTest.class,
+                ToMapTest.class,
+                ToBeanXStreamConfigTest.class,
                 ToXmlMapIsPrintTest.class,
                 ToXmlMapIsPrettyPrintFalseTest.class,
                 ToXmlTest.class,
                 ToXmlWithConfigMapTest.class,
                 ToXmlWithConfigTest.class,
+
+                GetNodeNameAndStringValueMapTest.class,
+                FormatTest.class,
 
                 FeilongDocumentBuilderTest.class,
 

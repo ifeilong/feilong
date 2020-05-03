@@ -1,4 +1,4 @@
-package com.feilong.xml.xstream.annotation;
+package com.feilong.xml.temp.annotation;
 
 import java.sql.Timestamp;
 

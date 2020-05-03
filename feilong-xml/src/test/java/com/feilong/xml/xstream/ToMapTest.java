@@ -15,10 +15,10 @@
  */
 package com.feilong.xml.xstream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertNull;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 
@@ -26,7 +26,7 @@ import org.junit.Test;
 
 import com.feilong.xml.XmlUtil;
 
-public class FromXmlMapTest{
+public class ToMapTest{
 
     private static final String xml = "<xml><return_code><![CDATA[SUCCESS]]></return_code>\r\n"
                     + "<return_msg><![CDATA[OK]]></return_msg>\r\n" + "<appid><![CDATA[wx2cc3b3d8bb8df520]]></appid>\r\n"
@@ -37,7 +37,7 @@ public class FromXmlMapTest{
 
     @Test
     public void test(){
-        Map<String, String> map = XmlUtil.fromXML(xml, "xml");
+        Map<String, String> map = XmlUtil.toMap(xml, "xml");
         assertThat(
                         map,
                         allOf(
@@ -55,24 +55,24 @@ public class FromXmlMapTest{
 
     @Test
     public void test1(){
-        assertNull(XmlUtil.fromXML(null, "xml"));
+        assertNull(XmlUtil.toMap(null, "xml"));
     }
 
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testFromXmlMapTestNull(){
-        XmlUtil.fromXML(xml, (String) null);
+        XmlUtil.toMap(xml, (String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFromXmlMapTestEmpty(){
-        XmlUtil.fromXML(xml, "");
+        XmlUtil.toMap(xml, "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFromXmlMapTestBlank(){
-        XmlUtil.fromXML(xml, " ");
+        XmlUtil.toMap(xml, " ");
     }
 
 }

@@ -1,15 +1,13 @@
-package com.feilong.xml.xstream;
+package com.feilong.xml.temp.annotation;
 
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
-import com.feilong.xml.xstream.annotation.Request;
-import com.feilong.xml.xstream.annotation.Response;
 
 public class XStreamTest extends AbstractTest{
 
     @Test
-    public void testXStreamTest(){
+    public void test(){
         Request requestTest = new Request();
         requestTest.setReturnCode("200");
         requestTest.setReturnMessage("ok");

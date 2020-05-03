@@ -51,7 +51,8 @@ class TransformerBuilder{
         try{
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+            //transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "8");
 
             return transformer;
         }catch (TransformerException e){

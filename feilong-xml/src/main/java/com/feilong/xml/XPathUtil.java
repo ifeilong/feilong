@@ -51,6 +51,7 @@ final class XPathUtil{
      *
      * @return 通过xpath 获取对象
      */
+    @SuppressWarnings("unchecked")
     static <T> T evaluate(Node node,String expression,QName qName){
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();

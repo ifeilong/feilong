@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.xml.dom;
+package com.feilong.xml.temp.annotation;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
-public class GetNodeListByXPathTest2 extends AbstractTest{
+public class WeatherResponseTest extends AbstractTest{
 
     @Test
     public void test(){

@@ -1,4 +1,4 @@
-package com.feilong.xml.xstream;
+package com.feilong.xml.temp.annotation;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -46,7 +46,6 @@ public class XstreamTemp{
         //xstream使用注解转换
         xstream.processAnnotations(cls);
         return (T) xstream.fromXML(xml);
-
     }
 
 }
