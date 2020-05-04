@@ -18,8 +18,6 @@ package com.feilong.lib.json;
 import static java.util.Collections.emptyMap;
 
 import java.beans.PropertyDescriptor;
-import java.io.IOException;
-import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Array;
@@ -115,7 +113,7 @@ import com.feilong.lib.json.util.PropertySetStrategy;
  *
  * @author JSON.org
  */
-public final class JSONObject extends AbstractJSON implements JSON,Map,Comparable{
+public final class JSONObject extends AbstractJSON implements JSON{
 
     /** The Constant serialVersionUID. */
     private static final long   serialVersionUID = -7895449812672706822L;
@@ -1008,7 +1006,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             if (exclusions.contains(key)){
                 continue;
             }
-            Object value = object.opt(key);
+            Object value = object.get(key);
             if (jsonPropertyFilter != null && jsonPropertyFilter.apply(object, key, value)){
                 continue;
             }
@@ -1438,7 +1436,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
         if (jsonObject.properties.containsKey(key)){
             if (String.class.isAssignableFrom(type)){
-                Object o = jsonObject.opt(key);
+                Object o = jsonObject.get(key);
                 if (o instanceof JSONArray){
                     ((JSONArray) o).addString((String) value);
                 }else{
@@ -1456,7 +1454,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             }
         }
 
-        value = jsonObject.opt(key);
+        value = jsonObject.get(key);
         if (accumulated){
             JSONArray array = (JSONArray) value;
             value = array.get(array.size() - 1);
@@ -1632,53 +1630,12 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            the json config
      */
     public void accumulateAll(Map map,JsonConfig jsonConfig){
-        if (map instanceof JSONObject){
-            for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-                Map.Entry entry = (Map.Entry) entries.next();
-                String key = (String) entry.getKey();
-                Object value = entry.getValue();
-                accumulate(key, value, jsonConfig);
-            }
-        }else{
-            for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-                Map.Entry entry = (Map.Entry) entries.next();
-                String key = String.valueOf(entry.getKey());
-                Object value = entry.getValue();
-                accumulate(key, value, jsonConfig);
-            }
+        for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
+            Map.Entry entry = (Map.Entry) entries.next();
+            String key = String.valueOf(entry.getKey());
+            Object value = entry.getValue();
+            accumulate(key, value, jsonConfig);
         }
-    }
-
-    /**
-     * 清除.
-     */
-    @Override
-    public void clear(){
-        properties.clear();
-    }
-
-    /**
-     * Compare to.
-     *
-     * @param obj
-     *            the obj
-     * @return the int
-     */
-    @Override
-    public int compareTo(Object obj){
-        if (obj != null && (obj instanceof JSONObject)){
-            JSONObject other = (JSONObject) obj;
-            int size1 = size();
-            int size2 = other.size();
-            if (size1 < size2){
-                return -1;
-            }else if (size1 > size2){
-                return 1;
-            }else if (this.equals(other)){
-                return 0;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -1688,52 +1645,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            the key
      * @return true, if successful
      */
-    @Override
     public boolean containsKey(Object key){
         return properties.containsKey(key);
-    }
-
-    /**
-     * Contains value.
-     *
-     * @param value
-     *            the value
-     * @return true, if successful
-     */
-    @Override
-    public boolean containsValue(Object value){
-        return containsValue(value, new JsonConfig());
-    }
-
-    /**
-     * Contains value.
-     *
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean containsValue(Object value,JsonConfig jsonConfig){
-        try{
-            value = processValue(value, jsonConfig);
-        }catch (JSONException e){
-            return false;
-        }
-        return properties.containsValue(value);
-    }
-
-    /**
-     * Remove a name and its value, if present.
-     *
-     * @param key
-     *            A key string.
-     * @return this.
-     */
-    public JSONObject discard(String key){
-        verifyIsNull();
-        this.properties.remove(key);
-        return this;
     }
 
     /**
@@ -1871,11 +1784,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      */
     public JSONObject element(String key,Map value,JsonConfig jsonConfig){
         verifyIsNull();
-        if (value instanceof JSONObject){
-            return setInternal(key, value, jsonConfig);
-        }else{
-            return element(key, JSONObject.fromObject(value, jsonConfig), jsonConfig);
-        }
+        return element(key, JSONObject.fromObject(value, jsonConfig), jsonConfig);
     }
 
     /**
@@ -1931,182 +1840,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     }
 
     /**
-     * Put a key/value pair in the JSONObject, but only if the key and the value
-     * are both non-null.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object which is the value. It should be of one of these
-     *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
-     *            String, or the JSONNull object.
-     * @return this.
-     * @throws JSONException
-     *             If the value is a non-finite number.
-     */
-    public JSONObject elementOpt(String key,Object value){
-        return elementOpt(key, value, new JsonConfig());
-    }
-
-    /**
-     * Put a key/value pair in the JSONObject, but only if the key and the value
-     * are both non-null.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object which is the value. It should be of one of these
-     *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
-     *            String, or the JSONNull object.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             If the value is a non-finite number.
-     */
-    public JSONObject elementOpt(String key,Object value,JsonConfig jsonConfig){
-        verifyIsNull();
-        if (key != null && value != null){
-            element(key, value, jsonConfig);
-        }
-        return this;
-    }
-
-    /**
-     * Entry set.
-     *
-     * @return the 设置
-     */
-    @Override
-    public Set entrySet(){
-        return Collections.unmodifiableSet(properties.entrySet());
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (obj == this){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof JSONObject)){
-            return false;
-        }
-
-        JSONObject other = (JSONObject) obj;
-
-        if (isNullObject()){
-            if (other.isNullObject()){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            if (other.isNullObject()){
-                return false;
-            }
-        }
-
-        if (other.size() != size()){
-            return false;
-        }
-
-        for (Iterator keys = properties.keySet().iterator(); keys.hasNext();){
-            String key = (String) keys.next();
-            if (!other.properties.containsKey(key)){
-                return false;
-            }
-            Object o1 = properties.get(key);
-            Object o2 = other.properties.get(key);
-
-            if (JSONNull.getInstance().equals(o1)){
-                if (JSONNull.getInstance().equals(o2)){
-                    continue;
-                }else{
-                    return false;
-                }
-            }else{
-                if (JSONNull.getInstance().equals(o2)){
-                    return false;
-                }
-            }
-
-            if (o1 instanceof String && o2 instanceof JSONFunction){
-                if (!o1.equals(String.valueOf(o2))){
-                    return false;
-                }
-            }else if (o1 instanceof JSONFunction && o2 instanceof String){
-                if (!o2.equals(String.valueOf(o1))){
-                    return false;
-                }
-            }else if (o1 instanceof JSONObject && o2 instanceof JSONObject){
-                if (!o1.equals(o2)){
-                    return false;
-                }
-            }else if (o1 instanceof JSONArray && o2 instanceof JSONArray){
-                if (!o1.equals(o2)){
-                    return false;
-                }
-            }else if (o1 instanceof JSONFunction && o2 instanceof JSONFunction){
-                if (!o1.equals(o2)){
-                    return false;
-                }
-            }else{
-                if (o1 instanceof String){
-                    if (!o1.equals(String.valueOf(o2))){
-                        return false;
-                    }
-                }else if (o2 instanceof String){
-                    if (!o2.equals(String.valueOf(o1))){
-                        return false;
-                    }
-                }else{
-                    Morpher m1 = JSONUtils.getMorpherRegistry().getMorpherFor(o1.getClass());
-                    Morpher m2 = JSONUtils.getMorpherRegistry().getMorpherFor(o2.getClass());
-                    if (m1 != null && m1 != IdentityObjectMorpher.getInstance()){
-                        if (!o1.equals(JSONUtils.getMorpherRegistry().morph(o1.getClass(), o2))){
-                            return false;
-                        }
-                    }else if (m2 != null && m2 != IdentityObjectMorpher.getInstance()){
-                        if (!JSONUtils.getMorpherRegistry().morph(o1.getClass(), o1).equals(o2)){
-                            return false;
-                        }
-                    }else{
-                        if (!o1.equals(o2)){
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * 获得.
-     *
-     * @param key
-     *            the key
-     * @return the object
-     */
-    @Override
-    public Object get(Object key){
-        if (key instanceof String){
-            return get((String) key);
-        }
-        return null;
-    }
-
-    /**
      * Get the value object associated with a key.
      *
      * @param key
@@ -2141,49 +1874,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             }
         }
         throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a Boolean.");
-    }
-
-    /**
-     * Get the double value associated with a key.
-     *
-     * @param key
-     *            A key string.
-     * @return The numeric value.
-     * @throws JSONException
-     *             if the key is not found or if the value is not a
-     *             Number object and cannot be converted to a number.
-     */
-    public double getDouble(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (o != null){
-            try{
-                return o instanceof Number ? ((Number) o).doubleValue() : Double.parseDouble((String) o);
-            }catch (Exception e){
-                throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a number.");
-            }
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a number.");
-    }
-
-    /**
-     * Get the int value associated with a key. If the number value is too large
-     * for an int, it will be clipped.
-     *
-     * @param key
-     *            A key string.
-     * @return The integer value.
-     * @throws JSONException
-     *             if the key is not found or if the value cannot be
-     *             converted to an integer.
-     */
-    public int getInt(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (o != null){
-            return o instanceof Number ? ((Number) o).intValue() : (int) getDouble(key);
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a number.");
     }
 
     /**
@@ -2227,26 +1917,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     }
 
     /**
-     * Get the long value associated with a key. If the number value is too long
-     * for a long, it will be clipped.
-     *
-     * @param key
-     *            A key string.
-     * @return The long value.
-     * @throws JSONException
-     *             if the key is not found or if the value cannot be
-     *             converted to a long.
-     */
-    public long getLong(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (o != null){
-            return o instanceof Number ? ((Number) o).longValue() : (long) getDouble(key);
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a number.");
-    }
-
-    /**
      * Get the string associated with a key.
      *
      * @param key
@@ -2277,26 +1947,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     }
 
     /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        int hashcode = 19;
-        if (isNullObject()){
-            return hashcode + JSONNull.getInstance().hashCode();
-        }
-        for (Iterator entries = properties.entrySet().iterator(); entries.hasNext();){
-            Map.Entry entry = (Map.Entry) entries.next();
-            Object key = entry.getKey();
-            Object value = entry.getValue();
-            hashcode += key.hashCode() + JSONUtils.hashCode(value);
-        }
-        return hashcode;
-    }
-
-    /**
      * Checks if is array.
      *
      * @return true, if is array
@@ -2304,17 +1954,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     @Override
     public boolean isArray(){
         return false;
-    }
-
-    /**
-     * Checks if is empty.
-     *
-     * @return true, if is empty
-     */
-    @Override
-    public boolean isEmpty(){
-        // verifyIsNull();
-        return this.properties.isEmpty();
     }
 
     /**
@@ -2341,7 +1980,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *
      * @return the 设置
      */
-    @Override
     public Set keySet(){
         return Collections.unmodifiableSet(properties.keySet());
     }
@@ -2383,120 +2021,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     }
 
     /**
-     * Get an optional value associated with a key.
-     *
-     * @param key
-     *            A key string.
-     * @return An object which is the value, or null if there is no value.
-     */
-    public Object opt(String key){
-        verifyIsNull();
-        return key == null ? null : this.properties.get(key);
-    }
-
-    /**
-     * Get an optional boolean associated with a key. It returns false if there
-     * is no such key, or if the value is not Boolean.TRUE or the String "true".
-     *
-     * @param key
-     *            A key string.
-     * @return The truth.
-     */
-    public boolean optBoolean(String key){
-        verifyIsNull();
-        return optBoolean(key, false);
-    }
-
-    /**
-     * Get an optional boolean associated with a key. It returns the defaultValue
-     * if there is no such key, or if it is not a Boolean or the String "true" or
-     * "false" (case insensitive).
-     *
-     * @param key
-     *            A key string.
-     * @param defaultValue
-     *            The default.
-     * @return The truth.
-     */
-    public boolean optBoolean(String key,boolean defaultValue){
-        verifyIsNull();
-        try{
-            return getBoolean(key);
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get an optional double associated with a key, or NaN if there is no such
-     * key or if its value is not a number. If the value is a string, an attempt
-     * will be made to evaluate it as a number.
-     *
-     * @param key
-     *            A string which is the key.
-     * @return An object which is the value.
-     */
-    public double optDouble(String key){
-        verifyIsNull();
-        return optDouble(key, Double.NaN);
-    }
-
-    /**
-     * Get an optional double associated with a key, or the defaultValue if there
-     * is no such key or if its value is not a number. If the value is a string,
-     * an attempt will be made to evaluate it as a number.
-     *
-     * @param key
-     *            A key string.
-     * @param defaultValue
-     *            The default.
-     * @return An object which is the value.
-     */
-    public double optDouble(String key,double defaultValue){
-        verifyIsNull();
-        try{
-            Object o = opt(key);
-            return o instanceof Number ? ((Number) o).doubleValue() : new Double((String) o).doubleValue();
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get an optional int value associated with a key, or zero if there is no
-     * such key or if the value is not a number. If the value is a string, an
-     * attempt will be made to evaluate it as a number.
-     *
-     * @param key
-     *            A key string.
-     * @return An object which is the value.
-     */
-    public int optInt(String key){
-        verifyIsNull();
-        return optInt(key, 0);
-    }
-
-    /**
-     * Get an optional int value associated with a key, or the default if there
-     * is no such key or if the value is not a number. If the value is a string,
-     * an attempt will be made to evaluate it as a number.
-     *
-     * @param key
-     *            A key string.
-     * @param defaultValue
-     *            The default.
-     * @return An object which is the value.
-     */
-    public int optInt(String key,int defaultValue){
-        verifyIsNull();
-        try{
-            return getInt(key);
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
      * Get an optional JSONArray associated with a key. It returns null if there
      * is no such key, or if its value is not a JSONArray.
      *
@@ -2506,7 +2030,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      */
     public JSONArray optJSONArray(String key){
         verifyIsNull();
-        Object o = opt(key);
+        Object o = get(key);
         return o instanceof JSONArray ? (JSONArray) o : null;
     }
 
@@ -2520,42 +2044,8 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      */
     public JSONObject optJSONObject(String key){
         verifyIsNull();
-        Object o = opt(key);
+        Object o = get(key);
         return o instanceof JSONObject ? (JSONObject) o : null;
-    }
-
-    /**
-     * Get an optional long value associated with a key, or zero if there is no
-     * such key or if the value is not a number. If the value is a string, an
-     * attempt will be made to evaluate it as a number.
-     *
-     * @param key
-     *            A key string.
-     * @return An object which is the value.
-     */
-    public long optLong(String key){
-        verifyIsNull();
-        return optLong(key, 0);
-    }
-
-    /**
-     * Get an optional long value associated with a key, or the default if there
-     * is no such key or if the value is not a number. If the value is a string,
-     * an attempt will be made to evaluate it as a number.
-     *
-     * @param key
-     *            A key string.
-     * @param defaultValue
-     *            The default.
-     * @return An object which is the value.
-     */
-    public long optLong(String key,long defaultValue){
-        verifyIsNull();
-        try{
-            return getLong(key);
-        }catch (Exception e){
-            return defaultValue;
-        }
     }
 
     /**
@@ -2584,7 +2074,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      */
     public String optString(String key,String defaultValue){
         verifyIsNull();
-        Object o = opt(key);
+        Object o = get(key);
         return o != null ? o.toString() : defaultValue;
     }
 
@@ -2597,7 +2087,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            the value
      * @return the object
      */
-    @Override
     public Object put(Object key,Object value){
         if (key == null){
             throw new IllegalArgumentException("key is null.");
@@ -2613,7 +2102,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      * @param map
      *            the map
      */
-    @Override
     public void putAll(Map map){
         putAll(map, new JsonConfig());
     }
@@ -2627,33 +2115,12 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
      *            the json config
      */
     public void putAll(Map map,JsonConfig jsonConfig){
-        if (map instanceof JSONObject){
-            for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-                Map.Entry entry = (Map.Entry) entries.next();
-                String key = (String) entry.getKey();
-                Object value = entry.getValue();
-                this.properties.put(key, value);
-            }
-        }else{
-            for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-                Map.Entry entry = (Map.Entry) entries.next();
-                String key = String.valueOf(entry.getKey());
-                Object value = entry.getValue();
-                element(key, value, jsonConfig);
-            }
+        for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
+            Map.Entry entry = (Map.Entry) entries.next();
+            String key = String.valueOf(entry.getKey());
+            Object value = entry.getValue();
+            element(key, value, jsonConfig);
         }
-    }
-
-    /**
-     * 删除.
-     *
-     * @param key
-     *            the key
-     * @return the object
-     */
-    @Override
-    public Object remove(Object key){
-        return properties.remove(key);
     }
 
     /**
@@ -2698,7 +2165,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         }
         JSONArray ja = new JSONArray();
         for (int i = 0; i < names.size(); i += 1){
-            ja.element(this.opt(names.getString(i)));
+            ja.element(this.get(names.getString(i)));
         }
         return ja;
     }
@@ -2838,70 +2305,6 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
     }
 
     /**
-     * Values.
-     *
-     * @return the collection
-     */
-    @Override
-    public Collection values(){
-        return Collections.unmodifiableCollection(properties.values());
-    }
-
-    /**
-     * Write the contents of the JSONObject as JSON text to a writer. For
-     * compactness, no whitespace is added.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param writer
-     *            the writer
-     * @return The writer.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    @Override
-    public Writer write(Writer writer){
-        try{
-            if (isNullObject()){
-                writer.write(JSONNull.getInstance().toString());
-                return writer;
-            }
-
-            //---------------------------------------------------------------
-            writer.write('{');
-
-            //---------------------------------------------------------------
-
-            boolean b = false;
-            Iterator keys = keys();
-
-            while (keys.hasNext()){
-                if (b){
-                    writer.write(',');
-                }
-                Object k = keys.next();
-                writer.write(JSONUtils.quote(k.toString()));
-                writer.write(':');
-                Object v = this.properties.get(k);
-                if (v instanceof JSONObject){
-                    ((JSONObject) v).write(writer);
-                }else if (v instanceof JSONArray){
-                    ((JSONArray) v).write(writer);
-                }else{
-                    writer.write(JSONUtils.valueToString(v));
-                }
-                b = true;
-            }
-
-            //---------------------------------------------------------------
-            writer.write('}');
-            return writer;
-        }catch (IOException e){
-            throw new JSONException(e);
-        }
-    }
-
-    /**
      * Accumulate.
      *
      * @param key
@@ -2920,7 +2323,7 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
         if (!has(key)){
             setInternal(key, value, jsonConfig);
         }else{
-            Object o = opt(key);
+            Object o = get(key);
             if (o instanceof JSONArray){
                 ((JSONArray) o).element(value, jsonConfig);
             }else{
@@ -3061,4 +2464,5 @@ public final class JSONObject extends AbstractJSON implements JSON,Map,Comparabl
             throw new JSONException("null object");
         }
     }
+
 }

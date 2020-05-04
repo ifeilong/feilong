@@ -20,12 +20,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.json.processor.DateJsonValueProcessorTest;
+import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
 
-/**
- * The Class FeiLongJsonUtilSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
@@ -62,6 +58,8 @@ import com.feilong.json.processor.DateJsonValueProcessorTest;
                 //JsonHelperTest.class,
                 JsonHelperIsKeyValueJsonStringTest.class,
                 JsonHelperIsCommonStringTest.class,
+
+                JavaIdentifierTransformerSuiteTests.class,
 
         //
 })

@@ -29,10 +29,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.JsonToJavaConfig;
-import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.MyBean;
-import com.feilong.lib.json.JSONObject;
 import com.feilong.store.member.Person;
 
 public class ToMapWithJsonToJavaConfigTest{
@@ -55,19 +52,6 @@ public class ToMapWithJsonToJavaConfigTest{
                         allOf(//
                                         hasEntry(is("data1"), hasProperty("name", is("get"))),
                                         hasEntry(is("data2"), hasProperty("name", is("set")))));
-    }
-
-    @Test
-    public void testToMap(){
-        JSONObject json1 = JSONObject.fromObject("{'name':'get'}");
-        JSONObject json2 = JSONObject.fromObject("{'name':'set'}");
-
-        Map<String, JSONObject> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
-        assertThat(
-                        map,
-                        allOf(//
-                                        hasEntry("data1", json1),
-                                        hasEntry("data2", json2)));
     }
 
     @Test

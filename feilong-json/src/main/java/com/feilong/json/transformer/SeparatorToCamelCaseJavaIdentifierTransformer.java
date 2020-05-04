@@ -18,7 +18,7 @@ package com.feilong.json.transformer;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 
 /**
- * 当json转成bean的时候,json字符串里面的属性名字可能有下划线,转成bean里面属性去掉下划线,并且下划线后面字母大写的转换器.
+ * [json{@code -->}bean] json字符串里面的属性名字有下划线,去掉下划线,并将下划线后面字母大写的转换器.
  * 
  * <p>
  * 比如 member_Id,但是我们的java bean里面的属性名字是标准的 驼峰命名法则,比如 memberId
@@ -39,7 +39,7 @@ import com.feilong.lib.json.util.JavaIdentifierTransformer;
  * </pre>
  * 
  * <p>
- * 但是我们的类是标准的java bean,属性符合驼峰命名规则,比如:
+ * 但我们的类是标准的java bean,属性符合驼峰命名规则,比如:
  * </p>
  * 
  * <pre class="code">
@@ -68,7 +68,7 @@ import com.feilong.lib.json.util.JavaIdentifierTransformer;
  * 
  * </pre>
  * 
- * 也支持以下的形式
+ * 也支持分隔符非下划线形式, 比如以下:
  * 
  * <pre>
  * 

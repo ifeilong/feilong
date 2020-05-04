@@ -16,9 +16,6 @@
 
 package com.feilong.lib.json;
 
-import java.io.IOException;
-import java.io.Writer;
-
 /**
  * JSONNull is equivalent to the value that JavaScript calls null, whilst Java's
  * null is equivalent to the value that JavaScript calls undefined.
@@ -93,16 +90,6 @@ public final class JSONNull implements JSON{
         return false;
     }
 
-    /**
-     * Checks if is empty.
-     *
-     * @return true, if is empty
-     */
-    @Override
-    public boolean isEmpty(){
-        throw new JSONException("Object is null");
-    }
-
     //---------------------------------------------------------------
 
     /**
@@ -158,22 +145,4 @@ public final class JSONNull implements JSON{
         return sb.toString();
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Write.
-     *
-     * @param writer
-     *            the writer
-     * @return the writer
-     */
-    @Override
-    public Writer write(Writer writer){
-        try{
-            writer.write(toString());
-            return writer;
-        }catch (IOException e){
-            throw new JSONException(e);
-        }
-    }
 }

@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 
 /**
- * 当json转成bean的时候,json字符串里面的属性名字可能首字母是大写的,转成bean里面属性首字母小写的转换器.
+ * [json{@code -->}bean],json字符串里面的属性名字可能首字母是大写的,转成bean里面属性首字母小写的转换器.
  * 
  * <p>
  * 比如 MemberId,但是我们的java bean里面的属性名字是标准的 驼峰命名法则,比如 memberId

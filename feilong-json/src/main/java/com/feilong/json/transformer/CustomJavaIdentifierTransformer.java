@@ -24,10 +24,10 @@ import org.apache.commons.lang3.Validate;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 
 /**
- * 当json转成bean的时候,json字符串里面的属性名字可能有部分不符合我们的java属性命名规范,此时可以基于部分属性做转换器.
+ * [json{@code -->}bean],json字符串里面的属性名字可能有部分不符合我们的java属性命名规范,此时可以基于部分属性做转换器.
  * 
  * <p>
- * 比如 country_id,但是我们的java bean里面的属性名字是标准的 驼峰命名法则,比如 countryId
+ * 比如 country_id,但是我们的java bean里面的属性名字是标准的驼峰命名法则,比如 countryId
  * </p>
  * 
  * <h3>示例:</h3>

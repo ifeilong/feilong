@@ -16,7 +16,6 @@
 package com.feilong.lib.json;
 
 import java.io.Serializable;
-import java.io.Writer;
 
 /**
  * Marker interface, identifies a valid JSON value.<br>
@@ -33,15 +32,6 @@ public interface JSON extends Serializable{
      * @return true, if is array
      */
     boolean isArray();
-
-    /**
-     * Returns true if this object has no elements or keys.
-     *
-     * @return true, if is empty
-     * @throws JSONException
-     *             if called on a 'null' object
-     */
-    boolean isEmpty();
 
     /**
      * Returns the number of properties in an object or the size of the array.
@@ -89,19 +79,4 @@ public interface JSON extends Serializable{
      */
     String toString(int indentFactor,int indent);
 
-    //---------------------------------------------------------------
-
-    /**
-     * Write the contents as JSON text to a writer. For compactness, no
-     * whitespace is added.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param writer
-     *            the writer
-     * @return The writer.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    Writer write(Writer writer);
 }

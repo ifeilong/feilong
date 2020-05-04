@@ -16,8 +16,6 @@
 package com.feilong.lib.json;
 
 import java.beans.PropertyDescriptor;
-import java.io.IOException;
-import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -144,8 +142,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (object instanceof String){
             return _fromString((String) object, jsonConfig);
         }
-
-        //---------------------------------------------------------------
         if (object != null && object.getClass().isArray()){
             Class type = object.getClass().getComponentType();
             if (!type.isPrimitive()){
@@ -1569,20 +1565,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *             invalid number.
      */
     public JSONArray element(int index,Map value,JsonConfig jsonConfig){
-        if (value instanceof JSONObject){
-            if (index < 0){
-                throw new JSONException("JSONArray[" + index + "] not found.");
-            }
-            if (index < size()){
-                elements.set(index, value);
-            }else{
-                while (index != size()){
-                    element(JSONNull.getInstance());
-                }
-                element(value, jsonConfig);
-            }
-            return this;
-        }
         return element(index, JSONObject.fromObject(value, jsonConfig));
     }
 
@@ -1761,10 +1743,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * @return this.
      */
     public JSONArray element(Map value,JsonConfig jsonConfig){
-        if (value instanceof JSONObject){
-            elements.add(value);
-            return this;
-        }
         return element(JSONObject.fromObject(value, jsonConfig));
     }
 
@@ -2716,49 +2694,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Write the contents of the JSONArray as JSON text to a writer. For
-     * compactness, no whitespace is added.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param writer
-     *            the writer
-     * @return The writer.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    @Override
-    public Writer write(Writer writer){
-        try{
-            writer.write('[');
-            //---------------------------------------------------------------
-
-            boolean b = false;
-            int len = size();
-            for (int i = 0; i < len; i += 1){
-                if (b){
-                    writer.write(',');
-                }
-                Object v = this.elements.get(i);
-                if (v instanceof JSONObject){
-                    ((JSONObject) v).write(writer);
-                }else if (v instanceof JSONArray){
-                    ((JSONArray) v).write(writer);
-                }else{
-                    writer.write(JSONUtils.valueToString(v));
-                }
-                b = true;
-            }
-
-            //---------------------------------------------------------------
-            writer.write(']');
-            return writer;
-        }catch (IOException e){
-            throw new JSONException(e);
-        }
-    }
 
     /**
      * Adds a String without performing any conversion on it.
