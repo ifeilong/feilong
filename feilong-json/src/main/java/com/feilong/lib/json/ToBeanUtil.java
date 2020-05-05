@@ -203,10 +203,10 @@ public class ToBeanUtil{
                     String key,
                     PropertyDescriptor propertyDescriptor) throws Exception{
         //---------------------------------------------------------------
-
         if (propertyDescriptor != null){
             Class<?> propertyType = propertyDescriptor.getPropertyType();
             Class targetType = propertyType;
+
             if (!JSONUtils.isNull(value)){
                 if (value instanceof JSONArray){
                     if (List.class.isAssignableFrom(propertyType)){
@@ -268,66 +268,55 @@ public class ToBeanUtil{
                         setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
                     }
                 }
-            }else{
-                if (type.isPrimitive()){
-                    // assume assigned default value
-                    LOGGER.warn("Tried to assign null value to " + key + ":" + type.getName());
-                    setProperty(bean, key, JSONUtils.getMorpherRegistry().morph(type, null), jsonConfig);
+
+                return;
+            }
+            setNull(jsonConfig, bean, type, key);
+            return;
+        }
+
+        if (!JSONUtils.isNull(value)){
+            if (value instanceof JSONArray){
+                setProperty(
+                                bean,
+                                key,
+                                PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class),
+                                jsonConfig);
+            }else if (String.class.isAssignableFrom(type) || JSONUtils.isBoolean(type) || JSONUtils.isNumber(type)
+                            || JSONUtils.isString(type) || JSONFunction.class.isAssignableFrom(type)){
+                if (beanClass == null || bean instanceof Map || jsonConfig.getPropertySetStrategy() != null){
+                    setProperty(bean, key, value, jsonConfig);
                 }else{
-                    setProperty(bean, key, null, jsonConfig);
+                    LOGGER.warn("Tried to assign property {}:{} to bean of class {}", key, type.getName(), bean.getClass().getName());
+                }
+            }else{
+                if (jsonConfig.isHandleJettisonSingleElementArray()){
+                    Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
+                    JsonConfig jsc = jsonConfig.copy();
+                    jsc.setRootClass(newTargetClass);
+                    jsc.setClassMap(classMap);
+                    setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
+                }else{
+                    setProperty(bean, key, value, jsonConfig);
                 }
             }
+
+            return;
+        }
+
+        setNull(jsonConfig, bean, type, key);
+    }
+
+    private static void setNull(JsonConfig jsonConfig,Object bean,Class type,String key) throws Exception{
+        if (type.isPrimitive()){
+            // assume assigned default value
+            LOGGER.warn("Tried to assign null value to {}:{}", key, type.getName());
+            setProperty(bean, key, JSONUtils.getMorpherRegistry().morph(type, null), jsonConfig);
         }else{
-            if (!JSONUtils.isNull(value)){
-                if (value instanceof JSONArray){
-                    setProperty(
-                                    bean,
-                                    key,
-                                    PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class),
-                                    jsonConfig);
-                }else if (String.class.isAssignableFrom(type) || JSONUtils.isBoolean(type) || JSONUtils.isNumber(type)
-                                || JSONUtils.isString(type) || JSONFunction.class.isAssignableFrom(type)){
-                    if (beanClass == null || bean instanceof Map || jsonConfig.getPropertySetStrategy() != null){
-                        setProperty(bean, key, value, jsonConfig);
-                    }else{
-                        LOGGER.warn(
-                                        "Tried to assign property " + key + ":" + type.getName() + " to bean of class "
-                                                        + bean.getClass().getName());
-                    }
-                }else{
-                    if (jsonConfig.isHandleJettisonSingleElementArray()){
-                        Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
-                        JsonConfig jsc = jsonConfig.copy();
-                        jsc.setRootClass(newTargetClass);
-                        jsc.setClassMap(classMap);
-                        setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
-                    }else{
-                        setProperty(bean, key, value, jsonConfig);
-                    }
-                }
-            }else{
-                if (type.isPrimitive()){
-                    // assume assigned default value
-                    LOGGER.warn("Tried to assign null value to " + key + ":" + type.getName());
-                    setProperty(bean, key, JSONUtils.getMorpherRegistry().morph(type, null), jsonConfig);
-                }else{
-                    setProperty(bean, key, null, jsonConfig);
-                }
-            }
+            setProperty(bean, key, null, jsonConfig);
         }
     }
 
-    /**
-     * @param jsonConfig
-     * @param classMap
-     * @param bean
-     * @param name
-     * @param type
-     * @param value
-     * @param key
-     * @throws Exception
-     * @since 3.0.0
-     */
     private static void toBeanDoWithMap(JsonConfig jsonConfig,Map classMap,Object bean,String name,Class type,Object value,String key)
                     throws Exception{
         // no type info available for conversion

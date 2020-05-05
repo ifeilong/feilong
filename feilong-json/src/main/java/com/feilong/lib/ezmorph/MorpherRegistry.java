@@ -62,37 +62,6 @@ public class MorpherRegistry implements Serializable{
         morphers.clear();
     }
 
-    /**
-     * Deregister all Morphers of a type.<br>
-     *
-     * @param type
-     *            the type
-     */
-    public synchronized void clear(Class type){
-        List registered = (List) morphers.get(type);
-        if (registered != null){
-            morphers.remove(type);
-        }
-    }
-
-    /**
-     * Deregister the specified Morpher.<br>
-     * The registry will remove the target <code>Class</code> from the morphers
-     * Map if it has no other registered morphers.
-     *
-     * @param morpher
-     *            the target Morpher to remove
-     */
-    public synchronized void deregisterMorpher(Morpher morpher){
-        List registered = (List) morphers.get(morpher.morphsTo());
-        if (registered != null && !registered.isEmpty()){
-            registered.remove(morpher);
-            if (registered.isEmpty()){
-                morphers.remove(morpher.morphsTo());
-            }
-        }
-    }
-
     //---------------------------------------------------------------
 
     /**
@@ -154,8 +123,7 @@ public class MorpherRegistry implements Serializable{
      */
     public Object morph(Class target,Object value){
         if (value == null){
-            // give the first morpher in the list a shot to convert
-            // the value as we can't access type information on it
+            // give the first morpher in the list a shot to convert the value as we can't access type information on it
             Morpher morpher = getMorpherFor(target);
             if (morpher instanceof ObjectMorpher){
                 return ((ObjectMorpher) morpher).morph(value);
@@ -169,7 +137,6 @@ public class MorpherRegistry implements Serializable{
         }
 
         //---------------------------------------------------------------
-
         Morpher[] morphers = getMorphersFor(target);
         for (int i = 0; i < morphers.length; i++){
             Morpher morpher = morphers[i];
