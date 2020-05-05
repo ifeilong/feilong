@@ -13,32 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json;
+package com.feilong.json.format;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.json.format.FormatSuiteTests;
-import com.feilong.json.processor.JsonValueProcessorSuiteTests;
-import com.feilong.json.tobean.ToBeanSuiteTests;
-
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                //JsonHelperTest.class,
-                JsonHelperIsKeyValueJsonStringTest.class,
-                JsonHelperIsCommonStringTest.class,
+                FormatBeanIgnoreNullTest.class,
 
-                JsonValueProcessorSuiteTests.class,
+                FormatBeanErrorPropertyTest.class,
 
-                FormatSuiteTests.class,
-                ToBeanSuiteTests.class,
+                FormatBeanIgnoreNullWithIsIgnoreNullValueElementTest.class,
 
-        // JavaIdentifierTransformerSuiteTests.class,
+                FormatBeanSensitiveWordsTest.class,
+                FormatBeanSensitiveWordsNoTest.class,
+
+                FormatBeanBigDecimalTest.class,
+
+                FormatBeanFileTest.class,
+                FormatBeanXMLGregorianCalendarTest.class,
+
+                FormatStringTest.class,
 
         //
 })
-public class SuiteTests{
+public class FormatSuiteTests{
 
 }

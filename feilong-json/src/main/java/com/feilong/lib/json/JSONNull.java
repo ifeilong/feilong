@@ -80,16 +80,6 @@ public final class JSONNull implements JSON{
         return 37 + "null".hashCode();
     }
 
-    /**
-     * Checks if is array.
-     *
-     * @return true, if is array
-     */
-    @Override
-    public boolean isArray(){
-        return false;
-    }
-
     //---------------------------------------------------------------
 
     /**

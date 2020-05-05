@@ -73,6 +73,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         setMorpherRegistry(morpherRegistry);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Contains.
      *
@@ -123,7 +125,6 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         }
 
         //---------------------------------------------------------------
-
         MorphDynaBean other = (MorphDynaBean) obj;
         EqualsBuilder builder = new EqualsBuilder().append(this.dynaClass, other.dynaClass);
         DynaProperty[] props = dynaClass.getDynaProperties();

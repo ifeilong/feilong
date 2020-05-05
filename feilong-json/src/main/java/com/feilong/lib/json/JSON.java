@@ -27,13 +27,6 @@ import java.io.Serializable;
 public interface JSON extends Serializable{
 
     /**
-     * Returns true if this object is a JSONArray, false otherwise.
-     *
-     * @return true, if is array
-     */
-    boolean isArray();
-
-    /**
      * Returns the number of properties in an object or the size of the array.
      *
      * @return the size of an json object or array

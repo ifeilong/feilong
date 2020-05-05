@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.builder.JsonConfigBuilder;
+import com.feilong.json.entity.HttpMethodTestType;
 import com.feilong.json.entity.MyBean;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONObject;

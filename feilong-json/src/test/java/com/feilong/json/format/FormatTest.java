@@ -13,14 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.feilong.json.format;
 
-package com.feilong.lib.json;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
-/**
- * Base class for JSONObject and JSONArray.
- *
- * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
- */
-abstract class AbstractJSON{
+import org.junit.Test;
 
+import com.feilong.json.AbstractJsonTest;
+import com.feilong.json.JsonUtil;
+import com.feilong.store.system.Menu;
+
+public class FormatTest extends AbstractJsonTest{
+
+    @Test
+    public void testJsonMenu(){
+        Menu menu = new Menu(4L);
+        menu.setChildren(toList(new Menu(5L)));
+
+        LOGGER.debug(JsonUtil.format(menu));
+    }
+
+    @Test
+    public void testJsonString(){
+        LOGGER.debug("{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
+    }
 }
