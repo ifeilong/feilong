@@ -20,8 +20,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.json.JavaToJsonConfig;
-import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanIntIgnoreNull;
 import com.feilong.json.entity.BeanIntIgnoreNullNests;
 import com.feilong.json.entity.BeanIntIgnoreNullParent;
@@ -88,14 +86,6 @@ public class FormatBeanIgnoreNullTest extends AbstractTest{
         javaToJsonConfig.setIsIgnoreNullValueElement(true);
 
         assertEquals("{}", JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
-    }
-
-    @Test
-    public void test1(){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("age", 16);
-        jsonObject.put("name", null);
-        LOGGER.debug(jsonObject.toString());
     }
 
     @Test

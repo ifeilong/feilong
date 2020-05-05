@@ -40,7 +40,6 @@ import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessorMatcher;
 import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
-import com.feilong.lib.json.util.NewBeanInstanceStrategy;
 import com.feilong.lib.json.util.PropertyExclusionClassMatcher;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.json.util.PropertySetStrategy;
@@ -60,9 +59,6 @@ public class JsonConfig{
 
     /** The Constant DEFAULT_JSON_VALUE_PROCESSOR_MATCHER. */
     public static final JsonValueProcessorMatcher     DEFAULT_JSON_VALUE_PROCESSOR_MATCHER     = JsonValueProcessorMatcher.DEFAULT;
-
-    /** The Constant DEFAULT_NEW_BEAN_INSTANCE_STRATEGY. */
-    public static final NewBeanInstanceStrategy       DEFAULT_NEW_BEAN_INSTANCE_STRATEGY       = NewBeanInstanceStrategy.DEFAULT;
 
     /** The Constant DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER. */
     public static final PropertyExclusionClassMatcher DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER = PropertyExclusionClassMatcher.DEFAULT;
@@ -158,9 +154,6 @@ public class JsonConfig{
     /** The ignore transient fields. */
     private boolean                                   ignoreTransientFields;
 
-    /** The ignore public fields. */
-    private boolean                                   ignorePublicFields                       = true;
-
     //---------------------------------------------------------------
 
     /** The javascript compliant. */
@@ -195,9 +188,6 @@ public class JsonConfig{
 
     /** The key map. */
     private final Map                                 keyMap                                   = new HashMap();
-
-    /** The new bean instance strategy. */
-    private NewBeanInstanceStrategy                   newBeanInstanceStrategy                  = DEFAULT_NEW_BEAN_INSTANCE_STRATEGY;
 
     /** The property exclusion class matcher. */
     private PropertyExclusionClassMatcher             propertyExclusionClassMatcher            = DEFAULT_PROPERTY_EXCLUSION_CLASS_MATCHER;
@@ -653,17 +643,6 @@ public class JsonConfig{
     }
 
     /**
-     * Returns the configured NewBeanInstanceStrategy.<br>
-     * Default value is NewBeanInstanceStrategy.DEFAULT<br>
-     * [JSON -&gt; Java]
-     *
-     * @return the new bean instance strategy
-     */
-    public NewBeanInstanceStrategy getNewBeanInstanceStrategy(){
-        return newBeanInstanceStrategy;
-    }
-
-    /**
      * Returns the configured PropertyExclusionClassMatcher.<br>
      * Default value is PropertyExclusionClassMatcher.DEFAULT<br>
      * [JSON -&gt; Java]
@@ -774,17 +753,6 @@ public class JsonConfig{
      */
     public boolean isIgnoreTransientFields(){
         return ignoreTransientFields;
-    }
-
-    /**
-     * Returns true if public fields of a bean will be ignored.<br>
-     * Default value is true.<br>
-     * [Java -&gt; JSON]
-     *
-     * @return true, if is ignore public fields
-     */
-    public boolean isIgnorePublicFields(){
-        return ignorePublicFields;
     }
 
     /**
@@ -1216,17 +1184,6 @@ public class JsonConfig{
     }
 
     /**
-     * Sets if public fields would be skipped when building.<br>
-     * [Java -&gt; JSON]
-     *
-     * @param ignorePublicFields
-     *            the new ignore public fields
-     */
-    public void setIgnorePublicFields(boolean ignorePublicFields){
-        this.ignorePublicFields = ignorePublicFields;
-    }
-
-    /**
      * Sets if Javascript compatibility is enabled when building.<br>
      * [Java -&gt; JSON]
      *
@@ -1321,18 +1278,6 @@ public class JsonConfig{
     public void setJsonValueProcessorMatcher(JsonValueProcessorMatcher jsonValueProcessorMatcher){
         this.jsonValueProcessorMatcher = jsonValueProcessorMatcher == null ? DEFAULT_JSON_VALUE_PROCESSOR_MATCHER
                         : jsonValueProcessorMatcher;
-    }
-
-    /**
-     * Sets the NewBeanInstanceStrategy to use.<br>
-     * Will set default value (NewBeanInstanceStrategy.DEFAULT) if null.<br>
-     * [JSON -&gt; Java]
-     *
-     * @param newBeanInstanceStrategy
-     *            the new new bean instance strategy
-     */
-    public void setNewBeanInstanceStrategy(NewBeanInstanceStrategy newBeanInstanceStrategy){
-        this.newBeanInstanceStrategy = newBeanInstanceStrategy == null ? DEFAULT_NEW_BEAN_INSTANCE_STRATEGY : newBeanInstanceStrategy;
     }
 
     /**
@@ -1533,7 +1478,6 @@ public class JsonConfig{
         excludes = EMPTY_EXCLUDES;
         ignoreDefaultExcludes = false;
         ignoreTransientFields = false;
-        ignorePublicFields = true;
         javascriptCompliant = false;
         javaIdentifierTransformer = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
         cycleDetectionStrategy = DEFAULT_CYCLE_DETECTION_STRATEGY;
@@ -1550,7 +1494,6 @@ public class JsonConfig{
         jsonPropertyFilter = null;
         javaPropertyFilter = null;
         jsonBeanProcessorMatcher = DEFAULT_JSON_BEAN_PROCESSOR_MATCHER;
-        newBeanInstanceStrategy = DEFAULT_NEW_BEAN_INSTANCE_STRATEGY;
         defaultValueProcessorMatcher = DEFAULT_DEFAULT_VALUE_PROCESSOR_MATCHER;
         defaultValueMap.clear();
         propertySetStrategy = null/* DEFAULT_PROPERTY_SET_STRATEGY */;
@@ -1593,7 +1536,6 @@ public class JsonConfig{
         jsonConfig.handleJettisonSingleElementArray = handleJettisonSingleElementArray;
         jsonConfig.ignoreDefaultExcludes = ignoreDefaultExcludes;
         jsonConfig.ignoreTransientFields = ignoreTransientFields;
-        jsonConfig.ignorePublicFields = ignorePublicFields;
         jsonConfig.javaIdentifierTransformer = javaIdentifierTransformer;
         jsonConfig.javascriptCompliant = javascriptCompliant;
         jsonConfig.keyMap.putAll(keyMap);
@@ -1604,7 +1546,6 @@ public class JsonConfig{
         jsonConfig.jsonPropertyFilter = jsonPropertyFilter;
         jsonConfig.javaPropertyFilter = javaPropertyFilter;
         jsonConfig.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher;
-        jsonConfig.newBeanInstanceStrategy = newBeanInstanceStrategy;
         jsonConfig.defaultValueProcessorMatcher = defaultValueProcessorMatcher;
         jsonConfig.defaultValueMap.putAll(defaultValueMap);
         jsonConfig.propertySetStrategy = propertySetStrategy;

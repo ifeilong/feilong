@@ -52,23 +52,6 @@ public interface JSON extends Serializable{
      * @param indentFactor
      *            The number of spaces to add to each level of
      *            indentation.
-     * @return a printable, displayable, portable, transmittable representation
-     *         of the object, beginning with <code>{</code>&nbsp;<small>(left
-     *         brace)</small> and ending with <code>}</code>&nbsp;<small>(right
-     *         brace)</small>.
-     * @throws JSONException
-     *             If the object contains an invalid number.
-     */
-    String toString(int indentFactor);
-
-    /**
-     * Make a prettyprinted JSON text.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param indentFactor
-     *            The number of spaces to add to each level of
-     *            indentation.
      * @param indent
      *            The indentation of the top level.
      * @return a printable, displayable, transmittable representation of the

@@ -55,6 +55,8 @@ public class JSONTokener{
         return -1;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * The index of the next character.
      */

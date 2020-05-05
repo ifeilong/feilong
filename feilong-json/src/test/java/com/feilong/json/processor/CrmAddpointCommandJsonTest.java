@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json;
+package com.feilong.json.processor;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
 
@@ -23,7 +23,9 @@ import org.junit.Test;
 
 import com.feilong.json.processor.CapitalizePropertyNameProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
+import com.feilong.json.entity.CrmAddpointCommand;
 import com.feilong.test.AbstractTest;
 
 public class CrmAddpointCommandJsonTest extends AbstractTest{

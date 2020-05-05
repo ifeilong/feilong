@@ -63,9 +63,13 @@ public class JsDateJsonBeanProcessor implements JsonBeanProcessor{
         if (bean instanceof Date){
             Calendar c = Calendar.getInstance();
             c.setTime((Date) bean);
-            return new JSONObject().element("year", c.get(Calendar.YEAR)).element("month", c.get(Calendar.MONTH))
-                            .element("day", c.get(Calendar.DAY_OF_MONTH)).element("hours", c.get(Calendar.HOUR_OF_DAY))
-                            .element("minutes", c.get(Calendar.MINUTE)).element("seconds", c.get(Calendar.SECOND))
+            return new JSONObject().//
+                            element("year", c.get(Calendar.YEAR))//
+                            .element("month", c.get(Calendar.MONTH))//
+                            .element("day", c.get(Calendar.DAY_OF_MONTH))//
+                            .element("hours", c.get(Calendar.HOUR_OF_DAY))//
+                            .element("minutes", c.get(Calendar.MINUTE))//
+                            .element("seconds", c.get(Calendar.SECOND))//
                             .element("milliseconds", c.get(Calendar.MILLISECOND));
         }
         return new JSONObject(true);

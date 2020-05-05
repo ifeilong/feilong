@@ -33,6 +33,8 @@ public class MyBean{
     /** The data. */
     private List<Object> data = newArrayList();
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 data.
      *

@@ -119,18 +119,6 @@ public final class JSONNull implements JSON{
      *
      * @param indentFactor
      *            the indent factor
-     * @return the string
-     */
-    @Override
-    public String toString(int indentFactor){
-        return toString();
-    }
-
-    /**
-     * To string.
-     *
-     * @param indentFactor
-     *            the indent factor
      * @param indent
      *            the indent
      * @return the string

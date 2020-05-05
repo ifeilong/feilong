@@ -34,6 +34,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.processors.JsonValueProcessor;
@@ -399,7 +400,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 Array.set(array, i, value);
             }else{
                 try{
-                    Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(root.getClass(), null);
+                    Object newRoot = ConstructorUtil.newInstance(root.getClass());
                     Array.set(array, i, JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
                 }catch (JSONException jsone){
                     throw jsone;
@@ -541,7 +542,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 list.add(value);
             }else{
                 try{
-                    Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(root.getClass(), null);
+                    Object newRoot = ConstructorUtil.newInstance(root.getClass());
                     list.add(JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
                 }catch (JSONException jsone){
                     throw jsone;
@@ -571,8 +572,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -603,8 +603,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -635,8 +634,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -667,8 +665,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -742,8 +739,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -780,8 +776,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -812,8 +807,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -846,8 +840,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -861,8 +854,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             throw jsone;
         }catch (RuntimeException e){
             removeInstance(array);
-            JSONException jsone = new JSONException(e);
-            throw jsone;
+            throw new JSONException(e);
         }
 
         removeInstance(array);
@@ -887,8 +879,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -919,10 +910,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(collection);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
+
         JSONArray jsonArray = new JSONArray();
         try{
             int i = 0;
@@ -935,8 +926,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             throw jsone;
         }catch (RuntimeException e){
             removeInstance(collection);
-            JSONException jsone = new JSONException(e);
-            throw jsone;
+            throw new JSONException(e);
         }
 
         removeInstance(collection);
@@ -961,8 +951,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(array);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -2625,28 +2614,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      * @param indentFactor
      *            The number of spaces to add to each level of
      *            indentation.
-     * @return a printable, displayable, transmittable representation of the
-     *         object, beginning with <code>[</code>&nbsp;<small>(left
-     *         bracket)</small> and ending with <code>]</code>&nbsp;<small>(right
-     *         bracket)</small>.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    @Override
-    public String toString(int indentFactor){
-        if (indentFactor == 0){
-            return this.toString();
-        }
-        return toString(indentFactor, 0);
-    }
-
-    /**
-     * Make a prettyprinted JSON text of this JSONArray. Warning: This method
-     * assumes that the data structure is acyclical.
-     *
-     * @param indentFactor
-     *            The number of spaces to add to each level of
-     *            indentation.
      * @param indent
      *            The indention of the top level.
      * @return a printable, displayable, transmittable representation of the
@@ -2664,33 +2631,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             return this.toString();
         }
 
-        //---------------------------------------------------------------
-        int i;
-        StringBuffer sb = new StringBuffer("[");
-        if (len == 1){
-            sb.append(JSONUtils.valueToString(this.elements.get(0), indentFactor, indent));
-        }else{
-            int newindent = indent + indentFactor;
-            sb.append('\n');
-            for (i = 0; i < len; i += 1){
-                if (i > 0){
-                    sb.append(",\n");
-                }
-                for (int j = 0; j < newindent; j += 1){
-                    sb.append(' ');
-                }
-                sb.append(JSONUtils.valueToString(this.elements.get(i), indentFactor, newindent));
-            }
-            sb.append('\n');
-            for (i = 0; i < indent; i += 1){
-                sb.append(' ');
-            }
-            for (i = 0; i < indent; i += 1){
-                sb.insert(0, ' ');
-            }
-        }
-        sb.append(']');
-        return sb.toString();
+        List elements2 = this.elements;
+        return ToStringUtil.toString(elements2, indentFactor, indent);
     }
 
     //---------------------------------------------------------------

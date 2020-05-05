@@ -16,7 +16,6 @@
 
 package com.feilong.lib.json.util;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -113,36 +112,11 @@ public abstract class PropertySetStrategy{
             if (bean instanceof Map){
                 ((Map) bean).put(key, value);
             }else{
-                if (!jsonConfig.isIgnorePublicFields()){
-                    try{
-                        Field field = bean.getClass().getField(key);
-                        if (field != null){
-                            field.set(bean, value);
-                        }
-                    }catch (Exception e){
-                        _setProperty(bean, key, value);
-                    }
-                }else{
-                    _setProperty(bean, key, value);
+                try{
+                    PropertyUtils.setSimpleProperty(bean, key, value);
+                }catch (Exception e){
+                    throw new JSONException(e);
                 }
-            }
-        }
-
-        /**
-         * 设置 property.
-         *
-         * @param bean
-         *            the bean
-         * @param key
-         *            the key
-         * @param value
-         *            the value
-         */
-        private static void _setProperty(Object bean,String key,Object value){
-            try{
-                PropertyUtils.setSimpleProperty(bean, key, value);
-            }catch (Exception e){
-                throw new JSONException(e);
             }
         }
 

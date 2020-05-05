@@ -110,11 +110,14 @@ public class JSONSerializer{
     public static JSON toJSON(Object object,JsonConfig jsonConfig){
         if (object == null){
             return JSONNull.getInstance();
-        }else if (object instanceof JSONString){
+        }
+        if (object instanceof JSONString){
             return toJSON((JSONString) object, jsonConfig);
-        }else if (object instanceof String){
+        }
+        if (object instanceof String){
             return toJSON((String) object, jsonConfig);
-        }else if (JSONUtils.isArray(object)){
+        }
+        if (JSONUtils.isArray(object)){
             return JSONArray.fromObject(object, jsonConfig);
         }
 

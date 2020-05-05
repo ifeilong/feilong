@@ -20,9 +20,6 @@ import java.lang.ref.SoftReference;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -31,11 +28,6 @@ import com.feilong.lib.json.util.JSONUtils;
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 abstract class AbstractJSON{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractJSON.class);
-
-    //---------------------------------------------------------------
 
     /**
      * The Class CycleSet.
@@ -133,6 +125,8 @@ abstract class AbstractJSON{
         if (JSONUtils.isArray(value)){
             return JSONArray.fromObject(value, jsonConfig);
         }
+
+        //---------------------------------------------------------------
         if (JSONUtils.isString(value)){
             String str = String.valueOf(value);
             if (JSONUtils.hasQuotes(str)){
@@ -163,6 +157,8 @@ abstract class AbstractJSON{
             }
             return str;
         }
+
+        //---------------------------------------------------------------
         if (JSONUtils.isNumber(value)){
             JSONUtils.testValidity(value);
             return JSONUtils.transformNumber((Number) value);

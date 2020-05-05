@@ -1,4 +1,4 @@
-package com.feilong.json;
+package com.feilong.json.entity;
 
 import java.io.Serializable;
 

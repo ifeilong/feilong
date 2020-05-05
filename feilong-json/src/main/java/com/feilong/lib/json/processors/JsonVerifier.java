@@ -48,12 +48,17 @@ public final class JsonVerifier{
      * @return true, if is valid json value
      */
     public static boolean isValidJsonValue(Object value){
-        if (JSONNull.getInstance().equals(value) || value instanceof JSON || value instanceof Boolean || value instanceof Byte
-                        || value instanceof Short || value instanceof Integer || value instanceof Long || value instanceof Double
-                        || value instanceof BigInteger || value instanceof BigDecimal || value instanceof JSONFunction
-                        || value instanceof JSONString || value instanceof String){
-            return true;
-        }
-        return false;
+        return JSONNull.getInstance().equals(value) //
+                        || value instanceof JSON || value instanceof Boolean //
+                        || value instanceof Byte //
+                        || value instanceof Short//
+                        || value instanceof Integer //
+                        || value instanceof Long //
+                        || value instanceof Double //
+                        || value instanceof BigInteger //
+                        || value instanceof BigDecimal //
+                        || value instanceof JSONFunction //
+                        || value instanceof JSONString //
+                        || value instanceof String;
     }
 }

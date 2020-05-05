@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.transformer;
+package com.feilong.json.processor;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -22,10 +22,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-        //  CustomJavaIdentifierTransformerTest.class,
+                DateJsonValueProcessorTest.class,
+                SensitiveWordsJsonValueProcessorTest.class,
+                BigDecimalJsonValueProcessorTest.class,
 
         //
 })
-public class JavaIdentifierTransformerSuiteTests{
+public class JsonValueProcessorSuiteTests{
 
 }

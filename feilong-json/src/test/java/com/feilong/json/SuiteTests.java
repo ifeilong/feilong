@@ -19,13 +19,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.json.processor.DateJsonValueProcessorTest;
-import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
+import com.feilong.json.processor.JsonValueProcessorSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
-
-                DateJsonValueProcessorTest.class,
 
                 FormatBeanIgnoreNullTest.class,
 
@@ -59,7 +56,9 @@ import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
                 JsonHelperIsKeyValueJsonStringTest.class,
                 JsonHelperIsCommonStringTest.class,
 
-                JavaIdentifierTransformerSuiteTests.class,
+                JsonValueProcessorSuiteTests.class,
+
+        // JavaIdentifierTransformerSuiteTests.class,
 
         //
 })

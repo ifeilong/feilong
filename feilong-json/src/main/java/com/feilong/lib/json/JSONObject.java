@@ -19,10 +19,7 @@ import static java.util.Collections.emptyMap;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,6 +39,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.array.ObjectArrayMorpher;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
@@ -250,48 +248,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
     }
 
     /**
-     * Creates a bean from a JSONObject, with a specific target class.<br>
-     *
-     * @param jsonObject
-     *            the json object
-     * @param beanClass
-     *            the bean class
-     * @return the object
-     */
-    public static Object toBean(JSONObject jsonObject,Class beanClass){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(beanClass);
-        return toBean(jsonObject, jsonConfig);
-    }
-
-    /**
-     * Creates a bean from a JSONObject, with a specific target class.<br>
-     * If beanClass is null, this method will return a graph of DynaBeans. Any
-     * attribute that is a JSONObject and matches a key in the classMap will be
-     * converted to that target class.<br>
-     * The classMap has the following conventions:
-     * <ul>
-     * <li>Every key must be an String.</li>
-     * <li>Every value must be a Class.</li>
-     * <li>A key may be a regular expression.</li>
-     * </ul>
-     *
-     * @param jsonObject
-     *            the json object
-     * @param beanClass
-     *            the bean class
-     * @param classMap
-     *            the class map
-     * @return the object
-     */
-    public static Object toBean(JSONObject jsonObject,Class beanClass,Map classMap){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(beanClass);
-        jsonConfig.setClassMap(classMap);
-        return toBean(jsonObject, jsonConfig);
-    }
-
-    /**
      * Creates a bean from a JSONObject, with the specific configuration.
      *
      * @param jsonObject
@@ -327,7 +283,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 }
                 bean = new HashMap();
             }else{
-                bean = jsonConfig.getNewBeanInstanceStrategy().newInstance(beanClass, jsonObject);
+                bean = ConstructorUtil.newInstance(beanClass);
             }
         }catch (JSONException jsone){
             throw jsone;
@@ -349,13 +305,11 @@ public final class JSONObject extends AbstractJSON implements JSON{
             }
 
             //---------------------------------------------------------------
-
             String key = Map.class.isAssignableFrom(beanClass) && jsonConfig.isSkipJavaIdentifierTransformationInMapKeys()//
                             ? name
                             : JSONUtils.convertToJavaIdentifier(name, jsonConfig);
 
             //---------------------------------------------------------------
-
             PropertyNameProcessor propertyNameProcessor = jsonConfig.findJavaPropertyNameProcessor(beanClass);
             if (propertyNameProcessor != null){
                 key = propertyNameProcessor.processPropertyName(beanClass, key);
@@ -363,7 +317,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
 
             //---------------------------------------------------------------
             Class type = (Class) properties.get(name);
-
             try{
                 if (Map.class.isAssignableFrom(beanClass)){
                     doWithMap(jsonConfig, classMap, bean, name, type, value, key);
@@ -382,7 +335,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw new JSONException("Error while setting property=" + name + " type " + type, e);
             }
         }
-
         return bean;
     }
 
@@ -481,8 +433,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                                     jsonConfig);
                 }else if (String.class.isAssignableFrom(type) || JSONUtils.isBoolean(type) || JSONUtils.isNumber(type)
                                 || JSONUtils.isString(type) || JSONFunction.class.isAssignableFrom(type)){
-                    if (beanClass == null || bean instanceof Map || jsonConfig.getPropertySetStrategy() != null
-                                    || !jsonConfig.isIgnorePublicFields()){
+                    if (beanClass == null || bean instanceof Map || jsonConfig.getPropertySetStrategy() != null){
                         setProperty(bean, key, value, jsonConfig);
                     }else{
                         LOGGER.warn(
@@ -600,7 +551,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                     if (value instanceof JSONArray){
                         if (pd == null || List.class.isAssignableFrom(pd.getPropertyType())){
                             Class targetClass = resolveClass(classMap, key, name, type);
-                            Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(targetClass, null);
+                            Object newRoot = ConstructorUtil.newInstance(targetClass);
                             List list = JSONArray.toList((JSONArray) value, newRoot, jsonConfig);
                             setProperty(root, key, list, jsonConfig);
                         }else{
@@ -609,7 +560,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                             if (innerType.equals(Object.class) && targetInnerType != null && !targetInnerType.equals(Object.class)){
                                 innerType = targetInnerType;
                             }
-                            Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(innerType, null);
+                            Object newRoot = ConstructorUtil.newInstance(innerType);
                             Object array = JSONArray.toArray((JSONArray) value, newRoot, jsonConfig);
                             if (innerType.isPrimitive() || JSONUtils.isNumber(innerType) || Boolean.class.isAssignableFrom(innerType)
                                             || JSONUtils.isString(innerType)){
@@ -660,7 +611,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                             if (jsonConfig.isHandleJettisonSingleElementArray()){
                                 JSONArray array = new JSONArray().element(value, jsonConfig);
                                 Class newTargetClass = resolveClass(classMap, key, name, type);
-                                Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(newTargetClass, (JSONObject) value);
+                                Object newRoot = ConstructorUtil.newInstance(newTargetClass);
                                 if (targetClass.isArray()){
                                     setProperty(root, key, JSONArray.toArray(array, newRoot, jsonConfig), jsonConfig);
                                 }else if (Collection.class.isAssignableFrom(targetClass)){
@@ -677,13 +628,13 @@ public final class JSONObject extends AbstractJSON implements JSON{
                                         targetClass = Object.class;
                                     }
                                 }
-                                Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(targetClass, (JSONObject) value);
+                                Object newRoot = ConstructorUtil.newInstance(targetClass);
                                 setProperty(root, key, toBean((JSONObject) value, newRoot, jsonConfig), jsonConfig);
                             }
                         }else if (root instanceof Map){
                             Class targetClass = TargetClassFinder.findTargetClass(key, classMap);
                             targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
-                            Object newRoot = jsonConfig.getNewBeanInstanceStrategy().newInstance(targetClass, null);
+                            Object newRoot = ConstructorUtil.newInstance(targetClass);
                             setProperty(root, key, toBean((JSONObject) value, newRoot, jsonConfig), jsonConfig);
                         }else{
                             LOGGER.warn(
@@ -732,18 +683,18 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(bean);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
-
-        JsonBeanProcessor processor = jsonConfig.findJsonBeanProcessor(bean.getClass());
+        //---------------------------------------------------------------
+        Class<?> beanClass = bean.getClass();
+        JsonBeanProcessor processor = jsonConfig.findJsonBeanProcessor(beanClass);
         if (processor != null){
             JSONObject json = null;
             try{
                 json = processor.processBean(bean, jsonConfig);
                 if (json == null){
-                    json = (JSONObject) jsonConfig.findDefaultValueProcessor(bean.getClass()).getDefaultValue(bean.getClass());
+                    json = (JSONObject) jsonConfig.findDefaultValueProcessor(beanClass).getDefaultValue(beanClass);
                     if (json == null){
                         json = new JSONObject(true);
                     }
@@ -754,8 +705,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(bean);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
             return json;
         }
@@ -787,108 +737,55 @@ public final class JSONObject extends AbstractJSON implements JSON{
 
         try{
             PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(bean);
+
             for (int i = 0; i < propertyDescriptors.length; i++){
                 PropertyDescriptor propertyDescriptor = propertyDescriptors[i];
-
-                boolean bypass = false;
-                String key = propertyDescriptor.getName();
-                if (exclusions.contains(key)){
+                if (IsIgnoreUtil.isIgnore(propertyDescriptor, exclusions, beanClass, jsonConfig)){
                     continue;
                 }
-
-                if (jsonConfig.isIgnoreTransientFields() && isTransientField(key, beanClass, jsonConfig)){
-                    continue;
-                }
-
                 //---------------------------------------------------------------
-
-                Class type = propertyDescriptor.getPropertyType();
-                try{
-                    propertyDescriptor.getReadMethod();
-                }catch (Exception e){
-                    // bug 2565295
-                    String warning = "Property '" + key + "' of " + beanClass + " has no read method. SKIPPED";
-                    LOGGER.info(warning);
+                String key = propertyDescriptor.getName();
+                Object value = PropertyUtils.getProperty(bean, key);
+                if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
                     continue;
                 }
-                if (propertyDescriptor.getReadMethod() != null){
-                    if (isTransient(propertyDescriptor.getReadMethod(), jsonConfig)){
-                        continue;
-                    }
-
-                    Object value = PropertyUtils.getProperty(bean, key);
-                    if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
-                        continue;
-                    }
-                    JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(beanClass, type, key);
-                    if (jsonValueProcessor != null){
-                        value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
-                        bypass = true;
-                        if (!JsonVerifier.isValidJsonValue(value)){
-                            throw new JSONException("Value is not a valid JSON value. " + value);
-                        }
-                    }
-                    if (propertyNameProcessor != null){
-                        key = propertyNameProcessor.processPropertyName(beanClass, key);
-                    }
-                    setValue(jsonObject, key, value, type, jsonConfig, bypass);
-                }else{
-                    String warning = "Property '" + key + "' of " + beanClass + " has no read method. SKIPPED";
-                    LOGGER.info(warning);
-                }
+                //---------------------------------------------------------------
+                Class type = propertyDescriptor.getPropertyType();
+                set(key, value, jsonConfig, beanClass, propertyNameProcessor, type, jsonObject);
             }
 
             //---------------------------------------------------------------
-            // inspect public fields, this operation may fail under
-            // a SecurityManager so we will eat all exceptions
-            try{
-                if (!jsonConfig.isIgnorePublicFields()){
-                    Field[] fields = beanClass.getFields();
-                    for (int i = 0; i < fields.length; i++){
-                        boolean bypass = false;
-                        Field field = fields[i];
-                        String key = field.getName();
-                        if (exclusions.contains(key)){
-                            continue;
-                        }
-
-                        if (jsonConfig.isIgnoreTransientFields() && isTransient(field, jsonConfig)){
-                            continue;
-                        }
-
-                        Class type = field.getType();
-                        Object value = field.get(bean);
-                        if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
-                            continue;
-                        }
-
-                        //---------------------------------------------------------------
-                        JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(beanClass, type, key);
-                        if (jsonValueProcessor != null){
-                            value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
-                            bypass = true;
-                            if (!JsonVerifier.isValidJsonValue(value)){
-                                throw new JSONException("Value is not a valid JSON value. " + value);
-                            }
-                        }
-                        if (propertyNameProcessor != null){
-                            key = propertyNameProcessor.processPropertyName(beanClass, key);
-                        }
-                        setValue(jsonObject, key, value, type, jsonConfig, bypass);
-                    }
-                }
-            }catch (Exception e){
-                LOGGER.trace("Couldn't read public fields.", e);
-            }
         }catch (JSONException jsone){
             removeInstance(bean);
             throw jsone;
         }catch (Exception e){
             removeInstance(bean);
-            JSONException jsone = new JSONException(e);
-            throw jsone;
+            throw new JSONException(e);
         }
         return jsonObject;
+    }
+
+    private static void set(
+                    String key,
+                    Object value,
+                    JsonConfig jsonConfig,
+                    Class beanClass,
+                    PropertyNameProcessor propertyNameProcessor,
+                    Class type,
+                    JSONObject jsonObject){
+        JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(beanClass, type, key);
+        boolean bypass = false;
+        if (jsonValueProcessor != null){
+            value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
+            bypass = true;
+            if (!JsonVerifier.isValidJsonValue(value)){
+                throw new JSONException("Value is not a valid JSON value. " + value);
+            }
+        }
+        if (propertyNameProcessor != null){
+            key = propertyNameProcessor.processPropertyName(beanClass, key);
+        }
+        setValue(jsonObject, key, value, type, jsonConfig, bypass);
     }
 
     //---------------------------------------------------------------
@@ -915,10 +812,11 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(bean);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
+
+        //---------------------------------------------------------------
 
         JSONObject jsonObject = new JSONObject();
         try{
@@ -952,8 +850,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
             throw jsone;
         }catch (RuntimeException e){
             removeInstance(bean);
-            JSONException jsone = new JSONException(e);
-            throw jsone;
+            throw new JSONException(e);
         }
 
         removeInstance(bean);
@@ -982,10 +879,11 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(object);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
+
+        //---------------------------------------------------------------
 
         JSONArray sa = object.names(jsonConfig);
         Collection exclusions = jsonConfig.getMergedExcludes();
@@ -1046,16 +944,15 @@ public final class JSONObject extends AbstractJSON implements JSON{
      * @return the JSON object
      */
     private static JSONObject _fromJSONTokener(JSONTokener tokener,JsonConfig jsonConfig){
+        char c;
+        String key;
+        Object value;
+
+        if (tokener.matches("null.*")){
+            return new JSONObject(true);
+        }
 
         try{
-            char c;
-            String key;
-            Object value;
-
-            if (tokener.matches("null.*")){
-                return new JSONObject(true);
-            }
-
             if (tokener.nextClean() != '{'){
                 throw tokener.syntaxError("A JSONObject text must begin with '{'");
             }
@@ -1075,10 +972,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                         key = tokener.nextValue(jsonConfig).toString();
                 }
 
-                /*
-                 * The key is followed by ':'. We will also tolerate '=' or '=>'.
-                 */
-
+                //The key is followed by ':'. We will also tolerate '=' or '=>'.
                 c = tokener.nextClean();
                 if (c == '='){
                     if (tokener.next() != '>'){
@@ -1156,10 +1050,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                     }
                 }
 
-                /*
-                 * Pairs are separated by ','. We will also tolerate ';'.
-                 */
-
+                // Pairs are separated by ','. We will also tolerate ';'.
                 switch (tokener.nextClean()) {
                     case ';':
                     case ',':
@@ -1203,8 +1094,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw jsone;
             }catch (RuntimeException e){
                 removeInstance(map);
-                JSONException jsone = new JSONException(e);
-                throw jsone;
+                throw new JSONException(e);
             }
         }
 
@@ -1256,8 +1146,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
             throw jsone;
         }catch (RuntimeException e){
             removeInstance(map);
-            JSONException jsone = new JSONException(e);
-            throw jsone;
+            throw new JSONException(e);
         }
 
         removeInstance(map);
@@ -1310,53 +1199,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
             }
         }
         return targetClass;
-    }
-
-    /**
-     * Checks if is transient field.
-     *
-     * @param name
-     *            the name
-     * @param beanClass
-     *            the bean class
-     * @param jsonConfig
-     *            the json config
-     * @return true, if is transient field
-     */
-    private static boolean isTransientField(String name,Class beanClass,JsonConfig jsonConfig){
-        try{
-            Field field = beanClass.getDeclaredField(name);
-            if ((field.getModifiers() & Modifier.TRANSIENT) == Modifier.TRANSIENT){
-                return true;
-            }
-            return isTransient(field, jsonConfig);
-        }catch (Exception e){
-            LOGGER.info("Error while inspecting field " + beanClass + "." + name + " for transient status.", e);
-        }
-        return false;
-    }
-
-    /**
-     * Checks if is transient.
-     *
-     * @param element
-     *            the element
-     * @param jsonConfig
-     *            the json config
-     * @return true, if is transient
-     */
-    private static boolean isTransient(AnnotatedElement element,JsonConfig jsonConfig){
-        for (Iterator annotations = jsonConfig.getIgnoreFieldAnnotations().iterator(); annotations.hasNext();){
-            try{
-                String annotationClassName = (String) annotations.next();
-                if (element.getAnnotation((Class) Class.forName(annotationClassName)) != null){
-                    return true;
-                }
-            }catch (Exception e){
-                LOGGER.info("Error while inspecting " + element + " for transient status.", e);
-            }
-        }
-        return false;
     }
 
     /**
@@ -1434,6 +1276,8 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 throw new JSONException("Value is not a valid JSON value. " + value);
             }
         }
+
+        //---------------------------------------------------------------
         if (jsonObject.properties.containsKey(key)){
             if (String.class.isAssignableFrom(type)){
                 Object o = jsonObject.get(key);
@@ -1453,6 +1297,8 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 jsonObject.setInternal(key, value, jsonConfig);
             }
         }
+
+        //---------------------------------------------------------------
 
         value = jsonObject.get(key);
         if (accumulated){
@@ -1505,86 +1351,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
      *             If the value is an invalid number or if the key is
      *             null.
      */
-    public JSONObject accumulate(String key,boolean value){
-        return _accumulate(key, value ? Boolean.TRUE : Boolean.FALSE, new JsonConfig());
-    }
-
-    /**
-     * Accumulate values under a key. It is similar to the element method except
-     * that if there is already an object stored under the key then a JSONArray
-     * is stored under the key to hold all of the accumulated values. If there is
-     * already a JSONArray, then the new value is appended to it. In contrast,
-     * the replace method replaces the previous value.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object to be accumulated under the key.
-     * @return this.
-     * @throws JSONException
-     *             If the value is an invalid number or if the key is
-     *             null.
-     */
-    public JSONObject accumulate(String key,double value){
-        return _accumulate(key, Double.valueOf(value), new JsonConfig());
-    }
-
-    /**
-     * Accumulate values under a key. It is similar to the element method except
-     * that if there is already an object stored under the key then a JSONArray
-     * is stored under the key to hold all of the accumulated values. If there is
-     * already a JSONArray, then the new value is appended to it. In contrast,
-     * the replace method replaces the previous value.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object to be accumulated under the key.
-     * @return this.
-     * @throws JSONException
-     *             If the value is an invalid number or if the key is
-     *             null.
-     */
-    public JSONObject accumulate(String key,int value){
-        return _accumulate(key, Integer.valueOf(value), new JsonConfig());
-    }
-
-    /**
-     * Accumulate values under a key. It is similar to the element method except
-     * that if there is already an object stored under the key then a JSONArray
-     * is stored under the key to hold all of the accumulated values. If there is
-     * already a JSONArray, then the new value is appended to it. In contrast,
-     * the replace method replaces the previous value.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object to be accumulated under the key.
-     * @return this.
-     * @throws JSONException
-     *             If the value is an invalid number or if the key is
-     *             null.
-     */
-    public JSONObject accumulate(String key,long value){
-        return _accumulate(key, Long.valueOf(value), new JsonConfig());
-    }
-
-    /**
-     * Accumulate values under a key. It is similar to the element method except
-     * that if there is already an object stored under the key then a JSONArray
-     * is stored under the key to hold all of the accumulated values. If there is
-     * already a JSONArray, then the new value is appended to it. In contrast,
-     * the replace method replaces the previous value.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object to be accumulated under the key.
-     * @return this.
-     * @throws JSONException
-     *             If the value is an invalid number or if the key is
-     *             null.
-     */
     public JSONObject accumulate(String key,Object value){
         return _accumulate(key, value, new JsonConfig());
     }
@@ -1612,115 +1378,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
     }
 
     /**
-     * Accumulate all.
-     *
-     * @param map
-     *            the map
-     */
-    public void accumulateAll(Map map){
-        accumulateAll(map, new JsonConfig());
-    }
-
-    /**
-     * Accumulate all.
-     *
-     * @param map
-     *            the map
-     * @param jsonConfig
-     *            the json config
-     */
-    public void accumulateAll(Map map,JsonConfig jsonConfig){
-        for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-            Map.Entry entry = (Map.Entry) entries.next();
-            String key = String.valueOf(entry.getKey());
-            Object value = entry.getValue();
-            accumulate(key, value, jsonConfig);
-        }
-    }
-
-    /**
-     * Contains key.
-     *
-     * @param key
-     *            the key
-     * @return true, if successful
-     */
-    public boolean containsKey(Object key){
-        return properties.containsKey(key);
-    }
-
-    /**
-     * Put a key/boolean pair in the JSONObject.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A boolean which is the value.
-     * @return this.
-     * @throws JSONException
-     *             If the key is null.
-     */
-    public JSONObject element(String key,boolean value){
-        verifyIsNull();
-        return element(key, value ? Boolean.TRUE : Boolean.FALSE);
-    }
-
-    /**
-     * Put a key/value pair in the JSONObject, where the value will be a
-     * JSONArray which is produced from a Collection.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A Collection value.
-     * @return this.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    public JSONObject element(String key,Collection value){
-        return element(key, value, new JsonConfig());
-    }
-
-    /**
-     * Put a key/value pair in the JSONObject, where the value will be a
-     * JSONArray which is produced from a Collection.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A Collection value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    public JSONObject element(String key,Collection value,JsonConfig jsonConfig){
-        if (!(value instanceof JSONArray)){
-            value = JSONArray.fromObject(value, jsonConfig);
-        }
-        return setInternal(key, value, jsonConfig);
-    }
-
-    /**
-     * Put a key/double pair in the JSONObject.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A double which is the value.
-     * @return this.
-     * @throws JSONException
-     *             If the key is null or if the number is invalid.
-     */
-    public JSONObject element(String key,double value){
-        verifyIsNull();
-        Double d = new Double(value);
-        JSONUtils.testValidity(d);
-        return element(key, d);
-    }
-
-    /**
      * Put a key/int pair in the JSONObject.
      *
      * @param key
@@ -1734,57 +1391,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
     public JSONObject element(String key,int value){
         verifyIsNull();
         return element(key, new Integer(value));
-    }
-
-    /**
-     * Put a key/long pair in the JSONObject.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A long which is the value.
-     * @return this.
-     * @throws JSONException
-     *             If the key is null.
-     */
-    public JSONObject element(String key,long value){
-        verifyIsNull();
-        return element(key, new Long(value));
-    }
-
-    /**
-     * Put a key/value pair in the JSONObject, where the value will be a
-     * JSONObject which is produced from a Map.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A Map value.
-     * @return this.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    public JSONObject element(String key,Map value){
-        return element(key, value, new JsonConfig());
-    }
-
-    /**
-     * Put a key/value pair in the JSONObject, where the value will be a
-     * JSONObject which is produced from a Map.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A Map value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             the JSON exception
-     */
-    public JSONObject element(String key,Map value,JsonConfig jsonConfig){
-        verifyIsNull();
-        return element(key, JSONObject.fromObject(value, jsonConfig), jsonConfig);
     }
 
     /**
@@ -1854,87 +1460,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
     }
 
     /**
-     * Get the boolean value associated with a key.
-     *
-     * @param key
-     *            A key string.
-     * @return The truth.
-     * @throws JSONException
-     *             if the value is not a Boolean or the String "true"
-     *             or "false".
-     */
-    public boolean getBoolean(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (o != null){
-            if (o.equals(Boolean.FALSE) || (o instanceof String && ((String) o).equalsIgnoreCase("false"))){
-                return false;
-            }else if (o.equals(Boolean.TRUE) || (o instanceof String && ((String) o).equalsIgnoreCase("true"))){
-                return true;
-            }
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a Boolean.");
-    }
-
-    /**
-     * Get the JSONArray value associated with a key.
-     *
-     * @param key
-     *            A key string.
-     * @return A JSONArray which is the value.
-     * @throws JSONException
-     *             if the key is not found or if the value is not a
-     *             JSONArray.
-     */
-    public JSONArray getJSONArray(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (o != null && o instanceof JSONArray){
-            return (JSONArray) o;
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a JSONArray.");
-    }
-
-    /**
-     * Get the JSONObject value associated with a key.
-     *
-     * @param key
-     *            A key string.
-     * @return A JSONObject which is the value.
-     * @throws JSONException
-     *             if the key is not found or if the value is not a
-     *             JSONObject.
-     */
-    public JSONObject getJSONObject(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (JSONNull.getInstance().equals(o)){
-            return new JSONObject(true);
-        }else if (o instanceof JSONObject){
-            return (JSONObject) o;
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a JSONObject.");
-    }
-
-    /**
-     * Get the string associated with a key.
-     *
-     * @param key
-     *            A key string.
-     * @return A string which is the value.
-     * @throws JSONException
-     *             if the key is not found.
-     */
-    public String getString(String key){
-        verifyIsNull();
-        Object o = get(key);
-        if (o != null){
-            return o.toString();
-        }
-        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] not found.");
-    }
-
-    /**
      * Determine if the JSONObject contains a specific key.
      *
      * @param key
@@ -1972,33 +1497,8 @@ public final class JSONObject extends AbstractJSON implements JSON{
      */
     public Iterator keys(){
         verifyIsNull();
-        return keySet().iterator();
-    }
-
-    /**
-     * Key set.
-     *
-     * @return the 设置
-     */
-    public Set keySet(){
-        return Collections.unmodifiableSet(properties.keySet());
-    }
-
-    /**
-     * Produce a JSONArray containing the names of the elements of this
-     * JSONObject.
-     *
-     * @return A JSONArray containing the key strings, or null if the JSONObject
-     *         is empty.
-     */
-    public JSONArray names(){
-        verifyIsNull();
-        JSONArray ja = new JSONArray();
-        Iterator keys = keys();
-        while (keys.hasNext()){
-            ja.element(keys.next());
-        }
-        return ja;
+        Set keySet = Collections.unmodifiableSet(properties.keySet());
+        return keySet.iterator();
     }
 
     /**
@@ -2021,109 +1521,6 @@ public final class JSONObject extends AbstractJSON implements JSON{
     }
 
     /**
-     * Get an optional JSONArray associated with a key. It returns null if there
-     * is no such key, or if its value is not a JSONArray.
-     *
-     * @param key
-     *            A key string.
-     * @return A JSONArray which is the value.
-     */
-    public JSONArray optJSONArray(String key){
-        verifyIsNull();
-        Object o = get(key);
-        return o instanceof JSONArray ? (JSONArray) o : null;
-    }
-
-    /**
-     * Get an optional JSONObject associated with a key. It returns null if there
-     * is no such key, or if its value is not a JSONObject.
-     *
-     * @param key
-     *            A key string.
-     * @return A JSONObject which is the value.
-     */
-    public JSONObject optJSONObject(String key){
-        verifyIsNull();
-        Object o = get(key);
-        return o instanceof JSONObject ? (JSONObject) o : null;
-    }
-
-    /**
-     * Get an optional string associated with a key. It returns an empty string
-     * if there is no such key. If the value is not a string and is not null,
-     * then it is coverted to a string.
-     *
-     * @param key
-     *            A key string.
-     * @return A string which is the value.
-     */
-    public String optString(String key){
-        verifyIsNull();
-        return optString(key, "");
-    }
-
-    /**
-     * Get an optional string associated with a key. It returns the defaultValue
-     * if there is no such key.
-     *
-     * @param key
-     *            A key string.
-     * @param defaultValue
-     *            The default.
-     * @return A string which is the value.
-     */
-    public String optString(String key,String defaultValue){
-        verifyIsNull();
-        Object o = get(key);
-        return o != null ? o.toString() : defaultValue;
-    }
-
-    /**
-     * Put.
-     *
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @return the object
-     */
-    public Object put(Object key,Object value){
-        if (key == null){
-            throw new IllegalArgumentException("key is null.");
-        }
-        Object previous = properties.get(key);
-        element(String.valueOf(key), value);
-        return previous;
-    }
-
-    /**
-     * Put all.
-     *
-     * @param map
-     *            the map
-     */
-    public void putAll(Map map){
-        putAll(map, new JsonConfig());
-    }
-
-    /**
-     * Put all.
-     *
-     * @param map
-     *            the map
-     * @param jsonConfig
-     *            the json config
-     */
-    public void putAll(Map map,JsonConfig jsonConfig){
-        for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-            Map.Entry entry = (Map.Entry) entries.next();
-            String key = String.valueOf(entry.getKey());
-            Object value = entry.getValue();
-            element(key, value, jsonConfig);
-        }
-    }
-
-    /**
      * Remove a name and its value, if present.
      *
      * @param key
@@ -2143,31 +1540,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
      */
     @Override
     public int size(){
-        // verifyIsNull();
         return this.properties.size();
-    }
-
-    /**
-     * Produce a JSONArray containing the values of the members of this
-     * JSONObject.
-     *
-     * @param names
-     *            A JSONArray containing a list of key strings. This determines
-     *            the sequence of the values in the result.
-     * @return A JSONArray of values.
-     * @throws JSONException
-     *             If any of the values are non-finite numbers.
-     */
-    public JSONArray toJSONArray(JSONArray names){
-        verifyIsNull();
-        if (names == null || names.size() == 0){
-            return null;
-        }
-        JSONArray ja = new JSONArray();
-        for (int i = 0; i < names.size(); i += 1){
-            ja.element(this.get(names.getString(i)));
-        }
-        return ja;
     }
 
     /**
@@ -2187,52 +1560,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
         if (isNullObject()){
             return JSONNull.getInstance().toString();
         }
-
-        //---------------------------------------------------------------
-        try{
-            Iterator keys = keys();
-            StringBuffer sb = new StringBuffer("{");
-
-            while (keys.hasNext()){
-                if (sb.length() > 1){
-                    sb.append(',');
-                }
-                Object o = keys.next();
-                sb.append(JSONUtils.quote(o.toString()));
-                sb.append(':');
-                sb.append(JSONUtils.valueToString(this.properties.get(o)));
-            }
-            sb.append('}');
-            return sb.toString();
-        }catch (Exception e){
-            return null;
-        }
-    }
-
-    /**
-     * Make a prettyprinted JSON text of this JSONObject.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param indentFactor
-     *            The number of spaces to add to each level of
-     *            indentation.
-     * @return a printable, displayable, portable, transmittable representation
-     *         of the object, beginning with <code>{</code>&nbsp;<small>(left
-     *         brace)</small> and ending with <code>}</code>&nbsp;<small>(right
-     *         brace)</small>.
-     * @throws JSONException
-     *             If the object contains an invalid number.
-     */
-    @Override
-    public String toString(int indentFactor){
-        if (isNullObject()){
-            return JSONNull.getInstance().toString();
-        }
-        if (indentFactor == 0){
-            return this.toString();
-        }
-        return toString(indentFactor, 0);
+        return ToStringUtil.toString(this.properties);
     }
 
     //---------------------------------------------------------------
@@ -2258,50 +1586,15 @@ public final class JSONObject extends AbstractJSON implements JSON{
         if (isNullObject()){
             return JSONNull.getInstance().toString();
         }
-        int i;
+        //---------------------------------------------------------------
         int n = size();
         if (n == 0){
             return "{}";
         }
         if (indentFactor == 0){
-            return this.toString();
+            return toString();
         }
-        Iterator keys = keys();
-        StringBuffer sb = new StringBuffer("{");
-        int newindent = indent + indentFactor;
-        Object o;
-        if (n == 1){
-            o = keys.next();
-            sb.append(JSONUtils.quote(o.toString()));
-            sb.append(": ");
-            sb.append(JSONUtils.valueToString(this.properties.get(o), indentFactor, indent));
-        }else{
-            while (keys.hasNext()){
-                o = keys.next();
-                if (sb.length() > 1){
-                    sb.append(",\n");
-                }else{
-                    sb.append('\n');
-                }
-                for (i = 0; i < newindent; i += 1){
-                    sb.append(' ');
-                }
-                sb.append(JSONUtils.quote(o.toString()));
-                sb.append(": ");
-                sb.append(JSONUtils.valueToString(this.properties.get(o), indentFactor, newindent));
-            }
-            if (sb.length() > 1){
-                sb.append('\n');
-                for (i = 0; i < indent; i += 1){
-                    sb.append(' ');
-                }
-            }
-            for (i = 0; i < indent; i += 1){
-                sb.insert(0, ' ');
-            }
-        }
-        sb.append('}');
-        return sb.toString();
+        return ToStringUtil.toString(properties, indentFactor, indent);
     }
 
     /**
@@ -2375,6 +1668,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
             throw new JSONException("Null key.");
         }
 
+        //---------------------------------------------------------------
         if (JSONUtils.isString(value) && JSONUtils.mayBeJSON(String.valueOf(value))){
             this.properties.put(key, value);
         }else{
@@ -2384,30 +1678,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
                 this.properties.put(key, value);
             }
         }
-
         return this;
-    }
-
-    /**
-     * Process value.
-     *
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    private Object processValue(Object value,JsonConfig jsonConfig){
-        if (value != null){
-            JsonValueProcessor processor = jsonConfig.findJsonValueProcessor(value.getClass());
-            if (processor != null){
-                value = processor.processObjectValue(null, value, jsonConfig);
-                if (!JsonVerifier.isValidJsonValue(value)){
-                    throw new JSONException("Value is not a valid JSON value. " + value);
-                }
-            }
-        }
-        return _processValue(value, jsonConfig);
     }
 
     /**

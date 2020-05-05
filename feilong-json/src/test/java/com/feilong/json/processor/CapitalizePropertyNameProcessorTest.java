@@ -13,13 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.transformer;
+package com.feilong.json.processor;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-public class CustomJavaIdentifierTransformerTest{
+public class CapitalizePropertyNameProcessorTest{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CapitalizePropertyNameProcessorTest.class);
+
+    @Test
+    public void test(){
+        fail("Not yet implemented");
+    }
 }

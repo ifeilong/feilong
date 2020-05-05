@@ -20,13 +20,11 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 import org.junit.Test;
 
-import com.feilong.json.JsonUtil;
-
 public class FormatArrayTest extends AbstractJsonTest{
 
     @Test
-    @SuppressWarnings("static-method")
-    public void testJsonString1(){
+    public void test(){
+
         LOGGER.debug(JsonUtil.format(toArray(toBigDecimal("99999999.00"))));
     }
 }

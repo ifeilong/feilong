@@ -129,7 +129,9 @@ public final class JsonHelper{
         JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JAVA_TO_JSON_CONFIG);
 
         if (isNeedConvertToJSONArray(obj)){
-            Object arrayJsonObject = obj instanceof Iterator ? IteratorUtils.toList((Iterator<?>) obj) : obj;
+            Object arrayJsonObject = obj instanceof Iterator//
+                            ? IteratorUtils.toList((Iterator<?>) obj)
+                            : obj;
             return toJSONArray(arrayJsonObject, useJsonConfig);
         }
         return toJSONObject(obj, useJsonConfig);
