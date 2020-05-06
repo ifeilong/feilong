@@ -30,6 +30,7 @@ import com.feilong.lib.json.processors.JsonBeanProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;

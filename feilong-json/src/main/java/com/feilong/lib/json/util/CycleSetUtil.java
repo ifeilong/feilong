@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json;
+package com.feilong.lib.json.util;
 
 import java.lang.ref.SoftReference;
 import java.util.HashSet;
@@ -69,7 +69,7 @@ public class CycleSetUtil{
      * @return true if the instance has not been added previously, false
      *         otherwise.
      */
-    protected static boolean addInstance(Object instance){
+    public static boolean addInstance(Object instance){
         return getCycleSet().add(instance);
     }
 
@@ -81,7 +81,7 @@ public class CycleSetUtil{
      * @param instance
      *            the instance
      */
-    protected static void removeInstance(Object instance){
+    public static void removeInstance(Object instance){
         Set set = getCycleSet();
         set.remove(instance);
         if (set.size() == 0){
