@@ -67,9 +67,6 @@ class JSONObjectBuilder{
         if (object instanceof JSONTokener){
             return _fromJSONTokener((JSONTokener) object, jsonConfig);
         }
-        if (object instanceof JSONString){
-            return _fromJSONString((JSONString) object, jsonConfig);
-        }
         if (object instanceof Map){
             return _fromMap((Map) object, jsonConfig);
         }
@@ -93,19 +90,6 @@ class JSONObjectBuilder{
 
         //---------------------------------------------------------------
         return _fromBean(object, jsonConfig);
-    }
-
-    /**
-     * From JSON string.
-     *
-     * @param string
-     *            the string
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON object
-     */
-    private static JSONObject _fromJSONString(JSONString string,JsonConfig jsonConfig){
-        return _fromJSONTokener(new JSONTokener(string.toJSONString()), jsonConfig);
     }
 
     /**
@@ -458,7 +442,7 @@ class JSONObjectBuilder{
     private static JSONObject defaultBeanProcessing(Object bean,JsonConfig jsonConfig){
         Class beanClass = bean.getClass();
         PropertyNameProcessor propertyNameProcessor = jsonConfig.findJsonPropertyNameProcessor(beanClass);
-        Collection exclusions = jsonConfig.getMergedExcludes(beanClass);
+        Collection exclusions = jsonConfig.getMergedExcludes();
         JSONObject jsonObject = new JSONObject();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 

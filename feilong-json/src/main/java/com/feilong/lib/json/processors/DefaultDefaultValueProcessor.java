@@ -21,8 +21,29 @@ import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
- * Base implementation for DefaultDefaultValueProcessor.
+ * 通用的默认值处理.
+ * 
+ * <h3>和 {@link DefaultDefaultValueProcessor} 相比:</h3>
+ * <blockquote>
+ * 
+ * <p>
+ * {@link DefaultDefaultValueProcessor} 是json-lib的默认实现
+ * </p>
+ * <ol>
+ * <li>{@link DefaultDefaultValueProcessor} 把所有的数字类型默认值设置为0,但是实际场景中, 0和null是有区别的</li>
+ * <li>{@link DefaultDefaultValueProcessor} 把 Boolean 默认值设置为了 false,但是实际场景中, false和null是有区别的</li>
+ * </ol>
+ * 
+ * <p>
+ * 支持输出为null
+ * </p>
+ * 
+ * </blockquote>
  *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see com.feilong.lib.json.processors.DefaultDefaultValueProcessor
+ * @since 1.11.5
+ * 
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 public class DefaultDefaultValueProcessor implements DefaultValueProcessor{
@@ -38,16 +59,15 @@ public class DefaultDefaultValueProcessor implements DefaultValueProcessor{
     public Object getDefaultValue(Class type){
         if (JSONUtils.isArray(type)){
             return new JSONArray();
-        }else if (JSONUtils.isNumber(type)){
-            if (JSONUtils.isDouble(type)){
-                return new Double(0);
-            }
-            return new Integer(0);
-        }else if (JSONUtils.isBoolean(type)){
-            return Boolean.FALSE;
-        }else if (JSONUtils.isString(type)){
-            return "";
         }
         return JSONNull.getInstance();
     }
+    //  jsonConfig.registerDefaultValueProcessor(Boolean.class, CommonDefaultValueProcessor.INSTANCE);
+    //    //注册 包装类型的数字 默认的值
+    //    Class<? extends Number>[] wrapperNumberClasses = ConvertUtil
+    //                    .toArray(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class);
+    //    //---------------------------------------------------------------
+    //    for (Class<? extends Number> klass : wrapperNumberClasses){
+    //        jsonConfig.registerDefaultValueProcessor(klass, CommonDefaultValueProcessor.INSTANCE);
+    //    }
 }

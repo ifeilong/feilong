@@ -15,28 +15,23 @@
  */
 package com.feilong.json.tobean;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
-
-import java.util.Map;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.store.member.Person;
 
-public class ToMapTypeErrorTest{
+public class ToBeanNoSuchMethodTest{
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void test(){
-        Map<String, String> map = newHashMap();
-        map.put("1", "2");
+        String json = "{'name':'get','dateAttr222':'2009-11-12'}";
+        Person person = JsonUtil.toBean(json, Person.class);
 
-        String format = JsonUtil.format(map);
-
-        Map<String, Integer> map2 = JsonUtil.toMap(format);
-
-        for (Map.Entry<String, Integer> entry : map2.entrySet()){
-            String key = entry.getKey();
-            Integer value = entry.getValue();
-        }
+        assertThat(person, allOf(hasProperty("name", is("get"))));
     }
 }

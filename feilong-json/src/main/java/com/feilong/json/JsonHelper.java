@@ -31,7 +31,6 @@ import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
-import com.feilong.lib.json.JSONString;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.util.JSONTokener;
@@ -263,7 +262,7 @@ public final class JsonHelper{
      * 将 <code>object</code>转成 {@link JSONObject}.
      *
      * @param object
-     *            可以是 <code>null</code>,{@link JSONObject},{@link DynaBean} ,{@link JSONTokener},{@link JSONString},
+     *            可以是 <code>null</code>,{@link JSONObject},{@link DynaBean} ,{@link JSONTokener},
      *            {@link Map},{@link String},<code>JavaBeans</code>
      * @param useJsonConfig
      *            如果是null,将使用 {@link #DEFAULT_JSON_CONFIG_INSTANCE}

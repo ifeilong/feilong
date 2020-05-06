@@ -150,9 +150,6 @@ public class ProcessValueUtil{
             }
             return value;
         }
-        if (value instanceof JSONString){
-            return JSONSerializer.toJSON(value, jsonConfig);
-        }
 
         if (value instanceof JSON){
             return JSONSerializer.toJSON(value, jsonConfig);
@@ -178,9 +175,6 @@ public class ProcessValueUtil{
                 return str;
             }
             if (JSONUtils.isJsonKeyword(str, jsonConfig)){
-                if (jsonConfig.isJavascriptCompliant() && "undefined".equals(str)){
-                    return JSONNull.getInstance();
-                }
                 return str;
             }
             if (JSONUtils.mayBeJSON(str)){

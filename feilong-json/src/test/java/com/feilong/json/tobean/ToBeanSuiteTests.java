@@ -31,6 +31,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToBeanWithJsonToJavaConfigTest.class,
 
                 ToMapTest.class,
+                ToMapTypeErrorTest.class,
                 ToMapWithJsonToJavaConfigTest.class,
         //
 })

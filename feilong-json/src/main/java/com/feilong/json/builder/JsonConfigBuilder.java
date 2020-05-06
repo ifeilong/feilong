@@ -23,13 +23,11 @@ import java.util.Date;
 import java.util.Map;
 
 import com.feilong.core.DatePattern;
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.processor.CalendarJsonValueProcessor;
 import com.feilong.json.processor.DateJsonValueProcessor;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.json.processor.ToStringJsonValueProcessor;
-import com.feilong.json.processor.defaultvalue.CommonDefaultValueProcessor;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
@@ -198,7 +196,6 @@ public final class JsonConfigBuilder{
         JsonConfig jsonConfig = new JsonConfig();
 
         //---------------------------------------------------------------
-
         //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
         //默认会过滤的几个key "class", "declaringClass","metaClass"  
         jsonConfig.setIgnoreDefaultExcludes(false);
@@ -207,13 +204,10 @@ public final class JsonConfigBuilder{
         // see http://feitianbenyue.iteye.com/blog/2046877
         jsonConfig.setAllowNonStringKeys(true);
 
-        //排除,避免循环引用 There is a cycle in the hierarchy!
-        //Returns empty array and null object
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        //排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         //---------------------------------------------------------------
-        //注册 包装类型的数字 默认的值
-        registerDefaultValueProcessor(jsonConfig);
 
         // 注册日期处理器
         jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
@@ -234,36 +228,5 @@ public final class JsonConfigBuilder{
         //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
         jsonConfig.registerJsonValueProcessor(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Register default value processor.
-     *
-     * @param jsonConfig
-     *            the json config
-     * @since 1.11.5
-     */
-    private static void registerDefaultValueProcessor(JsonConfig jsonConfig){
-        registerWrapperNumberDefaultValueProcessor(jsonConfig);
-
-        jsonConfig.registerDefaultValueProcessor(Boolean.class, CommonDefaultValueProcessor.INSTANCE);
-    }
-
-    /**
-     * 注册 包装类型的数字 默认的值.
-     *
-     * @param jsonConfig
-     *            the json config
-     * @since 1.11.5
-     */
-    private static void registerWrapperNumberDefaultValueProcessor(JsonConfig jsonConfig){
-        Class<? extends Number>[] wrapperNumberClasses = ConvertUtil
-                        .toArray(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class);
-        //---------------------------------------------------------------
-        for (Class<? extends Number> klass : wrapperNumberClasses){
-            jsonConfig.registerDefaultValueProcessor(klass, CommonDefaultValueProcessor.INSTANCE);
-        }
     }
 }

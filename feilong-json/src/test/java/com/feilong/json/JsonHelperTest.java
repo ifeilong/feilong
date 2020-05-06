@@ -91,9 +91,7 @@ public class JsonHelperTest extends AbstractJsonTest{
         // String[] excludes = { "userInfo" };
         // jsonConfig.setExcludes(excludes);
 
-        Class<UserInfo> target = UserInfo.class;
-        String[] properties = { "age" };
-        jsonConfig.registerPropertyExclusions(target, properties);
+        jsonConfig.registerPropertyExclusions(UserInfo.class, "age");
         LOGGER.debug(JsonHelper.toJSON(user, jsonConfig).toString(4, 4));
     }
 

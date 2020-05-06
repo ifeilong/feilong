@@ -111,9 +111,6 @@ public class JSONSerializer{
         if (object == null){
             return JSONNull.getInstance();
         }
-        if (object instanceof JSONString){
-            return toJSON((JSONString) object, jsonConfig);
-        }
         if (object instanceof String){
             return toJSON((String) object, jsonConfig);
         }
@@ -131,21 +128,6 @@ public class JSONSerializer{
             }
             return JSONArray.fromObject(object, jsonConfig);
         }
-    }
-
-    /**
-     * Creates a JSONObject, JSONArray or a JSONNull from a JSONString.
-     *
-     * @param string
-     *            the string
-     * @param jsonConfig
-     *            the json config
-     * @return the json
-     * @throws JSONException
-     *             if the string is not a valid JSON string
-     */
-    private static JSON toJSON(JSONString string,JsonConfig jsonConfig){
-        return toJSON(string.toJSONString(), jsonConfig);
     }
 
     /**

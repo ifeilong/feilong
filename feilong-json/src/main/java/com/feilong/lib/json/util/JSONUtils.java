@@ -36,7 +36,6 @@ import com.feilong.lib.json.JSONException;
 import com.feilong.lib.json.JSONFunction;
 import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
-import com.feilong.lib.json.JSONString;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.regexp.RegexpUtils;
 
@@ -189,10 +188,6 @@ public final class JSONUtils{
         Map properties = new HashMap();
         for (Iterator keys = jsonObject.keys(); keys.hasNext();){
             String key = (String) keys.next();
-            /*
-             * String parsedKey = key; if( !JSONUtils.isJavaIdentifier( parsedKey ) ){
-             * parsedKey = JSONUtils.convertToJavaIdentifier( key ); }
-             */
             properties.put(key, getTypeClass(jsonObject.get(key)));
         }
         return properties;
@@ -219,6 +214,8 @@ public final class JSONUtils{
         if (isBoolean(obj)){
             return Boolean.class;
         }
+
+        //---------------------------------------------------------------
         if (isNumber(obj)){
             Number n = (Number) obj;
             if (isInteger(n)){
@@ -706,8 +703,7 @@ public final class JSONUtils{
         if (input == null){
             return false;
         }
-        return "null".equals(input) || "true".equals(input) || "false".equals(input)
-                        || (jsonConfig.isJavascriptCompliant() && "undefined".equals(input));
+        return "null".equals(input) || "true".equals(input) || "false".equals(input);
     }
 
     /**
@@ -786,18 +782,6 @@ public final class JSONUtils{
         if (value instanceof JSONFunction){
             return ((JSONFunction) value).toString();
         }
-        if (value instanceof JSONString){
-            Object o;
-            try{
-                o = ((JSONString) value).toJSONString();
-            }catch (Exception e){
-                throw new JSONException(e);
-            }
-            if (o instanceof String){
-                return (String) o;
-            }
-            throw new JSONException("Bad value from toJSONString: " + o);
-        }
         if (value instanceof Number){
             return numberToString((Number) value);
         }
@@ -831,9 +815,6 @@ public final class JSONUtils{
         }
         if (value instanceof JSONFunction){
             return ((JSONFunction) value).toString();
-        }
-        if (value instanceof JSONString){
-            return ((JSONString) value).toJSONString();
         }
         if (value instanceof Number){
             return numberToString((Number) value);

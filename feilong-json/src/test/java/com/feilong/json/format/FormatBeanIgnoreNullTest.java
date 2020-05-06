@@ -35,7 +35,7 @@ public class FormatBeanIgnoreNullTest extends AbstractTest{
     //---------------------------------------------------------------
     @Test
     public void test0(){
-        assertEquals("{\"name\":\"\",\"age\":16}", JsonUtil.format(beanIntIgnoreNull, 0, 0));
+        assertEquals("{\"name\":null,\"age\":16}", JsonUtil.format(beanIntIgnoreNull, 0, 0));
     }
 
     @Test

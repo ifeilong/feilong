@@ -74,7 +74,6 @@ public class ToBeanTest{
         assertEquals(null, JsonUtil.toBean(null, Person.class));
     }
 
-    @SuppressWarnings("unchecked")
     @Test(expected = NullPointerException.class)
     public void testToBeanNullRootClass(){
         String json = "{'name':'get','dateAttr':'2009-11-12'}";

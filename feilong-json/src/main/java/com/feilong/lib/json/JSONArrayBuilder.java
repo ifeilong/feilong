@@ -38,9 +38,6 @@ public class JSONArrayBuilder{
     private static final Logger LOGGER = LoggerFactory.getLogger(JSONArrayBuilder.class);
 
     public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
-        if (object instanceof JSONString){
-            return _fromJSONString((JSONString) object, jsonConfig);
-        }
         if (object instanceof JSONArray){
             return _fromJSONArray((JSONArray) object, jsonConfig);
         }
@@ -461,19 +458,6 @@ public class JSONArrayBuilder{
 
         CycleSetUtil.removeInstance(array);
         return jsonArray;
-    }
-
-    /**
-     * From JSON string.
-     *
-     * @param string
-     *            the string
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromJSONString(JSONString string,JsonConfig jsonConfig){
-        return _fromJSONTokener(new JSONTokener(string.toJSONString()), jsonConfig);
     }
 
     /**

@@ -22,7 +22,6 @@ import java.math.BigInteger;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONFunction;
 import com.feilong.lib.json.JSONNull;
-import com.feilong.lib.json.JSONString;
 
 /**
  * Verifies if a value is a valid JSON value.
@@ -49,7 +48,8 @@ public final class JsonVerifier{
      */
     public static boolean isValidJsonValue(Object value){
         return JSONNull.getInstance().equals(value) //
-                        || value instanceof JSON || value instanceof Boolean //
+                        || value instanceof JSON //
+                        || value instanceof Boolean //
                         || value instanceof Byte //
                         || value instanceof Short//
                         || value instanceof Integer //
@@ -58,7 +58,6 @@ public final class JsonVerifier{
                         || value instanceof BigInteger //
                         || value instanceof BigDecimal //
                         || value instanceof JSONFunction //
-                        || value instanceof JSONString //
                         || value instanceof String;
     }
 }

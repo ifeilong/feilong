@@ -35,7 +35,6 @@ import com.feilong.lib.json.JsonConfig;
 
 /**
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.lib.json.JSONSerializer#toJSON(Object, JsonConfig)
  * @since 1.0.5
  * @deprecated pls use {@link com.feilong.json.JsonUtil} just change packageName , since 3.0.0
  */

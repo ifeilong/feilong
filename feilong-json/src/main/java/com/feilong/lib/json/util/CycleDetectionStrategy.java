@@ -50,6 +50,8 @@ public abstract class CycleDetectionStrategy{
     /** Throws a JSONException */
     public static final CycleDetectionStrategy STRICT              = new StrictCycleDetectionStrategy();
 
+    //---------------------------------------------------------------
+
     /**
      * Handle a repeated reference<br>
      * Must return a valid JSONArray or null.

@@ -44,6 +44,8 @@ public class JSONTokener{
      */
     private final String mySource;
 
+    //---------------------------------------------------------------
+
     /**
      * Construct a JSONTokener from a string.
      *
@@ -260,13 +262,9 @@ public class JSONTokener{
                 // empty
         }
 
-        /*
-         * Handle unquoted text. This could be the values true, false, or null, or
-         * it can be a number. An implementation (such as this one) is allowed to
-         * also accept non-standard forms. Accumulate characters until we reach
-         * the end of the text or a formatting character.
-         */
+        //---------------------------------------------------------------
 
+        //Handle unquoted text. This could be the values true, false, or null, or it can be a number. An implementation (such as this one) is allowed to also accept non-standard forms. Accumulate characters until we reach the end of the text or a formatting character.
         StringBuffer sb = new StringBuffer();
         char b = c;
         while (c >= ' ' && ",:]}/\\\"[{;=#".indexOf(c) < 0){
@@ -275,10 +273,9 @@ public class JSONTokener{
         }
         back();
 
-        /*
-         * If it is true, false, or null, return the proper value.
-         */
+        //---------------------------------------------------------------
 
+        //If it is true, false, or null, return the proper value.
         s = sb.toString().trim();
         if (s.equals("")){
             throw syntaxError("Missing value.");
@@ -289,18 +286,11 @@ public class JSONTokener{
         if (s.equalsIgnoreCase("false")){
             return Boolean.FALSE;
         }
-        if (s.equals("null") || (jsonConfig.isJavascriptCompliant() && s.equals("undefined"))){
+        if (s.equals("null")){
             return JSONNull.getInstance();
         }
 
-        /*
-         * If it might be a number, try converting it. We support the 0- and 0x-
-         * conventions. If a number cannot be produced, then the value will just
-         * be a string. Note that the 0-, 0x-, plus, and implied string
-         * conventions are non-standard. A JSON parser is free to accept non-JSON
-         * forms as long as it accepts all correct JSON forms.
-         */
-
+        //If it might be a number, try converting it. We support the 0- and 0x-conventions. If a number cannot be produced, then the value will just be a string. Note that the 0-, 0x-, plus, and implied string conventions are non-standard. A JSON parser is free to accept non-JSON forms as long as it accepts all correct JSON forms.
         if ((b >= '0' && b <= '9') || b == '.' || b == '-' || b == '+'){
             if (b == '0'){
                 if (s.length() > 2 && (s.charAt(1) == 'x' || s.charAt(1) == 'X')){

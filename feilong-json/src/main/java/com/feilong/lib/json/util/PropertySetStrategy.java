@@ -19,19 +19,30 @@ package com.feilong.lib.json.util;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.json.JSONException;
 import com.feilong.lib.json.JsonConfig;
 
 /**
  * Defines a custom setter to be used when setting object values.<br>
  * Specify with JsonConfig.setJsonPropertySetter().
- *
+ * 
+ * @see <a
+ *      href="http://javaskeleton.blogspot.com/2011/05/ignore-missing-properties-with-json-lib.html">ignore-missing-properties-with-json-lib
+ *      </a>
+ * @see <a href="http://envy2002.iteye.com/blog/1682738">envy2002.iteye.com</a>
  * @author Gino Miceli <ginomiceli@users.sourceforge.net>
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
 public abstract class PropertySetStrategy{
 
+    /** The Constant log. */
+    private static final Logger             LOGGER  = LoggerFactory.getLogger(PropertySetStrategy.class);
+
+    //---------------------------------------------------------------
     /** The Constant DEFAULT. */
     public static final PropertySetStrategy DEFAULT = new DefaultPropertySetStrategy();
 
@@ -111,11 +122,22 @@ public abstract class PropertySetStrategy{
         public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig) throws JSONException{
             if (bean instanceof Map){
                 ((Map) bean).put(key, value);
-            }else{
-                try{
-                    PropertyUtils.setSimpleProperty(bean, key, value);
-                }catch (Exception e){
-                    throw new JSONException(e);
+                return;
+            }
+
+            //---------------------------------------------------------------
+            try{
+                PropertyUtils.setSimpleProperty(bean, key, value);
+            }catch (Exception e){
+
+                //Ignore missing properties with Json-Lib
+                //避免出现 Unknown property <code>'orderIdAndCodeMap'</code> on class 'class com.trade.....PaymentResultEntity' 异常
+                Throwable cause = e.getCause();
+                //since 1.12.5
+                if (ClassUtil.isInstance(cause, NoSuchMethodException.class)){
+                    LOGGER.warn("in class:[{}],can't find property:[{}],now ignore~~", bean.getClass().getName(), key);
+                }else{
+                    LOGGER.warn(e.getMessage(), e);
                 }
             }
         }
