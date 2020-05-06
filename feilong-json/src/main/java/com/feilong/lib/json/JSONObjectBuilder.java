@@ -179,9 +179,6 @@ class JSONObjectBuilder{
      * @return the JSON object
      */
     static JSONObject _fromJSONTokener(JSONTokener tokener,JsonConfig jsonConfig){
-        char c;
-        String key;
-        Object value;
 
         if (tokener.matches("null.*")){
             return new JSONObject(true);
@@ -192,6 +189,9 @@ class JSONObjectBuilder{
                 throw tokener.syntaxError("A JSONObject text must begin with '{'");
             }
 
+            char c;
+            String key;
+            Object value;
             Collection exclusions = jsonConfig.getMergedExcludes();
             PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
             JSONObject jsonObject = new JSONObject();
@@ -285,6 +285,8 @@ class JSONObjectBuilder{
                     }
                 }
 
+                //---------------------------------------------------------------
+
                 // Pairs are separated by ','. We will also tolerate ';'.
                 switch (tokener.nextClean()) {
                     case ';':
@@ -319,6 +321,7 @@ class JSONObjectBuilder{
             return new JSONObject(true);
         }
 
+        //---------------------------------------------------------------
         if (!CycleSetUtil.addInstance(map)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(map);
@@ -327,6 +330,8 @@ class JSONObjectBuilder{
                 throw JSONExceptionUtil.build("", e);
             }
         }
+
+        //---------------------------------------------------------------
 
         Collection exclusions = jsonConfig.getMergedExcludes();
         JSONObject jsonObject = new JSONObject();

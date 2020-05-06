@@ -81,7 +81,7 @@ import com.feilong.lib.json.util.JSONUtils;
  *
  * @author JSON.org
  */
-public final class JSONObject extends AbstractJSON implements JSON{
+public final class JSONObject implements JSON{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7895449812672706822L;

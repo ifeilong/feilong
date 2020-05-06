@@ -119,7 +119,8 @@ public class ProcessValueUtil{
     private static Object _processJSONObjectValue(Object value,JsonConfig jsonConfig){
         if (value instanceof JSONTokener){
             return JSONObjectBuilder._fromJSONTokener((JSONTokener) value, jsonConfig);
-        }else if (value != null && Enum.class.isAssignableFrom(value.getClass())){
+        }
+        if (value != null && Enum.class.isAssignableFrom(value.getClass())){
             return ((Enum) value).name();
         }
         return _processValue(value, jsonConfig);
@@ -196,7 +197,7 @@ public class ProcessValueUtil{
             return value;
         }
 
-        JSONObject jsonObject = JSONObject.fromObject(value, jsonConfig);
+        JSONObject jsonObject = JSONObjectBuilder.build(value, jsonConfig);
         if (jsonObject.isNullObject()){
             return JSONNull.getInstance();
         }
