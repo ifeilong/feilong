@@ -38,9 +38,9 @@ class ToStringUtil{
     //---------------------------------------------------------------
 
     static String toString(Map properties,int indentFactor,int indent){
-        StringBuffer sb = new StringBuffer("{");
+        StringBuilder sb = new StringBuilder("{");
 
-        int newindent = indent + indentFactor;
+        //---------------------------------------------------------------
         Iterator keys = properties.keySet().iterator();
 
         if (properties.size() == 1){
@@ -49,6 +49,7 @@ class ToStringUtil{
             sb.append(": ");
             sb.append(JSONUtils.valueToString(properties.get(o), indentFactor, indent));
         }else{
+            int newindent = indent + indentFactor;
             while (keys.hasNext()){
                 Object o = keys.next();
                 if (sb.length() > 1){
@@ -74,38 +75,36 @@ class ToStringUtil{
             }
         }
 
+        //---------------------------------------------------------------
         sb.append('}');
         return sb.toString();
     }
 
     static String toString(Map properties){
-        StringBuffer sb = new StringBuffer("{");
-        try{
+        StringBuilder sb = new StringBuilder("{");
 
-            Iterator keys = properties.keySet().iterator();
-            while (keys.hasNext()){
-                if (sb.length() > 1){
-                    sb.append(',');
-                }
-                Object o = keys.next();
-                sb.append(JSONUtils.quote(o.toString()));
-                sb.append(':');
-
-                sb.append(JSONUtils.valueToString(properties.get(o)));
+        Iterator keys = properties.keySet().iterator();
+        while (keys.hasNext()){
+            if (sb.length() > 1){
+                sb.append(',');
             }
-            sb.append('}');
-            return sb.toString();
-        }catch (Exception e){
-            return null;
+            Object o = keys.next();
+            sb.append(JSONUtils.quote(o.toString()));
+            sb.append(':');
+
+            sb.append(JSONUtils.valueToString(properties.get(o)));
         }
+        sb.append('}');
+        return sb.toString();
     }
 
-    static String toString(List elements2,int indentFactor,int indent){
-        StringBuffer sb = new StringBuffer("[");
+    static String toString(List elements,int indentFactor,int indent){
+        StringBuilder sb = new StringBuilder("[");
 
-        int len = elements2.size();
+        //---------------------------------------------------------------
+        int len = elements.size();
         if (len == 1){
-            sb.append(JSONUtils.valueToString(elements2.get(0), indentFactor, indent));
+            sb.append(JSONUtils.valueToString(elements.get(0), indentFactor, indent));
         }else{
             int newindent = indent + indentFactor;
             sb.append('\n');
@@ -116,7 +115,7 @@ class ToStringUtil{
                 for (int j = 0; j < newindent; j += 1){
                     sb.append(' ');
                 }
-                sb.append(JSONUtils.valueToString(elements2.get(i), indentFactor, newindent));
+                sb.append(JSONUtils.valueToString(elements.get(i), indentFactor, newindent));
             }
             sb.append('\n');
             for (int i = 0; i < indent; i += 1){
@@ -127,6 +126,7 @@ class ToStringUtil{
             }
         }
 
+        //---------------------------------------------------------------
         sb.append(']');
         return sb.toString();
     }
