@@ -86,8 +86,6 @@ public final class JSONObject implements JSON{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7895449812672706822L;
 
-    //---------------------------------------------------------------
-
     /**
      * Creates a JSONObject.<br>
      * Inspects the object type to call the correct JSONObject factory method. Accepts JSON formatted strings, Maps, DynaBeans and

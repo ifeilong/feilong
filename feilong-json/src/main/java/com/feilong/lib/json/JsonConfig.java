@@ -104,7 +104,7 @@ public class JsonConfig{
     private final MultiKeyMap                        beanKeyMap                              = new MultiKeyMap();
 
     /** The bean processor map. */
-    private final Map                                beanProcessorMap                        = new HashMap();
+    private final Map<Class<?>, JsonBeanProcessor>   beanProcessorMap                        = new HashMap<>();
 
     /** The bean type map. */
     private final MultiKeyMap                        beanTypeMap                             = new MultiKeyMap();
@@ -139,9 +139,6 @@ public class JsonConfig{
 
     /** The ignore default excludes. */
     private boolean                                  ignoreDefaultExcludes;
-
-    /** The ignore transient fields. */
-    private boolean                                  ignoreTransientFields;
 
     //---------------------------------------------------------------
 
@@ -243,10 +240,10 @@ public class JsonConfig{
      *            a class used for searching a JsonBeanProcessor.
      * @return the json bean processor
      */
-    public JsonBeanProcessor findJsonBeanProcessor(Class target){
+    public JsonBeanProcessor findJsonBeanProcessor(Class<?> target){
         if (!beanProcessorMap.isEmpty()){
-            Object key = jsonBeanProcessorMatcher.getMatch(target, beanProcessorMap.keySet());
-            return (JsonBeanProcessor) beanProcessorMap.get(key);
+            Class<?> key = jsonBeanProcessorMatcher.getMatch(target, beanProcessorMap.keySet());
+            return beanProcessorMap.get(key);
         }
         return null;
     }
@@ -513,7 +510,7 @@ public class JsonConfig{
         Collection exclusions = new HashSet();
         for (int i = 0; i < excludes.length; i++){
             String exclusion = excludes[i];
-            if (!StringUtils.isBlank(excludes[i])){
+            if (!StringUtils.isBlank(exclusion)){
                 exclusions.add(exclusion.trim());
             }
         }
@@ -564,17 +561,6 @@ public class JsonConfig{
     }
 
     /**
-     * Returns true if transient fields of a bean will be ignored.<br>
-     * Default value is false.<br>
-     * [Java -&gt; JSON]
-     *
-     * @return true, if is ignore transient fields
-     */
-    public boolean isIgnoreTransientFields(){
-        return ignoreTransientFields;
-    }
-
-    /**
      * Registers a DefaultValueProcessor.<br>
      * [Java -&gt; JSON]
      * 
@@ -613,7 +599,7 @@ public class JsonConfig{
      * @param jsonBeanProcessor
      *            the processor to register
      */
-    public void registerJsonBeanProcessor(Class target,JsonBeanProcessor jsonBeanProcessor){
+    public void registerJsonBeanProcessor(Class<?> target,JsonBeanProcessor jsonBeanProcessor){
         if (target != null && jsonBeanProcessor != null){
             beanProcessorMap.put(target, jsonBeanProcessor);
         }
@@ -844,17 +830,6 @@ public class JsonConfig{
     }
 
     /**
-     * Sets if transient fields would be skipped when building.<br>
-     * [Java -&gt; JSON]
-     *
-     * @param ignoreTransientFields
-     *            the new ignore transient fields
-     */
-    public void setIgnoreTransientFields(boolean ignoreTransientFields){
-        this.ignoreTransientFields = ignoreTransientFields;
-    }
-
-    /**
      * Sets the JavaIdentifierTransformer to use.<br>
      * Will set default value (JavaIdentifierTransformer.NOOP) if null.<br>
      * [JSON -&gt; Java]
@@ -957,7 +932,6 @@ public class JsonConfig{
     public void reset(){
         excludes = EMPTY_EXCLUDES;
         ignoreDefaultExcludes = false;
-        ignoreTransientFields = false;
         javaIdentifierTransformer = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
         cycleDetectionStrategy = DEFAULT_CYCLE_DETECTION_STRATEGY;
         arrayMode = MODE_LIST;
@@ -1006,7 +980,6 @@ public class JsonConfig{
             System.arraycopy(excludes, 0, jsonConfig.excludes, 0, excludes.length);
         }
         jsonConfig.ignoreDefaultExcludes = ignoreDefaultExcludes;
-        jsonConfig.ignoreTransientFields = ignoreTransientFields;
         jsonConfig.javaIdentifierTransformer = javaIdentifierTransformer;
         jsonConfig.keyMap.putAll(keyMap);
         jsonConfig.beanProcessorMap.putAll(beanProcessorMap);

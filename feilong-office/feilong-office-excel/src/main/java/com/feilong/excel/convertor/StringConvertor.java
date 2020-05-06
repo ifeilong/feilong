@@ -22,28 +22,21 @@ import com.feilong.excel.definition.ExcelCell;
  */
 public class StringConvertor extends AbstractChoiceConvertor<String>{
 
-    /**
-     * Convert value.
-     *
-     * @param value
-     *            the value
-     * @param sheetNo
-     *            the sheet no
-     * @param cellIndex
-     *            the cell index
-     * @param excelCell
-     *            the cell definition
-     * @return the string
-     */
     @Override
     protected String convertValue(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
         String str = (value == null ? null : value.toString());
         if (str != null && str.length() == 0){
             str = null;
         }
-        //remove .0 for Integer Data
-        if (value instanceof Double && str.length() > 2 && str.lastIndexOf(".0") == (str.length() - 2)){
-            str = str.substring(0, str.length() - 2);
+
+        //---------------------------------------------------------------
+        if (null != str){
+            //remove .0 for Integer Data
+            if (value instanceof Double //
+                            && str.length() > 2//
+                            && str.lastIndexOf(".0") == (str.length() - 2)){
+                str = str.substring(0, str.length() - 2);
+            }
         }
         return str;
     }

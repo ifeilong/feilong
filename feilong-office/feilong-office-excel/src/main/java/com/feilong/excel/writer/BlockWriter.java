@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.writer;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -151,6 +153,7 @@ class BlockWriter{
             for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
                 sheet.removeRow(sheet.getRow(i));
             }
+            return;
         }
 
         //---------------------------------------------------------------
@@ -159,9 +162,7 @@ class BlockWriter{
             if (value.getClass().isArray()){
                 listValue = Arrays.asList(value);
             }else{
-                ArrayList<Object> list = new ArrayList<>();
-                list.add(value);
-                listValue = list;
+                listValue = toList(value);
             }
         }else{
             listValue = (Collection<? extends Object>) value;

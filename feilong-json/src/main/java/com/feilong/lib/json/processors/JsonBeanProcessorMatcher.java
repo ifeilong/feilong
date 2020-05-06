@@ -32,8 +32,7 @@ public abstract class JsonBeanProcessorMatcher{
     public static final JsonBeanProcessorMatcher DEFAULT = new DefaultJsonBeanProcessorMatcher();
 
     /**
-     * Returns the matching class calculated with the target class and the
-     * provided set.
+     * Returns the matching class calculated with the target class and the provided set.
      *
      * @param target
      *            the target class to match
@@ -41,24 +40,14 @@ public abstract class JsonBeanProcessorMatcher{
      *            a set of possible matches
      * @return the match
      */
-    public abstract Object getMatch(Class target,Set set);
+    public abstract Class<?> getMatch(Class<?> target,Set<Class<?>> set);
 
-    /**
-     * The Class DefaultJsonBeanProcessorMatcher.
-     */
+    //---------------------------------------------------------------
+
     private static final class DefaultJsonBeanProcessorMatcher extends JsonBeanProcessorMatcher{
 
-        /**
-         * Gets the match.
-         *
-         * @param target
-         *            the target
-         * @param set
-         *            the set
-         * @return the match
-         */
         @Override
-        public Object getMatch(Class target,Set set){
+        public Class<?> getMatch(Class<?> target,Set<Class<?>> set){
             if (target != null && set != null && set.contains(target)){
                 return target;
             }

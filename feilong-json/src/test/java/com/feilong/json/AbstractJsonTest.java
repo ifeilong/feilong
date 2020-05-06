@@ -53,8 +53,8 @@ public abstract class AbstractJsonTest extends AbstractTest{
         user.setLoves(toArray("桔子", "香蕉"));
         user.setUserInfo(new UserInfo(10));
 
-        UserAddress userAddress1 = new UserAddress("上海市闸北区万荣路1188号H座109-118室");
-        UserAddress userAddress2 = new UserAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
+        UserAddress userAddress1 = new UserAddress("上海市地址1");
+        UserAddress userAddress2 = new UserAddress("上海市地址2");
 
         user.setUserAddresses(toArray(userAddress1, userAddress2));
         user.setUserAddresseList(toList(userAddress1, userAddress2));

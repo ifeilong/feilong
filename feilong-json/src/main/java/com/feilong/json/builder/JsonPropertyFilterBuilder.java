@@ -54,7 +54,7 @@ class JsonPropertyFilterBuilder{
         //---------------------------------------------------------------
         //不忽视
         if (!isIgnoreNullValueElement){
-            if (isNotNullOrEmpty(includes)){//不忽视 但是 需要输出指定参数
+            if (isNotNullOrEmpty(includes)){//不忽视 但是需要输出指定参数
                 return new ArrayContainsPropertyNamesPropertyFilter(includes);
             }
             return null;

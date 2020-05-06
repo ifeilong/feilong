@@ -666,13 +666,14 @@ public final class JSONUtils{
     public static String stripQuotes(String input){
         if (input.length() < 2){
             return input;
-        }else if (input.startsWith(SINGLE_QUOTE) && input.endsWith(SINGLE_QUOTE)){
-            return input.substring(1, input.length() - 1);
-        }else if (input.startsWith(DOUBLE_QUOTE) && input.endsWith(DOUBLE_QUOTE)){
-            return input.substring(1, input.length() - 1);
-        }else{
-            return input;
         }
+        if (input.startsWith(SINGLE_QUOTE) && input.endsWith(SINGLE_QUOTE)){
+            return input.substring(1, input.length() - 1);
+        }
+        if (input.startsWith(DOUBLE_QUOTE) && input.endsWith(DOUBLE_QUOTE)){
+            return input.substring(1, input.length() - 1);
+        }
+        return input;
     }
 
     /**

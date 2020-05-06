@@ -16,6 +16,8 @@
 
 package com.feilong.lib.ezmorph.object;
 
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -76,16 +78,18 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
             return false;
         }
 
+        //---------------------------------------------------------------
+
         BigDecimalMorpher other = (BigDecimalMorpher) obj;
         EqualsBuilder builder = new EqualsBuilder();
         if (isUseDefault() && other.isUseDefault()){
             builder.append(getDefaultValue(), other.getDefaultValue());
             return builder.isEquals();
-        }else if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }else{
-            return false;
         }
+        if (!isUseDefault() && !other.isUseDefault()){
+            return builder.isEquals();
+        }
+        return false;
     }
 
     /**
@@ -131,6 +135,8 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
             return null;
         }
 
+        //---------------------------------------------------------------
+
         if (value instanceof Number){
             if (value instanceof Float){
                 Float f = ((Float) value);
@@ -143,10 +149,10 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
                     throw new MorphException("BigDecimal can not be infinite or NaN");
                 }
             }else if (value instanceof BigInteger){
-                return new BigDecimal((BigInteger) value);
+                return toBigDecimal(value);
             }
 
-            return new BigDecimal(((Number) value).doubleValue());
+            return toBigDecimal(value).doubleValue();
         }
 
         try{
@@ -154,7 +160,7 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
             if (str.length() == 0 || str.equalsIgnoreCase("null")){
                 return null;
             }
-            return new BigDecimal(str);
+            return toBigDecimal(str);
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;
@@ -162,6 +168,8 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
             throw new MorphException(nfe);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Morphs to.

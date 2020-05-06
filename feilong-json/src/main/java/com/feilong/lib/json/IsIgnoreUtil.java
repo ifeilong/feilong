@@ -16,9 +16,7 @@
 package com.feilong.lib.json;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Collection;
 
 import org.slf4j.Logger;
@@ -42,19 +40,13 @@ public class IsIgnoreUtil{
 
     //---------------------------------------------------------------
 
-    static boolean isIgnore(PropertyDescriptor propertyDescriptor,Collection exclusions,Class beanClass,JsonConfig jsonConfig){
+    static boolean isIgnore(Class beanClass,PropertyDescriptor propertyDescriptor,Collection exclusions){
         String key = propertyDescriptor.getName();
         if (exclusions.contains(key)){
             return true;
         }
 
-        if (jsonConfig.isIgnoreTransientFields() && isTransientField(key, beanClass, jsonConfig)){
-            return true;
-        }
-
         //---------------------------------------------------------------
-        Class type = propertyDescriptor.getPropertyType();
-
         Method readMethod = null;
         try{
             readMethod = propertyDescriptor.getReadMethod();
@@ -72,35 +64,4 @@ public class IsIgnoreUtil{
         return false;
     }
 
-    static boolean isIgnore(Field field,Collection exclusions,JsonConfig jsonConfig){
-        String key = field.getName();
-        if (exclusions.contains(key)){
-            return true;
-        }
-
-        return jsonConfig.isIgnoreTransientFields();
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Checks if is transient field.
-     *
-     * @param name
-     *            the name
-     * @param beanClass
-     *            the bean class
-     * @param jsonConfig
-     *            the json config
-     * @return true, if is transient field
-     */
-    private static boolean isTransientField(String name,Class beanClass,JsonConfig jsonConfig){
-        try{
-            Field field = beanClass.getDeclaredField(name);
-            return (field.getModifiers() & Modifier.TRANSIENT) == Modifier.TRANSIENT;
-        }catch (Exception e){
-            LOGGER.info("Error while inspecting field " + beanClass + "." + name + " for transient status.", e);
-        }
-        return false;
-    }
 }

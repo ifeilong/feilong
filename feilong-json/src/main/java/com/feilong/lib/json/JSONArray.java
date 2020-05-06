@@ -309,7 +309,6 @@ public final class JSONArray implements JSON{
      *             If the array contains an invalid number.
      */
     public String join(String separator){
-        boolean stripQuotes = false;
         int len = size();
         StringBuffer sb = new StringBuffer();
 
@@ -318,7 +317,8 @@ public final class JSONArray implements JSON{
                 sb.append(separator);
             }
             String value = JSONUtils.valueToString(this.elements.get(i));
-            sb.append(stripQuotes ? JSONUtils.stripQuotes(value) : value);
+            //sb.append(stripQuotes ? JSONUtils.stripQuotes(value) : value);
+            sb.append(value);
         }
         return sb.toString();
     }

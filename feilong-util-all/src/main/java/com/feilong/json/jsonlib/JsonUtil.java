@@ -65,7 +65,7 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"userAddresses":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
+    {"userAddresseList":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"userAddresses":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
      * </pre>
      * 
      * <b>返回:</b>
@@ -73,12 +73,12 @@ public final class JsonUtil{
      * <pre class="code">
     {
             "userAddresseList":         [
-                {"address": "上海市闸北区万荣路1188号H座109-118室"},
-                {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+                {"address": "上海市地址1"},
+                {"address": "上海市地址2"}
             ],
             "userAddresses":         [
-                {"address": "上海市闸北区万荣路1188号H座109-118室"},
-                {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+                {"address": "上海市地址1"},
+                {"address": "上海市地址2"}
             ],
             "date": "2016-06-09 17:40:28",
             "password": "******",
@@ -129,7 +129,7 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     *     {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"userAddresses":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
+     *     {"userAddresseList":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"userAddresses":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
      * </pre>
      * 
      * <p>
@@ -141,12 +141,12 @@ public final class JsonUtil{
      * <pre class="code">
      *     {
      *             "userAddresseList":         [
-     *                 {"address": "上海市闸北区万荣路1188号H座109-118室"},
-     *                 {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+     *                 {"address": "上海市地址1"},
+     *                 {"address": "上海市地址2"}
      *             ],
      *             "userAddresses":         [
-     *                 {"address": "上海市闸北区万荣路1188号H座109-118室"},
-     *                 {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+     *                 {"address": "上海市地址1"},
+     *                 {"address": "上海市地址2"}
      *             ],
      *             "date": "2016-06-09 17:40:28",
      *             "password": "******",
@@ -174,12 +174,12 @@ public final class JsonUtil{
      * <pre class="code">
     {
         "userAddresseList":         [
-            {"address": "上海市闸北区万荣路1188号H座109-118室"},
-            {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+            {"address": "上海市地址1"},
+            {"address": "上海市地址2"}
         ],
         "userAddresses":         [
-            {"address": "上海市闸北区万荣路1188号H座109-118室"},
-            {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+            {"address": "上海市地址1"},
+            {"address": "上海市地址2"}
         ],
         "date": "2019-09-05 18:59:26",
         "password": "******",
@@ -315,8 +315,8 @@ public final class JsonUtil{
      * user.setLoves(toArray("桔子", "香蕉"));
      * user.setUserInfo(new UserInfo(10));
      * 
-     * UserAddress userAddress1 = new UserAddress("上海市闸北区万荣路1188号H座109-118室");
-     * UserAddress userAddress2 = new UserAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
+     * UserAddress userAddress1 = new UserAddress("上海市地址1");
+     * UserAddress userAddress2 = new UserAddress("上海市地址2");
      * 
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
@@ -330,8 +330,8 @@ public final class JsonUtil{
      * <pre class="code">
      *  {
         "userAddresseList":         [
-            {"address": "上海市闸北区万荣路1188号H座109-118室"},
-            {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+            {"address": "上海市地址1"},
+            {"address": "上海市地址2"}
         ],
         "date": "2016-07-17 16:04:35",
         "password": "******",
@@ -381,8 +381,8 @@ public final class JsonUtil{
      * user.setLoves(toArray("桔子", "香蕉"));
      * user.setUserInfo(new UserInfo(10));
      * 
-     * UserAddress userAddress1 = new UserAddress("上海市闸北区万荣路1188号H座109-118室");
-     * UserAddress userAddress2 = new UserAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
+     * UserAddress userAddress1 = new UserAddress("上海市地址1");
+     * UserAddress userAddress2 = new UserAddress("上海市地址2");
      * 
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
@@ -394,7 +394,7 @@ public final class JsonUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-07-17 16:05:34","password":"******","id":8,"age":0,"money":99999999,"nickNames":[]}
+    {"userAddresseList":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"date":"2016-07-17 16:05:34","password":"******","id":8,"age":0,"money":99999999,"nickNames":[]}
      * </pre>
      * 
      * </blockquote>
