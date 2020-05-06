@@ -400,10 +400,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 try{
                     Object newRoot = ConstructorUtil.newInstance(root.getClass());
                     Array.set(array, i, JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                }catch (JSONException jsone){
-                    throw jsone;
                 }catch (Exception e){
-                    throw new JSONException(e);
+                    throw JSONExceptionUtil.build("", e);
                 }
             }
         }
@@ -542,10 +540,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 try{
                     Object newRoot = ConstructorUtil.newInstance(root.getClass());
                     list.add(JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                }catch (JSONException jsone){
-                    throw jsone;
                 }catch (Exception e){
-                    throw new JSONException(e);
+                    throw JSONExceptionUtil.build("", e);
                 }
             }
         }
@@ -565,12 +561,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -596,13 +589,11 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
+
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
@@ -627,12 +618,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -658,12 +646,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -673,9 +658,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 JSONUtils.testValidity(d);
                 jsonArray.addValue(d, jsonConfig);
             }
-        }catch (JSONException jsone){
+        }catch (Exception e){
             CycleSetUtil.removeInstance(array);
-            throw jsone;
+            throw JSONExceptionUtil.build("", e);
         }
 
         CycleSetUtil.removeInstance(array);
@@ -697,13 +682,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(e)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(e);
-            }catch (JSONException jsone){
+            }catch (Exception ex){
                 CycleSetUtil.removeInstance(e);
-                throw jsone;
-            }catch (RuntimeException re){
-                CycleSetUtil.removeInstance(e);
-                JSONException jsone = new JSONException(re);
-                throw jsone;
+                throw JSONExceptionUtil.build("", ex);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -732,12 +713,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -747,9 +725,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 JSONUtils.testValidity(f);
                 jsonArray.addValue(f, jsonConfig);
             }
-        }catch (JSONException jsone){
+        }catch (Exception e){
             CycleSetUtil.removeInstance(array);
-            throw jsone;
+            throw JSONExceptionUtil.build("", e);
         }
 
         CycleSetUtil.removeInstance(array);
@@ -769,12 +747,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -800,12 +775,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -833,12 +805,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -847,12 +816,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 Object element = array[i];
                 jsonArray.addValue(element, jsonConfig);
             }
-        }catch (JSONException jsone){
+        }catch (Exception e){
             CycleSetUtil.removeInstance(array);
-            throw jsone;
-        }catch (RuntimeException e){
-            CycleSetUtil.removeInstance(array);
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build("", e);
         }
 
         CycleSetUtil.removeInstance(array);
@@ -872,12 +838,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -903,12 +866,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(collection)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(collection);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(collection);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(collection);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
 
@@ -919,12 +879,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                 Object element = elements.next();
                 jsonArray.addValue(element, jsonConfig);
             }
-        }catch (JSONException jsone){
+        }catch (Exception e){
             CycleSetUtil.removeInstance(collection);
-            throw jsone;
-        }catch (RuntimeException e){
-            CycleSetUtil.removeInstance(collection);
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build("", e);
         }
 
         CycleSetUtil.removeInstance(collection);
@@ -944,12 +901,9 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         if (!CycleSetUtil.addInstance(array)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(array);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         JSONArray jsonArray = new JSONArray();
@@ -1056,8 +1010,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
                         throw tokener.syntaxError("Expected a ',' or ']'");
                 }
             }
-        }catch (JSONException jsone){
-            throw jsone;
+        }catch (Exception e){
+            throw JSONExceptionUtil.build("", e);
         }
     }
 

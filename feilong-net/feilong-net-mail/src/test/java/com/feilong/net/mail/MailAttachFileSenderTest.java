@@ -16,6 +16,7 @@
 package com.feilong.net.mail;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateUtil.getTime;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.FILE;
@@ -56,9 +57,9 @@ public class MailAttachFileSenderTest extends AbstractMailSenderTest{
 
     private List<FileInfoEntity> buildList(){
         return toList(
-                        new FileInfoEntity("feilongstore_china_cancel20130910.csv", FILE, 25655L, now().getTime()),
-                        new FileInfoEntity("feilongstore_china_revenue20131022.csv", FILE, 25655L, now().getTime()),
-                        new FileInfoEntity("feilongstore_china_return20131022.csv", FILE, 25655L, now().getTime()),
-                        new FileInfoEntity("feilongstore_china_demand20130910.csv", FILE, 25655L, now().getTime()));
+                        new FileInfoEntity("feilongstore_china_cancel20130910.csv", FILE, 25655L, getTime(now())),
+                        new FileInfoEntity("feilongstore_china_revenue20131022.csv", FILE, 25655L, getTime(now())),
+                        new FileInfoEntity("feilongstore_china_return20131022.csv", FILE, 25655L, getTime(now())),
+                        new FileInfoEntity("feilongstore_china_demand20130910.csv", FILE, 25655L, getTime(now())));
     }
 }

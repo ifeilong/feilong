@@ -18,7 +18,6 @@ package com.feilong.lib.json;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
@@ -36,8 +35,7 @@ public class IsIgnoreUtil{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IsIgnoreUtil.class);
 
-    static boolean isIgnore(PropertyDescriptor propertyDescriptor,Collection exclusions,Class beanClass,JsonConfig jsonConfig)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
+    static boolean isIgnore(PropertyDescriptor propertyDescriptor,Collection exclusions,Class beanClass,JsonConfig jsonConfig){
         String key = propertyDescriptor.getName();
         if (exclusions.contains(key)){
             return true;
@@ -70,8 +68,7 @@ public class IsIgnoreUtil{
         return false;
     }
 
-    static boolean isIgnore(Field field,Collection exclusions,JsonConfig jsonConfig)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
+    static boolean isIgnore(Field field,Collection exclusions,JsonConfig jsonConfig){
         String key = field.getName();
         if (exclusions.contains(key)){
             return true;

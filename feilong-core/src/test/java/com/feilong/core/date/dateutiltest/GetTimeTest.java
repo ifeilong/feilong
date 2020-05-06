@@ -15,27 +15,15 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.date.DateUtil.getTime;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import static com.feilong.core.date.DateUtil.getTime;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-
-/**
- * The Class DateUtilGetTimeTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class GetTimeTest{
 
-    //************com.feilong.core.date.DateUtil.getTime(Date)***********************
-
-    /**
-     * Test get time null date.
-     */
     @Test(expected = NullPointerException.class)
     public void testGetTimeNullDate(){
         getTime(null);

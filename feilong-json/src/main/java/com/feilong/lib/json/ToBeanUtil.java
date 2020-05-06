@@ -91,10 +91,8 @@ public class ToBeanUtil{
                         dynaBean.set(key, null);
                     }
                 }
-            }catch (JSONException jsone){
-                throw jsone;
             }catch (Exception e){
-                throw new JSONException("Error while setting property=" + name + " type" + type, e);
+                throw JSONExceptionUtil.build("Error while setting property=" + name + " type" + type, e);
             }
         }
 
@@ -139,10 +137,8 @@ public class ToBeanUtil{
             }else{
                 bean = ConstructorUtil.newInstance(beanClass);
             }
-        }catch (JSONException jsone){
-            throw jsone;
         }catch (Exception e){
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build("", e);
         }
 
         //---------------------------------------------------------------
@@ -183,10 +179,8 @@ public class ToBeanUtil{
 
                     toBeanDoWithBean(jsonConfig, beanClass, classMap, bean, name, type, value, key, propertyDescriptor);
                 }
-            }catch (JSONException jsone){
-                throw jsone;
             }catch (Exception e){
-                throw new JSONException("Error while setting property=" + name + " type " + type, e);
+                throw JSONExceptionUtil.build("Error while setting property=" + name + " type" + type, e);
             }
         }
         return bean;
@@ -275,6 +269,8 @@ public class ToBeanUtil{
             return;
         }
 
+        //---------------------------------------------------------------
+
         if (!JSONUtils.isNull(value)){
             if (value instanceof JSONArray){
                 setProperty(
@@ -322,9 +318,13 @@ public class ToBeanUtil{
         // no type info available for conversion
         if (JSONUtils.isNull(value)){
             setProperty(bean, key, value, jsonConfig);
-        }else if (value instanceof JSONArray){
+            return;
+        }
+        if (value instanceof JSONArray){
             setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class), jsonConfig);
-        }else if (String.class.isAssignableFrom(type) || //
+            return;
+        }
+        if (String.class.isAssignableFrom(type) || //
                         JSONUtils.isBoolean(type) || //
                         JSONUtils.isNumber(type) || //
                         JSONUtils.isString(type) || //
@@ -334,16 +334,18 @@ public class ToBeanUtil{
             }else{
                 setProperty(bean, key, value, jsonConfig);
             }
+            return;
+        }
+
+        //---------------------------------------------------------------
+        Class targetClass = ClassResolver.resolveClass(classMap, key, name, type);
+        JsonConfig newJsonConfig = jsonConfig.copy();
+        newJsonConfig.setRootClass(targetClass);
+        newJsonConfig.setClassMap(classMap);
+        if (targetClass != null){
+            setProperty(bean, key, toBean((JSONObject) value, newJsonConfig), jsonConfig);
         }else{
-            Class targetClass = ClassResolver.resolveClass(classMap, key, name, type);
-            JsonConfig newJsonConfig = jsonConfig.copy();
-            newJsonConfig.setRootClass(targetClass);
-            newJsonConfig.setClassMap(classMap);
-            if (targetClass != null){
-                setProperty(bean, key, toBean((JSONObject) value, newJsonConfig), jsonConfig);
-            }else{
-                setProperty(bean, key, toBean((JSONObject) value), jsonConfig);
-            }
+            setProperty(bean, key, toBean((JSONObject) value), jsonConfig);
         }
     }
 
@@ -494,10 +496,8 @@ public class ToBeanUtil{
                         setProperty(root, key, null, jsonConfig);
                     }
                 }
-            }catch (JSONException jsone){
-                throw jsone;
             }catch (Exception e){
-                throw new JSONException("Error while setting property=" + name + " type " + type, e);
+                throw JSONExceptionUtil.build("Error while setting property=" + name + " type " + type, e);
             }
         }
 

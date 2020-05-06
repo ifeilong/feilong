@@ -33,6 +33,7 @@ import com.feilong.lib.ezmorph.bean.MorphDynaClass;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONException;
+import com.feilong.lib.json.JSONExceptionUtil;
 import com.feilong.lib.json.JSONFunction;
 import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
@@ -110,10 +111,8 @@ public final class JSONUtils{
     public static String convertToJavaIdentifier(String key,JsonConfig jsonConfig){
         try{
             return jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(key);
-        }catch (JSONException jsone){
-            throw jsone;
         }catch (Exception e){
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build(key, e);
         }
     }
 

@@ -134,12 +134,9 @@ class JSONObjectBuilder{
         if (!CycleSetUtil.addInstance(bean)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(bean);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(bean);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(bean);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
 
@@ -172,12 +169,9 @@ class JSONObjectBuilder{
                 }
                 setValue(jsonObject, key, value, type, jsonConfig, bypass);
             }
-        }catch (JSONException jsone){
+        }catch (Exception e){
             CycleSetUtil.removeInstance(bean);
-            throw jsone;
-        }catch (RuntimeException e){
-            CycleSetUtil.removeInstance(bean);
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build("", e);
         }
 
         CycleSetUtil.removeInstance(bean);
@@ -337,12 +331,9 @@ class JSONObjectBuilder{
         if (!CycleSetUtil.addInstance(map)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(map);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(map);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(map);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
 
@@ -389,12 +380,9 @@ class JSONObjectBuilder{
                     }
                 }
             }
-        }catch (JSONException jsone){
+        }catch (Exception e){
             CycleSetUtil.removeInstance(map);
-            throw jsone;
-        }catch (RuntimeException e){
-            CycleSetUtil.removeInstance(map);
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build("", e);
         }
 
         CycleSetUtil.removeInstance(map);
@@ -418,12 +406,9 @@ class JSONObjectBuilder{
         if (!CycleSetUtil.addInstance(bean)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(bean);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(bean);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(bean);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
         //---------------------------------------------------------------
@@ -440,12 +425,9 @@ class JSONObjectBuilder{
                     }
                 }
                 CycleSetUtil.removeInstance(bean);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(bean);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(bean);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
             return json;
         }
@@ -495,12 +477,9 @@ class JSONObjectBuilder{
             }
 
             //---------------------------------------------------------------
-        }catch (JSONException jsone){
-            CycleSetUtil.removeInstance(bean);
-            throw jsone;
         }catch (Exception e){
             CycleSetUtil.removeInstance(bean);
-            throw new JSONException(e);
+            throw JSONExceptionUtil.build("", e);
         }
         return jsonObject;
     }
@@ -547,12 +526,9 @@ class JSONObjectBuilder{
         if (!CycleSetUtil.addInstance(object)){
             try{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(object);
-            }catch (JSONException jsone){
+            }catch (Exception e){
                 CycleSetUtil.removeInstance(object);
-                throw jsone;
-            }catch (RuntimeException e){
-                CycleSetUtil.removeInstance(object);
-                throw new JSONException(e);
+                throw JSONExceptionUtil.build("", e);
             }
         }
 
