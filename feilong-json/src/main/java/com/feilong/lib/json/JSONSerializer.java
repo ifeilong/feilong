@@ -65,7 +65,7 @@ public class JSONSerializer{
      * @return depends on the nature of the source object (JSONObject, JSONArray,
      *         JSONNull) and the configured rootClass, classMap and arrayMode
      */
-    public static Object toJava(JSON json,JsonConfig jsonConfig){
+    private static Object toJava(JSON json,JsonConfig jsonConfig){
         if (JSONUtils.isNull(json)){
             return null;
         }

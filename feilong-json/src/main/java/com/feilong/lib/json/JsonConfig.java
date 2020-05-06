@@ -654,19 +654,6 @@ public class JsonConfig{
     }
 
     /**
-     * Returns the configured PropertyNameProcessorMatcher.<br>
-     * Default value is PropertyNameProcessorMatcher.DEFAULT<br>
-     * [JSON -&gt; Java]
-     *
-     * @return the property name processor matcher
-     * @deprecated use getJavaPropertyNameProcessorMatcher() instead
-     */
-    @Deprecated
-    public PropertyNameProcessorMatcher getPropertyNameProcessorMatcher(){
-        return getJavaPropertyNameProcessorMatcher();
-    }
-
-    /**
      * Returns the configured PropertySetStrategy.<br>
      * Default value is PropertySetStrategy.DEFAULT<br>
      * [JSON -&gt; Java]

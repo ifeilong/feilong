@@ -53,11 +53,15 @@ public class JSONArrayBuilder{
         if (object instanceof String){
             return _fromString((String) object, jsonConfig);
         }
+
+        //---------------------------------------------------------------
         if (object != null && object.getClass().isArray()){
             Class type = object.getClass().getComponentType();
             if (!type.isPrimitive()){
                 return _fromArray((Object[]) object, jsonConfig);
             }
+
+            //---------------------------------------------------------------
             if (type == Boolean.TYPE){
                 return _fromArray((boolean[]) object, jsonConfig);
             }else if (type == Byte.TYPE){
@@ -112,8 +116,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            Boolean b = array[i] ? Boolean.TRUE : Boolean.FALSE;
-            jsonArray.addValue(b, jsonConfig);
+            jsonArray.addValue(array[i], jsonConfig);
         }
 
         CycleSetUtil.removeInstance(array);
@@ -169,8 +172,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            Character c = new Character(array[i]);
-            jsonArray.addValue(c, jsonConfig);
+            jsonArray.addValue(new Character(array[i]), jsonConfig);
         }
 
         CycleSetUtil.removeInstance(array);

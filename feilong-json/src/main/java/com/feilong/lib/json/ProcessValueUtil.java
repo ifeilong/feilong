@@ -72,9 +72,11 @@ public class ProcessValueUtil{
     private static Object _processArrayValue(Object value,JsonConfig jsonConfig){
         if (value instanceof JSONTokener){
             return JSONArrayBuilder._fromJSONTokener((JSONTokener) value, jsonConfig);
-        }else if (value != null && Enum.class.isAssignableFrom(value.getClass())){
+        }
+        if (value != null && Enum.class.isAssignableFrom(value.getClass())){
             return ((Enum) value).name();
-        }else if (value instanceof Annotation || (value != null && value.getClass().isAnnotation())){
+        }
+        if (value instanceof Annotation || (value != null && value.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
         }
         return ProcessValueUtil._processValue(value, jsonConfig);
