@@ -16,7 +16,6 @@
 package com.feilong.lib.json;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
@@ -75,7 +74,7 @@ import com.feilong.lib.json.util.JSONUtils;
  *
  * @author JSON.org
  */
-public final class JSONArray extends AbstractJSON implements JSON,List{
+public final class JSONArray extends AbstractJSON implements JSON{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1663435868052425703L;
@@ -138,7 +137,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      * @param value
      *            the value
      */
-    @Override
     public void add(int index,Object value){
         add(index, value, new JsonConfig());
     }
@@ -153,226 +151,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      * @param jsonConfig
      *            the json config
      */
-    public void add(int index,Object value,JsonConfig jsonConfig){
+    private void add(int index,Object value,JsonConfig jsonConfig){
         this.elements.add(index, ProcessValueUtil.processArrayValue(value, jsonConfig));
-    }
-
-    /**
-     * 添加.
-     *
-     * @param value
-     *            the value
-     * @return true, if successful
-     */
-    @Override
-    public boolean add(Object value){
-        element(value, new JsonConfig());
-        return true;
-    }
-
-    /**
-     * 添加 all.
-     *
-     * @param collection
-     *            the collection
-     * @return true, if successful
-     */
-    @Override
-    public boolean addAll(Collection collection){
-        return addAll(collection, new JsonConfig());
-    }
-
-    /**
-     * 添加 all.
-     *
-     * @param collection
-     *            the collection
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean addAll(Collection collection,JsonConfig jsonConfig){
-        if (collection == null || collection.size() == 0){
-            return false;
-        }
-        for (Iterator i = collection.iterator(); i.hasNext();){
-            element(i.next(), jsonConfig);
-        }
-        return true;
-    }
-
-    /**
-     * 添加 all.
-     *
-     * @param index
-     *            the index
-     * @param collection
-     *            the collection
-     * @return true, if successful
-     */
-    @Override
-    public boolean addAll(int index,Collection collection){
-        return addAll(index, collection, new JsonConfig());
-    }
-
-    /**
-     * 添加 all.
-     *
-     * @param index
-     *            the index
-     * @param collection
-     *            the collection
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean addAll(int index,Collection collection,JsonConfig jsonConfig){
-        if (collection == null || collection.size() == 0){
-            return false;
-        }
-        int offset = 0;
-        for (Iterator i = collection.iterator(); i.hasNext();){
-            this.elements.add(index + (offset++), ProcessValueUtil.processArrayValue(i.next(), jsonConfig));
-        }
-        return true;
     }
 
     /**
      * 清除.
      */
-    @Override
     public void clear(){
         elements.clear();
-    }
-
-    /**
-     * Contains.
-     *
-     * @param o
-     *            the o
-     * @return true, if successful
-     */
-    @Override
-    public boolean contains(Object o){
-        return contains(o, new JsonConfig());
-    }
-
-    /**
-     * Contains.
-     *
-     * @param o
-     *            the o
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean contains(Object o,JsonConfig jsonConfig){
-        return elements.contains(ProcessValueUtil.processArrayValue(o, jsonConfig));
-    }
-
-    /**
-     * Contains all.
-     *
-     * @param collection
-     *            the collection
-     * @return true, if successful
-     */
-    @Override
-    public boolean containsAll(Collection collection){
-        return containsAll(collection, new JsonConfig());
-    }
-
-    /**
-     * Contains all.
-     *
-     * @param collection
-     *            the collection
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean containsAll(Collection collection,JsonConfig jsonConfig){
-        return elements.containsAll(fromObject(collection, jsonConfig));
-    }
-
-    /**
-     * Append a value in the JSONArray, where the value will be a JSONArray which
-     * is produced from a Collection.
-     *
-     * @param value
-     *            A Collection value.
-     * @return this.
-     */
-    private JSONArray element(Collection value){
-        return element(value, new JsonConfig());
-    }
-
-    /**
-     * Append a value in the JSONArray, where the value will be a JSONArray which
-     * is produced from a Collection.
-     *
-     * @param value
-     *            A Collection value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     */
-    private JSONArray element(Collection value,JsonConfig jsonConfig){
-        if (value instanceof JSONArray){
-            elements.add(value);
-            return this;
-        }
-        return element(JSONArrayBuilder._fromCollection(value, jsonConfig));
-    }
-
-    /**
-     * Put a value in the JSONArray, where the value will be a JSONArray which is
-     * produced from a Collection.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A Collection value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the value is not
-     *             finite.
-     */
-    private JSONArray element(int index,Collection value){
-        return element(index, value, new JsonConfig());
-    }
-
-    /**
-     * Put a value in the JSONArray, where the value will be a JSONArray which is
-     * produced from a Collection.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A Collection value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the value is not
-     *             finite.
-     */
-    private JSONArray element(int index,Collection value,JsonConfig jsonConfig){
-        if (value instanceof JSONArray){
-            if (index < 0){
-                throw new JSONException("JSONArray[" + index + "] not found.");
-            }
-            if (index < size()){
-                elements.set(index, value);
-            }else{
-                while (index != size()){
-                    element(JSONNull.getInstance());
-                }
-                element(value, jsonConfig);
-            }
-            return this;
-        }
-        return element(index, JSONArrayBuilder._fromCollection(value, jsonConfig));
     }
 
     /**
@@ -428,7 +215,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *            An JSON value.
      * @return this.
      */
-    public JSONArray element(JSONObject value){
+    JSONArray element(JSONObject value){
         this.elements.add(value);
         return this;
     }
@@ -442,7 +229,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *            JSONString or the JSONNull object.
      * @return this.
      */
-    public JSONArray element(Object value){
+    JSONArray element(Object value){
         return element(value, new JsonConfig());
     }
 
@@ -457,7 +244,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *            the json config
      * @return this.
      */
-    public JSONArray element(Object value,JsonConfig jsonConfig){
+    JSONArray element(Object value,JsonConfig jsonConfig){
         return addValue(value, jsonConfig);
     }
 
@@ -468,7 +255,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *            The index must be between 0 and size() - 1.
      * @return An object value.
      */
-    @Override
     public Object get(int index){
         return this.elements.get(index);
     }
@@ -494,23 +280,10 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
     }
 
     /**
-     * Index of.
-     *
-     * @param o
-     *            the o
-     * @return the int
-     */
-    @Override
-    public int indexOf(Object o){
-        return elements.indexOf(o);
-    }
-
-    /**
      * Checks if is empty.
      *
      * @return true, if is empty
      */
-    @Override
     public boolean isEmpty(){
         return this.elements.isEmpty();
     }
@@ -520,7 +293,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *
      * @return the iterator
      */
-    @Override
     public Iterator iterator(){
         return new JSONArrayListIterator();
     }
@@ -537,23 +309,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *             If the array contains an invalid number.
      */
     public String join(String separator){
-        return join(separator, false);
-    }
-
-    /**
-     * Make a string from the contents of this JSONArray. The
-     * <code>separator</code> string is inserted between each element. Warning:
-     * This method assumes that the data structure is acyclical.
-     *
-     * @param separator
-     *            A string that will be inserted between the elements.
-     * @param stripQuotes
-     *            the strip quotes
-     * @return a string.
-     * @throws JSONException
-     *             If the array contains an invalid number.
-     */
-    public String join(String separator,boolean stripQuotes){
+        boolean stripQuotes = false;
         int len = size();
         StringBuffer sb = new StringBuffer();
 
@@ -568,118 +324,17 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
     }
 
     /**
-     * Last index of.
-     *
-     * @param o
-     *            the o
-     * @return the int
-     */
-    @Override
-    public int lastIndexOf(Object o){
-        return elements.lastIndexOf(o);
-    }
-
-    /**
-     * List iterator.
-     *
-     * @return the list iterator
-     */
-    @Override
-    public ListIterator listIterator(){
-        return listIterator(0);
-    }
-
-    /**
-     * List iterator.
-     *
-     * @param index
-     *            the index
-     * @return the list iterator
-     */
-    @Override
-    public ListIterator listIterator(int index){
-        if (index < 0 || index > size()){
-            throw new IndexOutOfBoundsException("Index: " + index);
-        }
-
-        return new JSONArrayListIterator(index);
-    }
-
-    /**
      * 删除.
      *
      * @param index
      *            the index
      * @return the object
      */
-    @Override
     public Object remove(int index){
         return elements.remove(index);
     }
 
     /**
-     * 删除.
-     *
-     * @param o
-     *            the o
-     * @return true, if successful
-     */
-    @Override
-    public boolean remove(Object o){
-        return elements.remove(o);
-    }
-
-    /**
-     * 删除 all.
-     *
-     * @param collection
-     *            the collection
-     * @return true, if successful
-     */
-    @Override
-    public boolean removeAll(Collection collection){
-        return removeAll(collection, new JsonConfig());
-    }
-
-    /**
-     * 删除 all.
-     *
-     * @param collection
-     *            the collection
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean removeAll(Collection collection,JsonConfig jsonConfig){
-        return elements.removeAll(fromObject(collection, jsonConfig));
-    }
-
-    /**
-     * Retain all.
-     *
-     * @param collection
-     *            the collection
-     * @return true, if successful
-     */
-    @Override
-    public boolean retainAll(Collection collection){
-        return retainAll(collection, new JsonConfig());
-    }
-
-    /**
-     * Retain all.
-     *
-     * @param collection
-     *            the collection
-     * @param jsonConfig
-     *            the json config
-     * @return true, if successful
-     */
-    public boolean retainAll(Collection collection,JsonConfig jsonConfig){
-        return elements.retainAll(fromObject(collection, jsonConfig));
-    }
-
-    /**
      * 设置.
      *
      * @param index
@@ -688,23 +343,8 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
      *            the value
      * @return the object
      */
-    @Override
     public Object set(int index,Object value){
-        return set(index, value, new JsonConfig());
-    }
-
-    /**
-     * 设置.
-     *
-     * @param index
-     *            the index
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    public Object set(int index,Object value,JsonConfig jsonConfig){
+        JsonConfig jsonConfig = new JsonConfig();
         Object previous = get(index);
         element(index, value, jsonConfig);
         return previous;
@@ -718,42 +358,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List{
     @Override
     public int size(){
         return this.elements.size();
-    }
-
-    /**
-     * Sub list.
-     *
-     * @param fromIndex
-     *            the from index
-     * @param toIndex
-     *            the to index
-     * @return the list
-     */
-    @Override
-    public List subList(int fromIndex,int toIndex){
-        return elements.subList(fromIndex, toIndex);
-    }
-
-    /**
-     * Produce an Object[] with the contents of this JSONArray.
-     *
-     * @return the object[]
-     */
-    @Override
-    public Object[] toArray(){
-        return this.elements.toArray();
-    }
-
-    /**
-     * To array.
-     *
-     * @param array
-     *            the array
-     * @return the object[]
-     */
-    @Override
-    public Object[] toArray(Object[] array){
-        return elements.toArray(array);
     }
 
     /**
