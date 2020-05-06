@@ -72,9 +72,9 @@ public class JSONSerializer{
 
         if (json instanceof JSONArray){
             if (jsonConfig.getArrayMode() == JsonConfig.MODE_OBJECT_ARRAY){
-                return JSONArray.toArray((JSONArray) json, jsonConfig);
+                return JSONArrayToBeanUtil.toArray((JSONArray) json, jsonConfig);
             }
-            return JSONArray.toCollection((JSONArray) json, jsonConfig);
+            return JSONArrayToBeanUtil.toCollection((JSONArray) json, jsonConfig);
         }
         return JSONObject.toBean((JSONObject) json, jsonConfig);
     }

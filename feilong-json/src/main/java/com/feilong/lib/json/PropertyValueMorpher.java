@@ -21,8 +21,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.MorpherRegistry;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
+import com.feilong.lib.ezmorph.object.EnumMorpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
-import com.feilong.lib.json.util.EnumMorpher;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -33,6 +33,15 @@ import com.feilong.lib.json.util.JSONUtils;
 class PropertyValueMorpher{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyValueMorpher.class);
+
+    /** Don't let anyone instantiate this class. */
+    private PropertyValueMorpher(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Morph property value.

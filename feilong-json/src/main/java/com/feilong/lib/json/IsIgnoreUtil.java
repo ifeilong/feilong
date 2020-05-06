@@ -35,6 +35,15 @@ public class IsIgnoreUtil{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IsIgnoreUtil.class);
 
+    /** Don't let anyone instantiate this class. */
+    private IsIgnoreUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     static boolean isIgnore(PropertyDescriptor propertyDescriptor,Collection exclusions,Class beanClass,JsonConfig jsonConfig){
         String key = propertyDescriptor.getName();
         if (exclusions.contains(key)){
@@ -59,7 +68,7 @@ public class IsIgnoreUtil{
 
         //---------------------------------------------------------------
         if (readMethod == null){
-            LOGGER.info("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
+            LOGGER.trace("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
             return true;
         }
         if (isTransient(readMethod, jsonConfig)){

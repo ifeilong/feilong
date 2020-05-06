@@ -633,7 +633,6 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.lib.json.JSONArray#fromObject(Object)
-     * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
@@ -782,7 +781,6 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
-     * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
      * @see com.feilong.lib.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
      * @deprecated since 1.10.7 change package 'com.feilong.json', pls use {@link com.feilong.json.JsonUtil#toList(Object,

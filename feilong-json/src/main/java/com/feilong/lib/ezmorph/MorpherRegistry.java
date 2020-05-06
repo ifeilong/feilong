@@ -92,7 +92,7 @@ public class MorpherRegistry implements Serializable{
      *            associated
      * @return the morphers for
      */
-    public synchronized Morpher[] getMorphersFor(Class clazz){
+    private synchronized Morpher[] getMorphersFor(Class clazz){
         List registered = (List) morphers.get(clazz);
         if (registered == null || registered.isEmpty()){
             // no morphers registered for clazz
@@ -169,24 +169,8 @@ public class MorpherRegistry implements Serializable{
      *            is used to associate the Morpher to a target Class
      */
     public void registerMorpher(Morpher morpher){
-        registerMorpher(morpher, false);
-    }
-
-    /**
-     * Register a Morpher for a target <code>Class</code>.<br>
-     * The target class is the class this Morpher morphs to. If there are another
-     * morphers registered to that class, it will be appended to a List.
-     *
-     * @param morpher
-     *            a Morpher to register. The method <code>morphsTo()</code>
-     *            is used to associate the Morpher to a target Class
-     * @param override
-     *            if registering teh Morpher should override all previously
-     *            registered morphers for the target type
-     */
-    public synchronized void registerMorpher(Morpher morpher,boolean override){
         List registered = (List) morphers.get(morpher.morphsTo());
-        if (override || registered == null){
+        if (registered == null){
             registered = new ArrayList();
             morphers.put(morpher.morphsTo(), registered);
         }

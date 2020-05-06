@@ -134,7 +134,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
      * @return the object
      */
     public static Object toBean(JSONObject jsonObject){
-        return ToBeanUtil.toBean(jsonObject);
+        return JSONObjectToBeanUtil.toBean(jsonObject);
     }
 
     /**
@@ -147,7 +147,7 @@ public final class JSONObject extends AbstractJSON implements JSON{
      * @return the object
      */
     public static Object toBean(JSONObject jsonObject,JsonConfig jsonConfig){
-        return ToBeanUtil.toBean(jsonObject, jsonConfig);
+        return JSONObjectToBeanUtil.toBean(jsonObject, jsonConfig);
 
     }
 

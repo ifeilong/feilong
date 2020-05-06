@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.feilong.lib.json.util;
+package com.feilong.lib.ezmorph.object;
 
 import com.feilong.lib.ezmorph.ObjectMorpher;
 
@@ -27,6 +27,8 @@ public class EnumMorpher implements ObjectMorpher{
 
     /** The enum class. */
     private final Class enumClass;
+
+    //---------------------------------------------------------------
 
     /**
      * Instantiates a new enum morpher.

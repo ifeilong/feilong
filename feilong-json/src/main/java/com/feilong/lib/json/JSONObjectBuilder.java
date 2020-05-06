@@ -25,13 +25,12 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.json.processors.JsonBeanProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
@@ -43,7 +42,14 @@ import com.feilong.lib.json.util.PropertyFilter;
  */
 class JSONObjectBuilder{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JSONObjectBuilder.class);
+    /** Don't let anyone instantiate this class. */
+    private JSONObjectBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
 
     static JSONObject build(Object object,JsonConfig jsonConfig){
         if (object == null || JSONUtils.isNull(object)){

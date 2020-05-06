@@ -246,28 +246,13 @@ public final class MorphDynaClass implements DynaClass,Serializable{
      */
     @Override
     public DynaBean newInstance() throws IllegalAccessException,InstantiationException{
-        return newInstance(null);
-    }
+        MorpherRegistry morpherRegistry = new MorpherRegistry();
+        MorphUtils.registerStandardMorphers(morpherRegistry);
 
-    /**
-     * New instance.
-     *
-     * @param morpherRegistry
-     *            the morpher registry
-     * @return the dyna bean
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InstantiationException
-     *             the instantiation exception
-     */
-    public DynaBean newInstance(MorpherRegistry morpherRegistry) throws IllegalAccessException,InstantiationException{
-        if (morpherRegistry == null){
-            morpherRegistry = new MorpherRegistry();
-            MorphUtils.registerStandardMorphers(morpherRegistry);
-        }
         MorphDynaBean dynaBean = (MorphDynaBean) getBeanClass().newInstance();
         dynaBean.setDynaBeanClass(this);
         dynaBean.setMorpherRegistry(morpherRegistry);
+
         Iterator keys = attributes.keySet().iterator();
         while (keys.hasNext()){
             String key = (String) keys.next();
@@ -283,7 +268,10 @@ public final class MorphDynaClass implements DynaClass,Serializable{
      */
     @Override
     public String toString(){
-        return new ToStringBuilder(this).append("name", this.name).append("type", this.type).append("attributes", this.attributes)
+        return new ToStringBuilder(this).//
+                        append("name", this.name).//
+                        append("type", this.type).//
+                        append("attributes", this.attributes)//
                         .toString();
     }
 

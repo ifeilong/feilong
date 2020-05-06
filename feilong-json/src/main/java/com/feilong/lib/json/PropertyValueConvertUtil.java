@@ -33,6 +33,15 @@ import com.feilong.lib.json.util.JSONUtils;
  */
 public class PropertyValueConvertUtil{
 
+    /** Don't let anyone instantiate this class. */
+    private PropertyValueConvertUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Convert property value to list.
      *
@@ -54,8 +63,7 @@ public class PropertyValueConvertUtil{
         JsonConfig jsc = jsonConfig.copy();
         jsc.setRootClass(targetClass);
         jsc.setClassMap(classMap);
-        List list = (List) JSONArray.toCollection((JSONArray) value, jsc);
-        return list;
+        return (List) JSONArrayToBeanUtil.toCollection((JSONArray) value, jsc);
     }
 
     /**
@@ -75,20 +83,14 @@ public class PropertyValueConvertUtil{
      *            the collection type
      * @return the collection
      */
-    static Collection toCollection(
-                    String key,
-                    Object value,
-                    JsonConfig jsonConfig,
-                    String name,
-                    Map classMap,
-                    Class collectionType){
+    static Collection toCollection(String key,Object value,JsonConfig jsonConfig,String name,Map classMap,Class collectionType){
         Class targetClass = TargetClassFinder.findTargetClass(key, classMap);
         targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
         JsonConfig jsc = jsonConfig.copy();
         jsc.setRootClass(targetClass);
         jsc.setClassMap(classMap);
         jsc.setCollectionType(collectionType);
-        return JSONArray.toCollection((JSONArray) value, jsc);
+        return JSONArrayToBeanUtil.toCollection((JSONArray) value, jsc);
     }
 
     /**
@@ -113,11 +115,13 @@ public class PropertyValueConvertUtil{
             innerType = targetInnerType;
         }
 
+        //---------------------------------------------------------------
+
         JsonConfig jsc = jsonConfig.copy();
         jsc.setRootClass(innerType);
         jsc.setClassMap(classMap);
 
-        Object array = JSONArray.toArray((JSONArray) value, jsc);
+        Object array = JSONArrayToBeanUtil.toArray((JSONArray) value, jsc);
         if (innerType.isPrimitive() || JSONUtils.isNumber(innerType) || Boolean.class.isAssignableFrom(innerType)
                         || JSONUtils.isString(innerType)){
             array = JSONUtils.getMorpherRegistry().morph(Array.newInstance(innerType, 0).getClass(), array);

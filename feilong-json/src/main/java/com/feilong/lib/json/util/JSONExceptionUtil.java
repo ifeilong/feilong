@@ -13,15 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json;
+package com.feilong.lib.json.util;
+
+import com.feilong.lib.json.JSONException;
 
 /**
- * 
+ * The Class JSONExceptionUtil.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
 public class JSONExceptionUtil{
 
+    /**
+     * Builds the.
+     *
+     * @param message
+     *            the message
+     * @param e
+     *            the e
+     * @return the JSON exception
+     */
     public static JSONException build(String message,Exception e){
         if (e instanceof JSONException){
             return (JSONException) e;

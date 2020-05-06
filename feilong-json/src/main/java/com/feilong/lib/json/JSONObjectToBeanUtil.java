@@ -37,6 +37,7 @@ import com.feilong.lib.ezmorph.array.ObjectArrayMorpher;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.json.util.PropertySetStrategy;
@@ -46,9 +47,18 @@ import com.feilong.lib.json.util.PropertySetStrategy;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-public class ToBeanUtil{
+public class JSONObjectToBeanUtil{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToBeanUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JSONObjectToBeanUtil.class);
+
+    /** Don't let anyone instantiate this class. */
+    private JSONObjectToBeanUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Creates a JSONDynaBean from a JSONObject.
@@ -75,7 +85,7 @@ public class ToBeanUtil{
             try{
                 if (!JSONUtils.isNull(value)){
                     if (value instanceof JSONArray){
-                        dynaBean.set(key, JSONArray.toCollection((JSONArray) value));
+                        dynaBean.set(key, JSONArrayToBeanUtil.toCollection((JSONArray) value));
                     }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
                                     || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
                         dynaBean.set(key, value);
@@ -196,76 +206,75 @@ public class ToBeanUtil{
                     Object value,
                     String key,
                     PropertyDescriptor propertyDescriptor) throws Exception{
-        //---------------------------------------------------------------
         if (propertyDescriptor != null){
-            Class<?> propertyType = propertyDescriptor.getPropertyType();
-            Class targetType = propertyType;
-
-            if (!JSONUtils.isNull(value)){
-                if (value instanceof JSONArray){
-                    if (List.class.isAssignableFrom(propertyType)){
-                        setProperty(
-                                        bean,
-                                        key,
-                                        PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, propertyType),
-                                        jsonConfig);
-                    }else if (Set.class.isAssignableFrom(propertyType)){
-                        setProperty(
-                                        bean,
-                                        key,
-                                        PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, propertyType),
-                                        jsonConfig);
-                    }else{
-                        setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, targetType, jsonConfig, classMap), jsonConfig);
-                    }
-                }else if (String.class.isAssignableFrom(type) || //
-                                JSONUtils.isBoolean(type) || //
-                                JSONUtils.isNumber(type) || //
-                                JSONUtils.isString(type) || //
-                                JSONFunction.class.isAssignableFrom(type)){
-                    if (jsonConfig.isHandleJettisonEmptyElement() && "".equals(value)){
-                        setProperty(bean, key, null, jsonConfig);
-                    }else if (!targetType.isInstance(value)){
-                        setProperty(bean, key, PropertyValueMorpher.morphPropertyValue(key, value, type, targetType), jsonConfig);
-                    }else{
-                        setProperty(bean, key, value, jsonConfig);
-                    }
-
-                    LOGGER.warn("Tried to assign property {}:{} to bean of class {}", key, type.getName(), bean.getClass().getName());
-                }else{
-                    if (jsonConfig.isHandleJettisonSingleElementArray()){
-                        JSONArray array = new JSONArray().element(value, jsonConfig);
-                        Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
-                        JsonConfig jsc = jsonConfig.copy();
-                        jsc.setRootClass(newTargetClass);
-                        jsc.setClassMap(classMap);
-                        if (targetType.isArray()){
-                            setProperty(bean, key, JSONArray.toArray(array, jsc), jsonConfig);
-                        }else if (JSONArray.class.isAssignableFrom(targetType)){
-                            setProperty(bean, key, array, jsonConfig);
-                        }else if (List.class.isAssignableFrom(targetType) || Set.class.isAssignableFrom(targetType)){
-                            jsc.setCollectionType(targetType);
-                            setProperty(bean, key, JSONArray.toCollection(array, jsc), jsonConfig);
-                        }else{
-                            setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
-                        }
-                    }else{
-                        if (targetType == Object.class || targetType.isInterface()){
-                            Class targetTypeCopy = targetType;
-                            targetType = TargetClassFinder.findTargetClass(key, classMap);
-                            targetType = targetType == null ? TargetClassFinder.findTargetClass(name, classMap) : targetType;
-                            targetType = targetType == null && targetTypeCopy.isInterface() ? targetTypeCopy : targetType;
-                        }
-                        JsonConfig jsc = jsonConfig.copy();
-                        jsc.setRootClass(targetType);
-                        jsc.setClassMap(classMap);
-                        setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
-                    }
-                }
-
+            if (JSONUtils.isNull(value)){
+                setNull(jsonConfig, bean, type, key);
                 return;
             }
-            setNull(jsonConfig, bean, type, key);
+
+            //---------------------------------------------------------------
+            Class<?> propertyType = propertyDescriptor.getPropertyType();
+            Class targetType = propertyType;
+            if (value instanceof JSONArray){
+                if (List.class.isAssignableFrom(propertyType) || Set.class.isAssignableFrom(propertyType)){
+                    setProperty(
+                                    bean,
+                                    key,
+                                    PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, propertyType),
+                                    jsonConfig);
+                }else{
+                    setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, targetType, jsonConfig, classMap), jsonConfig);
+                }
+                return;
+            }
+
+            //---------------------------------------------------------------
+            if (String.class.isAssignableFrom(type) || //
+                            JSONUtils.isBoolean(type) || //
+                            JSONUtils.isNumber(type) || //
+                            JSONUtils.isString(type) || //
+                            JSONFunction.class.isAssignableFrom(type)){
+                if (jsonConfig.isHandleJettisonEmptyElement() && "".equals(value)){
+                    setProperty(bean, key, null, jsonConfig);
+                }else if (!targetType.isInstance(value)){
+                    setProperty(bean, key, PropertyValueMorpher.morphPropertyValue(key, value, type, targetType), jsonConfig);
+                }else{
+                    setProperty(bean, key, value, jsonConfig);
+                }
+
+                LOGGER.trace("Tried to assign bean of class:[{}], property [{}]:[{}]", bean.getClass().getName(), type.getName(), key);
+                return;
+            }
+
+            //---------------------------------------------------------------
+            if (jsonConfig.isHandleJettisonSingleElementArray()){
+                JSONArray array = new JSONArray().element(value, jsonConfig);
+                Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
+                JsonConfig jsc = jsonConfig.copy();
+                jsc.setRootClass(newTargetClass);
+                jsc.setClassMap(classMap);
+                if (targetType.isArray()){
+                    setProperty(bean, key, JSONArrayToBeanUtil.toArray(array, jsc), jsonConfig);
+                }else if (JSONArray.class.isAssignableFrom(targetType)){
+                    setProperty(bean, key, array, jsonConfig);
+                }else if (List.class.isAssignableFrom(targetType) || Set.class.isAssignableFrom(targetType)){
+                    jsc.setCollectionType(targetType);
+                    setProperty(bean, key, JSONArrayToBeanUtil.toCollection(array, jsc), jsonConfig);
+                }else{
+                    setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
+                }
+            }else{
+                if (targetType == Object.class || targetType.isInterface()){
+                    Class targetTypeCopy = targetType;
+                    targetType = TargetClassFinder.findTargetClass(key, classMap);
+                    targetType = targetType == null ? TargetClassFinder.findTargetClass(name, classMap) : targetType;
+                    targetType = targetType == null && targetTypeCopy.isInterface() ? targetTypeCopy : targetType;
+                }
+                JsonConfig jsc = jsonConfig.copy();
+                jsc.setRootClass(targetType);
+                jsc.setClassMap(classMap);
+                setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
+            }
             return;
         }
 
@@ -278,28 +287,33 @@ public class ToBeanUtil{
                                 key,
                                 PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class),
                                 jsonConfig);
-            }else if (String.class.isAssignableFrom(type) || JSONUtils.isBoolean(type) || JSONUtils.isNumber(type)
-                            || JSONUtils.isString(type) || JSONFunction.class.isAssignableFrom(type)){
+                return;
+            }
+            if (String.class.isAssignableFrom(type) || JSONUtils.isBoolean(type) || JSONUtils.isNumber(type) || JSONUtils.isString(type)
+                            || JSONFunction.class.isAssignableFrom(type)){
                 if (beanClass == null || bean instanceof Map || jsonConfig.getPropertySetStrategy() != null){
                     setProperty(bean, key, value, jsonConfig);
                 }else{
                     LOGGER.warn("Tried to assign property {}:{} to bean of class {}", key, type.getName(), bean.getClass().getName());
                 }
+                return;
+            }
+
+            //---------------------------------------------------------------
+            if (jsonConfig.isHandleJettisonSingleElementArray()){
+                Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
+                JsonConfig jsc = jsonConfig.copy();
+                jsc.setRootClass(newTargetClass);
+                jsc.setClassMap(classMap);
+                setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
             }else{
-                if (jsonConfig.isHandleJettisonSingleElementArray()){
-                    Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
-                    JsonConfig jsc = jsonConfig.copy();
-                    jsc.setRootClass(newTargetClass);
-                    jsc.setClassMap(classMap);
-                    setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
-                }else{
-                    setProperty(bean, key, value, jsonConfig);
-                }
+                setProperty(bean, key, value, jsonConfig);
             }
 
             return;
         }
 
+        //---------------------------------------------------------------
         setNull(jsonConfig, bean, type, key);
     }
 
@@ -397,7 +411,7 @@ public class ToBeanUtil{
                         if (pd == null || List.class.isAssignableFrom(pd.getPropertyType())){
                             Class targetClass = ClassResolver.resolveClass(classMap, key, name, type);
                             Object newRoot = ConstructorUtil.newInstance(targetClass);
-                            List list = JSONArray.toList((JSONArray) value, newRoot, jsonConfig);
+                            List list = JSONArrayToBeanUtil.toList((JSONArray) value, newRoot, jsonConfig);
                             setProperty(root, key, list, jsonConfig);
                         }else{
                             Class innerType = JSONUtils.getInnerComponentType(pd.getPropertyType());
@@ -406,7 +420,7 @@ public class ToBeanUtil{
                                 innerType = targetInnerType;
                             }
                             Object newRoot = ConstructorUtil.newInstance(innerType);
-                            Object array = JSONArray.toArray((JSONArray) value, newRoot, jsonConfig);
+                            Object array = JSONArrayToBeanUtil.toArray((JSONArray) value, newRoot, jsonConfig);
                             if (innerType.isPrimitive() || JSONUtils.isNumber(innerType) || Boolean.class.isAssignableFrom(innerType)
                                             || JSONUtils.isString(innerType)){
                                 array = JSONUtils.getMorpherRegistry().morph(Array.newInstance(innerType, 0).getClass(), array);
@@ -458,9 +472,9 @@ public class ToBeanUtil{
                                 Class newTargetClass = ClassResolver.resolveClass(classMap, key, name, type);
                                 Object newRoot = ConstructorUtil.newInstance(newTargetClass);
                                 if (targetClass.isArray()){
-                                    setProperty(root, key, JSONArray.toArray(array, newRoot, jsonConfig), jsonConfig);
+                                    setProperty(root, key, JSONArrayToBeanUtil.toArray(array, newRoot, jsonConfig), jsonConfig);
                                 }else if (Collection.class.isAssignableFrom(targetClass)){
-                                    setProperty(root, key, JSONArray.toList(array, newRoot, jsonConfig), jsonConfig);
+                                    setProperty(root, key, JSONArrayToBeanUtil.toList(array, newRoot, jsonConfig), jsonConfig);
                                 }else if (JSONArray.class.isAssignableFrom(targetClass)){
                                     setProperty(root, key, array, jsonConfig);
                                 }else{

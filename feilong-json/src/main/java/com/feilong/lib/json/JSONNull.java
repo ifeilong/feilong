@@ -64,8 +64,11 @@ public final class JSONNull implements JSON{
      */
     @Override
     public boolean equals(Object object){
-        return object == null || object == this || object == instance
-                        || (object instanceof JSONObject && ((JSONObject) object).isNullObject()) || "null".equals(object);
+        return object == null || //
+                        object == this || //
+                        object == instance || //
+                        (object instanceof JSONObject && ((JSONObject) object).isNullObject()) || //
+                        "null".equals(object);
     }
 
     //---------------------------------------------------------------

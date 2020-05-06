@@ -15,29 +15,16 @@
  */
 package com.feilong.lib.json;
 
-import java.beans.PropertyDescriptor;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
-import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -88,7 +75,7 @@ import com.feilong.lib.json.util.JSONUtils;
  *
  * @author JSON.org
  */
-public final class JSONArray extends AbstractJSON implements JSON,List,Comparable{
+public final class JSONArray extends AbstractJSON implements JSON,List{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1663435868052425703L;
@@ -126,946 +113,15 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *             JSONArray.
      */
     public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
-        if (object instanceof JSONString){
-            return _fromJSONString((JSONString) object, jsonConfig);
-        }
-        if (object instanceof JSONArray){
-            return _fromJSONArray((JSONArray) object, jsonConfig);
-        }
-        if (object instanceof Collection){
-            return _fromCollection((Collection) object, jsonConfig);
-        }
-        if (object instanceof JSONTokener){
-            return _fromJSONTokener((JSONTokener) object, jsonConfig);
-        }
-        if (object instanceof String){
-            return _fromString((String) object, jsonConfig);
-        }
-        if (object != null && object.getClass().isArray()){
-            Class type = object.getClass().getComponentType();
-            if (!type.isPrimitive()){
-                return _fromArray((Object[]) object, jsonConfig);
-            }
-            if (type == Boolean.TYPE){
-                return _fromArray((boolean[]) object, jsonConfig);
-            }else if (type == Byte.TYPE){
-                return _fromArray((byte[]) object, jsonConfig);
-            }else if (type == Short.TYPE){
-                return _fromArray((short[]) object, jsonConfig);
-            }else if (type == Integer.TYPE){
-                return _fromArray((int[]) object, jsonConfig);
-            }else if (type == Long.TYPE){
-                return _fromArray((long[]) object, jsonConfig);
-            }else if (type == Float.TYPE){
-                return _fromArray((float[]) object, jsonConfig);
-            }else if (type == Double.TYPE){
-                return _fromArray((double[]) object, jsonConfig);
-            }else if (type == Character.TYPE){
-                return _fromArray((char[]) object, jsonConfig);
-            }
-
-            throw new JSONException("Unsupported type");
-        }else if (JSONUtils.isBoolean(object) || JSONUtils.isFunction(object) || JSONUtils.isNumber(object) || JSONUtils.isNull(object)
-                        || JSONUtils.isString(object) || object instanceof JSON){
-            JSONArray jsonArray = new JSONArray().element(object, jsonConfig);
-            return jsonArray;
-        }else if (object instanceof Enum){
-            return _fromArray((Enum) object, jsonConfig);
-        }else if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
-            throw new JSONException("Unsupported type");
-        }else if (JSONUtils.isObject(object)){
-            JSONArray jsonArray = new JSONArray().element(JSONObject.fromObject(object, jsonConfig));
-            return jsonArray;
-        }
-        throw new JSONException("Unsupported type");
-    }
-
-    /**
-     * Get the collection type from a getter or setter, or null if no type was
-     * found.<br/>
-     * Contributed by [Matt Small @ WaveMaker].
-     *
-     * @param pd
-     *            the pd
-     * @param useGetter
-     *            the use getter
-     * @return the collection type
-     * @throws JSONException
-     *             the JSON exception
-     */
-    public static Class[] getCollectionType(PropertyDescriptor pd,boolean useGetter) throws JSONException{
-        Type type;
-        if (useGetter){
-            Method m = pd.getReadMethod();
-            type = m.getGenericReturnType();
-        }else{
-            Method m = pd.getWriteMethod();
-            Type[] gpts = m.getGenericParameterTypes();
-
-            if (1 != gpts.length){
-                throw new JSONException("method " + m + " is not a standard setter");
-            }
-            type = gpts[0];
-        }
-
-        if (!(type instanceof ParameterizedType)){
-            return null;
-        }
-
-        ParameterizedType pType = (ParameterizedType) type;
-        Type[] actualTypes = pType.getActualTypeArguments();
-
-        Class[] ret = new Class[actualTypes.length];
-        for (int i = 0; i < ret.length; i++){
-            ret[i] = (Class) actualTypes[i];
-        }
-
-        return ret;
-    }
-
-    /**
-     * Returns the number of dimensions suited for a java array.
-     *
-     * @param jsonArray
-     *            the json array
-     * @return the dimensions
-     */
-    public static int[] getDimensions(JSONArray jsonArray){
-        // short circuit for empty arrays
-        if (jsonArray == null || jsonArray.isEmpty()){
-            return new int[] { 0 };
-        }
-
-        List dims = new ArrayList();
-        processArrayDimensions(jsonArray, dims, 0);
-        int[] dimensions = new int[dims.size()];
-        int j = 0;
-        for (Iterator i = dims.iterator(); i.hasNext();){
-            dimensions[j++] = ((Integer) i.next()).intValue();
-        }
-        return dimensions;
+        return JSONArrayBuilder.fromObject(object, jsonConfig);
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Creates a java array from a JSONArray.
-     *
-     * @param jsonArray
-     *            the json array
-     * @return the object
-     */
-    public static Object toArray(JSONArray jsonArray){
-        return toArray(jsonArray, new JsonConfig());
-    }
-
-    /**
-     * Creates a java array from a JSONArray.
-     *
-     * @param jsonArray
-     *            the json array
-     * @param objectClass
-     *            the object class
-     * @return the object
-     */
-    public static Object toArray(JSONArray jsonArray,Class objectClass){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(objectClass);
-        return toArray(jsonArray, jsonConfig);
-    }
-
-    /**
-     * Creates a java array from a JSONArray.<br>
-     * Any attribute is a JSONObject and matches a key in the classMap, it will
-     * be converted to that target class.<br>
-     * The classMap has the following conventions:
-     * <ul>
-     * <li>Every key must be an String.</li>
-     * <li>Every value must be a Class.</li>
-     * <li>A key may be a regular expression.</li>
-     * </ul>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param objectClass
-     *            the object class
-     * @param classMap
-     *            the class map
-     * @return the object
-     */
-    public static Object toArray(JSONArray jsonArray,Class objectClass,Map classMap){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(objectClass);
-        jsonConfig.setClassMap(classMap);
-        return toArray(jsonArray, jsonConfig);
-    }
-
-    /**
-     * Creates a java array from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    public static Object toArray(JSONArray jsonArray,JsonConfig jsonConfig){
-        Class objectClass = jsonConfig.getRootClass();
-        Map classMap = jsonConfig.getClassMap();
-
-        if (jsonArray.size() == 0){
-            return Array.newInstance(objectClass == null ? Object.class : objectClass, 0);
-        }
-
-        int[] dimensions = JSONArray.getDimensions(jsonArray);
-        Object array = Array.newInstance(objectClass == null ? Object.class : objectClass, dimensions);
-        int size = jsonArray.size();
-
-        //---------------------------------------------------------------
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                Array.set(array, i, null);
-                continue;
-            }
-
-            //---------------------------------------------------------------
-            Class type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(type)){
-                Array.set(array, i, toArray((JSONArray) value, objectClass, classMap));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || Character.class.isAssignableFrom(type)
-                            || JSONFunction.class.isAssignableFrom(type)){
-                if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                }
-                Array.set(array, i, value);
-            }else if (JSONUtils.isNumber(type)){
-                if (objectClass != null && (Byte.class.isAssignableFrom(objectClass) || Byte.TYPE.isAssignableFrom(objectClass))){
-                    Array.set(array, i, Byte.valueOf(String.valueOf(value)));
-                }else if (objectClass != null && (Short.class.isAssignableFrom(objectClass) || Short.TYPE.isAssignableFrom(objectClass))){
-                    Array.set(array, i, Short.valueOf(String.valueOf(value)));
-                }else{
-                    Array.set(array, i, value);
-                }
-            }else{
-                if (objectClass != null){
-                    JsonConfig jsc = jsonConfig.copy();
-                    jsc.setRootClass(objectClass);
-                    jsc.setClassMap(classMap);
-                    Array.set(array, i, JSONObject.toBean((JSONObject) value, jsc));
-                }else{
-                    Array.set(array, i, JSONObject.toBean((JSONObject) value));
-                }
-            }
-        }
-        return array;
-    }
-
-    /**
-     * Creates a java array from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param root
-     *            the root
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    public static Object toArray(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
-        Class objectClass = root.getClass();
-        if (jsonArray.size() == 0){
-            return Array.newInstance(objectClass, 0);
-        }
-
-        int[] dimensions = JSONArray.getDimensions(jsonArray);
-        Object array = Array.newInstance(objectClass == null ? Object.class : objectClass, dimensions);
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                Array.set(array, i, null);
-                continue;
-            }
-            Class type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(type)){
-                Array.set(array, i, toArray((JSONArray) value, root, jsonConfig));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-                if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                }
-                Array.set(array, i, value);
-            }else{
-                try{
-                    Object newRoot = ConstructorUtil.newInstance(root.getClass());
-                    Array.set(array, i, JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                }catch (Exception e){
-                    throw JSONExceptionUtil.build("", e);
-                }
-            }
-        }
-        return array;
-    }
-
-    /**
-     * Returns a List or a Set taking generics into account.<br/>
-     *
-     * @param jsonArray
-     *            the json array
-     * @return the collection
-     */
-    public static Collection toCollection(JSONArray jsonArray){
-        return toCollection(jsonArray, new JsonConfig());
-    }
-
-    /**
-     * Returns a List or a Set taking generics into account.<br/>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param objectClass
-     *            the object class
-     * @return the collection
-     */
-    public static Collection toCollection(JSONArray jsonArray,Class objectClass){
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(objectClass);
-        return toCollection(jsonArray, jsonConfig);
-    }
-
-    /**
-     * Returns a List or a Set taking generics into account.<br/>
-     * Contributed by [Matt Small @ WaveMaker].
-     *
-     * @param jsonArray
-     *            the json array
-     * @param jsonConfig
-     *            the json config
-     * @return the collection
-     */
-    public static Collection toCollection(JSONArray jsonArray,JsonConfig jsonConfig){
-        Collection collection = null;
-        Class collectionType = jsonConfig.getCollectionType();
-
-        if (collectionType.isInterface()){
-            if (collectionType.equals(List.class)){
-                collection = new ArrayList();
-            }else if (collectionType.equals(Set.class)){
-                collection = new HashSet();
-            }else{
-                throw new JSONException("unknown interface: " + collectionType);
-            }
-        }else{
-            try{
-                collection = (Collection) collectionType.newInstance();
-            }catch (InstantiationException e){
-                throw new JSONException(e);
-            }catch (IllegalAccessException e){
-                throw new JSONException(e);
-            }
-        }
-
-        //---------------------------------------------------------------
-
-        Class objectClass = jsonConfig.getRootClass();
-        Map classMap = jsonConfig.getClassMap();
-
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-
-            if (JSONUtils.isNull(value)){
-                collection.add(null);
-                continue;
-            }
-            Class type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(value.getClass())){
-                collection.add(toCollection((JSONArray) value, jsonConfig));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-
-                if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                }
-                collection.add(value);
-            }else{
-                if (objectClass != null){
-                    JsonConfig jsc = jsonConfig.copy();
-                    jsc.setRootClass(objectClass);
-                    jsc.setClassMap(classMap);
-                    collection.add(JSONObject.toBean((JSONObject) value, jsc));
-                }else{
-                    collection.add(JSONObject.toBean((JSONObject) value));
-                }
-            }
-        }
-
-        return collection;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Creates a List from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param root
-     *            the root
-     * @param jsonConfig
-     *            the json config
-     * @return the list
-     */
-    public static List toList(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
-        if (jsonArray.size() == 0 || root == null){
-            return new ArrayList();
-        }
-
-        List list = new ArrayList();
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                list.add(null);
-                continue;
-            }
-            Class type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(type)){
-                list.add(toList((JSONArray) value, root, jsonConfig));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
-                list.add(value);
-            }else{
-                try{
-                    Object newRoot = ConstructorUtil.newInstance(root.getClass());
-                    list.add(JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                }catch (Exception e){
-                    throw JSONExceptionUtil.build("", e);
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Construct a JSONArray from an boolean[].<br>
-     *
-     * @param array
-     *            An boolean[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(boolean[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < array.length; i++){
-            Boolean b = array[i] ? Boolean.TRUE : Boolean.FALSE;
-            jsonArray.addValue(b, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an byte[].<br>
-     *
-     * @param array
-     *            An byte[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(byte[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < array.length; i++){
-            Number n = JSONUtils.transformNumber(new Byte(array[i]));
-            jsonArray.addValue(n, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an char[].<br>
-     *
-     * @param array
-     *            An char[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(char[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < array.length; i++){
-            Character c = new Character(array[i]);
-            jsonArray.addValue(c, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an double[].<br>
-     *
-     * @param array
-     *            An double[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(double[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        try{
-            for (int i = 0; i < array.length; i++){
-                Double d = new Double(array[i]);
-                JSONUtils.testValidity(d);
-                jsonArray.addValue(d, jsonConfig);
-            }
-        }catch (Exception e){
-            CycleSetUtil.removeInstance(array);
-            throw JSONExceptionUtil.build("", e);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an Enum value.
-     *
-     * @param e
-     *            A enum value.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     * @throws JSONException
-     *             If there is a syntax error.
-     */
-    private static JSONArray _fromArray(Enum e,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(e)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(e);
-            }catch (Exception ex){
-                CycleSetUtil.removeInstance(e);
-                throw JSONExceptionUtil.build("", ex);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        if (e != null){
-            jsonArray.addValue(e, jsonConfig);
-        }else{
-            JSONException jsone = new JSONException("enum value is null");
-            CycleSetUtil.removeInstance(e);
-            throw jsone;
-        }
-
-        CycleSetUtil.removeInstance(e);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an float[].<br>
-     *
-     * @param array
-     *            An float[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(float[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        try{
-            for (int i = 0; i < array.length; i++){
-                Float f = new Float(array[i]);
-                JSONUtils.testValidity(f);
-                jsonArray.addValue(f, jsonConfig);
-            }
-        }catch (Exception e){
-            CycleSetUtil.removeInstance(array);
-            throw JSONExceptionUtil.build("", e);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an int[].<br>
-     *
-     * @param array
-     *            An int[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(int[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < array.length; i++){
-            Number n = new Integer(array[i]);
-            jsonArray.addValue(n, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an long[].<br>
-     *
-     * @param array
-     *            An long[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(long[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < array.length; i++){
-            Number n = JSONUtils.transformNumber(new Long(array[i]));
-            jsonArray.addValue(n, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    // ------------------------------------------------------
-
-    /**
-     * From array.
-     *
-     * @param array
-     *            the array
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(Object[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        try{
-            for (int i = 0; i < array.length; i++){
-                Object element = array[i];
-                jsonArray.addValue(element, jsonConfig);
-            }
-        }catch (Exception e){
-            CycleSetUtil.removeInstance(array);
-            throw JSONExceptionUtil.build("", e);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * Construct a JSONArray from an short[].<br>
-     *
-     * @param array
-     *            An short[] array.
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromArray(short[] array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < array.length; i++){
-            Number n = JSONUtils.transformNumber(new Short(array[i]));
-            jsonArray.addValue(n, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * From collection.
-     *
-     * @param collection
-     *            the collection
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromCollection(Collection collection,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(collection)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(collection);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(collection);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-
-        JSONArray jsonArray = new JSONArray();
-        try{
-            int i = 0;
-            for (Iterator elements = collection.iterator(); elements.hasNext();){
-                Object element = elements.next();
-                jsonArray.addValue(element, jsonConfig);
-            }
-        }catch (Exception e){
-            CycleSetUtil.removeInstance(collection);
-            throw JSONExceptionUtil.build("", e);
-        }
-
-        CycleSetUtil.removeInstance(collection);
-        return jsonArray;
-    }
-
-    /**
-     * From JSON array.
-     *
-     * @param array
-     *            the array
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromJSONArray(JSONArray array,JsonConfig jsonConfig){
-        if (!CycleSetUtil.addInstance(array)){
-            try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
-            }catch (Exception e){
-                CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
-            }
-        }
-        JSONArray jsonArray = new JSONArray();
-        int index = 0;
-        for (Iterator elements = array.iterator(); elements.hasNext();){
-            Object element = elements.next();
-            jsonArray.addValue(element, jsonConfig);
-        }
-
-        CycleSetUtil.removeInstance(array);
-        return jsonArray;
-    }
-
-    /**
-     * From JSON string.
-     *
-     * @param string
-     *            the string
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromJSONString(JSONString string,JsonConfig jsonConfig){
-        return _fromJSONTokener(new JSONTokener(string.toJSONString()), jsonConfig);
-    }
-
-    /**
-     * From JSON tokener.
-     *
-     * @param tokener
-     *            the tokener
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    static JSONArray _fromJSONTokener(JSONTokener tokener,JsonConfig jsonConfig){
-
-        JSONArray jsonArray = new JSONArray();
-        int index = 0;
-
-        try{
-            if (tokener.nextClean() != '['){
-                throw tokener.syntaxError("A JSONArray text must start with '['");
-            }
-            if (tokener.nextClean() == ']'){
-                return jsonArray;
-            }
-            tokener.back();
-            for (;;){
-                if (tokener.nextClean() == ','){
-                    tokener.back();
-                    jsonArray.elements.add(JSONNull.getInstance());
-                }else{
-                    tokener.back();
-                    Object v = tokener.nextValue(jsonConfig);
-                    if (!JSONUtils.isFunctionHeader(v)){
-                        if (v instanceof String && JSONUtils.mayBeJSON((String) v)){
-                            jsonArray.addValue(JSONUtils.DOUBLE_QUOTE + v + JSONUtils.DOUBLE_QUOTE, jsonConfig);
-                        }else{
-                            jsonArray.addValue(v, jsonConfig);
-                        }
-                    }else{
-                        // read params if any
-                        String params = JSONUtils.getFunctionParams((String) v);
-                        // read function text
-                        int i = 0;
-                        StringBuffer sb = new StringBuffer();
-                        for (;;){
-                            char ch = tokener.next();
-                            if (ch == 0){
-                                break;
-                            }
-                            if (ch == '{'){
-                                i++;
-                            }
-                            if (ch == '}'){
-                                i--;
-                            }
-                            sb.append(ch);
-                            if (i == 0){
-                                break;
-                            }
-                        }
-                        if (i != 0){
-                            throw tokener.syntaxError("Unbalanced '{' or '}' on prop: " + v);
-                        }
-                        // trim '{' at start and '}' at end
-                        String text = sb.toString();
-                        text = text.substring(1, text.length() - 1).trim();
-                        jsonArray.addValue(new JSONFunction((params != null) ? StringUtils.split(params, ",") : null, text), jsonConfig);
-                    }
-                }
-                switch (tokener.nextClean()) {
-                    case ';':
-                    case ',':
-                        if (tokener.nextClean() == ']'){
-                            return jsonArray;
-                        }
-                        tokener.back();
-                        break;
-                    case ']':
-                        return jsonArray;
-                    default:
-                        throw tokener.syntaxError("Expected a ',' or ']'");
-                }
-            }
-        }catch (Exception e){
-            throw JSONExceptionUtil.build("", e);
-        }
-    }
-
-    /**
-     * From string.
-     *
-     * @param string
-     *            the string
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     */
-    private static JSONArray _fromString(String string,JsonConfig jsonConfig){
-        return _fromJSONTokener(new JSONTokener(string), jsonConfig);
-    }
-
-    /**
-     * Process array dimensions.
-     *
-     * @param jsonArray
-     *            the json array
-     * @param dims
-     *            the dims
-     * @param index
-     *            the index
-     */
-    private static void processArrayDimensions(JSONArray jsonArray,List dims,int index){
-        if (dims.size() <= index){
-            dims.add(new Integer(jsonArray.size()));
-        }else{
-            int i = ((Integer) dims.get(index)).intValue();
-            if (jsonArray.size() > i){
-                dims.set(index, new Integer(jsonArray.size()));
-            }
-        }
-        for (Iterator i = jsonArray.iterator(); i.hasNext();){
-            Object item = i.next();
-            if (item instanceof JSONArray){
-                processArrayDimensions((JSONArray) item, dims, index + 1);
-            }
-        }
-    }
-
-    // ------------------------------------------------------
 
     /**
      * The List where the JSONArray's properties are kept.
      */
-    private final List elements;
-
-    /**
-     * A flag for XML processing.
-     */
-    private boolean    expandElements;
+    final List elements;
 
     /**
      * Construct an empty JSONArray.
@@ -1190,30 +246,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     /**
-     * Compare to.
-     *
-     * @param obj
-     *            the obj
-     * @return the int
-     */
-    @Override
-    public int compareTo(Object obj){
-        if (obj != null && (obj instanceof JSONArray)){
-            JSONArray other = (JSONArray) obj;
-            int size1 = size();
-            int size2 = other.size();
-            if (size1 < size2){
-                return -1;
-            }else if (size1 > size2){
-                return 1;
-            }else if (this.equals(other)){
-                return 0;
-            }
-        }
-        return -1;
-    }
-
-    /**
      * Contains.
      *
      * @param o
@@ -1264,41 +296,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     /**
-     * Remove an element, if present.
-     *
-     * @param index
-     *            the index of the element.
-     * @return this.
-     */
-    public JSONArray discard(int index){
-        elements.remove(index);
-        return this;
-    }
-
-    /**
-     * Remove an element, if present.
-     *
-     * @param o
-     *            the o
-     * @return this.
-     */
-    public JSONArray discard(Object o){
-        elements.remove(o);
-        return this;
-    }
-
-    /**
-     * Append a boolean value. This increases the array's length by one.
-     *
-     * @param value
-     *            A boolean value.
-     * @return this.
-     */
-    public JSONArray element(boolean value){
-        return element(value ? Boolean.TRUE : Boolean.FALSE);
-    }
-
-    /**
      * Append a value in the JSONArray, where the value will be a JSONArray which
      * is produced from a Collection.
      *
@@ -1306,7 +303,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            A Collection value.
      * @return this.
      */
-    public JSONArray element(Collection value){
+    private JSONArray element(Collection value){
         return element(value, new JsonConfig());
     }
 
@@ -1320,55 +317,12 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            the json config
      * @return this.
      */
-    public JSONArray element(Collection value,JsonConfig jsonConfig){
+    private JSONArray element(Collection value,JsonConfig jsonConfig){
         if (value instanceof JSONArray){
             elements.add(value);
             return this;
         }
-        return element(_fromCollection(value, jsonConfig));
-    }
-
-    /**
-     * Append a double value. This increases the array's length by one.
-     *
-     * @param value
-     *            A double value.
-     * @return this.
-     * @throws JSONException
-     *             if the value is not finite.
-     */
-    public JSONArray element(double value){
-        Double d = new Double(value);
-        JSONUtils.testValidity(d);
-        return element(d);
-    }
-
-    /**
-     * Append an int value. This increases the array's length by one.
-     *
-     * @param value
-     *            An int value.
-     * @return this.
-     */
-    public JSONArray element(int value){
-        return element(new Integer(value));
-    }
-
-    /**
-     * Put or replace a boolean value in the JSONArray. If the index is greater
-     * than the length of the JSONArray, then null elements will be added as
-     * necessary to pad it out.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A boolean value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative.
-     */
-    public JSONArray element(int index,boolean value){
-        return element(index, value ? Boolean.TRUE : Boolean.FALSE);
+        return element(JSONArrayBuilder._fromCollection(value, jsonConfig));
     }
 
     /**
@@ -1384,7 +338,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *             If the index is negative or if the value is not
      *             finite.
      */
-    public JSONArray element(int index,Collection value){
+    private JSONArray element(int index,Collection value){
         return element(index, value, new JsonConfig());
     }
 
@@ -1403,7 +357,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *             If the index is negative or if the value is not
      *             finite.
      */
-    public JSONArray element(int index,Collection value,JsonConfig jsonConfig){
+    private JSONArray element(int index,Collection value,JsonConfig jsonConfig){
         if (value instanceof JSONArray){
             if (index < 0){
                 throw new JSONException("JSONArray[" + index + "] not found.");
@@ -1418,115 +372,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
             }
             return this;
         }
-        return element(index, _fromCollection(value, jsonConfig));
-    }
-
-    /**
-     * Put or replace a double value. If the index is greater than the length of
-     * the JSONArray, then null elements will be added as necessary to pad it
-     * out.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A double value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the value is not
-     *             finite.
-     */
-    public JSONArray element(int index,double value){
-        return element(index, new Double(value));
-    }
-
-    /**
-     * Put or replace an int value. If the index is greater than the length of
-     * the JSONArray, then null elements will be added as necessary to pad it
-     * out.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            An int value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative.
-     */
-    public JSONArray element(int index,int value){
-        return element(index, new Integer(value));
-    }
-
-    /**
-     * Put or replace a long value. If the index is greater than the length of
-     * the JSONArray, then null elements will be added as necessary to pad it
-     * out.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A long value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative.
-     */
-    public JSONArray element(int index,long value){
-        return element(index, new Long(value));
-    }
-
-    /**
-     * Put a value in the JSONArray, where the value will be a JSONObject which
-     * is produced from a Map.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            The Map value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the the value is an
-     *             invalid number.
-     */
-    public JSONArray element(int index,Map value){
-        return element(index, value, new JsonConfig());
-    }
-
-    /**
-     * Put a value in the JSONArray, where the value will be a JSONObject which
-     * is produced from a Map.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            The Map value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the the value is an
-     *             invalid number.
-     */
-    public JSONArray element(int index,Map value,JsonConfig jsonConfig){
-        return element(index, JSONObject.fromObject(value, jsonConfig));
-    }
-
-    /**
-     * Put or replace an object value in the JSONArray. If the index is greater
-     * than the length of the JSONArray, then null elements will be added as
-     * necessary to pad it out.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            An object value. The value should be a Boolean, Double,
-     *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
-     *            JSONString or the JSONNull object.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the the value is an
-     *             invalid number.
-     */
-    public JSONArray element(int index,Object value){
-        return element(index, value, new JsonConfig());
+        return element(index, JSONArrayBuilder._fromCollection(value, jsonConfig));
     }
 
     /**
@@ -1547,7 +393,7 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *             If the index is negative or if the the value is an
      *             invalid number.
      */
-    public JSONArray element(int index,Object value,JsonConfig jsonConfig){
+    private JSONArray element(int index,Object value,JsonConfig jsonConfig){
         JSONUtils.testValidity(value);
         if (index < 0){
             throw new JSONException("JSONArray[" + index + "] not found.");
@@ -1564,76 +410,13 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     /**
-     * Put or replace a String value in the JSONArray. If the index is greater
-     * than the length of the JSONArray, then null elements will be added as
-     * necessary to pad it out.<br>
-     * The string may be a valid JSON formatted string, in tha case, it will be
-     * transformed to a JSONArray, JSONObject or JSONNull.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A String value.
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the the value is an
-     *             invalid number.
-     */
-    public JSONArray element(int index,String value){
-        return element(index, value, new JsonConfig());
-    }
-
-    /**
-     * Put or replace a String value in the JSONArray. If the index is greater
-     * than the length of the JSONArray, then null elements will be added as
-     * necessary to pad it out.<br>
-     * The string may be a valid JSON formatted string, in tha case, it will be
-     * transformed to a JSONArray, JSONObject or JSONNull.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            A String value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the the value is an
-     *             invalid number.
-     */
-    public JSONArray element(int index,String value,JsonConfig jsonConfig){
-        if (index < 0){
-            throw new JSONException("JSONArray[" + index + "] not found.");
-        }
-        if (index < size()){
-            if (value == null){
-                this.elements.set(index, "");
-            }else if (JSONUtils.mayBeJSON(value)){
-                try{
-                    this.elements.set(index, JSONSerializer.toJSON(value, jsonConfig));
-                }catch (JSONException jsone){
-                    this.elements.set(index, JSONUtils.stripQuotes(value));
-                }
-            }else{
-                this.elements.set(index, JSONUtils.stripQuotes(value));
-            }
-        }else{
-            while (index != size()){
-                element(JSONNull.getInstance());
-            }
-            element(value, jsonConfig);
-        }
-        return this;
-    }
-
-    /**
      * Append an JSON value. This increases the array's length by one.
      *
      * @param value
      *            An JSON value.
      * @return this.
      */
-    public JSONArray element(JSONNull value){
+    private JSONArray element(JSONNull value){
         this.elements.add(value);
         return this;
     }
@@ -1648,43 +431,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     public JSONArray element(JSONObject value){
         this.elements.add(value);
         return this;
-    }
-
-    /**
-     * Append an long value. This increases the array's length by one.
-     *
-     * @param value
-     *            A long value.
-     * @return this.
-     */
-    public JSONArray element(long value){
-        return element(JSONUtils.transformNumber(new Long(value)));
-    }
-
-    /**
-     * Put a value in the JSONArray, where the value will be a JSONObject which
-     * is produced from a Map.
-     *
-     * @param value
-     *            A Map value.
-     * @return this.
-     */
-    public JSONArray element(Map value){
-        return element(value, new JsonConfig());
-    }
-
-    /**
-     * Put a value in the JSONArray, where the value will be a JSONObject which
-     * is produced from a Map.
-     *
-     * @param value
-     *            A Map value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     */
-    public JSONArray element(Map value,JsonConfig jsonConfig){
-        return element(JSONObject.fromObject(value, jsonConfig));
     }
 
     /**
@@ -1716,156 +462,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     /**
-     * Append a String value. This increases the array's length by one.<br>
-     * The string may be a valid JSON formatted string, in tha case, it will be
-     * transformed to a JSONArray, JSONObject or JSONNull.
-     *
-     * @param value
-     *            A String value.
-     * @return this.
-     */
-    public JSONArray element(String value){
-        return element(value, new JsonConfig());
-    }
-
-    /**
-     * Append a String value. This increases the array's length by one.<br>
-     * The string may be a valid JSON formatted string, in tha case, it will be
-     * transformed to a JSONArray, JSONObject or JSONNull.
-     *
-     * @param value
-     *            A String value.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     */
-    public JSONArray element(String value,JsonConfig jsonConfig){
-        if (value == null){
-            this.elements.add("");
-        }else if (JSONUtils.hasQuotes(value)){
-            this.elements.add(value);
-        }else if (JSONNull.getInstance().equals(value)){
-            this.elements.add(JSONNull.getInstance());
-        }else if (JSONUtils.isJsonKeyword(value, jsonConfig)){
-            if (jsonConfig.isJavascriptCompliant() && "undefined".equals(value)){
-                this.elements.add(JSONNull.getInstance());
-            }else{
-                this.elements.add(value);
-            }
-        }else if (JSONUtils.mayBeJSON(value)){
-            try{
-                this.elements.add(JSONSerializer.toJSON(value, jsonConfig));
-            }catch (JSONException jsone){
-                this.elements.add(value);
-            }
-        }else{
-            this.elements.add(value);
-        }
-        return this;
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (obj == this){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof JSONArray)){
-            return false;
-        }
-
-        JSONArray other = (JSONArray) obj;
-
-        if (other.size() != size()){
-            return false;
-        }
-
-        int max = size();
-        for (int i = 0; i < max; i++){
-            Object o1 = get(i);
-            Object o2 = other.get(i);
-
-            // handle nulls
-            if (JSONNull.getInstance().equals(o1)){
-                if (JSONNull.getInstance().equals(o2)){
-                    continue;
-                }
-                return false;
-            }
-            if (JSONNull.getInstance().equals(o2)){
-                return false;
-            }
-
-            if (o1 instanceof JSONArray && o2 instanceof JSONArray){
-                JSONArray e = (JSONArray) o1;
-                JSONArray a = (JSONArray) o2;
-                if (!a.equals(e)){
-                    return false;
-                }
-            }else{
-                if (o1 instanceof String && o2 instanceof JSONFunction){
-                    if (!o1.equals(String.valueOf(o2))){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONFunction && o2 instanceof String){
-                    if (!o2.equals(String.valueOf(o1))){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONObject && o2 instanceof JSONObject){
-                    if (!o1.equals(o2)){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONArray && o2 instanceof JSONArray){
-                    if (!o1.equals(o2)){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONFunction && o2 instanceof JSONFunction){
-                    if (!o1.equals(o2)){
-                        return false;
-                    }
-                }else{
-                    if (o1 instanceof String){
-                        if (!o1.equals(String.valueOf(o2))){
-                            return false;
-                        }
-                    }else if (o2 instanceof String){
-                        if (!o2.equals(String.valueOf(o1))){
-                            return false;
-                        }
-                    }else{
-                        Morpher m1 = JSONUtils.getMorpherRegistry().getMorpherFor(o1.getClass());
-                        Morpher m2 = JSONUtils.getMorpherRegistry().getMorpherFor(o2.getClass());
-                        if (m1 != null && m1 != IdentityObjectMorpher.getInstance()){
-                            if (!o1.equals(JSONUtils.getMorpherRegistry().morph(o1.getClass(), o2))){
-                                return false;
-                            }
-                        }else if (m2 != null && m2 != IdentityObjectMorpher.getInstance()){
-                            if (!JSONUtils.getMorpherRegistry().morph(o1.getClass(), o1).equals(o2)){
-                                return false;
-                            }
-                        }else{
-                            if (!o1.equals(o2)){
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * Get the object value associated with an index.
      *
      * @param index
@@ -1875,88 +471,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     @Override
     public Object get(int index){
         return this.elements.get(index);
-    }
-
-    /**
-     * Get the boolean value associated with an index. The string values "true"
-     * and "false" are converted to boolean.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The truth.
-     * @throws JSONException
-     *             If there is no value for the index or if the value
-     *             is not convertable to boolean.
-     */
-    public boolean getBoolean(int index){
-        Object o = get(index);
-        if (o != null){
-            if (o.equals(Boolean.FALSE) || (o instanceof String && ((String) o).equalsIgnoreCase("false"))){
-                return false;
-            }else if (o.equals(Boolean.TRUE) || (o instanceof String && ((String) o).equalsIgnoreCase("true"))){
-                return true;
-            }
-        }
-        throw new JSONException("JSONArray[" + index + "] is not a Boolean.");
-    }
-
-    /**
-     * Get the double value associated with an index.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The value.
-     * @throws JSONException
-     *             If the key is not found or if the value cannot be
-     *             converted to a number.
-     */
-    public double getDouble(int index){
-        Object o = get(index);
-        if (o != null){
-            try{
-                return o instanceof Number ? ((Number) o).doubleValue() : Double.parseDouble((String) o);
-            }catch (Exception e){
-                throw new JSONException("JSONArray[" + index + "] is not a number.");
-            }
-        }
-        throw new JSONException("JSONArray[" + index + "] is not a number.");
-    }
-
-    /**
-     * Get the int value associated with an index.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The value.
-     * @throws JSONException
-     *             If the key is not found or if the value cannot be
-     *             converted to a number. if the value cannot be converted to a
-     *             number.
-     */
-    public int getInt(int index){
-        Object o = get(index);
-        if (o != null){
-            return o instanceof Number ? ((Number) o).intValue() : (int) getDouble(index);
-        }
-        throw new JSONException("JSONArray[" + index + "] is not a number.");
-    }
-
-    /**
-     * Get the JSONArray associated with an index.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return A JSONArray value.
-     * @throws JSONException
-     *             If there is no value for the index. or if the value
-     *             is not a JSONArray
-     */
-    public JSONArray getJSONArray(int index){
-        Object o = get(index);
-        if (o != null && o instanceof JSONArray){
-            return (JSONArray) o;
-        }
-        throw new JSONException("JSONArray[" + index + "] is not a JSONArray.");
     }
 
     /**
@@ -1980,57 +494,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     /**
-     * Get the long value associated with an index.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The value.
-     * @throws JSONException
-     *             If the key is not found or if the value cannot be
-     *             converted to a number.
-     */
-    public long getLong(int index){
-        Object o = get(index);
-        if (o != null){
-            return o instanceof Number ? ((Number) o).longValue() : (long) getDouble(index);
-        }
-        throw new JSONException("JSONArray[" + index + "] is not a number.");
-    }
-
-    /**
-     * Get the string associated with an index.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return A string value.
-     * @throws JSONException
-     *             If there is no value for the index.
-     */
-    public String getString(int index){
-        Object o = get(index);
-        if (o != null){
-            return o.toString();
-        }
-        throw new JSONException("JSONArray[" + index + "] not found.");
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        int hashcode = 29;
-
-        for (Iterator e = elements.iterator(); e.hasNext();){
-            Object element = e.next();
-            hashcode += JSONUtils.hashCode(element);
-        }
-        return hashcode;
-    }
-
-    /**
      * Index of.
      *
      * @param o
@@ -2050,15 +513,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     @Override
     public boolean isEmpty(){
         return this.elements.isEmpty();
-    }
-
-    /**
-     * Checks if is a flag for XML processing.
-     *
-     * @return the a flag for XML processing
-     */
-    public boolean isExpandElements(){
-        return expandElements;
     }
 
     /**
@@ -2149,200 +603,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         }
 
         return new JSONArrayListIterator(index);
-    }
-
-    /**
-     * Get the optional object value associated with an index.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return An object value, or null if there is no object at that index.
-     */
-    public Object opt(int index){
-        return (index < 0 || index >= size()) ? null : this.elements.get(index);
-    }
-
-    /**
-     * Get the optional boolean value associated with an index. It returns false
-     * if there is no value at that index, or if the value is not Boolean.TRUE or
-     * the String "true".
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The truth.
-     */
-    public boolean optBoolean(int index){
-        return optBoolean(index, false);
-    }
-
-    /**
-     * Get the optional boolean value associated with an index. It returns the
-     * defaultValue if there is no value at that index or if it is not a Boolean
-     * or the String "true" or "false" (case insensitive).
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @param defaultValue
-     *            A boolean default.
-     * @return The truth.
-     */
-    public boolean optBoolean(int index,boolean defaultValue){
-        try{
-            return getBoolean(index);
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get the optional double value associated with an index. NaN is returned if
-     * there is no value for the index, or if the value is not a number and
-     * cannot be converted to a number.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The value.
-     */
-    public double optDouble(int index){
-        return optDouble(index, Double.NaN);
-    }
-
-    /**
-     * Get the optional double value associated with an index. The defaultValue
-     * is returned if there is no value for the index, or if the value is not a
-     * number and cannot be converted to a number.
-     *
-     * @param index
-     *            subscript
-     * @param defaultValue
-     *            The default value.
-     * @return The value.
-     */
-    public double optDouble(int index,double defaultValue){
-        try{
-            return getDouble(index);
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get the optional int value associated with an index. Zero is returned if
-     * there is no value for the index, or if the value is not a number and
-     * cannot be converted to a number.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The value.
-     */
-    public int optInt(int index){
-        return optInt(index, 0);
-    }
-
-    /**
-     * Get the optional int value associated with an index. The defaultValue is
-     * returned if there is no value for the index, or if the value is not a
-     * number and cannot be converted to a number.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @param defaultValue
-     *            The default value.
-     * @return The value.
-     */
-    public int optInt(int index,int defaultValue){
-        try{
-            return getInt(index);
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get the optional JSONArray associated with an index.
-     *
-     * @param index
-     *            subscript
-     * @return A JSONArray value, or null if the index has no value, or if the
-     *         value is not a JSONArray.
-     */
-    public JSONArray optJSONArray(int index){
-        Object o = opt(index);
-        return o instanceof JSONArray ? (JSONArray) o : null;
-    }
-
-    /**
-     * Get the optional JSONObject associated with an index. Null is returned if
-     * the key is not found, or null if the index has no value, or if the value
-     * is not a JSONObject.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return A JSONObject value.
-     */
-    public JSONObject optJSONObject(int index){
-        Object o = opt(index);
-        return o instanceof JSONObject ? (JSONObject) o : null;
-    }
-
-    /**
-     * Get the optional long value associated with an index. Zero is returned if
-     * there is no value for the index, or if the value is not a number and
-     * cannot be converted to a number.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return The value.
-     */
-    public long optLong(int index){
-        return optLong(index, 0);
-    }
-
-    /**
-     * Get the optional long value associated with an index. The defaultValue is
-     * returned if there is no value for the index, or if the value is not a
-     * number and cannot be converted to a number.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @param defaultValue
-     *            The default value.
-     * @return The value.
-     */
-    public long optLong(int index,long defaultValue){
-        try{
-            return getLong(index);
-        }catch (Exception e){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Get the optional string value associated with an index. It returns an
-     * empty string if there is no value at that index. If the value is not a
-     * string and is not null, then it is coverted to a string.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @return A String value.
-     */
-    public String optString(int index){
-        return optString(index, "");
-    }
-
-    /**
-     * Get the optional string associated with an index. The defaultValue is
-     * returned if the key is not found.
-     *
-     * @param index
-     *            The index must be between 0 and size() - 1.
-     * @param defaultValue
-     *            The default value.
-     * @return A String value.
-     */
-    public String optString(int index,String defaultValue){
-        Object o = opt(index);
-        return o != null ? o.toString() : defaultValue;
     }
 
     /**
@@ -2451,16 +711,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     }
 
     /**
-     * 设置 a flag for XML processing.
-     *
-     * @param expandElements
-     *            the new a flag for XML processing
-     */
-    public void setExpandElements(boolean expandElements){
-        this.expandElements = expandElements;
-    }
-
-    /**
      * Get the number of elements in the JSONArray, included nulls.
      *
      * @return The length (or size).
@@ -2504,29 +754,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
     @Override
     public Object[] toArray(Object[] array){
         return elements.toArray(array);
-    }
-
-    /**
-     * Produce a JSONObject by combining a JSONArray of names with the values of
-     * this JSONArray.
-     *
-     * @param names
-     *            A JSONArray containing a list of key strings. These will be
-     *            paired with the values.
-     * @return A JSONObject, or null if there are no names or if this JSONArray
-     *         has no values.
-     * @throws JSONException
-     *             If any of the names are null.
-     */
-    public JSONObject toJSONObject(JSONArray names){
-        if (names == null || names.size() == 0 || size() == 0){
-            return null;
-        }
-        JSONObject jo = new JSONObject();
-        for (int i = 0; i < names.size(); i++){
-            jo.element(names.getString(i), this.opt(i), new JsonConfig());
-        }
-        return jo;
     }
 
     /**
@@ -2593,22 +820,6 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
         return this;
     }
 
-    /**
-     * Append an object value. This increases the array's length by one.
-     *
-     * @param value
-     *            An object value. The value should be a Boolean, Double,
-     *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
-     *            JSONString or the JSONNull object.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     */
-    private JSONArray _addValue(Object value,JsonConfig jsonConfig){
-        this.elements.add(value);
-        return this;
-    }
-
     //---------------------------------------------------------------
 
     /**
@@ -2622,8 +833,126 @@ public final class JSONArray extends AbstractJSON implements JSON,List,Comparabl
      *            the json config
      * @return this.
      */
-    private JSONArray addValue(Object value,JsonConfig jsonConfig){
-        return _addValue(ProcessValueUtil.processArrayValue(value, jsonConfig), jsonConfig);
+    JSONArray addValue(Object value,JsonConfig jsonConfig){
+        this.elements.add(ProcessValueUtil.processArrayValue(value, jsonConfig));
+        return this;
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (obj == this){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
+
+        if (!(obj instanceof JSONArray)){
+            return false;
+        }
+
+        JSONArray other = (JSONArray) obj;
+
+        if (other.size() != size()){
+            return false;
+        }
+
+        int max = size();
+        for (int i = 0; i < max; i++){
+            Object o1 = get(i);
+            Object o2 = other.get(i);
+
+            // handle nulls
+            if (JSONNull.getInstance().equals(o1)){
+                if (JSONNull.getInstance().equals(o2)){
+                    continue;
+                }
+                return false;
+            }
+            if (JSONNull.getInstance().equals(o2)){
+                return false;
+            }
+
+            if (o1 instanceof JSONArray && o2 instanceof JSONArray){
+                JSONArray e = (JSONArray) o1;
+                JSONArray a = (JSONArray) o2;
+                if (!a.equals(e)){
+                    return false;
+                }
+            }else{
+                if (o1 instanceof String && o2 instanceof JSONFunction){
+                    if (!o1.equals(String.valueOf(o2))){
+                        return false;
+                    }
+                }else if (o1 instanceof JSONFunction && o2 instanceof String){
+                    if (!o2.equals(String.valueOf(o1))){
+                        return false;
+                    }
+                }else if (o1 instanceof JSONObject && o2 instanceof JSONObject){
+                    if (!o1.equals(o2)){
+                        return false;
+                    }
+                }else if (o1 instanceof JSONArray && o2 instanceof JSONArray){
+                    if (!o1.equals(o2)){
+                        return false;
+                    }
+                }else if (o1 instanceof JSONFunction && o2 instanceof JSONFunction){
+                    if (!o1.equals(o2)){
+                        return false;
+                    }
+                }else{
+                    if (o1 instanceof String){
+                        if (!o1.equals(String.valueOf(o2))){
+                            return false;
+                        }
+                    }else if (o2 instanceof String){
+                        if (!o2.equals(String.valueOf(o1))){
+                            return false;
+                        }
+                    }else{
+                        Morpher m1 = JSONUtils.getMorpherRegistry().getMorpherFor(o1.getClass());
+                        Morpher m2 = JSONUtils.getMorpherRegistry().getMorpherFor(o2.getClass());
+                        if (m1 != null && m1 != IdentityObjectMorpher.getInstance()){
+                            if (!o1.equals(JSONUtils.getMorpherRegistry().morph(o1.getClass(), o2))){
+                                return false;
+                            }
+                        }else if (m2 != null && m2 != IdentityObjectMorpher.getInstance()){
+                            if (!JSONUtils.getMorpherRegistry().morph(o1.getClass(), o1).equals(o2)){
+                                return false;
+                            }
+                        }else{
+                            if (!o1.equals(o2)){
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
+    @Override
+    public int hashCode(){
+        int hashcode = 29;
+
+        for (Iterator e = elements.iterator(); e.hasNext();){
+            Object element = e.next();
+            hashcode += JSONUtils.hashCode(element);
+        }
+        return hashcode;
     }
 
     /**

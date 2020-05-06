@@ -31,16 +31,8 @@ import com.feilong.json.JsonUtil;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 
-/**
- * The Class JsonUtilToBeanTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToBeanTest{
 
-    /**
-     * Test to bean.
-     */
     @Test
     public void testToBean(){
         User user = JsonUtil.toBean("{'password':'123456','name':'feilong','money':'99999999.00','loves':['桔子', '香蕉']}", User.class);

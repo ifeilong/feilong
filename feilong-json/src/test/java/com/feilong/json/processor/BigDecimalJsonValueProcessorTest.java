@@ -17,15 +17,15 @@ package com.feilong.json.processor;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.processor.BigDecimalJsonValueProcessor;
-import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 
@@ -39,7 +39,7 @@ public class BigDecimalJsonValueProcessorTest extends AbstractTest{
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setIncludes("money");
 
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        assertEquals("{\"money\": \"99999999.00\"}", JsonUtil.format(user, jsonFormatConfig));
     }
 
     @Test

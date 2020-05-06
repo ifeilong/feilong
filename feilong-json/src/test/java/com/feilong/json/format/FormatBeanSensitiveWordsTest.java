@@ -25,20 +25,10 @@ import com.feilong.test.AbstractTest;
 
 public class FormatBeanSensitiveWordsTest extends AbstractTest{
 
-    /**
-     * Name1.
-     */
     @Test
     public void test(){
         BeanWithSensitiveWords beanWithSensitiveWords = new BeanWithSensitiveWords("34567889", "sadadad&^%", "567");
         beanWithSensitiveWords.setCvv2("456");
-
-        LOGGER.debug(JsonUtil.format(beanWithSensitiveWords));
-
-        //maven install , 顺序会有问题
-        //        assertEquals(
-        //                        "{\"pattern\":\"34567889\",\"cvv\":\"******\",\"cvv2\":\"******\",\"key\":\"******\"}",
-        //                        JsonUtil.format(beanWithSensitiveWords, 0, 0));
 
         String result = JsonUtil.format(beanWithSensitiveWords, 0, 0);
 

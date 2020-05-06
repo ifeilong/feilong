@@ -72,6 +72,8 @@ public class MorphUtils{
         registerStandardObjectArrayMorphers(morpherRegistry);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Registers morphers for arrays of wrappers and String with standard default
      * values.<br>
@@ -92,7 +94,7 @@ public class MorphUtils{
      * @param morpherRegistry
      *            the morpher registry
      */
-    public static void registerStandardObjectArrayMorphers(MorpherRegistry morpherRegistry){
+    private static void registerStandardObjectArrayMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new BooleanObjectMorpher(Boolean.FALSE)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new CharacterObjectMorpher(new Character('\0'))));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(StringMorpher.getInstance()));
@@ -126,7 +128,7 @@ public class MorphUtils{
      * @param morpherRegistry
      *            the morpher registry
      */
-    public static void registerStandardObjectMorphers(MorpherRegistry morpherRegistry){
+    private static void registerStandardObjectMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanObjectMorpher(Boolean.FALSE));
         morpherRegistry.registerMorpher(new CharacterObjectMorpher(new Character('\0')));
         morpherRegistry.registerMorpher(StringMorpher.getInstance());
@@ -157,7 +159,7 @@ public class MorphUtils{
      * @param morpherRegistry
      *            the morpher registry
      */
-    public static void registerStandardPrimitiveArrayMorphers(MorpherRegistry morpherRegistry){
+    private static void registerStandardPrimitiveArrayMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanArrayMorpher(false));
         morpherRegistry.registerMorpher(new CharArrayMorpher('\0'));
         morpherRegistry.registerMorpher(new ByteArrayMorpher((byte) 0));
@@ -184,7 +186,7 @@ public class MorphUtils{
      * @param morpherRegistry
      *            the morpher registry
      */
-    public static void registerStandardPrimitiveMorphers(MorpherRegistry morpherRegistry){
+    private static void registerStandardPrimitiveMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanMorpher(false));
         morpherRegistry.registerMorpher(new CharMorpher('\0'));
         morpherRegistry.registerMorpher(new ByteMorpher((byte) 0));

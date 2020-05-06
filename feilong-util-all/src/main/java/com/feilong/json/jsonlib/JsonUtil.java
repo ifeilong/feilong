@@ -890,7 +890,6 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
-     * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
      * @see com.feilong.lib.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
      * @deprecated pls use {@link com.feilong.json.JsonUtil} just change packageName , since 3.0.0
