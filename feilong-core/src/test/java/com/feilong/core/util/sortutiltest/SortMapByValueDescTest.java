@@ -15,15 +15,12 @@
  */
 package com.feilong.core.util.sortutiltest;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 import java.util.Set;
@@ -37,11 +34,6 @@ import org.junit.Test;
  */
 public class SortMapByValueDescTest{
 
-    private static final Map<String, String> SORTMAP_BYVALUEDESC_MAP = toMap(getResourceBundle("messages/sortMapByValueDesc"));
-
-    /**
-     * Test sort by value desc.
-     */
     @Test
     public void testSortByValueDesc(){
         Map<String, Integer> map = newLinkedHashMap();
@@ -50,17 +42,6 @@ public class SortMapByValueDescTest{
         map.put("b", 8);
 
         assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "b"));
-    }
-
-    @Test
-    public void testSortByValueDesc1(){
-        sortMapByValueDesc(SORTMAP_BYVALUEDESC_MAP);
-    }
-
-    @Test
-    public void testSortByValueDesc12(){
-        Map<String, Integer> map = toMap(SORTMAP_BYVALUEDESC_MAP, Integer.class);
-        sortMapByValueDesc(map);
     }
 
     @Test

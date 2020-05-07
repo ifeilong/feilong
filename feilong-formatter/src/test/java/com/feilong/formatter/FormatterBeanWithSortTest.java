@@ -26,11 +26,6 @@ import org.junit.Test;
 import com.feilong.store.member.Person;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
- */
 public class FormatterBeanWithSortTest extends AbstractTest{
 
     @Test
@@ -41,7 +36,6 @@ public class FormatterBeanWithSortTest extends AbstractTest{
 
     //---------------------------------------------------------------
     @Test
-    
     public final void testFormatToSimpleTable11(){
         assertEquals(EMPTY, formatToSimpleTable(null, "name"));
     }

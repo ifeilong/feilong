@@ -164,7 +164,6 @@ public class SimpleTableFormatter extends AbstractFormatter{
         Date beginDate = now();
 
         //---------------------------------------------------------------
-
         List<Object[]> rows = combinRowsData(columnTitles, dataList);
         if (isNullOrEmpty(rows)){
             return EMPTY;
@@ -172,24 +171,19 @@ public class SimpleTableFormatter extends AbstractFormatter{
 
         //---------------------------------------------------------------
         int[] colWidths = ColumnMaxWidthsBuilder.build(rows);
-
         if (null != columnTitles){
             insertSplitorLine(rows, colWidths);
         }
 
         //---------------------------------------------------------------
         StringBuilder sb = new StringBuilder();
-
         for (Object[] cells : rows){
             sb.append(formatRowInfo(cells, colWidths)).append(lineSeparator());
         }
-
         //---------------------------------------------------------------
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("format use time:[{}]", formatDuration(beginDate));
         }
-
         return lineSeparator() + sb.toString();
     }
 

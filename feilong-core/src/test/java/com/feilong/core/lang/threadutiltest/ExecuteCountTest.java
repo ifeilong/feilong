@@ -15,23 +15,15 @@
  */
 package com.feilong.core.lang.threadutiltest;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
 
-/**
- * The Class ExecuteCountTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.3
- */
 public class ExecuteCountTest{
 
-    /**
-     * Test execute.
-     */
     @Test
-    
     public void testExecute(){
         ThreadUtil.execute(new Runnable(){
 
@@ -40,6 +32,8 @@ public class ExecuteCountTest{
 
             }
         }, 1);
+
+        assertTrue(true);
     }
     //---------------------------------------------------------
 
@@ -47,7 +41,6 @@ public class ExecuteCountTest{
      * Test execute null list.
      */
     @Test(expected = NullPointerException.class)
-    
     public void testExecuteNullList(){
         ThreadUtil.execute(null, 100);
     }
@@ -58,7 +51,6 @@ public class ExecuteCountTest{
      * Test execute invalid thread count.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testExecuteInvalidThreadCount(){
         ThreadUtil.execute(new Runnable(){
 
@@ -73,7 +65,6 @@ public class ExecuteCountTest{
      * Test execute invalid thread count 1.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testExecuteInvalidThreadCount1(){
         ThreadUtil.execute(new Runnable(){
 

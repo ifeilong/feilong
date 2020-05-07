@@ -21,6 +21,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -72,21 +73,16 @@ public class ForEachTest{
         assertThat(liubei30, hasProperty("age", is(88)));
     }
 
-    /**
-     * Test null iterable.
-     */
-    //----------------
     @Test
     public void testNullIterable(){
         CollectionsUtil.forEach(null, null, 88);
+        assertTrue(true);
     }
 
-    /**
-     * Test empty iterable.
-     */
     @Test
     public void testEmptyIterable(){
         CollectionsUtil.forEach(emptyList(), null, 88);
+        assertTrue(true);
     }
 
     /**

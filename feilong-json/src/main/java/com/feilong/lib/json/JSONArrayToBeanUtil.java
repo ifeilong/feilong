@@ -336,13 +336,15 @@ public class JSONArrayToBeanUtil{
      */
     private static void processArrayDimensions(JSONArray jsonArray,List dims,int index){
         if (dims.size() <= index){
-            dims.add(new Integer(jsonArray.size()));
+            dims.add(jsonArray.size());
         }else{
             int i = ((Integer) dims.get(index)).intValue();
             if (jsonArray.size() > i){
-                dims.set(index, new Integer(jsonArray.size()));
+                dims.set(index, jsonArray.size());
             }
         }
+
+        //---------------------------------------------------------------
         for (Iterator i = jsonArray.iterator(); i.hasNext();){
             Object item = i.next();
             if (item instanceof JSONArray){

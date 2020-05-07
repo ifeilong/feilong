@@ -26,12 +26,6 @@ import com.feilong.io.ioreaderutil.IOReaderUtilSuiteTests;
 import com.feilong.io.iowriteutil.IOWriteUtilSuiteTests;
 import com.feilong.io.readerutil.ReaderUtilSuiteTests;
 
-/**
- * The Class FeiLongIoSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 FilenameUtilSuiteTests.class,
@@ -41,7 +35,9 @@ import com.feilong.io.readerutil.ReaderUtilSuiteTests;
 
                 IOWriteUtilSuiteTests.class,
                 IOReaderUtilSuiteTests.class,
-                ReaderUtilSuiteTests.class
+                ReaderUtilSuiteTests.class,
+
+                MimeTypeUtilTest.class,
 
 })
 

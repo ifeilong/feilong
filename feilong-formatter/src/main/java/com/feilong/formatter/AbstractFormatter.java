@@ -93,16 +93,13 @@ abstract class AbstractFormatter{
         }
         //---------------------------------------------------------------
         List<Object[]> dataList = new ArrayList<>(map.size());
-
         Map<K, V> useMap = sortMapByKeyAsc(map);//不影响原map
 
         String separator = SPACE + ":" + SPACE;
-
         //---------------------------------------------------------------
         for (Map.Entry<K, V> entry : useMap.entrySet()){
             K key = entry.getKey();
             V value = entry.getValue();
-            //StringUtils.leftPad(ConvertUtil.toString(key), maxKeyLength)
             dataList.add(toArray(ConvertUtil.toString(key), separator, value));
         }
         return format(null, dataList);

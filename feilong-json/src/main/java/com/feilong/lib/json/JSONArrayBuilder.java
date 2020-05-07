@@ -141,7 +141,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            Number n = JSONUtils.transformNumber(new Byte(array[i]));
+            Number n = JSONUtils.transformNumber(array[i]);
             jsonArray.addValue(n, jsonConfig);
         }
 

@@ -16,11 +16,12 @@
 package com.feilong.core.util.maputiltest;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -71,6 +72,7 @@ public class PutIfValueNotNullTest{
     @Test
     public void testPutIfValueNotNullNullMap(){
         MapUtil.putIfValueNotNull(null, "1000001", 5);
+        assertTrue(true);
     }
 
 }

@@ -41,8 +41,7 @@ public class DefaultTransformerTest extends AbstractTest{
      * Test format to simple table 2.
      */
     @Test
-    
-    public void testFormatToSimpleTable2(){
+    public void test(){
         User user = new User();
         user.setDate(now());
         user.setAge(50);

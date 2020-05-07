@@ -75,8 +75,7 @@ public class MorphUtils{
     //---------------------------------------------------------------
 
     /**
-     * Registers morphers for arrays of wrappers and String with standard default
-     * values.<br>
+     * Registers morphers for arrays of wrappers and String with standard default values.<br>
      * <ul>
      * <li>Boolean - Boolean.FALSE</li>
      * <li>Character - new Character('\0')</li>
@@ -95,15 +94,15 @@ public class MorphUtils{
      *            the morpher registry
      */
     private static void registerStandardObjectArrayMorphers(MorpherRegistry morpherRegistry){
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new BooleanObjectMorpher(Boolean.FALSE)));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new CharacterObjectMorpher(new Character('\0'))));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new BooleanObjectMorpher(false)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new CharacterObjectMorpher('\0')));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(StringMorpher.getInstance()));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Byte.class, new Byte((byte) 0))));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Short.class, new Short((short) 0))));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Integer.class, new Integer(0))));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Long.class, new Long(0))));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Float.class, new Float(0))));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Double.class, new Double(0))));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Byte.class, (byte) 0)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Short.class, (short) 0)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Integer.class, 0)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Long.class, 0L)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Float.class, 0f)));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Double.class, 0d)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigInteger.class, BigInteger.ZERO)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigDecimal.class, BigDecimal.ZERO)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(ClassMorpher.getInstance()));
@@ -130,14 +129,14 @@ public class MorphUtils{
      */
     private static void registerStandardObjectMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanObjectMorpher(Boolean.FALSE));
-        morpherRegistry.registerMorpher(new CharacterObjectMorpher(new Character('\0')));
+        morpherRegistry.registerMorpher(new CharacterObjectMorpher('\0'));
         morpherRegistry.registerMorpher(StringMorpher.getInstance());
-        morpherRegistry.registerMorpher(new NumberMorpher(Byte.class, new Byte((byte) 0)));
-        morpherRegistry.registerMorpher(new NumberMorpher(Short.class, new Short((short) 0)));
-        morpherRegistry.registerMorpher(new NumberMorpher(Integer.class, new Integer(0)));
-        morpherRegistry.registerMorpher(new NumberMorpher(Long.class, new Long(0)));
-        morpherRegistry.registerMorpher(new NumberMorpher(Float.class, new Float(0)));
-        morpherRegistry.registerMorpher(new NumberMorpher(Double.class, new Double(0)));
+        morpherRegistry.registerMorpher(new NumberMorpher(Byte.class, (byte) 0));
+        morpherRegistry.registerMorpher(new NumberMorpher(Short.class, (short) 0));
+        morpherRegistry.registerMorpher(new NumberMorpher(Integer.class, 0));
+        morpherRegistry.registerMorpher(new NumberMorpher(Long.class, 0L));
+        morpherRegistry.registerMorpher(new NumberMorpher(Float.class, 0f));
+        morpherRegistry.registerMorpher(new NumberMorpher(Double.class, 0d));
         morpherRegistry.registerMorpher(new NumberMorpher(BigInteger.class, BigInteger.ZERO));
         morpherRegistry.registerMorpher(new NumberMorpher(BigDecimal.class, BigDecimal.ZERO));
         morpherRegistry.registerMorpher(ClassMorpher.getInstance());

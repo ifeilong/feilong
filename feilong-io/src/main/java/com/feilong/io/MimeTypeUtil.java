@@ -76,9 +76,8 @@ public final class MimeTypeUtil{
      * 获得 content type by file name.
      * 
      * <p>
-     * <b>Very incomplete function.<br>
-     * As of Java 7, html, pdf and jpeg extensions 返回 正确的 mime-type,但是js 和 css 返回 null!
-     * </b>
+     * <b>Very incomplete function.</b><br>
+     * As of Java 7, html, pdf and jpeg extensions 返回正确的 mime-type,但是js 和 css 返回 null!
      * </p>
      * 
      * <p>

@@ -16,27 +16,23 @@
 package com.feilong.io;
 
 import static com.feilong.io.MimeTypeUtil.getContentTypeByFileName;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.feilong.io.entity.MimeType;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class MimeTypeUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.8
- */
 public class MimeTypeUtilTest extends AbstractTest{
 
     @Test
-    public void testGetContentTypeByFileName(){
+    public void test(){
         LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.mkv"));
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.oxt"));
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.jpg"));
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.js"));
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.css"));
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.ppt"));
-        LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.pdf"));
+
+        assertEquals(MimeType.OXT.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.oxt"));
+        assertEquals(MimeType.JPG.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.jpg"));
+        assertEquals(MimeType.JS.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.js"));
+        assertEquals(MimeType.CSS.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.css"));
+        assertEquals(MimeType.PDF.getMime(), getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.pdf"));
     }
 }

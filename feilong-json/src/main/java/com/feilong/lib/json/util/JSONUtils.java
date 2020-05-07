@@ -745,14 +745,17 @@ public final class JSONUtils{
     public static Number transformNumber(Number input){
         if (input instanceof Float){
             return new Double(input.toString());
-        }else if (input instanceof Short){
-            return new Integer(input.intValue());
-        }else if (input instanceof Byte){
-            return new Integer(input.intValue());
-        }else if (input instanceof Long){
+        }
+        if (input instanceof Short){
+            return input.intValue();
+        }
+        if (input instanceof Byte){
+            return input.intValue();
+        }
+        if (input instanceof Long){
             Long max = new Long(Integer.MAX_VALUE);
             if (input.longValue() <= max.longValue() && input.longValue() >= Integer.MIN_VALUE){
-                return new Integer(input.intValue());
+                return input.intValue();
             }
         }
 

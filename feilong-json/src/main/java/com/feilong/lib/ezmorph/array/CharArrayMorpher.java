@@ -137,7 +137,7 @@ public final class CharArrayMorpher extends AbstractArrayMorpher{
             CharMorpher morpher = isUseDefault() ? new CharMorpher(defaultValue) : new CharMorpher();
             if (dims == 1){
                 for (int index = 0; index < length; index++){
-                    Array.set(result, index, new Character(morpher.morph(Array.get(array, index))));
+                    Array.set(result, index, morpher.morph(Array.get(array, index)));
                 }
             }else{
                 for (int index = 0; index < length; index++){

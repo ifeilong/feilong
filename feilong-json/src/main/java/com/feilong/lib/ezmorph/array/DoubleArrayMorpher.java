@@ -137,7 +137,7 @@ public final class DoubleArrayMorpher extends AbstractArrayMorpher{
             DoubleMorpher morpher = isUseDefault() ? new DoubleMorpher(defaultValue) : new DoubleMorpher();
             if (dims == 1){
                 for (int index = 0; index < length; index++){
-                    Array.set(result, index, new Double(morpher.morph(Array.get(array, index))));
+                    Array.set(result, index, morpher.morph(Array.get(array, index)));
                 }
             }else{
                 for (int index = 0; index < length; index++){

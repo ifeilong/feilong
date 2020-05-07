@@ -15,21 +15,19 @@
  */
 package com.feilong.core.lang.threadutiltest;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.7
- */
 public class SleepTest extends AbstractTest{
 
     @Test
     public void testNegative1(){
         ThreadUtil.sleep(1);
+        assertTrue(true);
     }
 
     //---------------------------------------------------------------
