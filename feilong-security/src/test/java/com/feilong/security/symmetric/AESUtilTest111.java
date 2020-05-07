@@ -60,7 +60,7 @@ public class AESUtilTest111 extends AbstractSecurityTest{
      * Test encrypt.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEncrypt(){
         String SYMMETRIC_TYPE_KEY = "xhf6Z6I3JePpm8pgYa5m6w==";
         SymmetricEncryption symmetricEncryption1 = new SymmetricEncryption(SYMMETRIC_TYPE, SYMMETRIC_TYPE_KEY);

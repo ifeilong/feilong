@@ -40,7 +40,7 @@ public class FindWithPredicateTest{
      * Test find2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//

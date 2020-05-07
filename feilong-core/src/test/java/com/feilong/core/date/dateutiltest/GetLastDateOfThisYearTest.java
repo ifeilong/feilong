@@ -34,7 +34,7 @@ public class GetLastDateOfThisYearTest{
      * Test get last date of this year.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testGetLastDateOfThisYear(){
         assertEquals(
                         toDate("2016-12-31 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),

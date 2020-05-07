@@ -42,7 +42,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect3.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testCollect3(){
         List<User> list = toList(//
@@ -68,7 +68,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect with null element.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testCollectWithNullElement(){
         List<User> list = toList(//
@@ -83,7 +83,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect with property name.
      */
-    @SuppressWarnings("static-method")
+    
     //---------
     @Test
     public void testCollectWithPropertyName(){
@@ -97,7 +97,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect with property name no from name.
      */
-    @SuppressWarnings("static-method")
+    
     //---------
     @Test(expected = BeanOperationException.class)
     public void testCollectWithPropertyNameNoFromName(){
@@ -110,7 +110,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect with property name no to name.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = BeanOperationException.class)
     public void testCollectWithPropertyNameNoToName(){
         List<User> list = toList(//
@@ -124,7 +124,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect null iterable.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testCollectNullIterable(){
         assertEquals(null, CollectionsUtil.collect((List<Long>) null, User.class));
@@ -133,7 +133,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect empty iterable.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testCollectEmptyIterable(){
         assertEquals(emptyList(), CollectionsUtil.collect(new ArrayList<Long>(), User.class));
@@ -144,7 +144,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect null output list bean type.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = NullPointerException.class)
     public void testCollectNullOutputListBeanType(){
         CollectionsUtil.collect(new ArrayList<Long>(), (Class) null);

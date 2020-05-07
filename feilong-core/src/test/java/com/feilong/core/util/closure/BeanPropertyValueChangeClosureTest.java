@@ -35,7 +35,7 @@ public class BeanPropertyValueChangeClosureTest{
     /**
      * Test bean property value change closure test 1.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testBeanPropertyValueChangeClosureTest1(){
         User user = new User();
@@ -49,7 +49,7 @@ public class BeanPropertyValueChangeClosureTest{
     /**
      * Test bean property value change closure test.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testBeanPropertyValueChangeClosureTest(){
         BeanPropertyValueChangeClosure<User> beanPropertyValueChangeClosure = new BeanPropertyValueChangeClosure("name", 1);
@@ -61,7 +61,7 @@ public class BeanPropertyValueChangeClosureTest{
     /**
      * Test bean property value change closure test null.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = NullPointerException.class)
     public void testBeanPropertyValueChangeClosureTestNull(){
         new BeanPropertyValueChangeClosure<User>(null, 1);
@@ -70,7 +70,7 @@ public class BeanPropertyValueChangeClosureTest{
     /**
      * Test bean property value change closure test empty.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPropertyValueChangeClosureTestEmpty(){
         new BeanPropertyValueChangeClosure<User>("", 1);
@@ -79,7 +79,7 @@ public class BeanPropertyValueChangeClosureTest{
     /**
      * Test bean property value change closure test blank.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPropertyValueChangeClosureTestBlank(){
         new BeanPropertyValueChangeClosure<User>(" ", 1);

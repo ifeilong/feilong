@@ -47,7 +47,7 @@ public class ToDateTest{
      * Test to date null.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testToDateNull(){
         toDate(null, COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -56,7 +56,7 @@ public class ToDateTest{
      * Test to date empty.
      */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
+    
     public void testToDateEmpty(){
         toDate("", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -75,7 +75,7 @@ public class ToDateTest{
      * Test to date null pattern.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testToDateNullPattern(){
         toDate("2016-06-30 15:36", null);
     }
@@ -84,7 +84,7 @@ public class ToDateTest{
      * Test to date empty patterns.
      */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
+    
     public void testToDateEmptyPatterns(){
         toDate("2016-06-30 15:36");
     }
@@ -102,7 +102,7 @@ public class ToDateTest{
      */
     @Test(expected = IllegalArgumentException.class)
     //@Test()
-    @SuppressWarnings("static-method")
+    
     public void testToDate1(){
         toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -111,7 +111,7 @@ public class ToDateTest{
      * Test to date 2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testToDate2(){
         toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }

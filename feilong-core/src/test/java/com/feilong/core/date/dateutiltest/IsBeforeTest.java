@@ -30,7 +30,7 @@ import org.junit.Test;
 public class IsBeforeTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testIsBefore(){
         assertEquals(true, isBefore(toDate("2011-03-05", COMMON_DATE), toDate("2011-03-10", COMMON_DATE)));
         assertEquals(false, isBefore(toDate("2011-05-01", COMMON_DATE), toDate("2011-04-01", COMMON_DATE)));
@@ -40,7 +40,7 @@ public class IsBeforeTest{
      * Test is before null.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testIsBeforeNull(){
         isBefore(null, null);
     }
@@ -49,7 +49,7 @@ public class IsBeforeTest{
      * Test is before null when date.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testIsBeforeNullWhenDate(){
         isBefore(toDate("2011-05-01", COMMON_DATE), null);
     }
@@ -58,7 +58,7 @@ public class IsBeforeTest{
      * Test is before null date.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testIsBeforeNullDate(){
         assertEquals(false, isBefore(null, toDate("2011-04-01", COMMON_DATE)));
     }

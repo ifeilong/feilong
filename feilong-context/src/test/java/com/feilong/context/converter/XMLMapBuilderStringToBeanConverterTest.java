@@ -28,7 +28,7 @@ import com.feilong.core.bean.ConvertUtil;
 public class XMLMapBuilderStringToBeanConverterTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void convert(){
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + "<item>" + "<categoryId></categoryId>"
                         + "<title><![CDATA[test pro<duct name]]></title>" + "<price>0</price>" + "<listPrice>200000</listPrice>"

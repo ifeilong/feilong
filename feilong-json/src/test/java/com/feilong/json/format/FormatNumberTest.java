@@ -26,7 +26,7 @@ public class FormatNumberTest extends AbstractJsonTest{
      * Test json string2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testJsonString2(){
         LOGGER.debug(JsonUtil.format(1L));
         LOGGER.debug(JsonUtil.format(1));

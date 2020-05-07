@@ -30,7 +30,7 @@ public class ItemDtoJsonConverterTest{
      * Convert.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void convert(){
         ItemDto itemDto = new ItemDto();
         itemDto.setCity("上海");

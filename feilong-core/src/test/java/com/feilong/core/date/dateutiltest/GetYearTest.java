@@ -30,7 +30,7 @@ public class GetYearTest{
      * Test get year 1.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testGetYear1(){
         DateUtil.getYear(null);
     }

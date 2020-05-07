@@ -34,7 +34,7 @@ public class GenericTest extends AbstractTest{
      * Test generic test.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testGenericTest(){
         LOGGER.debug((String) getValue("jinxin", String.class));
         LOGGER.debug((String) getValue("jinxin", Integer.class));

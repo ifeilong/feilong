@@ -41,7 +41,7 @@ public class DefaultTransformerTest extends AbstractTest{
      * Test format to simple table 2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testFormatToSimpleTable2(){
         User user = new User();
         user.setDate(now());

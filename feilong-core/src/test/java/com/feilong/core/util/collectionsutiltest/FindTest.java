@@ -38,7 +38,7 @@ public class FindTest{
      * Test find.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testFind(){
         User zhangfei = new User("张飞", 23);
         User guanyu24 = new User("关羽", 24);

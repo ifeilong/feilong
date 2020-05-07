@@ -34,7 +34,7 @@ public class PagerParamsTest extends AbstractTest{
      * Test hash code.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 

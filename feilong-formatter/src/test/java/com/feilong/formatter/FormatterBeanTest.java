@@ -29,7 +29,7 @@ import com.feilong.test.AbstractTest;
 public class FormatterBeanTest extends AbstractTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public final void testFormatToSimpleTable1(){
         User user = new User();
         user.setAge(15);

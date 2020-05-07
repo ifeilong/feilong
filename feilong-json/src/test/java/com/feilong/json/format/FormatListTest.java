@@ -25,7 +25,7 @@ import com.feilong.json.JsonUtil;
 public class FormatListTest extends AbstractJsonTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testVector(){
         Vector<Integer> vector = new Vector<>();
         vector.add(1);

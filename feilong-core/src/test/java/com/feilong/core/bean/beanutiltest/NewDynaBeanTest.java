@@ -72,7 +72,7 @@ public class NewDynaBeanTest{
      * Test new dyna bean null map.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testNewDynaBeanNullMap(){
         BeanUtil.newDynaBean(null);
     }
@@ -81,7 +81,7 @@ public class NewDynaBeanTest{
      * Test new dyna bean map with null key.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testNewDynaBeanMapWithNullKey(){
         BeanUtil.newDynaBean(toMap((String) null, "feilong"));
     }
@@ -90,7 +90,7 @@ public class NewDynaBeanTest{
      * Test new dyna bean map with empty key.
      */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
+    
     public void testNewDynaBeanMapWithEmptyKey(){
         BeanUtil.newDynaBean(toMap("", "feilong"));
     }
@@ -99,7 +99,7 @@ public class NewDynaBeanTest{
      * Test new dyna bean map with blank key.
      */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
+    
     public void testNewDynaBeanMapWithBlankKey(){
         BeanUtil.newDynaBean(toMap("", "feilong"));
     }

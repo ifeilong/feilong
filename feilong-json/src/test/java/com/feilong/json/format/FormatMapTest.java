@@ -28,7 +28,7 @@ public class FormatMapTest extends AbstractJsonTest{
      * Test hashtable.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testHashtable(){
         Hashtable<String, Object> hashtable = new Hashtable<>();
         hashtable.put("a", "a");

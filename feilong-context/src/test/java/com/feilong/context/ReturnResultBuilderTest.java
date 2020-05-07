@@ -22,7 +22,7 @@ public class ReturnResultBuilderTest{
     /**
      * Test return result builder test null.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = NullPointerException.class)
     public void testReturnResultBuilderTestNull(){
         ReturnResultBuilder.buildFailureResult(null);
@@ -31,7 +31,7 @@ public class ReturnResultBuilderTest{
     /**
      * Test return result builder test empty.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = IllegalArgumentException.class)
     public void testReturnResultBuilderTestEmpty(){
         ReturnResultBuilder.buildFailureResult("");
@@ -40,7 +40,7 @@ public class ReturnResultBuilderTest{
     /**
      * Test return result builder test blank.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = IllegalArgumentException.class)
     public void testReturnResultBuilderTestBlank(){
         ReturnResultBuilder.buildFailureResult(" ");

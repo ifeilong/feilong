@@ -33,7 +33,7 @@ public class HttpConcatParamEqualsTest extends BaseHttpConcatTest{
     private static final String domain = "http://www.feilong.com";
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEqualsObject(){
         HttpConcatParam pagerParams1 = new HttpConcatParam();
 

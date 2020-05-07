@@ -28,7 +28,7 @@ import com.feilong.test.AbstractTest;
 
 public class PostTest extends AbstractTest{
 
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
@@ -38,7 +38,7 @@ public class PostTest extends AbstractTest{
     /**
      * Test get response body as string 1.
      */
-    @SuppressWarnings("static-method")
+    
     @Test
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084/post1";

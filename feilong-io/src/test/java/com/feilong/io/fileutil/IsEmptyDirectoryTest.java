@@ -34,7 +34,7 @@ public class IsEmptyDirectoryTest{
      * Checks if is empty directory.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void isEmptyDirectory(){
         // 不存在的文件
         try{

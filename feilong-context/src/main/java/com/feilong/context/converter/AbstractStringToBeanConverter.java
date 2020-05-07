@@ -91,7 +91,6 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
      * @return the string
      * @since 1.11.5
      */
-    @SuppressWarnings("static-method")
     protected String formatValue(String value){
         return value;
     }

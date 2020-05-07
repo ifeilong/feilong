@@ -38,7 +38,7 @@ public class PopulateBigDecimalTest{
      * Test populate null.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testPopulateNull(){
         User user = new User();
 
@@ -54,7 +54,7 @@ public class PopulateBigDecimalTest{
      * Test populate empty.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testPopulateEmpty(){
         User user = new User();
 
@@ -70,7 +70,7 @@ public class PopulateBigDecimalTest{
      * Test populate.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testPopulate(){
         User user = new User();
 

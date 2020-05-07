@@ -62,7 +62,7 @@ public class GetElementTest{
     /**
      * Test get element error index 1.
      */
-    @SuppressWarnings("static-method")
+    
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testGetElementErrorIndex1(){
         ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 5);

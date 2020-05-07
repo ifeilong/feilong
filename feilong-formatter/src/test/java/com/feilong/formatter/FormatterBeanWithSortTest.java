@@ -41,7 +41,7 @@ public class FormatterBeanWithSortTest extends AbstractTest{
 
     //---------------------------------------------------------------
     @Test
-    @SuppressWarnings("static-method")
+    
     public final void testFormatToSimpleTable11(){
         assertEquals(EMPTY, formatToSimpleTable(null, "name"));
     }

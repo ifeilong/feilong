@@ -25,7 +25,7 @@ import com.feilong.store.member.Person;
 public class GetFieldValueTest{
 
     @Test(expected = ReflectException.class)
-    @SuppressWarnings("static-method")
+    
     public void testBeanUtilNullFromBean222(){
 
         MethodUtil.invokeStaticMethod(FieldUtil.class, "getFieldValue", new Person(), "name11");

@@ -40,7 +40,7 @@ import com.feilong.store.member.Person;
 public class JsonHelperTest extends AbstractJsonTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void name(){
         String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
 
@@ -96,7 +96,7 @@ public class JsonHelperTest extends AbstractJsonTest{
      * 实体Bean转json串 void.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testgetJsonStr1(){
         Person ps = new Person();
         ps.setDateAttr(now());
@@ -114,7 +114,7 @@ public class JsonHelperTest extends AbstractJsonTest{
      * list转json串 void.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testgetJsonStr4(){
         Person ps = new Person();
         ps.setDateAttr(now());

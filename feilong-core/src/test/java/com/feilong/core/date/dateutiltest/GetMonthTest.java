@@ -30,7 +30,7 @@ public class GetMonthTest{
      * Test get month null date.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testGetMonthNullDate(){
         getMonth(null);
     }

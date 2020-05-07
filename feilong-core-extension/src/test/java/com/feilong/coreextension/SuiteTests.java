@@ -19,12 +19,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.coreextension.awt.ClipboardUtilTest;
 import com.feilong.coreextension.io.SerializableUtilTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
                 SerializableUtilTest.class,
+                ClipboardUtilTest.class,
 
         //
 })

@@ -15,25 +15,33 @@
  */
 package com.feilong.component;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
+import com.feilong.core.lang.ClassLoaderUtil;
+import com.feilong.io.IOReaderUtil;
 import com.feilong.test.AbstractTest;
 import com.feilong.velocity.VelocityUtil;
 
-//@ContextConfiguration(value = { "classpath:feilong-spring-DataFileEmailComponent.xml" })
 public class SpelTest extends AbstractTest{
 
+    private static final String CONTENT = IOReaderUtil
+                    .readToString(ClassLoaderUtil.getResourceAsStream("content.vm", SpelTest.class), UTF8);
+
+    //---------------------------------------------------------------
     @Test
     public void run(){
         String expressionString = "#{T(com.feilong.velocity.VelocityUtil).INSTANCE.parseTemplateWithClasspathResourceLoader('content.vm',null)}";
-        LOGGER.debug("" + SpelUtil.getTemplateValue(expressionString));
+        assertEquals(CONTENT, SpelUtil.getTemplateValue(expressionString));
 
     }
 
     @Test
-    public void ru1n(){
-        LOGGER.debug("{}", VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader("content.vm"));
-
+    public void run1(){
+        String parseTemplateWithClasspathResourceLoader = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader("content.vm");
+        assertEquals(CONTENT, SpelUtil.getTemplateValue(parseTemplateWithClasspathResourceLoader));
     }
 
 }

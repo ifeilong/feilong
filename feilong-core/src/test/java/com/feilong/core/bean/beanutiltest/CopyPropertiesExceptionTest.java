@@ -33,7 +33,7 @@ public class CopyPropertiesExceptionTest{
      * Test copy property from bean not exist properties.
      */
     @Test(expected = BeanOperationException.class)
-    @SuppressWarnings("static-method")
+    
     public void testCopyPropertyFromBeanNotExistProperties(){
         User user = new User();
         user.setId(5L);
@@ -46,7 +46,7 @@ public class CopyPropertiesExceptionTest{
      * Test bean util null to bean.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testBeanUtilNullToBean(){
         BeanUtil.copyProperties(null, new Person());
     }
@@ -55,7 +55,7 @@ public class CopyPropertiesExceptionTest{
      * Test bean util null from bean.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testBeanUtilNullFromBean(){
         BeanUtil.copyProperties(new Person(), null);
     }

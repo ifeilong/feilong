@@ -34,7 +34,7 @@ public class GetLastDateOfThisMonthTest{
      * Test get last date of this month.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testGetLastDateOfThisMonth(){
         assertEquals(
                         toDate("2016-08-31 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
@@ -52,7 +52,7 @@ public class GetLastDateOfThisMonthTest{
      * Test get last date of this month null.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testGetLastDateOfThisMonthNull(){
         getLastDateOfThisMonth(null);
     }

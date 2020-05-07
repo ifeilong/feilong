@@ -30,7 +30,7 @@ public class FormatJsonMapTest extends AbstractJsonTest{
      * Test json string 11.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testJsonString11(){
         Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
         LOGGER.debug("{}", JsonUtil.format(map));
@@ -40,7 +40,7 @@ public class FormatJsonMapTest extends AbstractJsonTest{
      * Test json string2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testJsonMap(){
         Map<String, String> nullMap = null;
         LOGGER.debug(JsonUtil.format(nullMap));

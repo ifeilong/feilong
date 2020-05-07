@@ -33,7 +33,7 @@ public class GetSecondTest{
      * Test get second null date.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testGetSecondNullDate(){
         getSecond(null);
     }
@@ -42,7 +42,7 @@ public class GetSecondTest{
      * Gets the second.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testGetSecond(){
         assertEquals(23, getSecond(toDate("2013-09-15 01:15:23", COMMON_DATE_AND_TIME)));
     }

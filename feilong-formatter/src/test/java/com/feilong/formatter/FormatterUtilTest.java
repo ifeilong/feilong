@@ -29,7 +29,7 @@ import com.feilong.test.AbstractTest;
 public class FormatterUtilTest extends AbstractTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public final void test(){
         List<Address> list = toList(
                         new Address("china", "shanghai", "216000", "wenshui wanrong.lu 888"),

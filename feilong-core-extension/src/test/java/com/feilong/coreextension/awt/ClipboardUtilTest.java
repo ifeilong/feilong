@@ -15,28 +15,14 @@
  */
 package com.feilong.coreextension.awt;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class ClipboardUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ClipboardUtilTest extends AbstractTest{
 
-    /**
-     * Test set clipboard contents.
-     */
-    @Test
-    public void testSetClipboardContents(){
-        LOGGER.debug(ClipboardUtil.getClipboardContent());
-    }
-
-    /**
-     * Test.
-     */
     @Test
     public void test(){
         String aString = "L,M,S,XL,XS,XXL";
@@ -47,7 +33,13 @@ public class ClipboardUtilTest extends AbstractTest{
             sb.append("<item>" + string + "</item>");
         }
         sb.append("</enum>");
+
+        //---------------------------------------------------------------
         ClipboardUtil.setClipboardContent(sb.toString());
-        LOGGER.debug(sb.toString());
+
+        String clipboardContent = ClipboardUtil.getClipboardContent();
+        LOGGER.debug(clipboardContent);
+
+        assertEquals(sb.toString(), clipboardContent);
     }
 }

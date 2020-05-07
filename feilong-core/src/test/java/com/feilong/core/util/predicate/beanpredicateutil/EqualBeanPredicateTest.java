@@ -34,7 +34,7 @@ public class EqualBeanPredicateTest{
      * Test find2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
@@ -50,7 +50,7 @@ public class EqualBeanPredicateTest{
      * Test equal predicate.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicate(){
         User user = new User(2L);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(2L), "id");
@@ -58,7 +58,7 @@ public class EqualBeanPredicateTest{
     }
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicate1(){
         User user = new User(2L);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(1L), "id");
@@ -68,7 +68,7 @@ public class EqualBeanPredicateTest{
     //---------------------------------------------------------------------------
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicateNullMap(){
         assertEquals(PredicateUtils.nullPredicate(), BeanPredicateUtil.equalPredicate((User) null));
     }

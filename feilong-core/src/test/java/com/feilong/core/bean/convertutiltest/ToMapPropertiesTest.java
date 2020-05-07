@@ -19,9 +19,9 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 import java.util.Properties;
@@ -29,18 +29,8 @@ import java.util.Properties;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
-/**
- * The Class ConvertUtilToMapPropertiesTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToMapPropertiesTest{
 
-    //*********************com.feilong.core.bean.ConvertUtil.toMap(Properties)*************
-
-    /**
-     * Test to properties 1.
-     */
     @Test
     public void testToProperties1(){
         Properties properties = new Properties();
@@ -65,12 +55,9 @@ public class ToMapPropertiesTest{
         assertEquals(emptyMap(), toMap(new Properties()));
     }
 
-    /**
-     * Test to map null properties.
-     */
     @Test
     public void testToMapNullProperties(){
-        toMap((Properties) null);
+        assertEquals(emptyMap(), toMap((Properties) null));
     }
 
     /**

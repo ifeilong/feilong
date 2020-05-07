@@ -24,14 +24,13 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-//@Ignore
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 CloneBeanTest.class,
                 CopyPropertiesTest.class,
                 CopyPropertiesExceptionTest.class,
 
-                //GetPropertyExceptionTest.class,
+                GetPropertyExceptionTest.class,
 
                 NewDynaBeanTest.class,
                 PopulateAliasBeanTest.class,

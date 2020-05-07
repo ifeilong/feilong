@@ -41,7 +41,7 @@ public class EqualMapPredicateTest{
      * Test find2.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
@@ -59,7 +59,7 @@ public class EqualMapPredicateTest{
      * Test equal predicate.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicate(){
         User user = new User(2L);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", 2L));
@@ -70,7 +70,7 @@ public class EqualMapPredicateTest{
      * Test equal predicate 1.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicate1(){
         User user = new User(2L);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", null));
@@ -83,7 +83,7 @@ public class EqualMapPredicateTest{
      * Test equal predicate null map.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicateNullMap(){
         BeanPredicateUtil.equalPredicate(null);
     }
@@ -92,7 +92,7 @@ public class EqualMapPredicateTest{
      * Test equal predicate empty map.
      */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
+    
     public void testEqualPredicateEmptyMap(){
         BeanPredicateUtil.equalPredicate(new HashMap<String, Object>());
     }

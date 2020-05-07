@@ -43,7 +43,7 @@ public class PopulateAliasBeanTest{
      * Test populate alias bean.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testPopulateAliasBean(){
         Map<String, String> readPropertiesToMap = ResourceBundleUtil.toMap(getResourceBundle("messages.feilong-core-test"));
 
@@ -65,7 +65,7 @@ public class PopulateAliasBeanTest{
      * Test populate alias null bean.
      */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testPopulateAliasNullBean(){
         Map<String, String> readPropertiesToMap = ResourceBundleUtil.toMap(getResourceBundle("messages.feilong-core-test"));
         BeanUtil.populateAliasBean(null, readPropertiesToMap);
@@ -75,7 +75,7 @@ public class PopulateAliasBeanTest{
      * Test populate alias null alias and value map.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testPopulateAliasNullAliasAndValueMap(){
         VarBean varBean = new VarBean();
         assertEquals(varBean, BeanUtil.populateAliasBean(varBean, null));
@@ -85,7 +85,7 @@ public class PopulateAliasBeanTest{
      * Test populate alias empty alias and value map.
      */
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testPopulateAliasEmptyAliasAndValueMap(){
         VarBean varBean = new VarBean();
         assertEquals(varBean, BeanUtil.populateAliasBean(varBean, new HashMap<String, String>()));

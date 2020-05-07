@@ -31,7 +31,7 @@ import com.feilong.store.member.User;
 public class CopyPropertiesExceptionLogTest{
 
     @Test
-    @SuppressWarnings("static-method")
+    
     public void testCopyPropertiesNoDateLocaleConverter(){
         User user = new User();
         user.setDate(now());
@@ -42,7 +42,7 @@ public class CopyPropertiesExceptionLogTest{
 
     @Test
     //@Test(expected = BeanOperationException.class)
-    @SuppressWarnings("static-method")
+    
     public void testCopyProperties(){
         AccessExceptionProperty user = new AccessExceptionProperty();
 

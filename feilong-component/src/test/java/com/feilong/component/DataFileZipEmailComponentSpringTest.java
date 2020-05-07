@@ -15,6 +15,8 @@
  */
 package com.feilong.component;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,6 +32,7 @@ public class DataFileZipEmailComponentSpringTest extends AbstractJUnit4SpringCon
     @Test
     public void run(){
         component.run();
+        assertTrue(true);
     }
 
 }

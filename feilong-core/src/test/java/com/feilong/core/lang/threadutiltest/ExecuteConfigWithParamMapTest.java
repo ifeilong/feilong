@@ -50,13 +50,13 @@ public class ExecuteConfigWithParamMapTest extends AbstractExcuteTest{
     //---------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testExecuteNullList(){
         ThreadUtil.execute(null, PartitionThreadConfig.INSTANCE, null, EmptyPartitionPerHandler.INSTANCE);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
+    
     public void testExecuteEmptyList(){
         ThreadUtil.execute(Collections.<Integer> emptyList(), PartitionThreadConfig.INSTANCE, null, EmptyPartitionPerHandler.INSTANCE);
     }
@@ -64,7 +64,7 @@ public class ExecuteConfigWithParamMapTest extends AbstractExcuteTest{
     //---------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
+    
     public void testExecuteNullGroupRunnableBuilder(){
         ThreadUtil.execute(toList(2), PartitionThreadConfig.INSTANCE, null, (PartitionPerHandler<Integer>) null);
     }
