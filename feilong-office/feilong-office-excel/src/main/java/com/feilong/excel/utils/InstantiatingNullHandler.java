@@ -115,7 +115,7 @@ public class InstantiatingNullHandler implements NullHandler{
 
         try{
             String propName = property.toString();
-            Class clazz = null;
+            Class<?> clazz = null;
 
             if (target != null){
                 PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(target.getClass(), propName);
@@ -177,7 +177,7 @@ public class InstantiatingNullHandler implements NullHandler{
      * @throws Exception
      *             the exception
      */
-    private static Object createObject(Class clazz) throws Exception{
+    private static Object createObject(Class<?> clazz) throws Exception{
         if (Collection.class.isAssignableFrom(clazz)){
             return new ArrayList<>();
         }else if (clazz == Map.class){

@@ -30,7 +30,7 @@ public interface Morpher{
      *
      * @return the target Class for conversion.
      */
-    Class morphsTo();
+    Class<?> morphsTo();
 
     /**
      * Returns true if the Morpher supports conversion from this Class.
@@ -39,5 +39,5 @@ public interface Morpher{
      *            the source Class
      * @return true if clazz is supported by this morpher, false otherwise.
      */
-    boolean supports(Class clazz);
+    boolean supports(Class<?> clazz);
 }

@@ -30,7 +30,7 @@ import com.feilong.lib.json.util.PropertyFilter;
 public class CompositePropertyFilter implements PropertyFilter{
 
     /** The filters. */
-    private final List filters = new ArrayList();
+    private final List filters = new ArrayList<>();
 
     //---------------------------------------------------------------
 

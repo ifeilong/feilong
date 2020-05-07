@@ -256,10 +256,10 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * <pre class="code">
      * {
-     * "OrderCode": "fl123456",
-     * "BuyerId": "123456",
-     * "ConsumptionChannel": "feilongstore",
-     * "OpenId": "feilong888888ky"
+     * "<span style="color:red">O</span>rderCode": "fl123456",
+     * "<span style="color:red">B</span>uyerId": "123456",
+     * "<span style="color:red">C</span>onsumptionChannel": "feilongstore",
+     * "<span style="color:red">O</span>penId": "feilong888888ky"
      * }
      * </pre>
      * 

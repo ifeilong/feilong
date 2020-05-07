@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.FloatMorpher;
  */
 public final class FloatArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant FLOAT_ARRAY_CLASS. */
-    private static final Class FLOAT_ARRAY_CLASS = float[].class;
+    private static final Class<?> FLOAT_ARRAY_CLASS = float[].class;
 
     /** The default value. */
-    private float              defaultValue;
+    private float                 defaultValue;
 
     //---------------------------------------------------------------
 
@@ -156,7 +155,7 @@ public final class FloatArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return FLOAT_ARRAY_CLASS;
     }
 }

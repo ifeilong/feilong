@@ -31,6 +31,8 @@ public final class ByteMorpher extends AbstractIntegerMorpher{
     /** The default value. */
     private byte defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new byte morpher.
      */
@@ -138,13 +140,15 @@ public final class ByteMorpher extends AbstractIntegerMorpher{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Morphs to.
      *
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Byte.TYPE;
     }
 }

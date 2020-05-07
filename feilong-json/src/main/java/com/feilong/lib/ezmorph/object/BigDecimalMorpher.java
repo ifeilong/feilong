@@ -155,6 +155,8 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
             return toBigDecimal(value).doubleValue();
         }
 
+        //---------------------------------------------------------------
+
         try{
             String str = String.valueOf(value).trim();
             if (str.length() == 0 || str.equalsIgnoreCase("null")){
@@ -177,7 +179,7 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return BigDecimal.class;
     }
 }

@@ -48,6 +48,10 @@ import com.feilong.lib.json.util.JSONUtils;
  */
 public class DefaultDefaultValueProcessor implements DefaultValueProcessor{
 
+    /** Static instance. */
+    // the static instance works for all types
+    public static final DefaultDefaultValueProcessor INSTANCE = new DefaultDefaultValueProcessor();
+
     /**
      * Gets the default value.
      *
@@ -56,7 +60,7 @@ public class DefaultDefaultValueProcessor implements DefaultValueProcessor{
      * @return the default value
      */
     @Override
-    public Object getDefaultValue(Class type){
+    public Object getDefaultValue(Class<?> type){
         if (JSONUtils.isArray(type)){
             return new JSONArray();
         }

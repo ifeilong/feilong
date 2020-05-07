@@ -51,8 +51,8 @@ class ClassResolver{
      *            the type
      * @return the class
      */
-    static Class resolveClass(Map classMap,String key,String name,Class type){
-        Class targetClass = TargetClassFinder.findTargetClass(key, classMap);
+    static Class<?> resolveClass(Map classMap,String key,String name,Class<?> type){
+        Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
         if (targetClass == null){
             targetClass = TargetClassFinder.findTargetClass(name, classMap);
         }

@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.IntMorpher;
  */
 public final class IntArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant INT_ARRAY_CLASS. */
-    private static final Class INT_ARRAY_CLASS = int[].class;
+    private static final Class<?> INT_ARRAY_CLASS = int[].class;
 
     /** The default value. */
-    private int                defaultValue;
+    private int                   defaultValue;
 
     /**
      * Instantiates a new int array morpher.
@@ -154,7 +153,7 @@ public final class IntArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return INT_ARRAY_CLASS;
     }
 }

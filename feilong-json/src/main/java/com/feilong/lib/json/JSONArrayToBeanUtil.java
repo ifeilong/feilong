@@ -54,13 +54,13 @@ public class JSONArrayToBeanUtil{
      */
     static Collection toCollection(JSONArray jsonArray,JsonConfig jsonConfig){
         Collection collection = null;
-        Class collectionType = jsonConfig.getCollectionType();
+        Class<?> collectionType = jsonConfig.getCollectionType();
 
         if (collectionType.isInterface()){
             if (collectionType.equals(List.class)){
-                collection = new ArrayList();
+                collection = new ArrayList<>();
             }else if (collectionType.equals(Set.class)){
-                collection = new HashSet();
+                collection = new HashSet<>();
             }else{
                 throw new JSONException("unknown interface: " + collectionType);
             }
@@ -76,7 +76,7 @@ public class JSONArrayToBeanUtil{
 
         //---------------------------------------------------------------
 
-        Class objectClass = jsonConfig.getRootClass();
+        Class<?> objectClass = jsonConfig.getRootClass();
         Map classMap = jsonConfig.getClassMap();
 
         int size = jsonArray.size();
@@ -87,7 +87,7 @@ public class JSONArrayToBeanUtil{
                 collection.add(null);
                 continue;
             }
-            Class type = value.getClass();
+            Class<?> type = value.getClass();
             if (JSONArray.class.isAssignableFrom(value.getClass())){
                 collection.add(toCollection((JSONArray) value, jsonConfig));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
@@ -127,10 +127,10 @@ public class JSONArrayToBeanUtil{
      */
     static List toList(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
         if (jsonArray.size() == 0 || root == null){
-            return new ArrayList();
+            return new ArrayList<>();
         }
 
-        List list = new ArrayList();
+        List list = new ArrayList<>();
         int size = jsonArray.size();
         for (int i = 0; i < size; i++){
             Object value = jsonArray.get(i);
@@ -138,7 +138,7 @@ public class JSONArrayToBeanUtil{
                 list.add(null);
                 continue;
             }
-            Class type = value.getClass();
+            Class<?> type = value.getClass();
             if (JSONArray.class.isAssignableFrom(type)){
                 list.add(toList((JSONArray) value, root, jsonConfig));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
@@ -168,7 +168,7 @@ public class JSONArrayToBeanUtil{
      * @return the object
      */
     static Object toArray(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
-        Class objectClass = root.getClass();
+        Class<?> objectClass = root.getClass();
         if (jsonArray.size() == 0){
             return Array.newInstance(objectClass, 0);
         }
@@ -182,7 +182,7 @@ public class JSONArrayToBeanUtil{
                 Array.set(array, i, null);
                 continue;
             }
-            Class type = value.getClass();
+            Class<?> type = value.getClass();
             if (JSONArray.class.isAssignableFrom(type)){
                 Array.set(array, i, toArray((JSONArray) value, root, jsonConfig));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
@@ -224,7 +224,7 @@ public class JSONArrayToBeanUtil{
      * @return the object
      */
     static Object toArray(JSONArray jsonArray,JsonConfig jsonConfig){
-        Class objectClass = jsonConfig.getRootClass();
+        Class<?> objectClass = jsonConfig.getRootClass();
         Map classMap = jsonConfig.getClassMap();
 
         if (jsonArray.size() == 0){
@@ -244,7 +244,7 @@ public class JSONArrayToBeanUtil{
             }
 
             //---------------------------------------------------------------
-            Class type = value.getClass();
+            Class<?> type = value.getClass();
             if (JSONArray.class.isAssignableFrom(type)){
                 Array.set(array, i, toArray((JSONArray) value, objectClass, classMap));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || Character.class.isAssignableFrom(type)
@@ -314,7 +314,7 @@ public class JSONArrayToBeanUtil{
             return new int[] { 0 };
         }
 
-        List dims = new ArrayList();
+        List dims = new ArrayList<>();
         processArrayDimensions(jsonArray, dims, 0);
         int[] dimensions = new int[dims.size()];
         int j = 0;

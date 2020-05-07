@@ -38,6 +38,7 @@ import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.json.util.KeyUpdate;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.json.util.PropertySetStrategy;
 
@@ -79,7 +80,7 @@ public class JSONObjectToBeanUtil{
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
             String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
-            Class type = (Class) props.get(name);
+            Class<?> type = (Class<?>) props.get(name);
             Object value = jsonObject.get(name);
             try{
                 if (!JSONUtils.isNull(value)){
@@ -123,7 +124,7 @@ public class JSONObjectToBeanUtil{
         }
 
         //---------------------------------------------------------------
-        Class beanClass = jsonConfig.getRootClass();
+        Class<?> beanClass = jsonConfig.getRootClass();
         if (beanClass == null){
             return toBean(jsonObject);
         }
@@ -142,7 +143,7 @@ public class JSONObjectToBeanUtil{
                 if (!Map.class.isAssignableFrom(beanClass)){
                     throw new JSONException("beanClass is an interface. " + beanClass);
                 }
-                bean = new HashMap();
+                bean = new HashMap<>();
             }else{
                 bean = ConstructorUtil.newInstance(beanClass);
             }
@@ -168,12 +169,10 @@ public class JSONObjectToBeanUtil{
 
             //---------------------------------------------------------------
             PropertyNameProcessor propertyNameProcessor = jsonConfig.findJavaPropertyNameProcessor(beanClass);
-            if (propertyNameProcessor != null){
-                key = propertyNameProcessor.processPropertyName(beanClass, key);
-            }
+            key = KeyUpdate.update(beanClass, key, propertyNameProcessor);
 
             //---------------------------------------------------------------
-            Class type = (Class) properties.get(name);
+            Class<?> type = (Class<?>) properties.get(name);
             try{
                 if (Map.class.isAssignableFrom(beanClass)){
                     toBeanDoWithMap(jsonConfig, classMap, bean, name, type, value, key);
@@ -205,7 +204,7 @@ public class JSONObjectToBeanUtil{
                     Map classMap,
                     PropertyDescriptor propertyDescriptor) throws Exception{
 
-        Class beanClass = bean.getClass();
+        Class<?> beanClass = bean.getClass();
         if (propertyDescriptor != null){
             if (JSONUtils.isNull(value)){
                 setNull(jsonConfig, bean, type, key);
@@ -214,7 +213,7 @@ public class JSONObjectToBeanUtil{
 
             //---------------------------------------------------------------
             Class<?> propertyType = propertyDescriptor.getPropertyType();
-            Class targetType = propertyType;
+            Class<?> targetType = propertyType;
             if (value instanceof JSONArray){
                 if (List.class.isAssignableFrom(propertyType) || Set.class.isAssignableFrom(propertyType)){
                     setProperty(
@@ -244,7 +243,7 @@ public class JSONObjectToBeanUtil{
 
             //---------------------------------------------------------------
             if (targetType == Object.class || targetType.isInterface()){
-                Class targetTypeCopy = targetType;
+                Class<?> targetTypeCopy = targetType;
                 targetType = TargetClassFinder.findTargetClass(key, classMap);
                 targetType = targetType == null ? TargetClassFinder.findTargetClass(name, classMap) : targetType;
                 targetType = targetType == null && targetTypeCopy.isInterface() ? targetTypeCopy : targetType;
@@ -322,12 +321,13 @@ public class JSONObjectToBeanUtil{
         }
 
         //---------------------------------------------------------------
-        Class targetClass = ClassResolver.resolveClass(classMap, key, name, type);
-        JsonConfig newJsonConfig = jsonConfig.copy();
-        newJsonConfig.setRootClass(targetClass);
-        newJsonConfig.setClassMap(classMap);
+        Class<?> targetClass = ClassResolver.resolveClass(classMap, key, name, type);
+
+        JsonConfig jsonConfigCopy = jsonConfig.copy();
+        jsonConfigCopy.setRootClass(targetClass);
+        jsonConfigCopy.setClassMap(classMap);
         if (targetClass != null){
-            setProperty(bean, key, toBean((JSONObject) value, newJsonConfig), jsonConfig);
+            setProperty(bean, key, toBean((JSONObject) value, jsonConfigCopy), jsonConfig);
         }else{
             setProperty(bean, key, toBean((JSONObject) value), jsonConfig);
         }
@@ -349,7 +349,7 @@ public class JSONObjectToBeanUtil{
             return root;
         }
 
-        Class rootClass = root.getClass();
+        Class<?> rootClass = root.getClass();
         if (rootClass.isInterface()){
             throw new JSONException("Root bean is an interface. " + rootClass);
         }
@@ -363,7 +363,7 @@ public class JSONObjectToBeanUtil{
         PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
-            Class type = (Class) props.get(name);
+            Class<?> type = (Class) props.get(name);
             Object value = jsonObject.get(name);
             if (javaPropertyFilter != null && javaPropertyFilter.apply(root, name, value)){
                 continue;
@@ -379,13 +379,13 @@ public class JSONObjectToBeanUtil{
                 if (!JSONUtils.isNull(value)){
                     if (value instanceof JSONArray){
                         if (pd == null || List.class.isAssignableFrom(pd.getPropertyType())){
-                            Class targetClass = ClassResolver.resolveClass(classMap, key, name, type);
+                            Class<?> targetClass = ClassResolver.resolveClass(classMap, key, name, type);
                             Object newRoot = ConstructorUtil.newInstance(targetClass);
                             List list = JSONArrayToBeanUtil.toList((JSONArray) value, newRoot, jsonConfig);
                             setProperty(root, key, list, jsonConfig);
                         }else{
-                            Class innerType = JSONUtils.getInnerComponentType(pd.getPropertyType());
-                            Class targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
+                            Class<?> innerType = JSONUtils.getInnerComponentType(pd.getPropertyType());
+                            Class<?> targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
                             if (innerType.equals(Object.class) && targetInnerType != null && !targetInnerType.equals(Object.class)){
                                 innerType = targetInnerType;
                             }
@@ -434,7 +434,7 @@ public class JSONObjectToBeanUtil{
                         }
                     }else{
                         if (pd != null){
-                            Class targetClass = pd.getPropertyType();
+                            Class<?> targetClass = pd.getPropertyType();
 
                             if (targetClass == Object.class){
                                 targetClass = ClassResolver.resolveClass(classMap, key, name, type);
@@ -445,7 +445,7 @@ public class JSONObjectToBeanUtil{
                             Object newRoot = ConstructorUtil.newInstance(targetClass);
                             setProperty(root, key, toBean((JSONObject) value, newRoot, jsonConfig), jsonConfig);
                         }else if (root instanceof Map){
-                            Class targetClass = TargetClassFinder.findTargetClass(key, classMap);
+                            Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
                             targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
                             Object newRoot = ConstructorUtil.newInstance(targetClass);
                             setProperty(root, key, toBean((JSONObject) value, newRoot, jsonConfig), jsonConfig);

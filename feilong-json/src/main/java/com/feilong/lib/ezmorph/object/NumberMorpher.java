@@ -54,7 +54,7 @@ public final class NumberMorpher extends AbstractObjectMorpher{
      *            must be a primitive or wrapper type. BigDecimal and BigInteger
      *            are also supported.
      */
-    public NumberMorpher(Class type){
+    public NumberMorpher(Class<?> type){
         super(false);
 
         if (type == null){
@@ -82,7 +82,7 @@ public final class NumberMorpher extends AbstractObjectMorpher{
      * @param defaultValue
      *            return value if the value to be morphed is null
      */
-    public NumberMorpher(Class type, Number defaultValue){
+    public NumberMorpher(Class<?> type, Number defaultValue){
         super(true);
 
         if (type == null){
@@ -211,7 +211,7 @@ public final class NumberMorpher extends AbstractObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return type;
     }
 
@@ -237,9 +237,12 @@ public final class NumberMorpher extends AbstractObjectMorpher{
      *            the type
      * @return true, if is decimal number
      */
-    private boolean isDecimalNumber(Class type){
-        return (Double.class.isAssignableFrom(type) || Float.class.isAssignableFrom(type) || Double.TYPE == type || Float.TYPE == type
-                        || BigDecimal.class.isAssignableFrom(type));
+    private static boolean isDecimalNumber(Class<?> type){
+        return (Double.class.isAssignableFrom(type) || //
+                        Float.class.isAssignableFrom(type) || //
+                        Double.TYPE == type || //
+                        Float.TYPE == type || //
+                        BigDecimal.class.isAssignableFrom(type));
     }
 
     /**

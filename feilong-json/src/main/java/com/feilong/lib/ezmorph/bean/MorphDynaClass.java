@@ -62,7 +62,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
     private final Map               attributes;
 
     /** The bean class. */
-    private Class                   beanClass;
+    private Class<?>                beanClass;
 
     /** The dyna properties. */
     private DynaProperty[]          dynaProperties;
@@ -71,10 +71,10 @@ public final class MorphDynaClass implements DynaClass,Serializable{
     private final String            name;
 
     /** The properties. */
-    private final Map               properties             = new HashMap();
+    private final Map               properties             = new HashMap<>();
 
     /** The type. */
-    private final Class             type;
+    private final Class<?>          type;
 
     //---------------------------------------------------------------
 
@@ -110,7 +110,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
      * @param attributes
      *            the attributes
      */
-    public MorphDynaClass(String name, Class type, Map attributes){
+    public MorphDynaClass(String name, Class<?> type, Map attributes){
         this(name, type, attributes, false);
     }
 
@@ -126,7 +126,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
      * @param exceptionOnEmptyAttributes
      *            the exception on empty attributes
      */
-    public MorphDynaClass(String name, Class type, Map attributes, boolean exceptionOnEmptyAttributes){
+    public MorphDynaClass(String name, Class<?> type, Map attributes, boolean exceptionOnEmptyAttributes){
         if (name == null){
             name = "MorphDynaClass";
         }
@@ -140,7 +140,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
             if (exceptionOnEmptyAttributes){
                 throw new MorphException("Attributes map is null or empty.");
             }
-            attributes = new HashMap();
+            attributes = new HashMap<>();
         }
         this.name = name;
         this.type = type;
@@ -280,7 +280,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
      *
      * @return the bean class
      */
-    protected Class getBeanClass(){
+    protected Class<?> getBeanClass(){
         if (this.beanClass == null){
             process();
         }
@@ -303,13 +303,13 @@ public final class MorphDynaClass implements DynaClass,Serializable{
                 Object pclass = entry.getValue();
                 DynaProperty dynaProperty = null;
                 if (pclass instanceof String){
-                    Class klass = Class.forName((String) pclass);
+                    Class<?> klass = Class.forName((String) pclass);
                     if (klass.isArray() && klass.getComponentType().isArray()){
                         throw new MorphException("Multidimensional arrays are not supported");
                     }
                     dynaProperty = new DynaProperty(pname, klass);
                 }else if (pclass instanceof Class){
-                    Class klass = (Class) pclass;
+                    Class<?> klass = (Class<?>) pclass;
                     if (klass.isArray() && klass.getComponentType().isArray()){
                         throw new MorphException("Multidimensional arrays are not supported");
                     }

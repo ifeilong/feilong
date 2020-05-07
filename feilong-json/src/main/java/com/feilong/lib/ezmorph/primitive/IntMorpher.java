@@ -83,6 +83,8 @@ public final class IntMorpher extends AbstractIntegerMorpher{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the default value for this Morpher.
      *
@@ -128,10 +130,8 @@ public final class IntMorpher extends AbstractIntegerMorpher{
         if (value instanceof Number){
             return ((Number) value).intValue();
         }
-        int i = 0;
         try{
-            i = Integer.parseInt(getIntegerValue(value));
-            return i;
+            return Integer.parseInt(getIntegerValue(value));
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;
@@ -146,7 +146,7 @@ public final class IntMorpher extends AbstractIntegerMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Integer.TYPE;
     }
 }

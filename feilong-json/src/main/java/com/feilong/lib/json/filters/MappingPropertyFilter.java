@@ -30,7 +30,7 @@ import com.feilong.lib.json.util.PropertyFilter;
 public abstract class MappingPropertyFilter implements PropertyFilter{
 
     /** The filters. */
-    private final Map filters = new HashMap();
+    private final Map filters = new HashMap<>();
 
     //---------------------------------------------------------------
 

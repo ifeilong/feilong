@@ -51,7 +51,7 @@ public final class BeanMorpher implements ObjectMorpher{
     //---------------------------------------------------------------
 
     /** The bean class. */
-    private final Class           beanClass;
+    private final Class<?>        beanClass;
 
     /** The lenient. */
     private final boolean         lenient;
@@ -69,7 +69,7 @@ public final class BeanMorpher implements ObjectMorpher{
      * @param morpherRegistry
      *            a registry of morphers
      */
-    public BeanMorpher(Class beanClass, MorpherRegistry morpherRegistry){
+    public BeanMorpher(Class<?> beanClass, MorpherRegistry morpherRegistry){
         this(beanClass, morpherRegistry, false);
     }
 
@@ -84,7 +84,7 @@ public final class BeanMorpher implements ObjectMorpher{
      *            if an exception should be raised if no morpher is found for
      *            a target property
      */
-    public BeanMorpher(Class beanClass, MorpherRegistry morpherRegistry, boolean lenient){
+    public BeanMorpher(Class<?> beanClass, MorpherRegistry morpherRegistry, boolean lenient){
         validateClass(beanClass);
         if (morpherRegistry == null){
             throw new MorphException("morpherRegistry is null");
@@ -127,7 +127,7 @@ public final class BeanMorpher implements ObjectMorpher{
                 }
 
                 //---------------------------------------------------------------
-                Class sourceType = null;
+                Class<?> sourceType = null;
                 if (sourceBean instanceof DynaBean){
                     DynaBean dynaBean = (DynaBean) sourceBean;
                     DynaProperty dynaProperty = dynaBean.getDynaClass().getDynaProperty(name);
@@ -150,7 +150,7 @@ public final class BeanMorpher implements ObjectMorpher{
 
                 //---------------------------------------------------------------
 
-                Class targetType = targetPropertyDescriptor.getPropertyType();
+                Class<?> targetType = targetPropertyDescriptor.getPropertyType();
                 Object value = PropertyUtils.getProperty(sourceBean, name);
                 setProperty(targetBean, name, sourceType, targetType, value);
             }
@@ -171,7 +171,7 @@ public final class BeanMorpher implements ObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return beanClass;
     }
 
@@ -183,7 +183,7 @@ public final class BeanMorpher implements ObjectMorpher{
      * @return true, if successful
      */
     @Override
-    public boolean supports(Class clazz){
+    public boolean supports(Class<?> clazz){
         return !clazz.isArray();
     }
 
@@ -209,7 +209,7 @@ public final class BeanMorpher implements ObjectMorpher{
      * @throws NoSuchMethodException
      *             the no such method exception
      */
-    private void setProperty(Object targetBean,String name,Class sourceType,Class targetType,Object value)
+    private void setProperty(Object targetBean,String name,Class<?> sourceType,Class<?> targetType,Object value)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
         if (targetType.isAssignableFrom(sourceType)){
             if (value == null && targetType.isPrimitive()){
@@ -250,24 +250,32 @@ public final class BeanMorpher implements ObjectMorpher{
      * @param clazz
      *            the clazz
      */
-    private void validateClass(Class clazz){
+    private static void validateClass(Class<?> clazz){
         if (clazz == null){
             throw new MorphException("target class is null");
-        }else if (clazz.isPrimitive()){
+        }
+        if (clazz.isPrimitive()){
             throw new MorphException("target class is a primitive");
-        }else if (clazz.isArray()){
+        }
+        if (clazz.isArray()){
             throw new MorphException("target class is an array");
-        }else if (clazz.isInterface()){
+        }
+        if (clazz.isInterface()){
             throw new MorphException("target class is an interface");
-        }else if (DynaBean.class.isAssignableFrom(clazz)){
+        }
+        if (DynaBean.class.isAssignableFrom(clazz)){
             throw new MorphException("target class is a DynaBean");
-        }else if (Number.class.isAssignableFrom(clazz) || Boolean.class.isAssignableFrom(clazz) || Character.class.isAssignableFrom(clazz)){
+        }
+        if (Number.class.isAssignableFrom(clazz) || Boolean.class.isAssignableFrom(clazz) || Character.class.isAssignableFrom(clazz)){
             throw new MorphException("target class is a wrapper");
-        }else if (String.class.isAssignableFrom(clazz)){
+        }
+        if (String.class.isAssignableFrom(clazz)){
             throw new MorphException("target class is a String");
-        }else if (Collection.class.isAssignableFrom(clazz)){
+        }
+        if (Collection.class.isAssignableFrom(clazz)){
             throw new MorphException("target class is a Collection");
-        }else if (Map.class.isAssignableFrom(clazz)){
+        }
+        if (Map.class.isAssignableFrom(clazz)){
             throw new MorphException("target class is a Map");
         }
     }

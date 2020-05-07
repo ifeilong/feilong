@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json;
+package com.feilong.lib.json.util;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import com.feilong.lib.json.regexp.RegexpUtils;
+import com.feilong.lib.json.processors.PropertyNameProcessor;
 
 /**
- * 
+ * The Class KeyUpdate.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class TargetClassFinder{
+public class KeyUpdate{
 
     /** Don't let anyone instantiate this class. */
-    private TargetClassFinder(){
+    private KeyUpdate(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -37,32 +35,20 @@ class TargetClassFinder{
     //---------------------------------------------------------------
 
     /**
-     * Locates a Class associated to a specifi key.
-     * <p>
-     * The key may be a regexp.
-     * </p>
+     * Update.
      *
+     * @param beanClass
+     *            the bean class
      * @param key
      *            the key
-     * @param classMap
-     *            the class map
-     * @return the class
+     * @param propertyNameProcessor
+     *            the property name processor
+     * @return the string
      */
-    static Class<?> findTargetClass(String key,Map classMap){
-        // try get first
-        Class<?> targetClass = (Class) classMap.get(key);
-
-        if (targetClass == null){
-            // try with regexp
-            // this will hit performance as it must iterate over all the keys and create a RegexpMatcher for each key
-            for (Iterator i = classMap.entrySet().iterator(); i.hasNext();){
-                Map.Entry entry = (Map.Entry) i.next();
-                if (RegexpUtils.getMatcher((String) entry.getKey()).matches(key)){
-                    targetClass = (Class) entry.getValue();
-                    break;
-                }
-            }
+    public static String update(Class<?> beanClass,String key,PropertyNameProcessor propertyNameProcessor){
+        if (propertyNameProcessor != null){
+            return propertyNameProcessor.processPropertyName(beanClass, key);
         }
-        return targetClass;
+        return key;
     }
 }

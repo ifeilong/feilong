@@ -130,10 +130,8 @@ public final class DoubleMorpher extends AbstractDecimalMorpher{
         if (value instanceof Number){
             return ((Number) value).doubleValue();
         }
-        double i = 0;
         try{
-            i = Double.parseDouble(String.valueOf(value));
-            return i;
+            return Double.parseDouble(String.valueOf(value));
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;
@@ -142,13 +140,15 @@ public final class DoubleMorpher extends AbstractDecimalMorpher{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Morphs to.
      *
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Double.TYPE;
     }
 }

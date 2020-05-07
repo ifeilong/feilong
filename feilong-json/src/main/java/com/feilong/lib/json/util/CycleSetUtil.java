@@ -19,17 +19,9 @@ import java.lang.ref.SoftReference;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 public class CycleSetUtil{
 
-    /**
-     * The Class CycleSet.
-     */
-    private static class CycleSet extends ThreadLocal{
+    private static class CycleSet extends ThreadLocal<SoftReference<Set<Object>>>{
 
         /**
          * Initial value.
@@ -37,8 +29,8 @@ public class CycleSetUtil{
          * @return the object
          */
         @Override
-        protected Object initialValue(){
-            return new SoftReference(new HashSet());
+        protected SoftReference<Set<Object>> initialValue(){
+            return new SoftReference<>(new HashSet<Object>());
         }
 
         /**
@@ -46,11 +38,11 @@ public class CycleSetUtil{
          *
          * @return the 设置
          */
-        public Set getSet(){
-            Set set = (Set) ((SoftReference) get()).get();
+        public Set<Object> getSet(){
+            Set<Object> set = get().get();
             if (set == null){
-                set = new HashSet();
-                set(new SoftReference(set));
+                set = new HashSet<>();
+                set(new SoftReference<>(set));
             }
             return set;
         }
@@ -70,6 +62,7 @@ public class CycleSetUtil{
      *         otherwise.
      */
     public static boolean addInstance(Object instance){
+        // return true;
         return getCycleSet().add(instance);
     }
 
@@ -82,8 +75,9 @@ public class CycleSetUtil{
      *            the instance
      */
     public static void removeInstance(Object instance){
-        Set set = getCycleSet();
+        Set<Object> set = getCycleSet();
         set.remove(instance);
+
         if (set.size() == 0){
             cycleSet.remove();
         }
@@ -96,7 +90,7 @@ public class CycleSetUtil{
      *
      * @return the cycle set
      */
-    private static Set getCycleSet(){
+    private static Set<Object> getCycleSet(){
         return cycleSet.getSet();
     }
 }

@@ -49,7 +49,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     private MorphDynaClass    dynaClass;
 
     /** The dyna values. */
-    private final Map         dynaValues       = new HashMap();
+    private final Map         dynaValues       = new HashMap<>();
 
     /** The morpher registry. */
     private MorpherRegistry   morpherRegistry;
@@ -88,7 +88,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public boolean contains(String name,String key){
         DynaProperty dynaProperty = getDynaProperty(name);
 
-        Class type = dynaProperty.getType();
+        Class<?> type = dynaProperty.getType();
         if (!Map.class.isAssignableFrom(type)){
             throw new MorphException("Non-Mapped property name: " + name + " key: " + key);
         }
@@ -97,7 +97,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
 
         Object value = dynaValues.get(name);
         if (value == null){
-            value = new HashMap();
+            value = new HashMap<>();
             dynaValues.put(name, value);
         }
         return ((Map) value).containsKey(key);
@@ -150,7 +150,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
             return value;
         }
 
-        Class type = getDynaProperty(name).getType();
+        Class<?> type = getDynaProperty(name).getType();
         if (!type.isPrimitive()){
             return value;
         }
@@ -170,7 +170,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public Object get(String name,int index){
         DynaProperty dynaProperty = getDynaProperty(name);
 
-        Class type = dynaProperty.getType();
+        Class<?> type = dynaProperty.getType();
         if (!type.isArray() && !List.class.isAssignableFrom(type)){
             throw new MorphException("Non-Indexed property name: " + name + " index: " + index);
         }
@@ -199,14 +199,14 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public Object get(String name,String key){
         DynaProperty dynaProperty = getDynaProperty(name);
 
-        Class type = dynaProperty.getType();
+        Class<?> type = dynaProperty.getType();
         if (!Map.class.isAssignableFrom(type)){
             throw new MorphException("Non-Mapped property name: " + name + " key: " + key);
         }
 
         Object value = dynaValues.get(name);
         if (value == null){
-            value = new HashMap();
+            value = new HashMap<>();
             dynaValues.put(name, value);
         }
         return ((Map) value).get(key);
@@ -259,14 +259,14 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public void remove(String name,String key){
         DynaProperty dynaProperty = getDynaProperty(name);
 
-        Class type = dynaProperty.getType();
+        Class<?> type = dynaProperty.getType();
         if (!Map.class.isAssignableFrom(type)){
             throw new MorphException("Non-Mapped property name: " + name + " key: " + key);
         }
 
         Object value = dynaValues.get(name);
         if (value == null){
-            value = new HashMap();
+            value = new HashMap<>();
             dynaValues.put(name, value);
         }
         ((Map) value).remove(key);
@@ -286,7 +286,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public void set(String name,int index,Object value){
         DynaProperty dynaProperty = getDynaProperty(name);
 
-        Class type = dynaProperty.getType();
+        Class<?> type = dynaProperty.getType();
         if (!type.isArray() && !List.class.isAssignableFrom(type)){
             throw new MorphException("Non-Indexed property name: " + name + " index: " + index);
         }
@@ -294,7 +294,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         Object prop = dynaValues.get(name);
         if (prop == null){
             if (List.class.isAssignableFrom(type)){
-                prop = new ArrayList();
+                prop = new ArrayList<>();
             }else{
                 prop = Array.newInstance(type.getComponentType(), index + 1);
             }
@@ -353,14 +353,14 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public void set(String name,String key,Object value){
         DynaProperty dynaProperty = getDynaProperty(name);
 
-        Class type = dynaProperty.getType();
+        Class<?> type = dynaProperty.getType();
         if (!Map.class.isAssignableFrom(type)){
             throw new MorphException("Non-Mapped property name: " + name + " key: " + key);
         }
 
         Object prop = dynaValues.get(name);
         if (prop == null){
-            prop = new HashMap();
+            prop = new HashMap<>();
             dynaValues.put(name, prop);
         }
         ((Map) prop).put(key, value);
@@ -427,7 +427,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      *            the src
      * @return true, if is dyna assignable
      */
-    protected boolean isDynaAssignable(Class dest,Class src){
+    private static boolean isDynaAssignable(Class<?> dest,Class<?> src){
         boolean assignable = dest.isAssignableFrom(src);
         if (assignable){
             return true;
@@ -467,7 +467,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      *            the clazz
      * @return true, if is byte
      */
-    private boolean isByte(Class clazz){
+    private static boolean isByte(Class<?> clazz){
         return Byte.class.isAssignableFrom(clazz) || clazz == Byte.TYPE;
     }
 
@@ -478,7 +478,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      *            the clazz
      * @return true, if is float
      */
-    private boolean isFloat(Class clazz){
+    private static boolean isFloat(Class<?> clazz){
         return Float.class.isAssignableFrom(clazz) || clazz == Float.TYPE;
     }
 
@@ -489,7 +489,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      *            the clazz
      * @return true, if is integer
      */
-    private boolean isInteger(Class clazz){
+    private static boolean isInteger(Class<?> clazz){
         return Integer.class.isAssignableFrom(clazz) || clazz == Integer.TYPE;
     }
 
@@ -500,7 +500,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      *            the clazz
      * @return true, if is long
      */
-    private boolean isLong(Class clazz){
+    private static boolean isLong(Class<?> clazz){
         return Long.class.isAssignableFrom(clazz) || clazz == Long.TYPE;
     }
 
@@ -511,7 +511,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      *            the clazz
      * @return true, if is short
      */
-    private boolean isShort(Class clazz){
+    private static boolean isShort(Class<?> clazz){
         return Short.class.isAssignableFrom(clazz) || clazz == Short.TYPE;
     }
 }

@@ -141,7 +141,7 @@ public final class CharacterObjectMorpher extends AbstractObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Character.class;
     }
 }

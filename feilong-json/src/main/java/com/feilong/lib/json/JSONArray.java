@@ -126,7 +126,7 @@ public final class JSONArray implements JSON{
      * Construct an empty JSONArray.
      */
     public JSONArray(){
-        this.elements = new ArrayList();
+        this.elements = new ArrayList<>();
     }
 
     /**

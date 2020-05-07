@@ -89,7 +89,7 @@ class BlockReader{
             Object obj = stack.getValue(dataName);
             Collection dataList;
             if (obj == null){
-                dataList = new ArrayList();
+                dataList = new ArrayList<>();
                 stack.setValue(dataName, dataList);
             }else if (!(obj instanceof Collection)){
                 readStatus.setStatus(STATUS_SETTING_ERROR);

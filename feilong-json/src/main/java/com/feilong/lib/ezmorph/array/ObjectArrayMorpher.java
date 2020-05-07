@@ -32,16 +32,16 @@ import com.feilong.lib.ezmorph.Morpher;
 public final class ObjectArrayMorpher extends AbstractArrayMorpher{
 
     /** The morpher. */
-    private Morpher morpher;
+    private Morpher  morpher;
 
     /** The morph method. */
-    private Method  morphMethod;
+    private Method   morphMethod;
 
     /** The target. */
-    private Class   target;
+    private Class<?> target;
 
     /** The target array class. */
-    private Class   targetArrayClass;
+    private Class<?> targetArrayClass;
 
     //---------------------------------------------------------------
 
@@ -144,7 +144,7 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return targetArrayClass;
     }
 
@@ -156,10 +156,15 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
      * @return true, if successful
      */
     @Override
-    public boolean supports(Class clazz){
-        if (clazz != null && !clazz.isArray()){
+    public boolean supports(Class<?> clazz){
+        if (clazz == null){
             return false;
         }
+        if (!clazz.isArray()){
+            return false;
+        }
+
+        //---------------------------------------------------------------
         while (clazz.isArray()){
             clazz = clazz.getComponentType();
         }

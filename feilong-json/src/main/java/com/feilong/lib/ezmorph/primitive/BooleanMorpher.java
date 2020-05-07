@@ -31,6 +31,8 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
     /** The default value. */
     private boolean defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new boolean morpher.
      */
@@ -48,6 +50,8 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
         super(true);
         this.defaultValue = defaultValue;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Equals.
@@ -124,7 +128,8 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
         //---------------------------------------------------------------
         if (value instanceof Boolean){
             return ((Boolean) value).booleanValue();
-        }else if (value instanceof Number){
+        }
+        if (value instanceof Number){
             if (value instanceof Double
                             && (Double.isInfinite(((Number) value).doubleValue()) || Double.isNaN(((Number) value).doubleValue()))){
                 return true;
@@ -134,16 +139,15 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
             }
             long l = ((Number) value).longValue();
             return l != 0;
-        }else{
-            String s = String.valueOf(value);
+        }
+        String s = String.valueOf(value);
 
-            if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")){
-                return true;
-            }else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
-                return false;
-            }else if (isUseDefault()){
-                return defaultValue;
-            }
+        if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")){
+            return true;
+        }else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
+            return false;
+        }else if (isUseDefault()){
+            return defaultValue;
         }
 
         throw new MorphException("Can't morph value: " + value);
@@ -157,7 +161,7 @@ public final class BooleanMorpher extends AbstractPrimitiveMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Boolean.TYPE;
     }
 }

@@ -36,8 +36,6 @@ import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.store.member.Person;
-import com.feilong.store.member.User;
-import com.feilong.store.member.UserInfo;
 
 public class JsonHelperTest extends AbstractJsonTest{
 
@@ -62,7 +60,6 @@ public class JsonHelperTest extends AbstractJsonTest{
      * To bean n ull.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void toBeanNUll(){
         LOGGER.debug(toJSON(null).toString(4, 4));
     }
@@ -70,35 +67,14 @@ public class JsonHelperTest extends AbstractJsonTest{
     /**
      * To json.
      */
-    @SuppressWarnings("static-method")
     @Test
     public void toJSON(){
         LOGGER.debug(toJSON(HttpMethodTestType.GET).toString(4, 4));
     }
 
     /**
-     * To bean n ulluser.
-     */
-    @SuppressWarnings("static-method")
-    @Test
-    public void toBeanNUlluser(){
-        User user = new User();
-        user.setId(8L);
-        user.setName("feilong");
-
-        JsonConfig jsonConfig = new JsonConfig();
-
-        // String[] excludes = { "userInfo" };
-        // jsonConfig.setExcludes(excludes);
-
-        jsonConfig.registerPropertyExclusions(UserInfo.class, "age");
-        LOGGER.debug(JsonHelper.toJSON(user, jsonConfig).toString(4, 4));
-    }
-
-    /**
      * Name.
      */
-    @SuppressWarnings("static-method")
     @Test
     public void name1(){
         Map<String, Object> map = newHashMap();
@@ -159,7 +135,7 @@ public class JsonHelperTest extends AbstractJsonTest{
         // print: [{"dateAttr":"2009-09-12 07:23:54","name":"get"}]
         LOGGER.debug("" + toJSON(personArr));
 
-        Map map = new LinkedHashMap();
+        Map map = new LinkedHashMap<>();
         map.put("person1", ps);
 
         // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}

@@ -202,7 +202,7 @@ public final class JsonConfigBuilder{
 
         // java.lang.ClassCastException: JSON keys must be strings
         // see http://feitianbenyue.iteye.com/blog/2046877
-        jsonConfig.setAllowNonStringKeys(true);
+        //jsonConfig.setAllowNonStringKeys(true);
 
         //排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object
         //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);

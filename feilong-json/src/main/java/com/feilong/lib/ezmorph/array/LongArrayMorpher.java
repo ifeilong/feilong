@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.LongMorpher;
  */
 public final class LongArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant LONG_ARRAY_CLASS. */
-    private static final Class LONG_ARRAY_CLASS = long[].class;
+    private static final Class<?> LONG_ARRAY_CLASS = long[].class;
 
     /** The default value. */
-    private long               defaultValue;
+    private long                  defaultValue;
 
     //---------------------------------------------------------------
 
@@ -156,7 +155,7 @@ public final class LongArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return LONG_ARRAY_CLASS;
     }
 }

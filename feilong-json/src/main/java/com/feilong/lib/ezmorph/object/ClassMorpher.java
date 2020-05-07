@@ -103,7 +103,7 @@ public final class ClassMorpher implements ObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Class.class;
     }
 
@@ -115,7 +115,7 @@ public final class ClassMorpher implements ObjectMorpher{
      * @return true, if successful
      */
     @Override
-    public boolean supports(Class clazz){
+    public boolean supports(Class<?> clazz){
         return true;
     }
 }

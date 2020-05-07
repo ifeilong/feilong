@@ -53,7 +53,7 @@ public class JSONArrayBuilder{
 
         //---------------------------------------------------------------
         if (object != null && object.getClass().isArray()){
-            Class type = object.getClass().getComponentType();
+            Class<?> type = object.getClass().getComponentType();
             if (!type.isPrimitive()){
                 return _fromArray((Object[]) object, jsonConfig);
             }

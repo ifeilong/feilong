@@ -30,6 +30,8 @@ public final class ShortMorpher extends AbstractIntegerMorpher{
     /** The default value. */
     private short defaultValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new short morpher.
      */
@@ -124,10 +126,8 @@ public final class ShortMorpher extends AbstractIntegerMorpher{
         if (value instanceof Number){
             return ((Number) value).shortValue();
         }
-        short i = 0;
         try{
-            i = Short.parseShort(getIntegerValue(value));
-            return i;
+            return Short.parseShort(getIntegerValue(value));
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;
@@ -142,7 +142,7 @@ public final class ShortMorpher extends AbstractIntegerMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Short.TYPE;
     }
 }

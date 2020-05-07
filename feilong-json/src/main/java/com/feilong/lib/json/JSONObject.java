@@ -178,7 +178,7 @@ public final class JSONObject implements JSON{
      * Construct an empty JSONObject.
      */
     public JSONObject(){
-        this.properties = new ListOrderedMap();
+        this.properties = new ListOrderedMap<>();
     }
 
     /**

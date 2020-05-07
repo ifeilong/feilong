@@ -51,6 +51,8 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
         this.defaultValue = defaultValue;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Equals.
      *
@@ -70,6 +72,8 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
         if (!(obj instanceof FloatMorpher)){
             return false;
         }
+
+        //---------------------------------------------------------------
 
         FloatMorpher other = (FloatMorpher) obj;
         EqualsBuilder builder = new EqualsBuilder();
@@ -127,10 +131,10 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
         if (value instanceof Number){
             return ((Number) value).floatValue();
         }
-        float i = 0;
+
+        //---------------------------------------------------------------
         try{
-            i = Float.parseFloat(String.valueOf(value));
-            return i;
+            return Float.parseFloat(String.valueOf(value));
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;
@@ -139,13 +143,15 @@ public final class FloatMorpher extends AbstractDecimalMorpher{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Morphs to.
      *
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Float.TYPE;
     }
 }

@@ -15,7 +15,6 @@
  */
 package com.feilong.lib.json;
 
-import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Iterator;
@@ -23,13 +22,11 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaProperty;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.lib.json.processors.JsonBeanProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
-import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONTokener;
@@ -89,6 +86,7 @@ class JSONObjectBuilder{
         }
 
         //---------------------------------------------------------------
+
         return _fromBean(object, jsonConfig);
     }
 
@@ -145,7 +143,7 @@ class JSONObjectBuilder{
                 if (exclusions.contains(key)){
                     continue;
                 }
-                Class type = dynaProperty.getType();
+                Class<?> type = dynaProperty.getType();
                 Object value = bean.get(dynaProperty.getName());
                 if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
                     continue;
@@ -158,7 +156,7 @@ class JSONObjectBuilder{
                         throw new JSONException("Value is not a valid JSON value. " + value);
                     }
                 }
-                setValue(jsonObject, key, value, type, jsonConfig, bypass);
+                JSONObjectSetValueCore.setValue(jsonObject, key, value, type, jsonConfig, bypass);
             }
         }catch (Exception e){
             CycleSetUtil.removeInstance(bean);
@@ -336,6 +334,8 @@ class JSONObjectBuilder{
         Collection exclusions = jsonConfig.getMergedExcludes();
         JSONObject jsonObject = new JSONObject();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
+
+        //---------------------------------------------------------------
         try{
             for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
                 boolean bypass = false;
@@ -343,9 +343,6 @@ class JSONObjectBuilder{
                 Object k = entry.getKey();
                 if (k == null){
                     throw new JSONException("JSON keys cannot be null.");
-                }
-                if (!(k instanceof String) && !jsonConfig.isAllowNonStringKeys()){
-                    throw new ClassCastException("JSON keys must be strings.");
                 }
                 String key = String.valueOf(k);
                 if ("null".equals(key)){
@@ -367,7 +364,7 @@ class JSONObjectBuilder{
                             throw new JSONException("Value is not a valid JSON value. " + value);
                         }
                     }
-                    setValue(jsonObject, key, value, value.getClass(), jsonConfig, bypass);
+                    JSONObjectSetValueCore.setValue(jsonObject, key, value, value.getClass(), jsonConfig, bypass);
                 }else{
                     if (jsonObject.properties.containsKey(key)){
                         jsonObject.accumulate(key, JSONNull.getInstance(), new JsonConfig());
@@ -380,6 +377,8 @@ class JSONObjectBuilder{
             CycleSetUtil.removeInstance(map);
             throw JSONExceptionUtil.build("", e);
         }
+
+        //---------------------------------------------------------------
 
         CycleSetUtil.removeInstance(map);
         return jsonObject;
@@ -407,6 +406,7 @@ class JSONObjectBuilder{
                 throw JSONExceptionUtil.build("", e);
             }
         }
+
         //---------------------------------------------------------------
         Class<?> beanClass = bean.getClass();
         JsonBeanProcessor processor = jsonConfig.findJsonBeanProcessor(beanClass);
@@ -428,79 +428,9 @@ class JSONObjectBuilder{
             return json;
         }
 
-        JSONObject jsonObject = defaultBeanProcessing(bean, jsonConfig);
+        JSONObject jsonObject = BeanProcessing.defaultBeanProcessing(bean, jsonConfig);
         CycleSetUtil.removeInstance(bean);
         return jsonObject;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Default bean processing.
-     *
-     * @param bean
-     *            the bean
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON object
-     */
-    private static JSONObject defaultBeanProcessing(Object bean,JsonConfig jsonConfig){
-        Class beanClass = bean.getClass();
-        PropertyNameProcessor propertyNameProcessor = jsonConfig.findJsonPropertyNameProcessor(beanClass);
-        Collection exclusions = jsonConfig.getMergedExcludes();
-        JSONObject jsonObject = new JSONObject();
-        PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
-
-        //---------------------------------------------------------------
-
-        try{
-            PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(bean);
-
-            for (int i = 0; i < propertyDescriptors.length; i++){
-                PropertyDescriptor propertyDescriptor = propertyDescriptors[i];
-                if (IsIgnoreUtil.isIgnore(propertyDescriptor, exclusions, beanClass, jsonConfig)){
-                    continue;
-                }
-                //---------------------------------------------------------------
-                String key = propertyDescriptor.getName();
-                Object value = PropertyUtils.getProperty(bean, key);
-                if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
-                    continue;
-                }
-                //---------------------------------------------------------------
-                Class type = propertyDescriptor.getPropertyType();
-                set(key, value, jsonConfig, beanClass, propertyNameProcessor, type, jsonObject);
-            }
-
-            //---------------------------------------------------------------
-        }catch (Exception e){
-            CycleSetUtil.removeInstance(bean);
-            throw JSONExceptionUtil.build("", e);
-        }
-        return jsonObject;
-    }
-
-    private static void set(
-                    String key,
-                    Object value,
-                    JsonConfig jsonConfig,
-                    Class beanClass,
-                    PropertyNameProcessor propertyNameProcessor,
-                    Class type,
-                    JSONObject jsonObject){
-        JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(beanClass, type, key);
-        boolean bypass = false;
-        if (jsonValueProcessor != null){
-            value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
-            bypass = true;
-            if (!JsonVerifier.isValidJsonValue(value)){
-                throw new JSONException("Value is not a valid JSON value. " + value);
-            }
-        }
-        if (propertyNameProcessor != null){
-            key = propertyNameProcessor.processPropertyName(beanClass, key);
-        }
-        setValue(jsonObject, key, value, type, jsonConfig, bypass);
     }
 
     //---------------------------------------------------------------
@@ -539,9 +469,6 @@ class JSONObjectBuilder{
             if (k == null){
                 throw new JSONException("JSON keys cannot be null.");
             }
-            if (!(k instanceof String) && !jsonConfig.isAllowNonStringKeys()){
-                throw new ClassCastException("JSON keys must be strings.");
-            }
             String key = String.valueOf(k);
             if ("null".equals(key)){
                 throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
@@ -562,63 +489,6 @@ class JSONObjectBuilder{
 
         CycleSetUtil.removeInstance(object);
         return jsonObject;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 设置 value.
-     *
-     * @param jsonObject
-     *            the json object
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @param type
-     *            the type
-     * @param jsonConfig
-     *            the json config
-     * @param bypass
-     *            the bypass
-     */
-    private static void setValue(JSONObject jsonObject,String key,Object value,Class type,JsonConfig jsonConfig,boolean bypass){
-        boolean accumulated = false;
-        if (value == null){
-            value = jsonConfig.findDefaultValueProcessor(type).getDefaultValue(type);
-            if (!JsonVerifier.isValidJsonValue(value)){
-                throw new JSONException("Value is not a valid JSON value. " + value);
-            }
-        }
-
-        //---------------------------------------------------------------
-        if (jsonObject.properties.containsKey(key)){
-            if (String.class.isAssignableFrom(type)){
-                Object o = jsonObject.get(key);
-                if (o instanceof JSONArray){
-                    ((JSONArray) o).addString((String) value);
-                }else{
-                    jsonObject.properties.put(key, new JSONArray().element(o).addString((String) value));
-                }
-            }else{
-                jsonObject.accumulate(key, value, jsonConfig);
-            }
-            accumulated = true;
-        }else{
-            if (bypass || String.class.isAssignableFrom(type)){
-                jsonObject.properties.put(key, value);
-            }else{
-                jsonObject.setInternal(key, value, jsonConfig);
-            }
-        }
-
-        //---------------------------------------------------------------
-
-        value = jsonObject.get(key);
-        if (accumulated){
-            JSONArray array = (JSONArray) value;
-            value = array.get(array.size() - 1);
-        }
     }
 
 }

@@ -41,10 +41,10 @@ import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 public class MorpherRegistry implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -3894767123320768419L;
+    private static final long            serialVersionUID = -3894767123320768419L;
 
     /** The morphers. */
-    private final Map         morphers         = new HashMap();
+    private final Map<Class<?>, List<?>> morphers         = new HashMap<>();
 
     //---------------------------------------------------------------
 
@@ -73,8 +73,8 @@ public class MorpherRegistry implements Serializable{
      *            the target class for which a Morpher may be associated
      * @return the morpher for
      */
-    public synchronized Morpher getMorpherFor(Class clazz){
-        List registered = (List) morphers.get(clazz);
+    public synchronized Morpher getMorpherFor(Class<?> clazz){
+        List registered = morphers.get(clazz);
         if (registered == null || registered.isEmpty()){
             // no morpher registered for clazz
             return IdentityObjectMorpher.getInstance();
@@ -92,8 +92,8 @@ public class MorpherRegistry implements Serializable{
      *            associated
      * @return the morphers for
      */
-    private synchronized Morpher[] getMorphersFor(Class clazz){
-        List registered = (List) morphers.get(clazz);
+    private synchronized Morpher[] getMorphersFor(Class<?> clazz){
+        List registered = morphers.get(clazz);
         if (registered == null || registered.isEmpty()){
             // no morphers registered for clazz
             return new Morpher[] { IdentityObjectMorpher.getInstance() };
@@ -121,7 +121,7 @@ public class MorpherRegistry implements Serializable{
      * @throws MorphException
      *             if an error occurs during the conversion
      */
-    public Object morph(Class target,Object value){
+    public Object morph(Class<?> target,Object value){
         if (value == null){
             // give the first morpher in the list a shot to convert the value as we can't access type information on it
             Morpher morpher = getMorpherFor(target);
@@ -169,10 +169,12 @@ public class MorpherRegistry implements Serializable{
      *            is used to associate the Morpher to a target Class
      */
     public void registerMorpher(Morpher morpher){
-        List registered = (List) morphers.get(morpher.morphsTo());
+        Class<?> morphsTo = morpher.morphsTo();
+
+        List registered = morphers.get(morphsTo);
         if (registered == null){
-            registered = new ArrayList();
-            morphers.put(morpher.morphsTo(), registered);
+            registered = new ArrayList<>();
+            morphers.put(morphsTo, registered);
         }
         if (!registered.contains(morpher)){
             registered.add(morpher);

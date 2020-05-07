@@ -30,5 +30,5 @@ public interface DefaultValueProcessor{
      *            the type
      * @return the default value for instances of type
      */
-    Object getDefaultValue(Class type);
+    Object getDefaultValue(Class<?> type);
 }

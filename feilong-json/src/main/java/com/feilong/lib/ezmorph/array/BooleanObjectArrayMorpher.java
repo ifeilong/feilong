@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.BooleanMorpher;
  */
 public final class BooleanObjectArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant BOOLEAN_OBJECT_ARRAY_CLASS. */
-    private static final Class BOOLEAN_OBJECT_ARRAY_CLASS = Boolean[].class;
+    private static final Class<?> BOOLEAN_OBJECT_ARRAY_CLASS = Boolean[].class;
 
     /** The default value. */
-    private Boolean            defaultValue;
+    private Boolean               defaultValue;
 
     //---------------------------------------------------------------
 
@@ -167,7 +166,7 @@ public final class BooleanObjectArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return BOOLEAN_OBJECT_ARRAY_CLASS;
     }
 }

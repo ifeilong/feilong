@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.ShortMorpher;
  */
 public final class ShortArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant SHORT_ARRAY_CLASS. */
-    private static final Class SHORT_ARRAY_CLASS = short[].class;
+    private static final Class<?> SHORT_ARRAY_CLASS = short[].class;
 
     /** The default value. */
-    private short              defaultValue;
+    private short                 defaultValue;
 
     //---------------------------------------------------------------
 
@@ -156,7 +155,7 @@ public final class ShortArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return SHORT_ARRAY_CLASS;
     }
 }

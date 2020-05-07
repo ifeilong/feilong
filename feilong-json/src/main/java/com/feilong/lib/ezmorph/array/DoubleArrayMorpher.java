@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.DoubleMorpher;
  */
 public final class DoubleArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant DOUBLE_ARRAY_CLASS. */
-    private static final Class DOUBLE_ARRAY_CLASS = double[].class;
+    private static final Class<?> DOUBLE_ARRAY_CLASS = double[].class;
 
     /** The default value. */
-    private double             defaultValue;
+    private double                defaultValue;
 
     //---------------------------------------------------------------
 
@@ -156,7 +155,7 @@ public final class DoubleArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return DOUBLE_ARRAY_CLASS;
     }
 }

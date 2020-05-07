@@ -36,7 +36,7 @@ public class EnumMorpher implements ObjectMorpher{
      * @param enumClass
      *            the enum class
      */
-    public EnumMorpher(Class enumClass){
+    public EnumMorpher(Class<?> enumClass){
         if (enumClass == null){
             throw new IllegalArgumentException("enumClass is null");
         }
@@ -69,7 +69,7 @@ public class EnumMorpher implements ObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return enumClass;
     }
 
@@ -83,7 +83,7 @@ public class EnumMorpher implements ObjectMorpher{
      * @return true, if successful
      */
     @Override
-    public boolean supports(Class clazz){
+    public boolean supports(Class<?> clazz){
         return String.class.isAssignableFrom(clazz);
     }
 }

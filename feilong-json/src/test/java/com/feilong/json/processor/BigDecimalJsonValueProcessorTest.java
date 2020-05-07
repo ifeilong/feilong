@@ -58,7 +58,6 @@ public class BigDecimalJsonValueProcessorTest extends AbstractTest{
     }
 
     @Test
-    @SuppressWarnings("static-method")
     public void test3(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.10"));
@@ -74,7 +73,6 @@ public class BigDecimalJsonValueProcessorTest extends AbstractTest{
     }
 
     @Test
-    @SuppressWarnings("static-method")
     public void test5(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.109"));

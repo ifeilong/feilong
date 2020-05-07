@@ -40,7 +40,7 @@ public class IsIgnoreUtil{
 
     //---------------------------------------------------------------
 
-    static boolean isIgnore(Class beanClass,PropertyDescriptor propertyDescriptor,Collection exclusions){
+    static boolean isIgnore(Class<?> beanClass,PropertyDescriptor propertyDescriptor,Collection exclusions){
         String key = propertyDescriptor.getName();
         if (exclusions.contains(key)){
             return true;

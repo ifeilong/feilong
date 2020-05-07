@@ -144,7 +144,7 @@ public final class CharMorpher extends AbstractPrimitiveMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Character.TYPE;
     }
 }

@@ -129,9 +129,11 @@ public final class BooleanObjectMorpher extends AbstractObjectMorpher{
 
         if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("on")){
             return Boolean.TRUE;
-        }else if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
+        }
+        if (s.equalsIgnoreCase("false") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("off")){
             return Boolean.FALSE;
-        }else if (isUseDefault()){
+        }
+        if (isUseDefault()){
             return defaultValue;
         }
 
@@ -144,7 +146,7 @@ public final class BooleanObjectMorpher extends AbstractObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Boolean.class;
     }
 }

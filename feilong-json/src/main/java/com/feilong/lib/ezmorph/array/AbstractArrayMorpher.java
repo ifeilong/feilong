@@ -78,7 +78,7 @@ public abstract class AbstractArrayMorpher implements ObjectMorpher{
      * @return true, if successful
      */
     @Override
-    public boolean supports(Class clazz){
+    public boolean supports(Class<?> clazz){
         return clazz.isArray();
     }
 
@@ -91,7 +91,7 @@ public abstract class AbstractArrayMorpher implements ObjectMorpher{
      *            the initial
      * @return the int[]
      */
-    protected int[] createDimensions(int length,int initial){
+    protected static int[] createDimensions(int length,int initial){
         Object dims = Array.newInstance(int.class, length);
         Array.set(dims, 0, new Integer(initial));
         return (int[]) dims;
@@ -104,7 +104,7 @@ public abstract class AbstractArrayMorpher implements ObjectMorpher{
      *            the array class
      * @return the dimensions
      */
-    protected int getDimensions(Class arrayClass){
+    protected int getDimensions(Class<?> arrayClass){
         if (arrayClass == null || !arrayClass.isArray()){
             return 0;
         }

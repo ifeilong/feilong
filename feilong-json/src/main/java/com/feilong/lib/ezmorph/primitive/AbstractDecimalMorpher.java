@@ -30,6 +30,8 @@ public abstract class AbstractDecimalMorpher extends AbstractPrimitiveMorpher{
         super();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new abstract decimal morpher.
      *

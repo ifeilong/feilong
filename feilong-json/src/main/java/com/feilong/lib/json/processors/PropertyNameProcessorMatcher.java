@@ -41,7 +41,7 @@ public abstract class PropertyNameProcessorMatcher{
      *            a set of possible matches
      * @return the match
      */
-    public abstract Object getMatch(Class target,Set set);
+    public abstract Object getMatch(Class<?> target,Set set);
 
     /**
      * The Class DefaultPropertyNameProcessorMatcher.
@@ -58,7 +58,7 @@ public abstract class PropertyNameProcessorMatcher{
          * @return the match
          */
         @Override
-        public Object getMatch(Class target,Set set){
+        public Object getMatch(Class<?> target,Set set){
             if (target != null && set != null && set.contains(target)){
                 return target;
             }

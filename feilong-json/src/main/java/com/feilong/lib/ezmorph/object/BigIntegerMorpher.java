@@ -126,9 +126,8 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
         if (value == null){
             if (isUseDefault()){
                 return defaultValue;
-            }else{
-                return null;
             }
+            return null;
         }
 
         if (value instanceof Number){
@@ -167,7 +166,7 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return BigInteger.class;
     }
 

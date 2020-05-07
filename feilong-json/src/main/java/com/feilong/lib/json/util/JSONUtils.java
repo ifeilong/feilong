@@ -185,7 +185,7 @@ public final class JSONUtils{
      * @return the properties
      */
     public static Map getProperties(JSONObject jsonObject){
-        Map properties = new HashMap();
+        Map properties = new HashMap<>();
         for (Iterator keys = jsonObject.keys(); keys.hasNext();){
             String key = (String) keys.next();
             properties.put(key, getTypeClass(jsonObject.get(key)));
@@ -271,7 +271,7 @@ public final class JSONUtils{
      *            the clazz
      * @return true, if is array
      */
-    public static boolean isArray(Class clazz){
+    public static boolean isArray(Class<?> clazz){
         return clazz != null && (clazz.isArray() || Collection.class.isAssignableFrom(clazz) || (JSONArray.class.isAssignableFrom(clazz)));
     }
 
@@ -296,7 +296,7 @@ public final class JSONUtils{
      *            the clazz
      * @return true, if is boolean
      */
-    public static boolean isBoolean(Class clazz){
+    public static boolean isBoolean(Class<?> clazz){
         return clazz != null && (Boolean.TYPE.isAssignableFrom(clazz) || Boolean.class.isAssignableFrom(clazz));
     }
 
@@ -321,7 +321,7 @@ public final class JSONUtils{
      *            the clazz
      * @return true, if is double
      */
-    public static boolean isDouble(Class clazz){
+    public static boolean isDouble(Class<?> clazz){
         return clazz != null && (Double.TYPE.isAssignableFrom(clazz) || Double.class.isAssignableFrom(clazz));
     }
 
@@ -401,7 +401,7 @@ public final class JSONUtils{
      *            the clazz
      * @return true, if is number
      */
-    public static boolean isNumber(Class clazz){
+    public static boolean isNumber(Class<?> clazz){
         return clazz != null && (Byte.TYPE.isAssignableFrom(clazz) || Short.TYPE.isAssignableFrom(clazz)
                         || Integer.TYPE.isAssignableFrom(clazz) || Long.TYPE.isAssignableFrom(clazz) || Float.TYPE.isAssignableFrom(clazz)
                         || Double.TYPE.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz));
@@ -442,7 +442,7 @@ public final class JSONUtils{
      *            the clazz
      * @return true, if is string
      */
-    public static boolean isString(Class clazz){
+    public static boolean isString(Class<?> clazz){
         return clazz != null && (String.class.isAssignableFrom(clazz)
                         || (Character.TYPE.isAssignableFrom(clazz) || Character.class.isAssignableFrom(clazz)));
     }

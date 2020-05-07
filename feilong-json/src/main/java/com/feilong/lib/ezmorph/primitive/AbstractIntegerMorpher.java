@@ -52,7 +52,7 @@ public abstract class AbstractIntegerMorpher extends AbstractPrimitiveMorpher{
      *            the obj
      * @return the integer value
      */
-    protected String getIntegerValue(Object obj){
+    protected static String getIntegerValue(Object obj){
         // use en_US Locale
         Locale defaultLocale = Locale.getDefault();
         String str = null;
@@ -62,6 +62,8 @@ public abstract class AbstractIntegerMorpher extends AbstractPrimitiveMorpher{
         }finally{
             Locale.setDefault(defaultLocale);
         }
+
+        //---------------------------------------------------------------
 
         int index = str.indexOf(".");
         if (index != -1){

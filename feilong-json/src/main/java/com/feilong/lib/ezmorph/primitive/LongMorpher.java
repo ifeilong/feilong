@@ -129,10 +129,8 @@ public final class LongMorpher extends AbstractIntegerMorpher{
         if (value instanceof Number){
             return ((Number) value).longValue();
         }
-        long i = 0;
         try{
-            i = Long.parseLong(getIntegerValue(value));
-            return i;
+            return Long.parseLong(getIntegerValue(value));
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;
@@ -147,7 +145,7 @@ public final class LongMorpher extends AbstractIntegerMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Long.TYPE;
     }
 }

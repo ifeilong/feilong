@@ -58,7 +58,7 @@ public class PropertyValueConvertUtil{
      * @return the list
      */
     static List toList(String key,Object value,JsonConfig jsonConfig,String name,Map classMap){
-        Class targetClass = TargetClassFinder.findTargetClass(key, classMap);
+        Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
         targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
         JsonConfig jsc = jsonConfig.copy();
         jsc.setRootClass(targetClass);
@@ -83,14 +83,23 @@ public class PropertyValueConvertUtil{
      *            the collection type
      * @return the collection
      */
-    static Collection toCollection(String key,Object value,JsonConfig jsonConfig,String name,Map classMap,Class collectionType){
-        Class targetClass = TargetClassFinder.findTargetClass(key, classMap);
+    static Collection toCollection(
+                    String key,
+                    Object value,
+                    JsonConfig jsonConfig,
+                    String name,
+                    Map<String, Class<?>> classMap,
+                    Class<?> collectionType){
+        Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
         targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
-        JsonConfig jsc = jsonConfig.copy();
-        jsc.setRootClass(targetClass);
-        jsc.setClassMap(classMap);
-        jsc.setCollectionType(collectionType);
-        return JSONArrayToBeanUtil.toCollection((JSONArray) value, jsc);
+
+        //---------------------------------------------------------------
+
+        JsonConfig jsonConfigCopy = jsonConfig.copy();
+        jsonConfigCopy.setRootClass(targetClass);
+        jsonConfigCopy.setClassMap(classMap);
+        jsonConfigCopy.setCollectionType(collectionType);
+        return JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
     }
 
     /**
@@ -108,8 +117,8 @@ public class PropertyValueConvertUtil{
      *            the class map
      * @return the object
      */
-    static Object toArray(String key,Object value,Class targetType,JsonConfig jsonConfig,Map classMap){
-        Class innerType = JSONUtils.getInnerComponentType(targetType);
+    static Object toArray(String key,Object value,Class<?> targetType,JsonConfig jsonConfig,Map<String, Class<?>> classMap){
+        Class<?> innerType = JSONUtils.getInnerComponentType(targetType);
         Class targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
         if (innerType.equals(Object.class) && targetInnerType != null && !targetInnerType.equals(Object.class)){
             innerType = targetInnerType;
@@ -117,11 +126,11 @@ public class PropertyValueConvertUtil{
 
         //---------------------------------------------------------------
 
-        JsonConfig jsc = jsonConfig.copy();
-        jsc.setRootClass(innerType);
-        jsc.setClassMap(classMap);
+        JsonConfig jsonConfigCopy = jsonConfig.copy();
+        jsonConfigCopy.setRootClass(innerType);
+        jsonConfigCopy.setClassMap(classMap);
 
-        Object array = JSONArrayToBeanUtil.toArray((JSONArray) value, jsc);
+        Object array = JSONArrayToBeanUtil.toArray((JSONArray) value, jsonConfigCopy);
         if (innerType.isPrimitive() || JSONUtils.isNumber(innerType) || Boolean.class.isAssignableFrom(innerType)
                         || JSONUtils.isString(innerType)){
             array = JSONUtils.getMorpherRegistry().morph(Array.newInstance(innerType, 0).getClass(), array);

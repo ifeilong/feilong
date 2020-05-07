@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.ByteMorpher;
  */
 public final class ByteArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant BYTE_ARRAY_CLASS. */
-    private static final Class BYTE_ARRAY_CLASS = byte[].class;
+    private static final Class<?> BYTE_ARRAY_CLASS = byte[].class;
 
     /** The default value. */
-    private byte               defaultValue;
+    private byte                  defaultValue;
 
     //---------------------------------------------------------------
 
@@ -156,7 +155,7 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return BYTE_ARRAY_CLASS;
     }
 }

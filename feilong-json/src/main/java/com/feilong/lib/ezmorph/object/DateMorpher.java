@@ -267,7 +267,7 @@ public final class DateMorpher extends AbstractObjectMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return Date.class;
     }
 
@@ -289,7 +289,7 @@ public final class DateMorpher extends AbstractObjectMorpher{
      * @return true, if successful
      */
     @Override
-    public boolean supports(Class clazz){
+    public boolean supports(Class<?> clazz){
         return String.class.isAssignableFrom(clazz);
     }
 }

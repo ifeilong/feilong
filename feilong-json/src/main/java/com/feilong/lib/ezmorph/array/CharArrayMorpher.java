@@ -31,11 +31,10 @@ import com.feilong.lib.ezmorph.primitive.CharMorpher;
  */
 public final class CharArrayMorpher extends AbstractArrayMorpher{
 
-    /** The Constant CHAR_ARRAY_CLASS. */
-    private static final Class CHAR_ARRAY_CLASS = char[].class;
+    private static final Class<?> CHAR_ARRAY_CLASS = char[].class;
 
     /** The default value. */
-    private char               defaultValue;
+    private char                  defaultValue;
 
     //---------------------------------------------------------------
 
@@ -156,7 +155,7 @@ public final class CharArrayMorpher extends AbstractArrayMorpher{
      * @return the class
      */
     @Override
-    public Class morphsTo(){
+    public Class<?> morphsTo(){
         return CHAR_ARRAY_CLASS;
     }
 }
