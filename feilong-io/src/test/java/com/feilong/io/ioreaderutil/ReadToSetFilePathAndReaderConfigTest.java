@@ -32,6 +32,9 @@ import com.feilong.io.ReaderConfig;
  */
 public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStringTest{
 
+    /** The file path. */
+    private final String filePath1 = floderPath + "src/test/resources/readtest.txt";
+
     /**
      * Test read file path and reader config test null.
      */
@@ -63,7 +66,7 @@ public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStri
      */
     @Test
     public void testResolverReaderAndReaderConfigTest1(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+        Set<String> codes = IOReaderUtil.readToSet(filePath1, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
         assertThat(codes, allOf(hasItem("123456"), not(hasItem("23456"))));
     }
 
@@ -72,13 +75,13 @@ public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStri
      */
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath, new ReaderConfig());
+        Set<String> codes = IOReaderUtil.readToSet(filePath1, new ReaderConfig());
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 
     @Test
     public void testResolverReaderAndReaderConfigTest23(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath, null);
+        Set<String> codes = IOReaderUtil.readToSet(filePath1, null);
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 
@@ -89,7 +92,7 @@ public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStri
      */
     @Test
     public void testResolverReaderAndReaderConfigTest3(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath, new ReaderConfig(true, false));
+        Set<String> codes = IOReaderUtil.readToSet(filePath1, new ReaderConfig(true, false));
         assertThat(codes, allOf(hasItem("123456 "), hasItem("A"), hasItem("23456"), not(hasItem(" "))));
     }
 
@@ -98,7 +101,7 @@ public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStri
      */
     @Test
     public void testResolverReaderAndReaderConfigTest4(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath, new ReaderConfig(false, false));
+        Set<String> codes = IOReaderUtil.readToSet(filePath1, new ReaderConfig(false, false));
         assertThat(codes, allOf(hasItem(" "), hasItem(""), hasItem("123456 "), hasItem("A"), hasItem("23456")));
     }
 
@@ -108,7 +111,7 @@ public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStri
     // \n\n123456 \nA\n23456
     @Test
     public void testResolverReaderAndReaderConfigTest5(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath, new ReaderConfig(false, true));
+        Set<String> codes = IOReaderUtil.readToSet(filePath1, new ReaderConfig(false, true));
         assertThat(codes, allOf(hasItem(""), hasItem(""), hasItem("123456"), hasItem("A"), hasItem("23456")));
     }
 }
