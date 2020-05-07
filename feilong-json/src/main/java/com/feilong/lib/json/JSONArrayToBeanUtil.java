@@ -294,7 +294,7 @@ public class JSONArrayToBeanUtil{
      *            the class map
      * @return the object
      */
-    private static Object toArray(JSONArray jsonArray,Class objectClass,Map classMap){
+    private static Object toArray(JSONArray jsonArray,Class<?> objectClass,Map classMap){
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setRootClass(objectClass);
         jsonConfig.setClassMap(classMap);

@@ -42,7 +42,6 @@ public class ExecuteWithPartitionRunnableBuilderParamMapTest extends AbstractExc
      * Test execute.
      */
     @Test
-    
     public void testExecute(){
         AtomicInteger atomicInteger = new AtomicInteger(0);
 
@@ -62,7 +61,6 @@ public class ExecuteWithPartitionRunnableBuilderParamMapTest extends AbstractExc
      * Test execute null list.
      */
     @Test(expected = NullPointerException.class)
-    
     public void testExecuteNullList(){
         ThreadUtil.execute(null, 100, null, EmptyPartitionRunnableBuilder.INSTANCE);
     }
@@ -71,7 +69,6 @@ public class ExecuteWithPartitionRunnableBuilderParamMapTest extends AbstractExc
      * Test execute empty list.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testExecuteEmptyList(){
         ThreadUtil.execute(Collections.<Integer> emptyList(), 100, null, EmptyPartitionRunnableBuilder.INSTANCE);
     }
@@ -82,7 +79,6 @@ public class ExecuteWithPartitionRunnableBuilderParamMapTest extends AbstractExc
      * Test execute invalid per size.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testExecuteInvalidPerSize(){
         ThreadUtil.execute(toList(2), 0, null, EmptyPartitionRunnableBuilder.INSTANCE);
     }
@@ -91,20 +87,15 @@ public class ExecuteWithPartitionRunnableBuilderParamMapTest extends AbstractExc
      * Test execute invalid per size 1.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testExecuteInvalidPerSize1(){
         ThreadUtil.execute(toList(2), -100, null, EmptyPartitionRunnableBuilder.INSTANCE);
     }
 
     //---------------------------------------------------------
 
-    /**
-     * Test execute null group runnable builder.
-     */
     @Test(expected = NullPointerException.class)
-    
     public void testExecuteNullGroupRunnableBuilder(){
-        ThreadUtil.execute(toList(2), 100, null, (PartitionRunnableBuilder) null);
+        ThreadUtil.execute(toList(2), 100, null, (PartitionRunnableBuilder<Integer>) null);
     }
 
 }

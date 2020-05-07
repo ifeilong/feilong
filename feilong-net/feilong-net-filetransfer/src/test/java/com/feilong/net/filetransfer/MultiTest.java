@@ -57,7 +57,7 @@ public class MultiTest extends AbstractFileTransferTest{
         ThreadUtil.sleep(MILLISECOND_PER_MINUTE * 5);
     }
 
-    private void addTimerTask(TimerTask timerTask){
+    private static void addTimerTask(TimerTask timerTask){
         Timer timer = new Timer();
 
         //delay 行任务前的延迟时间，单位是毫秒。

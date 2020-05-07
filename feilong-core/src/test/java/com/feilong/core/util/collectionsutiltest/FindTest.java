@@ -17,9 +17,9 @@ package com.feilong.core.util.collectionsutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,6 @@ public class FindTest{
      * Test find.
      */
     @Test
-    
     public void testFind(){
         User zhangfei = new User("张飞", 23);
         User guanyu24 = new User("关羽", 24);
@@ -62,12 +61,10 @@ public class FindTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test find null iterable.
-     */
     @Test
     public void testFindNullIterable(){
-        assertEquals(null, CollectionsUtil.find(null, "name", "关羽"));
+        Object find = CollectionsUtil.find(null, "name", "关羽");
+        assertEquals(null, find);
     }
 
     /**

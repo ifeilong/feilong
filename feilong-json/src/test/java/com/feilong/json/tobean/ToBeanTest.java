@@ -77,6 +77,6 @@ public class ToBeanTest{
     @Test(expected = NullPointerException.class)
     public void testToBeanNullRootClass(){
         String json = "{'name':'get','dateAttr':'2009-11-12'}";
-        JsonUtil.toBean(json, (Class) null);
+        JsonUtil.toBean(json, (Class<?>) null);
     }
 }

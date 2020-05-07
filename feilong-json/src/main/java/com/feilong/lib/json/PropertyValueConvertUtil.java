@@ -119,7 +119,7 @@ public class PropertyValueConvertUtil{
      */
     static Object toArray(String key,Object value,Class<?> targetType,JsonConfig jsonConfig,Map<String, Class<?>> classMap){
         Class<?> innerType = JSONUtils.getInnerComponentType(targetType);
-        Class targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
+        Class<?> targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
         if (innerType.equals(Object.class) && targetInnerType != null && !targetInnerType.equals(Object.class)){
             innerType = targetInnerType;
         }

@@ -15,10 +15,10 @@
  */
 package com.feilong.io.ioreaderutil;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Set;
 
@@ -31,11 +31,6 @@ import com.feilong.io.ReaderConfig;
  * The Class ReadFilePathAndReaderConfigTest.
  */
 public class ReadToSetFilePathAndReaderConfigTest extends AbstractReadFileToStringTest{
-
-    /** The file path. */
-    private final String filePath = floderPath + "src/test/resources/readtest.txt";
-
-    //---------------------------------------------------------------
 
     /**
      * Test read file path and reader config test null.

@@ -202,7 +202,7 @@ public final class JsonUtil{
      * </pre>
      * 
      * <p>
-     * 如果 com.feilong.json.jsonlib.JsonUtil.format(Object, false) ,不过滤 null 值
+     * 如果 com.feilong.json.JsonUtil.format(Object, false) ,不过滤 null 值
      * </p>
      * 
      * <b>返回:</b>
@@ -235,7 +235,7 @@ public final class JsonUtil{
      * </pre>
      * 
      * <p>
-     * 如果 com.feilong.json.jsonlib.JsonUtil.format(Object, true),过滤 null 值元素
+     * 如果 com.feilong.json.JsonUtil.format(Object, true),过滤 null 值元素
      * </p>
      * 
      * <b>返回:</b>

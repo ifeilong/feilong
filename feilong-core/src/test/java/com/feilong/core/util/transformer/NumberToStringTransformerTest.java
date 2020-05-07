@@ -40,17 +40,20 @@ public class NumberToStringTransformerTest{
 
     //---------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testNumberToStringTransformerTestNull(){
         new NumberToStringTransformer(null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testNumberToStringTransformerTestEmpty(){
         new NumberToStringTransformer("");
 
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testNumberToStringTransformerTestBlank(){
         new NumberToStringTransformer(" ");

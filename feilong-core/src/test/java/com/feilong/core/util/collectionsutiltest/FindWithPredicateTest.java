@@ -40,7 +40,7 @@ public class FindWithPredicateTest{
      * Test find2.
      */
     @Test
-    
+
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
@@ -61,23 +61,17 @@ public class FindWithPredicateTest{
     @Test(expected = NullPointerException.class)
     public void testFindNullPredicate(){
         List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.find(list, (Predicate) null);
+        CollectionsUtil.find(list, (Predicate<User>) null);
     }
 
-    /**
-     * Test find null predicate 1.
-     */
     @Test(expected = NullPointerException.class)
     public void testFindNullPredicate1(){
-        CollectionsUtil.find(null, (Predicate) null);
+        CollectionsUtil.find(null, (Predicate<User>) null);
     }
 
-    /**
-     * Test find null iterable.
-     */
     @Test
     public void testFindNullIterable(){
-        assertEquals(null, CollectionsUtil.find(null, BeanPredicateUtil.equalPredicate("name", "关羽")));
+        assertEquals(null, CollectionsUtil.<Object> find(null, BeanPredicateUtil.equalPredicate("name", "关羽")));
     }
 
     /**

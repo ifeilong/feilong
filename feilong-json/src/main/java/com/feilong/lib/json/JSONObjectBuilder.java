@@ -134,7 +134,7 @@ class JSONObjectBuilder{
         JSONObject jsonObject = new JSONObject();
         try{
             DynaProperty[] props = bean.getDynaClass().getDynaProperties();
-            Collection exclusions = jsonConfig.getMergedExcludes();
+            Collection<String> exclusions = jsonConfig.getMergedExcludes();
             PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
             for (int i = 0; i < props.length; i++){
                 boolean bypass = false;
@@ -190,7 +190,7 @@ class JSONObjectBuilder{
             char c;
             String key;
             Object value;
-            Collection exclusions = jsonConfig.getMergedExcludes();
+            Collection<String> exclusions = jsonConfig.getMergedExcludes();
             PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
             JSONObject jsonObject = new JSONObject();
             for (;;){
@@ -331,7 +331,7 @@ class JSONObjectBuilder{
 
         //---------------------------------------------------------------
 
-        Collection exclusions = jsonConfig.getMergedExcludes();
+        Collection<String> exclusions = jsonConfig.getMergedExcludes();
         JSONObject jsonObject = new JSONObject();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
@@ -461,7 +461,7 @@ class JSONObjectBuilder{
         //---------------------------------------------------------------
 
         JSONArray sa = object.names(jsonConfig);
-        Collection exclusions = jsonConfig.getMergedExcludes();
+        Collection<String> exclusions = jsonConfig.getMergedExcludes();
         JSONObject jsonObject = new JSONObject();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
         for (Iterator i = sa.iterator(); i.hasNext();){

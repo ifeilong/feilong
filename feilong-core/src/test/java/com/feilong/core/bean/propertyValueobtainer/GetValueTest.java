@@ -43,8 +43,7 @@ public class GetValueTest{
     }
 
     @Test(expected = NullPointerException.class)
-    //@Test
-    public void testGetValueError() throws IntrospectionException{
+    public void testGetValueError(){
         PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(StoreLocatorErrorProperty.class);
 
         //---------------------------------------------------------------

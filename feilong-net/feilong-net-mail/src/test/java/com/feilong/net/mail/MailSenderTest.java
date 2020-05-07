@@ -18,8 +18,6 @@ package com.feilong.net.mail;
 import static com.feilong.core.CharsetType.UTF8;
 import static org.apache.commons.lang3.SystemUtils.USER_HOME;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
@@ -27,7 +25,7 @@ import com.feilong.io.IOReaderUtil;
 public class MailSenderTest extends AbstractMailSenderTest{
 
     @Test
-    public void sendMail1() throws IOException{
+    public void sendMail1(){
         String path = USER_HOME + "/feilong/train/1201单元测试/generalRegulation/generalRegulation-20141125194610.html";
         String textContent = IOReaderUtil.readToString(path, UTF8);
         mailSenderConfig.setContent(textContent);

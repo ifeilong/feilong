@@ -28,14 +28,16 @@ public class SimpleClassTransformerTest{
 
     @Test
     public void testTransform(){
-        assertEquals(123, new SimpleClassTransformer(Integer.class).transform("123"));
+        Object transform = new SimpleClassTransformer<String, Integer>(Integer.class).transform("123");
+        assertEquals(123, transform);
     }
 
     //---------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testSimpleClassTransformerTestNull(){
-        new SimpleClassTransformer(null);
+        new SimpleClassTransformer<>(null);
     }
 
 }

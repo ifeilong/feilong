@@ -191,7 +191,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * </pre>
      * 
-     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.jsonlib.JsonUtil#format(Object)}
+     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.JsonUtil#format(Object)}
      * 
      * <pre class="code">
      * 
@@ -458,7 +458,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * </pre>
      * 
-     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.jsonlib.JsonUtil#format(Object)}
+     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.JsonUtil#format(Object)}
      * 
      * <pre class="code">
      * 
@@ -568,7 +568,7 @@ public class JavaToJsonConfig extends AbstractConfig{
      * 
      * </pre>
      * 
-     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.jsonlib.JsonUtil#format(Object)}
+     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.JsonUtil#format(Object)}
      * 
      * <pre class="code">
      * 

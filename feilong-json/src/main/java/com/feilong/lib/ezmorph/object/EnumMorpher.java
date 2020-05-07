@@ -26,7 +26,7 @@ import com.feilong.lib.ezmorph.ObjectMorpher;
 public class EnumMorpher implements ObjectMorpher{
 
     /** The enum class. */
-    private final Class enumClass;
+    private final Class<?> enumClass;
 
     //---------------------------------------------------------------
 
@@ -60,7 +60,7 @@ public class EnumMorpher implements ObjectMorpher{
         if (value == null){
             return enumClass.cast(null);
         }
-        return Enum.valueOf(enumClass, String.valueOf(value));
+        return Enum.valueOf((Class) enumClass, String.valueOf(value));
     }
 
     /**

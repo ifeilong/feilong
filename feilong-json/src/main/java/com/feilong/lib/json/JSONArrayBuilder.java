@@ -20,8 +20,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
@@ -34,8 +32,6 @@ import com.feilong.lib.json.util.JSONUtils;
  * @since 3.0.0
  */
 public class JSONArrayBuilder{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JSONArrayBuilder.class);
 
     public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
         if (object instanceof JSONArray){
@@ -78,15 +74,19 @@ public class JSONArrayBuilder{
             }
 
             throw new JSONException("Unsupported type");
-        }else if (JSONUtils.isBoolean(object) || JSONUtils.isFunction(object) || JSONUtils.isNumber(object) || JSONUtils.isNull(object)
+        }
+        if (JSONUtils.isBoolean(object) || JSONUtils.isFunction(object) || JSONUtils.isNumber(object) || JSONUtils.isNull(object)
                         || JSONUtils.isString(object) || object instanceof JSON){
             JSONArray jsonArray = new JSONArray().element(object, jsonConfig);
             return jsonArray;
-        }else if (object instanceof Enum){
+        }
+        if (object instanceof Enum){
             return _fromArray((Enum) object, jsonConfig);
-        }else if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
+        }
+        if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
-        }else if (JSONUtils.isObject(object)){
+        }
+        if (JSONUtils.isObject(object)){
             JSONArray jsonArray = new JSONArray().element(JSONObject.fromObject(object, jsonConfig));
             return jsonArray;
         }
@@ -169,7 +169,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            jsonArray.addValue(new Character(array[i]), jsonConfig);
+            jsonArray.addValue(array[i], jsonConfig);
         }
 
         CycleSetUtil.removeInstance(array);
@@ -197,7 +197,7 @@ public class JSONArrayBuilder{
         JSONArray jsonArray = new JSONArray();
         try{
             for (int i = 0; i < array.length; i++){
-                Double d = new Double(array[i]);
+                Double d = array[i];
                 JSONUtils.testValidity(d);
                 jsonArray.addValue(d, jsonConfig);
             }

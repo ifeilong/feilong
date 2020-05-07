@@ -15,11 +15,11 @@
  */
 package com.feilong.json.tobean;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 
@@ -56,6 +56,6 @@ public class ToListTest{
     @Test(expected = NullPointerException.class)
     public void testToListNullRootClass(){
         String json = "[{'name':'get'},{'name':'set'}]";
-        JsonUtil.toList(json, (Class) null);
+        JsonUtil.toList(json, (Class<?>) null);
     }
 }

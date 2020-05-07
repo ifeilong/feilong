@@ -45,35 +45,33 @@ public class BeanPredicateTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test bean predicate test null 1.
-     */
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testBeanPredicateTestNull1(){
-        new BeanPredicate("name", null);
+        new BeanPredicate<>("name", null);
     }
 
-    /**
-     * Test bean predicate test null.
-     */
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testBeanPredicateTestNull(){
-        new BeanPredicate(null, null);
+        new BeanPredicate<>(null, null);
     }
 
     /**
      * Test bean predicate test empty.
      */
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPredicateTestEmpty(){
-        new BeanPredicate("", null);
+        new BeanPredicate<>("", null);
     }
 
     /**
      * Test bean predicate test blank.
      */
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPredicateTestBlank(){
-        new BeanPredicate(" ", null);
+        new BeanPredicate<>(" ", null);
     }
 }

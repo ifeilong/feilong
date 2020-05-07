@@ -15,9 +15,10 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.SortUtil.sortArray;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 import java.util.Comparator;
 
@@ -25,9 +26,6 @@ import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.util.SortUtil.sortArray;
 
 /**
  * The Class SortUtilSortArrayComparatorsTest.
@@ -65,13 +63,10 @@ public class SortArrayComparatorsTest{
         assertArrayEquals(toArray("cba", "fba", "almn"), arrays);
     }
 
-    /**
-     * Test sort array null array.
-     */
     @Test
     public void testSortArrayNullArray(){
         String[] arrays = null;
-        assertEquals(EMPTY_STRING_ARRAY, sortArray(arrays, ComparatorUtils.<String> naturalComparator()));
+        assertArrayEquals(EMPTY_STRING_ARRAY, sortArray(arrays, ComparatorUtils.<String> naturalComparator()));
     }
 
     /**
@@ -79,7 +74,7 @@ public class SortArrayComparatorsTest{
      */
     @Test
     public void testSortArrayNullComparator(){
-        assertEquals(toArray(1, 2, 3), sortArray(toArray(1, 2, 3), null));
+        assertArrayEquals(toArray(1, 2, 3), sortArray(toArray(1, 2, 3), null));
     }
 
     /**
@@ -87,6 +82,6 @@ public class SortArrayComparatorsTest{
      */
     @Test
     public void testSortArrayEmptyComparator(){
-        assertEquals(toArray(1, 2, 3), sortArray(toArray(1, 2, 3), ConvertUtil.<Comparator> toArray()));
+        assertArrayEquals(toArray(1, 2, 3), sortArray(toArray(1, 2, 3), ConvertUtil.<Comparator> toArray()));
     }
 }

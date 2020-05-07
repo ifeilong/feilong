@@ -65,7 +65,7 @@ public class ExecuteWithPartitionRunnableBuilderTest extends AbstractExcuteTest{
 
     @Test(expected = NullPointerException.class)
     public void testExecuteNullGroupRunnableBuilder(){
-        ThreadUtil.execute(toList(2), 100, (PartitionRunnableBuilder) null);
+        ThreadUtil.execute(toList(2), 100, (PartitionRunnableBuilder<Integer>) null);
     }
 
 }

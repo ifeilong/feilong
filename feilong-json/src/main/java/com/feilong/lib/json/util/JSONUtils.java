@@ -170,7 +170,7 @@ public final class JSONUtils{
      *            the type
      * @return the inner component type
      */
-    public static Class getInnerComponentType(Class type){
+    public static Class<?> getInnerComponentType(Class<?> type){
         if (!type.isArray()){
             return type;
         }
@@ -201,7 +201,7 @@ public final class JSONUtils{
      *            the obj
      * @return the type class
      */
-    public static Class getTypeClass(Object obj){
+    public static Class<?> getTypeClass(Object obj){
         if (isNull(obj)){
             return Object.class;
         }
@@ -257,11 +257,11 @@ public final class JSONUtils{
     public static int hashCode(Object value){
         if (value == null){
             return JSONNull.getInstance().hashCode();
-        }else if (value instanceof JSON || value instanceof String || value instanceof JSONFunction){
-            return value.hashCode();
-        }else{
-            return String.valueOf(value).hashCode();
         }
+        if (value instanceof JSON || value instanceof String || value instanceof JSONFunction){
+            return value.hashCode();
+        }
+        return String.valueOf(value).hashCode();
     }
 
     /**
@@ -272,7 +272,8 @@ public final class JSONUtils{
      * @return true, if is array
      */
     public static boolean isArray(Class<?> clazz){
-        return clazz != null && (clazz.isArray() || Collection.class.isAssignableFrom(clazz) || (JSONArray.class.isAssignableFrom(clazz)));
+        return clazz != null && //
+                        (clazz.isArray() || Collection.class.isAssignableFrom(clazz) || (JSONArray.class.isAssignableFrom(clazz)));
     }
 
     /**
@@ -283,10 +284,10 @@ public final class JSONUtils{
      * @return true, if is array
      */
     public static boolean isArray(Object obj){
-        if ((obj != null && obj.getClass().isArray()) || (obj instanceof Collection) || (obj instanceof JSONArray)){
-            return true;
-        }
-        return false;
+        return (obj != null && obj.getClass().isArray()) || //
+                        obj instanceof Collection || //
+                        obj instanceof JSONArray;
+
     }
 
     /**
@@ -297,7 +298,8 @@ public final class JSONUtils{
      * @return true, if is boolean
      */
     public static boolean isBoolean(Class<?> clazz){
-        return clazz != null && (Boolean.TYPE.isAssignableFrom(clazz) || Boolean.class.isAssignableFrom(clazz));
+        return clazz != null && //
+                        (Boolean.TYPE.isAssignableFrom(clazz) || Boolean.class.isAssignableFrom(clazz));
     }
 
     /**
@@ -308,10 +310,8 @@ public final class JSONUtils{
      * @return true, if is boolean
      */
     public static boolean isBoolean(Object obj){
-        if ((obj instanceof Boolean) || (obj != null && obj.getClass() == Boolean.TYPE)){
-            return true;
-        }
-        return false;
+        return obj instanceof Boolean || //
+                        (obj != null && obj.getClass() == Boolean.TYPE);
     }
 
     /**
@@ -322,7 +322,8 @@ public final class JSONUtils{
      * @return true, if is double
      */
     public static boolean isDouble(Class<?> clazz){
-        return clazz != null && (Double.TYPE.isAssignableFrom(clazz) || Double.class.isAssignableFrom(clazz));
+        return clazz != null && //
+                        (Double.TYPE.isAssignableFrom(clazz) || Double.class.isAssignableFrom(clazz));
     }
 
     /**
@@ -339,10 +340,7 @@ public final class JSONUtils{
             String str = (String) obj;
             return str.startsWith(FUNCTION_PREFIX) && RegexpUtils.getMatcher(FUNCTION_PATTERN, true).matches(str);
         }
-        if (obj instanceof JSONFunction){
-            return true;
-        }
-        return false;
+        return obj instanceof JSONFunction;
     }
 
     /**
@@ -721,11 +719,13 @@ public final class JSONUtils{
                 if (((Double) o).isInfinite() || ((Double) o).isNaN()){
                     throw new JSONException("JSON does not allow non-finite numbers");
                 }
-            }else if (o instanceof Float){
+            }
+            if (o instanceof Float){
                 if (((Float) o).isInfinite() || ((Float) o).isNaN()){
                     throw new JSONException("JSON does not allow non-finite numbers.");
                 }
-            }else if (o instanceof BigDecimal || o instanceof BigInteger){
+            }
+            if (o instanceof BigDecimal || o instanceof BigInteger){
                 // ok
                 return;
             }
@@ -843,6 +843,7 @@ public final class JSONUtils{
      * @return true if n is instanceOf BigInteger or the literal value can be
      *         evaluated as a BigInteger
      */
+    @SuppressWarnings("unused")
     private static boolean isBigDecimal(Number n){
         if (n instanceof BigDecimal){
             return true;
@@ -863,6 +864,7 @@ public final class JSONUtils{
      * @return true if n is instanceOf BigInteger or the literal value can be
      *         evaluated as a BigInteger
      */
+    @SuppressWarnings("unused")
     private static boolean isBigInteger(Number n){
         if (n instanceof BigInteger){
             return true;

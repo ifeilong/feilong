@@ -15,13 +15,12 @@
  */
 package com.feilong.core.util.sortutiltest;
 
-import static org.junit.Assert.assertEquals;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.SortUtil.sortArray;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.util.SortUtil.sortArray;
 
 /**
  * The Class SortUtilSortArrayTest.
@@ -30,29 +29,26 @@ import static com.feilong.core.util.SortUtil.sortArray;
  */
 public class SortArrayTest{
 
-    /**
-     * Test sort array null array.
-     */
     @Test
-    public final void testSortArrayNullArray(){
-        assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sortArray((Object[]) null));
+    public void testSortArrayNullArray(){
+        assertArrayEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sortArray((Object[]) null));
     }
 
     /**
      * Test sort array null.
      */
     @Test
-    public final void testSortArrayNull(){
-        assertEquals(toArray((String) null), sortArray(toArray((String) null)));
+    public void testSortArrayNull(){
+        assertArrayEquals(toArray((String) null), sortArray(toArray((String) null)));
     }
 
     /**
      * Test sort T array.
      */
     @Test
-    public final void testSortTArray(){
+    public void testSortTArray(){
         Integer[] array = toArray(100, 2, 200, 1, 500);
         sortArray(array);
-        assertEquals(toArray(1, 2, 100, 200, 500), array);
+        assertArrayEquals(toArray(1, 2, 100, 200, 500), array);
     }
 }

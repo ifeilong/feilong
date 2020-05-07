@@ -18,6 +18,7 @@ package com.feilong.taglib.display.pager.command;
 import org.junit.Test;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 
 /**
@@ -27,12 +28,9 @@ import com.feilong.test.AbstractTest;
  */
 public class PagerTest extends AbstractTest{
 
-    /**
-     * Test.
-     */
     @Test
     public void test(){
-        Pager pager = new Pager(2, 10, 10000);
+        Pager<User> pager = new Pager<>(2, 10, 10000);
         pager.setMaxShowPageNo(-2);
         LOGGER.debug(JsonUtil.format(pager));
     }

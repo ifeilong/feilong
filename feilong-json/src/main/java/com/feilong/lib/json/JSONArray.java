@@ -578,16 +578,6 @@ public final class JSONArray implements JSON{
         }
 
         /**
-         * Instantiates a new JSON array list iterator.
-         *
-         * @param index
-         *            the index
-         */
-        JSONArrayListIterator(int index){
-            currentIndex = index;
-        }
-
-        /**
          * Checks for next.
          *
          * @return true, if successful

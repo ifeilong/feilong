@@ -106,7 +106,7 @@ public final class ELFunctions{
      * @param obj
      *            the obj
      * @return the string
-     * @see com.feilong.json.jsonlib.JsonUtil#format(Object, int, int)
+     * @see com.feilong.json.JsonUtil#format(Object, int, int)
      */
     public static String toJsonString(Object obj){
         try{

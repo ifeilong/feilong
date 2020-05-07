@@ -35,7 +35,6 @@ import com.feilong.lib.json.processors.DefaultValueProcessor;
 import com.feilong.lib.json.processors.JsonBeanProcessor;
 import com.feilong.lib.json.processors.JsonBeanProcessorMatcher;
 import com.feilong.lib.json.processors.JsonValueProcessor;
-import com.feilong.lib.json.processors.JsonValueProcessorMatcher;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessorMatcher;
 import com.feilong.lib.json.util.CycleDetectionStrategy;
@@ -50,8 +49,6 @@ import com.feilong.lib.json.util.PropertyFilter;
 public class JsonConfig{
 
     private static final JsonBeanProcessorMatcher      DEFAULT_JSON_BEAN_PROCESSOR_MATCHER     = JsonBeanProcessorMatcher.DEFAULT;
-
-    private static final JsonValueProcessorMatcher     DEFAULT_JSON_VALUE_PROCESSOR_MATCHER    = JsonValueProcessorMatcher.DEFAULT;
 
     private static final PropertyNameProcessorMatcher  DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER = PropertyNameProcessorMatcher.DEFAULT;
 
@@ -137,9 +134,6 @@ public class JsonConfig{
 
     /** The json property name processor matcher. */
     private PropertyNameProcessorMatcher               jsonPropertyNameProcessorMatcher        = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
-
-    /** The json value processor matcher. */
-    private JsonValueProcessorMatcher                  jsonValueProcessorMatcher               = DEFAULT_JSON_VALUE_PROCESSOR_MATCHER;
 
     //---------------------------------------------------------------
 
@@ -233,12 +227,7 @@ public class JsonConfig{
      * @return the json value processor
      */
     public JsonValueProcessor findJsonValueProcessor(Class<?> propertyType){
-        if (!typeMap.isEmpty()){
-            Object key = jsonValueProcessorMatcher.getMatch(propertyType, typeMap.keySet());
-            return typeMap.get(key);
-
-        }
-        return null;
+        return typeMap.get(propertyType);
     }
 
     /**
@@ -273,13 +262,7 @@ public class JsonConfig{
             return jsonValueProcessor;
         }
         //---------------------------------------------------------------
-        Object tkey = jsonValueProcessorMatcher.getMatch(propertyType, typeMap.keySet());
-        jsonValueProcessor = typeMap.get(tkey);
-        if (jsonValueProcessor != null){
-            return jsonValueProcessor;
-        }
-
-        return null;
+        return typeMap.get(propertyType);
     }
 
     /**
@@ -304,14 +287,7 @@ public class JsonConfig{
         if (jsonValueProcessor != null){
             return jsonValueProcessor;
         }
-
-        Object tkey = jsonValueProcessorMatcher.getMatch(propertyType, typeMap.keySet());
-        jsonValueProcessor = typeMap.get(tkey);
-        if (jsonValueProcessor != null){
-            return jsonValueProcessor;
-        }
-
-        return null;
+        return typeMap.get(propertyType);
     }
 
     //---------------------------------------------------------------
@@ -429,17 +405,6 @@ public class JsonConfig{
      */
     public PropertyNameProcessorMatcher getJsonPropertyNameProcessorMatcher(){
         return javaPropertyNameProcessorMatcher;
-    }
-
-    /**
-     * Returns the configured JsonValueProcessorMatcher.<br>
-     * Default value is JsonValueProcessorMatcher.DEFAULT<br>
-     * [Java -&gt; JSON]
-     *
-     * @return the json value processor matcher
-     */
-    public JsonValueProcessorMatcher getJsonValueProcessorMatcher(){
-        return jsonValueProcessorMatcher;
     }
 
     /**
@@ -756,19 +721,6 @@ public class JsonConfig{
     }
 
     /**
-     * Sets a JsonValueProcessorMatcher to use.<br>
-     * Will set default value (JsonValueProcessorMatcher.DEFAULT) if null.<br>
-     * [Java -&gt; JSON]
-     *
-     * @param jsonValueProcessorMatcher
-     *            the new json value processor matcher
-     */
-    public void setJsonValueProcessorMatcher(JsonValueProcessorMatcher jsonValueProcessorMatcher){
-        this.jsonValueProcessorMatcher = jsonValueProcessorMatcher == null ? DEFAULT_JSON_VALUE_PROCESSOR_MATCHER
-                        : jsonValueProcessorMatcher;
-    }
-
-    /**
      * Sets the current root Class.<br>
      * [JSON -&gt; Java]
      * 
@@ -801,7 +753,6 @@ public class JsonConfig{
         defaultValueMap.clear();
         //ignoreJPATransient = false;
         collectionType = List.class;
-        jsonValueProcessorMatcher = DEFAULT_JSON_VALUE_PROCESSOR_MATCHER;
         javaPropertyNameProcessorMap.clear();
         javaPropertyNameProcessorMatcher = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
         jsonPropertyNameProcessorMap.clear();
@@ -839,7 +790,6 @@ public class JsonConfig{
         jsonConfig.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher;
         jsonConfig.defaultValueMap.putAll(defaultValueMap);
         jsonConfig.collectionType = collectionType;
-        jsonConfig.jsonValueProcessorMatcher = jsonValueProcessorMatcher;
         jsonConfig.javaPropertyNameProcessorMatcher = javaPropertyNameProcessorMatcher;
         jsonConfig.javaPropertyNameProcessorMap.putAll(javaPropertyNameProcessorMap);
         jsonConfig.jsonPropertyNameProcessorMatcher = jsonPropertyNameProcessorMatcher;

@@ -19,7 +19,7 @@ import com.feilong.lib.json.processors.JsonVerifier;
 
 public class JSONObjectSetValueCore{
 
-    static void setValue(JSONObject jsonObject,String key,Object value,Class type,JsonConfig jsonConfig,boolean bypass){
+    static void setValue(JSONObject jsonObject,String key,Object value,Class<?> type,JsonConfig jsonConfig,boolean bypass){
         if (value == null){
             value = jsonConfig.findDefaultValueProcessor(type).getDefaultValue(type);
             if (!JsonVerifier.isValidJsonValue(value)){

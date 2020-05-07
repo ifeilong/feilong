@@ -41,9 +41,7 @@ public class RegexGroupNumberComparatorTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test regex group number comparator test null.
-     */
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testRegexGroupNumberComparatorTestNull(){
         new RegexGroupNumberComparator(null);
@@ -52,6 +50,7 @@ public class RegexGroupNumberComparatorTest{
     /**
      * Test regex group number comparator test empty.
      */
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testRegexGroupNumberComparatorTestEmpty(){
         new RegexGroupNumberComparator("");
@@ -60,6 +59,7 @@ public class RegexGroupNumberComparatorTest{
     /**
      * Test regex group number comparator test blank.
      */
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testRegexGroupNumberComparatorTestBlank(){
         new RegexGroupNumberComparator(" ");

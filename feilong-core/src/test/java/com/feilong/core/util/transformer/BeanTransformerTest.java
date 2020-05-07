@@ -54,13 +54,15 @@ public class BeanTransformerTest{
 
     //---------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testBeanTransformerTestNull(){
-        new BeanTransformer(null);
+        new BeanTransformer<>(null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testBeanTransformerTestNull1(){
-        new BeanTransformer(null, "name");
+        new BeanTransformer<>(null, "name");
     }
 }

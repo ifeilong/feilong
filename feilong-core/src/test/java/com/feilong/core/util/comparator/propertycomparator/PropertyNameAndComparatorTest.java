@@ -22,18 +22,19 @@ import com.feilong.core.util.comparator.PropertyComparator;
 
 public class PropertyNameAndComparatorTest{
 
-    //----------------------------------------------------------------------------
-
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testPropertyComparatorNullPropertyNameAndNaturalComparator(){
         new PropertyComparator<>(null, ComparatorUtils.NATURAL_COMPARATOR);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorEmptyPropertyNameAndNaturalComparator(){
         new PropertyComparator<>("", ComparatorUtils.NATURAL_COMPARATOR);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorBlankPropertyNameAndNaturalComparator(){
         new PropertyComparator<>("    ", ComparatorUtils.NATURAL_COMPARATOR);

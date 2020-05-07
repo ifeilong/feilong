@@ -54,7 +54,6 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *            the os
      * @param beans
      *            the beans
-     * @return the write status
      */
     @Override
     public void write(String template,OutputStream os,Map<String, Object> beans){
@@ -68,7 +67,6 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *            the os
      * @param beans
      *            the beans
-     * @return the write status
      */
     @Override
     public void write(OutputStream outputStream,Map<String, Object> beans){
@@ -96,7 +94,6 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *            the os
      * @param beansList
      *            the beans list
-     * @return the write status
      */
     @Override
     public void writePerSheet(String template,OutputStream os,List<Map<String, Object>> beansList){
@@ -121,7 +118,6 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *            the os
      * @param beansList
      *            the beans list
-     * @return the write status
      */
     @Override
     public void writePerSheet(OutputStream os,List<Map<String, Object>> beansList){

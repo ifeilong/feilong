@@ -18,15 +18,11 @@ package com.feilong.temp;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
 public class GetTestTemp extends AbstractTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetTestTemp.class);
 
     @Test
     public void testGetResponseBodyAsString(){

@@ -18,8 +18,6 @@ package com.feilong.taglib.display.httpconcat;
 import static com.feilong.taglib.display.httpconcat.HttpConcatUtil.getWriteContent;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
@@ -30,9 +28,6 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @since 1.0.7
  */
 public class HttpConcatUtilTest2 extends BaseHttpConcatTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatUtilTest2.class);
 
     @Test
     public void testGetWriteContent(){

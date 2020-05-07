@@ -30,22 +30,22 @@ public class TagUtilsFindAttributeValueTest{
 
     @Test
     public void test(){
-        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", "request"));
+        assertEquals(null, TagUtils.<Object> findAttributeValue(pageContext, "name", "request"));
     }
 
     @Test
     public void test1(){
-        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", null));
+        assertEquals(null, TagUtils.<Object> findAttributeValue(pageContext, "name", null));
     }
 
     @Test
     public void test2(){
-        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", ""));
+        assertEquals(null, TagUtils.<Object> findAttributeValue(pageContext, "name", ""));
     }
 
     @Test
     public void test3(){
-        assertEquals(null, TagUtils.findAttributeValue(pageContext, "name", " "));
+        assertEquals(null, TagUtils.<Object> findAttributeValue(pageContext, "name", " "));
     }
 
     //---------------------------------------------------------------

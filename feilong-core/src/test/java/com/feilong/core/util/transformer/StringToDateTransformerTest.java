@@ -45,17 +45,20 @@ public class StringToDateTransformerTest{
 
     //---------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testStringToDateTransformerTestNull(){
         new StringToDateTransformer(null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testStringToDateTransformerTestEmpty(){
         new StringToDateTransformer("");
 
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testStringToDateTransformerTestBlank(){
         new StringToDateTransformer(" ");

@@ -15,10 +15,10 @@
  */
 package com.feilong.core.util.comparator.propertycomparator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -128,16 +128,19 @@ public class PropertyNameTest{
 
     //----------------------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testPropertyComparatorNullPropertyName(){
         new PropertyComparator<>(null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorEmptyPropertyName(){
         new PropertyComparator<>("");
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorBlankPropertyName(){
         new PropertyComparator<>("    ");

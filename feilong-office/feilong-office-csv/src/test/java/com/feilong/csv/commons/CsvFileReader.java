@@ -3,12 +3,12 @@ package com.feilong.csv.commons;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,11 +57,11 @@ public class CsvFileReader{
             for (User user : userList){
                 LOGGER.debug(user.toString());
             }
-        }catch (Exception e){}finally{
-            try{
-                fileReader.close();
-                csvFileParser.close();
-            }catch (IOException e){}
+        }catch (Exception e){
+
+        }finally{
+            IOUtils.closeQuietly(fileReader);
+            IOUtils.closeQuietly(csvFileParser);
         }
     }
 

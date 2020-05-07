@@ -108,7 +108,7 @@ public class InstantiatingNullHandler implements NullHandler{
         LOGGER.trace("Entering nullPropertyValue [target={}, property={}]", target, property);
 
         //---------------------------------------------------------------
-        if ((target == null) || (property == null)){
+        if ((target == null) || property == null){
             return null;
         }
         //---------------------------------------------------------------
@@ -117,18 +117,18 @@ public class InstantiatingNullHandler implements NullHandler{
             String propName = property.toString();
             Class<?> clazz = null;
 
-            if (target != null){
-                PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(target.getClass(), propName);
-                if (pd == null){
-                    return null;
-                }
-                clazz = pd.getPropertyType();
+            PropertyDescriptor pd = OgnlRuntime.getPropertyDescriptor(target.getClass(), propName);
+            if (pd == null){
+                return null;
             }
+            clazz = pd.getPropertyType();
 
             if (clazz == null){
                 // can't do much here!
                 return null;
             }
+
+            //---------------------------------------------------------------
 
             //ignore those class in ignored package
             if (ignoreClass(clazz)){

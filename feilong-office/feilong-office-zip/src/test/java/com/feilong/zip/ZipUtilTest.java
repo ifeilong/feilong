@@ -41,14 +41,7 @@ public class ZipUtilTest{
         a(tobeZipFilePath, outputZipPath);
     }
 
-    /**
-     * @param tobeZipFilePath
-     * @param outputZipPath
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @since 3.0.0
-     */
-    private void a(String tobeZipFilePath,String outputZipPath) throws FileNotFoundException,IOException{
+    private static void a(String tobeZipFilePath,String outputZipPath) throws FileNotFoundException,IOException{
         ZipArchiveOutputStream zipArchiveOutputStream = new ZipArchiveOutputStream(
                         new BufferedOutputStream(FileUtil.getFileOutputStream(outputZipPath)));
         ZipUtil.zip(zipArchiveOutputStream, tobeZipFilePath, outputZipPath);

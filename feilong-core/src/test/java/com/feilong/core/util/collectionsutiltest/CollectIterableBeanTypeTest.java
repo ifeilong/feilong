@@ -34,15 +34,8 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.Customer;
 import com.feilong.store.member.User;
 
-/**
- * The Class CollectIterableBeanTypeTest.
- */
 public class CollectIterableBeanTypeTest{
 
-    /**
-     * Test collect3.
-     */
-    
     @Test
     public void testCollect3(){
         List<User> list = toList(//
@@ -65,10 +58,6 @@ public class CollectIterableBeanTypeTest{
         assertThat(customerList.get(2), allOf(hasProperty("id", is(25L)), hasProperty("name", is("刘备"))));
     }
 
-    /**
-     * Test collect with null element.
-     */
-    
     @Test
     public void testCollectWithNullElement(){
         List<User> list = toList(//
@@ -80,10 +69,6 @@ public class CollectIterableBeanTypeTest{
         assertThat(customerList.get(1), is((Customer) null));
     }
 
-    /**
-     * Test collect with property name.
-     */
-    
     //---------
     @Test
     public void testCollectWithPropertyName(){
@@ -94,10 +79,6 @@ public class CollectIterableBeanTypeTest{
         assertThat(customerList.get(0), allOf(hasProperty("id", not(23L)), hasProperty("name", is("张飞"))));
     }
 
-    /**
-     * Test collect with property name no from name.
-     */
-    
     //---------
     @Test(expected = BeanOperationException.class)
     public void testCollectWithPropertyNameNoFromName(){
@@ -110,7 +91,7 @@ public class CollectIterableBeanTypeTest{
     /**
      * Test collect with property name no to name.
      */
-    
+
     @Test(expected = BeanOperationException.class)
     public void testCollectWithPropertyNameNoToName(){
         List<User> list = toList(//
@@ -121,33 +102,19 @@ public class CollectIterableBeanTypeTest{
 
     //---------
 
-    /**
-     * Test collect null iterable.
-     */
-    
     @Test
     public void testCollectNullIterable(){
         assertEquals(null, CollectionsUtil.collect((List<Long>) null, User.class));
     }
 
-    /**
-     * Test collect empty iterable.
-     */
-    
     @Test
     public void testCollectEmptyIterable(){
         assertEquals(emptyList(), CollectionsUtil.collect(new ArrayList<Long>(), User.class));
     }
 
-    //********
-
-    /**
-     * Test collect null output list bean type.
-     */
-    
     @Test(expected = NullPointerException.class)
     public void testCollectNullOutputListBeanType(){
-        CollectionsUtil.collect(new ArrayList<Long>(), (Class) null);
+        CollectionsUtil.collect(new ArrayList<Long>(), (Class<?>) null);
     }
 
 }

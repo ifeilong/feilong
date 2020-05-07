@@ -50,7 +50,7 @@ class TargetClassFinder{
      */
     static Class<?> findTargetClass(String key,Map classMap){
         // try get first
-        Class<?> targetClass = (Class) classMap.get(key);
+        Class<?> targetClass = (Class<?>) classMap.get(key);
 
         if (targetClass == null){
             // try with regexp
@@ -58,7 +58,7 @@ class TargetClassFinder{
             for (Iterator i = classMap.entrySet().iterator(); i.hasNext();){
                 Map.Entry entry = (Map.Entry) i.next();
                 if (RegexpUtils.getMatcher((String) entry.getKey()).matches(key)){
-                    targetClass = (Class) entry.getValue();
+                    targetClass = (Class<?>) entry.getValue();
                     break;
                 }
             }

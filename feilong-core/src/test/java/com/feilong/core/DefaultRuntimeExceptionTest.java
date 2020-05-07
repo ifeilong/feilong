@@ -27,6 +27,7 @@ public class DefaultRuntimeExceptionTest{
     @Test(expected = DefaultRuntimeException.class)
     public void test(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new DefaultRuntimeException(e);
@@ -36,6 +37,7 @@ public class DefaultRuntimeExceptionTest{
     @Test(expected = RuntimeException.class)
     public void test1(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -45,9 +47,9 @@ public class DefaultRuntimeExceptionTest{
     //---------------------------------------------------------------
 
     @Test(expected = DefaultRuntimeException.class)
-    //@Test
     public void testDefaultRuntimeException(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new DefaultRuntimeException("", e);
@@ -55,9 +57,9 @@ public class DefaultRuntimeExceptionTest{
     }
 
     @Test(expected = RuntimeException.class)
-    //@Test()
     public void testRuntimeException(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new RuntimeException("", e);
@@ -66,9 +68,9 @@ public class DefaultRuntimeExceptionTest{
 
     //---------------------------------------------------------------
     @Test(expected = DefaultRuntimeException.class)
-    //@Test
     public void testDefaultRuntimeExceptionNull(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new DefaultRuntimeException(null, e);
@@ -76,9 +78,9 @@ public class DefaultRuntimeExceptionTest{
     }
 
     @Test(expected = RuntimeException.class)
-    //@Test()
     public void testRuntimeExceptionNull(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new RuntimeException(null, e);
@@ -90,6 +92,7 @@ public class DefaultRuntimeExceptionTest{
     //@Test
     public void testDefaultRuntimeExceptionMessageAppend(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new DefaultRuntimeException("exception", e);
@@ -97,9 +100,9 @@ public class DefaultRuntimeExceptionTest{
     }
 
     @Test(expected = RuntimeException.class)
-    //@Test()
     public void testRuntimeExceptionMessage(){
         try{
+            @SuppressWarnings("unused")
             int i = 1 / 0;
         }catch (Exception e){
             throw new RuntimeException("exception", e);

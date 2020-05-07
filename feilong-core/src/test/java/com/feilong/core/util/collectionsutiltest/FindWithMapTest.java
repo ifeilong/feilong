@@ -38,7 +38,7 @@ public class FindWithMapTest{
      * Test find2.
      */
     @Test
-    
+
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
 
@@ -65,15 +65,13 @@ public class FindWithMapTest{
 
     @Test
     public void testFindNullPredicate1(){
-        assertEquals(null, CollectionsUtil.find(null, (Map<String, ?>) null));
+        assertEquals(null, CollectionsUtil.<Object> find(null, (Map<String, ?>) null));
     }
 
-    /**
-     * Test find null iterable.
-     */
     @Test
     public void testFindNullIterable(){
-        assertEquals(null, CollectionsUtil.find(null, toMap("name", "关羽")));
+        Object find = CollectionsUtil.find(null, toMap("name", "关羽"));
+        assertEquals(null, find);
     }
 
     /**

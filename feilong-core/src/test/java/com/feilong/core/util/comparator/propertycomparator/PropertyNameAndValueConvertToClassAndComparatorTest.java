@@ -15,9 +15,9 @@
  */
 package com.feilong.core.util.comparator.propertycomparator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
@@ -42,16 +42,19 @@ public class PropertyNameAndValueConvertToClassAndComparatorTest{
 
     //----------------------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testPropertyComparatorNullPropertyNameAndPropertyValueConvertToClassAndNaturalComparator(){
         new PropertyComparator<>(null, Integer.class, ComparatorUtils.NATURAL_COMPARATOR);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorEmptyPropertyNameAndPropertyValueConvertToClassAndNaturalComparator(){
         new PropertyComparator<>("", Integer.class, ComparatorUtils.NATURAL_COMPARATOR);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorBlankPropertyNameAndPropertyValueConvertToClassAndNaturalComparator(){
         new PropertyComparator<>("    ", Integer.class, ComparatorUtils.NATURAL_COMPARATOR);

@@ -17,8 +17,6 @@ package com.feilong.security;
 
 import org.apache.commons.codec.digest.HmacUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class SymmetricEncryptionTest.
@@ -27,9 +25,6 @@ import org.slf4j.LoggerFactory;
  * @version 1.0 2011-12-26 上午10:50:59
  */
 public class HmacTest2 extends AbstractSecurityTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HmacTest2.class);
 
     @Test
     public void base64String1(){

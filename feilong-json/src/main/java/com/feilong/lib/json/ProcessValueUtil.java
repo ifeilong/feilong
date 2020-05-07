@@ -142,7 +142,7 @@ public class ProcessValueUtil{
             return JSONNull.getInstance();
         }
         if (Class.class.isAssignableFrom(value.getClass()) || value instanceof Class){
-            return ((Class) value).getName();
+            return ((Class<?>) value).getName();
         }
 
         if (JSONUtils.isFunction(value)){

@@ -20,8 +20,6 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonToJavaConfig;
@@ -36,9 +34,6 @@ import com.feilong.json.entity.SplitSalesOrderV5;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ToBeanWithJsonToJavaConfigTest2 extends AbstractJsonTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToBeanWithJsonToJavaConfigTest2.class);
 
     @Test
     public void testToBean(){

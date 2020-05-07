@@ -34,7 +34,7 @@ public class PagerParamsTest extends AbstractTest{
      * Test hash code.
      */
     @Test
-    
+
     public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
@@ -43,10 +43,7 @@ public class PagerParamsTest extends AbstractTest{
         LOGGER.debug("" + pagerParams1.hashCode());
     }
 
-    /**
-     * Test equals object.
-     */
-    @SuppressWarnings({ "cast", "static-method" })
+    @SuppressWarnings({ "cast" })
     @Test
     public void testEqualsObject(){
         PagerParams pagerParams1 = new PagerParams(0, "a");

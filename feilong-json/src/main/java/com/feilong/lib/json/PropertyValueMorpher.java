@@ -56,7 +56,7 @@ class PropertyValueMorpher{
      *            the target type
      * @return the object
      */
-    static Object morphPropertyValue(String key,Object value,Class type,Class targetType){
+    static Object morphPropertyValue(String key,Object value,Class<?> type,Class<?> targetType){
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
 
         Morpher morpher = morpherRegistry.getMorpherFor(targetType);

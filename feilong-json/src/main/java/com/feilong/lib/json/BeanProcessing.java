@@ -47,7 +47,7 @@ public class BeanProcessing{
     static JSONObject defaultBeanProcessing(Object bean,JsonConfig jsonConfig){
         Class<?> beanClass = bean.getClass();
         PropertyNameProcessor propertyNameProcessor = jsonConfig.findJsonPropertyNameProcessor(beanClass);
-        Collection exclusions = jsonConfig.getMergedExcludes();
+        Collection<String> exclusions = jsonConfig.getMergedExcludes();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
         //---------------------------------------------------------------
@@ -97,10 +97,10 @@ public class BeanProcessing{
     private static void set(
                     JSONObject jsonObject,
 
-                    Class beanClass,
+                    Class<?> beanClass,
                     String key,
                     Object value,
-                    Class type,
+                    Class<?> type,
 
                     JsonConfig jsonConfig,
                     PropertyNameProcessor propertyNameProcessor){

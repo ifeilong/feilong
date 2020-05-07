@@ -195,7 +195,7 @@ public class JSONObjectToBeanUtil{
     private static void toBeanDoWithBean(
                     Object bean,
                     String name,
-                    Class type,
+                    Class<?> type,
                     Object value,
 
                     String key,
@@ -290,7 +290,7 @@ public class JSONObjectToBeanUtil{
         setNull(jsonConfig, bean, type, key);
     }
 
-    private static void setNull(JsonConfig jsonConfig,Object bean,Class type,String key) throws Exception{
+    private static void setNull(JsonConfig jsonConfig,Object bean,Class<?> type,String key) throws Exception{
         if (type.isPrimitive()){
             // assume assigned default value
             LOGGER.warn("Tried to assign null value to {}:{}", key, type.getName());
@@ -300,7 +300,7 @@ public class JSONObjectToBeanUtil{
         }
     }
 
-    private static void toBeanDoWithMap(JsonConfig jsonConfig,Map classMap,Object bean,String name,Class type,Object value,String key)
+    private static void toBeanDoWithMap(JsonConfig jsonConfig,Map classMap,Object bean,String name,Class<?> type,Object value,String key)
                     throws Exception{
         // no type info available for conversion
         if (JSONUtils.isNull(value)){
@@ -363,7 +363,7 @@ public class JSONObjectToBeanUtil{
         PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
-            Class<?> type = (Class) props.get(name);
+            Class<?> type = (Class<?>) props.get(name);
             Object value = jsonObject.get(name);
             if (javaPropertyFilter != null && javaPropertyFilter.apply(root, name, value)){
                 continue;

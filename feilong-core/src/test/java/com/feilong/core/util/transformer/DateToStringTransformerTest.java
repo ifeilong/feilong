@@ -43,17 +43,20 @@ public class DateToStringTransformerTest{
 
     //---------------------------------------------------------------
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testDateToStringTransformerTestNull(){
         new DateToStringTransformer(null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testDateToStringTransformerTestEmpty(){
         new DateToStringTransformer("");
 
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testDateToStringTransformerTestBlank(){
         new DateToStringTransformer(" ");
