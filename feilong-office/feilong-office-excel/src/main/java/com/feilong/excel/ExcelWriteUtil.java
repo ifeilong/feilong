@@ -252,14 +252,16 @@ public class ExcelWriteUtil{
         excelWriter.write(excelTemplateLocationInputStream, outputStream, beans);
 
         //---------------------------------------------------------------
-        Map<String, Object> map = build(
-                        excelTemplateLocationInputStream,
-                        xmlSheetConfigurations,
-                        sheetNames,
-                        beans,
-                        outputStream,
-                        beginDate);
-        LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
+        if (LOGGER.isDebugEnabled()){
+            Map<String, Object> map = build(
+                            excelTemplateLocationInputStream,
+                            xmlSheetConfigurations,
+                            sheetNames,
+                            beans,
+                            outputStream,
+                            beginDate);
+            LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
+        }
     }
 
     //---------------------------------------------------------------

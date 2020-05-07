@@ -132,7 +132,7 @@ public final class BeanMorpher implements ObjectMorpher{
                     DynaBean dynaBean = (DynaBean) sourceBean;
                     DynaProperty dynaProperty = dynaBean.getDynaClass().getDynaProperty(name);
                     if (dynaProperty == null){
-                        LOGGER.warn("DynaProperty '" + name + "' does not exist. SKIPPED.");
+                        LOGGER.warn("DynaProperty '{}' does not exist. SKIPPED.", name);
                         continue;
                     }
                     sourceType = dynaProperty.getType();
@@ -238,7 +238,7 @@ public final class BeanMorpher implements ObjectMorpher{
             if (!lenient){
                 throw new MorphException("Can't find a morpher for target class " + targetType.getName() + " (" + name + ")");
             }
-            LOGGER.info("Can't find a morpher for target class " + targetType.getName() + " (" + name + ") SKIPPED");
+            LOGGER.info("Can't find a morpher for target class {} ({}) SKIPPED", targetType.getName(), name);
         }else{
             PropertyUtils.setProperty(targetBean, name, morpherRegistry.morph(targetType, value));
         }

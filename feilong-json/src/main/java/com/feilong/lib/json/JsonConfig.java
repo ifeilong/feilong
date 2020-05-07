@@ -397,17 +397,6 @@ public class JsonConfig{
     }
 
     /**
-     * Returns the configured PropertyNameProcessorMatcher.<br>
-     * Default value is PropertyNameProcessorMatcher.DEFAULT<br>
-     * [Java -&gt; JSON]
-     *
-     * @return the json property name processor matcher
-     */
-    public PropertyNameProcessorMatcher getJsonPropertyNameProcessorMatcher(){
-        return javaPropertyNameProcessorMatcher;
-    }
-
-    /**
      * Returns a set of default excludes with user-defined excludes.<br>
      * [Java -&gt; JSON]
      *

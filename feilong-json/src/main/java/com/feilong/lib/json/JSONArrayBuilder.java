@@ -33,6 +33,15 @@ import com.feilong.lib.json.util.JSONUtils;
  */
 public class JSONArrayBuilder{
 
+    /** Don't let anyone instantiate this class. */
+    private JSONArrayBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
         if (object instanceof JSONArray){
             return _fromJSONArray((JSONArray) object, jsonConfig);
@@ -264,7 +273,7 @@ public class JSONArrayBuilder{
         JSONArray jsonArray = new JSONArray();
         try{
             for (int i = 0; i < array.length; i++){
-                Float f = new Float(array[i]);
+                float f = array[i];
                 JSONUtils.testValidity(f);
                 jsonArray.addValue(f, jsonConfig);
             }
@@ -325,7 +334,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            Number n = JSONUtils.transformNumber(new Long(array[i]));
+            Number n = JSONUtils.transformNumber(array[i]);
             jsonArray.addValue(n, jsonConfig);
         }
 
@@ -388,7 +397,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            Number n = JSONUtils.transformNumber(new Short(array[i]));
+            Number n = JSONUtils.transformNumber(array[i]);
             jsonArray.addValue(n, jsonConfig);
         }
 

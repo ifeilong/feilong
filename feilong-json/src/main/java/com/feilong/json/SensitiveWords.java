@@ -22,14 +22,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
 
 /**
  * 标识是否是敏感词.
  * 
  * <p>
- * 如果是,那么使用 {@link JsonUtil} 格式化的时候会显示成*****.
+ * 如果是,那么使用 {@link com.feilong.json.JsonUtil} 格式化的时候会显示成*****.
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>

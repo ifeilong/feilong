@@ -49,13 +49,6 @@ public class MorpherRegistry implements Serializable{
     //---------------------------------------------------------------
 
     /**
-     * Instantiates a new morpher registry.
-     */
-    public MorpherRegistry(){
-
-    }
-
-    /**
      * Deregisters all morphers.
      */
     public synchronized void clear(){

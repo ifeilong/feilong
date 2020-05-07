@@ -95,7 +95,7 @@ public class JSONObjectToBeanUtil{
                 }else{
                     if (type.isPrimitive()){
                         // assume assigned default value
-                        LOGGER.warn("Tried to assign null value to " + key + ":" + type.getName());
+                        LOGGER.warn("Tried to assign null value to {}:{}", key, type.getName());
                         dynaBean.set(key, JSONUtils.getMorpherRegistry().morph(type, null));
                     }else{
                         dynaBean.set(key, null);
@@ -372,7 +372,7 @@ public class JSONObjectToBeanUtil{
             try{
                 PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(root, key);
                 if (pd != null && pd.getWriteMethod() == null){
-                    LOGGER.info("Property '" + key + "' of " + root.getClass() + " has no write method. SKIPPED.");
+                    LOGGER.info("Property '{}' of {} has no write method. SKIPPED.", key, root.getClass());
                     continue;
                 }
 
@@ -415,9 +415,10 @@ public class JSONObjectToBeanUtil{
                                 Morpher morpher = JSONUtils.getMorpherRegistry().getMorpherFor(pd.getPropertyType());
                                 if (IdentityObjectMorpher.getInstance().equals(morpher)){
                                     LOGGER.warn(
-                                                    "Can't transform property '" + key + "' from " + type.getName() + " into "
-                                                                    + pd.getPropertyType().getName()
-                                                                    + ". Will register a default BeanMorpher");
+                                                    "Can't transform property '{}' from {} into {}. Will register a default BeanMorpher",
+                                                    key,
+                                                    type.getName(),
+                                                    pd.getPropertyType().getName());
                                     JSONUtils.getMorpherRegistry()
                                                     .registerMorpher(new BeanMorpher(pd.getPropertyType(), JSONUtils.getMorpherRegistry()));
                                 }
@@ -429,8 +430,10 @@ public class JSONObjectToBeanUtil{
                             setProperty(root, key, value, jsonConfig);
                         }else{
                             LOGGER.warn(
-                                            "Tried to assign property " + key + ":" + type.getName() + " to bean of class "
-                                                            + root.getClass().getName());
+                                            "Tried to assign property {}:{} to bean of class {}",
+                                            key,
+                                            type.getName(),
+                                            root.getClass().getName());
                         }
                     }else{
                         if (pd != null){
@@ -450,15 +453,13 @@ public class JSONObjectToBeanUtil{
                             Object newRoot = ConstructorUtil.newInstance(targetClass);
                             setProperty(root, key, toBean((JSONObject) value, newRoot, jsonConfig), jsonConfig);
                         }else{
-                            LOGGER.warn(
-                                            "Tried to assign property " + key + ":" + type.getName() + " to bean of class "
-                                                            + rootClass.getName());
+                            LOGGER.warn("Tried to assign property {}:{} to bean of class {}", key, type.getName(), rootClass.getName());
                         }
                     }
                 }else{
                     if (type.isPrimitive()){
                         // assume assigned default value
-                        LOGGER.warn("Tried to assign null value to " + key + ":" + type.getName());
+                        LOGGER.warn("Tried to assign null value to {}:{}", key, type.getName());
                         setProperty(root, key, JSONUtils.getMorpherRegistry().morph(type, null), jsonConfig);
                     }else{
                         setProperty(root, key, null, jsonConfig);

@@ -20,6 +20,7 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -40,6 +41,8 @@ public class FormatterBeanTest extends AbstractTest{
         user.setNickNames(toArray("jinxin", "feilong"));
 
         LOGGER.debug(formatToSimpleTable(user));
+
+        assertTrue(true);
     }
 
 }

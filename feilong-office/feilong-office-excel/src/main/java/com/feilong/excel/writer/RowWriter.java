@@ -128,7 +128,7 @@ class RowWriter{
                 if (colValue.getClass().isArray()){
                     listValue = Arrays.asList(colValue);
                 }else{
-                    ArrayList<Object> list = new ArrayList<Object>();
+                    List<Object> list = new ArrayList<>();
                     list.add(colValue);
                     listValue = list;
                 }

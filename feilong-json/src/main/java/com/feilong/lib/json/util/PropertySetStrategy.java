@@ -60,7 +60,7 @@ public abstract class PropertySetStrategy{
      * @throws JSONException
      *             the JSON exception
      */
-    public abstract void setProperty(Object bean,String key,Object value) throws JSONException;
+    public abstract void setProperty(Object bean,String key,Object value);
 
     /**
      * 设置 property.
@@ -76,7 +76,7 @@ public abstract class PropertySetStrategy{
      * @throws JSONException
      *             the JSON exception
      */
-    public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig) throws JSONException{
+    public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig){
         setProperty(bean, key, value);
     }
 
@@ -100,7 +100,7 @@ public abstract class PropertySetStrategy{
          *             the JSON exception
          */
         @Override
-        public void setProperty(Object bean,String key,Object value) throws JSONException{
+        public void setProperty(Object bean,String key,Object value){
             setProperty(bean, key, value, new JsonConfig());
         }
 
@@ -119,7 +119,7 @@ public abstract class PropertySetStrategy{
          *             the JSON exception
          */
         @Override
-        public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig) throws JSONException{
+        public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig){
             if (bean instanceof Map){
                 ((Map) bean).put(key, value);
                 return;
