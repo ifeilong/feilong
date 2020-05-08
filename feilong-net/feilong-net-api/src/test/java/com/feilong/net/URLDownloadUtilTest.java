@@ -17,7 +17,6 @@ package com.feilong.net;
 
 import org.junit.Test;
 
-import com.feilong.io.SpecialFolder;
 import com.feilong.net.http.URLDownloadUtil;
 
 /**
@@ -34,7 +33,6 @@ public class URLDownloadUtilTest{
     @Test
     public void down(){
         String url = "http://www.kenwen.com/egbk/31/31186/4395342.txt";
-        String directoryName = SpecialFolder.getDesktop();
-        URLDownloadUtil.download(url, directoryName);
+        URLDownloadUtil.download(url, "/Users/feilong/Downloads/");
     }
 }
