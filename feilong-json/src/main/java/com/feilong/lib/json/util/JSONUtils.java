@@ -177,6 +177,8 @@ public final class JSONUtils{
         return getInnerComponentType(type.getComponentType());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a Map with all the properties of the JSONObject.
      *
@@ -192,6 +194,8 @@ public final class JSONUtils{
         }
         return properties;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns the JSON type.<br>

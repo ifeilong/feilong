@@ -38,6 +38,8 @@ public abstract class CycleDetectionStrategy{
 
     public static final JSONObject             IGNORE_PROPERTY_OBJ = new JSONObject();
 
+    //---------------------------------------------------------------
+
     /** Returns empty array and null object */
     public static final CycleDetectionStrategy LENIENT             = new LenientCycleDetectionStrategy();
 
@@ -58,6 +60,7 @@ public abstract class CycleDetectionStrategy{
      *
      * @param reference
      *            the repeated reference.
+     * @return JSONArray
      */
     public abstract JSONArray handleRepeatedReferenceAsArray(Object reference);
 
@@ -67,6 +70,7 @@ public abstract class CycleDetectionStrategy{
      *
      * @param reference
      *            the repeated reference.
+     * @return JSONObject
      */
     public abstract JSONObject handleRepeatedReferenceAsObject(Object reference);
 

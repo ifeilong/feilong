@@ -18,11 +18,6 @@ package com.feilong.lib.json.filters;
 
 import com.feilong.lib.json.util.PropertyFilter;
 
-/**
- * The Class OrPropertyFilter.
- *
- * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
- */
 public class OrPropertyFilter implements PropertyFilter{
 
     /** The filter 1. */
@@ -59,9 +54,8 @@ public class OrPropertyFilter implements PropertyFilter{
      */
     @Override
     public boolean apply(Object source,String name,Object value){
-        if ((filter1 != null && filter1.apply(source, name, value)) || (filter2 != null && filter2.apply(source, name, value))){
-            return true;
-        }
-        return false;
+        return (filter1 != null && filter1.apply(source, name, value)) || //
+                        (filter2 != null && filter2.apply(source, name, value));
+
     }
 }

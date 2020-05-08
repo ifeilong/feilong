@@ -57,7 +57,7 @@ public class JsonConfig{
     private static final DefaultValueProcessor         DEFAULT_VALUE_PROCESSOR                 = DefaultDefaultValueProcessor.INSTANCE;
 
     /** 排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object. */
-    private static final CycleDetectionStrategy        DEFAULT_CYCLE_DETECTION_STRATEGY        = CycleDetectionStrategy.LENIENT;
+    private static final CycleDetectionStrategy        DEFAULT_CYCLE_DETECTION                 = CycleDetectionStrategy.LENIENT;
 
     //---------------------------------------------------------------
 
@@ -92,7 +92,7 @@ public class JsonConfig{
     private final Map<Class<?>, DefaultValueProcessor> defaultValueMap                         = new HashMap<>();
 
     /** The ignore default excludes. */
-    private boolean                                    ignoreDefaultExcludes;
+    private boolean                                    ignoreDefaultExcludes                   = false;
 
     /** The java identifier transformer. */
     private JavaIdentifierTransformer                  javaIdentifierTransformer               = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
@@ -105,7 +105,7 @@ public class JsonConfig{
     private Class<?>                                   collectionType                          = List.class;
 
     /** The cycle detection strategy. */
-    private CycleDetectionStrategy                     cycleDetectionStrategy                  = DEFAULT_CYCLE_DETECTION_STRATEGY;
+    private CycleDetectionStrategy                     cycleDetectionStrategy                  = DEFAULT_CYCLE_DETECTION;
 
     //---------------------------------------------------------------
 
@@ -434,17 +434,6 @@ public class JsonConfig{
     }
 
     /**
-     * Returns true if default excludes will not be used.<br>
-     * Default value is false.<br>
-     * [Java -&gt; JSON]
-     *
-     * @return true, if is ignore default excludes
-     */
-    public boolean isIgnoreDefaultExcludes(){
-        return ignoreDefaultExcludes;
-    }
-
-    /**
      * Registers a DefaultValueProcessor.<br>
      * [Java -&gt; JSON]
      * 
@@ -610,7 +599,7 @@ public class JsonConfig{
      *            the new cycle detection strategy
      */
     public void setCycleDetectionStrategy(CycleDetectionStrategy cycleDetectionStrategy){
-        this.cycleDetectionStrategy = defaultIfNull(cycleDetectionStrategy, DEFAULT_CYCLE_DETECTION_STRATEGY);
+        this.cycleDetectionStrategy = defaultIfNull(cycleDetectionStrategy, DEFAULT_CYCLE_DETECTION);
     }
 
     /**
@@ -729,7 +718,7 @@ public class JsonConfig{
         excludes = EMPTY_STRING_ARRAY;
         ignoreDefaultExcludes = false;
         javaIdentifierTransformer = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
-        cycleDetectionStrategy = DEFAULT_CYCLE_DETECTION_STRATEGY;
+        cycleDetectionStrategy = DEFAULT_CYCLE_DETECTION;
         arrayMode = MODE_LIST;
         rootClass = null;
         classMap = null;

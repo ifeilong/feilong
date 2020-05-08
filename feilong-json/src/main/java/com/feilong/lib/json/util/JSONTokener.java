@@ -239,6 +239,8 @@ public class JSONTokener{
     /**
      * Get the next value. The value can be a Boolean, Double, Integer,
      * JSONArray, JSONObject, Long, or String, or the JSONObject.NULL object.
+     * 
+     * @param jsonConfig
      *
      * @throws JSONException
      *             If syntax error.
@@ -325,6 +327,8 @@ public class JSONTokener{
             case '[':
             case ']':
                 throw new JSONException("Unquotted string '" + s + "'");
+            default:
+                break;
         }
 
         return s;

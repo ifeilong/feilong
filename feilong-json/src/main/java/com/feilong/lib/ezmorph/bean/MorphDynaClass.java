@@ -55,6 +55,7 @@ public final class MorphDynaClass implements DynaClass,Serializable{
                                                                }
                                                            };
 
+    //---------------------------------------------------------------
     /** The Constant serialVersionUID. */
     private static final long       serialVersionUID       = -613214016860871560L;
 
@@ -235,6 +236,8 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return builder.toHashCode();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * New instance.
      *
@@ -261,6 +264,8 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         return dynaBean;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * To string.
      *
@@ -286,6 +291,8 @@ public final class MorphDynaClass implements DynaClass,Serializable{
         }
         return this.beanClass;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Process.

@@ -94,7 +94,6 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         }
 
         //---------------------------------------------------------------
-
         Object value = dynaValues.get(name);
         if (value == null){
             value = new HashMap<>();
@@ -115,15 +114,12 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         if (this == obj){
             return true;
         }
-
         if (obj == null){
             return false;
         }
-
         if (!(obj instanceof MorphDynaBean)){
             return false;
         }
-
         //---------------------------------------------------------------
         MorphDynaBean other = (MorphDynaBean) obj;
         EqualsBuilder builder = new EqualsBuilder().append(this.dynaClass, other.dynaClass);
@@ -291,6 +287,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
             throw new MorphException("Non-Indexed property name: " + name + " index: " + index);
         }
 
+        //---------------------------------------------------------------
+
         Object prop = dynaValues.get(name);
         if (prop == null){
             if (List.class.isAssignableFrom(type)){
@@ -331,11 +329,9 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     @Override
     public void set(String name,Object value){
         DynaProperty property = getDynaProperty(name);
-
         if (value == null || !isDynaAssignable(property.getType(), value.getClass())){
             value = morpherRegistry.morph(property.getType(), value);
         }
-
         dynaValues.put(name, value);
     }
 
@@ -428,11 +424,12 @@ public final class MorphDynaBean implements DynaBean,Serializable{
      * @return true, if is dyna assignable
      */
     private static boolean isDynaAssignable(Class<?> dest,Class<?> src){
-        boolean assignable = dest.isAssignableFrom(src);
-        if (assignable){
+        if (dest.isAssignableFrom(src)){
             return true;
         }
-        assignable = (dest == Boolean.TYPE && src == Boolean.class) ? true : assignable;
+
+        //---------------------------------------------------------------
+        boolean assignable = dest == Boolean.TYPE && src == Boolean.class;
         assignable = (dest == Byte.TYPE && src == Byte.class) ? true : assignable;
         assignable = (dest == Character.TYPE && src == Character.class) ? true : assignable;
         assignable = (dest == Short.TYPE && src == Short.class) ? true : assignable;
@@ -459,6 +456,8 @@ public final class MorphDynaBean implements DynaBean,Serializable{
 
         return assignable;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Checks if is byte.
