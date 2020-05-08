@@ -18,11 +18,8 @@ package com.feilong.lib.ezmorph.object;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Locale;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
+import com.feilong.lib.ezmorph.IntegerValueUtil;
 import com.feilong.lib.ezmorph.MorphException;
 
 /**
@@ -55,60 +52,7 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
         this.defaultValue = defaultValue;
     }
 
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof BigIntegerMorpher)){
-            return false;
-        }
-
-        BigIntegerMorpher other = (BigIntegerMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }else if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * Returns the default value for this Morpher.
-     *
-     * @return the default value
-     */
-    public BigInteger getDefaultValue(){
-        return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
-    }
+    //---------------------------------------------------------------
 
     /**
      * Morph.
@@ -147,7 +91,7 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
             return BigInteger.valueOf(((Number) value).longValue());
         }
         try{
-            String str = getIntegerValue(value);
+            String str = IntegerValueUtil.getIntegerValue(value);
             if (str.length() == 0 || str.equalsIgnoreCase("null")){
                 return null;
             }
@@ -160,6 +104,8 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Morphs to.
      *
@@ -170,28 +116,4 @@ public final class BigIntegerMorpher extends AbstractObjectMorpher{
         return BigInteger.class;
     }
 
-    /**
-     * Trims the String from the begining to the first "."
-     *
-     * @param obj
-     *            the obj
-     * @return the integer value
-     */
-    protected String getIntegerValue(Object obj){
-        // use en_US Locale
-        Locale defaultLocale = Locale.getDefault();
-        String str = null;
-        try{
-            Locale.setDefault(Locale.US);
-            str = String.valueOf(obj).trim();
-        }finally{
-            Locale.setDefault(defaultLocale);
-        }
-
-        int index = str.indexOf(".");
-        if (index != -1){
-            str = str.substring(0, index);
-        }
-        return str;
-    }
 }

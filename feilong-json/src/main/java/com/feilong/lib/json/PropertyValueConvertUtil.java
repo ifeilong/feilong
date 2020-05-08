@@ -138,7 +138,7 @@ public class PropertyValueConvertUtil{
         }else if (!array.getClass().equals(targetType)){
             if (!targetType.equals(Object.class)){
                 Morpher morpher = JSONUtils.getMorpherRegistry().getMorpherFor(Array.newInstance(innerType, 0).getClass());
-                if (IdentityObjectMorpher.getInstance().equals(morpher)){
+                if (IdentityObjectMorpher.INSTANCE.equals(morpher)){
                     ObjectArrayMorpher beanMorpher = new ObjectArrayMorpher(new BeanMorpher(innerType, JSONUtils.getMorpherRegistry()));
                     JSONUtils.getMorpherRegistry().registerMorpher(beanMorpher);
                 }

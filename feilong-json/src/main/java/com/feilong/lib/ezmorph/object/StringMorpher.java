@@ -20,7 +20,7 @@ import com.feilong.lib.ezmorph.MorphException;
 import com.feilong.lib.ezmorph.ObjectMorpher;
 
 /**
- * Morphs to a String.<br>
+ * Morphs to a String.
  * This morpher is a singleton.
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
@@ -28,22 +28,15 @@ import com.feilong.lib.ezmorph.ObjectMorpher;
 public final class StringMorpher implements ObjectMorpher{
 
     /** The Constant INSTANCE. */
-    private static final StringMorpher INSTANCE = new StringMorpher();
-
-    /**
-     * Returns the singleton instance.
-     *
-     * @return single instance of StringMorpher
-     */
-    public static StringMorpher getInstance(){
-        return INSTANCE;
-    }
+    public static final StringMorpher INSTANCE = new StringMorpher();
 
     /**
      * Instantiates a new string morpher.
      */
     private StringMorpher(){
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Equals.
@@ -90,6 +83,8 @@ public final class StringMorpher implements ObjectMorpher{
         }
         return String.valueOf(value);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Morphs to.

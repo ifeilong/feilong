@@ -41,10 +41,10 @@ import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 public class MorpherRegistry implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long            serialVersionUID = -3894767123320768419L;
+    private static final long                  serialVersionUID = -3894767123320768419L;
 
     /** The morphers. */
-    private final Map<Class<?>, List<?>> morphers         = new HashMap<>();
+    private final Map<Class<?>, List<Morpher>> morpherMap       = new HashMap<>();
 
     //---------------------------------------------------------------
 
@@ -52,7 +52,7 @@ public class MorpherRegistry implements Serializable{
      * Deregisters all morphers.
      */
     public synchronized void clear(){
-        morphers.clear();
+        morpherMap.clear();
     }
 
     //---------------------------------------------------------------
@@ -67,12 +67,12 @@ public class MorpherRegistry implements Serializable{
      * @return the morpher for
      */
     public synchronized Morpher getMorpherFor(Class<?> clazz){
-        List registered = morphers.get(clazz);
+        List<Morpher> registered = morpherMap.get(clazz);
         if (registered == null || registered.isEmpty()){
             // no morpher registered for clazz
-            return IdentityObjectMorpher.getInstance();
+            return IdentityObjectMorpher.INSTANCE;
         }
-        return (Morpher) registered.get(0);
+        return registered.get(0);
     }
 
     /**
@@ -86,17 +86,17 @@ public class MorpherRegistry implements Serializable{
      * @return the morphers for
      */
     private synchronized Morpher[] getMorphersFor(Class<?> clazz){
-        List registered = morphers.get(clazz);
+        List<Morpher> registered = morpherMap.get(clazz);
         if (registered == null || registered.isEmpty()){
             // no morphers registered for clazz
-            return new Morpher[] { IdentityObjectMorpher.getInstance() };
+            return new Morpher[] { IdentityObjectMorpher.INSTANCE };
         }
 
         //---------------------------------------------------------------
         Morpher[] morphs = new Morpher[registered.size()];
         int k = 0;
-        for (Iterator i = registered.iterator(); i.hasNext();){
-            morphs[k++] = (Morpher) i.next();
+        for (Iterator<Morpher> i = registered.iterator(); i.hasNext();){
+            morphs[k++] = i.next();
         }
         return morphs;
     }
@@ -162,12 +162,12 @@ public class MorpherRegistry implements Serializable{
      *            is used to associate the Morpher to a target Class
      */
     public void registerMorpher(Morpher morpher){
-        Class<?> morphsTo = morpher.morphsTo();
+        Class<?> klass = morpher.morphsTo();
 
-        List registered = morphers.get(morphsTo);
+        List<Morpher> registered = morpherMap.get(klass);
         if (registered == null){
             registered = new ArrayList<>();
-            morphers.put(morphsTo, registered);
+            morpherMap.put(klass, registered);
         }
         if (!registered.contains(morpher)){
             registered.add(morpher);

@@ -134,6 +134,7 @@ public final class ByteArrayMorpher extends AbstractArrayMorpher{
             int dims = getDimensions(array.getClass());
             int[] dimensions = createDimensions(dims, length);
             Object result = Array.newInstance(byte.class, dimensions);
+
             ByteMorpher morpher = isUseDefault() ? new ByteMorpher(defaultValue) : new ByteMorpher();
             if (dims == 1){
                 for (int index = 0; index < length; index++){

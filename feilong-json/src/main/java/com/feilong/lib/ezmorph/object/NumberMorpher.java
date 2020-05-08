@@ -19,9 +19,6 @@ package com.feilong.lib.ezmorph.object;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.ezmorph.MorphException;
 import com.feilong.lib.ezmorph.primitive.ByteMorpher;
 import com.feilong.lib.ezmorph.primitive.DoubleMorpher;
@@ -37,10 +34,7 @@ import com.feilong.lib.ezmorph.primitive.ShortMorpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class NumberMorpher extends AbstractObjectMorpher{
-
-    /** The default value. */
-    private Number         defaultValue;
+public final class NumberMorpher extends AbstractObjectMorpher<Number>{
 
     /** The type. */
     private final Class<?> type;
@@ -118,67 +112,6 @@ public final class NumberMorpher extends AbstractObjectMorpher{
 
         this.type = type;
         setDefaultValue(defaultValue);
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof NumberMorpher)){
-            return false;
-        }
-
-        //---------------------------------------------------------------
-
-        NumberMorpher other = (NumberMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        builder.append(type, other.type);
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }
-        if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }
-        return false;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Returns the default value for this Morpher.
-     *
-     * @return the default value
-     */
-    public Number getDefaultValue(){
-        return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        builder.append(type);
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
     }
 
     //---------------------------------------------------------------

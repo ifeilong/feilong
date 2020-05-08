@@ -23,10 +23,13 @@ import com.feilong.lib.ezmorph.Morpher;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public abstract class AbstractPrimitiveMorpher implements Morpher{
+public abstract class AbstractPrimitiveMorpher<T> implements Morpher{
 
     /** The use default. */
     private boolean useDefault = false;
+
+    /** The default value. */
+    protected T     defaultValue;
 
     //---------------------------------------------------------------
 
@@ -48,6 +51,8 @@ public abstract class AbstractPrimitiveMorpher implements Morpher{
         this.useDefault = useDefault;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns if this morpher will use a default value if the value to be
      * morphed is null.
@@ -56,6 +61,15 @@ public abstract class AbstractPrimitiveMorpher implements Morpher{
      */
     public boolean isUseDefault(){
         return useDefault;
+    }
+
+    /**
+     * Returns the default value for this Morpher.
+     *
+     * @return the default value
+     */
+    public T getDefaultValue(){
+        return defaultValue;
     }
 
     //---------------------------------------------------------------

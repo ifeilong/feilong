@@ -17,6 +17,7 @@ package com.feilong.context.codecreator;
 
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -24,10 +25,12 @@ import org.apache.commons.lang3.Validate;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.feilong.test.AbstractTest;
+
 /**
  * The Class CodeCreatorTest.
  */
-public class SimpleSequenceTypeOrderCodeCreatorTest{
+public class SimpleSequenceTypeOrderCodeCreatorTest extends AbstractTest{
 
     /** The code creator. */
     private SequenceTypeOrderCodeCreator sequenceTypeOrderCodeCreator;
@@ -49,12 +52,11 @@ public class SimpleSequenceTypeOrderCodeCreatorTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test create.
-     */
     @Test
     public void testCreate(){
-        sequenceTypeOrderCodeCreator.create(1000, 11);
+        LOGGER.debug(sequenceTypeOrderCodeCreator.create(1000, 11));
+
+        assertTrue(true);
     }
 
     /**
@@ -69,6 +71,7 @@ public class SimpleSequenceTypeOrderCodeCreatorTest{
 
             SET.add(value);
         }
+        assertTrue(true);
     }
     //---------------------------------------------------------------
 

@@ -16,9 +16,6 @@
 
 package com.feilong.lib.ezmorph.primitive;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.ezmorph.MorphException;
 
 /**
@@ -26,12 +23,7 @@ import com.feilong.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class CharMorpher extends AbstractPrimitiveMorpher{
-
-    /** The default value. */
-    private char defaultValue;
-
-    //---------------------------------------------------------------
+public final class CharMorpher extends AbstractPrimitiveMorpher<Character>{
 
     /**
      * Instantiates a new char morpher.
@@ -49,61 +41,6 @@ public final class CharMorpher extends AbstractPrimitiveMorpher{
     public CharMorpher(char defaultValue){
         super(true);
         this.defaultValue = defaultValue;
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof CharMorpher)){
-            return false;
-        }
-
-        CharMorpher other = (CharMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }else if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * Returns the default value for this Morpher.
-     *
-     * @return the default value
-     */
-    public char getDefaultValue(){
-        return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
     }
 
     /**

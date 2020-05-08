@@ -523,11 +523,11 @@ public final class JSONArray implements JSON{
                     }else{
                         Morpher m1 = JSONUtils.getMorpherRegistry().getMorpherFor(o1.getClass());
                         Morpher m2 = JSONUtils.getMorpherRegistry().getMorpherFor(o2.getClass());
-                        if (m1 != null && m1 != IdentityObjectMorpher.getInstance()){
+                        if (m1 != null && m1 != IdentityObjectMorpher.INSTANCE){
                             if (!o1.equals(JSONUtils.getMorpherRegistry().morph(o1.getClass(), o2))){
                                 return false;
                             }
-                        }else if (m2 != null && m2 != IdentityObjectMorpher.getInstance()){
+                        }else if (m2 != null && m2 != IdentityObjectMorpher.INSTANCE){
                             if (!JSONUtils.getMorpherRegistry().morph(o1.getClass(), o1).equals(o2)){
                                 return false;
                             }

@@ -18,7 +18,6 @@ package com.feilong.lib.ezmorph.array;
 
 import java.lang.reflect.Array;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.feilong.lib.ezmorph.MorphException;
@@ -52,38 +51,6 @@ public final class CharacterObjectArrayMorpher extends AbstractArrayMorpher{
     public CharacterObjectArrayMorpher(Character defaultValue){
         super(true);
         this.defaultValue = defaultValue;
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof CharacterObjectArrayMorpher)){
-            return false;
-        }
-
-        CharacterObjectArrayMorpher other = (CharacterObjectArrayMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }else if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }else{
-            return false;
-        }
     }
 
     /**

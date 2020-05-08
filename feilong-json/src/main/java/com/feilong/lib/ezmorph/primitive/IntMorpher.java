@@ -16,9 +16,7 @@
 
 package com.feilong.lib.ezmorph.primitive;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
+import com.feilong.lib.ezmorph.IntegerValueUtil;
 import com.feilong.lib.ezmorph.MorphException;
 
 /**
@@ -26,10 +24,7 @@ import com.feilong.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class IntMorpher extends AbstractIntegerMorpher{
-
-    /** The default value. */
-    private int defaultValue;
+public final class IntMorpher extends AbstractPrimitiveMorpher<Integer>{
 
     /**
      * Instantiates a new int morpher.
@@ -50,63 +45,6 @@ public final class IntMorpher extends AbstractIntegerMorpher{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof IntMorpher)){
-            return false;
-        }
-
-        IntMorpher other = (IntMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }else if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }else{
-            return false;
-        }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Returns the default value for this Morpher.
-     *
-     * @return the default value
-     */
-    public int getDefaultValue(){
-        return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
-    }
 
     /**
      * Morphs the input object into an output object of the supported type.
@@ -131,7 +69,7 @@ public final class IntMorpher extends AbstractIntegerMorpher{
             return ((Number) value).intValue();
         }
         try{
-            return Integer.parseInt(getIntegerValue(value));
+            return Integer.parseInt(IntegerValueUtil.getIntegerValue(value));
         }catch (NumberFormatException nfe){
             if (isUseDefault()){
                 return defaultValue;

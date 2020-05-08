@@ -172,11 +172,10 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         }
 
         Object value = dynaValues.get(name);
-
         if (value.getClass().isArray()){
-            value = Array.get(value, index);
+            return Array.get(value, index);
         }else if (value instanceof List){
-            value = ((List) value).get(index);
+            return ((List) value).get(index);
         }
 
         return value;

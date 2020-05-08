@@ -398,7 +398,7 @@ public class JSONObjectToBeanUtil{
                                 if (!pd.getPropertyType().equals(Object.class)){
                                     Morpher morpher = JSONUtils.getMorpherRegistry()
                                                     .getMorpherFor(Array.newInstance(innerType, 0).getClass());
-                                    if (IdentityObjectMorpher.getInstance().equals(morpher)){
+                                    if (IdentityObjectMorpher.INSTANCE.equals(morpher)){
                                         ObjectArrayMorpher beanMorpher = new ObjectArrayMorpher(
                                                         new BeanMorpher(innerType, JSONUtils.getMorpherRegistry()));
                                         JSONUtils.getMorpherRegistry().registerMorpher(beanMorpher);
@@ -413,7 +413,7 @@ public class JSONObjectToBeanUtil{
                         if (pd != null){
                             if (!pd.getPropertyType().isInstance(value)){
                                 Morpher morpher = JSONUtils.getMorpherRegistry().getMorpherFor(pd.getPropertyType());
-                                if (IdentityObjectMorpher.getInstance().equals(morpher)){
+                                if (IdentityObjectMorpher.INSTANCE.equals(morpher)){
                                     LOGGER.warn(
                                                     "Can't transform property '{}' from {} into {}. Will register a default BeanMorpher",
                                                     key,

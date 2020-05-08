@@ -23,16 +23,8 @@ import static com.feilong.core.date.DateUtil.toDate;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-/**
- * The Class DateUtilToDateTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class ToDateTest{
 
-    /**
-     * Test string2 date.
-     */
     @Test
     public void testToDate(){
         toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ");
@@ -47,7 +39,6 @@ public class ToDateTest{
      * Test to date null.
      */
     @Test(expected = NullPointerException.class)
-    
     public void testToDateNull(){
         toDate(null, COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -56,7 +47,6 @@ public class ToDateTest{
      * Test to date empty.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testToDateEmpty(){
         toDate("", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -71,20 +61,15 @@ public class ToDateTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test to date null pattern.
-     */
     @Test(expected = NullPointerException.class)
-    
     public void testToDateNullPattern(){
-        toDate("2016-06-30 15:36", null);
+        toDate("2016-06-30 15:36", (String[]) null);
     }
 
     /**
      * Test to date empty patterns.
      */
     @Test(expected = IllegalArgumentException.class)
-    
     public void testToDateEmptyPatterns(){
         toDate("2016-06-30 15:36");
     }
@@ -101,8 +86,6 @@ public class ToDateTest{
      * Test to date 1.
      */
     @Test(expected = IllegalArgumentException.class)
-    //@Test()
-    
     public void testToDate1(){
         toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -111,7 +94,6 @@ public class ToDateTest{
      * Test to date 2.
      */
     @Test
-    
     public void testToDate2(){
         toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }

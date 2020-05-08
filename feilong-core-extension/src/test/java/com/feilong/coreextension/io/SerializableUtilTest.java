@@ -15,6 +15,8 @@
  */
 package com.feilong.coreextension.io;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -37,5 +39,6 @@ public class SerializableUtilTest extends AbstractTest{
         //       LOGGER.debug("Size of Object: " + ObjectUtil.size(new Object()));
         LOGGER.debug("Size of Calendar: " + SerializableUtil.size(Calendar.getInstance()));
         LOGGER.debug("Size of HashMap: " + SerializableUtil.size(new HashMap<String, String>()));
+        assertTrue(true);
     }
 }

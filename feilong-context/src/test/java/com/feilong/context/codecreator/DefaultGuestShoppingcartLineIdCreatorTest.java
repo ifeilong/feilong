@@ -22,7 +22,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-public class DefaultGuestShoppingcartLineIdCreatorTest{
+import com.feilong.test.AbstractTest;
+
+public class DefaultGuestShoppingcartLineIdCreatorTest extends AbstractTest{
 
     private static final Set<Long>                SET                            = new HashSet<>();
 

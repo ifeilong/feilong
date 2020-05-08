@@ -22,11 +22,15 @@ import com.feilong.lib.ezmorph.ObjectMorpher;
  * Base class for ObjectMorpher implementations.
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
+ * @param <T>
  */
-public abstract class AbstractObjectMorpher implements ObjectMorpher{
+public abstract class AbstractObjectMorpher<T> implements ObjectMorpher{
 
     /** The use default. */
     private boolean useDefault;
+
+    /** The default value. */
+    protected T     defaultValue;
 
     //---------------------------------------------------------------
 
@@ -48,6 +52,8 @@ public abstract class AbstractObjectMorpher implements ObjectMorpher{
         this.useDefault = useDefault;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns if this morpher will use a default value.
      *
@@ -58,13 +64,12 @@ public abstract class AbstractObjectMorpher implements ObjectMorpher{
     }
 
     /**
-     * Sets if this morpher will use a default value.
+     * Returns the default value for this Morpher.
      *
-     * @param useDefault
-     *            the new use default
+     * @return the default value
      */
-    public void setUseDefault(boolean useDefault){
-        this.useDefault = useDefault;
+    public T getDefaultValue(){
+        return defaultValue;
     }
 
     //---------------------------------------------------------------

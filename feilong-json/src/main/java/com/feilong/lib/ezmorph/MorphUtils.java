@@ -96,7 +96,7 @@ public class MorphUtils{
     private static void registerStandardObjectArrayMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new BooleanObjectMorpher(false)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new CharacterObjectMorpher('\0')));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(StringMorpher.getInstance()));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(StringMorpher.INSTANCE));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Byte.class, (byte) 0)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Short.class, (short) 0)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Integer.class, 0)));
@@ -105,7 +105,7 @@ public class MorphUtils{
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(Double.class, 0d)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigInteger.class, BigInteger.ZERO)));
         morpherRegistry.registerMorpher(new ObjectArrayMorpher(new NumberMorpher(BigDecimal.class, BigDecimal.ZERO)));
-        morpherRegistry.registerMorpher(new ObjectArrayMorpher(ClassMorpher.getInstance()));
+        morpherRegistry.registerMorpher(new ObjectArrayMorpher(ClassMorpher.INSTANCE));
     }
 
     /**
@@ -130,7 +130,7 @@ public class MorphUtils{
     private static void registerStandardObjectMorphers(MorpherRegistry morpherRegistry){
         morpherRegistry.registerMorpher(new BooleanObjectMorpher(Boolean.FALSE));
         morpherRegistry.registerMorpher(new CharacterObjectMorpher('\0'));
-        morpherRegistry.registerMorpher(StringMorpher.getInstance());
+        morpherRegistry.registerMorpher(StringMorpher.INSTANCE);
         morpherRegistry.registerMorpher(new NumberMorpher(Byte.class, (byte) 0));
         morpherRegistry.registerMorpher(new NumberMorpher(Short.class, (short) 0));
         morpherRegistry.registerMorpher(new NumberMorpher(Integer.class, 0));
@@ -139,7 +139,7 @@ public class MorphUtils{
         morpherRegistry.registerMorpher(new NumberMorpher(Double.class, 0d));
         morpherRegistry.registerMorpher(new NumberMorpher(BigInteger.class, BigInteger.ZERO));
         morpherRegistry.registerMorpher(new NumberMorpher(BigDecimal.class, BigDecimal.ZERO));
-        morpherRegistry.registerMorpher(ClassMorpher.getInstance());
+        morpherRegistry.registerMorpher(ClassMorpher.INSTANCE);
     }
 
     /**

@@ -13,37 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.feilong.lib.ezmorph.primitive;
+package com.feilong.lib.ezmorph;
 
 import java.util.Locale;
 
 /**
- * Base class por primitive integer conversion.
- *
- * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 3.0.0
  */
-public abstract class AbstractIntegerMorpher extends AbstractPrimitiveMorpher{
-
-    /**
-     * Instantiates a new abstract integer morpher.
-     */
-    public AbstractIntegerMorpher(){
-        super();
-    }
-
-    /**
-     * Instantiates a new abstract integer morpher.
-     *
-     * @param useDefault
-     *            if morph() should return a default value if the value to
-     *            be morphed is null
-     */
-    public AbstractIntegerMorpher(boolean useDefault){
-        super(useDefault);
-    }
-
-    //---------------------------------------------------------------
+public class IntegerValueUtil{
 
     /**
      * Trims the String from the begining to the first "."
@@ -52,18 +31,16 @@ public abstract class AbstractIntegerMorpher extends AbstractPrimitiveMorpher{
      *            the obj
      * @return the integer value
      */
-    protected static String getIntegerValue(Object obj){
+    public static String getIntegerValue(Object obj){
         // use en_US Locale
         Locale defaultLocale = Locale.getDefault();
         String str = null;
         try{
             Locale.setDefault(Locale.US);
-            str = String.valueOf(obj);
+            str = String.valueOf(obj).trim();
         }finally{
             Locale.setDefault(defaultLocale);
         }
-
-        //---------------------------------------------------------------
 
         int index = str.indexOf(".");
         if (index != -1){
@@ -71,4 +48,5 @@ public abstract class AbstractIntegerMorpher extends AbstractPrimitiveMorpher{
         }
         return str;
     }
+
 }

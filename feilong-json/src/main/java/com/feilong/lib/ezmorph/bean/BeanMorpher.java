@@ -234,7 +234,7 @@ public final class BeanMorpher implements ObjectMorpher{
             return;
         }
 
-        if (IdentityObjectMorpher.getInstance() == morpherRegistry.getMorpherFor(targetType)){
+        if (IdentityObjectMorpher.INSTANCE == morpherRegistry.getMorpherFor(targetType)){
             if (!lenient){
                 throw new MorphException("Can't find a morpher for target class " + targetType.getName() + " (" + name + ")");
             }

@@ -60,7 +60,7 @@ class PropertyValueMorpher{
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
 
         Morpher morpher = morpherRegistry.getMorpherFor(targetType);
-        if (IdentityObjectMorpher.getInstance().equals(morpher)){
+        if (IdentityObjectMorpher.INSTANCE.equals(morpher)){
             LOGGER.warn(
                             "Can't transform property '{}' from {} into {}.Will register a default Morpher",
                             key,

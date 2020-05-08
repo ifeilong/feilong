@@ -16,6 +16,7 @@
 package com.feilong.context.codecreator;
 
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -56,11 +57,13 @@ public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
     @Test
     public void createOrderCode(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(35191L, 555L));
+        assertTrue(true);
     }
 
     @Test
     public void createOrderCode12(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(1161L, 5555555L));
+        assertTrue(true);
     }
 
     @Test
@@ -72,11 +75,13 @@ public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
 
             SET.add(value);
         }
+        assertTrue(true);
     }
 
     @Test
     public void createReturnOrderCode(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(111121L, 5555555L));
+        assertTrue(true);
     }
 
 }

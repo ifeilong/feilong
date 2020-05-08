@@ -27,16 +27,9 @@ import com.feilong.lib.ezmorph.ObjectMorpher;
 public final class IdentityObjectMorpher implements ObjectMorpher{
 
     /** The Constant INSTANCE. */
-    private static final IdentityObjectMorpher INSTANCE = new IdentityObjectMorpher();
+    public static final IdentityObjectMorpher INSTANCE = new IdentityObjectMorpher();
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return single instance of IdentityObjectMorpher
-     */
-    public static IdentityObjectMorpher getInstance(){
-        return INSTANCE;
-    }
+    //---------------------------------------------------------------
 
     /**
      * Instantiates a new identity object morpher.
@@ -58,6 +51,8 @@ public final class IdentityObjectMorpher implements ObjectMorpher{
         return INSTANCE == obj;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Hash code.
      *
@@ -67,6 +62,8 @@ public final class IdentityObjectMorpher implements ObjectMorpher{
     public int hashCode(){
         return 42 + getClass().hashCode();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Morph.
@@ -80,6 +77,8 @@ public final class IdentityObjectMorpher implements ObjectMorpher{
         return value;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Morphs to.
      *
@@ -89,6 +88,8 @@ public final class IdentityObjectMorpher implements ObjectMorpher{
     public Class<?> morphsTo(){
         return Object.class;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Supports.

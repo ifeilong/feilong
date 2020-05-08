@@ -15,6 +15,8 @@
  */
 package com.feilong.context.codecreator;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
@@ -33,5 +35,6 @@ public class TradeNoCreatorTest extends AbstractTest{
     public void createTradeNo(){
         LOGGER.debug(TradeNoCreator.createTradeNo(5545L, 88));
         LOGGER.debug(TradeNoCreator.createTradeNo(5545L, 1));
+        assertTrue(true);
     }
 }

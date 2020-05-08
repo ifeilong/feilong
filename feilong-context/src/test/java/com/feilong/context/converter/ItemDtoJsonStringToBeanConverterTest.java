@@ -15,29 +15,34 @@
  */
 package com.feilong.context.converter;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+
 import org.junit.Test;
 
-import com.feilong.context.converter.JsonStringToBeanConverter;
-import com.feilong.context.converter.StringToBeanConverter;
 import com.feilong.json.JsonUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class ItemDtoJsonConverterTest.
  */
-public class ItemDtoJsonConverterTest{
+public class ItemDtoJsonStringToBeanConverterTest extends AbstractTest{
 
     /**
      * Convert.
      */
     @Test
-    
-    public void convert(){
+    public void test(){
         ItemDto itemDto = new ItemDto();
         itemDto.setCity("上海");
 
-        String xml = JsonUtil.format(itemDto);
+        String json = JsonUtil.format(itemDto);
         StringToBeanConverter<ItemDto> converter = new JsonStringToBeanConverter<>(ItemDto.class);
 
-        converter.convert(xml);
+        ItemDto convert = converter.convert(json);
+
+        assertThat(convert, allOf(hasProperty("city", is("上海"))));
     }
 }

@@ -21,9 +21,6 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.ezmorph.MorphException;
 
 /**
@@ -31,12 +28,7 @@ import com.feilong.lib.ezmorph.MorphException;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public final class BigDecimalMorpher extends AbstractObjectMorpher{
-
-    /** The default value. */
-    private BigDecimal defaultValue;
-
-    //---------------------------------------------------------------
+public final class BigDecimalMorpher extends AbstractObjectMorpher<BigDecimal>{
 
     /**
      * Instantiates a new big decimal morpher.
@@ -57,63 +49,6 @@ public final class BigDecimalMorpher extends AbstractObjectMorpher{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof BigDecimalMorpher)){
-            return false;
-        }
-
-        //---------------------------------------------------------------
-
-        BigDecimalMorpher other = (BigDecimalMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }
-        if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }
-        return false;
-    }
-
-    /**
-     * Returns the default value for this Morpher.
-     *
-     * @return the default value
-     */
-    public BigDecimal getDefaultValue(){
-        return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
-    }
 
     /**
      * Morph.

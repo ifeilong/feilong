@@ -135,6 +135,7 @@ public final class BooleanArrayMorpher extends AbstractArrayMorpher{
             int length = Array.getLength(array);
             int dims = getDimensions(array.getClass());
             int[] dimensions = createDimensions(dims, length);
+
             Object result = Array.newInstance(boolean.class, dimensions);
             BooleanMorpher morpher = isUseDefault() ? new BooleanMorpher(defaultValue) : new BooleanMorpher();
             if (dims == 1){

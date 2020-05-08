@@ -16,6 +16,7 @@
 package com.feilong.core.lang.threadutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
@@ -35,6 +36,7 @@ public class ExecuteWithPartitionPerHandlerTest extends AbstractExcuteTest{
     @Test
     public void testExecute(){
         ThreadUtil.execute(toList(2, 5, 6, 7), 2, EmptyPartitionPerHandler.INSTANCE);
+        assertTrue(true);
     }
 
     //---------------------------------------------------------

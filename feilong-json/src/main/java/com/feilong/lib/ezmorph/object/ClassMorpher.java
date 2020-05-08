@@ -28,18 +28,9 @@ import com.feilong.lib.ezmorph.ObjectMorpher;
 public final class ClassMorpher implements ObjectMorpher{
 
     /** The Constant INSTANCE. */
-    private static final ClassMorpher INSTANCE = new ClassMorpher();
+    public static final ClassMorpher INSTANCE = new ClassMorpher();
 
     //---------------------------------------------------------------
-
-    /**
-     * Returns the singleton instance.
-     *
-     * @return single instance of ClassMorpher
-     */
-    public static ClassMorpher getInstance(){
-        return INSTANCE;
-    }
 
     /**
      * Instantiates a new class morpher.
