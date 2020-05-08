@@ -467,13 +467,38 @@
 			</dependency>
 
 			<!-- *******************spring********************************* -->
+
+			<!-- spring-test -->
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
+				<artifactId>spring-test</artifactId>
 				<version>${version.spring}</version>
-				<type>pom</type>
-				<scope>import</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+
 
 			<!-- **************************************************** -->
 			<!-- java mail -->
@@ -1192,7 +1217,7 @@
 
 						<!-- 404 not find -->
 						<!-- <link>http://commons.apache.org/proper/commons-collections/javadocs/api-release/</link> -->
-						
+
 						<!-- 404 not find -->
 						<!-- <link>http://ezmorph.sourceforge.net/apidocs/</link> -->
 					</links>
