@@ -19,8 +19,6 @@ package com.feilong.lib.ezmorph.array;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.ezmorph.MorphException;
 import com.feilong.lib.ezmorph.Morpher;
 
@@ -57,40 +55,6 @@ public final class ObjectArrayMorpher extends AbstractArrayMorpher{
     public ObjectArrayMorpher(Morpher morpher){
         super(false);
         setMorpher(morpher);
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof ObjectArrayMorpher)){
-            return false;
-        }
-
-        ObjectArrayMorpher other = (ObjectArrayMorpher) obj;
-        return morpher.equals(other.morpher);
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        return new HashCodeBuilder().append(morpher).toHashCode();
     }
 
     /**

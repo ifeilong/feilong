@@ -18,9 +18,6 @@ package com.feilong.lib.ezmorph.array;
 
 import java.lang.reflect.Array;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.ezmorph.MorphException;
 import com.feilong.lib.ezmorph.primitive.CharMorpher;
 
@@ -57,58 +54,12 @@ public final class CharArrayMorpher extends AbstractArrayMorpher{
     }
 
     /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof CharArrayMorpher)){
-            return false;
-        }
-
-        CharArrayMorpher other = (CharArrayMorpher) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        if (isUseDefault() && other.isUseDefault()){
-            builder.append(getDefaultValue(), other.getDefaultValue());
-            return builder.isEquals();
-        }else if (!isUseDefault() && !other.isUseDefault()){
-            return builder.isEquals();
-        }else{
-            return false;
-        }
-    }
-
-    /**
      * Returns the default value for this Morpher.
      *
      * @return the default value
      */
     public char getDefaultValue(){
         return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
     }
 
     /**
@@ -128,6 +79,8 @@ public final class CharArrayMorpher extends AbstractArrayMorpher{
             // no conversion needed
             return array;
         }
+
+        //---------------------------------------------------------------
 
         if (array.getClass().isArray()){
             int length = Array.getLength(array);

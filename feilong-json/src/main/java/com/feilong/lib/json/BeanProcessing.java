@@ -24,6 +24,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.CycleSetUtil;
+import com.feilong.lib.json.util.IsIgnoreUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.KeyUpdate;
 import com.feilong.lib.json.util.PropertyFilter;

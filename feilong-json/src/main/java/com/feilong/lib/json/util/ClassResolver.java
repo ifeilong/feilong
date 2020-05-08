@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json;
+package com.feilong.lib.json.util;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -27,7 +27,7 @@ import java.util.Set;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class ClassResolver{
+public class ClassResolver{
 
     /** Don't let anyone instantiate this class. */
     private ClassResolver(){
@@ -51,7 +51,7 @@ class ClassResolver{
      *            the type
      * @return the class
      */
-    static Class<?> resolveClass(Map classMap,String key,String name,Class<?> type){
+    public static Class<?> resolveClass(Map<String, Class<?>> classMap,String key,String name,Class<?> type){
         Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
         if (targetClass == null){
             targetClass = TargetClassFinder.findTargetClass(name, classMap);

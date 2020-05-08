@@ -1152,7 +1152,6 @@ public final class JsonUtil{
      * @since 1.9.2 use LinkedHashMap instead of HashMap
      * @since 1.9.4
      */
-    @SuppressWarnings("unchecked")
     public static <T> Map<String, T> toMap(Object json,JsonToJavaConfig jsonToJavaConfig){
         LOGGER.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
         if (isNullOrEmpty(json)){

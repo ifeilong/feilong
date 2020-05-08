@@ -97,6 +97,8 @@ public abstract class AbstractArrayMorpher implements ObjectMorpher{
         return (int[]) dims;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the number of dimensions in an array class.
      *

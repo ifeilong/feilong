@@ -37,17 +37,17 @@ class ToStringUtil{
 
     //---------------------------------------------------------------
 
-    static String toString(Map properties,int indentFactor,int indent){
+    static String toString(Map<String, Object> properties,int indentFactor,int indent){
         StringBuilder sb = new StringBuilder("{");
 
         //---------------------------------------------------------------
-        Iterator keys = properties.keySet().iterator();
+        Iterator<String> keys = properties.keySet().iterator();
 
         if (properties.size() == 1){
             Object o = keys.next();
             sb.append(JSONUtils.quote(o.toString()));
             sb.append(": ");
-            sb.append(JSONUtils.valueToString(properties.get(o), indentFactor, indent));
+            sb.append(ValueToStringUtil.valueToString(properties.get(o), indentFactor, indent));
         }else{
             int newindent = indent + indentFactor;
             while (keys.hasNext()){
@@ -62,7 +62,7 @@ class ToStringUtil{
                 }
                 sb.append(JSONUtils.quote(o.toString()));
                 sb.append(": ");
-                sb.append(JSONUtils.valueToString(properties.get(o), indentFactor, newindent));
+                sb.append(ValueToStringUtil.valueToString(properties.get(o), indentFactor, newindent));
             }
             if (sb.length() > 1){
                 sb.append('\n');
@@ -80,10 +80,10 @@ class ToStringUtil{
         return sb.toString();
     }
 
-    static String toString(Map properties){
+    static String toString(Map<String, Object> properties){
         StringBuilder sb = new StringBuilder("{");
 
-        Iterator keys = properties.keySet().iterator();
+        Iterator<String> keys = properties.keySet().iterator();
         while (keys.hasNext()){
             if (sb.length() > 1){
                 sb.append(',');
@@ -92,8 +92,10 @@ class ToStringUtil{
             sb.append(JSONUtils.quote(o.toString()));
             sb.append(':');
 
-            sb.append(JSONUtils.valueToString(properties.get(o)));
+            sb.append(ValueToStringUtil.valueToString(properties.get(o)));
         }
+
+        //---------------------------------------------------------------
         sb.append('}');
         return sb.toString();
     }
@@ -104,7 +106,7 @@ class ToStringUtil{
         //---------------------------------------------------------------
         int len = elements.size();
         if (len == 1){
-            sb.append(JSONUtils.valueToString(elements.get(0), indentFactor, indent));
+            sb.append(ValueToStringUtil.valueToString(elements.get(0), indentFactor, indent));
         }else{
             int newindent = indent + indentFactor;
             sb.append('\n');
@@ -115,7 +117,7 @@ class ToStringUtil{
                 for (int j = 0; j < newindent; j += 1){
                     sb.append(' ');
                 }
-                sb.append(JSONUtils.valueToString(elements.get(i), indentFactor, newindent));
+                sb.append(ValueToStringUtil.valueToString(elements.get(i), indentFactor, newindent));
             }
             sb.append('\n');
             for (int i = 0; i < indent; i += 1){
@@ -126,6 +128,32 @@ class ToStringUtil{
             }
         }
 
+        //---------------------------------------------------------------
+        sb.append(']');
+        return sb.toString();
+    }
+
+    /**
+     * Make a JSON text of this JSONArray. For compactness, no unnecessary
+     * whitespace is added. If it is not possible to produce a syntactically
+     * correct JSON text then null will be returned instead. This could occur if
+     * the array contains an invalid number.
+     * <p>
+     * Warning: This method assumes that the data structure is acyclical.
+     *
+     * @return a printable, displayable, transmittable representation of the
+     *         array.
+     */
+    static String toString(List<Object> elements){
+        StringBuilder sb = new StringBuilder("[");
+
+        int len = elements.size();
+        for (int i = 0; i < len; i += 1){
+            if (i > 0){
+                sb.append(",");
+            }
+            sb.append(ValueToStringUtil.valueToString(elements.get(i)));
+        }
         //---------------------------------------------------------------
         sb.append(']');
         return sb.toString();

@@ -186,10 +186,10 @@ public final class JSONUtils{
      *            the json object
      * @return the properties
      */
-    public static Map getProperties(JSONObject jsonObject){
-        Map properties = new HashMap<>();
-        for (Iterator keys = jsonObject.keys(); keys.hasNext();){
-            String key = (String) keys.next();
+    public static Map<String, Class<?>> getProperties(JSONObject jsonObject){
+        Map<String, Class<?>> properties = new HashMap<>();
+        for (Iterator<String> keys = jsonObject.keys(); keys.hasNext();){
+            String key = keys.next();
             properties.put(key, getTypeClass(jsonObject.get(key)));
         }
         return properties;
@@ -510,7 +510,7 @@ public final class JSONUtils{
      * @return the dyna bean
      */
     public static DynaBean newDynaBean(JSONObject jsonObject,JsonConfig jsonConfig){
-        Map props = getProperties(jsonObject);
+        Map<String, Class<?>> props = getProperties(jsonObject);
         for (Iterator entries = props.entrySet().iterator(); entries.hasNext();){
             Map.Entry entry = (Map.Entry) entries.next();
             String key = (String) entry.getKey();
@@ -552,7 +552,6 @@ public final class JSONUtils{
         testValidity(n);
 
         // Shave off trailing zeros and decimal point, if possible.
-
         String s = n.toString();
         if (s.indexOf('.') > 0 && s.indexOf('e') < 0 && s.indexOf('E') < 0){
             while (s.endsWith("0")){
@@ -698,11 +697,9 @@ public final class JSONUtils{
      *
      * @param input
      *            the input
-     * @param jsonConfig
-     *            the json config
      * @return true, if is json keyword
      */
-    public static boolean isJsonKeyword(String input,JsonConfig jsonConfig){
+    public static boolean isJsonKeyword(String input){
         if (input == null){
             return false;
         }
@@ -766,78 +763,9 @@ public final class JSONUtils{
         return input;
     }
 
-    /**
-     * Make a JSON text of an Object value. If the object has an
-     * value.toJSONString() method, then that method will be used to produce the
-     * JSON text. The method is required to produce a strictly conforming text.
-     * If the object does not contain a toJSONString method (which is the most
-     * common case), then a text will be produced by the rules.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param value
-     *            The value to be serialized.
-     * @return a printable, displayable, transmittable representation of the
-     *         object, beginning with <code>{</code>&nbsp;<small>(left brace)</small>
-     *         and ending with <code>}</code>&nbsp;<small>(right brace)</small>.
-     * @throws JSONException
-     *             If the value is or contains an invalid number.
-     */
-    public static String valueToString(Object value){
-        if (value == null || isNull(value)){
-            return "null";
-        }
-        if (value instanceof JSONFunction){
-            return ((JSONFunction) value).toString();
-        }
-        if (value instanceof Number){
-            return numberToString((Number) value);
-        }
-        if (value instanceof Boolean || value instanceof JSONObject || value instanceof JSONArray){
-            return value.toString();
-        }
-        return quote(value.toString());
-    }
+    //---------------------------------------------------------------
 
-    /**
-     * Make a prettyprinted JSON text of an object value.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @param value
-     *            The value to be serialized.
-     * @param indentFactor
-     *            The number of spaces to add to each level of
-     *            indentation.
-     * @param indent
-     *            The indentation of the top level.
-     * @return a printable, displayable, transmittable representation of the
-     *         object, beginning with <code>{</code>&nbsp;<small>(left brace)</small>
-     *         and ending with <code>}</code>&nbsp;<small>(right brace)</small>.
-     * @throws JSONException
-     *             If the object contains an invalid number.
-     */
-    public static String valueToString(Object value,int indentFactor,int indent){
-        if (value == null || isNull(value)){
-            return "null";
-        }
-        if (value instanceof JSONFunction){
-            return ((JSONFunction) value).toString();
-        }
-        if (value instanceof Number){
-            return numberToString((Number) value);
-        }
-        if (value instanceof Boolean){
-            return value.toString();
-        }
-        if (value instanceof JSONObject){
-            return ((JSONObject) value).toString(indentFactor, indent);
-        }
-        if (value instanceof JSONArray){
-            return ((JSONArray) value).toString(indentFactor, indent);
-        }
-        return quote(value.toString());
-    }
+    //---------------------------------------------------------------
 
     /**
      * Finds out if n represents a BigInteger.

@@ -62,7 +62,7 @@ public abstract class JavaIdentifierTransformer{
      * @throws JSONException
      *             if the resulting string has zero length.
      */
-    protected final String shaveOffNonJavaIdentifierStartChars(String str){
+    protected final static String shaveOffNonJavaIdentifierStartChars(String str){
         String str2 = str;
         // shave off first char if not valid
         boolean ready = false;

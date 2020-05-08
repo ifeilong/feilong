@@ -125,6 +125,8 @@ public class JSONArrayBuilder{
             jsonArray.addValue(array[i], jsonConfig);
         }
 
+        //---------------------------------------------------------------
+
         CycleSetUtil.removeInstance(array);
         return jsonArray;
     }
@@ -146,13 +148,16 @@ public class JSONArrayBuilder{
                 CycleSetUtil.removeInstance(array);
                 throw JSONExceptionUtil.build("", e);
             }
-
         }
+
+        //---------------------------------------------------------------
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
             Number n = JSONUtils.transformNumber(array[i]);
             jsonArray.addValue(n, jsonConfig);
         }
+
+        //---------------------------------------------------------------
 
         CycleSetUtil.removeInstance(array);
         return jsonArray;
@@ -306,7 +311,7 @@ public class JSONArrayBuilder{
         }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < array.length; i++){
-            Number n = new Integer(array[i]);
+            Number n = array[i];
             jsonArray.addValue(n, jsonConfig);
         }
 
@@ -426,7 +431,6 @@ public class JSONArrayBuilder{
 
         JSONArray jsonArray = new JSONArray();
         try{
-            int i = 0;
             for (Iterator elements = collection.iterator(); elements.hasNext();){
                 Object element = elements.next();
                 jsonArray.addValue(element, jsonConfig);
@@ -459,7 +463,6 @@ public class JSONArrayBuilder{
             }
         }
         JSONArray jsonArray = new JSONArray();
-        int index = 0;
         for (Iterator elements = array.iterator(); elements.hasNext();){
             Object element = elements.next();
             jsonArray.addValue(element, jsonConfig);
@@ -479,9 +482,7 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     static JSONArray _fromJSONTokener(JSONTokener tokener,JsonConfig jsonConfig){
-
         JSONArray jsonArray = new JSONArray();
-        int index = 0;
 
         try{
             if (tokener.nextClean() != '['){

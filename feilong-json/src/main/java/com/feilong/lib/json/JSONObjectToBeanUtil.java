@@ -36,11 +36,13 @@ import com.feilong.lib.ezmorph.array.ObjectArrayMorpher;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.util.ClassResolver;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.KeyUpdate;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.json.util.PropertySetStrategy;
+import com.feilong.lib.json.util.TargetClassFinder;
 
 /**
  * 
@@ -75,12 +77,12 @@ public class JSONObjectToBeanUtil{
         DynaBean dynaBean = null;
 
         JsonConfig jsonConfig = new JsonConfig();
-        Map props = JSONUtils.getProperties(jsonObject);
+        Map<String, Class<?>> props = JSONUtils.getProperties(jsonObject);
         dynaBean = JSONUtils.newDynaBean(jsonObject, jsonConfig);
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
             String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
-            Class<?> type = (Class<?>) props.get(name);
+            Class<?> type = props.get(name);
             Object value = jsonObject.get(name);
             try{
                 if (!JSONUtils.isNull(value)){
@@ -130,7 +132,7 @@ public class JSONObjectToBeanUtil{
         }
 
         //---------------------------------------------------------------
-        Map classMap = jsonConfig.getClassMap();
+        Map<String, Class<?>> classMap = jsonConfig.getClassMap();
         if (classMap == null){
             classMap = emptyMap();
         }
@@ -153,7 +155,7 @@ public class JSONObjectToBeanUtil{
 
         //---------------------------------------------------------------
 
-        Map properties = JSONUtils.getProperties(jsonObject);
+        Map<String, Class<?>> properties = JSONUtils.getProperties(jsonObject);
 
         PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
@@ -172,7 +174,7 @@ public class JSONObjectToBeanUtil{
             key = KeyUpdate.update(beanClass, key, propertyNameProcessor);
 
             //---------------------------------------------------------------
-            Class<?> type = (Class<?>) properties.get(name);
+            Class<?> type = properties.get(name);
             try{
                 if (Map.class.isAssignableFrom(beanClass)){
                     toBeanDoWithMap(jsonConfig, classMap, bean, name, type, value, key);
@@ -201,7 +203,7 @@ public class JSONObjectToBeanUtil{
                     String key,
 
                     JsonConfig jsonConfig,
-                    Map classMap,
+                    Map<String, Class<?>> classMap,
                     PropertyDescriptor propertyDescriptor) throws Exception{
 
         Class<?> beanClass = bean.getClass();
@@ -248,10 +250,12 @@ public class JSONObjectToBeanUtil{
                 targetType = targetType == null ? TargetClassFinder.findTargetClass(name, classMap) : targetType;
                 targetType = targetType == null && targetTypeCopy.isInterface() ? targetTypeCopy : targetType;
             }
-            JsonConfig jsc = jsonConfig.copy();
-            jsc.setRootClass(targetType);
-            jsc.setClassMap(classMap);
-            setProperty(bean, key, toBean((JSONObject) value, jsc), jsonConfig);
+
+            //---------------------------------------------------------------
+            JsonConfig jsonConfigCopy = jsonConfig.copy();
+            jsonConfigCopy.setRootClass(targetType);
+            jsonConfigCopy.setClassMap(classMap);
+            setProperty(bean, key, toBean((JSONObject) value, jsonConfigCopy), jsonConfig);
             return;
         }
 
@@ -280,9 +284,7 @@ public class JSONObjectToBeanUtil{
             }
 
             //---------------------------------------------------------------
-
             setProperty(bean, key, value, jsonConfig);
-
             return;
         }
 
@@ -300,13 +302,21 @@ public class JSONObjectToBeanUtil{
         }
     }
 
-    private static void toBeanDoWithMap(JsonConfig jsonConfig,Map classMap,Object bean,String name,Class<?> type,Object value,String key)
-                    throws Exception{
+    private static void toBeanDoWithMap(
+                    JsonConfig jsonConfig,
+                    Map<String, Class<?>> classMap,
+                    Object bean,
+                    String name,
+                    Class<?> type,
+                    Object value,
+                    String key) throws Exception{
         // no type info available for conversion
         if (JSONUtils.isNull(value)){
             setProperty(bean, key, value, jsonConfig);
             return;
         }
+
+        //---------------------------------------------------------------
         if (value instanceof JSONArray){
             setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class), jsonConfig);
             return;
@@ -354,20 +364,22 @@ public class JSONObjectToBeanUtil{
             throw new JSONException("Root bean is an interface. " + rootClass);
         }
 
-        Map classMap = jsonConfig.getClassMap();
+        Map<String, Class<?>> classMap = jsonConfig.getClassMap();
         if (classMap == null){
             classMap = emptyMap();
         }
 
-        Map props = JSONUtils.getProperties(jsonObject);
+        Map<String, Class<?>> props = JSONUtils.getProperties(jsonObject);
         PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
-            Class<?> type = (Class<?>) props.get(name);
+            Class<?> type = props.get(name);
             Object value = jsonObject.get(name);
             if (javaPropertyFilter != null && javaPropertyFilter.apply(root, name, value)){
                 continue;
             }
+
+            //---------------------------------------------------------------
             String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
             try{
                 PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(root, key);
@@ -470,6 +482,7 @@ public class JSONObjectToBeanUtil{
             }
         }
 
+        //---------------------------------------------------------------
         return root;
     }
 

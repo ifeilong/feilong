@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json;
+package com.feilong.lib.json.util;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -40,7 +40,7 @@ public class IsIgnoreUtil{
 
     //---------------------------------------------------------------
 
-    static boolean isIgnore(Class<?> beanClass,PropertyDescriptor propertyDescriptor,Collection exclusions){
+    public static boolean isIgnore(Class<?> beanClass,PropertyDescriptor propertyDescriptor,Collection<String> exclusions){
         String key = propertyDescriptor.getName();
         if (exclusions.contains(key)){
             return true;

@@ -298,32 +298,6 @@ public final class JSONArray implements JSON{
     }
 
     /**
-     * Make a string from the contents of this JSONArray. The
-     * <code>separator</code> string is inserted between each element. Warning:
-     * This method assumes that the data structure is acyclical.
-     *
-     * @param separator
-     *            A string that will be inserted between the elements.
-     * @return a string.
-     * @throws JSONException
-     *             If the array contains an invalid number.
-     */
-    public String join(String separator){
-        int len = size();
-        StringBuffer sb = new StringBuffer();
-
-        for (int i = 0; i < len; i += 1){
-            if (i > 0){
-                sb.append(separator);
-            }
-            String value = JSONUtils.valueToString(this.elements.get(i));
-            //sb.append(stripQuotes ? JSONUtils.stripQuotes(value) : value);
-            sb.append(value);
-        }
-        return sb.toString();
-    }
-
-    /**
      * 删除.
      *
      * @param index
@@ -373,11 +347,7 @@ public final class JSONArray implements JSON{
      */
     @Override
     public String toString(){
-        try{
-            return '[' + join(",") + ']';
-        }catch (Exception e){
-            return null;
-        }
+        return ToStringUtil.toString(this.elements);
     }
 
     /**
@@ -461,6 +431,8 @@ public final class JSONArray implements JSON{
         if (!(obj instanceof JSONArray)){
             return false;
         }
+
+        //---------------------------------------------------------------
 
         JSONArray other = (JSONArray) obj;
 

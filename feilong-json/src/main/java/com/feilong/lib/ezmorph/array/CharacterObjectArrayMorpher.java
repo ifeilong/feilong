@@ -18,8 +18,6 @@ package com.feilong.lib.ezmorph.array;
 
 import java.lang.reflect.Array;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.ezmorph.MorphException;
 import com.feilong.lib.ezmorph.primitive.CharMorpher;
 
@@ -60,20 +58,6 @@ public final class CharacterObjectArrayMorpher extends AbstractArrayMorpher{
      */
     public Character getDefaultValue(){
         return defaultValue;
-    }
-
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-    public int hashCode(){
-        HashCodeBuilder builder = new HashCodeBuilder();
-        if (isUseDefault()){
-            builder.append(getDefaultValue());
-        }
-        return builder.toHashCode();
     }
 
     /**

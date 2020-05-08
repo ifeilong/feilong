@@ -167,12 +167,12 @@ public final class JSONObject implements JSON{
     // ------------------------------------------------------
 
     /** identifies this object as null. */
-    private boolean nullObject;
+    private boolean           nullObject;
 
     /**
      * The Map where the JSONObject's properties are kept.
      */
-    final Map       properties;
+    final Map<String, Object> properties;
 
     /**
      * Construct an empty JSONObject.
@@ -214,7 +214,7 @@ public final class JSONObject implements JSON{
             throw new JSONException("Can't accumulate on null object");
         }
 
-        if (!has(key)){
+        if (!this.properties.containsKey(key)){
             setInternal(key, value, jsonConfig);
         }else{
             Object o = get(key);
@@ -251,9 +251,9 @@ public final class JSONObject implements JSON{
         }
         if (value != null){
             value = ProcessValueUtil.processJsonObjectValue(key, value, jsonConfig);
-            _setInternal(key, value, jsonConfig);
+            _setInternal(key, value);
         }else{
-            remove(key);
+            this.properties.remove(key);
         }
         return this;
     }
@@ -273,18 +273,6 @@ public final class JSONObject implements JSON{
     }
 
     /**
-     * Determine if the JSONObject contains a specific key.
-     *
-     * @param key
-     *            A key string.
-     * @return true if the key exists in the JSONObject.
-     */
-    public boolean has(String key){
-        verifyIsNull();
-        return this.properties.containsKey(key);
-    }
-
-    /**
      * Returs if this object is a null JSONObject.
      *
      * @return the identifies this object as null
@@ -298,9 +286,9 @@ public final class JSONObject implements JSON{
      *
      * @return An iterator of the keys.
      */
-    public Iterator keys(){
+    public Iterator<String> keys(){
         verifyIsNull();
-        Set keySet = Collections.unmodifiableSet(properties.keySet());
+        Set<String> keySet = Collections.unmodifiableSet(properties.keySet());
         return keySet.iterator();
     }
 
@@ -316,24 +304,11 @@ public final class JSONObject implements JSON{
     public JSONArray names(JsonConfig jsonConfig){
         verifyIsNull();
         JSONArray ja = new JSONArray();
-        Iterator keys = keys();
+        Iterator<String> keys = keys();
         while (keys.hasNext()){
             ja.element(keys.next(), jsonConfig);
         }
         return ja;
-    }
-
-    /**
-     * Remove a name and its value, if present.
-     *
-     * @param key
-     *            The name to be removed.
-     * @return The value that was associated with the name, or null if there was
-     *         no value.
-     */
-    public Object remove(String key){
-        verifyIsNull();
-        return this.properties.remove(key);
     }
 
     /**
@@ -409,14 +384,12 @@ public final class JSONObject implements JSON{
      *            An object which is the value. It should be of one of these
      *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
-     * @param jsonConfig
-     *            the json config
      * @return this.
      * @throws JSONException
      *             If the value is non-finite number or if the key is
      *             null.
      */
-    private JSONObject _setInternal(String key,Object value,JsonConfig jsonConfig){
+    private JSONObject _setInternal(String key,Object value){
         verifyIsNull();
         if (key == null){
             throw new JSONException("Null key.");
@@ -453,7 +426,7 @@ public final class JSONObject implements JSON{
      */
     JSONObject setInternal(String key,Object value,JsonConfig jsonConfig){
         Object processJsonObjectValue = ProcessValueUtil.processJsonObjectValue(key, value, jsonConfig);
-        return _setInternal(key, processJsonObjectValue, jsonConfig);
+        return _setInternal(key, processJsonObjectValue);
     }
 
     /**

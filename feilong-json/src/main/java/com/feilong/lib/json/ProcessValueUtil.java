@@ -79,7 +79,7 @@ public class ProcessValueUtil{
         if (value instanceof Annotation || (value != null && value.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
         }
-        return ProcessValueUtil._processValue(value, jsonConfig);
+        return ProcessValueUtil.processValue(value, jsonConfig);
     }
     //---------------------------------------------------------------
 
@@ -123,7 +123,7 @@ public class ProcessValueUtil{
         if (value != null && Enum.class.isAssignableFrom(value.getClass())){
             return ((Enum) value).name();
         }
-        return _processValue(value, jsonConfig);
+        return processValue(value, jsonConfig);
     }
 
     //---------------------------------------------------------------
@@ -137,7 +137,7 @@ public class ProcessValueUtil{
      *            the json config
      * @return the object
      */
-    static Object _processValue(Object value,JsonConfig jsonConfig){
+    static Object processValue(Object value,JsonConfig jsonConfig){
         if (JSONNull.getInstance().equals(value)){
             return JSONNull.getInstance();
         }
@@ -145,6 +145,7 @@ public class ProcessValueUtil{
             return ((Class<?>) value).getName();
         }
 
+        //---------------------------------------------------------------
         if (JSONUtils.isFunction(value)){
             if (value instanceof String){
                 value = JSONFunction.parse((String) value);
@@ -175,7 +176,7 @@ public class ProcessValueUtil{
                 }
                 return str;
             }
-            if (JSONUtils.isJsonKeyword(str, jsonConfig)){
+            if (JSONUtils.isJsonKeyword(str)){
                 return str;
             }
             if (JSONUtils.mayBeJSON(str)){
@@ -197,6 +198,7 @@ public class ProcessValueUtil{
             return value;
         }
 
+        //---------------------------------------------------------------
         JSONObject jsonObject = JSONObjectBuilder.build(value, jsonConfig);
         if (jsonObject.isNullObject()){
             return JSONNull.getInstance();

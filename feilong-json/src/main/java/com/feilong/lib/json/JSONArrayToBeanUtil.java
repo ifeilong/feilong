@@ -75,9 +75,8 @@ public class JSONArrayToBeanUtil{
         }
 
         //---------------------------------------------------------------
-
         Class<?> objectClass = jsonConfig.getRootClass();
-        Map classMap = jsonConfig.getClassMap();
+        Map<String, Class<?>> classMap = jsonConfig.getClassMap();
 
         int size = jsonArray.size();
         for (int i = 0; i < size; i++){
@@ -129,6 +128,8 @@ public class JSONArrayToBeanUtil{
         if (jsonArray.size() == 0 || root == null){
             return new ArrayList<>();
         }
+
+        //---------------------------------------------------------------
 
         List list = new ArrayList<>();
         int size = jsonArray.size();
@@ -225,7 +226,7 @@ public class JSONArrayToBeanUtil{
      */
     static Object toArray(JSONArray jsonArray,JsonConfig jsonConfig){
         Class<?> objectClass = jsonConfig.getRootClass();
-        Map classMap = jsonConfig.getClassMap();
+        Map<String, Class<?>> classMap = jsonConfig.getClassMap();
 
         if (jsonArray.size() == 0){
             return Array.newInstance(objectClass == null ? Object.class : objectClass, 0);
@@ -294,7 +295,7 @@ public class JSONArrayToBeanUtil{
      *            the class map
      * @return the object
      */
-    private static Object toArray(JSONArray jsonArray,Class<?> objectClass,Map classMap){
+    private static Object toArray(JSONArray jsonArray,Class<?> objectClass,Map<String, Class<?>> classMap){
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setRootClass(objectClass);
         jsonConfig.setClassMap(classMap);

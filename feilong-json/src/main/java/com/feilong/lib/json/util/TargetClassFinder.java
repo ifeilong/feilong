@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json;
+package com.feilong.lib.json.util;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -25,7 +25,7 @@ import com.feilong.lib.json.regexp.RegexpUtils;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
-class TargetClassFinder{
+public class TargetClassFinder{
 
     /** Don't let anyone instantiate this class. */
     private TargetClassFinder(){
@@ -48,7 +48,7 @@ class TargetClassFinder{
      *            the class map
      * @return the class
      */
-    static Class<?> findTargetClass(String key,Map classMap){
+    public static Class<?> findTargetClass(String key,Map classMap){
         // try get first
         Class<?> targetClass = (Class<?>) classMap.get(key);
 

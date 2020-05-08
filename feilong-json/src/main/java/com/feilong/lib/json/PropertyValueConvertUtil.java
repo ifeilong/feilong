@@ -25,6 +25,7 @@ import com.feilong.lib.ezmorph.array.ObjectArrayMorpher;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.json.util.TargetClassFinder;
 
 /**
  * 
@@ -57,13 +58,14 @@ public class PropertyValueConvertUtil{
      *            the class map
      * @return the list
      */
-    static List toList(String key,Object value,JsonConfig jsonConfig,String name,Map classMap){
+    static List toList(String key,Object value,JsonConfig jsonConfig,String name,Map<String, Class<?>> classMap){
         Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
         targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
-        JsonConfig jsc = jsonConfig.copy();
-        jsc.setRootClass(targetClass);
-        jsc.setClassMap(classMap);
-        return (List) JSONArrayToBeanUtil.toCollection((JSONArray) value, jsc);
+
+        JsonConfig jsonConfigCopy = jsonConfig.copy();
+        jsonConfigCopy.setRootClass(targetClass);
+        jsonConfigCopy.setClassMap(classMap);
+        return (List) JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
     }
 
     /**
@@ -147,5 +149,4 @@ public class PropertyValueConvertUtil{
         }
         return array;
     }
-
 }
