@@ -80,11 +80,6 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-velocity</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-velocity-extension</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
 
 		<!-- feilong-json -->
 		<dependency>

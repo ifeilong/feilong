@@ -81,6 +81,19 @@
 			</dependency> -->
 
 
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-io</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-core-extension</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
 	</dependencies>
 
 </project>

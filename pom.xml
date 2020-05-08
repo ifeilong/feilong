@@ -27,7 +27,6 @@
 		<module>feilong-net</module>
 
 		<module>feilong-velocity</module>
-		<module>feilong-velocity-extension</module>
 		<module>feilong-xml</module>
 
 		<module>feilong-context</module>
