@@ -112,7 +112,7 @@ public class ExcelSheet{
      * @return the excel block
      */
     public ExcelBlock getExcelBlock(){
-        if (excelBlocks.size() == 0){
+        if (excelBlocks.isEmpty()){
             return null;
         }
         return excelBlocks.iterator().next();
