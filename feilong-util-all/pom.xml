@@ -138,13 +138,6 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!--feilong-tools-pinyin -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-pinyin</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
-
 		<!-- ***************end*********************************** -->
 
 		<!-- feilong-security -->

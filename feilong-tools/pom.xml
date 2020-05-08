@@ -12,11 +12,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-
-
 		<module>feilong-tools-emailaddress</module>
 		<module>feilong-tools-mobile</module>
-		<module>feilong-tools-pinyin</module>
 	</modules>
 
 	<dependencies>
