@@ -74,7 +74,7 @@
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<!-- http://commons.apache.org/proper/commons-collections/index.html -->
 		<!-- 4.3 需要 jdk1.8 -->
-		<version.commons-collections4>4.2</version.commons-collections4>
+		<version.commons-collections4>4.4</version.commons-collections4>
 
 		<version.commons-configuration>1.10</version.commons-configuration>
 
@@ -115,10 +115,11 @@
 		<!-- http://commons.apache.org/proper/commons-lang/ -->
 		<!-- https://github.com/apache/commons-lang/blob/master/RELEASE-NOTES.txt -->
 		<!--
+			Lang 3.9 and onwards now targets Java 8, making use of features that arrived with Java 8.
 			Commons Lang 3.6 at least requires Java 7.0.
 			Note that this has changed from Commons Lang 3.5, which only required Java 1.6
 		-->
-		<version.commons-lang3>3.8.1</version.commons-lang3>
+		<version.commons-lang3>3.10</version.commons-lang3>
 
 		<!-- http://commons.apache.org/proper/commons-logging/download_logging.cgi -->
 		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
@@ -492,7 +493,7 @@
 				<artifactId>spring-context</artifactId>
 				<version>${version.spring}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-expression</artifactId>

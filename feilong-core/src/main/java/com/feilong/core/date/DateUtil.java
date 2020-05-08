@@ -598,7 +598,7 @@ public final class DateUtil{
      *            加减年数 ,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>year==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#YEAR
      * @see org.apache.commons.lang3.time.DateUtils#addYears(Date, int)
@@ -636,7 +636,7 @@ public final class DateUtil{
      *            比如-3 表示 3个月之前
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>month==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addMonths(Date, int)
@@ -675,7 +675,7 @@ public final class DateUtil{
      *            需要加减的天数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>day==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#DAY_OF_MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addDays(Date, int)
@@ -713,7 +713,7 @@ public final class DateUtil{
      *            需要加减的星期数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>week==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addWeeks(Date, int)
      */
@@ -749,7 +749,7 @@ public final class DateUtil{
      *            加减小时数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>hour==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addHours(Date, int)
      */
@@ -785,7 +785,7 @@ public final class DateUtil{
      *            加减分钟数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>minute==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addMinutes(Date, int)
      */
@@ -821,7 +821,7 @@ public final class DateUtil{
      *            加减秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>second==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addSeconds(Date, int)
      */
@@ -857,7 +857,7 @@ public final class DateUtil{
      *            加减毫秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}<br>
      *         如果 <code>millisecond==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addMilliseconds(Date, int)
      * @since 1.4.1
