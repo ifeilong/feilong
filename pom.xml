@@ -97,7 +97,7 @@
 		<version.commons-compress>1.20</version.commons-compress>
 
 		<!-- http://commons.apache.org/proper/commons-digester/ -->
-		<version.commons-digester>2.1</version.commons-digester>
+		<version.commons-digester3>3.2</version.commons-digester3>
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
 		<version.commons-fileupload>1.4</version.commons-fileupload>
@@ -656,23 +656,19 @@
 				<version>${version.commons-codec}</version>
 			</dependency>
 
-			<!-- commons-digester -->
 			<dependency>
-				<groupId>commons-digester</groupId>
-				<artifactId>commons-digester</artifactId>
-				<version>${version.commons-digester}</version>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-digester3</artifactId>
+				<version>${version.commons-digester3}</version>
 				<exclusions>
 					<exclusion>
-						<artifactId>commons-collections</artifactId>
-						<groupId>commons-collections</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-beanutils</artifactId>
 						<groupId>commons-beanutils</groupId>
+						<artifactId>commons-beanutils</artifactId>
 					</exclusion>
+
 					<exclusion>
-						<artifactId>commons-logging</artifactId>
 						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>

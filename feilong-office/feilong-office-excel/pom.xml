@@ -50,8 +50,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>commons-digester</groupId>
-			<artifactId>commons-digester</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-digester3</artifactId>
 			<optional>true</optional>
 		</dependency>
 

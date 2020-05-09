@@ -35,6 +35,9 @@
 	<logger name="org.apache.commons.digester.Digester">
 		<level value="warn"></level>
 	</logger>
+	<category name="org.apache.commons.digester3">
+		<priority value="info" />
+	</category>
 	<logger name="org.apache.commons.beanutils.ConvertUtilsBean">
 		<level value="warn"></level>
 	</logger>

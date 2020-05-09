@@ -51,6 +51,9 @@
 	<category name="org.apache.commons.digester.Digester">
 		<priority value="warn" />
 	</category>
+	<category name="org.apache.commons.digester3">
+		<priority value="info" />
+	</category>
 	<category name="org.apache.commons.beanutils.ConvertUtilsBean">
 		<priority value="warn" />
 	</category>

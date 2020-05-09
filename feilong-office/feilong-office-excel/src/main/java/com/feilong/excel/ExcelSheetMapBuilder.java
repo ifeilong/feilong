@@ -17,18 +17,17 @@ package com.feilong.excel;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.xmlrules.DigesterLoader;
+import org.apache.commons.digester3.Digester;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.InputSource;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.definition.ExcelSheet;
@@ -40,10 +39,12 @@ import com.feilong.excel.definition.ExcelSheet;
  */
 class ExcelSheetMapBuilder{
 
-    private static final Logger LOGGER    = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
+    private static final Logger   LOGGER    = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
 
     /** The Constant RULE_FILE. */
-    private static final String RULE_FILE = "config/excel/definition-rule.xml";
+    private static final String   RULE_FILE = "config/excel/definition-rule.xml";
+
+    private static final Digester digester  = DigesterCreater.create(RULE_FILE);
 
     //---------------------------------------------------------------
 
@@ -57,42 +58,32 @@ class ExcelSheetMapBuilder{
     //---------------------------------------------------------------
 
     static Map<String, ExcelSheet> build(String...configurations){
-
         Map<String, ExcelSheet> sheetDefinitions = new HashMap<>();
 
         Validate.notEmpty(configurations, "configurations can't be null/empty!");
-
         //---------------------------------------------------------------
 
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        Digester digester = DigesterLoader.createDigester(new InputSource(contextClassLoader.getResourceAsStream(RULE_FILE)));
-        digester.setValidating(false);
-
-        //---------------------------------------------------------------
-
         for (String configuration : configurations){
             Validate.notBlank(configuration, "config can't be blank!");
             try{
                 Date beginDate = new Date();
-                List<ExcelSheet> excelSheetList = (List<ExcelSheet>) digester.parse(contextClassLoader.getResourceAsStream(configuration));
+                InputStream inputStream = contextClassLoader.getResourceAsStream(configuration);
+                List<ExcelSheet> excelSheetList = digester.parse(inputStream);
 
                 for (ExcelSheet excelSheet : excelSheetList){
                     sheetDefinitions.put(excelSheet.getName(), excelSheet);
                 }
-
                 //---------------------------------------------------------------
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(
-                                    "parse config:[{}],list size:[{}],use time: [{}]",
-                                    configuration,
-                                    CollectionUtils.size(excelSheetList),
-                                    formatDuration(beginDate));
+                    int size = CollectionUtils.size(excelSheetList);
+                    LOGGER.debug("parse config:[{}],list size:[{}],use time: [{}]", configuration, size, formatDuration(beginDate));
                 }
             }catch (Exception e){
                 throw new DefaultRuntimeException("parse [" + configuration + "] fail", e);
             }
         }
-
         return sheetDefinitions;
     }
+
 }
