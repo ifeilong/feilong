@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
 import com.feilong.net.mail.entity.ICalendar;
@@ -38,8 +36,6 @@ import com.feilong.template.TemplateUtil;
  * @since 1.10.2
  */
 public class IcsBuilder{
-
-    private static final Logger LOGGER              = LoggerFactory.getLogger(IcsBuilder.class);
 
     private static final String templateInClassPath = "ics.vm";
 
