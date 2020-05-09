@@ -76,12 +76,6 @@
 		<!-- 4.3 需要 jdk1.8 -->
 		<version.commons-collections4>4.4</version.commons-collections4>
 
-		<version.commons-configuration>1.10</version.commons-configuration>
-
-		<!-- http://commons.apache.org/proper/commons-configuration/index.html -->
-		<!-- http://commons.apache.org/proper/commons-configuration/changes-report.html#a2.4 -->
-		<version.commons-configuration2>2.3</version.commons-configuration2>
-
 		<!--
 			The Apache Commons Compress library defines an API for working with ar, cpio, Unix dump, tar, zip, gzip, XZ, Pack200, bzip2, 7z, arj, lzma, snappy, DEFLATE,
 			lz4, Brotli, Zstandard, DEFLATE64 and Z files.
@@ -97,7 +91,10 @@
 		-->
 
 		<!-- http://commons.apache.org/proper/commons-compress/ -->
-		<version.commons-compress>1.19</version.commons-compress>
+		<!--
+			1.20 (requires JDK 1.7+)
+		-->
+		<version.commons-compress>1.20</version.commons-compress>
 
 		<!-- http://commons.apache.org/proper/commons-digester/ -->
 		<version.commons-digester>2.1</version.commons-digester>
@@ -178,9 +175,12 @@
 		<!-- #133: XStream 1.4.11 fails to run on a Java Runtime < 8. -->
 		<version.xstream>1.4.12</version.xstream>
 
-		<!-- <version.velocity-engine>2.0</version.velocity-engine> -->
+		<!-- http://velocity.apache.org/news.html -->
 		<version.velocity>1.7</version.velocity>
 		<version.velocity-tools>2.0</version.velocity-tools>
+
+		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
+		<!-- <version.velocity-engine>2.0</version.velocity-engine> -->
 
 		<!--
 			http://tiles.apache.org/framework/whats-new.html
@@ -551,7 +551,6 @@
 				<version>${version.commons-compress}</version>
 			</dependency>
 
-
 			<dependency>
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk15on</artifactId>
@@ -688,30 +687,6 @@
 						<groupId>commons-logging</groupId>
 					</exclusion>
 				</exclusions>
-			</dependency>
-
-			<!-- commons-configuration 通用接口，它可以使应用程序通过多种途径读取配置信 -->
-			<dependency>
-				<groupId>commons-configuration</groupId>
-				<artifactId>commons-configuration</artifactId>
-				<version>${version.commons-configuration}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-lang</artifactId>
-						<groupId>commons-lang</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<!-- commons-configuration2 -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-configuration2</artifactId>
-				<version>${version.commons-configuration2}</version>
 			</dependency>
 
 			<dependency>
