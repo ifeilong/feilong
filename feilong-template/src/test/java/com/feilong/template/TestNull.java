@@ -13,26 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
+package com.feilong.template;
+
+import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
 import org.junit.Test;
 
+import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
-public class MacroTest extends AbstractTest{
+/**
+ * The Class VelocityUtilTest.
+ */
+public class TestNull extends AbstractTest{
 
-    String templateInClassPath = "velocity/test_macro.vm";
+    String templateInClassPath = "velocity/test_null.vm";
 
     @Test
-    public void parseVMTemplateWithClasspathResourceLoader(){
-        // Properties properties = new Properties();
-        // //设置模板的路径
-        // properties.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, "target/test-classes/scripts");
+    public void testNull(){
+        Map<String, Object> map = newHashMap();
+        map.put("code", null);
 
-        Map<String, Object> contextKeyValues = null;
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
+        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
         LOGGER.debug(parseVMTemplate);
+
+        assertTrue(parseVMTemplate.contains("jinxin"));
     }
 }

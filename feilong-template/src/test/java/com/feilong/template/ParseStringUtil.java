@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
+package com.feilong.template;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
@@ -23,6 +23,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class ParseStringUtil extends AbstractTest{

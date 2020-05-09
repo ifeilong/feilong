@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
+package com.feilong.template;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
 
@@ -22,6 +22,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.date.DateUtil;
+import com.feilong.template.ToolVelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class ToolVelocityUtilTest extends AbstractTest{

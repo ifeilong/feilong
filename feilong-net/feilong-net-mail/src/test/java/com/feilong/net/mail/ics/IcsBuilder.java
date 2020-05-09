@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateUtil;
 import com.feilong.net.mail.entity.ICalendar;
 import com.feilong.net.mail.entity.MailSenderConfig;
-import com.feilong.velocity.VelocityUtil;
+import com.feilong.template.VelocityUtil;
 
 /**
  * 

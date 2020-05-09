@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
+package com.feilong.template;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;

@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.velocity.VelocityUtil;
+import com.feilong.template.VelocityUtil;
 
 public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
 

@@ -22,8 +22,8 @@ import org.junit.Test;
 
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.io.IOReaderUtil;
+import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
-import com.feilong.velocity.VelocityUtil;
 
 public class SpelTest extends AbstractTest{
 

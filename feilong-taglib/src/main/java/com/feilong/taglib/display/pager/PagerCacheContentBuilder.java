@@ -48,7 +48,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.taglib.display.pager.command.PagerType;
 import com.feilong.taglib.display.pager.command.PagerUrlTemplate;
 import com.feilong.taglib.display.pager.command.PagerVMParam;
-import com.feilong.velocity.VelocityUtil;
+import com.feilong.template.VelocityUtil;
 
 /**
  * 

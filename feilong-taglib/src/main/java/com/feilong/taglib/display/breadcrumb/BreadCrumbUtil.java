@@ -38,7 +38,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
-import com.feilong.velocity.VelocityUtil;
+import com.feilong.template.VelocityUtil;
 
 /**
  * 面包屑渲染核心工具类.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
+package com.feilong.template;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static java.util.Collections.emptyMap;
@@ -75,10 +75,10 @@ import com.feilong.json.JsonUtil;
  * @since 1.2.1
  */
 //默认访问修饰符
-abstract class AbstractVelocityUtil{
+abstract class AbstractTemplateUtil{
 
     /** The Constant log. */
-    private static final Logger LOGGER                    = LoggerFactory.getLogger(AbstractVelocityUtil.class);
+    private static final Logger LOGGER                    = LoggerFactory.getLogger(AbstractTemplateUtil.class);
 
     //---------------------------------------------------------------
 

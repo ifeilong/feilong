@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
+package com.feilong.template;
 
 import java.util.Map;
 
@@ -31,7 +31,7 @@ import org.apache.velocity.context.Context;
  * @see org.apache.velocity.runtime.resource.loader.ResourceLoader
  * @since 1.2.1
  */
-public final class VelocityUtil extends AbstractVelocityUtil{
+public final class VelocityUtil extends AbstractTemplateUtil{
 
     /**
      * Static instance.

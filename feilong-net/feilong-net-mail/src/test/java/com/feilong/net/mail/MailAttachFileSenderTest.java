@@ -28,7 +28,7 @@ import org.junit.Test;
 
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.net.mail.setter.AttachmentSetter;
-import com.feilong.velocity.VelocityUtil;
+import com.feilong.template.VelocityUtil;
 
 public class MailAttachFileSenderTest extends AbstractMailSenderTest{
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity.extension;
+package com.feilong.template.extension;
 
 import static com.feilong.core.CharsetType.UTF8;
 
@@ -22,7 +22,7 @@ import org.apache.commons.lang3.Validate;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.velocity.ToolVelocityUtil;
+import com.feilong.template.ToolVelocityUtil;
 
 /**
  * The Class VelocityFileDataUtil.

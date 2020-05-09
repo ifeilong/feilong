@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.velocity;
-
-import static com.feilong.core.util.MapUtil.newHashMap;
-import static org.junit.Assert.assertTrue;
+package com.feilong.template;
 
 import java.util.Map;
 
 import org.junit.Test;
 
+import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
-public class TestFalse extends AbstractTest{
+public class MacroTest extends AbstractTest{
 
-    String templateInClassPath = "velocity/test_false.vm";
+    String templateInClassPath = "velocity/test_macro.vm";
 
     @Test
-    public void test(){
-        Map<String, Object> map = newHashMap();
-        map.put("effective", false);
+    public void parseVMTemplateWithClasspathResourceLoader(){
+        // Properties properties = new Properties();
+        // //设置模板的路径
+        // properties.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, "target/test-classes/scripts");
 
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-        assertTrue(parseVMTemplate.contains(":effective false 进"));
+        Map<String, Object> contextKeyValues = null;
+        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
+        LOGGER.debug(parseVMTemplate);
     }
 }

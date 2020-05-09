@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.velocity.ToolVelocityUtil;
+import com.feilong.template.ToolVelocityUtil;
 
 /**
  * 解析 http request uri.
