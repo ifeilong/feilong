@@ -27,58 +27,8 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-engine-core</artifactId>
-		</dependency>
-
-		<!-- velocity -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<optional>true</optional>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-digester</groupId>
-					<artifactId>commons-digester</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<artifactId>commons-chain</artifactId>
-			<groupId>commons-chain</groupId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- velocity-tools 需要用来解析 org/apache/velocity/tools/generic/tools.xml -->
-		<dependency>
-			<groupId>commons-digester</groupId>
-			<artifactId>commons-digester</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- velocity need -->
-		<dependency>
-			<artifactId>commons-lang</artifactId>
-			<groupId>commons-lang</groupId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- <dependency>
-			<groupId>commons-validator</groupId>
-			<artifactId>commons-validator</artifactId>
-			<exclusions>
-			<exclusion>
-			<groupId>commons-digester</groupId>
-			<artifactId>commons-digester</artifactId>
-			</exclusion>
-			</exclusions>
-			</dependency> -->
-
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>

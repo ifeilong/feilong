@@ -26,7 +26,7 @@
 	<logger name="com.feilong">
 		<level value="debug" />
 	</logger>
-	<category name="feilongVelocityLogger">
+	<category name="org.apache.velocity">
 		<priority value="info" />
 	</category>
 	<logger name="com.feilong.velocity.log.SLF4JLogChute">

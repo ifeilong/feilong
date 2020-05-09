@@ -109,21 +109,9 @@
 		<!-- velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
+			<artifactId>velocity-engine-core</artifactId>
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- velocity need -->
-		<dependency>
-			<artifactId>commons-lang</artifactId>
-			<groupId>commons-lang</groupId>
-			<optional>true</optional>
-		</dependency>
 	</dependencies>
 </project>

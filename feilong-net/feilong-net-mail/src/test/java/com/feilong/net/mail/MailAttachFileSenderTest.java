@@ -28,7 +28,7 @@ import org.junit.Test;
 
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.net.mail.setter.AttachmentSetter;
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 public class MailAttachFileSenderTest extends AbstractMailSenderTest{
 
@@ -48,7 +48,7 @@ public class MailAttachFileSenderTest extends AbstractMailSenderTest{
         contextKeyValues.put("fileInfoEntityList", fileInfoEntityList);
 
         //---------------------------------------------------------------
-        mailSenderConfig.setContent(VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues));
+        mailSenderConfig.setContent(TemplateUtil.parseTemplate(templateInClassPath, contextKeyValues));
 
         //  String fileString = "E:\\DataFixed\\Material\\avatar\\飞龙.png";
         String fileString = "/Users/feilong/DataFixed/Material/头像avatar/飞龙.png";

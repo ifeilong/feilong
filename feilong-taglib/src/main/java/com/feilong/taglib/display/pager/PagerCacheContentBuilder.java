@@ -48,7 +48,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.taglib.display.pager.command.PagerType;
 import com.feilong.taglib.display.pager.command.PagerUrlTemplate;
 import com.feilong.taglib.display.pager.command.PagerVMParam;
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 /**
  * 
@@ -83,7 +83,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         vmParamMap.put(VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
         vmParamMap.put(VM_KEY_I18NMAP, toMap(getResourceBundle(I18N_FEILONG_PAGER, pagerParams.getLocale())));
 
-        String content = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(pagerParams.getVmPath(), vmParamMap);
+        String content = TemplateUtil.parseTemplate(pagerParams.getVmPath(), vmParamMap);
 
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.format(vmParamMap), content);

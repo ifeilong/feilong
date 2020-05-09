@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.io.IOReaderUtil;
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 import com.feilong.test.AbstractTest;
 
 public class SpelTest extends AbstractTest{
@@ -40,7 +40,7 @@ public class SpelTest extends AbstractTest{
 
     @Test
     public void run1(){
-        String parseTemplateWithClasspathResourceLoader = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader("content.vm");
+        String parseTemplateWithClasspathResourceLoader = TemplateUtil.parseTemplate("content.vm");
         assertEquals(CONTENT, SpelUtil.getTemplateValue(parseTemplateWithClasspathResourceLoader));
     }
 

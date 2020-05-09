@@ -68,19 +68,15 @@ class VelocityEngineBuilder{
         Validate.notEmpty(properties, message, configFileInClassPath);
 
         //---------------------------------------------------------------
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("will use [{}] init velocity, properties:{}", configFileInClassPath, JsonUtil.format(toMap(properties)));
         }
-
         //---------------------------------------------------------------
-
         // 单列模式 Velocity.init(properties); RuntimeSingleton.isInitialized()
 
         // 分离实例 避免影响其他的 项目
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.init(properties);
-
         return velocityEngine;
     }
 }

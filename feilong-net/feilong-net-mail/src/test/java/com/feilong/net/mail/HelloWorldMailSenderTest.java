@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
 
@@ -29,7 +29,7 @@ public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
     public void helloWorld(){
         Map<String, Object> map = newHashMap();
 
-        String content = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader("hello world.vm", map);
+        String content = TemplateUtil.parseTemplate("hello world.vm", map);
 
         mailSenderConfig.setSubject("hello world");
         mailSenderConfig.setContent(content);

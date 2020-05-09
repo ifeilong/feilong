@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateUtil;
 import com.feilong.net.mail.entity.ICalendar;
 import com.feilong.net.mail.entity.MailSenderConfig;
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 /**
  * 
@@ -61,7 +61,7 @@ public class IcsBuilder{
         map.put("now", toUTC(now()));
         map.put("summary", getiCalendar.getSummary());
 
-        return VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        return TemplateUtil.parseTemplate(templateInClassPath, map);
     }
 
     public static String buildIcs(MailSenderConfig mailSenderConfig){

@@ -176,9 +176,6 @@
 		<version.xstream>1.4.12</version.xstream>
 
 		<!-- http://velocity.apache.org/news.html -->
-		<version.velocity>1.7</version.velocity>
-		<version.velocity-tools>2.0</version.velocity-tools>
-
 		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
 		<version.velocity-engine>2.2</version.velocity-engine>
 
@@ -693,82 +690,6 @@
 				<artifactId>commons-chain</artifactId>
 				<groupId>commons-chain</groupId>
 				<version>${version.commons-chain}</version>
-			</dependency>
-
-			<!-- velocity -->
-			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity</artifactId>
-				<version>${version.velocity}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-lang</artifactId>
-						<groupId>commons-lang</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-collections</artifactId>
-						<groupId>commons-collections</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity-tools</artifactId>
-				<version>${version.velocity-tools}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.apache.velocity</groupId>
-						<artifactId>velocity</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.struts</groupId>
-						<artifactId>struts-core</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.struts</groupId>
-						<artifactId>struts-taglib</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.struts</groupId>
-						<artifactId>struts-tiles</artifactId>
-					</exclusion>
-
-					<exclusion>
-						<groupId>dom4j</groupId>
-						<artifactId>dom4j</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>sslext</groupId>
-						<artifactId>sslext</artifactId>
-					</exclusion>
-
-					<exclusion>
-						<groupId>commons-beanutils</groupId>
-						<artifactId>commons-beanutils</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>commons-collections</groupId>
-						<artifactId>commons-collections</artifactId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-					<exclusion>
-						<groupId>commons-validator</groupId>
-						<artifactId>commons-validator</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>commons-chain</groupId>
-						<artifactId>commons-chain</artifactId>
-					</exclusion>
-
-				</exclusions>
 			</dependency>
 
 			<dependency>

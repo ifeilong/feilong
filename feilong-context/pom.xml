@@ -72,19 +72,7 @@
 		<!-- velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<artifactId>commons-chain</artifactId>
-			<groupId>commons-chain</groupId>
+			<artifactId>velocity-engine-core</artifactId>
 			<optional>true</optional>
 		</dependency>
 

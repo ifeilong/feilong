@@ -37,7 +37,7 @@
 		<priority value="error" />
 	</category>
 
-	<category name="feilongVelocityLogger" additivity="false">
+	<category name="org.apache.velocity" additivity="false">
 		<priority value="info" />
 	</category>
 

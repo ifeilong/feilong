@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.template.ToolVelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 /**
  * 解析 http request uri.
@@ -128,7 +128,7 @@ class HttpRequestUriResolver{
         String attributeName = StringUtils.uncapitalize(request.getClass().getSimpleName());
         Map<String, T> map = toMap(attributeName, request);
 
-        String result = ToolVelocityUtil.INSTANCE.parseString(uri, map);
+        String result = TemplateUtil.parseString(uri, map);
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("parse uri:[{}],use map:[{}],result:[{}]", uri, JsonUtil.formatSimpleMap(map), result);

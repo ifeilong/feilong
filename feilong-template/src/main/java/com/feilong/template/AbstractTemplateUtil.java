@@ -234,15 +234,11 @@ abstract class AbstractTemplateUtil{
         if (null == contextKeyValues){
             return emptyMap();
         }
-
+        //---------------------------------------------------------------
         Map<String, Object> result = new LinkedHashMap<>(contextKeyValues);
-        //---------------------------------------------------------------
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will build [{}] use map:[{}]", Context.class.getName(), JsonUtil.formatSimpleMap(result));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("will build [{}] use map:[{}]", Context.class.getName(), JsonUtil.formatSimpleMap(result));
         }
-
-        //---------------------------------------------------------------
         return result;
     }
 }

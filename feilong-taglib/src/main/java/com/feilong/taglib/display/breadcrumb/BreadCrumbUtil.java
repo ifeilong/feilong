@@ -38,7 +38,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 /**
  * 面包屑渲染核心工具类.
@@ -70,13 +70,10 @@ import com.feilong.template.VelocityUtil;
 public class BreadCrumbUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger       LOGGER            = LoggerFactory.getLogger(BreadCrumbUtil.class);
-
-    /** The Constant VELOCITY_UTIL. */
-    private static final VelocityUtil VELOCITY_UTIL     = VelocityUtil.INSTANCE;
+    private static final Logger LOGGER            = LoggerFactory.getLogger(BreadCrumbUtil.class);
 
     /** The Constant VM_KEY_BREADCRUMB. */
-    private static final String       VM_KEY_BREADCRUMB = "breadCrumbVMParams";
+    private static final String VM_KEY_BREADCRUMB = "breadCrumbVMParams";
 
     //---------------------------------------------------------------
 
@@ -132,7 +129,7 @@ public class BreadCrumbUtil{
         Map<String, Object> contextKeyValues = newHashMap();
         contextKeyValues.put(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
-        String siteMapString = VELOCITY_UTIL.parseTemplateWithClasspathResourceLoader(breadCrumbParams.getVmPath(), contextKeyValues);
+        String siteMapString = TemplateUtil.parseTemplate(breadCrumbParams.getVmPath(), contextKeyValues);
         LOGGER.debug("siteMapString is:[{}]", siteMapString);
         return siteMapString;
     }

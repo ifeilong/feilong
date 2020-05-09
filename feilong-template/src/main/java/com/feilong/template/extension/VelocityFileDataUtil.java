@@ -22,7 +22,7 @@ import org.apache.commons.lang3.Validate;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.template.ToolVelocityUtil;
+import com.feilong.template.VelocityUtil;
 
 /**
  * The Class VelocityFileDataUtil.
@@ -61,7 +61,7 @@ public class VelocityFileDataUtil{
 
         //---------------------------------------------------------------
 
-        String content = ToolVelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(vmPath, velocityFileData.getData());
+        String content = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(vmPath, velocityFileData.getData());
         IOWriteUtil.writeStringToFile(outPutFilePath, content, UTF8);
 
         DesktopUtil.open(FileUtil.getParent(outPutFilePath));//和输出文件同级目录

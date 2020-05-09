@@ -15,32 +15,24 @@
  */
 package com.feilong.template;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
-
-import java.util.Map;
-
-import org.junit.Test;
-
-import com.feilong.core.date.DateUtil;
-import com.feilong.template.ToolVelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class ToolVelocityUtilTest extends AbstractTest{
 
     String templateInClassPath = "velocity/test_toolbox.vm";
 
-    @Test
-    public void testTool(){
-        Map<String, Object> map = newHashMap();
-        map.put("code", "SH123456");
-        map.put("courseDate", "2015-06-02");
-        map.put("courseTime", "14:00");
-        map.put("DateUtil", DateUtil.class);
-
-        //        String toolboxPath = "/lib/toolbox.xml";
-        //String toolboxPath = ConfigurationUtils.GENERIC_DEFAULTS_PATH;
-
-        String parseVMTemplate = ToolVelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-        LOGGER.debug(parseVMTemplate);
-    }
+    //    @Test
+    //    public void testTool(){
+    //        Map<String, Object> map = newHashMap();
+    //        map.put("code", "SH123456");
+    //        map.put("courseDate", "2015-06-02");
+    //        map.put("courseTime", "14:00");
+    //        map.put("DateUtil", DateUtil.class);
+    //
+    //        //        String toolboxPath = "/lib/toolbox.xml";
+    //        //String toolboxPath = ConfigurationUtils.GENERIC_DEFAULTS_PATH;
+    //
+    //        String parseVMTemplate = ToolVelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+    //        LOGGER.debug(parseVMTemplate);
+    //    }
 }
