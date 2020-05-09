@@ -30,7 +30,6 @@ class DigesterCreater{
     static Digester create(String file){
         try{
             InputStream resourceAsStream = ClassLoaderUtil.getResourceAsStream(file, ExcelSheetMapBuilder.class);
-            // DigesterLoader.createDigester(new InputSource(resourceAsStream));
 
             Digester digester = DigesterLoader.newLoader(new FromXmlRulesModule(){
 

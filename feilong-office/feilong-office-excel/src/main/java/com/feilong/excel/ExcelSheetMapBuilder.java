@@ -44,7 +44,7 @@ class ExcelSheetMapBuilder{
     /** The Constant RULE_FILE. */
     private static final String   RULE_FILE = "config/excel/definition-rule.xml";
 
-    private static final Digester digester  = DigesterCreater.create(RULE_FILE);
+    private static final Digester DIGESTER  = DigesterCreater.create(RULE_FILE);
 
     //---------------------------------------------------------------
 
@@ -69,8 +69,7 @@ class ExcelSheetMapBuilder{
             try{
                 Date beginDate = new Date();
                 InputStream inputStream = contextClassLoader.getResourceAsStream(configuration);
-                List<ExcelSheet> excelSheetList = digester.parse(inputStream);
-
+                List<ExcelSheet> excelSheetList = DIGESTER.parse(inputStream);
                 for (ExcelSheet excelSheet : excelSheetList){
                     sheetDefinitions.put(excelSheet.getName(), excelSheet);
                 }
