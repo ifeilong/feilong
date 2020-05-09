@@ -32,10 +32,10 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--feilong-velocity -->
+		<!--feilong-template -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-velocity</artifactId>
+			<artifactId>feilong-template</artifactId>
 		</dependency>
 
 		<!-- velocity need -->

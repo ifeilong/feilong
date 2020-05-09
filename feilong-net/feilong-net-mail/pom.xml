@@ -16,10 +16,10 @@
 			<artifactId>feilong-io</artifactId>
 		</dependency>
 
-		<!--feilong-velocity -->
+		<!--feilong-template -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-velocity</artifactId>
+			<artifactId>feilong-template</artifactId>
 			<scope>test</scope>
 		</dependency>
 

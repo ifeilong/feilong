@@ -8,7 +8,7 @@
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>feilong-velocity</artifactId>
+	<artifactId>feilong-template</artifactId>
 
 	<dependencies>
 
@@ -23,12 +23,11 @@
 			<artifactId>feilong-json</artifactId>
 		</dependency>
 
-		<!--
-			<dependency>
+		<!-- -->
+		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-engine-core</artifactId>
-			<version>${version.velocity-engine}</version>
-			</dependency> -->
+		</dependency>
 
 		<!-- velocity -->
 		<dependency>

@@ -26,7 +26,7 @@
 
 		<module>feilong-net</module>
 
-		<module>feilong-velocity</module>
+		<module>feilong-template</module>
 		<module>feilong-xml</module>
 
 		<module>feilong-context</module>
@@ -180,7 +180,7 @@
 		<version.velocity-tools>2.0</version.velocity-tools>
 
 		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
-		<!-- <version.velocity-engine>2.0</version.velocity-engine> -->
+		<version.velocity-engine>2.2</version.velocity-engine>
 
 		<!--
 			http://tiles.apache.org/framework/whats-new.html
@@ -446,10 +446,10 @@
 				<version>${version.feilong-platform}</version>
 			</dependency>
 
-			<!--feilong-velocity -->
+			<!--feilong-template -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-velocity</artifactId>
+				<artifactId>feilong-template</artifactId>
 				<version>${version.feilong-platform}</version>
 			</dependency>
 
@@ -769,6 +769,12 @@
 					</exclusion>
 
 				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-engine-core</artifactId>
+				<version>${version.velocity-engine}</version>
 			</dependency>
 
 			<!-- commons-collections Requires Java 1.2+ 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
