@@ -13,26 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net;
+package com.feilong.net.http;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.net.http.URLDownloadUtil;
+@RunWith(Suite.class)
+@SuiteClasses({ //
 
-/**
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.4.0
- */
-public class URLDownloadUtilTest{
+        //                
+})
+public class SuiteTests{
 
-    /**
-     * Down.
-     * 
-     */
-    @Test
-    public void down(){
-        String url = "http://www.kenwen.com/egbk/31/31186/4395342.txt";
-        URLDownloadUtil.download(url, "/Users/feilong/Downloads/");
-    }
 }

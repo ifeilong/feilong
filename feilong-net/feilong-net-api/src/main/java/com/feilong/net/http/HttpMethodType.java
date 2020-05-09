@@ -233,7 +233,7 @@ public enum HttpMethodType{
     //---------------------------------------------------------------
 
     /**
-     * 传入一个 字符串的 HTTP method,比如 get,得到 {@link HttpMethodType#GET}.
+     * 传入一个字符串的 HTTP method,比如 get,得到 {@link HttpMethodType#GET}.
      *
      * @param methodValue
      *            <span style="color:red">不区分大小写</span>, 比如get,Get,GET都可以,但是需要对应 {@link HttpMethodType}的支持的枚举值
