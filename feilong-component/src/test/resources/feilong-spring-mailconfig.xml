@@ -27,7 +27,7 @@
 		<!-- <property name="ccs" value="feilongtestemail@163.com" /> -->
 
 		<property name="subject" value="hello report" />
-		<property name="content" value="#{T(com.feilong.velocity.VelocityUtil).INSTANCE.parseTemplateWithClasspathResourceLoader('content.vm',null)}" />
+		<property name="content" value="#{T(com.feilong.template.VelocityUtil).INSTANCE.parseTemplateWithClasspathResourceLoader('content.vm',null)}" />
 
 		<!-- <property name="isDebug" value="true" /> -->
 		<!-- <property name="isNeedReturnReceipt" value="true" /> -->

@@ -29,10 +29,7 @@
 	<category name="org.apache.velocity">
 		<priority value="info" />
 	</category>
-	<logger name="com.feilong.velocity.log.SLF4JLogChute">
-		<level value="info" />
-	</logger>
-	<logger name="com.feilong.velocity.VelocityEngineBuilder">
+	<logger name="com.feilong.template.VelocityEngineBuilder">
 		<level value="info" />
 	</logger>
 
