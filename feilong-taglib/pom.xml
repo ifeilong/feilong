@@ -47,12 +47,12 @@
 
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
+			<artifactId>javax.el-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 

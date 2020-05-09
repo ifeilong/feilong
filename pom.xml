@@ -70,7 +70,7 @@
 		<version.commons-beanutils>1.9.4</version.commons-beanutils>
 
 		<!-- http://commons.apache.org/proper/commons-codec/changes-report.html#a1.12 -->
-		<version.commons-codec>1.12</version.commons-codec>
+		<version.commons-codec>1.14</version.commons-codec>
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<!-- http://commons.apache.org/proper/commons-collections/index.html -->
 		<!-- 4.3 需要 jdk1.8 -->
@@ -142,9 +142,9 @@
 		<version.javax.mail>1.6.2</version.javax.mail>
 		<version.commons-email>1.5</version.commons-email>
 
-		<version.servlet-api>3.0.1</version.servlet-api>
-		<version.jsp-api>2.2</version.jsp-api>
-		<version.el-api>2.2</version.el-api>
+		<version.servlet-api>3.1.0</version.servlet-api>
+		<version.jsp-api>2.3.3</version.jsp-api>
+		<version.el-api>3.0.0</version.el-api>
 		<version.jstl>1.2</version.jstl>
 
 		<!-- https://junit.org/junit4/ -->
@@ -194,7 +194,7 @@
 		<v.maven-antrun-plugin>3.0.0</v.maven-antrun-plugin>
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
-		<v.maven-assembly-plugin>3.2.0</v.maven-assembly-plugin>
+		<v.maven-assembly-plugin>3.3.0</v.maven-assembly-plugin>
 
 		<v.maven-clean-plugin>3.1.0</v.maven-clean-plugin>
 
@@ -863,14 +863,14 @@
 			<!-- jsp-api -->
 			<dependency>
 				<groupId>javax.servlet.jsp</groupId>
-				<artifactId>jsp-api</artifactId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
 				<version>${version.jsp-api}</version>
 				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>javax.el</groupId>
-				<artifactId>el-api</artifactId>
+				<artifactId>javax.el-api</artifactId>
 				<version>${version.el-api}</version>
 				<scope>provided</scope>
 			</dependency>
