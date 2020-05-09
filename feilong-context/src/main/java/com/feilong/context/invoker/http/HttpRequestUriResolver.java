@@ -61,7 +61,7 @@ class HttpRequestUriResolver{
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>uri</code> 不包含 $ 符号,那么直接返回 <code>uri</code><br>
      *         如果 <code>uri</code> 包含 $ 符号,那么如果 <code>request</code> 是null,抛出 {@link NullPointerException}<br>
-     *         否则使用 {@link com.feilong.velocity.AbstractVelocityUtil#parseString(String, Map)} 来解析 <code>uri</code><br>
+     *         否则使用 模板来解析 <code>uri</code><br>
      * @see <a href="https://github.com/venusdrogon/feilong-platform/issues/233">支持将请求参数放在路径中的配置</a>
      */
     static <T> String resolve(String uri,T request){

@@ -33,7 +33,7 @@ public class SpelTest extends AbstractTest{
     //---------------------------------------------------------------
     @Test
     public void run(){
-        String expressionString = "#{T(com.feilong.velocity.VelocityUtil).INSTANCE.parseTemplateWithClasspathResourceLoader('content.vm',null)}";
+        String expressionString = "#{T(com.feilong.template.TemplateUtil).parseTemplate('content.vm',null)}";
         assertEquals(CONTENT, SpelUtil.getTemplateValue(expressionString));
 
     }
