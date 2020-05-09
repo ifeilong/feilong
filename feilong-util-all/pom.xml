@@ -112,17 +112,10 @@
 
 		<!-- ****************tools ******************************************* -->
 
-		<!-- feilong-tools-mobile -->
+		<!-- feilong-tools -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-mobile</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
-
-		<!--feilong-tools-emailaddress -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-tools-emailaddress</artifactId>
+			<artifactId>feilong-tools</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

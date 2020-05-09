@@ -33,7 +33,6 @@ import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.tools.emailaddress.EmailAddressUtil;
 
 public class CompareTemp{
 

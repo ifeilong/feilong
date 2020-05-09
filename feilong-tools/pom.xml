@@ -7,14 +7,7 @@
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>feilong-tools-parent</artifactId>
-
-	<packaging>pom</packaging>
-
-	<modules>
-		<module>feilong-tools-emailaddress</module>
-		<module>feilong-tools-mobile</module>
-	</modules>
+	<artifactId>feilong-tools</artifactId>
 
 	<dependencies>
 		<dependency>
@@ -26,6 +19,17 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-json</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-formatter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-io</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
