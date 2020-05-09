@@ -53,7 +53,11 @@ public final class DesktopUtil{
 
     /**
      * 使用系统默认浏览器,打开url.
-     *
+     * <p>
+     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param url
      *            url地址
      * @see #desktopAction(String, Action)
@@ -64,7 +68,11 @@ public final class DesktopUtil{
 
     /**
      * 启动关联应用程序来打开文件..
-     *
+     * <p>
+     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param url
      *            url地址
      * @see #desktopAction(String, Action)
@@ -77,7 +85,11 @@ public final class DesktopUtil{
 
     /**
      * 发送邮件.
-     *
+     * <p>
+     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param mailtoURL
      *            the mail
      * @see java.awt.Desktop#mail(URI)
@@ -89,7 +101,12 @@ public final class DesktopUtil{
 
     /**
      * 打印.
-     *
+     * 
+     * <p>
+     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param url
      *            the url
      * @since 1.2.0
@@ -113,6 +130,11 @@ public final class DesktopUtil{
 
     /**
      * Desktop action.
+     * 
+     * <p>
+     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
      *
      * @param url
      *            the url

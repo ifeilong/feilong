@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.coreextension;
+package com.feilong.accessor;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.coreextension.awt.ClipboardUtilTest;
-import com.feilong.coreextension.awt.DesktopUtilNullTest;
-import com.feilong.coreextension.io.SerializableUtilTest;
-
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                SerializableUtilTest.class,
-                DesktopUtilNullTest.class,
-                ClipboardUtilTest.class,
-
-        //
+        //                
 })
 public class SuiteTests{
 
