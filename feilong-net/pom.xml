@@ -39,13 +39,6 @@
 			<artifactId>feilong-io</artifactId>
 		</dependency>
 
-		<!-- commons-net -->
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 	</dependencies>
 
 </project>

@@ -18,11 +18,10 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
-		<!-- 下载要使用 -->
+		<!-- 下载要使用,解析requestbody等也需要 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-io</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<!-- feilong-json -->

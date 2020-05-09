@@ -129,6 +129,7 @@
 		<!-- see in http://commons.apache.org/proper/commons-net/index.html -->
 		<version.commons-net>3.6</version.commons-net>
 
+		<!-- http://commons.apache.org/proper/commons-validator/download_validator.cgi -->
 		<version.commons-validator>1.6</version.commons-validator>
 
 		<!-- http://www.jcraft.com/jsch/ChangeLog -->

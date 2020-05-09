@@ -10,7 +10,6 @@
 	<artifactId>feilong-net-cxf</artifactId>
 
 	<properties>
-		<!-- 3.1.11 -->
 		<version.cxf>3.1.11</version.cxf>
 	</properties>
 

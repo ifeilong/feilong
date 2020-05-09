@@ -20,10 +20,10 @@
 			<artifactId>feilong-servlet</artifactId>
 		</dependency>
 
+		<!-- 用于 version生成 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-security</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>

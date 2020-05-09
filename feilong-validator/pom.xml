@@ -17,6 +17,7 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
+		<!-- 用户校验邮箱 -->
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
