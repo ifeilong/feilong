@@ -23,13 +23,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- velocity need -->
-		<dependency>
-			<artifactId>commons-lang</artifactId>
-			<groupId>commons-lang</groupId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- feilong-json -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

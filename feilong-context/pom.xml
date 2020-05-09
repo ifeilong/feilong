@@ -44,13 +44,6 @@
 			<artifactId>feilong-template</artifactId>
 		</dependency>
 
-		<!-- velocity need -->
-		<dependency>
-			<artifactId>commons-lang</artifactId>
-			<groupId>commons-lang</groupId>
-			<optional>true</optional>
-		</dependency>
-
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-security</artifactId>

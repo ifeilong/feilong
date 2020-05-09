@@ -106,9 +106,6 @@
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<version.httpcomponents>4.5.12</version.httpcomponents>
 
-		<!-- base on jdk1.2 legacy(won't update) -->
-		<version.commons-lang>2.6</version.commons-lang>
-
 		<!-- http://commons.apache.org/proper/commons-lang/ -->
 		<!-- https://github.com/apache/commons-lang/blob/master/RELEASE-NOTES.txt -->
 		<!--
@@ -525,13 +522,6 @@
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
 				<version>${version.commons-logging}</version>
-			</dependency>
-
-			<!-- commons-lang 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-			<dependency>
-				<artifactId>commons-lang</artifactId>
-				<groupId>commons-lang</groupId>
-				<version>${version.commons-lang}</version>
 			</dependency>
 
 			<!-- commons-lang3 -->
