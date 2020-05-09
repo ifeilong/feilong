@@ -37,11 +37,18 @@
 			<artifactId>javax.servlet.jsp-api</artifactId>
 		</dependency>
 
-		<!-- spring-context -->
+		<!-- spring-beans version 不限制 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- spring-context version 不限制 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<scope>provided</scope>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -51,8 +58,5 @@
 		</dependency>
 
 	</dependencies>
-
-
-
 
 </project>

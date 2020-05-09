@@ -46,10 +46,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- for com.feilong.security.oneway.Sm3Util -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
