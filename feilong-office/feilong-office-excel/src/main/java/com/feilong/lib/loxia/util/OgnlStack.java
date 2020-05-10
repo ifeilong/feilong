@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel.utils;
+package com.feilong.lib.loxia.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DefaultRuntimeException;
+import com.feilong.tools.slf4j.Slf4jUtil;
+
+import ognl.DefaultMemberAccess;
 import ognl.NullHandler;
 import ognl.Ognl;
+import ognl.OgnlContext;
 import ognl.OgnlException;
 import ognl.OgnlRuntime;
 
@@ -34,11 +37,6 @@ import ognl.OgnlRuntime;
  * The Class OgnlStack.
  */
 public class OgnlStack{
-
-    /** The Constant log. */
-    private static final Logger       LOGGER      = LoggerFactory.getLogger(OgnlStack.class);
-
-    //---------------------------------------------------------------
 
     /** The stack. */
     private final List<Object>        stackList   = new ArrayList<>();
@@ -58,18 +56,6 @@ public class OgnlStack{
      *            the obj
      */
     public OgnlStack(Object obj){
-        this(obj, new HashMap<>());
-    }
-
-    /**
-     * Instantiates a new ognl stack.
-     *
-     * @param obj
-     *            the obj
-     * @param context
-     *            the context
-     */
-    public OgnlStack(Object obj, Map<String, Object> context){
         NullHandler nullHandler = null;
         synchronized (OgnlStack.class){
             try{
@@ -78,12 +64,13 @@ public class OgnlStack{
                     OgnlRuntime.setNullHandler(Object.class, new InstantiatingNullHandler(nullHandler, Arrays.asList("java")));
                 }
             }catch (OgnlException e){
-                LOGGER.error("", e);
+                throw new DefaultRuntimeException(e);
             }
         }
 
+        //---------------------------------------------------------------
         stackList.add(obj);
-        this.context = context == null ? new HashMap<>() : context;
+        this.context = new HashMap<>();
         this.context.put(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
     }
 
@@ -118,18 +105,31 @@ public class OgnlStack{
      */
     public Object getValue(String expr){
         for (Object obj : stackList){
+            if (expr.indexOf("top") >= 0){
+                //contains top evaluation
+                context.put("__top", obj);
+                expr = expr.replaceAll("top", "#__top");
+            }
             try{
-                if (expr.indexOf("top") >= 0){
-                    //contains top evaluation
-                    context.put("__top", obj);
-                    expr = expr.replaceAll("top", "#__top");
-                }
-                return Ognl.getValue(getExpression(expr), context, obj);
-            }catch (OgnlException e){
-                LOGGER.warn("expr:" + expr, e);
+                Object expression = getExpression(expr);
+                return Ognl.getValue(expression, buildOgnlContext(context), obj);
+            }catch (Exception e){
+                throw new DefaultRuntimeException(Slf4jUtil.format("expr:[{}],obj:[{}]", expr, obj), e);
             }
         }
         return null;
+    }
+
+    /**
+     * Builds the ognl context.
+     *
+     * @param context
+     *            the context
+     * @return the ognl context
+     * @since 3.0.0
+     */
+    private static OgnlContext buildOgnlContext(Map<String, Object> context){
+        return new OgnlContext(new DefaultMemberAccess(true), null, null, context);
     }
 
     /**
@@ -139,14 +139,14 @@ public class OgnlStack{
      *            the expr
      * @param value
      *            the value
-     * @throws OgnlException
-     *             the ognl exception
+     * @throws Exception
+     *             the exception
      */
-    public void setValue(String expr,Object value) throws OgnlException{
+    public void setValue(String expr,Object value) throws Exception{
         Object root = stackList.get(0);
         Validate.notNull(root, "root can't be null!");
 
-        Ognl.setValue(getExpression(expr), context, root, value);
+        Ognl.setValue(getExpression(expr), buildOgnlContext(context), root, value);
     }
 
     //---------------------------------------------------------------
@@ -203,27 +203,5 @@ public class OgnlStack{
      */
     public void removeContext(String key){
         this.context.remove(key);
-    }
-
-    /**
-     * Gets the context.
-     *
-     * @param key
-     *            the key
-     * @return the context
-     */
-    public Object getContext(String key){
-        return this.context.get(key);
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Gets the context map.
-     *
-     * @return the context map
-     */
-    public Map<String, Object> getContextMap(){
-        return this.context;
     }
 }

@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.excel.utils.WorkbookUtil;
+import com.feilong.excel.util.WorkbookUtil;
 import com.feilong.excel.writer.WorkbookWriter;
 
 /**

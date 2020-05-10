@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.utils.CellReferenceUtil;
-import com.feilong.excel.utils.OgnlStack;
+import com.feilong.excel.util.CellReferenceUtil;
+import com.feilong.lib.loxia.util.OgnlStack;
 
 class SheetWriter{
 

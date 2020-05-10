@@ -101,7 +101,10 @@
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
 		<version.commons-fileupload>1.4</version.commons-fileupload>
-		<version.ognl>2.7.3</version.ognl>
+
+		<!-- https://search.maven.org/artifact/ognl/ognl -->
+		<!-- OGNL - Object Graph Navigation Library -->
+		<version.ognl>3.2.14</version.ognl>
 
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<version.httpcomponents>4.5.12</version.httpcomponents>

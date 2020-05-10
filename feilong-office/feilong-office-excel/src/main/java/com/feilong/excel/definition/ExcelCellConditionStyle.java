@@ -15,7 +15,7 @@
  */
 package com.feilong.excel.definition;
 
-import com.feilong.excel.utils.CellReferenceUtil;
+import com.feilong.excel.util.CellReferenceUtil;
 
 /**
  * The Class ExcelCellConditionStyle.

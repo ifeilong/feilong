@@ -26,8 +26,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.feilong.excel.utils.Config;
-import com.feilong.excel.utils.OgnlStack;
+import com.feilong.excel.util.Config;
+import com.feilong.lib.loxia.util.OgnlStack;
 
 class CellValueSetter{
 

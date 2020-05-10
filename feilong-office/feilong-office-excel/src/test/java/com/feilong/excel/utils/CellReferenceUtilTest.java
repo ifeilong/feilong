@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.excel.utils.CellReferenceUtil;
+import com.feilong.excel.util.CellReferenceUtil;
 import com.feilong.test.AbstractTest;
 
 /**

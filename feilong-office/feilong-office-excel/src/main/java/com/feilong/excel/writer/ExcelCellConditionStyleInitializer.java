@@ -30,7 +30,7 @@ import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.ExcelCellConditionStyle;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.utils.CellReferenceUtil;
+import com.feilong.excel.util.CellReferenceUtil;
 
 class ExcelCellConditionStyleInitializer{
 

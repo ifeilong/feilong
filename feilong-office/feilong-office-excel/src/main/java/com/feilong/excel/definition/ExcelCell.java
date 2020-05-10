@@ -18,7 +18,7 @@ package com.feilong.excel.definition;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.feilong.excel.utils.CellReferenceUtil;
+import com.feilong.excel.util.CellReferenceUtil;
 
 /**
  * The Class ExcelCell.

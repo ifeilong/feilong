@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel.utils;
+package com.feilong.excel.util;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 

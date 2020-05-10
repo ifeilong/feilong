@@ -33,8 +33,8 @@ import com.feilong.excel.ReadStatus;
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.LoopBreakCondition;
-import com.feilong.excel.utils.CellReferenceUtil;
-import com.feilong.excel.utils.OgnlStack;
+import com.feilong.excel.util.CellReferenceUtil;
+import com.feilong.lib.loxia.util.OgnlStack;
 
 /**
  * The Class BlockReader.

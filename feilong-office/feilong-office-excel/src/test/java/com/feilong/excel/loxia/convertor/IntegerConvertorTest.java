@@ -21,8 +21,8 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import com.feilong.excel.convertor.IntegerConvertor;
 import com.feilong.excel.definition.ExcelCell;
+import com.feilong.lib.loxia.convertor.IntegerConvertor;
 import com.feilong.test.AbstractTest;
 
 public class IntegerConvertorTest extends AbstractTest{

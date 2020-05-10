@@ -20,7 +20,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import com.feilong.excel.ReadStatus;
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.utils.OgnlStack;
+import com.feilong.lib.loxia.util.OgnlStack;
 
 /**
  * The Class SheetReader.

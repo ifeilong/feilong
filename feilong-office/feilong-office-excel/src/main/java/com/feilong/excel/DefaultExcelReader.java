@@ -30,8 +30,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.SheetReader;
-import com.feilong.excel.utils.CloneUtil;
-import com.feilong.excel.utils.OgnlStack;
+import com.feilong.excel.util.CloneUtil;
+import com.feilong.lib.loxia.util.OgnlStack;
 
 /**
  * The Class DefaultExcelReader.

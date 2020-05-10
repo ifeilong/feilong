@@ -27,8 +27,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.feilong.excel.ExcelDefinition;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.utils.OgnlStack;
-import com.feilong.excel.utils.WorkbookUtil;
+import com.feilong.excel.util.WorkbookUtil;
+import com.feilong.lib.loxia.util.OgnlStack;
 
 /**
  * The Class WorkbookWriter.

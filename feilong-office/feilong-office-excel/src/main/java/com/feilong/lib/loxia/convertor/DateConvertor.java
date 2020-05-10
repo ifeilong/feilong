@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel.convertor;
+package com.feilong.lib.loxia.convertor;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,7 +24,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 
 import com.feilong.excel.ExcelException;
 import com.feilong.excel.definition.ExcelCell;
-import com.feilong.excel.utils.Config;
+import com.feilong.excel.util.Config;
 
 /**
  * The Class DateConvertor.
