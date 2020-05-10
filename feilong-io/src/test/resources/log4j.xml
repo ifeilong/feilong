@@ -31,7 +31,7 @@
 		<level value="debug" />
 	</logger>
 
-	<category name="org.apache.commons.beanutils">
+	<category name="com.feilong.lib.beanutils">
 		<priority value="info" />
 	</category>
 

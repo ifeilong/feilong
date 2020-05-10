@@ -26,8 +26,8 @@ import com.feilong.core.bean.PropertyUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see org.apache.commons.beanutils.BeanPredicate
- * @see org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
+ * @see com.feilong.lib.beanutils.BeanPredicate
+ * @see com.feilong.lib.beanutils.BeanPropertyValueEqualsPredicate
  * @see org.apache.commons.collections4.functors.ComparatorPredicate
  * @since 1.8.0
  */

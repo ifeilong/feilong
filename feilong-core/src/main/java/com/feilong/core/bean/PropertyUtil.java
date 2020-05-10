@@ -22,19 +22,17 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
+ * 对 {@link com.feilong.lib.beanutils.PropertyUtils}的再次封装.
  * 
  * <h3>说明:</h3>
  * <blockquote>
@@ -43,18 +41,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ol>
  * </blockquote>
  * 
- * <h3>{@link PropertyUtils}与 {@link BeanUtils}:</h3>
+ * <h3>{@link PropertyUtils}与 {@link com.feilong.lib.beanutils.BeanUtils}:</h3>
  * 
  * <blockquote>
  * <p>
- * {@link PropertyUtils}类和{@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同.<br>
- * {@link BeanUtils}着重于"Bean",返回值通常是{@link String},<br>
+ * {@link PropertyUtils}类和{@link com.feilong.lib.beanutils.BeanUtils}类很多的方法在参数上都是相同的,但返回值不同.<br>
+ * {@link com.feilong.lib.beanutils.BeanUtils}着重于"Bean",返回值通常是{@link String},<br>
  * 而{@link PropertyUtils}着重于属性,它的返回值通常是{@link Object}. 
  * </p>
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.beanutils.PropertyUtils
+ * @see com.feilong.lib.beanutils.PropertyUtils
  * @see com.feilong.core.bean.BeanUtil
  * @since 1.0.0
  */
@@ -177,11 +175,13 @@ public final class PropertyUtil{
      * 
      * </blockquote>
      * 
-     * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
+     * <h3>{@link com.feilong.lib.beanutils.BeanUtils#copyProperties(Object, Object)}与
+     * {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
      * 
      * <blockquote>
      * <ul>
-     * <li>{@link BeanUtils#copyProperties(Object, Object) BeanUtils} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,<br>
+     * <li>{@link com.feilong.lib.beanutils.BeanUtils#copyProperties(Object, Object) BeanUtils}
+     * 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,<br>
      * 而 {@link PropertyUtils#copyProperties(Object, Object) PropertyUtils}不支持这个功能,但是速度会更快一些.</li>
      * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
@@ -212,7 +212,8 @@ public final class PropertyUtil{
      *            {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中</li>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,会抛出异常,see
-     *            {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties} Line2078</li>
+     *            {@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties}
+     *            Line2078</li>
      *            </ol>
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
@@ -220,7 +221,7 @@ public final class PropertyUtil{
      *             如果在copy的过程中,有任何的checkedException,将会被转成该异常返回
      * @see #setProperty(Object, String, Object)
      * @see BeanUtil#copyProperties(Object, Object, String...)
-     * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     * @see com.feilong.lib.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
      *      BeanUtils,Cglib BeanCopier)</a>
      * @since 1.4.1
@@ -321,7 +322,7 @@ public final class PropertyUtil{
      * <ol>
      * <li>取到bean class的 {@link java.beans.PropertyDescriptor}数组</li>
      * <li>循环,找到 {@link java.beans.PropertyDescriptor#getReadMethod()}</li>
-     * <li>将 name and {@link org.apache.commons.beanutils.PropertyUtilsBean#getProperty(Object, String)} 设置到map中</li>
+     * <li>将 name and {@link com.feilong.lib.beanutils.PropertyUtilsBean#getProperty(Object, String)} 设置到map中</li>
      * </ol>
      * </blockquote>
      *
@@ -334,8 +335,8 @@ public final class PropertyUtil{
      *             如果 <code>bean</code> 是null,或者<code>propertyNames</code> 包含 null的元素
      * @throws IllegalArgumentException
      *             如果 <code>propertyNames</code> 包含 blank的元素
-     * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
-     * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
+     * @see com.feilong.lib.beanutils.BeanUtils#describe(Object)
+     * @see com.feilong.lib.beanutils.PropertyUtils#describe(Object)
      * @since 1.8.0
      */
     public static Map<String, Object> describe(Object bean,String...propertyNames){
@@ -401,7 +402,8 @@ public final class PropertyUtil{
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078,转成 {@link BeanOperationException}</li>
+     * {@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078,转成
+     * {@link BeanOperationException}</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
@@ -412,8 +414,8 @@ public final class PropertyUtil{
      *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @param value
      *            Value to which this property is to be set
-     * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
-     * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
+     * @see com.feilong.lib.beanutils.BeanUtils#setProperty(Object, String, Object)
+     * @see com.feilong.lib.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see BeanUtil#setProperty(Object, String, Object)
      */
     public static void setProperty(Object bean,String propertyName,Object value){
@@ -442,7 +444,7 @@ public final class PropertyUtil{
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * {@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
@@ -473,7 +475,7 @@ public final class PropertyUtil{
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * {@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
@@ -542,9 +544,9 @@ public final class PropertyUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         否则 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
      * @see BeanUtil#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.PropertyUtilsBean
+     * @see com.feilong.lib.beanutils.BeanUtils#getProperty(Object, String)
+     * @see com.feilong.lib.beanutils.PropertyUtils#getProperty(Object, String)
+     * @see com.feilong.lib.beanutils.PropertyUtilsBean
      */
     public static <T> T getProperty(Object bean,String propertyName){
         Validate.notNull(bean, MESSAGE_BEAN_IS_NULL);

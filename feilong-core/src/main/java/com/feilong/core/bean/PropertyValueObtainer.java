@@ -22,13 +22,13 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -148,7 +148,7 @@ public final class PropertyValueObtainer{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see PropertyUtil#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
+     * @see com.feilong.lib.beanutils.BeanToPropertyValueTransformer
      * @since 1.0.8
      */
     public static <T, O, K extends Collection<T>> K getPropertyValueCollection(
@@ -212,7 +212,7 @@ public final class PropertyValueObtainer{
         //---------------------------------------------------------------
         //since 1.12.1
         //https://github.com/venusdrogon/feilong-core/issues/760
-        readMethod = org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(obj.getClass(), readMethod);
+        readMethod = com.feilong.lib.beanutils.MethodUtils.getAccessibleMethod(obj.getClass(), readMethod);
 
         try{
             return (T) readMethod.invoke(obj);

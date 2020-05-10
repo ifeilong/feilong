@@ -20,8 +20,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.junit.Test;
+
+import com.feilong.lib.beanutils.ConversionException;
 
 /**
  * The Class ConvertUtilConvertClassTest.

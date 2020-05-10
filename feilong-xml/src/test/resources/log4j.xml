@@ -30,6 +30,9 @@
 	<category name="org.apache.commons.beanutils">
 		<priority value="info" />
 	</category>
+	<category name="com.feilong.lib.beanutils">
+		<priority value="info" />
+	</category>
 
 	<!-- 设置接收所有输出的通道 -->
 	<root>

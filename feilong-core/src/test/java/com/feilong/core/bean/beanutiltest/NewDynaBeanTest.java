@@ -23,10 +23,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.apache.commons.beanutils.DynaBean;
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtil;
+import com.feilong.lib.beanutils.DynaBean;
 
 /**
  * The Class BeanUtilNewDynaBeanTest.

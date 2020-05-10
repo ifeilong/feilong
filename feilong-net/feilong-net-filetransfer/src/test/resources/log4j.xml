@@ -53,7 +53,7 @@
 	<category name="org.apache.commons.httpclient.params.DefaultHttpParams">
 		<priority value="info" />
 	</category>
-	<category name="org.apache.commons.beanutils.converters">
+	<category name="com.feilong.lib.beanutils">
 		<priority value="info" />
 	</category>
 

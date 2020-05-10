@@ -55,7 +55,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see org.apache.commons.beanutils.BeanPropertyValueChangeClosure
+ * @see com.feilong.lib.beanutils.BeanPropertyValueChangeClosure
  * @see org.apache.commons.collections4.CollectionUtils#forAllDo(Iterable, Closure)
  * @see org.apache.commons.collections4.IterableUtils#forEach(Iterable, Closure)
  * @since 1.10.2

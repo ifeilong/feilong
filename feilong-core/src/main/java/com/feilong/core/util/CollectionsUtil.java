@@ -38,7 +38,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.ListUtils;
@@ -2127,7 +2126,7 @@ public final class CollectionsUtil{
      *            <ol>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>inputBeanIterable</code> bean 没有的属性名字,将会抛出异常</li>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>inputBeanIterable</code>
-     *            bean有,但是<code>outputListBeanType</code>没有的属性名字,会抛出异常,see{@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)
+     *            bean有,但是<code>outputListBeanType</code>没有的属性名字,会抛出异常,see{@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)
      *            copyProperties} Line2078</li>
      *            </ol>
      * @return 如果 <code>inputBeanIterable</code> 是null,返回 null<br>

@@ -36,7 +36,7 @@ import com.feilong.core.lang.reflect.ConstructorUtil;
  *            输入类型
  * @param <O>
  *            输出类型
- * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
+ * @see com.feilong.lib.beanutils.BeanToPropertyValueTransformer
  * @since 1.10.1
  */
 public class BeanTransformer<I, O> implements Transformer<I, O>,Serializable{

@@ -19,6 +19,9 @@
 	<category name="org.apache.commons.beanutils">
 		<priority value="info" />
 	</category>
+	<category name="com.feilong.lib.beanutils">
+		<priority value="info" />
+	</category>
 
 	<category name="org.springframework">
 		<priority value="info" />

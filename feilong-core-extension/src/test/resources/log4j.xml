@@ -34,9 +34,6 @@
 		<level value="debug" />
 	</logger>
 
-	<category name="org.apache.commons.beanutils">
-		<priority value="info" />
-	</category>
 	<category name="com.feilong.core.lang.ThreadUtil">
 		<priority value="info" />
 	</category>

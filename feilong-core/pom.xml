@@ -22,12 +22,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<optional>true</optional>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- commons-lang3 -->
@@ -44,35 +38,20 @@
 
 		<!-- commons-beanutils -->
 		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>commons-collections</artifactId>
-					<groupId>commons-collections</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-beanutils</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- **********************仅仅 统一下版本************************************** -->
-		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-		<!-- commons beanutils 需要使用 -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
 
 		<!-- commons-collections 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
 		<!-- commons-beanutils 需要 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 		</dependency>
-
+ -->
 		<!-- xml-apis:xml-apis 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
 
 		<!-- 规范下 xercesImpl版本 -->

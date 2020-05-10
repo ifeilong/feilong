@@ -29,7 +29,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -40,6 +39,7 @@ import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
+import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 
 /**

@@ -41,7 +41,11 @@
 		<priority value="info" />
 	</category>
 
-	<category name="org.apache.commons.beanutils">
+	
+		<category name="org.apache.commons.beanutils">
+		<priority value="info" />
+	</category>
+	<category name="com.feilong.lib.beanutils">
 		<priority value="info" />
 	</category>
 
@@ -53,15 +57,6 @@
 	</category>
 	<category name="org.apache.commons.digester3">
 		<priority value="info" />
-	</category>
-	<category name="org.apache.commons.beanutils.ConvertUtilsBean">
-		<priority value="warn" />
-	</category>
-	<category name="org.apache.commons.beanutils.converters">
-		<priority value="warn" />
-	</category>
-	<category name="org.apache.commons.beanutils.converters.AbstractConverter">
-		<priority value="warn" />
 	</category>
 
 	<!-- 设置接收所有输出的通道 -->

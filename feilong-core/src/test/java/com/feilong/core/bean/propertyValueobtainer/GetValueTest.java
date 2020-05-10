@@ -20,10 +20,10 @@ import static org.junit.Assert.assertEquals;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
 
 import com.feilong.core.bean.PropertyValueObtainer;
+import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.store.member.Member;
 
 /**

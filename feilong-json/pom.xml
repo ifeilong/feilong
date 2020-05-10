@@ -17,5 +17,11 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-lib-jsonlib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 	</dependencies>
 </project>

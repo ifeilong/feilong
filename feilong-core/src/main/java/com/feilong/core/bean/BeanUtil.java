@@ -25,21 +25,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.DynaBean;
-import org.apache.commons.beanutils.LazyDynaBean;
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
+import com.feilong.lib.beanutils.BeanUtils;
+import com.feilong.lib.beanutils.DynaBean;
+import com.feilong.lib.beanutils.LazyDynaBean;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
+ * 对 {@link com.feilong.lib.beanutils.BeanUtils}的再次封装.
  * 
  * <h3>说明:</h3>
  * <blockquote>
@@ -49,7 +44,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * 
- * <h3>{@link PropertyUtils}与 {@link BeanUtils}区别:</h3>
+ * <h3>{@link com.feilong.lib.beanutils.PropertyUtils}与 {@link com.feilong.lib.beanutils.BeanUtils}区别:</h3>
  * 
  * <blockquote>
  * 
@@ -60,7 +55,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </pre>
  * 
  * <p>
- * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同. <br>
+ * {@link com.feilong.lib.beanutils.PropertyUtils}类和 {@link com.feilong.lib.beanutils.BeanUtils}类很多的方法在参数上都是相同的,但返回值不同. <br>
  * BeanUtils着重于"Bean",返回值通常是String,<br>
  * 而PropertyUtils着重于属性,它的返回值通常是Object. 
  * </p>
@@ -153,18 +148,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @see java.beans.PropertyDescriptor
  * @see java.beans.MethodDescriptor
  * 
- * @see org.apache.commons.beanutils.BeanUtils
- * @see org.apache.commons.beanutils.Converter
- * @see org.apache.commons.beanutils.converters.DateConverter
- * @see org.apache.commons.beanutils.converters.DateTimeConverter
- * @see org.apache.commons.beanutils.converters.AbstractConverter
+ * @see com.feilong.lib.beanutils.BeanUtils
+ * @see com.feilong.lib.beanutils.Converter
+ * @see com.feilong.lib.beanutils.converters.DateConverter
+ * @see com.feilong.lib.beanutils.converters.DateTimeConverter
+ * @see com.feilong.lib.beanutils.converters.AbstractConverter
  * 
- * @see org.apache.commons.beanutils.ConvertUtils#register(org.apache.commons.beanutils.Converter, Class)
+ * @see com.feilong.lib.beanutils.ConvertUtils#register(com.feilong.lib.beanutils.Converter, Class)
  * 
- * @see org.apache.commons.beanutils.ConvertUtilsBean#registerPrimitives(boolean)
- * @see org.apache.commons.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean)
- * @see org.apache.commons.beanutils.ConvertUtilsBean#registerOther(boolean)
- * @see org.apache.commons.beanutils.ConvertUtilsBean#registerArrays(boolean, int)
+ * @see com.feilong.lib.beanutils.ConvertUtilsBean#registerPrimitives(boolean)
+ * @see com.feilong.lib.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean)
+ * @see com.feilong.lib.beanutils.ConvertUtilsBean#registerOther(boolean)
+ * @see com.feilong.lib.beanutils.ConvertUtilsBean#registerArrays(boolean, int)
  * 
  * @see "org.springframework.beans.BeanUtils"
  * 
@@ -206,7 +201,8 @@ public final class BeanUtil{
      * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换</li>
      * <li>如果指定了<code>includePropertyNames</code>,会调用 {@link #getProperty(Object, String)},在自动进行{@code Object--->String}
      * 类型转换过程中,如果发现值是数组,只会取第一个元素重新构造数组转到 <code>toObj</code>中,规则参见 {@link ConvertUtil#toString(Object)}</li>
-     * <li>不支持<code>toObj</code>是map类型,从{@link BeanUtilsBean#copyProperties(Object, Object)}源码可以看出, <code class="code">fromObj</code>可以是map
+     * <li>不支持<code>toObj</code>是map类型,从{@link com.feilong.lib.beanutils.BeanUtilsBean#copyProperties(Object, Object)}源码可以看出,
+     * <code class="code">fromObj</code>可以是map
      * </li>
      * </ol>
      * </blockquote>
@@ -231,22 +227,24 @@ public final class BeanUtil{
      * 
      * </blockquote>
      * 
-     * <h3>注册自定义 {@link Converter}:</h3>
+     * <h3>注册自定义 {@link com.feilong.lib.beanutils.Converter}:</h3>
      * 
      * <blockquote>
      * <p>
-     * 如果有 {@link java.util.Date}类型的需要copy,那么需要先使用{@link ConvertUtils#register(Converter, Class)}方法:<br>
+     * 如果有
+     * {@link java.util.Date}类型的需要copy,那么需要先使用{@link com.feilong.lib.beanutils.ConvertUtils#register(com.feilong.lib.beanutils.Converter, Class)}方法:<br>
      * 
      * <code>ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE),Date.class);</code>
      * </p>
      * </blockquote>
      * 
-     * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
+     * <h3>{@link BeanUtils#copyProperties(Object, Object)}与
+     * {@link com.feilong.lib.beanutils.PropertyUtils#copyProperties(Object, Object)}区别</h3>
      * 
      * <blockquote>
      * <ul>
      * <li>{@link BeanUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而
-     * {@link PropertyUtils#copyProperties(Object, Object)}不支持这个功能,但是速度会更快一些.</li>
+     * {@link com.feilong.lib.beanutils.PropertyUtils#copyProperties(Object, Object)}不支持这个功能,但是速度会更快一些.</li>
      * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
      * of certain data types),具体信息,可以参阅commons-beanutils的
@@ -275,13 +273,13 @@ public final class BeanUtil{
      *            {@link #setProperty(Object, String, Object)}到 <code>toObj</code>对象中</li>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行(跳过该属性设置),see
-     *            {@link BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     *            {@link com.feilong.lib.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
      *            </ol>
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
      * @throws BeanOperationException
      *             其他调用api有任何异常,转成{@link BeanOperationException}返回
-     * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperties(Object, Object)
+     * @see com.feilong.lib.beanutils.BeanUtilsBean#copyProperties(Object, Object)
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
      *      BeanUtils,Cglib BeanCopier)</a>
      */
@@ -330,9 +328,9 @@ public final class BeanUtil{
      *            Value to be set
      * @throws BeanOperationException
      *             有任何异常,转成{@link BeanOperationException}返回
-     * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
-     * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
-     * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
+     * @see com.feilong.lib.beanutils.BeanUtils#setProperty(Object, String, Object)
+     * @see com.feilong.lib.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
+     * @see com.feilong.lib.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.PropertyUtil#setProperty(Object, String, Object)
      */
     private static void setProperty(Object bean,String propertyName,Object value){
@@ -368,8 +366,8 @@ public final class BeanUtil{
      *             如果 <code>propertyName</code> 是blank
      * @throws BeanOperationException
      *             在调用 {@link BeanUtils#getProperty(Object, String)}过程中有任何异常,转成{@link BeanOperationException}返回
-     * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
+     * @see com.feilong.lib.beanutils.BeanUtils#getProperty(Object, String)
+     * @see com.feilong.lib.beanutils.PropertyUtils#getProperty(Object, String)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @since 1.9.0 change access to private
      */
@@ -424,8 +422,8 @@ public final class BeanUtil{
      *             如果 <code>bean</code> 是null
      * @throws BeanOperationException
      *             在调用api有任何异常,转成{@link BeanOperationException}返回
-     * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
-     * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     * @see com.feilong.lib.beanutils.BeanUtils#cloneBean(Object)
+     * @see com.feilong.lib.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
      * @see org.apache.commons.lang3.ObjectUtils#clone(Object)
      * @see org.apache.commons.lang3.ObjectUtils#cloneIfPossible(Object)
@@ -458,11 +456,13 @@ public final class BeanUtil{
      * <ol>
      * <li>将Map{@code <Key,value>}中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. </li>
      * <li>apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,<b>在正常使用中不推荐使用</b>.推荐使用 {@link #copyProperties(Object, Object, String...)}方法</li>
-     * <li>底层方法原理 {@link BeanUtilsBean#populate(Object, Map)},循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到
+     * <li>底层方法原理 {@link com.feilong.lib.beanutils.BeanUtilsBean#populate(Object, Map)},循环map,调用
+     * {@link com.feilong.lib.beanutils.BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到
      * <code>bean</code>对象</li>
      * <li>如果properties key中有bean中不存在的属性,那么该条数据自动忽略</li>
-     * <li>如果properties key中有null,那么该条数据自动忽略,see {@link BeanUtilsBean#populate(Object, Map)} line 817</li>
-     * <li><code>bean</code>可以是Map类型,不过转换之后的key和value都会是Object类型,而不是声明的类型,see {@link BeanUtilsBean#setProperty(Object, String, Object)} line
+     * <li>如果properties key中有null,那么该条数据自动忽略,see {@link com.feilong.lib.beanutils.BeanUtilsBean#populate(Object, Map)} line 817</li>
+     * <li><code>bean</code>可以是Map类型,不过转换之后的key和value都会是Object类型,而不是声明的类型,see
+     * {@link com.feilong.lib.beanutils.BeanUtilsBean#setProperty(Object, String, Object)} line
      * 928</li>
      * </ol>
      * </blockquote>
@@ -619,7 +619,7 @@ public final class BeanUtil{
      * 
      * <p>
      * 此时你会发现,上面的 tos 期望值是 ["123456@163.com","1234567@163.cn"],但是和你的期望值不符合,ccs和bccs 也是相同的情况<br>
-     * 因为,{@link ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * 因为,{@link com.feilong.lib.beanutils.converters.ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
      * </p>
      * 
      * <p>
@@ -683,12 +683,12 @@ public final class BeanUtil{
      * @param properties
      *            Map keyed by property name,with the corresponding (String or String[]) value(s) to be set
      * @return 如果properties key中有bean中不存在的属性,那么该条数据自动忽略<br>
-     *         如果properties key中有null,那么该条数据自动忽略,see {@link BeanUtilsBean#populate(Object, Map)} line 817<br>
+     *         如果properties key中有null,那么该条数据自动忽略,see {@link com.feilong.lib.beanutils.BeanUtilsBean#populate(Object, Map)} line 817<br>
      * @throws NullPointerException
      *             如果 <code>bean</code> 是null,或者如果 <code>properties</code> 是null
      * @throws BeanOperationException
      *             在调用{@link BeanUtils#populate(Object, Map)}过程中有任何异常,转成{@link BeanOperationException}返回
-     * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
+     * @see com.feilong.lib.beanutils.BeanUtils#populate(Object, Map)
      */
     public static <T> T populate(T bean,Map<String, ?> properties){
         Validate.notNull(bean, "bean can't be null/empty!");
@@ -844,7 +844,7 @@ public final class BeanUtil{
      * 
      * <p>
      * 此时你会发现,上面的 serverList 期望值是 ["172.20.31.23:11211","172.20.31.22:11211"],但是和你的期望值不符合,<br>
-     * 因为, {@link ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * 因为, {@link com.feilong.lib.beanutils.converters.ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
      * </p>
      * 
      * <p>
@@ -965,7 +965,7 @@ public final class BeanUtil{
      * <ol>
      * <li>一般情况下,你可能不需要使用这个方法</li>
      * <li>很适合那种属性值数量不确定,并且又不想在页面使用map来渲染的地方,比如制作多维度的图表</li>
-     * <li>程序内部,默认使用的是 {@link org.apache.commons.beanutils.LazyDynaClass}</li>
+     * <li>程序内部,默认使用的是 {@link com.feilong.lib.beanutils.LazyDynaClass}</li>
      * <li>不需要先创建一个期望的数据结构DynaClass,就能向{@link LazyDynaBean}中填充我们任意想填充的数据。</li>
      * <li>{@link LazyDynaBean}内部会根据我们填充进的数据(即使是一个map中的一个key-value pair),创建metadata的。</li>
      * </ol>
@@ -1003,7 +1003,7 @@ public final class BeanUtil{
      *             如果 <code>valueMap</code> 是null,或者 <code>valueMap</code>中有key是null
      * @throws IllegalArgumentException
      *             如果<code>valueMap</code>中有key是empty
-     * @see org.apache.commons.beanutils.LazyDynaBean
+     * @see com.feilong.lib.beanutils.LazyDynaBean
      * @since 1.8.1
      * @since 1.13.2 param map change from {@code Map<String, ?> valueMap} to {@code Map<?, ?> valueMap}
      */

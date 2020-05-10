@@ -34,7 +34,6 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
-import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -569,7 +568,7 @@ public final class ResourceBundleUtil{
      * 
      * <p>
      * 但是同时,你也会发现,上面的 serverList 期望值是 ["172.20.3-1.23:11211","172.20.31.22:11211"],但是和你的期望值不符合,<br>
-     * 因为, {@link ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * 因为, {@link com.feilong.lib.beanutils.converters.ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
      * </p>
      * 
      * <p>

@@ -38,21 +38,12 @@
 	<category name="org.apache.commons.digester3">
 		<priority value="info" />
 	</category>
-	<logger name="org.apache.commons.beanutils.ConvertUtilsBean">
-		<level value="warn"></level>
-	</logger>
-	<logger name="org.apache.commons.beanutils.converters">
-		<level value="warn"></level>
-	</logger>
-	<logger name="org.apache.commons.beanutils.converters.AbstractConverter">
-		<level value="warn"></level>
-	</logger>
 
 	<!--
 		priority已经由level代替 
 		category已经由logger代替。 
 	-->
-	<category name="org.apache.commons.beanutils">
+	<category name="com.feilong.lib.beanutils">
 		<priority value="info" />
 	</category>
 

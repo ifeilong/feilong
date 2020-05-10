@@ -23,12 +23,12 @@ import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.beanutils.converters.StringConverter;
 import org.junit.Test;
 
 import com.feilong.core.entity.DangaMemCachedConfig;
+import com.feilong.lib.beanutils.ConvertUtils;
+import com.feilong.lib.beanutils.converters.ArrayConverter;
+import com.feilong.lib.beanutils.converters.StringConverter;
 
 /**
  * The Class ResourceBundleUtilToAliasBeanTest.

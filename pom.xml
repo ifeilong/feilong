@@ -41,6 +41,7 @@
 		<module>feilong-component</module>
 
 		<module>feilong-util-all</module>
+		<module>feilong-lib</module>
 	</modules>
 
 	<!--****************************定义属性 properties************************************* -->
@@ -120,7 +121,6 @@
 
 		<!-- http://commons.apache.org/proper/commons-logging/download_logging.cgi -->
 		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-		<version.commons-logging>1.2</version.commons-logging>
 
 		<!-- see in http://commons.apache.org/proper/commons-io/index.html -->
 		<!--
@@ -521,12 +521,6 @@
 			</dependency>
 
 			<!-- *********************apache******************************* -->
-			<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>${version.commons-logging}</version>
-			</dependency>
 
 			<!-- commons-lang3 -->
 			<dependency>
@@ -627,12 +621,6 @@
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>${version.httpcomponents}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<!-- commons-beanutils -->
@@ -640,16 +628,6 @@
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
 				<version>${version.commons-beanutils}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-collections</artifactId>
-						<groupId>commons-collections</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<!-- commons-codec -->
@@ -663,17 +641,6 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-digester3</artifactId>
 				<version>${version.commons-digester3}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-beanutils</groupId>
-						<artifactId>commons-beanutils</artifactId>
-					</exclusion>
-
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>

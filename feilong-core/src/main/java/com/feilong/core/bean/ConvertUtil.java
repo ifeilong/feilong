@@ -39,24 +39,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.ConvertUtilsBean;
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.converters.AbstractConverter;
-import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.beanutils.converters.BigDecimalConverter;
-import org.apache.commons.beanutils.converters.BigIntegerConverter;
-import org.apache.commons.beanutils.converters.BooleanConverter;
-import org.apache.commons.beanutils.converters.ByteConverter;
-import org.apache.commons.beanutils.converters.CharacterConverter;
-import org.apache.commons.beanutils.converters.DoubleConverter;
-import org.apache.commons.beanutils.converters.FloatConverter;
-import org.apache.commons.beanutils.converters.IntegerConverter;
-import org.apache.commons.beanutils.converters.LongConverter;
-import org.apache.commons.beanutils.converters.NumberConverter;
-import org.apache.commons.beanutils.converters.ShortConverter;
-import org.apache.commons.beanutils.converters.StringConverter;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -72,6 +54,23 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.core.util.transformer.SimpleClassTransformer;
+import com.feilong.lib.beanutils.ConvertUtils;
+import com.feilong.lib.beanutils.ConvertUtilsBean;
+import com.feilong.lib.beanutils.Converter;
+import com.feilong.lib.beanutils.converters.ArrayConverter;
+import com.feilong.lib.beanutils.converters.BigDecimalConverter;
+import com.feilong.lib.beanutils.converters.BigIntegerConverter;
+import com.feilong.lib.beanutils.converters.BooleanConverter;
+import com.feilong.lib.beanutils.converters.ByteConverter;
+import com.feilong.lib.beanutils.converters.CharacterConverter;
+import com.feilong.lib.beanutils.converters.DoubleConverter;
+import com.feilong.lib.beanutils.converters.FloatConverter;
+import com.feilong.lib.beanutils.converters.IntegerConverter;
+import com.feilong.lib.beanutils.converters.LongConverter;
+import com.feilong.lib.beanutils.converters.NumberConverter;
+import com.feilong.lib.beanutils.converters.ShortConverter;
+import com.feilong.lib.beanutils.converters.StringConverter;
+import com.feilong.lib.beanutils.locale.converters.DateLocaleConverter;
 
 /**
  * 常用类型转换处理.
@@ -228,9 +227,9 @@ import com.feilong.core.util.transformer.SimpleClassTransformer;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.beanutils.ConvertUtils
- * @see org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)
- * @see org.apache.commons.beanutils.locale.LocaleConvertUtils
+ * @see com.feilong.lib.beanutils.ConvertUtils
+ * @see com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)
+ * @see com.feilong.lib.beanutils.locale.LocaleConvertUtils
  * @since 1.3.0
  */
 public final class ConvertUtil{
@@ -318,12 +317,12 @@ public final class ConvertUtil{
      * <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
      * <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
      * <li>其他抛出 conversionException, 但是在
-     * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
      * Throwable)} 方法里面返回默认值 是 null
      * </ul>
      * 
      * <p>
-     * 你也可以调用 {@link org.apache.commons.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
+     * 你也可以调用 {@link com.feilong.lib.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
      * BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
      * </p>
      * </blockquote>
@@ -340,7 +339,7 @@ public final class ConvertUtil{
      *            object
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.BooleanConverter
+     * @see com.feilong.lib.beanutils.converters.BooleanConverter
      * @see org.apache.commons.lang3.BooleanUtils
      * @see java.lang.Boolean#parseBoolean(String)
      */
@@ -367,7 +366,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
      * </p>
      * 
      * <pre class="code">
@@ -375,7 +375,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
      * </p>
      * 
      * <pre class="code">
@@ -444,7 +445,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
-     * @see org.apache.commons.beanutils.converters.IntegerConverter
+     * @see com.feilong.lib.beanutils.converters.IntegerConverter
      * @see org.apache.commons.lang3.math.NumberUtils#toInt(String)
      * @see #toInteger(Object, Integer)
      */
@@ -469,7 +470,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
      * </p>
      * 
      * <pre class="code">
@@ -477,7 +479,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
      * </p>
      * 
      * <pre class="code">
@@ -531,7 +534,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
-     * @see org.apache.commons.beanutils.converters.IntegerConverter
+     * @see com.feilong.lib.beanutils.converters.IntegerConverter
      * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
      * @since 1.6.1
      */
@@ -557,7 +560,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
      * </p>
      * 
      * <pre class="code">
@@ -565,7 +569,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
      * </p>
      * 
      * <pre class="code">
@@ -581,7 +586,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.LongConverter
+     * @see com.feilong.lib.beanutils.converters.LongConverter
      * @see org.apache.commons.lang3.math.NumberUtils#toLong(String)
      */
     public static Long toLong(Object toBeConvertedValue){
@@ -606,7 +611,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
      * </p>
      * 
      * <pre class="code">
@@ -614,7 +620,8 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
      * </p>
      * 
      * <pre class="code">
@@ -649,8 +656,8 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
-     * @see org.apache.commons.beanutils.converters.BigDecimalConverter
+     * @see com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     * @see com.feilong.lib.beanutils.converters.BigDecimalConverter
      */
     public static BigDecimal toBigDecimal(Object toBeConvertedValue){
         return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
@@ -674,7 +681,7 @@ public final class ConvertUtil{
      * 
      * <dd>
      * <p>
-     * 参见{@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     * 参见{@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
      * ArrayConverter#convertToType(Class,Object)}<br>
      * 
      * 会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
@@ -737,14 +744,14 @@ public final class ConvertUtil{
      * 
      * <p>
      * 每个元素转换成 Integer的时候,会调用
-     * {@link org.apache.commons.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
+     * {@link com.feilong.lib.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
      * </p>
      * 
      * <blockquote>
      * 
      * <dl>
      * <dt>1.如果 元素是 Number类型</dt>
-     * <dd>那么会调用 {@link org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
+     * <dd>那么会调用 {@link com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
      * 
      * <dt>2.如果 元素是 Boolean类型</dt>
      * <dd>那么 true被转成1,false 转成 0</dd>
@@ -753,8 +760,8 @@ public final class ConvertUtil{
      * <dd>将元素转成字符串,并trim,再进行转换</dd>
      * 
      * <dt>4.元素是null的情况</dt>
-     * <dd>如果有元素是null,那么会调用 {@link org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
-     * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
+     * <dd>如果有元素是null,那么会调用 {@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
      * </dd>
      * </dl>
      * 
@@ -774,7 +781,7 @@ public final class ConvertUtil{
      *            需要被转换的值
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
      * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.ArrayConverter
+     * @see com.feilong.lib.beanutils.converters.ArrayConverter
      */
     public static Integer[] toIntegers(Object toBeConvertedValue){
         return convert(toBeConvertedValue, Integer[].class);
@@ -795,7 +802,7 @@ public final class ConvertUtil{
      * 
      * <dd>
      * <p>
-     * 参见{@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     * 参见{@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
      * ArrayConverter#convertToType(Class,Object)}<br>
      * 
      * 会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
@@ -858,14 +865,14 @@ public final class ConvertUtil{
      * 
      * <p>
      * 每个元素转换成 Integer的时候,会调用
-     * {@link org.apache.commons.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
+     * {@link com.feilong.lib.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
      * </p>
      * 
      * <blockquote>
      * 
      * <dl>
      * <dt>1.如果 元素是 Number类型</dt>
-     * <dd>那么会调用 {@link org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
+     * <dd>那么会调用 {@link com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
      * 
      * <dt>2.如果 元素是 Boolean类型</dt>
      * <dd>那么 true被转成1L,false 转成 0L</dd>
@@ -874,8 +881,8 @@ public final class ConvertUtil{
      * <dd>将元素转成字符串,并trim,再进行转换</dd>
      * 
      * <dt>4.元素是null的情况</dt>
-     * <dd>如果有元素是null,那么会调用 {@link org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
-     * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
+     * <dd>如果有元素是null,那么会调用 {@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
      * </dd>
      * </dl>
      * 
@@ -924,8 +931,8 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
-     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.ArrayConverter
+     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object, Class)
+     * @see com.feilong.lib.beanutils.converters.ArrayConverter
      * @see #convert(Object, Class)
      */
     public static Long[] toLongs(Object toBeConvertedValue){
@@ -965,10 +972,10 @@ public final class ConvertUtil{
      *         如果 <code>toBeConvertedValue</code> 是 {@link BigDecimal}或者是{@link Float}或者是 {@link Double},那么返回
      *         {@link com.feilong.core.NumberPattern#TWO_DECIMAL_POINTS} 2 位小数点格式字符串<br>
      *         其他调用 {@link com.feilong.core.bean.ConvertUtil#convert(Object, Class)}
-     * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
-     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
-     * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(Object)
-     * @see org.apache.commons.beanutils.converters.StringConverter
+     * @see com.feilong.lib.beanutils.converters.ArrayConverter#convertToString(Object)
+     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object)
+     * @see com.feilong.lib.beanutils.ConvertUtilsBean#convert(Object)
+     * @see com.feilong.lib.beanutils.converters.StringConverter
      * 
      * @see java.util.Arrays#toString(Object[])
      * @since 1.14.0 call {@link com.feilong.core.bean.ToStringHandler#toStringValue(Object)}
@@ -2729,8 +2736,8 @@ public final class ConvertUtil{
      * @return 如果 <code>toBeConvertedValue</code> 是null,那么返回null<br>
      *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
      *         否则调用 {@link ConvertUtils#convert(String[], Class)}
-     * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
-     * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
+     * @see com.feilong.lib.beanutils.ConvertUtils#convert(String[], Class)
+     * @see com.feilong.lib.beanutils.ConvertUtilsBean#convert(String[], Class)
      * @since 1.6.0
      */
     @SuppressWarnings("unchecked")
@@ -2801,7 +2808,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String) parseElements}
+     * 参见 {@link com.feilong.lib.beanutils.converters.AbstractArrayConverter#parseElements(String) parseElements}
      * </p>
      * 
      * <ul>
@@ -2830,8 +2837,8 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
-     * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
-     * @see org.apache.commons.beanutils.converters.ArrayConverter#parseElements(Class, String)
+     * @see com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     * @see com.feilong.lib.beanutils.converters.ArrayConverter#parseElements(Class, String)
      * @see #convert(Object, Class)
      * @since 1.4.0
      */
@@ -2977,12 +2984,13 @@ public final class ConvertUtil{
      * <dd>
      * <p>
      * 那么<span style="color:red">会取第一个元素</span>进行转换,<br>
-     * 参见{@link AbstractConverter#convert(Class, Object)},调用的 {@link AbstractConverter#convertArray(Object)} 方法
+     * 参见{@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},调用的
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} 方法
      * </p>
      * </dd>
      * 
      * <dt>如果 <code>targetType</code> 是数组</dt>
-     * <dd>参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
+     * <dd>参见 {@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
      * Object)} 会基于targetType 构造一个数组对象,大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代 <code>toBeConvertedValue</code> 依次进行转换</dd>
      * 
      * </dl>
@@ -3031,15 +3039,15 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
+     * 参见 {@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
      * 
      * 在转换的过程中,如果发现object是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)}来获得数据,<br>
-     * 如果发现不是数组,将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * 如果发现不是数组,将会将object转成集合 {@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
      * ArrayConverter#convertToCollection(Class, Object)}再转成迭代器 {@link java.util.Collection#iterator() Collection.iterator()}
      * </p>
      * 
      * <p>
-     * 在将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * 在将object转成集合 {@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
      * ArrayConverter#convertToCollection(Class, Object)}时候,有以下规则:
      * </p>
      *
@@ -3095,10 +3103,10 @@ public final class ConvertUtil{
      *            要转成什么类型
      * @return 如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toBeConvertedValue</code> 是null,那么直接返回null<br>
-     *         否则返回 {@link org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)}
-     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)
-     * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     *         否则返回 {@link com.feilong.lib.beanutils.ConvertUtils#convert(Object, Class)}
+     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object, Class)
+     * @see com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)
+     * @see com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
      */
     @SuppressWarnings("unchecked")
     public static <T> T convert(Object toBeConvertedValue,Class<T> targetType){

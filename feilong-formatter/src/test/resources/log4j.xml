@@ -27,7 +27,7 @@
 		priority已经由level代替 
 		category已经由logger代替。 
 	-->
-	<category name="org.apache.commons.beanutils">
+	<category name="com.feilong.lib.beanutils">
 		<priority value="info" />
 	</category>
 

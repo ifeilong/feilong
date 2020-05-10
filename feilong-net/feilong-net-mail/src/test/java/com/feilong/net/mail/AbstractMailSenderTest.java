@@ -17,15 +17,15 @@ package com.feilong.net.mail;
 
 import java.util.ResourceBundle;
 
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.beanutils.converters.StringConverter;
 import org.junit.After;
 import org.junit.Before;
 
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.FileUtil;
+import com.feilong.lib.beanutils.ConvertUtils;
+import com.feilong.lib.beanutils.converters.ArrayConverter;
+import com.feilong.lib.beanutils.converters.StringConverter;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.test.AbstractTest;
 

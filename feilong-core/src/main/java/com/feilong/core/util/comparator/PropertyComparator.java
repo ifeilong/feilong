@@ -55,7 +55,7 @@ import com.feilong.core.bean.PropertyUtil;
  *            the generic type
  * @see org.apache.commons.collections4.ComparatorUtils
  * @see "org.springframework.beans.support.PropertyComparator"
- * @see org.apache.commons.beanutils.BeanComparator
+ * @see com.feilong.lib.beanutils.BeanComparator
  * @see org.apache.commons.collections4.comparators.BooleanComparator
  * @see org.apache.commons.collections4.comparators.ReverseComparator
  * @see org.apache.commons.collections4.comparators.ComparableComparator
