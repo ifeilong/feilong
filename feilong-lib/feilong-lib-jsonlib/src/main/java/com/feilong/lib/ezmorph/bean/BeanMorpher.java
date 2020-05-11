@@ -24,6 +24,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.PropertyUtils;
@@ -116,7 +117,7 @@ public final class BeanMorpher implements ObjectMorpher{
         Object targetBean = null;
         try{
             targetBean = beanClass.newInstance();
-            PropertyDescriptor[] targetPropertyDescriptors = PropertyUtils.getPropertyDescriptors(beanClass);
+            PropertyDescriptor[] targetPropertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
             for (int i = 0; i < targetPropertyDescriptors.length; i++){
 
                 PropertyDescriptor targetPropertyDescriptor = targetPropertyDescriptors[i];

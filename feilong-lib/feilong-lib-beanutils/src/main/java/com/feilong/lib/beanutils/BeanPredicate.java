@@ -30,7 +30,9 @@ import org.slf4j.LoggerFactory;
  * </p>
  *
  * @version $Id$
+ * @deprecated by feilong use com.feilong.core.util.predicate.BeanPredicate
  */
+@Deprecated
 public class BeanPredicate implements Predicate{
 
     /** The Constant log. */

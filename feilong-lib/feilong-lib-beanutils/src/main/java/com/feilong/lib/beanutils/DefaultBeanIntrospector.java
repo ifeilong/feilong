@@ -122,7 +122,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector{
      * @param descriptors
      *            the array with property descriptors
      */
-    private void handleIndexedPropertyDescriptors(final Class<?> beanClass,final PropertyDescriptor[] descriptors){
+    private static void handleIndexedPropertyDescriptors(final Class<?> beanClass,final PropertyDescriptor[] descriptors){
         for (final PropertyDescriptor pd : descriptors){
             if (pd instanceof IndexedPropertyDescriptor){
                 final IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) pd;

@@ -18,6 +18,7 @@ package com.feilong.lib.json;
 import java.beans.PropertyDescriptor;
 import java.util.Collection;
 
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
@@ -62,7 +63,7 @@ public class BeanProcessing{
         //---------------------------------------------------------------
         JSONObject jsonObject = new JSONObject();
         try{
-            PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(beanClass);
+            PropertyDescriptor[] propertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
 
             for (int i = 0; i < propertyDescriptors.length; i++){
                 PropertyDescriptor propertyDescriptor = propertyDescriptors[i];

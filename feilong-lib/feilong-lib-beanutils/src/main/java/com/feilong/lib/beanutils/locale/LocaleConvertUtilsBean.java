@@ -25,11 +25,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.FastHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.BeanUtils;
+import com.feilong.lib.beanutils.FastHashMap;
 import com.feilong.lib.beanutils.locale.converters.BigDecimalLocaleConverter;
 import com.feilong.lib.beanutils.locale.converters.BigIntegerLocaleConverter;
 import com.feilong.lib.beanutils.locale.converters.ByteLocaleConverter;

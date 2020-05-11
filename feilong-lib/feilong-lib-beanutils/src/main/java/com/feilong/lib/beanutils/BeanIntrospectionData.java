@@ -50,6 +50,8 @@ class BeanIntrospectionData{
     /** A map for remembering the write method names for properties. */
     private final Map<String, String>  writeMethodNames;
 
+    //---------------------------------------------------------------
+
     /**
      * Creates a new instance of {@code BeanIntrospectionData} and initializes its
      * completely.
@@ -100,6 +102,8 @@ class BeanIntrospectionData{
         }
         return null;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns the write method for the property determined by the given

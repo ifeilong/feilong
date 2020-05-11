@@ -37,50 +37,6 @@ import java.util.Map;
 
 public class BeanUtils{
 
-    // ------------------------------------------------------ Private Variables
-
-    /**
-     * The debugging detail level for this component.
-     *
-     * Note that this static variable will have unexpected side-effects if
-     * this class is deployed in a shared classloader within a container.
-     * However as it is actually completely ignored by this class due to its
-     * deprecated status, it doesn't do any actual harm.
-     *
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    private static int debug = 0;
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * 
-     * @return debug property
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    public static int getDebug(){
-        return (debug);
-    }
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * 
-     * @param newDebug
-     *            debug property
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    public static void setDebug(final int newDebug){
-        debug = newDebug;
-    }
-
     // --------------------------------------------------------- Class Methods
 
     /**
@@ -113,9 +69,7 @@ public class BeanUtils{
      */
     public static Object cloneBean(final Object bean)
                     throws IllegalAccessException,InstantiationException,InvocationTargetException,NoSuchMethodException{
-
         return BeanUtilsBean.getInstance().cloneBean(bean);
-
     }
 
     /**
@@ -147,7 +101,6 @@ public class BeanUtils{
      * @see BeanUtilsBean#copyProperties
      */
     public static void copyProperties(final Object dest,final Object orig) throws IllegalAccessException,InvocationTargetException{
-
         BeanUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
@@ -178,7 +131,6 @@ public class BeanUtils{
      */
     public static void copyProperty(final Object bean,final String name,final Object value)
                     throws IllegalAccessException,InvocationTargetException{
-
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
     }
 
@@ -209,7 +161,6 @@ public class BeanUtils{
      */
     public static Map<String, String> describe(final Object bean)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return BeanUtilsBean.getInstance().describe(bean);
     }
 
@@ -242,7 +193,6 @@ public class BeanUtils{
      */
     public static String[] getArrayProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return BeanUtilsBean.getInstance().getArrayProperty(bean, name);
     }
 
@@ -276,7 +226,6 @@ public class BeanUtils{
      */
     public static String getIndexedProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
@@ -593,9 +542,8 @@ public class BeanUtils{
     public static boolean getCacheFast(final Map<?, ?> map){
         if (map instanceof WeakFastHashMap){
             return ((WeakFastHashMap<?, ?>) map).getFast();
-        }else{
-            return false;
         }
+        return false;
     }
 
     /**

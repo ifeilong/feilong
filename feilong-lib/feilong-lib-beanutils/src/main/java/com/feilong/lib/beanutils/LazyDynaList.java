@@ -314,7 +314,6 @@ public class LazyDynaList extends ArrayList<Object>{
      */
     @Override
     public void add(final int index,final Object element){
-
         final DynaBean dynaBean = transform(element);
 
         growList(index);
@@ -685,7 +684,6 @@ public class LazyDynaList extends ArrayList<Object>{
      *            the required size of the List.
      */
     private void growList(final int requiredSize){
-
         if (requiredSize < size()){
             return;
         }
@@ -696,7 +694,6 @@ public class LazyDynaList extends ArrayList<Object>{
             final DynaBean dynaBean = transform(null);
             super.add(dynaBean);
         }
-
     }
 
     /**

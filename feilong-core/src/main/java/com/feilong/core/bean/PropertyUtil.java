@@ -19,6 +19,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
+import java.beans.PropertyDescriptor;
 import java.util.Collection;
 import java.util.Map;
 
@@ -81,6 +82,26 @@ public final class PropertyUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+    /**
+     * Retrieve the property descriptors for the specified class, introspecting and caching them the first time a particular bean class is
+     * encountered.
+     *
+     * @param klass
+     *            the klass
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 3.0.0
+     */
+    public static PropertyDescriptor[] getPropertyDescriptors(Class<?> klass){
+        Validate.notNull(klass, "klass can't be null!");
+        try{
+            return PropertyUtils.getPropertyDescriptors(klass);
+        }catch (Exception e){
+            String pattern = "getPropertyDescriptors exception,klass:[{}]";
+            throw new BeanOperationException(Slf4jUtil.format(pattern, klass), e);
+        }
     }
 
     //---------------------------------------------------------------

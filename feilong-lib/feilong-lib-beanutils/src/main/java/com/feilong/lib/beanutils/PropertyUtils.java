@@ -22,8 +22,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.apache.commons.collections.FastHashMap;
-
 /**
  * <p>
  * Utility methods for using Java Reflection APIs to facilitate generic
@@ -493,9 +491,7 @@ public class PropertyUtils{
      */
     public static Object getNestedProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return PropertyUtilsBean.getInstance().getNestedProperty(bean, name);
-
     }
 
     /**
@@ -532,10 +528,10 @@ public class PropertyUtils{
      */
     public static Object getProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return (PropertyUtilsBean.getInstance().getProperty(bean, name));
-
     }
+
+    //---------------------------------------------------------------
 
     /**
      * <p>
@@ -574,9 +570,7 @@ public class PropertyUtils{
      */
     public static PropertyDescriptor getPropertyDescriptor(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return PropertyUtilsBean.getInstance().getPropertyDescriptor(bean, name);
-
     }
 
     /**
@@ -598,34 +592,10 @@ public class PropertyUtils{
      * @see PropertyUtilsBean#getPropertyDescriptors(Class)
      */
     public static PropertyDescriptor[] getPropertyDescriptors(final Class<?> beanClass){
-
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(beanClass);
-
     }
 
-    /**
-     * <p>
-     * Retrieve the property descriptors for the specified bean,
-     * introspecting and caching them the first time a particular bean class
-     * is encountered.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>PropertyUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean for which property descriptors are requested
-     * @return the property descriptors
-     * @throws IllegalArgumentException
-     *             if <code>bean</code> is null
-     * @see PropertyUtilsBean#getPropertyDescriptors(Object)
-     */
-    public static PropertyDescriptor[] getPropertyDescriptors(final Object bean){
-
-        return PropertyUtilsBean.getInstance().getPropertyDescriptors(bean);
-
-    }
+    //---------------------------------------------------------------
 
     /**
      * <p>

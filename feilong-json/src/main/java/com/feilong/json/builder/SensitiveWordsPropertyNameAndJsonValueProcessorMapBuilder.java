@@ -35,11 +35,11 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
-import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 
 /**
@@ -243,7 +243,7 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
      * @since 1.11.5
      */
     private static <A extends Annotation> List<String> getPropertyNamesWithAnnotation(Class<?> klass,Class<A> annotationCls){
-        PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(klass);
+        PropertyDescriptor[] propertyDescriptors = PropertyUtil.getPropertyDescriptors(klass);
         if (isNullOrEmpty(propertyDescriptors)){
             return emptyList();
         }

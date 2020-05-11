@@ -45,7 +45,6 @@ import java.lang.reflect.InvocationTargetException;
  *
  * @version $Id$
  */
-
 public class WrapDynaBean implements DynaBean,Serializable{
 
     // ---------------------------------------------------------- Constructors

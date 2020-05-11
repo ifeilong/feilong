@@ -49,16 +49,16 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable{
 
     private transient Object                                       bean;
 
-    private transient HashMap<String, Method>                      readMethods         = new HashMap<String, Method>();
+    private transient HashMap<String, Method>                      readMethods      = new HashMap<String, Method>();
 
-    private transient HashMap<String, Method>                      writeMethods        = new HashMap<String, Method>();
+    private transient HashMap<String, Method>                      writeMethods     = new HashMap<String, Method>();
 
-    private transient HashMap<String, Class<? extends Object>>     types               = new HashMap<String, Class<? extends Object>>();
+    private transient HashMap<String, Class<? extends Object>>     types            = new HashMap<String, Class<? extends Object>>();
 
     /**
      * An empty array. Used to invoke accessors via reflection.
      */
-    public static final Object[]                                   NULL_ARGUMENTS      = {};
+    public static final Object[]                                   NULL_ARGUMENTS   = {};
 
     /**
      * Maps primitive Class types to transformers. The transformer
@@ -66,86 +66,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable{
      *
      * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static final Map<Class<? extends Object>, Transformer> typeTransformers    = Collections
-                    .unmodifiableMap(createTypeTransformers());
-
-    /**
-     * This HashMap has been made unmodifiable to prevent issues when
-     * loaded in a shared ClassLoader enviroment.
-     *
-     * @see "http://issues.apache.org/jira/browse/BEANUTILS-112"
-     * @deprecated Use {@link BeanMap#getTypeTransformer(Class)} method
-     */
-    @Deprecated
-    public static HashMap                                          defaultTransformers = new HashMap(){
-
-                                                                                           /**
-                                                                                            * 
-                                                                                            */
-                                                                                           private static final long serialVersionUID = 1401258447226826385L;
-
-                                                                                           @Override
-                                                                                           public void clear(){
-                                                                                               throw new UnsupportedOperationException();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public boolean containsKey(final Object key){
-                                                                                               return typeTransformers.containsKey(key);
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public boolean containsValue(final Object value){
-                                                                                               return typeTransformers.containsValue(value);
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public Set entrySet(){
-                                                                                               return typeTransformers.entrySet();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public Object get(final Object key){
-                                                                                               return typeTransformers.get(key);
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public boolean isEmpty(){
-                                                                                               return false;
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public Set keySet(){
-                                                                                               return typeTransformers.keySet();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public Object put(
-                                                                                                           final Object key,
-                                                                                                           final Object value){
-                                                                                               throw new UnsupportedOperationException();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public void putAll(final Map m){
-                                                                                               throw new UnsupportedOperationException();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public Object remove(final Object key){
-                                                                                               throw new UnsupportedOperationException();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public int size(){
-                                                                                               return typeTransformers.size();
-                                                                                           }
-
-                                                                                           @Override
-                                                                                           public Collection values(){
-                                                                                               return typeTransformers.values();
-                                                                                           }
-                                                                                       };
+    private static final Map<Class<? extends Object>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
     private static Map<Class<? extends Object>, Transformer> createTypeTransformers(){
         final Map<Class<? extends Object>, Transformer> defaultTransformers = new HashMap<Class<? extends Object>, Transformer>();

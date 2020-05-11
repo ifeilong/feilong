@@ -25,7 +25,6 @@ package com.feilong.lib.beanutils;
  * @since 1.3
  * @version $Id$
  */
-
 public class ConversionException extends RuntimeException{
 
     // ----------------------------------------------------------- Constructors

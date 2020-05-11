@@ -19,7 +19,7 @@ package com.feilong.lib.beanutils.locale;
 
 import java.util.Locale;
 
-import org.apache.commons.collections.FastHashMap;
+import com.feilong.lib.beanutils.FastHashMap;
 
 /**
  * <p>

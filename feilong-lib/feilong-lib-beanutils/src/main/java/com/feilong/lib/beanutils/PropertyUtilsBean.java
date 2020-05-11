@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.apache.commons.collections.FastHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1117,9 +1116,8 @@ public class PropertyUtilsBean{
         final PropertyDescriptor descriptor = getPropertyDescriptor(bean, name);
         if (descriptor != null){
             return (descriptor.getPropertyEditorClass());
-        }else{
-            return (null);
         }
+        return (null);
 
     }
 

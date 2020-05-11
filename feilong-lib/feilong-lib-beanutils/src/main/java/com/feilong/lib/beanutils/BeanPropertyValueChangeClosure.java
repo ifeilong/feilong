@@ -78,8 +78,9 @@ import org.slf4j.LoggerFactory;
  *
  * @version $Id$
  * @see com.feilong.lib.beanutils.PropertyUtils
- * @see org.apache.commons.collections.Closure
+ * @deprecated by feilong use com.feilong.core.util.closure.BeanPropertyValueChangeClosure
  */
+@Deprecated
 public class BeanPropertyValueChangeClosure implements Closure{
 
     /** The Constant log. */

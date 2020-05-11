@@ -25,7 +25,6 @@ package com.feilong.context.converter;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.lib.beanutils.Converter
  * @see org.apache.commons.collections4.Transformer
  * @see "org.springframework.core.convert.converter.Converter"
  * @see "org.springframework.core.convert.support.StringToEnumConverterFactory"

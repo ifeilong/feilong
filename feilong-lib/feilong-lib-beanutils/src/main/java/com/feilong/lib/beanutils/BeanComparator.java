@@ -59,6 +59,8 @@ public class BeanComparator<T> implements Comparator<T>,Serializable{
 
     private final Comparator<?> comparator;
 
+    //---------------------------------------------------------------
+
     /**
      * <p>
      * Constructs a Bean Comparator without a property set.
@@ -128,6 +130,8 @@ public class BeanComparator<T> implements Comparator<T>,Serializable{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Sets the method to be called to compare two JavaBeans
      *
@@ -157,6 +161,8 @@ public class BeanComparator<T> implements Comparator<T>,Serializable{
     public Comparator<?> getComparator(){
         return comparator;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Compare two JavaBeans by their shared property.

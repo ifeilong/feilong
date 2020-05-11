@@ -2808,7 +2808,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * 参见 {@link com.feilong.lib.beanutils.converters.AbstractArrayConverter#parseElements(String) parseElements}
+     * 参见 {@link com.feilong.lib.beanutils.converters.ArrayConverter}
      * </p>
      * 
      * <ul>

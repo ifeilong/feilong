@@ -41,7 +41,6 @@
 			<artifactId>javax.servlet.jsp-api</artifactId>
 		</dependency>
 
-
 	</dependencies>
 
 </project>

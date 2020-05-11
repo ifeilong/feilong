@@ -107,7 +107,6 @@ import org.slf4j.LoggerFactory;
  *
  * @version $Id$
  * @see com.feilong.lib.beanutils.PropertyUtils
- * @see org.apache.commons.collections.Predicate
  */
 public class BeanPropertyValueEqualsPredicate implements Predicate{
 
