@@ -115,7 +115,6 @@ abstract class AbstractFormatter{
      * @param iterable
      *            the iterable
      * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object)
      */
     public <T> String format(Iterable<T> iterable){
         return format(iterable, null);
@@ -131,7 +130,6 @@ abstract class AbstractFormatter{
      * @param beanFormatterConfig
      *            the bean formatter config
      * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object)
      */
     public <T> String format(Iterable<T> iterable,BeanFormatterConfig beanFormatterConfig){
         if (isNullOrEmpty(iterable)){

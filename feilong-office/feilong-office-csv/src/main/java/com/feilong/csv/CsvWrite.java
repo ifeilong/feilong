@@ -167,7 +167,6 @@ public interface CsvWrite{
      * @param iterable
      *            the iterable
      * @see #write(String, String[], List, CsvConfig)
-     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object)
      */
     <T> void write(String fileName,Iterable<T> iterable);
 
@@ -218,7 +217,6 @@ public interface CsvWrite{
      * @param beanCsvConfig
      *            the bean csv config
      * @see #write(String, String[], List, CsvConfig)
-     * @see com.feilong.lib.beanutils.ConvertUtils#convert(Object)
      */
     <T> void write(String fileName,Iterable<T> iterable,BeanCsvConfig<T> beanCsvConfig);
 

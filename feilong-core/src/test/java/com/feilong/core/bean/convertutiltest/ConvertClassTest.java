@@ -48,7 +48,7 @@ public class ConvertClassTest{
      * Test convert 2.
      */
     @Test
-    
+
     public void testConvert2(){
         assertEquals(1, convert("1", Integer.class).intValue());
         assertEquals(1, convert("1", Long.class).intValue());
@@ -58,7 +58,7 @@ public class ConvertClassTest{
      * Test convert 3.
      */
     @Test
-    
+
     public void testConvert3(){
         assertEquals(null, convert("", Integer.class));
     }
@@ -69,7 +69,6 @@ public class ConvertClassTest{
      * Test to URL.
      */
     @Test(expected = ConversionException.class)
-    
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
         convert(spec, URL.class); //异常
@@ -81,7 +80,7 @@ public class ConvertClassTest{
      * Test convert target type.
      */
     @Test(expected = NullPointerException.class)
-    
+
     public void testConvertTargetType(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
         convert(spec, null);
