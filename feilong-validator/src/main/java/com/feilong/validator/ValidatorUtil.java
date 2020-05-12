@@ -22,9 +22,9 @@ import static com.feilong.validator.RegexPattern.TELEPHONE_MUST_AREACODE;
 import static com.feilong.validator.RegexPattern.ZIPCODE;
 
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.validator.routines.EmailValidator;
 
 import com.feilong.core.util.RegexUtil;
+import com.feilong.lib.validator.EmailValidator;
 
 /**
  * 校验的工具类.
@@ -103,7 +103,7 @@ public final class ValidatorUtil{
      *         <code>email</code> 提取 domain 部分值,如果不是有效的domain {@link EmailValidator#isValidDomain(String)},返回 false<br>
      *         其余返回true<br>
      * 
-     * @see org.apache.commons.validator.routines.EmailValidator
+     * @see com.feilong.lib.validator.EmailValidator
      * @see <a href="http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/">how-to-validate-email
      *      -address-with-regular-expression</a>
      * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
@@ -114,7 +114,7 @@ public final class ValidatorUtil{
             return false;
         }
 
-        EmailValidator emailValidator = org.apache.commons.validator.routines.EmailValidator.getInstance();
+        EmailValidator emailValidator = com.feilong.lib.validator.EmailValidator.getInstance();
         return emailValidator.isValid(email);
     }
 

@@ -104,8 +104,7 @@ public class WorkbookUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            IOUtils.closeQuietly(workbook);
-            IOUtils.closeQuietly(outputStream);
+            IOUtils.closeQuietly(workbook, outputStream);
         }
     }
 }

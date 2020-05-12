@@ -60,8 +60,7 @@ public class CsvFileReader{
         }catch (Exception e){
 
         }finally{
-            IOUtils.closeQuietly(fileReader);
-            IOUtils.closeQuietly(csvFileParser);
+            IOUtils.closeQuietly(fileReader, csvFileParser);
         }
     }
 

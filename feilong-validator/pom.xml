@@ -17,17 +17,10 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
-		<!-- 用户校验邮箱 -->
 		<dependency>
-			<groupId>commons-validator</groupId>
-			<artifactId>commons-validator</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-digester</groupId>
-					<artifactId>commons-digester</artifactId>
-				</exclusion>
-			</exclusions>
-			<optional>true</optional>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-commons-validator</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>
