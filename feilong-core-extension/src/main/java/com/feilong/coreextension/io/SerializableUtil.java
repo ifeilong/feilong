@@ -30,6 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationException;
 
 import com.feilong.core.net.URIUtil;
+import com.feilong.io.IOUtil;
 
 /**
  * {@link java.io.Serializable}util.
@@ -100,7 +101,7 @@ public final class SerializableUtil{
             byteArrayOutputStream = toByteArrayOutputStream(serializable);
             return byteArrayOutputStream.size();
         }finally{
-            IOUtils.closeQuietly(byteArrayOutputStream);
+            IOUtil.closeQuietly(byteArrayOutputStream);
         }
     }
 
@@ -127,7 +128,7 @@ public final class SerializableUtil{
         }catch (IOException e){
             throw new SerializationException(e);
         }finally{
-            IOUtils.closeQuietly(objectOutputStream);
+            IOUtil.closeQuietly(objectOutputStream);
         }
     }
 
@@ -153,7 +154,7 @@ public final class SerializableUtil{
         }catch (IOException e){
             throw new SerializationException(e);
         }finally{
-            IOUtils.closeQuietly(byteArrayOutputStream);
+            IOUtil.closeQuietly(byteArrayOutputStream);
         }
     }
 
@@ -179,7 +180,7 @@ public final class SerializableUtil{
             inputStream = IOUtils.toInputStream(decodeString, Charset.forName(ISO_8859_1));
             return org.apache.commons.lang3.SerializationUtils.deserialize(inputStream);
         }finally{
-            IOUtils.closeQuietly(inputStream);
+            IOUtil.closeQuietly(inputStream);
         }
     }
 }

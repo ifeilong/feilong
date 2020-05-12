@@ -8,11 +8,11 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.csv.User;
+import com.feilong.io.IOUtil;
 
 /**
  * @author ashraf_sarhan
@@ -60,7 +60,7 @@ public class CsvFileReader{
         }catch (Exception e){
 
         }finally{
-            IOUtils.closeQuietly(fileReader, csvFileParser);
+            IOUtil.closeQuietly(fileReader, csvFileParser);
         }
     }
 

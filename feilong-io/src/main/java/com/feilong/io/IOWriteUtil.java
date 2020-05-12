@@ -422,8 +422,8 @@ public final class IOWriteUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            IOUtils.closeQuietly(outputStream);
-            IOUtils.closeQuietly(inputStream);
+            IOUtil.closeQuietly(outputStream);
+            IOUtil.closeQuietly(inputStream);
         }
     }
 }

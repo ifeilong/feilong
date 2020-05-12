@@ -317,7 +317,7 @@ public final class IOReaderUtil{
             throw new UncheckedIOException(e);
         }finally{
             // 用完关闭流 是个好习惯,^_^
-            IOUtils.closeQuietly(fileInputStream);
+            IOUtil.closeQuietly(fileInputStream);
         }
     }
 
@@ -389,7 +389,7 @@ public final class IOReaderUtil{
             throw new UncheckedIOException(e);
         }finally{
             // 用完关闭流 是个好习惯,^_^
-            IOUtils.closeQuietly(inputStream);
+            IOUtil.closeQuietly(inputStream);
         }
     }
 
@@ -622,7 +622,7 @@ public final class IOReaderUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            IOUtils.closeQuietly(reader);
+            IOUtil.closeQuietly(reader);
         }
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
@@ -779,7 +779,7 @@ public final class IOReaderUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            IOUtils.closeQuietly(reader);
+            IOUtil.closeQuietly(reader);
         }
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){

@@ -28,7 +28,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
+import com.feilong.io.IOUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -541,7 +541,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
 
         logInfoOrError(isSuccess, "put [{}] to [{}] [{}]", localFileFullPath, remoteDirectory, buildResultString(isSuccess));
 
-        IOUtils.closeQuietly(fileInputStream);
+        IOUtil.closeQuietly(fileInputStream);
         return isSuccess;
     }
 
