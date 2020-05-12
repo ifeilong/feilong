@@ -6,7 +6,18 @@ feilong
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
-feilong parent pom项目,定义常用jar及 plugins
+让Java开发更简便的工具包,详细的帮助文档 http://feilong-core.mydoc.io/
+
+1. 让你从`大量重复`的底层代码中脱身,`提高工作效率`;
+1. 让你的代码`更简炼`，`易写`、`易读`、`易于维护`;
+
+## feilong 优点:
+
+1. 有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
+1. 有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
+1. 不必要的`Exception` 转成了`RuntimeException`,减少不必要的代码
+1. 国内`中文注释`最完善的API
+1. 有完善的单元测试
 
 ## 子项目地址
 
@@ -18,6 +29,28 @@ feilong-io			| 封装了io操作的常用类
 feilong-taglib	| 封装了常用的自定义标签		
 feilong-net	| 封装了网络访问操作的常用类
 feilong-json	| 封装了json操作的常用类
+
+## 4.:dragon: Maven使用配置
+
+如果你使用 `maven`, 您可以通过以下方式来配置 `pom.xml`:
+
+
+```XML
+<dependency>
+	<groupId>com.github.ifeilong</groupId>
+	<artifactId>feilong-util-all</artifactId>
+	<version>3.0.0</version>
+</dependency>
+```
+
+## How to install?
+
+有些小伙伴想下载并 `自行install` 进行研究, 你需要执行以下 `2` 个步骤:
+
+```bat
+git clone https://github.com/ifeilong/feilong.git --depth 1
+mvn install -f feilong/pom.xml
+```
 
 ## 一图概述:
 

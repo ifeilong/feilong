@@ -26,11 +26,6 @@
 	</scm>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			</dependency> -->
-
 		<!-- commons-collections4 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
