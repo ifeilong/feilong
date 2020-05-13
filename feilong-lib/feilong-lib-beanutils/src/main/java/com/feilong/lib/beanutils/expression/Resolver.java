@@ -121,6 +121,8 @@ public interface Resolver{
      */
     String getProperty(String expression);
 
+    //---------------------------------------------------------------
+
     /**
      * Indicates whether or not the expression
      * contains nested property expressions or not.
@@ -130,6 +132,8 @@ public interface Resolver{
      * @return The next property expression
      */
     boolean hasNested(String expression);
+
+    //---------------------------------------------------------------
 
     /**
      * Indicate whether the expression is for an indexed property or not.
@@ -151,6 +155,8 @@ public interface Resolver{
      */
     boolean isMapped(String expression);
 
+    //---------------------------------------------------------------
+
     /**
      * Extract the next property expression from the
      * current expression.
@@ -160,6 +166,8 @@ public interface Resolver{
      * @return The next property expression
      */
     String next(String expression);
+
+    //---------------------------------------------------------------
 
     /**
      * Remove the last property expresson from the

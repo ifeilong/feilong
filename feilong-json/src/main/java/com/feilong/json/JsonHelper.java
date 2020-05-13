@@ -261,7 +261,7 @@ public final class JsonHelper{
      * 将 <code>object</code>转成 {@link JSONObject}.
      *
      * @param object
-     *            可以是 <code>null</code>,{@link JSONObject},{@link com.feilong.lib.beanutils.DynaBean} ,{@link JSONTokener},
+     *            可以是 <code>null</code>,{@link JSONObject},{@link org.apache.commons.beanutils.DynaBean} ,{@link JSONTokener},
      *            {@link Map},{@link String},<code>JavaBeans</code>
      * @param useJsonConfig
      *            如果是null,将使用 {@link #DEFAULT_JSON_CONFIG_INSTANCE}

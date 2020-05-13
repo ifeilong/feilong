@@ -35,7 +35,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +57,7 @@ import com.feilong.io.entity.FileWriteMode;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.util.StreamUtils"
  * @see "org.springframework.util.FileCopyUtils"
- * @see org.apache.commons.io.IOUtils
+ * @see com.feilong.lib.io.IOUtils
  * @since 1.0.6
  */
 public final class IOWriteUtil{
@@ -67,7 +66,7 @@ public final class IOWriteUtil{
     private static final Logger LOGGER                = LoggerFactory.getLogger(IOWriteUtil.class);
 
     /** 默认缓冲大小 10k <code>{@value}</code>. */
-    public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
+    public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtil.ONE_KB);
 
     //---------------------------------------------------------------
 
@@ -104,7 +103,7 @@ public final class IOWriteUtil{
      * @see FileWriteMode
      * @see CharsetType
      * @see #writeStringToFile(String, String, String, FileWriteMode)
-     * @see org.apache.commons.io.FileUtils#writeStringToFile(File, String, Charset)
+     * @see "com.feilong.lib.io.FileUtils#writeStringToFile(File, String, Charset)"
      * @since 1.5.4
      */
     public static void writeStringToFile(String filePath,String content,String charsetType){
@@ -143,7 +142,7 @@ public final class IOWriteUtil{
      *            写模式 {@link FileWriteMode}
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      * @see #write(InputStream, OutputStream)
-     * @see org.apache.commons.io.FileUtils#writeStringToFile(File, String, Charset, boolean)
+     * @see com.feilong.lib.io.FileUtils#writeStringToFile(File, String, Charset, boolean)
      * @since 1.5.4
      */
     public static void writeStringToFile(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
@@ -293,7 +292,7 @@ public final class IOWriteUtil{
      *            outputStream
      * @see java.io.OutputStream#write(byte[], int, int)
      * @see #write(InputStream, OutputStream,int)
-     * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
+     * @see com.feilong.lib.io.IOUtils#copyLarge(InputStream, OutputStream)
      */
     public static void write(InputStream inputStream,OutputStream outputStream){
         write(inputStream, outputStream, DEFAULT_BUFFER_LENGTH);
@@ -321,8 +320,8 @@ public final class IOWriteUtil{
      *            每次循环buffer大小 ,必须 {@code >}0
      * @see #writeUseNIO(InputStream, OutputStream,int)
      * @see java.io.OutputStream#write(byte[], int, int)
-     * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
-     * @see org.apache.commons.io.IOUtils#copy(InputStream, OutputStream, int)
+     * @see com.feilong.lib.io.IOUtils#copyLarge(InputStream, OutputStream)
+     * @see com.feilong.lib.io.IOUtils#copy(InputStream, OutputStream, int)
      * @see <a href="http://stackoverflow.com/questions/10142409/write-an-inputstream-to-an-httpservletresponse">As creme de la creme with
      *      regard to performance, you could use NIO Channels and ByteBuffer. Create the following utility/helper method in some custom
      *      utility class,</a>

@@ -25,11 +25,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.array.ObjectArrayMorpher;

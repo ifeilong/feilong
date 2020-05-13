@@ -22,8 +22,9 @@ package com.feilong.lib.beanutils;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.beanutils.BasicDynaClass;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.PropertyUtilsBean;

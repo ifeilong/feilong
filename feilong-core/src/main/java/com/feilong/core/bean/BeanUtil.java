@@ -25,11 +25,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.feilong.lib.beanutils.BeanUtils;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.LazyDynaBean;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

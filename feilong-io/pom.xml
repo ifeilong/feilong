@@ -26,15 +26,15 @@
 			<artifactId>feilong-json</artifactId>
 		</dependency>
 
-		<!-- commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-spring-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- -->
+		<dependency>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-commons-io</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

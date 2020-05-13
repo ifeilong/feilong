@@ -20,6 +20,8 @@ package com.feilong.lib.beanutils;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * Implementation of <code>DynaBean</code> that wraps a standard JavaBean

@@ -21,13 +21,13 @@ import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,9 +99,6 @@ public class BeanUtilsBean{
 
     /** Used to access properties */
     private final PropertyUtilsBean propertyUtilsBean;
-
-    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
-    private static final Method     INIT_CAUSE_METHOD = getInitCauseMethod();
 
     // --------------------------------------------------------- Constuctors
 
@@ -1106,28 +1103,6 @@ public class BeanUtilsBean{
     }
 
     /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     *
-     * @param throwable
-     *            The throwable.
-     * @param cause
-     *            The cause of the throwable.
-     * @return true if the cause was initialized, otherwise false.
-     * @since 1.8.0
-     */
-    public boolean initCause(final Throwable throwable,final Throwable cause){
-        if (INIT_CAUSE_METHOD != null && cause != null){
-            try{
-                INIT_CAUSE_METHOD.invoke(throwable, new Object[] { cause });
-                return true;
-            }catch (final Throwable e){
-                return false; // can't initialize cause
-            }
-        }
-        return false;
-    }
-
-    /**
      * <p>
      * Convert the value to an object of the specified class (if
      * possible).
@@ -1165,28 +1140,6 @@ public class BeanUtilsBean{
      */
     private Object convertForCopy(final Object value,final Class<?> type){
         return (value != null) ? convert(value, type) : value;
-    }
-
-    /**
-     * Returns a <code>Method<code> allowing access to
-     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
-     * or <code>null</code> if the method
-     * does not exist.
-     *
-     * @return A <code>Method<code> for <code>Throwable.initCause</code>, or
-     *         <code>null</code> if unavailable.
-     */
-    private static Method getInitCauseMethod(){
-        try{
-            final Class<?>[] paramsClasses = new Class<?>[] { Throwable.class };
-            return Throwable.class.getMethod("initCause", paramsClasses);
-        }catch (final NoSuchMethodException e){
-            LOGGER.warn("Throwable does not have initCause() method in JDK 1.3");
-            return null;
-        }catch (final Throwable e){
-            LOGGER.warn("Error getting the Throwable initCause() method", e);
-            return null;
-        }
     }
 
     /**

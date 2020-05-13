@@ -79,7 +79,6 @@ public class ConvertingWrapDynaBean extends WrapDynaBean{
             throw new IllegalArgumentException("Error setting property '" + name + "' nested exception - " + cause);
         }catch (final Throwable t){
             final IllegalArgumentException iae = new IllegalArgumentException("Error setting property '" + name + "', exception - " + t);
-            BeanUtils.initCause(iae, t);
             throw iae;
         }
 

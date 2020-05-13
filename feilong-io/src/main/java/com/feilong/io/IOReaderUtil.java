@@ -22,7 +22,6 @@ import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
-import static org.apache.commons.io.IOUtils.EOF;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.File;
@@ -39,7 +38,6 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -53,7 +51,7 @@ import com.feilong.validator.ValidatorUtil;
  * focus 在文件读取以及解析.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.io.IOUtils
+ * @see com.feilong.lib.io.IOUtils
  * @since 1.0.6
  */
 public final class IOReaderUtil{
@@ -114,7 +112,7 @@ public final class IOReaderUtil{
      * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
-     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
      * @see #readToString(File, String)
      * @since 2.1.0
      */
@@ -161,7 +159,7 @@ public final class IOReaderUtil{
      * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
-     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
      * @see #readToString(File, String)
      * @since 1.0.8
      * @since 1.14.0 rename from readFileToString
@@ -217,7 +215,7 @@ public final class IOReaderUtil{
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
-     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
      * @since 1.14.0 rename from readFileToString
      */
@@ -274,7 +272,7 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>fileInputStream</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
      * @since 1.14.0 rename from getContent
      */
@@ -300,7 +298,7 @@ public final class IOReaderUtil{
         FileChannel fileChannel = fileInputStream.getChannel();
         try{
             StringBuilder sb = new StringBuilder(capacity);
-            while (fileChannel.read(byteBuffer) != EOF){
+            while (fileChannel.read(byteBuffer) != IOUtil.EOF){
                 // 反转此缓冲区
                 byteBuffer.flip();
                 sb.append(charset.decode(byteBuffer));
@@ -365,7 +363,7 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.io.IOUtils#toString(InputStream, String)
+     * @see com.feilong.lib.io.IOUtils#toString(InputStream, String)
      * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.3
      * @since 1.14.0 rename from getContent
@@ -380,13 +378,11 @@ public final class IOReaderUtil{
         }
         //---------------------------------------------------------------
         try{
-            String result = IOUtils.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
+            String result = InputStreamUtil.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
             if (LOGGER.isInfoEnabled()){
                 LOGGER.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDuration(beginDate));
             }
             return result;
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
         }finally{
             // 用完关闭流 是个好习惯,^_^
             IOUtil.closeQuietly(inputStream);

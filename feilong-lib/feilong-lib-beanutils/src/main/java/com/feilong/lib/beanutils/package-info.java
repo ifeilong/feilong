@@ -551,7 +551,7 @@
  *
  * <p>
  * To support this use case, the <em>BeanUtils</em> package provides the
- * {@link com.feilong.lib.beanutils.DynaBean} interface, which must be implemented by a
+ * {@link org.apache.commons.beanutils.DynaBean} interface, which must be implemented by a
  * bean class actually implementing the interface's methods, and the associated
  * {@link com.feilong.lib.beanutils.DynaClass} interface that defines the set of
  * properties supported by a particular group of DynaBeans, in much the same way
@@ -777,12 +777,12 @@
  *
  * <ul>
  * <li>1. <a href="#LazyDynaBean">LazyDynaBean</a> - A <i>Lazy</i>
- * {@link com.feilong.lib.beanutils.DynaBean}</li>
+ * {@link org.apache.commons.beanutils.DynaBean}</li>
  * <li>2. <a href="#LazyDynaMap">LazyDynaMap</a> - A <i>light weight</i>
- * {@link com.feilong.lib.beanutils.DynaBean} facade to a Map
+ * {@link org.apache.commons.beanutils.DynaBean} facade to a Map
  * with <i>lazy</i> map/list processing</li>
  * <li>3. <a href="#LazyDynaList">LazyDynaList</a> - A <i>lazy list</i>
- * for {@link com.feilong.lib.beanutils.DynaBean DynaBean's},
+ * for {@link org.apache.commons.beanutils.DynaBean DynaBean's},
  * <code>java.util.Map</code>'s or POJO beans.</li>
  * <li>4. <a href="#LazyDynaClass">LazyDynaClass</a> - A
  * {@link com.feilong.lib.beanutils.MutableDynaClass} implementation.</li>
@@ -805,14 +805,14 @@
  * enough to accomodate the <code>index</code> being set then the <code>List</code> or
  * <code>Array</code> is automatically <i>grown</i> so that it is.</li>
  * <li><strong><i>Lazy</i> List/Array instantiation</strong> - if an <i>indexed</i>
- * property doesn't exist then calling the {@link com.feilong.lib.beanutils.DynaBean DynaBean's}
+ * property doesn't exist then calling the {@link org.apache.commons.beanutils.DynaBean DynaBean's}
  * <i>indexed</i> property getter/setter methods (i.e. <code>get(name, index)</code> or
  * <code>set(name, index, value)</code>) results in either a new <code>List</code>
  * or <code>Array</code> being instantiated. If the indexed property has not been
  * defined in the DynaClass then it is automatically added and a default <code>List</code>
  * implementation instantiated.</li>
  * <li><strong><i>Lazy</i> Map instantiation</strong> - if a <i>mapped</i>
- * property doesn't exist then calling the {@link com.feilong.lib.beanutils.DynaBean DynaBean's}
+ * property doesn't exist then calling the {@link org.apache.commons.beanutils.DynaBean DynaBean's}
  * <i>mapped</i> property getter/setter methods (i.e. <code>get(name, key)</code> or
  * <code>set(name, key, value)</code>) results in a new <code>Map</code>
  * being instantiated. If the mapped property has not been defined in the DynaClass
@@ -881,7 +881,7 @@
  *
  * <p>
  * <strong>3. {@link com.feilong.lib.beanutils.LazyDynaList}</strong>
- * is <i>lazy list</i> for {@link com.feilong.lib.beanutils.DynaBean DynaBeans}
+ * is <i>lazy list</i> for {@link org.apache.commons.beanutils.DynaBean DynaBeans}
  * <code>java.util.Map</code>'s or POJO beans. See the <a href="LazyDynaList.html">Javadoc</a>
  * for more details and example usage.
  * </p>

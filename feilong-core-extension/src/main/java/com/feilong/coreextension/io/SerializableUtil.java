@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.nio.charset.Charset;
 
 import org.apache.commons.lang3.SerializationException;
 
@@ -168,7 +167,7 @@ public final class SerializableUtil{
      * @param serializableString
      *            the serializable string
      * @return the t
-     * @see org.apache.commons.io.IOUtils#toInputStream(String, Charset)
+     * @see "com.feilong.lib.io.IOUtils#toInputStream(String, Charset)"
      * @see org.apache.commons.lang3.SerializationUtils#deserialize(InputStream)
      * @deprecated 转字符串值得商榷
      */

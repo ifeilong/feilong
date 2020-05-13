@@ -16,6 +16,8 @@
  */
 package com.feilong.lib.beanutils;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * Decorates a {@link DynaBean} to provide <code>Map</code> behavior.

@@ -21,11 +21,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.ezmorph.MorphException;

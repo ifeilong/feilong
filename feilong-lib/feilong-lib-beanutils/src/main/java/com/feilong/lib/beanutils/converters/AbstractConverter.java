@@ -22,7 +22,6 @@ import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.Converter;
@@ -298,7 +297,6 @@ public abstract class AbstractConverter implements Converter{
                 LOGGER.debug("    Throwing ConversionException: " + msg);
                 LOGGER.debug("    " + DEFAULT_CONFIG_MSG);
             }
-            BeanUtils.initCause(cex, cause);
         }
 
         throw cex;

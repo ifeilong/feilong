@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * A base class for decorators providing <code>Map</code> behavior on

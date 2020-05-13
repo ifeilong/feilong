@@ -23,12 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.ezmorph.MorphException;

@@ -23,9 +23,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.beanutils.BasicDynaClass;
 import com.feilong.lib.beanutils.BeanUtilsBean;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 

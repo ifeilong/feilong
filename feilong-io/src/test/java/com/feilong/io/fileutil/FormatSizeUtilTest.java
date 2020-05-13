@@ -89,7 +89,7 @@ public class FormatSizeUtilTest extends AbstractTest{
         LOGGER.debug(FileUtil.formatSize(8000222200333223001L));
         LOGGER.debug(FileUtil.formatSize(898152));
         LOGGER.debug(FileUtil.formatSize(8981528));
-        LOGGER.debug(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+        //LOGGER.debug(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
     }
 
     /**

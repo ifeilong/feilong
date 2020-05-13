@@ -22,19 +22,19 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import java.io.File;
 import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.io.FilenameUtils;
 
 /**
  * The Class FilenameUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.io.FilenameUtils
+ * @see com.feilong.lib.io.FilenameUtils
  * @since 1.4.0
  */
 public final class FilenameUtil{
@@ -119,7 +119,7 @@ public final class FilenameUtil{
      * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#getName()
-     * @see org.apache.commons.io.FilenameUtils#getName(String)
+     * @see com.feilong.lib.io.FilenameUtils#getName(String)
      */
     public static String getFileName(String fileName){
         Validate.notBlank(fileName, "fileName can't be blank!");
@@ -143,7 +143,7 @@ public final class FilenameUtil{
      *            文件名称
      * @return 获得文件的不带后缀名的名称
      * @see java.lang.String#substring(int, int)
-     * @see org.apache.commons.io.FilenameUtils#getBaseName(String)
+     * @see com.feilong.lib.io.FilenameUtils#getBaseName(String)
      */
     public static String getFilePreName(String fileName){
         return fileName.substring(0, fileName.lastIndexOf('.'));
@@ -186,7 +186,7 @@ public final class FilenameUtil{
      *            文件名称
      * @return 不带. 的后缀,<br>
      *         如果 <code>fileName</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @see org.apache.commons.io.FilenameUtils#getExtension(String)
+     * @see com.feilong.lib.io.FilenameUtils#getExtension(String)
      * @see java.lang.String#substring(int, int)
      * @since 1.4.0
      */
@@ -221,7 +221,7 @@ public final class FilenameUtil{
      *            文件名称
      * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.io.FilenameUtils#getExtension(String)
+     * @see com.feilong.lib.io.FilenameUtils#getExtension(String)
      * @see #getExtension(String)
      * @since 1.7.1
      */
@@ -421,7 +421,7 @@ public final class FilenameUtil{
      * @param fileName
      *            the file name
      * @return true, if successful
-     * @see org.apache.commons.io.FilenameUtils#indexOfExtension(String)
+     * @see com.feilong.lib.io.FilenameUtils#indexOfExtension(String)
      * @since 1.4.0
      * @since 1.11.0 change to private
      */

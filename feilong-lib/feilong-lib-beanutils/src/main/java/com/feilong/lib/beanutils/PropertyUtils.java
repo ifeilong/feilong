@@ -22,6 +22,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * Utility methods for using Java Reflection APIs to facilitate generic
@@ -40,98 +42,6 @@ import java.util.Map;
 
 public class PropertyUtils{
 
-    // ----------------------------------------------------- Manifest Constants
-
-    /**
-     * The delimiter that preceeds the zero-relative subscript for an
-     * indexed reference.
-     *
-     * @deprecated The notation used for property name expressions is now
-     *             dependant on the {@link com.feilong.lib.beanutils.expression.Resolver}
-     *             implementation being used.
-     */
-    @Deprecated
-    public static final char INDEXED_DELIM  = '[';
-
-    /**
-     * The delimiter that follows the zero-relative subscript for an
-     * indexed reference.
-     *
-     * @deprecated The notation used for property name expressions is now
-     *             dependant on the {@link com.feilong.lib.beanutils.expression.Resolver}
-     *             implementation being used.
-     */
-    @Deprecated
-    public static final char INDEXED_DELIM2 = ']';
-
-    /**
-     * The delimiter that preceeds the key of a mapped property.
-     *
-     * @deprecated The notation used for property name expressions is now
-     *             dependant on the {@link com.feilong.lib.beanutils.expression.Resolver}
-     *             implementation being used.
-     */
-    @Deprecated
-    public static final char MAPPED_DELIM   = '(';
-
-    /**
-     * The delimiter that follows the key of a mapped property.
-     *
-     * @deprecated The notation used for property name expressions is now
-     *             dependant on the {@link com.feilong.lib.beanutils.expression.Resolver}
-     *             implementation being used.
-     */
-    @Deprecated
-    public static final char MAPPED_DELIM2  = ')';
-
-    /**
-     * The delimiter that separates the components of a nested reference.
-     *
-     * @deprecated The notation used for property name expressions is now
-     *             dependant on the {@link com.feilong.lib.beanutils.expression.Resolver}
-     *             implementation being used.
-     */
-    @Deprecated
-    public static final char NESTED_DELIM   = '.';
-
-    // ------------------------------------------------------- Static Variables
-
-    /**
-     * The debugging detail level for this component.
-     *
-     * Note that this static variable will have unexpected side-effects if
-     * this class is deployed in a shared classloader within a container.
-     * However as it is actually completely ignored by this class due to its
-     * deprecated status, it doesn't do any actual harm.
-     *
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    private static int       debug          = 0;
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * 
-     * @return debug property
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    public static int getDebug(){
-        return (debug);
-    }
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * 
-     * @param newDebug
-     *            debug property
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    public static void setDebug(final int newDebug){
-        debug = newDebug;
-    }
-
     // --------------------------------------------------------- Public Methods
 
     /**
@@ -146,9 +56,7 @@ public class PropertyUtils{
      * @see PropertyUtilsBean#clearDescriptors
      */
     public static void clearDescriptors(){
-
         PropertyUtilsBean.getInstance().clearDescriptors();
-
     }
 
     /**
@@ -222,7 +130,6 @@ public class PropertyUtils{
      */
     public static void copyProperties(final Object dest,final Object orig)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         PropertyUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
@@ -255,7 +162,6 @@ public class PropertyUtils{
      */
     public static Map<String, Object> describe(final Object bean)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return (PropertyUtilsBean.getInstance().describe(bean));
 
     }
@@ -296,9 +202,7 @@ public class PropertyUtils{
      */
     public static Object getIndexedProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return (PropertyUtilsBean.getInstance().getIndexedProperty(bean, name));
-
     }
 
     /**
@@ -338,7 +242,6 @@ public class PropertyUtils{
      */
     public static Object getIndexedProperty(final Object bean,final String name,final int index)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return (PropertyUtilsBean.getInstance().getIndexedProperty(bean, name, index));
     }
 
@@ -408,9 +311,7 @@ public class PropertyUtils{
      */
     public static Object getMappedProperty(final Object bean,final String name,final String key)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return PropertyUtilsBean.getInstance().getMappedProperty(bean, name, key);
-
     }
 
     /**

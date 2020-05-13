@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.DynaBean;
+import org.apache.commons.beanutils.DynaBean;
 
 
 /**

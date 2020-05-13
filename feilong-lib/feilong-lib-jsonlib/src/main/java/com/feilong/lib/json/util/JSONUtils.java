@@ -24,7 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.DynaBean;
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.ezmorph.MorphUtils;
 import com.feilong.lib.ezmorph.MorpherRegistry;
 import com.feilong.lib.ezmorph.bean.MorphDynaBean;

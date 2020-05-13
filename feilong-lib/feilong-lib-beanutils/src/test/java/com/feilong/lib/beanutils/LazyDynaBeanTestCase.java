@@ -22,8 +22,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.beanutils.ConversionException;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.LazyDynaBean;
 import com.feilong.lib.beanutils.LazyDynaClass;
 import com.feilong.lib.beanutils.LazyDynaMap;

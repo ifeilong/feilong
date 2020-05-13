@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <h2><i>Lazy</i> DynaBean List.</h2>
  *

@@ -25,10 +25,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.beanutils.BasicDynaClass;
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.ConvertUtils;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.PropertyUtils;

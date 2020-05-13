@@ -32,7 +32,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
@@ -40,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
+import com.feilong.lib.io.FileUtils;
 
 /**
  * {@link File}文件操作.
@@ -70,8 +70,8 @@ import com.feilong.io.entity.FileWriteMode;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.io.File
- * @see org.apache.commons.io.FilenameUtils
- * @see org.apache.commons.io.FileUtils
+ * @see com.feilong.lib.io.FilenameUtils
+ * @see com.feilong.lib.io.FileUtils
  * @since 1.0.0
  */
 public final class FileUtil{
@@ -79,20 +79,39 @@ public final class FileUtil{
     /** The Constant LOGGER. */
     private static final Logger            LOGGER                = LoggerFactory.getLogger(FileUtil.class);
 
+    //---------------------------------------------------------------
+
     /**
      * The number of bytes in a kilobyte.
      */
-    public static final long               ONE_KB                = 1024;
+    public static final Long               ONE_KB                = 1024L;
+
+    /**
+     * The number of bytes in a megabyte.
+     */
+    public static final long               ONE_MB                = ONE_KB * ONE_KB;
+
+    /**
+     * The number of bytes in a gigabyte.
+     */
+    public static final long               ONE_GB                = ONE_KB * ONE_MB;
+
+    /**
+     * The number of bytes in a terabyte.
+     */
+    public static final long               ONE_TB                = ONE_KB * ONE_GB;
+
+    //---------------------------------------------------------------
 
     /** 默认缓冲大小 10k <code>{@value}</code>. */
     public static final int                DEFAULT_BUFFER_LENGTH = (int) (10 * ONE_KB);
 
     /** 除数和单位的map,必须是有顺序的 从大到小. */
     private static final Map<Long, String> DIVISOR_AND_UNIT_MAP  = toMapUseEntrys(
-                    Pair.of(FileUtils.ONE_TB, "TB"),                                                        //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
-                    Pair.of(FileUtils.ONE_GB, "GB"),                                                        //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
-                    Pair.of(FileUtils.ONE_MB, "MB"),                                                        //(Megabyte,兆字节,简称“兆”)=1024KB, 
-                    Pair.of(ONE_KB, "KB"));                                                                 //(Kilobyte 千字节)=1024B
+                    Pair.of(ONE_TB, "TB"),                                                                 //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
+                    Pair.of(ONE_GB, "GB"),                                                                 //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
+                    Pair.of(ONE_MB, "MB"),                                                                 //(Megabyte,兆字节,简称“兆”)=1024KB, 
+                    Pair.of(ONE_KB, "KB"));                                                                //(Kilobyte 千字节)=1024B
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
@@ -132,8 +151,8 @@ public final class FileUtil{
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getFileInputStream(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
-     * @see org.apache.commons.io.FileUtils#readFileToByteArray(File)
-     * @see org.apache.commons.io.IOUtils#toByteArray(InputStream, int)
+     * @see com.feilong.lib.io.FileUtils#readFileToByteArray(File)
+     * @see com.feilong.lib.io.IOUtils#toByteArray(InputStream, int)
      */
     public static byte[] toByteArray(File file){
         Validate.notNull(file, "file can't be null!");
@@ -226,7 +245,7 @@ public final class FileUtil{
      * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.FileOutputStream#FileOutputStream(String, boolean)
-     * @see org.apache.commons.io.FileUtils#openOutputStream(File, boolean)
+     * @see com.feilong.lib.io.FileUtils#openOutputStream(File, boolean)
      * @since 1.2.0
      */
     //默认 Access Modifiers 权限修饰符
@@ -249,7 +268,7 @@ public final class FileUtil{
      * @param append
      *            if {@code true}, then bytes will be added to the end of the file rather than overwriting
      * @return the file output stream
-     * @see org.apache.commons.io.FileUtils#openOutputStream(File, boolean)
+     * @see com.feilong.lib.io.FileUtils#openOutputStream(File, boolean)
      * @since 1.4.0
      */
     //默认 Access Modifiers 权限修饰符
@@ -307,7 +326,7 @@ public final class FileUtil{
      * @param file
      *            为了进行读取而打开的文件.
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.io.FileUtils#openInputStream(File)
+     * @see com.feilong.lib.io.FileUtils#openInputStream(File)
      */
     public static FileInputStream getFileInputStream(File file){
         Validate.notNull(file, "file can't be null!");
@@ -334,8 +353,8 @@ public final class FileUtil{
      *         <li>如果directory is not Directory,抛出 {@link IllegalArgumentException}</li>
      *         <li>return file.list() ==0</li>
      *         </ul>
-     * @see org.apache.commons.io.FileUtils#sizeOf(File)
-     * @see org.apache.commons.io.FileUtils#sizeOfDirectory(File)
+     * @see com.feilong.lib.io.FileUtils#sizeOf(File)
+     * @see com.feilong.lib.io.FileUtils#sizeOfDirectory(File)
      */
     public static boolean isEmptyDirectory(String directory){
         Validate.notBlank(directory, "directory can't be null/empty!");
@@ -508,7 +527,7 @@ public final class FileUtil{
      *            file or directory to delete, can be {@code null}
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         {@code true} if the file or directory was deleted, otherwise {@code false}
-     * @see org.apache.commons.io.FileUtils#deleteQuietly(File)
+     * @see com.feilong.lib.io.FileUtils#deleteQuietly(File)
      */
     public static boolean deleteFileOrDirectory(File file){
         Validate.notNull(file, "file can't be null!");
@@ -619,7 +638,7 @@ public final class FileUtil{
      *         如果文件不存在,则返回 0L.<br>
      *         对于表示特定于系统的实体(比如设备或管道)的路径名,某些操作系统可能返回 0L.
      * @see File#length()
-     * @see org.apache.commons.io.FileUtils#sizeOf(File)
+     * @see com.feilong.lib.io.FileUtils#sizeOf(File)
      */
     public static long getFileSize(File file){
         Validate.notNull(file, "file can't be null!");
@@ -647,7 +666,7 @@ public final class FileUtil{
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getFileSize(File)
      * @see com.feilong.io.FileUtil#formatSize(long)
-     * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
+     * @see "com.feilong.lib.io.FileUtils#byteCountToDisplaySize(long)"
      * @since 1.0.7
      */
     public static String getFileFormatSize(File file){
@@ -685,22 +704,21 @@ public final class FileUtil{
      * </blockquote>
      * 
      * <p>
-     * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数(比如1.99G 显示为1G),apache 论坛上争议比较大
+     * Common-io 2.4{@link com.feilong.lib.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数(比如1.99G 显示为1G),apache 论坛上争议比较大
      * </p>
      * 
      * @param fileSize
      *            文件大小 单位byte
      * @return 如果 {@code fileSize < 0} ,抛出 {@link IllegalArgumentException}<br>
      *         如果 {@code fileSize < } {@link FileUtils#ONE_KB},直接返回 <code>fileSize + "Bytes"</code><br>
-     * @see org.apache.commons.io.FileUtils#ONE_TB
-     * @see org.apache.commons.io.FileUtils#ONE_GB
-     * @see org.apache.commons.io.FileUtils#ONE_MB
-     * @see org.apache.commons.io.FileUtils#ONE_KB
-     * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
+     * @see com.feilong.lib.io.FileUtils#ONE_TB
+     * @see com.feilong.lib.io.FileUtils#ONE_GB
+     * @see com.feilong.lib.io.FileUtils#ONE_MB
+     * @see com.feilong.lib.io.FileUtils#ONE_KB
      */
     public static String formatSize(long fileSize){
         Validate.isTrue(fileSize >= 0, "fileSize :[%s] must >=0");
-        if (fileSize < FileUtils.ONE_KB){
+        if (fileSize < ONE_KB){
             return fileSize + "Bytes";
         }
 
@@ -748,7 +766,7 @@ public final class FileUtil{
      * @return 如果 <code>filePaths</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePaths</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.bean.ConvertUtil#toArray(String[], Class)
-     * @see org.apache.commons.io.FileUtils#toURLs(File[])
+     * @see com.feilong.lib.io.FileUtils#toURLs(File[])
      * @since 1.4.0
      */
     public static URL[] toURLs(String...filePaths){

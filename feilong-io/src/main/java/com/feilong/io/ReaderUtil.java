@@ -21,8 +21,9 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.UncheckedIOException;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
+
+import com.feilong.lib.io.IOUtils;
 
 /**
  * {@link java.io.Reader} 工具类.
@@ -69,9 +70,9 @@ public final class ReaderUtil{
      * @param reader
      *            the reader
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
-     * @see org.apache.commons.io.IOUtils#toString(Reader)
-     * @since 1.10.6 call {@link org.apache.commons.io.IOUtils#toString(Reader)}
+     * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
+     * @see com.feilong.lib.io.IOUtils#toString(Reader)
+     * @since 1.10.6 call {@link com.feilong.lib.io.IOUtils#toString(Reader)}
      */
     public static String toString(Reader reader){
         Validate.notNull(reader, "reader can't be null!");
@@ -92,7 +93,7 @@ public final class ReaderUtil{
      * @param reader
      *            the reader
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
+     * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
      */
     public static String readLine(Reader reader){
         Validate.notNull(reader, "reader can't be null!");

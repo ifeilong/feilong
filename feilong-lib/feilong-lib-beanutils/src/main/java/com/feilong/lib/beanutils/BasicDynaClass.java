@@ -22,6 +22,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * Minimal implementation of the <code>DynaClass</code> interface. Can be

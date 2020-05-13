@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
-package com.feilong.lib.beanutils;
+package org.apache.commons.beanutils;
+
+import com.feilong.lib.beanutils.ConversionException;
+import com.feilong.lib.beanutils.DynaClass;
 
 /**
  * <p>

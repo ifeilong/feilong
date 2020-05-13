@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * Minimal implementation of the <code>DynaBean</code> interface. Can be

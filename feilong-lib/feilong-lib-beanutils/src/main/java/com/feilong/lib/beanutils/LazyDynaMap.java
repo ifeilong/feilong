@@ -18,6 +18,8 @@ package com.feilong.lib.beanutils;
 
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * Provides a <i>light weight</i> <code>DynaBean</code> facade to a <code>Map</code>

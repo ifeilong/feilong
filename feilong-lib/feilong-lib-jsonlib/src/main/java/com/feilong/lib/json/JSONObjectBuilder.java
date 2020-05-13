@@ -20,9 +20,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.json.processors.JsonBeanProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;

@@ -23,11 +23,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.ezmorph.MorphException;

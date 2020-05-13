@@ -22,6 +22,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +30,6 @@ import com.feilong.lib.beanutils.BeanUtilsBean;
 import com.feilong.lib.beanutils.ContextClassLoaderLocal;
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.ConvertUtilsBean;
-import com.feilong.lib.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.beanutils.MappedPropertyDescriptor;

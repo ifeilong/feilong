@@ -25,13 +25,13 @@ import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.io.IOUtils;
 import com.feilong.lib.springframework.core.io.DefaultResourceLoader;
 import com.feilong.lib.springframework.core.io.Resource;
 import com.feilong.lib.springframework.core.io.ResourceLoader;
@@ -98,7 +98,7 @@ public final class InputStreamUtil{
      * @param charsetType
      *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
      * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.io.IOUtils#toInputStream(String, Charset)
+     * @see com.feilong.lib.io.IOUtils#toInputStream(String, Charset)
      * @since 1.12.1
      */
     public static InputStream newByteArrayInputStream(String str,String charsetType){
@@ -169,7 +169,7 @@ public final class InputStreamUtil{
      * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.io.BufferedReader
      * @see java.io.InputStreamReader#InputStreamReader(InputStream, String)
-     * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
+     * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
      */
     public static BufferedReader toBufferedReader(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");

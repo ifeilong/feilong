@@ -17,7 +17,6 @@ package com.feilong.io.filenameutil;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
 
 import com.feilong.io.FilenameUtil;
@@ -37,7 +36,7 @@ public class FilenameUtilTest extends AbstractTest{
     @Test
     public void testGetFilePreName(){
         assertEquals("F:/pie2", FilenameUtil.getFilePreName(FILE_NAME));
-        assertEquals("pie2", FilenameUtils.getBaseName(FILE_NAME));
+        //assertEquals("pie2", FilenameUtils.getBaseName(FILE_NAME));
     }
 
 }

@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.feilong.lib.beanutils.DynaBean;
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.beanutils.LazyDynaBean;
 import com.feilong.lib.beanutils.LazyDynaMap;
 import com.feilong.lib.beanutils.PropertyUtils;

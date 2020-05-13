@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -2193,9 +2194,6 @@ public class PropertyUtilsBean{
                                             // as per https://issues.apache.org/jira/browse/BEANUTILS-224
                                             + " - had objects of type \"" + valueString + "\" but expected signature \"" + expectedString
                                             + "\"");
-            if (!BeanUtils.initCause(e, cause)){
-                LOGGER.error("Method invocation failed", cause);
-            }
             throw e;
         }catch (final IllegalArgumentException cause){
             String valueString = "";
@@ -2227,9 +2225,6 @@ public class PropertyUtilsBean{
                                             // as per https://issues.apache.org/jira/browse/BEANUTILS-224
                                             + " - had objects of type \"" + valueString + "\" but expected signature \"" + expectedString
                                             + "\"");
-            if (!BeanUtils.initCause(e, cause)){
-                LOGGER.error("Method invocation failed", cause);
-            }
             throw e;
 
         }

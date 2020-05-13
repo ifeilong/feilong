@@ -16,6 +16,8 @@
  */
 package com.feilong.lib.beanutils;
 
+import org.apache.commons.beanutils.DynaBean;
+
 /**
  * <p>
  * A <strong>DynaClass</strong> is a simulation of the functionality of

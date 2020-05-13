@@ -176,9 +176,8 @@ public class DefaultResolver implements Resolver{
     public boolean hasNested(final String expression){
         if (expression == null || expression.length() == 0){
             return false;
-        }else{
-            return (remove(expression) != null);
         }
+        return (remove(expression) != null);
     }
 
     /**

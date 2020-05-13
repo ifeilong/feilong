@@ -25,8 +25,6 @@ import java.util.Map;
 
 import javax.activation.MimetypesFileTypeMap;
 
-import org.apache.commons.io.FilenameUtils;
-
 import com.feilong.io.entity.MimeType;
 
 /**
@@ -92,13 +90,13 @@ public final class MimeTypeUtil{
      * @see java.net.URLConnection#getFileNameMap()
      * @see javax.activation.MimetypesFileTypeMap#getContentType(java.io.File)
      * @see java.net.FileNameMap#getContentTypeFor(String)
-     * @see org.apache.commons.io.FilenameUtils#getExtension(String)
+     * @see com.feilong.lib.io.FilenameUtils#getExtension(String)
      * @see java.net.URLConnection#guessContentTypeFromName(String)
      * @see java.net.URLConnection#guessContentTypeFromStream(java.io.InputStream)
      * @see "java.nio.file.Files#probeContentType(java.nio.file.Path)"
      */
     public static String getContentTypeByFileName(String fileName){
-        String extension = FilenameUtils.getExtension(fileName);
+        String extension = FilenameUtil.getExtension(fileName);
         if (isNullOrEmpty(extension)){
             return EMPTY;
         }

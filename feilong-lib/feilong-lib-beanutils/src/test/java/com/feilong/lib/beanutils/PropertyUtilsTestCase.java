@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.beanutils.DynaBean;
+
 import com.feilong.lib.beanutils.priv.PrivateBeanFactory;
 import com.feilong.lib.beanutils.priv.PrivateDirect;
 import com.feilong.lib.beanutils.priv.PublicSubBean;

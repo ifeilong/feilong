@@ -219,31 +219,19 @@ public class BeanPropertyValueEqualsPredicate implements Predicate{
                 LOGGER.warn("WARNING: " + errorMsg + e);
             }else{
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-                if (!BeanUtils.initCause(iae, e)){
-                    LOGGER.error(errorMsg, e);
-                }
                 throw iae;
             }
         }catch (final IllegalAccessException e){
             final String errorMsg = "Unable to access the property provided.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            if (!BeanUtils.initCause(iae, e)){
-                LOGGER.error(errorMsg, e);
-            }
             throw iae;
         }catch (final InvocationTargetException e){
             final String errorMsg = "Exception occurred in property's getter";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            if (!BeanUtils.initCause(iae, e)){
-                LOGGER.error(errorMsg, e);
-            }
             throw iae;
         }catch (final NoSuchMethodException e){
             final String errorMsg = "Property not found.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            if (!BeanUtils.initCause(iae, e)){
-                LOGGER.error(errorMsg, e);
-            }
             throw iae;
         }
 
