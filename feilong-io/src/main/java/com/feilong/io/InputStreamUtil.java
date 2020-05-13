@@ -15,8 +15,8 @@
  */
 package com.feilong.io;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -59,19 +59,20 @@ public final class InputStreamUtil{
     //---------------------------------------------------------------
 
     /**
-     * Return a Resource handle for the specified resource location.
+     * Return a Resource handle for the 指定的资源路径.
+     *
      * <p>
      * The handle should always be a reusable resource descriptor,allowing for multiple {@link Resource#getInputStream()} calls.
      * <p>
+     * 
      * <ul>
-     * <li>Must support fully qualified URLs, e.g. "file:C:/test.dat".</li>
-     * <li>Must support classpath pseudo-URLs, e.g. "classpath:test.dat".</li>
-     * <li>Should support relative file paths, e.g. "WEB-INF/test.dat".</li>
-     * (This will be implementation-specific, typically provided by an ApplicationContext implementation.)
+     * <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     * <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     * <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     * <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
      * </ul>
      * <p>
      * Note that a Resource handle does not imply an existing resource; you need to invoke {@link Resource#exists} to check for existence.
-     *
      *
      * @param location
      *            the url or path
@@ -84,6 +85,13 @@ public final class InputStreamUtil{
         try{
             return resource.getInputStream();
         }catch (IOException e){
+            //class path resource [Users/feilong/workspace/feilong/feilong/feilong-io/src/test/resources/readFileToString.txt] cannot be opened because it does not exist
+            if (e instanceof FileNotFoundException){
+                LOGGER.warn(
+                                "[{}] use DefaultResourceLoader not found,will convert to FileInputStream.Suggest you can try to use file:// or classpath: to improve the parse speed",
+                                location);
+                return FileUtil.getFileInputStream(location);
+            }
             throw new UncheckedIOException("location:[" + location + "]", e);
         }
     }
@@ -153,8 +161,8 @@ public final class InputStreamUtil{
     public static String toString(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
-        BufferedReader bufferedReader = toBufferedReader(inputStream, charsetName);
-        return ReaderUtil.toString(bufferedReader);
+        Reader reader = toBufferedReader(inputStream, charsetName);
+        return ReaderUtil.toString(reader);
     }
 
     //---------------------------------------------------------------
@@ -171,7 +179,7 @@ public final class InputStreamUtil{
      * @see java.io.InputStreamReader#InputStreamReader(InputStream, String)
      * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
      */
-    public static BufferedReader toBufferedReader(InputStream inputStream,String charsetName){
+    public static Reader toBufferedReader(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         try{

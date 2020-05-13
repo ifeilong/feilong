@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2017 the original author or authors.
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,14 +24,13 @@ import java.net.URL;
 /**
  * Interface for a resource descriptor that abstracts from the actual
  * type of underlying resource, such as a file or class path resource.
- *
+ * 
  * <p>
  * An InputStream can be opened for every resource if it exists in
  * physical form, but a URL or File handle can just be returned for
  * certain resources. The actual behavior is implementation-specific.
  *
  * @author Juergen Hoeller
- * @since 28.12.2003
  * @see #getInputStream()
  * @see #getURL()
  * @see #getURI()
@@ -44,6 +43,7 @@ import java.net.URL;
  * @see PathResource
  * @see ByteArrayResource
  * @see InputStreamResource
+ * @since 28.12.2003
  */
 public interface Resource extends InputStreamSource{
 
@@ -53,6 +53,8 @@ public interface Resource extends InputStreamSource{
      * This method performs a definitive existence check, whereas the
      * existence of a {@code Resource} handle only guarantees a valid
      * descriptor handle.
+     *
+     * @return true, if successful
      */
     boolean exists();
 
@@ -64,7 +66,8 @@ public interface Resource extends InputStreamSource{
      * note that actual content reading may still fail when attempted.
      * However, a value of {@code false} is a definitive indication
      * that the resource content cannot be read.
-     * 
+     *
+     * @return true, if is readable
      * @see #getInputStream()
      */
     boolean isReadable();
@@ -75,12 +78,15 @@ public interface Resource extends InputStreamSource{
      * and must be read and closed to avoid resource leaks.
      * <p>
      * Will be {@code false} for typical resource descriptors.
+     *
+     * @return true, if is open
      */
     boolean isOpen();
 
     /**
      * Return a URL handle for this resource.
-     * 
+     *
+     * @return the url
      * @throws IOException
      *             if the resource cannot be resolved as URL,
      *             i.e. if the resource is not available as descriptor
@@ -89,7 +95,8 @@ public interface Resource extends InputStreamSource{
 
     /**
      * Return a URI handle for this resource.
-     * 
+     *
+     * @return the uri
      * @throws IOException
      *             if the resource cannot be resolved as URI,
      *             i.e. if the resource is not available as descriptor
@@ -99,10 +106,8 @@ public interface Resource extends InputStreamSource{
 
     /**
      * Return a File handle for this resource.
-     * 
-     * @throws java.io.FileNotFoundException
-     *             if the resource cannot be resolved as
-     *             absolute file path, i.e. if the resource is not available in a file system
+     *
+     * @return the file
      * @throws IOException
      *             in case of general resolution/reading failures
      * @see #getInputStream()
@@ -111,7 +116,8 @@ public interface Resource extends InputStreamSource{
 
     /**
      * Determine the content length for this resource.
-     * 
+     *
+     * @return the long
      * @throws IOException
      *             if the resource cannot be resolved
      *             (in the file system or as some other known physical resource type)
@@ -120,7 +126,8 @@ public interface Resource extends InputStreamSource{
 
     /**
      * Determine the last-modified timestamp for this resource.
-     * 
+     *
+     * @return the long
      * @throws IOException
      *             if the resource cannot be resolved
      *             (in the file system or as some other known physical resource type)
@@ -144,6 +151,8 @@ public interface Resource extends InputStreamSource{
      * <p>
      * Returns {@code null} if this type of resource does not
      * have a filename.
+     *
+     * @return the filename
      */
     String getFilename();
 
@@ -153,7 +162,8 @@ public interface Resource extends InputStreamSource{
      * <p>
      * Implementations are also encouraged to return this value
      * from their {@code toString} method.
-     * 
+     *
+     * @return the description
      * @see Object#toString()
      */
     String getDescription();

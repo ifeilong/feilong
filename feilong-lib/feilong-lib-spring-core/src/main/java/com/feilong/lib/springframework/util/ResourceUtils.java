@@ -341,9 +341,8 @@ public abstract class ResourceUtils{
                 }
                 return new URL(FILE_URL_PREFIX + jarFile);
             }
-        }else{
-            return jarUrl;
         }
+        return jarUrl;
     }
 
     /**

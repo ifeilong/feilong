@@ -16,6 +16,7 @@
 package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -30,6 +31,12 @@ public class ReadToStringStringFilePathAndCharsetNameTest extends AbstractReadFi
     @Test
     public void testReadFile(){
         String readFileToString = IOReaderUtil.readToString(filePath, UTF8);
+        assertEquals("feilong 我爱你\n" + "feilong", readFileToString);
+    }
+
+    @Test
+    public void testReadFile12(){
+        String readFileToString = IOReaderUtil.readToString(CLASSPATH_URL_PREFIX + "readFileToString.txt", UTF8);
         assertEquals("feilong 我爱你\n" + "feilong", readFileToString);
     }
 

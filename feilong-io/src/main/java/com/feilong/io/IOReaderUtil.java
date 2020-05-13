@@ -107,17 +107,22 @@ public final class IOReaderUtil{
      * 
      * </blockquote>
      *
-     * @param filePath
-     *            the path
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
      * @see #readToString(File, String)
      * @since 2.1.0
      */
-    public static String readToString(String filePath){
-        return readToString(filePath, DEFAULT_CHARSET_NAME);
+    public static String readToString(String location){
+        return readToString(location, DEFAULT_CHARSET_NAME);
     }
 
     /**
@@ -152,28 +157,33 @@ public final class IOReaderUtil{
      * 
      * </blockquote>
      *
-     * @param filePath
-     *            the path
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
      * @see #readToString(File, String)
      * @since 1.0.8
      * @since 1.14.0 rename from readFileToString
      */
-    public static String readToString(String filePath,String charsetName){
-        Validate.notBlank(filePath, "filePath can't be blank!");
+    public static String readToString(String location,String charsetName){
+        Validate.notBlank(location, "location can't be blank!");
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("will read filePath:[{}] to String,use charsetName:[{}]", filePath, charsetName);
+            LOGGER.trace("will read location:[{}] to String,use charsetName:[{}]", location, charsetName);
         }
         //---------------------------------------------------------------
-        File file = new File(filePath);
-        return readToString(file, charsetName);
+        InputStream inputStream = InputStreamUtil.getInputStream(location);
+        return readToString(inputStream, charsetName);
     }
 
     //---------------------------------------------------------------
@@ -392,20 +402,25 @@ public final class IOReaderUtil{
     //---------------------------------------------------------------
 
     /**
-     * 直接解析 {@code filePath} 成 {@link Set}.
+     * 直接解析 {@code location} 成 {@link Set}.
      * 
      * <p>
      * 使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * </p>
      *
-     * @param filePath
-     *            the file path
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.14.0
      */
-    public static Set<String> readToSet(String filePath){
-        return readToSet(filePath, null);
+    public static Set<String> readToSet(String location){
+        return readToSet(location, null);
     }
 
     /**
@@ -452,19 +467,25 @@ public final class IOReaderUtil{
      * 
      * </blockquote>
      *
-     * @param filePath
-     *            the file path
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.12.10
      * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      * @since 1.14.0 rename from read
      */
-    public static Set<String> readToSet(String filePath,ReaderConfig readerConfig){
-        Validate.notBlank(filePath, "filePath can't be blank!");
-        return readToSet(new File(filePath), readerConfig);
+    public static Set<String> readToSet(String location,ReaderConfig readerConfig){
+        Validate.notBlank(location, "location can't be blank!");
+        InputStream inputStream = InputStreamUtil.getInputStream(location);
+        return readToSet(InputStreamUtil.toBufferedReader(inputStream, UTF8), readerConfig);
     }
 
     /**
@@ -634,29 +655,35 @@ public final class IOReaderUtil{
      * 使用 {@link LineNumberReaderResolver}解析文件.
      * 
      * <p>
-     * 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      * 如果 <code>lineNumberReaderResolver</code> 是null,抛出 {@link NullPointerException}<br>
      * </p>
      * 
-     * @param filePath
-     *            the file path
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
      * @param lineNumberReaderResolver
      *            the line number reader resolver
      * @see #resolverFile(File, LineNumberReaderResolver)
      * @since 1.4.1
      */
-    public static void resolverFile(String filePath,LineNumberReaderResolver lineNumberReaderResolver){
-        Validate.notBlank(filePath, "filePath can't be blank!");
+    public static void resolverFile(String location,LineNumberReaderResolver lineNumberReaderResolver){
+        Validate.notBlank(location, "location can't be blank!");
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("will resolverFile filePath:[{}],use lineNumberReaderResolver:[{}]", filePath, lineNumberReaderResolver);
+            LOGGER.trace("will resolverFile location:[{}],use lineNumberReaderResolver:[{}]", location, lineNumberReaderResolver);
         }
         //---------------------------------------------------------------
-        resolverFile(new File(filePath), lineNumberReaderResolver);
+        InputStream inputStream = InputStreamUtil.getInputStream(location);
+        resolverFile(InputStreamUtil.toBufferedReader(inputStream, UTF8), lineNumberReaderResolver);
     }
 
     /**
