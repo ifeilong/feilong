@@ -20,7 +20,6 @@ import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.io.entity.FileWriteMode.COVER;
-import static org.apache.commons.io.IOUtils.EOF;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +36,6 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -163,7 +161,7 @@ public final class IOWriteUtil{
 
         //---------------------------------------------------------------
 
-        InputStream inputStream = IOUtils.toInputStream(content, Charset.forName(useEncode));
+        InputStream inputStream = InputStreamUtil.newByteArrayInputStream(content, useEncode);
         OutputStream outputStream = FileUtil.getFileOutputStream(filePath, useFileWriteMode);
 
         //---------------------------------------------------------------
@@ -407,7 +405,7 @@ public final class IOWriteUtil{
         try (ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
                         WritableByteChannel writableByteChannel = Channels.newChannel(outputStream);){
 
-            while (readableByteChannel.read(byteBuffer) != EOF){
+            while (readableByteChannel.read(byteBuffer) != IOUtil.EOF){
                 byteBuffer.flip();
                 sumSize += writableByteChannel.write(byteBuffer);
                 byteBuffer.clear();
@@ -422,8 +420,7 @@ public final class IOWriteUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            IOUtil.closeQuietly(outputStream);
-            IOUtil.closeQuietly(inputStream);
+            IOUtil.closeQuietly(outputStream, inputStream);
         }
     }
 }

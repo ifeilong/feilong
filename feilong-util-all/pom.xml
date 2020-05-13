@@ -210,9 +210,9 @@
 							<artifactSet>
 								<includes>
 									<include>com.github.ifeilong:*:*</include>
-									<include>org.apache.commons:commons-lang3:*</include>
+							<!-- 		<include>org.apache.commons:commons-lang3:*</include>
 									<include>org.apache.commons:commons-collections4:*</include>
-									<include>commons-io:commons-io:*</include>
+									<include>commons-io:commons-io:*</include> -->
 								</includes>
 							</artifactSet>
 

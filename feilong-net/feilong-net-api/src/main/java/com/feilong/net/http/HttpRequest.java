@@ -175,7 +175,7 @@ public class HttpRequest{
             //对于某些遵循RFC 2396标准的应用来说，它可能不接受查询字符串中出现加号+，认为它是非法字符。
 
             //所以一个安全的举措是URL中统一使用%20来编码空格字符。
-            uri = uri.replaceAll(SPACE, "%20");
+            uri = uri.replaceAll(SPACE, "%20"); //参见 org.springframework.util.ResourceUtils.toURI(String)
         }
         return uri;
     }

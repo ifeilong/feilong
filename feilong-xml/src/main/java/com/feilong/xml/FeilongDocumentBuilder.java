@@ -24,12 +24,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+
+import com.feilong.io.InputStreamUtil;
 
 /**
  * 用来构造 {@link Document}.
@@ -84,7 +85,7 @@ class FeilongDocumentBuilder{
 
                 //普通的xml 字符串
                 if (isXmlString(xmlString)){
-                    InputStream inputStream = IOUtils.toInputStream(xmlString, UTF8);
+                    InputStream inputStream = InputStreamUtil.newByteArrayInputStream(xmlString, UTF8);
                     return DEFAULT_DOCUMENTBUILDER.parse(inputStream);
                 }
                 //---------------------------------------------------------------

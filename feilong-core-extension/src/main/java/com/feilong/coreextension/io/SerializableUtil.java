@@ -26,11 +26,11 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationException;
 
 import com.feilong.core.net.URIUtil;
 import com.feilong.io.IOUtil;
+import com.feilong.io.InputStreamUtil;
 
 /**
  * {@link java.io.Serializable}util.
@@ -177,7 +177,7 @@ public final class SerializableUtil{
         InputStream inputStream = null;
         try{
             String decodeString = URIUtil.encode(serializableString, UTF8);
-            inputStream = IOUtils.toInputStream(decodeString, Charset.forName(ISO_8859_1));
+            inputStream = InputStreamUtil.newByteArrayInputStream(decodeString, ISO_8859_1);
             return org.apache.commons.lang3.SerializationUtils.deserialize(inputStream);
         }finally{
             IOUtil.closeQuietly(inputStream);

@@ -19,14 +19,12 @@ import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.io.IOReaderUtil.readToString;
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.feilong.io.IOWriteUtil;
+import com.feilong.io.InputStreamUtil;
 
 public class WriteDirectoryAndFileTest{
 
@@ -113,11 +111,7 @@ public class WriteDirectoryAndFileTest{
     }
 
     private static InputStream getInputStream(){
-        try{
-            return IOUtils.toInputStream(INPUT_MESSAGE, UTF8);
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
+        return InputStreamUtil.newByteArrayInputStream(INPUT_MESSAGE, UTF8);
     }
 
 }

@@ -20,10 +20,8 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -32,12 +30,10 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.io.FileUtil;
+import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
 
 /**
@@ -116,7 +112,7 @@ public class ExcelWriteUtil{
                     String outputFileName){
         Date beginDate = new Date();
 
-        InputStream inputStream = getInputStream(excelTemplateLocation);
+        InputStream inputStream = InputStreamUtil.getInputStream(excelTemplateLocation);
         write(inputStream, xmlSheetConfigurations, sheetNames, beans, outputFileName);
 
         //---------------------------------------------------------------
@@ -341,59 +337,5 @@ public class ExcelWriteUtil{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Return a Resource handle for the specified resource location.
-     * <p>
-     * The handle should always be a reusable resource descriptor,allowing for multiple {@link Resource#getInputStream()} calls.
-     * <p>
-     * <ul>
-     * <li>Must support fully qualified URLs, e.g. "file:C:/test.dat".</li>
-     * <li>Must support classpath pseudo-URLs, e.g. "classpath:test.dat".</li>
-     * <li>Should support relative file paths, e.g. "WEB-INF/test.dat".</li>
-     * (This will be implementation-specific, typically provided by an ApplicationContext implementation.)
-     * </ul>
-     * <p>
-     * Note that a Resource handle does not imply an existing resource; you need to invoke {@link Resource#exists} to check for existence.
-     *
-     * @param location
-     *            the url or path
-     * @return the resource
-     * @see org.springframework.core.io.DefaultResourceLoader#DefaultResourceLoader()
-     * @see org.springframework.core.io.ResourceLoader
-     */
-    private static Resource getResource(String location){
-        ResourceLoader resourceLoader = new DefaultResourceLoader();
-        return resourceLoader.getResource(location);
-    }
-
-    /**
-     * Return a Resource handle for the specified resource location.
-     * <p>
-     * The handle should always be a reusable resource descriptor,allowing for multiple {@link Resource#getInputStream()} calls.
-     * <p>
-     * <ul>
-     * <li>Must support fully qualified URLs, e.g. "file:C:/test.dat".</li>
-     * <li>Must support classpath pseudo-URLs, e.g. "classpath:test.dat".</li>
-     * <li>Should support relative file paths, e.g. "WEB-INF/test.dat".</li>
-     * (This will be implementation-specific, typically provided by an ApplicationContext implementation.)
-     * </ul>
-     * <p>
-     * Note that a Resource handle does not imply an existing resource; you need to invoke {@link Resource#exists} to check for existence.
-     *
-     *
-     * @param location
-     *            the url or path
-     * @return the input stream
-     * @since 4.2.0
-     */
-    private static InputStream getInputStream(String location){
-        Resource resource = getResource(location);
-        try{
-            return resource.getInputStream();
-        }catch (IOException e){
-            throw new UncheckedIOException("location:[" + location + "]", e);
-        }
-    }
 
 }

@@ -93,6 +93,14 @@ public class CompressZipHandler extends AbstractZipHandler{
         if (willFile.isFile()){
             putArchiveEntry(zipArchiveOutputStream, dirName + fileName);
             IOUtils.copy(FileUtil.getFileInputStream(willFile.getAbsolutePath()), zipArchiveOutputStream);
+
+            //java.io.UncheckedIOException: java.io.IOException: This archive contains unclosed entries.
+            //        Caused by: java.io.IOException: This archive contains unclosed entries.
+            //            at org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream.finish(ZipArchiveOutputStream.java:521)
+            //            at org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream.close(ZipArchiveOutputStream.java:1046)
+
+            //IOWriteUtil.write(FileUtil.getFileInputStream(willFile.getAbsolutePath()), zipArchiveOutputStream);
+
             //关闭zipArchiveOutputStream，完成一个文件的压缩  
             zipArchiveOutputStream.closeArchiveEntry();
             return;

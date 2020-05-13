@@ -32,6 +32,12 @@
 			<artifactId>commons-io</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-spring-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 	</dependencies>
 
 

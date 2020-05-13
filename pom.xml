@@ -498,7 +498,6 @@
 				<version>${version.spring}</version>
 			</dependency>
 
-
 			<!-- **************************************************** -->
 			<!-- java mail -->
 			<!-- <dependency>

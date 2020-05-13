@@ -14,5 +14,6 @@
 		<module>feilong-lib-jsonlib</module>
 		<module>feilong-lib-beanutils</module>
 		<module>feilong-lib-commons-validator</module>
+		<module>feilong-lib-spring-core</module>
 	</modules>
 </project>
