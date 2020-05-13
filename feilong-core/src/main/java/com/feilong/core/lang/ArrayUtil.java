@@ -17,7 +17,7 @@ package com.feilong.core.lang;
 
 import java.lang.reflect.Array;
 
-import org.apache.commons.lang3.Validate;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 数组工具类.
@@ -35,16 +35,16 @@ import org.apache.commons.lang3.Validate;
  * 
  * <blockquote>
  * <ul>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(boolean[], boolean)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(byte[], byte)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(char[], char)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(double[], double)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(float[], float)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(int[], int)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(long[], long)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(short[], short)}</li>
- * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(double[], double, double)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(boolean[], boolean)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(byte[], byte)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(char[], char)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(double[], double)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(float[], float)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(int[], int)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(long[], long)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(Object[], Object)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(short[], short)}</li>
+ * <li>{@link com.feilong.lib.lang3.ArrayUtils#contains(double[], double, double)}</li>
  * </ul>
  * </blockquote>
  * 
@@ -59,7 +59,7 @@ import org.apache.commons.lang3.Validate;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.ArrayUtils
+ * @see com.feilong.lib.lang3.ArrayUtils
  * @since 1.4.0
  */
 public final class ArrayUtil{

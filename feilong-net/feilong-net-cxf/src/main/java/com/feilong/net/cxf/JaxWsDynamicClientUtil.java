@@ -24,7 +24,6 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 import javax.xml.ws.WebServiceException;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.dynamic.DynamicClientFactory;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
@@ -32,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 使用{@link JaxWsDynamicClientFactory} 动态调用 WebService服务.

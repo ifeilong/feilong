@@ -30,7 +30,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +38,7 @@ import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.io.MimeTypeUtil;
 import com.feilong.io.entity.MimeType;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 关于 {@link javax.servlet.http.HttpServletResponse}下载的工具类.

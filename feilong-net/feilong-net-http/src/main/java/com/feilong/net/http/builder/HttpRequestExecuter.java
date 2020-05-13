@@ -16,15 +16,15 @@
 package com.feilong.net.http.builder;
 
 import static com.feilong.core.date.DateUtil.now;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 
+import com.feilong.lib.lang3.Validate;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;

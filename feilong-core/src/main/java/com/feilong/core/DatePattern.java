@@ -207,7 +207,7 @@ import java.util.Date;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see SimpleDateFormat
- * @see org.apache.commons.lang3.time.DateFormatUtils
+ * @see com.feilong.lib.lang3.time.DateFormatUtils
  * @see "org.springframework.format.annotation.DateTimeFormat"
  * @see "java.time.format.DateTimeFormatter"
  * @see <a
@@ -228,7 +228,7 @@ public final class DatePattern{
      * example:<span style="color:green">2012-01-22</span>
      * </p>
      * 
-     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_DATE_FORMAT
+     * @see com.feilong.lib.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_DATE_FORMAT
      * @see "java.time.format.DateTimeFormatter#ISO_LOCAL_DATE"
      * @see <a href="https://www.iso.org/iso-8601-date-and-time-format.html">Date and time format - ISO 8601</a>
      */
@@ -323,7 +323,7 @@ public final class DatePattern{
      * example:<span style="color:green">21:57:36</span>
      * </p>
      * 
-     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_TIME_FORMAT
+     * @see com.feilong.lib.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_TIME_FORMAT
      * @see "java.time.format.DateTimeFormatter#ISO_LOCAL_TIME"
      */
     public static final String COMMON_TIME                                  = "HH:mm:ss";
@@ -465,7 +465,7 @@ public final class DatePattern{
      * </p>
      * 
      * @see Date#toString()
-     * @see org.apache.commons.lang3.time.DateFormatUtils#SMTP_DATETIME_FORMAT
+     * @see com.feilong.lib.lang3.time.DateFormatUtils#SMTP_DATETIME_FORMAT
      */
     public static final String TO_STRING_STYLE                              = "EEE MMM dd HH:mm:ss zzz yyyy";
 

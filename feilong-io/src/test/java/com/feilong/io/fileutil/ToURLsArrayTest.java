@@ -15,7 +15,7 @@
  */
 package com.feilong.io.fileutil;
 
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 
 import org.junit.Test;
 

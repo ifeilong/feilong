@@ -23,11 +23,10 @@ import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.csv.entity.BeanCsvConfig;
 import com.feilong.csv.entity.CsvColumnEntity;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * The Class CsvColumnEntityListBuilder.
@@ -55,7 +54,7 @@ public class CsvColumnEntityListBuilder{
      *            the bean csv config
      * @return the csv column entity list
      * @see com.feilong.core.lang.reflect.FieldUtil#getAllFieldList(Class, String...)
-     * @see org.apache.commons.lang3.reflect.FieldUtils#getAllFieldsList(Class)
+     * @see com.feilong.lib.lang3.reflect.FieldUtils#getAllFieldsList(Class)
      * @since 1.7.1
      */
     public static <T> List<CsvColumnEntity> build(BeanCsvConfig<T> beanCsvConfig){

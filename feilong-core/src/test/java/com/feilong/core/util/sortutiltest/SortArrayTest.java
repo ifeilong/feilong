@@ -19,8 +19,9 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortArray;
 import static org.junit.Assert.assertArrayEquals;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
+
+import com.feilong.lib.lang3.ArrayUtils;
 
 /**
  * The Class SortUtilSortArrayTest.

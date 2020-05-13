@@ -15,7 +15,7 @@
  */
 package com.feilong.taglib.display.sensitive;
 
-import org.apache.commons.lang3.Validate;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 敏感词配置相关.

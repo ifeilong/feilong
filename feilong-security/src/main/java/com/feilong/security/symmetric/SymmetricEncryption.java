@@ -16,18 +16,18 @@
 package com.feilong.security.symmetric;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 import static com.feilong.security.symmetric.LogBuilder.errorMessage;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.security.Key;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
 import com.feilong.security.symmetric.builder.DefaultKeyBuilder;

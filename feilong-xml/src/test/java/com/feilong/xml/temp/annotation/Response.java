@@ -2,9 +2,8 @@ package com.feilong.xml.temp.annotation;
 
 import java.sql.Timestamp;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("Response")

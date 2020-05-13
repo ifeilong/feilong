@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.json.processors.JsonBeanProcessor;
@@ -32,6 +31,7 @@ import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 

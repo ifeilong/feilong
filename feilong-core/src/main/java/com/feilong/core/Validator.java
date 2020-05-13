@@ -21,9 +21,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.lib.collection4.CollectionUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 判断给定的对象是否是null或者empty.
@@ -42,7 +41,7 @@ import com.feilong.lib.collection4.CollectionUtils;
  * <blockquote>
  * <ol>
  * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
- * {@link org.apache.commons.lang3.StringUtils#isBlank(CharSequence)};</li>
+ * {@link com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)};</li>
  * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
  * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
  * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
@@ -57,18 +56,18 @@ import com.feilong.lib.collection4.CollectionUtils;
  * @see Collection#isEmpty()
  * @see Enumeration#hasMoreElements()
  * @see Iterator#hasNext()
- * @see org.apache.commons.lang3.Validate
- * @see org.apache.commons.lang3.StringUtils#isBlank(CharSequence)
- * @see org.apache.commons.lang3.StringUtils#isEmpty(CharSequence)
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(byte[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(boolean[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(char[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(int[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(long[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(short[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(float[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(double[])
- * @see org.apache.commons.lang3.ArrayUtils#isEmpty(Object[])
+ * @see com.feilong.lib.lang3.Validate
+ * @see com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)
+ * @see com.feilong.lib.lang3.StringUtils#isEmpty(CharSequence)
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(byte[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(boolean[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(char[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(int[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(long[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(short[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(float[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(double[])
+ * @see com.feilong.lib.lang3.ArrayUtils#isEmpty(Object[])
  * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
  * @see com.feilong.lib.collection4.CollectionUtils#isEmpty(Collection)
  * @see com.feilong.lib.collection4.CollectionUtils#isNotEmpty(Collection)
@@ -146,7 +145,7 @@ public final class Validator{
      * <blockquote>
      * <ol>
      * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
-     * {@link org.apache.commons.lang3.StringUtils#isBlank(CharSequence)};</li>
+     * {@link com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)};</li>
      * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
      * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
@@ -162,7 +161,7 @@ public final class Validator{
      *         如果是empty也返回true<br>
      *         其他情况返回false<br>
      * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
-     * @see org.apache.commons.lang3.StringUtils#isBlank(CharSequence)
+     * @see com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)
      */
     public static boolean isNullOrEmpty(Object value){
         if (null == value){
@@ -196,7 +195,7 @@ public final class Validator{
      * <blockquote>
      * <ol>
      * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
-     * {@link org.apache.commons.lang3.StringUtils#isBlank(CharSequence)};</li>
+     * {@link com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)};</li>
      * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
      * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>

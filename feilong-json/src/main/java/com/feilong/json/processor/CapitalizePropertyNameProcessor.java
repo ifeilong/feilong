@@ -15,9 +15,8 @@
  */
 package com.feilong.json.processor;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 将指定类型下面所有属性名字<b>首字母变大写</b>的处理器.

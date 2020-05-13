@@ -24,15 +24,15 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.feilong.lib.beanutils.DynaClass;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.ezmorph.MorphException;
 import com.feilong.lib.ezmorph.MorphUtils;
 import com.feilong.lib.ezmorph.MorpherRegistry;
+import com.feilong.lib.lang3.builder.EqualsBuilder;
+import com.feilong.lib.lang3.builder.HashCodeBuilder;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
 
 /**
  * The Class MorphDynaClass.

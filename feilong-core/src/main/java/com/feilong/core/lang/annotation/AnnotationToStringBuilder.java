@@ -17,7 +17,7 @@ package com.feilong.core.lang.annotation;
 
 import java.lang.annotation.Annotation;
 
-import org.apache.commons.lang3.StringUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 将 {@link Annotation} 转成 {@link String} 的接口.
@@ -25,9 +25,9 @@ import org.apache.commons.lang3.StringUtils;
  * @param <T>
  *            the generic type
  * 
- * @see org.apache.commons.lang3.AnnotationUtils#toString(Annotation)
- * @see org.apache.commons.lang3.builder.Builder
- * @see org.apache.commons.lang3.builder.ToStringBuilder
+ * @see com.feilong.lib.lang3.AnnotationUtils#toString(Annotation)
+ * @see com.feilong.lib.lang3.builder.Builder
+ * @see com.feilong.lib.lang3.builder.ToStringBuilder
  * @since 1.10.4
  */
 public interface AnnotationToStringBuilder<T extends Annotation> {

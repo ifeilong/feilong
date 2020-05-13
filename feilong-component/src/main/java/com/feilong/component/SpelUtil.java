@@ -19,11 +19,12 @@ import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.ParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+
+import com.feilong.lib.lang3.Validate;
 
 /**
  * Spring Expression Language 工具类.

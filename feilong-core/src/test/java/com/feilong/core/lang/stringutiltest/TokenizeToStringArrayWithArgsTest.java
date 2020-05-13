@@ -16,7 +16,7 @@
 package com.feilong.core.lang.stringutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;

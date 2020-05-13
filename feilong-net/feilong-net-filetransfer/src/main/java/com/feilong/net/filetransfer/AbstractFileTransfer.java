@@ -19,7 +19,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.io.entity.FileType.DIRECTORY;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +28,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +37,7 @@ import com.feilong.io.FilenameUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

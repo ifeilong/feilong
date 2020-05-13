@@ -18,6 +18,7 @@ package com.feilong.servlet.http;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION_TYPE;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_MESSAGE;
@@ -35,7 +36,6 @@ import static com.feilong.servlet.http.RequestAttributes.INCLUDE_QUERY_STRING;
 import static com.feilong.servlet.http.RequestAttributes.INCLUDE_REQUEST_URI;
 import static com.feilong.servlet.http.RequestAttributes.INCLUDE_SERVLET_PATH;
 import static com.feilong.servlet.http.entity.RequestLogSwitch.NORMAL;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -43,11 +43,10 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.builder.Builder;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.MapUtil;
+import com.feilong.lib.lang3.builder.Builder;
 import com.feilong.servlet.http.entity.RequestIdentity;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
 
@@ -55,8 +54,8 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * 基于 {@link RequestLogSwitch} ,构造需要输出的Map,以便输出 request log.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.builder.Builder
- * @see org.apache.commons.lang3.builder.HashCodeBuilder
+ * @see com.feilong.lib.lang3.builder.Builder
+ * @see com.feilong.lib.lang3.builder.HashCodeBuilder
  * @since 1.4.0
  * @since 1.10.6 调整访问权限
  */

@@ -15,9 +15,8 @@
  */
 package com.feilong.io.filenameutil;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.feilong.io.FilenameUtil;
+import com.feilong.lib.lang3.ArrayUtils;
 
 /**
  * The Class FilenameUtilTest.

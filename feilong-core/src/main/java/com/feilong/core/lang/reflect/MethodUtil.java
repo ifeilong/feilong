@@ -17,12 +17,12 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.reflect.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.reflect.MethodUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -42,9 +42,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ol>
  * 
  * <br>
- * 注意,底层调用的是 {@link org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[]) MethodUtils.invokeMethod}
+ * 注意,底层调用的是 {@link com.feilong.lib.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[]) MethodUtils.invokeMethod}
  * ,这个方法会调用
- * {@link org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
+ * {@link com.feilong.lib.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
  * MethodUtils.getMatchingAccessibleMethod}获得最佳匹配方法
  * 
  * <p>
@@ -58,11 +58,11 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * </blockquote>
  * 
- * <h3>关于 {@link org.apache.commons.lang3.reflect.MethodUtils MethodUtils}:</h3>
+ * <h3>关于 {@link com.feilong.lib.lang3.reflect.MethodUtils MethodUtils}:</h3>
  * <blockquote>
  * 
  * <p>
- * 如果你要调用精准的方法,可以使用 {@link org.apache.commons.lang3.reflect.MethodUtils MethodUtils}原生方法:
+ * 如果你要调用精准的方法,可以使用 {@link com.feilong.lib.lang3.reflect.MethodUtils MethodUtils}原生方法:
  * </p>
  * 
  * <ol>
@@ -74,7 +74,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ol>
  * 
  * <p>
- * 当然,你还可以调用 {@link org.apache.commons.lang3.reflect.MethodUtils MethodUtils}其他方法:
+ * 当然,你还可以调用 {@link com.feilong.lib.lang3.reflect.MethodUtils MethodUtils}其他方法:
  * </p>
  * 
  * <ol>
@@ -83,7 +83,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>{@link MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)}</li>
  * <li>{@link MethodUtils#getMethodsListWithAnnotation(Class, Class)} 获得一个类中,指定泛型的方法(集合形式),比较实用</li>
  * <li>{@link MethodUtils#getMethodsWithAnnotation(Class, Class)} 获得一个类中,指定泛型的方法(数组形式),比较实用</li>
- * <li>{@link MethodUtils#getOverrideHierarchy(java.lang.reflect.Method, org.apache.commons.lang3.ClassUtils.Interfaces)}</li>
+ * <li>{@link MethodUtils#getOverrideHierarchy(java.lang.reflect.Method, com.feilong.lib.lang3.ClassUtils.Interfaces)}</li>
  * </ol>
  * 
  * </blockquote>
@@ -145,8 +145,8 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.reflect.MethodUtils
- * @see org.apache.commons.lang3.ClassUtils#getPublicMethod(Class, String, Class...)
+ * @see com.feilong.lib.lang3.reflect.MethodUtils
+ * @see com.feilong.lib.lang3.ClassUtils#getPublicMethod(Class, String, Class...)
  * @see java.util.ServiceLoader jdk1.6 ServiceLoader
  * @since 1.0.7
  */
@@ -256,8 +256,8 @@ public final class MethodUtil{
      *         如果 <code>params</code> 是empty,表示不需要参数<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
-     * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
-     * @see org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
+     * @see com.feilong.lib.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
+     * @see com.feilong.lib.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
      */
     public static <T> T invokeMethod(Object obj,String methodName,Object...params){
         Validate.notNull(obj, "obj can't be null!");
@@ -339,8 +339,8 @@ public final class MethodUtil{
      *         如果 <code>obj</code>没有指定的<code>methodName</code>方法,抛出 {@link ReflectException}<br>
      *         如果 <code>parameterTypes</code> 是null,系统内部会使用 empty 的class 数组<br>
      *         如果 <code>parameterTypes</code> 是empty,表示不需要参数<br>
-     * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])
-     * @see org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
+     * @see com.feilong.lib.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])
+     * @see com.feilong.lib.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
@@ -460,7 +460,7 @@ public final class MethodUtil{
      *         如果 <code>parameterTypes</code> 是null,系统内部会使用 empty 的class 数组<br>
      *         如果 <code>parameterTypes</code> 是empty,表示不需要参数<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
-     * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object...)
+     * @see com.feilong.lib.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object...)
      */
     public static <T> T invokeStaticMethod(Class<?> klass,String staticMethodName,Object...params){
         final Class<?>[] parameterTypes = ClassUtil.toClass(params);
@@ -544,7 +544,7 @@ public final class MethodUtil{
      *         如果 <code>klass</code>没有指定的<code>staticMethodName</code>方法,抛出 {@link ReflectException}<br>
      *         如果 <code>parameterTypes</code> 是null,系统内部会使用 empty 的class 数组<br>
      *         如果 <code>parameterTypes</code> 是empty,表示不需要参数<br>
-     * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])
+     * @see com.feilong.lib.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")

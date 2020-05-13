@@ -18,7 +18,7 @@ package com.feilong.formatter.builder;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 
 import java.lang.reflect.Field;
 import java.util.List;

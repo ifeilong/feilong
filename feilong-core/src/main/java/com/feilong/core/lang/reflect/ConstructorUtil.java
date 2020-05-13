@@ -17,10 +17,9 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Constructor;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.reflect.ConstructorUtils;
-
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.reflect.ConstructorUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -66,7 +65,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.reflect.ConstructorUtils
+ * @see com.feilong.lib.lang3.reflect.ConstructorUtils
  * @see "org.springframework.beans.BeanUtils.instantiateClass"
  * @since 1.0.7
  */
@@ -115,7 +114,7 @@ public final class ConstructorUtil{
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
      * @see java.lang.Class#getConstructor(Class...)
      * @see java.lang.reflect.Constructor#newInstance(Object...)
-     * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object...)
+     * @see com.feilong.lib.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object...)
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     public static <T> T newInstance(Class<T> klass,Object...parameterValues){
@@ -166,7 +165,7 @@ public final class ConstructorUtil{
      *            the array of parameter types, {@code null} treated as empty
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         有任何异常(比如 NoSuchMethodException 找不到相关参数的构造函数),将抛出 {@link ReflectException}
-     * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
+     * @see com.feilong.lib.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     public static <T> T newInstance(Class<T> klass,Object[] parameterValues,Class<?>[] parameterTypes){

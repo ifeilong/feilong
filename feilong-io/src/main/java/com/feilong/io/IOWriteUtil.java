@@ -35,12 +35,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.io.entity.FileWriteMode;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 专注于写文件的操作的工具类.

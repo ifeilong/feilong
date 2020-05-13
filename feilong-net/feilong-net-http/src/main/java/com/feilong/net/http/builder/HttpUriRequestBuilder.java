@@ -15,12 +15,12 @@
  */
 package com.feilong.net.http.builder;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.httpurirequest.HttpUriRequestFactory;

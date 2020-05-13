@@ -17,11 +17,11 @@ package com.feilong.net.mail;
 
 import javax.mail.Message;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.net.mail.builer.MessageBuilder;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.util.MessageSendUtil;

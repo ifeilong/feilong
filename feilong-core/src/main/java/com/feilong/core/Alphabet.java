@@ -36,7 +36,7 @@ public final class Alphabet{
     /**
      * 数字和所有的字母.
      * 
-     * @see org.apache.commons.lang3.RandomStringUtils#randomAlphanumeric(int)
+     * @see com.feilong.lib.lang3.RandomStringUtils#randomAlphanumeric(int)
      */
     public static final String DECIMAL_AND_LETTERS                           = UPPERCASE + LOWERCASE + DECIMAL;
 

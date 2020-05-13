@@ -15,9 +15,8 @@
  */
 package com.feilong.json.transformer;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * [json{@code -->}bean],json字符串里面的属性名字可能首字母是大写的,转成bean里面属性首字母小写的转换器.

@@ -17,8 +17,8 @@ package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 import static java.lang.System.lineSeparator;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.List;
 

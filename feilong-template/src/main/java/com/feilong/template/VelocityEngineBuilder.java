@@ -21,12 +21,12 @@ import static com.feilong.core.util.ResourceBundleUtil.toProperties;
 
 import java.util.Properties;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link VelocityEngine} 构造器.

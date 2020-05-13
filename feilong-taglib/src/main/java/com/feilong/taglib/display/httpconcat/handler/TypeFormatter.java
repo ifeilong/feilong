@@ -21,7 +21,7 @@ import static com.feilong.taglib.display.httpconcat.builder.TemplateFactory.TYPE
 
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * type 值格式化.

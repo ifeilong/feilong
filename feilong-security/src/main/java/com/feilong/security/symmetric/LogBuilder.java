@@ -19,12 +19,12 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.StringUtils;
 
 class LogBuilder{
 

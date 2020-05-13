@@ -18,16 +18,16 @@ package com.feilong.taglib.display.httpconcat.builder;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.taglib.TagUtils;
 
 /**

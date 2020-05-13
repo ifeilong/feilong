@@ -17,7 +17,7 @@ package com.feilong.context.signer;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.bean.ConvertUtil;

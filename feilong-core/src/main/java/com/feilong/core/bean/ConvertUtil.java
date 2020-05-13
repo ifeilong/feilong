@@ -18,9 +18,9 @@ package com.feilong.core.bean;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -40,11 +40,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.collections4.Transformer;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.LocaleUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
@@ -71,6 +66,11 @@ import com.feilong.lib.collection4.EnumerationUtils;
 import com.feilong.lib.collection4.IteratorUtils;
 import com.feilong.lib.collection4.MapUtils;
 import com.feilong.lib.collection4.iterators.EnumerationIterator;
+import com.feilong.lib.lang3.ArrayUtils;
+import com.feilong.lib.lang3.LocaleUtils;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.tuple.Pair;
 
 /**
  * 常用类型转换处理.
@@ -340,7 +340,7 @@ public final class ConvertUtil{
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      * @see #convert(Object, Class)
      * @see com.feilong.lib.beanutils.converters.BooleanConverter
-     * @see org.apache.commons.lang3.BooleanUtils
+     * @see com.feilong.lib.lang3.BooleanUtils
      * @see java.lang.Boolean#parseBoolean(String)
      */
     public static Boolean toBoolean(Object toBeConvertedValue){
@@ -446,7 +446,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see com.feilong.lib.beanutils.converters.IntegerConverter
-     * @see org.apache.commons.lang3.math.NumberUtils#toInt(String)
+     * @see com.feilong.lib.lang3.math.NumberUtils#toInt(String)
      * @see #toInteger(Object, Integer)
      */
     public static Integer toInteger(Object toBeConvertedValue){
@@ -535,7 +535,7 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
      * @see com.feilong.lib.beanutils.converters.IntegerConverter
-     * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
+     * @see com.feilong.lib.lang3.ObjectUtils#defaultIfNull(Object, Object)
      * @since 1.6.1
      */
     public static Integer toInteger(Object toBeConvertedValue,Integer defaultValue){
@@ -587,7 +587,7 @@ public final class ConvertUtil{
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
      * @see com.feilong.lib.beanutils.converters.LongConverter
-     * @see org.apache.commons.lang3.math.NumberUtils#toLong(String)
+     * @see com.feilong.lib.lang3.math.NumberUtils#toLong(String)
      */
     public static Long toLong(Object toBeConvertedValue){
         return new LongConverter(null).convert(Long.class, toBeConvertedValue);
@@ -1041,7 +1041,7 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see com.feilong.lib.collection4.IteratorUtils#toString(Iterator)
-     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
+     * @see com.feilong.lib.lang3.StringUtils#join(Iterable, String)
      * @since 1.11.0
      */
     public static String toString(final Collection<?> collection,String connector){
@@ -1101,8 +1101,8 @@ public final class ConvertUtil{
      * @param connector
      *            the connector
      * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
-     * @see org.apache.commons.lang3.builder.ToStringStyle
-     * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
+     * @see com.feilong.lib.lang3.builder.ToStringStyle
+     * @see com.feilong.lib.lang3.StringUtils#join(Object[], String)
      * @since 1.11.0
      */
     public static String toString(Object[] arrays,String connector){
@@ -1213,7 +1213,7 @@ public final class ConvertUtil{
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see com.feilong.lib.collection4.IteratorUtils#toString(Iterator)
-     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
+     * @see com.feilong.lib.lang3.StringUtils#join(Iterable, String)
      * @since 1.8.4 change param order
      */
     public static String toString(final Collection<?> collection,ToStringConfig toStringConfig){
@@ -1306,9 +1306,9 @@ public final class ConvertUtil{
      * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
-     * @see org.apache.commons.lang3.builder.ToStringStyle
-     * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
-     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
+     * @see com.feilong.lib.lang3.builder.ToStringStyle
+     * @see com.feilong.lib.lang3.StringUtils#join(Object[], String)
+     * @see com.feilong.lib.lang3.StringUtils#join(Iterable, String)
      * @since 1.8.4 change param order
      */
     public static String toString(Object[] arrays,ToStringConfig toStringConfig){
@@ -1469,7 +1469,7 @@ public final class ConvertUtil{
      * @param value
      *            the value
      * @return 将 <code>key</code> 和 <code>value</code> 直接转成map
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @see com.feilong.lib.lang3.ArrayUtils#toMap(Object[])
      * @see java.util.Collections#singletonMap(Object, Object)
      * @see "com.google.common.collect.ImmutableMap#of(K, V)"
      * @since 1.7.1
@@ -1550,7 +1550,7 @@ public final class ConvertUtil{
      * @param value2
      *            the value 2
      * @return 将 <code>key1</code> 和 <code>value1</code>/<code>key2</code> 和 <code>value2</code> 直接转成map
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @see com.feilong.lib.lang3.ArrayUtils#toMap(Object[])
      * @see java.util.Collections#singletonMap(Object, Object)
      * @see "com.google.common.collect.ImmutableMap#of(K, V)"
      * @since 1.9.5
@@ -2079,7 +2079,7 @@ public final class ConvertUtil{
      *            the map entry collection
      * @return 如果 <code>mapEntryCollection</code> 是null,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>mapEntryCollection</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @see com.feilong.lib.lang3.ArrayUtils#toMap(Object[])
      * @since 1.7.1
      */
     public static <V, K, E extends Map.Entry<K, V>> Map<K, V> toMap(Collection<E> mapEntryCollection){
@@ -2215,8 +2215,8 @@ public final class ConvertUtil{
      *            the entrys
      * @return 如果 <code>entrys</code> 是null,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>entrys</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
-     * @see org.apache.commons.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
-     * @see org.apache.commons.lang3.tuple.Pair#of(Object, Object)
+     * @see com.feilong.lib.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
+     * @see com.feilong.lib.lang3.tuple.Pair#of(Object, Object)
      * @since 1.7.1
      * @since 1.9.5 change name
      */
@@ -2628,7 +2628,7 @@ public final class ConvertUtil{
      * @param arrays
      *            the arrays
      * @return 如果 <code>arrays</code> 是null,返回null<br>
-     * @see org.apache.commons.lang3.ArrayUtils#toArray(Object...)
+     * @see com.feilong.lib.lang3.ArrayUtils#toArray(Object...)
      * @since commons-lang 3
      * @since 1.6.0
      */
@@ -3136,7 +3136,7 @@ public final class ConvertUtil{
      *         如果 <code>locale instanceof <span style="color:green">Locale</span></code>,返回 <code>(Locale) locale</code><br>
      *         如果 <code>locale instanceof <span style="color:green">String</span></code>,返回 {@link LocaleUtils#toLocale(String)}<br>
      *         其他的类型,将抛出 {@link UnsupportedOperationException}
-     * @see org.apache.commons.lang3.LocaleUtils#toLocale(String)
+     * @see com.feilong.lib.lang3.LocaleUtils#toLocale(String)
      * @since 1.7.2
      */
     public static Locale toLocale(Object locale){

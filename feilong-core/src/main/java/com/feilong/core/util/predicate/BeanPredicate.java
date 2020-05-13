@@ -16,9 +16,9 @@
 package com.feilong.core.util.predicate;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 调用 {@link PropertyUtil#getProperty(Object, String)} 匹配属性值.

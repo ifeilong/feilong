@@ -21,11 +21,12 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.exception.VelocityException;
+
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link VelocityEngine} 解析器.

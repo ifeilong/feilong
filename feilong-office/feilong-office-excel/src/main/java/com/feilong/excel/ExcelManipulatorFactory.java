@@ -18,10 +18,9 @@ package com.feilong.excel;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.CloneUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * A factory for creating ExcelManipulator objects.

@@ -20,11 +20,10 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 
 import javax.net.ssl.HostnameVerifier;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
+import com.feilong.lib.lang3.builder.EqualsBuilder;
+import com.feilong.lib.lang3.builder.HashCodeBuilder;
 
 /**
  * 连接参数配置,比如超时时间,代理等等.

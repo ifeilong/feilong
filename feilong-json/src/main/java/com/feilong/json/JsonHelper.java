@@ -16,12 +16,10 @@
 package com.feilong.json;
 
 import static com.feilong.json.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Iterator;
 import java.util.Map;
-
-import org.apache.commons.lang3.ClassUtils;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
@@ -34,6 +32,7 @@ import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.lang3.ClassUtils;
 
 /**
  * json处理的辅助类.

@@ -22,14 +22,14 @@ import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.collection4.comparators.ReverseComparator;
+import com.feilong.lib.lang3.ObjectUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用每个需要排序的字段创建 {@link Comparator}类.

@@ -40,7 +40,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +51,7 @@ import com.feilong.core.util.transformer.BeanTransformer;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.ListUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.

@@ -21,8 +21,8 @@ import static com.feilong.core.DatePattern.COMMON_TIME;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +49,8 @@ import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -708,7 +708,7 @@ public final class JsonUtil{
      *         否则取到该对象 所有field 的name 和value值 map {@link FieldUtil#getAllFieldNameAndValueMap(Object, String...)} 调用
      *         {@link #format(Object, JavaToJsonConfig)},再次过程中,会处理 {@link SensitiveWords}
      * @see FieldUtil#getAllFieldNameAndValueMap(Object, String...)
-     * @see org.apache.commons.lang3.reflect.FieldUtils#getFieldsListWithAnnotation(Class, Class)
+     * @see com.feilong.lib.lang3.reflect.FieldUtils#getFieldsListWithAnnotation(Class, Class)
      * @since 1.5.6
      */
     public static String formatObjectFieldsNameAndValueMap(Object obj){

@@ -29,9 +29,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.commons.lang3.reflect.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +38,9 @@ import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.reflect.FieldUtils;
+import com.feilong.lib.lang3.reflect.MethodUtils;
 
 /**
  * 专门用来构造 <code>SensitiveWordsPropertyNameAndJsonValueProcessorMap</code> 的构造器.

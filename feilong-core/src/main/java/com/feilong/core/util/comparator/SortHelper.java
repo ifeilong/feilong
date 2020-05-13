@@ -16,13 +16,12 @@
 package com.feilong.core.util.comparator;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.lib.lang3.StringUtils.SPACE;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
-import static org.apache.commons.lang3.StringUtils.SPACE;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 排序的辅助类.

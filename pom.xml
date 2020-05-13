@@ -359,6 +359,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- slf4j-log4j12 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

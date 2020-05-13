@@ -22,13 +22,13 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import java.io.File;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.io.FilenameUtils;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * The Class FilenameUtil.
@@ -212,7 +212,7 @@ public final class FilenameUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果文件没有后缀名, 返回 {@link org.apache.commons.lang3.StringUtils#EMPTY}</li>
+     * <li>如果文件没有后缀名, 返回 {@link com.feilong.lib.lang3.StringUtils#EMPTY}</li>
      * </ol>
      * </blockquote>
      * 

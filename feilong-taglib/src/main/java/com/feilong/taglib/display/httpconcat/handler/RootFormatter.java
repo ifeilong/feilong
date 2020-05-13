@@ -16,11 +16,10 @@
 package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-
-import org.apache.commons.lang3.StringUtils;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * Root 格式化.

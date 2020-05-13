@@ -18,7 +18,7 @@ package com.feilong.net.filetransfer.ftp;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -26,8 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -38,6 +36,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.net.filetransfer.AbstractFileTransfer;
 import com.feilong.net.filetransfer.FileTransferException;
 import com.feilong.tools.slf4j.Slf4jUtil;

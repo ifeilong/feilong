@@ -15,9 +15,8 @@
  */
 package com.feilong.tools.mobile;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 手机号码操作.
@@ -77,7 +76,7 @@ public final class MobileUtil{
      *            11位mobileNumber
      * @return see javadoc
      * 
-     * @see org.apache.commons.lang3.StringUtils#abbreviateMiddle(String, String, int)
+     * @see com.feilong.lib.lang3.StringUtils#abbreviateMiddle(String, String, int)
      */
     public static String getMobileNumberHided(String mobileNumber){
         return getMobileNumberHided(mobileNumber, 4);
@@ -126,7 +125,7 @@ public final class MobileUtil{
      *         </table>
      *         </blockquote>
      * 
-     * @see org.apache.commons.lang3.StringUtils#abbreviateMiddle(String, String, int)
+     * @see com.feilong.lib.lang3.StringUtils#abbreviateMiddle(String, String, int)
      */
     public static String getMobileNumberHided(String mobileNo,int count){
         Validate.notBlank(mobileNo, "mobileNo can't be null/empty!");

@@ -16,14 +16,13 @@
 package com.feilong.xml.xstream.converters;
 
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-import org.apache.commons.lang3.Validate;
-
+import com.feilong.lib.lang3.Validate;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;

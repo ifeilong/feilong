@@ -17,9 +17,8 @@ package com.feilong.formatter;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.formatter.entity.BeanFormatterConfig;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 处理将对象格式化的工具类.

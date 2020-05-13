@@ -17,9 +17,8 @@ package com.feilong.core.lang;
 
 import java.lang.reflect.Modifier;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.core.lang.reflect.ReflectException;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -132,7 +131,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="http://www.cnblogs.com/maokun/p/6771365.html">Class的getName、getSimpleName与getCanonicalName的区别</a>
- * @see org.apache.commons.lang3.ClassUtils
+ * @see com.feilong.lib.lang3.ClassUtils
  * @since 1.0.0
  */
 public final class ClassUtil{
@@ -292,7 +291,7 @@ public final class ClassUtil{
      * @return 如果 <code>klass</code> 是null,返回false<br>
      *         如果 <code>cls</code> 是null,返回false
      * @see java.lang.Class#isAssignableFrom(Class)
-     * @see org.apache.commons.lang3.ClassUtils#isAssignable(Class, Class)
+     * @see com.feilong.lib.lang3.ClassUtils#isAssignable(Class, Class)
      * @since 1.4.0
      */
     public static boolean isAssignableFrom(Class<?> klass,Class<?> cls){
@@ -345,12 +344,12 @@ public final class ClassUtil{
      * @param paramValues
      *            参数值
      * @return 如果 <code>paramValues</code> 是null,返回 null<br>
-     * @see org.apache.commons.lang3.ClassUtils#toClass(Object...)
-     * @see org.apache.commons.lang3.ClassUtils#convertClassNamesToClasses(java.util.List)
+     * @see com.feilong.lib.lang3.ClassUtils#toClass(Object...)
+     * @see com.feilong.lib.lang3.ClassUtils#convertClassNamesToClasses(java.util.List)
      * @since 1.1.1
      */
     public static Class<?>[] toClass(Object...paramValues){
-        return null == paramValues ? null : org.apache.commons.lang3.ClassUtils.toClass(paramValues);
+        return null == paramValues ? null : com.feilong.lib.lang3.ClassUtils.toClass(paramValues);
     }
 
     //---------------------------------------------------------------
@@ -435,8 +434,8 @@ public final class ClassUtil{
      * @see java.lang.ClassLoader#loadClass(String)
      * @see java.lang.Class#forName(String)
      * @see java.lang.Class#forName(String, boolean, ClassLoader)
-     * @see org.apache.commons.lang3.ClassUtils#getClass(String)
-     * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
+     * @see com.feilong.lib.lang3.ClassUtils#getClass(String)
+     * @see com.feilong.lib.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
      * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
      * @since 1.6.2
      */
@@ -445,7 +444,7 @@ public final class ClassUtil{
 
         //---------------------------------------------------------------
         try{
-            return org.apache.commons.lang3.ClassUtils.getClass(className);
+            return com.feilong.lib.lang3.ClassUtils.getClass(className);
         }catch (Exception e){
             throw new ReflectException(Slf4jUtil.format("className:[{}]", className), e);
         }

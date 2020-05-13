@@ -16,13 +16,13 @@
 package com.feilong.net.filetransfer.sftp;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.StringUtils;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;

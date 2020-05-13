@@ -15,17 +15,17 @@
  */
 package com.feilong.xml.temp.annotation;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.test.AbstractTest;
 
 public class Temp extends AbstractTest{

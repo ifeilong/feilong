@@ -17,9 +17,9 @@ package com.feilong.core.bean;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * 将 {@link ConvertUtil#toString(java.util.Collection, ToStringConfig) 集合转成字符串},将{@link ConvertUtil#toString(Object[], ToStringConfig)
@@ -37,8 +37,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.builder.ToStringStyle
- * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
+ * @see com.feilong.lib.lang3.builder.ToStringStyle
+ * @see com.feilong.lib.lang3.StringUtils#join(Object[], String)
  * @since 1.4.0
  */
 public final class ToStringConfig implements Serializable{
@@ -86,7 +86,7 @@ public final class ToStringConfig implements Serializable{
      * 
      * </blockquote>
      * 
-     * @see org.apache.commons.lang3.builder.ToStringStyle#DEFAULT_STYLE
+     * @see com.feilong.lib.lang3.builder.ToStringStyle#DEFAULT_STYLE
      * 
      * @since 1.10.3
      */
@@ -120,7 +120,7 @@ public final class ToStringConfig implements Serializable{
      * 
      * </blockquote>
      * 
-     * @see org.apache.commons.lang3.builder.ToStringStyle#DEFAULT_STYLE
+     * @see com.feilong.lib.lang3.builder.ToStringStyle#DEFAULT_STYLE
      * @since 1.10.3
      */
     public static final ToStringConfig IGNORE_NULL_OR_EMPTY_CONFIG = new ToStringConfig(DEFAULT_CONNECTOR, false);

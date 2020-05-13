@@ -17,8 +17,8 @@ package com.feilong.core.bean.convertutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ToStringConfig.DEFAULT_CONNECTOR;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.lang.System.lineSeparator;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;

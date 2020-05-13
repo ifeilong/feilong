@@ -17,7 +17,7 @@
  * 对 <code>java.lang.reflect</code>包常用类的封装.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.reflect
+ * @see com.feilong.lib.lang3.reflect
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7
  */

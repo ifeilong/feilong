@@ -19,12 +19,12 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 
 import java.io.IOException;
 
-import org.apache.commons.lang3.Validate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.feilong.lib.lang3.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

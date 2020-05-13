@@ -21,9 +21,8 @@ import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link java.lang.System}工具类.
@@ -38,26 +37,26 @@ import com.feilong.core.bean.ConvertUtil;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.encoding <br>
- * {@link org.apache.commons.lang3.SystemUtils#FILE_ENCODING}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#FILE_ENCODING}</td>
  * <td>utf-8</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.separator <br>
- * {@link org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#FILE_SEPARATOR}</td>
  * <td>\\</td>
  * <tr valign="top">
  * <td>java.home <br>
- * {@link org.apache.commons.lang3.SystemUtils#JAVA_HOME}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#JAVA_HOME}</td>
  * <td>D:\\Program Files\\Java\\jdk1.6.0_37\\jre</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.io.tmpdir <br>
- * {@link org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#JAVA_IO_TMPDIR}</td>
  * <td>C:\\Users\\feilong\\AppData\\Local\\Temp\\</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.version <br>
- * {@link org.apache.commons.lang3.SystemUtils#JAVA_VERSION}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#JAVA_VERSION}</td>
  * <td>1.6.0_37</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -67,12 +66,12 @@ import com.feilong.core.bean.ConvertUtil;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>user.dir <br>
- * {@link org.apache.commons.lang3.SystemUtils#USER_DIR}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#USER_DIR}</td>
  * <td>E:\\Workspaces\\feilong\\feilong-platform\\commons\\feilong-core</td>
  * </tr>
  * <tr valign="top">
  * <td>user.home<br>
- * {@link org.apache.commons.lang3.SystemUtils#USER_HOME}</td>
+ * {@link com.feilong.lib.lang3.SystemUtils#USER_HOME}</td>
  * <td>C:\\Users\\feilong</td>
  * </tr>
  * </table>
@@ -311,11 +310,11 @@ import com.feilong.core.bean.ConvertUtil;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.System
- * @see org.apache.commons.lang3.SystemUtils
- * @see org.apache.commons.lang3.SystemUtils#USER_HOME
- * @see org.apache.commons.lang3.SystemUtils#FILE_ENCODING
- * @see org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR
- * @see org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR
+ * @see com.feilong.lib.lang3.SystemUtils
+ * @see com.feilong.lib.lang3.SystemUtils#USER_HOME
+ * @see com.feilong.lib.lang3.SystemUtils#FILE_ENCODING
+ * @see com.feilong.lib.lang3.SystemUtils#FILE_SEPARATOR
+ * @see com.feilong.lib.lang3.SystemUtils#JAVA_IO_TMPDIR
  * 
  * @see "org.springframework.util.SystemPropertyUtils"
  * @since 1.0.7

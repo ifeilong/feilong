@@ -47,13 +47,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.time.DateFormatUtils;
+import com.feilong.lib.lang3.time.DateUtils;
+import com.feilong.lib.lang3.tuple.Pair;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -212,7 +211,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see CalendarUtil
  * @see DatePattern
- * @see org.apache.commons.lang3.time.DateUtils
+ * @see com.feilong.lib.lang3.time.DateUtils
  * @since 1.0.0
  */
 public final class DateUtil{
@@ -346,7 +345,7 @@ public final class DateUtil{
      * @param date
      *            任意时间
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
-     * @see org.apache.commons.lang3.time.DateUtils#truncate(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#truncate(Date, int)
      * @since 1.5.0
      */
     public static Date getFirstDateOfThisDay(Date date){
@@ -601,7 +600,7 @@ public final class DateUtil{
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#YEAR
-     * @see org.apache.commons.lang3.time.DateUtils#addYears(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addYears(Date, int)
      */
     public static Date addYear(Date date,int year){
         return DateUtils.addYears(date, year);
@@ -639,7 +638,7 @@ public final class DateUtil{
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#MONTH
-     * @see org.apache.commons.lang3.time.DateUtils#addMonths(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addMonths(Date, int)
      */
     public static Date addMonth(Date date,int month){
         return DateUtils.addMonths(date, month);
@@ -678,7 +677,7 @@ public final class DateUtil{
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#DAY_OF_MONTH
-     * @see org.apache.commons.lang3.time.DateUtils#addDays(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addDays(Date, int)
      */
     public static Date addDay(Date date,int day){
         // Calendar.DAY_OF_MONTH 它与 Calendar.DATE 是同义词.一个月中第一天的值为 1.
@@ -715,7 +714,7 @@ public final class DateUtil{
      *         如果 <code>week==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
-     * @see org.apache.commons.lang3.time.DateUtils#addWeeks(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addWeeks(Date, int)
      */
     public static Date addWeek(Date date,int week){
         return DateUtils.addWeeks(date, week);
@@ -751,7 +750,7 @@ public final class DateUtil{
      *         如果 <code>hour==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
-     * @see org.apache.commons.lang3.time.DateUtils#addHours(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addHours(Date, int)
      */
     public static Date addHour(Date date,int hour){
         return DateUtils.addHours(date, hour);
@@ -787,7 +786,7 @@ public final class DateUtil{
      *         如果 <code>minute==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
-     * @see org.apache.commons.lang3.time.DateUtils#addMinutes(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addMinutes(Date, int)
      */
     public static Date addMinute(Date date,int minute){
         return DateUtils.addMinutes(date, minute);
@@ -823,7 +822,7 @@ public final class DateUtil{
      *         如果 <code>second==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
-     * @see org.apache.commons.lang3.time.DateUtils#addSeconds(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addSeconds(Date, int)
      */
     public static Date addSecond(Date date,int second){
         return DateUtils.addSeconds(date, second);
@@ -859,7 +858,7 @@ public final class DateUtil{
      *         如果 <code>millisecond==0</code>,那么什么都不做,返回 <code>date</code>,参见 {@link GregorianCalendar#add(int, int)}
      * @throws NullPointerException
      *             如果 <code>date</code> 是<code>null</code>
-     * @see org.apache.commons.lang3.time.DateUtils#addMilliseconds(Date, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#addMilliseconds(Date, int)
      * @since 1.4.1
      */
     public static Date addMillisecond(Date date,int millisecond){
@@ -1248,7 +1247,7 @@ public final class DateUtil{
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.lang3.time.DateFormatUtils#format(Date, String)
+     * @see com.feilong.lib.lang3.time.DateFormatUtils#format(Date, String)
      * @see "org.joda.time.base.AbstractDateTime#toString(String)"
      * @see <a href="http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string">convert-java-util-date-to-string</a>
      * @see <a href="http://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string">change-date-format-in-a-java-string</a>
@@ -1367,7 +1366,7 @@ public final class DateUtil{
      *         如果 <code>datePatterns</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePatterns</code> 是 empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>datePatterns</code> 有元素是 null,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
+     * @see com.feilong.lib.lang3.time.DateUtils#parseDate(String, String...)
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/">java-string-to-date-conversion</a>
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/22180505#22180505">java-string-to-date-
      *      conversion/22180505#22180505</a>
@@ -1418,7 +1417,7 @@ public final class DateUtil{
      * @see GregorianCalendar
      * @see Calendar#setTime(Date)
      * @see Calendar#setTimeInMillis(long)
-     * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
+     * @see com.feilong.lib.lang3.time.DateUtils#toCalendar(Date)
      * @since 1.8.3 remove public
      */
     static Calendar toCalendar(Date date){
@@ -1685,7 +1684,7 @@ public final class DateUtil{
      *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see #toString(Date, String)
-     * @see org.apache.commons.lang3.time.DateUtils#isSameDay(Date, Date)
+     * @see com.feilong.lib.lang3.time.DateUtils#isSameDay(Date, Date)
      * @since 1.0.5 change name from isEqual to isEquals
      */
     public static boolean isEquals(Date date1,Date date2,String datePattern){
@@ -2023,14 +2022,14 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <h3>和 {@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 的区别:
      * </h3>
      * <blockquote>
      * <ol>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
      * </ol>
      * </blockquote>
@@ -2039,7 +2038,7 @@ public final class DateUtil{
      *            开始日期
      * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #formatDuration(Date, Date)
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
@@ -2086,14 +2085,14 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <h3>和 {@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 的区别:
      * </h3>
      * <blockquote>
      * <ol>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
      * </ol>
      * </blockquote>
@@ -2106,7 +2105,7 @@ public final class DateUtil{
      *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
      * @see #formatDuration(long)
      * @see #getIntervalTime(Date, Date)
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
@@ -2137,14 +2136,14 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <h3>和 {@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 的区别:
      * </h3>
      * <blockquote>
      * <ol>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
      * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
      * </ol>
      * </blockquote>
@@ -2157,7 +2156,7 @@ public final class DateUtil{
      * @see #getIntervalHour(long)
      * @see #getIntervalMinute(long)
      * @see #getIntervalSecond(long)
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView

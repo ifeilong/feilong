@@ -15,14 +15,14 @@
  */
 package com.feilong.core.lang.annotation;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.lang.annotation.Annotation;
 
-import org.apache.commons.lang3.AnnotationUtils;
+import com.feilong.lib.lang3.AnnotationUtils;
 
 /**
- * 默认直接调用 {@link org.apache.commons.lang3.AnnotationUtils#toString(Annotation)}.
+ * 默认直接调用 {@link com.feilong.lib.lang3.AnnotationUtils#toString(Annotation)}.
  * 
  * <h3>格式:</h3>
  * 
@@ -43,7 +43,7 @@ import org.apache.commons.lang3.AnnotationUtils;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see org.apache.commons.lang3.AnnotationUtils#toString(Annotation)
+ * @see com.feilong.lib.lang3.AnnotationUtils#toString(Annotation)
  * @since 1.10.4
  */
 public class DefaultAnnotationToStringBuilder<T extends Annotation> implements AnnotationToStringBuilder<T>{

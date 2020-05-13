@@ -17,12 +17,11 @@ package com.feilong.csv;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +34,7 @@ import com.feilong.csv.handler.CsvContentBuilder;
 import com.feilong.csv.handler.DataListBuilder;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.lib.collection4.IterableUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * cvs工具类.

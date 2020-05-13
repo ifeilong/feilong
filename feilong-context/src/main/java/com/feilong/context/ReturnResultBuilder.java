@@ -15,7 +15,7 @@
  */
 package com.feilong.context;
 
-import org.apache.commons.lang3.Validate;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link ReturnResult} 一些工具类.

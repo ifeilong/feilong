@@ -15,7 +15,7 @@
  */
 package com.feilong.net.mail.setter;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;

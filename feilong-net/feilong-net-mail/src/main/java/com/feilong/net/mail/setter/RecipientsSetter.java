@@ -21,9 +21,8 @@ import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.net.mail.entity.MailSenderConfig;
 import com.feilong.net.mail.util.InternetAddressUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;

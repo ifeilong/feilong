@@ -16,18 +16,18 @@
 package com.feilong.context.codecreator;
 
 import static com.feilong.core.date.DateUtil.now;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.SPACE;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.SPACE;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RandomUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 默认的code 生成器.

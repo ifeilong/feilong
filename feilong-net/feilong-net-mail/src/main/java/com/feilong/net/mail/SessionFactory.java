@@ -20,8 +20,7 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Session;
 
-import org.apache.commons.lang3.Validate;
-
+import com.feilong.lib.lang3.Validate;
 import com.feilong.net.mail.builer.AuthenticatorBuilder;
 import com.feilong.net.mail.builer.SessionPropertiesBuilder;
 import com.feilong.net.mail.entity.SessionConfig;

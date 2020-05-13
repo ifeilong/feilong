@@ -19,10 +19,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.collections4.Transformer;
-import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 日期转成字符串的转换器.

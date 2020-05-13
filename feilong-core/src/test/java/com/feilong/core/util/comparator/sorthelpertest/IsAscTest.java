@@ -18,10 +18,10 @@ package com.feilong.core.util.comparator.sorthelpertest;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.SortHelper;
+import com.feilong.lib.lang3.ArrayUtils;
 
 /**
  * The Class IsAscTest.

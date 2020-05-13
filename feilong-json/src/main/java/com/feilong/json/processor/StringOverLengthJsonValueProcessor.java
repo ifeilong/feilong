@@ -15,13 +15,12 @@
  */
 package com.feilong.json.processor;
 
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-
-import org.apache.commons.lang3.Validate;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.json.JsonConfig;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 如果字符串格式jsonvalue的值超过指定的长度 <code>maxLength</code>,将省略显示 <code>overLengthMaskString</code>,以控制输出的字符串长度.

@@ -18,7 +18,7 @@ package com.feilong.core.lang;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
@@ -28,12 +28,11 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.text.StrSubstitutor;
-
 import com.feilong.core.CharsetType;
+import com.feilong.lib.lang3.ArrayUtils;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.text.StrSubstitutor;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -77,7 +76,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <ul>
  * <li>{@link StringUtils#capitalize(String)} 首字母大写</li>
  * <li>{@link StringUtils#uncapitalize(String)} 单词首字母小写</li>
- * <li>{@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)} 如果要使用一段文字,每个单词首字母小写</li>
+ * <li>{@link com.feilong.lib.lang3.text.WordUtils#uncapitalize(String, char...)} 如果要使用一段文字,每个单词首字母小写</li>
  * </ul>
  * </blockquote>
  * 
@@ -167,7 +166,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @see java.util.StringTokenizer
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"
- * @see org.apache.commons.lang3.StringUtils
+ * @see com.feilong.lib.lang3.StringUtils
  * @see "com.google.common.base.Strings"
  * @since 1.4.0
  */
@@ -193,7 +192,7 @@ public final class StringUtil{
      *         or <code>null</code> if the input byte array was <code>null</code>.
      * @see String#String(byte[], String)
      * @see "org.apache.commons.lang3.StringUtils#toString(byte[], String)"
-     * @see org.apache.commons.lang3.StringUtils#toEncodedString(byte[], Charset)
+     * @see com.feilong.lib.lang3.StringUtils#toEncodedString(byte[], Charset)
      * @see "org.apache.commons.codec.binary.StringUtils#newString(byte[], String)"
      * @since 1.3.0
      */
@@ -303,7 +302,7 @@ public final class StringUtil{
      *         如果 <code>searchString</code> 是null,原样返回 <code>text</code><br>
      *         如果 <code>replacement</code> 是null,原样返回 <code>text</code><br>
      * @see java.lang.String#replace(CharSequence, CharSequence)
-     * @see org.apache.commons.lang3.StringUtils#replace(String, String, String)
+     * @see com.feilong.lib.lang3.StringUtils#replace(String, String, String)
      * @since jdk 1.5
      */
     public static String replace(final String text,final String searchString,final String replacement){
@@ -468,8 +467,8 @@ public final class StringUtil{
      *            the values map
      * @return 如果 <code>templateString</code> 是 <code>StringUtils.isEmpty(templateString)</code>,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>valuesMap</code> 是null或者empty,原样返回 <code>templateString</code><br>
-     * @see org.apache.commons.lang3.text.StrSubstitutor#replace(String)
-     * @see org.apache.commons.lang3.text.StrSubstitutor#replace(Object, Map)
+     * @see com.feilong.lib.lang3.text.StrSubstitutor#replace(String)
+     * @see com.feilong.lib.lang3.text.StrSubstitutor#replace(Object, Map)
      * @since 1.1.1
      */
     public static <V> String replace(CharSequence templateString,Map<String, V> valuesMap){
@@ -505,7 +504,7 @@ public final class StringUtil{
      *            从指定索引处 the position to start from,negative means count back from the end of the String by this many characters
      * @return 如果 <code>text</code> 是null,返回 null<br>
      *         An empty ("") String 返回 "".<br>
-     * @see org.apache.commons.lang3.StringUtils#substring(String, int)
+     * @see com.feilong.lib.lang3.StringUtils#substring(String, int)
      * @see #substringLast(String, int)
      */
     public static String substring(final String text,final int beginIndex){
@@ -528,7 +527,7 @@ public final class StringUtil{
      *            长度 {@code >=1}
      * @return 如果 <code>text</code> 是null,返回 null<br>
      *         如果 <code>startIndex + length</code> {@code >} <code>text.length</code>,那么截取 从 startIndex 开始截取,截取到最后
-     * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
+     * @see com.feilong.lib.lang3.StringUtils#substring(String, int, int)
      */
     public static String substring(final String text,int startIndex,int length){
         return StringUtils.substring(text, startIndex, startIndex + length);
@@ -555,7 +554,7 @@ public final class StringUtil{
      *         如果 {@code lastLenth<0},返回 {@link StringUtils#EMPTY}<br>
      *         如果 {@code text.length() <= lastLenth},返回text<br>
      *         否则返回<code> text.substring(text.length() - lastLenth)</code>
-     * @see org.apache.commons.lang3.StringUtils#right(String, int)
+     * @see com.feilong.lib.lang3.StringUtils#right(String, int)
      */
     public static String substringLast(final String text,int lastLenth){
         return StringUtils.right(text, lastLenth);
@@ -584,7 +583,7 @@ public final class StringUtil{
      *            最后的位数
      * @return 如果 <code>text</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see java.lang.String#substring(int, int)
-     * @see org.apache.commons.lang3.StringUtils#left(String, int)
+     * @see com.feilong.lib.lang3.StringUtils#left(String, int)
      */
     public static String substringWithoutLast(final String text,final int lastLenth){
         return null == text ? EMPTY : text.substring(0, text.length() - lastLenth);

@@ -17,10 +17,11 @@ package com.feilong.namespace;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.w3c.dom.Element;
+
+import com.feilong.lib.lang3.Validate;
 
 /**
  * The Class BeanDefinitionParserUtil.

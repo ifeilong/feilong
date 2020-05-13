@@ -25,9 +25,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link URL} 工具类.

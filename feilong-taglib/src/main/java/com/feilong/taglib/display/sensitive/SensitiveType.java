@@ -17,9 +17,8 @@ package com.feilong.taglib.display.sensitive;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.core.lang.EnumUtil;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 敏感字类型.

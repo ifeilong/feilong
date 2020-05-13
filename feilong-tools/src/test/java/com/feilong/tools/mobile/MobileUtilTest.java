@@ -17,9 +17,9 @@ package com.feilong.tools.mobile;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.test.AbstractTest;
 
 /**

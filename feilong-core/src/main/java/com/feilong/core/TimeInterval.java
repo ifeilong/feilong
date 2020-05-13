@@ -19,7 +19,7 @@ package com.feilong.core;
  * 常用的时间间隔.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.time.DateUtils
+ * @see com.feilong.lib.lang3.time.DateUtils
  * @since 1.0.0
  */
 public final class TimeInterval{
@@ -81,7 +81,7 @@ public final class TimeInterval{
      * 1秒 1000ms(毫秒).
      *
      * @see #SECONDS_PER_SECOND
-     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_SECOND
+     * @see com.feilong.lib.lang3.time.DateUtils#MILLIS_PER_SECOND
      * @since 1.2.2
      */
     public static final int  MILLISECOND_PER_SECONDS = 1000;
@@ -90,7 +90,7 @@ public final class TimeInterval{
      * 1分钟 60 000ms(毫秒).
      *
      * @see #SECONDS_PER_MINUTE
-     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_MINUTE
+     * @see com.feilong.lib.lang3.time.DateUtils#MILLIS_PER_MINUTE
      * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_MINUTE  = SECONDS_PER_MINUTE * 1000;
@@ -99,7 +99,7 @@ public final class TimeInterval{
      * 1小时 3600 000ms(毫秒).
      *
      * @see #SECONDS_PER_HOUR
-     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_HOUR
+     * @see com.feilong.lib.lang3.time.DateUtils#MILLIS_PER_HOUR
      * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_HOUR    = SECONDS_PER_HOUR * 1000;
@@ -108,7 +108,7 @@ public final class TimeInterval{
      * 1天 86400 000ms(毫秒).
      *
      * @see #SECONDS_PER_DAY
-     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_DAY
+     * @see com.feilong.lib.lang3.time.DateUtils#MILLIS_PER_DAY
      * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_DAY     = SECONDS_PER_DAY * 1000;

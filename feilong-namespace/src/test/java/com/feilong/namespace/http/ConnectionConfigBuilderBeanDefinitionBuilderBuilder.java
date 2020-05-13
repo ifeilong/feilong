@@ -18,12 +18,12 @@ package com.feilong.namespace.http;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 import com.feilong.context.invoker.http.ConnectionConfigBuilder;
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.namespace.RuntimeBeanReferenceBuilder;
 import com.feilong.net.http.ConnectionConfig;
 

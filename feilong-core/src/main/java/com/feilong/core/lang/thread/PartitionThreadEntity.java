@@ -17,8 +17,8 @@ package com.feilong.core.lang.thread;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * 在每个线程中 {@link PartitionRunnableBuilder},你可以使用到的参数.

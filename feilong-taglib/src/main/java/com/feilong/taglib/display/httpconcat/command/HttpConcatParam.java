@@ -17,8 +17,8 @@ package com.feilong.taglib.display.httpconcat.command;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import com.feilong.lib.lang3.builder.EqualsBuilder;
+import com.feilong.lib.lang3.builder.HashCodeBuilder;
 
 /**
  * 封装解析http concat 用到的参数.

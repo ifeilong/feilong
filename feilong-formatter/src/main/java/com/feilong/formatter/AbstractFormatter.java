@@ -21,15 +21,14 @@ import static com.feilong.core.util.CollectionsUtil.addIgnoreNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.SPACE;
 import static java.lang.Math.max;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +41,7 @@ import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.IterableUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * Formatter相关父类.

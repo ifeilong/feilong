@@ -18,7 +18,7 @@ package com.feilong.formatter;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;

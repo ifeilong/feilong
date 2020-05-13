@@ -25,11 +25,10 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import org.apache.commons.lang3.SerializationException;
-
 import com.feilong.core.net.URIUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.io.InputStreamUtil;
+import com.feilong.lib.lang3.SerializationException;
 
 /**
  * {@link java.io.Serializable}util.
@@ -37,7 +36,7 @@ import com.feilong.io.InputStreamUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.io.Serializable
  * @see "c3p0 com.mchange.v2.ser.SerializableUtils#serializeToByteArray(Object)"
- * @see org.apache.commons.lang3.SerializationUtils
+ * @see com.feilong.lib.lang3.SerializationUtils
  * @see "org.hibernate.util.SerializationHelper"
  * @see "org.springframework.util.SerializationUtils"
  * @see "org.springframework.core.serializer.DefaultSerializer"
@@ -60,10 +59,10 @@ public final class SerializableUtil{
      * @param serializable
      *            the serializable
      * @return the byte[]
-     * @see org.apache.commons.lang3.SerializationUtils#serialize(Serializable)
+     * @see com.feilong.lib.lang3.SerializationUtils#serialize(Serializable)
      */
     public static byte[] serialize(Serializable serializable){
-        return org.apache.commons.lang3.SerializationUtils.serialize(serializable);
+        return com.feilong.lib.lang3.SerializationUtils.serialize(serializable);
     }
 
     /**
@@ -74,10 +73,10 @@ public final class SerializableUtil{
      * @param objectData
      *            the object data
      * @return the t
-     * @see org.apache.commons.lang3.SerializationUtils#deserialize(byte[])
+     * @see com.feilong.lib.lang3.SerializationUtils#deserialize(byte[])
      */
     public static <T> T deserialize(byte[] objectData){
-        return org.apache.commons.lang3.SerializationUtils.deserialize(objectData);
+        return com.feilong.lib.lang3.SerializationUtils.deserialize(objectData);
     }
 
     /**
@@ -114,7 +113,7 @@ public final class SerializableUtil{
      * @return the byte array output stream
      * @see java.io.ObjectOutputStream#ObjectOutputStream(OutputStream)
      * @see java.io.ObjectOutputStream#writeObject(Object)
-     * @see org.apache.commons.lang3.SerializationUtils#serialize(Serializable, OutputStream)
+     * @see com.feilong.lib.lang3.SerializationUtils#serialize(Serializable, OutputStream)
      */
     private static ByteArrayOutputStream toByteArrayOutputStream(Serializable serializable){
         ObjectOutputStream objectOutputStream = null;
@@ -168,7 +167,7 @@ public final class SerializableUtil{
      *            the serializable string
      * @return the t
      * @see "com.feilong.lib.io.IOUtils#toInputStream(String, Charset)"
-     * @see org.apache.commons.lang3.SerializationUtils#deserialize(InputStream)
+     * @see com.feilong.lib.lang3.SerializationUtils#deserialize(InputStream)
      * @deprecated 转字符串值得商榷
      */
     @Deprecated
@@ -177,7 +176,7 @@ public final class SerializableUtil{
         try{
             String decodeString = URIUtil.encode(serializableString, UTF8);
             inputStream = InputStreamUtil.newByteArrayInputStream(decodeString, ISO_8859_1);
-            return org.apache.commons.lang3.SerializationUtils.deserialize(inputStream);
+            return com.feilong.lib.lang3.SerializationUtils.deserialize(inputStream);
         }finally{
             IOUtil.closeQuietly(inputStream);
         }

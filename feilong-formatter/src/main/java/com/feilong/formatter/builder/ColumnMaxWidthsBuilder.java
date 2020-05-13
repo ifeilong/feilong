@@ -19,9 +19,8 @@ import static java.lang.Math.max;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 列的最大宽度构建.

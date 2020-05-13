@@ -22,20 +22,20 @@ import static com.feilong.core.lang.ArrayUtil.newArray;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.lib.collection4.CollectionUtils.addIgnoreNull;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.SPACE;
+import static com.feilong.lib.lang3.StringUtils.defaultString;
 import static java.lang.System.lineSeparator;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.SPACE;
-import static org.apache.commons.lang3.StringUtils.defaultString;
 
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.formatter.builder.ColumnMaxWidthsBuilder;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 简单的格式化成table的实现.

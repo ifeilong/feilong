@@ -17,8 +17,7 @@ package com.feilong.net.http;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
-
+import com.feilong.lib.lang3.Validate;
 import com.feilong.net.http.builder.HttpRequestExecuter;
 import com.feilong.net.http.callback.HttpResponseResultCallback;
 import com.feilong.net.http.callback.ResponseBodyAsStringResultCallback;

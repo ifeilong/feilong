@@ -17,17 +17,17 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
+import static com.feilong.lib.lang3.StringUtils.LF;
 import static java.util.Collections.emptyList;
-import static org.apache.commons.lang3.StringUtils.LF;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 专门用来提取标签体内容的.

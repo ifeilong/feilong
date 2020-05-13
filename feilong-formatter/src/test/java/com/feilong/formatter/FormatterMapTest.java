@@ -17,15 +17,15 @@ package com.feilong.formatter;
 
 import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
+import com.feilong.lib.lang3.tuple.Pair;
 import com.feilong.test.AbstractTest;
 
 public class FormatterMapTest extends AbstractTest{

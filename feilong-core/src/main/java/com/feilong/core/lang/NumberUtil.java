@@ -17,18 +17,17 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.feilong.core.NumberPattern;
 import com.feilong.core.text.NumberFormatUtil;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.math.NumberUtils;
 
 /**
  * 处理{@link Integer},{@link Long},{@link BigDecimal}等数据类型.
@@ -156,7 +155,7 @@ import com.feilong.core.text.NumberFormatUtil;
  * @see Number
  * @see NumberPattern
  * @see RoundingMode
- * @see org.apache.commons.lang3.math.NumberUtils
+ * @see com.feilong.lib.lang3.math.NumberUtils
  * @since 1.4.0
  */
 public final class NumberUtil{

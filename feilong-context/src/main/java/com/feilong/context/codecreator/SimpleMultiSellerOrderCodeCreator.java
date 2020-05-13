@@ -17,7 +17,7 @@ package com.feilong.context.codecreator;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 import static com.feilong.core.date.DateUtil.now;
-import static org.apache.commons.lang3.StringUtils.defaultString;
+import static com.feilong.lib.lang3.StringUtils.defaultString;
 
 import java.util.Date;
 

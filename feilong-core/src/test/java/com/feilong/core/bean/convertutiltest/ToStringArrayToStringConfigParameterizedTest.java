@@ -17,15 +17,15 @@ package com.feilong.core.bean.convertutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
+import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**

@@ -16,12 +16,11 @@
 package com.feilong.net.http.builder;
 
 import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
@@ -30,6 +29,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.packer.SSLPacker;
 

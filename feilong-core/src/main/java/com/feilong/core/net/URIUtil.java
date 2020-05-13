@@ -18,10 +18,10 @@ package com.feilong.core.net;
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.INDEX_NOT_FOUND;
+import static com.feilong.lib.lang3.StringUtils.isEmpty;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.INDEX_NOT_FOUND;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,14 +30,14 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.

@@ -27,12 +27,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.servlet.http.entity.CookieEntity;
 
 /**

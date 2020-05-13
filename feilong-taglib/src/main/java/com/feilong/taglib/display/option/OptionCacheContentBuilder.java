@@ -15,8 +15,8 @@
  */
 package com.feilong.taglib.display.option;
 
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.lang.System.lineSeparator;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.Map;
 

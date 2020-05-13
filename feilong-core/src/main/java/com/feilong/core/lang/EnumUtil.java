@@ -15,20 +15,20 @@
  */
 package com.feilong.core.lang;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.Enum} 工具类.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.EnumUtils
+ * @see com.feilong.lib.lang3.EnumUtils
  * @since 1.0.6
  */
 public final class EnumUtil{

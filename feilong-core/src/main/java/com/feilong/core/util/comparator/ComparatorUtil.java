@@ -17,10 +17,9 @@ package com.feilong.core.util.comparator;
 
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * The Class ComparatorUtil.

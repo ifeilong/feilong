@@ -15,10 +15,9 @@
  */
 package com.feilong.excel;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.feilong.excel.definition.ExcelCell;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * The Class ExcelException.

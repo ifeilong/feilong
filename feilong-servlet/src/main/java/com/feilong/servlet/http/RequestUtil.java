@@ -26,13 +26,13 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.getValue;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.servlet.http.HttpHeaders.ORIGIN;
 import static com.feilong.servlet.http.HttpHeaders.REFERER;
 import static com.feilong.servlet.http.HttpHeaders.USER_AGENT;
 import static com.feilong.servlet.http.HttpHeaders.X_REQUESTED_WITH;
 import static com.feilong.servlet.http.HttpHeaders.X_REQUESTED_WITH_VALUE_AJAX;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,8 +49,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,6 +59,8 @@ import com.feilong.core.util.EnumerationUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.ReaderUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
 
 /**

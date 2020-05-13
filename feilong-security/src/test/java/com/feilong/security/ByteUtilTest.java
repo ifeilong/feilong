@@ -18,9 +18,9 @@ package com.feilong.security;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang3.Validate;
 import org.junit.Test;
 
+import com.feilong.lib.lang3.Validate;
 import com.feilong.test.AbstractTest;
 
 /**

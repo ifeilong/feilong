@@ -26,20 +26,17 @@ import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.defaultString;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.defaultString;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +44,9 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
+import com.feilong.lib.lang3.ArrayUtils;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 处理参数相关.
@@ -380,7 +380,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     * @see org.apache.commons.lang3.ArrayUtils#add(Object[], Object)
+     * @see com.feilong.lib.lang3.ArrayUtils#add(Object[], Object)
      * @see com.feilong.core.lang.StringUtil#split(String, String)
      * @since 1.4.0
      */
@@ -851,7 +851,7 @@ public final class ParamUtil{
      *            参数多值
      * @return 如果<code>paramValues</code>是null,那么直接返回 <code>paramName=</code>
      * @see java.lang.AbstractStringBuilder#append(String)
-     * @see org.apache.commons.lang3.StringUtils#defaultString(String)
+     * @see com.feilong.lib.lang3.StringUtils#defaultString(String)
      * @see "org.springframework.web.servlet.view.RedirectView#appendQueryProperties(StringBuilder,Map, String)"
      * @since 1.4.0
      */
@@ -908,7 +908,7 @@ public final class ParamUtil{
      * @return 如果 <code>singleValueMap</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>includeKeys</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;<br>
-     * @see org.apache.commons.lang3.StringUtils#defaultString(String)
+     * @see com.feilong.lib.lang3.StringUtils#defaultString(String)
      * @since 1.5.5
      */
     @SafeVarargs

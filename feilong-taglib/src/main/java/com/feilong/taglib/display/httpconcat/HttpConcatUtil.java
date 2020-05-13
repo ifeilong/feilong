@@ -17,19 +17,19 @@ package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.taglib.display.httpconcat.builder.ResultBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;

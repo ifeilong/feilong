@@ -15,16 +15,16 @@
  */
 package com.feilong.core.lang.annotation;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
 import com.feilong.core.bean.Alias;
 import com.feilong.core.entity.DangaMemCachedConfig;
+import com.feilong.lib.lang3.reflect.FieldUtils;
 
 /**
  * The Class DefaultAnnotationToStringBuilderTest.

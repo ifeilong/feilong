@@ -17,8 +17,8 @@
 package com.feilong.lib.json;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,8 +26,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.lib.json.processors.DefaultDefaultValueProcessor;
 import com.feilong.lib.json.processors.DefaultValueProcessor;
@@ -39,6 +37,7 @@ import com.feilong.lib.json.processors.PropertyNameProcessorMatcher;
 import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.lib.json.util.PropertyFilter;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * Utility class that helps configuring the serialization process.

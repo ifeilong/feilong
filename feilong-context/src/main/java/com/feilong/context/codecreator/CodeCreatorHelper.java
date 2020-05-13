@@ -15,12 +15,11 @@
  */
 package com.feilong.context.codecreator;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.SPACE;
-
-import org.apache.commons.lang3.StringUtils;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.SPACE;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * The Class CodeCreatorHelper.

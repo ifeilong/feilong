@@ -18,9 +18,9 @@ package com.feilong.core.util;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,14 +34,14 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.MessageFormatUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.

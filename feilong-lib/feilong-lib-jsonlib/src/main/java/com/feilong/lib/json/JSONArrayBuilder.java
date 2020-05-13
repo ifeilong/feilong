@@ -19,12 +19,11 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 

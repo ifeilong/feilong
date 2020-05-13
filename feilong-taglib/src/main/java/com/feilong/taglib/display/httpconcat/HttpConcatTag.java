@@ -16,14 +16,14 @@
 package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.CacheTag;
 import com.feilong.taglib.display.httpconcat.builder.DomainRebuilder;

@@ -23,7 +23,6 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Date;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -31,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.io.IOUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * The Class WorkbookUtil.

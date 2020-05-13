@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.LazyDynaBean;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -403,7 +403,7 @@ public final class BeanUtil{
      * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话(即自定义类),可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用
      * </li>
      * <li>
-     * 如果需要深度clone,可以使用 {@link org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable) SerializationUtils.clone}
+     * 如果需要深度clone,可以使用 {@link com.feilong.lib.lang3.SerializationUtils#clone(java.io.Serializable) SerializationUtils.clone}
      * ,但是它的性能要慢很多倍</li>
      * <li>由于内部实现是通过 {@link java.lang.Class#newInstance() Class.newInstance()}来构造新的对象,所以需要被clone的对象<b>必须存在默认无参构造函数</b>,否则会出现异常
      * {@link java.lang.InstantiationException InstantiationException}</li>
@@ -424,9 +424,9 @@ public final class BeanUtil{
      *             在调用api有任何异常,转成{@link BeanOperationException}返回
      * @see com.feilong.lib.beanutils.BeanUtils#cloneBean(Object)
      * @see com.feilong.lib.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
-     * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
-     * @see org.apache.commons.lang3.ObjectUtils#clone(Object)
-     * @see org.apache.commons.lang3.ObjectUtils#cloneIfPossible(Object)
+     * @see com.feilong.lib.lang3.SerializationUtils#clone(java.io.Serializable)
+     * @see com.feilong.lib.lang3.ObjectUtils#clone(Object)
+     * @see com.feilong.lib.lang3.ObjectUtils#cloneIfPossible(Object)
      * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-471">BeanUtils.cloneBean with List is broken</a>
      */
     @SuppressWarnings("unchecked")

@@ -25,8 +25,8 @@ import java.nio.charset.StandardCharsets;
  * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.CharEncoding
- * @see org.apache.commons.lang3.CharEncoding#isSupported(String)
+ * @see com.feilong.lib.lang3.CharEncoding
+ * @see com.feilong.lib.lang3.CharEncoding#isSupported(String)
  * @see java.nio.charset.Charset#availableCharsets()
  * @see java.nio.charset.Charset#isSupported(String)
  * @see java.nio.charset.Charset#defaultCharset()
@@ -78,7 +78,7 @@ public final class CharsetType{
      * </ul>
      * </blockquote>
      * 
-     * @see org.apache.commons.lang3.CharEncoding#UTF_8
+     * @see com.feilong.lib.lang3.CharEncoding#UTF_8
      * @see java.nio.charset.StandardCharsets#UTF_8
      */
     public static final String UTF8       = StandardCharsets.UTF_8.name();
@@ -173,7 +173,7 @@ public final class CharsetType{
      * 8859-15同时加入了欧元符号)
      * </p>
      * 
-     * @see org.apache.commons.lang3.CharEncoding#ISO_8859_1
+     * @see com.feilong.lib.lang3.CharEncoding#ISO_8859_1
      * @see java.nio.charset.StandardCharsets#ISO_8859_1
      */
     public static final String ISO_8859_1 = StandardCharsets.ISO_8859_1.name();

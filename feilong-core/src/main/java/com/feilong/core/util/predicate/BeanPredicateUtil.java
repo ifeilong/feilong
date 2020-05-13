@@ -23,7 +23,6 @@ import java.util.Comparator;
 import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ArrayUtil;
@@ -35,6 +34,7 @@ import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
 import com.feilong.lib.collection4.functors.EqualPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.
@@ -353,7 +353,7 @@ public final class BeanPredicateUtil{
 
     /**
      * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,使用
-     * {@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object) ArrayUtils.contains} 判断是否在 <code>values</code>数组中.
+     * {@link com.feilong.lib.lang3.ArrayUtils#contains(Object[], Object) ArrayUtils.contains} 判断是否在 <code>values</code>数组中.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -379,7 +379,7 @@ public final class BeanPredicateUtil{
      *            the property values
      * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)
+     * @see com.feilong.lib.lang3.ArrayUtils#contains(Object[], Object)
      */
     @SafeVarargs
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
@@ -388,7 +388,7 @@ public final class BeanPredicateUtil{
 
             @Override
             public boolean evaluate(V propertyValue){
-                return org.apache.commons.lang3.ArrayUtils.contains(propertyValues, propertyValue);
+                return com.feilong.lib.lang3.ArrayUtils.contains(propertyValues, propertyValue);
             }
         });
     }

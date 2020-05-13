@@ -23,24 +23,24 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_NAVIGATION_PAGE_NUMBER;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 import static com.feilong.taglib.display.pager.command.PagerConstants.I18N_FEILONG_PAGER;
 import static com.feilong.taglib.display.pager.command.PagerConstants.VM_KEY_I18NMAP;
 import static com.feilong.taglib.display.pager.command.PagerConstants.VM_KEY_PAGERVMPARAM;
 import static com.feilong.taglib.display.pager.command.PagerType.NO_REDIRECT;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.ParamUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.tuple.Pair;
 import com.feilong.taglib.display.CacheContentBuilder;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerConstants;

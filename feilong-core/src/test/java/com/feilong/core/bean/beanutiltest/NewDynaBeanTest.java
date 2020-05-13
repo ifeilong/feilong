@@ -18,7 +18,7 @@ package com.feilong.core.bean.beanutiltest;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.core.util.MapUtil.newHashMap;
-import static org.apache.commons.lang3.tuple.Pair.of;
+import static com.feilong.lib.lang3.tuple.Pair.of;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;

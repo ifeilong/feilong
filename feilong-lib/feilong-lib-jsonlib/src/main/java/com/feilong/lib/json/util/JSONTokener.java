@@ -15,14 +15,13 @@
  */
 package com.feilong.lib.json.util;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONException;
 import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.regexp.RegexpUtils;
+import com.feilong.lib.lang3.math.NumberUtils;
 
 /**
  * A JSONTokener takes a source string and extracts characters and tokens from

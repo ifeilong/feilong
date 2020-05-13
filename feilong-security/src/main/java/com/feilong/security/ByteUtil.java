@@ -17,7 +17,7 @@ package com.feilong.security;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import org.apache.commons.lang3.Validate;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link java.lang.Byte} 工具类.

@@ -19,7 +19,7 @@ import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 import static com.feilong.io.entity.FileWriteMode.APPEND;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,14 +32,14 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
 import com.feilong.lib.io.FileUtils;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.tuple.Pair;
 
 /**
  * {@link File}文件操作.

@@ -16,9 +16,9 @@
 package com.feilong.core.util.closure;
 
 import org.apache.commons.collections4.Closure;
-import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link org.apache.commons.collections4.Closure} 实现,用来更新指定属性的指定值.

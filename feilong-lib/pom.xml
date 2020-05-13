@@ -17,5 +17,6 @@
 		<module>feilong-lib-spring-core</module>
 		<module>feilong-lib-commons-io</module>
 		<module>feilong-lib-commons-collections4</module>
+		<module>feilong-lib-commons-lang3</module>
 	</modules>
 </project>

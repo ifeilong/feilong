@@ -36,7 +36,7 @@ import java.io.Serializable;
  * </blockquote>
  * 
  * <p>
- * 借鉴了 {@link org.apache.commons.lang3.builder.ToStringStyle} 的思想
+ * 借鉴了 {@link com.feilong.lib.lang3.builder.ToStringStyle} 的思想
  * </p>
  * 
  * <h3>readResolve()方法:</h3>
@@ -50,7 +50,7 @@ import java.io.Serializable;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.builder.ToStringStyle
+ * @see com.feilong.lib.lang3.builder.ToStringStyle
  * @since 1.4.0
  */
 public abstract class RequestLogSwitch implements Serializable{

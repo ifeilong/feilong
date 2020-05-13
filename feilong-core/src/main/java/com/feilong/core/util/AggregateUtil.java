@@ -19,9 +19,9 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,11 +31,11 @@ import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
-import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.IterableUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 专门用来统计数据的工具类.

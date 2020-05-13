@@ -17,13 +17,12 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RegexUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 路径提取器.

@@ -17,10 +17,9 @@ package com.feilong.core.util;
 
 import java.util.Random;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.core.Alphabet;
+import com.feilong.lib.lang3.RandomStringUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 随机数工具类.
@@ -34,8 +33,8 @@ import com.feilong.core.Alphabet;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.Math#random()
- * @see org.apache.commons.lang3.RandomUtils
- * @see org.apache.commons.lang3.RandomStringUtils
+ * @see com.feilong.lib.lang3.RandomUtils
+ * @see com.feilong.lib.lang3.RandomStringUtils
  * @see java.util.concurrent.ThreadLocalRandom
  * @since 1.0.0
  */
@@ -49,7 +48,7 @@ public final class RandomUtil{
      * 把Random对象作为一个全局实例(static)来使用. Java中Random是线程安全的(内部进行了加锁处理);
      * </p>
      * 
-     * @see org.apache.commons.lang3.RandomUtils
+     * @see com.feilong.lib.lang3.RandomUtils
      * @since 1.0.7
      */
     private static final Random JVM_RANDOM = new Random();
@@ -125,7 +124,7 @@ public final class RandomUtil{
      *         如果 <code>str</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
      * 
-     * @see org.apache.commons.lang3.RandomStringUtils#random(int, String)
+     * @see com.feilong.lib.lang3.RandomStringUtils#random(int, String)
      */
     public static String createRandomFromString(String str,int length){
         Validate.notBlank(str, "str can't be null/empty!");
@@ -160,7 +159,7 @@ public final class RandomUtil{
      *            指定字符串长度,比如 5
      * @return 如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
      * 
-     * @see org.apache.commons.lang3.RandomStringUtils#random(int, String)
+     * @see com.feilong.lib.lang3.RandomStringUtils#random(int, String)
      * @since 2.1.0
      */
     public static String createRandomString(int length){

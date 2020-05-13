@@ -18,10 +18,9 @@ package com.feilong.lib.loxia.convertor;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.feilong.excel.ExcelException;
 import com.feilong.excel.definition.ExcelCell;
+import com.feilong.lib.lang3.ArrayUtils;
 
 /**
  * The Class ChoiceConvertor.

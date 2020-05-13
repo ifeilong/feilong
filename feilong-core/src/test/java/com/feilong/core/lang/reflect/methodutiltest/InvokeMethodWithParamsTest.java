@@ -15,7 +15,7 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
@@ -91,7 +91,7 @@ public class InvokeMethodWithParamsTest{
      */
     @Test(expected = NoSuchMethodException.class)
     public void testInvokeMethodPrivateMethodEmptyParams() throws NoSuchMethodException,IllegalAccessException,InvocationTargetException{
-        org.apache.commons.lang3.reflect.MethodUtils.invokeMethod(new PrivateMethod(), "name");
+        com.feilong.lib.lang3.reflect.MethodUtils.invokeMethod(new PrivateMethod(), "name");
     }
 
     /**

@@ -18,8 +18,8 @@ package com.feilong.xml;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.StringWriter;
 import java.io.Writer;
@@ -31,8 +31,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPathConstants;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -41,6 +39,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.xml.xstream.XStreamBuilder;
 import com.feilong.xml.xstream.XStreamConfig;
 import com.feilong.xml.xstream.XStreamConfigBuilder;

@@ -53,6 +53,6 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
         // [source] the owner of the property
         // [name] the name of the property
         // [value] the value of the property
-        return !org.apache.commons.lang3.ArrayUtils.contains(propertyNames, name);
+        return !com.feilong.lib.lang3.ArrayUtils.contains(propertyNames, name);
     }
 }

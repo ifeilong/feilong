@@ -16,7 +16,7 @@
 package com.feilong.net.mail;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static org.apache.commons.lang3.SystemUtils.USER_HOME;
+import static com.feilong.lib.lang3.SystemUtils.USER_HOME;
 
 import org.junit.Test;
 

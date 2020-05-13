@@ -20,12 +20,12 @@ import static com.feilong.core.bean.ConvertUtil.convert;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
@@ -64,7 +64,7 @@ import com.feilong.core.bean.ToStringConfig;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.reflect.TypeUtils
+ * @see com.feilong.lib.lang3.reflect.TypeUtils
  * @see "org.springframework.core.GenericTypeResolver"
  * @see "org.springframework.core.GenericTypeResolver#getTypeVariableMap(Class<?>)"
  * @see "org.springframework.core.ParameterizedTypeReference<T>"

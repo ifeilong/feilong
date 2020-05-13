@@ -18,7 +18,8 @@ package com.feilong.core.util.equator;
 import java.io.Serializable;
 
 import org.apache.commons.collections4.Equator;
-import org.apache.commons.lang3.StringUtils;
+
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 忽视大小写的实现.

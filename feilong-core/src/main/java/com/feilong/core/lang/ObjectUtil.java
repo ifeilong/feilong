@@ -17,8 +17,8 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.Validate;
+import com.feilong.lib.lang3.ObjectUtils;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * {@link Object} 工具类.
@@ -27,13 +27,13 @@ import org.apache.commons.lang3.Validate;
  * 
  * <blockquote>
  * <ol>
- * <li>{@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)} 支持两个值都是null的情况</li>
+ * <li>{@link com.feilong.lib.lang3.ObjectUtils#equals(Object, Object)} 支持两个值都是null的情况</li>
  * <li>{@link java.util.Objects#equals(Object, Object)} (since jdk1.7) 也支持两个值都是null的情况</li>
  * </ol>
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.ObjectUtils
+ * @see com.feilong.lib.lang3.ObjectUtils
  * @see java.util.Objects
  * @since 1.0.0
  */
@@ -137,7 +137,7 @@ public final class ObjectUtil{
      * @param defaultValue
      *            the default value to return, 可以是 {@code null} or empty
      * @return 如果 <code>object</code> 是null或者empty,返回 <code>defaultValue</code>,否则返回 <code>object</code>
-     * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
+     * @see com.feilong.lib.lang3.ObjectUtils#defaultIfNull(Object, Object)
      * @see com.feilong.lib.collection4.ListUtils#defaultIfNull(java.util.List, java.util.List)
      * @since 1.7.2
      */

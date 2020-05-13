@@ -17,7 +17,7 @@ package com.feilong.io;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newHashMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.net.FileNameMap;
 import java.net.URLConnection;

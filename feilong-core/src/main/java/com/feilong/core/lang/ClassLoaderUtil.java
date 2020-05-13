@@ -23,11 +23,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
+import com.feilong.lib.lang3.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -154,7 +154,7 @@ public final class ClassLoaderUtil{
      *            the resource name
      * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果找不到该资源,或者调用者没有足够的权限获取该资源,则返回 null
-     * @see org.apache.commons.lang3.ClassPathUtils#toFullyQualifiedPath(Package, String)
+     * @see com.feilong.lib.lang3.ClassPathUtils#toFullyQualifiedPath(Package, String)
      * @see #getResource(ClassLoader, String)
      * @see #getClassLoaderByClass(Class)
      */

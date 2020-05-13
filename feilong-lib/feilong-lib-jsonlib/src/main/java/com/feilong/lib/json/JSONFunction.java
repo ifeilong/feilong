@@ -18,11 +18,10 @@ package com.feilong.lib.json;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.builder.EqualsBuilder;
+import com.feilong.lib.lang3.builder.HashCodeBuilder;
 
 /**
  * JSONFunction represents a javaScript function's text.

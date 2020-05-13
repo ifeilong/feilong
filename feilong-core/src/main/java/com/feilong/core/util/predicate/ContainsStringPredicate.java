@@ -15,7 +15,7 @@
  */
 package com.feilong.core.util.predicate;
 
-import org.apache.commons.lang3.StringUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 判断字符串是否包含指定的 searchCharSequence.

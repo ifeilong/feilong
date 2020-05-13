@@ -17,9 +17,9 @@ package com.feilong.core.lang.reflect;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.selectRejected;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -29,13 +29,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
+import com.feilong.lib.lang3.Validate;
+import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -102,7 +102,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.lang3.reflect.FieldUtils
+ * @see com.feilong.lib.lang3.reflect.FieldUtils
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7
  */
@@ -245,7 +245,7 @@ public final class FieldUtil{
      *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>obj</code> 中没有 <code>fieldName</code>,抛出 {@link ReflectException}<br>
-     * @see org.apache.commons.lang3.reflect.FieldUtils#readField(Object, String, boolean)
+     * @see com.feilong.lib.lang3.reflect.FieldUtils#readField(Object, String, boolean)
      * @since 1.4.0
      * @since 1.9.2 change to private
      */

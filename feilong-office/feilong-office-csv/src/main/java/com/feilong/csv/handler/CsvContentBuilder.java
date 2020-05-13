@@ -99,7 +99,7 @@ public class CsvContentBuilder{
      *            the csv params
      * @return the write content line
      * @see com.feilong.core.bean.ConvertUtil#toString(Object)
-     * @see org.apache.commons.lang3.StringEscapeUtils#escapeCsv(String)
+     * @see com.feilong.lib.lang3.StringEscapeUtils#escapeCsv(String)
      */
     private static final StringBuilder buildLine(Object[] lineColumns,CsvConfig csvConfig){
         StringBuilder sb = new StringBuilder();

@@ -18,10 +18,9 @@ package com.feilong.taglib.display.loadbundle;
 import java.io.Serializable;
 import java.util.Locale;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import com.feilong.core.util.ResourceBundleUtil;
+import com.feilong.lib.lang3.builder.EqualsBuilder;
+import com.feilong.lib.lang3.builder.HashCodeBuilder;
 import com.feilong.taglib.display.CacheParam;
 
 /**

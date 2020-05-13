@@ -16,8 +16,8 @@
 package com.feilong.net.http.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.net.SocketTimeoutException;
 import java.util.Map;

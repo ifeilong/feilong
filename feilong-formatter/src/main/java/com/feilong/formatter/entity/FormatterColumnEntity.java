@@ -15,10 +15,9 @@
  */
 package com.feilong.formatter.entity;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.feilong.formatter.FormatterColumn;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * 定制每列的顺序以及标题的名称.

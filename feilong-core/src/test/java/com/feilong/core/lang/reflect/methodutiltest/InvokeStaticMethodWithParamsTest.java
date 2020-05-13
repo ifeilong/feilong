@@ -15,7 +15,7 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
+import static com.feilong.lib.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;

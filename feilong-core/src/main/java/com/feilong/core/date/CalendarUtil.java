@@ -26,9 +26,8 @@ import static java.util.Calendar.SECOND;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.core.DatePattern;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .
@@ -260,7 +259,7 @@ final class CalendarUtil{
      * @see Calendar#MINUTE
      * @see Calendar#SECOND
      * @see Calendar#MILLISECOND
-     * @see org.apache.commons.lang3.time.DateUtils#truncate(Calendar, int)
+     * @see com.feilong.lib.lang3.time.DateUtils#truncate(Calendar, int)
      * @since 1.3.0
      */
     static Calendar resetDayBegin(Calendar calendar){

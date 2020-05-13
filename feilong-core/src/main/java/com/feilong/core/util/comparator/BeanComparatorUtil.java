@@ -23,13 +23,12 @@ import static com.feilong.lib.collection4.ComparatorUtils.reversedComparator;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
-
 import com.feilong.lib.beanutils.BeanComparator;
 import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.comparators.ComparableComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
+import com.feilong.lib.lang3.Validate;
 
 /**
  * 专注于 bean 属性值的排序.

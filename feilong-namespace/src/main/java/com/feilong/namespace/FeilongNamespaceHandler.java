@@ -19,9 +19,9 @@ import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 
+import com.feilong.lib.lang3.tuple.Pair;
 import com.feilong.namespace.parser.CookieAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SessionAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SessionKeyAccessorBeanDefinitionParser;

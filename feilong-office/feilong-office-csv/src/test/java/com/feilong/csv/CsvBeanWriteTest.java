@@ -18,7 +18,7 @@ package com.feilong.csv;
 import static com.feilong.core.CharsetType.GBK;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
-import static org.apache.commons.lang3.SystemUtils.USER_HOME;
+import static com.feilong.lib.lang3.SystemUtils.USER_HOME;
 
 import org.junit.After;
 import org.junit.BeforeClass;

@@ -16,9 +16,9 @@
 package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
-import org.apache.commons.lang3.StringUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * Domain 值格式化.

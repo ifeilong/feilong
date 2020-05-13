@@ -16,9 +16,8 @@
 
 package com.feilong.lib.json.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.feilong.lib.json.JSONException;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * Transforms a string into a valid Java identifier.<br>
