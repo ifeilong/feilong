@@ -18,10 +18,10 @@ package com.feilong.core.util.predicate.beanpredicateutil;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.store.member.User;
 
 public class ContainsPredicateTest{

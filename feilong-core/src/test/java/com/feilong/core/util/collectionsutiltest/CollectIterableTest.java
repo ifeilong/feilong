@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.Transformer;
-import org.apache.commons.collections4.TransformerUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.lib.collection4.TransformerUtils;
 import com.feilong.store.member.User;
 
 /**

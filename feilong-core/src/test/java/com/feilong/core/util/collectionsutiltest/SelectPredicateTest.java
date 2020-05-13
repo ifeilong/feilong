@@ -26,17 +26,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.functors.ComparatorPredicate;
-import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
-import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.equator.IgnoreCaseEquator;
 import com.feilong.core.util.predicate.BeanPredicate;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.lib.collection4.ComparatorUtils;
+import com.feilong.lib.collection4.functors.ComparatorPredicate;
+import com.feilong.lib.collection4.functors.EqualPredicate;
+import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;

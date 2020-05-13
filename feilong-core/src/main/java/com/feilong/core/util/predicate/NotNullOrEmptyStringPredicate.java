@@ -22,13 +22,13 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * 
- * @see org.apache.commons.collections4.functors.NullPredicate
- * @see org.apache.commons.collections4.functors.NullIsExceptionPredicate
- * @see org.apache.commons.collections4.functors.NullIsFalsePredicate
- * @see org.apache.commons.collections4.functors.NullIsTruePredicate
+ * @see com.feilong.lib.collection4.functors.NullPredicate
+ * @see com.feilong.lib.collection4.functors.NullIsExceptionPredicate
+ * @see com.feilong.lib.collection4.functors.NullIsFalsePredicate
+ * @see com.feilong.lib.collection4.functors.NullIsTruePredicate
  * 
- * @see org.apache.commons.collections4.functors.NonePredicate
- * @see org.apache.commons.collections4.functors.NotNullPredicate
+ * @see com.feilong.lib.collection4.functors.NonePredicate
+ * @see com.feilong.lib.collection4.functors.NotNullPredicate
  * 
  * @since 1.13.2
  */

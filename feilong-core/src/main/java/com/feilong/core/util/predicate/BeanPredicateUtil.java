@@ -22,12 +22,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
 
-import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
-import org.apache.commons.collections4.functors.ComparatorPredicate;
-import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
-import org.apache.commons.collections4.functors.EqualPredicate;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
@@ -35,12 +30,17 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.equator.IgnoreCaseEquator;
+import com.feilong.lib.collection4.ComparatorUtils;
+import com.feilong.lib.collection4.PredicateUtils;
+import com.feilong.lib.collection4.functors.ComparatorPredicate;
+import com.feilong.lib.collection4.functors.EqualPredicate;
+import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.collections4.PredicateUtils
+ * @see com.feilong.lib.collection4.PredicateUtils
  * @see com.feilong.core.util.predicate.BeanPredicate
  * @since 1.8.0
  */
@@ -108,7 +108,7 @@ public final class BeanPredicateUtil{
      *            the property value
      * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.collections4.PredicateUtils#equalPredicate(Object)
+     * @see com.feilong.lib.collection4.PredicateUtils#equalPredicate(Object)
      */
     public static <T, V> Predicate<T> equalPredicate(String propertyName,V propertyValue){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
@@ -174,7 +174,7 @@ public final class BeanPredicateUtil{
      *            the property value
      * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.collections4.PredicateUtils#equalPredicate(Object)
+     * @see com.feilong.lib.collection4.PredicateUtils#equalPredicate(Object)
      * @see com.feilong.core.util.equator.IgnoreCaseEquator#INSTANCE
      * @since 1.10.1
      */
@@ -335,7 +335,7 @@ public final class BeanPredicateUtil{
      *            the bean
      * @param propertyNames
      *            如果 <code>propertyNames</code> 是null或者empty 那么取所有属性值.
-     * @return 如果 <code>bean</code> 是null,返回 {@link org.apache.commons.collections4.PredicateUtils#nullPredicate()}<br>
+     * @return 如果 <code>bean</code> 是null,返回 {@link com.feilong.lib.collection4.PredicateUtils#nullPredicate()}<br>
      *         否则 调用 {@link com.feilong.core.bean.PropertyUtil#describe(Object, String...)} 提取属性值,再调用 {@link #equalPredicate(Map)}
      * @see #equalPredicate(String, Object)
      * @see com.feilong.core.bean.PropertyUtil#describe(Object, String...)
@@ -636,7 +636,7 @@ public final class BeanPredicateUtil{
      *            the criterion
      * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.collections4.functors.ComparatorPredicate
+     * @see com.feilong.lib.collection4.functors.ComparatorPredicate
      * @since commons-collections 4
      */
     public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(

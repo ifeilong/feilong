@@ -18,9 +18,9 @@ package com.feilong.core.util.predicate;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
+import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.store.member.User;
 
 /**

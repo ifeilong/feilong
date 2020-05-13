@@ -17,10 +17,10 @@ package com.feilong.core;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.store.member.User;
 
 import static com.feilong.core.Validator.isNullOrEmpty;

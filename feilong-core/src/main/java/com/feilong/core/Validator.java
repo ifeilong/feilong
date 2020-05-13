@@ -21,8 +21,9 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import com.feilong.lib.collection4.CollectionUtils;
 
 /**
  * 判断给定的对象是否是null或者empty.
@@ -68,11 +69,11 @@ import org.apache.commons.lang3.StringUtils;
  * @see org.apache.commons.lang3.ArrayUtils#isEmpty(float[])
  * @see org.apache.commons.lang3.ArrayUtils#isEmpty(double[])
  * @see org.apache.commons.lang3.ArrayUtils#isEmpty(Object[])
- * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
- * @see org.apache.commons.collections4.CollectionUtils#isEmpty(Collection)
- * @see org.apache.commons.collections4.CollectionUtils#isNotEmpty(Collection)
- * @see org.apache.commons.collections4.MapUtils#isEmpty(Map)
- * @see org.apache.commons.collections4.MapUtils#isNotEmpty(Map)
+ * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
+ * @see com.feilong.lib.collection4.CollectionUtils#isEmpty(Collection)
+ * @see com.feilong.lib.collection4.CollectionUtils#isNotEmpty(Collection)
+ * @see com.feilong.lib.collection4.MapUtils#isEmpty(Map)
+ * @see com.feilong.lib.collection4.MapUtils#isNotEmpty(Map)
  * @since 1.0.0
  */
 public final class Validator{
@@ -160,7 +161,7 @@ public final class Validator{
      * @return 如果是null,返回true<br>
      *         如果是empty也返回true<br>
      *         其他情况返回false<br>
-     * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
+     * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
      * @see org.apache.commons.lang3.StringUtils#isBlank(CharSequence)
      */
     public static boolean isNullOrEmpty(Object value){

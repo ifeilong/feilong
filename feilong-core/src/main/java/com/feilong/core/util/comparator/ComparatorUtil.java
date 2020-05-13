@@ -17,15 +17,16 @@ package com.feilong.core.util.comparator;
 
 import java.util.List;
 
-import org.apache.commons.collections4.comparators.FixedOrderComparator;
-import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.apache.commons.lang3.Validate;
+
+import com.feilong.lib.collection4.comparators.FixedOrderComparator;
+import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 
 /**
  * The Class ComparatorUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.collections4.ComparatorUtils
+ * @see com.feilong.lib.collection4.ComparatorUtils
  * @see FixedOrderComparator
  * @since 1.14.3
  */

@@ -56,8 +56,8 @@ import com.feilong.core.bean.PropertyUtil;
  * @param <T>
  *            the generic type
  * @see com.feilong.lib.beanutils.BeanPropertyValueChangeClosure
- * @see org.apache.commons.collections4.CollectionUtils#forAllDo(Iterable, Closure)
- * @see org.apache.commons.collections4.IterableUtils#forEach(Iterable, Closure)
+ * @see com.feilong.lib.collection4.CollectionUtils#forAllDo(Iterable, Closure)
+ * @see com.feilong.lib.collection4.IterableUtils#forEach(Iterable, Closure)
  * @since 1.10.2
  */
 public class BeanPropertyValueChangeClosure<T> implements Closure<T>{

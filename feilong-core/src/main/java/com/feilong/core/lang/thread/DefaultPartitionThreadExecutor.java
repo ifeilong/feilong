@@ -18,12 +18,12 @@ package com.feilong.core.lang.thread;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ThreadUtil;
+import com.feilong.lib.collection4.ListUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

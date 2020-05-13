@@ -28,12 +28,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

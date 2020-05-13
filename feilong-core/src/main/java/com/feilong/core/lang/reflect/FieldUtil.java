@@ -29,13 +29,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

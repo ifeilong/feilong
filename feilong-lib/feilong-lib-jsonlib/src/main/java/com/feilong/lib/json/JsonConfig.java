@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections4.map.MultiKeyMap;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.lib.json.processors.DefaultDefaultValueProcessor;
@@ -78,9 +77,6 @@ public class JsonConfig{
 
     /** Array conversion mode. */
     private int                                        arrayMode                               = MODE_LIST;
-
-    /** The bean key map. */
-    private final MultiKeyMap                          beanKeyMap                              = new MultiKeyMap<>();
 
     /** The bean processor map. */
     private final Map<Class<?>, JsonBeanProcessor>     beanProcessorMap                        = new HashMap<>();
@@ -251,13 +247,7 @@ public class JsonConfig{
      * @return the json value processor
      */
     public JsonValueProcessor findJsonValueProcessor(Class<?> beanClass,Class<?> propertyType,String key){
-        JsonValueProcessor jsonValueProcessor = (JsonValueProcessor) beanKeyMap.get(beanClass, key);
-        if (jsonValueProcessor != null){
-            return jsonValueProcessor;
-        }
-
-        //---------------------------------------------------------------
-        jsonValueProcessor = keyMap.get(key);
+        JsonValueProcessor jsonValueProcessor = keyMap.get(key);
         if (jsonValueProcessor != null){
             return jsonValueProcessor;
         }
@@ -512,23 +502,6 @@ public class JsonConfig{
      * Registers a JsonValueProcessor.<br>
      * [Java -&gt; JSON]
      * 
-     * @param beanClass
-     *            the class to use as key
-     * @param key
-     *            the property name to use as key
-     * @param jsonValueProcessor
-     *            the processor to register
-     */
-    public void registerJsonValueProcessor(Class<?> beanClass,String key,JsonValueProcessor jsonValueProcessor){
-        if (beanClass != null && key != null && jsonValueProcessor != null){
-            beanKeyMap.put(beanClass, key, jsonValueProcessor);
-        }
-    }
-
-    /**
-     * Registers a JsonValueProcessor.<br>
-     * [Java -&gt; JSON]
-     * 
      * @param key
      *            the property name to use as key
      * @param jsonValueProcessor
@@ -724,7 +697,6 @@ public class JsonConfig{
         classMap = null;
         keyMap.clear();
         typeMap.clear();
-        beanKeyMap.clear();
         jsonPropertyFilter = null;
         javaPropertyFilter = null;
         jsonBeanProcessorMatcher = DEFAULT_JSON_BEAN_PROCESSOR_MATCHER;
@@ -747,7 +719,6 @@ public class JsonConfig{
      */
     public JsonConfig copy(){
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.beanKeyMap.putAll(beanKeyMap);
         jsonConfig.classMap = new HashMap<>();
         if (classMap != null){
             jsonConfig.classMap.putAll(classMap);

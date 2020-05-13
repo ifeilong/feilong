@@ -36,14 +36,14 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.collections4.IterableUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
+import com.feilong.lib.collection4.IterableUtils;
+import com.feilong.lib.collection4.MapUtils;
 
 /**
  * {@link Map}工具类.
@@ -193,7 +193,7 @@ import com.feilong.core.lang.NumberUtil;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.AbstractMap.SimpleEntry
- * @see org.apache.commons.collections4.MapUtils
+ * @see com.feilong.lib.collection4.MapUtils
  * @see "com.google.common.collect.Maps"
  * @since 1.0.0
  */
@@ -313,8 +313,8 @@ public final class MapUtil{
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
-     * @see org.apache.commons.collections4.IterableUtils#get(Iterable, int)
-     * @see org.apache.commons.collections4.CollectionUtils#get(Map, int)
+     * @see com.feilong.lib.collection4.IterableUtils#get(Iterable, int)
+     * @see com.feilong.lib.collection4.CollectionUtils#get(Map, int)
      * @since 1.10.1
      */
     public static <K, V> Map.Entry<K, V> get(Map<K, V> map,int index){
@@ -485,7 +485,7 @@ public final class MapUtil{
      *            the key
      * @param value
      *            the value
-     * @see org.apache.commons.collections4.MapUtils#safeAddToMap(Map, Object, Object)
+     * @see com.feilong.lib.collection4.MapUtils#safeAddToMap(Map, Object, Object)
      * @since 1.4.0
      */
     public static <K, V> void putIfValueNotNull(final Map<K, V> map,final K key,final V value){
@@ -812,7 +812,7 @@ public final class MapUtil{
      * @see "com.google.common.collect.ArrayListMultimap"
      * @see org.apache.commons.collections4.MultiValuedMap
      * @see org.apache.commons.collections4.IterableMap
-     * @see org.apache.commons.collections4.MultiMapUtils
+     * @see com.feilong.lib.collection4.MultiMapUtils
      * @see org.apache.commons.collections4.multimap.AbstractMultiValuedMap#put(Object, Object)
      * @since 1.6.2
      */
@@ -1077,7 +1077,7 @@ public final class MapUtil{
 
         for (Map.Entry<K, T> entry : map.entrySet()){
             K key = entry.getKey();
-            if (!org.apache.commons.collections4.IterableUtils.contains(excludeKeys, key)){
+            if (!com.feilong.lib.collection4.IterableUtils.contains(excludeKeys, key)){
                 returnMap.put(key, entry.getValue());
             }
         }
@@ -1217,7 +1217,7 @@ public final class MapUtil{
      *            the map
      * @return 如果<code>map</code> 是null,返回 null<br>
      *         如果<code>map</code> 是empty,返回 一个 new HashMap
-     * @see org.apache.commons.collections4.MapUtils#invertMap(Map)
+     * @see com.feilong.lib.collection4.MapUtils#invertMap(Map)
      * @since 1.2.2
      */
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){

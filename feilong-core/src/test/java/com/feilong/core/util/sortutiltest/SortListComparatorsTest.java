@@ -26,11 +26,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
+import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.store.member.User;
 
 /**

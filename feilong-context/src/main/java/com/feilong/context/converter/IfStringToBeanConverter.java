@@ -16,8 +16,9 @@
 package com.feilong.context.converter;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.functors.IfClosure;
-import org.apache.commons.collections4.functors.IfTransformer;
+
+import com.feilong.lib.collection4.functors.IfClosure;
+import com.feilong.lib.collection4.functors.IfTransformer;
 
 /**
  * The Class IfStringToBeanConverter.

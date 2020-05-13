@@ -39,11 +39,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.commons.collections4.EnumerationUtils;
-import org.apache.commons.collections4.IteratorUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.Transformer;
-import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -71,6 +67,10 @@ import com.feilong.lib.beanutils.converters.NumberConverter;
 import com.feilong.lib.beanutils.converters.ShortConverter;
 import com.feilong.lib.beanutils.converters.StringConverter;
 import com.feilong.lib.beanutils.locale.converters.DateLocaleConverter;
+import com.feilong.lib.collection4.EnumerationUtils;
+import com.feilong.lib.collection4.IteratorUtils;
+import com.feilong.lib.collection4.MapUtils;
+import com.feilong.lib.collection4.iterators.EnumerationIterator;
 
 /**
  * 常用类型转换处理.
@@ -1040,7 +1040,7 @@ public final class ConvertUtil{
      *            the connector
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
-     * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
+     * @see com.feilong.lib.collection4.IteratorUtils#toString(Iterator)
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @since 1.11.0
      */
@@ -1212,7 +1212,7 @@ public final class ConvertUtil{
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
-     * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
+     * @see com.feilong.lib.collection4.IteratorUtils#toString(Iterator)
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @since 1.8.4 change param order
      */
@@ -1612,7 +1612,7 @@ public final class ConvertUtil{
      * @param properties
      *            the properties
      * @return 如果 <code>properties</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
+     * @see com.feilong.lib.collection4.MapUtils#toProperties(Map)
      * @since 1.7.1
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -1974,7 +1974,7 @@ public final class ConvertUtil{
      * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>keyTransformer</code> 是null,那么key直接使用<code>inputMap</code>的key<br>
      *         如果 <code>valueTransformer</code> 是null,那么value 直接使用<code>inputMap</code>的 value<br>
-     * @see org.apache.commons.collections4.MapUtils#transformedMap(Map, Transformer, Transformer)
+     * @see com.feilong.lib.collection4.MapUtils#transformedMap(Map, Transformer, Transformer)
      * @see org.apache.commons.collections4.map.TransformedMap#transformedMap(Map, Transformer, Transformer)
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/497">issues497</a>
      * @since 1.9.2
@@ -2268,7 +2268,7 @@ public final class ConvertUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,返回 empty Properties<br>
-     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
+     * @see com.feilong.lib.collection4.MapUtils#toProperties(Map)
      * @since 1.7.3
      */
     public static Properties toProperties(final Map<String, String> map){
@@ -2341,8 +2341,8 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>collection instanceof List</code>,那么强转成 list返回<br>
      *         否则返回 <code>new ArrayList(collection)</code>
-     * @see org.apache.commons.collections4.IterableUtils#toList(Iterable)
-     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator)
+     * @see com.feilong.lib.collection4.IterableUtils#toList(Iterable)
+     * @see com.feilong.lib.collection4.IteratorUtils#toList(Iterator)
      * @since 1.6.1
      */
     public static <T> List<T> toList(final Collection<T> collection){
@@ -2692,7 +2692,7 @@ public final class ConvertUtil{
      * @see java.util.ArrayList#toArray()
      * @see java.util.ArrayList#toArray(Object[])
      * 
-     * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
+     * @see com.feilong.lib.collection4.IteratorUtils#toArray(Iterator,Class)
      * @see "org.springframework.util.StringUtils#toStringArray(Collection)"
      * @since 1.2.2
      */

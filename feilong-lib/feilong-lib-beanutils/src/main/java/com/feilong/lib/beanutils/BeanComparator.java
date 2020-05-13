@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 
-import org.apache.commons.collections4.comparators.ComparableComparator;
+import com.feilong.lib.collection4.comparators.ComparableComparator;
 
 /**
  * <p>

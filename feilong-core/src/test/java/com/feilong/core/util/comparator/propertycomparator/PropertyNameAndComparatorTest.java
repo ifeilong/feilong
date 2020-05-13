@@ -15,10 +15,10 @@
  */
 package com.feilong.core.util.comparator.propertycomparator;
 
-import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
+import com.feilong.lib.collection4.ComparatorUtils;
 
 public class PropertyNameAndComparatorTest{
 

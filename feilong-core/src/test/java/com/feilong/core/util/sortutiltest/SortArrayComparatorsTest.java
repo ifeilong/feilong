@@ -22,10 +22,10 @@ import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Comparator;
 
-import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.lib.collection4.ComparatorUtils;
 
 /**
  * The Class SortUtilSortArrayComparatorsTest.

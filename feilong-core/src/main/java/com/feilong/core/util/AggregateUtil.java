@@ -29,13 +29,13 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
+import com.feilong.lib.collection4.IterableUtils;
 
 /**
  * 专门用来统计数据的工具类.
@@ -668,7 +668,7 @@ public final class AggregateUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #groupCount(Iterable , String, Predicate)
-     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <O, T> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName){
         return groupCount(beanIterable, propertyName, null);
@@ -737,7 +737,7 @@ public final class AggregateUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
-     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <O, T> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
@@ -824,7 +824,7 @@ public final class AggregateUtil{
      *         如果 <code>propertyNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 循环的<code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.6
      * @since 1.10.7 change param type from {@code String[] propertyNames} to {@code String...propertyNames} <br>
      *        change return type from {@code Map<String, Map<T, Integer>>} to {@code Map<String, Map<Object, Integer>>}
@@ -899,7 +899,7 @@ public final class AggregateUtil{
      *         如果 循环的<code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
-     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.6
      * @since 1.10.7 change return type from {@code Map<String, Map<T, Integer>>} to {@code Map<String, Map<Object, Integer>>}
      */
@@ -1002,7 +1002,7 @@ public final class AggregateUtil{
      *         如果 <code>propertyNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果 循环的<code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
-     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.7
      */
     public static <O> Map<String, Map<Object, Integer>> groupCount(
@@ -1103,7 +1103,7 @@ public final class AggregateUtil{
      *         如果 循环的<code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
-     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.7
      */
     public static <O> Map<String, Map<Object, Integer>> groupCount(

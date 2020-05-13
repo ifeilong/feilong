@@ -21,11 +21,11 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
+import com.feilong.lib.collection4.IteratorUtils;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONNull;
@@ -119,8 +119,8 @@ public final class JsonHelper{
      * @see com.feilong.lib.json.util.JSONUtils#isArray(Object)
      * @see java.lang.Class#isEnum()
      * @see com.feilong.lib.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
-     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator)
-     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)
+     * @see com.feilong.lib.collection4.IteratorUtils#toList(Iterator)
+     * @see com.feilong.lib.collection4.IteratorUtils#toList(Iterator, int)
      * @see com.feilong.lib.json.JSONSerializer#toJSON(Object)
      */
     static JSON toJSON(Object obj,JsonConfig jsonConfig){

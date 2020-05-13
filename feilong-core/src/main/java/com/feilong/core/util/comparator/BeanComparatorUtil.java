@@ -18,24 +18,24 @@ package com.feilong.core.util.comparator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.comparator.SortHelper.isAsc;
-import static org.apache.commons.collections4.ComparatorUtils.reversedComparator;
+import static com.feilong.lib.collection4.ComparatorUtils.reversedComparator;
 
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.collections4.ComparatorUtils;
-import org.apache.commons.collections4.comparators.ComparableComparator;
-import org.apache.commons.collections4.comparators.FixedOrderComparator;
-import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.lib.beanutils.BeanComparator;
+import com.feilong.lib.collection4.ComparatorUtils;
+import com.feilong.lib.collection4.comparators.ComparableComparator;
+import com.feilong.lib.collection4.comparators.FixedOrderComparator;
+import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 
 /**
  * 专注于 bean 属性值的排序.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.collections4.ComparatorUtils
+ * @see com.feilong.lib.collection4.ComparatorUtils
  * @see FixedOrderComparator
  * @since 1.8.0
  */
@@ -91,7 +91,7 @@ public final class BeanComparatorUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyNameAndOrders</code> 是empty,<br>
      *             或者有元素是 blank
-     * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Collection)
+     * @see com.feilong.lib.collection4.ComparatorUtils#chainedComparator(java.util.Collection)
      * @since 1.10.2 support propertyNameAndOrder
      */
     public static <T> Comparator<T> chainedComparator(String...propertyNameAndOrders){

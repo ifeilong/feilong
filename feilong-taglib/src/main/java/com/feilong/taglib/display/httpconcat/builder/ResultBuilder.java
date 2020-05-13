@@ -21,13 +21,13 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.List;
 
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.collection4.ListUtils;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
 

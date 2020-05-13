@@ -17,8 +17,9 @@ package com.feilong.core.util.comparator;
 
 import static java.util.Collections.emptyList;
 
-import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.junit.Test;
+
+import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 
 /**
  * 

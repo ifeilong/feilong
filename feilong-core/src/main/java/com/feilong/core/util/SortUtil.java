@@ -28,14 +28,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.ComparatorUtils;
-import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
-import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.core.util.comparator.ComparatorUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
+import com.feilong.lib.collection4.ComparatorUtils;
+import com.feilong.lib.collection4.comparators.ReverseComparator;
+import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 
 /**
  * 专注于排序的工具类.
@@ -640,7 +640,7 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyNames</code> 是empty ,或者有 null元素
      * @see BeanComparatorUtil#chainedComparator(String...)
-     * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator...)
+     * @see com.feilong.lib.collection4.ComparatorUtils#chainedComparator(java.util.Comparator...)
      * @see #sortList(List, Comparator...)
      * @since 1.8.7 change name
      */

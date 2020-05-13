@@ -21,9 +21,10 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections4.IterableUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.lib.collection4.IterableUtils;
 
 /**
  * 笛卡尔乘积.

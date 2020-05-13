@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -30,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.lib.collection4.comparators.ReverseComparator;
 
 /**
  * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用每个需要排序的字段创建 {@link Comparator}类.
@@ -53,12 +53,12 @@ import com.feilong.core.bean.PropertyUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see org.apache.commons.collections4.ComparatorUtils
+ * @see com.feilong.lib.collection4.ComparatorUtils
  * @see "org.springframework.beans.support.PropertyComparator"
  * @see com.feilong.lib.beanutils.BeanComparator
- * @see org.apache.commons.collections4.comparators.BooleanComparator
- * @see org.apache.commons.collections4.comparators.ReverseComparator
- * @see org.apache.commons.collections4.comparators.ComparableComparator
+ * @see com.feilong.lib.collection4.comparators.BooleanComparator
+ * @see com.feilong.lib.collection4.comparators.ReverseComparator
+ * @see com.feilong.lib.collection4.comparators.ComparableComparator
  * @see <a href=
  *      "http://stackoverflow.com/questions/19325256/java-lang-illegalargumentexception-comparison-method-violates-its-general-contr">java-
  *      lang-illegalargumentexception-comparison-method-violates-its-general-contr</a>
@@ -455,7 +455,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * @param propertyValue2
      *            the property value2
      * @return the int
-     * @see org.apache.commons.collections4.comparators.ComparableComparator
+     * @see com.feilong.lib.collection4.comparators.ComparableComparator
      * @since 1.5.4
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })

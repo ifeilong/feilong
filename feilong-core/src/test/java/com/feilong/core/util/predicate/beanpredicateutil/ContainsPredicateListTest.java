@@ -21,10 +21,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.store.member.User;
 
 public class ContainsPredicateListTest{

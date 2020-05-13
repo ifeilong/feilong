@@ -28,8 +28,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.commons.collections4.IteratorUtils;
 import org.junit.Test;
+
+import com.feilong.lib.collection4.IteratorUtils;
 
 /**
  * The Class ConvertUtilToIteratorTest.

@@ -17,10 +17,10 @@ package com.feilong.core.util.predicate.beanpredicateutil;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.junit.Test;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
 public class ComparatorPredicateTest{

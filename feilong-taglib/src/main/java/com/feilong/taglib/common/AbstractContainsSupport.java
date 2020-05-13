@@ -82,7 +82,7 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
      * @return 如果iterator为null/empty,则返回false<br>
      *         否则迭代 <code>iterator</code>,将元素转成String,和传入参数 <code>value</code>的String值进行比较,如果相等直接返回true
      * @see "org.springframework.util.CollectionUtils#contains(Iterator, Object)"
-     * @see org.apache.commons.collections4.IteratorUtils#contains(Iterator, Object)
+     * @see com.feilong.lib.collection4.IteratorUtils#contains(Iterator, Object)
      * @since 1.7.2
      */
     public static boolean containsByStringValue(Iterator<?> iterator,Object value){

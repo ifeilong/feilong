@@ -22,7 +22,6 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +34,7 @@ import com.feilong.csv.handler.CsvColumnEntityListBuilder;
 import com.feilong.csv.handler.CsvContentBuilder;
 import com.feilong.csv.handler.DataListBuilder;
 import com.feilong.io.IOWriteUtil;
+import com.feilong.lib.collection4.IterableUtils;
 
 /**
  * cvs工具类.

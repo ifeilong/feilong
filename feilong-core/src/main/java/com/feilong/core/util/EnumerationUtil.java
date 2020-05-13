@@ -19,8 +19,8 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.util.Enumeration;
 
-import org.apache.commons.collections4.IteratorUtils;
-import org.apache.commons.collections4.iterators.EnumerationIterator;
+import com.feilong.lib.collection4.IteratorUtils;
+import com.feilong.lib.collection4.iterators.EnumerationIterator;
 
 /**
  * {@link Enumeration}工具类.
@@ -47,7 +47,7 @@ import org.apache.commons.collections4.iterators.EnumerationIterator;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.collections4.EnumerationUtils
+ * @see com.feilong.lib.collection4.EnumerationUtils
  * @since 1.5.3
  */
 public final class EnumerationUtil{
@@ -89,8 +89,8 @@ public final class EnumerationUtil{
      *         否则如果 contains 返回true,<br>
      *         其他返回false
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
-     * @see org.apache.commons.collections4.iterators.EnumerationIterator
-     * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
+     * @see com.feilong.lib.collection4.iterators.EnumerationIterator
+     * @see com.feilong.lib.collection4.IteratorUtils#contains(java.util.Iterator, Object)
      */
     public static <O> boolean contains(Enumeration<O> enumeration,O value){
         return isNotNullOrEmpty(enumeration) && IteratorUtils.contains(new EnumerationIterator<O>(enumeration), value);

@@ -17,10 +17,9 @@ package com.feilong.lib.json;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.collections4.map.ListOrderedMap;
 
 import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.JSONUtils;
@@ -178,7 +177,7 @@ public final class JSONObject implements JSON{
      * Construct an empty JSONObject.
      */
     public JSONObject(){
-        this.properties = new ListOrderedMap<>();
+        this.properties = new LinkedHashMap<>();
     }
 
     /**

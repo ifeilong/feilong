@@ -19,10 +19,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
+import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.store.member.UserSameHashCodeWithComparable;
 
 public class PropertyNameAndValueConvertToClassAndComparatorTest{

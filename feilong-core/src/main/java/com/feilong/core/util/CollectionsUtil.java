@@ -38,9 +38,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.IterableUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
@@ -52,6 +49,9 @@ import com.feilong.core.bean.PropertyValueObtainer;
 import com.feilong.core.util.closure.BeanPropertyValueChangeClosure;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.core.util.transformer.BeanTransformer;
+import com.feilong.lib.collection4.CollectionUtils;
+import com.feilong.lib.collection4.IterableUtils;
+import com.feilong.lib.collection4.ListUtils;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
@@ -259,9 +259,9 @@ import com.feilong.core.util.transformer.BeanTransformer;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.Collections
- * @see org.apache.commons.collections4.ListUtils
- * @see org.apache.commons.collections4.IterableUtils
- * @see org.apache.commons.collections4.CollectionUtils
+ * @see com.feilong.lib.collection4.ListUtils
+ * @see com.feilong.lib.collection4.IterableUtils
+ * @see com.feilong.lib.collection4.CollectionUtils
  * @see "org.springframework.util.CollectionUtils"
  * @see "com.google.common.collect.Sets"
  * @see "com.google.common.collect.Lists"
@@ -343,7 +343,7 @@ public final class CollectionsUtil{
      *             如果 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see org.apache.commons.collections4.IterableUtils#forEach(Iterable, org.apache.commons.collections4.Closure)
+     * @see com.feilong.lib.collection4.IterableUtils#forEach(Iterable, org.apache.commons.collections4.Closure)
      * @see BeanPropertyValueChangeClosure
      * @since 1.10.2
      */
@@ -422,9 +422,9 @@ public final class CollectionsUtil{
      *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>iterable</code> 是null,直接返回false<br>
      *         否则调用{@link CollectionUtils#addAll(Collection, Iterable)}
-     * @see org.apache.commons.collections4.CollectionUtils#addIgnoreNull(Collection, Object)
-     * @see org.apache.commons.collections4.CollectionUtils#addAll(Collection, Iterable)
-     * @see org.apache.commons.collections4.CollectionUtils#addAll(Collection, Iterator)
+     * @see com.feilong.lib.collection4.CollectionUtils#addIgnoreNull(Collection, Object)
+     * @see com.feilong.lib.collection4.CollectionUtils#addAll(Collection, Iterable)
+     * @see com.feilong.lib.collection4.CollectionUtils#addAll(Collection, Iterator)
      * @since 1.6.3
      */
     public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O> iterable){
@@ -479,7 +479,7 @@ public final class CollectionsUtil{
      *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>element</code> 是null 或者 empty,直接返回false<br>
      *         否则调用<code>objectCollection.add(object)</code>
-     * @see org.apache.commons.collections4.CollectionUtils#addIgnoreNull(Collection, Object)
+     * @see com.feilong.lib.collection4.CollectionUtils#addIgnoreNull(Collection, Object)
      * @since 1.8.2
      */
     public static <T> boolean addIgnoreNullOrEmpty(final Collection<T> objectCollection,final T element){
@@ -534,7 +534,7 @@ public final class CollectionsUtil{
      *             如果 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see org.apache.commons.collections4.ListUtils#indexOf(List, Predicate)
+     * @see com.feilong.lib.collection4.ListUtils#indexOf(List, Predicate)
      * @see BeanPredicateUtil#equalPredicate(String, Object)
      * @since 1.5.5
      */
@@ -754,7 +754,7 @@ public final class CollectionsUtil{
      *         否则先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
-     * @see org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)
+     * @see com.feilong.lib.collection4.IterableUtils#uniqueIterable(Iterable)
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -801,7 +801,7 @@ public final class CollectionsUtil{
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
-     * @see org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)
+     * @see com.feilong.lib.collection4.IterableUtils#uniqueIterable(Iterable)
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -866,7 +866,7 @@ public final class CollectionsUtil{
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
-     * @see org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)
+     * @see com.feilong.lib.collection4.IterableUtils#uniqueIterable(Iterable)
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -1719,15 +1719,15 @@ public final class CollectionsUtil{
      * @param predicate
      *            接口封装了对输入对象的判断,返回true或者false,可用的实现类有
      *            <ul>
-     *            <li>{@link org.apache.commons.collections4.functors.EqualPredicate EqualPredicate}</li>
-     *            <li>{@link org.apache.commons.collections4.functors.IdentityPredicate IdentityPredicate}</li>
-     *            <li>{@link org.apache.commons.collections4.functors.FalsePredicate FalsePredicate}</li>
-     *            <li>{@link org.apache.commons.collections4.functors.TruePredicate TruePredicate}</li>
+     *            <li>{@link com.feilong.lib.collection4.functors.EqualPredicate EqualPredicate}</li>
+     *            <li>{@link com.feilong.lib.collection4.functors.IdentityPredicate IdentityPredicate}</li>
+     *            <li>{@link com.feilong.lib.collection4.functors.FalsePredicate FalsePredicate}</li>
+     *            <li>{@link com.feilong.lib.collection4.functors.TruePredicate TruePredicate}</li>
      *            <li>....</li>
      *            </ul>
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)}
-     * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
+     * @see com.feilong.lib.collection4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Iterable<O> beanIterable,Predicate<O> predicate){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList() : (List<O>) CollectionUtils.select(beanIterable, predicate);
@@ -1899,7 +1899,7 @@ public final class CollectionsUtil{
      * @param predicate
      *            the predicate
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
+     * @see com.feilong.lib.collection4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
     public static <O> List<O> selectRejected(Iterable<O> beanIterable,Predicate<O> predicate){
@@ -2000,8 +2000,8 @@ public final class CollectionsUtil{
      *            the transformer to use, may be null
      * @return 如果 <code>inputIterable</code> 是null,返回 null<br>
      *         如果 <code>transformer</code> 是null,返回 empty list
-     * @see org.apache.commons.collections4.CollectionUtils#collect(Iterable, Transformer)
-     * @see org.apache.commons.collections4.CollectionUtils#transform(Collection, Transformer)
+     * @see com.feilong.lib.collection4.CollectionUtils#collect(Iterable, Transformer)
+     * @see com.feilong.lib.collection4.CollectionUtils#transform(Collection, Transformer)
      * @since 1.5.5
      */
     public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
@@ -2179,7 +2179,7 @@ public final class CollectionsUtil{
      *            the transformer to use, may be null
      * @return 如果 <code>inputIterator</code> 是null,返回 null<br>
      *         如果 <code>transformer</code> 是null,返回 {@code new ArrayList<>}
-     * @see org.apache.commons.collections4.CollectionUtils#collect(java.util.Iterator, Transformer)
+     * @see com.feilong.lib.collection4.CollectionUtils#collect(java.util.Iterator, Transformer)
      * @since 1.5.5
      */
     public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
@@ -2341,7 +2341,7 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * 参见
-     * {@link BeanPredicateUtil#comparatorPredicate(String, Comparable, org.apache.commons.collections4.functors.ComparatorPredicate.Criterion)}
+     * {@link BeanPredicateUtil#comparatorPredicate(String, Comparable, com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion)}
      * 
      * </blockquote>
      *

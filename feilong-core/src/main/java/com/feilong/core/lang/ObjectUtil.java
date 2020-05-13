@@ -138,7 +138,7 @@ public final class ObjectUtil{
      *            the default value to return, 可以是 {@code null} or empty
      * @return 如果 <code>object</code> 是null或者empty,返回 <code>defaultValue</code>,否则返回 <code>object</code>
      * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
-     * @see org.apache.commons.collections4.ListUtils#defaultIfNull(java.util.List, java.util.List)
+     * @see com.feilong.lib.collection4.ListUtils#defaultIfNull(java.util.List, java.util.List)
      * @since 1.7.2
      */
     public static <T> T defaultIfNullOrEmpty(final T object,final T defaultValue){

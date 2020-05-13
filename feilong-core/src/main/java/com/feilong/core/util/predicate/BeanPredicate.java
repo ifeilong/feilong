@@ -28,7 +28,7 @@ import com.feilong.core.bean.PropertyUtil;
  *            the generic type
  * @see com.feilong.lib.beanutils.BeanPredicate
  * @see com.feilong.lib.beanutils.BeanPropertyValueEqualsPredicate
- * @see org.apache.commons.collections4.functors.ComparatorPredicate
+ * @see com.feilong.lib.collection4.functors.ComparatorPredicate
  * @since 1.8.0
  */
 //XXX 如果{@link org.apache.commons.beanutils.BeanPredicate}支持泛型且支持 commons-collections4之后,那么这么类将会废弃

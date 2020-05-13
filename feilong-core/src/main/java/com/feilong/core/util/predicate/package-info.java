@@ -18,33 +18,33 @@
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * 
- * @see org.apache.commons.collections4.PredicateUtils
+ * @see com.feilong.lib.collection4.PredicateUtils
  * 
- * @see org.apache.commons.collections4.functors.AllPredicate
- * @see org.apache.commons.collections4.functors.AndPredicate
- * @see org.apache.commons.collections4.functors.AnyPredicate
+ * @see com.feilong.lib.collection4.functors.AllPredicate
+ * @see com.feilong.lib.collection4.functors.AndPredicate
+ * @see com.feilong.lib.collection4.functors.AnyPredicate
  * 
- * @see org.apache.commons.collections4.functors.ComparatorPredicate
- * @see org.apache.commons.collections4.functors.EqualPredicate
- * @see org.apache.commons.collections4.functors.ExceptionPredicate
- * @see org.apache.commons.collections4.functors.FalsePredicate
- * @see org.apache.commons.collections4.functors.IdentityPredicate
- * @see org.apache.commons.collections4.functors.InstanceofPredicate
+ * @see com.feilong.lib.collection4.functors.ComparatorPredicate
+ * @see com.feilong.lib.collection4.functors.EqualPredicate
+ * @see com.feilong.lib.collection4.functors.ExceptionPredicate
+ * @see com.feilong.lib.collection4.functors.FalsePredicate
+ * @see com.feilong.lib.collection4.functors.IdentityPredicate
+ * @see com.feilong.lib.collection4.functors.InstanceofPredicate
  * 
- * @see org.apache.commons.collections4.functors.NonePredicate
- * @see org.apache.commons.collections4.functors.NotNullPredicate
- * @see org.apache.commons.collections4.functors.NotPredicate
+ * @see com.feilong.lib.collection4.functors.NonePredicate
+ * @see com.feilong.lib.collection4.functors.NotNullPredicate
+ * @see com.feilong.lib.collection4.functors.NotPredicate
  * 
- * @see org.apache.commons.collections4.functors.NullPredicate
- * @see org.apache.commons.collections4.functors.NullIsExceptionPredicate
- * @see org.apache.commons.collections4.functors.NullIsFalsePredicate
- * @see org.apache.commons.collections4.functors.NullIsTruePredicate
+ * @see com.feilong.lib.collection4.functors.NullPredicate
+ * @see com.feilong.lib.collection4.functors.NullIsExceptionPredicate
+ * @see com.feilong.lib.collection4.functors.NullIsFalsePredicate
+ * @see com.feilong.lib.collection4.functors.NullIsTruePredicate
  * 
- * @see org.apache.commons.collections4.functors.OnePredicate
- * @see org.apache.commons.collections4.functors.OrPredicate
- * @see org.apache.commons.collections4.functors.TransformedPredicate
- * @see org.apache.commons.collections4.functors.TruePredicate
- * @see org.apache.commons.collections4.functors.UniquePredicate
+ * @see com.feilong.lib.collection4.functors.OnePredicate
+ * @see com.feilong.lib.collection4.functors.OrPredicate
+ * @see com.feilong.lib.collection4.functors.TransformedPredicate
+ * @see com.feilong.lib.collection4.functors.TruePredicate
+ * @see com.feilong.lib.collection4.functors.UniquePredicate
  * 
  * @since 1.2.0
  */

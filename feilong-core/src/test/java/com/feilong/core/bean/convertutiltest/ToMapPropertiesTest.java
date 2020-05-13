@@ -71,7 +71,7 @@ public class ToMapPropertiesTest{
         map.put("age", 18);
         map.put("country", "china");
 
-        Properties properties = org.apache.commons.collections4.MapUtils.toProperties(map);
+        Properties properties = com.feilong.lib.collection4.MapUtils.toProperties(map);
 
         assertThat(
                         toMap(properties),

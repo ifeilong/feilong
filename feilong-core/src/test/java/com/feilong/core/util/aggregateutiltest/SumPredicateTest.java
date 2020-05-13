@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.store.member.User;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
