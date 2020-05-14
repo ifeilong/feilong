@@ -26,17 +26,14 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.test.AbstractTest;
 
-public class CompareTemp{
-
-    private static final Logger        LOGGER            = LoggerFactory.getLogger(CompareTemp.class);
+public class CompareTemp extends AbstractTest{
 
     private static Map<String, String> EMAIL_ADDRESS_MAP = toMap(getResourceBundle("email-address"));
 

@@ -18,23 +18,17 @@ package com.feilong.core.net.urlutiltest;
 import java.net.URL;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.net.URLUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * The Class URLUtilToURLTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToFileURLTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToFileURLTest.class);
-
-    //---------------------------------------------------------------
+public class ToFileURLTest extends AbstractTest{
 
     // @Test(expected = InvocationTargetException.class)
     @Test

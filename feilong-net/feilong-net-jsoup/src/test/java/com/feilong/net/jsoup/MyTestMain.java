@@ -18,12 +18,14 @@ package com.feilong.net.jsoup;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
+import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
 public class MyTestMain extends AbstractTest{
 
-    public static void main(String[] args){
+    @Test
+    public void testMyTestMain(){
         // 直接从字符串中输入 HTML 文档
         String html = "<html><head><title> 开源中国社区 </title></head>" + "<body><p> 这里是 jsoup 项目的相关文章 </p></body></html>";
         Document doc = Jsoup.parse(html);

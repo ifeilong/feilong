@@ -13,26 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.processor;
+package com.feilong.store.member;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.feilong.lib.lang3.builder.CompareToBuilder;
 
 /**
+ * for 极端测试
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
+ * @since 1.10.3
  */
-public class CapitalizePropertyNameProcessorTest{
+public class UserSameHashCodeWithComparable extends UserSameHashCode implements Comparable<UserSameHashCodeWithComparable>{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CapitalizePropertyNameProcessorTest.class);
-
-    @Test
-    public void test(){
-        fail("Not yet implemented");
+    public UserSameHashCodeWithComparable(Integer id, String name){
+        super(id, name);
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(UserSameHashCodeWithComparable userSameHashCodeWithComparable){
+        return CompareToBuilder.reflectionCompare(this, userSameHashCodeWithComparable);
+    }
+
 }

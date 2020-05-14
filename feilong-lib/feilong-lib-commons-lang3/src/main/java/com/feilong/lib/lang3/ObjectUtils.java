@@ -28,9 +28,6 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.function.Supplier;
 
-import com.feilong.lib.lang3.exception.CloneFailedException;
-import com.feilong.lib.lang3.text.StrBuilder;
-
 /**
  * <p>
  * Operations on {@code Object}.
@@ -571,33 +568,7 @@ public class ObjectUtils{
               .append(Integer.toHexString(System.identityHashCode(object)));
     }
 
-    /**
-     * <p>Appends the toString that would be produced by {@code Object}
-     * if a class did not override toString itself. {@code null}
-     * will throw a NullPointerException for either of the two parameters. </p>
-     *
-     * <pre>
-     * ObjectUtils.identityToString(builder, "")            = builder.append("java.lang.String@1e23"
-     * ObjectUtils.identityToString(builder, Boolean.TRUE)  = builder.append("java.lang.Boolean@7fa"
-     * ObjectUtils.identityToString(builder, Boolean.TRUE)  = builder.append("java.lang.Boolean@7fa")
-     * </pre>
-     *
-     * @param builder  the builder to append to
-     * @param object  the object to create a toString for
-     * @since 3.2
-     * @deprecated as of 3.6, because StrBuilder was moved to commons-text,
-     *  use one of the other {@code identityToString} methods instead
-     */
-    @Deprecated
-    public static void identityToString(final StrBuilder builder, final Object object) {
-        Validate.notNull(object, "Cannot get the toString of a null object");
-        final String name = object.getClass().getName();
-        final String hexString = Integer.toHexString(System.identityHashCode(object));
-        builder.ensureCapacity(builder.length() +  name.length() + 1 + hexString.length());
-        builder.append(name)
-              .append(AT_SIGN)
-              .append(hexString);
-    }
+    
 
     /**
      * <p>Appends the toString that would be produced by {@code Object}
@@ -852,7 +823,6 @@ public class ObjectUtils{
      * @param <T> the type of the object
      * @param obj  the object to clone, null returns null
      * @return the clone if the object implements {@link Cloneable} otherwise {@code null}
-     * @throws CloneFailedException if the object is cloneable and the clone operation fails
      * @since 3.0
      */
     public static <T> T clone(final T obj) {
@@ -874,14 +844,14 @@ public class ObjectUtils{
                     final Method clone = obj.getClass().getMethod("clone");
                     result = clone.invoke(obj);
                 } catch (final NoSuchMethodException e) {
-                    throw new CloneFailedException("Cloneable type "
+                    throw new IllegalArgumentException("Cloneable type "
                         + obj.getClass().getName()
                         + " has no clone method", e);
                 } catch (final IllegalAccessException e) {
-                    throw new CloneFailedException("Cannot clone Cloneable type "
+                    throw new IllegalArgumentException("Cannot clone Cloneable type "
                         + obj.getClass().getName(), e);
                 } catch (final InvocationTargetException e) {
-                    throw new CloneFailedException("Exception cloning Cloneable type "
+                    throw new IllegalArgumentException("Exception cloning Cloneable type "
                         + obj.getClass().getName(), e.getCause());
                 }
             }
@@ -974,118 +944,7 @@ public class ObjectUtils{
 
             public final static int MAGIC_NUMBER = CONST(5);
      */
-
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     *     public final static boolean MAGIC_FLAG = ObjectUtils.CONST(true);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v the boolean value to return
-     * @return the boolean v, unchanged
-     * @since 3.2
-     */
-    public static boolean CONST(final boolean v) {
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     *     public final static byte MAGIC_BYTE = ObjectUtils.CONST((byte) 127);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v the byte value to return
-     * @return the byte v, unchanged
-     * @since 3.2
-     */
-    public static byte CONST(final byte v) {
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     *     public final static byte MAGIC_BYTE = ObjectUtils.CONST_BYTE(127);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v the byte literal (as an int) value to return
-     * @throws IllegalArgumentException if the value passed to v
-     *         is larger than a byte, that is, smaller than -128 or
-     *         larger than 127.
-     * @return the byte v, unchanged
-     * @since 3.2
-     */
-    public static byte CONST_BYTE(final int v) {
-        if (v < Byte.MIN_VALUE || v > Byte.MAX_VALUE) {
-            throw new IllegalArgumentException("Supplied value must be a valid byte literal between -128 and 127: [" + v + "]");
-        }
-        return (byte) v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     *     public final static char MAGIC_CHAR = ObjectUtils.CONST('a');
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v the char value to return
-     * @return the char v, unchanged
-     * @since 3.2
-     */
-    public static char CONST(final char v) {
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     *     public final static short MAGIC_SHORT = ObjectUtils.CONST((short) 123);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v the short value to return
-     * @return the short v, unchanged
-     * @since 3.2
-     */
-    public static short CONST(final short v) {
-        return v;
-    }
+ 
 
     /**
      * This method returns the provided value unchanged.

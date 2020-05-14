@@ -111,9 +111,9 @@ public class SerializationUtils{
             return readObject;
 
         }catch (final ClassNotFoundException ex){
-            throw new SerializationException("ClassNotFoundException while reading cloned object data", ex);
+            throw new IllegalArgumentException("ClassNotFoundException while reading cloned object data", ex);
         }catch (final IOException ex){
-            throw new SerializationException("IOException while reading or closing cloned object data", ex);
+            throw new IllegalArgumentException("IOException while reading or closing cloned object data", ex);
         }
     }
 
@@ -165,7 +165,7 @@ public class SerializationUtils{
         try (ObjectOutputStream out = new ObjectOutputStream(outputStream)){
             out.writeObject(obj);
         }catch (final IOException ex){
-            throw new SerializationException(ex);
+            throw new IllegalArgumentException(ex);
         }
     }
 
@@ -227,7 +227,7 @@ public class SerializationUtils{
             final T obj = (T) in.readObject();
             return obj;
         }catch (final ClassNotFoundException | IOException ex){
-            throw new SerializationException(ex);
+            throw new IllegalArgumentException(ex);
         }
     }
 

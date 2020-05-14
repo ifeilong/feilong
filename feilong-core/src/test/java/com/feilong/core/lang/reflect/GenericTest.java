@@ -27,14 +27,15 @@ import com.feilong.test.AbstractTest;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0
+ * @deprecated 要加入到suite里
  */
+@Deprecated
 public class GenericTest extends AbstractTest{
 
     /**
      * Test generic test.
      */
     @Test
-    
     public void testGenericTest(){
         LOGGER.debug((String) getValue("jinxin", String.class));
         LOGGER.debug((String) getValue("jinxin", Integer.class));
@@ -51,7 +52,7 @@ public class GenericTest extends AbstractTest{
      *            the klass
      * @return the value
      */
-    public static <T> T getValue(String a,Class<?> klass){
+    public <T> T getValue(String a,Class<?> klass){
         try{
             Method method = GenericTest.class.getMethod("getValue", String.class, Class.class);
             TypeVariable<?> typeVariable = (TypeVariable<?>) method.getGenericReturnType();

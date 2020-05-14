@@ -8,20 +8,17 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.Test;
 
 import com.feilong.csv.User;
 import com.feilong.io.IOUtil;
+import com.feilong.test.AbstractTest;
 
 /**
  * @author ashraf_sarhan
  *
  */
-public class CsvFileReader{
-
-    /** The Constant log. */
-    private static final Logger   LOGGER      = LoggerFactory.getLogger(CsvFileReader.class);
+public class CsvFileReader extends AbstractTest{
 
     //---------------------------------------------------------------
     //CSV文件头
@@ -32,7 +29,7 @@ public class CsvFileReader{
     /**
      * @param fileName
      */
-    public static void readCsvFile(String fileName){
+    public void readCsvFile(String fileName){
         FileReader fileReader = null;
         CSVParser csvFileParser = null;
         //创建CSVFormat(header mapping)
@@ -64,11 +61,10 @@ public class CsvFileReader{
         }
     }
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args){
+    @Test
+    public void testCsvFileReader(){
         readCsvFile("c://users.csv");
+        //assertEquals(expected, actual);
     }
 
 }

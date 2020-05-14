@@ -18,6 +18,7 @@
 	<description>${project.name} ${project.version} API</description>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>

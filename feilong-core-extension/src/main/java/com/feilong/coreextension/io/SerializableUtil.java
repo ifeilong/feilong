@@ -25,10 +25,10 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.net.URIUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.io.InputStreamUtil;
-import com.feilong.lib.lang3.SerializationException;
 
 /**
  * {@link java.io.Serializable}util.
@@ -124,7 +124,7 @@ public final class SerializableUtil{
 
             return byteArrayOutputStream;
         }catch (IOException e){
-            throw new SerializationException(e);
+            throw new DefaultRuntimeException(e);
         }finally{
             IOUtil.closeQuietly(objectOutputStream);
         }
@@ -150,7 +150,7 @@ public final class SerializableUtil{
             String serializableString = byteArrayOutputStream.toString(ISO_8859_1);
             return URIUtil.encode(serializableString, UTF8);
         }catch (IOException e){
-            throw new SerializationException(e);
+            throw new DefaultRuntimeException(e);
         }finally{
             IOUtil.closeQuietly(byteArrayOutputStream);
         }

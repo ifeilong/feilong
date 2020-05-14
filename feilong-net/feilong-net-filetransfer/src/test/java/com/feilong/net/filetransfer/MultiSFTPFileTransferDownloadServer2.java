@@ -16,22 +16,17 @@
 package com.feilong.net.filetransfer;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.feilong.net.filetransfer.FileTransfer;
+import com.feilong.test.AbstractTest;
 
-public class MultiSFTPFileTransferDownloadServer2{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MultiSFTPFileTransferDownloadServer2.class);
+public class MultiSFTPFileTransferDownloadServer2 extends AbstractTest{
 
     /** The file transfer. */
     @Autowired
     @Qualifier("sftpFileTransfer")
-    private FileTransfer        fileTransfer;
+    private FileTransfer fileTransfer;
 
     @Test
     public void downloadFile(){

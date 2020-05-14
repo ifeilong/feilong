@@ -4103,60 +4103,6 @@ public class ArrayUtils{
      * @return whether the array is sorted according to natural ordering
      * @since 3.4
      */
-    public static boolean isSorted(final byte[] array){
-        if (array == null || array.length < 2){
-            return true;
-        }
-
-        byte previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++){
-            final byte current = array[i];
-            if (NumberUtils.compare(previous, current) > 0){
-                return false;
-            }
-
-            previous = current;
-        }
-        return true;
-    }
-
-    /**
-     * <p>
-     * This method checks whether the provided array is sorted according to natural ordering.
-     *
-     * @param array
-     *            the array to check
-     * @return whether the array is sorted according to natural ordering
-     * @since 3.4
-     */
-    public static boolean isSorted(final char[] array){
-        if (array == null || array.length < 2){
-            return true;
-        }
-
-        char previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++){
-            final char current = array[i];
-            if (CharUtils.compare(previous, current) > 0){
-                return false;
-            }
-
-            previous = current;
-        }
-        return true;
-    }
-
-    /**
-     * <p>
-     * This method checks whether the provided array is sorted according to natural ordering.
-     *
-     * @param array
-     *            the array to check
-     * @return whether the array is sorted according to natural ordering
-     * @since 3.4
-     */
     public static boolean isSorted(final double[] array){
         if (array == null || array.length < 2){
             return true;
