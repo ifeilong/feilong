@@ -265,7 +265,11 @@
 		<v.native2ascii-maven-plugin>2.0.1</v.native2ascii-maven-plugin>
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
+
+		<!-- https://docs.sonarqube.org/latest/analysis/analysis-parameters/ -->
 		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
+		<sonar.exclusions>feilong-lib/**/*</sonar.exclusions>
+
 		<!-- taglist 检查报告 -->
 		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>
 
