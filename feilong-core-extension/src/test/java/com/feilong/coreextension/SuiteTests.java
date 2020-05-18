@@ -28,6 +28,7 @@ import com.feilong.coreextension.io.SerializableUtilTest;
 
                 SerializableUtilTest.class,
                 DesktopUtilNullTest.class,
+
                 ClipboardUtilTest.class,
 
         //

@@ -36,22 +36,6 @@ public class DesktopUtilNullTest{
 
     //---------------------------------------------------------------
     @Test(expected = NullPointerException.class)
-    public void testEditDesktopUtilNullTestNull(){
-        DesktopUtil.edit(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testEditUtilNullTestEmpty(){
-        DesktopUtil.edit("");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testEditUtilNullTestBlank(){
-        DesktopUtil.edit(" ");
-    }
-
-    //---------------------------------------------------------------
-    @Test(expected = NullPointerException.class)
     public void testMailDesktopUtilNullTestNull(){
         DesktopUtil.mail(null);
     }

@@ -15,59 +15,51 @@
  */
 package com.feilong.coreextension.awt;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.lib.lang3.SystemUtils;
 
 public class DesktopUtilTest{
 
     /** The test file. */
-    private final String testFile = "E:\\DataCommon\\test\\test.txt";
+    private final String testFile = SystemUtils.USER_HOME + "/.m2/settings.xml";
 
-    /**
-     * Test browse1.
-     */
     @Test
     public void testBrowse1(){
-        int id = 14;
-        String s = "中国";
-        DesktopUtil.browse("http://101.95.128.146/payment/paymentChannel?s=" + s + "&id=" + id);
+        DesktopUtil.browse("http://101.95.128.146/payment/paymentChannel?s={}&id={}", 14, "中国");
+        assertTrue(true);
+
     }
 
-    /**
-     * Test print.
-     */
+    //---------------------------------------------------------------
     @Test
     public void testPrint(){
         DesktopUtil.print(testFile);
+        assertTrue(true);
     }
 
-    /**
-     * Test edit.
-     */
-    @Test
-    public void testEdit(){
-        DesktopUtil.edit(testFile);
-    }
+    //    @Test
+    //    public void testEdit(){
+    //        DesktopUtil.edit(testFile);
+    //    }
 
     @Test
     public void testOpen(){
         DesktopUtil.open(testFile);
+        assertTrue(true);
     }
 
+    //---------------------------------------------------------------
     @Test
     public void testMail(){
-        String a = "mailto:{}?subject={}&body={}";
-        String format = Slf4jUtil.format(a, "feilong@163.com", "你好", "我是飞天奔月</br>哈哈哈哈");
-
-        DesktopUtil.mail(format);
+        DesktopUtil.mail(
+                        "mailto:{}?subject={}&body={}", //
+                        "feilong@163.com",
+                        "你好",
+                        "我是飞天奔月</br>哈哈哈哈");
+        assertTrue(true);
     }
 
-    @Test
-    public void testBrowse(){
-        String[] strings = { "2RMD217-4", "ARHE041-1", "CRDF013-3" };
-        for (String string : strings){
-            DesktopUtil.browse("http://list.tmall.com/search_product.htm?q=" + string + "&type=p&cat=all&userBucket=5&userBucketCell=25");
-        }
-    }
 }

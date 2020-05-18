@@ -19,21 +19,17 @@ package com.feilong.lib.beanutils.locale.converters;
 
 import java.math.BigDecimal;
 
-import com.feilong.lib.beanutils.locale.converters.BigDecimalLocaleConverter;
-
 /**
  * Test Case for the BigDecimalLocaleConverter class.
  *
  * @version $Id$
  */
 
-public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase {
-
-
+public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase{
 
     // ---------------------------------------------------------- Constructors
 
-    public BigDecimalLocaleConverterTestCase(final String name) {
+    public BigDecimalLocaleConverterTestCase(final String name){
         super(name);
     }
 
@@ -43,11 +39,11 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      * Set up instance variables required by this test case.
      */
     @Override
-    public void setUp() throws Exception {
+    public void setUp() throws Exception{
 
         super.setUp();
 
-        defaultValue  = new BigDecimal("9.99");
+        defaultValue = new BigDecimal("9.99");
         expectedValue = new BigDecimal(expectedDecimalValue);
 
     }
@@ -56,30 +52,24 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      * Tear down instance variables required by this test case.
      */
     @Override
-    public void tearDown() {
+    public void tearDown(){
         super.tearDown();
     }
-
 
     // ------------------------------------------------------------------------
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
-    public void testConstructorMain() {
+    public void testConstructorMain(){
 
         // ------------- Construct with localized pattern ------------
-        converter = new BigDecimalLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedDecimalPattern,
-                                                  true);
-
+        converter = new BigDecimalLocaleConverter(defaultValue, localizedLocale, localizedDecimalPattern, true);
 
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -88,7 +78,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, new BigDecimal("1.234"));
-
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
@@ -99,7 +88,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
 
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -109,13 +97,8 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         //convertValueToType(converter, "(B)", Double.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-
         // ------------- Construct with non-localized pattern ------------
-        converter = new BigDecimalLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultDecimalPattern,
-                                                  false);
-
+        converter = new BigDecimalLocaleConverter(defaultValue, localizedLocale, defaultDecimalPattern, false);
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -130,7 +113,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      * Uses the default locale, no default value
      *
      */
-    public void testConstructor_2() {
+    public void testConstructor_2(){
 
         // ------------- Construct using default locale ------------
         converter = new BigDecimalLocaleConverter();
@@ -149,7 +132,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      * Uses the default locale, no default value
      *
      */
-    public void testConstructor_3() {
+    public void testConstructor_3(){
 
         // ------------- Construct using localized pattern (default locale) --------
         converter = new BigDecimalLocaleConverter(true);
@@ -160,13 +143,12 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
      * Test Converter(Locale) constructor
      */
-    public void testConstructor_4() {
+    public void testConstructor_4(){
 
         // ------------- Construct using specified Locale --------
         converter = new BigDecimalLocaleConverter(localizedLocale);
@@ -177,14 +159,12 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, locPattern) constructor
      */
-    public void testConstructor_5() {
+    public void testConstructor_5(){
 
         // ------------- Construct using specified Locale --------
         converter = new BigDecimalLocaleConverter(localizedLocale, true);
@@ -195,13 +175,12 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
      * Test Converter(Locale, pattern) constructor
      */
-    public void testConstructor_6() {
+    public void testConstructor_6(){
 
         // ------------- Construct using specified Locale --------
         converter = new BigDecimalLocaleConverter(localizedLocale, defaultDecimalPattern);
@@ -217,7 +196,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
     /**
      * Test Converter(Locale, pattern, locPattern) constructor
      */
-    public void testConstructor_7() {
+    public void testConstructor_7(){
 
         // ------------- Construct using specified Locale --------
         converter = new BigDecimalLocaleConverter(localizedLocale, localizedDecimalPattern, true);
@@ -233,7 +212,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
     /**
      * Test Converter(defaultValue) constructor
      */
-    public void testConstructor_8() {
+    public void testConstructor_8(){
 
         // ------------- Construct using specified Locale --------
         converter = new BigDecimalLocaleConverter(defaultValue);
@@ -249,7 +228,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
     /**
      * Test Converter(defaultValue, locPattern) constructor
      */
-    public void testConstructor_9() {
+    public void testConstructor_9(){
 
         // ------------- Construct using specified Locale --------
         converter = new BigDecimalLocaleConverter(defaultValue, true);
@@ -262,7 +241,4 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
     }
 
-
-
 }
-

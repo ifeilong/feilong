@@ -141,12 +141,6 @@ public abstract class AbstractConverter implements Converter{
         Class<?> sourceType = value == null ? null : value.getClass();
         final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
-                            "Converting" + (value == null ? "" : " '" + toString(sourceType) + "'") + " value '" + value + "' to type '"
-                                            + toString(targetType) + "'");
-        }
-
         value = convertArray(value);
 
         // Missing Value
@@ -163,17 +157,11 @@ public abstract class AbstractConverter implements Converter{
 
                 // No conversion necessary
             }else if (targetType.equals(sourceType)){
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("    No conversion required, value is already a " + toString(targetType));
-                }
                 return targetType.cast(value);
 
                 // Convert --> Type
             }else{
                 final Object result = convertToType(targetType, value);
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("    Converted to " + toString(targetType) + " value '" + result + "'");
-                }
                 return targetType.cast(result);
             }
         }catch (final Throwable t){
@@ -364,9 +352,6 @@ public abstract class AbstractConverter implements Converter{
      */
     protected void setDefaultValue(final Object defaultValue){
         useDefault = false;
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("Setting default value: " + defaultValue);
-        }
         if (defaultValue == null){
             this.defaultValue = null;
         }else{

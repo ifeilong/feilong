@@ -52,17 +52,20 @@ public final class DesktopUtil{
 
     /**
      * 使用系统默认浏览器,打开url.
+     * 
      * <p>
      * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
-     * 
+     *
      * @param url
      *            url地址
+     * @param args
+     *            the args
      * @see #desktopAction(String, Action)
      */
-    public static void browse(String url){
-        desktopAction(url, Action.BROWSE);
+    public static void browse(String url,Object...args){
+        desktopAction(Slf4jUtil.format(url, args), Action.BROWSE);
     }
 
     /**
@@ -71,13 +74,15 @@ public final class DesktopUtil{
      * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
-     * 
+     *
      * @param url
      *            url地址
+     * @param args
+     *            the args
      * @see #desktopAction(String, Action)
      */
-    public static void open(String url){
-        desktopAction(url, Action.OPEN);
+    public static void open(String url,Object...args){
+        desktopAction(Slf4jUtil.format(url, args), Action.OPEN);
     }
 
     //---------------------------------------------------------------
@@ -88,14 +93,16 @@ public final class DesktopUtil{
      * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
-     * 
-     * @param mailtoURL
+     *
+     * @param mailtoURLPattern
      *            the mail
+     * @param args
+     *            the args
      * @see java.awt.Desktop#mail(URI)
      * @see #desktopAction(String, Action)
      */
-    public static void mail(String mailtoURL){
-        desktopAction(mailtoURL, Action.MAIL);
+    public static void mail(String mailtoURLPattern,Object...args){
+        desktopAction(Slf4jUtil.format(mailtoURLPattern, args), Action.MAIL);
     }
 
     /**
@@ -105,25 +112,27 @@ public final class DesktopUtil{
      * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
-     * 
-     * @param url
-     *            the url
-     * @since 1.2.0
-     */
-    public static void print(String url){
-        desktopAction(url, Action.PRINT);
-    }
-
-    /**
-     * Edits the.
      *
      * @param url
      *            the url
+     * @param args
+     *            the args
      * @since 1.2.0
      */
-    public static void edit(String url){
-        desktopAction(url, Action.EDIT);
+    public static void print(String url,Object...args){
+        desktopAction(Slf4jUtil.format(url, args), Action.PRINT);
     }
+
+    //    /**
+    //     * Edits the.
+    //     *
+    //     * @param url
+    //     *            the url
+    //     * @since 1.2.0
+    //     */
+    //    public static void edit(String url){
+    //        desktopAction(url, Action.EDIT);
+    //    }
 
     //---------------------------------------------------------------
 

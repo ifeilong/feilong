@@ -137,7 +137,7 @@ public class SessionPropertiesBuilder{
         // Defaults to false for the "smtp" protocol and true for the "smtps" protocol.
         properties.put("mail.smtp.ssl.enable", "true");
 
-        //If set, specifies the name of a class that implements thejavax.net.SocketFactory interface. 
+        //If set, specifies the name of a class that implements the javax.net.SocketFactory interface. 
         //This class will be used to create SMTP sockets.
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
@@ -181,17 +181,14 @@ public class SessionPropertiesBuilder{
 
     }
 
-    /**
-     * @param properties
-     */
     private static void setStarttls(Properties properties){
-        //        使用 STARTTLS安全连接:prop.put(“mail.smtp.starttls.enable”,”true”);
+        // 使用 STARTTLS安全连接:prop.put(“mail.smtp.starttls.enable”,”true”);
         //    Caused by: com.sun.mail.smtp.SMTPSendFailedException: 530 5.7.0 Must issue a STARTTLS command first
 
         //boolean If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection before issuing any login commands. 
         //Note that an appropriate trust store must configured so that the client will trust the server's certificate. 
-        //Defaults to false.
 
+        //Defaults to false.
         properties.put("mail.smtp.starttls.enable", "true");//STARTTLS requested but already using SSL
 
         //If true, requires the use of the STARTTLS command. 
