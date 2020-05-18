@@ -21,7 +21,9 @@ import java.util.Date;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.2
+ * @deprecated 还不work
  */
+@Deprecated
 public class ICalendar{
 
     /**
