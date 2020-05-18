@@ -31,7 +31,7 @@ import org.apache.velocity.context.Context;
  * @see org.apache.velocity.runtime.resource.loader.ResourceLoader
  * @since 1.2.1
  */
-public final class VelocityUtil extends AbstractTemplateUtil{
+final class VelocityUtil extends AbstractTemplateUtil{
 
     /**
      * Static instance.
