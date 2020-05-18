@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail.builer;
 
+import static com.feilong.core.date.DateUtil.now;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -125,6 +127,9 @@ public class MessageBuilder{
 
         //header信息
         HeaderSetter.setHeaders(message, mailSendRequest);
+
+        // 设置邮件消息发送的时间
+        message.setSentDate(now());
     }
 
 }

@@ -64,8 +64,8 @@ public class IMAPMailReader implements MailReader{
      * @see com.feilong.tools.mail.MailReader#getMailInfoList(com.feilong.tools.mail.entity.mailReaderConfig)
      */
     @Override
-    public List<MailInfo> getMailInfoList(MailReaderConfig mailReaderConfig){
-        return getMailInfoList(mailReaderConfig, null, null);
+    public List<MailInfo> read(MailReaderConfig mailReaderConfig){
+        return read(mailReaderConfig, null, null);
     }
 
     //---------------------------------------------------------------
@@ -77,7 +77,7 @@ public class IMAPMailReader implements MailReader{
      * javax.mail.search.SearchTerm)
      */
     @Override
-    public List<MailInfo> getMailInfoList(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm){
+    public List<MailInfo> read(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm){
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.format(mailReaderConfig), JsonUtil.format(searchTerm));
         }

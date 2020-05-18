@@ -67,7 +67,7 @@ public final class DefaultMailSender implements MailSender{
      * @see com.feilong.tools.mail.MailSender#sendMail(com.feilong.tools.mail.entity.MailSenderConfig)
      */
     @Override
-    public void sendMail(MailSendRequest mailSendRequest){
+    public void send(MailSendRequest mailSendRequest){
         Validate.notNull(mailSendRequest, "mailSenderConfig can't be null!");
 
         Validate.notBlank(mailSendConnectionConfig.getUserName(), "mailSenderConfig.getUserName() can't be null!");

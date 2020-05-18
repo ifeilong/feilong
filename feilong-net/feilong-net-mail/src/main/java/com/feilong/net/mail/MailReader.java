@@ -37,7 +37,7 @@ public interface MailReader{
      *            the mail reader config
      * @return the mail info list
      */
-    List<MailInfo> getMailInfoList(MailReaderConfig mailReaderConfig);
+    List<MailInfo> read(MailReaderConfig mailReaderConfig);
 
     /**
      * 获得所有的邮件列表.
@@ -54,5 +54,5 @@ public interface MailReader{
      *            筛选条件
      * @return the mail info list
      */
-    List<MailInfo> getMailInfoList(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm);
+    List<MailInfo> read(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm);
 }

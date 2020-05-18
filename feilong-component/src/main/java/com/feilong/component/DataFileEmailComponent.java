@@ -130,7 +130,7 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
         MailSendRequest useMailSendRequest = BeanUtil.cloneBean(mailSendRequest);
         //变成附件发邮件给相关人员的组件
         useMailSendRequest.setAttachFilePaths(filePath);
-        mailSender.sendMail(useMailSendRequest);
+        mailSender.send(useMailSendRequest);
     }
 
     //---------------------------------------------------------------

@@ -37,5 +37,5 @@ public interface MailSender{
      * @throws MailSenderException
      *             the mail sender exception
      */
-    void sendMail(MailSendRequest mailSendRequest);
+    void send(MailSendRequest mailSendRequest);
 }

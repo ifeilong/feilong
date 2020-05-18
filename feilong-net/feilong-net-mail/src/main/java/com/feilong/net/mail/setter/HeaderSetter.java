@@ -15,12 +15,10 @@
  */
 package com.feilong.net.mail.setter;
 
-import static com.feilong.core.date.DateUtil.now;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
-import com.feilong.net.mail.MailHeader;
+import com.feilong.net.mail.FeiLongMailVersion;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.entity.Priority;
 
@@ -31,6 +29,22 @@ import com.feilong.net.mail.entity.Priority;
  * @since 1.13.2
  */
 public class HeaderSetter{
+
+    /** 是否需要回执. */
+    private static final String DISPOSITION_NOTIFICATION_TO = "Disposition-Notification-To";
+
+    /** 邮件的优先级. */
+    private static final String X_PRIORITY                  = "X-Priority";
+
+    //---------------------------------------------------------------
+
+    /** 邮件客户端 版本. */
+    private static final String X_MAILER                    = "X-mailer";
+
+    /** 邮件客户端 版本. */
+    private static final String X_MAILER_VALUE              = "FeiLong Mail Api " + FeiLongMailVersion.getVersion();
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HeaderSetter(){
@@ -67,20 +81,18 @@ public class HeaderSetter{
         // 邮件的优先级
         Priority priority = mailSendRequest.getPriority();
         if (null != priority){
-            message.addHeader(MailHeader.X_PRIORITY, priority.getLevelValue());
+            message.addHeader(X_PRIORITY, priority.getLevelValue());
         }
 
         // 是否需要回执
         if (mailSendRequest.getIsNeedReturnReceipt()){
-            message.setHeader(MailHeader.DISPOSITION_NOTIFICATION_TO, "1");
+            message.setHeader(DISPOSITION_NOTIFICATION_TO, "1");
         }
 
         //---------------------------------------------------------------
         // 邮件客户端
-        message.setHeader(MailHeader.X_MAILER, MailHeader.X_MAILER_VALUE);
+        message.setHeader(X_MAILER, X_MAILER_VALUE);
 
-        // 设置邮件消息发送的时间
-        message.setSentDate(now());
     }
 
 }

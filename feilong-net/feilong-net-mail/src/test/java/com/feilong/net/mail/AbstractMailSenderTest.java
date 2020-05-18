@@ -83,7 +83,7 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
     @After
     public void after(){
         MailSender mailSender = new DefaultMailSender(mailSendConnectionConfig);
-        mailSender.sendMail(mailSendRequest);
+        mailSender.send(mailSendRequest);
     }
 
 }
