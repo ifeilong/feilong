@@ -19,12 +19,6 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
@@ -41,8 +35,7 @@ public class NewTest{
      */
     @Test
     public void testNewArrayList(){
-        ArrayList<Object> newArrayList = CollectionsUtil.newArrayList();
-        assertEquals(emptyList(), newArrayList);
+        assertEquals(emptyList(), CollectionsUtil.newArrayList());
     }
 
     /**
@@ -50,8 +43,7 @@ public class NewTest{
      */
     @Test
     public void testNewLinkedList(){
-        LinkedList<Object> newLinkedList = CollectionsUtil.newLinkedList();
-        assertEquals(emptyList(), newLinkedList);
+        assertEquals(emptyList(), CollectionsUtil.newLinkedList());
     }
 
     //---------------------------------------------------------------
@@ -61,8 +53,7 @@ public class NewTest{
      */
     @Test
     public void testNewCopyOnWriteArrayList(){
-        CopyOnWriteArrayList<Object> newCopyOnWriteArrayList = CollectionsUtil.newCopyOnWriteArrayList();
-        assertEquals(emptyList(), newCopyOnWriteArrayList);
+        assertEquals(emptyList(), CollectionsUtil.newCopyOnWriteArrayList());
     }
 
     /**
@@ -70,8 +61,7 @@ public class NewTest{
      */
     @Test
     public void testNewHashSet(){
-        HashSet<Object> newHashSet = CollectionsUtil.newHashSet();
-        assertEquals(emptySet(), newHashSet);
+        assertEquals(emptySet(), CollectionsUtil.newHashSet());
     }
 
     /**
@@ -79,8 +69,7 @@ public class NewTest{
      */
     @Test
     public void testNewLinkedHashSet(){
-        LinkedHashSet<Object> newLinkedHashSet = CollectionsUtil.newLinkedHashSet();
-        assertEquals(emptySet(), newLinkedHashSet);
+        assertEquals(emptySet(), CollectionsUtil.newLinkedHashSet());
     }
 
 }

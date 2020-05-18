@@ -84,11 +84,11 @@ public class SessionPropertiesBuilder{
         //---------------------------------------------------------------
 
         //        if(mailConfig.getTimeout() > 0)
-        //            javaMailProperties.put("mail.smtp.connectiontimeout", mailConfig.getTimeout() * 1000);
-        //            javaMailProperties.put("mail.smtp.timeout", mailConfig.getTimeout() * 1000);
+        //            javaMailProperties.put("mail.smtp.connectiontimeout", mailConfig.getTimeout() * 1000)
+        //            javaMailProperties.put("mail.smtp.timeout", mailConfig.getTimeout() * 1000)
         //        }else
-        //            javaMailProperties.put("mail.smtp.connectiontimeout", MailConfig.TIMEOUT);
-        //            javaMailProperties.put("mail.smtp.timeout", MailConfig.TIMEOUT);
+        //            javaMailProperties.put("mail.smtp.connectiontimeout", MailConfig.TIMEOUT)
+        //            javaMailProperties.put("mail.smtp.timeout", MailConfig.TIMEOUT)
 
         //---------------------------------------------------------------
 
@@ -146,38 +146,38 @@ public class SessionPropertiesBuilder{
         //SocketFactory
         //If set to a class that implements thejavax.net.SocketFactory interface, this class will be used to create SMTP sockets. 
         //Note that this is an instance of a class, not a name, and must be set using the putmethod, not the setProperty method.
-        //        properties.put("mail.smtp.socketFactory", "");
+        //        properties.put("mail.smtp.socketFactory", "")
 
         //boolean If set to true, failure to create a socket using the specified socket factory class will cause the socket to be created using the java.net.Socket class. 
         //Defaults to true.
-        //        properties.put("mail.smtp.socketFactory.fallback", "");
+        //        properties.put("mail.smtp.socketFactory.fallback", "")
 
         //int Specifies the port to connect to when using the specified socket factory. 
         //If not set, the default port will be used.
-        //properties.put("mail.smtp.socketFactory.port", "");
+        //properties.put("mail.smtp.socketFactory.port", "")
 
         //boolean If set to true, check the server identity as specified by RFC 2595. 
         //These additional checks based on the content of the server's certificate are intended to prevent man-in-the-middle attacks. Defaults to false.
-        //        properties.put("mail.smtp.ssl.checkserveridentity", "");
+        //        properties.put("mail.smtp.ssl.checkserveridentity", "")
 
         //If set to a class that extends thejavax.net.ssl.SSLSocketFactory class, this class will be used to create SMTP SSL sockets. 
         //Note that this is an instance of a class, not a name, and must be set using theput method, not the setProperty method.
-        //        properties.put("mail.smtp.ssl.socketFactory SSLSocketFactory", "");
+        //        properties.put("mail.smtp.ssl.socketFactory SSLSocketFactory", "")
 
         //String  If set, specifies the name of a class that extends thejavax.net.ssl.SSLSocketFactory class. 
         //This class will be used to create SMTP SSL sockets.
-        //        properties.put("mail.smtp.ssl.socketFactory.class", "");
+        //        properties.put("mail.smtp.ssl.socketFactory.class", "")
 
         //int Specifies the port to connect to when using the specified socket factory. 
         //If not set, the default port will be used.
-        //        properties.put("mail.smtp.ssl.socketFactory.port", "");
+        //        properties.put("mail.smtp.ssl.socketFactory.port", "")
 
         //string  Specifies the SSL protocols that will be enabled for SSL connections. The property value is a whitespace separated list of tokens acceptable to thejavax.net.ssl.SSLSocket.setEnabledProtocolsmethod.
-        //        properties.put("mail.smtp.ssl.protocols", "");
+        //        properties.put("mail.smtp.ssl.protocols", "")
 
         //string  Specifies the SSL cipher suites that will be enabled for SSL connections. 
         //The property value is a whitespace separated list of tokens acceptable to thejavax.net.ssl.SSLSocket.setEnabledCipherSuitesmethod.
-        //        properties.put("mail.smtp.ssl.ciphersuites", "");
+        //        properties.put("mail.smtp.ssl.ciphersuites", "")
 
     }
 
@@ -194,17 +194,17 @@ public class SessionPropertiesBuilder{
         //If true, requires the use of the STARTTLS command. 
         //If the server doesn't support the STARTTLS command, or the command fails, the connect method will fail. 
         //Defaults to false.
-        // properties.put("mail.smtp.starttls.required", "true");
+        // properties.put("mail.smtp.starttls.required", "true")
     }
     //
     //    private static void setSSL(Properties properties){
     //        //-------当需使用SSL验证时添加，邮箱不需SSL验证时删除即可（测试SSL验证使用QQ企业邮箱）
-    //        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-    //        properties.put("mail.smtp.socketFactory.fallback", "false");
-    //        properties.put("mail.smtp.socketFactory.port", "465");
-    //        //        MailSSLSocketFactory sf = new MailSSLSocketFactory();
-    //        //        sf.setTrustAllHosts(true);
-    //        properties.put("mail.smtp.ssl.socketFactory", "javax.net.ssl.SSLSocketFactory");
+    //        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
+    //        properties.put("mail.smtp.socketFactory.fallback", "false")
+    //        properties.put("mail.smtp.socketFactory.port", "465")
+    //        //        MailSSLSocketFactory sf = new MailSSLSocketFactory()
+    //        //        sf.setTrustAllHosts(true)
+    //        properties.put("mail.smtp.ssl.socketFactory", "javax.net.ssl.SSLSocketFactory")
     //    }
 
 }

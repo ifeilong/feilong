@@ -2734,7 +2734,7 @@ public final class CollectionsUtil{
      * @return the array list
      * @since 1.10.7
      */
-    public static <E> ArrayList<E> newArrayList(){
+    public static <E> List<E> newArrayList(){
         return new ArrayList<>();
     }
 
@@ -2746,7 +2746,7 @@ public final class CollectionsUtil{
      * @return the linked list
      * @since 1.10.7
      */
-    public static <E> LinkedList<E> newLinkedList(){
+    public static <E> List<E> newLinkedList(){
         return new LinkedList<>();
     }
 
@@ -2758,7 +2758,7 @@ public final class CollectionsUtil{
      * @return a new, empty {@code CopyOnWriteArrayList}
      * @since 1.10.7
      */
-    public static <E> CopyOnWriteArrayList<E> newCopyOnWriteArrayList(){
+    public static <E> List<E> newCopyOnWriteArrayList(){
         return new CopyOnWriteArrayList<>();
     }
 
@@ -2772,7 +2772,7 @@ public final class CollectionsUtil{
      * @return the hash set
      * @since 1.10.7
      */
-    public static <E> HashSet<E> newHashSet(){
+    public static <E> Set<E> newHashSet(){
         return new HashSet<>();
     }
 
@@ -2784,7 +2784,7 @@ public final class CollectionsUtil{
      * @return a new, empty {@code LinkedHashSet}
      * @since 1.10.7
      */
-    public static <E> LinkedHashSet<E> newLinkedHashSet(){
+    public static <E> Set<E> newLinkedHashSet(){
         return new LinkedHashSet<>();
     }
 

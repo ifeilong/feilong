@@ -1400,7 +1400,7 @@ public final class MapUtil{
      * @return a new, empty {@code ConcurrentHashMap}
      * @since 1.10.7
      */
-    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(){
+    public static <K, V> Map<K, V> newConcurrentHashMap(){
         return new ConcurrentHashMap<>();
     }
 
@@ -1416,7 +1416,7 @@ public final class MapUtil{
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      */
-    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(Map<K, V> map){
+    public static <K, V> Map<K, V> newConcurrentHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
         return new ConcurrentHashMap<>(map);
     }
@@ -1516,7 +1516,7 @@ public final class MapUtil{
      *             如果 expectedSize{@code  < }0
      * @since 1.11.1
      */
-    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(int expectedSize){
+    public static <K, V> Map<K, V> newConcurrentHashMap(int expectedSize){
         return new ConcurrentHashMap<>(toInitialCapacity(expectedSize));
     }
 
@@ -1533,7 +1533,7 @@ public final class MapUtil{
      * @since 1.10.7
      */
     @SuppressWarnings("rawtypes")
-    public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(){
+    public static <K extends Comparable, V> Map<K, V> newTreeMap(){
         return new TreeMap<>();
     }
 
@@ -1549,7 +1549,7 @@ public final class MapUtil{
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      */
-    public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(Map<K, V> map){
+    public static <K extends Comparable, V> Map<K, V> newTreeMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
         return new TreeMap<>(map);
     }
@@ -1621,7 +1621,7 @@ public final class MapUtil{
      * @see java.util.HashMap#HashMap()
      * @since 1.10.7
      */
-    public static <K, V> HashMap<K, V> newHashMap(){
+    public static <K, V> Map<K, V> newHashMap(){
         return new HashMap<>();
     }
 
@@ -1637,7 +1637,7 @@ public final class MapUtil{
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      */
-    public static <K, V> HashMap<K, V> newHashMap(Map<K, V> map){
+    public static <K, V> Map<K, V> newHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
         return new HashMap<>(map);
     }
@@ -1739,7 +1739,7 @@ public final class MapUtil{
      * @see java.util.HashMap#HashMap(int)
      * @since 1.7.1
      */
-    public static <K, V> HashMap<K, V> newHashMap(int expectedSize){
+    public static <K, V> Map<K, V> newHashMap(int expectedSize){
         return new HashMap<>(toInitialCapacity(expectedSize));
     }
 
@@ -1810,7 +1810,7 @@ public final class MapUtil{
      * @see java.util.LinkedHashMap#LinkedHashMap()
      * @since 1.10.7
      */
-    public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(){
+    public static <K, V> Map<K, V> newLinkedHashMap(){
         return new LinkedHashMap<>();
     }
 
@@ -1826,7 +1826,7 @@ public final class MapUtil{
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
      */
-    public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Map<K, V> map){
+    public static <K, V> Map<K, V> newLinkedHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
         return new LinkedHashMap<>(map);
     }
@@ -1929,7 +1929,7 @@ public final class MapUtil{
      * @see java.util.LinkedHashMap#LinkedHashMap(int)
      * @since 1.7.1
      */
-    public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize){
+    public static <K, V> Map<K, V> newLinkedHashMap(int expectedSize){
         return new LinkedHashMap<>(toInitialCapacity(expectedSize));
     }
 
