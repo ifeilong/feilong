@@ -55,8 +55,7 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
 
     //---------------------------------------------------------------
     private void loadMailSenderConfig(){
-        ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream(folder + getConfigFile()));
-        Map<String, String> map = ResourceBundleUtil.toMap(resourceBundle);
+        Map<String, String> map = buildData();
 
         ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
         char[] allowedChars = { '@' };
@@ -70,6 +69,11 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
 
         mailSendRequest = BeanUtil.populate(mailSendRequest, map);
         mailSendConnectionConfig = BeanUtil.populate(mailSendConnectionConfig, map);
+    }
+
+    private Map<String, String> buildData(){
+        ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream(folder + getConfigFile()));
+        return ResourceBundleUtil.toMap(resourceBundle);
     }
 
     //---------------------------------------------------------------

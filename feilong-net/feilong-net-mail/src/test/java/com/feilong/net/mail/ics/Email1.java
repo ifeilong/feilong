@@ -20,7 +20,7 @@ import com.feilong.core.date.DateUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.net.mail.AbstractMailSenderTest;
-import com.feilong.net.mail.builer.MessageBuilder;
+import com.feilong.net.mail.builder.MessageBuilder;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.MessageSendUtil;
 import com.feilong.net.mail.util.MimeType;

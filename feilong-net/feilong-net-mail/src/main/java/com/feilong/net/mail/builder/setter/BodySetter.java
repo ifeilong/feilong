@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail.setter;
+package com.feilong.net.mail.builder.setter;
 
 import static com.feilong.lib.lang3.StringUtils.EMPTY;
 

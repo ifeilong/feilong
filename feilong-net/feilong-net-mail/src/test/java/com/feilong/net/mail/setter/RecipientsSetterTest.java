@@ -24,6 +24,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.reflect.MethodUtil;
+import com.feilong.net.mail.builder.setter.RecipientsSetter;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 /**
@@ -31,7 +32,7 @@ import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 2.1.0
- * @see com.feilong.net.mail.setter.RecipientsSetter#buildCC(String[], String, boolean)
+ * @see com.feilong.net.mail.builder.setter.RecipientsSetter#buildCC(String[], String, boolean)
  */
 public class RecipientsSetterTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String[]>{
 

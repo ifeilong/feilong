@@ -21,8 +21,8 @@ import javax.mail.Authenticator;
 import javax.mail.Session;
 
 import com.feilong.lib.lang3.Validate;
-import com.feilong.net.mail.builer.AuthenticatorBuilder;
-import com.feilong.net.mail.builer.SessionPropertiesBuilder;
+import com.feilong.net.mail.builder.AuthenticatorBuilder;
+import com.feilong.net.mail.builder.SessionPropertiesBuilder;
 import com.feilong.net.mail.entity.SessionConfig;
 
 /**

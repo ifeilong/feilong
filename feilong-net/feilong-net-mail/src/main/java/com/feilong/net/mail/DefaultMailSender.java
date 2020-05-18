@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.Validate;
-import com.feilong.net.mail.builer.MessageBuilder;
+import com.feilong.net.mail.builder.MessageBuilder;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.MessageSendUtil;

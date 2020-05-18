@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.net.mail.builer;
+package com.feilong.net.mail.builder;
 
 import static com.feilong.core.date.DateUtil.now;
 
@@ -24,12 +24,12 @@ import javax.mail.internet.MimeMessage;
 
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.SessionFactory;
+import com.feilong.net.mail.builder.setter.BodySetter;
+import com.feilong.net.mail.builder.setter.HeaderSetter;
+import com.feilong.net.mail.builder.setter.RecipientsSetter;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.exception.MailSenderException;
-import com.feilong.net.mail.setter.BodySetter;
-import com.feilong.net.mail.setter.HeaderSetter;
-import com.feilong.net.mail.setter.RecipientsSetter;
 import com.feilong.net.mail.util.InternetAddressUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -74,7 +74,6 @@ public class MessageBuilder{
         // 根据session创建一个邮件消息
         Message message = new MimeMessage(session);
         try{
-
             //mail.smtp.from  String  Email address to use for SMTP MAIL command. 
             //This sets the envelope return address. 
             //Defaults to msg.getFrom() or InternetAddress.getLocalAddress(). 
@@ -131,5 +130,4 @@ public class MessageBuilder{
         // 设置邮件消息发送的时间
         message.setSentDate(now());
     }
-
 }
