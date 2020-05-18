@@ -39,11 +39,11 @@ public class EmailCalendarTest2 extends AbstractMailSenderTest{
 
     @Test
     public void send() throws Exception{
-        mailSenderConfig.setContent("hello hahaha");
+        mailSendRequest.setContent("hello hahaha");
 
         //---------------------------------------------------------------
         String fromEmail = "feilongtestemail@163.com";
-        Session session = SessionFactory.createSession(mailSenderConfig);
+        Session session = SessionFactory.createSession(mailSendConnectionConfig);
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(fromEmail));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
@@ -62,7 +62,7 @@ public class EmailCalendarTest2 extends AbstractMailSenderTest{
         BodyPart bodyPart = new MimeBodyPart();
         // 设置HTML内容
         // 设置邮件消息的主要内容
-        bodyPart.setContent(mailSenderConfig.getContent(), mailSenderConfig.getContentMimeType());
+        bodyPart.setContent(mailSendRequest.getContent(), mailSendRequest.getContentMimeType());
         multipart.addBodyPart(bodyPart);
 
         multipart.addBodyPart(messageBodyPart);

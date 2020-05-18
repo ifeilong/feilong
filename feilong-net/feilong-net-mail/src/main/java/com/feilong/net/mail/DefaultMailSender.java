@@ -23,7 +23,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.Validate;
 import com.feilong.net.mail.builer.MessageBuilder;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendConnectionConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.MessageSendUtil;
 
 /**
@@ -40,7 +41,23 @@ import com.feilong.net.mail.util.MessageSendUtil;
 public final class DefaultMailSender implements MailSender{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMailSender.class);
+    private static final Logger      LOGGER = LoggerFactory.getLogger(DefaultMailSender.class);
+
+    private MailSendConnectionConfig mailSendConnectionConfig;
+
+    //---------------------------------------------------------------
+    /**
+     * 
+     */
+    public DefaultMailSender(){
+    }
+
+    /**
+     * @param mailSendConnectionConfig
+     */
+    public DefaultMailSender(MailSendConnectionConfig mailSendConnectionConfig){
+        this.mailSendConnectionConfig = mailSendConnectionConfig;
+    }
 
     //---------------------------------------------------------------
 
@@ -50,24 +67,37 @@ public final class DefaultMailSender implements MailSender{
      * @see com.feilong.tools.mail.MailSender#sendMail(com.feilong.tools.mail.entity.MailSenderConfig)
      */
     @Override
-    public void sendMail(MailSenderConfig mailSenderConfig){
-        Validate.notNull(mailSenderConfig, "mailSenderConfig can't be null!");
+    public void sendMail(MailSendRequest mailSendRequest){
+        Validate.notNull(mailSendRequest, "mailSenderConfig can't be null!");
 
-        Validate.notBlank(mailSenderConfig.getUserName(), "mailSenderConfig.getUserName() can't be null!");
-        Validate.notBlank(mailSenderConfig.getPassword(), "mailSenderConfig.getPassword() can't be null!");
-        Validate.notEmpty(mailSenderConfig.getTos(), "mailSenderConfig.getTos() can't be null!");
-        Validate.notBlank(mailSenderConfig.getFromAddress(), "mailSenderConfig.getFromAddress() can't be null!");
-        Validate.notBlank(mailSenderConfig.getSubject(), "mailSenderConfig.getSubject() can't be null!");
+        Validate.notBlank(mailSendConnectionConfig.getUserName(), "mailSenderConfig.getUserName() can't be null!");
+        Validate.notBlank(mailSendConnectionConfig.getPassword(), "mailSenderConfig.getPassword() can't be null!");
+        Validate.notEmpty(mailSendRequest.getTos(), "mailSenderConfig.getTos() can't be null!");
+        Validate.notBlank(mailSendRequest.getFromAddress(), "mailSenderConfig.getFromAddress() can't be null!");
+        Validate.notBlank(mailSendRequest.getSubject(), "mailSenderConfig.getSubject() can't be null!");
 
         //---------------------------------------------------------------
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("mailSenderConfig:{}", JsonUtil.format(mailSenderConfig));
+            LOGGER.debug(
+                            "mailSenderConfig:{},mailSendConnectionConfig:[{}]",
+                            JsonUtil.format(mailSendRequest),
+                            JsonUtil.format(mailSendConnectionConfig));
         }
 
         //---------------------------------------------------------------
-        Message message = MessageBuilder.build(mailSenderConfig);
+        Message message = MessageBuilder.build(mailSendRequest, mailSendConnectionConfig);
         MessageSendUtil.send(message);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param mailSendConnectionConfig
+     *            the mailSendConnectionConfig to set
+     */
+    public void setMailSendConnectionConfig(MailSendConnectionConfig mailSendConnectionConfig){
+        this.mailSendConnectionConfig = mailSendConnectionConfig;
     }
 
 }

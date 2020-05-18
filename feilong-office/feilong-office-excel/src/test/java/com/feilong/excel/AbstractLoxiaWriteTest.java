@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.feilong.coreextension.awt.DesktopUtil;
-import com.feilong.excel.ExcelWriteUtil;
 import com.feilong.io.FilenameUtil;
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -69,7 +69,7 @@ public abstract class AbstractLoxiaWriteTest extends AbstractTest{
      */
     protected static void build(String templateFileName,String configurations,String[] sheetNames,Map<String, Object> beans){
         String outputFileName = Slf4jUtil.format(
-                        "/Users/feilong/feilong/excel/{}{}.{}",
+                        SystemUtils.USER_HOME + "/feilong/excel/{}{}.{}",
                         sheetNames,
                         nowTimestamp(),
                         FilenameUtil.getExtension(templateFileName));

@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
 import com.feilong.io.LineNumberReaderResolver;
+import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * 
@@ -55,6 +56,6 @@ public class ResolverFilePathAndLineNumberReaderTest{
     //---------------------------------------------------------------
     @Test(expected = NullPointerException.class)
     public void testReadFileToStringFilePathNull(){
-        IOReaderUtil.resolverFile("/Users/feilong/work/build.xml", null);
+        IOReaderUtil.resolverFile(SystemUtils.USER_HOME+ "/work/build.xml", null);
     }
 }

@@ -15,14 +15,14 @@
  */
 package com.feilong.net.mail;
 
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.exception.MailSenderException;
 
 /**
  * 邮件发送器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.net.mail.entity.MailSenderConfig
+ * @see com.feilong.net.mail.entity.MailSendRequest
  * @see "org.springframework.mail.MailSender"
  * @see "org.springframework.mail.javamail.JavaMailSenderImpl"
  * @since 1.0.9
@@ -32,10 +32,10 @@ public interface MailSender{
     /**
      * 发送邮件.
      *
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the mail sender config
      * @throws MailSenderException
      *             the mail sender exception
      */
-    void sendMail(MailSenderConfig mailSenderConfig);
+    void sendMail(MailSendRequest mailSendRequest);
 }

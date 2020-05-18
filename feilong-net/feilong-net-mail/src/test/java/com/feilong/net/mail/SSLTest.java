@@ -15,7 +15,7 @@
  */
 package com.feilong.net.mail;
 
-public class SSLTest extends HelloWorldMailSenderTest{
+public class SSLTest extends HelloWorldTest{
 
     @Override
     protected String getConfigFile(){

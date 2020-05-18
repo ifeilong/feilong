@@ -33,9 +33,8 @@ import com.feilong.context.log.UseTimeLogable;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.Validate;
-import com.feilong.net.mail.DefaultMailSender;
 import com.feilong.net.mail.MailSender;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 
 /**
  * 这是一个一体化 数据{@code -->}转成Excel/CVS{@code -->}保存文件到硬盘{@code -->}变成附件发邮件给相关人员 的组件.
@@ -48,7 +47,7 @@ import com.feilong.net.mail.entity.MailSenderConfig;
 public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTimeLogable,Component{
 
     /** The Constant LOGGER. */
-    private static final Logger    LOGGER     = LoggerFactory.getLogger(DataFileEmailComponent.class);
+    private static final Logger    LOGGER = LoggerFactory.getLogger(DataFileEmailComponent.class);
 
     //---------------------------------------------------------------
 
@@ -64,12 +63,12 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
     //---------------------------------------------------------------
 
     /** The mail sender. */
-    private MailSender             mailSender = new DefaultMailSender();
+    private MailSender             mailSender;
 
     //---------------------------------------------------------------
 
     /** The mail sender config. */
-    private MailSenderConfig       mailSenderConfig;
+    private MailSendRequest        mailSendRequest;
 
     //---------------------------------------------------------------
 
@@ -77,7 +76,7 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
     @PostConstruct
     protected void postConstruct(){
         Validate.notNull(mailSender, "mailSender can't be null!");
-        Validate.notNull(mailSenderConfig, "mailSenderConfig can't be null!");
+        Validate.notNull(mailSendRequest, "mailSenderConfig can't be null!");
     }
 
     //---------------------------------------------------------------
@@ -128,10 +127,10 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
      */
     private void sendEmail(String filePath,List<T> dataList){
         //避免影响到元数据
-        MailSenderConfig useMailSenderConfig = BeanUtil.cloneBean(mailSenderConfig);
+        MailSendRequest useMailSendRequest = BeanUtil.cloneBean(mailSendRequest);
         //变成附件发邮件给相关人员的组件
-        useMailSenderConfig.setAttachFilePaths(filePath);
-        mailSender.sendMail(useMailSenderConfig);
+        useMailSendRequest.setAttachFilePaths(filePath);
+        mailSender.sendMail(useMailSendRequest);
     }
 
     //---------------------------------------------------------------
@@ -157,16 +156,6 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
     }
 
     /**
-     * Sets the mail sender config.
-     *
-     * @param mailSenderConfig
-     *            the mailSenderConfig to set
-     */
-    public void setMailSenderConfig(MailSenderConfig mailSenderConfig){
-        this.mailSenderConfig = mailSenderConfig;
-    }
-
-    /**
      * 设置 文件创造器.
      *
      * @param listDataFileCreator
@@ -184,6 +173,14 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
      */
     public void setFileReworker(FileReworker fileReworker){
         this.fileReworker = fileReworker;
+    }
+
+    /**
+     * @param mailSendRequest
+     *            the mailSendRequest to set
+     */
+    public void setMailSendRequest(MailSendRequest mailSendRequest){
+        this.mailSendRequest = mailSendRequest;
     }
 
 }

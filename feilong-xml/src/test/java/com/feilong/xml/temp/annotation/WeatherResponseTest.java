@@ -20,6 +20,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
@@ -27,7 +28,7 @@ public class WeatherResponseTest extends AbstractTest{
 
     @Test
     public void test(){
-        String xml = "/Users/feilong/workspace/feilong/feilong/feilong-xml/src/test/resources/weather-response.xml";
+        String xml = SystemUtils.USER_HOME + "/workspace/feilong/feilong/feilong-xml/src/test/resources/weather-response.xml";
 
         Map<String, String> map = XmlUtil.getNodeNameAndStringValueMap(xml, "//string");
         LOGGER.debug(JsonUtil.format(map));

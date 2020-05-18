@@ -22,12 +22,9 @@ public class EmojiSubjectTest extends AbstractMailSenderTest{
     @Test
     public void test(){
         String subject = "";
-        // String subject = "今天吃饭";
-
         // subject = "=?utf-8?Q?=E2=9C=A8Pixibo_cron_job_result_=5B1200/1200=5D?=";
         subject = "=?utf-8?Q?=F0=9F=90=9BPixibo_cron_job_result_=5B1111/1200=5D?=";
 
-        mailSenderConfig.setSubject(subject);
-        mailSenderConfig.setContent("");
+        mailSendRequest.setSubject(subject);
     }
 }

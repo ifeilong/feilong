@@ -24,6 +24,7 @@ import java.io.IOException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.security.AbstractSecurityTest;
 
 /**
@@ -41,7 +42,7 @@ public class SHA1UtilTest extends AbstractSecurityTest{
      */
     @Test
     public void encodeFile() throws IOException{
-        String filepath = "/Users/feilong/.gitconfig";
+        String filepath = SystemUtils.USER_HOME + "/.gitconfig";
         String encodeFile = SHA1Util.encodeFile(filepath);
 
         LOGGER.debug(debugSecurityValue(encodeFile));//9163e830c3a3e74bc70d9744f33642cb46f951ba

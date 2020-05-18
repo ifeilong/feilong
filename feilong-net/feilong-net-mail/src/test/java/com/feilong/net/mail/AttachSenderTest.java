@@ -27,10 +27,11 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.io.entity.FileInfoEntity;
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.net.mail.setter.AttachmentSetter;
 import com.feilong.template.TemplateUtil;
 
-public class MailAttachFileSenderTest extends AbstractMailSenderTest{
+public class AttachSenderTest extends AbstractMailSenderTest{
 
     @Test
     public void sendMailWithAttach(){
@@ -48,10 +49,10 @@ public class MailAttachFileSenderTest extends AbstractMailSenderTest{
         contextKeyValues.put("fileInfoEntityList", fileInfoEntityList);
 
         //---------------------------------------------------------------
-        mailSenderConfig.setContent(TemplateUtil.parseTemplate(templateInClassPath, contextKeyValues));
+        mailSendRequest.setContent(TemplateUtil.parseTemplate(templateInClassPath, contextKeyValues));
 
         //  String fileString = "E:\\DataFixed\\Material\\avatar\\飞龙.png";
-        String fileString = "/Users/feilong/DataFixed/Material/头像avatar/飞龙.png";
+        String fileString = SystemUtils.USER_HOME + "/DataFixed/Material/头像avatar/飞龙.png";
         // mailSenderConfig.setAttachFilePaths(fileString);
     }
 

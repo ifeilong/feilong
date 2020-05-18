@@ -31,6 +31,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import com.feilong.excel.ExcelWriter;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 @ContextConfiguration(locations = { "classpath*:loxia/subscribtion/spring-excel-2sheet.xml" })
@@ -49,8 +50,11 @@ public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{
         List<SubscribtionCommand> alist = buildList(2);
         List<SubscribtionCommand> blist = alist;
 
-        String outputFileName = Slf4jUtil
-                        .format("/Users/feilong/feilong/excel/{}{}.{}", "111", nowTimestamp(), FilenameUtil.getExtension(templateFileName));
+        String outputFileName = Slf4jUtil.format(
+                        SystemUtils.USER_HOME + "/feilong/excel/{}{}.{}",
+                        "111",
+                        nowTimestamp(),
+                        FilenameUtil.getExtension(templateFileName));
 
         Map<String, Object> beans = toMap(//
                         "alist",

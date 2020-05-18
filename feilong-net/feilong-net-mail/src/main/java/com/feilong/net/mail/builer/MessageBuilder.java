@@ -22,7 +22,8 @@ import javax.mail.internet.MimeMessage;
 
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.SessionFactory;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendConnectionConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.exception.MailSenderException;
 import com.feilong.net.mail.setter.BodySetter;
 import com.feilong.net.mail.setter.HeaderSetter;
@@ -54,29 +55,36 @@ public class MessageBuilder{
      * 基于 mailSenderConfig 构建 通用的 MimeMessage,然后设置message公共属性(含发件人 收件人等信息)
      * </p>
      *
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the mail sender config
+     * @param mailSendConnectionConfig
+     *            the mail send connection config
      * @return the message
      * @since 1.10.2
      */
-    public static Message build(MailSenderConfig mailSenderConfig){
+    public static Message build(MailSendRequest mailSendRequest,MailSendConnectionConfig mailSendConnectionConfig){
         // 根据session创建一个邮件消息
 
         // 根据邮件会话属性和密码验证器构造一个发送邮件的session
-        Session session = SessionFactory.createSession(mailSenderConfig);
+        Session session = SessionFactory.createSession(mailSendConnectionConfig);
 
         //---------------------------------------------------------------
-
         // 根据session创建一个邮件消息
         Message message = new MimeMessage(session);
-
         try{
-            setMessageAttribute(message, mailSenderConfig);
 
-            BodySetter.setBody(message, mailSenderConfig);
+            //mail.smtp.from  String  Email address to use for SMTP MAIL command. 
+            //This sets the envelope return address. 
+            //Defaults to msg.getFrom() or InternetAddress.getLocalAddress(). 
+            //NOTE: mail.smtp.user was previously used for this.
+            message.setFrom(InternetAddressUtil.buildFromAddress(mailSendRequest.getPersonal(), mailSendRequest.getFromAddress()));
+
+            setMessageAttribute(message, mailSendRequest);
+
+            BodySetter.setBody(message, mailSendRequest);
         }catch (MessagingException e){
             //since 1.13.2 update exception message
-            throw new MailSenderException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.format(mailSenderConfig)), e);
+            throw new MailSenderException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.format(mailSendRequest)), e);
         }
         return message;
     }
@@ -99,30 +107,24 @@ public class MessageBuilder{
      *
      * @param message
      *            the message
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the mail sender config
      * @throws MessagingException
      *             the messaging exception
-     * @see RecipientsSetter#setRecipients(Message, MailSenderConfig)
-     * @see HeaderSetter#setHeaders(Message, MailSenderConfig)
+     * @see RecipientsSetter#setRecipients(Message, MailSendRequest)
+     * @see HeaderSetter#setHeaders(Message, MailSendRequest)
      */
-    private static void setMessageAttribute(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
-        //mail.smtp.from  String  Email address to use for SMTP MAIL command. 
-        //This sets the envelope return address. 
-        //Defaults to msg.getFrom() or InternetAddress.getLocalAddress(). 
-        //NOTE: mail.smtp.user was previously used for this.
-        message.setFrom(InternetAddressUtil.buildFromAddress(mailSenderConfig.getPersonal(), mailSenderConfig.getFromAddress()));
-
+    private static void setMessageAttribute(Message message,MailSendRequest mailSendRequest) throws MessagingException{
         // 设置邮件接受人群
         // 支持 to cc bcc
-        RecipientsSetter.setRecipients(message, mailSenderConfig);
+        RecipientsSetter.setRecipients(message, mailSendRequest);
 
         //---------------------------------------------------------------
         // 设置邮件消息的主题
-        message.setSubject(mailSenderConfig.getSubject());
+        message.setSubject(mailSendRequest.getSubject());
 
         //header信息
-        HeaderSetter.setHeaders(message, mailSenderConfig);
+        HeaderSetter.setHeaders(message, mailSendRequest);
     }
 
 }

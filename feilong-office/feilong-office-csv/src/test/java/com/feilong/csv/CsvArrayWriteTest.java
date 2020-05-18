@@ -29,6 +29,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.csv.entity.CsvConfig;
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 
 /**
@@ -44,7 +45,7 @@ public class CsvArrayWriteTest extends AbstractTest{
 
     @Test
     public void testWrite(){
-        String path = "/Users/feilong/Downloads/feilong/${date}/feilongid_pix_demand.csv";
+        String path = SystemUtils.USER_HOME + "/Downloads/feilong/${date}/feilongid_pix_demand.csv";
         path = path.replace("${date}", DateUtil.toString(addDay(now(), -1), COMMON_DATE));
         LOGGER.debug(path);
 

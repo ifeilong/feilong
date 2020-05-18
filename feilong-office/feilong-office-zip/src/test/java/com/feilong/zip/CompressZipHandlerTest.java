@@ -19,19 +19,19 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import org.junit.Test;
 
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
-import com.feilong.zip.CompressZipHandler;
-import com.feilong.zip.ZipHandler;
 
 public class CompressZipHandlerTest extends AbstractTest{
 
     private final ZipHandler zipHandler        = new CompressZipHandler();
 
-    String                   tobeZipFileFloder = "/Users/feilong/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources";
+    String                   tobeZipFileFloder = SystemUtils.USER_HOME
+                    + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources";
 
     //---------------------------------------------------------------
 
-    String                   outputZipFloder   = "/Users/feilong/feilong/zip-unzip/";
+    String                   outputZipFloder   = SystemUtils.USER_HOME + "/feilong/zip-unzip/";
 
     @Test
     public void test(){

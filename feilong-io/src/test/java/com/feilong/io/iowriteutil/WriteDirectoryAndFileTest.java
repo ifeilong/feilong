@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import com.feilong.io.IOWriteUtil;
 import com.feilong.io.InputStreamUtil;
+import com.feilong.lib.lang3.SystemUtils;
 
 public class WriteDirectoryAndFileTest{
 
@@ -35,40 +36,40 @@ public class WriteDirectoryAndFileTest{
     @Test
     public void test(){
         //带斜杆的
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", "a.txt");
-        check("/Users/feilong/feilong/logs/a.txt", INPUT_MESSAGE);
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs/", "a.txt");
+        check(SystemUtils.USER_HOME + "/feilong/logs/a.txt", INPUT_MESSAGE);
     }
 
     @Test
     public void test12(){
         //不带斜杆的
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs", "a.txt");
-        check("/Users/feilong/feilong/logs/a.txt", INPUT_MESSAGE);
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs", "a.txt");
+        check(SystemUtils.USER_HOME + "/feilong/logs/a.txt", INPUT_MESSAGE);
     }
 
     @Test
     public void test1(){
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", "a/a.txt");
-        check("/Users/feilong/feilong/logs/a/a.txt", INPUT_MESSAGE);
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs/", "a/a.txt");
+        check(SystemUtils.USER_HOME + "/feilong/logs/a/a.txt", INPUT_MESSAGE);
     }
 
     @Test
     public void test123(){
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs", "normalize/normalize.txt");
-        check("/Users/feilong/feilong/logs/normalize/normalize.txt", INPUT_MESSAGE);
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs", "normalize/normalize.txt");
+        check(SystemUtils.USER_HOME + "/feilong/logs/normalize/normalize.txt", INPUT_MESSAGE);
     }
 
     @Test
     public void testNormalize(){
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs", "../normalize/normalize2.txt");
-        check("/Users/feilong/feilong/normalize/normalize2.txt", INPUT_MESSAGE);
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs", "../normalize/normalize2.txt");
+        check(SystemUtils.USER_HOME + "/feilong/normalize/normalize2.txt", INPUT_MESSAGE);
     }
 
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testInputStreamNull(){
-        IOWriteUtil.write(null, "/Users/feilong/feilong/logs/", "a.txt");
+        IOWriteUtil.write(null, SystemUtils.USER_HOME + "/feilong/logs/", "a.txt");
     }
 
     //---------------------------------------------------------------
@@ -91,17 +92,17 @@ public class WriteDirectoryAndFileTest{
 
     @Test(expected = NullPointerException.class)
     public void testWriteDirectoryAndFileTestNull11(){
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", null);
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs/", null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testWriteDirectoryAndFileTestEmpty1(){
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", "");
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs/", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testWriteDirectoryAndFileTestBlank1(){
-        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", " ");
+        IOWriteUtil.write(getInputStream(), SystemUtils.USER_HOME + "/feilong/logs/", " ");
     }
 
     //---------------------------------------------------------------

@@ -21,7 +21,7 @@ import javax.mail.PasswordAuthentication;
 import com.feilong.net.mail.entity.SessionConfig;
 
 /**
- * The Class AuthenticatorBuilder.
+ * 用来生成 {@link Authenticator}.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.2

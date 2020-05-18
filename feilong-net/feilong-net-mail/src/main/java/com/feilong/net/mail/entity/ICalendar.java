@@ -24,14 +24,30 @@ import java.util.Date;
  */
 public class ICalendar{
 
+    /**
+     * 开始时间
+     */
     private Date   beginDate;
 
+    /**
+     * 结束时间
+     */
     private Date   endDate;
 
+    /**
+     * 描述
+     */
     private String description;
 
+    /**
+     * 地点
+     */
     private String location;
 
+    /**
+     * summary
+     * 
+     */
     private String summary;
 
     //---------------------------------------------------------------

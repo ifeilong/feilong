@@ -26,7 +26,7 @@ import java.util.UUID;
 import com.feilong.core.date.DateUtil;
 import com.feilong.lib.lang3.time.DateUtils;
 import com.feilong.net.mail.entity.ICalendar;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.template.TemplateUtil;
 
 /**
@@ -39,14 +39,14 @@ public class IcsBuilder{
     private static final String templateInClassPath = "ics.vm";
 
     /**
-     * @param mailSenderConfig
+     * @param mailSendRequest
      * @return
      * @since 1.10.2
      */
-    static String buildIcs1(MailSenderConfig mailSenderConfig){
+    static String buildIcs1(MailSendRequest mailSendRequest){
         //T代表后面跟着时间，Z代表UTC统一时间
 
-        ICalendar getiCalendar = mailSenderConfig.getiCalendar();
+        ICalendar getiCalendar = mailSendRequest.getiCalendar();
         Map<String, Object> map = newHashMap();
         map.put("uuid", UUID.randomUUID().toString());
         map.put("beginDate", toUTC(getiCalendar.getBeginDate()));
@@ -59,31 +59,40 @@ public class IcsBuilder{
         return TemplateUtil.parseTemplate(templateInClassPath, map);
     }
 
-    public static String buildIcs(MailSenderConfig mailSenderConfig){
+    public static String buildIcs(MailSendRequest mailSendRequest){
+        ICalendar icalendar = mailSendRequest.getiCalendar();
+
         StringBuffer buffer = new StringBuffer();
         buffer.append(
                         "BEGIN:VCALENDAR\n" //
                                         + "PRODID:-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN\n" //
                                         + "VERSION:2.0\n" //
+
                                         + "METHOD:REQUEST\n" //
                                         + "BEGIN:VEVENT\n" //
-                                        + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:" + mailSenderConfig.getTos()[0] + "\n" //
-                                        + "ORGANIZER:MAILTO:" + mailSenderConfig.getTos()[0] + "\n" //
-                                        + "DTSTART:20170322T060000Z\n" //
-                                        + "DTEND:20170322T070000Z\n" //
-                                        + "LOCATION:Conference room\n" //
+
+                                        + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:" + mailSendRequest.getTos()[0] + "\n" //
+                                        + "ORGANIZER:MAILTO:" + mailSendRequest.getTos()[0] + "\n" //
+
+                                        + "DTSTART:20200322T060000Z\n" //
+                                        + "DTEND:20200322T070000Z\n" //
+                                        + "LOCATION:" + icalendar.getLocation() + "\n" //
+
                                         + "UID:" + UUID.randomUUID().toString() + "\n"//如果id相同的话，outlook会认为是同一个会议请求，所以使用uuid。  // 
                                         + "CATEGORIES:SuccessCentral Reminder\n" //
-                                        + "DESCRIPTION:This the description of the meeting.<br>asd;flkjasdpfi\n\n" //
-                                        + "SUMMARY:Test meeting request\n" //
+                                        + "DESCRIPTION:" + icalendar.getDescription() + "" //
+                                        + "SUMMARY:" + icalendar.getSummary() + "\n" //
                                         + "PRIORITY:5\n" //
                                         + "CLASS:PUBLIC\n"//
+
                                         + "BEGIN:VALARM\n" // 
                                         + "TRIGGER:-PT15M\n"//
                                         + "ACTION:DISPLAY\n" //
                                         + "DESCRIPTION:Reminder\n"//
                                         + "END:VALARM\n" //
+
                                         + "END:VEVENT\n"//
+
                                         + "END:VCALENDAR");
 
         return buffer.toString();

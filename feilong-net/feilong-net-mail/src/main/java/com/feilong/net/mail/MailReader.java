@@ -26,7 +26,6 @@ import com.feilong.net.mail.entity.MailReaderConfig;
  * 邮件读取器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.net.mail.entity.MailSenderConfig
  * @since 1.0.9
  */
 public interface MailReader{

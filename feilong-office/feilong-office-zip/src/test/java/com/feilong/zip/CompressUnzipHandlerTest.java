@@ -19,8 +19,7 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import org.junit.Test;
 
-import com.feilong.zip.CompressUnzipHandler;
-import com.feilong.zip.UnzipHandler;
+import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * 
@@ -31,28 +30,29 @@ public class CompressUnzipHandlerTest{
 
     private final UnzipHandler unzipHandler  = new CompressUnzipHandler();
 
-    String                     unZipFilePath = "/Users/feilong/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources/for-unzip.zip";
+    String                     unZipFilePath = SystemUtils.USER_HOME
+                    + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources/for-unzip.zip";
 
     @Test
     public void test(){
         unzipHandler.unzip(
                         unZipFilePath, //需要被解压的zip文件
-                        "/Users/feilong/feilong/zip-unzip/" + nowTimestamp() + "Compress"); // 解压到文件路径
+                        SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "Compress"); // 解压到文件路径
     }
 
     @Test(expected = NullPointerException.class)
     public void testAntUnzipHandlerTestNull(){
-        unzipHandler.unzip(null, "/Users/feilong/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
+        unzipHandler.unzip(null, SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAntUnzipHandlerTestEmpty(){
-        unzipHandler.unzip("", "/Users/feilong/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
+        unzipHandler.unzip("", SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAntUnzipHandlerTestBlank(){
-        unzipHandler.unzip(" ", "/Users/feilong/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
+        unzipHandler.unzip(" ", SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
     }
     //---------------------------------------------------------------
 

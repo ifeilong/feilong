@@ -27,7 +27,7 @@ public class EmailCalendarTest extends AbstractMailSenderTest{
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.163.com");
 
-        Session session = SessionFactory.createSession(mailSenderConfig);
+        Session session = SessionFactory.createSession(mailSendConnectionConfig);
         // Define message
         MimeMessage message = new MimeMessage(session);
         message.addHeaderLine("method=REQUEST");

@@ -16,19 +16,19 @@
 package com.feilong.net.mail;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.lib.lang3.SystemUtils.USER_HOME;
 
 import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
+import com.feilong.lib.lang3.SystemUtils;
 
 public class MailSenderTest extends AbstractMailSenderTest{
 
     @Test
     public void sendMail1(){
-        String path = USER_HOME + "/feilong/train/1201单元测试/generalRegulation/generalRegulation-20141125194610.html";
+        String path = SystemUtils.USER_HOME + "/workspace/baozun/nebula-doc/store/release log/adidas 删除Git DEV分支说明.adoc.html";
         String textContent = IOReaderUtil.readToString(path, UTF8);
-        mailSenderConfig.setContent(textContent);
+        mailSendRequest.setContent(textContent);
     }
 
     //---------------------------------------------------------------
@@ -36,13 +36,13 @@ public class MailSenderTest extends AbstractMailSenderTest{
     @Test
     public void sendMail(){
         String textContent = "<html><body><hr/><div style='boder:1px #000 solid;color:red'>今天天气不错</div></body></html>";
-        mailSenderConfig.setContent(textContent);
+        mailSendRequest.setContent(textContent);
     }
 
     //---------------------------------------------------------------
     @Test
     public void testSendTextMail(){
         String textContent = "测试回执";
-        mailSenderConfig.setContent(textContent);
+        mailSendRequest.setContent(textContent);
     }
 }

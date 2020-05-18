@@ -16,6 +16,7 @@
 package com.feilong.net.mail.util;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 import java.io.UnsupportedEncodingException;
 
@@ -27,18 +28,12 @@ import com.feilong.test.AbstractTest;
 
 public class InternetAddressUtilTest extends AbstractTest{
 
-    /**
-     * Test.
-     *
-     * @throws UnsupportedEncodingException
-     *             the unsupported encoding exception
-     */
     @Test
     public void test() throws UnsupportedEncodingException{
         InternetAddress internetAddress = new InternetAddress("longxia@feilong.cn", "夏龙", UTF8);
         InternetAddress internetAddress1 = new InternetAddress("zhen.yao@feilong.cn", "姚真", UTF8);
 
-        InternetAddress[] internetAddresses = { internetAddress, internetAddress1 };
+        InternetAddress[] internetAddresses = toArray(internetAddress, internetAddress1);
 
         LOGGER.debug("\n{}", internetAddress.toUnicodeString());
         LOGGER.debug("\n{}", InternetAddress.toString(internetAddresses, 0));

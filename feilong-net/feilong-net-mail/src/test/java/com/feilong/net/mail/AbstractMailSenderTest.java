@@ -15,6 +15,7 @@
  */
 package com.feilong.net.mail;
 
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.junit.After;
@@ -26,20 +27,24 @@ import com.feilong.io.FileUtil;
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.converters.ArrayConverter;
 import com.feilong.lib.beanutils.converters.StringConverter;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.lib.lang3.SystemUtils;
+import com.feilong.net.mail.entity.MailSendConnectionConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.test.AbstractTest;
 
 public abstract class AbstractMailSenderTest extends AbstractTest{
 
     /** The Constant folder. */
-    private static final String folder  = "/Users/feilong/Development/DataCommon/Files/Java/config/";
+    private static final String        folder  = SystemUtils.USER_HOME + "/Development/DataCommon/Files/Java/config/";
 
     //---------------------------------------------------------------
 
     /** The mail sender config. */
-    protected MailSenderConfig  mailSenderConfig;
+    protected MailSendRequest          mailSendRequest;
 
-    public static final String  toEmail = "venusdrogon@163.com";
+    protected MailSendConnectionConfig mailSendConnectionConfig;
+
+    public static final String         toEmail = "venusdrogon@163.com";
 
     //---------------------------------------------------------------
 
@@ -51,6 +56,7 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
     //---------------------------------------------------------------
     private void loadMailSenderConfig(){
         ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream(folder + getConfigFile()));
+        Map<String, String> map = ResourceBundleUtil.toMap(resourceBundle);
 
         ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
         char[] allowedChars = { '@' };
@@ -59,8 +65,11 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
 
         //---------------------------------------------------------------
 
-        mailSenderConfig = new MailSenderConfig();
-        mailSenderConfig = BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
+        mailSendRequest = new MailSendRequest();
+        mailSendConnectionConfig = new MailSendConnectionConfig();
+
+        mailSendRequest = BeanUtil.populate(mailSendRequest, map);
+        mailSendConnectionConfig = BeanUtil.populate(mailSendConnectionConfig, map);
     }
 
     //---------------------------------------------------------------
@@ -73,8 +82,8 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
 
     @After
     public void after(){
-        MailSender mailSender = new DefaultMailSender();
-        mailSender.sendMail(mailSenderConfig);
+        MailSender mailSender = new DefaultMailSender(mailSendConnectionConfig);
+        mailSender.sendMail(mailSendRequest);
     }
 
 }

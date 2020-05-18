@@ -23,7 +23,7 @@ import javax.mail.MessagingException;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.lib.lang3.ArrayUtils;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.InternetAddressUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -53,18 +53,18 @@ public final class RecipientsSetter{
      *
      * @param message
      *            the message
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the new recipients
      */
-    public static void setRecipients(Message message,MailSenderConfig mailSenderConfig){
+    public static void setRecipients(Message message,MailSendRequest mailSendRequest){
         // 创建邮件的接收者地址,并设置到邮件消息中
         // Message.RecipientType.TO属性表示接收者的类型为TO
-        set(message, Message.RecipientType.TO, mailSenderConfig.getTos());
+        set(message, Message.RecipientType.TO, mailSendRequest.getTos());
         //cc 抄送
-        String[] cc = buildCC(mailSenderConfig.getCcs(), mailSenderConfig.getFromAddress(), mailSenderConfig.getIsDefaultCcSelf());
+        String[] cc = buildCC(mailSendRequest.getCcs(), mailSendRequest.getFromAddress(), mailSendRequest.getIsDefaultCcSelf());
         set(message, Message.RecipientType.CC, cc);
         //bcc 密送
-        set(message, Message.RecipientType.BCC, mailSenderConfig.getBccs());
+        set(message, Message.RecipientType.BCC, mailSendRequest.getBccs());
     }
 
     //---------------------------------------------------------------

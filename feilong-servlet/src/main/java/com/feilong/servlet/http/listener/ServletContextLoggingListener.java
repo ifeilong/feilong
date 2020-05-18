@@ -49,7 +49,7 @@ import com.feilong.servlet.ServletContextUtil;
         "domainImage": "",
         "domainJS": "",
         "domainResource": "http://127.0.0.1:6666",
-        "javax.servlet.context.tempdir": "/Users/feilong/workspace/feilong/feilong-test/feilong-web-springmvc-test/target/tomcat/work/Tomcat/localhost/_",
+        "javax.servlet.context.tempdir": SystemUtils.USER_HOME+ "/workspace/feilong/feilong-test/feilong-web-springmvc-test/target/tomcat/work/Tomcat/localhost/_",
         "javax.websocket.server.ServerContainer": "org.apache.tomcat.websocket.server.WsServerContainer@3dfa5f07",
         "org.springframework.web.context.WebApplicationContext.ROOT": "Root WebApplicationContext: startup date [Sun May 20 14:39:36 CST 2018]; root of context hierarchy",
         "org.springframework.web.context.support.ServletContextScope": "org.springframework.web.context.support.ServletContextScope@74e45b"

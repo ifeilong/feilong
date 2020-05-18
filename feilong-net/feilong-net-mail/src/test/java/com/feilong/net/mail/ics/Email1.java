@@ -13,15 +13,15 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-import org.junit.After;
 import org.junit.Test;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.date.DateUtil;
 import com.feilong.io.IOWriteUtil;
+import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.net.mail.AbstractMailSenderTest;
 import com.feilong.net.mail.builer.MessageBuilder;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.MessageSendUtil;
 import com.feilong.net.mail.util.MimeType;
 
@@ -29,25 +29,25 @@ public class Email1 extends AbstractMailSenderTest{
 
     @Test
     public void send() throws Exception{
-        mailSenderConfig.setiCalendar(ICalendarBuilder.build());
+        mailSendRequest.setiCalendar(ICalendarBuilder.build());
 
-        Message message = MessageBuilder.build(mailSenderConfig);
-        if (null != mailSenderConfig.getiCalendar()){
-            message.setContent(buildContent(mailSenderConfig));
+        Message message = MessageBuilder.build(mailSendRequest, mailSendConnectionConfig);
+        if (null != mailSendRequest.getiCalendar()){
+            message.setContent(buildContent(mailSendRequest));
         }
         MessageSendUtil.send(message);
     }
 
-    static Multipart buildContent(MailSenderConfig mailSenderConfig) throws MessagingException,IOException{
+    static Multipart buildContent(MailSendRequest mailSendRequest) throws MessagingException,IOException{
         Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(build(mailSenderConfig));
+        multipart.addBodyPart(build(mailSendRequest));
         return multipart;
     }
 
-    static BodyPart build(MailSenderConfig mailSenderConfig) throws MessagingException,IOException{
-        String ics = IcsBuilder.buildIcs(mailSenderConfig);
+    static BodyPart build(MailSendRequest mailSendRequest) throws MessagingException,IOException{
+        String ics = IcsBuilder.buildIcs(mailSendRequest);
 
-        IOWriteUtil.writeStringToFile("/Users/feilong/feilong/email/" + DateUtil.getTime(now()) + ".ics", ics, CharsetType.UTF8);
+        IOWriteUtil.writeStringToFile(SystemUtils.USER_HOME + "/feilong/email/" + DateUtil.getTime(now()) + ".ics", ics, CharsetType.UTF8);
 
         //测试下来如果不这么转换的话，会以纯文本的形式发送过去，  
         //如果没有method=REQUEST;charset=\"UTF-8\"，outlook会议附件的形式存在，而不是直接打开就是一个会议请求  
@@ -56,19 +56,5 @@ public class Email1 extends AbstractMailSenderTest{
         messageBodyPart.setDataHandler(new DataHandler(new ByteArrayDataSource(ics, MimeType.TYPE_ICS)));
 
         return messageBodyPart;
-    }
-
-    //---------------------------------------------------------------
-
-    @Override
-    protected String getConfigFile(){
-        return "mail-bz.properties";
-    }
-
-    //---------------------------------------------------------------
-
-    @Override
-    @After
-    public void after(){
     }
 }

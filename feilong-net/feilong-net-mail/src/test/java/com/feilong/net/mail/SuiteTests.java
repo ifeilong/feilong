@@ -25,7 +25,9 @@ import com.feilong.net.mail.setter.RecipientsSetterTest;
 @SuiteClasses({ //
 
                 RecipientsSetterTest.class,
-                MailAttachFileSenderSimpleTest.class,
+                AttachSenderSimpleTest.class,
+
+                HelloWorldTest.class,
         //                
 })
 public class SuiteTests{

@@ -18,42 +18,23 @@ package com.feilong.net.mail.entity;
 import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 /**
- * 邮件发送配置.
+ * 邮件发送请求.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
  */
-public class MailSenderConfig extends BaseConfig{
+public class MailSendRequest{
+
+    /** 邮件主题. */
+    private String    subject;
+
+    /** 邮件的文本内容. */
+    private String    content             = EMPTY;
+
+    //---------------------------------------------------------------
 
     /** 是否需要回执, 默认不需要. */
-    private boolean   isNeedReturnReceipt  = false;
-
-    /**
-     * The is tls enable.
-     * 
-     * <p>
-     * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection
-     * before issuing any login commands.<br>
-     * 
-     * Note that an appropriate trust store must configured so that the client will trust the server's certificate.<br>
-     * Defaults to false.
-     * </p>
-     * 
-     * @since 1.13.2
-     */
-    private boolean   isSmtpStarttlsEnable = false;
-
-    /**
-     * mail.smtp.ssl.enable SSL 开关.
-     * 
-     * <p>
-     * If set to true, use SSL to connect and use the SSL port by default.<br>
-     * Defaults to false for the <b>"smtp"</b> protocol and true for the <b>"smtps"</b> protocol.
-     * </p>
-     * 
-     * @since 1.13.2
-     */
-    private boolean   isSmtpSSLEnable      = false;
+    private boolean   isNeedReturnReceipt = false;
 
     //---------------------------------------------------------------
 
@@ -68,7 +49,7 @@ public class MailSenderConfig extends BaseConfig{
      * @see <a href="https://blog.csdn.net/jerry11112/article/details/81213162">彻底解决 163邮箱转发邮件提示报错554 DT:SPM smtp12</a>
      * @since 2.1.0
      */
-    private boolean   isDefaultCcSelf      = true;
+    private boolean   isDefaultCcSelf     = true;
 
     //---------------------------------------------------------------
 
@@ -81,11 +62,8 @@ public class MailSenderConfig extends BaseConfig{
      */
     private String    fromAddress;
 
-    //---------------------------------------------------------------
-
     /** 个人名义. */
-    private String    personal             = "";
-
+    private String    personal            = "";
     //---------------------------------------------------------------
 
     /** 邮件多人接收地址. */
@@ -104,20 +82,16 @@ public class MailSenderConfig extends BaseConfig{
 
     //---------------------------------------------------------------
 
-    /** 邮件主题. */
-    private String    subject;
-
-    /** 邮件的文本内容. */
-    private String    content              = EMPTY;
-
     /** MIME type of this object. */
-    private String    contentMimeType      = "text/html; charset=gb2312";
+    private String    contentMimeType     = "text/html; charset=gb2312";
 
     /**
      * 日历信息.
      *
      * @since 1.10.2
+     * @deprecated not impl
      */
+    @Deprecated
     private ICalendar iCalendar;
 
     //-----------------附件----------------------------------------------
@@ -155,50 +129,6 @@ public class MailSenderConfig extends BaseConfig{
      */
     public void setIsNeedReturnReceipt(boolean isNeedReturnReceipt){
         this.isNeedReturnReceipt = isNeedReturnReceipt;
-    }
-
-    /**
-     * 获得 邮件发送者的地址.
-     * <p>
-     * example:huanyuansp@126.com
-     * </p>
-     *
-     * @return the fromAddress
-     */
-    public String getFromAddress(){
-        return fromAddress;
-    }
-
-    /**
-     * 设置 邮件发送者的地址.
-     * <p>
-     * example:huanyuansp@126.com
-     * </p>
-     * 
-     * @param fromAddress
-     *            the fromAddress to set
-     */
-    public void setFromAddress(String fromAddress){
-        this.fromAddress = fromAddress;
-    }
-
-    /**
-     * 获得 个人名义.
-     *
-     * @return the personal
-     */
-    public String getPersonal(){
-        return personal;
-    }
-
-    /**
-     * 设置 个人名义.
-     *
-     * @param personal
-     *            the personal to set
-     */
-    public void setPersonal(String personal){
-        this.personal = personal;
     }
 
     /**
@@ -349,7 +279,9 @@ public class MailSenderConfig extends BaseConfig{
      * Gets the i calendar.
      *
      * @return the iCalendar
+     * @deprecated not impl
      */
+    @Deprecated
     public ICalendar getiCalendar(){
         return iCalendar;
     }
@@ -359,79 +291,11 @@ public class MailSenderConfig extends BaseConfig{
      *
      * @param iCalendar
      *            the iCalendar to set
+     * @deprecated not impl
      */
+    @Deprecated
     public void setiCalendar(ICalendar iCalendar){
         this.iCalendar = iCalendar;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * mail.smtp.ssl.enable SSL 开关.
-     * 
-     * <p>
-     * If set to true, use SSL to connect and use the SSL port by default.<br>
-     * Defaults to false for the <b>"smtp"</b> protocol and true for the <b>"smtps"</b> protocol.
-     * </p>
-     *
-     * @return the isSmtpSSLEnable
-     * @since 1.13.2
-     */
-    public boolean getIsSmtpSSLEnable(){
-        return isSmtpSSLEnable;
-    }
-
-    /**
-     * mail.smtp.ssl.enable SSL 开关.
-     * 
-     * <p>
-     * If set to true, use SSL to connect and use the SSL port by default.<br>
-     * Defaults to false for the <b>"smtp"</b> protocol and true for the <b>"smtps"</b> protocol.
-     * </p>
-     *
-     * @param isSmtpSSLEnable
-     *            the isSmtpSSLEnable to set
-     * @since 1.13.2
-     */
-    public void setIsSmtpSSLEnable(boolean isSmtpSSLEnable){
-        this.isSmtpSSLEnable = isSmtpSSLEnable;
-    }
-
-    /**
-     * The is tls enable.
-     * 
-     * <p>
-     * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection
-     * before issuing any login commands.<br>
-     * 
-     * Note that an appropriate trust store must configured so that the client will trust the server's certificate.<br>
-     * Defaults to false.
-     * </p>
-     *
-     * @return the is tls enable
-     * @since 1.13.2
-     */
-    public boolean getIsSmtpStarttlsEnable(){
-        return isSmtpStarttlsEnable;
-    }
-
-    /**
-     * The is tls enable.
-     * 
-     * <p>
-     * If true, enables the use of the STARTTLS command (if supported by the server) to switch the connection to a TLS-protected connection
-     * before issuing any login commands.<br>
-     * 
-     * Note that an appropriate trust store must configured so that the client will trust the server's certificate.<br>
-     * Defaults to false.
-     * </p>
-     *
-     * @param isSmtpStarttlsEnable
-     *            the new is tls enable
-     * @since 1.13.2
-     */
-    public void setIsSmtpStarttlsEnable(boolean isSmtpStarttlsEnable){
-        this.isSmtpStarttlsEnable = isSmtpStarttlsEnable;
     }
 
     //---------------------------------------------------------------
@@ -467,6 +331,50 @@ public class MailSenderConfig extends BaseConfig{
      */
     public void setIsDefaultCcSelf(boolean isDefaultCcSelf){
         this.isDefaultCcSelf = isDefaultCcSelf;
+    }
+
+    /**
+     * 获得 邮件发送者的地址.
+     * <p>
+     * example:huanyuansp@126.com
+     * </p>
+     *
+     * @return the fromAddress
+     */
+    public String getFromAddress(){
+        return fromAddress;
+    }
+
+    /**
+     * 设置 邮件发送者的地址.
+     * <p>
+     * example:huanyuansp@126.com
+     * </p>
+     * 
+     * @param fromAddress
+     *            the fromAddress to set
+     */
+    public void setFromAddress(String fromAddress){
+        this.fromAddress = fromAddress;
+    }
+
+    /**
+     * 获得 个人名义.
+     *
+     * @return the personal
+     */
+    public String getPersonal(){
+        return personal;
+    }
+
+    /**
+     * 设置 个人名义.
+     *
+     * @param personal
+     *            the personal to set
+     */
+    public void setPersonal(String personal){
+        this.personal = personal;
     }
 
 }

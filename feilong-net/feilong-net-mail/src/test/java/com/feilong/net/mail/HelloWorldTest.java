@@ -15,30 +15,22 @@
  */
 package com.feilong.net.mail;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
-
-import java.util.Map;
-
 import org.junit.Test;
 
 import com.feilong.template.TemplateUtil;
 
-public class HelloWorldMailSenderTest extends AbstractMailSenderTest{
+public class HelloWorldTest extends AbstractMailSenderTest{
 
     @Test
-    public void helloWorld(){
-        Map<String, Object> map = newHashMap();
-
-        String content = TemplateUtil.parseTemplate("hello world.vm", map);
-
-        mailSenderConfig.setSubject("hello world");
-        mailSenderConfig.setContent(content);
+    public void test(){
+        mailSendRequest.setSubject("hello world");
+        mailSendRequest.setContent(TemplateUtil.parseTemplate("hello world.vm"));
     }
 
     //---------------------------------------------------------------
 
-    @Override
-    protected String getConfigFile(){
-        return "mail-feilongtestemail.properties";
-    }
+    //    @Override
+    //    protected String getConfigFile(){
+    //        return "mail-feilongtestemail.properties";
+    //    }
 }

@@ -21,7 +21,6 @@ import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import com.feilong.net.mail.entity.ICalendar;
-import com.feilong.test.AbstractTest;
 
 /**
  * The Class ICalendarBuilder.
@@ -29,7 +28,7 @@ import com.feilong.test.AbstractTest;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.2
  */
-public class ICalendarBuilder extends AbstractTest{
+public class ICalendarBuilder{
 
     public static ICalendar build(){
         ICalendar iCalendar = new ICalendar();

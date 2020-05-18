@@ -20,6 +20,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 import com.feilong.io.FileUtil;
+import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * 
@@ -28,12 +29,9 @@ import com.feilong.io.FileUtil;
  */
 public class DeleteFileOrDirectoryFilePathTest{
 
-    /**
-     * Test delete file or directory.
-     */
     @Test
     public void testDeleteFileOrDirectory(){
-        assertFalse(FileUtil.deleteFileOrDirectory("/Users/feilong/feilong/logs/deleteFileOrDirectory"));
+        assertFalse(FileUtil.deleteFileOrDirectory(SystemUtils.USER_HOME + "/feilong/logs/deleteFileOrDirectory"));
     }
 
     //---------------------------------------------------------------

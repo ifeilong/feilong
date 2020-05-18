@@ -2,34 +2,35 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd ">
 
 	<!-- 常用不改的参数 -->
-	<context:property-placeholder location="file:/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties" />
+	<context:property-placeholder
+		location="file:/Users/feilong/Development/DataCommon/Files/Java/config/mail-feilongtestemail.properties" />
 
-	<bean id="mailSenderConfig" class="com.feilong.net.mail.entity.MailSenderConfig">
+	<bean id="mailSendRequest" class="com.feilong.net.mail.entity.MailSendRequest">
+		<property name="personal" value="test邮件使者11" />
+
+		<property name="fromAddress" value="${fromAddress}" />
+		<property name="tos" value="${tos}" />
+
+		<property name="subject" value="hello report" />
+		<property name="content" value="#{T(com.feilong.template.TemplateUtil).parseTemplate('content.vm')}" />
+		<!-- <property name="isDebug" value="true" /> -->
+		<!-- <property name="isNeedReturnReceipt" value="true" /> -->
+	</bean>
+
+	<bean id="mailSendConnectionConfig" class="com.feilong.net.mail.entity.MailSendConnectionConfig">
 		<property name="serverHost" value="${serverHost}" />
 		<property name="serverPort" value="${serverPort}" />
 
 		<property name="userName" value="${userName}" />
 		<property name="password" value="${password}" />
-
-		<property name="personal" value="test邮件使者" />
-
-		<property name="fromAddress" value="${fromAddress}" />
-		<property name="tos" value="${tos}" />
-
-		<!-- 554是邮件被网易默认为垃圾邮件，解决办法只要发邮件的时候抄送自己一份就可以了 -->
-		<!-- <property name="ccs" value="feilongtestemail@163.com" /> -->
-
-		<property name="subject" value="hello report" />
-		<property name="content" value="#{T(com.feilong.template.VelocityUtil).INSTANCE.parseTemplateWithClasspathResourceLoader('content.vm',null)}" />
-
-		<!-- <property name="isDebug" value="true" /> -->
-		<!-- <property name="isNeedReturnReceipt" value="true" /> -->
 	</bean>
+
+	<bean id="mailSender" class="com.feilong.net.mail.DefaultMailSender" p:mailSendConnectionConfig-ref="mailSendConnectionConfig" />
 </beans>

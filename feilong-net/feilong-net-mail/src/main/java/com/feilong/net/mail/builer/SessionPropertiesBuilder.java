@@ -22,7 +22,7 @@ import java.util.Properties;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.SessionConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -93,16 +93,16 @@ public class SessionPropertiesBuilder{
         //---------------------------------------------------------------
 
         //ssl
-        if (ClassUtil.isInstance(sessionConfig, MailSenderConfig.class)){
-            MailSenderConfig mailSenderConfig = (MailSenderConfig) sessionConfig;
+        if (ClassUtil.isInstance(sessionConfig, MailSendConnectionConfig.class)){
+            MailSendConnectionConfig mailSendConnectionConfig = (MailSendConnectionConfig) sessionConfig;
 
             //ssl
-            if (mailSenderConfig.getIsSmtpSSLEnable()){
+            if (mailSendConnectionConfig.getIsSmtpSSLEnable()){
                 setSSL(properties);
             }
 
             //Starttls
-            if (mailSenderConfig.getIsSmtpStarttlsEnable()){
+            if (mailSendConnectionConfig.getIsSmtpStarttlsEnable()){
                 setStarttls(properties);
             }
         }

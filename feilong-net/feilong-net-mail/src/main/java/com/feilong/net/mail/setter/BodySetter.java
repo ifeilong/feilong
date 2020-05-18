@@ -23,7 +23,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 
 /**
  * 设置 BodyPart.
@@ -47,22 +47,22 @@ public class BodySetter{
      *
      * @param message
      *            the message
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the body
      * @throws MessagingException
      *             the messaging exception
      */
-    public static void setBody(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
+    public static void setBody(Message message,MailSendRequest mailSendRequest) throws MessagingException{
         //since 1.13.0
-        if (null == mailSenderConfig.getContent()){
-            mailSenderConfig.setContent(EMPTY);
+        if (null == mailSendRequest.getContent()){
+            mailSendRequest.setContent(EMPTY);
         }
 
         //---------------------------------------------------------------
 
         // if txt
         // message.setText(mailContent);
-        MimeMultipart mimeMultipart = buildContent(mailSenderConfig);
+        MimeMultipart mimeMultipart = buildContent(mailSendRequest);
 
         // 将MiniMultipart对象设置为邮件内容
         message.setContent(mimeMultipart);
@@ -73,22 +73,22 @@ public class BodySetter{
     /**
      * 构造邮件内容.
      *
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the mail sender config
      * @return the mime multipart
      * @throws MessagingException
      *             the messaging exception
      * @since 1.10.2
      */
-    private static MimeMultipart buildContent(MailSenderConfig mailSenderConfig) throws MessagingException{
+    private static MimeMultipart buildContent(MailSendRequest mailSendRequest) throws MessagingException{
         // 以HTML格式发送邮件 (不带附件的邮件)
 
         // MiniMultipart类是一个容器类,包含MimeBodyPart类型的对象
         MimeMultipart mimeMultipart = new MimeMultipart();
-        mimeMultipart.addBodyPart(buildHtmlContentBody(mailSenderConfig));
+        mimeMultipart.addBodyPart(buildHtmlContentBody(mailSendRequest));
 
         //------------设置附件---------------------------------------------------
-        AttachmentSetter.setAttachment(mimeMultipart, mailSenderConfig.getAttachFilePaths());
+        AttachmentSetter.setAttachment(mimeMultipart, mailSendRequest.getAttachFilePaths());
         return mimeMultipart;
     }
 
@@ -97,18 +97,18 @@ public class BodySetter{
     /**
      * Builds the html content body.
      *
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the mail sender config
      * @return the body part
      * @throws MessagingException
      *             the messaging exception
      * @since 1.10.2
      */
-    private static BodyPart buildHtmlContentBody(MailSenderConfig mailSenderConfig) throws MessagingException{
+    private static BodyPart buildHtmlContentBody(MailSendRequest mailSendRequest) throws MessagingException{
         // 创建一个包含HTML内容的MimeBodyPart
         BodyPart bodyPart = new MimeBodyPart();
         // 设置HTML内容
-        bodyPart.setContent(mailSenderConfig.getContent(), mailSenderConfig.getContentMimeType());
+        bodyPart.setContent(mailSendRequest.getContent(), mailSendRequest.getContentMimeType());
 
         return bodyPart;
     }

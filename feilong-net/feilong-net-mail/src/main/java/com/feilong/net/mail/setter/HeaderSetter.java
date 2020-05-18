@@ -21,7 +21,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 
 import com.feilong.net.mail.MailHeader;
-import com.feilong.net.mail.entity.MailSenderConfig;
+import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.entity.Priority;
 
 /**
@@ -56,22 +56,22 @@ public class HeaderSetter{
      *
      * @param message
      *            the message
-     * @param mailSenderConfig
+     * @param mailSendRequest
      *            the headers
      * @throws MessagingException
      *             the messaging exception
      * @see javax.mail.Part#addHeader(String, String)
      * @see javax.mail.Part#setHeader(String, String)
      */
-    public static void setHeaders(Message message,MailSenderConfig mailSenderConfig) throws MessagingException{
+    public static void setHeaders(Message message,MailSendRequest mailSendRequest) throws MessagingException{
         // 邮件的优先级
-        Priority priority = mailSenderConfig.getPriority();
+        Priority priority = mailSendRequest.getPriority();
         if (null != priority){
             message.addHeader(MailHeader.X_PRIORITY, priority.getLevelValue());
         }
 
         // 是否需要回执
-        if (mailSenderConfig.getIsNeedReturnReceipt()){
+        if (mailSendRequest.getIsNeedReturnReceipt()){
             message.setHeader(MailHeader.DISPOSITION_NOTIFICATION_TO, "1");
         }
 
