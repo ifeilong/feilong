@@ -558,10 +558,10 @@ public final class FileUtil{
      * FileUtil.getParent("/");// null
      * FileUtil.getParent("/Users/feilong/feilong/logs/createDirectoryByFilePath");// /Users/feilong/feilong/logs
      * 
-     * // 不存在
+     * <span style="color:green">// 不存在</span>
      * FileUtil.getParent("/Users/feilong/feilong/logs/getParent/getParent");// /Users/feilong/feilong/logs/getParent
      * 
-     * // 文件
+     * <span style="color:green">// 文件</span>
      * FileUtil.getParent("/Users/feilong/feilong/logs/1.txt");// /Users/feilong/feilong/logs
      * </pre>
      * 

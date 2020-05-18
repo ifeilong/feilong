@@ -18,6 +18,7 @@ package com.feilong.io.fileutil;
 import org.junit.Test;
 
 import com.feilong.io.FileUtil;
+import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * 
@@ -31,7 +32,7 @@ public class CreateDirectoryTest{
      */
     @Test
     public void testCreateDirectory(){
-        FileUtil.createDirectory("/Users/feilong/feilong/logs/createDirectory/test/test");
+        FileUtil.createDirectory(SystemUtils.USER_HOME + "/feilong/logs/createDirectory/test/test");
     }
 
     //---------------------------------------------------------------

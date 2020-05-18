@@ -15,6 +15,8 @@
  */
 package com.feilong.io.ioreaderutil;
 
+import com.feilong.lib.lang3.SystemUtils;
+
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -22,7 +24,7 @@ package com.feilong.io.ioreaderutil;
  */
 public abstract class AbstractReadFileToStringTest{
 
-    protected String floderPath = "/Users/feilong/workspace/feilong/feilong/feilong-io/";
+    protected String floderPath = SystemUtils.USER_HOME+ "/workspace/feilong/feilong/feilong-io/";
 
     protected String filePath   = floderPath + "src/test/resources/readFileToString.txt";
 }
