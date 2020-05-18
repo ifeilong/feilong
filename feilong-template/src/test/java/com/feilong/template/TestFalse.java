@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class TestFalse extends AbstractTest{
@@ -34,7 +33,7 @@ public class TestFalse extends AbstractTest{
         Map<String, Object> map = newHashMap();
         map.put("effective", false);
 
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
         assertTrue(parseVMTemplate.contains(":effective false 进"));
     }
 }

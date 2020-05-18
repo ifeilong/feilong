@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class VelocityUtilTest extends AbstractTest{
@@ -47,7 +46,7 @@ public class VelocityUtilTest extends AbstractTest{
         map.put("channelIds", toList(1L, 2L, 8L, 3L));
 
         String templateInClassPath = "velocity/test.vm";
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
         LOGGER.debug(parseVMTemplate);
     }
 
@@ -56,7 +55,7 @@ public class VelocityUtilTest extends AbstractTest{
         Map<String, Object> map = newHashMap();
         String templateInClassPath = "velocity/test1.vm";
 
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
         LOGGER.debug(parseVMTemplate);
     }
 

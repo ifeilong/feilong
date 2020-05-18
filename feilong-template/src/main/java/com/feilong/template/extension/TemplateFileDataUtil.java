@@ -21,7 +21,7 @@ import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.lib.lang3.Validate;
-import com.feilong.template.VelocityUtil;
+import com.feilong.template.TemplateUtil;
 
 /**
  * The Class VelocityFileDataUtil.
@@ -29,10 +29,10 @@ import com.feilong.template.VelocityUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.0
  */
-public class VelocityFileDataUtil{
+public class TemplateFileDataUtil{
 
     /** Don't let anyone instantiate this class. */
-    private VelocityFileDataUtil(){
+    private TemplateFileDataUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -48,19 +48,19 @@ public class VelocityFileDataUtil{
      * 如果 <code>outPutFilePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
-     * @param velocityFileData
+     * @param templateFileData
      *            the velocity file data
      */
-    public static void writeAndOpen(VelocityFileData velocityFileData){
-        String outPutFilePath = velocityFileData.getOutPutFilePath();
+    public static void writeAndOpen(TemplateFileData templateFileData){
+        String outPutFilePath = templateFileData.getOutPutFilePath();
         Validate.notBlank(outPutFilePath, "outPutFilePath can't be null/empty!");
 
-        String vmPath = velocityFileData.getVmPath();
-        Validate.notBlank(vmPath, "vmPath can't be blank!");
+        String templatePath = templateFileData.getTemplatePath();
+        Validate.notBlank(templatePath, "templatePath can't be blank!");
 
         //---------------------------------------------------------------
 
-        String content = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(vmPath, velocityFileData.getData());
+        String content = TemplateUtil.parseTemplate(templatePath, templateFileData.getData());
         IOWriteUtil.writeStringToFile(outPutFilePath, content, UTF8);
 
         DesktopUtil.open(FileUtil.getParent(outPutFilePath));//和输出文件同级目录

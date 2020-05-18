@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
 /**
@@ -37,7 +36,7 @@ public class TestNull extends AbstractTest{
         Map<String, Object> map = newHashMap();
         map.put("code", null);
 
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
         LOGGER.debug(parseVMTemplate);
 
         assertTrue(parseVMTemplate.contains("jinxin"));

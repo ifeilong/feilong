@@ -23,7 +23,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class ParseStringUtil extends AbstractTest{
@@ -36,7 +35,7 @@ public class ParseStringUtil extends AbstractTest{
         map.put("StringUtil", StringUtil.class);
         map.put("code", "橘黄色/米黄色");
 
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, map);
         assertEquals("橘黄色_米黄色", parseVMTemplate);
     }
 }

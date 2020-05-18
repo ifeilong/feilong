@@ -23,10 +23,11 @@ import java.util.Map;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.9.2
  */
-public class VelocityFileData{
+public class TemplateFileData{
 
-    /** velocity 模板地址. */
-    private String         vmPath;
+    /** 模板地址. */
+    private String         templatePath;
+    //---------------------------------------------------------------
 
     /** 数据. */
     private Map<String, ?> data;
@@ -39,23 +40,23 @@ public class VelocityFileData{
     /**
      * Instantiates a new velocity file data.
      */
-    public VelocityFileData(){
+    public TemplateFileData(){
         super();
     }
 
     /**
      * Instantiates a new velocity file data.
      *
-     * @param vmPath
+     * @param templatePath
      *            the vm path
      * @param data
      *            the data
      * @param outPutFilePath
      *            the out put file path
      */
-    public VelocityFileData(String vmPath, Map<String, ?> data, String outPutFilePath){
+    public TemplateFileData(String templatePath, Map<String, ?> data, String outPutFilePath){
         super();
-        this.vmPath = vmPath;
+        this.templatePath = templatePath;
         this.data = data;
         this.outPutFilePath = outPutFilePath;
     }
@@ -65,21 +66,23 @@ public class VelocityFileData{
     /**
      * 获得 velocity 模板地址.
      *
-     * @return the vmPath
+     * @return the 模板地址
      */
-    public String getVmPath(){
-        return vmPath;
+    public String getTemplatePath(){
+        return templatePath;
     }
 
     /**
      * 设置 velocity 模板地址.
      *
-     * @param vmPath
-     *            the vmPath to set
+     * @param templatePath
+     *            the new 模板地址
      */
-    public void setVmPath(String vmPath){
-        this.vmPath = vmPath;
+    public void setTemplatePath(String templatePath){
+        this.templatePath = templatePath;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 数据.
@@ -99,6 +102,8 @@ public class VelocityFileData{
     public void setData(Map<String, ?> data){
         this.data = data;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 输出的文件.

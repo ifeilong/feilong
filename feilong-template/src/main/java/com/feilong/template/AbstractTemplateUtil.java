@@ -151,7 +151,7 @@ abstract class AbstractTemplateUtil{
      * 
      * String vmContent = "${memberId},feilong";
      * 
-     * assertEquals("5,feilong", VelocityUtil.INSTANCE.parseString(vmContent, map));
+     * assertEquals("5,feilong", TemplateUtil.parseString(vmContent, map));
      * </pre>
      * 
      * </blockquote>
@@ -173,7 +173,7 @@ abstract class AbstractTemplateUtil{
      * 
      * String vmContent = "${memberId},${memberId1},feilong";
      * 
-     * assertEquals("${memberId},5,feilong", VelocityUtil.INSTANCE.parseString(vmContent, map));
+     * assertEquals("${memberId},5,feilong", TemplateUtil.parseString(vmContent, map));
      * </pre>
      * 
      * </blockquote>

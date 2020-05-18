@@ -23,8 +23,6 @@ import java.util.Properties;
 
 import org.junit.Test;
 
-import com.feilong.template.VelocityUtil;
-
 public class ParseStringTest{
 
     @Test
@@ -34,7 +32,7 @@ public class ParseStringTest{
 
         String vmContent = "${memberId},${memberId1},feilong";
 
-        assertEquals("${memberId},5,feilong", VelocityUtil.INSTANCE.parseString(vmContent, map));
+        assertEquals("${memberId},5,feilong", TemplateUtil.parseString(vmContent, map));
     }
 
     /**
@@ -47,7 +45,7 @@ public class ParseStringTest{
 
         String vmContent = "${memberId},feilong";
 
-        assertEquals("5,feilong", VelocityUtil.INSTANCE.parseString(vmContent, map));
+        assertEquals("5,feilong", TemplateUtil.parseString(vmContent, map));
     }
 
     /**
@@ -62,24 +60,24 @@ public class ParseStringTest{
         map.put("global", properties);
 
         String vmContent = "${global.get('name')}";
-        assertEquals("jinxin", VelocityUtil.INSTANCE.parseString(vmContent, map));
+        assertEquals("jinxin", TemplateUtil.parseString(vmContent, map));
     }
 
     //---------------------------------------------------------------
 
     @Test
     public void testParseStringTestNull(){
-        assertEquals(null, VelocityUtil.INSTANCE.parseString(null, null));
+        assertEquals(null, TemplateUtil.parseString(null, null));
     }
 
     @Test
     public void testParseStringTestEmpty(){
-        assertEquals("", VelocityUtil.INSTANCE.parseString("", null));
+        assertEquals("", TemplateUtil.parseString("", null));
     }
 
     @Test
     public void testParseStringTestBlank(){
-        assertEquals(" ", VelocityUtil.INSTANCE.parseString(" ", null));
+        assertEquals(" ", TemplateUtil.parseString(" ", null));
     }
 
 }

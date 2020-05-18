@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.template.VelocityUtil;
 import com.feilong.test.AbstractTest;
 
 public class MacroTest extends AbstractTest{
@@ -33,7 +32,7 @@ public class MacroTest extends AbstractTest{
         // properties.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, "target/test-classes/scripts");
 
         Map<String, Object> contextKeyValues = null;
-        String parseVMTemplate = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
+        String parseVMTemplate = TemplateUtil.parseTemplate(templateInClassPath, contextKeyValues);
         LOGGER.debug(parseVMTemplate);
     }
 }
