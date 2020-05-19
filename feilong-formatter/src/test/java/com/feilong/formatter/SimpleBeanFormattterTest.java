@@ -19,6 +19,7 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -31,10 +32,6 @@ import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.store.order.OrderLine;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class SimpleBeanFormattterTest extends AbstractTest{
 
     private static Iterable<OrderLine> ITERABLE_DATA       = null;
@@ -61,7 +58,6 @@ public class SimpleBeanFormattterTest extends AbstractTest{
     @Test
     public void testFormatToSimpleTable6(){
         beanFormatterConfig = new BeanFormatterConfig();
-        //beanFormatterConfig.setIncludePropertyNames("id", "orderId", "MSRP", "salePrice", "discountPrice", "count", "subtotal");
         beanFormatterConfig.setSorts("id", "orderId");
     }
 
@@ -113,5 +109,7 @@ public class SimpleBeanFormattterTest extends AbstractTest{
         Date beginDate = now();
         LOGGER.debug(FormatterUtil.formatToSimpleTable(ITERABLE_DATA, beanFormatterConfig));
         LOGGER.info("use time: [{}]", formatDuration(beginDate));
+
+        assertTrue(true);
     }
 }

@@ -30,11 +30,15 @@ public class DefaultMemberAccess implements MemberAccess{
                         : AccessibleObjectHandlerPreJDK9.createHandler();
     }
 
-    public boolean allowPrivateAccess          = false;
+    //---------------------------------------------------------------
 
-    public boolean allowProtectedAccess        = false;
+    private boolean allowPrivateAccess          = false;
 
-    public boolean allowPackageProtectedAccess = false;
+    private boolean allowProtectedAccess        = false;
+
+    private boolean allowPackageProtectedAccess = false;
+
+    //---------------------------------------------------------------
 
     /*
      * ===================================================================
@@ -51,6 +55,8 @@ public class DefaultMemberAccess implements MemberAccess{
         this.allowProtectedAccess = allowProtectedAccess;
         this.allowPackageProtectedAccess = allowPackageProtectedAccess;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * ===================================================================
