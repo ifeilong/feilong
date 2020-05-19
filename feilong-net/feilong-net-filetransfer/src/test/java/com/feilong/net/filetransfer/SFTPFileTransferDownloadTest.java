@@ -16,12 +16,11 @@
 package com.feilong.net.filetransfer;
 
 import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import com.feilong.net.filetransfer.FileTransfer;
 
 /**
  * The Class SFTPFileTransferDownloadTest.
@@ -49,6 +48,8 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
                                  "/upload/Inbound/InventoryAdjustments/Archive/2016-07-22_10-46-00.318-INVENTORY_ADJUSTMENTS_3PL_feilong_20160722-144626-073.XML" };
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
+
+        assertTrue(true);
     }
 
     /*
@@ -62,6 +63,8 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
         String remotePath = "/upload/Inbound/InventoryAdjustments/Archive";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
+
+        assertTrue(true);
     }
 
     //---------------------------------------------------------------

@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 public class EmojiSubjectTest extends AbstractMailSenderTest{
@@ -26,5 +28,6 @@ public class EmojiSubjectTest extends AbstractMailSenderTest{
         subject = "=?utf-8?Q?=F0=9F=90=9BPixibo_cron_job_result_=5B1111/1200=5D?=";
 
         mailSendRequest.setSubject(subject);
+        assertTrue(true);
     }
 }

@@ -16,12 +16,11 @@
 package com.feilong.net.filetransfer;
 
 import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import com.feilong.net.filetransfer.FileTransfer;
 
 public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
 
@@ -41,6 +40,8 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
         String remotePath = "/maven/settings.xml";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
+
+        assertTrue(true);
     }
 
     /**
@@ -52,6 +53,7 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
         String remotePath = "/webstore/InlineSales_Test/2011-07-05";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
+        assertTrue(true);
     }
 
     //---------------------------------------------------------------

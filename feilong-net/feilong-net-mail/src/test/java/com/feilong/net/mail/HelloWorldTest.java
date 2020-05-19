@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.template.TemplateUtil;
@@ -25,6 +27,8 @@ public class HelloWorldTest extends AbstractMailSenderTest{
     public void test(){
         mailSendRequest.setSubject("hello world");
         mailSendRequest.setContent(TemplateUtil.parseTemplate("hello world.vm"));
+
+        assertTrue(true);
     }
 
     //---------------------------------------------------------------

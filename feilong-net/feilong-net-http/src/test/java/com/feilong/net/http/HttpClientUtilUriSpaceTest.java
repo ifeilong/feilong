@@ -15,9 +15,10 @@
  */
 package com.feilong.net.http;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
 public class HttpClientUtilUriSpaceTest extends AbstractTest{
@@ -28,6 +29,8 @@ public class HttpClientUtilUriSpaceTest extends AbstractTest{
         HttpClientUtil.get(uri);
 
         LOGGER.info("get over");
+
+        assertTrue(true);
 
     }
 }

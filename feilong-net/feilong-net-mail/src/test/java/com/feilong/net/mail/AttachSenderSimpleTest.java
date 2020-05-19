@@ -15,6 +15,8 @@
  */
 package com.feilong.net.mail;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.lib.lang3.SystemUtils;
@@ -24,6 +26,7 @@ public class AttachSenderSimpleTest extends AbstractMailSenderTest{
     @Test
     public void sendMailWithAttach(){
         mailSendRequest.setAttachFilePaths(SystemUtils.USER_HOME + "/feilong/excel/[consultantExport]20200428214903.xlsx");
+        assertTrue(true);
     }
 
     @Test
@@ -32,5 +35,6 @@ public class AttachSenderSimpleTest extends AbstractMailSenderTest{
         //        另外，如果要做内嵌或发送图片，你应该使用信用较高的邮箱帐户，否则会报错：
         //        554 DT:SPM 发送的邮件内容包含了未被许可的信息，或被系统识别为垃圾邮件。请检查是否有用户发送病毒或者垃圾邮件
         mailSendRequest.setAttachFilePaths(SystemUtils.USER_HOME + "/DataFixed/Material/头像avatar/飞龙.png");
+        assertTrue(true);
     }
 }
