@@ -28,31 +28,17 @@ import com.feilong.io.FileUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class FileUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class FileUtilTest extends AbstractTest{
 
     /** The string. */
     private final String fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
 
-    /**
-     * TestFileUtilTest.
-     * 
-     * @throws IOException
-     */
     @Test
-    
     public void testFileUtilTest() throws IOException{
         URL url = URLUtil.toURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
         url.openConnection();
     }
 
-    /**
-     * Test get p.
-     */
     @Test
     public void testGetP(){
         File file = new File(fString);
@@ -60,11 +46,7 @@ public class FileUtilTest extends AbstractTest{
         LOGGER.debug(file.getParent());
     }
 
-    /**
-     * Test get p1.
-     */
     @Test
-    
     public void testGetP1(){
         URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
         URI uri = URLUtil.toURI(resource);
@@ -79,7 +61,6 @@ public class FileUtilTest extends AbstractTest{
      *             Signals that an I/O exception has occurred.
      */
     @Test
-    
     public void listFiles() throws IOException{
         String localPath = "E:\\DataCommon\\test";
         // 读取localPath目录下的全部properties文件
@@ -90,9 +71,6 @@ public class FileUtilTest extends AbstractTest{
         }
     }
 
-    /**
-     * Test to ur ls.
-     */
     @Test
     public void testToURLs(){
         LOGGER.debug(JsonUtil.format(FileUtil.toURLs("D:\\Program Files", "D:\\新建文件夹")));

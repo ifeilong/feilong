@@ -16,6 +16,7 @@
 package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -25,9 +26,10 @@ import com.feilong.test.AbstractTest;
 public class GetSleepTest extends AbstractTest{
 
     @Test
-    public void testGetResponseBodyAsString11(){
+    public void test(){
         String uri = "http://127.0.0.1:8084/sleep?name=jinxin&age=18";
         LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
+        assertTrue(true);
     }
 
 }

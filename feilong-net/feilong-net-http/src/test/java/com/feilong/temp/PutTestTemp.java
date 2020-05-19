@@ -16,6 +16,7 @@
 package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -28,23 +29,27 @@ public class PutTestTemp extends AbstractTest{
     public void testPut(){
         String uri = "http://127.0.0.1:8085";
         LOGGER.debug(HttpClientUtil.put(uri));
+        assertTrue(true);
     }
 
     @Test
     public void testPut1(){
         String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
         LOGGER.debug(HttpClientUtil.put(uri));
+        assertTrue(true);
     }
 
     @Test
     public void testPut11(){
         String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
         LOGGER.debug(HttpClientUtil.put(uri, toMap("country", "china")));
+        assertTrue(true);
     }
 
     @Test
     public void testPut121(){
         String uri = "http://127.0.0.1:8085";
         LOGGER.debug(HttpClientUtil.put(uri, toMap("country", "china")));
+        assertTrue(true);
     }
 }

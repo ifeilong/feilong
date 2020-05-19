@@ -268,7 +268,7 @@
 
 		<!-- https://docs.sonarqube.org/latest/analysis/analysis-parameters/ -->
 		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
-		<sonar.exclusions>feilong-lib/**/*</sonar.exclusions>
+		<sonar.exclusions>**/com/feilong/lib/**/*</sonar.exclusions>
 
 		<!-- taglist 检查报告 -->
 		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>

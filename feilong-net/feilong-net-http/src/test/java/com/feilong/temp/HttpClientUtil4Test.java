@@ -15,6 +15,8 @@
  */
 package com.feilong.temp;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.net.http.HttpClientUtil;
@@ -35,23 +37,19 @@ public class HttpClientUtil4Test extends AbstractTest{
 
     @Test
     public void testGetResponseBodyAsString1(){
-        String uri = "";
-        uri = "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934";
-
+        String uri = "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934";
         LOGGER.debug(HttpClientUtil.get(uri));
+        assertTrue(true);
     }
 
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084";
-
         LOGGER.debug(HttpClientUtil.get(uri));
+        assertTrue(true);
     }
 
-    @Test
-    public void testHttpClientUtilTest(){
-        // 执行一个get方法,设置超时时间,并且将结果变成字符串
-        // Request.Get("http://www.yeetrack.com/").connectTimeout(1000).socketTimeout(1000).execute().returnContent().asString();
-    }
+    // 执行一个get方法,设置超时时间,并且将结果变成字符串
+    // Request.Get("http://www.yeetrack.com/").connectTimeout(1000).socketTimeout(1000).execute().returnContent().asString();
 
 }

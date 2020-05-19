@@ -16,6 +16,7 @@
 package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -36,6 +37,8 @@ public class MultiThreadGetResponseBodyAsStringGetTest extends AbstractTest{
 
             }
         }, 20);
+
+        assertTrue(true);
     }
 
 }
