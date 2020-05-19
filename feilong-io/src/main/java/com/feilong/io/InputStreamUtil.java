@@ -84,14 +84,13 @@ public final class InputStreamUtil{
         Resource resource = resourceLoader.getResource(location);
         try{
             return resource.getInputStream();
-        }catch (IOException e){
+        }catch (FileNotFoundException e){
             //class path resource [Users/feilong/workspace/feilong/feilong/feilong-io/src/test/resources/readFileToString.txt] cannot be opened because it does not exist
-            if (e instanceof FileNotFoundException){
-                LOGGER.warn(
-                                "[{}] use DefaultResourceLoader not found,will convert to FileInputStream.Suggest you can try to use file:// or classpath: to improve the parse speed",
-                                location);
-                return FileUtil.getFileInputStream(location);
-            }
+            LOGGER.warn(
+                            "[{}] use DefaultResourceLoader not found,will convert to FileInputStream.Suggest you try use [file://] or [classpath:] to improve the parse speed",
+                            location);
+            return FileUtil.getFileInputStream(location);
+        }catch (IOException e){
             throw new UncheckedIOException("location:[" + location + "]", e);
         }
     }

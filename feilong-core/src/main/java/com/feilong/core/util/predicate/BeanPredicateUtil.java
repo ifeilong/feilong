@@ -32,8 +32,8 @@ import com.feilong.core.util.equator.IgnoreCaseEquator;
 import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
-import com.feilong.lib.collection4.functors.EqualPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
+import com.feilong.lib.collection4.functors.EqualPredicate;
 import com.feilong.lib.lang3.Validate;
 
 /**
@@ -384,13 +384,10 @@ public final class BeanPredicateUtil{
     @SafeVarargs
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new BeanPredicate<>(propertyName, new Predicate<V>(){
+        return new BeanPredicate<>(
+                        propertyName, //
+                        (propertyValue) -> com.feilong.lib.lang3.ArrayUtils.contains(propertyValues, propertyValue));
 
-            @Override
-            public boolean evaluate(V propertyValue){
-                return com.feilong.lib.lang3.ArrayUtils.contains(propertyValues, propertyValue);
-            }
-        });
     }
 
     /**
