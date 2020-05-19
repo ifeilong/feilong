@@ -53,6 +53,10 @@
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<!-- https://docs.sonarqube.org/latest/analysis/analysis-parameters/ -->
+		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
+		<!-- <sonar.exclusions>**/com/feilong/lib/**/*</sonar.exclusions> -->
+
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
 		<maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>
@@ -265,10 +269,6 @@
 		<v.native2ascii-maven-plugin>2.0.1</v.native2ascii-maven-plugin>
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
-
-		<!-- https://docs.sonarqube.org/latest/analysis/analysis-parameters/ -->
-		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
-		<sonar.exclusions>**/com/feilong/lib/**/*</sonar.exclusions>
 
 		<!-- taglist 检查报告 -->
 		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>
@@ -1298,26 +1298,26 @@
 					<artifactId>lifecycle-mapping</artifactId>
 					<version>1.0.0</version>
 					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-antrun-plugin</artifactId>
-										<versionRange>[1.7,)</versionRange>
-										<goals>
-											<goal>run</goal>
-											<goal>help</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
+					<lifecycleMappingMetadata>
+					<pluginExecutions>
+					<pluginExecution>
+					<pluginExecutionFilter>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<versionRange>[1.7,)</versionRange>
+					<goals>
+					<goal>run</goal>
+					<goal>help</goal>
+					</goals>
+					</pluginExecutionFilter>
+					<action>
+					<ignore />
+					</action>
+					</pluginExecution>
+					</pluginExecutions>
+					</lifecycleMappingMetadata>
 					</configuration>
-				</plugin> -->
+					</plugin> -->
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

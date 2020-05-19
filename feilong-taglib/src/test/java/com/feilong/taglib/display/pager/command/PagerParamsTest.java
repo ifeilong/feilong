@@ -30,11 +30,7 @@ import com.feilong.test.AbstractTest;
  */
 public class PagerParamsTest extends AbstractTest{
 
-    /**
-     * Test hash code.
-     */
     @Test
-
     public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 

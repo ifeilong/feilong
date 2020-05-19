@@ -34,12 +34,6 @@ public class FileUtilTest extends AbstractTest{
     private final String fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
 
     @Test
-    public void testFileUtilTest() throws IOException{
-        URL url = URLUtil.toURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
-        url.openConnection();
-    }
-
-    @Test
     public void testGetP(){
         File file = new File(fString);
         LOGGER.debug(file.getAbsolutePath());
@@ -73,7 +67,8 @@ public class FileUtilTest extends AbstractTest{
 
     @Test
     public void testToURLs(){
-        LOGGER.debug(JsonUtil.format(FileUtil.toURLs("D:\\Program Files", "D:\\新建文件夹")));
+        URL[] urLs = FileUtil.toURLs("/Users/feilong/.m2/settings.xml", "/Users/feilong/.m2/settings.xml");
+        LOGGER.debug(JsonUtil.format(urLs));
     }
 
 }

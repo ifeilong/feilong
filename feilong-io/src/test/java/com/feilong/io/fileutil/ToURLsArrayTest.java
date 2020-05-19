@@ -21,14 +21,8 @@ import org.junit.Test;
 
 import com.feilong.io.FileUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.5
- */
 public class ToURLsArrayTest{
 
-    //---------------------------------------------------------------
     @Test(expected = NullPointerException.class)
     public void testToURLsTestNull(){
         FileUtil.toURLs((String[]) null);

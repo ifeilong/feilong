@@ -721,7 +721,6 @@ public final class FileUtil{
         if (fileSize < ONE_KB){
             return fileSize + "Bytes";
         }
-
         //---------------------------------------------------------------
         for (Map.Entry<Long, String> entry : DIVISOR_AND_UNIT_MAP.entrySet()){
             Long divisor = entry.getKey();
@@ -732,7 +731,6 @@ public final class FileUtil{
                 return fileSize / divisor + (0 == remainder ? EMPTY : ("." + remainder)) + unit;
             }
         }
-
         //---------------------------------------------------------------
         throw new UnsupportedOperationException("fileSize:[" + fileSize + "] not support!");//理论上不会到这里
     }
@@ -773,7 +771,6 @@ public final class FileUtil{
         Validate.notEmpty(filePaths, "filePaths can't be null/empty!");
 
         //---------------------------------------------------------------
-
         File[] files = ConvertUtil.toArray(filePaths, File.class);
         try{
             return FileUtils.toURLs(files);

@@ -9,7 +9,12 @@
 	<artifactId>feilong-lib</artifactId>
 
 	<packaging>pom</packaging>
-	
+
+	<properties>
+		<!-- https://stackoverflow.com/questions/30178581/how-to-skip-a-sub-module-in-a-sonar-analysis-in-a-multi-module-java-project?r=SearchResults -->
+		<sonar.skip>true</sonar.skip>
+	</properties>
+
 	<modules>
 		<module>feilong-lib-jsonlib</module>
 		<module>feilong-lib-beanutils</module>

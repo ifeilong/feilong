@@ -16,6 +16,7 @@
 package com.feilong.json.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -33,6 +34,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.PropertyFilter;
+import com.feilong.lib.lang3.tuple.Pair;
 
 /**
  * {@link JsonConfig} 构造器.
@@ -48,10 +50,33 @@ public final class JsonConfigBuilder{
      * 
      * @since 1.12.6 move from JsonHelper
      */
-    private static final String[]  SENSITIVE_WORDS_PROPERTY_NAMES = { "password", "key" };
+    private static final String[]                          SENSITIVE_WORDS_PROPERTY_NAMES     = { "password", "key" };
+
+    /**
+     * 初始化
+     * 
+     * @since 3.0.0
+     */
+    private static final Map<Class<?>, JsonValueProcessor> DEFAULT_CLASS_JSON_VALUE_PROCESSOR = toMapUseEntrys(                        //
+                    // 注册日期处理器
+                    Pair.of(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE),
+                    //since 1.13.0
+                    Pair.of(File.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE),
+                    //since 1.13.0
+                    //see https://github.com/venusdrogon/feilong-json/issues/24
+                    Pair.of(BigDecimal.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE),
+
+                    //since 1.14.0 
+                    //@see https://github.com/venusdrogon/feilong-json/issues/29 json format 支持 javax.xml.datatype.XMLGregorianCalendar
+                    //@see com.fasterxml.jackson.databind.ext.CoreXMLSerializers.XMLGregorianCalendarSerializer
+                    Pair.of(javax.xml.datatype.XMLGregorianCalendar.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE),
+
+                    //since 1.14.0 
+                    //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
+                    Pair.of(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE));
 
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
-    public static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG    = buildDefaultJavaToJsonConfig();
+    public static final JsonConfig                         DEFAULT_JAVA_TO_JSON_CONFIG        = buildDefaultJavaToJsonConfig();
 
     //---------------------------------------------------------------
 
@@ -208,25 +233,9 @@ public final class JsonConfigBuilder{
         //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         //---------------------------------------------------------------
-
-        // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
-
-        //since 1.13.0
-        jsonConfig.registerJsonValueProcessor(File.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
-
-        //since 1.13.0
-        //see https://github.com/venusdrogon/feilong-json/issues/24
-        jsonConfig.registerJsonValueProcessor(BigDecimal.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
-
-        //since 1.14.0 
-        //@see https://github.com/venusdrogon/feilong-json/issues/29 json format 支持 javax.xml.datatype.XMLGregorianCalendar
-        //@see com.fasterxml.jackson.databind.ext.CoreXMLSerializers.XMLGregorianCalendarSerializer
-        jsonConfig.registerJsonValueProcessor(javax.xml.datatype.XMLGregorianCalendar.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
-
-        //since 1.14.0 
-        //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
-        jsonConfig.registerJsonValueProcessor(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE);
+        for (Map.Entry<Class<?>, JsonValueProcessor> entry : DEFAULT_CLASS_JSON_VALUE_PROCESSOR.entrySet()){
+            jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
+        }
         return jsonConfig;
     }
 }
