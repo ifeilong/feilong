@@ -42,6 +42,7 @@ import com.feilong.lib.lang3.Validate;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class ExcelWriteUtil{
 
     /** The Constant LOGGER. */

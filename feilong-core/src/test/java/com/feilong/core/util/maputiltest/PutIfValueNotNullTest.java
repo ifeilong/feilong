@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -66,13 +65,10 @@ public class PutIfValueNotNullTest{
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 
-    /**
-     * Test put if value not null null map.
-     */
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testPutIfValueNotNullNullMap(){
         MapUtil.putIfValueNotNull(null, "1000001", 5);
-        assertTrue(true);
     }
 
 }

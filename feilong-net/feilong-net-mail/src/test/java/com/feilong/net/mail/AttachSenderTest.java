@@ -20,7 +20,6 @@ import static com.feilong.core.date.DateUtil.getTime;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.FILE;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -35,6 +34,7 @@ import com.feilong.template.TemplateUtil;
 public class AttachSenderTest extends AbstractMailSenderTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void sendMailWithAttach(){
         String templateInClassPath = "velocity/mailtest.vm";
 
@@ -55,8 +55,6 @@ public class AttachSenderTest extends AbstractMailSenderTest{
         //  String fileString = "E:\\DataFixed\\Material\\avatar\\飞龙.png";
         String fileString = SystemUtils.USER_HOME + "/DataFixed/Material/头像avatar/飞龙.png";
         // mailSenderConfig.setAttachFilePaths(fileString);
-
-        assertTrue(true);
     }
 
     private List<FileInfoEntity> buildList(){

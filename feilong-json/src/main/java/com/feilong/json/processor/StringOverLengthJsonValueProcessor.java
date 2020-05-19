@@ -28,6 +28,7 @@ import com.feilong.lib.lang3.Validate;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class StringOverLengthJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /** <code>{@value}</code>. */

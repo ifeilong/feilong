@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang.threadutiltest;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
@@ -25,9 +23,9 @@ import com.feilong.test.AbstractTest;
 public class SleepTest extends AbstractTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testNegative1(){
         ThreadUtil.sleep(1);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------

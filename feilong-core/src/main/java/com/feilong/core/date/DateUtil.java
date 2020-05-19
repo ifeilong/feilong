@@ -214,6 +214,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @see com.feilong.lib.lang3.time.DateUtils
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class DateUtil{
 
     /**

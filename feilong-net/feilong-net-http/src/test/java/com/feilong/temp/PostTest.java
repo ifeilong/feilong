@@ -16,7 +16,6 @@
 package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -30,24 +29,21 @@ import com.feilong.test.AbstractTest;
 public class PostTest extends AbstractTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
         LOGGER.debug(HttpClientUtil.get(uri));
-
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084/post1";
         LOGGER.debug(HttpClientUtil.post(uri, toMap("name", "金鑫", "age", "18")));
-        assertTrue(true);
     }
 
-    /**
-     * Test get response body as string 122.
-     */
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString122(){
         //        "requestURL": "http://staging.mapemall.com/pay/redirect/doku", 
         //        "requestMethod": "POST", 
@@ -57,10 +53,10 @@ public class PostTest extends AbstractTest{
         //            }
         String uri = "http://test.mapemall.com/pay/redirect/doku";
         LOGGER.debug(HttpClientUtil.post(uri, toMap("PAYMENTCHANNEL", "01")));
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString122222(){
         String uri = "http://127.0.0.1:8223/consumestest";
 
@@ -71,6 +67,5 @@ public class PostTest extends AbstractTest{
 
         String result = HttpClientUtil.getResponseBodyAsString(httpRequest);
         LOGGER.debug(result);
-        assertTrue(true);
     }
 }

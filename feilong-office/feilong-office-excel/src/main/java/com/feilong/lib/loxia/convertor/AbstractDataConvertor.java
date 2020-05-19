@@ -36,8 +36,7 @@ public abstract class AbstractDataConvertor<T> implements DataConvertor<T>{
         }
 
         //---------------------------------------------------------------
-        T t = handleConvert(value, sheetNo, cellIndex, excelCell);
-        return t;
+        return handleConvert(value, sheetNo, cellIndex, excelCell);
     }
 
     protected abstract T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell);

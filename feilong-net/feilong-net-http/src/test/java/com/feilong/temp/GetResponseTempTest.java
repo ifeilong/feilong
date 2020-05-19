@@ -16,7 +16,6 @@
 package com.feilong.temp;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -25,6 +24,7 @@ import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class GetResponseTempTest extends AbstractTest{
 
     @Test
@@ -39,8 +39,6 @@ public class GetResponseTempTest extends AbstractTest{
         urlString = "http://www.baidu.com";
 
         HttpClientUtil.getHttpResponse(urlString);
-
-        assertTrue(true);
     }
 
     @Test
@@ -48,6 +46,5 @@ public class GetResponseTempTest extends AbstractTest{
         String uri = "http://127.0.0.1:8085?name=jinxin&age=18";
         HttpRequest httpRequest = new HttpRequest(uri, HttpMethodType.PUT);
         HttpClientUtil.getHttpResponse(httpRequest, null);
-        assertTrue(true);
     }
 }

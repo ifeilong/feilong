@@ -271,6 +271,7 @@ import com.feilong.lib.lang3.Validate;
  * @since 1.0.2
  * @since jdk1.5
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class CollectionsUtil{
 
     /** The Constant LOGGER. */

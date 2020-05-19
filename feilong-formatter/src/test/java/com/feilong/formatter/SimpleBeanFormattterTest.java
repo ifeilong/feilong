@@ -19,7 +19,6 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -32,6 +31,7 @@ import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.store.order.OrderLine;
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class SimpleBeanFormattterTest extends AbstractTest{
 
     private static Iterable<OrderLine> ITERABLE_DATA       = null;
@@ -42,27 +42,23 @@ public class SimpleBeanFormattterTest extends AbstractTest{
 
     @Test
     public void testFormatToSimpleTable2(){
-        assertTrue(true);
     }
 
     @Test
     public void testFormatToSimpleTable3(){
         beanFormatterConfig = new BeanFormatterConfig();
-        assertTrue(true);
     }
 
     @Test
     public void testFormatToSimpleTable5(){
         beanFormatterConfig = new BeanFormatterConfig();
         beanFormatterConfig.setIncludePropertyNames("id", "orderId", "MSRP", "salePrice", "discountPrice", "count", "subtotal");
-        assertTrue(true);
     }
 
     @Test
     public void testFormatToSimpleTable6(){
         beanFormatterConfig = new BeanFormatterConfig();
         beanFormatterConfig.setSorts("id", "orderId");
-        assertTrue(true);
     }
 
     @Test
@@ -70,7 +66,6 @@ public class SimpleBeanFormattterTest extends AbstractTest{
         beanFormatterConfig = new BeanFormatterConfig();
         beanFormatterConfig.setIncludePropertyNames("id", "orderId", "MSRP", "salePrice", "discountPrice", "count", "subtotal");
         beanFormatterConfig.setSorts("id", "orderId");
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------
@@ -114,7 +109,5 @@ public class SimpleBeanFormattterTest extends AbstractTest{
         Date beginDate = now();
         LOGGER.debug(FormatterUtil.formatToSimpleTable(ITERABLE_DATA, beanFormatterConfig));
         LOGGER.info("use time: [{}]", formatDuration(beginDate));
-
-        assertTrue(true);
     }
 }

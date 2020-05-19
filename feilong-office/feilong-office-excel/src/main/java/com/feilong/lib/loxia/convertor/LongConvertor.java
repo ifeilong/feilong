@@ -49,10 +49,8 @@ public class LongConvertor extends AbstractChoiceConvertor<Long>{
             }
 
             try{
-                Long v = Long.parseLong((String) value);
-                return v;
+                return Long.parseLong((String) value);
             }catch (NumberFormatException e){
-
                 throw new ExcelException(WRONG_DATA_TYPE_NUMBER, sheetNo, cellIndex, value, excelCell);
             }
         }else if (value instanceof Double){

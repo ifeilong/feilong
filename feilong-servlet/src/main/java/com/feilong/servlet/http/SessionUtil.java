@@ -90,6 +90,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @see "org.apache.catalina.core.ApplicationSessionCookieConfig#createSessionCookie(Context, String, boolean)"
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class SessionUtil{
 
     /** The Constant LOGGER. */

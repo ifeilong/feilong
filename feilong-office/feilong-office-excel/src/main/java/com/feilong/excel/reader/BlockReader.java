@@ -42,6 +42,7 @@ import com.feilong.lib.loxia.util.OgnlStack;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class BlockReader{
 
     /** The Constant LOGGER. */

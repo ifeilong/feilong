@@ -16,7 +16,6 @@
 package com.feilong.net.filetransfer;
 
 import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
 
     /** The file transfer. */
@@ -48,8 +48,6 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
                                  "/upload/Inbound/InventoryAdjustments/Archive/2016-07-22_10-46-00.318-INVENTORY_ADJUSTMENTS_3PL_feilong_20160722-144626-073.XML" };
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePaths);
-
-        assertTrue(true);
     }
 
     /*
@@ -63,8 +61,6 @@ public class SFTPFileTransferDownloadTest extends FileTransferDownloadTest{
         String remotePath = "/upload/Inbound/InventoryAdjustments/Archive";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
-
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------

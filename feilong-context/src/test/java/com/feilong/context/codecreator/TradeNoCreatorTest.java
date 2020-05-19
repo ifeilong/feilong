@@ -15,8 +15,6 @@
  */
 package com.feilong.context.codecreator;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
@@ -28,13 +26,10 @@ import com.feilong.test.AbstractTest;
  */
 public class TradeNoCreatorTest extends AbstractTest{
 
-    /**
-     * Creates the trade no.
-     */
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createTradeNo(){
         LOGGER.debug(TradeNoCreator.createTradeNo(5545L, 88));
         LOGGER.debug(TradeNoCreator.createTradeNo(5545L, 1));
-        assertTrue(true);
     }
 }

@@ -15,13 +15,12 @@
  */
 package com.feilong.temp;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class HttpClientUtil4Test extends AbstractTest{
 
     // "fullEncodedUrl":
@@ -39,14 +38,12 @@ public class HttpClientUtil4Test extends AbstractTest{
     public void testGetResponseBodyAsString1(){
         String uri = "https://cps.wecommerce.com.cn/cps/broker/getToken?storeId=9&secret=991d110bc99aa4c9f151525f49eb6934";
         LOGGER.debug(HttpClientUtil.get(uri));
-        assertTrue(true);
     }
 
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084";
         LOGGER.debug(HttpClientUtil.get(uri));
-        assertTrue(true);
     }
 
     // 执行一个get方法,设置超时时间,并且将结果变成字符串

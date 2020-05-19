@@ -15,8 +15,6 @@
  */
 package com.feilong.coreextension.io;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -31,14 +29,11 @@ import com.feilong.test.AbstractTest;
  */
 public class SerializableUtilTest extends AbstractTest{
 
-    /**
-     * Name.
-     */
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testSize(){
         //       LOGGER.debug("Size of Object: " + ObjectUtil.size(new Object()));
         LOGGER.debug("Size of Calendar: " + SerializableUtil.size(Calendar.getInstance()));
         LOGGER.debug("Size of HashMap: " + SerializableUtil.size(new HashMap<String, String>()));
-        assertTrue(true);
     }
 }

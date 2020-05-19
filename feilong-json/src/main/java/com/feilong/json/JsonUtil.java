@@ -94,6 +94,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @see com.feilong.lib.json.JSONSerializer#toJSON(Object, JsonConfig)
  * @since 1.0.5
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class JsonUtil{
 
     /** The Constant LOGGER. */

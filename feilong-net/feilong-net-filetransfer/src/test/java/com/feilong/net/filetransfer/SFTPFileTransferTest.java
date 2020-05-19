@@ -15,8 +15,6 @@
  */
 package com.feilong.net.filetransfer;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +26,7 @@ import com.feilong.json.JsonUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class SFTPFileTransferTest extends FileTransferTest{
 
     /** The file transfer. */
@@ -45,7 +44,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void upload() throws Exception{
         String singleLocalFileFullPath = "E:\\1.txt";
         fileTransfer.upload(remoteDirectory, singleLocalFileFullPath);
-        assertTrue(true);
     }
 
     /*
@@ -58,7 +56,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void uploadDir() throws Exception{
         String singleLocalFileFullPath = "E:\\test";
         fileTransfer.upload(remoteDirectory, singleLocalFileFullPath);
-        assertTrue(true);
     }
 
     /*
@@ -71,7 +68,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void uploadDirs() throws Exception{
         String[] batchLocalFileFullPaths = { "E:\\test", "E:\\1.txt", "E:\\test1" };
         fileTransfer.upload(remoteDirectory, batchLocalFileFullPaths);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------
@@ -85,7 +81,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void delete() throws Exception{
         String remoteAbsolutePath = "/home/appuser/test/pg_ctl.conf";
         fileTransfer.delete(remoteAbsolutePath);
-        assertTrue(true);
     }
 
     /*
@@ -98,7 +93,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void deleteDir() throws Exception{
         String remoteAbsolutePath = "/home/feilongtest/out/test/2011-07-07";
         fileTransfer.delete(remoteAbsolutePath);
-        assertTrue(true);
     }
 
     /*
@@ -111,7 +105,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void deleteDirEmpty() throws Exception{
         String remoteAbsolutePath = "/home/appuser/test/2013-01-06";
         fileTransfer.delete(remoteAbsolutePath);
-        assertTrue(true);
     }
 
     /*
@@ -124,7 +117,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void deleteNotExist() throws Exception{
         String remoteAbsolutePath = "/home/appuser/test/2011-07-051/";
         fileTransfer.delete(remoteAbsolutePath);
-        assertTrue(true);
     }
 
     /**
@@ -137,7 +129,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
     public void deleteNotExist1() throws Exception{
         String remoteAbsolutePath = "/";
         fileTransfer.delete(remoteAbsolutePath);
-        assertTrue(true);
     }
 
     //------------------------------------------------------------------------------------------
@@ -153,7 +144,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
         String remoteAbsolutePath = "/home/appuser/test/2013-12-04-1938";
         String[] fileNames = { "SportActivity.dat", "SubCategory.dat", "aaa" };
         LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath, fileNames)));
-        assertTrue(true);
     }
 
     /*
@@ -163,7 +153,6 @@ public class SFTPFileTransferTest extends FileTransferTest{
      */
     @Override
     public void sendLocalFileToRemote_dir_chinese() throws Exception{
-        assertTrue(true);
     }
 
     //    /**

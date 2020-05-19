@@ -44,6 +44,7 @@ import com.feilong.lib.lang3.Validate;
  * @see com.feilong.core.util.predicate.BeanPredicate
  * @since 1.8.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class BeanPredicateUtil{
 
     /** Don't let anyone instantiate this class. */
@@ -386,7 +387,7 @@ public final class BeanPredicateUtil{
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<>(
                         propertyName, //
-                        (propertyValue) -> com.feilong.lib.lang3.ArrayUtils.contains(propertyValues, propertyValue));
+                        propertyValue -> com.feilong.lib.lang3.ArrayUtils.contains(propertyValues, propertyValue));
 
     }
 

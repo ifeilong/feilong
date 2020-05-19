@@ -49,6 +49,7 @@ import com.feilong.lib.lang3.Validate;
  * @since 1.8.0
  */
 //Aggregate Functions
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class AggregateUtil{
 
     /** Don't let anyone instantiate this class. */

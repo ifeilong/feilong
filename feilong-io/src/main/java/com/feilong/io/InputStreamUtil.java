@@ -44,6 +44,7 @@ import com.feilong.lib.springframework.core.io.ResourceLoader;
  * @see java.io.InputStream
  * @since 1.0.9
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class InputStreamUtil{
 
     /** The Constant LOGGER. */

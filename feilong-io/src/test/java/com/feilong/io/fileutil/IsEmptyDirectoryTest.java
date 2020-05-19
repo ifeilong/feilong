@@ -16,7 +16,6 @@
 package com.feilong.io.fileutil;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -30,27 +29,20 @@ import com.feilong.io.FileUtil;
  */
 public class IsEmptyDirectoryTest{
 
-    /**
-     * Checks if is empty directory.
-     */
     @Test
-    
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void isEmptyDirectory(){
         // 不存在的文件
         try{
             FileUtil.isEmptyDirectory("E:\\test\\1\\2011-07-07\\test\\1\\2011-07-07");
             fail();
-        }catch (IllegalArgumentException e){
-            assertTrue(true);
-        }
+        }catch (IllegalArgumentException e){}
 
         // 文件
         try{
             FileUtil.isEmptyDirectory("E:\\1.txt");
             fail();
-        }catch (IllegalArgumentException e){
-            assertTrue(true);
-        }
+        }catch (IllegalArgumentException e){}
 
         // 非空目录
         assertEquals(false, FileUtil.isEmptyDirectory("E:\\Workspaces"));
@@ -59,9 +51,6 @@ public class IsEmptyDirectoryTest{
         assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
     }
 
-    /**
-     * Test is empty directory1.
-     */
     @Test
     public void testIsEmptyDirectory1(){
         // 正确的 空目录

@@ -35,6 +35,7 @@ import com.feilong.excel.definition.ExcelCellConditionStyle;
 import com.feilong.excel.util.CellReferenceUtil;
 import com.feilong.lib.loxia.util.OgnlStack;
 
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class BlockWriter{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockWriter.class);

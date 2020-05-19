@@ -16,7 +16,6 @@
 package com.feilong.context.invoker.http;
 
 import static com.feilong.context.invoker.http.HttpRequestUriResolver.resolve;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -26,6 +25,7 @@ import com.feilong.store.member.Member;
 public class HttpRequestUriResolverTest2{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testTemplate12(){
         Member member = new Member();
         member.setCode("cfei long-jinxin");
@@ -34,10 +34,10 @@ public class HttpRequestUriResolverTest2{
         HttpClientUtil.get(resolve);
 
         //assertEquals("http://www.feilong.com/fei long", resolve);
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testTemplate122(){
         Member member = new Member();
         member.setCode("cfei long-中国");
@@ -45,7 +45,6 @@ public class HttpRequestUriResolverTest2{
 
         HttpClientUtil.get(resolve);
         //assertEquals("http://www.feilong.com/fei long", resolve);
-        assertTrue(true);
     }
 
 }

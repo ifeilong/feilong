@@ -129,6 +129,7 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  * @see #encryptHex(String, String)
  * @see #decryptHex(String, String)
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class SymmetricEncryption{
 
     /** The Constant log. */

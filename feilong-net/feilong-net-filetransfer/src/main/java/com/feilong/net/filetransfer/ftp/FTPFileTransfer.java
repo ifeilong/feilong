@@ -76,6 +76,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class FTPFileTransfer extends AbstractFileTransfer{
 
     /** The Constant LOGGER. */

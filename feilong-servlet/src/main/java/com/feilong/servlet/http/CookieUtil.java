@@ -212,6 +212,7 @@ import com.feilong.servlet.http.entity.CookieEntity;
  * @see <a href="http://www.ietf.org/rfc/rfc2109.txt">HTTP State Management Mechanism (废弃 被rfc6265取代)</a>
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class CookieUtil{
 
     /** The Constant LOGGER. */

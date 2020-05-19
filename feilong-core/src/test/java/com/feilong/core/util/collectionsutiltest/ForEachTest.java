@@ -21,7 +21,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -74,15 +73,15 @@ public class ForEachTest{
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testNullIterable(){
         CollectionsUtil.forEach(null, null, 88);
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testEmptyIterable(){
         CollectionsUtil.forEach(emptyList(), null, 88);
-        assertTrue(true);
     }
 
     /**

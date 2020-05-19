@@ -34,6 +34,7 @@ import com.feilong.net.http.callback.StatusCodeResultCallback;
  * @see <a href="https://wiki.apache.org/HttpComponents/QuickStart">QuickStart</a>
  * @since 1.10.6
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class HttpClientUtil{
 
     /** Don't let anyone instantiate this class. */

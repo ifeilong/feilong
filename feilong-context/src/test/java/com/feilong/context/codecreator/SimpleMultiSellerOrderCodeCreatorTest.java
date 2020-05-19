@@ -16,7 +16,6 @@
 package com.feilong.context.codecreator;
 
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -55,18 +54,19 @@ public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
     //---------------------------------------------------------------
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createOrderCode(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(35191L, 555L));
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createOrderCode12(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(1161L, 5555555L));
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createOrderCode1(){
         for (int i = 0, j = 100; i < j; ++i){
             String value = multiSellerOrderCodeCreator.create(35191L, 555L);
@@ -75,13 +75,12 @@ public class SimpleMultiSellerOrderCodeCreatorTest extends AbstractTest{
 
             SET.add(value);
         }
-        assertTrue(true);
     }
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void createReturnOrderCode(){
         LOGGER.debug(multiSellerOrderCodeCreator.create(111121L, 5555555L));
-        assertTrue(true);
     }
 
 }

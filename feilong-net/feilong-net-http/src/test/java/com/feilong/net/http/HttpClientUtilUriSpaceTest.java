@@ -15,8 +15,6 @@
  */
 package com.feilong.net.http;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
@@ -24,13 +22,12 @@ import com.feilong.test.AbstractTest;
 public class HttpClientUtilUriSpaceTest extends AbstractTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         String uri = "https://www.baidu.com/item/BA8 900";
         HttpClientUtil.get(uri);
 
         LOGGER.info("get over");
-
-        assertTrue(true);
 
     }
 }

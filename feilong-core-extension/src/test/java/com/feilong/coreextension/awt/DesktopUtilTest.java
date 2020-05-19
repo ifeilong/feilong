@@ -15,8 +15,6 @@
  */
 package com.feilong.coreextension.awt;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import com.feilong.lib.lang3.SystemUtils;
@@ -27,39 +25,34 @@ public class DesktopUtilTest{
     private final String testFile = SystemUtils.USER_HOME + "/.m2/settings.xml";
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testBrowse1(){
         DesktopUtil.browse("http://101.95.128.146/payment/paymentChannel?s={}&id={}", 14, "中国");
-        assertTrue(true);
 
     }
 
     //---------------------------------------------------------------
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testPrint(){
         DesktopUtil.print(testFile);
-        assertTrue(true);
     }
 
-    //    @Test
-    //    public void testEdit(){
-    //        DesktopUtil.edit(testFile);
-    //    }
-
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testOpen(){
         DesktopUtil.open(testFile);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testMail(){
         DesktopUtil.mail(
                         "mailto:{}?subject={}&body={}", //
                         "feilong@163.com",
                         "你好",
                         "我是飞天奔月</br>哈哈哈哈");
-        assertTrue(true);
     }
 
 }

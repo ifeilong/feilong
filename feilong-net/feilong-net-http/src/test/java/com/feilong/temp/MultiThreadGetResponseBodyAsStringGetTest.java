@@ -16,7 +16,6 @@
 package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -27,6 +26,7 @@ import com.feilong.test.AbstractTest;
 public class MultiThreadGetResponseBodyAsStringGetTest extends AbstractTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testGetResponseBodyAsString11(){
         ThreadUtil.execute(new Runnable(){
 
@@ -37,8 +37,6 @@ public class MultiThreadGetResponseBodyAsStringGetTest extends AbstractTest{
 
             }
         }, 20);
-
-        assertTrue(true);
     }
 
 }

@@ -20,7 +20,6 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,13 +55,10 @@ public class PutAllIfNotNullTest{
         assertThat(map.keySet(), hasSize(0));
     }
 
-    /**
-     * Test put all if not null null map.
-     */
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testPutAllIfNotNullNullMap(){
         MapUtil.putAllIfNotNull(null, newHashMap());
-        assertTrue(true);
     }
 
 }

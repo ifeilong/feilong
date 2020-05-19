@@ -74,6 +74,7 @@ import com.feilong.lib.lang3.tuple.Pair;
  * @see com.feilong.lib.io.FileUtils
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class FileUtil{
 
     /** The Constant LOGGER. */

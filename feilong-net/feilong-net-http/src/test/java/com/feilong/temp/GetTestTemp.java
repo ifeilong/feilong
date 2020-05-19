@@ -16,41 +16,37 @@
 package com.feilong.temp;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class GetTestTemp extends AbstractTest{
 
     @Test
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084";
         LOGGER.debug(HttpClientUtil.get(uri));
-        assertTrue(true);
     }
 
     @Test
     public void testGetResponseBodyAsString1(){
         String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
         LOGGER.debug(HttpClientUtil.get(uri));
-        assertTrue(true);
     }
 
     @Test
     public void testGetResponseBodyAsString11(){
         String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
         LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
-        assertTrue(true);
     }
 
     @Test
     public void testGetResponseBodyAsString121(){
         String uri = "http://127.0.0.1:8084";
         LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
-        assertTrue(true);
     }
 
 }

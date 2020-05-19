@@ -16,12 +16,12 @@
 package com.feilong.net.filetransfer;
 
 import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
 
     /** The file transfer. */
@@ -40,8 +40,6 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
         String remotePath = "/maven/settings.xml";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
-
-        assertTrue(true);
     }
 
     /**
@@ -53,7 +51,6 @@ public class FTPFileTransferDownloadTest extends FileTransferDownloadTest{
         String remotePath = "/webstore/InlineSales_Test/2011-07-05";
         String localAbsoluteDirectoryPath = "E:\\test\\1";
         fileTransfer.download(localAbsoluteDirectoryPath, remotePath);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------

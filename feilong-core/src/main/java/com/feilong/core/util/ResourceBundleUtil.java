@@ -259,8 +259,7 @@ public final class ResourceBundleUtil{
                     map.putAll(littleMap);
                 }
             }catch (Exception e){
-                LOGGER.warn("baseName:[{}],message:[{}]", baseName, e.getMessage());
-                continue;
+                LOGGER.warn("baseName:[{}],message:[{}],ignore~", baseName, e.getMessage());
             }
         }
         return map;

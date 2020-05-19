@@ -26,6 +26,7 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
 
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class LogBuilder{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogBuilder.class);

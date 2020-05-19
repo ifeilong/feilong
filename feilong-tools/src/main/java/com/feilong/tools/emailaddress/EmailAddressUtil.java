@@ -40,6 +40,7 @@ import com.feilong.lib.lang3.Validate;
  * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
  * @since 1.0.1
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class EmailAddressUtil{
 
     /** The Constant log. */

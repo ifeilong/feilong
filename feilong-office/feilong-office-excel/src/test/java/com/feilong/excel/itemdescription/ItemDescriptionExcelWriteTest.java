@@ -26,6 +26,7 @@ import com.feilong.excel.AbstractLoxiaWriteTest;
 public class ItemDescriptionExcelWriteTest extends AbstractLoxiaWriteTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         String configurations = "loxia/ItemDescription/feilong-sheets-productList2.xml";
         String templateFileName = "ItemDescription/itemdescription-export-2.xlsx";

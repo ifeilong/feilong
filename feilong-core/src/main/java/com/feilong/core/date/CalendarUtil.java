@@ -235,6 +235,7 @@ import com.feilong.lib.lang3.Validate;
  * @see DateUtil
  * @since 1.0.1
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 final class CalendarUtil{
 
     /** Don't let anyone instantiate this class. */

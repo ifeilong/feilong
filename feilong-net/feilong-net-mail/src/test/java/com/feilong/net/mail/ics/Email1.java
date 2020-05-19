@@ -28,6 +28,7 @@ import com.feilong.net.mail.util.MimeType;
 public class Email1 extends AbstractMailSenderTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void send() throws Exception{
         mailSendRequest.setiCalendar(ICalendarBuilder.build());
 

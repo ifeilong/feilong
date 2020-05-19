@@ -38,6 +38,7 @@ import com.feilong.net.mail.SessionFactory;
 public class EmailCalendarTest2 extends AbstractMailSenderTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void send() throws Exception{
         mailSendRequest.setContent("hello hahaha");
 

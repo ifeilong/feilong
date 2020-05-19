@@ -16,7 +16,6 @@
 package com.feilong.core.lang.threadutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
@@ -26,17 +25,12 @@ import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.threadutiltest.entity.EmptyPartitionPerHandler;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.3
- */
 public class ExecuteWithPartitionPerHandlerTest extends AbstractExcuteTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void testExecute(){
         ThreadUtil.execute(toList(2, 5, 6, 7), 2, EmptyPartitionPerHandler.INSTANCE);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------

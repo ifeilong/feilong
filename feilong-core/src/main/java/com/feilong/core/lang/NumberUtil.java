@@ -158,6 +158,7 @@ import com.feilong.lib.lang3.math.NumberUtils;
  * @see com.feilong.lib.lang3.math.NumberUtils
  * @since 1.4.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class NumberUtil{
 
     /**

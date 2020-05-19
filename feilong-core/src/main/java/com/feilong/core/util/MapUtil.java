@@ -197,6 +197,7 @@ import com.feilong.lib.lang3.Validate;
  * @see "com.google.common.collect.Maps"
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class MapUtil{
 
     /** The Constant LOGGER. */

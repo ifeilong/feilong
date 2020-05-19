@@ -54,6 +54,7 @@ import com.feilong.validator.ValidatorUtil;
  * @see com.feilong.lib.io.IOUtils
  * @since 1.0.6
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class IOReaderUtil{
 
     /** The Constant log. */

@@ -16,13 +16,13 @@
 package com.feilong.net.mail;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
 import com.feilong.lib.lang3.SystemUtils;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class MailSenderTest extends AbstractMailSenderTest{
 
     @Test
@@ -30,7 +30,6 @@ public class MailSenderTest extends AbstractMailSenderTest{
         String path = SystemUtils.USER_HOME + "/workspace/baozun/nebula-doc/store/release log/adidas 删除Git DEV分支说明.adoc.html";
         String textContent = IOReaderUtil.readToString(path, UTF8);
         mailSendRequest.setContent(textContent);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------
@@ -39,7 +38,6 @@ public class MailSenderTest extends AbstractMailSenderTest{
     public void sendMail(){
         String textContent = "<html><body><hr/><div style='boder:1px #000 solid;color:red'>今天天气不错</div></body></html>";
         mailSendRequest.setContent(textContent);
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------
@@ -47,6 +45,5 @@ public class MailSenderTest extends AbstractMailSenderTest{
     public void testSendTextMail(){
         String textContent = "测试回执";
         mailSendRequest.setContent(textContent);
-        assertTrue(true);
     }
 }

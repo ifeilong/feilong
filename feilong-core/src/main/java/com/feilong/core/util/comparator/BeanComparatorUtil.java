@@ -38,6 +38,7 @@ import com.feilong.lib.lang3.Validate;
  * @see FixedOrderComparator
  * @since 1.8.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class BeanComparatorUtil{
 
     /** Don't let anyone instantiate this class. */

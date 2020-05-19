@@ -15,8 +15,6 @@
  */
 package com.feilong.net.mail;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import com.feilong.template.TemplateUtil;
@@ -24,11 +22,10 @@ import com.feilong.template.TemplateUtil;
 public class HelloWorldTest extends AbstractMailSenderTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         mailSendRequest.setSubject("hello world");
         mailSendRequest.setContent(TemplateUtil.parseTemplate("hello world.vm"));
-
-        assertTrue(true);
     }
 
     //---------------------------------------------------------------

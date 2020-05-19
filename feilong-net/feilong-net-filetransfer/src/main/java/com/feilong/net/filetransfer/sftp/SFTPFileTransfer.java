@@ -66,6 +66,7 @@ import com.jcraft.jsch.SftpException;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /** The Constant LOGGER. */

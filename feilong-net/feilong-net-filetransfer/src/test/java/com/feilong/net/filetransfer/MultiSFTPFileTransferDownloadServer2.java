@@ -29,6 +29,7 @@ public class MultiSFTPFileTransferDownloadServer2 extends AbstractTest{
     private FileTransfer fileTransfer;
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void downloadFile(){
         LOGGER.info("begin mutiSFTPFileTransferDownloadTest1");
         String[] remotePaths = {

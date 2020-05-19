@@ -20,7 +20,6 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -30,6 +29,7 @@ import com.feilong.test.AbstractTest;
 public class FormatterBeanTest extends AbstractTest{
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public final void test(){
         User user = new User();
         user.setAge(15);
@@ -42,7 +42,6 @@ public class FormatterBeanTest extends AbstractTest{
 
         LOGGER.debug(formatToSimpleTable(user));
 
-        assertTrue(true);
     }
 
 }

@@ -68,6 +68,7 @@ import com.feilong.lib.lang3.Validate;
  * @see <a href="http://www.it165.net/pro/html/201407/18366.html">Java中的TreeMap、Comparable、Comparator</a>
  * @since 1.2.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /** The Constant serialVersionUID. */

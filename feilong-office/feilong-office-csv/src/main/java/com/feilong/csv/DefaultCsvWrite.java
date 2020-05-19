@@ -151,6 +151,7 @@ import com.feilong.lib.lang3.Validate;
  * @see <a href="https://zh.wikipedia.org/wiki/%E9%80%97%E5%8F%B7%E5%88%86%E9%9A%94%E5%80%BC">逗号分隔值</a>
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class DefaultCsvWrite implements CsvWrite{
 
     /** The Constant log. */

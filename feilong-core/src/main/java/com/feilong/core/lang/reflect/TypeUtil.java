@@ -253,7 +253,6 @@ public final class TypeUtil{
         Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
 
         //---------------------------------------------------------------
-
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, ToStringConfig.DEFAULT_CONNECTOR));
         }

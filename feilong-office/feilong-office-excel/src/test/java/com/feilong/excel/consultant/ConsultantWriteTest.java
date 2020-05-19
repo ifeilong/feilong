@@ -29,6 +29,7 @@ public class ConsultantWriteTest extends AbstractLoxiaWriteTest{
     int count = 1000;
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         String templateFileName = "consultant/consultant-list-export.xlsx";
         String configurations = "loxia/consultant/feilong-sheets-Consultant.xml";

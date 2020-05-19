@@ -15,8 +15,6 @@
  */
 package com.feilong.component;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,9 +28,9 @@ public class DataFileEmailComponentSpringTest extends AbstractJUnit4SpringContex
     //---------------------------------------------------------------
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void run(){
         component.run();
-        assertTrue(true);
     }
 
 }
