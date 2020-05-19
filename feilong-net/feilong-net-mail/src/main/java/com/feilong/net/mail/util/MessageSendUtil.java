@@ -21,7 +21,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
 
-import com.feilong.net.mail.exception.MailSenderException;
+import com.feilong.net.mail.exception.MailException;
 
 /**
  * 专门用来发送邮件.
@@ -56,7 +56,7 @@ public class MessageSendUtil{
             // 发送邮件
             Transport.send(message);
         }catch (MessagingException e){
-            throw new MailSenderException(e);
+            throw new MailException(e);
         }
     }
 

@@ -19,18 +19,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * The Class FeiLongTypeUtilSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 GetGenericInterfacesParameterizedRawTypesTest.class,
                 GetGenericSuperclassParameterizedRawTypesTest.class,
         //
 })
-
 public class TypeUtilSuiteTests{
 
 }

@@ -91,7 +91,7 @@ public final class TypeUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得某个类的父类上面的泛型参数的类型.
+     * 获得类的 父类 上的泛型参数的类型.
      * 
      * <h3>示例:</h3>
      * 
@@ -116,8 +116,6 @@ public final class TypeUtil{
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 没有父类(除了Object),抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 有父类(除了Object)但是父类没有泛型参数,抛出 {@link NullPointerException}<br>
-     * @see #getGenericSuperclassParameterizedType(Class)
-     * @see #extractActualTypeArgumentClassArray(ParameterizedType)
      * @since 1.1.1
      */
     public static Class<?>[] getGenericSuperclassParameterizedRawTypes(Class<?> klass){
@@ -127,7 +125,7 @@ public final class TypeUtil{
     }
 
     /**
-     * 获得某个类的接口上面的泛型参数的类型.
+     * 获得类的 接口 上的泛型参数的类型.
      * 
      * <h3>示例:</h3>
      * 
@@ -172,8 +170,6 @@ public final class TypeUtil{
      *         如果 <code>extractInterfaceClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 是没有泛型接口,抛出 {@link NullPointerException}<br>
      *         如果 <code>klass</code> 有泛型接口但是其中没有指定的接口类型<code>extractInterfaceClass</code> ,抛出 {@link NullPointerException}<br>
-     * @see #getGenericInterfacesParameterizedType(Class, Class)
-     * @see #extractActualTypeArgumentClassArray(ParameterizedType)
      * @since 1.1.1
      */
     public static Class<?>[] getGenericInterfacesParameterizedRawTypes(Class<?> klass,Class<?> extractInterfaceClass){
@@ -206,7 +202,6 @@ public final class TypeUtil{
             }
 
             //---------------------------------------------------------------
-
             ParameterizedType genericInterfacesType = (ParameterizedType) genericInterface;
             Type rawType = genericInterfacesType.getRawType();
 

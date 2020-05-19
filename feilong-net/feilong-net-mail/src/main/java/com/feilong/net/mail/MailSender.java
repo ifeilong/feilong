@@ -16,7 +16,7 @@
 package com.feilong.net.mail;
 
 import com.feilong.net.mail.entity.MailSendRequest;
-import com.feilong.net.mail.exception.MailSenderException;
+import com.feilong.net.mail.exception.MailException;
 
 /**
  * 邮件发送器.
@@ -34,8 +34,8 @@ public interface MailSender{
      *
      * @param mailSendRequest
      *            the mail sender config
-     * @throws MailSenderException
-     *             the mail sender exception
+     * @throws MailException
+     *             邮件发送时候的异常
      */
     void send(MailSendRequest mailSendRequest);
 }

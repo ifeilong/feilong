@@ -22,16 +22,8 @@ import org.junit.Test;
 
 import com.feilong.core.lang.reflect.TypeUtil;
 
-/**
- * The Class TypeUtilGetGenericInterfacesParameterizedRawTypesTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class GetGenericInterfacesParameterizedRawTypesTest{
 
-    /**
-     * Test get generic interfaces parameterized raw types.
-     */
     @Test
     public void testGetGenericInterfacesParameterizedRawTypes(){
         Class<?>[] rawTypes = TypeUtil
@@ -42,9 +34,6 @@ public class GetGenericInterfacesParameterizedRawTypesTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test get generic interfaces parameterized raw types no extract interface class.
-     */
     @Test(expected = NullPointerException.class)
     public void testGetGenericInterfacesParameterizedRawTypesNoExtractInterfaceClass(){
         TypeUtil.getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryInterfaceImpl.class, BaseSolrRepository2.class);

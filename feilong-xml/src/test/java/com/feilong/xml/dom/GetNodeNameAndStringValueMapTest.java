@@ -65,4 +65,10 @@ public class GetNodeNameAndStringValueMapTest extends AbstractTest{
 
     }
 
+    @Test(expected = NullPointerException.class)
+    public void test1(){
+        XmlUtil.getNodeNameAndStringValueMap(null, "/RESULT/INPOLIST/*");
+
+    }
+
 }

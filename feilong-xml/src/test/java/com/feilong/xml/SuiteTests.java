@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.xml.dom.FormatTest;
 import com.feilong.xml.dom.GetNodeNameAndStringValueMapTest;
+import com.feilong.xml.dom.GetNodeAttributeValueAndStringValueMapTest;
 import com.feilong.xml.xstream.ToBeanTest;
 import com.feilong.xml.xstream.ToBeanXStreamConfigTest;
 import com.feilong.xml.xstream.ToMapTest;
@@ -43,6 +44,8 @@ import com.feilong.xml.xstream.ToXmlWithConfigTest;
                 ToXmlWithConfigTest.class,
 
                 GetNodeNameAndStringValueMapTest.class,
+                GetNodeAttributeValueAndStringValueMapTest.class,
+
                 FormatTest.class,
 
                 FeilongDocumentBuilderTest.class,

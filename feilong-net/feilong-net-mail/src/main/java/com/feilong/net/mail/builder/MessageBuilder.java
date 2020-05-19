@@ -29,7 +29,7 @@ import com.feilong.net.mail.builder.setter.HeaderSetter;
 import com.feilong.net.mail.builder.setter.RecipientsSetter;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.MailSendRequest;
-import com.feilong.net.mail.exception.MailSenderException;
+import com.feilong.net.mail.exception.MailException;
 import com.feilong.net.mail.util.InternetAddressUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -85,7 +85,7 @@ public class MessageBuilder{
             BodySetter.setBody(message, mailSendRequest);
         }catch (MessagingException e){
             //since 1.13.2 update exception message
-            throw new MailSenderException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.format(mailSendRequest)), e);
+            throw new MailException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.format(mailSendRequest)), e);
         }
         return message;
     }

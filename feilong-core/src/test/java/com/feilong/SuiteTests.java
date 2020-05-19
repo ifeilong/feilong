@@ -28,18 +28,11 @@ import com.feilong.core.text.TextSuiteTests;
 import com.feilong.core.util.UtilSuiteTests;
 import com.feilong.tools.slf4j.Slf4jUtilTest;
 
-/**
- * The Class FeiLongSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.7.1
- */
 @RunWith(Suite.class)
 @SuiteClasses({
                 CoreTests.class,
 
                 Slf4jUtilTest.class,
-                //FeiLongJsonUtilSuiteTests.class,
 
                 BeanSuiteTests.class,
                 DateSuiteTests.class,

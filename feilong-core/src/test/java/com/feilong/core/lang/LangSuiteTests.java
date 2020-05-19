@@ -31,12 +31,6 @@ import com.feilong.core.lang.stringutiltest.StringUtilSuiteTests;
 import com.feilong.core.lang.systemutiltest.SystemUtilSuiteTests;
 import com.feilong.core.lang.threadutiltest.ThreadUtilSuiteTests;
 
-/**
- * The Class FeiLongLangSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
- */
 @RunWith(Suite.class)
 @SuiteClasses({
                 ArrayUtilSuiteTests.class,

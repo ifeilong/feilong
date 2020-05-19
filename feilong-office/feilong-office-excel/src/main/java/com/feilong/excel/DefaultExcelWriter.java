@@ -27,6 +27,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.util.WorkbookUtil;
 import com.feilong.excel.writer.WorkbookWriter;
 
@@ -134,7 +135,7 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
         try (Workbook workbook = WorkbookUtil.create(inputStream)){
             WorkbookWriter.writePerSheet(workbook, outputStream, excelDefinition, beansList);
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new DefaultRuntimeException(e);
         }
     }
 

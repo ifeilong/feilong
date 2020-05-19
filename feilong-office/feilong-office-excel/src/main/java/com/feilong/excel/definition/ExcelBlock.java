@@ -18,6 +18,7 @@ package com.feilong.excel.definition;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.util.CellReferenceUtil;
 
 /**
@@ -394,7 +395,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         try{
             setLoopClass(Class.forName(className));
         }catch (ClassNotFoundException e){
-            throw new RuntimeException(className + " is not found.");
+            throw new DefaultRuntimeException(className + " is not found.");
         }
     }
 

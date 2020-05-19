@@ -75,7 +75,6 @@ public class JsoupUtilTest extends AbstractTest{
         Document document = JsoupUtil.getDocument(urlString);
 
         Element select = document.getElementById("lrcContent");
-
         LOGGER.debug("" + _getContent(select));
     }
 

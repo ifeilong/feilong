@@ -175,17 +175,14 @@ public class XmlUtil{
      *            the xml
      * @param xpathExpression
      *            the xpath expression
-     * @return the name and string value map
+     * @return 如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.0.0
      */
     public static Map<String, String> getNodeNameAndStringValueMap(Object xml,String xpathExpression){
-        return getNodeMap(xml, xpathExpression, new Hook(){
-
-            @Override
-            public void hook(Map<String, String> map,Node node){
-                map.put(node.getNodeName(), node.getTextContent());
-            }
-        });
+        return getNodeMap(
+                        xml,
+                        xpathExpression, //
+                        (map,node) -> map.put(node.getNodeName(), node.getTextContent()));
     }
 
     /**
@@ -197,20 +194,18 @@ public class XmlUtil{
      *            the xpath expression
      * @param nodeAttributeName
      *            the node attribute name
-     * @return the node attribute value and string value map
+     * @return 如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.0.0
      */
     public static Map<String, String> getNodeAttributeValueAndStringValueMap(
                     Object xml,
                     String xpathExpression,
                     final String nodeAttributeName){
-        return getNodeMap(xml, xpathExpression, new Hook(){
+        return getNodeMap(
+                        xml,
+                        xpathExpression, //
+                        (map,node) -> map.put(getAttributeValue(node, nodeAttributeName), node.getTextContent()));
 
-            @Override
-            public void hook(Map<String, String> map,Node node){
-                map.put(getAttributeValue(node, nodeAttributeName), node.getTextContent());
-            }
-        });
     }
 
     /**
@@ -222,7 +217,7 @@ public class XmlUtil{
      *            the xpath expression
      * @param hook
      *            the hook
-     * @return the node map
+     * @return 如果 <code>xml</code> 是null,抛出 {@link NullPointerException}<br>
      */
     private static Map<String, String> getNodeMap(Object xml,String xpathExpression,Hook hook){
         Document document = FeilongDocumentBuilder.buildDocument(xml);

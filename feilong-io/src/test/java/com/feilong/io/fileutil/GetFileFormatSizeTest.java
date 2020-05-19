@@ -21,17 +21,10 @@ import org.junit.Test;
 
 import com.feilong.io.FileUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.5
- */
 public class GetFileFormatSizeTest{
 
-    //---------------------------------------------------------------
-
     @Test(expected = NullPointerException.class)
-    public void testGetFileFormatSizeTestNull(){
+    public void test(){
         FileUtil.getFileFormatSize((File) null);
     }
 

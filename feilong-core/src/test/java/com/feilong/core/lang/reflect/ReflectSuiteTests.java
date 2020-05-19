@@ -24,11 +24,6 @@ import com.feilong.core.lang.reflect.fieldutiltest.FieldUtilSuiteTests;
 import com.feilong.core.lang.reflect.methodutiltest.MethodUtilSuiteTests;
 import com.feilong.core.lang.reflect.typeutiltest.TypeUtilSuiteTests;
 
-/**
- * The Class FeiLongReflectSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 ConstructorUtilSuiteTests.class,

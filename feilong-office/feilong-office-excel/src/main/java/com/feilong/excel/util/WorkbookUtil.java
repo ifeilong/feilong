@@ -29,11 +29,12 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.io.IOUtil;
 import com.feilong.lib.lang3.Validate;
 
 /**
- * The Class WorkbookUtil.
+ * {@link Workbook} 工具类.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
@@ -64,15 +65,15 @@ public class WorkbookUtil{
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         //---------------------------------------------------------------
+        Date beginDate = new Date();
         try{
-            Date beginDate = new Date();
             Workbook workbook = WorkbookFactory.create(inputStream);
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug("create workbook from [{}] use time: [{}]", inputStream.toString(), formatDuration(beginDate));
             }
             return workbook;
         }catch (EncryptedDocumentException e){
-            throw new RuntimeException(e);
+            throw new DefaultRuntimeException(e);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -96,8 +97,8 @@ public class WorkbookUtil{
         Validate.notNull(outputStream, "outputStream can't be null!");
 
         //---------------------------------------------------------------
+        Date beginDate = new Date();
         try{
-            Date beginDate = new Date();
             workbook.write(outputStream);
             if (LOGGER.isInfoEnabled()){
                 LOGGER.info("write workbook to outputStream use time: [{}]", formatDuration(beginDate));

@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailInfo;
 import com.feilong.net.mail.entity.MailReaderConfig;
-import com.feilong.net.mail.exception.MailReaderException;
+import com.feilong.net.mail.exception.MailException;
 import com.feilong.net.mail.util.FolderUtil;
 import com.feilong.net.mail.util.MessageUtil;
 
@@ -104,7 +104,7 @@ public class IMAPMailReader implements MailReader{
             Message[] messages = getMessages(folder, searchTerm, newstIndex);
             return MessageUtil.toMailInfoList(messages);
         }catch (MessagingException e){
-            throw new MailReaderException(e);
+            throw new MailException(e);
         }finally{
             close(store);
             close(folder);
@@ -126,7 +126,7 @@ public class IMAPMailReader implements MailReader{
                 store.close();
             }
         }catch (MessagingException e){
-            throw new MailReaderException(e);
+            throw new MailException(e);
         }
     }
 
@@ -145,7 +145,7 @@ public class IMAPMailReader implements MailReader{
                 folder.close(false); // Close connection 
             }
         }catch (MessagingException e){
-            throw new MailReaderException(e);
+            throw new MailException(e);
         }
     }
 
