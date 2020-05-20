@@ -17,19 +17,18 @@ package com.feilong.excel.销售数据;
 
 import java.math.BigDecimal;
 
-/**
- * The Class SalesData.
- */
 public class SalesData{
 
     /** 年份 *. */
-    private int        year;
+    private int         year;
 
     /** 月份 *. */
-    private int        month;
+    private int         month;
 
     /** 总金额. */
-    private BigDecimal total;
+    private BigDecimal  total;
+
+    private AuditMember auditMember;
 
     //---------------------------------------------------------------
     /**
@@ -37,6 +36,20 @@ public class SalesData{
      */
     public SalesData(){
         super();
+    }
+
+    /**
+     * @param year
+     * @param month
+     * @param total
+     * @param auditMember
+     */
+    public SalesData(int year, int month, BigDecimal total, AuditMember auditMember){
+        super();
+        this.year = year;
+        this.month = month;
+        this.total = total;
+        this.auditMember = auditMember;
     }
 
     /**
@@ -106,6 +119,21 @@ public class SalesData{
      */
     public void setTotal(BigDecimal total){
         this.total = total;
+    }
+
+    /**
+     * @return the auditMember
+     */
+    public AuditMember getAuditMember(){
+        return auditMember;
+    }
+
+    /**
+     * @param auditMember
+     *            the auditMember to set
+     */
+    public void setAuditMember(AuditMember auditMember){
+        this.auditMember = auditMember;
     }
 
 }

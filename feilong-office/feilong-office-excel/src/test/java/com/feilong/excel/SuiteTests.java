@@ -20,9 +20,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.excel.consultant.ConsultantReadTest;
-import com.feilong.excel.consultant.ConsultantWriteTest;
 import com.feilong.excel.loxia.convertor.IntegerConvertorTest;
 import com.feilong.excel.utils.CellReferenceUtilTest;
+import com.feilong.excel.销售数据.Write审计Test;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
@@ -31,7 +31,7 @@ import com.feilong.excel.utils.CellReferenceUtilTest;
 
                 CellReferenceUtilTest.class,
 
-                ConsultantWriteTest.class,
+                Write审计Test.class,
                 ConsultantReadTest.class,
         //
 })

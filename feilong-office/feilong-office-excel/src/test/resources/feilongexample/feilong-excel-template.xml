@@ -49,30 +49,6 @@
 		</block>
 	</sheet>
 
-	<sheet name="salesOrderdownload">
-		<block start="A1" end="D1">
-			<cell position="B1" dataName="fromDate" />
-			<cell position="D1" dataName="toDate" />
-		</block>
-		<block start="A3" end="AJ3" loop="true" dataName="headlist" loopClass="com.feilong.service.report.command.SoStatMonthCommand">
-			<cell position="A3" dataName="salCode" />
-			<cell position="B3" dataName="createTime" />
-			<!-- 付款时间 -->
-			<cell position="C3" dataName="commitTime" />
-			<cell position="D3" dataName="deliveryTime" />
-			<cell position="R3" dataName="=O3+Q3" />
-			<cell position="S3" dataName="paymentType" />
-			<cell position="T3" dataName="discount" />
-			<!-- 确认收货时间-发货时间 -->
-			<!-- 商品订购件数 -->
-			<cell position="AG3" dataName="requestQty" />
-			<!-- 是否全退 -->
-			<cell position="AJ3" dataName="isFullyReturn" />
-			<!-- 订单签收时间 -->
-			<cell position="AK3" dataName="signTime" />
-		</block>
-	</sheet>
-
 	<sheet name="transFeeupload">
 		<block start="A2" end="C2">
 			<cell position="C2" dataName="transferType" />
@@ -80,26 +56,6 @@
 		<block start="A5" end="E5" dataName="transfeelist" loop="true" loopClass="com.feilong.model.master.TransferFee">
 			<cell position="A5" dataName="province" mandatory="true" />
 			<cell position="B5" dataName="city" />
-		</block>
-	</sheet>
-
-	<sheet name="soReturnOrderdownload">
-		<block start="A1" end="D1">
-			<cell position="B1" dataName="fromDate" />
-			<cell position="D1" dataName="toDate" />
-		</block>
-		<block start="A3" end="U3" loop="true" dataName="rolist" loopClass="com.feilong.service.report.command.SoReturnReportCommand">
-			<cell position="A3" dataName="returnCode" />
-			<cell position="E3" dataName="oldCode" />
-		</block>
-	</sheet>
-
-	<sheet name="createHtmlFile">
-		<block start="C4" end="C8">
-			<cell position="C4" dataName="stytleNo" />
-		</block>
-		<block start="C10" end="C10" loop="true" dataName="htmlList" loopClass="com.feilong.service.report.command.CreateHtmlCommand">
-			<cell position="C10" dataName="spec" />
 		</block>
 	</sheet>
 
@@ -117,28 +73,6 @@
 			<cell position="B9" dataName="shippCount" mandatory="true" />
 			<cell position="D9" dataName="actualCount" mandatory="true" />
 			<loopbreakcondition rowOffset="0" colOffset="0">合计</loopbreakcondition>
-		</block>
-	</sheet>
-
-	<sheet name="importOverSize">
-		<block start="A2" end="D2" loop="true" dataName="sizelist" loopClass="com.feilong.model.system.SizeRef">
-			<cell position="A2" dataName="size" mandatory="true" />
-			<cell position="B2" dataName="category" mandatory="true" />
-			<cell position="C2" dataName="gender" />
-			<cell position="D2" dataName="ref" />
-		</block>
-	</sheet>
-
-	<!-- so reconciliations start -->
-	<sheet name="soReconciliationsSummaryDownload">
-		<block start="A3" end="C3">
-			<cell position="A3" dataName="dataScrope" />
-		</block>
-		<block start="C6" end="C6">
-			<cell position="C6" dataName="totalAccount" />
-		</block>
-		<block start="E6" end="E6">
-			<cell position="E6" dataName="feilv" />
 		</block>
 	</sheet>
 
@@ -169,15 +103,6 @@
 			<cell position="D3" dataName="sku.code" />
 			<cell position="E3" dataName="sku.lifeCycleStatus" />
 			<cell position="F3" dataName="=VLOOKUP(E3,sku状态!$A$1:$B$3,2,false)" />
-		</block>
-	</sheet>
-
-	<!--wms为0,oms已上架sku code create by jinxin 2011-9-22 10:22 -->
-	<sheet name="syscInventoryWmsZeroOmsSellingDownload">
-		<block start="B3" end="C3" dataName="allWmsZeroOmsSellingList" loop="true" loopClass="com.feilong.model.master.SkuInventory">
-			<cell position="B3" dataName="sku.code" />
-			<cell position="C3" dataName="sku.lifeCycleStatus" />
-			<cell position="D3" dataName="=VLOOKUP(C3,sku状态!$A$1:$B$3,2,false)" />
 		</block>
 	</sheet>
 </sheets>

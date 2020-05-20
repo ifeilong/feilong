@@ -15,26 +15,22 @@
  */
 package com.feilong.excel.销售数据;
 
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
-
 import java.util.List;
 
-import com.feilong.excel.AbstractLoxiaWriteTest;
+import org.junit.Test;
 
-abstract class AbstractWriteTest extends AbstractLoxiaWriteTest{
+public class Write审计Test extends AbstractWriteTest{
 
-    protected List<SalesData> buildList(){
-        List<SalesData> list = newArrayList();
+    @Test
+    public void test(){
+        String templateFileName = "销售数据/audit/export-template-sales-vlookup.xlsx";
+        String configurations = "excel/销售数据/audit/feilong-sheets-salesData-vlookup.xml";
 
-        for (int i = 1; i <= buildMonth(); ++i){
-            AuditMember auditMember = new AuditMember(i % 2 == 0 ? "张飞" : "关羽");
-            list.add(new SalesData(2020, i, toBigDecimal(i * 533033.88), auditMember));
-        }
-        return list;
+        String sheetName = "salesDataExport";
+
+        //---------------------------------------------------------------
+        List<SalesData> list = buildList();
+        build(templateFileName, configurations, sheetName, "salesDataList", list);
     }
 
-    protected int buildMonth(){
-        return 12;
-    }
 }
