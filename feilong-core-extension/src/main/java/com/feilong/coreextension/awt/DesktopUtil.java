@@ -123,17 +123,6 @@ public final class DesktopUtil{
         desktopAction(Slf4jUtil.format(url, args), Action.PRINT);
     }
 
-    //    /**
-    //     * Edits the.
-    //     *
-    //     * @param url
-    //     *            the url
-    //     * @since 1.2.0
-    //     */
-    //    public static void edit(String url){
-    //        desktopAction(url, Action.EDIT);
-    //    }
-
     //---------------------------------------------------------------
 
     /**

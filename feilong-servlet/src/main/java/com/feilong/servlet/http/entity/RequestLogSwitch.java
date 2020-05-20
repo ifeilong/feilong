@@ -75,6 +75,8 @@ public abstract class RequestLogSwitch implements Serializable{
      *
      * @since 1.4.0
      */
+    //Classes should not access their own subclasses during initialization
+    @SuppressWarnings("squid:S2390")
     public static final RequestLogSwitch NORMAL                               = new NormalRequestLogSwitch();
 
     /**
@@ -93,6 +95,8 @@ public abstract class RequestLogSwitch implements Serializable{
      *
      * @since 1.12.4
      */
+    //Classes should not access their own subclasses during initialization
+    @SuppressWarnings("squid:S2390")
     public static final RequestLogSwitch NORMAL_WITH_HEADER                   = new NormalWithHeadersRequestLogSwitch();
 
     /**
@@ -111,6 +115,8 @@ public abstract class RequestLogSwitch implements Serializable{
      *
      * @since 1.4.0
      */
+    //Classes should not access their own subclasses during initialization
+    @SuppressWarnings("squid:S2390")
     public static final RequestLogSwitch NORMAL_WITH_IDENTITY                 = new NormalWithIdentityRequestLogSwitch();
 
     /**
@@ -131,6 +137,8 @@ public abstract class RequestLogSwitch implements Serializable{
      *
      * @since 1.4.0
      */
+    //Classes should not access their own subclasses during initialization
+    @SuppressWarnings("squid:S2390")
     public static final RequestLogSwitch NORMAL_WITH_IDENTITY_INCLUDE_FORWARD = new NormalWithIdentityIncludeForwardRequestLogSwitch();
 
     /**
@@ -138,6 +146,8 @@ public abstract class RequestLogSwitch implements Serializable{
      * 
      * @since 1.4.0
      */
+    //Classes should not access their own subclasses during initialization
+    @SuppressWarnings("squid:S2390")
     public static final RequestLogSwitch FULL                                 = new FullRequestLogSwitch();
 
     /**
@@ -161,6 +171,8 @@ public abstract class RequestLogSwitch implements Serializable{
      * 
      * @since 1.10.5
      */
+    //Classes should not access their own subclasses during initialization
+    @SuppressWarnings("squid:S2390")
     public static final RequestLogSwitch ERROR                                = new ErrorRequestLogSwitch();
 
     //---------------------------------------------------------------

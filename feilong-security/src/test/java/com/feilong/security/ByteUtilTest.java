@@ -23,12 +23,6 @@ import org.junit.Test;
 import com.feilong.lib.lang3.Validate;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class ByteUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.0 2012-4-10 下午11:55:36
- */
 public class ByteUtilTest extends AbstractTest{
 
     /**
@@ -57,7 +51,7 @@ public class ByteUtilTest extends AbstractTest{
      * @return the string
      * @since 1.2.0
      */
-    private String toHexString(byte b){
+    private static String toHexString(byte b){
         int intValue = 0;
         if (b >= 0){
             intValue = b;
