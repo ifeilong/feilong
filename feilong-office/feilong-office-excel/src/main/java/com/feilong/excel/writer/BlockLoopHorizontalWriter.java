@@ -43,6 +43,8 @@ class BlockLoopHorizontalWriter{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     static void write(
                     Sheet sheet,
                     ExcelBlock excelBlock,
@@ -91,10 +93,10 @@ class BlockLoopHorizontalWriter{
         int startRow = excelBlock.getStartRow();
         int endRow = excelBlock.getEndRow();
 
-        int step = 1;
         Object preObj = null;
 
         int lastRowNum = sheet.getLastRowNum();
+        int step = 1;
         for (Object obj : listValue){
             ognlStack.push(obj);
             ognlStack.addContext("preLine", preObj);
@@ -103,19 +105,10 @@ class BlockLoopHorizontalWriter{
             //shiftrow and prepare write new row
             int rowOffset = step * (endRow - startRow + 1);
             //---------------------------------------------------------------
-
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
-                                "startRow:[{}],endRow:[{}],step:[{}],rowOffset:[{}]", //
-                                startRow,
-                                endRow,
-                                step,
-
-                                rowOffset);
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("startRow:[{}],endRow:[{}],step:[{}],rowOffset:[{}]", startRow, endRow, step, rowOffset);
             }
-
             //---------------------------------------------------------------
-
             int nextStartRow = startRow + rowOffset;
             if (nextStartRow <= lastRowNum){
                 sheet.shiftRows(nextStartRow, lastRowNum, endRow - startRow + 1, true, false);

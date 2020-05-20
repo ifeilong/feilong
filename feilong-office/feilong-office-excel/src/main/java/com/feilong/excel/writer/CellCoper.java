@@ -16,13 +16,7 @@
 package com.feilong.excel.writer;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class CellCoper{
 
     /** Don't let anyone instantiate this class. */
@@ -45,7 +39,7 @@ class CellCoper{
                 newCell.setCellValue(oldCell.getNumericCellValue());
                 break;
             case BLANK:
-                newCell.setCellType(CellType.BLANK);
+                newCell.setBlank();
                 break;
             case BOOLEAN:
                 newCell.setCellValue(oldCell.getBooleanCellValue());
@@ -72,7 +66,7 @@ class CellCoper{
                 newCell.setCellValue(oldCell.getNumericCellValue());
                 break;
             case BLANK:
-                newCell.setCellType(CellType.BLANK);
+                newCell.setBlank();
                 break;
             case BOOLEAN:
                 newCell.setCellValue(oldCell.getBooleanCellValue());

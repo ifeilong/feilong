@@ -93,8 +93,8 @@ class RowWriter{
 
             setCellStyle(sheet, styleMap, ognlStack, excelCell, rowIndex, col);
         }
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("write row:[{}] over,rowOffset:[{}],use time: [{}]", rowIndex, rowOffset, formatDuration(beginDate));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("write row:[{}] over,rowOffset:[{}],use time: [{}]", rowIndex, rowOffset, formatDuration(beginDate));
         }
     }
 

@@ -15,7 +15,10 @@
  */
 package com.feilong.excel.util;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.feilong.excel.definition.ExcelBlock;
@@ -66,9 +69,12 @@ public class CloneUtil{
         excelBlock.setStartRow(aexcelBlock.getStartRow());
 
         //---------------------------------------------------------------
+        List<ExcelCellConditionStyle> styles = newArrayList();
         for (ExcelCellConditionStyle excelCellConditionStyle : aexcelBlock.getStyles()){
-            excelBlock.addStyle(cloneStyle(excelCellConditionStyle));
+            styles.add(cloneStyle(excelCellConditionStyle));
         }
+        excelBlock.setStyles(styles);
+
         for (ExcelCell excelCell : aexcelBlock.getCells()){
             excelBlock.addCell(cloneCell(excelCell));
         }
@@ -96,13 +102,6 @@ public class CloneUtil{
         return condition;
     }
 
-    /**
-     * Clone sheet.
-     *
-     * @param aexcelSheet
-     *            the aexcel sheet
-     * @return the excel sheet
-     */
     public static ExcelSheet cloneSheet(ExcelSheet aexcelSheet){
         ExcelSheet excelSheet = new ExcelSheet();
         excelSheet.setName(aexcelSheet.getName());

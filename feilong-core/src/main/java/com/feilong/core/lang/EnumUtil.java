@@ -267,6 +267,7 @@ public final class EnumUtil{
         }else if (propertyValue == specifiedValue){
             return true;
         }
+        //---------------------------------------------------------------
         //到这里  propertyValue 和 specifiedValue, 肯定 不是null了 
         String propertyValueString = propertyValue.toString();
         String specifiedValueString = specifiedValue.toString();

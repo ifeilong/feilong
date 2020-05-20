@@ -26,7 +26,7 @@ import com.feilong.excel.AbstractLoxiaWriteTest;
 
 public class ConsultantWriteTest extends AbstractLoxiaWriteTest{
 
-    int count = 2;
+    int count = 200;
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code

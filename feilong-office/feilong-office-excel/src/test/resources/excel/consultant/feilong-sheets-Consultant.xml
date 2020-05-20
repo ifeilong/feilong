@@ -9,10 +9,12 @@
 			<cell position="B4" dataName="itemName" />
 			<cell position="C4" dataName="memberName" />
 			<cell position="D4" dataName="content" />
+			
 			<cell position="E4" dataName="createTime" />
 			<cell position="F4" dataName="resolveNote" />
 			<cell position="G4" dataName="resolveTime" />
 			<cell position="H4" dataName="resolveName" />
+			
 			<cell position="I4" dataName="publishMark" />
 		</block>
 	</sheet>

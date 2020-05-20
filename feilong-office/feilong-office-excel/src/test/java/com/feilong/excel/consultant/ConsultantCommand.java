@@ -4,9 +4,6 @@ import java.util.Date;
 
 /**
  * 咨询Command
- * 
- * @author Tianlong.Zhang
- * 
  */
 public class ConsultantCommand{
 

@@ -51,15 +51,11 @@ class ColumnWriter{
                     List<CellRangeAddress> mergedRegions,
                     Map<String, CellStyle> styleMap){
         if (rowOffset > 0 || colOffset > 0){
-            BlockCopyer.copy(
-                            sheet,
-                            excelBlock.getStartRow(),
-                            excelBlock.getStartCol(),
-                            excelBlock.getEndRow(),
-                            excelBlock.getEndCol(),
-                            rowOffset,
-                            colOffset,
-                            mergedRegions);
+            int startRow = excelBlock.getStartRow();
+            int startCol = excelBlock.getStartCol();
+            int endRow = excelBlock.getEndRow();
+            int endCol = excelBlock.getEndCol();
+            BlockCopyer.copy(sheet, startRow, startCol, endRow, endCol, rowOffset, colOffset, mergedRegions);
         }
 
         //---------------------------------------------------------------

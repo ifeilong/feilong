@@ -35,7 +35,10 @@ import com.feilong.excel.util.CellReferenceUtil;
 public class FormulaEvaluatorUtil{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormulaEvaluatorUtil.class);
+    private static final Logger  LOGGER               = LoggerFactory.getLogger(FormulaEvaluatorUtil.class);
+
+    /** The Constant DYNAMIC_CELL_PATTREN. */
+    private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
@@ -44,9 +47,6 @@ public class FormulaEvaluatorUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
-
-    /** The Constant DYNAMIC_CELL_PATTREN. */
-    private static final Pattern DYNAMIC_CELL_PATTREN = Pattern.compile("[A-Z][A-Z]?\\d+");
 
     //---------------------------------------------------------------
 
@@ -94,6 +94,7 @@ public class FormulaEvaluatorUtil{
     static String offsetFormula(String formula,int rowOffset,int colOffset){
         StringBuffer sb = new StringBuffer();
         Matcher matcher = DYNAMIC_CELL_PATTREN.matcher(formula);
+
         int head = 0;
         int start = 0;
         int end = -1;

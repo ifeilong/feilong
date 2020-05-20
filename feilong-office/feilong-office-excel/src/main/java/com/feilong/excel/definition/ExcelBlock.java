@@ -368,6 +368,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         this.isChildBlock = isChildBlock;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Sets the loop class by class name.
      *
@@ -412,6 +414,8 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         return result;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the styles.
      *
@@ -429,16 +433,6 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      */
     public void setStyles(List<ExcelCellConditionStyle> styles){
         this.styles = styles;
-    }
-
-    /**
-     * 添加 style.
-     *
-     * @param style
-     *            the style
-     */
-    public void addStyle(ExcelCellConditionStyle style){
-        this.styles.add(style);
     }
 
 }

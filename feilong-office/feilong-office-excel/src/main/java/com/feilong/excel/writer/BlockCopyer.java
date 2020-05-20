@@ -48,22 +48,31 @@ class BlockCopyer{
                     int rowOffset,
                     int colOffset,
                     List<CellRangeAddress> mergedRegions){
+
+        //---------------------------------------------------------------
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace(
+                            "will copy block,startRow:[{}],startCol:[{}],endRow:[{}],endCol:[{}],rowOffset:[{}],colOffset:[{}]",
+                            startRow,
+                            startCol,
+                            endRow,
+                            endCol,
+                            rowOffset,
+                            colOffset);
+        }
+        //---------------------------------------------------------------
+        //will copy block,startRow:[3],startCol:[0],endRow:[3],endCol:[8],rowOffset:[23],colOffset:[0]
         for (int row = startRow; row <= endRow; row++){
             Row oldRow = sheet.getRow(row);
             if (oldRow == null){
                 continue;
             }
-            Row newRow = sheet.getRow(row + rowOffset);
-            if (newRow == null){
-                newRow = sheet.createRow(row + rowOffset);
-            }
-            if (oldRow.getHeight() >= 0){
-                newRow.setHeight(oldRow.getHeight());
-            }
 
             //---------------------------------------------------------------
+            int newRowIndex = row + rowOffset;
+            Row newRow = buildNewRow(sheet, oldRow, newRowIndex);
             if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("copy row [{}] to [{}],Set row height :{}", row, row + rowOffset, newRow.getHeightInPoints());
+                LOGGER.trace("copy row [{}] to [{}],Set new row height :{}", row, newRowIndex, newRow.getHeightInPoints());
             }
 
             //---------------------------------------------------------------
@@ -72,10 +81,9 @@ class BlockCopyer{
                 if (oldCell == null){
                     continue;
                 }
-                Cell newCell = newRow.getCell(col + colOffset);
-                if (newCell == null){
-                    newCell = newRow.createCell(col + colOffset);
-                }
+
+                int newCellIndex = col + colOffset;
+                Cell newCell = buildNewCell(newRow, newCellIndex);
                 CellCoper.copy(oldCell, newCell, rowOffset, colOffset);
             }
         }
@@ -90,10 +98,29 @@ class BlockCopyer{
         //---------------------------------------------------------------
         if (mergedRegions != null){
             for (CellRangeAddress cellRangeAddress : mergedRegions){
-                CellRangeAddress craNew = buildCellRangeAddress(rowOffset, colOffset, cellRangeAddress);
-                sheet.addMergedRegion(craNew);
+                sheet.addMergedRegion(buildCellRangeAddress(rowOffset, colOffset, cellRangeAddress));
             }
         }
+    }
+
+    private static Cell buildNewCell(Row newRow,int newCellIndex){
+        Cell newCell = newRow.getCell(newCellIndex);
+        if (newCell == null){
+            return newRow.createCell(newCellIndex);
+        }
+        return newCell;
+    }
+
+    private static Row buildNewRow(Sheet sheet,Row oldRow,int newRowIndex){
+        Row newRow = sheet.getRow(newRowIndex);
+        if (newRow == null){
+            newRow = sheet.createRow(newRowIndex);
+        }
+        if (oldRow.getHeight() >= 0){
+            newRow.setHeight(oldRow.getHeight());
+        }
+
+        return newRow;
     }
 
     private static CellRangeAddress buildCellRangeAddress(int rowOffset,int colOffset,CellRangeAddress cellRangeAddress){
