@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.writer;
 
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +107,7 @@ class ExcelCellConditionStyleInitializer{
                     return;
                 }
 
-                String cellIndex2 = CellReferenceUtil.getCellRef(i, j);
+                String cellIndex2 = getCellRef(i, j);
                 styleMap.put(cellIndex2, cell.getCellStyle());
 
                 LOGGER.debug("Condition Style [{}]", cellIndex2);

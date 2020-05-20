@@ -66,7 +66,7 @@ class StyleMapBuilder{
     static Map<String, CellStyle> build(Workbook workbook,ExcelDefinition excelDefinition,List<ExcelSheet> excelSheetList){
         Integer styleSheetPosition = excelDefinition.getStyleSheetPosition();
         if (null == styleSheetPosition){
-            LOGGER.debug("ExcelDefinition styleSheetPosition is null, renturn empty styleMap");
+            LOGGER.debug("ExcelDefinition styleSheetPosition is null, return empty styleMap");
             return emptyMap();
         }
 

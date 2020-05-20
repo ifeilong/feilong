@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.reader;
 
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -160,11 +162,16 @@ class BlockReader{
                     Object value = CellValueGetter.get(cell, formulaEvaluator);
                     value = CellValueConverter.convert(
                                     sheetNo,
-                                    CellReferenceUtil.getCellRef(startRow + rowOffSet, cellDefinition.getCol()),
+                                    getCellRef(startRow + rowOffSet, cellDefinition.getCol()),
                                     value,
                                     cellDefinition,
                                     PropertyTypeDetector.detect(result, cellDefinition));
-                    LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellRef(startRow + rowOffSet, cellDefinition.getCol()), value);
+
+                    //---------------------------------------------------------------
+                    if (LOGGER.isDebugEnabled()){
+                        LOGGER.debug("{}[Checked]:{}", getCellRef(startRow + rowOffSet, cellDefinition.getCol()), value);
+                    }
+                    //---------------------------------------------------------------
                     result.put(cellDefinition.getDataName(), value);
                 }catch (ExcelException e){
                     if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){
@@ -235,13 +242,14 @@ class BlockReader{
                 Object value = CellValueGetter.get(cell, formulaEvaluator);
 
                 Class<?> propertyType = PropertyTypeDetector.detect(ognlStack.peek(), excelCell);
-                value = CellValueConverter.convert(
-                                sheetNo,
-                                CellReferenceUtil.getCellRef(excelCell.getRow(), excelCell.getCol()),
-                                value,
-                                excelCell,
-                                propertyType);
-                LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellRef(excelCell.getRow(), excelCell.getCol()), value);
+                value = CellValueConverter
+                                .convert(sheetNo, getCellRef(excelCell.getRow(), excelCell.getCol()), value, excelCell, propertyType);
+
+                //---------------------------------------------------------------
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug("{}[Checked]:{}", CellReferenceUtil.getCellRef(excelCell.getRow(), excelCell.getCol()), value);
+                }
+                //---------------------------------------------------------------
                 ognlStack.setValue(excelCell.getDataName(), value);
             }catch (ExcelException e){
                 if (readStatus.getStatus() == ReadStatus.STATUS_SUCCESS){

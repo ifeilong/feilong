@@ -67,7 +67,7 @@ public class CloneUtil{
 
         //---------------------------------------------------------------
         for (ExcelCellConditionStyle excelCellConditionStyle : aexcelBlock.getStyles()){
-            excelBlock.addStyle(excelCellConditionStyle.cloneStyle());
+            excelBlock.addStyle(cloneStyle(excelCellConditionStyle));
         }
         for (ExcelCell excelCell : aexcelBlock.getCells()){
             excelBlock.addCell(cloneCell(excelCell));
@@ -161,9 +161,21 @@ public class CloneUtil{
         cell.setType(excelCell.getType());
 
         for (ExcelCellConditionStyle style : excelCell.getStyles()){
-            cell.addStyle(style.cloneStyle());
+            cell.addStyle(cloneStyle(style));
         }
         return cell;
+    }
+
+    private static ExcelCellConditionStyle cloneStyle(ExcelCellConditionStyle excelCellConditionStyle){
+        ExcelCellConditionStyle style = new ExcelCellConditionStyle();
+        style.setCellIndex(excelCellConditionStyle.getCellIndex());
+        style.setCondition(excelCellConditionStyle.getCondition());
+
+        style.setEndRow(excelCellConditionStyle.getEndRow());
+        style.setEndCol(excelCellConditionStyle.getEndCol());
+        style.setStartRow(excelCellConditionStyle.getStartRow());
+        style.setStartCol(excelCellConditionStyle.getStartCol());
+        return style;
     }
 
 }

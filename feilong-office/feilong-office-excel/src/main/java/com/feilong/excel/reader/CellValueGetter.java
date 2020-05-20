@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.reader;
 
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -62,7 +64,7 @@ class CellValueGetter{
         CellValue cellValue = formulaEvaluator.evaluate(cell);
         if (cellValue == null){
             if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("{}: null", CellReferenceUtil.getCellRef(cell.getRowIndex(), cell.getColumnIndex()));
+                LOGGER.trace("{}: null", getCellRef(cell.getRowIndex(), cell.getColumnIndex()));
             }
             return null;
         }

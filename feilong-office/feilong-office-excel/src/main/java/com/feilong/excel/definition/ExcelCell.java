@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.definition;
 
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,7 +212,7 @@ public class ExcelCell{
      * @return the cell index
      */
     public String getCellIndex(){
-        return CellReferenceUtil.getCellRef(row, col);
+        return getCellRef(row, col);
     }
 
     /**

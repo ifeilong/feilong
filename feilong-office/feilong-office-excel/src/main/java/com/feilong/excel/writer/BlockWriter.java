@@ -15,10 +15,8 @@
  */
 package com.feilong.excel.writer;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +30,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.ExcelCellConditionStyle;
-import com.feilong.excel.util.CellReferenceUtil;
 import com.feilong.lib.loxia.util.OgnlStack;
 
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
@@ -70,14 +67,12 @@ class BlockWriter{
                     continue;
                 }
                 if (((Boolean) obj).booleanValue()){
-                    BlockStyleSetter.set(
-                                    sheet,
-                                    excelCellConditionStyle.getStartRow(),
-                                    excelCellConditionStyle.getEndRow(),
-                                    excelCellConditionStyle.getStartCol(),
-                                    excelCellConditionStyle.getEndCol(),
-                                    excelCellConditionStyle.getCellIndex(),
-                                    styleMap);
+                    int startRow = excelCellConditionStyle.getStartRow();
+                    int endRow = excelCellConditionStyle.getEndRow();
+                    int startCol = excelCellConditionStyle.getStartCol();
+                    int endCol = excelCellConditionStyle.getEndCol();
+                    String cellIndex = excelCellConditionStyle.getCellIndex();
+                    BlockStyleSetter.set(sheet, startRow, endRow, startCol, endCol, cellIndex, styleMap);
                 }
             }
         }
@@ -85,12 +80,10 @@ class BlockWriter{
         //---------------------------------------------------------------
         for (ExcelCell excelCell : blockDefinition.getCells()){
             String dataExpr = excelCell.getDataExpr();
-            CellValueSetter.set(
-                            sheet,
-                            excelCell.getRow(),
-                            excelCell.getCol(),
-                            dataExpr == null ? excelCell.getDataName() : dataExpr,
-                            stack);
+            int row = excelCell.getRow();
+            String dataName = excelCell.getDataName();
+            int col = excelCell.getCol();
+            CellValueSetter.set(sheet, row, col, dataExpr == null ? dataName : dataExpr, stack);
 
             //---------------------------------------------------------------
             if (styleMap.keySet().size() > 0){
@@ -100,11 +93,7 @@ class BlockWriter{
                         continue;
                     }
                     if (((Boolean) obj).booleanValue()){
-                        CellStyleSetter.set(
-                                        sheet,
-                                        excelCell.getRow(),
-                                        excelCell.getCol(),
-                                        styleMap.get(excelCellConditionStyle.getCellIndex()));
+                        CellStyleSetter.set(sheet, row, col, styleMap.get(excelCellConditionStyle.getCellIndex()));
                     }
                 }
             }
@@ -113,21 +102,6 @@ class BlockWriter{
 
     //---------------------------------------------------------------
 
-    /**
-     * Write loop block.
-     *
-     * @param sheet
-     *            the sheet
-     * @param excelBlock
-     *            the block definition
-     * @param ognlStack
-     *            the stack
-     * @param mergedRegions
-     *            the merged regions
-     * @param styleMap
-     *            the style map
-     * @throws Exception
-     */
     static void writeLoopBlock(
                     Sheet sheet,
                     ExcelBlock excelBlock,
@@ -149,49 +123,38 @@ class BlockWriter{
                     List<CellRangeAddress> mergedRegions,
                     Map<String, CellStyle> styleMap){
         Object value = ognlStack.getValue(excelBlock.getDataName());
+
+        int startRow = excelBlock.getStartRow();
+        int endRow = excelBlock.getEndRow();
         if (value == null){
             //if no data, just remove the dummy data
-            for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
+            for (int i = endRow; i >= startRow; i--){
                 sheet.removeRow(sheet.getRow(i));
             }
             return;
         }
-
         //---------------------------------------------------------------
-        Collection<? extends Object> listValue;
-        if (!(value instanceof Collection)){
-            if (value.getClass().isArray()){
-                listValue = Arrays.asList(value);
-            }else{
-                listValue = toList(value);
-            }
-        }else{
-            listValue = (Collection<? extends Object>) value;
-        }
-
+        Collection<?> listValue = DataToCollectionUtil.convert(value);
         //---------------------------------------------------------------
 
         int step = 1;
         Object preObj = null;
+
+        int lastRowNum = sheet.getLastRowNum();
         for (Object obj : listValue){
             ognlStack.push(obj);
             ognlStack.addContext("preLine", preObj);
             ognlStack.addContext("lineNum", step - 1);
+
             //shiftrow and prepare write new row
-            int nextStartRow = excelBlock.getStartRow() + step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1);
-            if (nextStartRow <= sheet.getLastRowNum()){
-                sheet.shiftRows(nextStartRow, sheet.getLastRowNum(), excelBlock.getEndRow() - excelBlock.getStartRow() + 1, true, false);
+            int rowOffset = step * (endRow - startRow + 1);
+            int nextStartRow = startRow + rowOffset;
+            if (nextStartRow <= lastRowNum){
+                sheet.shiftRows(nextStartRow, lastRowNum, endRow - startRow + 1, true, false);
             }
 
             //---------------------------------------------------------------
-            RowWriter.write(
-                            sheet,
-                            excelBlock,
-                            ognlStack,
-                            step * (excelBlock.getEndRow() - excelBlock.getStartRow() + 1),
-                            mergedRegions,
-                            styleMap);
-
+            RowWriter.write(sheet, excelBlock, rowOffset, mergedRegions, styleMap, ognlStack);
             //---------------------------------------------------------------
             step++;
             preObj = ognlStack.pop();
@@ -199,35 +162,36 @@ class BlockWriter{
         ognlStack.removeContext("preLine");
         ognlStack.removeContext("lineNum");
 
+        //---------------------------------------------------------------
+
         //if no data, just remove the dummy data        
         //[2013-2-26]it seems that we also need to remove all merged regions for shift      
         for (int i = sheet.getNumMergedRegions() - 1; i >= 0; i--){
             CellRangeAddress cellRangeAddress = sheet.getMergedRegion(i);
-            if (cellRangeAddress.getFirstRow() >= excelBlock.getStartRow() && cellRangeAddress.getFirstColumn() >= excelBlock.getStartCol()
-                            && cellRangeAddress.getLastRow() <= excelBlock.getEndRow()
-                            && cellRangeAddress.getLastColumn() <= excelBlock.getEndCol()){
+            int lastRow = cellRangeAddress.getLastRow();
+            int firstRow = cellRangeAddress.getFirstRow();
+            int firstColumn = cellRangeAddress.getFirstColumn();
+            int lastColumn = cellRangeAddress.getLastColumn();
+            int startCol = excelBlock.getStartCol();
+            int endCol = excelBlock.getEndCol();
+            //---------------------------------------------------------------
+            if (firstRow >= startRow && firstColumn >= startCol && lastRow <= endRow && lastColumn <= endCol){
                 sheet.removeMergedRegion(i);
-                LOGGER.debug(
-                                "Removed Merged Region:[{}-{}]",
-                                CellReferenceUtil.getCellRef(cellRangeAddress.getFirstRow(), cellRangeAddress.getFirstColumn()),
-                                CellReferenceUtil.getCellRef(cellRangeAddress.getLastRow(), cellRangeAddress.getLastColumn()));
+
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug("Removed Merged Region:[{}-{}]", getCellRef(firstRow, firstColumn), getCellRef(lastRow, lastColumn));
+                }
             }
         }
 
         //---------------------------------------------------------------
         //[2013-2-22]if with data, still need to remove dummy one, otherwise xlsx will have error if there are formulas in block.
-        for (int i = excelBlock.getEndRow(); i >= excelBlock.getStartRow(); i--){
+        for (int i = endRow; i >= startRow; i--){
             sheet.removeRow(sheet.getRow(i));
         }
         if (listValue.size() > 0){
-            sheet.shiftRows(
-                            excelBlock.getEndRow() + 1,
-                            sheet.getLastRowNum(),
-                            excelBlock.getStartRow() - excelBlock.getEndRow() - 1,
-                            true,
-                            false);
+            sheet.shiftRows(endRow + 1, lastRowNum, startRow - endRow - 1, true, false);
         }
-
     }
 
     private static void writeLoopVertical(
@@ -241,22 +205,10 @@ class BlockWriter{
             if (value == null){
                 return;
             }
-
             //---------------------------------------------------------------
-            Collection<? extends Object> listValue;
-            if (!(value instanceof Collection)){
-                if (value.getClass().isArray()){
-                    listValue = Arrays.asList(value);
-                }else{
-                    ArrayList<Object> list = new ArrayList<>();
-                    list.add(value);
-                    listValue = list;
-                }
-            }else{
-                listValue = (Collection<? extends Object>) value;
-            }
-
-            //---------------------------------------------------------------
+            Collection<?> listValue = DataToCollectionUtil.convert(value);
+            int endCol = excelBlock.getEndCol();
+            int startCol = excelBlock.getStartCol();
 
             int step = 0;
             Object preObj = null;
@@ -265,14 +217,8 @@ class BlockWriter{
                 ognlStack.addContext("preLine", preObj);
                 ognlStack.addContext("lineNum", step - 1);
 
-                ColumnWriter.write(
-                                sheet,
-                                excelBlock,
-                                ognlStack,
-                                0,
-                                step * (excelBlock.getEndCol() - excelBlock.getStartCol() + 1),
-                                mergedRegions,
-                                styleMap);
+                int colOffset = step * (endCol - startCol + 1);
+                ColumnWriter.write(sheet, excelBlock, ognlStack, 0, colOffset, mergedRegions, styleMap);
                 step++;
                 preObj = ognlStack.pop();
             }

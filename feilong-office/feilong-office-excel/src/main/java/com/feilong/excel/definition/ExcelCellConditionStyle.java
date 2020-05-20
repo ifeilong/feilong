@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.definition;
 
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
+
 import com.feilong.excel.util.CellReferenceUtil;
 
 /**
@@ -164,7 +166,7 @@ public class ExcelCellConditionStyle{
      * @return the start cell index
      */
     public String getStartCellIndex(){
-        return CellReferenceUtil.getCellRef(startRow, startCol);
+        return getCellRef(startRow, startCol);
     }
 
     /**
@@ -200,19 +202,4 @@ public class ExcelCellConditionStyle{
         this.endCol = value[1];
     }
 
-    /**
-     * Clone style.
-     *
-     * @return the excel cell condition style
-     */
-    public ExcelCellConditionStyle cloneStyle(){
-        ExcelCellConditionStyle style = new ExcelCellConditionStyle();
-        style.setCellIndex(cellIndex);
-        style.setCondition(condition);
-        style.setEndCol(endCol);
-        style.setEndRow(endRow);
-        style.setStartCol(startCol);
-        style.setStartRow(startRow);
-        return style;
-    }
 }

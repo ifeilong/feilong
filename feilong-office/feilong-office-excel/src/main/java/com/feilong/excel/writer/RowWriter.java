@@ -16,7 +16,6 @@
 package com.feilong.excel.writer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -40,42 +39,21 @@ class RowWriter{
     }
 
     //---------------------------------------------------------------
-    /**
-     * Write row.
-     *
-     * @param sheet
-     *            the sheet
-     * @param excelBlock
-     *            the block definition
-     * @param ognlStack
-     *            the stack
-     * @param rowOffset
-     *            the row offset
-     * @param mergedRegions
-     *            the merged regions
-     * @param styleMap
-     *            the style map
-     * @throws Exception
-     *             the exception
-     */
     static void write(
                     Sheet sheet,
                     ExcelBlock excelBlock,
-                    OgnlStack ognlStack,
                     int rowOffset,
                     List<CellRangeAddress> mergedRegions,
-                    Map<String, CellStyle> styleMap){
+                    Map<String, CellStyle> styleMap,
+                    OgnlStack ognlStack){
         if (rowOffset > 0){
-            BlockCopyer.copy(
-                            sheet,
-                            excelBlock.getStartRow(),
-                            excelBlock.getStartCol(),
-                            excelBlock.getEndRow(),
-                            excelBlock.getEndCol(),
-                            rowOffset,
-                            0,
-                            mergedRegions);
+            int startRow = excelBlock.getStartRow();
+            int startCol = excelBlock.getStartCol();
+            int endRow = excelBlock.getEndRow();
+            int endCol = excelBlock.getEndCol();
+            BlockCopyer.copy(sheet, startRow, startCol, endRow, endCol, rowOffset, 0, mergedRegions);
         }
+        //---------------------------------------------------------------
 
         if (styleMap.keySet().size() > 0){
             for (ExcelCellConditionStyle style : excelBlock.getStyles()){
@@ -84,25 +62,28 @@ class RowWriter{
                     continue;
                 }
                 if (((Boolean) obj).booleanValue()){
-                    BlockStyleSetter.set(
-                                    sheet,
-                                    style.getStartRow() + rowOffset,
-                                    style.getEndRow() + rowOffset,
-                                    style.getStartCol(),
-                                    style.getEndCol(),
-                                    style.getCellIndex(),
-                                    styleMap);
+                    int startRow = style.getStartRow();
+                    int endRow = style.getEndRow();
+                    int startCol = style.getStartCol();
+                    int endCol = style.getEndCol();
+                    String cellIndex = style.getCellIndex();
+                    BlockStyleSetter.set(sheet, startRow + rowOffset, endRow + rowOffset, startCol, endCol, cellIndex, styleMap);
                 }
             }
         }
 
         //---------------------------------------------------------------
         for (ExcelCell excelCell : excelBlock.getCells()){
-            String dataName = excelCell.getDataExpr() == null ? excelCell.getDataName() : excelCell.getDataExpr();
+            String dataExpr = excelCell.getDataExpr();
+            String dataName = dataExpr == null ? excelCell.getDataName() : dataExpr;
             if (dataName.startsWith("=")){
                 dataName = FormulaEvaluatorUtil.offsetFormula(dataName, rowOffset, 0);
             }
-            CellValueSetter.set(sheet, excelCell.getRow() + rowOffset, excelCell.getCol(), dataName, ognlStack);
+
+            int rowIndex = excelCell.getRow() + rowOffset;
+            int col = excelCell.getCol();
+            CellValueSetter.set(sheet, rowIndex, col, dataName, ognlStack);
+
             if (styleMap.keySet().size() > 0){
                 for (ExcelCellConditionStyle style : excelCell.getStyles()){
                     Object obj = ognlStack.getValue(style.getCondition());
@@ -110,7 +91,7 @@ class RowWriter{
                         continue;
                     }
                     if (((Boolean) obj).booleanValue()){
-                        CellStyleSetter.set(sheet, excelCell.getRow() + rowOffset, excelCell.getCol(), styleMap.get(style.getCellIndex()));
+                        CellStyleSetter.set(sheet, rowIndex, col, styleMap.get(style.getCellIndex()));
                     }
                 }
             }
@@ -123,26 +104,20 @@ class RowWriter{
             if (colValue == null){
                 return;
             }
-            Collection<? extends Object> listValue;
-            if (!(colValue instanceof Collection)){
-                if (colValue.getClass().isArray()){
-                    listValue = Arrays.asList(colValue);
-                }else{
-                    List<Object> list = new ArrayList<>();
-                    list.add(colValue);
-                    listValue = list;
-                }
-            }else{
-                listValue = (Collection<? extends Object>) colValue;
-            }
+            Collection<?> listValue = DataToCollectionUtil.convert(colValue);
             List<CellRangeAddress> childMergedRegions = null;
+            int startCol = childBlock.getStartCol();
+            int endCol = childBlock.getEndCol();
             if (mergedRegions != null){
                 childMergedRegions = new ArrayList<>();
                 for (CellRangeAddress cellRangeAddress : mergedRegions){
-                    if (cellRangeAddress.getFirstRow() >= childBlock.getStartRow()
-                                    && cellRangeAddress.getFirstColumn() >= childBlock.getStartCol()
-                                    && cellRangeAddress.getLastRow() <= childBlock.getEndRow()
-                                    && cellRangeAddress.getLastColumn() <= childBlock.getEndCol()){
+                    int firstRow = cellRangeAddress.getFirstRow();
+                    int firstColumn = cellRangeAddress.getFirstColumn();
+                    int lastRow = cellRangeAddress.getLastRow();
+                    int lastColumn = cellRangeAddress.getLastColumn();
+                    int startRow = childBlock.getStartRow();
+                    int endRow = childBlock.getEndRow();
+                    if (firstRow >= startRow && firstColumn >= startCol && lastRow <= endRow && lastColumn <= endCol){
                         childMergedRegions.add(cellRangeAddress);
                     }
                 }
@@ -153,14 +128,9 @@ class RowWriter{
                 ognlStack.push(obj);
                 ognlStack.addContext("preColumn", preObj);
                 ognlStack.addContext("columnNum", colStep);
-                ColumnWriter.write(
-                                sheet,
-                                childBlock,
-                                ognlStack,
-                                rowOffset,
-                                colStep * (childBlock.getEndCol() - childBlock.getStartCol() + 1),
-                                childMergedRegions,
-                                styleMap);
+
+                int colOffset = colStep * (endCol - startCol + 1);
+                ColumnWriter.write(sheet, childBlock, ognlStack, rowOffset, colOffset, childMergedRegions, styleMap);
                 colStep++;
                 preObj = ognlStack.pop();
             }
@@ -168,4 +138,5 @@ class RowWriter{
             ognlStack.removeContext("columnNum");
         }
     }
+
 }

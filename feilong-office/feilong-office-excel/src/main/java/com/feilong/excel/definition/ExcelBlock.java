@@ -15,6 +15,8 @@
  */
 package com.feilong.excel.definition;
 
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +28,10 @@ import com.feilong.excel.util.CellReferenceUtil;
  */
 public class ExcelBlock implements Comparable<ExcelBlock>{
 
-    /** The Constant LOOP_DIRECTION_HORIZONAL. */
+    /** 水平. */
     public static final String            LOOP_DIRECTION_HORIZONAL = "horizontal";
 
-    /** The Constant LOOP_DIRECTION_VERTICAL. */
+    /** 垂直. */
     public static final String            LOOP_DIRECTION_VERTICAL  = "vertical";
 
     //---------------------------------------------------------------
@@ -99,7 +101,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      * @return the end cell index
      */
     public String getEndCellIndex(){
-        return CellReferenceUtil.getCellRef(endRow, endCol);
+        return getCellRef(endRow, endCol);
     }
 
     /**
@@ -408,7 +410,7 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
      */
     @Override
     public String toString(){
-        return "ExcelBlock[" + CellReferenceUtil.getCellRef(startRow, startCol) + ":" + getEndCellIndex() + "]";
+        return "ExcelBlock[" + getCellRef(startRow, startCol) + ":" + getEndCellIndex() + "]";
     }
 
     /**
@@ -433,6 +435,11 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         return this.toString().equals(eb.toString());
     }
 
+    @Override
+    public int hashCode(){
+        // TODO Auto-generated method stub
+        return super.hashCode();
+    }
     //---------------------------------------------------------------
 
     /**

@@ -16,6 +16,8 @@
 package com.feilong.excel.writer;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +34,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.util.CellReferenceUtil;
 import com.feilong.lib.loxia.util.OgnlStack;
 
 class SheetWriter{
@@ -51,37 +52,19 @@ class SheetWriter{
 
     //---------------------------------------------------------------
 
-    /**
-     * Write sheet.
-     *
-     * @param sheet
-     *            the sheet
-     * @param excelSheet
-     *            the sheet definition
-     * @param ognlStack
-     *            the stack
-     * @param styleMap
-     *            the style map
-     */
     public static void write(Sheet sheet,ExcelSheet excelSheet,OgnlStack ognlStack,Map<String, CellStyle> styleMap){
         Date beginDate = new Date();
-
-        //---------------------------------------------------------------
-        Workbook workbook = sheet.getWorkbook();
-
-        setSheetName(workbook, sheet, excelSheet, ognlStack);
-
+        setSheetName(sheet, excelSheet, ognlStack);
         //---------------------------------------------------------------
         List<ExcelBlock> sortedExcelBlocks = excelSheet.getSortedExcelBlocks();
-
-        Map<ExcelBlock, List<CellRangeAddress>> mergedRegions = buildMergedRegions(sheet, sortedExcelBlocks);
-
+        Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap = buildMergedRegions(sheet, sortedExcelBlocks);
         //---------------------------------------------------------------
         for (ExcelBlock excelBlock : sortedExcelBlocks){
             Date blockBeginDate = new Date();
 
             if (excelBlock.isLoop()){
-                BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, mergedRegions.get(excelBlock), styleMap);
+                List<CellRangeAddress> cellRangeAddressList = mergedRegionsMap.get(excelBlock);
+                BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
             }else{
                 BlockWriter.writeSimpleBlock(sheet, excelBlock, ognlStack, styleMap);
             }
@@ -114,10 +97,7 @@ class SheetWriter{
 
             //---------------------------------------------------------------
             if (LOGGER.isTraceEnabled()){
-                LOGGER.trace(
-                                "Merged Region:[{}-{}]",
-                                CellReferenceUtil.getCellRef(firstRow, firstColumn),
-                                CellReferenceUtil.getCellRef(lastRow, lastColumn));
+                LOGGER.trace("Merged Region:[{}-{}]", getCellRef(firstRow, firstColumn), getCellRef(lastRow, lastColumn));
             }
 
             //---------------------------------------------------------------
@@ -140,15 +120,26 @@ class SheetWriter{
         return mergedRegions;
     }
 
-    private static void setSheetName(Workbook workbook,Sheet sheet,ExcelSheet excelSheet,OgnlStack ognlStack){
-        String sheetName = excelSheet.getDisplayName();
-        Object value = ognlStack.getValue("sheetName");
-
-        if (value != null){
-            sheetName = (String) value;
-        }
+    private static void setSheetName(Sheet sheet,ExcelSheet excelSheet,OgnlStack ognlStack){
+        String sheetName = getSheetName(excelSheet, ognlStack);
         if (sheetName != null){
-            workbook.setSheetName(workbook.getSheetIndex(sheet), sheetName);
+            Workbook workbook = sheet.getWorkbook();
+            int sheetIndex = workbook.getSheetIndex(sheet);
+
+            LOGGER.debug("set workbook sheet:[{}] name:[{}]", sheetIndex, sheetName);
+            workbook.setSheetName(sheetIndex, sheetName);
         }
+    }
+
+    private static String getSheetName(ExcelSheet excelSheet,OgnlStack ognlStack){
+        String sheetDisplayName = excelSheet.getDisplayName();
+
+        String sheetNameStack = "";
+        Object value = ognlStack.getValue("sheetName");
+        if (value != null){
+            sheetNameStack = (String) value;
+        }
+        LOGGER.debug("excelSheet DisplayName:[{}],stack value:[{}]", sheetDisplayName, sheetNameStack);
+        return defaultIfNullOrEmpty(sheetNameStack, sheetDisplayName);
     }
 }
