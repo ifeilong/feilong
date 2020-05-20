@@ -129,7 +129,7 @@ class CellValueSetter{
         }
 
         //---------------------------------------------------------------
-        if (cellType == CellType.BLANK || cellType == CellType.ERROR || cellType == CellType.FORMULA){
+        if (cellType == CellType.BLANK || cellType == CellType.ERROR || cellType == CellType.FORMULA || cellType == CellType.NUMERIC){
             //set cell value without data type transform            
             if (value instanceof Integer){
                 cell.setCellValue(new BigDecimal((Integer) value).doubleValue());
@@ -142,40 +142,23 @@ class CellValueSetter{
             }else if (value instanceof Date){
                 cell.setCellValue((Date) value);
             }else{
-                cell.setCellValue(value.toString());
-            }
-            return;
-        }
-
-        //---------------------------------------------------------------
-
-        if (cellType == CellType.BOOLEAN){
-            if (value instanceof Boolean){
-                cell.setCellValue((Boolean) value);
-            }
-            return;
-        }
-
-        //---------------------------------------------------------------
-        if (cellType == CellType.NUMERIC){
-            if (value instanceof Date){
-                cell.setCellValue((Date) value);
-            }else{
-                if (value instanceof Integer){
-                    cell.setCellValue(new BigDecimal((Integer) value).doubleValue());
-                }else if (value instanceof Long){
-                    cell.setCellValue(new BigDecimal((Long) value).doubleValue());
-                }else if (value instanceof Double){
-                    cell.setCellValue((Double) value);
-                }else if (value instanceof BigDecimal){
-                    cell.setCellValue(((BigDecimal) value).doubleValue());
-                }else{
+                if (cellType == CellType.NUMERIC){
                     try{
                         cell.setCellValue(Double.parseDouble(value.toString()));
                     }catch (NumberFormatException e){
                         //do nothing
                     }
+                }else{
+                    cell.setCellValue(value.toString());
                 }
+            }
+            return;
+        }
+
+        //---------------------------------------------------------------
+        if (cellType == CellType.BOOLEAN){
+            if (value instanceof Boolean){
+                cell.setCellValue((Boolean) value);
             }
             return;
         }

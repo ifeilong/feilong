@@ -19,12 +19,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class WriteTest extends AbstractWriteTest{
+public class WriteVlookupTest extends AbstractWriteTest{
 
     @Test
     public void test(){
-        String templateFileName = "销售数据/export-template-sales.xlsx";
-        String configurations = "excel/销售数据/feilong-sheets-salesData.xml";
+        String templateFileName = "销售数据/vlookup/export-template-sales-vlookup.xlsx";
+        String configurations = "excel/销售数据/vlookup/feilong-sheets-salesData-vlookup.xml";
 
         String sheetName = "salesDataExport";
 

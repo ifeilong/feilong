@@ -2,12 +2,16 @@
 <sheets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="exceltemplate-1.0.xsd">
 	<!-- 销售数据导出 -->
 	<sheet name="salesDataExport">
-		<block start="A4" end="I4" dataName="salesDataList" loop="true" loopClass="com.feilong.excel.销售数据.SalesData">
+
+		<block start="A4" end="G4" dataName="salesDataList" loop="true" loopClass="com.feilong.excel.销售数据.SalesData">
 			<cell position="A4" dataName="year" />
 			<cell position="B4" dataName="month" />
 			<cell position="C4" dataName="total" />
+			<cell position="D4" dataName="=C4*0.2" />
+			<cell position="E4" dataName="=VLOOKUP(B4,'2019'!B3:D15,2,FALSE)" />
+			<cell position="F4" dataName="=C4-E4" />
+			<cell position="G4" dataName="=F4/E4" />
 		</block>
-
 	</sheet>
 
 </sheets>

@@ -19,12 +19,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class WriteTest extends AbstractWriteTest{
+public class Write税Test extends AbstractWriteTest{
 
     @Test
     public void test(){
-        String templateFileName = "销售数据/export-template-sales.xlsx";
-        String configurations = "excel/销售数据/feilong-sheets-salesData.xml";
+        String templateFileName = "销售数据/税/export-template-sales-税.xlsx";
+        String configurations = "excel/销售数据/税/feilong-sheets-salesData-税.xml";
 
         String sheetName = "salesDataExport";
 

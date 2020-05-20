@@ -73,7 +73,6 @@
 		</block>
 	</sheet>
 
-
 	<sheet name="transFeeupload">
 		<block start="A2" end="C2">
 			<cell position="C2" dataName="transferType" />
@@ -103,7 +102,6 @@
 			<cell position="C10" dataName="spec" />
 		</block>
 	</sheet>
-
 
 	<sheet name="importWMSRepertory">
 		<block start="A8" end="E8" loop="true" dataName="wmsRepertoryList" loopClass="com.feilong.service.report.command.ImportWMSRepertoryCommand">
@@ -150,95 +148,6 @@
 			<cell position="A2" dataName="date" type="date" pattern="yyyy-MM-dd" />
 			<cell position="B2" dataName="flowNumber" />
 			<cell position="C2" dataName="adviceNumber" />
-		</block>
-	</sheet>
-
-	<!--**************** 销售报表******************** -->
-	<sheet name="exportDailySalesReport">
-		<!--****日期********* -->
-		<block start="A1" end="B1" loop="true" dataName="dateList">
-			<childblock start="B1" dataName="childList">
-				<cell position="B1" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****订单********* -->
-		<block start="A2" end="B2" loop="true" dataName="soCountList">
-			<childblock start="B2" dataName="childList">
-				<cell position="B2" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****销售********* -->
-		<block start="A3" end="B3" loop="true" dataName="soSellPriceList">
-			<childblock start="B3" dataName="childList">
-				<cell position="B3" dataName="value" />
-			</childblock>
-		</block>
-
-
-		<!--****退货金额********* -->
-		<block start="A4" end="B4" loop="true" dataName="soReturnPriceList">
-			<childblock start="B4" dataName="childList">
-				<cell position="B4" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****非COD下单********* -->
-		<block start="A5" end="B5" loop="true" dataName="soNotCodPriceList">
-			<childblock start="B5" dataName="childList">
-				<cell position="B5" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****COD下单********* -->
-		<block start="A6" end="B6" loop="true" dataName="soCodPriceList">
-			<childblock start="B6" dataName="childList">
-				<cell position="B6" dataName="value" />
-			</childblock>
-		</block>
-
-
-		<!--****流量********* -->
-		<block start="A7" end="B7" loop="true" dataName="flowList">
-			<childblock start="B7" dataName="childList">
-				<cell position="B7" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****咨询转化率********* -->
-		<block start="A8" end="B8" loop="true" dataName="adviceConvertList">
-			<childblock start="B8" dataName="childList">
-				<cell position="B8" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****UV转化率********* -->
-		<block start="A9" end="B9" loop="true" dataName="uvConvertList">
-			<childblock start="B9" dataName="childList">
-				<cell position="B9" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****退货率********* -->
-		<block start="A10" end="B10" loop="true" dataName="returnRateList">
-			<childblock start="B10" dataName="childList">
-				<cell position="B10" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****会员注册********* -->
-		<block start="A11" end="B11" loop="true" dataName="memberCountList">
-			<childblock start="B11" dataName="childList">
-				<cell position="B11" dataName="value" />
-			</childblock>
-		</block>
-
-		<!--****日期-会员累计总数********* -->
-		<block start="A12" end="B12" loop="true" dataName="memberAllCountList">
-			<childblock start="B12" dataName="childList">
-				<cell position="B12" dataName="value" />
-			</childblock>
 		</block>
 	</sheet>
 
