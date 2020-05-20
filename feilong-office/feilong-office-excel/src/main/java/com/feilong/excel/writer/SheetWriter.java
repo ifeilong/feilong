@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
+import com.feilong.json.JsonUtil;
 import com.feilong.lib.loxia.util.OgnlStack;
 
 class SheetWriter{
@@ -60,13 +61,25 @@ class SheetWriter{
         Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap = buildMergedRegions(sheet, sortedExcelBlocks);
         //---------------------------------------------------------------
         for (ExcelBlock excelBlock : sortedExcelBlocks){
+
+            //---------------------------------------------------------------
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("excelBlock:{}", JsonUtil.format(excelBlock));
+            }
+            //---------------------------------------------------------------
+
             Date blockBeginDate = new Date();
 
             if (excelBlock.isLoop()){
                 List<CellRangeAddress> cellRangeAddressList = mergedRegionsMap.get(excelBlock);
-                BlockWriter.writeLoopBlock(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
+                boolean isHorizontal = excelBlock.getDirection().equalsIgnoreCase(ExcelBlock.LOOP_DIRECTION_HORIZONAL);
+                if (isHorizontal){
+                    BlockLoopHorizontalWriter.write(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
+                    return;
+                }
+                BlockLoopVerticalWriter.write(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
             }else{
-                BlockWriter.writeSimpleBlock(sheet, excelBlock, ognlStack, styleMap);
+                BlockSimpleWriter.write(sheet, excelBlock, ognlStack, styleMap);
             }
 
             //---------------------------------------------------------------

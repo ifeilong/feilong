@@ -15,6 +15,9 @@
  */
 package com.feilong.excel.writer;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+
 import java.util.List;
 import java.util.Map;
 
@@ -60,41 +63,35 @@ class ColumnWriter{
         }
 
         //---------------------------------------------------------------
-        if (styleMap.keySet().size() > 0){
-            for (ExcelCellConditionStyle excelCellConditionStyle : excelBlock.getStyles()){
-                Object obj = ognlStack.getValue(excelCellConditionStyle.getCondition());
+        if (isNotNullOrEmpty(styleMap)){
+            for (ExcelCellConditionStyle style : excelBlock.getStyles()){
+                Object obj = ognlStack.getValue(style.getCondition());
                 if (obj == null || !(obj instanceof Boolean)){
                     continue;
                 }
 
                 //---------------------------------------------------------------
                 if (((Boolean) obj).booleanValue()){
-                    BlockStyleSetter.set(
-                                    sheet,
-                                    excelCellConditionStyle.getStartRow() + rowOffset,
-                                    excelCellConditionStyle.getEndRow() + rowOffset,
-                                    excelCellConditionStyle.getStartCol() + colOffset,
-                                    excelCellConditionStyle.getEndCol() + colOffset,
-                                    excelCellConditionStyle.getCellIndex(),
-                                    styleMap);
+                    int startRowIndex = style.getStartRow() + rowOffset;
+                    int endRowIndex = style.getEndRow() + rowOffset;
+                    int startColumnIndex = style.getStartCol() + colOffset;
+                    int endColumnIndex = style.getEndCol() + colOffset;
+                    String cellIndex = style.getCellIndex();
+                    BlockStyleSetter.set(sheet, startRowIndex, endRowIndex, startColumnIndex, endColumnIndex, cellIndex, styleMap);
                 }
             }
         }
 
         //---------------------------------------------------------------
         for (ExcelCell excelCell : excelBlock.getCells()){
-            String dataExpr = excelCell.getDataExpr();
-            String dataName = dataExpr == null ? excelCell.getDataName() : dataExpr;
-            if (dataName.startsWith("=")){
-                dataName = FormulaEvaluatorUtil.offsetFormula(dataName, rowOffset, colOffset);
-            }
+            String dataName = buildDataName(rowOffset, colOffset, excelCell);
             int row = excelCell.getRow();
             int col = excelCell.getCol();
 
             //---------------------------------------------------------------
 
             CellValueSetter.set(sheet, row + rowOffset, col + colOffset, dataName, ognlStack);
-            if (styleMap.keySet().size() > 0){
+            if (isNotNullOrEmpty(styleMap)){
                 for (ExcelCellConditionStyle excelCellConditionStyle : excelCell.getStyles()){
                     Object obj = ognlStack.getValue(excelCellConditionStyle.getCondition());
                     if (obj == null || !(obj instanceof Boolean)){
@@ -106,5 +103,13 @@ class ColumnWriter{
                 }
             }
         }
+    }
+
+    private static String buildDataName(int rowOffset,int colOffset,ExcelCell excelCell){
+        String dataName = defaultIfNullOrEmpty(excelCell.getDataExpr(), excelCell.getDataName());
+        if (dataName.startsWith("=")){
+            return FormulaEvaluatorUtil.offsetFormula(dataName, rowOffset, colOffset);
+        }
+        return dataName;
     }
 }

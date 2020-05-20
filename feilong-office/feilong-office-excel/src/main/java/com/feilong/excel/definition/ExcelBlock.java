@@ -274,25 +274,6 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         this.loopClass = loopClass;
     }
 
-    //    /**
-    //     * Gets the cell.
-    //     *
-    //     * @param position
-    //     *            the position
-    //     * @return the cell
-    //     */
-    //    public ExcelCell getCell(String position){
-    //        if (cells.size() == 0){
-    //            return null;
-    //        }
-    //        for (ExcelCell cell : cells){
-    //            if (ExcelUtil.getCellIndex(cell.getRow(), cell.getCol()).equalsIgnoreCase(position.trim())){
-    //                return cell;
-    //            }
-    //        }
-    //        return null;
-    //    }
-
     /**
      * Gets the cells.
      *
@@ -413,33 +394,6 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
         return "ExcelBlock[" + getCellRef(startRow, startCol) + ":" + getEndCellIndex() + "]";
     }
 
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (obj == null){
-            return false;
-        }
-        if (this == obj){
-            return true;
-        }
-        if (!(obj instanceof ExcelBlock)){
-            return false;
-        }
-        ExcelBlock eb = (ExcelBlock) obj;
-        return this.toString().equals(eb.toString());
-    }
-
-    @Override
-    public int hashCode(){
-        // TODO Auto-generated method stub
-        return super.hashCode();
-    }
     //---------------------------------------------------------------
 
     /**
