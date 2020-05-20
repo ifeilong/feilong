@@ -213,9 +213,8 @@ public class UrlResource extends AbstractFileResolvingResource{
     public URI getURI() throws IOException{
         if (this.uri != null){
             return this.uri;
-        }else{
-            return super.getURI();
         }
+        return super.getURI();
     }
 
     /**
@@ -228,9 +227,8 @@ public class UrlResource extends AbstractFileResolvingResource{
     public File getFile() throws IOException{
         if (this.uri != null){
             return super.getFile(this.uri);
-        }else{
-            return super.getFile();
         }
+        return super.getFile();
     }
 
     /**

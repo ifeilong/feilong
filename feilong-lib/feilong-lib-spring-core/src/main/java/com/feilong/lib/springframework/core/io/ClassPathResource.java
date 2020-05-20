@@ -60,7 +60,6 @@ public class ClassPathResource extends AbstractFileResolvingResource{
      * @param path
      *            the absolute path within the class path
      * @see java.lang.ClassLoader#getResourceAsStream(String)
-     * @see com.feilong.lib.springframework.util.ClassUtils#getDefaultClassLoader()
      */
     public ClassPathResource(String path){
         this(path, (ClassLoader) null);

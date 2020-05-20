@@ -21,11 +21,6 @@ import org.junit.Test;
 
 import com.feilong.lib.lang3.SystemUtils;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.4
- */
 public class CompressUnzipHandlerTest{
 
     private final UnzipHandler unzipHandler  = new CompressUnzipHandler();
@@ -34,6 +29,7 @@ public class CompressUnzipHandlerTest{
                     + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources/for-unzip.zip";
 
     @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         unzipHandler.unzip(
                         unZipFilePath, //需要被解压的zip文件

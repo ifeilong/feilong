@@ -140,10 +140,6 @@ public abstract class ObjectUtils{
      * @return {@code true} if the object is {@code null} or <em>empty</em>
      * @since 4.2
      * @see ObjectUtils#isEmpty(Object[])
-     * @see StringUtils#hasLength(CharSequence)
-     * @see StringUtils#isEmpty(Object)
-     * @see CollectionUtils#isEmpty(java.util.Collection)
-     * @see CollectionUtils#isEmpty(java.util.Map)
      */
     @SuppressWarnings("rawtypes")
     public static boolean isEmpty(Object obj){

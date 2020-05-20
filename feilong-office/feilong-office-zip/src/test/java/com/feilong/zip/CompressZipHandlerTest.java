@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class CompressZipHandlerTest extends AbstractTest{
 
     private final ZipHandler zipHandler        = new CompressZipHandler();

@@ -40,7 +40,6 @@ import java.net.URLConnection;
  * @since 1.1.5
  * @see com.feilong.lib.springframework.core.io.Resource
  * @see com.feilong.lib.springframework.core.io.ClassPathResource
- * @see org.springframework.core.io.FileSystemResource
  * @see com.feilong.lib.springframework.core.io.UrlResource
  * @see com.feilong.lib.springframework.core.io.ResourceLoader
  */
@@ -101,6 +100,7 @@ public abstract class ResourceUtils{
      * @see #CLASSPATH_URL_PREFIX
      * @see java.net.URL
      */
+    @SuppressWarnings("unused")
     public static boolean isUrl(String resourceLocation){
         if (resourceLocation == null){
             return false;

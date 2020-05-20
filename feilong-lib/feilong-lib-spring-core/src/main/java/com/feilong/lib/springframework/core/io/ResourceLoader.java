@@ -80,7 +80,6 @@ public interface ResourceLoader{
      * 
      * @return the ClassLoader (only {@code null} if even the system
      *         ClassLoader isn't accessible)
-     * @see com.feilong.lib.springframework.util.ClassUtils#getDefaultClassLoader()
      */
     ClassLoader getClassLoader();
 
