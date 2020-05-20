@@ -76,33 +76,12 @@
 		</block>
 	</sheet>
 
-	<!--**************** 上传流量******************** -->
-	<sheet name="flowUploadSheet">
-		<block start="A2" end="C2" dataName="flowList" loop="true" loopClass="com.feilong.service.report.command.FlowCommand">
-			<cell position="A2" dataName="date" type="date" pattern="yyyy-MM-dd" />
-			<cell position="B2" dataName="flowNumber" />
-			<cell position="C2" dataName="adviceNumber" />
-		</block>
-	</sheet>
-
 	<!--****************jdi商品限制******************** -->
 	<sheet name="jdiSkuIntegralIntReport">
 		<block start="A2" end="F2" dataName="interllist" loop="true" loopClass="com.feilong.service.report.command.SkuJdiInternalCommand">
 			<cell position="A2" dataName="skuCode" />
 			<cell position="C2" dataName="begin_time" type="date" pattern="yyyy-MM-dd HH:mm:ss" />
 			<cell position="D2" dataName="end_time" type="date" pattern="yyyy-MM-dd HH:mm:ss" />
-		</block>
-	</sheet>
-	<!--*************************************同步库存***************************************************** -->
-
-	<!--未同步到库存OMS商品 create by jinxin 2011-9-16 16:57 -->
-	<sheet name="syscInventoryOMSYesWMSNoDownload">
-		<block start="B3" end="C3" dataName="allOmsHasWmsNoList" loop="true" loopClass="com.feilong.model.master.SkuInventory">
-			<cell position="B3" dataName="upc" />
-			<cell position="C3" dataName="availableQty" />
-			<cell position="D3" dataName="sku.code" />
-			<cell position="E3" dataName="sku.lifeCycleStatus" />
-			<cell position="F3" dataName="=VLOOKUP(E3,sku状态!$A$1:$B$3,2,false)" />
 		</block>
 	</sheet>
 </sheets>
