@@ -86,18 +86,6 @@ public class WorkbookWriter{
         pack(workbook, outputStream);
     }
 
-    /**
-     * Write.
-     *
-     * @param workbook
-     *            the workbook
-     * @param outputStream
-     *            the output stream
-     * @param excelDefinition
-     *            the definition
-     * @param beans
-     *            the beans
-     */
     public static void write(Workbook workbook,OutputStream outputStream,ExcelDefinition excelDefinition,Map<String, Object> beans){
         List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
         int excelSheetsSize = excelSheets.size();

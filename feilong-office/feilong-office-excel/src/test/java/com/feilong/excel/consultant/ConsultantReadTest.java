@@ -28,11 +28,11 @@ public class ConsultantReadTest extends AbstractLoxiaReadTest{
 
     @Test
     public void test(){
-        String xmlSheetConfiguration = "loxia/consultant/feilong-sheets-Consultant.xml";
+        String xmlSheetConfiguration = "excel/consultant/feilong-sheets-Consultant.xml";
         String sheetName = "consultantExport";
         String dataName = "consultantList";
         String fileName = SystemUtils.USER_HOME
-                        + "/workspace/feilong/feilong/feilong-office/feilong-office-excel/src/test/resources/loxia/consultant/read20200428214903.xlsx";
+                        + "/workspace/feilong/feilong/feilong-office/feilong-office-excel/src/test/resources/excel/consultant/read20200428214903.xlsx";
 
         //---------------------------------------------------------------
         List<ConsultantCommand> list = build(xmlSheetConfiguration, sheetName, dataName, fileName);

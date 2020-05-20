@@ -28,9 +28,10 @@ import com.feilong.excel.utils.CellReferenceUtilTest;
 @SuiteClasses({ //
 
                 IntegerConvertorTest.class,
-                ConsultantWriteTest.class,
 
                 CellReferenceUtilTest.class,
+
+                ConsultantWriteTest.class,
                 ConsultantReadTest.class,
         //
 })

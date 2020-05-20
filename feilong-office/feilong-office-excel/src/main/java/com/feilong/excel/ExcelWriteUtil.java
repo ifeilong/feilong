@@ -63,8 +63,8 @@ public class ExcelWriteUtil{
      *            excel模板location,
      * 
      *            <ol>
-     *            <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/loxia/TradeData/TradeData-list-export.xlsx".</li>
-     *            <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:loxia/TradeData/TradeData-list-export.xlsx".</li>
+     *            <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/excel/TradeData/TradeData-list-export.xlsx".</li>
+     *            <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:excel/TradeData/TradeData-list-export.xlsx".</li>
      *            <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      *            </ol>
      * @param xmlSheetConfigurations
@@ -92,8 +92,8 @@ public class ExcelWriteUtil{
      *            excel模板location,
      * 
      *            <ol>
-     *            <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/loxia/TradeData/TradeData-list-export.xlsx".</li>
-     *            <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:loxia/TradeData/TradeData-list-export.xlsx".</li>
+     *            <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/excel/TradeData/TradeData-list-export.xlsx".</li>
+     *            <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:excel/TradeData/TradeData-list-export.xlsx".</li>
      *            <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      *            </ol>
      * @param xmlSheetConfigurations
@@ -111,6 +111,11 @@ public class ExcelWriteUtil{
                     String[] sheetNames,
                     Map<String, Object> beans,
                     String outputFileName){
+        if (LOGGER.isDebugEnabled()){
+            Map<String, Object> map = build(excelTemplateLocation, xmlSheetConfigurations, sheetNames, beans, outputFileName);
+            LOGGER.debug("will write excel,params info:[{}]", JsonUtil.format(map));
+        }
+        //---------------------------------------------------------------
         Date beginDate = new Date();
 
         InputStream inputStream = InputStreamUtil.getInputStream(excelTemplateLocation);
@@ -310,13 +315,32 @@ public class ExcelWriteUtil{
                     Map<String, Object> beans,
                     String outputFileName,
                     Date beginDate){
+        Map<String, Object> map = build(excelTemplateLocation, xmlSheetConfigurations, sheetNames, beans, outputFileName);
+        map.put("useTime", formatDuration(beginDate));
+        return map;
+    }
+
+    /**
+     * @param excelTemplateLocation
+     * @param xmlSheetConfigurations
+     * @param sheetNames
+     * @param beans
+     * @param outputFileName
+     * @return
+     * @since 3.0.0
+     */
+    private static Map<String, Object> build(
+                    String excelTemplateLocation,
+                    String xmlSheetConfigurations,
+                    String[] sheetNames,
+                    Map<String, Object> beans,
+                    String outputFileName){
         Map<String, Object> map = newLinkedHashMap();
         map.put("excelTemplateLocation", excelTemplateLocation);
         map.put("xmlSheetConfigurations", xmlSheetConfigurations);
         map.put("sheetName", sheetNames);
         map.put("outputFileName", outputFileName);
         map.put("data info", toDataInfo(beans));
-        map.put("useTime", formatDuration(beginDate));
         return map;
     }
 

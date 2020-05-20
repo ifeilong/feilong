@@ -30,8 +30,8 @@ public class SimpleListLoopExcelFileCreator<T extends Data> implements ListDataF
      * excel模板location.
      * 
      * <ol>
-     * <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/loxia/TradeData/TradeData-list-export.xlsx".</li>
-     * <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:loxia/TradeData/TradeData-list-export.xlsx".</li>
+     * <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/excel/TradeData/TradeData-list-export.xlsx".</li>
+     * <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:excel/TradeData/TradeData-list-export.xlsx".</li>
      * <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      * </ol>
      */
@@ -119,8 +119,8 @@ public class SimpleListLoopExcelFileCreator<T extends Data> implements ListDataF
      * excel模板location.
      * 
      * <ol>
-     * <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/loxia/TradeData/TradeData-list-export.xlsx".</li>
-     * <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:loxia/TradeData/TradeData-list-export.xlsx".</li>
+     * <li>支持fully qualified URLs(完全合格的url),比如 "file:/Users/feilong/workspace/excel/TradeData/TradeData-list-export.xlsx".</li>
+     * <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:excel/TradeData/TradeData-list-export.xlsx".</li>
      * <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      * </ol>
      *

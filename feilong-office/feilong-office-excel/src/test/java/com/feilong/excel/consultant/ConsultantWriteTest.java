@@ -32,7 +32,7 @@ public class ConsultantWriteTest extends AbstractLoxiaWriteTest{
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
         String templateFileName = "consultant/consultant-list-export.xlsx";
-        String configurations = "loxia/consultant/feilong-sheets-Consultant.xml";
+        String configurations = "excel/consultant/feilong-sheets-Consultant.xml";
 
         String sheetName = "consultantExport";
 
@@ -45,16 +45,16 @@ public class ConsultantWriteTest extends AbstractLoxiaWriteTest{
         List<ConsultantCommand> list = newArrayList();
 
         for (int i = 1; i <= count; ++i){
-            ConsultantCommand consultantCommand = new ConsultantCommand();
+            ConsultantCommand command = new ConsultantCommand();
 
-            consultantCommand.setItemId((long) i);
+            command.setItemId((long) i);
 
-            consultantCommand.setItemCode("FK00" + i);
-            consultantCommand.setItemName("羽绒服FK00" + i);
-            consultantCommand.setResponseTime(now());
-            consultantCommand.setContent("你好");
+            command.setItemCode("FK00" + i);
+            command.setItemName("羽绒服FK00" + i);
+            command.setResponseTime(now());
+            command.setContent("你好");
 
-            list.add(consultantCommand);
+            list.add(command);
         }
         return list;
     }

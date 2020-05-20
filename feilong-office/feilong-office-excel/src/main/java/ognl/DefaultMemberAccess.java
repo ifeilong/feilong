@@ -1,4 +1,3 @@
-//--------------------------------------------------------------------------
 package ognl;
 
 import java.lang.reflect.AccessibleObject;

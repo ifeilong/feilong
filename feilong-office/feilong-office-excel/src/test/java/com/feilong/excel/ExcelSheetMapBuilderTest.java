@@ -15,16 +15,15 @@
  */
 package com.feilong.excel;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.excel.ExcelSheetMapBuilder;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.test.AbstractTest;
 
@@ -37,7 +36,7 @@ public class ExcelSheetMapBuilderTest extends AbstractTest{
 
     @Test
     public void test(){
-        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("loxia/consultant/feilong-sheets-Consultant.xml");
+        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("excel/consultant/feilong-sheets-Consultant.xml");
         assertTrue(map.size() == 1);
 
         assertThat(map, allOf(hasKey("consultantExport")));

@@ -34,7 +34,7 @@ import com.feilong.io.FilenameUtil;
 import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
-@ContextConfiguration(locations = { "classpath*:loxia/subscribtion/spring-excel-2sheet.xml" })
+@ContextConfiguration(locations = { "classpath*:excel/subscribtion/spring-excel-2sheet.xml" })
 public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{
 
     @Autowired
@@ -46,7 +46,7 @@ public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
-        String templateFileName = "loxia/subscribtion/template-list-2sheet.xlsx";
+        String templateFileName = "excel/subscribtion/template-list-2sheet.xlsx";
 
         List<SubscribtionCommand> alist = buildList(2);
         List<SubscribtionCommand> blist = alist;

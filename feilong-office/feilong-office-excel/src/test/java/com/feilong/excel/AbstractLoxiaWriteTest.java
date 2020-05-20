@@ -28,45 +28,14 @@ import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
-/**
- * The Class AbstractLoxiaExcelWriteTest.
- */
 public abstract class AbstractLoxiaWriteTest extends AbstractTest{
 
-    /**
-     * Builds the.
-     *
-     * @param <T>
-     *            the generic type
-     * @param templateFileName
-     *            the template file name
-     * @param configurations
-     *            the configurations
-     * @param sheetName
-     *            the sheet name
-     * @param dataName
-     *            the data name
-     * @param list
-     *            the list
-     */
     protected static <T> void build(String templateFileName,String configurations,String sheetName,String dataName,List<T> list){
         Map<String, Object> beans = toMap(dataName, (Object) list);
 
         build(templateFileName, configurations, toArray(sheetName), beans);
     }
 
-    /**
-     * Builds the.
-     *
-     * @param templateFileName
-     *            the template file name
-     * @param configurations
-     *            the configurations
-     * @param sheetNames
-     *            the sheet names
-     * @param beans
-     *            the beans
-     */
     protected static void build(String templateFileName,String configurations,String[] sheetNames,Map<String, Object> beans){
         String outputFileName = Slf4jUtil.format(
                         SystemUtils.USER_HOME + "/feilong/excel/{}{}.{}",
@@ -74,7 +43,7 @@ public abstract class AbstractLoxiaWriteTest extends AbstractTest{
                         nowTimestamp(),
                         FilenameUtil.getExtension(templateFileName));
 
-        String excelTemplateLocation = "classpath:loxia/" + templateFileName;
+        String excelTemplateLocation = "classpath:excel/" + templateFileName;
         ExcelWriteUtil.write(excelTemplateLocation, configurations, sheetNames, beans, outputFileName);
 
         DesktopUtil.open(outputFileName);
