@@ -34,8 +34,8 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
             "totalSpace": 499963174912,
             "absoluteFile": null,
             "canonicalFile": null,
-            "parent": SystemUtils.USER_HOME+ "/work",
-            "absolutePath": SystemUtils.USER_HOME+ "/work/eclipse feilong.sh",
+            "parent": SystemUtil.USER_HOME+ "/work",
+            "absolutePath": SystemUtil.USER_HOME+ "/work/eclipse feilong.sh",
             "absolute": true,
             "freeSpace": 14801756160,
             "usableSpace": 9794330624,
@@ -43,13 +43,13 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
             "file": true,
             "hidden": false,
             "name": "eclipse feilong.sh",
-            "path": SystemUtils.USER_HOME+ "/work/eclipse feilong.sh",
+            "path": SystemUtil.USER_HOME+ "/work/eclipse feilong.sh",
             "parentFile":             {
                 "totalSpace": 499963174912,
                 "absoluteFile": null,
                 "canonicalFile": null,
-                "parent": SystemUtils.USER_HOME+ "",
-                "absolutePath": SystemUtils.USER_HOME+ "/work",
+                "parent": SystemUtil.USER_HOME+ "",
+                "absolutePath": SystemUtil.USER_HOME+ "/work",
                 "absolute": true,
                 "freeSpace": 14801756160,
                 "usableSpace": 9794330624,
@@ -57,13 +57,13 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
                 "file": false,
                 "hidden": false,
                 "name": "work",
-                "path": SystemUtils.USER_HOME+ "/work",
+                "path": SystemUtil.USER_HOME+ "/work",
                 "parentFile":                 {
                     "totalSpace": 499963174912,
                     "absoluteFile": null,
                     "canonicalFile": null,
                     "parent": "/Users",
-                    "absolutePath": SystemUtils.USER_HOME+ "",
+                    "absolutePath": SystemUtil.USER_HOME+ "",
                     "absolute": true,
                     "freeSpace": 14801756160,
                     "usableSpace": 9794330624,
@@ -71,7 +71,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
                     "file": false,
                     "hidden": false,
                     "name": "feilong",
-                    "path": SystemUtils.USER_HOME+ "",
+                    "path": SystemUtil.USER_HOME+ "",
                     "parentFile":                     {
                         "totalSpace": 499963174912,
                         "absoluteFile": null,
@@ -105,11 +105,11 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
                         },
                         "canonicalPath": "/Users"
                     },
-                    "canonicalPath": SystemUtils.USER_HOME+ ""
+                    "canonicalPath": SystemUtil.USER_HOME+ ""
                 },
-                "canonicalPath": SystemUtils.USER_HOME+ "/work"
+                "canonicalPath": SystemUtil.USER_HOME+ "/work"
             },
-            "canonicalPath": SystemUtils.USER_HOME+ "/work/eclipse feilong.sh"
+            "canonicalPath": SystemUtil.USER_HOME+ "/work/eclipse feilong.sh"
         },
         "name": "jim"
  * </pre>

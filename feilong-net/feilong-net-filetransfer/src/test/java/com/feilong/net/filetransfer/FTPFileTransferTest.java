@@ -23,9 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * The Class FTPUtilTest.
@@ -60,7 +60,7 @@ public class FTPFileTransferTest extends FileTransferTest{
     @Override
     @Test
     public void upload() throws Exception{
-        String singleLocalFileFullPath = SystemUtils.USER_HOME + "/Downloads/接口.png";
+        String singleLocalFileFullPath = SystemUtil.USER_HOME + "/Downloads/接口.png";
         fileTransfer.upload(remoteDirectory, singleLocalFileFullPath);
     }
 

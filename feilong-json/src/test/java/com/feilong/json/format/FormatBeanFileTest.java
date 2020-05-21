@@ -19,16 +19,16 @@ import java.io.File;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanWithFile;
-import com.feilong.lib.lang3.SystemUtils;
 
 public class FormatBeanFileTest extends AbstractJsonTest{
 
     @Test
     public void test(){
-        File file = new File(SystemUtils.USER_HOME + "/work/eclipse feilong.sh");
+        File file = new File(SystemUtil.USER_HOME + "/work/eclipse feilong.sh");
         BeanWithFile beanWithFile = new BeanWithFile();
         beanWithFile.setName("jim");
         beanWithFile.setFile(file);

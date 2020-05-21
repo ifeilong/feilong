@@ -22,12 +22,12 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.feilong.core.bean.BeanUtil;
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.converters.ArrayConverter;
 import com.feilong.lib.beanutils.converters.StringConverter;
-import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.test.AbstractTest;
@@ -35,7 +35,7 @@ import com.feilong.test.AbstractTest;
 public abstract class AbstractMailSenderTest extends AbstractTest{
 
     /** The Constant folder. */
-    private static final String        folder  = SystemUtils.USER_HOME + "/Development/DataCommon/Files/Java/config/";
+    private static final String        folder  = SystemUtil.USER_HOME + "/Development/DataCommon/Files/Java/config/";
 
     //---------------------------------------------------------------
 

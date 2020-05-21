@@ -15,7 +15,7 @@
  */
 package com.feilong.io.ioreaderutil;
 
-import com.feilong.lib.lang3.SystemUtils;
+import com.feilong.core.lang.SystemUtil;
 
 /**
  * 
@@ -24,7 +24,7 @@ import com.feilong.lib.lang3.SystemUtils;
  */
 public abstract class AbstractReadFileToStringTest{
 
-    protected String floderPath = SystemUtils.USER_HOME+ "/workspace/feilong/feilong/feilong-io/";
+    protected String floderPath = SystemUtil.USER_HOME + "/workspace/feilong/feilong/feilong-io/";
 
     protected String filePath   = floderPath + "src/test/resources/readFileToString.txt";
 }

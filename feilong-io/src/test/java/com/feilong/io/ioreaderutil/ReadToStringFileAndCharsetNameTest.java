@@ -23,8 +23,8 @@ import java.io.UncheckedIOException;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.IOReaderUtil;
-import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * 
@@ -43,7 +43,7 @@ public class ReadToStringFileAndCharsetNameTest extends AbstractReadFileToString
 
     @Test(expected = UncheckedIOException.class)
     public void testReadFile1(){
-        IOReaderUtil.readToString(new File(SystemUtils.USER_HOME+ "/feilong/logs2222/readFileToString.txt"), UTF8);
+        IOReaderUtil.readToString(new File(SystemUtil.USER_HOME + "/feilong/logs2222/readFileToString.txt"), UTF8);
     }
 
     //---------------------------------------------------------------

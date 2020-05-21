@@ -321,6 +321,32 @@ import com.feilong.lib.lang3.Validate;
  */
 public final class SystemUtil{
 
+    /**
+     * The System property key for the user home directory.
+     * 
+     * @since 3.0.0
+     */
+    private static final String USER_HOME_KEY = "user.home";
+
+    /**
+     * The {@code user.home} System Property. User's home directory.
+     * 
+     * <p>
+     * Defaults to {@code null} if the runtime does not have security access to read this property or the property does
+     * not exist.
+     * </p>
+     * 
+     * <p>
+     * This value is initialized when the class is loaded. If {@link System#setProperty(String,String)} or
+     * {@link System#setProperties(java.util.Properties)} is called after this class is loaded, the value will be out of
+     * sync with that System property.
+     * </p>
+     *
+     * @since Java 1.1
+     * @since 3.0.0
+     */
+    public static final String  USER_HOME     = getSystemProperty(USER_HOME_KEY);
+
     /** Don't let anyone instantiate this class. */
     private SystemUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -328,6 +354,31 @@ public final class SystemUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    // -----------------------------------------------------------------------
+    /**
+     * <p>
+     * Gets a System property, defaulting to {@code null} if the property cannot be read.
+     * </p>
+     * <p>
+     * If a {@code SecurityException} is caught, the return value is {@code null} and a message is written to
+     * {@code System.err}.
+     * </p>
+     *
+     * @param property
+     *            the system property name
+     * @return the system property value or {@code null} if a security problem occurs
+     * @since 3.0.0
+     */
+    private static String getSystemProperty(final String property){
+        try{
+            return System.getProperty(property);
+        }catch (final SecurityException ex){
+            // we are not allowed to look at this property
+            // System.err.println("Caught a SecurityException reading the system property '" + property
+            // + "'; the SystemUtils property value will default to null.");
+            return null;
+        }
+    }
     //---------------------------------------------------------------
 
     /**

@@ -18,15 +18,13 @@ package com.feilong.csv;
 import static com.feilong.core.CharsetType.GBK;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
-import static com.feilong.lib.lang3.SystemUtils.USER_HOME;
 
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
-import com.feilong.csv.CsvWrite;
-import com.feilong.csv.DefaultCsvWrite;
 import com.feilong.csv.entity.BeanCsvConfig;
 import com.feilong.io.FileUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -64,7 +62,7 @@ public class CsvBeanWriteTest{
 
     private String buildUrl(String type,String fileName){
         String pattern = "{}/feilong/{}/{}";
-        return Slf4jUtil.format(pattern, USER_HOME, type, fileName);
+        return Slf4jUtil.format(pattern, SystemUtil.USER_HOME, type, fileName);
     }
 
     @Test

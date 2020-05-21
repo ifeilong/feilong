@@ -34,8 +34,8 @@ public interface UnzipHandler{
      * 
      * UnzipHandler unzipHandler = new CompressUnzipHandler();
      * unzipHandler.unzip(
-     *                 SystemUtils.USER_HOME+ "/feilong/logs/test.zip", //需要被解压的zip文件
-     *                 SystemUtils.USER_HOME+ "/feilong/logs/" + DateUtil.nowString(TIMESTAMP) + "Compress"); // 解压到文件路径
+     *                 SystemUtil.USER_HOME+ "/feilong/logs/test.zip", //需要被解压的zip文件
+     *                 SystemUtil.USER_HOME+ "/feilong/logs/" + DateUtil.nowString(TIMESTAMP) + "Compress"); // 解压到文件路径
      * 
      * </pre>
      * 

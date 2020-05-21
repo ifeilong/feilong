@@ -17,12 +17,12 @@ package com.feilong.coreextension.awt;
 
 import org.junit.Test;
 
-import com.feilong.lib.lang3.SystemUtils;
+import com.feilong.core.lang.SystemUtil;
 
 public class DesktopUtilTest{
 
     /** The test file. */
-    private final String testFile = SystemUtils.USER_HOME + "/.m2/settings.xml";
+    private final String testFile = SystemUtil.USER_HOME + "/.m2/settings.xml";
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code

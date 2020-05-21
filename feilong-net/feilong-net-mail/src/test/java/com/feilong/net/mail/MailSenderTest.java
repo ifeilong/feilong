@@ -19,15 +19,15 @@ import static com.feilong.core.CharsetType.UTF8;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.IOReaderUtil;
-import com.feilong.lib.lang3.SystemUtils;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class MailSenderTest extends AbstractMailSenderTest{
 
     @Test
     public void sendMail1(){
-        String path = SystemUtils.USER_HOME + "/workspace/baozun/nebula-doc/store/release log/adidas 删除Git DEV分支说明.adoc.html";
+        String path = SystemUtil.USER_HOME + "/workspace/baozun/nebula-doc/store/release log/adidas 删除Git DEV分支说明.adoc.html";
         String textContent = IOReaderUtil.readToString(path, UTF8);
         mailSendRequest.setContent(textContent);
     }

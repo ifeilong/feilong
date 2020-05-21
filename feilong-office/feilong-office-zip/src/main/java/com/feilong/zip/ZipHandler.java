@@ -34,8 +34,8 @@ public interface ZipHandler{
      * 
      * ZipHandler zipHandler = new AntZipHandler();
      * zipHandler.zip(
-     *                 SystemUtils.USER_HOME+ "/workspace/resources/product-reports20200324.xlsx", //需要压缩的文件夹 或者文件
-     *                 SystemUtils.USER_HOME+ "/feilong/logs/" + DateUtil.nowString(TIMESTAMP) + "zip"); //  需要压缩输出到的文件
+     *                 SystemUtil.USER_HOME+ "/workspace/resources/product-reports20200324.xlsx", //需要压缩的文件夹 或者文件
+     *                 SystemUtil.USER_HOME+ "/feilong/logs/" + DateUtil.nowString(TIMESTAMP) + "zip"); //  需要压缩输出到的文件
      * 
      * </pre>
      * 

@@ -25,14 +25,14 @@ import java.io.IOException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
-import com.feilong.lib.lang3.SystemUtils;
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.security.AbstractSecurityTest;
 
 public class MD5UtilTest extends AbstractSecurityTest{
 
     @Test
     public void encodeFile() throws IOException{
-        String filepath = SystemUtils.USER_HOME + "/.gitconfig";
+        String filepath = SystemUtil.USER_HOME + "/.gitconfig";
         String encodeFile = MD5Util.encodeFile(filepath);
 
         File file = new File(filepath);

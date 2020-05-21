@@ -19,7 +19,7 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import org.junit.Test;
 
-import com.feilong.lib.lang3.SystemUtils;
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.test.AbstractTest;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
@@ -27,12 +27,12 @@ public class CompressZipHandlerTest extends AbstractTest{
 
     private final ZipHandler zipHandler        = new CompressZipHandler();
 
-    String                   tobeZipFileFloder = SystemUtils.USER_HOME
+    String                   tobeZipFileFloder = SystemUtil.USER_HOME
                     + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources";
 
     //---------------------------------------------------------------
 
-    String                   outputZipFloder   = SystemUtils.USER_HOME + "/feilong/zip-unzip/";
+    String                   outputZipFloder   = SystemUtil.USER_HOME + "/feilong/zip-unzip/";
 
     @Test
     public void test(){

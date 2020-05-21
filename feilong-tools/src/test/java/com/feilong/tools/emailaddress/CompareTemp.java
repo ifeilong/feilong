@@ -27,11 +27,11 @@ import java.util.Properties;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 
 public class CompareTemp extends AbstractTest{
@@ -51,7 +51,7 @@ public class CompareTemp extends AbstractTest{
         LOGGER.debug("{},size:[{}]", JsonUtil.format(map3), map3.size());
 
         Properties properties = toProperties(toMap(map3, String.class));
-        properties.store(FileUtil.getFileOutputStream(SystemUtils.USER_HOME + "/work/a.properties"), "");
+        properties.store(FileUtil.getFileOutputStream(SystemUtil.USER_HOME + "/work/a.properties"), "");
 
         Map<String, Integer> sortMapByValueDesc = SortUtil.sortMapByValueDesc(map3);
         LOGGER.debug("{},size:[{}]", JsonUtil.format(sortMapByValueDesc), sortMapByValueDesc.size());

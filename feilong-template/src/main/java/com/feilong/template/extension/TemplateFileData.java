@@ -18,7 +18,7 @@ package com.feilong.template.extension;
 import java.util.Map;
 
 /**
- * The Class VelocityFileData.
+ * The Class TemplateFileData.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.9.2

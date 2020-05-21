@@ -21,8 +21,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.excel.AbstractLoxiaReadTest;
-import com.feilong.lib.lang3.SystemUtils;
 
 public class ConsultantReadTest extends AbstractLoxiaReadTest{
 
@@ -31,7 +31,7 @@ public class ConsultantReadTest extends AbstractLoxiaReadTest{
         String xmlSheetConfiguration = "excel/consultant/feilong-sheets-Consultant.xml";
         String sheetName = "consultantExport";
         String dataName = "consultantList";
-        String fileName = SystemUtils.USER_HOME
+        String fileName = SystemUtil.USER_HOME
                         + "/workspace/feilong/feilong/feilong-office/feilong-office-excel/src/test/resources/excel/consultant/read20200428214903.xlsx";
 
         //---------------------------------------------------------------

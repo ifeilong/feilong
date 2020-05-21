@@ -19,13 +19,13 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import org.junit.Test;
 
-import com.feilong.lib.lang3.SystemUtils;
+import com.feilong.core.lang.SystemUtil;
 
 public class CompressUnzipHandlerTest{
 
     private final UnzipHandler unzipHandler  = new CompressUnzipHandler();
 
-    String                     unZipFilePath = SystemUtils.USER_HOME
+    String                     unZipFilePath = SystemUtil.USER_HOME
                     + "/workspace/feilong/feilong/feilong-office/feilong-office-zip/src/test/resources/for-unzip.zip";
 
     @Test
@@ -33,22 +33,22 @@ public class CompressUnzipHandlerTest{
     public void test(){
         unzipHandler.unzip(
                         unZipFilePath, //需要被解压的zip文件
-                        SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "Compress"); // 解压到文件路径
+                        SystemUtil.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "Compress"); // 解压到文件路径
     }
 
     @Test(expected = NullPointerException.class)
     public void testAntUnzipHandlerTestNull(){
-        unzipHandler.unzip(null, SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
+        unzipHandler.unzip(null, SystemUtil.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAntUnzipHandlerTestEmpty(){
-        unzipHandler.unzip("", SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
+        unzipHandler.unzip("", SystemUtil.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAntUnzipHandlerTestBlank(){
-        unzipHandler.unzip(" ", SystemUtils.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
+        unzipHandler.unzip(" ", SystemUtil.USER_HOME + "/feilong/zip-unzip/" + nowTimestamp() + "antUnzip3");
     }
     //---------------------------------------------------------------
 

@@ -24,10 +24,7 @@ import com.feilong.lib.lang3.Validate;
 import com.feilong.template.TemplateUtil;
 
 /**
- * The Class VelocityFileDataUtil.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.0
+ * The Class TemplateFileDataUtil.
  */
 public class TemplateFileDataUtil{
 

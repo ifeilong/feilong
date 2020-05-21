@@ -17,8 +17,8 @@ package com.feilong.io.fileutil;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.FileUtil;
-import com.feilong.lib.lang3.SystemUtils;
 
 /**
  * 
@@ -29,7 +29,7 @@ public class CreateDirectoryByFilePathTest{
 
     @Test
     public void testCreateDirectoryByFilePath(){
-        FileUtil.createDirectoryByFilePath(SystemUtils.USER_HOME + "/feilong/logs/createDirectoryByFilePath/createDirectoryByFilePath.txt");
+        FileUtil.createDirectoryByFilePath(SystemUtil.USER_HOME + "/feilong/logs/createDirectoryByFilePath/createDirectoryByFilePath.txt");
     }
 
     //---------------------------------------------------------------

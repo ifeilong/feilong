@@ -22,9 +22,9 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 import java.util.List;
 import java.util.Map;
 
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FilenameUtil;
-import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -39,7 +39,7 @@ public abstract class AbstractLoxiaWriteTest extends AbstractTest{
 
     protected static void build(String templateFileName,String configurations,String[] sheetNames,Map<String, Object> beans){
         String outputFileName = Slf4jUtil.format(
-                        SystemUtils.USER_HOME + "/feilong/excel/{}{}.{}",
+                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
                         sheetNames,
                         nowTimestamp(),
                         FilenameUtil.getExtension(templateFileName));

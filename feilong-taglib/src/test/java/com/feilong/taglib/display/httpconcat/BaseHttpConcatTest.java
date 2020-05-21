@@ -24,8 +24,8 @@ import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.IOReaderUtil;
-import com.feilong.lib.lang3.SystemUtils;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.test.AbstractTest;
 
@@ -37,7 +37,7 @@ import com.feilong.test.AbstractTest;
  */
 public abstract class BaseHttpConcatTest extends AbstractTest{
 
-    protected static final String vmFloder = SystemUtils.USER_HOME
+    protected static final String vmFloder = SystemUtil.USER_HOME
                     + "/workspace/feilong/feilong/feilong-taglib/src/test/resources/velocity/";
 
     //---------------------------------------------------------------
