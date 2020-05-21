@@ -41,7 +41,7 @@ import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.

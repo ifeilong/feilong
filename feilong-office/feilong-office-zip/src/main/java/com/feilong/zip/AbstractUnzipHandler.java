@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.io.IOWriteUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 抽象的解压缩.

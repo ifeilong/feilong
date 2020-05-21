@@ -20,7 +20,7 @@ import java.util.Map;
 
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.CloneUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * A factory for creating ExcelManipulator objects.

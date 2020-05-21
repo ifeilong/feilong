@@ -29,7 +29,7 @@ import org.apache.commons.beanutils.DynaBean;
 
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.LazyDynaBean;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

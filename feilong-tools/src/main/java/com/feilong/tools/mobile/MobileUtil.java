@@ -16,7 +16,7 @@
 package com.feilong.tools.mobile;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 手机号码操作.

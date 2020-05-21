@@ -20,7 +20,7 @@ import static com.feilong.core.CharsetType.UTF8;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.template.TemplateUtil;
 
 /**

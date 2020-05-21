@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

@@ -15,7 +15,7 @@
  */
 package com.feilong.context;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link ReturnResult} 一些工具类.

@@ -17,7 +17,7 @@ package com.feilong.context.converter.builder;
 
 import java.util.Map;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.xml.XmlUtil;
 
 /**

@@ -30,7 +30,7 @@ import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.SheetReader;
 import com.feilong.excel.util.CloneUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.loxia.util.OgnlStack;
 
 /**

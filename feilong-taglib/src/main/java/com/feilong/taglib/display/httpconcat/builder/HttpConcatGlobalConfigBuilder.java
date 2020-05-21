@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.BooleanUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 
 /**

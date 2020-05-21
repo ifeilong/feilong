@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.lib.collection4.CollectionUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 

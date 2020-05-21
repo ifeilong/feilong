@@ -26,7 +26,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.exception.VelocityException;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link VelocityEngine} 解析器.

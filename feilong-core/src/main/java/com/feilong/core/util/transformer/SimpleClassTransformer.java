@@ -22,7 +22,7 @@ import java.io.Serializable;
 import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 简单的将对象转成指定 <code>targetType</code> 类型的转换器.

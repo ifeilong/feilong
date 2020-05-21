@@ -28,7 +28,7 @@ import com.feilong.context.converter.builder.CommonBeanBuilder;
 import com.feilong.context.converter.builder.NameAndValueMapBuilder;
 import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * map 构造器之后转成bean ,定义了两个标准方法,也是核心步骤:

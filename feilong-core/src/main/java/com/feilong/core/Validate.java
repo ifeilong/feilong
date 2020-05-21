@@ -14,16 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.lang3;
+package com.feilong.core;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
+import com.feilong.lib.lang3.ArrayUtils;
+import com.feilong.lib.lang3.StringUtils;
+
 /**
- * <p>
- * This class assists in validating arguments. The validation methods are
- * based along the following principles:
+ * This class assists in validating arguments.
+ * 
+ * The validation methods are based along the following principles:
  * <ul>
  * <li>An invalid {@code null} argument causes a {@link NullPointerException}.</li>
  * <li>A non-{@code null} argument causes an {@link IllegalArgumentException}.</li>
@@ -46,28 +50,25 @@ import java.util.Objects;
  * </p>
  * 
  * @see java.lang.String#format(String, Object...)
- * @since 2.0
- * @deprecated pls use com.feilong.core.Validate
+ * @since 3.0.0
  */
-@Deprecated
-public class Validate{
+public final class Validate{
 
-    private static final String DEFAULT_IS_NULL_EX_MESSAGE                = "The validated object is null";
-
-    private static final String DEFAULT_NO_NULL_ELEMENTS_ARRAY_EX_MESSAGE = "The validated array contains null element at index: %d";
-
-    private static final String DEFAULT_NOT_BLANK_EX_MESSAGE              = "The validated character sequence is blank";
+    /** Don't let anyone instantiate this class. */
+    private Validate(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     // isTrue
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the argument condition is {@code true}; otherwise
      * throwing an exception with the specified message. This method is useful when
      * validating according to an arbitrary boolean expression, such as validating a
      * primitive number or using your own custom validation expression.
-     * </p>
      *
      * <pre>
      * Validate.isTrue(i &gt;= min &amp;&amp; i &lt;= max, "The value must be between &#37;d and &#37;d", min, max);
@@ -82,9 +83,6 @@ public class Validate{
      *            the optional values for the formatted exception message, null array not recommended
      * @throws IllegalArgumentException
      *             if expression is {@code false}
-     * @see #isTrue(boolean)
-     * @see #isTrue(boolean, String, long)
-     * @see #isTrue(boolean, String, double)
      */
     public static void isTrue(final boolean expression,final String message,final Object...values){
         if (!expression){
@@ -96,7 +94,6 @@ public class Validate{
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the specified argument is not {@code null};
      * otherwise throwing an exception.
      *
@@ -118,12 +115,11 @@ public class Validate{
      *             if the object is {@code null}
      * @see #notNull(Object, String, Object...)
      */
-    public static <T> T notNull(final T object){
-        return notNull(object, DEFAULT_IS_NULL_EX_MESSAGE);
+    private static <T> T notNull(final T object){
+        return notNull(object, "The validated object is null");
     }
 
     /**
-     * <p>
      * Validate that the specified argument is not {@code null};
      * otherwise throwing an exception with the specified message.
      *
@@ -148,11 +144,44 @@ public class Validate{
         return Objects.requireNonNull(object, () -> String.format(message, values));
     }
 
+    // notEmpty array
+    //---------------------------------------------------------------------------------
+
+    /**
+     * Validate that the specified argument array is neither {@code null}
+     * nor a length of zero (no elements); otherwise throwing an exception
+     * with the specified message.
+     *
+     * <pre>
+     * Validate.notEmpty(myArray, "The array must not be empty");
+     * </pre>
+     *
+     * @param <T>
+     *            the array type
+     * @param array
+     *            the array to check, validated not null by this method
+     * @param message
+     *            the {@link String#format(String, Object...)} exception message if invalid, not null
+     * @param values
+     *            the optional values for the formatted exception message, null array not recommended
+     * @return the validated array (never {@code null} method for chaining)
+     * @throws NullPointerException
+     *             if the array is {@code null}
+     * @throws IllegalArgumentException
+     *             if the array is empty
+     */
+    public static <T> T[] notEmpty(final T[] array,final String message,final Object...values){
+        Objects.requireNonNull(array, () -> String.format(message, values));
+        if (array.length == 0){
+            throw new IllegalArgumentException(String.format(message, values));
+        }
+        return array;
+    }
+
     // notEmpty collection
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the specified argument collection is neither {@code null}
      * nor a size of zero (no elements); otherwise throwing an exception
      * with the specified message.
@@ -174,7 +203,6 @@ public class Validate{
      *             if the collection is {@code null}
      * @throws IllegalArgumentException
      *             if the collection is empty
-     * @see #notEmpty(Object[])
      */
     public static <T extends Collection<?>> T notEmpty(final T collection,final String message,final Object...values){
         Objects.requireNonNull(collection, () -> String.format(message, values));
@@ -188,7 +216,6 @@ public class Validate{
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the specified argument map is neither {@code null}
      * nor a size of zero (no elements); otherwise throwing an exception
      * with the specified message.
@@ -210,7 +237,6 @@ public class Validate{
      *             if the map is {@code null}
      * @throws IllegalArgumentException
      *             if the map is empty
-     * @see #notEmpty(Object[])
      */
     public static <T extends Map<?, ?>> T notEmpty(final T map,final String message,final Object...values){
         Objects.requireNonNull(map, () -> String.format(message, values));
@@ -224,7 +250,6 @@ public class Validate{
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the specified argument character sequence is
      * neither {@code null} nor a length of zero (no characters);
      * otherwise throwing an exception with the specified message.
@@ -246,7 +271,6 @@ public class Validate{
      *             if the character sequence is {@code null}
      * @throws IllegalArgumentException
      *             if the character sequence is empty
-     * @see #notEmpty(CharSequence)
      */
     public static <T extends CharSequence> T notEmpty(final T chars,final String message,final Object...values){
         Objects.requireNonNull(chars, () -> String.format(message, values));
@@ -260,7 +284,6 @@ public class Validate{
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the specified argument character sequence is
      * neither {@code null}, a length of zero (no characters), empty
      * nor whitespace; otherwise throwing an exception with the specified
@@ -283,9 +306,6 @@ public class Validate{
      *             if the character sequence is {@code null}
      * @throws IllegalArgumentException
      *             if the character sequence is blank
-     * @see #notBlank(CharSequence)
-     *
-     * @since 3.0
      */
     public static <T extends CharSequence> T notBlank(final T chars,final String message,final Object...values){
         Objects.requireNonNull(chars, () -> String.format(message, values));
@@ -295,43 +315,10 @@ public class Validate{
         return chars;
     }
 
-    /**
-     * <p>
-     * Validate that the specified argument character sequence is
-     * neither {@code null}, a length of zero (no characters), empty
-     * nor whitespace; otherwise throwing an exception.
-     *
-     * <pre>
-     * Validate.notBlank(myString);
-     * </pre>
-     *
-     * <p>
-     * The message in the exception is &quot;The validated character
-     * sequence is blank&quot;.
-     * </p>
-     *
-     * @param <T>
-     *            the character sequence type
-     * @param chars
-     *            the character sequence to check, validated not null by this method
-     * @return the validated character sequence (never {@code null} method for chaining)
-     * @throws NullPointerException
-     *             if the character sequence is {@code null}
-     * @throws IllegalArgumentException
-     *             if the character sequence is blank
-     * @see #notBlank(CharSequence, String, Object...)
-     *
-     * @since 3.0
-     */
-    public static <T extends CharSequence> T notBlank(final T chars){
-        return notBlank(chars, DEFAULT_NOT_BLANK_EX_MESSAGE);
-    }
-
     // noNullElements array
     //---------------------------------------------------------------------------------
 
     /**
-     * <p>
      * Validate that the specified argument array is neither
      * {@code null} nor contains any elements that are {@code null};
      * otherwise throwing an exception with the specified message.
@@ -364,7 +351,6 @@ public class Validate{
      *             if the array is {@code null}
      * @throws IllegalArgumentException
      *             if an element is {@code null}
-     * @see #noNullElements(Object[])
      */
     public static <T> T[] noNullElements(final T[] array,final String message,final Object...values){
         notNull(array);
@@ -377,73 +363,83 @@ public class Validate{
         return array;
     }
 
+    // noNullElements iterable
+    //---------------------------------------------------------------------------------
+
     /**
-     * <p>
-     * Validate that the specified argument array is neither
+     * Validate that the specified argument iterable is neither
      * {@code null} nor contains any elements that are {@code null};
-     * otherwise throwing an exception.
-     * </p>
+     * otherwise throwing an exception with the specified message.
      *
      * <pre>
-     * Validate.noNullElements(myArray);
+     * Validate.noNullElements(myCollection, "The collection contains null at position %d");
      * </pre>
      *
      * <p>
-     * If the array is {@code null}, then the message in the exception
+     * If the iterable is {@code null}, then the message in the exception
      * is &quot;The validated object is null&quot;.
      * </p>
      *
      * <p>
-     * If the array has a {@code null} element, then the message in the
-     * exception is &quot;The validated array contains null element at index:
-     * &quot; followed by the index.
+     * If the iterable has a {@code null} element, then the iteration
+     * index of the invalid element is appended to the {@code values}
+     * argument.
      * </p>
      *
      * @param <T>
-     *            the array type
-     * @param array
-     *            the array to check, validated not null by this method
-     * @return the validated array (never {@code null} method for chaining)
+     *            the iterable type
+     * @param iterable
+     *            the iterable to check, validated not null by this method
+     * @param message
+     *            the {@link String#format(String, Object...)} exception message if invalid, not null
+     * @param values
+     *            the optional values for the formatted exception message, null array not recommended
+     * @return the validated iterable (never {@code null} method for chaining)
      * @throws NullPointerException
      *             if the array is {@code null}
      * @throws IllegalArgumentException
      *             if an element is {@code null}
-     * @see #noNullElements(Object[], String, Object...)
+     * @see #noNullElements(Iterable)
      */
-    public static <T> T[] noNullElements(final T[] array){
-        return noNullElements(array, DEFAULT_NO_NULL_ELEMENTS_ARRAY_EX_MESSAGE);
+    public static <T extends Iterable<?>> T noNullElements(final T iterable,final String message,final Object...values){
+        notNull(iterable);
+        int i = 0;
+        for (final Iterator<?> it = iterable.iterator(); it.hasNext(); i++){
+            if (it.next() == null){
+                final Object[] values2 = ArrayUtils.addAll(values, Integer.valueOf(i));
+                throw new IllegalArgumentException(String.format(message, values2));
+            }
+        }
+        return iterable;
     }
 
-    // inclusiveBetween
-    //---------------------------------------------------------------------------------
+    // validState
 
     /**
-     * Validate that the specified primitive value falls between the two
-     * inclusive values specified; otherwise, throws an exception with the
-     * specified message.
+     * Validate that the stateful condition is {@code true}; otherwise
+     * throwing an exception with the specified message. This method is useful when
+     * validating according to an arbitrary boolean expression, such as validating a
+     * primitive number or using your own custom validation expression.
      *
      * <pre>
-     * Validate.inclusiveBetween(0, 2, 1, "Not in range");
+     * Validate.validState(this.isOk(), "The state is not OK: %s", myObject);
      * </pre>
      *
-     * @param start
-     *            the inclusive start value
-     * @param end
-     *            the inclusive end value
-     * @param value
-     *            the value to validate
+     * @param expression
+     *            the boolean expression to check
      * @param message
-     *            the exception message if invalid, not null
+     *            the {@link String#format(String, Object...)} exception message if invalid, not null
+     * @param values
+     *            the optional values for the formatted exception message, null array not recommended
+     * @throws IllegalStateException
+     *             if expression is {@code false}
+     * @see #validState(boolean)
      *
-     * @throws IllegalArgumentException
-     *             if the value falls outside the boundaries
-     *
-     * @since 3.3
+     * @since 3.0
      */
-    public static void inclusiveBetween(final long start,final long end,final long value,final String message){
-        // TODO when breaking BC, consider returning value
-        if (value < start || value > end){
-            throw new IllegalArgumentException(message);
+    public static void validState(final boolean expression,final String message,final Object...values){
+        if (!expression){
+            throw new IllegalStateException(String.format(message, values));
         }
     }
 

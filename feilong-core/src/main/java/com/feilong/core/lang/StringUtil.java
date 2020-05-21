@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import com.feilong.core.CharsetType;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.text.StrSubstitutor;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

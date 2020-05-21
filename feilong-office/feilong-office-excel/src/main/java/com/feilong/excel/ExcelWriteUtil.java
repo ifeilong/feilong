@@ -34,7 +34,7 @@ import com.feilong.io.FileUtil;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.CollectionUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 使用 loxia 来进行 excel 输出的工具类.

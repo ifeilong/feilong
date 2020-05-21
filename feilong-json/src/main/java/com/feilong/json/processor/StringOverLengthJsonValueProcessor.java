@@ -20,7 +20,7 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.json.JsonConfig;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 如果字符串格式jsonvalue的值超过指定的长度 <code>maxLength</code>,将省略显示 <code>overLengthMaskString</code>,以控制输出的字符串长度.

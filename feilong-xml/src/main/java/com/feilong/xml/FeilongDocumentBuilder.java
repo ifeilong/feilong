@@ -30,7 +30,7 @@ import org.w3c.dom.Document;
 
 import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 用来构造 {@link Document}.

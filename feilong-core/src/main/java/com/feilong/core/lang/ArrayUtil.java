@@ -17,7 +17,7 @@ package com.feilong.core.lang;
 
 import java.lang.reflect.Array;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 数组工具类.

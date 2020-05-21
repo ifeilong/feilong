@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.servlet.http.entity.CookieEntity;
 
 /**

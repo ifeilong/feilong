@@ -24,7 +24,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -149,8 +149,8 @@ public final class JsoupUtil{
      * @see org.jsoup.nodes.Element#select(String)
      */
     public static Elements getElementsBySelect(String url,String selectQuery){
-        Validate.notBlank(url);
-        Validate.notBlank(selectQuery);
+        Validate.notBlank(url, "url can't be blank!");
+        Validate.notBlank(selectQuery, "selectQuery can't be blank!");
         //---------------------------------------------------------------
         Document document = getDocument(url);
         return document.select(selectQuery);
@@ -173,8 +173,8 @@ public final class JsoupUtil{
      * @see org.jsoup.nodes.Element#getElementById(String)
      */
     public static Element getElementById(String url,String id){
-        Validate.notBlank(url);
-        Validate.notBlank(id);
+        Validate.notBlank(url, "url can't be blank!");
+        Validate.notBlank(id, "id can't be blank!");
 
         //---------------------------------------------------------------
         Document document = getDocument(url);

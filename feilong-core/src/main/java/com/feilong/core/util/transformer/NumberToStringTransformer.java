@@ -21,7 +21,7 @@ import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.NumberPattern;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 数字转成字符串的转换器.

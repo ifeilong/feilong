@@ -27,7 +27,7 @@ import org.apache.http.client.utils.URIBuilder;
 
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.NotImplementedException;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpMethodType;

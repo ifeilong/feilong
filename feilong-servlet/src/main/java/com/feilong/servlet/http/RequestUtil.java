@@ -60,7 +60,7 @@ import com.feilong.core.util.MapUtil;
 import com.feilong.io.ReaderUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
 
 /**

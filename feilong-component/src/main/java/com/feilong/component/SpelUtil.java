@@ -24,7 +24,7 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.ParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * Spring Expression Language 工具类.

@@ -50,7 +50,7 @@ import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

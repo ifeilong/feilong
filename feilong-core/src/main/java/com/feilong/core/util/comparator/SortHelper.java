@@ -21,7 +21,7 @@ import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 排序的辅助类.

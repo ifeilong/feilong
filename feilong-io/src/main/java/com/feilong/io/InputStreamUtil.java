@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.io.IOUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.springframework.core.io.DefaultResourceLoader;
 import com.feilong.lib.springframework.core.io.Resource;
 import com.feilong.lib.springframework.core.io.ResourceLoader;

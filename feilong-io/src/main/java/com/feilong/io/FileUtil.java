@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
 import com.feilong.lib.io.FileUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.tuple.Pair;
 
 /**

@@ -18,7 +18,7 @@ package com.feilong.core.lang;
 import java.lang.reflect.Modifier;
 
 import com.feilong.core.lang.reflect.ReflectException;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

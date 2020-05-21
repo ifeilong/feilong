@@ -33,7 +33,7 @@ import com.feilong.core.lang.thread.PartitionEachSizeThreadConfigBuilder;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 import com.feilong.core.lang.thread.PartitionThreadConfig;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 线程相关工具类.

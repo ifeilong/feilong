@@ -24,7 +24,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
 import com.feilong.tools.slf4j.Slf4jUtil;

@@ -40,7 +40,7 @@ import org.w3c.dom.NodeList;
 
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.xml.xstream.XStreamBuilder;
 import com.feilong.xml.xstream.XStreamConfig;
 import com.feilong.xml.xstream.XStreamConfigBuilder;

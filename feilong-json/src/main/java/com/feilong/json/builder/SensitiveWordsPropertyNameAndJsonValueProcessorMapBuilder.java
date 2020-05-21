@@ -38,7 +38,7 @@ import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.lib.lang3.reflect.MethodUtils;
 

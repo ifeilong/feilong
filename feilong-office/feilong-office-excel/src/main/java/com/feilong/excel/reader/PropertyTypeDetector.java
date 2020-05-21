@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.DataConvertorConfigurator;
 import com.feilong.excel.definition.ExcelCell;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 import ognl.OgnlException;
 import ognl.OgnlRuntime;

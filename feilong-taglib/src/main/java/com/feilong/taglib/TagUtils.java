@@ -20,7 +20,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 
 import javax.servlet.jsp.PageContext;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * Utility class for tag library related code, exposing functionality

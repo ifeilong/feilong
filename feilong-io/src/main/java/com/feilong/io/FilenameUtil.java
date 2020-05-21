@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.io.FilenameUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * The Class FilenameUtil.

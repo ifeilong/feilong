@@ -19,7 +19,7 @@ import java.util.Random;
 
 import com.feilong.core.Alphabet;
 import com.feilong.lib.lang3.RandomStringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 随机数工具类.

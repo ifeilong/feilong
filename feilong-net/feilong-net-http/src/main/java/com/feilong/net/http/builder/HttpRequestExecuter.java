@@ -24,7 +24,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;

@@ -21,10 +21,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
-import java.util.TreeSet;
 import java.util.function.Supplier;
 
 /**
@@ -562,61 +559,6 @@ public class ObjectUtils{
             return nullGreater ? -1 : 1;
         }
         return c1.compareTo(c2);
-    }
-
-    /**
-     * Find the "best guess" middle value among comparables. If there is an even
-     * number of total values, the lower of the two middle values will be returned.
-     * 
-     * @param <T>
-     *            type of values processed by this method
-     * @param items
-     *            to compare
-     * @return T at middle position
-     * @throws NullPointerException
-     *             if items is {@code null}
-     * @throws IllegalArgumentException
-     *             if items is empty or contains {@code null} values
-     * @since 3.0.1
-     */
-    @SafeVarargs
-    public static <T extends Comparable<? super T>> T median(final T...items){
-        Validate.notEmpty(items);
-        Validate.noNullElements(items);
-        final TreeSet<T> sort = new TreeSet<>();
-        Collections.addAll(sort, items);
-        @SuppressWarnings("unchecked") //we know all items added were T instances
-        final T result = (T) sort.toArray()[(sort.size() - 1) / 2];
-        return result;
-    }
-
-    /**
-     * Find the "best guess" middle value among comparables. If there is an even
-     * number of total values, the lower of the two middle values will be returned.
-     * 
-     * @param <T>
-     *            type of values processed by this method
-     * @param comparator
-     *            to use for comparisons
-     * @param items
-     *            to compare
-     * @return T at middle position
-     * @throws NullPointerException
-     *             if items or comparator is {@code null}
-     * @throws IllegalArgumentException
-     *             if items is empty or contains {@code null} values
-     * @since 3.0.1
-     */
-    @SafeVarargs
-    public static <T> T median(final Comparator<T> comparator,final T...items){
-        Validate.notEmpty(items, "null/empty items");
-        Validate.noNullElements(items);
-        Validate.notNull(comparator, "null comparator");
-        final TreeSet<T> sort = new TreeSet<>(comparator);
-        Collections.addAll(sort, items);
-        @SuppressWarnings("unchecked") //we know all items added were T instances
-        final T result = (T) sort.toArray()[(sort.size() - 1) / 2];
-        return result;
     }
 
     // Mode

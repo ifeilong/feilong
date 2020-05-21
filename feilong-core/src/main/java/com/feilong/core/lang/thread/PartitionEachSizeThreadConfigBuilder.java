@@ -20,7 +20,7 @@ import static com.feilong.core.bean.ConvertUtil.toInteger;
 import java.math.RoundingMode;
 
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 用来计算 each size 大小的.

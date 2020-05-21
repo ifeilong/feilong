@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.feilong.core.DatePattern;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .

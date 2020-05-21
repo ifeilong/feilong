@@ -19,7 +19,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 
 /**

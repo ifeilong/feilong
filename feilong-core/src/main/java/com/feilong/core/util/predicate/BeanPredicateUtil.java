@@ -34,7 +34,7 @@ import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.lib.collection4.functors.EqualPredicate;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.

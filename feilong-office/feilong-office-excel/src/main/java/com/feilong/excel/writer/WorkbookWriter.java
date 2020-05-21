@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import com.feilong.excel.ExcelDefinition;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.WorkbookUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.loxia.util.OgnlStack;
 
 /**

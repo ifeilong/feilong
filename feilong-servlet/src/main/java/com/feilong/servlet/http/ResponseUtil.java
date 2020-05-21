@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
 import com.feilong.io.entity.MimeType;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link javax.servlet.http.HttpServletResponse HttpServletResponse} 工具类.

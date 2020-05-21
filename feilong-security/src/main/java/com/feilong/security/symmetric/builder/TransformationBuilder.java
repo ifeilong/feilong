@@ -15,7 +15,7 @@
  */
 package com.feilong.security.symmetric.builder;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.security.symmetric.CipherMode;
 import com.feilong.security.symmetric.CipherPadding;
 

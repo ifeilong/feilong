@@ -34,7 +34,7 @@ import com.feilong.csv.handler.CsvContentBuilder;
 import com.feilong.csv.handler.DataListBuilder;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.lib.collection4.IterableUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * cvs工具类.

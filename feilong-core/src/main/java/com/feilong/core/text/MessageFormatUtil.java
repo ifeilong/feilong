@@ -18,7 +18,7 @@ package com.feilong.core.text;
 import java.text.Format;
 import java.text.MessageFormat;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link MessageFormat}工具类,常用于国际化 .

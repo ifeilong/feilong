@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * The Class ComparatorUtil.

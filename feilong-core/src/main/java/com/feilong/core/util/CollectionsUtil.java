@@ -51,7 +51,7 @@ import com.feilong.core.util.transformer.BeanTransformer;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.ListUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.

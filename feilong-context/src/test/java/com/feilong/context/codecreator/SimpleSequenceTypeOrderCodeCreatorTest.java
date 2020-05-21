@@ -23,7 +23,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.test.AbstractTest;
 
 /**

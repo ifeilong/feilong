@@ -21,7 +21,7 @@ import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 将传入的bean转成指定类型 <code>toBeanType</code> 的Bean 的转换器.

@@ -26,7 +26,7 @@ import java.util.List;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.csv.entity.BeanCsvConfig;
 import com.feilong.csv.entity.CsvColumnEntity;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * The Class CsvColumnEntityListBuilder.

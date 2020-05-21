@@ -37,7 +37,7 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.

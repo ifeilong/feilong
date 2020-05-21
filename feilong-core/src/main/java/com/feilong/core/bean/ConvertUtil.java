@@ -69,7 +69,7 @@ import com.feilong.lib.collection4.iterators.EnumerationIterator;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.LocaleUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.tuple.Pair;
 
 /**

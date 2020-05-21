@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link java.lang.System}工具类.

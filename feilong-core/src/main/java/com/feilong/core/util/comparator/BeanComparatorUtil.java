@@ -28,7 +28,7 @@ import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.comparators.ComparableComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 专注于 bean 属性值的排序.

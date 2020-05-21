@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.io.IOUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link Workbook} 工具类.

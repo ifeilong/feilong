@@ -25,7 +25,7 @@ import java.io.UncheckedIOException;
 import java.net.URI;
 
 import com.feilong.core.net.URIUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**

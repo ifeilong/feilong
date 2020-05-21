@@ -22,7 +22,7 @@ import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 日期转成字符串的转换器.

@@ -22,7 +22,7 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RegexUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 路径提取器.

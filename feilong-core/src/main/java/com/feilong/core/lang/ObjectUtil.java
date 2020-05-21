@@ -17,7 +17,7 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link Object} 工具类.

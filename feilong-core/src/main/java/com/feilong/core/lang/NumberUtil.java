@@ -26,7 +26,7 @@ import java.math.RoundingMode;
 
 import com.feilong.core.NumberPattern;
 import com.feilong.core.text.NumberFormatUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.lang3.math.NumberUtils;
 
 /**

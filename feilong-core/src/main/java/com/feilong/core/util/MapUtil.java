@@ -43,7 +43,7 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.MapUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * {@link Map}工具类.

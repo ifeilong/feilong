@@ -22,7 +22,7 @@ import static com.feilong.validator.RegexPattern.TELEPHONE_MUST_AREACODE;
 import static com.feilong.validator.RegexPattern.ZIPCODE;
 
 import com.feilong.core.util.RegexUtil;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 import com.feilong.lib.validator.EmailValidator;
 
 /**

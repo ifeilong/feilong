@@ -35,7 +35,7 @@ import org.apache.commons.collections4.Transformer;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.IterableUtils;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * 专门用来统计数据的工具类.

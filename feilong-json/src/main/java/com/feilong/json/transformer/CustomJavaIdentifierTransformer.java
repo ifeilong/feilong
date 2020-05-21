@@ -20,7 +20,7 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import java.util.Map;
 
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
-import com.feilong.lib.lang3.Validate;
+import com.feilong.core.Validate;
 
 /**
  * [json{@code -->}bean],json字符串里面的属性名字可能有部分不符合我们的java属性命名规范,此时可以基于部分属性做转换器.
