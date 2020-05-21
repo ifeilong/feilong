@@ -16,8 +16,8 @@
 package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 
 import java.util.List;

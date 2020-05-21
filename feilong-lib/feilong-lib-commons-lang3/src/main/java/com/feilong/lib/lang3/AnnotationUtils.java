@@ -83,7 +83,7 @@ public class AnnotationUtils{
                     return "@" + iface.getName();
                 }
             }
-            return StringUtils.EMPTY;
+            return "";
         }
 
         /**

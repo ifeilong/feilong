@@ -17,8 +17,8 @@ package com.feilong.core.net.uriutiltest;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
-import static com.feilong.lib.lang3.StringUtils.SPACE;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.SPACE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;

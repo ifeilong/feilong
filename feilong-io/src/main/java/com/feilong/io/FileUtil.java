@@ -19,7 +19,7 @@ import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 import static com.feilong.io.entity.FileWriteMode.APPEND;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.io.File;
 import java.io.FileInputStream;

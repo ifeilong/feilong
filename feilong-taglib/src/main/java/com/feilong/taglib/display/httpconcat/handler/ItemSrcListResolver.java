@@ -16,8 +16,8 @@
 package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.LF;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
-import static com.feilong.lib.lang3.StringUtils.LF;
 import static java.util.Collections.emptyList;
 
 import java.util.ArrayList;

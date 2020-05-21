@@ -18,7 +18,6 @@ package com.feilong.core.lang;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
@@ -171,6 +170,40 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @since 1.4.0
  */
 public final class StringUtil{
+
+    /**
+     * A String for a space character.
+     *
+     * @since 3.0.0
+     */
+    public static final String SPACE = " ";
+
+    /**
+     * The empty String {@code ""}.
+     * 
+     * @since 3.0.0
+     */
+    public static final String EMPTY = "";
+
+    /**
+     * A String for linefeed LF ("\n").
+     *
+     * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6">JLF: Escape Sequences
+     *      for Character and String Literals</a>
+     * @since 3.0.0
+     */
+    public static final String LF    = "\n";
+
+    /**
+     * A String for carriage return CR ("\r").
+     *
+     * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6">JLF: Escape Sequences
+     *      for Character and String Literals</a>
+     * @since 3.0.0
+     */
+    public static final String CR    = "\r";
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private StringUtil(){

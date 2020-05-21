@@ -130,7 +130,7 @@ import java.util.regex.Pattern;
 //@Immutable
 public class StringUtils{
 
-    private static final int   STRING_BUILDER_SIZE = 256;
+    private static final int    STRING_BUILDER_SIZE = 256;
 
     // Performance testing notes (JDK 1.4, Jul03, scolebourne)
     // Whitespace:
@@ -153,46 +153,28 @@ public class StringUtils{
      *
      * @since 3.2
      */
-    public static final String SPACE               = " ";
+    private static final String SPACE               = " ";
 
     /**
      * The empty String {@code ""}.
      * 
      * @since 2.0
      */
-    public static final String EMPTY               = "";
-
-    /**
-     * A String for linefeed LF ("\n").
-     *
-     * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6">JLF: Escape Sequences
-     *      for Character and String Literals</a>
-     * @since 3.2
-     */
-    public static final String LF                  = "\n";
-
-    /**
-     * A String for carriage return CR ("\r").
-     *
-     * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6">JLF: Escape Sequences
-     *      for Character and String Literals</a>
-     * @since 3.2
-     */
-    public static final String CR                  = "\r";
+    private static final String EMPTY               = "";
 
     /**
      * Represents a failed index search.
      * 
      * @since 2.1
      */
-    public static final int    INDEX_NOT_FOUND     = -1;
+    public static final int     INDEX_NOT_FOUND     = -1;
 
     /**
      * <p>
      * The maximum size to which the padding constant(s) can expand.
      * </p>
      */
-    private static final int   PAD_LIMIT           = 8192;
+    private static final int    PAD_LIMIT           = 8192;
 
     // Abbreviating
     //-----------------------------------------------------------------------
@@ -236,54 +218,6 @@ public class StringUtils{
      */
     public static String abbreviate(final String str,final int maxWidth){
         return abbreviate(str, "...", 0, maxWidth);
-    }
-
-    /**
-     * <p>
-     * Abbreviates a String using ellipses. This will turn
-     * "Now is the time for all good men" into "...is the time for..."
-     * </p>
-     *
-     * <p>
-     * Works like {@code abbreviate(String, int)}, but allows you to specify
-     * a "left edge" offset. Note that this left edge is not necessarily going to
-     * be the leftmost character in the result, or the first character following the
-     * ellipses, but it will appear somewhere in the result.
-     *
-     * <p>
-     * In no case will it return a String of length greater than
-     * {@code maxWidth}.
-     * </p>
-     *
-     * <pre>
-     * StringUtils.abbreviate(null, *, *)                = null
-     * StringUtils.abbreviate("", 0, 4)                  = ""
-     * StringUtils.abbreviate("abcdefghijklmno", -1, 10) = "abcdefg..."
-     * StringUtils.abbreviate("abcdefghijklmno", 0, 10)  = "abcdefg..."
-     * StringUtils.abbreviate("abcdefghijklmno", 1, 10)  = "abcdefg..."
-     * StringUtils.abbreviate("abcdefghijklmno", 4, 10)  = "abcdefg..."
-     * StringUtils.abbreviate("abcdefghijklmno", 5, 10)  = "...fghi..."
-     * StringUtils.abbreviate("abcdefghijklmno", 6, 10)  = "...ghij..."
-     * StringUtils.abbreviate("abcdefghijklmno", 8, 10)  = "...ijklmno"
-     * StringUtils.abbreviate("abcdefghijklmno", 10, 10) = "...ijklmno"
-     * StringUtils.abbreviate("abcdefghijklmno", 12, 10) = "...ijklmno"
-     * StringUtils.abbreviate("abcdefghij", 0, 3)        = IllegalArgumentException
-     * StringUtils.abbreviate("abcdefghij", 5, 6)        = IllegalArgumentException
-     * </pre>
-     *
-     * @param str
-     *            the String to check, may be null
-     * @param offset
-     *            left edge of source String
-     * @param maxWidth
-     *            maximum length of result String, must be at least 4
-     * @return abbreviated String, {@code null} if null String input
-     * @throws IllegalArgumentException
-     *             if the width is too small
-     * @since 2.0
-     */
-    public static String abbreviate(final String str,final int offset,final int maxWidth){
-        return abbreviate(str, "...", offset, maxWidth);
     }
 
     /**
@@ -468,127 +402,6 @@ public class StringUtils{
         final int endOffset = str.length() - targetSting / 2;
 
         return str.substring(0, startOffset) + middle + str.substring(endOffset);
-    }
-
-    /**
-     * Appends the suffix to the end of the string if the string does not
-     * already end with the suffix.
-     *
-     * @param str
-     *            The string.
-     * @param suffix
-     *            The suffix to append to the end of the string.
-     * @param ignoreCase
-     *            Indicates whether the compare should ignore case.
-     * @param suffixes
-     *            Additional suffixes that are valid terminators (optional).
-     *
-     * @return A new String if suffix was appended, the same string otherwise.
-     */
-    private static String appendIfMissing(
-                    final String str,
-                    final CharSequence suffix,
-                    final boolean ignoreCase,
-                    final CharSequence...suffixes){
-        if (str == null || isEmpty(suffix) || endsWith(str, suffix, ignoreCase)){
-            return str;
-        }
-        if (ArrayUtils.isNotEmpty(suffixes)){
-            for (final CharSequence s : suffixes){
-                if (endsWith(str, s, ignoreCase)){
-                    return str;
-                }
-            }
-        }
-        return str + suffix.toString();
-    }
-
-    /**
-     * Appends the suffix to the end of the string if the string does not
-     * already end with any of the suffixes.
-     *
-     * <pre>
-     * StringUtils.appendIfMissing(null, null) = null
-     * StringUtils.appendIfMissing("abc", null) = "abc"
-     * StringUtils.appendIfMissing("", "xyz") = "xyz"
-     * StringUtils.appendIfMissing("abc", "xyz") = "abcxyz"
-     * StringUtils.appendIfMissing("abcxyz", "xyz") = "abcxyz"
-     * StringUtils.appendIfMissing("abcXYZ", "xyz") = "abcXYZxyz"
-     * </pre>
-     * <p>
-     * With additional suffixes,
-     * </p>
-     * 
-     * <pre>
-     * StringUtils.appendIfMissing(null, null, null) = null
-     * StringUtils.appendIfMissing("abc", null, null) = "abc"
-     * StringUtils.appendIfMissing("", "xyz", null) = "xyz"
-     * StringUtils.appendIfMissing("abc", "xyz", new CharSequence[]{null}) = "abcxyz"
-     * StringUtils.appendIfMissing("abc", "xyz", "") = "abc"
-     * StringUtils.appendIfMissing("abc", "xyz", "mno") = "abcxyz"
-     * StringUtils.appendIfMissing("abcxyz", "xyz", "mno") = "abcxyz"
-     * StringUtils.appendIfMissing("abcmno", "xyz", "mno") = "abcmno"
-     * StringUtils.appendIfMissing("abcXYZ", "xyz", "mno") = "abcXYZxyz"
-     * StringUtils.appendIfMissing("abcMNO", "xyz", "mno") = "abcMNOxyz"
-     * </pre>
-     *
-     * @param str
-     *            The string.
-     * @param suffix
-     *            The suffix to append to the end of the string.
-     * @param suffixes
-     *            Additional suffixes that are valid terminators.
-     *
-     * @return A new String if suffix was appended, the same string otherwise.
-     *
-     * @since 3.2
-     */
-    public static String appendIfMissing(final String str,final CharSequence suffix,final CharSequence...suffixes){
-        return appendIfMissing(str, suffix, false, suffixes);
-    }
-
-    /**
-     * Appends the suffix to the end of the string if the string does not
-     * already end, case insensitive, with any of the suffixes.
-     *
-     * <pre>
-     * StringUtils.appendIfMissingIgnoreCase(null, null) = null
-     * StringUtils.appendIfMissingIgnoreCase("abc", null) = "abc"
-     * StringUtils.appendIfMissingIgnoreCase("", "xyz") = "xyz"
-     * StringUtils.appendIfMissingIgnoreCase("abc", "xyz") = "abcxyz"
-     * StringUtils.appendIfMissingIgnoreCase("abcxyz", "xyz") = "abcxyz"
-     * StringUtils.appendIfMissingIgnoreCase("abcXYZ", "xyz") = "abcXYZ"
-     * </pre>
-     * <p>
-     * With additional suffixes,
-     * </p>
-     * 
-     * <pre>
-     * StringUtils.appendIfMissingIgnoreCase(null, null, null) = null
-     * StringUtils.appendIfMissingIgnoreCase("abc", null, null) = "abc"
-     * StringUtils.appendIfMissingIgnoreCase("", "xyz", null) = "xyz"
-     * StringUtils.appendIfMissingIgnoreCase("abc", "xyz", new CharSequence[]{null}) = "abcxyz"
-     * StringUtils.appendIfMissingIgnoreCase("abc", "xyz", "") = "abc"
-     * StringUtils.appendIfMissingIgnoreCase("abc", "xyz", "mno") = "axyz"
-     * StringUtils.appendIfMissingIgnoreCase("abcxyz", "xyz", "mno") = "abcxyz"
-     * StringUtils.appendIfMissingIgnoreCase("abcmno", "xyz", "mno") = "abcmno"
-     * StringUtils.appendIfMissingIgnoreCase("abcXYZ", "xyz", "mno") = "abcXYZ"
-     * StringUtils.appendIfMissingIgnoreCase("abcMNO", "xyz", "mno") = "abcMNO"
-     * </pre>
-     *
-     * @param str
-     *            The string.
-     * @param suffix
-     *            The suffix to append to the end of the string.
-     * @param suffixes
-     *            Additional suffixes that are valid terminators.
-     *
-     * @return A new String if suffix was appended, the same string otherwise.
-     *
-     * @since 3.2
-     */
-    public static String appendIfMissingIgnoreCase(final String str,final CharSequence suffix,final CharSequence...suffixes){
-        return appendIfMissing(str, suffix, true, suffixes);
     }
 
     /**
@@ -9901,45 +9714,6 @@ public class StringUtils{
     }
 
     /**
-     * <p>
-     * Converts a {@code CharSequence} into an array of code points.
-     * </p>
-     *
-     * <p>
-     * Valid pairs of surrogate code units will be converted into a single supplementary
-     * code point. Isolated surrogate code units (i.e. a high surrogate not followed by a low surrogate or
-     * a low surrogate not preceded by a high surrogate) will be returned as-is.
-     * </p>
-     *
-     * <pre>
-     * StringUtils.toCodePoints(null)   =  null
-     * StringUtils.toCodePoints("")     =  []  // empty array
-     * </pre>
-     *
-     * @param str
-     *            the character sequence to convert
-     * @return an array of code points
-     * @since 3.6
-     */
-    public static int[] toCodePoints(final CharSequence str){
-        if (str == null){
-            return null;
-        }
-        if (str.length() == 0){
-            return ArrayUtils.EMPTY_INT_ARRAY;
-        }
-
-        final String s = str.toString();
-        final int[] result = new int[s.codePointCount(0, s.length())];
-        int index = 0;
-        for (int i = 0; i < result.length; i++){
-            result[i] = s.codePointAt(index);
-            index += Character.charCount(result[i]);
-        }
-        return result;
-    }
-
-    /**
      * Converts a {@code byte[]} to a String using the specified character encoding.
      *
      * @param bytes
@@ -9954,30 +9728,6 @@ public class StringUtils{
      */
     public static String toEncodedString(final byte[] bytes,final Charset charset){
         return new String(bytes, Charsets.toCharset(charset));
-    }
-
-    /**
-     * Converts the given source String as a lower-case using the {@link Locale#ROOT} locale in a null-safe manner.
-     *
-     * @param source
-     *            A source String or null.
-     * @return the given source String as a lower-case using the {@link Locale#ROOT} locale or null.
-     * @since 3.10
-     */
-    public static String toRootLowerCase(final String source){
-        return source == null ? null : source.toLowerCase(Locale.ROOT);
-    }
-
-    /**
-     * Converts the given source String as a upper-case using the {@link Locale#ROOT} locale in a null-safe manner.
-     *
-     * @param source
-     *            A source String or null.
-     * @return the given source String as a upper-case using the {@link Locale#ROOT} locale or null.
-     * @since 3.10
-     */
-    public static String toRootUpperCase(final String source){
-        return source == null ? null : source.toUpperCase(Locale.ROOT);
     }
 
     /**
@@ -10094,138 +9844,6 @@ public class StringUtils{
     public static String trimToNull(final String str){
         final String ts = trim(str);
         return isEmpty(ts) ? null : ts;
-    }
-
-    /**
-     * <p>
-     * Truncates a String. This will turn
-     * "Now is the time for all good men" into "Now is the time for".
-     * </p>
-     *
-     * <p>
-     * Specifically:
-     * </p>
-     * <ul>
-     * <li>If {@code str} is less than {@code maxWidth} characters
-     * long, return it.</li>
-     * <li>Else truncate it to {@code substring(str, 0, maxWidth)}.</li>
-     * <li>If {@code maxWidth} is less than {@code 0}, throw an
-     * {@code IllegalArgumentException}.</li>
-     * <li>In no case will it return a String of length greater than
-     * {@code maxWidth}.</li>
-     * </ul>
-     *
-     * <pre>
-     * StringUtils.truncate(null, 0)       = null
-     * StringUtils.truncate(null, 2)       = null
-     * StringUtils.truncate("", 4)         = ""
-     * StringUtils.truncate("abcdefg", 4)  = "abcd"
-     * StringUtils.truncate("abcdefg", 6)  = "abcdef"
-     * StringUtils.truncate("abcdefg", 7)  = "abcdefg"
-     * StringUtils.truncate("abcdefg", 8)  = "abcdefg"
-     * StringUtils.truncate("abcdefg", -1) = throws an IllegalArgumentException
-     * </pre>
-     *
-     * @param str
-     *            the String to truncate, may be null
-     * @param maxWidth
-     *            maximum length of result String, must be positive
-     * @return truncated String, {@code null} if null String input
-     * @throws IllegalArgumentException
-     *             If {@code maxWidth} is less than {@code 0}
-     * @since 3.5
-     */
-    public static String truncate(final String str,final int maxWidth){
-        return truncate(str, 0, maxWidth);
-    }
-
-    /**
-     * <p>
-     * Truncates a String. This will turn
-     * "Now is the time for all good men" into "is the time for all".
-     * </p>
-     *
-     * <p>
-     * Works like {@code truncate(String, int)}, but allows you to specify
-     * a "left edge" offset.
-     *
-     * <p>
-     * Specifically:
-     * </p>
-     * <ul>
-     * <li>If {@code str} is less than {@code maxWidth} characters
-     * long, return it.</li>
-     * <li>Else truncate it to {@code substring(str, offset, maxWidth)}.</li>
-     * <li>If {@code maxWidth} is less than {@code 0}, throw an
-     * {@code IllegalArgumentException}.</li>
-     * <li>If {@code offset} is less than {@code 0}, throw an
-     * {@code IllegalArgumentException}.</li>
-     * <li>In no case will it return a String of length greater than
-     * {@code maxWidth}.</li>
-     * </ul>
-     *
-     * <pre>
-     * StringUtils.truncate(null, 0, 0) = null
-     * StringUtils.truncate(null, 2, 4) = null
-     * StringUtils.truncate("", 0, 10) = ""
-     * StringUtils.truncate("", 2, 10) = ""
-     * StringUtils.truncate("abcdefghij", 0, 3) = "abc"
-     * StringUtils.truncate("abcdefghij", 5, 6) = "fghij"
-     * StringUtils.truncate("raspberry peach", 10, 15) = "peach"
-     * StringUtils.truncate("abcdefghijklmno", 0, 10) = "abcdefghij"
-     * StringUtils.truncate("abcdefghijklmno", -1, 10) = throws an IllegalArgumentException
-     * StringUtils.truncate("abcdefghijklmno", Integer.MIN_VALUE, 10) = throws an IllegalArgumentException
-     * StringUtils.truncate("abcdefghijklmno", Integer.MIN_VALUE, Integer.MAX_VALUE) = throws an IllegalArgumentException
-     * StringUtils.truncate("abcdefghijklmno", 0, Integer.MAX_VALUE) = "abcdefghijklmno"
-     * StringUtils.truncate("abcdefghijklmno", 1, 10) = "bcdefghijk"
-     * StringUtils.truncate("abcdefghijklmno", 2, 10) = "cdefghijkl"
-     * StringUtils.truncate("abcdefghijklmno", 3, 10) = "defghijklm"
-     * StringUtils.truncate("abcdefghijklmno", 4, 10) = "efghijklmn"
-     * StringUtils.truncate("abcdefghijklmno", 5, 10) = "fghijklmno"
-     * StringUtils.truncate("abcdefghijklmno", 5, 5) = "fghij"
-     * StringUtils.truncate("abcdefghijklmno", 5, 3) = "fgh"
-     * StringUtils.truncate("abcdefghijklmno", 10, 3) = "klm"
-     * StringUtils.truncate("abcdefghijklmno", 10, Integer.MAX_VALUE) = "klmno"
-     * StringUtils.truncate("abcdefghijklmno", 13, 1) = "n"
-     * StringUtils.truncate("abcdefghijklmno", 13, Integer.MAX_VALUE) = "no"
-     * StringUtils.truncate("abcdefghijklmno", 14, 1) = "o"
-     * StringUtils.truncate("abcdefghijklmno", 14, Integer.MAX_VALUE) = "o"
-     * StringUtils.truncate("abcdefghijklmno", 15, 1) = ""
-     * StringUtils.truncate("abcdefghijklmno", 15, Integer.MAX_VALUE) = ""
-     * StringUtils.truncate("abcdefghijklmno", Integer.MAX_VALUE, Integer.MAX_VALUE) = ""
-     * StringUtils.truncate("abcdefghij", 3, -1) = throws an IllegalArgumentException
-     * StringUtils.truncate("abcdefghij", -2, 4) = throws an IllegalArgumentException
-     * </pre>
-     *
-     * @param str
-     *            the String to truncate, may be null
-     * @param offset
-     *            left edge of source String
-     * @param maxWidth
-     *            maximum length of result String, must be positive
-     * @return truncated String, {@code null} if null String input
-     * @throws IllegalArgumentException
-     *             If {@code offset} or {@code maxWidth} is less than {@code 0}
-     * @since 3.5
-     */
-    public static String truncate(final String str,final int offset,final int maxWidth){
-        if (offset < 0){
-            throw new IllegalArgumentException("offset cannot be negative");
-        }
-        if (maxWidth < 0){
-            throw new IllegalArgumentException("maxWith cannot be negative");
-        }
-        if (str == null){
-            return null;
-        }
-        if (offset > str.length()){
-            return EMPTY;
-        }
-        if (str.length() > maxWidth){
-            final int ix = offset + maxWidth > str.length() ? str.length() : offset + maxWidth;
-            return str.substring(offset, ix);
-        }
-        return str.substring(offset);
     }
 
     /**

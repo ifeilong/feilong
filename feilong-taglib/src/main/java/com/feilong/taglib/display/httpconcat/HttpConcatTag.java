@@ -16,7 +16,7 @@
 package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import javax.servlet.http.HttpServletRequest;
 

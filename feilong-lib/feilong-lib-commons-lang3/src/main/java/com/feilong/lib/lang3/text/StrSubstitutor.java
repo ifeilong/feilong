@@ -264,18 +264,6 @@ public class StrSubstitutor{
         return replace(source, valueMap);
     }
 
-    /**
-     * Replaces all the occurrences of variables in the given source object with
-     * their matching values from the system properties.
-     *
-     * @param source
-     *            the source text containing the variables to substitute, null returns null
-     * @return the result of the replace operation
-     */
-    public static String replaceSystemProperties(final Object source){
-        return new StrSubstitutor(StrLookup.systemPropertiesLookup()).replace(source);
-    }
-
     //-----------------------------------------------------------------------
     /**
      * Creates a new instance with defaults for variable prefix and suffix

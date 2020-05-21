@@ -21,6 +21,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.net.URIUtil.decode;
 import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
@@ -28,7 +29,6 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static com.feilong.lib.lang3.StringUtils.defaultString;
 import static java.util.Collections.emptyMap;
 

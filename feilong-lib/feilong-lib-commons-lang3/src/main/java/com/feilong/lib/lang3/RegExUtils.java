@@ -28,6 +28,8 @@ import java.util.regex.Pattern;
  */
 public class RegExUtils{
 
+    private static final String EMPTY = "";
+
     /**
      * <p>
      * Removes each substring of the text String that matches the given regular expression pattern.
@@ -35,7 +37,7 @@ public class RegExUtils{
      *
      * This method is a {@code null} safe equivalent to:
      * <ul>
-     * <li>{@code pattern.matcher(text).replaceAll(StringUtils.EMPTY)}</li>
+     * <li>{@code pattern.matcher(text).replaceAll(EMPTY)}</li>
      * </ul>
      *
      * <p>
@@ -67,7 +69,7 @@ public class RegExUtils{
      * @see java.util.regex.Pattern
      */
     public static String removeAll(final String text,final Pattern regex){
-        return replaceAll(text, regex, StringUtils.EMPTY);
+        return replaceAll(text, regex, EMPTY);
     }
 
     /**
@@ -77,8 +79,8 @@ public class RegExUtils{
      *
      * This method is a {@code null} safe equivalent to:
      * <ul>
-     * <li>{@code text.replaceAll(regex, StringUtils.EMPTY)}</li>
-     * <li>{@code Pattern.compile(regex).matcher(text).replaceAll(StringUtils.EMPTY)}</li>
+     * <li>{@code text.replaceAll(regex, EMPTY)}</li>
+     * <li>{@code Pattern.compile(regex).matcher(text).replaceAll(EMPTY)}</li>
      * </ul>
      *
      * <p>
@@ -121,7 +123,7 @@ public class RegExUtils{
      * @see java.util.regex.Pattern#DOTALL
      */
     public static String removeAll(final String text,final String regex){
-        return replaceAll(text, regex, StringUtils.EMPTY);
+        return replaceAll(text, regex, EMPTY);
     }
 
     /**
@@ -131,7 +133,7 @@ public class RegExUtils{
      *
      * This method is a {@code null} safe equivalent to:
      * <ul>
-     * <li>{@code pattern.matcher(text).replaceFirst(StringUtils.EMPTY)}</li>
+     * <li>{@code pattern.matcher(text).replaceFirst(EMPTY)}</li>
      * </ul>
      *
      * <p>
@@ -163,7 +165,7 @@ public class RegExUtils{
      * @see java.util.regex.Pattern
      */
     public static String removeFirst(final String text,final Pattern regex){
-        return replaceFirst(text, regex, StringUtils.EMPTY);
+        return replaceFirst(text, regex, EMPTY);
     }
 
     /**
@@ -173,8 +175,8 @@ public class RegExUtils{
      *
      * This method is a {@code null} safe equivalent to:
      * <ul>
-     * <li>{@code text.replaceFirst(regex, StringUtils.EMPTY)}</li>
-     * <li>{@code Pattern.compile(regex).matcher(text).replaceFirst(StringUtils.EMPTY)}</li>
+     * <li>{@code text.replaceFirst(regex, EMPTY)}</li>
+     * <li>{@code Pattern.compile(regex).matcher(text).replaceFirst(EMPTY)}</li>
      * </ul>
      *
      * <p>
@@ -216,7 +218,7 @@ public class RegExUtils{
      * @see java.util.regex.Pattern#DOTALL
      */
     public static String removeFirst(final String text,final String regex){
-        return replaceFirst(text, regex, StringUtils.EMPTY);
+        return replaceFirst(text, regex, EMPTY);
     }
 
     /**
@@ -226,8 +228,8 @@ public class RegExUtils{
      *
      * This call is a {@code null} safe equivalent to:
      * <ul>
-     * <li>{@code text.replaceAll(&quot;(?s)&quot; + regex, StringUtils.EMPTY)}</li>
-     * <li>{@code Pattern.compile(regex, Pattern.DOTALL).matcher(text).replaceAll(StringUtils.EMPTY)}</li>
+     * <li>{@code text.replaceAll(&quot;(?s)&quot; + regex, EMPTY)}</li>
+     * <li>{@code Pattern.compile(regex, Pattern.DOTALL).matcher(text).replaceAll(EMPTY)}</li>
      * </ul>
      *
      * <p>
@@ -251,7 +253,7 @@ public class RegExUtils{
      * @see Pattern#DOTALL
      */
     public static String removePattern(final String text,final String regex){
-        return replacePattern(text, regex, StringUtils.EMPTY);
+        return replacePattern(text, regex, EMPTY);
     }
 
     /**

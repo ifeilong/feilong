@@ -644,7 +644,7 @@ public class ObjectUtils{
      */
     @Deprecated
     public static String toString(final Object obj) {
-        return obj == null ? StringUtils.EMPTY : obj.toString();
+        return obj == null ? "" : obj.toString();
     }
 
     /**

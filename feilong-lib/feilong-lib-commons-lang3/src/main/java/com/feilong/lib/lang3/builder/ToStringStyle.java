@@ -24,7 +24,6 @@ import java.util.WeakHashMap;
 
 import com.feilong.lib.lang3.ClassUtils;
 import com.feilong.lib.lang3.ObjectUtils;
-import com.feilong.lib.lang3.StringUtils;
 
 /**
  * <p>
@@ -74,6 +73,8 @@ import com.feilong.lib.lang3.StringUtils;
  */
 @SuppressWarnings("deprecation") // StringEscapeUtils
 public abstract class ToStringStyle implements Serializable{
+
+    private static final String                                   EMPTY                = "";
 
     /**
      * Serialization version ID.
@@ -2147,7 +2148,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setArrayStart(String arrayStart){
         if (arrayStart == null){
-            arrayStart = StringUtils.EMPTY;
+            arrayStart = EMPTY;
         }
         this.arrayStart = arrayStart;
     }
@@ -2180,7 +2181,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setArrayEnd(String arrayEnd){
         if (arrayEnd == null){
-            arrayEnd = StringUtils.EMPTY;
+            arrayEnd = EMPTY;
         }
         this.arrayEnd = arrayEnd;
     }
@@ -2213,7 +2214,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setArraySeparator(String arraySeparator){
         if (arraySeparator == null){
-            arraySeparator = StringUtils.EMPTY;
+            arraySeparator = EMPTY;
         }
         this.arraySeparator = arraySeparator;
     }
@@ -2246,7 +2247,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setContentStart(String contentStart){
         if (contentStart == null){
-            contentStart = StringUtils.EMPTY;
+            contentStart = EMPTY;
         }
         this.contentStart = contentStart;
     }
@@ -2279,7 +2280,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setContentEnd(String contentEnd){
         if (contentEnd == null){
-            contentEnd = StringUtils.EMPTY;
+            contentEnd = EMPTY;
         }
         this.contentEnd = contentEnd;
     }
@@ -2312,7 +2313,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setFieldNameValueSeparator(String fieldNameValueSeparator){
         if (fieldNameValueSeparator == null){
-            fieldNameValueSeparator = StringUtils.EMPTY;
+            fieldNameValueSeparator = EMPTY;
         }
         this.fieldNameValueSeparator = fieldNameValueSeparator;
     }
@@ -2345,7 +2346,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setFieldSeparator(String fieldSeparator){
         if (fieldSeparator == null){
-            fieldSeparator = StringUtils.EMPTY;
+            fieldSeparator = EMPTY;
         }
         this.fieldSeparator = fieldSeparator;
     }
@@ -2436,7 +2437,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setNullText(String nullText){
         if (nullText == null){
-            nullText = StringUtils.EMPTY;
+            nullText = EMPTY;
         }
         this.nullText = nullText;
     }
@@ -2479,7 +2480,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setSizeStartText(String sizeStartText){
         if (sizeStartText == null){
-            sizeStartText = StringUtils.EMPTY;
+            sizeStartText = EMPTY;
         }
         this.sizeStartText = sizeStartText;
     }
@@ -2522,7 +2523,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setSizeEndText(String sizeEndText){
         if (sizeEndText == null){
-            sizeEndText = StringUtils.EMPTY;
+            sizeEndText = EMPTY;
         }
         this.sizeEndText = sizeEndText;
     }
@@ -2565,7 +2566,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setSummaryObjectStartText(String summaryObjectStartText){
         if (summaryObjectStartText == null){
-            summaryObjectStartText = StringUtils.EMPTY;
+            summaryObjectStartText = EMPTY;
         }
         this.summaryObjectStartText = summaryObjectStartText;
     }
@@ -2608,7 +2609,7 @@ public abstract class ToStringStyle implements Serializable{
      */
     protected void setSummaryObjectEndText(String summaryObjectEndText){
         if (summaryObjectEndText == null){
-            summaryObjectEndText = StringUtils.EMPTY;
+            summaryObjectEndText = EMPTY;
         }
         this.summaryObjectEndText = summaryObjectEndText;
     }
@@ -2779,8 +2780,8 @@ public abstract class ToStringStyle implements Serializable{
             this.setUseClassName(false);
             this.setUseIdentityHashCode(false);
             this.setUseFieldNames(false);
-            this.setContentStart(StringUtils.EMPTY);
-            this.setContentEnd(StringUtils.EMPTY);
+            this.setContentStart(EMPTY);
+            this.setContentEnd(EMPTY);
         }
 
         /**

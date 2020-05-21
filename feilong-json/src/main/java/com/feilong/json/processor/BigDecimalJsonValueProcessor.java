@@ -16,7 +16,7 @@
 package com.feilong.json.processor;
 
 import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.math.BigDecimal;
 

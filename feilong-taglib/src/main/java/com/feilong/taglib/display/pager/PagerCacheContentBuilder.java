@@ -23,7 +23,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_NAVIGATION_PAGE_NUMBER;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 import static com.feilong.taglib.display.pager.command.PagerConstants.I18N_FEILONG_PAGER;

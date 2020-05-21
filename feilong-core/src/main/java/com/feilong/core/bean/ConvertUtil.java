@@ -16,10 +16,10 @@
 package com.feilong.core.bean;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
 import static java.util.Collections.emptyMap;
 
 import java.math.BigDecimal;

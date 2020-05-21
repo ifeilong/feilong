@@ -26,7 +26,6 @@ import java.util.Objects;
 
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.CharUtils;
-import com.feilong.lib.lang3.StringUtils;
 
 /**
  * Builds a string from constituent parts providing a more flexible and powerful API
@@ -78,29 +77,31 @@ import com.feilong.lib.lang3.StringUtils;
 @Deprecated
 public class StrBuilder implements CharSequence,Appendable,Serializable{
 
+    private static final String EMPTY            = "";
+
     /**
      * The extra capacity for new builders.
      */
-    static final int          CAPACITY         = 32;
+    static final int            CAPACITY         = 32;
 
     /**
      * Required for serialization support.
      *
      * @see java.io.Serializable
      */
-    private static final long serialVersionUID = 7628716375283629643L;
+    private static final long   serialVersionUID = 7628716375283629643L;
 
     /** Internal data storage. */
-    protected char[]          buffer;                                 // TODO make private?
+    protected char[]            buffer;                                 // TODO make private?
 
     /** Current size of the buffer. */
-    protected int             size;                                   // TODO make private?
+    protected int               size;                                   // TODO make private?
 
     /** The new line. */
-    private String            newLine;
+    private String              newLine;
 
     /** The null text. */
-    private String            nullText;
+    private String              nullText;
 
     //-----------------------------------------------------------------------
     /**
@@ -1637,7 +1638,7 @@ public class StrBuilder implements CharSequence,Appendable,Serializable{
             ensureCapacity(size + width);
             String str = (obj == null ? getNullText() : obj.toString());
             if (str == null){
-                str = StringUtils.EMPTY;
+                str = EMPTY;
             }
             final int strLen = str.length();
             if (strLen >= width){
@@ -1690,7 +1691,7 @@ public class StrBuilder implements CharSequence,Appendable,Serializable{
             ensureCapacity(size + width);
             String str = (obj == null ? getNullText() : obj.toString());
             if (str == null){
-                str = StringUtils.EMPTY;
+                str = EMPTY;
             }
             final int strLen = str.length();
             if (strLen >= width){
@@ -2521,7 +2522,7 @@ public class StrBuilder implements CharSequence,Appendable,Serializable{
      */
     public String leftString(final int length){
         if (length <= 0){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }else if (length >= size){
             return new String(buffer, 0, size);
         }else{
@@ -2544,7 +2545,7 @@ public class StrBuilder implements CharSequence,Appendable,Serializable{
      */
     public String rightString(final int length){
         if (length <= 0){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }else if (length >= size){
             return new String(buffer, 0, size);
         }else{
@@ -2575,7 +2576,7 @@ public class StrBuilder implements CharSequence,Appendable,Serializable{
             index = 0;
         }
         if (length <= 0 || index >= size){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         if (size <= index + length){
             return new String(buffer, index, size - index);

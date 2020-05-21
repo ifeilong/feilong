@@ -17,7 +17,7 @@ package com.feilong.core.lang.reflect;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.selectRejected;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 

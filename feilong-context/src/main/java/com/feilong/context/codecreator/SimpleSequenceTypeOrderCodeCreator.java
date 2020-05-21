@@ -16,8 +16,8 @@
 package com.feilong.context.codecreator;
 
 import static com.feilong.core.date.DateUtil.now;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
-import static com.feilong.lib.lang3.StringUtils.SPACE;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import java.util.Date;
 

@@ -18,7 +18,7 @@ package com.feilong.core.net;
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.lib.lang3.StringUtils.INDEX_NOT_FOUND;
 import static com.feilong.lib.lang3.StringUtils.isEmpty;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;

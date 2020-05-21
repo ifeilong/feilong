@@ -16,7 +16,7 @@
 package com.feilong.security.oneway;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;

@@ -17,7 +17,7 @@ package com.feilong.formatter;
 
 import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.util.Collections.emptyMap;
 import static org.junit.Assert.assertEquals;
 

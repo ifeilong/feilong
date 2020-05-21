@@ -17,12 +17,12 @@ package com.feilong.formatter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.core.util.CollectionsUtil.addIgnoreNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
-import static com.feilong.lib.lang3.StringUtils.SPACE;
 import static java.lang.Math.max;
 
 import java.util.ArrayList;

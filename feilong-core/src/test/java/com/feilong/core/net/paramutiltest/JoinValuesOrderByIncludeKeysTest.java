@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net.paramutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
@@ -23,9 +25,6 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.net.ParamUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
 
 /**
  * The Class ParamUtilJoinValuesOrderByIncludeKeysTest.

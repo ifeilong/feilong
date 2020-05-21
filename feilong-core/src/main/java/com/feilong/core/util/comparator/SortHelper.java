@@ -16,7 +16,7 @@
 package com.feilong.core.util.comparator;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.lib.lang3.StringUtils.SPACE;
+import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import com.feilong.core.lang.StringUtil;

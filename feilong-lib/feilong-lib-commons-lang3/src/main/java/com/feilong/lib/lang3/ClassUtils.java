@@ -49,6 +49,8 @@ import com.feilong.lib.lang3.ClassUtils.Interfaces;
  */
 public class ClassUtils{
 
+    private static final String EMPTY = "";
+
     /**
      * Inclusivity literals for {@link #hierarchy(Class, Interfaces)}.
      * 
@@ -217,7 +219,7 @@ public class ClassUtils{
      */
     public static String getShortClassName(final Class<?> cls){
         if (cls == null){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return getShortClassName(cls.getName());
     }
@@ -260,7 +262,7 @@ public class ClassUtils{
      */
     public static String getShortClassName(String className){
         if (StringUtils.isEmpty(className)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         final StringBuilder arrayPrefix = new StringBuilder();
@@ -302,7 +304,7 @@ public class ClassUtils{
      * @see Class#getSimpleName()
      */
     public static String getSimpleName(final Class<?> cls){
-        return getSimpleName(cls, StringUtils.EMPTY);
+        return getSimpleName(cls, EMPTY);
     }
 
     /**
@@ -343,7 +345,7 @@ public class ClassUtils{
      * @see Class#getSimpleName()
      */
     public static String getSimpleName(final Object object){
-        return getSimpleName(object, StringUtils.EMPTY);
+        return getSimpleName(object, EMPTY);
     }
 
     /**
@@ -376,7 +378,7 @@ public class ClassUtils{
      * @see Class#getSimpleName()
      */
     public static String getName(final Class<?> cls){
-        return getName(cls, StringUtils.EMPTY);
+        return getName(cls, EMPTY);
     }
 
     /**
@@ -408,7 +410,7 @@ public class ClassUtils{
      * @see Class#getSimpleName()
      */
     public static String getName(final Object object){
-        return getName(object, StringUtils.EMPTY);
+        return getName(object, EMPTY);
     }
 
     /**
@@ -459,7 +461,7 @@ public class ClassUtils{
      */
     public static String getPackageName(final Class<?> cls){
         if (cls == null){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return getPackageName(cls.getName());
     }
@@ -482,7 +484,7 @@ public class ClassUtils{
      */
     public static String getPackageName(String className){
         if (StringUtils.isEmpty(className)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         // Strip array encoding
@@ -496,7 +498,7 @@ public class ClassUtils{
 
         final int i = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
         if (i == -1){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return className.substring(0, i);
     }
@@ -520,7 +522,7 @@ public class ClassUtils{
      */
     public static String getAbbreviatedName(final Class<?> cls,final int lengthHint){
         if (cls == null){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return getAbbreviatedName(cls.getName(), lengthHint);
     }
@@ -613,7 +615,7 @@ public class ClassUtils{
             throw new IllegalArgumentException("len must be > 0");
         }
         if (className == null){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         if (className.length() <= lengthHint){
             return className;
@@ -1516,7 +1518,7 @@ public class ClassUtils{
      * @see Class#getCanonicalName()
      */
     public static String getCanonicalName(final Class<?> cls){
-        return getCanonicalName(cls, StringUtils.EMPTY);
+        return getCanonicalName(cls, EMPTY);
     }
 
     /**
@@ -1552,7 +1554,7 @@ public class ClassUtils{
      * @see Class#getCanonicalName()
      */
     public static String getCanonicalName(final Object object){
-        return getCanonicalName(object, StringUtils.EMPTY);
+        return getCanonicalName(object, EMPTY);
     }
 
     /**
@@ -1588,7 +1590,7 @@ public class ClassUtils{
      */
     public static String getShortCanonicalName(final Class<?> cls){
         if (cls == null){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return getShortCanonicalName(cls.getName());
     }
@@ -1729,7 +1731,7 @@ public class ClassUtils{
      */
     public static String getPackageCanonicalName(final Class<?> cls){
         if (cls == null){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return getPackageCanonicalName(cls.getName());
     }

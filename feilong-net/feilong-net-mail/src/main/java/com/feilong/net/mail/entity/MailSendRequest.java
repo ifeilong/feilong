@@ -15,7 +15,7 @@
  */
 package com.feilong.net.mail.entity;
 
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 
 /**
  * 邮件发送请求.

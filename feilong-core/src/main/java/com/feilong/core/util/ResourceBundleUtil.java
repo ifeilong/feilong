@@ -19,7 +19,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.util.Collections.emptyMap;
 
 import java.io.IOException;

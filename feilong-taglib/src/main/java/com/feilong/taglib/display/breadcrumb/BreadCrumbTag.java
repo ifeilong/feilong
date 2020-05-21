@@ -16,7 +16,7 @@
 package com.feilong.taglib.display.breadcrumb;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.util.List;
 

@@ -18,7 +18,7 @@ package com.feilong.xml;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
-import static com.feilong.lib.lang3.StringUtils.EMPTY;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.util.Collections.emptyMap;
 
 import java.io.StringWriter;
