@@ -16,7 +16,7 @@
 package com.feilong.net.filetransfer.sftp;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

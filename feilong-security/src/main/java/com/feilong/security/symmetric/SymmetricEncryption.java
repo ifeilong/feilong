@@ -16,7 +16,7 @@
 package com.feilong.security.symmetric;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.security.symmetric.LogBuilder.errorMessage;
 
 import java.security.Key;

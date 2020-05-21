@@ -16,10 +16,10 @@
 package com.feilong.core.bean;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
 import static java.util.Collections.emptyMap;
 
 import java.math.BigDecimal;
@@ -535,7 +535,6 @@ public final class ConvertUtil{
      *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
      * @see com.feilong.lib.beanutils.converters.IntegerConverter
-     * @see com.feilong.lib.lang3.ObjectUtils#defaultIfNull(Object, Object)
      * @since 1.6.1
      */
     public static Integer toInteger(Object toBeConvertedValue,Integer defaultValue){

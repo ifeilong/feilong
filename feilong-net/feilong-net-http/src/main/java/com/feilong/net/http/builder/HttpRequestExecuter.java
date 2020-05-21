@@ -16,7 +16,7 @@
 package com.feilong.net.http.builder;
 
 import static com.feilong.core.date.DateUtil.now;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.util.Date;
 

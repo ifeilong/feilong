@@ -16,7 +16,7 @@
 package com.feilong.json;
 
 import static com.feilong.json.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.util.Iterator;
 import java.util.Map;

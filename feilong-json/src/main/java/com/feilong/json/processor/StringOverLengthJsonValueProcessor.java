@@ -15,7 +15,7 @@
  */
 package com.feilong.json.processor;
 
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import com.feilong.core.lang.StringUtil;

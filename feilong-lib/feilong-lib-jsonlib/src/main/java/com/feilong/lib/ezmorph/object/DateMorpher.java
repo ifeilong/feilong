@@ -16,7 +16,7 @@
 
 package com.feilong.lib.ezmorph.object;
 
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

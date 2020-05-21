@@ -17,7 +17,7 @@ package com.feilong.csv;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.util.ArrayList;
 import java.util.List;

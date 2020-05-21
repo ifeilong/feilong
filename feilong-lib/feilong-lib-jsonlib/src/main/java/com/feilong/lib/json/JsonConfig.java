@@ -18,7 +18,7 @@ package com.feilong.lib.json;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.util.Collection;
 import java.util.HashMap;

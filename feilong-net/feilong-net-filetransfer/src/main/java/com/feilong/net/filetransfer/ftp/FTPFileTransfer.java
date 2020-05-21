@@ -18,7 +18,7 @@ package com.feilong.net.filetransfer.ftp;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;

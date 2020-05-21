@@ -15,7 +15,7 @@
  */
 package com.feilong.taglib.display.httpconcat.builder;
 
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 import static java.lang.System.lineSeparator;
 

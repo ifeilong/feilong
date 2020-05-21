@@ -15,7 +15,7 @@
  */
 package com.feilong.core.text;
 
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static java.math.RoundingMode.HALF_UP;
 
 import java.math.RoundingMode;

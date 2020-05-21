@@ -18,7 +18,7 @@ package com.feilong.servlet.http;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION_TYPE;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_MESSAGE;

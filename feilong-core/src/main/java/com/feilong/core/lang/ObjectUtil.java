@@ -17,7 +17,6 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
-import com.feilong.lib.lang3.ObjectUtils;
 import com.feilong.lib.lang3.Validate;
 
 /**
@@ -70,7 +69,7 @@ public final class ObjectUtil{
      * <ol>
      * <li>使用该方法,可以简化你的代码</li>
      * <li>如果使用 import static 的特性,代码会更加简洁</li>
-     * <li>如果你只需要判断 null的场景,你可以使用 {@link ObjectUtils#defaultIfNull(Object, Object)}</li>
+     * <li>如果你只需要判断 null的场景,你可以使用 {@link #defaultIfNull(Object, Object)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -137,12 +136,36 @@ public final class ObjectUtil{
      * @param defaultValue
      *            the default value to return, 可以是 {@code null} or empty
      * @return 如果 <code>object</code> 是null或者empty,返回 <code>defaultValue</code>,否则返回 <code>object</code>
-     * @see com.feilong.lib.lang3.ObjectUtils#defaultIfNull(Object, Object)
+     * @see #defaultIfNull(Object, Object)
      * @see com.feilong.lib.collection4.ListUtils#defaultIfNull(java.util.List, java.util.List)
      * @since 1.7.2
      */
     public static <T> T defaultIfNullOrEmpty(final T object,final T defaultValue){
         return isNotNullOrEmpty(object) ? object : defaultValue;
+    }
+
+    /**
+     * Returns a default value if the object passed is {@code null}.
+     *
+     * <pre>
+     * ObjectUtil.defaultIfNull(null, null)      = null
+     * ObjectUtil.defaultIfNull(null, "")        = ""
+     * ObjectUtil.defaultIfNull(null, "zz")      = "zz"
+     * ObjectUtil.defaultIfNull("abc", *)        = "abc"
+     * ObjectUtil.defaultIfNull(Boolean.TRUE, *) = Boolean.TRUE
+     * </pre>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param object
+     *            the {@code Object} to test, may be {@code null}
+     * @param defaultValue
+     *            the default value to return, may be {@code null}
+     * @return {@code object} if it is not {@code null}, defaultValue otherwise
+     * @since 3.0.0
+     */
+    public static <T> T defaultIfNull(final T object,final T defaultValue){
+        return object != null ? object : defaultValue;
     }
 
     //---------------------------------------------------------------

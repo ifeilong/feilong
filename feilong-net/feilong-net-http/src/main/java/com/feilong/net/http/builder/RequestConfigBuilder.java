@@ -17,7 +17,7 @@ package com.feilong.net.http.builder;
 
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.lib.lang3.ObjectUtils.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.CookieSpecs;
