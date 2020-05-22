@@ -16,7 +16,7 @@
 package com.feilong.core.lang.stringutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
@@ -29,7 +29,6 @@ import com.feilong.core.lang.StringUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class TokenizeToStringArrayWithArgsTest{
-    //******************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String, boolean, boolean)**************************************************************************************
 
     /**
      * Tokenize to string array2.

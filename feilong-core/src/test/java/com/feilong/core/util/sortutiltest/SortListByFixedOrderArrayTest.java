@@ -18,7 +18,7 @@ package com.feilong.core.util.sortutiltest;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sortListByFixedOrderArray;
-import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;

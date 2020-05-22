@@ -15,8 +15,8 @@
  */
 package com.feilong.core.util.resourcebundleutiltest;
 
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
-import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static java.util.Collections.emptyMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

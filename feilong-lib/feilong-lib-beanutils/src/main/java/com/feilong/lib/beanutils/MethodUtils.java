@@ -51,8 +51,9 @@ import org.slf4j.LoggerFactory;
  * </p>
  *
  * @version $Id$
+ * @deprecated may be can use com.feilong.lib.lang3.reflect.MethodUtils
  */
-
+@Deprecated
 public class MethodUtils{
 
     /** The Constant log. */

@@ -15,6 +15,7 @@
  */
 package com.feilong.io;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,9 +30,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.io.IOUtils;
-import com.feilong.core.Validate;
 import com.feilong.lib.springframework.core.io.DefaultResourceLoader;
 import com.feilong.lib.springframework.core.io.Resource;
 import com.feilong.lib.springframework.core.io.ResourceLoader;
@@ -179,7 +180,8 @@ public final class InputStreamUtil{
      * @see java.io.InputStreamReader#InputStreamReader(InputStream, String)
      * @see com.feilong.lib.io.IOUtils#toBufferedReader(Reader)
      */
-    public static Reader toBufferedReader(InputStream inputStream,String charsetName){
+    // 返回 BufferedReader , 方便调用者使用 BufferedReader readLine功能
+    public static BufferedReader toBufferedReader(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         try{

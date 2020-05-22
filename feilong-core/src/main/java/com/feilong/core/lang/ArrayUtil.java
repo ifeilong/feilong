@@ -64,6 +64,15 @@ import com.feilong.core.Validate;
  */
 public final class ArrayUtil{
 
+    /**
+     * An empty immutable {@code String} array.
+     * 
+     * @since 3.0.0
+     */
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private ArrayUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.

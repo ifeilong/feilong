@@ -17,6 +17,7 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.UncheckedIOException;
@@ -28,9 +29,8 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import com.feilong.core.CharsetType;
-import com.feilong.lib.lang3.ArrayUtils;
-import com.feilong.lib.lang3.StringUtils;
 import com.feilong.core.Validate;
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.text.StrSubstitutor;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -672,14 +672,14 @@ public final class StringUtil{
      * @param regexSpliter
      *            此处不是简单的分隔符,是正则表达式,<b>.$|()[{^?*+\\</b> 有特殊的含义,因此我们使用.的时候必须进行转义,<span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
-     * @return 如果 <code>value</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link ArrayUtil#EMPTY_STRING_ARRAY}<br>
      * @see String#split(String)
      * @see String#split(String, int)
      * @see StringUtils#split(String)
      * @see java.util.regex.Pattern#split(CharSequence)
      */
     public static String[] split(String value,String regexSpliter){
-        return isNullOrEmpty(value) ? ArrayUtils.EMPTY_STRING_ARRAY : value.split(regexSpliter);
+        return isNullOrEmpty(value) ? EMPTY_STRING_ARRAY : value.split(regexSpliter);
     }
 
     // [end]
@@ -738,8 +738,8 @@ public final class StringUtil{
      * @param delimiters
      *            delimiter characters, assembled as String<br>
      *            参数中的所有字符都是分隔标记的分隔符,比如这里可以设置成 ";, " ,spring就是使用这样的字符串来分隔数组/集合的
-     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
-     *         如果 <code>str</code> 是blank,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
+     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtil#EMPTY_STRING_ARRAY}<br>
+     *         如果 <code>str</code> 是blank,返回 {@link ArrayUtil#EMPTY_STRING_ARRAY}<br>
      * @see java.util.StringTokenizer
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
@@ -791,7 +791,7 @@ public final class StringUtil{
      * @param ignoreEmptyTokens
      *            是否忽视空白的token,如果为true,那么token必须长度 {@code >} 0;如果为false会包含长度=0 空白的字符<br>
      *            (仅仅用于那些 trim之后是empty的tokens,StringTokenizer不会考虑subsequent delimiters as token in the first place).
-     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
+     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtil#EMPTY_STRING_ARRAY}<br>
      * @see java.util.StringTokenizer
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
@@ -800,7 +800,7 @@ public final class StringUtil{
      */
     public static String[] tokenizeToStringArray(String str,String delimiters,boolean trimTokens,boolean ignoreEmptyTokens){
         if (null == str){
-            return ArrayUtils.EMPTY_STRING_ARRAY;
+            return EMPTY_STRING_ARRAY;
         }
 
         List<String> tokens = newArrayList();

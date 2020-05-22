@@ -21,14 +21,14 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.net.URIUtil.decode;
 import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
-import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.lib.lang3.StringUtils.defaultString;
 import static java.util.Collections.emptyMap;
 
@@ -41,12 +41,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 
 /**
  * 处理参数相关.

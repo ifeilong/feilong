@@ -157,7 +157,10 @@ public class ArrayUtils{
 
     /**
      * An empty immutable {@code String} array.
+     * 
+     * @deprecated use feilong
      */
+    @Deprecated
     public static final String[]    EMPTY_STRING_ARRAY           = new String[0];
 
     /**
@@ -10418,18 +10421,5 @@ public class ArrayUtils{
         }
 
         return result;
-    }
-
-    /**
-     * <p>
-     * ArrayUtils instances should NOT be constructed in standard programming.
-     * Instead, the class should be used as {@code ArrayUtils.clone(new int[] {2})}.
-     *
-     * <p>
-     * This constructor is public to permit tools that require a JavaBean instance
-     * to operate.
-     */
-    public ArrayUtils(){
-        super();
     }
 }

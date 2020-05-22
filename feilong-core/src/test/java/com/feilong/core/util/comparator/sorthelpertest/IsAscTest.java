@@ -16,12 +16,12 @@
 package com.feilong.core.util.comparator.sorthelpertest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.SortHelper;
-import com.feilong.lib.lang3.ArrayUtils;
 
 /**
  * The Class IsAscTest.
@@ -81,7 +81,7 @@ public class IsAscTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyNameAndOrderArrayIsEmpty(){
-        SortHelper.isAsc(ArrayUtils.EMPTY_STRING_ARRAY);
+        SortHelper.isAsc(EMPTY_STRING_ARRAY);
     }
 
     /**

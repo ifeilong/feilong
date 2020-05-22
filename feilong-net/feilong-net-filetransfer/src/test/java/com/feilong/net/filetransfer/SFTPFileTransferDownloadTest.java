@@ -15,7 +15,7 @@
  */
 package com.feilong.net.filetransfer;
 
-import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

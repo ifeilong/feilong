@@ -17,7 +17,7 @@ package com.feilong.core.util.sortutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortArray;
-import static com.feilong.lib.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Comparator;

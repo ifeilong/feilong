@@ -16,7 +16,6 @@
  */
 package com.feilong.lib.lang3;
 
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -46,31 +45,6 @@ import java.util.function.Supplier;
 public class ObjectUtils{
 
     private static final char AT_SIGN = '@';
-
-    /**
-     * <p>
-     * Singleton used as a {@code null} placeholder where
-     * {@code null} has another meaning.
-     * </p>
-     *
-     * <p>
-     * For example, in a {@code HashMap} the
-     * {@link java.util.HashMap#get(java.lang.Object)} method returns
-     * {@code null} if the {@code Map} contains {@code null} or if there
-     * is no matching key. The {@code Null} placeholder can be used to
-     * distinguish between these two cases.
-     * </p>
-     *
-     * <p>
-     * Another example is {@code Hashtable}, where {@code null}
-     * cannot be stored.
-     * </p>
-     *
-     * <p>
-     * This instance is Serializable.
-     * </p>
-     */
-    public static final Null  NULL    = new Null();
 
     // Empty checks
     //-----------------------------------------------------------------------
@@ -450,68 +424,6 @@ public class ObjectUtils{
         return obj == null ? nullStr : obj.toString();
     }
 
-    // Comparable
-    //-----------------------------------------------------------------------
-    /**
-     * <p>
-     * Null safe comparison of Comparables.
-     * </p>
-     *
-     * @param <T>
-     *            type of the values processed by this method
-     * @param values
-     *            the set of comparable values, may be null
-     * @return
-     *         <ul>
-     *         <li>If any objects are non-null and unequal, the lesser object.
-     *         <li>If all objects are non-null and equal, the first.
-     *         <li>If any of the comparables are null, the lesser of the non-null objects.
-     *         <li>If all the comparables are null, null is returned.
-     *         </ul>
-     */
-    @SafeVarargs
-    public static <T extends Comparable<? super T>> T min(final T...values){
-        T result = null;
-        if (values != null){
-            for (final T value : values){
-                if (compare(value, result, true) < 0){
-                    result = value;
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
-     * <p>
-     * Null safe comparison of Comparables.
-     * </p>
-     *
-     * @param <T>
-     *            type of the values processed by this method
-     * @param values
-     *            the set of comparable values, may be null
-     * @return
-     *         <ul>
-     *         <li>If any objects are non-null and unequal, the greater object.
-     *         <li>If all objects are non-null and equal, the first.
-     *         <li>If any of the comparables are null, the greater of the non-null objects.
-     *         <li>If all the comparables are null, null is returned.
-     *         </ul>
-     */
-    @SafeVarargs
-    public static <T extends Comparable<? super T>> T max(final T...values){
-        T result = null;
-        if (values != null){
-            for (final T value : values){
-                if (compare(value, result, false) > 0){
-                    result = value;
-                }
-            }
-        }
-        return result;
-    }
-
     /**
      * <p>
      * Null safe comparison of Comparables.
@@ -642,55 +554,6 @@ public class ObjectUtils{
         return clone == null ? obj : clone;
     }
 
-    // Null
-    //-----------------------------------------------------------------------
-    /**
-     * <p>
-     * Class used as a null placeholder where {@code null}
-     * has another meaning.
-     * </p>
-     *
-     * <p>
-     * For example, in a {@code HashMap} the
-     * {@link java.util.HashMap#get(java.lang.Object)} method returns
-     * {@code null} if the {@code Map} contains {@code null} or if there is
-     * no matching key. The {@code Null} placeholder can be used to distinguish
-     * between these two cases.
-     * </p>
-     *
-     * <p>
-     * Another example is {@code Hashtable}, where {@code null}
-     * cannot be stored.
-     * </p>
-     */
-    public static class Null implements Serializable{
-
-        /**
-         * Required for serialization support. Declare serialization compatibility with Commons Lang 1.0
-         *
-         * @see java.io.Serializable
-         */
-        private static final long serialVersionUID = 7092611880189329093L;
-
-        /**
-         * Restricted constructor - singleton.
-         */
-        Null(){
-            super();
-        }
-
-        /**
-         * <p>
-         * Ensure singleton.
-         * </p>
-         *
-         * @return the singleton value
-         */
-        private Object readResolve(){
-            return NULL;
-        }
-    }
-
     // Constants (LANG-816):
     /*
      * These methods ensure constants are not inlined by javac.
@@ -710,152 +573,5 @@ public class ObjectUtils{
      * 
      * public final static int MAGIC_NUMBER = CONST(5);
      */
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     * 
-     * public final static short MAGIC_SHORT = ObjectUtils.CONST_SHORT(127);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v
-     *            the short literal (as an int) value to return
-     * @throws IllegalArgumentException
-     *             if the value passed to v
-     *             is larger than a short, that is, smaller than -32768 or
-     *             larger than 32767.
-     * @return the byte v, unchanged
-     * @since 3.2
-     */
-    public static short CONST_SHORT(final int v){
-        if (v < Short.MIN_VALUE || v > Short.MAX_VALUE){
-            throw new IllegalArgumentException("Supplied value must be a valid byte literal between -32768 and 32767: [" + v + "]");
-        }
-        return (short) v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     * 
-     * public final static int MAGIC_INT = ObjectUtils.CONST(123);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v
-     *            the int value to return
-     * @return the int v, unchanged
-     * @since 3.2
-     */
-    public static int CONST(final int v){
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     * 
-     * public final static long MAGIC_LONG = ObjectUtils.CONST(123L);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v
-     *            the long value to return
-     * @return the long v, unchanged
-     * @since 3.2
-     */
-    public static long CONST(final long v){
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     * 
-     * public final static float MAGIC_FLOAT = ObjectUtils.CONST(1.0f);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v
-     *            the float value to return
-     * @return the float v, unchanged
-     * @since 3.2
-     */
-    public static float CONST(final float v){
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     * 
-     * public final static double MAGIC_DOUBLE = ObjectUtils.CONST(1.0);
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param v
-     *            the double value to return
-     * @return the double v, unchanged
-     * @since 3.2
-     */
-    public static double CONST(final double v){
-        return v;
-    }
-
-    /**
-     * This method returns the provided value unchanged.
-     * This can prevent javac from inlining a constant
-     * field, e.g.,
-     *
-     * <pre>
-     * 
-     * public final static String MAGIC_STRING = ObjectUtils.CONST("abc");
-     * </pre>
-     *
-     * This way any jars that refer to this field do not
-     * have to recompile themselves if the field's value
-     * changes at some future date.
-     *
-     * @param <T>
-     *            the Object type
-     * @param v
-     *            the genericized Object value to return (typically a String).
-     * @return the genericized Object v, unchanged (typically a String).
-     * @since 3.2
-     */
-    public static <T> T CONST(final T v){
-        return v;
-    }
 
 }
