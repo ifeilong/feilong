@@ -53,23 +53,6 @@ import java.util.Map;
  */
 public class SerializationUtils{
 
-    /**
-     * <p>
-     * SerializationUtils instances should NOT be constructed in standard programming.
-     * Instead, the class should be used as {@code SerializationUtils.clone(object)}.
-     * </p>
-     *
-     * <p>
-     * This constructor is public to permit tools that require a JavaBean instance
-     * to operate.
-     * </p>
-     * 
-     * @since 2.0
-     */
-    public SerializationUtils(){
-        super();
-    }
-
     // Clone
     //-----------------------------------------------------------------------
     /**
@@ -115,22 +98,6 @@ public class SerializationUtils{
         }catch (final IOException ex){
             throw new IllegalArgumentException("IOException while reading or closing cloned object data", ex);
         }
-    }
-
-    /**
-     * Performs a serialization roundtrip. Serializes and deserializes the given object, great for testing objects that
-     * implement {@link Serializable}.
-     *
-     * @param <T>
-     *            the type of the object involved
-     * @param msg
-     *            the object to roundtrip
-     * @return the serialized and deserialized object
-     * @since 3.3
-     */
-    @SuppressWarnings("unchecked") // OK, because we serialized a type `T`
-    public static <T extends Serializable> T roundtrip(final T msg){
-        return (T) deserialize(serialize(msg));
     }
 
     // Serialize

@@ -3842,50 +3842,6 @@ public class StringUtils{
         return false;
     }
 
-    /**
-     * <p>
-     * Checks if the CharSequence contains only ASCII printable characters.
-     * </p>
-     *
-     * <p>
-     * {@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code true}.
-     * </p>
-     *
-     * <pre>
-     * StringUtils.isAsciiPrintable(null)     = false
-     * StringUtils.isAsciiPrintable("")       = true
-     * StringUtils.isAsciiPrintable(" ")      = true
-     * StringUtils.isAsciiPrintable("Ceki")   = true
-     * StringUtils.isAsciiPrintable("ab2c")   = true
-     * StringUtils.isAsciiPrintable("!ab-c~") = true
-     * StringUtils.isAsciiPrintable("\u0020") = true
-     * StringUtils.isAsciiPrintable("\u0021") = true
-     * StringUtils.isAsciiPrintable("\u007e") = true
-     * StringUtils.isAsciiPrintable("\u007f") = false
-     * StringUtils.isAsciiPrintable("Ceki G\u00fclc\u00fc") = false
-     * </pre>
-     *
-     * @param cs
-     *            the CharSequence to check, may be null
-     * @return {@code true} if every character is in the range
-     *         32 thru 126
-     * @since 2.1
-     * @since 3.0 Changed signature from isAsciiPrintable(String) to isAsciiPrintable(CharSequence)
-     */
-    public static boolean isAsciiPrintable(final CharSequence cs){
-        if (cs == null){
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++){
-            if (!CharUtils.isAsciiPrintable(cs.charAt(i))){
-                return false;
-            }
-        }
-        return true;
-    }
-
     // Nested extraction
     //-----------------------------------------------------------------------
 
@@ -7552,42 +7508,6 @@ public class StringUtils{
             return null;
         }
         return new StringBuilder(str).reverse().toString();
-    }
-
-    /**
-     * <p>
-     * Reverses a String that is delimited by a specific character.
-     * </p>
-     *
-     * <p>
-     * The Strings between the delimiters are not reversed.
-     * Thus java.lang.String becomes String.lang.java (if the delimiter
-     * is {@code '.'}).
-     * </p>
-     *
-     * <pre>
-     * StringUtils.reverseDelimited(null, *)      = null
-     * StringUtils.reverseDelimited("", *)        = ""
-     * StringUtils.reverseDelimited("a.b.c", 'x') = "a.b.c"
-     * StringUtils.reverseDelimited("a.b.c", ".") = "c.b.a"
-     * </pre>
-     *
-     * @param str
-     *            the String to reverse, may be null
-     * @param separatorChar
-     *            the separator character to use
-     * @return the reversed String, {@code null} if null String input
-     * @since 2.0
-     */
-    public static String reverseDelimited(final String str,final char separatorChar){
-        if (str == null){
-            return null;
-        }
-        // could implement manually, but simple way is to reuse other,
-        // probably slower, methods.
-        final String[] strs = split(str, separatorChar);
-        ArrayUtils.reverse(strs);
-        return join(strs, separatorChar);
     }
 
     /**

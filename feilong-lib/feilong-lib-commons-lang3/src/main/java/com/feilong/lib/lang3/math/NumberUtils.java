@@ -54,57 +54,6 @@ public class NumberUtils{
     /** Reusable Integer constant for minus one. */
     public static final Integer INTEGER_MINUS_ONE = Integer.valueOf(-1);
 
-    /** Reusable Short constant for zero. */
-    public static final Short   SHORT_ZERO        = Short.valueOf((short) 0);
-
-    /** Reusable Short constant for one. */
-    public static final Short   SHORT_ONE         = Short.valueOf((short) 1);
-
-    /** Reusable Short constant for minus one. */
-    public static final Short   SHORT_MINUS_ONE   = Short.valueOf((short) -1);
-
-    /** Reusable Byte constant for zero. */
-    public static final Byte    BYTE_ZERO         = Byte.valueOf((byte) 0);
-
-    /** Reusable Byte constant for one. */
-    public static final Byte    BYTE_ONE          = Byte.valueOf((byte) 1);
-
-    /** Reusable Byte constant for minus one. */
-    public static final Byte    BYTE_MINUS_ONE    = Byte.valueOf((byte) -1);
-
-    /** Reusable Double constant for zero. */
-    public static final Double  DOUBLE_ZERO       = Double.valueOf(0.0d);
-
-    /** Reusable Double constant for one. */
-    public static final Double  DOUBLE_ONE        = Double.valueOf(1.0d);
-
-    /** Reusable Double constant for minus one. */
-    public static final Double  DOUBLE_MINUS_ONE  = Double.valueOf(-1.0d);
-
-    /** Reusable Float constant for zero. */
-    public static final Float   FLOAT_ZERO        = Float.valueOf(0.0f);
-
-    /** Reusable Float constant for one. */
-    public static final Float   FLOAT_ONE         = Float.valueOf(1.0f);
-
-    /** Reusable Float constant for minus one. */
-    public static final Float   FLOAT_MINUS_ONE   = Float.valueOf(-1.0f);
-
-    /**
-     * <p>
-     * {@code NumberUtils} instances should NOT be constructed in standard programming.
-     * Instead, the class should be used as {@code NumberUtils.toInt("6");}.
-     * </p>
-     *
-     * <p>
-     * This constructor is public to permit tools that require a JavaBean instance
-     * to operate.
-     * </p>
-     */
-    public NumberUtils(){
-        super();
-    }
-
     //-----------------------------------------------------------------------
     /**
      * <p>
@@ -460,66 +409,6 @@ public class NumberUtils{
         }
         try{
             return Byte.parseByte(str);
-        }catch (final NumberFormatException nfe){
-            return defaultValue;
-        }
-    }
-
-    /**
-     * <p>
-     * Convert a {@code String} to a {@code short}, returning
-     * {@code zero} if the conversion fails.
-     * </p>
-     *
-     * <p>
-     * If the string is {@code null}, {@code zero} is returned.
-     * </p>
-     *
-     * <pre>
-     *   NumberUtils.toShort(null) = 0
-     *   NumberUtils.toShort("")   = 0
-     *   NumberUtils.toShort("1")  = 1
-     * </pre>
-     *
-     * @param str
-     *            the string to convert, may be null
-     * @return the short represented by the string, or {@code zero} if
-     *         conversion fails
-     * @since 2.5
-     */
-    public static short toShort(final String str){
-        return toShort(str, (short) 0);
-    }
-
-    /**
-     * <p>
-     * Convert a {@code String} to an {@code short}, returning a
-     * default value if the conversion fails.
-     * </p>
-     *
-     * <p>
-     * If the string is {@code null}, the default value is returned.
-     * </p>
-     *
-     * <pre>
-     *   NumberUtils.toShort(null, 1) = 1
-     *   NumberUtils.toShort("", 1)   = 1
-     *   NumberUtils.toShort("1", 0)  = 1
-     * </pre>
-     *
-     * @param str
-     *            the string to convert, may be null
-     * @param defaultValue
-     *            the default value
-     * @return the short represented by the string, or the default if conversion fails
-     * @since 2.5
-     */
-    public static short toShort(final String str,final short defaultValue){
-        if (str == null){
-            return defaultValue;
-        }
-        try{
-            return Short.parseShort(str);
         }catch (final NumberFormatException nfe){
             return defaultValue;
         }
