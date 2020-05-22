@@ -399,7 +399,6 @@ public final class Validate{
      *             if the array is {@code null}
      * @throws IllegalArgumentException
      *             if an element is {@code null}
-     * @see #noNullElements(Iterable)
      */
     public static <T extends Iterable<?>> T noNullElements(final T iterable,final String message,final Object...values){
         notNull(iterable);
@@ -433,8 +432,6 @@ public final class Validate{
      *            the optional values for the formatted exception message, null array not recommended
      * @throws IllegalStateException
      *             if expression is {@code false}
-     * @see #validState(boolean)
-     *
      * @since 3.0
      */
     public static void validState(final boolean expression,final String message,final Object...values){

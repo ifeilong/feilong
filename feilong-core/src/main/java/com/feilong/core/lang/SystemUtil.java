@@ -21,8 +21,8 @@ import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import java.util.Map;
 import java.util.Properties;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.bean.ConvertUtil;
 
 /**
  * {@link java.lang.System}工具类.
@@ -310,7 +310,6 @@ import com.feilong.core.Validate;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.System
- * @see com.feilong.lib.lang3.SystemUtils
  * @see com.feilong.lib.lang3.SystemUtils#USER_HOME
  * @see com.feilong.lib.lang3.SystemUtils#FILE_ENCODING
  * @see com.feilong.lib.lang3.SystemUtils#FILE_SEPARATOR

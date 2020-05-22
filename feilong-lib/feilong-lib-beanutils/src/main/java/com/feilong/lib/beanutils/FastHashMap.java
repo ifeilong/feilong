@@ -319,10 +319,9 @@ public class FastHashMap extends HashMap{
                 map = temp;
                 return (result);
             }
-        }else{
-            synchronized (map){
-                return (map.remove(key));
-            }
+        }
+        synchronized (map){
+            return (map.remove(key));
         }
     }
 

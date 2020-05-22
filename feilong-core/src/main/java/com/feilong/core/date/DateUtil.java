@@ -2039,7 +2039,6 @@ public final class DateUtil{
      *            开始日期
      * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #formatDuration(Date, Date)
-     * @see com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
@@ -2106,7 +2105,6 @@ public final class DateUtil{
      *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
      * @see #formatDuration(long)
      * @see #getIntervalTime(Date, Date)
-     * @see com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView

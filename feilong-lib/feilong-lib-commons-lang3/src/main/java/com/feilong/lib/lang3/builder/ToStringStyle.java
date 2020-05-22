@@ -71,7 +71,7 @@ import com.feilong.lib.lang3.ObjectUtils;
  *
  * @since 1.0
  */
-@SuppressWarnings("deprecation") // StringEscapeUtils
+// StringEscapeUtils
 public abstract class ToStringStyle implements Serializable{
 
     private static final String                                   EMPTY                = "";

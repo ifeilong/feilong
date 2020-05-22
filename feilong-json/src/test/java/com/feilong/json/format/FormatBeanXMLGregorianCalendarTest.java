@@ -31,8 +31,7 @@ public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
         BeanWithXMLGregorianCalendar bean = new BeanWithXMLGregorianCalendar();
         bean.setName("jim");
 
-        // XMLGregorianCalendar xmlGregorianCalendar = new com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl();
-
+        @SuppressWarnings("restriction")
         XMLGregorianCalendar xmlGregorianCalendar = com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl.LEAP_YEAR_DEFAULT;
         bean.setBirthDate(xmlGregorianCalendar);
 

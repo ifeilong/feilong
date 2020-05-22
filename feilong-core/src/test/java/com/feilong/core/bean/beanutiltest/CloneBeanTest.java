@@ -19,10 +19,10 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 
@@ -43,7 +43,6 @@ public class CloneBeanTest{
      * Test clone bean.
      */
     @Test
-    
     public void testCloneBean(){
         OrderLine orderLine = new OrderLine();
         orderLine.setCount(8);
@@ -57,7 +56,6 @@ public class CloneBeanTest{
      * Test clone bean list.
      */
     @Test
-    
     public void testCloneBeanList(){
         OrderLine orderLine = new OrderLine();
         orderLine.setCount(8);
@@ -75,7 +73,6 @@ public class CloneBeanTest{
      * Test clone bean null bean.
      */
     @Test(expected = NullPointerException.class)
-    
     public void testCloneBeanNullBean(){
         BeanUtil.cloneBean(null);
     }
@@ -103,7 +100,7 @@ public class CloneBeanTest{
          * @param name
          *            the name
          */
-        public NoDefaultConstructorBean(String name){
+        public NoDefaultConstructorBean(@SuppressWarnings("unused") String name){
         }
     }
 

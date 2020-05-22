@@ -63,7 +63,6 @@ import org.apache.commons.collections4.Transformer;
  *
  * @since 1.0
  */
-@SuppressWarnings("deprecation")
 public class MapUtils{
 
     /**
