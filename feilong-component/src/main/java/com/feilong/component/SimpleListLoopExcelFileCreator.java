@@ -35,7 +35,7 @@ public class SimpleListLoopExcelFileCreator<T extends Data> implements ListDataF
      * <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      * </ol>
      */
-    private String excelTemplateLocation;
+    private String templateLocation;
 
     //---------------------------------------------------------------
 
@@ -68,7 +68,7 @@ public class SimpleListLoopExcelFileCreator<T extends Data> implements ListDataF
 
         //---------------------------------------------------------------
         String filePath = SpelUtil.getTemplateValue(outputFilePathExpression);
-        ExcelWriteUtil.write(excelTemplateLocation, xmlSheetConfigurations, sheetName, beans, filePath);
+        ExcelWriteUtil.write(templateLocation, xmlSheetConfigurations, sheetName, beans, filePath);
 
         return filePath;
     }
@@ -127,7 +127,7 @@ public class SimpleListLoopExcelFileCreator<T extends Data> implements ListDataF
      * @param excelTemplateLocation
      *            the excelTemplateLocation to set
      */
-    public void setExcelTemplateLocation(String excelTemplateLocation){
-        this.excelTemplateLocation = excelTemplateLocation;
+    public void setTemplateLocation(String excelTemplateLocation){
+        this.templateLocation = excelTemplateLocation;
     }
 }

@@ -9,10 +9,10 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd ">
 
 	<bean id="simpleListLoopExcelFileCreator" class="com.feilong.component.SimpleListLoopExcelFileCreator">
-		<property name="excelTemplateLocation" value="classpath:loxia/TradeData/TradeData-list-export.xlsx" />
-		<property name="xmlSheetConfigurations" value="loxia/TradeData/feilong-sheets-TradeData.xml" />
+		<property name="templateLocation" value="classpath:loxia/TradeData/template.xlsx" />
+		<property name="xmlSheetConfigurations" value="loxia/TradeData/sheets-definition.xml" />
 		<!-- <property name="sheetName" value="sheet" />
-		<property name="dataName" value="list" /> -->
+			<property name="dataName" value="list" /> -->
 
 		<property name="outputFilePathExpression" value="#{p_config['excel.outputPathExpression']}" />
 	</bean>
