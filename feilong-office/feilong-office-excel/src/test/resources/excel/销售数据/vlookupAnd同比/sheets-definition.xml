@@ -3,7 +3,7 @@
 	<!-- 销售数据导出 -->
 	<sheet name="salesDataExport">
 
-		<block start="A4" end="G4" dataName="salesDataList" loop="true" loopClass="com.feilong.excel.销售数据.SalesData">
+		<block start="A4" end="G4" dataName="salesDataList" loop="true">
 			<cell position="A4" dataName="year" />
 			<cell position="B4" dataName="month" />
 			<cell position="C4" dataName="total" />
