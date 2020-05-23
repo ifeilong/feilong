@@ -42,6 +42,7 @@
 		<module>feilong-component</module>
 
 		<module>feilong-util-all</module>
+		<module>feilong-util-all-with-optional</module>
 	</modules>
 
 	<!--****************************定义属性 properties************************************* -->
@@ -402,6 +403,13 @@
 			<dependency>
 				<groupId>com.github.ifeilong</groupId>
 				<artifactId>feilong-util-all</artifactId>
+				<version>${version.feilong-platform}</version>
+			</dependency>
+
+			<!-- feilong-util-all-with-optional -->
+			<dependency>
+				<groupId>com.github.ifeilong</groupId>
+				<artifactId>feilong-util-all-with-optional</artifactId>
 				<version>${version.feilong-platform}</version>
 			</dependency>
 

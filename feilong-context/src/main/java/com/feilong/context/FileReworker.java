@@ -16,7 +16,11 @@
 package com.feilong.context;
 
 /**
- * 文件再加工器.
+ * 文件路径再加工器.
+ * 
+ * <p>
+ * 支持将文件路径重新加工成新的路径,以便后续使用
+ * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 2.1.0
