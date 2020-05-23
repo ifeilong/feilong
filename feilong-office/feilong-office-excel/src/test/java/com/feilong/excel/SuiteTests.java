@@ -20,15 +20,15 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.excel.consultant.ConsultantReadTest;
-import com.feilong.excel.loxia.convertor.IntegerConvertorTest;
+import com.feilong.excel.convertor.IntegerConvertorTest;
 import com.feilong.excel.utils.CellReferenceUtilTest;
 import com.feilong.excel.销售数据.Write审计Test;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
+                ExcelSheetMapBuilderTest.class,
 
                 IntegerConvertorTest.class,
-
                 CellReferenceUtilTest.class,
 
                 Write审计Test.class,

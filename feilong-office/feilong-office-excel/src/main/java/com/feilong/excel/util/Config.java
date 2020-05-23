@@ -19,13 +19,11 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 import java.util.Map;
 
-/**
- * The Class Config.
- */
 public class Config{
 
-    /** The Constant LOXIA_EXCEL_MAP. */
-    private static final Map<String, String> LOXIA_EXCEL_MAP = toMap("config/excel/support", "loxia/support-default");
+    private static final Map<String, String> EXCEL_MAP = toMap(
+                    "config/excel/support", //
+                    "excel/support-default");
 
     //---------------------------------------------------------------
 
@@ -46,7 +44,7 @@ public class Config{
      * @return the string
      */
     public static String get(String name){
-        return LOXIA_EXCEL_MAP.get(name);
+        return EXCEL_MAP.get(name);
     }
 
 }

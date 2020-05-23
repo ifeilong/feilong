@@ -22,9 +22,9 @@ import java.util.List;
 import org.junit.Test;
 
 import com.feilong.core.lang.SystemUtil;
-import com.feilong.excel.AbstractLoxiaReadTest;
+import com.feilong.excel.AbstractReadTest;
 
-public class ConsultantReadTest extends AbstractLoxiaReadTest{
+public class ConsultantReadTest extends AbstractReadTest{
 
     @Test
     public void test(){

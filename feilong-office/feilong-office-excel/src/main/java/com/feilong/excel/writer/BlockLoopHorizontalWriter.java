@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.definition.ExcelBlock;
-import com.feilong.lib.ognl.OgnlStack;
+import com.feilong.lib.excel.ognl.OgnlStack;
 
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 class BlockLoopHorizontalWriter{

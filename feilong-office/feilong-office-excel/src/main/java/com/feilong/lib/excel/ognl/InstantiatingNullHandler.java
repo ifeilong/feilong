@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.ognl;
+package com.feilong.lib.excel.ognl;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
@@ -39,7 +39,6 @@ public class InstantiatingNullHandler implements NullHandler{
 
     //---------------------------------------------------------------
 
-    /** The Constant USING_LOXIA_NULL_HANDLER. */
     static final String         USING_LOXIA_NULL_HANDLER = "loxia.useingLoxiaNullHandler";
 
     /** The ignore list. */
@@ -50,14 +49,6 @@ public class InstantiatingNullHandler implements NullHandler{
 
     //---------------------------------------------------------------
 
-    /**
-     * Instantiates a new instantiating null handler.
-     *
-     * @param nullHandler
-     *            the null handler
-     * @param ignoreList
-     *            the ignore list
-     */
     public InstantiatingNullHandler(NullHandler nullHandler, List<String> ignoreList){
         this.handlerWrapper = nullHandler;
         this.ignoreList.addAll(ignoreList);
@@ -65,19 +56,6 @@ public class InstantiatingNullHandler implements NullHandler{
 
     //---------------------------------------------------------------
 
-    /**
-     * Null method result.
-     *
-     * @param context
-     *            the context
-     * @param target
-     *            the target
-     * @param methodName
-     *            the method name
-     * @param args
-     *            the args
-     * @return the object
-     */
     @Override
     public Object nullMethodResult(Map context,Object target,String methodName,Object[] args){
         Boolean flag = (Boolean) context.get(USING_LOXIA_NULL_HANDLER);
@@ -88,17 +66,6 @@ public class InstantiatingNullHandler implements NullHandler{
         return null;
     }
 
-    /**
-     * Null property value.
-     *
-     * @param context
-     *            the context
-     * @param target
-     *            the target
-     * @param property
-     *            the property
-     * @return the object
-     */
     @Override
     public Object nullPropertyValue(Map context,Object target,Object property){
         Boolean flag = (Boolean) context.get(USING_LOXIA_NULL_HANDLER);
@@ -146,13 +113,6 @@ public class InstantiatingNullHandler implements NullHandler{
 
     //---------------------------------------------------------------
 
-    /**
-     * Ignore class.
-     *
-     * @param clazz
-     *            the clazz
-     * @return true, if successful
-     */
     private boolean ignoreClass(Class<?> clazz){
         if (clazz.isPrimitive() || clazz.isArray()){
             return true;

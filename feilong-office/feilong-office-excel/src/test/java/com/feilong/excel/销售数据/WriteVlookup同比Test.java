@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class WriteVlookup同比Test extends AbstractWriteTest{
+public class WriteVlookup同比Test extends AbstractSalesDataWriteTest{
 
     @Test
     public void test(){

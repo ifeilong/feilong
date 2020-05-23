@@ -30,8 +30,8 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.core.Validate;
+import com.feilong.json.JsonUtil;
 
 /**
  * base Velocity 工具类.
@@ -94,7 +94,7 @@ abstract class AbstractTemplateUtil{
      * 解析vm模板文件.
      *
      * @param templateInClassPath
-     *            基于classpath 下面的velocity模版文件路径,比如 \\loxia\\excel\\template\\trainReport.html
+     *            基于classpath 下面的velocity模版文件路径,比如 \\excel\\template\\trainReport.html
      * @return the string
      *         如果 <code>templateInClassPath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>templateInClassPath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -114,7 +114,7 @@ abstract class AbstractTemplateUtil{
      * 解析vm模板文件.
      *
      * @param templateInClassPath
-     *            基于classpath 下面的velocity模版文件路径,比如 \\loxia\\excel\\template\\trainReport.html
+     *            基于classpath 下面的velocity模版文件路径,比如 \\excel\\template\\trainReport.html
      * @param contextKeyValues
      *            解析vm模板使用到的参数
      * @return the string

@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.excel.util.Config;
-import com.feilong.lib.ognl.OgnlStack;
+import com.feilong.lib.excel.ognl.OgnlStack;
 
 class CellValueSetter{
 

@@ -36,7 +36,7 @@ import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.LoopBreakCondition;
 import com.feilong.excel.util.CellReferenceUtil;
-import com.feilong.lib.ognl.OgnlStack;
+import com.feilong.lib.excel.ognl.OgnlStack;
 
 /**
  * The Class BlockReader.
@@ -129,24 +129,6 @@ class BlockReader{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Read Block in loop condition.
-     *
-     * @param workbook
-     *            the wb
-     * @param sheetNo
-     *            the sheet no
-     * @param excelBlock
-     *            the block definition
-     * @param startRow
-     *            the start row
-     * @param readStatus
-     *            the read status
-     * @return the object
-     * @throws Exception
-     *             the exception
-     */
     static Object readBlock(Workbook workbook,int sheetNo,ExcelBlock excelBlock,int startRow,ReadStatus readStatus) throws Exception{
         Sheet sheet = workbook.getSheetAt(sheetNo);
         FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();

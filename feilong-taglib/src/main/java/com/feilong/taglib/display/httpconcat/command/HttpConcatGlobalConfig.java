@@ -145,7 +145,6 @@ public class HttpConcatGlobalConfig{
         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.min.js"></script>
     
         <script type="text/javascript" src="/resources/libs/jquery/jquery-ui-1.10.3.custom.js"></script>
-        <script type="text/javascript" src="/resources/js/loxia2/jquery.loxiacore-2.js"></script>
     
         <script type="text/javascript" src="/resources/libs/spice/js/placeholder/jquery.placeholder.min.js"></script>
         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.tools.min.js"></script>
@@ -473,7 +472,6 @@ public class HttpConcatGlobalConfig{
      *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.min.js"></script>
      *     
      *         <script type="text/javascript" src="/resources/libs/jquery/jquery-ui-1.10.3.custom.js"></script>
-     *         <script type="text/javascript" src="/resources/js/loxia2/jquery.loxiacore-2.js"></script>
      *     
      *         <script type="text/javascript" src="/resources/libs/spice/js/placeholder/jquery.placeholder.min.js"></script>
      *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.tools.min.js"></script>
@@ -534,7 +532,6 @@ public class HttpConcatGlobalConfig{
      *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.min.js"></script>
      *     
      *         <script type="text/javascript" src="/resources/libs/jquery/jquery-ui-1.10.3.custom.js"></script>
-     *         <script type="text/javascript" src="/resources/js/loxia2/jquery.loxiacore-2.js"></script>
      *     
      *         <script type="text/javascript" src="/resources/libs/spice/js/placeholder/jquery.placeholder.min.js"></script>
      *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.tools.min.js"></script>

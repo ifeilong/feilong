@@ -53,25 +53,39 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
     /** The data name. */
     private String                        dataName;
 
+    //---------------------------------------------------------------
+
     /** The is loop. */
     private boolean                       isLoop                   = false;
 
+    /**
+     * 循环的类.
+     * 
+     * <p>
+     * 写数据的时候, 可以不配置
+     * </p>
+     */
+    private Class<?>                      loopClass;
+
+    //---------------------------------------------------------------
+
     /** The direction. */
     private String                        direction                = LOOP_DIRECTION_HORIZONAL;
+
+    //---------------------------------------------------------------
 
     /** The break condition. */
     private LoopBreakCondition            breakCondition;
 
     //---------------------------------------------------------------
 
-    /** The loop class. */
-    private Class<? extends Object>       loopClass;
-
     /** The cells. */
     private List<ExcelCell>               cells                    = new ArrayList<>();
 
     /** The styles. */
     private List<ExcelCellConditionStyle> styles                   = new ArrayList<>();
+
+    //---------------------------------------------------------------
 
     /** The is child block. */
     private boolean                       isChildBlock             = false;
@@ -257,20 +271,26 @@ public class ExcelBlock implements Comparable<ExcelBlock>{
 
     /**
      * 获得 loop class.
-     *
+     * <p>
+     * 写数据的时候, 可以不配置
+     * </p>
+     * 
      * @return the loop class
      */
-    public Class<? extends Object> getLoopClass(){
+    public Class<?> getLoopClass(){
         return loopClass;
     }
 
     /**
      * Sets the loop class.
-     *
+     * <p>
+     * 写数据的时候, 可以不配置
+     * </p>
+     * 
      * @param loopClass
      *            the new loop class
      */
-    public void setLoopClass(Class<? extends Object> loopClass){
+    public void setLoopClass(Class<?> loopClass){
         this.loopClass = loopClass;
     }
 

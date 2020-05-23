@@ -27,15 +27,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.SheetReader;
 import com.feilong.excel.util.CloneUtil;
-import com.feilong.lib.ognl.OgnlStack;
-import com.feilong.core.Validate;
+import com.feilong.lib.excel.ognl.OgnlStack;
 
-/**
- * The Class DefaultExcelReader.
- */
 public class DefaultExcelReader extends AbstractExcelConfig implements ExcelReader{
 
     /** The skip errors. */
@@ -43,15 +40,6 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
 
     //---------------------------------------------------------------
 
-    /**
-     * Read all.
-     *
-     * @param inputStream
-     *            the is
-     * @param beans
-     *            the beans
-     * @return the read status
-     */
     @Override
     public ReadStatus readAll(InputStream inputStream,Map<String, Object> beans){
         ReadStatus readStatus = new ReadStatus();

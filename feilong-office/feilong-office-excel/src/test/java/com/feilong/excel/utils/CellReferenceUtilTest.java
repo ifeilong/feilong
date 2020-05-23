@@ -22,11 +22,6 @@ import org.junit.Test;
 import com.feilong.excel.util.CellReferenceUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 public class CellReferenceUtilTest extends AbstractTest{
 
     @Test

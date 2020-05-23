@@ -17,17 +17,12 @@ package com.feilong.excel;
 
 import java.util.List;
 
-import com.feilong.excel.ExcelReaderUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class AbstractLoxiaExcelWriteTest.
- */
-public abstract class AbstractLoxiaReadTest extends AbstractTest{
+public abstract class AbstractReadTest extends AbstractTest{
 
     protected static <T> List<T> build(String xmlSheetConfigurations,String sheetName,String dataName,String fileName){
         return ExcelReaderUtil.getList(xmlSheetConfigurations, sheetName, dataName, fileName, 0);
-
     }
 
 }

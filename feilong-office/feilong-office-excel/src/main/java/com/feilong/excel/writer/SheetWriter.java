@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.ognl.OgnlStack;
+import com.feilong.lib.excel.ognl.OgnlStack;
 
 class SheetWriter{
 
@@ -53,47 +53,54 @@ class SheetWriter{
 
     //---------------------------------------------------------------
 
-    public static void write(Sheet sheet,ExcelSheet excelSheet,OgnlStack ognlStack,Map<String, CellStyle> styleMap){
+    public static void write(Sheet sheet,ExcelSheet excelSheet,Map<String, CellStyle> styleMap,Object ognlData){
         Date beginDate = new Date();
+
+        OgnlStack ognlStack = new OgnlStack(ognlData);
         setSheetName(sheet, excelSheet, ognlStack);
         //---------------------------------------------------------------
         List<ExcelBlock> sortedExcelBlocks = excelSheet.getSortedExcelBlocks();
         Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap = buildMergedRegions(sheet, sortedExcelBlocks);
         //---------------------------------------------------------------
         for (ExcelBlock excelBlock : sortedExcelBlocks){
-
-            //---------------------------------------------------------------
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("excelBlock:{}", JsonUtil.format(excelBlock));
-            }
-            //---------------------------------------------------------------
-
-            Date blockBeginDate = new Date();
-
-            if (excelBlock.isLoop()){
-                List<CellRangeAddress> cellRangeAddressList = mergedRegionsMap.get(excelBlock);
-                boolean isHorizontal = excelBlock.getDirection().equalsIgnoreCase(ExcelBlock.LOOP_DIRECTION_HORIZONAL);
-                if (isHorizontal){
-                    BlockLoopHorizontalWriter.write(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
-                    return;
-                }
-                BlockLoopVerticalWriter.write(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
-            }else{
-                BlockSimpleWriter.write(sheet, excelBlock, ognlStack, styleMap);
-            }
-
-            //---------------------------------------------------------------
-            if (LOGGER.isDebugEnabled()){
-                String pattern = "write sheet block:[{}]-[{}], use time: [{}]";
-                LOGGER.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDuration(blockBeginDate));
-            }
+            write(sheet, excelSheet, excelBlock, styleMap, mergedRegionsMap, ognlStack);
         }
-
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("writeSheet:[{}] use time: [{}]", excelSheet.getName(), formatDuration(beginDate));
         }
+    }
 
+    private static void write(
+                    Sheet sheet,
+                    ExcelSheet excelSheet,
+                    ExcelBlock excelBlock,
+                    Map<String, CellStyle> styleMap,
+                    Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap,
+                    OgnlStack ognlStack){
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("excelBlock:{}", JsonUtil.format(excelBlock));
+        }
+        //---------------------------------------------------------------
+        Date blockBeginDate = new Date();
+        //循环
+        if (excelBlock.isLoop()){
+            List<CellRangeAddress> cellRangeAddressList = mergedRegionsMap.get(excelBlock);
+            boolean isHorizontal = excelBlock.getDirection().equalsIgnoreCase(ExcelBlock.LOOP_DIRECTION_HORIZONAL);
+            if (isHorizontal){
+                BlockLoopHorizontalWriter.write(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
+            }else{
+                BlockLoopVerticalWriter.write(sheet, excelBlock, ognlStack, cellRangeAddressList, styleMap);
+            }
+        }else{
+            BlockSimpleWriter.write(sheet, excelBlock, ognlStack, styleMap);
+        }
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            String pattern = "write sheet block:[{}]-[{}], use time: [{}]";
+            LOGGER.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDuration(blockBeginDate));
+        }
     }
 
     private static Map<ExcelBlock, List<CellRangeAddress>> buildMergedRegions(Sheet sheet,List<ExcelBlock> sortedExcelBlocks){

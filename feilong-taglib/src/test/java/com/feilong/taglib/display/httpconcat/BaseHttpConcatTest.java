@@ -16,8 +16,8 @@
 package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.lang.System.lineSeparator;
 
 import java.util.List;
@@ -94,7 +94,7 @@ public abstract class BaseHttpConcatTest extends AbstractTest{
 
         itemSrcList.add("public/js/jquery.lazyload.min.js");
         itemSrcList.add("marketplace/js/item/searchItem.js");
-        itemSrcList.add("public/js/loxia2/jquery.loxia.locale_${request.getAttribute('locale')}.js");
+        itemSrcList.add("public/js/jquery.locale_${request.getAttribute('locale')}.js");
         itemSrcList.add("marketplace/js/marketplace.js");
         itemSrcList.add("public/js/ajax.extend.js");
 

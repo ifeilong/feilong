@@ -18,7 +18,7 @@ package com.feilong.excel.reader;
 import com.feilong.excel.DataConvertorConfig;
 import com.feilong.excel.ExcelException;
 import com.feilong.excel.definition.ExcelCell;
-import com.feilong.lib.loxia.convertor.DataConvertor;
+import com.feilong.lib.excel.convertor.DataConvertor;
 
 class CellValueConverter{
 

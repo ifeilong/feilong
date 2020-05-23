@@ -19,14 +19,14 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.feilong.lib.loxia.convertor.BigDecimalConvertor;
-import com.feilong.lib.loxia.convertor.BooleanConvertor;
-import com.feilong.lib.loxia.convertor.DataConvertor;
-import com.feilong.lib.loxia.convertor.DateConvertor;
-import com.feilong.lib.loxia.convertor.DoubleConvertor;
-import com.feilong.lib.loxia.convertor.IntegerConvertor;
-import com.feilong.lib.loxia.convertor.LongConvertor;
-import com.feilong.lib.loxia.convertor.StringConvertor;
+import com.feilong.lib.excel.convertor.BigDecimalConvertor;
+import com.feilong.lib.excel.convertor.BooleanConvertor;
+import com.feilong.lib.excel.convertor.DataConvertor;
+import com.feilong.lib.excel.convertor.DateConvertor;
+import com.feilong.lib.excel.convertor.DoubleConvertor;
+import com.feilong.lib.excel.convertor.IntegerConvertor;
+import com.feilong.lib.excel.convertor.LongConvertor;
+import com.feilong.lib.excel.convertor.StringConvertor;
 
 /**
  * The Class DataConvertorConfigurator.

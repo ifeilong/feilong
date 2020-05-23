@@ -20,9 +20,9 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.util.List;
 
-import com.feilong.excel.AbstractLoxiaWriteTest;
+import com.feilong.excel.AbstractWriteTest;
 
-abstract class AbstractWriteTest extends AbstractLoxiaWriteTest{
+abstract class AbstractSalesDataWriteTest extends AbstractWriteTest{
 
     protected List<SalesData> buildList(){
         List<SalesData> list = newArrayList();

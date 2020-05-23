@@ -29,15 +29,15 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.CollectionUtils;
-import com.feilong.core.Validate;
 
 /**
- * 使用 loxia 来进行 excel 输出的工具类.
+ * 进行 excel 输出的工具类.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.13.0

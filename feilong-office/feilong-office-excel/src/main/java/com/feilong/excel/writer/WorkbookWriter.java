@@ -24,11 +24,10 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.feilong.core.Validate;
 import com.feilong.excel.ExcelDefinition;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.WorkbookUtil;
-import com.feilong.lib.ognl.OgnlStack;
-import com.feilong.core.Validate;
 
 /**
  * The Class WorkbookWriter.
@@ -78,7 +77,7 @@ public class WorkbookWriter{
         for (int i = 0; i < beansList.size(); i++){
             Sheet newSheet = workbook.createSheet("Auto Generated Sheet " + i);
             SheetCopyer.copy(workbook.getSheetAt(0), newSheet);
-            SheetWriter.write(newSheet, excelSheets.iterator().next(), new OgnlStack(beansList.get(i)), styleMap);
+            SheetWriter.write(newSheet, excelSheets.iterator().next(), styleMap, beansList.get(i));
         }
         //---------------------------------------------------------------
         //remove template sheet
@@ -94,7 +93,7 @@ public class WorkbookWriter{
 
         Map<String, CellStyle> styleMap = StyleMapBuilder.build(workbook, excelDefinition, excelSheets);
         for (int i = 0; i < excelSheetsSize; i++){
-            SheetWriter.write(workbook.getSheetAt(i), excelSheets.get(i), new OgnlStack(beans), styleMap);
+            SheetWriter.write(workbook.getSheetAt(i), excelSheets.get(i), styleMap, beans);
         }
         pack(workbook, outputStream);
     }
@@ -112,7 +111,7 @@ public class WorkbookWriter{
     private static void validate(int excelSheetsSize,int numberOfSheets){
         Validate.isTrue(
                         excelSheetsSize > 0 && numberOfSheets >= excelSheetsSize,
-                        "No sheet definition found or Sheet Number in definition is more than number in template file.");
+                        "No sheet definition found or Sheet Number in definition > number in excel template.");
     }
 
     //---------------------------------------------------------------

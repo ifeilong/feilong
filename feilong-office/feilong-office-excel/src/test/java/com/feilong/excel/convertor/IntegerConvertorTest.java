@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel.loxia.convertor;
+package com.feilong.excel.convertor;
 
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import com.feilong.excel.definition.ExcelCell;
-import com.feilong.lib.loxia.convertor.IntegerConvertor;
+import com.feilong.lib.excel.convertor.IntegerConvertor;
 import com.feilong.test.AbstractTest;
 
 public class IntegerConvertorTest extends AbstractTest{

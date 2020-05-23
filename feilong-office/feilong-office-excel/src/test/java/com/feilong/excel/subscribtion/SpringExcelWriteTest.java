@@ -35,7 +35,7 @@ import com.feilong.io.FilenameUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 @ContextConfiguration(locations = { "classpath*:excel/subscribtion/spring-excel-2sheet.xml" })
-public class SpringLoxiaExcelWriteTest extends AbstractJUnit4SpringContextTests{
+public class SpringExcelWriteTest extends AbstractJUnit4SpringContextTests{
 
     @Autowired
     @Qualifier("all订阅Writer")

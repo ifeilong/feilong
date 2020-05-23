@@ -24,9 +24,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.excel.AbstractLoxiaWriteTest;
+import com.feilong.excel.AbstractWriteTest;
 
-public class LoxiaExcelWrite订阅Test extends AbstractLoxiaWriteTest{
+public class ExcelWrite订阅Test extends AbstractWriteTest{
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code

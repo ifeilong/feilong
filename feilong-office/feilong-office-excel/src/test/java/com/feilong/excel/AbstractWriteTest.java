@@ -29,7 +29,7 @@ import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
-public abstract class AbstractLoxiaWriteTest extends AbstractTest{
+public abstract class AbstractWriteTest extends AbstractTest{
 
     protected static <T> void build(String templateFileName,String configurations,String sheetName,String dataName,List<T> list){
         Map<String, Object> beans = toMap(dataName, (Object) list);
