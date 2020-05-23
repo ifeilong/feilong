@@ -18,19 +18,19 @@ package com.feilong.excel;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.CloneUtil;
-import com.feilong.core.Validate;
 
 /**
  * A factory for creating ExcelManipulator objects.
  */
 public class ExcelManipulatorFactory{
 
+    /**
+     * key是sheet Name
+     */
     private Map<String, ExcelSheet> sheetDefinitions = new HashMap<>();
-
-    /** The Constant BLANK_SHEET. */
-    private static final ExcelSheet BLANK_SHEET      = new ExcelSheet();
 
     //---------------------------------------------------------------
 
@@ -169,8 +169,9 @@ public class ExcelManipulatorFactory{
      */
     private ExcelSheet toExcelSheet(String sheetName){
         if ("blank".equalsIgnoreCase(sheetName)){
-            return BLANK_SHEET;
+            return new ExcelSheet();
         }
+
         ExcelSheet excelSheet = sheetDefinitions.get(sheetName);
         Validate.notNull(excelSheet, "No sheet defintion found with name: " + sheetName);
         return CloneUtil.cloneSheet(excelSheet);

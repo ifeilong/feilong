@@ -24,7 +24,7 @@ public class WriteTest extends AbstractWriteTest{
     @Test
     public void test(){
         String templateFileName = "销售数据/export-template-sales.xlsx";
-        String configurations = "excel/销售数据/feilong-sheets-salesData.xml";
+        String configurations = "excel/销售数据/sheets-definition.xml";
 
         String sheetName = "salesDataExport";
 

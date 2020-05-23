@@ -27,16 +27,11 @@ import org.junit.Test;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.test.AbstractTest;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 public class ExcelSheetMapBuilderTest extends AbstractTest{
 
     @Test
     public void test(){
-        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("excel/consultant/feilong-sheets-Consultant.xml");
+        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("excel/consultant/sheets-definition.xml");
         assertTrue(map.size() == 1);
 
         assertThat(map, allOf(hasKey("consultantExport")));

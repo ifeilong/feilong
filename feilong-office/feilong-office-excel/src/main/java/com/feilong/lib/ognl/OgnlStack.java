@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.loxia.util;
+package com.feilong.lib.ognl;
+
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +26,8 @@ import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
-import ognl.DefaultMemberAccess;
-import ognl.NullHandler;
 import ognl.Ognl;
-import ognl.OgnlContext;
 import ognl.OgnlException;
-import ognl.OgnlRuntime;
 
 /**
  * The Class OgnlStack.
@@ -55,22 +52,12 @@ public class OgnlStack{
      *            the obj
      */
     public OgnlStack(Object obj){
-        NullHandler nullHandler = null;
-        synchronized (OgnlStack.class){
-            try{
-                nullHandler = OgnlRuntime.getNullHandler(Object.class);
-                if (nullHandler == null || !(nullHandler instanceof InstantiatingNullHandler)){
-                    OgnlRuntime.setNullHandler(Object.class, new InstantiatingNullHandler(nullHandler, Arrays.asList("java")));
-                }
-            }catch (OgnlException e){
-                throw new DefaultRuntimeException(e);
-            }
-        }
+        OgnlUtil.setNullHandler();
 
         //---------------------------------------------------------------
         stackList.add(obj);
-        this.context = new HashMap<>();
-        this.context.put(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
+
+        this.context = toMap(InstantiatingNullHandler.USING_LOXIA_NULL_HANDLER, true);
     }
 
     //---------------------------------------------------------------
@@ -111,24 +98,12 @@ public class OgnlStack{
             }
             try{
                 Object expression = getExpression(expr);
-                return Ognl.getValue(expression, buildOgnlContext(context), obj);
+                return Ognl.getValue(expression, OgnlContextBuilder.build(context), obj);
             }catch (Exception e){
                 throw new DefaultRuntimeException(Slf4jUtil.format("expr:[{}],obj:[{}]", expr, obj), e);
             }
         }
         return null;
-    }
-
-    /**
-     * Builds the ognl context.
-     *
-     * @param context
-     *            the context
-     * @return the ognl context
-     * @since 3.0.0
-     */
-    private static OgnlContext buildOgnlContext(Map<String, Object> context){
-        return new OgnlContext(new DefaultMemberAccess(true), null, null, context);
     }
 
     /**
@@ -145,7 +120,7 @@ public class OgnlStack{
         Object root = stackList.get(0);
         Validate.notNull(root, "root can't be null!");
 
-        Ognl.setValue(getExpression(expr), buildOgnlContext(context), root, value);
+        Ognl.setValue(getExpression(expr), OgnlContextBuilder.build(context), root, value);
     }
 
     //---------------------------------------------------------------

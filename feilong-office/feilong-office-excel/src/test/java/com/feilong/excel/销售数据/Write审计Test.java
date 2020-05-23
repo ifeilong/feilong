@@ -24,7 +24,7 @@ public class Write审计Test extends AbstractWriteTest{
     @Test
     public void test(){
         String templateFileName = "销售数据/audit/export-template-sales-vlookup.xlsx";
-        String configurations = "excel/销售数据/audit/feilong-sheets-salesData-vlookup.xml";
+        String configurations = "excel/销售数据/audit/sheets-definition.xml";
 
         String sheetName = "salesDataExport";
 

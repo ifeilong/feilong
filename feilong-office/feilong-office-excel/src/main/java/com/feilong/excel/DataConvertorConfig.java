@@ -31,7 +31,7 @@ import com.feilong.lib.loxia.convertor.StringConvertor;
 /**
  * The Class DataConvertorConfigurator.
  */
-public class DataConvertorConfigurator implements Serializable{
+public class DataConvertorConfig implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long                     serialVersionUID = -6172555487692156540L;
@@ -41,20 +41,18 @@ public class DataConvertorConfigurator implements Serializable{
     /** The supports map. */
     private final Map<String, Class<?>>           supportsMap      = new HashMap<>();
 
-    //---------------------------------------------------------------
-
     /** The convertor map. */
     private final Map<Class<?>, DataConvertor<?>> convertorMap     = new HashMap<>();
 
     /** The instance. */
-    private static DataConvertorConfigurator      instance;
+    private static DataConvertorConfig            instance;
 
     //---------------------------------------------------------------
 
     /**
      * Instantiates a new data convertor configurator.
      */
-    private DataConvertorConfigurator(){
+    private DataConvertorConfig(){
         registerDataConvertor(new StringConvertor());
         registerDataConvertor(new IntegerConvertor());
         registerDataConvertor(new LongConvertor());
@@ -110,9 +108,9 @@ public class DataConvertorConfigurator implements Serializable{
      *
      * @return single instance of DataConvertorConfigurator
      */
-    public static DataConvertorConfigurator getInstance(){
+    public static DataConvertorConfig getInstance(){
         if (instance == null){
-            instance = new DataConvertorConfigurator();
+            instance = new DataConvertorConfig();
         }
         return instance;
     }

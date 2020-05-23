@@ -28,15 +28,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.lib.collection4.CollectionUtils;
-import com.feilong.core.Validate;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 3.0.0
- */
 class ExcelSheetMapBuilder{
 
     private static final Logger   LOGGER    = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
@@ -57,6 +52,12 @@ class ExcelSheetMapBuilder{
 
     //---------------------------------------------------------------
 
+    /**
+     * 
+     * @param configurations
+     * @return key是sheet Name
+     * @since 3.0.0
+     */
     static Map<String, ExcelSheet> build(String...configurations){
         Map<String, ExcelSheet> sheetDefinitions = new HashMap<>();
 

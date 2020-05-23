@@ -22,7 +22,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.excel.DataConvertorConfigurator;
+import com.feilong.excel.DataConvertorConfig;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.core.Validate;
 
@@ -64,7 +64,7 @@ class PropertyTypeDetector{
         //---------------------------------------------------------------
         //有type 先使用type  , 没有type 基于属性名字去探测
         String type = excelCell.getType();
-        Class<?> clazz = DataConvertorConfigurator.getInstance().getSupportedClass(type);
+        Class<?> clazz = DataConvertorConfig.getInstance().getSupportedClass(type);
         if (clazz != null){
             return clazz;
         }

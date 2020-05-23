@@ -31,9 +31,6 @@ import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.util.WorkbookUtil;
 import com.feilong.excel.writer.WorkbookWriter;
 
-/**
- * The Class DefaultExcelWriter.
- */
 public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWriter{
 
     /** The Constant log. */
@@ -51,14 +48,14 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *
      * @param template
      *            the template
-     * @param os
+     * @param outputStream
      *            the os
      * @param beans
      *            the beans
      */
     @Override
-    public void write(String template,OutputStream os,Map<String, Object> beans){
-        write(build(template), os, beans);
+    public void write(String template,OutputStream outputStream,Map<String, Object> beans){
+        write(build(template), outputStream, beans);
     }
 
     /**
@@ -102,9 +99,6 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
     }
 
     /**
-     * @param template
-     * @return
-     * @since 3.0.0
      * @deprecated use feilong
      */
     @Deprecated
@@ -115,19 +109,19 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
     /**
      * Write per sheet.
      *
-     * @param os
+     * @param outputStream
      *            the os
      * @param beansList
      *            the beans list
      */
     @Override
-    public void writePerSheet(OutputStream os,List<Map<String, Object>> beansList){
+    public void writePerSheet(OutputStream outputStream,List<Map<String, Object>> beansList){
         if (bufferedTemplate == null){
             throw new IllegalArgumentException("bufferedTemplate is null");
         }
         //---------------------------------------------------------------
         InputStream inputStream = new ByteArrayInputStream(bufferedTemplate);
-        writePerSheet(inputStream, os, beansList);
+        writePerSheet(inputStream, outputStream, beansList);
     }
 
     @Override
@@ -144,17 +138,17 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
     /**
      * Inits the buffered template.
      *
-     * @param is
+     * @param inputStream
      *            the is
      */
-    public void initBufferedTemplate(InputStream is){
+    public void initBufferedTemplate(InputStream inputStream){
         try{
             byte[] buf = new byte[1024];
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            int b = is.read(buf);
+            int b = inputStream.read(buf);
             while (b != -1){
                 bos.write(buf, 0, b);
-                b = is.read(buf);
+                b = inputStream.read(buf);
             }
             bufferedTemplate = bos.toByteArray();
         }catch (IOException e){

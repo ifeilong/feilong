@@ -28,7 +28,7 @@ public class ConsultantReadTest extends AbstractLoxiaReadTest{
 
     @Test
     public void test(){
-        String xmlSheetConfiguration = "excel/consultant/feilong-sheets-Consultant.xml";
+        String xmlSheetConfiguration = "excel/consultant/sheets-definition.xml";
         String sheetName = "consultantExport";
         String dataName = "consultantList";
         String fileName = SystemUtil.USER_HOME

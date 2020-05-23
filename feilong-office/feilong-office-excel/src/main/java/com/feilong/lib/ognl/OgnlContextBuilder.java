@@ -13,24 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel.销售数据;
+package com.feilong.lib.ognl;
 
-import java.util.List;
+import java.util.Map;
 
-import org.junit.Test;
+import ognl.OgnlContext;
 
-public class WriteVlookupTest extends AbstractWriteTest{
+public class OgnlContextBuilder{
 
-    @Test
-    public void test(){
-        String templateFileName = "销售数据/vlookup/export-template-sales-vlookup.xlsx";
-        String configurations = "excel/销售数据/vlookup/sheets-definition.xml";
-
-        String sheetName = "salesDataExport";
-
-        //---------------------------------------------------------------
-        List<SalesData> list = buildList();
-        build(templateFileName, configurations, sheetName, "salesDataList", list);
+    static OgnlContext build(Map<String, Object> context){
+        return new OgnlContext(new DefaultMemberAccess(true), null, null, context);
     }
-
 }

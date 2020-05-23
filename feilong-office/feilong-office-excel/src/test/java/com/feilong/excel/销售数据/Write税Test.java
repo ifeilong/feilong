@@ -24,7 +24,7 @@ public class Write税Test extends AbstractWriteTest{
     @Test
     public void test(){
         String templateFileName = "销售数据/税/export-template-sales-税.xlsx";
-        String configurations = "excel/销售数据/税/feilong-sheets-salesData-税.xml";
+        String configurations = "excel/销售数据/税/sheets-definition.xml";
 
         String sheetName = "salesDataExport";
 

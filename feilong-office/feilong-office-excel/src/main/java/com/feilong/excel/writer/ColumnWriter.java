@@ -28,7 +28,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.excel.definition.ExcelCellConditionStyle;
-import com.feilong.lib.loxia.util.OgnlStack;
+import com.feilong.lib.ognl.OgnlStack;
 
 class ColumnWriter{
 

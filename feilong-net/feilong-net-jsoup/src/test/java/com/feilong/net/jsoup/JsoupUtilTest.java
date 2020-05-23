@@ -15,11 +15,8 @@
  */
 package com.feilong.net.jsoup;
 
-import static com.feilong.core.CharsetType.UTF8;
 import static java.lang.System.lineSeparator;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -28,10 +25,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
 import org.junit.Test;
 
-import com.feilong.io.FileUtil;
 import com.feilong.test.AbstractTest;
 
 public class JsoupUtilTest extends AbstractTest{
@@ -47,20 +42,6 @@ public class JsoupUtilTest extends AbstractTest{
         for (Element e : doc.select("requestqueue")){
             LOGGER.debug("" + e);
         }
-    }
-
-    @Test
-    public void testJsoupUtilTest1() throws IOException{
-        String fileName = "E:/Workspaces/feilong/feilong-project/feilong-novel/src/main/resources/feilong-novel.xml";
-        FileInputStream fileInputStream = FileUtil.getFileInputStream(fileName);
-        Document document = Jsoup.parse(fileInputStream, UTF8, "", Parser.xmlParser());
-
-        Element elementById = document.getElementById("catalog_suimeng_重生九二之商业大亨");
-        LOGGER.debug("" + elementById);
-        Elements elementsByTag = elementById.getElementsByTag("webSite");
-        LOGGER.debug("" + elementsByTag);
-        LOGGER.debug("" + elementsByTag.attr("ref"));
-
     }
 
     @Test
