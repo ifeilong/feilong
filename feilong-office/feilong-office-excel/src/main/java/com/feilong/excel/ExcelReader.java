@@ -18,6 +18,8 @@ package com.feilong.excel;
 import java.io.InputStream;
 import java.util.Map;
 
+import com.feilong.excel.reader.ReadStatus;
+
 /**
  * The Interface ExcelReader.
  */

@@ -31,8 +31,8 @@ public class ExcelWrite订阅Test extends AbstractWriteTest{
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
-        String configurations = "excel/subscribtion/sheets-definition.xml";
         String templateFileName = "subscribtion/template-list-2sheet.xlsx";
+        String configurations = "classpath:excel/subscribtion/sheets-definition.xml";
 
         //---------------------------------------------------------------
         List<SubscribtionCommand> alist = buildAList();

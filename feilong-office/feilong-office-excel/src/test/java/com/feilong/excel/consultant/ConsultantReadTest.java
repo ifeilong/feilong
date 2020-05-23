@@ -28,7 +28,7 @@ public class ConsultantReadTest extends AbstractReadTest{
 
     @Test
     public void test(){
-        String xmlSheetConfiguration = "excel/consultant/sheets-definition.xml";
+        String xmlSheetConfiguration = "classpath:excel/consultant/sheets-definition.xml";
         String sheetName = "consultantExport";
         String dataName = "consultantList";
         String fileName = SystemUtil.USER_HOME

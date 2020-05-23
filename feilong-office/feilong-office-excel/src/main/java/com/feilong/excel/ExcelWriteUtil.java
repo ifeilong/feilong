@@ -59,7 +59,7 @@ public class ExcelWriteUtil{
     /**
      * Write.
      * 
-     * @param excelTemplateLocation
+     * @param templateLocation
      *            excel模板location,
      * 
      *            <ol>
@@ -67,7 +67,7 @@ public class ExcelWriteUtil{
      *            <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:excel/TradeData/TradeData-list-export.xlsx".</li>
      *            <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      *            </ol>
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            the sheet
@@ -77,18 +77,18 @@ public class ExcelWriteUtil{
      *            输出目录,注意是绝对地址
      */
     public static void write(
-                    String excelTemplateLocation,
-                    String xmlSheetConfigurations,
+                    String templateLocation,
+                    String sheetDefinitionPath,
                     String sheetName,
                     Map<String, Object> beans,
                     String outputFileName){
-        write(excelTemplateLocation, xmlSheetConfigurations, toArray(sheetName), beans, outputFileName);
+        write(templateLocation, sheetDefinitionPath, toArray(sheetName), beans, outputFileName);
     }
 
     /**
      * Write.
      * 
-     * @param excelTemplateLocation
+     * @param templateLocation
      *            excel模板location,
      * 
      *            <ol>
@@ -96,7 +96,7 @@ public class ExcelWriteUtil{
      *            <li>支持classpath pseudo-URLs(伪url), 比如 "classpath:excel/TradeData/TradeData-list-export.xlsx".</li>
      *            <li>支持relative file paths(相对路径), 比如 "WEB-INF/TradeData-list-export.xlsx".</li>
      *            </ol>
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetNames
      *            the sheet names
@@ -106,24 +106,24 @@ public class ExcelWriteUtil{
      *            输出文件名字(全路径)
      */
     public static void write(
-                    String excelTemplateLocation,
-                    String xmlSheetConfigurations,
+                    String templateLocation,
+                    String sheetDefinitionPath,
                     String[] sheetNames,
                     Map<String, Object> beans,
                     String outputFileName){
         if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = build(excelTemplateLocation, xmlSheetConfigurations, sheetNames, beans, outputFileName);
+            Map<String, Object> map = build(templateLocation, sheetDefinitionPath, sheetNames, beans, outputFileName);
             LOGGER.debug("will write excel,params info:[{}]", JsonUtil.format(map));
         }
         //---------------------------------------------------------------
         Date beginDate = new Date();
 
-        InputStream inputStream = InputStreamUtil.getInputStream(excelTemplateLocation);
-        write(inputStream, xmlSheetConfigurations, sheetNames, beans, outputFileName);
+        InputStream inputStream = InputStreamUtil.getInputStream(templateLocation);
+        write(inputStream, sheetDefinitionPath, sheetNames, beans, outputFileName);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            Map<String, Object> map = buildMap(excelTemplateLocation, xmlSheetConfigurations, sheetNames, beans, outputFileName, beginDate);
+            Map<String, Object> map = buildMap(templateLocation, sheetDefinitionPath, sheetNames, beans, outputFileName, beginDate);
             LOGGER.info("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
@@ -133,9 +133,9 @@ public class ExcelWriteUtil{
     /**
      * Write.
      * 
-     * @param excelTemplateLocationInputStream
+     * @param templateInputStream
      *            the input stream template file name
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            the sheet
@@ -146,20 +146,20 @@ public class ExcelWriteUtil{
      * @since 1.2.1
      */
     public static void write(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
+                    InputStream templateInputStream,
+                    String sheetDefinitionPath,
                     String sheetName,
                     Map<String, Object> beans,
                     String outputFileName){
-        write(excelTemplateLocationInputStream, xmlSheetConfigurations, toArray(sheetName), beans, outputFileName);
+        write(templateInputStream, sheetDefinitionPath, toArray(sheetName), beans, outputFileName);
     }
 
     /**
      * Write.
      * 
-     * @param excelTemplateLocationInputStream
+     * @param templateInputStream
      *            the input stream template file name
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            the sheet name
@@ -169,25 +169,19 @@ public class ExcelWriteUtil{
      *            输出文件名字(全路径)
      */
     public static void write(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
+                    InputStream templateInputStream,
+                    String sheetDefinitionPath,
                     String[] sheetName,
                     Map<String, Object> beans,
                     String outputFileName){
         Date beginDate = new Date();
 
         OutputStream outputStream = FileUtil.getFileOutputStream(outputFileName);
-        write(excelTemplateLocationInputStream, xmlSheetConfigurations, sheetName, beans, outputStream);
+        write(templateInputStream, sheetDefinitionPath, sheetName, beans, outputStream);
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = build(
-                            excelTemplateLocationInputStream,
-                            xmlSheetConfigurations,
-                            sheetName,
-                            beans,
-                            outputFileName,
-                            beginDate);
+            Map<String, Object> map = build(templateInputStream, sheetDefinitionPath, sheetName, beans, outputFileName, beginDate);
             LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
@@ -197,9 +191,9 @@ public class ExcelWriteUtil{
     /**
      * Write.
      * 
-     * @param excelTemplateLocationInputStream
+     * @param templateInputStream
      *            the input stream template file name
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            sheetName
@@ -210,20 +204,20 @@ public class ExcelWriteUtil{
      * @since 1.2.1
      */
     public static void write(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
+                    InputStream templateInputStream,
+                    String sheetDefinitionPath,
                     String sheetName,
                     Map<String, Object> beans,
                     OutputStream outputFileOutputStream){
-        write(excelTemplateLocationInputStream, xmlSheetConfigurations, toArray(sheetName), beans, outputFileOutputStream);
+        write(templateInputStream, sheetDefinitionPath, toArray(sheetName), beans, outputFileOutputStream);
     }
 
     /**
      * Write.
      * 
-     * @param excelTemplateLocationInputStream
+     * @param templateInputStream
      *            the input stream template file name
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetNames
      *            the sheet names
@@ -233,35 +227,29 @@ public class ExcelWriteUtil{
      *            输出文件流
      */
     public static void write(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
+                    InputStream templateInputStream,
+                    String sheetDefinitionPath,
                     String[] sheetNames,
                     Map<String, Object> beans,
                     OutputStream outputStream){
         Date beginDate = new Date();
 
-        Validate.notNull(excelTemplateLocationInputStream, "excelTemplateLocationInputStream can't be null!");
+        Validate.notNull(templateInputStream, "templateLocationInputStream can't be null!");
         Validate.notNull(outputStream, "outputStream can't be null!");
 
-        Validate.notBlank(xmlSheetConfigurations, "xmlSheetConfigurations can't be blank!");
+        Validate.notBlank(sheetDefinitionPath, "xmlSheetConfigurations can't be blank!");
 
         //---------------------------------------------------------------
         ExcelManipulatorFactory excelManipulatorFactory = new ExcelManipulatorFactory();
-        excelManipulatorFactory.setConfig(xmlSheetConfigurations);
+        excelManipulatorFactory.setConfig(sheetDefinitionPath);
 
         //---------------------------------------------------------------
         ExcelWriter excelWriter = excelManipulatorFactory.createExcelWriter(sheetNames);
-        excelWriter.write(excelTemplateLocationInputStream, outputStream, beans);
+        excelWriter.write(templateInputStream, outputStream, beans);
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = build(
-                            excelTemplateLocationInputStream,
-                            xmlSheetConfigurations,
-                            sheetNames,
-                            beans,
-                            outputStream,
-                            beginDate);
+            Map<String, Object> map = build(templateInputStream, sheetDefinitionPath, sheetNames, beans, outputStream, beginDate);
             LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
@@ -269,15 +257,15 @@ public class ExcelWriteUtil{
     //---------------------------------------------------------------
 
     private static Map<String, Object> build(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
+                    InputStream templateInputStream,
+                    String sheetDefinitionPath,
                     String[] sheetNames,
                     Map<String, Object> beans,
                     OutputStream outputStream,
                     Date beginDate){
         Map<String, Object> map = newLinkedHashMap();
-        map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
-        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
+        map.put("templateInputStream class", templateInputStream.getClass());
+        map.put("xmlSheetConfigurations", sheetDefinitionPath);
         map.put("sheetNames", sheetNames);
 
         map.put("outputFileOutputStream class", outputStream.getClass());
@@ -309,20 +297,20 @@ public class ExcelWriteUtil{
     //---------------------------------------------------------------
 
     private static Map<String, Object> buildMap(
-                    String excelTemplateLocation,
-                    String xmlSheetConfigurations,
+                    String templateLocation,
+                    String sheetDefinitionPath,
                     String[] sheetNames,
                     Map<String, Object> beans,
                     String outputFileName,
                     Date beginDate){
-        Map<String, Object> map = build(excelTemplateLocation, xmlSheetConfigurations, sheetNames, beans, outputFileName);
+        Map<String, Object> map = build(templateLocation, sheetDefinitionPath, sheetNames, beans, outputFileName);
         map.put("useTime", formatDuration(beginDate));
         return map;
     }
 
     /**
-     * @param excelTemplateLocation
-     * @param xmlSheetConfigurations
+     * @param templateLocation
+     * @param sheetDefinitionPath
      * @param sheetNames
      * @param beans
      * @param outputFileName
@@ -330,14 +318,14 @@ public class ExcelWriteUtil{
      * @since 3.0.0
      */
     private static Map<String, Object> build(
-                    String excelTemplateLocation,
-                    String xmlSheetConfigurations,
+                    String templateLocation,
+                    String sheetDefinitionPath,
                     String[] sheetNames,
                     Map<String, Object> beans,
                     String outputFileName){
         Map<String, Object> map = newLinkedHashMap();
-        map.put("excelTemplateLocation", excelTemplateLocation);
-        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
+        map.put("templateLocation", templateLocation);
+        map.put("sheetDefinitionPath", sheetDefinitionPath);
         map.put("sheetName", sheetNames);
         map.put("outputFileName", outputFileName);
         map.put("data info", toDataInfo(beans));
@@ -345,22 +333,19 @@ public class ExcelWriteUtil{
     }
 
     private static Map<String, Object> build(
-                    InputStream excelTemplateLocationInputStream,
-                    String xmlSheetConfigurations,
+                    InputStream templateInputStream,
+                    String sheetDefinitionPath,
                     String[] sheetName,
                     Map<String, Object> beans,
                     String outputFileName,
                     Date beginDate){
         Map<String, Object> map = newLinkedHashMap();
-        map.put("excelTemplateLocationInputStream class", excelTemplateLocationInputStream.getClass());
-        map.put("xmlSheetConfigurations", xmlSheetConfigurations);
+        map.put("templateInputStream class", templateInputStream.getClass());
+        map.put("sheetDefinitionPath", sheetDefinitionPath);
         map.put("sheetName", sheetName);
         map.put("outputFileName", outputFileName);
         map.put("data info", toDataInfo(beans));
         map.put("useTime", formatDuration(beginDate));
         return map;
     }
-
-    //---------------------------------------------------------------
-
 }

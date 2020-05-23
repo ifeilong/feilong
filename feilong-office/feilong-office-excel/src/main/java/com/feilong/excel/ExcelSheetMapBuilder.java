@@ -17,7 +17,6 @@ package com.feilong.excel;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 
-import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,16 +29,15 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
+import com.feilong.excel.util.DigesterCreater;
+import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.collection4.CollectionUtils;
 
 class ExcelSheetMapBuilder{
 
-    private static final Logger   LOGGER    = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
+    private static final Logger   LOGGER   = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
 
-    /** The Constant RULE_FILE. */
-    private static final String   RULE_FILE = "config/excel/definition-rule.xml";
-
-    private static final Digester DIGESTER  = DigesterCreater.create(RULE_FILE);
+    private static final Digester DIGESTER = DigesterCreater.create("classpath:config/excel/definition-rule.xml");
 
     //---------------------------------------------------------------
 
@@ -54,36 +52,31 @@ class ExcelSheetMapBuilder{
 
     /**
      * 
-     * @param configurations
+     * @param sheetDefinitionPaths
      * @return key是sheet Name
-     * @since 3.0.0
      */
-    static Map<String, ExcelSheet> build(String...configurations){
-        Map<String, ExcelSheet> sheetDefinitions = new HashMap<>();
+    static Map<String, ExcelSheet> build(String...sheetDefinitionPaths){
+        Validate.notEmpty(sheetDefinitionPaths, "sheetDefinitionPaths can't be null/empty!");
 
-        Validate.notEmpty(configurations, "configurations can't be null/empty!");
-        //---------------------------------------------------------------
-
-        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        for (String configuration : configurations){
-            Validate.notBlank(configuration, "config can't be blank!");
+        Map<String, ExcelSheet> sheetDefinitionsMap = new HashMap<>();
+        for (String sheetDefinitionPath : sheetDefinitionPaths){
+            Validate.notBlank(sheetDefinitionPath, "sheetDefinitionPath can't be blank!");
             try{
                 Date beginDate = new Date();
-                InputStream inputStream = contextClassLoader.getResourceAsStream(configuration);
-                List<ExcelSheet> excelSheetList = DIGESTER.parse(inputStream);
+                List<ExcelSheet> excelSheetList = DIGESTER.parse(InputStreamUtil.getInputStream(sheetDefinitionPath));
                 for (ExcelSheet excelSheet : excelSheetList){
-                    sheetDefinitions.put(excelSheet.getName(), excelSheet);
+                    sheetDefinitionsMap.put(excelSheet.getName(), excelSheet);
                 }
                 //---------------------------------------------------------------
                 if (LOGGER.isDebugEnabled()){
                     int size = CollectionUtils.size(excelSheetList);
-                    LOGGER.debug("parse [{}],list size:[{}],use time: [{}]", configuration, size, formatDuration(beginDate));
+                    LOGGER.debug("parse [{}],list size:[{}],use time: [{}]", sheetDefinitionPath, size, formatDuration(beginDate));
                 }
             }catch (Exception e){
-                throw new DefaultRuntimeException("parse [" + configuration + "] fail", e);
+                throw new DefaultRuntimeException("parse [" + sheetDefinitionPath + "] fail", e);
             }
         }
-        return sheetDefinitions;
+        return sheetDefinitionsMap;
     }
 
 }

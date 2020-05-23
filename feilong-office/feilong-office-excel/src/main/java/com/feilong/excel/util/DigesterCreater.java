@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel;
-
-import java.io.InputStream;
+package com.feilong.excel.util;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.binder.DigesterLoader;
@@ -23,9 +21,9 @@ import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
 import org.xml.sax.InputSource;
 
 import com.feilong.core.DefaultRuntimeException;
-import com.feilong.core.lang.ClassLoaderUtil;
+import com.feilong.io.InputStreamUtil;
 
-class DigesterCreater{
+public class DigesterCreater{
 
     /** Don't let anyone instantiate this class. */
     private DigesterCreater(){
@@ -36,22 +34,21 @@ class DigesterCreater{
 
     //---------------------------------------------------------------
 
-    static Digester create(String file){
+    public static Digester create(String location){
         try{
-            InputStream resourceAsStream = ClassLoaderUtil.getResourceAsStream(file, ExcelSheetMapBuilder.class);
-
             Digester digester = DigesterLoader.newLoader(new FromXmlRulesModule(){
 
                 @Override
                 protected void loadRules(){
-                    loadXMLRules(new InputSource(resourceAsStream));
+                    loadXMLRules(new InputSource(InputStreamUtil.getInputStream(location)));
                 }
 
             }).newDigester();
+
             digester.setValidating(false);
             return digester;
         }catch (Exception e){
-            throw new DefaultRuntimeException("can not create Digester from: " + file, e);
+            throw new DefaultRuntimeException("can not create Digester from: " + location, e);
         }
     }
 }

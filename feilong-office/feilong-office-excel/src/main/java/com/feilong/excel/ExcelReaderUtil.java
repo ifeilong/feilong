@@ -20,9 +20,7 @@ import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +29,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DefaultRuntimeException;
+import com.feilong.excel.reader.ReadStatus;
 import com.feilong.io.FileUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.CollectionUtils;
@@ -61,7 +61,7 @@ public class ExcelReaderUtil{
      *
      * @param <T>
      *            the generic type
-     * @param xmlSheetConfiguration
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            sheet 比如 trainCourseSheet
@@ -73,8 +73,8 @@ public class ExcelReaderUtil{
      *            第几个sheet,从0开始,比如1
      * @return the list
      */
-    public static <T> List<T> getList(String xmlSheetConfiguration,String sheetName,String dataName,String fileName,int sheetNo){
-        return getList(toArray(xmlSheetConfiguration), sheetName, dataName, fileName, sheetNo);
+    public static <T> List<T> getList(String sheetDefinitionPath,String sheetName,String dataName,String fileName,int sheetNo){
+        return getList(toArray(sheetDefinitionPath), sheetName, dataName, fileName, sheetNo);
     }
 
     /**
@@ -82,7 +82,7 @@ public class ExcelReaderUtil{
      *
      * @param <T>
      *            the generic type
-     * @param xmlSheetConfiguration
+     * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            sheet 比如 trainCourseSheet
@@ -94,8 +94,8 @@ public class ExcelReaderUtil{
      *            the sheet no
      * @return the list
      */
-    public static <T> List<T> getList(String xmlSheetConfiguration,String sheetName,String dataName,InputStream inputStream,int sheetNo){
-        ExcelReader excelReader = getExcelReader(toArray(xmlSheetConfiguration), sheetName);
+    public static <T> List<T> getList(String sheetDefinitionPath,String sheetName,String dataName,InputStream inputStream,int sheetNo){
+        ExcelReader excelReader = getExcelReader(toArray(sheetDefinitionPath), sheetName);
         return getList(excelReader, dataName, inputStream, sheetNo);
     }
 
@@ -104,7 +104,7 @@ public class ExcelReaderUtil{
      *
      * @param <T>
      *            the generic type
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPaths
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            sheet 比如 trainCourseSheet
@@ -116,8 +116,8 @@ public class ExcelReaderUtil{
      *            the sheet no
      * @return the list
      */
-    public static <T> List<T> getList(String[] xmlSheetConfigurations,String sheetName,String dataName,String fileName,int sheetNo){
-        ExcelReader excelReader = getExcelReader(xmlSheetConfigurations, sheetName);
+    public static <T> List<T> getList(String[] sheetDefinitionPaths,String sheetName,String dataName,String fileName,int sheetNo){
+        ExcelReader excelReader = getExcelReader(sheetDefinitionPaths, sheetName);
         return getList(excelReader, dataName, fileName, sheetNo);
     }
 
@@ -126,16 +126,16 @@ public class ExcelReaderUtil{
     /**
      * 获得 excel reader.
      *
-     * @param xmlSheetConfigurations
+     * @param sheetDefinitionPaths
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
      *            the sheet
      * @return the excel reader
      * @since 1.0.9
      */
-    private static ExcelReader getExcelReader(String[] xmlSheetConfigurations,String sheetName){
+    private static ExcelReader getExcelReader(String[] sheetDefinitionPaths,String sheetName){
         ExcelManipulatorFactory excelManipulatorFactory = new ExcelManipulatorFactory();
-        excelManipulatorFactory.setConfig(xmlSheetConfigurations);
+        excelManipulatorFactory.setConfig(sheetDefinitionPaths);
 
         return excelManipulatorFactory.createExcelReader(sheetName);
     }
@@ -189,7 +189,6 @@ public class ExcelReaderUtil{
 
         int status = readStatus.getStatus();
         if (status != ReadStatus.STATUS_SUCCESS){
-
             List<Exception> exceptions = readStatus.getExceptions();
 
             String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
@@ -199,8 +198,7 @@ public class ExcelReaderUtil{
                             readStatus.getMessage(),
                             exceptions.size(),
                             exceptions.get(0).getStackTrace());
-            LOGGER.error(message);
-            throw new UncheckedIOException(new IOException(message));
+            throw new DefaultRuntimeException(message);
         }
 
         //--------------------------------------------------------------- 

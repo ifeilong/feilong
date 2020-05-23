@@ -17,7 +17,6 @@ package com.feilong.excel.reader;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.feilong.excel.ReadStatus;
 import com.feilong.excel.definition.ExcelBlock;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.lib.excel.ognl.OgnlStack;

@@ -37,11 +37,11 @@ public class ExcelManipulatorFactory{
     /**
      * Sets the config.
      *
-     * @param configurations
+     * @param sheetDefinitionPaths
      *            the new config
      */
-    public void setConfig(String...configurations){
-        sheetDefinitions = ExcelSheetMapBuilder.build(configurations);
+    public void setConfig(String...sheetDefinitionPaths){
+        sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionPaths);
     }
 
     //---------------------------------------------------------------

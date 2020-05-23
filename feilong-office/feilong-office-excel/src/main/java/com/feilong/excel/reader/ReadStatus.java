@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel;
+package com.feilong.excel.reader;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,7 +16,10 @@
 package com.feilong.excel.definition;
 
 /**
- * The Class LoopBreakCondition.
+ * 循环跳出的条件.
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 3.0.0
  */
 public class LoopBreakCondition{
 
@@ -49,6 +52,8 @@ public class LoopBreakCondition{
     public void setRowOffset(int rowOffset){
         this.rowOffset = rowOffset;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the col offset.
