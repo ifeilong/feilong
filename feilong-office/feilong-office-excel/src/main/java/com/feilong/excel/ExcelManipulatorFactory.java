@@ -72,7 +72,7 @@ public class ExcelManipulatorFactory{
      *            the sheets
      * @return the excel writer
      */
-    public ExcelWriter createExcelWriter(Integer styleSheetPosition,String writeTemplateName,String[] sheetNames){
+    public ExcelWriter createExcelWriter(Integer styleSheetPosition,String writeTemplateName,String...sheetNames){
         ExcelWriter excelWriter = createExcelWriterInner(writeTemplateName, sheetNames);
         excelWriter.getDefinition().setStyleSheetPosition(styleSheetPosition);
         return excelWriter;
@@ -87,7 +87,7 @@ public class ExcelManipulatorFactory{
      *            the sheets
      * @return the excel writer
      */
-    public ExcelWriter createExcelWriter(String writeTemplateName,String[] sheetNames){
+    public ExcelWriter createExcelWriter(String writeTemplateName,String...sheetNames){
         return createExcelWriterInner(writeTemplateName, sheetNames);
     }
 
@@ -118,8 +118,8 @@ public class ExcelManipulatorFactory{
         excelWriter.setDefinition(toExcelDefinition(sheetNames));
 
         if (writeTemplateName != null){
-            DefaultExcelWriter dew = (DefaultExcelWriter) excelWriter;
-            dew.initBufferedTemplate(Thread.currentThread().getContextClassLoader().getResourceAsStream(writeTemplateName));
+            DefaultExcelWriter defaultExcelWriter = (DefaultExcelWriter) excelWriter;
+            defaultExcelWriter.initBufferedTemplate(Thread.currentThread().getContextClassLoader().getResourceAsStream(writeTemplateName));
 
         }
         return excelWriter;

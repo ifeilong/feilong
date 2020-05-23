@@ -29,8 +29,6 @@ public class ExcelSheet{
     /** The name. */
     private String           name;
 
-    //---------------------------------------------------------------
-
     /** The display name. */
     private String           displayName;
 
@@ -82,6 +80,8 @@ public class ExcelSheet{
         this.displayName = displayName;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Gets the excel blocks.
      *
@@ -98,7 +98,7 @@ public class ExcelSheet{
      *            the new excel blocks
      */
     public void setExcelBlocks(List<ExcelBlock> excelBlocks){
-        synchronized (isOrdered){
+        synchronized (ExcelSheet.class){
             this.excelBlocks = excelBlocks;
             isOrdered = false;
         }
@@ -125,7 +125,7 @@ public class ExcelSheet{
      *            the new excel block
      */
     public void setExcelBlock(ExcelBlock excelBlock){
-        synchronized (isOrdered){
+        synchronized (ExcelSheet.class){
             excelBlocks.clear();
             excelBlocks.add(excelBlock);
             isOrdered = false;
@@ -139,7 +139,7 @@ public class ExcelSheet{
      *            the excel block
      */
     public void addExcelBlock(ExcelBlock excelBlock){
-        synchronized (isOrdered){
+        synchronized (ExcelSheet.class){
             excelBlocks.add(excelBlock);
             isOrdered = false;
         }
@@ -151,7 +151,7 @@ public class ExcelSheet{
      * @return the sorted excel blocks
      */
     public List<ExcelBlock> getSortedExcelBlocks(){
-        synchronized (isOrdered){
+        synchronized (ExcelSheet.class){
             if (!isOrdered){
                 Collections.sort(excelBlocks);
                 isOrdered = true;

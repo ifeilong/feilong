@@ -23,8 +23,10 @@
 		<set-properties-rule>
 			<alias attr-name="start" prop-name="startCellIndex" />
 			<alias attr-name="end" prop-name="endCellIndex" />
+			
 			<alias attr-name="dataName" prop-name="dataName" />
 			<alias attr-name="loop" prop-name="loop" />
+			
 			<alias attr-name="direction" prop-name="direction" />
 		</set-properties-rule>
 
