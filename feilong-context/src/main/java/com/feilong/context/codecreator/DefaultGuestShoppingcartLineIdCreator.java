@@ -41,7 +41,7 @@ public class DefaultGuestShoppingcartLineIdCreator implements GuestShoppingcartL
      * <li>初始值理论上,每次重启都是不一样的, 且不会重复,只要服务器时间设置是ok的</li>
      * </ul>
      */
-    private static AtomicLong ATOMIC_LONG = new AtomicLong(getIntervalTime(now(), toDate("2017-01-01", COMMON_DATE)));
+    private static AtomicLong counter = new AtomicLong(getIntervalTime(now(), toDate("2017-01-01", COMMON_DATE)));
 
     //---------------------------------------------------------------
 
@@ -59,7 +59,7 @@ public class DefaultGuestShoppingcartLineIdCreator implements GuestShoppingcartL
     public long create(){ //shoppingCartLines.size() 不能解决删除的问题
 
         StringBuilder sb = new StringBuilder();
-        sb.append(ATOMIC_LONG.getAndIncrement());
+        sb.append(counter.getAndIncrement());
         sb.append(RandomUtil.createRandomWithLength(4));//减少因为服务器时间等场景带来的幺蛾子事情
 
         return toLong(sb);

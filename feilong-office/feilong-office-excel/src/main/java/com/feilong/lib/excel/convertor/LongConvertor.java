@@ -25,19 +25,19 @@ public class LongConvertor extends AbstractChoiceConvertor<Long>{
 
     /**
      * Convert value.
-     *
-     * @param value
-     *            the value
      * @param sheetNo
      *            the sheet no
      * @param cellIndex
      *            the cell index
      * @param excelCell
      *            the cell definition
+     * @param value
+     *            the value
+     *
      * @return the long
      */
     @Override
-    protected Long convertValue(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
+    protected Long convertValue(int sheetNo,String cellIndex,ExcelCell excelCell,Object value){
         if (value instanceof String){
             String str = (String) value;
             str = str.trim();

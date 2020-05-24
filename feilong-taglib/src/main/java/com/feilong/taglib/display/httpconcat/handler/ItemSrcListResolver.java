@@ -26,8 +26,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * 专门用来提取标签体内容的.
@@ -109,14 +109,10 @@ public final class ItemSrcListResolver{
         }
 
         //---------------------------------------------------------------
-
         //since 1.11.1
         //<!-- 公共 CSS 部分开始 -->
-        if (item.trim().startsWith("<!--")){// 忽视html注释行
-            return true;
-        }
-
-        return false;
+        //忽视html注释行
+        return item.trim().startsWith("<!--");
     }
 
     //---------------------------------------------------------------

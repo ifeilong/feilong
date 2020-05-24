@@ -14,7 +14,7 @@ import com.feilong.excel.definition.ExcelCell;
 public class IntegerConvertor extends AbstractChoiceConvertor<Integer>{
 
     @Override
-    protected Integer convertValue(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
+    protected Integer convertValue(int sheetNo,String cellIndex,ExcelCell excelCell,Object value){
         if (value instanceof String){
             String str = (String) value;
             str = str.trim();

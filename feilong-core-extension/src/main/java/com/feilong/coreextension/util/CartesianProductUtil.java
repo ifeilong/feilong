@@ -30,8 +30,11 @@ import com.feilong.lib.collection4.IterableUtils;
  * 笛卡尔乘积.
  * 
  * <p>
- * 在数学中,两个集合X和Y的笛卡尓积(Cartesian product),又称直积,表示为X × Y,第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。<br>
+ * 在数学中,两个集合X和Y的笛卡尓积(Cartesian product),又称直积,表示为X × Y,<br>
+ * 
+ * 第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。<br>
  * 假设集合A={a, b},集合B={0, 1, 2},则两个集合的笛卡尔积为{(a, 0), (a, 1), (a, 2), (b, 0), (b, 1), (b, 2)}。<br>
+ * 
  * 类似的例子有,如果A表示某学校学生的集合,B表示该学校所有课程的集合,则A与B的笛卡尔积表示所有可能的选课情况。
  * </p>
  *
@@ -165,7 +168,6 @@ public final class CartesianProductUtil{
         }
 
         //---------------------------------------------------------------
-
         List<List<T>> returnList = new ArrayList<>(length);
         for (int i = 0; i < length; i++){
             returnList.add(buildList(iterables, i));
@@ -195,7 +197,6 @@ public final class CartesianProductUtil{
         }
 
         //---------------------------------------------------------------
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(list.toString());
         }

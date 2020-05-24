@@ -17,6 +17,8 @@ package com.feilong.template;
 
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+@Deprecated
 public class ToolVelocityUtilTest extends AbstractTest{
 
     String templateInClassPath = "velocity/test_toolbox.vm";

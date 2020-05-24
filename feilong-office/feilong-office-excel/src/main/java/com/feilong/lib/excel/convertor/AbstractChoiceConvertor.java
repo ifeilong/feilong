@@ -22,47 +22,32 @@ import com.feilong.excel.ExcelException;
 import com.feilong.excel.definition.ExcelCell;
 import com.feilong.lib.lang3.ArrayUtils;
 
-/**
- * The Class ChoiceConvertor.
- *
- * @param <T>
- *            the generic type
- */
 public abstract class AbstractChoiceConvertor<T> extends AbstractDataConvertor<T>{
 
     private static final int OUT_OF_CHOICES = 3;
 
-    //---------------------------------------------------------------
-
     @Override
     protected T handleConvert(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
-        T t = convertValue(value, sheetNo, cellIndex, excelCell);
+        T t = convertValue(sheetNo, cellIndex, excelCell, value);
+        if (t == null){
+            return null;
+        }
 
-        T[] choices = getChoices(excelCell);
-        if (t == null || choices == null || ArrayUtils.contains(choices, t)){
+        //---------------------------------------------------------------
+        String[] availableChoices = excelCell.getAvailableChoices();
+        if (isNullOrEmpty(availableChoices)){
             return t;
         }
 
+        //---------------------------------------------------------------
+        T[] choices = toArray(availableChoices, supportClass());
+        if (ArrayUtils.contains(choices, t)){
+            return t;
+        }
+
+        //---------------------------------------------------------------
         throw new ExcelException(OUT_OF_CHOICES, sheetNo, cellIndex, value, excelCell);
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * 获得 choices.
-     *
-     * @param cellDefinition
-     *            the cell definition
-     * @return the choices
-     */
-    private T[] getChoices(ExcelCell cellDefinition){
-        String[] availableChoices = cellDefinition.getAvailableChoices();
-        if (isNullOrEmpty(availableChoices)){
-            return null;
-        }
-        return toArray(availableChoices, supportClass());
-    }
-
-    protected abstract T convertValue(Object value,int sheetNo,String cellIndex,ExcelCell cellDefinition);
-
+    protected abstract T convertValue(int sheetNo,String cellIndex,ExcelCell excelCell,Object value);
 }

@@ -16,6 +16,7 @@
 package com.feilong.net.mail.util;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -124,12 +125,12 @@ public final class MessageUtil{
      *
      * @param allRecipients
      *            the all recipients
-     * @return the string[]
+     * @return 如果 <code>allRecipients</code> 是null或者empty,返回 {@link com.feilong.core.lang.ArrayUtil#EMPTY_STRING_ARRAY}<br>
      * @since 1.9.0
      */
     private static String[] toRecipients(Address[] allRecipients){
         if (isNullOrEmpty(allRecipients)){
-            return null;
+            return EMPTY_STRING_ARRAY;
         }
         int length = allRecipients.length;
         String[] recipients = new String[length];

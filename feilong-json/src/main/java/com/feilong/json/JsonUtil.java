@@ -34,6 +34,7 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
@@ -50,7 +51,6 @@ import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -820,6 +820,7 @@ public final class JsonUtil{
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
      */
+    @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> T[] toArray(Object json,JsonToJavaConfig jsonToJavaConfig){
         if (null == json){
             return null;
@@ -905,6 +906,7 @@ public final class JsonUtil{
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(Object, JsonToJavaConfig)
      */
+    @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> List<T> toList(Object json,Class<T> rootClass){
         if (null == json){
             return null;
@@ -993,6 +995,7 @@ public final class JsonUtil{
      * @see com.feilong.lib.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
      */
+    @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> List<T> toList(Object json,JsonToJavaConfig jsonToJavaConfig){
         if (null == json){
             return null;

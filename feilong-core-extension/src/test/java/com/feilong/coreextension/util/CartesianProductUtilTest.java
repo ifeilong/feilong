@@ -16,6 +16,7 @@
 package com.feilong.coreextension.util;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ import com.feilong.test.AbstractTest;
 public class CartesianProductUtilTest extends AbstractTest{
 
     @Test
-    public void testCollectionUtilTest1(){
+    public void test1(){
         Integer[] array1 = { 1, 2, 3 };
         Integer[] array2 = { 1, 2 };
         Integer[] array3 = { 5 };
@@ -39,19 +40,34 @@ public class CartesianProductUtilTest extends AbstractTest{
     }
 
     @Test
-    public void testCollectionUtilTest11(){
+    public void test2(){
         Integer[] array1 = { 1, 2, 3 };
         Integer[] array2 = { 1, 2 };
         Integer[] array3 = { 5 };
         Integer[] array4 = { 4, 8 };
 
-        LOGGER.debug(JsonUtil.format(CartesianProductUtil.cartesianProduct(array1, array2, array3, array4), 0, 4));
+        List<List<Integer>> cartesianProduct = CartesianProductUtil.cartesianProduct(array1, array2, array3, array4);
+        String format = JsonUtil.format(cartesianProduct, 0, 4);
+        //LOGGER.debug(format);
+
+        assertEquals(
+                        "[[1,1,5,4],[2,2,5,8],[3,1,5,4],[1,2,5,8],[2,1,5,4],[3,2,5,8],[1,1,5,4],[2,2,5,8],[3,1,5,4],[1,2,5,8],[2,1,5,4],[3,2,5,8]]",
+                        format);
 
     }
 
     @Test
-    public void testCollectionUtilTest112(){
-        List<List<Integer>> result = CartesianProductUtil.cartesianProduct(toList(1, 2, 3), toList(1, 2), toList(5), toList(4, 8));
-        LOGGER.debug(JsonUtil.format(result, 0, 4));
+    public void test3(){
+        List<List<Integer>> result = CartesianProductUtil.cartesianProduct(//
+                        toList(1, 2, 3),
+                        toList(1, 2),
+                        toList(5),
+                        toList(4, 8));
+        String format = JsonUtil.format(result, 0, 0);
+        //LOGGER.debug(format);
+
+        assertEquals(
+                        "[[1,1,5,4],[2,2,5,8],[3,1,5,4],[1,2,5,8],[2,1,5,4],[3,2,5,8],[1,1,5,4],[2,2,5,8],[3,1,5,4],[1,2,5,8],[2,1,5,4],[3,2,5,8]]",
+                        format);
     }
 }

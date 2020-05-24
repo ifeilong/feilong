@@ -64,15 +64,6 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
 
     }
 
-    /**
-     * Read all per sheet.
-     *
-     * @param inputStream
-     *            the is
-     * @param beans
-     *            the beans
-     * @return the read status
-     */
     @Override
     public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
         try (Workbook workbook = WorkbookFactory.create(inputStream)){

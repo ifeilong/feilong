@@ -41,6 +41,7 @@ import java.util.Set;
 
 import org.apache.commons.collections4.Transformer;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.SortUtil;
@@ -69,7 +70,6 @@ import com.feilong.lib.collection4.iterators.EnumerationIterator;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.LocaleUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.lib.lang3.tuple.Pair;
 
 /**
@@ -2695,6 +2695,7 @@ public final class ConvertUtil{
      * @see "org.springframework.util.StringUtils#toStringArray(Collection)"
      * @since 1.2.2
      */
+    @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){
         if (null == collection){ // since 1.8.6
             return null;

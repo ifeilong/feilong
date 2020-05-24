@@ -15,6 +15,7 @@
  */
 package com.feilong.excel.writer;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
 
 import java.util.Collection;
@@ -78,7 +79,7 @@ class BlockLoopHorizontalWriter{
         }
 
         //---------------------------------------------------------------
-        if (listValue.size() > 0){
+        if (isNotNullOrEmpty(listValue)){
             sheet.shiftRows(endRow + 1, sheet.getLastRowNum(), startRow - endRow - 1, true, false);
         }
     }

@@ -23,7 +23,7 @@ import com.feilong.excel.definition.ExcelCell;
 public class StringConvertor extends AbstractChoiceConvertor<String>{
 
     @Override
-    protected String convertValue(Object value,int sheetNo,String cellIndex,ExcelCell excelCell){
+    protected String convertValue(int sheetNo,String cellIndex,ExcelCell excelCell,Object value){
         String str = (value == null ? null : value.toString());
         if (str != null && str.length() == 0){
             str = null;

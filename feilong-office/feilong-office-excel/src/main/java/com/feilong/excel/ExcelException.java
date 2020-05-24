@@ -72,6 +72,43 @@ public class ExcelException extends RuntimeException{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * @return the errorCode
+     */
+    public int getErrorCode(){
+        return errorCode;
+    }
+
+    /**
+     * @return the sheetNo
+     */
+    public int getSheetNo(){
+        return sheetNo;
+    }
+
+    /**
+     * @return the cellIndex
+     */
+    public String getCellIndex(){
+        return cellIndex;
+    }
+
+    /**
+     * @return the value
+     */
+    public Object getValue(){
+        return value;
+    }
+
+    /**
+     * @return the excelCell
+     */
+    public ExcelCell getExcelCell(){
+        return excelCell;
+    }
+
+    //---------------------------------------------------------------
     /**
      * To string.
      *
@@ -86,4 +123,5 @@ public class ExcelException extends RuntimeException{
     public String toString(){
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+
 }

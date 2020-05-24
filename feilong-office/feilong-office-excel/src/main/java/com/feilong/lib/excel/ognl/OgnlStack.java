@@ -141,7 +141,7 @@ public class OgnlStack{
      * @return the object
      */
     public Object pop(){
-        Validate.isTrue(stackList.size() > 0, "stackList.size() must > 0");
+        Validate.isTrue(!stackList.isEmpty(), "stackList must not empty");
         return stackList.remove(0);
     }
 
@@ -151,7 +151,7 @@ public class OgnlStack{
      * @return the object
      */
     public Object peek(){
-        Validate.isTrue(stackList.size() > 0, "stackList.size() must > 0");
+        Validate.isTrue(!stackList.isEmpty(), "stackList must not empty");
         return stackList.get(0);
     }
 

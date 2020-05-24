@@ -56,6 +56,7 @@ public final class SensitivePropertiesConfig{
      *            the type
      * @return the integer[]
      */
+    @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static Integer[] load(String type){
         //配置式
         String leftAndRightNoMaskLengthsString = SENSITIVE_CONFIG_MAP.get(PREFIX + type.toLowerCase());

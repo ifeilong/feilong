@@ -30,8 +30,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
-import com.feilong.io.IOUtil;
 import com.feilong.core.Validate;
+import com.feilong.io.IOUtil;
 
 /**
  * {@link Workbook} 工具类.
@@ -69,7 +69,7 @@ public class WorkbookUtil{
         try{
             Workbook workbook = WorkbookFactory.create(inputStream);
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("create workbook from [{}] use time: [{}]", inputStream.toString(), formatDuration(beginDate));
+                LOGGER.debug("create workbook from [{}], use time: [{}]", inputStream, formatDuration(beginDate));
             }
             return workbook;
         }catch (EncryptedDocumentException e){
