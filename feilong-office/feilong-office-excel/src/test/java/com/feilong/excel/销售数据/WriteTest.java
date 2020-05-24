@@ -27,7 +27,7 @@ public class WriteTest extends AbstractSalesDataWriteTest{
         String templateFileName = "classpath:销售数据/export-template-sales.xlsx";
         String sheetDefinitionLocation = "classpath:销售数据/sheets-definition.xml";
 
-        handlePerSheet(templateFileName, sheetDefinitionLocation, null, toMap("salesDataList", buildList()));
+        handle(templateFileName, sheetDefinitionLocation, toMap("salesDataList", buildList()));
     }
 
 }

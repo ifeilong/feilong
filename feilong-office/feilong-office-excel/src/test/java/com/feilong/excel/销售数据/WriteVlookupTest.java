@@ -27,7 +27,7 @@ public class WriteVlookupTest extends AbstractSalesDataWriteTest{
         String templateFileName = "classpath:销售数据/vlookup/export-template-sales-vlookup.xlsx";
         String sheetDefinitionLocation = "classpath:销售数据/vlookup/sheets-definition.xml";
 
-        handlePerSheet(templateFileName, sheetDefinitionLocation, null, toMap("salesDataList", buildList()));
+        handle(templateFileName, sheetDefinitionLocation, toMap("salesDataList", buildList()));
     }
 
 }

@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.excel.util.WorkbookUtil;
 import com.feilong.excel.writer.WorkbookWriter;
+import com.feilong.io.InputStreamUtil;
 
 public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWriter{
 
@@ -55,7 +56,7 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      */
     @Override
     public void write(String template,OutputStream outputStream,Map<String, Object> data){
-        write(build(template), outputStream, data);
+        write(InputStreamUtil.getInputStream(template), outputStream, data);
     }
 
     /**
@@ -77,19 +78,7 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
         write(inputStream, outputStream, data);
     }
 
-    //    @Override
-    //    public String write(InputStream inputStream,Map<String, Object> data){
-    //        OutputStream outputStream = null;
-    //        String outputFileName = Slf4jUtil.format(
-    //                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
-    //                        sheetNames,
-    //                        nowTimestamp(),
-    //                        FilenameUtil.getExtension(excelTemplateLocation));
-    //        return write(inputStream, outputStream, data);
-    //    }
-
-    @Override
-    public void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> data){
+    private void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> data){
         Workbook workbook = WorkbookUtil.create(inputStream);
         WorkbookWriter.write(workbook, outputStream, excelDefinition, data);
     }
@@ -108,15 +97,7 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      */
     @Override
     public void writePerSheet(String template,OutputStream os,List<Map<String, Object>> beansList){
-        writePerSheet(build(template), os, beansList);
-    }
-
-    /**
-     * @deprecated use feilong
-     */
-    @Deprecated
-    private static InputStream build(String template){
-        return Thread.currentThread().getContextClassLoader().getResourceAsStream(template);
+        writePerSheet(InputStreamUtil.getInputStream(template), os, beansList);
     }
 
     /**

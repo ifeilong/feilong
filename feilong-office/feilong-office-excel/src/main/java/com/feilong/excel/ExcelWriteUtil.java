@@ -18,9 +18,10 @@ package com.feilong.excel;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.nowTimestamp;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Date;
@@ -31,10 +32,12 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.FileUtil;
-import com.feilong.io.InputStreamUtil;
+import com.feilong.io.FilenameUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.CollectionUtils;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 进行 excel 输出的工具类.
@@ -60,7 +63,7 @@ public class ExcelWriteUtil{
     //---------------------------------------------------------------
     /**
      * Write.
-     * 
+     *
      * @param templateLocation
      *            excel模板location,
      * 
@@ -77,20 +80,21 @@ public class ExcelWriteUtil{
      *            the beans
      * @param outputFileName
      *            输出目录,注意是绝对地址
+     * @return the string
      */
-    public static void write(
+    public static String write(
                     String templateLocation,
                     String sheetDefinitionLocation,
                     String sheetName,
 
                     Map<String, Object> beans,
                     String outputFileName){
-        write(templateLocation, sheetDefinitionLocation, toArray(sheetName), beans, outputFileName);
+        return write(templateLocation, sheetDefinitionLocation, toArray(sheetName), beans, outputFileName);
     }
 
     /**
      * Write.
-     * 
+     *
      * @param templateLocation
      *            excel模板location,
      * 
@@ -107,156 +111,57 @@ public class ExcelWriteUtil{
      *            the beans
      * @param outputFileName
      *            输出文件名字(全路径)
+     * @return the string
      */
-    public static void write(
+    public static String write(
                     String templateLocation,
                     String sheetDefinitionLocation,
                     String[] sheetNames,
 
                     Map<String, Object> beans,
                     String outputFileName){
+        Date beginDate = new Date();
+
+        Validate.notNull(templateLocation, "templateLocation can't be null!");
+        Validate.notBlank(sheetDefinitionLocation, "sheetDefinitionLocation can't be blank!");
+
+        String useOutputFileName = defaultIfNullOrEmpty(
+                        outputFileName,
+                        Slf4jUtil.format(
+                                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
+                                        sheetNames,
+                                        nowTimestamp(),
+                                        FilenameUtil.getExtension(templateLocation)));
+
         if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName);
+            Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName);
             LOGGER.debug("will write excel,params info:[{}]", JsonUtil.format(map));
         }
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        OutputStream outputStream = FileUtil.getFileOutputStream(useOutputFileName);
+        Validate.notNull(outputStream, "outputStream can't be null!");
 
-        InputStream inputStream = InputStreamUtil.getInputStream(templateLocation);
-        write(inputStream, sheetDefinitionLocation, sheetNames, beans, outputFileName);
+        ExcelWriter excelWriter = buildExcelWriter(sheetDefinitionLocation, sheetNames);
+        excelWriter.write(templateLocation, outputStream, beans);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            Map<String, Object> map = buildMap(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName, beginDate);
+            Map<String, Object> map = buildMap(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName, beginDate);
             LOGGER.info("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
-    }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Write.
-     * 
-     * @param templateInputStream
-     *            the input stream template file name
-     * @param sheetDefinitionLocation
-     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
-     * @param sheetName
-     *            the sheet
-     * @param beans
-     *            the beans
-     * @param outputFileName
-     *            输出文件名字(全路径)
-     * @since 1.2.1
-     */
-    public static void write(
-                    InputStream templateInputStream,
-                    String sheetDefinitionLocation,
-                    String sheetName,
-
-                    Map<String, Object> beans,
-                    String outputFileName){
-        write(templateInputStream, sheetDefinitionLocation, toArray(sheetName), beans, outputFileName);
+        return useOutputFileName;
     }
 
     /**
-     * Write.
-     * 
-     * @param templateInputStream
-     *            the input stream template file name
+     * Builds the excel writer.
+     *
      * @param sheetDefinitionLocation
-     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
-     * @param sheetName
-     *            the sheet name
-     * @param beans
-     *            the beans
-     * @param outputFileName
-     *            输出文件名字(全路径)
-     */
-    public static void write(
-                    InputStream templateInputStream,
-                    String sheetDefinitionLocation,
-                    String[] sheetName,
-
-                    Map<String, Object> beans,
-                    String outputFileName){
-        Date beginDate = new Date();
-
-        OutputStream outputStream = FileUtil.getFileOutputStream(outputFileName);
-        write(templateInputStream, sheetDefinitionLocation, sheetName, beans, outputStream);
-
-        //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            Map<String, Object> map = build(templateInputStream, sheetDefinitionLocation, sheetName, beans, outputFileName, beginDate);
-            LOGGER.trace("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
-        }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Write.
-     * 
-     * @param templateInputStream
-     *            the input stream template file name
-     * @param sheetDefinitionLocation
-     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
-     * @param sheetName
-     *            sheetName
-     * @param beans
-     *            the beans
-     * @param outputFileOutputStream
-     *            the output file output stream
-     * @since 1.2.1
-     */
-    public static void write(
-                    InputStream templateInputStream,
-                    String sheetDefinitionLocation,
-                    String sheetName,
-
-                    Map<String, Object> beans,
-                    OutputStream outputFileOutputStream){
-        write(templateInputStream, sheetDefinitionLocation, toArray(sheetName), beans, outputFileOutputStream);
-    }
-
-    /**
-     * Write.
-     * 
-     * @param templateInputStream
-     *            the input stream template file name
-     * @param sheetDefinitionLocation
-     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
+     *            the sheet definition location
      * @param sheetNames
      *            the sheet names
-     * @param beans
-     *            the beans
-     * @param outputStream
-     *            输出文件流
+     * @return the excel writer
      */
-    public static void write(
-                    InputStream templateInputStream,
-                    String sheetDefinitionLocation,
-                    String[] sheetNames,
-
-                    Map<String, Object> beans,
-                    OutputStream outputStream){
-        Date beginDate = new Date();
-
-        Validate.notNull(templateInputStream, "templateLocationInputStream can't be null!");
-        Validate.notNull(outputStream, "outputStream can't be null!");
-
-        Validate.notBlank(sheetDefinitionLocation, "sheetDefinitionLocation can't be blank!");
-
-        ExcelWriter excelWriter = buildExcelWriter(sheetDefinitionLocation, sheetNames);
-        excelWriter.write(templateInputStream, outputStream, beans);
-
-        //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            Map<String, Object> map = build(templateInputStream, sheetDefinitionLocation, sheetNames, beans, outputStream, beginDate);
-            LOGGER.trace("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
-        }
-    }
-
     private static ExcelWriter buildExcelWriter(String sheetDefinitionLocation,String[] sheetNames){
         ExcelManipulatorFactory excelManipulatorFactory = new ExcelManipulatorFactory();
         excelManipulatorFactory.setConfig(sheetDefinitionLocation);
@@ -266,25 +171,13 @@ public class ExcelWriteUtil{
 
     //---------------------------------------------------------------
 
-    private static Map<String, Object> build(
-                    InputStream templateInputStream,
-                    String sheetDefinitionLocation,
-                    String[] sheetNames,
-
-                    Map<String, Object> beans,
-                    OutputStream outputStream,
-                    Date beginDate){
-        Map<String, Object> map = newLinkedHashMap();
-        map.put("templateInputStream class", templateInputStream.getClass());
-        map.put("sheetDefinitionLocation", sheetDefinitionLocation);
-        map.put("sheetNames", sheetNames);
-
-        map.put("outputFileOutputStream class", outputStream.getClass());
-        map.put("data info", toDataInfo(beans));
-        map.put("useTime", formatDuration(beginDate));
-        return map;
-    }
-
+    /**
+     * To data info.
+     *
+     * @param beans
+     *            the beans
+     * @return the map
+     */
     private static Map<String, Integer> toDataInfo(Map<String, Object> beans){
         Map<String, Integer> map = newLinkedHashMap();
         if (isNotNullOrEmpty(beans)){
@@ -301,6 +194,23 @@ public class ExcelWriteUtil{
 
     //---------------------------------------------------------------
 
+    /**
+     * Builds the map.
+     *
+     * @param templateLocation
+     *            the template location
+     * @param sheetDefinitionLocation
+     *            the sheet definition location
+     * @param sheetNames
+     *            the sheet names
+     * @param beans
+     *            the beans
+     * @param outputFileName
+     *            the output file name
+     * @param beginDate
+     *            the begin date
+     * @return the map
+     */
     private static Map<String, Object> buildMap(
                     String templateLocation,
                     String sheetDefinitionLocation,
@@ -315,12 +225,19 @@ public class ExcelWriteUtil{
     }
 
     /**
+     * Builds the.
+     *
      * @param templateLocation
+     *            the template location
      * @param sheetDefinitionLocation
+     *            the sheet definition location
      * @param sheetNames
+     *            the sheet names
      * @param beans
+     *            the beans
      * @param outputFileName
-     * @return
+     *            the output file name
+     * @return the map
      * @since 3.0.0
      */
     private static Map<String, Object> build(
@@ -339,21 +256,4 @@ public class ExcelWriteUtil{
         return map;
     }
 
-    private static Map<String, Object> build(
-                    InputStream templateInputStream,
-                    String sheetDefinitionLocation,
-                    String[] sheetName,
-
-                    Map<String, Object> beans,
-                    String outputFileName,
-                    Date beginDate){
-        Map<String, Object> map = newLinkedHashMap();
-        map.put("templateInputStream class", templateInputStream.getClass());
-        map.put("sheetDefinitionLocation", sheetDefinitionLocation);
-        map.put("sheetName", sheetName);
-        map.put("outputFileName", outputFileName);
-        map.put("data info", toDataInfo(beans));
-        map.put("useTime", formatDuration(beginDate));
-        return map;
-    }
 }

@@ -31,7 +31,7 @@ public class ExcelSheetMapBuilderTest extends AbstractTest{
 
     @Test
     public void test(){
-        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("classpath:excel/consultant/sheets-definition.xml");
+        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("classpath:consultant/sheets-definition.xml");
         assertTrue(map.size() == 1);
 
         assertThat(map, allOf(hasKey("consultantExport")));

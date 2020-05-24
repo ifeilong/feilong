@@ -16,39 +16,28 @@
 package com.feilong.excel;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.date.DateUtil.nowTimestamp;
 
 import java.util.Map;
 
-import com.feilong.core.lang.SystemUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
-import com.feilong.io.FilenameUtil;
 import com.feilong.test.AbstractTest;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 public abstract class AbstractWriteTest extends AbstractTest{
 
-    protected static <T> void handle(String excelTemplateLocation,String sheetDefinitionLocation,Map<String, Object> data){
-        handle(excelTemplateLocation, sheetDefinitionLocation, null, data);
+    protected static <T> void handle(String templateLocation,String sheetDefinitionLocation,Map<String, Object> data){
+        handle(templateLocation, sheetDefinitionLocation, null, data);
     }
 
     protected static <T> void handlePerSheet(
-                    String excelTemplateLocation,
+                    String templateLocation,
                     String sheetDefinitionLocation,
                     String sheetName,
                     Map<String, Object> data){
-        handle(excelTemplateLocation, sheetDefinitionLocation, toArray(sheetName), data);
+        handle(templateLocation, sheetDefinitionLocation, toArray(sheetName), data);
     }
 
-    protected static void handle(String excelTemplateLocation,String sheetDefinitionLocation,String[] sheetNames,Map<String, Object> beans){
-        String outputFileName = Slf4jUtil.format(
-                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
-                        sheetNames,
-                        nowTimestamp(),
-                        FilenameUtil.getExtension(excelTemplateLocation));
-
-        ExcelWriteUtil.write(excelTemplateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName);
-
+    protected static void handle(String templateLocation,String sheetDefinitionLocation,String[] sheetNames,Map<String, Object> beans){
+        String outputFileName = ExcelWriteUtil.write(templateLocation, sheetDefinitionLocation, sheetNames, beans, null);
         DesktopUtil.open(outputFileName);
     }
 

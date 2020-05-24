@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel;
+package com.feilong.excel.销售数据;
 
-import java.util.List;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.test.AbstractTest;
-
-public abstract class AbstractReadTest extends AbstractTest{
-
-    protected static <T> List<T> read(String fileLocation,String sheetDefinitionLocation,String sheetName,String dataName){
-        return ExcelReaderUtil.read(fileLocation, sheetDefinitionLocation, sheetName, dataName, 0);
-    }
+@RunWith(Suite.class)
+@SuiteClasses({ //
+                Write审计Test.class,
+                Write税Test.class,
+                WriteTest.class,
+                WriteVlookup同比Test.class,
+                WriteVlookupTest.class,
+        //
+})
+public class 销售SuiteTests{
 
 }
