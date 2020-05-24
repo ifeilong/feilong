@@ -24,6 +24,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see ViewCommand
  * @since 1.11.3
  */
 public interface SubViewCommand extends Serializable{
