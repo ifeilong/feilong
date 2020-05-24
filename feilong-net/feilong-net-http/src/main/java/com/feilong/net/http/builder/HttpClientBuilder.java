@@ -55,7 +55,7 @@ public class HttpClientBuilder{
      * 
      * @since 2.1.0
      */
-    private static Map<ConnectionConfig, HttpClient> CACHE  = newConcurrentHashMap(10);
+    private static Map<ConnectionConfig, HttpClient> cache  = newConcurrentHashMap(10);
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
@@ -79,11 +79,11 @@ public class HttpClientBuilder{
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
-        HttpClient httpClient = CACHE.get(useConnectionConfig);
+        HttpClient httpClient = cache.get(useConnectionConfig);
         if (null != httpClient){
 
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(StringUtils.center("loader from cache,cache size:[" + CACHE.size() + "]", 80, "="));
+                LOGGER.debug(StringUtils.center("loader from cache,cache size:[" + cache.size() + "]", 80, "="));
             }
             return httpClient;
         }
@@ -91,13 +91,13 @@ public class HttpClientBuilder{
         //---------------------------------------------------------------
         //只有cache 中没有httpClient 对象时 才需要排队
         synchronized (HttpClientBuilder.class){
-            httpClient = CACHE.get(useConnectionConfig);
+            httpClient = cache.get(useConnectionConfig);
             if (null == httpClient){
                 httpClient = build(useConnectionConfig, null);
-                CACHE.put(useConnectionConfig, httpClient);
+                cache.put(useConnectionConfig, httpClient);
 
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + CACHE.size() + "]", 120, "-"));
+                    LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + cache.size() + "]", 120, "-"));
                 }
             }
         }

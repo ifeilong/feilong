@@ -37,6 +37,8 @@ public class BreadCrumbVMParams<T> implements Serializable{
     /** The connector. */
     private String                    connector;
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 the bread crumb entity list.
      *

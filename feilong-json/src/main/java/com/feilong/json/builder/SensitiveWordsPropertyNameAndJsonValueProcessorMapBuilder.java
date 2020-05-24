@@ -57,7 +57,7 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
     //---------------------------------------------------------------
 
     /** The cache. */
-    private static Map<Class<?>, Map<String, JsonValueProcessor>> CACHE  = newHashMap();
+    private static Map<Class<?>, Map<String, JsonValueProcessor>> cache  = newHashMap();
 
     //---------------------------------------------------------------
 
@@ -153,13 +153,13 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
      */
     private static Map<String, JsonValueProcessor> parseBean(Object javaBean){
         Class<?> klass = javaBean.getClass();
-        if (CACHE.containsKey(klass)){
-            return CACHE.get(klass);
+        if (cache.containsKey(klass)){
+            return cache.get(klass);
         }
 
         //---------------------------------------------------------------
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = build(klass);
-        CACHE.put(klass, propertyNameAndJsonValueProcessorMap);
+        cache.put(klass, propertyNameAndJsonValueProcessorMap);
         return propertyNameAndJsonValueProcessorMap;
     }
 

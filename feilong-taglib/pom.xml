@@ -38,6 +38,12 @@
 			<artifactId>feilong-template</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-engine-core</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!--*******************servlet-api && jsp-api************************* -->
 		<!-- servlet-api -->
 		<dependency>

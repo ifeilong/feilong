@@ -38,7 +38,7 @@ public class ExcelSheet{
     private List<ExcelBlock> excelBlocks = new ArrayList<>();
 
     /** The is ordered. */
-    private Boolean          isOrdered   = false;
+    private boolean          isOrdered   = false;
 
     //---------------------------------------------------------------
 

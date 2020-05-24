@@ -176,22 +176,6 @@ public class ExcelCell{
         this.pattern = pattern;
     }
 
-    /**
-     * Gets the choice string.
-     *
-     * @return the choice string
-     */
-    public String getChoiceString(){
-        if (getAvailableChoices() == null || getAvailableChoices().length == 0){
-            return "";
-        }
-        StringBuffer sb = new StringBuffer();
-        for (String str : getAvailableChoices()){
-            sb.append("," + str);
-        }
-        return sb.substring(1);
-    }
-
     //---------------------------------------------------------------
 
     /**

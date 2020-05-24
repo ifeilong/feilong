@@ -16,9 +16,9 @@
 package com.feilong.taglib.display.breadcrumb;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
-import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 
 import java.net.URL;
@@ -29,12 +29,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
@@ -126,8 +126,7 @@ public class BreadCrumbUtil{
         breadCrumbVMParams.setConnector(breadCrumbParams.getConnector());
 
         //---------------------------------------------------------------
-        Map<String, Object> contextKeyValues = newHashMap();
-        contextKeyValues.put(VM_KEY_BREADCRUMB, breadCrumbVMParams);
+        Map<String, Object> contextKeyValues = toMap(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
         String siteMapString = TemplateUtil.parseTemplate(breadCrumbParams.getVmPath(), contextKeyValues);
         LOGGER.debug("siteMapString is:[{}]", siteMapString);

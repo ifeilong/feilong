@@ -72,9 +72,8 @@ public final class HttpRequestExecuter{
 
         //---------------------------------------------------------------
         //回手掏
-        T t = resultCallback.on(httpRequest, httpUriRequest, httpResponse, useConnectionConfig, beginDate);
+        return resultCallback.on(httpRequest, httpUriRequest, httpResponse, useConnectionConfig, beginDate);
         //httpUriRequest.abort();
-        return t;
     }
 
     //---------------------------------------------------------------

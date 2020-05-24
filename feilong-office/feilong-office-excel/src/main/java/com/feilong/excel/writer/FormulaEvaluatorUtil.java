@@ -92,9 +92,8 @@ public class FormulaEvaluatorUtil{
      * @return the string
      */
     static String offsetFormula(String formula,int rowOffset,int colOffset){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Matcher matcher = DYNAMIC_CELL_PATTREN.matcher(formula);
-
         int head = 0;
         int start = 0;
         int end = -1;
