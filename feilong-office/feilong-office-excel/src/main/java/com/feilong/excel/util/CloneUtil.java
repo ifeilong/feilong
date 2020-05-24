@@ -15,17 +15,7 @@
  */
 package com.feilong.excel.util;
 
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-
-import com.feilong.excel.definition.ExcelBlock;
-import com.feilong.excel.definition.ExcelCell;
-import com.feilong.excel.definition.ExcelCellConditionStyle;
-import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.definition.LoopBreakCondition;
 
 /**
  * The Class CloneUtil.
@@ -43,74 +33,6 @@ public class CloneUtil{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Clone block.
-     *
-     * @param aexcelBlock
-     *            the aexcel block
-     * @return the excel block
-     */
-    private static ExcelBlock cloneBlock(ExcelBlock aexcelBlock){
-        if (null == aexcelBlock){
-            return null;
-        }
-        //---------------------------------------------------------------
-        ExcelBlock excelBlock = new ExcelBlock();
-        excelBlock.setBreakCondition(cloneLoopBreakCondition(aexcelBlock.getBreakCondition()));
-        excelBlock.setChild(aexcelBlock.isChild());
-        excelBlock.setDataName(aexcelBlock.getDataName());
-        excelBlock.setEndCol(aexcelBlock.getEndCol());
-        excelBlock.setEndRow(aexcelBlock.getEndRow());
-        excelBlock.setLoop(aexcelBlock.isLoop());
-        excelBlock.setDirection(aexcelBlock.getDirection());
-        excelBlock.setLoopClass(aexcelBlock.getLoopClass());
-        excelBlock.setStartCol(aexcelBlock.getStartCol());
-        excelBlock.setStartRow(aexcelBlock.getStartRow());
-
-        //---------------------------------------------------------------
-        List<ExcelCellConditionStyle> styles = newArrayList();
-        for (ExcelCellConditionStyle excelCellConditionStyle : aexcelBlock.getStyles()){
-            styles.add(cloneStyle(excelCellConditionStyle));
-        }
-        excelBlock.setStyles(styles);
-
-        for (ExcelCell excelCell : aexcelBlock.getCells()){
-            excelBlock.addCell(cloneCell(excelCell));
-        }
-        excelBlock.setChildBlock(cloneBlock(aexcelBlock.getChildBlock()));
-        return excelBlock;
-    }
-
-    /**
-     * Clone condition.
-     *
-     * @param loopBreakCondition
-     *            the loop break condition
-     * @return the loop break condition
-     */
-    private static LoopBreakCondition cloneLoopBreakCondition(LoopBreakCondition loopBreakCondition){
-        if (null == loopBreakCondition){
-            return null;
-        }
-
-        //---------------------------------------------------------------
-        LoopBreakCondition condition = new LoopBreakCondition();
-        condition.setRowOffset(loopBreakCondition.getRowOffset());
-        condition.setColOffset(loopBreakCondition.getColOffset());
-        condition.setFlagString(loopBreakCondition.getFlagString());
-        return condition;
-    }
-
-    public static ExcelSheet cloneSheet(ExcelSheet aexcelSheet){
-        ExcelSheet excelSheet = new ExcelSheet();
-        excelSheet.setName(aexcelSheet.getName());
-        excelSheet.setDisplayName(aexcelSheet.getDisplayName());
-        for (ExcelBlock block : aexcelSheet.getSortedExcelBlocks()){
-            excelSheet.addExcelBlock(cloneBlock(block));
-        }
-        return excelSheet;
-    }
 
     /**
      * Clone map.
@@ -137,44 +59,6 @@ public class CloneUtil{
             }
         }
         return result;
-    }
-
-    /**
-     * Clone cell.
-     *
-     * @param excelCell
-     *            the excel cell
-     * @return the excel cell
-     */
-    private static ExcelCell cloneCell(ExcelCell excelCell){
-        ExcelCell cell = new ExcelCell();
-
-        String[] availableChoices = excelCell.getAvailableChoices();
-        cell.setAvailableChoices(availableChoices == null ? null : Arrays.asList(availableChoices).toArray(new String[0]));
-        cell.setCol(excelCell.getCol());
-        cell.setDataExpr(excelCell.getDataExpr());
-        cell.setDataName(excelCell.getDataName());
-        cell.setMandatory(excelCell.isMandatory());
-        cell.setPattern(excelCell.getPattern());
-        cell.setRow(excelCell.getRow());
-        cell.setType(excelCell.getType());
-
-        for (ExcelCellConditionStyle style : excelCell.getStyles()){
-            cell.addStyle(cloneStyle(style));
-        }
-        return cell;
-    }
-
-    private static ExcelCellConditionStyle cloneStyle(ExcelCellConditionStyle excelCellConditionStyle){
-        ExcelCellConditionStyle style = new ExcelCellConditionStyle();
-        style.setCellIndex(excelCellConditionStyle.getCellIndex());
-        style.setCondition(excelCellConditionStyle.getCondition());
-
-        style.setEndRow(excelCellConditionStyle.getEndRow());
-        style.setEndCol(excelCellConditionStyle.getEndCol());
-        style.setStartRow(excelCellConditionStyle.getStartRow());
-        style.setStartCol(excelCellConditionStyle.getStartCol());
-        return style;
     }
 
 }

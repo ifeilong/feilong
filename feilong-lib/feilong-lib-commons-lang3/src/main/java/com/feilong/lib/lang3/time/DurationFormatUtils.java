@@ -193,7 +193,7 @@ public class DurationFormatUtils{
      *             if durationMillis is negative
      */
     public static String formatDuration(final long durationMillis,final String format,final boolean padWithZeros){
-        Validate.inclusiveBetween(0, Long.MAX_VALUE, durationMillis, "durationMillis must not be negative");
+        inclusiveBetween(0, Long.MAX_VALUE, durationMillis, "durationMillis must not be negative");
 
         final Token[] tokens = lexx(format);
 
@@ -221,6 +221,36 @@ public class DurationFormatUtils{
         }
 
         return format(tokens, 0, 0, days, hours, minutes, seconds, milliseconds, padWithZeros);
+    }
+
+    /**
+     * Validate that the specified primitive value falls between the two
+     * inclusive values specified; otherwise, throws an exception with the
+     * specified message.
+     *
+     * <pre>
+     * Validate.inclusiveBetween(0, 2, 1, "Not in range");
+     * </pre>
+     *
+     * @param start
+     *            the inclusive start value
+     * @param end
+     *            the inclusive end value
+     * @param value
+     *            the value to validate
+     * @param message
+     *            the exception message if invalid, not null
+     *
+     * @throws IllegalArgumentException
+     *             if the value falls outside the boundaries
+     *
+     * @since 3.3
+     */
+    private static void inclusiveBetween(final long start,final long end,final long value,final String message){
+        // TODO when breaking BC, consider returning value
+        if (value < start || value > end){
+            throw new IllegalArgumentException(message);
+        }
     }
 
     //-----------------------------------------------------------------------

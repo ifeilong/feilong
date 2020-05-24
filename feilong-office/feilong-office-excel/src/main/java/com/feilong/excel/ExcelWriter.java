@@ -30,10 +30,10 @@ public interface ExcelWriter extends ExcelConfig{
      *
      * @param outputStream
      *            the os
-     * @param beans
+     * @param data
      *            the beans
      */
-    void write(OutputStream outputStream,Map<String, Object> beans);
+    void write(OutputStream outputStream,Map<String, Object> data);
 
     /**
      * Write.
@@ -42,10 +42,10 @@ public interface ExcelWriter extends ExcelConfig{
      *            the template
      * @param outputStream
      *            the os
-     * @param beans
+     * @param data
      *            the beans
      */
-    void write(String template,OutputStream outputStream,Map<String, Object> beans);
+    void write(String template,OutputStream outputStream,Map<String, Object> data);
 
     /**
      * Write.
@@ -54,10 +54,10 @@ public interface ExcelWriter extends ExcelConfig{
      *            the is
      * @param outputStream
      *            the os
-     * @param beans
+     * @param data
      *            the beans
      */
-    void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans);
+    void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> data);
 
     //---------------------------------------------------------------
 
@@ -66,10 +66,10 @@ public interface ExcelWriter extends ExcelConfig{
      *
      * @param outputStream
      *            the os
-     * @param beansList
+     * @param dataList
      *            the beans list
      */
-    void writePerSheet(OutputStream outputStream,List<Map<String, Object>> beansList);
+    void writePerSheet(OutputStream outputStream,List<Map<String, Object>> dataList);
 
     /**
      * Write per sheet.
@@ -78,10 +78,10 @@ public interface ExcelWriter extends ExcelConfig{
      *            the template
      * @param outputStream
      *            the os
-     * @param beansList
+     * @param dataList
      *            the beans list
      */
-    void writePerSheet(String template,OutputStream outputStream,List<Map<String, Object>> beansList);
+    void writePerSheet(String template,OutputStream outputStream,List<Map<String, Object>> dataList);
 
     //---------------------------------------------------------------
 
@@ -92,9 +92,9 @@ public interface ExcelWriter extends ExcelConfig{
      *            the is
      * @param outputStream
      *            the os
-     * @param beansList
+     * @param dataList
      *            the beans list
      */
-    void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList);
+    void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> dataList);
 
 }

@@ -37,6 +37,8 @@ class ExcelSheetMapBuilder{
 
     private static final Logger   LOGGER   = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
 
+    //---------------------------------------------------------------
+
     private static final Digester DIGESTER = DigesterCreater.create("classpath:config/excel/definition-rule.xml");
 
     //---------------------------------------------------------------
@@ -52,14 +54,14 @@ class ExcelSheetMapBuilder{
 
     /**
      * 
-     * @param sheetDefinitionPaths
+     * @param sheetDefinitionLocations
      * @return key是sheet Name
      */
-    static Map<String, ExcelSheet> build(String...sheetDefinitionPaths){
-        Validate.notEmpty(sheetDefinitionPaths, "sheetDefinitionPaths can't be null/empty!");
+    static Map<String, ExcelSheet> build(String...sheetDefinitionLocations){
+        Validate.notEmpty(sheetDefinitionLocations, "sheetDefinitionLocations can't be null/empty!");
 
         Map<String, ExcelSheet> sheetDefinitionsMap = new HashMap<>();
-        for (String sheetDefinitionPath : sheetDefinitionPaths){
+        for (String sheetDefinitionPath : sheetDefinitionLocations){
             Validate.notBlank(sheetDefinitionPath, "sheetDefinitionPath can't be blank!");
             try{
                 Date beginDate = new Date();

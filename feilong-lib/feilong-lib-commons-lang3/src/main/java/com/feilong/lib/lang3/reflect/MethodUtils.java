@@ -893,7 +893,7 @@ public class MethodUtils{
      */
     public static Method getMatchingMethod(final Class<?> cls,final String methodName,final Class<?>...parameterTypes){
         Validate.notNull(cls, "Null class not allowed.");
-        Validate.notEmpty(methodName, "Null or blank methodName not allowed.");
+        notEmpty(methodName, "Null or blank methodName not allowed.");
 
         // Address methods in superclasses
         Method[] methodArray = cls.getDeclaredMethods();
@@ -918,6 +918,38 @@ public class MethodUtils{
 
         }
         return inexactMatch;
+    }
+
+    /**
+     * <p>
+     * Validate that the specified argument character sequence is
+     * neither {@code null} nor a length of zero (no characters);
+     * otherwise throwing an exception with the specified message.
+     *
+     * <pre>
+     * Validate.notEmpty(myString, "The string must not be empty");
+     * </pre>
+     *
+     * @param <T>
+     *            the character sequence type
+     * @param chars
+     *            the character sequence to check, validated not null by this method
+     * @param message
+     *            the {@link String#format(String, Object...)} exception message if invalid, not null
+     * @param values
+     *            the optional values for the formatted exception message, null array not recommended
+     * @return the validated character sequence (never {@code null} method for chaining)
+     * @throws NullPointerException
+     *             if the character sequence is {@code null}
+     * @throws IllegalArgumentException
+     *             if the character sequence is empty
+     */
+    private static <T extends CharSequence> T notEmpty(final T chars,final String message,final Object...values){
+        Objects.requireNonNull(chars, () -> String.format(message, values));
+        if (chars.length() == 0){
+            throw new IllegalArgumentException(String.format(message, values));
+        }
+        return chars;
     }
 
     /**
