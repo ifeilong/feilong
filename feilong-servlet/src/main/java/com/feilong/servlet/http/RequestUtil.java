@@ -21,12 +21,12 @@ import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.getValue;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.servlet.http.HttpHeaders.ORIGIN;
 import static com.feilong.servlet.http.HttpHeaders.REFERER;
 import static com.feilong.servlet.http.HttpHeaders.USER_AGENT;
@@ -53,6 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.EnumerationUtil;
@@ -60,7 +61,6 @@ import com.feilong.core.util.MapUtil;
 import com.feilong.io.ReaderUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
 
 /**
@@ -860,12 +860,9 @@ public final class RequestUtil{
         //---------------------------------------------------------------
         for (Map.Entry<String, String> entry : map.entrySet()){
             String value = entry.getValue();
-            if (isNullOrEmpty(value)){
-                continue;
-            }
             //IPV4 127.0.0.1
             //IPV6 2610:00f8:0c34:67f9:0200:83ff:fe94:4c36
-            if ("unknown".equalsIgnoreCase(value)){
+            if (isNullOrEmpty(value) || "unknown".equalsIgnoreCase(value)){
                 continue;
             }
 

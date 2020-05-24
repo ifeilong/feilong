@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class Write审计Test extends AbstractSalesDataWriteTest{
 
     @Test

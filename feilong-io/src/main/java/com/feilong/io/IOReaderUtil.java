@@ -20,9 +20,9 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,9 +42,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.validator.ValidatorUtil;
 
 /**
@@ -617,10 +617,7 @@ public final class IOReaderUtil{
         }
 
         //---------------------------------------------------------------
-        String regexPattern = useReaderConfig.getRegexPattern();
-
         Date beginDate = now();
-
         Set<String> set = newLinkedHashSet();
         //---------------------------------------------------------------
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
@@ -629,10 +626,7 @@ public final class IOReaderUtil{
                 if (useReaderConfig.getIsTrim()){
                     line = StringUtils.trim(line);
                 }
-                if (isNotNullOrEmpty(regexPattern) && !ValidatorUtil.isMatches(regexPattern, line)){
-                    continue;
-                }
-                if (isNullOrEmpty(line) && useReaderConfig.getIgnoreBlankLine()){
+                if (isIgnoreLine(line, useReaderConfig)){
                     continue;
                 }
                 set.add(line);
@@ -648,6 +642,16 @@ public final class IOReaderUtil{
             LOGGER.info(format, reader, JsonUtil.format(useReaderConfig), formatDuration(beginDate));
         }
         return set;
+    }
+
+    private static boolean isIgnoreLine(String line,ReaderConfig readerConfig){
+        String regexPattern = readerConfig.getRegexPattern();
+        //不符合正则
+        if (isNotNullOrEmpty(regexPattern) && !ValidatorUtil.isMatches(regexPattern, line)){
+            return true;
+        }
+        //空白
+        return isNullOrEmpty(line) && readerConfig.getIgnoreBlankLine();
     }
 
     //---------------------------------------------------------------

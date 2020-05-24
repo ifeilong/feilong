@@ -28,13 +28,10 @@ import org.junit.Test;
 import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class JsoupUtilTest.
- */
 public class JsoupUtilTest2 extends AbstractTest{
 
     @Test
-    public void getDocument1() throws JsoupUtilException{
+    public void test(){
         String urlString = "http://data.10jqka.com.cn/financial/yjgg/date/2017-03-31/ajax/1/";
         Elements elements = JsoupUtil.getElementsBySelect(urlString, "tbody tr");
 
@@ -44,18 +41,10 @@ public class JsoupUtilTest2 extends AbstractTest{
             list.add(buildTdValueMap(trElement));
         }
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(list));
-        }
+        LOGGER.debug(JsonUtil.format(list));
 
     }
 
-    /**
-     * @param tdElements
-     * @param i
-     * @return
-     * @since 1.10.4
-     */
     private Map<String, Object> buildTdValueMap(Element element){
         LOGGER.debug("" + element);
 

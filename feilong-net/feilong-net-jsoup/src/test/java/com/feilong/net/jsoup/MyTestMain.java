@@ -22,20 +22,22 @@ import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class MyTestMain extends AbstractTest{
 
     @Test
-    public void testMyTestMain(){
-        // 直接从字符串中输入 HTML 文档
+    public void test(){
         String html = "<html><head><title> 开源中国社区 </title></head>" + "<body><p> 这里是 jsoup 项目的相关文章 </p></body></html>";
         Document doc = Jsoup.parse(html);
-        //	LOGGER.debug(doc.getElementsByClass(""));
-        String unsafe = "<p><a href='http://www.oschina.net/' onclick='stealCookies()'>  开源中国社区 </a></p>";
-        String safe = Jsoup.clean(unsafe, Whitelist.basic());
-        LOGGER.debug(safe);
-
         LOGGER.debug(doc.text());
         // 输出 : 
         // <p><a href="http://www.oschina.net/" rel="nofollow"> 开源中国社区 </a></p> 
+    }
+
+    @Test
+    public void testMyTestMain(){
+        String unsafe = "<p><a href='http://www.oschina.net/' onclick='stealCookies()'>  开源中国社区 </a></p>";
+        String safe = Jsoup.clean(unsafe, Whitelist.basic());
+        LOGGER.debug(safe);
     }
 }

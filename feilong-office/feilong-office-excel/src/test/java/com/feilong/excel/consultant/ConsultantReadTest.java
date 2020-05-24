@@ -24,6 +24,7 @@ import org.junit.Test;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.excel.AbstractReadTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class ConsultantReadTest extends AbstractReadTest{
 
     @Test
