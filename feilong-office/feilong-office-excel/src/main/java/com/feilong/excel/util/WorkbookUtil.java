@@ -69,7 +69,7 @@ public class WorkbookUtil{
         try{
             Workbook workbook = WorkbookFactory.create(inputStream);
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("create workbook from [{}], use time: [{}]", inputStream, formatDuration(beginDate));
+                LOGGER.debug("create workbook from [{}],use time: [{}]", inputStream, formatDuration(beginDate));
             }
             return workbook;
         }catch (EncryptedDocumentException e){

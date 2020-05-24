@@ -128,7 +128,7 @@ public class ExcelWriteUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             Map<String, Object> map = buildMap(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName, beginDate);
-            LOGGER.info("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
+            LOGGER.info("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
 
@@ -186,9 +186,9 @@ public class ExcelWriteUtil{
         write(templateInputStream, sheetDefinitionLocation, sheetName, beans, outputStream);
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (LOGGER.isTraceEnabled()){
             Map<String, Object> map = build(templateInputStream, sheetDefinitionLocation, sheetName, beans, outputFileName, beginDate);
-            LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
+            LOGGER.trace("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
 
@@ -251,9 +251,9 @@ public class ExcelWriteUtil{
         excelWriter.write(templateInputStream, outputStream, beans);
 
         //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
+        if (LOGGER.isTraceEnabled()){
             Map<String, Object> map = build(templateInputStream, sheetDefinitionLocation, sheetNames, beans, outputStream, beginDate);
-            LOGGER.debug("write excel [SUCCESS],params info:[{}]", JsonUtil.format(map));
+            LOGGER.trace("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
         }
     }
 

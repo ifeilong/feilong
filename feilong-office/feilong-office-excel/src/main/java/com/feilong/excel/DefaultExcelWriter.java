@@ -50,12 +50,12 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *            the template
      * @param outputStream
      *            the os
-     * @param beans
+     * @param data
      *            the beans
      */
     @Override
-    public void write(String template,OutputStream outputStream,Map<String, Object> beans){
-        write(build(template), outputStream, beans);
+    public void write(String template,OutputStream outputStream,Map<String, Object> data){
+        write(build(template), outputStream, data);
     }
 
     /**
@@ -63,25 +63,38 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
      *
      * @param outputStream
      *            the os
-     * @param beans
+     * @param data
      *            the beans
      */
     @Override
-    public void write(OutputStream outputStream,Map<String, Object> beans){
+    public void write(OutputStream outputStream,Map<String, Object> data){
         if (bufferedTemplate == null){
             throw new IllegalArgumentException("bufferedTemplate is null");
         }
 
         //---------------------------------------------------------------
         InputStream inputStream = new ByteArrayInputStream(bufferedTemplate);
-        write(inputStream, outputStream, beans);
+        write(inputStream, outputStream, data);
     }
 
+    //    @Override
+    //    public String write(InputStream inputStream,Map<String, Object> data){
+    //        OutputStream outputStream = null;
+    //        String outputFileName = Slf4jUtil.format(
+    //                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
+    //                        sheetNames,
+    //                        nowTimestamp(),
+    //                        FilenameUtil.getExtension(excelTemplateLocation));
+    //        return write(inputStream, outputStream, data);
+    //    }
+
     @Override
-    public void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> beans){
+    public void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> data){
         Workbook workbook = WorkbookUtil.create(inputStream);
-        WorkbookWriter.write(workbook, outputStream, excelDefinition, beans);
+        WorkbookWriter.write(workbook, outputStream, excelDefinition, data);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Write per sheet.

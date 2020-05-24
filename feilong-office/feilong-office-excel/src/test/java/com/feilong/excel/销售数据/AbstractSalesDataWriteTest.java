@@ -37,4 +37,5 @@ abstract class AbstractSalesDataWriteTest extends AbstractWriteTest{
     protected int buildMonth(){
         return 12;
     }
+
 }

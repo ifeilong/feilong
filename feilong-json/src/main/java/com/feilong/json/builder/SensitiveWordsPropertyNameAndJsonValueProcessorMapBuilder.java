@@ -32,13 +32,13 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
-import com.feilong.core.Validate;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.lib.lang3.reflect.MethodUtils;
 
@@ -256,7 +256,7 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
             //since 1.12.2
             if (null == readMethod){
                 LOGGER.warn(
-                                "class:[{}],propertyDescriptor name:[{}],has no ReadMethod!!SKIPPED",
+                                "class:[{}],property:[{}],has no ReadMethod!!SKIPPED",
                                 klass.getCanonicalName(),
                                 propertyDescriptor.getDisplayName());
                 continue;

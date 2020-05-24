@@ -15,7 +15,7 @@
  */
 package com.feilong.excel.销售数据;
 
-import java.util.List;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
 
@@ -24,14 +24,18 @@ public class Write税Test extends AbstractSalesDataWriteTest{
 
     @Test
     public void test(){
-        String templateFileName = "销售数据/税/export-template-sales-税.xlsx";
-        String configurations = "classpath:excel/销售数据/税/sheets-definition.xml";
+        String templateFileName = "classpath:销售数据/税/export-template-sales-税.xlsx";
+        String sheetDefinitionLocation = "classpath:销售数据/税/sheets-definition.xml";
 
-        String sheetName = "salesDataExport";
+        handle(
+                        templateFileName,
+                        sheetDefinitionLocation,
+                        toMap(//
+                                        "salesDataList",
+                                        buildList(),
 
-        //---------------------------------------------------------------
-        List<SalesData> list = buildList();
-        build(templateFileName, configurations, sheetName, "salesDataList", list);
+                                        "sheetName",
+                                        "测试111"));
     }
 
 }

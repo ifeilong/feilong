@@ -20,7 +20,6 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
@@ -31,15 +30,19 @@ public class ExcelWrite订阅Test extends AbstractWriteTest{
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
-        String templateFileName = "subscribtion/template-list-2sheet.xlsx";
-        String configurations = "classpath:excel/subscribtion/sheets-definition.xml";
+        String templateFileName = "classpath:subscribtion/template-list-2sheet.xlsx";
+        String sheetDefinitionLocation = "classpath:subscribtion/sheets-definition.xml";
 
-        //---------------------------------------------------------------
-        List<SubscribtionCommand> alist = buildAList();
-        List<SubscribtionCommand> blist = buildBList();
+        handle(
+                        templateFileName,
+                        sheetDefinitionLocation,
+                        toArray("aSheet", "bSheet"), //
+                        toMap(
+                                        "alist",
+                                        (Object) buildAList(), //
 
-        Map<String, Object> map = toMap("alist", (Object) alist, "blist", blist);
-        build(templateFileName, configurations, toArray("aSheet", "bSheet"), map);
+                                        "blist",
+                                        buildBList()));
     }
 
     //---------------------------------------------------------------

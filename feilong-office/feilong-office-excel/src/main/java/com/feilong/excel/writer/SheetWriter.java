@@ -17,6 +17,7 @@ package com.feilong.excel.writer;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
 
 import java.util.ArrayList;
@@ -40,8 +41,9 @@ import com.feilong.lib.excel.ognl.OgnlStack;
 class SheetWriter{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SheetWriter.class);
+    private static final Logger LOGGER     = LoggerFactory.getLogger(SheetWriter.class);
 
+    private static final String SHEET_NAME = "sheetName";
     //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
@@ -75,10 +77,10 @@ class SheetWriter{
                     Sheet sheet,
                     ExcelSheet excelSheet,
                     ExcelBlock excelBlock,
+
                     Map<String, CellStyle> styleMap,
                     Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap,
                     OgnlStack ognlStack){
-        //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("excelBlock:{}", JsonUtil.format(excelBlock));
         }
@@ -152,13 +154,11 @@ class SheetWriter{
     }
 
     private static String getSheetName(ExcelSheet excelSheet,OgnlStack ognlStack){
+        String sheetNameStack = defaultIfNullOrEmpty(//
+                        (String) ognlStack.getValue(SHEET_NAME),
+                        EMPTY);
         String sheetDisplayName = excelSheet.getDisplayName();
 
-        String sheetNameStack = "";
-        Object value = ognlStack.getValue("sheetName");
-        if (value != null){
-            sheetNameStack = (String) value;
-        }
         LOGGER.debug("excelSheet DisplayName:[{}],stack value:[{}]", sheetDisplayName, sheetNameStack);
         return defaultIfNullOrEmpty(sheetNameStack, sheetDisplayName);
     }

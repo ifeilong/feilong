@@ -15,7 +15,7 @@
  */
 package com.feilong.excel.销售数据;
 
-import java.util.List;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import org.junit.Test;
 
@@ -24,14 +24,10 @@ public class WriteTest extends AbstractSalesDataWriteTest{
 
     @Test
     public void test(){
-        String templateFileName = "销售数据/export-template-sales.xlsx";
-        String configurations = "classpath:excel/销售数据/sheets-definition.xml";
+        String templateFileName = "classpath:销售数据/export-template-sales.xlsx";
+        String sheetDefinitionLocation = "classpath:销售数据/sheets-definition.xml";
 
-        String sheetName = "salesDataExport";
-
-        //---------------------------------------------------------------
-        List<SalesData> list = buildList();
-        build(templateFileName, configurations, sheetName, "salesDataList", list);
+        handlePerSheet(templateFileName, sheetDefinitionLocation, null, toMap("salesDataList", buildList()));
     }
 
 }
