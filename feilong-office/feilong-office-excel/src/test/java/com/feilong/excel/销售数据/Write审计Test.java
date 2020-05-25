@@ -15,19 +15,17 @@
  */
 package com.feilong.excel.销售数据;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
-
-import org.junit.Test;
-
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class Write审计Test extends AbstractSalesDataWriteTest{
 
-    @Test
-    public void test(){
-        String templateFileName = "classpath:销售数据/audit/export-template-sales-vlookup.xlsx";
-        String sheetDefinitionLocation = "classpath:销售数据/audit/sheets-definition.xml";
+    @Override
+    protected String buildTemplateLocation(){
+        return "classpath:销售数据/audit/export-template-sales-vlookup.xlsx";
+    }
 
-        handle(templateFileName, sheetDefinitionLocation, toMap("salesDataList", buildList()));
+    @Override
+    protected String buildSheetDefinitionLocation(){
+        return "classpath:销售数据/audit/sheets-definition.xml";
     }
 
 }

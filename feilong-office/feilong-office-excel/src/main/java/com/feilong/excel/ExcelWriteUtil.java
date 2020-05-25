@@ -79,7 +79,8 @@ public class ExcelWriteUtil{
      * @param beans
      *            the beans
      * @param outputFileName
-     *            输出目录,注意是绝对地址
+     *            输出文件名字(全路径),<br>
+     *            如果是null,默认输出地址是 USER_HOME +/feilong/excel/{sheetNames}{nowTimestamp()}.{FilenameUtil.getExtension(templateLocation)}
      * @return the string
      */
     public static String write(
@@ -110,8 +111,12 @@ public class ExcelWriteUtil{
      * @param beans
      *            the beans
      * @param outputFileName
-     *            输出文件名字(全路径)
-     * @return the string
+     *            输出文件名字(全路径),<br>
+     *            如果是null,默认输出地址是 USER_HOME +/feilong/excel/{sheetNames}{nowTimestamp()}.{FilenameUtil.getExtension(templateLocation)}
+     * @return 如果 <code>templateLocation</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>templateLocation</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>sheetDefinitionLocation</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>sheetDefinitionLocation</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static String write(
                     String templateLocation,
@@ -122,7 +127,7 @@ public class ExcelWriteUtil{
                     String outputFileName){
         Date beginDate = new Date();
 
-        Validate.notNull(templateLocation, "templateLocation can't be null!");
+        Validate.notBlank(templateLocation, "templateLocation can't be blank!");
         Validate.notBlank(sheetDefinitionLocation, "sheetDefinitionLocation can't be blank!");
 
         String useOutputFileName = defaultIfNullOrEmpty(

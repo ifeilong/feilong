@@ -17,6 +17,11 @@
 
 		<dependency>
 			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-servlet</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-excel</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -64,7 +69,8 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

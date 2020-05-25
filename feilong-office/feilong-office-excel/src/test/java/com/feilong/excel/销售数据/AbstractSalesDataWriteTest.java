@@ -16,13 +16,37 @@
 package com.feilong.excel.销售数据;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.util.List;
+import java.util.Map;
+
+import org.junit.Test;
 
 import com.feilong.excel.AbstractWriteTest;
 
 abstract class AbstractSalesDataWriteTest extends AbstractWriteTest{
+
+    @Test
+    public void test(){
+        String templateLocation = buildTemplateLocation();
+        String sheetDefinitionLocation = buildSheetDefinitionLocation();
+
+        handle(templateLocation, sheetDefinitionLocation, buildData());
+    }
+
+    protected Map<String, Object> buildData(){
+        return toMap("salesDataList", buildList());
+    }
+
+    //---------------------------------------------------------------
+
+    protected abstract String buildTemplateLocation();
+
+    protected abstract String buildSheetDefinitionLocation();
+
+    //---------------------------------------------------------------
 
     protected List<SalesData> buildList(){
         List<SalesData> list = newArrayList();

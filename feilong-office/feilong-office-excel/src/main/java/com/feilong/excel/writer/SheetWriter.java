@@ -69,7 +69,7 @@ class SheetWriter{
         }
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("writeSheet:[{}] use time: [{}]", excelSheet.getName(), formatDuration(beginDate));
+            LOGGER.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatDuration(beginDate));
         }
     }
 

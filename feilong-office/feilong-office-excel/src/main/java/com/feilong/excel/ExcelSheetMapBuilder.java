@@ -72,7 +72,7 @@ class ExcelSheetMapBuilder{
                 //---------------------------------------------------------------
                 if (LOGGER.isDebugEnabled()){
                     int size = CollectionUtils.size(excelSheetList);
-                    LOGGER.debug("parse [{}],list size:[{}],use time: [{}]", sheetDefinitionPath, size, formatDuration(beginDate));
+                    LOGGER.debug("parse [{}],sheetList size:[{}],use time: [{}]", sheetDefinitionPath, size, formatDuration(beginDate));
                 }
             }catch (Exception e){
                 throw new DefaultRuntimeException("parse [" + sheetDefinitionPath + "] fail", e);

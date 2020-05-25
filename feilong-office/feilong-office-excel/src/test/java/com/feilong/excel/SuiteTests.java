@@ -27,6 +27,7 @@ import com.feilong.excel.销售数据.Write审计Test;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 ExcelSheetMapBuilderTest.class,
+                ExcelWriteUtilTest.class,
 
                 IntegerConvertorTest.class,
                 CellReferenceUtilTest.class,
