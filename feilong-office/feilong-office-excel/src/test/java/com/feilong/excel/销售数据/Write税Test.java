@@ -16,22 +16,21 @@
 package com.feilong.excel.销售数据;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
 import java.util.Map;
-
-import com.feilong.lib.springframework.util.ResourceUtils;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class Write税Test extends AbstractSalesDataWriteTest{
 
     @Override
     protected String buildTemplateLocation(){
-        return ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/税/export-template-sales-税.xlsx";
+        return CLASSPATH_URL_PREFIX + "销售数据/税/export-template-sales-税.xlsx";
     }
 
     @Override
     protected String buildSheetDefinitionLocation(){
-        return ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/税/sheets-definition.xml";
+        return CLASSPATH_URL_PREFIX + "销售数据/税/sheets-definition.xml";
     }
 
     //---------------------------------------------------------------

@@ -15,19 +15,19 @@
  */
 package com.feilong.excel.销售数据;
 
-import com.feilong.lib.springframework.util.ResourceUtils;
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class WriteVlookupTest extends AbstractSalesDataWriteTest{
 
     @Override
     protected String buildSheetDefinitionLocation(){
-        return ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/vlookup/export-template-sales-vlookup.xlsx";
+        return CLASSPATH_URL_PREFIX + "销售数据/vlookup/export-template-sales-vlookup.xlsx";
     }
 
     @Override
     protected String buildTemplateLocation(){
-        return ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/vlookup/sheets-definition.xml";
+        return CLASSPATH_URL_PREFIX + "销售数据/vlookup/sheets-definition.xml";
     }
 
 }
