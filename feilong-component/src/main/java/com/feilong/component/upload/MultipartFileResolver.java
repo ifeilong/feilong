@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.spring.web.multipart;
+package com.feilong.component.upload;
 
 import org.springframework.web.multipart.MultipartFile;
 

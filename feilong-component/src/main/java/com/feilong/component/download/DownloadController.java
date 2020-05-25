@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.controller;
+package com.feilong.component.download;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
