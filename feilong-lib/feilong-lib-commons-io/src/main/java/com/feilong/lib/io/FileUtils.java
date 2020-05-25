@@ -208,7 +208,7 @@ public class FileUtils{
         try (InputStream in = openInputStream(file)){
             final long fileLength = file.length();
             // file.length() may return 0 for system-dependent entities, treat 0 as unknown length - see IO-453
-            return fileLength > 0 ? IOUtils.toByteArray(in, fileLength) : IOUtils.toByteArray(in);
+            return fileLength > 0 ? IOUtils.toByteArray(in, (int) fileLength) : IOUtils.toByteArray(in);
         }
     }
 

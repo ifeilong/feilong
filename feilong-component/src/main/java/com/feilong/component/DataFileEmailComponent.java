@@ -30,9 +30,9 @@ import com.feilong.context.FileReworker;
 import com.feilong.context.Task;
 import com.feilong.context.filecreator.ListDataFileCreator;
 import com.feilong.context.log.UseTimeLogable;
+import com.feilong.core.Validate;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 import com.feilong.net.mail.MailSender;
 import com.feilong.net.mail.entity.MailSendRequest;
 
@@ -119,17 +119,17 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
     /**
      * 4.变成附件发邮件给相关人员 的组件
      *
-     * @param filePath
+     * @param attachFilePath
      *            the file path
      * @param dataList
      *            the data list
      * @since 2.1.0
      */
-    private void sendEmail(String filePath,List<T> dataList){
+    private void sendEmail(String attachFilePath,List<T> dataList){
         //避免影响到元数据
         MailSendRequest useMailSendRequest = BeanUtil.cloneBean(mailSendRequest);
         //变成附件发邮件给相关人员的组件
-        useMailSendRequest.setAttachFilePaths(filePath);
+        useMailSendRequest.setAttachFileLocations(attachFilePath);
         mailSender.send(useMailSendRequest);
     }
 

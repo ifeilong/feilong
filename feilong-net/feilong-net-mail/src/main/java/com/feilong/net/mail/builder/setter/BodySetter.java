@@ -88,7 +88,7 @@ public class BodySetter{
         mimeMultipart.addBodyPart(buildHtmlContentBody(mailSendRequest));
 
         //------------设置附件---------------------------------------------------
-        AttachmentSetter.setAttachment(mimeMultipart, mailSendRequest.getAttachFilePaths());
+        AttachmentSetter.setAttachment(mimeMultipart, mailSendRequest.getAttachFileLocations());
         return mimeMultipart;
     }
 

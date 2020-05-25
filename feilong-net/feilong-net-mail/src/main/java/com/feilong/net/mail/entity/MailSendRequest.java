@@ -96,18 +96,33 @@ public class MailSendRequest{
 
     //-----------------附件----------------------------------------------
 
-    /** 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.png. */
-    private String[]  attachFilePaths;
+    /**
+     * 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.png.
+     * 
+     * @since 3.0.0 change from attachFilePaths,support classpath: format
+     */
+    private String[]  attachFileLocations;
 
     //-----------------注意:这个参数 是 ...----------------------------------------------
     /**
      * 设置 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.
      *
-     * @param attachFilePaths
+     * @param attachFileLocations
      *            the attachFilePaths to set
+     * @since 3.0.0 change from attachFilePaths,support classpath: format
      */
-    public void setAttachFilePaths(String...attachFilePaths){
-        this.attachFilePaths = attachFilePaths;
+    public void setAttachFileLocations(String...attachFileLocations){
+        this.attachFileLocations = attachFileLocations;
+    }
+
+    /**
+     * 获得 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.
+     *
+     * @return the attachFilePaths
+     * @since 3.0.0 change from attachFilePaths,support classpath: format
+     */
+    public String[] getAttachFileLocations(){
+        return attachFileLocations;
     }
 
     //---------------------------------------------------------------
@@ -262,15 +277,6 @@ public class MailSendRequest{
      */
     public void setContentMimeType(String contentMimeType){
         this.contentMimeType = contentMimeType;
-    }
-
-    /**
-     * 获得 邮件附件的文件全路径, 比如 E:\Workspaces\train\20150417Spring事务\ppt-contents.
-     *
-     * @return the attachFilePaths
-     */
-    public String[] getAttachFilePaths(){
-        return attachFilePaths;
     }
 
     //---------------------------------------------------------------

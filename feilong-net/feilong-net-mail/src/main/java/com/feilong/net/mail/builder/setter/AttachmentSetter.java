@@ -16,10 +16,9 @@
 package com.feilong.net.mail.builder.setter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
-import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -28,9 +27,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
+import com.feilong.io.InputStreamUtil;
 import com.feilong.io.entity.MimeType;
+import com.feilong.lib.io.IOUtils;
 
 /**
  * 设置附件.
@@ -60,41 +60,37 @@ public final class AttachmentSetter{
      *
      * @param mimeMultipart
      *            MiniMultipart类是一个容器类,包含MimeBodyPart类型的对象
-     * @param attachFilePaths
+     * @param attachFileLocations
      *            the attach file paths
      * @throws MessagingException
      *             the messaging exception
      * @since 1.1.1
      */
-    public static void setAttachment(MimeMultipart mimeMultipart,String[] attachFilePaths) throws MessagingException{
-        // html
-        if (isNullOrEmpty(attachFilePaths)){
+    public static void setAttachment(MimeMultipart mimeMultipart,String[] attachFileLocations) throws MessagingException{
+        if (isNullOrEmpty(attachFileLocations)){
             return;// nothing to do
         }
 
         //-------------------以HTML格式发送邮件 带附件的邮件图片--------------------------------------------
-
-        //附件文件名字
-        List<String> attachFileNames = newArrayList();
-        List<byte[]> attachList = newArrayList();
-
-        for (String attachFilePath : attachFilePaths){
-            attachFileNames.add(FilenameUtil.getFileName(attachFilePath));
-            attachList.add(FileUtil.toByteArray(new File(attachFilePath)));
-        }
-
-        //---------------------------------------------------------------
         System.setProperty("mail.mime.encodefilename", "true");
 
         // 用于组合文本和图片,"related"型的MimeMultipart对象  
         mimeMultipart.setSubType("related");
 
-        for (int i = 0, j = attachList.size(); i < j; i++){
-            String cid = PREFIX_CONTENTID + i;
-            MimeBodyPart mimeBodyPart = buildMimeBodyPart(attachList.get(i), attachFileNames.get(i), cid);
+        int i = 0;
+        for (String attachFileLocation : attachFileLocations){
+            //附件文件名字
+            String fileName = FilenameUtil.getFileName(attachFileLocation);
 
-            // 将含有附件的BodyPart加入到MimeMultipart对象中
-            mimeMultipart.addBodyPart(mimeBodyPart);
+            try{
+                byte[] byteArray = IOUtils.toByteArray(InputStreamUtil.getInputStream(attachFileLocation));
+
+                // 将含有附件的BodyPart加入到MimeMultipart对象中
+                mimeMultipart.addBodyPart(buildMimeBodyPart(fileName, byteArray, PREFIX_CONTENTID + i));
+                i++;
+            }catch (IOException e){
+                throw new UncheckedIOException(e);
+            }
         }
     }
 
@@ -102,19 +98,20 @@ public final class AttachmentSetter{
 
     /**
      * Builds the mime body part.
-     *
-     * @param data
-     *            the data
+     * 
      * @param fileName
      *            the file name
+     * @param data
+     *            the data
      * @param cid
      *            the cid
+     *
      * @return the mime body part
      * @throws MessagingException
      *             the messaging exception
      * @since 1.8.2
      */
-    private static MimeBodyPart buildMimeBodyPart(byte[] data,String fileName,String cid) throws MessagingException{
+    private static MimeBodyPart buildMimeBodyPart(String fileName,byte[] data,String cid) throws MessagingException{
         String mimeType = MimeType.BIN.getMime();
 
         // 新建一个存放附件的BodyPart

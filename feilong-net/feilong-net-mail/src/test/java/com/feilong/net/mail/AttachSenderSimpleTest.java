@@ -15,16 +15,19 @@
  */
 package com.feilong.net.mail;
 
-import org.junit.Test;
+import static com.feilong.core.lang.SystemUtil.USER_HOME;
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
-import com.feilong.core.lang.SystemUtil;
+import org.junit.Test;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class AttachSenderSimpleTest extends AbstractMailSenderTest{
 
     @Test
     public void sendMailWithAttach(){
-        mailSendRequest.setAttachFilePaths(SystemUtil.USER_HOME + "/feilong/excel/[consultantExport]20200428214903.xlsx");
+        mailSendRequest.setAttachFileLocations(
+                        CLASSPATH_URL_PREFIX + "/salesDataExport20200525153218.xlsx", //
+                        USER_HOME + "/.gitconfig");
     }
 
     @Test
@@ -32,6 +35,6 @@ public class AttachSenderSimpleTest extends AbstractMailSenderTest{
         mailSendRequest.setContent("hello world");
         //        另外，如果要做内嵌或发送图片，你应该使用信用较高的邮箱帐户，否则会报错：
         //        554 DT:SPM 发送的邮件内容包含了未被许可的信息，或被系统识别为垃圾邮件。请检查是否有用户发送病毒或者垃圾邮件
-        mailSendRequest.setAttachFilePaths(SystemUtil.USER_HOME + "/DataFixed/Material/头像avatar/飞龙.png");
+        mailSendRequest.setAttachFileLocations(USER_HOME + "/DataFixed/Material/头像avatar/飞龙.png");
     }
 }
