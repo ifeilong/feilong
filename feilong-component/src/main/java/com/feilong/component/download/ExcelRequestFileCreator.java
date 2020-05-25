@@ -15,18 +15,13 @@
  */
 package com.feilong.component.download;
 
-import static com.feilong.core.date.DateUtil.nowTimestamp;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.context.RequestDataBuilder;
 import com.feilong.context.filecreator.RequestFileCreator;
-import com.feilong.core.lang.SystemUtil;
 import com.feilong.excel.ExcelWriteUtil;
-import com.feilong.io.FilenameUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 基于request 来生成 excel文件.
@@ -42,7 +37,12 @@ public class ExcelRequestFileCreator implements RequestFileCreator{
     /** The sheet definition location. */
     private String             sheetDefinitionLocation;
 
+    //---------------------------------------------------------------
+
+    @Deprecated
     private String             sheetName;
+
+    private String             outputFileName;
 
     //---------------------------------------------------------------
 
@@ -60,13 +60,6 @@ public class ExcelRequestFileCreator implements RequestFileCreator{
      */
     @Override
     public String create(HttpServletRequest request){
-        String outputFileName = Slf4jUtil.format(
-                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
-                        sheetName,
-                        nowTimestamp(),
-                        FilenameUtil.getExtension(templateLocation));
-
-        //---------------------------------------------------------------
         Map<String, Object> data = requestDataBuilder.build(request);
 
         ExcelWriteUtil.write(templateLocation, sheetDefinitionLocation, sheetName, data, outputFileName);
@@ -107,9 +100,18 @@ public class ExcelRequestFileCreator implements RequestFileCreator{
     /**
      * @param sheetName
      *            the sheetName to set
+     * @Deprecated
      */
     public void setSheetName(String sheetName){
         this.sheetName = sheetName;
+    }
+
+    /**
+     * @param outputFileName
+     *            the outputFileName to set
+     */
+    public void setOutputFileName(String outputFileName){
+        this.outputFileName = outputFileName;
     }
 
 }

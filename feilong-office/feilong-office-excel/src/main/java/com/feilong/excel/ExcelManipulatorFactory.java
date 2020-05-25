@@ -22,7 +22,12 @@ import com.feilong.excel.definition.ExcelSheet;
 
 /**
  * A factory for creating ExcelManipulator objects.
+ * 
+ * @see DefaultExcelWriter
+ * @see DefaultExcelReader
+ * @deprecated 将会删除
  */
+@Deprecated
 public class ExcelManipulatorFactory{
 
     /** key是sheet Name. */
@@ -36,22 +41,23 @@ public class ExcelManipulatorFactory{
      * @param sheetDefinitionLocations
      *            the new config
      */
+    @Deprecated
     public void setConfig(String...sheetDefinitionLocations){
         sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionLocations);
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Creates a new ExcelManipulator object.
-     *
-     * @param sheetNames
-     *            the sheet names
-     * @return the excel writer
-     */
-    public ExcelWriter createExcelWriter(String...sheetNames){
-        return createExcelWriter(null, null, sheetNames);
-    }
+    //
+    //    /**
+    //     * Creates a new ExcelManipulator object.
+    //     *
+    //     * @param sheetNames
+    //     *            the sheet names
+    //     * @return the excel writer
+    //     */
+    //    public ExcelWriter createExcelWriter(String...sheetNames){
+    //        return createExcelWriter(null, null, sheetNames);
+    //    }
 
     /**
      * Creates a new ExcelManipulator object.
@@ -95,6 +101,14 @@ public class ExcelManipulatorFactory{
         ExcelReader excelReader = new DefaultExcelReader();
         excelReader.setDefinition(ExcelDefinitionBuilder.build(sheetDefinitions, sheetNames));
         return excelReader;
+    }
+
+    /**
+     * @param sheetDefinitions
+     *            the sheetDefinitions to set
+     */
+    public void setSheetDefinitions(Map<String, ExcelSheet> sheetDefinitions){
+        this.sheetDefinitions = sheetDefinitions;
     }
 
 }

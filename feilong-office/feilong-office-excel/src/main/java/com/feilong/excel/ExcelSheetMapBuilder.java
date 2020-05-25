@@ -16,9 +16,11 @@
 package com.feilong.excel;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.DigesterCreater;
 import com.feilong.io.InputStreamUtil;
+import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.springframework.util.ResourceUtils;
 
@@ -62,14 +65,14 @@ class ExcelSheetMapBuilder{
     static Map<String, ExcelSheet> build(String...sheetDefinitionLocations){
         Validate.notEmpty(sheetDefinitionLocations, "sheetDefinitionLocations can't be null/empty!");
 
-        Map<String, ExcelSheet> sheetDefinitionsMap = new HashMap<>();
+        Map<String, ExcelSheet> sheetDefinitionsMap = newLinkedHashMap(sheetDefinitionLocations.length);
         for (String sheetDefinitionPath : sheetDefinitionLocations){
             Validate.notBlank(sheetDefinitionPath, "sheetDefinitionPath can't be blank!");
             try{
                 Date beginDate = new Date();
                 List<ExcelSheet> excelSheetList = DIGESTER.parse(InputStreamUtil.getInputStream(sheetDefinitionPath));
                 for (ExcelSheet excelSheet : excelSheetList){
-                    sheetDefinitionsMap.put(excelSheet.getName(), excelSheet);
+                    sheetDefinitionsMap.put(defaultIfNullOrEmpty(excelSheet.getName(), EMPTY), excelSheet);
                 }
                 //---------------------------------------------------------------
                 if (LOGGER.isDebugEnabled()){
@@ -80,6 +83,15 @@ class ExcelSheetMapBuilder{
                 throw new DefaultRuntimeException("parse [" + sheetDefinitionPath + "] fail", e);
             }
         }
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(
+                            "parse sheetDefinitionLocations:[{}],sheetDefinitionsMap:[{}]",
+                            sheetDefinitionLocations,
+                            JsonUtil.format(sheetDefinitionsMap));
+        }
+        //---------------------------------------------------------------
         return sheetDefinitionsMap;
     }
 

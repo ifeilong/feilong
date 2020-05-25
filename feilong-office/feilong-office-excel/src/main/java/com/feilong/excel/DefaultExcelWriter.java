@@ -32,6 +32,11 @@ import com.feilong.excel.util.WorkbookUtil;
 import com.feilong.excel.writer.WorkbookWriter;
 import com.feilong.io.InputStreamUtil;
 
+/**
+ * The Class DefaultExcelWriter.
+ * 
+ * @see ExcelManipulatorFactory
+ */
 public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWriter{
 
     /** The Constant log. */
@@ -41,6 +46,25 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
 
     /** The buffered template. */
     private byte[]              bufferedTemplate;
+
+    //---------------------------------------------------------------
+
+    /**
+     * Instantiates a new default excel writer.
+     */
+    public DefaultExcelWriter(){
+    }
+
+    /**
+     * Instantiates a new default excel writer.
+     *
+     * @param excelDefinition
+     *            the excel definition
+     */
+    public DefaultExcelWriter(ExcelDefinition excelDefinition){
+        super();
+        this.excelDefinition = excelDefinition;
+    }
 
     //---------------------------------------------------------------
 
@@ -78,6 +102,16 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
         write(inputStream, outputStream, data);
     }
 
+    /**
+     * Write.
+     *
+     * @param inputStream
+     *            the input stream
+     * @param outputStream
+     *            the output stream
+     * @param data
+     *            the data
+     */
     private void write(InputStream inputStream,OutputStream outputStream,Map<String, Object> data){
         Workbook workbook = WorkbookUtil.create(inputStream);
         WorkbookWriter.write(workbook, outputStream, excelDefinition, data);
@@ -118,6 +152,16 @@ public class DefaultExcelWriter extends AbstractExcelConfig implements ExcelWrit
         writePerSheet(inputStream, outputStream, beansList);
     }
 
+    /**
+     * Write per sheet.
+     *
+     * @param inputStream
+     *            the input stream
+     * @param outputStream
+     *            the output stream
+     * @param beansList
+     *            the beans list
+     */
     @Override
     public void writePerSheet(InputStream inputStream,OutputStream outputStream,List<Map<String, Object>> beansList){
         try (Workbook workbook = WorkbookUtil.create(inputStream)){

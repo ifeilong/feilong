@@ -34,6 +34,13 @@ import com.feilong.excel.reader.SheetReader;
 import com.feilong.excel.util.CloneUtil;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
+/**
+ * The Class DefaultExcelReader.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see ExcelManipulatorFactory
+ * @since 3.0.0
+ */
 public class DefaultExcelReader extends AbstractExcelConfig implements ExcelReader{
 
     /** The skip errors. */
@@ -41,6 +48,15 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
 
     //---------------------------------------------------------------
 
+    /**
+     * Read all.
+     *
+     * @param inputStream
+     *            the input stream
+     * @param beans
+     *            the beans
+     * @return the read status
+     */
     @Override
     public ReadStatus readAll(InputStream inputStream,Map<String, Object> beans){
         ReadStatus readStatus = new ReadStatus();
@@ -64,6 +80,15 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
 
     }
 
+    /**
+     * Read all per sheet.
+     *
+     * @param inputStream
+     *            the input stream
+     * @param beans
+     *            the beans
+     * @return the read status
+     */
     @Override
     public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
@@ -106,6 +131,17 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
 
     //---------------------------------------------------------------
 
+    /**
+     * Read sheet.
+     *
+     * @param inputStream
+     *            the input stream
+     * @param sheetNo
+     *            the sheet no
+     * @param beans
+     *            the beans
+     * @return the read status
+     */
     @Override
     public ReadStatus readSheet(InputStream inputStream,int sheetNo,Map<String, Object> beans){
         OgnlStack ognlStack = new OgnlStack(beans);

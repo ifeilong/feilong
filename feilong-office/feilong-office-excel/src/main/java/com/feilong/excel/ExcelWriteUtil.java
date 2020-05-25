@@ -17,6 +17,7 @@ package com.feilong.excel;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
@@ -28,6 +29,7 @@ import static java.util.Collections.emptyMap;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -35,6 +37,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.SheetNamesUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
@@ -135,7 +138,11 @@ public class ExcelWriteUtil{
         Validate.notBlank(templateLocation, "templateLocation can't be blank!");
         Validate.notBlank(sheetDefinitionLocation, "sheetDefinitionLocation can't be blank!");
 
-        String useOutputFileName = defaultIfNullOrEmpty(outputFileName, buildDefaultOutputFileName(templateLocation, sheetNames));
+        Map<String, ExcelSheet> sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionLocation);
+
+        String useOutputFileName = defaultIfNullOrEmpty(
+                        outputFileName,
+                        buildDefaultOutputFileName(templateLocation, sheetNames, sheetDefinitions));
 
         if (LOGGER.isDebugEnabled()){
             Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName);
@@ -145,7 +152,7 @@ public class ExcelWriteUtil{
         OutputStream outputStream = FileUtil.getFileOutputStream(useOutputFileName);
         Validate.notNull(outputStream, "outputStream can't be null!");
 
-        ExcelWriter excelWriter = buildExcelWriter(sheetDefinitionLocation, sheetNames);
+        ExcelWriter excelWriter = buildExcelWriter(sheetDefinitions, sheetNames);
         excelWriter.write(templateLocation, outputStream, beans);
 
         //---------------------------------------------------------------
@@ -157,10 +164,25 @@ public class ExcelWriteUtil{
         return useOutputFileName;
     }
 
-    private static String buildDefaultOutputFileName(String templateLocation,String[] sheetNames){
+    private static String buildDefaultOutputFileName(String templateLocation,String[] sheetNames,Map<String, ExcelSheet> sheetDefinitions){
         String pattern = USER_HOME + "/feilong/excel/{}{}.{}";
-        String fileNameString = SheetNamesUtil.isEmptyOrNullElement(sheetNames) ? EMPTY : sheetNames.toString();
-        return Slf4jUtil.format(pattern, fileNameString, nowTimestamp(), FilenameUtil.getExtension(templateLocation));
+        return Slf4jUtil.format(
+                        pattern,
+                        buildFileName(sheetNames, sheetDefinitions),
+                        nowTimestamp(),
+                        FilenameUtil.getExtension(templateLocation));
+    }
+
+    private static String buildFileName(String[] sheetNames,Map<String, ExcelSheet> sheetDefinitions){
+        if (!SheetNamesUtil.isEmptyOrNullElement(sheetNames)){
+            return sheetNames.toString();
+        }
+        if (sheetDefinitions.size() == 1){
+            List<String> list = toList(sheetDefinitions.keySet());
+            String string = list.get(0);
+            return defaultIfNullOrEmpty(string, EMPTY);
+        }
+        return EMPTY;
     }
 
     /**
@@ -172,11 +194,9 @@ public class ExcelWriteUtil{
      *            the sheet names
      * @return the excel writer
      */
-    private static ExcelWriter buildExcelWriter(String sheetDefinitionLocation,String[] sheetNames){
-        ExcelManipulatorFactory excelManipulatorFactory = new ExcelManipulatorFactory();
-        excelManipulatorFactory.setConfig(sheetDefinitionLocation);
-
-        return excelManipulatorFactory.createExcelWriter(sheetNames);
+    private static ExcelWriter buildExcelWriter(Map<String, ExcelSheet> sheetDefinitions,String[] sheetNames){
+        ExcelDefinition excelDefinition = ExcelDefinitionBuilder.build(sheetDefinitions, sheetNames);
+        return new DefaultExcelWriter(excelDefinition);
     }
 
     //---------------------------------------------------------------
