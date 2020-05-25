@@ -29,7 +29,7 @@ import com.feilong.io.FileUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
-public final class MultipartFileUtil{
+final class MultipartFileUtil{
 
     /** Don't let anyone instantiate this class. */
     private MultipartFileUtil(){
@@ -43,18 +43,18 @@ public final class MultipartFileUtil{
     /**
      * 获得 multipart file info map for log map.
      *
-     * @param importFile
+     * @param multipartFile
      *            the import file
      * @return the multipart file info map for log map
      * @since 1.0.9
      */
-    public static Map<String, Object> getMultipartFileInfoMapForLogMap(MultipartFile importFile){
+    static Map<String, Object> getMultipartFileInfoMapForLogMap(MultipartFile multipartFile){
         Map<String, Object> map = newLinkedHashMap(5);
-        map.put("importFile.getContentType()", importFile.getContentType());
-        map.put("importFile.getName()", importFile.getName());
-        map.put("importFile.getOriginalFilename()", importFile.getOriginalFilename());
-        map.put("importFile.getSize()", FileUtil.formatSize(importFile.getSize()));
-        map.put("importFile.isEmpty()", importFile.isEmpty());
+        map.put("multipartFile.getContentType()", multipartFile.getContentType());
+        map.put("multipartFile.getName()", multipartFile.getName());
+        map.put("multipartFile.getOriginalFilename()", multipartFile.getOriginalFilename());
+        map.put("multipartFile.getSize()", FileUtil.formatSize(multipartFile.getSize()));
+        map.put("multipartFile.isEmpty()", multipartFile.isEmpty());
         return map;
     }
 }

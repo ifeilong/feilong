@@ -31,6 +31,12 @@ public interface MultipartFileResolver{
      * <p>
      * 如果{@link MultipartFile#isEmpty()},那么log warn并跳过
      * </p>
+     * 
+     * 如果 <code>multipartFile</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *
      * @param multipartFile
      *            the multipart file
@@ -47,6 +53,13 @@ public interface MultipartFileResolver{
      * <p>
      * 如果{@link MultipartFile#isEmpty()},那么log warn并跳过
      * </p>
+     * 
+     * 如果 <code>multipartFiles</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>multipartFiles</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>fileNames</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>fileNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 
      * @param multipartFiles
      *            the multipart files

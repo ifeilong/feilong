@@ -18,15 +18,14 @@ package com.feilong.component.upload;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.feilong.core.Validate;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -34,19 +33,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  *
  * <pre class="code">
 {@code
-    <bean id="multipartFileResolver" class="com.feilong.spring.web.multipart.DefaultMultipartFileResolver" />
+    <bean id="multipartFileResolver" class="com.feilong.component.upload.DefaultMultipartFileResolver" />
 }
  * </pre>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  * @since 1.12.0 rename
+ * @since 3.0.0 move from feilong spring
  */
 public class DefaultMultipartFileResolver implements MultipartFileResolver{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMultipartFileResolver.class);
-
-    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -58,6 +56,10 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
     public void upload(MultipartFile multipartFile,String directoryName,String fileName){
         Validate.notNull(multipartFile, "multipartFile can't be null!");
 
+        Validate.notBlank(directoryName, "directoryName can't be blank!");
+        Validate.notBlank(fileName, "fileName can't be blank!");
+
+        //---------------------------------------------------------------
         if (multipartFile.isEmpty()){
             LOGGER.warn("multipartFile is empty,but you want to save to directoryName:[{}],fileName:[{}]", directoryName, fileName);
             return;
@@ -65,8 +67,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            Map<String, Object> map = MultipartFileUtil.getMultipartFileInfoMapForLogMap(multipartFile);
-            LOGGER.debug(JsonUtil.format(map));
+            LOGGER.debug(JsonUtil.format(MultipartFileUtil.getMultipartFileInfoMapForLogMap(multipartFile)));
         }
 
         try (InputStream inputStream = multipartFile.getInputStream()){
@@ -86,7 +87,8 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
      */
     @Override
     public void upload(MultipartFile[] multipartFiles,String directoryName,String[] fileNames){
-        Validate.notNull(multipartFiles, "multipartFiles can't be null!");
+        Validate.notEmpty(multipartFiles, "multipartFiles can't be empty!");
+        Validate.notEmpty(fileNames, "fileNames can't be empty!");
 
         for (int i = 0; i < multipartFiles.length; ++i){
             MultipartFile multipartFile = multipartFiles[i];
@@ -94,9 +96,9 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
                 continue;
             }
             String fileName = fileNames[i];
-            Validate.notEmpty(fileName, "fileName can't be null/empty!");
+            Validate.notBlank(fileName, "fileName can't be blank!");
 
-            upload(multipartFile, directoryName, fileName);
+            this.upload(multipartFile, directoryName, fileName);
         }
     }
 }

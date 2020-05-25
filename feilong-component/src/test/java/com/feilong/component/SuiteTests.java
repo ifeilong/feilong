@@ -19,6 +19,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.component.upload.BatchUploadMultipartFileResolverTest;
+import com.feilong.component.upload.SingleUploadTest;
+
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
@@ -26,6 +29,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 DataFileEmailComponentSpringTest.class,
                 DataFileZipEmailComponentSpringTest.class,
+
+                BatchUploadMultipartFileResolverTest.class,
+                SingleUploadTest.class,
 
         //
 })
