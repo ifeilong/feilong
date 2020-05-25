@@ -24,6 +24,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
+import com.feilong.lib.springframework.util.ResourceUtils;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
 
@@ -31,7 +32,7 @@ public class GetNodeAttributeValueAndStringValueMapTest extends AbstractTest{
 
     @Test
     public void test(){
-        String xmlString = IOReaderUtil.readToString("classpath:nodeAttributeValueAndStringValueMapTest.xml");
+        String xmlString = IOReaderUtil.readToString(ResourceUtils.CLASSPATH_URL_PREFIX + "nodeAttributeValueAndStringValueMapTest.xml");
         String xpathExpression = "/wddxPacket/data/struct/var";
 
         Map<String, String> map = XmlUtil.getNodeAttributeValueAndStringValueMap(xmlString, xpathExpression, "name");

@@ -19,17 +19,19 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import java.util.Map;
 
+import com.feilong.lib.springframework.util.ResourceUtils;
+
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class Write税Test extends AbstractSalesDataWriteTest{
 
     @Override
     protected String buildTemplateLocation(){
-        return "classpath:销售数据/税/export-template-sales-税.xlsx";
+        return ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/税/export-template-sales-税.xlsx";
     }
 
     @Override
     protected String buildSheetDefinitionLocation(){
-        return "classpath:销售数据/税/sheets-definition.xml";
+        return ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/税/sheets-definition.xml";
     }
 
     //---------------------------------------------------------------

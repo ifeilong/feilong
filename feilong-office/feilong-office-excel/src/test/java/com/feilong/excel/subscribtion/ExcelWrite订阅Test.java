@@ -24,14 +24,15 @@ import java.util.List;
 import org.junit.Test;
 
 import com.feilong.excel.AbstractWriteTest;
+import com.feilong.lib.springframework.util.ResourceUtils;
 
 public class ExcelWrite订阅Test extends AbstractWriteTest{
 
     @Test
     @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
     public void test(){
-        String templateFileName = "classpath:subscribtion/template-list-2sheet.xlsx";
-        String sheetDefinitionLocation = "classpath:subscribtion/sheets-definition.xml";
+        String templateFileName = ResourceUtils.CLASSPATH_URL_PREFIX + "subscribtion/template-list-2sheet.xlsx";
+        String sheetDefinitionLocation = ResourceUtils.CLASSPATH_URL_PREFIX + "subscribtion/sheets-definition.xml";
 
         handle(
                         templateFileName,

@@ -32,6 +32,7 @@ import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.DigesterCreater;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.collection4.CollectionUtils;
+import com.feilong.lib.springframework.util.ResourceUtils;
 
 class ExcelSheetMapBuilder{
 
@@ -39,7 +40,8 @@ class ExcelSheetMapBuilder{
 
     //---------------------------------------------------------------
 
-    private static final Digester DIGESTER = DigesterCreater.create("classpath:config/excel/definition-rule.xml");
+    private static final Digester DIGESTER = DigesterCreater
+                    .create(ResourceUtils.CLASSPATH_URL_PREFIX + "config/excel/definition-rule.xml");
 
     //---------------------------------------------------------------
 

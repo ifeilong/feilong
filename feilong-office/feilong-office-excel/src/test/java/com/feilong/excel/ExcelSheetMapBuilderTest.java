@@ -25,13 +25,14 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.excel.definition.ExcelSheet;
+import com.feilong.lib.springframework.util.ResourceUtils;
 import com.feilong.test.AbstractTest;
 
 public class ExcelSheetMapBuilderTest extends AbstractTest{
 
     @Test
     public void test(){
-        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build("classpath:consultant/sheets-definition.xml");
+        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build(ResourceUtils.CLASSPATH_URL_PREFIX + "consultant/sheets-definition.xml");
         assertTrue(map.size() == 1);
 
         assertThat(map, allOf(hasKey("consultantExport")));

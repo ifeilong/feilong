@@ -19,13 +19,14 @@ import static java.util.Collections.emptyMap;
 
 import org.junit.Test;
 
+import com.feilong.lib.springframework.util.ResourceUtils;
 import com.feilong.test.AbstractTest;
 
 public class ExcelWriteUtilTest extends AbstractTest{
 
-    private final String templateLocation        = "classpath:销售数据/audit/export-template-sales-vlookup.xlsx";
+    private final String templateLocation        = ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/audit/export-template-sales-vlookup.xlsx";
 
-    private final String sheetDefinitionLocation = "classpath:销售数据/audit/sheets-definition.xml";
+    private final String sheetDefinitionLocation = ResourceUtils.CLASSPATH_URL_PREFIX + "销售数据/audit/sheets-definition.xml";
 
     @Test(expected = NullPointerException.class)
     public void testExcelWriteUtilTestNull(){

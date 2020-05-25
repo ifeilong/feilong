@@ -15,12 +15,15 @@
  */
 package com.feilong.excel;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.SystemUtil.USER_HOME;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static java.util.Collections.emptyMap;
 
 import java.io.OutputStream;
 import java.util.Collection;
@@ -32,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.SystemUtil;
+import com.feilong.excel.util.SheetNamesUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
 import com.feilong.json.JsonUtil;
@@ -90,7 +93,9 @@ public class ExcelWriteUtil{
 
                     Map<String, Object> beans,
                     String outputFileName){
-        return write(templateLocation, sheetDefinitionLocation, toArray(sheetName), beans, outputFileName);
+
+        String[] sheetNames = null == sheetName ? (String[]) null : toArray(sheetName);
+        return write(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName);
     }
 
     /**
@@ -130,13 +135,7 @@ public class ExcelWriteUtil{
         Validate.notBlank(templateLocation, "templateLocation can't be blank!");
         Validate.notBlank(sheetDefinitionLocation, "sheetDefinitionLocation can't be blank!");
 
-        String useOutputFileName = defaultIfNullOrEmpty(
-                        outputFileName,
-                        Slf4jUtil.format(
-                                        SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
-                                        sheetNames,
-                                        nowTimestamp(),
-                                        FilenameUtil.getExtension(templateLocation)));
+        String useOutputFileName = defaultIfNullOrEmpty(outputFileName, buildDefaultOutputFileName(templateLocation, sheetNames));
 
         if (LOGGER.isDebugEnabled()){
             Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName);
@@ -156,6 +155,12 @@ public class ExcelWriteUtil{
         }
 
         return useOutputFileName;
+    }
+
+    private static String buildDefaultOutputFileName(String templateLocation,String[] sheetNames){
+        String pattern = USER_HOME + "/feilong/excel/{}{}.{}";
+        String fileNameString = SheetNamesUtil.isEmptyOrNullElement(sheetNames) ? EMPTY : sheetNames.toString();
+        return Slf4jUtil.format(pattern, fileNameString, nowTimestamp(), FilenameUtil.getExtension(templateLocation));
     }
 
     /**
@@ -184,14 +189,17 @@ public class ExcelWriteUtil{
      * @return the map
      */
     private static Map<String, Integer> toDataInfo(Map<String, Object> beans){
+        if (isNullOrEmpty(beans)){
+            return emptyMap();
+        }
+
+        //---------------------------------------------------------------
         Map<String, Integer> map = newLinkedHashMap();
-        if (isNotNullOrEmpty(beans)){
-            for (Map.Entry<String, Object> entry : beans.entrySet()){
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                if (ClassUtil.isInstance(value, Collection.class)){
-                    map.put(key + " size", CollectionUtils.size(value));
-                }
+        for (Map.Entry<String, Object> entry : beans.entrySet()){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (ClassUtil.isInstance(value, Collection.class)){
+                map.put(key + " size", CollectionUtils.size(value));
             }
         }
         return map;

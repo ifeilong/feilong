@@ -15,7 +15,6 @@
  */
 package com.feilong.excel;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 import java.util.Map;
@@ -25,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
+import com.feilong.excel.util.SheetNamesUtil;
 import com.feilong.lib.collection4.MapUtils;
 
 /**
@@ -62,7 +62,7 @@ public class ExcelDefinitionBuilder{
         ExcelDefinition excelDefinition = new ExcelDefinition();
 
         //如果sheetNames 没有配置, 且sheetDefinitions 只有1个
-        if (isEmptyOrNullElement(sheetNames) && MapUtils.size(sheetDefinitionMap) == 1){
+        if (SheetNamesUtil.isEmptyOrNullElement(sheetNames) && MapUtils.size(sheetDefinitionMap) == 1){
             LOGGER.debug("sheetNames isEmptyOrNullElement,and sheetDefinitionMap is only 1,use ExcelSheet");
             excelDefinition.setExcelSheets(toList(sheetDefinitionMap.values()));
         }else{
@@ -72,16 +72,6 @@ public class ExcelDefinitionBuilder{
             }
         }
         return excelDefinition;
-    }
-
-    private static boolean isEmptyOrNullElement(String...sheetNames){
-        if (isNullOrEmpty(sheetNames)){
-            return true;
-        }
-        if (sheetNames.length == 1){
-            return null == sheetNames[0];
-        }
-        return false;
     }
 
     //---------------------------------------------------------------
