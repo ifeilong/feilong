@@ -36,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.SheetNamesUtil;
@@ -175,7 +176,7 @@ public class ExcelWriteUtil{
 
     private static String buildFileName(String[] sheetNames,Map<String, ExcelSheet> sheetDefinitions){
         if (!SheetNamesUtil.isEmptyOrNullElement(sheetNames)){
-            return sheetNames.toString();
+            return ConvertUtil.toString(sheetNames, " ");
         }
         if (sheetDefinitions.size() == 1){
             List<String> list = toList(sheetDefinitions.keySet());
