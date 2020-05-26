@@ -59,7 +59,7 @@ public class ExcelReaderUtil{
     /**
      * 获得 list.
      * 
-     * @param fileLocation
+     * @param excelLocation
      *            比如 "E:\\Workspaces\\train\\Java培训报名12.xls"
      * @param sheetDefinitionPath
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
@@ -74,37 +74,49 @@ public class ExcelReaderUtil{
      *            the generic type
      * @return the list
      */
-    public static <T> List<T> read(String fileLocation,String sheetDefinitionPath,String sheetName,String dataName,int sheetNo){
-        return read(fileLocation, toArray(sheetDefinitionPath), sheetName, dataName, sheetNo);
+    public static <T> List<T> read(String excelLocation,String sheetDefinitionPath,String sheetName,String dataName,int sheetNo){
+        return read(excelLocation, toArray(sheetDefinitionPath), sheetName, dataName, sheetNo);
     }
 
-    /**
-     * 获得 list.
-     * 
-     * @param inputStream
-     *            the input stream
-     * @param sheetDefinitionPath
-     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
-     * @param sheetName
-     *            sheet 比如 trainCourseSheet
-     * @param dataName
-     *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
-     * @param sheetNo
-     *            the sheet no
-     *
-     * @param <T>
-     *            the generic type
-     * @return the list
-     */
-    public static <T> List<T> read(InputStream inputStream,String sheetDefinitionPath,String sheetName,String dataName,int sheetNo){
+    public static <T> Map<String, Object> readData(
+                    String excelLocation,
+                    String sheetDefinitionPath,
+                    String sheetName,
+                    String dataName,
+                    int sheetNo){
         ExcelReader excelReader = buildExcelReader(toArray(sheetDefinitionPath), sheetName);
-        return read(excelReader, dataName, inputStream, sheetNo);
+
+        InputStream inputStream = InputStreamUtil.getInputStream(excelLocation);
+        return readData(excelReader, inputStream, dataName, sheetNo);
     }
+    //
+    //    /**
+    //     * 获得 list.
+    //     * 
+    //     * @param inputStream
+    //     *            the input stream
+    //     * @param sheetDefinitionPath
+    //     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
+    //     * @param sheetName
+    //     *            sheet 比如 trainCourseSheet
+    //     * @param dataName
+    //     *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
+    //     * @param sheetNo
+    //     *            the sheet no
+    //     *
+    //     * @param <T>
+    //     *            the generic type
+    //     * @return the list
+    //     */
+    //    public static <T> List<T> read(InputStream inputStream,String sheetDefinitionPath,String sheetName,String dataName,int sheetNo){
+    //        ExcelReader excelReader = buildExcelReader(toArray(sheetDefinitionPath), sheetName);
+    //        return read(excelReader, dataName, inputStream, sheetNo);
+    //    }
 
     /**
      * 获得 list.
      * 
-     * @param fileLocation
+     * @param excelLocation
      *            the file name
      * @param sheetDefinitionPaths
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
@@ -118,9 +130,11 @@ public class ExcelReaderUtil{
      *            the generic type
      * @return the list
      */
-    public static <T> List<T> read(String fileLocation,String[] sheetDefinitionPaths,String sheetName,String dataName,int sheetNo){
+    private static <T> List<T> read(String excelLocation,String[] sheetDefinitionPaths,String sheetName,String dataName,int sheetNo){
         ExcelReader excelReader = buildExcelReader(sheetDefinitionPaths, sheetName);
-        return read(excelReader, dataName, fileLocation, sheetNo);
+
+        InputStream inputStream = InputStreamUtil.getInputStream(excelLocation);
+        return read(excelReader, inputStream, dataName, sheetNo);
     }
 
     //---------------------------------------------------------------
@@ -151,39 +165,34 @@ public class ExcelReaderUtil{
      *            the generic type
      * @param excelReader
      *            the excel reader
-     * @param dataName
-     *            the data name
-     * @param fileLocation
-     *            the file name
-     * @param sheetNo
-     *            the sheet no
-     * @return the list
-     */
-    private static <T> List<T> read(ExcelReader excelReader,String dataName,String fileLocation,int sheetNo){
-        InputStream inputStream = InputStreamUtil.getInputStream(fileLocation);
-        return read(excelReader, dataName, inputStream, sheetNo);
-    }
-
-    /**
-     * 获得 list.
-     *
-     * @param <T>
-     *            the generic type
-     * @param excelReader
-     *            the excel reader
-     * @param dataName
-     *            the data name
      * @param inputStream
      *            the input stream
+     * @param dataName
+     *            the data name
      * @param sheetNo
      *            the sheet no
      * @return the list< t>
      * @since 1.0.9
      */
     @SuppressWarnings("unchecked")
-    private static <T> List<T> read(ExcelReader excelReader,String dataName,InputStream inputStream,int sheetNo){
+    private static <T> List<T> read(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
         Date beginDate = new Date();
 
+        Map<String, Object> beans = readData(excelReader, inputStream, dataName, sheetNo);
+        //--------------------------------------------------------------- 
+        List<T> list = (List<T>) beans.get(dataName);
+        if (LOGGER.isInfoEnabled()){
+            Map<String, Object> map = newLinkedHashMap();
+            map.put("sheetNo", sheetNo);
+            map.put("dataName", dataName);
+            map.put("list size", CollectionUtils.size(list));
+            map.put("use time", formatDuration(beginDate));
+            LOGGER.info("use time: [{}]", JsonUtil.format(map));
+        }
+        return list;
+    }
+
+    private static <T> Map<String, Object> readData(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
         Map<String, Object> beans = toMap(dataName, new ArrayList<T>());
 
         ReadStatus readStatus = excelReader.readSheet(inputStream, sheetNo, beans);
@@ -201,18 +210,7 @@ public class ExcelReaderUtil{
                             exceptions.get(0).getStackTrace());
             throw new DefaultRuntimeException(message);
         }
-
-        //--------------------------------------------------------------- 
-        List<T> list = (List<T>) beans.get(dataName);
-        if (LOGGER.isInfoEnabled()){
-            Map<String, Object> map = newLinkedHashMap();
-            map.put("sheetNo", sheetNo);
-            map.put("dataName", dataName);
-            map.put("list size", CollectionUtils.size(list));
-            map.put("use time", formatDuration(beginDate));
-            LOGGER.info("use time: [{}]", JsonUtil.format(map));
-        }
-        return list;
+        return beans;
     }
 
 }

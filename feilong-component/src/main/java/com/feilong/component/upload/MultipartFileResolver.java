@@ -15,6 +15,8 @@
  */
 package com.feilong.component.upload;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -32,20 +34,19 @@ public interface MultipartFileResolver{
      * 如果{@link MultipartFile#isEmpty()},那么log warn并跳过
      * </p>
      * 
-     * 如果 <code>multipartFile</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *
      * @param multipartFile
      *            the multipart file
      * @param directoryName
      *            指定目录
      * @param fileName
      *            the file name
+     * @return 如果 <code>multipartFile</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
-    void upload(MultipartFile multipartFile,String directoryName,String fileName);
+    String upload(MultipartFile multipartFile,String directoryName,String fileName);
 
     /**
      * 将一组<code>multipartFiles</code>上传到指定目录<code>directoryName</code>下面,依次重命名指定的文件名称<code>fileNames</code>.
@@ -54,19 +55,18 @@ public interface MultipartFileResolver{
      * 如果{@link MultipartFile#isEmpty()},那么log warn并跳过
      * </p>
      * 
-     * 如果 <code>multipartFiles</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>multipartFiles</code> 是empty,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>fileNames</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>fileNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
-     * 
      * @param multipartFiles
      *            the multipart files
      * @param directoryName
      *            指定目录
      * @param fileNames
      *            the file names
+     * @return 如果 <code>multipartFiles</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>multipartFiles</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>directoryName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>directoryName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>fileNames</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      */
-    void upload(MultipartFile[] multipartFiles,String directoryName,String[] fileNames);
+    List<String> upload(MultipartFile[] multipartFiles,String directoryName,String[] fileNames);
 }

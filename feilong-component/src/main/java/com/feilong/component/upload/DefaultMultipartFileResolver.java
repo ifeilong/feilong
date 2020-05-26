@@ -15,9 +15,12 @@
  */
 package com.feilong.component.upload;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +56,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
      * java.lang.String)
      */
     @Override
-    public void upload(MultipartFile multipartFile,String directoryName,String fileName){
+    public String upload(MultipartFile multipartFile,String directoryName,String fileName){
         Validate.notNull(multipartFile, "multipartFile can't be null!");
 
         Validate.notBlank(directoryName, "directoryName can't be blank!");
@@ -62,7 +65,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
         //---------------------------------------------------------------
         if (multipartFile.isEmpty()){
             LOGGER.warn("multipartFile is empty,but you want to save to directoryName:[{}],fileName:[{}]", directoryName, fileName);
-            return;
+            return null;
         }
 
         //---------------------------------------------------------------
@@ -71,7 +74,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
         }
 
         try (InputStream inputStream = multipartFile.getInputStream()){
-            IOWriteUtil.write(inputStream, directoryName, fileName);
+            return IOWriteUtil.write(inputStream, directoryName, fileName);
         }catch (IOException e){
             throw new UncheckedIOException(Slf4jUtil.format("directoryName:[{}],fileName:[{}]", directoryName, fileName), e);
         }
@@ -86,9 +89,11 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
      * java.lang.String, java.lang.String[])
      */
     @Override
-    public void upload(MultipartFile[] multipartFiles,String directoryName,String[] fileNames){
+    public List<String> upload(MultipartFile[] multipartFiles,String directoryName,String[] fileNames){
         Validate.notEmpty(multipartFiles, "multipartFiles can't be empty!");
         Validate.notEmpty(fileNames, "fileNames can't be empty!");
+
+        List<String> list = newArrayList();
 
         for (int i = 0; i < multipartFiles.length; ++i){
             MultipartFile multipartFile = multipartFiles[i];
@@ -98,7 +103,9 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
             String fileName = fileNames[i];
             Validate.notBlank(fileName, "fileName can't be blank!");
 
-            this.upload(multipartFile, directoryName, fileName);
+            list.add(this.upload(multipartFile, directoryName, fileName));
         }
+
+        return list;
     }
 }

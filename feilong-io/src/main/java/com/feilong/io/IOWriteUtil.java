@@ -39,8 +39,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
-import com.feilong.io.entity.FileWriteMode;
 import com.feilong.core.Validate;
+import com.feilong.io.entity.FileWriteMode;
 
 /**
  * 专注于写文件的操作的工具类.
@@ -219,26 +219,23 @@ public final class IOWriteUtil{
      * </p>
      * 
      * </blockquote>
-     * 
-     * <p>
-     * 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
-     * 
-     * 如果 <code>directoryPath</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>directoryPath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * 
-     * 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * </p>
-     * 
+     *
      * @param inputStream
      *            上传的文件流
      * @param directoryPath
      *            文件夹路径, 支持格式类似于是 <code>/Users/feilong/logs/</code> 或者 <code>/Users/feilong/logs</code>
      * @param fileName
      *            文件名称
+     * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>directoryPath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>directoryPath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则返回新文件全路径
      * @see #write(InputStream, OutputStream)
+     * @since 3.0.0 change return type from void to String
      */
-    public static void write(InputStream inputStream,String directoryPath,String fileName){
+    public static String write(InputStream inputStream,String directoryPath,String fileName){
         Validate.notNull(inputStream, "inputStream can't be null!");
         Validate.notBlank(directoryPath, "directoryPath can't be blank!");
         Validate.notBlank(fileName, "fileName can't be blank!");
@@ -268,6 +265,7 @@ public final class IOWriteUtil{
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
             LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), formatDuration(beginDate));
         }
+        return filePath;
     }
 
     //---------------------------------------------------------------

@@ -145,7 +145,9 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
     @Override
     public ReadStatus readSheet(InputStream inputStream,int sheetNo,Map<String, Object> beans){
         OgnlStack ognlStack = new OgnlStack(beans);
+
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
+
             List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
 
             ReadStatus readStatus = new ReadStatus();

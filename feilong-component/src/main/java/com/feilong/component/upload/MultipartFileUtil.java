@@ -54,7 +54,7 @@ final class MultipartFileUtil{
         map.put("multipartFile.getName()", multipartFile.getName());
         map.put("multipartFile.getOriginalFilename()", multipartFile.getOriginalFilename());
         map.put("multipartFile.getSize()", FileUtil.formatSize(multipartFile.getSize()));
-        map.put("multipartFile.isEmpty()", multipartFile.isEmpty());
+        //map.put("multipartFile.isEmpty()", multipartFile.isEmpty());
         return map;
     }
 }
