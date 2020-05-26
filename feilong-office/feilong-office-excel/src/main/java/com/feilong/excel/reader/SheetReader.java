@@ -49,7 +49,7 @@ public class SheetReader{
      *            the sheet no
      * @param sheetDefinition
      *            the sheet definition
-     * @param stack
+     * @param ognlStack
      *            the stack
      * @param readStatus
      *            the read status
@@ -60,21 +60,22 @@ public class SheetReader{
                     Workbook workbook,
                     int sheetNo,
                     ExcelSheet sheetDefinition,
-                    OgnlStack stack,
+                    OgnlStack ognlStack,
                     ReadStatus readStatus,
                     boolean skipErrors){
         //In Read Operation only the first loopBlock will be read
         int loopBlock = 0;
 
         int status = readStatus.getStatus();
+
         for (ExcelBlock excelBlock : sheetDefinition.getExcelBlocks()){
             if (((skipErrors && status == STATUS_DATA_COLLECTION_ERROR) || status == ReadStatus.STATUS_SUCCESS)
                             && (loopBlock < 1 || !excelBlock.isLoop())){
                 if (excelBlock.isLoop()){
                     loopBlock++;
-                    BlockReader.readLoopBlock(workbook, sheetNo, excelBlock, stack, readStatus);
+                    BlockReader.readLoopBlock(workbook, sheetNo, excelBlock, ognlStack, readStatus);
                 }else{
-                    BlockReader.readSimpleBlock(workbook, sheetNo, excelBlock, stack, readStatus);
+                    BlockReader.readSimpleBlock(workbook, sheetNo, excelBlock, ognlStack, readStatus);
                 }
             }
         }

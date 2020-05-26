@@ -32,6 +32,9 @@ public class ExcelFileParser implements FileParser{
 
     private String      sheetName;
 
+    /**
+     * 如果只有1个sheet ,且只有1个dataName 可以省略
+     */
     private String      dataName;
 
     //---------------------------------------------------------------

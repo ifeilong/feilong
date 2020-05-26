@@ -96,7 +96,9 @@ public class ExcelManipulatorFactory{
      * @param sheetNames
      *            the sheets
      * @return the excel reader
+     * @deprecated use DefaultExcelReader
      */
+    @Deprecated
     public ExcelReader createExcelReader(String...sheetNames){
         ExcelReader excelReader = new DefaultExcelReader();
         excelReader.setDefinition(ExcelDefinitionBuilder.build(sheetDefinitions, sheetNames));

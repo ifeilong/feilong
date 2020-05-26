@@ -15,6 +15,7 @@
  */
 package com.feilong.excel.reader;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
 
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ class BlockReader{
     /** The Constant STATUS_DATA_COLLECTION_ERROR. */
     private static final int    STATUS_DATA_COLLECTION_ERROR = 10;
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private BlockReader(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -78,15 +81,15 @@ class BlockReader{
      *            the sheet no
      * @param excelBlock
      *            the block definition
-     * @param stack
+     * @param ognlStack
      *            the stack
      * @param readStatus
      *            the read status
      */
-    static void readLoopBlock(Workbook workbook,int sheetNo,ExcelBlock excelBlock,OgnlStack stack,ReadStatus readStatus){
+    static void readLoopBlock(Workbook workbook,int sheetNo,ExcelBlock excelBlock,OgnlStack ognlStack,ReadStatus readStatus){
         //Loop Block will only care about row loop
         String dataName = excelBlock.getDataName();
-        if (dataName == null || dataName.length() == 0){
+        if (isNullOrEmpty(dataName)){
             readStatus.setStatus(STATUS_SETTING_ERROR);
             readStatus.setMessage("dataName for block[" + excelBlock.toString() + "] is not set");
             return;
@@ -95,11 +98,11 @@ class BlockReader{
         //---------------------------------------------------------------
 
         try{
-            Object obj = stack.getValue(dataName);
+            Object obj = ognlStack.getValue(dataName);
             Collection dataList;
             if (obj == null){
                 dataList = new ArrayList<>();
-                stack.setValue(dataName, dataList);
+                ognlStack.setValue(dataName, dataList);
             }else if (!(obj instanceof Collection)){
                 readStatus.setStatus(STATUS_SETTING_ERROR);
                 readStatus.setMessage("Property " + dataName + " is not a Collection");
@@ -113,9 +116,9 @@ class BlockReader{
             int startRow = excelBlock.getStartRow();
             int step = excelBlock.getEndRow() - excelBlock.getStartRow() + 1;
 
-            LoopBreakCondition breakCondition = excelBlock.getBreakCondition();
+            LoopBreakCondition loopBreakCondition = excelBlock.getBreakCondition();
             int startCol = excelBlock.getStartCol();
-            while (!BlockReaderLoopBreaker.checkBreak(workbook.getSheetAt(sheetNo), startRow, startCol, breakCondition)){
+            while (!BlockReaderLoopBreaker.checkBreak(workbook.getSheetAt(sheetNo), startRow, startCol, loopBreakCondition)){
                 Object value = readBlock(workbook, sheetNo, excelBlock, startRow, readStatus);
                 dataList.add(value);
                 startRow += step;

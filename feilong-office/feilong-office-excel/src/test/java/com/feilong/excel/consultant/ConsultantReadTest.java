@@ -31,8 +31,11 @@ public class ConsultantReadTest extends AbstractReadTest{
     public void test(){
         String excelLocation = CLASSPATH_URL_PREFIX + "consultant/read20200428214903.xlsx";
         String sheetDefinitionLocation = CLASSPATH_URL_PREFIX + "consultant/sheets-definition.xml";
-        String sheetName = "consultantExport";
-        String dataName = "consultantList";
+
+        //  String sheetName = "consultantExport";
+        String sheetName = null;
+        //String dataName = "consultantList";
+        String dataName = null;
 
         //---------------------------------------------------------------
         List<ConsultantCommand> list = read(excelLocation, sheetDefinitionLocation, sheetName, dataName);

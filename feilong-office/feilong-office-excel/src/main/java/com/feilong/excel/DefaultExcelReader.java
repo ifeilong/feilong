@@ -49,6 +49,25 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
     //---------------------------------------------------------------
 
     /**
+     * Instantiates a new default excel reader.
+     */
+    public DefaultExcelReader(){
+    }
+
+    /**
+     * Instantiates a new default excel reader.
+     *
+     * @param excelDefinition
+     *            the excel definition
+     */
+    public DefaultExcelReader(ExcelDefinition excelDefinition){
+        super();
+        this.excelDefinition = excelDefinition;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
      * Read all.
      *
      * @param inputStream

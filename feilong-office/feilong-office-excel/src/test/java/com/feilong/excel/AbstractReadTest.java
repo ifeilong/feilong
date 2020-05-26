@@ -21,6 +21,10 @@ import com.feilong.test.AbstractTest;
 
 public abstract class AbstractReadTest extends AbstractTest{
 
+    protected static <T> List<T> read(String fileLocation,String sheetDefinitionLocation){
+        return read(fileLocation, sheetDefinitionLocation, null, null);
+    }
+
     protected static <T> List<T> read(String fileLocation,String sheetDefinitionLocation,String sheetName,String dataName){
         return ExcelReaderUtil.read(fileLocation, sheetDefinitionLocation, sheetName, dataName, 0);
     }
