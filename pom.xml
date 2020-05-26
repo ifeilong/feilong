@@ -1021,16 +1021,9 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${v.maven-javadoc-plugin}</version>
 				<configuration>
-					<!-- <additionalparam>-Xdoclint:none</additionalparam> -->
-
-					<!-- <verbose>true</verbose> -->
-					<destDir>${maven-javadoc-plugin.destDir}</destDir>
-
 					<outputDirectory>${maven-javadoc-plugin.outputDirectory}</outputDirectory>
-					<reportOutputDirectory>${maven-javadoc-plugin.reportOutputDirectory}</reportOutputDirectory>
-
+					
 					<stylesheet>${maven-javadoc-plugin.stylesheet}</stylesheet>
 					<stylesheetfile>${maven-javadoc-plugin.stylesheetfile}</stylesheetfile>
 
@@ -1064,37 +1057,6 @@
 						<![CDATA[Copyright &copy; {inceptionYear}-{currentYear} by feilong]]>
 					</bottom>
 
-					<!-- Detect the Javadoc links for all dependencies defined in the project. -->
-					<detectLinks>true</detectLinks>
-					<detectOfflineLinks>true</detectOfflineLinks>
-
-					<!-- By default, the goal detects the Javadoc API link depending the value of the source parameter in theorg.apache.maven.plugins:maven-compiler-plugin (defined
-						in ${project.build.plugins} or in${project.build.pluginManagement}),
-					-->
-					<detectJavaApiLink>true</detectJavaApiLink>
-					<links>
-						<!-- <link>http://docs.oracle.com/javase/7/docs/api/</link> -->
-						<link>https://docs.oracle.com/javaee/7/api/</link>
-
-						<link>http://commons.apache.org/proper/commons-lang/javadocs/api-release/</link>
-
-						<link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
-						<link>http://commons.apache.org/proper/commons-beanutils/javadocs/v${version.commons-beanutils}/apidocs/</link>
-
-
-						<!-- <link>http://docs.spring.io/spring/docs/${version.spring}/javadoc-api/</link> -->
-
-						<!-- <link>https://github.com/venusdrogon/feilongjavadocs/feilong-core/</link>
-							<link>https://github.com/venusdrogon/feilongjavadocs/feilong-servlet/</link>
-							<link>https://github.com/venusdrogon/feilongjavadocs/feilong-io/</link> -->
-
-
-						<!-- 404 not find -->
-						<!-- <link>http://commons.apache.org/proper/commons-collections/javadocs/api-release/</link> -->
-
-						<!-- 404 not find -->
-						<!-- <link>http://ezmorph.sourceforge.net/apidocs/</link> -->
-					</links>
 				</configuration>
 			</plugin>
 
@@ -1303,32 +1265,12 @@
 					<version>${v.maven-release-plugin}</version>
 				</plugin>
 
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-				<!-- <plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-					<lifecycleMappingMetadata>
-					<pluginExecutions>
-					<pluginExecution>
-					<pluginExecutionFilter>
+				<!-- maven-javadoc-plugin -->
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<versionRange>[1.7,)</versionRange>
-					<goals>
-					<goal>run</goal>
-					<goal>help</goal>
-					</goals>
-					</pluginExecutionFilter>
-					<action>
-					<ignore />
-					</action>
-					</pluginExecution>
-					</pluginExecutions>
-					</lifecycleMappingMetadata>
-					</configuration>
-					</plugin> -->
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${v.maven-javadoc-plugin}</version>
+				</plugin>
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

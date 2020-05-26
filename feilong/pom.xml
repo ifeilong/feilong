@@ -13,10 +13,14 @@
 
 	<!-- 发布到中央仓库必须要name -->
 	<name>feilong: feilong Libraries for Java</name>
-	
+
 	<description>
 	feilong is a suite of core and expanded libraries that include utility classes, http, excel,cvs, io classes, and much much more.
     </description>
+
+	<properties>
+		<maven-javadoc-plugin.outputDirectory>${project.build.directory}/apidocs</maven-javadoc-plugin.outputDirectory>
+	</properties>
 
 	<dependencies>
 
@@ -237,11 +241,12 @@
 			<build>
 				<plugins>
 
-					<!-- Javadoc -->
+					<!-- maven-javadoc-plugin -->
 					<plugin>
+						<inherited>true</inherited>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>${v.maven-javadoc-plugin}</version>
+
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -250,6 +255,52 @@
 								</goals>
 							</execution>
 						</executions>
+
+						<configuration>
+							<!-- <additionalparam>-Xdoclint:none</additionalparam> -->
+
+							<!-- <verbose>true</verbose> -->
+							<!-- <destDir>${maven-javadoc-plugin.destDir}</destDir> -->
+
+							<!-- <outputDirectory>${project.build.directory}/apidocs</outputDirectory>
+								<reportOutputDirectory>${maven-javadoc-plugin.reportOutputDirectory}</reportOutputDirectory> -->
+
+							<!-- <sourcepath>${project.build.sourceDirectory}:${project.build.directory}</sourcepath> -->
+
+							<!-- <overview>src/main/java/overview.html</overview> -->
+
+							<!-- Detect the Javadoc links for all dependencies defined in the project. -->
+							<detectLinks>false</detectLinks>
+							<detectOfflineLinks>false</detectOfflineLinks>
+
+							<!-- By default, the goal detects the Javadoc API link depending the value of the source parameter in theorg.apache.maven.plugins:maven-compiler-plugin (defined
+								in ${project.build.plugins} or in${project.build.pluginManagement}),
+							-->
+							<detectJavaApiLink>true</detectJavaApiLink>
+							<links>
+								<!-- <link>http://docs.oracle.com/javase/7/docs/api/</link> -->
+								<link>https://docs.oracle.com/javaee/7/api/</link>
+
+								<link>http://commons.apache.org/proper/commons-lang/javadocs/api-release/</link>
+
+								<link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
+								<link>http://commons.apache.org/proper/commons-beanutils/javadocs/v${version.commons-beanutils}/apidocs/</link>
+
+
+								<!-- <link>http://docs.spring.io/spring/docs/${version.spring}/javadoc-api/</link> -->
+
+								<!-- <link>https://github.com/venusdrogon/feilongjavadocs/feilong-core/</link>
+									<link>https://github.com/venusdrogon/feilongjavadocs/feilong-servlet/</link>
+									<link>https://github.com/venusdrogon/feilongjavadocs/feilong-io/</link> -->
+
+
+								<!-- 404 not find -->
+								<!-- <link>http://commons.apache.org/proper/commons-collections/javadocs/api-release/</link> -->
+
+								<!-- 404 not find -->
+								<!-- <link>http://ezmorph.sourceforge.net/apidocs/</link> -->
+							</links>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
