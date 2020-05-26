@@ -23,11 +23,8 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 ## feilong 的历史
 
 - feilong since 2008, 开始时应对开发过程中不断重复的代码进行了封装,进而在公司进行推广
-
 - `2016-09-22` 开源了 `feilong-core` https://www.oschina.net/p/feilong-core
-
 - `2016-10-31` 开源了 `feilong-taglib` https://www.oschina.net/p/feilong-taglib
-
 - `2020-5-26` 开源了 `feilong` https://www.oschina.net/p/feilong
 
 
