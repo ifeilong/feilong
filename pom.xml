@@ -402,17 +402,17 @@
 				<version>${version.feilong-platform}</version>
 			</dependency>
 
-			<!-- feilong-util-all -->
+			<!-- feilong -->
 			<dependency>
 				<groupId>com.github.ifeilong</groupId>
-				<artifactId>feilong-util-all</artifactId>
+				<artifactId>feilong</artifactId>
 				<version>${version.feilong-platform}</version>
 			</dependency>
 
-			<!-- feilong-util-all-with-optional -->
+			<!-- feilong-with-optional -->
 			<dependency>
 				<groupId>com.github.ifeilong</groupId>
-				<artifactId>feilong-util-all-with-optional</artifactId>
+				<artifactId>feilong-with-optional</artifactId>
 				<version>${version.feilong-platform}</version>
 			</dependency>
 

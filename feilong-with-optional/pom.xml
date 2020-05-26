@@ -15,7 +15,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-util-all</artifactId>
+			<artifactId>feilong</artifactId>
 		</dependency>
 
 		<!-- 使用 XML 功能 -->
@@ -202,7 +202,7 @@
 							<!-- When true, it will attempt to create a sources jar as well -->
 							<createSourcesJar>true</createSourcesJar>
 
-							<!-- 如果不加这个参数,那么生成的pom会少很多依赖,商城依赖这个feilong-util-all,会发现少 velocity等jar
+							<!-- 如果不加这个参数,那么生成的pom会少很多依赖,商城依赖这个,会发现少 velocity等jar
 
 								When true, transitive deps of removed dependencies are promoted to direct dependencies.
 								This should allow the drop in replacement of the removed deps with the new shaded jar and everything should still work. -->
