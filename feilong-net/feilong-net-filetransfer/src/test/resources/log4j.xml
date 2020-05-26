@@ -23,7 +23,7 @@
 	<category name="org.springframework">
 		<priority value="info" />
 	</category>
-	
+
 	<category name="org.springframework.beans.factory.support">
 		<priority value="warn" />
 	</category>
@@ -31,9 +31,9 @@
 		<priority value="info" />
 	</category>
 
-<!-- 	<category name="com.feilong">
+	<!-- <category name="com.feilong">
 		<priority value="debug" />
-	</category> -->
+		</category> -->
 	<category name="com.feilong.tools.net.AbstractFileTransfer">
 		<priority value="info" />
 	</category>
@@ -54,6 +54,10 @@
 		<priority value="info" />
 	</category>
 	<category name="com.feilong.lib.beanutils">
+		<priority value="info" />
+	</category>
+
+	<category name="org.springframework">
 		<priority value="info" />
 	</category>
 

@@ -47,6 +47,10 @@
 		<priority value="info" />
 	</category>
 
+	<category name="org.springframework">
+		<priority value="info" />
+	</category>
+
 	<!-- 设置接收所有输出的通道 -->
 	<root>
 		<level value="debug" />

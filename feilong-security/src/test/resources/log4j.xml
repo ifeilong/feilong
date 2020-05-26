@@ -31,6 +31,10 @@
 		<priority value="info" />
 	</category>
 
+	<category name="org.springframework">
+		<priority value="info" />
+	</category>
+
 	<category name="com.feilong">
 		<priority value="debug" />
 	</category>

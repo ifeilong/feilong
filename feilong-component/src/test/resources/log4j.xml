@@ -41,8 +41,8 @@
 		<priority value="info" />
 	</category>
 
-	
-		<category name="org.apache.commons.beanutils">
+
+	<category name="org.apache.commons.beanutils">
 		<priority value="info" />
 	</category>
 	<category name="com.feilong.lib.beanutils">
@@ -56,6 +56,9 @@
 		<priority value="warn" />
 	</category>
 	<category name="org.apache.commons.digester3">
+		<priority value="info" />
+	</category>
+	<category name="org.springframework">
 		<priority value="info" />
 	</category>
 
