@@ -38,7 +38,7 @@ feilong-json	| 封装了json操作的常用类
 ```XML
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
-	<artifactId>feilong-util-all</artifactId>
+	<artifactId>feilong</artifactId>
 	<version>3.0.0</version>
 </dependency>
 ```

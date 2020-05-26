@@ -8,8 +8,12 @@
 		<version>3.0.0</version>
 	</parent>
 
-	<artifactId>feilong-util-all</artifactId>
+	<artifactId>feilong</artifactId>
 	<packaging>jar</packaging>
+
+	<!-- 发布到中央仓库必须要name -->
+	<name>feilong</name>
+	<description>Reduce development, Release ideas,all feilong util</description>
 
 	<dependencies>
 
@@ -210,9 +214,9 @@
 							<artifactSet>
 								<includes>
 									<include>com.github.ifeilong:*:*</include>
-							<!-- 		<include>org.apache.commons:commons-lang3:*</include>
-									<include>org.apache.commons:commons-collections4:*</include>
-									<include>commons-io:commons-io:*</include> -->
+									<!-- <include>org.apache.commons:commons-lang3:*</include>
+										<include>org.apache.commons:commons-collections4:*</include>
+										<include>commons-io:commons-io:*</include> -->
 								</includes>
 							</artifactSet>
 

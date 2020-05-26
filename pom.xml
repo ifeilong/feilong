@@ -11,7 +11,9 @@
 	<!-- 成立年份 -->
 	<inceptionYear>2008</inceptionYear>
 
-	<description>Reduce development, Release ideas</description>
+	<!-- 发布到中央仓库必须要name -->
+	<name>feilong-parent</name>
+	<description>Reduce development, Release ideas,all feilong parent pom</description>
 
 	<url>https://github.com/ifeilong/feilong</url>
 
@@ -41,8 +43,8 @@
 		<module>feilong-office</module>
 		<module>feilong-component</module>
 
-		<module>feilong-util-all</module>
-		<module>feilong-util-all-with-optional</module>
+		<module>feilong</module>
+		<module>feilong-with-optional</module>
 	</modules>
 
 	<!--****************************定义属性 properties************************************* -->
