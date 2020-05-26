@@ -76,14 +76,15 @@ feilong-json	| 封装了json操作的常用类
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 
+## :panda_face: 提bug反馈或建议
+
+提交问题反馈
+
+- Github issue https://github.com/ifeilong/feilong/issues
+- 码云Gitee issue https://gitee.com/ifeilong/feilong/issues
+
 ## :cyclone: feilong 即时交流
 
 |QQ 群 `243306798`
 |:---------
 |![](http://i.imgur.com/cIfglCa.png)
-
-## :panda_face: About
-
-如果您对本项目有任何建议和批评,可以使用下面的联系方式：
-
-* iteye博客:http://feitianbenyue.iteye.com/
