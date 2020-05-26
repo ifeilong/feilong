@@ -59,14 +59,35 @@ mvn install
 ```
 ## 子项目地址
 
-child 				| Description 									
-:---- 				| :---------									
-feilong-core	| focus on J2SE,核心项目		
-feilong-servlet| focus on J2EE,是 platform 重要组成部分,web相关项目的基础	
-feilong-io			| 封装了io操作的常用类		
-feilong-taglib	| 封装了常用的自定义标签		
-feilong-net	| 封装了网络访问操作的常用类
-feilong-json	| 封装了json操作的常用类
+module | 描述
+:---- 				| :---------		
+
+feilong-core |  核心包
+feilong-validator |  常用的校验, 包含可配置式的手机号码, 邮编等等
+feilong-json  | json format以及tobean toMap等常见操作
+feilong-io | 文件常见操作
+feilong-servlet | 基于http servlet 的封装,含常见request,response操作快捷封装
+feilong-accessor | 便捷式使用session ,cookie
+feilong-formatter | 将Map,bean,list format成友好形式
+feilong-net-http | http封装操作
+feilong-net-jsoup | jsoup操作
+feilong-net-filetransfer | ftp/sftp操作
+feilong-template | 模板操作,如velocity
+feilong-net-mail | 发送邮件,接收邮件操作
+feilong-net-cxf | cxf操作
+feilong-xml  | xml format以及tobean toMap等常见操作
+feilong-security | 加密解密操作
+feilong-context | 上下文操作
+feilong-namespace | 可以spring xml 来配置的便捷操作
+feilong-taglib | jsp 自定义标签
+feilong-tools | 可用性操作
+feilong-office-csv | csv生成操作
+feilong-office-excel | excel操作,xml配置式来生成和读取excel文件
+feilong-office-zip | 压缩解压缩操作
+feilong-component  | 组件式操作,含配置式即可获取数据-->转成excel-->打成zip压缩包-->发送邮件
+feilong | 一体化total jar包,包含上述所有功能
+feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含所有optional jar依赖
+
 
 ## 一图概述:
 
