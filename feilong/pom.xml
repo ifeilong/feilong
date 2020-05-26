@@ -12,8 +12,11 @@
 	<packaging>jar</packaging>
 
 	<!-- 发布到中央仓库必须要name -->
-	<name>feilong</name>
-	<description>Reduce development, Release ideas,all feilong util</description>
+	<name>feilong: feilong Libraries for Java</name>
+	
+	<description>
+	feilong is a suite of core and expanded libraries that include utility classes, http, excel,cvs, io classes, and much much more.
+    </description>
 
 	<dependencies>
 
