@@ -1,13 +1,11 @@
-feilong
+feilong 让Java开发更简便的工具包
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![JDK 1.8](https://img.shields.io/badge/JDK-1.8-green.svg "JDK 1.8")
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ifeilong/feilong.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.ifeilong%22%20AND%20a:%22feilong%22)
 
-> Reduce development, Release ideas (减少开发,释放思想)
-
-让Java开发更简便的工具包,详细的帮助文档 http://feilong-core.mydoc.io/
+Reduce development, Release ideas (灵感从重复简单的代码中释放出来)
 
 1. 让你从`大量重复`的底层代码中脱身,`提高工作效率`;
 1. 让你的代码`更简炼`，`易写`、`易读`、`易于维护`;
@@ -19,6 +17,8 @@ feilong
 1. 不必要的`Exception` 转成了`RuntimeException`,减少不必要的代码
 1. 国内`中文注释`最完善的API
 1. 有完善的单元测试
+
+详细的帮助文档 http://feilong-core.mydoc.io/
 
 ## :dragon: Maven使用配置
 
@@ -59,8 +59,7 @@ mvn install
 ## 子项目地址
 
 module | 描述
-:---- 				| :---------		
-
+:----  | :---------
 feilong-core |  核心包
 feilong-validator |  常用的校验, 包含可配置式的手机号码, 邮编等等
 feilong-json  | json format以及tobean toMap等常见操作
