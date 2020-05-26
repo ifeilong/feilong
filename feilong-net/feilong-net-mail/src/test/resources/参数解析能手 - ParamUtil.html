@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1.添加参数.</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <blockquote>
+<p>给个string 格式的url,拿出或者添加几个参数,有方便的方法吗?</p>
+</blockquote>
+<p>我们来看看 参数解析能手 - <code>ParamUtil</code></p>
+<p>主要由下面几个部分组成:</p>
+<p><img src="http://venusdrogon.github.io/feilong-platform/mysource/feilong-core/ParamUtil.png" alt="AggregateUtil"></p>
+<h2 id="1添加参数">1.添加参数.</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回类型</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">addParameter(String uriString,String paramName,String paramValue,String charsetType)</td>
+<td style="text-align:left">给指定的uriString添加指定的参数 paramName 和值 paramValue.</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">addParameterSingleValueMap(String uriString,Map&lt;String, String&gt; singleValueMap,String charsetType)</td>
+<td style="text-align:left">给指定的uriString添加指定的参数 singleValueMap.</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">addParameterArrayValueMap(String uriString,Map&lt;String, String[]&gt; arrayValueMap,String charsetType)</td>
+<td style="text-align:left">给指定的 uriString添加参数 arrayValueMap,如果uri包含指定的参数名字,那么会被新的值替换.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-string-addparameterstring-uristringstring-paramnamestring-paramvaluestring-charsettype">1.1 String addParameter(String uriString,String paramName,String paramValue,String charsetType)</h3>
+<p>给指定的uriString添加指定的参数 paramName 和值 paramValue.</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>如果原来的<code>uriString</code>没有指定的参数paramName,那么追加新的参数paramName和值paramValue.</li>
+<li>如果原来的<code>uriString</code>有指定的参数paramName,那么会被新的值替换paramValue.</li>
+<li>如果原来的<code>uriString</code>有指定的参数paramName,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换paramValue,其他的被丢弃.</li>
+<li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
+<li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
+<li>如果<code>uriString</code>不带?,则自动增加?</li>
+</ul>
+<p><strong>示例:</strong></p>
+<pre><code class="language-JAVA"><div> String uri = <span class="hljs-string">"http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&amp;page="</span>;
+ String pageParamName = <span class="hljs-string">"label"</span>;
+ String prePageNo = <span class="hljs-string">"2-5-8-12"</span>;
+ LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, UTF8));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div>http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&amp;page=&amp;label=2-5-8-12
+</div></code></code></pre>
+<h3 id="12-string-addparametersinglevaluemapstring-uristringmapstring-string-singlevaluemapstring-charsettype">1.2 String addParameterSingleValueMap(String uriString,Map&lt;String, String&gt; singleValueMap,String charsetType)</h3>
+<p>给指定的uriString添加指定的参数 <code>singleValueMap</code>.</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>如果原来的 <code>uriString</code> 没有指定的参数paramName,那么循环arrayValueMap,追加新的参数paramName和值 paramValue.</li>
+<li>如果原来的 <code>uriString</code> 有指定的参数paramName,那么会被新的值替换paramValue.</li>
+<li>如果原来的 <code>uriString</code> 有指定的参数paramName,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换paramValue,其他的被丢弃.</li>
+<li>如果原来的 <code>uriString</code> 有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
+<li>如果 <code>uriString</code> 带有? 和参数,会先被截取,最后再拼接.</li>
+<li>如果 <code>uriString</code> 不带?,则自动增加?</li>
+</ul>
+<p><strong>示例1:</strong></p>
+<pre><code class="language-JAVA"><div> String beforeUrl = <span class="hljs-string">"www.baidu.com"</span>;
+ Map&lt;String, String&gt; keyAndArrayMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+
+ keyAndArrayMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-string">"江苏省"</span>);
+ keyAndArrayMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-string">"南通市"</span>);
+
+ LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div>  www.baidu.com?province=%E6%B1%9F%E8%8B%8F%E7%9C%81&amp;city=%E5%8D%97%E9%80%9A%E5%B8%82
+</div></code></code></pre>
+<p><strong>示例2:</strong></p>
+<pre><code class="language-JAVA"><div>   String beforeUrl = <span class="hljs-string">"www.baidu.com?a=b"</span>;
+   Map&lt;String, String&gt; keyAndArrayMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+
+   keyAndArrayMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-string">"江苏省"</span>);
+   keyAndArrayMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-string">"南通市"</span>);
+
+   LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div>   www.baidu.com?a=b&amp;province=%E6%B1%9F%E8%8B%8F%E7%9C%81&amp;city=%E5%8D%97%E9%80%9A%E5%B8%82
+</div></code></code></pre>
+<h3 id="13-string-addparameterarrayvaluemapstring-uristringmapstring-string-arrayvaluemapstring-charsettype">1.3 String addParameterArrayValueMap(String uriString,Map&lt;String, String[]&gt; arrayValueMap,String charsetType)</h3>
+<p>给指定的 <code>uriString</code> 添加参数 <code>arrayValueMap</code>,如果uri包含指定的参数名字,那么会被新的值替换.</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>如果原来的 <code>uriString</code> 没有指定的参数paramName,那么循环arrayValueMap,追加新的参数paramName和值 paramValue.</li>
+<li>如果原来的 <code>uriString</code> 有指定的参数paramName,那么会被新的值替换paramValue.</li>
+<li>如果原来的 <code>uriString</code> 有指定的参数paramName,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换paramValue,其他的被丢弃.</li>
+<li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
+<li>如果 <code>uriString</code> 带有? 和参数,会先被截取,最后再拼接.</li>
+<li>如果 <code>uriString</code> 不带?,则自动增加?</li>
+</ul>
+<p><strong>示例1:</strong></p>
+<pre><code class="language-JAVA"><div>String beforeUrl = <span class="hljs-string">"www.baidu.com"</span>;
+Map&lt;String, String[]&gt; keyAndArrayMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+
+keyAndArrayMap.put(<span class="hljs-string">"receiver"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"鑫哥"</span>, <span class="hljs-string">"feilong"</span> });
+keyAndArrayMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"江苏省"</span> });
+keyAndArrayMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"南通市"</span> });
+LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div> www.baidu.com?receiver=%E9%91%AB%E5%93%A5&amp;receiver=feilong&amp;province=%E6%B1%9F%E8%8B%8F%E7%9C%81&amp;city=%E5%8D%97%E9%80%9A%E5%B8%82
+</div></code></code></pre>
+<p><strong>示例2:</strong></p>
+<pre><code class="language-JAVA"><div>String beforeUrl = <span class="hljs-string">"www.baidu.com?a=b"</span>;
+Map&lt;String, String[]&gt; keyAndArrayMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+keyAndArrayMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"江苏省"</span> });
+keyAndArrayMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"南通市"</span> });
+LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div>www.baidu.com?a=b&amp;province=%E6%B1%9F%E8%8B%8F%E7%9C%81&amp;city=%E5%8D%97%E9%80%9A%E5%B8%82
+</div></code></code></pre>
+<h2 id="2转换">2.转换.</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回类型</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Map&lt;String, String&gt;</td>
+<td style="text-align:left">toSingleValueMap(String queryString,String charsetType)</td>
+<td style="text-align:left">将a=1&amp;b=2这样格式的 queryString数据转换成map.</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">toNaturalOrderingQueryString(Map&lt;String, String&gt; singleValueMap)</td>
+<td style="text-align:left">将 singleValueMap 转成自然排序的 queryString 字符串.</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">toQueryStringUseSingleValueMap(Map&lt;String, String&gt; singleValueMap)</td>
+<td style="text-align:left">将singleValueMap转成 queryString.</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">toQueryStringUseArrayValueMap(Map&lt;String, String[]&gt; arrayValueMap)</td>
+<td style="text-align:left">只是简单的将map的key value 连接起来,最终格式类似于 url 的queryString.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="21-mapstring-string-tosinglevaluemapstring-querystringstring-charsettype">2.1 Map&lt;String, String&gt; toSingleValueMap(String queryString,String charsetType)</h3>
+<p>将a=1&amp;b=2这样格式的 queryString数据转换成map.</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>如果参数里面有相同名字的参数,那么转换的时候取第一个值</li>
+<li>内部使用 <code>LinkedHashMap</code>,map顺序依照 queryString 分隔的顺序</li>
+</ul>
+<p><strong>示例:</strong></p>
+<pre><code class="language-JAVA"><div> String queryString = <span class="hljs-string">"sec_id=MD5&amp;format=xml&amp;sign=cc945983476d615ca66cee41a883f6c1&amp;v=2.0&amp;req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&amp;service=alipay.wap.auth.authAndExecute&amp;partner=2088011438559510"</span>;
+ LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code class="language-JSON"><div> {
+ <span class="hljs-attr">"sec_id"</span>: <span class="hljs-string">"MD5"</span>,
+ <span class="hljs-attr">"format"</span>: <span class="hljs-string">"xml"</span>,
+ <span class="hljs-attr">"sign"</span>: <span class="hljs-string">"cc945983476d615ca66cee41a883f6c1"</span>,
+ <span class="hljs-attr">"v"</span>: <span class="hljs-string">"2.0"</span>,
+ <span class="hljs-attr">"req_data"</span>:<span class="hljs-string">"%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E"</span>,
+ <span class="hljs-attr">"service"</span>: <span class="hljs-string">"alipay.wap.auth.authAndExecute"</span>,
+ <span class="hljs-attr">"partner"</span>: <span class="hljs-string">"2088011438559510"</span>
+ }
+</div></code></pre>
+<h3 id="22-string-tonaturalorderingquerystringmapstring-string-singlevaluemap">2.2 String toNaturalOrderingQueryString(Map&lt;String, String&gt; singleValueMap)</h3>
+<p>将 <code>singleValueMap</code> 转成自然排序的 <code>queryString</code> 字符串.</p>
+<p><strong>示例:</strong></p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+ map.put(<span class="hljs-string">"service"</span>, <span class="hljs-string">"create_salesorder"</span>);
+ map.put(<span class="hljs-string">"_input_charset"</span>, <span class="hljs-string">"gbk"</span>);
+ map.put(<span class="hljs-string">"totalActual"</span>, <span class="hljs-string">"210.00"</span>);
+ map.put(<span class="hljs-string">"address"</span>, <span class="hljs-string">"江苏南通市通州区888组888号"</span>);
+ LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+</div></code></pre>
+<p><strong>返回:</strong><br>
+_input_charset=gbk&amp;address=江苏南通市通州区888组888号&amp;service=create_salesorder&amp;totalActual=210.00</p>
+<p><strong>规则:</strong></p>
+<ul>
+<li>首先将 <code>singleValueMap</code> 使用 <code>SortUtil.sortMapByKeyAsc(Map)</code> 进行排序,</li>
+<li>然后将map的key和value 使用= 符号 连接,不同的entry之间再使用&amp; 符号进行连接,最终格式类似于 url 的queryString</li>
+</ul>
+<p><strong>说明:</strong></p>
+<ul>
+<li>常用于和第三方对接数据(比如支付宝,生成 待签名的字符串)</li>
+<li>该方法不会执行encode操作,使用原生值进行拼接</li>
+<li>对于 null key或者null value的处理:</li>
+<li>如果 <code>singleValueMap</code> 中,<br>
+如果有 key 是null,那么会使用 <code>StringUtils.EMPTY</code> 进行拼接;<br>
+如果有 value 是 null,那么会使用 <code>StringUtils.EMPTY</code> 进行拼接</li>
+</ul>
+<p><strong>示例:</strong></p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+ map.put(<span class="hljs-string">"totalActual"</span>, <span class="hljs-keyword">null</span>);
+ map.put(<span class="hljs-keyword">null</span>, <span class="hljs-string">"create_salesorder"</span>);
+ map.put(<span class="hljs-string">"province"</span>, <span class="hljs-string">"江苏省"</span>);
+
+ LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div> =create_salesorder&amp;province=江苏省&amp;totalActual=
+</div></code></code></pre>
+<h3 id="23-string-toquerystringusesinglevaluemapmapstring-string-singlevaluemap">2.3 String toQueryStringUseSingleValueMap(Map&lt;String, String&gt; singleValueMap)</h3>
+<p>将<code>singleValueMap</code>转成 <code>queryString</code>.</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 连接起来,最终格式类似于 url 的<code>queryString</code>,比如,参数名字param Name=name,param Value=zhangfei,那么返回值是 name=zhangfei</li>
+<li>如果<code>singleValueMap</code>有key 是null,将使用 <code>StringUtils.EMPTY</code> 进行拼接</li>
+<li>如果<code>singleValueMap</code>有value 是null,将使用 <code>StringUtils.EMPTY</code> 进行拼接</li>
+</ul>
+<p><strong>示例1:</strong></p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String&gt; singleValueMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+
+ singleValueMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-string">"江苏省"</span>);
+ singleValueMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-string">"南通市"</span>);
+
+ LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div> province=江苏省&amp;city=南通市
+</div></code></code></pre>
+<p><strong>示例2:</strong></p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+ map.put(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>);
+ map.put(<span class="hljs-string">"a"</span>, <span class="hljs-string">""</span>);
+ map.put(<span class="hljs-string">"b"</span>, <span class="hljs-keyword">null</span>);
+ map.put(<span class="hljs-string">"c"</span>, <span class="hljs-string">"jim"</span>);
+
+ LOGGER.info(ParamUtil.toQueryStringUseSingleValueMap(map));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div> =&amp;a=&amp;b=&amp;c=jim
+</div></code></code></pre>
+<h3 id="24-string-toquerystringusearrayvaluemapmapstring-string-arrayvaluemap">2.4 String toQueryStringUseArrayValueMap(Map&lt;String, String[]&gt; arrayValueMap)</h3>
+<p>只是简单的将map的key value 连接起来,最终格式类似于 url 的<code>queryString</code>.</p>
+<p><strong>注意:</strong></p>
+<ul>
+<li>该方法不会执行encode操作,使用原生值进行拼接</li>
+<li>按照传入的map key顺序进行排序,不会自行自动排序转换;如有有业务需求,先行排序完传入进来</li>
+<li>如果<code>arrayValueMap</code>有key 是null,将使用 <code>StringUtils.EMPTY</code> 进行拼接</li>
+<li>如果<code>arrayValueMap</code>有value的元素是null,将使用 <code>StringUtils.EMPTY</code> 进行拼接</li>
+</ul>
+<p><strong>示例1:</strong></p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String[]&gt; keyAndArrayMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+
+ keyAndArrayMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"江苏省"</span>, <span class="hljs-string">"浙江省"</span> });
+ keyAndArrayMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"南通市"</span> });
+ LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div> province=江苏省&amp;province=浙江省&amp;city=南通市
+</div></code></code></pre>
+<p>示例2:</p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String[]&gt; keyAndArrayMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();
+
+ keyAndArrayMap.put(<span class="hljs-string">"province"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"江苏省"</span>, <span class="hljs-keyword">null</span> });
+ keyAndArrayMap.put(<span class="hljs-string">"city"</span>, <span class="hljs-keyword">new</span> String[] { <span class="hljs-string">"南通市"</span> });
+ LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+</div></code></pre>
+<p><strong>返回:</strong></p>
+<pre><code><code><div> province=江苏省&amp;province=&amp;city=南通市
+</div></code></code></pre>
+<h2 id="3拼接">3.拼接.</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回类型</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">joinValuesOrderByIncludeKeys(Map&lt;K, String&gt; singleValueMap,K...includeKeys)</td>
+<td style="text-align:left">在singleValueMap中取到指定includeKeys key的value,连接起来(不使用任何连接符).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-string-joinvaluesorderbyincludekeysmapk-string-singlevaluemapkincludekeys">3.1 String joinValuesOrderByIncludeKeys(Map&lt;K, String&gt; singleValueMap,K...includeKeys)</h3>
+<p>在<code>singleValueMap</code>中取到指定includeKeys key的value,连接起来(不使用任何连接符).</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>拼接的顺序按照 <code>includeKeys</code> 的顺序,目前适用于个别银行(比如汇付天下)需要将值拼接起来加密</li>
+<li>如果<code>singleValueMap</code>中的value是null,那么会以<code>StringUtils.EMPTY</code>替代,进行拼接</li>
+</ul>
+<p><strong>示例:</strong></p>
+<p>场景: 拼接map中 key是 &quot;service&quot;以及 &quot;paymentType&quot;的 value</p>
+<pre><code class="language-JAVA"><div> Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+ map.put(<span class="hljs-string">"service"</span>, <span class="hljs-string">"create_salesorder"</span>);
+ map.put(<span class="hljs-string">"paymentType"</span>, <span class="hljs-string">"unionpay_mobile"</span>);
+
+ ParamUtil.joinValuesOrderByIncludeKeys(map, <span class="hljs-string">"service"</span>, <span class="hljs-string">"paymentType"</span>)    =   create_salesorderunionpay_mobile
+</div></code></pre>
+
+    </body>
+    </html>
