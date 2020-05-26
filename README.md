@@ -20,12 +20,11 @@ feilong
 1. 国内`中文注释`最完善的API
 1. 有完善的单元测试
 
-
-## 4.:dragon: Maven使用配置
+## :dragon: Maven使用配置
 
 feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/search?q=feilong
 
-### `maven`, 您可以通过以下方式来配置 `pom.xml`:
+### `maven 配置` 
 
 ```XML
 <dependency>
@@ -35,13 +34,13 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/search?q=f
 </dependency>
 ```
 
-### `Gradle`,
+### `Gradle 配置` 
 
 ```XML
 'com.github.ifeilong:feilong:3.0.0'
 ```
 
-### 非Maven项目
+### `非Maven项目`
 
 点击 https://repo1.maven.org/maven2/com/github/ifeilong/feilong/ 链接，下载 feilong.jar即可：
 
@@ -87,11 +86,6 @@ feilong-office-zip | 压缩解压缩操作
 feilong-component  | 组件式操作,含配置式即可获取数据-->转成excel-->打成zip压缩包-->发送邮件
 feilong | 一体化total jar包,包含上述所有功能
 feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含所有optional jar依赖
-
-
-## 一图概述:
-
-![one-feilong-platform](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-platform.png) 
 
 ## :memo: 说明
 
