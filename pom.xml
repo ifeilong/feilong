@@ -272,6 +272,7 @@
 		<v.native2ascii-maven-plugin>2.0.1</v.native2ascii-maven-plugin>
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
+		<v.nexus-staging-maven-plugin>1.6.8</v.nexus-staging-maven-plugin>
 
 		<!-- taglist 检查报告 -->
 		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>
@@ -1565,7 +1566,21 @@
 							</execution>
 						</executions>
 					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>${v.nexus-staging-maven-plugin}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>oss</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+
 				</plugins>
+
 			</build>
 		</profile>
 	</profiles>
