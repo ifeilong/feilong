@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.component;
+package com.feilong.spring.expression;
 
 import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
 
 import java.util.Map;
 
+import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.ParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import com.feilong.core.Validate;
 
@@ -40,10 +42,8 @@ import com.feilong.core.Validate;
  * @see <a href="http://commons.apache.org/proper/commons-ognl/">commons-ognl</a>
  * @see <a href="http://camel.apache.org/mvel.html/">mvel</a>
  * @since 1.0.4
- * @deprecated 将来使用feilong-spring里面的
  */
-@Deprecated
-final class SpelUtil{
+public final class SpelUtil{
 
     /** The expression parser. */
     private static ExpressionParser              expressionParser                     = new SpelExpressionParser();
@@ -84,6 +84,99 @@ final class SpelUtil{
         //---------------------------------------------------------------
         Expression expression = load(expressionString, ParserContext.TEMPLATE_EXPRESSION);
         return (T) expression.getValue();
+    }
+
+    /**
+     * Gets the value.
+     * 
+     * <h3>示例1:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String ex = "'Hello,World'";
+     * 
+     * assertEquals("Hello,World", SpelUtil.getValue(ex));
+     * assertEquals(11, SpelUtil.getValue(ex + ".length()"));
+     * assertEquals("Hello,World!", SpelUtil.getValue(ex + ".concat('!')"));
+     * assertEquals(String.class, SpelUtil.getValue(ex + ".class"));
+     * assertEquals(11, SpelUtil.getValue(ex + ".bytes.length"));
+     * assertEquals("HELLO,WORLD", SpelUtil.getValue("new String(" + ex + ").toUpperCase()"));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例2:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String expressionString = "T(com.feilong.core.lang.StringUtil).tokenizeToStringArray('xin,jin',',')";
+     * 
+     * String[] values = SpelUtil.getValue(expressionString);
+     * assertThat(toList(values), allOf(hasItem("xin"), hasItem("jin")));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param expressionString
+     *            the expression string
+     * @return 如果 <code>expressionString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>expressionString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     * @see org.springframework.expression.Expression#getValue()
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T getValue(String expressionString){
+        Validate.notBlank(expressionString, "expressionString can't be blank!");
+
+        //---------------------------------------------------------------
+        Expression expression = load(expressionString, null);
+        return (T) expression.getValue();
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Gets the value.
+     *
+     * @param <V>
+     *            the value type
+     * @param <T>
+     *            the generic type
+     * @param expressionString
+     *            the expression string
+     * @param rootObject
+     *            the root object to use, see
+     *            {@link org.springframework.expression.spel.support.StandardEvaluationContext#StandardEvaluationContext(Object)
+     *            StandardEvaluationContext}
+     * @return 如果 <code>expressionString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>expressionString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>rootObject</code> 是null或者empty,返回 {@link #getValue(String)}<br>
+     * @see org.springframework.expression.Expression#getValue(EvaluationContext)
+     * @see StandardEvaluationContext
+     * @see org.springframework.expression.spel.support.SimpleEvaluationContext
+     * @since 4.0.6
+     */
+    @SuppressWarnings("unchecked")
+    public static <V, T> V getValue(String expressionString,T rootObject){
+        Validate.notBlank(expressionString, "expressionString can't be blank!");
+        //---------------------------------------------------------------
+        if (null == rootObject){
+            return getValue(expressionString);
+        }
+
+        //---------------------------------------------------------------
+        EvaluationContext evaluationContext = new StandardEvaluationContext(rootObject);
+
+        Expression expression = load(expressionString, null);
+        return (V) expression.getValue(evaluationContext);
     }
 
     //---------------------------------------------------------------

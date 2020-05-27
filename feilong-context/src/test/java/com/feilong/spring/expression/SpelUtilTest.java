@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.component;
+package com.feilong.spring.expression;
 
-import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.io.IOReaderUtil;
 import com.feilong.template.TemplateUtil;
 import com.feilong.test.AbstractTest;
 
-public class SpelTest extends AbstractTest{
+public class SpelUtilTest extends AbstractTest{
 
-    private static final String CONTENT = IOReaderUtil
-                    .readToString(ClassLoaderUtil.getResourceAsStream("content.vm", SpelTest.class), UTF8);
+    private static final String CONTENT = IOReaderUtil.readToString(CLASSPATH_URL_PREFIX + "content.vm");
 
     //---------------------------------------------------------------
     @Test
