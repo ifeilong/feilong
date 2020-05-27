@@ -225,13 +225,6 @@ public final class JsonConfigBuilder{
         //默认会过滤的几个key "class", "declaringClass","metaClass"  
         jsonConfig.setIgnoreDefaultExcludes(false);
 
-        // java.lang.ClassCastException: JSON keys must be strings
-        // see http://feitianbenyue.iteye.com/blog/2046877
-        //jsonConfig.setAllowNonStringKeys(true);
-
-        //排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object
-        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-
         //---------------------------------------------------------------
         for (Map.Entry<Class<?>, JsonValueProcessor> entry : DEFAULT_CLASS_JSON_VALUE_PROCESSOR.entrySet()){
             jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());

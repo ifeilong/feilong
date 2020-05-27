@@ -15,16 +15,26 @@
  */
 package com.feilong.spring.expression;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.test.AbstractTest;
+@RunWith(Suite.class)
+@SuiteClasses({ //
 
-public class StringTemplateFilePathTest extends AbstractTest{
+                BeanTest.class,
+                FunctionTest.class,
+                StringTest.class,
 
-    @Test
-    public void getValue12222(){
-        String expressionString = "/Users/feilong/Downloads/adidas-cn-productData-#{T(com.feilong.core.date.DateUtil).nowString('yyyyMMdd')}.zip";
-        LOGGER.debug("" + SpelUtil.getTemplateValue(expressionString));
-    }
+                GetValueTest.class,
+                GetValueRootObjectNullTest.class,
+                GetValueNullTest.class,
+
+                GetTemplateValueTest.class,
+                StringTemplateFilePathTest.class,
+
+        //
+})
+public class SpelUtilSuiteTests{
 
 }

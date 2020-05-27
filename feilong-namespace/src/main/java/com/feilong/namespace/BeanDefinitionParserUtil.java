@@ -143,12 +143,4 @@ public class BeanDefinitionParserUtil{
         addPropertyValue(element, beanDefinitionBuilder, attributeName, false);
     }
 
-    //    /**
-    //     * 添加.
-    //     */
-    //    private static void add(Element element,BeanDefinitionBuilder beanDefinitionBuilder,List<String> attributeNameList,boolean required){
-    //        for (String attributeName : attributeNameList){
-    //            addPropertyValue(element, beanDefinitionBuilder, attributeName, required);
-    //        }
-    //    }
 }

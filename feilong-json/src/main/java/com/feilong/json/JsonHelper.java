@@ -15,8 +15,8 @@
  */
 package com.feilong.json;
 
-import static com.feilong.json.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.json.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -163,7 +163,7 @@ public final class JsonHelper{
                 return true;
             }
         }
-        return JSONUtils.isArray(obj) || //obj.getClass().isArray() || obj instanceof Collection || obj instanceof Object[]
+        return JSONUtils.isArray(obj) || //
                         obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
                         obj instanceof Iterator;
     }

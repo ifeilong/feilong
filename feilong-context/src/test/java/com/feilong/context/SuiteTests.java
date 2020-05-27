@@ -27,7 +27,7 @@ import com.feilong.context.format.JsonStringFormatterTest;
 import com.feilong.context.format.XMLStringFormatterTest;
 import com.feilong.context.invoker.http.HttpRequestUriResolverTest;
 import com.feilong.context.valueloader.SimpleParamNameValueLoaderTest;
-import com.feilong.spring.expression.FeiLongSpelUtilSuiteTests;
+import com.feilong.spring.expression.SpelUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
@@ -48,7 +48,7 @@ import com.feilong.spring.expression.FeiLongSpelUtilSuiteTests;
                 JsonStringFormatterTest.class,
 
                 XMLStringFormatterTest.class,
-                FeiLongSpelUtilSuiteTests.class
+                SpelUtilSuiteTests.class
         //
 })
 public class SuiteTests{

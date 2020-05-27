@@ -26,7 +26,7 @@ import com.feilong.test.AbstractTest;
 public class MapTest extends AbstractTest{
 
     @Test
-    public void getValueMap(){
+    public void test(){
         Map<String, Object> map = toMap("logisticsStatus", (Object) 10);
 
         LOGGER.debug("" + SpelUtil.getValue("logisticsStatus", map));

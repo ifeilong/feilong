@@ -15,24 +15,25 @@
  */
 package com.feilong.spring.expression;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(Suite.class)
-@SuiteClasses({ //
+import org.junit.Test;
 
-                BeanTest.class,
-                FunctionTest.class,
-                StringTest.class,
+public class GetValueTest{
 
-                GetValueRootObjectNullTest.class,
-                SpelUtilTest.class,
+    @Test
+    public void getValue(){
+        assertEquals("2020".length(), ((String) SpelUtil.getValue("T(com.feilong.core.date.DateUtil).nowString('yyyy')")).length());
+    }
 
-                GetValueNullTest.class,
+    @Test
+    public void getValue1(){
+        assertEquals("AAABCFDD", SpelUtil.getValue("#this.toUpperCase()", "aaabcfdd"));
+    }
 
-        //
-})
-public class FeiLongSpelUtilSuiteTests{
+    @Test
+    public void getValue122(){
+        assertEquals("AAABCFDD.zip", SpelUtil.getValue("#this.toUpperCase() + '.zip'", "aaabcfdd"));
+    }
 
 }

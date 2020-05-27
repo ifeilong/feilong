@@ -24,11 +24,20 @@ import com.feilong.io.IOReaderUtil;
 import com.feilong.template.TemplateUtil;
 import com.feilong.test.AbstractTest;
 
-public class SpelUtilTest extends AbstractTest{
+public class GetTemplateValueTest extends AbstractTest{
 
     private static final String CONTENT = IOReaderUtil.readToString(CLASSPATH_URL_PREFIX + "content.vm");
 
-    //---------------------------------------------------------------
+    ///Users/feilong/Downloads/adidas-cn-productData-20200528.zip
+    @Test
+    public void test(){
+        String expressionString = "/Users/feilong/Downloads/adidas-cn-productData-#{T(com.feilong.core.date.DateUtil).nowString('yyyyMMdd')}.zip";
+        String templateValue = SpelUtil.getTemplateValue(expressionString);
+        assertEquals(
+                        "/Users/feilong/Downloads/adidas-cn-productData-20200528.zip".length(), //
+                        templateValue.length());
+    }
+
     @Test
     public void run(){
         String expressionString = "#{T(com.feilong.template.TemplateUtil).parseTemplate('content.vm',null)}";
