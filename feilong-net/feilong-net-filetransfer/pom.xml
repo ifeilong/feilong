@@ -5,14 +5,10 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-net-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 	</parent>
 
 	<artifactId>feilong-net-filetransfer</artifactId>
-
-	<properties>
-		<version.aspectjweaver>1.6.8</version.aspectjweaver>
-	</properties>
 
 	<dependencies>
 		<!-- jsch 用于sftp 传输 -->

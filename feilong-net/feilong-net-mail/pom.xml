@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-net-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 	</parent>
 
 	<artifactId>feilong-net-mail</artifactId>
@@ -41,18 +41,7 @@
 			<artifactId>velocity-engine-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!---->
-		<!-- <dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.2</version>
-			</dependency> -->
 
-		<!-- commons-email -->
-		<!-- <dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			</dependency> -->
 
 	</dependencies>
 

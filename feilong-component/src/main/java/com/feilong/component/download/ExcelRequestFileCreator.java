@@ -62,8 +62,7 @@ public class ExcelRequestFileCreator implements RequestFileCreator{
     public String create(HttpServletRequest request){
         Map<String, Object> data = requestDataBuilder.build(request);
 
-        ExcelWriteUtil.write(templateLocation, sheetDefinitionLocation, sheetName, data, outputFileName);
-        return outputFileName;
+        return ExcelWriteUtil.write(templateLocation, sheetDefinitionLocation, sheetName, data, outputFileName);
     }
     //---------------------------------------------------------------
 

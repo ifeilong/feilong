@@ -22,20 +22,22 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.excel.DataConvertorConfig;
 import com.feilong.excel.definition.ExcelCell;
-import com.feilong.core.Validate;
 
 import ognl.OgnlException;
 import ognl.OgnlRuntime;
 
 /**
- * 
+ * The Class PropertyTypeDetector.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.0.0
  */
 class PropertyTypeDetector{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyTypeDetector.class);
 
     //---------------------------------------------------------------
@@ -124,6 +126,19 @@ class PropertyTypeDetector{
         return getPropertyTypeWithClass(propertyType, dataName.substring(delim + 1));
     }
 
+    /**
+     * Extracted.
+     *
+     * @param clazz
+     *            the clazz
+     * @param dataName
+     *            the data name
+     * @return the class
+     * @throws IntrospectionException
+     *             the introspection exception
+     * @throws OgnlException
+     *             the ognl exception
+     */
     private static Class<?> extracted(Class<?> clazz,String dataName) throws IntrospectionException,OgnlException{
         PropertyDescriptor propertyDescriptor = OgnlRuntime.getPropertyDescriptor(clazz, dataName);
         Validate.notNull(propertyDescriptor, "propertyDescriptor can't be null!");

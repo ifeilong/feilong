@@ -4,17 +4,11 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-office-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 	</parent>
 	<artifactId>feilong-office-excel</artifactId>
 
 	<dependencies>
-
-		<!-- <dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>easyexcel</artifactId>
-			<version>2.2.3</version>
-			</dependency> -->
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>

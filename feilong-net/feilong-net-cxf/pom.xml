@@ -4,14 +4,10 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-net-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 	</parent>
 
 	<artifactId>feilong-net-cxf</artifactId>
-
-	<properties>
-		<version.cxf>3.1.11</version.cxf>
-	</properties>
 
 	<dependencies>
 
