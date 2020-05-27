@@ -25,8 +25,6 @@ import com.feilong.component.upload.SingleUploadTest;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                SpelTest.class,
-
                 DataFileEmailComponentSpringTest.class,
                 DataFileZipEmailComponentSpringTest.class,
 
