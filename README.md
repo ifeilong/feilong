@@ -38,7 +38,7 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/search?q=f
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.2</version>
 </dependency>
 ```
 
