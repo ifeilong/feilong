@@ -31,7 +31,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetValueNullTest.class,
 
                 GetTemplateValueTest.class,
-                StringTemplateFilePathTest.class,
 
         //
 })
