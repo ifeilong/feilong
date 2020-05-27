@@ -37,7 +37,7 @@ import static com.feilong.core.TimeInterval.SECONDS_PER_YEAR;
 /**
  * The Class TimeIntervalTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.1
  */
 public class TimeIntervalTest{

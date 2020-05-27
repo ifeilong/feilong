@@ -31,7 +31,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * {@link java.awt.Desktop}允许 Java应用程序启动已在本机桌面上注册的关联应用程序,以及处理 URI 或文件 .
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.awt.Desktop
  * @since 1.0.0
  * @since jdk 1.6

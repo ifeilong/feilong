@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 得到的 http response 结果信息.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public class HttpResponse implements Serializable{

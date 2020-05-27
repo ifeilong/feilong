@@ -22,7 +22,7 @@ package com.feilong.context.beanproperty;
  * 用来表示该对象是一个bean 配置需要的属性. 通常用于 spring 注入
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.3
  */
 public interface BeanProperty{

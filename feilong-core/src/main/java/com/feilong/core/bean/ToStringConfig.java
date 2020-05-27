@@ -36,7 +36,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
  * </ol>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.builder.ToStringStyle
  * @see com.feilong.lib.lang3.StringUtils#join(Object[], String)
  * @since 1.4.0

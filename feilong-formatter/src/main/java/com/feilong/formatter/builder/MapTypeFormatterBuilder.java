@@ -29,7 +29,7 @@ import com.feilong.formatter.entity.FormatterColumnEntity;
 /**
  * List 里面元素是 Map 的相关构建.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public class MapTypeFormatterBuilder extends AbstractFormatterBuilder{

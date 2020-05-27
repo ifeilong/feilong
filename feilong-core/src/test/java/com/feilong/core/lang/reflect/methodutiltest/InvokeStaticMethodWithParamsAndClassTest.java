@@ -29,7 +29,7 @@ import com.feilong.core.lang.reflect.ReflectException;
 /**
  * The Class MethodUtilInvokeStaticMethodWithParamsAndClassTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class InvokeStaticMethodWithParamsAndClassTest{
 

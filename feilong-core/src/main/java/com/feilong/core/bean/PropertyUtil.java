@@ -52,7 +52,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.beanutils.PropertyUtils
  * @see com.feilong.core.bean.BeanUtil
  * @since 1.0.0

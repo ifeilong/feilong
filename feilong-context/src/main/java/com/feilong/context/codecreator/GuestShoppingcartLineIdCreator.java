@@ -22,7 +22,7 @@ package com.feilong.context.codecreator;
  * 游客购物车行的特点在于, 它目前不会保存到db,只需要确保当前游客不重复即可,
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public interface GuestShoppingcartLineIdCreator{

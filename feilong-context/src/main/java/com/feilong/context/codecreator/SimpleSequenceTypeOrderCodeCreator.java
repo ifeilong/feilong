@@ -32,7 +32,7 @@ import com.feilong.core.Validate;
 /**
  * 默认的code 生成器.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public class SimpleSequenceTypeOrderCodeCreator implements SequenceTypeOrderCodeCreator{

@@ -51,7 +51,7 @@ import com.feilong.lib.lang3.StringUtils;
 /**
  * 处理参数相关.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.web.util.UriComponentsBuilder"
  * @see "org.apache.http.client.utils.URIBuilder"
  * @since 1.0.0

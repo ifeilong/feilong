@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //

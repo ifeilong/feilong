@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * The Class MyBean.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 Jan 26, 2013 2:43:19 PM
  */
 public class MyBean{

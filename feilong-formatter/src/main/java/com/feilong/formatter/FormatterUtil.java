@@ -130,7 +130,7 @@ addr   city     country zipCode
  * </ol>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see SimpleTableFormatter
  * @since 1.8.5
  */

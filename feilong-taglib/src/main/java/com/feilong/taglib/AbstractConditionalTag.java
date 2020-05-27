@@ -21,7 +21,7 @@ package com.feilong.taglib;
  * 用法:简单条件标签,仅需实现condition()方法即可.
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.servlet.jsp.jstl.core.ConditionalTagSupport
  * @since 1.0.1
  */

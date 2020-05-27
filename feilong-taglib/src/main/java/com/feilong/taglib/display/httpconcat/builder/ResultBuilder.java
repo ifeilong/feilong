@@ -34,7 +34,7 @@ import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
 /**
  * 结果构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  * @since 1.11.1 rename
  */

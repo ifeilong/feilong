@@ -33,7 +33,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
 /**
  * The Class DateUtilAddWeekParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class AddWeekParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, Integer, String>{
 

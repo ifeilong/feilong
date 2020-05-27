@@ -25,7 +25,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * bean message 信息构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.0 move from spring
  */
 public final class BeanLogMessageBuilder{

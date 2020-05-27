@@ -33,7 +33,7 @@ import static com.feilong.core.entity.HttpMethodTestType.POST;
 /**
  * The Class EnumUtilGetEnumByPropertyValueIgnoreCaseParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @param <E>

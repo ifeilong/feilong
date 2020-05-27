@@ -31,7 +31,7 @@ import com.feilong.core.Validate;
 /**
  * {@link VelocityEngine} 解析器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.5
  */
 class VelocityEngineParser{

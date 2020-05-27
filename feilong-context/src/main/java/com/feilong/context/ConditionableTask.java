@@ -35,7 +35,7 @@ import com.feilong.core.Validate;
  * </ol>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.14.3

@@ -191,7 +191,7 @@ import com.feilong.core.Validate;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.util.AbstractMap.SimpleEntry
  * @see com.feilong.lib.collection4.MapUtils
  * @see "com.google.common.collect.Maps"

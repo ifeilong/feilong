@@ -20,7 +20,7 @@ import com.feilong.lib.lang3.builder.CompareToBuilder;
 /**
  * for 极端测试
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
 public class UserSameHashCodeWithComparable extends UserSameHashCode implements Comparable<UserSameHashCodeWithComparable>{

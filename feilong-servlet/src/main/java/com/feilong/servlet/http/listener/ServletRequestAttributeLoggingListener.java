@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 /**
  * request 属性的创建, 替换,删除的监听器.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public class ServletRequestAttributeLoggingListener implements ServletRequestAttributeListener{

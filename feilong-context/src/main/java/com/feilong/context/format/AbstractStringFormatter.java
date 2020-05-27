@@ -20,7 +20,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 /**
  * 抽象的字符串格式化.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
 public abstract class AbstractStringFormatter implements StringFormatter{

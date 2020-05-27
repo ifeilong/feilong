@@ -26,7 +26,7 @@ import com.feilong.taglib.display.httpconcat.builder.TemplateFactory;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
 public class TypeFormatterTest{

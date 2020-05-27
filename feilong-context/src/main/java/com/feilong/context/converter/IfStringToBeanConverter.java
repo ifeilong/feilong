@@ -23,7 +23,7 @@ import com.feilong.lib.collection4.functors.IfTransformer;
 /**
  * The Class IfStringToBeanConverter.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see IfTransformer

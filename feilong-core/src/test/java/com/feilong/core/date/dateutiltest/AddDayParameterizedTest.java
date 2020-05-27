@@ -33,7 +33,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 /**
  * The Class DateUtilAddDayParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class AddDayParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, Integer, String>{
 

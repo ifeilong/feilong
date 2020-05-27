@@ -145,7 +145,7 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option">feilongDisplay-option</a>
  * @since 1.5.4
  */

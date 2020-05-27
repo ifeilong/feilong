@@ -26,7 +26,7 @@ import com.jcraft.jsch.Session;
 /**
  * The Class SftpSessionUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 class SftpSessionUtil{
@@ -70,8 +70,6 @@ class SftpSessionUtil{
         map.put("serverAliveCountMax", session.getServerAliveCountMax());
         map.put("serverAliveInterval", session.getServerAliveInterval());
         map.put("timeout", session.getTimeout());
-
-        //map.put("userInfo", session.getUserInfo());
         return map;
     }
 }

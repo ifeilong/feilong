@@ -22,7 +22,7 @@ import static com.feilong.core.date.DateUtil.getDayOfYear;
 /**
  * The Class DateUtilGetDayOfYearTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class GetDayOfYearTest{
 

@@ -71,7 +71,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.lang.ClassLoader
  * @see java.net.URLClassLoader
  * @see "org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)"

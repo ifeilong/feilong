@@ -63,7 +63,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  * </table>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.servlet.jsp.tagext.TagExtraInfo
  * @see "org.apache.taglibs.standard.tei.DeclareTEI"
  * @see "org.apache.taglibs.standard.tei.ForEachTEI"

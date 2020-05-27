@@ -44,7 +44,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * The Class MessageUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
 public final class MessageUtil{

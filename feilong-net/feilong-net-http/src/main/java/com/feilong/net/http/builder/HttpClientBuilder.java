@@ -36,7 +36,7 @@ import com.feilong.net.http.packer.SSLPacker;
 /**
  * {@link HttpClient} 构造器.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
  * @see org.apache.http.impl.client.HttpClients#createDefault()
  * @see org.apache.http.impl.client.HttpClients#custom()

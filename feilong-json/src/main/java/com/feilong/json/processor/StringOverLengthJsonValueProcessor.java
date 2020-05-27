@@ -25,7 +25,7 @@ import com.feilong.core.Validate;
 /**
  * 如果字符串格式jsonvalue的值超过指定的长度 <code>maxLength</code>,将省略显示 <code>overLengthMaskString</code>,以控制输出的字符串长度.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.7
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated

@@ -18,7 +18,7 @@ package com.feilong.excel.definition;
 /**
  * 循环跳出的条件.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class LoopBreakCondition{

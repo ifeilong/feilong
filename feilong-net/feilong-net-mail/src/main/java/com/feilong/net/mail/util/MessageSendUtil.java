@@ -26,7 +26,7 @@ import com.feilong.net.mail.exception.MailException;
 /**
  * 专门用来发送邮件.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class MessageSendUtil{

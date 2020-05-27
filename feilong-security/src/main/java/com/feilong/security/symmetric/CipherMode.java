@@ -18,7 +18,7 @@ package com.feilong.security.symmetric;
 /**
  * 分组模式(The following names can be specified as the mode component in a transformation when requesting an instance of Cipher.)
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.7 2014年7月8日 下午4:45:24
  * @since 1.0.7
  */

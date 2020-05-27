@@ -23,7 +23,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
 /**
  * 邮件服务商.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.3
  */
 public class EmailProvider implements Serializable{

@@ -31,7 +31,7 @@ import com.feilong.lib.lang3.ArrayUtils;
 /**
  * {@link javax.servlet.ServletContext} 工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.2
  */
 public final class ServletContextUtil{

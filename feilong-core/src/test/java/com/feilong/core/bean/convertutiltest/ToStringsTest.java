@@ -28,7 +28,7 @@ import com.feilong.core.net.URLUtil;
 /**
  * The Class ConvertUtilToStringsTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToStringsTest{
 

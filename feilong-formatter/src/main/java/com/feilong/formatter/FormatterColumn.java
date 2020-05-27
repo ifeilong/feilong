@@ -37,7 +37,7 @@ import java.lang.annotation.Target;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.5
  */
 @Documented

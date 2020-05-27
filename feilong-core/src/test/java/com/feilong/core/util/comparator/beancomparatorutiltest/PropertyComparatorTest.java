@@ -21,7 +21,7 @@ import com.feilong.core.util.comparator.BeanComparatorUtil;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.2
  */
 public class PropertyComparatorTest{

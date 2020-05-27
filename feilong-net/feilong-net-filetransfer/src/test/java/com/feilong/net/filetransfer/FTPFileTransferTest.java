@@ -30,7 +30,7 @@ import com.feilong.json.JsonUtil;
 /**
  * The Class FTPUtilTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 @ContextConfiguration(value = { "classpath*:spring/spring-ftp.xml" })
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code

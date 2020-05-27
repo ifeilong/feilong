@@ -18,7 +18,7 @@ package com.feilong.core.lang.reflect.typeutiltest;
 /**
  * 查询商品.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public interface SkuItemRepository extends BaseSolrRepository<SkuItem, Long>{
 

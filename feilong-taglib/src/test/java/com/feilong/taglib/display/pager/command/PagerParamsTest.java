@@ -25,7 +25,7 @@ import com.feilong.test.AbstractTest;
 /**
  * The Class PagerParamsTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
 public class PagerParamsTest extends AbstractTest{

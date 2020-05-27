@@ -50,7 +50,7 @@ import com.feilong.validator.ValidatorUtil;
 /**
  * focus 在文件读取以及解析.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.io.IOUtils
  * @since 1.0.6
  */

@@ -22,13 +22,12 @@ import com.feilong.core.bean.BeanUtil;
 /**
  * 简单模式的 populate.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public class CommonBeanBuilder implements BeanBuilder{
 
     /** Static instance. */
-    // the static instance works for all types
     public static final BeanBuilder INSTANCE = new CommonBeanBuilder();
 
     //---------------------------------------------------------------

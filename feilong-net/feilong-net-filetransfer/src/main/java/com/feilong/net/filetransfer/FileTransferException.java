@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * 文件传输遇到的异常.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.1
  */
 public final class FileTransferException extends DefaultRuntimeException{

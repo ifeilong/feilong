@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 
 /**
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.6
  */
 public class SimpleHttpTypeBeanPropertyBeanDefinitionBuilderBuilder{

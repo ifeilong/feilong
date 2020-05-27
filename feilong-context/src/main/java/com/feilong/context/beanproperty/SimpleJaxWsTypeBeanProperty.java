@@ -18,7 +18,7 @@ package com.feilong.context.beanproperty;
 /**
  * 简单的JaxWs 请求类型的bean属性.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.3
  */
 public class SimpleJaxWsTypeBeanProperty implements JaxWsTypeBeanProperty{

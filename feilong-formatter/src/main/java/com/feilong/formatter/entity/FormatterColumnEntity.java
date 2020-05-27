@@ -22,7 +22,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
 /**
  * 定制每列的顺序以及标题的名称.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see FormatterColumn
  * @since 1.8.5
  */

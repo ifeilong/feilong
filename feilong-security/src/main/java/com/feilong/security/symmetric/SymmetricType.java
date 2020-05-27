@@ -83,7 +83,7 @@ package com.feilong.security.symmetric;
  * </p>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 2012-3-24 下午11:36:22
  * @see <a href="http://tripledes.online-domain-tools.com/">加解密在线测试网站</a>
  * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html#AppA">JCA Reference Guide</a>
@@ -221,7 +221,7 @@ public enum SymmetricType{
 
     //Cannot find any provider supporting HmacSHA1
     //HMAC(Hash Message Authentication Code,散列消息鉴别码,基于密钥的Hash算法的认证协议。
-    //    HmacSHA1("HMAC-SHA1");
+    //    HmacSHA1("HMAC-SHA1")
 
     //---------------------------------------------------------------
 

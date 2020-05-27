@@ -26,7 +26,7 @@ import com.feilong.security.EncryptionException;
 /**
  * The Class DESedeUtilTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 Mar 21, 2011 4:55:43 PM
  */
 public class DESedeUtilTest extends AbstractSecurityTest{

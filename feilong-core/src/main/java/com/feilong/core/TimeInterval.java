@@ -18,7 +18,7 @@ package com.feilong.core;
 /**
  * 常用的时间间隔.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.time.DateUtils
  * @since 1.0.0
  */

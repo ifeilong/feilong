@@ -24,7 +24,7 @@ import com.feilong.json.JsonUtil;
 /**
  * The Class SFTPUtilTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class SFTPFileTransferTest extends FileTransferTest{

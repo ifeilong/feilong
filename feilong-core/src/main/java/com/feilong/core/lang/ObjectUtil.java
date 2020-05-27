@@ -31,7 +31,7 @@ import com.feilong.core.Validate;
  * </ol>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.ObjectUtils
  * @see java.util.Objects
  * @since 1.0.0

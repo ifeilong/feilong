@@ -35,7 +35,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 /**
  * The Class NumberUtilSetScaleRoundingModeParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class SetScaleRoundingModeParameterizedTest
                 extends Abstract3ParamsAndResultParameterizedTest<Number, Integer, RoundingMode, BigDecimal>{

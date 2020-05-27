@@ -40,7 +40,7 @@ import com.feilong.core.net.URIUtil;
  * }
  * </pre></code>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.3 move from feilong-spring-core
  */
 public class URLDecoderEditor extends PropertyEditorSupport{

@@ -30,7 +30,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 /**
  * XStream相关配置.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.5.0 2015年10月29日 下午4:48:56
  * @since 1.5.0
  */

@@ -30,7 +30,7 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 /**
  * The Class StringUtilSubstringStartIndexAndLengthParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class SubstringStartIndexAndLengthParameterizedTest
                 extends Abstract3ParamsAndResultParameterizedTest<String, Integer, Integer, String>{

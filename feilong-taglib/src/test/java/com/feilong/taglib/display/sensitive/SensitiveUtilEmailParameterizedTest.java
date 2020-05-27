@@ -27,7 +27,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.1
  */
 public class SensitiveUtilEmailParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{

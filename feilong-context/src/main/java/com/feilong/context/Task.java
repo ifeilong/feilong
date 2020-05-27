@@ -18,7 +18,7 @@ package com.feilong.context;
 /**
  * 可以被 quartz 运行的 Task.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * 

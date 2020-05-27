@@ -25,7 +25,7 @@ import com.feilong.test.AbstractTest;
 /**
  * The Class FilenameUtilTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.0
  */
 public class FilenameUtilTest extends AbstractTest{

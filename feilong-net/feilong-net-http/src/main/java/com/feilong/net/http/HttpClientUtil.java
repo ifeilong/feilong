@@ -26,7 +26,7 @@ import com.feilong.net.http.callback.StatusCodeResultCallback;
 /**
  * 基于 HttpClient4 的工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see org.apache.http.client.methods.HttpUriRequest
  * @see "com.feilong.tools.net.httpclient3.HttpClientUtil"
  * @see "org.springframework.http.client.HttpComponentsClientHttpResponse"

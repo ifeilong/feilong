@@ -28,7 +28,7 @@ import com.feilong.security.symmetric.SymmetricType;
 /**
  * 默认的加密解密器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.12.0

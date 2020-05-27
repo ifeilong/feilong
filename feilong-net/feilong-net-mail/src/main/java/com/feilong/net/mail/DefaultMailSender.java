@@ -30,7 +30,7 @@ import com.feilong.net.mail.util.MessageSendUtil;
 /**
  * 邮件发送器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.mail.Message
  * @see javax.mail.Session
  * @see "org.springframework.mail.MailSender"

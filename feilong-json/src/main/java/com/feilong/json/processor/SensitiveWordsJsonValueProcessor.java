@@ -65,7 +65,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
  * {@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES} 以及 {@link JsonConfigBuilder#registerDefaultJsonValueProcessor(JsonConfig)}
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.2
  */
 public class SensitiveWordsJsonValueProcessor extends AbstractJsonValueProcessor{

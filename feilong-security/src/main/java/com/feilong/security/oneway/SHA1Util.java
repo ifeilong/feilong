@@ -37,7 +37,7 @@ import com.feilong.security.EncryptionException;
  * SHA1Util.encode(&quot;你好&quot;) = 440ee0853ad1e99f962b63e459ef992d7c211722
  * </pre>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.0 2010年10月26日 17:13:58
  * @version 1.0.1 2011-10-18 16:49
  * @version 1.0.2 2013-7-18 17:01 修改了javadoc 和类关系

@@ -18,7 +18,7 @@ package com.feilong.context;
 /**
  * 简单的基于参数名字配置的条件.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
 public class SimpleParamNameConfigCondition implements Condition{

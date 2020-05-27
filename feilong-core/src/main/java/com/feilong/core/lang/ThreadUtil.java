@@ -82,7 +82,7 @@ import com.feilong.core.Validate;
  * </blockquote>
  * 
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.core.task.SimpleAsyncTaskExecutor"
  * @see "org.springframework.core.task.SyncTaskExecutor"
  * @see "org.springframework.core.task.TaskExecutor"

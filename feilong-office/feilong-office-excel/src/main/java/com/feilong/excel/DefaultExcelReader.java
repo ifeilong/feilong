@@ -37,7 +37,7 @@ import com.feilong.lib.excel.ognl.OgnlStack;
 /**
  * The Class DefaultExcelReader.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see ExcelManipulatorFactory
  * @since 3.0.0
  */

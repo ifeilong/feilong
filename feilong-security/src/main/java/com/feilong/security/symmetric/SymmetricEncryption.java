@@ -113,7 +113,7 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.0 2011-12-26 上午11:05:53
  * @version 1.0.1 2013-1-15 15:18 json log
  * @version 1.0.7 2014-6-5 16:26 丰富了javadoc

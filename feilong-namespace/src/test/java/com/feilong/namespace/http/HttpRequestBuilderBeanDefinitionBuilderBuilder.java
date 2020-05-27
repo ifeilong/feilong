@@ -24,7 +24,7 @@ import com.feilong.namespace.RuntimeBeanReferenceBuilder;
 /**
  * The Class HttpRequestBuilderParserUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 4.0.6
  */
 public class HttpRequestBuilderBeanDefinitionBuilderBuilder{

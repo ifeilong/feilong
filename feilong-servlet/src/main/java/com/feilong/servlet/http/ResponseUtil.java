@@ -90,7 +90,7 @@ import com.feilong.core.Validate;
  * </p>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.servlet.http.HttpServletResponse
  * @since 1.0.0
  */

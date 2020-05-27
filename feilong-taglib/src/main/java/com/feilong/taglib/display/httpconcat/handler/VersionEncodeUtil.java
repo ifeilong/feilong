@@ -24,7 +24,7 @@ import com.feilong.security.oneway.SHA1Util;
 /**
  * 独立成一个类,避免没有依赖 security 报错.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
 public final class VersionEncodeUtil{

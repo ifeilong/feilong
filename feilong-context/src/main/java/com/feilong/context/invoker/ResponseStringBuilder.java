@@ -18,7 +18,7 @@ package com.feilong.context.invoker;
 /**
  * 响应结果字符串构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            请求的类型
  * @since 1.11.2

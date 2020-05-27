@@ -30,7 +30,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * {@link Cipher} 类为加密和解密提供密码功能.它构成了 Java Cryptographic Extension (JCE) 框架的核心..
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.5.0 2015年10月20日 下午6:09:51
  * @since 1.5.0
  */

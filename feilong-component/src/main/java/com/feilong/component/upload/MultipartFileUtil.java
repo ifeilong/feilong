@@ -26,7 +26,7 @@ import com.feilong.io.FileUtil;
 /**
  * {@link MultipartFile} 工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
 final class MultipartFileUtil{
@@ -54,7 +54,6 @@ final class MultipartFileUtil{
         map.put("multipartFile.getName()", multipartFile.getName());
         map.put("multipartFile.getOriginalFilename()", multipartFile.getOriginalFilename());
         map.put("multipartFile.getSize()", FileUtil.formatSize(multipartFile.getSize()));
-        //map.put("multipartFile.isEmpty()", multipartFile.isEmpty());
         return map;
     }
 }

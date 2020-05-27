@@ -46,19 +46,6 @@ public class ExcelManipulatorFactory{
         sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionLocations);
     }
 
-    //---------------------------------------------------------------
-    //
-    //    /**
-    //     * Creates a new ExcelManipulator object.
-    //     *
-    //     * @param sheetNames
-    //     *            the sheet names
-    //     * @return the excel writer
-    //     */
-    //    public ExcelWriter createExcelWriter(String...sheetNames){
-    //        return createExcelWriter(null, null, sheetNames);
-    //    }
-
     /**
      * Creates a new ExcelManipulator object.
      *

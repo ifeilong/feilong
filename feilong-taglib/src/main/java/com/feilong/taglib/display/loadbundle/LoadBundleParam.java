@@ -26,7 +26,7 @@ import com.feilong.taglib.display.CacheParam;
 /**
  * 用来处理国际化.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
 public class LoadBundleParam implements Serializable,CacheParam{

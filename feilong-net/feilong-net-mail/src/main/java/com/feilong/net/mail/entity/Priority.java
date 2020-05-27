@@ -18,7 +18,7 @@ package com.feilong.net.mail.entity;
 /**
  * 邮件发送级别.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.3
  */
 public enum Priority{

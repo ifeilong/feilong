@@ -27,7 +27,7 @@ import static com.feilong.core.bean.ConvertUtil.toEnumeration;
 /**
  * The Class ValidatorData.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.5
  */
 public class ValidatorData{

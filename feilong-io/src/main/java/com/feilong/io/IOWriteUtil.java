@@ -54,7 +54,7 @@ import com.feilong.io.entity.FileWriteMode;
  * 
  * 如果需要覆盖写文件,可以调用 {@link #writeStringToFile(String, String, String, FileWriteMode)}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.util.StreamUtils"
  * @see "org.springframework.util.FileCopyUtils"
  * @see com.feilong.lib.io.IOUtils

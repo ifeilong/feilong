@@ -33,7 +33,7 @@ import com.feilong.core.util.transformer.NumberToStringTransformer;
 /**
  * 处理值转换.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.0
  */
 public final class ToStringHandler{

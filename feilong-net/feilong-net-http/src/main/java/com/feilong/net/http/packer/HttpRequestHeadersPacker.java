@@ -33,7 +33,7 @@ import com.feilong.net.http.HttpRequest;
 /**
  * 专门用来封装请求头 {@link org.apache.http.HttpMessage#setHeader(String, String)}.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  * @since 1.11.0 rename from HeadersPacker
  */

@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  * 如果不是 null 或者 empty ,那么进行调用 {@link #handle(List)} 执行
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 2.0.0

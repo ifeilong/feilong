@@ -20,7 +20,7 @@ import com.feilong.core.Validate;
 /**
  * 敏感词配置相关.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.1
  */
 public class SensitiveConfig{

@@ -30,7 +30,7 @@ import com.feilong.taglib.display.loadbundle.LoadBundleParam;
 /**
  * The Class LocaleSupportUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
 public final class LocaleSupportUtil{

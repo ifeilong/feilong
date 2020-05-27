@@ -25,7 +25,7 @@ import com.feilong.security.AbstractSecurityTest;
 /**
  * The Class AESUtilTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.2.2 2015年7月19日 下午6:36:00
  * @since 1.2.2
  */

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  * 数据可以用于excel解析等各种地方
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public interface RequestDataBuilder{

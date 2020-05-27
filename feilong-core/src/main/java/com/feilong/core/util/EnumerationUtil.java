@@ -46,7 +46,7 @@ import com.feilong.lib.collection4.iterators.EnumerationIterator;
  * </p>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.collection4.EnumerationUtils
  * @since 1.5.3
  */

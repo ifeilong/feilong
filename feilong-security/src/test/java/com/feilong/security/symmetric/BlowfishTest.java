@@ -26,7 +26,7 @@ import com.feilong.security.EncryptionException;
 /**
  * The Class BlowfishTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.7 2014年6月5日 下午3:55:06
  * @since 1.0.7
  */

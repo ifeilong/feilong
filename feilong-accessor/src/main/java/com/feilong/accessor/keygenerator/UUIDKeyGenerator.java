@@ -25,7 +25,7 @@ import com.feilong.core.util.RandomUtil;
 /**
  * The Class UUIDKeyGenerator.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
 public class UUIDKeyGenerator implements KeyGenerator{

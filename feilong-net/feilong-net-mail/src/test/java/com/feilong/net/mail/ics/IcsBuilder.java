@@ -31,7 +31,7 @@ import com.feilong.template.TemplateUtil;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.2
  */
 public class IcsBuilder{

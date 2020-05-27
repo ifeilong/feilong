@@ -18,7 +18,7 @@ package com.feilong.net.filetransfer;
 /**
  * 通用的 FileTransferTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public abstract class FileTransferTest extends AbstractFileTransferTest{
 

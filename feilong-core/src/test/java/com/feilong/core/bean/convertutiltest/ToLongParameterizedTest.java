@@ -30,7 +30,7 @@ import static com.feilong.core.bean.ConvertUtil.toLong;
 /**
  * The Class ConvertUtilToLongParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToLongParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, Long>{
 

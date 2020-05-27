@@ -30,7 +30,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 /**
  * The Class ConvertUtilToIntegerParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToIntegerParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, Integer>{
 

@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 只需要实现 {@link ServletContextListener#contextInitialized} 方法的 {@link ServletContextListener}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
 public abstract class AbstractServletContextInitializedListener implements ServletContextListener{

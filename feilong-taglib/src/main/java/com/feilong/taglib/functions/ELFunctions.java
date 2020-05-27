@@ -51,7 +51,7 @@ import com.feilong.taglib.common.AbstractContainsSupport;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see org.apache.taglibs.standard.functions.Functions
  * @see "org.owasp.esapi.tags.ELEncodeFunctions"
  * 

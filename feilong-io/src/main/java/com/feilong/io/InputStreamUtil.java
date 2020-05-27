@@ -40,7 +40,7 @@ import com.feilong.lib.springframework.core.io.ResourceLoader;
 /**
  * {@link java.io.InputStream} 工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see ReaderUtil
  * @see java.io.InputStream
  * @since 1.0.9

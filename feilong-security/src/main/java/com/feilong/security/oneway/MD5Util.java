@@ -35,7 +35,7 @@ import com.feilong.core.CharsetType;
  * </pre>
  * 
  * @author 腾讯通
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.0 2010年10月26日 17:13:58
  * @version 1.0.1 2011-10-18 16:49
  * @version 1.0.7 2014-7-10 14:28 update javadoc and remove extends

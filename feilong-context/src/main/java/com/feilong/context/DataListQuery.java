@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 专门用来查询数据的接口.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 2.0.0

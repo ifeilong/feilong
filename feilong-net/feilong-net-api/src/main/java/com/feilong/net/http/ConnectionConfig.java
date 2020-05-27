@@ -60,7 +60,7 @@ import com.feilong.lib.lang3.builder.HashCodeBuilder;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.3.0
  */
 public final class ConnectionConfig{

@@ -18,7 +18,7 @@ package com.feilong.context.codecreator;
 /**
  * 简单的相关配置.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.9
  */
 public class SimpleMultiSellerOrderCodeCreatorConfig{

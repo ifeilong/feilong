@@ -24,7 +24,7 @@ import com.feilong.json.entity.StoreLocatorErrorProperty;
 /**
  * The Class FormatBeanErrorPropertyTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see https://github.com/venusdrogon/feilong-json/issues/20
  * @since 1.12.0
  */

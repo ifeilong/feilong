@@ -24,7 +24,7 @@ import com.feilong.core.lang.ArrayUtil;
 /**
  * The Class ArrayUtilNewArrayTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class NewArrayTest{
     //************com.feilong.core.lang.ArrayUtil.newArray(Class<Object>, int)*************************************

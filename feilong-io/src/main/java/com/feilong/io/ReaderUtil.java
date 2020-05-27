@@ -27,7 +27,7 @@ import com.feilong.core.Validate;
 /**
  * {@link java.io.Reader} 工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.io.BufferedReader
  * @see java.io.CharArrayReader
  * @see java.io.FilterReader

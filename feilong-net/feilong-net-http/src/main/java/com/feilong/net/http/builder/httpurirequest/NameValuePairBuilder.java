@@ -29,7 +29,7 @@ import org.apache.http.message.BasicNameValuePair;
 /**
  * 将Map{@code <String, String>} 转成 List{@code <NameValuePair>} 的构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 final class NameValuePairBuilder{

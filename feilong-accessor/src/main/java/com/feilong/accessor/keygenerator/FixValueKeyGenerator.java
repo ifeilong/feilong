@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 固定值(常用于 {@link com.feilong.accessor.cookie.CookieAccessor}).
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
 public class FixValueKeyGenerator implements KeyGenerator{

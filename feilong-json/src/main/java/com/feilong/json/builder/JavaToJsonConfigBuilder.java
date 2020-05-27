@@ -29,7 +29,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
 /**
  * {@link JavaToJsonConfig} 构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  * @since 1.11.0 change package
  */
@@ -124,10 +124,6 @@ public final class JavaToJsonConfigBuilder{
      * @since 1.11.5
      */
     private static JavaToJsonConfig merge(JavaToJsonConfig defaultJavaToJsonConfig,JavaToJsonConfig javaToJsonConfig){
-        //        defaultJavaToJsonConfig.getExcludes();
-        //        defaultJavaToJsonConfig.getIncludes();
-        //        defaultJavaToJsonConfig.getJsonTargetClassAndPropertyNameProcessorMap();
-
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = defaultIfNullOrEmpty(
                         javaToJsonConfig.getPropertyNameAndJsonValueProcessorMap(),
                         MapUtil.<String, JsonValueProcessor> newHashMap());

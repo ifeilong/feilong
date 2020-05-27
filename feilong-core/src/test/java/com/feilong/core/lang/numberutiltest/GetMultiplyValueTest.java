@@ -22,7 +22,7 @@ import com.feilong.core.lang.NumberUtil;
 /**
  * The Class NumberUtilGetMultiplyValueTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class GetMultiplyValueTest{
 

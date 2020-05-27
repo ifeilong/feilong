@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
  * 建议不要自己硬编码,可以直接调用此处声明的常量.
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.CharEncoding
  * @see com.feilong.lib.lang3.CharEncoding#isSupported(String)
  * @see java.nio.charset.Charset#availableCharsets()

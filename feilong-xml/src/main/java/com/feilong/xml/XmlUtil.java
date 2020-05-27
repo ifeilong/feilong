@@ -16,9 +16,9 @@
 package com.feilong.xml;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.util.Collections.emptyMap;
 
 import java.io.StringWriter;
@@ -38,9 +38,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.xml.xstream.XStreamBuilder;
 import com.feilong.xml.xstream.XStreamConfig;
 import com.feilong.xml.xstream.XStreamConfigBuilder;
@@ -141,9 +141,9 @@ import com.thoughtworks.xstream.XStream;
  * </p>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://x-stream.github.io/faq.html">Frequently Asked Questions</a>
  * @see <a href="https://x-stream.github.io/news.html">News</a>
  * @see "org.apache.solr.common.util.DOMUtil"
@@ -440,7 +440,7 @@ public class XmlUtil{
         Validate.notBlank(rootElementName, "rootName can't be blank!");
 
         XStreamConfig xStreamConfig = XStreamConfigBuilder.buildSimpleMapXStreamConfig(rootElementName, isPrettyPrint);
-        // xStreamConfig.getDefaultImplementationMap().put(map.getClass(), Map.class);
+        // xStreamConfig.getDefaultImplementationMap().put(map.getClass(), Map.class)
 
         if (map.getClass() != HashMap.class){
             xStreamConfig.getAliasMap().put(rootElementName, map.getClass());

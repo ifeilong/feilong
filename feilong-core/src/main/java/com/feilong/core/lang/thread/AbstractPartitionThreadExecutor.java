@@ -36,7 +36,7 @@ import com.feilong.core.Validate;
  * 含公共校验以及日志
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 public abstract class AbstractPartitionThreadExecutor implements PartitionThreadExecutor{

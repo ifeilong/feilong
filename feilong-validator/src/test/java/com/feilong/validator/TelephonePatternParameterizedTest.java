@@ -28,7 +28,7 @@ import com.feilong.test.TestUtil;
 /**
  * The Class TelephonePatternTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.3
  */
 public class TelephonePatternParameterizedTest extends AbstractBooleanParameterizedTest<String, Boolean>{

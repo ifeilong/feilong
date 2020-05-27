@@ -16,7 +16,7 @@
 /**
  * 专门用来做校验的.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 package com.feilong.validator;

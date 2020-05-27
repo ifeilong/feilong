@@ -101,7 +101,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.reflect.FieldUtils
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7

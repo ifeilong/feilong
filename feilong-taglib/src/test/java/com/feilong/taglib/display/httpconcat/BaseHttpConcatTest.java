@@ -32,7 +32,7 @@ import com.feilong.test.AbstractTest;
 /**
  * The Class BaseHttpConcatTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
 public abstract class BaseHttpConcatTest extends AbstractTest{

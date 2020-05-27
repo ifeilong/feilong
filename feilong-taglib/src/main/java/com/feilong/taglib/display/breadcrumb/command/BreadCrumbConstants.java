@@ -18,7 +18,7 @@ package com.feilong.taglib.display.breadcrumb.command;
 /**
  * 面包屑常量.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.2
  */
 public final class BreadCrumbConstants{

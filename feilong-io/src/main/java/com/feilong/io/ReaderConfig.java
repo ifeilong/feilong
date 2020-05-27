@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * 读取文件的配置参数.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.10
  */
 public class ReaderConfig implements Serializable{

@@ -18,7 +18,7 @@ package com.feilong.core;
 /**
  * uri中使用的字符常量.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.web.util.HierarchicalUriComponents.Type"
  * @see "org.springframework.web.util.UriComponentsBuilder"
  * @see "org.springframework.web.util.UriComponents"

@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * 常规{@link Map}型 请求参数构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see RequestArrayParamsBuilder

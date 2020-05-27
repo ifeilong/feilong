@@ -28,7 +28,7 @@ import com.feilong.context.filecreator.RequestFileCreatorDetector;
 /**
  * 默认基于request请求的标识参数名字来,来探测使用的{@link RequestFileCreator}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class DefaultRequestFileCreatorDetector implements RequestFileCreatorDetector{

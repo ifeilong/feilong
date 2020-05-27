@@ -25,7 +25,7 @@ import com.feilong.net.mail.entity.Priority;
 /**
  * 专门用来设置header.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class HeaderSetter{

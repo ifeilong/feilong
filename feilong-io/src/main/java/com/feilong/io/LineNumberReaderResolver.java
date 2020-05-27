@@ -18,7 +18,7 @@ package com.feilong.io;
 /**
  * 定义对 {@link java.io.LineNumberReader} 的解析.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.1
  */
 public interface LineNumberReaderResolver{

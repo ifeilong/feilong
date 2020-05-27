@@ -38,7 +38,7 @@ import com.feilong.core.DefaultRuntimeException;
  * </ol>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.beans.BeansException"
  * @since 1.9.0
  */

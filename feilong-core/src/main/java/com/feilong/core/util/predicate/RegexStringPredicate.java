@@ -20,7 +20,7 @@ import com.feilong.core.util.RegexUtil;
 /**
  * 正则表达式类型的 StringPredicate.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see RegexUtil#matches(String, CharSequence)
  * @since 1.13.2
  */

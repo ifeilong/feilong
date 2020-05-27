@@ -23,7 +23,7 @@ import com.feilong.core.lang.ClassUtil;
 /**
  * 用来判断 当前环境是否有 spring bean BeanUtils 类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.0
  */
 class SpringBeanUtilsHelper{

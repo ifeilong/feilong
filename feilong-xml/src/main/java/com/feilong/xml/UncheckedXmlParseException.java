@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * xml 解析异常.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.0
  */
 public final class UncheckedXmlParseException extends DefaultRuntimeException{

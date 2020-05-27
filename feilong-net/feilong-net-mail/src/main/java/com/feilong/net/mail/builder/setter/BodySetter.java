@@ -28,7 +28,7 @@ import com.feilong.net.mail.entity.MailSendRequest;
 /**
  * 设置 BodyPart.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class BodySetter{
@@ -59,9 +59,6 @@ public class BodySetter{
         }
 
         //---------------------------------------------------------------
-
-        // if txt
-        // message.setText(mailContent);
         MimeMultipart mimeMultipart = buildContent(mailSendRequest);
 
         // 将MiniMultipart对象设置为邮件内容

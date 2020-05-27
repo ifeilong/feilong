@@ -18,7 +18,7 @@ package com.feilong.csv.entity;
 /**
  * The Class BeanCsvConfig.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.7.1

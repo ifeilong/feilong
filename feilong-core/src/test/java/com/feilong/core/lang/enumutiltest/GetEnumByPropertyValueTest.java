@@ -24,7 +24,7 @@ import com.feilong.core.lang.EnumUtil;
 /**
  * The Class EnumUtilGetEnumByPropertyValueTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class GetEnumByPropertyValueTest{
 

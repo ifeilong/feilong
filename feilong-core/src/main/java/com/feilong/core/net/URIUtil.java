@@ -170,7 +170,7 @@ import com.feilong.core.Validate;
  * </p>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.net.URI
  * @see java.net.URL
  * @see URIComponents

@@ -34,7 +34,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 /**
  * 基于 {@link XStreamConfig} 构造 {@link XStream}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.7
  */
 public final class XStreamBuilder{
@@ -157,7 +157,7 @@ public final class XStreamBuilder{
 
         //避免出现以下警告:Security framework of XStream not initialized, XStream is probably vulnerable
         //since 1.14.3
-        //XStream.setupDefaultSecurity(xstream);
+        //XStream.setupDefaultSecurity(xstream)
         return xstream;
     }
 

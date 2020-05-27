@@ -34,7 +34,7 @@ import com.feilong.taglib.BaseTEI;
 /**
  * The Class PagerTagExtraInfo.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.3
  */
 public class PagerTagExtraInfo extends BaseTEI{

@@ -22,7 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * The Class DefaultKeyBuilder.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public abstract class AbstractSecretKeySpecBuilder implements KeyBuilder{

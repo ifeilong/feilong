@@ -20,7 +20,7 @@ import com.feilong.core.bean.Alias;
 /**
  * The Class DangaMemCachedConfig.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.1
  */
 public class DangaMemCachedConfig{

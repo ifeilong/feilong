@@ -43,7 +43,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 通用的文件传输.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
  */
 public abstract class AbstractFileTransfer implements FileTransfer{

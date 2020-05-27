@@ -27,7 +27,7 @@ import org.apache.commons.compress.archivers.zip.ZipFile;
 /**
  * 解压缩的工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.4
  */
 public class CompressUnzipHandler extends AbstractUnzipHandler{

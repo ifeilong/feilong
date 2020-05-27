@@ -33,7 +33,7 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 /**
  * The Class ResourceBundleUtilGetValueWithResourceBundleParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class GetValueWithResourceBundleParameterizedTest
                 extends Abstract3ParamsAndResultParameterizedTest<ResourceBundle, String, Object[], String>{

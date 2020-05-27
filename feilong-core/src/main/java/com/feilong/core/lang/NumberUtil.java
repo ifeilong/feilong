@@ -148,7 +148,7 @@ import com.feilong.lib.lang3.math.NumberUtils;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see Integer
  * @see Long
  * @see BigDecimal

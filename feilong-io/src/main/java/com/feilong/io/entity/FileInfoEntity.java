@@ -26,7 +26,7 @@ import com.feilong.io.FileUtil;
 /**
  * 文件信息 entity.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.1
  */
 public class FileInfoEntity implements Serializable{

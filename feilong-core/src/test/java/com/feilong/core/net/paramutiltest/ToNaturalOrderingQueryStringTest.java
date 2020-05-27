@@ -29,7 +29,7 @@ import com.feilong.core.net.ParamUtil;
 /**
  * The Class ParamUtilToNaturalOrderingQueryStringTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToNaturalOrderingQueryStringTest{
     //***************com.feilong.core.net.ParamUtil.toNaturalOrderingQueryString(Map<String, String>)**********

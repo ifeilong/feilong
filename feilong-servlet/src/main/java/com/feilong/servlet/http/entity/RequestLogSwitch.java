@@ -49,7 +49,7 @@ import java.io.Serializable;
  * </p>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.builder.ToStringStyle
  * @since 1.4.0
  */

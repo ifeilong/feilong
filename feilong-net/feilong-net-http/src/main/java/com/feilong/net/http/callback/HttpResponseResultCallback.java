@@ -46,7 +46,7 @@ import com.feilong.net.http.builder.HttpResponseUtil;
 /**
  * 用来解析 全数据 {@link com.feilong.net.http.HttpResponse} 的 {@link ResultCallback}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
 public class HttpResponseResultCallback implements ResultCallback<com.feilong.net.http.HttpResponse>{

@@ -29,7 +29,7 @@ import com.feilong.core.Validate;
 /**
  * 字符串转成日期的转换器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class StringToDateTransformer implements Transformer<String, Date>,Serializable{

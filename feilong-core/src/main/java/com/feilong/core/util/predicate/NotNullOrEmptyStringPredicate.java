@@ -20,7 +20,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 /**
  * 不是null or empty StringPredicate.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
  * @see com.feilong.lib.collection4.functors.NullPredicate
  * @see com.feilong.lib.collection4.functors.NullIsExceptionPredicate

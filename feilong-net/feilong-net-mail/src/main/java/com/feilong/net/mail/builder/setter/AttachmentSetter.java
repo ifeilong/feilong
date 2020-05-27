@@ -35,7 +35,7 @@ import com.feilong.lib.io.IOUtils;
 /**
  * 设置附件.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.0
  * @since 1.13.2 move package
  */

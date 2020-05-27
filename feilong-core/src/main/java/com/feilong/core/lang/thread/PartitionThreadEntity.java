@@ -23,7 +23,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
 /**
  * 在每个线程中 {@link PartitionRunnableBuilder},你可以使用到的参数.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
 public class PartitionThreadEntity implements Serializable{

@@ -26,7 +26,7 @@ import com.feilong.lib.json.util.PropertyFilter;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 public final class JsonToJavaConfigBuilder{
@@ -66,11 +66,6 @@ public final class JsonToJavaConfigBuilder{
         if (isNotNullOrEmpty(classMap)){
             jsonConfig.setClassMap(classMap);
         }
-
-        // Ignore missing properties with Json-Lib
-
-        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class com.trade.web.result.command.PaymentResultEntity' 异常
-        //jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
 
         //---------------------------------------------------------------
         //since 2.0.0

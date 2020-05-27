@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * PagerVMParam 可以在 vm中 取到的值.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see PagerParams
  * @since 1.0.2
  */

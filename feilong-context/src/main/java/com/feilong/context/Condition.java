@@ -22,7 +22,7 @@ package com.feilong.context;
  * 适用于来判断定时任务是否执行
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
 public interface Condition{

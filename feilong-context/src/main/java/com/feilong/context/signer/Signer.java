@@ -23,7 +23,7 @@ package com.feilong.context.signer;
  * 故，增加特殊参数判断.
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.1
  */
 public interface Signer{

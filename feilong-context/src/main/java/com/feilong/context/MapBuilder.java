@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * 将bean信息转成map 数据.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see "com.feilong.spring.event.builder.BeanToMapBuilder"

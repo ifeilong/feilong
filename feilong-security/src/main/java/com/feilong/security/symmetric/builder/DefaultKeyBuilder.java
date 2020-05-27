@@ -18,7 +18,7 @@ package com.feilong.security.symmetric.builder;
 /**
  * 默认的 KeyBuilder,直接使用 {@link String#getBytes()}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class DefaultKeyBuilder extends AbstractSecretKeySpecBuilder{

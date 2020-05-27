@@ -36,7 +36,7 @@ import com.feilong.net.http.HttpRequest;
 /**
  * http 请求执行异常 message 构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.0
  */
 public class HttpRequestExecuterExceptionMessageBuilder{

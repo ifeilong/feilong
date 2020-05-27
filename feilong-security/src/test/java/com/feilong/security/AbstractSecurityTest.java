@@ -21,7 +21,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * The Class BaseSecurityTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 Apr 17, 2014 10:27:27 AM
  */
 public abstract class AbstractSecurityTest extends AbstractTest{

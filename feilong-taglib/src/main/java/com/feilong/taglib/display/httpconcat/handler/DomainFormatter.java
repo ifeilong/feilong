@@ -23,7 +23,7 @@ import com.feilong.lib.lang3.StringUtils;
 /**
  * Domain 值格式化.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public final class DomainFormatter{

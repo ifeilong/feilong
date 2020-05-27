@@ -158,7 +158,7 @@ Caused by: java.lang.ArithmeticException: / by zero
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.5
  */
 public class DefaultRuntimeException extends RuntimeException{

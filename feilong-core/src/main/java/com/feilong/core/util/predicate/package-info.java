@@ -16,7 +16,7 @@
 /**
  * 自定义{@link org.apache.commons.collections4.Predicate}.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
  * @see com.feilong.lib.collection4.PredicateUtils
  * 

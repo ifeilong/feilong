@@ -21,7 +21,7 @@ import com.feilong.lib.lang3.ArrayUtils;
 /**
  * The Class FilenameUtilTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.0
  */
 public class FilenameUtilTemp{

@@ -39,7 +39,7 @@ import com.feilong.servlet.http.ResponseDownloadUtil;
 /**
  * 下载.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 2012-3-18 下午11:32:05
  */
 @Controller

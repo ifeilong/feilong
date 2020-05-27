@@ -30,7 +30,7 @@ import com.feilong.namespace.parser.SimpleHttpTypeBeanPropertyBeanDefinitionPars
 /**
  * The Class FeilongNamespaceHandler.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 public class FeilongNamespaceHandler extends org.springframework.beans.factory.xml.NamespaceHandlerSupport{

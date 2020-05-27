@@ -28,7 +28,7 @@ import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 /**
  * The Class PartitionEachSizeBuilderParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 public class PartitionEachSizeBuilderParameterizedTest

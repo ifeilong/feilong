@@ -37,7 +37,7 @@ import com.feilong.lib.lang3.ClassUtils;
 /**
  * json处理的辅助类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.9.4
  */
 public final class JsonHelper{

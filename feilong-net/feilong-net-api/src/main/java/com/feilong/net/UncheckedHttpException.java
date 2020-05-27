@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * Un checked HttpException.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.3
  */
 public final class UncheckedHttpException extends DefaultRuntimeException{

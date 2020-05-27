@@ -29,7 +29,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * The Class SessionPropertiesBuilder.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class SessionPropertiesBuilder{

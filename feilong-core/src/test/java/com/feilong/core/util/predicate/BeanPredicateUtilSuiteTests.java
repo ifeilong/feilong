@@ -31,7 +31,7 @@ import com.feilong.core.util.predicate.beanpredicateutil.EqualPredicateTest;
 /**
  * The Class FeiLongBeanPredicateUtilSuiteTests.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //

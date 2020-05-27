@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 指明key的存取器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
 public interface KeyAccessor extends Accessor{

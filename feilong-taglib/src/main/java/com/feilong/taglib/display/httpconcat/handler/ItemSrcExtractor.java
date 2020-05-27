@@ -27,7 +27,7 @@ import com.feilong.core.Validate;
 /**
  * 路径提取器.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
 public class ItemSrcExtractor{

@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * 响应的结果是 blank异常.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public class InvokerResponseBlankException extends DefaultRuntimeException{

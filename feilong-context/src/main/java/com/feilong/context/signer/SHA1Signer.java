@@ -26,7 +26,7 @@ import com.feilong.security.oneway.SHA1Util;
 /**
  * 基于 sha1 的实现.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.1
  */
 public class SHA1Signer implements Signer{

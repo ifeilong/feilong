@@ -18,7 +18,7 @@ package com.feilong.taglib.common;
 /**
  * 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中).
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.0
  */
 @SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep

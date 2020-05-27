@@ -18,7 +18,7 @@ package com.feilong.taglib.display.httpconcat.command;
 /**
  * http concat 全局配置.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.0
  */
 public class HttpConcatGlobalConfig{

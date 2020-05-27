@@ -27,7 +27,7 @@ import com.feilong.store.member.UserInfo;
 /**
  * The Class FieldUtilGetAllFieldListTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class GetAllFieldListTest{
 

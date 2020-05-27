@@ -131,7 +131,7 @@ import com.feilong.core.Validate;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see JavaIdentifierTransformer
  * @see UncapitalizeJavaIdentifierTransformer
  * @see <a href="https://github.com/venusdrogon/feilong-json/issues/1">issue 1</a>

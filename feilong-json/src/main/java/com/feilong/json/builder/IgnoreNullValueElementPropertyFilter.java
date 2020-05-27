@@ -20,7 +20,7 @@ import com.feilong.lib.json.util.PropertyFilter;
 /**
  * {@code java --> json} 忽略 null value 属性过滤器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 class IgnoreNullValueElementPropertyFilter implements PropertyFilter{

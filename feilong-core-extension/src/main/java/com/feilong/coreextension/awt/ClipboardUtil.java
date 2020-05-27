@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 操作剪切板 {@link java.awt.datatransfer.Clipboard}.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.0
  */
 public final class ClipboardUtil{

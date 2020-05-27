@@ -36,7 +36,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * {@link HttpEntity} 构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 final class HttpEntityBuilder{

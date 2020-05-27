@@ -29,7 +29,7 @@ import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 /**
  * The Class ObjectUtilDefaultIfNullOrEmptyParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class DefaultIfNullOrEmptyParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Object, Object, Object>{
 

@@ -40,7 +40,7 @@ import com.feilong.lib.json.util.JSONUtils;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.json.processors.DefaultDefaultValueProcessor
  * @since 1.11.5
  * 

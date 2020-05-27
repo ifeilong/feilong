@@ -18,7 +18,7 @@ package com.feilong.security.symmetric;
 /**
  * 填充类型
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.7 2014年7月8日 下午5:12:49
  * @since 1.0.7
  */

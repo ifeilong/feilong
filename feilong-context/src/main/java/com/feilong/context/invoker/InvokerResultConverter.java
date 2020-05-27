@@ -18,7 +18,7 @@ package com.feilong.context.invoker;
 /**
  * 将 {@link ResponseCommand} 转成 {@link InvokerResult}转换器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <R>
  *            请求的相关属性对象
  * @param <T>

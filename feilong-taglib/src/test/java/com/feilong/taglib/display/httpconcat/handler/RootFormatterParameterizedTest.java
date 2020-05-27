@@ -26,7 +26,7 @@ import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.5
  */
 public class RootFormatterParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{

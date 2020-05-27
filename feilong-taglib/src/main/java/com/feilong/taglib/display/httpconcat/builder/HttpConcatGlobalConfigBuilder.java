@@ -33,7 +33,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 /**
  * {@link HttpConcatGlobalConfig} 构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.0
  * @since 1.8.8 change class Access Modifiers
  */

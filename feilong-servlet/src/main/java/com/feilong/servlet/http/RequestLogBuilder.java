@@ -53,7 +53,7 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
 /**
  * 基于 {@link RequestLogSwitch} ,构造需要输出的Map,以便输出 request log.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.builder.Builder
  * @see com.feilong.lib.lang3.builder.HashCodeBuilder
  * @since 1.4.0

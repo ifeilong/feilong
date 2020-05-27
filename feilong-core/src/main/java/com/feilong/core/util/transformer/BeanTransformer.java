@@ -31,7 +31,7 @@ import com.feilong.core.Validate;
  * 如果没有传递此属性,那么默认会转换所有的属性
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <I>
  *            输入类型
  * @param <O>

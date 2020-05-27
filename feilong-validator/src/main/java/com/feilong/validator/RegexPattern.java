@@ -313,7 +313,7 @@ import java.util.regex.Pattern;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see Pattern
  * @since 1.0.0
  */

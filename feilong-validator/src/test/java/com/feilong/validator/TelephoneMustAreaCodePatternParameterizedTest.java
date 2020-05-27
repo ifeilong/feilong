@@ -28,7 +28,7 @@ import com.feilong.test.TestUtil;
 /**
  * The Class TelephoneMustAreaCodePatternTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.3
  */
 public class TelephoneMustAreaCodePatternParameterizedTest extends AbstractBooleanParameterizedTest<String, Boolean>{

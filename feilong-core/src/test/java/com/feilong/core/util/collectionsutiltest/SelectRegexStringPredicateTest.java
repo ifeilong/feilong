@@ -32,7 +32,7 @@ import com.feilong.core.util.predicate.RegexStringPredicate;
 /**
  * The Class CollectionsUtilSelectPredicateTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class SelectRegexStringPredicateTest{
 

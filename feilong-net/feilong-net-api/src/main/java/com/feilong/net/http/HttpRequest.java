@@ -28,7 +28,7 @@ import com.feilong.core.net.ParamUtil;
 /**
  * http 请求信息.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.apache.http.HttpRequest"
  * @since 1.2.0
  */

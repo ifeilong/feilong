@@ -22,7 +22,7 @@ package com.feilong.context.converter;
  * 功能和{@link org.apache.commons.collections4.Transformer} 类似,但是更专业和具体
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see org.apache.commons.collections4.Transformer

@@ -28,7 +28,7 @@ import com.feilong.taglib.SimpleTagStringCacheManager;
 /**
  * 标签缓存管理器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "com.google.common.cache.Cache"
  * @see org.apache.commons.collections4.map.LRUMap
  * @since 1.5.4

@@ -34,7 +34,7 @@ import com.feilong.core.Validate;
 /**
  * 格式化构造器的父类, 含有公共方法.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public abstract class AbstractFormatterBuilder implements FormatterBuilder{

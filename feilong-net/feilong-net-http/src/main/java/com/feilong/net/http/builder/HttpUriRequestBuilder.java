@@ -29,7 +29,7 @@ import com.feilong.net.http.packer.HttpRequestHeadersPacker;
 /**
  * 专门用来构造 {@link HttpUriRequest}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public final class HttpUriRequestBuilder{

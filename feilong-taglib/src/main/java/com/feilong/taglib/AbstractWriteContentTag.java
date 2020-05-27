@@ -46,7 +46,7 @@ import com.feilong.servlet.http.RequestUtil;
  * </ul>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.taglib.BaseTag
  * @since 1.0.0
  */

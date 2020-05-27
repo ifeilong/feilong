@@ -27,7 +27,7 @@ import com.feilong.lib.beanutils.ConversionException;
 /**
  * The Class ConvertUtilConvertClassTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ConvertClassTest{
 

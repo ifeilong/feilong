@@ -18,7 +18,7 @@ package com.feilong.context.codecreator;
 /**
  * 多卖家的平台订单号创建接口.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.9
  */
 public interface MultiSellerOrderCodeCreator extends OrderCodeCreator{

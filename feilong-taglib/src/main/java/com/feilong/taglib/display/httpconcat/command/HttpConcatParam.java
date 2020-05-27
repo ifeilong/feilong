@@ -23,7 +23,7 @@ import com.feilong.lib.lang3.builder.HashCodeBuilder;
 /**
  * 封装解析http concat 用到的参数.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.0
  */
 public final class HttpConcatParam implements Serializable{

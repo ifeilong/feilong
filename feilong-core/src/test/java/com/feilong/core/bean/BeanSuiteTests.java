@@ -27,7 +27,7 @@ import com.feilong.core.bean.propertyutiltest.PropertyUtilSuiteTests;
 /**
  * The Class FeiLongBeanSuiteTests.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.3
  */
 @RunWith(Suite.class)

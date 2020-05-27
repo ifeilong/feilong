@@ -30,7 +30,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 设置相关接收方, 含 TO,抄送CC,密送 BCC.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public final class RecipientsSetter{

@@ -41,7 +41,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 专门用来读取 excel 的.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.0
  */
 public class ExcelReaderUtil{
@@ -106,29 +106,6 @@ public class ExcelReaderUtil{
         InputStream inputStream = InputStreamUtil.getInputStream(excelLocation);
         return readData(excelReader, inputStream, dataName, sheetNo);
     }
-    //
-    //    /**
-    //     * 获得 list.
-    //     * 
-    //     * @param inputStream
-    //     *            the input stream
-    //     * @param sheetDefinitionLocation
-    //     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
-    //     * @param sheetName
-    //     *            sheet 比如 trainCourseSheet
-    //     * @param dataName
-    //     *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
-    //     * @param sheetNo
-    //     *            the sheet no
-    //     *
-    //     * @param <T>
-    //     *            the generic type
-    //     * @return the list
-    //     */
-    //    public static <T> List<T> read(InputStream inputStream,String sheetDefinitionLocation,String sheetName,String dataName,int sheetNo){
-    //        ExcelReader excelReader = buildExcelReader(toArray(sheetDefinitionLocation), sheetName);
-    //        return read(excelReader, dataName, inputStream, sheetNo);
-    //    }
 
     private static ExcelReader build(String sheetDefinitionLocation,String sheetName){
         Map<String, ExcelSheet> sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionLocation);
@@ -196,7 +173,6 @@ public class ExcelReaderUtil{
      * @return the list< t>
      * @since 1.0.9
      */
-    @SuppressWarnings("unchecked")
     private static <T> List<T> read(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
         Date beginDate = new Date();
 
@@ -242,7 +218,6 @@ public class ExcelReaderUtil{
      * @return the map
      */
     private static Map<String, Object> readData(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
-        //Map<String, Object> beans = toMap(dataName, new ArrayList<T>());
         Map<String, Object> beans = newLinkedHashMap();
 
         ReadStatus readStatus = excelReader.readSheet(inputStream, sheetNo, beans);

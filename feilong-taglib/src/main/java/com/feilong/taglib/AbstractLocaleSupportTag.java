@@ -22,7 +22,7 @@ import com.feilong.core.util.ResourceBundleUtil;
 /**
  * 支持 locale 国际化.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
 @SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep

@@ -28,7 +28,7 @@ import com.feilong.servlet.http.SessionUtil;
 /**
  * session创建和销毁的监听器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.web.util.HttpSessionMutexListener"
  * @since 1.10.4
  */

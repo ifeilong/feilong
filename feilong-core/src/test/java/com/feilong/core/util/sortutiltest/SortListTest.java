@@ -30,7 +30,7 @@ import static com.feilong.core.util.SortUtil.sortList;
 /**
  * The Class SortUtilSortListTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class SortListTest{
 

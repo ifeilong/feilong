@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 基于request 请求来探测使用的{@link FileParser}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public interface RequestFileParserDetector{

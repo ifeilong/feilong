@@ -37,7 +37,7 @@ import com.feilong.servlet.http.entity.CookieEntity;
  * </ol>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.servlet.http.CookieUtil
  * @since 1.5.5
  */

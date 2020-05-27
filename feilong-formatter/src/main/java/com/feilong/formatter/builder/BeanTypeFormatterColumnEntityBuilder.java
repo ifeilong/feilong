@@ -25,7 +25,7 @@ import com.feilong.formatter.entity.FormatterColumnEntity;
 /**
  * java Bean类型格式化列的创造器.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 class BeanTypeFormatterColumnEntityBuilder{

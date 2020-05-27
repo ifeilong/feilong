@@ -32,7 +32,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
  * ,如果你想输出成其他的日期格式,也可以使用这个类来提前渲染
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.0
  */
 public class CalendarJsonValueProcessor extends AbstractJsonValueProcessor{

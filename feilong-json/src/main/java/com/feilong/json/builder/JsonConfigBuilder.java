@@ -39,7 +39,7 @@ import com.feilong.lib.lang3.tuple.Pair;
 /**
  * {@link JsonConfig} 构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  * @since 1.11.0 change package
  */

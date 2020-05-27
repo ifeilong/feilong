@@ -33,7 +33,7 @@ import com.feilong.core.Validate;
 /**
  * 专注于 bean 属性值的排序.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.collection4.ComparatorUtils
  * @see FixedOrderComparator
  * @since 1.8.0

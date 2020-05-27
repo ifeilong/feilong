@@ -30,7 +30,7 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 /**
  * The Class StringUtilReplaceAllParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ReplaceAllParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String>{
 

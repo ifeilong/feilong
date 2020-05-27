@@ -24,7 +24,7 @@ import com.feilong.context.Data;
  * 通常用于 诸如 定时查询交易的任务, 然后拿到结果后更新数据库
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <D>
  *            the generic type
  * @param <I>

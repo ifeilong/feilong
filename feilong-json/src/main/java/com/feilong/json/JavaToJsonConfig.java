@@ -24,7 +24,7 @@ import com.feilong.lib.json.processors.PropertyNameProcessor;
 /**
  * java格式化成json的一些配置.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.json.JsonConfig
  * @since 1.2.2
  * @since 1.9.4 <a href="https://github.com/venusdrogon/feilong-core/issues/511">rename</a>

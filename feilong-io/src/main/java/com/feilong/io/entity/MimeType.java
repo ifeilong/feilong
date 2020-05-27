@@ -18,7 +18,7 @@ package com.feilong.io.entity;
 /**
  * The Enum MimeType.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>
  * @see "org.springframework.http.MediaType"
  * @since 1.7.1

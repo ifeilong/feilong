@@ -23,7 +23,7 @@ import java.io.Serializable;
  * (目前只是标识类,将来可能会有扩展).
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see ViewCommand
  * @since 1.11.3
  */

@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 /**
  * IOWriteUtil相关测试套餐.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 @RunWith(Suite.class)

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * 支持构造游客的member Id
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.11.3

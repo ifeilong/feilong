@@ -35,7 +35,7 @@ import com.feilong.store.order.OrderLine;
 /**
  * The Class BeanUtilCloneBeanTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class CloneBeanTest{
 
@@ -89,7 +89,7 @@ public class CloneBeanTest{
     /**
      * 没有默认构造函数的bean.
      *
-     * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+     * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
      * @since 1.9.0
      */
     public class NoDefaultConstructorBean{

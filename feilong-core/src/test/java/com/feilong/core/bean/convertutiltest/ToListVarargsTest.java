@@ -32,7 +32,7 @@ import com.feilong.store.member.User;
 /**
  * The Class ConvertUtilToListVarargsTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToListVarargsTest{
 

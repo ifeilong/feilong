@@ -24,7 +24,7 @@ import java.io.Serializable;
  * 其中泛型中的T 是 id 主键的类型,可以是Number String 或者其他类型.
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * 

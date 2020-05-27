@@ -22,7 +22,7 @@ package com.feilong.context.invoker;
  * 顶级接口
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <R>
  *            the generic type
  * @since 2.1.0

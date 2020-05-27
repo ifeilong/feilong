@@ -31,7 +31,7 @@ import com.feilong.core.util.MapUtil;
 /**
  * The Class MapUtilPutIfValueNotNullTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class PutIfValueNotNullTest{
 

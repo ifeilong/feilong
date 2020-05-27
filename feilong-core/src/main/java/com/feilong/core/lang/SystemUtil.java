@@ -308,7 +308,7 @@ import com.feilong.core.bean.ConvertUtil;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.lang.System
  * @see com.feilong.lib.lang3.SystemUtils#USER_HOME
  * @see com.feilong.lib.lang3.SystemUtils#FILE_ENCODING
@@ -373,8 +373,6 @@ public final class SystemUtil{
             return System.getProperty(property);
         }catch (final SecurityException ex){
             // we are not allowed to look at this property
-            // System.err.println("Caught a SecurityException reading the system property '" + property
-            // + "'; the SystemUtils property value will default to null.");
             return null;
         }
     }

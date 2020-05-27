@@ -25,7 +25,7 @@ import com.feilong.lib.json.util.PropertyFilter;
 /**
  * The Class JsonPropertyFilterBuilder.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 class JsonPropertyFilterBuilder{

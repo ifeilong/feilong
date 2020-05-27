@@ -35,7 +35,7 @@ import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 /**
  * The Class MapUtilInvertMapTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class InvertMapTest{
 

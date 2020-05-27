@@ -27,7 +27,7 @@ import com.feilong.core.lang.threadutiltest.entity.EmptyPartitionRunnableBuilder
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
 public class ExecuteWithPartitionRunnableBuilderTest extends AbstractExcuteTest{

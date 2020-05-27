@@ -18,7 +18,7 @@ package com.feilong.net.mail.entity;
 /**
  * 邮件的读取配置.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.3
  */
 public class MailReaderConfig extends BaseConfig{

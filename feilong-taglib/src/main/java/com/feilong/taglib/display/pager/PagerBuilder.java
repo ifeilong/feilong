@@ -96,7 +96,7 @@ import com.feilong.taglib.display.pager.command.PagerVMParam;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see PagerConstants
  * @see PagerParams
  * @see PagerUrlTemplate

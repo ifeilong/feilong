@@ -28,7 +28,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 /**
  * The Class DateUtilIsLeapYearTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class IsLeapYearParameterizedTest extends AbstractBooleanParameterizedTest<Integer, Boolean>{
 

@@ -22,7 +22,7 @@ import com.feilong.core.lang.reflect.TypeUtil;
 /**
  * The Class BaseSolrRepositoryFirstImpl.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @param <PK>

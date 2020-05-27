@@ -32,7 +32,7 @@ import com.feilong.core.bean.ConvertUtil;
 /**
  * The Class ConvertUtilToEnumerationTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToEnumerationTest{
 

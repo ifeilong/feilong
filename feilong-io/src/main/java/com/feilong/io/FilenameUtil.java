@@ -33,7 +33,7 @@ import com.feilong.core.Validate;
 /**
  * The Class FilenameUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.io.FilenameUtils
  * @since 1.4.0
  */

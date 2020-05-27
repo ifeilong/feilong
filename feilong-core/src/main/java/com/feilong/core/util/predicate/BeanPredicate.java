@@ -23,7 +23,7 @@ import com.feilong.core.Validate;
 /**
  * 调用 {@link PropertyUtil#getProperty(Object, String)} 匹配属性值.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see com.feilong.lib.beanutils.BeanPredicate

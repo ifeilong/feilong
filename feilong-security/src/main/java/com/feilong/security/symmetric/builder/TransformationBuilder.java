@@ -27,7 +27,7 @@ import com.feilong.security.symmetric.CipherPadding;
  * </p>
  * 
  * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html">StandardNames</a>
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 public class TransformationBuilder{

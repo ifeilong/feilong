@@ -278,7 +278,6 @@
 							-->
 							<detectJavaApiLink>true</detectJavaApiLink>
 							<links>
-								<!-- <link>http://docs.oracle.com/javase/7/docs/api/</link> -->
 								<link>https://docs.oracle.com/javaee/7/api/</link>
 
 								<link>http://commons.apache.org/proper/commons-lang/javadocs/api-release/</link>
@@ -286,19 +285,6 @@
 								<link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
 								<link>http://commons.apache.org/proper/commons-beanutils/javadocs/v${version.commons-beanutils}/apidocs/</link>
 
-
-								<!-- <link>http://docs.spring.io/spring/docs/${version.spring}/javadoc-api/</link> -->
-
-								<!-- <link>https://github.com/venusdrogon/feilongjavadocs/feilong-core/</link>
-									<link>https://github.com/venusdrogon/feilongjavadocs/feilong-servlet/</link>
-									<link>https://github.com/venusdrogon/feilongjavadocs/feilong-io/</link> -->
-
-
-								<!-- 404 not find -->
-								<!-- <link>http://commons.apache.org/proper/commons-collections/javadocs/api-release/</link> -->
-
-								<!-- 404 not find -->
-								<!-- <link>http://ezmorph.sourceforge.net/apidocs/</link> -->
 							</links>
 						</configuration>
 					</plugin>

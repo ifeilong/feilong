@@ -119,7 +119,7 @@ import com.feilong.core.lang.EnumUtil;
  * </table>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.http.HttpMethod"
  * @see <a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp">HTTP 方法：GET 对比 POST</a>
  * @since 1.7.3 move from feilong-core

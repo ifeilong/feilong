@@ -31,7 +31,7 @@ import com.feilong.net.http.HttpRequest;
 /**
  * 将{@link HttpRequest} 转成 {@link URIBuilder} 的构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href=
  *      "https://stackoverflow.com/questions/22038957/httpclient-getparams-deprecated-what-should-i-use-instead">HttpClient.getParams()
  *      deprecated. What should I use instead?

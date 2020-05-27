@@ -20,7 +20,7 @@ import java.security.Key;
 /**
  * 基于 algorithm 算法来生成 {@link Key}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public interface KeyBuilder{

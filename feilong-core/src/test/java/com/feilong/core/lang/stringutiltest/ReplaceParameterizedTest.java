@@ -29,7 +29,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 /**
  * The Class StringReplaceParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.0
  */
 public class ReplaceParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String>{

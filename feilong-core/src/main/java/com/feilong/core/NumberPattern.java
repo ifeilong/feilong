@@ -117,7 +117,7 @@ import java.text.DecimalFormat;
  * </table>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see DecimalFormat
  * @since 1.0.2
  */

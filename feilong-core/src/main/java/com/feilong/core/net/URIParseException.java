@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * 解析url/uri出现异常.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.8
  */
 public final class URIParseException extends DefaultRuntimeException{

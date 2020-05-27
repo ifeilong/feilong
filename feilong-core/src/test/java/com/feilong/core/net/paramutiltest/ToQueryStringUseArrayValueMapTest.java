@@ -29,7 +29,7 @@ import com.feilong.core.net.ParamUtil;
 /**
  * The Class ParamUtilToQueryStringUseArrayValueMapTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToQueryStringUseArrayValueMapTest{
 

@@ -50,7 +50,7 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
 }
  * </pre>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see org.apache.taglibs.standard.tag.rt.fmt.BundleTag
  * @see org.apache.taglibs.standard.tag.rt.fmt.SetBundleTag
  * @since 1.10.3

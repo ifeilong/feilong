@@ -25,7 +25,7 @@ import com.feilong.test.AbstractTest;
 /**
  * 泛型.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0
  * @deprecated 要加入到suite里
  */

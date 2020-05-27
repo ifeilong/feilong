@@ -94,7 +94,7 @@ import com.feilong.lib.lang3.StringUtils;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-core/issues/509">issue 509</a>
  * @since 1.9.4
  * @since 1.11.0 change package

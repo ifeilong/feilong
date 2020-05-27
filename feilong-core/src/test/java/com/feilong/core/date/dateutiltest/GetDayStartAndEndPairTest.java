@@ -32,7 +32,7 @@ import com.feilong.lib.lang3.tuple.Pair;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public class GetDayStartAndEndPairTest{

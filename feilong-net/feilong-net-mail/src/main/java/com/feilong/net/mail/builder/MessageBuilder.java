@@ -36,7 +36,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 专门用来构造 {@link Message}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class MessageBuilder{

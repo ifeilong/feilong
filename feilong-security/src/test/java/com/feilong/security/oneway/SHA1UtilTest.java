@@ -30,7 +30,7 @@ import com.feilong.security.AbstractSecurityTest;
 /**
  * The Class SHA1UtilTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0 2011-2-7 上午01:12:36
  */
 public class SHA1UtilTest extends AbstractSecurityTest{

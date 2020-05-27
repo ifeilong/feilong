@@ -31,7 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 /**
  * The Class EnumUtilGetEnumByPropertyValueParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @param <E>

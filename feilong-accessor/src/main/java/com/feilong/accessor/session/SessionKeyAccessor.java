@@ -35,7 +35,7 @@ import com.feilong.accessor.KeyAccessor;
  * 
  * 这种非固定 key,且 key 动态的场景
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.4
  */
 public class SessionKeyAccessor extends AbstractSessionKeyAccessor implements KeyAccessor{

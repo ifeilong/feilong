@@ -43,7 +43,7 @@ import com.feilong.core.Validate;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.2
  */
 public final class MobileUtil{

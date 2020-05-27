@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * 分页链接模板.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
  */
 public class PagerUrlTemplate implements Serializable{

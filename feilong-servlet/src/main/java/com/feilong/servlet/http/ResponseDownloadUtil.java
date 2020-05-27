@@ -43,7 +43,7 @@ import com.feilong.lib.lang3.StringUtils;
 /**
  * 关于 {@link javax.servlet.http.HttpServletResponse}下载的工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.servlet.http.HttpServletResponse
  * @since 1.5.1
  */

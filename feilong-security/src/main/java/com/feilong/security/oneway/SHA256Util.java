@@ -21,7 +21,7 @@ import com.feilong.security.EncryptionException;
 /**
  * The Class SHA256Util.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see OnewayType#SHA256
  * @since 1.14.2
  */

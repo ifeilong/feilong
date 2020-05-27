@@ -25,9 +25,9 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 
+import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.NotImplementedException;
-import com.feilong.core.Validate;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpMethodType;
@@ -38,7 +38,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * A factory for creating {@link HttpUriRequest} objects.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public class HttpUriRequestFactory{
@@ -117,7 +117,6 @@ public class HttpUriRequestFactory{
     private static HttpPost buildPost(HttpRequest httpRequest){
         HttpPost httpPost = new HttpPost(httpRequest.getUri());
         httpPost.setEntity(HttpEntityBuilder.build(httpRequest));
-        // httpPost.setConfig(requestConfig);
         return httpPost;
     }
 
@@ -126,7 +125,6 @@ public class HttpUriRequestFactory{
     private static HttpPut buildPut(HttpRequest httpRequest){
         HttpPut httpPut = new HttpPut(httpRequest.getUri());
         httpPut.setEntity(HttpEntityBuilder.build(httpRequest));
-        //        httpPut.setConfig(requestConfig);
         return httpPut;
     }
 }

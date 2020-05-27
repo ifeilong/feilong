@@ -18,7 +18,7 @@ package com.feilong.context.filecreator;
 /**
  * 基于数据来创建文件.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 2.1.0

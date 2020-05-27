@@ -25,7 +25,7 @@ import com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuild
 /**
  * version 值格式化.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.1
  */
 public final class VersionFormatter{

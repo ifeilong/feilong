@@ -36,7 +36,7 @@ import com.feilong.json.JsonUtil;
  * 不能100%的保证订单号唯一,各个商城按照需求 定制retry机制.
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.9
  */
 public class SimpleMultiSellerOrderCodeCreator implements MultiSellerOrderCodeCreator{

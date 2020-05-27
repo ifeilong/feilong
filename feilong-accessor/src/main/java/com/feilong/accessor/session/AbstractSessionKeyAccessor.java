@@ -27,7 +27,7 @@ import com.feilong.servlet.http.SessionUtil;
 /**
  * 基于session的寄存器实现.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
 public abstract class AbstractSessionKeyAccessor{

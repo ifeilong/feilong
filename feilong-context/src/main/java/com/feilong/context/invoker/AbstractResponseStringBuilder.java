@@ -29,7 +29,7 @@ import com.feilong.json.JsonUtil;
 /**
  * 抽象的响应结果字符串构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.11.3

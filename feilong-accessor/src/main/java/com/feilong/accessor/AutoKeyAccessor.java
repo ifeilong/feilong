@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * key自动生成的存取器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
 public interface AutoKeyAccessor extends Accessor{

@@ -31,7 +31,7 @@ import com.feilong.template.TemplateUtil;
 /**
  * 解析 http request uri.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.9
  */
 class HttpRequestUriResolver{

@@ -18,7 +18,7 @@ package com.feilong.taglib.display.pager.command;
 /**
  * 分页类型.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.0
  */
 public enum PagerType{

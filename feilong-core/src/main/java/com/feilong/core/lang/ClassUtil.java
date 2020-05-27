@@ -129,7 +129,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="http://www.cnblogs.com/maokun/p/6771365.html">Class的getName、getSimpleName与getCanonicalName的区别</a>
  * @see com.feilong.lib.lang3.ClassUtils
  * @since 1.0.0

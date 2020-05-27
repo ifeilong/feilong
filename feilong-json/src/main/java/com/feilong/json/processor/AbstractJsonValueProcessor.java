@@ -21,7 +21,7 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
 /**
  * 所有 {@link JsonValueProcessor} 的基类,你只需要实现 {@link #processValue(Object, JsonConfig)}即可.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.3
  */
 abstract class AbstractJsonValueProcessor implements JsonValueProcessor{

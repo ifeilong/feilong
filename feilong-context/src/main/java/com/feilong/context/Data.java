@@ -18,7 +18,7 @@ package com.feilong.context;
 /**
  * 数据标识接口.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 public interface Data{

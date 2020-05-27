@@ -24,7 +24,7 @@ import com.feilong.core.lang.StringUtil;
 /**
  * The Class HexUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.4.0 2015年8月24日 上午10:49:21
  * @see com.feilong.lib.codec.binary.Hex
  * @since 1.4.0

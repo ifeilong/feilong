@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * <b>标识接口</b> ,标识网关返回转换的结果对象.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public interface ResponseCommand extends Serializable{

@@ -22,7 +22,7 @@ import org.apache.commons.collections4.Transformer;
 /**
  * 提供格式化的时候,相关参数控制.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.5
  */
 public class BeanFormatterConfig{

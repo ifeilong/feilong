@@ -33,7 +33,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * The Class ParamUtilAddParameterSingleValueMapTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class AddParameterSingleValueMapTest{
 

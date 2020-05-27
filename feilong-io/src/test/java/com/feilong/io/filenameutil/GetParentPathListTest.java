@@ -26,7 +26,7 @@ import com.feilong.io.FilenameUtil;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 public class GetParentPathListTest{

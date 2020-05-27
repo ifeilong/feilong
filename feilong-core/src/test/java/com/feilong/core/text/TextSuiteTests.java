@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 /**
  * The Class FeiLongTextSuiteTests.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.3
  */
 @RunWith(Suite.class)

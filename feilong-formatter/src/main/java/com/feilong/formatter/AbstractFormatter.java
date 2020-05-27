@@ -46,7 +46,7 @@ import com.feilong.lib.lang3.StringUtils;
 /**
  * Formatter相关父类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.5
  */
 abstract class AbstractFormatter{

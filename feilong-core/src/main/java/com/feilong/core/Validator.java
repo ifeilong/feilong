@@ -50,7 +50,7 @@ import com.feilong.lib.lang3.StringUtils;
  * </ol>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see String#trim()
  * @see Map#isEmpty()
  * @see Collection#isEmpty()

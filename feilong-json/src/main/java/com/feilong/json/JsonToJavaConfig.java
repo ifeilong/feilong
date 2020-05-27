@@ -26,7 +26,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
 /**
  * 将 json转成java时候的配置.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.9.4
  */
 public class JsonToJavaConfig extends AbstractConfig{

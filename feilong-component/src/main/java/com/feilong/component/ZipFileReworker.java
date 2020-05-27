@@ -29,7 +29,7 @@ import com.feilong.zip.ZipHandler;
 /**
  * The Class ZipFileReworker.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
 public class ZipFileReworker implements FileReworker{

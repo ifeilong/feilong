@@ -49,7 +49,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 进行 excel 输出的工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated

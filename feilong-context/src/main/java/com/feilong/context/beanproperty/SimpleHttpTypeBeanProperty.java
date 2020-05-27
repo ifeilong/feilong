@@ -20,7 +20,7 @@ import com.feilong.net.http.HttpMethodType;
 /**
  * 简单的 http请求类型的bean属性.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.net.http.HttpMethodType
  * @since 1.11.2
  */

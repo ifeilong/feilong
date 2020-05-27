@@ -248,7 +248,7 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see RequestAttributes
  * @see RequestLogSwitch
  * @since 1.0.0

@@ -34,7 +34,7 @@ import com.feilong.security.EncryptionException;
 /**
  * The Class SymmetricEncryptionSpringTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.7 2014-7-2 18:06:19
  */
 @ContextConfiguration(locations = { "classpath:feilong-security.xml" })

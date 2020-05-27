@@ -83,7 +83,7 @@ import com.feilong.lib.json.util.JavaIdentifierTransformer;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-json/issues/11">issue 11</a>
  * @since 1.11.2
  */

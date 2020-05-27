@@ -24,7 +24,7 @@ import com.feilong.test.AbstractTest;
 
 /**
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.4.0 2015年8月24日 上午10:51:27
  * @since 1.4.0
  */

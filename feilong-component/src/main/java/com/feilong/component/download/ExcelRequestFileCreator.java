@@ -26,7 +26,7 @@ import com.feilong.excel.ExcelWriteUtil;
 /**
  * 基于request 来生成 excel文件.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class ExcelRequestFileCreator implements RequestFileCreator{

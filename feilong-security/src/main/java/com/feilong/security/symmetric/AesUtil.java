@@ -35,7 +35,7 @@ import com.feilong.security.symmetric.builder.KeyBuilder;
  * Based on the Rijndael algorithm by Joan Daemen and Vincent Rijmen<br>
  * AES is a 128-bit block cipher supporting keys of 128, 192, and 256 bits<br>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class AesUtil extends SymmetricEncryption{

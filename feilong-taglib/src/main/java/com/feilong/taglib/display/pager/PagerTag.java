@@ -108,7 +108,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager">feilongDisplay-pager</a>
  * @since 1.0.0
  */

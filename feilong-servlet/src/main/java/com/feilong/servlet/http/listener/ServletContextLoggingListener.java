@@ -80,7 +80,7 @@ import com.feilong.servlet.ServletContextUtil;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public class ServletContextLoggingListener implements ServletContextListener{

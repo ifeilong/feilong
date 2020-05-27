@@ -101,7 +101,7 @@ import java.util.Map;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  * @since 2.0.0 move from package com.feilong.core.lang
  */

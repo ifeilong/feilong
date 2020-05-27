@@ -63,7 +63,7 @@ import com.jcraft.jsch.SftpException;
  * 伺服器的安全方式。其实在SSH软件包中,已经包含了一个叫作SFTP(Secure File Transfer Protocol)的安全文件传输子系统
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated

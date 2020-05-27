@@ -60,7 +60,7 @@ import com.feilong.lib.lang3.StringUtils;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
  * @since 1.14.3
  */

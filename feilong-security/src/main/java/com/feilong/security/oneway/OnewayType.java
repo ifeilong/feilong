@@ -75,7 +75,7 @@ package com.feilong.security.oneway;
  * 
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.0 2012-3-25 上午7:19:44
  * @version 1.0.2 2013-1-14 20:27 增加 SHA-1、 SHA-256、SHA-384,和SHA-512
  * @see java.security.MessageDigestSpi

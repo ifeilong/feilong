@@ -39,7 +39,7 @@ import com.feilong.core.Validate;
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.collection4.PredicateUtils
  * @see com.feilong.core.util.predicate.BeanPredicate
  * @since 1.8.0

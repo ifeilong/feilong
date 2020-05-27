@@ -31,7 +31,7 @@ import com.feilong.core.Validate;
  * <li>生成随机数的算法有很多种,最简单也是最常用的就是 "线性同余法":第n+1个数=(第n个数*29+37) % 1000,其中%是"求余数"运算符.</li>
  * </ul>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.lang.Math#random()
  * @see com.feilong.lib.lang3.RandomUtils
  * @see com.feilong.lib.lang3.RandomStringUtils

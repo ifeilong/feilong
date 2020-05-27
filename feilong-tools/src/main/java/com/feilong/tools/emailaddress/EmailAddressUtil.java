@@ -36,7 +36,7 @@ import com.feilong.core.Validate;
 /**
  * 解析邮箱地址工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
  * @since 1.0.1
  */

@@ -21,7 +21,7 @@ import com.feilong.net.mail.exception.MailException;
 /**
  * 邮件发送器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.net.mail.entity.MailSendRequest
  * @see "org.springframework.mail.MailSender"
  * @see "org.springframework.mail.javamail.JavaMailSenderImpl"

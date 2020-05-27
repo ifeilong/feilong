@@ -20,7 +20,7 @@ import java.util.Locale;
 /**
  * 标识支持 locale 语言环境的标签 support.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport
  * @see javax.servlet.jsp.jstl.fmt.LocaleSupport
  * @since 1.7.2

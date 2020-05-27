@@ -18,7 +18,7 @@ package com.feilong.context.invoker;
 /**
  * 请求参数自定义校验.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.11.2 rename

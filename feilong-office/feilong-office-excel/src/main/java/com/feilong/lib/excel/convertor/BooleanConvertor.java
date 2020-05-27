@@ -30,7 +30,7 @@ import com.feilong.lib.lang3.BooleanUtils;
  * DataConvertorConfigurator.getInstance().registerDataConvertor(new BooleanConvertor());
  * </pre>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.8 2014年9月20日 下午8:54:47
  * @since 1.0.8
  */

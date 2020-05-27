@@ -20,7 +20,7 @@ import com.feilong.core.Validate;
 /**
  * {@link ReturnResult} 一些工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 public final class ReturnResultBuilder{

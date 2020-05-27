@@ -31,7 +31,7 @@ import static com.feilong.core.util.ResourceBundleUtil.toProperties;
 /**
  * The Class ResourceBundleUtilToPropertiesTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToPropertiesTest{
 

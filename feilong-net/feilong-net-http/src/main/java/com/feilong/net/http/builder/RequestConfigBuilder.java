@@ -29,7 +29,7 @@ import com.feilong.net.http.ConnectionConfig;
 /**
  * httpclient 超时时间 等待时间 响应时间.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public final class RequestConfigBuilder{
@@ -57,7 +57,7 @@ public final class RequestConfigBuilder{
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
-        Builder requestConfigBuilder = RequestConfig.custom(); //RequestConfig.DEFAULT;
+        Builder requestConfigBuilder = RequestConfig.custom(); //RequestConfig.DEFAULT
 
         //设置超时时间
         setTimeout(requestConfigBuilder, useConnectionConfig);
@@ -70,7 +70,7 @@ public final class RequestConfigBuilder{
         requestConfigBuilder.setCookieSpec(CookieSpecs.IGNORE_COOKIES);
 
         //requestConfigBuilder.setContentCompressionEnabled(contentCompressionEnabled)
-        //requestConfigBuilder.setAuthenticationEnabled(true);
+        //requestConfigBuilder.setAuthenticationEnabled(true)
 
         return requestConfigBuilder.build();
     }

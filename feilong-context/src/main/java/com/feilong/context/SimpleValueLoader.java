@@ -31,7 +31,7 @@ package com.feilong.context;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <V>
  *            the value type
  * @since 2.0.0

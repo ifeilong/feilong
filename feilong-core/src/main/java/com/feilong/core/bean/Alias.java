@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  * 到bean里面去,需要配置key和propertyName的对应关系,此时可以在bean里面使用{@link Alias}来配置对应关系,然后使用 {@link BeanUtil#populateAliasBean(Object, java.util.Map)}
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.1
  */
 @Documented

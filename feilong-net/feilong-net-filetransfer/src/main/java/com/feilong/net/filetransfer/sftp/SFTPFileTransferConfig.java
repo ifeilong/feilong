@@ -22,7 +22,7 @@ import com.feilong.net.filetransfer.AbstractFileTransferConfig;
 /**
  * sftp 文件传输的配置.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.1
  */
 public class SFTPFileTransferConfig extends AbstractFileTransferConfig{

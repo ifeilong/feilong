@@ -27,7 +27,7 @@ import com.feilong.core.Validate;
 /**
  * 简单的将对象转成指定 <code>targetType</code> 类型的转换器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            原来的类型
  * @param <V>

@@ -42,7 +42,7 @@ import com.feilong.core.Validate;
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @author Rick Evans
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.web.util.TagUtils#getScope(String)"
  * @see javax.servlet.jsp.jstl.core.ConditionalTagSupport#setScope(String)
  * @since 1.11.1

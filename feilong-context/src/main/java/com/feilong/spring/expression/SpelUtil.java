@@ -36,12 +36,12 @@ import com.feilong.core.Validate;
  * "http://camel.apache.org/mvel.html">MVEL</a>}和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目录中所有产品提供单一良好支持的表达式语言。
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/expressions.html">Spring Expression
  *      Language (SpEL)</a>
  * @see <a href="http://commons.apache.org/proper/commons-ognl/">commons-ognl</a>
  * @see <a href="http://camel.apache.org/mvel.html/">mvel</a>
- * @since 1.0.4
+ * @since 3.0.2 move from feilong-spring project
  */
 public final class SpelUtil{
 

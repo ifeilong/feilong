@@ -40,7 +40,7 @@ import com.feilong.net.mail.util.MessageUtil;
 /**
  * IMAP模式来读取邮件.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.9
  */
 public class IMAPMailReader implements MailReader{

@@ -20,7 +20,7 @@ import com.feilong.lib.json.util.PropertyFilter;
 /**
  * {@code java --> json} 时候的, 属性过滤器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.2
  * @since 1.11.0 change package
  */

@@ -34,7 +34,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 属性值获取器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.0
  */
 public final class PropertyValueObtainer{

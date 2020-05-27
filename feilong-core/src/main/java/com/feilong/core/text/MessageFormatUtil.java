@@ -23,7 +23,7 @@ import com.feilong.core.Validate;
 /**
  * {@link MessageFormat}工具类,常用于国际化 .
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see MessageFormat
  * @see Format
  * @since 1.0.2

@@ -73,7 +73,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * FTP(File Transfer Protocol, FTP)是TCP/IP网络上两台计算机传送文件的协议,FTP是在TCP/IP网络和INTERNET上最早使用的协议之一,它属于网络协议组的应用层.
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated

@@ -58,9 +58,7 @@
 
 		<!-- https://docs.sonarqube.org/latest/analysis/analysis-parameters/ -->
 		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
-		<!-- <sonar.exclusions>**/com/feilong/lib/**/*</sonar.exclusions> -->
 
-		<!-- <version.spring>4.3.27.RELEASE</version.spring> -->
 		<version.spring>5.2.6.RELEASE</version.spring>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
@@ -520,12 +518,6 @@
 			</dependency>
 
 			<!-- **************************************************** -->
-			<!-- java mail -->
-			<!-- <dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-				<version>${version.javamail}</version>
-				</dependency> -->
 
 			<!-- -->
 			<dependency>
@@ -1017,7 +1009,6 @@
 					<source>${maven-compiler-plugin.source}</source>
 					<target>${maven-compiler-plugin.target}</target>
 					<encoding>${maven-compiler-plugin.encoding}</encoding>
-					<!-- <verbose>true</verbose> -->
 					<detail>true</detail>
 				</configuration>
 			</plugin>
@@ -1032,8 +1023,6 @@
 
 					<stylesheet>${maven-javadoc-plugin.stylesheet}</stylesheet>
 					<stylesheetfile>${maven-javadoc-plugin.stylesheetfile}</stylesheetfile>
-
-					<!-- <overview>src/main/java/overview.html</overview> -->
 
 					<docfilessubdirs>true</docfilessubdirs>
 					<!---->
@@ -1330,11 +1319,7 @@
 
 			<!-- 代码格式检查 -->
 			<!-- 乱七八糟的 一行多长都控制 Line is longer than 80 characters (found 99). -->
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${v.maven-checkstyle-plugin}</version>
-				</plugin> -->
+			<!-- maven-checkstyle-plugin -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -1343,7 +1328,6 @@
 			</plugin>
 
 			<!--源码分析 -->
-			<!-- -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>

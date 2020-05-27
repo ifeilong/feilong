@@ -205,7 +205,7 @@ import java.util.Date;
  * </p>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see SimpleDateFormat
  * @see com.feilong.lib.lang3.time.DateFormatUtils
  * @see "org.springframework.format.annotation.DateTimeFormat"

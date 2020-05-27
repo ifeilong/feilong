@@ -31,7 +31,7 @@ import com.feilong.core.Validate;
 /**
  * 正则表达式工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "RegexPattern"
  * @see java.util.regex.Pattern
  * @see java.util.regex.Matcher

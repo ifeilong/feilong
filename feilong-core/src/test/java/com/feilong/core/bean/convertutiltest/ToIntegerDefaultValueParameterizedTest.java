@@ -29,7 +29,7 @@ import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 /**
  * The Class ConvertUtilToIntegerDefaultValueParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToIntegerDefaultValueParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Object, Integer, Integer>{
 

@@ -32,7 +32,7 @@ import com.feilong.store.member.User;
 /**
  * The Class ForEachTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.2
  */
 public class ForEachTest{

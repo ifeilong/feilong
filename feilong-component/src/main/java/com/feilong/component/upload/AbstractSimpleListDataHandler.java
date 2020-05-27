@@ -25,7 +25,7 @@ import com.feilong.lib.collection4.MapUtils;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  * @since 3.0.0
  */

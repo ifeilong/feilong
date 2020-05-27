@@ -231,7 +231,7 @@ import com.feilong.core.Validate;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see DateUtil
  * @since 1.0.1
  */

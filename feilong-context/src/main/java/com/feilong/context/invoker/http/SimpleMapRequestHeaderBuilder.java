@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * 简单的 map式的.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see <a href="https://github.com/venusdrogon/feilong-platform/issues/227">RequestHeaderBuilder 提供一个默认的可xml 直接配置式的实现</a>

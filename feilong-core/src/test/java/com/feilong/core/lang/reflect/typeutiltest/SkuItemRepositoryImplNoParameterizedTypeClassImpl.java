@@ -18,7 +18,7 @@ package com.feilong.core.lang.reflect.typeutiltest;
 /**
  * The Class SkuItemRepositoryImplNoParameterizedTypeClassImpl.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class SkuItemRepositoryImplNoParameterizedTypeClassImpl extends BaseSkuItemRepositoryImplParentNoParameterizedTypeClass{
 

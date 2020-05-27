@@ -47,7 +47,7 @@ import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
  * </ol>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see HttpConcatTag
  * @see HttpConcatParam
  * @see org.apache.commons.collections4.map.LRUMap

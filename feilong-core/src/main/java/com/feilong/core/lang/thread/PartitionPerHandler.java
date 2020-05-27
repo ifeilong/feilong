@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 分区中的每个线程执行.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see com.feilong.core.lang.thread.DefaultPartitionRunnableBuilder

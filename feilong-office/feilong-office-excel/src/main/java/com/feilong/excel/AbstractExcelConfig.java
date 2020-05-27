@@ -17,7 +17,7 @@ package com.feilong.excel;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 abstract class AbstractExcelConfig implements ExcelConfig{

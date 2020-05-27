@@ -22,7 +22,7 @@ import com.feilong.core.Validate;
 /**
  * {@link java.lang.Byte} 工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.4.0 2015年8月3日 上午3:06:20
  * @since 1.4.0
  */

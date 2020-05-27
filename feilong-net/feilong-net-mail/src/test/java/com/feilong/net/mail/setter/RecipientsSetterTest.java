@@ -30,7 +30,7 @@ import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 /**
  * 
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  * @see com.feilong.net.mail.builder.setter.RecipientsSetter#buildCC(String[], String, boolean)
  */

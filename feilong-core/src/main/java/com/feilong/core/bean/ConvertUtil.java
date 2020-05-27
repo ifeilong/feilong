@@ -226,7 +226,7 @@ import com.feilong.lib.lang3.tuple.Pair;
  * </table>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.beanutils.ConvertUtils
  * @see com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)
  * @see com.feilong.lib.beanutils.locale.LocaleConvertUtils

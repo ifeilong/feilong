@@ -29,7 +29,7 @@ import com.feilong.core.Validate;
 /**
  * 用来给 {@code List<FormatterColumnEntity> formatterColumnEntityList} 排序的工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 class FormatterColumnEntityListSorter{

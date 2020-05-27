@@ -203,7 +203,7 @@ import com.feilong.servlet.http.entity.CookieEntity;
  * 更多,请参考 <a href="https://github.com/venusdrogon/feilong-servlet/wiki/CookieUtil">CookieUtil wiki</a>
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.servlet.http.Cookie
  * @see "org.springframework.web.util.CookieGenerator"
  * @see "org.springframework.session.web.http.CookieSerializer"

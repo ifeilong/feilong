@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  * 可以想象为超时寄存包裹的地方,它的凭据是超市柜子出来的小票,该小票类似于 {@link Accessor} 相关地方使用的key
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.5
  */
 public interface Accessor{

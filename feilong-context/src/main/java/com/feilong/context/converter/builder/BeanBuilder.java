@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * 构造对象.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public interface BeanBuilder{

@@ -30,7 +30,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * Jsoup 的工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.6
  */
 public final class JsoupUtil{

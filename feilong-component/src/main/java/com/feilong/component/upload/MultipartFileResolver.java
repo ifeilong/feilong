@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * {@link MultipartFile} 解析器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.4
  */
 public interface MultipartFileResolver{

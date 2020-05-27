@@ -65,7 +65,7 @@ import com.feilong.json.JsonUtil;
  * 
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see org.apache.velocity.runtime.resource.loader.ResourceLoader
  * @see org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
  * @see org.apache.velocity.runtime.resource.loader.DataSourceResourceLoader

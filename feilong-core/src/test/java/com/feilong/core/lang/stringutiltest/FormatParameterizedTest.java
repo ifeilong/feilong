@@ -29,7 +29,7 @@ import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 /**
  * The Class StringUtilFormatParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class FormatParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, Object[], String>{
 

@@ -22,7 +22,7 @@ import com.feilong.core.bean.BeanUtil;
 /**
  * xml格式结果的解析,目的将xml字符串转成自定义的对象.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public class AliasBeanBuilder implements BeanBuilder{

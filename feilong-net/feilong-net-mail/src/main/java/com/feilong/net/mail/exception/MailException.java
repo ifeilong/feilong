@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * 通用的邮件相关异常.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.8.2
  */
 public class MailException extends DefaultRuntimeException{

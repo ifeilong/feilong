@@ -33,7 +33,7 @@ import com.feilong.taglib.TagUtils;
 /**
  * version 号再加工.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class VersionRebuilder{
 

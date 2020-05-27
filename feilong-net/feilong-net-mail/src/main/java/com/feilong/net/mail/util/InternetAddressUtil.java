@@ -48,7 +48,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  *  User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;
  * </pre>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.8
  */
 public final class InternetAddressUtil{

@@ -29,7 +29,7 @@ import com.feilong.servlet.http.RequestUtil;
 /**
  * request的初始化以及销毁的监听器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.web.context.request.RequestContextListener"
  * @since 1.10.4
  */

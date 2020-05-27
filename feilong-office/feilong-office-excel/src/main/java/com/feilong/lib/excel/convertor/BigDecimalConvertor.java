@@ -25,7 +25,7 @@ import com.feilong.excel.definition.ExcelCell;
 /**
  * 解决 loxia 中 将 236796.83 解析成 236796.82999999998719431459903717041015625
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class BigDecimalConvertor extends AbstractDataConvertor<BigDecimal>{

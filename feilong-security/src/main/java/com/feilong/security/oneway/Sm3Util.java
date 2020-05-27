@@ -36,7 +36,7 @@ import com.feilong.security.EncryptionException;
  * Sm3Util.encode(&quot;你好&quot;) = 78e5c78c5322ca174089e58dc7790acf8ce9d542bee6ae4a5a0797d5e356be61
  * </pre>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see OnewayEncryption
  * @see OnewayType#SM3
  * @see <a href="https://tools.ietf.org/html/draft-shen-sm3-hash-00">SM3 Hash function draft-shen-sm3-hash-00</a>

@@ -25,7 +25,7 @@ import javax.mail.MessagingException;
 /**
  * 和 {@link javax.mail.Folder} 相关工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "HKEY_CURRENT_USER/Software/Microsoft/Windows/CurrentVersion/Explorer/Shell Folders"
  * @since 1.0.9
  */

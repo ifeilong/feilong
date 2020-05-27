@@ -25,7 +25,7 @@ import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.3
  */
 public class ContainsStringPredicateParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, String, Boolean>{

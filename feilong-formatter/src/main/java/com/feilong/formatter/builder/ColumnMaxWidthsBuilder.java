@@ -25,7 +25,7 @@ import com.feilong.lib.lang3.StringUtils;
 /**
  * 列的最大宽度构建.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
 public final class ColumnMaxWidthsBuilder{

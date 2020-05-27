@@ -24,7 +24,7 @@ import com.feilong.test.AbstractTest;
 /**
  * test https://github.com/venusdrogon/feilong-json/issues/30
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.14.0
  * @deprecated json format bean 支持排序输出 放弃吧,
  */

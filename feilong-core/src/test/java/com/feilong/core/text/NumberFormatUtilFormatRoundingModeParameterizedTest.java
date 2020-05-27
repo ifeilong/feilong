@@ -33,7 +33,7 @@ import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 /**
  * The Class NumberFormatUtilFormatRoundingModeParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class NumberFormatUtilFormatRoundingModeParameterizedTest
                 extends Abstract3ParamsAndResultParameterizedTest<Number, String, RoundingMode, String>{

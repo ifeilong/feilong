@@ -38,7 +38,7 @@ import com.feilong.lib.collection4.IterableUtils;
  * 类似的例子有,如果A表示某学校学生的集合,B表示该学校所有课程的集合,则A与B的笛卡尔积表示所有可能的选课情况。
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.2
  */
 public final class CartesianProductUtil{

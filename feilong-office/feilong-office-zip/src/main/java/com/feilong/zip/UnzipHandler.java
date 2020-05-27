@@ -18,7 +18,7 @@ package com.feilong.zip;
 /**
  * 解压缩的接口.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.4
  */
 public interface UnzipHandler{

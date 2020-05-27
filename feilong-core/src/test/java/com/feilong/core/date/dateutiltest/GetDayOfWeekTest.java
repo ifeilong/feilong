@@ -22,7 +22,7 @@ import static com.feilong.core.date.DateUtil.getDayOfWeek;
 /**
  * The Class DateUtilGetDayOfWeekTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class GetDayOfWeekTest{
 

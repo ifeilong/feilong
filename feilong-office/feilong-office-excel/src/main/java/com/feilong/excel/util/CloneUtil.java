@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * The Class CloneUtil.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class CloneUtil{

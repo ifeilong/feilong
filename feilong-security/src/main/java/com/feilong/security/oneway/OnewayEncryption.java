@@ -42,7 +42,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ul>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.0 2012-3-25 上午7:19:18
  * @version 1.0.7 2014-7-10 14:30 update class type is final
  * @see OnewayType

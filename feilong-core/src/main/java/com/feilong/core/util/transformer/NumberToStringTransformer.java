@@ -26,7 +26,7 @@ import com.feilong.core.Validate;
 /**
  * 数字转成字符串的转换器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.7
  */
 public class NumberToStringTransformer implements Transformer<Number, String>,Serializable{

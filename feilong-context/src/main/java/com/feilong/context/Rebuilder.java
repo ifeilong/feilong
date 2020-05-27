@@ -18,7 +18,7 @@ package com.feilong.context;
 /**
  * 对象构造之后,再加工.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see org.apache.commons.lang3.builder.Builder

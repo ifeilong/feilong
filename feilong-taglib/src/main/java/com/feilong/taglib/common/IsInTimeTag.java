@@ -36,7 +36,7 @@ import com.feilong.taglib.AbstractConditionalTag;
  * <li>要么设置 beginDateString+endDateString+pattern</li>
  * </ul>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.0
  */
 public class IsInTimeTag extends AbstractConditionalTag{

@@ -68,7 +68,7 @@ import com.feilong.lib.lang3.tuple.Pair;
  * </ul>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.io.File
  * @see com.feilong.lib.io.FilenameUtils
  * @see com.feilong.lib.io.FileUtils

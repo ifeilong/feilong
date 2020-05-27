@@ -22,7 +22,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * 在使用 {@link Clipboard} 过程中出现的异常.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.2.2
  */
 public final class ClipboardException extends DefaultRuntimeException{

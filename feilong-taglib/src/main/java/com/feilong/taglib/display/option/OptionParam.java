@@ -20,7 +20,7 @@ import com.feilong.taglib.display.loadbundle.LoadBundleParam;
 /**
  * The Class OptionParam.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.4
  */
 public class OptionParam extends LoadBundleParam{

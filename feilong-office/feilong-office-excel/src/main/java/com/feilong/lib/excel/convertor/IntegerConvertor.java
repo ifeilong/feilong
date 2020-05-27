@@ -8,7 +8,7 @@ import com.feilong.excel.definition.ExcelCell;
 /**
  * 解决 12344.0 转成 int 的问题
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.13.2
  */
 public class IntegerConvertor extends AbstractChoiceConvertor<Integer>{

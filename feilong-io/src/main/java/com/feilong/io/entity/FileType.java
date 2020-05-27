@@ -18,7 +18,7 @@ package com.feilong.io.entity;
 /**
  * 文件类型.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.1
  */
 public enum FileType{

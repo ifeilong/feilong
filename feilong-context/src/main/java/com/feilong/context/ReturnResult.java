@@ -24,7 +24,7 @@ import java.io.Serializable;
  * 规范新的名称,用来替代 BackWarnEntity
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.11.0

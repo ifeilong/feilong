@@ -22,7 +22,7 @@ import com.feilong.context.Data;
 /**
  * 基本的交易数据模型.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class DefaultTradeData implements Serializable,Data{

@@ -28,7 +28,7 @@ import org.junit.Test;
 /**
  * The Class CalendarUtilTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class CalendarUtilTest{
 

@@ -18,7 +18,7 @@ package com.feilong.context.converter;
 /**
  * 抽象的指定class类型的将 字符串转成 bean 的转换器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.11.3

@@ -27,7 +27,7 @@ import com.feilong.test.TestUtil;
 /**
  * The Class ObjectUtilIsPrimitiveArrayParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class IsPrimitiveArrayParameterizedTest extends AbstractBooleanParameterizedTest<Object, Boolean>{
 

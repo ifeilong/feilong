@@ -23,7 +23,7 @@ import javax.xml.transform.TransformerFactory;
 /**
  * build {@link Transformer}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see OutputKeys
  * @since 3.0.0
  */
@@ -51,9 +51,6 @@ class TransformerBuilder{
         try{
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
-            //transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "8");
-
             return transformer;
         }catch (TransformerException e){
             throw new UncheckedXmlParseException(e);

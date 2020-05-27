@@ -18,7 +18,7 @@ package com.feilong.net.mail.entity;
 /**
  * 和 session 相关的配置.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.3
  */
 public interface SessionConfig{

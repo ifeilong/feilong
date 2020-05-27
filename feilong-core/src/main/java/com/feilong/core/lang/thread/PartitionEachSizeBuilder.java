@@ -18,7 +18,7 @@ package com.feilong.core.lang.thread;
 /**
  * 用来计算 each size 大小的.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 public interface PartitionEachSizeBuilder{

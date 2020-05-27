@@ -27,7 +27,7 @@ import com.feilong.lib.lang3.StringUtils;
  * 0513-8677****
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.1
  */
 public enum SensitiveType{

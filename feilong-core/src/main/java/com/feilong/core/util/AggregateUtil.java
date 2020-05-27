@@ -44,7 +44,7 @@ import com.feilong.core.Validate;
  * 类似于sql里面的 统计函数 <a href="http://www.sqlcourse2.com/agg_functions.html">(Aggregate functions)</a>
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "java.util.stream.Collectors"
  * @since 1.8.0
  */

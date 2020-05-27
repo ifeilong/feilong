@@ -29,7 +29,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * 默认基于 {@link Thread} 数组的执行实现.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  * @since 2.0.0 move from package com.feilong.core.lang
  */

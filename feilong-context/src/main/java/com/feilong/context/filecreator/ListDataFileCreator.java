@@ -22,7 +22,7 @@ import com.feilong.context.Data;
 /**
  * 基于list 数据的文件创造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <E>
  *            the element type
  * @since 2.1.0

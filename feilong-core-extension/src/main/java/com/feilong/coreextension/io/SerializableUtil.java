@@ -33,7 +33,7 @@ import com.feilong.io.InputStreamUtil;
 /**
  * {@link java.io.Serializable}util.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.io.Serializable
  * @see "c3p0 com.mchange.v2.ser.SerializableUtils#serializeToByteArray(Object)"
  * @see com.feilong.lib.lang3.SerializationUtils

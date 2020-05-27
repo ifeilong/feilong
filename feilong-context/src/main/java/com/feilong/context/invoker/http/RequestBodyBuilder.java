@@ -18,7 +18,7 @@ package com.feilong.context.invoker.http;
 /**
  * 专门用来构造http post 请求的requestbody的构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.11.3

@@ -18,7 +18,7 @@ package com.feilong.context;
 /**
  * 通过指定字符串类型参数来获取值.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <V>
  *            the value type
  * @since 2.0.0

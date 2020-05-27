@@ -20,7 +20,7 @@ import com.feilong.json.JsonUtil;
 /**
  * json格式的格式化.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public class JsonStringFormatter extends AbstractStringFormatter{

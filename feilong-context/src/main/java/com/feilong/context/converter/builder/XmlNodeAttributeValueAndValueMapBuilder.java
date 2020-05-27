@@ -84,7 +84,7 @@ import com.feilong.xml.XmlUtil;
  *  }
  * </pre>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
  */
 public class XmlNodeAttributeValueAndValueMapBuilder implements NameAndValueMapBuilder{

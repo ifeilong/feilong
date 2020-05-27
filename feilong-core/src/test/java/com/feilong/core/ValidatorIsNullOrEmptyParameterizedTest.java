@@ -27,7 +27,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 /**
  * The Class ObjectUtilIsPrimitiveArrayParameterizedTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ValidatorIsNullOrEmptyParameterizedTest extends AbstractBooleanParameterizedTest<Object, Boolean>{
 

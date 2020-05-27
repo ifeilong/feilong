@@ -33,7 +33,7 @@ import com.feilong.net.http.callback.ResultCallback;
 /**
  * 专门发送请求 <code>httpUriRequest</code> .
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public final class HttpRequestExecuter{
@@ -73,7 +73,6 @@ public final class HttpRequestExecuter{
         //---------------------------------------------------------------
         //回手掏
         return resultCallback.on(httpRequest, httpUriRequest, httpResponse, useConnectionConfig, beginDate);
-        //httpUriRequest.abort();
     }
 
     //---------------------------------------------------------------

@@ -31,7 +31,7 @@ import com.feilong.lib.net.util.TrustManagerUtils;
  * 它是网景（Netscape）公司提出的基于 WEB 应用的安全协议
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.net.util.SSLContextUtils
  * @see javax.net.ssl.X509TrustManager
  * @since 1.10.6

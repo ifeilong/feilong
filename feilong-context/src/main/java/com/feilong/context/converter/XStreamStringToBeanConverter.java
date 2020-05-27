@@ -20,7 +20,7 @@ import com.feilong.xml.XmlUtil;
 /**
  * 使用 Xstream 来将 字符串转换成对象.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see XmlUtil#toBean(String, Class)

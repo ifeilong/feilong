@@ -26,7 +26,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 /**
  * The Class HttpConcatUtilTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
 public class HttpConcatUtilConcatTest extends BaseHttpConcatTest{

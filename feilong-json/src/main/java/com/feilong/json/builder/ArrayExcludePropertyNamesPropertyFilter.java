@@ -86,7 +86,7 @@ import com.feilong.lib.json.util.PropertyFilter;
  * }
  * </pre>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-json/issues/3">json 转java 的时候,想排除某个属性</a>
  * @since 1.11.0
  */

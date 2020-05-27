@@ -27,7 +27,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * {@link java.lang.Enum} 工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.lang3.EnumUtils
  * @since 1.0.6
  */

@@ -53,7 +53,7 @@ import com.feilong.core.Validate;
  * unable to find valid certification path to requested target</a>}
  * </blockquote>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href=
  *      "https://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/">SunCertPathBuilderException:
  *      unable to find valid certification path to requested target</a>

@@ -24,7 +24,7 @@ import com.feilong.lib.lang3.StringUtils;
 /**
  * 忽视大小写的实现.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.collection4.functors.DefaultEquator
  * @since 1.10.1
  */

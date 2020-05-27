@@ -36,7 +36,7 @@ import com.feilong.io.IOUtil;
 /**
  * 压缩的工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 public class CompressZipHandler extends AbstractZipHandler{
@@ -97,9 +97,7 @@ public class CompressZipHandler extends AbstractZipHandler{
             //java.io.UncheckedIOException: java.io.IOException: This archive contains unclosed entries.
             //        Caused by: java.io.IOException: This archive contains unclosed entries.
             //            at org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream.finish(ZipArchiveOutputStream.java:521)
-            //            at org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream.close(ZipArchiveOutputStream.java:1046)
-
-            //IOWriteUtil.write(FileUtil.getFileInputStream(willFile.getAbsolutePath()), zipArchiveOutputStream);
+            //IOWriteUtil.write(FileUtil.getFileInputStream(willFile.getAbsolutePath()), zipArchiveOutputStream)
 
             //关闭zipArchiveOutputStream，完成一个文件的压缩  
             zipArchiveOutputStream.closeArchiveEntry();
@@ -123,7 +121,6 @@ public class CompressZipHandler extends AbstractZipHandler{
             // 进入递归，处理下一级的文件  
             zip(zipArchiveOutputStream, file, dirName + fileName + File.separator);
         }
-
     }
 
     /**

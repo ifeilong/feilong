@@ -23,7 +23,7 @@ import com.feilong.context.beanproperty.SimpleHttpTypeBeanProperty;
 /**
  * 用来构造 {@link SimpleHttpTypeBeanProperty}.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 public class SimpleHttpTypeBeanPropertyBeanDefinitionParser extends AbstractSimpleBeanDefinitionParser{

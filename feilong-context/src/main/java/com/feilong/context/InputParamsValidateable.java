@@ -22,7 +22,7 @@ package com.feilong.context;
  * 只是标识接口
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.0
  */
 public interface InputParamsValidateable{

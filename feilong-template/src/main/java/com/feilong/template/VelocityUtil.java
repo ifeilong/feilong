@@ -23,7 +23,7 @@ import org.apache.velocity.context.Context;
 /**
  * Velocity 工具类.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
  * @see org.apache.velocity.VelocityContext
  * @see org.apache.velocity.app.VelocityEngine

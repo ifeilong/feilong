@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * 确认请求信息的身份.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.0
  */
 public class RequestIdentity implements Serializable{

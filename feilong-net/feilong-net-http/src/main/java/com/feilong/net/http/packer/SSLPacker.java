@@ -26,7 +26,7 @@ import com.feilong.net.http.ConnectionConfig;
 /**
  * ssl 封装器.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
  */
 public final class SSLPacker{

@@ -46,7 +46,7 @@ import com.feilong.core.Validate;
  * 默认会提取正则表达式中的 <span style="color:red">第一个group 转成int 类型</span> 进行比较
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.apache.commons.io.comparator.NameFileComparator"
  * @see "org.apache.commons.io.comparator.DirectoryFileComparator"
  * @see "org.apache.commons.io.comparator.DefaultFileComparator"

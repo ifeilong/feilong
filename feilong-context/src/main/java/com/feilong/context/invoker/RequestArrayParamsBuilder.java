@@ -18,7 +18,7 @@ package com.feilong.context.invoker;
 /**
  * 数组型 请求参数构造器.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see RequestParamsBuilder

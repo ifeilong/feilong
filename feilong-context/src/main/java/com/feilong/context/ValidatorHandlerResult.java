@@ -22,7 +22,7 @@ package com.feilong.context;
  * 通常用于责任链
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.4
  */
 public enum ValidatorHandlerResult{

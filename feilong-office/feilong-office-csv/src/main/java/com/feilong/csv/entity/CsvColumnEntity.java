@@ -25,7 +25,7 @@ import com.feilong.lib.lang3.builder.ToStringStyle;
  * 实体需要声明成 public的 ,否则反射取不到
  * </p>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.csv.entity.CsvColumn
  * @since 1.7.1
  */

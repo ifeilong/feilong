@@ -27,7 +27,7 @@ import static com.feilong.core.CharsetType.UTF8;
 /**
  * The Class BasePagerTest.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.7
  */
 public abstract class BasePagerTest{

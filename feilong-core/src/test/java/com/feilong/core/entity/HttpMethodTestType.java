@@ -20,7 +20,7 @@ import com.feilong.core.lang.EnumUtil;
 /**
  * http请求方法,目前仅支持通用的get和post 其他不支持.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "org.springframework.http.HttpMethod"
  * @since 1.7.3 move from feilong-core
  */

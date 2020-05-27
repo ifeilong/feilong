@@ -20,7 +20,7 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 /**
  * 邮件发送请求.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.3
  */
 public class MailSendRequest{

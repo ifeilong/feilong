@@ -22,7 +22,7 @@ import com.feilong.json.JsonUtil;
 /**
  * 简单的 json格式的.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
  * @see JsonStringFormatter

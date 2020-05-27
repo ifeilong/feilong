@@ -27,7 +27,7 @@ import com.feilong.taglib.AbstractConditionalTag;
 /**
  * 包含父类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.7.2
  */
 public abstract class AbstractContainsSupport extends AbstractConditionalTag{

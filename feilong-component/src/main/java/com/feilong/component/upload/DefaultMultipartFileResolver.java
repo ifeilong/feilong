@@ -40,7 +40,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 }
  * </pre>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.5.4
  * @since 1.12.0 rename
  * @since 3.0.0 move from feilong spring

@@ -31,7 +31,7 @@ import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
 /**
  * The Class RandomUtilTest.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class CreateRandomFromStringTest{
 

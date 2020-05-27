@@ -41,7 +41,7 @@ import com.feilong.lib.excel.ognl.OgnlStack;
 /**
  * The Class BlockReader.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated

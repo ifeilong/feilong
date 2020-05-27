@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * <li>XXE漏洞可能带来的危害：可读取任意文件；执行系统命令；探测内网端口；攻击内网网站</li>
  * </ul>
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.1
  */
 public final class XXEUtil{

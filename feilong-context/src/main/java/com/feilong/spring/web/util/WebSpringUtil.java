@@ -72,10 +72,10 @@ import com.feilong.core.Validate;
  * </p>
  * </blockquote>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see org.springframework.web.context.WebApplicationContext#ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE
  * @see org.springframework.web.context.support.WebApplicationContextUtils#getWebApplicationContext(ServletContext)
- * @since 1.0.4
+ * @since 3.0.2 move from feilong-spring project
  */
 public final class WebSpringUtil{
 

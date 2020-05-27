@@ -15,8 +15,8 @@
  */
 package com.feilong.xml.xstream.converters;
 
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -56,7 +56,7 @@ import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
  * However it is your responsibility then to ensure, that the resulting names are valid for XML.
  * </p>
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
  * @see <a href="https://x-stream.github.io/faq.html#XML_double_underscores">Why do field names suddenly have double underscores in the
  *      generated XML?</a>
@@ -65,7 +65,6 @@ import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 public class SimpleMapConverter implements Converter{
 
     /** Static instance. */
-    // the static instance works for all types
     public static final SimpleMapConverter INSTANCE = new SimpleMapConverter();
 
     //---------------------------------------------------------------
@@ -87,7 +86,7 @@ public class SimpleMapConverter implements Converter{
             writer.startNode(Objects.toString(key));
             writer.setValue(Objects.toString(entry.getValue(), EMPTY));
 
-            //writer.setValue("<![CDATA[" + Objects.toString(entry.getValue(), EMPTY) + "]]>");
+            //writer.setValue("<![CDATA[" + Objects.toString(entry.getValue(), EMPTY) + "]]>")
 
             writer.endNode();
         }
@@ -110,7 +109,6 @@ public class SimpleMapConverter implements Converter{
             reader.moveUp();
         }
         return map;
-
     }
 
     //---------------------------------------------------------------

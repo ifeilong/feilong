@@ -28,7 +28,7 @@ import com.feilong.lib.validator.EmailValidator;
 /**
  * 校验的工具类.
  *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6
  */
 public final class ValidatorUtil{

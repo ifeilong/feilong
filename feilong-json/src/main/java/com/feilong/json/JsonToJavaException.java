@@ -20,7 +20,7 @@ import com.feilong.core.DefaultRuntimeException;
 /**
  * json转成java 异常.
  * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.5
  */
 public final class JsonToJavaException extends DefaultRuntimeException{
