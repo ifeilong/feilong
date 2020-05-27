@@ -30,9 +30,6 @@ import com.feilong.test.AbstractTest;
  */
 public class ItemDtoJsonStringToBeanConverterTest extends AbstractTest{
 
-    /**
-     * Convert.
-     */
     @Test
     public void test(){
         ItemDto itemDto = new ItemDto();

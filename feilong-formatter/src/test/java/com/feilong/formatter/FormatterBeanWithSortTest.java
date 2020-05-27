@@ -17,8 +17,8 @@ package com.feilong.formatter;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.now;
-import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -29,14 +29,14 @@ import com.feilong.test.AbstractTest;
 public class FormatterBeanWithSortTest extends AbstractTest{
 
     @Test
-    public final void testFormatToSimpleTable1(){
+    public void testFormatToSimpleTable1(){
         Person person = new Person("feilong", now());
         LOGGER.debug(formatToSimpleTable(toList(person), "name", "dateAttr"));
     }
 
     //---------------------------------------------------------------
     @Test
-    public final void testFormatToSimpleTable11(){
+    public void test(){
         assertEquals(EMPTY, formatToSimpleTable(null, "name"));
     }
 

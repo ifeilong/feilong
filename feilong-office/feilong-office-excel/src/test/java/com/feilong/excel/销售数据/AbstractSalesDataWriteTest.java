@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import com.feilong.excel.AbstractWriteTest;
 
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 abstract class AbstractSalesDataWriteTest extends AbstractWriteTest{
 
     @Test

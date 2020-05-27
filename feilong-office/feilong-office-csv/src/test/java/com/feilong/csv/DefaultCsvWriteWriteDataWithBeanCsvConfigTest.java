@@ -19,15 +19,8 @@ import static java.util.Collections.emptyList;
 
 import org.junit.Test;
 
-import com.feilong.csv.CsvWrite;
-import com.feilong.csv.DefaultCsvWrite;
 import com.feilong.csv.entity.BeanCsvConfig;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.13.0
- */
 public class DefaultCsvWriteWriteDataWithBeanCsvConfigTest{
 
     private final CsvWrite csvWrite = new DefaultCsvWrite();

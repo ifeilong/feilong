@@ -19,22 +19,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import com.feilong.store.member.User;
 
-/**
- * The Class BeanPropertyValueChangeClosureTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.7
- */
 public class BeanPropertyValueChangeClosureTest{
-
-    /**
-     * Test bean property value change closure test 1.
-     */
 
     @Test
     public void testBeanPropertyValueChangeClosureTest1(){
@@ -50,23 +41,16 @@ public class BeanPropertyValueChangeClosureTest{
     public void testBeanPropertyValueChangeClosureTest(){
         BeanPropertyValueChangeClosure<User> beanPropertyValueChangeClosure = new BeanPropertyValueChangeClosure<>("name", 1);
         beanPropertyValueChangeClosure.execute(null);
+        assertTrue(true);
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Test bean property value change closure test null.
-     */
 
     @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testBeanPropertyValueChangeClosureTestNull(){
         new BeanPropertyValueChangeClosure<User>(null, 1);
     }
-
-    /**
-     * Test bean property value change closure test empty.
-     */
 
     @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)

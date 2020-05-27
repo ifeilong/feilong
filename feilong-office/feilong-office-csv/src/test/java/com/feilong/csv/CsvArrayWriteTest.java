@@ -32,16 +32,10 @@ import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.csv.entity.CsvConfig;
 import com.feilong.test.AbstractTest;
 
-/**
- * The Class CSVUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
+@SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class CsvArrayWriteTest extends AbstractTest{
 
     private final CsvWrite csvWrite = new DefaultCsvWrite();
-
-    //---------------------------------------------------------------
 
     @Test
     public void testWrite(){

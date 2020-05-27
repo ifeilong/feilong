@@ -17,6 +17,8 @@ package com.feilong.json.processor;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
@@ -42,19 +44,14 @@ public class BigDecimalJsonValueProcessorTest extends AbstractTest{
         assertEquals("{\"money\": \"99999999.00\"}", JsonUtil.format(user, jsonFormatConfig));
     }
 
+    //---------------------------------------------------------------
+
     @Test
     public void test2(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
 
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
-
-        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
-        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
-        jsonFormatConfig.setIncludes("name", "age", "money");
-
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        assertThat(JsonUtil.format(user, build()), containsString("\"money\": \"99999999.00\""));
     }
 
     @Test
@@ -62,14 +59,7 @@ public class BigDecimalJsonValueProcessorTest extends AbstractTest{
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.10"));
 
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
-
-        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
-        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
-        jsonFormatConfig.setIncludes("name", "age", "money");
-
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        assertThat(JsonUtil.format(user, build()), containsString("\"money\": \"99999999.10\""));
     }
 
     @Test
@@ -77,13 +67,18 @@ public class BigDecimalJsonValueProcessorTest extends AbstractTest{
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.109"));
 
+        assertThat(JsonUtil.format(user, build()), containsString("\"money\": \"99999999.11\""));
+    }
+
+    //---------------------------------------------------------------
+
+    private static JavaToJsonConfig build(){
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
         propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("name", "age", "money");
-
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        return jsonFormatConfig;
     }
 }

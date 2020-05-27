@@ -15,14 +15,13 @@
  */
 package com.feilong.json.processor;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
-
-import java.util.Map;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 
 import org.junit.Test;
 
-import com.feilong.json.processor.CapitalizePropertyNameProcessor;
-import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.CrmAddpointCommand;
@@ -30,11 +29,8 @@ import com.feilong.test.AbstractTest;
 
 public class CrmAddpointCommandJsonTest extends AbstractTest{
 
-    /**
-     * TestJsonTest.
-     */
     @Test
-    public void testJsonTest(){
+    public void test(){
         CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
 
         crmAddpointCommand.setBuyerId("123456");
@@ -46,13 +42,19 @@ public class CrmAddpointCommandJsonTest extends AbstractTest{
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
 
-        Map<Class<?>, PropertyNameProcessor> targetClassAndPropertyNameProcessorMap = newHashMap(1);
-        targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
-
-        jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);
+        jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(
+                        toMap(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE));
 
         //---------------------------------------------------------------
 
-        LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+        assertThat(
+                        JsonUtil.format(crmAddpointCommand, jsonFormatConfig), //
+                        allOf(//
+                                        containsString("\"OpenId\": \"feilong888888ky\""),
+                                        containsString("\"ConsumptionChannel\": \"feilongstore\""),
+                                        containsString("\"OrderCode\": \"fl123456\""),
+                                        containsString("\"BuyerId\": \"123456\"")
+
+                        ));
     }
 }
