@@ -490,8 +490,7 @@ public abstract class DateTimeConverter extends AbstractConverter{
 
         final String msg = toString(getClass()) + " does not support default String to '" + toString(type) + "' conversion.";
         if (LOGGER.isWarnEnabled()){
-            LOGGER.warn("    " + msg);
-            LOGGER.warn("    (N.B. Re-configure Converter or use alternative implementation)");
+            LOGGER.warn(msg + "    (N.B. Re-configure Converter or use alternative implementation)");
         }
         throw new ConversionException(msg);
     }

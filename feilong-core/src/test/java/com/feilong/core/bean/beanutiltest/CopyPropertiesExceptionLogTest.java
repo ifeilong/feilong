@@ -19,6 +19,7 @@ import static com.feilong.core.date.DateUtil.now;
 
 import org.junit.Test;
 
+import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.beanutiltest.entity.AccessExceptionProperty;
 import com.feilong.store.member.User;
@@ -36,11 +37,12 @@ public class CopyPropertiesExceptionLogTest{
         user.setDate(now());
 
         User user2 = new User();
+
+        //ConvertUtil.registerSimpleDateLocaleConverter(TO_STRING_STYLE)
         BeanUtil.copyProperties(user2, user, "date");
     }
 
-    @Test
-    //@Test(expected = BeanOperationException.class)
+    @Test(expected = BeanOperationException.class)
     public void testCopyProperties(){
         AccessExceptionProperty user = new AccessExceptionProperty();
 
