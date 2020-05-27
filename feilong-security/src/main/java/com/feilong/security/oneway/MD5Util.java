@@ -43,9 +43,8 @@ import com.feilong.core.CharsetType;
  * @see <a href="http://www.cmd5.com/">MD5解密网站</a>
  * @see com.feilong.security.oneway.OnewayEncryption
  * @see com.feilong.security.oneway.OnewayType
- * @see org.apache.commons.codec.digest.Md5Crypt#md5Crypt(byte[])
+ * @see com.feilong.lib.codec.digest.DigestUtils#md5Hex(String)
  * @see "org.springframework.util.DigestUtils"
- * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(String)
  * @since 1.0.0
  */
 public final class MD5Util{
@@ -85,7 +84,7 @@ public final class MD5Util{
      *            原始字符串,将使用默认的 {@link String#getBytes()} 转成字节数组<br>
      * @return 加密之后的转成<span style="color:green">小写的</span>16进制字符串
      * @see OnewayEncryption#encode(OnewayType, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(String)
+     * @see com.feilong.lib.codec.digest.DigestUtils#md5Hex(String)
      */
     public static String encode(String origin){
         return OnewayEncryption.encode(ONEWAYTYPE, origin);
@@ -116,7 +115,7 @@ public final class MD5Util{
      *            受支持的 {@link CharsetType} 名称,比如 utf-8
      * @return 加密之后的转成 <span style="color:green">小写的</span>16进制字符串
      * @see OnewayEncryption#encode(OnewayType, String, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(byte[])
+     * @see com.feilong.lib.codec.digest.DigestUtils#md5Hex(byte[])
      */
     public static String encode(String origin,String charsetName){
         return OnewayEncryption.encode(ONEWAYTYPE, origin, charsetName);
@@ -131,7 +130,7 @@ public final class MD5Util{
      *            文件路径 {@link java.io.File#File(String)}
      * @return the string
      * @see OnewayEncryption#encodeFile(OnewayType, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#md5Hex(java.io.InputStream)
+     * @see com.feilong.lib.codec.digest.DigestUtils#md5Hex(java.io.InputStream)
      */
     public static String encodeFile(String filePath){
         return OnewayEncryption.encodeFile(ONEWAYTYPE, filePath);

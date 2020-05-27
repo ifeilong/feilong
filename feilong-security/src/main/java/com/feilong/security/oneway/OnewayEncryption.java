@@ -20,10 +20,9 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.core.Validate;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
@@ -47,7 +46,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @version 1.0.0 2012-3-25 上午7:19:18
  * @version 1.0.7 2014-7-10 14:30 update class type is final
  * @see OnewayType
- * @see org.apache.commons.codec.digest.DigestUtils
+ * @see com.feilong.lib.codec.digest.DigestUtils
  * @see org.springframework.util.DigestUtils
  */
 //无访问控制符修饰的内容可以被同一个包中的类访问,
@@ -150,7 +149,7 @@ final class OnewayEncryption{
      * @see java.io.FileInputStream#read(byte[], int, int)
      * @see java.security.MessageDigest#update(byte[], int, int)
      * @see java.security.MessageDigest#digest()
-     * @see org.apache.commons.codec.digest.DigestUtils#updateDigest(MessageDigest, InputStream)
+     * @see com.feilong.lib.codec.digest.DigestUtils#updateDigest(MessageDigest, InputStream)
      */
     public static String encodeFile(OnewayType onewayType,String filePath){
         Validate.notBlank(filePath, "filePath can't be null/empty!");
@@ -179,7 +178,7 @@ final class OnewayEncryption{
      *            the oneway type
      * @return {@link java.security.MessageDigest#getInstance(String)}
      * @see java.security.MessageDigest#getInstance(String)
-     * @see org.apache.commons.codec.digest.DigestUtils#getDigest(String)
+     * @see com.feilong.lib.codec.digest.DigestUtils#getDigest(String)
      */
     private static final MessageDigest getMessageDigest(OnewayType onewayType){
         Validate.notNull(onewayType, "onewayType can't be null!");

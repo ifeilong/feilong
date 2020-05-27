@@ -21,10 +21,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 import com.feilong.core.lang.SystemUtil;
+import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
 /**

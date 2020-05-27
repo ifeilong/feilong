@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-parent</artifactId>
-		<version>3.0.1</version>
+		<version>3.0.2</version>
 	</parent>
 
 	<artifactId>feilong-with-optional</artifactId>
@@ -28,13 +28,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-compress</artifactId>
-		</dependency>
-
-
-		<!-- 2.3. 使用 加密解密 功能 -->
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
 		</dependency>
 
 		<!-- for com.feilong.security.oneway.Sm3Util -->

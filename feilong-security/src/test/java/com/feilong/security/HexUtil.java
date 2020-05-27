@@ -26,7 +26,7 @@ import com.feilong.core.lang.StringUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @version 1.4.0 2015年8月24日 上午10:49:21
- * @see org.apache.commons.codec.binary.Hex
+ * @see com.feilong.lib.codec.binary.Hex
  * @since 1.4.0
  * @deprecated 不需要使用了
  */

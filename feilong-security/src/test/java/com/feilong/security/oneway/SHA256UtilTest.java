@@ -17,9 +17,9 @@ package com.feilong.security.oneway;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
+import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
 public class SHA256UtilTest extends AbstractSecurityTest{

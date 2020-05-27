@@ -21,12 +21,12 @@ import static com.feilong.security.symmetric.LogBuilder.errorMessage;
 
 import java.security.Key;
 
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.lib.codec.binary.Base64;
 import com.feilong.core.Validate;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
@@ -122,7 +122,7 @@ import com.feilong.security.symmetric.builder.TransformationBuilder;
  * @see javax.crypto.Cipher#DECRYPT_MODE
  * @see javax.crypto.KeyGenerator
  * @see java.security.Key
- * @see org.apache.commons.codec.binary.Base64
+ * @see com.feilong.lib.codec.binary.Base64
  * @see SymmetricType
  * @see #encryptBase64(String, String)
  * @see #decryptBase64(String, String)
@@ -273,7 +273,7 @@ public class SymmetricEncryption{
      *         如果 <code>original</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>original</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see "sun.misc.BASE64Encoder"
-     * @see org.apache.commons.codec.binary.Base64
+     * @see com.feilong.lib.codec.binary.Base64
      * @since 3.0.0
      */
     public String encryptBase64(String original){
@@ -298,7 +298,7 @@ public class SymmetricEncryption{
      *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see "sun.misc.BASE64Encoder"
-     * @see org.apache.commons.codec.binary.Base64
+     * @see com.feilong.lib.codec.binary.Base64
      */
     public String encryptBase64(String original,String charsetName){
         Validate.notBlank(charsetName, "charsetName can't be blank!");
@@ -331,8 +331,8 @@ public class SymmetricEncryption{
      *         如果 <code>base64String</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see "sun.misc.BASE64Decoder"
      * @see "sun.misc.BASE64Decoder#decodeBuffer(String)"
-     * @see org.apache.commons.codec.binary.Base64
-     * @see org.apache.commons.codec.binary.Base64#decodeBase64(byte[])
+     * @see com.feilong.lib.codec.binary.Base64
+     * @see com.feilong.lib.codec.binary.Base64#decodeBase64(byte[])
      * @since 3.0.0
      */
     public String decryptBase64(String base64String){
@@ -359,8 +359,8 @@ public class SymmetricEncryption{
      *         如果 <code>base64String</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see "sun.misc.BASE64Decoder"
      * @see "sun.misc.BASE64Decoder#decodeBuffer(String)"
-     * @see org.apache.commons.codec.binary.Base64
-     * @see org.apache.commons.codec.binary.Base64#decodeBase64(byte[])
+     * @see com.feilong.lib.codec.binary.Base64
+     * @see com.feilong.lib.codec.binary.Base64#decodeBase64(byte[])
      */
     public String decryptBase64(String base64String,String charsetName){
         Validate.notBlank(charsetName, "charsetName can't be blank!");

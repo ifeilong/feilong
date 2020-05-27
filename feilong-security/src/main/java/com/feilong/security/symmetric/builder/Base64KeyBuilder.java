@@ -15,7 +15,7 @@
  */
 package com.feilong.security.symmetric.builder;
 
-import org.apache.commons.codec.binary.Base64;
+import com.feilong.lib.codec.binary.Base64;
 
 /**
  * The Class Base64KeyBuilder.

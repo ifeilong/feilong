@@ -17,9 +17,9 @@ package com.feilong.security;
 
 import static com.feilong.core.CharsetType.UTF8;
 
-import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
 
+import com.feilong.lib.codec.binary.Hex;
 import com.feilong.test.AbstractTest;
 
 /**

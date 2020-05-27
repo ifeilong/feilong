@@ -110,7 +110,7 @@ public final class Sm3Util{
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encodeFile(OnewayType, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#sha384Hex(java.io.InputStream)
+     * @see com.feilong.lib.codec.digest.DigestUtils#sha384Hex(java.io.InputStream)
      */
     public static String encodeFile(String filePath){
         return OnewayEncryption.encodeFile(ONEWAYTYPE, filePath);

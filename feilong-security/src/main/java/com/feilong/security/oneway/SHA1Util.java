@@ -44,8 +44,7 @@ import com.feilong.security.EncryptionException;
  * @version 1.0.7 2014-7-10 14:28 update javadoc and remove extends
  * @see OnewayEncryption
  * @see OnewayType
- * @see org.apache.commons.codec.digest.Sha2Crypt
- * @see org.apache.commons.codec.digest.DigestUtils#sha1(String)
+ * @see com.feilong.lib.codec.digest.DigestUtils#sha1(String)
  * @since 1.0.0
  */
 public final class SHA1Util{
@@ -77,7 +76,7 @@ public final class SHA1Util{
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encode(OnewayType, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#sha1Hex(String)
+     * @see com.feilong.lib.codec.digest.DigestUtils#sha1Hex(String)
      */
     public static String encode(String origin){
         return OnewayEncryption.encode(ONEWAYTYPE, origin);
@@ -99,7 +98,7 @@ public final class SHA1Util{
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encode(OnewayType, String, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#sha1(byte[])
+     * @see com.feilong.lib.codec.digest.DigestUtils#sha1(byte[])
      */
     public static String encode(String origin,String charsetName){
         return OnewayEncryption.encode(ONEWAYTYPE, origin, charsetName);
@@ -116,7 +115,7 @@ public final class SHA1Util{
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encodeFile(OnewayType, String)
-     * @see org.apache.commons.codec.digest.DigestUtils#sha1Hex(java.io.InputStream)
+     * @see com.feilong.lib.codec.digest.DigestUtils#sha1Hex(java.io.InputStream)
      */
     public static String encodeFile(String filePath){
         return OnewayEncryption.encodeFile(ONEWAYTYPE, filePath);

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-parent</artifactId>
-		<version>3.0.1</version>
+		<version>3.0.2</version>
 	</parent>
 
 	<artifactId>feilong-taglib</artifactId>
@@ -24,12 +24,6 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<!--feilong-template -->
