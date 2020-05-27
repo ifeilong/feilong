@@ -44,7 +44,9 @@ public class CloneUtil{
      *             the instantiation exception
      * @throws IllegalAccessException
      *             the illegal access exception
+     * @deprecated 为什么要clone?
      */
+    @Deprecated
     public static Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
         Map<String, Object> result = map.getClass().newInstance();
         for (String key : map.keySet()){

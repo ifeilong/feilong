@@ -134,10 +134,12 @@ public class InstantiatingNullHandler implements NullHandler{
      * @param clazz
      *            the clazz
      * @return the object
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      * @throws Exception
      *             the exception
      */
-    private static Object createObject(Class<?> clazz) throws Exception{
+    private static Object createObject(Class<?> clazz) throws InstantiationException,IllegalAccessException{
         if (Collection.class.isAssignableFrom(clazz)){
             return new ArrayList<>();
         }else if (clazz == Map.class){

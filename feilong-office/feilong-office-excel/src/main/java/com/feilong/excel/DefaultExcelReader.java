@@ -99,17 +99,8 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
 
     }
 
-    /**
-     * Read all per sheet.
-     *
-     * @param inputStream
-     *            the input stream
-     * @param beans
-     *            the beans
-     * @return the read status
-     */
     @Override
-    public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> beans){
+    public ReadStatus readAllPerSheet(InputStream inputStream,Map<String, Object> data){
         try (Workbook workbook = WorkbookFactory.create(inputStream)){
             List<ExcelSheet> excelSheets = excelDefinition.getExcelSheets();
             int size = excelSheets.size();
@@ -119,27 +110,32 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
             ExcelSheet excelSheet = excelSheets.iterator().next();
 
             Map<String, List<Object>> cacheMap = new HashMap<>();
-            for (String key : beans.keySet()){
-                if (beans.get(key) != null){
+
+            for (Map.Entry<String, Object> entry : data.entrySet()){
+                String key = entry.getKey();
+                Object value = entry.getValue();
+
+                if (value != null){
                     cacheMap.put(key, new ArrayList<>());
                 }
+
             }
 
             //---------------------------------------------------------------
             ReadStatus readStatus = new ReadStatus();
             readStatus.setStatus(ReadStatus.STATUS_SUCCESS);
             for (int i = 0; i < workbook.getNumberOfSheets(); i++){
-                Map<String, Object> clonedBeans = CloneUtil.cloneMap(beans);
-                SheetReader.readSheet(workbook, i, excelSheet, new OgnlStack(clonedBeans), readStatus, skipErrors);
-                for (String key : clonedBeans.keySet()){
-                    cacheMap.get(key).add(clonedBeans.get(key));
+                Map<String, Object> clonedData = CloneUtil.cloneMap(data);
+                SheetReader.readSheet(workbook, i, excelSheet, new OgnlStack(clonedData), readStatus, skipErrors);
+                for (String key : clonedData.keySet()){
+                    cacheMap.get(key).add(clonedData.get(key));
                 }
             }
-            for (String key : beans.keySet()){
+            for (String key : data.keySet()){
                 if (cacheMap.containsKey(key)){
-                    beans.put(key, cacheMap.get(key));
+                    data.put(key, cacheMap.get(key));
                 }else{
-                    beans.put(key, null);
+                    data.put(key, null);
                 }
             }
             return readStatus;

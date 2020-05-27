@@ -17,12 +17,13 @@ package com.feilong.net.http;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.net.http.HttpMethodType.GET;
 
 import java.util.Map;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.ParamUtil;
 
 /**
@@ -155,6 +156,11 @@ public class HttpRequest{
 
     /**
      * 获得 请求的uri地址.
+     * 
+     * <p>
+     * 如果uri是null,将返回empty
+     * 如果uri中有空格,将会替换成%20
+     * </p>
      *
      * @return the 请求的uri地址
      * @see <a href="https://github.com/venusdrogon/feilong-platform/issues/257">增加自动转义-请求参数放在路径中的配置</a>
@@ -175,7 +181,7 @@ public class HttpRequest{
             //对于某些遵循RFC 2396标准的应用来说，它可能不接受查询字符串中出现加号+，认为它是非法字符。
 
             //所以一个安全的举措是URL中统一使用%20来编码空格字符。
-            uri = uri.replaceAll(SPACE, "%20"); //参见 org.springframework.util.ResourceUtils.toURI(String)
+            uri = StringUtil.replace(uri, SPACE, "%20"); //参见 org.springframework.util.ResourceUtils.toURI(String)
         }
         return uri;
     }

@@ -43,6 +43,7 @@ import com.feilong.core.Validate;
  * @see <a href="http://camel.apache.org/mvel.html/">mvel</a>
  * @since 3.0.2 move from feilong-spring project
  */
+@SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class SpelUtil{
 
     /** The expression parser. */

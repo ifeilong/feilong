@@ -113,10 +113,10 @@ public class OgnlStack{
      *            the expr
      * @param value
      *            the value
-     * @throws Exception
-     *             the exception
+     * @throws OgnlException
+     *             the ognl exception
      */
-    public void setValue(String expr,Object value) throws Exception{
+    public void setValue(String expr,Object value) throws OgnlException{
         Object root = stackList.get(0);
         Validate.notNull(root, "root can't be null!");
 
