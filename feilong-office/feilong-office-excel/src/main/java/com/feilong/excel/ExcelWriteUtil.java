@@ -98,7 +98,7 @@ public class ExcelWriteUtil{
                     Map<String, Object> beans,
                     String outputFileName){
 
-        String[] sheetNames = null == sheetName ? (String[]) null : toArray(sheetName);
+        String[] sheetNames = null == sheetName ? null : toArray(sheetName);
         return write(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName);
     }
 
