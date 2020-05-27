@@ -79,6 +79,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * @see SensitiveType
  * @since 1.10.1
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class SensitiveTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */

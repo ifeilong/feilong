@@ -119,6 +119,7 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
  * @see <a href="http://www.webdesignpractices.com/navigation/breadcrumb.html">Breadcrumb Navigation</a>
  * @since 1.2.2
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class BreadCrumbTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */

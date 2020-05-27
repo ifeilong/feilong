@@ -25,6 +25,7 @@ import com.feilong.core.util.ResourceBundleUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public abstract class AbstractLocaleSupportTag extends AbstractStartWriteContentTag implements LocaleSupport{
 
     /** The Constant serialVersionUID. */

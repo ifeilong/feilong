@@ -55,6 +55,7 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
  * @see org.apache.taglibs.standard.tag.rt.fmt.SetBundleTag
  * @since 1.10.3
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class LoadBundleTag extends AbstractLocaleSupportTag{
 
     /** The Constant serialVersionUID. */

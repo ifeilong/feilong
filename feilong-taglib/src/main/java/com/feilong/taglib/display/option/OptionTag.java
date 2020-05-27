@@ -149,6 +149,7 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option">feilongDisplay-option</a>
  * @since 1.5.4
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class OptionTag extends AbstractLocaleSupportTag{
 
     /** The Constant serialVersionUID. */

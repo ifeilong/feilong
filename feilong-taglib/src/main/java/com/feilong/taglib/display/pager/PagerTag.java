@@ -112,6 +112,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager">feilongDisplay-pager</a>
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupport{
 
     /** The Constant serialVersionUID. */

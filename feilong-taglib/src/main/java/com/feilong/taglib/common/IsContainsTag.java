@@ -21,6 +21,7 @@ package com.feilong.taglib.common;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
+@SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep
 public class IsContainsTag extends AbstractContainsSupport{
 
     /** The Constant serialVersionUID. */
