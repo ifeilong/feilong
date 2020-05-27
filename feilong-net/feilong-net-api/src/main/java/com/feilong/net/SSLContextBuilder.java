@@ -21,8 +21,8 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 
-import org.apache.commons.net.util.SSLContextUtils;
-import org.apache.commons.net.util.TrustManagerUtils;
+import com.feilong.lib.net.util.SSLContextUtils;
+import com.feilong.lib.net.util.TrustManagerUtils;
 
 /**
  * 用来构造 {@link SSLContext}, SSL全称是Secure Sockets Layer安全套接层协议层.
@@ -32,7 +32,7 @@ import org.apache.commons.net.util.TrustManagerUtils;
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.net.util.SSLContextUtils
+ * @see com.feilong.lib.net.util.SSLContextUtils
  * @see javax.net.ssl.X509TrustManager
  * @since 1.10.6
  */
@@ -54,8 +54,8 @@ public class SSLContextBuilder{
      *            协议,参见 {@link SSLProtocol} ,如果 <code>protocol</code> 是null或者empty,那么默认使用 {@link SSLProtocol#TLS}
      * @return 如果 <code>protocol</code> 是null或者empty,那么默认使用 {@link SSLProtocol#TLS}<br>
      * @see SSLProtocol
-     * @see org.apache.commons.net.util.SSLContextUtils#createSSLContext(String, KeyManager[], TrustManager[])
-     * @see org.apache.commons.net.util.TrustManagerUtils#getAcceptAllTrustManager()
+     * @see com.feilong.lib.net.util.SSLContextUtils#createSSLContext(String, KeyManager[], TrustManager[])
+     * @see com.feilong.lib.net.util.TrustManagerUtils#getAcceptAllTrustManager()
      */
     public static SSLContext build(String protocol){
         try{

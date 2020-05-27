@@ -82,12 +82,6 @@
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
 		</dependency>
-		<!-- 2.7. 使用 FTP 功能 -->
-
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-		</dependency>
 		<!-- 2.8. 使用 email 功能 -->
 
 		<dependency>

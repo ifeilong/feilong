@@ -32,13 +32,6 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
-		<!-- commons-net -->
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>

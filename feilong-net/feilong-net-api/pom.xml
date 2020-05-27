@@ -14,9 +14,9 @@
 	<dependencies>
 		<!-- commons-net -->
 		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-			<optional>true</optional>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-commons-net</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 	</dependencies>
 </project>

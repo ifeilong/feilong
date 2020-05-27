@@ -24,5 +24,6 @@
 		<module>feilong-lib-commons-collections4</module>
 		<module>feilong-lib-commons-lang3</module>
 		<module>feilong-lib-commons-codec</module>
+		<module>feilong-lib-commons-net</module>
 	</modules>
 </project>

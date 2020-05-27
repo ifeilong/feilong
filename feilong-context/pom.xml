@@ -49,13 +49,6 @@
 			<artifactId>feilong-security</artifactId>
 		</dependency>
 
-		<!-- commons-net -->
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>

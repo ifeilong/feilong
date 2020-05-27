@@ -26,10 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
-import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +33,10 @@ import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.net.ftp.FTP;
+import com.feilong.lib.net.ftp.FTPClient;
+import com.feilong.lib.net.ftp.FTPFile;
+import com.feilong.lib.net.ftp.FTPReply;
 import com.feilong.core.Validate;
 import com.feilong.net.filetransfer.AbstractFileTransfer;
 import com.feilong.net.filetransfer.FileTransferException;

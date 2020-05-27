@@ -11,17 +11,17 @@
 	<artifactId>feilong-net-filetransfer</artifactId>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-api</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
 		<!-- jsch 用于sftp 传输 -->
 		<dependency>
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- commons-net -->
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
 			<optional>true</optional>
 		</dependency>
 
