@@ -20,7 +20,7 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
-import ognl.MemberAccess;
+import com.feilong.lib.ognl.MemberAccess;
 
 /**
  * This class provides methods for setting up and restoring

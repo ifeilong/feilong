@@ -25,9 +25,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ognl.NullHandler;
-import ognl.Ognl;
-import ognl.OgnlRuntime;
+import com.feilong.lib.ognl.NullHandler;
+import com.feilong.lib.ognl.Ognl;
+import com.feilong.lib.ognl.OgnlRuntime;
 
 /**
  * The Class InstantiatingNullHandler.

@@ -65,17 +65,6 @@
 			<artifactId>ooxml-schemas</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>ognl</groupId>
-			<artifactId>ognl</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-digester3</artifactId>
-		</dependency>
-
-
 		<!-- 2.6. 使用 SFTP 功能 -->
 
 		<dependency>

@@ -15,6 +15,7 @@
  */
 package com.feilong.excel;
 
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasKey;
@@ -25,14 +26,13 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.lib.springframework.util.ResourceUtils;
 import com.feilong.test.AbstractTest;
 
 public class ExcelSheetMapBuilderTest extends AbstractTest{
 
     @Test
     public void test(){
-        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build(ResourceUtils.CLASSPATH_URL_PREFIX + "consultant/sheets-definition.xml");
+        Map<String, ExcelSheet> map = ExcelSheetMapBuilder.build(CLASSPATH_URL_PREFIX + "consultant/sheets-definition.xml");
         assertTrue(map.size() == 1);
 
         assertThat(map, allOf(hasKey("consultantExport")));

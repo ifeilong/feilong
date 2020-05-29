@@ -100,18 +100,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>ognl</groupId>
-			<artifactId>ognl</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-digester3</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>

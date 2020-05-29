@@ -25,9 +25,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.excel.DataConvertorConfig;
 import com.feilong.excel.definition.ExcelCell;
-
-import ognl.OgnlException;
-import ognl.OgnlRuntime;
+import com.feilong.lib.ognl.OgnlException;
+import com.feilong.lib.ognl.OgnlRuntime;
 
 /**
  * The Class PropertyTypeDetector.

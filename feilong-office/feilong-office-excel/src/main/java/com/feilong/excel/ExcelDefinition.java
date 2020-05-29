@@ -22,7 +22,9 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.excel.definition.ExcelSheet;
 
 /**
- * The Class ExcelManipulatorDefinition.
+ * 定义不同sheet 的sheet list.
+ * 
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ExcelDefinition{
 

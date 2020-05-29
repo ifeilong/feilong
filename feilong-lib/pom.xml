@@ -25,5 +25,7 @@
 		<module>feilong-lib-commons-lang3</module>
 		<module>feilong-lib-commons-codec</module>
 		<module>feilong-lib-commons-net</module>
+		<module>feilong-lib-ognl</module>
+		<module>feilong-lib-commons-digester3</module>
 	</modules>
 </project>

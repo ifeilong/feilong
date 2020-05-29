@@ -13,20 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.excel.util;
+package com.feilong.excel;
 
-import org.apache.commons.digester3.Digester;
-import org.apache.commons.digester3.binder.DigesterLoader;
-import org.apache.commons.digester3.xmlrules.FromXmlRulesModule;
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.core.Validate;
+import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.io.InputStreamUtil;
+import com.feilong.lib.digester3.Digester;
+import com.feilong.lib.digester3.binder.DigesterLoader;
+import com.feilong.lib.digester3.xmlrules.FromXmlRulesModule;
 
-public class DigesterCreater{
+/**
+ * 
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @since 3.0.3
+ */
+public class ExcelSheetListBuilder{
+
+    /** The Constant log. */
+    private static final Logger   LOGGER   = LoggerFactory.getLogger(ExcelSheetListBuilder.class);
+
+    //---------------------------------------------------------------
+
+    private static final Digester DIGESTER = create(CLASSPATH_URL_PREFIX + "config/excel/definition-rule.xml");
 
     /** Don't let anyone instantiate this class. */
-    private DigesterCreater(){
+    private ExcelSheetListBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -34,7 +56,13 @@ public class DigesterCreater{
 
     //---------------------------------------------------------------
 
+    static List<ExcelSheet> build(String sheetDefinitionPath) throws IOException,SAXException{
+        Validate.notBlank(sheetDefinitionPath, "sheetDefinitionPath can't be blank!");
+        return DIGESTER.parse(InputStreamUtil.getInputStream(sheetDefinitionPath));
+    }
+
     public static Digester create(String location){
+        LOGGER.debug("will parse:[{}]", location);
         try{
             Digester digester = DigesterLoader.newLoader(new FromXmlRulesModule(){
 
@@ -48,7 +76,7 @@ public class DigesterCreater{
             digester.setValidating(false);
             return digester;
         }catch (Exception e){
-            throw new DefaultRuntimeException("can not create Digester from: " + location, e);
+            throw new DefaultRuntimeException("can't create Digester from: " + location, e);
         }
     }
 }

@@ -18,10 +18,9 @@ package com.feilong.lib.excel.ognl;
 import java.util.Arrays;
 
 import com.feilong.core.DefaultRuntimeException;
-
-import ognl.NullHandler;
-import ognl.OgnlException;
-import ognl.OgnlRuntime;
+import com.feilong.lib.ognl.NullHandler;
+import com.feilong.lib.ognl.OgnlException;
+import com.feilong.lib.ognl.OgnlRuntime;
 
 /**
  * 

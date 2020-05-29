@@ -24,27 +24,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.digester3.Digester;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.excel.util.DigesterCreater;
-import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.collection4.CollectionUtils;
-import com.feilong.lib.springframework.util.ResourceUtils;
 
 class ExcelSheetMapBuilder{
 
-    private static final Logger   LOGGER   = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
-
-    //---------------------------------------------------------------
-
-    private static final Digester DIGESTER = DigesterCreater
-                    .create(ResourceUtils.CLASSPATH_URL_PREFIX + "config/excel/definition-rule.xml");
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelSheetMapBuilder.class);
 
     //---------------------------------------------------------------
 
@@ -70,7 +61,7 @@ class ExcelSheetMapBuilder{
             Validate.notBlank(sheetDefinitionPath, "sheetDefinitionPath can't be blank!");
             try{
                 Date beginDate = new Date();
-                List<ExcelSheet> excelSheetList = DIGESTER.parse(InputStreamUtil.getInputStream(sheetDefinitionPath));
+                List<ExcelSheet> excelSheetList = ExcelSheetListBuilder.build(sheetDefinitionPath);
                 for (ExcelSheet excelSheet : excelSheetList){
                     sheetDefinitionsMap.put(defaultIfNullOrEmpty(excelSheet.getName(), EMPTY), excelSheet);
                 }
@@ -86,13 +77,10 @@ class ExcelSheetMapBuilder{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
-                            "parse sheetDefinitionLocations:[{}],sheetDefinitionsMap:[{}]",
-                            sheetDefinitionLocations,
-                            JsonUtil.format(sheetDefinitionsMap));
+            String pattern = "parse sheetDefinitionLocations:[{}],sheetDefinitionsMap:[{}]";
+            LOGGER.debug(pattern, sheetDefinitionLocations, JsonUtil.format(sheetDefinitionsMap));
         }
         //---------------------------------------------------------------
         return sheetDefinitionsMap;
     }
-
 }

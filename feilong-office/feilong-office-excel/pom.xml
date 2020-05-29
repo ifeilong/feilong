@@ -38,15 +38,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>ognl</groupId>
-			<artifactId>ognl</artifactId>
-			<optional>true</optional>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-ognl</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-digester3</artifactId>
-			<optional>true</optional>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-commons-digester3</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>

@@ -24,10 +24,9 @@ import java.util.Map;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
+import com.feilong.lib.ognl.Ognl;
+import com.feilong.lib.ognl.OgnlException;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import ognl.Ognl;
-import ognl.OgnlException;
 
 /**
  * The Class OgnlStack.

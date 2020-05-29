@@ -17,7 +17,7 @@ package com.feilong.lib.excel.ognl;
 
 import java.util.Map;
 
-import ognl.OgnlContext;
+import com.feilong.lib.ognl.OgnlContext;
 
 public class OgnlContextBuilder{
 
