@@ -2,13 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.github.ifeilong</groupId>
-		<artifactId>feilong-parent</artifactId>
-		<version>3.0.3</version>
-	</parent>
-
+	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
+	<version>3.0.3</version>
+
 	<packaging>jar</packaging>
 
 	<!-- 发布到中央仓库必须要name -->
@@ -18,21 +15,91 @@
 	feilong is a suite of core and expanded libraries that include utility classes, http, excel,cvs, io classes, and much much more.
     </description>
 
+	<!-- 成立年份 -->
+	<inceptionYear>2008</inceptionYear>
+
+	<url>https://github.com/ifeilong/feilong</url>
+
 	<properties>
+		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
+		<version.feilong-platform>3.0.3</version.feilong-platform>
+
+		<!-- 让整个项目统一字符集编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 		<maven-javadoc-plugin.outputDirectory>${project.build.directory}/apidocs</maven-javadoc-plugin.outputDirectory>
+
+		<version.feilong-common-test>4.1.0</version.feilong-common-test>
+
+		<!-- **********************begin maven-compiler-plugin config******************************************* -->
+		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
+		<maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>
+		<maven-compiler-plugin.encoding>${project.build.sourceEncoding}</maven-compiler-plugin.encoding>
+		<!-- **********************end maven-compiler-plugin config******************************************* -->
+
+		<v.maven-clean-plugin>3.1.0</v.maven-clean-plugin>
+		<v.maven-compiler-plugin>3.8.1</v.maven-compiler-plugin>
+
+		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
+		<v.maven-dependency-plugin>3.1.2</v.maven-dependency-plugin>
+		<v.maven-deploy-plugin>2.8.2</v.maven-deploy-plugin>
+
+		<v.maven-install-plugin>2.5.2</v.maven-install-plugin>
+
+		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
+		<v.maven-javadoc-plugin>3.2.0</v.maven-javadoc-plugin>
+
+		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
+		<v.maven-jar-plugin>3.2.0</v.maven-jar-plugin>
+
+		<!-- http://maven.apache.org/plugins/maven-source-plugin/download.cgi -->
+		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<v.maven-source-plugin>3.2.1</v.maven-source-plugin>
+
+		<!--http://maven.apache.org/surefire/maven-surefire-plugin/ -->
+		<!--https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<v.maven-surefire-plugin>2.22.2</v.maven-surefire-plugin>
+
+		<v.maven-gpg-plugin>1.6</v.maven-gpg-plugin>
+		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
+
+		<v.site-maven-plugin>0.12</v.site-maven-plugin>
+		<v.nexus-staging-maven-plugin>1.6.8</v.nexus-staging-maven-plugin>
+
+		<!-- **********************begin maven-surefire-plugin config******************************************* -->
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<maven-surefire-plugin.include>**/SuiteTests</maven-surefire-plugin.include>
+		<!-- **********************end maven-surefire-plugin config******************************************* -->
+
+		<!-- **********************begin maven-javadoc-plugin config******************************************* -->
+		<!-- 用来编译生成文档 -->
+		<maven-javadoc-plugin.encoding>${project.build.sourceEncoding}</maven-javadoc-plugin.encoding>
+		<maven-javadoc-plugin.docencoding>${project.build.sourceEncoding}</maven-javadoc-plugin.docencoding>
+		<!-- 用来显示页面 META 部分 content="text/html; charset=GBK" -->
+		<maven-javadoc-plugin.charset>${project.build.sourceEncoding}</maven-javadoc-plugin.charset>
+		<!-- 用于读取javadoc 内部使用的 配置文件, 比如 描述文字为 描述,英文环境为description -->
+		<maven-javadoc-plugin.locale>en_US</maven-javadoc-plugin.locale>
+
+		<maven-javadoc-plugin.javadocVersion>1.8.0</maven-javadoc-plugin.javadocVersion>
+		<maven-javadoc-plugin.javadocDirectory>/Users/feilong/Development/DataCommon/Files/Java/Apache Maven/javadoc/springframework</maven-javadoc-plugin.javadocDirectory>
+
+		<maven-javadoc-plugin.stylesheetfile>${maven-javadoc-plugin.javadocDirectory}/stylesheet.css</maven-javadoc-plugin.stylesheetfile>
+		<maven-javadoc-plugin.stylesheet>java</maven-javadoc-plugin.stylesheet>
+		<!-- **********************end maven-javadoc-plugin config******************************************* -->
 	</properties>
 
 	<dependencies>
-
 		<!--feilong-core -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core-extension</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-context -->
@@ -46,18 +113,21 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-servlet</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-taglib -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-taglib</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-formatter -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-formatter</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-accessor -->
@@ -71,6 +141,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-io</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-httpclient4 -->
@@ -90,18 +161,21 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-template</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-json -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-json</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-validator -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-validator</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- ******************** net ************************************* -->
@@ -143,6 +217,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-security</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-office-csv -->
@@ -189,6 +264,7 @@
 
 	</dependencies>
 
+
 	<build>
 		<plugins>
 			<plugin>
@@ -208,11 +284,17 @@
 							<!-- When true, it will attempt to create a sources jar as well -->
 							<createSourcesJar>true</createSourcesJar>
 
+							<!--
+								When true, dependencies are kept in the pom but with scope 'provided';
+								when false, the dependency is removed.
+							-->
+							<keepDependenciesWithProvidedScope>false</keepDependenciesWithProvidedScope>
+
 							<!-- 如果不加这个参数,那么生成的pom会少很多依赖,商城依赖这个feilong,会发现少 velocity等jar
 
 								When true, transitive deps of removed dependencies are promoted to direct dependencies.
 								This should allow the drop in replacement of the removed deps with the new shaded jar and everything should still work. -->
-							<promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+							<!-- <promoteTransitiveDependencies>true</promoteTransitiveDependencies> -->
 
 							<!-- 使用maven的maven-shade-plugin插件时需要注意的一个问题 -->
 							<!-- http://blog.csdn.net/thc1987/article/details/44176481 -->
@@ -221,9 +303,12 @@
 							<artifactSet>
 								<includes>
 									<include>com.github.ifeilong:*:*</include>
+									<!-- add slf4j-api -->
+									<include>org.slf4j:slf4j-api:*</include>
 									<!-- <include>org.apache.commons:commons-lang3:*</include>
 										<include>org.apache.commons:commons-collections4:*</include>
 										<include>commons-io:commons-io:*</include> -->
+
 								</includes>
 							</artifactSet>
 
@@ -231,8 +316,154 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- maven-compiler-plugin -->
+			<plugin>
+				<!-- true or false，是否此插件配置将会应用于poms，那些继承于此的项目 -->
+				<inherited>true</inherited>
+
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${v.maven-compiler-plugin}</version>
+				<configuration>
+					<!-- 指定高版本的源码和编译后的字节码文件 -->
+					<source>${maven-compiler-plugin.source}</source>
+					<target>${maven-compiler-plugin.target}</target>
+					<encoding>${maven-compiler-plugin.encoding}</encoding>
+					<detail>true</detail>
+				</configuration>
+			</plugin>
+
+			<!-- maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${v.maven-jar-plugin}</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- maven-source-plugin -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${v.maven-source-plugin}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- maven-surefire-plugin -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${v.maven-surefire-plugin}</version>
+				<configuration>
+					<!-- 跳过测试 -->
+					<skip>${maven-surefire-plugin.skip}</skip>
+
+					<includes>
+						<include>${maven-surefire-plugin.include}</include>
+					</includes>
+
+					<!-- Option to print summary of test suites or just print the test cases that have errors. Default value is: true. -->
+					<printSummary>true</printSummary>
+				</configuration>
+			</plugin>
+
+			<!-- maven-clean-plugin插件 -->
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${v.maven-clean-plugin}</version>
+				<executions>
+					<execution>
+						<id>default-clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- maven-deploy-plugin插件 -->
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${v.maven-deploy-plugin}</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- maven-install-plugin插件 -->
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${v.maven-install-plugin}</version>
+				<executions>
+					<execution>
+						<id>default-install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- maven-dependency-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+
 		</plugins>
+
+		<!-- pluginManagement -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${v.maven-dependency-plugin}</version>
+				</plugin>
+
+
+				<!-- maven-javadoc-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${v.maven-javadoc-plugin}</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
 	</build>
+
 
 	<profiles>
 		<profile>
@@ -288,8 +519,129 @@
 							</links>
 						</configuration>
 					</plugin>
+
+					<!-- Gpg Signature -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${v.maven-gpg-plugin}</version>
+						<executions>
+							<execution>
+								<id>oss</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+
+								<!-- https://myshittycode.com/2017/08/07/maven-gpg-plugin-prevent-signing-prompt-or-gpg-signing-failed-no-such-file-or-directory-error/ -->
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>${v.nexus-staging-maven-plugin}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>oss</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+
 				</plugins>
+
 			</build>
 		</profile>
 	</profiles>
+
+	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
+	<!-- The scm url must start with 'scm:' -->
+	<scm>
+		<url>https://github.com/ifeilong/feilong</url>
+		<connection>scm:git:https://github.com/ifeilong/feilong</connection>
+		<developerConnection>scm:git:git@github.com:ifeilong/feilong.git</developerConnection>
+	</scm>
+
+	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/ifeilong/feilong/issues</url>
+	</issueManagement>
+
+	<!-- 项目发布管理 -->
+	<distributionManagement>
+		<repository>
+			<id>oss</id>
+			<name>sonatype Staging Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>oss</id>
+			<name>sonatype snapshots Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+	<!-- 项目的贡献者,但不属于开发小组 -->
+	<contributors>
+		<contributor>
+			<name>benjamin.liu</name>
+			<url>https://github.com/benjaliu</url>
+		</contributor>
+
+		<contributor>
+			<name>yi.huang</name>
+			<url>https://github.com/ananbeike</url>
+		</contributor>
+
+		<contributor>
+			<name>minglei.feng</name>
+			<url>https://github.com/shade41-code</url>
+		</contributor>
+
+		<contributor>
+			<name>ijiangtao</name>
+			<url>https://github.com/ijiangtao</url>
+		</contributor>
+	</contributors>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<!-- 指定这个项目的组织机构信息 -->
+	<organization>
+		<name>feiLong</name>
+		<url>https://github.com/ifeilong</url>
+	</organization>
+
+	<!-- 项目提交者信息 -->
+	<developers>
+		<developer>
+			<id>feilong</id>
+			<name>金鑫</name>
+			<url>https://github.com/venusdrogon</url>
+			<organization>feilong</organization>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>8</timezone>
+		</developer>
+	</developers>
 </project>

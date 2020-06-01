@@ -24,9 +24,11 @@ import com.feilong.context.DataHandler;
 import com.feilong.lib.collection4.MapUtils;
 
 /**
- * 
+ * The Class AbstractSimpleListDataHandler.
+ *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
+ *            the generic type
  * @since 3.0.0
  */
 public abstract class AbstractSimpleListDataHandler<T> implements DataHandler{
@@ -46,5 +48,11 @@ public abstract class AbstractSimpleListDataHandler<T> implements DataHandler{
 
     }
 
+    /**
+     * Handle.
+     *
+     * @param list
+     *            the list
+     */
     protected abstract void handle(List<T> list);
 }
