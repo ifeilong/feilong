@@ -15,21 +15,22 @@
  */
 package com.feilong.xml.xstream;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import com.thoughtworks.xstream.io.naming.NoNameCoder;
-import com.thoughtworks.xstream.io.xml.CompactWriter;
-import com.thoughtworks.xstream.io.xml.XppDriver;
+import com.feilong.lib.xstream.XStream;
+import com.feilong.lib.xstream.converters.Converter;
+import com.feilong.lib.xstream.io.HierarchicalStreamDriver;
+import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
+import com.feilong.lib.xstream.io.naming.NoNameCoder;
+import com.feilong.lib.xstream.io.xml.CompactWriter;
+import com.feilong.lib.xstream.io.xml.DomDriver;
+import com.feilong.lib.xstream.security.AnyTypePermission;
 
 /**
  * 基于 {@link XStreamConfig} 构造 {@link XStream}.
@@ -39,18 +40,18 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  */
 public final class XStreamBuilder{
 
-    /** The Constant XPPDRIVER_NONAMECODER. */
-    private static final HierarchicalStreamDriver XPPDRIVER_NONAMECODER               = new XppDriver(new NoNameCoder());
+    /** xstream 默认用的是 xppDriver 需要依赖 xmlpull:xmlpull jar. */
+    private static final HierarchicalStreamDriver DEFAULT_NONAMECODER               = new DomDriver(UTF8, new NoNameCoder());
 
-    /** The Constant XPPDRIVER_NONAMECODER_COMPACTWRITER. */
-    private static final HierarchicalStreamDriver XPPDRIVER_NONAMECODER_COMPACTWRITER = new XppDriver(new NoNameCoder()){
+    /** xstream 默认用的是 xppDriver 需要依赖 xmlpull:xmlpull jar. */
+    private static final HierarchicalStreamDriver DEFAULT_NONAMECODER_COMPACTWRITER = new DomDriver(UTF8, new NoNameCoder()){
 
-                                                                                          @Override
-                                                                                          public HierarchicalStreamWriter createWriter(
-                                                                                                          Writer out){
-                                                                                              return new CompactWriter(out, getNameCoder());
-                                                                                          }
-                                                                                      };
+                                                                                        @Override
+                                                                                        public HierarchicalStreamWriter createWriter(
+                                                                                                        Writer out){
+                                                                                            return new CompactWriter(out, getNameCoder());
+                                                                                        }
+                                                                                    };
     //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
@@ -149,6 +150,8 @@ public final class XStreamBuilder{
      */
     private static XStream buildDefault(XStreamConfig xStreamConfig){
         XStream xstream = new XStream(buildHierarchicalStreamDriver(xStreamConfig));
+        //since 1.4.7
+        xstream.addPermission(AnyTypePermission.ANY);
         //自动探测注解
         xstream.autodetectAnnotations(true);
 
@@ -187,10 +190,7 @@ public final class XStreamBuilder{
      * @return the hierarchical stream driver
      */
     private static HierarchicalStreamDriver buildHierarchicalStreamDriver(XStreamConfig xStreamConfig){
-        if (null == xStreamConfig){
-            return defaultDriver(xStreamConfig);
-        }
-        return defaultIfNull(xStreamConfig.getHierarchicalStreamDriver(), defaultDriver(xStreamConfig));
+        return defaultDriver(xStreamConfig);
     }
 
     /**
@@ -202,9 +202,9 @@ public final class XStreamBuilder{
      */
     private static HierarchicalStreamDriver defaultDriver(XStreamConfig xStreamConfig){
         if (null == xStreamConfig){
-            return XPPDRIVER_NONAMECODER;
+            return DEFAULT_NONAMECODER;
         }
-        return xStreamConfig.getIsPrettyPrint() ? XPPDRIVER_NONAMECODER : XPPDRIVER_NONAMECODER_COMPACTWRITER;
+        return xStreamConfig.getIsPrettyPrint() ? DEFAULT_NONAMECODER : DEFAULT_NONAMECODER_COMPACTWRITER;
     }
 
     //---------------------------------------------------------------

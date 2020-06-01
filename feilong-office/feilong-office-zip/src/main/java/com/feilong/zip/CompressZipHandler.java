@@ -25,13 +25,13 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.zip.Deflater;
 
-import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 import com.feilong.io.IOUtil;
+import com.feilong.lib.compress.archivers.zip.ZipArchiveEntry;
+import com.feilong.lib.compress.archivers.zip.ZipArchiveOutputStream;
 
 /**
  * 压缩的工具类.

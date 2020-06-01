@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 
-import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipFile;
+import com.feilong.lib.compress.archivers.zip.ZipArchiveEntry;
+import com.feilong.lib.compress.archivers.zip.ZipFile;
 
 /**
  * 解压缩的工具类.

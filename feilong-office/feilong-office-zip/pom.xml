@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-office-parent</artifactId>
-		<version>3.0.2</version>
+		<version>3.0.3</version>
 	</parent>
 
 	<artifactId>feilong-office-zip</artifactId>
@@ -12,9 +12,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-compress</artifactId>
-			<optional>true</optional>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-commons-compress</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-parent</artifactId>
-		<version>3.0.2</version>
+		<version>3.0.3</version>
 	</parent>
 	<artifactId>feilong-lib</artifactId>
 
@@ -27,5 +27,7 @@
 		<module>feilong-lib-commons-net</module>
 		<module>feilong-lib-ognl</module>
 		<module>feilong-lib-commons-digester3</module>
+		<module>feilong-lib-commons-compress</module>
+		<module>feilong-lib-xstream</module>
 	</modules>
 </project>

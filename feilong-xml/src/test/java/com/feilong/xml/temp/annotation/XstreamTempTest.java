@@ -1,10 +1,13 @@
 package com.feilong.xml.temp.annotation;
 
+import static com.feilong.core.CharsetType.UTF8;
+
 import org.junit.Test;
 
+import com.feilong.lib.xstream.XStream;
+import com.feilong.lib.xstream.io.naming.NoNameCoder;
+import com.feilong.lib.xstream.io.xml.DomDriver;
 import com.feilong.test.AbstractTest;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class XstreamTempTest extends AbstractTest{
 
@@ -34,7 +37,7 @@ public class XstreamTempTest extends AbstractTest{
      * @return bean转换为xml
      */
     public static String objectToXml(Object obj){
-        XStream xStream = new XStream();
+        XStream xStream = new XStream(new DomDriver(UTF8, new NoNameCoder()));
 
         //xstream使用注解转换
         xStream.processAnnotations(obj.getClass());

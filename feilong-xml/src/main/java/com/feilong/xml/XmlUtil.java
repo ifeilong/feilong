@@ -41,11 +41,10 @@ import org.w3c.dom.NodeList;
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.xml.xstream.XStreamBuilder;
+import com.feilong.lib.xstream.XStream;
 import com.feilong.xml.xstream.XStreamConfig;
 import com.feilong.xml.xstream.XStreamConfigBuilder;
 import com.feilong.xml.xstream.converters.SimpleMapConverter;
-import com.thoughtworks.xstream.XStream;
 
 /**
  * xml 工具.
@@ -65,7 +64,7 @@ import com.thoughtworks.xstream.XStream;
  * </p>
  * <p>
  * <b>1.不带XStreamConfig参数</b> <br>
- * 使用 {@code com.feilong.tools.xstream.XmlUtil.toXML(user, null)},则返回
+ * 使用 {@code com.feilong.xml.XmlUtil.toXML(user, null)},则返回
  * 
  * <pre class="code">
  * {@code
@@ -462,7 +461,7 @@ public class XmlUtil{
      * 
      * <p>
      * <b>1.不带XStreamConfig参数</b> <br>
-     * 使用 {@code com.feilong.tools.xstream.XmlUtil.toXML(user, null)},则返回
+     * 使用 {@code com.feilong.xml.XmlUtil#toXML(user, null)},则返回
      * 
      * <pre class="code">
      * {@code
@@ -543,9 +542,9 @@ public class XmlUtil{
      * @param xStreamConfig
      *            the to xml config
      * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.thoughtworks.xstream.XStream#toXML(Object)
-     * @see com.thoughtworks.xstream.XStream#alias(String, Class)
-     * @see com.thoughtworks.xstream.XStream#addImplicitCollection(Class, String)
+     * @see com.feilong.lib.xstream.XStream#toXML(Object)
+     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
+     * @see com.feilong.lib.xstream.XStream#addImplicitCollection(Class, String)
      */
     public static String toXML(Object bean,XStreamConfig xStreamConfig){
         Validate.notNull(bean, "bean can't be null!");
@@ -554,10 +553,7 @@ public class XmlUtil{
             String pattern = "class:[{}],bean:[{}],xStreamConfig:[{}]";
             LOGGER.debug(pattern, bean.getClass().getSimpleName(), JsonUtil.format(bean), JsonUtil.format(xStreamConfig));
         }
-
-        //---------------------------------------------------------------
-        XStream xstream = XStreamBuilder.build(xStreamConfig);
-        return xstream.toXML(bean);
+        return XStreamUtil.toXML(bean, xStreamConfig);
     }
 
     //---------------------------------------------------------------
@@ -781,8 +777,6 @@ public class XmlUtil{
         if (isNullOrEmpty(xml)){
             return null;
         }
-        //---------------------------------------------------------------
-        XStream xstream = XStreamBuilder.build(xStreamConfig);
-        return (T) xstream.fromXML(xml);
+        return XStreamUtil.toBean(xml, xStreamConfig);
     }
 }

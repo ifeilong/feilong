@@ -15,6 +15,7 @@
  */
 package com.feilong.xml.xstream;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
@@ -22,21 +23,20 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.feilong.lib.xstream.XStream;
+import com.feilong.lib.xstream.io.naming.NoNameCoder;
+import com.feilong.lib.xstream.io.xml.DomDriver;
 import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
-import com.thoughtworks.xstream.XStream;
 
 public class ToXmlTest extends AbstractTest{
 
-    /**
-     * Name.
-     */
     @Test
     public void name(){
         User user = new User(1L);
 
-        XStream xStream = new XStream();
+        XStream xStream = new XStream(new DomDriver(UTF8, new NoNameCoder()));
         xStream.alias("user", User.class);
 
         LOGGER.debug(xStream.toXML(user));
@@ -100,6 +100,6 @@ public class ToXmlTest extends AbstractTest{
 
         map.put("call_back_url", "");
         map.put("notify_url", "");
-        LOGGER.debug(XmlUtil.toXML((Object) map, null));
+        LOGGER.debug(XmlUtil.toXML(map, (XStreamConfig) null));
     }
 }

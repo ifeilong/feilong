@@ -20,12 +20,9 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.reflection.ReflectionProvider;
-import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
-import com.thoughtworks.xstream.io.xml.CompactWriter;
-import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
-import com.thoughtworks.xstream.io.xml.XppDriver;
+import com.feilong.lib.xstream.converters.Converter;
+import com.feilong.lib.xstream.io.xml.CompactWriter;
+import com.feilong.lib.xstream.io.xml.PrettyPrintWriter;
 
 /**
  * XStream相关配置.
@@ -46,23 +43,14 @@ public final class XStreamConfig{
      */
     private boolean                   isPrettyPrint            = true;
 
+    //---------------------------------------------------------------
+
     /**
      * 哪个类的注解需要被激活.
      * 
-     * @see com.thoughtworks.xstream.XStream#processAnnotations(Class[])
+     * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
      */
     private Class<?>[]                processAnnotationsTypes;
-
-    /**
-     * Provides implementation of stream parsers and writers to XStream.
-     * <p>
-     * 默认是 {@link XppDriver}
-     * </p>
-     * 
-     * @see com.thoughtworks.xstream.XStream#XStream(ReflectionProvider)
-     * @since 1.10.7
-     */
-    private HierarchicalStreamDriver  hierarchicalStreamDriver;
 
     /**
      * 转换器.
@@ -76,7 +64,7 @@ public final class XStreamConfig{
     /**
      * 别名.
      * 
-     * @see com.thoughtworks.xstream.XStream#alias(String, Class)
+     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
      */
     private Map<String, Class<?>>     aliasMap                 = newHashMap();
 
@@ -112,9 +100,9 @@ public final class XStreamConfig{
      * 
      * </blockquote>
      *
-     * @see com.thoughtworks.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
-     * @see com.thoughtworks.xstream.XStream#addDefaultImplementation(Class, Class)
-     * @see com.thoughtworks.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
+     * @see com.feilong.lib.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
+     * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
+     * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
     private Map<Class<?>, Class<?>>   defaultImplementationMap = newHashMap();
@@ -132,7 +120,7 @@ public final class XStreamConfig{
      * Instantiates a new x stream config.
      *
      * @param aliasMap
-     *            别名,see {@link com.thoughtworks.xstream.XStream#alias(String, Class)}
+     *            别名,see {@link com.feilong.lib.xstream.XStream#alias(String, Class)}
      */
     public XStreamConfig(Map<String, Class<?>> aliasMap){
         this.aliasMap = aliasMap;
@@ -155,7 +143,7 @@ public final class XStreamConfig{
      *
      * @param processAnnotationsTypes
      *            哪个类的注解需要被激活.<br>
-     *            see {@link com.thoughtworks.xstream.XStream#processAnnotations(Class[])}
+     *            see {@link com.feilong.lib.xstream.XStream#processAnnotations(Class[])}
      */
     public XStreamConfig(Class<?>...processAnnotationsTypes){
         this.processAnnotationsTypes = processAnnotationsTypes;
@@ -166,7 +154,7 @@ public final class XStreamConfig{
      * 获得 别名.
      *
      * @return the aliasMap
-     * @see com.thoughtworks.xstream.XStream#alias(String, Class)
+     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
      */
     public Map<String, Class<?>> getAliasMap(){
         return aliasMap;
@@ -177,7 +165,7 @@ public final class XStreamConfig{
      *
      * @param aliasMap
      *            the aliasMap to set
-     * @see com.thoughtworks.xstream.XStream#alias(String, Class)
+     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
      */
     public void setAliasMap(Map<String, Class<?>> aliasMap){
         this.aliasMap = aliasMap;
@@ -200,35 +188,6 @@ public final class XStreamConfig{
      */
     public void setImplicitCollectionMap(Map<String, Class<?>> implicitCollectionMap){
         this.implicitCollectionMap = implicitCollectionMap;
-    }
-
-    /**
-     * Provides implementation of stream parsers and writers to XStream.
-     * <p>
-     * 默认是 {@link XppDriver}
-     * </p>
-     *
-     * @return the provides implementation of stream parsers and writers to XStream
-     * @see com.thoughtworks.xstream.XStream#XStream(ReflectionProvider)
-     * @since 1.10.7
-     */
-    public HierarchicalStreamDriver getHierarchicalStreamDriver(){
-        return hierarchicalStreamDriver;
-    }
-
-    /**
-     * Provides implementation of stream parsers and writers to XStream.
-     * <p>
-     * 默认是 {@link XppDriver}
-     * </p>
-     *
-     * @param hierarchicalStreamDriver
-     *            the new provides implementation of stream parsers and writers to XStream
-     * @see com.thoughtworks.xstream.XStream#XStream(ReflectionProvider)
-     * @since 1.10.7
-     */
-    public void setHierarchicalStreamDriver(HierarchicalStreamDriver hierarchicalStreamDriver){
-        this.hierarchicalStreamDriver = hierarchicalStreamDriver;
     }
 
     /**
@@ -256,7 +215,7 @@ public final class XStreamConfig{
      * 哪个类的注解需要被激活.
      *
      * @return 哪个类的注解需要被激活
-     * @see com.thoughtworks.xstream.XStream#processAnnotations(Class[])
+     * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
      */
     public Class<?>[] getProcessAnnotationsTypes(){
         return processAnnotationsTypes;
@@ -267,7 +226,7 @@ public final class XStreamConfig{
      *
      * @param processAnnotationsTypes
      *            哪个类的注解需要被激活
-     * @see com.thoughtworks.xstream.XStream#processAnnotations(Class[])
+     * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
      */
     public void setProcessAnnotationsTypes(Class<?>[] processAnnotationsTypes){
         this.processAnnotationsTypes = processAnnotationsTypes;
@@ -330,9 +289,9 @@ public final class XStreamConfig{
      * </blockquote>
      *
      * @return the defaultImplementationMap
-     * @see com.thoughtworks.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
-     * @see com.thoughtworks.xstream.XStream#addDefaultImplementation(Class, Class)
-     * @see com.thoughtworks.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
+     * @see com.feilong.lib.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
+     * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
+     * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
     public Map<Class<?>, Class<?>> getDefaultImplementationMap(){
@@ -370,9 +329,9 @@ public final class XStreamConfig{
      * 
      * @param defaultImplementationMap
      *            the defaultImplementationMap to set
-     * @see com.thoughtworks.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
-     * @see com.thoughtworks.xstream.XStream#addDefaultImplementation(Class, Class)
-     * @see com.thoughtworks.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
+     * @see com.feilong.lib.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
+     * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
+     * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
     public void setDefaultImplementationMap(Map<Class<?>, Class<?>> defaultImplementationMap){
