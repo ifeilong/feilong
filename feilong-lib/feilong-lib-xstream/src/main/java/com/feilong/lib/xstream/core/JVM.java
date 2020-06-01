@@ -236,63 +236,11 @@ public class JVM implements Caching{
     }
 
     /**
-     * @deprecated As of 1.4.4, minimal JDK version is 1.4 already
-     */
-    @Deprecated
-    public static boolean is14(){
-        return isVersion(4);
-    }
-
-    /**
      * @deprecated As of 1.4.4, minimal JDK version will be 1.7 for next major release
      */
     @Deprecated
     public static boolean is15(){
         return isVersion(5);
-    }
-
-    /**
-     * @deprecated As of 1.4.4, minimal JDK version will be 1.7 for next major release
-     */
-    @Deprecated
-    public static boolean is16(){
-        return isVersion(6);
-    }
-
-    /**
-     * @since 1.4
-     * @deprecated As of 1.4.10, minimal JDK version will be 1.7 for next major release
-     */
-    @Deprecated
-    public static boolean is17(){
-        return isVersion(7);
-    }
-
-    /**
-     * @since 1.4
-     * @deprecated As of 1.4.11 use {@link #isVersion(int)}.
-     */
-    @Deprecated
-    public static boolean is18(){
-        return isVersion(8);
-    }
-
-    /**
-     * @since 1.4.8
-     * @deprecated As of 1.4.10 use {@link #isVersion(int)}.
-     */
-    @Deprecated
-    public static boolean is19(){
-        return majorJavaVersion >= 1.9f;
-    }
-
-    /**
-     * @since 1.4.10
-     * @deprecated As of 1.4.11 use {@link #isVersion(int)}
-     */
-    @Deprecated
-    public static boolean is9(){
-        return isVersion(9);
     }
 
     /**

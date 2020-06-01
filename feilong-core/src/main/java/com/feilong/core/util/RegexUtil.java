@@ -269,13 +269,7 @@ public final class RegexUtil{
      * @since 1.10.6
      */
     public static Pattern buildPattern(final String regexPattern,final int flags){
-        final String key = regexPattern + "@" + flags;
-        Pattern pattern = PATTERN_CACHE.get(key);
-
-        if (null == pattern){
-            pattern = Pattern.compile(regexPattern, flags);
-            PATTERN_CACHE.put(key, pattern);
-        }
-        return pattern;
+        String key = regexPattern + "@" + flags;
+        return PATTERN_CACHE.computeIfAbsent(key, k -> Pattern.compile(regexPattern, flags));
     }
 }

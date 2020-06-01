@@ -34,13 +34,13 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 public class OgnlStack{
 
     /** The stack. */
-    private final List<Object>        stackList   = new ArrayList<>();
+    private final List<Object>        stackList      = new ArrayList<>();
 
     /** The context. */
     private final Map<String, Object> context;
 
     /** The expressions. */
-    private final Map<String, Object> expressions = new HashMap<>();
+    private final Map<String, Object> expressionsMap = new HashMap<>();
 
     //---------------------------------------------------------------
 
@@ -70,14 +70,15 @@ public class OgnlStack{
      * @throws OgnlException
      *             the ognl exception
      */
-    private Object getExpression(String expr) throws OgnlException{
-        synchronized (expressions){
-            Object object = expressions.get(expr);
-            if (object == null){
-                object = Ognl.parseExpression(expr);
-                expressions.put(expr, object);
-            }
-            return object;
+    private Object getExpression(String expr){
+        synchronized (expressionsMap){
+            return expressionsMap.computeIfAbsent(expr, key -> {
+                try{
+                    return Ognl.parseExpression(expr);
+                }catch (OgnlException e){
+                    throw new DefaultRuntimeException(e);
+                }
+            });
         }
     }
 

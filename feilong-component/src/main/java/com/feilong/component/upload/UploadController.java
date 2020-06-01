@@ -35,7 +35,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 
 public class UploadController{
 
-    private final String              directoryName = USER_HOME + "/feilong/upload";
+    private static final String       DIRECTORY_NAME = USER_HOME + "/feilong/upload";
 
     @Autowired
     private MultipartFileResolver     multipartFileResolver;
@@ -46,12 +46,15 @@ public class UploadController{
     //---------------------------------------------------------------
 
     //@RequestMapping(value = "/upload",method = { POST })
-    public void upload(HttpServletRequest request,HttpServletResponse response,@RequestParam("importFile") MultipartFile[] multipartFiles){
+    public void upload(
+                    HttpServletRequest request,
+                    @SuppressWarnings("unused") HttpServletResponse response,
+                    @RequestParam("importFile") MultipartFile[] multipartFiles){
         Validate.notEmpty(multipartFiles, "multipartFiles can't be empty!");
 
         String[] fileNames = resolverNewFileNames(multipartFiles);
         //1 上传到制定的目录 ,已备份
-        List<String> filePathList = multipartFileResolver.upload(multipartFiles, directoryName, fileNames);
+        List<String> filePathList = multipartFileResolver.upload(multipartFiles, DIRECTORY_NAME, fileNames);
 
         FileParser fileParser = requestFileParserDetector.detect(request);
         for (String filePath : filePathList){
