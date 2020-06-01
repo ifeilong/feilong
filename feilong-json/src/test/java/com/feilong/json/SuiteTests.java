@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.feilong.json.format.FormatSuiteTests;
 import com.feilong.json.processor.JsonValueProcessorSuiteTests;
 import com.feilong.json.tobean.ToBeanSuiteTests;
+import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
@@ -35,7 +36,7 @@ import com.feilong.json.tobean.ToBeanSuiteTests;
                 FormatSuiteTests.class,
                 ToBeanSuiteTests.class,
 
-        // JavaIdentifierTransformerSuiteTests.class,
+                JavaIdentifierTransformerSuiteTests.class,
 
         //
 })

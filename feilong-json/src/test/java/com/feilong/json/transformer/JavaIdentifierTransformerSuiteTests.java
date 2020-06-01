@@ -22,7 +22,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-        //  CustomJavaIdentifierTransformerTest.class,
+                CustomJavaIdentifierTransformerTest.class,
+                UncapitalizeJavaIdentifierTransformerTest.class,
 
         //
 })

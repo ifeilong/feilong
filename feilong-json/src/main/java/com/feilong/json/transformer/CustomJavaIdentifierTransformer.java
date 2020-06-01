@@ -19,8 +19,8 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 import java.util.Map;
 
-import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.core.Validate;
+import com.feilong.lib.json.util.JavaIdentifierTransformer;
 
 /**
  * [json{@code -->}bean],json字符串里面的属性名字可能有部分不符合我们的java属性命名规范,此时可以基于部分属性做转换器.
@@ -148,7 +148,8 @@ public class CustomJavaIdentifierTransformer extends JavaIdentifierTransformer{
      * Instantiates a new map java identifier transformer.
      *
      * @param map
-     *            the map
+     *            如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *            如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      */
     public CustomJavaIdentifierTransformer(Map<String, String> map){
         Validate.notEmpty(map, "map can't be null/empty!");
@@ -163,6 +164,7 @@ public class CustomJavaIdentifierTransformer extends JavaIdentifierTransformer{
      */
     @Override
     public String transformToJavaIdentifier(String propertyName){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         return defaultIfNullOrEmpty(propertyNameConvertMap.get(propertyName), propertyName);
     }
 

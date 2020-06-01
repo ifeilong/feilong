@@ -15,6 +15,7 @@
  */
 package com.feilong.json.transformer;
 
+import com.feilong.core.Validate;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.lib.lang3.StringUtils;
 
@@ -112,6 +113,7 @@ public class UncapitalizeJavaIdentifierTransformer extends JavaIdentifierTransfo
      */
     @Override
     public String transformToJavaIdentifier(String str){
+        Validate.notBlank(str, "str can't be blank!");
         return StringUtils.uncapitalize(str);
     }
 }
