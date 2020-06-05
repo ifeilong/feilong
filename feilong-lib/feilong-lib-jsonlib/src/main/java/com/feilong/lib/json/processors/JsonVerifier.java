@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import com.feilong.lib.json.JSON;
-import com.feilong.lib.json.JSONFunction;
 import com.feilong.lib.json.JSONNull;
 
 /**
@@ -57,7 +56,6 @@ public final class JsonVerifier{
                         || value instanceof Double //
                         || value instanceof BigInteger //
                         || value instanceof BigDecimal //
-                        || value instanceof JSONFunction //
                         || value instanceof String;
     }
 }

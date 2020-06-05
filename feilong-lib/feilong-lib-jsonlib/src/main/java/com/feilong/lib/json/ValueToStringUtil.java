@@ -45,9 +45,6 @@ public class ValueToStringUtil{
         if (value == null || JSONUtils.isNull(value)){
             return "null";
         }
-        if (value instanceof JSONFunction){
-            return ((JSONFunction) value).toString();
-        }
         if (value instanceof Number){
             return JSONUtils.numberToString((Number) value);
         }
@@ -78,9 +75,6 @@ public class ValueToStringUtil{
     public static String valueToString(Object value,int indentFactor,int indent){
         if (value == null || JSONUtils.isNull(value)){
             return "null";
-        }
-        if (value instanceof JSONFunction){
-            return ((JSONFunction) value).toString();
         }
         if (value instanceof Number){
             return JSONUtils.numberToString((Number) value);

@@ -90,7 +90,7 @@ public class JSONArrayToBeanUtil{
             if (JSONArray.class.isAssignableFrom(value.getClass())){
                 collection.add(toCollection((JSONArray) value, jsonConfig));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
+                            || Character.class.isAssignableFrom(type)){
 
                 if (objectClass != null && !objectClass.isAssignableFrom(type)){
                     value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
@@ -143,7 +143,7 @@ public class JSONArrayToBeanUtil{
             if (JSONArray.class.isAssignableFrom(type)){
                 list.add(toList((JSONArray) value, root, jsonConfig));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
+                            || Character.class.isAssignableFrom(type)){
                 list.add(value);
             }else{
                 try{
@@ -187,7 +187,7 @@ public class JSONArrayToBeanUtil{
             if (JSONArray.class.isAssignableFrom(type)){
                 Array.set(array, i, toArray((JSONArray) value, root, jsonConfig));
             }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type) || JSONFunction.class.isAssignableFrom(type)){
+                            || Character.class.isAssignableFrom(type)){
                 if (objectClass != null && !objectClass.isAssignableFrom(type)){
                     value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
                 }
@@ -248,8 +248,8 @@ public class JSONArrayToBeanUtil{
             Class<?> type = value.getClass();
             if (JSONArray.class.isAssignableFrom(type)){
                 Array.set(array, i, toArray((JSONArray) value, objectClass, classMap));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || Character.class.isAssignableFrom(type)
-                            || JSONFunction.class.isAssignableFrom(type)){
+            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type)
+                            || Character.class.isAssignableFrom(type)){
                 if (objectClass != null && !objectClass.isAssignableFrom(type)){
                     value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
                 }

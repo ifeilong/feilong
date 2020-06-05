@@ -119,7 +119,6 @@ public class JSONSerializer{
         }
 
         //---------------------------------------------------------------
-
         try{
             return JSONObject.fromObject(object, jsonConfig);
         }catch (JSONException e){
