@@ -20,11 +20,24 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
 import static com.feilong.core.DatePattern.TIMESTAMP_WITH_MILLISECOND;
 import static com.feilong.core.date.DateUtil.toDate;
 
+import java.util.Date;
+
 import org.junit.Test;
 
+import com.feilong.core.DatePattern;
+import com.feilong.core.date.DateUtil;
 import com.feilong.lib.lang3.StringUtils;
 
 public class ToDateTest{
+
+    /**
+     * TestToDateTest.
+     */
+    @Test
+    public void testToDateTest(){
+        Date date = toDate("2020-05-26T01:52:07Z", "yyyy-MM-dd'T'HH:mm:ss'Z'");
+        System.out.println(DateUtil.toString(date, DatePattern.COMMON_DATE_AND_TIME));//TODO:remove
+    }
 
     @Test
     public void testToDate(){

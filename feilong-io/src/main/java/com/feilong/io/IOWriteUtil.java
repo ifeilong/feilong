@@ -78,6 +78,34 @@ public final class IOWriteUtil{
     }
 
     //---------------------------------------------------------------
+    /**
+     * 将字符串/文字写到文件中.
+     * 
+     * <h3>相关规则:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}</li>
+     * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
+     * <li>如果文件存在则覆盖旧文件,可以设置{@link FileWriteMode#APPEND}表示追加内容而非覆盖</li>
+     * <li>默认使用{@link CharsetType#UTF8}编码</li>
+     * </ul>
+     * </blockquote>
+     *
+     * @param filePath
+     *            文件路径
+     * @param content
+     *            字符串内容
+     * @see FileWriteMode
+     * @see CharsetType
+     * @see #writeStringToFile(String, String, String, FileWriteMode)
+     * @see "com.feilong.lib.io.FileUtils#writeStringToFile(File, String, Charset)"
+     * @since 3.0.4
+     */
+    public static void writeStringToFile(String filePath,String content){
+        writeStringToFile(filePath, content, UTF8, COVER);
+    }
 
     /**
      * 将字符串/文字写到文件中.

@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.classutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -24,26 +25,19 @@ import com.feilong.core.lang.ClassUtil;
 import com.feilong.store.member.User;
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class ClassUtilIsInstanceParameterizedTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class IsInstanceParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Object, Class<?>, Boolean>{
 
-    /**
-     * Data.
-     *
-     * @return the iterable
-     */
     @Parameters(name = "index:{index}: ClassUtil.isInstance({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { new User(), null, false },
                                               { new User(), Comparable.class, true },
                                               { "1234", CharSequence.class, true },
+                                              {
+                                                new NoSuchMethodException(
+                                                                "Unknown property 'assignees' on class 'class com.feilong.plugins.releasenote.mojo.GitIssue'"),
+                                                NoSuchMethodException.class,
+                                                true },
                                               { "1234", Integer.class, false },
 
                                               { null, CharSequence.class, false },
@@ -53,11 +47,8 @@ public class IsInstanceParameterizedTest extends Abstract2ParamsAndResultParamet
         return toList(objects);
     }
 
-    /**
-     * Test is instance.
-     */
     @Test
-    public void testIsInstance(){
+    public void test(){
         assertEquals(expectedValue, ClassUtil.isInstance(input1, input2));
     }
 

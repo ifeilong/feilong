@@ -28,16 +28,8 @@ import org.junit.Test;
 import com.feilong.json.JsonUtil;
 import com.feilong.store.member.Person;
 
-/**
- * The Class JsonUtilToListTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class ToListTest{
 
-    /**
-     * 把一个json数组串转换成集合,且集合里存放的为实例Bean void.
-     */
     @Test
     public void testToList(){
         String json = "[{'name':'get'},{'name':'set'}]";
