@@ -38,6 +38,8 @@ public class JsonToJavaConfig extends AbstractConfig{
      */
     private Class<?>                  rootClass;
 
+    //---------------------------------------------------------------
+
     /**
      * The class map.
      * 

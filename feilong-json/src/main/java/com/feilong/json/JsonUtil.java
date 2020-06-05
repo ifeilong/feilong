@@ -1329,7 +1329,6 @@ public final class JsonUtil{
         if (null == json){
             return null;
         }
-
         //---------------------------------------------------------------
         Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
 
@@ -1359,7 +1358,7 @@ public final class JsonUtil{
      * @since 1.11.5
      */
     private static String buildJsonToJavaExceptionMessage(Object json,JsonToJavaConfig jsonToJavaConfig){
-        return Slf4jUtil.format("input json:[{}],jsonToJavaConfig:[{}]", json, format(jsonToJavaConfig));
+        return Slf4jUtil.format("input json:{},jsonToJavaConfig:{}", json, format(jsonToJavaConfig, true));
     }
 
     // [end]

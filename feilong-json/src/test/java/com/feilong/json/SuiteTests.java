@@ -23,6 +23,7 @@ import com.feilong.json.format.FormatSuiteTests;
 import com.feilong.json.processor.JsonValueProcessorSuiteTests;
 import com.feilong.json.tobean.ToBeanSuiteTests;
 import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
+import com.feilong.lib.json.util.PropertySetStrategyTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
@@ -37,6 +38,8 @@ import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
                 ToBeanSuiteTests.class,
 
                 JavaIdentifierTransformerSuiteTests.class,
+
+                PropertySetStrategyTest.class,
 
         //
 })

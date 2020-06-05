@@ -245,12 +245,6 @@ public final class BeanMorpher implements ObjectMorpher{
         }
     }
 
-    /**
-     * Validate class.
-     *
-     * @param clazz
-     *            the clazz
-     */
     private static void validateClass(Class<?> clazz){
         if (clazz == null){
             throw new MorphException("target class is null");
