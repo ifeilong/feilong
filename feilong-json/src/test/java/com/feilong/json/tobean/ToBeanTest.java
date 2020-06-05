@@ -27,6 +27,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.feilong.json.JsonToJavaException;
 import com.feilong.json.JsonUtil;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
@@ -72,6 +73,12 @@ public class ToBeanTest{
     @Test
     public void testToBeanNullJson(){
         assertEquals(null, JsonUtil.toBean(null, Person.class));
+    }
+
+    @Test(expected = JsonToJavaException.class)
+    public void testToBean11(){
+        String json = "2{'name11':'get'},{'nam112e':'set'}";
+        JsonUtil.toBean(json, Person.class);
     }
 
     @Test(expected = NullPointerException.class)

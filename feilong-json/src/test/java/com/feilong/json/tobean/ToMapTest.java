@@ -75,6 +75,12 @@ public class ToMapTest{
         JsonUtil.toMap("<aaaaaa>");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testToMap(){
+        String json = "2{'name11':'get'},{'nam112e':'set'}";
+        JsonUtil.toMap(json);
+    }
+
     @Test
     public void testToMap122(){
         //泛型擦除

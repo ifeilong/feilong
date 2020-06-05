@@ -27,6 +27,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.json.JsonToJavaConfig;
+import com.feilong.json.JsonToJavaException;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.MyBean;
 import com.feilong.store.member.Person;
@@ -37,6 +38,12 @@ import com.feilong.store.member.Person;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class ToArrayWithJsonToJavaConfigTest{
+
+    @Test(expected = JsonToJavaException.class)
+    public void testToArrayBean(){
+        String json = "2{'name11':'get'},{'nam112e':'set'}";
+        JsonUtil.toArray(json, new JsonToJavaConfig(Person.class));
+    }
 
     /**
      * 把一个json数组串转换成实体数组 void.

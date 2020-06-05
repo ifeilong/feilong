@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.feilong.json.JsonToJavaException;
 import com.feilong.json.JsonUtil;
 import com.feilong.store.member.Person;
 
@@ -43,6 +44,12 @@ public class ToListTest{
     @Test
     public void testToListNullJson(){
         assertEquals(null, JsonUtil.toList(null, Person.class));
+    }
+
+    @Test(expected = JsonToJavaException.class)
+    public void testToList11(){
+        String json = "{'name11':'get'},{'nam112e':'set'}";
+        JsonUtil.toList(json, Person.class);
     }
 
     @Test(expected = NullPointerException.class)

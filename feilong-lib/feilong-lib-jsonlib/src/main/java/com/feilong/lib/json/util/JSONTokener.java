@@ -15,6 +15,8 @@
  */
 package com.feilong.lib.json.util;
 
+import static com.feilong.core.lang.StringUtil.EMPTY;
+
 import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONException;
 import com.feilong.lib.json.JSONNull;
@@ -41,34 +43,32 @@ public class JSONTokener{
     /**
      * The source string being tokenized.
      */
-    private final String mySource;
+    private final String sourceJson;
 
     //---------------------------------------------------------------
 
     /**
      * Construct a JSONTokener from a string.
      *
-     * @param s
+     * @param json
      *            A source string.
      */
-    public JSONTokener(String s){
+    public JSONTokener(String json){
         this.myIndex = 0;
-        if (s != null){
-            s = s.trim();
-        }else{
-            s = "";
-        }
-        if (s.length() > 0){
-            char first = s.charAt(0);
-            char last = s.charAt(s.length() - 1);
+
+        this.sourceJson = json != null ? json.trim() : EMPTY;
+        if (sourceJson.length() > 0){
+            char first = sourceJson.charAt(0);
+            char last = sourceJson.charAt(sourceJson.length() - 1);
+
             if (first == '[' && last != ']'){
-                throw syntaxError("Found starting '[' but missing ']' at the end.");
+                throw syntaxError("Found start '[' ,but miss ']' at the end.");
             }
             if (first == '{' && last != '}'){
-                throw syntaxError("Found starting '{' but missing '}' at the end.");
+                throw syntaxError("Found start '{' ,but miss '}' at the end.");
             }
         }
-        this.mySource = s;
+
     }
 
     /**
@@ -82,19 +82,16 @@ public class JSONTokener{
         }
     }
 
-    public boolean matches(String pattern){
-        String str = this.mySource.substring(this.myIndex);
-        return RegexpUtils.getMatcher(pattern).matches(str);
-    }
-
     /**
-     * Determine if the source string still contains characters that next() can
-     * consume.
-     *
-     * @return true if not yet at the end of the source.
+     * 
+     * @param pattern
+     * @return
+     * @deprecated maybe可以删除
      */
-    private boolean more(){
-        return this.myIndex < this.mySource.length();
+    @Deprecated
+    public boolean matches(String pattern){
+        String str = this.sourceJson.substring(this.myIndex);
+        return RegexpUtils.getMatcher(pattern).matches(str);
     }
 
     /**
@@ -104,7 +101,7 @@ public class JSONTokener{
      */
     public char next(){
         if (more()){
-            char c = this.mySource.charAt(this.myIndex);
+            char c = this.sourceJson.charAt(this.myIndex);
             this.myIndex += 1;
             return c;
         }
@@ -124,11 +121,11 @@ public class JSONTokener{
     public String next(int n){
         int i = this.myIndex;
         int j = i + n;
-        if (j >= this.mySource.length()){
+        if (j >= this.sourceJson.length()){
             throw syntaxError("Substring bounds error");
         }
         this.myIndex += n;
-        return this.mySource.substring(i, j);
+        return this.sourceJson.substring(i, j);
     }
 
     /**
@@ -188,7 +185,7 @@ public class JSONTokener{
      * @throws JSONException
      *             Unterminated string.
      */
-    public String nextString(char quote){
+    private String nextString(char quote){
         char c;
         StringBuffer sb = new StringBuffer();
         for (;;){
@@ -291,6 +288,8 @@ public class JSONTokener{
             return JSONNull.getInstance();
         }
 
+        //---------------------------------------------------------------
+
         //If it might be a number, try converting it. We support the 0- and 0x-conventions. If a number cannot be produced, then the value will just be a string. Note that the 0-, 0x-, plus, and implied string conventions are non-standard. A JSON parser is free to accept non-JSON forms as long as it accepts all correct JSON forms.
         if ((b >= '0' && b <= '9') || b == '.' || b == '-' || b == '+'){
             if (b == '0'){
@@ -316,9 +315,8 @@ public class JSONTokener{
             }
         }
 
-        if (JSONUtils.isFunctionHeader(s) || JSONUtils.isFunction(s)){
-            return s;
-        }
+        //---------------------------------------------------------------
+
         switch (peek()) {
             case ',':
             case '}':
@@ -330,6 +328,8 @@ public class JSONTokener{
                 break;
         }
 
+        //---------------------------------------------------------------
+
         return s;
     }
 
@@ -340,7 +340,7 @@ public class JSONTokener{
      */
     public char peek(){
         if (more()){
-            char c = this.mySource.charAt(this.myIndex);
+            char c = this.sourceJson.charAt(this.myIndex);
             return c;
         }
         return 0;
@@ -349,6 +349,18 @@ public class JSONTokener{
     public void reset(){
         this.myIndex = 0;
     }
+
+    /**
+     * Determine if the source string still contains characters that next() can
+     * consume.
+     *
+     * @return true if not yet at the end of the source.
+     */
+    private boolean more(){
+        return this.myIndex < this.sourceJson.length();
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Make a JSONException to signal a syntax error.
@@ -368,6 +380,6 @@ public class JSONTokener{
      */
     @Override
     public String toString(){
-        return " at character " + this.myIndex + " of " + this.mySource;
+        return " at character " + this.myIndex + " of " + this.sourceJson;
     }
 }

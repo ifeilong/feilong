@@ -25,8 +25,10 @@ import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
- * A JSONObject is an unordered collection of name/value pairs. Its external
- * form is a string wrapped in curly braces with colons between the names and
+ * A JSONObject is an unordered collection of name/value pairs.
+ * 
+ * <p>
+ * Its external form is a string wrapped in curly braces with colons between the names and
  * values, and commas between the values and names. The internal form is an
  * object having <code>get</code> and <code>opt</code> methods for accessing
  * the values by name, and <code>put</code> methods for adding or replacing
@@ -41,6 +43,8 @@ import com.feilong.lib.json.util.JSONUtils;
  * exception if one cannot be found. An <code>opt</code> method returns a
  * default value instead of throwing an exception, and so is useful for
  * obtaining optional values.
+ * </p>
+ * 
  * <p>
  * The generic <code>get()</code> and <code>opt()</code> methods return an
  * object, which you can cast or query for type. There are also typed
@@ -131,7 +135,7 @@ public final class JSONObject implements JSON{
      * @return the object
      */
     public static Object toBean(JSONObject jsonObject){
-        return JSONObjectToBeanUtil.toBean(jsonObject);
+        return toBean(jsonObject, null);
     }
 
     /**
@@ -218,9 +222,9 @@ public final class JSONObject implements JSON{
         }else{
             Object o = get(key);
             if (o instanceof JSONArray){
-                ((JSONArray) o).element(value, jsonConfig);
+                ((JSONArray) o).addValue(value, jsonConfig);
             }else{
-                setInternal(key, new JSONArray().element(o).element(value, jsonConfig), jsonConfig);
+                setInternal(key, new JSONArray().add(o).addValue(value, jsonConfig), jsonConfig);
             }
         }
 
@@ -243,7 +247,7 @@ public final class JSONObject implements JSON{
      * @throws JSONException
      *             If the value is non-finite number or if the key is null.
      */
-    public JSONObject element(String key,Object value,JsonConfig jsonConfig){
+    public JSONObject put(String key,Object value,JsonConfig jsonConfig){
         verifyIsNull();
         if (key == null){
             throw new JSONException("Null key.");
@@ -302,12 +306,13 @@ public final class JSONObject implements JSON{
      */
     public JSONArray names(JsonConfig jsonConfig){
         verifyIsNull();
-        JSONArray ja = new JSONArray();
+
+        JSONArray jsonArray = new JSONArray();
         Iterator<String> keys = keys();
         while (keys.hasNext()){
-            ja.element(keys.next(), jsonConfig);
+            jsonArray.addValue(keys.next(), jsonConfig);
         }
-        return ja;
+        return jsonArray;
     }
 
     /**
