@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import com.feilong.lib.ezmorph.Morpher;
-import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -120,13 +118,13 @@ public final class JSONArray implements JSON{
     /**
      * The List where the JSONArray's properties are kept.
      */
-    final List elements;
+    final List elementList;
 
     /**
      * Construct an empty JSONArray.
      */
     public JSONArray(){
-        this.elements = new ArrayList<>();
+        this.elementList = new ArrayList<>();
     }
 
     /**
@@ -138,28 +136,7 @@ public final class JSONArray implements JSON{
      *            the value
      */
     public void add(int index,Object value){
-        add(index, value, new JsonConfig());
-    }
-
-    /**
-     * 添加.
-     *
-     * @param index
-     *            the index
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     */
-    private void add(int index,Object value,JsonConfig jsonConfig){
-        this.elements.add(index, ProcessValueUtil.processArrayValue(value, jsonConfig));
-    }
-
-    /**
-     * 清除.
-     */
-    public void clear(){
-        elements.clear();
+        this.elementList.add(index, ProcessValueUtil.processArrayValue(value, new JsonConfig()));
     }
 
     /**
@@ -180,18 +157,18 @@ public final class JSONArray implements JSON{
      *             If the index is negative or if the the value is an
      *             invalid number.
      */
-    private JSONArray element(int index,Object value,JsonConfig jsonConfig){
+    private JSONArray add(int index,Object value,JsonConfig jsonConfig){
         JSONUtils.testValidity(value);
         if (index < 0){
             throw new JSONException("JSONArray[" + index + "] not found.");
         }
         if (index < size()){
-            this.elements.set(index, ProcessValueUtil.processArrayValue(value, jsonConfig));
+            this.elementList.set(index, ProcessValueUtil.processArrayValue(value, jsonConfig));
         }else{
             while (index != size()){
-                element(JSONNull.getInstance());
+                this.elementList.add(JSONNull.getInstance());
             }
-            element(value, jsonConfig);
+            addValue(value, jsonConfig);
         }
         return this;
     }
@@ -203,20 +180,8 @@ public final class JSONArray implements JSON{
      *            An JSON value.
      * @return this.
      */
-    private JSONArray element(JSONNull value){
-        this.elements.add(value);
-        return this;
-    }
-
-    /**
-     * Append an JSON value. This increases the array's length by one.
-     *
-     * @param value
-     *            An JSON value.
-     * @return this.
-     */
-    JSONArray element(JSONObject value){
-        this.elements.add(value);
+    JSONArray add(JSONObject value){
+        this.elementList.add(value);
         return this;
     }
 
@@ -229,23 +194,8 @@ public final class JSONArray implements JSON{
      *            JSONString or the JSONNull object.
      * @return this.
      */
-    JSONArray element(Object value){
-        return element(value, new JsonConfig());
-    }
-
-    /**
-     * Append an object value. This increases the array's length by one.
-     *
-     * @param value
-     *            An object value. The value should be a Boolean, Double,
-     *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
-     *            JSONString or the JSONNull object.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     */
-    JSONArray element(Object value,JsonConfig jsonConfig){
-        return addValue(value, jsonConfig);
+    JSONArray add(Object value){
+        return addValue(value, new JsonConfig());
     }
 
     /**
@@ -256,7 +206,7 @@ public final class JSONArray implements JSON{
      * @return An object value.
      */
     public Object get(int index){
-        return this.elements.get(index);
+        return this.elementList.get(index);
     }
 
     /**
@@ -285,7 +235,7 @@ public final class JSONArray implements JSON{
      * @return true, if is empty
      */
     public boolean isEmpty(){
-        return this.elements.isEmpty();
+        return this.elementList.isEmpty();
     }
 
     /**
@@ -303,9 +253,11 @@ public final class JSONArray implements JSON{
      * @param index
      *            the index
      * @return the object
+     * @deprecated 将会删除
      */
+    @Deprecated
     public Object remove(int index){
-        return elements.remove(index);
+        return elementList.remove(index);
     }
 
     /**
@@ -320,7 +272,7 @@ public final class JSONArray implements JSON{
     public Object set(int index,Object value){
         JsonConfig jsonConfig = new JsonConfig();
         Object previous = get(index);
-        element(index, value, jsonConfig);
+        add(index, value, jsonConfig);
         return previous;
     }
 
@@ -331,7 +283,7 @@ public final class JSONArray implements JSON{
      */
     @Override
     public int size(){
-        return this.elements.size();
+        return this.elementList.size();
     }
 
     /**
@@ -347,7 +299,7 @@ public final class JSONArray implements JSON{
      */
     @Override
     public String toString(){
-        return ToStringUtil.toString(this.elements);
+        return ToStringUtil.toString(this.elementList);
     }
 
     /**
@@ -374,7 +326,7 @@ public final class JSONArray implements JSON{
             return this.toString();
         }
 
-        List elements2 = this.elements;
+        List elements2 = this.elementList;
         return ToStringUtil.toString(elements2, indentFactor, indent);
     }
 
@@ -389,7 +341,7 @@ public final class JSONArray implements JSON{
      */
     protected JSONArray addString(String str){
         if (str != null){
-            elements.add(str);
+            elementList.add(str);
         }
         return this;
     }
@@ -408,111 +360,8 @@ public final class JSONArray implements JSON{
      * @return this.
      */
     JSONArray addValue(Object value,JsonConfig jsonConfig){
-        this.elements.add(ProcessValueUtil.processArrayValue(value, jsonConfig));
+        this.elementList.add(ProcessValueUtil.processArrayValue(value, jsonConfig));
         return this;
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (obj == this){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-
-        if (!(obj instanceof JSONArray)){
-            return false;
-        }
-
-        //---------------------------------------------------------------
-
-        JSONArray other = (JSONArray) obj;
-
-        if (other.size() != size()){
-            return false;
-        }
-
-        int max = size();
-        for (int i = 0; i < max; i++){
-            Object o1 = get(i);
-            Object o2 = other.get(i);
-
-            // handle nulls
-            if (JSONNull.getInstance().equals(o1)){
-                if (JSONNull.getInstance().equals(o2)){
-                    continue;
-                }
-                return false;
-            }
-            if (JSONNull.getInstance().equals(o2)){
-                return false;
-            }
-
-            if (o1 instanceof JSONArray && o2 instanceof JSONArray){
-                JSONArray e = (JSONArray) o1;
-                JSONArray a = (JSONArray) o2;
-                if (!a.equals(e)){
-                    return false;
-                }
-            }else{
-                if (o1 instanceof String && o2 instanceof JSONFunction){
-                    if (!o1.equals(String.valueOf(o2))){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONFunction && o2 instanceof String){
-                    if (!o2.equals(String.valueOf(o1))){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONObject && o2 instanceof JSONObject){
-                    if (!o1.equals(o2)){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONArray && o2 instanceof JSONArray){
-                    if (!o1.equals(o2)){
-                        return false;
-                    }
-                }else if (o1 instanceof JSONFunction && o2 instanceof JSONFunction){
-                    if (!o1.equals(o2)){
-                        return false;
-                    }
-                }else{
-                    if (o1 instanceof String){
-                        if (!o1.equals(String.valueOf(o2))){
-                            return false;
-                        }
-                    }else if (o2 instanceof String){
-                        if (!o2.equals(String.valueOf(o1))){
-                            return false;
-                        }
-                    }else{
-                        Morpher m1 = JSONUtils.getMorpherRegistry().getMorpherFor(o1.getClass());
-                        Morpher m2 = JSONUtils.getMorpherRegistry().getMorpherFor(o2.getClass());
-                        if (m1 != null && m1 != IdentityObjectMorpher.INSTANCE){
-                            if (!o1.equals(JSONUtils.getMorpherRegistry().morph(o1.getClass(), o2))){
-                                return false;
-                            }
-                        }else if (m2 != null && m2 != IdentityObjectMorpher.INSTANCE){
-                            if (!JSONUtils.getMorpherRegistry().morph(o1.getClass(), o1).equals(o2)){
-                                return false;
-                            }
-                        }else{
-                            if (!o1.equals(o2)){
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return true;
     }
 
     /**
@@ -524,7 +373,7 @@ public final class JSONArray implements JSON{
     public int hashCode(){
         int hashcode = 29;
 
-        for (Iterator e = elements.iterator(); e.hasNext();){
+        for (Iterator e = elementList.iterator(); e.hasNext();){
             Object element = e.next();
             hashcode += JSONUtils.hashCode(element);
         }
