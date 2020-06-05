@@ -23,8 +23,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
-import com.feilong.lib.json.JSONException;
-import com.feilong.lib.json.JsonConfig;
 
 /**
  * Defines a custom setter to be used when setting object values.<br>
@@ -48,78 +46,14 @@ public abstract class PropertySetStrategy{
 
     //---------------------------------------------------------------
 
-    /**
-     * 设置 property.
-     *
-     * @param bean
-     *            the bean
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @throws JSONException
-     *             the JSON exception
-     */
     public abstract void setProperty(Object bean,String key,Object value);
-
-    /**
-     * 设置 property.
-     *
-     * @param bean
-     *            the bean
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @throws JSONException
-     *             the JSON exception
-     */
-    public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig){
-        setProperty(bean, key, value);
-    }
 
     //---------------------------------------------------------------
 
-    /**
-     * The Class DefaultPropertySetStrategy.
-     */
     private static final class DefaultPropertySetStrategy extends PropertySetStrategy{
 
-        /**
-         * 设置 property.
-         *
-         * @param bean
-         *            the bean
-         * @param key
-         *            the key
-         * @param value
-         *            the value
-         * @throws JSONException
-         *             the JSON exception
-         */
         @Override
         public void setProperty(Object bean,String key,Object value){
-            setProperty(bean, key, value, new JsonConfig());
-        }
-
-        /**
-         * 设置 property.
-         *
-         * @param bean
-         *            the bean
-         * @param key
-         *            the key
-         * @param value
-         *            the value
-         * @param jsonConfig
-         *            the json config
-         * @throws JSONException
-         *             the JSON exception
-         */
-        @Override
-        public void setProperty(Object bean,String key,Object value,JsonConfig jsonConfig){
             if (bean instanceof Map){
                 ((Map) bean).put(key, value);
                 return;
@@ -129,18 +63,15 @@ public abstract class PropertySetStrategy{
             try{
                 PropertyUtils.setSimpleProperty(bean, key, value);
             }catch (Exception e){
-
                 //Ignore missing properties with Json-Lib
                 //避免出现 Unknown property <code>'orderIdAndCodeMap'</code> on class 'class com.trade.....PaymentResultEntity' 异常
-                Throwable cause = e.getCause();
                 //since 1.12.5
-                if (ClassUtil.isInstance(cause, NoSuchMethodException.class)){
-                    LOGGER.warn("in class:[{}],can't find property:[{}],now ignore~~", bean.getClass().getName(), key);
+                if (ClassUtil.isInstance(e, NoSuchMethodException.class)){
+                    LOGGER.warn("in class:[{}],can't find property:[{}],ignore~~", bean.getClass().getName(), key);
                 }else{
                     LOGGER.warn(e.getMessage(), e);
                 }
             }
         }
-
     }
 }
