@@ -36,13 +36,13 @@ import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.store.member.Person;
+import com.feilong.test.AbstractTest;
 
-public class JsonHelperTest extends AbstractJsonTest{
+public class JsonHelperTest extends AbstractTest{
 
     @Test
-    
     public void name(){
-        String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
+        String json_test = "{name=\"json\",bool:true,int:1,double:2.2,array:[1,2]}";
 
         JSONObject jsonObject = JSONObject.fromObject(json_test);
         Object bean = JSONObject.toBean(jsonObject);
@@ -51,7 +51,6 @@ public class JsonHelperTest extends AbstractJsonTest{
         assertEquals(jsonObject.get("bool"), PropertyUtil.getProperty(bean, "bool"));
         assertEquals(jsonObject.get("int"), PropertyUtil.getProperty(bean, "int"));
         assertEquals(jsonObject.get("double"), PropertyUtil.getProperty(bean, "double"));
-        assertEquals(jsonObject.get("func"), PropertyUtil.getProperty(bean, "func"));
         //Collection<?> expected = JSONArray.toCollection(jsonObject.getJSONArray("array"));
         //assertEquals(expected, PropertyUtil.getProperty(bean, "array"));
     }
@@ -96,7 +95,7 @@ public class JsonHelperTest extends AbstractJsonTest{
      * 实体Bean转json串 void.
      */
     @Test
-    
+
     public void testgetJsonStr1(){
         Person ps = new Person();
         ps.setDateAttr(now());
@@ -114,7 +113,7 @@ public class JsonHelperTest extends AbstractJsonTest{
      * list转json串 void.
      */
     @Test
-    
+
     public void testgetJsonStr4(){
         Person ps = new Person();
         ps.setDateAttr(now());

@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
+import com.feilong.lib.ezmorph.Morpher;
+import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -118,7 +120,7 @@ public final class JSONArray implements JSON{
     /**
      * The List where the JSONArray's properties are kept.
      */
-    final List elementList;
+    final List<Object> elementList;
 
     /**
      * Construct an empty JSONArray.
@@ -126,6 +128,8 @@ public final class JSONArray implements JSON{
     public JSONArray(){
         this.elementList = new ArrayList<>();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 添加.
@@ -162,6 +166,7 @@ public final class JSONArray implements JSON{
         if (index < 0){
             throw new JSONException("JSONArray[" + index + "] not found.");
         }
+        //---------------------------------------------------------------
         if (index < size()){
             this.elementList.set(index, ProcessValueUtil.processArrayValue(value, jsonConfig));
         }else{
@@ -180,7 +185,7 @@ public final class JSONArray implements JSON{
      *            An JSON value.
      * @return this.
      */
-    JSONArray add(JSONObject value){
+    JSONArray addValue(JSONObject value){
         this.elementList.add(value);
         return this;
     }
@@ -194,7 +199,7 @@ public final class JSONArray implements JSON{
      *            JSONString or the JSONNull object.
      * @return this.
      */
-    JSONArray add(Object value){
+    JSONArray addValue(Object value){
         return addValue(value, new JsonConfig());
     }
 
@@ -364,6 +369,8 @@ public final class JSONArray implements JSON{
         return this;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Hash code.
      *
@@ -378,6 +385,94 @@ public final class JSONArray implements JSON{
             hashcode += JSONUtils.hashCode(element);
         }
         return hashcode;
+    }
+
+    /**
+     * Equals.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if successful
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (obj == this){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
+
+        if (!(obj instanceof JSONArray)){
+            return false;
+        }
+
+        //---------------------------------------------------------------
+        JSONArray other = (JSONArray) obj;
+        if (other.size() != size()){
+            return false;
+        }
+        int max = size();
+        for (int i = 0; i < max; i++){
+            Object o1 = get(i);
+            Object o2 = other.get(i);
+
+            // handle nulls
+            if (JSONNull.getInstance().equals(o1)){
+                if (JSONNull.getInstance().equals(o2)){
+                    continue;
+                }
+                return false;
+            }
+            if (JSONNull.getInstance().equals(o2)){
+                return false;
+            }
+
+            if (o1 instanceof JSONArray && o2 instanceof JSONArray){
+                JSONArray e = (JSONArray) o1;
+                JSONArray a = (JSONArray) o2;
+                if (!a.equals(e)){
+                    return false;
+                }
+            }else{
+                if (o1 instanceof JSONObject && o2 instanceof JSONObject){
+                    if (!o1.equals(o2)){
+                        return false;
+                    }
+                }else if (o1 instanceof JSONArray && o2 instanceof JSONArray){
+                    if (!o1.equals(o2)){
+                        return false;
+                    }
+                }else{
+                    if (o1 instanceof String){
+                        if (!o1.equals(String.valueOf(o2))){
+                            return false;
+                        }
+                    }else if (o2 instanceof String){
+                        if (!o2.equals(String.valueOf(o1))){
+                            return false;
+                        }
+                    }else{
+                        Morpher m1 = JSONUtils.getMorpherRegistry().getMorpherFor(o1.getClass());
+                        Morpher m2 = JSONUtils.getMorpherRegistry().getMorpherFor(o2.getClass());
+                        if (m1 != null && m1 != IdentityObjectMorpher.INSTANCE){
+                            if (!o1.equals(JSONUtils.getMorpherRegistry().morph(o1.getClass(), o2))){
+                                return false;
+                            }
+                        }else if (m2 != null && m2 != IdentityObjectMorpher.INSTANCE){
+                            if (!JSONUtils.getMorpherRegistry().morph(o1.getClass(), o1).equals(o2)){
+                                return false;
+                            }
+                        }else{
+                            if (!o1.equals(o2)){
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**

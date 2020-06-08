@@ -70,6 +70,7 @@ public class JSONSerializer{
             return null;
         }
 
+        //---------------------------------------------------------------
         if (json instanceof JSONArray){
             if (jsonConfig.getArrayMode() == JsonConfig.MODE_OBJECT_ARRAY){
                 return JSONArrayToBeanUtil.toArray((JSONArray) json, jsonConfig);
@@ -117,7 +118,6 @@ public class JSONSerializer{
         if (JSONUtils.isArray(object)){
             return JSONArray.fromObject(object, jsonConfig);
         }
-
         //---------------------------------------------------------------
         try{
             return JSONObject.fromObject(object, jsonConfig);

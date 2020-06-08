@@ -22,7 +22,7 @@ import com.feilong.lib.json.JSONException;
 import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
-import com.feilong.lib.json.regexp.RegexpUtils;
+import com.feilong.lib.json.regexp.JdkRegexpMatcher;
 import com.feilong.lib.lang3.math.NumberUtils;
 
 /**
@@ -91,7 +91,7 @@ public class JSONTokener{
     @Deprecated
     public boolean matches(String pattern){
         String str = this.sourceJson.substring(this.myIndex);
-        return RegexpUtils.getMatcher(pattern).matches(str);
+        return new JdkRegexpMatcher(pattern).matches(str);
     }
 
     /**
@@ -138,13 +138,16 @@ public class JSONTokener{
     public char nextClean(){
         for (;;){
             char c = next();
+
             if (c == '/'){
                 switch (next()) {
                     case '/':
                         do{
                             c = next();
                         }while (c != '\n' && c != '\r' && c != 0);
+
                         break;
+
                     case '*':
                         for (;;){
                             c = next();
@@ -158,11 +161,15 @@ public class JSONTokener{
                                 back();
                             }
                         }
+
                         break;
+
                     default:
                         back();
+
                         return '/';
                 }
+
             }else if (c == '#'){
                 do{
                     c = next();

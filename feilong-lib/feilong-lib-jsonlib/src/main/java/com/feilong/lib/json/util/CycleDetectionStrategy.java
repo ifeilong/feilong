@@ -40,7 +40,7 @@ public abstract class CycleDetectionStrategy{
 
     //---------------------------------------------------------------
 
-    /** Returns empty array and null object */
+    /** Returns empty array and null object 排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object. */
     public static final CycleDetectionStrategy LENIENT             = new LenientCycleDetectionStrategy();
 
     /**

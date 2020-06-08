@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -33,7 +31,7 @@ import com.feilong.lib.json.util.JSONUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
-public class JSONArrayToBeanUtil{
+class JSONArrayToBeanUtil{
 
     /** Don't let anyone instantiate this class. */
     private JSONArrayToBeanUtil(){
@@ -41,6 +39,8 @@ public class JSONArrayToBeanUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns a List or a Set taking generics into account.<br/>
@@ -114,97 +114,6 @@ public class JSONArrayToBeanUtil{
     //---------------------------------------------------------------
 
     /**
-     * Creates a List from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param root
-     *            the root
-     * @param jsonConfig
-     *            the json config
-     * @return the list
-     */
-    static List toList(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
-        if (jsonArray.size() == 0 || root == null){
-            return new ArrayList<>();
-        }
-
-        //---------------------------------------------------------------
-
-        List list = new ArrayList<>();
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                list.add(null);
-                continue;
-            }
-            Class<?> type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(type)){
-                list.add(toList((JSONArray) value, root, jsonConfig));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type)){
-                list.add(value);
-            }else{
-                try{
-                    Object newRoot = ConstructorUtil.newInstance(root.getClass());
-                    list.add(JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                }catch (Exception e){
-                    throw JSONExceptionUtil.build("", e);
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Creates a java array from a JSONArray.<br>
-     *
-     * @param jsonArray
-     *            the json array
-     * @param root
-     *            the root
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    static Object toArray(JSONArray jsonArray,Object root,JsonConfig jsonConfig){
-        Class<?> objectClass = root.getClass();
-        if (jsonArray.size() == 0){
-            return Array.newInstance(objectClass, 0);
-        }
-
-        int[] dimensions = getDimensions(jsonArray);
-        Object array = Array.newInstance(objectClass == null ? Object.class : objectClass, dimensions);
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                Array.set(array, i, null);
-                continue;
-            }
-            Class<?> type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(type)){
-                Array.set(array, i, toArray((JSONArray) value, root, jsonConfig));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type) || JSONUtils.isNumber(type)
-                            || Character.class.isAssignableFrom(type)){
-                if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
-                }
-                Array.set(array, i, value);
-            }else{
-                try{
-                    Object newRoot = ConstructorUtil.newInstance(root.getClass());
-                    Array.set(array, i, JSONObject.toBean((JSONObject) value, newRoot, jsonConfig));
-                }catch (Exception e){
-                    throw JSONExceptionUtil.build("", e);
-                }
-            }
-        }
-        return array;
-    }
-
-    /**
      * Returns a List or a Set taking generics into account.<br/>
      *
      * @param jsonArray
@@ -232,6 +141,7 @@ public class JSONArrayToBeanUtil{
             return Array.newInstance(objectClass == null ? Object.class : objectClass, 0);
         }
 
+        //---------------------------------------------------------------
         int[] dimensions = getDimensions(jsonArray);
         Object array = Array.newInstance(objectClass == null ? Object.class : objectClass, dimensions);
         int size = jsonArray.size();
@@ -309,12 +219,13 @@ public class JSONArrayToBeanUtil{
      *            the json array
      * @return the dimensions
      */
-    static int[] getDimensions(JSONArray jsonArray){
+    private static int[] getDimensions(JSONArray jsonArray){
         // short circuit for empty arrays
         if (jsonArray == null || jsonArray.isEmpty()){
             return new int[] { 0 };
         }
 
+        //---------------------------------------------------------------
         List dims = new ArrayList<>();
         processArrayDimensions(jsonArray, dims, 0);
         int[] dimensions = new int[dims.size()];

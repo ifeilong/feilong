@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.beanutils.DynaBean;
 
@@ -33,11 +34,9 @@ import com.feilong.lib.ezmorph.bean.MorphDynaClass;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONArray;
 import com.feilong.lib.json.JSONException;
-import com.feilong.lib.json.JSONFunction;
 import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JsonConfig;
-import com.feilong.lib.json.regexp.RegexpUtils;
 
 /**
  * Provides useful methods on java objects and JSON values.
@@ -48,32 +47,15 @@ import com.feilong.lib.json.regexp.RegexpUtils;
 public final class JSONUtils{
 
     /** Constant for char ". */
-    public static final String           DOUBLE_QUOTE            = "\"";
+    public static final String           DOUBLE_QUOTE    = "\"";
 
     /** Constant for char '. */
-    public static final String           SINGLE_QUOTE            = "'";
-
-    //---------------------------------------------------------------
-
-    /** The Constant FUNCTION_BODY_PATTERN. */
-    private static final String          FUNCTION_BODY_PATTERN   = "^function[ ]?\\(.*?\\)[ \n\t]*\\{(.*?)\\}$";
-
-    /** The Constant FUNCTION_HEADER_PATTERN. */
-    private static final String          FUNCTION_HEADER_PATTERN = "^function[ ]?\\(.*?\\)$";
-
-    /** The Constant FUNCTION_PARAMS_PATTERN. */
-    private static final String          FUNCTION_PARAMS_PATTERN = "^function[ ]?\\((.*?)\\).*";
-
-    /** The Constant FUNCTION_PATTERN. */
-    private static final String          FUNCTION_PATTERN        = "^function[ ]?\\(.*?\\)[ \n\t]*\\{.*?\\}$";
-
-    /** The Constant FUNCTION_PREFIX. */
-    private static final String          FUNCTION_PREFIX         = "function";
+    private static final String          SINGLE_QUOTE    = "'";
 
     //---------------------------------------------------------------
 
     /** The Constant morpherRegistry. */
-    private static final MorpherRegistry morpherRegistry         = new MorpherRegistry();
+    private static final MorpherRegistry morpherRegistry = new MorpherRegistry();
 
     //---------------------------------------------------------------
 
@@ -115,55 +97,6 @@ public final class JSONUtils{
     }
 
     /**
-     * Produce a string from a double. The string "null" will be returned if the
-     * number is not finite.
-     *
-     * @param d
-     *            A double.
-     * @return A String.
-     */
-    public static String doubleToString(double d){
-        if (Double.isInfinite(d) || Double.isNaN(d)){
-            return "null";
-        }
-
-        // Shave off trailing zeros and decimal point, if possible.
-
-        String s = Double.toString(d);
-        if (s.indexOf('.') > 0 && s.indexOf('e') < 0 && s.indexOf('E') < 0){
-            while (s.endsWith("0")){
-                s = s.substring(0, s.length() - 1);
-            }
-            if (s.endsWith(".")){
-                s = s.substring(0, s.length() - 1);
-            }
-        }
-        return s;
-    }
-
-    /**
-     * Returns the body of a function literal.
-     *
-     * @param function
-     *            the function
-     * @return the function body
-     */
-    public static String getFunctionBody(String function){
-        return RegexpUtils.getMatcher(FUNCTION_BODY_PATTERN, true).getGroupIfMatches(function, 1);
-    }
-
-    /**
-     * Returns the params of a function literal.
-     *
-     * @param function
-     *            the function
-     * @return the function params
-     */
-    public static String getFunctionParams(String function){
-        return RegexpUtils.getMatcher(FUNCTION_PARAMS_PATTERN, true).getGroupIfMatches(function, 1);
-    }
-
-    /**
      * Returns the inner-most component type of an Array.
      *
      * @param type
@@ -188,8 +121,9 @@ public final class JSONUtils{
      */
     public static Map<String, Class<?>> getProperties(JSONObject jsonObject){
         Map<String, Class<?>> properties = new HashMap<>();
-        for (Iterator<String> keys = jsonObject.keys(); keys.hasNext();){
-            String key = keys.next();
+
+        Set<String> keys = jsonObject.keys();
+        for (String key : keys){
             properties.put(key, getTypeClass(jsonObject.get(key)));
         }
         return properties;
@@ -205,15 +139,12 @@ public final class JSONUtils{
      *            the obj
      * @return the type class
      */
-    public static Class<?> getTypeClass(Object obj){
+    private static Class<?> getTypeClass(Object obj){
         if (isNull(obj)){
             return Object.class;
         }
         if (isArray(obj)){
             return List.class;
-        }
-        if (isFunction(obj)){
-            return JSONFunction.class;
         }
         if (isBoolean(obj)){
             return Boolean.class;
@@ -262,7 +193,7 @@ public final class JSONUtils{
         if (value == null){
             return JSONNull.getInstance().hashCode();
         }
-        if (value instanceof JSON || value instanceof String || value instanceof JSONFunction){
+        if (value instanceof JSON || value instanceof String){
             return value.hashCode();
         }
         return String.valueOf(value).hashCode();
@@ -331,39 +262,6 @@ public final class JSONUtils{
     }
 
     /**
-     * Tests if obj is javaScript function.<br>
-     * Obj must be a non-null String and match <nowrap>"^function[ ]?\\(.*\\)[
-     * ]?\\{.*\\}$"</nowrap>
-     *
-     * @param obj
-     *            the obj
-     * @return true, if is function
-     */
-    public static boolean isFunction(Object obj){
-        if (obj instanceof String){
-            String str = (String) obj;
-            return str.startsWith(FUNCTION_PREFIX) && RegexpUtils.getMatcher(FUNCTION_PATTERN, true).matches(str);
-        }
-        return obj instanceof JSONFunction;
-    }
-
-    /**
-     * Tests if obj is javaScript function header.<br>
-     * Obj must be a non-null String and match "^function[ ]?\\(.*\\)$"
-     *
-     * @param obj
-     *            the obj
-     * @return true, if is function header
-     */
-    public static boolean isFunctionHeader(Object obj){
-        if (obj instanceof String){
-            String str = (String) obj;
-            return str.startsWith(FUNCTION_PREFIX) && RegexpUtils.getMatcher(FUNCTION_HEADER_PATTERN, true).matches(str);
-        }
-        return false;
-    }
-
-    /**
      * Returns trus if str represents a valid Java identifier.
      *
      * @param str
@@ -417,12 +315,17 @@ public final class JSONUtils{
      * @return true, if is number
      */
     public static boolean isNumber(Object obj){
-        if ((obj != null && obj.getClass() == Byte.TYPE) || (obj != null && obj.getClass() == Short.TYPE)
-                        || (obj != null && obj.getClass() == Integer.TYPE) || (obj != null && obj.getClass() == Long.TYPE)
-                        || (obj != null && obj.getClass() == Float.TYPE) || (obj != null && obj.getClass() == Double.TYPE)){
-            return true;
+        if (null != obj){
+            Class<? extends Object> class1 = obj.getClass();
+            if (class1 == Byte.TYPE || //
+                            class1 == Short.TYPE || //
+                            class1 == Integer.TYPE || //
+                            class1 == Long.TYPE || //
+                            class1 == Float.TYPE || //
+                            class1 == Double.TYPE){
+                return true;
+            }
         }
-
         return obj instanceof Number;
     }
 
@@ -434,7 +337,7 @@ public final class JSONUtils{
      * @return true, if is object
      */
     public static boolean isObject(Object obj){
-        return !isNumber(obj) && !isString(obj) && !isBoolean(obj) && !isArray(obj) && !isFunction(obj) || isNull(obj);
+        return !isNumber(obj) && !isString(obj) && !isBoolean(obj) && !isArray(obj) || isNull(obj);
     }
 
     /**
@@ -514,8 +417,8 @@ public final class JSONUtils{
         for (Iterator entries = props.entrySet().iterator(); entries.hasNext();){
             Map.Entry entry = (Map.Entry) entries.next();
             String key = (String) entry.getKey();
-            if (!JSONUtils.isJavaIdentifier(key)){
-                String parsedKey = JSONUtils.convertToJavaIdentifier(key, jsonConfig);
+            if (!isJavaIdentifier(key)){
+                String parsedKey = convertToJavaIdentifier(key, jsonConfig);
                 if (parsedKey.compareTo(key) != 0){
                     props.put(parsedKey, props.remove(key));
                 }
@@ -578,9 +481,6 @@ public final class JSONUtils{
      * @return A String correctly formatted for insertion in a JSON text.
      */
     public static String quote(String string){
-        if (isFunction(string)){
-            return string;
-        }
         if (string == null || string.length() == 0){
             return "\"\"";
         }

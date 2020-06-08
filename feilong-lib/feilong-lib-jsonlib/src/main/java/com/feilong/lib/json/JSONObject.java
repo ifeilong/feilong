@@ -15,9 +15,11 @@
  */
 package com.feilong.lib.json;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -152,21 +154,6 @@ public final class JSONObject implements JSON{
 
     }
 
-    /**
-     * Creates a bean from a JSONObject, with the specific configuration.
-     *
-     * @param jsonObject
-     *            the json object
-     * @param root
-     *            the root
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    public static Object toBean(JSONObject jsonObject,Object root,JsonConfig jsonConfig){
-        return toBean(jsonObject, root, jsonConfig);
-    }
-
     // ------------------------------------------------------
 
     /** identifies this object as null. */
@@ -224,7 +211,8 @@ public final class JSONObject implements JSON{
             if (o instanceof JSONArray){
                 ((JSONArray) o).addValue(value, jsonConfig);
             }else{
-                setInternal(key, new JSONArray().add(o).addValue(value, jsonConfig), jsonConfig);
+                JSONArray jsonArray = new JSONArray().addValue(o).addValue(value, jsonConfig);
+                setInternal(key, jsonArray, jsonConfig);
             }
         }
 
@@ -252,6 +240,8 @@ public final class JSONObject implements JSON{
         if (key == null){
             throw new JSONException("Null key.");
         }
+
+        //---------------------------------------------------------------
         if (value != null){
             value = ProcessValueUtil.processJsonObjectValue(key, value, jsonConfig);
             _setInternal(key, value);
@@ -289,10 +279,9 @@ public final class JSONObject implements JSON{
      *
      * @return An iterator of the keys.
      */
-    public Iterator<String> keys(){
+    public Set<String> keys(){
         verifyIsNull();
-        Set<String> keySet = Collections.unmodifiableSet(properties.keySet());
-        return keySet.iterator();
+        return Collections.unmodifiableSet(properties.keySet());
     }
 
     /**
@@ -304,15 +293,16 @@ public final class JSONObject implements JSON{
      * @return A JSONArray containing the key strings, or null if the JSONObject
      *         is empty.
      */
-    public JSONArray names(JsonConfig jsonConfig){
+    public List<String> names(JsonConfig jsonConfig){
         verifyIsNull();
 
-        JSONArray jsonArray = new JSONArray();
-        Iterator<String> keys = keys();
-        while (keys.hasNext()){
-            jsonArray.addValue(keys.next(), jsonConfig);
+        List<String> list = newArrayList();
+
+        Set<String> keys = keys();
+        for (String key : keys){
+            list.add((String) ProcessValueUtil.processArrayValue(key, jsonConfig));
         }
-        return jsonArray;
+        return list;
     }
 
     /**

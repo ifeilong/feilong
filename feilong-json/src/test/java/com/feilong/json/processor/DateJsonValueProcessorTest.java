@@ -18,16 +18,12 @@ package com.feilong.json.processor;
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateUtil.toDate;
-import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
-
-import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.processor.DateJsonValueProcessor;
-import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
 import com.feilong.store.member.User;
@@ -40,11 +36,8 @@ import com.feilong.store.member.User;
  */
 public class DateJsonValueProcessorTest{
 
-    /**
-     * Test date json value processor.
-     */
     @Test
-    public void testDateJsonValueProcessor(){
+    public void test(){
         User user = new User("feilong1", 24);
         user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
 
@@ -62,11 +55,8 @@ public class DateJsonValueProcessorTest{
         User user = new User("feilong1", 24);
         user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
 
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        propertyNameAndJsonValueProcessorMap.put("date", DateJsonValueProcessor.DEFAULT_INSTANCE);
-
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
-        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(toMap("date", DateJsonValueProcessor.DEFAULT_INSTANCE));
         jsonFormatConfig.setIncludes("date");
 
         assertEquals("{\"date\": \"2016-08-15 13:30:00\"}", JsonUtil.format(user, jsonFormatConfig));
@@ -80,11 +70,9 @@ public class DateJsonValueProcessorTest{
         User user = new User("feilong1", 24);
         user.setDate(toDate("2016-08-15", COMMON_DATE));
 
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
-        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(
+                        toMap("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
         jsonFormatConfig.setIncludes("date");
 
         assertEquals("{\"date\": \"2016-08-15 00:00:00.000\"}", JsonUtil.format(user, jsonFormatConfig));

@@ -52,6 +52,8 @@ public final class JsonConfigBuilder{
      */
     private static final String[]                          SENSITIVE_WORDS_PROPERTY_NAMES     = { "password", "key" };
 
+    //---------------------------------------------------------------
+
     /**
      * 初始化
      * 
@@ -74,6 +76,8 @@ public final class JsonConfigBuilder{
                     //since 1.14.0 
                     //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
                     Pair.of(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE));
+
+    //---------------------------------------------------------------
 
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
     public static final JsonConfig                         DEFAULT_JAVA_TO_JSON_CONFIG        = buildDefaultJavaToJsonConfig();
@@ -136,7 +140,6 @@ public final class JsonConfigBuilder{
         if (useJavaToJsonConfig.getIsMaskDefaultSensitiveWords()){
             registerDefaultJsonValueProcessor(jsonConfig);
         }
-
         return jsonConfig;
     }
 
@@ -219,11 +222,6 @@ public final class JsonConfigBuilder{
      */
     static JsonConfig buildDefaultJavaToJsonConfig(){
         JsonConfig jsonConfig = new JsonConfig();
-
-        //---------------------------------------------------------------
-        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-        //默认会过滤的几个key "class", "declaringClass","metaClass"  
-        jsonConfig.setIgnoreDefaultExcludes(false);
 
         //---------------------------------------------------------------
         for (Map.Entry<Class<?>, JsonValueProcessor> entry : DEFAULT_CLASS_JSON_VALUE_PROCESSOR.entrySet()){

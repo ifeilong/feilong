@@ -23,7 +23,9 @@ import java.util.regex.Pattern;
  * JDK 1.4+ RegexpMatcher implementation.
  * 
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
+ * @deprecated maybe can 删除
  */
+@Deprecated
 public class JdkRegexpMatcher implements RegexpMatcher{
 
     /** The pattern. */

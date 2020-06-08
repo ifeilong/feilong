@@ -44,7 +44,7 @@ public class JSONObjectSetValueCore{
                 if (o instanceof JSONArray){
                     ((JSONArray) o).addString((String) value);
                 }else{
-                    jsonObject.properties.put(key, new JSONArray().add(o).addString((String) value));
+                    jsonObject.properties.put(key, new JSONArray().addValue(o).addString((String) value));
                 }
             }else{
                 jsonObject.accumulate(key, value, jsonConfig);
@@ -59,7 +59,6 @@ public class JSONObjectSetValueCore{
         }
 
         //---------------------------------------------------------------
-
         value = jsonObject.get(key);
         if (accumulated){
             JSONArray array = (JSONArray) value;

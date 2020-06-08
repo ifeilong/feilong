@@ -25,10 +25,10 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -1150,7 +1150,6 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
-     * @see com.feilong.lib.json.JSONObject#keys()
      * @see #toBean(Object, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
      * @since 1.9.4
@@ -1169,9 +1168,8 @@ public final class JsonUtil{
         Map<String, T> map = newLinkedHashMap();
         try{
             JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
-            Iterator<String> keys = jsonObject.keys();
-            while (keys.hasNext()){
-                String key = keys.next();
+            Set<String> keys = jsonObject.keys();
+            for (String key : keys){
                 Object value = jsonObject.get(key);
                 LOGGER.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
 

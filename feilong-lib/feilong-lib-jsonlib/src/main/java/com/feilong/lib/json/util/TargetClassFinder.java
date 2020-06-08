@@ -18,7 +18,7 @@ package com.feilong.lib.json.util;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.feilong.lib.json.regexp.RegexpUtils;
+import com.feilong.lib.json.regexp.JdkRegexpMatcher;
 
 /**
  * 
@@ -48,16 +48,16 @@ public class TargetClassFinder{
      *            the class map
      * @return the class
      */
-    public static Class<?> findTargetClass(String key,Map classMap){
+    public static Class<?> findTargetClass(String key,Map<String, Class<?>> classMap){
         // try get first
-        Class<?> targetClass = (Class<?>) classMap.get(key);
+        Class<?> targetClass = classMap.get(key);
 
         if (targetClass == null){
             // try with regexp
             // this will hit performance as it must iterate over all the keys and create a RegexpMatcher for each key
             for (Iterator i = classMap.entrySet().iterator(); i.hasNext();){
                 Map.Entry entry = (Map.Entry) i.next();
-                if (RegexpUtils.getMatcher((String) entry.getKey()).matches(key)){
+                if (new JdkRegexpMatcher((String) entry.getKey()).matches(key)){
                     targetClass = (Class<?>) entry.getValue();
                     break;
                 }

@@ -29,8 +29,6 @@ import java.util.Set;
 
 import com.feilong.lib.json.processors.DefaultDefaultValueProcessor;
 import com.feilong.lib.json.processors.DefaultValueProcessor;
-import com.feilong.lib.json.processors.JsonBeanProcessor;
-import com.feilong.lib.json.processors.JsonBeanProcessorMatcher;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessorMatcher;
@@ -38,6 +36,8 @@ import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * Utility class that helps configuring the serialization process.
@@ -46,89 +46,64 @@ import com.feilong.lib.lang3.StringUtils;
  */
 public class JsonConfig{
 
-    private static final JsonBeanProcessorMatcher      DEFAULT_JSON_BEAN_PROCESSOR_MATCHER     = JsonBeanProcessorMatcher.DEFAULT;
+    //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+    //默认会过滤的几个key "class", "declaringClass","metaClass"  
+    private static final String[]                      DEFAULT_EXCLUDES                 = toArray("class", "declaringClass", "metaClass");
 
-    private static final PropertyNameProcessorMatcher  DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER = PropertyNameProcessorMatcher.DEFAULT;
+    private static final int                           MODE_LIST                        = 1;
 
-    private static final JavaIdentifierTransformer     DEFAULT_JAVA_IDENTIFIER_TRANSFORMER     = JavaIdentifierTransformer.NOOP;
+    public static final int                            MODE_OBJECT_ARRAY                = 2;
 
-    private static final DefaultValueProcessor         DEFAULT_VALUE_PROCESSOR                 = DefaultDefaultValueProcessor.INSTANCE;
-
-    /** 排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object. */
-    private static final CycleDetectionStrategy        DEFAULT_CYCLE_DETECTION                 = CycleDetectionStrategy.LENIENT;
-
-    //---------------------------------------------------------------
-
-    private static final String[]                      DEFAULT_EXCLUDES                        = toArray(
-                    "class",
-                    "declaringClass",
-                    "metaClass");
-
-    //---------------------------------------------------------------
-
-    private static final int                           MODE_LIST                               = 1;
-
-    public static final int                            MODE_OBJECT_ARRAY                       = 2;
-
-    private static final int                           MODE_SET                                = 2;
+    private static final int                           MODE_SET                         = 2;
 
     //---------------------------------------------------------------
 
     /** Array conversion mode. */
-    private int                                        arrayMode                               = MODE_LIST;
-
-    /** The bean processor map. */
-    private final Map<Class<?>, JsonBeanProcessor>     beanProcessorMap                        = new HashMap<>();
+    private int                                        arrayMode                        = MODE_LIST;
 
     /** The excludes. */
-    private String[]                                   excludes                                = EMPTY_STRING_ARRAY;
+    private String[]                                   excludes                         = EMPTY_STRING_ARRAY;
 
     /** The default value map. */
-    private final Map<Class<?>, DefaultValueProcessor> defaultValueMap                         = new HashMap<>();
-
-    /** The ignore default excludes. */
-    private boolean                                    ignoreDefaultExcludes                   = false;
+    private final Map<Class<?>, DefaultValueProcessor> defaultValueMap                  = new HashMap<>();
 
     /** The java identifier transformer. */
-    private JavaIdentifierTransformer                  javaIdentifierTransformer               = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
+    private JavaIdentifierTransformer                  javaIdentifierTransformer        = JavaIdentifierTransformer.NOOP;
 
     /** The java property filter. */
     private PropertyFilter                             javaPropertyFilter;
     //---------------------------------------------------------------
 
     /** The collection type. */
-    private Class<?>                                   collectionType                          = List.class;
+    private Class<?>                                   collectionType                   = List.class;
 
     /** The cycle detection strategy. */
-    private CycleDetectionStrategy                     cycleDetectionStrategy                  = DEFAULT_CYCLE_DETECTION;
+    private CycleDetectionStrategy                     cycleDetectionStrategy           = CycleDetectionStrategy.LENIENT;
 
     //---------------------------------------------------------------
 
     /** The java property name processor map. */
-    private final Map<Class<?>, PropertyNameProcessor> javaPropertyNameProcessorMap            = new HashMap<>();
+    private final Map<Class<?>, PropertyNameProcessor> javaPropertyNameProcessorMap     = new HashMap<>();
 
     /** The key map. */
-    private final Map<String, JsonValueProcessor>      keyMap                                  = new HashMap<>();
+    private final Map<String, JsonValueProcessor>      keyMap                           = new HashMap<>();
 
     /** The type map. */
-    private final Map<Class<?>, JsonValueProcessor>    typeMap                                 = new HashMap<>();
+    private final Map<Class<?>, JsonValueProcessor>    typeMap                          = new HashMap<>();
 
     //---------------------------------------------------------------
 
     /** The java property name processor matcher. */
-    private PropertyNameProcessorMatcher               javaPropertyNameProcessorMatcher        = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
-
-    /** The json bean processor matcher. */
-    private JsonBeanProcessorMatcher                   jsonBeanProcessorMatcher                = DEFAULT_JSON_BEAN_PROCESSOR_MATCHER;
+    private PropertyNameProcessorMatcher               javaPropertyNameProcessorMatcher = PropertyNameProcessorMatcher.DEFAULT;
 
     /** The json property filter. */
     private PropertyFilter                             jsonPropertyFilter;
 
     /** The json property name processor map. */
-    private final Map<Class<?>, PropertyNameProcessor> jsonPropertyNameProcessorMap            = new HashMap<>();
+    private final Map<Class<?>, PropertyNameProcessor> jsonPropertyNameProcessorMap     = new HashMap<>();
 
     /** The json property name processor matcher. */
-    private PropertyNameProcessorMatcher               jsonPropertyNameProcessorMatcher        = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
+    private PropertyNameProcessorMatcher               jsonPropertyNameProcessorMatcher = PropertyNameProcessorMatcher.DEFAULT;
 
     //---------------------------------------------------------------
 
@@ -156,7 +131,7 @@ public class JsonConfig{
                 return processor;
             }
         }
-        return DEFAULT_VALUE_PROCESSOR;
+        return DefaultDefaultValueProcessor.INSTANCE;
     }
 
     /**
@@ -173,23 +148,6 @@ public class JsonConfig{
             Object key = javaPropertyNameProcessorMatcher.getMatch(beanClass, javaPropertyNameProcessorMap.keySet());
             return javaPropertyNameProcessorMap.get(key);
 
-        }
-        return null;
-    }
-
-    /**
-     * Finds a JsonBeanProcessor registered to the target class.<br>
-     * Returns null if none is registered.<br>
-     * [Java -&gt; JSON]
-     *
-     * @param target
-     *            a class used for searching a JsonBeanProcessor.
-     * @return the json bean processor
-     */
-    public JsonBeanProcessor findJsonBeanProcessor(Class<?> target){
-        if (!beanProcessorMap.isEmpty()){
-            Class<?> key = jsonBeanProcessorMatcher.getMatch(target, beanProcessorMap.keySet());
-            return beanProcessorMap.get(key);
         }
         return null;
     }
@@ -365,17 +323,6 @@ public class JsonConfig{
     }
 
     /**
-     * Returns the configured JsonBeanProcessorMatcher.<br>
-     * Default value is JsonBeanProcessorMatcher.DEFAULT<br>
-     * [JSON -&gt; Java]
-     *
-     * @return the json bean processor matcher
-     */
-    public JsonBeanProcessorMatcher getJsonBeanProcessorMatcher(){
-        return jsonBeanProcessorMatcher;
-    }
-
-    /**
      * Returns the configured property filter when serializing to JSON.<br>
      * [Java -&gt; JSON]
      *
@@ -400,11 +347,9 @@ public class JsonConfig{
             }
         }
 
-        if (!ignoreDefaultExcludes){
-            for (int i = 0; i < DEFAULT_EXCLUDES.length; i++){
-                if (!exclusions.contains(DEFAULT_EXCLUDES[i])){
-                    exclusions.add(DEFAULT_EXCLUDES[i]);
-                }
+        for (int i = 0; i < DEFAULT_EXCLUDES.length; i++){
+            if (!exclusions.contains(DEFAULT_EXCLUDES[i])){
+                exclusions.add(DEFAULT_EXCLUDES[i]);
             }
         }
         return exclusions;
@@ -449,21 +394,6 @@ public class JsonConfig{
     public void registerJavaPropertyNameProcessor(Class<?> target,PropertyNameProcessor propertyNameProcessor){
         if (target != null && propertyNameProcessor != null){
             javaPropertyNameProcessorMap.put(target, propertyNameProcessor);
-        }
-    }
-
-    /**
-     * Registers a JsonBeanProcessor.<br>
-     * [Java -&gt; JSON]
-     * 
-     * @param target
-     *            the class to use as key
-     * @param jsonBeanProcessor
-     *            the processor to register
-     */
-    public void registerJsonBeanProcessor(Class<?> target,JsonBeanProcessor jsonBeanProcessor){
-        if (target != null && jsonBeanProcessor != null){
-            beanProcessorMap.put(target, jsonBeanProcessor);
         }
     }
 
@@ -571,7 +501,7 @@ public class JsonConfig{
      *            the new cycle detection strategy
      */
     public void setCycleDetectionStrategy(CycleDetectionStrategy cycleDetectionStrategy){
-        this.cycleDetectionStrategy = defaultIfNull(cycleDetectionStrategy, DEFAULT_CYCLE_DETECTION);
+        this.cycleDetectionStrategy = defaultIfNull(cycleDetectionStrategy, CycleDetectionStrategy.LENIENT);
     }
 
     /**
@@ -587,17 +517,6 @@ public class JsonConfig{
     }
 
     /**
-     * Sets if default excludes would be skipped when building.<br>
-     * [Java -&gt; JSON]
-     *
-     * @param ignoreDefaultExcludes
-     *            the new ignore default excludes
-     */
-    public void setIgnoreDefaultExcludes(boolean ignoreDefaultExcludes){
-        this.ignoreDefaultExcludes = ignoreDefaultExcludes;
-    }
-
-    /**
      * Sets the JavaIdentifierTransformer to use.<br>
      * Will set default value (JavaIdentifierTransformer.NOOP) if null.<br>
      * [JSON -&gt; Java]
@@ -606,8 +525,7 @@ public class JsonConfig{
      *            the new java identifier transformer
      */
     public void setJavaIdentifierTransformer(JavaIdentifierTransformer javaIdentifierTransformer){
-        this.javaIdentifierTransformer = javaIdentifierTransformer == null ? DEFAULT_JAVA_IDENTIFIER_TRANSFORMER
-                        : javaIdentifierTransformer;
+        this.javaIdentifierTransformer = javaIdentifierTransformer == null ? JavaIdentifierTransformer.NOOP : javaIdentifierTransformer;
     }
 
     /**
@@ -630,20 +548,8 @@ public class JsonConfig{
      *            the new java property name processor matcher
      */
     public void setJavaPropertyNameProcessorMatcher(PropertyNameProcessorMatcher propertyNameProcessorMatcher){
-        this.javaPropertyNameProcessorMatcher = propertyNameProcessorMatcher == null ? DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER
+        this.javaPropertyNameProcessorMatcher = propertyNameProcessorMatcher == null ? PropertyNameProcessorMatcher.DEFAULT
                         : propertyNameProcessorMatcher;
-    }
-
-    /**
-     * Sets a JsonBeanProcessorMatcher to use.<br>
-     * Will set default value (JsonBeanProcessorMatcher.DEFAULT) if null.<br>
-     * [Java -&gt; JSON]
-     *
-     * @param jsonBeanProcessorMatcher
-     *            the new json bean processor matcher
-     */
-    public void setJsonBeanProcessorMatcher(JsonBeanProcessorMatcher jsonBeanProcessorMatcher){
-        this.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher == null ? DEFAULT_JSON_BEAN_PROCESSOR_MATCHER : jsonBeanProcessorMatcher;
     }
 
     /**
@@ -666,7 +572,7 @@ public class JsonConfig{
      *            the new json property name processor matcher
      */
     public void setJsonPropertyNameProcessorMatcher(PropertyNameProcessorMatcher propertyNameProcessorMatcher){
-        this.jsonPropertyNameProcessorMatcher = propertyNameProcessorMatcher == null ? DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER
+        this.jsonPropertyNameProcessorMatcher = propertyNameProcessorMatcher == null ? PropertyNameProcessorMatcher.DEFAULT
                         : propertyNameProcessorMatcher;
     }
 
@@ -679,34 +585,6 @@ public class JsonConfig{
      */
     public void setRootClass(Class<?> rootClass){
         this.rootClass = rootClass;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Resets all values to its default state.
-     */
-    public void reset(){
-        excludes = EMPTY_STRING_ARRAY;
-        ignoreDefaultExcludes = false;
-        javaIdentifierTransformer = DEFAULT_JAVA_IDENTIFIER_TRANSFORMER;
-        cycleDetectionStrategy = DEFAULT_CYCLE_DETECTION;
-        arrayMode = MODE_LIST;
-        rootClass = null;
-        classMap = null;
-        keyMap.clear();
-        typeMap.clear();
-        jsonPropertyFilter = null;
-        javaPropertyFilter = null;
-        jsonBeanProcessorMatcher = DEFAULT_JSON_BEAN_PROCESSOR_MATCHER;
-        defaultValueMap.clear();
-        //ignoreJPATransient = false;
-        collectionType = List.class;
-        javaPropertyNameProcessorMap.clear();
-        javaPropertyNameProcessorMatcher = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
-        jsonPropertyNameProcessorMap.clear();
-        jsonPropertyNameProcessorMatcher = DEFAULT_PROPERTY_NAME_PROCESSOR_MATCHER;
-        beanProcessorMap.clear();
     }
 
     //---------------------------------------------------------------
@@ -727,15 +605,12 @@ public class JsonConfig{
             jsonConfig.excludes = new String[excludes.length];
             System.arraycopy(excludes, 0, jsonConfig.excludes, 0, excludes.length);
         }
-        jsonConfig.ignoreDefaultExcludes = ignoreDefaultExcludes;
         jsonConfig.javaIdentifierTransformer = javaIdentifierTransformer;
         jsonConfig.keyMap.putAll(keyMap);
-        jsonConfig.beanProcessorMap.putAll(beanProcessorMap);
         jsonConfig.rootClass = rootClass;
         jsonConfig.typeMap.putAll(typeMap);
         jsonConfig.jsonPropertyFilter = jsonPropertyFilter;
         jsonConfig.javaPropertyFilter = javaPropertyFilter;
-        jsonConfig.jsonBeanProcessorMatcher = jsonBeanProcessorMatcher;
         jsonConfig.defaultValueMap.putAll(defaultValueMap);
         jsonConfig.collectionType = collectionType;
         jsonConfig.javaPropertyNameProcessorMatcher = javaPropertyNameProcessorMatcher;
@@ -743,6 +618,17 @@ public class JsonConfig{
         jsonConfig.jsonPropertyNameProcessorMatcher = jsonPropertyNameProcessorMatcher;
         jsonConfig.jsonPropertyNameProcessorMap.putAll(jsonPropertyNameProcessorMap);
         return jsonConfig;
+    }
+
+    //---------------------------------------------------------------
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.NO_CLASS_NAME_STYLE);
     }
 
 }

@@ -57,21 +57,9 @@ public class ProcessValueUtil{
                 }
             }
         }
-        return _processArrayValue(value, jsonConfig);
-    }
 
-    /**
-     * Process value.
-     *
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    private static Object _processArrayValue(Object value,JsonConfig jsonConfig){
         if (value instanceof JSONTokener){
-            return JSONArrayBuilder._fromJSONTokener((JSONTokener) value, jsonConfig);
+            return JSONTokenerParser.toJSONArray((JSONTokener) value, jsonConfig);
         }
         if (value != null && Enum.class.isAssignableFrom(value.getClass())){
             return ((Enum) value).name();
@@ -79,7 +67,7 @@ public class ProcessValueUtil{
         if (value instanceof Annotation || (value != null && value.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
         }
-        return ProcessValueUtil.processValue(value, jsonConfig);
+        return processValue(value, jsonConfig);
     }
     //---------------------------------------------------------------
 
@@ -104,21 +92,8 @@ public class ProcessValueUtil{
                 }
             }
         }
-        return _processJSONObjectValue(value, jsonConfig);
-    }
-
-    /**
-     * Process value.
-     *
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    private static Object _processJSONObjectValue(Object value,JsonConfig jsonConfig){
         if (value instanceof JSONTokener){
-            return JSONObjectBuilder._fromJSONTokener((JSONTokener) value, jsonConfig);
+            return JSONTokenerParser.toJSONObject((JSONTokener) value, jsonConfig);
         }
         if (value != null && Enum.class.isAssignableFrom(value.getClass())){
             return ((Enum) value).name();
@@ -137,7 +112,7 @@ public class ProcessValueUtil{
      *            the json config
      * @return the object
      */
-    static Object processValue(Object value,JsonConfig jsonConfig){
+    private static Object processValue(Object value,JsonConfig jsonConfig){
         if (JSONNull.getInstance().equals(value)){
             return JSONNull.getInstance();
         }
@@ -146,13 +121,6 @@ public class ProcessValueUtil{
         }
 
         //---------------------------------------------------------------
-        if (JSONUtils.isFunction(value)){
-            if (value instanceof String){
-                value = JSONFunction.parse((String) value);
-            }
-            return value;
-        }
-
         if (value instanceof JSON){
             return JSONSerializer.toJSON(value, jsonConfig);
         }
@@ -165,9 +133,6 @@ public class ProcessValueUtil{
             String str = String.valueOf(value);
             if (JSONUtils.hasQuotes(str)){
                 String stripped = JSONUtils.stripQuotes(str);
-                if (JSONUtils.isFunction(stripped)){
-                    return JSONUtils.DOUBLE_QUOTE + stripped + JSONUtils.DOUBLE_QUOTE;
-                }
                 if (stripped.startsWith("[") && stripped.endsWith("]")){
                     return stripped;
                 }
@@ -176,6 +141,8 @@ public class ProcessValueUtil{
                 }
                 return str;
             }
+
+            //---------------------------------------------------------------
             if (JSONUtils.isJsonKeyword(str)){
                 return str;
             }

@@ -23,10 +23,8 @@ import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
-import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.IsIgnoreUtil;
-import com.feilong.lib.json.util.JSONExceptionUtil;
-import com.feilong.lib.json.util.KeyUpdate;
+import com.feilong.lib.json.util.PropertyNameProcessorUtil;
 import com.feilong.lib.json.util.PropertyFilter;
 
 /**
@@ -34,73 +32,55 @@ import com.feilong.lib.json.util.PropertyFilter;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
-public class BeanProcessing{
+public class DefaultBeanProcesser{
 
     /** Don't let anyone instantiate this class. */
-    private BeanProcessing(){
+    private DefaultBeanProcesser(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Default bean processing.
-     *
-     * @param bean
-     *            the bean
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON object
-     */
-    static JSONObject defaultBeanProcessing(Object bean,JsonConfig jsonConfig){
+    static JSONObject process(Object bean,JSONObject jsonObject,JsonConfig jsonConfig) throws Exception{
         Class<?> beanClass = bean.getClass();
         PropertyNameProcessor propertyNameProcessor = jsonConfig.findJsonPropertyNameProcessor(beanClass);
         Collection<String> exclusions = jsonConfig.getMergedExcludes();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
         //---------------------------------------------------------------
-        JSONObject jsonObject = new JSONObject();
-        try{
-            PropertyDescriptor[] propertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
+        PropertyDescriptor[] propertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
 
-            for (int i = 0; i < propertyDescriptors.length; i++){
-                PropertyDescriptor propertyDescriptor = propertyDescriptors[i];
+        for (int i = 0; i < propertyDescriptors.length; i++){
+            PropertyDescriptor propertyDescriptor = propertyDescriptors[i];
 
-                if (IsIgnoreUtil.isIgnore(beanClass, propertyDescriptor, exclusions)){
-                    continue;
-                }
-
-                //---------------------------------------------------------------
-                String key = propertyDescriptor.getName();
-                Object value = PropertyUtils.getSimpleProperty(bean, key);
-                if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
-                    continue;
-                }
-
-                //FIXME
-                //                if (bean.getClass().getName().equals("com.feilong.store.member.User")){
-                //                    continue;
-                //                }
-                //---------------------------------------------------------------
-                Class<?> type = propertyDescriptor.getPropertyType();
-                //FIXME
-                //                if (bean.getClass().getName().equals("1com.feilong.store.member.User")){
-                //                    return null;
-                //                }
-
-                //FIXME
-                //if (!bean.getClass().getName().equals("com.feilong.store.member.User")){
-                set(jsonObject, beanClass, key, value, type, jsonConfig, propertyNameProcessor);
-                //}
+            if (IsIgnoreUtil.isIgnore(beanClass, propertyDescriptor, exclusions)){
+                continue;
             }
 
             //---------------------------------------------------------------
-        }catch (Exception e){
-            CycleSetUtil.removeInstance(bean);
-            throw JSONExceptionUtil.build("", e);
+            String key = propertyDescriptor.getName();
+            Object value = PropertyUtils.getSimpleProperty(bean, key);
+            if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
+                continue;
+            }
+
+            //FIXME
+            //                if (bean.getClass().getName().equals("com.feilong.store.member.User")){
+            //                    continue;
+            //                }
+            //---------------------------------------------------------------
+            Class<?> type = propertyDescriptor.getPropertyType();
+            //FIXME
+            //                if (bean.getClass().getName().equals("1com.feilong.store.member.User")){
+            //                    return null;
+            //                }
+
+            //FIXME
+            //if (!bean.getClass().getName().equals("com.feilong.store.member.User")){
+            set(jsonObject, beanClass, key, value, type, jsonConfig, propertyNameProcessor);
+            //}
         }
+        //---------------------------------------------------------------
         return jsonObject;
     }
 
@@ -124,7 +104,7 @@ public class BeanProcessing{
             }
         }
         //---------------------------------------------------------------
-        key = KeyUpdate.update(beanClass, key, propertyNameProcessor);
+        key = PropertyNameProcessorUtil.update(beanClass, key, propertyNameProcessor);
         JSONObjectSetValueCore.setValue(jsonObject, key, value, type, jsonConfig, bypass);
     }
 

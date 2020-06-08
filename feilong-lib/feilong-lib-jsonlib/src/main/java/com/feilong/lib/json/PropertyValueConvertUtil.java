@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.feilong.lib.ezmorph.Morpher;
+import com.feilong.lib.ezmorph.MorpherRegistry;
 import com.feilong.lib.ezmorph.array.ObjectArrayMorpher;
 import com.feilong.lib.ezmorph.bean.BeanMorpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
@@ -43,21 +44,6 @@ public class PropertyValueConvertUtil{
 
     //---------------------------------------------------------------
 
-    /**
-     * Convert property value to list.
-     *
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @param name
-     *            the name
-     * @param classMap
-     *            the class map
-     * @return the list
-     */
     static List toList(String key,Object value,JsonConfig jsonConfig,String name,Map<String, Class<?>> classMap){
         Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
         targetClass = targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
@@ -68,23 +54,6 @@ public class PropertyValueConvertUtil{
         return (List) JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
     }
 
-    /**
-     * Convert property value to collection.
-     *
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @param jsonConfig
-     *            the json config
-     * @param name
-     *            the name
-     * @param classMap
-     *            the class map
-     * @param collectionType
-     *            the collection type
-     * @return the collection
-     */
     static Collection toCollection(
                     String key,
                     Object value,
@@ -104,21 +73,6 @@ public class PropertyValueConvertUtil{
         return JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
     }
 
-    /**
-     * Convert property value to array.
-     *
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @param targetType
-     *            the target type
-     * @param jsonConfig
-     *            the json config
-     * @param classMap
-     *            the class map
-     * @return the object
-     */
     static Object toArray(String key,Object value,Class<?> targetType,JsonConfig jsonConfig,Map<String, Class<?>> classMap){
         Class<?> innerType = JSONUtils.getInnerComponentType(targetType);
         Class<?> targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
@@ -127,24 +81,28 @@ public class PropertyValueConvertUtil{
         }
 
         //---------------------------------------------------------------
-
         JsonConfig jsonConfigCopy = jsonConfig.copy();
         jsonConfigCopy.setRootClass(innerType);
         jsonConfigCopy.setClassMap(classMap);
 
+        //---------------------------------------------------------------
+        MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
         Object array = JSONArrayToBeanUtil.toArray((JSONArray) value, jsonConfigCopy);
-        if (innerType.isPrimitive() || JSONUtils.isNumber(innerType) || Boolean.class.isAssignableFrom(innerType)
-                        || JSONUtils.isString(innerType)){
-            array = JSONUtils.getMorpherRegistry().morph(Array.newInstance(innerType, 0).getClass(), array);
 
-        }else if (!array.getClass().equals(targetType)){
+        if (innerType.isPrimitive() || //
+                        JSONUtils.isNumber(innerType) || //
+                        Boolean.class.isAssignableFrom(innerType) || //
+                        JSONUtils.isString(innerType)){
+            return morpherRegistry.morph(Array.newInstance(innerType, 0).getClass(), array);
+        }
+        //---------------------------------------------------------------
+        if (!array.getClass().equals(targetType)){
             if (!targetType.equals(Object.class)){
-                Morpher morpher = JSONUtils.getMorpherRegistry().getMorpherFor(Array.newInstance(innerType, 0).getClass());
+                Morpher morpher = morpherRegistry.getMorpherFor(Array.newInstance(innerType, 0).getClass());
                 if (IdentityObjectMorpher.INSTANCE.equals(morpher)){
-                    ObjectArrayMorpher beanMorpher = new ObjectArrayMorpher(new BeanMorpher(innerType, JSONUtils.getMorpherRegistry()));
-                    JSONUtils.getMorpherRegistry().registerMorpher(beanMorpher);
+                    morpherRegistry.registerMorpher(new ObjectArrayMorpher(new BeanMorpher(innerType, morpherRegistry)));
                 }
-                array = JSONUtils.getMorpherRegistry().morph(Array.newInstance(innerType, 0).getClass(), array);
+                array = morpherRegistry.morph(Array.newInstance(innerType, 0).getClass(), array);
             }
         }
         return array;
