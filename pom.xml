@@ -59,7 +59,8 @@
 		<!-- https://docs.sonarqube.org/latest/analysis/analysis-parameters/ -->
 		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
 
-		<version.spring>5.2.6.RELEASE</version.spring>
+		<!-- https://github.com/spring-projects/spring-framework/releases -->
+		<version.spring>5.2.7.RELEASE</version.spring>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
@@ -73,75 +74,12 @@
 
 		<!-- http://www.bouncycastle.org/java.html -->
 		<version.bcprov-jdk15on>1.55</version.bcprov-jdk15on>
-		<version.commons-chain>1.2</version.commons-chain>
-
-		<!-- http://commons.apache.org/proper/commons-beanutils/changes-report.html -->
-		<version.commons-beanutils>1.9.4</version.commons-beanutils>
-
-		<!-- http://commons.apache.org/proper/commons-codec/changes-report.html#a1.12 -->
-		<version.commons-codec>1.14</version.commons-codec>
-		<version.commons-collections>3.2.2</version.commons-collections>
-		<!-- http://commons.apache.org/proper/commons-collections/index.html -->
-		<!-- 4.3 需要 jdk1.8 -->
-		<version.commons-collections4>4.4</version.commons-collections4>
-
-		<!--
-			The Apache Commons Compress library defines an API for working with ar, cpio, Unix dump, tar, zip, gzip, XZ, Pack200, bzip2, 7z, arj, lzma, snappy, DEFLATE,
-			lz4, Brotli, Zstandard, DEFLATE64 and Z files.
-
-			The code in this component has many origins:
-
-			The bzip2, tar and zip support came from Avalon's Excalibur, but originally from Ant, as far as life in Apache goes.
-			The tar package is originally Tim Endres' public domain package.
-			The bzip2 package is based on the work done by Keiron Liddle as well as Julian Seward's libbzip2.
-			It has migrated via:
-			Ant -> Avalon-Excalibur -> Commons-IO -> Commons-Compress.
-			The cpio package has been contributed by Michael Kuss and the jRPM project.
-		-->
-
-		<!-- http://commons.apache.org/proper/commons-compress/ -->
-		<!--
-			1.20 (requires JDK 1.7+)
-		-->
-		<version.commons-compress>1.20</version.commons-compress>
-
-		<!-- http://commons.apache.org/proper/commons-digester/ -->
-		<version.commons-digester3>3.2</version.commons-digester3>
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
 		<version.commons-fileupload>1.4</version.commons-fileupload>
 
-		<!-- https://search.maven.org/artifact/ognl/ognl -->
-		<!-- OGNL - Object Graph Navigation Library -->
-		<version.ognl>3.2.14</version.ognl>
-
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<version.httpcomponents>4.5.12</version.httpcomponents>
-
-		<!-- http://commons.apache.org/proper/commons-lang/ -->
-		<!-- https://github.com/apache/commons-lang/blob/master/RELEASE-NOTES.txt -->
-		<!--
-			Lang 3.9 and onwards now targets Java 8, making use of features that arrived with Java 8.
-			Commons Lang 3.6 at least requires Java 7.0.
-			Note that this has changed from Commons Lang 3.5, which only required Java 1.6
-		-->
-		<version.commons-lang3>3.10</version.commons-lang3>
-
-		<!-- http://commons.apache.org/proper/commons-logging/download_logging.cgi -->
-		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-
-		<!-- see in http://commons.apache.org/proper/commons-io/index.html -->
-		<!--
-			Commons IO 2.6 (requires JDK 1.7+)
-			Commons IO 2.5 (requires JDK 1.6+)
-		-->
-		<version.commons-io>2.6</version.commons-io>
-
-		<!-- see in http://commons.apache.org/proper/commons-net/index.html -->
-		<version.commons-net>3.6</version.commons-net>
-
-		<!-- http://commons.apache.org/proper/commons-validator/download_validator.cgi -->
-		<version.commons-validator>1.6</version.commons-validator>
 
 		<version.cxf>3.1.11</version.cxf>
 
@@ -181,11 +119,6 @@
 
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.30</version.slf4j>
-
-
-		<!-- http://x-stream.github.io/news.html -->
-		<!-- #133: XStream 1.4.11 fails to run on a Java Runtime < 8. -->
-		<version.xstream>1.4.12</version.xstream>
 
 		<!-- http://velocity.apache.org/news.html -->
 		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
@@ -534,46 +467,12 @@
 
 			<!-- *********************apache******************************* -->
 
-			<!-- commons-lang3 -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-lang3</artifactId>
-				<version>${version.commons-lang3}</version>
-			</dependency>
-
-			<!-- commons-compress -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-compress</artifactId>
-				<version>${version.commons-compress}</version>
-			</dependency>
-
 			<dependency>
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk15on</artifactId>
 				<version>${version.bcprov-jdk15on}</version>
 			</dependency>
 
-			<!-- commons-validator -->
-			<dependency>
-				<groupId>commons-validator</groupId>
-				<artifactId>commons-validator</artifactId>
-				<version>${version.commons-validator}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-beanutils</artifactId>
-						<groupId>commons-beanutils</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>commons-collections</artifactId>
-						<groupId>commons-collections</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
 
 			<!-- jsch 用于sftp 传输 -->
 			<dependency>
@@ -589,12 +488,6 @@
 				<version>${version.jsoup}</version>
 			</dependency>
 
-			<!-- commons-net -->
-			<dependency>
-				<groupId>commons-net</groupId>
-				<artifactId>commons-net</artifactId>
-				<version>${version.commons-net}</version>
-			</dependency>
 
 			<!--
 				HttpCore is a set of low level HTTP transport components that can be used to build custom client and server side HTTP services with a minimal footprint.
@@ -635,31 +528,6 @@
 				<version>${version.httpcomponents}</version>
 			</dependency>
 
-			<!-- commons-beanutils -->
-			<dependency>
-				<groupId>commons-beanutils</groupId>
-				<artifactId>commons-beanutils</artifactId>
-				<version>${version.commons-beanutils}</version>
-			</dependency>
-
-			<!-- commons-codec -->
-			<dependency>
-				<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
-				<version>${version.commons-codec}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-digester3</artifactId>
-				<version>${version.commons-digester3}</version>
-			</dependency>
-
-			<dependency>
-				<artifactId>commons-chain</artifactId>
-				<groupId>commons-chain</groupId>
-				<version>${version.commons-chain}</version>
-			</dependency>
 
 			<dependency>
 				<groupId>org.apache.velocity</groupId>
@@ -667,38 +535,11 @@
 				<version>${version.velocity-engine}</version>
 			</dependency>
 
-			<!-- commons-collections Requires Java 1.2+ 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-			<dependency>
-				<groupId>commons-collections</groupId>
-				<artifactId>commons-collections</artifactId>
-				<version>${version.commons-collections}</version>
-			</dependency>
-
-			<!-- commons-collections4 Requires Java 5.0+ -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-collections4</artifactId>
-				<version>${version.commons-collections4}</version>
-			</dependency>
-
 			<!-- commons-fileupload -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>${version.commons-fileupload}</version>
-			</dependency>
-
-			<!-- commons-io -->
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>${version.commons-io}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>ognl</groupId>
-				<artifactId>ognl</artifactId>
-				<version>${version.ognl}</version>
 			</dependency>
 
 			<!-- ***************************** poi ***************************** -->
@@ -719,11 +560,11 @@
 						<groupId>com.github.virtuald</groupId>
 						<artifactId>curvesapi</artifactId>
 					</exclusion>
-					<!-- 不能少  Caused by: java.lang.ClassNotFoundException: org.apache.commons.compress.archivers.zip.ZipFile -->
+					<!-- 不能少 Caused by: java.lang.ClassNotFoundException: org.apache.commons.compress.archivers.zip.ZipFile -->
 					<!-- <exclusion>
 						<groupId>org.apache.commons</groupId>
 						<artifactId>commons-compress</artifactId>
-					</exclusion> -->
+						</exclusion> -->
 				</exclusions>
 			</dependency>
 
@@ -735,12 +576,6 @@
 			</dependency>
 
 			<!-- *********************json******************************* -->
-			<!-- xstream -->
-			<dependency>
-				<groupId>com.thoughtworks.xstream</groupId>
-				<artifactId>xstream</artifactId>
-				<version>${version.xstream}</version>
-			</dependency>
 
 			<!--******** slf4j******** -->
 			<dependency>
