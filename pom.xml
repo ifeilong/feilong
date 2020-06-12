@@ -200,7 +200,7 @@
 
 		<!-- http://maven.apache.org/plugins/maven-war-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MWAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-war-plugin>3.2.3</v.maven-war-plugin>
+		<v.maven-war-plugin>3.3.0</v.maven-war-plugin>
 
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
 
