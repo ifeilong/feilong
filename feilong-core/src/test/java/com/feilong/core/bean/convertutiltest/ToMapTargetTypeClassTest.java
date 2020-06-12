@@ -18,10 +18,10 @@ package com.feilong.core.bean.convertutiltest;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +38,7 @@ public class ToMapTargetTypeClassTest{
     /**
      * Test same class type.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testSameClassType(){
         Map<String, String> map = toMap("1", "2");
@@ -51,6 +52,7 @@ public class ToMapTargetTypeClassTest{
     /**
      * Test array.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testMap(){
         Map<String, String> map = toMap("1", "2,2");
@@ -61,6 +63,7 @@ public class ToMapTargetTypeClassTest{
         assertThat(returnMap, allOf(hasEntry(1, toArray(2, 2))));
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testMapNullKeyClass1(){
         Map<String, String> map = toMap("1", "2,2");
@@ -71,6 +74,7 @@ public class ToMapTargetTypeClassTest{
         assertThat(returnMap, allOf(hasEntry("1", toArray(2, 2))));
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testMapNullValueClass1(){
         Map<String, String> map = toMap("1", "2,2");
@@ -84,6 +88,7 @@ public class ToMapTargetTypeClassTest{
     /**
      * Test array to array.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testMapToArray(){
         Map<String[], String[]> map = toMap(toArray("1"), toArray("2", "8"));
@@ -99,6 +104,7 @@ public class ToMapTargetTypeClassTest{
     /**
      * Test array null key class.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testMapNullKeyClass(){
         Map<String, String> map = toMap("1", "2,2");
@@ -111,6 +117,7 @@ public class ToMapTargetTypeClassTest{
     /**
      * Test array null value class.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testMapNullValueClass(){
         Map<String, String> map = toMap("1", "2,2");
