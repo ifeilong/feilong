@@ -88,23 +88,15 @@ public class ExcelReaderUtil{
      *            the sheet definition path
      * @param sheetName
      *            the sheet name
-     * @param dataName
-     *            the data name
      * @param sheetNo
      *            the sheet no
      * @return the map
      */
-    public static Map<String, Object> readData(
-                    String excelLocation,
-                    String sheetDefinitionLocation,
-                    String sheetName,
-                    String dataName,
-                    int sheetNo){
-
+    public static Map<String, Object> readData(String excelLocation,String sheetDefinitionLocation,String sheetName,int sheetNo){
         ExcelReader excelReader = build(sheetDefinitionLocation, sheetName);
 
         InputStream inputStream = InputStreamUtil.getInputStream(excelLocation);
-        return readData(excelReader, inputStream, dataName, sheetNo);
+        return readData(excelReader, inputStream, sheetNo);
     }
 
     private static ExcelReader build(String sheetDefinitionLocation,String sheetName){
@@ -176,7 +168,7 @@ public class ExcelReaderUtil{
     private static <T> List<T> read(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
         Date beginDate = new Date();
 
-        Map<String, Object> beans = readData(excelReader, inputStream, dataName, sheetNo);
+        Map<String, Object> beans = readData(excelReader, inputStream, sheetNo);
         //--------------------------------------------------------------- 
         List<T> list = loadData(beans, dataName);
         if (LOGGER.isInfoEnabled()){
@@ -190,6 +182,7 @@ public class ExcelReaderUtil{
         return list;
     }
 
+    @SuppressWarnings("unchecked")
     private static <T> List<T> loadData(Map<String, Object> beans,String dataName){
         if (isNotNullOrEmpty(dataName)){
             return (List<T>) beans.get(dataName);
@@ -205,19 +198,15 @@ public class ExcelReaderUtil{
     /**
      * Read data.
      *
-     * @param <T>
-     *            the generic type
      * @param excelReader
      *            the excel reader
      * @param inputStream
      *            the input stream
-     * @param dataName
-     *            the data name
      * @param sheetNo
      *            the sheet no
      * @return the map
      */
-    private static Map<String, Object> readData(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
+    private static Map<String, Object> readData(ExcelReader excelReader,InputStream inputStream,int sheetNo){
         Map<String, Object> beans = newLinkedHashMap();
 
         ReadStatus readStatus = excelReader.readSheet(inputStream, sheetNo, beans);

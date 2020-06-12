@@ -23,21 +23,21 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  *
  * @author Joe Walnes
  */
-public class CharArrayConverter implements Converter {
+public class CharArrayConverter implements Converter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && type.isArray() && type.getComponentType().equals(char.class);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         char[] chars = (char[]) source;
         writer.setValue(new String(chars));
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         return reader.getValue().toCharArray();
     }
 }

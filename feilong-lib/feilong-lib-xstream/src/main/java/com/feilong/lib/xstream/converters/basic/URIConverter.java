@@ -15,24 +15,23 @@ import java.net.URISyntaxException;
 
 import com.feilong.lib.xstream.converters.ConversionException;
 
-
 /**
  * Converts a java.net.URI to a string.
  * 
  * @author Carlos Roman
  */
-public class URIConverter extends AbstractSingleValueConverter {
+public class URIConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == URI.class;
     }
 
     @Override
-    public Object fromString(String str) {
-        try {
+    public Object fromString(String str){
+        try{
             return new URI(str);
-        } catch (URISyntaxException e) {
+        }catch (URISyntaxException e){
             throw new ConversionException(e);
         }
     }

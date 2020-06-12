@@ -21,31 +21,36 @@ import java.util.Iterator;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public interface ErrorWriter {
+public interface ErrorWriter{
 
     /**
      * Add some information to the error message. The information will be added even
      * if the identifier is already in use.
      *
-     * @param name        something to identify the type of information (e.g. 'XPath').
-     * @param information detail of the message (e.g. '/blah/moo[3]'
+     * @param name
+     *            something to identify the type of information (e.g. 'XPath').
+     * @param information
+     *            detail of the message (e.g. '/blah/moo[3]'
      */
-    void add(String name, String information);
+    void add(String name,String information);
 
     /**
      * Set some information to the error message. If the identifier is already in use, the
      * new information will replace the old one.
      *
-     * @param name        something to identify the type of information (e.g. 'XPath').
-     * @param information detail of the message (e.g. '/blah/moo[3]'
+     * @param name
+     *            something to identify the type of information (e.g. 'XPath').
+     * @param information
+     *            detail of the message (e.g. '/blah/moo[3]'
      * @since 1.4
      */
-    void set(String name, String information);
+    void set(String name,String information);
 
     /**
      * Retrieve information of the error message.
      * 
-     * @param errorKey the key of the message
+     * @param errorKey
+     *            the key of the message
      * @return the value
      * @since 1.3
      */

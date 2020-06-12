@@ -23,31 +23,32 @@ import com.feilong.lib.xstream.io.WriterWrapper;
  *
  * @author Joe Walnes
  */
-public class PathTrackingWriter extends WriterWrapper {
+public class PathTrackingWriter extends WriterWrapper{
 
     private final PathTracker pathTracker;
-    private final boolean isNameEncoding;
 
-    public PathTrackingWriter(HierarchicalStreamWriter writer, PathTracker pathTracker) {
+    private final boolean     isNameEncoding;
+
+    public PathTrackingWriter(HierarchicalStreamWriter writer, PathTracker pathTracker){
         super(writer);
         this.isNameEncoding = writer.underlyingWriter() instanceof AbstractWriter;
         this.pathTracker = pathTracker;
     }
 
     @Override
-    public void startNode(String name) {
-        pathTracker.pushElement(isNameEncoding ? ((AbstractWriter)wrapped.underlyingWriter()).encodeNode(name) : name);
-        super.startNode(name); 
+    public void startNode(String name){
+        pathTracker.pushElement(isNameEncoding ? ((AbstractWriter) wrapped.underlyingWriter()).encodeNode(name) : name);
+        super.startNode(name);
     }
 
     @Override
-    public void startNode(String name, Class clazz) {
-        pathTracker.pushElement(isNameEncoding ? ((AbstractWriter)wrapped.underlyingWriter()).encodeNode(name) : name);
+    public void startNode(String name,Class clazz){
+        pathTracker.pushElement(isNameEncoding ? ((AbstractWriter) wrapped.underlyingWriter()).encodeNode(name) : name);
         super.startNode(name, clazz);
     }
 
     @Override
-    public void endNode() {
+    public void endNode(){
         super.endNode();
         pathTracker.popElement();
     }

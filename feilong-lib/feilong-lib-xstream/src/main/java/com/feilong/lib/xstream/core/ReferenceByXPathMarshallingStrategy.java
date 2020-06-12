@@ -16,26 +16,31 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-public class ReferenceByXPathMarshallingStrategy extends AbstractTreeMarshallingStrategy {
+public class ReferenceByXPathMarshallingStrategy extends AbstractTreeMarshallingStrategy{
 
-    public static int RELATIVE = 0;
-    public static int ABSOLUTE = 1;
+    public static int RELATIVE    = 0;
+
+    public static int ABSOLUTE    = 1;
+
     public static int SINGLE_NODE = 2;
+
     private final int mode;
 
-    public ReferenceByXPathMarshallingStrategy(int mode) {
+    public ReferenceByXPathMarshallingStrategy(int mode){
         this.mode = mode;
     }
 
     @Override
-    protected TreeUnmarshaller createUnmarshallingContext(Object root,
-        HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper) {
+    protected TreeUnmarshaller createUnmarshallingContext(
+                    Object root,
+                    HierarchicalStreamReader reader,
+                    ConverterLookup converterLookup,
+                    Mapper mapper){
         return new ReferenceByXPathUnmarshaller(root, reader, converterLookup, mapper);
     }
 
     @Override
-    protected TreeMarshaller createMarshallingContext(
-        HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper) {
+    protected TreeMarshaller createMarshallingContext(HierarchicalStreamWriter writer,ConverterLookup converterLookup,Mapper mapper){
         return new ReferenceByXPathMarshaller(writer, converterLookup, mapper, mode);
     }
 }

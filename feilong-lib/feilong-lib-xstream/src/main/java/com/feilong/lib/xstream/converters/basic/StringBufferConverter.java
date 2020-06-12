@@ -16,15 +16,15 @@ package com.feilong.lib.xstream.converters.basic;
  *
  * @author Joe Walnes
  */
-public class StringBufferConverter extends AbstractSingleValueConverter {
+public class StringBufferConverter extends AbstractSingleValueConverter{
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return new StringBuffer(str);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == StringBuffer.class;
     }
 }

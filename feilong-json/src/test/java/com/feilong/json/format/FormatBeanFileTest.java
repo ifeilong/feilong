@@ -15,6 +15,10 @@
  */
 package com.feilong.json.format;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+
 import java.io.File;
 
 import org.junit.Test;
@@ -28,12 +32,20 @@ public class FormatBeanFileTest extends AbstractJsonTest{
 
     @Test
     public void test(){
-        File file = new File(SystemUtil.USER_HOME + "/work/eclipse feilong.sh");
+        String path = SystemUtil.USER_HOME + "/work/eclipse feilong.sh";
+
         BeanWithFile beanWithFile = new BeanWithFile();
         beanWithFile.setName("jim");
-        beanWithFile.setFile(file);
+        beanWithFile.setFile(new File(path));
 
-        LOGGER.debug(JsonUtil.format(beanWithFile));
+        String format = JsonUtil.format(beanWithFile);
+        assertThat(
+                        format,
+                        allOf(//
+                                        containsString("\"file\": \"" + path + "\""),
+                                        containsString("\"name\": \"jim\"")
+                        //
+                        ));
     }
 
 }

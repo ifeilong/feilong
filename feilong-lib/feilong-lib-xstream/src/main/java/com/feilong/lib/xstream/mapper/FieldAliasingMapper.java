@@ -22,28 +22,29 @@ import com.feilong.lib.xstream.core.util.FastField;
  *
  * @author Joe Walnes
  */
-public class FieldAliasingMapper extends MapperWrapper {
+public class FieldAliasingMapper extends MapperWrapper{
 
-    protected final Map fieldToAliasMap = new HashMap();
-    protected final Map aliasToFieldMap = new HashMap();
+    protected final Map                 fieldToAliasMap = new HashMap();
+
+    protected final Map                 aliasToFieldMap = new HashMap();
+
     private final ElementIgnoringMapper elementIgnoringMapper;
 
-    public FieldAliasingMapper(Mapper wrapped) {
+    public FieldAliasingMapper(Mapper wrapped){
         super(wrapped);
-        elementIgnoringMapper = 
-            (ElementIgnoringMapper)lookupMapperOfType(ElementIgnoringMapper.class);
+        elementIgnoringMapper = (ElementIgnoringMapper) lookupMapperOfType(ElementIgnoringMapper.class);
     }
 
-    public void addFieldAlias(String alias, Class type, String fieldName) {
+    public void addFieldAlias(String alias,Class type,String fieldName){
         fieldToAliasMap.put(key(type, fieldName), alias);
         aliasToFieldMap.put(key(type, alias), fieldName);
     }
-    
+
     /**
      * @deprecated As of 1.4.9 use {@link ElementIgnoringMapper#addElementsToIgnore(Pattern)}.
      */
-    public void addFieldsToIgnore(final Pattern pattern) {
-        if (elementIgnoringMapper != null) {
+    public void addFieldsToIgnore(final Pattern pattern){
+        if (elementIgnoringMapper != null){
             elementIgnoringMapper.addElementsToIgnore(pattern);
         }
     }
@@ -51,41 +52,40 @@ public class FieldAliasingMapper extends MapperWrapper {
     /**
      * @deprecated As of 1.4.9 use {@link ElementIgnoringMapper#omitField(Class, String)}.
      */
-    public void omitField(Class definedIn, String fieldName) {
-        if (elementIgnoringMapper != null) {
+    public void omitField(Class definedIn,String fieldName){
+        if (elementIgnoringMapper != null){
             elementIgnoringMapper.omitField(definedIn, fieldName);
         }
     }
 
-    private Object key(Class type, String name) {
+    private Object key(Class type,String name){
         return new FastField(type, name);
     }
 
     @Override
-    public String serializedMember(Class type, String memberName) {
+    public String serializedMember(Class type,String memberName){
         String alias = getMember(type, memberName, fieldToAliasMap);
-        if (alias == null) {
+        if (alias == null){
             return super.serializedMember(type, memberName);
-        } else {
+        }else{
             return alias;
         }
     }
 
     @Override
-    public String realMember(Class type, String serialized) {
+    public String realMember(Class type,String serialized){
         String real = getMember(type, serialized, aliasToFieldMap);
-        if (real == null) {
+        if (real == null){
             return super.realMember(type, serialized);
-        } else {
+        }else{
             return real;
         }
     }
 
-    private String getMember(Class type, String name, Map map) {
+    private String getMember(Class type,String name,Map map){
         String member = null;
-        for (Class declaringType = type; 
-                member == null && declaringType != Object.class && declaringType != null; 
-                declaringType = declaringType.getSuperclass()) {
+        for (Class declaringType = type; member == null && declaringType != Object.class
+                        && declaringType != null; declaringType = declaringType.getSuperclass()){
             member = (String) map.get(key(declaringType, name));
         }
         return member;

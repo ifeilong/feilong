@@ -16,7 +16,6 @@ import com.feilong.lib.xstream.converters.SingleValueConverter;
 import com.feilong.lib.xstream.core.ClassLoaderReference;
 import com.feilong.lib.xstream.core.util.Primitives;
 
-
 /**
  * Default mapper implementation with 'vanilla' functionality.
  * <p>
@@ -26,134 +25,135 @@ import com.feilong.lib.xstream.core.util.Primitives;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class DefaultMapper implements Mapper {
+public class DefaultMapper implements Mapper{
 
     private static String XSTREAM_PACKAGE_ROOT;
-    static {
+    static{
         String packageName = DefaultMapper.class.getName();
         int idx = packageName.indexOf(".xstream.");
-        XSTREAM_PACKAGE_ROOT = idx > 0 ? packageName.substring(0, idx+9) : ".N/A";
+        XSTREAM_PACKAGE_ROOT = idx > 0 ? packageName.substring(0, idx + 9) : ".N/A";
     }
-    
+
     private final ClassLoaderReference classLoaderReference;
 
-    
     /**
      * Construct a DefaultMapper.
      *
-     * @param classLoaderReference the reference to the classloader used by the XStream instance.
+     * @param classLoaderReference
+     *            the reference to the classloader used by the XStream instance.
      * @since 1.4.5
      */
-    public DefaultMapper(ClassLoaderReference classLoaderReference) {
+    public DefaultMapper(ClassLoaderReference classLoaderReference){
         this.classLoaderReference = classLoaderReference;
     }
 
     /**
      * Construct a DefaultMapper.
      *
-     * @param classLoader the ClassLoader used by the XStream instance.
+     * @param classLoader
+     *            the ClassLoader used by the XStream instance.
      * @deprecated As of 1.4.5 use {@link #DefaultMapper(ClassLoaderReference)}
      */
-    public DefaultMapper(ClassLoader classLoader) {
+    public DefaultMapper(ClassLoader classLoader){
         this(new ClassLoaderReference(classLoader));
     }
 
     @Override
-    public String serializedClass(Class type) {
+    public String serializedClass(Class type){
         return type.getName();
     }
 
     @Override
-    public Class realClass(String elementName) {
+    public Class realClass(String elementName){
         Class resultingClass = Primitives.primitiveType(elementName);
-        if( resultingClass != null ){
+        if (resultingClass != null){
             return resultingClass;
         }
-        try {
+        try{
             boolean initialize = true;
             final ClassLoader classLoader;
-            if (elementName.startsWith(XSTREAM_PACKAGE_ROOT)) {
+            if (elementName.startsWith(XSTREAM_PACKAGE_ROOT)){
                 classLoader = DefaultMapper.class.getClassLoader();
-            } else {
+            }else{
                 classLoader = classLoaderReference.getReference();
                 initialize = elementName.charAt(0) == '[';
             }
             return Class.forName(elementName, initialize, classLoader);
-        } catch (ClassNotFoundException e) {
+        }catch (ClassNotFoundException e){
             throw new CannotResolveClassException(elementName);
         }
     }
 
     @Override
-    public Class defaultImplementationOf(Class type) {
+    public Class defaultImplementationOf(Class type){
         return type;
     }
 
     @Override
-    public String aliasForAttribute(String attribute) {
+    public String aliasForAttribute(String attribute){
         return attribute;
     }
 
     @Override
-    public String attributeForAlias(String alias) {
+    public String attributeForAlias(String alias){
         return alias;
     }
 
     @Override
-    public String aliasForSystemAttribute(String attribute) {
+    public String aliasForSystemAttribute(String attribute){
         return attribute;
     }
 
     @Override
-    public boolean isImmutableValueType(Class type) {
+    public boolean isImmutableValueType(Class type){
         return false;
     }
 
     @Override
-    public boolean isReferenceable(final Class type) {
+    public boolean isReferenceable(final Class type){
         return true;
     }
 
     @Override
-    public String getFieldNameForItemTypeAndName(Class definedIn, Class itemType, String itemFieldName) {
+    public String getFieldNameForItemTypeAndName(Class definedIn,Class itemType,String itemFieldName){
         return null;
     }
 
     @Override
-    public Class getItemTypeForItemFieldName(Class definedIn, String itemFieldName) {
+    public Class getItemTypeForItemFieldName(Class definedIn,String itemFieldName){
         return null;
     }
 
     @Override
-    public ImplicitCollectionMapping getImplicitCollectionDefForFieldName(Class itemType, String fieldName) {
+    public ImplicitCollectionMapping getImplicitCollectionDefForFieldName(Class itemType,String fieldName){
         return null;
     }
 
     @Override
-    public boolean shouldSerializeMember(Class definedIn, String fieldName) {
+    public boolean shouldSerializeMember(Class definedIn,String fieldName){
         return true;
     }
-    
+
     @Override
-    public boolean isIgnoredElement(String name) {
+    public boolean isIgnoredElement(String name){
         return false;
     }
 
-    public String lookupName(Class type) {
+    public String lookupName(Class type){
         return serializedClass(type);
     }
 
-    public Class lookupType(String elementName) {
+    public Class lookupType(String elementName){
         return realClass(elementName);
     }
 
     @Override
-    public String serializedMember(Class type, String memberName) {
+    public String serializedMember(Class type,String memberName){
         return memberName;
     }
 
     @Override
-    public String realMember(Class type, String serialized) {
+    public String realMember(Class type,String serialized){
         return serialized;
     }
 
@@ -161,7 +161,7 @@ public class DefaultMapper implements Mapper {
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromAttribute(String name) {
+    public SingleValueConverter getConverterFromAttribute(String name){
         return null;
     }
 
@@ -169,7 +169,7 @@ public class DefaultMapper implements Mapper {
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromItemType(String fieldName, Class type) {
+    public SingleValueConverter getConverterFromItemType(String fieldName,Class type){
         return null;
     }
 
@@ -177,52 +177,53 @@ public class DefaultMapper implements Mapper {
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromItemType(Class type) {
+    public SingleValueConverter getConverterFromItemType(Class type){
         return null;
     }
 
     @Override
-    public SingleValueConverter getConverterFromItemType(String fieldName, Class type,
-        Class definedIn) {
+    public SingleValueConverter getConverterFromItemType(String fieldName,Class type,Class definedIn){
         return null;
     }
 
     @Override
-    public Converter getLocalConverter(Class definedIn, String fieldName) {
+    public Converter getLocalConverter(Class definedIn,String fieldName){
         return null;
     }
 
     @Override
-    public Mapper lookupMapperOfType(Class type) {
+    public Mapper lookupMapperOfType(Class type){
         return null;
     }
 
     /**
-     * @deprecated As of 1.3, use combination of {@link #serializedMember(Class, String)} and {@link #getConverterFromItemType(String, Class, Class)} 
+     * @deprecated As of 1.3, use combination of {@link #serializedMember(Class, String)} and
+     *             {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public String aliasForAttribute(Class definedIn, String fieldName) {
+    public String aliasForAttribute(Class definedIn,String fieldName){
         return fieldName;
     }
 
     /**
-     * @deprecated As of 1.3, use combination of {@link #realMember(Class, String)} and {@link #getConverterFromItemType(String, Class, Class)} 
+     * @deprecated As of 1.3, use combination of {@link #realMember(Class, String)} and
+     *             {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public String attributeForAlias(Class definedIn, String alias) {
+    public String attributeForAlias(Class definedIn,String alias){
         return alias;
     }
 
     /**
-     * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)} 
+     * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromAttribute(Class definedIn, String attribute) {
+    public SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute){
         return null;
     }
 
     @Override
-    public SingleValueConverter getConverterFromAttribute(Class definedIn, String attribute, Class type) {
+    public SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute,Class type){
         return null;
     }
 }

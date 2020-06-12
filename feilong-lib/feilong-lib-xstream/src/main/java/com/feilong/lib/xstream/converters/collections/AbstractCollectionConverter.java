@@ -27,43 +27,45 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * Base helper class for converters that need to handle
  * collections of items (arrays, Lists, Maps, etc).
  *
- * <p>Typically, subclasses of this will converter the outer
+ * <p>
+ * Typically, subclasses of this will converter the outer
  * structure of the collection, loop through the contents and
- * call readItem() or writeItem() for each item.</p>
+ * call readItem() or writeItem() for each item.
+ * </p>
  *
  * @author Joe Walnes
  */
-public abstract class AbstractCollectionConverter implements Converter {
+public abstract class AbstractCollectionConverter implements Converter{
 
     private final Mapper mapper;
 
     @Override
     public abstract boolean canConvert(Class type);
 
-    public AbstractCollectionConverter(Mapper mapper) {
+    public AbstractCollectionConverter(Mapper mapper){
         this.mapper = mapper;
     }
 
-    protected Mapper mapper() {
+    protected Mapper mapper(){
         return mapper;
     }
 
     @Override
-    public abstract void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context);
+    public abstract void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context);
 
     @Override
-    public abstract Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context);
+    public abstract Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context);
 
     /**
      * @deprecated As of 1.4.11 use {@link #writeCompleteItem(Object, MarshallingContext, HierarchicalStreamWriter)}
      *             instead.
      */
-    protected void writeItem(Object item, MarshallingContext context, HierarchicalStreamWriter writer) {
+    protected void writeItem(Object item,MarshallingContext context,HierarchicalStreamWriter writer){
         // PUBLISHED API METHOD! If changing signature, ensure backwards compatibility.
-        if (item == null) {
+        if (item == null){
             // todo: this is duplicated in TreeMarshaller.start()
             writeNullItem(context, writer);
-        } else {
+        }else{
             String name = mapper().serializedClass(item.getClass());
             ExtendedHierarchicalStreamWriterHelper.startNode(writer, name, item.getClass());
             writeBareItem(item, context, writer);
@@ -74,26 +76,30 @@ public abstract class AbstractCollectionConverter implements Converter {
     /**
      * Write an item of the collection into the writer including surrounding tags.
      *
-     * @param item the item to write
-     * @param context the current marshalling context
-     * @param writer the target writer
+     * @param item
+     *            the item to write
+     * @param context
+     *            the current marshalling context
+     * @param writer
+     *            the target writer
      * @since 1.4.11
      */
-    protected void writeCompleteItem(final Object item, final MarshallingContext context,
-            final HierarchicalStreamWriter writer) {
+    protected void writeCompleteItem(final Object item,final MarshallingContext context,final HierarchicalStreamWriter writer){
         writeItem(item, context, writer);
     }
 
     /**
      * Write the bare item of the collection into the writer.
      *
-     * @param item the item to write
-     * @param context the current marshalling context
-     * @param writer the target writer
+     * @param item
+     *            the item to write
+     * @param context
+     *            the current marshalling context
+     * @param writer
+     *            the target writer
      * @since 1.4.11
      */
-    protected void writeBareItem(final Object item, final MarshallingContext context,
-            final HierarchicalStreamWriter writer) {
+    protected void writeBareItem(final Object item,final MarshallingContext context,final HierarchicalStreamWriter writer){
         context.convertAnother(item);
     }
 
@@ -101,11 +107,13 @@ public abstract class AbstractCollectionConverter implements Converter {
      * Write a null item of the collection into the writer. The method readItem should be able to process the written
      * data i.e. it has to write the tags or may not write anything at all.
      *
-     * @param context the current marshalling context
-     * @param writer the target writer
+     * @param context
+     *            the current marshalling context
+     * @param writer
+     *            the target writer
      * @since 1.4.11
      */
-    protected void writeNullItem(final MarshallingContext context, final HierarchicalStreamWriter writer) {
+    protected void writeNullItem(final MarshallingContext context,final HierarchicalStreamWriter writer){
         final String name = mapper().serializedClass(null);
         ExtendedHierarchicalStreamWriterHelper.startNode(writer, name, Mapper.Null.class);
         writer.endNode();
@@ -115,22 +123,23 @@ public abstract class AbstractCollectionConverter implements Converter {
      * @deprecated As of 1.4.11 use {@link #readBareItem(HierarchicalStreamReader, UnmarshallingContext, Object)} or
      *             {@link #readCompleteItem(HierarchicalStreamReader, UnmarshallingContext, Object)} instead.
      */
-    protected Object readItem(final HierarchicalStreamReader reader, final UnmarshallingContext context,
-            final Object current) {
+    protected Object readItem(final HierarchicalStreamReader reader,final UnmarshallingContext context,final Object current){
         return readBareItem(reader, context, current);
     }
 
     /**
      * Read a bare item of the collection from the reader.
      *
-     * @param reader the source reader
-     * @param context the unmarshalling context
-     * @param current the target collection (if already available)
+     * @param reader
+     *            the source reader
+     * @param context
+     *            the unmarshalling context
+     * @param current
+     *            the target collection (if already available)
      * @return the read item
      * @since 1.4.11
      */
-    protected Object readBareItem(final HierarchicalStreamReader reader, final UnmarshallingContext context,
-            final Object current) {
+    protected Object readBareItem(final HierarchicalStreamReader reader,final UnmarshallingContext context,final Object current){
         Class type = HierarchicalStreams.readClassType(reader, mapper());
         return context.convertAnother(current, type);
     }
@@ -138,28 +147,30 @@ public abstract class AbstractCollectionConverter implements Converter {
     /**
      * Read an item of the collection including the tags from the reader.
      *
-     * @param reader the source reader
-     * @param context the unmarshalling context
-     * @param current the target collection (if already available)
+     * @param reader
+     *            the source reader
+     * @param context
+     *            the unmarshalling context
+     * @param current
+     *            the target collection (if already available)
      * @return the read item
      * @since 1.4.11
      */
-    protected Object readCompleteItem(final HierarchicalStreamReader reader, final UnmarshallingContext context,
-            final Object current) {
+    protected Object readCompleteItem(final HierarchicalStreamReader reader,final UnmarshallingContext context,final Object current){
         reader.moveDown();
         final Object result = readItem(reader, context, current);
         reader.moveUp();
         return result;
     }
 
-    protected Object createCollection(Class type) {
+    protected Object createCollection(Class type){
         ErrorWritingException ex = null;
         Class defaultType = mapper().defaultImplementationOf(type);
-        try {
+        try{
             return defaultType.newInstance();
-        } catch (InstantiationException e) {
-            ex =  new ConversionException("Cannot instantiate default collection", e);
-        } catch (IllegalAccessException e) {
+        }catch (InstantiationException e){
+            ex = new ConversionException("Cannot instantiate default collection", e);
+        }catch (IllegalAccessException e){
             ex = new ObjectAccessException("Cannot instantiate default collection", e);
         }
         ex.add("collection-type", type.getName());

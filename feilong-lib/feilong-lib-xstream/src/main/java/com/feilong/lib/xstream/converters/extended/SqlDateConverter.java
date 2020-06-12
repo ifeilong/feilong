@@ -18,17 +18,17 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 /**
  * Converts a java.sql.Date to text.
  *
- * @author Jose A. Illescas 
+ * @author Jose A. Illescas
  */
-public class SqlDateConverter extends AbstractSingleValueConverter {
+public class SqlDateConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Date.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return Date.valueOf(str);
     }
 

@@ -47,7 +47,7 @@ public class ConnectionConfigBuilderBeanDefinitionBuilderBuilder{
         return beanDefinitionBuilder;
     }
 
-    public static ConnectionConfigBuilder build(Element element){
+    public static ConnectionConfigBuilder<Object> build(Element element){
 
         final String userName = element.getAttribute("userName");
         final String password = element.getAttribute("password");
@@ -63,7 +63,7 @@ public class ConnectionConfigBuilderBeanDefinitionBuilderBuilder{
 
         //---------------------------------------------------------------
 
-        ConnectionConfigBuilder connectionConfigBuilder = new ConnectionConfigBuilder(){
+        ConnectionConfigBuilder<Object> connectionConfigBuilder = new ConnectionConfigBuilder<Object>(){
 
             @Override
             public ConnectionConfig build(Object request){

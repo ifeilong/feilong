@@ -15,25 +15,24 @@ import java.time.Year;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link Year} instance to string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class YearConverter extends AbstractSingleValueConverter {
+public class YearConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return Year.class == type;
     }
 
     @Override
-    public Year fromString(final String str) {
-        try {
+    public Year fromString(final String str){
+        try{
             return Year.of(Integer.parseInt(str));
-        } catch (final NumberFormatException ex) {
+        }catch (final NumberFormatException ex){
             final ConversionException exception = new ConversionException("Cannot parse value as year", ex);
             exception.add("value", str);
             throw exception;

@@ -17,7 +17,6 @@ import java.util.GregorianCalendar;
 
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * A DateConverter conforming to the ISO8601 standard.
  * http://www.iso.ch/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBER=26780
@@ -25,23 +24,24 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  * @author Mauro Talevi
  * @author J&ouml;rg Schaible
  */
-public class ISO8601DateConverter extends AbstractSingleValueConverter {
+public class ISO8601DateConverter extends AbstractSingleValueConverter{
+
     private final ISO8601GregorianCalendarConverter converter = new ISO8601GregorianCalendarConverter();
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Date.class && converter.canConvert(GregorianCalendar.class);
     }
 
     @Override
-    public Object fromString(String str) {
-        return ((Calendar)converter.fromString(str)).getTime();
+    public Object fromString(String str){
+        return ((Calendar) converter.fromString(str)).getTime();
     }
 
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         final Calendar calendar = Calendar.getInstance();
-        calendar.setTime((Date)obj);
+        calendar.setTime((Date) obj);
         return converter.toString(calendar);
     }
 }

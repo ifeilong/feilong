@@ -73,8 +73,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see javax.servlet.jsp.tagext.BodyTagSupport
  * @see javax.servlet.jsp.tagext.TagSupport
- * 
- * @see javax.servlet.jsp.jstl.core.Config
+ * @see "javax.servlet.jsp.jstl.core.Config"
  * @since 1.0.0
  */
 public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{

@@ -16,33 +16,31 @@ import java.time.chrono.MinguoDate;
 import java.time.chrono.MinguoEra;
 import java.util.Collections;
 
-
 /**
  * Converts a {@link java.time.chrono.MinguoDate} to a string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class MinguoDateConverter extends AbstractChronoLocalDateConverter<MinguoEra> {
+public class MinguoDateConverter extends AbstractChronoLocalDateConverter<MinguoEra>{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return MinguoDate.class == type;
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         return parseChronoLocalDate(str, "Minguo", Collections.singleton(MinguoChronology.INSTANCE));
     }
 
     @Override
-    protected ChronoLocalDate chronoLocalDateOf(final MinguoEra era, final int prolepticYear, final int month,
-            final int dayOfMonth) {
+    protected ChronoLocalDate chronoLocalDateOf(final MinguoEra era,final int prolepticYear,final int month,final int dayOfMonth){
         return MinguoDate.of(prolepticYear, month, dayOfMonth);
     }
 
     @Override
-    protected MinguoEra eraOf(final String id) {
+    protected MinguoEra eraOf(final String id){
         return MinguoEra.valueOf(id);
     }
 

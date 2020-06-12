@@ -1567,8 +1567,7 @@ public class XStream{
      */
     public void aliasSystemAttribute(String alias,String systemAttributeName){
         if (systemAttributeAliasingMapper == null){
-            throw new com.feilong.lib.xstream.InitializationException(
-                            "No " + SystemAttributeAliasingMapper.class.getName() + " available");
+            throw new com.feilong.lib.xstream.InitializationException("No " + SystemAttributeAliasingMapper.class.getName() + " available");
         }
         systemAttributeAliasingMapper.addAliasFor(systemAttributeName, alias);
     }

@@ -12,7 +12,6 @@ package com.feilong.lib.xstream.converters.javabean;
 
 import java.util.Map;
 
-
 /**
  * A sorter that keeps the natural order of the bean properties as they are returned by the
  * JavaBean introspection.
@@ -20,10 +19,10 @@ import java.util.Map;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public class NativePropertySorter implements PropertySorter {
+public class NativePropertySorter implements PropertySorter{
 
     @Override
-    public Map sort(final Class type, final Map nameMap) {
+    public Map sort(final Class type,final Map nameMap){
         return nameMap;
     }
 

@@ -31,60 +31,64 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Aslak Helles&oslash;y
  * @author J&ouml;rg Schaible
  */
-public class JavaMethodConverter implements Converter {
+public class JavaMethodConverter implements Converter{
 
     private final SingleValueConverter javaClassConverter;
 
     /**
      * Construct a JavaMethodConverter.
-     * @param classLoaderReference the reference to the {@link ClassLoader} of the XStream instance
+     * 
+     * @param classLoaderReference
+     *            the reference to the {@link ClassLoader} of the XStream instance
      * @since 1.4.5
      */
-    public JavaMethodConverter(ClassLoaderReference classLoaderReference) {
+    public JavaMethodConverter(ClassLoaderReference classLoaderReference){
         this(new JavaClassConverter(classLoaderReference));
     }
 
     /**
      * @deprecated As of 1.4.5 use {@link #JavaMethodConverter(ClassLoaderReference)}
      */
-    public JavaMethodConverter(ClassLoader classLoader) {
+    public JavaMethodConverter(ClassLoader classLoader){
         this(new ClassLoaderReference(classLoader));
     }
 
     /**
      * Construct a JavaMethodConverter.
-     * @param javaClassConverter the converter to use 
+     * 
+     * @param javaClassConverter
+     *            the converter to use
      * @since 1.4.5
      */
-    protected JavaMethodConverter(SingleValueConverter javaClassConverter) {
+    protected JavaMethodConverter(SingleValueConverter javaClassConverter){
         this.javaClassConverter = javaClassConverter;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Method.class || type == Constructor.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-        if (source instanceof Method) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
+        if (source instanceof Method){
             Method method = (Method) source;
             String declaringClassName = javaClassConverter.toString(method.getDeclaringClass());
             marshalMethod(writer, declaringClassName, method.getName(), method.getParameterTypes());
-        } else {
+        }else{
             Constructor method = (Constructor) source;
             String declaringClassName = javaClassConverter.toString(method.getDeclaringClass());
             marshalMethod(writer, declaringClassName, null, method.getParameterTypes());
         }
     }
 
-    private void marshalMethod(HierarchicalStreamWriter writer, String declaringClassName, String methodName, Class[] parameterTypes) {
+    private void marshalMethod(HierarchicalStreamWriter writer,String declaringClassName,String methodName,Class[] parameterTypes){
 
         writer.startNode("class");
         writer.setValue(declaringClassName);
         writer.endNode();
 
-        if (methodName != null) {
+        if (methodName != null){
             // it's a method and not a ctor
             writer.startNode("name");
             writer.setValue(methodName);
@@ -92,7 +96,7 @@ public class JavaMethodConverter implements Converter {
         }
 
         writer.startNode("parameter-types");
-        for (int i = 0; i < parameterTypes.length; i++) {
+        for (int i = 0; i < parameterTypes.length; i++){
             writer.startNode("class");
             writer.setValue(javaClassConverter.toString(parameterTypes[i]));
             writer.endNode();
@@ -101,17 +105,17 @@ public class JavaMethodConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-        try {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
+        try{
             boolean isMethodNotConstructor = context.getRequiredType().equals(Method.class);
 
             reader.moveDown();
             String declaringClassName = reader.getValue();
-            Class declaringClass = (Class)javaClassConverter.fromString(declaringClassName);
+            Class declaringClass = (Class) javaClassConverter.fromString(declaringClassName);
             reader.moveUp();
 
             String methodName = null;
-            if (isMethodNotConstructor) {
+            if (isMethodNotConstructor){
                 reader.moveDown();
                 methodName = reader.getValue();
                 reader.moveUp();
@@ -119,7 +123,7 @@ public class JavaMethodConverter implements Converter {
 
             reader.moveDown();
             List parameterTypeList = new ArrayList();
-            while (reader.hasMoreChildren()) {
+            while (reader.hasMoreChildren()){
                 reader.moveDown();
                 String parameterTypeName = reader.getValue();
                 parameterTypeList.add(javaClassConverter.fromString(parameterTypeName));
@@ -128,12 +132,12 @@ public class JavaMethodConverter implements Converter {
             Class[] parameterTypes = (Class[]) parameterTypeList.toArray(new Class[parameterTypeList.size()]);
             reader.moveUp();
 
-            if (isMethodNotConstructor) {
+            if (isMethodNotConstructor){
                 return declaringClass.getDeclaredMethod(methodName, parameterTypes);
-            } else {
+            }else{
                 return declaringClass.getDeclaredConstructor(parameterTypes);
             }
-        } catch (NoSuchMethodException e) {
+        }catch (NoSuchMethodException e){
             throw new ConversionException(e);
         }
     }

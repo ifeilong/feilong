@@ -21,49 +21,48 @@ import java.nio.file.Paths;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link Path} to string.
  *
  * @author Aaron Johnson
  * @author J&ouml;rg Schaible
  */
-public class PathConverter extends AbstractSingleValueConverter {
+public class PathConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return type != null && Path.class.isAssignableFrom(type);
     }
 
     @Override
-    public Path fromString(final String str) {
-        try {
-            try {
+    public Path fromString(final String str){
+        try{
+            try{
                 final URI uri = new URI(str);
-                if (uri.getScheme() == null || uri.getScheme().length() == 1) {
+                if (uri.getScheme() == null || uri.getScheme().length() == 1){
                     return Paths.get(File.separatorChar != '/' ? str.replace('/', File.separatorChar) : str);
-                } else {
+                }else{
                     return Paths.get(uri);
                 }
-            } catch (final URISyntaxException e) {
+            }catch (final URISyntaxException e){
                 return Paths.get(str);
             }
-        } catch (final InvalidPathException e) {
+        }catch (final InvalidPathException e){
             throw new ConversionException(e);
         }
     }
 
     @Override
-    public String toString(final Object obj) {
-        final Path path = (Path)obj;
-        if (path.getFileSystem() == FileSystems.getDefault()) {
+    public String toString(final Object obj){
+        final Path path = (Path) obj;
+        if (path.getFileSystem() == FileSystems.getDefault()){
             final String localPath = path.toString();
-            if (File.separatorChar != '/') {
+            if (File.separatorChar != '/'){
                 return localPath.replace(File.separatorChar, '/');
-            } else {
+            }else{
                 return localPath;
             }
-        } else {
+        }else{
             return path.toUri().toString();
         }
     }

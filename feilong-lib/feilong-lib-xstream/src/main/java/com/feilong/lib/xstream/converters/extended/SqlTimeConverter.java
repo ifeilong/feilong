@@ -20,15 +20,15 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  *
  * @author Jose A. Illescas
  */
-public class SqlTimeConverter extends AbstractSingleValueConverter {
+public class SqlTimeConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Time.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return Time.valueOf(str);
     }
 

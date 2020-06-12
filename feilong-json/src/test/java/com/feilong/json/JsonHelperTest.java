@@ -95,7 +95,6 @@ public class JsonHelperTest extends AbstractTest{
      * 实体Bean转json串 void.
      */
     @Test
-
     public void testgetJsonStr1(){
         Person ps = new Person();
         ps.setDateAttr(now());
@@ -113,7 +112,6 @@ public class JsonHelperTest extends AbstractTest{
      * list转json串 void.
      */
     @Test
-
     public void testgetJsonStr4(){
         Person ps = new Person();
         ps.setDateAttr(now());
@@ -124,7 +122,7 @@ public class JsonHelperTest extends AbstractTest{
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
         LOGGER.debug("" + toJSON(list));
 
-        Set set = toSet(ps);
+        Set<Person> set = toSet(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:16","name":"get"}]
         LOGGER.debug("" + toJSON(set));
@@ -134,7 +132,7 @@ public class JsonHelperTest extends AbstractTest{
         // print: [{"dateAttr":"2009-09-12 07:23:54","name":"get"}]
         LOGGER.debug("" + toJSON(personArr));
 
-        Map map = new LinkedHashMap<>();
+        Map<String, Person> map = new LinkedHashMap<>();
         map.put("person1", ps);
 
         // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}

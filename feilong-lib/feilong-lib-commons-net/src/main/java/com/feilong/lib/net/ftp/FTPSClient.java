@@ -712,7 +712,7 @@ public class FTPSClient extends FTPClient{
      *             on error
      * @since 3.1
      */
-    protected void _prepareDataSocket_(Socket socket) throws IOException{
+    protected void _prepareDataSocket_(@SuppressWarnings("unused") Socket socket) throws IOException{
     }
 
     /**

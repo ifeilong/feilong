@@ -19,27 +19,27 @@ import com.feilong.lib.xstream.io.path.PathTracker;
 import com.feilong.lib.xstream.io.path.PathTrackingReader;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-public class ReferenceByXPathUnmarshaller extends AbstractReferenceUnmarshaller {
+public class ReferenceByXPathUnmarshaller extends AbstractReferenceUnmarshaller{
 
     private PathTracker pathTracker = new PathTracker();
-    protected boolean isNameEncoding;
 
-    public ReferenceByXPathUnmarshaller(Object root, HierarchicalStreamReader reader,
-                                        ConverterLookup converterLookup, Mapper mapper) {
+    protected boolean   isNameEncoding;
+
+    public ReferenceByXPathUnmarshaller(Object root, HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper){
         super(root, reader, converterLookup, mapper);
         this.reader = new PathTrackingReader(reader, pathTracker);
         isNameEncoding = reader.underlyingReader() instanceof AbstractReader;
     }
 
     @Override
-    protected Object getReferenceKey(String reference) {
-        final Path path = new Path(isNameEncoding ? ((AbstractReader)reader.underlyingReader()).decodeNode(reference) : reference);
+    protected Object getReferenceKey(String reference){
+        final Path path = new Path(isNameEncoding ? ((AbstractReader) reader.underlyingReader()).decodeNode(reference) : reference);
         // We have absolute references, if path starts with '/'
         return reference.charAt(0) != '/' ? pathTracker.getPath().apply(path) : path;
     }
 
     @Override
-    protected Object getCurrentReferenceKey() {
+    protected Object getCurrentReferenceKey(){
         return pathTracker.getPath();
     }
 

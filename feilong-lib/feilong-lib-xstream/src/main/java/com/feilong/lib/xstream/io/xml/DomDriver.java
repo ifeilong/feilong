@@ -39,16 +39,16 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.io.StreamException;
 import com.feilong.lib.xstream.io.naming.NameCoder;
 
+public class DomDriver extends AbstractXmlDriver{
 
-public class DomDriver extends AbstractXmlDriver {
+    private final String           encoding;
 
-    private final String encoding;
     private DocumentBuilderFactory documentBuilderFactory;
 
     /**
      * Construct a DomDriver.
      */
-    public DomDriver() {
+    public DomDriver(){
         this(null);
     }
 
@@ -56,84 +56,74 @@ public class DomDriver extends AbstractXmlDriver {
      * Construct a DomDriver with a specified encoding. The created DomReader will ignore any
      * encoding attribute of the XML header though.
      */
-    public DomDriver(String encoding) {
+    public DomDriver(String encoding){
         this(encoding, new XmlFriendlyNameCoder());
     }
 
     /**
      * @since 1.4
      */
-    public DomDriver(String encoding, NameCoder nameCoder) {
+    public DomDriver(String encoding, NameCoder nameCoder){
         super(nameCoder);
         this.encoding = encoding;
     }
 
-    /**
-     * @since 1.2
-     * @deprecated As of 1.4, use {@link #DomDriver(String, NameCoder)} instead.
-     */
-    public DomDriver(String encoding, XmlFriendlyReplacer replacer) {
-        this(encoding, (NameCoder)replacer);
-    }
-
     @Override
-    public HierarchicalStreamReader createReader(Reader in) {
+    public HierarchicalStreamReader createReader(Reader in){
         return createReader(new InputSource(in));
     }
 
     @Override
-    public HierarchicalStreamReader createReader(InputStream in) {
+    public HierarchicalStreamReader createReader(InputStream in){
         return createReader(new InputSource(in));
     }
 
     @Override
-    public HierarchicalStreamReader createReader(URL in) {
+    public HierarchicalStreamReader createReader(URL in){
         return createReader(new InputSource(in.toExternalForm()));
     }
 
     @Override
-    public HierarchicalStreamReader createReader(File in) {
+    public HierarchicalStreamReader createReader(File in){
         return createReader(new InputSource(in.toURI().toASCIIString()));
     }
 
-    private HierarchicalStreamReader createReader(InputSource source) {
-        try {
-            if (documentBuilderFactory == null) {
-                synchronized (this) {
-                    if (documentBuilderFactory == null) {
+    private HierarchicalStreamReader createReader(InputSource source){
+        try{
+            if (documentBuilderFactory == null){
+                synchronized (this){
+                    if (documentBuilderFactory == null){
                         documentBuilderFactory = createDocumentBuilderFactory();
                     }
                 }
             }
             final DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            if (encoding != null) {
+            if (encoding != null){
                 source.setEncoding(encoding);
             }
             Document document = documentBuilder.parse(source);
             return new DomReader(document, getNameCoder());
-        } catch (FactoryConfigurationError e) {
+        }catch (FactoryConfigurationError e){
             throw new StreamException(e);
-        } catch (ParserConfigurationException e) {
+        }catch (ParserConfigurationException e){
             throw new StreamException(e);
-        } catch (SAXException e) {
+        }catch (SAXException e){
             throw new StreamException(e);
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
     @Override
-    public HierarchicalStreamWriter createWriter(Writer out) {
+    public HierarchicalStreamWriter createWriter(Writer out){
         return new PrettyPrintWriter(out, getNameCoder());
     }
 
     @Override
-    public HierarchicalStreamWriter createWriter(OutputStream out) {
-        try {
-            return createWriter(encoding != null
-                ? new OutputStreamWriter(out, encoding)
-                : new OutputStreamWriter(out));
-        } catch (UnsupportedEncodingException e) {
+    public HierarchicalStreamWriter createWriter(OutputStream out){
+        try{
+            return createWriter(encoding != null ? new OutputStreamWriter(out, encoding) : new OutputStreamWriter(out));
+        }catch (UnsupportedEncodingException e){
             throw new StreamException(e);
         }
     }
@@ -144,22 +134,20 @@ public class DomDriver extends AbstractXmlDriver {
      * @return the new instance
      * @since 1.4.9
      */
-    protected DocumentBuilderFactory createDocumentBuilderFactory() {
+    protected DocumentBuilderFactory createDocumentBuilderFactory(){
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        if (JVM.isVersion(5)) {
-            try {
-                Method method = DocumentBuilderFactory.class.getMethod("setFeature",
-                    new Class[]{ String.class, boolean.class });
-                method.invoke(factory, new Object[]{ "http://apache.org/xml/features/disallow-doctype-decl", Boolean.TRUE });
-            } catch (NoSuchMethodException e) {
+        if (JVM.isVersion(5)){
+            try{
+                Method method = DocumentBuilderFactory.class.getMethod("setFeature", new Class[] { String.class, boolean.class });
+                method.invoke(factory, new Object[] { "http://apache.org/xml/features/disallow-doctype-decl", Boolean.TRUE });
+            }catch (NoSuchMethodException e){
                 // Ignore
-            } catch (IllegalAccessException e) {
+            }catch (IllegalAccessException e){
                 throw new ObjectAccessException("Cannot set feature of DocumentBuilderFactory.", e);
-            } catch (InvocationTargetException e) {
+            }catch (InvocationTargetException e){
                 Throwable cause = e.getCause();
-                if (JVM.isVersion(6)
-                        || (cause instanceof ParserConfigurationException 
-                                &&  cause.getMessage().indexOf("disallow-doctype-decl") < 0)) { 
+                if (JVM.isVersion(6) || (cause instanceof ParserConfigurationException
+                                && cause.getMessage().indexOf("disallow-doctype-decl") < 0)){
                     throw new StreamException(cause);
                 }
             }

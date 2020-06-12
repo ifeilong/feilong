@@ -14,14 +14,15 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class NullPermission implements TypePermission {
+public class NullPermission implements TypePermission{
+
     /**
      * @since 1.4.7
      */
     public static final TypePermission NULL = new NullPermission();
 
     @Override
-    public boolean allows(Class type) {
+    public boolean allows(Class type){
         return type == null || type == Mapper.Null.class;
     }
 }

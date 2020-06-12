@@ -25,15 +25,16 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class ThrowableConverter implements Converter {
-    
-    private Converter defaultConverter;
+public class ThrowableConverter implements Converter{
+
+    private Converter             defaultConverter;
+
     private final ConverterLookup lookup;
 
     /**
      * @deprecated As of 1.4.5 use {@link #ThrowableConverter(ConverterLookup)}
      */
-    public ThrowableConverter(Converter defaultConverter) {
+    public ThrowableConverter(Converter defaultConverter){
         this.defaultConverter = defaultConverter;
         lookup = null;
     }
@@ -41,22 +42,22 @@ public class ThrowableConverter implements Converter {
     /**
      * @since 1.4.5
      */
-    public ThrowableConverter(ConverterLookup lookup) {
+    public ThrowableConverter(ConverterLookup lookup){
         this.lookup = lookup;
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return type != null && Throwable.class.isAssignableFrom(type);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         Throwable throwable = (Throwable) source;
-        if (throwable.getCause() == null) {
-            try {
+        if (throwable.getCause() == null){
+            try{
                 throwable.initCause(null);
-            } catch (IllegalStateException e) {
+            }catch (IllegalStateException e){
                 // ignore, initCause failed, cause was already set
             }
         }
@@ -64,12 +65,12 @@ public class ThrowableConverter implements Converter {
         getConverter().marshal(throwable, writer, context);
     }
 
-    private Converter getConverter() {
+    private Converter getConverter(){
         return defaultConverter != null ? defaultConverter : lookup.lookupConverterForType(Object.class);
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         return getConverter().unmarshal(reader, context);
     }
 }

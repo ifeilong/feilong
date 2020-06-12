@@ -56,6 +56,7 @@ public class XstreamTempTest extends AbstractTest{
      *            bean对应的Class
      * @return xml转换为bean
      */
+    @SuppressWarnings("unchecked")
     public static <T> T xmlToObject(String xml,Class<T> cls){
         XStream xstream = new XStream(new DomDriver());//new DomDriver()
 

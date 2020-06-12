@@ -16,28 +16,27 @@ import java.time.chrono.Chronology;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
-
 /**
  * Converts a {@link Chronology} instance to a string using its id.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class ChronologyConverter implements SingleValueConverter {
+public class ChronologyConverter implements SingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return type != null && Chronology.class.isAssignableFrom(type);
     }
 
     @Override
-    public Chronology fromString(final String str) {
-        if (str == null) {
+    public Chronology fromString(final String str){
+        if (str == null){
             return null;
         }
-        try {
+        try{
             return Chronology.of(str);
-        } catch (final DateTimeException e) {
+        }catch (final DateTimeException e){
             final ConversionException exception = new ConversionException("Cannot parse value as chronology", e);
             exception.add("value", str);
             throw exception;
@@ -45,7 +44,7 @@ public class ChronologyConverter implements SingleValueConverter {
     }
 
     @Override
-    public String toString(final Object obj) {
-        return obj == null ? null : ((Chronology)obj).getId();
+    public String toString(final Object obj){
+        return obj == null ? null : ((Chronology) obj).getId();
     }
 }

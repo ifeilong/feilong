@@ -19,35 +19,31 @@ import java.time.temporal.ChronoField;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
-
 /**
  * Converts a {@link OffsetDateTime} to a string.
  *
  * @author Matej Cimbora
  * @since 1.4.10
  */
-public class OffsetDateTimeConverter implements SingleValueConverter {
+public class OffsetDateTimeConverter implements SingleValueConverter{
 
     private static final DateTimeFormatter FORMATTER;
 
-    static {
-        FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("uuuu-MM-dd'T'HH:mm:ss")
-            .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
-            .appendOffsetId()
-            .toFormatter();
+    static{
+        FORMATTER = new DateTimeFormatterBuilder().appendPattern("uuuu-MM-dd'T'HH:mm:ss")
+                        .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true).appendOffsetId().toFormatter();
     }
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return OffsetDateTime.class == type;
     }
 
     @Override
-    public Object fromString(final String str) {
-        try {
+    public Object fromString(final String str){
+        try{
             return OffsetDateTime.parse(str);
-        } catch (final DateTimeParseException e) {
+        }catch (final DateTimeParseException e){
             final ConversionException exception = new ConversionException("Cannot parse value as offset date time", e);
             exception.add("value", str);
             throw exception;
@@ -55,12 +51,12 @@ public class OffsetDateTimeConverter implements SingleValueConverter {
     }
 
     @Override
-    public String toString(final Object obj) {
-        if (obj == null) {
+    public String toString(final Object obj){
+        if (obj == null){
             return null;
         }
 
-        final OffsetDateTime offsetDateTime = (OffsetDateTime)obj;
+        final OffsetDateTime offsetDateTime = (OffsetDateTime) obj;
         return FORMATTER.format(offsetDateTime);
     }
 }

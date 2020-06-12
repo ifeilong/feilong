@@ -16,12 +16,13 @@ package com.feilong.lib.xstream.core;
  * @author J&ouml;rg Schaible
  * @since 1.4.11
  */
-public interface StringCodec {
+public interface StringCodec{
 
     /**
      * Decode the provided encoded string.
      *
-     * @param encoded the encoded string
+     * @param encoded
+     *            the encoded string
      * @return the decoded data
      * @since 1.4.11
      */
@@ -30,7 +31,8 @@ public interface StringCodec {
     /**
      * Encode the provided data.
      *
-     * @param data the data to encode
+     * @param data
+     *            the data to encode
      * @return the data encoded as string
      * @since 1.4.11
      */

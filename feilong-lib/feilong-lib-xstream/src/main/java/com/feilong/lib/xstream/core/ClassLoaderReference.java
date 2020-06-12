@@ -19,25 +19,25 @@ import com.feilong.lib.xstream.core.util.CompositeClassLoader;
  * @author J&ouml;rg Schaible
  * @since 1.4.5
  */
-public final class ClassLoaderReference {
+public final class ClassLoaderReference{
 
     private transient ClassLoader reference;
 
-    public ClassLoaderReference(ClassLoader reference) {
+    public ClassLoaderReference(ClassLoader reference){
         setReference(reference);
     }
 
-    public ClassLoader getReference() {
+    public ClassLoader getReference(){
         return reference;
     }
 
-    public void setReference(ClassLoader reference) {
+    public void setReference(ClassLoader reference){
         this.reference = reference instanceof com.feilong.lib.xstream.core.util.ClassLoaderReference
-                ? ((com.feilong.lib.xstream.core.util.ClassLoaderReference)reference)
-                    .getReference() : reference;
+                        ? ((com.feilong.lib.xstream.core.util.ClassLoaderReference) reference).getReference()
+                        : reference;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         this.reference = new CompositeClassLoader();
         return this;
     }

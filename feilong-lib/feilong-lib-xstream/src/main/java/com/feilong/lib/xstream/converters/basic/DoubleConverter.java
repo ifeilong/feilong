@@ -17,15 +17,15 @@ package com.feilong.lib.xstream.converters.basic;
  *
  * @author Joe Walnes
  */
-public class DoubleConverter extends AbstractSingleValueConverter {
+public class DoubleConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == double.class || type == Double.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return Double.valueOf(str);
     }
 

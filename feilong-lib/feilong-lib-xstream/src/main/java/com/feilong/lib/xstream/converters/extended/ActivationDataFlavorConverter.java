@@ -19,37 +19,36 @@ import com.feilong.lib.xstream.converters.UnmarshallingContext;
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 
-
 /**
  * Converts an {@link ActivationDataFlavor}.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.9
  */
-public class ActivationDataFlavorConverter implements Converter {
+public class ActivationDataFlavorConverter implements Converter{
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return type == ActivationDataFlavor.class;
     }
 
     @Override
-    public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-        final ActivationDataFlavor dataFlavor = (ActivationDataFlavor)source;
+    public void marshal(final Object source,final HierarchicalStreamWriter writer,final MarshallingContext context){
+        final ActivationDataFlavor dataFlavor = (ActivationDataFlavor) source;
         final String mimeType = dataFlavor.getMimeType();
-        if (mimeType != null) {
+        if (mimeType != null){
             writer.startNode("mimeType");
             writer.setValue(mimeType);
             writer.endNode();
         }
         final String name = dataFlavor.getHumanPresentableName();
-        if (name != null) {
+        if (name != null){
             writer.startNode("humanRepresentableName");
             writer.setValue(name);
             writer.endNode();
         }
         final Class representationClass = dataFlavor.getRepresentationClass();
-        if (representationClass != null) {
+        if (representationClass != null){
             writer.startNode("representationClass");
             context.convertAnother(representationClass);
             writer.endNode();
@@ -57,21 +56,21 @@ public class ActivationDataFlavorConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+    public Object unmarshal(final HierarchicalStreamReader reader,final UnmarshallingContext context){
         String mimeType = null;
         String name = null;
         Class type = null;
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             reader.moveDown();
-            
+
             final String elementName = reader.getNodeName();
-            if (elementName.equals("mimeType")) {
+            if (elementName.equals("mimeType")){
                 mimeType = reader.getValue();
-            } else if (elementName.equals("humanRepresentableName")) {
+            }else if (elementName.equals("humanRepresentableName")){
                 name = reader.getValue();
-            } else if (elementName.equals("representationClass")) {
-                type = (Class)context.convertAnother(null, Class.class);
-            } else {
+            }else if (elementName.equals("representationClass")){
+                type = (Class) context.convertAnother(null, Class.class);
+            }else{
                 final ConversionException exception = new ConversionException("Unknown child element");
                 exception.add("element", reader.getNodeName());
                 throw exception;
@@ -79,17 +78,17 @@ public class ActivationDataFlavorConverter implements Converter {
             reader.moveUp();
         }
         ActivationDataFlavor dataFlavor = null;
-        try {
-            if (type == null) {
+        try{
+            if (type == null){
                 dataFlavor = new ActivationDataFlavor(mimeType, name);
-            } else if (mimeType == null) {
+            }else if (mimeType == null){
                 dataFlavor = new ActivationDataFlavor(type, name);
-            } else {
+            }else{
                 dataFlavor = new ActivationDataFlavor(type, mimeType, name);
             }
-        } catch (final IllegalArgumentException ex) {
+        }catch (final IllegalArgumentException ex){
             throw new ConversionException(ex);
-        } catch (final NullPointerException ex) {
+        }catch (final NullPointerException ex){
             throw new ConversionException(ex);
         }
         return dataFlavor;

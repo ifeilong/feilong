@@ -8,28 +8,27 @@ package com.feilong.lib.xstream.security;
 
 import java.util.regex.Pattern;
 
-
 /**
  * Permission for any type with a name matching one of the provided regular expressions.
  * 
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class RegExpTypePermission implements TypePermission {
+public class RegExpTypePermission implements TypePermission{
 
     private final Pattern[] patterns;
 
-    public RegExpTypePermission(final String[] patterns) {
+    public RegExpTypePermission(final String[] patterns){
         this(getPatterns(patterns));
     }
 
-    public RegExpTypePermission(final Pattern[] patterns) {
+    public RegExpTypePermission(final Pattern[] patterns){
         this.patterns = patterns == null ? new Pattern[0] : patterns;
     }
 
     @Override
-    public boolean allows(final Class type) {
-        if (type != null) {
+    public boolean allows(final Class type){
+        if (type != null){
             final String name = type.getName();
             for (int i = 0; i < patterns.length; ++i)
                 if (patterns[i].matcher(name).matches())
@@ -38,7 +37,7 @@ public class RegExpTypePermission implements TypePermission {
         return false;
     }
 
-    private static Pattern[] getPatterns(final String[] patterns) {
+    private static Pattern[] getPatterns(final String[] patterns){
         if (patterns == null)
             return null;
         final Pattern[] array = new Pattern[patterns.length];

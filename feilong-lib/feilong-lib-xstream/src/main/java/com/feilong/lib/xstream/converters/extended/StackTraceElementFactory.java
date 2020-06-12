@@ -15,7 +15,6 @@ import java.lang.reflect.Field;
 
 import com.feilong.lib.xstream.core.util.Fields;
 
-
 /**
  * Factory for creating StackTraceElements.
  *
@@ -23,27 +22,25 @@ import com.feilong.lib.xstream.core.util.Fields;
  * @author Joe Walnes
  * @deprecated As of 1.4.8, it is an internal helper class
  */
-public class StackTraceElementFactory {
+public class StackTraceElementFactory{
 
-    public StackTraceElement nativeMethodElement(final String declaringClass, final String methodName) {
+    public StackTraceElement nativeMethodElement(final String declaringClass,final String methodName){
         return create(declaringClass, methodName, "Native Method", -2);
     }
 
-    public StackTraceElement unknownSourceElement(final String declaringClass, final String methodName) {
+    public StackTraceElement unknownSourceElement(final String declaringClass,final String methodName){
         return create(declaringClass, methodName, "Unknown Source", -1);
     }
 
-    public StackTraceElement element(final String declaringClass, final String methodName, final String fileName) {
+    public StackTraceElement element(final String declaringClass,final String methodName,final String fileName){
         return create(declaringClass, methodName, fileName, -1);
     }
 
-    public StackTraceElement element(final String declaringClass, final String methodName, final String fileName,
-            final int lineNumber) {
+    public StackTraceElement element(final String declaringClass,final String methodName,final String fileName,final int lineNumber){
         return create(declaringClass, methodName, fileName, lineNumber);
     }
 
-    protected StackTraceElement create(final String declaringClass, final String methodName, final String fileName,
-            final int lineNumber) {
+    protected StackTraceElement create(final String declaringClass,final String methodName,final String fileName,final int lineNumber){
         final StackTraceElement result = new Throwable().getStackTrace()[0];
         setField(result, "declaringClass", declaringClass);
         setField(result, "methodName", methodName);
@@ -52,7 +49,7 @@ public class StackTraceElementFactory {
         return result;
     }
 
-    private void setField(final StackTraceElement element, final String fieldName, final Object value) {
+    private void setField(final StackTraceElement element,final String fieldName,final Object value){
         final Field field = Fields.find(StackTraceElement.class, fieldName);
         Fields.write(field, element, value);
     }

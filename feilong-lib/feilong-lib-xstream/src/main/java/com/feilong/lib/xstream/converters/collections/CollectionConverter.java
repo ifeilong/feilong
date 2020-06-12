@@ -29,81 +29,86 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * Converts most common Collections (Lists and Sets) to XML, specifying a nested
  * element for each item.
  *
- * <p>Supports java.util.ArrayList, java.util.HashSet,
- * java.util.LinkedList, java.util.Vector and java.util.LinkedHashSet.</p>
+ * <p>
+ * Supports java.util.ArrayList, java.util.HashSet,
+ * java.util.LinkedList, java.util.Vector and java.util.LinkedHashSet.
+ * </p>
  *
  * @author Joe Walnes
  */
-public class CollectionConverter extends AbstractCollectionConverter {
+public class CollectionConverter extends AbstractCollectionConverter{
 
     private final Class type;
 
-    public CollectionConverter(Mapper mapper) {
+    public CollectionConverter(Mapper mapper){
         this(mapper, null);
     }
 
     /**
      * Construct a CollectionConverter for a special Collection type.
-     * @param mapper the mapper
-     * @param type the Collection type to handle
+     * 
+     * @param mapper
+     *            the mapper
+     * @param type
+     *            the Collection type to handle
      * @since 1.4.5
      */
-    public CollectionConverter(Mapper mapper, Class type) {
+    public CollectionConverter(Mapper mapper, Class type){
         super(mapper);
         this.type = type;
-        if (type != null && !Collection.class.isAssignableFrom(type)) {
+        if (type != null && !Collection.class.isAssignableFrom(type)){
             throw new IllegalArgumentException(type + " not of type " + Collection.class);
         }
     }
 
     @Override
-    public boolean canConvert(Class type) {
-        if (this.type != null) {
+    public boolean canConvert(Class type){
+        if (this.type != null){
             return type.equals(this.type);
         }
-        return type.equals(ArrayList.class)
-            || type.equals(HashSet.class)
-            || type.equals(LinkedList.class)
-            || type.equals(Vector.class) 
-            || type.equals(LinkedHashSet.class);
+        return type.equals(ArrayList.class) || type.equals(HashSet.class) || type.equals(LinkedList.class) || type.equals(Vector.class)
+                        || type.equals(LinkedHashSet.class);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         Collection collection = (Collection) source;
-        for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = collection.iterator(); iterator.hasNext();){
             Object item = iterator.next();
             writeCompleteItem(item, context, writer);
         }
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         Collection collection = (Collection) createCollection(context.getRequiredType());
         populateCollection(reader, context, collection);
         return collection;
     }
 
-    protected void populateCollection(HierarchicalStreamReader reader, UnmarshallingContext context, Collection collection) {
+    protected void populateCollection(HierarchicalStreamReader reader,UnmarshallingContext context,Collection collection){
         populateCollection(reader, context, collection, collection);
     }
 
-    protected void populateCollection(HierarchicalStreamReader reader, UnmarshallingContext context, Collection collection, Collection target) {
-        while (reader.hasMoreChildren()) {
+    protected void populateCollection(HierarchicalStreamReader reader,UnmarshallingContext context,Collection collection,Collection target){
+        while (reader.hasMoreChildren()){
             reader.moveDown();
             addCurrentElementToCollection(reader, context, collection, target);
             reader.moveUp();
         }
     }
 
-    protected void addCurrentElementToCollection(HierarchicalStreamReader reader, UnmarshallingContext context,
-        Collection collection, Collection target) {
+    protected void addCurrentElementToCollection(
+                    HierarchicalStreamReader reader,
+                    UnmarshallingContext context,
+                    Collection collection,
+                    Collection target){
         final Object item = readItem(reader, context, collection); // call readBareItem when deprecated method is removed
         target.add(item);
     }
 
     @Override
-    protected Object createCollection(Class type) {
+    protected Object createCollection(Class type){
         return super.createCollection(this.type != null ? this.type : type);
     }
 }

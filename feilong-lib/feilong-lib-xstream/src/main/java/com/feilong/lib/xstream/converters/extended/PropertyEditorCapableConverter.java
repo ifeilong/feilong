@@ -15,7 +15,6 @@ import java.beans.PropertyEditor;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 import com.feilong.lib.xstream.core.util.ThreadSafePropertyEditor;
 
-
 /**
  * A SingleValueConverter that can utilize a {@link PropertyEditor} implementation used for a
  * specific type. The converter ensures that the editors can be used concurrently.
@@ -24,28 +23,29 @@ import com.feilong.lib.xstream.core.util.ThreadSafePropertyEditor;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public class PropertyEditorCapableConverter implements SingleValueConverter {
+public class PropertyEditorCapableConverter implements SingleValueConverter{
 
     private final ThreadSafePropertyEditor editor;
-    private final Class type;
 
-    public PropertyEditorCapableConverter(final Class propertyEditorType, final Class type) {
+    private final Class                    type;
+
+    public PropertyEditorCapableConverter(final Class propertyEditorType, final Class type){
         this.type = type;
         editor = new ThreadSafePropertyEditor(propertyEditorType, 2, 5);
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return this.type == type;
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         return editor.setAsText(str);
     }
 
     @Override
-    public String toString(final Object obj) {
+    public String toString(final Object obj){
         return editor.getAsText(obj);
     }
 

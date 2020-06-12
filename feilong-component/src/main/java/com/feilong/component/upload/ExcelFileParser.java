@@ -45,7 +45,7 @@ public class ExcelFileParser implements FileParser{
 
     @Override
     public void parse(String fileLocation){
-        Map<String, Object> readData = ExcelReaderUtil.readData(fileLocation, sheetDefinitionLocation, sheetName, dataName, 0);
+        Map<String, Object> readData = ExcelReaderUtil.readData(fileLocation, sheetDefinitionLocation, sheetName, 0);
         dataHandler.handle(readData);
     }
 

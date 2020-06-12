@@ -25,52 +25,55 @@ import java.util.Set;
  *
  * @author Joe Walnes
  */
-public class ImmutableTypesMapper extends MapperWrapper {
+public class ImmutableTypesMapper extends MapperWrapper{
 
     private final Set unreferenceableTypes = new HashSet();
-    private final Set immutableTypes = new HashSet();
 
-    public ImmutableTypesMapper(Mapper wrapped) {
+    private final Set immutableTypes       = new HashSet();
+
+    public ImmutableTypesMapper(Mapper wrapped){
         super(wrapped);
     }
 
     /**
      * @deprecated As of 1.4.9 use {@link #addImmutableType(Class, boolean)}
      */
-    public void addImmutableType(Class type) {
+    public void addImmutableType(Class type){
         addImmutableType(type, true);
     }
 
     /**
      * Declare a type as immutable.
      *
-     * @param type the immutable type
-     * @param isReferenceable flag for possible references
+     * @param type
+     *            the immutable type
+     * @param isReferenceable
+     *            flag for possible references
      * @since 1.4.9
      */
-    public void addImmutableType(final Class type, final boolean isReferenceable) {
+    public void addImmutableType(final Class type,final boolean isReferenceable){
         immutableTypes.add(type);
-        if (!isReferenceable) {
+        if (!isReferenceable){
             unreferenceableTypes.add(type);
-        } else {
+        }else{
             unreferenceableTypes.remove(type);
         }
     }
 
     @Override
-    public boolean isImmutableValueType(Class type) {
-        if (immutableTypes.contains(type)) {
+    public boolean isImmutableValueType(Class type){
+        if (immutableTypes.contains(type)){
             return true;
-        } else {
+        }else{
             return super.isImmutableValueType(type);
         }
     }
 
     @Override
-    public boolean isReferenceable(final Class type) {
-        if (unreferenceableTypes.contains(type)) {
+    public boolean isReferenceable(final Class type){
+        if (unreferenceableTypes.contains(type)){
             return false;
-        } else {
+        }else{
             return super.isReferenceable(type);
         }
     }

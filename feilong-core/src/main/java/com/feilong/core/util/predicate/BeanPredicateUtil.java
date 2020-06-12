@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.AggregateUtil;
@@ -34,7 +35,6 @@ import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.lib.collection4.functors.EqualPredicate;
-import com.feilong.core.Validate;
 
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.
@@ -397,6 +397,7 @@ public final class BeanPredicateUtil{
      * 
      * <h3>说明:</h3>
      * <blockquote>
+     * 
      * <ol>
      * <li>
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
@@ -406,6 +407,7 @@ public final class BeanPredicateUtil{
      * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
+     * 
      * </blockquote>
      *
      * @param <T>
@@ -423,13 +425,9 @@ public final class BeanPredicateUtil{
      */
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final Collection<V> propertyValueList){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new BeanPredicate<>(propertyName, new Predicate<V>(){
-
-            @Override
-            public boolean evaluate(V propertyValue){
-                return isNotNullOrEmpty(propertyValueList) && propertyValueList.contains(propertyValue);
-            }
-        });
+        return new BeanPredicate<>(
+                        propertyName,
+                        propertyValue -> isNotNullOrEmpty(propertyValueList) && propertyValueList.contains(propertyValue));
     }
 
     //---------------------------------------------------------------

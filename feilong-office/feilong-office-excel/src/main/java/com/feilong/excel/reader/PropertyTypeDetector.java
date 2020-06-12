@@ -87,6 +87,7 @@ class PropertyTypeDetector{
     private static Class<?> detect(Object object,String dataName) throws Exception{
         if (object instanceof Map){
             LOGGER.debug("detect for Map[{}] with Key {}.", object, dataName);
+            @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) object;
             int delim = dataName.indexOf('.');
             if (delim > 0){

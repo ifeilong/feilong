@@ -13,19 +13,20 @@ package com.feilong.lib.xstream.io;
 
 import com.feilong.lib.xstream.XStreamException;
 
-public class StreamException extends XStreamException {
-    public StreamException(Throwable e) {
+public class StreamException extends XStreamException{
+
+    public StreamException(Throwable e){
         super(e);
     }
 
-    public StreamException(String message) {
+    public StreamException(String message){
         super(message);
     }
 
     /**
      * @since 1.4
      */
-    public StreamException(String message, Throwable cause) {
+    public StreamException(String message, Throwable cause){
         super(message, cause);
     }
 }

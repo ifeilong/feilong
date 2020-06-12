@@ -18,11 +18,11 @@ import java.lang.reflect.Field;
  * @author J&ouml;rg Schaible
  * @since 1.2
  */
-public class ReflectionProviderWrapper implements ReflectionProvider {
+public class ReflectionProviderWrapper implements ReflectionProvider{
 
     final protected ReflectionProvider wrapped;
 
-    public ReflectionProviderWrapper(ReflectionProvider wrapper) {
+    public ReflectionProviderWrapper(ReflectionProvider wrapper){
         this.wrapped = wrapper;
     }
 
@@ -30,37 +30,37 @@ public class ReflectionProviderWrapper implements ReflectionProvider {
      * @deprecated As of 1.4.5, use {@link #getFieldOrNull(Class, String)} instead
      */
     @Override
-    public boolean fieldDefinedInClass(String fieldName, Class type) {
+    public boolean fieldDefinedInClass(String fieldName,Class type){
         return this.wrapped.fieldDefinedInClass(fieldName, type);
     }
 
     @Override
-    public Field getField(Class definedIn, String fieldName) {
+    public Field getField(Class definedIn,String fieldName){
         return this.wrapped.getField(definedIn, fieldName);
     }
 
     @Override
-    public Field getFieldOrNull(Class definedIn, String fieldName) {
+    public Field getFieldOrNull(Class definedIn,String fieldName){
         return this.wrapped.getFieldOrNull(definedIn, fieldName);
     }
 
     @Override
-    public Class getFieldType(Object object, String fieldName, Class definedIn) {
+    public Class getFieldType(Object object,String fieldName,Class definedIn){
         return this.wrapped.getFieldType(object, fieldName, definedIn);
     }
 
     @Override
-    public Object newInstance(Class type) {
+    public Object newInstance(Class type){
         return this.wrapped.newInstance(type);
     }
 
     @Override
-    public void visitSerializableFields(Object object, Visitor visitor) {
+    public void visitSerializableFields(Object object,Visitor visitor){
         this.wrapped.visitSerializableFields(object, visitor);
     }
 
     @Override
-    public void writeField(Object object, String fieldName, Object value, Class definedIn) {
+    public void writeField(Object object,String fieldName,Object value,Class definedIn){
         this.wrapped.writeField(object, fieldName, value, definedIn);
     }
 

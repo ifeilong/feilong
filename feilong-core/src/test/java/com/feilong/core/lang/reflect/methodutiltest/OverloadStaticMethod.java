@@ -15,35 +15,17 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
-/**
- * The Class OverloadStaticMethod.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class OverloadStaticMethod{
 
-    /**
-     * Age.
-     *
-     * @param age
-     *            the age
-     * @return the string
-     */
     public static String age(int age){
         return "static age int:" + age;
     }
 
-    /**
-     * Age.
-     *
-     * @param age
-     *            the age
-     * @return the string
-     */
     public static String age(Integer age){
         return "static age Integer:" + age;
     }
 
+    @SuppressWarnings("unused")
     private static String agePrivate(Integer age){
         return "static age Integer:" + age;
     }

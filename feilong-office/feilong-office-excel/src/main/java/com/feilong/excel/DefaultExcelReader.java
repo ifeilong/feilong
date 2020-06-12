@@ -127,8 +127,12 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
             for (int i = 0; i < workbook.getNumberOfSheets(); i++){
                 Map<String, Object> clonedData = CloneUtil.cloneMap(data);
                 SheetReader.readSheet(workbook, i, excelSheet, new OgnlStack(clonedData), readStatus, skipErrors);
-                for (String key : clonedData.keySet()){
-                    cacheMap.get(key).add(clonedData.get(key));
+
+                for (Map.Entry<String, Object> entry : clonedData.entrySet()){
+                    String key = entry.getKey();
+
+                    List<Object> list = cacheMap.get(key);
+                    list.add(entry.getValue());
                 }
             }
             for (String key : data.keySet()){

@@ -16,25 +16,24 @@ import java.time.format.DateTimeParseException;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link Period} instance to string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class PeriodConverter extends AbstractSingleValueConverter {
+public class PeriodConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return Period.class == type;
     }
 
     @Override
-    public Period fromString(final String str) {
-        try {
+    public Period fromString(final String str){
+        try{
             return Period.parse(str);
-        } catch (final DateTimeParseException ex) {
+        }catch (final DateTimeParseException ex){
             final ConversionException exception = new ConversionException("Cannot parse period value", ex);
             exception.add("period", str);
             throw exception;

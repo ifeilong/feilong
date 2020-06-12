@@ -26,16 +26,8 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 
-/**
- * The Class MethodUtilInvokeStaticMethodWithParamsAndClassTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class InvokeStaticMethodWithParamsAndClassTest{
 
-    /**
-     * Test invoke method all pack type.
-     */
     @Test
     public void testInvokeMethodAllPackType(){
         Class<?>[] parameterTypes1 = { Integer.TYPE };

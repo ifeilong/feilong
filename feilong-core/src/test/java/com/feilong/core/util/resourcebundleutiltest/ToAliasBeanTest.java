@@ -37,10 +37,8 @@ import com.feilong.lib.beanutils.converters.StringConverter;
  */
 public class ToAliasBeanTest{
 
-    /**
-     * Test to alias bean.
-     */
     @Test
+    @SuppressWarnings("unchecked")
     public void testToAliasBean(){
         DangaMemCachedConfig dangaMemCachedConfig = toAliasBean(getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
         assertThat(
@@ -61,10 +59,8 @@ public class ToAliasBeanTest{
                         ));
     }
 
-    /**
-     * Test read properties to alias bean1.
-     */
     @Test
+    @SuppressWarnings("unchecked")
     public void testToAliasBean1(){
         ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
         char[] allowedChars = { ':' };

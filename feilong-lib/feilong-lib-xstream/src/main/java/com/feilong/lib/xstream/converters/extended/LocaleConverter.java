@@ -21,26 +21,26 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  * @author Jose A. Illescas
  * @author Joe Walnes
  */
-public class LocaleConverter extends AbstractSingleValueConverter {
+public class LocaleConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Locale.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         int[] underscorePositions = underscorePositions(str);
         String language, country, variant;
-        if (underscorePositions[0] == -1) { // "language"
+        if (underscorePositions[0] == -1){ // "language"
             language = str;
             country = "";
             variant = "";
-        } else if (underscorePositions[1] == -1) { // "language_country"
+        }else if (underscorePositions[1] == -1){ // "language_country"
             language = str.substring(0, underscorePositions[0]);
             country = str.substring(underscorePositions[0] + 1);
             variant = "";
-        } else { // "language_country_variant"
+        }else{ // "language_country_variant"
             language = str.substring(0, underscorePositions[0]);
             country = str.substring(underscorePositions[0] + 1, underscorePositions[1]);
             variant = str.substring(underscorePositions[1] + 1);
@@ -48,9 +48,9 @@ public class LocaleConverter extends AbstractSingleValueConverter {
         return new Locale(language, country, variant);
     }
 
-    private int[] underscorePositions(String in) {
+    private int[] underscorePositions(String in){
         int[] result = new int[2];
-        for (int i = 0; i < result.length; i++) {
+        for (int i = 0; i < result.length; i++){
             int last = i == 0 ? 0 : result[i - 1];
             result[i] = in.indexOf('_', last + 1);
         }

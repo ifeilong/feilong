@@ -17,6 +17,9 @@ package com.feilong.xml.xstream;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 
 import java.util.Map;
 
@@ -29,7 +32,6 @@ public class ToXmlWithConfigMapTest extends AbstractTest{
 
     @Test
     public void testToXML(){
-
         //        <map>
         //        <entry>
         //          <string>call_back_url</string>
@@ -80,7 +82,18 @@ public class ToXmlWithConfigMapTest extends AbstractTest{
         map.put("call_back_url", "");
         map.put("notify_url", "");
 
-        LOGGER.debug(XmlUtil.toXML(map, "xml"));
+        String xml = XmlUtil.toXML(map, "xml");
+        assertThat(
+                        xml,
+                        allOf(
+                                        containsString("<out_trade_no>112122212</out_trade_no>"),
+                                        containsString("<total_fee>125.00</total_fee>"),
+                                        containsString("<notify_url></notify_url>"),
+                                        containsString("<call_back_url></call_back_url>")
+
+                        )
+
+        );
     }
 
     @Test
@@ -99,7 +112,18 @@ public class ToXmlWithConfigMapTest extends AbstractTest{
         map.put("call_back_url", "");
         map.put("notify_url", null);
 
-        LOGGER.debug(XmlUtil.toXML(map, "xml"));
+        String xml = XmlUtil.toXML(map, "xml");
+        assertThat(
+                        xml,
+                        allOf(
+                                        containsString("<call_back_url></call_back_url>"),
+                                        containsString("<total_fee>&lt;name&gt;</total_fee>"),
+                                        containsString("<notify_url></notify_url>"),
+                                        containsString("<out_trade_no>112122212</out_trade_no>")
+
+                        )
+
+        );
     }
 
     @Test
@@ -117,6 +141,17 @@ public class ToXmlWithConfigMapTest extends AbstractTest{
         map.put("call_back_url", "");
         map.put("notify_url", toMap("name", "name"));
 
-        LOGGER.debug(XmlUtil.toXML(map, "xml"));
+        String xml = XmlUtil.toXML(map, "xml");
+        assertThat(
+                        xml,
+                        allOf(
+                                        containsString("<call_back_url></call_back_url>"),
+                                        containsString("<total_fee>125.00</total_fee>"),
+                                        containsString("<notify_url>{name=name}</notify_url>"),
+                                        containsString("<out_trade_no>112122212</out_trade_no>")
+
+                        )
+
+        );
     }
 }

@@ -20,14 +20,16 @@ import com.feilong.lib.xstream.XStreamException;
  * @author J&ouml;rg Schaible
  * @since 1.2
  */
-public class CannotResolveClassException extends XStreamException {
-    public CannotResolveClassException(String className) {
+public class CannotResolveClassException extends XStreamException{
+
+    public CannotResolveClassException(String className){
         super(className);
     }
+
     /**
      * @since 1.4.2
      */
-    public CannotResolveClassException(String className, Throwable cause) {
+    public CannotResolveClassException(String className, Throwable cause){
         super(className, cause);
     }
 }

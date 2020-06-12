@@ -21,45 +21,46 @@ import java.util.regex.Pattern;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Abstract base class for converters handling derived classes of {@link java.time.chrono.ChronoLocalDate} instances.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-abstract class AbstractChronoLocalDateConverter<E extends Era> extends AbstractSingleValueConverter {
-    protected abstract ChronoLocalDate chronoLocalDateOf(final E era, final int prolepticYear, final int month,
-            final int dayOfMonth);
+abstract class AbstractChronoLocalDateConverter<E extends Era> extends AbstractSingleValueConverter{
+
+    protected abstract ChronoLocalDate chronoLocalDateOf(final E era,final int prolepticYear,final int month,final int dayOfMonth);
 
     protected abstract E eraOf(final String id);
 
     private final static Pattern CHRONO_DATE_PATTERN = Pattern.compile("^ (\\w+) (\\d+)-(\\d+)-(\\d+)$");
 
-    protected ChronoLocalDate parseChronoLocalDate(final String str, final String dateTypeName,
-            final Set<Chronology> chronologies) {
-        if (str == null) {
+    protected ChronoLocalDate parseChronoLocalDate(final String str,final String dateTypeName,final Set<Chronology> chronologies){
+        if (str == null){
             return null;
         }
 
         ConversionException exception = null;
-        for (final Chronology chronology : chronologies) {
+        for (final Chronology chronology : chronologies){
             final String id = chronology.getId();
-            if (str.startsWith(id + ' ')) {
+            if (str.startsWith(id + ' ')){
                 final Matcher matcher = CHRONO_DATE_PATTERN.matcher(str.subSequence(id.length(), str.length()));
-                if (matcher.matches()) {
+                if (matcher.matches()){
                     E era = null;
-                    try {
+                    try{
                         era = eraOf(matcher.group(1));
-                    } catch (final IllegalArgumentException e) {
+                    }catch (final IllegalArgumentException e){
                         exception = new ConversionException("Cannot parse value as " + dateTypeName + " date", e);
                         break;
                     }
-                    if (era != null) {
-                        try {
-                            return chronoLocalDateOf(era, Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher
-                                .group(3)), Integer.parseInt(matcher.group(4)));
-                        } catch (final DateTimeException e) {
+                    if (era != null){
+                        try{
+                            return chronoLocalDateOf(
+                                            era,
+                                            Integer.parseInt(matcher.group(2)),
+                                            Integer.parseInt(matcher.group(3)),
+                                            Integer.parseInt(matcher.group(4)));
+                        }catch (final DateTimeException e){
                             exception = new ConversionException("Cannot parse value as " + dateTypeName + " date", e);
                             break;
                         }
@@ -67,7 +68,7 @@ abstract class AbstractChronoLocalDateConverter<E extends Era> extends AbstractS
                 }
             }
         }
-        if (exception == null) {
+        if (exception == null){
             exception = new ConversionException("Cannot parse value as " + dateTypeName + " date");
         }
         exception.add("value", str);

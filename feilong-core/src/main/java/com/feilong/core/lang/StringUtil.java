@@ -75,7 +75,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <ul>
  * <li>{@link StringUtils#capitalize(String)} 首字母大写</li>
  * <li>{@link StringUtils#uncapitalize(String)} 单词首字母小写</li>
- * <li>{@link com.feilong.lib.lang3.text.WordUtils#uncapitalize(String, char...)} 如果要使用一段文字,每个单词首字母小写</li>
+ * <li>org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...) 如果要使用一段文字,每个单词首字母小写</li>
  * </ul>
  * </blockquote>
  * 

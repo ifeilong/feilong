@@ -25,44 +25,44 @@ import com.feilong.lib.xstream.security.ForbiddenClassException;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class CachingMapper extends MapperWrapper implements Caching {
+public class CachingMapper extends MapperWrapper implements Caching{
 
     private transient Map realClassCache;
 
-    public CachingMapper(Mapper wrapped) {
+    public CachingMapper(Mapper wrapped){
         super(wrapped);
         readResolve();
     }
 
     @Override
-    public Class realClass(String elementName) {
+    public Class realClass(String elementName){
         Object cached = realClassCache.get(elementName);
-        if (cached != null) {
-            if (cached instanceof Class) {
-                return (Class)cached;
+        if (cached != null){
+            if (cached instanceof Class){
+                return (Class) cached;
             }
-            throw (XStreamException)cached;
+            throw (XStreamException) cached;
         }
 
-        try {
+        try{
             Class result = super.realClass(elementName);
             realClassCache.put(elementName, result);
             return result;
-        } catch (ForbiddenClassException e) {
+        }catch (ForbiddenClassException e){
             realClassCache.put(elementName, e);
             throw e;
-        } catch (CannotResolveClassException e) {
+        }catch (CannotResolveClassException e){
             realClassCache.put(elementName, e);
             throw e;
         }
     }
 
     @Override
-    public void flushCache() {
+    public void flushCache(){
         realClassCache.clear();
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         realClassCache = Collections.synchronizedMap(new HashMap(128));
         return this;
     }

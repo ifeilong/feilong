@@ -17,81 +17,81 @@ import com.feilong.lib.xstream.core.util.Primitives;
  * Mapper that detects arrays and changes the name so it can identified as an array
  * (for example Foo[] gets serialized as foo-array). Supports multi-dimensional arrays.
  *
- * @author Joe Walnes 
+ * @author Joe Walnes
  */
-public class ArrayMapper extends MapperWrapper {
+public class ArrayMapper extends MapperWrapper{
 
-    public ArrayMapper(Mapper wrapped) {
+    public ArrayMapper(Mapper wrapped){
         super(wrapped);
     }
 
     @Override
-    public String serializedClass(Class type) {
+    public String serializedClass(Class type){
         StringBuffer arraySuffix = new StringBuffer();
         String name = null;
-        while (type.isArray()) {
+        while (type.isArray()){
             name = super.serializedClass(type);
-            if (type.getName().equals(name)) {
+            if (type.getName().equals(name)){
                 type = type.getComponentType();
                 arraySuffix.append("-array");
                 name = null;
-            } else {
+            }else{
                 break;
             }
         }
-        if (name == null) {
+        if (name == null){
             name = boxedTypeName(type);
         }
-        if (name == null) {
+        if (name == null){
             name = super.serializedClass(type);
         }
-        if (arraySuffix.length() > 0) {
+        if (arraySuffix.length() > 0){
             return name + arraySuffix;
-        } else {
+        }else{
             return name;
         }
     }
 
     @Override
-    public Class realClass(String elementName) {
+    public Class realClass(String elementName){
         int dimensions = 0;
 
         // strip off "-array" suffix
-        while (elementName.endsWith("-array")) {
+        while (elementName.endsWith("-array")){
             elementName = elementName.substring(0, elementName.length() - 6); // cut off -array
             ++dimensions;
         }
 
-        if (dimensions > 0) {
+        if (dimensions > 0){
             Class componentType = Primitives.primitiveType(elementName);
-            if (componentType == null) {
+            if (componentType == null){
                 componentType = super.realClass(elementName);
             }
-            while (componentType.isArray()) {
+            while (componentType.isArray()){
                 componentType = componentType.getComponentType();
                 ++dimensions;
             }
             return super.realClass(arrayType(dimensions, componentType));
-        } else {
+        }else{
             return super.realClass(elementName);
         }
     }
 
-    private String arrayType(int dimensions, Class componentType) {
+    private String arrayType(int dimensions,Class componentType){
         StringBuffer className = new StringBuffer();
-        for (int i = 0; i < dimensions; i++) {
+        for (int i = 0; i < dimensions; i++){
             className.append('[');
         }
-        if (componentType.isPrimitive()) {
+        if (componentType.isPrimitive()){
             className.append(Primitives.representingChar(componentType));
             return className.toString();
-        } else {
+        }else{
             className.append('L').append(componentType.getName()).append(';');
             return className.toString();
         }
     }
-    
-    private String boxedTypeName(Class type) {
+
+    private String boxedTypeName(Class type){
         return Primitives.isBoxed(type) ? type.getName() : null;
     }
 }

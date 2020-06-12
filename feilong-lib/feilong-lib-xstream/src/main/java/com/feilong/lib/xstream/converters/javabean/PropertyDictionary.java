@@ -15,8 +15,6 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,62 +25,27 @@ import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
 import com.feilong.lib.xstream.core.Caching;
 import com.feilong.lib.xstream.core.util.OrderRetainingMap;
 
-
 /**
  * Builds the properties maps for each bean and caches them.
  * 
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class PropertyDictionary implements Caching {
-    private transient Map propertyNameCache = Collections.synchronizedMap(new HashMap());
+public class PropertyDictionary implements Caching{
+
+    private transient Map        propertyNameCache = Collections.synchronizedMap(new HashMap());
+
     private final PropertySorter sorter;
 
-    public PropertyDictionary() {
+    public PropertyDictionary(){
         this(new NativePropertySorter());
     }
 
-    public PropertyDictionary(PropertySorter sorter) {
+    public PropertyDictionary(PropertySorter sorter){
         this.sorter = sorter;
     }
 
-    /**
-     * @deprecated As of 1.3.1, use {@link #propertiesFor(Class)} instead
-     */
-    public Iterator serializablePropertiesFor(Class type) {
-        Collection beanProperties = new ArrayList();
-        Collection descriptors = buildMap(type).values();
-        for (Iterator iter = descriptors.iterator(); iter.hasNext();) {
-            PropertyDescriptor descriptor = (PropertyDescriptor)iter.next();
-            if (descriptor.getReadMethod() != null && descriptor.getWriteMethod() != null) {
-                beanProperties.add(new BeanProperty(type, descriptor.getName(), descriptor
-                    .getPropertyType()));
-            }
-        }
-        return beanProperties.iterator();
-    }
-
-    /**
-     * Locates a serializable property.
-     * 
-     * @param cls
-     * @param name
-     * @deprecated As of 1.3.1, use {@link #propertyDescriptor(Class, String)} instead
-     */
-    public BeanProperty property(Class cls, String name) {
-        BeanProperty beanProperty = null;
-        PropertyDescriptor descriptor = propertyDescriptorOrNull(cls, name);
-        if (descriptor == null) {
-            throw new MissingFieldException(cls.getName(), name);
-        }
-        if (descriptor.getReadMethod() != null && descriptor.getWriteMethod() != null) {
-            beanProperty = new BeanProperty(
-                cls, descriptor.getName(), descriptor.getPropertyType());
-        }
-        return beanProperty;
-    }
-
-    public Iterator propertiesFor(Class type) {
+    public Iterator propertiesFor(Class type){
         return buildMap(type).values().iterator();
     }
 
@@ -91,11 +54,12 @@ public class PropertyDictionary implements Caching {
      * 
      * @param type
      * @param name
-     * @throws MissingFieldException if property does not exist
+     * @throws MissingFieldException
+     *             if property does not exist
      */
-    public PropertyDescriptor propertyDescriptor(Class type, String name) {
+    public PropertyDescriptor propertyDescriptor(Class type,String name){
         PropertyDescriptor descriptor = propertyDescriptorOrNull(type, name);
-        if (descriptor == null) {
+        if (descriptor == null){
             throw new MissingFieldException(type.getName(), name);
         }
         return descriptor;
@@ -109,24 +73,24 @@ public class PropertyDictionary implements Caching {
      * @return {@code null} if property does not exist
      * @since 1.4.10
      */
-    public PropertyDescriptor propertyDescriptorOrNull(Class type, String name) {
-        return (PropertyDescriptor)buildMap(type).get(name);
+    public PropertyDescriptor propertyDescriptorOrNull(Class type,String name){
+        return (PropertyDescriptor) buildMap(type).get(name);
     }
 
-    private Map buildMap(Class type) {
-        Map nameMap = (Map)propertyNameCache.get(type);
-        if (nameMap == null) {
+    private Map buildMap(Class type){
+        Map nameMap = (Map) propertyNameCache.get(type);
+        if (nameMap == null){
             BeanInfo beanInfo;
-            try {
+            try{
                 beanInfo = Introspector.getBeanInfo(type, Object.class);
-            } catch (IntrospectionException e) {
+            }catch (IntrospectionException e){
                 ObjectAccessException oaex = new ObjectAccessException("Cannot get BeanInfo of type", e);
                 oaex.add("bean-type", type.getName());
                 throw oaex;
             }
             nameMap = new OrderRetainingMap();
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-            for (int i = 0; i < propertyDescriptors.length; i++ ) {
+            for (int i = 0; i < propertyDescriptors.length; i++){
                 PropertyDescriptor descriptor = propertyDescriptors[i];
                 nameMap.put(descriptor.getName(), descriptor);
             }
@@ -137,7 +101,7 @@ public class PropertyDictionary implements Caching {
     }
 
     @Override
-    public void flushCache() {
+    public void flushCache(){
         propertyNameCache.clear();
     }
 }

@@ -33,42 +33,45 @@ import com.feilong.lib.xstream.mapper.Mapper;
 /**
  * Converts a java.util.TreeSet to XML, and serializes
  * the associated java.util.Comparator. The converter
- * assumes that the elements in the XML are already sorted 
+ * assumes that the elements in the XML are already sorted
  * according the comparator.
  *
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class TreeSetConverter extends CollectionConverter {
-    private transient TreeMapConverter treeMapConverter;  
-    private final static Field sortedMapField;
-    private final static Object constantValue;
-    static {
+public class TreeSetConverter extends CollectionConverter{
+
+    private transient TreeMapConverter treeMapConverter;
+
+    private final static Field         sortedMapField;
+
+    private final static Object        constantValue;
+    static{
         Object value = null;
         sortedMapField = JVM.hasOptimizedTreeSetAddAll() ? Fields.locate(TreeSet.class, SortedMap.class, false) : null;
-        if (sortedMapField != null) {
+        if (sortedMapField != null){
             TreeSet set = new TreeSet();
             set.add("1");
             set.add("2");
 
             Map backingMap = null;
-            try {
-                backingMap = (Map)sortedMapField.get(set);
-            } catch (final IllegalAccessException e) {
+            try{
+                backingMap = (Map) sortedMapField.get(set);
+            }catch (final IllegalAccessException e){
                 // give up;
             }
-            if (backingMap != null) {
+            if (backingMap != null){
                 Object[] values = backingMap.values().toArray();
-                if (values[0] == values[1]) {
+                if (values[0] == values[1]){
                     value = values[0];
                 }
             }
-        } else {
+        }else{
             Field valueField = Fields.locate(TreeSet.class, Object.class, true);
-            if (valueField != null) {
-                try {
+            if (valueField != null){
+                try{
                     value = valueField.get(null);
-                } catch (final IllegalAccessException e) {
+                }catch (final IllegalAccessException e){
                     // give up;
                 }
             }
@@ -76,88 +79,87 @@ public class TreeSetConverter extends CollectionConverter {
         constantValue = value;
     }
 
-    public TreeSetConverter(Mapper mapper) {
+    public TreeSetConverter(Mapper mapper){
         super(mapper, TreeSet.class);
         readResolve();
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         SortedSet sortedSet = (SortedSet) source;
         treeMapConverter.marshalComparator(sortedSet.comparator(), writer, context);
         super.marshal(source, writer, context);
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         TreeSet result = null;
         final TreeMap treeMap;
         Comparator unmarshalledComparator = treeMapConverter.unmarshalComparator(reader, context, null);
         boolean inFirstElement = unmarshalledComparator instanceof Mapper.Null;
         Comparator comparator = inFirstElement ? null : unmarshalledComparator;
-        if (sortedMapField != null) {
+        if (sortedMapField != null){
             TreeSet possibleResult = comparator == null ? new TreeSet() : new TreeSet(comparator);
             Object backingMap = null;
-            try {
+            try{
                 backingMap = sortedMapField.get(possibleResult);
-            } catch (IllegalAccessException e) {
+            }catch (IllegalAccessException e){
                 throw new ObjectAccessException("Cannot get backing map of TreeSet", e);
             }
-            if (backingMap instanceof TreeMap) {
-                treeMap = (TreeMap)backingMap;
+            if (backingMap instanceof TreeMap){
+                treeMap = (TreeMap) backingMap;
                 result = possibleResult;
-            } else {
+            }else{
                 treeMap = null;
             }
-        } else {
+        }else{
             treeMap = null;
         }
-        if (treeMap == null) {
+        if (treeMap == null){
             final PresortedSet set = new PresortedSet(comparator);
             result = comparator == null ? new TreeSet() : new TreeSet(comparator);
-            if (inFirstElement) {
+            if (inFirstElement){
                 // we are already within the first element
                 addCurrentElementToCollection(reader, context, result, set);
                 reader.moveUp();
             }
             populateCollection(reader, context, result, set);
-            if (set.size() > 0) {
+            if (set.size() > 0){
                 result.addAll(set); // comparator will not be called if internally optimized
             }
-        } else {
+        }else{
             treeMapConverter.populateTreeMap(reader, context, treeMap, unmarshalledComparator);
         }
         return result;
     }
 
-    private Object readResolve() {
-        treeMapConverter = new TreeMapConverter(mapper()) {
+    private Object readResolve(){
+        treeMapConverter = new TreeMapConverter(mapper()){
 
             @Override
-            protected void populateMap(HierarchicalStreamReader reader,
-                UnmarshallingContext context, Map map, final Map target) {
-                populateCollection(reader, context, new AbstractList() {
+            protected void populateMap(HierarchicalStreamReader reader,UnmarshallingContext context,Map map,final Map target){
+                populateCollection(reader, context, new AbstractList(){
+
                     @Override
-                    public boolean add(Object object) {
+                    public boolean add(Object object){
                         return target.put(object, constantValue != null ? constantValue : object) != null;
                     }
 
                     @Override
-                    public Object get(int location) {
+                    public Object get(int location){
                         return null;
                     }
 
                     @Override
-                    public int size() {
+                    public int size(){
                         return target.size();
                     }
                 });
             }
 
             @Override
-            protected void putCurrentEntryIntoMap(HierarchicalStreamReader reader, UnmarshallingContext context,
-                Map map, Map target) {
-                final Object key = readItem(reader, context, map);  // call readBareItem when deprecated method is removed
+            protected void putCurrentEntryIntoMap(HierarchicalStreamReader reader,UnmarshallingContext context,Map map,Map target){
+                final Object key = readItem(reader, context, map); // call readBareItem when deprecated method is removed
                 target.put(key, key);
             }
         };

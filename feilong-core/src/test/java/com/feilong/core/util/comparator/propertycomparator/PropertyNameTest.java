@@ -31,6 +31,7 @@ import com.feilong.store.member.UserSameHashCodeWithComparable;
 
 public class PropertyNameTest{
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testPropertyComparatorWithTreeSetWithComparable(){
         UserSameHashCodeWithComparable userSameHashCodeWithComparable_1_name1 = new UserSameHashCodeWithComparable(1, "name1");
@@ -80,6 +81,7 @@ public class PropertyNameTest{
                         ));
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testPropertyComparatorWithTreeSet(){
         UserSameHashCode userSameHashCode_1_name1 = new UserSameHashCode(1, "name1");

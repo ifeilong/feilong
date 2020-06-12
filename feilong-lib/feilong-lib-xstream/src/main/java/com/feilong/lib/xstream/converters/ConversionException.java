@@ -23,17 +23,17 @@ package com.feilong.lib.xstream.converters;
  *
  * @see ErrorWriter
  */
-public class ConversionException extends ErrorWritingException {
+public class ConversionException extends ErrorWritingException{
 
-    public ConversionException(String msg, Throwable cause) {
+    public ConversionException(String msg, Throwable cause){
         super(msg, cause);
     }
 
-    public ConversionException(String msg) {
+    public ConversionException(String msg){
         super(msg);
     }
 
-    public ConversionException(Throwable cause) {
+    public ConversionException(Throwable cause){
         super(cause);
     }
 }

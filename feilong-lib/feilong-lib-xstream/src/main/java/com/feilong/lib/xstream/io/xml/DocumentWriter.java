@@ -14,7 +14,6 @@ import java.util.List;
 
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 
-
 /**
  * A generic interface for all {@link HierarchicalStreamWriter} implementations generating a
  * DOM.
@@ -22,7 +21,7 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author J&ouml;rg Schaible
  * @since 1.2.1
  */
-public interface DocumentWriter extends HierarchicalStreamWriter {
+public interface DocumentWriter extends HierarchicalStreamWriter{
 
     /**
      * Retrieve a {@link List} with the top elements. In the standard use case this list will

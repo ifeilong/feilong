@@ -18,9 +18,9 @@ package com.feilong.core.util.sortutiltest;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sortList;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -40,10 +40,6 @@ import com.feilong.store.member.User;
  */
 public class SortListComparatorsTest{
 
-    /**
-     * Test sort list comparators.
-     */
-    
     @Test
     public void testSortListComparators(){
         User zhangfei = new User("张飞", 23);
@@ -57,10 +53,6 @@ public class SortListComparatorsTest{
         assertThat(list, contains(liubei, guanyu));
     }
 
-    /**
-     * Test sort list comparators 1.
-     */
-    
     @Test
     public void testSortListComparators1(){
         User guanyu = new User("关羽", 30);
@@ -80,39 +72,27 @@ public class SortListComparatorsTest{
         assertThat(list, contains(liubei10, liubei25, liubei30, liubei60, guanyu));
     }
 
-    /**
-     * Test sort list null list.
-     */
-    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testSortListNullList(){
         assertEquals(emptyList(), sortList((List) null, (Comparator) null));
     }
 
-    /**
-     * Test sort list empty list.
-     */
-    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void testSortListEmptyList(){
         assertEquals(emptyList(), sortList(new ArrayList<>(), (Comparator) null));
     }
 
-    /**
-     * Test sort list null comparators.
-     */
-    
+    @SuppressWarnings({ "unchecked" })
     @Test
     public void testSortListNullComparators(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
         assertEquals(list, sortList(list, (Comparator[]) null));
     }
 
-    /**
-     * Test sort list null comparator.
-     */
-    
     @Test
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public void testSortListNullComparator(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
         assertEquals(list, sortList(list, (Comparator) null));

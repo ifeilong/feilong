@@ -18,33 +18,51 @@ import java.util.Map;
 import com.feilong.lib.xstream.converters.Converter;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
+public abstract class MapperWrapper implements Mapper{
 
-public abstract class MapperWrapper implements Mapper {
     private final Mapper wrapped;
+
     private final Mapper aliasForAttributeMapper;
+
     private final Mapper aliasForSystemAttributeMapper;
+
     private final Mapper attributeForAliasMapper;
+
     private final Mapper defaultImplementationOfMapper;
+
     private final Mapper getConverterFromAttributeMapper;
+
     private final Mapper getConverterFromItemTypeMapper;
+
     private final Mapper getFieldNameForItemTypeAndNameMapper;
+
     private final Mapper getImplicitCollectionDefForFieldNameMapper;
+
     private final Mapper getItemTypeForItemFieldNameMapper;
+
     private final Mapper getLocalConverterMapper;
+
     private final Mapper isIgnoredElementMapper;
+
     private final Mapper isImmutableValueTypeMapper;
+
     private final Mapper isReferenceableMapper;
+
     private final Mapper realClassMapper;
+
     private final Mapper realMemberMapper;
+
     private final Mapper serializedClassMapper;
+
     private final Mapper serializedMemberMapper;
+
     private final Mapper shouldSerializeMemberMapper;
 
-    public MapperWrapper(Mapper wrapped) {
+    public MapperWrapper(Mapper wrapped){
         this.wrapped = wrapped;
 
-        if (wrapped instanceof MapperWrapper) {
-            final MapperWrapper wrapper = (MapperWrapper)wrapped;
+        if (wrapped instanceof MapperWrapper){
+            final MapperWrapper wrapper = (MapperWrapper) wrapped;
             final Map wrapperMap = new HashMap();
             wrapperMap.put("aliasForAttribute", wrapper.aliasForAttributeMapper);
             wrapperMap.put("aliasForSystemAttribute", wrapper.aliasForSystemAttributeMapper);
@@ -66,35 +84,35 @@ public abstract class MapperWrapper implements Mapper {
             wrapperMap.put("shouldSerializeMember", wrapper.shouldSerializeMemberMapper);
 
             final Method[] methods = wrapped.getClass().getMethods();
-            for (int i = 0; i < methods.length; ++i) {
+            for (int i = 0; i < methods.length; ++i){
                 final Method method = methods[i];
-                if (method.getDeclaringClass() != MapperWrapper.class) {
+                if (method.getDeclaringClass() != MapperWrapper.class){
                     final String name = method.getName();
-                    if (wrapperMap.containsKey(name)) {
+                    if (wrapperMap.containsKey(name)){
                         wrapperMap.put(name, wrapped);
                     }
                 }
             }
 
-            aliasForAttributeMapper = (Mapper)wrapperMap.get("aliasForAttribute");
-            aliasForSystemAttributeMapper = (Mapper)wrapperMap.get("aliasForSystemAttribute");
-            attributeForAliasMapper = (Mapper)wrapperMap.get("attributeForAlias");
-            defaultImplementationOfMapper = (Mapper)wrapperMap.get("defaultImplementationOf");
-            getConverterFromAttributeMapper = (Mapper)wrapperMap.get("getConverterFromAttribute");
-            getConverterFromItemTypeMapper = (Mapper)wrapperMap.get("getConverterFromItemType");
-            getFieldNameForItemTypeAndNameMapper = (Mapper)wrapperMap.get("getFieldNameForItemTypeAndName");
-            getImplicitCollectionDefForFieldNameMapper = (Mapper)wrapperMap.get("getImplicitCollectionDefForFieldName");
-            getItemTypeForItemFieldNameMapper = (Mapper)wrapperMap.get("getItemTypeForItemFieldName");
-            getLocalConverterMapper = (Mapper)wrapperMap.get("getLocalConverter");
-            isIgnoredElementMapper = (Mapper)wrapperMap.get("isIgnoredElement");
-            isImmutableValueTypeMapper = (Mapper)wrapperMap.get("isImmutableValueType");
-            isReferenceableMapper = (Mapper)wrapperMap.get("isReferenceable");
-            realClassMapper = (Mapper)wrapperMap.get("realClass");
-            realMemberMapper = (Mapper)wrapperMap.get("realMember");
-            serializedClassMapper = (Mapper)wrapperMap.get("serializedClass");
-            serializedMemberMapper = (Mapper)wrapperMap.get("serializedMember");
-            shouldSerializeMemberMapper = (Mapper)wrapperMap.get("shouldSerializeMember");
-        } else {
+            aliasForAttributeMapper = (Mapper) wrapperMap.get("aliasForAttribute");
+            aliasForSystemAttributeMapper = (Mapper) wrapperMap.get("aliasForSystemAttribute");
+            attributeForAliasMapper = (Mapper) wrapperMap.get("attributeForAlias");
+            defaultImplementationOfMapper = (Mapper) wrapperMap.get("defaultImplementationOf");
+            getConverterFromAttributeMapper = (Mapper) wrapperMap.get("getConverterFromAttribute");
+            getConverterFromItemTypeMapper = (Mapper) wrapperMap.get("getConverterFromItemType");
+            getFieldNameForItemTypeAndNameMapper = (Mapper) wrapperMap.get("getFieldNameForItemTypeAndName");
+            getImplicitCollectionDefForFieldNameMapper = (Mapper) wrapperMap.get("getImplicitCollectionDefForFieldName");
+            getItemTypeForItemFieldNameMapper = (Mapper) wrapperMap.get("getItemTypeForItemFieldName");
+            getLocalConverterMapper = (Mapper) wrapperMap.get("getLocalConverter");
+            isIgnoredElementMapper = (Mapper) wrapperMap.get("isIgnoredElement");
+            isImmutableValueTypeMapper = (Mapper) wrapperMap.get("isImmutableValueType");
+            isReferenceableMapper = (Mapper) wrapperMap.get("isReferenceable");
+            realClassMapper = (Mapper) wrapperMap.get("realClass");
+            realMemberMapper = (Mapper) wrapperMap.get("realMember");
+            serializedClassMapper = (Mapper) wrapperMap.get("serializedClass");
+            serializedMemberMapper = (Mapper) wrapperMap.get("serializedMember");
+            shouldSerializeMemberMapper = (Mapper) wrapperMap.get("shouldSerializeMember");
+        }else{
             aliasForAttributeMapper = wrapped;
             aliasForSystemAttributeMapper = wrapped;
             attributeForAliasMapper = wrapped;
@@ -118,77 +136,77 @@ public abstract class MapperWrapper implements Mapper {
     }
 
     @Override
-    public String serializedClass(Class type) {
+    public String serializedClass(Class type){
         return serializedClassMapper.serializedClass(type);
     }
 
     @Override
-    public Class realClass(String elementName) {
+    public Class realClass(String elementName){
         return realClassMapper.realClass(elementName);
     }
 
     @Override
-    public String serializedMember(Class type, String memberName) {
+    public String serializedMember(Class type,String memberName){
         return serializedMemberMapper.serializedMember(type, memberName);
     }
 
     @Override
-    public String realMember(Class type, String serialized) {
+    public String realMember(Class type,String serialized){
         return realMemberMapper.realMember(type, serialized);
     }
 
     @Override
-    public boolean isImmutableValueType(Class type) {
+    public boolean isImmutableValueType(Class type){
         return isImmutableValueTypeMapper.isImmutableValueType(type);
     }
 
     @Override
-    public boolean isReferenceable(Class type) {
+    public boolean isReferenceable(Class type){
         return isReferenceableMapper.isReferenceable(type);
     }
 
     @Override
-    public Class defaultImplementationOf(Class type) {
+    public Class defaultImplementationOf(Class type){
         return defaultImplementationOfMapper.defaultImplementationOf(type);
     }
 
     @Override
-    public String aliasForAttribute(String attribute) {
+    public String aliasForAttribute(String attribute){
         return aliasForAttributeMapper.aliasForAttribute(attribute);
     }
 
     @Override
-    public String attributeForAlias(String alias) {
+    public String attributeForAlias(String alias){
         return attributeForAliasMapper.attributeForAlias(alias);
     }
 
     @Override
-    public String aliasForSystemAttribute(String attribute) {
+    public String aliasForSystemAttribute(String attribute){
         return aliasForSystemAttributeMapper.aliasForSystemAttribute(attribute);
     }
 
     @Override
-    public String getFieldNameForItemTypeAndName(Class definedIn, Class itemType, String itemFieldName) {
+    public String getFieldNameForItemTypeAndName(Class definedIn,Class itemType,String itemFieldName){
         return getFieldNameForItemTypeAndNameMapper.getFieldNameForItemTypeAndName(definedIn, itemType, itemFieldName);
     }
 
     @Override
-    public Class getItemTypeForItemFieldName(Class definedIn, String itemFieldName) {
+    public Class getItemTypeForItemFieldName(Class definedIn,String itemFieldName){
         return getItemTypeForItemFieldNameMapper.getItemTypeForItemFieldName(definedIn, itemFieldName);
     }
 
     @Override
-    public ImplicitCollectionMapping getImplicitCollectionDefForFieldName(Class itemType, String fieldName) {
+    public ImplicitCollectionMapping getImplicitCollectionDefForFieldName(Class itemType,String fieldName){
         return getImplicitCollectionDefForFieldNameMapper.getImplicitCollectionDefForFieldName(itemType, fieldName);
     }
 
     @Override
-    public boolean shouldSerializeMember(Class definedIn, String fieldName) {
+    public boolean shouldSerializeMember(Class definedIn,String fieldName){
         return shouldSerializeMemberMapper.shouldSerializeMember(definedIn, fieldName);
     }
-    
+
     @Override
-    public boolean isIgnoredElement(String name) {
+    public boolean isIgnoredElement(String name){
         return isIgnoredElementMapper.isIgnoredElement(name);
     }
 
@@ -196,7 +214,7 @@ public abstract class MapperWrapper implements Mapper {
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromItemType(String fieldName, Class type) {
+    public SingleValueConverter getConverterFromItemType(String fieldName,Class type){
         return getConverterFromItemTypeMapper.getConverterFromItemType(fieldName, type);
     }
 
@@ -204,7 +222,7 @@ public abstract class MapperWrapper implements Mapper {
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromItemType(Class type) {
+    public SingleValueConverter getConverterFromItemType(Class type){
         return getConverterFromItemTypeMapper.getConverterFromItemType(type);
     }
 
@@ -212,22 +230,22 @@ public abstract class MapperWrapper implements Mapper {
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromAttribute(String name) {
+    public SingleValueConverter getConverterFromAttribute(String name){
         return getConverterFromAttributeMapper.getConverterFromAttribute(name);
     }
 
     @Override
-    public Converter getLocalConverter(Class definedIn, String fieldName) {
+    public Converter getLocalConverter(Class definedIn,String fieldName){
         return getLocalConverterMapper.getLocalConverter(definedIn, fieldName);
     }
 
     @Override
-    public Mapper lookupMapperOfType(Class type) {
+    public Mapper lookupMapperOfType(Class type){
         return type.isAssignableFrom(getClass()) ? this : wrapped.lookupMapperOfType(type);
     }
 
     @Override
-    public SingleValueConverter getConverterFromItemType(String fieldName, Class type, Class definedIn) {
+    public SingleValueConverter getConverterFromItemType(String fieldName,Class type,Class definedIn){
         return getConverterFromItemTypeMapper.getConverterFromItemType(fieldName, type, definedIn);
     }
 
@@ -236,7 +254,7 @@ public abstract class MapperWrapper implements Mapper {
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public String aliasForAttribute(Class definedIn, String fieldName) {
+    public String aliasForAttribute(Class definedIn,String fieldName){
         return aliasForAttributeMapper.aliasForAttribute(definedIn, fieldName);
     }
 
@@ -245,7 +263,7 @@ public abstract class MapperWrapper implements Mapper {
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
     @Override
-    public String attributeForAlias(Class definedIn, String alias) {
+    public String attributeForAlias(Class definedIn,String alias){
         return attributeForAliasMapper.attributeForAlias(definedIn, alias);
     }
 
@@ -253,12 +271,12 @@ public abstract class MapperWrapper implements Mapper {
      * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
     @Override
-    public SingleValueConverter getConverterFromAttribute(Class type, String attribute) {
+    public SingleValueConverter getConverterFromAttribute(Class type,String attribute){
         return getConverterFromAttributeMapper.getConverterFromAttribute(type, attribute);
     }
 
     @Override
-    public SingleValueConverter getConverterFromAttribute(Class definedIn, String attribute, Class type) {
+    public SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute,Class type){
         return getConverterFromAttributeMapper.getConverterFromAttribute(definedIn, attribute, type);
     }
 

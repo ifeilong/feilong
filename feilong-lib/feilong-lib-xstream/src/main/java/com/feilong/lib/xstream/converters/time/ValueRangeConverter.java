@@ -22,7 +22,6 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * Converts a temporal {@link ValueRange}, using four nested elements: maxLargest, maxSmallest, minLargest, and
  * minSmallest.
@@ -30,28 +29,29 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class ValueRangeConverter implements Converter {
+public class ValueRangeConverter implements Converter{
 
     private final Mapper mapper;
 
     /**
      * Constructs a ValueRangeConverter instance.
      * 
-     * @param mapper the Mapper instance
+     * @param mapper
+     *            the Mapper instance
      */
-    public ValueRangeConverter(final Mapper mapper) {
+    public ValueRangeConverter(final Mapper mapper){
         this.mapper = mapper;
 
     }
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return type == ValueRange.class;
     }
 
     @Override
-    public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-        final ValueRange valueRange = (ValueRange)source;
+    public void marshal(final Object source,final HierarchicalStreamWriter writer,final MarshallingContext context){
+        final ValueRange valueRange = (ValueRange) source;
         write("maxLargest", valueRange.getMaximum(), writer);
         write("maxSmallest", valueRange.getSmallestMaximum(), writer);
         write("minLargest", valueRange.getLargestMinimum(), writer);
@@ -59,32 +59,33 @@ public class ValueRangeConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+    public Object unmarshal(final HierarchicalStreamReader reader,final UnmarshallingContext context){
         final boolean oldFormat = "custom".equals(reader.getAttribute(mapper.aliasForSystemAttribute("serialization")));
-        if (oldFormat) {
+        if (oldFormat){
             reader.moveDown();
             reader.moveDown();
         }
         final Map<String, Long> elements = new HashMap<>();
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             reader.moveDown();
 
             final String name = reader.getNodeName();
             elements.put(oldFormat ? name : mapper.realMember(ValueRange.class, name), Long.valueOf(reader.getValue()));
             reader.moveUp();
         }
-        if (oldFormat) {
+        if (oldFormat){
             reader.moveUp();
             reader.moveUp();
         }
-        return ValueRange.of(elements.get("minSmallest").longValue(), elements.get("minLargest").longValue(), elements
-            .get("maxSmallest")
-            .longValue(), elements.get("maxLargest").longValue());
+        return ValueRange.of(
+                        elements.get("minSmallest").longValue(),
+                        elements.get("minLargest").longValue(),
+                        elements.get("maxSmallest").longValue(),
+                        elements.get("maxLargest").longValue());
     }
 
-    private void write(final String fieldName, final long value, final HierarchicalStreamWriter writer) {
-        ExtendedHierarchicalStreamWriterHelper.startNode(writer, mapper.serializedMember(ValueRange.class, fieldName),
-            long.class);
+    private void write(final String fieldName,final long value,final HierarchicalStreamWriter writer){
+        ExtendedHierarchicalStreamWriterHelper.startNode(writer, mapper.serializedMember(ValueRange.class, fieldName), long.class);
         writer.setValue(String.valueOf(value));
         writer.endNode();
     }

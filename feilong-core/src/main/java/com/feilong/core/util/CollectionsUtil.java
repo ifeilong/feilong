@@ -43,6 +43,7 @@ import org.apache.commons.collections4.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.bean.PropertyValueObtainer;
 import com.feilong.core.util.closure.BeanPropertyValueChangeClosure;
@@ -51,7 +52,6 @@ import com.feilong.core.util.transformer.BeanTransformer;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.ListUtils;
-import com.feilong.core.Validate;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
@@ -755,7 +755,7 @@ public final class CollectionsUtil{
      *         否则先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
-     * @see com.feilong.lib.collection4.IterableUtils#uniqueIterable(Iterable)
+     * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -802,7 +802,7 @@ public final class CollectionsUtil{
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
-     * @see com.feilong.lib.collection4.IterableUtils#uniqueIterable(Iterable)
+     * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -867,7 +867,7 @@ public final class CollectionsUtil{
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
-     * @see com.feilong.lib.collection4.IterableUtils#uniqueIterable(Iterable)
+     * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -2005,6 +2005,7 @@ public final class CollectionsUtil{
      * @see com.feilong.lib.collection4.CollectionUtils#transform(Collection, Transformer)
      * @since 1.5.5
      */
+    @SuppressWarnings("unchecked")
     public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
         return null == inputIterable ? null : (List<T>) CollectionUtils.collect(inputIterable, transformer);
     }
@@ -2183,6 +2184,7 @@ public final class CollectionsUtil{
      * @see com.feilong.lib.collection4.CollectionUtils#collect(java.util.Iterator, Transformer)
      * @since 1.5.5
      */
+    @SuppressWarnings("unchecked")
     public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
         return null == inputIterator ? null : (List<T>) CollectionUtils.collect(inputIterator, transformer);
     }
@@ -2374,13 +2376,10 @@ public final class CollectionsUtil{
 
         //---------------------------------------------------------------
         //org.apache.commons.beanutils.BeanToPropertyValueTransformer 但是实现的是 commons-collection3
-        return group(beanIterable, includePredicate, new Transformer<O, T>(){
-
-            @Override
-            public T transform(O input){
-                return PropertyUtil.getProperty(input, propertyName);
-            }
-        });
+        return group(
+                        beanIterable,
+                        includePredicate, //
+                        input -> PropertyUtil.getProperty(input, propertyName));
     }
 
     /**

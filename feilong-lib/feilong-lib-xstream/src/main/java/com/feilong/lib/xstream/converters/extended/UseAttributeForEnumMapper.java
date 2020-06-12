@@ -16,18 +16,18 @@ import com.feilong.lib.xstream.mapper.AttributeMapper;
 import com.feilong.lib.xstream.mapper.DefaultMapper;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-class UseAttributeForEnumMapper extends AttributeMapper {
+class UseAttributeForEnumMapper extends AttributeMapper{
 
-    public UseAttributeForEnumMapper(Mapper wrapped) {
+    public UseAttributeForEnumMapper(Mapper wrapped){
         super(wrapped, null, null);
     }
 
     /**
-     * @deprecated only used for Java 1.4 support 
+     * @deprecated only used for Java 1.4 support
      */
-    public static boolean isEnum(Class type) {
-        while(type != null && type != Object.class) {
-            if (type.getName().equals("java.lang.Enum")) {
+    public static boolean isEnum(Class type){
+        while (type != null && type != Object.class){
+            if (type.getName().equals("java.lang.Enum")){
                 return true;
             }
             type = type.getSuperclass();
@@ -36,33 +36,27 @@ class UseAttributeForEnumMapper extends AttributeMapper {
     }
 
     @Override
-    public boolean shouldLookForSingleValueConverter(String fieldName, Class type,
-        Class definedIn) {
+    public boolean shouldLookForSingleValueConverter(String fieldName,Class type,Class definedIn){
         return isEnum(type);
     }
 
     @Override
-    public SingleValueConverter getConverterFromItemType(String fieldName, Class type,
-        Class definedIn) {
+    public SingleValueConverter getConverterFromItemType(String fieldName,Class type,Class definedIn){
         return null;
     }
 
     @Override
-    public SingleValueConverter getConverterFromAttribute(Class definedIn,
-        String attribute, Class type) {
+    public SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute,Class type){
         return null;
     }
 
-    static Mapper createEnumMapper(final Mapper mapper) {
-        try {
-            Class enumMapperClass = Class.forName(
-                "com.feilong.lib.xstream.mapper.EnumMapper", true,
-                Mapper.class.getClassLoader());
-            return (Mapper)DependencyInjectionFactory.newInstance(
-                enumMapperClass,
-                new Object[]{new UseAttributeForEnumMapper(mapper
-                    .lookupMapperOfType(DefaultMapper.class))});
-        } catch (Exception e) {
+    static Mapper createEnumMapper(final Mapper mapper){
+        try{
+            Class enumMapperClass = Class.forName("com.feilong.lib.xstream.mapper.EnumMapper", true, Mapper.class.getClassLoader());
+            return (Mapper) DependencyInjectionFactory.newInstance(
+                            enumMapperClass,
+                            new Object[] { new UseAttributeForEnumMapper(mapper.lookupMapperOfType(DefaultMapper.class)) });
+        }catch (Exception e){
             return null;
         }
     }

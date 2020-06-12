@@ -798,7 +798,7 @@ public abstract class ToStringStyle implements Serializable{
      * @param value
      *            the value to add to the {@code toString}
      */
-    protected void appendDetail(final StringBuffer buffer,final String fieldName,final int value){
+    protected void appendDetail(final StringBuffer buffer,@SuppressWarnings("unused") final String fieldName,final int value){
         buffer.append(value);
     }
 

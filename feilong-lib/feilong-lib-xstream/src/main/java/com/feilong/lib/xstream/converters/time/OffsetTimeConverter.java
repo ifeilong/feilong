@@ -19,7 +19,6 @@ import java.time.temporal.ChronoField;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
-
 /**
  * Converts a {@link OffsetTime} to a string.
  *
@@ -27,28 +26,25 @@ import com.feilong.lib.xstream.converters.SingleValueConverter;
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class OffsetTimeConverter implements SingleValueConverter {
+public class OffsetTimeConverter implements SingleValueConverter{
 
     private static final DateTimeFormatter FORMATTER;
 
-    static {
-        FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("HH:mm:ss")
-            .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
-            .appendOffsetId()
-            .toFormatter();
+    static{
+        FORMATTER = new DateTimeFormatterBuilder().appendPattern("HH:mm:ss").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
+                        .appendOffsetId().toFormatter();
     }
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return OffsetTime.class == type;
     }
 
     @Override
-    public Object fromString(final String str) {
-        try {
+    public Object fromString(final String str){
+        try{
             return OffsetTime.parse(str);
-        } catch (final DateTimeParseException e) {
+        }catch (final DateTimeParseException e){
             final ConversionException exception = new ConversionException("Cannot parse value as offset time", e);
             exception.add("value", str);
             throw exception;
@@ -56,12 +52,12 @@ public class OffsetTimeConverter implements SingleValueConverter {
     }
 
     @Override
-    public String toString(final Object obj) {
-        if (obj == null) {
+    public String toString(final Object obj){
+        if (obj == null){
             return null;
         }
 
-        final OffsetTime offsetTime = (OffsetTime)obj;
+        final OffsetTime offsetTime = (OffsetTime) obj;
         return FORMATTER.format(offsetTime);
     }
 }

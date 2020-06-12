@@ -38,6 +38,7 @@ public class PutIfValueNotNullOrEmptyTest{
     /**
      * Test put if value not null or empty.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testPutIfValueNotNullOrEmpty(){
         Map<String, Integer> map = newHashMap();
@@ -48,6 +49,7 @@ public class PutIfValueNotNullOrEmptyTest{
     /**
      * Test put if value not null or empty null value.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testPutIfValueNotNullOrEmptyNullValue(){
         Map<String, Integer> map = newHashMap();
@@ -58,6 +60,7 @@ public class PutIfValueNotNullOrEmptyTest{
     /**
      * Test put if value not null or empty empty value.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue(){
         Map<String, String> map = newHashMap();
@@ -68,6 +71,7 @@ public class PutIfValueNotNullOrEmptyTest{
     /**
      * Test put if value not null or empty empty value 1.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue1(){
         Map<String, String> map = newHashMap();
@@ -78,6 +82,7 @@ public class PutIfValueNotNullOrEmptyTest{
     /**
      * Test put if value not null or empty empty value 2.
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue2(){
         Map<String, Object[]> map = newHashMap();

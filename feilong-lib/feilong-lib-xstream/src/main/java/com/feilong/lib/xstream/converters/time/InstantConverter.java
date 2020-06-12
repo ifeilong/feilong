@@ -16,25 +16,24 @@ import java.time.format.DateTimeParseException;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link Instant} instance to string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class InstantConverter extends AbstractSingleValueConverter {
+public class InstantConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return Instant.class == type;
     }
 
     @Override
-    public Instant fromString(final String str) {
-        try {
+    public Instant fromString(final String str){
+        try{
             return Instant.parse(str);
-        } catch (final DateTimeParseException ex) {
+        }catch (final DateTimeParseException ex){
             final ConversionException exception = new ConversionException("Cannot parse value as instant", ex);
             exception.add("value", str);
             throw exception;

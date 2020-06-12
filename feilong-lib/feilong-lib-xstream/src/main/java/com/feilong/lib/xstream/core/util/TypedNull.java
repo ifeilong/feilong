@@ -13,21 +13,19 @@ package com.feilong.lib.xstream.core.util;
 /**
  * A placeholder for a <code>null</code> value of a specific type.
  *
- * @author  J&ouml;rg Schaible
+ * @author J&ouml;rg Schaible
  * @since 1.2.2
  */
-public class TypedNull
-{
-	private final Class type;
-	
-	public TypedNull(Class type)
-	{
-		super();
-		this.type = type;
-	}
-	
-	public Class getType()
-	{
-		return this.type;
-	}
+public class TypedNull{
+
+    private final Class type;
+
+    public TypedNull(Class type){
+        super();
+        this.type = type;
+    }
+
+    public Class getType(){
+        return this.type;
+    }
 }

@@ -24,7 +24,7 @@ import com.feilong.lib.xstream.core.JVM;
  * @author <a href="mailto:boxley@thoughtworks.com">B. K. Oxley (binkley)</a>
  * @author Joe Walnes
  */
-public class StackTraceElementConverter extends AbstractSingleValueConverter {
+public class StackTraceElementConverter extends AbstractSingleValueConverter{
 
     // Regular expression to parse a line of a stack trace. Returns 4 groups.
     //
@@ -32,67 +32,66 @@ public class StackTraceElementConverter extends AbstractSingleValueConverter {
     //                |-------1------| |--2--| |----3-----| |4|
     // (Note group 4 is optional is optional and only present if a colon char exists.)
 
-    private static final Pattern PATTERN = Pattern.compile("^(.+)\\.([^\\(]+)\\(([^:]*)(:(\\d+))?\\)$");
+    private static final Pattern                  PATTERN = Pattern.compile("^(.+)\\.([^\\(]+)\\(([^:]*)(:(\\d+))?\\)$");
+
     private static final StackTraceElementFactory FACTORY;
-    static {
+    static{
         StackTraceElementFactory factory = null;
-        if (JVM.isVersion(5)) {
-            Class factoryType = JVM.loadClassForName(
-                "com.feilong.lib.xstream.converters.extended.StackTraceElementFactory15",
-                false);
-            try {
-                factory = (StackTraceElementFactory)factoryType.newInstance();
-            } catch (Exception e) {
+        if (JVM.isVersion(5)){
+            Class factoryType = JVM.loadClassForName("com.feilong.lib.xstream.converters.extended.StackTraceElementFactory15", false);
+            try{
+                factory = (StackTraceElementFactory) factoryType.newInstance();
+            }catch (Exception e){
                 // N/A
-            } catch (LinkageError e) {
+            }catch (LinkageError e){
                 // N/A
             }
         }
-        if (factory == null) {
+        if (factory == null){
             factory = new StackTraceElementFactory();
         }
-        try {
+        try{
             factory.unknownSourceElement("a", "b");
-        } catch (Exception e) {
+        }catch (Exception e){
             factory = null;
-        } catch (NoClassDefFoundError e) { // GAE
+        }catch (NoClassDefFoundError e){ // GAE
             factory = null;
         }
         FACTORY = factory;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return StackTraceElement.class.equals(type) && FACTORY != null;
     }
-    
+
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         String s = super.toString(obj);
         // JRockit adds ":???" for invalid line number
         return s.replaceFirst(":\\?\\?\\?", "");
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         Matcher matcher = PATTERN.matcher(str);
-        if (matcher.matches()) {
+        if (matcher.matches()){
             String declaringClass = matcher.group(1);
             String methodName = matcher.group(2);
             String fileName = matcher.group(3);
-            if (fileName.equals("Unknown Source")) {
+            if (fileName.equals("Unknown Source")){
                 return FACTORY.unknownSourceElement(declaringClass, methodName);
-            } else if (fileName.equals("Native Method")) {
+            }else if (fileName.equals("Native Method")){
                 return FACTORY.nativeMethodElement(declaringClass, methodName);
-            } else {
-                if (matcher.group(4) != null) {
+            }else{
+                if (matcher.group(4) != null){
                     int lineNumber = Integer.parseInt(matcher.group(5));
                     return FACTORY.element(declaringClass, methodName, fileName, lineNumber);
-                } else {
+                }else{
                     return FACTORY.element(declaringClass, methodName, fileName);
                 }
             }
-        } else {
+        }else{
             throw new ConversionException("Could not parse StackTraceElement : " + str);
         }
     }

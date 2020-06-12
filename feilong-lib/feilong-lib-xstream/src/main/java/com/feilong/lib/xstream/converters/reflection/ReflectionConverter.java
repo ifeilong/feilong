@@ -13,29 +13,32 @@ package com.feilong.lib.xstream.converters.reflection;
 
 import com.feilong.lib.xstream.mapper.Mapper;
 
-public class ReflectionConverter extends AbstractReflectionConverter {
+public class ReflectionConverter extends AbstractReflectionConverter{
 
     private Class type;
 
-    public ReflectionConverter(Mapper mapper, ReflectionProvider reflectionProvider) {
+    public ReflectionConverter(Mapper mapper, ReflectionProvider reflectionProvider){
         super(mapper, reflectionProvider);
     }
 
     /**
      * Construct a ReflectionConverter for an explicit type.
      * 
-     * @param mapper the mapper in use
-     * @param reflectionProvider the reflection provider in use
-     * @param type the explicit type to handle
+     * @param mapper
+     *            the mapper in use
+     * @param reflectionProvider
+     *            the reflection provider in use
+     * @param type
+     *            the explicit type to handle
      * @since 1.4.7
      */
-    public ReflectionConverter(Mapper mapper, ReflectionProvider reflectionProvider, Class type) {
+    public ReflectionConverter(Mapper mapper, ReflectionProvider reflectionProvider, Class type){
         this(mapper, reflectionProvider);
         this.type = type;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return (this.type != null && this.type == type || this.type == null && type != null) && canAccess(type);
     }
 }

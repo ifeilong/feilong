@@ -19,7 +19,7 @@ import com.feilong.lib.xstream.converters.ErrorWriter;
 /**
  * @author Joe Walnes
  */
-public interface HierarchicalStreamReader extends ErrorReporter {
+public interface HierarchicalStreamReader extends ErrorReporter{
 
     /**
      * Does the node have any more children remaining that have not yet been read?
@@ -63,7 +63,7 @@ public interface HierarchicalStreamReader extends ErrorReporter {
      * </p>
      */
     String getAttribute(int index);
-    
+
     /**
      * Number of attributes in current node.
      */
@@ -102,20 +102,31 @@ public interface HierarchicalStreamReader extends ErrorReporter {
     /**
      * Return the underlying HierarchicalStreamReader implementation.
      *
-     * <p>If a Converter needs to access methods of a specific HierarchicalStreamReader implementation that are not
+     * <p>
+     * If a Converter needs to access methods of a specific HierarchicalStreamReader implementation that are not
      * defined in the HierarchicalStreamReader interface, it should call this method before casting. This is because
      * the reader passed to the Converter is often wrapped/decorated by another implementation to provide additional
-     * functionality (such as XPath tracking).</p>
+     * functionality (such as XPath tracking).
+     * </p>
      *
-     * <p>For example:</p>
-     * <pre>MySpecificReader mySpecificReader = (MySpecificReader)reader; <b>// INCORRECT!</b>
-     * mySpecificReader.doSomethingSpecific();</pre>
-
-     * <pre>MySpecificReader mySpecificReader = (MySpecificReader)reader.underlyingReader();  <b>// CORRECT!</b>
-     * mySpecificReader.doSomethingSpecific();</pre>
+     * <p>
+     * For example:
+     * </p>
+     * 
+     * <pre>
+     * MySpecificReader mySpecificReader = (MySpecificReader)reader; <b>// INCORRECT!</b>
+     * mySpecificReader.doSomethingSpecific();
+     * </pre>
+     * 
+     * <pre>
+     * MySpecificReader mySpecificReader = (MySpecificReader)reader.underlyingReader();  <b>// CORRECT!</b>
+     * mySpecificReader.doSomethingSpecific();
+     * </pre>
      *
-     * <p>Implementations of HierarchicalStreamReader should return 'this', unless they are a decorator, in which case
-     * they should delegate to whatever they are wrapping.</p>
+     * <p>
+     * Implementations of HierarchicalStreamReader should return 'this', unless they are a decorator, in which case
+     * they should delegate to whatever they are wrapping.
+     * </p>
      */
     HierarchicalStreamReader underlyingReader();
 

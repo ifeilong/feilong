@@ -17,8 +17,8 @@ package com.feilong.core.util.predicate;
 
 import org.apache.commons.collections4.Predicate;
 
-import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.bean.PropertyUtil;
 
 /**
  * 调用 {@link PropertyUtil#getProperty(Object, String)} 匹配属性值.
@@ -26,7 +26,7 @@ import com.feilong.core.Validate;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.lib.beanutils.BeanPredicate
+ * @see "org.apache.commons.beanutils.BeanPredicate"
  * @see com.feilong.lib.beanutils.BeanPropertyValueEqualsPredicate
  * @see com.feilong.lib.collection4.functors.ComparatorPredicate
  * @since 1.8.0

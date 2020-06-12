@@ -12,24 +12,25 @@ package com.feilong.lib.xstream.security;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class ArrayTypePermission implements TypePermission {
+public class ArrayTypePermission implements TypePermission{
+
     /**
      * @since 1.4.7
      */
     public static final TypePermission ARRAYS = new ArrayTypePermission();
 
     @Override
-    public boolean allows(Class type) {
+    public boolean allows(Class type){
         return type != null && type.isArray();
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return 13;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj){
         return obj != null && obj.getClass() == ArrayTypePermission.class;
     }
 }

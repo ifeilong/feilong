@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 /**
  * List that allows items to be added with a priority that will affect the order in which they are later iterated over.
  * Objects with a high priority will appear before objects with a low priority in the list. If two objects of the same
@@ -25,75 +24,77 @@ import java.util.TreeSet;
  * @author Joe Walnes
  * @author Guilherme Silveira
  */
-public class PrioritizedList {
+public class PrioritizedList{
 
-    private final Set set = new TreeSet();
+    private final Set set            = new TreeSet();
 
-    private int lowestPriority = Integer.MAX_VALUE;
+    private int       lowestPriority = Integer.MAX_VALUE;
 
-    private int lastId = 0;
+    private int       lastId         = 0;
 
-    public void add(Object item, int priority) {
-        if (this.lowestPriority > priority) {
+    public void add(Object item,int priority){
+        if (this.lowestPriority > priority){
             this.lowestPriority = priority;
         }
         this.set.add(new PrioritizedItem(item, priority, ++lastId));
     }
 
-    public Iterator iterator() {
+    public Iterator iterator(){
         return new PrioritizedItemIterator(this.set.iterator());
     }
 
-    private static class PrioritizedItem implements Comparable {
+    private static class PrioritizedItem implements Comparable{
 
         final Object value;
-        final int priority;
-        final int id;
 
-        public PrioritizedItem(Object value, int priority, int id) {
+        final int    priority;
+
+        final int    id;
+
+        public PrioritizedItem(Object value, int priority, int id){
             this.value = value;
             this.priority = priority;
             this.id = id;
         }
 
         @Override
-        public int compareTo(Object o) {
-            PrioritizedItem other = (PrioritizedItem)o;
-            if (this.priority != other.priority) {
+        public int compareTo(Object o){
+            PrioritizedItem other = (PrioritizedItem) o;
+            if (this.priority != other.priority){
                 return (other.priority - this.priority);
             }
             return (other.id - this.id);
         }
 
         @Override
-        public boolean equals(Object obj) {
-            return this.id == ((PrioritizedItem)obj).id;
+        public boolean equals(Object obj){
+            return this.id == ((PrioritizedItem) obj).id;
         }
 
     }
 
-    private static class PrioritizedItemIterator implements Iterator {
+    private static class PrioritizedItemIterator implements Iterator{
 
         private Iterator iterator;
 
-        public PrioritizedItemIterator(Iterator iterator) {
+        public PrioritizedItemIterator(Iterator iterator){
             this.iterator = iterator;
         }
 
         @Override
-        public void remove() {
+        public void remove(){
             // call iterator.remove()?
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public boolean hasNext() {
+        public boolean hasNext(){
             return iterator.hasNext();
         }
 
         @Override
-        public Object next() {
-            return ((PrioritizedItem)iterator.next()).value;
+        public Object next(){
+            return ((PrioritizedItem) iterator.next()).value;
         }
 
     }

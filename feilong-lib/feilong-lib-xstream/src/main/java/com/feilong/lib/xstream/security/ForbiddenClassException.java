@@ -14,14 +14,16 @@ import com.feilong.lib.xstream.XStreamException;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class ForbiddenClassException extends XStreamException {
+public class ForbiddenClassException extends XStreamException{
 
     /**
      * Construct a ForbiddenClassException.
-     * @param type the forbidden class
+     * 
+     * @param type
+     *            the forbidden class
      * @since 1.4.7
      */
-    public ForbiddenClassException(Class type) {
+    public ForbiddenClassException(Class type){
         super(type == null ? "null" : type.getName());
     }
 }

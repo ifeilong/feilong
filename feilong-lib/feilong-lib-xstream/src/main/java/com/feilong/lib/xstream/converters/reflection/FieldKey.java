@@ -16,14 +16,18 @@ package com.feilong.lib.xstream.converters.reflection;
  * @author Guilherme Silveira
  * @author J&ouml;rg Schaible
  */
-public class FieldKey {
-    final private String fieldName;
-    final private Class declaringClass;
-    final private int depth;
-    final private int order;
+public class FieldKey{
 
-    public FieldKey(String fieldName, Class declaringClass, int order) {
-        if (fieldName == null || declaringClass == null) {
+    final private String fieldName;
+
+    final private Class  declaringClass;
+
+    final private int    depth;
+
+    final private int    order;
+
+    public FieldKey(String fieldName, Class declaringClass, int order){
+        if (fieldName == null || declaringClass == null){
             throw new IllegalArgumentException("fieldName or declaringClass is null");
         }
         this.fieldName = fieldName;
@@ -31,65 +35,58 @@ public class FieldKey {
         this.order = order;
         Class c = declaringClass;
         int i = 0;
-        while (c.getSuperclass() != null) {
+        while (c.getSuperclass() != null){
             i++;
             c = c.getSuperclass();
         }
         depth = i;
     }
 
-    public String getFieldName() {
+    public String getFieldName(){
         return this.fieldName;
     }
 
-    public Class getDeclaringClass() {
+    public Class getDeclaringClass(){
         return this.declaringClass;
     }
 
-    public int getDepth() {
+    public int getDepth(){
         return this.depth;
     }
 
-    public int getOrder() {
+    public int getOrder(){
         return this.order;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FieldKey)) return false;
-
-        final FieldKey fieldKey = (FieldKey)o;
-
-        if (!declaringClass.equals(fieldKey.declaringClass)) 
+    public boolean equals(Object o){
+        if (this == o)
+            return true;
+        if (!(o instanceof FieldKey))
             return false;
-        if (!fieldName.equals(fieldKey.fieldName)) 
+
+        final FieldKey fieldKey = (FieldKey) o;
+
+        if (!declaringClass.equals(fieldKey.declaringClass))
+            return false;
+        if (!fieldName.equals(fieldKey.fieldName))
             return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result;
         result = fieldName.hashCode();
-        result = 29 * result +declaringClass.hashCode();
+        result = 29 * result + declaringClass.hashCode();
         return result;
     }
 
     @Override
-    public String toString() {
-        return "FieldKey{"
-            + "order="
-            + order
-            + ", writer="
-            + depth
-            + ", declaringClass="
-            + declaringClass
-            + ", fieldName='"
-            + fieldName
-            + "'"
-            + "}";
+    public String toString(){
+        return "FieldKey{" + "order=" + order + ", writer=" + depth + ", declaringClass=" + declaringClass + ", fieldName='" + fieldName
+                        + "'" + "}";
     }
 
 }

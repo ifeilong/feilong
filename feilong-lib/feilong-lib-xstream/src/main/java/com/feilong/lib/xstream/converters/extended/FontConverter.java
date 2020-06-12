@@ -30,61 +30,62 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class FontConverter implements Converter {
+public class FontConverter implements Converter{
 
     private final SingleValueConverter textAttributeConverter;
-    private final Mapper mapper;
+
+    private final Mapper               mapper;
 
     /**
      * Constructs a FontConverter.
+     * 
      * @deprecated As of 1.4.5
      */
-    public FontConverter() {
+    public FontConverter(){
         this(null);
     }
 
     /**
      * Constructs a FontConverter.
+     * 
      * @param mapper
      * @since 1.4.5
      */
-    public FontConverter(Mapper mapper) {
+    public FontConverter(Mapper mapper){
         this.mapper = mapper;
-        if (mapper == null) {
+        if (mapper == null){
             textAttributeConverter = null;
-        } else {
+        }else{
             textAttributeConverter = new TextAttributeConverter();
         }
     }
-    
+
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         // String comparison is used here because Font.class loads the class which in turns instantiates AWT,
         // which is nasty if you don't want it.
-        return type != null
-            && (type.getName().equals("java.awt.Font") || type.getName().equals("javax.swing.plaf.FontUIResource"));
+        return type != null && (type.getName().equals("java.awt.Font") || type.getName().equals("javax.swing.plaf.FontUIResource"));
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer,
-        MarshallingContext context) {
-        Font font = (Font)source;
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
+        Font font = (Font) source;
         Map attributes = font.getAttributes();
-        if (mapper != null) {
+        if (mapper != null){
             String classAlias = mapper.aliasForSystemAttribute("class");
-            for (Iterator iter = attributes.entrySet().iterator(); iter.hasNext();) {
-                Map.Entry entry = (Map.Entry)iter.next();
+            for (Iterator iter = attributes.entrySet().iterator(); iter.hasNext();){
+                Map.Entry entry = (Map.Entry) iter.next();
                 String name = textAttributeConverter.toString(entry.getKey());
                 Object value = entry.getValue();
                 Class type = value != null ? value.getClass() : Mapper.Null.class;
                 ExtendedHierarchicalStreamWriterHelper.startNode(writer, name, type);
                 writer.addAttribute(classAlias, mapper.serializedClass(type));
-                if (value != null) {
+                if (value != null){
                     context.convertAnother(value);
                 }
                 writer.endNode();
             }
-        } else {
+        }else{
             writer.startNode("attributes"); // <attributes>
             context.convertAnother(attributes);
             writer.endNode(); // </attributes>
@@ -92,42 +93,42 @@ public class FontConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         final Map attributes;
-        if (reader.hasMoreChildren()) {
+        if (reader.hasMoreChildren()){
             reader.moveDown();
-            if (!reader.getNodeName().equals("attributes")) {
+            if (!reader.getNodeName().equals("attributes")){
                 String classAlias = mapper.aliasForSystemAttribute("class");
                 attributes = new HashMap();
-                do {
-                    if (!attributes.isEmpty()) {
+                do{
+                    if (!attributes.isEmpty()){
                         reader.moveDown();
                     }
                     Class type = mapper.realClass(reader.getAttribute(classAlias));
-                    TextAttribute attribute = (TextAttribute)textAttributeConverter.fromString(reader.getNodeName());
+                    TextAttribute attribute = (TextAttribute) textAttributeConverter.fromString(reader.getNodeName());
                     Object value = type == Mapper.Null.class ? null : context.convertAnother(null, type);
                     attributes.put(attribute, value);
                     reader.moveUp();
-                } while(reader.hasMoreChildren());
-            } else {
+                }while (reader.hasMoreChildren());
+            }else{
                 // in <attributes>
-                attributes = (Map)context.convertAnother(null, Map.class);
+                attributes = (Map) context.convertAnother(null, Map.class);
                 reader.moveUp(); // out of </attributes>
             }
-        } else {
+        }else{
             attributes = Collections.EMPTY_MAP;
         }
-        if (!JVM.isVersion(6)) {
-            for (Iterator iter = attributes.values().iterator(); iter.hasNext(); ) {
-                if (iter.next() == null) {
+        if (!JVM.isVersion(6)){
+            for (Iterator iter = attributes.values().iterator(); iter.hasNext();){
+                if (iter.next() == null){
                     iter.remove();
                 }
             }
         }
         Font font = Font.getFont(attributes);
-        if (context.getRequiredType() == FontUIResource.class) {
+        if (context.getRequiredType() == FontUIResource.class){
             return new FontUIResource(font);
-        } else {
+        }else{
             return font;
         }
     }

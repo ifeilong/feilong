@@ -15,9 +15,9 @@
  */
 package com.feilong.io.ioreaderutil;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Set;
 
@@ -26,11 +26,6 @@ import org.junit.Test;
 import com.feilong.io.IOReaderUtil;
 
 public class ReadToSetTest extends AbstractReadFileToStringTest{
-
-    /** The file path. */
-    private final String filePath = floderPath + "src/test/resources/readtest.txt";
-
-    //---------------------------------------------------------------
 
     /**
      * Test read file path and reader config test null.
@@ -63,7 +58,7 @@ public class ReadToSetTest extends AbstractReadFileToStringTest{
      */
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
-        Set<String> codes = IOReaderUtil.readToSet(filePath);
+        Set<String> codes = IOReaderUtil.readToSet(floderPath + "src/test/resources/readtest.txt");
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 

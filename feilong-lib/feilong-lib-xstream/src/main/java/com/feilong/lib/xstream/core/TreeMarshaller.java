@@ -23,35 +23,36 @@ import com.feilong.lib.xstream.io.ExtendedHierarchicalStreamWriterHelper;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
-public class TreeMarshaller implements MarshallingContext {
+public class TreeMarshaller implements MarshallingContext{
 
     protected HierarchicalStreamWriter writer;
-    protected ConverterLookup converterLookup;
-    private Mapper mapper;
-    private ObjectIdDictionary parentObjects = new ObjectIdDictionary();
-    private DataHolder dataHolder;
 
-    public TreeMarshaller(
-        HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper) {
+    protected ConverterLookup          converterLookup;
+
+    private Mapper                     mapper;
+
+    private ObjectIdDictionary         parentObjects = new ObjectIdDictionary();
+
+    private DataHolder                 dataHolder;
+
+    public TreeMarshaller(HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper){
         this.writer = writer;
         this.converterLookup = converterLookup;
         this.mapper = mapper;
     }
 
     @Override
-    public void convertAnother(Object item) {
+    public void convertAnother(Object item){
         convertAnother(item, null);
     }
 
     @Override
-    public void convertAnother(Object item, Converter converter) {
-        if (converter == null) {
+    public void convertAnother(Object item,Converter converter){
+        if (converter == null){
             converter = converterLookup.lookupConverterForType(item.getClass());
-        } else {
-            if (!converter.canConvert(item.getClass())) {
-                ConversionException e = new ConversionException(
-                    "Explicit selected converter cannot handle item");
+        }else{
+            if (!converter.canConvert(item.getClass())){
+                ConversionException e = new ConversionException("Explicit selected converter cannot handle item");
                 e.add("item-type", item.getClass().getName());
                 e.add("converter-type", converter.getClass().getName());
                 throw e;
@@ -60,10 +61,9 @@ public class TreeMarshaller implements MarshallingContext {
         convert(item, converter);
     }
 
-    protected void convert(Object item, Converter converter) {
-        if (parentObjects.containsId(item)) {
-            ConversionException e = new CircularReferenceException(
-                "Recursive reference to parent object");
+    protected void convert(Object item,Converter converter){
+        if (parentObjects.containsId(item)){
+            ConversionException e = new CircularReferenceException("Recursive reference to parent object");
             e.add("item-type", item.getClass().getName());
             e.add("converter-type", converter.getClass().getName());
             throw e;
@@ -73,50 +73,49 @@ public class TreeMarshaller implements MarshallingContext {
         parentObjects.removeId(item);
     }
 
-    public void start(Object item, DataHolder dataHolder) {
+    public void start(Object item,DataHolder dataHolder){
         this.dataHolder = dataHolder;
-        if (item == null) {
+        if (item == null){
             writer.startNode(mapper.serializedClass(null));
             writer.endNode();
-        } else {
-            ExtendedHierarchicalStreamWriterHelper.startNode(writer, mapper
-                .serializedClass(item.getClass()), item.getClass());
+        }else{
+            ExtendedHierarchicalStreamWriterHelper.startNode(writer, mapper.serializedClass(item.getClass()), item.getClass());
             convertAnother(item);
             writer.endNode();
         }
     }
 
     @Override
-    public Object get(Object key) {
+    public Object get(Object key){
         lazilyCreateDataHolder();
         return dataHolder.get(key);
     }
 
     @Override
-    public void put(Object key, Object value) {
+    public void put(Object key,Object value){
         lazilyCreateDataHolder();
         dataHolder.put(key, value);
     }
 
     @Override
-    public Iterator keys() {
+    public Iterator keys(){
         lazilyCreateDataHolder();
         return dataHolder.keys();
     }
 
-    private void lazilyCreateDataHolder() {
-        if (dataHolder == null) {
+    private void lazilyCreateDataHolder(){
+        if (dataHolder == null){
             dataHolder = new MapBackedDataHolder();
         }
     }
 
-    protected Mapper getMapper() {
+    protected Mapper getMapper(){
         return this.mapper;
     }
 
-    public static class CircularReferenceException extends ConversionException {
+    public static class CircularReferenceException extends ConversionException{
 
-        public CircularReferenceException(String msg) {
+        public CircularReferenceException(String msg){
             super(msg);
         }
     }

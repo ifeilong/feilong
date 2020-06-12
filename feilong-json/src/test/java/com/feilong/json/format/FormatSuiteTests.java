@@ -37,6 +37,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 FormatBeanXMLGregorianCalendarTest.class,
 
                 FormatStringTest.class,
+                FormatBeanExcludesTest.class,
 
         //
 })

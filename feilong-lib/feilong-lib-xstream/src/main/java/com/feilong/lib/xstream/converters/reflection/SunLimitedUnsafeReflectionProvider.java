@@ -14,7 +14,6 @@ import com.feilong.lib.xstream.converters.ErrorWritingException;
 
 import sun.misc.Unsafe;
 
-
 /**
  * Instantiates a new object bypassing the constructor using undocumented internal JDK features.
  * <p>
@@ -33,24 +32,25 @@ import sun.misc.Unsafe;
  * @author Brian Slesinsky
  * @since 1.4.7
  */
-public class SunLimitedUnsafeReflectionProvider extends PureJavaReflectionProvider {
+public class SunLimitedUnsafeReflectionProvider extends PureJavaReflectionProvider{
 
-    protected static final Unsafe unsafe;
+    protected static final Unsafe    unsafe;
+
     protected static final Exception exception;
-    static {
+    static{
         Unsafe u = null;
         Exception ex = null;
-        try {
+        try{
             Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
             unsafeField.setAccessible(true);
-            u = (Unsafe)unsafeField.get(null);
-        } catch (SecurityException e) {
+            u = (Unsafe) unsafeField.get(null);
+        }catch (SecurityException e){
             ex = e;
-        } catch (NoSuchFieldException e) {
+        }catch (NoSuchFieldException e){
             ex = e;
-        } catch (IllegalArgumentException e) {
+        }catch (IllegalArgumentException e){
             ex = e;
-        } catch (IllegalAccessException e) {
+        }catch (IllegalAccessException e){
             ex = e;
         }
         exception = ex;
@@ -60,35 +60,35 @@ public class SunLimitedUnsafeReflectionProvider extends PureJavaReflectionProvid
     /**
      * @since 1.4.7
      */
-    public SunLimitedUnsafeReflectionProvider() {
+    public SunLimitedUnsafeReflectionProvider(){
         super();
     }
 
     /**
      * @since 1.4.7
      */
-    public SunLimitedUnsafeReflectionProvider(FieldDictionary fieldDictionary) {
+    public SunLimitedUnsafeReflectionProvider(FieldDictionary fieldDictionary){
         super(fieldDictionary);
     }
 
     @Override
-    public Object newInstance(Class type) {
-        if (exception != null) {
+    public Object newInstance(Class type){
+        if (exception != null){
             ObjectAccessException ex = new ObjectAccessException("Cannot construct type", exception);
             ex.add("construction-type", type.getName());
             throw ex;
         }
         ErrorWritingException ex = null;
-        if (type == void.class || type == Void.class) {
+        if (type == void.class || type == Void.class){
             ex = new ConversionException("Type void cannot have an instance");
-        } else {
-            try {
+        }else{
+            try{
                 return unsafe.allocateInstance(type);
-            } catch (final SecurityException e) {
+            }catch (final SecurityException e){
                 ex = new ObjectAccessException("Cannot construct type", e);
-            } catch (final InstantiationException e) {
+            }catch (final InstantiationException e){
                 ex = new ConversionException("Cannot construct type", e);
-            } catch (final IllegalArgumentException e) {
+            }catch (final IllegalArgumentException e){
                 ex = new ObjectAccessException("Cannot construct type", e);
             }
         }
@@ -97,11 +97,11 @@ public class SunLimitedUnsafeReflectionProvider extends PureJavaReflectionProvid
     }
 
     @Override
-    protected void validateFieldAccess(Field field) {
+    protected void validateFieldAccess(Field field){
         // (overriden) don't mind final fields.
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         init();
         return this;
     }

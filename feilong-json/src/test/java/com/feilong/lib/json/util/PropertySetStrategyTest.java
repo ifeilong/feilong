@@ -15,6 +15,8 @@
  */
 package com.feilong.lib.json.util;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.feilong.store.member.User;
@@ -31,5 +33,7 @@ public class PropertySetStrategyTest{
         PropertySetStrategy propertySetStrategy = PropertySetStrategy.DEFAULT;
         User bean = new User();
         propertySetStrategy.setProperty(bean, "a", "aa");
+
+        assertTrue(true);
     }
 }

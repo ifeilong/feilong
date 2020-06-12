@@ -19,15 +19,15 @@ import java.math.BigDecimal;
  *
  * @author Joe Walnes
  */
-public class BigDecimalConverter extends AbstractSingleValueConverter {
+public class BigDecimalConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == BigDecimal.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return new BigDecimal(str);
     }
 

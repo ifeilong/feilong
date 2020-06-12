@@ -16,29 +16,30 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.io.path.Path;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-public class ReferenceByXPathMarshaller extends AbstractReferenceMarshaller {
+public class ReferenceByXPathMarshaller extends AbstractReferenceMarshaller{
 
     private final int mode;
 
-    public ReferenceByXPathMarshaller(HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper, int mode) {
+    public ReferenceByXPathMarshaller(HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper, int mode){
         super(writer, converterLookup, mapper);
         this.mode = mode;
     }
 
     @Override
-    protected String createReference(Path currentPath, Object existingReferenceKey) {
-        Path existingPath = (Path)existingReferenceKey;
-        Path referencePath = (mode & ReferenceByXPathMarshallingStrategy.ABSOLUTE) > 0 ? existingPath : currentPath.relativeTo(existingPath);
+    protected String createReference(Path currentPath,Object existingReferenceKey){
+        Path existingPath = (Path) existingReferenceKey;
+        Path referencePath = (mode & ReferenceByXPathMarshallingStrategy.ABSOLUTE) > 0 ? existingPath
+                        : currentPath.relativeTo(existingPath);
         return (mode & ReferenceByXPathMarshallingStrategy.SINGLE_NODE) > 0 ? referencePath.explicit() : referencePath.toString();
     }
 
     @Override
-    protected Object createReferenceKey(Path currentPath, Object item) {
+    protected Object createReferenceKey(Path currentPath,Object item){
         return currentPath;
     }
 
     @Override
-    protected void fireValidReference(Object referenceKey) {
+    protected void fireValidReference(Object referenceKey){
         // nothing to do
     }
 }

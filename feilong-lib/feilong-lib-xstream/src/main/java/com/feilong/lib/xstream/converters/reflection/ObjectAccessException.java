@@ -13,12 +13,13 @@ package com.feilong.lib.xstream.converters.reflection;
 
 import com.feilong.lib.xstream.converters.ErrorWritingException;
 
-public class ObjectAccessException extends ErrorWritingException {
-    public ObjectAccessException(String message) {
+public class ObjectAccessException extends ErrorWritingException{
+
+    public ObjectAccessException(String message){
         super(message);
     }
 
-    public ObjectAccessException(String message, Throwable cause) {
+    public ObjectAccessException(String message, Throwable cause){
         super(message, cause);
     }
 }

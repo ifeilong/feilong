@@ -20,7 +20,7 @@ import java.util.Map;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public interface PropertySorter {
+public interface PropertySorter{
 
     /**
      * Sort the properties of a bean type. The method will be called with the class type
@@ -30,12 +30,14 @@ public interface PropertySorter {
      * different Map with similar semantic, add all elements of the original map and return
      * the new one.
      * 
-     * @param type the bean class that contains all the properties
-     * @param nameMap the map to sort, key is the property name, value the
+     * @param type
+     *            the bean class that contains all the properties
+     * @param nameMap
+     *            the map to sort, key is the property name, value the
      *            {@link PropertyDescriptor}
      * @return the sorted nameMap
      * @since 1.4
      */
-    Map sort(Class type, Map nameMap);
+    Map sort(Class type,Map nameMap);
 
 }

@@ -23,39 +23,40 @@ import com.feilong.lib.xstream.core.util.FastField;
  *
  * @author Joerg Schaible
  */
-public class ElementIgnoringMapper extends MapperWrapper {
+public class ElementIgnoringMapper extends MapperWrapper{
 
-    protected final Set fieldsToOmit = new HashSet();
+    protected final Set fieldsToOmit            = new HashSet();
+
     protected final Set unknownElementsToIgnore = new LinkedHashSet();
 
-    public ElementIgnoringMapper(Mapper wrapped) {
+    public ElementIgnoringMapper(Mapper wrapped){
         super(wrapped);
     }
-    
-    public void addElementsToIgnore(final Pattern pattern) {
+
+    public void addElementsToIgnore(final Pattern pattern){
         unknownElementsToIgnore.add(pattern);
     }
 
-    public void omitField(Class definedIn, String fieldName) {
+    public void omitField(Class definedIn,String fieldName){
         fieldsToOmit.add(key(definedIn, fieldName));
     }
 
     @Override
-    public boolean shouldSerializeMember(Class definedIn, String fieldName) {
-        if (fieldsToOmit.contains(key(definedIn, fieldName))) {
+    public boolean shouldSerializeMember(Class definedIn,String fieldName){
+        if (fieldsToOmit.contains(key(definedIn, fieldName))){
             return false;
-        } else if (definedIn == Object.class && isIgnoredElement(fieldName)) {
+        }else if (definedIn == Object.class && isIgnoredElement(fieldName)){
             return false;
         }
         return super.shouldSerializeMember(definedIn, fieldName);
     }
 
     @Override
-    public boolean isIgnoredElement(String name) {
-        if (!unknownElementsToIgnore.isEmpty()) {
-            for(Iterator iter = unknownElementsToIgnore.iterator(); iter.hasNext();) {
-                Pattern pattern = (Pattern)iter.next();
-                if (pattern.matcher(name).matches()) {
+    public boolean isIgnoredElement(String name){
+        if (!unknownElementsToIgnore.isEmpty()){
+            for (Iterator iter = unknownElementsToIgnore.iterator(); iter.hasNext();){
+                Pattern pattern = (Pattern) iter.next();
+                if (pattern.matcher(name).matches()){
                     return true;
                 }
             }
@@ -63,7 +64,7 @@ public class ElementIgnoringMapper extends MapperWrapper {
         return super.isIgnoredElement(name);
     }
 
-    private Object key(Class type, String name) {
+    private Object key(Class type,String name){
         return new FastField(type, name);
     }
 }

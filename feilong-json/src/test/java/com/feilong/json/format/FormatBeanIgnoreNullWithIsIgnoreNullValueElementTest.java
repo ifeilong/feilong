@@ -16,6 +16,10 @@
 package com.feilong.json.format;
 
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -27,7 +31,17 @@ public class FormatBeanIgnoreNullWithIsIgnoreNullValueElementTest extends Abstra
 
     @Test
     public void test0(){
-        LOGGER.debug(JsonUtil.format(USER, true));
+        String format = JsonUtil.format(USER, true);
+        assertThat(
+                        format,
+                        allOf(//
+                                        containsString("date"),
+                                        containsString("userAddresses"),
+
+                                        not(containsString("nickNames"))
+
+                        //
+                        ));
     }
 
     @Test

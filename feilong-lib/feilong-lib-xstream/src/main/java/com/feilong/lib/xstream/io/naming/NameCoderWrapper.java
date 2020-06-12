@@ -16,25 +16,26 @@ package com.feilong.lib.xstream.io.naming;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public class NameCoderWrapper implements NameCoder {
+public class NameCoderWrapper implements NameCoder{
 
     private final NameCoder wrapped;
 
     /**
      * Construct a new wrapper for a NameCoder.
      * 
-     * @param inner the wrapped NameCoder
+     * @param inner
+     *            the wrapped NameCoder
      * @since 1.4
      */
-    public NameCoderWrapper(NameCoder inner) {
+    public NameCoderWrapper(NameCoder inner){
         this.wrapped = inner;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public String decodeAttribute(String attributeName) {
+    public String decodeAttribute(String attributeName){
         return wrapped.decodeAttribute(attributeName);
     }
 
@@ -42,7 +43,7 @@ public class NameCoderWrapper implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String decodeNode(String nodeName) {
+    public String decodeNode(String nodeName){
         return wrapped.decodeNode(nodeName);
     }
 
@@ -50,7 +51,7 @@ public class NameCoderWrapper implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String encodeAttribute(String name) {
+    public String encodeAttribute(String name){
         return wrapped.encodeAttribute(name);
     }
 
@@ -58,7 +59,7 @@ public class NameCoderWrapper implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String encodeNode(String name) {
+    public String encodeNode(String name){
         return wrapped.encodeNode(name);
     }
 

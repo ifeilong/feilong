@@ -37,26 +37,26 @@ import com.feilong.core.bean.ConvertUtil;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.encoding <br>
- * {@link com.feilong.lib.lang3.SystemUtils#FILE_ENCODING}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#FILE_ENCODING"}</td>
  * <td>utf-8</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>file.separator <br>
- * {@link com.feilong.lib.lang3.SystemUtils#FILE_SEPARATOR}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR"}</td>
  * <td>\\</td>
  * <tr valign="top">
  * <td>java.home <br>
- * {@link com.feilong.lib.lang3.SystemUtils#JAVA_HOME}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#JAVA_HOME"}</td>
  * <td>D:\\Program Files\\Java\\jdk1.6.0_37\\jre</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.io.tmpdir <br>
- * {@link com.feilong.lib.lang3.SystemUtils#JAVA_IO_TMPDIR}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR"}</td>
  * <td>C:\\Users\\feilong\\AppData\\Local\\Temp\\</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.version <br>
- * {@link com.feilong.lib.lang3.SystemUtils#JAVA_VERSION}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#JAVA_VERSION"}</td>
  * <td>1.6.0_37</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -66,12 +66,12 @@ import com.feilong.core.bean.ConvertUtil;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>user.dir <br>
- * {@link com.feilong.lib.lang3.SystemUtils#USER_DIR}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#USER_DIR"}</td>
  * <td>E:\\Workspaces\\feilong\\feilong-platform\\commons\\feilong-core</td>
  * </tr>
  * <tr valign="top">
  * <td>user.home<br>
- * {@link com.feilong.lib.lang3.SystemUtils#USER_HOME}</td>
+ * {@link "org.apache.commons.lang3.SystemUtils#USER_HOME"}</td>
  * <td>C:\\Users\\feilong</td>
  * </tr>
  * </table>
@@ -310,10 +310,10 @@ import com.feilong.core.bean.ConvertUtil;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.lang.System
- * @see com.feilong.lib.lang3.SystemUtils#USER_HOME
- * @see com.feilong.lib.lang3.SystemUtils#FILE_ENCODING
- * @see com.feilong.lib.lang3.SystemUtils#FILE_SEPARATOR
- * @see com.feilong.lib.lang3.SystemUtils#JAVA_IO_TMPDIR
+ * @see "org.apache.commons.lang3.SystemUtils#USER_HOME"
+ * @see "org.apache.commons.lang3.SystemUtils#FILE_ENCODING"
+ * @see "org.apache.commons.lang3.SystemUtils#FILE_SEPARATOR"
+ * @see "org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR"
  * 
  * @see "org.springframework.util.SystemPropertyUtils"
  * @since 1.0.7

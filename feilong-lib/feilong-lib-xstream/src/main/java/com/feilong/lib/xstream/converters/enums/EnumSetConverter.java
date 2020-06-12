@@ -32,44 +32,45 @@ import com.feilong.lib.xstream.mapper.Mapper;
 /**
  * Serializes a Java 5 EnumSet. If a SecurityManager is set, the converter will only work with permissions
  * for SecurityManager.checkPackageAccess, SecurityManager.checkMemberAccess(this, EnumSet.MEMBER)
- * and ReflectPermission("suppressAccessChecks").   
+ * and ReflectPermission("suppressAccessChecks").
  *
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class EnumSetConverter implements Converter {
+public class EnumSetConverter implements Converter{
 
     private final static Field typeField = Fields.locate(EnumSet.class, Class.class, false);
-    private final Mapper mapper;
 
-    public EnumSetConverter(Mapper mapper) {
+    private final Mapper       mapper;
+
+    public EnumSetConverter(Mapper mapper){
         this.mapper = mapper;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return typeField != null && type != null && EnumSet.class.isAssignableFrom(type);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         EnumSet set = (EnumSet) source;
         Class enumTypeForSet = (Class) Fields.read(typeField, set);
         String attributeName = mapper.aliasForSystemAttribute("enum-type");
-        if (attributeName != null) {
+        if (attributeName != null){
             writer.addAttribute(attributeName, mapper.serializedClass(enumTypeForSet));
         }
         writer.setValue(joinEnumValues(set));
     }
 
-    private String joinEnumValues(EnumSet set) {
+    private String joinEnumValues(EnumSet set){
         boolean seenFirst = false;
         StringBuffer result = new StringBuffer();
-        for (Iterator iterator = set.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = set.iterator(); iterator.hasNext();){
             Enum value = (Enum) iterator.next();
-            if (seenFirst) {
+            if (seenFirst){
                 result.append(',');
-            } else {
+            }else{
                 seenFirst = true;
             }
             result.append(value.name());
@@ -79,17 +80,17 @@ public class EnumSetConverter implements Converter {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         String attributeName = mapper.aliasForSystemAttribute("enum-type");
-        if (attributeName == null) {
+        if (attributeName == null){
             throw new ConversionException("No EnumType specified for EnumSet");
         }
         Class enumTypeForSet = mapper.realClass(reader.getAttribute(attributeName));
         EnumSet set = EnumSet.noneOf(enumTypeForSet);
         String[] enumValues = reader.getValue().split(",");
-        for (int i = 0; i < enumValues.length; i++) {
+        for (int i = 0; i < enumValues.length; i++){
             String enumValue = enumValues[i];
-            if(enumValue.length() > 0) {
+            if (enumValue.length() > 0){
                 set.add(Enum.valueOf(enumTypeForSet, enumValue));
             }
         }

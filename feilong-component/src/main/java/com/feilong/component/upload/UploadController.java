@@ -63,7 +63,7 @@ public class UploadController{
     }
 
     //---------------------------------------------------------------
-    private static String[] resolverNewFileNames(MultipartFile[] multipartFiles){
+    private static String[] resolverNewFileNames(MultipartFile...multipartFiles){
         String[] fileNames = new String[multipartFiles.length];
 
         for (int i = 0; i < multipartFiles.length; ++i){

@@ -16,23 +16,24 @@ package com.feilong.lib.xstream.security;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class NoPermission implements TypePermission {
+public class NoPermission implements TypePermission{
 
     private final TypePermission permission;
 
     /**
      * Construct a NoPermission.
      * 
-     * @param permission the permission to negate or <code>null</code> to forbid any type
+     * @param permission
+     *            the permission to negate or <code>null</code> to forbid any type
      * @since 1.4.7
      */
-    public NoPermission(final TypePermission permission) {
+    public NoPermission(final TypePermission permission){
         this.permission = permission;
     }
 
     @Override
-    public boolean allows(final Class type) {
-        if (permission == null || permission.allows(type)) {
+    public boolean allows(final Class type){
+        if (permission == null || permission.allows(type)){
             throw new ForbiddenClassException(type);
         }
         return false;

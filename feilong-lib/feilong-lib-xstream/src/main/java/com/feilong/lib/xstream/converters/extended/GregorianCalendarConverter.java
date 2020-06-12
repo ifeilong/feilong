@@ -29,15 +29,15 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class GregorianCalendarConverter implements Converter {
+public class GregorianCalendarConverter implements Converter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == GregorianCalendar.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         GregorianCalendar calendar = (GregorianCalendar) source;
         ExtendedHierarchicalStreamWriterHelper.startNode(writer, "time", long.class);
         long timeInMillis = calendar.getTime().getTime(); // calendar.getTimeInMillis() not available under JDK 1.3
@@ -49,16 +49,16 @@ public class GregorianCalendarConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         reader.moveDown();
         long timeInMillis = Long.parseLong(reader.getValue());
         reader.moveUp();
         final String timeZone;
-        if (reader.hasMoreChildren()) {
+        if (reader.hasMoreChildren()){
             reader.moveDown();
             timeZone = reader.getValue();
             reader.moveUp();
-        } else { // backward compatibility to XStream 1.1.2 and below
+        }else{ // backward compatibility to XStream 1.1.2 and below
             timeZone = TimeZone.getDefault().getID();
         }
 

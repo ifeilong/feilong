@@ -19,29 +19,31 @@ import java.util.Iterator;
  * @author Joe Walnes
  * @deprecated As of 1.4.8, it is an internal helper class only
  */
-public class AttributeNameIterator implements Iterator {
+public class AttributeNameIterator implements Iterator{
 
-    private int current;
-    private final int count;
+    private int                            current;
+
+    private final int                      count;
+
     private final HierarchicalStreamReader reader;
 
-    public AttributeNameIterator(HierarchicalStreamReader reader) {
+    public AttributeNameIterator(HierarchicalStreamReader reader){
         this.reader = reader;
         count = reader.getAttributeCount();
     }
 
     @Override
-    public boolean hasNext() {
+    public boolean hasNext(){
         return current < count;
     }
 
     @Override
-    public Object next() {
+    public Object next(){
         return reader.getAttributeName(current++);
     }
 
     @Override
-    public void remove() {
+    public void remove(){
         throw new UnsupportedOperationException();
     }
 

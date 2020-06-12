@@ -36,7 +36,6 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * Converter that supports the definition of one field member that will be written as value and
  * all other field members are written as attributes. The converter requires that all the field
@@ -48,76 +47,94 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public class ToAttributedValueConverter implements Converter {
-    private static final String STRUCTURE_MARKER = "";
-    private final Class type;
-    private final Mapper mapper;
-    private final Mapper enumMapper;
+public class ToAttributedValueConverter implements Converter{
+
+    private static final String      STRUCTURE_MARKER = "";
+
+    private final Class              type;
+
+    private final Mapper             mapper;
+
+    private final Mapper             enumMapper;
+
     private final ReflectionProvider reflectionProvider;
-    private final ConverterLookup lookup;
-    private final Field valueField;
+
+    private final ConverterLookup    lookup;
+
+    private final Field              valueField;
 
     /**
      * Creates a new ToAttributedValueConverter instance.
      * 
      * All field elements will be attributes, the element itself will have no value.
      * 
-     * @param type the type that is handled by this converter instance
-     * @param mapper the mapper in use
-     * @param reflectionProvider the reflection provider in use
-     * @param lookup the converter lookup in use
+     * @param type
+     *            the type that is handled by this converter instance
+     * @param mapper
+     *            the mapper in use
+     * @param reflectionProvider
+     *            the reflection provider in use
+     * @param lookup
+     *            the converter lookup in use
      * @since 1.4.9
      */
-    public ToAttributedValueConverter(
-            final Class type, final Mapper mapper, final ReflectionProvider reflectionProvider,
-            final ConverterLookup lookup) {
+    public ToAttributedValueConverter(final Class type, final Mapper mapper, final ReflectionProvider reflectionProvider,
+                    final ConverterLookup lookup){
         this(type, mapper, reflectionProvider, lookup, null, null);
     }
 
     /**
      * Creates a new ToAttributedValueConverter instance.
      * 
-     * @param type the type that is handled by this converter instance
-     * @param mapper the mapper in use
-     * @param reflectionProvider the reflection provider in use
-     * @param lookup the converter lookup in use
-     * @param valueFieldName the field defining the tag's value (may be null)
+     * @param type
+     *            the type that is handled by this converter instance
+     * @param mapper
+     *            the mapper in use
+     * @param reflectionProvider
+     *            the reflection provider in use
+     * @param lookup
+     *            the converter lookup in use
+     * @param valueFieldName
+     *            the field defining the tag's value (may be null)
      */
-    public ToAttributedValueConverter(
-        final Class type, final Mapper mapper, final ReflectionProvider reflectionProvider,
-        final ConverterLookup lookup, final String valueFieldName) {
+    public ToAttributedValueConverter(final Class type, final Mapper mapper, final ReflectionProvider reflectionProvider,
+                    final ConverterLookup lookup, final String valueFieldName){
         this(type, mapper, reflectionProvider, lookup, valueFieldName, null);
     }
 
     /**
      * Creates a new ToAttributedValueConverter instance.
      * 
-     * @param type the type that is handled by this converter instance
-     * @param mapper the mapper in use
-     * @param reflectionProvider the reflection provider in use
-     * @param lookup the converter lookup in use
-     * @param valueFieldName the field defining the tag's value (may be null)
-     * @param valueDefinedIn the type defining the field
+     * @param type
+     *            the type that is handled by this converter instance
+     * @param mapper
+     *            the mapper in use
+     * @param reflectionProvider
+     *            the reflection provider in use
+     * @param lookup
+     *            the converter lookup in use
+     * @param valueFieldName
+     *            the field defining the tag's value (may be null)
+     * @param valueDefinedIn
+     *            the type defining the field
      */
-    public ToAttributedValueConverter(
-        final Class type, final Mapper mapper, final ReflectionProvider reflectionProvider,
-        final ConverterLookup lookup, final String valueFieldName, Class valueDefinedIn) {
+    public ToAttributedValueConverter(final Class type, final Mapper mapper, final ReflectionProvider reflectionProvider,
+                    final ConverterLookup lookup, final String valueFieldName, Class valueDefinedIn){
         this.type = type;
         this.mapper = mapper;
         this.reflectionProvider = reflectionProvider;
         this.lookup = lookup;
 
-        if (valueFieldName == null) {
+        if (valueFieldName == null){
             valueField = null;
-        } else {
+        }else{
             Field field = null;
-            try {
-                field = (valueDefinedIn != null ? valueDefinedIn : type)
-                    .getDeclaredField(valueFieldName);
-                if (!field.isAccessible()) {
+            try{
+                field = (valueDefinedIn != null ? valueDefinedIn : type).getDeclaredField(valueFieldName);
+                if (!field.isAccessible()){
                     field.setAccessible(true);
                 }
-            } catch (NoSuchFieldException e) {
+            }catch (NoSuchFieldException e){
                 throw new IllegalArgumentException(e.getMessage() + ": " + valueFieldName);
             }
             this.valueField = field;
@@ -126,103 +143,98 @@ public class ToAttributedValueConverter implements Converter {
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return this.type == type;
     }
 
     @Override
-    public void marshal(final Object source, final HierarchicalStreamWriter writer,
-        final MarshallingContext context) {
+    public void marshal(final Object source,final HierarchicalStreamWriter writer,final MarshallingContext context){
         final Class sourceType = source.getClass();
         final Map defaultFieldDefinition = new HashMap();
         final String[] tagValue = new String[1];
         final Object[] realValue = new Object[1];
         final Class[] fieldType = new Class[1];
         final Class[] definingType = new Class[1];
-        reflectionProvider.visitSerializableFields(source, new ReflectionProvider.Visitor() {
+        reflectionProvider.visitSerializableFields(source, new ReflectionProvider.Visitor(){
+
             @Override
-            public void visit(final String fieldName, final Class type, final Class definedIn,
-                final Object value) {
-                if (!mapper.shouldSerializeMember(definedIn, fieldName)) {
+            public void visit(final String fieldName,final Class type,final Class definedIn,final Object value){
+                if (!mapper.shouldSerializeMember(definedIn, fieldName)){
                     return;
                 }
 
                 final FastField field = new FastField(definedIn, fieldName);
                 final String alias = mapper.serializedMember(definedIn, fieldName);
-                if (!defaultFieldDefinition.containsKey(alias)) {
+                if (!defaultFieldDefinition.containsKey(alias)){
                     final Class lookupType = sourceType;
-                    defaultFieldDefinition.put(
-                        alias, reflectionProvider.getField(lookupType, fieldName));
-                } else if (!fieldIsEqual(field)) {
-                    final ConversionException exception = new ConversionException(
-                        "Cannot write attribute twice for object");
+                    defaultFieldDefinition.put(alias, reflectionProvider.getField(lookupType, fieldName));
+                }else if (!fieldIsEqual(field)){
+                    final ConversionException exception = new ConversionException("Cannot write attribute twice for object");
                     exception.add("alias", alias);
                     exception.add("type", sourceType.getName());
                     throw exception;
                 }
 
                 ConverterMatcher converter = UseAttributeForEnumMapper.isEnum(type)
-                    ? (ConverterMatcher)enumMapper.getConverterFromItemType(null, type, null)
-                    : (ConverterMatcher)mapper.getLocalConverter(definedIn, fieldName);
-                if (converter == null) {
+                                ? (ConverterMatcher) enumMapper.getConverterFromItemType(null, type, null)
+                                : (ConverterMatcher) mapper.getLocalConverter(definedIn, fieldName);
+                if (converter == null){
                     converter = lookup.lookupConverterForType(type);
                 }
 
-                if (value != null) {
+                if (value != null){
                     boolean isValueField = valueField != null && fieldIsEqual(field);
-                    if (isValueField) {
+                    if (isValueField){
                         definingType[0] = definedIn;
                         fieldType[0] = type;
                         realValue[0] = value;
                         tagValue[0] = STRUCTURE_MARKER;
                     }
-                    if (converter instanceof SingleValueConverter) {
-                        final String str = ((SingleValueConverter)converter).toString(value);
+                    if (converter instanceof SingleValueConverter){
+                        final String str = ((SingleValueConverter) converter).toString(value);
 
-                        if (isValueField) {
+                        if (isValueField){
                             tagValue[0] = str;
-                        } else {
-                            if (str != null) {
+                        }else{
+                            if (str != null){
                                 writer.addAttribute(alias, str);
                             }
                         }
-                    } else {
-                        if (!isValueField) {
-                            final ConversionException exception = new ConversionException(
-                                    "Cannot write element as attribute");
-                                exception.add("alias", alias);
-                                exception.add("type", sourceType.getName());
-                                throw exception;
+                    }else{
+                        if (!isValueField){
+                            final ConversionException exception = new ConversionException("Cannot write element as attribute");
+                            exception.add("alias", alias);
+                            exception.add("type", sourceType.getName());
+                            throw exception;
                         }
                     }
                 }
             }
         });
 
-        if (tagValue[0] != null) {
+        if (tagValue[0] != null){
             final Class actualType = realValue[0].getClass();
             final Class defaultType = mapper.defaultImplementationOf(fieldType[0]);
-            if (!actualType.equals(defaultType)) {
+            if (!actualType.equals(defaultType)){
                 final String serializedClassName = mapper.serializedClass(actualType);
-                if (!serializedClassName.equals(mapper.serializedClass(defaultType))) {
+                if (!serializedClassName.equals(mapper.serializedClass(defaultType))){
                     final String attributeName = mapper.aliasForSystemAttribute("class");
-                    if (attributeName != null) {
+                    if (attributeName != null){
                         writer.addAttribute(attributeName, serializedClassName);
                     }
                 }
             }
 
-            if (tagValue[0] == STRUCTURE_MARKER) {
+            if (tagValue[0] == STRUCTURE_MARKER){
                 context.convertAnother(realValue[0]);
-            } else { 
+            }else{
                 writer.setValue(tagValue[0]);
             }
         }
     }
 
     @Override
-    public Object unmarshal(final HierarchicalStreamReader reader,
-        final UnmarshallingContext context) {
+    public Object unmarshal(final HierarchicalStreamReader reader,final UnmarshallingContext context){
         final Object result = reflectionProvider.newInstance(context.getRequiredType());
         final Class resultType = result.getClass();
 
@@ -233,70 +245,62 @@ public class ToAttributedValueConverter implements Converter {
         systemAttributes.add(mapper.aliasForSystemAttribute("class"));
 
         // Process attributes before recursing into child elements.
-        while (it.hasNext()) {
-            final String attrName = (String)it.next();
-            if (systemAttributes.contains(attrName)) {
+        while (it.hasNext()){
+            final String attrName = (String) it.next();
+            if (systemAttributes.contains(attrName)){
                 continue;
             }
 
             final String fieldName = mapper.realMember(resultType, attrName);
             final Field field = reflectionProvider.getFieldOrNull(resultType, fieldName);
-            if (field != null) {
-                if (Modifier.isTransient(field.getModifiers())) {
+            if (field != null){
+                if (Modifier.isTransient(field.getModifiers())){
                     continue;
                 }
 
                 Class type = field.getType();
                 final Class declaringClass = field.getDeclaringClass();
                 ConverterMatcher converter = UseAttributeForEnumMapper.isEnum(type)
-                    ? (ConverterMatcher)enumMapper.getConverterFromItemType(null, type, null)
-                    : (ConverterMatcher)mapper.getLocalConverter(declaringClass, fieldName);
-                if (converter == null) {
+                                ? (ConverterMatcher) enumMapper.getConverterFromItemType(null, type, null)
+                                : (ConverterMatcher) mapper.getLocalConverter(declaringClass, fieldName);
+                if (converter == null){
                     converter = lookup.lookupConverterForType(type);
                 }
 
-                if (!(converter instanceof SingleValueConverter)) {
-                    final ConversionException exception = new ConversionException(
-                        "Cannot read field as a single value for object");
+                if (!(converter instanceof SingleValueConverter)){
+                    final ConversionException exception = new ConversionException("Cannot read field as a single value for object");
                     exception.add("field", fieldName);
                     exception.add("type", resultType.getName());
                     throw exception;
                 }
 
-                if (converter != null) {
-                    final Object value = ((SingleValueConverter)converter).fromString(reader
-                        .getAttribute(attrName));
-                    if (type.isPrimitive()) {
+                if (converter != null){
+                    final Object value = ((SingleValueConverter) converter).fromString(reader.getAttribute(attrName));
+                    if (type.isPrimitive()){
                         type = Primitives.box(type);
                     }
 
-                    if (value != null && !type.isAssignableFrom(value.getClass())) {
-                        final ConversionException exception = new ConversionException(
-                            "Cannot assign object to type");
+                    if (value != null && !type.isAssignableFrom(value.getClass())){
+                        final ConversionException exception = new ConversionException("Cannot assign object to type");
                         exception.add("object type", value.getClass().getName());
                         exception.add("target type", type.getName());
                         throw exception;
                     }
 
                     reflectionProvider.writeField(result, fieldName, value, declaringClass);
-                    if (!seenFields.add(new FastField(declaringClass, fieldName))) {
-                        throw new DuplicateFieldException(fieldName
-                            + " ["
-                            + declaringClass.getName()
-                            + "]");
+                    if (!seenFields.add(new FastField(declaringClass, fieldName))){
+                        throw new DuplicateFieldException(fieldName + " [" + declaringClass.getName() + "]");
                     }
                 }
             }
         }
 
-        if (valueField != null) {
+        if (valueField != null){
             final Class classDefiningField = valueField.getDeclaringClass();
             final String fieldName = valueField.getName();
-            final Field field = fieldName == null ? null : reflectionProvider.getField(
-                classDefiningField, fieldName);
-            if (fieldName == null || field == null) {
-                final ConversionException exception = new ConversionException(
-                    "Cannot assign value to field of type");
+            final Field field = fieldName == null ? null : reflectionProvider.getField(classDefiningField, fieldName);
+            if (fieldName == null || field == null){
+                final ConversionException exception = new ConversionException("Cannot assign value to field of type");
                 exception.add("element", reader.getNodeName());
                 exception.add("field", fieldName);
                 exception.add("target type", context.getRequiredType().getName());
@@ -304,46 +308,36 @@ public class ToAttributedValueConverter implements Converter {
             }
 
             Class type;
-            final String classAttribute = HierarchicalStreams
-                .readClassAttribute(reader, mapper);
-            if (classAttribute != null) {
+            final String classAttribute = HierarchicalStreams.readClassAttribute(reader, mapper);
+            if (classAttribute != null){
                 type = mapper.realClass(classAttribute);
-            } else {
-                type = mapper.defaultImplementationOf(reflectionProvider.getFieldType(
-                    result, fieldName, classDefiningField));
+            }else{
+                type = mapper.defaultImplementationOf(reflectionProvider.getFieldType(result, fieldName, classDefiningField));
             }
 
-            final Object value = context.convertAnother(
-                result, type,
-                mapper.getLocalConverter(field.getDeclaringClass(), field.getName()));
+            final Object value = context.convertAnother(result, type, mapper.getLocalConverter(field.getDeclaringClass(), field.getName()));
 
-            final Class definedType = reflectionProvider.getFieldType(
-                result, fieldName, classDefiningField);
-            if (!definedType.isPrimitive()) {
+            final Class definedType = reflectionProvider.getFieldType(result, fieldName, classDefiningField);
+            if (!definedType.isPrimitive()){
                 type = definedType;
             }
 
-            if (value != null && !type.isAssignableFrom(value.getClass())) {
-                final ConversionException exception = new ConversionException(
-                    "Cannot assign object to type");
+            if (value != null && !type.isAssignableFrom(value.getClass())){
+                final ConversionException exception = new ConversionException("Cannot assign object to type");
                 exception.add("object type", value.getClass().getName());
                 exception.add("target type", type.getName());
                 throw exception;
             }
 
             reflectionProvider.writeField(result, fieldName, value, classDefiningField);
-            if (!seenFields.add(new FastField(classDefiningField, fieldName))) {
-                throw new DuplicateFieldException(fieldName
-                    + " ["
-                    + classDefiningField.getName()
-                    + "]");
+            if (!seenFields.add(new FastField(classDefiningField, fieldName))){
+                throw new DuplicateFieldException(fieldName + " [" + classDefiningField.getName() + "]");
             }
         }
         return result;
     }
 
-    private boolean fieldIsEqual(FastField field) {
-        return valueField.getName().equals(field.getName())
-            && valueField.getDeclaringClass().getName().equals(field.getDeclaringClass());
+    private boolean fieldIsEqual(FastField field){
+        return valueField.getName().equals(field.getName()) && valueField.getDeclaringClass().getName().equals(field.getDeclaringClass());
     }
 }

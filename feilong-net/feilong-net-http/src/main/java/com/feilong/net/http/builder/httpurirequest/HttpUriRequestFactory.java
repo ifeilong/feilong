@@ -64,8 +64,8 @@ public class HttpUriRequestFactory{
      */
     public static HttpUriRequest create(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         HttpRequestBase httpRequestBase = create(httpRequest);
-        // RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig);
-        //httpRequestBase.setConfig(requestConfig);
+        // RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig)
+        //httpRequestBase.setConfig(requestConfig)
         return httpRequestBase;
     }
 

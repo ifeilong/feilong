@@ -21,13 +21,13 @@ package com.feilong.lib.xstream.io.naming;
  * @author J&ouml;rg Schaiblea
  * @since 1.4
  */
-public class NoNameCoder implements NameCoder {
+public class NoNameCoder implements NameCoder{
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String decodeAttribute(String attributeName) {
+    public String decodeAttribute(String attributeName){
         return attributeName;
     }
 
@@ -35,7 +35,7 @@ public class NoNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String decodeNode(String nodeName) {
+    public String decodeNode(String nodeName){
         return nodeName;
     }
 
@@ -43,7 +43,7 @@ public class NoNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String encodeAttribute(String name) {
+    public String encodeAttribute(String name){
         return name;
     }
 
@@ -51,7 +51,7 @@ public class NoNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String encodeNode(String name) {
+    public String encodeNode(String name){
         return name;
     }
 

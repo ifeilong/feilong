@@ -18,48 +18,46 @@ import java.time.chrono.HijrahEra;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * Converts a {@link java.time.chrono.HijrahDate} to a string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class HijrahDateConverter extends AbstractChronoLocalDateConverter<HijrahEra> {
+public class HijrahDateConverter extends AbstractChronoLocalDateConverter<HijrahEra>{
 
     private final Set<Chronology> hijrahChronologies;
 
     /**
      * Constructs a HijrahDateConverter instance.
      */
-    public HijrahDateConverter() {
+    public HijrahDateConverter(){
         hijrahChronologies = new HashSet<>();
         final Set<Chronology> chronologies = Chronology.getAvailableChronologies();
-        for (final Chronology chronology : chronologies) {
-            if (chronology instanceof HijrahChronology) {
+        for (final Chronology chronology : chronologies){
+            if (chronology instanceof HijrahChronology){
                 hijrahChronologies.add(chronology);
             }
         }
     }
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return HijrahDate.class == type;
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         return parseChronoLocalDate(str, "Hijrah", hijrahChronologies);
     }
 
     @Override
-    protected ChronoLocalDate chronoLocalDateOf(final HijrahEra era, final int prolepticYear, final int month,
-            final int dayOfMonth) {
+    protected ChronoLocalDate chronoLocalDateOf(final HijrahEra era,final int prolepticYear,final int month,final int dayOfMonth){
         return era != null ? HijrahDate.of(prolepticYear, month, dayOfMonth) : null;
     }
 
     @Override
-    protected HijrahEra eraOf(final String id) {
+    protected HijrahEra eraOf(final String id){
         return HijrahEra.valueOf(id);
     }
 

@@ -19,21 +19,20 @@ import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 import com.feilong.lib.xstream.core.util.ThreadSafeSimpleDateFormat;
 
-
 /**
  * Converts a {@link Timestamp} to a string.
  *
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class SqlTimestampConverter extends AbstractSingleValueConverter {
+public class SqlTimestampConverter extends AbstractSingleValueConverter{
 
     private final ThreadSafeSimpleDateFormat format;
 
     /**
      * Constructs a SqlTimestampConverter using UTC format.
      */
-    public SqlTimestampConverter() {
+    public SqlTimestampConverter(){
         this(TimeZone.getTimeZone("UTC"));
     }
 
@@ -45,27 +44,28 @@ public class SqlTimestampConverter extends AbstractSingleValueConverter {
      * a case you can register an own instance of the SqlTimestamp converter using e.g. {@link TimeZone#getDefault()}.
      * </p>
      *
-     * @param timeZone the time zone used for the format
+     * @param timeZone
+     *            the time zone used for the format
      * @since 1.4.10
      */
-    public SqlTimestampConverter(final TimeZone timeZone) {
+    public SqlTimestampConverter(final TimeZone timeZone){
         format = new ThreadSafeSimpleDateFormat("yyyy-MM-dd HH:mm:ss", timeZone, 0, 5, false);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Timestamp.class;
     }
 
     @Override
-    public String toString(final Object obj) {
-        final Timestamp timestamp = (Timestamp)obj;
+    public String toString(final Object obj){
+        final Timestamp timestamp = (Timestamp) obj;
         final StringBuffer buffer = new StringBuffer(format.format(timestamp));
-        if (timestamp.getNanos() != 0) {
+        if (timestamp.getNanos() != 0){
             buffer.append('.');
             final String nanos = String.valueOf(timestamp.getNanos() + 1000000000);
             int last = 10;
-            while (last > 2 && nanos.charAt(last-1) == '0')
+            while (last > 2 && nanos.charAt(last - 1) == '0')
                 --last;
             buffer.append(nanos.subSequence(1, last));
         }
@@ -73,27 +73,25 @@ public class SqlTimestampConverter extends AbstractSingleValueConverter {
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         final int idx = str.lastIndexOf('.');
-        if (idx > 0 && (str.length() - idx < 2 || str.length() - idx > 10)) {
+        if (idx > 0 && (str.length() - idx < 2 || str.length() - idx > 10)){
             throw new ConversionException("Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]");
         }
-        try {
+        try{
             final Timestamp timestamp = new Timestamp(format.parse(idx < 0 ? str : str.substring(0, idx)).getTime());
-            if (idx > 0) {
+            if (idx > 0){
                 final StringBuffer buffer = new StringBuffer(str.substring(idx + 1));
-                while (buffer.length() != 9) {
+                while (buffer.length() != 9){
                     buffer.append('0');
                 }
                 timestamp.setNanos(Integer.parseInt(buffer.toString()));
             }
             return timestamp;
-        } catch (NumberFormatException e) {
-            throw new ConversionException(
-                "Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]", e);
-        } catch (ParseException e) {
-            throw new ConversionException(
-                "Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]", e);
+        }catch (NumberFormatException e){
+            throw new ConversionException("Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]", e);
+        }catch (ParseException e){
+            throw new ConversionException("Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]", e);
         }
     }
 

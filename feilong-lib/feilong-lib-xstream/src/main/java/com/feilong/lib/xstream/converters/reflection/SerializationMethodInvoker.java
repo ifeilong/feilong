@@ -25,7 +25,7 @@ import com.feilong.lib.xstream.core.util.SerializationMembers;
  * @author J&ouml;rg Schaible
  * @deprecated As of 1.4.8, moved into internal util package.
  */
-public class SerializationMethodInvoker implements Caching {
+public class SerializationMethodInvoker implements Caching{
 
     SerializationMembers serializationMembers = new SerializationMembers();
 
@@ -34,42 +34,42 @@ public class SerializationMethodInvoker implements Caching {
      * 
      * @deprecated As of 1.4.8, moved into internal util package.
      */
-    public Object callReadResolve(Object result) {
+    public Object callReadResolve(Object result){
         return serializationMembers.callReadResolve(result);
     }
 
     /**
      * @deprecated As of 1.4.8, moved into internal util package.
      */
-    public Object callWriteReplace(Object object) {
+    public Object callWriteReplace(Object object){
         return serializationMembers.callWriteReplace(object);
     }
 
     /**
      * @deprecated As of 1.4.8, moved into internal util package.
      */
-    public boolean supportsReadObject(Class type, boolean includeBaseClasses) {
+    public boolean supportsReadObject(Class type,boolean includeBaseClasses){
         return serializationMembers.supportsReadObject(type, includeBaseClasses);
     }
 
     /**
      * @deprecated As of 1.4.8, moved into internal util package.
      */
-    public void callReadObject(Class type, Object object, ObjectInputStream stream) {
+    public void callReadObject(Class type,Object object,ObjectInputStream stream){
         serializationMembers.callReadObject(type, object, stream);
     }
 
     /**
      * @deprecated As of 1.4.8, moved into internal util package.
      */
-    public boolean supportsWriteObject(Class type, boolean includeBaseClasses) {
+    public boolean supportsWriteObject(Class type,boolean includeBaseClasses){
         return serializationMembers.supportsWriteObject(type, includeBaseClasses);
     }
 
     /**
      * @deprecated As of 1.4.8, moved into internal util package.
      */
-    public void callWriteObject(Class type, Object instance, ObjectOutputStream stream) {
+    public void callWriteObject(Class type,Object instance,ObjectOutputStream stream){
         serializationMembers.callWriteObject(type, instance, stream);
     }
 
@@ -77,7 +77,7 @@ public class SerializationMethodInvoker implements Caching {
      * @deprecated As of 1.4.8, moved into internal util package.
      */
     @Override
-    public void flushCache() {
+    public void flushCache(){
         serializationMembers.flushCache();
     }
 }

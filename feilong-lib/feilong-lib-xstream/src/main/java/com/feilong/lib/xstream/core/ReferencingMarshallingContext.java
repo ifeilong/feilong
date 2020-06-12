@@ -14,13 +14,13 @@ import com.feilong.lib.xstream.converters.MarshallingContext;
 import com.feilong.lib.xstream.io.path.Path;
 
 /**
- * A {@link MarshallingContext} that manages references. 
+ * A {@link MarshallingContext} that manages references.
  * 
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public interface ReferencingMarshallingContext extends MarshallingContext {
-    
+public interface ReferencingMarshallingContext extends MarshallingContext{
+
     /**
      * Retrieve the current path.
      * 
@@ -29,33 +29,39 @@ public interface ReferencingMarshallingContext extends MarshallingContext {
      * @deprecated As of 1.4.2
      */
     Path currentPath();
-    
+
     /**
-     * Request the reference key for the given item 
+     * Request the reference key for the given item
      * 
-     * @param item the item to lookup
+     * @param item
+     *            the item to lookup
      * @return the reference key or <code>null</code>
      * @since 1.4
      */
     Object lookupReference(Object item);
-    
+
     /**
      * Replace the currently marshalled item.
      * 
-     * <p><strong>Use this method only, if you know exactly what you do!</strong> It is a special solution for
-     * Serializable types that make usage of the writeReplace method where the replacing object itself is referenced.</p>
+     * <p>
+     * <strong>Use this method only, if you know exactly what you do!</strong> It is a special solution for
+     * Serializable types that make usage of the writeReplace method where the replacing object itself is referenced.
+     * </p>
      * 
-     * @param original the original item to convert
-     * @param replacement the replacement item that is converted instead
+     * @param original
+     *            the original item to convert
+     * @param replacement
+     *            the replacement item that is converted instead
      * @since 1.4
      */
-    void replace(Object original, Object replacement);
+    void replace(Object original,Object replacement);
 
     /**
      * Register an implicit element. This is typically some kind of collection. Note, that this object may not be
      * referenced anywhere else in the object stream.
      * 
-     * @param item the object that is implicit
+     * @param item
+     *            the object that is implicit
      * @since 1.4
      */
     void registerImplicit(Object item);

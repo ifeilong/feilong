@@ -16,7 +16,6 @@ import java.lang.reflect.Modifier;
 
 import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
 
-
 /**
  * Slightly nicer way to find, get and set fields in classes. Wraps standard java.lang.reflect.Field calls and turns
  * exceptions into XStreamExceptions.
@@ -24,75 +23,75 @@ import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class Fields {
-    public static Field locate(final Class definedIn, final Class fieldType, final boolean isStatic) {
+public class Fields{
+
+    public static Field locate(final Class definedIn,final Class fieldType,final boolean isStatic){
         Field field = null;
-        try {
+        try{
             final Field[] fields = definedIn.getDeclaredFields();
-            for(int i = 0; i < fields.length; ++i) {
-                if (Modifier.isStatic(fields[i].getModifiers()) == isStatic) {
-                    if (fieldType.isAssignableFrom(fields[i].getType())) {
+            for (int i = 0; i < fields.length; ++i){
+                if (Modifier.isStatic(fields[i].getModifiers()) == isStatic){
+                    if (fieldType.isAssignableFrom(fields[i].getType())){
                         field = fields[i];
                     }
                 }
             }
-            if (field != null && !field.isAccessible()) {
+            if (field != null && !field.isAccessible()){
                 field.setAccessible(true);
             }
-        } catch (final SecurityException e) {
+        }catch (final SecurityException e){
             // active SecurityManager
-        } catch (final NoClassDefFoundError e) {
+        }catch (final NoClassDefFoundError e){
             // restricted type in GAE
         }
         return field;
     }
 
-    public static Field find(final Class type, final String name) {
-        try {
+    public static Field find(final Class type,final String name){
+        try{
             final Field result = type.getDeclaredField(name);
-            if (!result.isAccessible()) {
+            if (!result.isAccessible()){
                 result.setAccessible(true);
             }
             return result;
-        } catch (final SecurityException e) {
+        }catch (final SecurityException e){
             throw wrap("Cannot access field", type, name, e);
-        } catch (final NoSuchFieldException e) {
+        }catch (final NoSuchFieldException e){
             throw wrap("Cannot access field", type, name, e);
-        } catch (final NoClassDefFoundError e) {
+        }catch (final NoClassDefFoundError e){
             throw wrap("Cannot access field", type, name, e);
         }
     }
 
-    public static void write(final Field field, final Object instance, final Object value) {
-        try {
+    public static void write(final Field field,final Object instance,final Object value){
+        try{
             field.set(instance, value);
-        } catch (final SecurityException e) {
+        }catch (final SecurityException e){
             throw wrap("Cannot write field", field.getType(), field.getName(), e);
-        } catch (final IllegalArgumentException e) {
+        }catch (final IllegalArgumentException e){
             throw wrap("Cannot write field", field.getType(), field.getName(), e);
-        } catch (final IllegalAccessException e) {
+        }catch (final IllegalAccessException e){
             throw wrap("Cannot write field", field.getType(), field.getName(), e);
-        } catch (final NoClassDefFoundError e) {
+        }catch (final NoClassDefFoundError e){
             throw wrap("Cannot write field", field.getType(), field.getName(), e);
         }
     }
 
-    public static Object read(final Field field, final Object instance) {
-        try {
+    public static Object read(final Field field,final Object instance){
+        try{
             return field.get(instance);
-        } catch (final SecurityException e) {
+        }catch (final SecurityException e){
             throw wrap("Cannot read field", field.getType(), field.getName(), e);
-        } catch (final IllegalArgumentException e) {
+        }catch (final IllegalArgumentException e){
             throw wrap("Cannot read field", field.getType(), field.getName(), e);
-        } catch (final IllegalAccessException e) {
+        }catch (final IllegalAccessException e){
             throw wrap("Cannot read field", field.getType(), field.getName(), e);
-        } catch (final NoClassDefFoundError e) {
+        }catch (final NoClassDefFoundError e){
             throw wrap("Cannot read field", field.getType(), field.getName(), e);
         }
     }
 
-    private static ObjectAccessException wrap(final String message, final Class type, final String name,
-            final Throwable ex) {
+    private static ObjectAccessException wrap(final String message,final Class type,final String name,final Throwable ex){
         final ObjectAccessException exception = new ObjectAccessException(message, ex);
         exception.add("field", type.getName() + "." + name);
         return exception;

@@ -14,14 +14,9 @@ public class BeanIntIgnoreNullNests{
         super();
     }
 
-    /**
-     * @param age
-     * @param name
-     */
     public BeanIntIgnoreNullNests(Integer age){
         super();
         this.age = age;
-
     }
 
     //---------------------------------------------------------------

@@ -16,6 +16,7 @@ package com.feilong.lib.xstream.core;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public interface Caching {
+public interface Caching{
+
     void flushCache();
 }

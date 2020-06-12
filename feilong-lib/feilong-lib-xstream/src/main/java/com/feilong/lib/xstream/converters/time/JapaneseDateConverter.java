@@ -16,33 +16,31 @@ import java.time.chrono.JapaneseDate;
 import java.time.chrono.JapaneseEra;
 import java.util.Collections;
 
-
 /**
  * Converts a {@link java.time.chrono.JapaneseDate} to a string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class JapaneseDateConverter extends AbstractChronoLocalDateConverter<JapaneseEra> {
+public class JapaneseDateConverter extends AbstractChronoLocalDateConverter<JapaneseEra>{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return JapaneseDate.class == type;
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         return parseChronoLocalDate(str, "Japanese", Collections.singleton(JapaneseChronology.INSTANCE));
     }
 
     @Override
-    protected ChronoLocalDate chronoLocalDateOf(final JapaneseEra era, final int prolepticYear, final int month,
-            final int dayOfMonth) {
+    protected ChronoLocalDate chronoLocalDateOf(final JapaneseEra era,final int prolepticYear,final int month,final int dayOfMonth){
         return JapaneseDate.of(era, prolepticYear, month, dayOfMonth);
     }
 
     @Override
-    protected JapaneseEra eraOf(final String id) {
+    protected JapaneseEra eraOf(final String id){
         return JapaneseEra.valueOf(id);
     }
 

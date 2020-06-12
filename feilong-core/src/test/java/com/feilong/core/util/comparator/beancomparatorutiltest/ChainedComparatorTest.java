@@ -72,7 +72,6 @@ public class ChainedComparatorTest{
     /**
      * Test property name and orders null.
      */
-    //------
     @Test(expected = NullPointerException.class)
     public void testPropertyNameAndOrdersNull(){
         BeanComparatorUtil.chainedComparator(null);

@@ -813,7 +813,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
          * @return the result of the task
          * @see #execute(Reference, Entry, Entries)
          */
-        protected T execute(Reference<K, V> ref,Entry<K, V> entry){
+        protected T execute(@SuppressWarnings("unused") Reference<K, V> ref,@SuppressWarnings("unused") Entry<K, V> entry){
             return null;
         }
     }

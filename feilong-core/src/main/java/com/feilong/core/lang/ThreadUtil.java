@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 
@@ -27,13 +28,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.TimeInterval;
+import com.feilong.core.Validate;
 import com.feilong.core.lang.thread.DefaultPartitionRunnableBuilder;
 import com.feilong.core.lang.thread.DefaultPartitionThreadExecutor;
 import com.feilong.core.lang.thread.PartitionEachSizeThreadConfigBuilder;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 import com.feilong.core.lang.thread.PartitionThreadConfig;
-import com.feilong.core.Validate;
 
 /**
  * 线程相关工具类.
@@ -132,7 +133,7 @@ public final class ThreadUtil{
      * <pre class="code">
      * 
      * public void testNegative1(){
-     *     ThreadUtil.sleep(1);
+     *     ThreadUtil.sleep(com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS * 10);
      * }
      * 
      * </pre>
@@ -148,7 +149,63 @@ public final class ThreadUtil{
      * </blockquote>
      *
      * @param milliseconds
-     *            睡眠的毫秒数,可以使用 {@link TimeInterval} 常量
+     *            睡眠的毫秒数,建议使用 {@link TimeInterval} 常量
+     * @throws IllegalArgumentException
+     *             如果 <code>milliseconds</code> 参数是负数
+     * @see <a href="http://localhost:9000/coding_rules#rule_key=squid%3AS2925">"Thread.sleep" should not be used in tests</a>
+     * @see <a href="https://github.com/ifeilong/feilong/issues/251">新建 ThreadUtil.sleep int 参数方法 ,避免sonar 扫描问题</a>
+     * @see java.util.concurrent.TimeUnit#sleep(long) TimeUnit.SECONDS.sleep(3);
+     * @see java.lang.Thread#sleep(long)
+     * @since 3.0.5
+     */
+    public static final void sleep(int milliseconds){
+        sleep(toLong(milliseconds));
+    }
+
+    /**
+     * 强制当前正在执行的线程 休眠(暂停执行) <code>milliseconds</code> 毫秒.
+     * 
+     * <p>
+     * 该方法简便的地方在于,捕获了异常和记录了日志,不需要再写这些额外代码
+     * </p>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>The thread does not lose ownership of any monitors.</li>
+     * <li>当线程睡眠时,它睡在某个地方,在苏醒之前不会返回到可运行状态,<br>
+     * 当睡眠时间到期,则返回到可运行状态。sleep()方法不能保证该线程睡眠到期后就开始执行</li>
+     * <li>sleep()是静态方法,只能控制当前正在运行的线程</li>
+     * <li>sonarqube不建议在单元测试中使用 sleep, 参见 "Thread.sleep" should not be used in tests squid:S2925</li>
+     * </ol>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * public void testNegative1(){
+     *     ThreadUtil.sleep(com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS * 10);
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>sleep()和wait()方法的最大区别:</h3>
+     * <blockquote>
+     * <p>
+     * sleep()睡眠时,保持对象锁,仍然占有该锁；<br>
+     * 而wait()睡眠时,释放对象锁。
+     * </p>
+     * </blockquote>
+     *
+     * @param milliseconds
+     *            睡眠的毫秒数,建议使用 {@link TimeInterval} 常量
      * @throws IllegalArgumentException
      *             如果 <code>milliseconds</code> 参数是负数
      * @see <a href="http://localhost:9000/coding_rules#rule_key=squid%3AS2925">"Thread.sleep" should not be used in tests</a>

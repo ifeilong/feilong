@@ -25,34 +25,34 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 /**
  * Converter for JDK 1.5 enums. Combined with EnumMapper this also deals with polymorphic enums.
  *
- * @author Eric Snell 
+ * @author Eric Snell
  * @author Bryan Coleman
  */
-public class EnumConverter implements Converter {
+public class EnumConverter implements Converter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && type.isEnum() || Enum.class.isAssignableFrom(type);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         writer.setValue(((Enum) source).name());
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         Class type = context.getRequiredType();
-        if (type.getSuperclass() != Enum.class) {
+        if (type.getSuperclass() != Enum.class){
             type = type.getSuperclass(); // polymorphic enums
         }
         String name = reader.getValue();
-        try {
+        try{
             return Enum.valueOf(type, name);
-        } catch (IllegalArgumentException e) {
+        }catch (IllegalArgumentException e){
             // failed to find it, do a case insensitive match
-            for (Enum c : (Enum[])type.getEnumConstants())
+            for (Enum c : (Enum[]) type.getEnumConstants())
                 if (c.name().equalsIgnoreCase(name))
                     return c;
             // all else failed

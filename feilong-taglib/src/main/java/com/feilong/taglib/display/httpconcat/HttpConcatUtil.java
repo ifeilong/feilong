@@ -26,10 +26,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.taglib.display.httpconcat.builder.ResultBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
@@ -50,7 +50,7 @@ import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see HttpConcatTag
  * @see HttpConcatParam
- * @see org.apache.commons.collections4.map.LRUMap
+ * @see "org.apache.commons.collections4.map.LRUMap"
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a>
  * @since 1.0.7
  */

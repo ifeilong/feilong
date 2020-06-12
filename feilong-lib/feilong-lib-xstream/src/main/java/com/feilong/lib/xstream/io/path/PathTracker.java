@@ -17,9 +17,11 @@ import java.util.Map;
 /**
  * Maintains the current {@link Path} as a stream is moved through.
  *
- * <p>Can be linked to a {@link com.feilong.lib.xstream.io.HierarchicalStreamWriter} or
+ * <p>
+ * Can be linked to a {@link com.feilong.lib.xstream.io.HierarchicalStreamWriter} or
  * {@link com.feilong.lib.xstream.io.HierarchicalStreamReader} by wrapping them with a
- * {@link PathTrackingWriter} or {@link PathTrackingReader}.</p>
+ * {@link PathTrackingWriter} or {@link PathTrackingReader}.
+ * </p>
  *
  * <h3>Example</h3>
  *
@@ -43,25 +45,29 @@ import java.util.Map;
  *
  * @author Joe Walnes
  */
-public class PathTracker {
+public class PathTracker{
 
-    private int pointer;
-    private int capacity;
+    private int      pointer;
+
+    private int      capacity;
+
     private String[] pathStack;
-    private Map[] indexMapStack;
 
-    private Path currentPath;
+    private Map[]    indexMapStack;
 
-    public PathTracker() {
+    private Path     currentPath;
+
+    public PathTracker(){
         this(16);
     }
 
     /**
-     * @param initialCapacity Size of the initial stack of nodes (one level per depth in the tree). Note that this is
-     *                        only for optimizations - the stack will resize itself if it exceeds its capacity. If in doubt,
-     *                        use the other constructor.
+     * @param initialCapacity
+     *            Size of the initial stack of nodes (one level per depth in the tree). Note that this is
+     *            only for optimizations - the stack will resize itself if it exceeds its capacity. If in doubt,
+     *            use the other constructor.
      */
-    public PathTracker(int initialCapacity) {
+    public PathTracker(int initialCapacity){
         this.capacity = Math.max(1, initialCapacity);
         pathStack = new String[capacity];
         indexMapStack = new Map[capacity];
@@ -70,21 +76,22 @@ public class PathTracker {
     /**
      * Notify the tracker that the stream has moved into a new element.
      *
-     * @param name Name of the element
+     * @param name
+     *            Name of the element
      */
-    public void pushElement(String name) {
-        if (pointer + 1 >= capacity) {
+    public void pushElement(String name){
+        if (pointer + 1 >= capacity){
             resizeStacks(capacity * 2);
         }
         pathStack[pointer] = name;
         Map indexMap = indexMapStack[pointer];
-        if (indexMap == null) {
+        if (indexMap == null){
             indexMap = new HashMap();
             indexMapStack[pointer] = indexMap;
         }
-        if (indexMap.containsKey(name)) {
+        if (indexMap.containsKey(name)){
             indexMap.put(name, new Integer(((Integer) indexMap.get(name)).intValue() + 1));
-        } else {
+        }else{
             indexMap.put(name, new Integer(1));
         }
         pointer++;
@@ -94,44 +101,46 @@ public class PathTracker {
     /**
      * Notify the tracker that the stream has moved out of an element.
      */
-    public void popElement() {
+    public void popElement(){
         indexMapStack[pointer] = null;
         pathStack[pointer] = null;
         currentPath = null;
         pointer--;
     }
-    
+
     /**
      * Get the last path element from the stack.
      * 
      * @return the name of the path element
      * @since 1.4.2
      */
-    public String peekElement() {
+    public String peekElement(){
         return peekElement(0);
     }
-    
+
     /**
      * Get a path element from the stack.
      * 
-     * @param i path index
+     * @param i
+     *            path index
      * @return the name of the path element
      * @since 1.4.2
-     * @throws ArrayIndexOutOfBoundsException if the index is &gt;= 0 or &lt;= -depth() 
+     * @throws ArrayIndexOutOfBoundsException
+     *             if the index is &gt;= 0 or &lt;= -depth()
      */
-    public String peekElement(int i) {
-        if (i < -pointer || i > 0) {
+    public String peekElement(int i){
+        if (i < -pointer || i > 0){
             throw new ArrayIndexOutOfBoundsException(i);
         }
         int idx = pointer + i - 1;
-        final String name; 
+        final String name;
         Integer integer = ((Integer) indexMapStack[idx].get(pathStack[idx]));
         int index = integer.intValue();
-        if (index > 1) {
+        if (index > 1){
             StringBuffer chunk = new StringBuffer(pathStack[idx].length() + 6);
             chunk.append(pathStack[idx]).append('[').append(index).append(']');
             name = chunk.toString();
-        } else {
+        }else{
             name = pathStack[idx];
         }
         return name;
@@ -143,11 +152,11 @@ public class PathTracker {
      * @return the stack depth
      * @since 1.4.2
      */
-    public int depth() {
-        return pointer; 
+    public int depth(){
+        return pointer;
     }
 
-    private void resizeStacks(int newCapacity) {
+    private void resizeStacks(int newCapacity){
         String[] newPathStack = new String[newCapacity];
         Map[] newIndexMapStack = new Map[newCapacity];
         int min = Math.min(capacity, newCapacity);
@@ -161,11 +170,11 @@ public class PathTracker {
     /**
      * Current Path in stream.
      */
-    public Path getPath() {
-        if (currentPath == null) {
+    public Path getPath(){
+        if (currentPath == null){
             String[] chunks = new String[pointer + 1];
             chunks[0] = "";
-            for (int i = -pointer; ++i <= 0; ) {
+            for (int i = -pointer; ++i <= 0;){
                 final String name = peekElement(i);
                 chunks[i + pointer] = name;
             }

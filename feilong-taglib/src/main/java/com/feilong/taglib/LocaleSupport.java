@@ -21,8 +21,8 @@ import java.util.Locale;
  * 标识支持 locale 语言环境的标签 support.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport
- * @see javax.servlet.jsp.jstl.fmt.LocaleSupport
+ * @see "org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport"
+ * @see "javax.servlet.jsp.jstl.fmt.LocaleSupport"
  * @since 1.7.2
  */
 public interface LocaleSupport{
@@ -32,11 +32,11 @@ public interface LocaleSupport{
      *
      * @param locale
      *            the new locale
-     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
-     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
-     * @see org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale
-     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)
-     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)
+     * @see "org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value"
+     * @see "org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)"
+     * @see "org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale"
+     * @see "org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)"
+     * @see "org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)"
      */
     //不能声明成 Serializable类型
     //Unable to convert string "zh_CN" to class "java.io.Serializable" for attribute "locale": Property Editor not registered with the PropertyEditorManager

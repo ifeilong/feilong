@@ -51,8 +51,8 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
  * </pre>
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see org.apache.taglibs.standard.tag.rt.fmt.BundleTag
- * @see org.apache.taglibs.standard.tag.rt.fmt.SetBundleTag
+ * @see "org.apache.taglibs.standard.tag.rt.fmt.BundleTag"
+ * @see "org.apache.taglibs.standard.tag.rt.fmt.SetBundleTag"
  * @since 1.10.3
  */
 @SuppressWarnings("squid:S110") //Inheritance tree of classes should not be too deep

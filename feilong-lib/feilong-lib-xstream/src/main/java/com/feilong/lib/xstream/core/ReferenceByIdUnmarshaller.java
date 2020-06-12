@@ -15,20 +15,19 @@ import com.feilong.lib.xstream.converters.ConverterLookup;
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-public class ReferenceByIdUnmarshaller extends AbstractReferenceUnmarshaller {
+public class ReferenceByIdUnmarshaller extends AbstractReferenceUnmarshaller{
 
-    public ReferenceByIdUnmarshaller(Object root, HierarchicalStreamReader reader,
-                                     ConverterLookup converterLookup, Mapper mapper) {
+    public ReferenceByIdUnmarshaller(Object root, HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper){
         super(root, reader, converterLookup, mapper);
     }
 
     @Override
-    protected Object getReferenceKey(String reference) {
+    protected Object getReferenceKey(String reference){
         return reference;
     }
 
     @Override
-    protected Object getCurrentReferenceKey() {
+    protected Object getCurrentReferenceKey(){
         String attributeName = getMapper().aliasForSystemAttribute("id");
         return attributeName == null ? null : reader.getAttribute(attributeName);
     }

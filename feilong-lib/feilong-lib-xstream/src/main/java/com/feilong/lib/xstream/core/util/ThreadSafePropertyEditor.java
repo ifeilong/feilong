@@ -16,7 +16,6 @@ import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.ErrorWritingException;
 import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
 
-
 /**
  * Wrapper around {@link PropertyEditor} that can be called by multiple threads concurrently.
  * <p>
@@ -32,27 +31,27 @@ import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public class ThreadSafePropertyEditor {
+public class ThreadSafePropertyEditor{
 
     private final Class editorType;
-    private final Pool pool;
 
-    public ThreadSafePropertyEditor(Class type, int initialPoolSize, int maxPoolSize) {
-        if (!PropertyEditor.class.isAssignableFrom(type)) {
-            throw new IllegalArgumentException(type.getName()
-                + " is not a "
-                + PropertyEditor.class.getName());
+    private final Pool  pool;
+
+    public ThreadSafePropertyEditor(Class type, int initialPoolSize, int maxPoolSize){
+        if (!PropertyEditor.class.isAssignableFrom(type)){
+            throw new IllegalArgumentException(type.getName() + " is not a " + PropertyEditor.class.getName());
         }
         editorType = type;
-        pool = new Pool(initialPoolSize, maxPoolSize, new Pool.Factory() {
+        pool = new Pool(initialPoolSize, maxPoolSize, new Pool.Factory(){
+
             @Override
-            public Object newInstance() {
+            public Object newInstance(){
                 ErrorWritingException ex = null;
-                try {
+                try{
                     return editorType.newInstance();
-                } catch (InstantiationException e) {
+                }catch (InstantiationException e){
                     ex = new ConversionException("Faild to call default constructor", e);
-                } catch (IllegalAccessException e) {
+                }catch (IllegalAccessException e){
                     ex = new ObjectAccessException("Cannot call default constructor", e);
                 }
                 ex.add("construction-type", editorType.getName());
@@ -62,28 +61,28 @@ public class ThreadSafePropertyEditor {
         });
     }
 
-    public String getAsText(Object object) {
+    public String getAsText(Object object){
         PropertyEditor editor = fetchFromPool();
-        try {
+        try{
             editor.setValue(object);
             return editor.getAsText();
-        } finally {
+        }finally{
             pool.putInPool(editor);
         }
     }
 
-    public Object setAsText(String str) {
+    public Object setAsText(String str){
         PropertyEditor editor = fetchFromPool();
-        try {
+        try{
             editor.setAsText(str);
             return editor.getValue();
-        } finally {
+        }finally{
             pool.putInPool(editor);
         }
     }
 
-    private PropertyEditor fetchFromPool() {
-        PropertyEditor editor = (PropertyEditor)pool.fetchFromPool();
+    private PropertyEditor fetchFromPool(){
+        PropertyEditor editor = (PropertyEditor) pool.fetchFromPool();
         return editor;
     }
 }

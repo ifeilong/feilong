@@ -18,7 +18,6 @@ import com.feilong.lib.xstream.converters.SingleValueConverter;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 import com.feilong.lib.xstream.core.JVM;
 
-
 /**
  * A GregorianCalendarConverter conforming to the ISO8601 standard. The converter will always serialize the calendar
  * value in UTC and deserialize it to a value in the current default time zone.
@@ -28,43 +27,45 @@ import com.feilong.lib.xstream.core.JVM;
  * @see <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=40874">ISO 8601</a>
  * @since 1.1.3
  */
-public class ISO8601GregorianCalendarConverter extends AbstractSingleValueConverter {
-    private final static Class[] EMPTY_CLASS_ARRAY = new Class[0];
-    private final static Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+public class ISO8601GregorianCalendarConverter extends AbstractSingleValueConverter{
+
+    private final static Class[]       EMPTY_CLASS_ARRAY  = new Class[0];
+
+    private final static Object[]      EMPTY_OBJECT_ARRAY = new Object[0];
+
     private final SingleValueConverter converter;
 
-    public ISO8601GregorianCalendarConverter() {
+    public ISO8601GregorianCalendarConverter(){
         SingleValueConverter svConverter = null;
-        final Class type = JVM.loadClassForName(JVM.isVersion(8)
-            ? "com.feilong.lib.xstream.core.util.ISO8601JavaTimeConverter"
-            : "com.feilong.lib.xstream.core.util.ISO8601JodaTimeConverter");
-        try {
-            svConverter = (SingleValueConverter)type.getDeclaredConstructor(EMPTY_CLASS_ARRAY).newInstance(
-                EMPTY_OBJECT_ARRAY);
-        } catch (final InstantiationException e) {
+        final Class type = JVM.loadClassForName(
+                        JVM.isVersion(8) ? "com.feilong.lib.xstream.core.util.ISO8601JavaTimeConverter"
+                                        : "com.feilong.lib.xstream.core.util.ISO8601JodaTimeConverter");
+        try{
+            svConverter = (SingleValueConverter) type.getDeclaredConstructor(EMPTY_CLASS_ARRAY).newInstance(EMPTY_OBJECT_ARRAY);
+        }catch (final InstantiationException e){
             // ignore
-        } catch (final IllegalAccessException e) {
+        }catch (final IllegalAccessException e){
             // ignore
-        } catch (final InvocationTargetException e) {
+        }catch (final InvocationTargetException e){
             // ignore
-        } catch (final NoSuchMethodException e) {
+        }catch (final NoSuchMethodException e){
             // ignore
         }
         converter = svConverter;
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return converter != null && type == GregorianCalendar.class;
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         return converter.fromString(str);
     }
 
     @Override
-    public String toString(final Object obj) {
+    public String toString(final Object obj){
         return converter.toString(obj);
     }
 }

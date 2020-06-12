@@ -26,12 +26,14 @@ import java.lang.annotation.Target;
  * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.FIELD})
-public @interface XStreamAlias {
+@Target({ ElementType.TYPE, ElementType.FIELD })
+public @interface XStreamAlias{
+
     /**
      * The name of the class or field alias.
      */
     public String value();
+
     /**
      * A possible default implementation if the annotated type is an interface.
      */

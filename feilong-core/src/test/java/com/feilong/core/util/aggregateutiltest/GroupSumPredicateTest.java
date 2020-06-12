@@ -18,10 +18,10 @@ package com.feilong.core.util.aggregateutiltest;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -149,11 +149,7 @@ public class GroupSumPredicateTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * @return
-     * @since 1.13.2
-     */
-    private List<User> getTestUserList(){
+    private static List<User> getTestUserList(){
         User user1 = new User(2L);
         user1.setAge(18);
 

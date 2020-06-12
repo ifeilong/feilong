@@ -24,13 +24,16 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface XStreamImplicit {
+public @interface XStreamImplicit{
+
     /**
      * Element name of the implicit collection.
      */
     String itemFieldName() default "";
+
     /**
      * Field name of map entries that are used as key for the element in the implicit map.
+     * 
      * @since 1.4
      */
     String keyFieldName() default "";

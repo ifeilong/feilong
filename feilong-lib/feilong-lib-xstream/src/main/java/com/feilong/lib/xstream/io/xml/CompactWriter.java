@@ -15,50 +15,35 @@ import java.io.Writer;
 
 import com.feilong.lib.xstream.io.naming.NameCoder;
 
-public class CompactWriter extends PrettyPrintWriter {
+public class CompactWriter extends PrettyPrintWriter{
 
-    public CompactWriter(Writer writer) {
+    public CompactWriter(Writer writer){
         super(writer);
     }
 
     /**
      * @since 1.3
      */
-    public CompactWriter(Writer writer, int mode) {
+    public CompactWriter(Writer writer, int mode){
         super(writer, mode);
     }
 
     /**
      * @since 1.4
      */
-    public CompactWriter(Writer writer, NameCoder nameCoder) {
+    public CompactWriter(Writer writer, NameCoder nameCoder){
         super(writer, nameCoder);
     }
 
     /**
      * @since 1.4
      */
-    public CompactWriter(Writer writer, int mode, NameCoder nameCoder) {
+    public CompactWriter(Writer writer, int mode, NameCoder nameCoder){
         super(writer, mode, nameCoder);
     }
 
-    /**
-     * @deprecated As of 1.4 use {@link CompactWriter#CompactWriter(Writer, NameCoder)} instead.
-     */
-    public CompactWriter(Writer writer, XmlFriendlyReplacer replacer) {
-        super(writer, replacer);
-    }
-
-    /**
-     * @since 1.3
-     * @deprecated As of 1.4 use {@link CompactWriter#CompactWriter(Writer, int, NameCoder)} instead.
-     */
-    public CompactWriter(Writer writer, int mode, XmlFriendlyReplacer replacer) {
-        super(writer, mode, replacer);
-    }
-    
     @Override
-    protected void endOfLine() {
+    protected void endOfLine(){
         // override parent: don't write anything at end of line
     }
 }

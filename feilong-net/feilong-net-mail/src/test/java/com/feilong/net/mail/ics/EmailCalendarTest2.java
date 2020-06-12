@@ -76,12 +76,12 @@ public class EmailCalendarTest2 extends AbstractMailSenderTest{
 
     //---------------------------------------------------------------
 
-    private String buildContent(String toEmail){
+    private static String buildContent(String useToEmail){
         StringBuffer buffer = new StringBuffer();
         buffer.append(
                         "BEGIN:VCALENDAR\n" + "PRODID:-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN\n" + "VERSION:2.0\n"
                                         + "METHOD:REQUEST\n" + "BEGIN:VEVENT\n" + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:"
-                                        + toEmail + "\n" + "ORGANIZER:MAILTO:" + toEmail + "\n" + "DTSTART:20180302T060000Z\n"
+                                        + useToEmail + "\n" + "ORGANIZER:MAILTO:" + useToEmail + "\n" + "DTSTART:20180302T060000Z\n"
                                         + "DTEND:20180302T070000Z\n" + "LOCATION:Conference room\n" + "UID:" + UUID.randomUUID().toString()
                                         + "\n"//如果id相同的话，outlook会认为是同一个会议请求，所以使用uuid。  
                                         + "CATEGORIES:SuccessCentral Reminder\n"

@@ -21,20 +21,20 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  *
  * @author Joe Walnes
  */
-public class FileConverter extends AbstractSingleValueConverter {
+public class FileConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == File.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return new File(str);
     }
 
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         return ((File) obj).getPath();
     }
 

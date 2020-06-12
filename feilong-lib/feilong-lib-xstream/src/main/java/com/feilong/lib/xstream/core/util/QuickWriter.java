@@ -16,26 +16,28 @@ import java.io.Writer;
 
 import com.feilong.lib.xstream.io.StreamException;
 
-public class QuickWriter {
+public class QuickWriter{
 
     private final Writer writer;
-    private char[] buffer;
-    private int pointer;
 
-    public QuickWriter(Writer writer) {
+    private char[]       buffer;
+
+    private int          pointer;
+
+    public QuickWriter(Writer writer){
         this(writer, 1024);
     }
 
-    public QuickWriter(Writer writer, int bufferSize) {
+    public QuickWriter(Writer writer, int bufferSize){
         this.writer = writer;
         buffer = new char[bufferSize];
     }
 
-    public void write(String str) {
+    public void write(String str){
         int len = str.length();
-        if (pointer + len >= buffer.length) {
+        if (pointer + len >= buffer.length){
             flush();
-            if (len > buffer.length) {
+            if (len > buffer.length){
                 raw(str.toCharArray());
                 return;
             }
@@ -44,10 +46,10 @@ public class QuickWriter {
         pointer += len;
     }
 
-    public void write(char c) {
-        if (pointer + 1 >= buffer.length) {
+    public void write(char c){
+        if (pointer + 1 >= buffer.length){
             flush();
-            if (buffer.length == 0) {
+            if (buffer.length == 0){
                 raw(c);
                 return;
             }
@@ -55,11 +57,11 @@ public class QuickWriter {
         buffer[pointer++] = c;
     }
 
-    public void write(char[] c) {
+    public void write(char[] c){
         int len = c.length;
-        if (pointer + len >= buffer.length) {
+        if (pointer + len >= buffer.length){
             flush();
-            if (len > buffer.length) {
+            if (len > buffer.length){
                 raw(c);
                 return;
             }
@@ -68,40 +70,40 @@ public class QuickWriter {
         pointer += len;
     }
 
-    public void flush() {
-        try {
+    public void flush(){
+        try{
             writer.write(buffer, 0, pointer);
             pointer = 0;
             writer.flush();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
-    public void close() {
-        try {
+    public void close(){
+        try{
             writer.write(buffer, 0, pointer);
             pointer = 0;
             writer.close();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
-    private void raw(char[] c) {
-        try {
+    private void raw(char[] c){
+        try{
             writer.write(c);
             writer.flush();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
-    private void raw(char c) {
-        try {
+    private void raw(char c){
+        try{
             writer.write(c);
             writer.flush();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }

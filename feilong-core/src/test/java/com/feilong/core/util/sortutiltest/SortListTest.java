@@ -15,17 +15,16 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.SortUtil.sortList;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sortList;
 
 /**
  * The Class SortUtilSortListTest.
@@ -34,20 +33,14 @@ import static com.feilong.core.util.SortUtil.sortList;
  */
 public class SortListTest{
 
-    /**
-     * Test sort list.
-     */
     @Test
     public void testSortList(){
         List<Integer> list = toList(5, 10, 3, 2);
         assertThat(sortList(list), contains(2, 3, 5, 10));
     }
 
-    /**
-     * Test sort list null list.
-     */
     @Test
-    public final void testSortListNullList(){
-        assertEquals(emptyList(), sortList((List) null));
+    public void testSortListNullList(){
+        assertEquals(emptyList(), sortList((List<?>) null));
     }
 }

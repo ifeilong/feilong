@@ -22,11 +22,7 @@ package com.feilong.core.lang.reflect.methodutiltest;
  */
 public class PrivateMethod{
 
-    /**
-     * Name.
-     *
-     * @return the string
-     */
+    @SuppressWarnings({ "static-method", "unused" })
     private String name(){
         return "hello world";
     }

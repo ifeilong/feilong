@@ -19,40 +19,45 @@ import com.feilong.lib.xstream.mapper.Mapper;
 /**
  * Converts a singleton map to XML, specifying an 'entry'
  * element with 'key' and 'value' children.
- * <p>Note: 'key' and 'value' is not the name of the generated tag. The
+ * <p>
+ * Note: 'key' and 'value' is not the name of the generated tag. The
  * children are serialized as normal elements and the implementation expects
- * them in the order 'key'/'value'.</p>
- * <p>Supports Collections.singletonMap.</p>
+ * them in the order 'key'/'value'.
+ * </p>
+ * <p>
+ * Supports Collections.singletonMap.
+ * </p>
  * 
  * @author J&ouml;rg Schaible
  * @since 1.4.2
  */
-public class SingletonMapConverter extends MapConverter {
+public class SingletonMapConverter extends MapConverter{
 
     private static final Class MAP = Collections.singletonMap(Boolean.TRUE, null).getClass();
 
     /**
      * Construct a SingletonMapConverter.
+     * 
      * @param mapper
      * @since 1.4.2
      */
-    public SingletonMapConverter(Mapper mapper) {
+    public SingletonMapConverter(Mapper mapper){
         super(mapper);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return MAP == type;
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         reader.moveDown();
         final Object key = readCompleteItem(reader, context, null);
         final Object value = readCompleteItem(reader, context, null);
         reader.moveUp();
-        
-        return Collections.singletonMap(key, value); 
+
+        return Collections.singletonMap(key, value);
     }
 
 }

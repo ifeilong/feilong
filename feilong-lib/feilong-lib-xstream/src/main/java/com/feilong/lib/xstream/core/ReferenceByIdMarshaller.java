@@ -16,42 +16,39 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.io.path.Path;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-public class ReferenceByIdMarshaller extends AbstractReferenceMarshaller {
+public class ReferenceByIdMarshaller extends AbstractReferenceMarshaller{
 
     private final IDGenerator idGenerator;
 
-    public static interface IDGenerator {
+    public static interface IDGenerator{
+
         String next(Object item);
     }
 
-    public ReferenceByIdMarshaller(HierarchicalStreamWriter writer,
-                                   ConverterLookup converterLookup,
-                                   Mapper mapper,
-                                   IDGenerator idGenerator) {
+    public ReferenceByIdMarshaller(HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper,
+                    IDGenerator idGenerator){
         super(writer, converterLookup, mapper);
         this.idGenerator = idGenerator;
     }
 
-    public ReferenceByIdMarshaller(HierarchicalStreamWriter writer,
-                                   ConverterLookup converterLookup,
-                                   Mapper mapper) {
+    public ReferenceByIdMarshaller(HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper){
         this(writer, converterLookup, mapper, new SequenceGenerator(1));
     }
 
     @Override
-    protected String createReference(Path currentPath, Object existingReferenceKey) {
+    protected String createReference(Path currentPath,Object existingReferenceKey){
         return existingReferenceKey.toString();
     }
 
     @Override
-    protected Object createReferenceKey(Path currentPath, Object item) {
+    protected Object createReferenceKey(Path currentPath,Object item){
         return idGenerator.next(item);
     }
 
     @Override
-    protected void fireValidReference(Object referenceKey) {
+    protected void fireValidReference(Object referenceKey){
         String attributeName = getMapper().aliasForSystemAttribute("id");
-        if (attributeName != null) {
+        if (attributeName != null){
             writer.addAttribute(attributeName, referenceKey.toString());
         }
     }

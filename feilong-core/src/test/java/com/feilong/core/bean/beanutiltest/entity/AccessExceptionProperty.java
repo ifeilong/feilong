@@ -17,11 +17,9 @@ package com.feilong.core.bean.beanutiltest.entity;
 
 public class AccessExceptionProperty{
 
+    @SuppressWarnings("unused")
     private String name;
 
-    /**
-     * @return the name
-     */
     public String getName(){
         throw new NullPointerException("the name is null or empty!");
     }

@@ -17,15 +17,15 @@ package com.feilong.lib.xstream.converters.basic;
  *
  * @author Joe Walnes
  */
-public class FloatConverter extends AbstractSingleValueConverter {
+public class FloatConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == float.class || type == Float.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return Float.valueOf(str);
     }
 

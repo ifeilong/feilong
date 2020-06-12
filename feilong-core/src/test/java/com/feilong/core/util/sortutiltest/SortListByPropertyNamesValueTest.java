@@ -19,9 +19,9 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 import java.util.Map;
@@ -173,20 +173,14 @@ public class SortListByPropertyNamesValueTest{
         assertThat(list, contains(id2_age2, id1_age8, id12_age18, id2_age30, id2_age36));
     }
 
-    /**
-     * Test sort by property names value null list 1 property name.
-     */
     @Test
-    public final void testSortByPropertyNamesValueNullList1PropertyName(){
-        assertEquals(emptyList(), sortListByPropertyNamesValue((List) null, "name"));
+    public void testSortByPropertyNamesValueNullList1PropertyName(){
+        assertEquals(emptyList(), sortListByPropertyNamesValue((List<?>) null, "name"));
     }
 
-    /**
-     * Test sort by property names value null list.
-     */
     @Test
-    public final void testSortByPropertyNamesValueNullList(){
-        assertEquals(emptyList(), sortListByPropertyNamesValue((List) null, "name", "age"));
+    public void testSortByPropertyNamesValueNullList(){
+        assertEquals(emptyList(), sortListByPropertyNamesValue((List<?>) null, "name", "age"));
     }
 
     /**

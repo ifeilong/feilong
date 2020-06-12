@@ -17,28 +17,27 @@ import java.time.zone.ZoneRulesException;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
-
 /**
  * Converts a {@link ZoneId} instance to string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class ZoneIdConverter implements SingleValueConverter {
+public class ZoneIdConverter implements SingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return type != null && ZoneId.class.isAssignableFrom(type);
     }
 
     @Override
-    public ZoneId fromString(final String str) {
+    public ZoneId fromString(final String str){
         ConversionException exception;
-        try {
+        try{
             return ZoneId.of(str);
-        } catch (final ZoneRulesException e) {
+        }catch (final ZoneRulesException e){
             exception = new ConversionException("Not a valid zone id", e);
-        } catch (final DateTimeException e) {
+        }catch (final DateTimeException e){
             exception = new ConversionException("Cannot parse value as zone id", e);
         }
         exception.add("value", str);
@@ -46,11 +45,11 @@ public class ZoneIdConverter implements SingleValueConverter {
     }
 
     @Override
-    public String toString(final Object obj) {
-        if (obj == null) {
+    public String toString(final Object obj){
+        if (obj == null){
             return null;
         }
-        final ZoneId zoneId = (ZoneId)obj;
+        final ZoneId zoneId = (ZoneId) obj;
         return zoneId.getId();
     }
 }

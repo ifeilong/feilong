@@ -18,11 +18,11 @@ import java.util.Map;
  * @author Guilherme Silveira
  * @since 1.2.2
  */
-public class ImmutableFieldKeySorter implements FieldKeySorter {
+public class ImmutableFieldKeySorter implements FieldKeySorter{
 
-	@Override
-    public Map sort(Class type, Map keyedByFieldKey) {
-		return keyedByFieldKey;
-	}
+    @Override
+    public Map sort(Class type,Map keyedByFieldKey){
+        return keyedByFieldKey;
+    }
 
 }

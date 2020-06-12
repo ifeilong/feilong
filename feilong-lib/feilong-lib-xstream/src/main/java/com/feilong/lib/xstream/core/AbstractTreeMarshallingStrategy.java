@@ -17,7 +17,6 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * Basic functionality of a tree based marshalling strategy.
  * 
@@ -25,23 +24,33 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public abstract class AbstractTreeMarshallingStrategy implements MarshallingStrategy {
+public abstract class AbstractTreeMarshallingStrategy implements MarshallingStrategy{
 
     @Override
-    public Object unmarshal(Object root, HierarchicalStreamReader reader, DataHolder dataHolder, ConverterLookup converterLookup, Mapper mapper) {
+    public Object unmarshal(
+                    Object root,
+                    HierarchicalStreamReader reader,
+                    DataHolder dataHolder,
+                    ConverterLookup converterLookup,
+                    Mapper mapper){
         TreeUnmarshaller context = createUnmarshallingContext(root, reader, converterLookup, mapper);
         return context.start(dataHolder);
     }
 
     @Override
-    public void marshal(HierarchicalStreamWriter writer, Object obj, ConverterLookup converterLookup, Mapper mapper, DataHolder dataHolder) {
+    public void marshal(HierarchicalStreamWriter writer,Object obj,ConverterLookup converterLookup,Mapper mapper,DataHolder dataHolder){
         TreeMarshaller context = createMarshallingContext(writer, converterLookup, mapper);
         context.start(obj, dataHolder);
     }
-    
-    protected abstract TreeUnmarshaller createUnmarshallingContext(Object root,
-        HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper);
+
+    protected abstract TreeUnmarshaller createUnmarshallingContext(
+                    Object root,
+                    HierarchicalStreamReader reader,
+                    ConverterLookup converterLookup,
+                    Mapper mapper);
 
     protected abstract TreeMarshaller createMarshallingContext(
-        HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper);
+                    HierarchicalStreamWriter writer,
+                    ConverterLookup converterLookup,
+                    Mapper mapper);
 }

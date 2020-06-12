@@ -16,7 +16,6 @@ import javax.xml.datatype.Duration;
 
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * A Converter for the XML Schema datatype <a
  * href="http://www.w3.org/TR/xmlschema-2/#duration">duration</a> and the Java type
@@ -29,32 +28,34 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public class DurationConverter extends AbstractSingleValueConverter {
+public class DurationConverter extends AbstractSingleValueConverter{
+
     private final DatatypeFactory factory;
 
-    public DurationConverter() {
-        this(new Object() {
-            DatatypeFactory getFactory() {
-                try {
+    public DurationConverter(){
+        this(new Object(){
+
+            DatatypeFactory getFactory(){
+                try{
                     return DatatypeFactory.newInstance();
-                } catch (final DatatypeConfigurationException e) {
+                }catch (final DatatypeConfigurationException e){
                     return null;
                 }
             }
         }.getFactory());
     }
 
-    public DurationConverter(DatatypeFactory factory) {
+    public DurationConverter(DatatypeFactory factory){
         this.factory = factory;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return factory != null && type != null && Duration.class.isAssignableFrom(type);
     }
 
     @Override
-    public Object fromString(String s) {
+    public Object fromString(String s){
         return factory.newDuration(s);
     }
 }

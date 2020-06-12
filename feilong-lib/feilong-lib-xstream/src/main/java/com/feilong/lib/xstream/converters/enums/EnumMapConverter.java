@@ -30,30 +30,31 @@ import com.feilong.lib.xstream.mapper.Mapper;
 import java.lang.reflect.Field;
 
 /**
- * Serializes an Java 5 EnumMap, including the type of Enum it's for. If a SecurityManager is set, the converter will only work with permissions
+ * Serializes an Java 5 EnumMap, including the type of Enum it's for. If a SecurityManager is set, the converter will only work with
+ * permissions
  * for SecurityManager.checkPackageAccess, SecurityManager.checkMemberAccess(this, EnumSet.MEMBER)
  * and ReflectPermission("suppressAccessChecks").
  *
  * @author Joe Walnes
  */
-public class EnumMapConverter extends MapConverter {
+public class EnumMapConverter extends MapConverter{
 
     private final static Field typeField = Fields.locate(EnumMap.class, Class.class, false);
 
-    public EnumMapConverter(Mapper mapper) {
+    public EnumMapConverter(Mapper mapper){
         super(mapper);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return typeField != null && type == EnumMap.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         Class type = (Class) Fields.read(typeField, source);
         String attributeName = mapper().aliasForSystemAttribute("enum-type");
-        if (attributeName != null) {
+        if (attributeName != null){
             writer.addAttribute(attributeName, mapper().serializedClass(type));
         }
         super.marshal(source, writer, context);
@@ -61,9 +62,9 @@ public class EnumMapConverter extends MapConverter {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         String attributeName = mapper().aliasForSystemAttribute("enum-type");
-        if (attributeName == null) {
+        if (attributeName == null){
             throw new ConversionException("No EnumType specified for EnumMap");
         }
         Class type = mapper().realClass(reader.getAttribute(attributeName));

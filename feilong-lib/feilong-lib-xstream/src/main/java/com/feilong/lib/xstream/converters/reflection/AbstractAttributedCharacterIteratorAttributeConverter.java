@@ -23,7 +23,6 @@ import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 import com.feilong.lib.xstream.core.util.Fields;
 
-
 /**
  * An abstract converter implementation for constants of
  * {@link java.text.AttributedCharacterIterator.Attribute} and derived types.
@@ -31,65 +30,64 @@ import com.feilong.lib.xstream.core.util.Fields;
  * @author J&ouml;rg Schaible
  * @since 1.2.2
  */
-public class AbstractAttributedCharacterIteratorAttributeConverter extends
-    AbstractSingleValueConverter {
+public class AbstractAttributedCharacterIteratorAttributeConverter extends AbstractSingleValueConverter{
 
-    private static final Map instanceMaps = new HashMap();
+    private static final Map    instanceMaps = new HashMap();
+
     private static final Method getName;
-    static {
+    static{
         Method method = null;
-        try {
-            method = AttributedCharacterIterator.Attribute.class.getDeclaredMethod(
-                "getName", (Class[])null);
-            if (!method.isAccessible()) {
+        try{
+            method = AttributedCharacterIterator.Attribute.class.getDeclaredMethod("getName", (Class[]) null);
+            if (!method.isAccessible()){
                 method.setAccessible(true);
             }
-        } catch (SecurityException e) {
+        }catch (SecurityException e){
             // ignore for now
-        } catch (NoSuchMethodException e) {
+        }catch (NoSuchMethodException e){
             // ignore for now
         }
         getName = method;
     }
 
-    private final Class type;
+    private final Class   type;
+
     private transient Map attributeMap;
 
-    public AbstractAttributedCharacterIteratorAttributeConverter(final Class type) {
+    public AbstractAttributedCharacterIteratorAttributeConverter(final Class type){
         super();
-        if (!AttributedCharacterIterator.Attribute.class.isAssignableFrom(type)) {
-            throw new IllegalArgumentException(type.getName()
-                + " is not a " + AttributedCharacterIterator.Attribute.class.getName());
+        if (!AttributedCharacterIterator.Attribute.class.isAssignableFrom(type)){
+            throw new IllegalArgumentException(type.getName() + " is not a " + AttributedCharacterIterator.Attribute.class.getName());
         }
         this.type = type;
         readResolve();
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return type == this.type && !attributeMap.isEmpty();
     }
 
     @Override
-    public String toString(final Object source) {
-        return getName((AttributedCharacterIterator.Attribute)source);
+    public String toString(final Object source){
+        return getName((AttributedCharacterIterator.Attribute) source);
     }
 
-    private String getName(AttributedCharacterIterator.Attribute attribute) {
+    private String getName(AttributedCharacterIterator.Attribute attribute){
         Exception ex = null;
-        if (getName != null) {
-            try {
-                return (String)getName.invoke(attribute, (Object[])null);
-            } catch (IllegalAccessException e) {
+        if (getName != null){
+            try{
+                return (String) getName.invoke(attribute, (Object[]) null);
+            }catch (IllegalAccessException e){
                 ex = e;
-            } catch (InvocationTargetException e) {
+            }catch (InvocationTargetException e){
                 ex = e;
             }
         }
         String s = attribute.toString();
         String className = attribute.getClass().getName();
-        if (s.startsWith(className)) {
-            return s.substring(className.length()+1, s.length()-1);
+        if (s.startsWith(className)){
+            return s.substring(className.length() + 1, s.length() - 1);
         }
         ConversionException exception = new ConversionException("Cannot find name of attribute", ex);
         exception.add("attribute-type", className);
@@ -97,8 +95,8 @@ public class AbstractAttributedCharacterIteratorAttributeConverter extends
     }
 
     @Override
-    public Object fromString(final String str) {
-        if (attributeMap.containsKey(str)) {
+    public Object fromString(final String str){
+        if (attributeMap.containsKey(str)){
             return attributeMap.get(str);
         }
         ConversionException exception = new ConversionException("Cannot find attribute");
@@ -107,42 +105,41 @@ public class AbstractAttributedCharacterIteratorAttributeConverter extends
         throw exception;
     }
 
-    private Object readResolve() {
-        attributeMap = (Map)instanceMaps.get(type.getName());
-        if (attributeMap == null) {
+    private Object readResolve(){
+        attributeMap = (Map) instanceMaps.get(type.getName());
+        if (attributeMap == null){
             attributeMap = new HashMap();
             Field instanceMap = Fields.locate(type, Map.class, true);
-            if (instanceMap != null) {
-                try {
-                    Map map = (Map)Fields.read(instanceMap, null);
-                    if (map != null) {
+            if (instanceMap != null){
+                try{
+                    Map map = (Map) Fields.read(instanceMap, null);
+                    if (map != null){
                         boolean valid = true;
-                        for (Iterator iter = map.entrySet().iterator(); valid && iter.hasNext(); ) {
-                            Map.Entry entry = (Map.Entry)iter.next(); 
+                        for (Iterator iter = map.entrySet().iterator(); valid && iter.hasNext();){
+                            Map.Entry entry = (Map.Entry) iter.next();
                             valid = entry.getKey().getClass() == String.class && entry.getValue().getClass() == type;
                         }
-                        if (valid) {
+                        if (valid){
                             attributeMap.putAll(map);
                         }
                     }
-                } catch (ObjectAccessException e) {
-                }
+                }catch (ObjectAccessException e){}
             }
-            if (attributeMap.isEmpty()) {
-                try {
+            if (attributeMap.isEmpty()){
+                try{
                     Field[] fields = type.getDeclaredFields();
-                    for(int i = 0; i < fields.length; ++i) {
-                        if(fields[i].getType() == type == Modifier.isStatic(fields[i].getModifiers())) {
-                            AttributedCharacterIterator.Attribute attribute =
-                                    (AttributedCharacterIterator.Attribute)Fields.read(fields[i], null);
+                    for (int i = 0; i < fields.length; ++i){
+                        if (fields[i].getType() == type == Modifier.isStatic(fields[i].getModifiers())){
+                            AttributedCharacterIterator.Attribute attribute = (AttributedCharacterIterator.Attribute) Fields
+                                            .read(fields[i], null);
                             attributeMap.put(toString(attribute), attribute);
                         }
                     }
-                } catch (SecurityException e) {
+                }catch (SecurityException e){
                     attributeMap.clear();
-                } catch (ObjectAccessException e) {
+                }catch (ObjectAccessException e){
                     attributeMap.clear();
-                } catch (NoClassDefFoundError e) {
+                }catch (NoClassDefFoundError e){
                     attributeMap.clear();
                 }
             }

@@ -12,7 +12,6 @@ package com.feilong.lib.xstream.converters.enums;
 
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * A single value converter for a special enum type. Converter is internally automatically
  * instantiated for enum types.
@@ -20,29 +19,29 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public class EnumSingleValueConverter extends AbstractSingleValueConverter {
+public class EnumSingleValueConverter extends AbstractSingleValueConverter{
 
     private final Class<? extends Enum> enumType;
 
-    public EnumSingleValueConverter(Class<? extends Enum> type) {
-        if (!Enum.class.isAssignableFrom(type) && type != Enum.class) {
+    public EnumSingleValueConverter(Class<? extends Enum> type){
+        if (!Enum.class.isAssignableFrom(type) && type != Enum.class){
             throw new IllegalArgumentException("Converter can only handle defined enums");
         }
         enumType = type;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && enumType.isAssignableFrom(type);
     }
 
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         return Enum.class.cast(obj).name();
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         @SuppressWarnings("unchecked")
         Enum result = Enum.valueOf(enumType, str);
         return result;

@@ -18,8 +18,8 @@ package com.feilong.core.util;
 import java.util.Random;
 
 import com.feilong.core.Alphabet;
-import com.feilong.lib.lang3.RandomStringUtils;
 import com.feilong.core.Validate;
+import com.feilong.lib.lang3.RandomStringUtils;
 
 /**
  * 随机数工具类.
@@ -33,7 +33,7 @@ import com.feilong.core.Validate;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.lang.Math#random()
- * @see com.feilong.lib.lang3.RandomUtils
+ * @see "org.apache.commons.lang3.RandomUtils"
  * @see com.feilong.lib.lang3.RandomStringUtils
  * @see java.util.concurrent.ThreadLocalRandom
  * @since 1.0.0

@@ -15,10 +15,10 @@
  */
 package com.feilong.net.filetransfer.ftp;
 
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -29,6 +29,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
@@ -37,7 +38,6 @@ import com.feilong.lib.net.ftp.FTP;
 import com.feilong.lib.net.ftp.FTPClient;
 import com.feilong.lib.net.ftp.FTPFile;
 import com.feilong.lib.net.ftp.FTPReply;
-import com.feilong.core.Validate;
 import com.feilong.net.filetransfer.AbstractFileTransfer;
 import com.feilong.net.filetransfer.FileTransferException;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -144,14 +144,6 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             LOGGER.debug("ftpClient systemName:[{}]", systemName);
 
             //---------------------------------------------------------------
-
-            // 设置FTP客服端的配置--一般可以不设置 
-            // FTPClientConfig ftpConfig = new FTPClientConfig(FTPClientConfig.SYST_UNIX);
-            // ftpConfig.setServerLanguageCode(FTP.DEFAULT_CONTROL_ENCODING);
-            // ftpClient.configure(ftpClientConfig);
-
-            // ftpClient.setFileTransferMode(FTP.STREAM_TRANSFER_MODE);
-
             // 没有异常则 确定成功
             LOGGER.info("connect:[{}]", true);
             return true;

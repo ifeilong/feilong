@@ -25,80 +25,83 @@ import java.util.HashMap;
 /**
  * @since 1.2
  */
-public class BinaryStreamWriter implements ExtendedHierarchicalStreamWriter {
+public class BinaryStreamWriter implements ExtendedHierarchicalStreamWriter{
 
-    private final IdRegistry idRegistry = new IdRegistry();
+    private final IdRegistry       idRegistry     = new IdRegistry();
+
     private final DataOutputStream out;
-    private final Token.Formatter tokenFormatter = new Token.Formatter();
 
-    public BinaryStreamWriter(OutputStream outputStream) {
+    private final Token.Formatter  tokenFormatter = new Token.Formatter();
+
+    public BinaryStreamWriter(OutputStream outputStream){
         out = new DataOutputStream(outputStream);
     }
 
     @Override
-    public void startNode(String name) {
+    public void startNode(String name){
         write(new Token.StartNode(idRegistry.getId(name)));
     }
 
     @Override
-    public void startNode(String name, Class clazz) {
+    public void startNode(String name,Class clazz){
         startNode(name);
     }
 
     @Override
-    public void addAttribute(String name, String value) {
+    public void addAttribute(String name,String value){
         write(new Token.Attribute(idRegistry.getId(name), value));
     }
 
     @Override
-    public void setValue(String text) {
+    public void setValue(String text){
         write(new Token.Value(text));
     }
 
     @Override
-    public void endNode() {
+    public void endNode(){
         write(new Token.EndNode());
     }
 
     @Override
-    public void flush() {
-        try {
+    public void flush(){
+        try{
             out.flush();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
     @Override
-    public void close() {
-        try {
+    public void close(){
+        try{
             out.close();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
     @Override
-    public HierarchicalStreamWriter underlyingWriter() {
+    public HierarchicalStreamWriter underlyingWriter(){
         return this;
     }
 
-    private void write(Token token) {
-        try {
+    private void write(Token token){
+        try{
             tokenFormatter.write(out, token);
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
-    private class IdRegistry {
+    private class IdRegistry{
 
         private long nextId = 0;
-        private Map ids = new HashMap();
 
-        public long getId(String value) {
+        private Map  ids    = new HashMap();
+
+        public long getId(String value){
             Long id = (Long) ids.get(value);
-            if (id == null) {
+            if (id == null){
                 id = new Long(++nextId);
                 ids.put(value, id);
                 write(new Token.MapIdToValue(id.longValue(), value));

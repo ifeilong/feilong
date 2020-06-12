@@ -11,16 +11,16 @@
  */
 package com.feilong.lib.xstream.core;
 
-public class SequenceGenerator implements ReferenceByIdMarshaller.IDGenerator {
+public class SequenceGenerator implements ReferenceByIdMarshaller.IDGenerator{
 
     private int counter;
 
-    public SequenceGenerator(int startsAt) {
+    public SequenceGenerator(int startsAt){
         this.counter = startsAt;
     }
 
     @Override
-    public String next(Object item) {
+    public String next(Object item){
         return String.valueOf(counter++);
     }
 

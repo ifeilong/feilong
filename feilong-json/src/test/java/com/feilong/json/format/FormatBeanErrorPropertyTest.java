@@ -25,7 +25,7 @@ import com.feilong.json.entity.StoreLocatorErrorProperty;
  * The Class FormatBeanErrorPropertyTest.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see https://github.com/venusdrogon/feilong-json/issues/20
+ * @see <a href="https://github.com/venusdrogon/feilong-json/issues/20">json format ,当字段名字叫 isO2O,但是get 方法叫 isO2O() 的时候会出现异常</a>
  * @since 1.12.0
  */
 public class FormatBeanErrorPropertyTest extends AbstractJsonTest{
@@ -35,5 +35,4 @@ public class FormatBeanErrorPropertyTest extends AbstractJsonTest{
         StoreLocatorErrorProperty storeLocator = new StoreLocatorErrorProperty();
         LOGGER.debug(JsonUtil.format(storeLocator));
     }
-
 }

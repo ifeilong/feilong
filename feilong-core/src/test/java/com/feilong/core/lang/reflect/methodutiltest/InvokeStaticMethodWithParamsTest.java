@@ -26,9 +26,6 @@ import com.feilong.core.lang.reflect.ReflectException;
 
 public class InvokeStaticMethodWithParamsTest{
 
-    /**
-     * Test invoke method all pack type.
-     */
     @Test
     public void testInvokeMethodAllPackType(){
         assertEquals("static age Integer:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", 5));

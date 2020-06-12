@@ -30,6 +30,5 @@ public class MapTest extends AbstractTest{
         Map<String, Object> map = toMap("logisticsStatus", (Object) 10);
 
         LOGGER.debug("" + SpelUtil.getValue("logisticsStatus", map));
-
     }
 }

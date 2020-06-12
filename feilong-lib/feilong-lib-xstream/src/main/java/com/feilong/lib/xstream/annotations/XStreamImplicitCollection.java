@@ -18,12 +18,13 @@ import java.lang.annotation.Target;
 
 /**
  * 
- * @author Chung-Onn Cheong
  * @deprecated As of 1.3, use @XStreamImplicit at field level
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XStreamImplicitCollection {
+public @interface XStreamImplicitCollection{
+
     String value(); //fieldName
-    String item() default "";   //itemfieldName
+
+    String item() default ""; //itemfieldName
 }

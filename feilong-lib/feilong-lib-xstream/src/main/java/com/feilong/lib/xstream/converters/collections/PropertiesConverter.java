@@ -24,7 +24,6 @@ import com.feilong.lib.xstream.core.util.Fields;
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 
-
 /**
  * Special converter for java.util.Properties that stores properties in a more compact form than
  * java.util.Map.
@@ -42,38 +41,39 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Joe Walnes
  * @author Kevin Ring
  */
-public class PropertiesConverter implements Converter {
+public class PropertiesConverter implements Converter{
 
     private final static Field defaultsField = Fields.locate(Properties.class, Properties.class, false);
-    private final boolean sort;
 
-    public PropertiesConverter() {
+    private final boolean      sort;
+
+    public PropertiesConverter(){
         this(false);
     }
 
-    public PropertiesConverter(boolean sort) {
+    public PropertiesConverter(boolean sort){
         this.sort = sort;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return Properties.class == type;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         final Properties properties = (Properties) source;
-        Map map = sort ? (Map)new TreeMap(properties) : (Map)properties;
-        for (Iterator iterator = map.entrySet().iterator(); iterator.hasNext();) {
+        Map map = sort ? (Map) new TreeMap(properties) : (Map) properties;
+        for (Iterator iterator = map.entrySet().iterator(); iterator.hasNext();){
             Map.Entry entry = (Map.Entry) iterator.next();
             writer.startNode("property");
             writer.addAttribute("name", entry.getKey().toString());
             writer.addAttribute("value", entry.getValue().toString());
             writer.endNode();
         }
-        if (defaultsField != null) {
-            Properties defaults = (Properties)Fields.read(defaultsField, properties);
-            if (defaults != null) {
+        if (defaultsField != null){
+            Properties defaults = (Properties) Fields.read(defaultsField, properties);
+            if (defaults != null){
                 writer.startNode("defaults");
                 marshal(defaults, writer, context);
                 writer.endNode();
@@ -82,23 +82,23 @@ public class PropertiesConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         Properties properties = new Properties();
         Properties defaults = null;
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             reader.moveDown();
-            if (reader.getNodeName().equals("defaults")) {
+            if (reader.getNodeName().equals("defaults")){
                 defaults = (Properties) unmarshal(reader, context);
-            } else {
+            }else{
                 String name = reader.getAttribute("name");
                 String value = reader.getAttribute("value");
                 properties.setProperty(name, value);
             }
             reader.moveUp();
         }
-        if (defaults == null) {
+        if (defaults == null){
             return properties;
-        } else {
+        }else{
             Properties propertiesWithDefaults = new Properties(defaults);
             propertiesWithDefaults.putAll(properties);
             return propertiesWithDefaults;

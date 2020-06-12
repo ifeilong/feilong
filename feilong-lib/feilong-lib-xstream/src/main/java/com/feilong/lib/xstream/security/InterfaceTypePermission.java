@@ -12,24 +12,25 @@ package com.feilong.lib.xstream.security;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class InterfaceTypePermission implements TypePermission {
+public class InterfaceTypePermission implements TypePermission{
+
     /**
      * @since 1.4.7
      */
     public static final TypePermission INTERFACES = new InterfaceTypePermission();
 
     @Override
-    public boolean allows(Class type) {
+    public boolean allows(Class type){
         return type != null && type.isInterface();
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return 31;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj){
         return obj != null && obj.getClass() == InterfaceTypePermission.class;
     }
 

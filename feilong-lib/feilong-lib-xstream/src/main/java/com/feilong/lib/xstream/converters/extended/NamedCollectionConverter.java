@@ -19,7 +19,6 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * A collection converter that uses predefined names for its items.
  * <p>
@@ -30,41 +29,48 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.4.5
  */
-public class NamedCollectionConverter extends CollectionConverter {
+public class NamedCollectionConverter extends CollectionConverter{
 
     private final String name;
-    private final Class type;
+
+    private final Class  type;
 
     /**
      * Constructs a NamedCollectionConverter.
      * 
-     * @param mapper the mapper
-     * @param itemName the name of the items
-     * @param itemType the base type of the items
+     * @param mapper
+     *            the mapper
+     * @param itemName
+     *            the name of the items
+     * @param itemType
+     *            the base type of the items
      * @since 1.4.5
      */
-    public NamedCollectionConverter(Mapper mapper, String itemName, Class itemType) {
+    public NamedCollectionConverter(Mapper mapper, String itemName, Class itemType){
         this(null, mapper, itemName, itemType);
     }
 
     /**
      * Constructs a NamedCollectionConverter handling an explicit Collection type.
      * 
-     * @param type the Collection type to handle
-     * @param mapper the mapper
-     * @param itemName the name of the items
-     * @param itemType the base type of the items
+     * @param type
+     *            the Collection type to handle
+     * @param mapper
+     *            the mapper
+     * @param itemName
+     *            the name of the items
+     * @param itemType
+     *            the base type of the items
      * @since 1.4.5
      */
-    public NamedCollectionConverter(Class type, Mapper mapper, String itemName, Class itemType) {
+    public NamedCollectionConverter(Class type, Mapper mapper, String itemName, Class itemType){
         super(mapper, type);
         this.name = itemName;
         this.type = itemType;
     }
 
     @Override
-    protected void writeCompleteItem(final Object item, final MarshallingContext context,
-            final HierarchicalStreamWriter writer) {
+    protected void writeCompleteItem(final Object item,final MarshallingContext context,final HierarchicalStreamWriter writer){
         writeItem(item, context, writer);
     }
 
@@ -73,29 +79,28 @@ public class NamedCollectionConverter extends CollectionConverter {
      *             instead.
      */
     @Override
-    protected void writeItem(Object item, MarshallingContext context, HierarchicalStreamWriter writer) {
+    protected void writeItem(Object item,MarshallingContext context,HierarchicalStreamWriter writer){
         final Class itemType = item == null ? Mapper.Null.class : item.getClass();
         ExtendedHierarchicalStreamWriterHelper.startNode(writer, name, itemType);
-        if (!itemType.equals(type)) {
+        if (!itemType.equals(type)){
             String attributeName = mapper().aliasForSystemAttribute("class");
-            if (attributeName != null) {
+            if (attributeName != null){
                 writer.addAttribute(attributeName, mapper().serializedClass(itemType));
             }
         }
-        if (item != null) {
+        if (item != null){
             context.convertAnother(item);
         }
         writer.endNode();
     }
 
     @Override
-    protected Object readBareItem(final HierarchicalStreamReader reader, final UnmarshallingContext context,
-            final Object current) {
+    protected Object readBareItem(final HierarchicalStreamReader reader,final UnmarshallingContext context,final Object current){
         final String className = HierarchicalStreams.readClassAttribute(reader, mapper());
         final Class itemType = className == null ? type : mapper().realClass(className);
-        if (Mapper.Null.class.equals(itemType)) {
+        if (Mapper.Null.class.equals(itemType)){
             return null;
-        } else {
+        }else{
             return context.convertAnother(current, itemType);
         }
     }

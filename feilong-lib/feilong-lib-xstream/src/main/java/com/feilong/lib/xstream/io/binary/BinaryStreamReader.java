@@ -31,62 +31,65 @@ import com.feilong.lib.xstream.io.StreamException;
  * @see BinaryStreamReader
  * @since 1.2
  */
-public class BinaryStreamReader implements ExtendedHierarchicalStreamReader {
+public class BinaryStreamReader implements ExtendedHierarchicalStreamReader{
 
-    private final DataInputStream in;
-    private final ReaderDepthState depthState = new ReaderDepthState();
-    private final IdRegistry idRegistry = new IdRegistry();
+    private final DataInputStream  in;
 
-    private Token pushback;
-    private final Token.Formatter tokenFormatter = new Token.Formatter();
+    private final ReaderDepthState depthState     = new ReaderDepthState();
 
-    public BinaryStreamReader(InputStream inputStream) {
+    private final IdRegistry       idRegistry     = new IdRegistry();
+
+    private Token                  pushback;
+
+    private final Token.Formatter  tokenFormatter = new Token.Formatter();
+
+    public BinaryStreamReader(InputStream inputStream){
         in = new DataInputStream(inputStream);
         moveDown();
     }
 
     @Override
-    public boolean hasMoreChildren() {
+    public boolean hasMoreChildren(){
         return depthState.hasMoreChildren();
     }
 
     @Override
-    public String getNodeName() {
+    public String getNodeName(){
         return depthState.getName();
     }
 
     @Override
-    public String getValue() {
+    public String getValue(){
         return depthState.getValue();
     }
 
     @Override
-    public String getAttribute(String name) {
+    public String getAttribute(String name){
         return depthState.getAttribute(name);
     }
 
     @Override
-    public String getAttribute(int index) {
+    public String getAttribute(int index){
         return depthState.getAttribute(index);
     }
 
     @Override
-    public int getAttributeCount() {
+    public int getAttributeCount(){
         return depthState.getAttributeCount();
     }
 
     @Override
-    public String getAttributeName(int index) {
+    public String getAttributeName(int index){
         return depthState.getAttributeName(index);
     }
 
     @Override
-    public Iterator getAttributeNames() {
+    public Iterator getAttributeNames(){
         return depthState.getAttributeNames();
     }
 
     @Override
-    public void moveDown() {
+    public void moveDown(){
         depthState.push();
         Token firstToken = readToken();
         switch (firstToken.getType()) {
@@ -96,7 +99,7 @@ public class BinaryStreamReader implements ExtendedHierarchicalStreamReader {
             default:
                 throw new StreamException("Expected StartNode");
         }
-        while (true) {
+        while (true){
             Token nextToken = readToken();
             switch (nextToken.getType()) {
                 case Token.TYPE_ATTRIBUTE:
@@ -120,18 +123,17 @@ public class BinaryStreamReader implements ExtendedHierarchicalStreamReader {
     }
 
     @Override
-    public void moveUp() {
+    public void moveUp(){
         depthState.pop();
         // We're done with this depth. Skip over all tokens until we get to the end.
         int depth = 0;
-        slurp:
-        while (true) {
+        slurp: while (true){
             Token nextToken = readToken();
-            switch(nextToken.getType()) {
+            switch (nextToken.getType()) {
                 case Token.TYPE_END_NODE:
-                    if (depth == 0) {
+                    if (depth == 0){
                         break slurp;
-                    } else {
+                    }else{
                         depth--;
                     }
                     break;
@@ -144,7 +146,7 @@ public class BinaryStreamReader implements ExtendedHierarchicalStreamReader {
         }
         // Peek ahead to determine if there are any more kids at this level.
         Token nextToken = readToken();
-        switch(nextToken.getType()) {
+        switch (nextToken.getType()) {
             case Token.TYPE_END_NODE:
                 depthState.setHasMoreChildren(false);
                 break;
@@ -157,9 +159,9 @@ public class BinaryStreamReader implements ExtendedHierarchicalStreamReader {
         pushBack(nextToken);
     }
 
-    private Token readToken() {
-        if (pushback == null) {
-            try {
+    private Token readToken(){
+        if (pushback == null){
+            try{
                 Token token = tokenFormatter.read(in);
                 switch (token.getType()) {
                     case Token.TYPE_MAP_ID_TO_VALUE:
@@ -168,65 +170,65 @@ public class BinaryStreamReader implements ExtendedHierarchicalStreamReader {
                     default:
                         return token;
                 }
-            } catch (IOException e) {
+            }catch (IOException e){
                 throw new StreamException(e);
             }
-        } else {
+        }else{
             Token result = pushback;
             pushback = null;
             return result;
         }
     }
 
-    public void pushBack(Token token) {
-        if (pushback == null) {
+    public void pushBack(Token token){
+        if (pushback == null){
             pushback = token;
-        } else {
+        }else{
             // If this happens, I've messed up :( -joe.
             throw new Error("Cannot push more than one token back");
         }
     }
 
     @Override
-    public void close() {
-        try {
+    public void close(){
+        try{
             in.close();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
     }
 
     @Override
-    public String peekNextChild() {
-        if (depthState.hasMoreChildren()) {
+    public String peekNextChild(){
+        if (depthState.hasMoreChildren()){
             return idRegistry.get(pushback.getId());
         }
         return null;
     }
 
     @Override
-    public HierarchicalStreamReader underlyingReader() {
+    public HierarchicalStreamReader underlyingReader(){
         return this;
     }
 
     @Override
-    public void appendErrors(ErrorWriter errorWriter) {
+    public void appendErrors(ErrorWriter errorWriter){
         // TODO: When things go bad, it would be good to know where!
     }
 
-    private static class IdRegistry {
+    private static class IdRegistry{
 
         private Map map = new HashMap();
 
-        public void put(long id, String value) {
+        public void put(long id,String value){
             map.put(new Long(id), value);
         }
 
-        public String get(long id) {
+        public String get(long id){
             String result = (String) map.get(new Long(id));
-            if (result == null) {
+            if (result == null){
                 throw new StreamException("Unknown ID : " + id);
-            } else {
+            }else{
                 return result;
             }
         }

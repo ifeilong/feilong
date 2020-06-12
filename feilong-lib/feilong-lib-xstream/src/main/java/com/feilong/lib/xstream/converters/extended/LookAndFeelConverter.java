@@ -18,7 +18,6 @@ import com.feilong.lib.xstream.mapper.Mapper;
 
 import java.io.NotSerializableException;
 
-
 /**
  * A converter for Swing LookAndFeel implementations. The JDK's implementations are serializable
  * for historical reasons but will throw a {@link NotSerializableException} in their writeObject
@@ -27,21 +26,23 @@ import java.io.NotSerializableException;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public class LookAndFeelConverter extends ReflectionConverter {
+public class LookAndFeelConverter extends ReflectionConverter{
 
     /**
      * Constructs a LookAndFeelConverter.
      * 
-     * @param mapper the mapper
-     * @param reflectionProvider the reflection provider
+     * @param mapper
+     *            the mapper
+     * @param reflectionProvider
+     *            the reflection provider
      * @since 1.3
      */
-    public LookAndFeelConverter(Mapper mapper, ReflectionProvider reflectionProvider) {
+    public LookAndFeelConverter(Mapper mapper, ReflectionProvider reflectionProvider){
         super(mapper, reflectionProvider);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && LookAndFeel.class.isAssignableFrom(type) && canAccess(type);
     }
 }

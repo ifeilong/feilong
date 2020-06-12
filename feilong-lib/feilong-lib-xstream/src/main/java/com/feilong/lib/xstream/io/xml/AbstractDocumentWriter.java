@@ -16,7 +16,6 @@ import java.util.List;
 import com.feilong.lib.xstream.core.util.FastStack;
 import com.feilong.lib.xstream.io.naming.NameCoder;
 
-
 /**
  * A generic {@link com.feilong.lib.xstream.io.HierarchicalStreamWriter} for DOM writer
  * implementations. The implementation manages a list of top level DOM nodes. Every time the
@@ -27,45 +26,32 @@ import com.feilong.lib.xstream.io.naming.NameCoder;
  * @author J&ouml;rg Schaible
  * @since 1.2.1
  */
-public abstract class AbstractDocumentWriter extends AbstractXmlWriter implements
-    DocumentWriter {
+public abstract class AbstractDocumentWriter extends AbstractXmlWriter implements DocumentWriter{
 
-    private final List result = new ArrayList();
+    private final List      result    = new ArrayList();
+
     private final FastStack nodeStack = new FastStack(16);
 
     /**
      * Constructs an AbstractDocumentWriter.
      * 
-     * @param container the top level container for the nodes to create (may be
+     * @param container
+     *            the top level container for the nodes to create (may be
      *            <code>null</code>)
-     * @param nameCoder the object that creates XML-friendly names
+     * @param nameCoder
+     *            the object that creates XML-friendly names
      * @since 1.4
      */
-    public AbstractDocumentWriter(final Object container, final NameCoder nameCoder) {
+    public AbstractDocumentWriter(final Object container, final NameCoder nameCoder){
         super(nameCoder);
-        if (container != null) {
+        if (container != null){
             nodeStack.push(container);
             result.add(container);
         }
     }
 
-    /**
-     * Constructs an AbstractDocumentWriter.
-     * 
-     * @param container the top level container for the nodes to create (may be
-     *            <code>null</code>)
-     * @param replacer the object that creates XML-friendly names
-     * @since 1.2.1
-     * @deprecated As of 1.4 use
-     *             {@link AbstractDocumentWriter#AbstractDocumentWriter(Object, NameCoder)}
-     *             instead.
-     */
-    public AbstractDocumentWriter(final Object container, final XmlFriendlyReplacer replacer) {
-        this(container, (NameCoder)replacer);
-    }
-
     @Override
-    public final void startNode(final String name) {
+    public final void startNode(final String name){
         final Object node = createNode(name);
         nodeStack.push(node);
     }
@@ -74,17 +60,18 @@ public abstract class AbstractDocumentWriter extends AbstractXmlWriter implement
      * Create a node. The provided node name is not yet XML friendly. If {@link #getCurrent()}
      * returns <code>null</code> the node is a top level node.
      * 
-     * @param name the node name
+     * @param name
+     *            the node name
      * @return the new node
      * @since 1.2.1
      */
     protected abstract Object createNode(String name);
 
     @Override
-    public final void endNode() {
+    public final void endNode(){
         endNodeInternally();
         final Object node = nodeStack.pop();
-        if (nodeStack.size() == 0) {
+        if (nodeStack.size() == 0){
             result.add(node);
         }
     }
@@ -94,28 +81,28 @@ public abstract class AbstractDocumentWriter extends AbstractXmlWriter implement
      * 
      * @since 1.2.1
      */
-    public void endNodeInternally() {
+    public void endNodeInternally(){
     }
 
     /**
      * @since 1.2.1
      */
-    protected final Object getCurrent() {
+    protected final Object getCurrent(){
         return nodeStack.peek();
     }
 
     @Override
-    public List getTopLevelNodes() {
+    public List getTopLevelNodes(){
         return result;
     }
 
     @Override
-    public void flush() {
+    public void flush(){
         // don't need to do anything
     }
 
     @Override
-    public void close() {
+    public void close(){
         // don't need to do anything
     }
 }

@@ -486,7 +486,7 @@ public class CallMethodRule extends Rule{
      * @param result
      *            the Object returned by the method invoked, possibly null
      */
-    protected void processMethodCallResult(Object result){
+    protected void processMethodCallResult(@SuppressWarnings("unused") Object result){
         // do nothing
     }
 

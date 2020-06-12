@@ -58,6 +58,22 @@ import java.util.Map;
  * 
  * 从 13 行 简写到 6 行
  * 
+ * 
+ * <p>
+ * 如果是JDK8+,还可以使用lambda重构成:
+ * </p>
+ * 
+ * <pre class="code">
+ * ThreadUtil.execute(list, 5, new DefaultPartitionRunnableBuilder{@code <>}(new Call{@code <String>}(){
+ * 
+ *     public void call(List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
+ *         map.putAll(handle(perBatchList, noList));
+ *     }
+ * }));
+ * </pre>
+ * 
+ * 从 13 行 简写到 6 行
+ * 
  * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
@@ -98,12 +114,6 @@ public class DefaultPartitionRunnableBuilder<T> implements PartitionRunnableBuil
      */
     @Override
     public Runnable build(final List<T> perBatchList,final PartitionThreadEntity partitionThreadEntity,final Map<String, ?> paramsMap){
-        return new Runnable(){
-
-            @Override
-            public void run(){
-                partitionPerHandler.handle(perBatchList, partitionThreadEntity, paramsMap);
-            }
-        };
+        return () -> partitionPerHandler.handle(perBatchList, partitionThreadEntity, paramsMap);
     }
 }

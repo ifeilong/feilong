@@ -25,5 +25,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @Documented
-public @interface XStreamAsAttribute {
-}
+public @interface XStreamAsAttribute{}

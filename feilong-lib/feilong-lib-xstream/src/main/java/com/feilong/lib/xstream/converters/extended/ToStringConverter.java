@@ -21,38 +21,43 @@ import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
  * Convenient converter for classes with natural string representation.
  * 
  * Converter for classes that adopt the following convention:
- *   - a constructor that takes a single string parameter
- *   - a toString() that is overloaded to issue a string that is meaningful
+ * - a constructor that takes a single string parameter
+ * - a toString() that is overloaded to issue a string that is meaningful
  *
  * @author Paul Hammant
  */
-public class ToStringConverter extends AbstractSingleValueConverter {
-    private static final Class[] STRING_PARAMETER = {String.class};
-    private final Class clazz;
-    private final Constructor ctor;
+public class ToStringConverter extends AbstractSingleValueConverter{
 
-    public ToStringConverter(Class clazz) throws NoSuchMethodException {
+    private static final Class[] STRING_PARAMETER = { String.class };
+
+    private final Class          clazz;
+
+    private final Constructor    ctor;
+
+    public ToStringConverter(Class clazz) throws NoSuchMethodException{
         this.clazz = clazz;
         ctor = clazz.getConstructor(STRING_PARAMETER);
     }
+
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == clazz;
     }
+
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         return obj == null ? null : obj.toString();
     }
 
     @Override
-    public Object fromString(String str) {
-        try {
-            return ctor.newInstance(new Object[] {str});
-        } catch (InstantiationException e) {
+    public Object fromString(String str){
+        try{
+            return ctor.newInstance(new Object[] { str });
+        }catch (InstantiationException e){
             throw new ConversionException("Unable to instantiate single String param constructor", e);
-        } catch (IllegalAccessException e) {
+        }catch (IllegalAccessException e){
             throw new ObjectAccessException("Unable to access single String param constructor", e);
-        } catch (InvocationTargetException e) {
+        }catch (InvocationTargetException e){
             throw new ConversionException("Unable to target single String param constructor", e.getTargetException());
         }
     }

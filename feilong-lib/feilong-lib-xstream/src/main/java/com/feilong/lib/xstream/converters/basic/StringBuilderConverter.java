@@ -15,15 +15,15 @@ package com.feilong.lib.xstream.converters.basic;
  *
  * @author J&ouml;rg Schaible
  */
-public class StringBuilderConverter extends AbstractSingleValueConverter {
+public class StringBuilderConverter extends AbstractSingleValueConverter{
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return new StringBuilder(str);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == StringBuilder.class;
     }
 }

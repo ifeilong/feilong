@@ -39,11 +39,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.MapUtils;
-import com.feilong.core.Validate;
 
 /**
  * {@link Map}工具类.
@@ -486,7 +486,7 @@ public final class MapUtil{
      *            the key
      * @param value
      *            the value
-     * @see com.feilong.lib.collection4.MapUtils#safeAddToMap(Map, Object, Object)
+     * @see "org.apache.commons.collections4.MapUtils#safeAddToMap(Map, Object, Object)"
      * @since 1.4.0
      */
     public static <K, V> void putIfValueNotNull(final Map<K, V> map,final K key,final V value){
@@ -654,8 +654,8 @@ public final class MapUtil{
      *            数值,不能为null,可以是负数
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.collections4.bag.HashBag
-     * @see com.feilong.lib.lang3.mutable.MutableInt
+     * @see "org.apache.commons.collections4.bag.HashBag"
+     * @see "org.apache.commons.lang3.mutable.MutableInt"
      * @see "java.util.Map#getOrDefault(Object, Object)"
      * @see <a href="http://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java">most-efficient-way-to-
      *      increment-a-map-value-in-java</a>
@@ -712,7 +712,7 @@ public final class MapUtil{
      *            数值,不能为null,可以是负数
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.collections4.bag.HashBag
+     * @see "org.apache.commons.collections4.bag.HashBag"
      * @see "java.util.Map#getOrDefault(Object, Object)"
      * @see <a href="http://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java">most-efficient-way-to-
      *      increment-a-map-value-in-java</a>
@@ -811,10 +811,10 @@ public final class MapUtil{
      *            the value
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "com.google.common.collect.ArrayListMultimap"
-     * @see org.apache.commons.collections4.MultiValuedMap
-     * @see org.apache.commons.collections4.IterableMap
-     * @see com.feilong.lib.collection4.MultiMapUtils
-     * @see org.apache.commons.collections4.multimap.AbstractMultiValuedMap#put(Object, Object)
+     * @see "org.apache.commons.collections4.MultiValuedMap"
+     * @see "org.apache.commons.collections4.IterableMap"
+     * @see "org.apache.commons.collections4.MultiMapUtils"
+     * @see "org.apache.commons.collections4.multimap.AbstractMultiValuedMap#put(Object, Object)"
      * @since 1.6.2
      */
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){

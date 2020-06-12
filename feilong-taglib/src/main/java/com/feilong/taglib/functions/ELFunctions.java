@@ -52,7 +52,7 @@ import com.feilong.taglib.common.AbstractContainsSupport;
  * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see org.apache.taglibs.standard.functions.Functions
+ * @see "org.apache.taglibs.standard.functions.Functions"
  * @see "org.owasp.esapi.tags.ELEncodeFunctions"
  * 
  * @see <a href="http://stackoverflow.com/questions/9763619/does-el-support-overloaded-methods">does-el-support-overloaded-methods</a>
@@ -87,7 +87,7 @@ public final class ELFunctions{
      *         如果iterator为null/empty,则返回false<br>
      *         否则迭代 <code>iterator</code>,将元素转成String,和传入参数 <code>value</code>的String值进行比较,如果相等直接返回true
      * @see ConvertUtil#toIterator(Object)
-     * @see org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)
+     * @see "org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)"
      */
     public static boolean contains(Object collection,Object value){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);

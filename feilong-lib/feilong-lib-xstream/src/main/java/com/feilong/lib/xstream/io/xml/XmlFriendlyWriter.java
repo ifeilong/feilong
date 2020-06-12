@@ -19,12 +19,13 @@ package com.feilong.lib.xstream.io.xml;
  * @since 1.3
  * @deprecated As of 1.4
  */
-public interface XmlFriendlyWriter {
+public interface XmlFriendlyWriter{
 
     /**
      * Escapes XML name (node or attribute) to be XML-friendly
      * 
-     * @param name the unescaped XML name
+     * @param name
+     *            the unescaped XML name
      * @return An escaped name with original characters replaced
      * @deprecated As of 1.4
      */

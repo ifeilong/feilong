@@ -55,7 +55,7 @@ public class FilenameUtilTemp{
      * @return 上传的文件是否在指定的文件类型里面
      */
     // XXX 忽视大小写
-    public static boolean isInAppointTypes(String fileName,String[] appointTypes){
+    public static boolean isInAppointTypes(String fileName,String...appointTypes){
         String filePostfixName = FilenameUtil.getExtension(fileName);
         return ArrayUtils.contains(appointTypes, filePostfixName);
     }

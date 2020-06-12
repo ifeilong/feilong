@@ -13,22 +13,24 @@ package com.feilong.lib.xstream.converters.basic;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
 /**
- * Base abstract implementation of  {@link com.feilong.lib.xstream.converters.SingleValueConverter}.
+ * Base abstract implementation of {@link com.feilong.lib.xstream.converters.SingleValueConverter}.
  *
- * <p>Subclasses should implement methods canConvert(Class) and fromString(String) for the conversion.</p>
+ * <p>
+ * Subclasses should implement methods canConvert(Class) and fromString(String) for the conversion.
+ * </p>
  *
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  * @author Mauro Talevi
  * @see com.feilong.lib.xstream.converters.SingleValueConverter
  */
-public abstract class AbstractSingleValueConverter implements SingleValueConverter {
+public abstract class AbstractSingleValueConverter implements SingleValueConverter{
 
     @Override
     public abstract boolean canConvert(Class type);
 
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         return obj == null ? null : obj.toString();
     }
 

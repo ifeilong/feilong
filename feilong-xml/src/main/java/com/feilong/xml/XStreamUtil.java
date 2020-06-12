@@ -40,6 +40,7 @@ class XStreamUtil{
         return xstream.toXML(bean);
     }
 
+    @SuppressWarnings("unchecked")
     static <T> T toBean(String xml,XStreamConfig xStreamConfig){
         XStream xstream = XStreamBuilder.build(xStreamConfig);
         return (T) xstream.fromXML(xml);

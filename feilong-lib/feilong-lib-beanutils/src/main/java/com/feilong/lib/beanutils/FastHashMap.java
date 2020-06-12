@@ -611,10 +611,9 @@ public class FastHashMap extends HashMap{
         public Object[] toArray(Object[] o){
             if (fast){
                 return get(map).toArray(o);
-            }else{
-                synchronized (map){
-                    return get(map).toArray(o);
-                }
+            }
+            synchronized (map){
+                return get(map).toArray(o);
             }
         }
 

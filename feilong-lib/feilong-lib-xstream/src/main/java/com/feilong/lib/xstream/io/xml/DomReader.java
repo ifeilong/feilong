@@ -11,6 +11,9 @@
  */
 package com.feilong.lib.xstream.io.xml;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,27 +23,26 @@ import org.w3c.dom.Text;
 
 import com.feilong.lib.xstream.io.naming.NameCoder;
 
-import java.util.ArrayList;
-import java.util.List;
+public class DomReader extends AbstractDocumentReader{
 
-public class DomReader extends AbstractDocumentReader {
+    private Element            currentElement;
 
-    private Element currentElement;
-    private StringBuffer textBuffer;
-    private List childElements;
+    private final StringBuffer textBuffer;
 
-    public DomReader(Element rootElement) {
+    private List               childElements;
+
+    public DomReader(Element rootElement){
         this(rootElement, new XmlFriendlyNameCoder());
     }
 
-    public DomReader(Document document) {
+    public DomReader(Document document){
         this(document.getDocumentElement());
     }
 
     /**
      * @since 1.4
      */
-    public DomReader(Element rootElement, NameCoder nameCoder) {
+    public DomReader(Element rootElement, NameCoder nameCoder){
         super(rootElement, nameCoder);
         textBuffer = new StringBuffer();
     }
@@ -48,39 +50,23 @@ public class DomReader extends AbstractDocumentReader {
     /**
      * @since 1.4
      */
-    public DomReader(Document document, NameCoder nameCoder) {
+    public DomReader(Document document, NameCoder nameCoder){
         this(document.getDocumentElement(), nameCoder);
     }
 
-    /**
-     * @since 1.2
-     * @deprecated As of 1.4, use {@link DomReader#DomReader(Element, NameCoder)} instead.
-     */
-    public DomReader(Element rootElement, XmlFriendlyReplacer replacer) {
-        this(rootElement, (NameCoder)replacer);
-    }
-
-    /**
-     * @since 1.2
-     * @deprecated As of 1.4, use {@link DomReader#DomReader(Document, NameCoder)} instead.
-     */
-    public DomReader(Document document, XmlFriendlyReplacer replacer) {
-        this(document.getDocumentElement(), (NameCoder)replacer);
-    }
-    
     @Override
-    public String getNodeName() {
+    public String getNodeName(){
         return decodeNode(currentElement.getTagName());
     }
 
     @Override
-    public String getValue() {
+    public String getValue(){
         NodeList childNodes = currentElement.getChildNodes();
         textBuffer.setLength(0);
         int length = childNodes.getLength();
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++){
             Node childNode = childNodes.item(i);
-            if (childNode instanceof Text) {
+            if (childNode instanceof Text){
                 Text text = (Text) childNode;
                 textBuffer.append(text.getData());
             }
@@ -89,60 +75,60 @@ public class DomReader extends AbstractDocumentReader {
     }
 
     @Override
-    public String getAttribute(String name) {
+    public String getAttribute(String name){
         Attr attribute = currentElement.getAttributeNode(encodeAttribute(name));
         return attribute == null ? null : attribute.getValue();
     }
 
     @Override
-    public String getAttribute(int index) {
+    public String getAttribute(int index){
         return ((Attr) currentElement.getAttributes().item(index)).getValue();
     }
 
     @Override
-    public int getAttributeCount() {
+    public int getAttributeCount(){
         return currentElement.getAttributes().getLength();
     }
 
     @Override
-    public String getAttributeName(int index) {
+    public String getAttributeName(int index){
         return decodeAttribute(((Attr) currentElement.getAttributes().item(index)).getName());
     }
 
     @Override
-    protected Object getParent() {
+    protected Object getParent(){
         return currentElement.getParentNode();
     }
 
     @Override
-    protected Object getChild(int index) {
+    protected Object getChild(int index){
         return childElements.get(index);
     }
 
     @Override
-    protected int getChildCount() {
+    protected int getChildCount(){
         return childElements.size();
     }
 
     @Override
-    protected void reassignCurrentElement(Object current) {
+    protected void reassignCurrentElement(Object current){
         currentElement = (Element) current;
         NodeList childNodes = currentElement.getChildNodes();
         childElements = new ArrayList();
-        for (int i = 0; i < childNodes.getLength(); i++) {
+        for (int i = 0; i < childNodes.getLength(); i++){
             Node node = childNodes.item(i);
-            if (node instanceof Element) {
+            if (node instanceof Element){
                 childElements.add(node);
             }
         }
     }
 
     @Override
-    public String peekNextChild() {
+    public String peekNextChild(){
         NodeList childNodes = currentElement.getChildNodes();
-        for (int i = 0; i < childNodes.getLength(); i++) {
+        for (int i = 0; i < childNodes.getLength(); i++){
             Node node = childNodes.item(i);
-            if (node instanceof Element) {
+            if (node instanceof Element){
                 return decodeNode(((Element) node).getTagName());
             }
         }

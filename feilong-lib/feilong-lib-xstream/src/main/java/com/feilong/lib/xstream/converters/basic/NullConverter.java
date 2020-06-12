@@ -24,21 +24,21 @@ import com.feilong.lib.xstream.mapper.Mapper;
  *
  * @author Joe Walnes
  */
-public class NullConverter implements Converter {
+public class NullConverter implements Converter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == null || Mapper.Null.class.isAssignableFrom(type);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         ExtendedHierarchicalStreamWriterHelper.startNode(writer, "null", Mapper.Null.class);
         writer.endNode();
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         return null;
     }
 }

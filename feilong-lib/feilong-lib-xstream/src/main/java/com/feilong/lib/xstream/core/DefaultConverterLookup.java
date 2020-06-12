@@ -24,7 +24,6 @@ import com.feilong.lib.xstream.core.util.Cloneables;
 import com.feilong.lib.xstream.core.util.PrioritizedList;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * The default implementation of converters lookup.
  * 
@@ -32,24 +31,28 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @author Guilherme Silveira
  */
-public class DefaultConverterLookup implements ConverterLookup, ConverterRegistry, Caching {
+public class DefaultConverterLookup implements ConverterLookup,ConverterRegistry,Caching{
 
-    private final PrioritizedList converters = new PrioritizedList();
-    private transient Map typeToConverterMap;
-    private Map serializationMap = null;
+    private final PrioritizedList converters       = new PrioritizedList();
 
-    public DefaultConverterLookup() {
+    private transient Map         typeToConverterMap;
+
+    private Map                   serializationMap = null;
+
+    public DefaultConverterLookup(){
         this(new HashMap());
     }
 
     /**
      * Constructs a DefaultConverterLookup with a provided map.
      *
-     * @param map the map to use
-     * @throws NullPointerException if map is null
+     * @param map
+     *            the map to use
+     * @throws NullPointerException
+     *             if map is null
      * @since 1.4.11
      */
-    public DefaultConverterLookup(Map map) {
+    public DefaultConverterLookup(Map map){
         typeToConverterMap = map;
         typeToConverterMap.clear();
     }
@@ -57,42 +60,41 @@ public class DefaultConverterLookup implements ConverterLookup, ConverterRegistr
     /**
      * @deprecated As of 1.3, use {@link #DefaultConverterLookup()}
      */
-    public DefaultConverterLookup(Mapper mapper) {
+    public DefaultConverterLookup(Mapper mapper){
         this();
     }
 
     @Override
-    public Converter lookupConverterForType(Class type) {
-        Converter cachedConverter = type != null ? (Converter)typeToConverterMap.get(type.getName()) : null;
-        if (cachedConverter != null) {
+    public Converter lookupConverterForType(Class type){
+        Converter cachedConverter = type != null ? (Converter) typeToConverterMap.get(type.getName()) : null;
+        if (cachedConverter != null){
             return cachedConverter;
         }
 
         final Map errors = new LinkedHashMap();
         Iterator iterator = converters.iterator();
-        while (iterator.hasNext()) {
-            Converter converter = (Converter)iterator.next();
-            try {
-                if (converter.canConvert(type)) {
-                    if (type != null) {
+        while (iterator.hasNext()){
+            Converter converter = (Converter) iterator.next();
+            try{
+                if (converter.canConvert(type)){
+                    if (type != null){
                         typeToConverterMap.put(type.getName(), converter);
                     }
                     return converter;
                 }
-            } catch (final RuntimeException e) {
+            }catch (final RuntimeException e){
                 errors.put(converter.getClass().getName(), e.getMessage());
-            } catch (final LinkageError e) {
+            }catch (final LinkageError e){
                 errors.put(converter.getClass().getName(), e.getMessage());
             }
         }
 
-        final ConversionException exception = new ConversionException(errors.isEmpty()
-            ? "No converter specified"
-            : "No converter available");
+        final ConversionException exception = new ConversionException(
+                        errors.isEmpty() ? "No converter specified" : "No converter available");
         exception.add("type", type != null ? type.getName() : "null");
         iterator = errors.entrySet().iterator();
-        while (iterator.hasNext()) {
-            final Map.Entry entry = (Map.Entry)iterator.next();
+        while (iterator.hasNext()){
+            final Map.Entry entry = (Map.Entry) iterator.next();
             exception.add("converter", entry.getKey().toString());
             exception.add("message", entry.getValue().toString());
         }
@@ -100,30 +102,30 @@ public class DefaultConverterLookup implements ConverterLookup, ConverterRegistr
     }
 
     @Override
-    public void registerConverter(Converter converter, int priority) {
+    public void registerConverter(Converter converter,int priority){
         typeToConverterMap.clear();
         converters.add(converter, priority);
     }
 
     @Override
-    public void flushCache() {
+    public void flushCache(){
         typeToConverterMap.clear();
         Iterator iterator = converters.iterator();
-        while (iterator.hasNext()) {
-            Converter converter = (Converter)iterator.next();
-            if (converter instanceof Caching) {
-                ((Caching)converter).flushCache();
+        while (iterator.hasNext()){
+            Converter converter = (Converter) iterator.next();
+            if (converter instanceof Caching){
+                ((Caching) converter).flushCache();
             }
         }
     }
 
-    private Object writeReplace() {
-        serializationMap = (Map)Cloneables.cloneIfPossible(typeToConverterMap);
+    private Object writeReplace(){
+        serializationMap = (Map) Cloneables.cloneIfPossible(typeToConverterMap);
         serializationMap.clear();
         return this;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         typeToConverterMap = serializationMap == null ? new HashMap() : serializationMap;
         serializationMap = null;
         return this;

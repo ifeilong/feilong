@@ -18,29 +18,30 @@ import java.util.Map;
 
 import com.feilong.lib.xstream.converters.DataHolder;
 
-public class MapBackedDataHolder implements DataHolder {
+public class MapBackedDataHolder implements DataHolder{
+
     private final Map map;
 
-    public MapBackedDataHolder() {
+    public MapBackedDataHolder(){
         this(new HashMap());
     }
 
-    public MapBackedDataHolder(Map map) {
+    public MapBackedDataHolder(Map map){
         this.map = map;
     }
 
     @Override
-    public Object get(Object key) {
+    public Object get(Object key){
         return map.get(key);
     }
 
     @Override
-    public void put(Object key, Object value) {
+    public void put(Object key,Object value){
         map.put(key, value);
     }
 
     @Override
-    public Iterator keys() {
+    public Iterator keys(){
         return Collections.unmodifiableCollection(map.keySet()).iterator();
     }
 }

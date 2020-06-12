@@ -19,7 +19,6 @@ import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.core.Caching;
 import com.feilong.lib.xstream.core.util.OrderRetainingMap;
 
-
 /**
  * The default implementation for sorting fields. Invoke registerFieldOrder in order to set the field order for an
  * specific type.
@@ -27,22 +26,23 @@ import com.feilong.lib.xstream.core.util.OrderRetainingMap;
  * @author Guilherme Silveira
  * @since 1.2.2
  */
-public class SortableFieldKeySorter implements FieldKeySorter, Caching {
+public class SortableFieldKeySorter implements FieldKeySorter,Caching{
 
     private final static FieldKey[] EMPTY_FIELD_KEY_ARRAY = {};
-    private final Map map = new HashMap();
+
+    private final Map               map                   = new HashMap();
 
     @Override
-    public Map sort(final Class type, final Map keyedByFieldKey) {
-        if (map.containsKey(type)) {
+    public Map sort(final Class type,final Map keyedByFieldKey){
+        if (map.containsKey(type)){
             final Map result = new OrderRetainingMap();
-            final FieldKey[] fieldKeys = (FieldKey[])keyedByFieldKey.keySet().toArray(EMPTY_FIELD_KEY_ARRAY);
-            Arrays.sort(fieldKeys, (Comparator)map.get(type));
-            for (int i = 0; i < fieldKeys.length; i++ ) {
+            final FieldKey[] fieldKeys = (FieldKey[]) keyedByFieldKey.keySet().toArray(EMPTY_FIELD_KEY_ARRAY);
+            Arrays.sort(fieldKeys, (Comparator) map.get(type));
+            for (int i = 0; i < fieldKeys.length; i++){
                 result.put(fieldKeys[i], keyedByFieldKey.get(fieldKeys[i]));
             }
             return result;
-        } else {
+        }else{
             return keyedByFieldKey;
         }
     }
@@ -52,37 +52,39 @@ public class SortableFieldKeySorter implements FieldKeySorter, Caching {
      * classes. If you skip a field which will be serialized, XStream will thrown a {@link ConversionException} during
      * the serialization process.
      *
-     * @param type the type
-     * @param fields the field order
+     * @param type
+     *            the type
+     * @param fields
+     *            the field order
      */
-    public void registerFieldOrder(final Class type, final String[] fields) {
+    public void registerFieldOrder(final Class type,final String[] fields){
         map.put(type, new FieldComparator(type, fields));
     }
 
-    private class FieldComparator implements Comparator {
+    private class FieldComparator implements Comparator{
 
         private final String[] fieldOrder;
-        private final Class type;
 
-        public FieldComparator(final Class type, final String[] fields) {
+        private final Class    type;
+
+        public FieldComparator(final Class type, final String[] fields){
             this.type = type;
             fieldOrder = fields;
         }
 
-        public int compare(final String first, final String second) {
+        public int compare(final String first,final String second){
             int firstPosition = -1, secondPosition = -1;
-            for (int i = 0; i < fieldOrder.length; i++) {
-                if (fieldOrder[i].equals(first)) {
+            for (int i = 0; i < fieldOrder.length; i++){
+                if (fieldOrder[i].equals(first)){
                     firstPosition = i;
                 }
-                if (fieldOrder[i].equals(second)) {
+                if (fieldOrder[i].equals(second)){
                     secondPosition = i;
                 }
             }
-            if (firstPosition == -1 || secondPosition == -1) {
+            if (firstPosition == -1 || secondPosition == -1){
                 // field not defined!!!
-                final ConversionException exception = new ConversionException(
-                    "Incomplete list of serialized fields for type");
+                final ConversionException exception = new ConversionException("Incomplete list of serialized fields for type");
                 exception.add("sort-type", type.getName());
                 throw exception;
             }
@@ -90,15 +92,15 @@ public class SortableFieldKeySorter implements FieldKeySorter, Caching {
         }
 
         @Override
-        public int compare(final Object firstObject, final Object secondObject) {
-            final FieldKey first = (FieldKey)firstObject, second = (FieldKey)secondObject;
+        public int compare(final Object firstObject,final Object secondObject){
+            final FieldKey first = (FieldKey) firstObject, second = (FieldKey) secondObject;
             return compare(first.getFieldName(), second.getFieldName());
         }
 
     }
 
     @Override
-    public void flushCache() {
+    public void flushCache(){
         map.clear();
     }
 }

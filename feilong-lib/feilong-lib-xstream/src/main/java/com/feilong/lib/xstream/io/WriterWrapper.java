@@ -16,52 +16,52 @@ package com.feilong.lib.xstream.io;
  *
  * @author Joe Walnes
  */
-public abstract class WriterWrapper implements ExtendedHierarchicalStreamWriter {
+public abstract class WriterWrapper implements ExtendedHierarchicalStreamWriter{
 
     protected HierarchicalStreamWriter wrapped;
 
-    protected WriterWrapper(HierarchicalStreamWriter wrapped) {
+    protected WriterWrapper(HierarchicalStreamWriter wrapped){
         this.wrapped = wrapped;
     }
 
     @Override
-    public void startNode(String name) {
+    public void startNode(String name){
         wrapped.startNode(name);
     }
 
     @Override
-    public void startNode(String name, Class clazz) {
+    public void startNode(String name,Class clazz){
 
         ((ExtendedHierarchicalStreamWriter) wrapped).startNode(name, clazz);
     }
 
     @Override
-    public void endNode() {
+    public void endNode(){
         wrapped.endNode();
     }
 
     @Override
-    public void addAttribute(String key, String value) {
+    public void addAttribute(String key,String value){
         wrapped.addAttribute(key, value);
     }
 
     @Override
-    public void setValue(String text) {
+    public void setValue(String text){
         wrapped.setValue(text);
     }
 
     @Override
-    public void flush() {
+    public void flush(){
         wrapped.flush();
     }
 
     @Override
-    public void close() {
+    public void close(){
         wrapped.close();
     }
 
     @Override
-    public HierarchicalStreamWriter underlyingWriter() {
+    public HierarchicalStreamWriter underlyingWriter(){
         return wrapped.underlyingWriter();
     }
 

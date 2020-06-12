@@ -14,15 +14,16 @@ import java.util.Base64;
 
 import com.feilong.lib.xstream.core.StringCodec;
 
-
 /**
  * Base64 codec implementation based on java.util.Base64.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.11
  */
-public class Base64JavaUtilCodec implements StringCodec {
+public class Base64JavaUtilCodec implements StringCodec{
+
     final private Base64.Decoder decoder;
+
     final private Base64.Encoder encoder;
 
     /**
@@ -33,29 +34,31 @@ public class Base64JavaUtilCodec implements StringCodec {
      *
      * @since 1.4.11
      */
-    public Base64JavaUtilCodec() {
+    public Base64JavaUtilCodec(){
         this(Base64.getEncoder(), Base64.getMimeDecoder());
     }
 
     /**
      * Constructs a Base64JavaUtilCodec with provided encoder and decoder.
      *
-     * @param encoder the encoder instance
-     * @param decoder the decoder instance
+     * @param encoder
+     *            the encoder instance
+     * @param decoder
+     *            the decoder instance
      * @since 1.4.11
      */
-    public Base64JavaUtilCodec(final Base64.Encoder encoder, final Base64.Decoder decoder) {
+    public Base64JavaUtilCodec(final Base64.Encoder encoder, final Base64.Decoder decoder){
         this.encoder = encoder;
         this.decoder = decoder;
     }
 
     @Override
-    public byte[] decode(final String base64) {
+    public byte[] decode(final String base64){
         return decoder.decode(base64);
     }
 
     @Override
-    public String encode(final byte[] data) {
+    public String encode(final byte[] data){
         return encoder.encodeToString(data);
     }
 }

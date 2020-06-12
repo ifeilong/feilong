@@ -10,32 +10,33 @@
  */
 package com.feilong.lib.xstream.converters.javabean;
 
-
 /**
  * @author J&ouml;rg Schaible
  *
  * @since 1.4
  */
-public interface JavaBeanProvider {
+public interface JavaBeanProvider{
 
     Object newInstance(Class type);
 
-    void visitSerializableProperties(Object object, Visitor visitor);
+    void visitSerializableProperties(Object object,Visitor visitor);
 
-    void writeProperty(Object object, String propertyName, Object value);
+    void writeProperty(Object object,String propertyName,Object value);
 
-    Class getPropertyType(Object object, String name);
+    Class getPropertyType(Object object,String name);
 
-    boolean propertyDefinedInClass(String name, Class type);
+    boolean propertyDefinedInClass(String name,Class type);
 
     /**
      * Returns true if the Bean provider can instantiate the specified class
      */
     boolean canInstantiate(Class type);
 
-    public interface Visitor {
-        boolean shouldVisit(String name, Class definedIn);
-        void visit(String name, Class type, Class definedIn, Object value);
+    public interface Visitor{
+
+        boolean shouldVisit(String name,Class definedIn);
+
+        void visit(String name,Class type,Class definedIn,Object value);
     }
 
 }

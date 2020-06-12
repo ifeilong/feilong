@@ -20,7 +20,6 @@ import java.net.URL;
 import com.feilong.lib.xstream.io.naming.NameCoder;
 import com.feilong.lib.xstream.io.naming.NoNameCoder;
 
-
 /**
  * Abstract base class for all HierarchicalStreamDriver implementations. Implementations of
  * {@link HierarchicalStreamDriver} should rather be derived from this class then implementing
@@ -29,27 +28,28 @@ import com.feilong.lib.xstream.io.naming.NoNameCoder;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public abstract class AbstractDriver implements HierarchicalStreamDriver {
+public abstract class AbstractDriver implements HierarchicalStreamDriver{
 
     private NameCoder replacer;
 
     /**
      * Creates an AbstractDriver with a NameCoder that does nothing.
      */
-    public AbstractDriver() {
+    public AbstractDriver(){
         this(new NoNameCoder());
     }
 
     /**
      * Creates an AbstractDriver with a provided {@link NameCoder}.
      * 
-     * @param nameCoder the name coder for the target format
+     * @param nameCoder
+     *            the name coder for the target format
      */
-    public AbstractDriver(NameCoder nameCoder) {
+    public AbstractDriver(NameCoder nameCoder){
         this.replacer = nameCoder;
     }
 
-    protected NameCoder getNameCoder() {
+    protected NameCoder getNameCoder(){
         return replacer;
     }
 
@@ -57,11 +57,11 @@ public abstract class AbstractDriver implements HierarchicalStreamDriver {
      * {@inheritDoc}
      */
     @Override
-    public HierarchicalStreamReader createReader(URL in) {
+    public HierarchicalStreamReader createReader(URL in){
         InputStream stream = null;
-        try {
+        try{
             stream = in.openStream();
-        } catch (IOException e) {
+        }catch (IOException e){
             throw new StreamException(e);
         }
         return createReader(stream);
@@ -71,10 +71,10 @@ public abstract class AbstractDriver implements HierarchicalStreamDriver {
      * {@inheritDoc}
      */
     @Override
-    public HierarchicalStreamReader createReader(File in) {
-        try {
+    public HierarchicalStreamReader createReader(File in){
+        try{
             return createReader(new FileInputStream(in));
-        } catch (FileNotFoundException e) {
+        }catch (FileNotFoundException e){
             throw new StreamException(e);
         }
     }

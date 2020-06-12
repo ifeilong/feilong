@@ -35,32 +35,39 @@ import com.feilong.lib.xstream.mapper.Mapper;
  *
  * @author Joe Walnes
  */
-public class DynamicProxyConverter implements Converter {
+public class DynamicProxyConverter implements Converter{
 
-    private ClassLoaderReference classLoaderReference;
-    private Mapper mapper;
-    private static final Field HANDLER = Fields.locate(Proxy.class, InvocationHandler.class, false);
-    private static final InvocationHandler DUMMY = new InvocationHandler() {
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            return null;
-        }
-    };
+    private ClassLoaderReference           classLoaderReference;
+
+    private Mapper                         mapper;
+
+    private static final Field             HANDLER = Fields.locate(Proxy.class, InvocationHandler.class, false);
+
+    private static final InvocationHandler DUMMY   = new InvocationHandler(){
+
+                                                       @Override
+                                                       public Object invoke(Object proxy,Method method,Object[] args) throws Throwable{
+                                                           return null;
+                                                       }
+                                                   };
 
     /**
      * @deprecated As of 1.4.5 use {@link #DynamicProxyConverter(Mapper, ClassLoaderReference)}
      */
-    public DynamicProxyConverter(Mapper mapper) {
+    public DynamicProxyConverter(Mapper mapper){
         this(mapper, DynamicProxyConverter.class.getClassLoader());
     }
 
     /**
      * Construct a DynamicProxyConverter.
-     * @param mapper the Mapper chain
-     * @param classLoaderReference the reference to the {@link ClassLoader} of the XStream instance
+     * 
+     * @param mapper
+     *            the Mapper chain
+     * @param classLoaderReference
+     *            the reference to the {@link ClassLoader} of the XStream instance
      * @since 1.4.5
      */
-    public DynamicProxyConverter(Mapper mapper, ClassLoaderReference classLoaderReference) {
+    public DynamicProxyConverter(Mapper mapper, ClassLoaderReference classLoaderReference){
         this.classLoaderReference = classLoaderReference;
         this.mapper = mapper;
     }
@@ -68,31 +75,31 @@ public class DynamicProxyConverter implements Converter {
     /**
      * @deprecated As of 1.4.5 use {@link #DynamicProxyConverter(Mapper, ClassLoaderReference)}
      */
-    public DynamicProxyConverter(Mapper mapper, ClassLoader classLoader) {
-        this(mapper,new ClassLoaderReference(classLoader));
+    public DynamicProxyConverter(Mapper mapper, ClassLoader classLoader){
+        this(mapper, new ClassLoaderReference(classLoader));
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && (type.equals(DynamicProxyMapper.DynamicProxy.class) || Proxy.isProxyClass(type));
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         InvocationHandler invocationHandler = Proxy.getInvocationHandler(source);
         addInterfacesToXml(source, writer);
         writer.startNode("handler");
         String attributeName = mapper.aliasForSystemAttribute("class");
-        if (attributeName != null) {
+        if (attributeName != null){
             writer.addAttribute(attributeName, mapper.serializedClass(invocationHandler.getClass()));
         }
         context.convertAnother(invocationHandler);
         writer.endNode();
     }
 
-    private void addInterfacesToXml(Object source, HierarchicalStreamWriter writer) {
+    private void addInterfacesToXml(Object source,HierarchicalStreamWriter writer){
         Class[] interfaces = source.getClass().getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
+        for (int i = 0; i < interfaces.length; i++){
             Class currentInterface = interfaces[i];
             writer.startNode("interface");
             writer.setValue(mapper.serializedClass(currentInterface));
@@ -101,38 +108,38 @@ public class DynamicProxyConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         List interfaces = new ArrayList();
         InvocationHandler handler = null;
         Class handlerType = null;
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             reader.moveDown();
             String elementName = reader.getNodeName();
-            if (elementName.equals("interface")) {
+            if (elementName.equals("interface")){
                 interfaces.add(mapper.realClass(reader.getValue()));
-            } else if (elementName.equals("handler")) {
+            }else if (elementName.equals("handler")){
                 String attributeName = mapper.aliasForSystemAttribute("class");
-                if (attributeName != null) {
+                if (attributeName != null){
                     handlerType = mapper.realClass(reader.getAttribute(attributeName));
                     break;
                 }
             }
             reader.moveUp();
         }
-        if (handlerType == null) {
+        if (handlerType == null){
             throw new ConversionException("No InvocationHandler specified for dynamic proxy");
         }
         Class[] interfacesAsArray = new Class[interfaces.size()];
         interfaces.toArray(interfacesAsArray);
         Object proxy = null;
-        if (HANDLER != null) { // we will not be able to resolve references to the proxy
+        if (HANDLER != null){ // we will not be able to resolve references to the proxy
             proxy = Proxy.newProxyInstance(classLoaderReference.getReference(), interfacesAsArray, DUMMY);
         }
         handler = (InvocationHandler) context.convertAnother(proxy, handlerType);
         reader.moveUp();
-        if (HANDLER != null) {
+        if (HANDLER != null){
             Fields.write(HANDLER, proxy, handler);
-        } else {
+        }else{
             proxy = Proxy.newProxyInstance(classLoaderReference.getReference(), interfacesAsArray, handler);
         }
         return proxy;

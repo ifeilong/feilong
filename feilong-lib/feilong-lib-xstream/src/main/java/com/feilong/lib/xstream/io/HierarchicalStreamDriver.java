@@ -24,21 +24,23 @@ import java.net.URL;
  * @author Joe Walnes
  * @author James Strachan
  */
-public interface HierarchicalStreamDriver {
+public interface HierarchicalStreamDriver{
 
     /**
      * Create the HierarchicalStreamReader with the stream parser reading from the IO reader.
      * 
-     * @param in the {@link Reader} with the data to parse 
+     * @param in
+     *            the {@link Reader} with the data to parse
      * @return the HierarchicalStreamReader
      */
     HierarchicalStreamReader createReader(Reader in);
-    
-    /** 
+
+    /**
      * Create the HierarchicalStreamReader with the stream parser reading from the input stream.
      * 
-     * @param in the {@link InputStream} with the data to parse 
-     * @since 1.1.3 
+     * @param in
+     *            the {@link InputStream} with the data to parse
+     * @since 1.1.3
      */
     HierarchicalStreamReader createReader(InputStream in);
 
@@ -48,7 +50,8 @@ public interface HierarchicalStreamDriver {
      * Depending on the parser implementation, some might take the URL as SystemId to resolve
      * additional references.
      * 
-     * @param in the {@link URL} defining the location with the data to parse 
+     * @param in
+     *            the {@link URL} defining the location with the data to parse
      * @return the HierarchicalStreamReader
      * @since 1.4
      */
@@ -60,7 +63,8 @@ public interface HierarchicalStreamDriver {
      * Depending on the parser implementation, some might take the file path as SystemId to
      * resolve additional references.
      * 
-     * @param in the {@link URL} defining the location with the data to parse 
+     * @param in
+     *            the {@link URL} defining the location with the data to parse
      * @return the HierarchicalStreamReader
      * @since 1.4
      */
@@ -69,14 +73,17 @@ public interface HierarchicalStreamDriver {
     /**
      * Create the HierarchicalStreamWriter with the formatted writer.
      * 
-     * @param out the {@link Writer} to receive the formatted data 
+     * @param out
+     *            the {@link Writer} to receive the formatted data
      * @return the HierarchicalStreamWriter
      */
     HierarchicalStreamWriter createWriter(Writer out);
-    /** 
+
+    /**
      * Create the HierarchicalStreamWriter with the formatted writer.
      * 
-     * @param out the {@link OutputStream} to receive the formatted data 
+     * @param out
+     *            the {@link OutputStream} to receive the formatted data
      * @return the HierarchicalStreamWriter
      * @since 1.1.3
      */

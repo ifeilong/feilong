@@ -15,7 +15,6 @@ import com.feilong.lib.xstream.core.util.Types;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * Converts a lambda type.
  * 
@@ -24,7 +23,7 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.4.8
  */
-public class LambdaConverter extends SerializableConverter {
+public class LambdaConverter extends SerializableConverter{
 
     /**
      * Constructs a LambdaConverter.
@@ -34,21 +33,19 @@ public class LambdaConverter extends SerializableConverter {
      * @param classLoaderReference
      * @since 1.4.8
      */
-    public LambdaConverter(
-            final Mapper mapper, final ReflectionProvider reflectionProvider,
-            final ClassLoaderReference classLoaderReference) {
+    public LambdaConverter(final Mapper mapper, final ReflectionProvider reflectionProvider,
+                    final ClassLoaderReference classLoaderReference){
         super(mapper, reflectionProvider, classLoaderReference);
     }
 
     @Override
-    public boolean canConvert(final Class type) {
-        return Types.isLambdaType(type)
-            && (JVM.canCreateDerivedObjectOutputStream() || !Serializable.class.isAssignableFrom(type));
+    public boolean canConvert(final Class type){
+        return Types.isLambdaType(type) && (JVM.canCreateDerivedObjectOutputStream() || !Serializable.class.isAssignableFrom(type));
     }
 
     @Override
-    public void marshal(final Object original, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-        if (original instanceof Serializable) {
+    public void marshal(final Object original,final HierarchicalStreamWriter writer,final MarshallingContext context){
+        if (original instanceof Serializable){
             super.marshal(original, writer, context);
         }
     }

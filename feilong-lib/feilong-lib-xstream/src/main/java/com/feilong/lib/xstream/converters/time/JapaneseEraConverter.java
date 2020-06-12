@@ -15,28 +15,27 @@ import java.time.chrono.JapaneseEra;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link JapaneseEra} instance to a string using its id.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class JapaneseEraConverter extends AbstractSingleValueConverter {
+public class JapaneseEraConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return type != null && JapaneseEra.class.isAssignableFrom(type);
     }
 
     @Override
-    public JapaneseEra fromString(final String str) {
-        if (str == null) {
+    public JapaneseEra fromString(final String str){
+        if (str == null){
             return null;
         }
-        try {
+        try{
             return JapaneseEra.valueOf(str);
-        } catch (final IllegalArgumentException e) {
+        }catch (final IllegalArgumentException e){
             final ConversionException exception = new ConversionException("Cannot parse value as Japanese era", e);
             exception.add("value", str);
             throw exception;

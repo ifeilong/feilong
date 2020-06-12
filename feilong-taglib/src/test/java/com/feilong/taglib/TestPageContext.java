@@ -31,11 +31,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.el.ExpressionEvaluator;
 import javax.servlet.jsp.el.VariableResolver;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.0
- */
+@SuppressWarnings("deprecation")
 public class TestPageContext extends PageContext{
 
     @Override
@@ -174,25 +170,21 @@ public class TestPageContext extends PageContext{
 
     @Override
     public JspWriter getOut(){
-
         return null;
     }
 
     @Override
     public ExpressionEvaluator getExpressionEvaluator(){
-
         return null;
     }
 
     @Override
     public VariableResolver getVariableResolver(){
-
         return null;
     }
 
     @Override
     public ELContext getELContext(){
-
         return null;
     }
 

@@ -11,7 +11,6 @@
  */
 package com.feilong.lib.xstream.converters.basic;
 
-
 /**
  * Converts a boolean primitive or java.lang.Boolean wrapper to
  * a String.
@@ -19,49 +18,53 @@ package com.feilong.lib.xstream.converters.basic;
  * @author Joe Walnes
  * @author David Blevins
  */
-public class BooleanConverter extends AbstractSingleValueConverter {
+public class BooleanConverter extends AbstractSingleValueConverter{
 
     public static final BooleanConverter TRUE_FALSE = new BooleanConverter("true", "false", false);
-    public static final BooleanConverter YES_NO = new BooleanConverter("yes", "no", false);
-    public static final BooleanConverter BINARY = new BooleanConverter("1", "0", true);
 
-    private final String positive;
-    private final String negative;
-    private final boolean caseSensitive;
+    public static final BooleanConverter YES_NO     = new BooleanConverter("yes", "no", false);
 
-    public BooleanConverter(final String positive, final String negative, final boolean caseSensitive) {
+    public static final BooleanConverter BINARY     = new BooleanConverter("1", "0", true);
+
+    private final String                 positive;
+
+    private final String                 negative;
+
+    private final boolean                caseSensitive;
+
+    public BooleanConverter(final String positive, final String negative, final boolean caseSensitive){
         this.positive = positive;
         this.negative = negative;
         this.caseSensitive = caseSensitive;
     }
 
-    public BooleanConverter() {
+    public BooleanConverter(){
         this("true", "false", false);
     }
 
     /**
      * @deprecated As of 1.4.8 use {@link #canConvert(Class)}
      */
-    public boolean shouldConvert(final Class type, final Object value) {
+    public boolean shouldConvert(final Class type,final Object value){
         return true;
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return type == boolean.class || type == Boolean.class;
     }
 
     @Override
-    public Object fromString(final String str) {
-        if (caseSensitive) {
+    public Object fromString(final String str){
+        if (caseSensitive){
             return positive.equals(str) ? Boolean.TRUE : Boolean.FALSE;
-        } else {
+        }else{
             return positive.equalsIgnoreCase(str) ? Boolean.TRUE : Boolean.FALSE;
         }
     }
 
     @Override
-    public String toString(final Object obj) {
+    public String toString(final Object obj){
         final Boolean value = (Boolean) obj;
         return obj == null ? null : value.booleanValue() ? positive : negative;
     }

@@ -20,23 +20,24 @@ import java.util.Map;
  * @author J&ouml;rg Schaible
  * @since 1.3.1
  */
-public abstract class AbstractAttributeAliasingMapper extends MapperWrapper {
+public abstract class AbstractAttributeAliasingMapper extends MapperWrapper{
 
-    protected final Map aliasToName = new HashMap();
+    protected final Map     aliasToName = new HashMap();
+
     protected transient Map nameToAlias = new HashMap();
 
-    public AbstractAttributeAliasingMapper(Mapper wrapped) {
+    public AbstractAttributeAliasingMapper(Mapper wrapped){
         super(wrapped);
     }
 
-    public void addAliasFor(final String attributeName, final String alias) {
+    public void addAliasFor(final String attributeName,final String alias){
         aliasToName.put(alias, attributeName);
         nameToAlias.put(attributeName, alias);
     }
 
-    Object readResolve() {
+    Object readResolve(){
         nameToAlias = new HashMap();
-        for (final Iterator iter = aliasToName.keySet().iterator(); iter.hasNext();) {
+        for (final Iterator iter = aliasToName.keySet().iterator(); iter.hasNext();){
             final Object alias = iter.next();
             nameToAlias.put(aliasToName.get(alias), alias);
         }

@@ -25,40 +25,40 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class CharConverter implements Converter, SingleValueConverter {
+public class CharConverter implements Converter,SingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == char.class || type == Character.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         writer.setValue(toString(source));
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         String nullAttribute = reader.getAttribute("null");
-        if (nullAttribute != null && nullAttribute.equals("true")) {
+        if (nullAttribute != null && nullAttribute.equals("true")){
             return new Character('\0');
-        } else {
+        }else{
             return fromString(reader.getValue());
         }
     }
 
     @Override
-    public Object fromString(String str) {
-        if (str.length() == 0) {
+    public Object fromString(String str){
+        if (str.length() == 0){
             return new Character('\0');
-        } else {
+        }else{
             return new Character(str.charAt(0));
         }
     }
 
     @Override
-    public String toString(Object obj) {
-        char ch = ((Character)obj).charValue();
+    public String toString(Object obj){
+        char ch = ((Character) obj).charValue();
         return ch == '\0' ? "" : obj.toString();
     }
 

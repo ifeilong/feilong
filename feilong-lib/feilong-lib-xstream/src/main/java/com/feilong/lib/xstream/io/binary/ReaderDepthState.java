@@ -24,77 +24,84 @@ import java.util.Collections;
  * @author Joe Walnes
  * @since 1.2
  */
-class ReaderDepthState {
+class ReaderDepthState{
 
     private static final String EMPTY_STRING = "";
 
-    private static class State {
-        String name;
-        String value;
-        List attributes;
+    private static class State{
+
+        String  name;
+
+        String  value;
+
+        List    attributes;
+
         boolean hasMoreChildren;
-        State parent;
+
+        State   parent;
     }
 
-    private static class Attribute {
+    private static class Attribute{
+
         String name;
+
         String value;
     }
 
     private State current;
 
-    public void push() {
+    public void push(){
         State newState = new State();
         newState.parent = current;
         current = newState;
     }
 
-    public void pop() {
+    public void pop(){
         current = current.parent;
     }
 
-    public String getName() {
+    public String getName(){
         return current.name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         current.name = name;
     }
 
-    public String getValue() {
+    public String getValue(){
         return current.value == null ? EMPTY_STRING : current.value;
     }
 
-    public void setValue(String value) {
+    public void setValue(String value){
         current.value = value;
     }
 
-    public boolean hasMoreChildren() {
+    public boolean hasMoreChildren(){
         return current.hasMoreChildren;
     }
 
-    public void setHasMoreChildren(boolean hasMoreChildren) {
+    public void setHasMoreChildren(boolean hasMoreChildren){
         current.hasMoreChildren = hasMoreChildren;
     }
 
-    public void addAttribute(String name, String value) {
+    public void addAttribute(String name,String value){
         Attribute attribute = new Attribute();
         attribute.name = name;
         attribute.value = value;
-        if (current.attributes == null) {
+        if (current.attributes == null){
             current.attributes = new ArrayList();
         }
         current.attributes.add(attribute);
     }
 
-    public String getAttribute(String name) {
-        if (current.attributes == null) {
+    public String getAttribute(String name){
+        if (current.attributes == null){
             return null;
-        } else {
+        }else{
             // For short maps, it's faster to iterate then do a hashlookup.
-            for (Iterator iterator = current.attributes.iterator(); iterator.hasNext();) {
+            for (Iterator iterator = current.attributes.iterator(); iterator.hasNext();){
                 Attribute attribute = (Attribute) iterator.next();
-                if (attribute.name.equals(name)) {
+                if (attribute.name.equals(name)){
                     return attribute.value;
                 }
             }
@@ -102,47 +109,48 @@ class ReaderDepthState {
         }
     }
 
-    public String getAttribute(int index) {
-        if (current.attributes == null) {
+    public String getAttribute(int index){
+        if (current.attributes == null){
             return null;
-        } else {
+        }else{
             Attribute attribute = (Attribute) current.attributes.get(index);
             return attribute.value;
         }
     }
 
-    public String getAttributeName(int index) {
-        if (current.attributes == null) {
+    public String getAttributeName(int index){
+        if (current.attributes == null){
             return null;
-        } else {
+        }else{
             Attribute attribute = (Attribute) current.attributes.get(index);
             return attribute.name;
         }
     }
 
-    public int getAttributeCount() {
+    public int getAttributeCount(){
         return current.attributes == null ? 0 : current.attributes.size();
     }
 
-    public Iterator getAttributeNames() {
-        if (current.attributes == null) {
+    public Iterator getAttributeNames(){
+        if (current.attributes == null){
             return Collections.EMPTY_SET.iterator();
-        } else {
+        }else{
             final Iterator attributeIterator = current.attributes.iterator();
-            return new Iterator() {
+            return new Iterator(){
+
                 @Override
-                public boolean hasNext() {
+                public boolean hasNext(){
                     return attributeIterator.hasNext();
                 }
 
                 @Override
-                public Object next() {
+                public Object next(){
                     Attribute attribute = (Attribute) attributeIterator.next();
                     return attribute.name;
                 }
 
                 @Override
-                public void remove() {
+                public void remove(){
                     throw new UnsupportedOperationException();
                 }
             };

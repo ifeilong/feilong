@@ -19,48 +19,42 @@ import java.time.temporal.ChronoField;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 
-
 /**
  * Converts a {@link ZonedDateTime} to a string.
  *
  * @author Matej Cimbora
  * @since 1.4.10
  */
-public class ZonedDateTimeConverter implements SingleValueConverter {
+public class ZonedDateTimeConverter implements SingleValueConverter{
 
     private static final DateTimeFormatter FORMATTER;
 
-    static {
-        FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("uuuu-MM-dd'T'HH:mm:ss")
-            .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
-            .appendOffsetId()
-            .appendLiteral("[")
-            .appendZoneId()
-            .appendLiteral("]")
-            .toFormatter();
+    static{
+        FORMATTER = new DateTimeFormatterBuilder().appendPattern("uuuu-MM-dd'T'HH:mm:ss")
+                        .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true).appendOffsetId().appendLiteral("[").appendZoneId()
+                        .appendLiteral("]").toFormatter();
     }
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return ZonedDateTime.class == type;
     }
 
     @Override
-    public String toString(final Object obj) {
-        if (obj == null) {
+    public String toString(final Object obj){
+        if (obj == null){
             return null;
         }
 
-        final ZonedDateTime zonedDateTime = (ZonedDateTime)obj;
+        final ZonedDateTime zonedDateTime = (ZonedDateTime) obj;
         return FORMATTER.format(zonedDateTime);
     }
 
     @Override
-    public Object fromString(final String str) {
-        try {
+    public Object fromString(final String str){
+        try{
             return ZonedDateTime.parse(str);
-        } catch (final DateTimeParseException e) {
+        }catch (final DateTimeParseException e){
             final ConversionException exception = new ConversionException("Cannot parse value as zoned date time", e);
             exception.add("value", str);
             throw exception;

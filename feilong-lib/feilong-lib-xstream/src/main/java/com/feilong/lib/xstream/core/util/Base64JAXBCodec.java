@@ -14,22 +14,21 @@ import javax.xml.bind.DatatypeConverter;
 
 import com.feilong.lib.xstream.core.StringCodec;
 
-
 /**
  * Base64 codec implementation based on JAXB.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.11
  */
-public class Base64JAXBCodec implements StringCodec {
+public class Base64JAXBCodec implements StringCodec{
 
     @Override
-    public byte[] decode(final String base64) {
+    public byte[] decode(final String base64){
         return DatatypeConverter.parseBase64Binary(base64);
     }
 
     @Override
-    public String encode(final byte[] data) {
+    public String encode(final byte[] data){
         return DatatypeConverter.printBase64Binary(data);
     }
 }

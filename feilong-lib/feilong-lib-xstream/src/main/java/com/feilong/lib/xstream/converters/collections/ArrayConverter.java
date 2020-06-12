@@ -28,21 +28,21 @@ import com.feilong.lib.xstream.mapper.Mapper;
  *
  * @author Joe Walnes
  */
-public class ArrayConverter extends AbstractCollectionConverter {
+public class ArrayConverter extends AbstractCollectionConverter{
 
-    public ArrayConverter(Mapper mapper) {
+    public ArrayConverter(Mapper mapper){
         super(mapper);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && type.isArray();
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         int length = Array.getLength(source);
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++){
             final Object item = Array.get(source, i);
             writeCompleteItem(item, context, writer);
         }
@@ -50,10 +50,10 @@ public class ArrayConverter extends AbstractCollectionConverter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         // read the items from xml into a list
         List items = new ArrayList();
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             final Object item = readCompleteItem(reader, context, null); // TODO: arg, what should replace null?
             items.add(item);
         }
@@ -62,7 +62,7 @@ public class ArrayConverter extends AbstractCollectionConverter {
         //  known until all items have been read)
         Object array = Array.newInstance(context.getRequiredType().getComponentType(), items.size());
         int i = 0;
-        for (Iterator iterator = items.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = items.iterator(); iterator.hasNext();){
             Array.set(array, i++, iterator.next());
         }
         return array;

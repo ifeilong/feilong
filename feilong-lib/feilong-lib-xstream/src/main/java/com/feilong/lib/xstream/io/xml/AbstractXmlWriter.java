@@ -23,32 +23,28 @@ import com.feilong.lib.xstream.io.naming.NameCoder;
  * @since 1.2
  * @deprecated As of 1.4 use {@link AbstractWriter} instead
  */
-public abstract class AbstractXmlWriter extends AbstractWriter implements XmlFriendlyWriter {
+@Deprecated
+public abstract class AbstractXmlWriter extends AbstractWriter implements XmlFriendlyWriter{
 
     protected AbstractXmlWriter(){
         this(new XmlFriendlyNameCoder());
     }
 
-    /**
-     * @deprecated As of 1.4
-     */
-    protected AbstractXmlWriter(XmlFriendlyReplacer replacer) {
-        this((NameCoder)replacer);
-    }
-
-    protected AbstractXmlWriter(NameCoder nameCoder) {
+    protected AbstractXmlWriter(NameCoder nameCoder){
         super(nameCoder);
     }
 
     /**
      * Escapes XML name (node or attribute) to be XML-friendly
      * 
-     * @param name the unescaped XML name
+     * @param name
+     *            the unescaped XML name
      * @return An escaped name with original characters replaced
      * @deprecated As of 1.4 use {@link #encodeNode(String)} or {@link #encodeAttribute(String)} instead
      */
+    @Deprecated
     @Override
-    public String escapeXmlName(String name) {
+    public String escapeXmlName(String name){
         return super.encodeNode(name);
     }
 

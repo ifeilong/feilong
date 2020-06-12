@@ -18,7 +18,6 @@ import java.io.StringReader;
 
 import com.feilong.lib.xstream.core.StringCodec;
 
-
 /**
  * Encodes binary data to plain text as Base64.
  * <p>
@@ -34,7 +33,7 @@ import com.feilong.lib.xstream.core.StringCodec;
  *
  * @author Joe Walnes
  */
-public class Base64Encoder implements StringCodec {
+public class Base64Encoder implements StringCodec{
 
     // Here's how encoding works:
     //
@@ -57,13 +56,14 @@ public class Base64Encoder implements StringCodec {
     //
     // 6) Special padding is done at the end of the stream using the '=' char.
 
-    private static final char[] SIXTY_FOUR_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-        .toCharArray();
-    private static final int[] REVERSE_MAPPING = new int[123];
-    private final boolean lineBreaks;
+    private static final char[] SIXTY_FOUR_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
 
-    static {
-        for (int i = 0; i < SIXTY_FOUR_CHARS.length; i++) {
+    private static final int[]  REVERSE_MAPPING  = new int[123];
+
+    private final boolean       lineBreaks;
+
+    static{
+        for (int i = 0; i < SIXTY_FOUR_CHARS.length; i++){
             REVERSE_MAPPING[SIXTY_FOUR_CHARS[i]] = i + 1;
         }
     }
@@ -76,34 +76,34 @@ public class Base64Encoder implements StringCodec {
      *
      * @since 1.4.11
      */
-    public Base64Encoder() {
+    public Base64Encoder(){
         this(false);
     }
 
     /**
      * Constructs a Base64Encoder.
      *
-     * @param lineBreaks flag to insert line breaks
+     * @param lineBreaks
+     *            flag to insert line breaks
      * @since 1.4.11
      */
-    public Base64Encoder(final boolean lineBreaks) {
+    public Base64Encoder(final boolean lineBreaks){
         this.lineBreaks = lineBreaks;
     }
 
     @Override
-    public String encode(final byte[] input) {
+    public String encode(final byte[] input){
         final int stringSize = computeResultingStringSize(input);
         final StringBuffer result = new StringBuffer(stringSize);
         int outputCharCount = 0;
-        for (int i = 0; i < input.length; i += 3) {
+        for (int i = 0; i < input.length; i += 3){
             final int remaining = Math.min(3, input.length - i);
-            final int oneBigNumber = (input[i] & 0xff) << 16
-                | (remaining <= 1 ? 0 : input[i + 1] & 0xff) << 8
-                | (remaining <= 2 ? 0 : input[i + 2] & 0xff);
-            for (int j = 0; j < 4; j++) {
+            final int oneBigNumber = (input[i] & 0xff) << 16 | (remaining <= 1 ? 0 : input[i + 1] & 0xff) << 8
+                            | (remaining <= 2 ? 0 : input[i + 2] & 0xff);
+            for (int j = 0; j < 4; j++){
                 result.append(remaining + 1 > j ? SIXTY_FOUR_CHARS[0x3f & oneBigNumber >> 6 * (3 - j)] : '=');
             }
-            if (lineBreaks && (outputCharCount += 4) % 76 == 0 && i + 3 < input.length) {
+            if (lineBreaks && (outputCharCount += 4) % 76 == 0 && i + 3 < input.length){
                 result.append('\n');
             }
         }
@@ -112,43 +112,43 @@ public class Base64Encoder implements StringCodec {
     }
 
     // package private for testing purpose
-    int computeResultingStringSize(final byte[] input) {
+    int computeResultingStringSize(final byte[] input){
         int stringSize = input.length / 3 + (input.length % 3 == 0 ? 0 : 1);
         stringSize *= 4;
-        if (lineBreaks) {
+        if (lineBreaks){
             stringSize += stringSize / 76;
         }
         return stringSize;
     }
 
     @Override
-    public byte[] decode(final String input) {
-        try {
+    public byte[] decode(final String input){
+        try{
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             final StringReader in = new StringReader(input);
-            for (int i = 0; i < input.length(); i += 4) {
-                final int a[] = {mapCharToInt(in), mapCharToInt(in), mapCharToInt(in), mapCharToInt(in)};
+            for (int i = 0; i < input.length(); i += 4){
+                final int a[] = { mapCharToInt(in), mapCharToInt(in), mapCharToInt(in), mapCharToInt(in) };
                 final int oneBigNumber = (a[0] & 0x3f) << 18 | (a[1] & 0x3f) << 12 | (a[2] & 0x3f) << 6 | a[3] & 0x3f;
-                for (int j = 0; j < 3; j++) {
-                    if (a[j + 1] >= 0) {
+                for (int j = 0; j < 3; j++){
+                    if (a[j + 1] >= 0){
                         out.write(0xff & oneBigNumber >> 8 * (2 - j));
                     }
                 }
             }
             return out.toByteArray();
-        } catch (final IOException e) {
+        }catch (final IOException e){
             throw new Error(e + ": " + e.getMessage());
         }
     }
 
-    private int mapCharToInt(final Reader input) throws IOException {
+    private int mapCharToInt(final Reader input) throws IOException{
         int c;
-        while ((c = input.read()) != -1) {
+        while ((c = input.read()) != -1){
             final int result = REVERSE_MAPPING[c];
-            if (result != 0) {
+            if (result != 0){
                 return result - 1;
             }
-            if (c == '=') {
+            if (c == '='){
                 return -1;
             }
         }

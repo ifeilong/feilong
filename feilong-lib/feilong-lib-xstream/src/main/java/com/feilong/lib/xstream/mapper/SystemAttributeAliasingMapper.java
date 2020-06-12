@@ -10,25 +10,24 @@
  */
 package com.feilong.lib.xstream.mapper;
 
-
 /**
  * Mapper that allows aliasing of system attribute names.
  * 
  * @author J&ouml;rg Schaible
  * @since 1.3.1
  */
-public class SystemAttributeAliasingMapper extends AbstractAttributeAliasingMapper {
+public class SystemAttributeAliasingMapper extends AbstractAttributeAliasingMapper{
 
-    public SystemAttributeAliasingMapper(Mapper wrapped) {
+    public SystemAttributeAliasingMapper(Mapper wrapped){
         super(wrapped);
     }
 
     @Override
-    public String aliasForSystemAttribute(String attribute) {
-        String alias = (String)nameToAlias.get(attribute);
-        if (alias == null && !nameToAlias.containsKey(attribute)) {
+    public String aliasForSystemAttribute(String attribute){
+        String alias = (String) nameToAlias.get(attribute);
+        if (alias == null && !nameToAlias.containsKey(attribute)){
             alias = super.aliasForSystemAttribute(attribute);
-            if (alias == attribute) {
+            if (alias == attribute){
                 alias = super.aliasForAttribute(attribute);
             }
         }

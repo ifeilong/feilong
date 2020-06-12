@@ -15,6 +15,10 @@
  */
 package com.feilong.json.format;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Test;
@@ -35,7 +39,14 @@ public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
         XMLGregorianCalendar xmlGregorianCalendar = com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl.LEAP_YEAR_DEFAULT;
         bean.setBirthDate(xmlGregorianCalendar);
 
-        LOGGER.debug(JsonUtil.format(bean));
+        String format = JsonUtil.format(bean);
+        assertThat(
+                        format,
+                        allOf(//
+                                        containsString("\"birthDate\": \"0400-01-01T00:00:00\""),
+                                        containsString("\"name\": \"jim\"")
+                        //
+                        ));
     }
 
 }

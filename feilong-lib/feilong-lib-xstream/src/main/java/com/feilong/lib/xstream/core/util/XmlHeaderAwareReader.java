@@ -21,7 +21,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * A {@link Reader} that evaluates the XML header. It selects its encoding based on the encoding read with the XML
  * header of the provided {@link InputStream}. The default encoding is <em>UTF-8</em> and the version is 1.0 if the
@@ -30,40 +29,49 @@ import java.util.Map;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public final class XmlHeaderAwareReader extends Reader {
+public final class XmlHeaderAwareReader extends Reader{
 
     private final InputStreamReader reader;
-    private final double version;
 
-    private static final String KEY_ENCODING = "encoding";
-    private static final String KEY_VERSION = "version";
+    private final double            version;
 
-    private static final String XML_TOKEN = "?xml";
+    private static final String     KEY_ENCODING           = "encoding";
 
-    private static final int STATE_BOM = 0;
-    private static final int STATE_START = 1;
-    private static final int STATE_AWAIT_XML_HEADER = 2;
-    private static final int STATE_ATTR_NAME = 3;
-    private static final int STATE_ATTR_VALUE = 4;
+    private static final String     KEY_VERSION            = "version";
+
+    private static final String     XML_TOKEN              = "?xml";
+
+    private static final int        STATE_BOM              = 0;
+
+    private static final int        STATE_START            = 1;
+
+    private static final int        STATE_AWAIT_XML_HEADER = 2;
+
+    private static final int        STATE_ATTR_NAME        = 3;
+
+    private static final int        STATE_ATTR_VALUE       = 4;
 
     /**
      * Constructs an XmlHeaderAwareReader.
      * 
-     * @param in the {@link InputStream}
-     * @throws UnsupportedEncodingException if the encoding is not supported
-     * @throws IOException occurred while reading the XML header
+     * @param in
+     *            the {@link InputStream}
+     * @throws UnsupportedEncodingException
+     *             if the encoding is not supported
+     * @throws IOException
+     *             occurred while reading the XML header
      * @since 1.3
      */
-    public XmlHeaderAwareReader(final InputStream in) throws UnsupportedEncodingException, IOException {
-        final PushbackInputStream[] pin = new PushbackInputStream[]{in instanceof PushbackInputStream
-            ? (PushbackInputStream)in
-            : new PushbackInputStream(in, 64)};
+    public XmlHeaderAwareReader(final InputStream in) throws UnsupportedEncodingException,IOException{
+        final PushbackInputStream[] pin = new PushbackInputStream[] {
+                                                                      in instanceof PushbackInputStream ? (PushbackInputStream) in
+                                                                                      : new PushbackInputStream(in, 64) };
         final Map header = getHeader(pin);
-        version = Double.parseDouble((String)header.get(KEY_VERSION));
-        reader = new InputStreamReader(pin[0], (String)header.get(KEY_ENCODING));
+        version = Double.parseDouble((String) header.get(KEY_VERSION));
+        reader = new InputStreamReader(pin[0], (String) header.get(KEY_ENCODING));
     }
 
-    private Map getHeader(final PushbackInputStream[] in) throws IOException {
+    private Map getHeader(final PushbackInputStream[] in) throws IOException{
         final Map header = new HashMap();
         header.put(KEY_ENCODING, "UTF-8");
         header.put(KEY_VERSION, "1.0");
@@ -76,103 +84,101 @@ public final class XmlHeaderAwareReader extends Reader {
         final StringBuffer name = new StringBuffer();
         final StringBuffer value = new StringBuffer();
         boolean escape = false;
-        while (i != -1 && (i = in[0].read()) != -1) {
+        while (i != -1 && (i = in[0].read()) != -1){
             out.write(i);
-            ch = (char)i;
+            ch = (char) i;
             switch (state) {
-            case STATE_BOM:
-                if ((ch == 0xEF && out.size() == 1)
-                        || (ch == 0xBB && out.size() == 2)
-                        || (ch == 0xBF && out.size() == 3)) {
-                    if (ch == 0xBF) {
-                        out.reset();
+                case STATE_BOM:
+                    if ((ch == 0xEF && out.size() == 1) || (ch == 0xBB && out.size() == 2) || (ch == 0xBF && out.size() == 3)){
+                        if (ch == 0xBF){
+                            out.reset();
+                            state = STATE_START;
+                        }
+                        break;
+                    }else if (out.size() > 1){
+                        i = -1;
+                        break;
+                    }else{
                         state = STATE_START;
                     }
-                    break;
-                } else if (out.size() > 1) {
-                    i = -1;
-                    break;
-                } else {
-                    state = STATE_START;
-                }
-                // fall through
-            case STATE_START:
-                if (!Character.isWhitespace(ch)) {
-                    if (ch == '<') {
-                        state = STATE_AWAIT_XML_HEADER;
-                    } else {
-                        i = -1;
-                    }
-                }
-                break;
-            case STATE_AWAIT_XML_HEADER:
-                if (!Character.isWhitespace(ch)) {
-                    name.append(Character.toLowerCase(ch));
-                    if (!XML_TOKEN.startsWith(name.substring(0))) {
-                        i = -1;
-                    }
-                } else {
-                    if (name.toString().equals(XML_TOKEN)) {
-                        state = STATE_ATTR_NAME;
-                        name.setLength(0);
-                    } else {
-                        i = -1;
-                    }
-                }
-                break;
-            case STATE_ATTR_NAME:
-                if (!Character.isWhitespace(ch)) {
-                    if (ch == '=') {
-                        state = STATE_ATTR_VALUE;
-                    } else {
-                        ch = Character.toLowerCase(ch);
-                        if (Character.isLetter(ch)) {
-                            name.append(ch);
-                        } else {
+                    // fall through
+                case STATE_START:
+                    if (!Character.isWhitespace(ch)){
+                        if (ch == '<'){
+                            state = STATE_AWAIT_XML_HEADER;
+                        }else{
                             i = -1;
                         }
                     }
-                } else if (name.length() > 0) {
-                    i = -1;
-                }
-                break;
-            case STATE_ATTR_VALUE:
-                if (valueEnd == 0) {
-                    if (ch == '"' || ch == '\'') {
-                        valueEnd = ch;
-                    } else {
-                        i = -1;
-                    }
-                } else {
-                    if (ch == '\\' && !escape) {
-                        escape = true;
-                        break;
-                    }
-                    if (ch == valueEnd && !escape) {
-                        valueEnd = 0;
-                        state = STATE_ATTR_NAME;
-                        header.put(name.toString(), value.toString());
-                        name.setLength(0);
-                        value.setLength(0);
-                    } else {
-                        escape = false;
-                        if (ch != '\n') {
-                            value.append(ch);
-                        } else {
+                    break;
+                case STATE_AWAIT_XML_HEADER:
+                    if (!Character.isWhitespace(ch)){
+                        name.append(Character.toLowerCase(ch));
+                        if (!XML_TOKEN.startsWith(name.substring(0))){
+                            i = -1;
+                        }
+                    }else{
+                        if (name.toString().equals(XML_TOKEN)){
+                            state = STATE_ATTR_NAME;
+                            name.setLength(0);
+                        }else{
                             i = -1;
                         }
                     }
-                }
-                break;
+                    break;
+                case STATE_ATTR_NAME:
+                    if (!Character.isWhitespace(ch)){
+                        if (ch == '='){
+                            state = STATE_ATTR_VALUE;
+                        }else{
+                            ch = Character.toLowerCase(ch);
+                            if (Character.isLetter(ch)){
+                                name.append(ch);
+                            }else{
+                                i = -1;
+                            }
+                        }
+                    }else if (name.length() > 0){
+                        i = -1;
+                    }
+                    break;
+                case STATE_ATTR_VALUE:
+                    if (valueEnd == 0){
+                        if (ch == '"' || ch == '\''){
+                            valueEnd = ch;
+                        }else{
+                            i = -1;
+                        }
+                    }else{
+                        if (ch == '\\' && !escape){
+                            escape = true;
+                            break;
+                        }
+                        if (ch == valueEnd && !escape){
+                            valueEnd = 0;
+                            state = STATE_ATTR_NAME;
+                            header.put(name.toString(), value.toString());
+                            name.setLength(0);
+                            value.setLength(0);
+                        }else{
+                            escape = false;
+                            if (ch != '\n'){
+                                value.append(ch);
+                            }else{
+                                i = -1;
+                            }
+                        }
+                    }
+                    break;
             }
         }
 
         byte[] pushbackData = out.toByteArray();
-        for (i = pushbackData.length; i-- > 0;) {
+        for (i = pushbackData.length; i-- > 0;){
             final byte b = pushbackData[i];
-            try {
+            try{
                 in[0].unread(b);
-            } catch (IOException ex) {
+            }catch (IOException ex){
                 in[0] = new PushbackInputStream(in[0], ++i);
             }
         }
@@ -183,7 +189,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see InputStreamReader#getEncoding()
      * @since 1.3
      */
-    public String getEncoding() {
+    public String getEncoding(){
         return reader.getEncoding();
     }
 
@@ -191,7 +197,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see InputStreamReader#getEncoding()
      * @since 1.3
      */
-    public double getVersion() {
+    public double getVersion(){
         return version;
     }
 
@@ -199,7 +205,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#mark(int)
      */
     @Override
-    public void mark(final int readAheadLimit) throws IOException {
+    public void mark(final int readAheadLimit) throws IOException{
         reader.mark(readAheadLimit);
     }
 
@@ -207,7 +213,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#markSupported()
      */
     @Override
-    public boolean markSupported() {
+    public boolean markSupported(){
         return reader.markSupported();
     }
 
@@ -215,7 +221,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#read()
      */
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         return reader.read();
     }
 
@@ -223,7 +229,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#read(char[], int, int)
      */
     @Override
-    public int read(final char[] cbuf, final int offset, final int length) throws IOException {
+    public int read(final char[] cbuf,final int offset,final int length) throws IOException{
         return reader.read(cbuf, offset, length);
     }
 
@@ -231,20 +237,20 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#read(char[])
      */
     @Override
-    public int read(final char[] cbuf) throws IOException {
+    public int read(final char[] cbuf) throws IOException{
         return reader.read(cbuf);
     }
 
-// TODO: This is JDK 1.5    
-//    public int read(final CharBuffer target) throws IOException {
-//        return reader.read(target);
-//    }
+    // TODO: This is JDK 1.5    
+    //    public int read(final CharBuffer target) throws IOException {
+    //        return reader.read(target);
+    //    }
 
     /**
      * @see java.io.Reader#ready()
      */
     @Override
-    public boolean ready() throws IOException {
+    public boolean ready() throws IOException{
         return reader.ready();
     }
 
@@ -252,7 +258,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#reset()
      */
     @Override
-    public void reset() throws IOException {
+    public void reset() throws IOException{
         reader.reset();
     }
 
@@ -260,7 +266,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#skip(long)
      */
     @Override
-    public long skip(final long n) throws IOException {
+    public long skip(final long n) throws IOException{
         return reader.skip(n);
     }
 
@@ -268,7 +274,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.io.Reader#close()
      */
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         reader.close();
     }
 
@@ -276,7 +282,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(final Object obj){
         return reader.equals(obj);
     }
 
@@ -284,7 +290,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return reader.hashCode();
     }
 
@@ -292,7 +298,7 @@ public final class XmlHeaderAwareReader extends Reader {
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
+    public String toString(){
         return reader.toString();
     }
 }

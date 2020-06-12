@@ -41,11 +41,13 @@ public class CustomJavaIdentifierTransformerTest{
         assertEquals("name1", customJavaIdentifierTransformer.transformToJavaIdentifier("name1"));
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void test(){
         new CustomJavaIdentifierTransformer(null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void test1(){
         new CustomJavaIdentifierTransformer(emptyMap());
@@ -67,6 +69,4 @@ public class CustomJavaIdentifierTransformerTest{
     public void testCustomJavaIdentifierTransformerTestBlank(){
         customJavaIdentifierTransformer.transformToJavaIdentifier(" ");
     }
-
-    //---------------------------------------------------------------
 }

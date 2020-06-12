@@ -28,17 +28,17 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  *
  * @author Joe Walnes
  */
-public class ColorConverter implements Converter {
+public class ColorConverter implements Converter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         // String comparison is used here because Color.class loads the class which in turns instantiates AWT,
         // which is nasty if you don't want it.
         return type != null && type.getName().equals("java.awt.Color");
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         Color color = (Color) source;
         write("red", color.getRed(), writer);
         write("green", color.getGreen(), writer);
@@ -47,20 +47,21 @@ public class ColorConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         Map elements = new HashMap();
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             reader.moveDown();
             elements.put(reader.getNodeName(), Integer.valueOf(reader.getValue()));
             reader.moveUp();
         }
-        return new Color(((Integer) elements.get("red")).intValue(),
-                ((Integer) elements.get("green")).intValue(),
-                ((Integer) elements.get("blue")).intValue(),
-                ((Integer) elements.get("alpha")).intValue());
+        return new Color(
+                        ((Integer) elements.get("red")).intValue(),
+                        ((Integer) elements.get("green")).intValue(),
+                        ((Integer) elements.get("blue")).intValue(),
+                        ((Integer) elements.get("alpha")).intValue());
     }
 
-    private void write(String fieldName, int value, HierarchicalStreamWriter writer) {
+    private void write(String fieldName,int value,HierarchicalStreamWriter writer){
         ExtendedHierarchicalStreamWriterHelper.startNode(writer, fieldName, int.class);
         writer.setValue(String.valueOf(value));
         writer.endNode();

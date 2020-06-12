@@ -20,16 +20,16 @@ import java.util.TreeMap;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public class ComparingPropertySorter implements PropertySorter {
+public class ComparingPropertySorter implements PropertySorter{
 
     private final Comparator comparator;
 
-    public ComparingPropertySorter(final Comparator propertyNameComparator) {
+    public ComparingPropertySorter(final Comparator propertyNameComparator){
         this.comparator = propertyNameComparator;
     }
 
     @Override
-    public Map sort(final Class type, final Map nameMap) {
+    public Map sort(final Class type,final Map nameMap){
         TreeMap map = new TreeMap(comparator);
         map.putAll(nameMap);
         return map;

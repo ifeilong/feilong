@@ -44,7 +44,7 @@ public class DefaultCsvWriteWriteDataWithBeanCsvConfigTest{
 
     @Test(expected = IllegalArgumentException.class)
     public void testDefaultCsvWriteTestNullData(){
-        csvWrite.write("1.cvs", null, (BeanCsvConfig) null);
+        csvWrite.write("1.cvs", null, (BeanCsvConfig<User>) null);
     }
 
     @Test(expected = IllegalArgumentException.class)

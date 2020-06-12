@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-
 /**
  * A NameCoder that encodes and decodes names based on a map.
  * <p>
@@ -27,26 +26,30 @@ import java.util.Map;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public class StaticNameCoder implements NameCoder {
+public class StaticNameCoder implements NameCoder{
 
-    private final Map java2Node;
-    private final Map java2Attribute;
+    private final Map     java2Node;
+
+    private final Map     java2Attribute;
 
     private transient Map node2Java;
+
     private transient Map attribute2Java;
 
     /**
      * Construct a StaticNameCoder.
      * 
-     * @param java2Node mapping of Java names to nodes
-     * @param java2Attribute mapping of Java names to attributes
+     * @param java2Node
+     *            mapping of Java names to nodes
+     * @param java2Attribute
+     *            mapping of Java names to attributes
      * @since 1.4
      */
-    public StaticNameCoder(Map java2Node, Map java2Attribute) {
+    public StaticNameCoder(Map java2Node, Map java2Attribute){
         this.java2Node = new HashMap(java2Node);
-        if (java2Node == java2Attribute || java2Attribute == null) {
+        if (java2Node == java2Attribute || java2Attribute == null){
             this.java2Attribute = this.java2Node;
-        } else {
+        }else{
             this.java2Attribute = new HashMap(java2Attribute);
         }
         readResolve();
@@ -56,8 +59,8 @@ public class StaticNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String decodeAttribute(String attributeName) {
-        String name = (String)attribute2Java.get(attributeName);
+    public String decodeAttribute(String attributeName){
+        String name = (String) attribute2Java.get(attributeName);
         return name == null ? attributeName : name;
     }
 
@@ -65,8 +68,8 @@ public class StaticNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String decodeNode(String nodeName) {
-        String name = (String)node2Java.get(nodeName);
+    public String decodeNode(String nodeName){
+        String name = (String) node2Java.get(nodeName);
         return name == null ? nodeName : name;
     }
 
@@ -74,8 +77,8 @@ public class StaticNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String encodeAttribute(String name) {
-        String friendlyName = (String)java2Attribute.get(name);
+    public String encodeAttribute(String name){
+        String friendlyName = (String) java2Attribute.get(name);
         return friendlyName == null ? name : friendlyName;
     }
 
@@ -83,26 +86,26 @@ public class StaticNameCoder implements NameCoder {
      * {@inheritDoc}
      */
     @Override
-    public String encodeNode(String name) {
-        String friendlyName = (String)java2Node.get(name);
+    public String encodeNode(String name){
+        String friendlyName = (String) java2Node.get(name);
         return friendlyName == null ? name : friendlyName;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         node2Java = invertMap(java2Node);
-        if (java2Node == java2Attribute) {
+        if (java2Node == java2Attribute){
             attribute2Java = node2Java;
-        } else {
+        }else{
             attribute2Java = invertMap(java2Attribute);
         }
         return this;
     }
 
-    private Map invertMap(Map map) {
+    private Map invertMap(Map map){
         Map inverseMap = new HashMap(map.size());
-        for (final Iterator iter = map.entrySet().iterator(); iter.hasNext();) {
-            final Map.Entry entry = (Map.Entry)iter.next();
-            inverseMap.put((String)entry.getValue(), (String)entry.getKey());
+        for (final Iterator iter = map.entrySet().iterator(); iter.hasNext();){
+            final Map.Entry entry = (Map.Entry) iter.next();
+            inverseMap.put((String) entry.getValue(), (String) entry.getKey());
         }
         return inverseMap;
     }

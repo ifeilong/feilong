@@ -24,15 +24,11 @@ import com.feilong.test.AbstractTest;
 
 public abstract class AbstractWriteTest extends AbstractTest{
 
-    protected static <T> void handle(String templateLocation,String sheetDefinitionLocation,Map<String, Object> data){
+    protected static void handle(String templateLocation,String sheetDefinitionLocation,Map<String, Object> data){
         handle(templateLocation, sheetDefinitionLocation, null, data);
     }
 
-    protected static <T> void handlePerSheet(
-                    String templateLocation,
-                    String sheetDefinitionLocation,
-                    String sheetName,
-                    Map<String, Object> data){
+    protected static void handlePerSheet(String templateLocation,String sheetDefinitionLocation,String sheetName,Map<String, Object> data){
         handle(templateLocation, sheetDefinitionLocation, toArray(sheetName), data);
     }
 

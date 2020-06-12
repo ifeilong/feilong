@@ -18,27 +18,31 @@ import java.util.Iterator;
  *
  * @since 1.4
  */
-public class ArrayIterator implements Iterator {
+public class ArrayIterator implements Iterator{
+
     private final Object array;
-    private int idx;
-    private int length;
-    public ArrayIterator(Object array) {
+
+    private int          idx;
+
+    private int          length;
+
+    public ArrayIterator(Object array){
         this.array = array;
         length = Array.getLength(array);
     }
 
     @Override
-    public boolean hasNext() {
+    public boolean hasNext(){
         return idx < length;
     }
 
     @Override
-    public Object next() {
+    public Object next(){
         return Array.get(array, idx++);
     }
 
     @Override
-    public void remove() {
-        throw new UnsupportedOperationException("Remove from array"); 
+    public void remove(){
+        throw new UnsupportedOperationException("Remove from array");
     }
 }

@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XStreamInclude
-{
+public @interface XStreamInclude{
+
     public Class<?>[] value();
 }

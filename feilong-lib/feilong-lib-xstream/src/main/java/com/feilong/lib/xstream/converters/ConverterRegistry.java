@@ -16,8 +16,8 @@ package com.feilong.lib.xstream.converters;
  * @author J&ouml;rg Schaible
  * @since 1.3
  */
-public interface ConverterRegistry {
+public interface ConverterRegistry{
 
-    void registerConverter(Converter converter, int priority);
+    void registerConverter(Converter converter,int priority);
 
 }

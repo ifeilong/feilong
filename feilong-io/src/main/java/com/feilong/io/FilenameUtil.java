@@ -25,10 +25,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.io.FilenameUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 
 /**
  * The Class FilenameUtil.
@@ -143,7 +143,7 @@ public final class FilenameUtil{
      *            文件名称
      * @return 获得文件的不带后缀名的名称
      * @see java.lang.String#substring(int, int)
-     * @see com.feilong.lib.io.FilenameUtils#getBaseName(String)
+     * @see "org.apache.commons.io.FilenameUtils#getBaseName(String)"
      */
     public static String getFilePreName(String fileName){
         return fileName.substring(0, fileName.lastIndexOf('.'));

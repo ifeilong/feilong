@@ -17,7 +17,7 @@ package com.feilong.lib.xstream.converters;
  * @author Joe Walnes
  * @see Converter
  */
-public interface ConverterLookup {
+public interface ConverterLookup{
 
     /**
      * Lookup a converter for a specific type.

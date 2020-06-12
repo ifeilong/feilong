@@ -26,51 +26,55 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author Matthew Sandoz
  * @author J&ouml;rg Schaible
  */
-public class JavaClassConverter extends AbstractSingleValueConverter {
+public class JavaClassConverter extends AbstractSingleValueConverter{
 
     private Mapper mapper;
 
     /**
      * Construct a JavaClassConverter.
-     * @param classLoaderReference the reference to the {@link ClassLoader} of the XStream instance
+     * 
+     * @param classLoaderReference
+     *            the reference to the {@link ClassLoader} of the XStream instance
      * @since 1.4.5
      */
-    public JavaClassConverter(ClassLoaderReference classLoaderReference) {
+    public JavaClassConverter(ClassLoaderReference classLoaderReference){
         this(new DefaultMapper(classLoaderReference));
     }
 
     /**
      * @deprecated As of 1.4.5 use {@link #JavaClassConverter(ClassLoaderReference)}
      */
-    public JavaClassConverter(ClassLoader classLoader) {
+    public JavaClassConverter(ClassLoader classLoader){
         this(new ClassLoaderReference(classLoader));
     }
 
     /**
      * Construct a JavaClassConverter that uses a provided mapper. Depending on the mapper
      * chain it will not only be used to load classes, but also to support type aliases.
-     * @param mapper to use
+     * 
+     * @param mapper
+     *            to use
      * @since 1.4.5
      */
-    protected JavaClassConverter(Mapper mapper) {
+    protected JavaClassConverter(Mapper mapper){
         this.mapper = mapper;
     }
 
     @Override
-    public boolean canConvert(Class clazz) {
+    public boolean canConvert(Class clazz){
         return Class.class.equals(clazz); // :)
     }
 
     @Override
-    public String toString(Object obj) {
+    public String toString(Object obj){
         return mapper.serializedClass(((Class) obj));
     }
 
     @Override
-    public Object fromString(String str) {
-        try {
+    public Object fromString(String str){
+        try{
             return mapper.realClass(str);
-        } catch (CannotResolveClassException e) {
+        }catch (CannotResolveClassException e){
             throw new ConversionException("Cannot load java class " + str, e.getCause());
         }
     }

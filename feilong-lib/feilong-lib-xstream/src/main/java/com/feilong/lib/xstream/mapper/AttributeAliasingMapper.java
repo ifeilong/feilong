@@ -11,8 +11,6 @@
  */
 package com.feilong.lib.xstream.mapper;
 
-
-
 /**
  * Mapper that allows aliasing of attribute names.
  * 
@@ -20,21 +18,21 @@ package com.feilong.lib.xstream.mapper;
  * @author Guilherme Silveira
  * @since 1.2
  */
-public class AttributeAliasingMapper extends AbstractAttributeAliasingMapper {
+public class AttributeAliasingMapper extends AbstractAttributeAliasingMapper{
 
-    public AttributeAliasingMapper(Mapper wrapped) {
+    public AttributeAliasingMapper(Mapper wrapped){
         super(wrapped);
     }
 
     @Override
-    public String aliasForAttribute(String attribute) {
-        String alias = (String)nameToAlias.get(attribute);
+    public String aliasForAttribute(String attribute){
+        String alias = (String) nameToAlias.get(attribute);
         return alias == null ? super.aliasForAttribute(attribute) : alias;
     }
 
     @Override
-    public String attributeForAlias(String alias) {
-        String name = (String)aliasToName.get(alias);
+    public String attributeForAlias(String alias){
+        String name = (String) aliasToName.get(alias);
         return name == null ? super.attributeForAlias(alias) : name;
     }
 }

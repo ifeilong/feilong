@@ -31,53 +31,55 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class EncodedByteArrayConverter implements Converter, SingleValueConverter {
+public class EncodedByteArrayConverter implements Converter,SingleValueConverter{
 
     private static final ByteConverter byteConverter = new ByteConverter();
-    private final StringCodec codec;
+
+    private final StringCodec          codec;
 
     /**
      * Constructs an EncodedByteArrayConverter. Initializes the converter with a Base64 codec.
      */
-    public EncodedByteArrayConverter() {
+    public EncodedByteArrayConverter(){
         this(JVM.getBase64Codec());
     }
 
     /**
      * Constructs an EncodedByteArrayConverter with a provided string codec.
      *
-     * @param stringCodec the codec to encode and decode the data as string
+     * @param stringCodec
+     *            the codec to encode and decode the data as string
      * @since 1.4.11
      */
-    public EncodedByteArrayConverter(final StringCodec stringCodec) {
+    public EncodedByteArrayConverter(final StringCodec stringCodec){
         codec = stringCodec;
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type != null && type.isArray() && type.getComponentType().equals(byte.class);
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         writer.setValue(toString(source));
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         String data = reader.getValue(); // needs to be called before hasMoreChildren.
-        if (!reader.hasMoreChildren()) {
+        if (!reader.hasMoreChildren()){
             return fromString(data);
-        } else {
+        }else{
             // backwards compatibility ... try to unmarshal byte arrays that haven't been encoded
             return unmarshalIndividualByteElements(reader, context);
         }
     }
 
-    private Object unmarshalIndividualByteElements(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    private Object unmarshalIndividualByteElements(HierarchicalStreamReader reader,UnmarshallingContext context){
         List bytes = new ArrayList(); // have to create a temporary list because don't know the size of the array
         boolean firstIteration = true;
-        while (firstIteration || reader.hasMoreChildren()) { // hangover from previous hasMoreChildren
+        while (firstIteration || reader.hasMoreChildren()){ // hangover from previous hasMoreChildren
             reader.moveDown();
             bytes.add(byteConverter.fromString(reader.getValue()));
             reader.moveUp();
@@ -86,7 +88,7 @@ public class EncodedByteArrayConverter implements Converter, SingleValueConverte
         // copy into real array
         byte[] result = new byte[bytes.size()];
         int i = 0;
-        for (Iterator iterator = bytes.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = bytes.iterator(); iterator.hasNext();){
             Byte b = (Byte) iterator.next();
             result[i] = b.byteValue();
             i++;
@@ -95,12 +97,12 @@ public class EncodedByteArrayConverter implements Converter, SingleValueConverte
     }
 
     @Override
-    public String toString(final Object obj) {
-        return codec.encode((byte[])obj);
+    public String toString(final Object obj){
+        return codec.encode((byte[]) obj);
     }
 
     @Override
-    public Object fromString(final String str) {
+    public Object fromString(final String str){
         return codec.decode(str);
     }
 }

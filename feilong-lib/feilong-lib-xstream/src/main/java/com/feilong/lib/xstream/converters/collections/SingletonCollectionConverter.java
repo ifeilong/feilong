@@ -16,7 +16,6 @@ import com.feilong.lib.xstream.converters.UnmarshallingContext;
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * Converts singleton collections (list and set) to XML, specifying a nested element for the
  * item.
@@ -27,31 +26,31 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author J&ouml;rg Schaible
  * @since 1.4.2
  */
-public class SingletonCollectionConverter extends CollectionConverter {
+public class SingletonCollectionConverter extends CollectionConverter{
 
     private static final Class LIST = Collections.singletonList(Boolean.TRUE).getClass();
-    private static final Class SET = Collections.singleton(Boolean.TRUE).getClass();
+
+    private static final Class SET  = Collections.singleton(Boolean.TRUE).getClass();
 
     /**
      * Construct a SingletonCollectionConverter.
      * 
-     * @param mapper the mapper
+     * @param mapper
+     *            the mapper
      * @since 1.4.2
      */
-    public SingletonCollectionConverter(Mapper mapper) {
+    public SingletonCollectionConverter(Mapper mapper){
         super(mapper);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return LIST == type || SET == type;
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         final Object item = readCompleteItem(reader, context, null);
-        return context.getRequiredType() == LIST
-            ? (Object)Collections.singletonList(item)
-            : (Object)Collections.singleton(item);
+        return context.getRequiredType() == LIST ? (Object) Collections.singletonList(item) : (Object) Collections.singleton(item);
     }
 }

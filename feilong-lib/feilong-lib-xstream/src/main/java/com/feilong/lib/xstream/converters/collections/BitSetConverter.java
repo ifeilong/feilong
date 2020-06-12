@@ -26,23 +26,23 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  *
  * @author Joe Walnes
  */
-public class BitSetConverter implements Converter {
+public class BitSetConverter implements Converter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == BitSet.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         BitSet bitSet = (BitSet) source;
         StringBuffer buffer = new StringBuffer();
         boolean seenFirst = false;
-        for (int i = 0; i < bitSet.length(); i++) {
-            if (bitSet.get(i)) {
-                if (seenFirst) {
+        for (int i = 0; i < bitSet.length(); i++){
+            if (bitSet.get(i)){
+                if (seenFirst){
                     buffer.append(',');
-                } else {
+                }else{
                     seenFirst = true;
                 }
                 buffer.append(i);
@@ -52,10 +52,10 @@ public class BitSetConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         BitSet result = new BitSet();
         StringTokenizer tokenizer = new StringTokenizer(reader.getValue(), ",", false);
-        while (tokenizer.hasMoreTokens()) {
+        while (tokenizer.hasMoreTokens()){
             int index = Integer.parseInt(tokenizer.nextToken());
             result.set(index);
         }

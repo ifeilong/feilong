@@ -19,18 +19,18 @@ import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
  * Converts a java.util.Currency to String. Despite the name of this class, it has nothing to do with converting
  * currencies between exchange rates! It makes sense in the context of XStream.
  *
- * @author Jose A. Illescas 
+ * @author Jose A. Illescas
  * @author Joe Walnes
  */
-public class CurrencyConverter extends AbstractSingleValueConverter {
+public class CurrencyConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Currency.class;
     }
 
     @Override
-    public Object fromString(String str) {
+    public Object fromString(String str){
         return Currency.getInstance(str);
     }
 

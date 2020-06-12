@@ -21,18 +21,18 @@ import com.feilong.lib.xstream.converters.ConversionException;
  *
  * @author J. Matthew Pryor
  */
-public class URLConverter extends AbstractSingleValueConverter {
+public class URLConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == URL.class;
     }
 
     @Override
-    public Object fromString(String str) {
-        try {
+    public Object fromString(String str){
+        try{
             return new URL(str);
-        } catch (MalformedURLException e) {
+        }catch (MalformedURLException e){
             throw new ConversionException(e);
         }
     }

@@ -17,7 +17,6 @@ import java.util.Map;
 
 import com.feilong.lib.xstream.InitializationException;
 
-
 /**
  * Mapper that resolves default implementations of classes. For example,
  * mapper.serializedClass(ArrayList.class) will return java.util.List. Calling
@@ -25,17 +24,18 @@ import com.feilong.lib.xstream.InitializationException;
  * 
  * @author Joe Walnes
  */
-public class DefaultImplementationsMapper extends MapperWrapper {
+public class DefaultImplementationsMapper extends MapperWrapper{
 
-    private final Map typeToImpl = new HashMap();
+    private final Map     typeToImpl = new HashMap();
+
     private transient Map implToType = new HashMap();
 
-    public DefaultImplementationsMapper(Mapper wrapped) {
+    public DefaultImplementationsMapper(Mapper wrapped){
         super(wrapped);
         addDefaults();
     }
 
-    protected void addDefaults() {
+    protected void addDefaults(){
         // null handling
         addDefaultImplementation(null, Mapper.Null.class);
         // register primitive types
@@ -49,34 +49,32 @@ public class DefaultImplementationsMapper extends MapperWrapper {
         addDefaultImplementation(Long.class, long.class);
     }
 
-    public void addDefaultImplementation(Class defaultImplementation, Class ofType) {
-        if (defaultImplementation != null && defaultImplementation.isInterface()) {
-            throw new InitializationException(
-                "Default implementation is not a concrete class: "
-                    + defaultImplementation.getName());
+    public void addDefaultImplementation(Class defaultImplementation,Class ofType){
+        if (defaultImplementation != null && defaultImplementation.isInterface()){
+            throw new InitializationException("Default implementation is not a concrete class: " + defaultImplementation.getName());
         }
         typeToImpl.put(ofType, defaultImplementation);
         implToType.put(defaultImplementation, ofType);
     }
 
     @Override
-    public String serializedClass(Class type) {
-        Class baseType = (Class)implToType.get(type);
+    public String serializedClass(Class type){
+        Class baseType = (Class) implToType.get(type);
         return baseType == null ? super.serializedClass(type) : super.serializedClass(baseType);
     }
 
     @Override
-    public Class defaultImplementationOf(Class type) {
-        if (typeToImpl.containsKey(type)) {
-            return (Class)typeToImpl.get(type);
-        } else {
+    public Class defaultImplementationOf(Class type){
+        if (typeToImpl.containsKey(type)){
+            return (Class) typeToImpl.get(type);
+        }else{
             return super.defaultImplementationOf(type);
         }
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         implToType = new HashMap();
-        for (final Iterator iter = typeToImpl.keySet().iterator(); iter.hasNext();) {
+        for (final Iterator iter = typeToImpl.keySet().iterator(); iter.hasNext();){
             final Object type = iter.next();
             implToType.put(typeToImpl.get(type), type);
         }

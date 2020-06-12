@@ -17,20 +17,20 @@ package com.feilong.lib.xstream.converters.basic;
  *
  * @author Joe Walnes
  */
-public class ShortConverter extends AbstractSingleValueConverter {
+public class ShortConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == short.class || type == Short.class;
     }
 
     @Override
-    public Object fromString(String str) {
-    	int value = Integer.decode(str).intValue();
-    	if(value < Short.MIN_VALUE || value > 0xFFFF) {
-    		throw new NumberFormatException("For input string: \"" + str + '"');
-    	}
-        return new Short((short)value);
+    public Object fromString(String str){
+        int value = Integer.decode(str).intValue();
+        if (value < Short.MIN_VALUE || value > 0xFFFF){
+            throw new NumberFormatException("For input string: \"" + str + '"');
+        }
+        return new Short((short) value);
     }
 
 }

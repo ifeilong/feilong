@@ -18,11 +18,13 @@ package com.feilong.lib.xstream.converters;
  *
  * @since 1.4
  */
-public interface ErrorReporter {
+public interface ErrorReporter{
+
     /**
      * Append context information to an {@link ErrorWriter}.
      * 
-     * @param errorWriter the error writer
+     * @param errorWriter
+     *            the error writer
      * @since 1.4
      */
     void appendErrors(ErrorWriter errorWriter);

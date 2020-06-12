@@ -19,17 +19,23 @@ import static java.util.Collections.emptyList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.store.member.UserInfo;
 
-/**
- * The Class FieldUtilGetAllFieldListTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class GetAllFieldListTest{
+
+    @Test
+    public void testGetAllFieldListExcludeFieldNamesAll22(){
+        List<Field> allFieldList = FieldUtil.getAllFieldList(UserInfo.class);
+        for (Field field : allFieldList){
+            assertEquals("age", field.getName());
+        }
+    }
 
     /**
      * Test get all field list exclude field names all.
@@ -67,7 +73,7 @@ public class GetAllFieldListTest{
     /**
      * Test get all field list no filed.
      */
-    
+
     @Test
     public void testGetAllFieldListNoFiled(){
         assertEquals(emptyList(), FieldUtil.getAllFieldList(GetAllFieldListTest.class));

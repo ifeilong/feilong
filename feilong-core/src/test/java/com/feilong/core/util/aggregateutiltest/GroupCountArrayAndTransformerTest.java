@@ -19,10 +19,10 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 import java.util.Map;
@@ -70,6 +70,7 @@ public class GroupCountArrayAndTransformerTest{
         };
 
         //---------------------------------------------------------------
+        @SuppressWarnings("unchecked")
         Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap = toMap("age", (Transformer<Object, Object>) value);
 
         Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap);

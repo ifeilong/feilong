@@ -37,11 +37,13 @@ package com.feilong.lib.xstream.io.naming;
  * @author J&ouml;rg Schaible
  * @since 1.4
  */
-public interface NameCoder {
+public interface NameCoder{
+
     /**
      * Encode an object name for a node in the target format.
      * 
-     * @param name the name of the object data
+     * @param name
+     *            the name of the object data
      * @return the node name in the target format
      * @since 1.4
      */
@@ -50,7 +52,8 @@ public interface NameCoder {
     /**
      * Encode a meta-data name for an attribute in the target format.
      * 
-     * @param name the name of the meta-data
+     * @param name
+     *            the name of the meta-data
      * @return the attribute name in the target format
      * @since 1.4
      */
@@ -59,7 +62,8 @@ public interface NameCoder {
     /**
      * Decode a node name to an object name.
      * 
-     * @param nodeName the name of the node
+     * @param nodeName
+     *            the name of the node
      * @return the name of the object
      * @since 1.4
      */
@@ -68,7 +72,8 @@ public interface NameCoder {
     /**
      * Decode an attribute name to an object name.
      * 
-     * @param attributeName the name of the attribute
+     * @param attributeName
+     *            the name of the attribute
      * @return the name of the meta-data
      * @since 1.4
      */

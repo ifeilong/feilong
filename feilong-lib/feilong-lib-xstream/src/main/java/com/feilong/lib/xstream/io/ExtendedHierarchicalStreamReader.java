@@ -15,7 +15,7 @@ package com.feilong.lib.xstream.io;
  * @since 1.4.2
  * @deprecated As of 1.4.11, this interface will be merged into parent with version 1.5.0.
  */
-public interface ExtendedHierarchicalStreamReader extends HierarchicalStreamReader {
+public interface ExtendedHierarchicalStreamReader extends HierarchicalStreamReader{
 
     /**
      * Peek the name of the next child. In situation where {@link #hasMoreChildren()} returns

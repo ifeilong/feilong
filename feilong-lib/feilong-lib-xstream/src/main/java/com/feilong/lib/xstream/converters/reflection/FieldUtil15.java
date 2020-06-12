@@ -13,10 +13,10 @@ import java.lang.reflect.Field;
 /**
  * @author J&ouml;rg Schaible
  */
-class FieldUtil15 implements FieldDictionary.FieldUtil {
+class FieldUtil15 implements FieldDictionary.FieldUtil{
 
     @Override
-    public boolean isSynthetic(final Field field) {
+    public boolean isSynthetic(final Field field){
         return field.isSynthetic();
     }
 }

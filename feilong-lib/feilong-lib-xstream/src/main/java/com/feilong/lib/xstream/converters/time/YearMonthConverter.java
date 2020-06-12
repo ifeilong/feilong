@@ -16,25 +16,24 @@ import java.time.format.DateTimeParseException;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link YearMonth} instance to string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class YearMonthConverter extends AbstractSingleValueConverter {
+public class YearMonthConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return YearMonth.class == type;
     }
 
     @Override
-    public YearMonth fromString(final String str) {
-        try {
+    public YearMonth fromString(final String str){
+        try{
             return YearMonth.parse(str);
-        } catch (final DateTimeParseException ex) {
+        }catch (final DateTimeParseException ex){
             final ConversionException exception = new ConversionException("Cannot parse value as year month", ex);
             exception.add("value", str);
             throw exception;

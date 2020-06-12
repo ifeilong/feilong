@@ -24,12 +24,15 @@ import java.util.Map;
  * @author James Strachan
  * @version $Revision$
  */
-public class QNameMap {
+public class QNameMap{
 
     // lets make the mapping a no-op unless we specify some mapping
-    private Map qnameToJava;
-    private Map javaToQName;
-    private String defaultPrefix = "";
+    private Map    qnameToJava;
+
+    private Map    javaToQName;
+
+    private String defaultPrefix    = "";
+
     private String defaultNamespace = "";
 
     /**
@@ -37,10 +40,10 @@ public class QNameMap {
      * If no explicit mapping has been made then the localPart of the QName is used
      * which is the normal default in XStream.
      */
-    public String getJavaClassName(QName qname) {
-        if (qnameToJava != null) {
+    public String getJavaClassName(QName qname){
+        if (qnameToJava != null){
             String answer = (String) qnameToJava.get(qname);
-            if (answer != null) {
+            if (answer != null){
                 return answer;
             }
         }
@@ -52,10 +55,10 @@ public class QNameMap {
      * If no explicit mapping has been made then the localPart of the QName is used
      * which is the normal default in XStream.
      */
-    public QName getQName(String javaClassName) {
-        if (javaToQName != null) {
+    public QName getQName(String javaClassName){
+        if (javaToQName != null){
             QName answer = (QName) javaToQName.get(javaClassName);
-            if (answer != null) {
+            if (answer != null){
                 return answer;
             }
         }
@@ -65,11 +68,11 @@ public class QNameMap {
     /**
      * Registers the mapping of the Java class name to the QName
      */
-    public synchronized void registerMapping(QName qname, String javaClassName) {
-        if (javaToQName == null) {
+    public synchronized void registerMapping(QName qname,String javaClassName){
+        if (javaToQName == null){
             javaToQName = Collections.synchronizedMap(new HashMap());
         }
-        if (qnameToJava == null) {
+        if (qnameToJava == null){
             qnameToJava = Collections.synchronizedMap(new HashMap());
         }
         javaToQName.put(javaClassName, qname);
@@ -79,23 +82,23 @@ public class QNameMap {
     /**
      * Registers the mapping of the type to the QName
      */
-    public synchronized void registerMapping(QName qname, Class type) {
+    public synchronized void registerMapping(QName qname,Class type){
         registerMapping(qname, type.getName());
     }
 
-    public String getDefaultNamespace() {
+    public String getDefaultNamespace(){
         return defaultNamespace;
     }
 
-    public void setDefaultNamespace(String defaultNamespace) {
+    public void setDefaultNamespace(String defaultNamespace){
         this.defaultNamespace = defaultNamespace;
     }
 
-    public String getDefaultPrefix() {
+    public String getDefaultPrefix(){
         return defaultPrefix;
     }
 
-    public void setDefaultPrefix(String defaultPrefix) {
+    public void setDefaultPrefix(String defaultPrefix){
         this.defaultPrefix = defaultPrefix;
     }
 }

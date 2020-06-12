@@ -15,7 +15,6 @@ import com.feilong.lib.xstream.security.ForbiddenClassException;
 import com.feilong.lib.xstream.security.NoTypePermission;
 import com.feilong.lib.xstream.security.TypePermission;
 
-
 /**
  * A Mapper implementation injecting a security layer based on permission rules for any type required in the
  * unmarshalling process.
@@ -23,32 +22,35 @@ import com.feilong.lib.xstream.security.TypePermission;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class SecurityMapper extends MapperWrapper {
+public class SecurityMapper extends MapperWrapper{
 
     private final List permissions;
 
     /**
      * Construct a SecurityMapper.
      * 
-     * @param wrapped the mapper chain
+     * @param wrapped
+     *            the mapper chain
      * @since 1.4.7
      */
-    public SecurityMapper(final Mapper wrapped) {
-        this(wrapped, (TypePermission[])null);
+    public SecurityMapper(final Mapper wrapped){
+        this(wrapped, (TypePermission[]) null);
     }
 
     /**
      * Construct a SecurityMapper.
      * 
-     * @param wrapped the mapper chain
-     * @param permissions the predefined permissions
+     * @param wrapped
+     *            the mapper chain
+     * @param permissions
+     *            the predefined permissions
      * @since 1.4.7
      */
-    public SecurityMapper(final Mapper wrapped, final TypePermission[] permissions) {
+    public SecurityMapper(final Mapper wrapped, final TypePermission[] permissions){
         super(wrapped);
         this.permissions = permissions == null //
-            ? new ArrayList()
-            : new ArrayList(Arrays.asList(permissions));
+                        ? new ArrayList()
+                        : new ArrayList(Arrays.asList(permissions));
     }
 
     /**
@@ -58,20 +60,21 @@ public class SecurityMapper extends MapperWrapper {
      * {@link AnyTypePermission} will implicitly wipe any existing permission.
      * </p>
      * 
-     * @param permission the permission to add.
+     * @param permission
+     *            the permission to add.
      * @since 1.4.7
      */
-    public void addPermission(final TypePermission permission) {
+    public void addPermission(final TypePermission permission){
         if (permission.equals(NoTypePermission.NONE) || permission.equals(AnyTypePermission.ANY))
             permissions.clear();
         permissions.add(0, permission);
     }
 
     @Override
-    public Class realClass(final String elementName) {
+    public Class realClass(final String elementName){
         final Class type = super.realClass(elementName);
-        for (int i = 0; i < permissions.size(); ++i) {
-            final TypePermission permission = (TypePermission)permissions.get(i);
+        for (int i = 0; i < permissions.size(); ++i){
+            final TypePermission permission = (TypePermission) permissions.get(i);
             if (permission.allows(type))
                 return type;
         }

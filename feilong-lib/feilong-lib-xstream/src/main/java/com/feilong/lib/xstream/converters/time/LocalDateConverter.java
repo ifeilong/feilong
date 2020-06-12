@@ -16,25 +16,24 @@ import java.time.format.DateTimeParseException;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link java.time.LocalDate} to a string.
  *
  * @author Matej Cimbora
  * @since 1.4.10
  */
-public class LocalDateConverter extends AbstractSingleValueConverter {
+public class LocalDateConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return LocalDate.class == type;
     }
 
     @Override
-    public Object fromString(final String str) {
-        try {
+    public Object fromString(final String str){
+        try{
             return LocalDate.parse(str);
-        } catch (final DateTimeParseException e) {
+        }catch (final DateTimeParseException e){
             final ConversionException exception = new ConversionException("Cannot parse value as local date", e);
             exception.add("value", str);
             throw exception;

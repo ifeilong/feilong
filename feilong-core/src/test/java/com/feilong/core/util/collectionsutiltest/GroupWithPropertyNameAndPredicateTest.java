@@ -15,16 +15,17 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +39,8 @@ import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class CollectionsUtilGroupWithPredicateTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class GroupWithPropertyNameAndPredicateTest{
 
-    /**
-     * Test group2.
-     */
     @Test
     public void testGroup2(){
         User zhangfei28 = new User("张飞", 28);
@@ -65,11 +56,13 @@ public class GroupWithPropertyNameAndPredicateTest{
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
         Map<String, List<User>> map = CollectionsUtil.group(list, "name", comparatorPredicate);
 
-        assertThat(map, allOf(//
-                        hasKey("张飞"),
-                        hasKey("刘备"),
-                        hasEntry(is("张飞"), hasItem(zhangfei28)),
-                        hasEntry(is("刘备"), hasItems(liubei32, liubei30))));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasKey("张飞"),
+                                        hasKey("刘备"),
+                                        hasEntry(is("张飞"), hasItem(zhangfei28)),
+                                        hasEntry(is("刘备"), hasItems(liubei32, liubei30))));
         assertSame(2, map.size());
     }
 
@@ -86,9 +79,11 @@ public class GroupWithPropertyNameAndPredicateTest{
         Map<String, List<User>> map = CollectionsUtil.group(list, "name", null);
 
         assertEquals(2, map.size());
-        assertThat(map, allOf(//
-                        hasEntry("张飞", toList(zhangfei28)),
-                        hasEntry("刘备", toList(liubei32, liubei30))));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("张飞", toList(zhangfei28)),
+                                        hasEntry("刘备", toList(liubei32, liubei30))));
     }
 
     /**

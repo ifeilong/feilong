@@ -12,7 +12,6 @@ import java.lang.reflect.Modifier;
 
 import com.feilong.lib.xstream.core.util.Types;
 
-
 /**
  * Mapper to map serializable lambda types to the name of their functional interface and non-serializable ones to
  * Mapper.Null.
@@ -20,38 +19,39 @@ import com.feilong.lib.xstream.core.util.Types;
  * @author J&ouml;rg Schaible
  * @since 1.4.8
  */
-public class LambdaMapper extends MapperWrapper {
+public class LambdaMapper extends MapperWrapper{
 
     /**
      * Constructs a LambdaMapper.
      *
-     * @param wrapped mapper
+     * @param wrapped
+     *            mapper
      * @since 1.4.8
      */
-    public LambdaMapper(final Mapper wrapped) {
+    public LambdaMapper(final Mapper wrapped){
         super(wrapped);
     }
 
     @Override
-    public String serializedClass(final Class type) {
+    public String serializedClass(final Class type){
         Class<?> replacement = null;
-        if (Types.isLambdaType(type)) {
-            if (Serializable.class.isAssignableFrom(type)) {
+        if (Types.isLambdaType(type)){
+            if (Serializable.class.isAssignableFrom(type)){
                 final Class<?>[] interfaces = type.getInterfaces();
-                if (interfaces.length > 1) {
-                    for (int i = 0; replacement == null && i < interfaces.length; i++) {
+                if (interfaces.length > 1){
+                    for (int i = 0; replacement == null && i < interfaces.length; i++){
                         final Class<?> iface = interfaces[i];
-                        for (final Method method : iface.getMethods()) {
-                            if (!method.isDefault() && !Modifier.isStatic(method.getModifiers())) {
+                        for (final Method method : iface.getMethods()){
+                            if (!method.isDefault() && !Modifier.isStatic(method.getModifiers())){
                                 replacement = iface;
                                 break;
                             }
                         }
                     }
-                } else {
+                }else{
                     replacement = interfaces[0];
                 }
-            } else {
+            }else{
                 replacement = Null.class;
             }
         }

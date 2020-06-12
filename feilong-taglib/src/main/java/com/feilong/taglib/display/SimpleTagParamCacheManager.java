@@ -30,7 +30,7 @@ import com.feilong.taglib.SimpleTagStringCacheManager;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see "com.google.common.cache.Cache"
- * @see org.apache.commons.collections4.map.LRUMap
+ * @see "org.apache.commons.collections4.map.LRUMap"
  * @since 1.5.4
  * @deprecated pls use {@link SimpleTagStringCacheManager}
  */
@@ -105,6 +105,7 @@ public final class SimpleTagParamCacheManager{
      *            the pager params
      * @return the content from cache
      */
+    @SuppressWarnings("unchecked")
     private static <V> V getContentFromCache(CacheParam cacheParam){
         if (!CACHE_ENABLE){
             LOGGER.info("the cache status is disable!");

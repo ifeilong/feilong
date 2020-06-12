@@ -22,6 +22,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XStreamConverters {
+public @interface XStreamConverters{
+
     XStreamConverter[] value();
 }

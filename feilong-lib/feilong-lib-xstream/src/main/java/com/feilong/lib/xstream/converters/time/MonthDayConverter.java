@@ -16,25 +16,24 @@ import java.time.format.DateTimeParseException;
 import com.feilong.lib.xstream.converters.ConversionException;
 import com.feilong.lib.xstream.converters.basic.AbstractSingleValueConverter;
 
-
 /**
  * Converts a {@link MonthDay} instance to string.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class MonthDayConverter extends AbstractSingleValueConverter {
+public class MonthDayConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type) {
+    public boolean canConvert(@SuppressWarnings("rawtypes") final Class type){
         return MonthDay.class == type;
     }
 
     @Override
-    public MonthDay fromString(final String str) {
-        try {
+    public MonthDay fromString(final String str){
+        try{
             return MonthDay.parse(str);
-        } catch (final DateTimeParseException ex) {
+        }catch (final DateTimeParseException ex){
             final ConversionException exception = new ConversionException("Cannot parse value as month day", ex);
             exception.add("value", str);
             throw exception;

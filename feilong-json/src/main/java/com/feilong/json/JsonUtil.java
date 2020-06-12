@@ -394,7 +394,7 @@ public final class JsonUtil{
      * user.setUserAddresses(toArray(userAddress1, userAddress2));
      * user.setUserAddresseList(toList(userAddress1, userAddress2));
      * 
-     * LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
+     * LOGGER.debug(JsonUtil.format(USER, "name", "loves", "attrMap", "userInfo", "userAddresses"));
      * 
      * </pre>
      * 
@@ -423,8 +423,9 @@ public final class JsonUtil{
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
+     * @since 3.0.5 change param type {@code String[]excludes} to {@code String...excludes}
      */
-    public static String format(Object obj,String[] excludes){
+    public static String format(Object obj,String...excludes){
         return format(obj, excludes, 4, 4);
     }
 

@@ -19,10 +19,10 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 import java.util.Map;
@@ -37,10 +37,6 @@ import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
 
-/**
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class GroupCountArrayAndTransformerPredicateTest{
 
     private final Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
@@ -54,7 +50,6 @@ public class GroupCountArrayAndTransformerPredicateTest{
                         new User("刘备", 40),
                         new User("赵云", 51),
                         new User("赵云", 50));
-
         Transformer<?, ?> value = new Transformer<Integer, String>(){
 
             @Override
@@ -71,14 +66,15 @@ public class GroupCountArrayAndTransformerPredicateTest{
         };
 
         //---------------------------------------------------------------
+        @SuppressWarnings("unchecked")
         Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap = toMap("age", (Transformer<Object, Object>) value);
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
-
         //---------------------------------------------------------------
-
-        Map<String, Map<Object, Integer>> map = AggregateUtil
-                        .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
+        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(
+                        list,
+                        toArray("name", "age"),
+                        propertyValueAndTransformerMap,
+                        BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS));
 
         assertThat(map.get("name"), allOf(hasEntry((Object) "刘备", 2), hasEntry((Object) "赵云", 2)));
         assertThat(map.get("age"), allOf(hasEntry((Object) ">=50", 2), hasEntry((Object) ">=30&&<50", 2)));

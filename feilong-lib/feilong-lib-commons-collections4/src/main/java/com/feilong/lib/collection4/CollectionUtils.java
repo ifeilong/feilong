@@ -1280,29 +1280,6 @@ public class CollectionUtils{
     }
 
     /**
-     * Returns the <code>index</code>-th value in the <code>iterable</code>'s {@link Iterator}, throwing
-     * <code>IndexOutOfBoundsException</code> if there is no such element.
-     * <p>
-     * If the {@link Iterable} is a {@link List}, then it will use {@link List#get(int)}.
-     * </p>
-     *
-     * @param iterable
-     *            the {@link Iterable} to get a value from
-     * @param index
-     *            the index to get
-     * @param <T>
-     *            the type of object in the {@link Iterable}.
-     * @return the object at the specified index
-     * @throws IndexOutOfBoundsException
-     *             if the index is invalid
-     * @deprecated since 4.1, use {@code IterableUtils.get(Iterable, int)} instead
-     */
-    @Deprecated
-    public static <T> T get(final Iterable<T> iterable,final int index){
-        return IterableUtils.get(iterable, index);
-    }
-
-    /**
      * Returns the <code>index</code>-th value in <code>object</code>, throwing
      * <code>IndexOutOfBoundsException</code> if there is no such element or
      * <code>IllegalArgumentException</code> if <code>object</code> is not an
@@ -1386,7 +1363,7 @@ public class CollectionUtils{
      */
     public static <K, V> Map.Entry<K, V> get(final Map<K, V> map,final int index){
         checkIndexBounds(index);
-        return get(map.entrySet(), index);
+        return IterableUtils.get(map.entrySet(), index);
     }
 
     /**

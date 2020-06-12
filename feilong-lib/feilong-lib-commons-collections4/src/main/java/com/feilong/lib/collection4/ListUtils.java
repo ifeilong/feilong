@@ -374,29 +374,6 @@ public class ListUtils{
         return -1;
     }
 
-    /**
-     * A simple wrapper to use a CharSequence as List.
-     */
-    private static final class CharSequenceAsList extends AbstractList<Character>{
-
-        private final CharSequence sequence;
-
-        public CharSequenceAsList(final CharSequence sequence){
-            this.sequence = sequence;
-        }
-
-        @Override
-        public Character get(final int index){
-            return Character.valueOf(sequence.charAt(index));
-        }
-
-        @Override
-        public int size(){
-            return sequence.length();
-        }
-
-    }
-
     //-----------------------------------------------------------------------
     /**
      * Returns consecutive {@link List#subList(int, int) sublists} of a

@@ -10,54 +10,54 @@
  */
 package com.feilong.lib.xstream.core.util;
 
-public final class FastField {
+public final class FastField{
+
     private final String name;
+
     private final String declaringClass;
 
-    public FastField(String definedIn, String name) {
+    public FastField(String definedIn, String name){
         this.name = name;
         this.declaringClass = definedIn;
     }
 
-    public FastField(Class definedIn, String name) {
+    public FastField(Class definedIn, String name){
         this(definedIn == null ? null : definedIn.getName(), name);
     }
 
-    public String getName() {
+    public String getName(){
         return this.name;
     }
 
-    public String getDeclaringClass() {
+    public String getDeclaringClass(){
         return this.declaringClass;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object obj){
+        if (this == obj){
             return true;
         }
-        if (obj == null) {
+        if (obj == null){
             return false;
         }
-        if (obj instanceof FastField) {
-            final FastField field = (FastField)obj;
-            if ((declaringClass == null && field.declaringClass != null)
-                || (declaringClass != null && field.declaringClass == null)) {
+        if (obj instanceof FastField){
+            final FastField field = (FastField) obj;
+            if ((declaringClass == null && field.declaringClass != null) || (declaringClass != null && field.declaringClass == null)){
                 return false;
             }
-            return name.equals(field.getName())
-                && (declaringClass == null || declaringClass.equals(field.getDeclaringClass()));
+            return name.equals(field.getName()) && (declaringClass == null || declaringClass.equals(field.getDeclaringClass()));
         }
         return false;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return name.hashCode() ^ (declaringClass == null ? 0 : declaringClass.hashCode());
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return (declaringClass == null ? "" : declaringClass + ".") + name;
     }
 }

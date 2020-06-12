@@ -16,8 +16,8 @@
 package com.feilong.core.lang.reflect;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.CollectionsUtil.selectRejected;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.CollectionsUtil.selectRejected;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 
@@ -32,9 +32,9 @@ import org.apache.commons.collections4.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
-import com.feilong.core.Validate;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -186,7 +186,7 @@ public final class FieldUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>是所有字段的值(<b>不是属性</b>)</li>
+     * <li>是字段(<b>不是属性</b>)</li>
      * <li>自动过滤私有并且静态的字段,比如 LOGGER serialVersionUID</li>
      * </ol>
      * </blockquote>
@@ -214,18 +214,15 @@ public final class FieldUtil{
 
         //---------------------------------------------------------------
         Predicate<Field> excludeFieldPredicate = BeanPredicateUtil.containsPredicate("name", excludeFieldNames);
-        Predicate<Field> staticPredicate = new Predicate<Field>(){
 
-            @Override
-            public boolean evaluate(Field field){
-                int modifiers = field.getModifiers();
-                // 私有并且静态 一般是log 或者  serialVersionUID
-                boolean isStatic = Modifier.isStatic(modifiers);
+        Predicate<Field> staticPredicate = field -> {
+            int modifiers = field.getModifiers();
+            // 私有并且静态 一般是log 或者  serialVersionUID
+            boolean isStatic = Modifier.isStatic(modifiers);
 
-                String pattern = "[{}.{}],modifiers:[{}]{}";
-                LOGGER.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : EMPTY);
-                return isStatic;
-            }
+            String pattern = "[{}.{}],modifiers:[{}]{}";
+            LOGGER.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : EMPTY);
+            return isStatic;
         };
         return selectRejected(fieldList, PredicateUtils.orPredicate(excludeFieldPredicate, staticPredicate));
     }

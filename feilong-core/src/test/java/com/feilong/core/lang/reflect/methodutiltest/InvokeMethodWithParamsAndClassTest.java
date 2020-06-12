@@ -69,25 +69,11 @@ public class InvokeMethodWithParamsAndClassTest{
     }
 
     //*******************PrivateMethod********************************************************
-    /**
-     * Test invoke method private empty params.
-     */
     @Test(expected = ReflectException.class)
     public void testInvokeMethodPrivateEmptyParams(){
-        Object invokeMethod = MethodUtil.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
-        assertEquals(0L, invokeMethod);
+        MethodUtil.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 
-    /**
-     * Test invoke method private method empty params.
-     *
-     * @throws NoSuchMethodException
-     *             the no such method exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InvocationTargetException
-     *             the invocation target exception
-     */
     @Test(expected = NoSuchMethodException.class)
     public void testInvokeMethodPrivateMethodEmptyParams() throws NoSuchMethodException,IllegalAccessException,InvocationTargetException{
         com.feilong.lib.lang3.reflect.MethodUtils.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);

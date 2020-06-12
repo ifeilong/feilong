@@ -19,7 +19,6 @@ import com.feilong.lib.xstream.io.AbstractDriver;
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 
-
 /**
  * HierarchicalStreamDriver for binary input and output. The driver uses an optimized binary
  * format to store an object graph. The format is not as compact as Java serialization, but a
@@ -29,33 +28,33 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author J&ouml;rg Schaible
  * @since 1.4.2
  */
-public class BinaryStreamDriver extends AbstractDriver {
+public class BinaryStreamDriver extends AbstractDriver{
 
     /**
-     * @throws UnsupportedOperationException if called
+     * @throws UnsupportedOperationException
+     *             if called
      */
     @Override
-    public HierarchicalStreamReader createReader(Reader in) {
-        throw new UnsupportedOperationException(
-            "The BinaryDriver cannot use character-oriented input streams.");
+    public HierarchicalStreamReader createReader(Reader in){
+        throw new UnsupportedOperationException("The BinaryDriver cannot use character-oriented input streams.");
     }
 
     @Override
-    public HierarchicalStreamReader createReader(InputStream in) {
+    public HierarchicalStreamReader createReader(InputStream in){
         return new BinaryStreamReader(in);
     }
 
     /**
-     * @throws UnsupportedOperationException if called
+     * @throws UnsupportedOperationException
+     *             if called
      */
     @Override
-    public HierarchicalStreamWriter createWriter(Writer out) {
-        throw new UnsupportedOperationException(
-            "The BinaryDriver cannot use character-oriented output streams.");
+    public HierarchicalStreamWriter createWriter(Writer out){
+        throw new UnsupportedOperationException("The BinaryDriver cannot use character-oriented output streams.");
     }
 
     @Override
-    public HierarchicalStreamWriter createWriter(OutputStream out) {
+    public HierarchicalStreamWriter createWriter(OutputStream out){
         return new BinaryStreamWriter(out);
     }
 }

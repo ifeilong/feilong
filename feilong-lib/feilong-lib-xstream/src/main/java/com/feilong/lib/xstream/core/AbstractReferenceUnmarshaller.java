@@ -28,23 +28,24 @@ import com.feilong.lib.xstream.mapper.Mapper;
  * @author Mauro Talevi
  * @since 1.2
  */
-public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
+public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller{
 
-    private static final Object NULL = new Object();
-    private Map values = new HashMap();
-    private FastStack parentStack = new FastStack(16);
+    private static final Object NULL        = new Object();
 
-    public AbstractReferenceUnmarshaller(Object root, HierarchicalStreamReader reader,
-                                     ConverterLookup converterLookup, Mapper mapper) {
+    private Map                 values      = new HashMap();
+
+    private FastStack           parentStack = new FastStack(16);
+
+    public AbstractReferenceUnmarshaller(Object root, HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper){
         super(root, reader, converterLookup, mapper);
     }
 
     @Override
-    protected Object convert(Object parent, Class type, Converter converter) {
-        if (parentStack.size() > 0) { // handles circular references
+    protected Object convert(Object parent,Class type,Converter converter){
+        if (parentStack.size() > 0){ // handles circular references
             Object parentReferenceKey = parentStack.peek();
-            if (parentReferenceKey != null) {
-                if (!values.containsKey(parentReferenceKey)) { // see AbstractCircularReferenceTest.testWeirdCircularReference()
+            if (parentReferenceKey != null){
+                if (!values.containsKey(parentReferenceKey)){ // see AbstractCircularReferenceTest.testWeirdCircularReference()
                     values.put(parentReferenceKey, parent);
                 }
             }
@@ -53,27 +54,27 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
         final String attributeName = getMapper().aliasForSystemAttribute("reference");
         final String reference = attributeName == null ? null : reader.getAttribute(attributeName);
         final boolean isReferenceable = getMapper().isReferenceable(type);
-        if (reference != null) {
+        if (reference != null){
             final Object cache = isReferenceable ? values.get(getReferenceKey(reference)) : null;
-            if (cache == null) {
+            if (cache == null){
                 final ConversionException ex = new ConversionException("Invalid reference");
                 ex.add("reference", reference);
                 ex.add("referenced-type", type.getName());
                 ex.add("referenceable", Boolean.toString(isReferenceable));
                 throw ex;
-            } 
+            }
             result = cache == NULL ? null : cache;
-        } else if (!isReferenceable) {
+        }else if (!isReferenceable){
             result = super.convert(parent, type, converter);
-        } else {
+        }else{
             Object currentReferenceKey = getCurrentReferenceKey();
             parentStack.push(currentReferenceKey);
             Object localResult = null;
-            try {
+            try{
                 localResult = super.convert(parent, type, converter);
-            } finally {
+            }finally{
                 result = localResult;
-                if (currentReferenceKey != null) {
+                if (currentReferenceKey != null){
                     values.put(currentReferenceKey, result == null ? NULL : result);
                 }
                 parentStack.popSilently();
@@ -81,7 +82,8 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
         }
         return result;
     }
-    
+
     protected abstract Object getReferenceKey(String reference);
+
     protected abstract Object getCurrentReferenceKey();
 }

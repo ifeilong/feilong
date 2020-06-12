@@ -118,7 +118,7 @@ public final class IOReaderUtil{
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
-     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
+     * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @see #readToString(File, String)
      * @since 2.1.0
      */
@@ -170,7 +170,7 @@ public final class IOReaderUtil{
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
-     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
+     * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @see #readToString(File, String)
      * @since 1.0.8
      * @since 1.14.0 rename from readFileToString
@@ -226,7 +226,7 @@ public final class IOReaderUtil{
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
-     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
+     * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @since 1.5.3
      * @since 1.14.0 rename from readFileToString
      */
@@ -283,7 +283,7 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>fileInputStream</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.feilong.lib.io.FileUtils#readFileToString(File, Charset)
+     * @see "org.apache.commons.io.FilenameUtils#readFileToString(File, Charset)"
      * @since 1.5.3
      * @since 1.14.0 rename from getContent
      */
@@ -374,7 +374,7 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.feilong.lib.io.IOUtils#toString(InputStream, String)
+     * @see "org.apache.commons.io.IOUtils#toString(InputStream, String)"
      * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.3
      * @since 1.14.0 rename from getContent

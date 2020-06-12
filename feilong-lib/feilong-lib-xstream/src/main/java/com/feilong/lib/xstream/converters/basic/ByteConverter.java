@@ -17,20 +17,20 @@ package com.feilong.lib.xstream.converters.basic;
  *
  * @author Joe Walnes
  */
-public class ByteConverter extends AbstractSingleValueConverter {
+public class ByteConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == byte.class || type == Byte.class;
     }
 
     @Override
-    public Object fromString(String str) {
-    	int value = Integer.decode(str).intValue();
-    	if(value < Byte.MIN_VALUE || value > 0xFF) {
-    		throw new NumberFormatException("For input string: \"" + str + '"');
-    	}
-        return new Byte((byte)value);
+    public Object fromString(String str){
+        int value = Integer.decode(str).intValue();
+        if (value < Byte.MIN_VALUE || value > 0xFF){
+            throw new NumberFormatException("For input string: \"" + str + '"');
+        }
+        return new Byte((byte) value);
     }
 
 }

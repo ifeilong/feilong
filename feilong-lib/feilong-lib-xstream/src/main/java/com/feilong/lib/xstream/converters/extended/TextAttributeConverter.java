@@ -14,22 +14,20 @@ import java.awt.font.TextAttribute;
 
 import com.feilong.lib.xstream.converters.reflection.AbstractAttributedCharacterIteratorAttributeConverter;
 
-
 /**
  * A converter for {@link TextAttribute} constants.
  * 
  * @author J&ouml;rg Schaible
  * @since 1.2
  */
-public class TextAttributeConverter extends
-    AbstractAttributedCharacterIteratorAttributeConverter {
+public class TextAttributeConverter extends AbstractAttributedCharacterIteratorAttributeConverter{
 
     /**
      * Constructs a TextAttributeConverter.
      * 
      * @since 1.2.2
      */
-    public TextAttributeConverter() {
+    public TextAttributeConverter(){
         super(TextAttribute.class);
     }
 }

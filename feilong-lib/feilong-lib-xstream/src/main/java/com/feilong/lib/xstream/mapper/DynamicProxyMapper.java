@@ -19,41 +19,41 @@ import java.lang.reflect.Proxy;
  *
  * @author Joe Walnes
  */
-public class DynamicProxyMapper extends MapperWrapper {
+public class DynamicProxyMapper extends MapperWrapper{
 
     private String alias;
 
-    public DynamicProxyMapper(Mapper wrapped) {
+    public DynamicProxyMapper(Mapper wrapped){
         this(wrapped, "dynamic-proxy");
     }
 
-    public DynamicProxyMapper(Mapper wrapped, String alias) {
+    public DynamicProxyMapper(Mapper wrapped, String alias){
         super(wrapped);
         this.alias = alias;
     }
 
-    public String getAlias() {
+    public String getAlias(){
         return alias;
     }
 
-    public void setAlias(String alias) {
+    public void setAlias(String alias){
         this.alias = alias;
     }
 
     @Override
-    public String serializedClass(Class type) {
-        if (Proxy.isProxyClass(type)) {
+    public String serializedClass(Class type){
+        if (Proxy.isProxyClass(type)){
             return alias;
-        } else {
+        }else{
             return super.serializedClass(type);
         }
     }
 
     @Override
-    public Class realClass(String elementName) {
-        if (elementName.equals(alias)) {
+    public Class realClass(String elementName){
+        if (elementName.equals(alias)){
             return DynamicProxy.class;
-        } else {
+        }else{
             return super.realClass(elementName);
         }
     }
@@ -61,6 +61,7 @@ public class DynamicProxyMapper extends MapperWrapper {
     /**
      * Place holder type used for dynamic proxies.
      */
-    public static class DynamicProxy {}
+    public static class DynamicProxy{
+    }
 
 }

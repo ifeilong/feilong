@@ -15,11 +15,10 @@ package com.feilong.lib.xstream.converters.extended;
  *
  * @since 1.4.6
  */
-class StackTraceElementFactory15 extends StackTraceElementFactory {
+class StackTraceElementFactory15 extends StackTraceElementFactory{
 
     @Override
-    protected StackTraceElement create(final String declaringClass, final String methodName,
-        final String fileName, final int lineNumber) {
+    protected StackTraceElement create(final String declaringClass,final String methodName,final String fileName,final int lineNumber){
         return new StackTraceElement(declaringClass, methodName, fileName, lineNumber);
     }
 }

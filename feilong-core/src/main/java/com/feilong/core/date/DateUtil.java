@@ -2023,15 +2023,12 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 的区别:
+     * <h3>和 "org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 的区别:
      * </h3>
      * <blockquote>
      * <ol>
-     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 显示的是英文,该方法显示的是中文</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 最小单位是秒,该方法最小单位是毫秒</li>
      * </ol>
      * </blockquote>
      * 
@@ -2085,15 +2082,12 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 的区别:
+     * <h3>和 "org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 的区别:
      * </h3>
      * <blockquote>
      * <ol>
-     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 显示的是英文,该方法显示的是中文</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 最小单位是秒,该方法最小单位是毫秒</li>
      * </ol>
      * </blockquote>
      * 
@@ -2135,15 +2129,12 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
-     * <h3>和 {@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 的区别:
+     * <h3>和 "org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 的区别:
      * </h3>
      * <blockquote>
      * <ol>
-     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
-     * <li>{@link com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
-     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 显示的是英文,该方法显示的是中文</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 最小单位是秒,该方法最小单位是毫秒</li>
      * </ol>
      * </blockquote>
      * 
@@ -2155,7 +2146,7 @@ public final class DateUtil{
      * @see #getIntervalHour(long)
      * @see #getIntervalMinute(long)
      * @see #getIntervalSecond(long)
-     * @see com.feilong.lib.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see "org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)"
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView

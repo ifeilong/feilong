@@ -88,9 +88,9 @@ public final class XStreamBuilder{
         doDefaultImplementationMap(xStreamConfig, xstream);
 
         // 属性重命名
-        // xstream.aliasField(alias, definedIn, fieldName);
+        // xstream.aliasField(alias, definedIn, fieldName)
         // 包重命名
-        // xstream.aliasPackage(name, pkgName);
+        // xstream.aliasPackage(name, pkgName)
         return xstream;
     }
 

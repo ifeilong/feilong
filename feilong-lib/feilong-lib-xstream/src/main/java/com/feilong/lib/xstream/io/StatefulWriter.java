@@ -17,7 +17,6 @@ import java.util.Set;
 
 import com.feilong.lib.xstream.core.util.FastStack;
 
-
 /**
  * An wrapper for all {@link HierarchicalStreamWriter} implementations, that keeps the state.
  * Writing in a wrong state will throw a {@link StreamException}, that wraps either an
@@ -27,69 +26,76 @@ import com.feilong.lib.xstream.core.util.FastStack;
  * @author J&ouml;rg Schaible
  * @since 1.2
  */
-public class StatefulWriter extends WriterWrapper {
+public class StatefulWriter extends WriterWrapper{
 
     /**
      * <code>STATE_OPEN</code> is the initial value of the writer.
      * 
      * @since 1.2
      */
-    public static int STATE_OPEN = 0;
+    public static int           STATE_OPEN       = 0;
+
     /**
      * <code>STATE_NODE_START</code> is the state of a new node has been started.
      * 
      * @since 1.2
      */
-    public static int STATE_NODE_START = 1;
+    public static int           STATE_NODE_START = 1;
+
     /**
      * <code>STATE_VALUE</code> is the state if the value of a node has been written.
      * 
      * @since 1.2
      */
-    public static int STATE_VALUE = 2;
+    public static int           STATE_VALUE      = 2;
+
     /**
      * <code>STATE_NODE_END</code> is the state if a node has ended
      * 
      * @since 1.2
      */
-    public static int STATE_NODE_END = 3;
+    public static int           STATE_NODE_END   = 3;
+
     /**
      * <code>STATE_CLOSED</code> is the state if the writer has been closed.
      * 
      * @since 1.2
      */
-    public static int STATE_CLOSED = 4;
+    public static int           STATE_CLOSED     = 4;
 
-    private transient int state = STATE_OPEN;
-    private transient int balance;
+    private transient int       state            = STATE_OPEN;
+
+    private transient int       balance;
+
     private transient FastStack attributes;
 
     /**
      * Constructs a StatefulWriter.
      * 
-     * @param wrapped the wrapped writer
+     * @param wrapped
+     *            the wrapped writer
      * @since 1.2
      */
-    public StatefulWriter(final HierarchicalStreamWriter wrapped) {
+    public StatefulWriter(final HierarchicalStreamWriter wrapped){
         super(wrapped);
         attributes = new FastStack(16);
     }
 
     @Override
-    public void startNode(final String name) {
+    public void startNode(final String name){
         startNodeCommon();
         super.startNode(name);
     }
 
     @Override
-    public void startNode(final String name, final Class clazz) {
+    public void startNode(final String name,final Class clazz){
         startNodeCommon();
         super.startNode(name, clazz);
     }
 
-    private void startNodeCommon() {
+    private void startNodeCommon(){
         checkClosed();
-        if (state == STATE_VALUE) {
+        if (state == STATE_VALUE){
             // legal XML, but not in XStream ... ?
             throw new StreamException(new IllegalStateException("Opening node after writing text"));
         }
@@ -99,39 +105,34 @@ public class StatefulWriter extends WriterWrapper {
     }
 
     @Override
-    public void addAttribute(String name, String value) {
+    public void addAttribute(String name,String value){
         checkClosed();
-        if (state != STATE_NODE_START) {
-            throw new StreamException(new IllegalStateException("Writing attribute '"
-                    + name
-                    + "' without an opened node"));
+        if (state != STATE_NODE_START){
+            throw new StreamException(new IllegalStateException("Writing attribute '" + name + "' without an opened node"));
         }
-        Set currentAttributes = (Set)attributes.peek();
-        if (currentAttributes.contains(name)) {
-            throw new StreamException(new IllegalStateException("Writing attribute '"
-                    + name
-                    + "' twice"));
+        Set currentAttributes = (Set) attributes.peek();
+        if (currentAttributes.contains(name)){
+            throw new StreamException(new IllegalStateException("Writing attribute '" + name + "' twice"));
         }
         currentAttributes.add(name);
         super.addAttribute(name, value);
     }
 
     @Override
-    public void setValue(String text) {
+    public void setValue(String text){
         checkClosed();
-        if (state != STATE_NODE_START) {
+        if (state != STATE_NODE_START){
             // STATE_NODE_END is legal XML, but not in XStream ... ?
-            throw new StreamException(new IllegalStateException(
-                    "Writing text without an opened node"));
+            throw new StreamException(new IllegalStateException("Writing text without an opened node"));
         }
         state = STATE_VALUE;
         super.setValue(text);
     }
 
     @Override
-    public void endNode() {
+    public void endNode(){
         checkClosed();
-        if (balance-- == 0) {
+        if (balance-- == 0){
             throw new StreamException(new IllegalStateException("Unbalanced node"));
         }
         attributes.popSilently();
@@ -140,14 +141,14 @@ public class StatefulWriter extends WriterWrapper {
     }
 
     @Override
-    public void flush() {
+    public void flush(){
         checkClosed();
         super.flush();
     }
 
     @Override
-    public void close() {
-        if (state != STATE_NODE_END && state != STATE_OPEN) {
+    public void close(){
+        if (state != STATE_NODE_END && state != STATE_OPEN){
             // calling close in a finally block should not throw again
             // throw new StreamException(new IllegalStateException("Closing with unbalanced tag"));
         }
@@ -155,8 +156,8 @@ public class StatefulWriter extends WriterWrapper {
         super.close();
     }
 
-    private void checkClosed() {
-        if (state == STATE_CLOSED) {
+    private void checkClosed(){
+        if (state == STATE_CLOSED){
             throw new StreamException(new IOException("Writing on a closed stream"));
         }
     }
@@ -172,11 +173,11 @@ public class StatefulWriter extends WriterWrapper {
      * @see #STATE_CLOSED
      * @since 1.2
      */
-    public int state() {
+    public int state(){
         return state;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         attributes = new FastStack(16);
         return this;
     }

@@ -14,24 +14,23 @@ import java.util.UUID;
 
 import com.feilong.lib.xstream.converters.ConversionException;
 
-
 /**
  * Converts a java.util.UUID to a string.
  * 
  * @author J&ouml;rg Schaible
  */
-public class UUIDConverter extends AbstractSingleValueConverter {
+public class UUIDConverter extends AbstractSingleValueConverter{
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == UUID.class;
     }
 
     @Override
-    public Object fromString(String str) {
-        try {
+    public Object fromString(String str){
+        try{
             return UUID.fromString(str);
-        } catch(IllegalArgumentException e) {
+        }catch (IllegalArgumentException e){
             throw new ConversionException("Cannot create UUID instance", e);
         }
     }

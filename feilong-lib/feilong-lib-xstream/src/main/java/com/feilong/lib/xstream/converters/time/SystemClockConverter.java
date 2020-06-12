@@ -21,45 +21,46 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-
 /**
  * Converts a system {@link Clock}, using zone as nested element.
  *
  * @author J&ouml;rg Schaible
  * @since 1.4.10
  */
-public class SystemClockConverter implements Converter {
+public class SystemClockConverter implements Converter{
 
-    private final Mapper mapper;
+    private final Mapper   mapper;
+
     private final Class<?> type;
 
     /**
      * Constructs a SystemClockConverter instance.
      * 
-     * @param mapper the Mapper instance
+     * @param mapper
+     *            the Mapper instance
      */
-    public SystemClockConverter(final Mapper mapper) {
+    public SystemClockConverter(final Mapper mapper){
         this.mapper = mapper;
         type = Clock.systemUTC().getClass();
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return type == this.type;
     }
 
     @Override
-    public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-        final Clock clock = (Clock)source;
+    public void marshal(final Object source,final HierarchicalStreamWriter writer,final MarshallingContext context){
+        final Clock clock = (Clock) source;
         ExtendedHierarchicalStreamWriterHelper.startNode(writer, mapper.serializedMember(Clock.class, "zone"), null);
         context.convertAnother(clock.getZone());
         writer.endNode();
     }
 
     @Override
-    public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+    public Object unmarshal(final HierarchicalStreamReader reader,final UnmarshallingContext context){
         reader.moveDown();
-        final ZoneId zone = (ZoneId)context.convertAnother(null, ZoneId.class);
+        final ZoneId zone = (ZoneId) context.convertAnother(null, ZoneId.class);
         reader.moveUp();
         return Clock.system(zone);
     }

@@ -32,79 +32,79 @@ import java.util.Set;
  * @author J&ouml;rg Schaible
  * @since 1.1.3
  */
-public class SubjectConverter extends AbstractCollectionConverter {
+public class SubjectConverter extends AbstractCollectionConverter{
 
-    public SubjectConverter(Mapper mapper) {
+    public SubjectConverter(Mapper mapper){
         super(mapper);
     }
 
     @Override
-    public boolean canConvert(Class type) {
+    public boolean canConvert(Class type){
         return type == Subject.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
         Subject subject = (Subject) source;
         marshalPrincipals(subject.getPrincipals(), writer, context);
         marshalPublicCredentials(subject.getPublicCredentials(), writer, context);
         marshalPrivateCredentials(subject.getPrivateCredentials(), writer, context);
         marshalReadOnly(subject.isReadOnly(), writer);
     }
-    
-    protected void marshalPrincipals(Set principals, HierarchicalStreamWriter writer, MarshallingContext context) {
+
+    protected void marshalPrincipals(Set principals,HierarchicalStreamWriter writer,MarshallingContext context){
         writer.startNode("principals");
-        for (final Iterator iter = principals.iterator(); iter.hasNext();) {
+        for (final Iterator iter = principals.iterator(); iter.hasNext();){
             final Object principal = iter.next(); // pre jdk 1.4 a Principal was also in javax.security
             writeCompleteItem(principal, context, writer);
         }
         writer.endNode();
     };
-    
-    protected void marshalPublicCredentials(Set pubCredentials, HierarchicalStreamWriter writer, MarshallingContext context) {
+
+    protected void marshalPublicCredentials(Set pubCredentials,HierarchicalStreamWriter writer,MarshallingContext context){
     };
 
-    protected void marshalPrivateCredentials(Set privCredentials, HierarchicalStreamWriter writer, MarshallingContext context) {
+    protected void marshalPrivateCredentials(Set privCredentials,HierarchicalStreamWriter writer,MarshallingContext context){
     };
-  
-    protected void marshalReadOnly(boolean readOnly, HierarchicalStreamWriter writer) {
+
+    protected void marshalReadOnly(boolean readOnly,HierarchicalStreamWriter writer){
         writer.startNode("readOnly");
         writer.setValue(String.valueOf(readOnly));
         writer.endNode();
     };
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         Set principals = unmarshalPrincipals(reader, context);
         Set publicCredentials = unmarshalPublicCredentials(reader, context);
         Set privateCredentials = unmarshalPrivateCredentials(reader, context);
         boolean readOnly = unmarshalReadOnly(reader);
         return new Subject(readOnly, principals, publicCredentials, privateCredentials);
     }
-    
-    protected Set unmarshalPrincipals(HierarchicalStreamReader reader, UnmarshallingContext context) {
+
+    protected Set unmarshalPrincipals(HierarchicalStreamReader reader,UnmarshallingContext context){
         return populateSet(reader, context);
     };
-    
-    protected Set unmarshalPublicCredentials(HierarchicalStreamReader reader, UnmarshallingContext context) {
+
+    protected Set unmarshalPublicCredentials(HierarchicalStreamReader reader,UnmarshallingContext context){
         return Collections.EMPTY_SET;
     };
 
-    protected Set unmarshalPrivateCredentials(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    protected Set unmarshalPrivateCredentials(HierarchicalStreamReader reader,UnmarshallingContext context){
         return Collections.EMPTY_SET;
     };
 
-    protected boolean unmarshalReadOnly(HierarchicalStreamReader reader) {
+    protected boolean unmarshalReadOnly(HierarchicalStreamReader reader){
         reader.moveDown();
         boolean readOnly = Boolean.getBoolean(reader.getValue());
         reader.moveUp();
         return readOnly;
     };
 
-    protected Set populateSet(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    protected Set populateSet(HierarchicalStreamReader reader,UnmarshallingContext context){
         Set set = new HashSet();
         reader.moveDown();
-        while (reader.hasMoreChildren()) {
+        while (reader.hasMoreChildren()){
             final Object principal = readCompleteItem(reader, context, set);
             set.add(principal);
         }

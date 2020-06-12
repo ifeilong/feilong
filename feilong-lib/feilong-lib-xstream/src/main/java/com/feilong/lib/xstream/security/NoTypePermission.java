@@ -15,7 +15,7 @@ package com.feilong.lib.xstream.security;
  * @author J&ouml;rg Schaible
  * @since 1.4.7
  */
-public class NoTypePermission implements TypePermission {
+public class NoTypePermission implements TypePermission{
 
     /**
      * @since 1.4.7
@@ -23,17 +23,17 @@ public class NoTypePermission implements TypePermission {
     public static final TypePermission NONE = new NoTypePermission();
 
     @Override
-    public boolean allows(Class type) {
+    public boolean allows(Class type){
         throw new ForbiddenClassException(type);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return 1;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj){
         return obj != null && obj.getClass() == NoTypePermission.class;
     }
 }

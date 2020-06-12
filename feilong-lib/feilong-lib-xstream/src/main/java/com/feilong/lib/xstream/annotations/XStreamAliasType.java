@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 /**
  * Annotation used to define an XStream type alias.
  * 
@@ -21,7 +20,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface XStreamAliasType {
+public @interface XStreamAliasType{
+
     /**
      * The name of the type alias.
      */

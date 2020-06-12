@@ -46,21 +46,26 @@ public class CloneUtil{
      *             the illegal access exception
      * @deprecated 为什么要clone?
      */
+    @SuppressWarnings("unchecked")
     @Deprecated
     public static Map<String, Object> cloneMap(Map<String, Object> map) throws InstantiationException,IllegalAccessException{
-        Map<String, Object> result = map.getClass().newInstance();
-        for (String key : map.keySet()){
-            Object obj = map.get(key);
-            if (obj == null){
+        Map<String, Object> resultMap = map.getClass().newInstance();
+
+        for (Map.Entry<String, Object> entry : map.entrySet()){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            //---------------------------------------------------------------
+            if (value == null){
                 continue;
             }
-            if (obj instanceof Map){
-                result.put(key, cloneMap((Map<String, Object>) obj));
+            if (value instanceof Map){
+                resultMap.put(key, cloneMap((Map<String, Object>) value));
             }else{
-                result.put(key, obj.getClass().newInstance());
+                resultMap.put(key, value.getClass().newInstance());
             }
         }
-        return result;
+        return resultMap;
     }
 
 }

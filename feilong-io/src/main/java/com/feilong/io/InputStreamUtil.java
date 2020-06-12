@@ -107,7 +107,7 @@ public final class InputStreamUtil{
      * @param charsetType
      *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
      * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.feilong.lib.io.IOUtils#toInputStream(String, Charset)
+     * @see "org.apache.commons.io.IOUtils#toInputStream(String, Charset)"
      * @since 1.12.1
      */
     public static InputStream newByteArrayInputStream(String str,String charsetType){

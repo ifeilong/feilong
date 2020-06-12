@@ -25,28 +25,28 @@ import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
  * @author Joe Walnes
  * @author J&ouml;rg Schaible
  */
-public class RegexPatternConverter implements Converter {
+public class RegexPatternConverter implements Converter{
 
     /**
      * @since 1.4.5
      */
-    public RegexPatternConverter() {
+    public RegexPatternConverter(){
     }
 
     /**
      * @deprecated As of 1.4.5, use {@link #RegexPatternConverter()} instead
      */
-    public RegexPatternConverter(Converter defaultConverter) {
+    public RegexPatternConverter(Converter defaultConverter){
     }
 
     @Override
-    public boolean canConvert(final Class type) {
+    public boolean canConvert(final Class type){
         return type == Pattern.class;
     }
 
     @Override
-    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-        Pattern pattern = (Pattern)source;
+    public void marshal(Object source,HierarchicalStreamWriter writer,MarshallingContext context){
+        Pattern pattern = (Pattern) source;
         writer.startNode("pattern");
         writer.setValue(pattern.pattern());
         writer.endNode();
@@ -56,7 +56,7 @@ public class RegexPatternConverter implements Converter {
     }
 
     @Override
-    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+    public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
         reader.moveDown();
         String pattern = reader.getValue();
         reader.moveUp();

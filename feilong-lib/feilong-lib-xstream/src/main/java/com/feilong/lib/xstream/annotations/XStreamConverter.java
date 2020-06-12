@@ -20,7 +20,6 @@ import java.lang.annotation.Target;
 import com.feilong.lib.xstream.XStream;
 import com.feilong.lib.xstream.converters.ConverterMatcher;
 
-
 /**
  * Annotation to declare a converter. The annotation supports additionally the injection of
  * various constructor arguments provided by XStream:
@@ -59,9 +58,10 @@ import com.feilong.lib.xstream.converters.ConverterMatcher;
  * @author J&ouml;rg Schaible
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.FIELD})
+@Target({ ElementType.TYPE, ElementType.FIELD })
 @Documented
-public @interface XStreamConverter {
+public @interface XStreamConverter{
+
     Class<? extends ConverterMatcher> value();
 
     int priority() default XStream.PRIORITY_NORMAL;
