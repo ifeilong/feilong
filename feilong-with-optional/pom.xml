@@ -16,6 +16,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- for com.feilong.security.oneway.Sm3Util -->
@@ -127,13 +128,11 @@
 			<artifactId>spring-beans</artifactId>
 		</dependency>
 
-
 		<!-- 配置式组件 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 		</dependency>
-
 
 		<!--spring tils Caused by: java.lang.NoClassDefFoundError: javax/servlet/jsp/jstl/core/Config -->
 		<dependency>
