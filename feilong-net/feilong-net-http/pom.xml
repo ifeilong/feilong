@@ -21,6 +21,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-formatter</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 

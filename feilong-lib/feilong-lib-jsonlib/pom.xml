@@ -13,6 +13,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>

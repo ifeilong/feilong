@@ -91,7 +91,6 @@
 
 		<version.javamail>1.4.7</version.javamail>
 		<version.javax.mail>1.6.2</version.javax.mail>
-		<version.commons-email>1.5</version.commons-email>
 
 		<version.servlet-api>3.1.0</version.servlet-api>
 		<version.jsp-api>2.3.3</version.jsp-api>
@@ -324,99 +323,6 @@
 	<dependencyManagement>
 		<dependencies>
 
-			<!--*******************feilong************************* -->
-			<!-- feilong-core -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-core</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-validator -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-validator</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong -->
-			<dependency>
-				<groupId>com.github.ifeilong</groupId>
-				<artifactId>feilong</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-with-optional -->
-			<dependency>
-				<groupId>com.github.ifeilong</groupId>
-				<artifactId>feilong-with-optional</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-core-extension -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-core-extension</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-json -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-json</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-json tests -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-json</artifactId>
-				<version>${version.feilong-platform}</version>
-				<classifier>tests</classifier>
-			</dependency>
-
-			<!-- feilong-servlet -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-servlet</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-taglib -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-taglib</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-security -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-security</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!--feilong-template -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-template</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!--feilong-formatter -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-formatter</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
-			<!-- feilong-io -->
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>feilong-io</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-
 			<!-- *******************spring********************************* -->
 
 			<!-- spring-test -->
@@ -459,12 +365,6 @@
 				<version>${version.javax.mail}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-email</artifactId>
-				<version>${version.commons-email}</version>
-			</dependency>
-
 			<!-- *********************apache******************************* -->
 
 			<dependency>
@@ -472,7 +372,6 @@
 				<artifactId>bcprov-jdk15on</artifactId>
 				<version>${version.bcprov-jdk15on}</version>
 			</dependency>
-
 
 			<!-- jsch 用于sftp 传输 -->
 			<dependency>
@@ -487,7 +386,6 @@
 				<artifactId>jsoup</artifactId>
 				<version>${version.jsoup}</version>
 			</dependency>
-
 
 			<!--
 				HttpCore is a set of low level HTTP transport components that can be used to build custom client and server side HTTP services with a minimal footprint.
@@ -527,8 +425,6 @@
 				<artifactId>httpclient</artifactId>
 				<version>${version.httpcomponents}</version>
 			</dependency>
-
-
 			<dependency>
 				<groupId>org.apache.velocity</groupId>
 				<artifactId>velocity-engine-core</artifactId>
@@ -585,7 +481,6 @@
 			</dependency>
 
 			<!-- ***********log4j *************** -->
-
 			<!-- slf4j-log4j12 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -696,7 +591,6 @@
 				<version>${version.el-api}</version>
 				<scope>provided</scope>
 			</dependency>
-
 
 			<!-- junit -->
 			<dependency>
@@ -1307,56 +1201,6 @@
 		</contributor>
 	</contributors>
 
-
-	<profiles>
-		<profile>
-			<id>release</id>
-
-			<build>
-				<plugins>
-
-					<!-- Gpg Signature -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${v.maven-gpg-plugin}</version>
-						<executions>
-							<execution>
-								<id>oss</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-
-								<!-- https://myshittycode.com/2017/08/07/maven-gpg-plugin-prevent-signing-prompt-or-gpg-signing-failed-no-such-file-or-directory-error/ -->
-								<configuration>
-									<gpgArguments>
-										<arg>--pinentry-mode</arg>
-										<arg>loopback</arg>
-									</gpgArguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${v.nexus-staging-maven-plugin}</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>oss</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-
-				</plugins>
-
-			</build>
-		</profile>
-	</profiles>
-
 	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
 	<!-- The scm url must start with 'scm:' -->
 	<scm>
@@ -1370,20 +1214,5 @@
 		<system>github</system>
 		<url>https://github.com/ifeilong/feilong/issues</url>
 	</issueManagement>
-
-	<!-- 项目发布管理 -->
-	<distributionManagement>
-		<repository>
-			<id>oss</id>
-			<name>sonatype Staging Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-
-		<snapshotRepository>
-			<id>oss</id>
-			<name>sonatype snapshots Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 </project>

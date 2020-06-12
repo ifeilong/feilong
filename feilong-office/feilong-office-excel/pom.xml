@@ -13,6 +13,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-io</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- ***************************** poi ***************************** -->
@@ -52,6 +53,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core-extension</artifactId>
+			<version>${version.feilong-platform}</version>
 			<scope>test</scope>
 		</dependency>
 

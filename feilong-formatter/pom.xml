@@ -13,12 +13,14 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-core</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-json -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-json</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 
