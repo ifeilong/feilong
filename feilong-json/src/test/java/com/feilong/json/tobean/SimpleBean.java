@@ -13,26 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json.util;
-
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-import com.feilong.store.member.User;
+package com.feilong.json.tobean;
 
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.3
+ * @since 3.0.6
  */
-public class PropertySetStrategyTest{
+public class SimpleBean{
 
-    @Test
-    public void test(){
-        User bean = new User();
-        PropertySetStrategy.setProperty(bean, "a", "aa");
+    private Long id;
 
-        assertTrue(true);
+    /**
+     * @return the id
+     */
+    public Long getId(){
+        return id;
     }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Long id){
+        this.id = id;
+    }
+
 }

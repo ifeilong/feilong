@@ -35,42 +35,29 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * @author Gino Miceli <ginomiceli@users.sourceforge.net>
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public abstract class PropertySetStrategy{
+public class PropertySetStrategy{
 
     /** The Constant log. */
-    private static final Logger             LOGGER  = LoggerFactory.getLogger(PropertySetStrategy.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertySetStrategy.class);
 
-    //---------------------------------------------------------------
-    /** The Constant DEFAULT. */
-    public static final PropertySetStrategy DEFAULT = new DefaultPropertySetStrategy();
+    @SuppressWarnings("unchecked")
+    public static void setProperty(Object bean,String key,Object value){
+        if (bean instanceof Map){
+            ((Map<String, Object>) bean).put(key, value);
+            return;
+        }
 
-    //---------------------------------------------------------------
-
-    public abstract void setProperty(Object bean,String key,Object value);
-
-    //---------------------------------------------------------------
-
-    private static final class DefaultPropertySetStrategy extends PropertySetStrategy{
-
-        @Override
-        public void setProperty(Object bean,String key,Object value){
-            if (bean instanceof Map){
-                ((Map) bean).put(key, value);
-                return;
-            }
-
-            //---------------------------------------------------------------
-            try{
-                PropertyUtils.setSimpleProperty(bean, key, value);
-            }catch (Exception e){
-                //Ignore missing properties with Json-Lib
-                //避免出现 Unknown property <code>'orderIdAndCodeMap'</code> on class 'class com.trade.....PaymentResultEntity' 异常
-                //since 1.12.5
-                if (ClassUtil.isInstance(e, NoSuchMethodException.class)){
-                    LOGGER.warn("in class:[{}],can't find property:[{}],ignore~~", bean.getClass().getName(), key);
-                }else{
-                    LOGGER.warn(e.getMessage(), e);
-                }
+        //---------------------------------------------------------------
+        try{
+            PropertyUtils.setSimpleProperty(bean, key, value);
+        }catch (Exception e){
+            //Ignore missing properties with Json-Lib
+            //避免出现 Unknown property <code>'orderIdAndCodeMap'</code> on class 'class com.trade.....PaymentResultEntity' 异常
+            //since 1.12.5
+            if (ClassUtil.isInstance(e, NoSuchMethodException.class)){
+                LOGGER.warn("in class:[{}],can't find property:[{}],ignore~~", bean.getClass().getName(), key);
+            }else{
+                LOGGER.warn(e.getMessage(), e);
             }
         }
     }

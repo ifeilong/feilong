@@ -27,12 +27,14 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToListWithJsonToJavaConfigTest.class,
 
                 ToBeanTest.class,
-                ToBeanJsonStringMoreAttributeTest.class,
                 ToBeanWithJsonToJavaConfigTest.class,
 
                 ToMapTest.class,
                 ToMapTypeErrorTest.class,
                 ToMapWithJsonToJavaConfigTest.class,
+
+                ToBeanManyNoExistPropertyTest.class,
+                ToBeanNoExistPropertyTest.class,
 
         //
 })

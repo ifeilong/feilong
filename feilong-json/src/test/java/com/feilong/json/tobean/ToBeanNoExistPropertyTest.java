@@ -15,35 +15,28 @@
  */
 package com.feilong.json.tobean;
 
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
 import com.feilong.json.JsonUtil;
-import com.feilong.store.member.User;
 
-public class ToBeanJsonStringMoreAttributeTest{
+public class ToBeanNoExistPropertyTest{
 
     @Test
-    public void testToBean(){
-        User user = JsonUtil.toBean(
-                        "{'passwordaaaaa':'123456','password':'123456','name':'feilong','money':'99999999.00','loves':['桔子', '香蕉']}",
-                        User.class);
-        user.setId(10L);
+    public void test(){
+        //assignees
+        SimpleBean user = JsonUtil.toBean(
+                        "{'assignees':[{\"login\":\"venusdrogon\"}],'assignee':{\"login\":\"venusdrogon\"},id:10}",
+                        SimpleBean.class);
 
         assertThat(
                         user,
                         allOf(//
-                                        hasProperty("id", is(10L)),
-                                        hasProperty("password", is("123456")),
-                                        hasProperty("name", is("feilong")),
-                                        hasProperty("money", is(toBigDecimal("99999999.00"))),
-                                        hasProperty("loves", arrayContaining("桔子", "香蕉"))
+                                        hasProperty("id", is(10L))
                         //  
                         ));
     }

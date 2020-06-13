@@ -37,26 +37,40 @@ public class ClassResolver{
     }
 
     //---------------------------------------------------------------
+    public static Class<?> resolve(String key,String name,Map<String, Class<?>> classMap){
+        Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
+        return targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
+    }
+
+    public static Class<?> resolve(String key,String name,Map<String, Class<?>> classMap,Class<?> targetType){
+        if (targetType == Object.class || targetType.isInterface()){
+            Class<?> resolve = resolve(key, name, classMap);
+            if (null != resolve){
+                return resolve;
+            }
+            if (targetType.isInterface()){
+                return targetType;
+            }
+        }
+        return targetType;
+    }
 
     /**
      * Resolve class.
-     *
-     * @param classMap
-     *            the class map
+     * 
      * @param key
      *            the key
      * @param name
      *            the name
      * @param type
      *            the type
+     * @param classMap
+     *            the class map
+     *
      * @return the class
      */
-    public static Class<?> resolveClass(Map<String, Class<?>> classMap,String key,String name,Class<?> type){
-        Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
-        if (targetClass == null){
-            targetClass = TargetClassFinder.findTargetClass(name, classMap);
-        }
-
+    public static Class<?> resolve(String key,String name,Class<?> type,Map<String, Class<?>> classMap){
+        Class<?> targetClass = resolve(key, name, classMap);
         if (targetClass != null){
             return targetClass;
         }

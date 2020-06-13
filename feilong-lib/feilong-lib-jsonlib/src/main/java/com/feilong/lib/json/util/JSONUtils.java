@@ -119,7 +119,7 @@ public final class JSONUtils{
      *            the json object
      * @return the properties
      */
-    public static Map<String, Class<?>> getProperties(JSONObject jsonObject){
+    public static Map<String, Class<?>> getKeyAndTypeMap(JSONObject jsonObject){
         Map<String, Class<?>> properties = new HashMap<>();
 
         Set<String> keys = jsonObject.keys();
@@ -250,18 +250,6 @@ public final class JSONUtils{
     }
 
     /**
-     * Tests if Class represents a primitive double or wrapper.<br>
-     *
-     * @param clazz
-     *            the clazz
-     * @return true, if is double
-     */
-    public static boolean isDouble(Class<?> clazz){
-        return clazz != null && //
-                        (Double.TYPE.isAssignableFrom(clazz) || Double.class.isAssignableFrom(clazz));
-    }
-
-    /**
      * Returns trus if str represents a valid Java identifier.
      *
      * @param str
@@ -302,9 +290,16 @@ public final class JSONUtils{
      * @return true, if is number
      */
     public static boolean isNumber(Class<?> clazz){
-        return clazz != null && (Byte.TYPE.isAssignableFrom(clazz) || Short.TYPE.isAssignableFrom(clazz)
-                        || Integer.TYPE.isAssignableFrom(clazz) || Long.TYPE.isAssignableFrom(clazz) || Float.TYPE.isAssignableFrom(clazz)
-                        || Double.TYPE.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz));
+        return clazz != null && //
+                        (Byte.TYPE.isAssignableFrom(clazz) //
+                                        || Short.TYPE.isAssignableFrom(clazz)//
+                                        || Integer.TYPE.isAssignableFrom(clazz)//
+                                        || Long.TYPE.isAssignableFrom(clazz) //
+                                        || Float.TYPE.isAssignableFrom(clazz)//
+                                        || Double.TYPE.isAssignableFrom(clazz)//
+                                        || Number.class.isAssignableFrom(clazz)
+                        //
+                        );
     }
 
     /**
@@ -337,7 +332,10 @@ public final class JSONUtils{
      * @return true, if is object
      */
     public static boolean isObject(Object obj){
-        return !isNumber(obj) && !isString(obj) && !isBoolean(obj) && !isArray(obj) || isNull(obj);
+        return !isNumber(obj) && //
+                        !isString(obj) && //
+                        !isBoolean(obj) && //
+                        !isArray(obj) || isNull(obj);
     }
 
     /**
@@ -413,7 +411,7 @@ public final class JSONUtils{
      * @return the dyna bean
      */
     public static DynaBean newDynaBean(JSONObject jsonObject,JsonConfig jsonConfig){
-        Map<String, Class<?>> props = getProperties(jsonObject);
+        Map<String, Class<?>> props = getKeyAndTypeMap(jsonObject);
         for (Iterator entries = props.entrySet().iterator(); entries.hasNext();){
             Map.Entry entry = (Map.Entry) entries.next();
             String key = (String) entry.getKey();
@@ -662,8 +660,6 @@ public final class JSONUtils{
 
         return input;
     }
-
-    //---------------------------------------------------------------
 
     //---------------------------------------------------------------
 

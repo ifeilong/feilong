@@ -15,12 +15,14 @@
  */
 package com.feilong.lib.json;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.lib.json.util.PropertySetStrategy.setProperty;
 import static java.util.Collections.emptyMap;
 
 import java.beans.PropertyDescriptor;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -30,16 +32,13 @@ import org.apache.commons.beanutils.DynaBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.lib.beanutils.PropertyUtils;
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.ClassResolver;
 import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.json.util.PropertyNameProcessorUtil;
-import com.feilong.lib.json.util.PropertySetStrategy;
-import com.feilong.lib.json.util.TargetClassFinder;
 import com.feilong.lib.lang3.tuple.Triple;
 
 /**
@@ -77,189 +76,152 @@ public class JSONObjectToBeanUtil{
         }
         //---------------------------------------------------------------
         Class<?> rootClass = jsonConfig.getRootClass();
-
-        //---------------------------------------------------------------
-        Map<String, Class<?>> classMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
-
-        Map<String, Class<?>> jsonKeyAndClassMap = JSONUtils.getProperties(jsonObject);
-
-        Object rootBean = newBean(rootClass);
+        Object rootBean = BeanNewer.newBean(rootClass);
 
         //---------------------------------------------------------------
         //所有经过filter 以及加工key 之后的数据
+        //Triple.of(name, key, value)
         List<Triple<String, String, Object>> list = buildTripleList(rootBean, jsonObject, jsonConfig);
+        if (isNullOrEmpty(list)){
+            return rootBean;
+        }
+
         //---------------------------------------------------------------
+        Map<String, Class<?>> jsonKeyAndClassMap = JSONUtils.getKeyAndTypeMap(jsonObject);
+        if (!Map.class.isAssignableFrom(rootClass)){
+            return doWithBean(rootBean, rootClass, list, jsonKeyAndClassMap, jsonConfig);
+        }
+        return doMap(rootBean, list, jsonKeyAndClassMap, jsonConfig);
+    }
+
+    private static Object doWithBean(
+                    Object rootBean,
+                    Class<?> rootClass,
+                    List<Triple<String, String, Object>> list,
+                    Map<String, Class<?>> jsonKeyAndClassMap,
+                    JsonConfig jsonConfig){
+        //Triple.of(name, key, value)
+        Map<Triple<String, String, Object>, PropertyDescriptor> map = build(rootClass, list);
+        if (isNullOrEmpty(map)){
+            return rootBean;
+        }
+
+        //---------------------------------------------------------------
+        for (Map.Entry<Triple<String, String, Object>, PropertyDescriptor> entry : map.entrySet()){
+            Triple<String, String, Object> triple = entry.getKey();
+
+            String key = triple.getMiddle();
+            PropertyDescriptor propertyDescriptor = entry.getValue();
+            if (propertyDescriptor.getWriteMethod() == null){
+                LOGGER.debug("{} property '{}' has no write method. SKIPPED.", rootClass.getCanonicalName(), key);
+                continue;
+            }
+
+            String name = triple.getLeft();
+            Class<?> jsonValueType = jsonKeyAndClassMap.get(name);
+            try{
+                toBeanUsePropertyDescriptor(rootBean, triple, jsonValueType, jsonConfig, propertyDescriptor);
+            }catch (Exception e){
+                throw JSONExceptionUtil.build("Error while setting property=[" + name + "] type: " + jsonValueType, e);
+            }
+        }
+        return rootBean;
+    }
+
+    private static Object doMap(
+                    Object rootBean,
+                    List<Triple<String, String, Object>> list,
+                    Map<String, Class<?>> jsonKeyAndClassMap,
+                    JsonConfig jsonConfig) throws JSONException{
         for (Triple<String, String, Object> triple : list){
             String name = triple.getLeft();
             String key = triple.getMiddle();
             Object value = triple.getRight();
 
             //---------------------------------------------------------------
-            Class<?> type = jsonKeyAndClassMap.get(name);
+            Class<?> jsonValueType = jsonKeyAndClassMap.get(name);
             try{
-                if (Map.class.isAssignableFrom(rootClass)){
-                    toBeanDoWithMap(classMap, rootBean, name, type, value, key, jsonConfig);
-                }else{
-                    PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(rootBean, key);
-                    if (propertyDescriptor != null && propertyDescriptor.getWriteMethod() == null){
-                        LOGGER.debug("{} property '{}' has no write method. SKIPPED.", rootBean.getClass(), key);
-                        continue;
-                    }
-                    toBeanUsePropertyDescriptor(rootBean, key, value, name, type, jsonConfig, classMap, propertyDescriptor);
-                }
+                toBeanDoWithMap(rootBean, name, jsonValueType, value, key, jsonConfig);
             }catch (Exception e){
-                throw JSONExceptionUtil.build("Error while setting property=" + name + " type" + type, e);
+                throw JSONExceptionUtil.build("Error while setting property=[" + name + "] type: " + jsonKeyAndClassMap.get(name), e);
             }
         }
         return rootBean;
     }
 
-    private static List<Triple<String, String, Object>> buildTripleList(Object rootBean,JSONObject jsonObject,JsonConfig jsonConfig){
-        List<String> names = jsonObject.names(jsonConfig);
-
-        Class<?> rootClass = jsonConfig.getRootClass();
-
-        PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
-        PropertyNameProcessor propertyNameProcessor = jsonConfig.findJavaPropertyNameProcessor(rootClass);
-
-        List<Triple<String, String, Object>> list = newArrayList();
-        for (String name : names){
-            Object value = jsonObject.get(name);
-            if (javaPropertyFilter != null && javaPropertyFilter.apply(rootBean, name, value)){
-                continue;
-            }
-
-            //---------------------------------------------------------------
-            String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
-            key = PropertyNameProcessorUtil.update(rootClass, key, propertyNameProcessor);
-
-            list.add(Triple.of(name, key, value));
-        }
-        return list;
-    }
-
     /**
-     * New bean.
-     *
-     * @param rootClass
-     *            the root class
-     * @return the object
-     * @throws JSONException
-     *             the JSON exception
-     * @since 3.0.4
+     * 查找json 以及 属性的对应关系
      */
-    private static Object newBean(Class<?> rootClass) throws JSONException{
-        try{
-            if (rootClass.isInterface()){
-                if (!Map.class.isAssignableFrom(rootClass)){
-                    throw new JSONException("beanClass is an interface. " + rootClass);
-                }
-                return new HashMap<>();
-            }
-            return ConstructorUtil.newInstance(rootClass);
-        }catch (Exception e){
-            throw JSONExceptionUtil.build("", e);
+    private static Map<Triple<String, String, Object>, PropertyDescriptor> build(
+                    Class<?> rootClass,
+                    List<Triple<String, String, Object>> list){
+        PropertyDescriptor[] propertyDescriptors = PropertyUtil.getPropertyDescriptors(rootClass);
+        if (isNullOrEmpty(propertyDescriptors)){
+            return emptyMap();
         }
+
+        //---------------------------------------------------------------
+        Map<Triple<String, String, Object>, PropertyDescriptor> map = newHashMap();
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptors){
+            String propertyName = propertyDescriptor.getName();
+
+            //Triple.of(name, key, value)
+            for (Triple<String, String, Object> triple : list){
+                String key = triple.getMiddle();
+                if (key.equals(propertyName)){
+                    map.put(triple, propertyDescriptor);
+                    break;
+                }
+            }
+        }
+        return map;
     }
 
-    //---------------------------------------------------------------
     private static void toBeanUsePropertyDescriptor(
                     Object bean,
-                    String key,
-                    Object value,
-
-                    String name,
-
-                    Class<?> type,
+                    Triple<String, String, Object> triple,
+                    Class<?> jsonValueType,
 
                     JsonConfig jsonConfig,
-                    Map<String, Class<?>> classMap,
                     PropertyDescriptor propertyDescriptor){
+        String key = triple.getMiddle();
+        Object value = triple.getRight();
 
         if (JSONUtils.isNull(value)){
-            setNull(bean, type, key);
+            setNull(bean, jsonValueType, key);
             return;
         }
 
-        if (propertyDescriptor != null){
-            doWithPropertyDescriptor(bean, key, value, name, type, jsonConfig, classMap, propertyDescriptor);
-            return;
-        }
-
+        Class<?> beanPropertyType = propertyDescriptor.getPropertyType();
         //---------------------------------------------------------------
-        if (value instanceof JSONArray){
-            setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class));
-            return;
-        }
-        if (isCommonType(type)){
-            Class<?> beanClass = bean.getClass();
-            if (beanClass == null || bean instanceof Map){
+        if (isCommonType(jsonValueType)){
+            if (beanPropertyType.isInstance(value)){
                 setProperty(bean, key, value);
                 return;
             }
-            LOGGER.debug("skip set [{}] property [{}]:[{}]", bean.getClass().getName(), key, type.getName());
-            return;
-        }
-        //---------------------------------------------------------------
-        setProperty(bean, key, value);
-        return;
-    }
-
-    private static void doWithPropertyDescriptor(
-                    Object bean,
-                    String key,
-                    Object value,
-
-                    String name,
-
-                    Class<?> type,
-                    JsonConfig jsonConfig,
-                    Map<String, Class<?>> classMap,
-                    PropertyDescriptor propertyDescriptor){
-        Class<?> propertyType = propertyDescriptor.getPropertyType();
-        Class<?> targetType = propertyType;
-
-        //---------------------------------------------------------------
-        if (isCommonType(type)){
-            if (targetType.isInstance(value)){
-                setProperty(bean, key, value);
-                return;
-            }
-            setProperty(bean, key, PropertyValueMorpher.morphPropertyValue(key, value, type, targetType));
+            setProperty(bean, key, PropertyValueMorpher.morphPropertyValue(key, value, jsonValueType, beanPropertyType));
             return;
         }
 
+        Map<String, Class<?>> classMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
+        String name = triple.getLeft();
         //---------------------------------------------------------------
-
         if (value instanceof JSONArray){
-            if (List.class.isAssignableFrom(propertyType) || Set.class.isAssignableFrom(propertyType)){
-                setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, propertyType));
+            if (List.class.isAssignableFrom(beanPropertyType) || Set.class.isAssignableFrom(beanPropertyType)){
+                setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, beanPropertyType));
             }else{
-                setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, targetType, jsonConfig, classMap));
+                setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, beanPropertyType, jsonConfig, classMap));
             }
             return;
-        }
-
-        //---------------------------------------------------------------
-        if (targetType == Object.class || targetType.isInterface()){
-            Class<?> targetTypeCopy = targetType;
-            targetType = TargetClassFinder.findTargetClass(key, classMap);
-            targetType = targetType == null ? TargetClassFinder.findTargetClass(name, classMap) : targetType;
-            targetType = targetType == null && targetTypeCopy.isInterface() ? targetTypeCopy : targetType;
         }
 
         //---------------------------------------------------------------
         JsonConfig jsonConfigCopy = jsonConfig.copy();
-        jsonConfigCopy.setRootClass(targetType);
+        jsonConfigCopy.setRootClass(ClassResolver.resolve(key, name, classMap, beanPropertyType));
         jsonConfigCopy.setClassMap(classMap);
         setProperty(bean, key, toBean((JSONObject) value, jsonConfigCopy));
-    }
+        return;
 
-    private static boolean isCommonType(Class<?> type){
-        return String.class.isAssignableFrom(type) || //
-                        JSONUtils.isBoolean(type) || //
-                        JSONUtils.isNumber(type) || //
-                        JSONUtils.isString(type);
     }
 
     /**
@@ -282,14 +244,11 @@ public class JSONObjectToBeanUtil{
         }
     }
 
-    private static void toBeanDoWithMap(
-                    Map<String, Class<?>> classMap,
-                    Object bean,
-                    String name,
-                    Class<?> type,
-                    Object value,
-                    String key,
-                    JsonConfig jsonConfig) throws Exception{
+    private static void toBeanDoWithMap(Object bean,String name,Class<?> type,Object value,String key,JsonConfig jsonConfig)
+                    throws Exception{
+
+        Map<String, Class<?>> classMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
+
         // no type info available for conversion
         if (JSONUtils.isNull(value)){
             setProperty(bean, key, value);
@@ -307,7 +266,7 @@ public class JSONObjectToBeanUtil{
         }
 
         //---------------------------------------------------------------
-        Class<?> targetClass = ClassResolver.resolveClass(classMap, key, name, type);
+        Class<?> targetClass = ClassResolver.resolve(key, name, type, classMap);
 
         JsonConfig jsonConfigCopy = jsonConfig.copy();
         jsonConfigCopy.setRootClass(targetClass);
@@ -329,7 +288,7 @@ public class JSONObjectToBeanUtil{
     @Deprecated
     private static DynaBean toDynaBean(JSONObject jsonObject){
         JsonConfig jsonConfig = new JsonConfig();
-        Map<String, Class<?>> props = JSONUtils.getProperties(jsonObject);
+        Map<String, Class<?>> props = JSONUtils.getKeyAndTypeMap(jsonObject);
         DynaBean dynaBean = JSONUtils.newDynaBean(jsonObject, jsonConfig);
 
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
@@ -366,20 +325,36 @@ public class JSONObjectToBeanUtil{
         return dynaBean;
     }
 
-    //---------------------------------------------------------------
+    //Triple.of(name, key, value)
+    private static List<Triple<String, String, Object>> buildTripleList(Object rootBean,JSONObject jsonObject,JsonConfig jsonConfig){
+        List<String> names = jsonObject.names(jsonConfig);
 
-    /**
-     * Sets a property on the target bean.<br>
-     * Bean may be a Map or a POJO.
-     *
-     * @param bean
-     *            the bean
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     */
-    private static void setProperty(Object bean,String key,Object value){
-        PropertySetStrategy.DEFAULT.setProperty(bean, key, value);
+        Class<?> rootClass = jsonConfig.getRootClass();
+
+        PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
+        PropertyNameProcessor propertyNameProcessor = jsonConfig.findJavaPropertyNameProcessor(rootClass);
+
+        List<Triple<String, String, Object>> list = newArrayList();
+        for (String name : names){
+            Object value = jsonObject.get(name);
+            if (javaPropertyFilter != null && javaPropertyFilter.apply(rootBean, name, value)){
+                continue;
+            }
+
+            //---------------------------------------------------------------
+            String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
+            key = PropertyNameProcessorUtil.update(rootClass, key, propertyNameProcessor);
+
+            list.add(Triple.of(name, key, value));
+        }
+        return list;
     }
+
+    private static boolean isCommonType(Class<?> type){
+        return String.class.isAssignableFrom(type) || //
+                        JSONUtils.isBoolean(type) || //
+                        JSONUtils.isNumber(type) || //
+                        JSONUtils.isString(type);
+    }
+
 }

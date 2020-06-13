@@ -15,8 +15,8 @@
  */
 package com.feilong.net.http.builder;
 
-import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -83,7 +83,7 @@ public class HttpClientBuilder{
         if (null != httpClient){
 
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(StringUtils.center("loader from cache,cache size:[" + cache.size() + "]", 80, "="));
+                LOGGER.debug(StringUtils.center("load HttpClient from cache,cache size:[" + cache.size() + "]", 80, "="));
             }
             return httpClient;
         }
