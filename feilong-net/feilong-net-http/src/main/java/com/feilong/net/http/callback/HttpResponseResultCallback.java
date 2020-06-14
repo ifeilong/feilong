@@ -35,10 +35,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.formatter.FormatterUtil;
-import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
-import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
+import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
+import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.HttpResponseUtil;
@@ -74,7 +74,7 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
                             resultResponse,
                             new JavaToJsonConfig(toMap("resultString", (JsonValueProcessor) new StringOverLengthJsonValueProcessor())));
 
-            LOGGER.info(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig), response);
+            LOGGER.info(pattern, JsonUtil.format(httpRequest, true), JsonUtil.format(useConnectionConfig, true), response);
         }
         return resultResponse;
     }

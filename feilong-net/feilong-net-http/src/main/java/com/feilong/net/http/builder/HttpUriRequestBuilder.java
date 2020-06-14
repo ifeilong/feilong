@@ -19,8 +19,8 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.core.Validate;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.httpurirequest.HttpUriRequestFactory;
@@ -65,7 +65,10 @@ public final class HttpUriRequestBuilder{
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("httpRequest info:[{}],connectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
+            LOGGER.trace(
+                            "httpRequest info:[{}],connectionConfig:[{}]",
+                            JsonUtil.format(httpRequest, true),
+                            JsonUtil.format(connectionConfig, true));
         }
         //---------------------------------------------------------------
         HttpUriRequest httpUriRequest = HttpUriRequestFactory.create(httpRequest, connectionConfig);

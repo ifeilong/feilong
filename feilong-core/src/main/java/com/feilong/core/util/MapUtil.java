@@ -941,7 +941,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                LOGGER.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
+                LOGGER.debug("map don't contains key:[{}],but has keys:[{}]", key, map.keySet());
             }
         }
         return returnMap;

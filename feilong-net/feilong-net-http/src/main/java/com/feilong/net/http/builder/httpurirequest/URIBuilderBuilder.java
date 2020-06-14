@@ -68,13 +68,13 @@ class URIBuilderBuilder{
             if (isNullOrEmpty(paramMap)){
 
                 if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest));
+                    LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest, true));
                 }
                 return uriBuilder;
             }
             return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
-            String message = format("httpRequest:[{}]", JsonUtil.format(httpRequest));
+            String message = format("httpRequest:[{}]", JsonUtil.format(httpRequest, true));
             throw new UncheckedHttpException(message, e);
         }
     }

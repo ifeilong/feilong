@@ -122,7 +122,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
         //---------------------------------------------------------------
         String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
-        String commonResult = format(pattern, JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig, true));
+        String commonResult = format(pattern, JsonUtil.format(httpRequest, true), JsonUtil.format(useConnectionConfig, true));
         if (isNullOrEmpty(httpPropertiesMap)){
             return commonResult;
         }

@@ -107,7 +107,7 @@ public class HttpUriRequestFactory{
             URI buildUri = uriBuilder.build();
             return new HttpGet(buildUri);
         }catch (URISyntaxException e){
-            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest));
+            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest, true));
             throw new UncheckedHttpException(message, e);
         }
     }

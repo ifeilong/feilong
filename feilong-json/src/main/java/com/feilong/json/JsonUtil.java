@@ -79,22 +79,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <h3>json-lib format map的时候或者 json转成对象/数组/map等的时候</h3>
  * 
  * <blockquote>
- * <p>
- * see {@link com.feilong.lib.json.JSONObject#_fromMap(Map, JsonConfig)}
- * </p>
  * <ul>
  * <li>key不能是null</li>
  * <li>key也不能是"null" 字符串</li>
  * </ul>
  * </blockquote>
- * 
- * 目前本工具类不再提供处理XML的方法, 请使用 xstream或者原生的XML来处理
  * </pre>
  * 
  * </blockquote>
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
+ * @since 3.0.0 change package name
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public final class JsonUtil{
