@@ -34,6 +34,8 @@ import com.feilong.json.entity.HttpMethodTestType;
 import com.feilong.json.entity.MyBean;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONObject;
+import com.feilong.lib.json.JSONObjectBuilder;
+import com.feilong.lib.json.JSONObjectToBeanUtil;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.store.member.Person;
 import com.feilong.test.AbstractTest;
@@ -44,8 +46,8 @@ public class JsonHelperTest extends AbstractTest{
     public void name(){
         String json_test = "{name=\"json\",bool:true,int:1,double:2.2,array:[1,2]}";
 
-        JSONObject jsonObject = JSONObject.fromObject(json_test);
-        Object bean = JSONObject.toBean(jsonObject);
+        JSONObject jsonObject = JSONObjectBuilder.build(json_test, new JsonConfig());
+        Object bean = JSONObjectToBeanUtil.toBean(jsonObject, null);
 
         assertEquals(jsonObject.get("name"), PropertyUtil.getProperty(bean, "name"));
         assertEquals(jsonObject.get("bool"), PropertyUtil.getProperty(bean, "bool"));

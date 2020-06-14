@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.lib.json.util;
+package com.feilong.lib.json;
 
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
-import com.feilong.lib.json.JSONArray;
-import com.feilong.lib.json.JSONException;
-import com.feilong.lib.json.JSONNull;
-import com.feilong.lib.json.JSONObject;
-import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.regexp.JdkRegexpMatcher;
 import com.feilong.lib.lang3.math.NumberUtils;
 
@@ -68,8 +63,9 @@ public class JSONTokener{
                 throw syntaxError("Found start '{' ,but miss '}' at the end.");
             }
         }
-
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Back up one character. This provides a sort of lookahead capability, so
@@ -259,10 +255,10 @@ public class JSONTokener{
                 return nextString(c);
             case '{':
                 back();
-                return JSONObject.fromObject(this, jsonConfig);
+                return JSONTokenerParser.toJSONObject(this, jsonConfig);
             case '[':
                 back();
-                return JSONArray.fromObject(this, jsonConfig);
+                return JSONTokenerParser.toJSONArray(this, jsonConfig);
             default:
                 // empty
         }

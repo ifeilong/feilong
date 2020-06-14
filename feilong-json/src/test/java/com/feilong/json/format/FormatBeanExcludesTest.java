@@ -28,6 +28,7 @@ import com.feilong.json.JsonUtil;
 
 public class FormatBeanExcludesTest extends AbstractJsonTest{
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testExcludes(){
         String format = JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"));
@@ -47,6 +48,7 @@ public class FormatBeanExcludesTest extends AbstractJsonTest{
                         ));
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testExcludes2(){
         String format = JsonUtil.format(USER, "name", "loves", "attrMap", "userInfo", "userAddresses");
@@ -68,6 +70,7 @@ public class FormatBeanExcludesTest extends AbstractJsonTest{
 
     //---------------------------------------------------------------
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testExcludes1(){
         String format = JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 0, 0);

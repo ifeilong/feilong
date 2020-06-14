@@ -91,71 +91,6 @@ public final class JSONObject implements JSON{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7895449812672706822L;
 
-    /**
-     * Creates a JSONObject.<br>
-     * Inspects the object type to call the correct JSONObject factory method. Accepts JSON formatted strings, Maps, DynaBeans and
-     * JavaBeans.
-     *
-     * @param object
-     *            the object
-     * @return the JSON object
-     * @throws JSONException
-     *             if the object can not be converted to a proper
-     *             JSONObject.
-     */
-    public static JSONObject fromObject(Object object){
-        return fromObject(object, new JsonConfig());
-    }
-
-    /**
-     * Creates a JSONObject.
-     * <p>
-     * Inspects the object type to call the correct JSONObject factory method.
-     * Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
-     * </p>
-     *
-     * @param object
-     *            the object
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON object
-     * @throws JSONException
-     *             if the object can not be converted to a proper
-     *             JSONObject.
-     */
-    public static JSONObject fromObject(Object object,JsonConfig jsonConfig){
-        return JSONObjectBuilder.build(object, jsonConfig);
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Creates a JSONDynaBean from a JSONObject.
-     *
-     * @param jsonObject
-     *            the json object
-     * @return the object
-     */
-    public static Object toBean(JSONObject jsonObject){
-        return toBean(jsonObject, null);
-    }
-
-    /**
-     * Creates a bean from a JSONObject, with the specific configuration.
-     *
-     * @param jsonObject
-     *            the json object
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     */
-    public static Object toBean(JSONObject jsonObject,JsonConfig jsonConfig){
-        return JSONObjectToBeanUtil.toBean(jsonObject, jsonConfig);
-
-    }
-
-    // ------------------------------------------------------
-
     /** identifies this object as null. */
     private boolean           nullObject;
 
@@ -163,6 +98,8 @@ public final class JSONObject implements JSON{
      * The Map where the JSONObject's properties are kept.
      */
     final Map<String, Object> properties;
+
+    //---------------------------------------------------------------
 
     /**
      * Construct an empty JSONObject.
@@ -181,6 +118,8 @@ public final class JSONObject implements JSON{
         this();
         this.nullObject = isNull;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Accumulate values under a key. It is similar to the element method except

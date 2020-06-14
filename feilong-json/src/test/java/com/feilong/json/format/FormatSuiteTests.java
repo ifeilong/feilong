@@ -39,6 +39,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 FormatStringTest.class,
                 FormatBeanExcludesTest.class,
 
+                FormatBeanSortBeanPropertyTest.class,
         //
 })
 public class FormatSuiteTests{

@@ -26,6 +26,8 @@ import com.feilong.json.entity.BeanIntIgnoreNull;
 import com.feilong.json.entity.BeanIntIgnoreNullNests;
 import com.feilong.json.entity.BeanIntIgnoreNullParent;
 import com.feilong.lib.json.JSONObject;
+import com.feilong.lib.json.JSONObjectBuilder;
+import com.feilong.lib.json.JsonConfig;
 import com.feilong.test.AbstractTest;
 
 public class FormatBeanIgnoreNullTest extends AbstractTest{
@@ -55,13 +57,13 @@ public class FormatBeanIgnoreNullTest extends AbstractTest{
 
     @Test
     public void test12MAP(){
-        JSONObject jsonObject = JSONObject.fromObject(toMap("age", 16, "name", null));
+        JSONObject jsonObject = JSONObjectBuilder.build(toMap("age", 16, "name", null), new JsonConfig());
         LOGGER.debug(jsonObject.toString(0, 0));
     }
 
     @Test
     public void test12(){
-        JSONObject jsonObject = JSONObject.fromObject(beanIntIgnoreNull);
+        JSONObject jsonObject = JSONObjectBuilder.build(beanIntIgnoreNull, new JsonConfig());
         LOGGER.debug(jsonObject.toString());
     }
 

@@ -17,6 +17,10 @@ package com.feilong.json;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.json.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_END;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_END;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -26,11 +30,13 @@ import com.feilong.core.lang.ObjectUtil;
 import com.feilong.lib.collection4.IteratorUtils;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONArray;
-import com.feilong.lib.json.JSONNull;
+import com.feilong.lib.json.JSONArrayBuilder;
 import com.feilong.lib.json.JSONObject;
+import com.feilong.lib.json.JSONObjectBuilder;
+import com.feilong.lib.json.JSONTokener;
 import com.feilong.lib.json.JsonConfig;
+import com.feilong.lib.json.ToStringUtil;
 import com.feilong.lib.json.processors.JsonValueProcessor;
-import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.lang3.ClassUtils;
 
@@ -56,28 +62,6 @@ public final class JsonHelper{
 
     //---------------------------------------------------------------
 
-    /**
-     * 转换value的值.
-     *
-     * @param <T>
-     *            the generic type
-     * @param value
-     *            the value
-     * @param jsonToJavaConfig
-     *            the json to java config
-     * @return 如果 value 是 {@link JSONNull#getInstance()} ,那么返回null,<br>
-     *         如果null == jsonToJavaConfig 或者 null == jsonToJavaConfig.getRootClass() 返回value,<br>
-     *         否则,使用 {@link JsonUtil#toBean(Object, JsonToJavaConfig)} 转成对应的bean
-     */
-    @SuppressWarnings("unchecked")
-    static <T> T transformerValue(Object value,JsonToJavaConfig jsonToJavaConfig){
-        if (JSONNull.getInstance().equals(value)){
-            return null;
-        }
-        //如果rootClass是null,表示不需要转换
-        boolean noRootClass = null == jsonToJavaConfig || null == jsonToJavaConfig.getRootClass();
-        return noRootClass ? (T) value : JsonUtil.<T> toBean(value, jsonToJavaConfig);
-    }
     // [start]toJSON
 
     /**
@@ -113,8 +97,6 @@ public final class JsonHelper{
      * @param jsonConfig
      *            the json config
      * @return the json
-     * @see com.feilong.lib.json.JSONArray#fromObject(Object, JsonConfig)
-     * @see com.feilong.lib.json.JSONObject#fromObject(Object, JsonConfig)
      * @see com.feilong.lib.json.util.JSONUtils#isArray(Object)
      * @see java.lang.Class#isEnum()
      * @see com.feilong.lib.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
@@ -153,13 +135,12 @@ public final class JsonHelper{
      * @param obj
      *            the obj
      * @return true, if is need convert to JSON array
-     * @see com.feilong.lib.json.JSONArray#_fromJSONTokener(com.feilong.lib.json.util.JSONTokener, JsonConfig)
      * @see com.feilong.lib.json.util.JSONUtils#isArray(Object)
      */
     private static boolean isNeedConvertToJSONArray(Object obj){
         if (obj instanceof String){
             String str = (String) obj;
-            if (str.startsWith("[") && str.endsWith("]")){// [] 格式的字符串 
+            if (str.startsWith(OBJECT_START) && str.endsWith(OBJECT_END)){// [] 格式的字符串 
                 return true;
             }
         }
@@ -196,10 +177,10 @@ public final class JsonHelper{
 
         //---------------------------------------------------------------
         String str = (String) obj;
-        if (str.startsWith("[") && str.endsWith("]")){// [] 格式的字符串 
+        if (str.startsWith(OBJECT_START) && str.endsWith(OBJECT_END)){// [] 格式的字符串 
             return false;
         }
-        if (str.startsWith("{") && str.endsWith("}")){// {} 格式的字符串 
+        if (str.startsWith(ARRAY_START) && str.endsWith(ARRAY_END)){// {} 格式的字符串 
             return false;
         }
         return true;
@@ -232,7 +213,7 @@ public final class JsonHelper{
 
         //---------------------------------------------------------------
         String str = (String) obj;
-        return str.startsWith("{") && str.endsWith("}");
+        return str.startsWith(ToStringUtil.ARRAY_START) && str.endsWith(ToStringUtil.ARRAY_END);
     }
 
     // [end]
@@ -247,10 +228,9 @@ public final class JsonHelper{
      * @param useJsonConfig
      *            如果是null,将使用 {@link #DEFAULT_JSON_CONFIG_INSTANCE}
      * @return the JSON array
-     * @see com.feilong.lib.json.JSONArray#fromObject(Object, JsonConfig)
      */
     static JSONArray toJSONArray(Object obj,JsonConfig useJsonConfig){
-        return JSONArray.fromObject(obj, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
+        return JSONArrayBuilder.fromObject(obj, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
     }
 
     //---------------------------------------------------------------
@@ -265,10 +245,9 @@ public final class JsonHelper{
      * @param useJsonConfig
      *            如果是null,将使用 {@link #DEFAULT_JSON_CONFIG_INSTANCE}
      * @return the JSON object
-     * @see com.feilong.lib.json.JSONObject#fromObject(Object, JsonConfig)
      */
     static JSONObject toJSONObject(Object object,JsonConfig useJsonConfig){
-        return JSONObject.fromObject(object, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
+        return JSONObjectBuilder.build(object, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
     }
 
     //---------------------------------------------------------------

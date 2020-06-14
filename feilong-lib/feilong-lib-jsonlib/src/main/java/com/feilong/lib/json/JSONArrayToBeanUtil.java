@@ -101,9 +101,9 @@ class JSONArrayToBeanUtil{
                     JsonConfig jsc = jsonConfig.copy();
                     jsc.setRootClass(objectClass);
                     jsc.setClassMap(classMap);
-                    collection.add(JSONObject.toBean((JSONObject) value, jsc));
+                    collection.add(JSONObjectToBeanUtil.toBean((JSONObject) value, jsc));
                 }else{
-                    collection.add(JSONObject.toBean((JSONObject) value));
+                    collection.add(JSONObjectToBeanUtil.toBean((JSONObject) value, null));
                 }
             }
         }
@@ -177,9 +177,9 @@ class JSONArrayToBeanUtil{
                     JsonConfig jsc = jsonConfig.copy();
                     jsc.setRootClass(objectClass);
                     jsc.setClassMap(classMap);
-                    Array.set(array, i, JSONObject.toBean((JSONObject) value, jsc));
+                    Array.set(array, i, JSONObjectToBeanUtil.toBean((JSONObject) value, jsc));
                 }else{
-                    Array.set(array, i, JSONObject.toBean((JSONObject) value));
+                    Array.set(array, i, JSONObjectToBeanUtil.toBean((JSONObject) value, null));
                 }
             }
         }
@@ -257,10 +257,9 @@ class JSONArrayToBeanUtil{
         }
 
         //---------------------------------------------------------------
-        for (Iterator i = jsonArray.iterator(); i.hasNext();){
-            Object item = i.next();
-            if (item instanceof JSONArray){
-                processArrayDimensions((JSONArray) item, dims, index + 1);
+        for (Object element : jsonArray.elementList){
+            if (element instanceof JSONArray){
+                processArrayDimensions((JSONArray) element, dims, index + 1);
             }
         }
     }

@@ -15,7 +15,7 @@
  */
 package com.feilong.json.tobean;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.json.transformer.UncapitalizeJavaIdentifierTransformer.UNCAPITALIZE;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,11 +25,9 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonToJavaConfig;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.CrmMemberInfoCommand;
@@ -39,12 +37,18 @@ import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 
-/**
- * The Class JsonUtilToBeanWithJsonToJavaConfigTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
-public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
+public class ToBeanWithJsonToJavaConfigTest{
+
+    @Test
+    public void test(){
+        String json = "{'data':[{'name':'get'}]}";
+
+        MyBean myBeans = JsonUtil.toBean(
+                        json, //
+                        new JsonToJavaConfig(MyBean.class, toMap("data", Person.class)));
+
+        assertThat(myBeans.getData().get(0), allOf(hasProperty("name", is("get"))));
+    }
 
     @Test
     public void testToBeanWithUncapitalizeJavaIdentifierTransformer1(){
@@ -124,16 +128,11 @@ public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
 
     //---------------------------------------------------------------
 
-    /**
-     * Test to bean.
-     */
     @Test
     public void testToBean(){
         String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
-        Map<String, Class<?>> classMap = newHashMap();
-        classMap.put("data", Person.class);
 
-        MyBean myBean = JsonUtil.toBean(json, new JsonToJavaConfig(MyBean.class, classMap));
+        MyBean myBean = JsonUtil.toBean(json, new JsonToJavaConfig(MyBean.class, toMap("data", Person.class)));
 
         assertThat(myBean, allOf(hasProperty("id", is(5L))));
 

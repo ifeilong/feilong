@@ -16,6 +16,11 @@
 
 package com.feilong.lib.json.util;
 
+import static com.feilong.lib.json.ToStringUtil.ARRAY_END;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_END;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -380,8 +385,8 @@ public final class JSONUtils{
     public static boolean mayBeJSON(String string){
         return string != null && //
                         ("null".equals(string) || //
-                                        (string.startsWith("[") && string.endsWith("]")) || //
-                                        (string.startsWith("{") && string.endsWith("}")));
+                                        (string.startsWith(OBJECT_START) && string.endsWith(OBJECT_END)) || //
+                                        (string.startsWith(ARRAY_START) && string.endsWith(ARRAY_END)));
     }
 
     //---------------------------------------------------------------
@@ -463,96 +468,6 @@ public final class JSONUtils{
             }
         }
         return s;
-    }
-
-    /**
-     * Produce a string in double quotes with backslash sequences in all the
-     * right places. A backslash will be inserted within </, allowing JSON text
-     * to be delivered in HTML. In JSON text, a string cannot contain a control
-     * character or an unescaped quote or backslash.<br>
-     * <strong>CAUTION:</strong> if <code>string</code> represents a
-     * javascript function, translation of characters will not take place. This
-     * will produce a non-conformant JSON text.
-     *
-     * @param string
-     *            A String
-     * @return A String correctly formatted for insertion in a JSON text.
-     */
-    public static String quote(String string){
-        if (string == null || string.length() == 0){
-            return "\"\"";
-        }
-
-        char b;
-        char c = 0;
-        int i;
-        int len = string.length();
-        StringBuffer sb = new StringBuffer(len * 2);
-        String t;
-        char[] chars = string.toCharArray();
-        char[] buffer = new char[1030];
-        int bufferIndex = 0;
-        sb.append('"');
-        for (i = 0; i < len; i += 1){
-            if (bufferIndex > 1024){
-                sb.append(buffer, 0, bufferIndex);
-                bufferIndex = 0;
-            }
-            b = c;
-            c = chars[i];
-            switch (c) {
-                case '\\':
-                case '"':
-                    buffer[bufferIndex++] = '\\';
-                    buffer[bufferIndex++] = c;
-                    break;
-                case '/':
-                    if (b == '<'){
-                        buffer[bufferIndex++] = '\\';
-                    }
-                    buffer[bufferIndex++] = c;
-                    break;
-                default:
-                    if (c < ' '){
-                        switch (c) {
-                            case '\b':
-                                buffer[bufferIndex++] = '\\';
-                                buffer[bufferIndex++] = 'b';
-                                break;
-                            case '\t':
-                                buffer[bufferIndex++] = '\\';
-                                buffer[bufferIndex++] = 't';
-                                break;
-                            case '\n':
-                                buffer[bufferIndex++] = '\\';
-                                buffer[bufferIndex++] = 'n';
-                                break;
-                            case '\f':
-                                buffer[bufferIndex++] = '\\';
-                                buffer[bufferIndex++] = 'f';
-                                break;
-                            case '\r':
-                                buffer[bufferIndex++] = '\\';
-                                buffer[bufferIndex++] = 'r';
-                                break;
-                            default:
-                                t = "000" + Integer.toHexString(c);
-                                int tLength = t.length();
-                                buffer[bufferIndex++] = '\\';
-                                buffer[bufferIndex++] = 'u';
-                                buffer[bufferIndex++] = t.charAt(tLength - 4);
-                                buffer[bufferIndex++] = t.charAt(tLength - 3);
-                                buffer[bufferIndex++] = t.charAt(tLength - 2);
-                                buffer[bufferIndex++] = t.charAt(tLength - 1);
-                        }
-                    }else{
-                        buffer[bufferIndex++] = c;
-                    }
-            }
-        }
-        sb.append(buffer, 0, bufferIndex);
-        sb.append('"');
-        return sb.toString();
     }
 
     /**

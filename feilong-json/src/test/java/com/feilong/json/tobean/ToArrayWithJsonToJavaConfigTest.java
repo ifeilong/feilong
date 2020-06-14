@@ -15,14 +15,14 @@
  */
 package com.feilong.json.tobean;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertArrayEquals;
 
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -32,17 +32,14 @@ import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.MyBean;
 import com.feilong.store.member.Person;
 
-/**
- * The Class JsonUtilToArrayWithJsonToJavaConfigTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class ToArrayWithJsonToJavaConfigTest{
 
-    @Test(expected = JsonToJavaException.class)
-    public void testToArrayBean(){
-        String json = "2{'name11':'get'},{'nam112e':'set'}";
-        JsonUtil.toArray(json, new JsonToJavaConfig(Person.class));
+    @Test
+    public void toArray2222(){
+        String json = "[{'name':'get'}]";
+        Person[] persons = JsonUtil.toArray(json, new JsonToJavaConfig(Person.class));
+
+        assertThat(persons[0], allOf(hasProperty("name", is("get"))));
     }
 
     /**
@@ -63,13 +60,23 @@ public class ToArrayWithJsonToJavaConfigTest{
     @Test
     public void toArray3(){
         String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
-        Map<String, Class<?>> classMap = newHashMap();
-        classMap.put("data", Person.class);
 
-        MyBean[] myBeans = JsonUtil.toArray(json, new JsonToJavaConfig(MyBean.class, classMap));
+        MyBean[] myBeans = JsonUtil.toArray(json, new JsonToJavaConfig(MyBean.class, toMap("data", Person.class)));
 
         assertThat(myBeans[0].getData().get(0), allOf(hasProperty("name", is("get"))));
         assertThat(myBeans[1].getData().get(0), allOf(hasProperty("name", is("set"))));
+    }
+
+    @Test
+    public void toArray3444(){
+        String json = "[{'data':[{'name':'get'}]}]";
+
+        MyBean[] myBeans = JsonUtil.toArray(
+                        json, //
+                        new JsonToJavaConfig(MyBean.class, toMap("data", Person.class)));
+
+        List<Object> data = myBeans[0].getData();
+        assertThat(data.get(0), allOf(hasProperty("name", is("get"))));
     }
 
     //-----------------------------------------------------------------------------------
@@ -99,6 +106,12 @@ public class ToArrayWithJsonToJavaConfigTest{
     public void testToArrayNullJsonToJavaConfigRootClass(){
         String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
         JsonUtil.toArray(json, new JsonToJavaConfig());
+    }
+
+    @Test(expected = JsonToJavaException.class)
+    public void testToArrayBean(){
+        String json = "2{'name11':'get'},{'nam112e':'set'}";
+        JsonUtil.toArray(json, new JsonToJavaConfig(Person.class));
     }
 
 }

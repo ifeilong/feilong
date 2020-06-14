@@ -47,7 +47,10 @@ import com.feilong.lib.ezmorph.MorpherRegistry;
 import com.feilong.lib.ezmorph.object.DateMorpher;
 import com.feilong.lib.json.JSON;
 import com.feilong.lib.json.JSONArray;
+import com.feilong.lib.json.JSONNull;
 import com.feilong.lib.json.JSONObject;
+import com.feilong.lib.json.JSONObjectBuilder;
+import com.feilong.lib.json.JSONObjectToBeanUtil;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.lang3.StringUtils;
@@ -816,12 +819,13 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #toBean(Object, JsonToJavaConfig)
+     * @see #toBean(String, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
+     * @since 3.0.6 change param type from Object to String
      */
     @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
-    public static <T> T[] toArray(Object json,JsonToJavaConfig jsonToJavaConfig){
+    public static <T> T[] toArray(String json,JsonToJavaConfig jsonToJavaConfig){
         if (null == json){
             return null;
         }
@@ -840,7 +844,7 @@ public final class JsonUtil{
             @SuppressWarnings("unchecked")
             T[] t = (T[]) ArrayUtil.newArray(rootClass, size);
             for (int i = 0; i < size; i++){
-                t[i] = toBean(jsonArray.getJSONObject(i), jsonToJavaConfig);
+                t[i] = toBean(jsonArray.getJSONObject(i).toString(), jsonToJavaConfig);
             }
             return t;
         }catch (Exception e){
@@ -904,10 +908,11 @@ public final class JsonUtil{
      *            the klass,see {@link com.feilong.lib.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #toList(Object, JsonToJavaConfig)
+     * @see #toList(String, JsonToJavaConfig)
+     * @since 3.0.6 change param type from Object to String
      */
     @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
-    public static <T> List<T> toList(Object json,Class<T> rootClass){
+    public static <T> List<T> toList(String json,Class<T> rootClass){
         if (null == json){
             return null;
         }
@@ -992,11 +997,11 @@ public final class JsonUtil{
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
      * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
-     * @see com.feilong.lib.json.JSONArray#fromObject(Object)
-     * @see #toBean(Object, JsonToJavaConfig)
+     * @see #toBean(String, JsonToJavaConfig)
+     * @since 3.0.6 change param type from Object to String
      */
     @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
-    public static <T> List<T> toList(Object json,JsonToJavaConfig jsonToJavaConfig){
+    public static <T> List<T> toList(String json,JsonToJavaConfig jsonToJavaConfig){
         if (null == json){
             return null;
         }
@@ -1010,7 +1015,7 @@ public final class JsonUtil{
             JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
             List<T> list = newArrayList();
             for (int i = 0, j = jsonArray.size(); i < j; i++){
-                list.add(JsonUtil.<T> toBean(jsonArray.getJSONObject(i), jsonToJavaConfig));
+                list.add(objectToBean(jsonArray.getJSONObject(i), jsonToJavaConfig));
             }
             return list;
         }catch (Exception e){
@@ -1090,10 +1095,11 @@ public final class JsonUtil{
      *            the json
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
-     * @see #toMap(Object, JsonToJavaConfig)
+     * @see #toMap(String, JsonToJavaConfig)
      * @since 1.5.0
+     * @since 3.0.6 change param type from Object to String
      */
-    public static <T> Map<String, T> toMap(Object json){
+    public static <T> Map<String, T> toMap(String json){
         return toMap(json, null);
     }
 
@@ -1151,11 +1157,11 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
-     * @see #toBean(Object, JsonToJavaConfig)
+     * @see #toBean(String, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
-     * @since 1.9.4
+     * @since 3.0.6 change param type from Object to String
      */
-    public static <T> Map<String, T> toMap(Object json,JsonToJavaConfig jsonToJavaConfig){
+    public static <T> Map<String, T> toMap(String json,JsonToJavaConfig jsonToJavaConfig){
         LOGGER.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
         if (isNullOrEmpty(json)){
             return emptyMap();
@@ -1174,7 +1180,7 @@ public final class JsonUtil{
                 Object value = jsonObject.get(key);
                 LOGGER.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
 
-                map.put(key, JsonHelper.<T> transformerValue(value, jsonToJavaConfig));
+                map.put(key, transformerValue(value, jsonToJavaConfig));
             }
             return map;
         }catch (Exception e){
@@ -1230,16 +1236,15 @@ public final class JsonUtil{
      *            e.g. {'name':'get','dateAttr':'2009-11-12'}<br>
      *            可以是 json字符串,也可以是JSONObject<br>
      *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
-     *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
      * @param rootClass
      *            e.g. Person.class,see {@link com.feilong.lib.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null <br>
      *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see JSONObject#fromObject(Object, JsonConfig)
      * @see com.feilong.lib.json.JsonConfig#setRootClass(Class)
-     * @see #toBean(Object, JsonToJavaConfig)
+     * @see #toBean(String, JsonToJavaConfig)
+     * @since 3.0.6 change param type from Object to String
      */
-    public static <T> T toBean(Object json,Class<T> rootClass){
+    public static <T> T toBean(String json,Class<T> rootClass){
         if (null == json){
             return null;
         }
@@ -1318,12 +1323,39 @@ public final class JsonUtil{
      * @return 如果<code>json</code> 是null,那么返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see JSONObject#fromObject(Object, JsonConfig)
      * @see com.feilong.lib.json.JsonConfig#setRootClass(Class)
      * @since 1.9.4
+     * @since 3.0.6 change param type from Object to String
+     */
+    public static <T> T toBean(String json,JsonToJavaConfig jsonToJavaConfig){
+        return objectToBean(json, jsonToJavaConfig);
+    }
+
+    /**
+     * 转换value的值.
+     *
+     * @param <T>
+     *            the generic type
+     * @param value
+     *            the value
+     * @param jsonToJavaConfig
+     *            the json to java config
+     * @return 如果 value 是 {@link JSONNull#getInstance()} ,那么返回null,<br>
+     *         如果null == jsonToJavaConfig 或者 null == jsonToJavaConfig.getRootClass() 返回value,<br>
+     *         否则,使用 {@link #objectToBean(Object, JsonToJavaConfig)} 转成对应的bean
      */
     @SuppressWarnings("unchecked")
-    public static <T> T toBean(Object json,JsonToJavaConfig jsonToJavaConfig){
+    static <T> T transformerValue(Object value,JsonToJavaConfig jsonToJavaConfig){
+        if (JSONNull.getInstance().equals(value)){
+            return null;
+        }
+        //如果rootClass是null,表示不需要转换
+        boolean noRootClass = null == jsonToJavaConfig || null == jsonToJavaConfig.getRootClass();
+        return noRootClass ? (T) value : objectToBean(value, jsonToJavaConfig);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T objectToBean(Object json,JsonToJavaConfig jsonToJavaConfig){
         if (null == json){
             return null;
         }
@@ -1336,10 +1368,10 @@ public final class JsonUtil{
         //---------------------------------------------------------------
         JsonConfig jsonConfig = JsonToJavaConfigBuilder.build(rootClass, jsonToJavaConfig);
         try{
-            JSONObject jsonObject = JSONObject.fromObject(json);
-            return (T) JSONObject.toBean(jsonObject, jsonConfig);
+            JSONObject jsonObject = JSONObjectBuilder.build(json, new JsonConfig());
+            return (T) JSONObjectToBeanUtil.toBean(jsonObject, jsonConfig);
         }catch (Exception e){
-            throw new JsonToJavaException(buildJsonToJavaExceptionMessage(json, jsonToJavaConfig), e);
+            throw new JsonToJavaException(buildJsonToJavaExceptionMessage(json.toString(), jsonToJavaConfig), e);
         }
     }
 
@@ -1355,7 +1387,7 @@ public final class JsonUtil{
      * @return the string
      * @since 1.11.5
      */
-    private static String buildJsonToJavaExceptionMessage(Object json,JsonToJavaConfig jsonToJavaConfig){
+    private static String buildJsonToJavaExceptionMessage(String json,JsonToJavaConfig jsonToJavaConfig){
         return Slf4jUtil.format("input json:{},jsonToJavaConfig:{}", json, format(jsonToJavaConfig, true));
     }
 

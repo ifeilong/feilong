@@ -16,11 +16,8 @@
 package com.feilong.lib.json;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 import com.feilong.lib.ezmorph.Morpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
@@ -82,45 +79,9 @@ public final class JSONArray implements JSON{
     //---------------------------------------------------------------
 
     /**
-     * Creates a JSONArray.<br>
-     * Inspects the object type to call the correct JSONArray factory method.
-     * Accepts JSON formatted strings, arrays, Collections and Enums.
-     *
-     * @param object
-     *            the object
-     * @return the JSON array
-     * @throws JSONException
-     *             if the object can not be converted to a proper
-     *             JSONArray.
-     */
-    public static JSONArray fromObject(Object object){
-        return fromObject(object, new JsonConfig());
-    }
-
-    /**
-     * Creates a JSONArray.<br>
-     * Inspects the object type to call the correct JSONArray factory method.
-     * Accepts JSON formatted strings, arrays, Collections and Enums.
-     *
-     * @param object
-     *            the object
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON array
-     * @throws JSONException
-     *             if the object can not be converted to a proper
-     *             JSONArray.
-     */
-    public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
-        return JSONArrayBuilder.fromObject(object, jsonConfig);
-    }
-
-    //---------------------------------------------------------------
-
-    /**
      * The List where the JSONArray's properties are kept.
      */
-    final List<Object> elementList;
+    final List<Object>        elementList;
 
     /**
      * Construct an empty JSONArray.
@@ -130,53 +91,6 @@ public final class JSONArray implements JSON{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * 添加.
-     *
-     * @param index
-     *            the index
-     * @param value
-     *            the value
-     */
-    public void add(int index,Object value){
-        this.elementList.add(index, ProcessValueUtil.processArrayValue(value, new JsonConfig()));
-    }
-
-    /**
-     * Put or replace an object value in the JSONArray. If the index is greater
-     * than the length of the JSONArray, then null elements will be added as
-     * necessary to pad it out.
-     *
-     * @param index
-     *            The subscript.
-     * @param value
-     *            An object value. The value should be a Boolean, Double,
-     *            Integer, JSONArray, JSONObject, JSONFunction, Long, String,
-     *            JSONString or the JSONNull object.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             If the index is negative or if the the value is an
-     *             invalid number.
-     */
-    private JSONArray add(int index,Object value,JsonConfig jsonConfig){
-        JSONUtils.testValidity(value);
-        if (index < 0){
-            throw new JSONException("JSONArray[" + index + "] not found.");
-        }
-        //---------------------------------------------------------------
-        if (index < size()){
-            this.elementList.set(index, ProcessValueUtil.processArrayValue(value, jsonConfig));
-        }else{
-            while (index != size()){
-                this.elementList.add(JSONNull.getInstance());
-            }
-            addValue(value, jsonConfig);
-        }
-        return this;
-    }
 
     /**
      * Append an JSON value. This increases the array's length by one.
@@ -203,6 +117,8 @@ public final class JSONArray implements JSON{
         return addValue(value, new JsonConfig());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Get the object value associated with an index.
      *
@@ -228,7 +144,8 @@ public final class JSONArray implements JSON{
         Object o = get(index);
         if (JSONNull.getInstance().equals(o)){
             return new JSONObject(true);
-        }else if (o instanceof JSONObject){
+        }
+        if (o instanceof JSONObject){
             return (JSONObject) o;
         }
         throw new JSONException("JSONArray[" + index + "] is not a JSONObject.");
@@ -241,44 +158,6 @@ public final class JSONArray implements JSON{
      */
     public boolean isEmpty(){
         return this.elementList.isEmpty();
-    }
-
-    /**
-     * Returns an Iterator for this JSONArray.
-     *
-     * @return the iterator
-     */
-    public Iterator iterator(){
-        return new JSONArrayListIterator();
-    }
-
-    /**
-     * 删除.
-     *
-     * @param index
-     *            the index
-     * @return the object
-     * @deprecated 将会删除
-     */
-    @Deprecated
-    public Object remove(int index){
-        return elementList.remove(index);
-    }
-
-    /**
-     * 设置.
-     *
-     * @param index
-     *            the index
-     * @param value
-     *            the value
-     * @return the object
-     */
-    public Object set(int index,Object value){
-        JsonConfig jsonConfig = new JsonConfig();
-        Object previous = get(index);
-        add(index, value, jsonConfig);
-        return previous;
     }
 
     /**
@@ -331,8 +210,7 @@ public final class JSONArray implements JSON{
             return this.toString();
         }
 
-        List elements2 = this.elementList;
-        return ToStringUtil.toString(elements2, indentFactor, indent);
+        return ToStringUtil.toString(this.elementList, indentFactor, indent);
     }
 
     //---------------------------------------------------------------
@@ -380,7 +258,7 @@ public final class JSONArray implements JSON{
     public int hashCode(){
         int hashcode = 29;
 
-        for (Iterator e = elementList.iterator(); e.hasNext();){
+        for (Iterator<Object> e = elementList.iterator(); e.hasNext();){
             Object element = e.next();
             hashcode += JSONUtils.hashCode(element);
         }
@@ -475,149 +353,4 @@ public final class JSONArray implements JSON{
         return true;
     }
 
-    /**
-     * The Class JSONArrayListIterator.
-     */
-    private class JSONArrayListIterator implements ListIterator{
-
-        /** The current index. */
-        int currentIndex = 0;
-
-        /** The last index. */
-        int lastIndex    = -1;
-
-        /**
-         * Instantiates a new JSON array list iterator.
-         */
-        JSONArrayListIterator(){
-
-        }
-
-        /**
-         * Checks for next.
-         *
-         * @return true, if successful
-         */
-        @Override
-        public boolean hasNext(){
-            return currentIndex != size();
-        }
-
-        /**
-         * Next.
-         *
-         * @return the object
-         */
-        @Override
-        public Object next(){
-            try{
-                Object next = get(currentIndex);
-                lastIndex = currentIndex++;
-                return next;
-            }catch (IndexOutOfBoundsException e){
-                throw new NoSuchElementException();
-            }
-        }
-
-        /**
-         * 删除.
-         */
-        @Override
-        public void remove(){
-            if (lastIndex == -1){
-                throw new IllegalStateException();
-            }
-            try{
-                JSONArray.this.remove(lastIndex);
-                if (lastIndex < currentIndex){
-                    currentIndex--;
-                }
-                lastIndex = -1;
-            }catch (IndexOutOfBoundsException e){
-                throw new ConcurrentModificationException();
-            }
-        }
-
-        /**
-         * Checks for previous.
-         *
-         * @return true, if successful
-         */
-        @Override
-        public boolean hasPrevious(){
-            return currentIndex != 0;
-        }
-
-        /**
-         * Previous.
-         *
-         * @return the object
-         */
-        @Override
-        public Object previous(){
-            try{
-                int index = currentIndex - 1;
-                Object previous = get(index);
-                lastIndex = currentIndex = index;
-                return previous;
-            }catch (IndexOutOfBoundsException e){
-                throw new NoSuchElementException();
-            }
-        }
-
-        /**
-         * Next index.
-         *
-         * @return the int
-         */
-        @Override
-        public int nextIndex(){
-            return currentIndex;
-        }
-
-        /**
-         * Previous index.
-         *
-         * @return the int
-         */
-        @Override
-        public int previousIndex(){
-            return currentIndex - 1;
-        }
-
-        /**
-         * 设置.
-         *
-         * @param obj
-         *            the obj
-         */
-        @Override
-        public void set(Object obj){
-            if (lastIndex == -1){
-                throw new IllegalStateException();
-            }
-
-            try{
-                JSONArray.this.set(lastIndex, obj);
-            }catch (IndexOutOfBoundsException ex){
-                throw new ConcurrentModificationException();
-            }
-        }
-
-        /**
-         * 添加.
-         *
-         * @param obj
-         *            the obj
-         */
-        @Override
-        public void add(Object obj){
-            try{
-                JSONArray.this.add(currentIndex++, obj);
-                lastIndex = -1;
-            }catch (IndexOutOfBoundsException ex){
-                throw new ConcurrentModificationException();
-            }
-        }
-    }
 }

@@ -18,7 +18,6 @@ package com.feilong.lib.json;
 import java.util.Collection;
 
 import com.feilong.lib.json.util.JSONExceptionUtil;
-import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 
@@ -30,11 +29,6 @@ import com.feilong.lib.json.util.PropertyFilter;
 public class JSONTokenerParser{
 
     static JSONObject toJSONObject(JSONTokener jsonTokener,JsonConfig jsonConfig){
-        //        if (tokener.matches("null.*")){
-        //            return new JSONObject(true);
-        //        }
-
-        //---------------------------------------------------------------
         if (jsonTokener.nextClean() != '{'){
             throw jsonTokener.syntaxError("A JSONObject text must begin with '{'");
         }
@@ -42,68 +36,34 @@ public class JSONTokenerParser{
         Collection<String> exclusions = jsonConfig.getMergedExcludes();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
+        //---------------------------------------------------------------
+
         JSONObject jsonObject = new JSONObject();
-        try{
 
-            String key;
-            for (;;){
-                char c = jsonTokener.nextClean();
+        String key;
+        for (;;){
+            char c = jsonTokener.nextClean();
+            switch (c) {
+                case 0:
+                    throw jsonTokener.syntaxError("A JSONObject text must end with '}'");
+                case '}':
+                    return jsonObject;
+                default:
+                    jsonTokener.back();
+                    key = jsonTokener.nextValue(jsonConfig).toString();
+            }
+            //---------------------------------------------------------------
 
-                switch (c) {
-                    case 0:
-                        throw jsonTokener.syntaxError("A JSONObject text must end with '}'");
-                    case '}':
-                        return jsonObject;
-                    default:
-                        jsonTokener.back();
-                        key = jsonTokener.nextValue(jsonConfig).toString();
-                }
+            //The key is followed by ':'. 
+            c = jsonTokener.nextClean();
+            if (c != ':'){
+                throw jsonTokener.syntaxError("Expected a ':' after a key");
+            }
 
-                //The key is followed by ':'. We will also tolerate '=' or '=>'.
-                c = jsonTokener.nextClean();
-                if (c == '='){
-                    if (jsonTokener.next() != '>'){
-                        jsonTokener.back();
-                    }
-                }else if (c != ':'){
-                    throw jsonTokener.syntaxError("Expected a ':' after a key");
-                }
+            //---------------------------------------------------------------
+            char peek = jsonTokener.peek();
 
-                //---------------------------------------------------------------
-                char peek = jsonTokener.peek();
-                boolean quoted = peek == '"' || peek == '\'';
-                Object v = jsonTokener.nextValue(jsonConfig);
-                if (exclusions.contains(key)){
-                    switch (jsonTokener.nextClean()) {
-                        case ';':
-                        case ',':
-                            if (jsonTokener.nextClean() == '}'){
-                                return jsonObject;
-                            }
-                            jsonTokener.back();
-                            break;
-                        case '}':
-                            return jsonObject;
-                        default:
-                            throw jsonTokener.syntaxError("Expected a ',' or '}'");
-                    }
-                    continue;
-                }
-
-                //---------------------------------------------------------------
-                if (jsonPropertyFilter == null || !jsonPropertyFilter.apply(jsonTokener, key, v)){
-                    if (quoted && v instanceof String && (JSONUtils.mayBeJSON((String) v))){
-                        v = JSONUtils.DOUBLE_QUOTE + v + JSONUtils.DOUBLE_QUOTE;
-                    }
-                    if (jsonObject.properties.containsKey(key)){
-                        jsonObject.accumulate(key, v, jsonConfig);
-                    }else{
-                        jsonObject.put(key, v, jsonConfig);
-                    }
-                }
-                //---------------------------------------------------------------
-
-                // Pairs are separated by ','. We will also tolerate ';'.
+            if (exclusions.contains(key)){
                 switch (jsonTokener.nextClean()) {
                     case ';':
                     case ',':
@@ -117,9 +77,38 @@ public class JSONTokenerParser{
                     default:
                         throw jsonTokener.syntaxError("Expected a ',' or '}'");
                 }
+                continue;
             }
-        }catch (JSONException jsone){
-            throw jsone;
+
+            //---------------------------------------------------------------
+            boolean quoted = peek == '"' || peek == '\'';
+            Object value = jsonTokener.nextValue(jsonConfig);
+            if (jsonPropertyFilter == null || !jsonPropertyFilter.apply(jsonTokener, key, value)){
+                if (quoted && value instanceof String && (JSONUtils.mayBeJSON((String) value))){
+                    value = JSONUtils.DOUBLE_QUOTE + value + JSONUtils.DOUBLE_QUOTE;
+                }
+                if (jsonObject.properties.containsKey(key)){
+                    jsonObject.accumulate(key, value, jsonConfig);
+                }else{
+                    jsonObject.put(key, value, jsonConfig);
+                }
+            }
+            //---------------------------------------------------------------
+
+            // Pairs are separated by ','. We will also tolerate ';'.
+            switch (jsonTokener.nextClean()) {
+                case ';':
+                case ',':
+                    if (jsonTokener.nextClean() == '}'){
+                        return jsonObject;
+                    }
+                    jsonTokener.back();
+                    break;
+                case '}':
+                    return jsonObject;
+                default:
+                    throw jsonTokener.syntaxError("Expected a ',' or '}'");
+            }
         }
     }
 

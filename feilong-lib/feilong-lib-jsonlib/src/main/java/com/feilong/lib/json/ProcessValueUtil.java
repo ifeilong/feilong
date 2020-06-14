@@ -15,11 +15,15 @@
  */
 package com.feilong.lib.json;
 
+import static com.feilong.lib.json.ToStringUtil.ARRAY_END;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_END;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+
 import java.lang.annotation.Annotation;
 
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
-import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -125,7 +129,7 @@ public class ProcessValueUtil{
             return JSONSerializer.toJSON(value, jsonConfig);
         }
         if (JSONUtils.isArray(value)){
-            return JSONArray.fromObject(value, jsonConfig);
+            return JSONArrayBuilder.fromObject(value, jsonConfig);
         }
 
         //---------------------------------------------------------------
@@ -133,10 +137,10 @@ public class ProcessValueUtil{
             String str = String.valueOf(value);
             if (JSONUtils.hasQuotes(str)){
                 String stripped = JSONUtils.stripQuotes(str);
-                if (stripped.startsWith("[") && stripped.endsWith("]")){
+                if (stripped.startsWith(OBJECT_START) && stripped.endsWith(OBJECT_END)){
                     return stripped;
                 }
-                if (stripped.startsWith("{") && stripped.endsWith("}")){
+                if (stripped.startsWith(ARRAY_START) && stripped.endsWith(ARRAY_END)){
                     return stripped;
                 }
                 return str;

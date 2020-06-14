@@ -468,7 +468,6 @@ public class ArrayConverter extends AbstractConverter{
      *             is <code>null</code>
      */
     private List<String> parseElements(final Class<?> type,String value){
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
         }

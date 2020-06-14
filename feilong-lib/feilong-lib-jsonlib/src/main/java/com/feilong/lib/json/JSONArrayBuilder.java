@@ -15,13 +15,14 @@
  */
 package com.feilong.lib.json;
 
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Iterator;
 
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
-import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -38,48 +39,59 @@ public class JSONArrayBuilder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //---------------------------------------------------------------
-
+    /**
+     * Creates a JSONArray.<br>
+     * Inspects the object type to call the correct JSONArray factory method.
+     * Accepts JSON formatted strings, arrays, Collections and Enums.
+     *
+     * @param object
+     *            the object
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON array
+     */
     public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
+        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, new JsonConfig());
+
         if (object instanceof String){
             JSONTokener jsonTokener = new JSONTokener((String) object);
-            return JSONTokenerParser.toJSONArray(jsonTokener, jsonConfig);
+            return JSONTokenerParser.toJSONArray(jsonTokener, useJsonConfig);
         }
         if (object instanceof JSONTokener){
-            return JSONTokenerParser.toJSONArray((JSONTokener) object, jsonConfig);
+            return JSONTokenerParser.toJSONArray((JSONTokener) object, useJsonConfig);
         }
 
         //---------------------------------------------------------------
         if (object instanceof JSONArray){
-            return fromJSONArray((JSONArray) object, jsonConfig);
+            return fromJSONArray((JSONArray) object, useJsonConfig);
         }
         if (object instanceof Collection){
-            return fromCollection((Collection) object, jsonConfig);
+            return fromCollection((Collection) object, useJsonConfig);
         }
 
         //---------------------------------------------------------------
         if (object != null && object.getClass().isArray()){
             Class<?> type = object.getClass().getComponentType();
             if (!type.isPrimitive()){
-                return fromArray((Object[]) object, jsonConfig);
+                return fromArray((Object[]) object, useJsonConfig);
             }
             //---------------------------------------------------------------
             if (type == Boolean.TYPE){
-                return fromArray((boolean[]) object, jsonConfig);
+                return fromArray((boolean[]) object, useJsonConfig);
             }else if (type == Byte.TYPE){
-                return fromArray((byte[]) object, jsonConfig);
+                return fromArray((byte[]) object, useJsonConfig);
             }else if (type == Short.TYPE){
-                return fromArray((short[]) object, jsonConfig);
+                return fromArray((short[]) object, useJsonConfig);
             }else if (type == Integer.TYPE){
-                return fromArray((int[]) object, jsonConfig);
+                return fromArray((int[]) object, useJsonConfig);
             }else if (type == Long.TYPE){
-                return fromArray((long[]) object, jsonConfig);
+                return fromArray((long[]) object, useJsonConfig);
             }else if (type == Float.TYPE){
-                return fromArray((float[]) object, jsonConfig);
+                return fromArray((float[]) object, useJsonConfig);
             }else if (type == Double.TYPE){
-                return fromArray((double[]) object, jsonConfig);
+                return fromArray((double[]) object, useJsonConfig);
             }else if (type == Character.TYPE){
-                return fromArray((char[]) object, jsonConfig);
+                return fromArray((char[]) object, useJsonConfig);
             }
 
             throw new JSONException("Unsupported type");
@@ -88,12 +100,12 @@ public class JSONArrayBuilder{
         //---------------------------------------------------------------
         if (JSONUtils.isBoolean(object) || JSONUtils.isNumber(object) || JSONUtils.isNull(object) || JSONUtils.isString(object)
                         || object instanceof JSON){
-            return new JSONArray().addValue(object, jsonConfig);
+            return new JSONArray().addValue(object, useJsonConfig);
         }
 
         //---------------------------------------------------------------
         if (object instanceof Enum){
-            return fromArray((Enum) object, jsonConfig);
+            return fromArray((Enum) object, useJsonConfig);
         }
         if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
@@ -101,7 +113,7 @@ public class JSONArrayBuilder{
 
         //---------------------------------------------------------------
         if (JSONUtils.isObject(object)){
-            return new JSONArray().addValue(JSONObject.fromObject(object, jsonConfig));
+            return new JSONArray().addValue(JSONObjectBuilder.build(object, useJsonConfig));
         }
         throw new JSONException("Unsupported type");
     }
@@ -365,19 +377,18 @@ public class JSONArrayBuilder{
     /**
      * From JSON array.
      *
-     * @param array
+     * @param inputJsonArray
      *            the array
      * @param jsonConfig
      *            the json config
      * @return the JSON array
      */
-    private static JSONArray fromJSONArray(JSONArray array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
+    private static JSONArray fromJSONArray(JSONArray inputJsonArray,JsonConfig jsonConfig){
+        return build(inputJsonArray, jsonConfig, new JsonHook<JSONArray>(){
 
             @Override
             public void handle(JSONArray jsonArray){
-                for (Iterator elements = array.iterator(); elements.hasNext();){
-                    Object element = elements.next();
+                for (Object element : inputJsonArray.elementList){
                     jsonArray.addValue(element, jsonConfig);
                 }
             }

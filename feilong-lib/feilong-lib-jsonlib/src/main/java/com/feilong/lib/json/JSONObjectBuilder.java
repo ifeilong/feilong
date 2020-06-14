@@ -28,7 +28,6 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONExceptionUtil;
-import com.feilong.lib.json.util.JSONTokener;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 
@@ -37,7 +36,7 @@ import com.feilong.lib.json.util.PropertyFilter;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
-class JSONObjectBuilder{
+public class JSONObjectBuilder{
 
     /** Don't let anyone instantiate this class. */
     private JSONObjectBuilder(){
@@ -46,9 +45,23 @@ class JSONObjectBuilder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //---------------------------------------------------------------
-
-    static JSONObject build(Object object,JsonConfig jsonConfig){
+    /**
+     * Creates a JSONObject.
+     * <p>
+     * Inspects the object type to call the correct JSONObject factory method.
+     * Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
+     * </p>
+     *
+     * @param object
+     *            the object
+     * @param jsonConfig
+     *            the json config
+     * @return the JSON object
+     * @throws JSONException
+     *             if the object can not be converted to a proper
+     *             JSONObject.
+     */
+    public static JSONObject build(Object object,JsonConfig jsonConfig){
         if (object == null || JSONUtils.isNull(object)){
             return new JSONObject(true);
         }
@@ -59,9 +72,9 @@ class JSONObjectBuilder{
         if (object instanceof JSONObject){
             return fromJSONObject((JSONObject) object, jsonConfig);
         }
-        if (object instanceof JSONTokener){
-            return JSONTokenerParser.toJSONObject((JSONTokener) object, jsonConfig);
-        }
+        //        if (object instanceof JSONTokener){
+        //            return JSONTokenerParser.toJSONObject((JSONTokener) object, jsonConfig);
+        //        }
         if (object instanceof Map){
             return fromMap((Map) object, jsonConfig);
         }
@@ -240,24 +253,24 @@ class JSONObjectBuilder{
     /**
      * From JSON object.
      *
-     * @param object
+     * @param inputJsonObject
      *            the object
      * @param jsonConfig
      *            the json config
      * @return the JSON object
      */
-    private static JSONObject fromJSONObject(JSONObject object,JsonConfig jsonConfig){
-        if (object == null || object.isNullObject()){
+    private static JSONObject fromJSONObject(JSONObject inputJsonObject,JsonConfig jsonConfig){
+        if (inputJsonObject == null || inputJsonObject.isNullObject()){
             return new JSONObject(true);
         }
-        return build(object, jsonConfig, new JsonHook<JSONObject>(){
+        return build(inputJsonObject, jsonConfig, new JsonHook<JSONObject>(){
 
             @Override
             public void handle(JSONObject jsonObject){
                 Collection<String> exclusions = jsonConfig.getMergedExcludes();
                 PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
-                List<String> names = object.names(jsonConfig);
+                List<String> names = inputJsonObject.names(jsonConfig);
                 for (String key : names){
                     if (key == null){
                         throw new JSONException("JSON keys cannot be null.");
@@ -268,8 +281,8 @@ class JSONObjectBuilder{
                     if (exclusions.contains(key)){
                         continue;
                     }
-                    Object value = object.get(key);
-                    if (jsonPropertyFilter != null && jsonPropertyFilter.apply(object, key, value)){
+                    Object value = inputJsonObject.get(key);
+                    if (jsonPropertyFilter != null && jsonPropertyFilter.apply(inputJsonObject, key, value)){
                         continue;
                     }
                     if (jsonObject.properties.containsKey(key)){

@@ -16,7 +16,9 @@
 
 package com.feilong.lib.json;
 
-import com.feilong.lib.json.util.JSONTokener;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -77,7 +79,7 @@ public class JSONSerializer{
             }
             return JSONArrayToBeanUtil.toCollection((JSONArray) json, jsonConfig);
         }
-        return JSONObject.toBean((JSONObject) json, jsonConfig);
+        return JSONObjectToBeanUtil.toBean((JSONObject) json, jsonConfig);
     }
 
     /**
@@ -116,16 +118,16 @@ public class JSONSerializer{
             return toJSON((String) object, jsonConfig);
         }
         if (JSONUtils.isArray(object)){
-            return JSONArray.fromObject(object, jsonConfig);
+            return JSONArrayBuilder.fromObject(object, jsonConfig);
         }
         //---------------------------------------------------------------
         try{
-            return JSONObject.fromObject(object, jsonConfig);
+            return JSONObjectBuilder.build(object, jsonConfig);
         }catch (JSONException e){
             if (object instanceof JSONTokener){
                 ((JSONTokener) object).reset();
             }
-            return JSONArray.fromObject(object, jsonConfig);
+            return JSONArrayBuilder.fromObject(object, jsonConfig);
         }
     }
 
@@ -141,11 +143,13 @@ public class JSONSerializer{
      *             if the string is not a valid JSON string
      */
     private static JSON toJSON(String string,JsonConfig jsonConfig){
-        if (string.startsWith("[")){
-            return JSONArray.fromObject(string, jsonConfig);
-        }else if (string.startsWith("{")){
-            return JSONObject.fromObject(string, jsonConfig);
-        }else if ("null".equals(string)){
+        if (string.startsWith(OBJECT_START)){
+            return JSONArrayBuilder.fromObject(string, jsonConfig);
+        }
+        if (string.startsWith(ARRAY_START)){
+            return JSONObjectBuilder.build(string, jsonConfig);
+        }
+        if ("null".equals(string)){
             return JSONNull.getInstance();
         }
         throw new JSONException("Invalid JSON String");
