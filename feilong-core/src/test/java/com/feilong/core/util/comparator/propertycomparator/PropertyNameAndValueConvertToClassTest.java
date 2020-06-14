@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
-import com.feilong.store.member.UserSameHashCodeWithComparable;
 
 public class PropertyNameAndValueConvertToClassTest{
 

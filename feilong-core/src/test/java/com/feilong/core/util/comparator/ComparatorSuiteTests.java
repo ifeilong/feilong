@@ -19,10 +19,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.util.comparator.beancomparatorutiltest.BeanComparatorUtilSuiteTests;
+import com.feilong.core.util.comparator.beancomparatorutil.BeanComparatorUtilSuiteTests;
 import com.feilong.core.util.comparator.propertycomparator.PropertyComparatorSuiteTests;
 import com.feilong.core.util.comparator.regexgroupnumbercomparator.RegexGroupNumberComparatorTest;
-import com.feilong.core.util.comparator.sorthelpertest.SortHelperSuiteTests;
+import com.feilong.core.util.comparator.sorthelper.SortHelperSuiteTests;
 
 /**
  *

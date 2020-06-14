@@ -19,9 +19,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.net.paramutiltest.FeiLongParamUtilSuiteTests;
-import com.feilong.core.net.uriutiltest.FeiLongURIUtilSuiteTests;
-import com.feilong.core.net.urlutiltest.FeiLongURLUtilSuiteTests;
+import com.feilong.core.net.paramutil.FeiLongParamUtilSuiteTests;
+import com.feilong.core.net.uriutil.FeiLongURIUtilSuiteTests;
+import com.feilong.core.net.urlutil.FeiLongURLUtilSuiteTests;
 
 /**
  * The Class FeiLongNetSuiteTests.

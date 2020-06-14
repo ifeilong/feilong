@@ -19,18 +19,18 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.util.aggregateutiltest.AggregateUtilSuiteTests;
+import com.feilong.core.util.aggregateutil.AggregateUtilSuiteTests;
 import com.feilong.core.util.closure.ClosureSuiteTests;
-import com.feilong.core.util.collectionsutiltest.CollectionsUtilSuiteTests;
+import com.feilong.core.util.collectionsutil.CollectionsUtilSuiteTests;
 import com.feilong.core.util.comparator.ComparatorSuiteTests;
-import com.feilong.core.util.enumerationutiltest.EnumerationUtilParameterizedTest;
+import com.feilong.core.util.enumerationutil.EnumerationUtilParameterizedTest;
 import com.feilong.core.util.equator.IgnoreCaseEquatorTest;
-import com.feilong.core.util.maputiltest.MapUtilSuiteTests;
+import com.feilong.core.util.maputil.MapUtilSuiteTests;
 import com.feilong.core.util.predicate.BeanPredicateUtilSuiteTests;
-import com.feilong.core.util.randomutiltest.RandomUtilSuiteTests;
-import com.feilong.core.util.regexutiltest.RegexUtilSuiteTests;
-import com.feilong.core.util.resourcebundleutiltest.ResourceBundleUtilSuiteTests;
-import com.feilong.core.util.sortutiltest.SortUtilSuiteTests;
+import com.feilong.core.util.randomutil.RandomUtilSuiteTests;
+import com.feilong.core.util.regexutil.RegexUtilSuiteTests;
+import com.feilong.core.util.resourcebundleutil.ResourceBundleUtilSuiteTests;
+import com.feilong.core.util.sortutil.SortUtilSuiteTests;
 import com.feilong.core.util.transformer.TransformerSuiteTests;
 
 @RunWith(Suite.class)

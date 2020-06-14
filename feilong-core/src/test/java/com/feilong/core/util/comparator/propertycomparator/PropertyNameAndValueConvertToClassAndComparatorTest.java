@@ -23,7 +23,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.lib.collection4.ComparatorUtils;
-import com.feilong.store.member.UserSameHashCodeWithComparable;
 
 public class PropertyNameAndValueConvertToClassAndComparatorTest{
 

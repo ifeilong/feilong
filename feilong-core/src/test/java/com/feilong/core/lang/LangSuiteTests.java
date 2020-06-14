@@ -20,16 +20,16 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.lang.annotation.AnnotationToStringBuilderSuiteTests;
-import com.feilong.core.lang.arrayutiltest.ArrayUtilSuiteTests;
-import com.feilong.core.lang.classloaderutiltest.ClassLoaderUtilSuiteTests;
-import com.feilong.core.lang.classutiltest.ClassUtilSuiteTests;
-import com.feilong.core.lang.enumutiltest.EnumUtilSuiteTests;
-import com.feilong.core.lang.numberutiltest.NumberUtilSuiteTests;
-import com.feilong.core.lang.objectutiltest.ObjectUtilSuiteTests;
+import com.feilong.core.lang.arrayutil.ArrayUtilSuiteTests;
+import com.feilong.core.lang.classloaderutil.ClassLoaderUtilSuiteTests;
+import com.feilong.core.lang.classutil.ClassUtilSuiteTests;
+import com.feilong.core.lang.enumutil.EnumUtilSuiteTests;
+import com.feilong.core.lang.numberutil.NumberUtilSuiteTests;
+import com.feilong.core.lang.objectutil.ObjectUtilSuiteTests;
 import com.feilong.core.lang.reflect.ReflectSuiteTests;
-import com.feilong.core.lang.stringutiltest.StringUtilSuiteTests;
-import com.feilong.core.lang.systemutiltest.SystemUtilSuiteTests;
-import com.feilong.core.lang.threadutiltest.ThreadUtilSuiteTests;
+import com.feilong.core.lang.stringutil.StringUtilSuiteTests;
+import com.feilong.core.lang.systemutil.SystemUtilSuiteTests;
+import com.feilong.core.lang.threadutil.ThreadUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({

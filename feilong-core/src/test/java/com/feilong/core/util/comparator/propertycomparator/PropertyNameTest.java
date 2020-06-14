@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.store.member.UserSameHashCode;
-import com.feilong.store.member.UserSameHashCodeWithComparable;
 
 public class PropertyNameTest{
 
