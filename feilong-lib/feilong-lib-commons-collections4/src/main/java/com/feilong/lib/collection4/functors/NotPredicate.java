@@ -25,10 +25,10 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class NotPredicate<T> implements PredicateDecorator<T>, Serializable {
+public final class NotPredicate<T> implements PredicateDecorator<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = -2654603322338049674L;
+    private static final long          serialVersionUID = -2654603322338049674L;
 
     /** The predicate to decorate */
     private final Predicate<? super T> iPredicate;
@@ -36,13 +36,16 @@ public final class NotPredicate<T> implements PredicateDecorator<T>, Serializabl
     /**
      * Factory to create the not predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicate  the predicate to decorate, not null
+     * @param <T>
+     *            the type that the predicate queries
+     * @param predicate
+     *            the predicate to decorate, not null
      * @return the predicate
-     * @throws NullPointerException if the predicate is null
+     * @throws NullPointerException
+     *             if the predicate is null
      */
-    public static <T> Predicate<T> notPredicate(final Predicate<? super T> predicate) {
-        if (predicate == null) {
+    public static <T> Predicate<T> notPredicate(final Predicate<? super T> predicate){
+        if (predicate == null){
             throw new NullPointerException("Predicate must not be null");
         }
         return new NotPredicate<>(predicate);
@@ -52,9 +55,10 @@ public final class NotPredicate<T> implements PredicateDecorator<T>, Serializabl
      * Constructor that performs no validation.
      * Use <code>notPredicate</code> if you want that.
      *
-     * @param predicate  the predicate to call after the null check
+     * @param predicate
+     *            the predicate to call after the null check
      */
-    public NotPredicate(final Predicate<? super T> predicate) {
+    public NotPredicate(final Predicate<? super T> predicate){
         super();
         iPredicate = predicate;
     }
@@ -62,11 +66,12 @@ public final class NotPredicate<T> implements PredicateDecorator<T>, Serializabl
     /**
      * Evaluates the predicate returning the opposite to the stored predicate.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if predicate returns false
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         return !iPredicate.evaluate(object);
     }
 
@@ -78,8 +83,8 @@ public final class NotPredicate<T> implements PredicateDecorator<T>, Serializabl
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Predicate<? super T>[] getPredicates() {
-        return new Predicate[] {iPredicate};
+    public Predicate<? super T>[] getPredicates(){
+        return new Predicate[] { iPredicate };
     }
 
 }

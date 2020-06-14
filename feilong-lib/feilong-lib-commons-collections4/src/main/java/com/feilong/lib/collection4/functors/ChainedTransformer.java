@@ -27,13 +27,15 @@ import org.apache.commons.collections4.Transformer;
  * The input object is passed to the first transformer. The transformed result
  * is passed to the second transformer and so on.
  * </p>
+ * 
+ * @param <T>
  *
  * @since 3.0
  */
-public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
+public class ChainedTransformer<T> implements Transformer<T, T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 3514945074733160196L;
+    private static final long                           serialVersionUID = 3514945074733160196L;
 
     /** The transformers to call in turn */
     private final Transformer<? super T, ? extends T>[] iTransformers;
@@ -41,16 +43,20 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Factory method that performs validation and copies the parameter array.
      *
-     * @param <T>  the object type
-     * @param transformers  the transformers to chain, copied, no nulls
+     * @param <T>
+     *            the object type
+     * @param transformers
+     *            the transformers to chain, copied, no nulls
      * @return the <code>chained</code> transformer
-     * @throws NullPointerException if the transformers array is null
-     * @throws NullPointerException if any transformer in the array is null
+     * @throws NullPointerException
+     *             if the transformers array is null
+     * @throws NullPointerException
+     *             if any transformer in the array is null
      */
-    public static <T> Transformer<T, T> chainedTransformer(final Transformer<? super T, ? extends T>... transformers) {
+    public static <T> Transformer<T, T> chainedTransformer(final Transformer<? super T, ? extends T>...transformers){
         FunctorUtils.validate(transformers);
-        if (transformers.length == 0) {
-            return NOPTransformer.<T>nopTransformer();
+        if (transformers.length == 0){
+            return NOPTransformer.<T> nopTransformer();
         }
         return new ChainedTransformer<>(transformers);
     }
@@ -60,19 +66,22 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * result into the next transformer. The ordering is that of the iterator()
      * method on the collection.
      *
-     * @param <T>  the object type
-     * @param transformers  a collection of transformers to chain
+     * @param <T>
+     *            the object type
+     * @param transformers
+     *            a collection of transformers to chain
      * @return the <code>chained</code> transformer
-     * @throws NullPointerException if the transformers collection is null
-     * @throws NullPointerException if any transformer in the collection is null
+     * @throws NullPointerException
+     *             if the transformers collection is null
+     * @throws NullPointerException
+     *             if any transformer in the collection is null
      */
-    public static <T> Transformer<T, T> chainedTransformer(
-            final Collection<? extends Transformer<? super T, ? extends T>> transformers) {
-        if (transformers == null) {
+    public static <T> Transformer<T, T> chainedTransformer(final Collection<? extends Transformer<? super T, ? extends T>> transformers){
+        if (transformers == null){
             throw new NullPointerException("Transformer collection must not be null");
         }
-        if (transformers.size() == 0) {
-            return NOPTransformer.<T>nopTransformer();
+        if (transformers.size() == 0){
+            return NOPTransformer.<T> nopTransformer();
         }
         // convert to array like this to guarantee iterator() ordering
         final Transformer<T, T>[] cmds = transformers.toArray(new Transformer[transformers.size()]);
@@ -83,10 +92,12 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Hidden constructor for the use by the static factory methods.
      *
-     * @param clone  if {@code true} the input argument will be cloned
-     * @param transformers  the transformers to chain, no nulls
+     * @param clone
+     *            if {@code true} the input argument will be cloned
+     * @param transformers
+     *            the transformers to chain, no nulls
      */
-    private ChainedTransformer(final boolean clone, final Transformer<? super T, ? extends T>[] transformers) {
+    private ChainedTransformer(final boolean clone, final Transformer<? super T, ? extends T>[] transformers){
         super();
         iTransformers = clone ? FunctorUtils.copy(transformers) : transformers;
     }
@@ -95,21 +106,23 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * Constructor that performs no validation.
      * Use <code>chainedTransformer</code> if you want that.
      *
-     * @param transformers  the transformers to chain, copied, no nulls
+     * @param transformers
+     *            the transformers to chain, copied, no nulls
      */
-    public ChainedTransformer(final Transformer<? super T, ? extends T>... transformers) {
+    public ChainedTransformer(final Transformer<? super T, ? extends T>...transformers){
         this(true, transformers);
     }
 
     /**
      * Transforms the input to result via each decorated transformer
      *
-     * @param object  the input object passed to the first transformer
+     * @param object
+     *            the input object passed to the first transformer
      * @return the transformed result
      */
     @Override
-    public T transform(T object) {
-        for (final Transformer<? super T, ? extends T> iTransformer : iTransformers) {
+    public T transform(T object){
+        for (final Transformer<? super T, ? extends T> iTransformer : iTransformers){
             object = iTransformer.transform(object);
         }
         return object;
@@ -121,8 +134,8 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * @return a copy of the transformers
      * @since 3.1
      */
-    public Transformer<? super T, ? extends T>[] getTransformers() {
-        return FunctorUtils.<T, T>copy(iTransformers);
+    public Transformer<? super T, ? extends T>[] getTransformers(){
+        return FunctorUtils.<T, T> copy(iTransformers);
     }
 
 }

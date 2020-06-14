@@ -26,10 +26,10 @@ import org.apache.commons.collections4.Closure;
  *
  * @since 3.0
  */
-public class ChainedClosure<E> implements Closure<E>, Serializable {
+public class ChainedClosure<E> implements Closure<E>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = -3520677225766901240L;
+    private static final long          serialVersionUID = -3520677225766901240L;
 
     /** The closures to call in turn */
     private final Closure<? super E>[] iClosures;
@@ -37,16 +37,21 @@ public class ChainedClosure<E> implements Closure<E>, Serializable {
     /**
      * Factory method that performs validation and copies the parameter array.
      *
-     * @param <E> the type that the closure acts on
-     * @param closures  the closures to chain, copied, no nulls
+     * @param <E>
+     *            the type that the closure acts on
+     * @param closures
+     *            the closures to chain, copied, no nulls
      * @return the <code>chained</code> closure
-     * @throws NullPointerException if the closures array is null
-     * @throws NullPointerException if any closure in the array is null
+     * @throws NullPointerException
+     *             if the closures array is null
+     * @throws NullPointerException
+     *             if any closure in the array is null
      */
-    public static <E> Closure<E> chainedClosure(final Closure<? super E>... closures) {
+    @SafeVarargs
+    public static <E> Closure<E> chainedClosure(final Closure<? super E>...closures){
         FunctorUtils.validate(closures);
-        if (closures.length == 0) {
-            return NOPClosure.<E>nopClosure();
+        if (closures.length == 0){
+            return NOPClosure.<E> nopClosure();
         }
         return new ChainedClosure<>(closures);
     }
@@ -56,24 +61,28 @@ public class ChainedClosure<E> implements Closure<E>, Serializable {
      * result into the next closure. The ordering is that of the iterator()
      * method on the collection.
      *
-     * @param <E> the type that the closure acts on
-     * @param closures  a collection of closures to chain
+     * @param <E>
+     *            the type that the closure acts on
+     * @param closures
+     *            a collection of closures to chain
      * @return the <code>chained</code> closure
-     * @throws NullPointerException if the closures collection is null
-     * @throws NullPointerException if any closure in the collection is null
+     * @throws NullPointerException
+     *             if the closures collection is null
+     * @throws NullPointerException
+     *             if any closure in the collection is null
      */
     @SuppressWarnings("unchecked")
-    public static <E> Closure<E> chainedClosure(final Collection<? extends Closure<? super E>> closures) {
-        if (closures == null) {
+    public static <E> Closure<E> chainedClosure(final Collection<? extends Closure<? super E>> closures){
+        if (closures == null){
             throw new NullPointerException("Closure collection must not be null");
         }
-        if (closures.size() == 0) {
-            return NOPClosure.<E>nopClosure();
+        if (closures.size() == 0){
+            return NOPClosure.<E> nopClosure();
         }
         // convert to array like this to guarantee iterator() ordering
         final Closure<? super E>[] cmds = new Closure[closures.size()];
         int i = 0;
-        for (final Closure<? super E> closure : closures) {
+        for (final Closure<? super E> closure : closures){
             cmds[i++] = closure;
         }
         FunctorUtils.validate(cmds);
@@ -83,10 +92,12 @@ public class ChainedClosure<E> implements Closure<E>, Serializable {
     /**
      * Hidden constructor for the use by the static factory methods.
      *
-     * @param clone  if {@code true} the input argument will be cloned
-     * @param closures  the closures to chain, no nulls
+     * @param clone
+     *            if {@code true} the input argument will be cloned
+     * @param closures
+     *            the closures to chain, no nulls
      */
-    private ChainedClosure(final boolean clone, final Closure<? super E>... closures) {
+    private ChainedClosure(final boolean clone, final Closure<? super E>...closures){
         super();
         iClosures = clone ? FunctorUtils.copy(closures) : closures;
     }
@@ -95,20 +106,22 @@ public class ChainedClosure<E> implements Closure<E>, Serializable {
      * Constructor that performs no validation.
      * Use <code>chainedClosure</code> if you want that.
      *
-     * @param closures  the closures to chain, copied, no nulls
+     * @param closures
+     *            the closures to chain, copied, no nulls
      */
-    public ChainedClosure(final Closure<? super E>... closures) {
+    public ChainedClosure(final Closure<? super E>...closures){
         this(true, closures);
     }
 
     /**
      * Execute a list of closures.
      *
-     * @param input  the input object passed to each closure
+     * @param input
+     *            the input object passed to each closure
      */
     @Override
-    public void execute(final E input) {
-        for (final Closure<? super E> iClosure : iClosures) {
+    public void execute(final E input){
+        for (final Closure<? super E> iClosure : iClosures){
             iClosure.execute(input);
         }
     }
@@ -119,8 +132,8 @@ public class ChainedClosure<E> implements Closure<E>, Serializable {
      * @return a copy of the closures
      * @since 3.1
      */
-    public Closure<? super E>[] getClosures() {
-        return FunctorUtils.<E>copy(iClosures);
+    public Closure<? super E>[] getClosures(){
+        return FunctorUtils.<E> copy(iClosures);
     }
 
 }

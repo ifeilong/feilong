@@ -25,41 +25,52 @@ import org.apache.commons.collections4.Transformer;
  * Transformer implementation that will call one of two closures based on whether a predicate evaluates
  * as true or false.
  *
- * @param <I> The input type for the transformer
- * @param <O> The output type for the transformer
+ * @param <I>
+ *            The input type for the transformer
+ * @param <O>
+ *            The output type for the transformer
  *
  * @since 4.1
  */
-public class IfTransformer<I, O> implements Transformer<I, O>, Serializable {
+public class IfTransformer<I, O> implements Transformer<I, O>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 8069309411242014252L;
+    private static final long                         serialVersionUID = 8069309411242014252L;
 
     /** The test */
-    private final Predicate<? super I> iPredicate;
+    private final Predicate<? super I>                iPredicate;
+
     /** The transformer to use if true */
     private final Transformer<? super I, ? extends O> iTrueTransformer;
+
     /** The transformer to use if false */
     private final Transformer<? super I, ? extends O> iFalseTransformer;
 
     /**
      * Factory method that performs validation.
      *
-     * @param <I>  input type for the transformer
-     * @param <O>  output type for the transformer
-     * @param predicate  predicate to switch on
-     * @param trueTransformer  transformer used if true
-     * @param falseTransformer  transformer used if false
+     * @param <I>
+     *            input type for the transformer
+     * @param <O>
+     *            output type for the transformer
+     * @param predicate
+     *            predicate to switch on
+     * @param trueTransformer
+     *            transformer used if true
+     * @param falseTransformer
+     *            transformer used if false
      * @return the <code>if</code> transformer
-     * @throws NullPointerException if either argument is null
+     * @throws NullPointerException
+     *             if either argument is null
      */
-    public static <I, O> Transformer<I, O> ifTransformer(final Predicate<? super I> predicate,
-                                                         final Transformer<? super I, ? extends O> trueTransformer,
-                                                         final Transformer<? super I, ? extends O> falseTransformer) {
-        if (predicate == null) {
+    public static <I, O> Transformer<I, O> ifTransformer(
+                    final Predicate<? super I> predicate,
+                    final Transformer<? super I, ? extends O> trueTransformer,
+                    final Transformer<? super I, ? extends O> falseTransformer){
+        if (predicate == null){
             throw new NullPointerException("Predicate must not be null");
         }
-        if (trueTransformer == null || falseTransformer == null) {
+        if (trueTransformer == null || falseTransformer == null){
             throw new NullPointerException("Transformers must not be null");
         }
 
@@ -72,37 +83,43 @@ public class IfTransformer<I, O> implements Transformer<I, O>, Serializable {
      * This factory creates a transformer that just returns the input object when
      * the predicate is false.
      *
-     * @param <T>  input and output type for the transformer
-     * @param predicate  predicate to switch on
-     * @param trueTransformer  transformer used if true
+     * @param <T>
+     *            input and output type for the transformer
+     * @param predicate
+     *            predicate to switch on
+     * @param trueTransformer
+     *            transformer used if true
      * @return the <code>if</code> transformer
-     * @throws NullPointerException if either argument is null
+     * @throws NullPointerException
+     *             if either argument is null
      */
     public static <T> Transformer<T, T> ifTransformer(
-            final Predicate<? super T> predicate,
-            final Transformer<? super T, ? extends T> trueTransformer) {
+                    final Predicate<? super T> predicate,
+                    final Transformer<? super T, ? extends T> trueTransformer){
 
-        if (predicate == null) {
+        if (predicate == null){
             throw new NullPointerException("Predicate must not be null");
         }
-        if (trueTransformer == null) {
+        if (trueTransformer == null){
             throw new NullPointerException("Transformer must not be null");
         }
 
-        return new IfTransformer<>(predicate, trueTransformer, NOPTransformer.<T>nopTransformer());
+        return new IfTransformer<>(predicate, trueTransformer, NOPTransformer.<T> nopTransformer());
     }
 
     /**
      * Constructor that performs no validation.
      * Use the static factory method <code>ifTransformer</code> if you want that.
      *
-     * @param predicate  predicate to switch on, not null
-     * @param trueTransformer  transformer used if true, not null
-     * @param falseTransformer  transformer used if false, not null
+     * @param predicate
+     *            predicate to switch on, not null
+     * @param trueTransformer
+     *            transformer used if true, not null
+     * @param falseTransformer
+     *            transformer used if false, not null
      */
-    public IfTransformer(final Predicate<? super I> predicate,
-        final Transformer<? super I, ? extends O> trueTransformer,
-        final Transformer<? super I, ? extends O> falseTransformer) {
+    public IfTransformer(final Predicate<? super I> predicate, final Transformer<? super I, ? extends O> trueTransformer,
+                    final Transformer<? super I, ? extends O> falseTransformer){
 
         super();
         iPredicate = predicate;
@@ -113,12 +130,13 @@ public class IfTransformer<I, O> implements Transformer<I, O>, Serializable {
     /**
      * Transforms the input using the true or false transformer based to the result of the predicate.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return the transformed result
      */
     @Override
-    public O transform(final I input) {
-        if(iPredicate.evaluate(input)){
+    public O transform(final I input){
+        if (iPredicate.evaluate(input)){
             return iTrueTransformer.transform(input);
         }
         return iFalseTransformer.transform(input);
@@ -138,7 +156,7 @@ public class IfTransformer<I, O> implements Transformer<I, O>, Serializable {
      *
      * @return the transformer
      */
-    public Transformer<? super I, ? extends O> getTrueTransformer() {
+    public Transformer<? super I, ? extends O> getTrueTransformer(){
         return iTrueTransformer;
     }
 
@@ -147,7 +165,7 @@ public class IfTransformer<I, O> implements Transformer<I, O>, Serializable {
      *
      * @return the transformer
      */
-    public Transformer<? super I, ? extends O> getFalseTransformer() {
+    public Transformer<? super I, ? extends O> getFalseTransformer(){
         return iFalseTransformer;
     }
 }

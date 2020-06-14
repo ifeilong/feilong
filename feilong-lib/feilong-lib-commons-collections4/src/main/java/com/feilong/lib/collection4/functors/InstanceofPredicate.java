@@ -26,23 +26,25 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class InstanceofPredicate implements Predicate<Object>, Serializable {
+public final class InstanceofPredicate implements Predicate<Object>,Serializable{
 
     /** Serial version UID */
     private static final long serialVersionUID = -6682656911025165584L;
 
     /** The type to compare to */
-    private final Class<?> iType;
+    private final Class<?>    iType;
 
     /**
      * Factory to create the identity predicate.
      *
-     * @param type  the type to check for, may not be null
+     * @param type
+     *            the type to check for, may not be null
      * @return the predicate
-     * @throws NullPointerException if the class is null
+     * @throws NullPointerException
+     *             if the class is null
      */
-    public static Predicate<Object> instanceOfPredicate(final Class<?> type) {
-        if (type == null) {
+    public static Predicate<Object> instanceOfPredicate(final Class<?> type){
+        if (type == null){
             throw new NullPointerException("The type to check instanceof must not be null");
         }
         return new InstanceofPredicate(type);
@@ -52,9 +54,10 @@ public final class InstanceofPredicate implements Predicate<Object>, Serializabl
      * Constructor that performs no validation.
      * Use <code>instanceOfPredicate</code> if you want that.
      *
-     * @param type  the type to check for
+     * @param type
+     *            the type to check for
      */
-    public InstanceofPredicate(final Class<?> type) {
+    public InstanceofPredicate(final Class<?> type){
         super();
         iType = type;
     }
@@ -62,11 +65,12 @@ public final class InstanceofPredicate implements Predicate<Object>, Serializabl
     /**
      * Evaluates the predicate returning true if the input object is of the correct type.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if input is of stored type
      */
     @Override
-    public boolean evaluate(final Object object) {
+    public boolean evaluate(final Object object){
         return iType.isInstance(object);
     }
 
@@ -76,7 +80,7 @@ public final class InstanceofPredicate implements Predicate<Object>, Serializabl
      * @return the type
      * @since 3.1
      */
-    public Class<?> getType() {
+    public Class<?> getType(){
         return iType;
     }
 

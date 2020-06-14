@@ -27,17 +27,19 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public class IfClosure<E> implements Closure<E>, Serializable {
+public class IfClosure<E> implements Closure<E>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 3518477308466486130L;
+    private static final long          serialVersionUID = 3518477308466486130L;
 
     /** The test */
     private final Predicate<? super E> iPredicate;
+
     /** The closure to use if true */
-    private final Closure<? super E> iTrueClosure;
+    private final Closure<? super E>   iTrueClosure;
+
     /** The closure to use if false */
-    private final Closure<? super E> iFalseClosure;
+    private final Closure<? super E>   iFalseClosure;
 
     /**
      * Factory method that performs validation.
@@ -45,34 +47,44 @@ public class IfClosure<E> implements Closure<E>, Serializable {
      * This factory creates a closure that performs no action when
      * the predicate is false.
      *
-     * @param <E> the type that the closure acts on
-     * @param predicate  predicate to switch on
-     * @param trueClosure  closure used if true
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicate
+     *            predicate to switch on
+     * @param trueClosure
+     *            closure used if true
      * @return the <code>if</code> closure
-     * @throws NullPointerException if either argument is null
+     * @throws NullPointerException
+     *             if either argument is null
      * @since 3.2
      */
-    public static <E> Closure<E> ifClosure(final Predicate<? super E> predicate, final Closure<? super E> trueClosure) {
-        return IfClosure.<E>ifClosure(predicate, trueClosure, NOPClosure.<E>nopClosure());
+    public static <E> Closure<E> ifClosure(final Predicate<? super E> predicate,final Closure<? super E> trueClosure){
+        return IfClosure.<E> ifClosure(predicate, trueClosure, NOPClosure.<E> nopClosure());
     }
 
     /**
      * Factory method that performs validation.
      *
-     * @param <E> the type that the closure acts on
-     * @param predicate  predicate to switch on
-     * @param trueClosure  closure used if true
-     * @param falseClosure  closure used if false
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicate
+     *            predicate to switch on
+     * @param trueClosure
+     *            closure used if true
+     * @param falseClosure
+     *            closure used if false
      * @return the <code>if</code> closure
-     * @throws NullPointerException if any argument is null
+     * @throws NullPointerException
+     *             if any argument is null
      */
-    public static <E> Closure<E> ifClosure(final Predicate<? super E> predicate,
-                                           final Closure<? super E> trueClosure,
-                                           final Closure<? super E> falseClosure) {
-        if (predicate == null) {
+    public static <E> Closure<E> ifClosure(
+                    final Predicate<? super E> predicate,
+                    final Closure<? super E> trueClosure,
+                    final Closure<? super E> falseClosure){
+        if (predicate == null){
             throw new NullPointerException("Predicate must not be null");
         }
-        if (trueClosure == null || falseClosure == null) {
+        if (trueClosure == null || falseClosure == null){
             throw new NullPointerException("Closures must not be null");
         }
         return new IfClosure<>(predicate, trueClosure, falseClosure);
@@ -85,11 +97,13 @@ public class IfClosure<E> implements Closure<E>, Serializable {
      * This constructor creates a closure that performs no action when
      * the predicate is false.
      *
-     * @param predicate  predicate to switch on, not null
-     * @param trueClosure  closure used if true, not null
+     * @param predicate
+     *            predicate to switch on, not null
+     * @param trueClosure
+     *            closure used if true, not null
      * @since 3.2
      */
-    public IfClosure(final Predicate<? super E> predicate, final Closure<? super E> trueClosure) {
+    public IfClosure(final Predicate<? super E> predicate, final Closure<? super E> trueClosure){
         this(predicate, trueClosure, NOPClosure.nopClosure());
     }
 
@@ -97,12 +111,14 @@ public class IfClosure<E> implements Closure<E>, Serializable {
      * Constructor that performs no validation.
      * Use <code>ifClosure</code> if you want that.
      *
-     * @param predicate  predicate to switch on, not null
-     * @param trueClosure  closure used if true, not null
-     * @param falseClosure  closure used if false, not null
+     * @param predicate
+     *            predicate to switch on, not null
+     * @param trueClosure
+     *            closure used if true, not null
+     * @param falseClosure
+     *            closure used if false, not null
      */
-    public IfClosure(final Predicate<? super E> predicate, final Closure<? super E> trueClosure,
-                     final Closure<? super E> falseClosure) {
+    public IfClosure(final Predicate<? super E> predicate, final Closure<? super E> trueClosure, final Closure<? super E> falseClosure){
         super();
         iPredicate = predicate;
         iTrueClosure = trueClosure;
@@ -112,13 +128,14 @@ public class IfClosure<E> implements Closure<E>, Serializable {
     /**
      * Executes the true or false closure according to the result of the predicate.
      *
-     * @param input  the input object
+     * @param input
+     *            the input object
      */
     @Override
-    public void execute(final E input) {
-        if (iPredicate.evaluate(input)) {
+    public void execute(final E input){
+        if (iPredicate.evaluate(input)){
             iTrueClosure.execute(input);
-        } else {
+        }else{
             iFalseClosure.execute(input);
         }
     }
@@ -129,7 +146,7 @@ public class IfClosure<E> implements Closure<E>, Serializable {
      * @return the predicate
      * @since 3.1
      */
-    public Predicate<? super E> getPredicate() {
+    public Predicate<? super E> getPredicate(){
         return iPredicate;
     }
 
@@ -139,7 +156,7 @@ public class IfClosure<E> implements Closure<E>, Serializable {
      * @return the closure
      * @since 3.1
      */
-    public Closure<? super E> getTrueClosure() {
+    public Closure<? super E> getTrueClosure(){
         return iTrueClosure;
     }
 
@@ -149,7 +166,7 @@ public class IfClosure<E> implements Closure<E>, Serializable {
      * @return the closure
      * @since 3.1
      */
-    public Closure<? super E> getFalseClosure() {
+    public Closure<? super E> getFalseClosure(){
         return iFalseClosure;
     }
 

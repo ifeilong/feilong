@@ -25,10 +25,10 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class NullIsTruePredicate<T> implements PredicateDecorator<T>, Serializable {
+public final class NullIsTruePredicate<T> implements PredicateDecorator<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = -7625133768987126273L;
+    private static final long          serialVersionUID = -7625133768987126273L;
 
     /** The predicate to decorate */
     private final Predicate<? super T> iPredicate;
@@ -36,13 +36,16 @@ public final class NullIsTruePredicate<T> implements PredicateDecorator<T>, Seri
     /**
      * Factory to create the null true predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicate  the predicate to decorate, not null
+     * @param <T>
+     *            the type that the predicate queries
+     * @param predicate
+     *            the predicate to decorate, not null
      * @return the predicate
-     * @throws NullPointerException if the predicate is null
+     * @throws NullPointerException
+     *             if the predicate is null
      */
-    public static <T> Predicate<T> nullIsTruePredicate(final Predicate<? super T> predicate) {
-        if (predicate == null) {
+    public static <T> Predicate<T> nullIsTruePredicate(final Predicate<? super T> predicate){
+        if (predicate == null){
             throw new NullPointerException("Predicate must not be null");
         }
         return new NullIsTruePredicate<>(predicate);
@@ -52,9 +55,10 @@ public final class NullIsTruePredicate<T> implements PredicateDecorator<T>, Seri
      * Constructor that performs no validation.
      * Use <code>nullIsTruePredicate</code> if you want that.
      *
-     * @param predicate  the predicate to call after the null check
+     * @param predicate
+     *            the predicate to call after the null check
      */
-    public NullIsTruePredicate(final Predicate<? super T> predicate) {
+    public NullIsTruePredicate(final Predicate<? super T> predicate){
         super();
         iPredicate = predicate;
     }
@@ -63,12 +67,13 @@ public final class NullIsTruePredicate<T> implements PredicateDecorator<T>, Seri
      * Evaluates the predicate returning the result of the decorated predicate
      * once a null check is performed.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if decorated predicate returns true or input is null
      */
     @Override
-    public boolean evaluate(final T object) {
-        if (object == null) {
+    public boolean evaluate(final T object){
+        if (object == null){
             return true;
         }
         return iPredicate.evaluate(object);
@@ -82,7 +87,7 @@ public final class NullIsTruePredicate<T> implements PredicateDecorator<T>, Seri
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Predicate<? super T>[] getPredicates() {
+    public Predicate<? super T>[] getPredicates(){
         return new Predicate[] { iPredicate };
     }
 

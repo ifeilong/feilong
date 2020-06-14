@@ -25,45 +25,47 @@ import org.apache.commons.collections4.Transformer;
  *
  * @since 3.0
  */
-public class NOPTransformer<T> implements Transformer<T, T>, Serializable {
+public class NOPTransformer<T> implements Transformer<T, T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 2133891748318574490L;
+    private static final long       serialVersionUID = 2133891748318574490L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes")
-    public static final Transformer INSTANCE = new NOPTransformer<>();
+    public static final Transformer INSTANCE         = new NOPTransformer<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T>  the input/output type
+     * @param <T>
+     *            the input/output type
      * @return the singleton instance
      * @since 3.1
      */
-    public static <T> Transformer<T, T> nopTransformer() {
+    public static <T> Transformer<T, T> nopTransformer(){
         return INSTANCE;
     }
 
     /**
      * Constructor.
      */
-    private NOPTransformer() {
+    private NOPTransformer(){
         super();
     }
 
     /**
      * Transforms the input to result by doing nothing.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return the transformed result which is the input
      */
     @Override
-    public T transform(final T input) {
+    public T transform(final T input){
         return input;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

@@ -34,45 +34,49 @@ import com.feilong.lib.collection4.FunctorException;
  *
  * @since 3.0
  */
-public class InstantiateTransformer<T> implements Transformer<Class<? extends T>, T> {
+public class InstantiateTransformer<T> implements Transformer<Class<? extends T>, T>{
 
     /** Singleton instance that uses the no arg constructor */
     @SuppressWarnings("rawtypes")
     private static final Transformer NO_ARG_INSTANCE = new InstantiateTransformer<>();
 
     /** The constructor parameter types */
-    private final Class<?>[] iParamTypes;
+    private final Class<?>[]         iParamTypes;
+
     /** The constructor arguments */
-    private final Object[] iArgs;
+    private final Object[]           iArgs;
 
     /**
      * Get a typed no-arg instance.
      *
-     * @param <T>  the type of the objects to be created
+     * @param <T>
+     *            the type of the objects to be created
      * @return Transformer&lt;Class&lt;? extends T&gt;, T&gt;
      */
-    public static <T> Transformer<Class<? extends T>, T> instantiateTransformer() {
+    public static <T> Transformer<Class<? extends T>, T> instantiateTransformer(){
         return NO_ARG_INSTANCE;
     }
 
     /**
      * Transformer method that performs validation.
      *
-     * @param <T>  the type of the objects to be created
-     * @param paramTypes  the constructor parameter types
-     * @param args  the constructor arguments
+     * @param <T>
+     *            the type of the objects to be created
+     * @param paramTypes
+     *            the constructor parameter types
+     * @param args
+     *            the constructor arguments
      * @return an instantiate transformer
-     * @throws IllegalArgumentException if paramTypes does not match args
+     * @throws IllegalArgumentException
+     *             if paramTypes does not match args
      */
-    public static <T> Transformer<Class<? extends T>, T> instantiateTransformer(final Class<?>[] paramTypes,
-                                                                                final Object[] args) {
-        if (((paramTypes == null) && (args != null))
-            || ((paramTypes != null) && (args == null))
-            || ((paramTypes != null) && (args != null) && (paramTypes.length != args.length))) {
+    public static <T> Transformer<Class<? extends T>, T> instantiateTransformer(final Class<?>[] paramTypes,final Object[] args){
+        if (((paramTypes == null) && (args != null)) || ((paramTypes != null) && (args == null))
+                        || ((paramTypes != null) && (args != null) && (paramTypes.length != args.length))){
             throw new IllegalArgumentException("Parameter types must match the arguments");
         }
 
-        if (paramTypes == null || paramTypes.length == 0) {
+        if (paramTypes == null || paramTypes.length == 0){
             return new InstantiateTransformer<>();
         }
         return new InstantiateTransformer<>(paramTypes, args);
@@ -81,7 +85,7 @@ public class InstantiateTransformer<T> implements Transformer<Class<? extends T>
     /**
      * Constructor for no arg instance.
      */
-    private InstantiateTransformer() {
+    private InstantiateTransformer(){
         super();
         iParamTypes = null;
         iArgs = null;
@@ -93,10 +97,12 @@ public class InstantiateTransformer<T> implements Transformer<Class<? extends T>
      * <p>
      * Note: from 4.0, the input parameters will be cloned
      *
-     * @param paramTypes  the constructor parameter types
-     * @param args  the constructor arguments
+     * @param paramTypes
+     *            the constructor parameter types
+     * @param args
+     *            the constructor arguments
      */
-    public InstantiateTransformer(final Class<?>[] paramTypes, final Object[] args) {
+    public InstantiateTransformer(final Class<?>[] paramTypes, final Object[] args){
         super();
         iParamTypes = paramTypes != null ? paramTypes.clone() : null;
         iArgs = args != null ? args.clone() : null;
@@ -105,25 +111,25 @@ public class InstantiateTransformer<T> implements Transformer<Class<? extends T>
     /**
      * Transforms the input Class object to a result by instantiation.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return the transformed result
      */
     @Override
-    public T transform(final Class<? extends T> input) {
-        try {
-            if (input == null) {
-                throw new FunctorException(
-                    "InstantiateTransformer: Input object was not an instanceof Class, it was a null object");
+    public T transform(final Class<? extends T> input){
+        try{
+            if (input == null){
+                throw new FunctorException("InstantiateTransformer: Input object was not an instanceof Class, it was a null object");
             }
             final Constructor<? extends T> con = input.getConstructor(iParamTypes);
             return con.newInstance(iArgs);
-        } catch (final NoSuchMethodException ex) {
+        }catch (final NoSuchMethodException ex){
             throw new FunctorException("InstantiateTransformer: The constructor must exist and be public ");
-        } catch (final InstantiationException ex) {
+        }catch (final InstantiationException ex){
             throw new FunctorException("InstantiateTransformer: InstantiationException", ex);
-        } catch (final IllegalAccessException ex) {
+        }catch (final IllegalAccessException ex){
             throw new FunctorException("InstantiateTransformer: Constructor must be public", ex);
-        } catch (final InvocationTargetException ex) {
+        }catch (final InvocationTargetException ex){
             throw new FunctorException("InstantiateTransformer: Constructor threw an exception", ex);
         }
     }

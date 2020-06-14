@@ -31,7 +31,7 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class OnePredicate<T> extends AbstractQuantifierPredicate<T> {
+public final class OnePredicate<T> extends AbstractQuantifierPredicate<T>{
 
     /** Serial version UID */
     private static final long serialVersionUID = -8125389089924745785L;
@@ -42,19 +42,23 @@ public final class OnePredicate<T> extends AbstractQuantifierPredicate<T> {
      * If the array is size zero, the predicate always returns false.
      * If the array is size one, then that predicate is returned.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicates  the predicates to check, cloned, not null
+     * @param <T>
+     *            the type that the predicate queries
+     * @param predicates
+     *            the predicates to check, cloned, not null
      * @return the <code>any</code> predicate
-     * @throws NullPointerException if the predicates array is null
-     * @throws NullPointerException if any predicate in the array is null
+     * @throws NullPointerException
+     *             if the predicates array is null
+     * @throws NullPointerException
+     *             if any predicate in the array is null
      */
     @SuppressWarnings("unchecked")
-    public static <T> Predicate<T> onePredicate(final Predicate<? super T>... predicates) {
+    public static <T> Predicate<T> onePredicate(final Predicate<? super T>...predicates){
         FunctorUtils.validate(predicates);
-        if (predicates.length == 0) {
-            return FalsePredicate.<T>falsePredicate();
+        if (predicates.length == 0){
+            return FalsePredicate.<T> falsePredicate();
         }
-        if (predicates.length == 1) {
+        if (predicates.length == 1){
             return (Predicate<T>) predicates[0];
         }
         return new OnePredicate<>(FunctorUtils.copy(predicates));
@@ -63,13 +67,17 @@ public final class OnePredicate<T> extends AbstractQuantifierPredicate<T> {
     /**
      * Factory to create the predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicates  the predicates to check, cloned, not null
+     * @param <T>
+     *            the type that the predicate queries
+     * @param predicates
+     *            the predicates to check, cloned, not null
      * @return the <code>one</code> predicate
-     * @throws NullPointerException if the predicates array is null
-     * @throws NullPointerException if any predicate in the array is null
+     * @throws NullPointerException
+     *             if the predicates array is null
+     * @throws NullPointerException
+     *             if any predicate in the array is null
      */
-    public static <T> Predicate<T> onePredicate(final Collection<? extends Predicate<? super T>> predicates) {
+    public static <T> Predicate<T> onePredicate(final Collection<? extends Predicate<? super T>> predicates){
         final Predicate<? super T>[] preds = FunctorUtils.validate(predicates);
         return new OnePredicate<>(preds);
     }
@@ -78,9 +86,10 @@ public final class OnePredicate<T> extends AbstractQuantifierPredicate<T> {
      * Constructor that performs no validation.
      * Use <code>onePredicate</code> if you want that.
      *
-     * @param predicates  the predicates to check, not cloned, not null
+     * @param predicates
+     *            the predicates to check, not cloned, not null
      */
-    public OnePredicate(final Predicate<? super T>... predicates) {
+    public OnePredicate(final Predicate<? super T>...predicates){
         super(predicates);
     }
 
@@ -88,15 +97,16 @@ public final class OnePredicate<T> extends AbstractQuantifierPredicate<T> {
      * Evaluates the predicate returning true if only one decorated predicate
      * returns true.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if only one decorated predicate returns true
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         boolean match = false;
-        for (final Predicate<? super T> iPredicate : iPredicates) {
-            if (iPredicate.evaluate(object)) {
-                if (match) {
+        for (final Predicate<? super T> iPredicate : iPredicates){
+            if (iPredicate.evaluate(object)){
+                if (match){
                     return false;
                 }
                 match = true;

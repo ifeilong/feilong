@@ -27,12 +27,12 @@ import org.apache.commons.collections4.Transformer;
  *
  * @since 3.0
  */
-class FunctorUtils {
+class FunctorUtils{
 
     /**
      * Restricted constructor.
      */
-    private FunctorUtils() {
+    private FunctorUtils(){
         super();
     }
 
@@ -41,12 +41,13 @@ class FunctorUtils {
      * Due to the {@link Predicate#evaluate(T)} method, Predicate<? super T> is
      * able to be coerced to Predicate<T> without casting issues.
      *
-     * @param predicates  the predicates to copy
+     * @param predicates
+     *            the predicates to copy
      * @return the cloned predicates
      */
     @SuppressWarnings("unchecked")
-    static <T> Predicate<T>[] copy(final Predicate<? super T>... predicates) {
-        if (predicates == null) {
+    static <T> Predicate<T>[] copy(final Predicate<? super T>...predicates){
+        if (predicates == null){
             return null;
         }
         return (Predicate<T>[]) predicates.clone();
@@ -56,32 +57,35 @@ class FunctorUtils {
      * A very simple method that coerces Predicate<? super T> to Predicate<T>.
      * Due to the {@link Predicate#evaluate(T)} method, Predicate<? super T> is
      * able to be coerced to Predicate<T> without casting issues.
-     * <p>This method exists
+     * <p>
+     * This method exists
      * simply as centralised documentation and atomic unchecked warning
      * suppression.
      *
-     * @param <T> the type of object the returned predicate should "accept"
-     * @param predicate the predicate to coerce.
+     * @param <T>
+     *            the type of object the returned predicate should "accept"
+     * @param predicate
+     *            the predicate to coerce.
      * @return the coerced predicate.
      */
     @SuppressWarnings("unchecked")
-    static <T> Predicate<T> coerce(final Predicate<? super T> predicate) {
+    static <T> Predicate<T> coerce(final Predicate<? super T> predicate){
         return (Predicate<T>) predicate;
     }
 
     /**
      * Validate the predicates to ensure that all is well.
      *
-     * @param predicates  the predicates to validate
+     * @param predicates
+     *            the predicates to validate
      */
-    static void validate(final Predicate<?>... predicates) {
-        if (predicates == null) {
+    static void validate(final Predicate<?>...predicates){
+        if (predicates == null){
             throw new NullPointerException("The predicate array must not be null");
         }
-        for (int i = 0; i < predicates.length; i++) {
-            if (predicates[i] == null) {
-                throw new NullPointerException(
-                        "The predicate array must not contain a null predicate, index " + i + " was null");
+        for (int i = 0; i < predicates.length; i++){
+            if (predicates[i] == null){
+                throw new NullPointerException("The predicate array must not contain a null predicate, index " + i + " was null");
             }
         }
     }
@@ -89,22 +93,22 @@ class FunctorUtils {
     /**
      * Validate the predicates to ensure that all is well.
      *
-     * @param predicates  the predicates to validate
+     * @param predicates
+     *            the predicates to validate
      * @return predicate array
      */
-    static <T> Predicate<? super T>[] validate(final Collection<? extends Predicate<? super T>> predicates) {
-        if (predicates == null) {
+    static <T> Predicate<? super T>[] validate(final Collection<? extends Predicate<? super T>> predicates){
+        if (predicates == null){
             throw new NullPointerException("The predicate collection must not be null");
         }
         // convert to array like this to guarantee iterator() ordering
         @SuppressWarnings("unchecked") // OK
         final Predicate<? super T>[] preds = new Predicate[predicates.size()];
         int i = 0;
-        for (final Predicate<? super T> predicate : predicates) {
+        for (final Predicate<? super T> predicate : predicates){
             preds[i] = predicate;
-            if (preds[i] == null) {
-                throw new NullPointerException(
-                        "The predicate collection must not contain a null predicate, index " + i + " was null");
+            if (preds[i] == null){
+                throw new NullPointerException("The predicate collection must not contain a null predicate, index " + i + " was null");
             }
             i++;
         }
@@ -114,12 +118,13 @@ class FunctorUtils {
     /**
      * Clone the closures to ensure that the internal reference can't be messed with.
      *
-     * @param closures  the closures to copy
+     * @param closures
+     *            the closures to copy
      * @return the cloned closures
      */
     @SuppressWarnings("unchecked")
-    static <E> Closure<E>[] copy(final Closure<? super E>... closures) {
-        if (closures == null) {
+    static <E> Closure<E>[] copy(final Closure<? super E>...closures){
+        if (closures == null){
             return null;
         }
         return (Closure<E>[]) closures.clone();
@@ -128,44 +133,48 @@ class FunctorUtils {
     /**
      * Validate the closures to ensure that all is well.
      *
-     * @param closures  the closures to validate
+     * @param closures
+     *            the closures to validate
      */
-    static void validate(final Closure<?>... closures) {
-        if (closures == null) {
+    static void validate(final Closure<?>...closures){
+        if (closures == null){
             throw new NullPointerException("The closure array must not be null");
         }
-        for (int i = 0; i < closures.length; i++) {
-            if (closures[i] == null) {
-                throw new NullPointerException(
-                        "The closure array must not contain a null closure, index " + i + " was null");
+        for (int i = 0; i < closures.length; i++){
+            if (closures[i] == null){
+                throw new NullPointerException("The closure array must not contain a null closure, index " + i + " was null");
             }
         }
     }
 
     /**
      * A very simple method that coerces Closure<? super T> to Closure<T>.
-     * <p>This method exists
+     * <p>
+     * This method exists
      * simply as centralised documentation and atomic unchecked warning
      * suppression.
      *
-     * @param <T> the type of object the returned closure should "accept"
-     * @param closure the closure to coerce.
+     * @param <T>
+     *            the type of object the returned closure should "accept"
+     * @param closure
+     *            the closure to coerce.
      * @return the coerced closure.
      */
     @SuppressWarnings("unchecked")
-    static <T> Closure<T> coerce(final Closure<? super T> closure) {
+    static <T> Closure<T> coerce(final Closure<? super T> closure){
         return (Closure<T>) closure;
     }
 
     /**
      * Copy method
      *
-     * @param transformers  the transformers to copy
+     * @param transformers
+     *            the transformers to copy
      * @return a clone of the transformers
      */
     @SuppressWarnings("unchecked")
-    static <I, O> Transformer<I, O>[] copy(final Transformer<? super I, ? extends O>... transformers) {
-        if (transformers == null) {
+    static <I, O> Transformer<I, O>[] copy(final Transformer<? super I, ? extends O>...transformers){
+        if (transformers == null){
             return null;
         }
         return (Transformer<I, O>[]) transformers.clone();
@@ -174,33 +183,37 @@ class FunctorUtils {
     /**
      * Validate method
      *
-     * @param transformers  the transformers to validate
+     * @param transformers
+     *            the transformers to validate
      */
-    static void validate(final Transformer<?, ?>... transformers) {
-        if (transformers == null) {
+    static void validate(final Transformer<?, ?>...transformers){
+        if (transformers == null){
             throw new NullPointerException("The transformer array must not be null");
         }
-        for (int i = 0; i < transformers.length; i++) {
-            if (transformers[i] == null) {
-                throw new NullPointerException(
-                    "The transformer array must not contain a null transformer, index " + i + " was null");
+        for (int i = 0; i < transformers.length; i++){
+            if (transformers[i] == null){
+                throw new NullPointerException("The transformer array must not contain a null transformer, index " + i + " was null");
             }
         }
     }
 
     /**
      * A very simple method that coerces Transformer<? super I, ? extends O> to Transformer<I, O>.
-     * <p>This method exists
+     * <p>
+     * This method exists
      * simply as centralised documentation and atomic unchecked warning
      * suppression.
      *
-     * @param <I> the type of object the returned transformer should "accept"
-     * @param <O> the type of object the returned transformer should "produce"
-     * @param transformer the transformer to coerce.
+     * @param <I>
+     *            the type of object the returned transformer should "accept"
+     * @param <O>
+     *            the type of object the returned transformer should "produce"
+     * @param transformer
+     *            the transformer to coerce.
      * @return the coerced transformer.
      */
     @SuppressWarnings("unchecked")
-    static <I, O> Transformer<I, O> coerce(final Transformer<? super I, ? extends O> transformer) {
+    static <I, O> Transformer<I, O> coerce(final Transformer<? super I, ? extends O> transformer){
         return (Transformer<I, O>) transformer;
     }
 

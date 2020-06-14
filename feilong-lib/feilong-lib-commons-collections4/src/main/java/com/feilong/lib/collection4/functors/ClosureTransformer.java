@@ -24,13 +24,15 @@ import org.apache.commons.collections4.Transformer;
 /**
  * Transformer implementation that calls a Closure using the input object
  * and then returns the input.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */
-public class ClosureTransformer<T> implements Transformer<T, T>, Serializable {
+public class ClosureTransformer<T> implements Transformer<T, T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 478466901448617286L;
+    private static final long        serialVersionUID = 478466901448617286L;
 
     /** The closure to wrap */
     private final Closure<? super T> iClosure;
@@ -38,13 +40,16 @@ public class ClosureTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Factory method that performs validation.
      *
-     * @param <T>  the type of the object to transform
-     * @param closure  the closure to call, not null
+     * @param <T>
+     *            the type of the object to transform
+     * @param closure
+     *            the closure to call, not null
      * @return the <code>closure</code> transformer
-     * @throws NullPointerException if the closure is null
+     * @throws NullPointerException
+     *             if the closure is null
      */
-    public static <T> Transformer<T, T> closureTransformer(final Closure<? super T> closure) {
-        if (closure == null) {
+    public static <T> Transformer<T, T> closureTransformer(final Closure<? super T> closure){
+        if (closure == null){
             throw new NullPointerException("Closure must not be null");
         }
         return new ClosureTransformer<>(closure);
@@ -54,9 +59,10 @@ public class ClosureTransformer<T> implements Transformer<T, T>, Serializable {
      * Constructor that performs no validation.
      * Use <code>closureTransformer</code> if you want that.
      *
-     * @param closure  the closure to call, not null
+     * @param closure
+     *            the closure to call, not null
      */
-    public ClosureTransformer(final Closure<? super T> closure) {
+    public ClosureTransformer(final Closure<? super T> closure){
         super();
         iClosure = closure;
     }
@@ -64,11 +70,12 @@ public class ClosureTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Transforms the input to result by executing a closure.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return the transformed result
      */
     @Override
-    public T transform(final T input) {
+    public T transform(final T input){
         iClosure.execute(input);
         return input;
     }
@@ -79,7 +86,7 @@ public class ClosureTransformer<T> implements Transformer<T, T>, Serializable {
      * @return the closure
      * @since 3.1
      */
-    public Closure<? super T> getClosure() {
+    public Closure<? super T> getClosure(){
         return iClosure;
     }
 

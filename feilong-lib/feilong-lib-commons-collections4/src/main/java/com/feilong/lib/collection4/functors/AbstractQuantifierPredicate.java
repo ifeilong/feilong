@@ -22,13 +22,15 @@ import org.apache.commons.collections4.Predicate;
 
 /**
  * Abstract base class for quantification predicates, e.g. All, Any, None.
+ * 
+ * @param <T>
  *
  * @since 4.0
  */
-public abstract class AbstractQuantifierPredicate<T> implements PredicateDecorator<T>, Serializable {
+public abstract class AbstractQuantifierPredicate<T> implements PredicateDecorator<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = -3094696765038308799L;
+    private static final long              serialVersionUID = -3094696765038308799L;
 
     /** The array of predicates to call */
     protected final Predicate<? super T>[] iPredicates;
@@ -36,9 +38,11 @@ public abstract class AbstractQuantifierPredicate<T> implements PredicateDecorat
     /**
      * Constructor that performs no validation.
      *
-     * @param predicates  the predicates to check, not cloned, not null
+     * @param predicates
+     *            the predicates to check, not cloned, not null
      */
-    public AbstractQuantifierPredicate(final Predicate<? super T>... predicates) {
+    @SafeVarargs
+    public AbstractQuantifierPredicate(final Predicate<? super T>...predicates){
         iPredicates = predicates;
     }
 
@@ -49,8 +53,8 @@ public abstract class AbstractQuantifierPredicate<T> implements PredicateDecorat
      * @since 3.1
      */
     @Override
-    public Predicate<? super T>[] getPredicates() {
-        return FunctorUtils.<T>copy(iPredicates);
+    public Predicate<? super T>[] getPredicates(){
+        return FunctorUtils.<T> copy(iPredicates);
     }
 
 }

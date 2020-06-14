@@ -27,32 +27,37 @@ import org.apache.commons.collections4.Transformer;
  *
  * @since 3.1
  */
-public final class TransformedPredicate<T> implements PredicateDecorator<T>, Serializable {
+public final class TransformedPredicate<T> implements PredicateDecorator<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = -5596090919668315834L;
+    private static final long                         serialVersionUID = -5596090919668315834L;
 
     /** The transformer to call */
     private final Transformer<? super T, ? extends T> iTransformer;
 
     /** The predicate to call */
-    private final Predicate<? super T> iPredicate;
+    private final Predicate<? super T>                iPredicate;
 
     /**
      * Factory to create the predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param transformer  the transformer to call
-     * @param predicate  the predicate to call with the result of the transform
+     * @param <T>
+     *            the type that the predicate queries
+     * @param transformer
+     *            the transformer to call
+     * @param predicate
+     *            the predicate to call with the result of the transform
      * @return the predicate
-     * @throws NullPointerException if the transformer or the predicate is null
+     * @throws NullPointerException
+     *             if the transformer or the predicate is null
      */
-    public static <T> Predicate<T> transformedPredicate(final Transformer<? super T, ? extends T> transformer,
-                                                        final Predicate<? super T> predicate) {
-        if (transformer == null) {
+    public static <T> Predicate<T> transformedPredicate(
+                    final Transformer<? super T, ? extends T> transformer,
+                    final Predicate<? super T> predicate){
+        if (transformer == null){
             throw new NullPointerException("The transformer to call must not be null");
         }
-        if (predicate == null) {
+        if (predicate == null){
             throw new NullPointerException("The predicate to call must not be null");
         }
         return new TransformedPredicate<>(transformer, predicate);
@@ -62,11 +67,12 @@ public final class TransformedPredicate<T> implements PredicateDecorator<T>, Ser
      * Constructor that performs no validation.
      * Use <code>transformedPredicate</code> if you want that.
      *
-     * @param transformer  the transformer to use
-     * @param predicate  the predicate to decorate
+     * @param transformer
+     *            the transformer to use
+     * @param predicate
+     *            the predicate to decorate
      */
-    public TransformedPredicate(final Transformer<? super T, ? extends T> transformer,
-                                final Predicate<? super T> predicate) {
+    public TransformedPredicate(final Transformer<? super T, ? extends T> transformer, final Predicate<? super T> predicate){
         iTransformer = transformer;
         iPredicate = predicate;
     }
@@ -75,11 +81,12 @@ public final class TransformedPredicate<T> implements PredicateDecorator<T>, Ser
      * Evaluates the predicate returning the result of the decorated predicate
      * once the input has been transformed
      *
-     * @param object  the input object which will be transformed
+     * @param object
+     *            the input object which will be transformed
      * @return true if decorated predicate returns true
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         final T result = iTransformer.transform(object);
         return iPredicate.evaluate(result);
     }
@@ -92,8 +99,8 @@ public final class TransformedPredicate<T> implements PredicateDecorator<T>, Ser
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Predicate<? super T>[] getPredicates() {
-        return new Predicate[] {iPredicate};
+    public Predicate<? super T>[] getPredicates(){
+        return new Predicate[] { iPredicate };
     }
 
     /**
@@ -101,7 +108,7 @@ public final class TransformedPredicate<T> implements PredicateDecorator<T>, Ser
      *
      * @return the transformer
      */
-    public Transformer<? super T, ? extends T> getTransformer() {
+    public Transformer<? super T, ? extends T> getTransformer(){
         return iTransformer;
     }
 

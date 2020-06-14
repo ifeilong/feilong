@@ -27,46 +27,49 @@ import com.feilong.lib.collection4.FunctorException;
  *
  * @since 3.0
  */
-public final class ExceptionPredicate<T> implements Predicate<T>, Serializable {
+public final class ExceptionPredicate<T> implements Predicate<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7179106032121985545L;
+    private static final long     serialVersionUID = 7179106032121985545L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes") // the static instance works for all types
-    public static final Predicate INSTANCE = new ExceptionPredicate<>();
+    public static final Predicate INSTANCE         = new ExceptionPredicate<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T>  the object type
+     * @param <T>
+     *            the object type
      * @return the singleton instance
      * @since 3.1
      */
-    public static <T> Predicate<T> exceptionPredicate() {
+    public static <T> Predicate<T> exceptionPredicate(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private ExceptionPredicate() {
+    private ExceptionPredicate(){
         super();
     }
 
     /**
      * Evaluates the predicate always throwing an exception.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return never
-     * @throws FunctorException always
+     * @throws FunctorException
+     *             always
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         throw new FunctorException("ExceptionPredicate invoked");
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

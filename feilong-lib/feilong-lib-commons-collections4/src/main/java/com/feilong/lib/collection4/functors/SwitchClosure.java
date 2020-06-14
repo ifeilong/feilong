@@ -28,41 +28,51 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public class SwitchClosure<E> implements Closure<E>, Serializable {
+public class SwitchClosure<E> implements Closure<E>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 3518477308466486130L;
+    private static final long            serialVersionUID = 3518477308466486130L;
 
     /** The tests to consider */
     private final Predicate<? super E>[] iPredicates;
+
     /** The matching closures to call */
-    private final Closure<? super E>[] iClosures;
+    private final Closure<? super E>[]   iClosures;
+
     /** The default closure to call if no tests match */
-    private final Closure<? super E> iDefault;
+    private final Closure<? super E>     iDefault;
 
     /**
      * Factory method that performs validation and copies the parameter arrays.
      *
-     * @param <E> the type that the closure acts on
-     * @param predicates  array of predicates, cloned, no nulls
-     * @param closures  matching array of closures, cloned, no nulls
-     * @param defaultClosure  the closure to use if no match, null means nop
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicates
+     *            array of predicates, cloned, no nulls
+     * @param closures
+     *            matching array of closures, cloned, no nulls
+     * @param defaultClosure
+     *            the closure to use if no match, null means nop
      * @return the <code>chained</code> closure
-     * @throws NullPointerException if array is null
-     * @throws NullPointerException if any element in the array is null
-     * @throws IllegalArgumentException if the array lengths of predicates and closures do not match
+     * @throws NullPointerException
+     *             if array is null
+     * @throws NullPointerException
+     *             if any element in the array is null
+     * @throws IllegalArgumentException
+     *             if the array lengths of predicates and closures do not match
      */
     @SuppressWarnings("unchecked")
-    public static <E> Closure<E> switchClosure(final Predicate<? super E>[] predicates,
-                                               final Closure<? super E>[] closures,
-                                               final Closure<? super E> defaultClosure) {
+    public static <E> Closure<E> switchClosure(
+                    final Predicate<? super E>[] predicates,
+                    final Closure<? super E>[] closures,
+                    final Closure<? super E> defaultClosure){
         FunctorUtils.validate(predicates);
         FunctorUtils.validate(closures);
-        if (predicates.length != closures.length) {
+        if (predicates.length != closures.length){
             throw new IllegalArgumentException("The predicate and closure arrays must be the same size");
         }
-        if (predicates.length == 0) {
-            return (Closure<E>) (defaultClosure == null ? NOPClosure.<E>nopClosure(): defaultClosure);
+        if (predicates.length == 0){
+            return (Closure<E>) (defaultClosure == null ? NOPClosure.<E> nopClosure() : defaultClosure);
         }
         return new SwitchClosure<>(predicates, closures, defaultClosure);
     }
@@ -78,28 +88,33 @@ public class SwitchClosure<E> implements Closure<E>, Serializable {
      * null key. The ordering is that of the iterator() method on the entryset
      * collection of the map.
      *
-     * @param <E> the type that the closure acts on
-     * @param predicatesAndClosures  a map of predicates to closures
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicatesAndClosures
+     *            a map of predicates to closures
      * @return the <code>switch</code> closure
-     * @throws NullPointerException if the map is null
-     * @throws NullPointerException if any closure in the map is null
-     * @throws ClassCastException  if the map elements are of the wrong type
+     * @throws NullPointerException
+     *             if the map is null
+     * @throws NullPointerException
+     *             if any closure in the map is null
+     * @throws ClassCastException
+     *             if the map elements are of the wrong type
      */
     @SuppressWarnings("unchecked")
-    public static <E> Closure<E> switchClosure(final Map<Predicate<E>, Closure<E>> predicatesAndClosures) {
-        if (predicatesAndClosures == null) {
+    public static <E> Closure<E> switchClosure(final Map<Predicate<E>, Closure<E>> predicatesAndClosures){
+        if (predicatesAndClosures == null){
             throw new NullPointerException("The predicate and closure map must not be null");
         }
         // convert to array like this to guarantee iterator() ordering
         final Closure<? super E> defaultClosure = predicatesAndClosures.remove(null);
         final int size = predicatesAndClosures.size();
-        if (size == 0) {
-            return (Closure<E>) (defaultClosure == null ? NOPClosure.<E>nopClosure() : defaultClosure);
+        if (size == 0){
+            return (Closure<E>) (defaultClosure == null ? NOPClosure.<E> nopClosure() : defaultClosure);
         }
         final Closure<E>[] closures = new Closure[size];
         final Predicate<E>[] preds = new Predicate[size];
         int i = 0;
-        for (final Map.Entry<Predicate<E>, Closure<E>> entry : predicatesAndClosures.entrySet()) {
+        for (final Map.Entry<Predicate<E>, Closure<E>> entry : predicatesAndClosures.entrySet()){
             preds[i] = entry.getKey();
             closures[i] = entry.getValue();
             i++;
@@ -110,42 +125,50 @@ public class SwitchClosure<E> implements Closure<E>, Serializable {
     /**
      * Hidden constructor for the use by the static factory methods.
      *
-     * @param clone  if {@code true} the input arguments will be cloned
-     * @param predicates  array of predicates, no nulls
-     * @param closures  matching array of closures, no nulls
-     * @param defaultClosure  the closure to use if no match, null means nop
+     * @param clone
+     *            if {@code true} the input arguments will be cloned
+     * @param predicates
+     *            array of predicates, no nulls
+     * @param closures
+     *            matching array of closures, no nulls
+     * @param defaultClosure
+     *            the closure to use if no match, null means nop
      */
     @SuppressWarnings("unchecked")
-    private SwitchClosure(final boolean clone, final Predicate<? super E>[] predicates,
-                          final Closure<? super E>[] closures, final Closure<? super E> defaultClosure) {
+    private SwitchClosure(final boolean clone, final Predicate<? super E>[] predicates, final Closure<? super E>[] closures,
+                    final Closure<? super E> defaultClosure){
         super();
         iPredicates = clone ? FunctorUtils.copy(predicates) : predicates;
         iClosures = clone ? FunctorUtils.copy(closures) : closures;
-        iDefault = (Closure<? super E>) (defaultClosure == null ? NOPClosure.<E>nopClosure() : defaultClosure);
+        iDefault = (Closure<? super E>) (defaultClosure == null ? NOPClosure.<E> nopClosure() : defaultClosure);
     }
 
     /**
      * Constructor that performs no validation.
      * Use <code>switchClosure</code> if you want that.
      *
-     * @param predicates  array of predicates, cloned, no nulls
-     * @param closures  matching array of closures, cloned, no nulls
-     * @param defaultClosure  the closure to use if no match, null means nop
+     * @param predicates
+     *            array of predicates, cloned, no nulls
+     * @param closures
+     *            matching array of closures, cloned, no nulls
+     * @param defaultClosure
+     *            the closure to use if no match, null means nop
      */
     public SwitchClosure(final Predicate<? super E>[] predicates, final Closure<? super E>[] closures,
-                         final Closure<? super E> defaultClosure) {
+                    final Closure<? super E> defaultClosure){
         this(true, predicates, closures, defaultClosure);
     }
 
     /**
      * Executes the closure whose matching predicate returns true
      *
-     * @param input  the input object
+     * @param input
+     *            the input object
      */
     @Override
-    public void execute(final E input) {
-        for (int i = 0; i < iPredicates.length; i++) {
-            if (iPredicates[i].evaluate(input) == true) {
+    public void execute(final E input){
+        for (int i = 0; i < iPredicates.length; i++){
+            if (iPredicates[i].evaluate(input) == true){
                 iClosures[i].execute(input);
                 return;
             }
@@ -159,8 +182,8 @@ public class SwitchClosure<E> implements Closure<E>, Serializable {
      * @return a copy of the predicates
      * @since 3.1
      */
-    public Predicate<? super E>[] getPredicates() {
-        return FunctorUtils.<E>copy(iPredicates);
+    public Predicate<? super E>[] getPredicates(){
+        return FunctorUtils.<E> copy(iPredicates);
     }
 
     /**
@@ -169,8 +192,8 @@ public class SwitchClosure<E> implements Closure<E>, Serializable {
      * @return a copy of the closures
      * @since 3.1
      */
-    public Closure<? super E>[] getClosures() {
-        return FunctorUtils.<E>copy(iClosures);
+    public Closure<? super E>[] getClosures(){
+        return FunctorUtils.<E> copy(iClosures);
     }
 
     /**
@@ -179,7 +202,7 @@ public class SwitchClosure<E> implements Closure<E>, Serializable {
      * @return the default closure
      * @since 3.1
      */
-    public Closure<? super E> getDefaultClosure() {
+    public Closure<? super E> getDefaultClosure(){
         return iDefault;
     }
 

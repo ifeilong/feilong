@@ -26,7 +26,7 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.1
  */
-public interface PredicateDecorator<T> extends Predicate<T> {
+public interface PredicateDecorator<T> extends Predicate<T>{
 
     /**
      * Gets the predicates being decorated as an array.

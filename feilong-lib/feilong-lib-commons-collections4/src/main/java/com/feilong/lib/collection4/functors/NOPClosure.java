@@ -25,44 +25,46 @@ import org.apache.commons.collections4.Closure;
  *
  * @since 3.0
  */
-public final class NOPClosure<E> implements Closure<E>, Serializable {
+public final class NOPClosure<E> implements Closure<E>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 3518477308466486130L;
+    private static final long   serialVersionUID = 3518477308466486130L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes")
-    public static final Closure INSTANCE = new NOPClosure<>();
+    public static final Closure INSTANCE         = new NOPClosure<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <E> the type that the closure acts on
+     * @param <E>
+     *            the type that the closure acts on
      * @return the singleton instance
      * @since 3.1
      */
-    public static <E> Closure<E> nopClosure() {
+    public static <E> Closure<E> nopClosure(){
         return INSTANCE;
     }
 
     /**
      * Constructor.
      */
-    private NOPClosure() {
+    private NOPClosure(){
         super();
     }
 
     /**
      * Do nothing.
      *
-     * @param input  the input object
+     * @param input
+     *            the input object
      */
     @Override
-    public void execute(final E input) {
+    public void execute(final E input){
         // do nothing
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

@@ -23,37 +23,39 @@ import org.apache.commons.collections4.Equator;
 /**
  * Default {@link Equator} implementation.
  *
- * @param <T>  the types of object this {@link Equator} can evaluate.
+ * @param <T>
+ *            the types of object this {@link Equator} can evaluate.
  * @since 4.0
  */
-public class DefaultEquator<T> implements Equator<T>, Serializable {
+public class DefaultEquator<T> implements Equator<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 825802648423525485L;
+    private static final long          serialVersionUID = 825802648423525485L;
 
     /** Static instance */
     @SuppressWarnings("rawtypes") // the static instance works for all types
-    public static final DefaultEquator INSTANCE = new DefaultEquator<>();
+    public static final DefaultEquator INSTANCE         = new DefaultEquator<>();
 
     /**
      * Hashcode used for <code>null</code> objects.
      */
-    public static final int HASHCODE_NULL = -1;
+    public static final int            HASHCODE_NULL    = -1;
 
     /**
      * Factory returning the typed singleton instance.
      *
-     * @param <T>  the object type
+     * @param <T>
+     *            the object type
      * @return the singleton instance
      */
-    public static <T> DefaultEquator<T> defaultEquator() {
+    public static <T> DefaultEquator<T> defaultEquator(){
         return DefaultEquator.INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private DefaultEquator() {
+    private DefaultEquator(){
         super();
     }
 
@@ -61,7 +63,7 @@ public class DefaultEquator<T> implements Equator<T>, Serializable {
      * {@inheritDoc} Delegates to {@link Object#equals(Object)}.
      */
     @Override
-    public boolean equate(final T o1, final T o2) {
+    public boolean equate(final T o1,final T o2){
         return o1 == o2 || o1 != null && o1.equals(o2);
     }
 
@@ -72,11 +74,11 @@ public class DefaultEquator<T> implements Equator<T>, Serializable {
      *         <code>null</code>, else {@link #HASHCODE_NULL}.
      */
     @Override
-    public int hash(final T o) {
+    public int hash(final T o){
         return o == null ? HASHCODE_NULL : o.hashCode();
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

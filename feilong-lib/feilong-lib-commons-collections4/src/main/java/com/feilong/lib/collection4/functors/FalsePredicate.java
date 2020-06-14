@@ -25,45 +25,47 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class FalsePredicate<T> implements Predicate<T>, Serializable {
+public final class FalsePredicate<T> implements Predicate<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7533784454832764388L;
+    private static final long     serialVersionUID = 7533784454832764388L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes") // the static instance works for all types
-    public static final Predicate INSTANCE = new FalsePredicate<>();
+    public static final Predicate INSTANCE         = new FalsePredicate<>();
 
     /**
      * Get a typed instance.
      *
-     * @param <T> the type that the predicate queries
+     * @param <T>
+     *            the type that the predicate queries
      * @return the singleton instance
      * @since 4.0
      */
-    public static <T> Predicate<T> falsePredicate() {
+    public static <T> Predicate<T> falsePredicate(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private FalsePredicate() {
+    private FalsePredicate(){
         super();
     }
 
     /**
      * Evaluates the predicate returning false always.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return false always
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         return false;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

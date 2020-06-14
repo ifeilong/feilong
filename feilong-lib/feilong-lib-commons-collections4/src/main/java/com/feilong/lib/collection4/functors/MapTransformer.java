@@ -27,10 +27,10 @@ import org.apache.commons.collections4.Transformer;
  *
  * @since 3.0
  */
-public final class MapTransformer<I, O> implements Transformer<I, O>, Serializable {
+public final class MapTransformer<I, O> implements Transformer<I, O>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 862391807045468939L;
+    private static final long                 serialVersionUID = 862391807045468939L;
 
     /** The map of data to lookup in */
     private final Map<? super I, ? extends O> iMap;
@@ -40,14 +40,17 @@ public final class MapTransformer<I, O> implements Transformer<I, O>, Serializab
      * <p>
      * If the map is null, a transformer that always returns null is returned.
      *
-     * @param <I>  the input type
-     * @param <O>  the output type
-     * @param map the map, not cloned
+     * @param <I>
+     *            the input type
+     * @param <O>
+     *            the output type
+     * @param map
+     *            the map, not cloned
      * @return the transformer
      */
-    public static <I, O> Transformer<I, O> mapTransformer(final Map<? super I, ? extends O> map) {
-        if (map == null) {
-            return ConstantTransformer.<I, O>nullTransformer();
+    public static <I, O> Transformer<I, O> mapTransformer(final Map<? super I, ? extends O> map){
+        if (map == null){
+            return ConstantTransformer.<I, O> nullTransformer();
         }
         return new MapTransformer<>(map);
     }
@@ -56,9 +59,10 @@ public final class MapTransformer<I, O> implements Transformer<I, O>, Serializab
      * Constructor that performs no validation.
      * Use <code>mapTransformer</code> if you want that.
      *
-     * @param map  the map to use for lookup, not cloned
+     * @param map
+     *            the map to use for lookup, not cloned
      */
-    private MapTransformer(final Map<? super I, ? extends O> map) {
+    private MapTransformer(final Map<? super I, ? extends O> map){
         super();
         iMap = map;
     }
@@ -66,11 +70,12 @@ public final class MapTransformer<I, O> implements Transformer<I, O>, Serializab
     /**
      * Transforms the input to result by looking it up in a <code>Map</code>.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return the transformed result
      */
     @Override
-    public O transform(final I input) {
+    public O transform(final I input){
         return iMap.get(input);
     }
 
@@ -80,7 +85,7 @@ public final class MapTransformer<I, O> implements Transformer<I, O>, Serializab
      * @return the map
      * @since 3.1
      */
-    public Map<? super I, ? extends O> getMap() {
+    public Map<? super I, ? extends O> getMap(){
         return iMap;
     }
 

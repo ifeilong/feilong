@@ -25,45 +25,47 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class NullPredicate<T> implements Predicate<T>, Serializable {
+public final class NullPredicate<T> implements Predicate<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7533784454832764388L;
+    private static final long     serialVersionUID = 7533784454832764388L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes")
-    public static final Predicate INSTANCE = new NullPredicate<>();
+    public static final Predicate INSTANCE         = new NullPredicate<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T> the type that the predicate queries
+     * @param <T>
+     *            the type that the predicate queries
      * @return the singleton instance
      * @since 3.1
      */
-    public static <T> Predicate<T> nullPredicate() {
+    public static <T> Predicate<T> nullPredicate(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private NullPredicate() {
+    private NullPredicate(){
         super();
     }
 
     /**
      * Evaluates the predicate returning true if the input is null.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if input is null
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         return object == null;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

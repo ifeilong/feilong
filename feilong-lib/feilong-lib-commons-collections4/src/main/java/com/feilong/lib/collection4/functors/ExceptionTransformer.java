@@ -27,47 +27,51 @@ import com.feilong.lib.collection4.FunctorException;
  *
  * @since 3.0
  */
-public final class ExceptionTransformer<I, O> implements Transformer<I, O>, Serializable {
+public final class ExceptionTransformer<I, O> implements Transformer<I, O>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7179106032121985545L;
+    private static final long       serialVersionUID = 7179106032121985545L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes") // the static instance works for all types
-    public static final Transformer INSTANCE = new ExceptionTransformer<>();
+    public static final Transformer INSTANCE         = new ExceptionTransformer<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <I>  the input type
-     * @param <O>  the output type
+     * @param <I>
+     *            the input type
+     * @param <O>
+     *            the output type
      * @return the singleton instance
      * @since 3.1
      */
-    public static <I, O> Transformer<I, O> exceptionTransformer() {
+    public static <I, O> Transformer<I, O> exceptionTransformer(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private ExceptionTransformer() {
+    private ExceptionTransformer(){
         super();
     }
 
     /**
      * Transforms the input to result by cloning it.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return never
-     * @throws FunctorException always
+     * @throws FunctorException
+     *             always
      */
     @Override
-    public O transform(final I input) {
+    public O transform(final I input){
         throw new FunctorException("ExceptionTransformer invoked");
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

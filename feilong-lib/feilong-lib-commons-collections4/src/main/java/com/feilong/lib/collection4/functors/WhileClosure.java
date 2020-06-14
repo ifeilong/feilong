@@ -31,31 +31,37 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public class WhileClosure<E> implements Closure<E> {
+public class WhileClosure<E> implements Closure<E>{
 
     /** The test condition */
     private final Predicate<? super E> iPredicate;
+
     /** The closure to call */
-    private final Closure<? super E> iClosure;
+    private final Closure<? super E>   iClosure;
+
     /** The flag, true is a do loop, false is a while */
-    private final boolean iDoLoop;
+    private final boolean              iDoLoop;
 
     /**
      * Factory method that performs validation.
      *
-     * @param <E> the type that the closure acts on
-     * @param predicate  the predicate used to evaluate when the loop terminates, not null
-     * @param closure  the closure the execute, not null
-     * @param doLoop  true to act as a do-while loop, always executing the closure once
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicate
+     *            the predicate used to evaluate when the loop terminates, not null
+     * @param closure
+     *            the closure the execute, not null
+     * @param doLoop
+     *            true to act as a do-while loop, always executing the closure once
      * @return the <code>while</code> closure
-     * @throws NullPointerException if the predicate or closure is null
+     * @throws NullPointerException
+     *             if the predicate or closure is null
      */
-    public static <E> Closure<E> whileClosure(final Predicate<? super E> predicate,
-                                              final Closure<? super E> closure, final boolean doLoop) {
-        if (predicate == null) {
+    public static <E> Closure<E> whileClosure(final Predicate<? super E> predicate,final Closure<? super E> closure,final boolean doLoop){
+        if (predicate == null){
             throw new NullPointerException("Predicate must not be null");
         }
-        if (closure == null) {
+        if (closure == null){
             throw new NullPointerException("Closure must not be null");
         }
         return new WhileClosure<>(predicate, closure, doLoop);
@@ -65,11 +71,14 @@ public class WhileClosure<E> implements Closure<E> {
      * Constructor that performs no validation.
      * Use <code>whileClosure</code> if you want that.
      *
-     * @param predicate  the predicate used to evaluate when the loop terminates, not null
-     * @param closure  the closure the execute, not null
-     * @param doLoop  true to act as a do-while loop, always executing the closure once
+     * @param predicate
+     *            the predicate used to evaluate when the loop terminates, not null
+     * @param closure
+     *            the closure the execute, not null
+     * @param doLoop
+     *            true to act as a do-while loop, always executing the closure once
      */
-    public WhileClosure(final Predicate<? super E> predicate, final Closure<? super E> closure, final boolean doLoop) {
+    public WhileClosure(final Predicate<? super E> predicate, final Closure<? super E> closure, final boolean doLoop){
         super();
         iPredicate = predicate;
         iClosure = closure;
@@ -79,14 +88,15 @@ public class WhileClosure<E> implements Closure<E> {
     /**
      * Executes the closure until the predicate is false.
      *
-     * @param input  the input object
+     * @param input
+     *            the input object
      */
     @Override
-    public void execute(final E input) {
-        if (iDoLoop) {
+    public void execute(final E input){
+        if (iDoLoop){
             iClosure.execute(input);
         }
-        while (iPredicate.evaluate(input)) {
+        while (iPredicate.evaluate(input)){
             iClosure.execute(input);
         }
     }
@@ -97,7 +107,7 @@ public class WhileClosure<E> implements Closure<E> {
      * @return the predicate
      * @since 3.1
      */
-    public Predicate<? super E> getPredicate() {
+    public Predicate<? super E> getPredicate(){
         return iPredicate;
     }
 
@@ -107,7 +117,7 @@ public class WhileClosure<E> implements Closure<E> {
      * @return the closure
      * @since 3.1
      */
-    public Closure<? super E> getClosure() {
+    public Closure<? super E> getClosure(){
         return iClosure;
     }
 
@@ -117,7 +127,7 @@ public class WhileClosure<E> implements Closure<E> {
      * @return true is do-while, false if while
      * @since 3.1
      */
-    public boolean isDoLoop() {
+    public boolean isDoLoop(){
         return iDoLoop;
     }
 

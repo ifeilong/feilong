@@ -25,45 +25,47 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class NotNullPredicate<T> implements Predicate<T>, Serializable {
+public final class NotNullPredicate<T> implements Predicate<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7533784454832764388L;
+    private static final long     serialVersionUID = 7533784454832764388L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes")
-    public static final Predicate INSTANCE = new NotNullPredicate<>();
+    public static final Predicate INSTANCE         = new NotNullPredicate<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T> the type that the predicate queries
+     * @param <T>
+     *            the type that the predicate queries
      * @return the singleton instance
      * @since 3.1
      */
-    public static <T> Predicate<T> notNullPredicate() {
+    public static <T> Predicate<T> notNullPredicate(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private NotNullPredicate() {
+    private NotNullPredicate(){
         super();
     }
 
     /**
      * Evaluates the predicate returning true if the object does not equal null.
      *
-     * @param object  the object to evaluate
+     * @param object
+     *            the object to evaluate
      * @return true if not null
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         return object != null;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

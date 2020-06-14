@@ -26,13 +26,16 @@ import org.apache.commons.collections4.Closure;
  * <a href="https://issues.apache.org/jira/browse/COLLECTIONS-580">COLLECTIONS-580</a>
  * for more details.
  * </p>
+ * 
+ * @param <E>
  *
  * @since 3.0
  */
-public class ForClosure<E> implements Closure<E> {
+public class ForClosure<E> implements Closure<E>{
 
     /** The number of times to loop */
-    private final int iCount;
+    private final int                iCount;
+
     /** The closure to call */
     private final Closure<? super E> iClosure;
 
@@ -42,17 +45,20 @@ public class ForClosure<E> implements Closure<E> {
      * A null closure or zero count returns the <code>NOPClosure</code>.
      * A count of one returns the specified closure.
      *
-     * @param <E> the type that the closure acts on
-     * @param count  the number of times to execute the closure
-     * @param closure  the closure to execute, not null
+     * @param <E>
+     *            the type that the closure acts on
+     * @param count
+     *            the number of times to execute the closure
+     * @param closure
+     *            the closure to execute, not null
      * @return the <code>for</code> closure
      */
     @SuppressWarnings("unchecked")
-    public static <E> Closure<E> forClosure(final int count, final Closure<? super E> closure) {
-        if (count <= 0 || closure == null) {
-            return NOPClosure.<E>nopClosure();
+    public static <E> Closure<E> forClosure(final int count,final Closure<? super E> closure){
+        if (count <= 0 || closure == null){
+            return NOPClosure.<E> nopClosure();
         }
-        if (count == 1) {
+        if (count == 1){
             return (Closure<E>) closure;
         }
         return new ForClosure<>(count, closure);
@@ -62,10 +68,12 @@ public class ForClosure<E> implements Closure<E> {
      * Constructor that performs no validation.
      * Use <code>forClosure</code> if you want that.
      *
-     * @param count  the number of times to execute the closure
-     * @param closure  the closure to execute, not null
+     * @param count
+     *            the number of times to execute the closure
+     * @param closure
+     *            the closure to execute, not null
      */
-    public ForClosure(final int count, final Closure<? super E> closure) {
+    public ForClosure(final int count, final Closure<? super E> closure){
         super();
         iCount = count;
         iClosure = closure;
@@ -74,11 +82,12 @@ public class ForClosure<E> implements Closure<E> {
     /**
      * Executes the closure <code>count</code> times.
      *
-     * @param input  the input object
+     * @param input
+     *            the input object
      */
     @Override
-    public void execute(final E input) {
-        for (int i = 0; i < iCount; i++) {
+    public void execute(final E input){
+        for (int i = 0; i < iCount; i++){
             iClosure.execute(input);
         }
     }
@@ -89,7 +98,7 @@ public class ForClosure<E> implements Closure<E> {
      * @return the closure
      * @since 3.1
      */
-    public Closure<? super E> getClosure() {
+    public Closure<? super E> getClosure(){
         return iClosure;
     }
 
@@ -99,7 +108,7 @@ public class ForClosure<E> implements Closure<E> {
      * @return the count
      * @since 3.1
      */
-    public int getCount() {
+    public int getCount(){
         return iCount;
     }
 

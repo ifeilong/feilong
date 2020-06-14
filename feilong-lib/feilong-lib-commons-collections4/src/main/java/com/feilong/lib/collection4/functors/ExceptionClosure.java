@@ -27,45 +27,48 @@ import com.feilong.lib.collection4.FunctorException;
  *
  * @since 3.0
  */
-public final class ExceptionClosure<E> implements Closure<E>, Serializable {
+public final class ExceptionClosure<E> implements Closure<E>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7179106032121985545L;
+    private static final long   serialVersionUID = 7179106032121985545L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes") // the static instance works for all types
-    public static final Closure INSTANCE = new ExceptionClosure<>();
+    public static final Closure INSTANCE         = new ExceptionClosure<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <E> the type that the closure acts on
+     * @param <E>
+     *            the type that the closure acts on
      * @return the singleton instance
      * @since 3.1
      */
-    public static <E> Closure<E> exceptionClosure() {
+    public static <E> Closure<E> exceptionClosure(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private ExceptionClosure() {
+    private ExceptionClosure(){
         super();
     }
 
     /**
      * Always throw an exception.
      *
-     * @param input  the input object
-     * @throws FunctorException always
+     * @param input
+     *            the input object
+     * @throws FunctorException
+     *             always
      */
     @Override
-    public void execute(final E input) {
+    public void execute(final E input){
         throw new FunctorException("ExceptionClosure invoked");
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

@@ -43,25 +43,29 @@ import com.feilong.lib.collection4.FunctorException;
  *     // handle error
  * }
  * </pre>
+ * 
+ * @param <E>
  *
  * @since 4.0
  */
-public abstract class CatchAndRethrowClosure<E> implements Closure<E> {
+public abstract class CatchAndRethrowClosure<E> implements Closure<E>{
 
     /**
      * Execute this closure on the specified input object.
      *
-     * @param input the input to execute on
-     * @throws FunctorException (runtime) if the closure execution resulted in a
+     * @param input
+     *            the input to execute on
+     * @throws FunctorException
+     *             (runtime) if the closure execution resulted in a
      *             checked exception.
      */
     @Override
-    public void execute(final E input) {
-        try {
+    public void execute(final E input){
+        try{
             executeAndThrow(input);
-        } catch (final RuntimeException ex) {
+        }catch (final RuntimeException ex){
             throw ex;
-        } catch (final Throwable t) {
+        }catch (final Throwable t){
             throw new FunctorException(t);
         }
     }
@@ -69,8 +73,10 @@ public abstract class CatchAndRethrowClosure<E> implements Closure<E> {
     /**
      * Execute this closure on the specified input object.
      *
-     * @param input the input to execute on
-     * @throws Throwable if the closure execution resulted in a checked
+     * @param input
+     *            the input to execute on
+     * @throws Throwable
+     *             if the closure execution resulted in a checked
      *             exception.
      */
     protected abstract void executeAndThrow(E input) throws Throwable;

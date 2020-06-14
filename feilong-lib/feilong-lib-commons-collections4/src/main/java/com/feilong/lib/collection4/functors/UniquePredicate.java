@@ -28,22 +28,24 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class UniquePredicate<T> implements Predicate<T>, Serializable {
+public final class UniquePredicate<T> implements Predicate<T>,Serializable{
 
     /** Serial version UID */
     private static final long serialVersionUID = -3319417438027438040L;
 
     /** The set of previously seen objects */
-    private final Set<T> iSet = new HashSet<>();
+    private final Set<T>      iSet             = new HashSet<>();
 
     /**
      * Factory to create the predicate.
      *
-     * @param <T> the type that the predicate queries
+     * @param <T>
+     *            the type that the predicate queries
      * @return the predicate
-     * @throws IllegalArgumentException if the predicate is null
+     * @throws IllegalArgumentException
+     *             if the predicate is null
      */
-    public static <T> Predicate<T> uniquePredicate() {
+    public static <T> Predicate<T> uniquePredicate(){
         return new UniquePredicate<>();
     }
 
@@ -51,7 +53,7 @@ public final class UniquePredicate<T> implements Predicate<T>, Serializable {
      * Constructor that performs no validation.
      * Use <code>uniquePredicate</code> if you want that.
      */
-    public UniquePredicate() {
+    public UniquePredicate(){
         super();
     }
 
@@ -59,11 +61,12 @@ public final class UniquePredicate<T> implements Predicate<T>, Serializable {
      * Evaluates the predicate returning true if the input object hasn't been
      * received yet.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if this is the first time the object is seen
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         return iSet.add(object);
     }
 

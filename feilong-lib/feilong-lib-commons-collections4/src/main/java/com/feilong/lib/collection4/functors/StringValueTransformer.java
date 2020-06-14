@@ -26,45 +26,47 @@ import org.apache.commons.collections4.Transformer;
  *
  * @since 3.0
  */
-public final class StringValueTransformer<T> implements Transformer<T, String>, Serializable {
+public final class StringValueTransformer<T> implements Transformer<T, String>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 7511110693171758606L;
+    private static final long                        serialVersionUID = 7511110693171758606L;
 
     /** Singleton predicate instance */
-    private static final Transformer<Object, String> INSTANCE = new StringValueTransformer<>();
+    private static final Transformer<Object, String> INSTANCE         = new StringValueTransformer<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T>  the input type
+     * @param <T>
+     *            the input type
      * @return the singleton instance
      * @since 3.1
      */
     @SuppressWarnings("unchecked")
-    public static <T> Transformer<T, String> stringValueTransformer() {
+    public static <T> Transformer<T, String> stringValueTransformer(){
         return (Transformer<T, String>) INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private StringValueTransformer() {
+    private StringValueTransformer(){
         super();
     }
 
     /**
      * Transforms the input to result by calling <code>String.valueOf</code>.
      *
-     * @param input  the input object to transform
+     * @param input
+     *            the input object to transform
      * @return the transformed result
      */
     @Override
-    public String transform(final T input) {
+    public String transform(final T input){
         return String.valueOf(input);
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 

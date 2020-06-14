@@ -27,42 +27,50 @@ import org.apache.commons.collections4.Transformer;
  * objects should use the constant factory. Mutable objects should
  * use the prototype factory.
  * </p>
+ * 
+ * @param <I>
+ * @param <O>
  *
  * @since 3.0
  */
-public class ConstantTransformer<I, O> implements Transformer<I, O>, Serializable {
+public class ConstantTransformer<I, O> implements Transformer<I, O>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 6374440726369055124L;
+    private static final long       serialVersionUID = 6374440726369055124L;
 
     /** Returns null each time */
     @SuppressWarnings("rawtypes")
-    public static final Transformer NULL_INSTANCE = new ConstantTransformer<>(null);
+    public static final Transformer NULL_INSTANCE    = new ConstantTransformer<>(null);
 
     /** The closures to call in turn */
-    private final O iConstant;
+    private final O                 iConstant;
 
     /**
      * Get a typed null instance.
      *
-     * @param <I>  the input type
-     * @param <O>  the output type
+     * @param <I>
+     *            the input type
+     * @param <O>
+     *            the output type
      * @return Transformer&lt;I, O&gt; that always returns null.
      */
-    public static <I, O> Transformer<I, O> nullTransformer() {
+    public static <I, O> Transformer<I, O> nullTransformer(){
         return NULL_INSTANCE;
     }
 
     /**
      * Transformer method that performs validation.
      *
-     * @param <I>  the input type
-     * @param <O>  the output type
-     * @param constantToReturn  the constant object to return each time in the factory
+     * @param <I>
+     *            the input type
+     * @param <O>
+     *            the output type
+     * @param constantToReturn
+     *            the constant object to return each time in the factory
      * @return the <code>constant</code> factory.
      */
-    public static <I, O> Transformer<I, O> constantTransformer(final O constantToReturn) {
-        if (constantToReturn == null) {
+    public static <I, O> Transformer<I, O> constantTransformer(final O constantToReturn){
+        if (constantToReturn == null){
             return nullTransformer();
         }
         return new ConstantTransformer<>(constantToReturn);
@@ -72,9 +80,10 @@ public class ConstantTransformer<I, O> implements Transformer<I, O>, Serializabl
      * Constructor that performs no validation.
      * Use <code>constantTransformer</code> if you want that.
      *
-     * @param constantToReturn  the constant to return each time
+     * @param constantToReturn
+     *            the constant to return each time
      */
-    public ConstantTransformer(final O constantToReturn) {
+    public ConstantTransformer(final O constantToReturn){
         super();
         iConstant = constantToReturn;
     }
@@ -82,11 +91,12 @@ public class ConstantTransformer<I, O> implements Transformer<I, O>, Serializabl
     /**
      * Transforms the input by ignoring it and returning the stored constant instead.
      *
-     * @param input  the input object which is ignored
+     * @param input
+     *            the input object which is ignored
      * @return the stored constant
      */
     @Override
-    public O transform(final I input) {
+    public O transform(final I input){
         return iConstant;
     }
 
@@ -96,7 +106,7 @@ public class ConstantTransformer<I, O> implements Transformer<I, O>, Serializabl
      * @return the constant
      * @since 3.1
      */
-    public O getConstant() {
+    public O getConstant(){
         return iConstant;
     }
 
@@ -104,11 +114,11 @@ public class ConstantTransformer<I, O> implements Transformer<I, O>, Serializabl
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(final Object obj) {
-        if (obj == this) {
+    public boolean equals(final Object obj){
+        if (obj == this){
             return true;
         }
-        if (obj instanceof ConstantTransformer == false) {
+        if (obj instanceof ConstantTransformer == false){
             return false;
         }
         final Object otherConstant = ((ConstantTransformer<?, ?>) obj).getConstant();
@@ -119,9 +129,9 @@ public class ConstantTransformer<I, O> implements Transformer<I, O>, Serializabl
      * {@inheritDoc}
      */
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = "ConstantTransformer".hashCode() << 2;
-        if (getConstant() != null) {
+        if (getConstant() != null){
             result |= getConstant().hashCode();
         }
         return result;

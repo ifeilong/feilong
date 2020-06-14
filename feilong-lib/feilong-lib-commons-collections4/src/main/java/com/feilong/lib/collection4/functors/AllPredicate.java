@@ -32,10 +32,12 @@ import org.apache.commons.collections4.Predicate;
  * NOTE: In versions prior to 3.2 an array size of zero or one
  * threw an exception.
  * </p>
+ * 
+ * @param <T>
  *
  * @since 3.0
  */
-public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
+public final class AllPredicate<T> extends AbstractQuantifierPredicate<T>{
 
     /** Serial version UID */
     private static final long serialVersionUID = -3094696765038308799L;
@@ -46,18 +48,23 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
      * If the array is size zero, the predicate always returns true.
      * If the array is size one, then that predicate is returned.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicates  the predicates to check, cloned, not null
+     * @param <T>
+     *            the type that the predicate queries
+     * @param predicates
+     *            the predicates to check, cloned, not null
      * @return the <code>all</code> predicate
-     * @throws NullPointerException if the predicates array is null
-     * @throws NullPointerException if any predicate in the array is null
+     * @throws NullPointerException
+     *             if the predicates array is null
+     * @throws NullPointerException
+     *             if any predicate in the array is null
      */
-    public static <T> Predicate<T> allPredicate(final Predicate<? super T>... predicates) {
+    @SafeVarargs
+    public static <T> Predicate<T> allPredicate(final Predicate<? super T>...predicates){
         validate(predicates);
-        if (predicates.length == 0) {
+        if (predicates.length == 0){
             return truePredicate();
         }
-        if (predicates.length == 1) {
+        if (predicates.length == 1){
             return coerce(predicates[0]);
         }
 
@@ -70,18 +77,22 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
      * If the collection is size zero, the predicate always returns true.
      * If the collection is size one, then that predicate is returned.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicates  the predicates to check, cloned, not null
+     * @param <T>
+     *            the type that the predicate queries
+     * @param predicates
+     *            the predicates to check, cloned, not null
      * @return the <code>all</code> predicate
-     * @throws NullPointerException if the predicates array is null
-     * @throws NullPointerException if any predicate in the array is null
+     * @throws NullPointerException
+     *             if the predicates array is null
+     * @throws NullPointerException
+     *             if any predicate in the array is null
      */
-    public static <T> Predicate<T> allPredicate(final Collection<? extends Predicate<? super T>> predicates) {
+    public static <T> Predicate<T> allPredicate(final Collection<? extends Predicate<? super T>> predicates){
         final Predicate<? super T>[] preds = validate(predicates);
-        if (preds.length == 0) {
+        if (preds.length == 0){
             return truePredicate();
         }
-        if (preds.length == 1) {
+        if (preds.length == 1){
             return coerce(preds[0]);
         }
         return new AllPredicate<>(preds);
@@ -91,22 +102,24 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
      * Constructor that performs no validation.
      * Use <code>allPredicate</code> if you want that.
      *
-     * @param predicates  the predicates to check, not cloned, not null
+     * @param predicates
+     *            the predicates to check, not cloned, not null
      */
-    public AllPredicate(final Predicate<? super T>... predicates) {
+    public AllPredicate(final Predicate<? super T>...predicates){
         super(predicates);
     }
 
     /**
      * Evaluates the predicate returning true if all predicates return true.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true if all decorated predicates return true
      */
     @Override
-    public boolean evaluate(final T object) {
-        for (final Predicate<? super T> iPredicate : iPredicates) {
-            if (!iPredicate.evaluate(object)) {
+    public boolean evaluate(final T object){
+        for (final Predicate<? super T> iPredicate : iPredicates){
+            if (!iPredicate.evaluate(object)){
                 return false;
             }
         }

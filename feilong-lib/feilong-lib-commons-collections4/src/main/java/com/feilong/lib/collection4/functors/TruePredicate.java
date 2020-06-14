@@ -25,45 +25,47 @@ import org.apache.commons.collections4.Predicate;
  *
  * @since 3.0
  */
-public final class TruePredicate<T> implements Predicate<T>, Serializable {
+public final class TruePredicate<T> implements Predicate<T>,Serializable{
 
     /** Serial version UID */
-    private static final long serialVersionUID = 3374767158756189740L;
+    private static final long     serialVersionUID = 3374767158756189740L;
 
     /** Singleton predicate instance */
     @SuppressWarnings("rawtypes")
-    public static final Predicate INSTANCE = new TruePredicate<>();
+    public static final Predicate INSTANCE         = new TruePredicate<>();
 
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T> the type that the predicate queries
+     * @param <T>
+     *            the type that the predicate queries
      * @return the singleton instance
      * @since 3.1
      */
-    public static <T> Predicate<T> truePredicate() {
+    public static <T> Predicate<T> truePredicate(){
         return INSTANCE;
     }
 
     /**
      * Restricted constructor.
      */
-    private TruePredicate() {
+    private TruePredicate(){
         super();
     }
 
     /**
      * Evaluates the predicate returning true always.
      *
-     * @param object  the input object
+     * @param object
+     *            the input object
      * @return true always
      */
     @Override
-    public boolean evaluate(final T object) {
+    public boolean evaluate(final T object){
         return true;
     }
 
-    private Object readResolve() {
+    private Object readResolve(){
         return INSTANCE;
     }
 
