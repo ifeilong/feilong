@@ -28,47 +28,47 @@ abstract class AbstractEmptyIterator<E> {
     /**
      * Constructor.
      */
-    protected AbstractEmptyIterator() {
+    protected AbstractEmptyIterator(){
         super();
     }
 
-    public boolean hasNext() {
+    public boolean hasNext(){
         return false;
     }
 
-    public E next() {
+    public E next(){
         throw new NoSuchElementException("Iterator contains no elements");
     }
 
-    public boolean hasPrevious() {
+    public boolean hasPrevious(){
         return false;
     }
 
-    public E previous() {
+    public E previous(){
         throw new NoSuchElementException("Iterator contains no elements");
     }
 
-    public int nextIndex() {
+    public int nextIndex(){
         return 0;
     }
 
-    public int previousIndex() {
+    public int previousIndex(){
         return -1;
     }
 
-    public void add(final E obj) {
+    public void add(@SuppressWarnings("unused") final E obj){
         throw new UnsupportedOperationException("add() not supported for empty Iterator");
     }
 
-    public void set(final E obj) {
+    public void set(@SuppressWarnings("unused") final E obj){
         throw new IllegalStateException("Iterator contains no elements");
     }
 
-    public void remove() {
+    public void remove(){
         throw new IllegalStateException("Iterator contains no elements");
     }
 
-    public void reset() {
+    public void reset(){
         // do nothing
     }
 

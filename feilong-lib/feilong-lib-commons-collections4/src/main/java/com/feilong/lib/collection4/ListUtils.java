@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.collections4.Predicate;
@@ -156,89 +155,6 @@ public class ListUtils{
      */
     public static <E> List<E> selectRejected(final Collection<? extends E> inputCollection,final Predicate<? super E> predicate){
         return CollectionUtils.selectRejected(inputCollection, predicate, new ArrayList<E>(inputCollection.size()));
-    }
-
-    /**
-     * Tests two lists for value-equality as per the equality contract in
-     * {@link java.util.List#equals(java.lang.Object)}.
-     * <p>
-     * This method is useful for implementing <code>List</code> when you cannot
-     * extend AbstractList. The method takes Collection instances to enable other
-     * collection types to use the List implementation algorithm.
-     * <p>
-     * The relevant text (slightly paraphrased as this is a static method) is:
-     * <blockquote>
-     * Compares the two list objects for equality. Returns
-     * {@code true} if and only if both
-     * lists have the same size, and all corresponding pairs of elements in
-     * the two lists are <i>equal</i>. (Two elements {@code e1} and
-     * {@code e2} are <i>equal</i> if <code>(e1==null ? e2==null :
-     * e1.equals(e2))</code>.) In other words, two lists are defined to be
-     * equal if they contain the same elements in the same order. This
-     * definition ensures that the equals method works properly across
-     * different implementations of the {@code List} interface.
-     * </blockquote>
-     *
-     * <b>Note:</b> The behaviour of this method is undefined if the lists are
-     * modified during the equals comparison.
-     *
-     * @see java.util.List
-     * @param list1
-     *            the first list, may be null
-     * @param list2
-     *            the second list, may be null
-     * @return whether the lists are equal by value comparison
-     */
-    public static boolean isEqualList(final Collection<?> list1,final Collection<?> list2){
-        if (list1 == list2){
-            return true;
-        }
-        if (list1 == null || list2 == null || list1.size() != list2.size()){
-            return false;
-        }
-
-        final Iterator<?> it1 = list1.iterator();
-        final Iterator<?> it2 = list2.iterator();
-        Object obj1 = null;
-        Object obj2 = null;
-
-        while (it1.hasNext() && it2.hasNext()){
-            obj1 = it1.next();
-            obj2 = it2.next();
-
-            if (!(obj1 == null ? obj2 == null : obj1.equals(obj2))){
-                return false;
-            }
-        }
-
-        return !(it1.hasNext() || it2.hasNext());
-    }
-
-    /**
-     * Generates a hash code using the algorithm specified in
-     * {@link java.util.List#hashCode()}.
-     * <p>
-     * This method is useful for implementing <code>List</code> when you cannot
-     * extend AbstractList. The method takes Collection instances to enable other
-     * collection types to use the List implementation algorithm.
-     *
-     * @see java.util.List#hashCode()
-     * @param list
-     *            the list to generate the hashCode for, may be null
-     * @return the hash code
-     */
-    public static int hashCodeForList(final Collection<?> list){
-        if (list == null){
-            return 0;
-        }
-        int hashCode = 1;
-        final Iterator<?> it = list.iterator();
-
-        while (it.hasNext()){
-            final Object obj = it.next();
-            hashCode = 31 * hashCode + (obj == null ? 0 : obj.hashCode());
-        }
-        return hashCode;
     }
 
     //-----------------------------------------------------------------------

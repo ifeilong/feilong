@@ -23,6 +23,8 @@ import org.apache.commons.collections4.Predicate;
  * <p>
  * This interface enables tools to access the decorated predicates.
  * </p>
+ * 
+ * @param <T>
  *
  * @since 3.1
  */

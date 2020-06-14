@@ -22,6 +22,8 @@ import org.apache.commons.collections4.Predicate;
 
 /**
  * Predicate implementation that returns the opposite of the decorated predicate.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

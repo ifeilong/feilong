@@ -61,12 +61,13 @@ import com.feilong.lib.collection4.functors.WhileClosure;
  *
  * @since 3.0
  */
-public class ClosureUtils {
+public class ClosureUtils{
 
     /**
      * This class is not normally instantiated.
      */
-    private ClosureUtils() {}
+    private ClosureUtils(){
+    }
 
     /**
      * Gets a Closure that always throws an exception.
@@ -74,11 +75,12 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.ExceptionClosure
      *
-     * @param <E>  the type that the closure acts on
+     * @param <E>
+     *            the type that the closure acts on
      * @return the closure
      */
-    public static <E> Closure<E> exceptionClosure() {
-        return ExceptionClosure.<E>exceptionClosure();
+    public static <E> Closure<E> exceptionClosure(){
+        return ExceptionClosure.<E> exceptionClosure();
     }
 
     /**
@@ -87,11 +89,12 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.NOPClosure
      *
-     * @param <E>  the type that the closure acts on
+     * @param <E>
+     *            the type that the closure acts on
      * @return the closure
      */
-    public static <E> Closure<E> nopClosure() {
-        return NOPClosure.<E>nopClosure();
+    public static <E> Closure<E> nopClosure(){
+        return NOPClosure.<E> nopClosure();
     }
 
     /**
@@ -101,11 +104,13 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.TransformerClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param transformer  the transformer to run each time in the closure, null means nop
+     * @param <E>
+     *            the type that the closure acts on
+     * @param transformer
+     *            the transformer to run each time in the closure, null means nop
      * @return the closure
      */
-    public static <E> Closure<E> asClosure(final Transformer<? super E, ?> transformer) {
+    public static <E> Closure<E> asClosure(final Transformer<? super E, ?> transformer){
         return TransformerClosure.transformerClosure(transformer);
     }
 
@@ -116,12 +121,15 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.ForClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param count  the number of times to loop
-     * @param closure  the closure to call repeatedly
+     * @param <E>
+     *            the type that the closure acts on
+     * @param count
+     *            the number of times to loop
+     * @param closure
+     *            the closure to call repeatedly
      * @return the <code>for</code> closure
      */
-    public static <E> Closure<E> forClosure(final int count, final Closure<? super E> closure) {
+    public static <E> Closure<E> forClosure(final int count,final Closure<? super E> closure){
         return ForClosure.forClosure(count, closure);
     }
 
@@ -131,14 +139,18 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.WhileClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param predicate  the predicate to use as an end of loop test, not null
-     * @param closure  the closure to call repeatedly, not null
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicate
+     *            the predicate to use as an end of loop test, not null
+     * @param closure
+     *            the closure to call repeatedly, not null
      * @return the <code>while</code> closure
-     * @throws NullPointerException if either argument is null
+     * @throws NullPointerException
+     *             if either argument is null
      */
-    public static <E> Closure<E> whileClosure(final Predicate<? super E> predicate, final Closure<? super E> closure) {
-        return WhileClosure.<E>whileClosure(predicate, closure, false);
+    public static <E> Closure<E> whileClosure(final Predicate<? super E> predicate,final Closure<? super E> closure){
+        return WhileClosure.<E> whileClosure(predicate, closure, false);
     }
 
     /**
@@ -147,15 +159,18 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.WhileClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param closure  the closure to call repeatedly, not null
-     * @param predicate  the predicate to use as an end of loop test, not null
+     * @param <E>
+     *            the type that the closure acts on
+     * @param closure
+     *            the closure to call repeatedly, not null
+     * @param predicate
+     *            the predicate to use as an end of loop test, not null
      * @return the <code>do-while</code> closure
-     * @throws NullPointerException if either argument is null
+     * @throws NullPointerException
+     *             if either argument is null
      */
-    public static <E> Closure<E> doWhileClosure(final Closure<? super E> closure,
-                                                final Predicate<? super E> predicate) {
-        return WhileClosure.<E>whileClosure(predicate, closure, true);
+    public static <E> Closure<E> doWhileClosure(final Closure<? super E> closure,final Predicate<? super E> predicate){
+        return WhileClosure.<E> whileClosure(predicate, closure, true);
     }
 
     /**
@@ -165,14 +180,17 @@ public class ClosureUtils {
      * @see com.feilong.lib.collection4.functors.InvokerTransformer
      * @see com.feilong.lib.collection4.functors.TransformerClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param methodName  the name of the method
+     * @param <E>
+     *            the type that the closure acts on
+     * @param methodName
+     *            the name of the method
      * @return the <code>invoker</code> closure
-     * @throws NullPointerException if the method name is null
+     * @throws NullPointerException
+     *             if the method name is null
      */
-    public static <E> Closure<E> invokerClosure(final String methodName) {
+    public static <E> Closure<E> invokerClosure(final String methodName){
         // reuse transformer as it has caching - this is lazy really, should have inner class here
-        return asClosure(InvokerTransformer.<E, Object>invokerTransformer(methodName));
+        return asClosure(InvokerTransformer.<E, Object> invokerTransformer(methodName));
     }
 
     /**
@@ -182,18 +200,23 @@ public class ClosureUtils {
      * @see com.feilong.lib.collection4.functors.InvokerTransformer
      * @see com.feilong.lib.collection4.functors.TransformerClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param methodName  the name of the method
-     * @param paramTypes  the parameter types
-     * @param args  the arguments
+     * @param <E>
+     *            the type that the closure acts on
+     * @param methodName
+     *            the name of the method
+     * @param paramTypes
+     *            the parameter types
+     * @param args
+     *            the arguments
      * @return the <code>invoker</code> closure
-     * @throws NullPointerException if the method name is null
-     * @throws IllegalArgumentException if the paramTypes and args don't match
+     * @throws NullPointerException
+     *             if the method name is null
+     * @throws IllegalArgumentException
+     *             if the paramTypes and args don't match
      */
-    public static <E> Closure<E> invokerClosure(final String methodName, final Class<?>[] paramTypes,
-                                                final Object[] args) {
+    public static <E> Closure<E> invokerClosure(final String methodName,final Class<?>[] paramTypes,final Object[] args){
         // reuse transformer as it has caching - this is lazy really, should have inner class here
-        return asClosure(InvokerTransformer.<E, Object>invokerTransformer(methodName, paramTypes, args));
+        return asClosure(InvokerTransformer.<E, Object> invokerTransformer(methodName, paramTypes, args));
     }
 
     /**
@@ -202,13 +225,17 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.ChainedClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param closures  an array of closures to chain
+     * @param <E>
+     *            the type that the closure acts on
+     * @param closures
+     *            an array of closures to chain
      * @return the <code>chained</code> closure
-     * @throws NullPointerException if the closures array is null
-     * @throws NullPointerException if any closure in the array is null
+     * @throws NullPointerException
+     *             if the closures array is null
+     * @throws NullPointerException
+     *             if any closure in the array is null
      */
-    public static <E> Closure<E> chainedClosure(final Closure<? super E>... closures) {
+    public static <E> Closure<E> chainedClosure(final Closure<? super E>...closures){
         return ChainedClosure.chainedClosure(closures);
     }
 
@@ -219,14 +246,19 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.ChainedClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param closures  a collection of closures to chain
+     * @param <E>
+     *            the type that the closure acts on
+     * @param closures
+     *            a collection of closures to chain
      * @return the <code>chained</code> closure
-     * @throws NullPointerException if the closures collection is null
-     * @throws NullPointerException if any closure in the collection is null
-     * @throws IllegalArgumentException if the closures collection is empty
+     * @throws NullPointerException
+     *             if the closures collection is null
+     * @throws NullPointerException
+     *             if any closure in the collection is null
+     * @throws IllegalArgumentException
+     *             if the closures collection is empty
      */
-    public static <E> Closure<E> chainedClosure(final Collection<? extends Closure<? super E>> closures) {
+    public static <E> Closure<E> chainedClosure(final Collection<? extends Closure<? super E>> closures){
         return ChainedClosure.chainedClosure(closures);
     }
 
@@ -236,16 +268,19 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.IfClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param predicate  the validating predicate
-     * @param trueClosure  the closure called if the predicate is true
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicate
+     *            the validating predicate
+     * @param trueClosure
+     *            the closure called if the predicate is true
      * @return the <code>if</code> closure
-     * @throws NullPointerException if the predicate or closure is null
+     * @throws NullPointerException
+     *             if the predicate or closure is null
      * @since 3.2
      */
-    public static <E> Closure<E> ifClosure(final Predicate<? super E> predicate,
-                                           final Closure<? super E> trueClosure) {
-        return IfClosure.<E>ifClosure(predicate, trueClosure);
+    public static <E> Closure<E> ifClosure(final Predicate<? super E> predicate,final Closure<? super E> trueClosure){
+        return IfClosure.<E> ifClosure(predicate, trueClosure);
     }
 
     /**
@@ -254,17 +289,23 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.IfClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param predicate  the predicate to switch on
-     * @param trueClosure  the closure called if the predicate is true
-     * @param falseClosure  the closure called if the predicate is false
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicate
+     *            the predicate to switch on
+     * @param trueClosure
+     *            the closure called if the predicate is true
+     * @param falseClosure
+     *            the closure called if the predicate is false
      * @return the <code>switch</code> closure
-     * @throws NullPointerException if the predicate or either closure is null
+     * @throws NullPointerException
+     *             if the predicate or either closure is null
      */
-    public static <E> Closure<E> ifClosure(final Predicate<? super E> predicate,
-                                           final Closure<? super E> trueClosure,
-                                           final Closure<? super E> falseClosure) {
-        return IfClosure.<E>ifClosure(predicate, trueClosure, falseClosure);
+    public static <E> Closure<E> ifClosure(
+                    final Predicate<? super E> predicate,
+                    final Closure<? super E> trueClosure,
+                    final Closure<? super E> falseClosure){
+        return IfClosure.<E> ifClosure(predicate, trueClosure, falseClosure);
     }
 
     /**
@@ -277,17 +318,22 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.SwitchClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param predicates  an array of predicates to check, not null
-     * @param closures  an array of closures to call, not null
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicates
+     *            an array of predicates to check, not null
+     * @param closures
+     *            an array of closures to call, not null
      * @return the <code>switch</code> closure
-     * @throws NullPointerException if the either array is null
-     * @throws NullPointerException if any element in the arrays is null
-     * @throws IllegalArgumentException if the arrays have different sizes
+     * @throws NullPointerException
+     *             if the either array is null
+     * @throws NullPointerException
+     *             if any element in the arrays is null
+     * @throws IllegalArgumentException
+     *             if the arrays have different sizes
      */
-    public static <E> Closure<E> switchClosure(final Predicate<? super E>[] predicates,
-                                               final Closure<? super E>[] closures) {
-        return SwitchClosure.<E>switchClosure(predicates, closures, null);
+    public static <E> Closure<E> switchClosure(final Predicate<? super E>[] predicates,final Closure<? super E>[] closures){
+        return SwitchClosure.<E> switchClosure(predicates, closures, null);
     }
 
     /**
@@ -301,19 +347,27 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.SwitchClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param predicates  an array of predicates to check, not null
-     * @param closures  an array of closures to call, not null
-     * @param defaultClosure  the default to call if no predicate matches
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicates
+     *            an array of predicates to check, not null
+     * @param closures
+     *            an array of closures to call, not null
+     * @param defaultClosure
+     *            the default to call if no predicate matches
      * @return the <code>switch</code> closure
-     * @throws NullPointerException if the either array is null
-     * @throws NullPointerException if any element in the arrays is null
-     * @throws IllegalArgumentException if the arrays are different sizes
+     * @throws NullPointerException
+     *             if the either array is null
+     * @throws NullPointerException
+     *             if any element in the arrays is null
+     * @throws IllegalArgumentException
+     *             if the arrays are different sizes
      */
-    public static <E> Closure<E> switchClosure(final Predicate<? super E>[] predicates,
-                                               final Closure<? super E>[] closures,
-                                               final Closure<? super E> defaultClosure) {
-        return SwitchClosure.<E>switchClosure(predicates, closures, defaultClosure);
+    public static <E> Closure<E> switchClosure(
+                    final Predicate<? super E>[] predicates,
+                    final Closure<? super E>[] closures,
+                    final Closure<? super E> defaultClosure){
+        return SwitchClosure.<E> switchClosure(predicates, closures, defaultClosure);
     }
 
     /**
@@ -329,15 +383,21 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.SwitchClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param predicatesAndClosures  a map of predicates to closures
+     * @param <E>
+     *            the type that the closure acts on
+     * @param predicatesAndClosures
+     *            a map of predicates to closures
      * @return the <code>switch</code> closure
-     * @throws NullPointerException if the map is null
-     * @throws NullPointerException if any closure in the map is null
-     * @throws IllegalArgumentException if the map is empty
-     * @throws ClassCastException  if the map elements are of the wrong type
+     * @throws NullPointerException
+     *             if the map is null
+     * @throws NullPointerException
+     *             if any closure in the map is null
+     * @throws IllegalArgumentException
+     *             if the map is empty
+     * @throws ClassCastException
+     *             if the map elements are of the wrong type
      */
-    public static <E> Closure<E> switchClosure(final Map<Predicate<E>, Closure<E>> predicatesAndClosures) {
+    public static <E> Closure<E> switchClosure(final Map<Predicate<E>, Closure<E>> predicatesAndClosures){
         return SwitchClosure.switchClosure(predicatesAndClosures);
     }
 
@@ -352,16 +412,21 @@ public class ClosureUtils {
      *
      * @see com.feilong.lib.collection4.functors.SwitchClosure
      *
-     * @param <E>  the type that the closure acts on
-     * @param objectsAndClosures  a map of objects to closures
+     * @param <E>
+     *            the type that the closure acts on
+     * @param objectsAndClosures
+     *            a map of objects to closures
      * @return the closure
-     * @throws NullPointerException if the map is null
-     * @throws NullPointerException if any closure in the map is null
-     * @throws IllegalArgumentException if the map is empty
+     * @throws NullPointerException
+     *             if the map is null
+     * @throws NullPointerException
+     *             if any closure in the map is null
+     * @throws IllegalArgumentException
+     *             if the map is empty
      */
     @SuppressWarnings("unchecked")
-    public static <E> Closure<E> switchMapClosure(final Map<? extends E, Closure<E>> objectsAndClosures) {
-        if (objectsAndClosures == null) {
+    public static <E> Closure<E> switchMapClosure(final Map<? extends E, Closure<E>> objectsAndClosures){
+        if (objectsAndClosures == null){
             throw new NullPointerException("The object and closure map must not be null");
         }
         final Closure<? super E> def = objectsAndClosures.remove(null);
@@ -369,12 +434,12 @@ public class ClosureUtils {
         final Closure<? super E>[] trs = new Closure[size];
         final Predicate<E>[] preds = new Predicate[size];
         int i = 0;
-        for (final Map.Entry<? extends E, Closure<E>> entry : objectsAndClosures.entrySet()) {
-            preds[i] = EqualPredicate.<E>equalPredicate(entry.getKey());
+        for (final Map.Entry<? extends E, Closure<E>> entry : objectsAndClosures.entrySet()){
+            preds[i] = EqualPredicate.<E> equalPredicate(entry.getKey());
             trs[i] = entry.getValue();
             i++;
         }
-        return ClosureUtils.<E>switchClosure(preds, trs, def);
+        return ClosureUtils.<E> switchClosure(preds, trs, def);
     }
 
 }

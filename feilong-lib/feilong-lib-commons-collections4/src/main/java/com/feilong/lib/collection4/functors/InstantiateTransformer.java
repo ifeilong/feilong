@@ -31,6 +31,8 @@ import com.feilong.lib.collection4.FunctorException;
  * <a href="https://issues.apache.org/jira/browse/COLLECTIONS-580">COLLECTIONS-580</a>
  * for more details.
  * </p>
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

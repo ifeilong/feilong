@@ -33,7 +33,8 @@ import com.feilong.lib.collection4.PredicateUtils;
  * or, not, method invokation and null testing.
  * </p>
  *
- * @param <T> the type that the predicate queries
+ * @param <T>
+ *            the type that the predicate queries
  *
  * @since 1.0
  */
@@ -43,11 +44,15 @@ public interface Predicate<T> {
     /**
      * Use the specified parameter to perform a test that returns true or false.
      *
-     * @param object  the object to evaluate, should not be changed
+     * @param object
+     *            the object to evaluate, should not be changed
      * @return true or false
-     * @throws ClassCastException (runtime) if the input is the wrong class
-     * @throws IllegalArgumentException (runtime) if the input is invalid
-     * @throws FunctorException (runtime) if the predicate encounters a problem
+     * @throws ClassCastException
+     *             (runtime) if the input is the wrong class
+     * @throws IllegalArgumentException
+     *             (runtime) if the input is invalid
+     * @throws FunctorException
+     *             (runtime) if the predicate encounters a problem
      */
     boolean evaluate(T object);
 

@@ -16,10 +16,8 @@
  */
 package com.feilong.lib.collection4;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Set;
 import java.util.SortedSet;
@@ -57,53 +55,6 @@ public class SetUtils{
      */
     public static <E> Set<E> emptySet(){
         return Collections.<E> emptySet();
-    }
-
-    /**
-     * Generates a hash code using the algorithm specified in
-     * {@link java.util.Set#hashCode()}.
-     * <p>
-     * This method is useful for implementing <code>Set</code> when you cannot
-     * extend AbstractSet. The method takes Collection instances to enable other
-     * collection types to use the Set implementation algorithm.
-     *
-     * @param <T>
-     *            the element type
-     * @see java.util.Set#hashCode()
-     * @param set
-     *            the set to calculate the hash code for, may be null
-     * @return the hash code
-     */
-    public static <T> int hashCodeForSet(final Collection<T> set){
-        if (set == null){
-            return 0;
-        }
-
-        int hashCode = 0;
-        for (final T obj : set){
-            if (obj != null){
-                hashCode += obj.hashCode();
-            }
-        }
-        return hashCode;
-    }
-
-    /**
-     * Creates a set from the given items. If the passed var-args argument is {@code
-     * null}, then the method returns {@code null}.
-     * 
-     * @param <E>
-     *            the element type
-     * @param items
-     *            the elements that make up the new set
-     * @return a set
-     * @since 4.3
-     */
-    public static <E> HashSet<E> hashSet(final E...items){
-        if (items == null){
-            return null;
-        }
-        return new HashSet<>(Arrays.asList(items));
     }
 
     /**
@@ -237,9 +188,6 @@ public class SetUtils{
     public static <E> SortedSet<E> synchronizedSortedSet(final SortedSet<E> set){
         return Collections.synchronizedSortedSet(set);
     }
-
-    // Set operations
-    //-----------------------------------------------------------------------
 
     /**
      * <code>SetUtils</code> should not normally be instantiated.

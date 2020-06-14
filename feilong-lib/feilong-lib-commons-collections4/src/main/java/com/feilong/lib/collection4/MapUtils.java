@@ -26,7 +26,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.SortedMap;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 
 /**
@@ -36,34 +35,10 @@ import org.apache.commons.collections4.Transformer;
  * It contains various type safe methods
  * as well as other useful features like deep copying.
  * </p>
- * <p>
- * It also provides the following decorators:
- * </p>
- *
- * <ul>
- * <li>{@link #fixedSizeMap(Map)}
- * <li>{@link #fixedSizeSortedMap(SortedMap)}
- * <li>{@link #lazyMap(Map,Factory)}
- * <li>{@link #lazyMap(Map,Transformer)}
- * <li>{@link #lazySortedMap(SortedMap,Factory)}
- * <li>{@link #lazySortedMap(SortedMap,Transformer)}
- * <li>{@link #predicatedMap(Map,Predicate,Predicate)}
- * <li>{@link #predicatedSortedMap(SortedMap,Predicate,Predicate)}
- * <li>{@link #transformedMap(Map, Transformer, Transformer)}
- * <li>{@link #transformedSortedMap(SortedMap, Transformer, Transformer)}
- * <li>{@link #multiValueMap( Map )}
- * <li>{@link #multiValueMap( Map, Class )}
- * <li>{@link #multiValueMap( Map, Factory )}
- * </ul>
  *
  * @since 1.0
  */
 public class MapUtils{
-
-    /**
-     * String used to indent the verbose and debug Map prints.
-     */
-    private static final String INDENT_STRING = "    ";
 
     /**
      * <code>MapUtils</code> should not normally be instantiated.
@@ -177,34 +152,6 @@ public class MapUtils{
             out.put(entry.getValue(), entry.getKey());
         }
         return out;
-    }
-
-    /**
-     * Null-safe check if the specified map is empty.
-     * <p>
-     * Null returns true.
-     *
-     * @param map
-     *            the map to check, may be null
-     * @return true if empty or null
-     * @since 3.2
-     */
-    public static boolean isEmpty(final Map<?, ?> map){
-        return map == null || map.isEmpty();
-    }
-
-    /**
-     * Null-safe check if the specified map is not empty.
-     * <p>
-     * Null returns false.
-     *
-     * @param map
-     *            the map to check, may be null
-     * @return true if non-null and non-empty
-     * @since 3.2
-     */
-    public static boolean isNotEmpty(final Map<?, ?> map){
-        return !MapUtils.isEmpty(map);
     }
 
     // Map decorators
@@ -327,17 +274,6 @@ public class MapUtils{
             final E temp = iter.next();
             map.put(keyTransformer.transform(temp), valueTransformer.transform(temp));
         }
-    }
-
-    /**
-     * Gets the given map size or 0 if the map is null
-     * 
-     * @param map
-     *            a Map or null
-     * @return the given map size or 0 if the map is null
-     */
-    public static int size(final Map<?, ?> map){
-        return map == null ? 0 : map.size();
     }
 
 }

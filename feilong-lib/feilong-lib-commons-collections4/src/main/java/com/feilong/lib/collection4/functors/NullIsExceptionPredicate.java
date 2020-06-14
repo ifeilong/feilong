@@ -24,6 +24,8 @@ import com.feilong.lib.collection4.FunctorException;
 
 /**
  * Predicate implementation that throws an exception if the input is null.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

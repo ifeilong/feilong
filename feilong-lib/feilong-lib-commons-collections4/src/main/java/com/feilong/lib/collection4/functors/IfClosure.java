@@ -24,6 +24,8 @@ import org.apache.commons.collections4.Predicate;
 /**
  * Closure implementation acts as an if statement calling one or other closure
  * based on a predicate.
+ * 
+ * @param <E>
  *
  * @since 3.0
  */

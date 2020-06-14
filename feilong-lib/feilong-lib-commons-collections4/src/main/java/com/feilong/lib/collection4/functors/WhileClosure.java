@@ -28,6 +28,8 @@ import org.apache.commons.collections4.Predicate;
  * <a href="https://issues.apache.org/jira/browse/COLLECTIONS-580">COLLECTIONS-580</a>
  * for more details.
  * </p>
+ * 
+ * @param <E>
  *
  * @since 3.0
  */

@@ -25,15 +25,16 @@ import com.feilong.lib.collection4.ComparatorUtils;
  * Reverses the order of another comparator by reversing the arguments
  * to its {@link #compare(Object, Object) compare} method.
  *
- * @param <E> the type of objects compared by this comparator
+ * @param <E>
+ *            the type of objects compared by this comparator
  *
  * @since 2.0
  * @see java.util.Collections#reverseOrder()
  */
-public class ReverseComparator<E> implements Comparator<E>, Serializable {
+public class ReverseComparator<E> implements Comparator<E>,Serializable{
 
     /** Serialization version from Collections 2.0. */
-    private static final long serialVersionUID = 2858887242028539265L;
+    private static final long           serialVersionUID = 2858887242028539265L;
 
     /** The comparator being decorated. */
     private final Comparator<? super E> comparator;
@@ -41,25 +42,26 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
     //-----------------------------------------------------------------------
     /**
      * Creates a comparator that compares objects based on the inverse of their
-     * natural ordering.  Using this Constructor will create a ReverseComparator
+     * natural ordering. Using this Constructor will create a ReverseComparator
      * that is functionally identical to the Comparator returned by
      * java.util.Collections.<b>reverseOrder()</b>.
      *
      * @see java.util.Collections#reverseOrder()
      */
-    public ReverseComparator() {
+    public ReverseComparator(){
         this(null);
     }
 
     /**
      * Creates a comparator that inverts the comparison
-     * of the given comparator.  If you pass in <code>null</code>,
+     * of the given comparator. If you pass in <code>null</code>,
      * the ReverseComparator defaults to reversing the
      * natural order, as per {@link java.util.Collections#reverseOrder()}.
      *
-     * @param comparator Comparator to reverse
+     * @param comparator
+     *            Comparator to reverse
      */
-    public ReverseComparator(final Comparator<? super E> comparator) {
+    public ReverseComparator(final Comparator<? super E> comparator){
         this.comparator = comparator == null ? ComparatorUtils.NATURAL_COMPARATOR : comparator;
     }
 
@@ -67,12 +69,14 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
     /**
      * Compares two objects in reverse order.
      *
-     * @param obj1  the first object to compare
-     * @param obj2  the second object to compare
+     * @param obj1
+     *            the first object to compare
+     * @param obj2
+     *            the second object to compare
      * @return negative if obj1 is less, positive if greater, zero if equal
      */
     @Override
-    public int compare(final E obj1, final E obj2) {
+    public int compare(final E obj1,final E obj2){
         return comparator.compare(obj2, obj1);
     }
 
@@ -85,7 +89,7 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
      * @since 3.0
      */
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return "ReverseComparator".hashCode() ^ comparator.hashCode();
     }
 
@@ -101,19 +105,20 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
      * Subclasses may want to override this behavior to remain consistent
      * with the {@link Comparator#equals(Object) equals} contract.
      *
-     * @param object  the object to compare to
+     * @param object
+     *            the object to compare to
      * @return true if equal
      * @since 3.0
      */
     @Override
-    public boolean equals(final Object object) {
-        if (this == object) {
+    public boolean equals(final Object object){
+        if (this == object){
             return true;
         }
-        if (null == object) {
+        if (null == object){
             return false;
         }
-        if (object.getClass().equals(this.getClass())) {
+        if (object.getClass().equals(this.getClass())){
             final ReverseComparator<?> thatrc = (ReverseComparator<?>) object;
             return comparator.equals(thatrc.comparator);
         }

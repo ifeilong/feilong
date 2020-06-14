@@ -29,7 +29,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections4.Closure;
 import org.apache.commons.collections4.Equator;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
@@ -120,7 +119,7 @@ public class CollectionUtils{
             return getFreq(obj, cardinalityB);
         }
 
-        private int getFreq(final Object obj,final Map<?, Integer> freqMap){
+        private static int getFreq(final Object obj,final Map<?, Integer> freqMap){
             final Integer count = freqMap.get(obj);
             if (count != null){
                 return count.intValue();
@@ -278,7 +277,6 @@ public class CollectionUtils{
      *            in both input collections.
      * @return the intersection of the two collections
      * @see Collection#retainAll
-     * @see #containsAny
      */
     public static <O> Collection<O> intersection(final Iterable<? extends O> a,final Iterable<? extends O> b){
         final SetOperationCardinalityHelper<O> helper = new SetOperationCardinalityHelper<>(a, b);
@@ -527,13 +525,7 @@ public class CollectionUtils{
         }
 
         @SuppressWarnings({ "unchecked", "rawtypes" })
-        final Transformer<E, ?> transformer = new Transformer(){
-
-            @Override
-            public EquatorWrapper<?> transform(final Object input){
-                return new EquatorWrapper(equator, input);
-            }
-        };
+        final Transformer<E, ?> transformer = input -> new EquatorWrapper(equator, input);
 
         return isEqualCollection(collect(a, transformer), collect(b, transformer));
     }
@@ -578,124 +570,6 @@ public class CollectionUtils{
         public int hashCode(){
             return equator.hash(object);
         }
-    }
-
-    /**
-     * Finds the first element in the given collection which matches the given predicate.
-     * <p>
-     * If the input collection or predicate is null, or no element of the collection
-     * matches the predicate, null is returned.
-     * </p>
-     *
-     * @param <T>
-     *            the type of object the {@link Iterable} contains
-     * @param collection
-     *            the collection to search, may be null
-     * @param predicate
-     *            the predicate to use, may be null
-     * @return the first element of the collection which matches the predicate or null if none could be found
-     * @deprecated since 4.1, use {@link IterableUtils#find(Iterable, Predicate)} instead
-     */
-    @Deprecated
-    public static <T> T find(final Iterable<T> collection,final Predicate<? super T> predicate){
-        return predicate != null ? IterableUtils.find(collection, predicate) : null;
-    }
-
-    /**
-     * Executes the given closure on each element in the collection.
-     * <p>
-     * If the input collection or closure is null, there is no change made.
-     * </p>
-     *
-     * @param <T>
-     *            the type of object the {@link Iterable} contains
-     * @param <C>
-     *            the closure type
-     * @param collection
-     *            the collection to get the input from, may be null
-     * @param closure
-     *            the closure to perform, may be null
-     * @return closure
-     * @deprecated since 4.1, use {@link IterableUtils#forEach(Iterable, Closure)} instead
-     */
-    @Deprecated
-    public static <T, C extends Closure<? super T>> C forAllDo(final Iterable<T> collection,final C closure){
-        if (closure != null){
-            IterableUtils.forEach(collection, closure);
-        }
-        return closure;
-    }
-
-    /**
-     * Executes the given closure on each element in the collection.
-     * <p>
-     * If the input collection or closure is null, there is no change made.
-     * </p>
-     *
-     * @param <T>
-     *            the type of object the {@link Iterator} contains
-     * @param <C>
-     *            the closure type
-     * @param iterator
-     *            the iterator to get the input from, may be null
-     * @param closure
-     *            the closure to perform, may be null
-     * @return closure
-     * @since 4.0
-     * @deprecated since 4.1, use {@link IteratorUtils#forEach(Iterator, Closure)} instead
-     */
-    @Deprecated
-    public static <T, C extends Closure<? super T>> C forAllDo(final Iterator<T> iterator,final C closure){
-        if (closure != null){
-            IteratorUtils.forEach(iterator, closure);
-        }
-        return closure;
-    }
-
-    /**
-     * Executes the given closure on each but the last element in the collection.
-     * <p>
-     * If the input collection or closure is null, there is no change made.
-     * </p>
-     *
-     * @param <T>
-     *            the type of object the {@link Iterable} contains
-     * @param <C>
-     *            the closure type
-     * @param collection
-     *            the collection to get the input from, may be null
-     * @param closure
-     *            the closure to perform, may be null
-     * @return the last element in the collection, or null if either collection or closure is null
-     * @since 4.0
-     * @deprecated since 4.1, use {@link IterableUtils#forEachButLast(Iterable, Closure)} instead
-     */
-    @Deprecated
-    public static <T, C extends Closure<? super T>> T forAllButLastDo(final Iterable<T> collection,final C closure){
-        return closure != null ? IterableUtils.forEachButLast(collection, closure) : null;
-    }
-
-    /**
-     * Executes the given closure on each but the last element in the collection.
-     * <p>
-     * If the input collection or closure is null, there is no change made.
-     * </p>
-     *
-     * @param <T>
-     *            the type of object the {@link Collection} contains
-     * @param <C>
-     *            the closure type
-     * @param iterator
-     *            the iterator to get the input from, may be null
-     * @param closure
-     *            the closure to perform, may be null
-     * @return the last element in the collection, or null if either iterator or closure is null
-     * @since 4.0
-     * @deprecated since 4.1, use {@link IteratorUtils#forEachButLast(Iterator, Closure)} instead
-     */
-    @Deprecated
-    public static <T, C extends Closure<? super T>> T forAllButLastDo(final Iterator<T> iterator,final C closure){
-        return closure != null ? IteratorUtils.forEachButLast(iterator, closure) : null;
     }
 
     /**
@@ -786,54 +660,6 @@ public class CollectionUtils{
                 collection.addAll(resultCollection);
             }
         }
-    }
-
-    /**
-     * Answers true if a predicate is true for at least one element of a
-     * collection.
-     * <p>
-     * A <code>null</code> collection or predicate returns false.
-     * </p>
-     *
-     * @param <C>
-     *            the type of object the {@link Iterable} contains
-     * @param input
-     *            the {@link Iterable} to get the input from, may be null
-     * @param predicate
-     *            the predicate to use, may be null
-     * @return true if at least one element of the collection matches the predicate
-     * @deprecated since 4.1, use {@link IterableUtils#matchesAny(Iterable, Predicate)} instead
-     */
-    @Deprecated
-    public static <C> boolean exists(final Iterable<C> input,final Predicate<? super C> predicate){
-        return predicate != null && IterableUtils.matchesAny(input, predicate);
-    }
-
-    /**
-     * Answers true if a predicate is true for every element of a
-     * collection.
-     *
-     * <p>
-     * A <code>null</code> predicate returns false.
-     * </p>
-     * <p>
-     * A <code>null</code> or empty collection returns true.
-     * </p>
-     *
-     * @param <C>
-     *            the type of object the {@link Iterable} contains
-     * @param input
-     *            the {@link Iterable} to get the input from, may be null
-     * @param predicate
-     *            the predicate to use, may be null
-     * @return true if every element of the collection matches the predicate or if the
-     *         collection is empty, false otherwise
-     * @since 4.0
-     * @deprecated since 4.1, use {@link IterableUtils#matchesAll(Iterable, Predicate)} instead
-     */
-    @Deprecated
-    public static <C> boolean matchesAll(final Iterable<C> input,final Predicate<? super C> predicate){
-        return predicate != null && IterableUtils.matchesAll(input, predicate);
     }
 
     /**
@@ -1231,38 +1057,13 @@ public class CollectionUtils{
      * @throws NullPointerException
      *             if the collection or array is null
      */
+    @SafeVarargs
     public static <C> boolean addAll(final Collection<C> collection,final C...elements){
         boolean changed = false;
         for (final C element : elements){
             changed |= collection.add(element);
         }
         return changed;
-    }
-
-    /**
-     * Returns the <code>index</code>-th value in {@link Iterator}, throwing
-     * <code>IndexOutOfBoundsException</code> if there is no such element.
-     * <p>
-     * The Iterator is advanced to <code>index</code> (or to the end, if
-     * <code>index</code> exceeds the number of entries) as a side effect of this method.
-     * </p>
-     *
-     * @param iterator
-     *            the iterator to get a value from
-     * @param index
-     *            the index to get
-     * @param <T>
-     *            the type of object in the {@link Iterator}
-     * @return the object at the specified index
-     * @throws IndexOutOfBoundsException
-     *             if the index is invalid
-     * @throws IllegalArgumentException
-     *             if the object type is invalid
-     * @deprecated since 4.1, use {@code IteratorUtils.get(Iterator, int)} instead
-     */
-    @Deprecated
-    public static <T> T get(final Iterator<T> iterator,final int index){
-        return IteratorUtils.get(iterator, index);
     }
 
     /**
@@ -1390,31 +1191,36 @@ public class CollectionUtils{
         if (object == null){
             return 0;
         }
-        int total = 0;
         if (object instanceof Map<?, ?>){
-            total = ((Map<?, ?>) object).size();
-        }else if (object instanceof Collection<?>){
-            total = ((Collection<?>) object).size();
-        }else if (object instanceof Iterable<?>){
-            total = IterableUtils.size((Iterable<?>) object);
-        }else if (object instanceof Object[]){
-            total = ((Object[]) object).length;
-        }else if (object instanceof Iterator<?>){
-            total = IteratorUtils.size((Iterator<?>) object);
-        }else if (object instanceof Enumeration<?>){
+            return ((Map<?, ?>) object).size();
+        }
+        if (object instanceof Collection<?>){
+            return ((Collection<?>) object).size();
+        }
+        if (object instanceof Iterable<?>){
+            return IterableUtils.size((Iterable<?>) object);
+        }
+        if (object instanceof Object[]){
+            return ((Object[]) object).length;
+        }
+        if (object instanceof Iterator<?>){
+            return IteratorUtils.size((Iterator<?>) object);
+        }
+
+        if (object instanceof Enumeration<?>){
+            int total = 0;
             final Enumeration<?> it = (Enumeration<?>) object;
             while (it.hasMoreElements()){
                 total++;
                 it.nextElement();
             }
-        }else{
-            try{
-                total = Array.getLength(object);
-            }catch (final IllegalArgumentException ex){
-                throw new IllegalArgumentException("Unsupported object type: " + object.getClass().getName());
-            }
+            return total;
         }
-        return total;
+        try{
+            return Array.getLength(object);
+        }catch (final IllegalArgumentException ex){
+            throw new IllegalArgumentException("Unsupported object type: " + object.getClass().getName());
+        }
     }
 
     /**
@@ -1518,8 +1324,6 @@ public class CollectionUtils{
     }
 
     //-----------------------------------------------------------------------
-
-    //-----------------------------------------------------------------------
     /**
      * Returns a collection containing all the elements in <code>collection</code>
      * that are also in <code>retain</code>. The cardinality of an element <code>e</code>
@@ -1587,13 +1391,7 @@ public class CollectionUtils{
                     final Iterable<? extends E> retain,
                     final Equator<? super E> equator){
 
-        final Transformer<E, EquatorWrapper<E>> transformer = new Transformer<E, EquatorWrapper<E>>(){
-
-            @Override
-            public EquatorWrapper<E> transform(final E input){
-                return new EquatorWrapper<>(equator, input);
-            }
-        };
+        final Transformer<E, EquatorWrapper<E>> transformer = input -> new EquatorWrapper<>(equator, input);
 
         final Set<EquatorWrapper<E>> retainSet = collect(retain, transformer, new HashSet<EquatorWrapper<E>>());
 
@@ -1675,13 +1473,7 @@ public class CollectionUtils{
                     final Iterable<? extends E> remove,
                     final Equator<? super E> equator){
 
-        final Transformer<E, EquatorWrapper<E>> transformer = new Transformer<E, EquatorWrapper<E>>(){
-
-            @Override
-            public EquatorWrapper<E> transform(final E input){
-                return new EquatorWrapper<>(equator, input);
-            }
-        };
+        final Transformer<E, EquatorWrapper<E>> transformer = input -> new EquatorWrapper<>(equator, input);
 
         final Set<EquatorWrapper<E>> removeSet = collect(remove, transformer, new HashSet<EquatorWrapper<E>>());
 

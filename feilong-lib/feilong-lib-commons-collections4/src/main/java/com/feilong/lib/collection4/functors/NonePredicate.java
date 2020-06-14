@@ -28,6 +28,8 @@ import org.apache.commons.collections4.Predicate;
  * NOTE: In versions prior to 3.2 an array size of zero or one
  * threw an exception.
  * </p>
+ * 
+ * @param <T>
  *
  * @since 3.0
  */
@@ -51,6 +53,7 @@ public final class NonePredicate<T> extends AbstractQuantifierPredicate<T>{
      * @throws NullPointerException
      *             if any predicate in the array is null
      */
+    @SafeVarargs
     public static <T> Predicate<T> nonePredicate(final Predicate<? super T>...predicates){
         FunctorUtils.validate(predicates);
         if (predicates.length == 0){

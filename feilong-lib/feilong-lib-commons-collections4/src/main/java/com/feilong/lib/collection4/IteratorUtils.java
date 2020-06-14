@@ -128,6 +128,7 @@ public class IteratorUtils{
      * @throws NullPointerException
      *             if iterators array is null or contains a null
      */
+    @SafeVarargs
     public static <E> Iterator<E> chainedIterator(final Iterator<? extends E>...iterators){
         return new IteratorChain<>(iterators);
     }

@@ -257,35 +257,6 @@ public class TransformerUtils{
     }
 
     /**
-     * Create a new Transformer that calls one of two transformers depending
-     * on the specified predicate.
-     *
-     * @param <I>
-     *            the input type
-     * @param <O>
-     *            the output type
-     * @param predicate
-     *            the predicate to switch on
-     * @param trueTransformer
-     *            the transformer called if the predicate is true
-     * @param falseTransformer
-     *            the transformer called if the predicate is false
-     * @return the transformer
-     * @throws NullPointerException
-     *             if either the predicate or transformer is null
-     * @see SwitchTransformer
-     * @deprecated as of 4.1, use {@link #ifTransformer(Predicate, Transformer, Transformer)}
-     */
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    public static <I, O> Transformer<I, O> switchTransformer(
-                    final Predicate<? super I> predicate,
-                    final Transformer<? super I, ? extends O> trueTransformer,
-                    final Transformer<? super I, ? extends O> falseTransformer){
-        return SwitchTransformer.switchTransformer(new Predicate[] { predicate }, new Transformer[] { trueTransformer }, falseTransformer);
-    }
-
-    /**
      * Create a new Transformer that calls one of the transformers depending
      * on the predicates. The transformer at array location 0 is called if the
      * predicate at array location 0 returned true. Each predicate is evaluated

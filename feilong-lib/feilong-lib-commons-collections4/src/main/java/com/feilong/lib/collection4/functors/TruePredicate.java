@@ -22,6 +22,8 @@ import org.apache.commons.collections4.Predicate;
 
 /**
  * Predicate implementation that always returns true.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

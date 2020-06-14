@@ -24,6 +24,9 @@ import com.feilong.lib.collection4.FunctorException;
 
 /**
  * Transformer implementation that always throws an exception.
+ * 
+ * @param <I>
+ * @param <O>
  *
  * @since 3.0
  */

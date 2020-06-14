@@ -28,6 +28,8 @@ import org.apache.commons.collections4.Predicate;
  * NOTE: In versions prior to 3.2 an array size of zero or one
  * threw an exception.
  * </p>
+ * 
+ * @param <T>
  *
  * @since 3.0
  */
@@ -89,6 +91,7 @@ public final class OnePredicate<T> extends AbstractQuantifierPredicate<T>{
      * @param predicates
      *            the predicates to check, not cloned, not null
      */
+    @SafeVarargs
     public OnePredicate(final Predicate<? super T>...predicates){
         super(predicates);
     }

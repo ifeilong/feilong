@@ -24,6 +24,8 @@ import com.feilong.lib.collection4.FunctorException;
 
 /**
  * Closure implementation that always throws an exception.
+ * 
+ * @param <E>
  *
  * @since 3.0
  */

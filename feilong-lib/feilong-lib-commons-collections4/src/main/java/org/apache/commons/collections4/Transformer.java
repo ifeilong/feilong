@@ -34,8 +34,10 @@ import com.feilong.lib.collection4.TransformerUtils;
  * cloning and returning the string value.
  * </p>
  *
- * @param <I> the input type to the transformer
- * @param <O> the output type from the transformer
+ * @param <I>
+ *            the input type to the transformer
+ * @param <O>
+ *            the output type from the transformer
  *
  * @since 1.0
  */
@@ -45,11 +47,15 @@ public interface Transformer<I, O> {
     /**
      * Transforms the input object (leaving it unchanged) into some output object.
      *
-     * @param input  the object to be transformed, should be left unchanged
+     * @param input
+     *            the object to be transformed, should be left unchanged
      * @return a transformed object
-     * @throws ClassCastException (runtime) if the input is the wrong class
-     * @throws IllegalArgumentException (runtime) if the input is invalid
-     * @throws FunctorException (runtime) if the transform cannot be completed
+     * @throws ClassCastException
+     *             (runtime) if the input is the wrong class
+     * @throws IllegalArgumentException
+     *             (runtime) if the input is invalid
+     * @throws FunctorException
+     *             (runtime) if the transform cannot be completed
      */
     O transform(I input);
 

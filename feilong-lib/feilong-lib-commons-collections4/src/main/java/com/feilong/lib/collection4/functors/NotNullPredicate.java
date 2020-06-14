@@ -22,6 +22,8 @@ import org.apache.commons.collections4.Predicate;
 
 /**
  * Predicate implementation that returns true if the input is not null.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

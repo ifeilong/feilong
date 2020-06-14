@@ -22,6 +22,8 @@ import org.apache.commons.collections4.Closure;
 
 /**
  * Closure implementation that does nothing.
+ * 
+ * @param <E>
  *
  * @since 3.0
  */

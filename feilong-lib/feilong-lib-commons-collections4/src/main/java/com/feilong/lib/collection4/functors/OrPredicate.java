@@ -22,6 +22,8 @@ import org.apache.commons.collections4.Predicate;
 
 /**
  * Predicate implementation that returns true if either of the predicates return true.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

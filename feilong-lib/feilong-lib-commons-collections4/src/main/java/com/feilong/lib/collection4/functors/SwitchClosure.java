@@ -25,6 +25,8 @@ import org.apache.commons.collections4.Predicate;
 /**
  * Closure implementation calls the closure whose predicate returns true,
  * like a switch statement.
+ * 
+ * @param <E>
  *
  * @since 3.0
  */

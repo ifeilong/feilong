@@ -25,6 +25,9 @@ import org.apache.commons.collections4.Transformer;
 /**
  * Transformer implementation calls the transformer whose predicate returns true,
  * like a switch statement.
+ * 
+ * @param <I>
+ * @param <O>
  *
  * @since 3.0
  */

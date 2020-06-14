@@ -24,6 +24,8 @@ import org.apache.commons.collections4.Transformer;
 /**
  * Predicate implementation that transforms the given object before invoking
  * another <code>Predicate</code>.
+ * 
+ * @param <T>
  *
  * @since 3.1
  */

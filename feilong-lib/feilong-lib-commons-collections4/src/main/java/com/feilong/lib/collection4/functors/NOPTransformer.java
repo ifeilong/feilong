@@ -22,6 +22,8 @@ import org.apache.commons.collections4.Transformer;
 
 /**
  * Transformer implementation that does nothing.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

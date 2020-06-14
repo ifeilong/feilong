@@ -30,7 +30,8 @@ import com.feilong.lib.collection4.FunctorException;
  * {@link ClosureUtils}. These include method invocation and for/while loops.
  * </p>
  *
- * @param <T> the type that the closure acts on
+ * @param <T>
+ *            the type that the closure acts on
  * @since 1.0
  */
 @FunctionalInterface
@@ -39,10 +40,14 @@ public interface Closure<T> {
     /**
      * Performs an action on the specified input object.
      *
-     * @param input  the input to execute on
-     * @throws ClassCastException (runtime) if the input is the wrong class
-     * @throws IllegalArgumentException (runtime) if the input is invalid
-     * @throws FunctorException (runtime) if any other error occurs
+     * @param input
+     *            the input to execute on
+     * @throws ClassCastException
+     *             (runtime) if the input is the wrong class
+     * @throws IllegalArgumentException
+     *             (runtime) if the input is invalid
+     * @throws FunctorException
+     *             (runtime) if any other error occurs
      */
     void execute(T input);
 

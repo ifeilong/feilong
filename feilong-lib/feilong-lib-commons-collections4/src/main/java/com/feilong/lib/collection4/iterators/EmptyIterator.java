@@ -26,13 +26,16 @@ import org.apache.commons.collections4.ResettableIterator;
  * This class provides an implementation of an empty iterator.
  * This class provides for binary compatibility between Commons Collections
  * 2.1.1 and 3.1 due to issues with <code>IteratorUtils</code>.
+ * 
+ * @param <E>
  *
  * @since 2.1.1 and 3.1
  */
-public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements ResettableIterator<E> {
+public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements ResettableIterator<E>{
 
     /**
      * Singleton instance of the iterator.
+     * 
      * @since 3.1
      */
     @SuppressWarnings("rawtypes")
@@ -40,33 +43,38 @@ public class EmptyIterator<E> extends AbstractEmptyIterator<E> implements Resett
 
     /**
      * Singleton instance of the iterator.
+     * 
      * @since 2.1.1 and 3.1
      */
     @SuppressWarnings("rawtypes")
-    public static final Iterator INSTANCE = RESETTABLE_INSTANCE;
+    public static final Iterator           INSTANCE            = RESETTABLE_INSTANCE;
 
     /**
      * Get a typed resettable empty iterator instance.
-     * @param <E> the element type
+     * 
+     * @param <E>
+     *            the element type
      * @return ResettableIterator&lt;E&gt;
      */
-    public static <E> ResettableIterator<E> resettableEmptyIterator() {
+    public static <E> ResettableIterator<E> resettableEmptyIterator(){
         return RESETTABLE_INSTANCE;
     }
 
     /**
      * Get a typed empty iterator instance.
-     * @param <E> the element type
+     * 
+     * @param <E>
+     *            the element type
      * @return Iterator&lt;E&gt;
      */
-    public static <E> Iterator<E> emptyIterator() {
+    public static <E> Iterator<E> emptyIterator(){
         return INSTANCE;
     }
 
     /**
      * Constructor.
      */
-    protected EmptyIterator() {
+    protected EmptyIterator(){
         super();
     }
 

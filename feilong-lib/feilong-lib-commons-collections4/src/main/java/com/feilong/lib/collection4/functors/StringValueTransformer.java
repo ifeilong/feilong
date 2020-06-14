@@ -23,6 +23,8 @@ import org.apache.commons.collections4.Transformer;
 /**
  * Transformer implementation that returns the result of calling
  * <code>String.valueOf</code> on the input object.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

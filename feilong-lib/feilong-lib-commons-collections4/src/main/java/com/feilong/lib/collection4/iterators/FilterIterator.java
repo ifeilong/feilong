@@ -26,26 +26,31 @@ import org.apache.commons.collections4.Predicate;
  * <p>
  * This iterator decorates the underlying iterator, only allowing through
  * those elements that match the specified {@link Predicate Predicate}.
+ * 
+ * @param <E>
  *
  * @since 1.0
  */
-public class FilterIterator<E> implements Iterator<E> {
+public class FilterIterator<E> implements Iterator<E>{
 
     /** The iterator being used */
     private Iterator<? extends E> iterator;
+
     /** The predicate being used */
-    private Predicate<? super E> predicate;
+    private Predicate<? super E>  predicate;
+
     /** The next object in the iteration */
-    private E nextObject;
+    private E                     nextObject;
+
     /** Whether the next object has been calculated yet */
-    private boolean nextObjectSet = false;
+    private boolean               nextObjectSet = false;
 
     //-----------------------------------------------------------------------
     /**
      * Constructs a new <code>FilterIterator</code> that will not function
      * until {@link #setIterator(Iterator) setIterator} is invoked.
      */
-    public FilterIterator() {
+    public FilterIterator(){
         super();
     }
 
@@ -53,9 +58,10 @@ public class FilterIterator<E> implements Iterator<E> {
      * Constructs a new <code>FilterIterator</code> that will not function
      * until {@link #setPredicate(Predicate) setPredicate} is invoked.
      *
-     * @param iterator  the iterator to use
+     * @param iterator
+     *            the iterator to use
      */
-    public FilterIterator(final Iterator<? extends E> iterator) {
+    public FilterIterator(final Iterator<? extends E> iterator){
         super();
         this.iterator = iterator;
     }
@@ -64,10 +70,12 @@ public class FilterIterator<E> implements Iterator<E> {
      * Constructs a new <code>FilterIterator</code> that will use the
      * given iterator and predicate.
      *
-     * @param iterator  the iterator to use
-     * @param predicate  the predicate to use
+     * @param iterator
+     *            the iterator to use
+     * @param predicate
+     *            the predicate to use
      */
-    public FilterIterator(final Iterator<? extends E> iterator, final Predicate<? super E> predicate) {
+    public FilterIterator(final Iterator<? extends E> iterator, final Predicate<? super E> predicate){
         super();
         this.iterator = iterator;
         this.predicate = predicate;
@@ -79,10 +87,11 @@ public class FilterIterator<E> implements Iterator<E> {
      * matches the predicate.
      *
      * @return true if there is another object that matches the predicate
-     * @throws NullPointerException if either the iterator or predicate are null
+     * @throws NullPointerException
+     *             if either the iterator or predicate are null
      */
     @Override
-    public boolean hasNext() {
+    public boolean hasNext(){
         return nextObjectSet || setNextObject();
     }
 
@@ -90,13 +99,15 @@ public class FilterIterator<E> implements Iterator<E> {
      * Returns the next object that matches the predicate.
      *
      * @return the next object which matches the given predicate
-     * @throws NullPointerException if either the iterator or predicate are null
-     * @throws NoSuchElementException if there are no more elements that
-     *  match the predicate
+     * @throws NullPointerException
+     *             if either the iterator or predicate are null
+     * @throws NoSuchElementException
+     *             if there are no more elements that
+     *             match the predicate
      */
     @Override
-    public E next() {
-        if (!nextObjectSet && !setNextObject()) {
+    public E next(){
+        if (!nextObjectSet && !setNextObject()){
             throw new NoSuchElementException();
         }
         nextObjectSet = false;
@@ -111,12 +122,13 @@ public class FilterIterator<E> implements Iterator<E> {
      * <code>hasNext()</code>, because the <code>hasNext()</code> call
      * changes the base iterator.
      *
-     * @throws IllegalStateException if <code>hasNext()</code> has already
-     *  been called.
+     * @throws IllegalStateException
+     *             if <code>hasNext()</code> has already
+     *             been called.
      */
     @Override
-    public void remove() {
-        if (nextObjectSet) {
+    public void remove(){
+        if (nextObjectSet){
             throw new IllegalStateException("remove() cannot be called");
         }
         iterator.remove();
@@ -128,7 +140,7 @@ public class FilterIterator<E> implements Iterator<E> {
      *
      * @return the iterator
      */
-    public Iterator<? extends E> getIterator() {
+    public Iterator<? extends E> getIterator(){
         return iterator;
     }
 
@@ -136,9 +148,10 @@ public class FilterIterator<E> implements Iterator<E> {
      * Sets the iterator for this iterator to use.
      * If iteration has started, this effectively resets the iterator.
      *
-     * @param iterator  the iterator to use
+     * @param iterator
+     *            the iterator to use
      */
-    public void setIterator(final Iterator<? extends E> iterator) {
+    public void setIterator(final Iterator<? extends E> iterator){
         this.iterator = iterator;
         nextObject = null;
         nextObjectSet = false;
@@ -150,16 +163,17 @@ public class FilterIterator<E> implements Iterator<E> {
      *
      * @return the predicate
      */
-    public Predicate<? super E> getPredicate() {
+    public Predicate<? super E> getPredicate(){
         return predicate;
     }
 
     /**
      * Sets the predicate this the iterator to use.
      *
-     * @param predicate  the predicate to use
+     * @param predicate
+     *            the predicate to use
      */
-    public void setPredicate(final Predicate<? super E> predicate) {
+    public void setPredicate(final Predicate<? super E> predicate){
         this.predicate = predicate;
         nextObject = null;
         nextObjectSet = false;
@@ -170,10 +184,10 @@ public class FilterIterator<E> implements Iterator<E> {
      * Set nextObject to the next object. If there are no more
      * objects then return false. Otherwise, return true.
      */
-    private boolean setNextObject() {
-        while (iterator.hasNext()) {
+    private boolean setNextObject(){
+        while (iterator.hasNext()){
             final E object = iterator.next();
-            if (predicate.evaluate(object)) {
+            if (predicate.evaluate(object)){
                 nextObject = object;
                 nextObjectSet = true;
                 return true;

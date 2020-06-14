@@ -22,7 +22,7 @@ package com.feilong.lib.collection4;
  *
  * @since 3.0
  */
-public class FunctorException extends RuntimeException {
+public class FunctorException extends RuntimeException{
 
     /** Serialization version */
     private static final long serialVersionUID = -4704772662059351193L;
@@ -31,7 +31,7 @@ public class FunctorException extends RuntimeException {
      * Constructs a new <code>FunctorException</code> without specified
      * detail message.
      */
-    public FunctorException() {
+    public FunctorException(){
         super();
     }
 
@@ -39,9 +39,10 @@ public class FunctorException extends RuntimeException {
      * Constructs a new <code>FunctorException</code> with specified
      * detail message.
      *
-     * @param msg  the error message.
+     * @param msg
+     *            the error message.
      */
-    public FunctorException(final String msg) {
+    public FunctorException(final String msg){
         super(msg);
     }
 
@@ -49,10 +50,11 @@ public class FunctorException extends RuntimeException {
      * Constructs a new <code>FunctorException</code> with specified
      * nested <code>Throwable</code> root cause.
      *
-     * @param rootCause  the exception or error that caused this exception
-     *                   to be thrown.
+     * @param rootCause
+     *            the exception or error that caused this exception
+     *            to be thrown.
      */
-    public FunctorException(final Throwable rootCause) {
+    public FunctorException(final Throwable rootCause){
         super(rootCause);
     }
 
@@ -60,11 +62,13 @@ public class FunctorException extends RuntimeException {
      * Constructs a new <code>FunctorException</code> with specified
      * detail message and nested <code>Throwable</code> root cause.
      *
-     * @param msg        the error message.
-     * @param rootCause  the exception or error that caused this exception
-     *                   to be thrown.
+     * @param msg
+     *            the error message.
+     * @param rootCause
+     *            the exception or error that caused this exception
+     *            to be thrown.
      */
-    public FunctorException(final String msg, final Throwable rootCause) {
+    public FunctorException(final String msg, final Throwable rootCause){
         super(msg, rootCause);
     }
 

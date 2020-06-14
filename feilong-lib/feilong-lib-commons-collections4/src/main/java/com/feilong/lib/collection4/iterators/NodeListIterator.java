@@ -30,22 +30,25 @@ import org.w3c.dom.NodeList;
  * @since 4.0
  * @see NodeList
  */
-public class NodeListIterator implements Iterator<Node> {
+public class NodeListIterator implements Iterator<Node>{
 
     /** the original NodeList instance */
     private final NodeList nodeList;
+
     /** The current iterator index */
-    private int index = 0;
+    private int            index = 0;
 
     /**
      * Convenience constructor, which creates a new NodeListIterator from
      * the specified node's childNodes.
      *
-     * @param node Node, who's child nodes are wrapped by this class. Must not be null
-     * @throws NullPointerException if node is null
+     * @param node
+     *            Node, who's child nodes are wrapped by this class. Must not be null
+     * @throws NullPointerException
+     *             if node is null
      */
-    public NodeListIterator(final Node node) {
-        if (node == null) {
+    public NodeListIterator(final Node node){
+        if (node == null){
             throw new NullPointerException("Node must not be null.");
         }
         this.nodeList = node.getChildNodes();
@@ -55,24 +58,26 @@ public class NodeListIterator implements Iterator<Node> {
      * Constructor, that creates a new NodeListIterator from the specified
      * <code>org.w3c.NodeList</code>
      *
-     * @param nodeList node list, which is wrapped by this class. Must not be null
-     * @throws NullPointerException if nodeList is null
+     * @param nodeList
+     *            node list, which is wrapped by this class. Must not be null
+     * @throws NullPointerException
+     *             if nodeList is null
      */
-    public NodeListIterator(final NodeList nodeList) {
-        if (nodeList == null) {
+    public NodeListIterator(final NodeList nodeList){
+        if (nodeList == null){
             throw new NullPointerException("NodeList must not be null.");
         }
         this.nodeList = nodeList;
     }
 
     @Override
-    public boolean hasNext() {
+    public boolean hasNext(){
         return nodeList != null && index < nodeList.getLength();
     }
 
     @Override
-    public Node next() {
-        if (nodeList != null && index < nodeList.getLength()) {
+    public Node next(){
+        if (nodeList != null && index < nodeList.getLength()){
             return nodeList.item(index++);
         }
         throw new NoSuchElementException("underlying nodeList has no more elements");
@@ -81,10 +86,11 @@ public class NodeListIterator implements Iterator<Node> {
     /**
      * Throws {@link UnsupportedOperationException}.
      *
-     * @throws UnsupportedOperationException always
+     * @throws UnsupportedOperationException
+     *             always
      */
     @Override
-    public void remove() {
+    public void remove(){
         throw new UnsupportedOperationException("remove() method not supported for a NodeListIterator.");
     }
 }

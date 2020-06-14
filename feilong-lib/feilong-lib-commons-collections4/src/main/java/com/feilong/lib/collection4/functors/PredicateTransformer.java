@@ -24,6 +24,8 @@ import org.apache.commons.collections4.Transformer;
 /**
  * Transformer implementation that calls a Predicate using the input object
  * and then returns the result.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

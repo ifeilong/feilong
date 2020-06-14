@@ -40,12 +40,13 @@ import com.feilong.lib.collection4.comparators.TransformingComparator;
  *
  * @since 2.1
  */
-public class ComparatorUtils {
+public class ComparatorUtils{
 
     /**
      * ComparatorUtils should not normally be instantiated.
      */
-    private ComparatorUtils() {}
+    private ComparatorUtils(){
+    }
 
     /**
      * Comparator for natural sort order.
@@ -53,16 +54,17 @@ public class ComparatorUtils {
      * @see ComparableComparator#comparableComparator()
      */
     @SuppressWarnings({ "rawtypes", "unchecked" }) // explicit type needed for Java 1.5 compilation
-    public static final Comparator NATURAL_COMPARATOR = ComparableComparator.<Comparable>comparableComparator();
+    public static final Comparator NATURAL_COMPARATOR = ComparableComparator.<Comparable> comparableComparator();
 
     /**
      * Gets a comparator that uses the natural order of the objects.
      *
-     * @param <E>  the object type to compare
-     * @return  a comparator which uses natural order
+     * @param <E>
+     *            the object type to compare
+     * @return a comparator which uses natural order
      */
     @SuppressWarnings("unchecked")
-    public static <E extends Comparable<? super E>> Comparator<E> naturalComparator() {
+    public static <E extends Comparable<? super E>> Comparator<E> naturalComparator(){
         return NATURAL_COMPARATOR;
     }
 
@@ -70,16 +72,20 @@ public class ComparatorUtils {
      * Gets a comparator that compares using an array of {@link Comparator}s, applied
      * in sequence until one returns not equal or the array is exhausted.
      *
-     * @param <E>  the object type to compare
-     * @param comparators  the comparators to use, not null or empty or containing nulls
+     * @param <E>
+     *            the object type to compare
+     * @param comparators
+     *            the comparators to use, not null or empty or containing nulls
      * @return a {@link ComparatorChain} formed from the input comparators
-     * @throws NullPointerException if comparators array is null or contains a null
+     * @throws NullPointerException
+     *             if comparators array is null or contains a null
      * @see ComparatorChain
      */
-    public static <E> Comparator<E> chainedComparator(final Comparator<E>... comparators) {
+    @SafeVarargs
+    public static <E> Comparator<E> chainedComparator(final Comparator<E>...comparators){
         final ComparatorChain<E> chain = new ComparatorChain<>();
-        for (final Comparator<E> comparator : comparators) {
-            if (comparator == null) {
+        for (final Comparator<E> comparator : comparators){
+            if (comparator == null){
                 throw new NullPointerException("Comparator cannot be null");
             }
             chain.addComparator(comparator);
@@ -92,29 +98,33 @@ public class ComparatorUtils {
      * applied in (default iterator) sequence until one returns not equal or the
      * collection is exhausted.
      *
-     * @param <E>  the object type to compare
-     * @param comparators  the comparators to use, not null or empty or containing nulls
+     * @param <E>
+     *            the object type to compare
+     * @param comparators
+     *            the comparators to use, not null or empty or containing nulls
      * @return a {@link ComparatorChain} formed from the input comparators
-     * @throws NullPointerException if comparators collection is null or contains a null
-     * @throws ClassCastException if the comparators collection contains the wrong object type
+     * @throws NullPointerException
+     *             if comparators collection is null or contains a null
+     * @throws ClassCastException
+     *             if the comparators collection contains the wrong object type
      * @see ComparatorChain
      */
     @SuppressWarnings("unchecked")
-    public static <E> Comparator<E> chainedComparator(final Collection<Comparator<E>> comparators) {
-        return chainedComparator(
-            (Comparator<E>[]) comparators.toArray(new Comparator[comparators.size()])
-        );
+    public static <E> Comparator<E> chainedComparator(final Collection<Comparator<E>> comparators){
+        return chainedComparator((Comparator<E>[]) comparators.toArray(new Comparator[comparators.size()]));
     }
 
     /**
      * Gets a comparator that reverses the order of the given comparator.
      *
-     * @param <E>  the object type to compare
-     * @param comparator  the comparator to reverse
-     * @return  a comparator that reverses the order of the input comparator
+     * @param <E>
+     *            the object type to compare
+     * @param comparator
+     *            the comparator to reverse
+     * @return a comparator that reverses the order of the input comparator
      * @see ReverseComparator
      */
-    public static <E> Comparator<E> reversedComparator(final Comparator<E> comparator) {
+    public static <E> Comparator<E> reversedComparator(final Comparator<E> comparator){
         return new ReverseComparator<>(comparator);
     }
 
@@ -127,12 +137,13 @@ public class ComparatorUtils {
      * The comparator throws NullPointerException if a null value is compared.
      * </p>
      *
-     * @param trueFirst  when <code>true</code>, sort
-     *        <code>true</code> {@link Boolean}s before
-     *        <code>false</code> {@link Boolean}s.
-     * @return  a comparator that sorts booleans
+     * @param trueFirst
+     *            when <code>true</code>, sort
+     *            <code>true</code> {@link Boolean}s before
+     *            <code>false</code> {@link Boolean}s.
+     * @return a comparator that sorts booleans
      */
-    public static Comparator<Boolean> booleanComparator(final boolean trueFirst) {
+    public static Comparator<Boolean> booleanComparator(final boolean trueFirst){
         return BooleanComparator.booleanComparator(trueFirst);
     }
 
@@ -140,18 +151,20 @@ public class ComparatorUtils {
      * Gets a Comparator that controls the comparison of <code>null</code> values.
      * <p>
      * The returned comparator will consider a null value to be less than
-     * any nonnull value, and equal to any other null value.  Two nonnull
+     * any nonnull value, and equal to any other null value. Two nonnull
      * values will be evaluated with the given comparator.
      * </p>
      *
-     * @param <E>  the object type to compare
-     * @param comparator the comparator that wants to allow nulls
-     * @return  a version of that comparator that allows nulls
+     * @param <E>
+     *            the object type to compare
+     * @param comparator
+     *            the comparator that wants to allow nulls
+     * @return a version of that comparator that allows nulls
      * @see NullComparator
      */
     @SuppressWarnings("unchecked")
-    public static <E> Comparator<E> nullLowComparator(Comparator<E> comparator) {
-        if (comparator == null) {
+    public static <E> Comparator<E> nullLowComparator(Comparator<E> comparator){
+        if (comparator == null){
             comparator = NATURAL_COMPARATOR;
         }
         return new NullComparator<>(comparator, false);
@@ -161,18 +174,20 @@ public class ComparatorUtils {
      * Gets a Comparator that controls the comparison of <code>null</code> values.
      * <p>
      * The returned comparator will consider a null value to be greater than
-     * any nonnull value, and equal to any other null value.  Two nonnull
+     * any nonnull value, and equal to any other null value. Two nonnull
      * values will be evaluated with the given comparator.
      * </p>
      *
-     * @param <E>  the object type to compare
-     * @param comparator the comparator that wants to allow nulls
-     * @return  a version of that comparator that allows nulls
+     * @param <E>
+     *            the object type to compare
+     * @param comparator
+     *            the comparator that wants to allow nulls
+     * @return a version of that comparator that allows nulls
      * @see NullComparator
      */
     @SuppressWarnings("unchecked")
-    public static <E> Comparator<E> nullHighComparator(Comparator<E> comparator) {
-        if (comparator == null) {
+    public static <E> Comparator<E> nullHighComparator(Comparator<E> comparator){
+        if (comparator == null){
             comparator = NATURAL_COMPARATOR;
         }
         return new NullComparator<>(comparator, true);
@@ -186,18 +201,23 @@ public class ComparatorUtils {
      * comparator.
      * </p>
      *
-     * @param <I>  the input object type of the transformed comparator
-     * @param <O>  the object type of the decorated comparator
-     * @param comparator  the sort order to use
-     * @param transformer  the transformer to use
-     * @return  a comparator that transforms its input objects before comparing them
-     * @see  TransformingComparator
+     * @param <I>
+     *            the input object type of the transformed comparator
+     * @param <O>
+     *            the object type of the decorated comparator
+     * @param comparator
+     *            the sort order to use
+     * @param transformer
+     *            the transformer to use
+     * @return a comparator that transforms its input objects before comparing them
+     * @see TransformingComparator
      */
     @SuppressWarnings("unchecked")
-    public static <I, O> Comparator<I> transformedComparator(Comparator<O> comparator,
-            final Transformer<? super I, ? extends O> transformer) {
+    public static <I, O> Comparator<I> transformedComparator(
+                    Comparator<O> comparator,
+                    final Transformer<? super I, ? extends O> transformer){
 
-        if (comparator == null) {
+        if (comparator == null){
             comparator = NATURAL_COMPARATOR;
         }
         return new TransformingComparator<>(transformer, comparator);
@@ -208,15 +228,19 @@ public class ComparatorUtils {
      * comparator, returning the second object if the comparator
      * returns equal.
      *
-     * @param <E>  the object type to compare
-     * @param o1  the first object to compare
-     * @param o2  the second object to compare
-     * @param comparator  the sort order to use
-     * @return  the smaller of the two objects
+     * @param <E>
+     *            the object type to compare
+     * @param o1
+     *            the first object to compare
+     * @param o2
+     *            the second object to compare
+     * @param comparator
+     *            the sort order to use
+     * @return the smaller of the two objects
      */
     @SuppressWarnings("unchecked")
-    public static <E> E min(final E o1, final E o2, Comparator<E> comparator) {
-        if (comparator == null) {
+    public static <E> E min(final E o1,final E o2,Comparator<E> comparator){
+        if (comparator == null){
             comparator = NATURAL_COMPARATOR;
         }
         final int c = comparator.compare(o1, o2);
@@ -228,15 +252,19 @@ public class ComparatorUtils {
      * comparator, returning the second object if the comparator
      * returns equal.
      *
-     * @param <E>  the object type to compare
-     * @param o1  the first object to compare
-     * @param o2  the second object to compare
-     * @param comparator  the sort order to use
-     * @return  the larger of the two objects
+     * @param <E>
+     *            the object type to compare
+     * @param o1
+     *            the first object to compare
+     * @param o2
+     *            the second object to compare
+     * @param comparator
+     *            the sort order to use
+     * @return the larger of the two objects
      */
     @SuppressWarnings("unchecked")
-    public static <E> E max(final E o1, final E o2, Comparator<E> comparator) {
-        if (comparator == null) {
+    public static <E> E max(final E o1,final E o2,Comparator<E> comparator){
+        if (comparator == null){
             comparator = NATURAL_COMPARATOR;
         }
         final int c = comparator.compare(o1, o2);

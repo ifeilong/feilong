@@ -23,17 +23,21 @@ import java.util.Iterator;
 /**
  * Adapter to make {@link Enumeration Enumeration} instances appear
  * to be {@link Iterator Iterator} instances.
+ * 
+ * @param <E>
  *
  * @since 1.0
  */
-public class EnumerationIterator<E> implements Iterator<E> {
+public class EnumerationIterator<E> implements Iterator<E>{
 
     /** The collection to remove elements from */
     private final Collection<? super E> collection;
+
     /** The enumeration being converted */
-    private Enumeration<? extends E> enumeration;
+    private Enumeration<? extends E>    enumeration;
+
     /** The last object retrieved */
-    private E last;
+    private E                           last;
 
     // Constructors
     //-----------------------------------------------------------------------
@@ -41,7 +45,7 @@ public class EnumerationIterator<E> implements Iterator<E> {
      * Constructs a new <code>EnumerationIterator</code> that will not
      * function until {@link #setEnumeration(Enumeration)} is called.
      */
-    public EnumerationIterator() {
+    public EnumerationIterator(){
         this(null, null);
     }
 
@@ -49,9 +53,10 @@ public class EnumerationIterator<E> implements Iterator<E> {
      * Constructs a new <code>EnumerationIterator</code> that provides
      * an iterator view of the given enumeration.
      *
-     * @param enumeration  the enumeration to use
+     * @param enumeration
+     *            the enumeration to use
      */
-    public EnumerationIterator(final Enumeration<? extends E> enumeration) {
+    public EnumerationIterator(final Enumeration<? extends E> enumeration){
         this(enumeration, null);
     }
 
@@ -59,10 +64,12 @@ public class EnumerationIterator<E> implements Iterator<E> {
      * Constructs a new <code>EnumerationIterator</code> that will remove
      * elements from the specified collection.
      *
-     * @param enumeration  the enumeration to use
-     * @param collection  the collection to remove elements from
+     * @param enumeration
+     *            the enumeration to use
+     * @param collection
+     *            the collection to remove elements from
      */
-    public EnumerationIterator(final Enumeration<? extends E> enumeration, final Collection<? super E> collection) {
+    public EnumerationIterator(final Enumeration<? extends E> enumeration, final Collection<? super E> collection){
         super();
         this.enumeration = enumeration;
         this.collection = collection;
@@ -75,10 +82,11 @@ public class EnumerationIterator<E> implements Iterator<E> {
      * Returns true if the underlying enumeration has more elements.
      *
      * @return true if the underlying enumeration has more elements
-     * @throws NullPointerException  if the underlying enumeration is null
+     * @throws NullPointerException
+     *             if the underlying enumeration is null
      */
     @Override
-    public boolean hasNext() {
+    public boolean hasNext(){
         return enumeration.hasMoreElements();
     }
 
@@ -86,10 +94,11 @@ public class EnumerationIterator<E> implements Iterator<E> {
      * Returns the next object from the enumeration.
      *
      * @return the next object from the enumeration
-     * @throws NullPointerException if the enumeration is null
+     * @throws NullPointerException
+     *             if the enumeration is null
      */
     @Override
-    public E next() {
+    public E next(){
         last = enumeration.nextElement();
         return last;
     }
@@ -101,18 +110,20 @@ public class EnumerationIterator<E> implements Iterator<E> {
      * If so, the first occurrence of the last returned object from this
      * iterator will be removed from the collection.
      *
-     * @throws IllegalStateException <code>next()</code> not called.
-     * @throws UnsupportedOperationException if no associated collection
+     * @throws IllegalStateException
+     *             <code>next()</code> not called.
+     * @throws UnsupportedOperationException
+     *             if no associated collection
      */
     @Override
-    public void remove() {
-        if (collection != null) {
-            if (last != null) {
+    public void remove(){
+        if (collection != null){
+            if (last != null){
                 collection.remove(last);
-            } else {
+            }else{
                 throw new IllegalStateException("next() must have been called for remove() to function");
             }
-        } else {
+        }else{
             throw new UnsupportedOperationException("No Collection associated with this Iterator");
         }
     }
@@ -124,16 +135,17 @@ public class EnumerationIterator<E> implements Iterator<E> {
      *
      * @return the underlying enumeration
      */
-    public Enumeration<? extends E> getEnumeration() {
+    public Enumeration<? extends E> getEnumeration(){
         return enumeration;
     }
 
     /**
      * Sets the underlying enumeration.
      *
-     * @param enumeration  the new underlying enumeration
+     * @param enumeration
+     *            the new underlying enumeration
      */
-    public void setEnumeration(final Enumeration<? extends E> enumeration) {
+    public void setEnumeration(final Enumeration<? extends E> enumeration){
         this.enumeration = enumeration;
     }
 

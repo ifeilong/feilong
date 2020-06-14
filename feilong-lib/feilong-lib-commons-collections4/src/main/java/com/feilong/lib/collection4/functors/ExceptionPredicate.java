@@ -24,6 +24,8 @@ import com.feilong.lib.collection4.FunctorException;
 
 /**
  * Predicate implementation that always throws an exception.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

@@ -23,6 +23,8 @@ import org.apache.commons.collections4.Closure;
 
 /**
  * Closure implementation that chains the specified closures together.
+ * 
+ * @param <E>
  *
  * @since 3.0
  */
@@ -97,6 +99,7 @@ public class ChainedClosure<E> implements Closure<E>,Serializable{
      * @param closures
      *            the closures to chain, no nulls
      */
+    @SafeVarargs
     private ChainedClosure(final boolean clone, final Closure<? super E>...closures){
         super();
         iClosures = clone ? FunctorUtils.copy(closures) : closures;
@@ -109,6 +112,7 @@ public class ChainedClosure<E> implements Closure<E>,Serializable{
      * @param closures
      *            the closures to chain, copied, no nulls
      */
+    @SafeVarargs
     public ChainedClosure(final Closure<? super E>...closures){
         this(true, closures);
     }

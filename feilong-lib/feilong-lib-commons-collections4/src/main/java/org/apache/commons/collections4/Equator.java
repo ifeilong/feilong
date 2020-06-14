@@ -17,18 +17,22 @@ package org.apache.commons.collections4;
  * {@link Object} as {@link java.util.Comparator} is to {@link java.lang.Comparable}.
  * </p>
  *
- * @param <T> the types of object this {@link Equator} can evaluate.
+ * @param <T>
+ *            the types of object this {@link Equator} can evaluate.
  * @since 4.0
  */
 public interface Equator<T> {
+
     /**
      * Evaluates the two arguments for their equality.
      *
-     * @param o1 the first object to be equated.
-     * @param o2 the second object to be equated.
+     * @param o1
+     *            the first object to be equated.
+     * @param o2
+     *            the second object to be equated.
      * @return whether the two objects are equal.
      */
-    boolean equate(T o1, T o2);
+    boolean equate(T o1,T o2);
 
     /**
      * Calculates the hash for the object, based on the method of equality used in the equate
@@ -36,7 +40,8 @@ public interface Equator<T> {
      * Equator (and so must also delegate their {@link Object#hashCode() hashCode()} method), or for implementations
      * of {@link org.apache.commons.collections4.map.HashedMap} that use an Equator for the key objects.
      *
-     * @param o the object to calculate the hash for.
+     * @param o
+     *            the object to calculate the hash for.
      * @return the hash of the object.
      */
     int hash(T o);

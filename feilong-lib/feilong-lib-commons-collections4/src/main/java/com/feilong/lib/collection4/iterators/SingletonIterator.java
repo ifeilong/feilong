@@ -23,28 +23,33 @@ import org.apache.commons.collections4.ResettableIterator;
 /**
  * <code>SingletonIterator</code> is an {@link java.util.Iterator} over a single
  * object instance.
+ * 
+ * @param <E>
  *
  * @since 2.0
  */
-public class SingletonIterator<E>
-        implements ResettableIterator<E> {
+public class SingletonIterator<E> implements ResettableIterator<E>{
 
     /** Whether remove is allowed */
     private final boolean removeAllowed;
+
     /** Is the cursor before the first element */
-    private boolean beforeFirst = true;
+    private boolean       beforeFirst = true;
+
     /** Has the element been removed */
-    private boolean removed = false;
+    private boolean       removed     = false;
+
     /** The object */
-    private E object;
+    private E             object;
 
     /**
      * Constructs a new <code>SingletonIterator</code> where <code>remove</code>
      * is a permitted operation.
      *
-     * @param object  the single object to return from the iterator
+     * @param object
+     *            the single object to return from the iterator
      */
-    public SingletonIterator(final E object) {
+    public SingletonIterator(final E object){
         this(object, true);
     }
 
@@ -52,11 +57,13 @@ public class SingletonIterator<E>
      * Constructs a new <code>SingletonIterator</code> optionally choosing if
      * <code>remove</code> is a permitted operation.
      *
-     * @param object  the single object to return from the iterator
-     * @param removeAllowed  true if remove is allowed
+     * @param object
+     *            the single object to return from the iterator
+     * @param removeAllowed
+     *            true if remove is allowed
      * @since 3.1
      */
-    public SingletonIterator(final E object, final boolean removeAllowed) {
+    public SingletonIterator(final E object, final boolean removeAllowed){
         super();
         this.object = object;
         this.removeAllowed = removeAllowed;
@@ -71,7 +78,7 @@ public class SingletonIterator<E>
      * @return true if the single object hasn't been returned yet
      */
     @Override
-    public boolean hasNext() {
+    public boolean hasNext(){
         return beforeFirst && !removed;
     }
 
@@ -81,12 +88,13 @@ public class SingletonIterator<E>
      * This returns the single object if it hasn't been returned yet.
      *
      * @return the single object
-     * @throws NoSuchElementException if the single object has already
-     *    been returned
+     * @throws NoSuchElementException
+     *             if the single object has already
+     *             been returned
      */
     @Override
-    public E next() {
-        if (!beforeFirst || removed) {
+    public E next(){
+        if (!beforeFirst || removed){
             throw new NoSuchElementException();
         }
         beforeFirst = false;
@@ -96,21 +104,23 @@ public class SingletonIterator<E>
     /**
      * Remove the object from this iterator.
      *
-     * @throws IllegalStateException if the {@code next} method has not
-     *        yet been called, or the {@code remove} method has already
-     *        been called after the last call to the {@code next}
-     *        method.
-     * @throws UnsupportedOperationException if remove is not supported
+     * @throws IllegalStateException
+     *             if the {@code next} method has not
+     *             yet been called, or the {@code remove} method has already
+     *             been called after the last call to the {@code next}
+     *             method.
+     * @throws UnsupportedOperationException
+     *             if remove is not supported
      */
     @Override
-    public void remove() {
-        if (removeAllowed) {
-            if (removed || beforeFirst) {
+    public void remove(){
+        if (removeAllowed){
+            if (removed || beforeFirst){
                 throw new IllegalStateException();
             }
             object = null;
             removed = true;
-        } else {
+        }else{
             throw new UnsupportedOperationException();
         }
     }
@@ -119,7 +129,7 @@ public class SingletonIterator<E>
      * Reset the iterator to the start.
      */
     @Override
-    public void reset() {
+    public void reset(){
         beforeFirst = true;
     }
 

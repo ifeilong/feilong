@@ -24,6 +24,9 @@ import org.apache.commons.collections4.Transformer;
 /**
  * Transformer implementation that returns the value held in a specified map
  * using the input parameter as a key.
+ * 
+ * @param <I>
+ * @param <O>
  *
  * @since 3.0
  */

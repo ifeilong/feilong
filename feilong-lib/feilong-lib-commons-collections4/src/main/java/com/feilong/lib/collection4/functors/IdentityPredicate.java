@@ -23,6 +23,8 @@ import org.apache.commons.collections4.Predicate;
 /**
  * Predicate implementation that returns true if the input is the same object
  * as the one stored in this predicate.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */

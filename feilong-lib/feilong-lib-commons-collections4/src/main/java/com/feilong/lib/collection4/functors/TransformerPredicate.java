@@ -25,6 +25,8 @@ import com.feilong.lib.collection4.FunctorException;
 
 /**
  * Predicate implementation that returns the result of a transformer.
+ * 
+ * @param <T>
  *
  * @since 3.0
  */
