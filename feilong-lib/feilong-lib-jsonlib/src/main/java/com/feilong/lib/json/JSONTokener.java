@@ -17,7 +17,6 @@ package com.feilong.lib.json;
 
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
-import com.feilong.lib.json.regexp.JdkRegexpMatcher;
 import com.feilong.lib.lang3.math.NumberUtils;
 
 /**
@@ -76,18 +75,6 @@ public class JSONTokener{
         if (this.myIndex > 0){
             this.myIndex -= 1;
         }
-    }
-
-    /**
-     * 
-     * @param pattern
-     * @return
-     * @deprecated maybe可以删除
-     */
-    @Deprecated
-    public boolean matches(String pattern){
-        String str = this.sourceJson.substring(this.myIndex);
-        return new JdkRegexpMatcher(pattern).matches(str);
     }
 
     /**

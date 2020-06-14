@@ -203,22 +203,22 @@ public class JSONObjectToBeanUtil{
             return;
         }
 
-        Map<String, Class<?>> classMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
+        Map<String, Class<?>> configClassMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
         String name = triple.getLeft();
         //---------------------------------------------------------------
         if (value instanceof JSONArray){
             if (List.class.isAssignableFrom(beanPropertyType) || Set.class.isAssignableFrom(beanPropertyType)){
-                setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, beanPropertyType));
+                setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, configClassMap, beanPropertyType));
             }else{
-                setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, beanPropertyType, jsonConfig, classMap));
+                setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, beanPropertyType, jsonConfig, configClassMap));
             }
             return;
         }
 
         //---------------------------------------------------------------
         JsonConfig jsonConfigCopy = jsonConfig.copy();
-        jsonConfigCopy.setRootClass(ClassResolver.resolve(key, name, classMap, beanPropertyType));
-        jsonConfigCopy.setClassMap(classMap);
+        jsonConfigCopy.setRootClass(ClassResolver.resolve(key, name, configClassMap, beanPropertyType));
+        jsonConfigCopy.setClassMap(configClassMap);
         setProperty(bean, key, toBean((JSONObject) value, jsonConfigCopy));
         return;
 
@@ -247,7 +247,7 @@ public class JSONObjectToBeanUtil{
     private static void toBeanDoWithMap(Object bean,String name,Class<?> type,Object value,String key,JsonConfig jsonConfig)
                     throws Exception{
 
-        Map<String, Class<?>> classMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
+        Map<String, Class<?>> configClassMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
 
         // no type info available for conversion
         if (JSONUtils.isNull(value)){
@@ -257,7 +257,7 @@ public class JSONObjectToBeanUtil{
 
         //---------------------------------------------------------------
         if (value instanceof JSONArray){
-            setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, classMap, List.class));
+            setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, configClassMap, List.class));
             return;
         }
         if (isCommonType(type)){
@@ -266,11 +266,11 @@ public class JSONObjectToBeanUtil{
         }
 
         //---------------------------------------------------------------
-        Class<?> targetClass = ClassResolver.resolve(key, name, type, classMap);
+        Class<?> targetClass = ClassResolver.resolve(key, name, type, configClassMap);
 
         JsonConfig jsonConfigCopy = jsonConfig.copy();
         jsonConfigCopy.setRootClass(targetClass);
-        jsonConfigCopy.setClassMap(classMap);
+        jsonConfigCopy.setClassMap(configClassMap);
         if (targetClass != null){
             setProperty(bean, key, toBean((JSONObject) value, jsonConfigCopy));
         }else{

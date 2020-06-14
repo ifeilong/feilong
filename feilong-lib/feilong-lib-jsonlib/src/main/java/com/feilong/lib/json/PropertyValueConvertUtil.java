@@ -27,7 +27,6 @@ import com.feilong.lib.ezmorph.bean.BeanMorpher;
 import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.util.ClassResolver;
 import com.feilong.lib.json.util.JSONUtils;
-import com.feilong.lib.json.util.TargetClassFinder;
 
 /**
  * 
@@ -59,22 +58,22 @@ public class PropertyValueConvertUtil{
                     Object value,
                     JsonConfig jsonConfig,
                     String name,
-                    Map<String, Class<?>> classMap,
+                    Map<String, Class<?>> configClassMap,
                     Class<?> collectionType){
-        Class<?> targetClass = ClassResolver.resolve(key, name, classMap);
+        Class<?> targetClass = ClassResolver.resolve(key, name, configClassMap);
 
         //---------------------------------------------------------------
 
         JsonConfig jsonConfigCopy = jsonConfig.copy();
         jsonConfigCopy.setRootClass(targetClass);
-        jsonConfigCopy.setClassMap(classMap);
+        jsonConfigCopy.setClassMap(configClassMap);
         jsonConfigCopy.setCollectionType(collectionType);
         return JSONArrayToBeanUtil.toCollection((JSONArray) value, jsonConfigCopy);
     }
 
-    static Object toArray(String key,Object value,Class<?> targetType,JsonConfig jsonConfig,Map<String, Class<?>> classMap){
+    static Object toArray(String key,Object value,Class<?> targetType,JsonConfig jsonConfig,Map<String, Class<?>> configClassMap){
         Class<?> innerType = JSONUtils.getInnerComponentType(targetType);
-        Class<?> targetInnerType = TargetClassFinder.findTargetClass(key, classMap);
+        Class<?> targetInnerType = configClassMap.get(key);
         if (innerType.equals(Object.class) && targetInnerType != null && !targetInnerType.equals(Object.class)){
             innerType = targetInnerType;
         }
@@ -82,7 +81,7 @@ public class PropertyValueConvertUtil{
         //---------------------------------------------------------------
         JsonConfig jsonConfigCopy = jsonConfig.copy();
         jsonConfigCopy.setRootClass(innerType);
-        jsonConfigCopy.setClassMap(classMap);
+        jsonConfigCopy.setClassMap(configClassMap);
 
         //---------------------------------------------------------------
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();

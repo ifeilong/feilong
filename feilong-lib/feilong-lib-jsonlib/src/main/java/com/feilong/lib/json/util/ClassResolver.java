@@ -37,14 +37,14 @@ public class ClassResolver{
     }
 
     //---------------------------------------------------------------
-    public static Class<?> resolve(String key,String name,Map<String, Class<?>> classMap){
-        Class<?> targetClass = TargetClassFinder.findTargetClass(key, classMap);
-        return targetClass == null ? TargetClassFinder.findTargetClass(name, classMap) : targetClass;
+    public static Class<?> resolve(String key,String name,Map<String, Class<?>> configClassMap){
+        Class<?> targetClass = configClassMap.get(key);
+        return targetClass == null ? configClassMap.get(name) : targetClass;
     }
 
-    public static Class<?> resolve(String key,String name,Map<String, Class<?>> classMap,Class<?> targetType){
+    public static Class<?> resolve(String key,String name,Map<String, Class<?>> configClassMap,Class<?> targetType){
         if (targetType == Object.class || targetType.isInterface()){
-            Class<?> resolve = resolve(key, name, classMap);
+            Class<?> resolve = resolve(key, name, configClassMap);
             if (null != resolve){
                 return resolve;
             }
@@ -55,22 +55,8 @@ public class ClassResolver{
         return targetType;
     }
 
-    /**
-     * Resolve class.
-     * 
-     * @param key
-     *            the key
-     * @param name
-     *            the name
-     * @param type
-     *            the type
-     * @param classMap
-     *            the class map
-     *
-     * @return the class
-     */
-    public static Class<?> resolve(String key,String name,Class<?> type,Map<String, Class<?>> classMap){
-        Class<?> targetClass = resolve(key, name, classMap);
+    public static Class<?> resolve(String key,String name,Class<?> type,Map<String, Class<?>> configClassMap){
+        Class<?> targetClass = resolve(key, name, configClassMap);
         if (targetClass != null){
             return targetClass;
         }
