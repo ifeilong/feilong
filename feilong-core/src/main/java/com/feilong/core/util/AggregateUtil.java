@@ -18,8 +18,9 @@ package com.feilong.core.util;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.util.CollectionsUtil.size;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
 
@@ -32,10 +33,9 @@ import java.util.Map;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.lib.collection4.IterableUtils;
-import com.feilong.core.Validate;
 
 /**
  * 专门用来统计数据的工具类.
@@ -167,7 +167,7 @@ public final class AggregateUtil{
 
         Map<String, BigDecimal> sumMap = sum(beanIterable, propertyNames);//先求和
 
-        int size = IterableUtils.size(beanIterable);
+        int size = size(beanIterable);
         Map<String, BigDecimal> map = newLinkedHashMap(size);
         for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
             map.put(entry.getKey(), NumberUtil.getDivideValue(toBigDecimal(entry.getValue()), size, scale));
@@ -449,7 +449,7 @@ public final class AggregateUtil{
         }
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
-        Map<String, BigDecimal> sumMap = newLinkedHashMap(IterableUtils.size(beanIterable));
+        Map<String, BigDecimal> sumMap = newLinkedHashMap(size(beanIterable));
         for (O obj : beanIterable){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;

@@ -284,6 +284,112 @@ public final class CollectionsUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //-----------------------------------------------------------------------
+    /**
+     * Returns consecutive {@link List#subList(int, int) sublists} of a
+     * list, each of the same size (the final list may be smaller). For example,
+     * partitioning a list containing {@code [a, b, c, d, e]} with a partition
+     * size of 3 yields {@code [[a, b, c], [d, e]]} -- an outer list containing
+     * two inner lists of three and two elements, all in the original order.
+     * <p>
+     * The outer list is unmodifiable, but reflects the latest state of the
+     * source list. The inner lists are sublist views of the original list,
+     * produced on demand using {@link List#subList(int, int)}, and are subject
+     * to all the usual caveats about modification as explained in that API.
+     * <p>
+     * Adapted from http://code.google.com/p/guava-libraries/
+     *
+     * @param <T>
+     *            the element type
+     * @param list
+     *            the list to return consecutive sublists of
+     * @param size
+     *            the desired size of each sublist (the last may be smaller)
+     * @return a list of consecutive sublists
+     * @throws NullPointerException
+     *             if list is null
+     * @throws IllegalArgumentException
+     *             if size is not strictly positive
+     * @since 3.0.6
+     */
+    public static <T> List<List<T>> partition(List<T> list,int size){
+        return ListUtils.partition(list, size);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 返回object 元素的大小.
+     * 
+     * <p>
+     * 支持object 如下类型:
+     * </p>
+     * 
+     * <ul>
+     * <li>Collection - the collection size
+     * <li>Map - the map size
+     * <li>Array - the array size
+     * <li>Iterator - the number of elements remaining in the iterator
+     * <li>Iterable - the number of elements remaining in the iterator
+     * <li>Enumeration - the number of elements remaining in the enumeration
+     * </ul>
+     * 
+     * 如果 <code>object</code> 不是上述类型,将抛出异常 {@link IllegalArgumentException} <br>
+     *
+     * @param object
+     *            the object to get the size of, may be null
+     * @return object中包含的元素的数量<br>
+     *         如果 <code>object</code> 是null 返回 0<br>
+     * @since 3.0.6
+     */
+    public static int size(final Object object){
+        return CollectionUtils.size(object);
+    }
+
+    /**
+     * Shortcut for {@code get(iterator, 0)}.
+     * <p>
+     * Returns the <code>first</code> value in the <code>iterable</code>'s {@link Iterator}, throwing
+     * <code>IndexOutOfBoundsException</code> if there is no such element.
+     * </p>
+     * <p>
+     * If the {@link Iterable} is a {@link List}, then it will use {@link List#get(int)}.
+     * </p>
+     *
+     * @param <T>
+     *            the type of object in the {@link Iterable}.
+     * @param iterable
+     *            the {@link Iterable} to get a value from, may be null
+     * @return the first object
+     * @throws IndexOutOfBoundsException
+     *             if the request is invalid
+     * @since 3.0.6
+     */
+    public static <T> T first(final Iterable<T> iterable){
+        return get(iterable, 0);
+    }
+
+    /**
+     * Returns the <code>index</code>-th value in the <code>iterable</code>'s {@link Iterator}, throwing
+     * <code>IndexOutOfBoundsException</code> if there is no such element.
+     * <p>
+     * If the {@link Iterable} is a {@link List}, then it will use {@link List#get(int)}.
+     *
+     * @param <T>
+     *            the type of object in the {@link Iterable}.
+     * @param iterable
+     *            the {@link Iterable} to get a value from, may be null
+     * @param index
+     *            the index to get
+     * @return the object at the specified index
+     * @throws IndexOutOfBoundsException
+     *             if the index is invalid
+     * @since 3.0.6
+     */
+    public static <T> T get(final Iterable<T> iterable,final int index){
+        return IterableUtils.get(iterable, index);
+    }
+
     //---------------------------------------------------------------
 
     /**
@@ -886,7 +992,7 @@ public final class CollectionsUtil{
         List<Map<String, Object>> mapList = newArrayList();
 
         //用来存放返回list
-        List<O> returnList = new ArrayList<>(IterableUtils.size(objectCollection));
+        List<O> returnList = new ArrayList<>(size(objectCollection));
         for (O o : objectCollection){
             Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
             boolean isNotExist = !isExist(mapList, propertyNameAndValueMap, propertyNames);
@@ -1129,8 +1235,7 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptyList();
         }
-        return PropertyValueObtainer
-                        .getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(IterableUtils.size(beanIterable)));
+        return PropertyValueObtainer.getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(size(beanIterable)));
     }
 
     /**
@@ -1189,8 +1294,7 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptySet();
         }
-        return PropertyValueObtainer
-                        .getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(IterableUtils.size(beanIterable)));
+        return PropertyValueObtainer.getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(size(beanIterable)));
     }
 
     //----------------------------getPropertyValueMap-----------------------------------
@@ -1283,7 +1387,7 @@ public final class CollectionsUtil{
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 
-        Map<K, V> map = newLinkedHashMap(IterableUtils.size(beanIterable));
+        Map<K, V> map = newLinkedHashMap(size(beanIterable));
         for (O bean : beanIterable){
             map.put(PropertyUtil.<K> getProperty(bean, keyPropertyName), PropertyUtil.<V> getProperty(bean, valuePropertyName));
         }
@@ -2631,7 +2735,7 @@ public final class CollectionsUtil{
         Validate.notNull(keyTransformer, "keyTransformer can't be null!");
         //---------------------------------------------------------------
 
-        Map<T, List<O>> map = newLinkedHashMap(IterableUtils.size(beanIterable));
+        Map<T, List<O>> map = newLinkedHashMap(size(beanIterable));
         for (O obj : beanIterable){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
@@ -2710,7 +2814,7 @@ public final class CollectionsUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
         //---------------------------------------------------------------
-        Map<T, O> map = newLinkedHashMap(IterableUtils.size(beanIterable));
+        Map<T, O> map = newLinkedHashMap(size(beanIterable));
         for (O o : beanIterable){
             T key = PropertyUtil.getProperty(o, propertyName);
             if (!map.containsKey(key)){

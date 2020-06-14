@@ -53,8 +53,6 @@ java.lang.RuntimeException:
     at com.feilong.core.DefaultRuntimeExceptionTest.testRuntimeException(DefaultRuntimeExceptionTest.java:63)
     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
     at java.lang.reflect.Method.invoke(Method.java:606)
-    at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-    at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
 Caused by: java.lang.ArithmeticException: / by zero
     at com.feilong.core.DefaultRuntimeExceptionTest.testRuntimeException(DefaultRuntimeExceptionTest.java:61)
     ... 23 more

@@ -23,12 +23,6 @@ import org.junit.Test;
 import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.store.member.User;
 
-/**
- * The Class BeanPredicateTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 1.10.7
- */
 public class BeanPredicateTest{
 
     /**

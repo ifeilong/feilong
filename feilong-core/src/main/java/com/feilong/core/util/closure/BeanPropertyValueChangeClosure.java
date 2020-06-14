@@ -17,8 +17,8 @@ package com.feilong.core.util.closure;
 
 import org.apache.commons.collections4.Closure;
 
-import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.bean.PropertyUtil;
 
 /**
  * {@link org.apache.commons.collections4.Closure} 实现,用来更新指定属性的指定值.
@@ -56,8 +56,8 @@ import com.feilong.core.Validate;
  * @param <T>
  *            the generic type
  * @see com.feilong.lib.beanutils.BeanPropertyValueChangeClosure
- * @see com.feilong.lib.collection4.CollectionUtils#forAllDo(Iterable, Closure)
- * @see com.feilong.lib.collection4.IterableUtils#forEach(Iterable, Closure)
+ * @see "org.apache.commons.collections4.CollectionUtils#forAllDo(Iterable, Closure)"
+ * @see "org.apache.commons.collections4.IterableUtils#forEach(Iterable, Closure)"
  * @since 1.10.2
  */
 public class BeanPropertyValueChangeClosure<T> implements Closure<T>{

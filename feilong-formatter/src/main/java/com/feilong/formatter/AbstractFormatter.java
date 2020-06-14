@@ -20,6 +20,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.core.util.CollectionsUtil.addIgnoreNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.first;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
@@ -40,7 +41,6 @@ import com.feilong.formatter.builder.FormatterBuilderFactory;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.lang3.StringUtils;
 
 /**
@@ -137,7 +137,7 @@ abstract class AbstractFormatter{
         }
 
         //---------------------------------------------------------------
-        T t = IterableUtils.get(iterable, 0);
+        T t = first(iterable);
 
         FormatterBuilder formatterBuilder = FormatterBuilderFactory.create(t);
 

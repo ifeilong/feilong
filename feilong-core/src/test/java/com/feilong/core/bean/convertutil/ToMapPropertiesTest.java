@@ -60,9 +60,6 @@ public class ToMapPropertiesTest{
         assertEquals(emptyMap(), toMap((Properties) null));
     }
 
-    /**
-     * Test to properties.
-     */
     @Test
     public void testToProperties(){
         Map<String, Object> map = newLinkedHashMap();

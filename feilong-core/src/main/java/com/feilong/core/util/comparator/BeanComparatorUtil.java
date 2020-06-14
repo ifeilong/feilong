@@ -23,18 +23,18 @@ import static com.feilong.lib.collection4.ComparatorUtils.reversedComparator;
 import java.util.Comparator;
 import java.util.List;
 
+import com.feilong.core.Validate;
 import com.feilong.lib.beanutils.BeanComparator;
 import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.comparators.ComparableComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
-import com.feilong.core.Validate;
 
 /**
  * 专注于 bean 属性值的排序.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see com.feilong.lib.collection4.ComparatorUtils
+ * @see "org.apache.commons.collections4.ComparatorUtils"
  * @see FixedOrderComparator
  * @since 1.8.0
  */
@@ -91,7 +91,7 @@ public final class BeanComparatorUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyNameAndOrders</code> 是empty,<br>
      *             或者有元素是 blank
-     * @see com.feilong.lib.collection4.ComparatorUtils#chainedComparator(java.util.Collection)
+     * @see "org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Collection)"
      * @since 1.10.2 support propertyNameAndOrder
      */
     public static <T> Comparator<T> chainedComparator(String...propertyNameAndOrders){

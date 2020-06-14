@@ -118,8 +118,8 @@ public final class JsonHelper{
      * @see com.feilong.lib.json.util.JSONUtils#isArray(Object)
      * @see java.lang.Class#isEnum()
      * @see com.feilong.lib.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
-     * @see com.feilong.lib.collection4.IteratorUtils#toList(Iterator)
-     * @see com.feilong.lib.collection4.IteratorUtils#toList(Iterator, int)
+     * @see "org.apache.commons.collections4.IteratorUtils#toList(Iterator)"
+     * @see "org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)"
      * @see com.feilong.lib.json.JSONSerializer#toJSON(Object)
      */
     static JSON toJSON(Object obj,JsonConfig jsonConfig){

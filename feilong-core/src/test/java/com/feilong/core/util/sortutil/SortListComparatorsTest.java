@@ -33,11 +33,6 @@ import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.store.member.User;
 
-/**
- * The Class SortUtilSortListComparatorsTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class SortListComparatorsTest{
 
     @Test

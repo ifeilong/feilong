@@ -19,6 +19,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.InputStream;
@@ -34,8 +35,6 @@ import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.ReadStatus;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.collection4.CollectionUtils;
-import com.feilong.lib.collection4.MapUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -175,7 +174,7 @@ public class ExcelReaderUtil{
             Map<String, Object> map = newLinkedHashMap();
             map.put("dataName", dataName);
             map.put("sheetNo", sheetNo);
-            map.put("list size", CollectionUtils.size(list));
+            map.put("list size", size(list));
             map.put("use time", formatDuration(beginDate));
             LOGGER.info("use time: [{}]", JsonUtil.format(map));
         }
@@ -188,7 +187,7 @@ public class ExcelReaderUtil{
             return (List<T>) beans.get(dataName);
         }
 
-        if (MapUtils.size(beans) == 1){
+        if (size(beans) == 1){
             return (List<T>) (toList(beans.values()).get(0));
         }
 

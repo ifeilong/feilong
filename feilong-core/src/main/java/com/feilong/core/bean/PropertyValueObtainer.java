@@ -17,6 +17,7 @@ package com.feilong.core.bean;
 
 import static com.feilong.core.bean.PropertyDescriptorUtil.getSpringPropertyDescriptor;
 import static com.feilong.core.bean.PropertyDescriptorUtil.isUseSpringOperate;
+import static com.feilong.core.util.CollectionsUtil.first;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -26,9 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
-import com.feilong.lib.beanutils.PropertyUtils;
-import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.core.Validate;
+import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -158,7 +158,7 @@ public final class PropertyValueObtainer{
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         //---------------------------------------------------------------
-        O o = IterableUtils.get(beanIterable, 0);
+        O o = first(beanIterable);
         Class<?> klass = o.getClass();
         //spring 操作
         if (isUseSpringOperate(klass, propertyName)){

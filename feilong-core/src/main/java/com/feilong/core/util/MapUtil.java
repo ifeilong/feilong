@@ -31,8 +31,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,7 +40,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.MapUtils;
 
 /**
@@ -193,7 +190,6 @@ import com.feilong.lib.collection4.MapUtils;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.util.AbstractMap.SimpleEntry
- * @see com.feilong.lib.collection4.MapUtils
  * @see "com.google.common.collect.Maps"
  * @since 1.0.0
  */
@@ -314,15 +310,13 @@ public final class MapUtil{
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
-     * @see com.feilong.lib.collection4.IterableUtils#get(Iterable, int)
-     * @see com.feilong.lib.collection4.CollectionUtils#get(Map, int)
+     * @see "org.apache.commons.collections4.CollectionUtils#get(Iterable, int)"
+     * @see "org.apache.commons.collections4.CollectionUtils#get(Map, int)"
      * @since 1.10.1
      */
     public static <K, V> Map.Entry<K, V> get(Map<K, V> map,int index){
         Validate.notNull(map, "map can't be null!");
-
-        Set<Entry<K, V>> entrySet = map.entrySet();
-        return IterableUtils.get(entrySet, index);
+        return com.feilong.lib.collection4.CollectionUtils.get(map, index);
     }
 
     //---------------------------------------------------------------

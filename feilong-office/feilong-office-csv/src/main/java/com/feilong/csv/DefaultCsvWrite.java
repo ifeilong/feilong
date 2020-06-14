@@ -17,6 +17,7 @@ package com.feilong.csv;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.util.CollectionsUtil.first;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ import com.feilong.csv.handler.CsvColumnEntityListBuilder;
 import com.feilong.csv.handler.CsvContentBuilder;
 import com.feilong.csv.handler.DataListBuilder;
 import com.feilong.io.IOWriteUtil;
-import com.feilong.lib.collection4.IterableUtils;
 
 /**
  * cvs工具类.
@@ -252,7 +252,7 @@ public class DefaultCsvWrite implements CsvWrite{
      * @since 1.8.1
      */
     private static <T> BeanCsvConfig<T> buildBeanCsvConfig(Iterable<T> iterable){
-        T t = IterableUtils.first(iterable);
+        T t = first(iterable);
         @SuppressWarnings("unchecked")
         Class<T> klass = (Class<T>) t.getClass();
         return new BeanCsvConfig<>(klass);

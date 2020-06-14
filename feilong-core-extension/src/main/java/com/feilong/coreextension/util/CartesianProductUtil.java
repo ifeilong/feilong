@@ -16,15 +16,15 @@
 package com.feilong.coreextension.util;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.get;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.CollectionsUtil.size;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.lib.collection4.IterableUtils;
 
 /**
  * 笛卡尔乘积.
@@ -164,7 +164,7 @@ public final class CartesianProductUtil{
     private static <T, I extends Iterable<T>> List<List<T>> cartesianProduct(Iterable<I> iterables){
         int length = 1;
         for (Iterable<T> iterable : iterables){
-            length *= IterableUtils.size(iterable);
+            length *= size(iterable);
         }
 
         //---------------------------------------------------------------
@@ -193,7 +193,7 @@ public final class CartesianProductUtil{
         //从不同的数组中取值
         List<T> list = newArrayList();
         for (Iterable<T> iterable : iterables){
-            list.add(IterableUtils.get(iterable, i % IterableUtils.size(iterable)));
+            list.add(get(iterable, i % size(iterable)));
         }
 
         //---------------------------------------------------------------

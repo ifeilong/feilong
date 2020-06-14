@@ -74,6 +74,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 SelectRegexStringPredicateTest.class,
                 SelectNotNullOrEmptyStringPredicateTest.class,
+
+                SizeTest.class,
         //
 })
 public class CollectionsUtilSuiteTests{

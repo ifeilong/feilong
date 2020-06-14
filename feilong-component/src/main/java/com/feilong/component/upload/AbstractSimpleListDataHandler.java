@@ -16,12 +16,12 @@
 package com.feilong.component.upload;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.size;
 
 import java.util.List;
 import java.util.Map;
 
 import com.feilong.context.DataHandler;
-import com.feilong.lib.collection4.MapUtils;
 
 /**
  * The Class AbstractSimpleListDataHandler.
@@ -35,7 +35,7 @@ public abstract class AbstractSimpleListDataHandler<T> implements DataHandler{
 
     @Override
     public void handle(Map<String, Object> data){
-        int size = MapUtils.size(data);
+        int size = size(data);
         if (size != 1){
             throw new IllegalArgumentException("data size:[" + size + "] != 1");
         }

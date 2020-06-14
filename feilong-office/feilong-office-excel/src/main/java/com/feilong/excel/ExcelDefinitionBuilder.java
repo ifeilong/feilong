@@ -16,6 +16,7 @@
 package com.feilong.excel;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.SheetNamesUtil;
-import com.feilong.lib.collection4.MapUtils;
 
 /**
  * The Class ExcelDefinitionBuilder.
@@ -66,7 +66,7 @@ public class ExcelDefinitionBuilder{
         List<ExcelSheet> excelSheets = new ArrayList<>();
 
         //如果sheetNames 没有配置, 且sheetDefinitions 只有1个
-        if (SheetNamesUtil.isEmptyOrNullElement(sheetNames) && MapUtils.size(sheetDefinitionMap) == 1){
+        if (SheetNamesUtil.isEmptyOrNullElement(sheetNames) && size(sheetDefinitionMap) == 1){
             LOGGER.debug("sheetNames isEmptyOrNullElement,and sheetDefinitionMap is only 1,use ExcelSheet");
             excelSheets.addAll(sheetDefinitionMap.values());
         }else{

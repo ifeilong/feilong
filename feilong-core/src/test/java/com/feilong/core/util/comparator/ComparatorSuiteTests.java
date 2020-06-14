@@ -24,10 +24,6 @@ import com.feilong.core.util.comparator.propertycomparator.PropertyComparatorSui
 import com.feilong.core.util.comparator.regexgroupnumbercomparator.RegexGroupNumberComparatorTest;
 import com.feilong.core.util.comparator.sorthelper.SortHelperSuiteTests;
 
-/**
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 

@@ -25,11 +25,11 @@ import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.collection4.comparators.ReverseComparator;
 import com.feilong.lib.lang3.ObjectUtils;
-import com.feilong.core.Validate;
 
 /**
  * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用每个需要排序的字段创建 {@link Comparator}类.
@@ -53,12 +53,12 @@ import com.feilong.core.Validate;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.lib.collection4.ComparatorUtils
  * @see "org.springframework.beans.support.PropertyComparator"
  * @see com.feilong.lib.beanutils.BeanComparator
- * @see com.feilong.lib.collection4.comparators.BooleanComparator
- * @see com.feilong.lib.collection4.comparators.ReverseComparator
- * @see com.feilong.lib.collection4.comparators.ComparableComparator
+ * @see "org.apache.commons.collections4.ComparatorUtils"
+ * @see "org.apache.commons.collections4.comparators.BooleanComparator"
+ * @see "org.apache.commons.collections4.comparators.ReverseComparator"
+ * @see "org.apache.commons.collections4.comparators.ComparableComparator"
  * @see <a href=
  *      "http://stackoverflow.com/questions/19325256/java-lang-illegalargumentexception-comparison-method-violates-its-general-contr">java-
  *      lang-illegalargumentexception-comparison-method-violates-its-general-contr</a>

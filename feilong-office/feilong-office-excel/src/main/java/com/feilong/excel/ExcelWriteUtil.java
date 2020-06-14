@@ -23,6 +23,7 @@ import static com.feilong.core.date.DateUtil.nowTimestamp;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.SystemUtil.USER_HOME;
+import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 
@@ -43,7 +44,6 @@ import com.feilong.excel.util.SheetNamesUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -220,7 +220,7 @@ public class ExcelWriteUtil{
             String key = entry.getKey();
             Object value = entry.getValue();
             if (ClassUtil.isInstance(value, Collection.class)){
-                map.put(key + " size", CollectionUtils.size(value));
+                map.put(key + " size", size(value));
             }
         }
         return map;

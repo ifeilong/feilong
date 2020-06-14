@@ -16,6 +16,7 @@
 package com.feilong.taglib.display.httpconcat.builder;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.util.CollectionsUtil.partition;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 import static java.lang.System.lineSeparator;
 
@@ -26,7 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.collection4.ListUtils;
 import com.feilong.lib.lang3.BooleanUtils;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
@@ -110,7 +110,7 @@ public class ResultBuilder{
         //---------------------------------------------------------------
         //since 1.12.6
         //将 list 分成 N 份
-        List<List<String>> groupList = ListUtils.partition(itemSrcList, autoPartitionSize);
+        List<List<String>> groupList = partition(itemSrcList, autoPartitionSize);
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < groupList.size(); ++i){

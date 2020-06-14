@@ -71,8 +71,8 @@ import com.feilong.lib.lang3.StringUtils;
  * @see com.feilong.lib.collection4.CollectionUtils#sizeIsEmpty(Object)
  * @see com.feilong.lib.collection4.CollectionUtils#isEmpty(Collection)
  * @see com.feilong.lib.collection4.CollectionUtils#isNotEmpty(Collection)
- * @see com.feilong.lib.collection4.MapUtils#isEmpty(Map)
- * @see com.feilong.lib.collection4.MapUtils#isNotEmpty(Map)
+ * @see "org.apache.commons.collections4.MapUtils#isEmpty(Map)"
+ * @see "org.apache.commons.collections4.MapUtils#isNotEmpty(Map)"
  * @since 1.0.0
  */
 public final class Validator{

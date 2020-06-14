@@ -15,15 +15,17 @@
  */
 package com.feilong.core.lang.thread;
 
+import static com.feilong.core.util.CollectionsUtil.partition;
+
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.ThreadUtil;
-import com.feilong.lib.collection4.ListUtils;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.ThreadUtil;
+import com.feilong.core.util.CollectionsUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -78,7 +80,8 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      * Builds the thread array.
      * 
      * <p>
-     * 调用 {@link ListUtils#partition(List, int)} 对list 分成N份,对应的创建N份线程,每个线程的 名字 参见 {@link #buildThreadName(int, PartitionRunnableBuilder)}
+     * 调用 {@link CollectionsUtil#partition(List, int)} 对list 分成N份,对应的创建N份线程,每个线程的 名字 参见
+     * {@link #buildThreadName(int, PartitionRunnableBuilder)}
      * </p>
      * 
      * <p>
@@ -108,7 +111,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
         ThreadGroup threadGroup = new ThreadGroup(buildThreadGroupName(list, partitionRunnableBuilder));
 
         //将 list 分成 N 份
-        List<List<T>> groupList = ListUtils.partition(list, eachSize);
+        List<List<T>> groupList = partition(list, eachSize);
 
         //-------------------------------------------------------------------
         int i = 0;

@@ -15,17 +15,18 @@
  */
 package com.feilong.core.util.comparator;
 
+import java.util.Comparator;
 import java.util.List;
 
+import com.feilong.core.Validate;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator;
 import com.feilong.lib.collection4.comparators.FixedOrderComparator.UnknownObjectBehavior;
-import com.feilong.core.Validate;
 
 /**
- * The Class ComparatorUtil.
+ * {@link Comparator} 工具类.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see com.feilong.lib.collection4.ComparatorUtils
+ * @see "org.apache.commons.collections4.ComparatorUtils"
  * @see FixedOrderComparator
  * @since 1.14.3
  */
@@ -74,7 +75,6 @@ public final class ComparatorUtil{
         Validate.notNull(unknownObjectBehavior, "unknownObjectBehavior can't be null!");
 
         //---------------------------------------------------------------
-
         FixedOrderComparator<T> fixedOrderComparator = new FixedOrderComparator<>(list);
         fixedOrderComparator.setUnknownObjectBehavior(unknownObjectBehavior);
         return fixedOrderComparator;

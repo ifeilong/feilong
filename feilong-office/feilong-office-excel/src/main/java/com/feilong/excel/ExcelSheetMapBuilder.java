@@ -18,6 +18,7 @@ package com.feilong.excel;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Date;
@@ -31,7 +32,6 @@ import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.collection4.CollectionUtils;
 
 class ExcelSheetMapBuilder{
 
@@ -67,7 +67,7 @@ class ExcelSheetMapBuilder{
                 }
                 //---------------------------------------------------------------
                 if (LOGGER.isDebugEnabled()){
-                    int size = CollectionUtils.size(excelSheetList);
+                    int size = size(excelSheetList);
                     LOGGER.debug("parse [{}],sheetList size:[{}],use time: [{}]", sheetDefinitionPath, size, formatDuration(beginDate));
                 }
             }catch (Exception e){
