@@ -51,14 +51,4 @@ public class JSONException extends DefaultRuntimeException{
     public JSONException(String msg, Throwable cause){
         super(msg, cause);
     }
-
-    /**
-     * Instantiates a new JSON exception.
-     *
-     * @param cause
-     *            the cause
-     */
-    public JSONException(Throwable cause){
-        super((cause == null ? null : cause.toString()), cause);
-    }
 }

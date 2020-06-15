@@ -90,8 +90,6 @@ public class JSONSerializer{
      * @param object
      *            any java Object
      * @return the json
-     * @throws JSONException
-     *             if the object can not be converted
      */
     public static JSON toJSON(Object object){
         return toJSON(object, new JsonConfig());
@@ -107,8 +105,6 @@ public class JSONSerializer{
      * @param jsonConfig
      *            additional configuration
      * @return the json
-     * @throws JSONException
-     *             if the object can not be converted
      */
     public static JSON toJSON(Object object,JsonConfig jsonConfig){
         if (object == null){
@@ -152,6 +148,6 @@ public class JSONSerializer{
         if ("null".equals(string)){
             return JSONNull.getInstance();
         }
-        throw new JSONException("Invalid JSON String");
+        throw new JSONException("Invalid JSON String:" + string);
     }
 }

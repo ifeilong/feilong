@@ -82,26 +82,6 @@ public final class JSONUtils{
     //---------------------------------------------------------------
 
     /**
-     * Transforms the string into a valid Java Identifier.<br>
-     * The default strategy is JavaIdentifierTransformer.NOOP
-     *
-     * @param key
-     *            the key
-     * @param jsonConfig
-     *            the json config
-     * @return the string
-     * @throws JSONException
-     *             if the string can not be transformed.
-     */
-    public static String convertToJavaIdentifier(String key,JsonConfig jsonConfig){
-        try{
-            return jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(key);
-        }catch (Exception e){
-            throw JSONExceptionUtil.build(key, e);
-        }
-    }
-
-    /**
      * Returns the inner-most component type of an Array.
      *
      * @param type
@@ -398,19 +378,6 @@ public final class JSONUtils{
      *
      * @param jsonObject
      *            the json object
-     * @return the dyna bean
-     */
-    public static DynaBean newDynaBean(JSONObject jsonObject){
-        return newDynaBean(jsonObject, new JsonConfig());
-    }
-
-    /**
-     * Creates a new MorphDynaBean from a JSONObject. The MorphDynaBean will have
-     * all the properties of the original JSONObject with the most accurate type.
-     * Values of properties are not copied.
-     *
-     * @param jsonObject
-     *            the json object
      * @param jsonConfig
      *            the json config
      * @return the dyna bean
@@ -421,7 +388,7 @@ public final class JSONUtils{
             Map.Entry entry = (Map.Entry) entries.next();
             String key = (String) entry.getKey();
             if (!isJavaIdentifier(key)){
-                String parsedKey = convertToJavaIdentifier(key, jsonConfig);
+                String parsedKey = jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(key);
                 if (parsedKey.compareTo(key) != 0){
                     props.put(parsedKey, props.remove(key));
                 }
@@ -435,7 +402,7 @@ public final class JSONUtils{
             dynaBean = (MorphDynaBean) dynaClass.newInstance();
             dynaBean.setDynaBeanClass(dynaClass);
         }catch (Exception e){
-            throw new JSONException(e);
+            throw new JSONException("", e);
         }
         return dynaBean;
     }

@@ -98,8 +98,7 @@ public class JSONTokener{
      *            The number of characters to take.
      * @return A string of n characters.
      * @throws JSONException
-     *             Substring bounds error if there are not n characters
-     *             remaining in the source string.
+     *             Substring bounds error if there are not n characters remaining in the source string.
      */
     public String next(int n){
         int i = this.myIndex;
@@ -112,10 +111,8 @@ public class JSONTokener{
     }
 
     /**
-     * Get the next char in the string, skipping whitespace and comments
-     * (slashslash, slashstar, and hash).
+     * Get the next char in the string, skipping whitespace and comments (slashslash, slashstar, and hash).
      *
-     * @throws JSONException
      * @return A character, or 0 if there are no more characters.
      */
     public char nextClean(){
@@ -172,8 +169,6 @@ public class JSONTokener{
      *            The quoting character, either <code>"</code>&nbsp;<small>(double
      *            quote)</small> or <code>'</code>&nbsp;<small>(single quote)</small>.
      * @return A String.
-     * @throws JSONException
-     *             Unterminated string.
      */
     private String nextString(char quote){
         char c;
@@ -228,8 +223,6 @@ public class JSONTokener{
      * 
      * @param jsonConfig
      *
-     * @throws JSONException
-     *             If syntax error.
      * @return An object.
      */
     public Object nextValue(JsonConfig jsonConfig){

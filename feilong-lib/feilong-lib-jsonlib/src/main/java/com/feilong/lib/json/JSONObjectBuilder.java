@@ -27,7 +27,6 @@ import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.util.CycleSetUtil;
-import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 
@@ -234,9 +233,6 @@ public class JSONObjectBuilder{
      * @param jsonConfig
      *            the json config
      * @return the JSON object
-     * @throws JSONException
-     *             if the bean can not be converted to a proper
-     *             JSONObject.
      */
     private static JSONObject fromBean(Object bean,JsonConfig jsonConfig){
         return build(bean, jsonConfig, new JsonHook<JSONObject>(){
@@ -304,7 +300,7 @@ public class JSONObjectBuilder{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(object);
             }catch (Exception e){
                 CycleSetUtil.removeInstance(object);
-                throw JSONExceptionUtil.build("", e);
+                throw new JSONException("", e);
             }
         }
 
@@ -316,7 +312,7 @@ public class JSONObjectBuilder{
             return jsonObject;
         }catch (Exception e){
             CycleSetUtil.removeInstance(object);
-            throw JSONExceptionUtil.build("", e);
+            throw new JSONException("", e);
         }
     }
 

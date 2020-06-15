@@ -88,9 +88,9 @@ public class ProcessValueUtil{
      */
     static Object processJsonObjectValue(String key,Object value,JsonConfig jsonConfig){
         if (value != null){
-            JsonValueProcessor processor = jsonConfig.findJsonValueProcessor(value.getClass(), key);
-            if (processor != null){
-                value = processor.processObjectValue(null, value, jsonConfig);
+            JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(value.getClass(), key);
+            if (jsonValueProcessor != null){
+                value = jsonValueProcessor.processObjectValue(null, value, jsonConfig);
                 if (!JsonVerifier.isValidJsonValue(value)){
                     throw new JSONException("Value is not a valid JSON value. " + value);
                 }

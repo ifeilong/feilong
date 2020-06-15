@@ -20,7 +20,6 @@ import static com.feilong.core.util.MapUtil.newTreeMap;
 import java.util.Map;
 
 import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.lib.json.util.JSONExceptionUtil;
 
 /**
  * 
@@ -38,18 +37,13 @@ public class BeanNewer{
 
     //---------------------------------------------------------------
 
-    static Object newBean(Class<?> rootClass) throws JSONException{
-        try{
-            if (rootClass.isInterface()){
-                if (!Map.class.isAssignableFrom(rootClass)){
-                    throw new JSONException("beanClass is an interface. " + rootClass);
-                }
-                return newTreeMap();
+    static Object newBean(Class<?> rootClass){
+        if (rootClass.isInterface()){
+            if (!Map.class.isAssignableFrom(rootClass)){
+                throw new JSONException("beanClass is an interface. " + rootClass);
             }
-            return ConstructorUtil.newInstance(rootClass);
-        }catch (Exception e){
-            throw JSONExceptionUtil.build("rootClass:" + rootClass.getCanonicalName(), e);
+            return newTreeMap();
         }
+        return ConstructorUtil.newInstance(rootClass);
     }
-
 }

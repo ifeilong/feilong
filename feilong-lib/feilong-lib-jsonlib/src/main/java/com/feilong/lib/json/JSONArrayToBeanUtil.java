@@ -68,9 +68,9 @@ class JSONArrayToBeanUtil{
             try{
                 collection = (Collection) collectionType.newInstance();
             }catch (InstantiationException e){
-                throw new JSONException(e);
+                throw new JSONException("", e);
             }catch (IllegalAccessException e){
-                throw new JSONException(e);
+                throw new JSONException("", e);
             }
         }
 

@@ -35,7 +35,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.ClassResolver;
-import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.lib.json.util.PropertyNameProcessorUtil;
@@ -122,7 +121,7 @@ public class JSONObjectToBeanUtil{
             try{
                 toBeanUsePropertyDescriptor(rootBean, triple, jsonValueType, jsonConfig, propertyDescriptor);
             }catch (Exception e){
-                throw JSONExceptionUtil.build("Error while setting property=[" + name + "] type: " + jsonValueType, e);
+                throw new JSONException("Error while setting property=[" + name + "] type: " + jsonValueType, e);
             }
         }
         return rootBean;
@@ -132,7 +131,7 @@ public class JSONObjectToBeanUtil{
                     Object rootBean,
                     List<Triple<String, String, Object>> list,
                     Map<String, Class<?>> jsonKeyAndClassMap,
-                    JsonConfig jsonConfig) throws JSONException{
+                    JsonConfig jsonConfig){
         for (Triple<String, String, Object> triple : list){
             String name = triple.getLeft();
             String key = triple.getMiddle();
@@ -140,11 +139,7 @@ public class JSONObjectToBeanUtil{
 
             //---------------------------------------------------------------
             Class<?> jsonValueType = jsonKeyAndClassMap.get(name);
-            try{
-                toBeanDoWithMap(rootBean, name, jsonValueType, value, key, jsonConfig);
-            }catch (Exception e){
-                throw JSONExceptionUtil.build("Error while setting property=[" + name + "] type: " + jsonKeyAndClassMap.get(name), e);
-            }
+            toBeanDoWithMap(rootBean, name, jsonValueType, value, key, jsonConfig);
         }
         return rootBean;
     }
@@ -208,7 +203,10 @@ public class JSONObjectToBeanUtil{
         //---------------------------------------------------------------
         if (value instanceof JSONArray){
             if (List.class.isAssignableFrom(beanPropertyType) || Set.class.isAssignableFrom(beanPropertyType)){
-                setProperty(bean, key, PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, configClassMap, beanPropertyType));
+                setProperty(
+                                bean,
+                                key,
+                                PropertyValueConvertUtil.toCollection(key, value, jsonConfig, name, configClassMap, beanPropertyType));
             }else{
                 setProperty(bean, key, PropertyValueConvertUtil.toArray(key, value, beanPropertyType, jsonConfig, configClassMap));
             }
@@ -244,9 +242,7 @@ public class JSONObjectToBeanUtil{
         }
     }
 
-    private static void toBeanDoWithMap(Object bean,String name,Class<?> type,Object value,String key,JsonConfig jsonConfig)
-                    throws Exception{
-
+    private static void toBeanDoWithMap(Object bean,String name,Class<?> type,Object value,String key,JsonConfig jsonConfig){
         Map<String, Class<?>> configClassMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
 
         // no type info available for conversion
@@ -293,7 +289,7 @@ public class JSONObjectToBeanUtil{
 
         for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
             String name = (String) entries.next();
-            String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
+            String key = jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(name);
             Class<?> type = props.get(name);
             Object value = jsonObject.get(name);
             try{
@@ -318,7 +314,7 @@ public class JSONObjectToBeanUtil{
                     }
                 }
             }catch (Exception e){
-                throw JSONExceptionUtil.build("Error while setting property=" + name + " type" + type, e);
+                throw new JSONException("Error while setting property=" + name + " type" + type, e);
             }
         }
 
@@ -342,7 +338,7 @@ public class JSONObjectToBeanUtil{
             }
 
             //---------------------------------------------------------------
-            String key = JSONUtils.convertToJavaIdentifier(name, jsonConfig);
+            String key = jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(name);
             key = PropertyNameProcessorUtil.update(rootClass, key, propertyNameProcessor);
 
             list.add(Triple.of(name, key, value));

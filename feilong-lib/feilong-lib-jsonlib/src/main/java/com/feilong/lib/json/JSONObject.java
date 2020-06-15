@@ -318,9 +318,6 @@ public final class JSONObject implements JSON{
      *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
      * @return this.
-     * @throws JSONException
-     *             If the value is non-finite number or if the key is
-     *             null.
      */
     private JSONObject _setInternal(String key,Object value){
         verifyIsNull();

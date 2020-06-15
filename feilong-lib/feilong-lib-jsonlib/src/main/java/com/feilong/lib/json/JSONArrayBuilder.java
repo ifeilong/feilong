@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import com.feilong.lib.json.util.CycleSetUtil;
-import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
@@ -368,7 +367,7 @@ public class JSONArrayBuilder{
                     }
                 }catch (Exception e){
                     CycleSetUtil.removeInstance(collection);
-                    throw JSONExceptionUtil.build("", e);
+                    throw new JSONException("", e);
                 }
             }
         });
@@ -401,7 +400,7 @@ public class JSONArrayBuilder{
                 return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
             }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
-                throw JSONExceptionUtil.build("", e);
+                throw new JSONException("", e);
             }
         }
 
@@ -414,7 +413,7 @@ public class JSONArrayBuilder{
             return jsonArray;
         }catch (Exception e){
             CycleSetUtil.removeInstance(array);
-            throw JSONExceptionUtil.build("", e);
+            throw new JSONException("", e);
         }
     }
 

@@ -17,7 +17,6 @@ package com.feilong.lib.json;
 
 import java.util.Collection;
 
-import com.feilong.lib.json.util.JSONExceptionUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 
@@ -128,42 +127,40 @@ public class JSONTokenerParser{
         if (jsonTokener.nextClean() == ']'){
             return new JSONArray();
         }
+
+        //---------------------------------------------------------------
         JSONArray jsonArray = new JSONArray();
         jsonTokener.back();
 
-        try{
-            for (;;){
-                if (jsonTokener.nextClean() == ','){
-                    jsonTokener.back();
-                    jsonArray.elementList.add(JSONNull.getInstance());
+        for (;;){
+            if (jsonTokener.nextClean() == ','){
+                jsonTokener.back();
+                jsonArray.elementList.add(JSONNull.getInstance());
+            }else{
+                jsonTokener.back();
+                Object v = jsonTokener.nextValue(jsonConfig);
+                if (v instanceof String && JSONUtils.mayBeJSON((String) v)){
+                    jsonArray.addValue(JSONUtils.DOUBLE_QUOTE + v + JSONUtils.DOUBLE_QUOTE, jsonConfig);
                 }else{
-                    jsonTokener.back();
-                    Object v = jsonTokener.nextValue(jsonConfig);
-                    if (v instanceof String && JSONUtils.mayBeJSON((String) v)){
-                        jsonArray.addValue(JSONUtils.DOUBLE_QUOTE + v + JSONUtils.DOUBLE_QUOTE, jsonConfig);
-                    }else{
-                        jsonArray.addValue(v, jsonConfig);
-                    }
-
+                    jsonArray.addValue(v, jsonConfig);
                 }
 
-                //---------------------------------------------------------------
-                switch (jsonTokener.nextClean()) {
-                    case ';':
-                    case ',':
-                        if (jsonTokener.nextClean() == ']'){
-                            return jsonArray;
-                        }
-                        jsonTokener.back();
-                        break;
-                    case ']':
-                        return jsonArray;
-                    default:
-                        throw jsonTokener.syntaxError("Expected a ',' or ']'");
-                }
             }
-        }catch (Exception e){
-            throw JSONExceptionUtil.build("", e);
+
+            //---------------------------------------------------------------
+            switch (jsonTokener.nextClean()) {
+                case ';':
+                case ',':
+                    if (jsonTokener.nextClean() == ']'){
+                        return jsonArray;
+                    }
+                    jsonTokener.back();
+                    break;
+                case ']':
+                    return jsonArray;
+                default:
+                    throw jsonTokener.syntaxError("Expected a ',' or ']'");
+            }
         }
     }
 }
