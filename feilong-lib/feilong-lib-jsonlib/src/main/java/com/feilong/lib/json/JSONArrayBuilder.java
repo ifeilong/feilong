@@ -19,12 +19,12 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
-import java.util.Iterator;
 
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
+ * 用来生成 {@link JSONArray}.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -39,9 +39,15 @@ public class JSONArrayBuilder{
     }
 
     /**
-     * Creates a JSONArray.<br>
+     * Creates a JSONArray.
+     * 
+     * <p>
      * Inspects the object type to call the correct JSONArray factory method.
+     * </p>
+     * 
+     * <p>
      * Accepts JSON formatted strings, arrays, Collections and Enums.
+     * </p>
      *
      * @param object
      *            the object
@@ -49,7 +55,7 @@ public class JSONArrayBuilder{
      *            the json config
      * @return the JSON array
      */
-    public static JSONArray fromObject(Object object,JsonConfig jsonConfig){
+    public static JSONArray build(Object object,JsonConfig jsonConfig){
         JsonConfig useJsonConfig = defaultIfNull(jsonConfig, new JsonConfig());
 
         if (object instanceof String){
@@ -65,7 +71,7 @@ public class JSONArrayBuilder{
             return fromJSONArray((JSONArray) object, useJsonConfig);
         }
         if (object instanceof Collection){
-            return fromCollection((Collection) object, useJsonConfig);
+            return fromCollection((Collection<?>) object, useJsonConfig);
         }
 
         //---------------------------------------------------------------
@@ -97,8 +103,11 @@ public class JSONArrayBuilder{
         }
 
         //---------------------------------------------------------------
-        if (JSONUtils.isBoolean(object) || JSONUtils.isNumber(object) || JSONUtils.isNull(object) || JSONUtils.isString(object)
-                        || object instanceof JSON){
+        if (JSONUtils.isBoolean(object) || //
+                        JSONUtils.isNumber(object) || //
+                        JSONUtils.isNull(object) || //
+                        JSONUtils.isString(object) || //
+                        object instanceof JSON){
             return new JSONArray().addValue(object, useJsonConfig);
         }
 
@@ -209,7 +218,7 @@ public class JSONArrayBuilder{
     /**
      * Construct a JSONArray from an Enum value.
      *
-     * @param e
+     * @param enumType
      *            A enum value.
      * @param jsonConfig
      *            the json config
@@ -217,17 +226,15 @@ public class JSONArrayBuilder{
      * @throws JSONException
      *             If there is a syntax error.
      */
-    private static JSONArray fromArray(Enum e,JsonConfig jsonConfig){
-        return build(e, jsonConfig, new JsonHook<JSONArray>(){
+    private static JSONArray fromArray(Enum<?> enumType,JsonConfig jsonConfig){
+        return build(enumType, jsonConfig, new JsonHook<JSONArray>(){
 
             @Override
             public void handle(JSONArray jsonArray){
-                if (e != null){
-                    jsonArray.addValue(e, jsonConfig);
+                if (enumType != null){
+                    jsonArray.addValue(enumType, jsonConfig);
                 }else{
-                    JSONException jsone = new JSONException("enum value is null");
-                    CycleSetUtil.removeInstance(e);
-                    throw jsone;
+                    throw new JSONException("enum value is null");
                 }
             }
         });
@@ -271,8 +278,7 @@ public class JSONArrayBuilder{
             @Override
             public void handle(JSONArray jsonArray){
                 for (int i = 0; i < array.length; i++){
-                    Number n = array[i];
-                    jsonArray.addValue(n, jsonConfig);
+                    jsonArray.addValue(array[i], jsonConfig);
                 }
             }
         });
@@ -293,8 +299,7 @@ public class JSONArrayBuilder{
             @Override
             public void handle(JSONArray jsonArray){
                 for (int i = 0; i < array.length; i++){
-                    Number n = JSONUtils.transformNumber(array[i]);
-                    jsonArray.addValue(n, jsonConfig);
+                    jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
                 }
             }
         });
@@ -317,8 +322,7 @@ public class JSONArrayBuilder{
             @Override
             public void handle(JSONArray jsonArray){
                 for (int i = 0; i < array.length; i++){
-                    Object element = array[i];
-                    jsonArray.addValue(element, jsonConfig);
+                    jsonArray.addValue(array[i], jsonConfig);
                 }
             }
         });
@@ -339,8 +343,7 @@ public class JSONArrayBuilder{
             @Override
             public void handle(JSONArray jsonArray){
                 for (int i = 0; i < array.length; i++){
-                    Number n = JSONUtils.transformNumber(array[i]);
-                    jsonArray.addValue(n, jsonConfig);
+                    jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
                 }
             }
         });
@@ -355,19 +358,13 @@ public class JSONArrayBuilder{
      *            the json config
      * @return the JSON array
      */
-    static JSONArray fromCollection(Collection collection,JsonConfig jsonConfig){
+    static JSONArray fromCollection(Collection<?> collection,JsonConfig jsonConfig){
         return build(collection, jsonConfig, new JsonHook<JSONArray>(){
 
             @Override
             public void handle(JSONArray jsonArray){
-                try{
-                    for (Iterator elements = collection.iterator(); elements.hasNext();){
-                        Object element = elements.next();
-                        jsonArray.addValue(element, jsonConfig);
-                    }
-                }catch (Exception e){
-                    CycleSetUtil.removeInstance(collection);
-                    throw new JSONException("", e);
+                for (Object element : collection){
+                    jsonArray.addValue(element, jsonConfig);
                 }
             }
         });

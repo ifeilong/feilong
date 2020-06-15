@@ -230,7 +230,7 @@ public final class JsonHelper{
      * @return the JSON array
      */
     static JSONArray toJSONArray(Object obj,JsonConfig useJsonConfig){
-        return JSONArrayBuilder.fromObject(obj, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
+        return JSONArrayBuilder.build(obj, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
     }
 
     //---------------------------------------------------------------

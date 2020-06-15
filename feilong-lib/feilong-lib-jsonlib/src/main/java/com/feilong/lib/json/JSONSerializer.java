@@ -114,7 +114,7 @@ public class JSONSerializer{
             return toJSON((String) object, jsonConfig);
         }
         if (JSONUtils.isArray(object)){
-            return JSONArrayBuilder.fromObject(object, jsonConfig);
+            return JSONArrayBuilder.build(object, jsonConfig);
         }
         //---------------------------------------------------------------
         try{
@@ -123,7 +123,7 @@ public class JSONSerializer{
             if (object instanceof JSONTokener){
                 ((JSONTokener) object).reset();
             }
-            return JSONArrayBuilder.fromObject(object, jsonConfig);
+            return JSONArrayBuilder.build(object, jsonConfig);
         }
     }
 
@@ -140,7 +140,7 @@ public class JSONSerializer{
      */
     private static JSON toJSON(String string,JsonConfig jsonConfig){
         if (string.startsWith(OBJECT_START)){
-            return JSONArrayBuilder.fromObject(string, jsonConfig);
+            return JSONArrayBuilder.build(string, jsonConfig);
         }
         if (string.startsWith(ARRAY_START)){
             return JSONObjectBuilder.build(string, jsonConfig);

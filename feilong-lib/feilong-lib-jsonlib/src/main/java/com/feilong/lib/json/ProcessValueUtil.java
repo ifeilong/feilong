@@ -129,7 +129,7 @@ public class ProcessValueUtil{
             return JSONSerializer.toJSON(value, jsonConfig);
         }
         if (JSONUtils.isArray(value)){
-            return JSONArrayBuilder.fromObject(value, jsonConfig);
+            return JSONArrayBuilder.build(value, jsonConfig);
         }
 
         //---------------------------------------------------------------
