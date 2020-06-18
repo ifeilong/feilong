@@ -153,7 +153,7 @@ public class ConvertUtilsBean{
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private final WeakFastHashMap<Class<?>, Converter> converters = new WeakFastHashMap<Class<?>, Converter>();
+    private final WeakFastHashMap<Class<?>, Converter> converters = new WeakFastHashMap<>();
 
     // ------------------------------------------------------- Constructors
 

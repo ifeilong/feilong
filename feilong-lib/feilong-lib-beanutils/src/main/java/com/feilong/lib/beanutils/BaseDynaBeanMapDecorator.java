@@ -186,11 +186,11 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object>{
     @Override
     public Set<Map.Entry<K, Object>> entrySet(){
         final DynaProperty[] properties = getDynaProperties();
-        final Set<Map.Entry<K, Object>> set = new HashSet<Map.Entry<K, Object>>(properties.length);
+        final Set<Map.Entry<K, Object>> set = new HashSet<>(properties.length);
         for (DynaProperty propertie : properties){
             final K key = convertKey(propertie.getName());
             final Object value = getDynaBean().get(propertie.getName());
-            set.add(new MapEntry<K>(key, value));
+            set.add(new MapEntry<>(key, value));
         }
         return Collections.unmodifiableSet(set);
     }
@@ -243,7 +243,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object>{
 
         // Create a Set of the keys
         final DynaProperty[] properties = getDynaProperties();
-        Set<K> set = new HashSet<K>(properties.length);
+        Set<K> set = new HashSet<>(properties.length);
         for (DynaProperty propertie : properties){
             set.add(convertKey(propertie.getName()));
         }
@@ -335,7 +335,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object>{
     @Override
     public Collection<Object> values(){
         final DynaProperty[] properties = getDynaProperties();
-        final List<Object> values = new ArrayList<Object>(properties.length);
+        final List<Object> values = new ArrayList<>(properties.length);
         for (DynaProperty propertie : properties){
             final String key = propertie.getName();
             final Object value = getDynaBean().get(key);

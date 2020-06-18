@@ -74,14 +74,19 @@ import java.util.Set;
 public class FastHashMap extends HashMap{
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = 8130980765901286848L;
+
+    /**
      * The underlying map we are managing.
      */
-    protected HashMap map  = null;
+    protected HashMap         map              = null;
 
     /**
      * Are we currently operating in "fast" mode?
      */
-    protected boolean fast = false;
+    protected boolean         fast             = false;
 
     // Constructors
     // ----------------------------------------------------------------------
@@ -630,8 +635,9 @@ public class FastHashMap extends HashMap{
 
         @Override
         public boolean equals(Object o){
-            if (o == this)
+            if (o == this){
                 return true;
+            }
             if (fast){
                 return get(map).equals(o);
             }else{

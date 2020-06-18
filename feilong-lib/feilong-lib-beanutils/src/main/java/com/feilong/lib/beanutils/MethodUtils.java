@@ -932,16 +932,16 @@ public class MethodUtils{
 
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++){
+            for (Class<?> interface1 : interfaces){
 
                 // Is this interface public?
-                if (!Modifier.isPublic(interfaces[i].getModifiers())){
+                if (!Modifier.isPublic(interface1.getModifiers())){
                     continue;
                 }
 
                 // Does the method exist on this interface?
                 try{
-                    method = interfaces[i].getDeclaredMethod(methodName, parameterTypes);
+                    method = interface1.getDeclaredMethod(methodName, parameterTypes);
                 }catch (final NoSuchMethodException e){
                     /*
                      * Swallow, if no method is found after the loop then this
@@ -953,7 +953,7 @@ public class MethodUtils{
                 }
 
                 // Recursively check our parent interfaces
-                method = getAccessibleMethodFromInterfaceNest(interfaces[i], methodName, parameterTypes);
+                method = getAccessibleMethodFromInterfaceNest(interface1, methodName, parameterTypes);
                 if (method != null){
                     return method;
                 }
@@ -1363,7 +1363,7 @@ public class MethodUtils{
     private static void cacheMethod(final MethodDescriptor md,final Method method){
         if (CACHE_METHODS){
             if (method != null){
-                cache.put(md, new WeakReference<Method>(method));
+                cache.put(md, new WeakReference<>(method));
             }
         }
     }

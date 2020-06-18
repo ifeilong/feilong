@@ -118,7 +118,7 @@ import java.util.WeakHashMap;
  */
 public class ContextClassLoaderLocal<T> {
 
-    private final Map<ClassLoader, T> valueByClassLoader     = new WeakHashMap<ClassLoader, T>();
+    private final Map<ClassLoader, T> valueByClassLoader     = new WeakHashMap<>();
 
     private boolean                   globalValueInitialized = false;
 

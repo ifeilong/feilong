@@ -61,7 +61,7 @@ public class WrapDynaClass implements DynaClass{
      */
     private WrapDynaClass(final Class<?> beanClass, final PropertyUtilsBean propUtils){
 
-        this.beanClassRef = new SoftReference<Class<?>>(beanClass);
+        this.beanClassRef = new SoftReference<>(beanClass);
         this.beanClassName = beanClass.getName();
         propertyUtilsBean = propUtils;
         introspect();
@@ -93,7 +93,7 @@ public class WrapDynaClass implements DynaClass{
      * property name. Individual descriptor instances will be the same
      * instances as those in the <code>descriptors</code> list.
      */
-    protected HashMap<String, PropertyDescriptor>                              descriptorsMap    = new HashMap<String, PropertyDescriptor>();
+    protected HashMap<String, PropertyDescriptor>                              descriptorsMap    = new HashMap<>();
 
     /**
      * The set of dynamic properties that are part of this DynaClass.
@@ -105,7 +105,7 @@ public class WrapDynaClass implements DynaClass{
      * keyed by the property name. Individual descriptor instances will
      * be the same instances as those in the <code>properties</code> list.
      */
-    protected HashMap<String, DynaProperty>                                    propertiesMap     = new HashMap<String, DynaProperty>();
+    protected HashMap<String, DynaProperty>                                    propertiesMap     = new HashMap<>();
 
     // ------------------------------------------------------- Static Variables
 
@@ -113,7 +113,7 @@ public class WrapDynaClass implements DynaClass{
 
                                                                                                      @Override
                                                                                                      protected Map<CacheKey, WrapDynaClass> initialValue(){
-                                                                                                         return new WeakHashMap<CacheKey, WrapDynaClass>();
+                                                                                                         return new WeakHashMap<>();
                                                                                                      }
                                                                                                  };
 
@@ -330,7 +330,7 @@ public class WrapDynaClass implements DynaClass{
         @SuppressWarnings("deprecation")
         Map<?, ?> mappeds = PropertyUtils.getMappedPropertyDescriptors(beanClass);
         if (mappeds == null){
-            mappeds = new HashMap<Object, Object>();
+            mappeds = new HashMap<>();
         }
 
         // Construct corresponding DynaProperty information
