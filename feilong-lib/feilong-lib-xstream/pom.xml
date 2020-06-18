@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-lib</artifactId>
-		<version>3.0.6</version>
+		<version>3.0.7</version>
 	</parent>
 	<artifactId>feilong-lib-xstream</artifactId>
 
