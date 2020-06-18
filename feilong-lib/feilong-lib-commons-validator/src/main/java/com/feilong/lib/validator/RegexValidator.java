@@ -123,8 +123,8 @@ public class RegexValidator implements Serializable{
         if (value == null){
             return false;
         }
-        for (int i = 0; i < patterns.length; i++){
-            if (patterns[i].matcher(value).matches()){
+        for (Pattern pattern : patterns){
+            if (pattern.matcher(value).matches()){
                 return true;
             }
         }
@@ -144,8 +144,8 @@ public class RegexValidator implements Serializable{
         if (value == null){
             return null;
         }
-        for (int i = 0; i < patterns.length; i++){
-            Matcher matcher = patterns[i].matcher(value);
+        for (Pattern pattern : patterns){
+            Matcher matcher = pattern.matcher(value);
             if (matcher.matches()){
                 int count = matcher.groupCount();
                 String[] groups = new String[count];
