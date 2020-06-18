@@ -29,7 +29,7 @@ import java.util.zip.ZipEntry;
  *
  * @since 1.5
  */
-public enum ZipMethod {
+public enum ZipMethod{
 
     /**
      * Compression method 0 for uncompressed entries.
@@ -131,7 +131,6 @@ public enum ZipMethod {
      */
     LZMA(14),
 
-
     /**
      * Compression Method 95 for XZ.
      *
@@ -160,7 +159,6 @@ public enum ZipMethod {
      */
     PPMD(98),
 
-
     /**
      * Compression Method 99 for AES encryption.
      *
@@ -173,28 +171,28 @@ public enum ZipMethod {
      */
     UNKNOWN();
 
-    static final int UNKNOWN_CODE = -1;
+    static final int                             UNKNOWN_CODE = -1;
 
-    private final int code;
+    private final int                            code;
 
     private static final Map<Integer, ZipMethod> codeToEnum;
 
-    static {
+    static{
         final Map<Integer, ZipMethod> cte = new HashMap<>();
-        for (final ZipMethod method : values()) {
+        for (final ZipMethod method : values()){
             cte.put(method.getCode(), method);
         }
         codeToEnum = Collections.unmodifiableMap(cte);
     }
 
-    private ZipMethod() {
+    private ZipMethod(){
         this(UNKNOWN_CODE);
     }
 
     /**
      * private constructor for enum style class.
      */
-    ZipMethod(final int code) {
+    ZipMethod(final int code){
         this.code = code;
     }
 
@@ -205,19 +203,20 @@ public enum ZipMethod {
      *
      * @return an integer code for the method
      */
-    public int getCode() {
+    public int getCode(){
         return code;
     }
-
 
     /**
      * returns the {@link ZipMethod} for the given code or null if the
      * method is not known.
-     * @param code the code
+     * 
+     * @param code
+     *            the code
      * @return the {@link ZipMethod} for the given code or null if the
-     * method is not known.
+     *         method is not known.
      */
-    public static ZipMethod getMethodByCode(final int code) {
+    public static ZipMethod getMethodByCode(final int code){
         return codeToEnum.get(code);
     }
 }

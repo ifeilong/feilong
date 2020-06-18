@@ -31,9 +31,9 @@ import com.feilong.lib.compress.utils.BitInputStream;
  *
  * @since 1.7
  */
-class BitStream extends BitInputStream {
+class BitStream extends BitInputStream{
 
-    BitStream(final InputStream in) {
+    BitStream(final InputStream in){
         super(in, ByteOrder.LITTLE_ENDIAN);
     }
 
@@ -42,24 +42,25 @@ class BitStream extends BitInputStream {
      *
      * @return The next bit (0 or 1) or -1 if the end of the stream has been reached
      */
-    int nextBit() throws IOException {
+    int nextBit() throws IOException{
         return (int) readBits(1);
     }
 
     /**
      * Returns the integer value formed by the n next bits (up to 8 bits).
      *
-     * @param n the number of bits read (up to 8)
+     * @param n
+     *            the number of bits read (up to 8)
      * @return The value formed by the n bits, or -1 if the end of the stream has been reached
      */
-    long nextBits(final int n) throws IOException {
-        if (n < 0 || n > 8) {
+    long nextBits(final int n) throws IOException{
+        if (n < 0 || n > 8){
             throw new IOException("Trying to read " + n + " bits, at most 8 are allowed");
         }
         return readBits(n);
     }
 
-    int nextByte() throws IOException {
+    int nextByte() throws IOException{
         return (int) readBits(8);
     }
 }

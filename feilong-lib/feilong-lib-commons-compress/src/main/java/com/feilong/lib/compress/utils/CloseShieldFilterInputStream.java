@@ -25,16 +25,17 @@ import java.io.InputStream;
 
 /**
  * Re-implements {@link FilterInputStream#close()} to do nothing.
+ * 
  * @since 1.14
  */
-public class CloseShieldFilterInputStream extends FilterInputStream {
+public class CloseShieldFilterInputStream extends FilterInputStream{
 
-    public CloseShieldFilterInputStream(InputStream in) {
+    public CloseShieldFilterInputStream(InputStream in){
         super(in);
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         // NO IMPLEMENTATION.
     }
 

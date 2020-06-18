@@ -23,16 +23,20 @@ import java.util.zip.ZipException;
 /**
  * General format of extra field data.
  *
- * <p>Extra fields usually appear twice per file, once in the local
- * file data and once in the central directory.  Usually they are the
- * same, but they don't have to be.  {@link
+ * <p>
+ * Extra fields usually appear twice per file, once in the local
+ * file data and once in the central directory. Usually they are the
+ * same, but they don't have to be. {@link
  * java.util.zip.ZipOutputStream java.util.zip.ZipOutputStream} will
- * only use the local file data in both places.</p>
+ * only use the local file data in both places.
+ * </p>
  *
  */
-public interface ZipExtraField {
+public interface ZipExtraField{
+
     /**
      * Size of an extra field field header (id + length).
+     * 
      * @since 1.14
      */
     int EXTRAFIELD_HEADER_SIZE = 4;
@@ -47,6 +51,7 @@ public interface ZipExtraField {
     /**
      * Length of the extra field in the local file data - without
      * Header-ID or length specifier.
+     * 
      * @return the length of the field in the local file data
      */
     ZipShort getLocalFileDataLength();
@@ -54,6 +59,7 @@ public interface ZipExtraField {
     /**
      * Length of the extra field in the central directory - without
      * Header-ID or length specifier.
+     * 
      * @return the length of the field in the central directory
      */
     ZipShort getCentralDirectoryLength();
@@ -61,6 +67,7 @@ public interface ZipExtraField {
     /**
      * The actual data to put into local file data - without Header-ID
      * or length specifier.
+     * 
      * @return the data
      */
     byte[] getLocalFileDataData();
@@ -68,6 +75,7 @@ public interface ZipExtraField {
     /**
      * The actual data to put into central directory - without Header-ID or
      * length specifier.
+     * 
      * @return the data
      */
     byte[] getCentralDirectoryData();
@@ -75,22 +83,28 @@ public interface ZipExtraField {
     /**
      * Populate data from this array as if it was in local file data.
      *
-     * @param buffer the buffer to read data from
-     * @param offset offset into buffer to read data
-     * @param length the length of data
-     * @throws ZipException on error
+     * @param buffer
+     *            the buffer to read data from
+     * @param offset
+     *            offset into buffer to read data
+     * @param length
+     *            the length of data
+     * @throws ZipException
+     *             on error
      */
-    void parseFromLocalFileData(byte[] buffer, int offset, int length)
-        throws ZipException;
+    void parseFromLocalFileData(byte[] buffer,int offset,int length) throws ZipException;
 
     /**
      * Populate data from this array as if it was in central directory data.
      *
-     * @param buffer the buffer to read data from
-     * @param offset offset into buffer to read data
-     * @param length the length of data
-     * @throws ZipException on error
+     * @param buffer
+     *            the buffer to read data from
+     * @param offset
+     *            offset into buffer to read data
+     * @param length
+     *            the length of data
+     * @throws ZipException
+     *             on error
      */
-    void parseFromCentralDirectoryData(byte[] buffer, int offset, int length)
-        throws ZipException;
+    void parseFromCentralDirectoryData(byte[] buffer,int offset,int length) throws ZipException;
 }

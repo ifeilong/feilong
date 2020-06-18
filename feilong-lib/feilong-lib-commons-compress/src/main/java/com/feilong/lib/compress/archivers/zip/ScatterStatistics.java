@@ -16,40 +16,44 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- package com.feilong.lib.compress.archivers.zip;
+package com.feilong.lib.compress.archivers.zip;
 
 /**
  * Provides information about a scatter compression run.
  *
  * @since 1.10
  */
-public class ScatterStatistics {
+public class ScatterStatistics{
+
     private final long compressionElapsed;
+
     private final long mergingElapsed;
 
-    ScatterStatistics(final long compressionElapsed, final long mergingElapsed) {
+    ScatterStatistics(final long compressionElapsed, final long mergingElapsed){
         this.compressionElapsed = compressionElapsed;
         this.mergingElapsed = mergingElapsed;
     }
 
     /**
      * The number of milliseconds elapsed in the parallel compression phase
+     * 
      * @return The number of milliseconds elapsed
      */
-    public long getCompressionElapsed() {
+    public long getCompressionElapsed(){
         return compressionElapsed;
     }
 
     /**
      * The number of milliseconds elapsed in merging the results of the parallel compression, the IO phase
+     * 
      * @return The number of milliseconds elapsed
      */
-    public long getMergingElapsed() {
+    public long getMergingElapsed(){
         return mergingElapsed;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "compressionElapsed=" + compressionElapsed + "ms, mergingElapsed=" + mergingElapsed + "ms";
     }
 

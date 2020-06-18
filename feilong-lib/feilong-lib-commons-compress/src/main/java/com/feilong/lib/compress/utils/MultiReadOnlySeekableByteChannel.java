@@ -36,54 +36,60 @@ import java.util.Objects;
  * Read-Only Implementation of {@link SeekableByteChannel} that
  * concatenates a collection of other {@link SeekableByteChannel}s.
  *
- * <p>This is a lose port of <a
- * href="https://github.com/frugalmechanic/fm-common/blob/master/jvm/src/main/scala/fm/common/MultiReadOnlySeekableByteChannel.scala">MultiReadOnlySeekableByteChannel</a>
- * by Tim Underwood.</p>
+ * <p>
+ * This is a lose port of <a
+ * href=
+ * "https://github.com/frugalmechanic/fm-common/blob/master/jvm/src/main/scala/fm/common/MultiReadOnlySeekableByteChannel.scala">MultiReadOnlySeekableByteChannel</a>
+ * by Tim Underwood.
+ * </p>
  *
  * @since 1.19
  */
-public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
+public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel{
 
     private final List<SeekableByteChannel> channels;
-    private long globalPosition;
-    private int currentChannelIdx;
+
+    private long                            globalPosition;
+
+    private int                             currentChannelIdx;
 
     /**
      * Concatenates the given channels.
      *
-     * @param channels the channels to concatenate
-     * @throws NullPointerException if channels is null
+     * @param channels
+     *            the channels to concatenate
+     * @throws NullPointerException
+     *             if channels is null
      */
-    public MultiReadOnlySeekableByteChannel(List<SeekableByteChannel> channels) {
-        this.channels = Collections.unmodifiableList(new ArrayList<>(
-            Objects.requireNonNull(channels, "channels must not be null")));
+    public MultiReadOnlySeekableByteChannel(List<SeekableByteChannel> channels){
+        this.channels = Collections.unmodifiableList(new ArrayList<>(Objects.requireNonNull(channels, "channels must not be null")));
     }
 
     @Override
-    public synchronized int read(ByteBuffer dst) throws IOException {
-        if (!isOpen()) {
+    public synchronized int read(ByteBuffer dst) throws IOException{
+        if (!isOpen()){
             throw new ClosedChannelException();
         }
-        if (!dst.hasRemaining()) {
+        if (!dst.hasRemaining()){
             return 0;
         }
 
         int totalBytesRead = 0;
-        while (dst.hasRemaining() && currentChannelIdx < channels.size()) {
+        while (dst.hasRemaining() && currentChannelIdx < channels.size()){
             final SeekableByteChannel currentChannel = channels.get(currentChannelIdx);
             final int newBytesRead = currentChannel.read(dst);
-            if (newBytesRead == -1) {
+            if (newBytesRead == -1){
                 // EOF for this channel -- advance to next channel idx
                 currentChannelIdx += 1;
                 continue;
             }
-            if (currentChannel.position() >= currentChannel.size()) {
+            if (currentChannel.position() >= currentChannel.size()){
                 // we are at the end of the current channel
                 currentChannelIdx++;
             }
             totalBytesRead += newBytesRead;
         }
-        if (totalBytesRead > 0) {
+        if (totalBytesRead > 0){
             globalPosition += totalBytesRead;
             return totalBytesRead;
         }
@@ -91,26 +97,26 @@ public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         IOException first = null;
-        for (SeekableByteChannel ch : channels) {
-            try {
+        for (SeekableByteChannel ch : channels){
+            try{
                 ch.close();
-            } catch (IOException ex) {
-                if (first == null) {
+            }catch (IOException ex){
+                if (first == null){
                     first = ex;
                 }
             }
         }
-        if (first != null) {
+        if (first != null){
             throw new IOException("failed to close wrapped channel", first);
         }
     }
 
     @Override
-    public boolean isOpen() {
-        for (SeekableByteChannel ch : channels) {
-            if (!ch.isOpen()) {
+    public boolean isOpen(){
+        for (SeekableByteChannel ch : channels){
+            if (!ch.isOpen()){
                 return false;
             }
         }
@@ -120,29 +126,34 @@ public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
     /**
      * Returns this channel's position.
      *
-     * <p>This method violates the contract of {@link SeekableByteChannel#position()} as it will not throw any exception
+     * <p>
+     * This method violates the contract of {@link SeekableByteChannel#position()} as it will not throw any exception
      * when invoked on a closed channel. Instead it will return the position the channel had when close has been
-     * called.</p>
+     * called.
+     * </p>
      */
     @Override
-    public long position() {
+    public long position(){
         return globalPosition;
     }
 
     /**
      * set the position based on the given channel number and relative offset
      *
-     * @param channelNumber  the channel number
-     * @param relativeOffset the relative offset in the corresponding channel
+     * @param channelNumber
+     *            the channel number
+     * @param relativeOffset
+     *            the relative offset in the corresponding channel
      * @return global position of all channels as if they are a single channel
-     * @throws IOException if positioning fails
+     * @throws IOException
+     *             if positioning fails
      */
-    public synchronized SeekableByteChannel position(long channelNumber, long relativeOffset) throws IOException {
-        if (!isOpen()) {
+    public synchronized SeekableByteChannel position(long channelNumber,long relativeOffset) throws IOException{
+        if (!isOpen()){
             throw new ClosedChannelException();
         }
         long globalPosition = relativeOffset;
-        for (int i = 0; i < channelNumber; i++) {
+        for (int i = 0; i < channelNumber; i++){
             globalPosition += channels.get(i).size();
         }
 
@@ -150,39 +161,41 @@ public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
     }
 
     @Override
-    public long size() throws IOException {
-        if (!isOpen()) {
+    public long size() throws IOException{
+        if (!isOpen()){
             throw new ClosedChannelException();
         }
         long acc = 0;
-        for (SeekableByteChannel ch : channels) {
+        for (SeekableByteChannel ch : channels){
             acc += ch.size();
         }
         return acc;
     }
 
     /**
-     * @throws NonWritableChannelException since this implementation is read-only.
+     * @throws NonWritableChannelException
+     *             since this implementation is read-only.
      */
     @Override
-    public SeekableByteChannel truncate(long size) {
+    public SeekableByteChannel truncate(long size){
         throw new NonWritableChannelException();
     }
 
     /**
-     * @throws NonWritableChannelException since this implementation is read-only.
+     * @throws NonWritableChannelException
+     *             since this implementation is read-only.
      */
     @Override
-    public int write(ByteBuffer src) {
+    public int write(ByteBuffer src){
         throw new NonWritableChannelException();
     }
 
     @Override
-    public synchronized SeekableByteChannel position(long newPosition) throws IOException {
-        if (newPosition < 0) {
+    public synchronized SeekableByteChannel position(long newPosition) throws IOException{
+        if (newPosition < 0){
             throw new IllegalArgumentException("Negative position: " + newPosition);
         }
-        if (!isOpen()) {
+        if (!isOpen()){
             throw new ClosedChannelException();
         }
 
@@ -190,22 +203,22 @@ public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
 
         long pos = newPosition;
 
-        for (int i = 0; i < channels.size(); i++) {
+        for (int i = 0; i < channels.size(); i++){
             final SeekableByteChannel currentChannel = channels.get(i);
             final long size = currentChannel.size();
 
             final long newChannelPos;
-            if (pos == -1L) {
+            if (pos == -1L){
                 // Position is already set for the correct channel,
                 // the rest of the channels get reset to 0
                 newChannelPos = 0;
-            } else if (pos <= size) {
+            }else if (pos <= size){
                 // This channel is where we want to be
                 currentChannelIdx = i;
                 long tmp = pos;
                 pos = -1L; // Mark pos as already being set
                 newChannelPos = tmp;
-            } else {
+            }else{
                 // newPosition is past this channel.  Set channel
                 // position to the end and substract channel size from
                 // pos
@@ -221,12 +234,14 @@ public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
     /**
      * Concatenates the given channels.
      *
-     * @param channels the channels to concatenate
-     * @throws NullPointerException if channels is null
+     * @param channels
+     *            the channels to concatenate
+     * @throws NullPointerException
+     *             if channels is null
      * @return SeekableByteChannel that concatenates all provided channels
      */
-    public static SeekableByteChannel forSeekableByteChannels(SeekableByteChannel... channels) {
-        if (Objects.requireNonNull(channels, "channels must not be null").length == 1) {
+    public static SeekableByteChannel forSeekableByteChannels(SeekableByteChannel...channels){
+        if (Objects.requireNonNull(channels, "channels must not be null").length == 1){
             return channels[0];
         }
         return new MultiReadOnlySeekableByteChannel(Arrays.asList(channels));
@@ -235,17 +250,20 @@ public class MultiReadOnlySeekableByteChannel implements SeekableByteChannel {
     /**
      * Concatenates the given files.
      *
-     * @param files the files to concatenate
-     * @throws NullPointerException if files is null
-     * @throws IOException if opening a channel for one of the files fails
+     * @param files
+     *            the files to concatenate
+     * @throws NullPointerException
+     *             if files is null
+     * @throws IOException
+     *             if opening a channel for one of the files fails
      * @return SeekableByteChannel that concatenates all provided files
      */
-    public static SeekableByteChannel forFiles(File... files) throws IOException {
+    public static SeekableByteChannel forFiles(File...files) throws IOException{
         List<SeekableByteChannel> channels = new ArrayList<>();
-        for (File f : Objects.requireNonNull(files, "files must not be null")) {
+        for (File f : Objects.requireNonNull(files, "files must not be null")){
             channels.add(Files.newByteChannel(f.toPath(), StandardOpenOption.READ));
         }
-        if (channels.size() == 1) {
+        if (channels.size() == 1){
             return channels.get(0);
         }
         return new MultiReadOnlySeekableByteChannel(channels);

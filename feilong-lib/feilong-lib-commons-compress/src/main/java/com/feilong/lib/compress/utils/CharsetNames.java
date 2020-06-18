@@ -45,13 +45,16 @@ package com.feilong.lib.compress.utils;
  * accepted on input, big-endian used on output.)</dd>
  * </dl>
  *
- * <p>This perhaps would best belong in the [lang] project. Even if a similar interface is defined in [lang], it is not
- * foreseen that [compress] would be made to depend on [lang].</p>
+ * <p>
+ * This perhaps would best belong in the [lang] project. Even if a similar interface is defined in [lang], it is not
+ * foreseen that [compress] would be made to depend on [lang].
+ * </p>
  *
  * @see <a href="https://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
  * @since 1.4
  */
-public class CharsetNames {
+public class CharsetNames{
+
     /**
      * CharEncodingISO Latin Alphabet No. 1, a.k.a. ISO-LATIN-1.
      * <p>
@@ -72,7 +75,7 @@ public class CharsetNames {
      *
      * @see <a href="https://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      */
-    public static final String US_ASCII = "US-ASCII";
+    public static final String US_ASCII   = "US-ASCII";
 
     /**
      * <p>
@@ -85,7 +88,7 @@ public class CharsetNames {
      *
      * @see <a href="https://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      */
-    public static final String UTF_16 = "UTF-16";
+    public static final String UTF_16     = "UTF-16";
 
     /**
      * <p>
@@ -97,7 +100,7 @@ public class CharsetNames {
      *
      * @see <a href="https://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      */
-    public static final String UTF_16BE = "UTF-16BE";
+    public static final String UTF_16BE   = "UTF-16BE";
 
     /**
      * <p>
@@ -109,7 +112,7 @@ public class CharsetNames {
      *
      * @see <a href="https://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      */
-    public static final String UTF_16LE = "UTF-16LE";
+    public static final String UTF_16LE   = "UTF-16LE";
 
     /**
      * <p>
@@ -121,5 +124,5 @@ public class CharsetNames {
      *
      * @see <a href="https://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      */
-    public static final String UTF_8 = "UTF-8";
+    public static final String UTF_8      = "UTF-8";
 }

@@ -950,30 +950,32 @@ public class ZipFile implements Closeable{
      */
     static final int         MIN_EOCD_SIZE                          = /* end of central dir signature */ WORD
                     /* number of this disk */ + SHORT
-                                                                                                                     /*
-                                                                                                                      * number of the disk
-                                                                                                                      * with the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * number of the
+                                                                                                                         * disk
+                                                                                                                         * with the
+                                                                                                                         */
                     /* start of the central directory */ + SHORT
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in
+                                                                                                                         */
                     /* the central dir on this disk */ + SHORT
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in
+                                                                                                                         */
                     /* the central dir */ + SHORT
                     /* size of the central directory */ + WORD
-                                                                                                                     /*
-                                                                                                                      * offset of start of
-                                                                                                                      * central
-                                                                                                                      */
-                                                                                                                     /*
-                                                                                                                      * directory with
-                                                                                                                      * respect to
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * offset of start
+                                                                                                                         * of
+                                                                                                                         * central
+                                                                                                                         */
+                                                                                                                        /*
+                                                                                                                         * directory with
+                                                                                                                         * respect to
+                                                                                                                         */
                     /* the starting disk number */ + WORD
                     /* zipfile comment length */ + SHORT;
 
@@ -992,20 +994,21 @@ public class ZipFile implements Closeable{
      */
     private static final int CFD_LOCATOR_OFFSET                     = /* end of central dir signature */ WORD
                     /* number of this disk */ + SHORT
-                                                                                                                     /*
-                                                                                                                      * number of the disk
-                                                                                                                      * with the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * number of the
+                                                                                                                         * disk
+                                                                                                                         * with the
+                                                                                                                         */
                     /* start of the central directory */ + SHORT
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in
+                                                                                                                         */
                     /* the central dir on this disk */ + SHORT
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in
+                                                                                                                         */
                     /* the central dir */ + SHORT
                     /* size of the central directory */ + WORD;
 
@@ -1025,15 +1028,15 @@ public class ZipFile implements Closeable{
      * of the central directory".
      */
     private static final int CFD_LOCATOR_RELATIVE_OFFSET            =
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in
+                                                                                                                         */
                     /* the central dir on this disk */ +SHORT
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in
+                                                                                                                         */
                                     /* the central dir */ + SHORT
                                     /* size of the central directory */ + WORD;
 
@@ -1043,19 +1046,22 @@ public class ZipFile implements Closeable{
      * record" if one is present at all.
      */
     private static final int ZIP64_EOCDL_LENGTH                     = /* zip64 end of central dir locator sig */ WORD
-                                                                                                                     /*
-                                                                                                                      * number of the disk
-                                                                                                                      * with the start
-                                                                                                                      */
-                                                                                                                     /*
-                                                                                                                      * start of the zip64
-                                                                                                                      * end of
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * number of the
+                                                                                                                         * disk
+                                                                                                                         * with the start
+                                                                                                                         */
+                                                                                                                        /*
+                                                                                                                         * start of the
+                                                                                                                         * zip64
+                                                                                                                         * end of
+                                                                                                                         */
                     /* central directory */ + WORD
-                                                                                                                     /*
-                                                                                                                      * relative offset of
-                                                                                                                      * the zip64
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * relative offset
+                                                                                                                         * of
+                                                                                                                         * the zip64
+                                                                                                                         */
                     /* end of central directory record */ + DWORD
                     /* total number of disks */ + WORD;
 
@@ -1066,14 +1072,16 @@ public class ZipFile implements Closeable{
      * central directory locator".
      */
     private static final int ZIP64_EOCDL_LOCATOR_OFFSET             = /* zip64 end of central dir locator sig */ WORD
-                                                                                                                     /*
-                                                                                                                      * number of the disk
-                                                                                                                      * with the start
-                                                                                                                      */
-                                                                                                                     /*
-                                                                                                                      * start of the zip64
-                                                                                                                      * end of
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * number of the
+                                                                                                                         * disk
+                                                                                                                         * with the start
+                                                                                                                         */
+                                                                                                                        /*
+                                                                                                                         * start of the
+                                                                                                                         * zip64
+                                                                                                                         * end of
+                                                                                                                         */
                     /* central directory */ + WORD;
 
     /**
@@ -1083,33 +1091,36 @@ public class ZipFile implements Closeable{
      * central directory record".
      */
     private static final int ZIP64_EOCD_CFD_LOCATOR_OFFSET          =
-                                                                                                                     /*
-                                                                                                                      * zip64 end of central
-                                                                                                                      * dir
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * zip64 end of
+                                                                                                                         * central
+                                                                                                                         * dir
+                                                                                                                         */
                     /* signature */ WORD
-                                                                                                                     /*
-                                                                                                                      * size of zip64 end of
-                                                                                                                      * central
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * size of zip64 end
+                                                                                                                         * of
+                                                                                                                         * central
+                                                                                                                         */
                                     /* directory record */ + DWORD
                                     /* version made by */ + SHORT
                                     /* version needed to extract */ + SHORT
                                     /* number of this disk */ + WORD
-                                                                                                                     /*
-                                                                                                                      * number of the disk
-                                                                                                                      * with the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * number of the
+                                                                                                                         * disk
+                                                                                                                         * with the
+                                                                                                                         */
                                     /* start of the central directory */ + WORD
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in the
+                                                                                                                         */
                                     /* central directory on this disk */ + DWORD
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in the
+                                                                                                                         */
                                     /* central directory */ + DWORD
                                     /* size of the central directory */ + DWORD;
 
@@ -1120,15 +1131,17 @@ public class ZipFile implements Closeable{
      * central directory record".
      */
     private static final int ZIP64_EOCD_CFD_DISK_OFFSET             =
-                                                                                                                     /*
-                                                                                                                      * zip64 end of central
-                                                                                                                      * dir
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * zip64 end of
+                                                                                                                         * central
+                                                                                                                         * dir
+                                                                                                                         */
                     /* signature */ WORD
-                                                                                                                     /*
-                                                                                                                      * size of zip64 end of
-                                                                                                                      * central
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * size of zip64 end
+                                                                                                                         * of
+                                                                                                                         * central
+                                                                                                                         */
                                     /* directory record */ + DWORD
                                     /* version made by */ + SHORT
                                     /* version needed to extract */ + SHORT
@@ -1141,15 +1154,15 @@ public class ZipFile implements Closeable{
      * with the start of the central directory".
      */
     private static final int ZIP64_EOCD_CFD_LOCATOR_RELATIVE_OFFSET =
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in the
+                                                                                                                         */
                     /* central directory on this disk */ DWORD
-                                                                                                                     /*
-                                                                                                                      * total number of
-                                                                                                                      * entries in the
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * total number of
+                                                                                                                         * entries in the
+                                                                                                                         */
                                     /* central directory */ + DWORD
                                     /* size of the central directory */ + DWORD;
 
@@ -1549,31 +1562,27 @@ public class ZipFile implements Closeable{
      *
      * @since 1.1
      */
-    private final Comparator<ZipArchiveEntry> offsetComparator = new Comparator<ZipArchiveEntry>(){
-
-        @Override
-        public int compare(final ZipArchiveEntry e1,final ZipArchiveEntry e2){
-            if (e1 == e2){
-                return 0;
-            }
-
-            final Entry ent1 = e1 instanceof Entry ? (Entry) e1 : null;
-            final Entry ent2 = e2 instanceof Entry ? (Entry) e2 : null;
-            if (ent1 == null){
-                return 1;
-            }
-            if (ent2 == null){
-                return -1;
-            }
-
-            // disk number is prior to relative offset
-            final long diskNumberStartVal = ent1.getDiskNumberStart() - ent2.getDiskNumberStart();
-            if (diskNumberStartVal != 0){
-                return diskNumberStartVal < 0 ? -1 : +1;
-            }
-            final long val = (ent1.getLocalHeaderOffset() - ent2.getLocalHeaderOffset());
-            return val == 0 ? 0 : val < 0 ? -1 : +1;
+    private final Comparator<ZipArchiveEntry> offsetComparator = (e1,e2) -> {
+        if (e1 == e2){
+            return 0;
         }
+
+        final Entry ent1 = e1 instanceof Entry ? (Entry) e1 : null;
+        final Entry ent2 = e2 instanceof Entry ? (Entry) e2 : null;
+        if (ent1 == null){
+            return 1;
+        }
+        if (ent2 == null){
+            return -1;
+        }
+
+        // disk number is prior to relative offset
+        final long diskNumberStartVal = ent1.getDiskNumberStart() - ent2.getDiskNumberStart();
+        if (diskNumberStartVal != 0){
+            return diskNumberStartVal < 0 ? -1 : +1;
+        }
+        final long val = (ent1.getLocalHeaderOffset() - ent2.getLocalHeaderOffset());
+        return val == 0 ? 0 : val < 0 ? -1 : +1;
     };
 
     /**

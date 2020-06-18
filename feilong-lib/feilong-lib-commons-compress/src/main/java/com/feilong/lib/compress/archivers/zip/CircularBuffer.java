@@ -25,21 +25,21 @@ package com.feilong.lib.compress.archivers.zip;
  * @author Emmanuel Bourg
  * @since 1.7
  */
-class CircularBuffer {
+class CircularBuffer{
 
     /** Size of the buffer */
-    private final int size;
+    private final int    size;
 
     /** The buffer */
     private final byte[] buffer;
 
     /** Index of the next data to be read from the buffer */
-    private int readIndex;
+    private int          readIndex;
 
     /** Index of the next data written in the buffer */
-    private int writeIndex;
+    private int          writeIndex;
 
-    CircularBuffer(final int size) {
+    CircularBuffer(final int size){
         this.size = size;
         buffer = new byte[size];
     }
@@ -47,14 +47,14 @@ class CircularBuffer {
     /**
      * Tells if a new byte can be read from the buffer.
      */
-    public boolean available() {
+    public boolean available(){
         return readIndex != writeIndex;
     }
 
     /**
      * Writes a byte to the buffer.
      */
-    public void put(final int value) {
+    public void put(final int value){
         buffer[writeIndex] = (byte) value;
         writeIndex = (writeIndex + 1) % size;
     }
@@ -62,8 +62,8 @@ class CircularBuffer {
     /**
      * Reads a byte from the buffer.
      */
-    public int get() {
-        if (available()) {
+    public int get(){
+        if (available()){
             final int value = buffer[readIndex];
             readIndex = (readIndex + 1) % size;
             return value & 0xFF;
@@ -74,13 +74,15 @@ class CircularBuffer {
     /**
      * Copy a previous interval in the buffer to the current position.
      *
-     * @param distance the distance from the current write position
-     * @param length   the number of bytes to copy
+     * @param distance
+     *            the distance from the current write position
+     * @param length
+     *            the number of bytes to copy
      */
-    public void copy(final int distance, final int length) {
+    public void copy(final int distance,final int length){
         final int pos1 = writeIndex - distance;
         final int pos2 = pos1 + length;
-        for (int i = pos1; i < pos2; i++) {
+        for (int i = pos1; i < pos2; i++){
             buffer[writeIndex] = buffer[(i + size) % size];
             writeIndex = (writeIndex + 1) % size;
         }

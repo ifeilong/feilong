@@ -23,13 +23,17 @@ import java.util.zip.ZipException;
 /**
  * X.509 Certificate ID and Signature for central directory (0x0016).
  *
- * <p>This field contains the information about which certificate in the PKCS#7
+ * <p>
+ * This field contains the information about which certificate in the PKCS#7
  * store was used to sign the central directory structure. When the Central
  * Directory Encryption feature is enabled for a ZIP file, this record will
  * appear in the Archive Extra Data Record, otherwise it will appear in the
- * first central directory record.</p>
+ * first central directory record.
+ * </p>
  *
- * <p>Note: all fields stored in Intel low-byte/high-byte order.</p>
+ * <p>
+ * Note: all fields stored in Intel low-byte/high-byte order.
+ * </p>
  *
  * <pre>
  *         Value     Size     Description
@@ -44,34 +48,36 @@ import java.util.zip.ZipException;
  * @NotThreadSafe
  * @since 1.11
  */
-public class X0016_CertificateIdForCentralDirectory extends PKWareExtraHeader {
+public class X0016_CertificateIdForCentralDirectory extends PKWareExtraHeader{
 
-    public X0016_CertificateIdForCentralDirectory() {
+    public X0016_CertificateIdForCentralDirectory(){
         super(new ZipShort(0x0016));
     }
 
-    private int rcount;
+    private int           rcount;
+
     private HashAlgorithm hashAlg;
 
     /**
      * Get record count.
+     * 
      * @return the record count
      */
-    public int getRecordCount() {
+    public int getRecordCount(){
         return rcount;
     }
 
     /**
      * Get hash algorithm.
+     * 
      * @return the hash algorithm
      */
-    public HashAlgorithm getHashAlgorithm() {
+    public HashAlgorithm getHashAlgorithm(){
         return hashAlg;
     }
 
     @Override
-    public void parseFromCentralDirectoryData(final byte[] data, final int offset, final int length)
-        throws ZipException {
+    public void parseFromCentralDirectoryData(final byte[] data,final int offset,final int length) throws ZipException{
         assertMinimalLength(4, length);
         // TODO: double check we really do not want to call super here
         this.rcount = ZipShort.getValue(data, offset);

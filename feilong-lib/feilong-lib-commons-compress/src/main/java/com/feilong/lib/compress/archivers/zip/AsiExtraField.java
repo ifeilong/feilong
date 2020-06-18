@@ -25,7 +25,10 @@ import java.util.zip.ZipException;
  * Adds Unix file permission and UID/GID fields as well as symbolic
  * link handling.
  *
- * <p>This class uses the ASi extra field in the format:</p>
+ * <p>
+ * This class uses the ASi extra field in the format:
+ * </p>
+ * 
  * <pre>
  *         Value         Size            Description
  *         -----         ----            -----------
@@ -38,107 +41,124 @@ import java.util.zip.ZipException;
  *         GID           Short           group ID
  *         (var.)        variable        symbolic link file name
  * </pre>
- * <p>taken from appnote.iz (Info-ZIP note, 981119) found at <a
- * href="ftp://ftp.uu.net/pub/archiving/zip/doc/">ftp://ftp.uu.net/pub/archiving/zip/doc/</a></p>
+ * <p>
+ * taken from appnote.iz (Info-ZIP note, 981119) found at <a
+ * href="ftp://ftp.uu.net/pub/archiving/zip/doc/">ftp://ftp.uu.net/pub/archiving/zip/doc/</a>
+ * </p>
  *
- * <p>Short is two bytes and Long is four bytes in big endian byte and
- * word order, device numbers are currently not supported.</p>
+ * <p>
+ * Short is two bytes and Long is four bytes in big endian byte and
+ * word order, device numbers are currently not supported.
+ * </p>
+ * 
  * @NotThreadSafe
  *
- * <p>Since the documentation this class is based upon doesn't mention
- * the character encoding of the file name at all, it is assumed that
- * it uses the current platform's default encoding.</p>
+ *                <p>
+ *                Since the documentation this class is based upon doesn't mention
+ *                the character encoding of the file name at all, it is assumed that
+ *                it uses the current platform's default encoding.
+ *                </p>
  */
-public class AsiExtraField implements ZipExtraField, UnixStat, Cloneable {
+public class AsiExtraField implements ZipExtraField,UnixStat,Cloneable{
 
     private static final ZipShort HEADER_ID = new ZipShort(0x756E);
-    private static final int      WORD = 4;
+
+    private static final int      WORD      = 4;
+
     /**
      * Standard Unix stat(2) file mode.
      */
-    private int mode = 0;
+    private int                   mode      = 0;
+
     /**
      * User ID.
      */
-    private int uid = 0;
+    private int                   uid       = 0;
+
     /**
      * Group ID.
      */
-    private int gid = 0;
+    private int                   gid       = 0;
+
     /**
      * File this entry points to, if it is a symbolic link.
      *
-     * <p>empty string - if entry is not a symbolic link.</p>
+     * <p>
+     * empty string - if entry is not a symbolic link.
+     * </p>
      */
-    private String link = "";
+    private String                link      = "";
+
     /**
      * Is this an entry for a directory?
      */
-    private boolean dirFlag = false;
+    private boolean               dirFlag   = false;
 
     /**
      * Instance used to calculate checksums.
      */
-    private CRC32 crc = new CRC32();
+    private CRC32                 crc       = new CRC32();
 
     /** Constructor for AsiExtraField. */
-    public AsiExtraField() {
+    public AsiExtraField(){
     }
 
     /**
      * The Header-ID.
+     * 
      * @return the value for the header id for this extrafield
      */
     @Override
-    public ZipShort getHeaderId() {
+    public ZipShort getHeaderId(){
         return HEADER_ID;
     }
 
     /**
      * Length of the extra field in the local file data - without
      * Header-ID or length specifier.
+     * 
      * @return a <code>ZipShort</code> for the length of the data of this extra field
      */
     @Override
-    public ZipShort getLocalFileDataLength() {
-        return new ZipShort(WORD         // CRC
-                          + 2         // Mode
-                          + WORD         // SizDev
-                          + 2         // UID
-                          + 2         // GID
-                          + getLinkedFile().getBytes().length);
-                          // Uses default charset - see class Javadoc
+    public ZipShort getLocalFileDataLength(){
+        return new ZipShort(
+                        WORD // CRC
+                                        + 2 // Mode
+                                        + WORD // SizDev
+                                        + 2 // UID
+                                        + 2 // GID
+                                        + getLinkedFile().getBytes().length);
+        // Uses default charset - see class Javadoc
     }
 
     /**
      * Delegate to local file data.
+     * 
      * @return the centralDirectory length
      */
     @Override
-    public ZipShort getCentralDirectoryLength() {
+    public ZipShort getCentralDirectoryLength(){
         return getLocalFileDataLength();
     }
 
     /**
      * The actual data to put into local file data - without Header-ID
      * or length specifier.
+     * 
      * @return get the data
      */
     @Override
-    public byte[] getLocalFileDataData() {
+    public byte[] getLocalFileDataData(){
         // CRC will be added later
         final byte[] data = new byte[getLocalFileDataLength().getValue() - WORD];
         System.arraycopy(ZipShort.getBytes(getMode()), 0, data, 0, 2);
 
         final byte[] linkArray = getLinkedFile().getBytes(); // Uses default charset - see class Javadoc
         // CheckStyle:MagicNumber OFF
-        System.arraycopy(ZipLong.getBytes(linkArray.length),
-                         0, data, 2, WORD);
+        System.arraycopy(ZipLong.getBytes(linkArray.length), 0, data, 2, WORD);
 
-        System.arraycopy(ZipShort.getBytes(getUserId()),
-                         0, data, 6, 2);
-        System.arraycopy(ZipShort.getBytes(getGroupId()),
-                         0, data, 8, 2);
+        System.arraycopy(ZipShort.getBytes(getUserId()), 0, data, 6, 2);
+        System.arraycopy(ZipShort.getBytes(getGroupId()), 0, data, 8, 2);
 
         System.arraycopy(linkArray, 0, data, 10, linkArray.length);
         // CheckStyle:MagicNumber ON
@@ -155,52 +175,60 @@ public class AsiExtraField implements ZipExtraField, UnixStat, Cloneable {
 
     /**
      * Delegate to local file data.
+     * 
      * @return the local file data
      */
     @Override
-    public byte[] getCentralDirectoryData() {
+    public byte[] getCentralDirectoryData(){
         return getLocalFileDataData();
     }
 
     /**
      * Set the user id.
-     * @param uid the user id
+     * 
+     * @param uid
+     *            the user id
      */
-    public void setUserId(final int uid) {
+    public void setUserId(final int uid){
         this.uid = uid;
     }
 
     /**
      * Get the user id.
+     * 
      * @return the user id
      */
-    public int getUserId() {
+    public int getUserId(){
         return uid;
     }
 
     /**
      * Set the group id.
-     * @param gid the group id
+     * 
+     * @param gid
+     *            the group id
      */
-    public void setGroupId(final int gid) {
+    public void setGroupId(final int gid){
         this.gid = gid;
     }
 
     /**
      * Get the group id.
+     * 
      * @return the group id
      */
-    public int getGroupId() {
+    public int getGroupId(){
         return gid;
     }
 
     /**
      * Indicate that this entry is a symbolic link to the given file name.
      *
-     * @param name Name of the file this entry links to, empty String
-     *             if it is not a symbolic link.
+     * @param name
+     *            Name of the file this entry links to, empty String
+     *            if it is not a symbolic link.
      */
-    public void setLinkedFile(final String name) {
+    public void setLinkedFile(final String name){
         link = name;
         mode = getMode(mode);
     }
@@ -211,61 +239,72 @@ public class AsiExtraField implements ZipExtraField, UnixStat, Cloneable {
      * @return name of the file this entry links to if it is a
      *         symbolic link, the empty string otherwise.
      */
-    public String getLinkedFile() {
+    public String getLinkedFile(){
         return link;
     }
 
     /**
      * Is this entry a symbolic link?
+     * 
      * @return true if this is a symbolic link
      */
-    public boolean isLink() {
+    public boolean isLink(){
         return getLinkedFile().length() != 0;
     }
 
     /**
      * File mode of this file.
-     * @param mode the file mode
+     * 
+     * @param mode
+     *            the file mode
      */
-    public void setMode(final int mode) {
+    public void setMode(final int mode){
         this.mode = getMode(mode);
     }
 
     /**
      * File mode of this file.
+     * 
      * @return the file mode
      */
-    public int getMode() {
+    public int getMode(){
         return mode;
     }
 
     /**
      * Indicate whether this entry is a directory.
-     * @param dirFlag if true, this entry is a directory
+     * 
+     * @param dirFlag
+     *            if true, this entry is a directory
      */
-    public void setDirectory(final boolean dirFlag) {
+    public void setDirectory(final boolean dirFlag){
         this.dirFlag = dirFlag;
         mode = getMode(mode);
     }
 
     /**
      * Is this entry a directory?
+     * 
      * @return true if this entry is a directory
      */
-    public boolean isDirectory() {
+    public boolean isDirectory(){
         return dirFlag && !isLink();
     }
 
     /**
      * Populate data from this array as if it was in local file data.
-     * @param data an array of bytes
-     * @param offset the start offset
-     * @param length the number of bytes in the array from offset
-     * @throws ZipException on error
+     * 
+     * @param data
+     *            an array of bytes
+     * @param offset
+     *            the start offset
+     * @param length
+     *            the number of bytes in the array from offset
+     * @throws ZipException
+     *             on error
      */
     @Override
-    public void parseFromLocalFileData(final byte[] data, final int offset, final int length)
-        throws ZipException {
+    public void parseFromLocalFileData(final byte[] data,final int offset,final int length) throws ZipException{
 
         final long givenChecksum = ZipLong.getValue(data, offset);
         final byte[] tmp = new byte[length - WORD];
@@ -273,11 +312,10 @@ public class AsiExtraField implements ZipExtraField, UnixStat, Cloneable {
         crc.reset();
         crc.update(tmp);
         final long realChecksum = crc.getValue();
-        if (givenChecksum != realChecksum) {
-            throw new ZipException("Bad CRC checksum, expected "
-                                   + Long.toHexString(givenChecksum)
-                                   + " instead of "
-                                   + Long.toHexString(realChecksum));
+        if (givenChecksum != realChecksum){
+            throw new ZipException(
+                            "Bad CRC checksum, expected " + Long.toHexString(givenChecksum) + " instead of "
+                                            + Long.toHexString(realChecksum));
         }
 
         final int newMode = ZipShort.getValue(tmp, 0);
@@ -286,12 +324,11 @@ public class AsiExtraField implements ZipExtraField, UnixStat, Cloneable {
         uid = ZipShort.getValue(tmp, 6);
         gid = ZipShort.getValue(tmp, 8);
 
-        if (linkArray.length == 0) {
+        if (linkArray.length == 0){
             link = "";
-        } else if (linkArray.length > tmp.length - 10) {
-            throw new ZipException("Bad symbolic link name length " + linkArray.length
-                + " in ASI extra field");
-        } else {
+        }else if (linkArray.length > tmp.length - 10){
+            throw new ZipException("Bad symbolic link name length " + linkArray.length + " in ASI extra field");
+        }else{
             System.arraycopy(tmp, 10, linkArray, 0, linkArray.length);
             link = new String(linkArray); // Uses default charset - see class Javadoc
         }
@@ -305,34 +342,34 @@ public class AsiExtraField implements ZipExtraField, UnixStat, Cloneable {
      * same data in central directory and local file data.
      */
     @Override
-    public void parseFromCentralDirectoryData(final byte[] buffer, final int offset,
-                                              final int length)
-        throws ZipException {
+    public void parseFromCentralDirectoryData(final byte[] buffer,final int offset,final int length) throws ZipException{
         parseFromLocalFileData(buffer, offset, length);
     }
 
     /**
      * Get the file mode for given permissions with the correct file type.
-     * @param mode the mode
+     * 
+     * @param mode
+     *            the mode
      * @return the type with the mode
      */
-    protected int getMode(final int mode) {
+    protected int getMode(final int mode){
         int type = FILE_FLAG;
-        if (isLink()) {
+        if (isLink()){
             type = LINK_FLAG;
-        } else if (isDirectory()) {
+        }else if (isDirectory()){
             type = DIR_FLAG;
         }
         return type | (mode & PERM_MASK);
     }
 
     @Override
-    public Object clone() {
-        try {
+    public Object clone(){
+        try{
             final AsiExtraField cloned = (AsiExtraField) super.clone();
             cloned.crc = new CRC32();
             return cloned;
-        } catch (final CloneNotSupportedException cnfe) {
+        }catch (final CloneNotSupportedException cnfe){
             // impossible
             throw new RuntimeException(cnfe); //NOSONAR
         }

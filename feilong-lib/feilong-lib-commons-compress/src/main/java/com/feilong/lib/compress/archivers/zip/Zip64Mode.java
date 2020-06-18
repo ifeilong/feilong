@@ -25,7 +25,7 @@ package com.feilong.lib.compress.archivers.zip;
  *
  * @since 1.3
  */
-public enum Zip64Mode {
+public enum Zip64Mode{
     /**
      * Use Zip64 extensions for all entries, even if it is clear it is
      * not required.
@@ -34,9 +34,11 @@ public enum Zip64Mode {
     /**
      * Don't use Zip64 extensions for any entries.
      *
-     * <p>This will cause a {@link Zip64RequiredException} to be
+     * <p>
+     * This will cause a {@link Zip64RequiredException} to be
      * thrown if {@link ZipArchiveOutputStream} detects it needs Zip64
-     * support.</p>
+     * support.
+     * </p>
      */
     Never,
     /**

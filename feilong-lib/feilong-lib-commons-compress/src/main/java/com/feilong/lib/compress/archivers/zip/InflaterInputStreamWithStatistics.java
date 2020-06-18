@@ -30,54 +30,55 @@ import com.feilong.lib.compress.utils.InputStreamStatistics;
  *
  * @since 1.17
  */
-/* package */ class InflaterInputStreamWithStatistics extends InflaterInputStream
-    implements InputStreamStatistics {
-    private long compressedCount = 0;
+/* package */ class InflaterInputStreamWithStatistics extends InflaterInputStream implements InputStreamStatistics{
+
+    private long compressedCount   = 0;
+
     private long uncompressedCount = 0;
 
-    public InflaterInputStreamWithStatistics(InputStream in) {
+    public InflaterInputStreamWithStatistics(InputStream in){
         super(in);
     }
 
-    public InflaterInputStreamWithStatistics(InputStream in, Inflater inf) {
+    public InflaterInputStreamWithStatistics(InputStream in, Inflater inf){
         super(in, inf);
     }
 
-    public InflaterInputStreamWithStatistics(InputStream in, Inflater inf, int size) {
+    public InflaterInputStreamWithStatistics(InputStream in, Inflater inf, int size){
         super(in, inf, size);
     }
 
     @Override
-    protected void fill() throws IOException {
+    protected void fill() throws IOException{
         super.fill();
         compressedCount += inf.getRemaining();
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         final int b = super.read();
-        if (b > -1) {
+        if (b > -1){
             uncompressedCount++;
         }
         return b;
     }
 
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
+    public int read(byte[] b,int off,int len) throws IOException{
         final int bytes = super.read(b, off, len);
-        if (bytes > -1) {
+        if (bytes > -1){
             uncompressedCount += bytes;
         }
         return bytes;
     }
 
     @Override
-    public long getCompressedCount() {
+    public long getCompressedCount(){
         return compressedCount;
     }
 
     @Override
-    public long getUncompressedCount() {
+    public long getUncompressedCount(){
         return uncompressedCount;
     }
 }

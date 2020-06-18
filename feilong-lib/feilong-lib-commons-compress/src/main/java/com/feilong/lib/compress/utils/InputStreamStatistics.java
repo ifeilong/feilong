@@ -25,7 +25,8 @@ package com.feilong.lib.compress.utils;
  *
  * @since 1.17
  */
-public interface InputStreamStatistics {
+public interface InputStreamStatistics{
+
     /**
      * @return the amount of raw or compressed bytes read by the stream
      */

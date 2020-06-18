@@ -26,36 +26,44 @@ import com.feilong.lib.compress.utils.CharsetNames;
 
 /**
  * A common base class for Unicode extra information extra fields.
+ * 
  * @NotThreadSafe
  */
-public abstract class AbstractUnicodeExtraField implements ZipExtraField {
-    private long nameCRC32;
+public abstract class AbstractUnicodeExtraField implements ZipExtraField{
+
+    private long   nameCRC32;
+
     private byte[] unicodeName;
+
     private byte[] data;
 
-    protected AbstractUnicodeExtraField() {
+    protected AbstractUnicodeExtraField(){
     }
 
     /**
      * Assemble as unicode extension from the name/comment and
      * encoding of the original zip entry.
      *
-     * @param text The file name or comment.
-     * @param bytes The encoded of the file name or comment in the zip
-     * file.
-     * @param off The offset of the encoded file name or comment in
-     * <code>bytes</code>.
-     * @param len The length of the encoded file name or commentin
-     * <code>bytes</code>.
+     * @param text
+     *            The file name or comment.
+     * @param bytes
+     *            The encoded of the file name or comment in the zip
+     *            file.
+     * @param off
+     *            The offset of the encoded file name or comment in
+     *            <code>bytes</code>.
+     * @param len
+     *            The length of the encoded file name or commentin
+     *            <code>bytes</code>.
      */
-    protected AbstractUnicodeExtraField(final String text, final byte[] bytes, final int off, final int len) {
+    protected AbstractUnicodeExtraField(final String text, final byte[] bytes, final int off, final int len){
         final CRC32 crc32 = new CRC32();
         crc32.update(bytes, off, len);
         nameCRC32 = crc32.getValue();
 
-        try {
+        try{
             unicodeName = text.getBytes(CharsetNames.UTF_8);
-        } catch (final UnsupportedEncodingException e) {
+        }catch (final UnsupportedEncodingException e){
             throw new RuntimeException("FATAL: UTF-8 encoding not supported.", e); //NOSONAR
         }
     }
@@ -64,16 +72,18 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
      * Assemble as unicode extension from the name/comment and
      * encoding of the original zip entry.
      *
-     * @param text The file name or comment.
-     * @param bytes The encoded of the file name or comment in the zip
-     * file.
+     * @param text
+     *            The file name or comment.
+     * @param bytes
+     *            The encoded of the file name or comment in the zip
+     *            file.
      */
-    protected AbstractUnicodeExtraField(final String text, final byte[] bytes) {
+    protected AbstractUnicodeExtraField(final String text, final byte[] bytes){
         this(text, bytes, 0, bytes.length);
     }
 
-    private void assembleData() {
-        if (unicodeName == null) {
+    private void assembleData(){
+        if (unicodeName == null){
             return;
         }
 
@@ -88,15 +98,16 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
      * @return The CRC32 checksum of the file name or comment as
      *         encoded in the central directory of the zip file.
      */
-    public long getNameCRC32() {
+    public long getNameCRC32(){
         return nameCRC32;
     }
 
     /**
-     * @param nameCRC32 The CRC32 checksum of the file name as encoded
-     *         in the central directory of the zip file to set.
+     * @param nameCRC32
+     *            The CRC32 checksum of the file name as encoded
+     *            in the central directory of the zip file to set.
      */
-    public void setNameCRC32(final long nameCRC32) {
+    public void setNameCRC32(final long nameCRC32){
         this.nameCRC32 = nameCRC32;
         data = null;
     }
@@ -104,9 +115,9 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
     /**
      * @return The UTF-8 encoded name.
      */
-    public byte[] getUnicodeName() {
+    public byte[] getUnicodeName(){
         byte[] b = null;
-        if (unicodeName != null) {
+        if (unicodeName != null){
             b = new byte[unicodeName.length];
             System.arraycopy(unicodeName, 0, b, 0, b.length);
         }
@@ -114,26 +125,26 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
     }
 
     /**
-     * @param unicodeName The UTF-8 encoded name to set.
+     * @param unicodeName
+     *            The UTF-8 encoded name to set.
      */
-    public void setUnicodeName(final byte[] unicodeName) {
-        if (unicodeName != null) {
+    public void setUnicodeName(final byte[] unicodeName){
+        if (unicodeName != null){
             this.unicodeName = new byte[unicodeName.length];
-            System.arraycopy(unicodeName, 0, this.unicodeName, 0,
-                             unicodeName.length);
-        } else {
+            System.arraycopy(unicodeName, 0, this.unicodeName, 0, unicodeName.length);
+        }else{
             this.unicodeName = null;
         }
         data = null;
     }
 
     @Override
-    public byte[] getCentralDirectoryData() {
-        if (data == null) {
+    public byte[] getCentralDirectoryData(){
+        if (data == null){
             this.assembleData();
         }
         byte[] b = null;
-        if (data != null) {
+        if (data != null){
             b = new byte[data.length];
             System.arraycopy(data, 0, b, 0, b.length);
         }
@@ -141,36 +152,34 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
     }
 
     @Override
-    public ZipShort getCentralDirectoryLength() {
-        if (data == null) {
+    public ZipShort getCentralDirectoryLength(){
+        if (data == null){
             assembleData();
         }
         return new ZipShort(data != null ? data.length : 0);
     }
 
     @Override
-    public byte[] getLocalFileDataData() {
+    public byte[] getLocalFileDataData(){
         return getCentralDirectoryData();
     }
 
     @Override
-    public ZipShort getLocalFileDataLength() {
+    public ZipShort getLocalFileDataLength(){
         return getCentralDirectoryLength();
     }
 
     @Override
-    public void parseFromLocalFileData(final byte[] buffer, final int offset, final int length)
-        throws ZipException {
+    public void parseFromLocalFileData(final byte[] buffer,final int offset,final int length) throws ZipException{
 
-        if (length < 5) {
+        if (length < 5){
             throw new ZipException("UniCode path extra data must have at least 5 bytes.");
         }
 
         final int version = buffer[offset];
 
-        if (version != 0x01) {
-            throw new ZipException("Unsupported version [" + version
-                                   + "] for UniCode path extra data.");
+        if (version != 0x01){
+            throw new ZipException("Unsupported version [" + version + "] for UniCode path extra data.");
         }
 
         nameCRC32 = ZipLong.getValue(buffer, offset + 1);
@@ -184,9 +193,7 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
      * same data in central directory and local file data.
      */
     @Override
-    public void parseFromCentralDirectoryData(final byte[] buffer, final int offset,
-                                              final int length)
-        throws ZipException {
+    public void parseFromCentralDirectoryData(final byte[] buffer,final int offset,final int length) throws ZipException{
         parseFromLocalFileData(buffer, offset, length);
     }
 }

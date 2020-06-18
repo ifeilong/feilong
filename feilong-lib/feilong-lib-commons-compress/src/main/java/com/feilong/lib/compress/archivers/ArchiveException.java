@@ -21,7 +21,7 @@ package com.feilong.lib.compress.archivers;
 /**
  * Archiver related Exception
  */
-public class ArchiveException extends Exception {
+public class ArchiveException extends Exception{
 
     /** Serial */
     private static final long serialVersionUID = 2772690708123267100L;
@@ -33,7 +33,7 @@ public class ArchiveException extends Exception {
      * @param message
      *            the detail message
      */
-    public ArchiveException(final String message) {
+    public ArchiveException(final String message){
         super(message);
     }
 
@@ -45,7 +45,7 @@ public class ArchiveException extends Exception {
      * @param cause
      *            the cause
      */
-    public ArchiveException(final String message, final Exception cause) {
+    public ArchiveException(final String message, final Exception cause){
         super(message);
         this.initCause(cause);
     }

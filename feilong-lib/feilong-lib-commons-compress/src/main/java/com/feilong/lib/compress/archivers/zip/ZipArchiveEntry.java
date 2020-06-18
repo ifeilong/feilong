@@ -31,39 +31,47 @@ import com.feilong.lib.compress.archivers.EntryStreamOffsets;
  * Extension that adds better handling of extra fields and provides
  * access to the internal and external file attributes.
  *
- * <p>The extra data is expected to follow the recommendation of
- * <a href="http://www.pkware.com/documents/casestudies/APPNOTE.TXT">APPNOTE.TXT</a>:</p>
+ * <p>
+ * The extra data is expected to follow the recommendation of
+ * <a href="http://www.pkware.com/documents/casestudies/APPNOTE.TXT">APPNOTE.TXT</a>:
+ * </p>
  * <ul>
- *   <li>the extra byte array consists of a sequence of extra fields</li>
- *   <li>each extra fields starts by a two byte header id followed by
- *   a two byte sequence holding the length of the remainder of
- *   data.</li>
+ * <li>the extra byte array consists of a sequence of extra fields</li>
+ * <li>each extra fields starts by a two byte header id followed by
+ * a two byte sequence holding the length of the remainder of
+ * data.</li>
  * </ul>
  *
- * <p>Any extra data that cannot be parsed by the rules above will be
+ * <p>
+ * Any extra data that cannot be parsed by the rules above will be
  * consumed as "unparseable" extra data and treated differently by the
- * methods of this class.  Versions prior to Apache Commons Compress
+ * methods of this class. Versions prior to Apache Commons Compress
  * 1.1 would have thrown an exception if any attempt was made to read
- * or write extra data not conforming to the recommendation.</p>
+ * or write extra data not conforming to the recommendation.
+ * </p>
  *
  * @NotThreadSafe
  */
-public class ZipArchiveEntry extends java.util.zip.ZipEntry
-    implements ArchiveEntry, EntryStreamOffsets
-{
+public class ZipArchiveEntry extends java.util.zip.ZipEntry implements ArchiveEntry,EntryStreamOffsets{
 
-    public static final int PLATFORM_UNIX = 3;
-    public static final int PLATFORM_FAT  = 0;
-    public static final int CRC_UNKNOWN = -1;
-    private static final int SHORT_MASK = 0xFFFF;
-    private static final int SHORT_SHIFT = 16;
-    private static final byte[] EMPTY = new byte[0];
+    public static final int     PLATFORM_UNIX = 3;
+
+    public static final int     PLATFORM_FAT  = 0;
+
+    public static final int     CRC_UNKNOWN   = -1;
+
+    private static final int    SHORT_MASK    = 0xFFFF;
+
+    private static final int    SHORT_SHIFT   = 16;
+
+    private static final byte[] EMPTY         = new byte[0];
 
     /**
      * Indicates how the name of this entry has been determined.
+     * 
      * @since 1.16
      */
-    public enum NameSource {
+    public enum NameSource{
         /**
          * The name has been read from the archive using the encoding
          * of the archive specified when creating the {@link
@@ -86,9 +94,10 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
 
     /**
      * Indicates how the comment of this entry has been determined.
+     * 
      * @since 1.16
      */
-    public enum CommentSource {
+    public enum CommentSource{
         /**
          * The comment has been read from the archive using the encoding
          * of the archive specified when creating the {@link
@@ -111,9 +120,9 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * The default value -1 means that the method has not been specified.
      *
      * @see <a href="https://issues.apache.org/jira/browse/COMPRESS-93"
-     *        >COMPRESS-93</a>
+     *      >COMPRESS-93</a>
      */
-    private int method = ZipMethod.UNKNOWN_CODE;
+    private int                          method             = ZipMethod.UNKNOWN_CODE;
 
     /**
      * The {@link java.util.zip.ZipEntry#setSize} method in the base
@@ -122,39 +131,62 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * implementation in java.util.zip doesn't support Zip64 itself
      * (it is an optional feature).
      *
-     * <p>We need to keep our own size information for Zip64 support.</p>
+     * <p>
+     * We need to keep our own size information for Zip64 support.
+     * </p>
      */
-    private long size = SIZE_UNKNOWN;
+    private long                         size               = SIZE_UNKNOWN;
 
-    private int internalAttributes = 0;
-    private int versionRequired;
-    private int versionMadeBy;
-    private int platform = PLATFORM_FAT;
-    private int rawFlag;
-    private long externalAttributes = 0;
-    private int alignment = 0;
-    private ZipExtraField[] extraFields;
-    private UnparseableExtraFieldData unparseableExtra = null;
-    private String name = null;
-    private byte[] rawName = null;
-    private GeneralPurposeBit gpb = new GeneralPurposeBit();
-    private static final ZipExtraField[] noExtraFields = new ZipExtraField[0];
-    private long localHeaderOffset = OFFSET_UNKNOWN;
-    private long dataOffset = OFFSET_UNKNOWN;
-    private boolean isStreamContiguous = false;
-    private NameSource nameSource = NameSource.NAME;
-    private CommentSource commentSource = CommentSource.COMMENT;
-    private long diskNumberStart;
+    private int                          internalAttributes = 0;
+
+    private int                          versionRequired;
+
+    private int                          versionMadeBy;
+
+    private int                          platform           = PLATFORM_FAT;
+
+    private int                          rawFlag;
+
+    private long                         externalAttributes = 0;
+
+    private int                          alignment          = 0;
+
+    private ZipExtraField[]              extraFields;
+
+    private UnparseableExtraFieldData    unparseableExtra   = null;
+
+    private String                       name               = null;
+
+    private byte[]                       rawName            = null;
+
+    private GeneralPurposeBit            gpb                = new GeneralPurposeBit();
+
+    private static final ZipExtraField[] noExtraFields      = new ZipExtraField[0];
+
+    private long                         localHeaderOffset  = OFFSET_UNKNOWN;
+
+    private long                         dataOffset         = OFFSET_UNKNOWN;
+
+    private boolean                      isStreamContiguous = false;
+
+    private NameSource                   nameSource         = NameSource.NAME;
+
+    private CommentSource                commentSource      = CommentSource.COMMENT;
+
+    private long                         diskNumberStart;
 
     /**
      * Creates a new zip entry with the specified name.
      *
-     * <p>Assumes the entry represents a directory if and only if the
-     * name ends with a forward slash "/".</p>
+     * <p>
+     * Assumes the entry represents a directory if and only if the
+     * name ends with a forward slash "/".
+     * </p>
      *
-     * @param name the name of the entry
+     * @param name
+     *            the name of the entry
      */
-    public ZipArchiveEntry(final String name) {
+    public ZipArchiveEntry(final String name){
         super(name);
         setName(name);
     }
@@ -162,18 +194,23 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Creates a new zip entry with fields taken from the specified zip entry.
      *
-     * <p>Assumes the entry represents a directory if and only if the
-     * name ends with a forward slash "/".</p>
+     * <p>
+     * Assumes the entry represents a directory if and only if the
+     * name ends with a forward slash "/".
+     * </p>
      *
-     * @param entry the entry to get fields from
-     * @throws ZipException on error
+     * @param entry
+     *            the entry to get fields from
+     * @throws ZipException
+     *             on error
      */
-    public ZipArchiveEntry(final java.util.zip.ZipEntry entry) throws ZipException {
+    public ZipArchiveEntry(final java.util.zip.ZipEntry entry) throws ZipException{
         super(entry);
         setName(entry.getName());
         final byte[] extra = entry.getExtra();
-        if (extra != null) {
-            setExtraFields(ExtraFieldUtils.parse(extra, true, ExtraFieldParsingMode.BEST_EFFORT));        } else {
+        if (extra != null){
+            setExtraFields(ExtraFieldUtils.parse(extra, true, ExtraFieldParsingMode.BEST_EFFORT));
+        }else{
             // initializes extra data to an empty byte array
             setExtra();
         }
@@ -184,26 +221,29 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Creates a new zip entry with fields taken from the specified zip entry.
      *
-     * <p>Assumes the entry represents a directory if and only if the
-     * name ends with a forward slash "/".</p>
+     * <p>
+     * Assumes the entry represents a directory if and only if the
+     * name ends with a forward slash "/".
+     * </p>
      *
-     * @param entry the entry to get fields from
-     * @throws ZipException on error
+     * @param entry
+     *            the entry to get fields from
+     * @throws ZipException
+     *             on error
      */
-    public ZipArchiveEntry(final ZipArchiveEntry entry) throws ZipException {
+    public ZipArchiveEntry(final ZipArchiveEntry entry) throws ZipException{
         this((java.util.zip.ZipEntry) entry);
         setInternalAttributes(entry.getInternalAttributes());
         setExternalAttributes(entry.getExternalAttributes());
         setExtraFields(getAllExtraFieldsNoCopy());
         setPlatform(entry.getPlatform());
         final GeneralPurposeBit other = entry.getGeneralPurposeBit();
-        setGeneralPurposeBit(other == null ? null :
-                             (GeneralPurposeBit) other.clone());
+        setGeneralPurposeBit(other == null ? null : (GeneralPurposeBit) other.clone());
     }
 
     /**
      */
-    protected ZipArchiveEntry() {
+    protected ZipArchiveEntry(){
         this("");
     }
 
@@ -211,16 +251,20 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Creates a new zip entry taking some information from the given
      * file and using the provided name.
      *
-     * <p>The name will be adjusted to end with a forward slash "/" if
-     * the file is a directory.  If the file is not a directory a
+     * <p>
+     * The name will be adjusted to end with a forward slash "/" if
+     * the file is a directory. If the file is not a directory a
      * potential trailing forward slash will be stripped from the
-     * entry name.</p>
-     * @param inputFile file to create the entry from
-     * @param entryName name of the entry
+     * entry name.
+     * </p>
+     * 
+     * @param inputFile
+     *            file to create the entry from
+     * @param entryName
+     *            name of the entry
      */
-    public ZipArchiveEntry(final File inputFile, final String entryName) {
-        this(inputFile.isDirectory() && !entryName.endsWith("/") ?
-             entryName + "/" : entryName);
+    public ZipArchiveEntry(final File inputFile, final String entryName){
+        this(inputFile.isDirectory() && !entryName.endsWith("/") ? entryName + "/" : entryName);
         if (inputFile.isFile()){
             setSize(inputFile.length());
         }
@@ -230,10 +274,11 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
 
     /**
      * Overwrite clone.
+     * 
      * @return a cloned copy of this ZipArchiveEntry
      */
     @Override
-    public Object clone() {
+    public Object clone(){
         final ZipArchiveEntry e = (ZipArchiveEntry) super.clone();
 
         e.setInternalAttributes(getInternalAttributes());
@@ -251,22 +296,22 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * @since 1.1
      */
     @Override
-    public int getMethod() {
+    public int getMethod(){
         return method;
     }
 
     /**
      * Sets the compression method of this entry.
      *
-     * @param method compression method
+     * @param method
+     *            compression method
      *
      * @since 1.1
      */
     @Override
-    public void setMethod(final int method) {
-        if (method < 0) {
-            throw new IllegalArgumentException(
-                    "ZIP compression method can not be negative: " + method);
+    public void setMethod(final int method){
+        if (method < 0){
+            throw new IllegalArgumentException("ZIP compression method can not be negative: " + method);
         }
         this.method = method;
     }
@@ -274,68 +319,79 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Retrieves the internal file attributes.
      *
-     * <p><b>Note</b>: {@link ZipArchiveInputStream} is unable to fill
+     * <p>
+     * <b>Note</b>: {@link ZipArchiveInputStream} is unable to fill
      * this field, you must use {@link ZipFile} if you want to read
-     * entries using this attribute.</p>
+     * entries using this attribute.
+     * </p>
      *
      * @return the internal file attributes
      */
-    public int getInternalAttributes() {
+    public int getInternalAttributes(){
         return internalAttributes;
     }
 
     /**
      * Sets the internal file attributes.
-     * @param value an <code>int</code> value
+     * 
+     * @param value
+     *            an <code>int</code> value
      */
-    public void setInternalAttributes(final int value) {
+    public void setInternalAttributes(final int value){
         internalAttributes = value;
     }
 
     /**
      * Retrieves the external file attributes.
      *
-     * <p><b>Note</b>: {@link ZipArchiveInputStream} is unable to fill
+     * <p>
+     * <b>Note</b>: {@link ZipArchiveInputStream} is unable to fill
      * this field, you must use {@link ZipFile} if you want to read
-     * entries using this attribute.</p>
+     * entries using this attribute.
+     * </p>
      *
      * @return the external file attributes
      */
-    public long getExternalAttributes() {
+    public long getExternalAttributes(){
         return externalAttributes;
     }
 
     /**
      * Sets the external file attributes.
-     * @param value an <code>long</code> value
+     * 
+     * @param value
+     *            an <code>long</code> value
      */
-    public void setExternalAttributes(final long value) {
+    public void setExternalAttributes(final long value){
         externalAttributes = value;
     }
 
     /**
      * Sets Unix permissions in a way that is understood by Info-Zip's
      * unzip command.
-     * @param mode an <code>int</code> value
+     * 
+     * @param mode
+     *            an <code>int</code> value
      */
-    public void setUnixMode(final int mode) {
+    public void setUnixMode(final int mode){
         // CheckStyle:MagicNumberCheck OFF - no point
-        setExternalAttributes((mode << SHORT_SHIFT)
-                              // MS-DOS read-only attribute
-                              | ((mode & 0200) == 0 ? 1 : 0)
-                              // MS-DOS directory flag
-                              | (isDirectory() ? 0x10 : 0));
+        setExternalAttributes(
+                        (mode << SHORT_SHIFT)
+                                        // MS-DOS read-only attribute
+                                        | ((mode & 0200) == 0 ? 1 : 0)
+                                        // MS-DOS directory flag
+                                        | (isDirectory() ? 0x10 : 0));
         // CheckStyle:MagicNumberCheck ON
         platform = PLATFORM_UNIX;
     }
 
     /**
      * Unix permission.
+     * 
      * @return the unix permissions
      */
-    public int getUnixMode() {
-        return platform != PLATFORM_UNIX ? 0 :
-            (int) ((getExternalAttributes() >> SHORT_SHIFT) & SHORT_MASK);
+    public int getUnixMode(){
+        return platform != PLATFORM_UNIX ? 0 : (int) ((getExternalAttributes() >> SHORT_SHIFT) & SHORT_MASK);
     }
 
     /**
@@ -346,7 +402,7 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * @since 1.5
      * @return true if the entry represents a unix symlink, false otherwise.
      */
-    public boolean isUnixSymlink() {
+    public boolean isUnixSymlink(){
         return (getUnixMode() & UnixStat.FILE_TYPE_FLAG) == UnixStat.LINK_FLAG;
     }
 
@@ -355,17 +411,19 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * by&quot; part of the central file header.
      *
      * @return PLATFORM_FAT unless {@link #setUnixMode setUnixMode}
-     * has been called, in which case PLATFORM_UNIX will be returned.
+     *         has been called, in which case PLATFORM_UNIX will be returned.
      */
-    public int getPlatform() {
+    public int getPlatform(){
         return platform;
     }
 
     /**
      * Set the platform (UNIX or FAT).
-     * @param platform an <code>int</code> value - 0 is FAT, 3 is UNIX
+     * 
+     * @param platform
+     *            an <code>int</code> value - 0 is FAT, 3 is UNIX
      */
-    protected void setPlatform(final int platform) {
+    protected void setPlatform(final int platform){
         this.platform = platform;
     }
 
@@ -373,10 +431,10 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Gets currently configured alignment.
      *
      * @return
-     *      alignment for this entry.
+     *         alignment for this entry.
      * @since 1.14
      */
-    protected int getAlignment() {
+    protected int getAlignment(){
         return this.alignment;
     }
 
@@ -384,29 +442,31 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Sets alignment for this entry.
      *
      * @param alignment
-     *      requested alignment, 0 for default.
+     *            requested alignment, 0 for default.
      * @since 1.14
      */
-    public void setAlignment(int alignment) {
-        if ((alignment & (alignment - 1)) != 0 || alignment > 0xffff) {
-            throw new IllegalArgumentException("Invalid value for alignment, must be power of two and no bigger than "
-                + 0xffff + " but is " + alignment);
+    public void setAlignment(int alignment){
+        if ((alignment & (alignment - 1)) != 0 || alignment > 0xffff){
+            throw new IllegalArgumentException(
+                            "Invalid value for alignment, must be power of two and no bigger than " + 0xffff + " but is " + alignment);
         }
         this.alignment = alignment;
     }
 
     /**
      * Replaces all currently attached extra fields with the new array.
-     * @param fields an array of extra fields
+     * 
+     * @param fields
+     *            an array of extra fields
      */
-    public void setExtraFields(final ZipExtraField[] fields) {
+    public void setExtraFields(final ZipExtraField[] fields){
         unparseableExtra = null;
         final List<ZipExtraField> newFields = new ArrayList<>();
-        if (fields != null) {
-            for (final ZipExtraField field : fields) {
-                if (field instanceof UnparseableExtraFieldData) {
+        if (fields != null){
+            for (final ZipExtraField field : fields){
+                if (field instanceof UnparseableExtraFieldData){
                     unparseableExtra = (UnparseableExtraFieldData) field;
-                } else {
+                }else{
                     newFields.add(field);
                 }
             }
@@ -418,67 +478,69 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Retrieves all extra fields that have been parsed successfully.
      *
-     * <p><b>Note</b>: The set of extra fields may be incomplete when
+     * <p>
+     * <b>Note</b>: The set of extra fields may be incomplete when
      * {@link ZipArchiveInputStream} has been used as some extra
      * fields use the central directory to store additional
-     * information.</p>
+     * information.
+     * </p>
      *
      * @return an array of the extra fields
      */
-    public ZipExtraField[] getExtraFields() {
+    public ZipExtraField[] getExtraFields(){
         return getParseableExtraFields();
     }
 
     /**
      * Retrieves extra fields.
-     * @param includeUnparseable whether to also return unparseable
-     * extra fields as {@link UnparseableExtraFieldData} if such data
-     * exists.
+     * 
+     * @param includeUnparseable
+     *            whether to also return unparseable
+     *            extra fields as {@link UnparseableExtraFieldData} if such data
+     *            exists.
      * @return an array of the extra fields
      *
      * @since 1.1
      */
-    public ZipExtraField[] getExtraFields(final boolean includeUnparseable) {
-        return includeUnparseable ?
-                getAllExtraFields() :
-                getParseableExtraFields();
+    public ZipExtraField[] getExtraFields(final boolean includeUnparseable){
+        return includeUnparseable ? getAllExtraFields() : getParseableExtraFields();
     }
 
     /**
      * Retrieves extra fields.
-     * @param parsingBehavior controls parsing of extra fields.
+     * 
+     * @param parsingBehavior
+     *            controls parsing of extra fields.
      * @return an array of the extra fields
      *
-     * @throws ZipException if parsing fails, can not happen if {@code
+     * @throws ZipException
+     *             if parsing fails, can not happen if {@code
      * parsingBehavior} is {@link ExtraFieldParsingMode#BEST_EFFORT}.
      *
      * @since 1.19
      */
-    public ZipExtraField[] getExtraFields(final ExtraFieldParsingBehavior parsingBehavior)
-        throws ZipException {
-        if (parsingBehavior == ExtraFieldParsingMode.BEST_EFFORT) {
+    public ZipExtraField[] getExtraFields(final ExtraFieldParsingBehavior parsingBehavior) throws ZipException{
+        if (parsingBehavior == ExtraFieldParsingMode.BEST_EFFORT){
             return getExtraFields(true);
         }
-        if (parsingBehavior == ExtraFieldParsingMode.ONLY_PARSEABLE_LENIENT) {
+        if (parsingBehavior == ExtraFieldParsingMode.ONLY_PARSEABLE_LENIENT){
             return getExtraFields(false);
         }
         byte[] local = getExtra();
-        List<ZipExtraField> localFields = new ArrayList<>(Arrays.asList(ExtraFieldUtils.parse(local, true,
-            parsingBehavior)));
+        List<ZipExtraField> localFields = new ArrayList<>(Arrays.asList(ExtraFieldUtils.parse(local, true, parsingBehavior)));
         byte[] central = getCentralDirectoryExtra();
-        List<ZipExtraField> centralFields = new ArrayList<>(Arrays.asList(ExtraFieldUtils.parse(central, false,
-            parsingBehavior)));
+        List<ZipExtraField> centralFields = new ArrayList<>(Arrays.asList(ExtraFieldUtils.parse(central, false, parsingBehavior)));
         List<ZipExtraField> merged = new ArrayList<>();
-        for (ZipExtraField l : localFields) {
+        for (ZipExtraField l : localFields){
             ZipExtraField c = null;
-            if (l instanceof UnparseableExtraFieldData) {
+            if (l instanceof UnparseableExtraFieldData){
                 c = findUnparseable(centralFields);
-            } else {
+            }else{
                 c = findMatching(l.getHeaderId(), centralFields);
             }
-            if (c != null) {
+            if (c != null){
                 byte[] cd = c.getCentralDirectoryData();
-                if (cd != null && cd.length > 0) {
+                if (cd != null && cd.length > 0){
                     l.parseFromCentralDirectoryData(cd, 0, cd.length);
                 }
                 centralFields.remove(c);
@@ -489,58 +551,57 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
         return merged.toArray(noExtraFields);
     }
 
-    private ZipExtraField[] getParseableExtraFieldsNoCopy() {
-        if (extraFields == null) {
+    private ZipExtraField[] getParseableExtraFieldsNoCopy(){
+        if (extraFields == null){
             return noExtraFields;
         }
         return extraFields;
     }
 
-    private ZipExtraField[] getParseableExtraFields() {
+    private ZipExtraField[] getParseableExtraFields(){
         final ZipExtraField[] parseableExtraFields = getParseableExtraFieldsNoCopy();
-        return (parseableExtraFields == extraFields) ? copyOf(parseableExtraFields, parseableExtraFields.length)
-            : parseableExtraFields;
+        return (parseableExtraFields == extraFields) ? copyOf(parseableExtraFields, parseableExtraFields.length) : parseableExtraFields;
     }
 
     /**
      * Get all extra fields, including unparseable ones.
+     * 
      * @return An array of all extra fields. Not necessarily a copy of internal data structures, hence private method
      */
-    private ZipExtraField[] getAllExtraFieldsNoCopy() {
-        if (extraFields == null) {
+    private ZipExtraField[] getAllExtraFieldsNoCopy(){
+        if (extraFields == null){
             return getUnparseableOnly();
         }
         return unparseableExtra != null ? getMergedFields() : extraFields;
     }
 
-    private ZipExtraField[] getMergedFields() {
+    private ZipExtraField[] getMergedFields(){
         final ZipExtraField[] zipExtraFields = copyOf(extraFields, extraFields.length + 1);
         zipExtraFields[extraFields.length] = unparseableExtra;
         return zipExtraFields;
     }
 
-    private ZipExtraField[] getUnparseableOnly() {
+    private ZipExtraField[] getUnparseableOnly(){
         return unparseableExtra == null ? noExtraFields : new ZipExtraField[] { unparseableExtra };
     }
 
-    private ZipExtraField[] getAllExtraFields() {
+    private ZipExtraField[] getAllExtraFields(){
         final ZipExtraField[] allExtraFieldsNoCopy = getAllExtraFieldsNoCopy();
-        return (allExtraFieldsNoCopy == extraFields) ? copyOf(allExtraFieldsNoCopy, allExtraFieldsNoCopy.length)
-            : allExtraFieldsNoCopy;
+        return (allExtraFieldsNoCopy == extraFields) ? copyOf(allExtraFieldsNoCopy, allExtraFieldsNoCopy.length) : allExtraFieldsNoCopy;
     }
 
-    private ZipExtraField findUnparseable(List<ZipExtraField> fs) {
-        for (ZipExtraField f : fs) {
-            if (f instanceof UnparseableExtraFieldData) {
+    private ZipExtraField findUnparseable(List<ZipExtraField> fs){
+        for (ZipExtraField f : fs){
+            if (f instanceof UnparseableExtraFieldData){
                 return f;
             }
         }
         return null;
     }
 
-    private ZipExtraField findMatching(ZipShort headerId, List<ZipExtraField> fs) {
-        for (ZipExtraField f : fs) {
-            if (headerId.equals(f.getHeaderId())) {
+    private ZipExtraField findMatching(ZipShort headerId,List<ZipExtraField> fs){
+        for (ZipExtraField f : fs){
+            if (headerId.equals(f.getHeaderId())){
                 return f;
             }
         }
@@ -551,18 +612,22 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Adds an extra field - replacing an already present extra field
      * of the same type.
      *
-     * <p>If no extra field of the same type exists, the field will be
-     * added as last field.</p>
-     * @param ze an extra field
+     * <p>
+     * If no extra field of the same type exists, the field will be
+     * added as last field.
+     * </p>
+     * 
+     * @param ze
+     *            an extra field
      */
-    public void addExtraField(final ZipExtraField ze) {
-        if (ze instanceof UnparseableExtraFieldData) {
+    public void addExtraField(final ZipExtraField ze){
+        if (ze instanceof UnparseableExtraFieldData){
             unparseableExtra = (UnparseableExtraFieldData) ze;
-        } else {
-            if (extraFields == null) {
-                extraFields = new ZipExtraField[]{ ze };
-            } else {
-                if (getExtraField(ze.getHeaderId()) != null) {
+        }else{
+            if (extraFields == null){
+                extraFields = new ZipExtraField[] { ze };
+            }else{
+                if (getExtraField(ze.getHeaderId()) != null){
                     removeExtraField(ze.getHeaderId());
                 }
                 final ZipExtraField[] zipExtraFields = copyOf(extraFields, extraFields.length + 1);
@@ -577,14 +642,18 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Adds an extra field - replacing an already present extra field
      * of the same type.
      *
-     * <p>The new extra field will be the first one.</p>
-     * @param ze an extra field
+     * <p>
+     * The new extra field will be the first one.
+     * </p>
+     * 
+     * @param ze
+     *            an extra field
      */
-    public void addAsFirstExtraField(final ZipExtraField ze) {
-        if (ze instanceof UnparseableExtraFieldData) {
+    public void addAsFirstExtraField(final ZipExtraField ze){
+        if (ze instanceof UnparseableExtraFieldData){
             unparseableExtra = (UnparseableExtraFieldData) ze;
-        } else {
-            if (getExtraField(ze.getHeaderId()) != null) {
+        }else{
+            if (getExtraField(ze.getHeaderId()) != null){
                 removeExtraField(ze.getHeaderId());
             }
             final ZipExtraField[] copy = extraFields;
@@ -600,20 +669,22 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
 
     /**
      * Remove an extra field.
-     * @param type the type of extra field to remove
+     * 
+     * @param type
+     *            the type of extra field to remove
      */
-    public void removeExtraField(final ZipShort type) {
-        if (extraFields == null) {
+    public void removeExtraField(final ZipShort type){
+        if (extraFields == null){
             throw new java.util.NoSuchElementException();
         }
 
         final List<ZipExtraField> newResult = new ArrayList<>();
-        for (final ZipExtraField extraField : extraFields) {
-            if (!type.equals(extraField.getHeaderId())) {
+        for (final ZipExtraField extraField : extraFields){
+            if (!type.equals(extraField.getHeaderId())){
                 newResult.add(extraField);
             }
         }
-        if (extraFields.length == newResult.size()) {
+        if (extraFields.length == newResult.size()){
             throw new java.util.NoSuchElementException();
         }
         extraFields = newResult.toArray(noExtraFields);
@@ -625,8 +696,8 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      *
      * @since 1.1
      */
-    public void removeUnparseableExtraFieldData() {
-        if (unparseableExtra == null) {
+    public void removeUnparseableExtraFieldData(){
+        if (unparseableExtra == null){
             throw new java.util.NoSuchElementException();
         }
         unparseableExtra = null;
@@ -636,13 +707,14 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Looks up an extra field by its header id.
      *
-     * @param type the header id
+     * @param type
+     *            the header id
      * @return null if no such field exists.
      */
-    public ZipExtraField getExtraField(final ZipShort type) {
-        if (extraFields != null) {
-            for (final ZipExtraField extraField : extraFields) {
-                if (type.equals(extraField.getHeaderId())) {
+    public ZipExtraField getExtraField(final ZipShort type){
+        if (extraFields != null){
+            for (final ZipExtraField extraField : extraFields){
+                if (type.equals(extraField.getHeaderId())){
                     return extraField;
                 }
             }
@@ -657,7 +729,7 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      *
      * @since 1.1
      */
-    public UnparseableExtraFieldData getUnparseableExtraFieldData() {
+    public UnparseableExtraFieldData getUnparseableExtraFieldData(){
         return unparseableExtra;
     }
 
@@ -665,19 +737,25 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Parses the given bytes as extra field data and consumes any
      * unparseable data as an {@link UnparseableExtraFieldData}
      * instance.
-     * @param extra an array of bytes to be parsed into extra fields
-     * @throws RuntimeException if the bytes cannot be parsed
-     * @throws RuntimeException on error
+     * 
+     * @param extra
+     *            an array of bytes to be parsed into extra fields
+     * @throws RuntimeException
+     *             if the bytes cannot be parsed
+     * @throws RuntimeException
+     *             on error
      */
     @Override
-    public void setExtra(final byte[] extra) throws RuntimeException {
-        try {
+    public void setExtra(final byte[] extra) throws RuntimeException{
+        try{
             final ZipExtraField[] local = ExtraFieldUtils.parse(extra, true, ExtraFieldParsingMode.BEST_EFFORT);
             mergeExtraFields(local, true);
-        } catch (final ZipException e) {
+        }catch (final ZipException e){
             // actually this is not possible as of Commons Compress 1.1
-            throw new RuntimeException("Error parsing extra fields for entry: " //NOSONAR
-                                       + getName() + " - " + e.getMessage(), e);
+            throw new RuntimeException(
+                            "Error parsing extra fields for entry: " //NOSONAR
+                                            + getName() + " - " + e.getMessage(),
+                            e);
         }
     }
 
@@ -687,19 +765,21 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * directly, so overriding getExtra doesn't help - we need to
      * modify super's data directly.
      */
-    protected void setExtra() {
+    protected void setExtra(){
         super.setExtra(ExtraFieldUtils.mergeLocalFileDataData(getAllExtraFieldsNoCopy()));
     }
 
     /**
      * Sets the central directory part of extra fields.
-     * @param b an array of bytes to be parsed into extra fields
+     * 
+     * @param b
+     *            an array of bytes to be parsed into extra fields
      */
-    public void setCentralDirectoryExtra(final byte[] b) {
-        try {
+    public void setCentralDirectoryExtra(final byte[] b){
+        try{
             final ZipExtraField[] central = ExtraFieldUtils.parse(b, false, ExtraFieldParsingMode.BEST_EFFORT);
             mergeExtraFields(central, false);
-        } catch (final ZipException e) {
+        }catch (final ZipException e){
             // actually this is not possible as of Commons Compress 1.19
             throw new RuntimeException(e.getMessage(), e); //NOSONAR
         }
@@ -707,50 +787,56 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
 
     /**
      * Retrieves the extra data for the local file data.
+     * 
      * @return the extra data for local file
      */
-    public byte[] getLocalFileDataExtra() {
+    public byte[] getLocalFileDataExtra(){
         final byte[] extra = getExtra();
         return extra != null ? extra : EMPTY;
     }
 
     /**
      * Retrieves the extra data for the central directory.
+     * 
      * @return the central directory extra data
      */
-    public byte[] getCentralDirectoryExtra() {
+    public byte[] getCentralDirectoryExtra(){
         return ExtraFieldUtils.mergeCentralDirectoryData(getAllExtraFieldsNoCopy());
     }
 
     /**
      * Get the name of the entry.
      *
-     * <p>This method returns the raw name as it is stored inside of the archive.</p>
+     * <p>
+     * This method returns the raw name as it is stored inside of the archive.
+     * </p>
      *
      * @return the entry name
      */
     @Override
-    public String getName() {
+    public String getName(){
         return name == null ? super.getName() : name;
     }
 
     /**
      * Is this entry a directory?
+     * 
      * @return true if the entry is a directory
      */
     @Override
-    public boolean isDirectory() {
+    public boolean isDirectory(){
         final String n = getName();
         return n != null && n.endsWith("/");
     }
 
     /**
      * Set the name of the entry.
-     * @param name the name to use
+     * 
+     * @param name
+     *            the name to use
      */
-    protected void setName(String name) {
-        if (name != null && getPlatform() == PLATFORM_FAT
-            && !name.contains("/")) {
+    protected void setName(String name){
+        if (name != null && getPlatform() == PLATFORM_FAT && !name.contains("/")){
             name = name.replace('\\', '/');
         }
         this.name = name;
@@ -759,26 +845,31 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Gets the uncompressed size of the entry data.
      *
-     * <p><b>Note</b>: {@link ZipArchiveInputStream} may create
+     * <p>
+     * <b>Note</b>: {@link ZipArchiveInputStream} may create
      * entries that return {@link #SIZE_UNKNOWN SIZE_UNKNOWN} as long
-     * as the entry hasn't been read completely.</p>
+     * as the entry hasn't been read completely.
+     * </p>
      *
      * @return the entry size
      */
     @Override
-    public long getSize() {
+    public long getSize(){
         return size;
     }
 
     /**
      * Sets the uncompressed size of the entry data.
-     * @param size the uncompressed size in bytes
-     * @throws IllegalArgumentException if the specified size is less
-     *            than 0
+     * 
+     * @param size
+     *            the uncompressed size in bytes
+     * @throws IllegalArgumentException
+     *             if the specified size is less
+     *             than 0
      */
     @Override
-    public void setSize(final long size) {
-        if (size < 0) {
+    public void setSize(final long size){
+        if (size < 0){
             throw new IllegalArgumentException("Invalid entry size");
         }
         this.size = size;
@@ -787,13 +878,16 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * Sets the name using the raw bytes and the string created from
      * it by guessing or using the configured encoding.
-     * @param name the name to use created from the raw bytes using
-     * the guessed or configured encoding
-     * @param rawName the bytes originally read as name from the
-     * archive
+     * 
+     * @param name
+     *            the name to use created from the raw bytes using
+     *            the guessed or configured encoding
+     * @param rawName
+     *            the bytes originally read as name from the
+     *            archive
      * @since 1.2
      */
-    protected void setName(final String name, final byte[] rawName) {
+    protected void setName(final String name,final byte[] rawName){
         setName(name);
         this.rawName = rawName;
     }
@@ -802,29 +896,31 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Returns the raw bytes that made up the name before it has been
      * converted using the configured or guessed encoding.
      *
-     * <p>This method will return null if this instance has not been
-     * read from an archive.</p>
+     * <p>
+     * This method will return null if this instance has not been
+     * read from an archive.
+     * </p>
      *
      * @return the raw name bytes
      * @since 1.2
      */
-    public byte[] getRawName() {
-        if (rawName != null) {
+    public byte[] getRawName(){
+        if (rawName != null){
             return Arrays.copyOf(rawName, rawName.length);
         }
         return null;
     }
 
-    protected long getLocalHeaderOffset() {
+    protected long getLocalHeaderOffset(){
         return this.localHeaderOffset;
     }
 
-    protected void setLocalHeaderOffset(long localHeaderOffset) {
+    protected void setLocalHeaderOffset(long localHeaderOffset){
         this.localHeaderOffset = localHeaderOffset;
     }
 
     @Override
-    public long getDataOffset() {
+    public long getDataOffset(){
         return dataOffset;
     }
 
@@ -832,28 +928,29 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Sets the data offset.
      *
      * @param dataOffset
-     *      new value of data offset.
+     *            new value of data offset.
      */
-    protected void setDataOffset(long dataOffset) {
+    protected void setDataOffset(long dataOffset){
         this.dataOffset = dataOffset;
     }
 
     @Override
-    public boolean isStreamContiguous() {
+    public boolean isStreamContiguous(){
         return isStreamContiguous;
     }
 
-    protected void setStreamContiguous(boolean isStreamContiguous) {
+    protected void setStreamContiguous(boolean isStreamContiguous){
         this.isStreamContiguous = isStreamContiguous;
     }
 
     /**
      * Get the hashCode of the entry.
      * This uses the name as the hashcode.
+     * 
      * @return a hashcode.
      */
     @Override
-    public int hashCode() {
+    public int hashCode(){
         // this method has severe consequences on performance. We cannot rely
         // on the super.hashCode() method since super.getName() always return
         // the empty string in the current implemention (there's no setter)
@@ -864,19 +961,22 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
 
     /**
      * The "general purpose bit" field.
+     * 
      * @return the general purpose bit
      * @since 1.1
      */
-    public GeneralPurposeBit getGeneralPurposeBit() {
+    public GeneralPurposeBit getGeneralPurposeBit(){
         return gpb;
     }
 
     /**
      * The "general purpose bit" field.
-     * @param b the general purpose bit
+     * 
+     * @param b
+     *            the general purpose bit
      * @since 1.1
      */
-    public void setGeneralPurposeBit(final GeneralPurposeBit b) {
+    public void setGeneralPurposeBit(final GeneralPurposeBit b){
         gpb = b;
     }
 
@@ -885,39 +985,41 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * data - otherwise merge the fields assuming the existing fields
      * and the new fields stem from different locations inside the
      * archive.
-     * @param f the extra fields to merge
-     * @param local whether the new fields originate from local data
+     * 
+     * @param f
+     *            the extra fields to merge
+     * @param local
+     *            whether the new fields originate from local data
      */
-    private void mergeExtraFields(final ZipExtraField[] f, final boolean local) {
-        if (extraFields == null) {
+    private void mergeExtraFields(final ZipExtraField[] f,final boolean local){
+        if (extraFields == null){
             setExtraFields(f);
-        } else {
-            for (final ZipExtraField element : f) {
+        }else{
+            for (final ZipExtraField element : f){
                 ZipExtraField existing;
-                if (element instanceof UnparseableExtraFieldData) {
+                if (element instanceof UnparseableExtraFieldData){
                     existing = unparseableExtra;
-                } else {
+                }else{
                     existing = getExtraField(element.getHeaderId());
                 }
-                if (existing == null) {
+                if (existing == null){
                     addExtraField(element);
-                } else {
-                    final byte[] b = local ? element.getLocalFileDataData()
-                        : element.getCentralDirectoryData();
-                    try {
-                        if (local) {
+                }else{
+                    final byte[] b = local ? element.getLocalFileDataData() : element.getCentralDirectoryData();
+                    try{
+                        if (local){
                             existing.parseFromLocalFileData(b, 0, b.length);
-                        } else {
+                        }else{
                             existing.parseFromCentralDirectoryData(b, 0, b.length);
                         }
-                    } catch (ZipException ex) {
+                    }catch (ZipException ex){
                         // emulate ExtraFieldParsingMode.fillAndMakeUnrecognizedOnError
                         final UnrecognizedExtraField u = new UnrecognizedExtraField();
                         u.setHeaderId(existing.getHeaderId());
-                        if (local) {
+                        if (local){
                             u.setLocalFileDataData(b);
                             u.setCentralDirectoryData(existing.getCentralDirectoryData());
-                        } else {
+                        }else{
                             u.setLocalFileDataData(existing.getLocalFileDataData());
                             u.setCentralDirectoryData(b);
                         }
@@ -934,149 +1036,159 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * Wraps {@link java.util.zip.ZipEntry#getTime} with a {@link Date} as the
      * entry's last modified date.
      *
-     * <p>Changes to the implementation of {@link java.util.zip.ZipEntry#getTime}
+     * <p>
+     * Changes to the implementation of {@link java.util.zip.ZipEntry#getTime}
      * leak through and the returned value may depend on your local
-     * time zone as well as your version of Java.</p>
+     * time zone as well as your version of Java.
+     * </p>
      */
     @Override
-    public Date getLastModifiedDate() {
+    public Date getLastModifiedDate(){
         return new Date(getTime());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
+    public boolean equals(final Object obj){
+        if (this == obj){
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()){
             return false;
         }
         final ZipArchiveEntry other = (ZipArchiveEntry) obj;
         final String myName = getName();
         final String otherName = other.getName();
-        if (myName == null) {
-            if (otherName != null) {
+        if (myName == null){
+            if (otherName != null){
                 return false;
             }
-        } else if (!myName.equals(otherName)) {
+        }else if (!myName.equals(otherName)){
             return false;
         }
         String myComment = getComment();
         String otherComment = other.getComment();
-        if (myComment == null) {
+        if (myComment == null){
             myComment = "";
         }
-        if (otherComment == null) {
+        if (otherComment == null){
             otherComment = "";
         }
-        return getTime() == other.getTime()
-            && myComment.equals(otherComment)
-            && getInternalAttributes() == other.getInternalAttributes()
-            && getPlatform() == other.getPlatform()
-            && getExternalAttributes() == other.getExternalAttributes()
-            && getMethod() == other.getMethod()
-            && getSize() == other.getSize()
-            && getCrc() == other.getCrc()
-            && getCompressedSize() == other.getCompressedSize()
-            && Arrays.equals(getCentralDirectoryExtra(),
-                             other.getCentralDirectoryExtra())
-            && Arrays.equals(getLocalFileDataExtra(),
-                             other.getLocalFileDataExtra())
-            && localHeaderOffset == other.localHeaderOffset
-            && dataOffset == other.dataOffset
-            && gpb.equals(other.gpb);
+        return getTime() == other.getTime() && myComment.equals(otherComment) && getInternalAttributes() == other.getInternalAttributes()
+                        && getPlatform() == other.getPlatform() && getExternalAttributes() == other.getExternalAttributes()
+                        && getMethod() == other.getMethod() && getSize() == other.getSize() && getCrc() == other.getCrc()
+                        && getCompressedSize() == other.getCompressedSize()
+                        && Arrays.equals(getCentralDirectoryExtra(), other.getCentralDirectoryExtra())
+                        && Arrays.equals(getLocalFileDataExtra(), other.getLocalFileDataExtra())
+                        && localHeaderOffset == other.localHeaderOffset && dataOffset == other.dataOffset && gpb.equals(other.gpb);
     }
 
     /**
      * Sets the "version made by" field.
-     * @param versionMadeBy "version made by" field
+     * 
+     * @param versionMadeBy
+     *            "version made by" field
      * @since 1.11
      */
-    public void setVersionMadeBy(final int versionMadeBy) {
+    public void setVersionMadeBy(final int versionMadeBy){
         this.versionMadeBy = versionMadeBy;
     }
 
     /**
      * Sets the "version required to expand" field.
-     * @param versionRequired "version required to expand" field
+     * 
+     * @param versionRequired
+     *            "version required to expand" field
      * @since 1.11
      */
-    public void setVersionRequired(final int versionRequired) {
+    public void setVersionRequired(final int versionRequired){
         this.versionRequired = versionRequired;
     }
 
     /**
      * The "version required to expand" field.
+     * 
      * @return "version required to expand" field
      * @since 1.11
      */
-    public int getVersionRequired() {
+    public int getVersionRequired(){
         return versionRequired;
     }
 
     /**
      * The "version made by" field.
+     * 
      * @return "version made by" field
      * @since 1.11
      */
-    public int getVersionMadeBy() {
+    public int getVersionMadeBy(){
         return versionMadeBy;
     }
 
     /**
      * The content of the flags field.
+     * 
      * @return content of the flags field
      * @since 1.11
      */
-    public int getRawFlag() {
+    public int getRawFlag(){
         return rawFlag;
     }
 
     /**
      * Sets the content of the flags field.
-     * @param rawFlag content of the flags field
+     * 
+     * @param rawFlag
+     *            content of the flags field
      * @since 1.11
      */
-    public void setRawFlag(final int rawFlag) {
+    public void setRawFlag(final int rawFlag){
         this.rawFlag = rawFlag;
     }
 
     /**
      * The source of the name field value.
+     * 
      * @return source of the name field value
      * @since 1.16
      */
-    public NameSource getNameSource() {
+    public NameSource getNameSource(){
         return nameSource;
     }
 
     /**
      * Sets the source of the name field value.
-     * @param nameSource source of the name field value
+     * 
+     * @param nameSource
+     *            source of the name field value
      * @since 1.16
      */
-    public void setNameSource(NameSource nameSource) {
+    public void setNameSource(NameSource nameSource){
         this.nameSource = nameSource;
     }
 
     /**
      * The source of the comment field value.
+     * 
      * @return source of the comment field value
      * @since 1.16
      */
-    public CommentSource getCommentSource() {
+    public CommentSource getCommentSource(){
         return commentSource;
     }
 
     /**
      * Sets the source of the comment field value.
-     * @param commentSource source of the comment field value
+     * 
+     * @param commentSource
+     *            source of the comment field value
      * @since 1.16
      */
-    public void setCommentSource(CommentSource commentSource) {
+    public void setCommentSource(CommentSource commentSource){
         this.commentSource = commentSource;
     }
 
@@ -1086,21 +1198,22 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
      * @return the number of the split segment this entry starts at.
      * @since 1.20
      */
-    public long getDiskNumberStart() {
+    public long getDiskNumberStart(){
         return diskNumberStart;
     }
 
     /**
      * The number of the split segment this entry starts at.
      *
-     * @param diskNumberStart the number of the split segment this entry starts at.
+     * @param diskNumberStart
+     *            the number of the split segment this entry starts at.
      * @since 1.20
      */
-    public void setDiskNumberStart(long diskNumberStart) {
+    public void setDiskNumberStart(long diskNumberStart){
         this.diskNumberStart = diskNumberStart;
     }
 
-    private ZipExtraField[] copyOf(final ZipExtraField[] src, final int length) {
+    private ZipExtraField[] copyOf(final ZipExtraField[] src,final int length){
         final ZipExtraField[] cpy = new ZipExtraField[length];
         System.arraycopy(src, 0, cpy, 0, Math.min(src.length, length));
         return cpy;
@@ -1109,36 +1222,44 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     /**
      * How to try to parse the extra fields.
      *
-     * <p>Configures the bahvior for:</p>
+     * <p>
+     * Configures the bahvior for:
+     * </p>
      * <ul>
-     *   <li>What shall happen if the extra field content doesn't
-     *   follow the recommended pattern of two-byte id followed by a
-     *   two-byte length?</li>
-     *  <li>What shall happen if an extra field is generally supported
-     *  by Commons Compress but its content cannot be parsed
-     *  correctly? This may for example happen if the archive is
-     *  corrupt, it triggers a bug in Commons Compress or the extra
-     *  field uses a version not (yet) supported by Commons
-     *  Compress.</li>
+     * <li>What shall happen if the extra field content doesn't
+     * follow the recommended pattern of two-byte id followed by a
+     * two-byte length?</li>
+     * <li>What shall happen if an extra field is generally supported
+     * by Commons Compress but its content cannot be parsed
+     * correctly? This may for example happen if the archive is
+     * corrupt, it triggers a bug in Commons Compress or the extra
+     * field uses a version not (yet) supported by Commons
+     * Compress.</li>
      * </ul>
      *
      * @since 1.19
      */
-    public enum ExtraFieldParsingMode implements ExtraFieldParsingBehavior {
+    public enum ExtraFieldParsingMode implements ExtraFieldParsingBehavior{
+
         /**
          * Try to parse as many extra fields as possible and wrap
          * unknown extra fields as well as supported extra fields that
          * cannot be parsed in {@link UnrecognizedExtraField}.
          *
-         * <p>Wrap extra data that doesn't follow the recommended
+         * <p>
+         * Wrap extra data that doesn't follow the recommended
          * pattern in an {@link UnparseableExtraFieldData}
-         * instance.</p>
+         * instance.
+         * </p>
          *
-         * <p>This is the default behavior starting with Commons Compress 1.19.</p>
+         * <p>
+         * This is the default behavior starting with Commons Compress 1.19.
+         * </p>
          */
-        BEST_EFFORT(ExtraFieldUtils.UnparseableExtraField.READ) {
+        BEST_EFFORT(ExtraFieldUtils.UnparseableExtraField.READ){
+
             @Override
-            public ZipExtraField fill(ZipExtraField field, byte[] data, int off, int len, boolean local) {
+            public ZipExtraField fill(ZipExtraField field,byte[] data,int off,int len,boolean local){
                 return fillAndMakeUnrecognizedOnError(field, data, off, len, local);
             }
         },
@@ -1146,15 +1267,21 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
          * Try to parse as many extra fields as possible and wrap
          * unknown extra fields in {@link UnrecognizedExtraField}.
          *
-         * <p>Wrap extra data that doesn't follow the recommended
+         * <p>
+         * Wrap extra data that doesn't follow the recommended
          * pattern in an {@link UnparseableExtraFieldData}
-         * instance.</p>
+         * instance.
+         * </p>
          *
-         * <p>Throw an exception if an extra field that is generally
-         * supported cannot be parsed.</p>
+         * <p>
+         * Throw an exception if an extra field that is generally
+         * supported cannot be parsed.
+         * </p>
          *
-         * <p>This used to be the default behavior prior to Commons
-         * Compress 1.19.</p>
+         * <p>
+         * This used to be the default behavior prior to Commons
+         * Compress 1.19.
+         * </p>
          */
         STRICT_FOR_KNOW_EXTRA_FIELDS(ExtraFieldUtils.UnparseableExtraField.READ),
         /**
@@ -1162,12 +1289,15 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
          * unknown extra fields as well as supported extra fields that
          * cannot be parsed in {@link UnrecognizedExtraField}.
          *
-         * <p>Ignore extra data that doesn't follow the recommended
-         * pattern.</p>
+         * <p>
+         * Ignore extra data that doesn't follow the recommended
+         * pattern.
+         * </p>
          */
-        ONLY_PARSEABLE_LENIENT(ExtraFieldUtils.UnparseableExtraField.SKIP) {
+        ONLY_PARSEABLE_LENIENT(ExtraFieldUtils.UnparseableExtraField.SKIP){
+
             @Override
-            public ZipExtraField fill(ZipExtraField field, byte[] data, int off, int len, boolean local) {
+            public ZipExtraField fill(ZipExtraField field,byte[] data,int off,int len,boolean local){
                 return fillAndMakeUnrecognizedOnError(field, data, off, len, local);
             }
         },
@@ -1175,11 +1305,15 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
          * Try to parse as many extra fields as possible and wrap
          * unknown extra fields in {@link UnrecognizedExtraField}.
          *
-         * <p>Ignore extra data that doesn't follow the recommended
-         * pattern.</p>
+         * <p>
+         * Ignore extra data that doesn't follow the recommended
+         * pattern.
+         * </p>
          *
-         * <p>Throw an exception if an extra field that is generally
-         * supported cannot be parsed.</p>
+         * <p>
+         * Throw an exception if an extra field that is generally
+         * supported cannot be parsed.
+         * </p>
          */
         ONLY_PARSEABLE_STRICT(ExtraFieldUtils.UnparseableExtraField.SKIP),
         /**
@@ -1191,38 +1325,34 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
 
         private final ExtraFieldUtils.UnparseableExtraField onUnparseableData;
 
-        private ExtraFieldParsingMode(ExtraFieldUtils.UnparseableExtraField onUnparseableData) {
+        private ExtraFieldParsingMode(ExtraFieldUtils.UnparseableExtraField onUnparseableData){
             this.onUnparseableData = onUnparseableData;
         }
 
         @Override
-        public ZipExtraField onUnparseableExtraField(byte[] data, int off, int len, boolean local,
-            int claimedLength) throws ZipException {
+        public ZipExtraField onUnparseableExtraField(byte[] data,int off,int len,boolean local,int claimedLength) throws ZipException{
             return onUnparseableData.onUnparseableExtraField(data, off, len, local, claimedLength);
         }
 
         @Override
-        public ZipExtraField createExtraField(final ZipShort headerId)
-            throws ZipException, InstantiationException, IllegalAccessException {
+        public ZipExtraField createExtraField(final ZipShort headerId) throws ZipException,InstantiationException,IllegalAccessException{
             return ExtraFieldUtils.createExtraField(headerId);
         }
 
         @Override
-        public ZipExtraField fill(ZipExtraField field, byte[] data, int off, int len, boolean local)
-            throws ZipException {
+        public ZipExtraField fill(ZipExtraField field,byte[] data,int off,int len,boolean local) throws ZipException{
             return ExtraFieldUtils.fillExtraField(field, data, off, len, local);
         }
 
-        private static ZipExtraField fillAndMakeUnrecognizedOnError(ZipExtraField field, byte[] data, int off,
-            int len, boolean local) {
-            try {
+        private static ZipExtraField fillAndMakeUnrecognizedOnError(ZipExtraField field,byte[] data,int off,int len,boolean local){
+            try{
                 return ExtraFieldUtils.fillExtraField(field, data, off, len, local);
-            } catch (ZipException ex) {
+            }catch (ZipException ex){
                 final UnrecognizedExtraField u = new UnrecognizedExtraField();
                 u.setHeaderId(field.getHeaderId());
-                if (local) {
+                if (local){
                     u.setLocalFileDataData(Arrays.copyOfRange(data, off, off + len));
-                } else {
+                }else{
                     u.setCentralDirectoryData(Arrays.copyOfRange(data, off, off + len));
                 }
                 return u;

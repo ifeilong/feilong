@@ -38,51 +38,54 @@ import com.feilong.lib.compress.utils.InputStreamStatistics;
  * @author Emmanuel Bourg
  * @since 1.7
  */
-class ExplodingInputStream extends InputStream implements InputStreamStatistics {
+class ExplodingInputStream extends InputStream implements InputStreamStatistics{
 
     /** The underlying stream containing the compressed data */
-    private final InputStream in;
+    private final InputStream    in;
 
     /** The stream of bits read from the input stream */
-    private BitStream bits;
+    private BitStream            bits;
 
     /** The size of the sliding dictionary (4K or 8K) */
-    private final int dictionarySize;
+    private final int            dictionarySize;
 
     /** The number of Shannon-Fano trees (2 or 3) */
-    private final int numberOfTrees;
+    private final int            numberOfTrees;
 
-    private final int minimumMatchLength;
+    private final int            minimumMatchLength;
 
     /** The binary tree containing the 256 encoded literals (null when only two trees are used) */
-    private BinaryTree literalTree;
+    private BinaryTree           literalTree;
 
     /** The binary tree containing the 64 encoded lengths */
-    private BinaryTree lengthTree;
+    private BinaryTree           lengthTree;
 
     /** The binary tree containing the 64 encoded distances */
-    private BinaryTree distanceTree;
+    private BinaryTree           distanceTree;
 
     /** Output buffer holding the decompressed data */
-    private final CircularBuffer buffer = new CircularBuffer(32 * 1024);
+    private final CircularBuffer buffer            = new CircularBuffer(32 * 1024);
 
-    private long uncompressedCount = 0;
+    private long                 uncompressedCount = 0;
 
-    private long treeSizes = 0;
+    private long                 treeSizes         = 0;
 
     /**
      * Create a new stream decompressing the content of the specified stream
      * using the explode algorithm.
      *
-     * @param dictionarySize the size of the sliding dictionary (4096 or 8192)
-     * @param numberOfTrees  the number of trees (2 or 3)
-     * @param in             the compressed data stream
+     * @param dictionarySize
+     *            the size of the sliding dictionary (4096 or 8192)
+     * @param numberOfTrees
+     *            the number of trees (2 or 3)
+     * @param in
+     *            the compressed data stream
      */
-    public ExplodingInputStream(final int dictionarySize, final int numberOfTrees, final InputStream in) {
-        if (dictionarySize != 4096 && dictionarySize != 8192) {
+    public ExplodingInputStream(final int dictionarySize, final int numberOfTrees, final InputStream in){
+        if (dictionarySize != 4096 && dictionarySize != 8192){
             throw new IllegalArgumentException("The dictionary size must be 4096 or 8192");
         }
-        if (numberOfTrees != 2 && numberOfTrees != 3) {
+        if (numberOfTrees != 2 && numberOfTrees != 3){
             throw new IllegalArgumentException("The number of trees must be 2 or 3");
         }
         this.dictionarySize = dictionarySize;
@@ -96,11 +99,11 @@ class ExplodingInputStream extends InputStream implements InputStreamStatistics 
      *
      * @throws IOException
      */
-    private void init() throws IOException {
-        if (bits == null) {
+    private void init() throws IOException{
+        if (bits == null){
             // we do not want to close in
-            try (CountingInputStream i = new CountingInputStream(new CloseShieldFilterInputStream(in))) {
-                if (numberOfTrees == 3) {
+            try (CountingInputStream i = new CountingInputStream(new CloseShieldFilterInputStream(in))){
+                if (numberOfTrees == 3){
                     literalTree = BinaryTree.decode(i, 256);
                 }
 
@@ -114,13 +117,13 @@ class ExplodingInputStream extends InputStream implements InputStreamStatistics 
     }
 
     @Override
-    public int read() throws IOException {
-        if (!buffer.available()) {
+    public int read() throws IOException{
+        if (!buffer.available()){
             fillBuffer();
         }
 
         final int ret = buffer.get();
-        if (ret > -1) {
+        if (ret > -1){
             uncompressedCount++;
         }
         return ret;
@@ -130,7 +133,7 @@ class ExplodingInputStream extends InputStream implements InputStreamStatistics 
      * @since 1.17
      */
     @Override
-    public long getCompressedCount() {
+    public long getCompressedCount(){
         return bits.getBytesRead() + treeSizes;
     }
 
@@ -138,7 +141,7 @@ class ExplodingInputStream extends InputStream implements InputStreamStatistics 
      * @since 1.17
      */
     @Override
-    public long getUncompressedCount() {
+    public long getUncompressedCount(){
         return uncompressedCount;
     }
 
@@ -146,52 +149,53 @@ class ExplodingInputStream extends InputStream implements InputStreamStatistics 
      * @since 1.17
      */
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         in.close();
     }
 
     /**
      * Fill the sliding dictionary with more data.
+     * 
      * @throws IOException
      */
-    private void fillBuffer() throws IOException {
+    private void fillBuffer() throws IOException{
         init();
 
         final int bit = bits.nextBit();
-        if (bit == -1) {
+        if (bit == -1){
             // EOF
             return;
-        } else if (bit == 1) {
+        }else if (bit == 1){
             // literal value
             int literal;
-            if (literalTree != null) {
+            if (literalTree != null){
                 literal = literalTree.read(bits);
-            } else {
+            }else{
                 literal = bits.nextByte();
             }
 
-            if (literal == -1) {
+            if (literal == -1){
                 // end of stream reached, nothing left to decode
                 return;
             }
 
             buffer.put(literal);
 
-        } else {
+        }else{
             // back reference
             final int distanceLowSize = dictionarySize == 4096 ? 6 : 7;
             final int distanceLow = (int) bits.nextBits(distanceLowSize);
             final int distanceHigh = distanceTree.read(bits);
-            if (distanceHigh == -1 && distanceLow <= 0) {
+            if (distanceHigh == -1 && distanceLow <= 0){
                 // end of stream reached, nothing left to decode
                 return;
             }
             final int distance = distanceHigh << distanceLowSize | distanceLow;
 
             int length = lengthTree.read(bits);
-            if (length == 63) {
+            if (length == 63){
                 final long nextByte = bits.nextBits(8);
-                if (nextByte == -1) {
+                if (nextByte == -1){
                     // EOF
                     return;
                 }

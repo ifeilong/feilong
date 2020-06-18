@@ -18,11 +18,10 @@
  */
 package com.feilong.lib.compress.archivers;
 
-
 /**
  * Provides information about ArchiveEntry stream offsets.
  */
-public interface EntryStreamOffsets {
+public interface EntryStreamOffsets{
 
     /** Special value indicating that the offset is unknown. */
     long OFFSET_UNKNOWN = -1;
@@ -31,7 +30,7 @@ public interface EntryStreamOffsets {
      * Gets the offset of data stream within the archive file,
      *
      * @return
-     *      the offset of entry data stream, {@code OFFSET_UNKNOWN} if not known.
+     *         the offset of entry data stream, {@code OFFSET_UNKNOWN} if not known.
      */
     long getDataOffset();
 
@@ -40,7 +39,7 @@ public interface EntryStreamOffsets {
      * several archive parts, interspersed with control blocks, etc.
      *
      * @return
-     *      true if stream is contiguous, false otherwise.
+     *         true if stream is contiguous, false otherwise.
      */
     boolean isStreamContiguous();
 }
