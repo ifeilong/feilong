@@ -21,11 +21,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.BeanIntrospectionData;
-import com.feilong.lib.beanutils.FluentPropertyBeanIntrospector;
-import com.feilong.lib.beanutils.PropertyUtilsBean;
-import com.feilong.lib.beanutils.SuppressPropertiesBeanIntrospector;
-
 import junit.framework.TestCase;
 
 /**
@@ -33,22 +28,21 @@ import junit.framework.TestCase;
  *
  * @version $Id$
  */
-public class BeanIntrospectionDataTestCase extends TestCase {
+public class BeanIntrospectionDataTestCase extends TestCase{
+
     /** Constant for the test bean class. */
     private static final Class<?> BEAN_CLASS = FluentIntrospectionTestBean.class;
 
     /** Constant for the name of the test property. */
-    private static final String TEST_PROP = "fluentGetProperty";
+    private static final String   TEST_PROP  = "fluentGetProperty";
 
     /**
      * Creates an array with property descriptors for the test bean class.
      *
      * @return the array with property descriptors
      */
-    private static PropertyDescriptor[] fetchDescriptors() {
+    private static PropertyDescriptor[] fetchDescriptors(){
         final PropertyUtilsBean pub = new PropertyUtilsBean();
-        pub.removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
-        pub.addBeanIntrospector(new FluentPropertyBeanIntrospector());
         return pub.getPropertyDescriptors(BEAN_CLASS);
     }
 
@@ -57,42 +51,41 @@ public class BeanIntrospectionDataTestCase extends TestCase {
      *
      * @return the test instance
      */
-    private static BeanIntrospectionData setUpData() {
+    private static BeanIntrospectionData setUpData(){
         return new BeanIntrospectionData(fetchDescriptors());
     }
 
     /**
      * Returns the property descriptor for the test property.
      *
-     * @param bid the data object
+     * @param bid
+     *            the data object
      * @return the test property descriptor
      */
-    private static PropertyDescriptor fetchTestDescriptor(final BeanIntrospectionData bid) {
+    private static PropertyDescriptor fetchTestDescriptor(final BeanIntrospectionData bid){
         return bid.getDescriptor(TEST_PROP);
     }
 
     /**
      * Tests whether a write method can be queried if it is defined in the descriptor.
      */
-    public void testGetWriteMethodDefined() {
+    public void testGetWriteMethodDefined(){
         final BeanIntrospectionData data = setUpData();
         final PropertyDescriptor pd = fetchTestDescriptor(data);
         assertNotNull("No write method", pd.getWriteMethod());
-        assertEquals("Wrong write method", pd.getWriteMethod(),
-                data.getWriteMethod(BEAN_CLASS, pd));
+        assertEquals("Wrong write method", pd.getWriteMethod(), data.getWriteMethod(BEAN_CLASS, pd));
     }
 
     /**
      * Tests whether a write method can be queried that is currently not available in the
      * property descriptor.
      */
-    public void testGetWriteMethodUndefined() throws Exception {
+    public void testGetWriteMethodUndefined() throws Exception{
         final BeanIntrospectionData data = setUpData();
         final PropertyDescriptor pd = fetchTestDescriptor(data);
         final Method writeMethod = pd.getWriteMethod();
         pd.setWriteMethod(null);
-        assertEquals("Wrong write method", writeMethod,
-                data.getWriteMethod(BEAN_CLASS, pd));
+        assertEquals("Wrong write method", writeMethod, data.getWriteMethod(BEAN_CLASS, pd));
         assertEquals("Method not set in descriptor", writeMethod, pd.getWriteMethod());
     }
 
@@ -100,14 +93,14 @@ public class BeanIntrospectionDataTestCase extends TestCase {
      * Tests getWriteMethod() if the method cannot be resolved. (This is a corner case
      * which should normally not happen in practice.)
      */
-    public void testGetWriteMethodNonExisting() throws Exception {
-        final PropertyDescriptor pd = new PropertyDescriptor(TEST_PROP,
-                BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
-                        "setFluentGetProperty", String.class));
+    public void testGetWriteMethodNonExisting() throws Exception{
+        final PropertyDescriptor pd = new PropertyDescriptor(
+                        TEST_PROP,
+                        BEAN_CLASS.getMethod("getFluentGetProperty"),
+                        BEAN_CLASS.getMethod("setFluentGetProperty", String.class));
         final Map<String, String> methods = new HashMap<String, String>();
         methods.put(TEST_PROP, "hashCode");
-        final BeanIntrospectionData data = new BeanIntrospectionData(
-                new PropertyDescriptor[] { pd }, methods);
+        final BeanIntrospectionData data = new BeanIntrospectionData(new PropertyDescriptor[] { pd }, methods);
         pd.setWriteMethod(null);
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));
     }
@@ -115,7 +108,7 @@ public class BeanIntrospectionDataTestCase extends TestCase {
     /**
      * Tests getWriteMethod() for a property for which no write method is known.
      */
-    public void testGetWriteMethodUnknown() {
+    public void testGetWriteMethodUnknown(){
         final BeanIntrospectionData data = setUpData();
         final PropertyDescriptor pd = data.getDescriptor("class");
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));

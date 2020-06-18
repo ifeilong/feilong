@@ -141,7 +141,6 @@ public class BeanUtilsBean{
      *            to access properties
      */
     public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean, final PropertyUtilsBean propertyUtilsBean){
-
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
     }
@@ -179,7 +178,6 @@ public class BeanUtilsBean{
      */
     public Object cloneBean(final Object bean)
                     throws IllegalAccessException,InstantiationException,InvocationTargetException,NoSuchMethodException{
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("Cloning bean: " + bean.getClass().getName());
         }
@@ -252,7 +250,6 @@ public class BeanUtilsBean{
      *             throws an exception
      */
     public void copyProperties(final Object dest,final Object orig) throws IllegalAccessException,InvocationTargetException{
-
         // Validate existence of the specified beans
         if (dest == null){
             throw new IllegalArgumentException("No destination bean specified");
@@ -747,8 +744,8 @@ public class BeanUtilsBean{
     public String getNestedProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
 
-        final Object value = getPropertyUtils().getNestedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        final Object value = getPropertyUtils().getProperty(bean, name);
+        return getConvertUtils().convert(value);
 
     }
 

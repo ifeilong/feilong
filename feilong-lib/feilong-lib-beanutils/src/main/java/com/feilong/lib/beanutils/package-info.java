@@ -308,8 +308,8 @@
  * </p>
  *
  * <ul>
- * <li>{@link com.feilong.lib.beanutils.PropertyUtils#getSimpleProperty(Object, String)}</li>
- * <li>{@link com.feilong.lib.beanutils.PropertyUtils#setSimpleProperty(Object, String, Object)}</li>
+ * <li>{@link "org.apache.commons.beanutils.PropertyUtils#getSimpleProperty(Object, String)"}</li>
+ * <li>{@link "org.apache.commons.beanutils.PropertyUtils#setSimpleProperty(Object, String, Object)"}</li>
  * </ul>
  *
  * <p>

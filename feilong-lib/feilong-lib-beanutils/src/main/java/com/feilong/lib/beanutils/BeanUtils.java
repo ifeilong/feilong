@@ -166,215 +166,6 @@ public class BeanUtils{
 
     /**
      * <p>
-     * Return the value of the specified array property of the specified
-     * bean, as a String array.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            Name of the property to be extracted
-     * @return The array property value
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getArrayProperty
-     */
-    public static String[] getArrayProperty(final Object bean,final String name)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-        return BeanUtilsBean.getInstance().getArrayProperty(bean, name);
-    }
-
-    /**
-     * <p>
-     * Return the value of the specified indexed property of the specified
-     * bean, as a String.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            <code>propertyname[index]</code> of the property value
-     *            to be extracted
-     * @return The indexed property's value, converted to a String
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getIndexedProperty(Object, String)
-     */
-    public static String getIndexedProperty(final Object bean,final String name)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-        return BeanUtilsBean.getInstance().getIndexedProperty(bean, name);
-
-    }
-
-    /**
-     * Return the value of the specified indexed property of the specified
-     * bean, as a String. The index is specified as a method parameter and
-     * must *not* be included in the property name expression
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            Simple property name of the property value to be extracted
-     * @param index
-     *            Index of the property value to be extracted
-     * @return The indexed property's value, converted to a String
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getIndexedProperty(Object, String, int)
-     */
-    public static String getIndexedProperty(final Object bean,final String name,final int index)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
-        return BeanUtilsBean.getInstance().getIndexedProperty(bean, name, index);
-
-    }
-
-    /**
-     * </p>
-     * Return the value of the specified indexed property of the specified
-     * bean, as a String.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            <code>propertyname(index)</code> of the property value
-     *            to be extracted
-     * @return The mapped property's value, converted to a String
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getMappedProperty(Object, String)
-     */
-    public static String getMappedProperty(final Object bean,final String name)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
-        return BeanUtilsBean.getInstance().getMappedProperty(bean, name);
-
-    }
-
-    /**
-     * </p>
-     * Return the value of the specified mapped property of the specified
-     * bean, as a String.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            Simple property name of the property value to be extracted
-     * @param key
-     *            Lookup key of the property value to be extracted
-     * @return The mapped property's value, converted to a String
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getMappedProperty(Object, String, String)
-     */
-    public static String getMappedProperty(final Object bean,final String name,final String key)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
-        return BeanUtilsBean.getInstance().getMappedProperty(bean, name, key);
-
-    }
-
-    /**
-     * <p>
-     * Return the value of the (possibly nested) property of the specified
-     * name, for the specified bean, as a String.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            Possibly nested name of the property to be extracted
-     * @return The nested property's value, converted to a String
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws IllegalArgumentException
-     *             if a nested reference to a
-     *             property returns null
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getNestedProperty
-     */
-    public static String getNestedProperty(final Object bean,final String name)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
-        return BeanUtilsBean.getInstance().getNestedProperty(bean, name);
-
-    }
-
-    /**
-     * <p>
      * Return the value of the specified property of the specified bean,
      * no matter which property reference format is used, as a String.
      * </p>
@@ -403,43 +194,7 @@ public class BeanUtils{
      */
     public static String getProperty(final Object bean,final String name)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
         return BeanUtilsBean.getInstance().getProperty(bean, name);
-
-    }
-
-    /**
-     * <p>
-     * Return the value of the specified simple property of the specified
-     * bean, converted to a String.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>BeanUtilsBean</code>.
-     * </p>
-     *
-     * @param bean
-     *            Bean whose property is to be extracted
-     * @param name
-     *            Name of the property to be extracted
-     * @return The property's value, converted to a String
-     *
-     * @throws IllegalAccessException
-     *             if the caller does not have
-     *             access to the property accessor method
-     * @throws InvocationTargetException
-     *             if the property accessor method
-     *             throws an exception
-     * @throws NoSuchMethodException
-     *             if an accessor method for this
-     *             property cannot be found
-     * @see BeanUtilsBean#getSimpleProperty
-     */
-    public static String getSimpleProperty(final Object bean,final String name)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
-
-        return BeanUtilsBean.getInstance().getSimpleProperty(bean, name);
-
     }
 
     /**
@@ -468,7 +223,6 @@ public class BeanUtils{
      */
     public static void populate(final Object bean,final Map<String, ? extends Object> properties)
                     throws IllegalAccessException,InvocationTargetException{
-
         BeanUtilsBean.getInstance().populate(bean, properties);
     }
 
@@ -499,7 +253,6 @@ public class BeanUtils{
      */
     public static void setProperty(final Object bean,final String name,final Object value)
                     throws IllegalAccessException,InvocationTargetException{
-
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
     }
 

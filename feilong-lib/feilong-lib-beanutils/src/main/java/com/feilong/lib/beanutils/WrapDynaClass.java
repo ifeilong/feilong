@@ -28,10 +28,8 @@ import java.util.WeakHashMap;
 import org.apache.commons.beanutils.DynaBean;
 
 /**
- * <p>
  * Implementation of <code>DynaClass</code> for DynaBeans that wrap
  * standard JavaBean instances.
- * </p>
  *
  * <p>
  * It is suggested that this class should not usually need to be used directly
@@ -47,7 +45,6 @@ import org.apache.commons.beanutils.DynaBean;
  *
  * @version $Id$
  */
-
 public class WrapDynaClass implements DynaClass{
 
     // ----------------------------------------------------------- Constructors
@@ -206,7 +203,6 @@ public class WrapDynaClass implements DynaClass{
     @Override
     public DynaProperty[] getDynaProperties(){
         return (properties);
-
     }
 
     /**
@@ -255,9 +251,7 @@ public class WrapDynaClass implements DynaClass{
      * @return The descriptor for the specified property
      */
     public PropertyDescriptor getPropertyDescriptor(final String name){
-
         return (descriptorsMap.get(name));
-
     }
 
     // --------------------------------------------------------- Static Methods
@@ -266,9 +260,7 @@ public class WrapDynaClass implements DynaClass{
      * Clear our cache of WrapDynaClass instances.
      */
     public static void clear(){
-
         getClassesCache().clear();
-
     }
 
     /**
@@ -310,7 +302,6 @@ public class WrapDynaClass implements DynaClass{
             getClassesCache().put(key, dynaClass);
         }
         return (dynaClass);
-
     }
 
     // ------------------------------------------------------ Protected Methods
@@ -330,7 +321,6 @@ public class WrapDynaClass implements DynaClass{
      * Introspect our bean class to identify the supported properties.
      */
     protected void introspect(){
-
         // Look up the property descriptors for this bean class
         final Class<?> beanClass = getBeanClass();
         PropertyDescriptor[] regulars = getPropertyUtilsBean().getPropertyDescriptors(beanClass);
@@ -359,7 +349,6 @@ public class WrapDynaClass implements DynaClass{
             propertiesMap.put(properties[j].getName(), properties[j]);
             j++;
         }
-
     }
 
     /**

@@ -24,9 +24,7 @@ package com.feilong.lib.beanutils;
  * @since 1.7
  * @version $Id$
  */
-public class NestedNullException extends BeanAccessLanguageException{
-
-    // --------------------------------------------------------- Constuctors
+public class NestedNullException extends IllegalArgumentException{
 
     /**
      * 

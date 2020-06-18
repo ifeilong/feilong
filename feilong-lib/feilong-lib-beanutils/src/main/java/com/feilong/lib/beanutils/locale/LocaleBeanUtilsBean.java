@@ -532,7 +532,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean{
     public String getNestedProperty(final Object bean,final String name,final String pattern)
                     throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
 
-        final Object value = getPropertyUtils().getNestedProperty(bean, name);
+        final Object value = getPropertyUtils().getProperty(bean, name);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
