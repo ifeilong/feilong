@@ -1998,7 +1998,7 @@ public final class DateUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time: [{}]", DateExtensionUtil.getIntervalForView(beginDate));
+     * LOGGER.info("use time: [{}]", DateUtil.formatDuration(beginDate));
      * </pre>
      * 
      * </blockquote>
@@ -2012,7 +2012,7 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
-     * LOGGER.debug(getIntervalForView(date));
+     * LOGGER.debug(DateUtil.formatDuration(date));
      * </pre>
      * 
      * <b>返回:</b>
@@ -2066,7 +2066,7 @@ public final class DateUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time: [{}]", DateExtensionUtil.getIntervalForView(beginDate, now()));
+     * LOGGER.info("use time: [{}]", DateUtil.formatDuration(beginDate, now()));
      * 
      * </pre>
      * 
@@ -2076,8 +2076,8 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24)             = 2小时59分44秒
-     * DateExtensionUtil.getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    = 1分钟1秒
+     * DateUtil.formatDuration(2011-05-19 8:30:40,2011-05-19 11:30:24)             = 2小时59分44秒
+     * DateUtil.formatDuration(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    = 1分钟1秒
      * </pre>
      * 
      * </blockquote>
@@ -2123,8 +2123,8 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalForView(13516)    = 13秒516毫秒
-     * DateExtensionUtil.getIntervalForView(0)        = 0
+     * DateUtil.formatDuration(13516)    = 13秒516毫秒
+     * DateUtil.formatDuration(0)        = 0
      * </pre>
      * 
      * </blockquote>
