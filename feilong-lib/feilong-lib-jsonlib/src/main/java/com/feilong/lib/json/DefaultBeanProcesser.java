@@ -17,17 +17,20 @@ package com.feilong.lib.json;
 
 import java.beans.PropertyDescriptor;
 import java.util.Collection;
+import java.util.Map;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.processors.PropertyNameProcessorMatcher;
 import com.feilong.lib.json.util.IsIgnoreUtil;
-import com.feilong.lib.json.util.PropertyNameProcessorUtil;
+import com.feilong.lib.json.util.KeyUpdater;
 import com.feilong.lib.json.util.PropertyFilter;
 
 /**
+ * 基于 bean 对象的解析成JSONObject.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -41,71 +44,78 @@ public class DefaultBeanProcesser{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     static JSONObject process(Object bean,JSONObject jsonObject,JsonConfig jsonConfig) throws Exception{
         Class<?> beanClass = bean.getClass();
-        PropertyNameProcessor propertyNameProcessor = jsonConfig.findJsonPropertyNameProcessor(beanClass);
+        PropertyNameProcessor propertyNameProcessor = findJsonPropertyNameProcessor(beanClass, jsonConfig);
+
         Collection<String> exclusions = jsonConfig.getMergedExcludes();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
         //---------------------------------------------------------------
         PropertyDescriptor[] propertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
-
-        for (int i = 0; i < propertyDescriptors.length; i++){
-            PropertyDescriptor propertyDescriptor = propertyDescriptors[i];
-
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptors){
             if (IsIgnoreUtil.isIgnore(beanClass, propertyDescriptor, exclusions)){
                 continue;
             }
-
             //---------------------------------------------------------------
             String key = propertyDescriptor.getName();
             Object value = PropertyUtils.getSimpleProperty(bean, key);
             if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
                 continue;
             }
-
-            //FIXME
-            //                if (bean.getClass().getName().equals("com.feilong.store.member.User")){
-            //                    continue;
-            //                }
-            //---------------------------------------------------------------
-            Class<?> type = propertyDescriptor.getPropertyType();
-            //FIXME
-            //                if (bean.getClass().getName().equals("1com.feilong.store.member.User")){
-            //                    return null;
-            //                }
-
-            //FIXME
-            //if (!bean.getClass().getName().equals("com.feilong.store.member.User")){
-            set(jsonObject, beanClass, key, value, type, jsonConfig, propertyNameProcessor);
-            //}
+            set(jsonObject, beanClass, propertyDescriptor, value, jsonConfig, propertyNameProcessor);
         }
-        //---------------------------------------------------------------
         return jsonObject;
     }
 
+    //---------------------------------------------------------------
+
     private static void set(
                     JSONObject jsonObject,
-
                     Class<?> beanClass,
-                    String key,
+
+                    PropertyDescriptor propertyDescriptor,
                     Object value,
-                    Class<?> type,
 
                     JsonConfig jsonConfig,
                     PropertyNameProcessor propertyNameProcessor){
-        JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(beanClass, type, key);
+        String propertyName = propertyDescriptor.getName();
+        Class<?> type = propertyDescriptor.getPropertyType();
+        JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(type, propertyName);
+
         boolean bypass = false;
         if (jsonValueProcessor != null){
-            value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
+            value = jsonValueProcessor.processObjectValue(propertyName, value, jsonConfig);
             bypass = true;
             if (!JsonVerifier.isValidJsonValue(value)){
                 throw new JSONException("Value is not a valid JSON value. " + value);
             }
         }
         //---------------------------------------------------------------
-        key = PropertyNameProcessorUtil.update(beanClass, key, propertyNameProcessor);
-        JSONObjectSetValueCore.setValue(jsonObject, key, value, type, jsonConfig, bypass);
+        propertyName = KeyUpdater.update(beanClass, propertyName, propertyNameProcessor);
+        JSONObjectValueSetter.set(jsonObject, propertyName, value, type, jsonConfig, bypass);
+    }
+
+    /**
+     * Finds a PropertyNameProcessor registered to the target class.<br>
+     * Returns null if none is registered.<br>
+     * [Java -&gt; JSON]
+     *
+     * @param beanClass
+     *            the bean class
+     * @param jsonConfig
+     * @return the property name processor
+     */
+    private static PropertyNameProcessor findJsonPropertyNameProcessor(Class<?> beanClass,JsonConfig jsonConfig){
+        Map<Class<?>, PropertyNameProcessor> jsonPropertyNameProcessorMap = jsonConfig.getJsonPropertyNameProcessorMap();
+        if (!jsonPropertyNameProcessorMap.isEmpty()){
+            Object key = PropertyNameProcessorMatcher.getMatch(beanClass, jsonPropertyNameProcessorMap.keySet());
+            return jsonPropertyNameProcessorMap.get(key);
+
+        }
+        return null;
     }
 
 }

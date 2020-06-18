@@ -86,11 +86,7 @@ public class JSONTokenerParser{
                 if (quoted && value instanceof String && (JSONUtils.mayBeJSON((String) value))){
                     value = JSONUtils.DOUBLE_QUOTE + value + JSONUtils.DOUBLE_QUOTE;
                 }
-                if (jsonObject.properties.containsKey(key)){
-                    jsonObject.accumulate(key, value, jsonConfig);
-                }else{
-                    jsonObject.put(key, value, jsonConfig);
-                }
+                jsonObject.accumulate(key, value, jsonConfig);
             }
             //---------------------------------------------------------------
 

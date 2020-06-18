@@ -122,11 +122,15 @@ public final class JSONObject implements JSON{
     //---------------------------------------------------------------
 
     /**
-     * Accumulate values under a key. It is similar to the element method except
-     * that if there is already an object stored under the key then a JSONArray
-     * is stored under the key to hold all of the accumulated values. If there is
-     * already a JSONArray, then the new value is appended to it. In contrast,
-     * the replace method replaces the previous value.
+     * Accumulate values under a key.
+     * 
+     * <p>
+     * It is similar to the element method except that if there is already an object stored under the key then a JSONArray is stored under
+     * the key to hold all of the accumulated values.
+     * 
+     * If there is already a JSONArray, then the new value is appended to it.
+     * In contrast, the replace method replaces the previous value.
+     * </p>
      *
      * @param key
      *            A key string.
@@ -135,60 +139,64 @@ public final class JSONObject implements JSON{
      * @param jsonConfig
      *            the json config
      * @return this.
-     * @throws JSONException
-     *             If the value is an invalid number or if the key is null.
      */
     public JSONObject accumulate(String key,Object value,JsonConfig jsonConfig){
-        if (isNullObject()){
-            throw new JSONException("Can't accumulate on null object");
-        }
-
         if (!this.properties.containsKey(key)){
-            setInternal(key, value, jsonConfig);
-        }else{
-            Object o = get(key);
-            if (o instanceof JSONArray){
-                ((JSONArray) o).addValue(value, jsonConfig);
-            }else{
-                JSONArray jsonArray = new JSONArray().addValue(o).addValue(value, jsonConfig);
-                setInternal(key, jsonArray, jsonConfig);
-            }
+            put(key, value, jsonConfig);
+            return this;
         }
 
+        //---------------------------------------------------------------
+        Object o = get(key);
+        if (o instanceof JSONArray){
+            ((JSONArray) o).addValue(value, jsonConfig);
+        }else{
+            JSONArray jsonArray = new JSONArray().addValue(o).addValue(value, jsonConfig);
+            put(key, jsonArray, jsonConfig);
+        }
         return this;
     }
 
     /**
-     * Put a key/value pair in the JSONObject. If the value is null, then the key will be removed from the JSONObject if it is present.<br>
+     * Put a key/value pair in the JSONObject. <br>
+     * 
+     * If the value is null, then the key will be removed from the JSONObject if it is present.<br>
      * If there is a previous value assigned to the key, it will call accumulate.
      *
      * @param key
      *            A key string.
      * @param value
-     *            An object which is the value. It should be of one of these
-     *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
+     *            An object which is the value. It should be of one of these types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
      *            String, or the JSONNull object.
      * @param jsonConfig
      *            the json config
      * @return this.
-     * @throws JSONException
-     *             If the value is non-finite number or if the key is null.
      */
-    public JSONObject put(String key,Object value,JsonConfig jsonConfig){
-        verifyIsNull();
+    private JSONObject put(String key,Object value,JsonConfig jsonConfig){
         if (key == null){
             throw new JSONException("Null key.");
         }
-
         //---------------------------------------------------------------
-        if (value != null){
-            value = ProcessValueUtil.processJsonObjectValue(key, value, jsonConfig);
-            _setInternal(key, value);
-        }else{
+        if (value == null){
             this.properties.remove(key);
+            return this;
+        }
+
+        value = ProcessValueUtil.processJsonObjectValue(key, value, jsonConfig);
+        if (JSONUtils.isString(value) && JSONUtils.mayBeJSON(String.valueOf(value))){
+            this.properties.put(key, value);
+            return this;
+        }
+        //---------------------------------------------------------------
+        if (CycleDetectionStrategy.IGNORE_PROPERTY_OBJ == value || CycleDetectionStrategy.IGNORE_PROPERTY_ARR == value){
+            // do nothing
+        }else{
+            this.properties.put(key, value);
         }
         return this;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Get the value object associated with a key.
@@ -200,7 +208,6 @@ public final class JSONObject implements JSON{
      *             if this.isNull() returns true.
      */
     public Object get(String key){
-        verifyIsNull();
         return this.properties.get(key);
     }
 
@@ -219,7 +226,6 @@ public final class JSONObject implements JSON{
      * @return An iterator of the keys.
      */
     public Set<String> keys(){
-        verifyIsNull();
         return Collections.unmodifiableSet(properties.keySet());
     }
 
@@ -233,7 +239,6 @@ public final class JSONObject implements JSON{
      *         is empty.
      */
     public List<String> names(JsonConfig jsonConfig){
-        verifyIsNull();
 
         List<String> list = newArrayList();
 
@@ -306,66 +311,6 @@ public final class JSONObject implements JSON{
             return toString();
         }
         return ToStringUtil.toString(properties, indentFactor, indent);
-    }
-
-    /**
-     * Put a key/value pair in the JSONObject.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object which is the value. It should be of one of these
-     *            types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
-     *            String, or the JSONNull object.
-     * @return this.
-     */
-    private JSONObject _setInternal(String key,Object value){
-        verifyIsNull();
-        if (key == null){
-            throw new JSONException("Null key.");
-        }
-
-        //---------------------------------------------------------------
-        if (JSONUtils.isString(value) && JSONUtils.mayBeJSON(String.valueOf(value))){
-            this.properties.put(key, value);
-        }else{
-            if (CycleDetectionStrategy.IGNORE_PROPERTY_OBJ == value || CycleDetectionStrategy.IGNORE_PROPERTY_ARR == value){
-                // do nothing
-            }else{
-                this.properties.put(key, value);
-            }
-        }
-        return this;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Put a key/value pair in the JSONObject.
-     *
-     * @param key
-     *            A key string.
-     * @param value
-     *            An object which is the value. It should be of one of these types: Boolean, Double, Integer, JSONArray, JSONObject, Long,
-     *            String, or the JSONNull object.
-     * @param jsonConfig
-     *            the json config
-     * @return this.
-     * @throws JSONException
-     *             If the value is non-finite number or if the key is null.
-     */
-    JSONObject setInternal(String key,Object value,JsonConfig jsonConfig){
-        Object processJsonObjectValue = ProcessValueUtil.processJsonObjectValue(key, value, jsonConfig);
-        return _setInternal(key, processJsonObjectValue);
-    }
-
-    /**
-     * Checks if this object is a "null" object.
-     */
-    private void verifyIsNull(){
-        if (isNullObject()){
-            throw new JSONException("null object");
-        }
     }
 
 }

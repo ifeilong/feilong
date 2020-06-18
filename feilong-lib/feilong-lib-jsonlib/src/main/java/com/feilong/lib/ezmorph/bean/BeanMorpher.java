@@ -54,9 +54,6 @@ public final class BeanMorpher implements ObjectMorpher{
     /** The bean class. */
     private final Class<?>        beanClass;
 
-    /** The lenient. */
-    private final boolean         lenient;
-
     /** The morpher registry. */
     private final MorpherRegistry morpherRegistry;
 
@@ -71,28 +68,12 @@ public final class BeanMorpher implements ObjectMorpher{
      *            a registry of morphers
      */
     public BeanMorpher(Class<?> beanClass, MorpherRegistry morpherRegistry){
-        this(beanClass, morpherRegistry, false);
-    }
-
-    /**
-     * Instantiates a new bean morpher.
-     *
-     * @param beanClass
-     *            the target class to morph to
-     * @param morpherRegistry
-     *            a registry of morphers
-     * @param lenient
-     *            if an exception should be raised if no morpher is found for
-     *            a target property
-     */
-    public BeanMorpher(Class<?> beanClass, MorpherRegistry morpherRegistry, boolean lenient){
         validateClass(beanClass);
         if (morpherRegistry == null){
             throw new MorphException("morpherRegistry is null");
         }
         this.beanClass = beanClass;
         this.morpherRegistry = morpherRegistry;
-        this.lenient = lenient;
     }
 
     //---------------------------------------------------------------
@@ -114,13 +95,11 @@ public final class BeanMorpher implements ObjectMorpher{
         }
 
         //---------------------------------------------------------------
-        Object targetBean = null;
         try{
-            targetBean = beanClass.newInstance();
-            PropertyDescriptor[] targetPropertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
-            for (int i = 0; i < targetPropertyDescriptors.length; i++){
+            Object targetBean = beanClass.newInstance();
 
-                PropertyDescriptor targetPropertyDescriptor = targetPropertyDescriptors[i];
+            PropertyDescriptor[] targetPropertyDescriptors = PropertyUtil.getPropertyDescriptors(beanClass);
+            for (PropertyDescriptor targetPropertyDescriptor : targetPropertyDescriptors){
                 String name = targetPropertyDescriptor.getName();
                 if (targetPropertyDescriptor.getWriteMethod() == null){
                     LOGGER.info("Property '{}.{}' has no write method. SKIPPED.", beanClass.getName(), name);
@@ -155,13 +134,12 @@ public final class BeanMorpher implements ObjectMorpher{
                 Object value = PropertyUtils.getProperty(sourceBean, name);
                 setProperty(targetBean, name, sourceType, targetType, value);
             }
+            return targetBean;
         }catch (MorphException me){
             throw me;
         }catch (Exception e){
             throw new MorphException(e);
         }
-
-        return targetBean;
     }
 
     //---------------------------------------------------------------
@@ -210,8 +188,7 @@ public final class BeanMorpher implements ObjectMorpher{
      * @throws NoSuchMethodException
      *             the no such method exception
      */
-    private void setProperty(Object targetBean,String name,Class<?> sourceType,Class<?> targetType,Object value)
-                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
+    private void setProperty(Object targetBean,String name,Class<?> sourceType,Class<?> targetType,Object value) throws Exception{
         if (targetType.isAssignableFrom(sourceType)){
             if (value == null && targetType.isPrimitive()){
                 value = morpherRegistry.morph(targetType, value);
@@ -236,13 +213,9 @@ public final class BeanMorpher implements ObjectMorpher{
         }
 
         if (IdentityObjectMorpher.INSTANCE == morpherRegistry.getMorpherFor(targetType)){
-            if (!lenient){
-                throw new MorphException("Can't find a morpher for target class " + targetType.getName() + " (" + name + ")");
-            }
-            LOGGER.info("Can't find a morpher for target class {} ({}) SKIPPED", targetType.getName(), name);
-        }else{
-            PropertyUtils.setProperty(targetBean, name, morpherRegistry.morph(targetType, value));
+            throw new MorphException("Can't find a morpher for target class " + targetType.getName() + " (" + name + ")");
         }
+        PropertyUtils.setProperty(targetBean, name, morpherRegistry.morph(targetType, value));
     }
 
     private static void validateClass(Class<?> clazz){

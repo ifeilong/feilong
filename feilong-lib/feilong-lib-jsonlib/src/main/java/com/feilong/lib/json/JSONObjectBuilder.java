@@ -17,7 +17,6 @@ package com.feilong.lib.json;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,15 +25,11 @@ import org.apache.commons.beanutils.DynaBean;
 import com.feilong.lib.beanutils.DynaProperty;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
+import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.0
- */
 public class JSONObjectBuilder{
 
     /** Don't let anyone instantiate this class. */
@@ -43,6 +38,8 @@ public class JSONObjectBuilder{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Creates a JSONObject.
@@ -56,26 +53,24 @@ public class JSONObjectBuilder{
      * @param jsonConfig
      *            the json config
      * @return the JSON object
-     * @throws JSONException
-     *             if the object can not be converted to a proper
-     *             JSONObject.
      */
     public static JSONObject build(Object object,JsonConfig jsonConfig){
         if (object == null || JSONUtils.isNull(object)){
             return new JSONObject(true);
         }
         if (object instanceof String){
-            return fromString((String) object, jsonConfig);
+            String str = (String) object;
+            if ("null".equals(str)){
+                return new JSONObject(true);
+            }
+            return JSONTokenerParser.toJSONObject(new JSONTokener(str), jsonConfig);
         }
         //---------------------------------------------------------------
         if (object instanceof JSONObject){
             return fromJSONObject((JSONObject) object, jsonConfig);
         }
-        //        if (object instanceof JSONTokener){
-        //            return JSONTokenerParser.toJSONObject((JSONTokener) object, jsonConfig);
-        //        }
         if (object instanceof Map){
-            return fromMap((Map) object, jsonConfig);
+            return fromMap((Map<?, ?>) object, jsonConfig);
         }
         if (JSONUtils.isNumber(object) || JSONUtils.isBoolean(object) || JSONUtils.isString(object)){
             return new JSONObject();
@@ -98,22 +93,6 @@ public class JSONObjectBuilder{
         return fromBean(object, jsonConfig);
     }
 
-    /**
-     * From string.
-     *
-     * @param str
-     *            the str
-     * @param jsonConfig
-     *            the json config
-     * @return the JSON object
-     */
-    private static JSONObject fromString(String str,JsonConfig jsonConfig){
-        if (str == null || "null".equals(str)){
-            return new JSONObject(true);
-        }
-        return JSONTokenerParser.toJSONObject(new JSONTokener(str), jsonConfig);
-    }
-
     //---------------------------------------------------------------
     /**
      * From dyna bean.
@@ -125,39 +104,35 @@ public class JSONObjectBuilder{
      * @return the JSON object
      */
     private static JSONObject fromDynaBean(DynaBean bean,JsonConfig jsonConfig){
-        return build(bean, jsonConfig, new JsonHook<JSONObject>(){
+        return build(bean, jsonObject -> {
 
-            @Override
-            public void handle(JSONObject jsonObject){
-                DynaProperty[] dynaPropertys = bean.getDynaClass().getDynaProperties();
-                Collection<String> exclusions = jsonConfig.getMergedExcludes();
-                PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
+            DynaProperty[] dynaPropertys = bean.getDynaClass().getDynaProperties();
+            Collection<String> exclusions = jsonConfig.getMergedExcludes();
+            PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
-                for (int i = 0; i < dynaPropertys.length; i++){
-                    boolean bypass = false;
-                    DynaProperty dynaProperty = dynaPropertys[i];
-                    String key = dynaProperty.getName();
-                    if (exclusions.contains(key)){
-                        continue;
-                    }
-                    Class<?> type = dynaProperty.getType();
-                    Object value = bean.get(dynaProperty.getName());
-                    if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
-                        continue;
-                    }
-                    JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(type, key);
-                    if (jsonValueProcessor != null){
-                        value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
-                        bypass = true;
-                        if (!JsonVerifier.isValidJsonValue(value)){
-                            throw new JSONException("Value is not a valid JSON value. " + value);
-                        }
-                    }
-                    JSONObjectSetValueCore.setValue(jsonObject, key, value, type, jsonConfig, bypass);
+            for (int i = 0; i < dynaPropertys.length; i++){
+                boolean bypass = false;
+                DynaProperty dynaProperty = dynaPropertys[i];
+                String key = dynaProperty.getName();
+                if (exclusions.contains(key)){
+                    continue;
                 }
+                Class<?> type = dynaProperty.getType();
+                Object value = bean.get(dynaProperty.getName());
+                if (jsonPropertyFilter != null && jsonPropertyFilter.apply(bean, key, value)){
+                    continue;
+                }
+                JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(type, key);
+                if (jsonValueProcessor != null){
+                    value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
+                    bypass = true;
+                    if (!JsonVerifier.isValidJsonValue(value)){
+                        throw new JSONException("Value is not a valid JSON value. " + value);
+                    }
+                }
+                JSONObjectValueSetter.set(jsonObject, key, value, type, jsonConfig, bypass);
             }
         });
-
     }
 
     /**
@@ -169,64 +144,51 @@ public class JSONObjectBuilder{
      *            the json config
      * @return the JSON object
      */
-    private static JSONObject fromMap(Map map,JsonConfig jsonConfig){
-        return build(map, jsonConfig, new JsonHook<JSONObject>(){
+    private static JSONObject fromMap(Map<?, ?> map,JsonConfig jsonConfig){
+        return build(map, jsonObject -> {
+            Collection<String> exclusions = jsonConfig.getMergedExcludes();
+            PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
-            @Override
-            public void handle(JSONObject jsonObject){
-                Collection<String> exclusions = jsonConfig.getMergedExcludes();
-                PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
+            for (Map.Entry<?, ?> entry : map.entrySet()){
+                Object k = entry.getKey();
+                if (k == null){
+                    throw new JSONException("JSON keys can't be null.");
+                }
+                //---------------------------------------------------------------
+                String key = String.valueOf(k);
+                if ("null".equals(key)){
+                    throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
+                }
+                if (exclusions.contains(key)){
+                    continue;
+                }
+                //---------------------------------------------------------------
+                Object value = entry.getValue();
+                if (jsonPropertyFilter != null && jsonPropertyFilter.apply(map, key, value)){
+                    continue;
+                }
 
-                for (Iterator entries = map.entrySet().iterator(); entries.hasNext();){
-                    boolean bypass = false;
-                    Map.Entry entry = (Map.Entry) entries.next();
-                    Object k = entry.getKey();
-                    if (k == null){
-                        throw new JSONException("JSON keys cannot be null.");
-                    }
-
-                    //---------------------------------------------------------------
-                    String key = String.valueOf(k);
-                    if ("null".equals(key)){
-                        throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
-                    }
-                    if (exclusions.contains(key)){
-                        continue;
-                    }
-
-                    //---------------------------------------------------------------
-                    Object value = entry.getValue();
-                    if (jsonPropertyFilter != null && jsonPropertyFilter.apply(map, key, value)){
-                        continue;
-                    }
-
-                    //---------------------------------------------------------------
-                    if (value != null){
-                        JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(value.getClass(), key);
-                        if (jsonValueProcessor != null){
-                            value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
-                            bypass = true;
-                            if (!JsonVerifier.isValidJsonValue(value)){
-                                throw new JSONException("Value is not a valid JSON value. " + value);
-                            }
-                        }
-                        JSONObjectSetValueCore.setValue(jsonObject, key, value, value.getClass(), jsonConfig, bypass);
-                    }else{
-                        if (jsonObject.properties.containsKey(key)){
-                            jsonObject.accumulate(key, JSONNull.getInstance(), new JsonConfig());
-                        }else{
-                            jsonObject.put(key, JSONNull.getInstance(), new JsonConfig());
+                boolean bypass = false;
+                //---------------------------------------------------------------
+                if (value != null){
+                    JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(value.getClass(), key);
+                    if (jsonValueProcessor != null){
+                        value = jsonValueProcessor.processObjectValue(key, value, jsonConfig);
+                        bypass = true;
+                        if (!JsonVerifier.isValidJsonValue(value)){
+                            throw new JSONException("Value is not a valid JSON value. " + value);
                         }
                     }
+                    JSONObjectValueSetter.set(jsonObject, key, value, value.getClass(), jsonConfig, bypass);
+                }else{
+                    jsonObject.accumulate(key, JSONNull.getInstance(), new JsonConfig());
                 }
             }
         });
-
     }
 
     /**
-     * Creates a JSONObject from a POJO.<br>
-     * Supports nested maps, POJOs, and arrays/collections.
+     * Creates a JSONObject from a POJO. Supports nested maps, POJOs, and arrays/collections.
      *
      * @param bean
      *            An object with POJO conventions
@@ -235,13 +197,9 @@ public class JSONObjectBuilder{
      * @return the JSON object
      */
     private static JSONObject fromBean(Object bean,JsonConfig jsonConfig){
-        return build(bean, jsonConfig, new JsonHook<JSONObject>(){
-
-            @Override
-            public void handle(JSONObject jsonObject) throws Exception{
-                DefaultBeanProcesser.process(bean, jsonObject, jsonConfig);
-            }
-        });
+        return build(
+                        bean,
+                        jsonObject -> DefaultBeanProcesser.process(bean, jsonObject, jsonConfig));
     }
 
     //---------------------------------------------------------------
@@ -256,54 +214,40 @@ public class JSONObjectBuilder{
      * @return the JSON object
      */
     private static JSONObject fromJSONObject(JSONObject inputJsonObject,JsonConfig jsonConfig){
-        if (inputJsonObject == null || inputJsonObject.isNullObject()){
-            return new JSONObject(true);
-        }
-        return build(inputJsonObject, jsonConfig, new JsonHook<JSONObject>(){
+        return build(inputJsonObject, jsonObject -> {
+            Collection<String> exclusions = jsonConfig.getMergedExcludes();
+            PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
-            @Override
-            public void handle(JSONObject jsonObject){
-                Collection<String> exclusions = jsonConfig.getMergedExcludes();
-                PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
-
-                List<String> names = inputJsonObject.names(jsonConfig);
-                for (String key : names){
-                    if (key == null){
-                        throw new JSONException("JSON keys cannot be null.");
-                    }
-                    if ("null".equals(key)){
-                        throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
-                    }
-                    if (exclusions.contains(key)){
-                        continue;
-                    }
-                    Object value = inputJsonObject.get(key);
-                    if (jsonPropertyFilter != null && jsonPropertyFilter.apply(inputJsonObject, key, value)){
-                        continue;
-                    }
-                    if (jsonObject.properties.containsKey(key)){
-                        jsonObject.accumulate(key, value, jsonConfig);
-                    }else{
-                        jsonObject.setInternal(key, value, jsonConfig);
-                    }
+            List<String> names = inputJsonObject.names(jsonConfig);
+            for (String key : names){
+                if (key == null){
+                    throw new JSONException("JSON keys cannot be null.");
                 }
+                if ("null".equals(key)){
+                    throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
+                }
+                if (exclusions.contains(key)){
+                    continue;
+                }
+                Object value = inputJsonObject.get(key);
+                if (jsonPropertyFilter != null && jsonPropertyFilter.apply(inputJsonObject, key, value)){
+                    continue;
+                }
+
+                jsonObject.accumulate(key, value, jsonConfig);
             }
         });
     }
 
-    private static JSONObject build(Object object,JsonConfig jsonConfig,JsonHook<JSONObject> jsonHook){
-        if (object == null){
-            return new JSONObject(true);
-        }
+    private static JSONObject build(Object object,JsonHook<JSONObject> jsonHook){
         if (!CycleSetUtil.addInstance(object)){
             try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsObject(object);
+                return CycleDetectionStrategy.LENIENT.handleRepeatedReferenceAsObject(object);
             }catch (Exception e){
                 CycleSetUtil.removeInstance(object);
                 throw new JSONException("", e);
             }
         }
-
         //---------------------------------------------------------------
         JSONObject jsonObject = new JSONObject();
         try{
@@ -315,5 +259,4 @@ public class JSONObjectBuilder{
             throw new JSONException("", e);
         }
     }
-
 }

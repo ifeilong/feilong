@@ -25,7 +25,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -383,20 +382,21 @@ public final class JSONUtils{
      * @return the dyna bean
      */
     public static DynaBean newDynaBean(JSONObject jsonObject,JsonConfig jsonConfig){
-        Map<String, Class<?>> props = getKeyAndTypeMap(jsonObject);
-        for (Iterator entries = props.entrySet().iterator(); entries.hasNext();){
-            Map.Entry entry = (Map.Entry) entries.next();
-            String key = (String) entry.getKey();
+        Map<String, Class<?>> keyAndTypeMap = getKeyAndTypeMap(jsonObject);
+
+        for (Map.Entry<String, Class<?>> entry : keyAndTypeMap.entrySet()){
+            String key = entry.getKey();
+
             if (!isJavaIdentifier(key)){
                 String parsedKey = jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(key);
                 if (parsedKey.compareTo(key) != 0){
-                    props.put(parsedKey, props.remove(key));
+                    keyAndTypeMap.put(parsedKey, keyAndTypeMap.remove(key));
                 }
             }
         }
 
         //---------------------------------------------------------------
-        MorphDynaClass dynaClass = new MorphDynaClass(props);
+        MorphDynaClass dynaClass = new MorphDynaClass(keyAndTypeMap);
         MorphDynaBean dynaBean = null;
         try{
             dynaBean = (MorphDynaBean) dynaClass.newInstance();
@@ -468,8 +468,8 @@ public final class JSONUtils{
         if (input == null || input.length() < 2){
             return false;
         }
-        return input.startsWith(SINGLE_QUOTE) && input.endsWith(SINGLE_QUOTE)
-                        || input.startsWith(DOUBLE_QUOTE) && input.endsWith(DOUBLE_QUOTE);
+        return (input.startsWith(SINGLE_QUOTE) && input.endsWith(SINGLE_QUOTE))//
+                        || (input.startsWith(DOUBLE_QUOTE) && input.endsWith(DOUBLE_QUOTE));
     }
 
     /**

@@ -20,9 +20,11 @@ import static com.feilong.core.lang.StringUtil.EMPTY;
 import com.feilong.lib.lang3.math.NumberUtils;
 
 /**
- * A JSONTokener takes a source string and extracts characters and tokens from
- * it. It is used by the JSONObject and JSONArray constructors to parse JSON
- * source strings.
+ * A JSONTokener takes a source string and extracts characters and tokens from it.
+ * 
+ * <p>
+ * It is used by the JSONObject and JSONArray constructors to parse JSON source strings.
+ * </p>
  *
  * @author JSON.org
  * @version 4
@@ -218,8 +220,12 @@ public class JSONTokener{
     }
 
     /**
-     * Get the next value. The value can be a Boolean, Double, Integer,
-     * JSONArray, JSONObject, Long, or String, or the JSONObject.NULL object.
+     * Get the next value.
+     * 
+     * <p>
+     * The value can be a Boolean, Double, Integer, JSONArray, JSONObject, Long, or String, or the JSONObject.NULL
+     * object.
+     * </p>
      * 
      * @param jsonConfig
      *
@@ -299,7 +305,6 @@ public class JSONTokener{
         }
 
         //---------------------------------------------------------------
-
         switch (peek()) {
             case ',':
             case '}':

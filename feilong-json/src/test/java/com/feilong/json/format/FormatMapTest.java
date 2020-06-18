@@ -15,7 +15,12 @@
  */
 package com.feilong.json.format;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Hashtable;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -24,15 +29,22 @@ import com.feilong.json.JsonUtil;
 
 public class FormatMapTest extends AbstractJsonTest{
 
-    /**
-     * Test hashtable.
-     */
     @Test
-    
+    public void testJsonString11(){
+        Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
+        assertEquals("{\"ID\": 4616189619433466044}", JsonUtil.format(map));
+    }
+
+    @Test
+    public void testJsonMap(){
+        Map<String, String> nullMap = null;
+        assertEquals(EMPTY, JsonUtil.format(nullMap));
+    }
+
+    @Test
     public void testHashtable(){
         Hashtable<String, Object> hashtable = new Hashtable<>();
         hashtable.put("a", "a");
-        // hashtable.put("a", null);
-        LOGGER.debug("hashtable:{}", JsonUtil.format(hashtable));
+        assertEquals("{\"a\": \"a\"}", JsonUtil.format(hashtable));
     }
 }

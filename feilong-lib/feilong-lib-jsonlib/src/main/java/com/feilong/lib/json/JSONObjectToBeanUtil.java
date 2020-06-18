@@ -23,7 +23,6 @@ import static com.feilong.lib.json.util.PropertySetStrategy.setProperty;
 import static java.util.Collections.emptyMap;
 
 import java.beans.PropertyDescriptor;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,10 +33,11 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.processors.PropertyNameProcessorMatcher;
 import com.feilong.lib.json.util.ClassResolver;
 import com.feilong.lib.json.util.JSONUtils;
+import com.feilong.lib.json.util.KeyUpdater;
 import com.feilong.lib.json.util.PropertyFilter;
-import com.feilong.lib.json.util.PropertyNameProcessorUtil;
 import com.feilong.lib.lang3.tuple.Triple;
 
 /**
@@ -194,7 +194,7 @@ public class JSONObjectToBeanUtil{
                 setProperty(bean, key, value);
                 return;
             }
-            setProperty(bean, key, PropertyValueMorpher.morphPropertyValue(key, value, jsonValueType, beanPropertyType));
+            setProperty(bean, key, PropertyValueMorpher.morph(key, value, jsonValueType, beanPropertyType));
             return;
         }
 
@@ -287,8 +287,8 @@ public class JSONObjectToBeanUtil{
         Map<String, Class<?>> props = JSONUtils.getKeyAndTypeMap(jsonObject);
         DynaBean dynaBean = JSONUtils.newDynaBean(jsonObject, jsonConfig);
 
-        for (Iterator entries = jsonObject.names(jsonConfig).iterator(); entries.hasNext();){
-            String name = (String) entries.next();
+        List<String> names = jsonObject.names(jsonConfig);
+        for (String name : names){
             String key = jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(name);
             Class<?> type = props.get(name);
             Object value = jsonObject.get(name);
@@ -328,7 +328,7 @@ public class JSONObjectToBeanUtil{
         Class<?> rootClass = jsonConfig.getRootClass();
 
         PropertyFilter javaPropertyFilter = jsonConfig.getJavaPropertyFilter();
-        PropertyNameProcessor propertyNameProcessor = jsonConfig.findJavaPropertyNameProcessor(rootClass);
+        PropertyNameProcessor propertyNameProcessor = findJavaPropertyNameProcessor(rootClass, jsonConfig);
 
         List<Triple<String, String, Object>> list = newArrayList();
         for (String name : names){
@@ -339,7 +339,7 @@ public class JSONObjectToBeanUtil{
 
             //---------------------------------------------------------------
             String key = jsonConfig.getJavaIdentifierTransformer().transformToJavaIdentifier(name);
-            key = PropertyNameProcessorUtil.update(rootClass, key, propertyNameProcessor);
+            key = KeyUpdater.update(rootClass, key, propertyNameProcessor);
 
             list.add(Triple.of(name, key, value));
         }
@@ -351,6 +351,23 @@ public class JSONObjectToBeanUtil{
                         JSONUtils.isBoolean(type) || //
                         JSONUtils.isNumber(type) || //
                         JSONUtils.isString(type);
+    }
+
+    /**
+     * Finds a PropertyNameProcessor registered to the target class.<br>
+     * Returns null if none is registered.<br>
+     * [JSON -&gt; Java]
+     *
+     * @param beanClass
+     *            the bean class
+     * @param jsonConfig
+     * @return the property name processor
+     */
+    private static PropertyNameProcessor findJavaPropertyNameProcessor(Class<?> beanClass,JsonConfig jsonConfig){
+        Map<Class<?>, PropertyNameProcessor> javaPropertyNameProcessorMap = jsonConfig.getJavaPropertyNameProcessorMap();
+        return javaPropertyNameProcessorMap.isEmpty() ? null
+                        : javaPropertyNameProcessorMap
+                                        .get(PropertyNameProcessorMatcher.getMatch(beanClass, javaPropertyNameProcessorMap.keySet()));
     }
 
 }

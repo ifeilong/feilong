@@ -15,12 +15,16 @@
  */
 package com.feilong.lib.json;
 
+import java.util.Map;
+
+import com.feilong.lib.json.processors.DefaultDefaultValueProcessor;
+import com.feilong.lib.json.processors.DefaultValueProcessor;
 import com.feilong.lib.json.processors.JsonVerifier;
 
-public class JSONObjectSetValueCore{
+public class JSONObjectValueSetter{
 
     /** Don't let anyone instantiate this class. */
-    private JSONObjectSetValueCore(){
+    private JSONObjectValueSetter(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -28,18 +32,25 @@ public class JSONObjectSetValueCore{
 
     //---------------------------------------------------------------
 
-    static void setValue(JSONObject jsonObject,String key,Object value,Class<?> type,JsonConfig jsonConfig,boolean bypass){
+    static void set(JSONObject jsonObject,String key,Object value,Class<?> propertyType,JsonConfig jsonConfig,boolean bypass){
         if (value == null){
-            value = jsonConfig.findDefaultValueProcessor(type).getDefaultValue(type);
+            DefaultValueProcessor defaultValueProcessor = findDefaultValueProcessor(propertyType, jsonConfig);
+            value = defaultValueProcessor.getDefaultValue(propertyType);
             if (!JsonVerifier.isValidJsonValue(value)){
                 throw new JSONException("Value is not a valid JSON value. " + value);
             }
         }
 
         //---------------------------------------------------------------
-        boolean accumulated = false;
-        if (jsonObject.properties.containsKey(key)){
-            if (String.class.isAssignableFrom(type)){
+        //不包含 就put
+        if (!jsonObject.properties.containsKey(key)){
+            if (bypass || String.class.isAssignableFrom(propertyType)){
+                jsonObject.properties.put(key, value);
+            }else{
+                jsonObject.accumulate(key, value, jsonConfig);
+            }
+        }else{
+            if (String.class.isAssignableFrom(propertyType)){
                 Object o = jsonObject.get(key);
                 if (o instanceof JSONArray){
                     ((JSONArray) o).addString((String) value);
@@ -49,20 +60,27 @@ public class JSONObjectSetValueCore{
             }else{
                 jsonObject.accumulate(key, value, jsonConfig);
             }
-            accumulated = true;
-        }else{
-            if (bypass || String.class.isAssignableFrom(type)){
-                jsonObject.properties.put(key, value);
-            }else{
-                jsonObject.setInternal(key, value, jsonConfig);
+        }
+    }
+
+    /**
+     * Finds a DefaultValueProcessor registered to the target class.<br>
+     * Returns null if none is registered.<br>
+     * [Java -&gt; JSON]
+     *
+     * @param target
+     *            a class used for searching a DefaultValueProcessor.
+     * @param jsonConfig
+     * @return the default value processor
+     */
+    public static DefaultValueProcessor findDefaultValueProcessor(Class<?> target,JsonConfig jsonConfig){
+        Map<Class<?>, DefaultValueProcessor> defaultValueMap = jsonConfig.getDefaultValueMap();
+        if (!defaultValueMap.isEmpty()){
+            DefaultValueProcessor processor = defaultValueMap.get(target);
+            if (processor != null){
+                return processor;
             }
         }
-
-        //---------------------------------------------------------------
-        value = jsonObject.get(key);
-        if (accumulated){
-            JSONArray array = (JSONArray) value;
-            value = array.get(array.size() - 1);
-        }
+        return DefaultDefaultValueProcessor.INSTANCE;
     }
 }

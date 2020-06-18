@@ -48,6 +48,7 @@ public final class JsonVerifier{
     public static boolean isValidJsonValue(Object value){
         return JSONNull.getInstance().equals(value) //
                         || value instanceof JSON //
+
                         || value instanceof Boolean //
                         || value instanceof Byte //
                         || value instanceof Short//

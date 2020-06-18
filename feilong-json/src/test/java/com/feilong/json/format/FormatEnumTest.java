@@ -17,11 +17,11 @@ package com.feilong.json.format;
 
 import org.junit.Test;
 
-import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.HttpMethodTestType;
+import com.feilong.test.AbstractTest;
 
-public class FormatEnumTest extends AbstractJsonTest{
+public class FormatEnumTest extends AbstractTest{
 
     @Test
     public void formatEnum(){

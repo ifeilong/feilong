@@ -27,6 +27,7 @@ import com.feilong.lib.json.processors.JsonVerifier;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
+ * 值的处理工具类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -53,7 +54,11 @@ public class ProcessValueUtil{
      */
     static Object processArrayValue(Object value,JsonConfig jsonConfig){
         if (value != null){
-            JsonValueProcessor jsonValueProcessor = jsonConfig.findJsonValueProcessor(value.getClass());
+
+            //Finds a JsonValueProcessor registered to the target type.<br>
+            //Returns null if none is registered.<br>
+            //[Java -&gt; JSON]
+            JsonValueProcessor jsonValueProcessor = jsonConfig.getTypeMap().get(value.getClass());
             if (jsonValueProcessor != null){
                 value = jsonValueProcessor.processArrayValue(value, jsonConfig);
                 if (!JsonVerifier.isValidJsonValue(value)){
@@ -66,12 +71,12 @@ public class ProcessValueUtil{
             return JSONTokenerParser.toJSONArray((JSONTokener) value, jsonConfig);
         }
         if (value != null && Enum.class.isAssignableFrom(value.getClass())){
-            return ((Enum) value).name();
+            return ((Enum<?>) value).name();
         }
         if (value instanceof Annotation || (value != null && value.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
         }
-        return processValue(value, jsonConfig);
+        return process(value, jsonConfig);
     }
     //---------------------------------------------------------------
 
@@ -100,9 +105,9 @@ public class ProcessValueUtil{
             return JSONTokenerParser.toJSONObject((JSONTokener) value, jsonConfig);
         }
         if (value != null && Enum.class.isAssignableFrom(value.getClass())){
-            return ((Enum) value).name();
+            return ((Enum<?>) value).name();
         }
-        return processValue(value, jsonConfig);
+        return process(value, jsonConfig);
     }
 
     //---------------------------------------------------------------
@@ -116,7 +121,7 @@ public class ProcessValueUtil{
      *            the json config
      * @return the object
      */
-    private static Object processValue(Object value,JsonConfig jsonConfig){
+    private static Object process(Object value,JsonConfig jsonConfig){
         if (JSONNull.getInstance().equals(value)){
             return JSONNull.getInstance();
         }
@@ -168,12 +173,6 @@ public class ProcessValueUtil{
         if (JSONUtils.isBoolean(value)){
             return value;
         }
-
-        //---------------------------------------------------------------
-        JSONObject jsonObject = JSONObjectBuilder.build(value, jsonConfig);
-        if (jsonObject.isNullObject()){
-            return JSONNull.getInstance();
-        }
-        return jsonObject;
+        return JSONObjectBuilder.build(value, jsonConfig);
     }
 }

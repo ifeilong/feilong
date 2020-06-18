@@ -271,7 +271,9 @@ public final class JSONArray implements JSON{
      * @param obj
      *            the obj
      * @return true, if successful
+     * @deprecated 看看能不能删掉
      */
+    @Deprecated
     @Override
     public boolean equals(Object obj){
         if (obj == this){

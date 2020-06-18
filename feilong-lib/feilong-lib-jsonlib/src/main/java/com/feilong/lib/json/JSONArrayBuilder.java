@@ -20,6 +20,7 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 
+import com.feilong.lib.json.util.CycleDetectionStrategy;
 import com.feilong.lib.json.util.CycleSetUtil;
 import com.feilong.lib.json.util.JSONUtils;
 
@@ -113,7 +114,7 @@ public class JSONArrayBuilder{
 
         //---------------------------------------------------------------
         if (object instanceof Enum){
-            return fromArray((Enum) object, useJsonConfig);
+            return fromArray((Enum<?>) object, useJsonConfig);
         }
         if (object instanceof Annotation || (object != null && object.getClass().isAnnotation())){
             throw new JSONException("Unsupported type");
@@ -138,13 +139,9 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(boolean[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    jsonArray.addValue(array[i], jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                jsonArray.addValue(array[i], jsonConfig);
             }
         });
     }
@@ -159,14 +156,10 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(byte[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    Number n = JSONUtils.transformNumber(array[i]);
-                    jsonArray.addValue(n, jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                Number n = JSONUtils.transformNumber(array[i]);
+                jsonArray.addValue(n, jsonConfig);
             }
         });
     }
@@ -181,13 +174,9 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(char[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    jsonArray.addValue(array[i], jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                jsonArray.addValue(array[i], jsonConfig);
             }
         });
     }
@@ -202,15 +191,11 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(double[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    Double d = array[i];
-                    JSONUtils.testValidity(d);
-                    jsonArray.addValue(d, jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                Double d = array[i];
+                JSONUtils.testValidity(d);
+                jsonArray.addValue(d, jsonConfig);
             }
         });
     }
@@ -227,16 +212,8 @@ public class JSONArrayBuilder{
      *             If there is a syntax error.
      */
     private static JSONArray fromArray(Enum<?> enumType,JsonConfig jsonConfig){
-        return build(enumType, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                if (enumType != null){
-                    jsonArray.addValue(enumType, jsonConfig);
-                }else{
-                    throw new JSONException("enum value is null");
-                }
-            }
+        return build(enumType, jsonArray -> {
+            jsonArray.addValue(enumType, jsonConfig);
         });
     }
 
@@ -250,15 +227,11 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(float[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    float f = array[i];
-                    JSONUtils.testValidity(f);
-                    jsonArray.addValue(f, jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                float f = array[i];
+                JSONUtils.testValidity(f);
+                jsonArray.addValue(f, jsonConfig);
             }
         });
     }
@@ -273,13 +246,9 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(int[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    jsonArray.addValue(array[i], jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                jsonArray.addValue(array[i], jsonConfig);
             }
         });
     }
@@ -294,13 +263,9 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(long[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
             }
         });
     }
@@ -317,13 +282,9 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(Object[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    jsonArray.addValue(array[i], jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                jsonArray.addValue(array[i], jsonConfig);
             }
         });
     }
@@ -338,13 +299,9 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromArray(short[] array,JsonConfig jsonConfig){
-        return build(array, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (int i = 0; i < array.length; i++){
-                    jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
-                }
+        return build(array, jsonArray -> {
+            for (int i = 0; i < array.length; i++){
+                jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
             }
         });
     }
@@ -358,14 +315,10 @@ public class JSONArrayBuilder{
      *            the json config
      * @return the JSON array
      */
-    static JSONArray fromCollection(Collection<?> collection,JsonConfig jsonConfig){
-        return build(collection, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (Object element : collection){
-                    jsonArray.addValue(element, jsonConfig);
-                }
+    private static JSONArray fromCollection(Collection<?> collection,JsonConfig jsonConfig){
+        return build(collection, jsonArray -> {
+            for (Object element : collection){
+                jsonArray.addValue(element, jsonConfig);
             }
         });
     }
@@ -380,21 +333,17 @@ public class JSONArrayBuilder{
      * @return the JSON array
      */
     private static JSONArray fromJSONArray(JSONArray inputJsonArray,JsonConfig jsonConfig){
-        return build(inputJsonArray, jsonConfig, new JsonHook<JSONArray>(){
-
-            @Override
-            public void handle(JSONArray jsonArray){
-                for (Object element : inputJsonArray.elementList){
-                    jsonArray.addValue(element, jsonConfig);
-                }
+        return build(inputJsonArray, jsonArray -> {
+            for (Object element : inputJsonArray.elementList){
+                jsonArray.addValue(element, jsonConfig);
             }
         });
     }
 
-    private static JSONArray build(Object array,JsonConfig jsonConfig,JsonHook<JSONArray> jsonHook) throws JSONException{
+    private static JSONArray build(Object array,JsonHook<JSONArray> jsonHook) throws JSONException{
         if (!CycleSetUtil.addInstance(array)){
             try{
-                return jsonConfig.getCycleDetectionStrategy().handleRepeatedReferenceAsArray(array);
+                return CycleDetectionStrategy.LENIENT.handleRepeatedReferenceAsArray(array);
             }catch (Exception e){
                 CycleSetUtil.removeInstance(array);
                 throw new JSONException("", e);

@@ -52,7 +52,7 @@ class JSONArrayToBeanUtil{
      *            the json config
      * @return the collection
      */
-    static Collection toCollection(JSONArray jsonArray,JsonConfig jsonConfig){
+    static Collection<?> toCollection(JSONArray jsonArray,JsonConfig jsonConfig){
         Collection collection = null;
         Class<?> collectionType = jsonConfig.getCollectionType();
 
@@ -120,7 +120,7 @@ class JSONArrayToBeanUtil{
      *            the json array
      * @return the collection
      */
-    public static Collection toCollection(JSONArray jsonArray){
+    public static Collection<?> toCollection(JSONArray jsonArray){
         return toCollection(jsonArray, new JsonConfig());
     }
 
@@ -134,56 +134,62 @@ class JSONArrayToBeanUtil{
      * @return the object
      */
     static Object toArray(JSONArray jsonArray,JsonConfig jsonConfig){
-        Class<?> objectClass = jsonConfig.getRootClass();
-        Map<String, Class<?>> classMap = jsonConfig.getClassMap();
-
-        if (jsonArray.size() == 0){
-            return Array.newInstance(objectClass == null ? Object.class : objectClass, 0);
+        Class<?> rootClass = jsonConfig.getRootClass();
+        int size = jsonArray.size();
+        if (size == 0){
+            return Array.newInstance(rootClass == null ? Object.class : rootClass, 0);
         }
 
         //---------------------------------------------------------------
         int[] dimensions = getDimensions(jsonArray);
-        Object array = Array.newInstance(objectClass == null ? Object.class : objectClass, dimensions);
-        int size = jsonArray.size();
+        Object returnArray = Array.newInstance(rootClass == null ? Object.class : rootClass, dimensions);
 
+        Map<String, Class<?>> classMap = jsonConfig.getClassMap();
         //---------------------------------------------------------------
         for (int i = 0; i < size; i++){
-            Object value = jsonArray.get(i);
-            if (JSONUtils.isNull(value)){
-                Array.set(array, i, null);
+            Object element = jsonArray.get(i);
+            if (JSONUtils.isNull(element)){
+                Array.set(returnArray, i, null);
+                continue;
+            }
+            //---------------------------------------------------------------
+            Class<?> elementType = element.getClass();
+            if (JSONArray.class.isAssignableFrom(elementType)){
+                Array.set(returnArray, i, toArray((JSONArray) element, rootClass, classMap));
                 continue;
             }
 
-            //---------------------------------------------------------------
-            Class<?> type = value.getClass();
-            if (JSONArray.class.isAssignableFrom(type)){
-                Array.set(array, i, toArray((JSONArray) value, objectClass, classMap));
-            }else if (String.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type)
-                            || Character.class.isAssignableFrom(type)){
-                if (objectClass != null && !objectClass.isAssignableFrom(type)){
-                    value = JSONUtils.getMorpherRegistry().morph(objectClass, value);
+            if (String.class.isAssignableFrom(elementType) || Boolean.class.isAssignableFrom(elementType)
+                            || Character.class.isAssignableFrom(elementType)){
+                if (rootClass != null && !rootClass.isAssignableFrom(elementType)){
+                    element = JSONUtils.getMorpherRegistry().morph(rootClass, element);
                 }
-                Array.set(array, i, value);
-            }else if (JSONUtils.isNumber(type)){
-                if (objectClass != null && (Byte.class.isAssignableFrom(objectClass) || Byte.TYPE.isAssignableFrom(objectClass))){
-                    Array.set(array, i, Byte.valueOf(String.valueOf(value)));
-                }else if (objectClass != null && (Short.class.isAssignableFrom(objectClass) || Short.TYPE.isAssignableFrom(objectClass))){
-                    Array.set(array, i, Short.valueOf(String.valueOf(value)));
+                Array.set(returnArray, i, element);
+                continue;
+            }
+
+            if (JSONUtils.isNumber(elementType)){
+                if (rootClass != null && (Byte.class.isAssignableFrom(rootClass) || Byte.TYPE.isAssignableFrom(rootClass))){
+                    Array.set(returnArray, i, Byte.valueOf(String.valueOf(element)));
+                }else if (rootClass != null && (Short.class.isAssignableFrom(rootClass) || Short.TYPE.isAssignableFrom(rootClass))){
+                    Array.set(returnArray, i, Short.valueOf(String.valueOf(element)));
                 }else{
-                    Array.set(array, i, value);
+                    Array.set(returnArray, i, element);
                 }
+                continue;
+            }
+
+            if (rootClass != null){
+                JsonConfig jsc = jsonConfig.copy();
+                jsc.setRootClass(rootClass);
+                jsc.setClassMap(classMap);
+
+                Array.set(returnArray, i, JSONObjectToBeanUtil.toBean((JSONObject) element, jsc));
             }else{
-                if (objectClass != null){
-                    JsonConfig jsc = jsonConfig.copy();
-                    jsc.setRootClass(objectClass);
-                    jsc.setClassMap(classMap);
-                    Array.set(array, i, JSONObjectToBeanUtil.toBean((JSONObject) value, jsc));
-                }else{
-                    Array.set(array, i, JSONObjectToBeanUtil.toBean((JSONObject) value, null));
-                }
+                Array.set(returnArray, i, JSONObjectToBeanUtil.toBean((JSONObject) element, null));
             }
         }
-        return array;
+        return returnArray;
     }
 
     /**
@@ -209,8 +215,10 @@ class JSONArrayToBeanUtil{
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setRootClass(objectClass);
         jsonConfig.setClassMap(classMap);
-        return JSONArrayToBeanUtil.toArray(jsonArray, jsonConfig);
+        return toArray(jsonArray, jsonConfig);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Returns the number of dimensions suited for a java array.
@@ -218,18 +226,16 @@ class JSONArrayToBeanUtil{
      * @param jsonArray
      *            the json array
      * @return the dimensions
+     * @deprecated maybe 可以删掉
      */
+    @Deprecated
     private static int[] getDimensions(JSONArray jsonArray){
         // short circuit for empty arrays
-        if (jsonArray == null || jsonArray.isEmpty()){
-            return new int[] { 0 };
-        }
-
-        //---------------------------------------------------------------
-        List dims = new ArrayList<>();
+        List<Integer> dims = new ArrayList<>();
         processArrayDimensions(jsonArray, dims, 0);
         int[] dimensions = new int[dims.size()];
         int j = 0;
+
         for (Iterator i = dims.iterator(); i.hasNext();){
             dimensions[j++] = ((Integer) i.next()).intValue();
         }
@@ -245,12 +251,14 @@ class JSONArrayToBeanUtil{
      *            the dims
      * @param index
      *            the index
+     * @deprecated maybe 可以删掉
      */
-    private static void processArrayDimensions(JSONArray jsonArray,List dims,int index){
+    @Deprecated
+    private static void processArrayDimensions(JSONArray jsonArray,List<Integer> dims,int index){
         if (dims.size() <= index){
             dims.add(jsonArray.size());
         }else{
-            int i = ((Integer) dims.get(index)).intValue();
+            int i = dims.get(index).intValue();
             if (jsonArray.size() > i){
                 dims.set(index, jsonArray.size());
             }

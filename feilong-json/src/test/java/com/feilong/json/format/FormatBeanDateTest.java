@@ -15,35 +15,28 @@
  */
 package com.feilong.json.format;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
-
-import java.util.Map;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateUtil.toDate;
 
 import org.junit.Test;
 
-import com.feilong.json.AbstractJsonTest;
+import com.feilong.core.DatePattern;
 import com.feilong.json.JsonUtil;
+import com.feilong.json.entity.BeanWithDate;
+import com.feilong.test.AbstractTest;
 
-public class FormatJsonMapTest extends AbstractJsonTest{
+public class FormatBeanDateTest extends AbstractTest{
 
-    /**
-     * Test json string 11.
-     */
     @Test
-    
-    public void testJsonString11(){
-        Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
-        LOGGER.debug("{}", JsonUtil.format(map));
+    public void test1(){
+        BeanWithDate beanWithDate = new BeanWithDate("jim", toDate("2020-06-16 20:00:00", DatePattern.COMMON_DATE_AND_TIME));
+        LOGGER.debug(JsonUtil.format(beanWithDate));
     }
 
-    /**
-     * Test json string2.
-     */
     @Test
-    
-    public void testJsonMap(){
-        Map<String, String> nullMap = null;
-        LOGGER.debug(JsonUtil.format(nullMap));
+    public void testArray(){
+        BeanWithDate beanWithDate = new BeanWithDate("jim", toDate("2020-06-16 20:00:00", DatePattern.COMMON_DATE_AND_TIME));
+        LOGGER.debug(JsonUtil.format(toList(beanWithDate)));
     }
 
 }

@@ -17,14 +17,17 @@
 package com.feilong.lib.json.util;
 
 import com.feilong.lib.json.JSONArray;
-import com.feilong.lib.json.JSONException;
 import com.feilong.lib.json.JSONObject;
 
 /**
- * Base class for cycle detection in a hierarchy.<br>
- * The JSON spec forbides cycles in a hierarchy and most parsers will raise and
- * error when a cycle is detected. This class defines a contract for handling
+ * Base class for cycle detection in a hierarchy.
+ * 
+ * <p>
+ * The JSON spec forbides cycles in a hierarchy and most parsers will raise and error when a cycle is detected. This class defines a
+ * contract for handling
  * those cycles and two base implementations:
+ * </p>
+ * 
  * <ul>
  * <li>STRICT - will throw a JSONException if a cycle is found.</li>
  * <li>LENIENT - will return an empty array or null object if a cycle is found.</li>
@@ -40,17 +43,13 @@ public abstract class CycleDetectionStrategy{
 
     //---------------------------------------------------------------
 
-    /** Returns empty array and null object 排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object. */
+    /** 宽容 Returns empty array and null object 排除,避免循环引用 There is a cycle in the hierarchy! Returns empty array and null object. */
     public static final CycleDetectionStrategy LENIENT             = new LenientCycleDetectionStrategy();
 
     /**
-     * Returns a special object (IGNORE_PROPERTY_OBJ) that indicates the entire
-     * property should be ignored
+     * Returns a special object (IGNORE_PROPERTY_OBJ) that indicates the entire property should be ignored
      */
     public static final CycleDetectionStrategy NOPROP              = new LenientNoRefCycleDetectionStrategy();
-
-    /** Throws a JSONException */
-    public static final CycleDetectionStrategy STRICT              = new StrictCycleDetectionStrategy();
 
     //---------------------------------------------------------------
 
@@ -105,19 +104,6 @@ public abstract class CycleDetectionStrategy{
         @Override
         public JSONObject handleRepeatedReferenceAsObject(Object reference){
             return IGNORE_PROPERTY_OBJ;
-        }
-    }
-
-    private static final class StrictCycleDetectionStrategy extends CycleDetectionStrategy{
-
-        @Override
-        public JSONArray handleRepeatedReferenceAsArray(Object reference){
-            throw new JSONException("There is a cycle in the hierarchy!");
-        }
-
-        @Override
-        public JSONObject handleRepeatedReferenceAsObject(Object reference){
-            throw new JSONException("There is a cycle in the hierarchy!");
         }
     }
 }

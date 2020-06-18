@@ -31,7 +31,6 @@ public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
 
     @Test
     public void test(){
-
         BeanWithXMLGregorianCalendar bean = new BeanWithXMLGregorianCalendar();
         bean.setName("jim");
 

@@ -23,10 +23,10 @@ import com.feilong.lib.json.processors.PropertyNameProcessor;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
  */
-public class PropertyNameProcessorUtil{
+public class KeyUpdater{
 
     /** Don't let anyone instantiate this class. */
-    private PropertyNameProcessorUtil(){
+    private KeyUpdater(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -46,9 +46,8 @@ public class PropertyNameProcessorUtil{
      * @return the string
      */
     public static String update(Class<?> beanClass,String key,PropertyNameProcessor propertyNameProcessor){
-        if (propertyNameProcessor != null){
-            return propertyNameProcessor.processPropertyName(beanClass, key);
-        }
-        return key;
+        return null == propertyNameProcessor ? //
+                        key : //
+                        propertyNameProcessor.processPropertyName(beanClass, key);
     }
 }

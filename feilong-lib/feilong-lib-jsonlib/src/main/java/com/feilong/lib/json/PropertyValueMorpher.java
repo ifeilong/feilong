@@ -26,6 +26,7 @@ import com.feilong.lib.ezmorph.object.IdentityObjectMorpher;
 import com.feilong.lib.json.util.JSONUtils;
 
 /**
+ * value 转换器 Morpher 变形器.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -56,7 +57,7 @@ class PropertyValueMorpher{
      *            the target type
      * @return the object
      */
-    static Object morphPropertyValue(String key,Object value,Class<?> type,Class<?> targetType){
+    static Object morph(String key,Object value,Class<?> type,Class<?> targetType){
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
 
         Morpher morpher = morpherRegistry.getMorpherFor(targetType);

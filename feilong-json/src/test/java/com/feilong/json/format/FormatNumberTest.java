@@ -17,17 +17,13 @@ package com.feilong.json.format;
 
 import org.junit.Test;
 
-import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
+import com.feilong.test.AbstractTest;
 
-public class FormatNumberTest extends AbstractJsonTest{
+public class FormatNumberTest extends AbstractTest{
 
-    /**
-     * Test json string2.
-     */
     @Test
-    
-    public void testJsonString2(){
+    public void test(){
         LOGGER.debug(JsonUtil.format(1L));
         LOGGER.debug(JsonUtil.format(1));
     }

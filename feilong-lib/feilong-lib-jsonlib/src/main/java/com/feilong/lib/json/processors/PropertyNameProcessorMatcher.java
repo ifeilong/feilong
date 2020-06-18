@@ -26,10 +26,7 @@ import java.util.Set;
  *
  * @author <a href="mailto:aalmiray@users.sourceforge.net">Andres Almiray</a>
  */
-public abstract class PropertyNameProcessorMatcher{
-
-    /** Matches the target with equals(). */
-    public static final PropertyNameProcessorMatcher DEFAULT = new DefaultPropertyNameProcessorMatcher();
+public class PropertyNameProcessorMatcher{
 
     /**
      * Returns the matching class calculated with the target class and the
@@ -41,28 +38,10 @@ public abstract class PropertyNameProcessorMatcher{
      *            a set of possible matches
      * @return the match
      */
-    public abstract Object getMatch(Class<?> target,Set set);
-
-    /**
-     * The Class DefaultPropertyNameProcessorMatcher.
-     */
-    private static final class DefaultPropertyNameProcessorMatcher extends PropertyNameProcessorMatcher{
-
-        /**
-         * Gets the match.
-         *
-         * @param target
-         *            the target
-         * @param set
-         *            the set
-         * @return the match
-         */
-        @Override
-        public Object getMatch(Class<?> target,Set set){
-            if (target != null && set != null && set.contains(target)){
-                return target;
-            }
-            return null;
+    public static Object getMatch(Class<?> target,Set set){
+        if (target != null && set != null && set.contains(target)){
+            return target;
         }
+        return null;
     }
 }
