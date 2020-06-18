@@ -41,6 +41,11 @@ import com.feilong.lib.ognl.enhance.ExpressionCompiler;
  */
 class ASTAdd extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7539710878696139202L;
+
     public ASTAdd(int id){
         super(id);
     }
@@ -58,8 +63,9 @@ class ASTAdd extends NumericExpression{
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         Object result = _children[0].getValue(context, source);
 
-        for (int i = 1; i < _children.length; ++i)
+        for (int i = 1; i < _children.length; ++i){
             result = OgnlOps.add(result, _children[i].getValue(context, source));
+        }
 
         return result;
     }
@@ -70,44 +76,55 @@ class ASTAdd extends NumericExpression{
     }
 
     boolean isWider(NodeType type,NodeType lastType){
-        if (lastType == null)
+        if (lastType == null){
             return true;
+        }
 
         //System.out.println("checking isWider(" + type.getGetterClass() + " , " + lastType.getGetterClass() + ")");
 
-        if (String.class.isAssignableFrom(lastType.getGetterClass()))
+        if (String.class.isAssignableFrom(lastType.getGetterClass())){
             return false;
+        }
 
-        if (String.class.isAssignableFrom(type.getGetterClass()))
+        if (String.class.isAssignableFrom(type.getGetterClass())){
             return true;
+        }
 
-        if (_parent != null && String.class.isAssignableFrom(type.getGetterClass()))
+        if (_parent != null && String.class.isAssignableFrom(type.getGetterClass())){
             return true;
+        }
 
-        if (String.class.isAssignableFrom(lastType.getGetterClass()) && Object.class == type.getGetterClass())
+        if (String.class.isAssignableFrom(lastType.getGetterClass()) && Object.class == type.getGetterClass()){
             return false;
+        }
 
-        if (_parent != null && String.class.isAssignableFrom(lastType.getGetterClass()))
+        if (_parent != null && String.class.isAssignableFrom(lastType.getGetterClass())){
             return false;
-        else if (_parent == null && String.class.isAssignableFrom(lastType.getGetterClass()))
+        }else if (_parent == null && String.class.isAssignableFrom(lastType.getGetterClass())){
             return true;
-        else if (_parent == null && String.class.isAssignableFrom(type.getGetterClass()))
+        }else if (_parent == null && String.class.isAssignableFrom(type.getGetterClass())){
             return false;
+        }
 
-        if (BigDecimal.class.isAssignableFrom(type.getGetterClass()) || BigInteger.class.isAssignableFrom(type.getGetterClass()))
+        if (BigDecimal.class.isAssignableFrom(type.getGetterClass()) || BigInteger.class.isAssignableFrom(type.getGetterClass())){
             return true;
+        }
 
-        if (BigDecimal.class.isAssignableFrom(lastType.getGetterClass()) || BigInteger.class.isAssignableFrom(lastType.getGetterClass()))
+        if (BigDecimal.class.isAssignableFrom(lastType.getGetterClass()) || BigInteger.class.isAssignableFrom(lastType.getGetterClass())){
             return false;
+        }
 
-        if (Double.class.isAssignableFrom(type.getGetterClass()))
+        if (Double.class.isAssignableFrom(type.getGetterClass())){
             return true;
+        }
 
-        if (Integer.class.isAssignableFrom(type.getGetterClass()) && Double.class.isAssignableFrom(lastType.getGetterClass()))
+        if (Integer.class.isAssignableFrom(type.getGetterClass()) && Double.class.isAssignableFrom(lastType.getGetterClass())){
             return false;
+        }
 
-        if (Float.class.isAssignableFrom(type.getGetterClass()) && Integer.class.isAssignableFrom(lastType.getGetterClass()))
+        if (Float.class.isAssignableFrom(type.getGetterClass()) && Integer.class.isAssignableFrom(lastType.getGetterClass())){
             return true;
+        }
 
         return true;
     }
@@ -126,12 +143,12 @@ class ASTAdd extends NumericExpression{
 
                 Object cast = context.get(ExpressionCompiler.PRE_CAST);
 
-                for (int i = 0; i < _children.length; ++i){
-                    _children[i].toGetSourceString(context, target);
+                for (Node element : _children){
+                    element.toGetSourceString(context, target);
 
-                    if (NodeType.class.isInstance(_children[i]) && ((NodeType) _children[i]).getGetterClass() != null
-                                    && isWider((NodeType) _children[i], lastType)){
-                        lastType = (NodeType) _children[i];
+                    if (NodeType.class.isInstance(element) && ((NodeType) element).getGetterClass() != null
+                                    && isWider((NodeType) element, lastType)){
+                        lastType = (NodeType) element;
                     }
                 }
 
@@ -148,8 +165,9 @@ class ASTAdd extends NumericExpression{
             if ((_children != null) && (_children.length > 0)){
 
                 for (int i = 0; i < _children.length; ++i){
-                    if (i > 0)
+                    if (i > 0){
                         result += " " + getExpressionOperator(i) + " ";
+                    }
 
                     String expr = _children[i].toGetSourceString(context, target);
 
@@ -182,15 +200,17 @@ class ASTAdd extends NumericExpression{
                     }else if ((_parent == null || !ASTChain.class.isInstance(_parent)) && ASTChain.class.isInstance(_children[i])){
                         String rootExpr = ExpressionCompiler.getRootExpression(_children[i], context.getRoot(), context);
 
-                        if (!ASTProperty.class.isInstance(_children[i].jjtGetChild(0)) && rootExpr.endsWith(")") && expr.startsWith(")"))
+                        if (!ASTProperty.class.isInstance(_children[i].jjtGetChild(0)) && rootExpr.endsWith(")") && expr.startsWith(")")){
                             expr = expr.substring(1, expr.length());
+                        }
 
                         expr = rootExpr + expr;
                         context.setCurrentAccessor(context.getRoot().getClass());
 
                         String cast = (String) context.remove(ExpressionCompiler.PRE_CAST);
-                        if (cast == null)
+                        if (cast == null){
                             cast = "";
+                        }
 
                         expr = cast + expr;
                     }
@@ -199,8 +219,9 @@ class ASTAdd extends NumericExpression{
 
                     if (context.getCurrentType() != null && context.getCurrentType() == Character.class
                                     && ASTConst.class.isInstance(_children[i])){
-                        if (expr.indexOf('\'') >= 0)
+                        if (expr.indexOf('\'') >= 0){
                             expr = expr.replaceAll("'", "\"");
+                        }
                         context.setCurrentType(String.class);
                     }else{
 
@@ -212,10 +233,12 @@ class ASTAdd extends NumericExpression{
                                         && !ASTTest.class.isInstance(_children[i])){
                             if (lastType != null && String.class.isAssignableFrom(lastType.getGetterClass())){
                                 //System.out.println("Input expr >>" + expr + "<<");
-                                if (expr.indexOf("&quot;") >= 0)
+                                if (expr.indexOf("&quot;") >= 0){
                                     expr = expr.replaceAll("&quot;", "\"");
-                                if (expr.indexOf('"') >= 0)
+                                }
+                                if (expr.indexOf('"') >= 0){
                                     expr = expr.replaceAll("\"", "'");
+                                }
                                 expr = "\"" + expr + "\"";
                                 //System.out.println("Expr now >>" + expr + "<<");
                             }
@@ -232,22 +255,25 @@ class ASTAdd extends NumericExpression{
                         if (context.getCurrentType() != null && Number.class.isAssignableFrom(context.getCurrentType())
                                         && !ASTMethod.class.isInstance(_children[i])){
                             if (ASTVarRef.class.isInstance(_children[i]) || ASTProperty.class.isInstance(_children[i])
-                                            || ASTChain.class.isInstance(_children[i]))
+                                            || ASTChain.class.isInstance(_children[i])){
                                 result += ".";
+                            }
 
                             result += OgnlRuntime.getNumericValueGetter(context.getCurrentType());
                             context.setCurrentType(OgnlRuntime.getPrimitiveWrapperClass(context.getCurrentType()));
                         }
                     }
 
-                    if (lastType != null)
+                    if (lastType != null){
                         context.setCurrentAccessor(lastType.getGetterClass());
+                    }
                 }
             }
 
             if (_parent == null || ASTSequence.class.isAssignableFrom(_parent.getClass())){
-                if (_getterClass != null && String.class.isAssignableFrom(_getterClass))
+                if (_getterClass != null && String.class.isAssignableFrom(_getterClass)){
                     _getterClass = Object.class;
+                }
             }else{
                 context.setCurrentType(_getterClass);
             }

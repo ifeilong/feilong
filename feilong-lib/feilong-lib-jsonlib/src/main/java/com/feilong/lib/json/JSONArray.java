@@ -16,7 +16,6 @@
 package com.feilong.lib.json;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.feilong.lib.ezmorph.Morpher;
@@ -258,8 +257,7 @@ public final class JSONArray implements JSON{
     public int hashCode(){
         int hashcode = 29;
 
-        for (Iterator<Object> e = elementList.iterator(); e.hasNext();){
-            Object element = e.next();
+        for (Object element : elementList){
             hashcode += JSONUtils.hashCode(element);
         }
         return hashcode;

@@ -27,17 +27,16 @@ import java.util.TreeMap;
  */
 public class PackageAliasingMapper extends MapperWrapper implements Serializable{
 
-    private static final Comparator REVERSE       = new Comparator(){
+    /**
+     * 
+     */
+    private static final long       serialVersionUID = -6087702061292696487L;
 
-                                                      @Override
-                                                      public int compare(final Object o1,final Object o2){
-                                                          return ((String) o2).compareTo((String) o1);
-                                                      }
-                                                  };
+    private static final Comparator REVERSE          = (o1,o2) -> ((String) o2).compareTo((String) o1);
 
-    private Map                     packageToName = new TreeMap(REVERSE);
+    private Map                     packageToName    = new TreeMap(REVERSE);
 
-    protected transient Map         nameToPackage = new HashMap();
+    protected transient Map         nameToPackage    = new HashMap();
 
     public PackageAliasingMapper(final Mapper wrapped){
         super(wrapped);

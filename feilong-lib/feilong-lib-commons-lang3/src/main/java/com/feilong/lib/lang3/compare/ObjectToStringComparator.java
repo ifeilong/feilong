@@ -27,41 +27,41 @@ import java.util.Comparator;
  *
  * @since 3.10
  */
-public final class ObjectToStringComparator implements Comparator<Object>, Serializable {
+public final class ObjectToStringComparator implements Comparator<Object>,Serializable{
 
     /**
      * Singleton instance.
      *
      * This class is stateless.
      */
-    public static final ObjectToStringComparator INSTANCE = new ObjectToStringComparator();
+    public static final ObjectToStringComparator INSTANCE         = new ObjectToStringComparator();
 
     /**
      * For {@link Serializable}.
      */
-    private static final long serialVersionUID = 1L;
+    private static final long                    serialVersionUID = 1L;
 
     @Override
-    public int compare(final Object o1, final Object o2) {
-        if (o1 == null && o2 == null) {
+    public int compare(final Object o1,final Object o2){
+        if (o1 == null && o2 == null){
             return 0;
         }
-        if (o1 == null) {
+        if (o1 == null){
             return 1;
         }
-        if (o2 == null) {
+        if (o2 == null){
             return -1;
         }
         final String string1 = o1.toString();
         final String string2 = o2.toString();
         // No guarantee that toString() returns a non-null value, despite what Spotbugs thinks.
-        if (string1 == null && string2 == null) {
+        if (string1 == null && string2 == null){
             return 0;
         }
-        if (string1 == null) {
+        if (string1 == null){
             return 1;
         }
-        if (string2 == null) {
+        if (string2 == null){
             return -1;
         }
         return string1.compareTo(string2);

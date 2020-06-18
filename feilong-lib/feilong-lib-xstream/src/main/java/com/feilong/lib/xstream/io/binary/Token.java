@@ -11,12 +11,11 @@
  */
 package com.feilong.lib.xstream.io.binary;
 
+import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 import com.feilong.lib.xstream.io.StreamException;
-
-import java.io.DataInput;
 
 /**
  * Represents the Tokens stored in the binary stream used by
@@ -95,17 +94,21 @@ public abstract class Token{
 
     @Override
     public boolean equals(Object o){
-        if (this == o)
+        if (this == o){
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()){
             return false;
+        }
 
         final Token token = (Token) o;
 
-        if (id != token.id)
+        if (id != token.id){
             return false;
-        if (type != token.type)
+        }
+        if (type != token.type){
             return false;
+        }
         return !(value != null ? !value.equals(token.value) : token.value != null);
     }
 

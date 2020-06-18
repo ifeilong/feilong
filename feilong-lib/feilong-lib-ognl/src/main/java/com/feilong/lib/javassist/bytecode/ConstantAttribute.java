@@ -23,52 +23,54 @@ import java.util.Map;
 /**
  * <code>ConstantValue_attribute</code>.
  */
-public class ConstantAttribute extends AttributeInfo {
+public class ConstantAttribute extends AttributeInfo{
+
     /**
      * The name of this attribute <code>"ConstantValue"</code>.
      */
     public static final String tag = "ConstantValue";
 
-    ConstantAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    ConstantAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
     /**
      * Constructs a ConstantValue attribute.
      *
-     * @param cp                a constant pool table.
-     * @param index             <code>constantvalue_index</code>
-     *                          of <code>ConstantValue_attribute</code>.
+     * @param cp
+     *            a constant pool table.
+     * @param index
+     *            <code>constantvalue_index</code>
+     *            of <code>ConstantValue_attribute</code>.
      */
-    public ConstantAttribute(ConstPool cp, int index) {
+    public ConstantAttribute(ConstPool cp, int index){
         super(cp, tag);
         byte[] bvalue = new byte[2];
-        bvalue[0] = (byte)(index >>> 8);
-        bvalue[1] = (byte)index;
+        bvalue[0] = (byte) (index >>> 8);
+        bvalue[1] = (byte) index;
         set(bvalue);
     }
 
     /**
      * Returns <code>constantvalue_index</code>.
      */
-    public int getConstantValue() {
+    public int getConstantValue(){
         return ByteArray.readU16bit(get(), 0);
     }
 
     /**
-     * Makes a copy.  Class names are replaced according to the
+     * Makes a copy. Class names are replaced according to the
      * given <code>Map</code> object.
      *
-     * @param newCp     the constant pool table used by the new copy.
-     * @param classnames        pairs of replaced and substituted
-     *                          class names.
+     * @param newCp
+     *            the constant pool table used by the new copy.
+     * @param classnames
+     *            pairs of replaced and substituted
+     *            class names.
      */
     @Override
-    public AttributeInfo copy(ConstPool newCp, Map<String,String> classnames) {
-        int index = getConstPool().copy(getConstantValue(), newCp,
-                                        classnames);
+    public AttributeInfo copy(ConstPool newCp,Map<String, String> classnames){
+        int index = getConstPool().copy(getConstantValue(), newCp, classnames);
         return new ConstantAttribute(newCp, index);
     }
 }

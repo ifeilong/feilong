@@ -23,32 +23,52 @@ package com.feilong.lib.javassist.runtime;
  *
  * @see com.feilong.lib.javassist.CtBehavior#useCflow(String)
  */
-public class Cflow extends ThreadLocal<Cflow.Depth> {
-    protected static class Depth {
+public class Cflow extends ThreadLocal<Cflow.Depth>{
+
+    protected static class Depth{
+
         private int depth;
-        Depth() { depth = 0; }
-        int value() { return depth; }
-        void inc() { ++depth; }
-        void dec() { --depth; }
+
+        Depth(){
+            depth = 0;
+        }
+
+        int value(){
+            return depth;
+        }
+
+        void inc(){
+            ++depth;
+        }
+
+        void dec(){
+            --depth;
+        }
     }
 
     @Override
-    protected synchronized Depth initialValue() {
+    protected synchronized Depth initialValue(){
         return new Depth();
     }
 
     /**
      * Increments the counter.
      */
-    public void enter() { get().inc(); }
+    public void enter(){
+        get().inc();
+    }
 
     /**
      * Decrements the counter.
      */
-    public void exit() { get().dec(); }
+    public void exit(){
+        get().dec();
+    }
 
     /**
      * Returns the value of the counter.
      */
-    public int value() { return get().value(); }
+    public int value(){
+        return get().value();
+    }
 }

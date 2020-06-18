@@ -64,8 +64,7 @@ public class PureJavaReflectionProvider implements ReflectionProvider{
         ObjectAccessException oaex = null;
         try{
             Constructor[] constructors = type.getDeclaredConstructors();
-            for (int i = 0; i < constructors.length; i++){
-                final Constructor constructor = constructors[i];
+            for (final Constructor constructor : constructors){
                 if (constructor.getParameterTypes().length == 0){
                     if (!constructor.isAccessible()){
                         constructor.setAccessible(true);
@@ -163,6 +162,7 @@ public class PureJavaReflectionProvider implements ReflectionProvider{
     /**
      * @deprecated As of 1.4.5, use {@link #getFieldOrNull(Class, String)} instead
      */
+    @Deprecated
     @Override
     public boolean fieldDefinedInClass(String fieldName,Class type){
         Field field = fieldDictionary.fieldOrNull(type, fieldName, null);

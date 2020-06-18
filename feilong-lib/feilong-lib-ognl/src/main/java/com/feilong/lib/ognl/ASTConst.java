@@ -41,9 +41,14 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTConst extends SimpleNode implements NodeType{
 
-    private Object value;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6491929408266740070L;
 
-    private Class  _getterClass;
+    private Object            value;
+
+    private Class             _getterClass;
 
     public ASTConst(int id){
         super(id);
@@ -79,8 +84,9 @@ public class ASTConst extends SimpleNode implements NodeType{
 
     @Override
     public Class getGetterClass(){
-        if (_getterClass == null)
+        if (_getterClass == null){
             return null;
+        }
 
         return _getterClass;
     }
@@ -162,10 +168,11 @@ public class ASTConst extends SimpleNode implements NodeType{
 
             context.setCurrentType(Character.class);
 
-            if (Character.isLetterOrDigit(val.charValue()))
+            if (Character.isLetterOrDigit(val.charValue())){
                 retval = "'" + ((Character) value).charValue() + "'";
-            else
+            }else{
                 retval = "'" + OgnlOps.getEscapedChar(((Character) value).charValue()) + "'";
+            }
 
             context.setCurrentObject(retval);
             return retval.toString();
@@ -185,8 +192,9 @@ public class ASTConst extends SimpleNode implements NodeType{
 
     @Override
     public String toSetSourceString(OgnlContext context,Object target){
-        if (_parent == null)
+        if (_parent == null){
             throw new UnsupportedCompilationException("Can't modify constant values.");
+        }
 
         return toGetSourceString(context, target);
     }

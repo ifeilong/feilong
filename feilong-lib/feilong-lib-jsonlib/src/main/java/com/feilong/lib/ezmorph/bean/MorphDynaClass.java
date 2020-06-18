@@ -42,17 +42,13 @@ import com.feilong.lib.lang3.builder.ToStringBuilder;
 public final class MorphDynaClass implements DynaClass,Serializable{
 
     /** The Constant dynaPropertyComparator. */
-    private static final Comparator dynaPropertyComparator = new Comparator(){
-
-                                                               @Override
-                                                               public int compare(Object a,Object b){
-                                                                   if (a instanceof DynaProperty && b instanceof DynaProperty){
-                                                                       DynaProperty p1 = (DynaProperty) a;
-                                                                       DynaProperty p2 = (DynaProperty) b;
-                                                                       return p1.getName().compareTo(p2.getName());
-                                                                   }
-                                                                   return -1;
+    private static final Comparator dynaPropertyComparator = (a,b) -> {
+                                                               if (a instanceof DynaProperty && b instanceof DynaProperty){
+                                                                   DynaProperty p1 = (DynaProperty) a;
+                                                                   DynaProperty p2 = (DynaProperty) b;
+                                                                   return p1.getName().compareTo(p2.getName());
                                                                }
+                                                               return -1;
                                                            };
 
     //---------------------------------------------------------------
@@ -229,9 +225,9 @@ public final class MorphDynaClass implements DynaClass,Serializable{
     @Override
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder().append(name).append(type);
-        for (int i = 0; i < dynaProperties.length; i++){
-            builder.append(this.dynaProperties[i].getName());
-            builder.append(this.dynaProperties[i].getType());
+        for (DynaProperty dynaPropertie : dynaProperties){
+            builder.append(dynaPropertie.getName());
+            builder.append(dynaPropertie.getType());
         }
         return builder.toHashCode();
     }

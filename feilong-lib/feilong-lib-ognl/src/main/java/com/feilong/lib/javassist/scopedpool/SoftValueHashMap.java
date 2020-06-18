@@ -34,21 +34,23 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version <code>$Revision: 1.4 $</code>
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  */
-public class SoftValueHashMap<K,V> implements Map<K,V> {
-    private static class SoftValueRef<K,V> extends SoftReference<V> {
+public class SoftValueHashMap<K, V> implements Map<K, V>{
+
+    private static class SoftValueRef<K, V> extends SoftReference<V>{
+
         public K key;
 
-        private SoftValueRef(K key, V val, ReferenceQueue<V> q) {
+        private SoftValueRef(K key, V val, ReferenceQueue<V> q){
             super(val, q);
             this.key = key;
         }
 
-        private static <K,V> SoftValueRef<K,V> create(
-                            K key, V val, ReferenceQueue<V> q) {
-            if (val == null)
+        private static <K, V> SoftValueRef<K, V> create(K key,V val,ReferenceQueue<V> q){
+            if (val == null){
                 return null;
-            else
-                return new SoftValueRef<K,V>(key, val, q);
+            }else{
+                return new SoftValueRef<>(key, val, q);
+            }
         }
 
     }
@@ -57,36 +59,39 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      * Returns a set of the mappings contained in this hash table.
      */
     @Override
-    public Set<Map.Entry<K, V>> entrySet() {
+    public Set<Map.Entry<K, V>> entrySet(){
         processQueue();
-        Set<Entry<K,V>> ret = new HashSet<Entry<K,V>>();
-        for (Entry<K,SoftValueRef<K,V>> e:hash.entrySet()) 
-                ret.add(new SimpleImmutableEntry<K,V> (
-                        e.getKey(), e.getValue().get()));
-        return ret;        
+        Set<Entry<K, V>> ret = new HashSet<>();
+        for (Entry<K, SoftValueRef<K, V>> e : hash.entrySet()){
+            ret.add(new SimpleImmutableEntry<>(e.getKey(), e.getValue().get()));
+        }
+        return ret;
     }
 
     /* Hash table mapping WeakKeys to values */
-    private Map<K,SoftValueRef<K,V>> hash;
+    private Map<K, SoftValueRef<K, V>> hash;
 
     /* Reference queue for cleared WeakKeys */
-    private ReferenceQueue<V> queue = new ReferenceQueue<V>();
+    private ReferenceQueue<V>          queue = new ReferenceQueue<>();
 
     /*
      * Remove all invalidated entries from the map, that is, remove all entries
      * whose values have been discarded.
      */
-    private void processQueue() {
+    private void processQueue(){
         Object ref;
-        if (!hash.isEmpty())
-        while ((ref = queue.poll()) != null)
-            if (ref instanceof SoftValueRef)  {
-                @SuppressWarnings("rawtypes")
-                SoftValueRef que =(SoftValueRef) ref;
-                if (ref == hash.get(que.key))
-                // only remove if it is the *exact* same SoftValueRef
-                    hash.remove(que.key);
+        if (!hash.isEmpty()){
+            while ((ref = queue.poll()) != null){
+                if (ref instanceof SoftValueRef){
+                    @SuppressWarnings("rawtypes")
+                    SoftValueRef que = (SoftValueRef) ref;
+                    if (ref == hash.get(que.key)){
+                        // only remove if it is the *exact* same SoftValueRef
+                        hash.remove(que.key);
+                    }
+                }
             }
+        }
     }
 
     /* -- Constructors -- */
@@ -105,8 +110,8 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      *             If the initial capacity is less than zero, or if the load
      *             factor is nonpositive
      */
-    public SoftValueHashMap(int initialCapacity, float loadFactor) {
-        hash = new ConcurrentHashMap<K,SoftValueRef<K,V>>(initialCapacity, loadFactor);
+    public SoftValueHashMap(int initialCapacity, float loadFactor){
+        hash = new ConcurrentHashMap<>(initialCapacity, loadFactor);
     }
 
     /**
@@ -119,16 +124,16 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      * @throws IllegalArgumentException
      *             If the initial capacity is less than zero
      */
-    public SoftValueHashMap(int initialCapacity) {
-        hash = new ConcurrentHashMap<K,SoftValueRef<K,V>>(initialCapacity);
+    public SoftValueHashMap(int initialCapacity){
+        hash = new ConcurrentHashMap<>(initialCapacity);
     }
 
     /**
      * Constructs a new, empty <code>WeakHashMap</code> with the default
      * initial capacity and the default load factor, which is <code>0.75</code>.
      */
-    public SoftValueHashMap() {
-        hash = new ConcurrentHashMap<K,SoftValueRef<K,V>>();
+    public SoftValueHashMap(){
+        hash = new ConcurrentHashMap<>();
     }
 
     /**
@@ -138,9 +143,10 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      * or 11 (whichever is greater), and a default load factor, which is
      * <code>0.75</code>.
      * 
-     * @param t     the map whose mappings are to be placed in this map.
+     * @param t
+     *            the map whose mappings are to be placed in this map.
      */
-    public SoftValueHashMap(Map<K,V> t) {
+    public SoftValueHashMap(Map<K, V> t){
         this(Math.max(2 * t.size(), 11), 0.75f);
         putAll(t);
     }
@@ -154,7 +160,7 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      * linear in the size of the map.</em>
      */
     @Override
-    public int size() {
+    public int size(){
         processQueue();
         return hash.size();
     }
@@ -163,7 +169,7 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      * Returns <code>true</code> if this map contains no key-value mappings.
      */
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty(){
         processQueue();
         return hash.isEmpty();
     }
@@ -176,7 +182,7 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      *            The key whose presence in this map is to be tested.
      */
     @Override
-    public boolean containsKey(Object key) {
+    public boolean containsKey(Object key){
         processQueue();
         return hash.containsKey(key);
     }
@@ -192,7 +198,7 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      *            The key whose associated value, if any, is to be returned.
      */
     @Override
-    public V get(Object key) {
+    public V get(Object key){
         processQueue();
         return valueOrNull(hash.get(key));
     }
@@ -213,7 +219,7 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      *         <code>null</code> if if there was no mapping for the key
      */
     @Override
-    public V put(K key, V value) {
+    public V put(K key,V value){
         processQueue();
         return valueOrNull(hash.put(key, SoftValueRef.create(key, value, queue)));
     }
@@ -229,7 +235,7 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      *         there was no mapping for the key.
      */
     @Override
-    public V remove(Object key) {
+    public V remove(Object key){
         processQueue();
         return valueOrNull(hash.remove(key));
     }
@@ -238,56 +244,64 @@ public class SoftValueHashMap<K,V> implements Map<K,V> {
      * Removes all mappings from this map.
      */
     @Override
-    public void clear() {
+    public void clear(){
         processQueue();
         hash.clear();
     }
 
     /*
      * Check whether the supplied value exists.
+     * 
      * @param Object the value to compare.
-     * @return true if it was found or null. 
+     * 
+     * @return true if it was found or null.
      */
     @Override
-    public boolean containsValue(Object arg0) {
+    public boolean containsValue(Object arg0){
         processQueue();
-        if (null == arg0)
+        if (null == arg0){
             return false;
-        
-        for (SoftValueRef<K,V> e:hash.values())
-            if (null != e && arg0.equals(e.get()))
+        }
+
+        for (SoftValueRef<K, V> e : hash.values()){
+            if (null != e && arg0.equals(e.get())){
                 return true;
+            }
+        }
         return false;
     }
 
     /* {@inheritDoc} */
     @Override
-    public Set<K> keySet() {
+    public Set<K> keySet(){
         processQueue();
         return hash.keySet();
-    }
-    
-    /* {@inheritDoc} */
-    @Override
-    public void putAll(Map<? extends K,? extends V> arg0) {
-        processQueue();
-        for (K key:arg0.keySet())
-            put(key, arg0.get(key));
     }
 
     /* {@inheritDoc} */
     @Override
-    public Collection<V> values() {
+    public void putAll(Map<? extends K, ? extends V> arg0){
         processQueue();
-        List<V> ret = new ArrayList<V>();
-        for (SoftValueRef<K,V> e:hash.values())
+        for (K key : arg0.keySet()){
+            put(key, arg0.get(key));
+        }
+    }
+
+    /* {@inheritDoc} */
+    @Override
+    public Collection<V> values(){
+        processQueue();
+        List<V> ret = new ArrayList<>();
+        for (SoftValueRef<K, V> e : hash.values()){
             ret.add(e.get());
+        }
         return ret;
     }
-    
-    private V valueOrNull(SoftValueRef<K,V> rtn) { 
-        if (null == rtn)
+
+    private V valueOrNull(SoftValueRef<K, V> rtn){
+        if (null == rtn){
             return null;
+        }
         return rtn.get();
     }
 }

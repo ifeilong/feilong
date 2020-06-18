@@ -221,14 +221,17 @@ public class Reflection implements Translator{
      */
     public boolean makeReflective(CtClass clazz,CtClass metaobject,CtClass metaclass)
                     throws CannotCompileException,CannotReflectException,NotFoundException{
-        if (clazz.isInterface())
+        if (clazz.isInterface()){
             throw new CannotReflectException("Cannot reflect an interface: " + clazz.getName());
+        }
 
-        if (clazz.subclassOf(classPool.get(classMetaobjectClassName)))
+        if (clazz.subclassOf(classPool.get(classMetaobjectClassName))){
             throw new CannotReflectException("Cannot reflect a subclass of ClassMetaobject: " + clazz.getName());
+        }
 
-        if (clazz.subclassOf(classPool.get(metaobjectClassName)))
+        if (clazz.subclassOf(classPool.get(metaobjectClassName))){
             throw new CannotReflectException("Cannot reflect a subclass of Metaobject: " + clazz.getName());
+        }
 
         registerReflectiveClass(clazz);
         return modifyClassfile(clazz, metaobject, metaclass);
@@ -240,8 +243,7 @@ public class Reflection implements Translator{
      */
     private void registerReflectiveClass(CtClass clazz){
         CtField[] fs = clazz.getDeclaredFields();
-        for (int i = 0; i < fs.length; ++i){
-            CtField f = fs[i];
+        for (CtField f : fs){
             int mod = f.getModifiers();
             if ((mod & Modifier.PUBLIC) != 0 && (mod & Modifier.FINAL) == 0){
                 String name = f.getName();
@@ -252,14 +254,16 @@ public class Reflection implements Translator{
     }
 
     private boolean modifyClassfile(CtClass clazz,CtClass metaobject,CtClass metaclass) throws CannotCompileException,NotFoundException{
-        if (clazz.getAttribute("Reflective") != null)
+        if (clazz.getAttribute("Reflective") != null){
             return false; // this is already reflective.
+        }
         clazz.setAttribute("Reflective", new byte[0]);
 
         CtClass mlevel = classPool.get("com.feilong.lib.javassist.tools.reflect.Metalevel");
         boolean addMeta = !clazz.subtypeOf(mlevel);
-        if (addMeta)
+        if (addMeta){
             clazz.addInterface(mlevel);
+        }
 
         processMethods(clazz, addMeta);
         processFields(clazz);
@@ -287,8 +291,9 @@ public class Reflection implements Translator{
         for (int i = 0; i < ms.length; ++i){
             CtMethod m = ms[i];
             int mod = m.getModifiers();
-            if (Modifier.isPublic(mod) && !Modifier.isAbstract(mod))
+            if (Modifier.isPublic(mod) && !Modifier.isAbstract(mod)){
                 processMethods0(mod, clazz, m, i, dontSearch);
+            }
         }
     }
 
@@ -297,13 +302,15 @@ public class Reflection implements Translator{
         CtMethod body;
         String name = m.getName();
 
-        if (isExcluded(name)) // internally-used method inherited
+        if (isExcluded(name)){
             return; // from a reflective class.
+        }
 
         CtMethod m2;
         if (m.getDeclaringClass() == clazz){
-            if (Modifier.isNative(mod))
+            if (Modifier.isNative(mod)){
                 return;
+            }
 
             m2 = m;
             if (Modifier.isFinal(mod)){
@@ -311,8 +318,9 @@ public class Reflection implements Translator{
                 m2.setModifiers(mod);
             }
         }else{
-            if (Modifier.isFinal(mod))
+            if (Modifier.isFinal(mod)){
                 return;
+            }
 
             mod &= ~Modifier.NATIVE;
             m2 = CtNewMethod.delegator(findOriginal(m, dontSearch), clazz);
@@ -322,10 +330,11 @@ public class Reflection implements Translator{
 
         m2.setName(ClassMetaobject.methodPrefix + identifier + "_" + name);
 
-        if (Modifier.isStatic(mod))
+        if (Modifier.isStatic(mod)){
             body = trapStaticMethod;
-        else
+        }else{
             body = trapMethod;
+        }
 
         CtMethod wmethod = CtNewMethod.wrapped(
                         m.getReturnType(),
@@ -340,15 +349,18 @@ public class Reflection implements Translator{
     }
 
     private CtMethod findOriginal(CtMethod m,boolean dontSearch) throws NotFoundException{
-        if (dontSearch)
+        if (dontSearch){
             return m;
+        }
 
         String name = m.getName();
         CtMethod[] ms = m.getDeclaringClass().getDeclaredMethods();
-        for (int i = 0; i < ms.length; ++i){
-            String orgName = ms[i].getName();
-            if (orgName.endsWith(name) && orgName.startsWith(ClassMetaobject.methodPrefix) && ms[i].getSignature().equals(m.getSignature()))
-                return ms[i];
+        for (CtMethod element : ms){
+            String orgName = element.getName();
+            if (orgName.endsWith(name) && orgName.startsWith(ClassMetaobject.methodPrefix)
+                            && element.getSignature().equals(m.getSignature())){
+                return element;
+            }
         }
 
         return m;
@@ -356,8 +368,7 @@ public class Reflection implements Translator{
 
     private void processFields(CtClass clazz) throws CannotCompileException,NotFoundException{
         CtField[] fs = clazz.getDeclaredFields();
-        for (int i = 0; i < fs.length; ++i){
-            CtField f = fs[i];
+        for (CtField f : fs){
             int mod = f.getModifiers();
             if ((mod & Modifier.PUBLIC) != 0 && (mod & Modifier.FINAL) == 0){
                 mod |= Modifier.STATIC;
@@ -385,10 +396,12 @@ public class Reflection implements Translator{
     }
 
     public void rebuildClassFile(ClassFile cf) throws BadBytecode{
-        if (ClassFile.MAJOR_VERSION < ClassFile.JAVA_6)
+        if (ClassFile.MAJOR_VERSION < ClassFile.JAVA_6){
             return;
+        }
 
-        for (MethodInfo mi : cf.getMethods())
+        for (MethodInfo mi : cf.getMethods()){
             mi.rebuildStackMap(classPool);
+        }
     }
 }

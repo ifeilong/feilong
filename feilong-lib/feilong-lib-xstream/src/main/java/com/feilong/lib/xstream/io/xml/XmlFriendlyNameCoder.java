@@ -528,12 +528,13 @@ public class XmlFriendlyNameCoder implements NameCoder,Cloneable{
                     result.append(escapeCharReplacement);
                 }else if ((i == 0 && !isXmlNameStartChar(c)) || (i > 0 && !isXmlNameChar(c))){
                     result.append(hexPrefix);
-                    if (c < 16)
+                    if (c < 16){
                         result.append("000");
-                    else if (c < 256)
+                    }else if (c < 256){
                         result.append("00");
-                    else if (c < 4096)
+                    }else if (c < 4096){
                         result.append("0");
+                    }
                     result.append(Integer.toHexString(c));
                 }else{
                     result.append(c);

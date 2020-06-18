@@ -60,6 +60,7 @@ public abstract class AbstractCollectionConverter implements Converter{
      * @deprecated As of 1.4.11 use {@link #writeCompleteItem(Object, MarshallingContext, HierarchicalStreamWriter)}
      *             instead.
      */
+    @Deprecated
     protected void writeItem(Object item,MarshallingContext context,HierarchicalStreamWriter writer){
         // PUBLISHED API METHOD! If changing signature, ensure backwards compatibility.
         if (item == null){
@@ -123,6 +124,7 @@ public abstract class AbstractCollectionConverter implements Converter{
      * @deprecated As of 1.4.11 use {@link #readBareItem(HierarchicalStreamReader, UnmarshallingContext, Object)} or
      *             {@link #readCompleteItem(HierarchicalStreamReader, UnmarshallingContext, Object)} instead.
      */
+    @Deprecated
     protected Object readItem(final HierarchicalStreamReader reader,final UnmarshallingContext context,final Object current){
         return readBareItem(reader, context, current);
     }

@@ -62,8 +62,8 @@ public class SerializationMembers implements Caching{
 
     private final Map                fieldCache                 = Collections.synchronizedMap(new HashMap());
     {
-        for (int i = 0; i < OBJECT_TYPE_FIELDS.length; ++i){
-            declaredCache.put(OBJECT_TYPE_FIELDS[i], NO_METHOD);
+        for (FastField element : OBJECT_TYPE_FIELDS){
+            declaredCache.put(element, NO_METHOD);
         }
         for (int i = 0; i < 2; ++i){
             resRepCache.put(OBJECT_TYPE_FIELDS[i], NO_METHOD);
@@ -224,8 +224,8 @@ public class SerializationMembers implements Caching{
                     final ObjectStreamField[] fields = (ObjectStreamField[]) field.get(null);
                     if (fields != null){
                         result = new HashMap();
-                        for (int i = 0; i < fields.length; ++i){
-                            result.put(fields[i].getName(), fields[i]);
+                        for (ObjectStreamField field2 : fields){
+                            result.put(field2.getName(), field2);
                         }
                     }
                 }

@@ -29,11 +29,12 @@ import com.feilong.lib.javassist.CtClass;
  * @see com.feilong.lib.javassist.tools.reflect.Reflection#makeReflective(CtClass,CtClass,CtClass)
  * @see com.feilong.lib.javassist.CannotCompileException
  */
-public class CannotReflectException extends CannotCompileException {
+public class CannotReflectException extends CannotCompileException{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public CannotReflectException(String msg) {
+    public CannotReflectException(String msg){
         super(msg);
     }
 }

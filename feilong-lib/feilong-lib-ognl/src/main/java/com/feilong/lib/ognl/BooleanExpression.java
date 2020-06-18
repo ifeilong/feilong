@@ -12,7 +12,12 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public abstract class BooleanExpression extends ExpressionNode implements NodeType{
 
-    protected Class _getterClass;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3641594575348908917L;
+
+    protected Class           _getterClass;
 
     public BooleanExpression(int id){
         super(id);
@@ -38,19 +43,21 @@ public abstract class BooleanExpression extends ExpressionNode implements NodeTy
 
             Object value = getValueBody(context, target);
 
-            if (value != null && Boolean.class.isAssignableFrom(value.getClass()))
+            if (value != null && Boolean.class.isAssignableFrom(value.getClass())){
                 _getterClass = Boolean.TYPE;
-            else if (value != null)
+            }else if (value != null){
                 _getterClass = value.getClass();
-            else
+            }else{
                 _getterClass = Boolean.TYPE;
+            }
 
             String ret = super.toGetSourceString(context, target);
 
-            if ("(false)".equals(ret))
+            if ("(false)".equals(ret)){
                 return "false";
-            else if ("(true)".equals(ret))
+            }else if ("(true)".equals(ret)){
                 return "true";
+            }
 
             return ret;
 

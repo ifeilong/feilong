@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTBitAnd extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6070895481686484882L;
+
     public ASTBitAnd(int id){
         super(id);
     }
@@ -52,8 +57,9 @@ class ASTBitAnd extends NumericExpression{
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         Object result = _children[0].getValue(context, source);
-        for (int i = 1; i < _children.length; ++i)
+        for (int i = 1; i < _children.length; ++i){
             result = OgnlOps.binaryAnd(result, _children[i].getValue(context, source));
+        }
         return result;
     }
 

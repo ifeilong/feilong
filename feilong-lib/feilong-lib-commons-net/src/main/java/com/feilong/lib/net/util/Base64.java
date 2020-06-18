@@ -20,8 +20,6 @@ package com.feilong.lib.net.util;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 
-
-
 /**
  * Provides Base64 encoding and decoding as defined by RFC 2045.
  *
@@ -46,10 +44,11 @@ import java.math.BigInteger;
  * @since 2.2
  * @version $Id$
  */
-public class Base64 {
-    private static final int DEFAULT_BUFFER_RESIZE_FACTOR = 2;
+public class Base64{
 
-    private static final int DEFAULT_BUFFER_SIZE = 8192;
+    private static final int    DEFAULT_BUFFER_RESIZE_FACTOR = 2;
+
+    private static final int    DEFAULT_BUFFER_SIZE          = 8192;
 
     /**
      * Chunk size per RFC 2045 section 6.8.
@@ -61,16 +60,16 @@ public class Base64 {
      *
      * @see <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045 section 6.8</a>
      */
-    static final int CHUNK_SIZE = 76;
+    static final int            CHUNK_SIZE                   = 76;
 
     /**
      * Chunk separator per RFC 2045 section 2.1.
      *
      * @see <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045 section 2.1</a>
      */
-    private static final byte[] CHUNK_SEPARATOR = {'\r', '\n'};
+    private static final byte[] CHUNK_SEPARATOR              = { '\r', '\n' };
 
-    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+    private static final byte[] EMPTY_BYTE_ARRAY             = new byte[0];
 
     /**
      * This array is a lookup table that translates 6-bit positive integer index values into their "Base64 Alphabet"
@@ -79,31 +78,147 @@ public class Base64 {
      * Thanks to "commons" project in ws.apache.org for this code.
      * http://svn.apache.org/repos/asf/webservices/commons/trunk/modules/util/
      */
-    private static final byte[] STANDARD_ENCODE_TABLE = {
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
-    };
+    private static final byte[] STANDARD_ENCODE_TABLE        = {
+                                                                 'A',
+                                                                 'B',
+                                                                 'C',
+                                                                 'D',
+                                                                 'E',
+                                                                 'F',
+                                                                 'G',
+                                                                 'H',
+                                                                 'I',
+                                                                 'J',
+                                                                 'K',
+                                                                 'L',
+                                                                 'M',
+                                                                 'N',
+                                                                 'O',
+                                                                 'P',
+                                                                 'Q',
+                                                                 'R',
+                                                                 'S',
+                                                                 'T',
+                                                                 'U',
+                                                                 'V',
+                                                                 'W',
+                                                                 'X',
+                                                                 'Y',
+                                                                 'Z',
+                                                                 'a',
+                                                                 'b',
+                                                                 'c',
+                                                                 'd',
+                                                                 'e',
+                                                                 'f',
+                                                                 'g',
+                                                                 'h',
+                                                                 'i',
+                                                                 'j',
+                                                                 'k',
+                                                                 'l',
+                                                                 'm',
+                                                                 'n',
+                                                                 'o',
+                                                                 'p',
+                                                                 'q',
+                                                                 'r',
+                                                                 's',
+                                                                 't',
+                                                                 'u',
+                                                                 'v',
+                                                                 'w',
+                                                                 'x',
+                                                                 'y',
+                                                                 'z',
+                                                                 '0',
+                                                                 '1',
+                                                                 '2',
+                                                                 '3',
+                                                                 '4',
+                                                                 '5',
+                                                                 '6',
+                                                                 '7',
+                                                                 '8',
+                                                                 '9',
+                                                                 '+',
+                                                                 '/' };
 
     /**
      * This is a copy of the STANDARD_ENCODE_TABLE above, but with + and /
      * changed to - and _ to make the encoded Base64 results more URL-SAFE.
      * This table is only used when the Base64's mode is set to URL-SAFE.
      */
-    private static final byte[] URL_SAFE_ENCODE_TABLE = {
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_'
-    };
+    private static final byte[] URL_SAFE_ENCODE_TABLE        = {
+                                                                 'A',
+                                                                 'B',
+                                                                 'C',
+                                                                 'D',
+                                                                 'E',
+                                                                 'F',
+                                                                 'G',
+                                                                 'H',
+                                                                 'I',
+                                                                 'J',
+                                                                 'K',
+                                                                 'L',
+                                                                 'M',
+                                                                 'N',
+                                                                 'O',
+                                                                 'P',
+                                                                 'Q',
+                                                                 'R',
+                                                                 'S',
+                                                                 'T',
+                                                                 'U',
+                                                                 'V',
+                                                                 'W',
+                                                                 'X',
+                                                                 'Y',
+                                                                 'Z',
+                                                                 'a',
+                                                                 'b',
+                                                                 'c',
+                                                                 'd',
+                                                                 'e',
+                                                                 'f',
+                                                                 'g',
+                                                                 'h',
+                                                                 'i',
+                                                                 'j',
+                                                                 'k',
+                                                                 'l',
+                                                                 'm',
+                                                                 'n',
+                                                                 'o',
+                                                                 'p',
+                                                                 'q',
+                                                                 'r',
+                                                                 's',
+                                                                 't',
+                                                                 'u',
+                                                                 'v',
+                                                                 'w',
+                                                                 'x',
+                                                                 'y',
+                                                                 'z',
+                                                                 '0',
+                                                                 '1',
+                                                                 '2',
+                                                                 '3',
+                                                                 '4',
+                                                                 '5',
+                                                                 '6',
+                                                                 '7',
+                                                                 '8',
+                                                                 '9',
+                                                                 '-',
+                                                                 '_' };
 
     /**
      * Byte used to pad output.
      */
-    private static final byte PAD = '=';
+    private static final byte   PAD                          = '=';
 
     /**
      * This array is a lookup table that translates Unicode characters drawn from the "Base64 Alphabet" (as specified in
@@ -116,21 +231,136 @@ public class Base64 {
      * Thanks to "commons" project in ws.apache.org for this code.
      * http://svn.apache.org/repos/asf/webservices/commons/trunk/modules/util/
      */
-    private static final byte[] DECODE_TABLE = {
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, 62, -1, 63, 52, 53, 54,
-            55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4,
-            5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-            24, 25, -1, -1, -1, -1, 63, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34,
-            35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
-    };
+    private static final byte[] DECODE_TABLE                 = {
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 62,
+                                                                 -1,
+                                                                 62,
+                                                                 -1,
+                                                                 63,
+                                                                 52,
+                                                                 53,
+                                                                 54,
+                                                                 55,
+                                                                 56,
+                                                                 57,
+                                                                 58,
+                                                                 59,
+                                                                 60,
+                                                                 61,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 0,
+                                                                 1,
+                                                                 2,
+                                                                 3,
+                                                                 4,
+                                                                 5,
+                                                                 6,
+                                                                 7,
+                                                                 8,
+                                                                 9,
+                                                                 10,
+                                                                 11,
+                                                                 12,
+                                                                 13,
+                                                                 14,
+                                                                 15,
+                                                                 16,
+                                                                 17,
+                                                                 18,
+                                                                 19,
+                                                                 20,
+                                                                 21,
+                                                                 22,
+                                                                 23,
+                                                                 24,
+                                                                 25,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 -1,
+                                                                 63,
+                                                                 -1,
+                                                                 26,
+                                                                 27,
+                                                                 28,
+                                                                 29,
+                                                                 30,
+                                                                 31,
+                                                                 32,
+                                                                 33,
+                                                                 34,
+                                                                 35,
+                                                                 36,
+                                                                 37,
+                                                                 38,
+                                                                 39,
+                                                                 40,
+                                                                 41,
+                                                                 42,
+                                                                 43,
+                                                                 44,
+                                                                 45,
+                                                                 46,
+                                                                 47,
+                                                                 48,
+                                                                 49,
+                                                                 50,
+                                                                 51 };
 
     /** Mask used to extract 6 bits, used when encoding */
-    private static final int MASK_6BITS = 0x3f;
+    private static final int    MASK_6BITS                   = 0x3f;
 
     /** Mask used to extract 8 bits, used in decoding base64 bytes */
-    private static final int MASK_8BITS = 0xff;
+    private static final int    MASK_8BITS                   = 0xff;
 
     // The static final fields above are used for the original static byte[] methods on Base64.
     // The private member fields below are used with the new streaming approach, which requires
@@ -141,69 +371,69 @@ public class Base64 {
      * to decode both STANDARD and URL_SAFE streams, but the encodeTable must be a member variable so we can switch
      * between the two modes.
      */
-    private final byte[] encodeTable;
+    private final byte[]        encodeTable;
 
     /**
      * Line length for encoding. Not used when decoding. A value of zero or less implies no chunking of the base64
      * encoded data.
      */
-    private final int lineLength;
+    private final int           lineLength;
 
     /**
      * Line separator for encoding. Not used when decoding. Only used if lineLength > 0.
      */
-    private final byte[] lineSeparator;
+    private final byte[]        lineSeparator;
 
     /**
      * Convenience variable to help us determine when our buffer is going to run out of room and needs resizing.
      * <code>decodeSize = 3 + lineSeparator.length;</code>
      */
-    private final int decodeSize;
+    private final int           decodeSize;
 
     /**
      * Convenience variable to help us determine when our buffer is going to run out of room and needs resizing.
      * <code>encodeSize = 4 + lineSeparator.length;</code>
      */
-    private final int encodeSize;
+    private final int           encodeSize;
 
     /**
      * Buffer for streaming.
      */
-    private byte[] buffer;
+    private byte[]              buffer;
 
     /**
      * Position where next character should be written in the buffer.
      */
-    private int pos;
+    private int                 pos;
 
     /**
      * Position where next character should be read from the buffer.
      */
-    private int readPos;
+    private int                 readPos;
 
     /**
      * Variable tracks how many characters have been written to the current line. Only used when encoding. We use it to
      * make sure each encoded line never goes beyond lineLength (if lineLength > 0).
      */
-    private int currentLinePos;
+    private int                 currentLinePos;
 
     /**
      * Writes to the buffer only occur after every 3 reads when encoding, an every 4 reads when decoding. This variable
      * helps track that.
      */
-    private int modulus;
+    private int                 modulus;
 
     /**
      * Boolean flag to indicate the EOF has been reached. Once EOF has been reached, this Base64 object becomes useless,
      * and must be thrown away.
      */
-    private boolean eof;
+    private boolean             eof;
 
     /**
      * Place holder for the 3 bytes we're dealing with for our base64 logic. Bitwise operations store and extract the
      * base64 encoding or decoding from this variable.
      */
-    private int x;
+    private int                 x;
 
     /**
      * Creates a Base64 codec used for decoding (all modes) and encoding in URL-unsafe mode.
@@ -215,7 +445,7 @@ public class Base64 {
      * When decoding all variants are supported.
      * </p>
      */
-    public Base64() {
+    public Base64(){
         this(false);
     }
 
@@ -234,7 +464,7 @@ public class Base64 {
      *            <code>false</code>.
      * @since 1.4
      */
-    public Base64(boolean urlSafe) {
+    public Base64(boolean urlSafe){
         this(CHUNK_SIZE, CHUNK_SEPARATOR, urlSafe);
     }
 
@@ -256,7 +486,7 @@ public class Base64 {
      *            If {@code lineLength <= 0}, then the output will not be divided into lines (chunks). Ignored when decoding.
      * @since 1.4
      */
-    public Base64(int lineLength) {
+    public Base64(int lineLength){
         this(lineLength, CHUNK_SEPARATOR);
     }
 
@@ -282,7 +512,7 @@ public class Base64 {
      *             Thrown when the provided lineSeparator included some base64 characters.
      * @since 1.4
      */
-    public Base64(int lineLength, byte[] lineSeparator) {
+    public Base64(int lineLength, byte[] lineSeparator){
         this(lineLength, lineSeparator, false);
     }
 
@@ -311,21 +541,21 @@ public class Base64 {
      *             The provided lineSeparator included some base64 characters. That's not going to work!
      * @since 1.4
      */
-    public Base64(int lineLength, byte[] lineSeparator, boolean urlSafe) {
-        if (lineSeparator == null) {
-            lineLength = 0;  // disable chunk-separating
-            lineSeparator = EMPTY_BYTE_ARRAY;  // this just gets ignored
+    public Base64(int lineLength, byte[] lineSeparator, boolean urlSafe){
+        if (lineSeparator == null){
+            lineLength = 0; // disable chunk-separating
+            lineSeparator = EMPTY_BYTE_ARRAY; // this just gets ignored
         }
         this.lineLength = lineLength > 0 ? (lineLength / 4) * 4 : 0;
         this.lineSeparator = new byte[lineSeparator.length];
         System.arraycopy(lineSeparator, 0, this.lineSeparator, 0, lineSeparator.length);
-        if (lineLength > 0) {
+        if (lineLength > 0){
             this.encodeSize = 4 + lineSeparator.length;
-        } else {
+        }else{
             this.encodeSize = 4;
         }
         this.decodeSize = this.encodeSize - 1;
-        if (containsBase64Byte(lineSeparator)) {
+        if (containsBase64Byte(lineSeparator)){
             String sep = newStringUtf8(lineSeparator);
             throw new IllegalArgumentException("lineSeperator must not contain base64 characters: [" + sep + "]");
         }
@@ -338,7 +568,7 @@ public class Base64 {
      * @return true if we're in URL-SAFE mode, false otherwise.
      * @since 1.4
      */
-    public boolean isUrlSafe() {
+    public boolean isUrlSafe(){
         return this.encodeTable == URL_SAFE_ENCODE_TABLE;
     }
 
@@ -347,7 +577,7 @@ public class Base64 {
      *
      * @return true if there is Base64 object still available for reading.
      */
-    boolean hasData() {
+    boolean hasData(){
         return this.buffer != null;
     }
 
@@ -356,17 +586,17 @@ public class Base64 {
      *
      * @return The amount of buffered data available for reading.
      */
-    int avail() {
+    int avail(){
         return buffer != null ? pos - readPos : 0;
     }
 
     /** Doubles our buffer. */
-    private void resizeBuffer() {
-        if (buffer == null) {
+    private void resizeBuffer(){
+        if (buffer == null){
             buffer = new byte[DEFAULT_BUFFER_SIZE];
             pos = 0;
             readPos = 0;
-        } else {
+        }else{
             byte[] b = new byte[buffer.length * DEFAULT_BUFFER_RESIZE_FACTOR];
             System.arraycopy(buffer, 0, b, 0, buffer.length);
             buffer = b;
@@ -385,16 +615,16 @@ public class Base64 {
      *            amount of bytes we're allowed to extract. We may extract fewer (if fewer are available).
      * @return The number of bytes successfully extracted into the provided byte[] array.
      */
-    int readResults(byte[] b, int bPos, int bAvail) {
-        if (buffer != null) {
+    int readResults(byte[] b,int bPos,int bAvail){
+        if (buffer != null){
             int len = Math.min(avail(), bAvail);
-            if (buffer != b) {
+            if (buffer != b){
                 System.arraycopy(buffer, readPos, b, bPos, len);
                 readPos += len;
-                if (readPos >= pos) {
+                if (readPos >= pos){
                     buffer = null;
                 }
-            } else {
+            }else{
                 // Re-using the original consumer's output array is only
                 // allowed for one round.
                 buffer = null;
@@ -415,10 +645,10 @@ public class Base64 {
      * @param outAvail
      *            Amount of bytes available for direct buffering.
      */
-    void setInitialBuffer(byte[] out, int outPos, int outAvail) {
+    void setInitialBuffer(byte[] out,int outPos,int outAvail){
         // We can re-use consumer's original output array under
         // special circumstances, saving on some System.arraycopy().
-        if (out != null && out.length == outAvail) {
+        if (out != null && out.length == outAvail){
             buffer = out;
             pos = outPos;
             readPos = outPos;
@@ -443,62 +673,62 @@ public class Base64 {
      * @param inAvail
      *            Amount of bytes available from input for encoding.
      */
-    void encode(byte[] in, int inPos, int inAvail) {
-        if (eof) {
+    void encode(byte[] in,int inPos,int inAvail){
+        if (eof){
             return;
         }
         // inAvail < 0 is how we're informed of EOF in the underlying data we're
         // encoding.
-        if (inAvail < 0) {
+        if (inAvail < 0){
             eof = true;
-            if (buffer == null || buffer.length - pos < encodeSize) {
+            if (buffer == null || buffer.length - pos < encodeSize){
                 resizeBuffer();
             }
             switch (modulus) {
-                case 1 :
+                case 1:
                     buffer[pos++] = encodeTable[(x >> 2) & MASK_6BITS];
                     buffer[pos++] = encodeTable[(x << 4) & MASK_6BITS];
                     // URL-SAFE skips the padding to further reduce size.
-                    if (encodeTable == STANDARD_ENCODE_TABLE) {
+                    if (encodeTable == STANDARD_ENCODE_TABLE){
                         buffer[pos++] = PAD;
                         buffer[pos++] = PAD;
                     }
                     break;
 
-                case 2 :
+                case 2:
                     buffer[pos++] = encodeTable[(x >> 10) & MASK_6BITS];
                     buffer[pos++] = encodeTable[(x >> 4) & MASK_6BITS];
                     buffer[pos++] = encodeTable[(x << 2) & MASK_6BITS];
                     // URL-SAFE skips the padding to further reduce size.
-                    if (encodeTable == STANDARD_ENCODE_TABLE) {
+                    if (encodeTable == STANDARD_ENCODE_TABLE){
                         buffer[pos++] = PAD;
                     }
                     break;
                 default:
-                    break;  // other values ignored
+                    break; // other values ignored
             }
-            if (lineLength > 0 && pos > 0) {
+            if (lineLength > 0 && pos > 0){
                 System.arraycopy(lineSeparator, 0, buffer, pos, lineSeparator.length);
                 pos += lineSeparator.length;
             }
-        } else {
-            for (int i = 0; i < inAvail; i++) {
-                if (buffer == null || buffer.length - pos < encodeSize) {
+        }else{
+            for (int i = 0; i < inAvail; i++){
+                if (buffer == null || buffer.length - pos < encodeSize){
                     resizeBuffer();
                 }
                 modulus = (++modulus) % 3;
                 int b = in[inPos++];
-                if (b < 0) {
+                if (b < 0){
                     b += 256;
                 }
                 x = (x << 8) + b;
-                if (0 == modulus) {
+                if (0 == modulus){
                     buffer[pos++] = encodeTable[(x >> 18) & MASK_6BITS];
                     buffer[pos++] = encodeTable[(x >> 12) & MASK_6BITS];
                     buffer[pos++] = encodeTable[(x >> 6) & MASK_6BITS];
                     buffer[pos++] = encodeTable[x & MASK_6BITS];
                     currentLinePos += 4;
-                    if (lineLength > 0 && lineLength <= currentLinePos) {
+                    if (lineLength > 0 && lineLength <= currentLinePos){
                         System.arraycopy(lineSeparator, 0, buffer, pos, lineSeparator.length);
                         pos += lineSeparator.length;
                         currentLinePos = 0;
@@ -531,29 +761,29 @@ public class Base64 {
      * @param inAvail
      *            Amount of bytes available from input for encoding.
      */
-    void decode(byte[] in, int inPos, int inAvail) {
-        if (eof) {
+    void decode(byte[] in,int inPos,int inAvail){
+        if (eof){
             return;
         }
-        if (inAvail < 0) {
+        if (inAvail < 0){
             eof = true;
         }
-        for (int i = 0; i < inAvail; i++) {
-            if (buffer == null || buffer.length - pos < decodeSize) {
+        for (int i = 0; i < inAvail; i++){
+            if (buffer == null || buffer.length - pos < decodeSize){
                 resizeBuffer();
             }
             byte b = in[inPos++];
-            if (b == PAD) {
+            if (b == PAD){
                 // We're done.
                 eof = true;
                 break;
-            } else {
-                if (b >= 0 && b < DECODE_TABLE.length) {
+            }else{
+                if (b >= 0 && b < DECODE_TABLE.length){
                     int result = DECODE_TABLE[b];
-                    if (result >= 0) {
+                    if (result >= 0){
                         modulus = (++modulus) % 4;
                         x = (x << 6) + result;
-                        if (modulus == 0) {
+                        if (modulus == 0){
                             buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                             buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
                             buffer[pos++] = (byte) (x & MASK_8BITS);
@@ -566,19 +796,19 @@ public class Base64 {
         // Two forms of EOF as far as base64 decoder is concerned: actual
         // EOF (-1) and first time '=' character is encountered in stream.
         // This approach makes the '=' padding characters completely optional.
-        if (eof && modulus != 0) {
+        if (eof && modulus != 0){
             x = x << 6;
             switch (modulus) {
-                case 2 :
+                case 2:
                     x = x << 6;
                     buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     break;
-                case 3 :
+                case 3:
                     buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
                     break;
                 default:
-                    break;  // other values ignored
+                    break; // other values ignored
             }
         }
     }
@@ -591,7 +821,7 @@ public class Base64 {
      * @return <code>true</code> if the value is defined in the the base 64 alphabet, <code>false</code> otherwise.
      * @since 1.4
      */
-    public static boolean isBase64(byte octet) {
+    public static boolean isBase64(byte octet){
         return octet == PAD || (octet >= 0 && octet < DECODE_TABLE.length && DECODE_TABLE[octet] != -1);
     }
 
@@ -604,9 +834,9 @@ public class Base64 {
      * @return <code>true</code> if all bytes are valid characters in the Base64 alphabet or if the byte array is empty;
      *         false, otherwise
      */
-    public static boolean isArrayByteBase64(byte[] arrayOctet) {
-        for (int i = 0; i < arrayOctet.length; i++) {
-            if (!isBase64(arrayOctet[i]) && !isWhiteSpace(arrayOctet[i])) {
+    public static boolean isArrayByteBase64(byte[] arrayOctet){
+        for (byte element : arrayOctet){
+            if (!isBase64(element) && !isWhiteSpace(element)){
                 return false;
             }
         }
@@ -620,10 +850,9 @@ public class Base64 {
      *            byte array to test
      * @return <code>true</code> if any byte is a valid character in the Base64 alphabet; false herwise
      */
-    private static boolean containsBase64Byte(byte[] arrayOctet) {
-        for (byte element : arrayOctet)
-        {
-            if (isBase64(element)) {
+    private static boolean containsBase64Byte(byte[] arrayOctet){
+        for (byte element : arrayOctet){
+            if (isBase64(element)){
                 return true;
             }
         }
@@ -637,7 +866,7 @@ public class Base64 {
      *            binary data to encode
      * @return byte[] containing Base64 characters in their UTF-8 representation.
      */
-    public static byte[] encodeBase64(byte[] binaryData) {
+    public static byte[] encodeBase64(byte[] binaryData){
         return encodeBase64(binaryData, false);
     }
 
@@ -651,7 +880,7 @@ public class Base64 {
      * @return String containing Base64 characters.
      * @since 1.4
      */
-    public static String encodeBase64String(byte[] binaryData) {
+    public static String encodeBase64String(byte[] binaryData){
         return newStringUtf8(encodeBase64(binaryData, true));
     }
 
@@ -665,7 +894,7 @@ public class Base64 {
      * @return String containing Base64 characters.
      * @since 3.2
      */
-    public static String encodeBase64StringUnChunked(byte[] binaryData) {
+    public static String encodeBase64StringUnChunked(byte[] binaryData){
         return newStringUtf8(encodeBase64(binaryData, false));
     }
 
@@ -674,11 +903,12 @@ public class Base64 {
      *
      * @param binaryData
      *            binary data to encode
-     * @param useChunking whether to split the output into chunks
+     * @param useChunking
+     *            whether to split the output into chunks
      * @return String containing Base64 characters.
      * @since 3.2
      */
-    public static String encodeBase64String(byte[] binaryData, boolean useChunking) {
+    public static String encodeBase64String(byte[] binaryData,boolean useChunking){
         return newStringUtf8(encodeBase64(binaryData, useChunking));
     }
 
@@ -691,7 +921,7 @@ public class Base64 {
      * @return byte[] containing Base64 characters in their UTF-8 representation.
      * @since 1.4
      */
-    public static byte[] encodeBase64URLSafe(byte[] binaryData) {
+    public static byte[] encodeBase64URLSafe(byte[] binaryData){
         return encodeBase64(binaryData, false, true);
     }
 
@@ -704,7 +934,7 @@ public class Base64 {
      * @return String containing Base64 characters
      * @since 1.4
      */
-    public static String encodeBase64URLSafeString(byte[] binaryData) {
+    public static String encodeBase64URLSafeString(byte[] binaryData){
         return newStringUtf8(encodeBase64(binaryData, false, true));
     }
 
@@ -715,7 +945,7 @@ public class Base64 {
      *            binary data to encode
      * @return Base64 characters chunked in 76 character blocks
      */
-    public static byte[] encodeBase64Chunked(byte[] binaryData) {
+    public static byte[] encodeBase64Chunked(byte[] binaryData){
         return encodeBase64(binaryData, true);
     }
 
@@ -727,14 +957,14 @@ public class Base64 {
      * @return a byte array containing binary data
      * @since 1.4
      */
-    public byte[] decode(String pArray) {
+    public byte[] decode(String pArray){
         return decode(getBytesUtf8(pArray));
     }
 
-    private byte[] getBytesUtf8(String pArray) {
-        try {
+    private byte[] getBytesUtf8(String pArray){
+        try{
             return pArray.getBytes("UTF8");
-        } catch (UnsupportedEncodingException e) {
+        }catch (UnsupportedEncodingException e){
             throw new RuntimeException(e);
         }
     }
@@ -746,9 +976,9 @@ public class Base64 {
      *            A byte array containing Base64 character data
      * @return a byte array containing binary data
      */
-    public byte[] decode(byte[] pArray) {
+    public byte[] decode(byte[] pArray){
         reset();
-        if (pArray == null || pArray.length == 0) {
+        if (pArray == null || pArray.length == 0){
             return pArray;
         }
         long len = (pArray.length * 3) / 4;
@@ -779,7 +1009,7 @@ public class Base64 {
      * @throws IllegalArgumentException
      *             Thrown when the input array needs an output array bigger than {@link Integer#MAX_VALUE}
      */
-    public static byte[] encodeBase64(byte[] binaryData, boolean isChunked) {
+    public static byte[] encodeBase64(byte[] binaryData,boolean isChunked){
         return encodeBase64(binaryData, isChunked, false);
     }
 
@@ -797,7 +1027,7 @@ public class Base64 {
      *             Thrown when the input array needs an output array bigger than {@link Integer#MAX_VALUE}
      * @since 1.4
      */
-    public static byte[] encodeBase64(byte[] binaryData, boolean isChunked, boolean urlSafe) {
+    public static byte[] encodeBase64(byte[] binaryData,boolean isChunked,boolean urlSafe){
         return encodeBase64(binaryData, isChunked, urlSafe, Integer.MAX_VALUE);
     }
 
@@ -817,17 +1047,16 @@ public class Base64 {
      *             Thrown when the input array needs an output array bigger than maxResultSize
      * @since 1.4
      */
-    public static byte[] encodeBase64(byte[] binaryData, boolean isChunked, boolean urlSafe, int maxResultSize) {
-        if (binaryData == null || binaryData.length == 0) {
+    public static byte[] encodeBase64(byte[] binaryData,boolean isChunked,boolean urlSafe,int maxResultSize){
+        if (binaryData == null || binaryData.length == 0){
             return binaryData;
         }
 
         long len = getEncodeLength(binaryData, isChunked ? CHUNK_SIZE : 0, isChunked ? CHUNK_SEPARATOR : EMPTY_BYTE_ARRAY);
-        if (len > maxResultSize) {
-            throw new IllegalArgumentException("Input array too big, the output array would be bigger (" +
-                len +
-                ") than the specified maxium size of " +
-                maxResultSize);
+        if (len > maxResultSize){
+            throw new IllegalArgumentException(
+                            "Input array too big, the output array would be bigger (" + len + ") than the specified maxium size of "
+                                            + maxResultSize);
         }
 
         Base64 b64 = isChunked ? new Base64(urlSafe) : new Base64(0, CHUNK_SEPARATOR, urlSafe);
@@ -842,7 +1071,7 @@ public class Base64 {
      * @return Array containing decoded data.
      * @since 1.4
      */
-    public static byte[] decodeBase64(String base64String) {
+    public static byte[] decodeBase64(String base64String){
         return new Base64().decode(base64String);
     }
 
@@ -853,11 +1082,9 @@ public class Base64 {
      *            Byte array containing Base64 data
      * @return Array containing decoded data.
      */
-    public static byte[] decodeBase64(byte[] base64Data) {
+    public static byte[] decodeBase64(byte[] base64Data){
         return new Base64().decode(base64Data);
     }
-
-
 
     /**
      * Checks if a byte value is whitespace or not.
@@ -866,14 +1093,14 @@ public class Base64 {
      *            the byte to check
      * @return true if byte is whitespace, false otherwise
      */
-    private static boolean isWhiteSpace(byte byteToCheck) {
+    private static boolean isWhiteSpace(byte byteToCheck){
         switch (byteToCheck) {
-            case ' ' :
-            case '\n' :
-            case '\r' :
-            case '\t' :
+            case ' ':
+            case '\n':
+            case '\r':
+            case '\t':
                 return true;
-            default :
+            default:
                 return false;
         }
     }
@@ -886,15 +1113,15 @@ public class Base64 {
      * @return A String containing only Base64 character data
      * @since 1.4
      */
-    public String encodeToString(byte[] pArray) {
+    public String encodeToString(byte[] pArray){
         return newStringUtf8(encode(pArray));
     }
 
-    private static String newStringUtf8(byte[] encode) {
+    private static String newStringUtf8(byte[] encode){
         String str = null;
-        try {
+        try{
             str = new String(encode, "UTF8");
-        } catch (UnsupportedEncodingException ue) {
+        }catch (UnsupportedEncodingException ue){
             throw new RuntimeException(ue);
         }
         return str;
@@ -907,9 +1134,9 @@ public class Base64 {
      *            a byte array containing binary data
      * @return A byte array containing only Base64 character data
      */
-    public byte[] encode(byte[] pArray) {
+    public byte[] encode(byte[] pArray){
         reset();
-        if (pArray == null || pArray.length == 0) {
+        if (pArray == null || pArray.length == 0){
             return pArray;
         }
         long len = getEncodeLength(pArray, lineLength, lineSeparator);
@@ -918,12 +1145,12 @@ public class Base64 {
         encode(pArray, 0, pArray.length);
         encode(pArray, 0, -1); // Notify encoder of EOF.
         // Encoder might have resized, even though it was unnecessary.
-        if (buffer != buf) {
+        if (buffer != buf){
             readResults(buf, 0, buf.length);
         }
         // In URL-SAFE mode we skip the padding characters, so sometimes our
         // final length is a bit smaller.
-        if (isUrlSafe() && pos < buf.length) {
+        if (isUrlSafe() && pos < buf.length){
             byte[] smallerBuf = new byte[pos];
             System.arraycopy(buf, 0, smallerBuf, 0, pos);
             buf = smallerBuf;
@@ -934,27 +1161,30 @@ public class Base64 {
     /**
      * Pre-calculates the amount of space needed to base64-encode the supplied array.
      *
-     * @param pArray byte[] array which will later be encoded
-     * @param chunkSize line-length of the output (<= 0 means no chunking) between each
-     *        chunkSeparator (e.g. CRLF).
-     * @param chunkSeparator the sequence of bytes used to separate chunks of output (e.g. CRLF).
+     * @param pArray
+     *            byte[] array which will later be encoded
+     * @param chunkSize
+     *            line-length of the output (<= 0 means no chunking) between each
+     *            chunkSeparator (e.g. CRLF).
+     * @param chunkSeparator
+     *            the sequence of bytes used to separate chunks of output (e.g. CRLF).
      *
-     * @return amount of space needed to encoded the supplied array.  Returns
+     * @return amount of space needed to encoded the supplied array. Returns
      *         a long since a max-len array will require Integer.MAX_VALUE + 33%.
      */
-    private static long getEncodeLength(byte[] pArray, int chunkSize, byte[] chunkSeparator) {
+    private static long getEncodeLength(byte[] pArray,int chunkSize,byte[] chunkSeparator){
         // base64 always encodes to multiples of 4.
         chunkSize = (chunkSize / 4) * 4;
 
         long len = (pArray.length * 4) / 3;
         long mod = len % 4;
-        if (mod != 0) {
+        if (mod != 0){
             len += 4 - mod;
         }
-        if (chunkSize > 0) {
+        if (chunkSize > 0){
             boolean lenChunksPerfectly = len % chunkSize == 0;
             len += (len / chunkSize) * chunkSeparator.length;
-            if (!lenChunksPerfectly) {
+            if (!lenChunksPerfectly){
                 len += chunkSeparator.length;
             }
         }
@@ -970,7 +1200,7 @@ public class Base64 {
      * @return A BigInteger
      * @since 1.4
      */
-    public static BigInteger decodeInteger(byte[] pArray) {
+    public static BigInteger decodeInteger(byte[] pArray){
         return new BigInteger(1, decodeBase64(pArray));
     }
 
@@ -984,8 +1214,8 @@ public class Base64 {
      *             if null is passed in
      * @since 1.4
      */
-    public static byte[] encodeInteger(BigInteger bigInt) {
-        if (bigInt == null) {
+    public static byte[] encodeInteger(BigInteger bigInt){
+        if (bigInt == null){
             throw new NullPointerException("encodeInteger called with null parameter");
         }
         return encodeBase64(toIntegerBytes(bigInt), false);
@@ -998,13 +1228,13 @@ public class Base64 {
      *            <code>BigInteger</code> to be converted
      * @return a byte array representation of the BigInteger parameter
      */
-    static byte[] toIntegerBytes(BigInteger bigInt) {
+    static byte[] toIntegerBytes(BigInteger bigInt){
         int bitlen = bigInt.bitLength();
         // round bitlen
         bitlen = ((bitlen + 7) >> 3) << 3;
         byte[] bigBytes = bigInt.toByteArray();
 
-        if (((bigInt.bitLength() % 8) != 0) && (((bigInt.bitLength() / 8) + 1) == (bitlen / 8))) {
+        if (((bigInt.bitLength() % 8) != 0) && (((bigInt.bitLength() / 8) + 1) == (bitlen / 8))){
             return bigBytes;
         }
         // set up params for copying everything but sign bit
@@ -1012,7 +1242,7 @@ public class Base64 {
         int len = bigBytes.length;
 
         // if bigInt is exactly byte-aligned, just skip signbit in copy
-        if ((bigInt.bitLength() % 8) == 0) {
+        if ((bigInt.bitLength() % 8) == 0){
             startSrc = 1;
             len--;
         }
@@ -1025,7 +1255,7 @@ public class Base64 {
     /**
      * Resets this Base64 object to its initial newly constructed state.
      */
-    private void reset() {
+    private void reset(){
         buffer = null;
         pos = 0;
         readPos = 0;
@@ -1036,11 +1266,11 @@ public class Base64 {
 
     // Getters for use in testing
 
-    int getLineLength() {
+    int getLineLength(){
         return lineLength;
     }
 
-    byte[] getLineSeparator() {
+    byte[] getLineSeparator(){
         return lineSeparator.clone();
     }
 }

@@ -90,8 +90,7 @@ public class PropertyDictionary implements Caching{
             }
             nameMap = new OrderRetainingMap();
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-            for (int i = 0; i < propertyDescriptors.length; i++){
-                PropertyDescriptor descriptor = propertyDescriptors[i];
+            for (PropertyDescriptor descriptor : propertyDescriptors){
                 nameMap.put(descriptor.getName(), descriptor);
             }
             nameMap = sorter.sort(type, nameMap);

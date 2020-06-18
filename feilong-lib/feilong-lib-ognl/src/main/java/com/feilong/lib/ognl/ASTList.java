@@ -42,6 +42,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTList extends SimpleNode implements NodeType{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2807877991498381397L;
+
     public ASTList(int id){
         super(id);
     }
@@ -53,8 +58,9 @@ public class ASTList extends SimpleNode implements NodeType{
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         List answer = new ArrayList(jjtGetNumChildren());
-        for (int i = 0; i < jjtGetNumChildren(); ++i)
+        for (int i = 0; i < jjtGetNumChildren(); ++i){
             answer.add(_children[i].getValue(context, source));
+        }
         return answer;
     }
 
@@ -95,8 +101,9 @@ public class ASTList extends SimpleNode implements NodeType{
         context.setCurrentAccessor(List.class);
 
         if (!array){
-            if (jjtGetNumChildren() < 1)
+            if (jjtGetNumChildren() < 1){
                 return "java.util.Arrays.asList( new Object[0])";
+            }
 
             result += "java.util.Arrays.asList( new Object[] ";
         }
@@ -128,18 +135,21 @@ public class ASTList extends SimpleNode implements NodeType{
 
                     cast = (String) context.remove(ExpressionCompiler.PRE_CAST);
                 }
-                if (cast == null)
+                if (cast == null){
                     cast = "";
+                }
 
-                if (!ASTConst.class.isInstance(_children[i]))
+                if (!ASTConst.class.isInstance(_children[i])){
                     value = cast + value;
+                }
 
                 Class ctorClass = (Class) context.get("_ctorClass");
                 if (array && ctorClass != null && !ctorClass.isPrimitive()){
 
                     Class valueClass = value != null ? value.getClass() : null;
-                    if (NodeType.class.isAssignableFrom(_children[i].getClass()))
+                    if (NodeType.class.isAssignableFrom(_children[i].getClass())){
                         valueClass = ((NodeType) _children[i]).getGetterClass();
+                    }
 
                     if (valueClass != null && ctorClass.isArray()){
 
@@ -181,8 +191,9 @@ public class ASTList extends SimpleNode implements NodeType{
                     value = " ($w) (" + value + ")";
                 }
 
-                if (objValue == null || value.length() <= 0)
+                if (objValue == null || value.length() <= 0){
                     value = "null";
+                }
 
                 result += value;
             }
@@ -196,8 +207,9 @@ public class ASTList extends SimpleNode implements NodeType{
 
         result += "}";
 
-        if (!array)
+        if (!array){
             result += ")";
+        }
 
         return result;
     }

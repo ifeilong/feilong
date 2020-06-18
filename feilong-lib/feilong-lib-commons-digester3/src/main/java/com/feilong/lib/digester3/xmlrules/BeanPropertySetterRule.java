@@ -9,29 +9,22 @@ import com.feilong.lib.digester3.binder.RulesBinder;
 /**
  * 
  */
-final class BeanPropertySetterRule
-    extends AbstractXmlRule
-{
+final class BeanPropertySetterRule extends AbstractXmlRule{
 
-    public BeanPropertySetterRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
+    public BeanPropertySetterRule(RulesBinder targetRulesBinder, PatternStack patternStack){
+        super(targetRulesBinder, patternStack);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
-        throws Exception
-    {
-        BeanPropertySetterBuilder builder =
-            linkedRuleBuilder.setBeanProperty().withName( attributes.getValue( "propertyname" ) );
+    protected void bindRule(LinkedRuleBuilder linkedRuleBuilder,Attributes attributes) throws Exception{
+        BeanPropertySetterBuilder builder = linkedRuleBuilder.setBeanProperty().withName(attributes.getValue("propertyname"));
 
-        int propertyNameFromAttributeIndex = attributes.getIndex( "propertynameFromAttribute" );
-        if ( propertyNameFromAttributeIndex >= 0 )
-        {
-            builder.extractPropertyNameFromAttribute( attributes.getValue( propertyNameFromAttributeIndex ) );
+        int propertyNameFromAttributeIndex = attributes.getIndex("propertynameFromAttribute");
+        if (propertyNameFromAttributeIndex >= 0){
+            builder.extractPropertyNameFromAttribute(attributes.getValue(propertyNameFromAttributeIndex));
         }
     }
 

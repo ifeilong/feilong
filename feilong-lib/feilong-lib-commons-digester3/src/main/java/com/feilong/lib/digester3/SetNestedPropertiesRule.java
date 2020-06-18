@@ -110,7 +110,7 @@ public class SetNestedPropertiesRule extends Rule{
 
     private boolean                       allowUnknownChildElements = false;
 
-    private final HashMap<String, String> elementNames              = new HashMap<String, String>();
+    private final HashMap<String, String> elementNames              = new HashMap<>();
 
     // ----------------------------------------------------------- Constructors
 
@@ -326,7 +326,7 @@ public class SetNestedPropertiesRule extends Rule{
 
         private Rules                 decoratedRules = null;
 
-        private final ArrayList<Rule> rules          = new ArrayList<Rule>(1);
+        private final ArrayList<Rule> rules          = new ArrayList<>(1);
 
         private final AnyChildRule    rule;
 
@@ -385,7 +385,7 @@ public class SetNestedPropertiesRule extends Rule{
                 //
                 // It might not be safe to modify the returned list,
                 // so clone it first.
-                LinkedList<Rule> newMatch = new LinkedList<Rule>(match);
+                LinkedList<Rule> newMatch = new LinkedList<>(match);
                 newMatch.addLast(rule);
                 return newMatch;
             }

@@ -19,6 +19,7 @@ package com.feilong.lib.javassist;
 import com.feilong.lib.javassist.CtMethod.ConstParameter;
 import com.feilong.lib.javassist.bytecode.Bytecode;
 import com.feilong.lib.javassist.bytecode.ConstPool;
+import com.feilong.lib.javassist.bytecode.Opcode;
 import com.feilong.lib.javassist.compiler.CompileError;
 import com.feilong.lib.javassist.compiler.Javac;
 
@@ -149,7 +150,7 @@ public class CtNewConstructor{
             throw new CannotCompileException(e);
         }
 
-        code.add(Bytecode.RETURN);
+        code.add(Opcode.RETURN);
 
         // no need to construct a stack map table.
         cons.getMethodInfo2().setCodeAttribute(code.toCodeAttribute());

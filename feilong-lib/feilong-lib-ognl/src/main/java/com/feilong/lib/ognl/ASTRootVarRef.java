@@ -38,6 +38,11 @@ import com.feilong.lib.ognl.enhance.ExpressionCompiler;
  */
 public class ASTRootVarRef extends ASTVarRef{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3373614874806333000L;
+
     public ASTRootVarRef(int id){
         super(id);
     }
@@ -63,25 +68,28 @@ public class ASTRootVarRef extends ASTVarRef{
 
     @Override
     public String toGetSourceString(OgnlContext context,Object target){
-        if (target != null)
+        if (target != null){
             _getterClass = target.getClass();
+        }
 
         if (_getterClass != null){
 
             context.setCurrentType(_getterClass);
         }
 
-        if (_parent == null || (_getterClass != null && _getterClass.isArray()))
+        if (_parent == null || (_getterClass != null && _getterClass.isArray())){
             return "";
-        else
+        }else{
             return ExpressionCompiler.getRootExpression(this, target, context);
+        }
     }
 
     @Override
     public String toSetSourceString(OgnlContext context,Object target){
-        if (_parent == null || (_getterClass != null && _getterClass.isArray()))
+        if (_parent == null || (_getterClass != null && _getterClass.isArray())){
             return "";
-        else
+        }else{
             return "$3";
+        }
     }
 }

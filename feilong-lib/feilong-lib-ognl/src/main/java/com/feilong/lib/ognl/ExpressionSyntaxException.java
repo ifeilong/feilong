@@ -38,6 +38,11 @@ package com.feilong.lib.ognl;
  */
 public class ExpressionSyntaxException extends OgnlException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7953790151638703030L;
+
     public ExpressionSyntaxException(String expression, Throwable reason){
         super("Malformed OGNL expression: " + expression, reason);
     }

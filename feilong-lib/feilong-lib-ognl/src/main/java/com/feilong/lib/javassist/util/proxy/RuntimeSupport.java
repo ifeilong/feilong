@@ -40,7 +40,7 @@ public class RuntimeSupport{
         public Object invoke(Object self,Method m,Method proceed,Object[] args) throws Exception{
             return proceed.invoke(self, args);
         }
-    };
+    }
 
     /**
      * Finds two methods specified by the parameters and stores them
@@ -101,8 +101,9 @@ public class RuntimeSupport{
     @Deprecated
     public static Method findMethod(Object self,String name,String desc){
         Method m = findMethod2(self.getClass(), name, desc);
-        if (m == null)
+        if (m == null){
             error(self.getClass(), name, desc);
+        }
 
         return m;
     }
@@ -116,8 +117,9 @@ public class RuntimeSupport{
      */
     public static Method findMethod(Class<?> clazz,String name,String desc){
         Method m = findMethod2(clazz, name, desc);
-        if (m == null)
+        if (m == null){
             error(clazz, name, desc);
+        }
 
         return m;
     }
@@ -144,11 +146,13 @@ public class RuntimeSupport{
      */
     public static Method findSuperClassMethod(Class<?> clazz,String name,String desc){
         Method m = findSuperMethod2(clazz.getSuperclass(), name, desc);
-        if (m == null)
+        if (m == null){
             m = searchInterfaces(clazz, name, desc);
+        }
 
-        if (m == null)
+        if (m == null){
             error(clazz, name, desc);
+        }
 
         return m;
     }
@@ -159,14 +163,16 @@ public class RuntimeSupport{
 
     private static Method findSuperMethod2(Class<?> clazz,String name,String desc){
         Method m = findMethod2(clazz, name, desc);
-        if (m != null)
+        if (m != null){
             return m;
+        }
 
         Class<?> superClass = clazz.getSuperclass();
         if (superClass != null){
             m = findSuperMethod2(superClass, name, desc);
-            if (m != null)
+            if (m != null){
                 return m;
+            }
         }
 
         return searchInterfaces(clazz, name, desc);
@@ -175,10 +181,11 @@ public class RuntimeSupport{
     private static Method searchInterfaces(Class<?> clazz,String name,String desc){
         Method m = null;
         Class<?>[] interfaces = clazz.getInterfaces();
-        for (int i = 0; i < interfaces.length; i++){
-            m = findSuperMethod2(interfaces[i], name, desc);
-            if (m != null)
+        for (Class<?> interface1 : interfaces){
+            m = findSuperMethod2(interface1, name, desc);
+            if (m != null){
                 return m;
+            }
         }
 
         return m;
@@ -187,9 +194,11 @@ public class RuntimeSupport{
     private static Method findMethod2(Class<?> clazz,String name,String desc){
         Method[] methods = SecurityActions.getDeclaredMethods(clazz);
         int n = methods.length;
-        for (int i = 0; i < n; i++)
-            if (methods[i].getName().equals(name) && makeDescriptor(methods[i]).equals(desc))
+        for (int i = 0; i < n; i++){
+            if (methods[i].getName().equals(name) && makeDescriptor(methods[i]).equals(desc)){
                 return methods[i];
+            }
+        }
 
         return null;
     }
@@ -213,12 +222,14 @@ public class RuntimeSupport{
     public static String makeDescriptor(Class<?>[] params,Class<?> retType){
         StringBuffer sbuf = new StringBuffer();
         sbuf.append('(');
-        for (int i = 0; i < params.length; i++)
-            makeDesc(sbuf, params[i]);
+        for (Class<?> param : params){
+            makeDesc(sbuf, param);
+        }
 
         sbuf.append(')');
-        if (retType != null)
+        if (retType != null){
             makeDesc(sbuf, retType);
+        }
 
         return sbuf.toString();
     }
@@ -242,28 +253,30 @@ public class RuntimeSupport{
             sbuf.append('[');
             makeDesc(sbuf, type.getComponentType());
         }else if (type.isPrimitive()){
-            if (type == Void.TYPE)
+            if (type == Void.TYPE){
                 sbuf.append('V');
-            else if (type == Integer.TYPE)
+            }else if (type == Integer.TYPE){
                 sbuf.append('I');
-            else if (type == Byte.TYPE)
+            }else if (type == Byte.TYPE){
                 sbuf.append('B');
-            else if (type == Long.TYPE)
+            }else if (type == Long.TYPE){
                 sbuf.append('J');
-            else if (type == Double.TYPE)
+            }else if (type == Double.TYPE){
                 sbuf.append('D');
-            else if (type == Float.TYPE)
+            }else if (type == Float.TYPE){
                 sbuf.append('F');
-            else if (type == Character.TYPE)
+            }else if (type == Character.TYPE){
                 sbuf.append('C');
-            else if (type == Short.TYPE)
+            }else if (type == Short.TYPE){
                 sbuf.append('S');
-            else if (type == Boolean.TYPE)
+            }else if (type == Boolean.TYPE){
                 sbuf.append('Z');
-            else
+            }else{
                 throw new RuntimeException("bad type: " + type.getName());
-        }else
+            }
+        }else{
             sbuf.append('L').append(type.getName().replace('.', '/')).append(';');
+        }
     }
 
     /**
@@ -277,10 +290,11 @@ public class RuntimeSupport{
         Class<?> clazz = proxy.getClass();
 
         MethodHandler methodHandler = null;
-        if (proxy instanceof ProxyObject)
+        if (proxy instanceof ProxyObject){
             methodHandler = ((ProxyObject) proxy).getHandler();
-        else if (proxy instanceof Proxy)
+        }else if (proxy instanceof Proxy){
             methodHandler = ProxyFactory.getHandler((Proxy) proxy);
+        }
 
         return new SerializedProxy(clazz, ProxyFactory.getFilterSignature(clazz), methodHandler);
     }

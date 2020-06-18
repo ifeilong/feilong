@@ -41,9 +41,14 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTMap extends SimpleNode{
 
-    private static Class DEFAULT_MAP_CLASS;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8425264364616357052L;
 
-    private String       className;
+    private static Class      DEFAULT_MAP_CLASS;
+
+    private String            className;
 
     static{
         /* Try to get LinkedHashMap; if older JDK than 1.4 use HashMap */

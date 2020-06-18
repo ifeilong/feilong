@@ -55,8 +55,9 @@ class SerializedProxy implements Serializable{
         String setterInf2 = Proxy.class.getName();
         for (int i = 0; i < n; i++){
             String name = infs[i].getName();
-            if (!name.equals(setterInf) && !name.equals(setterInf2))
+            if (!name.equals(setterInf) && !name.equals(setterInf2)){
                 interfaces[i] = name;
+            }
         }
     }
 
@@ -71,13 +72,9 @@ class SerializedProxy implements Serializable{
      */
     protected Class<?> loadClass(final String className) throws ClassNotFoundException{
         try{
-            return AccessController.doPrivileged(new PrivilegedExceptionAction<Class<?>>(){
-
-                @Override
-                public Class<?> run() throws Exception{
-                    ClassLoader cl = Thread.currentThread().getContextClassLoader();
-                    return Class.forName(className, true, cl);
-                }
+            return AccessController.doPrivileged((PrivilegedExceptionAction<Class<?>>) () -> {
+                ClassLoader cl = Thread.currentThread().getContextClassLoader();
+                return Class.forName(className, true, cl);
             });
         }catch (PrivilegedActionException pae){
             throw new RuntimeException("cannot load the class: " + className, pae.getException());
@@ -88,8 +85,9 @@ class SerializedProxy implements Serializable{
         try{
             int n = interfaces.length;
             Class<?>[] infs = new Class[n];
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++){
                 infs[i] = loadClass(interfaces[i]);
+            }
 
             ProxyFactory f = new ProxyFactory();
             f.setSuperclass(loadClass(superClass));

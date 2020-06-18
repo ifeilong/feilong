@@ -32,26 +32,28 @@ package com.feilong.lib.ognl.enhance;
 
 import com.feilong.lib.ognl.OgnlContext;
 
-public class ContextClassLoader extends ClassLoader
-{
-    private OgnlContext         context;
+public class ContextClassLoader extends ClassLoader{
 
-    /*===================================================================
-        Constructors
-      ===================================================================*/
-    public ContextClassLoader(ClassLoader parentClassLoader, OgnlContext context)
-    {
+    private OgnlContext context;
+
+    /*
+     * ===================================================================
+     * Constructors
+     * ===================================================================
+     */
+    public ContextClassLoader(ClassLoader parentClassLoader, OgnlContext context){
         super(parentClassLoader);
         this.context = context;
     }
 
-    /*===================================================================
-        Overridden methods
-      ===================================================================*/
+    /*
+     * ===================================================================
+     * Overridden methods
+     * ===================================================================
+     */
     @Override
-    protected Class findClass(String name) throws ClassNotFoundException
-    {
-        if ((context != null) && (context.getClassResolver() != null)) {
+    protected Class findClass(String name) throws ClassNotFoundException{
+        if ((context != null) && (context.getClassResolver() != null)){
             return context.getClassResolver().classForName(name, context);
         }
         return super.findClass(name);

@@ -22,6 +22,7 @@ import com.feilong.lib.xstream.core.util.Fields;
  * @author Joe Walnes
  * @deprecated As of 1.4.8, it is an internal helper class
  */
+@Deprecated
 public class StackTraceElementFactory{
 
     public StackTraceElement nativeMethodElement(final String declaringClass,final String methodName){

@@ -36,7 +36,12 @@ package com.feilong.lib.ognl;
  */
 public class ASTInstanceof extends SimpleNode implements NodeType{
 
-    private String targetType;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3808988321707410945L;
+
+    private String            targetType;
 
     public ASTInstanceof(int id){
         super(id);
@@ -77,10 +82,11 @@ public class ASTInstanceof extends SimpleNode implements NodeType{
 
             String ret = "";
 
-            if (ASTConst.class.isInstance(_children[0]))
+            if (ASTConst.class.isInstance(_children[0])){
                 ret = ((Boolean) getValueBody(context, target)).toString();
-            else
+            }else{
                 ret = _children[0].toGetSourceString(context, target) + " instanceof " + targetType;
+            }
 
             context.setCurrentType(Boolean.TYPE);
 

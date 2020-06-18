@@ -263,15 +263,17 @@ public class ObjectPropertyAccessor implements PropertyAccessor{
                                 (currentObjectStr.indexOf('"') >= 0 ? currentObjectStr.replaceAll("\"", "") : currentObjectStr));
             }
 
-            if (m == null || m.getParameterTypes() == null || m.getParameterTypes().length <= 0)
+            if (m == null || m.getParameterTypes() == null || m.getParameterTypes().length <= 0){
                 throw new UnsupportedCompilationException(
                                 "Unable to determine setting expression on " + context.getCurrentObject() + " with index of " + index);
+            }
 
             Class parm = m.getParameterTypes()[0];
             String conversion;
 
-            if (m.getParameterTypes().length > 1)
+            if (m.getParameterTypes().length > 1){
                 throw new UnsupportedCompilationException("Object property accessors can only support single parameter setters.");
+            }
 
             if (parm.isPrimitive()){
                 Class wrapClass = OgnlRuntime.getPrimitiveWrapperClass(parm);

@@ -19,7 +19,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -236,8 +235,8 @@ class JSONArrayToBeanUtil{
         int[] dimensions = new int[dims.size()];
         int j = 0;
 
-        for (Iterator i = dims.iterator(); i.hasNext();){
-            dimensions[j++] = ((Integer) i.next()).intValue();
+        for (Object element : dims){
+            dimensions[j++] = ((Integer) element).intValue();
         }
         return dimensions;
     }

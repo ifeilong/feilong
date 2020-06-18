@@ -26,8 +26,8 @@ import com.feilong.lib.xstream.converters.ConverterMatcher;
 import com.feilong.lib.xstream.converters.MarshallingContext;
 import com.feilong.lib.xstream.converters.SingleValueConverter;
 import com.feilong.lib.xstream.converters.UnmarshallingContext;
-import com.feilong.lib.xstream.converters.reflection.ReflectionProvider;
 import com.feilong.lib.xstream.converters.reflection.AbstractReflectionConverter.DuplicateFieldException;
+import com.feilong.lib.xstream.converters.reflection.ReflectionProvider;
 import com.feilong.lib.xstream.core.JVM;
 import com.feilong.lib.xstream.core.util.FastField;
 import com.feilong.lib.xstream.core.util.HierarchicalStreams;
@@ -155,58 +155,54 @@ public class ToAttributedValueConverter implements Converter{
         final Object[] realValue = new Object[1];
         final Class[] fieldType = new Class[1];
         final Class[] definingType = new Class[1];
-        reflectionProvider.visitSerializableFields(source, new ReflectionProvider.Visitor(){
+        reflectionProvider.visitSerializableFields(source, (fieldName,type,definedIn,value) -> {
+            if (!mapper.shouldSerializeMember(definedIn, fieldName)){
+                return;
+            }
 
-            @Override
-            public void visit(final String fieldName,final Class type,final Class definedIn,final Object value){
-                if (!mapper.shouldSerializeMember(definedIn, fieldName)){
-                    return;
+            final FastField field = new FastField(definedIn, fieldName);
+            final String alias = mapper.serializedMember(definedIn, fieldName);
+            if (!defaultFieldDefinition.containsKey(alias)){
+                final Class lookupType = sourceType;
+                defaultFieldDefinition.put(alias, reflectionProvider.getField(lookupType, fieldName));
+            }else if (!fieldIsEqual(field)){
+                final ConversionException exception1 = new ConversionException("Cannot write attribute twice for object");
+                exception1.add("alias", alias);
+                exception1.add("type", sourceType.getName());
+                throw exception1;
+            }
+
+            ConverterMatcher converter = UseAttributeForEnumMapper.isEnum(type)
+                            ? (ConverterMatcher) enumMapper.getConverterFromItemType(null, type, null)
+                            : (ConverterMatcher) mapper.getLocalConverter(definedIn, fieldName);
+            if (converter == null){
+                converter = lookup.lookupConverterForType(type);
+            }
+
+            if (value != null){
+                boolean isValueField = valueField != null && fieldIsEqual(field);
+                if (isValueField){
+                    definingType[0] = definedIn;
+                    fieldType[0] = type;
+                    realValue[0] = value;
+                    tagValue[0] = STRUCTURE_MARKER;
                 }
+                if (converter instanceof SingleValueConverter){
+                    final String str = ((SingleValueConverter) converter).toString(value);
 
-                final FastField field = new FastField(definedIn, fieldName);
-                final String alias = mapper.serializedMember(definedIn, fieldName);
-                if (!defaultFieldDefinition.containsKey(alias)){
-                    final Class lookupType = sourceType;
-                    defaultFieldDefinition.put(alias, reflectionProvider.getField(lookupType, fieldName));
-                }else if (!fieldIsEqual(field)){
-                    final ConversionException exception = new ConversionException("Cannot write attribute twice for object");
-                    exception.add("alias", alias);
-                    exception.add("type", sourceType.getName());
-                    throw exception;
-                }
-
-                ConverterMatcher converter = UseAttributeForEnumMapper.isEnum(type)
-                                ? (ConverterMatcher) enumMapper.getConverterFromItemType(null, type, null)
-                                : (ConverterMatcher) mapper.getLocalConverter(definedIn, fieldName);
-                if (converter == null){
-                    converter = lookup.lookupConverterForType(type);
-                }
-
-                if (value != null){
-                    boolean isValueField = valueField != null && fieldIsEqual(field);
                     if (isValueField){
-                        definingType[0] = definedIn;
-                        fieldType[0] = type;
-                        realValue[0] = value;
-                        tagValue[0] = STRUCTURE_MARKER;
-                    }
-                    if (converter instanceof SingleValueConverter){
-                        final String str = ((SingleValueConverter) converter).toString(value);
-
-                        if (isValueField){
-                            tagValue[0] = str;
-                        }else{
-                            if (str != null){
-                                writer.addAttribute(alias, str);
-                            }
-                        }
+                        tagValue[0] = str;
                     }else{
-                        if (!isValueField){
-                            final ConversionException exception = new ConversionException("Cannot write element as attribute");
-                            exception.add("alias", alias);
-                            exception.add("type", sourceType.getName());
-                            throw exception;
+                        if (str != null){
+                            writer.addAttribute(alias, str);
                         }
+                    }
+                }else{
+                    if (!isValueField){
+                        final ConversionException exception2 = new ConversionException("Cannot write element as attribute");
+                        exception2.add("alias", alias);
+                        exception2.add("type", sourceType.getName());
+                        throw exception2;
                     }
                 }
             }

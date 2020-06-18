@@ -40,12 +40,12 @@ final class FromBinderRuleSet implements RuleSet{
     /**
      * The data structure where storing the providers binding.
      */
-    private final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>           providers      = new LinkedList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
+    private final Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>           providers      = new LinkedList<>();
 
     /**
      * Index for quick-retrieve provider.
      */
-    private final Map<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>> providersIndex = new HashMap<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>>();
+    private final Map<Key, Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>>> providersIndex = new HashMap<>();
 
     /**
      * Register the given rule builder and returns it.
@@ -65,7 +65,7 @@ final class FromBinderRuleSet implements RuleSet{
         // O(1)
         Collection<AbstractBackToLinkedRuleBuilder<? extends Rule>> indexedProviders = this.providersIndex.get(key);
         if (indexedProviders == null){
-            indexedProviders = new ArrayList<AbstractBackToLinkedRuleBuilder<? extends Rule>>();
+            indexedProviders = new ArrayList<>();
             this.providersIndex.put(key, indexedProviders); // O(1)
         }
         indexedProviders.add(ruleBuilder);

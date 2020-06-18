@@ -84,8 +84,7 @@ public abstract class MapperWrapper implements Mapper{
             wrapperMap.put("shouldSerializeMember", wrapper.shouldSerializeMemberMapper);
 
             final Method[] methods = wrapped.getClass().getMethods();
-            for (int i = 0; i < methods.length; ++i){
-                final Method method = methods[i];
+            for (final Method method : methods){
                 if (method.getDeclaringClass() != MapperWrapper.class){
                     final String name = method.getName();
                     if (wrapperMap.containsKey(name)){
@@ -213,6 +212,7 @@ public abstract class MapperWrapper implements Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromItemType(String fieldName,Class type){
         return getConverterFromItemTypeMapper.getConverterFromItemType(fieldName, type);
@@ -221,6 +221,7 @@ public abstract class MapperWrapper implements Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromItemType(Class type){
         return getConverterFromItemTypeMapper.getConverterFromItemType(type);
@@ -229,6 +230,7 @@ public abstract class MapperWrapper implements Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromAttribute(String name){
         return getConverterFromAttributeMapper.getConverterFromAttribute(name);
@@ -253,6 +255,7 @@ public abstract class MapperWrapper implements Mapper{
      * @deprecated As of 1.3, use combination of {@link #serializedMember(Class, String)} and
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public String aliasForAttribute(Class definedIn,String fieldName){
         return aliasForAttributeMapper.aliasForAttribute(definedIn, fieldName);
@@ -262,6 +265,7 @@ public abstract class MapperWrapper implements Mapper{
      * @deprecated As of 1.3, use combination of {@link #realMember(Class, String)} and
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public String attributeForAlias(Class definedIn,String alias){
         return attributeForAliasMapper.attributeForAlias(definedIn, alias);
@@ -270,6 +274,7 @@ public abstract class MapperWrapper implements Mapper{
     /**
      * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromAttribute(Class type,String attribute){
         return getConverterFromAttributeMapper.getConverterFromAttribute(type, attribute);

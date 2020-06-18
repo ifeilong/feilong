@@ -21,6 +21,7 @@ package com.feilong.lib.javassist.tools.rmi;
  *
  * @see com.feilong.lib.javassist.tools.rmi.StubGenerator
  */
-public interface Proxy {
+public interface Proxy{
+
     int _getObjectId();
 }

@@ -21,25 +21,25 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Assignment expression.
  */
-public class AssignExpr extends Expr {
-    /* operator must be either of:
+public class AssignExpr extends Expr{
+    /*
+     * operator must be either of:
      * =, %=, &=, *=, +=, -=, /=, ^=, |=, <<=, >>=, >>>=
      */
 
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    private AssignExpr(int op, ASTree _head, ASTList _tail) {
+    private AssignExpr(int op, ASTree _head, ASTList _tail){
         super(op, _head, _tail);
     }
 
-    public static AssignExpr makeAssign(int op, ASTree oprand1,
-                                        ASTree oprand2) {
+    public static AssignExpr makeAssign(int op,ASTree oprand1,ASTree oprand2){
         return new AssignExpr(op, oprand1, new ASTList(oprand2));
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError {
+    public void accept(Visitor v) throws CompileError{
         v.atAssignExpr(this);
     }
 }

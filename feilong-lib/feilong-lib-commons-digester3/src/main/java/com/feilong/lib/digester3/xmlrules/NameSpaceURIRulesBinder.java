@@ -28,17 +28,14 @@ import com.feilong.lib.digester3.binder.RulesModule;
 /**
  * @since 3.0
  */
-final class NameSpaceURIRulesBinder
-    implements RulesBinder
-{
+final class NameSpaceURIRulesBinder implements RulesBinder{
 
     // a stack is needed because of includes!!!
-    private final Stack<String> namespaceURIs = new Stack<String>();
+    private final Stack<String> namespaceURIs = new Stack<>();
 
-    private final RulesBinder wrappedBinder;
+    private final RulesBinder   wrappedBinder;
 
-    public NameSpaceURIRulesBinder( RulesBinder wrappedBinder )
-    {
+    public NameSpaceURIRulesBinder(RulesBinder wrappedBinder){
         this.wrappedBinder = wrappedBinder;
     }
 
@@ -46,16 +43,14 @@ final class NameSpaceURIRulesBinder
      * 
      * @param namespaceURI
      */
-    public void addNamespaceURI( String namespaceURI )
-    {
-        namespaceURIs.push( namespaceURI );
+    public void addNamespaceURI(String namespaceURI){
+        namespaceURIs.push(namespaceURI);
     }
 
     /**
      * 
      */
-    public void removeNamespaceURI()
-    {
+    public void removeNamespaceURI(){
         namespaceURIs.pop();
     }
 
@@ -63,8 +58,7 @@ final class NameSpaceURIRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public ClassLoader getContextClassLoader()
-    {
+    public ClassLoader getContextClassLoader(){
         return wrappedBinder.getContextClassLoader();
     }
 
@@ -72,36 +66,32 @@ final class NameSpaceURIRulesBinder
      * {@inheritDoc}
      */
     @Override
-    public void addError( String messagePattern, Object... arguments )
-    {
-        wrappedBinder.addError( messagePattern, arguments );
+    public void addError(String messagePattern,Object...arguments){
+        wrappedBinder.addError(messagePattern, arguments);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addError( Throwable t )
-    {
-        wrappedBinder.addError( t );
+    public void addError(Throwable t){
+        wrappedBinder.addError(t);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void install( RulesModule rulesModule )
-    {
-        wrappedBinder.install( rulesModule );
+    public void install(RulesModule rulesModule){
+        wrappedBinder.install(rulesModule);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public LinkedRuleBuilder forPattern( String pattern )
-    {
-        return wrappedBinder.forPattern( pattern ).withNamespaceURI( namespaceURIs.peek() );
+    public LinkedRuleBuilder forPattern(String pattern){
+        return wrappedBinder.forPattern(pattern).withNamespaceURI(namespaceURIs.peek());
     }
 
 }

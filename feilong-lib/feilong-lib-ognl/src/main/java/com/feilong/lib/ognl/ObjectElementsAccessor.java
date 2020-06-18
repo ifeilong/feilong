@@ -30,7 +30,7 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.util.*;
+import java.util.Enumeration;
 
 /**
  * Implementation of ElementsAccessor that returns a single-element iterator, containing

@@ -29,7 +29,6 @@ import java.util.ListIterator;
 
 import com.feilong.lib.net.util.Charsets;
 
-
 /**
  * This class handles the entire process of parsing a listing of
  * file entries from the server.
@@ -37,9 +36,9 @@ import com.feilong.lib.net.util.Charsets;
  * This object defines a two-part parsing mechanism.
  * <p>
  * The first part is comprised of reading the raw input into an internal
- * list of strings.  Every item in this list corresponds to an actual
- * file.  All extraneous matter emitted by the server will have been
- * removed by the end of this phase.  This is accomplished in conjunction
+ * list of strings. Every item in this list corresponds to an actual
+ * file. All extraneous matter emitted by the server will have been
+ * removed by the end of this phase. This is accomplished in conjunction
  * with the FTPFileEntryParser associated with this engine, by calling
  * its methods <code>readNextEntry()</code> - which handles the issue of
  * what delimits one entry from another, usually but not always a line
@@ -48,8 +47,8 @@ import com.feilong.lib.net.util.Charsets;
  * of duplicates on versioning systems, etc.
  * <p>
  * The second part is composed of the actual parsing, again in conjunction
- * with the particular parser used by this engine.  This is controlled
- * by an iterator over the internal list of strings.  This may be done
+ * with the particular parser used by this engine. This is controlled
+ * by an iterator over the internal list of strings. This may be done
  * either in block mode, by calling the <code>getNext()</code> and
  * <code>getPrevious()</code> methods to provide "paged" output of less
  * than the whole list at one time, or by calling the
@@ -58,64 +57,70 @@ import com.feilong.lib.net.util.Charsets;
  * Examples:
  * <p>
  * Paged access:
+ * 
  * <pre>
- *    FTPClient f=FTPClient();
- *    f.connect(server);
- *    f.login(username, password);
- *    FTPListParseEngine engine = f.initiateListParsing(directory);
+ * FTPClient f = FTPClient();
+ * f.connect(server);
+ * f.login(username, password);
+ * FTPListParseEngine engine = f.initiateListParsing(directory);
  *
- *    while (engine.hasNext()) {
- *       FTPFile[] files = engine.getNext(25);  // "page size" you want
- *       //do whatever you want with these files, display them, etc.
- *       //expensive FTPFile objects not created until needed.
- *    }
+ * while (engine.hasNext()){
+ *     FTPFile[] files = engine.getNext(25); // "page size" you want
+ *     //do whatever you want with these files, display them, etc.
+ *     //expensive FTPFile objects not created until needed.
+ * }
  * </pre>
  * <p>
- * For unpaged access, simply use FTPClient.listFiles().  That method
+ * For unpaged access, simply use FTPClient.listFiles(). That method
  * uses this class transparently.
+ * 
  * @version $Id$
  */
-public class FTPListParseEngine {
-    private List<String> entries = new LinkedList<String>();
-    private ListIterator<String> _internalIterator = entries.listIterator();
+public class FTPListParseEngine{
+
+    private List<String>             entries           = new LinkedList<>();
+
+    private ListIterator<String>     _internalIterator = entries.listIterator();
 
     private final FTPFileEntryParser parser;
-    // Should invalid files (parse failures) be allowed?
-    private final boolean saveUnparseableEntries;
 
-    public FTPListParseEngine(FTPFileEntryParser parser) {
+    // Should invalid files (parse failures) be allowed?
+    private final boolean            saveUnparseableEntries;
+
+    public FTPListParseEngine(FTPFileEntryParser parser){
         this(parser, null);
     }
 
     /**
      * Intended for use by FTPClient only
+     * 
      * @since 3.4
      */
-    FTPListParseEngine(FTPFileEntryParser parser, FTPClientConfig configuration) {
+    FTPListParseEngine(FTPFileEntryParser parser, FTPClientConfig configuration){
         this.parser = parser;
-        if (configuration != null) {
+        if (configuration != null){
             this.saveUnparseableEntries = configuration.getUnparseableEntries();
-        } else {
+        }else{
             this.saveUnparseableEntries = false;
         }
     }
 
     /**
      * handle the initial reading and preparsing of the list returned by
-     * the server.  After this method has completed, this object will contain
+     * the server. After this method has completed, this object will contain
      * a list of unparsed entries (Strings) each referring to a unique file
      * on the server.
      *
-     * @param stream input stream provided by the server socket.
-     * @param encoding the encoding to be used for reading the stream
+     * @param stream
+     *            input stream provided by the server socket.
+     * @param encoding
+     *            the encoding to be used for reading the stream
      *
      * @throws IOException
-     *                   thrown on any failure to read from the sever.
+     *             thrown on any failure to read from the sever.
      */
-    public void readServerList(InputStream stream, String encoding)
-    throws IOException
-    {
-        this.entries = new LinkedList<String>();
+    public void readServerList(InputStream stream,String encoding) throws IOException{
+        this.entries = new LinkedList<>();
         readStream(stream, encoding);
         this.parser.preParse(this.entries);
         resetIterator();
@@ -129,21 +134,20 @@ public class FTPListParseEngine {
      * various non-entry preliminary lines from the server output, duplicates,
      * and other data that will not be part of the final listing.
      *
-     * @param stream The socket stream on which the input will be read.
-     * @param encoding The encoding to use.
+     * @param stream
+     *            The socket stream on which the input will be read.
+     * @param encoding
+     *            The encoding to use.
      *
      * @throws IOException
-     *                   thrown on any failure to read the stream
+     *             thrown on any failure to read the stream
      */
-    private void readStream(InputStream stream, String encoding) throws IOException
-    {
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(stream, Charsets.toCharset(encoding)));
+    private void readStream(InputStream stream,String encoding) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charsets.toCharset(encoding)));
 
         String line = this.parser.readNextEntry(reader);
 
-        while (line != null)
-        {
+        while (line != null){
             this.entries.add(line);
             line = this.parser.readNextEntry(reader);
         }
@@ -162,24 +166,25 @@ public class FTPListParseEngine {
      * by a number of positions equal to the size of the array returned.
      *
      * @param quantityRequested
-     * the maximum number of entries we want to get.
+     *            the maximum number of entries we want to get.
      *
      * @return an array of at most <code>quantityRequested</code> FTPFile
-     * objects starting at the current position of this iterator within its
-     * list and at least the number of elements which  exist in the list at
-     * and after its current position.
-     * <p><b>
-     * NOTE:</b> This array may contain null members if any of the
-     * individual file listings failed to parse.  The caller should
-     * check each entry for null before referencing it.
+     *         objects starting at the current position of this iterator within its
+     *         list and at least the number of elements which exist in the list at
+     *         and after its current position.
+     *         <p>
+     *         <b>
+     *         NOTE:</b> This array may contain null members if any of the
+     *         individual file listings failed to parse. The caller should
+     *         check each entry for null before referencing it.
      */
-    public FTPFile[] getNext(int quantityRequested) {
-        List<FTPFile> tmpResults = new LinkedList<FTPFile>();
+    public FTPFile[] getNext(int quantityRequested){
+        List<FTPFile> tmpResults = new LinkedList<>();
         int count = quantityRequested;
-        while (count > 0 && this._internalIterator.hasNext()) {
+        while (count > 0 && this._internalIterator.hasNext()){
             String entry = this._internalIterator.next();
             FTPFile temp = this.parser.parseFTPEntry(entry);
-            if (temp == null && saveUnparseableEntries) {
+            if (temp == null && saveUnparseableEntries){
                 temp = new FTPFile(entry);
             }
             tmpResults.add(temp);
@@ -203,28 +208,29 @@ public class FTPListParseEngine {
      * back by a number of positions equal to the size of the array returned.
      *
      * @param quantityRequested
-     * the maximum number of entries we want to get.
+     *            the maximum number of entries we want to get.
      *
      * @return an array of at most <code>quantityRequested</code> FTPFile
-     * objects starting at the current position of this iterator within its
-     * list and at least the number of elements which  exist in the list at
-     * and after its current position.  This array will be in the same order
-     * as the underlying list (not reversed).
-     * <p><b>
-     * NOTE:</b> This array may contain null members if any of the
-     * individual file listings failed to parse.  The caller should
-     * check each entry for null before referencing it.
+     *         objects starting at the current position of this iterator within its
+     *         list and at least the number of elements which exist in the list at
+     *         and after its current position. This array will be in the same order
+     *         as the underlying list (not reversed).
+     *         <p>
+     *         <b>
+     *         NOTE:</b> This array may contain null members if any of the
+     *         individual file listings failed to parse. The caller should
+     *         check each entry for null before referencing it.
      */
-    public FTPFile[] getPrevious(int quantityRequested) {
-        List<FTPFile> tmpResults = new LinkedList<FTPFile>();
+    public FTPFile[] getPrevious(int quantityRequested){
+        List<FTPFile> tmpResults = new LinkedList<>();
         int count = quantityRequested;
-        while (count > 0 && this._internalIterator.hasPrevious()) {
+        while (count > 0 && this._internalIterator.hasPrevious()){
             String entry = this._internalIterator.previous();
             FTPFile temp = this.parser.parseFTPEntry(entry);
-            if (temp == null && saveUnparseableEntries) {
+            if (temp == null && saveUnparseableEntries){
                 temp = new FTPFile(entry);
             }
-            tmpResults.add(0,temp);
+            tmpResults.add(0, temp);
             count--;
         }
         return tmpResults.toArray(new FTPFile[tmpResults.size()]);
@@ -236,11 +242,11 @@ public class FTPListParseEngine {
      *
      * @return an array of FTPFile objects containing the whole list of
      *         files returned by the server as read by this object's parser.
-     * None of the entries will be null
-     * @throws IOException - not ever thrown, may be removed in a later release
+     *         None of the entries will be null
+     * @throws IOException
+     *             - not ever thrown, may be removed in a later release
      */
-    public FTPFile[] getFiles()
-    throws IOException // TODO remove; not actually thrown
+    public FTPFile[] getFiles() throws IOException // TODO remove; not actually thrown
     {
         return getFiles(FTPFileFilters.NON_NULL);
     }
@@ -250,28 +256,30 @@ public class FTPListParseEngine {
      * files returned by the server as read by this object's parser.
      * The files are filtered before being added to the array.
      *
-     * @param filter FTPFileFilter, must not be <code>null</code>.
+     * @param filter
+     *            FTPFileFilter, must not be <code>null</code>.
      *
      * @return an array of FTPFile objects containing the whole list of
      *         files returned by the server as read by this object's parser.
-     * <p><b>
-     * NOTE:</b> This array may contain null members if any of the
-     * individual file listings failed to parse.  The caller should
-     * check each entry for null before referencing it, or use the
-     * a filter such as {@link FTPFileFilters#NON_NULL} which does not
-     * allow null entries.
+     *         <p>
+     *         <b>
+     *         NOTE:</b> This array may contain null members if any of the
+     *         individual file listings failed to parse. The caller should
+     *         check each entry for null before referencing it, or use the
+     *         a filter such as {@link FTPFileFilters#NON_NULL} which does not
+     *         allow null entries.
      * @since 2.2
-     * @throws IOException - not ever thrown, may be removed in a later release
+     * @throws IOException
+     *             - not ever thrown, may be removed in a later release
      */
-    public FTPFile[] getFiles(FTPFileFilter filter)
-    throws IOException // TODO remove; not actually thrown
+    public FTPFile[] getFiles(FTPFileFilter filter) throws IOException // TODO remove; not actually thrown
     {
-        List<FTPFile> tmpResults = new ArrayList<FTPFile>();
+        List<FTPFile> tmpResults = new ArrayList<>();
         Iterator<String> iter = this.entries.iterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext()){
             String entry = iter.next();
             FTPFile temp = this.parser.parseFTPEntry(entry);
-            if (temp == null && saveUnparseableEntries) {
+            if (temp == null && saveUnparseableEntries){
                 temp = new FTPFile(entry);
             }
             if (filter.accept(temp)){
@@ -287,9 +295,9 @@ public class FTPListParseEngine {
      * internal iterator's current position is at the end of the list.
      *
      * @return true if internal iterator is not at end of list, false
-     * otherwise.
+     *         otherwise.
      */
-    public boolean hasNext() {
+    public boolean hasNext(){
         return _internalIterator.hasNext();
     }
 
@@ -298,16 +306,16 @@ public class FTPListParseEngine {
      * internal iterator's current position is at the beginning of the list.
      *
      * @return true if internal iterator is not at beginning of list, false
-     * otherwise.
+     *         otherwise.
      */
-    public boolean hasPrevious() {
+    public boolean hasPrevious(){
         return _internalIterator.hasPrevious();
     }
 
     /**
      * resets this object's internal iterator to the beginning of the list.
      */
-    public void resetIterator() {
+    public void resetIterator(){
         this._internalIterator = this.entries.listIterator();
     }
 
@@ -315,14 +323,15 @@ public class FTPListParseEngine {
 
     /**
      * Do not use.
-     * @param stream the stream from which to read
-     * @throws IOException on error
+     * 
+     * @param stream
+     *            the stream from which to read
+     * @throws IOException
+     *             on error
      * @deprecated use {@link #readServerList(InputStream, String)} instead
-    */
+     */
     @Deprecated
-    public void readServerList(InputStream stream)
-    throws IOException
-    {
+    public void readServerList(InputStream stream) throws IOException{
         readServerList(stream, null);
     }
 

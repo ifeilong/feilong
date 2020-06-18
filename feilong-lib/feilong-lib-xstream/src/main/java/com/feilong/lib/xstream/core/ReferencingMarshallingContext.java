@@ -28,6 +28,7 @@ public interface ReferencingMarshallingContext extends MarshallingContext{
      * @since 1.4
      * @deprecated As of 1.4.2
      */
+    @Deprecated
     Path currentPath();
 
     /**

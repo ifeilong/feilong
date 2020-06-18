@@ -117,6 +117,11 @@ public class CompositeClassLoader extends ClassLoader{
     public Class loadClass(String name) throws ClassNotFoundException{
         List copy = new ArrayList(classLoaders.size()){
 
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 3293392233133693448L;
+
             @Override
             public boolean addAll(Collection c){
                 boolean result = false;

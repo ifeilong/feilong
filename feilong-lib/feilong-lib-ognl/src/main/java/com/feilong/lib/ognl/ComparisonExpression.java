@@ -10,6 +10,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public abstract class ComparisonExpression extends BooleanExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3946867623791689411L;
+
     public ComparisonExpression(int id){
         super(id);
     }
@@ -22,19 +27,21 @@ public abstract class ComparisonExpression extends BooleanExpression{
 
     @Override
     public String toGetSourceString(OgnlContext context,Object target){
-        if (target == null)
+        if (target == null){
             throw new UnsupportedCompilationException("Current target is null, can't compile.");
+        }
 
         try{
 
             Object value = getValueBody(context, target);
 
-            if (value != null && Boolean.class.isAssignableFrom(value.getClass()))
+            if (value != null && Boolean.class.isAssignableFrom(value.getClass())){
                 _getterClass = Boolean.TYPE;
-            else if (value != null)
+            }else if (value != null){
                 _getterClass = value.getClass();
-            else
+            }else{
                 _getterClass = Boolean.TYPE;
+            }
 
             // iterate over children to make numeric type detection work properly
 

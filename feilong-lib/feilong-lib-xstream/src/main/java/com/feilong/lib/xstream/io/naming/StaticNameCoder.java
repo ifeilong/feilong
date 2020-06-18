@@ -105,7 +105,7 @@ public class StaticNameCoder implements NameCoder{
         Map inverseMap = new HashMap(map.size());
         for (final Iterator iter = map.entrySet().iterator(); iter.hasNext();){
             final Map.Entry entry = (Map.Entry) iter.next();
-            inverseMap.put((String) entry.getValue(), (String) entry.getKey());
+            inverseMap.put(entry.getValue(), entry.getKey());
         }
         return inverseMap;
     }

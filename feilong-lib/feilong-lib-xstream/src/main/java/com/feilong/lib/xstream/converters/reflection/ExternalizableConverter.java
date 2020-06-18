@@ -68,6 +68,7 @@ public class ExternalizableConverter implements Converter{
     /**
      * @deprecated As of 1.4.5 use {@link #ExternalizableConverter(Mapper, ClassLoaderReference)}
      */
+    @Deprecated
     public ExternalizableConverter(Mapper mapper, ClassLoader classLoader){
         this(mapper, new ClassLoaderReference(classLoader));
     }
@@ -75,6 +76,7 @@ public class ExternalizableConverter implements Converter{
     /**
      * @deprecated As of 1.4 use {@link #ExternalizableConverter(Mapper, ClassLoader)}
      */
+    @Deprecated
     public ExternalizableConverter(Mapper mapper){
         this(mapper, ExternalizableConverter.class.getClassLoader());
     }

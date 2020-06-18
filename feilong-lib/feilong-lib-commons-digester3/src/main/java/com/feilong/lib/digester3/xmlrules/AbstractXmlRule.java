@@ -8,15 +8,12 @@ import com.feilong.lib.digester3.binder.RulesBinder;
 /**
  * 
  */
-abstract class AbstractXmlRule
-    extends PatternRule
-{
+abstract class AbstractXmlRule extends PatternRule{
 
     private final RulesBinder targetRulesBinder;
 
-    public AbstractXmlRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( "pattern", patternStack );
+    public AbstractXmlRule(RulesBinder targetRulesBinder, PatternStack patternStack){
+        super("pattern", patternStack);
         this.targetRulesBinder = targetRulesBinder;
     }
 
@@ -24,18 +21,15 @@ abstract class AbstractXmlRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
-        throws Exception
-    {
-        super.begin( namespace, name, attributes );
-        this.bindRule( this.targetRulesBinder.forPattern( this.getMatchingPattern() ), attributes );
+    public void begin(String namespace,String name,Attributes attributes) throws Exception{
+        super.begin(namespace, name, attributes);
+        this.bindRule(this.targetRulesBinder.forPattern(this.getMatchingPattern()), attributes);
     }
 
     /**
      * @param linkedRuleBuilder
      * @param attributes
      */
-    protected abstract void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
-        throws Exception;
+    protected abstract void bindRule(LinkedRuleBuilder linkedRuleBuilder,Attributes attributes) throws Exception;
 
 }

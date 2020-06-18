@@ -207,16 +207,15 @@ public class JsonConfig{
      */
     public Collection<String> getMergedExcludes(){
         Collection<String> exclusions = new HashSet<>();
-        for (int i = 0; i < excludes.length; i++){
-            String exclusion = excludes[i];
+        for (String exclusion : excludes){
             if (!StringUtils.isBlank(exclusion)){
                 exclusions.add(exclusion.trim());
             }
         }
 
-        for (int i = 0; i < DEFAULT_EXCLUDES.length; i++){
-            if (!exclusions.contains(DEFAULT_EXCLUDES[i])){
-                exclusions.add(DEFAULT_EXCLUDES[i]);
+        for (String element : DEFAULT_EXCLUDES){
+            if (!exclusions.contains(element)){
+                exclusions.add(element);
             }
         }
         return exclusions;

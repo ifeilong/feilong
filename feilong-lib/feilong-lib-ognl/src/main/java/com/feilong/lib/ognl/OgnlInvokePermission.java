@@ -30,7 +30,7 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.security.*;
+import java.security.BasicPermission;
 
 /**
  * BasicPermission subclass that defines a permission token for invoking
@@ -43,6 +43,11 @@ import java.security.*;
  * @author Drew Davidson (drew@ognl.org)
  */
 public class OgnlInvokePermission extends BasicPermission{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -2564616261428456082L;
 
     public OgnlInvokePermission(String name){
         super(name);

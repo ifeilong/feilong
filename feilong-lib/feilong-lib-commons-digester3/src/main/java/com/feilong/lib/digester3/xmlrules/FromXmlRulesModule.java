@@ -51,9 +51,9 @@ public abstract class FromXmlRulesModule extends AbstractRulesModule{
 
     private final URL               xmlRulesDtdUrl     = FromXmlRulesModule.class.getResource(DIGESTER_DTD_PATH);
 
-    private final List<InputSource> inputSource        = new ArrayList<InputSource>();
+    private final List<InputSource> inputSource        = new ArrayList<>();
 
-    private final Set<String>       systemIds          = new HashSet<String>();
+    private final Set<String>       systemIds          = new HashSet<>();
 
     private String                  rootPath;
 

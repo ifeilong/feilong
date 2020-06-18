@@ -21,12 +21,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * A quick class-file writer.  This is useful when a generated
+ * A quick class-file writer. This is useful when a generated
  * class file is simple and the code generation should be fast.
  *
- * <p>Example:
+ * <p>
+ * Example:
  *
- * <blockquote><pre>
+ * <blockquote>
+ * 
+ * <pre>
  * ClassFileWriter cfw = new ClassFileWriter(ClassFile.JAVA_4, 0);
  * ConstPoolWriter cpw = cfw.getConstPool();
  *
@@ -54,38 +57,58 @@ import java.io.OutputStream;
  * mw.codeEnd(1, 1);
  * mw.end(null, null);
  *
- * byte[] classfile = cfw.end(AccessFlag.PUBLIC, thisClass, superClass,
- *                            null, null);
- * </pre></blockquote>
+ * byte[] classfile = cfw.end(AccessFlag.PUBLIC, thisClass, superClass, null, null);
+ * </pre>
+ * 
+ * </blockquote>
  *
- * <p>The code above generates the following class:
+ * <p>
+ * The code above generates the following class:
  *
- * <blockquote><pre>
+ * <blockquote>
+ * 
+ * <pre>
  * package sample;
- * public class Test {
+ * 
+ * public class Test{
+ * 
  *     public int value;
+ * 
  *     public long value2;
- *     public Test() { super(); }
- *     public one() { return 1; }
+ * 
+ *     public Test(){
+ *         super();
+ *     }
+ * 
+ *     public one(){return 1;}
  * }
- * </pre></blockquote>
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @since 3.13
  */
-public class ClassFileWriter {
-    private ByteStream output;
+public class ClassFileWriter{
+
+    private ByteStream      output;
+
     private ConstPoolWriter constPool;
-    private FieldWriter fields;
-    private MethodWriter methods;
-    int thisClass, superClass;
+
+    private FieldWriter     fields;
+
+    private MethodWriter    methods;
+
+    int                     thisClass, superClass;
 
     /**
      * Constructs a class file writer.
      *
-     * @param major     the major version ({@link ClassFile#JAVA_4}, {@link ClassFile#JAVA_5}, ...).
-     * @param minor     the minor version (0 for JDK 1.3 and later).
+     * @param major
+     *            the major version ({@link ClassFile#JAVA_4}, {@link ClassFile#JAVA_5}, ...).
+     * @param minor
+     *            the minor version (0 for JDK 1.3 and later).
      */
-    public ClassFileWriter(int major, int minor) {
+    public ClassFileWriter(int major, int minor){
         output = new ByteStream(512);
         output.writeInt(0xCAFEBABE); // magic
         output.writeShort(minor);
@@ -99,55 +122,65 @@ public class ClassFileWriter {
     /**
      * Returns a constant pool.
      */
-    public ConstPoolWriter getConstPool() { return constPool; }
+    public ConstPoolWriter getConstPool(){
+        return constPool;
+    }
 
     /**
      * Returns a filed writer.
      */
-    public FieldWriter getFieldWriter() { return fields; }
+    public FieldWriter getFieldWriter(){
+        return fields;
+    }
 
     /**
      * Returns a method writer.
      */
-    public MethodWriter getMethodWriter() { return methods; }
+    public MethodWriter getMethodWriter(){
+        return methods;
+    }
 
     /**
      * Ends writing and returns the contents of the class file.
      *
-     * @param accessFlags       access flags.
-     * @param thisClass         this class.  an index indicating its <code>CONSTANT_Class_info</code>.
-     * @param superClass        super class.  an index indicating its <code>CONSTANT_Class_info</code>.
-     * @param interfaces        implemented interfaces.
-     *                          index numbers indicating their <code>ClassInfo</code>.
-     *                          It may be null.
-     * @param aw        attributes of the class file.  May be null.
+     * @param accessFlags
+     *            access flags.
+     * @param thisClass
+     *            this class. an index indicating its <code>CONSTANT_Class_info</code>.
+     * @param superClass
+     *            super class. an index indicating its <code>CONSTANT_Class_info</code>.
+     * @param interfaces
+     *            implemented interfaces.
+     *            index numbers indicating their <code>ClassInfo</code>.
+     *            It may be null.
+     * @param aw
+     *            attributes of the class file. May be null.
      *
      * @see AccessFlag
      */
-    public byte[] end(int accessFlags, int thisClass, int superClass,
-                      int[] interfaces, AttributeWriter aw) {
+    public byte[] end(int accessFlags,int thisClass,int superClass,int[] interfaces,AttributeWriter aw){
         constPool.end();
         output.writeShort(accessFlags);
         output.writeShort(thisClass);
         output.writeShort(superClass);
-        if (interfaces == null)
+        if (interfaces == null){
             output.writeShort(0);
-        else {
+        }else{
             int n = interfaces.length;
             output.writeShort(n);
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++){
                 output.writeShort(interfaces[i]);
+            }
         }
 
         output.enlarge(fields.dataSize() + methods.dataSize() + 6);
-        try {
+        try{
             output.writeShort(fields.size());
             fields.write(output);
 
             output.writeShort(methods.numOfMethods());
             methods.write(output);
-        }
-        catch (IOException e) {}
+        }catch (IOException e){}
 
         writeAttribute(output, aw, 0);
         return output.toByteArray();
@@ -157,33 +190,36 @@ public class ClassFileWriter {
      * Ends writing and writes the contents of the class file into the
      * given output stream.
      *
-     * @param accessFlags       access flags.
-     * @param thisClass         this class.  an index indicating its <code>CONSTANT_Class_info</code>.
-     * @param superClass        super class.  an index indicating its <code>CONSTANT_Class_info</code>.
-     * @param interfaces        implemented interfaces.
-     *                          index numbers indicating their <code>CONSTATNT_Class_info</code>.
-     *                          It may be null.
-     * @param aw        attributes of the class file.  May be null.
+     * @param accessFlags
+     *            access flags.
+     * @param thisClass
+     *            this class. an index indicating its <code>CONSTANT_Class_info</code>.
+     * @param superClass
+     *            super class. an index indicating its <code>CONSTANT_Class_info</code>.
+     * @param interfaces
+     *            implemented interfaces.
+     *            index numbers indicating their <code>CONSTATNT_Class_info</code>.
+     *            It may be null.
+     * @param aw
+     *            attributes of the class file. May be null.
      *
      * @see AccessFlag
      */
-    public void end(DataOutputStream out,
-                    int accessFlags, int thisClass, int superClass,
-                    int[] interfaces, AttributeWriter aw)
-        throws IOException
-    {
+    public void end(DataOutputStream out,int accessFlags,int thisClass,int superClass,int[] interfaces,AttributeWriter aw)
+                    throws IOException{
         constPool.end();
         output.writeTo(out);
         out.writeShort(accessFlags);
         out.writeShort(thisClass);
         out.writeShort(superClass);
-        if (interfaces == null)
+        if (interfaces == null){
             out.writeShort(0);
-        else {
+        }else{
             int n = interfaces.length;
             out.writeShort(n);
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++){
                 out.writeShort(interfaces[i]);
+            }
         }
 
         out.writeShort(fields.size());
@@ -191,9 +227,9 @@ public class ClassFileWriter {
 
         out.writeShort(methods.numOfMethods());
         methods.write(out);
-        if (aw == null)
+        if (aw == null){
             out.writeShort(0);
-        else {
+        }else{
             out.writeShort(aw.size());
             aw.write(out);
         }
@@ -202,7 +238,8 @@ public class ClassFileWriter {
     /**
      * This writes attributes.
      *
-     * <p>For example, the following object writes a synthetic attribute:
+     * <p>
+     * For example, the following object writes a synthetic attribute:
      *
      * <pre>
      * ConstPoolWriter cpw = ...;
@@ -218,7 +255,8 @@ public class ClassFileWriter {
      * };
      * </pre>
      */
-    public static interface AttributeWriter {
+    public static interface AttributeWriter{
+
         /**
          * Returns the number of attributes that this writer will
          * write.
@@ -226,36 +264,38 @@ public class ClassFileWriter {
         public int size();
 
         /**
-         * Writes all the contents of the attributes.  The binary representation
+         * Writes all the contents of the attributes. The binary representation
          * of the contents is an array of <code>attribute_info</code>.
          */
         public void write(DataOutputStream out) throws IOException;
     }
 
-    static void writeAttribute(ByteStream bs, AttributeWriter aw, int attrCount) {
-        if (aw == null) {
+    static void writeAttribute(ByteStream bs,AttributeWriter aw,int attrCount){
+        if (aw == null){
             bs.writeShort(attrCount);
             return;
         }
 
         bs.writeShort(aw.size() + attrCount);
         DataOutputStream dos = new DataOutputStream(bs);
-        try {
+        try{
             aw.write(dos);
             dos.flush();
-        }
-        catch (IOException e) {}
+        }catch (IOException e){}
     }
 
     /**
      * Field.
      */
-    public static final class FieldWriter {
-        protected ByteStream output;
-        protected ConstPoolWriter constPool;
-        private int fieldCount;
+    public static final class FieldWriter{
 
-        FieldWriter(ConstPoolWriter cp) {
+        protected ByteStream      output;
+
+        protected ConstPoolWriter constPool;
+
+        private int               fieldCount;
+
+        FieldWriter(ConstPoolWriter cp){
             output = new ByteStream(128);
             constPool = cp;
             fieldCount = 0;
@@ -264,13 +304,17 @@ public class ClassFileWriter {
         /**
          * Adds a new field.
          *
-         * @param accessFlags       access flags.
-         * @param name              the field name.
-         * @param descriptor        the field type.
-         * @param aw                the attributes of the field.  may be null.
+         * @param accessFlags
+         *            access flags.
+         * @param name
+         *            the field name.
+         * @param descriptor
+         *            the field type.
+         * @param aw
+         *            the attributes of the field. may be null.
          * @see AccessFlag
          */
-        public void add(int accessFlags, String name, String descriptor, AttributeWriter aw) {
+        public void add(int accessFlags,String name,String descriptor,AttributeWriter aw){
             int nameIndex = constPool.addUtf8Info(name);
             int descIndex = constPool.addUtf8Info(descriptor);
             add(accessFlags, nameIndex, descIndex, aw);
@@ -279,13 +323,17 @@ public class ClassFileWriter {
         /**
          * Adds a new field.
          *
-         * @param accessFlags       access flags.
-         * @param name              the field name.  an index indicating its <code>CONSTANT_Utf8_info</code>.
-         * @param descriptor        the field type.  an index indicating its <code>CONSTANT_Utf8_info</code>.
-         * @param aw                the attributes of the field.  may be null.
+         * @param accessFlags
+         *            access flags.
+         * @param name
+         *            the field name. an index indicating its <code>CONSTANT_Utf8_info</code>.
+         * @param descriptor
+         *            the field type. an index indicating its <code>CONSTANT_Utf8_info</code>.
+         * @param aw
+         *            the attributes of the field. may be null.
          * @see AccessFlag
          */
-        public void add(int accessFlags, int name, int descriptor, AttributeWriter aw) {
+        public void add(int accessFlags,int name,int descriptor,AttributeWriter aw){
             ++fieldCount;
             output.writeShort(accessFlags);
             output.writeShort(name);
@@ -293,14 +341,18 @@ public class ClassFileWriter {
             writeAttribute(output, aw, 0);
         }
 
-        int size() { return fieldCount; }
+        int size(){
+            return fieldCount;
+        }
 
-        int dataSize() { return output.size(); }
+        int dataSize(){
+            return output.size();
+        }
 
         /**
          * Writes the added fields.
          */
-        void write(OutputStream out) throws IOException {
+        void write(OutputStream out) throws IOException{
             output.writeTo(out);
         }
     }
@@ -308,20 +360,29 @@ public class ClassFileWriter {
     /**
      * Method.
      */
-    public static final class MethodWriter {
-        protected ByteStream output;
+    public static final class MethodWriter{
+
+        protected ByteStream      output;
+
         protected ConstPoolWriter constPool;
-        private int methodCount;
-        protected int codeIndex;
-        protected int throwsIndex;
-        protected int stackIndex;
 
-        private int startPos;
-        private boolean isAbstract;
-        private int catchPos;
-        private int catchCount;
+        private int               methodCount;
 
-        MethodWriter(ConstPoolWriter cp) {
+        protected int             codeIndex;
+
+        protected int             throwsIndex;
+
+        protected int             stackIndex;
+
+        private int               startPos;
+
+        private boolean           isAbstract;
+
+        private int               catchPos;
+
+        private int               catchCount;
+
+        MethodWriter(ConstPoolWriter cp){
             output = new ByteStream(256);
             constPool = cp;
             methodCount = 0;
@@ -333,23 +394,28 @@ public class ClassFileWriter {
         /**
          * Starts Adding a new method.
          *
-         * @param accessFlags       access flags.
-         * @param name              the method name.
-         * @param descriptor        the method signature.
-         * @param exceptions        throws clause.  It may be null.
-         *                          The class names must be the JVM-internal
-         *                          representations like <code>java/lang/Exception</code>.
-         * @param aw                attributes to the <code>Method_info</code>.                         
+         * @param accessFlags
+         *            access flags.
+         * @param name
+         *            the method name.
+         * @param descriptor
+         *            the method signature.
+         * @param exceptions
+         *            throws clause. It may be null.
+         *            The class names must be the JVM-internal
+         *            representations like <code>java/lang/Exception</code>.
+         * @param aw
+         *            attributes to the <code>Method_info</code>.
          */
-        public void begin(int accessFlags, String name, String descriptor,
-                        String[] exceptions, AttributeWriter aw) {
+        public void begin(int accessFlags,String name,String descriptor,String[] exceptions,AttributeWriter aw){
             int nameIndex = constPool.addUtf8Info(name);
             int descIndex = constPool.addUtf8Info(descriptor);
             int[] intfs;
-            if (exceptions == null)
+            if (exceptions == null){
                 intfs = null;
-            else
+            }else{
                 intfs = constPool.addClassInfo(exceptions);
+            }
 
             begin(accessFlags, nameIndex, descIndex, intfs, aw);
         }
@@ -357,14 +423,19 @@ public class ClassFileWriter {
         /**
          * Starts adding a new method.
          *
-         * @param accessFlags       access flags.
-         * @param name              the method name.  an index indicating its <code>CONSTANT_Utf8_info</code>.
-         * @param descriptor        the field type.  an index indicating its <code>CONSTANT_Utf8_info</code>.
-         * @param exceptions        throws clause.  indexes indicating <code>CONSTANT_Class_info</code>s.
-         *                          It may be null.
-         * @param aw                attributes to the <code>Method_info</code>.                         
+         * @param accessFlags
+         *            access flags.
+         * @param name
+         *            the method name. an index indicating its <code>CONSTANT_Utf8_info</code>.
+         * @param descriptor
+         *            the field type. an index indicating its <code>CONSTANT_Utf8_info</code>.
+         * @param exceptions
+         *            throws clause. indexes indicating <code>CONSTANT_Class_info</code>s.
+         *            It may be null.
+         * @param aw
+         *            attributes to the <code>Method_info</code>.
          */
-        public void begin(int accessFlags, int name, int descriptor, int[] exceptions, AttributeWriter aw) {
+        public void begin(int accessFlags,int name,int descriptor,int[] exceptions,AttributeWriter aw){
             ++methodCount;
             output.writeShort(accessFlags);
             output.writeShort(name);
@@ -372,36 +443,41 @@ public class ClassFileWriter {
             isAbstract = (accessFlags & AccessFlag.ABSTRACT) != 0;
 
             int attrCount = isAbstract ? 0 : 1;
-            if (exceptions != null)
+            if (exceptions != null){
                 ++attrCount;
+            }
 
             writeAttribute(output, aw, attrCount);
 
-            if (exceptions != null)
+            if (exceptions != null){
                 writeThrows(exceptions);
+            }
 
-            if (!isAbstract) {
-                if (codeIndex == 0)
+            if (!isAbstract){
+                if (codeIndex == 0){
                     codeIndex = constPool.addUtf8Info(CodeAttribute.tag);
+                }
 
                 startPos = output.getPos();
                 output.writeShort(codeIndex);
-                output.writeBlank(12);   // attribute_length, maxStack, maxLocals, code_lenth
+                output.writeBlank(12); // attribute_length, maxStack, maxLocals, code_lenth
             }
 
             catchPos = -1;
             catchCount = 0;
         }
 
-        private void writeThrows(int[] exceptions) {
-            if (throwsIndex == 0)
+        private void writeThrows(int[] exceptions){
+            if (throwsIndex == 0){
                 throwsIndex = constPool.addUtf8Info(ExceptionsAttribute.tag);
+            }
 
             output.writeShort(throwsIndex);
             output.writeInt(exceptions.length * 2 + 2);
             output.writeShort(exceptions.length);
-            for (int i = 0; i < exceptions.length; i++)
-                output.writeShort(exceptions[i]);
+            for (int exception : exceptions){
+                output.writeShort(exception);
+            }
         }
 
         /**
@@ -409,21 +485,21 @@ public class ClassFileWriter {
          *
          * @see Opcode
          */
-        public void add(int b) {
+        public void add(int b){
             output.write(b);
         }
 
         /**
          * Appends a 16bit value of bytecode.
          */
-        public void add16(int b) {
+        public void add16(int b){
             output.writeShort(b);
         }
 
         /**
          * Appends a 32bit value of bytecode.
          */
-        public void add32(int b) {
+        public void add32(int b){
             output.writeInt(b);
         }
 
@@ -432,8 +508,7 @@ public class ClassFileWriter {
          *
          * @see Opcode
          */
-        public void addInvoke(int opcode, String targetClass, String methodName,
-                              String descriptor) {
+        public void addInvoke(int opcode,String targetClass,String methodName,String descriptor){
             int target = constPool.addClassInfo(targetClass);
             int nt = constPool.addNameAndTypeInfo(methodName, descriptor);
             int method = constPool.addMethodrefInfo(target, nt);
@@ -444,25 +519,26 @@ public class ClassFileWriter {
         /**
          * Ends appending bytecode.
          */
-        public void codeEnd(int maxStack, int maxLocals) {
-            if (!isAbstract) {
+        public void codeEnd(int maxStack,int maxLocals){
+            if (!isAbstract){
                 output.writeShort(startPos + 6, maxStack);
                 output.writeShort(startPos + 8, maxLocals);
-                output.writeInt(startPos + 10, output.getPos() - startPos - 14);  // code_length
+                output.writeInt(startPos + 10, output.getPos() - startPos - 14); // code_length
                 catchPos = output.getPos();
                 catchCount = 0;
-                output.writeShort(0);   // number of catch clauses
+                output.writeShort(0); // number of catch clauses
             }
         }
 
         /**
          * Appends an <code>exception_table</code> entry to the
-         * <code>Code_attribute</code>.  This method is available
+         * <code>Code_attribute</code>. This method is available
          * only after the <code>codeEnd</code> method is called.
          *
-         * @param catchType     an index indicating a <code>CONSTANT_Class_info</code>.
+         * @param catchType
+         *            an index indicating a <code>CONSTANT_Class_info</code>.
          */
-        public void addCatch(int startPc, int endPc, int handlerPc, int catchType) {
+        public void addCatch(int startPc,int endPc,int handlerPc,int catchType){
             ++catchCount;
             output.writeShort(startPc);
             output.writeShort(endPc);
@@ -471,16 +547,19 @@ public class ClassFileWriter {
         }
 
         /**
-         * Ends adding a new method.  The <code>add</code> method must be
+         * Ends adding a new method. The <code>add</code> method must be
          * called before the <code>end</code> method is called.
          *
-         * @param smap              a stack map table.  may be null.
-         * @param aw                attributes to the <code>Code_attribute</code>.
-         *                          may be null.
+         * @param smap
+         *            a stack map table. may be null.
+         * @param aw
+         *            attributes to the <code>Code_attribute</code>.
+         *            may be null.
          */
-        public void end(StackMapTable.Writer smap, AttributeWriter aw) {
-            if (isAbstract)
+        public void end(StackMapTable.Writer smap,AttributeWriter aw){
+            if (isAbstract){
                 return;
+            }
 
             // exception_table_length
             output.writeShort(catchPos, catchCount);
@@ -488,9 +567,10 @@ public class ClassFileWriter {
             int attrCount = smap == null ? 0 : 1;
             writeAttribute(output, aw, attrCount);
 
-            if (smap != null) {
-                if (stackIndex == 0)
+            if (smap != null){
+                if (stackIndex == 0){
                     stackIndex = constPool.addUtf8Info(StackMapTable.tag);
+                }
 
                 output.writeShort(stackIndex);
                 byte[] data = smap.toByteArray();
@@ -505,19 +585,25 @@ public class ClassFileWriter {
         /**
          * Returns the length of the bytecode that has been added so far.
          *
-         * @return      the length in bytes.
+         * @return the length in bytes.
          * @since 3.19
          */
-        public int size() { return output.getPos() - startPos - 14; } 
+        public int size(){
+            return output.getPos() - startPos - 14;
+        }
 
-        int numOfMethods() { return methodCount; }
+        int numOfMethods(){
+            return methodCount;
+        }
 
-        int dataSize() { return output.size(); }
+        int dataSize(){
+            return output.size();
+        }
 
         /**
          * Writes the added methods.
          */
-        void write(OutputStream out) throws IOException {
+        void write(OutputStream out) throws IOException{
             output.writeTo(out);
         }
     }
@@ -525,16 +611,19 @@ public class ClassFileWriter {
     /**
      * Constant Pool.
      */
-    public static final class ConstPoolWriter {
-        ByteStream output;
+    public static final class ConstPoolWriter{
+
+        ByteStream    output;
+
         protected int startPos;
+
         protected int num;
 
-        ConstPoolWriter(ByteStream out) {
+        ConstPoolWriter(ByteStream out){
             output = out;
             startPos = out.getPos();
             num = 1;
-            output.writeShort(1);   // number of entries
+            output.writeShort(1); // number of entries
         }
 
         /**
@@ -542,11 +631,12 @@ public class ClassFileWriter {
          *
          * @return an array of indexes indicating <code>CONSTANT_Class_info</code>s.
          */
-        public int[] addClassInfo(String[] classNames) {
+        public int[] addClassInfo(String[] classNames){
             int n = classNames.length;
             int[] result = new int[n];
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++){
                 result[i] = addClassInfo(classNames[i]);
+            }
 
             return result;
         }
@@ -554,14 +644,16 @@ public class ClassFileWriter {
         /**
          * Adds a new <code>CONSTANT_Class_info</code> structure.
          *
-         * <p>This also adds a <code>CONSTANT_Utf8_info</code> structure
+         * <p>
+         * This also adds a <code>CONSTANT_Utf8_info</code> structure
          * for storing the class name.
          *
-         * @param jvmname   the JVM-internal representation of a class name.
-         *                  e.g. <code>java/lang/Object</code>.
-         * @return          the index of the added entry.
+         * @param jvmname
+         *            the JVM-internal representation of a class name.
+         *            e.g. <code>java/lang/Object</code>.
+         * @return the index of the added entry.
          */
-        public int addClassInfo(String jvmname) {
+        public int addClassInfo(String jvmname){
             int utf8 = addUtf8Info(jvmname);
             output.write(ClassInfo.tag);
             output.writeShort(utf8);
@@ -571,10 +663,11 @@ public class ClassFileWriter {
         /**
          * Adds a new <code>CONSTANT_Class_info</code> structure.
          *
-         * @param name      <code>name_index</code>
-         * @return          the index of the added entry.
+         * @param name
+         *            <code>name_index</code>
+         * @return the index of the added entry.
          */
-        public int addClassInfo(int name) {
+        public int addClassInfo(int name){
             output.write(ClassInfo.tag);
             output.writeShort(name);
             return num++;
@@ -583,22 +676,26 @@ public class ClassFileWriter {
         /**
          * Adds a new <code>CONSTANT_NameAndType_info</code> structure.
          *
-         * @param name      <code>name_index</code>
-         * @param type      <code>descriptor_index</code>
-         * @return          the index of the added entry.
+         * @param name
+         *            <code>name_index</code>
+         * @param type
+         *            <code>descriptor_index</code>
+         * @return the index of the added entry.
          */
-        public int addNameAndTypeInfo(String name, String type) {
+        public int addNameAndTypeInfo(String name,String type){
             return addNameAndTypeInfo(addUtf8Info(name), addUtf8Info(type));
         }
 
         /**
          * Adds a new <code>CONSTANT_NameAndType_info</code> structure.
          *
-         * @param name      <code>name_index</code>
-         * @param type      <code>descriptor_index</code>
-         * @return          the index of the added entry.
+         * @param name
+         *            <code>name_index</code>
+         * @param type
+         *            <code>descriptor_index</code>
+         * @return the index of the added entry.
          */
-        public int addNameAndTypeInfo(int name, int type) {
+        public int addNameAndTypeInfo(int name,int type){
             output.write(NameAndTypeInfo.tag);
             output.writeShort(name);
             output.writeShort(type);
@@ -608,11 +705,13 @@ public class ClassFileWriter {
         /**
          * Adds a new <code>CONSTANT_Fieldref_info</code> structure.
          *
-         * @param classInfo         <code>class_index</code>
-         * @param nameAndTypeInfo   <code>name_and_type_index</code>.
-         * @return          the index of the added entry.
+         * @param classInfo
+         *            <code>class_index</code>
+         * @param nameAndTypeInfo
+         *            <code>name_and_type_index</code>.
+         * @return the index of the added entry.
          */
-        public int addFieldrefInfo(int classInfo, int nameAndTypeInfo) {
+        public int addFieldrefInfo(int classInfo,int nameAndTypeInfo){
             output.write(FieldrefInfo.tag);
             output.writeShort(classInfo);
             output.writeShort(nameAndTypeInfo);
@@ -622,11 +721,13 @@ public class ClassFileWriter {
         /**
          * Adds a new <code>CONSTANT_Methodref_info</code> structure.
          *
-         * @param classInfo         <code>class_index</code>
-         * @param nameAndTypeInfo   <code>name_and_type_index</code>.
-         * @return          the index of the added entry.
+         * @param classInfo
+         *            <code>class_index</code>
+         * @param nameAndTypeInfo
+         *            <code>name_and_type_index</code>.
+         * @return the index of the added entry.
          */
-        public int addMethodrefInfo(int classInfo, int nameAndTypeInfo) {
+        public int addMethodrefInfo(int classInfo,int nameAndTypeInfo){
             output.write(MethodrefInfo.tag);
             output.writeShort(classInfo);
             output.writeShort(nameAndTypeInfo);
@@ -637,12 +738,13 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_InterfaceMethodref_info</code>
          * structure.
          *
-         * @param classInfo         <code>class_index</code>
-         * @param nameAndTypeInfo   <code>name_and_type_index</code>.
-         * @return          the index of the added entry.
+         * @param classInfo
+         *            <code>class_index</code>
+         * @param nameAndTypeInfo
+         *            <code>name_and_type_index</code>.
+         * @return the index of the added entry.
          */
-        public int addInterfaceMethodrefInfo(int classInfo,
-                                             int nameAndTypeInfo) {
+        public int addInterfaceMethodrefInfo(int classInfo,int nameAndTypeInfo){
             output.write(InterfaceMethodrefInfo.tag);
             output.writeShort(classInfo);
             output.writeShort(nameAndTypeInfo);
@@ -653,14 +755,16 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_MethodHandle_info</code>
          * structure.
          *
-         * @param kind      <code>reference_kind</code>
-         *                  such as {@link ConstPool#REF_invokeStatic <code>REF_invokeStatic</code>}.
-         * @param index     <code>reference_index</code>.
-         * @return          the index of the added entry.
+         * @param kind
+         *            <code>reference_kind</code>
+         *            such as {@link ConstPool#REF_invokeStatic <code>REF_invokeStatic</code>}.
+         * @param index
+         *            <code>reference_index</code>.
+         * @return the index of the added entry.
          *
          * @since 3.17.1
          */
-        public int addMethodHandleInfo(int kind, int index) {
+        public int addMethodHandleInfo(int kind,int index){
             output.write(MethodHandleInfo.tag);
             output.write(kind);
             output.writeShort(index);
@@ -671,12 +775,13 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_MethodType_info</code>
          * structure.
          *
-         * @param desc      <code>descriptor_index</code>.
-         * @return          the index of the added entry.
+         * @param desc
+         *            <code>descriptor_index</code>.
+         * @return the index of the added entry.
          *
          * @since 3.17.1
          */
-        public int addMethodTypeInfo(int desc) {
+        public int addMethodTypeInfo(int desc){
             output.write(MethodTypeInfo.tag);
             output.writeShort(desc);
             return num++;
@@ -686,14 +791,15 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_InvokeDynamic_info</code>
          * structure.
          *
-         * @param bootstrap         <code>bootstrap_method_attr_index</code>.
-         * @param nameAndTypeInfo   <code>name_and_type_index</code>.
-         * @return                  the index of the added entry.
+         * @param bootstrap
+         *            <code>bootstrap_method_attr_index</code>.
+         * @param nameAndTypeInfo
+         *            <code>name_and_type_index</code>.
+         * @return the index of the added entry.
          *
          * @since 3.17.1
          */
-        public int addInvokeDynamicInfo(int bootstrap,
-                                        int nameAndTypeInfo) {
+        public int addInvokeDynamicInfo(int bootstrap,int nameAndTypeInfo){
             output.write(InvokeDynamicInfo.tag);
             output.writeShort(bootstrap);
             output.writeShort(nameAndTypeInfo);
@@ -704,12 +810,13 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_String_info</code>
          * structure.
          *
-         * <p>This also adds a new <code>CONSTANT_Utf8_info</code>
+         * <p>
+         * This also adds a new <code>CONSTANT_Utf8_info</code>
          * structure.
          *
-         * @return          the index of the added entry.
+         * @return the index of the added entry.
          */
-        public int addStringInfo(String str) {
+        public int addStringInfo(String str){
             int utf8 = addUtf8Info(str);
             output.write(StringInfo.tag);
             output.writeShort(utf8);
@@ -720,9 +827,9 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_Integer_info</code>
          * structure.
          *
-         * @return          the index of the added entry.
+         * @return the index of the added entry.
          */
-        public int addIntegerInfo(int i) {
+        public int addIntegerInfo(int i){
             output.write(IntegerInfo.tag);
             output.writeInt(i);
             return num++;
@@ -732,9 +839,9 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_Float_info</code>
          * structure.
          *
-         * @return          the index of the added entry.
+         * @return the index of the added entry.
          */
-        public int addFloatInfo(float f) {
+        public int addFloatInfo(float f){
             output.write(FloatInfo.tag);
             output.writeFloat(f);
             return num++;
@@ -744,9 +851,9 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_Long_info</code>
          * structure.
          *
-         * @return          the index of the added entry.
+         * @return the index of the added entry.
          */
-        public int addLongInfo(long l) {
+        public int addLongInfo(long l){
             output.write(LongInfo.tag);
             output.writeLong(l);
             int n = num;
@@ -758,9 +865,9 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_Double_info</code>
          * structure.
          *
-         * @return          the index of the added entry.
+         * @return the index of the added entry.
          */
-        public int addDoubleInfo(double d) {
+        public int addDoubleInfo(double d){
             output.write(DoubleInfo.tag);
             output.writeDouble(d);
             int n = num;
@@ -772,9 +879,9 @@ public class ClassFileWriter {
          * Adds a new <code>CONSTANT_Utf8_info</code>
          * structure.
          *
-         * @return          the index of the added entry.
+         * @return the index of the added entry.
          */
-        public int addUtf8Info(String utf8) {
+        public int addUtf8Info(String utf8){
             output.write(Utf8Info.tag);
             output.writeUTF(utf8);
             return num++;
@@ -783,7 +890,7 @@ public class ClassFileWriter {
         /**
          * Writes the contents of this class pool.
          */
-        void end() {
+        void end(){
             output.writeShort(startPos, num);
         }
     }

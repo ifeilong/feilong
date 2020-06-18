@@ -21,20 +21,28 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * String literal.
  */
-public class StringL extends ASTree {
+public class StringL extends ASTree{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    protected String text;
 
-    public StringL(String t) {
+    protected String          text;
+
+    public StringL(String t){
         text = t;
     }
 
-    public String get() { return text; }
+    public String get(){
+        return text;
+    }
 
     @Override
-    public String toString() { return "\"" + text + "\""; }
+    public String toString(){
+        return "\"" + text + "\"";
+    }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atStringL(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atStringL(this);
+    }
 }

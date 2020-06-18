@@ -92,26 +92,30 @@ import com.feilong.lib.lang3.Validate;
  * </p>
  *
  * <pre>
- * public int hashCode() {
- *   return HashCodeBuilder.reflectionHashCode(this);
+ * 
+ * public int hashCode(){
+ *     return HashCodeBuilder.reflectionHashCode(this);
  * }
  * </pre>
  *
- * <p>The {@link HashCodeExclude} annotation can be used to exclude fields from being
- * used by the {@code reflectionHashCode} methods.</p>
+ * <p>
+ * The {@link HashCodeExclude} annotation can be used to exclude fields from being
+ * used by the {@code reflectionHashCode} methods.
+ * </p>
  *
  * @since 1.0
  */
-public class HashCodeBuilder implements Builder<Integer> {
+public class HashCodeBuilder implements Builder<Integer>{
+
     /**
      * The default initial value to use in reflection hash code building.
      */
-    private static final int DEFAULT_INITIAL_VALUE = 17;
+    private static final int                     DEFAULT_INITIAL_VALUE    = 17;
 
     /**
      * The default multiplier value to use in reflection hash code building.
      */
-    private static final int DEFAULT_MULTIPLIER_VALUE = 37;
+    private static final int                     DEFAULT_MULTIPLIER_VALUE = 37;
 
     /**
      * <p>
@@ -120,7 +124,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @since 2.3
      */
-    private static final ThreadLocal<Set<IDKey>> REGISTRY = new ThreadLocal<>();
+    private static final ThreadLocal<Set<IDKey>> REGISTRY                 = new ThreadLocal<>();
 
     /*
      * NOTE: we cannot store the actual objects in a HashSet, as that would use the very hashCode()
@@ -147,7 +151,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @return Set the registry of objects being traversed
      * @since 2.3
      */
-    static Set<IDKey> getRegistry() {
+    static Set<IDKey> getRegistry(){
         return REGISTRY.get();
     }
 
@@ -162,7 +166,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @return boolean {@code true} if the registry contains the given object.
      * @since 2.3
      */
-    static boolean isRegistered(final Object value) {
+    static boolean isRegistered(final Object value){
         final Set<IDKey> registry = getRegistry();
         return registry != null && registry.contains(new IDKey(value));
     }
@@ -183,34 +187,36 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @param excludeFields
      *            Collection of String field names to exclude from use in calculation of hash code
      */
-    private static void reflectionAppend(final Object object, final Class<?> clazz, final HashCodeBuilder builder, final boolean useTransients,
-            final String[] excludeFields) {
-        if (isRegistered(object)) {
+    private static void reflectionAppend(
+                    final Object object,
+                    final Class<?> clazz,
+                    final HashCodeBuilder builder,
+                    final boolean useTransients,
+                    final String[] excludeFields){
+        if (isRegistered(object)){
             return;
         }
-        try {
+        try{
             register(object);
             // The elements in the returned array are not sorted and are not in any particular order.
             final Field[] fields = clazz.getDeclaredFields();
             Arrays.sort(fields, Comparator.comparing(Field::getName));
             AccessibleObject.setAccessible(fields, true);
-            for (final Field field : fields) {
-                if (!ArrayUtils.contains(excludeFields, field.getName())
-                    && !field.getName().contains("$")
-                    && (useTransients || !Modifier.isTransient(field.getModifiers()))
-                    && !Modifier.isStatic(field.getModifiers())
-                    && !field.isAnnotationPresent(HashCodeExclude.class)) {
-                    try {
+            for (final Field field : fields){
+                if (!ArrayUtils.contains(excludeFields, field.getName()) && !field.getName().contains("$")
+                                && (useTransients || !Modifier.isTransient(field.getModifiers()))
+                                && !Modifier.isStatic(field.getModifiers()) && !field.isAnnotationPresent(HashCodeExclude.class)){
+                    try{
                         final Object fieldValue = field.get(object);
                         builder.append(fieldValue);
-                    } catch (final IllegalAccessException e) {
+                    }catch (final IllegalAccessException e){
                         // this can't happen. Would get a Security exception instead
                         // throw a runtime exception in case the impossible happens.
                         throw new InternalError("Unexpected IllegalAccessException");
                     }
                 }
             }
-        } finally {
+        }finally{
             unregister(object);
         }
     }
@@ -255,7 +261,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @see HashCodeExclude
      */
-    public static int reflectionHashCode(final int initialNonZeroOddNumber, final int multiplierNonZeroOddNumber, final Object object) {
+    public static int reflectionHashCode(final int initialNonZeroOddNumber,final int multiplierNonZeroOddNumber,final Object object){
         return reflectionHashCode(initialNonZeroOddNumber, multiplierNonZeroOddNumber, object, false, null);
     }
 
@@ -301,8 +307,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @see HashCodeExclude
      */
-    public static int reflectionHashCode(final int initialNonZeroOddNumber, final int multiplierNonZeroOddNumber, final Object object,
-            final boolean testTransients) {
+    public static int reflectionHashCode(
+                    final int initialNonZeroOddNumber,
+                    final int multiplierNonZeroOddNumber,
+                    final Object object,
+                    final boolean testTransients){
         return reflectionHashCode(initialNonZeroOddNumber, multiplierNonZeroOddNumber, object, testTransients, null);
     }
 
@@ -356,13 +365,18 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @see HashCodeExclude
      * @since 2.0
      */
-    public static <T> int reflectionHashCode(final int initialNonZeroOddNumber, final int multiplierNonZeroOddNumber, final T object,
-            final boolean testTransients, final Class<? super T> reflectUpToClass, final String... excludeFields) {
+    public static <T> int reflectionHashCode(
+                    final int initialNonZeroOddNumber,
+                    final int multiplierNonZeroOddNumber,
+                    final T object,
+                    final boolean testTransients,
+                    final Class<? super T> reflectUpToClass,
+                    final String...excludeFields){
         Validate.notNull(object, "The object to build a hash code for must not be null");
         final HashCodeBuilder builder = new HashCodeBuilder(initialNonZeroOddNumber, multiplierNonZeroOddNumber);
         Class<?> clazz = object.getClass();
         reflectionAppend(object, clazz, builder, testTransients, excludeFields);
-        while (clazz.getSuperclass() != null && clazz != reflectUpToClass) {
+        while (clazz.getSuperclass() != null && clazz != reflectUpToClass){
             clazz = clazz.getSuperclass();
             reflectionAppend(object, clazz, builder, testTransients, excludeFields);
         }
@@ -404,9 +418,8 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @see HashCodeExclude
      */
-    public static int reflectionHashCode(final Object object, final boolean testTransients) {
-        return reflectionHashCode(DEFAULT_INITIAL_VALUE, DEFAULT_MULTIPLIER_VALUE, object,
-                testTransients, null);
+    public static int reflectionHashCode(final Object object,final boolean testTransients){
+        return reflectionHashCode(DEFAULT_INITIAL_VALUE, DEFAULT_MULTIPLIER_VALUE, object, testTransients, null);
     }
 
     /**
@@ -444,7 +457,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @see HashCodeExclude
      */
-    public static int reflectionHashCode(final Object object, final Collection<String> excludeFields) {
+    public static int reflectionHashCode(final Object object,final Collection<String> excludeFields){
         return reflectionHashCode(object, ReflectionToStringBuilder.toNoNullStringArray(excludeFields));
     }
 
@@ -485,9 +498,8 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @see HashCodeExclude
      */
-    public static int reflectionHashCode(final Object object, final String... excludeFields) {
-        return reflectionHashCode(DEFAULT_INITIAL_VALUE, DEFAULT_MULTIPLIER_VALUE, object, false,
-                null, excludeFields);
+    public static int reflectionHashCode(final Object object,final String...excludeFields){
+        return reflectionHashCode(DEFAULT_INITIAL_VALUE, DEFAULT_MULTIPLIER_VALUE, object, false, null, excludeFields);
     }
 
     /**
@@ -498,9 +510,9 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @param value
      *            The object to register.
      */
-    private static void register(final Object value) {
+    private static void register(final Object value){
         Set<IDKey> registry = getRegistry();
-        if (registry == null) {
+        if (registry == null){
             registry = new HashSet<>();
             REGISTRY.set(registry);
         }
@@ -519,11 +531,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            The object to unregister.
      * @since 2.3
      */
-    private static void unregister(final Object value) {
+    private static void unregister(final Object value){
         final Set<IDKey> registry = getRegistry();
-        if (registry != null) {
+        if (registry != null){
             registry.remove(new IDKey(value));
-            if (registry.isEmpty()) {
+            if (registry.isEmpty()){
                 REGISTRY.remove();
             }
         }
@@ -537,14 +549,14 @@ public class HashCodeBuilder implements Builder<Integer> {
     /**
      * Running total of the hashCode.
      */
-    private int iTotal = 0;
+    private int       iTotal = 0;
 
     /**
      * <p>
      * Uses two hard coded choices for the constants needed to build a {@code hashCode}.
      * </p>
      */
-    public HashCodeBuilder() {
+    public HashCodeBuilder(){
         iConstant = 37;
         iTotal = 17;
     }
@@ -566,7 +578,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @throws IllegalArgumentException
      *             if the number is even
      */
-    public HashCodeBuilder(final int initialOddNumber, final int multiplierOddNumber) {
+    public HashCodeBuilder(final int initialOddNumber, final int multiplierOddNumber){
         Validate.isTrue(initialOddNumber % 2 != 0, "HashCodeBuilder requires an odd initial value");
         Validate.isTrue(multiplierOddNumber % 2 != 0, "HashCodeBuilder requires an odd multiplier");
         iConstant = multiplierOddNumber;
@@ -594,7 +606,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the boolean to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final boolean value) {
+    public HashCodeBuilder append(final boolean value){
         iTotal = iTotal * iConstant + (value ? 0 : 1);
         return this;
     }
@@ -608,11 +620,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final boolean[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final boolean[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final boolean element : array) {
+        }else{
+            for (final boolean element : array){
                 append(element);
             }
         }
@@ -630,7 +642,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the byte to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final byte value) {
+    public HashCodeBuilder append(final byte value){
         iTotal = iTotal * iConstant + value;
         return this;
     }
@@ -646,11 +658,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final byte[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final byte[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final byte element : array) {
+        }else{
+            for (final byte element : array){
                 append(element);
             }
         }
@@ -666,7 +678,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the char to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final char value) {
+    public HashCodeBuilder append(final char value){
         iTotal = iTotal * iConstant + value;
         return this;
     }
@@ -680,11 +692,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final char[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final char[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final char element : array) {
+        }else{
+            for (final char element : array){
                 append(element);
             }
         }
@@ -700,7 +712,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the double to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final double value) {
+    public HashCodeBuilder append(final double value){
         return append(Double.doubleToLongBits(value));
     }
 
@@ -713,11 +725,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final double[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final double[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final double element : array) {
+        }else{
+            for (final double element : array){
                 append(element);
             }
         }
@@ -733,7 +745,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the float to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final float value) {
+    public HashCodeBuilder append(final float value){
         iTotal = iTotal * iConstant + Float.floatToIntBits(value);
         return this;
     }
@@ -747,11 +759,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final float[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final float[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final float element : array) {
+        }else{
+            for (final float element : array){
                 append(element);
             }
         }
@@ -767,7 +779,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the int to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final int value) {
+    public HashCodeBuilder append(final int value){
         iTotal = iTotal * iConstant + value;
         return this;
     }
@@ -781,11 +793,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final int[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final int[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final int element : array) {
+        }else{
+            for (final int element : array){
                 append(element);
             }
         }
@@ -805,7 +817,7 @@ public class HashCodeBuilder implements Builder<Integer> {
     //       Long.hashCode do. Ideally we should switch to >>> at
     //       some stage. There are backwards compat issues, so
     //       that will have to wait for the time being. cf LANG-342.
-    public HashCodeBuilder append(final long value) {
+    public HashCodeBuilder append(final long value){
         iTotal = iTotal * iConstant + ((int) (value ^ (value >> 32)));
         return this;
     }
@@ -819,11 +831,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final long[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final long[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final long element : array) {
+        }else{
+            for (final long element : array){
                 append(element);
             }
         }
@@ -839,16 +851,16 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the Object to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final Object object) {
-        if (object == null) {
+    public HashCodeBuilder append(final Object object){
+        if (object == null){
             iTotal = iTotal * iConstant;
 
-        } else {
-            if (object.getClass().isArray()) {
+        }else{
+            if (object.getClass().isArray()){
                 // factor out array case in order to keep method small enough
                 // to be inlined
                 appendArray(object);
-            } else {
+            }else{
                 iTotal = iTotal * iConstant + object.hashCode();
             }
         }
@@ -863,26 +875,26 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @param object
      *            the array to add to the {@code hashCode}
      */
-    private void appendArray(final Object object) {
+    private void appendArray(final Object object){
         // 'Switch' on type of array, to dispatch to the correct handler
         // This handles multi dimensional arrays
-        if (object instanceof long[]) {
+        if (object instanceof long[]){
             append((long[]) object);
-        } else if (object instanceof int[]) {
+        }else if (object instanceof int[]){
             append((int[]) object);
-        } else if (object instanceof short[]) {
+        }else if (object instanceof short[]){
             append((short[]) object);
-        } else if (object instanceof char[]) {
+        }else if (object instanceof char[]){
             append((char[]) object);
-        } else if (object instanceof byte[]) {
+        }else if (object instanceof byte[]){
             append((byte[]) object);
-        } else if (object instanceof double[]) {
+        }else if (object instanceof double[]){
             append((double[]) object);
-        } else if (object instanceof float[]) {
+        }else if (object instanceof float[]){
             append((float[]) object);
-        } else if (object instanceof boolean[]) {
+        }else if (object instanceof boolean[]){
             append((boolean[]) object);
-        } else {
+        }else{
             // Not an array of primitives
             append((Object[]) object);
         }
@@ -897,11 +909,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final Object[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final Object[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final Object element : array) {
+        }else{
+            for (final Object element : array){
                 append(element);
             }
         }
@@ -917,7 +929,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the short to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final short value) {
+    public HashCodeBuilder append(final short value){
         iTotal = iTotal * iConstant + value;
         return this;
     }
@@ -931,11 +943,11 @@ public class HashCodeBuilder implements Builder<Integer> {
      *            the array to add to the {@code hashCode}
      * @return this
      */
-    public HashCodeBuilder append(final short[] array) {
-        if (array == null) {
+    public HashCodeBuilder append(final short[] array){
+        if (array == null){
             iTotal = iTotal * iConstant;
-        } else {
-            for (final short element : array) {
+        }else{
+            for (final short element : array){
                 append(element);
             }
         }
@@ -952,7 +964,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @return this HashCodeBuilder, used to chain calls.
      * @since 2.0
      */
-    public HashCodeBuilder appendSuper(final int superHashCode) {
+    public HashCodeBuilder appendSuper(final int superHashCode){
         iTotal = iTotal * iConstant + superHashCode;
         return this;
     }
@@ -964,7 +976,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      *
      * @return {@code hashCode} based on the fields appended
      */
-    public int toHashCode() {
+    public int toHashCode(){
         return iTotal;
     }
 
@@ -976,7 +988,7 @@ public class HashCodeBuilder implements Builder<Integer> {
      * @since 3.0
      */
     @Override
-    public Integer build() {
+    public Integer build(){
         return Integer.valueOf(toHashCode());
     }
 
@@ -984,13 +996,14 @@ public class HashCodeBuilder implements Builder<Integer> {
      * <p>
      * The computed {@code hashCode} from toHashCode() is returned due to the likelihood
      * of bugs in mis-calling toHashCode() and the unlikeliness of it mattering what the hashCode for
-     * HashCodeBuilder itself is.</p>
+     * HashCodeBuilder itself is.
+     * </p>
      *
      * @return {@code hashCode} based on the fields appended
      * @since 2.5
      */
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return toHashCode();
     }
 

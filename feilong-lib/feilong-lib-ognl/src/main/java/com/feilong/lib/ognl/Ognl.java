@@ -398,10 +398,11 @@ public abstract class Ognl{
 
         Node node = (Node) tree;
 
-        if (node.getAccessor() != null)
+        if (node.getAccessor() != null){
             result = node.getAccessor().get(ognlContext, root);
-        else
+        }else{
             result = node.getValue(ognlContext, root);
+        }
 
         if (resultType != null){
             result = getTypeConverter(context).convertValue(context, root, null, null, result, resultType);

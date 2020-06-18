@@ -107,6 +107,7 @@ public abstract class AbstractReferenceMarshaller extends TreeMarshaller{
                     /**
                      * @deprecated As of 1.4.2
                      */
+                    @Deprecated
                     @Override
                     public Path currentPath(){
                         return pathTracker.getPath();
@@ -151,6 +152,11 @@ public abstract class AbstractReferenceMarshaller extends TreeMarshaller{
     }
 
     public static class ReferencedImplicitElementException extends ConversionException{
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 3659574702624630908L;
 
         public ReferencedImplicitElementException(final Object item, final Path path){
             super("Cannot reference implicit element");

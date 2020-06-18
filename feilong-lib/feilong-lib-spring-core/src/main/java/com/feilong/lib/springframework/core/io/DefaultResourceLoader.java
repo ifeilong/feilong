@@ -46,7 +46,7 @@ public class DefaultResourceLoader implements ResourceLoader{
 
     private ClassLoader                 classLoader;
 
-    private final Set<ProtocolResolver> protocolResolvers = new LinkedHashSet<ProtocolResolver>(4);
+    private final Set<ProtocolResolver> protocolResolvers = new LinkedHashSet<>(4);
 
     /**
      * Create a new DefaultResourceLoader.

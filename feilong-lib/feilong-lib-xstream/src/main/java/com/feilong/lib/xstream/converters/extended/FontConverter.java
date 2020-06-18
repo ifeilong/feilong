@@ -11,6 +11,13 @@
  */
 package com.feilong.lib.xstream.converters.extended;
 
+import java.awt.Font;
+import java.awt.font.TextAttribute;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.swing.plaf.FontUIResource;
 
 import com.feilong.lib.xstream.converters.Converter;
@@ -23,13 +30,6 @@ import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
 
-import java.awt.Font;
-import java.awt.font.TextAttribute;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 public class FontConverter implements Converter{
 
     private final SingleValueConverter textAttributeConverter;
@@ -41,6 +41,7 @@ public class FontConverter implements Converter{
      * 
      * @deprecated As of 1.4.5
      */
+    @Deprecated
     public FontConverter(){
         this(null);
     }

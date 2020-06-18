@@ -28,16 +28,18 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class CharMemberValue extends MemberValue {
+public class CharMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs a char constant value.  The initial value is specified
+     * Constructs a char constant value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index     the index of a CONSTANT_Integer_info structure.
+     * @param index
+     *            the index of a CONSTANT_Integer_info structure.
      */
-    public CharMemberValue(int index, ConstPool cp) {
+    public CharMemberValue(int index, ConstPool cp){
         super('C', cp);
         this.valueIndex = index;
     }
@@ -45,42 +47,43 @@ public class CharMemberValue extends MemberValue {
     /**
      * Constructs a char constant value.
      *
-     * @param c     the initial value.
+     * @param c
+     *            the initial value.
      */
-    public CharMemberValue(char c, ConstPool cp) {
+    public CharMemberValue(char c, ConstPool cp){
         super('C', cp);
         setValue(c);
     }
 
     /**
-     * Constructs a char constant value.  The initial value is '\0'.
+     * Constructs a char constant value. The initial value is '\0'.
      */
-    public CharMemberValue(ConstPool cp) {
+    public CharMemberValue(ConstPool cp){
         super('C', cp);
         setValue('\0');
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m) {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m){
         return Character.valueOf(getValue());
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) {
+    Class<?> getType(ClassLoader cl){
         return char.class;
     }
 
     /**
      * Obtains the value of the member.
      */
-    public char getValue() {
-        return (char)cp.getIntegerInfo(valueIndex);
+    public char getValue(){
+        return (char) cp.getIntegerInfo(valueIndex);
     }
 
     /**
      * Sets the value of the member.
      */
-    public void setValue(char newValue) {
+    public void setValue(char newValue){
         valueIndex = cp.addIntegerInfo(newValue);
     }
 
@@ -88,7 +91,7 @@ public class CharMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return Character.toString(getValue());
     }
 
@@ -96,7 +99,7 @@ public class CharMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.constValueIndex(getValue());
     }
 
@@ -104,7 +107,7 @@ public class CharMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitCharMemberValue(this);
     }
 }

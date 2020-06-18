@@ -11,10 +11,10 @@
  */
 package com.feilong.lib.xstream.io.binary;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Maintains the state of a pull reader at various states in the document depth.

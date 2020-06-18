@@ -17,6 +17,11 @@ import com.feilong.lib.xstream.XStreamException;
 public class ForbiddenClassException extends XStreamException{
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = 1316685355876458443L;
+
+    /**
      * Construct a ForbiddenClassException.
      * 
      * @param type

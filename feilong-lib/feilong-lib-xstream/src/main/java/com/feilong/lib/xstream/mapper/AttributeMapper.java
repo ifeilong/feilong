@@ -49,6 +49,7 @@ public class AttributeMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3
      */
+    @Deprecated
     public AttributeMapper(Mapper wrapped){
         this(wrapped, null, null);
     }
@@ -62,6 +63,7 @@ public class AttributeMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3
      */
+    @Deprecated
     public void setConverterLookup(ConverterLookup converterLookup){
         this.converterLookup = converterLookup;
     }
@@ -86,6 +88,7 @@ public class AttributeMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromItemType(String fieldName,Class type){
         if (fieldNameToTypeMap.get(fieldName) == type){
@@ -121,6 +124,7 @@ public class AttributeMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromItemType(Class type){
         if (typeSet.contains(type)){
@@ -133,6 +137,7 @@ public class AttributeMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromAttribute(String attributeName){
         SingleValueConverter converter = null;
@@ -146,6 +151,7 @@ public class AttributeMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute){
         final Field field = reflectionProvider.getFieldOrNull(definedIn, attribute);

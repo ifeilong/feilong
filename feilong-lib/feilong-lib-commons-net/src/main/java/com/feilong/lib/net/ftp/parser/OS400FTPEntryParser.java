@@ -25,7 +25,8 @@ import com.feilong.lib.net.ftp.FTPFile;
 
 /**
  * @version $Id$
- * <pre>
+ * 
+ *          <pre>
  * Example *FILE/*MEM FTP entries, when the current
  * working directory is a file of file system QSYS:
  * ------------------------------------------------
@@ -229,33 +230,27 @@ import com.feilong.lib.net.ftp.FTPFile;
  *    [ftp] transferring RPGUNIT.SAVF to C:\workspaces\rdp_080\workspace\net-Test\i5-downloads-lib\RPGUNIT.SAVF
  *    [ftp] 1 files retrieved
  *
- * </pre>
+ *          </pre>
  */
-public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
-{
-    private static final String DEFAULT_DATE_FORMAT
-        = "yy/MM/dd HH:mm:ss"; //01/11/09 12:30:24
+public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
 
+    private static final String DEFAULT_DATE_FORMAT = "yy/MM/dd HH:mm:ss";          //01/11/09 12:30:24
 
-
-    private static final String REGEX =
-        "(\\S+)\\s+"                  // user
-        + "(?:(\\d+)\\s+)?"           // size, empty for members
-        + "(?:(\\S+)\\s+(\\S+)\\s+)?" // date stuff, empty for members
-        + "(\\*STMF|\\*DIR|\\*FILE|\\*MEM)\\s+"  // *STMF/*DIR/*FILE/*MEM
-        + "(?:(\\S+)\\s*)?";          // filename, missing, when CWD is a *FILE
-
+    private static final String REGEX               = "(\\S+)\\s+"                  // user
+                    + "(?:(\\d+)\\s+)?"                                             // size, empty for members
+                    + "(?:(\\S+)\\s+(\\S+)\\s+)?"                                   // date stuff, empty for members
+                    + "(\\*STMF|\\*DIR|\\*FILE|\\*MEM)\\s+"                         // *STMF/*DIR/*FILE/*MEM
+                    + "(?:(\\S+)\\s*)?";                                            // filename, missing, when CWD is a *FILE
 
     /**
      * The default constructor for a OS400FTPEntryParser object.
      *
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen
-     * under normal conditions.  It it is seen, this is a sign that
-     * <code>REGEX</code> is  not a valid regular expression.
+     *             Thrown if the regular expression is unparseable. Should not be seen
+     *             under normal conditions. It it is seen, this is a sign that
+     *             <code>REGEX</code> is not a valid regular expression.
      */
-    public OS400FTPEntryParser()
-    {
+    public OS400FTPEntryParser(){
         this(null);
     }
 
@@ -263,71 +258,56 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
      * This constructor allows the creation of an OS400FTPEntryParser object
      * with something other than the default configuration.
      *
-     * @param config The {@link FTPClientConfig configuration} object used to
-     * configure this parser.
+     * @param config
+     *            The {@link FTPClientConfig configuration} object used to
+     *            configure this parser.
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen
-     * under normal conditions.  It it is seen, this is a sign that
-     * <code>REGEX</code> is  not a valid regular expression.
+     *             Thrown if the regular expression is unparseable. Should not be seen
+     *             under normal conditions. It it is seen, this is a sign that
+     *             <code>REGEX</code> is not a valid regular expression.
      * @since 1.4
      */
-    public OS400FTPEntryParser(FTPClientConfig config)
-    {
+    public OS400FTPEntryParser(FTPClientConfig config){
         super(REGEX);
         configure(config);
     }
 
-
     @Override
-    public FTPFile parseFTPEntry(String entry)
-    {
+    public FTPFile parseFTPEntry(String entry){
 
         FTPFile file = new FTPFile();
         file.setRawListing(entry);
         int type;
 
-        if (matches(entry))
-        {
+        if (matches(entry)){
             String usr = group(1);
             String filesize = group(2);
             String datestr = "";
-            if (!isNullOrEmpty(group(3)) || !isNullOrEmpty(group(4)))
-            {
-                datestr = group(3)+" "+group(4);
+            if (!isNullOrEmpty(group(3)) || !isNullOrEmpty(group(4))){
+                datestr = group(3) + " " + group(4);
             }
             String typeStr = group(5);
             String name = group(6);
 
             boolean mustScanForPathSeparator = true;
 
-            try
-            {
+            try{
                 file.setTimestamp(super.parseTimestamp(datestr));
-            }
-            catch (ParseException e)
-            {
+            }catch (ParseException e){
                 // intentionally do nothing
             }
 
-
-            if (typeStr.equalsIgnoreCase("*STMF"))
-            {
+            if (typeStr.equalsIgnoreCase("*STMF")){
                 type = FTPFile.FILE_TYPE;
-                if (isNullOrEmpty(filesize) || isNullOrEmpty(name))
-                {
+                if (isNullOrEmpty(filesize) || isNullOrEmpty(name)){
                     return null;
                 }
-            }
-            else if (typeStr.equalsIgnoreCase("*DIR"))
-            {
+            }else if (typeStr.equalsIgnoreCase("*DIR")){
                 type = FTPFile.DIRECTORY_TYPE;
-                if (isNullOrEmpty(filesize) || isNullOrEmpty(name))
-                {
+                if (isNullOrEmpty(filesize) || isNullOrEmpty(name)){
                     return null;
                 }
-            }
-            else if (typeStr.equalsIgnoreCase("*FILE"))
-            {
+            }else if (typeStr.equalsIgnoreCase("*FILE")){
                 // File, defines the structure of the data (columns of a row)
                 // but the data is stored in one or more members. Typically a
                 // source file contains multiple members whereas it is
@@ -335,27 +315,20 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
                 // file.
                 // Save files are a special type of files which are used
                 // to save objects, e.g. for backups.
-                if (name != null && name.toUpperCase().endsWith(".SAVF"))
-                {
+                if (name != null && name.toUpperCase().endsWith(".SAVF")){
                     mustScanForPathSeparator = false;
                     type = FTPFile.FILE_TYPE;
-                }
-                else
-                {
+                }else{
                     return null;
                 }
-            }
-            else if (typeStr.equalsIgnoreCase("*MEM"))
-            {
+            }else if (typeStr.equalsIgnoreCase("*MEM")){
                 mustScanForPathSeparator = false;
                 type = FTPFile.FILE_TYPE;
 
-                if (isNullOrEmpty(name))
-                {
+                if (isNullOrEmpty(name)){
                     return null;
                 }
-                if (!(isNullOrEmpty(filesize) && isNullOrEmpty(datestr)))
-                {
+                if (!(isNullOrEmpty(filesize) && isNullOrEmpty(datestr))){
                     return null;
                 }
 
@@ -365,9 +338,7 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
                 // use the separator of the FTP server, which is a forward
                 // slash in case of an AS/400.
                 name = name.replace('/', File.separatorChar);
-            }
-            else
-            {
+            }else{
                 type = FTPFile.UNKNOWN_TYPE;
             }
 
@@ -375,24 +346,18 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
 
             file.setUser(usr);
 
-            try
-            {
+            try{
                 file.setSize(Long.parseLong(filesize));
-            }
-            catch (NumberFormatException e)
-            {
+            }catch (NumberFormatException e){
                 // intentionally do nothing
             }
 
-            if (name.endsWith("/"))
-            {
+            if (name.endsWith("/")){
                 name = name.substring(0, name.length() - 1);
             }
-            if (mustScanForPathSeparator)
-            {
+            if (mustScanForPathSeparator){
                 int pos = name.lastIndexOf('/');
-                if (pos > -1)
-                {
+                if (pos > -1){
                     name = name.substring(pos + 1);
                 }
             }
@@ -406,13 +371,14 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
 
     /**
      *
-     * @param string String value that is checked for <code>null</code>
-     * or empty.
+     * @param string
+     *            String value that is checked for <code>null</code>
+     *            or empty.
      * @return <code>true</code> for <code>null</code> or empty values,
-     * else <code>false</code>.
+     *         else <code>false</code>.
      */
-    private boolean isNullOrEmpty(String string) {
-        if (string == null || string.length() == 0) {
+    private boolean isNullOrEmpty(String string){
+        if (string == null || string.length() == 0){
             return true;
         }
         return false;
@@ -420,16 +386,14 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl
 
     /**
      * Defines a default configuration to be used when this class is
-     * instantiated without a {@link  FTPClientConfig  FTPClientConfig}
+     * instantiated without a {@link FTPClientConfig FTPClientConfig}
      * parameter being specified.
+     * 
      * @return the default configuration for this parser.
      */
     @Override
-    protected FTPClientConfig getDefaultConfiguration() {
-        return new FTPClientConfig(
-                FTPClientConfig.SYST_OS400,
-                DEFAULT_DATE_FORMAT,
-                null);
+    protected FTPClientConfig getDefaultConfiguration(){
+        return new FTPClientConfig(FTPClientConfig.SYST_OS400, DEFAULT_DATE_FORMAT, null);
     }
 
 }

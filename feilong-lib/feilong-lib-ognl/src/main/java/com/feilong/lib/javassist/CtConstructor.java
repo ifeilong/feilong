@@ -153,8 +153,9 @@ public final class CtConstructor extends CtBehavior{
      */
     @Override
     public String getName(){
-        if (methodInfo.isStaticInitializer())
+        if (methodInfo.isStaticInitializer()){
             return MethodInfo.nameClinit;
+        }
         return declaringClass.getSimpleName();
     }
 
@@ -168,9 +169,10 @@ public final class CtConstructor extends CtBehavior{
     @Override
     public boolean isEmpty(){
         CodeAttribute ca = getMethodInfo2().getCodeAttribute();
-        if (ca == null)
+        if (ca == null){
             return false; // native or abstract??
                           // they are not allowed, though.
+        }
 
         ConstPool cp = ca.getConstPool();
         CodeIterator it = ca.iterator();
@@ -223,11 +225,13 @@ public final class CtConstructor extends CtBehavior{
      */
     @Override
     public void setBody(String src) throws CannotCompileException{
-        if (src == null)
-            if (isClassInitializer())
+        if (src == null){
+            if (isClassInitializer()){
                 src = ";";
-            else
+            }else{
                 src = "super();";
+            }
+        }
 
         super.setBody(src);
     }
@@ -263,8 +267,9 @@ public final class CtConstructor extends CtBehavior{
     public void insertBeforeBody(String src) throws CannotCompileException{
         CtClass cc = declaringClass;
         cc.checkModify();
-        if (isClassInitializer())
+        if (isClassInitializer()){
             throw new CannotCompileException("class initializer");
+        }
 
         CodeAttribute ca = methodInfo.getCodeAttribute();
         CodeIterator iterator = ca.iterator();
@@ -393,8 +398,9 @@ public final class CtConstructor extends CtBehavior{
                 int mref = iterator.u16bitAt(pos + 1);
                 String desc = ca.getConstPool().getMethodrefType(mref);
                 int num = Descriptor.numOfParameters(desc) + 1;
-                if (num > 3)
+                if (num > 3){
                     pos = iterator.insertGapAt(pos, num - 3, false).position;
+                }
 
                 iterator.writeByte(Opcode.POP, pos++); // this
                 iterator.writeByte(Opcode.NOP, pos);
@@ -402,10 +408,11 @@ public final class CtConstructor extends CtBehavior{
                 Descriptor.Iterator it = new Descriptor.Iterator(desc);
                 while (true){
                     it.next();
-                    if (it.isParameter())
+                    if (it.isParameter()){
                         iterator.writeByte(it.is2byte() ? Opcode.POP2 : Opcode.POP, pos++);
-                    else
+                    }else{
                         break;
+                    }
                 }
             }
         }catch (BadBytecode e){

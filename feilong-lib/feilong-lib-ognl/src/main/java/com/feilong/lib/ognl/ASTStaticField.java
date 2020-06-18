@@ -39,11 +39,16 @@ import java.lang.reflect.Modifier;
  */
 public class ASTStaticField extends SimpleNode implements NodeType{
 
-    private String className;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5628236838853970756L;
 
-    private String fieldName;
+    private String            className;
 
-    private Class  _getterClass;
+    private String            fieldName;
+
+    private Class             _getterClass;
 
     public ASTStaticField(int id){
         super(id);
@@ -86,8 +91,9 @@ public class ASTStaticField extends SimpleNode implements NodeType{
                     throw new NoSuchFieldException(fieldName);
                 }
 
-                if (!Modifier.isStatic(f.getModifiers()))
+                if (!Modifier.isStatic(f.getModifiers())){
                     throw new OgnlException("Field " + fieldName + " of class " + className + " is not static");
+                }
 
                 result = Modifier.isFinal(f.getModifiers());
             }
@@ -99,8 +105,9 @@ public class ASTStaticField extends SimpleNode implements NodeType{
             reason = e;
         }
 
-        if (reason != null)
+        if (reason != null){
             throw new OgnlException("Could not get static field " + fieldName + " from class " + className, reason);
+        }
 
         return result;
     }

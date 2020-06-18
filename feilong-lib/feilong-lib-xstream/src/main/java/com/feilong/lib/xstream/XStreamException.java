@@ -20,6 +20,11 @@ package com.feilong.lib.xstream;
 public class XStreamException extends RuntimeException{
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = 2084185848642514291L;
+
+    /**
      * Default constructor.
      * 
      * @since 1.3

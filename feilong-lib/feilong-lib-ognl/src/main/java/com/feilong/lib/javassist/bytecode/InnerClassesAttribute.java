@@ -23,19 +23,18 @@ import java.util.Map;
 /**
  * <code>InnerClasses_attribute</code>.
  */
-public class InnerClassesAttribute extends AttributeInfo {
+public class InnerClassesAttribute extends AttributeInfo{
+
     /**
      * The name of this attribute <code>"InnerClasses"</code>.
      */
     public static final String tag = "InnerClasses";
 
-    InnerClassesAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    InnerClassesAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
-    private InnerClassesAttribute(ConstPool cp, byte[] info) {
+    private InnerClassesAttribute(ConstPool cp, byte[] info){
         super(cp, tag, info);
     }
 
@@ -44,7 +43,7 @@ public class InnerClassesAttribute extends AttributeInfo {
      *
      * @see #append(String, String, String, int)
      */
-    public InnerClassesAttribute(ConstPool cp) {
+    public InnerClassesAttribute(ConstPool cp){
         super(cp, tag, new byte[2]);
         ByteArray.write16bit(0, get(), 0);
     }
@@ -52,12 +51,14 @@ public class InnerClassesAttribute extends AttributeInfo {
     /**
      * Returns <code>number_of_classes</code>.
      */
-    public int tableLength() { return ByteArray.readU16bit(get(), 0); }
+    public int tableLength(){
+        return ByteArray.readU16bit(get(), 0);
+    }
 
     /**
      * Returns <code>classes[nth].inner_class_info_index</code>.
      */
-    public int innerClassIndex(int nth) {
+    public int innerClassIndex(int nth){
         return ByteArray.readU16bit(get(), nth * 8 + 2);
     }
 
@@ -69,10 +70,11 @@ public class InnerClassesAttribute extends AttributeInfo {
      * @return null or the class name.
      * @see ConstPool#getClassInfo(int)
      */
-    public String innerClass(int nth) {
+    public String innerClass(int nth){
         int i = innerClassIndex(nth);
-        if (i == 0)
+        if (i == 0){
             return null;
+        }
         return constPool.getClassInfo(i);
     }
 
@@ -80,14 +82,14 @@ public class InnerClassesAttribute extends AttributeInfo {
      * Sets <code>classes[nth].inner_class_info_index</code> to
      * the given index.
      */
-    public void setInnerClassIndex(int nth, int index) {
+    public void setInnerClassIndex(int nth,int index){
         ByteArray.write16bit(index, get(), nth * 8 + 2);
     }
 
     /**
      * Returns <code>classes[nth].outer_class_info_index</code>.
      */
-    public int outerClassIndex(int nth) {
+    public int outerClassIndex(int nth){
         return ByteArray.readU16bit(get(), nth * 8 + 4);
     }
 
@@ -97,10 +99,11 @@ public class InnerClassesAttribute extends AttributeInfo {
      *
      * @return null or the class name.
      */
-    public String outerClass(int nth) {
+    public String outerClass(int nth){
         int i = outerClassIndex(nth);
-        if (i == 0)
+        if (i == 0){
             return null;
+        }
         return constPool.getClassInfo(i);
     }
 
@@ -108,14 +111,14 @@ public class InnerClassesAttribute extends AttributeInfo {
      * Sets <code>classes[nth].outer_class_info_index</code> to
      * the given index.
      */
-    public void setOuterClassIndex(int nth, int index) {
+    public void setOuterClassIndex(int nth,int index){
         ByteArray.write16bit(index, get(), nth * 8 + 4);
     }
 
     /**
      * Returns <code>classes[nth].inner_name_index</code>.
      */
-    public int innerNameIndex(int nth) {
+    public int innerNameIndex(int nth){
         return ByteArray.readU16bit(get(), nth * 8 + 6);
     }
 
@@ -125,10 +128,11 @@ public class InnerClassesAttribute extends AttributeInfo {
      *
      * @return null or the class name.
      */
-    public String innerName(int nth) {
+    public String innerName(int nth){
         int i = innerNameIndex(nth);
-        if (i == 0)
+        if (i == 0){
             return null;
+        }
         return constPool.getUtf8Info(i);
     }
 
@@ -136,14 +140,14 @@ public class InnerClassesAttribute extends AttributeInfo {
      * Sets <code>classes[nth].inner_name_index</code> to
      * the given index.
      */
-    public void setInnerNameIndex(int nth, int index) {
+    public void setInnerNameIndex(int nth,int index){
         ByteArray.write16bit(index, get(), nth * 8 + 6);
     }
 
     /**
      * Returns <code>classes[nth].inner_class_access_flags</code>.
      */
-    public int accessFlags(int nth) {
+    public int accessFlags(int nth){
         return ByteArray.readU16bit(get(), nth * 8 + 8);
     }
 
@@ -151,22 +155,25 @@ public class InnerClassesAttribute extends AttributeInfo {
      * Sets <code>classes[nth].inner_class_access_flags</code> to
      * the given index.
      */
-    public void setAccessFlags(int nth, int flags) {
+    public void setAccessFlags(int nth,int flags){
         ByteArray.write16bit(flags, get(), nth * 8 + 8);
     }
 
     /**
      * Finds the entry for the given inner class.
      *
-     * @param name      the fully-qualified class name separated by dot and $.
+     * @param name
+     *            the fully-qualified class name separated by dot and $.
      * @return the index or -1 if not found.
      * @since 3.22
      */
-    public int find(String name) {
+    public int find(String name){
         int n = tableLength();
-        for (int i = 0; i < n; i++)
-            if (name.equals(innerClass(i)))
+        for (int i = 0; i < n; i++){
+            if (name.equals(innerClass(i))){
                 return i;
+            }
+        }
 
         return -1;
     }
@@ -174,12 +181,16 @@ public class InnerClassesAttribute extends AttributeInfo {
     /**
      * Appends a new entry.
      *
-     * @param inner     <code>inner_class_info_index</code>
-     * @param outer     <code>outer_class_info_index</code>
-     * @param name      <code>inner_name_index</code>
-     * @param flags     <code>inner_class_access_flags</code>
+     * @param inner
+     *            <code>inner_class_info_index</code>
+     * @param outer
+     *            <code>outer_class_info_index</code>
+     * @param name
+     *            <code>inner_name_index</code>
+     * @param flags
+     *            <code>inner_class_access_flags</code>
      */
-    public void append(String inner, String outer, String name, int flags) {
+    public void append(String inner,String outer,String name,int flags){
         int i = constPool.addClassInfo(inner);
         int o = constPool.addClassInfo(outer);
         int n = constPool.addUtf8Info(name);
@@ -189,17 +200,22 @@ public class InnerClassesAttribute extends AttributeInfo {
     /**
      * Appends a new entry.
      *
-     * @param inner     <code>inner_class_info_index</code>
-     * @param outer     <code>outer_class_info_index</code>
-     * @param name      <code>inner_name_index</code>
-     * @param flags     <code>inner_class_access_flags</code>
+     * @param inner
+     *            <code>inner_class_info_index</code>
+     * @param outer
+     *            <code>outer_class_info_index</code>
+     * @param name
+     *            <code>inner_name_index</code>
+     * @param flags
+     *            <code>inner_class_access_flags</code>
      */
-    public void append(int inner, int outer, int name, int flags) {
+    public void append(int inner,int outer,int name,int flags){
         byte[] data = get();
         int len = data.length;
         byte[] newData = new byte[len + 8];
-        for (int i = 2; i < len; ++i)
+        for (int i = 2; i < len; ++i){
             newData[i] = data[i];
+        }
 
         int n = ByteArray.readU16bit(data, 0);
         ByteArray.write16bit(n + 1, newData, 0);
@@ -213,49 +229,56 @@ public class InnerClassesAttribute extends AttributeInfo {
     }
 
     /**
-     * Removes the {@code nth} entry.  It does not eliminate
+     * Removes the {@code nth} entry. It does not eliminate
      * constant pool items that the removed entry refers to.
      * {@link ClassFile#compact()} should be executed to remove
-     * these unnecessary items. 
+     * these unnecessary items.
      *
-     * @param nth       0, 1, 2, ...
-     * @return  the number of items after the removal.
+     * @param nth
+     *            0, 1, 2, ...
+     * @return the number of items after the removal.
      * @see ClassFile#compact()
      */
-    public int remove(int nth) {
+    public int remove(int nth){
         byte[] data = get();
         int len = data.length;
-        if (len < 10)
+        if (len < 10){
             return 0;
+        }
 
         int n = ByteArray.readU16bit(data, 0);
         int nthPos = 2 + nth * 8;
-        if (n <= nth)
+        if (n <= nth){
             return n;
+        }
 
         byte[] newData = new byte[len - 8];
         ByteArray.write16bit(n - 1, newData, 0);
         int i = 2, j = 2;
-        while (i < len)
-            if (i == nthPos)
+        while (i < len){
+            if (i == nthPos){
                 i += 8;
-            else
+            }else{
                 newData[j++] = data[i++];
+            }
+        }
 
         set(newData);
         return n - 1;
     }
 
     /**
-     * Makes a copy.  Class names are replaced according to the
+     * Makes a copy. Class names are replaced according to the
      * given <code>Map</code> object.
      *
-     * @param newCp     the constant pool table used by the new copy.
-     * @param classnames        pairs of replaced and substituted
-     *                          class names.
+     * @param newCp
+     *            the constant pool table used by the new copy.
+     * @param classnames
+     *            pairs of replaced and substituted
+     *            class names.
      */
     @Override
-    public AttributeInfo copy(ConstPool newCp, Map<String,String> classnames) {
+    public AttributeInfo copy(ConstPool newCp,Map<String, String> classnames){
         byte[] src = get();
         byte[] dest = new byte[src.length];
         ConstPool cp = getConstPool();
@@ -263,24 +286,27 @@ public class InnerClassesAttribute extends AttributeInfo {
         int n = ByteArray.readU16bit(src, 0);
         ByteArray.write16bit(n, dest, 0);
         int j = 2;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i){
             int innerClass = ByteArray.readU16bit(src, j);
             int outerClass = ByteArray.readU16bit(src, j + 2);
             int innerName = ByteArray.readU16bit(src, j + 4);
             int innerAccess = ByteArray.readU16bit(src, j + 6);
 
-            if (innerClass != 0)
+            if (innerClass != 0){
                 innerClass = cp.copy(innerClass, newCp, classnames);
+            }
 
             ByteArray.write16bit(innerClass, dest, j);
 
-            if (outerClass != 0)
+            if (outerClass != 0){
                 outerClass = cp.copy(outerClass, newCp, classnames);
+            }
 
             ByteArray.write16bit(outerClass, dest, j + 2);
 
-            if (innerName != 0)
+            if (innerName != 0){
                 innerName = cp.copy(innerName, newCp, classnames);
+            }
 
             ByteArray.write16bit(innerName, dest, j + 4);
             ByteArray.write16bit(innerAccess, dest, j + 6);

@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTUnsignedShiftRight extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8111586890804900475L;
+
     public ASTUnsignedShiftRight(int id){
         super(id);
     }
@@ -71,7 +76,7 @@ class ASTUnsignedShiftRight extends NumericExpression{
             Object v1 = _children[0].getValue(context, target);
             int type = OgnlOps.getNumericType(v1);
 
-            if (type <= OgnlOps.INT){
+            if (type <= NumericTypes.INT){
                 child1 = "(int)" + child1;
                 child2 = "(int)" + child2;
             }

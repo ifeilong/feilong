@@ -33,12 +33,12 @@ import com.feilong.lib.net.ftp.FTPFile;
  * @version $Id$
  * @since 1.5
  */
-public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
+public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
 
     /**
      * Default date format is e.g. Feb 22 2006
      */
-    private static final String DEFAULT_DATE_FORMAT = "MMM dd yyyy";
+    private static final String DEFAULT_DATE_FORMAT        = "MMM dd yyyy";
 
     /**
      * Default recent date format is e.g. Feb 22 17:32
@@ -47,23 +47,23 @@ public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
 
     /**
      * this is the regular expression used by this parser.
-     * Example: d [-W---F--] SCION_VOL2                        512 Apr 13 23:12 VOL2
+     * Example: d [-W---F--] SCION_VOL2 512 Apr 13 23:12 VOL2
      */
-    private static final String REGEX = "(d|-){1}\\s+"      // Directory/file flag
-            + "\\[([-A-Z]+)\\]\\s+"                         // Attributes RWCEAFMS or -
-            + "(\\S+)\\s+" + "(\\d+)\\s+"                   // Owner and size
-            + "(\\S+\\s+\\S+\\s+((\\d+:\\d+)|(\\d{4})))"    // Long/short date format
-            + "\\s+(.*)";                                   // Filename (incl. spaces)
+    private static final String REGEX                      = "(d|-){1}\\s+"                       // Directory/file flag
+                    + "\\[([-A-Z]+)\\]\\s+"                                                       // Attributes RWCEAFMS or -
+                    + "(\\S+)\\s+" + "(\\d+)\\s+"                                                 // Owner and size
+                    + "(\\S+\\s+\\S+\\s+((\\d+:\\d+)|(\\d{4})))"                                  // Long/short date format
+                    + "\\s+(.*)";                                                                 // Filename (incl. spaces)
 
     /**
      * The default constructor for a NetwareFTPEntryParser object.
      *
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen
-     * under normal conditions.  It it is seen, this is a sign that
-     * <code>REGEX</code> is  not a valid regular expression.
+     *             Thrown if the regular expression is unparseable. Should not be seen
+     *             under normal conditions. It it is seen, this is a sign that
+     *             <code>REGEX</code> is not a valid regular expression.
      */
-    public NetwareFTPEntryParser() {
+    public NetwareFTPEntryParser(){
         this(null);
     }
 
@@ -71,27 +71,28 @@ public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * This constructor allows the creation of an NetwareFTPEntryParser object
      * with something other than the default configuration.
      *
-     * @param config The {@link FTPClientConfig configuration} object used to
-     * configure this parser.
+     * @param config
+     *            The {@link FTPClientConfig configuration} object used to
+     *            configure this parser.
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen
-     * under normal conditions.  It it is seen, this is a sign that
-     * <code>REGEX</code> is  not a valid regular expression.
+     *             Thrown if the regular expression is unparseable. Should not be seen
+     *             under normal conditions. It it is seen, this is a sign that
+     *             <code>REGEX</code> is not a valid regular expression.
      * @since 1.4
      */
-    public NetwareFTPEntryParser(FTPClientConfig config) {
+    public NetwareFTPEntryParser(FTPClientConfig config){
         super(REGEX);
         configure(config);
     }
 
     /**
      * Parses a line of an NetwareFTP server file listing and converts it into a
-     * usable format in the form of an <code> FTPFile </code> instance.  If the
+     * usable format in the form of an <code> FTPFile </code> instance. If the
      * file listing line doesn't describe a file, <code> null </code> is
      * returned, otherwise a <code> FTPFile </code> instance representing the
      * files in the directory is returned.
      * <p>
-     * Netware file permissions are in the following format:  RWCEAFMS, and are explained as follows:
+     * Netware file permissions are in the following format: RWCEAFMS, and are explained as follows:
      * <ul>
      * <li><b>S</b> - Supervisor; All rights.
      * <li><b>R</b> - Read; Right to open and read or execute.
@@ -108,14 +109,15 @@ public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * here</a>
      * for more details
      *
-     * @param entry A line of text from the file listing
+     * @param entry
+     *            A line of text from the file listing
      * @return An FTPFile instance corresponding to the supplied entry
      */
     @Override
-    public FTPFile parseFTPEntry(String entry) {
+    public FTPFile parseFTPEntry(String entry){
 
         FTPFile f = new FTPFile();
-        if (matches(entry)) {
+        if (matches(entry)){
             String dirString = group(1);
             String attrib = group(2);
             String user = group(3);
@@ -123,16 +125,16 @@ public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
             String datestr = group(5);
             String name = group(9);
 
-            try {
+            try{
                 f.setTimestamp(super.parseTimestamp(datestr));
-            } catch (ParseException e) {
-                 // intentionally do nothing
+            }catch (ParseException e){
+                // intentionally do nothing
             }
 
             //is it a DIR or a file
-            if (dirString.trim().equals("d")) {
+            if (dirString.trim().equals("d")){
                 f.setType(FTPFile.DIRECTORY_TYPE);
-            } else // Should be "-"
+            }else // Should be "-"
             {
                 f.setType(FTPFile.FILE_TYPE);
             }
@@ -147,13 +149,11 @@ public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
 
             // Now set the permissions (or at least a subset thereof - full permissions would probably require
             // subclassing FTPFile and adding extra metainformation there)
-            if (attrib.indexOf("R") != -1) {
-                f.setPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION,
-                        true);
+            if (attrib.indexOf("R") != -1){
+                f.setPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION, true);
             }
-            if (attrib.indexOf("W") != -1) {
-                f.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION,
-                        true);
+            if (attrib.indexOf("W") != -1){
+                f.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
             }
 
             return (f);
@@ -164,14 +164,14 @@ public class NetwareFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
 
     /**
      * Defines a default configuration to be used when this class is
-     * instantiated without a {@link  FTPClientConfig  FTPClientConfig}
+     * instantiated without a {@link FTPClientConfig FTPClientConfig}
      * parameter being specified.
+     * 
      * @return the default configuration for this parser.
      */
     @Override
-    protected FTPClientConfig getDefaultConfiguration() {
-        return new FTPClientConfig(FTPClientConfig.SYST_NETWARE,
-                DEFAULT_DATE_FORMAT, DEFAULT_RECENT_DATE_FORMAT);
+    protected FTPClientConfig getDefaultConfiguration(){
+        return new FTPClientConfig(FTPClientConfig.SYST_NETWARE, DEFAULT_DATE_FORMAT, DEFAULT_RECENT_DATE_FORMAT);
     }
 
 }

@@ -47,6 +47,7 @@ public class JavaBeanConverter implements Converter{
     /**
      * @deprecated As of 1.3, no necessity for field anymore.
      */
+    @Deprecated
     private String                   classAttributeIdentifier;
 
     public JavaBeanConverter(Mapper mapper){
@@ -71,6 +72,7 @@ public class JavaBeanConverter implements Converter{
      * @deprecated As of 1.3, use {@link #JavaBeanConverter(Mapper)} and
      *             {@link com.feilong.lib.xstream.XStream#aliasAttribute(String, String)}
      */
+    @Deprecated
     public JavaBeanConverter(Mapper mapper, String classAttributeIdentifier){
         this(mapper, new BeanProvider());
         this.classAttributeIdentifier = classAttributeIdentifier;
@@ -131,6 +133,11 @@ public class JavaBeanConverter implements Converter{
         final Object result = instantiateNewInstance(context);
         final Set seenProperties = new HashSet(){
 
+            /**
+             * 
+             */
+            private static final long serialVersionUID = -4204717529055942619L;
+
             @Override
             public boolean add(Object e){
                 if (!super.add(e)){
@@ -186,7 +193,13 @@ public class JavaBeanConverter implements Converter{
     /**
      * @deprecated As of 1.3
      */
+    @Deprecated
     public static class DuplicateFieldException extends ConversionException{
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 5193033042061884931L;
 
         public DuplicateFieldException(String msg){
             super(msg);
@@ -200,6 +213,11 @@ public class JavaBeanConverter implements Converter{
      * @since 1.4.2
      */
     public static class DuplicatePropertyException extends ConversionException{
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 1649950004602558210L;
 
         public DuplicatePropertyException(String msg){
             super("Duplicate property " + msg);

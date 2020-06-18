@@ -25,31 +25,38 @@ import com.feilong.lib.javassist.bytecode.ClassFilePrinter;
 
 /**
  * Dump is a tool for viewing the class definition in the given
- * class file.  Unlike the JDK javap tool, Dump works even if
+ * class file. Unlike the JDK javap tool, Dump works even if
  * the class file is broken.
  *
- * <p>For example,
- * <pre>% java javassist.tools.Dump foo.class</pre>
+ * <p>
+ * For example,
+ * 
+ * <pre>
+ * % java javassist.tools.Dump foo.class
+ * </pre>
  *
- * <p>prints the contents of the constant pool and the list of methods
+ * <p>
+ * prints the contents of the constant pool and the list of methods
  * and fields.
  */
-public class Dump {
-    private Dump() {}
+public class Dump{
+
+    private Dump(){
+    }
 
     /**
      * Main method.
      *
-     * @param args           <code>args[0]</code> is the class file name.
+     * @param args
+     *            <code>args[0]</code> is the class file name.
      */
-    public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
+    public static void main(String[] args) throws Exception{
+        if (args.length != 1){
             System.err.println("Usage: java Dump <class file name>");
             return;
         }
 
-        DataInputStream in = new DataInputStream(
-                                         new FileInputStream(args[0]));
+        DataInputStream in = new DataInputStream(new FileInputStream(args[0]));
         ClassFile w = new ClassFile(in);
         PrintWriter out = new PrintWriter(System.out, true);
         out.println("*** constant pool ***");

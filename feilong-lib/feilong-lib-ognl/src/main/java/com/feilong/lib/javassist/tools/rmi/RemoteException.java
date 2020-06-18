@@ -20,15 +20,16 @@ package com.feilong.lib.javassist.tools.rmi;
  * <code>RemoteException</code> represents any exception thrown
  * during remote method invocation.
  */
-public class RemoteException extends RuntimeException {
+public class RemoteException extends RuntimeException{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public RemoteException(String msg) {
+    public RemoteException(String msg){
         super(msg);
     }
 
-    public RemoteException(Exception e) {
+    public RemoteException(Exception e){
         super("by " + e.toString());
     }
 }

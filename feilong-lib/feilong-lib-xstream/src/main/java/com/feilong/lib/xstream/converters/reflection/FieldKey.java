@@ -60,17 +60,21 @@ public class FieldKey{
 
     @Override
     public boolean equals(Object o){
-        if (this == o)
+        if (this == o){
             return true;
-        if (!(o instanceof FieldKey))
+        }
+        if (!(o instanceof FieldKey)){
             return false;
+        }
 
         final FieldKey fieldKey = (FieldKey) o;
 
-        if (!declaringClass.equals(fieldKey.declaringClass))
+        if (!declaringClass.equals(fieldKey.declaringClass)){
             return false;
-        if (!fieldName.equals(fieldKey.fieldName))
+        }
+        if (!fieldName.equals(fieldKey.fieldName)){
             return false;
+        }
 
         return true;
     }

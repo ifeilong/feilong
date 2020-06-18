@@ -46,6 +46,7 @@ public class SelfStreamingInstanceChecker implements Converter{
     /**
      * @deprecated As of 1.4.5 use {@link #SelfStreamingInstanceChecker(ConverterLookup, Object)}
      */
+    @Deprecated
     public SelfStreamingInstanceChecker(Converter defaultConverter, Object xstream){
         this.defaultConverter = defaultConverter;
         this.self = xstream;

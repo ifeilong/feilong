@@ -30,7 +30,8 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.NoSuchElementException;
 
 /**
  * Implementation of ElementsAccessor that returns an iterator over integers from 0 up to
@@ -58,8 +59,9 @@ public class NumberElementsAccessor implements ElementsAccessor,NumericTypes{
 
             @Override
             public Object nextElement(){
-                if (next >= finish)
+                if (next >= finish){
                     throw new NoSuchElementException();
+                }
                 return OgnlOps.newInteger(type, next++);
             }
         };

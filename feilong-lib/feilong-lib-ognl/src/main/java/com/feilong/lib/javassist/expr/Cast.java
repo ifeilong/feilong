@@ -38,11 +38,12 @@ import com.feilong.lib.javassist.compiler.ast.ASTList;
 /**
  * Explicit type cast.
  */
-public class Cast extends Expr {
+public class Cast extends Expr{
+
     /**
-     * Undocumented constructor.  Do not use; internal-use only.
+     * Undocumented constructor. Do not use; internal-use only.
      */
-    protected Cast(int pos, CodeIterator i, CtClass declaring, MethodInfo m) {
+    protected Cast(int pos, CodeIterator i, CtClass declaring, MethodInfo m){
         super(pos, i, declaring, m);
     }
 
@@ -51,26 +52,28 @@ public class Cast extends Expr {
      * expression represented by this object.
      */
     @Override
-    public CtBehavior where() { return super.where(); }
+    public CtBehavior where(){
+        return super.where();
+    }
 
     /**
      * Returns the line number of the source line containing the
      * type-cast expression.
      *
-     * @return -1       if this information is not available.
+     * @return -1 if this information is not available.
      */
     @Override
-    public int getLineNumber() {
+    public int getLineNumber(){
         return super.getLineNumber();
     }
 
     /**
      * Returns the source file containing the type-cast expression.
      *
-     * @return null     if this information is not available.
+     * @return null if this information is not available.
      */
     @Override
-    public String getFileName() {
+    public String getFileName(){
         return super.getFileName();
     }
 
@@ -78,7 +81,7 @@ public class Cast extends Expr {
      * Returns the <code>CtClass</code> object representing
      * the type specified by the cast.
      */
-    public CtClass getType() throws NotFoundException {
+    public CtClass getType() throws NotFoundException{
         ConstPool cp = getConstPool();
         int pos = currentPos;
         int index = iterator.u16bitAt(pos + 1);
@@ -93,7 +96,7 @@ public class Cast extends Expr {
      * the throws declaration allows the method to throw.
      */
     @Override
-    public CtClass[] mayThrow() {
+    public CtClass[] mayThrow(){
         return super.mayThrow();
     }
 
@@ -101,13 +104,15 @@ public class Cast extends Expr {
      * Replaces the explicit cast operator with the bytecode derived from
      * the given source text.
      *
-     * <p>$0 is available but the value is <code>null</code>.
+     * <p>
+     * $0 is available but the value is <code>null</code>.
      *
-     * @param statement         a Java statement except try-catch.
+     * @param statement
+     *            a Java statement except try-catch.
      */
     @Override
-    public void replace(String statement) throws CannotCompileException {
-        thisClass.getClassFile();   // to call checkModify().
+    public void replace(String statement) throws CannotCompileException{
+        thisClass.getClassFile(); // to call checkModify().
         @SuppressWarnings("unused")
         ConstPool constPool = getConstPool();
         int pos = currentPos;
@@ -117,18 +122,17 @@ public class Cast extends Expr {
         ClassPool cp = thisClass.getClassPool();
         CodeAttribute ca = iterator.get();
 
-        try {
-            CtClass[] params
-                = new CtClass[] { cp.get(javaLangObject) };
+        try{
+            CtClass[] params = new CtClass[] { cp.get(javaLangObject) };
             CtClass retType = getType();
 
             int paramVar = ca.getMaxLocals();
-            jc.recordParams(javaLangObject, params, true, paramVar,
-                            withinStatic());
+            jc.recordParams(javaLangObject, params, true, paramVar, withinStatic());
             int retVar = jc.recordReturnType(retType, true);
             jc.recordProceed(new ProceedForCast(index, retType));
 
-            /* Is $_ included in the source code?
+            /*
+             * Is $_ included in the source code?
              */
             checkResultValue(retType, statement);
 
@@ -137,39 +141,40 @@ public class Cast extends Expr {
             jc.recordLocalVariables(ca, pos);
 
             bytecode.addConstZero(retType);
-            bytecode.addStore(retVar, retType);     // initialize $_
+            bytecode.addStore(retVar, retType); // initialize $_
 
             jc.compileStmnt(statement);
             bytecode.addLoad(retVar, retType);
 
             replace0(pos, bytecode, 3);
-        }
-        catch (CompileError e) { throw new CannotCompileException(e); }
-        catch (NotFoundException e) { throw new CannotCompileException(e); }
-        catch (BadBytecode e) {
+        }catch (CompileError e){
+            throw new CannotCompileException(e);
+        }catch (NotFoundException e){
+            throw new CannotCompileException(e);
+        }catch (BadBytecode e){
             throw new CannotCompileException("broken method");
         }
     }
 
-    /* <type> $proceed(Object obj)
+    /*
+     * <type> $proceed(Object obj)
      */
-    static class ProceedForCast implements ProceedHandler {
-        int index;
+    static class ProceedForCast implements ProceedHandler{
+
+        int     index;
+
         CtClass retType;
 
-        ProceedForCast(int i, CtClass t) {
+        ProceedForCast(int i, CtClass t){
             index = i;
             retType = t;
         }
 
         @Override
-        public void doit(JvstCodeGen gen, Bytecode bytecode, ASTList args)
-            throws CompileError
-        {
-            if (gen.getMethodArgsLength(args) != 1)
-                throw new CompileError(Javac.proceedName
-                        + "() cannot take more than one parameter "
-                        + "for cast");
+        public void doit(JvstCodeGen gen,Bytecode bytecode,ASTList args) throws CompileError{
+            if (gen.getMethodArgsLength(args) != 1){
+                throw new CompileError(Javac.proceedName + "() cannot take more than one parameter " + "for cast");
+            }
 
             gen.atMethodArgs(args, new int[1], new int[1], new String[1]);
             bytecode.addOpcode(Opcode.CHECKCAST);
@@ -178,9 +183,7 @@ public class Cast extends Expr {
         }
 
         @Override
-        public void setReturnType(JvstTypeChecker c, ASTList args)
-            throws CompileError
-        {
+        public void setReturnType(JvstTypeChecker c,ASTList args) throws CompileError{
             c.atMethodArgs(args, new int[1], new int[1], new String[1]);
             c.setType(retType);
         }

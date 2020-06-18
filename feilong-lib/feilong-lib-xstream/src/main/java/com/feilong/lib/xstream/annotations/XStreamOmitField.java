@@ -10,10 +10,10 @@
  */
 package com.feilong.lib.xstream.annotations;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.lang.annotation.ElementType;
 
 /**
  * Declares a field to be omitted. The result is the same as invoking the method

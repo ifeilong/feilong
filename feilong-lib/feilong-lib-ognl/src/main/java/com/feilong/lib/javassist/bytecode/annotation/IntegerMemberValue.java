@@ -28,16 +28,18 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class IntegerMemberValue extends MemberValue {
+public class IntegerMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs an int constant value.  The initial value is specified
+     * Constructs an int constant value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index     the index of a CONSTANT_Integer_info structure.
+     * @param index
+     *            the index of a CONSTANT_Integer_info structure.
      */
-    public IntegerMemberValue(int index, ConstPool cp) {
+    public IntegerMemberValue(int index, ConstPool cp){
         super('I', cp);
         this.valueIndex = index;
     }
@@ -51,42 +53,43 @@ public class IntegerMemberValue extends MemberValue {
      * an index into the constant pool table as the first parameter.
      * Note that the index is also int type.
      *
-     * @param value         the initial value.
+     * @param value
+     *            the initial value.
      */
-    public IntegerMemberValue(ConstPool cp, int value) {
+    public IntegerMemberValue(ConstPool cp, int value){
         super('I', cp);
         setValue(value);
     }
 
     /**
-     * Constructs an int constant value.  The initial value is 0.
+     * Constructs an int constant value. The initial value is 0.
      */
-    public IntegerMemberValue(ConstPool cp) {
+    public IntegerMemberValue(ConstPool cp){
         super('I', cp);
         setValue(0);
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m) {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m){
         return Integer.valueOf(getValue());
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) {
+    Class<?> getType(ClassLoader cl){
         return int.class;
     }
 
     /**
      * Obtains the value of the member.
      */
-    public int getValue() {
+    public int getValue(){
         return cp.getIntegerInfo(valueIndex);
     }
 
     /**
      * Sets the value of the member.
      */
-    public void setValue(int newValue) {
+    public void setValue(int newValue){
         valueIndex = cp.addIntegerInfo(newValue);
     }
 
@@ -94,7 +97,7 @@ public class IntegerMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return Integer.toString(getValue());
     }
 
@@ -102,7 +105,7 @@ public class IntegerMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.constValueIndex(getValue());
     }
 
@@ -110,7 +113,7 @@ public class IntegerMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitIntegerMemberValue(this);
     }
 }

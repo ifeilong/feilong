@@ -38,6 +38,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTTest extends ExpressionNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2651347502163713066L;
+
     public ASTTest(int id){
         super(id);
     }
@@ -67,19 +72,22 @@ class ASTTest extends ExpressionNode{
 
     @Override
     public String toGetSourceString(OgnlContext context,Object target){
-        if (target == null)
+        if (target == null){
             throw new UnsupportedCompilationException("evaluation resulted in null expression.");
+        }
 
-        if (_children.length != 3)
+        if (_children.length != 3){
             throw new UnsupportedCompilationException("Can only compile test expressions with two children." + _children.length);
+        }
 
         String result = "";
 
         try{
 
             String first = OgnlRuntime.getChildSource(context, target, _children[0]);
-            if (!OgnlRuntime.isBoolean(first) && !context.getCurrentType().isPrimitive())
+            if (!OgnlRuntime.isBoolean(first) && !context.getCurrentType().isPrimitive()){
                 first = OgnlRuntime.getCompiler().createLocalReference(context, first, context.getCurrentType());
+            }
 
             if (ExpressionNode.class.isInstance(_children[0])){
                 first = "(" + first + ")";
@@ -88,8 +96,9 @@ class ASTTest extends ExpressionNode{
             String second = OgnlRuntime.getChildSource(context, target, _children[1]);
             Class secondType = context.getCurrentType();
 
-            if (!OgnlRuntime.isBoolean(second) && !context.getCurrentType().isPrimitive())
+            if (!OgnlRuntime.isBoolean(second) && !context.getCurrentType().isPrimitive()){
                 second = OgnlRuntime.getCompiler().createLocalReference(context, second, context.getCurrentType());
+            }
 
             if (ExpressionNode.class.isInstance(_children[1])){
                 second = "(" + second + ")";
@@ -98,8 +107,9 @@ class ASTTest extends ExpressionNode{
             String third = OgnlRuntime.getChildSource(context, target, _children[2]);
             Class thirdType = context.getCurrentType();
 
-            if (!OgnlRuntime.isBoolean(third) && !context.getCurrentType().isPrimitive())
+            if (!OgnlRuntime.isBoolean(third) && !context.getCurrentType().isPrimitive()){
                 third = OgnlRuntime.getCompiler().createLocalReference(context, third, context.getCurrentType());
+            }
             if (ExpressionNode.class.isInstance(_children[2])){
                 third = "(" + third + ")";
             }

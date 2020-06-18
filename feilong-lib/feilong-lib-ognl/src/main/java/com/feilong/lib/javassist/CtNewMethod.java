@@ -79,12 +79,14 @@ public class CtNewMethod{
     public static CtMethod make(String src,CtClass declaring,String delegateObj,String delegateMethod) throws CannotCompileException{
         Javac compiler = new Javac(declaring);
         try{
-            if (delegateMethod != null)
+            if (delegateMethod != null){
                 compiler.recordProceed(delegateObj, delegateMethod);
+            }
 
             CtMember obj = compiler.compile(src);
-            if (obj instanceof CtMethod)
+            if (obj instanceof CtMethod){
                 return (CtMethod) obj;
+            }
         }catch (CompileError e){
             throw new CannotCompileException(e);
         }
@@ -258,8 +260,9 @@ public class CtNewMethod{
             if ((finfo.getAccessFlags() & AccessFlag.STATIC) == 0){
                 code.addAload(0);
                 code.addGetfield(Bytecode.THIS, fieldName, fieldType);
-            }else
+            }else{
                 code.addGetstatic(Bytecode.THIS, fieldName, fieldType);
+            }
 
             code.addReturn(field.getType());
         }catch (NotFoundException e){
@@ -361,8 +364,9 @@ public class CtNewMethod{
         minfo.setAccessFlags(deleInfo.getAccessFlags());
 
         ExceptionsAttribute eattr = deleInfo.getExceptionsAttribute();
-        if (eattr != null)
+        if (eattr != null){
             minfo.setExceptionsAttribute((ExceptionsAttribute) eattr.copy(cp, null));
+        }
 
         Bytecode code = new Bytecode(cp, 0, 0);
         boolean isStatic = Modifier.isStatic(delegate.getModifiers());

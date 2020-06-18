@@ -32,14 +32,16 @@ class CtNewClass extends CtClassType{
         super(name, cp);
         wasChanged = true;
         String superName;
-        if (isInterface || superclass == null)
+        if (isInterface || superclass == null){
             superName = null;
-        else
+        }else{
             superName = superclass.getName();
+        }
 
         classfile = new ClassFile(isInterface, name, superName);
-        if (isInterface && superclass != null)
+        if (isInterface && superclass != null){
             classfile.setInterfaces(new String[] { superclass.getName() });
+        }
 
         setModifiers(Modifier.setPublic(getModifiers()));
         hasConstructor = isInterface;
@@ -47,8 +49,9 @@ class CtNewClass extends CtClassType{
 
     @Override
     protected void extendToString(StringBuffer buffer){
-        if (hasConstructor)
+        if (hasConstructor){
             buffer.append("hasConstructor ");
+        }
 
         super.extendToString(buffer);
     }
@@ -61,13 +64,14 @@ class CtNewClass extends CtClassType{
 
     @Override
     public void toBytecode(DataOutputStream out) throws CannotCompileException,IOException{
-        if (!hasConstructor)
+        if (!hasConstructor){
             try{
                 inheritAllConstructors();
                 hasConstructor = true;
             }catch (NotFoundException e){
                 throw new CannotCompileException(e);
             }
+        }
 
         super.toBytecode(out);
     }
@@ -88,8 +92,7 @@ class CtNewClass extends CtClassType{
         cs = superclazz.getDeclaredConstructors();
 
         int n = 0;
-        for (int i = 0; i < cs.length; ++i){
-            CtConstructor c = cs[i];
+        for (CtConstructor c : cs){
             int mod = c.getModifiers();
             if (isInheritable(mod, superclazz)){
                 CtConstructor cons = CtNewConstructor.make(c.getParameterTypes(), c.getExceptionTypes(), this);
@@ -99,20 +102,23 @@ class CtNewClass extends CtClassType{
             }
         }
 
-        if (n < 1)
+        if (n < 1){
             throw new CannotCompileException("no inheritable constructor in " + superclazz.getName());
+        }
 
     }
 
     private boolean isInheritable(int mod,CtClass superclazz){
-        if (Modifier.isPrivate(mod))
+        if (Modifier.isPrivate(mod)){
             return false;
+        }
 
         if (Modifier.isPackage(mod)){
             String pname = getPackageName();
             String pname2 = superclazz.getPackageName();
-            if (pname == null)
+            if (pname == null){
                 return pname2 == null;
+            }
             return pname.equals(pname2);
         }
 

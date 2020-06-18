@@ -61,8 +61,9 @@ public class ClassCacheImpl implements ClassCache{
 
     @Override
     public final Object put(Class key,Object value){
-        if (_classInspector != null && !_classInspector.shouldCache(key))
+        if (_classInspector != null && !_classInspector.shouldCache(key)){
             return value;
+        }
 
         Object result = null;
         int i = key.hashCode() & TABLE_SIZE_MASK;

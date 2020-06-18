@@ -4,7 +4,7 @@ package com.feilong.lib.ognl.enhance;
  * Container class for {@link OgnlExpressionCompiler} generated local method
  * block references.
  */
-public interface LocalReference {
+public interface LocalReference{
 
     /**
      * The name of the assigned variable reference.
@@ -15,12 +15,14 @@ public interface LocalReference {
 
     /**
      * The expression that sets the value, ie the part after <code>&lt;class type&gt; refName = &lt;expression&gt;</code>.
+     * 
      * @return The setting expression.
      */
     String getExpression();
 
     /**
      * The type of reference.
+     * 
      * @return The type.
      */
     Class getType();

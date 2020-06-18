@@ -60,6 +60,7 @@ public class DefaultConverterLookup implements ConverterLookup,ConverterRegistry
     /**
      * @deprecated As of 1.3, use {@link #DefaultConverterLookup()}
      */
+    @Deprecated
     public DefaultConverterLookup(Mapper mapper){
         this();
     }

@@ -56,12 +56,12 @@ public class RulesBase extends AbstractRulesImpl{
      * The set of registered Rule instances, keyed by the matching pattern. Each value is a List containing the Rules
      * for that pattern, in the order that they were orginally registered.
      */
-    protected HashMap<String, List<Rule>> cache = new HashMap<String, List<Rule>>();
+    protected HashMap<String, List<Rule>> cache = new HashMap<>();
 
     /**
      * The set of registered Rule instances, in the order that they were originally registered.
      */
-    protected ArrayList<Rule>             rules = new ArrayList<Rule>();
+    protected ArrayList<Rule>             rules = new ArrayList<>();
 
     // ------------------------------------------------------------- Properties
 
@@ -91,7 +91,7 @@ public class RulesBase extends AbstractRulesImpl{
 
         List<Rule> list = cache.get(pattern);
         if (list == null){
-            list = new ArrayList<Rule>();
+            list = new ArrayList<>();
             cache.put(pattern, list);
         }
         list.add(rule);
@@ -127,7 +127,7 @@ public class RulesBase extends AbstractRulesImpl{
             }
         }
         if (rulesList == null){
-            rulesList = new ArrayList<Rule>();
+            rulesList = new ArrayList<>();
         }
         return (rulesList);
     }
@@ -164,7 +164,7 @@ public class RulesBase extends AbstractRulesImpl{
         }
 
         // Select only Rules that match on the specified namespace URI
-        ArrayList<Rule> results = new ArrayList<Rule>();
+        ArrayList<Rule> results = new ArrayList<>();
         for (Rule item : list){
             if ((namespaceURI.equals(item.getNamespaceURI())) || (item.getNamespaceURI() == null)){
                 results.add(item);

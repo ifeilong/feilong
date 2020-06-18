@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTKeyValue extends SimpleNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8850102307370762835L;
+
     public ASTKeyValue(int id){
         super(id);
     }

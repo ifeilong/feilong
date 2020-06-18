@@ -33,16 +33,18 @@ import com.feilong.lib.javassist.compiler.Javac;
 /**
  * A <code>catch</code> clause or a <code>finally</code> block.
  */
-public class Handler extends Expr {
-    private static String EXCEPTION_NAME = "$1";
+public class Handler extends Expr{
+
+    private static String  EXCEPTION_NAME = "$1";
+
     private ExceptionTable etable;
-    private int index;
+
+    private int            index;
 
     /**
-     * Undocumented constructor.  Do not use; internal-use only.
+     * Undocumented constructor. Do not use; internal-use only.
      */
-    protected Handler(ExceptionTable et, int nth,
-                      CodeIterator it, CtClass declaring, MethodInfo m) {
+    protected Handler(ExceptionTable et, int nth, CodeIterator it, CtClass declaring, MethodInfo m){
         super(et.handlerPc(nth), it, declaring, m);
         etable = et;
         index = nth;
@@ -52,25 +54,27 @@ public class Handler extends Expr {
      * Returns the method or constructor containing the catch clause.
      */
     @Override
-    public CtBehavior where() { return super.where(); }
+    public CtBehavior where(){
+        return super.where();
+    }
 
     /**
      * Returns the source line number of the catch clause.
      *
-     * @return -1       if this information is not available.
+     * @return -1 if this information is not available.
      */
     @Override
-    public int getLineNumber() {
+    public int getLineNumber(){
         return super.getLineNumber();
     }
 
     /**
      * Returns the source file containing the catch clause.
      *
-     * @return null     if this information is not available.
+     * @return null if this information is not available.
      */
     @Override
-    public String getFileName() {
+    public String getFileName(){
         return super.getFileName();
     }
 
@@ -78,7 +82,7 @@ public class Handler extends Expr {
      * Returns the list of exceptions that the catch clause may throw.
      */
     @Override
-    public CtClass[] mayThrow() {
+    public CtClass[] mayThrow(){
         return super.mayThrow();
     }
 
@@ -86,10 +90,11 @@ public class Handler extends Expr {
      * Returns the type handled by the catch clause.
      * If this is a <code>finally</code> block, <code>null</code> is returned.
      */
-    public CtClass getType() throws NotFoundException {
+    public CtClass getType() throws NotFoundException{
         int type = etable.catchType(index);
-        if (type == 0)
+        if (type == 0){
             return null;
+        }
         ConstPool cp = getConstPool();
         String name = cp.getClassInfo(type);
         return thisClass.getClassPool().getCtClass(name);
@@ -98,17 +103,18 @@ public class Handler extends Expr {
     /**
      * Returns true if this is a <code>finally</code> block.
      */
-    public boolean isFinally() {
+    public boolean isFinally(){
         return etable.catchType(index) == 0;
     }
 
     /**
      * This method has not been implemented yet.
      *
-     * @param statement         a Java statement except try-catch.
+     * @param statement
+     *            a Java statement except try-catch.
      */
     @Override
-    public void replace(String statement) throws CannotCompileException {
+    public void replace(String statement) throws CannotCompileException{
         throw new RuntimeException("not implemented yet");
     }
 
@@ -116,10 +122,11 @@ public class Handler extends Expr {
      * Inserts bytecode at the beginning of the catch clause.
      * The caught exception is stored in <code>$1</code>.
      *
-     * @param src       the source code representing the inserted bytecode.
-     *                  It must be a single statement or block.
+     * @param src
+     *            the source code representing the inserted bytecode.
+     *            It must be a single statement or block.
      */
-    public void insertBefore(String src) throws CannotCompileException {
+    public void insertBefore(String src) throws CannotCompileException{
         edited = true;
 
         @SuppressWarnings("unused")
@@ -130,7 +137,7 @@ public class Handler extends Expr {
         b.setStackDepth(1);
         b.setMaxLocals(ca.getMaxLocals());
 
-        try {
+        try{
             CtClass type = getType();
             int var = jv.recordVariable(type, EXCEPTION_NAME);
             jv.recordReturnType(type, false);
@@ -140,8 +147,7 @@ public class Handler extends Expr {
 
             int oldHandler = etable.handlerPc(index);
             b.addOpcode(Opcode.GOTO);
-            b.addIndex(oldHandler - iterator.getCodeLength()
-                       - b.currentPc() + 1);
+            b.addIndex(oldHandler - iterator.getCodeLength() - b.currentPc() + 1);
 
             maxStack = b.getMaxStack();
             maxLocals = b.getMaxLocals();
@@ -149,11 +155,9 @@ public class Handler extends Expr {
             int pos = iterator.append(b.get());
             iterator.append(b.getExceptionTable(), pos);
             etable.setHandlerPc(index, pos);
-        }
-        catch (NotFoundException e) {
+        }catch (NotFoundException e){
             throw new CannotCompileException(e);
-        }
-        catch (CompileError e) {
+        }catch (CompileError e){
             throw new CannotCompileException(e);
         }
     }

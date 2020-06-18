@@ -25,6 +25,11 @@ package com.feilong.lib.xstream.converters;
  */
 public class ConversionException extends ErrorWritingException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6029298263807854826L;
+
     public ConversionException(String msg, Throwable cause){
         super(msg, cause);
     }

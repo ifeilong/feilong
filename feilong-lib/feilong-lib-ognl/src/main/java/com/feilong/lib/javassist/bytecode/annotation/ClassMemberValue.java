@@ -31,16 +31,18 @@ import com.feilong.lib.javassist.bytecode.SignatureAttribute;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class ClassMemberValue extends MemberValue {
+public class ClassMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs a class value.  The initial value is specified
+     * Constructs a class value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index the index of a CONSTANT_Utf8_info structure.
+     * @param index
+     *            the index of a CONSTANT_Utf8_info structure.
      */
-    public ClassMemberValue(int index, ConstPool cp) {
+    public ClassMemberValue(int index, ConstPool cp){
         super('c', cp);
         this.valueIndex = index;
     }
@@ -48,9 +50,10 @@ public class ClassMemberValue extends MemberValue {
     /**
      * Constructs a class value.
      *
-     * @param className         the initial value.
+     * @param className
+     *            the initial value.
      */
-    public ClassMemberValue(String className, ConstPool cp) {
+    public ClassMemberValue(String className, ConstPool cp){
         super('c', cp);
         setValue(className);
     }
@@ -59,39 +62,39 @@ public class ClassMemberValue extends MemberValue {
      * Constructs a class value.
      * The initial value is java.lang.Class.
      */
-    public ClassMemberValue(ConstPool cp) {
+    public ClassMemberValue(ConstPool cp){
         super('c', cp);
         setValue("java.lang.Class");
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m)
-            throws ClassNotFoundException {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m) throws ClassNotFoundException{
         final String classname = getValue();
-        if (classname.equals("void"))
+        if (classname.equals("void")){
             return void.class;
-        else if (classname.equals("int"))
+        }else if (classname.equals("int")){
             return int.class;
-        else if (classname.equals("byte"))
+        }else if (classname.equals("byte")){
             return byte.class;
-        else if (classname.equals("long"))
+        }else if (classname.equals("long")){
             return long.class;
-        else if (classname.equals("double"))
+        }else if (classname.equals("double")){
             return double.class;
-        else if (classname.equals("float"))
+        }else if (classname.equals("float")){
             return float.class;
-        else if (classname.equals("char"))
+        }else if (classname.equals("char")){
             return char.class;
-        else if (classname.equals("short"))
+        }else if (classname.equals("short")){
             return short.class;
-        else if (classname.equals("boolean"))
+        }else if (classname.equals("boolean")){
             return boolean.class;
-        else
+        }else{
             return loadClass(cl, classname);
+        }
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) throws ClassNotFoundException {
+    Class<?> getType(ClassLoader cl) throws ClassNotFoundException{
         return loadClass(cl, "java.lang.Class");
     }
 
@@ -100,11 +103,11 @@ public class ClassMemberValue extends MemberValue {
      *
      * @return fully-qualified class name.
      */
-    public String getValue() {
+    public String getValue(){
         String v = cp.getUtf8Info(valueIndex);
-        try {
+        try{
             return SignatureAttribute.toTypeSignature(v).jvmTypeName();
-        } catch (BadBytecode e) {
+        }catch (BadBytecode e){
             throw new RuntimeException(e);
         }
     }
@@ -112,9 +115,10 @@ public class ClassMemberValue extends MemberValue {
     /**
      * Sets the value of the member.
      *
-     * @param newClassName      fully-qualified class name.
+     * @param newClassName
+     *            fully-qualified class name.
      */
-    public void setValue(String newClassName) {
+    public void setValue(String newClassName){
         String setTo = Descriptor.of(newClassName);
         valueIndex = cp.addUtf8Info(setTo);
     }
@@ -123,7 +127,7 @@ public class ClassMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return getValue().replace('$', '.') + ".class";
     }
 
@@ -131,7 +135,7 @@ public class ClassMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.classInfoIndex(cp.getUtf8Info(valueIndex));
     }
 
@@ -139,7 +143,7 @@ public class ClassMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitClassMemberValue(this);
     }
 }

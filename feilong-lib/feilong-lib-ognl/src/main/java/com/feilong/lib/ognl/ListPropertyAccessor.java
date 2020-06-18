@@ -31,7 +31,11 @@
 package com.feilong.lib.ognl;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Implementation of PropertyAccessor that uses numbers and dynamic subscripts as properties to
@@ -66,8 +70,9 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
             return result;
         }
 
-        if (name instanceof Number)
+        if (name instanceof Number){
             return list.get(((Number) name).intValue());
+        }
 
         if (name instanceof DynamicSubscript){
             int len = list.size();
@@ -104,20 +109,24 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
             int len = list.size();
             switch (((DynamicSubscript) name).getFlag()) {
                 case DynamicSubscript.FIRST:
-                    if (len > 0)
+                    if (len > 0){
                         list.set(0, value);
+                    }
                     return;
                 case DynamicSubscript.MID:
-                    if (len > 0)
+                    if (len > 0){
                         list.set(len / 2, value);
+                    }
                     return;
                 case DynamicSubscript.LAST:
-                    if (len > 0)
+                    if (len > 0){
                         list.set(len - 1, value);
+                    }
                     return;
                 case DynamicSubscript.ALL:{
-                    if (!(value instanceof Collection))
+                    if (!(value instanceof Collection)){
                         throw new OgnlException("Value must be a collection");
+                    }
                     list.clear();
                     list.addAll((Collection) value);
                     return;
@@ -148,8 +157,9 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
             }
         }
 
-        if (index instanceof Number)
+        if (index instanceof Number){
             return Object.class;
+        }
 
         return null;
     }
@@ -157,8 +167,9 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
     @Override
     public String getSourceAccessor(OgnlContext context,Object target,Object index){
         String indexStr = index.toString();
-        if (indexStr.indexOf('"') >= 0)
+        if (indexStr.indexOf('"') >= 0){
             indexStr = indexStr.replaceAll("\"", "");
+        }
 
         if (String.class.isInstance(index)){
             if (indexStr.equals("size")){
@@ -187,8 +198,9 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
             try{
                 Method m = OgnlRuntime.getReadMethod(target.getClass(), indexStr);
 
-                if (m != null)
+                if (m != null){
                     return super.getSourceAccessor(context, target, index);
+                }
 
             }catch (Throwable t){
                 throw OgnlOps.castToRuntime(t);
@@ -219,8 +231,9 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
     @Override
     public String getSourceSetter(OgnlContext context,Object target,Object index){
         String indexStr = index.toString();
-        if (indexStr.indexOf('"') >= 0)
+        if (indexStr.indexOf('"') >= 0){
             indexStr = indexStr.replaceAll("\"", "");
+        }
 
         // TODO: This feels really inefficient, must be some better way
         // check if the index string represents a method on a custom class implementing java.util.List instead..

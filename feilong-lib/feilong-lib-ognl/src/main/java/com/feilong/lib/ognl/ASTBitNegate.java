@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTBitNegate extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2339414806218315871L;
+
     public ASTBitNegate(int id){
         super(id);
     }

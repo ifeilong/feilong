@@ -54,6 +54,7 @@ public class DefaultMapper implements Mapper{
      *            the ClassLoader used by the XStream instance.
      * @deprecated As of 1.4.5 use {@link #DefaultMapper(ClassLoaderReference)}
      */
+    @Deprecated
     public DefaultMapper(ClassLoader classLoader){
         this(new ClassLoaderReference(classLoader));
     }
@@ -160,6 +161,7 @@ public class DefaultMapper implements Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromAttribute(String name){
         return null;
@@ -168,6 +170,7 @@ public class DefaultMapper implements Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromItemType(String fieldName,Class type){
         return null;
@@ -176,6 +179,7 @@ public class DefaultMapper implements Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromItemType(Class type){
         return null;
@@ -200,6 +204,7 @@ public class DefaultMapper implements Mapper{
      * @deprecated As of 1.3, use combination of {@link #serializedMember(Class, String)} and
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public String aliasForAttribute(Class definedIn,String fieldName){
         return fieldName;
@@ -209,6 +214,7 @@ public class DefaultMapper implements Mapper{
      * @deprecated As of 1.3, use combination of {@link #realMember(Class, String)} and
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     @Override
     public String attributeForAlias(Class definedIn,String alias){
         return alias;
@@ -217,6 +223,7 @@ public class DefaultMapper implements Mapper{
     /**
      * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     @Override
     public SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute){
         return null;

@@ -9,19 +9,22 @@ import java.security.PrivilegedExceptionAction;
  * @author Yasser Zamani
  * @since 3.1.24
  */
-public class UserMethod implements PrivilegedExceptionAction<Object> {
-    private final Object target;
-    private final Method method;
+public class UserMethod implements PrivilegedExceptionAction<Object>{
+
+    private final Object   target;
+
+    private final Method   method;
+
     private final Object[] argsArray;
 
-    public UserMethod(Object target, Method method, Object[] argsArray) {
+    public UserMethod(Object target, Method method, Object[] argsArray){
         this.target = target;
         this.method = method;
         this.argsArray = argsArray;
     }
 
     @Override
-    public Object run() throws Exception {
+    public Object run() throws Exception{
         return method.invoke(target, argsArray);
     }
 }

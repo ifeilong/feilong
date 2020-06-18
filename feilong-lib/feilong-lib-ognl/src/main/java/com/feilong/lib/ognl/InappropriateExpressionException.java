@@ -40,6 +40,11 @@ package com.feilong.lib.ognl;
  */
 public class InappropriateExpressionException extends OgnlException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6168919255005976546L;
+
     public InappropriateExpressionException(Node tree){
         super("Inappropriate OGNL expression: " + tree);
     }

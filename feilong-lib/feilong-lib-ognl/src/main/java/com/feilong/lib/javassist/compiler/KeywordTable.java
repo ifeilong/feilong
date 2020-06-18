@@ -18,17 +18,20 @@ package com.feilong.lib.javassist.compiler;
 
 import java.util.HashMap;
 
-public final class KeywordTable extends HashMap<String,Integer> {
+public final class KeywordTable extends HashMap<String, Integer>{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public KeywordTable() { super(); }
+    public KeywordTable(){
+        super();
+    }
 
-    public int lookup(String name) {
+    public int lookup(String name){
         return containsKey(name) ? get(name) : -1;
     }
 
-    public void append(String name, int t) {
+    public void append(String name,int t){
         put(name, t);
     }
 }

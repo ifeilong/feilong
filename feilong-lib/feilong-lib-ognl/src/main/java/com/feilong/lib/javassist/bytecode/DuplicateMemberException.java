@@ -24,11 +24,12 @@ import com.feilong.lib.javassist.CannotCompileException;
  * @see ClassFile#addMethod(MethodInfo)
  * @see ClassFile#addField(FieldInfo)
  */
-public class DuplicateMemberException extends CannotCompileException {
+public class DuplicateMemberException extends CannotCompileException{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public DuplicateMemberException(String msg) {
+    public DuplicateMemberException(String msg){
         super(msg);
     }
 }

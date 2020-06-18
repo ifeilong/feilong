@@ -21,7 +21,7 @@ import java.util.EventObject;
 
 /**
  * A CopyStreamEvent is triggered after every write performed by a
- * stream copying operation.  The event stores the number of bytes
+ * stream copying operation. The event stores the number of bytes
  * transferred by the write triggering the event as well as the total
  * number of bytes transferred so far by the copy operation.
  *
@@ -31,33 +31,38 @@ import java.util.EventObject;
  * @see Util
  * @version $Id$
  */
-public class CopyStreamEvent extends EventObject
-{
-    private static final long serialVersionUID = -964927635655051867L;
+public class CopyStreamEvent extends EventObject{
+
+    private static final long serialVersionUID    = -964927635655051867L;
 
     /**
      * Constant used to indicate the stream size is unknown.
      */
-    public static final long UNKNOWN_STREAM_SIZE = -1;
+    public static final long  UNKNOWN_STREAM_SIZE = -1;
 
-    private final int bytesTransferred;
-    private final long totalBytesTransferred;
-    private final long streamSize;
+    private final int         bytesTransferred;
+
+    private final long        totalBytesTransferred;
+
+    private final long        streamSize;
 
     /**
      * Creates a new CopyStreamEvent instance.
-     * @param source  The source of the event.
-     * @param totalBytesTransferred The total number of bytes transferred so
-     *   far during a copy operation.
-     * @param bytesTransferred  The number of bytes transferred during the
-     *        write that triggered the CopyStreamEvent.
-     * @param streamSize  The number of bytes in the stream being copied.
-     *          This may be set to <code>UNKNOWN_STREAM_SIZE</code> if the
-     *          size is unknown.
+     * 
+     * @param source
+     *            The source of the event.
+     * @param totalBytesTransferred
+     *            The total number of bytes transferred so
+     *            far during a copy operation.
+     * @param bytesTransferred
+     *            The number of bytes transferred during the
+     *            write that triggered the CopyStreamEvent.
+     * @param streamSize
+     *            The number of bytes in the stream being copied.
+     *            This may be set to <code>UNKNOWN_STREAM_SIZE</code> if the
+     *            size is unknown.
      */
-    public CopyStreamEvent(Object source, long totalBytesTransferred,
-                           int bytesTransferred, long streamSize)
-    {
+    public CopyStreamEvent(Object source, long totalBytesTransferred, int bytesTransferred, long streamSize){
         super(source);
         this.bytesTransferred = bytesTransferred;
         this.totalBytesTransferred = totalBytesTransferred;
@@ -67,22 +72,22 @@ public class CopyStreamEvent extends EventObject
     /**
      * Returns the number of bytes transferred by the write that triggered
      * the event.
+     * 
      * @return The number of bytes transferred by the write that triggered
-     * the vent.
+     *         the vent.
      */
-    public int getBytesTransferred()
-    {
+    public int getBytesTransferred(){
         return bytesTransferred;
     }
 
     /**
      * Returns the total number of bytes transferred so far by the copy
      * operation.
+     * 
      * @return The total number of bytes transferred so far by the copy
-     * operation.
+     *         operation.
      */
-    public long getTotalBytesTransferred()
-    {
+    public long getTotalBytesTransferred(){
         return totalBytesTransferred;
     }
 
@@ -90,22 +95,19 @@ public class CopyStreamEvent extends EventObject
      * Returns the size of the stream being copied.
      * This may be set to <code>UNKNOWN_STREAM_SIZE</code> if the
      * size is unknown.
+     * 
      * @return The size of the stream being copied.
      */
-    public long getStreamSize()
-    {
+    public long getStreamSize(){
         return streamSize;
     }
 
     /**
-      * @since 3.0
+     * @since 3.0
      */
     @Override
     public String toString(){
-        return getClass().getName() + "[source=" + source
-        + ", total=" + totalBytesTransferred
-        + ", bytes=" + bytesTransferred
-        + ", size=" + streamSize
-        + "]";
+        return getClass().getName() + "[source=" + source + ", total=" + totalBytesTransferred + ", bytes=" + bytesTransferred + ", size="
+                        + streamSize + "]";
     }
 }

@@ -42,22 +42,17 @@ public class ThreadSafePropertyEditor{
             throw new IllegalArgumentException(type.getName() + " is not a " + PropertyEditor.class.getName());
         }
         editorType = type;
-        pool = new Pool(initialPoolSize, maxPoolSize, new Pool.Factory(){
-
-            @Override
-            public Object newInstance(){
-                ErrorWritingException ex = null;
-                try{
-                    return editorType.newInstance();
-                }catch (InstantiationException e){
-                    ex = new ConversionException("Faild to call default constructor", e);
-                }catch (IllegalAccessException e){
-                    ex = new ObjectAccessException("Cannot call default constructor", e);
-                }
-                ex.add("construction-type", editorType.getName());
-                throw ex;
+        pool = new Pool(initialPoolSize, maxPoolSize, () -> {
+            ErrorWritingException ex = null;
+            try{
+                return editorType.newInstance();
+            }catch (InstantiationException e1){
+                ex = new ConversionException("Faild to call default constructor", e1);
+            }catch (IllegalAccessException e2){
+                ex = new ObjectAccessException("Cannot call default constructor", e2);
             }
-
+            ex.add("construction-type", editorType.getName());
+            throw ex;
         });
     }
 

@@ -137,8 +137,9 @@ public abstract class CtMember{
             methodTail.next = method;
             if (methodTail == consTail){
                 consTail = method;
-                if (methodTail == fieldTail)
+                if (methodTail == fieldTail){
                     fieldTail = method;
+                }
             }
 
             methodTail = method;
@@ -150,8 +151,9 @@ public abstract class CtMember{
         void addConstructor(CtMember cons){
             cons.next = consTail.next;
             consTail.next = cons;
-            if (consTail == fieldTail)
+            if (consTail == fieldTail){
                 fieldTail = cons;
+            }
 
             consTail = cons;
         }
@@ -178,14 +180,17 @@ public abstract class CtMember{
             while ((node = m.next) != this){
                 if (node == mem){
                     m.next = node.next;
-                    if (node == methodTail)
+                    if (node == methodTail){
                         methodTail = m;
+                    }
 
-                    if (node == consTail)
+                    if (node == consTail){
                         consTail = m;
+                    }
 
-                    if (node == fieldTail)
+                    if (node == fieldTail){
                         fieldTail = m;
+                    }
 
                     break;
                 }
@@ -245,21 +250,23 @@ public abstract class CtMember{
      */
     public boolean visibleFrom(CtClass clazz){
         int mod = getModifiers();
-        if (Modifier.isPublic(mod))
+        if (Modifier.isPublic(mod)){
             return true;
-        else if (Modifier.isPrivate(mod))
+        }else if (Modifier.isPrivate(mod)){
             return clazz == declaringClass;
-        else{ // package or protected
+        }else{ // package or protected
             String declName = declaringClass.getPackageName();
             String fromName = clazz.getPackageName();
             boolean visible;
-            if (declName == null)
+            if (declName == null){
                 visible = fromName == null;
-            else
+            }else{
                 visible = declName.equals(fromName);
+            }
 
-            if (!visible && Modifier.isProtected(mod))
+            if (!visible && Modifier.isProtected(mod)){
                 return clazz.subclassOf(declaringClass);
+            }
 
             return visible;
         }

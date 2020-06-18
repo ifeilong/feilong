@@ -41,7 +41,7 @@ public class RegexRules extends AbstractRulesImpl{
     // --------------------------------------------------------- Fields
 
     /** All registered <code>Rule</code>'s */
-    private ArrayList<RegisteredRule> registeredRules = new ArrayList<RegisteredRule>();
+    private ArrayList<RegisteredRule> registeredRules = new ArrayList<>();
 
     /** The regex strategy used by this RegexRules */
     private RegexMatcher              matcher;
@@ -113,7 +113,7 @@ public class RegexRules extends AbstractRulesImpl{
         //
         // XXX FIX ME - Time And Optimize
         //
-        ArrayList<Rule> rules = new ArrayList<Rule>(registeredRules.size());
+        ArrayList<Rule> rules = new ArrayList<>(registeredRules.size());
         for (RegisteredRule rr : registeredRules){
             if (matcher.match(pattern, rr.pattern)){
                 rules.add(rr.rule);
@@ -127,7 +127,7 @@ public class RegexRules extends AbstractRulesImpl{
      */
     @Override
     public List<Rule> rules(){
-        ArrayList<Rule> rules = new ArrayList<Rule>(registeredRules.size());
+        ArrayList<Rule> rules = new ArrayList<>(registeredRules.size());
         for (RegisteredRule rr : registeredRules){
             rules.add(rr.rule);
         }

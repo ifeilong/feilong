@@ -28,21 +28,17 @@ import com.feilong.lib.digester3.binder.RulesModule;
 /**
  *
  */
-final class XmlRulesModule
-    implements RulesModule
-{
+final class XmlRulesModule implements RulesModule{
 
     private final NameSpaceURIRulesBinder targetRulesBinder;
 
-    private final Set<String> rootSystemIds;
+    private final Set<String>             rootSystemIds;
 
-    private final String rootPath;
+    private final String                  rootPath;
 
-    private WithMemoryRulesBinder memoryRulesBinder;
+    private WithMemoryRulesBinder         memoryRulesBinder;
 
-    public XmlRulesModule( final NameSpaceURIRulesBinder targetRulesBinder, Set<String> rootSystemIds,
-    /* @Nullable */String rootPath )
-    {
+    public XmlRulesModule(final NameSpaceURIRulesBinder targetRulesBinder, Set<String> rootSystemIds, /* @Nullable */String rootPath){
         this.targetRulesBinder = targetRulesBinder;
         this.rootSystemIds = rootSystemIds;
         this.rootPath = rootPath;
@@ -52,67 +48,52 @@ final class XmlRulesModule
      * {@inheritDoc}
      */
     @Override
-    public void configure( RulesBinder rulesBinder )
-    {
-        if ( rulesBinder instanceof WithMemoryRulesBinder )
-        {
+    public void configure(RulesBinder rulesBinder){
+        if (rulesBinder instanceof WithMemoryRulesBinder){
             memoryRulesBinder = (WithMemoryRulesBinder) rulesBinder;
-        }
-        else
-        {
-            memoryRulesBinder = new WithMemoryRulesBinder( rulesBinder );
-            if ( !rootSystemIds.isEmpty() )
-            {
-                memoryRulesBinder.getIncludedFiles().addAll( rootSystemIds );
+        }else{
+            memoryRulesBinder = new WithMemoryRulesBinder(rulesBinder);
+            if (!rootSystemIds.isEmpty()){
+                memoryRulesBinder.getIncludedFiles().addAll(rootSystemIds);
             }
         }
 
         PatternStack patternStack = memoryRulesBinder.getPatternStack();
 
-        if ( rootPath != null )
-        {
-            patternStack.push( rootPath );
+        if (rootPath != null){
+            patternStack.push(rootPath);
         }
 
-        try
-        {
-            forPattern( "digester-rules" ).addRule( new SetNamespaceURIRule( targetRulesBinder ) );
+        try{
+            forPattern("digester-rules").addRule(new SetNamespaceURIRule(targetRulesBinder));
 
-            forPattern( "*/pattern" ).addRule( new PatternRule( patternStack ) );
-            forPattern( "*/include" ).addRule( new IncludeRule( memoryRulesBinder, targetRulesBinder ) );
+            forPattern("*/pattern").addRule(new PatternRule(patternStack));
+            forPattern("*/include").addRule(new IncludeRule(memoryRulesBinder, targetRulesBinder));
 
-            forPattern( "*/bean-property-setter-rule" ).addRule( new BeanPropertySetterRule( targetRulesBinder,
-                                                                                             patternStack ) );
+            forPattern("*/bean-property-setter-rule").addRule(new BeanPropertySetterRule(targetRulesBinder, patternStack));
 
-            forPattern( "*/call-method-rule" ).addRule( new CallMethodRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/call-param-rule" ).addRule( new CallParamRule( targetRulesBinder, patternStack ) );
+            forPattern("*/call-method-rule").addRule(new CallMethodRule(targetRulesBinder, patternStack));
+            forPattern("*/call-param-rule").addRule(new CallParamRule(targetRulesBinder, patternStack));
 
-            forPattern( "*/factory-create-rule" ).addRule( new FactoryCreateRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/node-create-rule" ).addRule( new NodeCreateRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/object-create-rule" ).addRule( new ObjectCreateRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/object-param-rule" ).addRule( new ObjectParamRule( targetRulesBinder, patternStack ) );
+            forPattern("*/factory-create-rule").addRule(new FactoryCreateRule(targetRulesBinder, patternStack));
+            forPattern("*/node-create-rule").addRule(new NodeCreateRule(targetRulesBinder, patternStack));
+            forPattern("*/object-create-rule").addRule(new ObjectCreateRule(targetRulesBinder, patternStack));
+            forPattern("*/object-param-rule").addRule(new ObjectParamRule(targetRulesBinder, patternStack));
 
-            forPattern( "*/set-properties-rule" ).addRule( new SetPropertiesRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/set-properties-rule/alias" )
-                .addRule( new SetPropertiesAliasRule() );
-            forPattern( "*/set-properties-rule/ignore" )
-                .addRule( new SetPropertiesIgnoreRule() );
+            forPattern("*/set-properties-rule").addRule(new SetPropertiesRule(targetRulesBinder, patternStack));
+            forPattern("*/set-properties-rule/alias").addRule(new SetPropertiesAliasRule());
+            forPattern("*/set-properties-rule/ignore").addRule(new SetPropertiesIgnoreRule());
 
-            forPattern( "*/set-property-rule" ).addRule( new SetPropertyRule( targetRulesBinder, patternStack ) );
+            forPattern("*/set-property-rule").addRule(new SetPropertyRule(targetRulesBinder, patternStack));
 
-            forPattern( "*/set-nested-properties-rule" )
-                .addRule( new SetNestedPropertiesRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/set-nested-properties-rule/alias" )
-                .addRule( new SetNestedPropertiesAliasRule() );
-            forPattern( "*/set-nested-properties-rule/ignore" )
-                .addRule( new SetNestedPropertiesIgnoreRule() );
+            forPattern("*/set-nested-properties-rule").addRule(new SetNestedPropertiesRule(targetRulesBinder, patternStack));
+            forPattern("*/set-nested-properties-rule/alias").addRule(new SetNestedPropertiesAliasRule());
+            forPattern("*/set-nested-properties-rule/ignore").addRule(new SetNestedPropertiesIgnoreRule());
 
-            forPattern( "*/set-top-rule" ).addRule( new SetTopRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/set-next-rule" ).addRule( new SetNextRule( targetRulesBinder, patternStack ) );
-            forPattern( "*/set-root-rule" ).addRule( new SetRootRule( targetRulesBinder, patternStack ) );
-        }
-        finally
-        {
+            forPattern("*/set-top-rule").addRule(new SetTopRule(targetRulesBinder, patternStack));
+            forPattern("*/set-next-rule").addRule(new SetNextRule(targetRulesBinder, patternStack));
+            forPattern("*/set-root-rule").addRule(new SetRootRule(targetRulesBinder, patternStack));
+        }finally{
             memoryRulesBinder = null;
         }
     }
@@ -121,9 +102,8 @@ final class XmlRulesModule
      * @param pattern
      * @return
      */
-    protected LinkedRuleBuilder forPattern( String pattern )
-    {
-        return memoryRulesBinder.forPattern( pattern );
+    protected LinkedRuleBuilder forPattern(String pattern){
+        return memoryRulesBinder.forPattern(pattern);
     }
 
 }

@@ -240,9 +240,9 @@ public class DateConverter extends AbstractSingleValueConverter implements Error
                 // try next ...
             }
         }
-        for (int i = 0; i < acceptableFormats.length; i++){
+        for (ThreadSafeSimpleDateFormat acceptableFormat : acceptableFormats){
             try{
-                return acceptableFormats[i].parse(str);
+                return acceptableFormat.parse(str);
             }catch (ParseException e3){
                 // no worries, let's try the next format.
             }
@@ -269,8 +269,8 @@ public class DateConverter extends AbstractSingleValueConverter implements Error
         if (defaultEraFormat != null){
             errorWriter.add("Default era date pattern", defaultEraFormat.toString());
         }
-        for (int i = 0; i < acceptableFormats.length; i++){
-            errorWriter.add("Alternative date pattern", acceptableFormats[i].toString());
+        for (ThreadSafeSimpleDateFormat acceptableFormat : acceptableFormats){
+            errorWriter.add("Alternative date pattern", acceptableFormat.toString());
         }
     }
 }

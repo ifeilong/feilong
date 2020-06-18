@@ -16,6 +16,7 @@
 
 package com.feilong.lib.xstream.converters.enums;
 
+import java.lang.reflect.Field;
 import java.util.EnumMap;
 
 import com.feilong.lib.xstream.converters.ConversionException;
@@ -26,8 +27,6 @@ import com.feilong.lib.xstream.core.util.Fields;
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
-
-import java.lang.reflect.Field;
 
 /**
  * Serializes an Java 5 EnumMap, including the type of Enum it's for. If a SecurityManager is set, the converter will only work with

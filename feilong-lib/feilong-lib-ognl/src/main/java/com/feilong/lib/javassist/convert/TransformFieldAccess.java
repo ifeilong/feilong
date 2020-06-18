@@ -23,19 +23,22 @@ import com.feilong.lib.javassist.bytecode.CodeAttribute;
 import com.feilong.lib.javassist.bytecode.CodeIterator;
 import com.feilong.lib.javassist.bytecode.ConstPool;
 
-final public class TransformFieldAccess extends Transformer {
-    private String newClassname, newFieldname;
-    private String fieldname;
-    private CtClass fieldClass;
-    private boolean isPrivate;
+final public class TransformFieldAccess extends Transformer{
+
+    private String    newClassname, newFieldname;
+
+    private String    fieldname;
+
+    private CtClass   fieldClass;
+
+    private boolean   isPrivate;
 
     /* cache */
-    private int newIndex;
+    private int       newIndex;
+
     private ConstPool constPool;
 
-    public TransformFieldAccess(Transformer next, CtField field,
-                                String newClassname, String newFieldname)
-    {
+    public TransformFieldAccess(Transformer next, CtField field, String newClassname, String newFieldname){
         super(next);
         this.fieldClass = field.getDeclaringClass();
         this.fieldname = field.getName();
@@ -46,34 +49,28 @@ final public class TransformFieldAccess extends Transformer {
     }
 
     @Override
-    public void initialize(ConstPool cp, CodeAttribute attr) {
-        if (constPool != cp)
+    public void initialize(ConstPool cp,CodeAttribute attr){
+        if (constPool != cp){
             newIndex = 0;
+        }
     }
 
     /**
      * Modify GETFIELD, GETSTATIC, PUTFIELD, and PUTSTATIC so that
-     * a different field is accessed.  The new field must be declared
+     * a different field is accessed. The new field must be declared
      * in a superclass of the class in which the original field is
      * declared.
      */
     @Override
-    public int transform(CtClass clazz, int pos,
-                         CodeIterator iterator, ConstPool cp)
-    {
+    public int transform(CtClass clazz,int pos,CodeIterator iterator,ConstPool cp){
         int c = iterator.byteAt(pos);
-        if (c == GETFIELD || c == GETSTATIC
-                                || c == PUTFIELD || c == PUTSTATIC) {
+        if (c == GETFIELD || c == GETSTATIC || c == PUTFIELD || c == PUTSTATIC){
             int index = iterator.u16bitAt(pos + 1);
-            String typedesc
-                = TransformReadField.isField(clazz.getClassPool(), cp,
-                                fieldClass, fieldname, isPrivate, index);
-            if (typedesc != null) {
-                if (newIndex == 0) {
-                    int nt = cp.addNameAndTypeInfo(newFieldname,
-                                                   typedesc);
-                    newIndex = cp.addFieldrefInfo(
-                                        cp.addClassInfo(newClassname), nt);
+            String typedesc = TransformReadField.isField(clazz.getClassPool(), cp, fieldClass, fieldname, isPrivate, index);
+            if (typedesc != null){
+                if (newIndex == 0){
+                    int nt = cp.addNameAndTypeInfo(newFieldname, typedesc);
+                    newIndex = cp.addFieldrefInfo(cp.addClassInfo(newClassname), nt);
                     constPool = cp;
                 }
 

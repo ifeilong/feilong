@@ -128,10 +128,10 @@ public class AbstractAttributedCharacterIteratorAttributeConverter extends Abstr
             if (attributeMap.isEmpty()){
                 try{
                     Field[] fields = type.getDeclaredFields();
-                    for (int i = 0; i < fields.length; ++i){
-                        if (fields[i].getType() == type == Modifier.isStatic(fields[i].getModifiers())){
+                    for (Field field : fields){
+                        if (field.getType() == type == Modifier.isStatic(field.getModifiers())){
                             AttributedCharacterIterator.Attribute attribute = (AttributedCharacterIterator.Attribute) Fields
-                                            .read(fields[i], null);
+                                            .read(field, null);
                             attributeMap.put(toString(attribute), attribute);
                         }
                     }

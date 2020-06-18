@@ -10,13 +10,13 @@
  */
 package com.feilong.lib.xstream.converters.extended;
 
+import java.io.NotSerializableException;
+
 import javax.swing.LookAndFeel;
 
 import com.feilong.lib.xstream.converters.reflection.ReflectionConverter;
 import com.feilong.lib.xstream.converters.reflection.ReflectionProvider;
 import com.feilong.lib.xstream.mapper.Mapper;
-
-import java.io.NotSerializableException;
 
 /**
  * A converter for Swing LookAndFeel implementations. The JDK's implementations are serializable

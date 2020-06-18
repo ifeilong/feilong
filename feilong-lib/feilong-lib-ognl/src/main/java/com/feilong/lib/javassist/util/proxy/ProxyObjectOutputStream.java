@@ -59,10 +59,9 @@ public class ProxyObjectOutputStream extends ObjectOutputStream{
             writeObject(name);
             // we don't write the marker interface ProxyObject
             writeInt(interfaces.length - 1);
-            for (int i = 0; i < interfaces.length; i++){
-                Class<?> interfaze = interfaces[i];
+            for (Class<?> interfaze : interfaces){
                 if (interfaze != ProxyObject.class && interfaze != Proxy.class){
-                    name = interfaces[i].getName();
+                    name = interfaze.getName();
                     writeObject(name);
                 }
             }

@@ -21,25 +21,26 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Instanceof expression.
  */
-public class InstanceOfExpr extends CastExpr {
+public class InstanceOfExpr extends CastExpr{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public InstanceOfExpr(ASTList className, int dim, ASTree expr) {
+    public InstanceOfExpr(ASTList className, int dim, ASTree expr){
         super(className, dim, expr);
     }
 
-    public InstanceOfExpr(int type, int dim, ASTree expr) {
+    public InstanceOfExpr(int type, int dim, ASTree expr){
         super(type, dim, expr);
     }
 
     @Override
-    public String getTag() {
+    public String getTag(){
         return "instanceof:" + castType + ":" + arrayDim;
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError {
+    public void accept(Visitor v) throws CompileError{
         v.atInstanceOfExpr(this);
     }
 }

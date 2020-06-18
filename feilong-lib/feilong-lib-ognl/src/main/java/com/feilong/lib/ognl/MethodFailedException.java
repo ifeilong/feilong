@@ -38,6 +38,11 @@ package com.feilong.lib.ognl;
  */
 public class MethodFailedException extends OgnlException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6611448426296726554L;
+
     public MethodFailedException(Object source, String name){
         super("Method \"" + name + "\" failed for object " + source);
     }

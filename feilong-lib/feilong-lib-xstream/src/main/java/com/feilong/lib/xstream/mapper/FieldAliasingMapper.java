@@ -43,6 +43,7 @@ public class FieldAliasingMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.4.9 use {@link ElementIgnoringMapper#addElementsToIgnore(Pattern)}.
      */
+    @Deprecated
     public void addFieldsToIgnore(final Pattern pattern){
         if (elementIgnoringMapper != null){
             elementIgnoringMapper.addElementsToIgnore(pattern);
@@ -52,6 +53,7 @@ public class FieldAliasingMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.4.9 use {@link ElementIgnoringMapper#omitField(Class, String)}.
      */
+    @Deprecated
     public void omitField(Class definedIn,String fieldName){
         if (elementIgnoringMapper != null){
             elementIgnoringMapper.omitField(definedIn, fieldName);

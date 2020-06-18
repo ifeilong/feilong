@@ -10,7 +10,12 @@ import com.feilong.lib.ognl.enhance.ExpressionCompiler;
  */
 public abstract class NumericExpression extends ExpressionNode implements NodeType{
 
-    protected Class _getterClass;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6526768565100257087L;
+
+    protected Class           _getterClass;
 
     public NumericExpression(int id){
         super(id);
@@ -22,8 +27,9 @@ public abstract class NumericExpression extends ExpressionNode implements NodeTy
 
     @Override
     public Class getGetterClass(){
-        if (_getterClass != null)
+        if (_getterClass != null){
             return _getterClass;
+        }
 
         return Double.TYPE;
     }
@@ -42,12 +48,14 @@ public abstract class NumericExpression extends ExpressionNode implements NodeTy
 
             value = getValueBody(context, target);
 
-            if (value != null)
+            if (value != null){
                 _getterClass = value.getClass();
+            }
 
             for (int i = 0; i < _children.length; i++){
-                if (i > 0)
+                if (i > 0){
                     result += " " + getExpressionOperator(i) + " ";
+                }
 
                 String str = OgnlRuntime.getChildSource(context, target, _children[i]);
 
@@ -81,8 +89,9 @@ public abstract class NumericExpression extends ExpressionNode implements NodeTy
             context.setCurrentType(Double.TYPE);
         }
 
-        if (NumericExpression.class.isInstance(child))
+        if (NumericExpression.class.isInstance(child)){
             ret = "(" + ret + ")";
+        }
 
         return ret;
     }

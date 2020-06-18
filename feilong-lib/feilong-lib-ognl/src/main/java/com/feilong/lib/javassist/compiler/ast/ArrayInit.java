@@ -21,17 +21,22 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Array initializer such as <code>{ 1, 2, 3 }</code>.
  */
-public class ArrayInit extends ASTList {
+public class ArrayInit extends ASTList{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public ArrayInit(ASTree firstElement) {
+    public ArrayInit(ASTree firstElement){
         super(firstElement);
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atArrayInit(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atArrayInit(this);
+    }
 
     @Override
-    public String getTag() { return "array"; }
+    public String getTag(){
+        return "array";
+    }
 }

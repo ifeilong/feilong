@@ -131,16 +131,19 @@ public interface Mapper{
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     SingleValueConverter getConverterFromItemType(String fieldName,Class type);
 
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     SingleValueConverter getConverterFromItemType(Class type);
 
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     SingleValueConverter getConverterFromAttribute(String name);
 
     Converter getLocalConverter(Class definedIn,String fieldName);
@@ -174,6 +177,7 @@ public interface Mapper{
      * @deprecated As of 1.3, use combination of {@link #serializedMember(Class, String)} and
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     String aliasForAttribute(Class definedIn,String fieldName);
 
     /**
@@ -188,6 +192,7 @@ public interface Mapper{
      * @deprecated As of 1.3, use combination of {@link #realMember(Class, String)} and
      *             {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Deprecated
     String attributeForAlias(Class definedIn,String alias);
 
     /**
@@ -199,6 +204,7 @@ public interface Mapper{
      *            the attribute name
      * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Deprecated
     SingleValueConverter getConverterFromAttribute(Class definedIn,String attribute);
 
     /**

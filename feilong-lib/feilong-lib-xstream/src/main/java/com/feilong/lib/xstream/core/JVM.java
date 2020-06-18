@@ -143,12 +143,8 @@ public class JVM implements Caching{
         }
         reflectionProviderType = type;
         canWriteWithUnsafe = test;
-        Comparator comparator = new Comparator(){
-
-            @Override
-            public int compare(Object o1,Object o2){
-                throw new RuntimeException();
-            }
+        Comparator comparator = (o1,o2) -> {
+            throw new RuntimeException();
         };
         SortedMap map = new PresortedMap(comparator);
         map.put("one", null);
@@ -448,7 +444,7 @@ public class JVM implements Caching{
      */
     @Deprecated
     public boolean supportsAWT(){
-        return this.isAWTAvailable;
+        return JVM.isAWTAvailable;
     }
 
     /**
@@ -467,7 +463,7 @@ public class JVM implements Caching{
      */
     @Deprecated
     public boolean supportsSwing(){
-        return this.isSwingAvailable;
+        return JVM.isSwingAvailable;
     }
 
     /**
@@ -486,7 +482,7 @@ public class JVM implements Caching{
      */
     @Deprecated
     public boolean supportsSQL(){
-        return this.isSQLAvailable;
+        return JVM.isSQLAvailable;
     }
 
     /**

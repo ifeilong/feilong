@@ -157,8 +157,9 @@ public class ClassPool{
      */
     public ClassPool(boolean useDefaultPath){
         this(null);
-        if (useDefaultPath)
+        if (useDefaultPath){
             appendSystemPath();
+        }
     }
 
     /**
@@ -175,8 +176,9 @@ public class ClassPool{
         this.parent = parent;
         if (parent == null){
             CtClass[] pt = CtClass.primitiveTypes;
-            for (int i = 0; i < pt.length; ++i)
-                classes.put(pt[i].getName(), pt[i]);
+            for (CtClass element : pt){
+                classes.put(element.getName(), element);
+            }
         }
 
         this.cflow = null;
@@ -273,8 +275,9 @@ public class ClassPool{
         if (compressCount++ > COMPRESS_THRESHOLD){
             compressCount = 0;
             Enumeration e = classes.elements();
-            while (e.hasMoreElements())
+            while (e.hasMoreElements()){
                 ((CtClass) e.nextElement()).compress();
+            }
         }
     }
 
@@ -357,8 +360,9 @@ public class ClassPool{
      *            field name
      */
     void recordCflow(String name,String cname,String fname){
-        if (cflow == null)
+        if (cflow == null){
             cflow = new Hashtable();
+        }
 
         cflow.put(name, new Object[] { cname, fname });
     }
@@ -370,8 +374,9 @@ public class ClassPool{
      *            the name of <code>$cflow</code> variable
      */
     public Object[] lookupCflow(String name){
-        if (cflow == null)
+        if (cflow == null){
             cflow = new Hashtable();
+        }
 
         return (Object[]) cflow.get(name);
     }
@@ -398,11 +403,13 @@ public class ClassPool{
      */
     public CtClass getAndRename(String orgName,String newName) throws NotFoundException{
         CtClass clazz = get0(orgName, false);
-        if (clazz == null)
+        if (clazz == null){
             throw new NotFoundException(orgName);
+        }
 
-        if (clazz instanceof CtClassType)
+        if (clazz instanceof CtClassType){
             ((CtClassType) clazz).setClassPool(this);
+        }
 
         clazz.setName(newName); // indirectly calls
                                 // classNameChanged() in this class
@@ -416,8 +423,9 @@ public class ClassPool{
      */
     synchronized void classNameChanged(String oldname,CtClass clazz){
         CtClass c = getCached(oldname);
-        if (c == clazz) // must check this equation.
+        if (c == clazz){
             removeCached(oldname); // see getAndRename().
+        }
 
         String newName = clazz.getName();
         checkNotFrozen(newName);
@@ -445,14 +453,15 @@ public class ClassPool{
      */
     public CtClass get(String classname) throws NotFoundException{
         CtClass clazz;
-        if (classname == null)
+        if (classname == null){
             clazz = null;
-        else
+        }else{
             clazz = get0(classname, true);
+        }
 
-        if (clazz == null)
+        if (clazz == null){
             throw new NotFoundException(classname);
-        else{
+        }else{
             clazz.incGetCounter();
             return clazz;
         }
@@ -475,9 +484,9 @@ public class ClassPool{
      */
     public CtClass getOrNull(String classname){
         CtClass clazz = null;
-        if (classname == null)
+        if (classname == null){
             clazz = null;
-        else
+        }else{
             try{
                 /*
                  * ClassPool.get0() never throws an exception
@@ -486,9 +495,11 @@ public class ClassPool{
                  */
                 clazz = get0(classname, true);
             }catch (NotFoundException e){}
+        }
 
-        if (clazz != null)
+        if (clazz != null){
             clazz.incGetCounter();
+        }
 
         return clazz;
     }
@@ -516,10 +527,11 @@ public class ClassPool{
      * @since 3.8.1
      */
     public CtClass getCtClass(String classname) throws NotFoundException{
-        if (classname.charAt(0) == '[')
+        if (classname.charAt(0) == '['){
             return Descriptor.toCtClass(classname, this);
-        else
+        }else{
             return get(classname);
+        }
     }
 
     /**
@@ -531,27 +543,31 @@ public class ClassPool{
         CtClass clazz = null;
         if (useCache){
             clazz = getCached(classname);
-            if (clazz != null)
+            if (clazz != null){
                 return clazz;
+            }
         }
 
         if (!childFirstLookup && parent != null){
             clazz = parent.get0(classname, useCache);
-            if (clazz != null)
+            if (clazz != null){
                 return clazz;
+            }
         }
 
         clazz = createCtClass(classname, useCache);
         if (clazz != null){
             // clazz.getName() != classname if classname is "[L<name>;".
-            if (useCache)
+            if (useCache){
                 cacheCtClass(clazz.getName(), clazz, false);
+            }
 
             return clazz;
         }
 
-        if (childFirstLookup && parent != null)
+        if (childFirstLookup && parent != null){
             clazz = parent.get0(classname, useCache);
+        }
 
         return clazz;
     }
@@ -565,19 +581,22 @@ public class ClassPool{
      */
     protected CtClass createCtClass(String classname,boolean useCache){
         // accept "[L<class name>;" as a class name. 
-        if (classname.charAt(0) == '[')
+        if (classname.charAt(0) == '['){
             classname = Descriptor.toClassName(classname);
+        }
 
         if (classname.endsWith("[]")){
             String base = classname.substring(0, classname.indexOf('['));
-            if ((!useCache || getCached(base) == null) && find(base) == null)
+            if ((!useCache || getCached(base) == null) && find(base) == null){
                 return null;
-            else
+            }else{
                 return new CtArray(classname, this);
-        }else if (find(classname) == null)
+            }
+        }else if (find(classname) == null){
             return null;
-        else
+        }else{
             return new CtClassType(classname, this);
+        }
     }
 
     /**
@@ -609,11 +628,13 @@ public class ClassPool{
                 try{
                     clazz = parent.get0(classname, true);
                 }catch (NotFoundException e){}
-                if (clazz != null)
+                if (clazz != null){
                     throw new RuntimeException(classname + " is in a parent ClassPool.  Use the parent.");
+                }
             }
-        }else if (clazz.isFrozen())
+        }else if (clazz.isFrozen()){
             throw new RuntimeException(classname + ": frozen class (cannot edit)");
+        }
     }
 
     /*
@@ -624,12 +645,13 @@ public class ClassPool{
      */
     CtClass checkNotExists(String classname){
         CtClass clazz = getCached(classname);
-        if (clazz == null)
+        if (clazz == null){
             if (!childFirstLookup && parent != null){
                 try{
                     clazz = parent.get0(classname, true);
                 }catch (NotFoundException e){}
             }
+        }
 
         return clazz;
     }
@@ -659,13 +681,15 @@ public class ClassPool{
      *            an array of fully-qualified class name.
      */
     public CtClass[] get(String[] classnames) throws NotFoundException{
-        if (classnames == null)
+        if (classnames == null){
             return new CtClass[0];
+        }
 
         int num = classnames.length;
         CtClass[] result = new CtClass[num];
-        for (int i = 0; i < num; ++i)
+        for (int i = 0; i < num; ++i){
             result[i] = get(classnames[i]);
+        }
 
         return result;
     }
@@ -729,8 +753,9 @@ public class ClassPool{
         CtClass clazz = new CtClassType(classfile, this);
         clazz.checkModify();
         String classname = clazz.getName();
-        if (ifNotFrozen)
+        if (ifNotFrozen){
             checkNotFrozen(classname);
+        }
 
         cacheCtClass(classname, clazz, true);
         return clazz;
@@ -779,8 +804,9 @@ public class ClassPool{
         CtClass clazz = new CtClassType(classfile, this);
         clazz.checkModify();
         String classname = clazz.getName();
-        if (ifNotFrozen)
+        if (ifNotFrozen){
             checkNotFrozen(classname);
+        }
 
         cacheCtClass(classname, clazz, true);
         return clazz;
@@ -810,9 +836,9 @@ public class ClassPool{
         clazz.checkModify();
         String classname = clazz.getName();
         CtClass found = checkNotExists(classname);
-        if (found != null)
+        if (found != null){
             return found;
-        else{
+        }else{
             cacheCtClass(classname, clazz, true);
             return clazz;
         }

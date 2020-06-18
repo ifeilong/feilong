@@ -23,28 +23,32 @@ import com.feilong.lib.javassist.compiler.TokenId;
 /**
  * Method call expression.
  */
-public class CallExpr extends Expr {
-    /** default serialVersionUID */
-    private static final long serialVersionUID = 1L;
-    private MemberResolver.Method method;  // cached result of lookupMethod()
+public class CallExpr extends Expr{
 
-    private CallExpr(ASTree _head, ASTList _tail) {
+    /** default serialVersionUID */
+    private static final long     serialVersionUID = 1L;
+
+    private MemberResolver.Method method;               // cached result of lookupMethod()
+
+    private CallExpr(ASTree _head, ASTList _tail){
         super(TokenId.CALL, _head, _tail);
         method = null;
     }
 
-    public void setMethod(MemberResolver.Method m) {
+    public void setMethod(MemberResolver.Method m){
         method = m;
     }
 
-    public MemberResolver.Method getMethod() {
+    public MemberResolver.Method getMethod(){
         return method;
     }
 
-    public static CallExpr makeCall(ASTree target, ASTree args) {
+    public static CallExpr makeCall(ASTree target,ASTree args){
         return new CallExpr(target, new ASTList(args));
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atCallExpr(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atCallExpr(this);
+    }
 }

@@ -15,13 +15,19 @@
  * limitations under the License.
  */
 /**
- * <p>Assists in creating consistent {@code equals(Object)}, {@code toString()}, {@code hashCode()}, and {@code compareTo(Object)} methods.
- * These classes are not thread-safe.</p>
+ * <p>
+ * Assists in creating consistent {@code equals(Object)}, {@code toString()}, {@code hashCode()}, and {@code compareTo(Object)} methods.
+ * These classes are not thread-safe.
+ * </p>
  *
- * <p>When you write a {@link java.lang.Object#hashCode() hashCode()}, do you check Bloch's Effective Java? No?
+ * <p>
+ * When you write a {@link java.lang.Object#hashCode() hashCode()}, do you check Bloch's Effective Java? No?
  * You just hack in a quick number?
  * Well {@link com.feilong.lib.lang3.builder.HashCodeBuilder} will save your day.
- * It, and its buddies ({@link com.feilong.lib.lang3.builder.EqualsBuilder}, {@link com.feilong.lib.lang3.builder.CompareToBuilder}, {@link com.feilong.lib.lang3.builder.ToStringBuilder}), take care of the nasty bits while you focus on the important bits, like which fields will go into making up the hashcode.</p>
+ * It, and its buddies ({@link com.feilong.lib.lang3.builder.EqualsBuilder}, {@link com.feilong.lib.lang3.builder.CompareToBuilder},
+ * {@link com.feilong.lib.lang3.builder.ToStringBuilder}), take care of the nasty bits while you focus on the important bits, like which
+ * fields will go into making up the hashcode.
+ * </p>
  *
  * @see java.lang.Object#equals(Object)
  * @see java.lang.Object#toString()

@@ -21,23 +21,29 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Variable.
  */
-public class Variable extends Symbol {
+public class Variable extends Symbol{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    protected Declarator declarator;
 
-    public Variable(String sym, Declarator d) {
+    protected Declarator      declarator;
+
+    public Variable(String sym, Declarator d){
         super(sym);
         declarator = d;
     }
 
-    public Declarator getDeclarator() { return declarator; }
+    public Declarator getDeclarator(){
+        return declarator;
+    }
 
     @Override
-    public String toString() {
+    public String toString(){
         return identifier + ":" + declarator.getType();
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atVariable(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atVariable(this);
+    }
 }

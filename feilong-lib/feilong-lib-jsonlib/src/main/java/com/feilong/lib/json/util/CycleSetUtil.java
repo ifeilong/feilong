@@ -39,7 +39,7 @@ public class CycleSetUtil{
          */
         @Override
         protected SoftReference<Set<Object>> initialValue(){
-            return new SoftReference<>(new HashSet<Object>());
+            return new SoftReference<>(new HashSet<>());
         }
 
         /**

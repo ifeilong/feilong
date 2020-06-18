@@ -42,6 +42,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTSelect extends SimpleNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5589971158125527233L;
+
     public ASTSelect(int id){
         super(id);
     }
@@ -60,8 +65,9 @@ class ASTSelect extends SimpleNode{
         for (Enumeration e = elementsAccessor.getElements(source); e.hasMoreElements();){
             Object next = e.nextElement();
 
-            if (OgnlOps.booleanValue(expr.getValue(context, next)))
+            if (OgnlOps.booleanValue(expr.getValue(context, next))){
                 answer.add(next);
+            }
         }
 
         return answer;

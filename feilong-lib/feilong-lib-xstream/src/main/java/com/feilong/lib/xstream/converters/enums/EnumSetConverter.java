@@ -88,8 +88,7 @@ public class EnumSetConverter implements Converter{
         Class enumTypeForSet = mapper.realClass(reader.getAttribute(attributeName));
         EnumSet set = EnumSet.noneOf(enumTypeForSet);
         String[] enumValues = reader.getValue().split(",");
-        for (int i = 0; i < enumValues.length; i++){
-            String enumValue = enumValues[i];
+        for (String enumValue : enumValues){
             if (enumValue.length() > 0){
                 set.add(Enum.valueOf(enumTypeForSet, enumValue));
             }

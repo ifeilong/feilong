@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTDivide extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7718761733145321313L;
+
     public ASTDivide(int id){
         super(id);
     }

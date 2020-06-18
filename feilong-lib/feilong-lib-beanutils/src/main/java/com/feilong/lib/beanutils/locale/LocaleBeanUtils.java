@@ -827,8 +827,8 @@ public class LocaleBeanUtils extends BeanUtils{
     @Deprecated
     protected static Descriptor calculate(final Object bean,final String name) throws IllegalAccessException,InvocationTargetException{
 
-        final com.feilong.lib.beanutils.locale.LocaleBeanUtilsBean.Descriptor descriptor = LocaleBeanUtilsBean
-                        .getLocaleBeanUtilsInstance().calculate(bean, name);
+        final com.feilong.lib.beanutils.locale.LocaleBeanUtilsBean.Descriptor descriptor = LocaleBeanUtilsBean.getLocaleBeanUtilsInstance()
+                        .calculate(bean, name);
         return new Descriptor(
                         descriptor.getTarget(),
                         descriptor.getName(),

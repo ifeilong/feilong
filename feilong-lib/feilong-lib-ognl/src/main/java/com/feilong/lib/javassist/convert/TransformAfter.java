@@ -21,16 +21,14 @@ import com.feilong.lib.javassist.NotFoundException;
 import com.feilong.lib.javassist.bytecode.BadBytecode;
 import com.feilong.lib.javassist.bytecode.CodeIterator;
 
-public class TransformAfter extends TransformBefore {
-    public TransformAfter(Transformer next,
-                           CtMethod origMethod, CtMethod afterMethod)
-        throws NotFoundException
-    {
+public class TransformAfter extends TransformBefore{
+
+    public TransformAfter(Transformer next, CtMethod origMethod, CtMethod afterMethod) throws NotFoundException{
         super(next, origMethod, afterMethod);
     }
 
     @Override
-    protected int match2(int pos, CodeIterator iterator) throws BadBytecode {
+    protected int match2(int pos,CodeIterator iterator) throws BadBytecode{
         iterator.move(pos);
         iterator.insert(saveCode);
         iterator.insert(loadCode);

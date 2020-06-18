@@ -28,60 +28,63 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class ArrayMemberValue extends MemberValue {
-    MemberValue type;
+public class ArrayMemberValue extends MemberValue{
+
+    MemberValue   type;
+
     MemberValue[] values;
 
     /**
-     * Constructs an array.  The initial value or type are not specified.
+     * Constructs an array. The initial value or type are not specified.
      */
-    public ArrayMemberValue(ConstPool cp) {
+    public ArrayMemberValue(ConstPool cp){
         super('[', cp);
         type = null;
         values = null;
     }
 
     /**
-     * Constructs an array.  The initial value is not specified.
+     * Constructs an array. The initial value is not specified.
      *
-     * @param t         the type of the array elements.
+     * @param t
+     *            the type of the array elements.
      */
-    public ArrayMemberValue(MemberValue t, ConstPool cp) {
+    public ArrayMemberValue(MemberValue t, ConstPool cp){
         super('[', cp);
         type = t;
         values = null;
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method method)
-        throws ClassNotFoundException
-    {
-        if (values == null)
-            throw new ClassNotFoundException(
-                        "no array elements found: " + method.getName());
+    Object getValue(ClassLoader cl,ClassPool cp,Method method) throws ClassNotFoundException{
+        if (values == null){
+            throw new ClassNotFoundException("no array elements found: " + method.getName());
+        }
 
         int size = values.length;
         Class<?> clazz;
-        if (type == null) {
+        if (type == null){
             clazz = method.getReturnType().getComponentType();
-            if (clazz == null || size > 0)
-                throw new ClassNotFoundException("broken array type: "
-                                                 + method.getName());
-        }
-        else
+            if (clazz == null || size > 0){
+                throw new ClassNotFoundException("broken array type: " + method.getName());
+            }
+        }else{
             clazz = type.getType(cl);
+        }
 
         Object a = Array.newInstance(clazz, size);
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++){
             Array.set(a, i, values[i].getValue(cl, cp, method));
+        }
 
         return a;
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) throws ClassNotFoundException {
-        if (type == null)
+    Class<?> getType(ClassLoader cl) throws ClassNotFoundException{
+        if (type == null){
             throw new ClassNotFoundException("no array type specified");
+        }
 
         Object a = Array.newInstance(type.getType(cl), 0);
         return a.getClass();
@@ -92,38 +95,40 @@ public class ArrayMemberValue extends MemberValue {
      *
      * @return null if the type is not specified.
      */
-    public MemberValue getType() {
+    public MemberValue getType(){
         return type;
     }
 
     /**
      * Obtains the elements of the array.
      */
-    public MemberValue[] getValue() {
+    public MemberValue[] getValue(){
         return values;
     }
 
     /**
      * Sets the elements of the array.
      */
-    public void setValue(MemberValue[] elements) {
+    public void setValue(MemberValue[] elements){
         values = elements;
-        if (elements != null && elements.length > 0)
+        if (elements != null && elements.length > 0){
             type = elements[0];
+        }
     }
 
     /**
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         StringBuffer buf = new StringBuffer("{");
-        if (values != null) {
-            for (int i = 0; i < values.length; i++) {
+        if (values != null){
+            for (int i = 0; i < values.length; i++){
                 buf.append(values[i].toString());
-                if (i + 1 < values.length)
+                if (i + 1 < values.length){
                     buf.append(", ");
                 }
+            }
         }
 
         buf.append("}");
@@ -134,18 +139,19 @@ public class ArrayMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         int num = values == null ? 0 : values.length;
         writer.arrayValue(num);
-        for (int i = 0; i < num; ++i)
+        for (int i = 0; i < num; ++i){
             values[i].write(writer);
+        }
     }
 
     /**
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitArrayMemberValue(this);
     }
 }

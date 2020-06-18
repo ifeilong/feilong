@@ -43,7 +43,7 @@ public class ScopedClassPool extends ClassPool{
 
     protected LoaderClassPath           classPath;
 
-    protected Map<String, CtClass>      softcache     = new SoftValueHashMap<String, CtClass>();
+    protected Map<String, CtClass>      softcache     = new SoftValueHashMap<>();
 
     boolean                             isBootstrapCl = true;
 
@@ -81,7 +81,7 @@ public class ScopedClassPool extends ClassPool{
     protected ScopedClassPool(ClassLoader cl, ClassPool src, ScopedClassPoolRepository repository, boolean isTemp){
         super(src);
         this.repository = repository;
-        this.classLoader = new WeakReference<ClassLoader>(cl);
+        this.classLoader = new WeakReference<>(cl);
         if (cl != null){
             classPath = new LoaderClassPath(cl);
             this.insertClassPath(classPath);
@@ -137,8 +137,9 @@ public class ScopedClassPool extends ClassPool{
      *            the class
      */
     public synchronized void soften(CtClass clazz){
-        if (repository.isPrune())
+        if (repository.isPrune()){
             clazz.prune();
+        }
         classes.remove(clazz.getName());
         softcache.put(clazz.getName(), clazz);
     }
@@ -215,8 +216,9 @@ public class ScopedClassPool extends ClassPool{
         if (dynamic){
             super.cacheCtClass(classname, c, dynamic);
         }else{
-            if (repository.isPrune())
+            if (repository.isPrune()){
                 c.prune();
+            }
             softcache.put(classname, c);
         }
     }
@@ -240,8 +242,9 @@ public class ScopedClassPool extends ClassPool{
      */
     protected CtClass getCachedLocally(String classname){
         CtClass cached = (CtClass) classes.get(classname);
-        if (cached != null)
+        if (cached != null){
             return cached;
+        }
         synchronized (softcache){
             return softcache.get(classname);
         }
@@ -261,8 +264,9 @@ public class ScopedClassPool extends ClassPool{
         CtClass clazz = (CtClass) classes.get(classname);
         if (clazz == null){
             clazz = createCtClass(classname, true);
-            if (clazz == null)
+            if (clazz == null){
                 throw new NotFoundException(classname);
+            }
             super.cacheCtClass(classname, clazz, false);
         }
 

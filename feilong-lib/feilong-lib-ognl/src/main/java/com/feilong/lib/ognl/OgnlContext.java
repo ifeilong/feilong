@@ -272,25 +272,29 @@ public class OgnlContext extends Object implements Map{
     }
 
     public Class getCurrentAccessor(){
-        if (_accessorStack.isEmpty())
+        if (_accessorStack.isEmpty()){
             return null;
+        }
 
         return _accessorStack.get(_accessorStack.size() - 1);
     }
 
     public Class getPreviousAccessor(){
-        if (_accessorStack.isEmpty())
+        if (_accessorStack.isEmpty()){
             return null;
+        }
 
-        if (_accessorStack.size() > 1)
+        if (_accessorStack.size() > 1){
             return _accessorStack.get(_accessorStack.size() - 2);
-        else
+        }else{
             return null;
+        }
     }
 
     public Class getFirstAccessor(){
-        if (_accessorStack.isEmpty())
+        if (_accessorStack.isEmpty()){
             return null;
+        }
 
         return _accessorStack.get(0);
     }
@@ -301,8 +305,9 @@ public class OgnlContext extends Object implements Map{
      * @return The current object type, may be null.
      */
     public Class getCurrentType(){
-        if (_typeStack.isEmpty())
+        if (_typeStack.isEmpty()){
             return null;
+        }
 
         return _typeStack.get(_typeStack.size() - 1);
     }
@@ -318,25 +323,29 @@ public class OgnlContext extends Object implements Map{
      * @return The previous type of object on the stack, may be null.
      */
     public Class getPreviousType(){
-        if (_typeStack.isEmpty())
+        if (_typeStack.isEmpty()){
             return null;
+        }
 
-        if (_typeStack.size() > 1)
+        if (_typeStack.size() > 1){
             return _typeStack.get(_typeStack.size() - 2);
-        else
+        }else{
             return null;
+        }
     }
 
     public void setPreviousType(Class type){
-        if (_typeStack.isEmpty() || _typeStack.size() < 2)
+        if (_typeStack.isEmpty() || _typeStack.size() < 2){
             return;
+        }
 
         _typeStack.set(_typeStack.size() - 2, type);
     }
 
     public Class getFirstType(){
-        if (_typeStack.isEmpty())
+        if (_typeStack.isEmpty()){
             return null;
+        }
 
         return _typeStack.get(0);
     }

@@ -80,17 +80,20 @@ public abstract class CtBehavior extends CtMember{
             if (srcSuper != null && destSuper != null){
                 String srcSuperName = srcSuper.getName();
                 destSuperName = destSuper.getName();
-                if (!srcSuperName.equals(destSuperName))
-                    if (srcSuperName.equals(CtClass.javaLangObject))
+                if (!srcSuperName.equals(destSuperName)){
+                    if (srcSuperName.equals(CtClass.javaLangObject)){
                         patch = true;
-                    else
+                    }else{
                         map.putIfNone(srcSuperName, destSuperName);
+                    }
+                }
             }
 
             // a stack map table is copied from srcInfo.
             methodInfo = new MethodInfo(cp, srcInfo.getName(), srcInfo, map);
-            if (isCons && patch)
+            if (isCons && patch){
                 methodInfo.setSuperclass(destSuperName);
+            }
         }catch (NotFoundException e){
             throw new CannotCompileException(e);
         }catch (BadBytecode e){
@@ -376,10 +379,11 @@ public abstract class CtBehavior extends CtMember{
     public CtClass[] getExceptionTypes() throws NotFoundException{
         String[] exceptions;
         ExceptionsAttribute ea = methodInfo.getExceptionsAttribute();
-        if (ea == null)
+        if (ea == null){
             exceptions = null;
-        else
+        }else{
             exceptions = ea.getExceptions();
+        }
 
         return declaringClass.getClassPool().get(exceptions);
     }
@@ -395,8 +399,9 @@ public abstract class CtBehavior extends CtMember{
         }
 
         String[] names = new String[types.length];
-        for (int i = 0; i < types.length; ++i)
+        for (int i = 0; i < types.length; ++i){
             names[i] = types[i].getName();
+        }
 
         ExceptionsAttribute ea = methodInfo.getExceptionsAttribute();
         if (ea == null){
@@ -445,8 +450,9 @@ public abstract class CtBehavior extends CtMember{
         cc.checkModify();
         try{
             Javac jv = new Javac(cc);
-            if (delegateMethod != null)
+            if (delegateMethod != null){
                 jv.recordProceed(delegateObj, delegateMethod);
+            }
 
             Bytecode b = jv.compileBody(this, src);
             methodInfo.setCodeAttribute(b.toCodeAttribute());
@@ -501,8 +507,9 @@ public abstract class CtBehavior extends CtMember{
     @Override
     public byte[] getAttribute(String name){
         AttributeInfo ai = methodInfo.getAttribute(name);
-        if (ai == null)
+        if (ai == null){
             return null;
+        }
         return ai.get();
     }
 
@@ -595,8 +602,9 @@ public abstract class CtBehavior extends CtMember{
         declaringClass.checkModify();
         ConstPool cp = methodInfo.getConstPool();
         CodeAttribute ca = methodInfo.getCodeAttribute();
-        if (ca == null)
+        if (ca == null){
             throw new CannotCompileException("no method body");
+        }
 
         LocalVariableAttribute va = (LocalVariableAttribute) ca.getAttribute(LocalVariableAttribute.tag);
         if (va == null){
@@ -653,25 +661,30 @@ public abstract class CtBehavior extends CtMember{
                 CtPrimitiveType cpt = (CtPrimitiveType) type;
                 size = cpt.getDataSize();
                 typeDesc = cpt.getDescriptor();
-            }else
+            }else{
                 classInfo = methodInfo.getConstPool().addClassInfo(type);
+            }
 
             ca.insertLocalVar(where, size);
             LocalVariableAttribute va = (LocalVariableAttribute) ca.getAttribute(LocalVariableAttribute.tag);
-            if (va != null)
+            if (va != null){
                 va.shiftIndex(where, size);
+            }
 
             LocalVariableTypeAttribute lvta = (LocalVariableTypeAttribute) ca.getAttribute(LocalVariableTypeAttribute.tag);
-            if (lvta != null)
+            if (lvta != null){
                 lvta.shiftIndex(where, size);
+            }
 
             StackMapTable smt = (StackMapTable) ca.getAttribute(StackMapTable.tag);
-            if (smt != null)
+            if (smt != null){
                 smt.insertLocal(where, StackMapTable.typeTagOf(typeDesc), classInfo);
+            }
 
             StackMap sm = (StackMap) ca.getAttribute(StackMap.tag);
-            if (sm != null)
+            if (sm != null){
                 sm.insertLocal(where, StackMapTable.typeTagOf(typeDesc), classInfo);
+            }
         }
     }
 
@@ -705,11 +718,13 @@ public abstract class CtBehavior extends CtMember{
     public void instrument(ExprEditor editor) throws CannotCompileException{
         // if the class is not frozen,
         // does not turn the modified flag on.
-        if (declaringClass.isFrozen())
+        if (declaringClass.isFrozen()){
             declaringClass.checkModify();
+        }
 
-        if (editor.doit(declaringClass, methodInfo))
+        if (editor.doit(declaringClass, methodInfo)){
             declaringClass.checkModify();
+        }
     }
 
     /**
@@ -739,8 +754,9 @@ public abstract class CtBehavior extends CtMember{
         CtClass cc = declaringClass;
         cc.checkModify();
         CodeAttribute ca = methodInfo.getCodeAttribute();
-        if (ca == null)
+        if (ca == null){
             throw new CannotCompileException("no method body");
+        }
 
         CodeIterator iterator = ca.iterator();
         Javac jv = new Javac(cc);
@@ -754,16 +770,19 @@ public abstract class CtBehavior extends CtMember{
             int stack = b.getMaxStack();
             int locals = b.getMaxLocals();
 
-            if (stack > ca.getMaxStack())
+            if (stack > ca.getMaxStack()){
                 ca.setMaxStack(stack);
+            }
 
-            if (locals > ca.getMaxLocals())
+            if (locals > ca.getMaxLocals()){
                 ca.setMaxLocals(locals);
+            }
 
             int pos = iterator.insertEx(b.get());
             iterator.insert(b.getExceptionTable(), pos);
-            if (rebuild)
+            if (rebuild){
                 methodInfo.rebuildStackMapIf6(cc.getClassPool(), cc.getClassFile2());
+            }
         }catch (NotFoundException e){
             throw new CannotCompileException(e);
         }catch (CompileError e){
@@ -805,8 +824,9 @@ public abstract class CtBehavior extends CtMember{
         cc.checkModify();
         ConstPool pool = methodInfo.getConstPool();
         CodeAttribute ca = methodInfo.getCodeAttribute();
-        if (ca == null)
+        if (ca == null){
             throw new CannotCompileException("no method body");
+        }
 
         CodeIterator iterator = ca.iterator();
         int retAddr = ca.getMaxLocals();
@@ -823,16 +843,18 @@ public abstract class CtBehavior extends CtMember{
             // finally clause for exceptions
             int handlerLen = insertAfterHandler(asFinally, b, rtype, varNo, jv, src);
             int handlerPos = iterator.getCodeLength();
-            if (asFinally)
+            if (asFinally){
                 ca.getExceptionTable().add(getStartPosOfBody(ca), handlerPos, handlerPos, 0);
+            }
 
             int adviceLen = 0;
             int advicePos = 0;
             boolean noReturn = true;
             while (iterator.hasNext()){
                 int pos = iterator.next();
-                if (pos >= handlerPos)
+                if (pos >= handlerPos){
                     break;
+                }
 
                 int c = iterator.byteAt(pos);
                 if (c == Opcode.ARETURN || c == Opcode.IRETURN || c == Opcode.FRETURN || c == Opcode.LRETURN || c == Opcode.DRETURN
@@ -876,16 +898,18 @@ public abstract class CtBehavior extends CtMember{
             code.addAstore(varNo);
             jv.compileStmnt(src);
             code.addOpcode(Opcode.RETURN);
-            if (code.getMaxLocals() < 1)
+            if (code.getMaxLocals() < 1){
                 code.setMaxLocals(1);
+            }
         }else{
             code.addStore(varNo, rtype);
             jv.compileStmnt(src);
             code.addLoad(varNo, rtype);
-            if (rtype.isPrimitive())
+            if (rtype.isPrimitive()){
                 code.addOpcode(((CtPrimitiveType) rtype).getReturnOp());
-            else
+            }else{
                 code.addOpcode(Opcode.ARETURN);
+            }
         }
 
         return code.currentPc() - pc;
@@ -924,8 +948,9 @@ public abstract class CtBehavior extends CtMember{
      * insert a finally clause
      */
     private int insertAfterHandler(boolean asFinally,Bytecode b,CtClass rtype,int returnVarNo,Javac javac,String src) throws CompileError{
-        if (!asFinally)
+        if (!asFinally){
             return 0;
+        }
 
         int var = b.getMaxLocals();
         b.incMaxLocals(1);
@@ -1060,11 +1085,13 @@ public abstract class CtBehavior extends CtMember{
             int stack = b.getMaxStack();
             int locals = b.getMaxLocals();
 
-            if (stack > ca.getMaxStack())
+            if (stack > ca.getMaxStack()){
                 ca.setMaxStack(stack);
+            }
 
-            if (locals > ca.getMaxLocals())
+            if (locals > ca.getMaxLocals()){
                 ca.setMaxLocals(locals);
+            }
 
             int len = iterator.getCodeLength();
             int pos = iterator.append(b.get());
@@ -1140,18 +1167,21 @@ public abstract class CtBehavior extends CtMember{
      */
     public int insertAt(int lineNum,boolean modify,String src) throws CannotCompileException{
         CodeAttribute ca = methodInfo.getCodeAttribute();
-        if (ca == null)
+        if (ca == null){
             throw new CannotCompileException("no method body");
+        }
 
         LineNumberAttribute ainfo = (LineNumberAttribute) ca.getAttribute(LineNumberAttribute.tag);
-        if (ainfo == null)
+        if (ainfo == null){
             throw new CannotCompileException("no line number info");
+        }
 
         LineNumberAttribute.Pc pc = ainfo.toNearPc(lineNum);
         lineNum = pc.line;
         int index = pc.index;
-        if (!modify)
+        if (!modify){
             return lineNum;
+        }
 
         CtClass cc = declaringClass;
         cc.checkModify();
@@ -1171,8 +1201,9 @@ public abstract class CtBehavior extends CtMember{
              * We assume that there is no values in the operand stack
              * at the position where the bytecode is inserted.
              */
-            if (stack > ca.getMaxStack())
+            if (stack > ca.getMaxStack()){
                 ca.setMaxStack(stack);
+            }
 
             index = iterator.insertAt(index, b.get());
             iterator.insert(b.getExceptionTable(), index);

@@ -11,11 +11,11 @@
  */
 package com.feilong.lib.xstream.io.xml;
 
-import javax.xml.namespace.QName;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.namespace.QName;
 
 /**
  * Represents a mapping of {@link QName} instances to Java class names

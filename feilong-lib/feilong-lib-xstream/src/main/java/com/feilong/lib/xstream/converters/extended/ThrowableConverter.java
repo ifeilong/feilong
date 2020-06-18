@@ -34,6 +34,7 @@ public class ThrowableConverter implements Converter{
     /**
      * @deprecated As of 1.4.5 use {@link #ThrowableConverter(ConverterLookup)}
      */
+    @Deprecated
     public ThrowableConverter(Converter defaultConverter){
         this.defaultConverter = defaultConverter;
         lookup = null;

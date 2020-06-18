@@ -38,6 +38,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTEval extends SimpleNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4876889984750275792L;
+
     public ASTEval(int id){
         super(id);
     }

@@ -38,8 +38,8 @@ public class SortableFieldKeySorter implements FieldKeySorter,Caching{
             final Map result = new OrderRetainingMap();
             final FieldKey[] fieldKeys = (FieldKey[]) keyedByFieldKey.keySet().toArray(EMPTY_FIELD_KEY_ARRAY);
             Arrays.sort(fieldKeys, (Comparator) map.get(type));
-            for (int i = 0; i < fieldKeys.length; i++){
-                result.put(fieldKeys[i], keyedByFieldKey.get(fieldKeys[i]));
+            for (FieldKey fieldKey : fieldKeys){
+                result.put(fieldKey, keyedByFieldKey.get(fieldKey));
             }
             return result;
         }else{

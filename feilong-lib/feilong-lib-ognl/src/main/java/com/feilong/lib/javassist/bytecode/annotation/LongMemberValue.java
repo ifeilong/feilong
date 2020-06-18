@@ -28,16 +28,18 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class LongMemberValue extends MemberValue {
+public class LongMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs a long constant value.  The initial value is specified
+     * Constructs a long constant value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index     the index of a CONSTANT_Long_info structure.
+     * @param index
+     *            the index of a CONSTANT_Long_info structure.
      */
-    public LongMemberValue(int index, ConstPool cp) {
+    public LongMemberValue(int index, ConstPool cp){
         super('J', cp);
         this.valueIndex = index;
     }
@@ -45,42 +47,43 @@ public class LongMemberValue extends MemberValue {
     /**
      * Constructs a long constant value.
      *
-     * @param j         the initial value.
+     * @param j
+     *            the initial value.
      */
-    public LongMemberValue(long j, ConstPool cp) {
+    public LongMemberValue(long j, ConstPool cp){
         super('J', cp);
         setValue(j);
     }
 
     /**
-     * Constructs a long constant value.  The initial value is 0.
+     * Constructs a long constant value. The initial value is 0.
      */
-    public LongMemberValue(ConstPool cp) {
+    public LongMemberValue(ConstPool cp){
         super('J', cp);
         setValue(0L);
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m) {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m){
         return Long.valueOf(getValue());
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) {
+    Class<?> getType(ClassLoader cl){
         return long.class;
     }
 
     /**
      * Obtains the value of the member.
      */
-    public long getValue() {
+    public long getValue(){
         return cp.getLongInfo(valueIndex);
     }
 
     /**
      * Sets the value of the member.
      */
-    public void setValue(long newValue) {
+    public void setValue(long newValue){
         valueIndex = cp.addLongInfo(newValue);
     }
 
@@ -88,7 +91,7 @@ public class LongMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return Long.toString(getValue());
     }
 
@@ -96,7 +99,7 @@ public class LongMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.constValueIndex(getValue());
     }
 
@@ -104,7 +107,7 @@ public class LongMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitLongMemberValue(this);
     }
 }

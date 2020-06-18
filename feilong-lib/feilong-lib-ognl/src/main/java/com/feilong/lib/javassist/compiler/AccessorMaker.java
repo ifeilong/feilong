@@ -50,14 +50,15 @@ public class AccessorMaker{
     public AccessorMaker(CtClass c){
         clazz = c;
         uniqueNumber = 1;
-        accessors = new HashMap<String, Object>();
+        accessors = new HashMap<>();
     }
 
     public String getConstructor(CtClass c,String desc,MethodInfo orig) throws CompileError{
         String key = "<init>:" + desc;
         String consDesc = (String) accessors.get(key);
-        if (consDesc != null)
+        if (consDesc != null){
             return consDesc; // already exists.
+        }
 
         consDesc = Descriptor.appendParameter(lastParamType, desc);
         ClassFile cf = clazz.getClassFile(); // turn on the modified flag. 
@@ -68,15 +69,17 @@ public class AccessorMaker{
             minfo.setAccessFlags(0);
             minfo.addAttribute(new SyntheticAttribute(cp));
             ExceptionsAttribute ea = orig.getExceptionsAttribute();
-            if (ea != null)
+            if (ea != null){
                 minfo.addAttribute(ea.copy(cp, null));
+            }
 
             CtClass[] params = Descriptor.getParameterTypes(desc, pool);
             Bytecode code = new Bytecode(cp);
             code.addAload(0);
             int regno = 1;
-            for (int i = 0; i < params.length; ++i)
-                regno += code.addLoad(regno, params[i]);
+            for (CtClass param : params){
+                regno += code.addLoad(regno, param);
+            }
             code.setMaxLocals(regno + 1); // the last parameter is added.
             code.addInvokespecial(clazz, MethodInfo.nameInit, desc);
 
@@ -113,8 +116,9 @@ public class AccessorMaker{
     public String getMethodAccessor(String name,String desc,String accDesc,MethodInfo orig) throws CompileError{
         String key = name + ":" + desc;
         String accName = (String) accessors.get(key);
-        if (accName != null)
+        if (accName != null){
             return accName; // already exists.
+        }
 
         ClassFile cf = clazz.getClassFile(); // turn on the modified flag. 
         accName = findAccessorName(cf);
@@ -125,20 +129,23 @@ public class AccessorMaker{
             minfo.setAccessFlags(AccessFlag.STATIC);
             minfo.addAttribute(new SyntheticAttribute(cp));
             ExceptionsAttribute ea = orig.getExceptionsAttribute();
-            if (ea != null)
+            if (ea != null){
                 minfo.addAttribute(ea.copy(cp, null));
+            }
 
             CtClass[] params = Descriptor.getParameterTypes(accDesc, pool);
             int regno = 0;
             Bytecode code = new Bytecode(cp);
-            for (int i = 0; i < params.length; ++i)
-                regno += code.addLoad(regno, params[i]);
+            for (CtClass param : params){
+                regno += code.addLoad(regno, param);
+            }
 
             code.setMaxLocals(regno);
-            if (desc == accDesc)
+            if (desc == accDesc){
                 code.addInvokestatic(clazz, name, desc);
-            else
+            }else{
                 code.addInvokevirtual(clazz, name, desc);
+            }
 
             code.addReturn(Descriptor.getReturnType(desc, pool));
             minfo.setCodeAttribute(code.toCodeAttribute());
@@ -160,8 +167,9 @@ public class AccessorMaker{
         String fieldName = finfo.getName();
         String key = fieldName + ":getter";
         Object res = accessors.get(key);
-        if (res != null)
+        if (res != null){
             return (MethodInfo) res; // already exists.
+        }
 
         ClassFile cf = clazz.getClassFile(); // turn on the modified flag. 
         String accName = findAccessorName(cf);
@@ -170,10 +178,11 @@ public class AccessorMaker{
             ClassPool pool = clazz.getClassPool();
             String fieldType = finfo.getDescriptor();
             String accDesc;
-            if (is_static)
+            if (is_static){
                 accDesc = "()" + fieldType;
-            else
+            }else{
                 accDesc = "(" + Descriptor.of(clazz) + ")" + fieldType;
+            }
 
             MethodInfo minfo = new MethodInfo(cp, accName, accDesc);
             minfo.setAccessFlags(AccessFlag.STATIC);
@@ -206,8 +215,9 @@ public class AccessorMaker{
         String fieldName = finfo.getName();
         String key = fieldName + ":setter";
         Object res = accessors.get(key);
-        if (res != null)
+        if (res != null){
             return (MethodInfo) res; // already exists.
+        }
 
         ClassFile cf = clazz.getClassFile(); // turn on the modified flag. 
         String accName = findAccessorName(cf);
@@ -216,10 +226,11 @@ public class AccessorMaker{
             ClassPool pool = clazz.getClassPool();
             String fieldType = finfo.getDescriptor();
             String accDesc;
-            if (is_static)
+            if (is_static){
                 accDesc = "(" + fieldType + ")V";
-            else
+            }else{
                 accDesc = "(" + Descriptor.of(clazz) + fieldType + ")V";
+            }
 
             MethodInfo minfo = new MethodInfo(cp, accName, accDesc);
             minfo.setAccessFlags(AccessFlag.STATIC);

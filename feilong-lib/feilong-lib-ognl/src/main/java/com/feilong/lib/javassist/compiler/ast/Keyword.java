@@ -21,20 +21,28 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Keyword.
  */
-public class Keyword extends ASTree {
+public class Keyword extends ASTree{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    protected int tokenId;
 
-    public Keyword(int token) {
+    protected int             tokenId;
+
+    public Keyword(int token){
         tokenId = token;
     }
 
-    public int get() { return tokenId; }
+    public int get(){
+        return tokenId;
+    }
 
     @Override
-    public String toString() { return "id:" + tokenId; }
+    public String toString(){
+        return "id:" + tokenId;
+    }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atKeyword(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atKeyword(this);
+    }
 }

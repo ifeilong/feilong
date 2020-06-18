@@ -124,8 +124,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
         MorphDynaBean other = (MorphDynaBean) obj;
         EqualsBuilder builder = new EqualsBuilder().append(this.dynaClass, other.dynaClass);
         DynaProperty[] props = dynaClass.getDynaProperties();
-        for (int i = 0; i < props.length; i++){
-            DynaProperty prop = props[i];
+        for (DynaProperty prop : props){
             builder.append(dynaValues.get(prop.getName()), dynaValues.get(prop.getName()));
         }
         return builder.isEquals();
@@ -235,8 +234,7 @@ public final class MorphDynaBean implements DynaBean,Serializable{
     public int hashCode(){
         HashCodeBuilder builder = new HashCodeBuilder().append(dynaClass);
         DynaProperty[] props = dynaClass.getDynaProperties();
-        for (int i = 0; i < props.length; i++){
-            DynaProperty prop = props[i];
+        for (DynaProperty prop : props){
             builder.append(dynaValues.get(prop.getName()));
         }
         return builder.toHashCode();

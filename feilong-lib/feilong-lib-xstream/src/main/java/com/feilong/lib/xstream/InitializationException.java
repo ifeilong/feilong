@@ -19,6 +19,11 @@ package com.feilong.lib.xstream;
  */
 public class InitializationException extends XStreamException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8274401395737978705L;
+
     public InitializationException(String message, Throwable cause){
         super(message, cause);
     }

@@ -27,9 +27,14 @@ import com.feilong.lib.xstream.core.util.OrderRetainingMap;
  */
 public abstract class ErrorWritingException extends XStreamException implements ErrorWriter{
 
-    private static final String SEPARATOR = "\n-------------------------------";
+    /**
+     * 
+     */
+    private static final long   serialVersionUID = -464013738977185090L;
 
-    private final Map           stuff     = new OrderRetainingMap();
+    private static final String SEPARATOR        = "\n-------------------------------";
+
+    private final Map           stuff            = new OrderRetainingMap();
 
     /**
      * Constructs a ErrorWritingException.
@@ -93,8 +98,9 @@ public abstract class ErrorWritingException extends XStreamException implements 
         int i = 0;
         while (stuff.containsKey(key)){
             String value = (String) stuff.get(key);
-            if (information.equals(value))
+            if (information.equals(value)){
                 return;
+            }
             key = name + "[" + ++i + "]";
         }
         stuff.put(key, information);

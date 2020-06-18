@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTNot extends BooleanExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2696565343451017530L;
+
     public ASTNot(int id){
         super(id);
     }
@@ -60,8 +65,9 @@ class ASTNot extends BooleanExpression{
 
             String srcString = super.toGetSourceString(context, target);
 
-            if (srcString == null || srcString.trim().length() < 1)
+            if (srcString == null || srcString.trim().length() < 1){
                 srcString = "null";
+            }
 
             context.setCurrentType(Boolean.TYPE);
 

@@ -7,14 +7,11 @@ import com.feilong.lib.digester3.Rule;
 /**
  * @since 3.0
  */
-final class SetNamespaceURIRule
-    extends Rule
-{
+final class SetNamespaceURIRule extends Rule{
 
     private final NameSpaceURIRulesBinder rulesBinder;
 
-    public SetNamespaceURIRule( NameSpaceURIRulesBinder rulesBinder )
-    {
+    public SetNamespaceURIRule(NameSpaceURIRulesBinder rulesBinder){
         this.rulesBinder = rulesBinder;
     }
 
@@ -22,19 +19,15 @@ final class SetNamespaceURIRule
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
-        throws Exception
-    {
-        rulesBinder.addNamespaceURI( attributes.getValue( "namespaceURI" ) );
+    public void begin(String namespace,String name,Attributes attributes) throws Exception{
+        rulesBinder.addNamespaceURI(attributes.getValue("namespaceURI"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void end( String namespace, String name )
-        throws Exception
-    {
+    public void end(String namespace,String name) throws Exception{
         rulesBinder.removeNamespaceURI();
     }
 

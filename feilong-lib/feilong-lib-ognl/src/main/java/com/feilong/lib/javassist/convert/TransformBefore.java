@@ -26,16 +26,17 @@ import com.feilong.lib.javassist.bytecode.CodeIterator;
 import com.feilong.lib.javassist.bytecode.ConstPool;
 import com.feilong.lib.javassist.bytecode.Descriptor;
 
-public class TransformBefore extends TransformCall {
-    protected CtClass[] parameterTypes;
-    protected int locals;
-    protected int maxLocals;
-    protected byte[] saveCode, loadCode;
+public class TransformBefore extends TransformCall{
 
-    public TransformBefore(Transformer next,
-                           CtMethod origMethod, CtMethod beforeMethod)
-        throws NotFoundException
-    {
+    protected CtClass[] parameterTypes;
+
+    protected int       locals;
+
+    protected int       maxLocals;
+
+    protected byte[]    saveCode, loadCode;
+
+    public TransformBefore(Transformer next, CtMethod origMethod, CtMethod beforeMethod) throws NotFoundException{
         super(next, origMethod, beforeMethod);
 
         // override
@@ -48,7 +49,7 @@ public class TransformBefore extends TransformCall {
     }
 
     @Override
-    public void initialize(ConstPool cp, CodeAttribute attr) {
+    public void initialize(ConstPool cp,CodeAttribute attr){
         super.initialize(cp, attr);
         locals = 0;
         maxLocals = attr.getMaxLocals();
@@ -56,10 +57,8 @@ public class TransformBefore extends TransformCall {
     }
 
     @Override
-    protected int match(int c, int pos, CodeIterator iterator,
-                        int typedesc, ConstPool cp) throws BadBytecode
-    {
-        if (newIndex == 0) {
+    protected int match(int c,int pos,CodeIterator iterator,int typedesc,ConstPool cp) throws BadBytecode{
+        if (newIndex == 0){
             String desc = Descriptor.ofParameters(parameterTypes) + 'V';
             desc = Descriptor.insertParameter(classname, desc);
             int nt = cp.addNameAndTypeInfo(newMethodname, desc);
@@ -68,13 +67,14 @@ public class TransformBefore extends TransformCall {
             constPool = cp;
         }
 
-        if (saveCode == null)
+        if (saveCode == null){
             makeCode(parameterTypes, cp);
+        }
 
         return match2(pos, iterator);
     }
 
-    protected int match2(int pos, CodeIterator iterator) throws BadBytecode {
+    protected int match2(int pos,CodeIterator iterator) throws BadBytecode{
         iterator.move(pos);
         iterator.insert(saveCode);
         iterator.insert(loadCode);
@@ -86,9 +86,11 @@ public class TransformBefore extends TransformCall {
     }
 
     @Override
-    public int extraLocals() { return locals; }
+    public int extraLocals(){
+        return locals;
+    }
 
-    protected void makeCode(CtClass[] paramTypes, ConstPool cp) {
+    protected void makeCode(CtClass[] paramTypes,ConstPool cp){
         Bytecode save = new Bytecode(cp, 0, 0);
         Bytecode load = new Bytecode(cp, 0, 0);
 
@@ -102,15 +104,13 @@ public class TransformBefore extends TransformCall {
         loadCode = load.get();
     }
 
-    private void makeCode2(Bytecode save, Bytecode load,
-                           int i, int n, CtClass[] paramTypes, int var)
-    {
-        if (i < n) {
+    private void makeCode2(Bytecode save,Bytecode load,int i,int n,CtClass[] paramTypes,int var){
+        if (i < n){
             int size = load.addLoad(var, paramTypes[i]);
             makeCode2(save, load, i + 1, n, paramTypes, var + size);
             save.addStore(var, paramTypes[i]);
-        }
-        else
+        }else{
             locals = var - maxLocals;
+        }
     }
 }

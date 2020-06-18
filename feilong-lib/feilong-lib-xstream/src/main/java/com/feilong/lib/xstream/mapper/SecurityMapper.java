@@ -65,18 +65,20 @@ public class SecurityMapper extends MapperWrapper{
      * @since 1.4.7
      */
     public void addPermission(final TypePermission permission){
-        if (permission.equals(NoTypePermission.NONE) || permission.equals(AnyTypePermission.ANY))
+        if (permission.equals(NoTypePermission.NONE) || permission.equals(AnyTypePermission.ANY)){
             permissions.clear();
+        }
         permissions.add(0, permission);
     }
 
     @Override
     public Class realClass(final String elementName){
         final Class type = super.realClass(elementName);
-        for (int i = 0; i < permissions.size(); ++i){
-            final TypePermission permission = (TypePermission) permissions.get(i);
-            if (permission.allows(type))
+        for (Object permission2 : permissions){
+            final TypePermission permission = (TypePermission) permission2;
+            if (permission.allows(type)){
                 return type;
+            }
         }
         throw new ForbiddenClassException(type);
     }

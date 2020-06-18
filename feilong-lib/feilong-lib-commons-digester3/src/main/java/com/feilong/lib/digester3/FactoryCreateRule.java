@@ -242,7 +242,7 @@ public class FactoryCreateRule extends Rule{
     public void begin(String namespace,String name,Attributes attributes) throws Exception{
         if (ignoreCreateExceptions){
             if (exceptionIgnoredStack == null){
-                exceptionIgnoredStack = new Stack<Boolean>();
+                exceptionIgnoredStack = new Stack<>();
             }
 
             try{

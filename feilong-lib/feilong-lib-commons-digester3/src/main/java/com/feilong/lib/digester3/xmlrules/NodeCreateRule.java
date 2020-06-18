@@ -25,46 +25,36 @@ import org.xml.sax.Attributes;
 
 import com.feilong.lib.digester3.binder.LinkedRuleBuilder;
 import com.feilong.lib.digester3.binder.NodeCreateRuleProvider;
-import com.feilong.lib.digester3.binder.RulesBinder;
 import com.feilong.lib.digester3.binder.NodeCreateRuleProvider.NodeType;
+import com.feilong.lib.digester3.binder.RulesBinder;
 
 /**
  * 
  */
-final class NodeCreateRule
-    extends AbstractXmlRule
-{
+final class NodeCreateRule extends AbstractXmlRule{
 
-    public NodeCreateRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
+    public NodeCreateRule(RulesBinder targetRulesBinder, PatternStack patternStack){
+        super(targetRulesBinder, patternStack);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, Attributes attributes )
-        throws Exception
-    {
+    protected void bindRule(LinkedRuleBuilder linkedRuleBuilder,Attributes attributes) throws Exception{
         NodeCreateRuleProvider nodeProvider = linkedRuleBuilder.createNode();
 
-        String nodeType = attributes.getValue( "type" );
-        if ( nodeType != null && nodeType.length() > 0 )
-        {
-            if ( "element".equals( nodeType ) )
-            {
-                nodeProvider.ofType( NodeType.ELEMENT );
-            }
-            else if ( "fragment".equals( nodeType ) )
-            {
-                nodeProvider.ofType( NodeType.DOCUMENT_FRAGMENT );
-            }
-            else
-            {
-                throw new RuntimeException( format(
-                    "Unrecognized node type: %s. This attribute is optional or can have a value of element|fragment.",
-                    nodeType ) );
+        String nodeType = attributes.getValue("type");
+        if (nodeType != null && nodeType.length() > 0){
+            if ("element".equals(nodeType)){
+                nodeProvider.ofType(NodeType.ELEMENT);
+            }else if ("fragment".equals(nodeType)){
+                nodeProvider.ofType(NodeType.DOCUMENT_FRAGMENT);
+            }else{
+                throw new RuntimeException(
+                                format(
+                                                "Unrecognized node type: %s. This attribute is optional or can have a value of element|fragment.",
+                                                nodeType));
             }
         }
     }

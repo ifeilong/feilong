@@ -21,7 +21,6 @@ package com.feilong.lib.digester3;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -154,7 +153,7 @@ public class ExtendedBaseRules extends RulesBase{
      * The decision algorithm used (unfortunately) doesn't preserve the entry order. This map is used by a comparator
      * which orders the list of matches before it's returned. This map stores the entry number keyed by the rule.
      */
-    private Map<Rule, Integer> order   = new HashMap<Rule, Integer>();
+    private Map<Rule, Integer> order   = new HashMap<>();
 
     // --------------------------------------------------------- Public Methods
 
@@ -188,7 +187,7 @@ public class ExtendedBaseRules extends RulesBase{
         }
 
         // we keep the list of universal matches separate
-        List<Rule> universalList = new ArrayList<Rule>(counter);
+        List<Rule> universalList = new ArrayList<>(counter);
 
         // Universal wildcards ('*') in the middle of the pattern-string
         List<Rule> recList = null;
@@ -387,28 +386,24 @@ public class ExtendedBaseRules extends RulesBase{
 
         // need to make sure that the collection is sort in the order
         // of addition. We use a custom comparator for this
-        Collections.sort(universalList, new Comparator<Rule>(){
+        Collections.sort(universalList, (r1,r2) -> {
+            // Get the entry order from the map
+            Integer i1 = order.get(r1);
+            Integer i2 = order.get(r2);
 
-            @Override
-            public int compare(Rule r1,Rule r2){
-                // Get the entry order from the map
-                Integer i1 = order.get(r1);
-                Integer i2 = order.get(r2);
+            // and use that to perform the comparison
+            if (i1 == null){
+                if (i2 == null){
 
-                // and use that to perform the comparison
-                if (i1 == null){
-                    if (i2 == null){
+                    return 0;
 
-                        return 0;
-
-                    }
-                    return -1;
-                }else if (i2 == null){
-                    return 1;
                 }
-
-                return (i1.intValue() - i2.intValue());
+                return -1;
+            }else if (i2 == null){
+                return 1;
             }
+
+            return (i1.intValue() - i2.intValue());
         });
 
         return universalList;

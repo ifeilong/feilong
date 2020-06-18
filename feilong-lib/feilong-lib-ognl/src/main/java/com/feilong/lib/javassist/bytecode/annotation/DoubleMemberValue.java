@@ -29,16 +29,18 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author Shigeru Chiba
  * @version $Revision: 1.7 $
  */
-public class DoubleMemberValue extends MemberValue {
+public class DoubleMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs a double constant value.  The initial value is specified
+     * Constructs a double constant value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index     the index of a CONSTANT_Double_info structure.
+     * @param index
+     *            the index of a CONSTANT_Double_info structure.
      */
-    public DoubleMemberValue(int index, ConstPool cp) {
+    public DoubleMemberValue(int index, ConstPool cp){
         super('D', cp);
         this.valueIndex = index;
     }
@@ -46,42 +48,43 @@ public class DoubleMemberValue extends MemberValue {
     /**
      * Constructs a double constant value.
      *
-     * @param d     the initial value.
+     * @param d
+     *            the initial value.
      */
-    public DoubleMemberValue(double d, ConstPool cp) {
+    public DoubleMemberValue(double d, ConstPool cp){
         super('D', cp);
         setValue(d);
     }
 
     /**
-     * Constructs a double constant value.  The initial value is 0.0.
+     * Constructs a double constant value. The initial value is 0.0.
      */
-    public DoubleMemberValue(ConstPool cp) {
+    public DoubleMemberValue(ConstPool cp){
         super('D', cp);
         setValue(0.0);
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m) {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m){
         return Double.valueOf(getValue());
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) {
+    Class<?> getType(ClassLoader cl){
         return double.class;
     }
 
     /**
      * Obtains the value of the member.
      */
-    public double getValue() {
+    public double getValue(){
         return cp.getDoubleInfo(valueIndex);
     }
 
     /**
      * Sets the value of the member.
      */
-    public void setValue(double newValue) {
+    public void setValue(double newValue){
         valueIndex = cp.addDoubleInfo(newValue);
     }
 
@@ -89,7 +92,7 @@ public class DoubleMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return Double.toString(getValue());
     }
 
@@ -97,7 +100,7 @@ public class DoubleMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.constValueIndex(getValue());
     }
 
@@ -105,7 +108,7 @@ public class DoubleMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitDoubleMemberValue(this);
     }
 }

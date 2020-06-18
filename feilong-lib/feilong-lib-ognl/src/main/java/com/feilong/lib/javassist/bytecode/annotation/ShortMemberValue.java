@@ -28,16 +28,18 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class ShortMemberValue extends MemberValue {
+public class ShortMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs a short constant value.  The initial value is specified
+     * Constructs a short constant value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index     the index of a CONSTANT_Integer_info structure.
+     * @param index
+     *            the index of a CONSTANT_Integer_info structure.
      */
-    public ShortMemberValue(int index, ConstPool cp) {
+    public ShortMemberValue(int index, ConstPool cp){
         super('S', cp);
         this.valueIndex = index;
     }
@@ -45,42 +47,43 @@ public class ShortMemberValue extends MemberValue {
     /**
      * Constructs a short constant value.
      *
-     * @param s         the initial value.
+     * @param s
+     *            the initial value.
      */
-    public ShortMemberValue(short s, ConstPool cp) {
+    public ShortMemberValue(short s, ConstPool cp){
         super('S', cp);
         setValue(s);
     }
 
     /**
-     * Constructs a short constant value.  The initial value is 0.
+     * Constructs a short constant value. The initial value is 0.
      */
-    public ShortMemberValue(ConstPool cp) {
+    public ShortMemberValue(ConstPool cp){
         super('S', cp);
-        setValue((short)0);
+        setValue((short) 0);
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m) {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m){
         return Short.valueOf(getValue());
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) {
+    Class<?> getType(ClassLoader cl){
         return short.class;
     }
 
     /**
      * Obtains the value of the member.
      */
-    public short getValue() {
-        return (short)cp.getIntegerInfo(valueIndex);
+    public short getValue(){
+        return (short) cp.getIntegerInfo(valueIndex);
     }
 
     /**
      * Sets the value of the member.
      */
-    public void setValue(short newValue) {
+    public void setValue(short newValue){
         valueIndex = cp.addIntegerInfo(newValue);
     }
 
@@ -88,7 +91,7 @@ public class ShortMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return Short.toString(getValue());
     }
 
@@ -96,7 +99,7 @@ public class ShortMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.constValueIndex(getValue());
     }
 
@@ -104,7 +107,7 @@ public class ShortMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitShortMemberValue(this);
     }
 }

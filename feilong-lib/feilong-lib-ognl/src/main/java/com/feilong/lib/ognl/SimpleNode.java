@@ -41,6 +41,11 @@ import com.feilong.lib.ognl.enhance.ExpressionAccessor;
  */
 public abstract class SimpleNode implements Node,Serializable{
 
+    /**
+     * 
+     */
+    private static final long  serialVersionUID = -574743279687880552L;
+
     protected Node             _parent;
 
     protected Node[]           _children;
@@ -141,8 +146,8 @@ public abstract class SimpleNode implements Node,Serializable{
         writer.println(toString(prefix));
 
         if (_children != null){
-            for (int i = 0; i < _children.length; ++i){
-                SimpleNode n = (SimpleNode) _children[i];
+            for (Node element : _children){
+                SimpleNode n = (SimpleNode) element;
                 if (n != null){
                     n.dump(writer, prefix + "  ");
                 }
@@ -407,29 +412,33 @@ public abstract class SimpleNode implements Node,Serializable{
         boolean shouldFlatten = false;
         int newSize = 0;
 
-        for (int i = 0; i < _children.length; ++i)
-            if (_children[i].getClass() == getClass()){
+        for (Node element : _children){
+            if (element.getClass() == getClass()){
                 shouldFlatten = true;
-                newSize += _children[i].jjtGetNumChildren();
-            }else
+                newSize += element.jjtGetNumChildren();
+            }else{
                 ++newSize;
+            }
+        }
 
         if (shouldFlatten){
             Node[] newChildren = new Node[newSize];
             int j = 0;
 
-            for (int i = 0; i < _children.length; ++i){
-                Node c = _children[i];
+            for (Node c : _children){
                 if (c.getClass() == getClass()){
-                    for (int k = 0; k < c.jjtGetNumChildren(); ++k)
+                    for (int k = 0; k < c.jjtGetNumChildren(); ++k){
                         newChildren[j++] = c.jjtGetChild(k);
+                    }
 
-                }else
+                }else{
                     newChildren[j++] = c;
+                }
             }
 
-            if (j != newSize)
+            if (j != newSize){
                 throw new Error("Assertion error: " + j + " != " + newSize);
+            }
 
             _children = newChildren;
         }

@@ -16,29 +16,38 @@
 
 package com.feilong.lib.javassist.compiler;
 
-class Token {
-    public Token next = null;
-    public int tokenId;
+class Token{
 
-    public long longValue;
+    public Token  next = null;
+
+    public int    tokenId;
+
+    public long   longValue;
+
     public double doubleValue;
+
     public String textValue;
 }
 
-public class Lex implements TokenId {
-    private int lastChar;
-    private StringBuffer textBuffer;
-    private Token currentToken;
-    private Token lookAheadTokens;
+public class Lex implements TokenId{
 
-    private String input;
+    private int          lastChar;
+
+    private StringBuffer textBuffer;
+
+    private Token        currentToken;
+
+    private Token        lookAheadTokens;
+
+    private String       input;
+
     @SuppressWarnings("unused")
-    private int position, maxlen, lineNumber;
+    private int          position, maxlen, lineNumber;
 
     /**
      * Constructs a lexical analyzer.
      */
-    public Lex(String s) {
+    public Lex(String s){
         lastChar = -1;
         textBuffer = new StringBuffer();
         currentToken = new Token();
@@ -50,9 +59,10 @@ public class Lex implements TokenId {
         lineNumber = 0;
     }
 
-    public int get() {
-        if (lookAheadTokens == null)
+    public int get(){
+        if (lookAheadTokens == null){
             return get(currentToken);
+        }
         Token t;
         currentToken = t = lookAheadTokens;
         lookAheadTokens = lookAheadTokens.next;
@@ -62,67 +72,67 @@ public class Lex implements TokenId {
     /**
      * Looks at the next token.
      */
-    public int lookAhead() {
+    public int lookAhead(){
         return lookAhead(0);
     }
 
-    public int lookAhead(int i) {
+    public int lookAhead(int i){
         Token tk = lookAheadTokens;
-        if (tk == null) {
-            lookAheadTokens = tk = currentToken;  // reuse an object!
+        if (tk == null){
+            lookAheadTokens = tk = currentToken; // reuse an object!
             tk.next = null;
             get(tk);
         }
 
-        for (; i-- > 0; tk = tk.next)
-            if (tk.next == null) {
+        for (; i-- > 0; tk = tk.next){
+            if (tk.next == null){
                 Token tk2;
                 tk.next = tk2 = new Token();
                 get(tk2);
             }
+        }
 
         currentToken = tk;
         return tk.tokenId;
     }
 
-    public String getString() {
+    public String getString(){
         return currentToken.textValue;
     }
 
-    public long getLong() {
+    public long getLong(){
         return currentToken.longValue;
     }
 
-    public double getDouble() {
+    public double getDouble(){
         return currentToken.doubleValue;
     }
 
-    private int get(Token token) {
+    private int get(Token token){
         int t;
-        do {
+        do{
             t = readLine(token);
-        } while (t == '\n');
+        }while (t == '\n');
         token.tokenId = t;
         return t;
     }
 
-    private int readLine(Token token) {
+    private int readLine(Token token){
         int c = getNextNonWhiteChar();
-        if(c < 0)
+        if (c < 0){
             return c;
-        else if(c == '\n') {
+        }else if (c == '\n'){
             ++lineNumber;
             return '\n';
-        }
-        else if (c == '\'')
+        }else if (c == '\''){
             return readCharConst(token);
-        else if (c == '"')
+        }else if (c == '"'){
             return readStringL(token);
-        else if ('0' <= c && c <= '9')
+        }else if ('0' <= c && c <= '9'){
             return readNumber(c, token);
-        else if(c == '.'){
+        }else if (c == '.'){
             c = getc();
-            if ('0' <= c && c <= '9') {
+            if ('0' <= c && c <= '9'){
                 StringBuffer tbuf = textBuffer;
                 tbuf.setLength(0);
                 tbuf.append('.');
@@ -130,104 +140,109 @@ public class Lex implements TokenId {
             }
             ungetc(c);
             return readSeparator('.');
-        }
-        else if (Character.isJavaIdentifierStart((char)c))
+        }else if (Character.isJavaIdentifierStart((char) c)){
             return readIdentifier(c, token);
+        }
         return readSeparator(c);
     }
 
-    private int getNextNonWhiteChar() {
+    private int getNextNonWhiteChar(){
         int c;
-        do {
+        do{
             c = getc();
-            if (c == '/') {
+            if (c == '/'){
                 c = getc();
-                if (c == '/')
-                    do {
+                if (c == '/'){
+                    do{
                         c = getc();
-                    } while (c != '\n' && c != '\r' && c != -1);
-                else if (c == '*')
-                    while (true) {
+                    }while (c != '\n' && c != '\r' && c != -1);
+                }else if (c == '*'){
+                    while (true){
                         c = getc();
-                        if (c == -1)
+                        if (c == -1){
                             break;
-                        else if (c == '*')
-                            if ((c = getc()) == '/') {
+                        }else if (c == '*'){
+                            if ((c = getc()) == '/'){
                                 c = ' ';
                                 break;
-                            }
-                            else
+                            }else{
                                 ungetc(c);
+                            }
+                        }
                     }
-                else {
+                }else{
                     ungetc(c);
                     c = '/';
                 }
             }
-        } while(isBlank(c));
+        }while (isBlank(c));
         return c;
     }
 
-    private int readCharConst(Token token) {
+    private int readCharConst(Token token){
         int c;
         int value = 0;
-        while ((c = getc()) != '\'')
-            if (c == '\\')
+        while ((c = getc()) != '\''){
+            if (c == '\\'){
                 value = readEscapeChar();
-            else if (c < 0x20) {
-                if (c == '\n')
+            }else if (c < 0x20){
+                if (c == '\n'){
                     ++lineNumber;
+                }
 
                 return BadToken;
-            }
-            else
+            }else{
                 value = c;
+            }
+        }
 
         token.longValue = value;
         return CharConstant;
     }
 
-    private int readEscapeChar() {
+    private int readEscapeChar(){
         int c = getc();
-        if (c == 'n')
+        if (c == 'n'){
             c = '\n';
-        else if (c == 't')
+        }else if (c == 't'){
             c = '\t';
-        else if (c == 'r')
+        }else if (c == 'r'){
             c = '\r';
-        else if (c == 'f')
+        }else if (c == 'f'){
             c = '\f';
-        else if (c == '\n')
+        }else if (c == '\n'){
             ++lineNumber;
+        }
 
         return c;
     }
 
-    private int readStringL(Token token) {
+    private int readStringL(Token token){
         int c;
         StringBuffer tbuf = textBuffer;
         tbuf.setLength(0);
-        for (;;) {
-            while ((c = getc()) != '"') {
-                if (c == '\\')
+        for (;;){
+            while ((c = getc()) != '"'){
+                if (c == '\\'){
                     c = readEscapeChar();
-                else if (c == '\n' || c < 0) {
+                }else if (c == '\n' || c < 0){
                     ++lineNumber;
                     return BadToken;
                 }
 
-                tbuf.append((char)c);
+                tbuf.append((char) c);
             }
 
-            for (;;) {
+            for (;;){
                 c = getc();
-                if (c == '\n')
+                if (c == '\n'){
                     ++lineNumber;
-                else if (!isBlank(c))
+                }else if (!isBlank(c)){
                     break;
+                }
             }
 
-            if (c != '"') {
+            if (c != '"'){
                 ungetc(c);
                 break;
             }
@@ -237,200 +252,234 @@ public class Lex implements TokenId {
         return StringL;
     }
 
-    private int readNumber(int c, Token token) {
+    private int readNumber(int c,Token token){
         long value = 0;
         int c2 = getc();
-        if (c == '0')
-            if (c2 == 'X' || c2 == 'x')
-                for (;;) {
+        if (c == '0'){
+            if (c2 == 'X' || c2 == 'x'){
+                for (;;){
                     c = getc();
-                    if ('0' <= c && c <= '9')
+                    if ('0' <= c && c <= '9'){
                         value = value * 16 + (c - '0');
-                    else if ('A' <= c && c <= 'F')
+                    }else if ('A' <= c && c <= 'F'){
                         value = value * 16 + (c - 'A' + 10);
-                    else if ('a' <= c && c <= 'f')
+                    }else if ('a' <= c && c <= 'f'){
                         value = value * 16 + (c - 'a' + 10);
-                    else {
+                    }else{
                         token.longValue = value;
-                        if (c == 'L' || c == 'l')
+                        if (c == 'L' || c == 'l'){
                             return LongConstant;
+                        }
                         ungetc(c);
                         return IntConstant;
                     }
                 }
-            else if ('0' <= c2 && c2 <= '7') {
+            }else if ('0' <= c2 && c2 <= '7'){
                 value = c2 - '0';
-                for (;;) {
+                for (;;){
                     c = getc();
-                    if ('0' <= c && c <= '7')
+                    if ('0' <= c && c <= '7'){
                         value = value * 8 + (c - '0');
-                    else {
+                    }else{
                         token.longValue = value;
-                        if (c == 'L' || c == 'l')
+                        if (c == 'L' || c == 'l'){
                             return LongConstant;
+                        }
                         ungetc(c);
                         return IntConstant;
                     }
                 }
             }
+        }
 
         value = c - '0';
-        while ('0' <= c2 && c2 <= '9') {
+        while ('0' <= c2 && c2 <= '9'){
             value = value * 10 + c2 - '0';
             c2 = getc();
         }
 
         token.longValue = value;
-        if (c2 == 'F' || c2 == 'f') {
+        if (c2 == 'F' || c2 == 'f'){
             token.doubleValue = value;
             return FloatConstant;
-        }
-        else if (c2 == 'E' || c2 == 'e'
-                 || c2 == 'D' || c2 == 'd' || c2 == '.') {
+        }else if (c2 == 'E' || c2 == 'e' || c2 == 'D' || c2 == 'd' || c2 == '.'){
             StringBuffer tbuf = textBuffer;
             tbuf.setLength(0);
             tbuf.append(value);
             return readDouble(tbuf, c2, token);
-        }
-        else if (c2 == 'L' || c2 == 'l')
+        }else if (c2 == 'L' || c2 == 'l'){
             return LongConstant;
-        else {
+        }else{
             ungetc(c2);
             return IntConstant;
         }
     }
 
-    private int readDouble(StringBuffer sbuf, int c, Token token) {
-        if (c != 'E' && c != 'e' && c != 'D' && c != 'd') {
-            sbuf.append((char)c);
-            for (;;) {
+    private int readDouble(StringBuffer sbuf,int c,Token token){
+        if (c != 'E' && c != 'e' && c != 'D' && c != 'd'){
+            sbuf.append((char) c);
+            for (;;){
                 c = getc();
-                if ('0' <= c && c <= '9')
-                    sbuf.append((char)c);
-                else
+                if ('0' <= c && c <= '9'){
+                    sbuf.append((char) c);
+                }else{
                     break;
+                }
             }
         }
 
-        if (c == 'E' || c == 'e') {
-            sbuf.append((char)c);
+        if (c == 'E' || c == 'e'){
+            sbuf.append((char) c);
             c = getc();
-            if (c == '+' || c == '-') {
-                sbuf.append((char)c);
+            if (c == '+' || c == '-'){
+                sbuf.append((char) c);
                 c = getc();
             }
 
-            while ('0' <= c && c <= '9') {
-                sbuf.append((char)c);
+            while ('0' <= c && c <= '9'){
+                sbuf.append((char) c);
                 c = getc();
             }
         }
 
-        try {
+        try{
             token.doubleValue = Double.parseDouble(sbuf.toString());
-        }
-        catch (NumberFormatException e) {
+        }catch (NumberFormatException e){
             return BadToken;
         }
 
-        if (c == 'F' || c == 'f')
+        if (c == 'F' || c == 'f'){
             return FloatConstant;
-        if (c != 'D' && c != 'd')
+        }
+        if (c != 'D' && c != 'd'){
             ungetc(c);
+        }
 
         return DoubleConstant;
     }
 
     // !"#$%&'(    )*+,-./0    12345678    9:;<=>?
-    private static final int[] equalOps
-        =  { NEQ, 0, 0, 0, MOD_E, AND_E, 0, 0,
-             0, MUL_E, PLUS_E, 0, MINUS_E, 0, DIV_E, 0,
-             0, 0, 0, 0, 0, 0, 0, 0,
-             0, 0, 0, LE, EQ, GE, 0 };
+    private static final int[] equalOps = {
+                                            NEQ,
+                                            0,
+                                            0,
+                                            0,
+                                            MOD_E,
+                                            AND_E,
+                                            0,
+                                            0,
+                                            0,
+                                            MUL_E,
+                                            PLUS_E,
+                                            0,
+                                            MINUS_E,
+                                            0,
+                                            DIV_E,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            LE,
+                                            EQ,
+                                            GE,
+                                            0 };
 
-    private int readSeparator(int c) {
+    private int readSeparator(int c){
         int c2, c3;
-        if ('!' <= c && c <= '?') {
+        if ('!' <= c && c <= '?'){
             int t = equalOps[c - '!'];
-            if (t == 0)
+            if (t == 0){
                 return c;
+            }
             c2 = getc();
-            if (c == c2)
+            if (c == c2){
                 switch (c) {
-                case '=' :
-                    return EQ;
-                case '+' :
-                    return PLUSPLUS;
-                case '-' :
-                    return MINUSMINUS;
-                case '&' :
-                    return ANDAND;
-                case '<' :
-                    c3 = getc();
-                    if (c3 == '=')
-                        return LSHIFT_E;
-                    ungetc(c3);
-                    return LSHIFT;
-                case '>' :
-                    c3 = getc();
-                    if (c3 == '=')
-                        return RSHIFT_E;
-                    else if (c3 == '>') {
+                    case '=':
+                        return EQ;
+                    case '+':
+                        return PLUSPLUS;
+                    case '-':
+                        return MINUSMINUS;
+                    case '&':
+                        return ANDAND;
+                    case '<':
                         c3 = getc();
-                        if (c3 == '=')
-                            return ARSHIFT_E;
+                        if (c3 == '='){
+                            return LSHIFT_E;
+                        }
                         ungetc(c3);
-                        return ARSHIFT;
-                    }
-                    else {
-                        ungetc(c3);
-                        return RSHIFT;
-                    }
-                default :
-                    break;
+                        return LSHIFT;
+                    case '>':
+                        c3 = getc();
+                        if (c3 == '='){
+                            return RSHIFT_E;
+                        }else if (c3 == '>'){
+                            c3 = getc();
+                            if (c3 == '='){
+                                return ARSHIFT_E;
+                            }
+                            ungetc(c3);
+                            return ARSHIFT;
+                        }else{
+                            ungetc(c3);
+                            return RSHIFT;
+                        }
+                    default:
+                        break;
                 }
-            else if (c2 == '=')
+            }else if (c2 == '='){
                 return t;
-        }
-        else if (c == '^') {
+            }
+        }else if (c == '^'){
             c2 = getc();
-            if (c2 == '=')
+            if (c2 == '='){
                 return EXOR_E;
-        }
-        else if (c == '|') {
+            }
+        }else if (c == '|'){
             c2 = getc();
-            if (c2 == '=')
+            if (c2 == '='){
                 return OR_E;
-            else if (c2 == '|')
+            }else if (c2 == '|'){
                 return OROR;
-        }
-        else
+            }
+        }else{
             return c;
+        }
 
         ungetc(c2);
         return c;
     }
 
-    private int readIdentifier(int c, Token token) {
+    private int readIdentifier(int c,Token token){
         StringBuffer tbuf = textBuffer;
         tbuf.setLength(0);
 
-        do {
-            tbuf.append((char)c);
+        do{
+            tbuf.append((char) c);
             c = getc();
-        } while (Character.isJavaIdentifierPart((char)c));
+        }while (Character.isJavaIdentifierPart((char) c));
 
         ungetc(c);
 
         String name = tbuf.toString();
         int t = ktable.lookup(name);
-        if (t >= 0)
+        if (t >= 0){
             return t;
-        /* tbuf.toString() is executed quickly since it does not
-         * need memory copy.  Using a hand-written extensible
+        }
+        /*
+         * tbuf.toString() is executed quickly since it does not
+         * need memory copy. Using a hand-written extensible
          * byte-array class instead of StringBuffer is not a good idea
-         * for execution speed.  Converting a byte array to a String
-         * object is very slow.  Using an extensible char array
+         * for execution speed. Converting a byte array to a String
+         * object is very slow. Using an extensible char array
          * might be OK.
          */
         token.textValue = name;
@@ -439,7 +488,7 @@ public class Lex implements TokenId {
 
     private static final KeywordTable ktable = new KeywordTable();
 
-    static {
+    static{
         ktable.append("abstract", ABSTRACT);
         ktable.append("boolean", BOOLEAN);
         ktable.append("break", BREAK);
@@ -493,38 +542,41 @@ public class Lex implements TokenId {
         ktable.append("while", WHILE);
     }
 
-    private static boolean isBlank(int c) {
-        return c == ' ' || c == '\t' || c == '\f' || c == '\r'
-            || c == '\n';
+    private static boolean isBlank(int c){
+        return c == ' ' || c == '\t' || c == '\f' || c == '\r' || c == '\n';
     }
 
     @SuppressWarnings("unused")
-    private static boolean isDigit(int c) {
+    private static boolean isDigit(int c){
         return '0' <= c && c <= '9';
     }
 
-    private void ungetc(int c) {
+    private void ungetc(int c){
         lastChar = c;
     }
 
-    public String getTextAround() {
+    public String getTextAround(){
         int begin = position - 10;
-        if (begin < 0)
+        if (begin < 0){
             begin = 0;
+        }
 
         int end = position + 10;
-        if (end > maxlen)
+        if (end > maxlen){
             end = maxlen;
+        }
 
         return input.substring(begin, end);
     }
 
-    private int getc() {
-        if (lastChar < 0)
-            if (position < maxlen)
+    private int getc(){
+        if (lastChar < 0){
+            if (position < maxlen){
                 return input.charAt(position++);
-            else
+            }else{
                 return -1;
+            }
+        }
         int c = lastChar;
         lastChar = -1;
         return c;

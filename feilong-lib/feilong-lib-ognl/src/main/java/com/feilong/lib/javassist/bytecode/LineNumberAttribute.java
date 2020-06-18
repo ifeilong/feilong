@@ -23,19 +23,18 @@ import java.util.Map;
 /**
  * <code>LineNumberTable_attribute</code>.
  */
-public class LineNumberAttribute extends AttributeInfo {
+public class LineNumberAttribute extends AttributeInfo{
+
     /**
      * The name of this attribute <code>"LineNumberTable"</code>.
      */
     public static final String tag = "LineNumberTable";
 
-    LineNumberAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    LineNumberAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
-    private LineNumberAttribute(ConstPool cp, byte[] i) {
+    private LineNumberAttribute(ConstPool cp, byte[] i){
         super(cp, tag, i);
     }
 
@@ -43,7 +42,7 @@ public class LineNumberAttribute extends AttributeInfo {
      * Returns <code>line_number_table_length</code>.
      * This represents the number of entries in the table.
      */
-    public int tableLength() {
+    public int tableLength(){
         return ByteArray.readU16bit(info, 0);
     }
 
@@ -52,9 +51,10 @@ public class LineNumberAttribute extends AttributeInfo {
      * This represents the index into the code array at which the code
      * for a new line in the original source file begins.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int startPc(int i) {
+    public int startPc(int i){
         return ByteArray.readU16bit(info, i * 4 + 2);
     }
 
@@ -63,26 +63,31 @@ public class LineNumberAttribute extends AttributeInfo {
      * This represents the corresponding line number in the original
      * source file.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int lineNumber(int i) {
+    public int lineNumber(int i){
         return ByteArray.readU16bit(info, i * 4 + 4);
     }
 
     /**
      * Returns the line number corresponding to the specified bytecode.
      *
-     * @param pc        the index into the code array.
+     * @param pc
+     *            the index into the code array.
      */
-    public int toLineNumber(int pc) {
+    public int toLineNumber(int pc){
         int n = tableLength();
         int i = 0;
-        for (; i < n; ++i)
-            if (pc < startPc(i))
-                if (i == 0)
+        for (; i < n; ++i){
+            if (pc < startPc(i)){
+                if (i == 0){
                     return lineNumber(0);
-                else
+                }else{
                     break;
+                }
+            }
+        }
 
         return lineNumber(i - 1);
     }
@@ -91,14 +96,17 @@ public class LineNumberAttribute extends AttributeInfo {
      * Returns the index into the code array at which the code for
      * the specified line begins.
      *
-     * @param line      the line number.
-     * @return          -1 if the specified line is not found.
+     * @param line
+     *            the line number.
+     * @return -1 if the specified line is not found.
      */
-    public int toStartPc(int line) {
+    public int toStartPc(int line){
         int n = tableLength();
-        for (int i = 0; i < n; ++i)
-            if (line == lineNumber(i))
+        for (int i = 0; i < n; ++i){
+            if (line == lineNumber(i)){
                 return startPc(i);
+            }
+        }
 
         return -1;
     }
@@ -106,11 +114,13 @@ public class LineNumberAttribute extends AttributeInfo {
     /**
      * Used as a return type of <code>toNearPc()</code>.
      */
-    static public class Pc {
+    static public class Pc{
+
         /**
          * The index into the code array.
-         */ 
+         */
         public int index;
+
         /**
          * The line number.
          */
@@ -122,25 +132,25 @@ public class LineNumberAttribute extends AttributeInfo {
      * the specified line (or the nearest line after the specified one)
      * begins.
      *
-     * @param line      the line number.
-     * @return          a pair of the index and the line number of the
-     *                  bytecode at that index.
+     * @param line
+     *            the line number.
+     * @return a pair of the index and the line number of the
+     *         bytecode at that index.
      */
-    public Pc toNearPc(int line) {
+    public Pc toNearPc(int line){
         int n = tableLength();
         int nearPc = 0;
         int distance = 0;
-        if (n > 0) {
+        if (n > 0){
             distance = lineNumber(0) - line;
             nearPc = startPc(0);
         }
 
-        for (int i = 1; i < n; ++i) {
+        for (int i = 1; i < n; ++i){
             int d = lineNumber(i) - line;
-            if ((d < 0 && d > distance)
-                || (d >= 0 && (d < distance || distance < 0))) { 
-                    distance = d;
-                    nearPc = startPc(i);
+            if ((d < 0 && d > distance) || (d >= 0 && (d < distance || distance < 0))){
+                distance = d;
+                nearPc = startPc(i);
             }
         }
 
@@ -153,16 +163,19 @@ public class LineNumberAttribute extends AttributeInfo {
     /**
      * Makes a copy.
      *
-     * @param newCp     the constant pool table used by the new copy.
-     * @param classnames        should be null.
+     * @param newCp
+     *            the constant pool table used by the new copy.
+     * @param classnames
+     *            should be null.
      */
     @Override
-    public AttributeInfo copy(ConstPool newCp, Map<String,String> classnames) {
+    public AttributeInfo copy(ConstPool newCp,Map<String, String> classnames){
         byte[] src = info;
         int num = src.length;
         byte[] dest = new byte[num];
-        for (int i = 0; i < num; ++i)
+        for (int i = 0; i < num; ++i){
             dest[i] = src[i];
+        }
 
         LineNumberAttribute attr = new LineNumberAttribute(newCp, dest);
         return attr;
@@ -171,13 +184,14 @@ public class LineNumberAttribute extends AttributeInfo {
     /**
      * Adjusts start_pc if bytecode is inserted in a method body.
      */
-    void shiftPc(int where, int gapLength, boolean exclusive) {
+    void shiftPc(int where,int gapLength,boolean exclusive){
         int n = tableLength();
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i){
             int pos = i * 4 + 2;
             int pc = ByteArray.readU16bit(info, pos);
-            if (pc > where || (exclusive && pc == where))
+            if (pc > where || (exclusive && pc == where)){
                 ByteArray.write16bit(pc + gapLength, info, pos);
+            }
         }
     }
 }

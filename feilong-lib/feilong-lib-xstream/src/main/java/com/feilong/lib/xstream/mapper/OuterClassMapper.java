@@ -80,8 +80,7 @@ public class OuterClassMapper extends MapperWrapper implements Caching{
         if (innerFieldNames == null){
             innerFieldNames = getInnerFieldNames(type.getSuperclass());
             Field[] declaredFields = type.getDeclaredFields();
-            for (int i = 0; i < declaredFields.length; i++){
-                final Field field = declaredFields[i];
+            for (final Field field : declaredFields){
                 if (field.getName().startsWith("this$")){
                     String[] temp = new String[innerFieldNames.length + 1];
                     System.arraycopy(innerFieldNames, 0, temp, 0, innerFieldNames.length);

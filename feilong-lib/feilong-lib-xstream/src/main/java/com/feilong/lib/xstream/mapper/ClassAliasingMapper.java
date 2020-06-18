@@ -43,6 +43,7 @@ public class ClassAliasingMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.3, method was a leftover of an old implementation
      */
+    @Deprecated
     public void addClassAttributeAlias(String name,Class type){
         addClassAlias(name, type);
     }
@@ -86,6 +87,7 @@ public class ClassAliasingMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.4.9
      */
+    @Deprecated
     public boolean itemTypeAsAttribute(Class clazz){
         return classToName.containsKey(clazz.getName());
     }
@@ -93,6 +95,7 @@ public class ClassAliasingMapper extends MapperWrapper{
     /**
      * @deprecated As of 1.4.9
      */
+    @Deprecated
     public boolean aliasIsAttribute(String name){
         return nameToType.containsKey(name);
     }

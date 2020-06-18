@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTSubtract extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3218366802786936551L;
+
     public ASTSubtract(int id){
         super(id);
     }

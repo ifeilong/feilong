@@ -49,15 +49,17 @@ public class FieldDictionary implements Caching{
 
     private void init(){
         dictionaryEntries = new HashMap();
-        if (JVM.is15())
+        if (JVM.is15()){
             try{
                 fieldUtil = (FieldUtil) JVM.loadClassForName("com.feilong.lib.xstream.converters.reflection.FieldUtil15", true)
                                 .newInstance();
             }catch (Exception e){
-                ;
+
             }
-        if (fieldUtil == null)
+        }
+        if (fieldUtil == null){
             fieldUtil = new FieldUtil14();
+        }
     }
 
     /**

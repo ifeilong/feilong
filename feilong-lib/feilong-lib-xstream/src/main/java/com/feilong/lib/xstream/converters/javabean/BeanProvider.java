@@ -85,9 +85,8 @@ public class BeanProvider implements JavaBeanProvider{
     @Override
     public void visitSerializableProperties(Object object,JavaBeanProvider.Visitor visitor){
         PropertyDescriptor[] propertyDescriptors = getSerializableProperties(object);
-        for (int i = 0; i < propertyDescriptors.length; i++){
+        for (PropertyDescriptor property : propertyDescriptors){
             ErrorWritingException ex = null;
-            PropertyDescriptor property = propertyDescriptors[i];
             try{
                 Method readMethod = property.getReadMethod();
                 String name = property.getName();
@@ -161,10 +160,10 @@ public class BeanProvider implements JavaBeanProvider{
     protected Constructor getDefaultConstrutor(Class type){
 
         Constructor[] constructors = type.getConstructors();
-        for (int i = 0; i < constructors.length; i++){
-            Constructor c = constructors[i];
-            if (c.getParameterTypes().length == 0 && Modifier.isPublic(c.getModifiers()))
+        for (Constructor c : constructors){
+            if (c.getParameterTypes().length == 0 && Modifier.isPublic(c.getModifiers())){
                 return c;
+            }
         }
         return null;
     }

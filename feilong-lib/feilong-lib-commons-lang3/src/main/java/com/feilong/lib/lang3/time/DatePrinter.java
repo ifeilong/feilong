@@ -32,147 +32,195 @@ import java.util.TimeZone;
  *
  * @since 3.2
  */
-public interface DatePrinter {
+public interface DatePrinter{
 
     /**
-     * <p>Formats a millisecond {@code long} value.</p>
+     * <p>
+     * Formats a millisecond {@code long} value.
+     * </p>
      *
-     * @param millis  the millisecond value to format
+     * @param millis
+     *            the millisecond value to format
      * @return the formatted string
      * @since 2.1
      */
     String format(long millis);
 
     /**
-     * <p>Formats a {@code Date} object using a {@code GregorianCalendar}.</p>
+     * <p>
+     * Formats a {@code Date} object using a {@code GregorianCalendar}.
+     * </p>
      *
-     * @param date  the date to format
+     * @param date
+     *            the date to format
      * @return the formatted string
      */
     String format(Date date);
 
     /**
-     * <p>Formats a {@code Calendar} object.</p>
+     * <p>
+     * Formats a {@code Calendar} object.
+     * </p>
      * The TimeZone set on the Calendar is only used to adjust the time offset.
      * The TimeZone specified during the construction of the Parser will determine the TimeZone
      * used in the formatted string.
      *
-     * @param calendar  the calendar to format.
+     * @param calendar
+     *            the calendar to format.
      * @return the formatted string
      */
     String format(Calendar calendar);
 
     /**
-     * <p>Formats a millisecond {@code long} value into the
-     * supplied {@code StringBuffer}.</p>
+     * <p>
+     * Formats a millisecond {@code long} value into the
+     * supplied {@code StringBuffer}.
+     * </p>
      *
-     * @param millis  the millisecond value to format
-     * @param buf  the buffer to format into
+     * @param millis
+     *            the millisecond value to format
+     * @param buf
+     *            the buffer to format into
      * @return the specified string buffer
      * @deprecated Use {{@link #format(long, Appendable)}.
      */
     @Deprecated
-    StringBuffer format(long millis, StringBuffer buf);
+    StringBuffer format(long millis,StringBuffer buf);
 
     /**
-     * <p>Formats a {@code Date} object into the
-     * supplied {@code StringBuffer} using a {@code GregorianCalendar}.</p>
+     * <p>
+     * Formats a {@code Date} object into the
+     * supplied {@code StringBuffer} using a {@code GregorianCalendar}.
+     * </p>
      *
-     * @param date  the date to format
-     * @param buf  the buffer to format into
+     * @param date
+     *            the date to format
+     * @param buf
+     *            the buffer to format into
      * @return the specified string buffer
      * @deprecated Use {{@link #format(Date, Appendable)}.
      */
     @Deprecated
-    StringBuffer format(Date date, StringBuffer buf);
+    StringBuffer format(Date date,StringBuffer buf);
 
     /**
-     * <p>Formats a {@code Calendar} object into the supplied {@code StringBuffer}.</p>
+     * <p>
+     * Formats a {@code Calendar} object into the supplied {@code StringBuffer}.
+     * </p>
      * The TimeZone set on the Calendar is only used to adjust the time offset.
      * The TimeZone specified during the construction of the Parser will determine the TimeZone
      * used in the formatted string.
      *
-     * @param calendar  the calendar to format
-     * @param buf  the buffer to format into
+     * @param calendar
+     *            the calendar to format
+     * @param buf
+     *            the buffer to format into
      * @return the specified string buffer
      * @deprecated Use {{@link #format(Calendar, Appendable)}.
      */
     @Deprecated
-    StringBuffer format(Calendar calendar, StringBuffer buf);
+    StringBuffer format(Calendar calendar,StringBuffer buf);
 
     /**
-     * <p>Formats a millisecond {@code long} value into the
-     * supplied {@code Appendable}.</p>
+     * <p>
+     * Formats a millisecond {@code long} value into the
+     * supplied {@code Appendable}.
+     * </p>
      *
-     * @param millis  the millisecond value to format
-     * @param buf  the buffer to format into
-     * @param <B> the Appendable class type, usually StringBuilder or StringBuffer.
+     * @param millis
+     *            the millisecond value to format
+     * @param buf
+     *            the buffer to format into
+     * @param <B>
+     *            the Appendable class type, usually StringBuilder or StringBuffer.
      * @return the specified string buffer
      * @since 3.5
      */
-    <B extends Appendable> B format(long millis, B buf);
+    <B extends Appendable> B format(long millis,B buf);
 
     /**
-     * <p>Formats a {@code Date} object into the
-     * supplied {@code Appendable} using a {@code GregorianCalendar}.</p>
+     * <p>
+     * Formats a {@code Date} object into the
+     * supplied {@code Appendable} using a {@code GregorianCalendar}.
+     * </p>
      *
-     * @param date  the date to format
-     * @param buf  the buffer to format into
-     * @param <B> the Appendable class type, usually StringBuilder or StringBuffer.
+     * @param date
+     *            the date to format
+     * @param buf
+     *            the buffer to format into
+     * @param <B>
+     *            the Appendable class type, usually StringBuilder or StringBuffer.
      * @return the specified string buffer
      * @since 3.5
      */
-    <B extends Appendable> B format(Date date, B buf);
+    <B extends Appendable> B format(Date date,B buf);
 
     /**
-     * <p>Formats a {@code Calendar} object into the supplied {@code Appendable}.</p>
+     * <p>
+     * Formats a {@code Calendar} object into the supplied {@code Appendable}.
+     * </p>
      * The TimeZone set on the Calendar is only used to adjust the time offset.
      * The TimeZone specified during the construction of the Parser will determine the TimeZone
      * used in the formatted string.
      *
-     * @param calendar  the calendar to format
-     * @param buf  the buffer to format into
-     * @param <B> the Appendable class type, usually StringBuilder or StringBuffer.
+     * @param calendar
+     *            the calendar to format
+     * @param buf
+     *            the buffer to format into
+     * @param <B>
+     *            the Appendable class type, usually StringBuilder or StringBuffer.
      * @return the specified string buffer
      * @since 3.5
      */
-    <B extends Appendable> B format(Calendar calendar, B buf);
-
+    <B extends Appendable> B format(Calendar calendar,B buf);
 
     // Accessors
     //-----------------------------------------------------------------------
     /**
-     * <p>Gets the pattern used by this printer.</p>
+     * <p>
+     * Gets the pattern used by this printer.
+     * </p>
      *
      * @return the pattern, {@link java.text.SimpleDateFormat} compatible
      */
     String getPattern();
 
     /**
-     * <p>Gets the time zone used by this printer.</p>
+     * <p>
+     * Gets the time zone used by this printer.
+     * </p>
      *
-     * <p>This zone is always used for {@code Date} printing. </p>
+     * <p>
+     * This zone is always used for {@code Date} printing.
+     * </p>
      *
      * @return the time zone
      */
     TimeZone getTimeZone();
 
     /**
-     * <p>Gets the locale used by this printer.</p>
+     * <p>
+     * Gets the locale used by this printer.
+     * </p>
      *
      * @return the locale
      */
     Locale getLocale();
 
     /**
-     * <p>Formats a {@code Date}, {@code Calendar} or
-     * {@code Long} (milliseconds) object.</p>
+     * <p>
+     * Formats a {@code Date}, {@code Calendar} or
+     * {@code Long} (milliseconds) object.
+     * </p>
      *
-     * @param obj  the object to format
-     * @param toAppendTo  the buffer to append to
-     * @param pos  the position - ignored
+     * @param obj
+     *            the object to format
+     * @param toAppendTo
+     *            the buffer to append to
+     * @param pos
+     *            the position - ignored
      * @return the buffer passed in
      * @see java.text.DateFormat#format(Object, StringBuffer, FieldPosition)
      */
-    StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos);
+    StringBuffer format(Object obj,StringBuffer toAppendTo,FieldPosition pos);
 }

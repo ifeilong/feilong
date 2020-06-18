@@ -9,7 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.feilong.lib.javassist.*;
+import com.feilong.lib.javassist.CannotCompileException;
+import com.feilong.lib.javassist.ClassPool;
+import com.feilong.lib.javassist.CtClass;
+import com.feilong.lib.javassist.CtField;
+import com.feilong.lib.javassist.CtMethod;
+import com.feilong.lib.javassist.CtNewConstructor;
+import com.feilong.lib.javassist.CtNewMethod;
+import com.feilong.lib.javassist.LoaderClassPath;
+import com.feilong.lib.javassist.NotFoundException;
 import com.feilong.lib.ognl.ASTAnd;
 import com.feilong.lib.ognl.ASTChain;
 import com.feilong.lib.ognl.ASTConst;
@@ -72,10 +80,11 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     public static void addCastString(OgnlContext context,String cast){
         String value = (String) context.get(PRE_CAST);
 
-        if (value != null)
+        if (value != null){
             value = cast + value;
-        else
+        }else{
             value = cast;
+        }
 
         context.put(PRE_CAST, value);
     }
@@ -93,8 +102,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
      * @return The converted raw string version of the class name.
      */
     public static String getCastString(Class type){
-        if (type == null)
+        if (type == null){
             return null;
+        }
 
         return type.isArray() ? type.getComponentType().getName() + "[]" : type.getName();
     }
@@ -116,8 +126,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     public static String getRootExpression(Node expression,Object root,OgnlContext context){
         String rootExpr = "";
 
-        if (!shouldCast(expression))
+        if (!shouldCast(expression)){
             return rootExpr;
+        }
 
         if ((!ASTList.class.isInstance(expression) && !ASTVarRef.class.isInstance(expression)
                         && !ASTStaticMethod.class.isInstance(expression) && !ASTStaticField.class.isInstance(expression)
@@ -130,8 +141,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
             if (castClass.isArray() || ASTRootVarRef.class.isInstance(expression) || ASTThisVarRef.class.isInstance(expression)){
                 rootExpr = "((" + getCastString(castClass) + ")$2)";
 
-                if (ASTProperty.class.isInstance(expression) && !((ASTProperty) expression).isIndexedAccess())
+                if (ASTProperty.class.isInstance(expression) && !((ASTProperty) expression).isIndexedAccess()){
                     rootExpr += ".";
+                }
             }else if ((ASTProperty.class.isInstance(expression) && ((ASTProperty) expression).isIndexedAccess())
                             || ASTChain.class.isInstance(expression)){
                 rootExpr = "((" + getCastString(castClass) + ")$2)";
@@ -144,7 +156,8 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     }
 
     /**
-     * Used by {@link #getRootExpression(com.feilong.lib.ognl.Node, Object, com.feilong.lib.ognl.OgnlContext)} to determine if the expression
+     * Used by {@link #getRootExpression(com.feilong.lib.ognl.Node, Object, com.feilong.lib.ognl.OgnlContext)} to determine if the
+     * expression
      * needs to be cast at all.
      *
      * @param expression
@@ -155,8 +168,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         if (ASTChain.class.isInstance(expression)){
             Node child = expression.jjtGetChild(0);
             if (ASTConst.class.isInstance(child) || ASTStaticMethod.class.isInstance(child) || ASTStaticField.class.isInstance(child)
-                            || (ASTVarRef.class.isInstance(child) && !ASTRootVarRef.class.isInstance(child)))
+                            || (ASTVarRef.class.isInstance(child) && !ASTRootVarRef.class.isInstance(child))){
                 return false;
+            }
         }
 
         return !ASTConst.class.isInstance(expression);
@@ -179,8 +193,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
                         || (context.get(ExpressionCompiler.PRE_CAST) != null
                                         && ((String) context.get(ExpressionCompiler.PRE_CAST)).startsWith("new"))
                         || ASTStaticField.class.isInstance(expression) || ASTStaticMethod.class.isInstance(expression)
-                        || (OrderedReturn.class.isInstance(expression) && ((OrderedReturn) expression).getLastExpression() != null))
+                        || (OrderedReturn.class.isInstance(expression) && ((OrderedReturn) expression).getLastExpression() != null)){
             return body;
+        }
 
         /*
          * System.out.println("castExpression() with expression " + expression + " expr class: " + expression.getClass() +
@@ -198,28 +213,32 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
 
     @Override
     public String getClassName(Class clazz){
-        if (clazz.getName().equals("java.util.AbstractList$Itr"))
+        if (clazz.getName().equals("java.util.AbstractList$Itr")){
             return Iterator.class.getName();
+        }
 
-        if (Modifier.isPublic(clazz.getModifiers()) && clazz.isInterface())
+        if (Modifier.isPublic(clazz.getModifiers()) && clazz.isInterface()){
             return clazz.getName();
+        }
 
         return _getClassName(clazz, clazz.getInterfaces());
     }
 
     private String _getClassName(Class clazz,Class[] intf){
-        for (int i = 0; i < intf.length; i++){
-            if (intf[i].getName().indexOf("util.List") > 0)
-                return intf[i].getName();
-            else if (intf[i].getName().indexOf("Iterator") > 0)
-                return intf[i].getName();
+        for (Class element : intf){
+            if (element.getName().indexOf("util.List") > 0){
+                return element.getName();
+            }else if (element.getName().indexOf("Iterator") > 0){
+                return element.getName();
+            }
         }
 
         final Class superclazz = clazz.getSuperclass();
         if (superclazz != null){
             final Class[] superclazzIntf = superclazz.getInterfaces();
-            if (superclazzIntf.length > 0)
+            if (superclazzIntf.length > 0){
                 return _getClassName(superclazz, superclazzIntf);
+            }
         }
 
         return clazz.getName();
@@ -231,26 +250,30 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         if (intfs != null && intfs.length > 0){
             Class intClass;
 
-            for (int i = 0; i < intfs.length; i++){
-                intClass = getSuperOrInterfaceClass(m, intfs[i]);
+            for (Class intf : intfs){
+                intClass = getSuperOrInterfaceClass(m, intf);
 
-                if (intClass != null)
+                if (intClass != null){
                     return intClass;
+                }
 
-                if (Modifier.isPublic(intfs[i].getModifiers()) && containsMethod(m, intfs[i]))
-                    return intfs[i];
+                if (Modifier.isPublic(intf.getModifiers()) && containsMethod(m, intf)){
+                    return intf;
+                }
             }
         }
 
         if (clazz.getSuperclass() != null){
             Class superClass = getSuperOrInterfaceClass(m, clazz.getSuperclass());
 
-            if (superClass != null)
+            if (superClass != null){
                 return superClass;
+            }
         }
 
-        if (Modifier.isPublic(clazz.getModifiers()) && containsMethod(m, clazz))
+        if (Modifier.isPublic(clazz.getModifiers()) && containsMethod(m, clazz)){
             return clazz;
+        }
 
         return null;
     }
@@ -268,18 +291,21 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     public boolean containsMethod(Method m,Class clazz){
         Method[] methods = clazz.getMethods();
 
-        if (methods == null)
+        if (methods == null){
             return false;
+        }
 
-        for (int i = 0; i < methods.length; i++){
-            if (methods[i].getName().equals(m.getName()) && methods[i].getReturnType() == m.getReturnType()){
+        for (Method method : methods){
+            if (method.getName().equals(m.getName()) && method.getReturnType() == m.getReturnType()){
                 Class[] parms = m.getParameterTypes();
-                if (parms == null)
+                if (parms == null){
                     continue;
+                }
 
-                Class[] mparms = methods[i].getParameterTypes();
-                if (mparms == null || mparms.length != parms.length)
+                Class[] mparms = method.getParameterTypes();
+                if (mparms == null || mparms.length != parms.length){
                     continue;
+                }
 
                 boolean parmsMatch = true;
                 for (int p = 0; p < parms.length; p++){
@@ -289,16 +315,19 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
                     }
                 }
 
-                if (!parmsMatch)
+                if (!parmsMatch){
                     continue;
+                }
 
                 Class[] exceptions = m.getExceptionTypes();
-                if (exceptions == null)
+                if (exceptions == null){
                     continue;
+                }
 
-                Class[] mexceptions = methods[i].getExceptionTypes();
-                if (mexceptions == null || mexceptions.length != exceptions.length)
+                Class[] mexceptions = method.getExceptionTypes();
+                if (mexceptions == null || mexceptions.length != exceptions.length){
                     continue;
+                }
 
                 boolean exceptionsMatch = true;
                 for (int e = 0; e < exceptions.length; e++){
@@ -308,8 +337,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
                     }
                 }
 
-                if (!exceptionsMatch)
+                if (!exceptionsMatch){
                     continue;
+                }
 
                 return true;
             }
@@ -320,34 +350,38 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
 
     @Override
     public Class getInterfaceClass(Class clazz){
-        if (clazz.getName().equals("java.util.AbstractList$Itr"))
+        if (clazz.getName().equals("java.util.AbstractList$Itr")){
             return Iterator.class;
+        }
 
-        if (Modifier.isPublic(clazz.getModifiers()) && clazz.isInterface() || clazz.isPrimitive())
+        if (Modifier.isPublic(clazz.getModifiers()) && clazz.isInterface() || clazz.isPrimitive()){
             return clazz;
+        }
 
         return _getInterfaceClass(clazz, clazz.getInterfaces());
     }
 
     private Class _getInterfaceClass(Class clazz,Class[] intf){
-        for (int i = 0; i < intf.length; i++){
-            if (List.class.isAssignableFrom(intf[i]))
+        for (Class element : intf){
+            if (List.class.isAssignableFrom(element)){
                 return List.class;
-            else if (Iterator.class.isAssignableFrom(intf[i]))
+            }else if (Iterator.class.isAssignableFrom(element)){
                 return Iterator.class;
-            else if (Map.class.isAssignableFrom(intf[i]))
+            }else if (Map.class.isAssignableFrom(element)){
                 return Map.class;
-            else if (Set.class.isAssignableFrom(intf[i]))
+            }else if (Set.class.isAssignableFrom(element)){
                 return Set.class;
-            else if (Collection.class.isAssignableFrom(intf[i]))
+            }else if (Collection.class.isAssignableFrom(element)){
                 return Collection.class;
+            }
         }
 
         final Class superclazz = clazz.getSuperclass();
         if (superclazz != null){
             final Class[] superclazzIntf = superclazz.getInterfaces();
-            if (superclazzIntf.length > 0)
+            if (superclazzIntf.length > 0){
                 return _getInterfaceClass(superclazz, superclazzIntf);
+            }
         }
 
         return clazz;
@@ -355,8 +389,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
 
     @Override
     public Class getRootExpressionClass(Node rootNode,OgnlContext context){
-        if (context.getRoot() == null)
+        if (context.getRoot() == null){
             return null;
+        }
 
         Class ret = context.getRoot().getClass();
 
@@ -376,8 +411,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     public void compileExpression(OgnlContext context,Node expression,Object root) throws Exception{
         //        System.out.println("Compiling expr class " + expression.getClass().getName() + " and root " + root);
 
-        if (expression.getAccessor() != null)
+        if (expression.getAccessor() != null){
             return;
+        }
 
         String getBody, setBody;
 
@@ -485,8 +521,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
 
         String getterCode = expression.toGetSourceString(context, root);
 
-        if (getterCode == null || getterCode.trim().length() <= 0 && !ASTVarRef.class.isAssignableFrom(expression.getClass()))
+        if (getterCode == null || getterCode.trim().length() <= 0 && !ASTVarRef.class.isAssignableFrom(expression.getClass())){
             getterCode = "null";
+        }
 
         String castExpression = (String) context.get(PRE_CAST);
 
@@ -499,8 +536,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         String rootExpr = !getterCode.equals("null") ? getRootExpression(expression, root, context) : "";
 
         String noRoot = (String) context.remove("_noRoot");
-        if (noRoot != null)
+        if (noRoot != null){
             rootExpr = "";
+        }
 
         createLocalReferences(context, pool, newClass, objClass, valueGetter.getParameterTypes());
 
@@ -514,8 +552,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
             body = "{  return " + pre + (castExpression != null ? castExpression : "") + rootExpr + getterCode + post + ";}";
         }
 
-        if (body.indexOf("..") >= 0)
+        if (body.indexOf("..") >= 0){
             body = body.replaceAll("\\.\\.", ".");
+        }
 
         //        System.out.println("Getter Body: ===================================\n" + body);
         valueGetter.setBody(body);
@@ -530,8 +569,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         context.addLocalReference(referenceName, new LocalReferenceImpl(referenceName, expression, type));
 
         String castString = "";
-        if (!type.isPrimitive())
+        if (!type.isPrimitive()){
             castString = "(" + ExpressionCompiler.getCastString(type) + ") ";
+        }
 
         return castString + referenceName + "($$)";
     }
@@ -539,8 +579,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     void createLocalReferences(OgnlContext context,ClassPool pool,CtClass clazz,CtClass objClass,CtClass[] params)
                     throws CannotCompileException,NotFoundException{
         Map referenceMap = context.getLocalReferences();
-        if (referenceMap == null || referenceMap.size() < 1)
+        if (referenceMap == null || referenceMap.size() < 1){
             return;
+        }
 
         Iterator it = referenceMap.values().iterator();
 
@@ -553,8 +594,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
             body += " return  " + widener + ref.getExpression() + ";";
             body += "}";
 
-            if (body.indexOf("..") >= 0)
+            if (body.indexOf("..") >= 0){
                 body = body.replaceAll("\\.\\.", ".");
+            }
 
             //            System.out.println("adding method " + ref.getName() + " with body:\n" + body + " and return type: " + ref.getType());
 
@@ -575,8 +617,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
                     CtMethod valueSetter,
                     Node expression,
                     Object root) throws Exception{
-        if (ExpressionNode.class.isInstance(expression) || ASTConst.class.isInstance(expression))
+        if (ExpressionNode.class.isInstance(expression) || ASTConst.class.isInstance(expression)){
             throw new UnsupportedCompilationException("Can't compile expression/constant setters.");
+        }
 
         context.setRoot(root);
         context.remove(PRE_CAST);
@@ -586,24 +629,28 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         String setterCode = expression.toSetSourceString(context, root);
         String castExpression = (String) context.get(PRE_CAST);
 
-        if (setterCode == null || setterCode.trim().length() < 1)
+        if (setterCode == null || setterCode.trim().length() < 1){
             throw new UnsupportedCompilationException("Can't compile null setter body.");
+        }
 
-        if (root == null)
+        if (root == null){
             throw new UnsupportedCompilationException("Can't compile setters with a null root object.");
+        }
 
         String pre = getRootExpression(expression, root, context);
 
         String noRoot = (String) context.remove("_noRoot");
-        if (noRoot != null)
+        if (noRoot != null){
             pre = "";
+        }
 
         createLocalReferences(context, pool, newClass, objClass, valueSetter.getParameterTypes());
 
         body = "{" + (castExpression != null ? castExpression : "") + pre + setterCode + ";}";
 
-        if (body.indexOf("..") >= 0)
+        if (body.indexOf("..") >= 0){
             body = body.replaceAll("\\.\\.", ".");
+        }
 
         //        System.out.println("Setter Body: ===================================\n" + body);
 
@@ -673,8 +720,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
     protected EnhancedClassLoader getClassLoader(OgnlContext context){
         EnhancedClassLoader ret = (EnhancedClassLoader) _loaders.get(context.getClassResolver());
 
-        if (ret != null)
+        if (ret != null){
             return ret;
+        }
 
         ClassLoader classLoader = new ContextClassLoader(OgnlContext.class.getClassLoader(), context);
 
@@ -710,8 +758,9 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
      * @return The existing or new {@link ClassPool} instance.
      */
     protected ClassPool getClassPool(OgnlContext context,EnhancedClassLoader loader){
-        if (_pool != null)
+        if (_pool != null){
             return _pool;
+        }
 
         _pool = ClassPool.getDefault();
         _pool.insertClassPath(new LoaderClassPath(loader.getParent()));

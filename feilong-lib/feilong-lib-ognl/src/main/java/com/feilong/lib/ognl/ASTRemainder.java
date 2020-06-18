@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTRemainder extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -7322563800691717529L;
+
     public ASTRemainder(int id){
         super(id);
     }

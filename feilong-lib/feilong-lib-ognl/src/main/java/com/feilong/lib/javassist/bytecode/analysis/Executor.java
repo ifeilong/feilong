@@ -30,44 +30,54 @@ import com.feilong.lib.javassist.bytecode.Opcode;
  *
  * @author Jason T. Greene
  */
-public class Executor implements Opcode {
-    private final ConstPool constPool;
-    private final ClassPool classPool;
-    private final Type STRING_TYPE;
-    private final Type CLASS_TYPE;
-    private final Type THROWABLE_TYPE;
-    private int lastPos;
+public class Executor implements Opcode{
 
-    public Executor(ClassPool classPool, ConstPool constPool) {
+    private final ConstPool constPool;
+
+    private final ClassPool classPool;
+
+    private final Type      STRING_TYPE;
+
+    private final Type      CLASS_TYPE;
+
+    private final Type      THROWABLE_TYPE;
+
+    private int             lastPos;
+
+    public Executor(ClassPool classPool, ConstPool constPool){
         this.constPool = constPool;
         this.classPool = classPool;
 
-        try {
+        try{
             STRING_TYPE = getType("java.lang.String");
             CLASS_TYPE = getType("java.lang.Class");
             THROWABLE_TYPE = getType("java.lang.Throwable");
-        } catch (Exception e) {
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
     }
-
 
     /**
      * Execute the instruction, modeling the effects on the specified frame and subroutine.
      * If a subroutine is passed, the access flags will be modified if this instruction accesses
      * the local variable table.
      *
-     * @param method the method containing the instruction
-     * @param pos the position of the instruction in the method
-     * @param iter the code iterator used to find the instruction
-     * @param frame the frame to modify to represent the result of the instruction
-     * @param subroutine the optional subroutine this instruction belongs to.
-     * @throws BadBytecode if the bytecode violates the jvm spec
+     * @param method
+     *            the method containing the instruction
+     * @param pos
+     *            the position of the instruction in the method
+     * @param iter
+     *            the code iterator used to find the instruction
+     * @param frame
+     *            the frame to modify to represent the result of the instruction
+     * @param subroutine
+     *            the optional subroutine this instruction belongs to.
+     * @throws BadBytecode
+     *             if the bytecode violates the jvm spec
      */
-    public void execute(MethodInfo method, int pos, CodeIterator iter, Frame frame, Subroutine subroutine) throws BadBytecode {
+    public void execute(MethodInfo method,int pos,CodeIterator iter,Frame frame,Subroutine subroutine) throws BadBytecode{
         this.lastPos = pos;
         int opcode = iter.byteAt(pos);
-
 
         // Declared opcode in order
         switch (opcode) {
@@ -105,10 +115,10 @@ public class Executor implements Opcode {
                 frame.push(Type.INTEGER);
                 break;
             case LDC:
-                evalLDC(iter.byteAt(pos + 1),  frame);
+                evalLDC(iter.byteAt(pos + 1), frame);
                 break;
-            case LDC_W :
-            case LDC2_W :
+            case LDC_W:
+            case LDC2_W:
                 evalLDC(iter.u16bitAt(pos + 1), frame);
                 break;
             case ILOAD:
@@ -242,31 +252,34 @@ public class Executor implements Opcode {
                 evalArrayStore(Type.INTEGER, frame);
                 break;
             case POP:
-                if (frame.pop() == Type.TOP)
+                if (frame.pop() == Type.TOP){
                     throw new BadBytecode("POP can not be used with a category 2 value, pos = " + pos);
+                }
                 break;
             case POP2:
                 frame.pop();
                 frame.pop();
                 break;
-            case DUP: {
+            case DUP:{
                 Type type = frame.peek();
-                if (type == Type.TOP)
+                if (type == Type.TOP){
                     throw new BadBytecode("DUP can not be used with a category 2 value, pos = " + pos);
+                }
 
                 frame.push(frame.peek());
                 break;
             }
             case DUP_X1:
-            case DUP_X2: {
+            case DUP_X2:{
                 Type type = frame.peek();
-                if (type == Type.TOP)
+                if (type == Type.TOP){
                     throw new BadBytecode("DUP can not be used with a category 2 value, pos = " + pos);
+                }
                 int end = frame.getTopIndex();
                 int insert = end - (opcode - DUP_X1) - 1;
                 frame.push(type);
 
-                while (end > insert) {
+                while (end > insert){
                     frame.setStack(end, frame.getStack(end - 1));
                     end--;
                 }
@@ -278,14 +291,14 @@ public class Executor implements Opcode {
                 frame.push(frame.getStack(frame.getTopIndex() - 1));
                 break;
             case DUP2_X1:
-            case DUP2_X2: {
+            case DUP2_X2:{
                 int end = frame.getTopIndex();
                 int insert = end - (opcode - DUP2_X1) - 1;
                 Type type1 = frame.getStack(frame.getTopIndex() - 1);
                 Type type2 = frame.peek();
                 frame.push(type1);
                 frame.push(type2);
-                while (end > insert) {
+                while (end > insert){
                     frame.setStack(end, frame.getStack(end - 2));
                     end--;
                 }
@@ -293,11 +306,12 @@ public class Executor implements Opcode {
                 frame.setStack(insert - 1, type1);
                 break;
             }
-            case SWAP: {
+            case SWAP:{
                 Type type1 = frame.pop();
                 Type type2 = frame.pop();
-                if (type1.getSize() == 2 || type2.getSize() == 2)
+                if (type1.getSize() == 2 || type2.getSize() == 2){
                     throw new BadBytecode("Swap can not be used with category 2 values, pos = " + pos);
+                }
                 frame.push(type1);
                 frame.push(type2);
                 break;
@@ -393,7 +407,7 @@ public class Executor implements Opcode {
                 evalShift(Type.LONG, frame);
                 break;
             case IUSHR:
-                evalShift(Type.INTEGER,frame);
+                evalShift(Type.INTEGER, frame);
                 break;
             case LUSHR:
                 evalShift(Type.LONG, frame);
@@ -419,7 +433,7 @@ public class Executor implements Opcode {
                 evalBinaryMath(Type.LONG, frame);
                 break;
 
-            case IINC: {
+            case IINC:{
                 int index = iter.byteAt(pos + 1);
                 verifyAssignable(Type.INTEGER, frame.getLocal(index));
                 access(index, Type.INTEGER, subroutine);
@@ -544,11 +558,11 @@ public class Executor implements Opcode {
                 verifyAssignable(Type.DOUBLE, simplePop(frame));
                 break;
             case ARETURN:
-                try {
+                try{
                     CtClass returnType = Descriptor.getReturnType(method.getDescriptor(), classPool);
                     verifyAssignable(Type.get(returnType), simplePop(frame));
-                } catch (NotFoundException e) {
-                   throw new RuntimeException(e);
+                }catch (NotFoundException e){
+                    throw new RuntimeException(e);
                 }
                 break;
             case RETURN:
@@ -585,10 +599,11 @@ public class Executor implements Opcode {
             case ANEWARRAY:
                 evalNewObjectArray(pos, iter, frame);
                 break;
-            case ARRAYLENGTH: {
+            case ARRAYLENGTH:{
                 Type array = simplePop(frame);
-                if (! array.isArray() && array != Type.UNINIT)
+                if (!array.isArray() && array != Type.UNINIT){
                     throw new BadBytecode("Array length passed a non-array [pos = " + pos + "]: " + array);
+                }
                 frame.push(Type.INTEGER);
                 break;
             }
@@ -625,24 +640,25 @@ public class Executor implements Opcode {
         }
     }
 
-    private Type zeroExtend(Type type) {
-        if (type == Type.SHORT || type == Type.BYTE || type == Type.CHAR || type == Type.BOOLEAN)
-            return  Type.INTEGER;
+    private Type zeroExtend(Type type){
+        if (type == Type.SHORT || type == Type.BYTE || type == Type.CHAR || type == Type.BOOLEAN){
+            return Type.INTEGER;
+        }
 
         return type;
     }
 
-    private void evalArrayLoad(Type expectedComponent, Frame frame) throws BadBytecode {
+    private void evalArrayLoad(Type expectedComponent,Frame frame) throws BadBytecode{
         Type index = frame.pop();
         Type array = frame.pop();
 
         // Special case, an array defined by aconst_null
         // TODO - we might need to be more inteligent about this
-        if (array == Type.UNINIT) {
+        if (array == Type.UNINIT){
             verifyAssignable(Type.INTEGER, index);
-            if (expectedComponent == Type.OBJECT) {
+            if (expectedComponent == Type.OBJECT){
                 simplePush(Type.UNINIT, frame);
-            } else {
+            }else{
                 simplePush(expectedComponent, frame);
             }
             return;
@@ -650,8 +666,9 @@ public class Executor implements Opcode {
 
         Type component = array.getComponent();
 
-        if (component == null)
+        if (component == null){
             throw new BadBytecode("Not an array! [pos = " + lastPos + "]: " + component);
+        }
 
         component = zeroExtend(component);
 
@@ -660,20 +677,21 @@ public class Executor implements Opcode {
         simplePush(component, frame);
     }
 
-    private void evalArrayStore(Type expectedComponent, Frame frame) throws BadBytecode {
+    private void evalArrayStore(Type expectedComponent,Frame frame) throws BadBytecode{
         Type value = simplePop(frame);
         Type index = frame.pop();
         Type array = frame.pop();
 
-        if (array == Type.UNINIT) {
+        if (array == Type.UNINIT){
             verifyAssignable(Type.INTEGER, index);
             return;
         }
 
         Type component = array.getComponent();
 
-        if (component == null)
+        if (component == null){
             throw new BadBytecode("Not an array! [pos = " + lastPos + "]: " + component);
+        }
 
         component = zeroExtend(component);
 
@@ -686,14 +704,14 @@ public class Executor implements Opcode {
         //      blah[2] = (Object) "test";
         //      blah[3] = new Integer(); // compiler doesnt catch it (has legal bytecode),
         //                               // but will throw arraystoreexception
-        if (expectedComponent == Type.OBJECT) {
+        if (expectedComponent == Type.OBJECT){
             verifyAssignable(expectedComponent, value);
-        } else {
+        }else{
             verifyAssignable(component, value);
         }
     }
 
-    private void evalBinaryMath(Type expected, Frame frame) throws BadBytecode {
+    private void evalBinaryMath(Type expected,Frame frame) throws BadBytecode{
         Type value2 = simplePop(frame);
         Type value1 = simplePop(frame);
 
@@ -702,11 +720,11 @@ public class Executor implements Opcode {
         simplePush(value1, frame);
     }
 
-    private void evalGetField(int opcode, int index, Frame frame) throws BadBytecode {
+    private void evalGetField(int opcode,int index,Frame frame) throws BadBytecode{
         String desc = constPool.getFieldrefType(index);
         Type type = zeroExtend(typeFromDesc(desc));
 
-        if (opcode == GETFIELD) {
+        if (opcode == GETFIELD){
             Type objectType = resolveClassInfo(constPool.getFieldrefClassName(index));
             verifyAssignable(objectType, simplePop(frame));
         }
@@ -714,86 +732,92 @@ public class Executor implements Opcode {
         simplePush(type, frame);
     }
 
-    private void evalInvokeIntfMethod(int opcode, int index, Frame frame) throws BadBytecode {
+    private void evalInvokeIntfMethod(int opcode,int index,Frame frame) throws BadBytecode{
         String desc = constPool.getInterfaceMethodrefType(index);
         Type[] types = paramTypesFromDesc(desc);
         int i = types.length;
 
-        while (i > 0)
+        while (i > 0){
             verifyAssignable(zeroExtend(types[--i]), simplePop(frame));
+        }
 
         String classInfo = constPool.getInterfaceMethodrefClassName(index);
         Type objectType = resolveClassInfo(classInfo);
         verifyAssignable(objectType, simplePop(frame));
 
         Type returnType = returnTypeFromDesc(desc);
-        if (returnType != Type.VOID)
+        if (returnType != Type.VOID){
             simplePush(zeroExtend(returnType), frame);
+        }
     }
 
-    private void evalInvokeMethod(int opcode, int index, Frame frame) throws BadBytecode {
+    private void evalInvokeMethod(int opcode,int index,Frame frame) throws BadBytecode{
         String desc = constPool.getMethodrefType(index);
         Type[] types = paramTypesFromDesc(desc);
         int i = types.length;
 
-        while (i > 0)
+        while (i > 0){
             verifyAssignable(zeroExtend(types[--i]), simplePop(frame));
+        }
 
-        if (opcode != INVOKESTATIC) {
+        if (opcode != INVOKESTATIC){
             Type objectType = resolveClassInfo(constPool.getMethodrefClassName(index));
             verifyAssignable(objectType, simplePop(frame));
         }
 
         Type returnType = returnTypeFromDesc(desc);
-        if (returnType != Type.VOID)
+        if (returnType != Type.VOID){
             simplePush(zeroExtend(returnType), frame);
+        }
     }
 
-    private void evalInvokeDynamic(int opcode, int index, Frame frame) throws BadBytecode {
+    private void evalInvokeDynamic(int opcode,int index,Frame frame) throws BadBytecode{
         String desc = constPool.getInvokeDynamicType(index);
         Type[] types = paramTypesFromDesc(desc);
         int i = types.length;
 
-        while (i > 0)
+        while (i > 0){
             verifyAssignable(zeroExtend(types[--i]), simplePop(frame));
+        }
 
         // simplePop(frame);    // assume CosntPool#REF_invokeStatic
 
         Type returnType = returnTypeFromDesc(desc);
-        if (returnType != Type.VOID)
+        if (returnType != Type.VOID){
             simplePush(zeroExtend(returnType), frame);
+        }
     }
 
-    private void evalLDC(int index, Frame frame) throws BadBytecode {
+    private void evalLDC(int index,Frame frame) throws BadBytecode{
         int tag = constPool.getTag(index);
         Type type;
         switch (tag) {
-        case ConstPool.CONST_String:
-            type = STRING_TYPE;
-            break;
-        case ConstPool.CONST_Integer:
-            type = Type.INTEGER;
-            break;
-        case ConstPool.CONST_Float:
-            type = Type.FLOAT;
-            break;
-        case ConstPool.CONST_Long:
-            type = Type.LONG;
-            break;
-        case ConstPool.CONST_Double:
-            type = Type.DOUBLE;
-            break;
-        case ConstPool.CONST_Class:
-            type = CLASS_TYPE;
-            break;
-        default:
-            throw new BadBytecode("bad LDC [pos = " + lastPos + "]: " + tag);
+            case ConstPool.CONST_String:
+                type = STRING_TYPE;
+                break;
+            case ConstPool.CONST_Integer:
+                type = Type.INTEGER;
+                break;
+            case ConstPool.CONST_Float:
+                type = Type.FLOAT;
+                break;
+            case ConstPool.CONST_Long:
+                type = Type.LONG;
+                break;
+            case ConstPool.CONST_Double:
+                type = Type.DOUBLE;
+                break;
+            case ConstPool.CONST_Class:
+                type = CLASS_TYPE;
+                break;
+            default:
+                throw new BadBytecode("bad LDC [pos = " + lastPos + "]: " + tag);
         }
 
         simplePush(type, frame);
     }
 
-    private void evalLoad(Type expected, int index, Frame frame, Subroutine subroutine) throws BadBytecode {
+    private void evalLoad(Type expected,int index,Frame frame,Subroutine subroutine) throws BadBytecode{
         Type type = frame.getLocal(index);
 
         verifyAssignable(expected, type);
@@ -802,7 +826,7 @@ public class Executor implements Opcode {
         access(index, type, subroutine);
     }
 
-    private void evalNewArray(int pos, CodeIterator iter, Frame frame) throws BadBytecode {
+    private void evalNewArray(int pos,CodeIterator iter,Frame frame) throws BadBytecode{
         verifyAssignable(Type.INTEGER, simplePop(frame));
         Type type = null;
         int typeInfo = iter.byteAt(pos + 1);
@@ -839,40 +863,40 @@ public class Executor implements Opcode {
         frame.push(type);
     }
 
-    private void evalNewObjectArray(int pos, CodeIterator iter, Frame frame) throws BadBytecode {
+    private void evalNewObjectArray(int pos,CodeIterator iter,Frame frame) throws BadBytecode{
         // Convert to x[] format
         Type type = resolveClassInfo(constPool.getClassInfo(iter.u16bitAt(pos + 1)));
         String name = type.getCtClass().getName();
         int opcode = iter.byteAt(pos);
         int dimensions;
 
-        if (opcode == MULTIANEWARRAY) {
+        if (opcode == MULTIANEWARRAY){
             dimensions = iter.byteAt(pos + 3);
-        } else {
+        }else{
             name = name + "[]";
             dimensions = 1;
         }
 
-        while (dimensions-- > 0) {
+        while (dimensions-- > 0){
             verifyAssignable(Type.INTEGER, simplePop(frame));
         }
 
         simplePush(getType(name), frame);
     }
 
-    private void evalPutField(int opcode, int index, Frame frame) throws BadBytecode {
+    private void evalPutField(int opcode,int index,Frame frame) throws BadBytecode{
         String desc = constPool.getFieldrefType(index);
         Type type = zeroExtend(typeFromDesc(desc));
 
         verifyAssignable(type, simplePop(frame));
 
-        if (opcode == PUTFIELD) {
+        if (opcode == PUTFIELD){
             Type objectType = resolveClassInfo(constPool.getFieldrefClassName(index));
             verifyAssignable(objectType, simplePop(frame));
         }
     }
 
-    private void evalShift(Type expected, Frame frame) throws BadBytecode {
+    private void evalShift(Type expected,Frame frame) throws BadBytecode{
         Type value2 = simplePop(frame);
         Type value1 = simplePop(frame);
 
@@ -881,17 +905,18 @@ public class Executor implements Opcode {
         simplePush(value1, frame);
     }
 
-    private void evalStore(Type expected, int index, Frame frame, Subroutine subroutine) throws BadBytecode {
+    private void evalStore(Type expected,int index,Frame frame,Subroutine subroutine) throws BadBytecode{
         Type type = simplePop(frame);
 
         // RETURN_ADDRESS is allowed by ASTORE
-        if (! (expected == Type.OBJECT && type == Type.RETURN_ADDRESS))
+        if (!(expected == Type.OBJECT && type == Type.RETURN_ADDRESS)){
             verifyAssignable(expected, type);
+        }
         simpleSetLocal(index, type, frame);
         access(index, type, subroutine);
     }
 
-    private void evalWide(int pos, CodeIterator iter, Frame frame, Subroutine subroutine) throws BadBytecode {
+    private void evalWide(int pos,CodeIterator iter,Frame frame,Subroutine subroutine) throws BadBytecode{
         int opcode = iter.byteAt(pos + 1);
         int index = iter.u16bitAt(pos + 2);
         switch (opcode) {
@@ -937,111 +962,121 @@ public class Executor implements Opcode {
 
     }
 
-    private Type getType(String name) throws BadBytecode {
-        try {
+    private Type getType(String name) throws BadBytecode{
+        try{
             return Type.get(classPool.get(name));
-        } catch (NotFoundException e) {
+        }catch (NotFoundException e){
             throw new BadBytecode("Could not find class [pos = " + lastPos + "]: " + name);
         }
     }
 
-    private Type[] paramTypesFromDesc(String desc) throws BadBytecode {
+    private Type[] paramTypesFromDesc(String desc) throws BadBytecode{
         CtClass classes[] = null;
-        try {
+        try{
             classes = Descriptor.getParameterTypes(desc, classPool);
-        } catch (NotFoundException e) {
+        }catch (NotFoundException e){
             throw new BadBytecode("Could not find class in descriptor [pos = " + lastPos + "]: " + e.getMessage());
         }
 
-        if (classes == null)
+        if (classes == null){
             throw new BadBytecode("Could not obtain parameters for descriptor [pos = " + lastPos + "]: " + desc);
+        }
 
         Type[] types = new Type[classes.length];
-        for (int i = 0; i < types.length; i++)
+        for (int i = 0; i < types.length; i++){
             types[i] = Type.get(classes[i]);
+        }
 
         return types;
     }
 
-    private Type returnTypeFromDesc(String desc) throws BadBytecode {
+    private Type returnTypeFromDesc(String desc) throws BadBytecode{
         CtClass clazz = null;
-        try {
+        try{
             clazz = Descriptor.getReturnType(desc, classPool);
-        } catch (NotFoundException e) {
+        }catch (NotFoundException e){
             throw new BadBytecode("Could not find class in descriptor [pos = " + lastPos + "]: " + e.getMessage());
         }
 
-        if (clazz == null)
+        if (clazz == null){
             throw new BadBytecode("Could not obtain return type for descriptor [pos = " + lastPos + "]: " + desc);
+        }
 
         return Type.get(clazz);
     }
 
-    private Type simplePeek(Frame frame) {
+    private Type simplePeek(Frame frame){
         Type type = frame.peek();
         return (type == Type.TOP) ? frame.getStack(frame.getTopIndex() - 1) : type;
     }
 
-    private Type simplePop(Frame frame) {
+    private Type simplePop(Frame frame){
         Type type = frame.pop();
         return (type == Type.TOP) ? frame.pop() : type;
     }
 
-    private void simplePush(Type type, Frame frame) {
+    private void simplePush(Type type,Frame frame){
         frame.push(type);
-        if (type.getSize() == 2)
+        if (type.getSize() == 2){
             frame.push(Type.TOP);
+        }
     }
 
-    private void access(int index, Type type, Subroutine subroutine) {
-        if (subroutine == null)
+    private void access(int index,Type type,Subroutine subroutine){
+        if (subroutine == null){
             return;
+        }
         subroutine.access(index);
-        if (type.getSize() == 2)
+        if (type.getSize() == 2){
             subroutine.access(index + 1);
+        }
     }
 
-    private void simpleSetLocal(int index, Type type, Frame frame) {
+    private void simpleSetLocal(int index,Type type,Frame frame){
         frame.setLocal(index, type);
-        if (type.getSize() == 2)
+        if (type.getSize() == 2){
             frame.setLocal(index + 1, Type.TOP);
+        }
     }
 
-    private Type resolveClassInfo(String info) throws BadBytecode {
+    private Type resolveClassInfo(String info) throws BadBytecode{
         CtClass clazz = null;
-        try {
-            if (info.charAt(0) == '[') {
+        try{
+            if (info.charAt(0) == '['){
                 clazz = Descriptor.toCtClass(info, classPool);
-            } else {
+            }else{
                 clazz = classPool.get(info);
             }
 
-        } catch (NotFoundException e) {
+        }catch (NotFoundException e){
             throw new BadBytecode("Could not find class in descriptor [pos = " + lastPos + "]: " + e.getMessage());
         }
 
-        if (clazz == null)
+        if (clazz == null){
             throw new BadBytecode("Could not obtain type for descriptor [pos = " + lastPos + "]: " + info);
+        }
 
         return Type.get(clazz);
     }
 
-    private Type typeFromDesc(String desc) throws BadBytecode {
+    private Type typeFromDesc(String desc) throws BadBytecode{
         CtClass clazz = null;
-        try {
+        try{
             clazz = Descriptor.toCtClass(desc, classPool);
-        } catch (NotFoundException e) {
+        }catch (NotFoundException e){
             throw new BadBytecode("Could not find class in descriptor [pos = " + lastPos + "]: " + e.getMessage());
         }
 
-        if (clazz == null)
+        if (clazz == null){
             throw new BadBytecode("Could not obtain type for descriptor [pos = " + lastPos + "]: " + desc);
+        }
 
         return Type.get(clazz);
     }
 
-    private void verifyAssignable(Type expected, Type type) throws BadBytecode {
-        if (! expected.isAssignableFrom(type))
+    private void verifyAssignable(Type expected,Type type) throws BadBytecode{
+        if (!expected.isAssignableFrom(type)){
             throw new BadBytecode("Expected type: " + expected + " Got: " + type + " [pos = " + lastPos + "]");
+        }
     }
 }

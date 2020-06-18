@@ -19,6 +19,7 @@ import java.util.Iterator;
  * @author Joe Walnes
  * @deprecated As of 1.4.8, it is an internal helper class only
  */
+@Deprecated
 public class AttributeNameIterator implements Iterator{
 
     private int                            current;

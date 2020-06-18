@@ -49,6 +49,7 @@ public class JavaMethodConverter implements Converter{
     /**
      * @deprecated As of 1.4.5 use {@link #JavaMethodConverter(ClassLoaderReference)}
      */
+    @Deprecated
     public JavaMethodConverter(ClassLoader classLoader){
         this(new ClassLoaderReference(classLoader));
     }
@@ -96,9 +97,9 @@ public class JavaMethodConverter implements Converter{
         }
 
         writer.startNode("parameter-types");
-        for (int i = 0; i < parameterTypes.length; i++){
+        for (Class parameterType : parameterTypes){
             writer.startNode("class");
-            writer.setValue(javaClassConverter.toString(parameterTypes[i]));
+            writer.setValue(javaClassConverter.toString(parameterType));
             writer.endNode();
         }
         writer.endNode();

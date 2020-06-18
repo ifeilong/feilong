@@ -20,6 +20,11 @@ import java.util.SortedMap;
 public class PresortedMap implements SortedMap{
 
     private static class ArraySet extends ArrayList implements Set{
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -4351829029614783671L;
     }
 
     private final PresortedMap.ArraySet set;

@@ -42,13 +42,18 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
 
-    private Class  _getterClass;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8632726828720933079L;
 
-    private Class  _setterClass;
+    private Class             _getterClass;
 
-    private String _lastExpression;
+    private Class             _setterClass;
 
-    private String _coreExpression;
+    private String            _lastExpression;
+
+    private String            _coreExpression;
 
     public ASTChain(int id){
         super(id);
@@ -287,8 +292,9 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
 
                     //                    System.out.println("astchain child returned >>  " + value + "  <<");
 
-                    if (ASTCtor.class.isInstance(_children[i]))
+                    if (ASTCtor.class.isInstance(_children[i])){
                         constructor = true;
+                    }
 
                     if (NodeType.class.isInstance(_children[i]) && ((NodeType) _children[i]).getGetterClass() != null){
                         _lastType = (NodeType) _children[i];
@@ -312,10 +318,11 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
                         ordered = true;
                         OrderedReturn or = (OrderedReturn) _children[i];
 
-                        if (or.getCoreExpression() == null || or.getCoreExpression().trim().length() <= 0)
+                        if (or.getCoreExpression() == null || or.getCoreExpression().trim().length() <= 0){
                             result = "";
-                        else
+                        }else{
                             result += or.getCoreExpression();
+                        }
 
                         _lastExpression = or.getLastExpression();
 
@@ -357,8 +364,9 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
         String prevChain = (String) context.get("_currentChain");
         String prevChild = (String) context.get("_lastChild");
 
-        if (prevChain != null)
+        if (prevChain != null){
             throw new UnsupportedCompilationException("Can't compile nested chain expressions.");
+        }
 
         if (target != null){
             context.setCurrentObject(target);
@@ -387,8 +395,9 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
 
                     //                    System.out.println("astchain setter child returned >>  " + value + "  <<");
 
-                    if (ASTCtor.class.isInstance(_children[i]))
+                    if (ASTCtor.class.isInstance(_children[i])){
                         constructor = true;
+                    }
 
                     if (NodeType.class.isInstance(_children[i]) && ((NodeType) _children[i]).getGetterClass() != null){
                         _lastType = (NodeType) _children[i];
@@ -415,8 +424,9 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
                                     || ASTCtor.class.isInstance(_children[i]) || ASTStaticField.class.isInstance(_children[i])){
                         context.put("_noRoot", "true");
                         result = value;
-                    }else
+                    }else{
                         result += value;
+                    }
 
                     context.put("_currentChain", result);
                 }
@@ -428,8 +438,9 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
         context.put("_lastChild", prevChild);
         context.put("_currentChain", prevChain);
 
-        if (_lastType != null)
+        if (_lastType != null){
             _setterClass = _lastType.getSetterClass();
+        }
 
         return result;
     }

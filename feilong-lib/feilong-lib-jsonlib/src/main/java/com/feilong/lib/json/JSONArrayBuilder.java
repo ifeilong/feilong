@@ -140,8 +140,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(boolean[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                jsonArray.addValue(array[i], jsonConfig);
+            for (boolean element : array){
+                jsonArray.addValue(element, jsonConfig);
             }
         });
     }
@@ -157,8 +157,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(byte[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                Number n = JSONUtils.transformNumber(array[i]);
+            for (byte element : array){
+                Number n = JSONUtils.transformNumber(element);
                 jsonArray.addValue(n, jsonConfig);
             }
         });
@@ -175,8 +175,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(char[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                jsonArray.addValue(array[i], jsonConfig);
+            for (char element : array){
+                jsonArray.addValue(element, jsonConfig);
             }
         });
     }
@@ -192,8 +192,7 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(double[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                Double d = array[i];
+            for (double d : array){
                 JSONUtils.testValidity(d);
                 jsonArray.addValue(d, jsonConfig);
             }
@@ -228,8 +227,7 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(float[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                float f = array[i];
+            for (float f : array){
                 JSONUtils.testValidity(f);
                 jsonArray.addValue(f, jsonConfig);
             }
@@ -247,8 +245,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(int[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                jsonArray.addValue(array[i], jsonConfig);
+            for (int element : array){
+                jsonArray.addValue(element, jsonConfig);
             }
         });
     }
@@ -264,8 +262,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(long[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
+            for (long element : array){
+                jsonArray.addValue(JSONUtils.transformNumber(element), jsonConfig);
             }
         });
     }
@@ -283,8 +281,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(Object[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                jsonArray.addValue(array[i], jsonConfig);
+            for (Object element : array){
+                jsonArray.addValue(element, jsonConfig);
             }
         });
     }
@@ -300,8 +298,8 @@ public class JSONArrayBuilder{
      */
     private static JSONArray fromArray(short[] array,JsonConfig jsonConfig){
         return build(array, jsonArray -> {
-            for (int i = 0; i < array.length; i++){
-                jsonArray.addValue(JSONUtils.transformNumber(array[i]), jsonConfig);
+            for (short element : array){
+                jsonArray.addValue(JSONUtils.transformNumber(element), jsonConfig);
             }
         });
     }

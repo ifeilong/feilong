@@ -22,60 +22,78 @@ import com.feilong.lib.javassist.compiler.TokenId;
 /**
  * New Expression.
  */
-public class NewExpr extends ASTList implements TokenId {
+public class NewExpr extends ASTList implements TokenId{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    protected boolean newArray;
-    protected int arrayType;
 
-    public NewExpr(ASTList className, ASTList args) {
+    protected boolean         newArray;
+
+    protected int             arrayType;
+
+    public NewExpr(ASTList className, ASTList args){
         super(className, new ASTList(args));
         newArray = false;
         arrayType = CLASS;
     }
 
-    public NewExpr(int type, ASTList arraySize, ArrayInit init) {
+    public NewExpr(int type, ASTList arraySize, ArrayInit init){
         super(null, new ASTList(arraySize));
         newArray = true;
         arrayType = type;
-        if (init != null)
+        if (init != null){
             append(this, init);
+        }
     }
 
-    public static NewExpr makeObjectArray(ASTList className,
-                                          ASTList arraySize, ArrayInit init) {
+    public static NewExpr makeObjectArray(ASTList className,ASTList arraySize,ArrayInit init){
         NewExpr e = new NewExpr(className, arraySize);
         e.newArray = true;
-        if (init != null)
+        if (init != null){
             append(e, init);
+        }
 
         return e;
     }
 
-    public boolean isArray() { return newArray; }
+    public boolean isArray(){
+        return newArray;
+    }
 
-    /* TokenId.CLASS, TokenId.INT, ...
+    /*
+     * TokenId.CLASS, TokenId.INT, ...
      */
-    public int getArrayType() { return arrayType; }
+    public int getArrayType(){
+        return arrayType;
+    }
 
-    public ASTList getClassName() { return (ASTList)getLeft(); }
+    public ASTList getClassName(){
+        return (ASTList) getLeft();
+    }
 
-    public ASTList getArguments() { return (ASTList)getRight().getLeft(); }
+    public ASTList getArguments(){
+        return (ASTList) getRight().getLeft();
+    }
 
-    public ASTList getArraySize() { return getArguments(); }
+    public ASTList getArraySize(){
+        return getArguments();
+    }
 
-    public ArrayInit getInitializer() {
+    public ArrayInit getInitializer(){
         ASTree t = getRight().getRight();
-        if (t == null)
+        if (t == null){
             return null;
-        return (ArrayInit)t.getLeft();
+        }
+        return (ArrayInit) t.getLeft();
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atNewExpr(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atNewExpr(this);
+    }
 
     @Override
-    protected String getTag() {
+    protected String getTag(){
         return newArray ? "new[]" : "new";
     }
 }

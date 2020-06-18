@@ -42,6 +42,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTProject extends SimpleNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1008393647352002476L;
+
     public ASTProject(int id){
         super(id);
     }

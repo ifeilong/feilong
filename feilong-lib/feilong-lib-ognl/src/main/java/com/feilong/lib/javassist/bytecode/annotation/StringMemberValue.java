@@ -28,16 +28,18 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class StringMemberValue extends MemberValue {
+public class StringMemberValue extends MemberValue{
+
     int valueIndex;
 
     /**
-     * Constructs a string constant value.  The initial value is specified
+     * Constructs a string constant value. The initial value is specified
      * by the constant pool entry at the given index.
      *
-     * @param index     the index of a CONSTANT_Utf8_info structure.
+     * @param index
+     *            the index of a CONSTANT_Utf8_info structure.
      */
-    public StringMemberValue(int index, ConstPool cp) {
+    public StringMemberValue(int index, ConstPool cp){
         super('s', cp);
         this.valueIndex = index;
     }
@@ -45,42 +47,43 @@ public class StringMemberValue extends MemberValue {
     /**
      * Constructs a string constant value.
      *
-     * @param str         the initial value.
+     * @param str
+     *            the initial value.
      */
-    public StringMemberValue(String str, ConstPool cp) {
+    public StringMemberValue(String str, ConstPool cp){
         super('s', cp);
         setValue(str);
     }
 
     /**
-     * Constructs a string constant value.  The initial value is "".
+     * Constructs a string constant value. The initial value is "".
      */
-    public StringMemberValue(ConstPool cp) {
+    public StringMemberValue(ConstPool cp){
         super('s', cp);
         setValue("");
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m) {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m){
         return getValue();
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) {
+    Class<?> getType(ClassLoader cl){
         return String.class;
     }
 
     /**
      * Obtains the value of the member.
      */
-    public String getValue() {
+    public String getValue(){
         return cp.getUtf8Info(valueIndex);
     }
 
     /**
      * Sets the value of the member.
      */
-    public void setValue(String newValue) {
+    public void setValue(String newValue){
         valueIndex = cp.addUtf8Info(newValue);
     }
 
@@ -88,7 +91,7 @@ public class StringMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return "\"" + getValue() + "\"";
     }
 
@@ -96,7 +99,7 @@ public class StringMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.constValueIndex(getValue());
     }
 
@@ -104,7 +107,7 @@ public class StringMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitStringMemberValue(this);
     }
 }

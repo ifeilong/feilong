@@ -38,6 +38,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTThisVarRef extends ASTVarRef{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1644235326497380141L;
+
     public ASTThisVarRef(int id){
         super(id);
     }

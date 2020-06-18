@@ -26,6 +26,7 @@ import com.feilong.lib.javassist.bytecode.ClassFile;
 import com.feilong.lib.javassist.bytecode.ConstPool;
 import com.feilong.lib.javassist.bytecode.Descriptor;
 import com.feilong.lib.javassist.bytecode.FieldInfo;
+import com.feilong.lib.javassist.bytecode.Opcode;
 import com.feilong.lib.javassist.bytecode.SignatureAttribute;
 import com.feilong.lib.javassist.compiler.CompileError;
 import com.feilong.lib.javassist.compiler.Javac;
@@ -100,15 +101,17 @@ public class CtField extends CtMember{
         fi.setAccessFlags(src.fieldInfo.getAccessFlags());
         ConstPool cp = fi.getConstPool();
         List<AttributeInfo> attributes = src.fieldInfo.getAttributes();
-        for (AttributeInfo ainfo : attributes)
+        for (AttributeInfo ainfo : attributes){
             fi.addAttribute(ainfo.copy(cp, null));
+        }
     }
 
     private CtField(String typeDesc, String name, CtClass clazz) throws CannotCompileException{
         super(clazz);
         ClassFile cf = clazz.getClassFile2();
-        if (cf == null)
+        if (cf == null){
             throw new CannotCompileException("bad declaring class: " + clazz.getName());
+        }
 
         fieldInfo = new FieldInfo(cf.getConstPool(), name, typeDesc);
     }
@@ -142,8 +145,9 @@ public class CtField extends CtMember{
     /* Called by CtClassType.addField(). */
     Initializer getInit(){
         ASTree tree = getInitAST();
-        if (tree == null)
+        if (tree == null){
             return null;
+        }
         return Initializer.byExpr(tree);
     }
 
@@ -169,8 +173,9 @@ public class CtField extends CtMember{
         Javac compiler = new Javac(declaring);
         try{
             CtMember obj = compiler.compile(src);
-            if (obj instanceof CtField)
+            if (obj instanceof CtField){
                 return (CtField) obj; // an instance of Javac.CtFieldWithInit
+            }
         }catch (CompileError e){
             throw new CannotCompileException(e);
         }
@@ -426,8 +431,9 @@ public class CtField extends CtMember{
         // see also getConstantFieldValue() in TypeChecker.
 
         int index = fieldInfo.getConstantValue();
-        if (index == 0)
+        if (index == 0){
             return null;
+        }
 
         ConstPool cp = fieldInfo.getConstPool();
         switch (cp.getTag(index)) {
@@ -440,8 +446,9 @@ public class CtField extends CtMember{
             case ConstPool.CONST_Integer:
                 int value = cp.getIntegerInfo(index);
                 // "Z" means boolean type.
-                if ("Z".equals(fieldInfo.getDescriptor()))
+                if ("Z".equals(fieldInfo.getDescriptor())){
                     return Boolean.valueOf(value != 0);
+                }
                 return Integer.valueOf(value);
             case ConstPool.CONST_String:
                 return cp.getStringInfo(index);
@@ -466,8 +473,9 @@ public class CtField extends CtMember{
     @Override
     public byte[] getAttribute(String name){
         AttributeInfo ai = fieldInfo.getAttribute(name);
-        if (ai == null)
+        if (ai == null){
             return null;
+        }
         return ai.get();
     }
 
@@ -946,23 +954,26 @@ public class CtField extends CtMember{
             if (type.isPrimitive()){
                 if (tree instanceof IntConst){
                     long value = ((IntConst) tree).get();
-                    if (type == CtClass.doubleType)
+                    if (type == CtClass.doubleType){
                         return cp.addDoubleInfo(value);
-                    else if (type == CtClass.floatType)
+                    }else if (type == CtClass.floatType){
                         return cp.addFloatInfo(value);
-                    else if (type == CtClass.longType)
+                    }else if (type == CtClass.longType){
                         return cp.addLongInfo(value);
-                    else if (type != CtClass.voidType)
+                    }else if (type != CtClass.voidType){
                         return cp.addIntegerInfo((int) value);
+                    }
                 }else if (tree instanceof DoubleConst){
                     double value = ((DoubleConst) tree).get();
-                    if (type == CtClass.floatType)
+                    if (type == CtClass.floatType){
                         return cp.addFloatInfo((float) value);
-                    else if (type == CtClass.doubleType)
+                    }else if (type == CtClass.doubleType){
                         return cp.addDoubleInfo(value);
+                    }
                 }
-            }else if (tree instanceof StringL && type.getName().equals(javaLangString))
+            }else if (tree instanceof StringL && type.getName().equals(javaLangString)){
                 return cp.addStringInfo(((StringL) tree).get());
+            }
 
             return 0;
         }
@@ -1049,17 +1060,19 @@ public class CtField extends CtMember{
             CtClass longType = CtClass.longType;
             CtClass doubleType = CtClass.doubleType;
             int k;
-            if (isStatic)
+            if (isStatic){
                 k = 0;
-            else
+            }else{
                 k = 1; // 0 is THIS.
+            }
 
             for (int i = 0; i < nth; ++i){
                 CtClass type = params[i];
-                if (type == longType || type == doubleType)
+                if (type == longType || type == doubleType){
                     k += 2;
-                else
+                }else{
                     ++k;
+                }
             }
 
             return k;
@@ -1095,16 +1108,18 @@ public class CtField extends CtMember{
 
             code.addAload(0);
             code.addNew(objectType);
-            code.add(Bytecode.DUP);
+            code.add(Opcode.DUP);
             code.addAload(0);
 
-            if (stringParams == null)
+            if (stringParams == null){
                 stacksize = 4;
-            else
+            }else{
                 stacksize = compileStringParameter(code) + 4;
+            }
 
-            if (withConstructorParams)
+            if (withConstructorParams){
                 stacksize += CtNewWrappedMethod.compileParameterList(code, parameters, 1);
+            }
 
             code.addInvokespecial(objectType, "<init>", getDescriptor());
             code.addPutfield(Bytecode.THIS, name, Descriptor.of(type));
@@ -1114,14 +1129,17 @@ public class CtField extends CtMember{
         private String getDescriptor(){
             final String desc3 = "(Ljava/lang/Object;[Ljava/lang/String;[Ljava/lang/Object;)V";
 
-            if (stringParams == null)
-                if (withConstructorParams)
+            if (stringParams == null){
+                if (withConstructorParams){
                     return "(Ljava/lang/Object;[Ljava/lang/Object;)V";
-                else
+                }else{
                     return "(Ljava/lang/Object;)V";
+                }
+            }
 
-            if (withConstructorParams)
+            if (withConstructorParams){
                 return desc3;
+            }
 
             return "(Ljava/lang/Object;[Ljava/lang/String;)V";
         }
@@ -1134,12 +1152,12 @@ public class CtField extends CtMember{
             String desc;
 
             code.addNew(objectType);
-            code.add(Bytecode.DUP);
+            code.add(Opcode.DUP);
 
             int stacksize = 2;
-            if (stringParams == null)
+            if (stringParams == null){
                 desc = "()V";
-            else{
+            }else{
                 desc = "([Ljava/lang/String;)V";
                 stacksize += compileStringParameter(code);
             }
@@ -1154,10 +1172,10 @@ public class CtField extends CtMember{
             code.addIconst(nparam);
             code.addAnewarray(javaLangString);
             for (int j = 0; j < nparam; ++j){
-                code.add(Bytecode.DUP); // dup
+                code.add(Opcode.DUP); // dup
                 code.addIconst(j); // iconst_<j>
                 code.addLdc(stringParams[j]); // ldc ...
-                code.add(Bytecode.AASTORE); // aastore
+                code.add(Opcode.AASTORE); // aastore
             }
 
             return 4;
@@ -1187,13 +1205,15 @@ public class CtField extends CtMember{
             code.addAload(0);
             code.addAload(0);
 
-            if (stringParams == null)
+            if (stringParams == null){
                 stacksize = 2;
-            else
+            }else{
                 stacksize = compileStringParameter(code) + 2;
+            }
 
-            if (withConstructorParams)
+            if (withConstructorParams){
                 stacksize += CtNewWrappedMethod.compileParameterList(code, parameters, 1);
+            }
 
             String typeDesc = Descriptor.of(type);
             String mDesc = getDescriptor() + typeDesc;
@@ -1205,14 +1225,17 @@ public class CtField extends CtMember{
         private String getDescriptor(){
             final String desc3 = "(Ljava/lang/Object;[Ljava/lang/String;[Ljava/lang/Object;)";
 
-            if (stringParams == null)
-                if (withConstructorParams)
+            if (stringParams == null){
+                if (withConstructorParams){
                     return "(Ljava/lang/Object;[Ljava/lang/Object;)";
-                else
+                }else{
                     return "(Ljava/lang/Object;)";
+                }
+            }
 
-            if (withConstructorParams)
+            if (withConstructorParams){
                 return desc3;
+            }
 
             return "(Ljava/lang/Object;[Ljava/lang/String;)";
         }
@@ -1225,9 +1248,9 @@ public class CtField extends CtMember{
             String desc;
 
             int stacksize = 1;
-            if (stringParams == null)
+            if (stringParams == null){
                 desc = "()";
-            else{
+            }else{
                 desc = "([Ljava/lang/String;)";
                 stacksize += compileStringParameter(code);
             }
@@ -1250,8 +1273,9 @@ public class CtField extends CtMember{
         @Override
         void check(String desc) throws CannotCompileException{
             char c = desc.charAt(0);
-            if (c != 'I' && c != 'S' && c != 'B' && c != 'C' && c != 'Z')
+            if (c != 'I' && c != 'S' && c != 'B' && c != 'C' && c != 'Z'){
                 throw new CannotCompileException("type mismatch");
+            }
         }
 
         @Override
@@ -1285,8 +1309,9 @@ public class CtField extends CtMember{
 
         @Override
         void check(String desc) throws CannotCompileException{
-            if (!desc.equals("J"))
+            if (!desc.equals("J")){
                 throw new CannotCompileException("type mismatch");
+            }
         }
 
         @Override
@@ -1306,8 +1331,9 @@ public class CtField extends CtMember{
 
         @Override
         int getConstantValue(ConstPool cp,CtClass type){
-            if (type == CtClass.longType)
+            if (type == CtClass.longType){
                 return cp.addLongInfo(value);
+            }
             return 0;
         }
     }
@@ -1322,8 +1348,9 @@ public class CtField extends CtMember{
 
         @Override
         void check(String desc) throws CannotCompileException{
-            if (!desc.equals("F"))
+            if (!desc.equals("F")){
                 throw new CannotCompileException("type mismatch");
+            }
         }
 
         @Override
@@ -1343,8 +1370,9 @@ public class CtField extends CtMember{
 
         @Override
         int getConstantValue(ConstPool cp,CtClass type){
-            if (type == CtClass.floatType)
+            if (type == CtClass.floatType){
                 return cp.addFloatInfo(value);
+            }
             return 0;
         }
     }
@@ -1359,8 +1387,9 @@ public class CtField extends CtMember{
 
         @Override
         void check(String desc) throws CannotCompileException{
-            if (!desc.equals("D"))
+            if (!desc.equals("D")){
                 throw new CannotCompileException("type mismatch");
+            }
         }
 
         @Override
@@ -1380,8 +1409,9 @@ public class CtField extends CtMember{
 
         @Override
         int getConstantValue(ConstPool cp,CtClass type){
-            if (type == CtClass.doubleType)
+            if (type == CtClass.doubleType){
                 return cp.addDoubleInfo(value);
+            }
             return 0;
         }
     }
@@ -1411,8 +1441,9 @@ public class CtField extends CtMember{
 
         @Override
         int getConstantValue(ConstPool cp,CtClass type){
-            if (type.getName().equals(javaLangString))
+            if (type.getName().equals(javaLangString)){
                 return cp.addStringInfo(value);
+            }
             return 0;
         }
     }
@@ -1429,10 +1460,11 @@ public class CtField extends CtMember{
         }
 
         private void addNewarray(Bytecode code){
-            if (type.isPrimitive())
+            if (type.isPrimitive()){
                 code.addNewarray(((CtPrimitiveType) type).getArrayType(), size);
-            else
+            }else{
                 code.addAnewarray(type, size);
+            }
         }
 
         @Override
@@ -1464,8 +1496,9 @@ public class CtField extends CtMember{
 
         @Override
         void check(String desc) throws CannotCompileException{
-            if (desc.charAt(0) != '[')
+            if (desc.charAt(0) != '['){
                 throw new CannotCompileException("type mismatch");
+            }
         }
 
         @Override

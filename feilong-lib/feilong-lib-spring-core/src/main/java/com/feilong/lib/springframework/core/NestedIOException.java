@@ -40,6 +40,11 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 public class NestedIOException extends IOException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8980815517316891574L;
+
     static{
         // Eagerly load the NestedExceptionUtils class to avoid classloader deadlock
         // issues on OSGi when calling getMessage(). Reported by Don Brown; SPR-5607.

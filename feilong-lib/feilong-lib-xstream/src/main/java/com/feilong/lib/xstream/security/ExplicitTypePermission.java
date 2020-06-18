@@ -28,11 +28,13 @@ public class ExplicitTypePermission implements TypePermission{
         this(new Object(){
 
             public String[] getNames(){
-                if (types == null)
+                if (types == null){
                     return null;
+                }
                 String[] names = new String[types.length];
-                for (int i = 0; i < types.length; ++i)
+                for (int i = 0; i < types.length; ++i){
                     names[i] = types[i].getName();
+                }
                 return names;
             }
         }.getNames());
@@ -47,8 +49,9 @@ public class ExplicitTypePermission implements TypePermission{
 
     @Override
     public boolean allows(Class type){
-        if (type == null)
+        if (type == null){
             return false;
+        }
         return names.contains(type.getName());
     }
 

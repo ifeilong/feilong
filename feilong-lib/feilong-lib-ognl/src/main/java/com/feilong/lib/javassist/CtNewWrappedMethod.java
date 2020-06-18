@@ -24,6 +24,7 @@ import com.feilong.lib.javassist.bytecode.BadBytecode;
 import com.feilong.lib.javassist.bytecode.Bytecode;
 import com.feilong.lib.javassist.bytecode.ClassFile;
 import com.feilong.lib.javassist.bytecode.MethodInfo;
+import com.feilong.lib.javassist.bytecode.Opcode;
 import com.feilong.lib.javassist.bytecode.SyntheticAttribute;
 import com.feilong.lib.javassist.compiler.JvstCodeGen;
 
@@ -82,11 +83,13 @@ class CtNewWrappedMethod{
                     CtClass returnType,
                     ConstParameter cparam,
                     Bytecode code) throws CannotCompileException{
-        if (!(clazz instanceof CtClassType))
+        if (!(clazz instanceof CtClassType)){
             throw new CannotCompileException("bad declaring class" + clazz.getName());
+        }
 
-        if (!isStatic)
+        if (!isStatic){
             code.addAload(0);
+        }
 
         int stacksize = compileParameterList(code, parameters, (isStatic ? 0 : 1));
         int stacksize2;
@@ -112,24 +115,27 @@ class CtNewWrappedMethod{
             throw new CannotCompileException(e);
         }
 
-        if (isStatic)
+        if (isStatic){
             code.addInvokestatic(Bytecode.THIS, bodyname, desc);
-        else
+        }else{
             code.addInvokespecial(Bytecode.THIS, bodyname, desc);
+        }
 
         compileReturn(code, returnType); // consumes 2 stack entries
 
-        if (stacksize < stacksize2 + 2)
+        if (stacksize < stacksize2 + 2){
             stacksize = stacksize2 + 2;
+        }
 
         return stacksize;
     }
 
     private static void checkSignature(CtMethod wrappedBody,String descriptor) throws CannotCompileException{
-        if (!descriptor.equals(wrappedBody.getMethodInfo2().getDescriptor()))
+        if (!descriptor.equals(wrappedBody.getMethodInfo2().getDescriptor())){
             throw new CannotCompileException(
                             "wrapped method with a bad signature: " + wrappedBody.getDeclaringClass().getName() + '.'
                                             + wrappedBody.getName());
+        }
     }
 
     private static String addBodyMethod(CtClassType clazz,ClassFile classfile,CtMethod src) throws BadBytecode,CannotCompileException{
@@ -149,8 +155,9 @@ class CtNewWrappedMethod{
             classfile.addMethod(body);
             bodies.put(src, bodyname);
             CtMember.Cache cache = clazz.hasMemberCache();
-            if (cache != null)
+            if (cache != null){
                 cache.addMethod(new CtMethod(body, clazz));
+            }
         }
 
         return bodyname;
@@ -183,7 +190,7 @@ class CtNewWrappedMethod{
             code.addOpcode(pt.getReturnOp());
         }else{
             code.addCheckcast(type);
-            code.addOpcode(Bytecode.ARETURN);
+            code.addOpcode(Opcode.ARETURN);
         }
     }
 }

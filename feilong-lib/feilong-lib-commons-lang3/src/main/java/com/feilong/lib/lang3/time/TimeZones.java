@@ -22,10 +22,10 @@ package com.feilong.lib.lang3.time;
  *
  * @since 3.7
  */
-public class TimeZones {
+public class TimeZones{
 
     // do not instantiate
-    private TimeZones() {
+    private TimeZones(){
     }
 
     /**

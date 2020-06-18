@@ -23,11 +23,12 @@ import java.util.Map;
 /**
  * <code>LocalVariableTable_attribute</code>.
  */
-public class LocalVariableAttribute extends AttributeInfo {
+public class LocalVariableAttribute extends AttributeInfo{
+
     /**
      * The name of this attribute <code>"LocalVariableTable"</code>.
      */
-    public static final String tag = "LocalVariableTable";
+    public static final String tag     = "LocalVariableTable";
 
     /**
      * The name of the attribute <code>"LocalVariableTypeTable"</code>.
@@ -37,7 +38,7 @@ public class LocalVariableAttribute extends AttributeInfo {
     /**
      * Constructs an empty LocalVariableTable.
      */
-    public LocalVariableAttribute(ConstPool cp) {
+    public LocalVariableAttribute(ConstPool cp){
         super(cp, tag, new byte[2]);
         ByteArray.write16bit(0, info, 0);
     }
@@ -45,46 +46,50 @@ public class LocalVariableAttribute extends AttributeInfo {
     /**
      * Constructs an empty LocalVariableTable.
      *
-     * @param name      the attribute name.
-     *                  <code>LocalVariableAttribute.tag</code> or
-     *                  <code>LocalVariableAttribute.typeTag</code>.
+     * @param name
+     *            the attribute name.
+     *            <code>LocalVariableAttribute.tag</code> or
+     *            <code>LocalVariableAttribute.typeTag</code>.
      * @see #tag
      * @see #typeTag
      * @since 3.1
      * @deprecated
      */
     @Deprecated
-    public LocalVariableAttribute(ConstPool cp, String name) {
+    public LocalVariableAttribute(ConstPool cp, String name){
         super(cp, name, new byte[2]);
         ByteArray.write16bit(0, info, 0);
     }
 
-    LocalVariableAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    LocalVariableAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
-    LocalVariableAttribute(ConstPool cp, String name, byte[] i) {
+    LocalVariableAttribute(ConstPool cp, String name, byte[] i){
         super(cp, name, i);
     }
 
     /**
      * Appends a new entry to <code>local_variable_table</code>.
      *
-     * @param startPc           <code>start_pc</code>
-     * @param length            <code>length</code>
-     * @param nameIndex         <code>name_index</code>
-     * @param descriptorIndex   <code>descriptor_index</code>
-     * @param index             <code>index</code>
+     * @param startPc
+     *            <code>start_pc</code>
+     * @param length
+     *            <code>length</code>
+     * @param nameIndex
+     *            <code>name_index</code>
+     * @param descriptorIndex
+     *            <code>descriptor_index</code>
+     * @param index
+     *            <code>index</code>
      */
-    public void addEntry(int startPc, int length, int nameIndex,
-                         int descriptorIndex, int index) {
+    public void addEntry(int startPc,int length,int nameIndex,int descriptorIndex,int index){
         int size = info.length;
         byte[] newInfo = new byte[size + 10];
         ByteArray.write16bit(tableLength() + 1, newInfo, 0);
-        for (int i = 2; i < size; ++i)
+        for (int i = 2; i < size; ++i){
             newInfo[i] = info[i];
+        }
 
         ByteArray.write16bit(startPc, newInfo, size);
         ByteArray.write16bit(length, newInfo, size + 2);
@@ -95,13 +100,13 @@ public class LocalVariableAttribute extends AttributeInfo {
     }
 
     @Override
-    void renameClass(String oldname, String newname) {
+    void renameClass(String oldname,String newname){
         ConstPool cp = getConstPool();
         int n = tableLength();
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i){
             int pos = i * 10 + 2;
             int index = ByteArray.readU16bit(info, pos + 6);
-            if (index != 0) {
+            if (index != 0){
                 String desc = cp.getUtf8Info(index);
                 desc = renameEntry(desc, oldname, newname);
                 ByteArray.write16bit(cp.addUtf8Info(desc), info, pos + 6);
@@ -109,18 +114,18 @@ public class LocalVariableAttribute extends AttributeInfo {
         }
     }
 
-    String renameEntry(String desc, String oldname, String newname) {
+    String renameEntry(String desc,String oldname,String newname){
         return Descriptor.rename(desc, oldname, newname);
     }
 
     @Override
-    void renameClass(Map<String,String> classnames) {
+    void renameClass(Map<String, String> classnames){
         ConstPool cp = getConstPool();
         int n = tableLength();
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i){
             int pos = i * 10 + 2;
             int index = ByteArray.readU16bit(info, pos + 6);
-            if (index != 0) {
+            if (index != 0){
                 String desc = cp.getUtf8Info(index);
                 desc = renameEntry(desc, classnames);
                 ByteArray.write16bit(cp.addUtf8Info(desc), info, pos + 6);
@@ -128,7 +133,7 @@ public class LocalVariableAttribute extends AttributeInfo {
         }
     }
 
-    String renameEntry(String desc, Map<String,String> classnames) {
+    String renameEntry(String desc,Map<String, String> classnames){
         return Descriptor.rename(desc, classnames);
     }
 
@@ -136,15 +141,17 @@ public class LocalVariableAttribute extends AttributeInfo {
      * For each <code>local_variable_table[i].index</code>,
      * this method increases <code>index</code> by <code>delta</code>.
      *
-     * @param lessThan      the index does not change if it
-     *                      is less than this value.
+     * @param lessThan
+     *            the index does not change if it
+     *            is less than this value.
      */
-    public void shiftIndex(int lessThan, int delta) {
+    public void shiftIndex(int lessThan,int delta){
         int size = info.length;
         for (int i = 2; i < size; i += 10){
             int org = ByteArray.readU16bit(info, i + 8);
-            if (org >= lessThan)
+            if (org >= lessThan){
                 ByteArray.write16bit(org + delta, info, i + 8);
+            }
         }
     }
 
@@ -152,7 +159,7 @@ public class LocalVariableAttribute extends AttributeInfo {
      * Returns <code>local_variable_table_length</code>.
      * This represents the number of entries in the table.
      */
-    public int tableLength() {
+    public int tableLength(){
         return ByteArray.readU16bit(info, 0);
     }
 
@@ -161,9 +168,10 @@ public class LocalVariableAttribute extends AttributeInfo {
      * This represents the index into the code array from which the local
      * variable is effective.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int startPc(int i) {
+    public int startPc(int i){
         return ByteArray.readU16bit(info, i * 10 + 2);
     }
 
@@ -172,28 +180,31 @@ public class LocalVariableAttribute extends AttributeInfo {
      * This represents the length of the code region in which the local
      * variable is effective.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int codeLength(int i) {
+    public int codeLength(int i){
         return ByteArray.readU16bit(info, i * 10 + 4);
     }
 
     /**
      * Adjusts start_pc and length if bytecode is inserted in a method body.
      */
-    void shiftPc(int where, int gapLength, boolean exclusive) {
+    void shiftPc(int where,int gapLength,boolean exclusive){
         int n = tableLength();
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i){
             int pos = i * 10 + 2;
             int pc = ByteArray.readU16bit(info, pos);
             int len = ByteArray.readU16bit(info, pos + 2);
 
-            /* if pc == 0, then the local variable is a method parameter.
+            /*
+             * if pc == 0, then the local variable is a method parameter.
              */
-            if (pc > where || (exclusive && pc == where && pc != 0))
+            if (pc > where || (exclusive && pc == where && pc != 0)){
                 ByteArray.write16bit(pc + gapLength, info, pos);
-            else if (pc + len > where || (exclusive && pc + len == where))
+            }else if (pc + len > where || (exclusive && pc + len == where)){
                 ByteArray.write16bit(len + gapLength, info, pos + 2);
+            }
         }
     }
 
@@ -201,9 +212,10 @@ public class LocalVariableAttribute extends AttributeInfo {
      * Returns the value of <code>local_variable_table[i].name_index</code>.
      * This represents the name of the local variable.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int nameIndex(int i) {
+    public int nameIndex(int i){
         return ByteArray.readU16bit(info, i * 10 + 6);
     }
 
@@ -211,9 +223,10 @@ public class LocalVariableAttribute extends AttributeInfo {
      * Returns the name of the local variable
      * specified by <code>local_variable_table[i].name_index</code>.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public String variableName(int i) {
+    public String variableName(int i){
         return getConstPool().getUtf8Info(nameIndex(i));
     }
 
@@ -227,9 +240,10 @@ public class LocalVariableAttribute extends AttributeInfo {
      * <code>local_variable_type_table[i].signature_index</code>.
      * It represents the type of the local variable.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int descriptorIndex(int i) {
+    public int descriptorIndex(int i){
         return ByteArray.readU16bit(info, i * 10 + 8);
     }
 
@@ -239,11 +253,12 @@ public class LocalVariableAttribute extends AttributeInfo {
      * this method should be used instead of <code>descriptorIndex()</code>
      * since the method name is more appropriate.
      * 
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      * @see #descriptorIndex(int)
      * @see SignatureAttribute#toFieldSignature(String)
      */
-    public int signatureIndex(int i) {
+    public int signatureIndex(int i){
         return descriptorIndex(i);
     }
 
@@ -254,10 +269,11 @@ public class LocalVariableAttribute extends AttributeInfo {
      * If this attribute represents a LocalVariableTypeTable attribute,
      * this method returns the type signature of the local variable
      * specified by <code>local_variable_type_table[i].signature_index</code>.
-      *
-     * @param i         the i-th entry.
+     *
+     * @param i
+     *            the i-th entry.
      */
-    public String descriptor(int i) {
+    public String descriptor(int i){
         return getConstPool().getUtf8Info(descriptorIndex(i));
     }
 
@@ -267,14 +283,16 @@ public class LocalVariableAttribute extends AttributeInfo {
      * this method should be used instead of <code>descriptor()</code>
      * since the method name is more appropriate.
      *
-     * <p>To parse the string, call <code>toFieldSignature(String)</code>
+     * <p>
+     * To parse the string, call <code>toFieldSignature(String)</code>
      * in <code>SignatureAttribute</code>.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      * @see #descriptor(int)
      * @see SignatureAttribute#toFieldSignature(String)
      */
-    public String signature(int i) {
+    public String signature(int i){
         return descriptor(i);
     }
 
@@ -282,20 +300,23 @@ public class LocalVariableAttribute extends AttributeInfo {
      * Returns <code>local_variable_table[i].index</code>.
      * This represents the index of the local variable.
      *
-     * @param i         the i-th entry.
+     * @param i
+     *            the i-th entry.
      */
-    public int index(int i) {
+    public int index(int i){
         return ByteArray.readU16bit(info, i * 10 + 10);
     }
 
     /**
      * Makes a copy.
      *
-     * @param newCp     the constant pool table used by the new copy.
-     * @param classnames        should be null.
+     * @param newCp
+     *            the constant pool table used by the new copy.
+     * @param classnames
+     *            should be null.
      */
     @Override
-    public AttributeInfo copy(ConstPool newCp, Map<String,String> classnames) {
+    public AttributeInfo copy(ConstPool newCp,Map<String, String> classnames){
         byte[] src = get();
         byte[] dest = new byte[src.length];
         ConstPool cp = getConstPool();
@@ -303,7 +324,7 @@ public class LocalVariableAttribute extends AttributeInfo {
         int n = ByteArray.readU16bit(src, 0);
         ByteArray.write16bit(n, dest, 0);
         int j = 2;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i){
             int start = ByteArray.readU16bit(src, j);
             int len = ByteArray.readU16bit(src, j + 2);
             int name = ByteArray.readU16bit(src, j + 4);
@@ -312,12 +333,13 @@ public class LocalVariableAttribute extends AttributeInfo {
 
             ByteArray.write16bit(start, dest, j);
             ByteArray.write16bit(len, dest, j + 2);
-            if (name != 0)
+            if (name != 0){
                 name = cp.copy(name, newCp, null);
+            }
 
             ByteArray.write16bit(name, dest, j + 4);
 
-            if (type != 0)  {
+            if (type != 0){
                 String sig = cp.getUtf8Info(type);
                 sig = Descriptor.rename(sig, classnames);
                 type = newCp.addUtf8Info(sig);
@@ -332,7 +354,7 @@ public class LocalVariableAttribute extends AttributeInfo {
     }
 
     // LocalVariableTypeAttribute overrides this method.
-    LocalVariableAttribute makeThisAttr(ConstPool cp, byte[] dest) {
+    LocalVariableAttribute makeThisAttr(ConstPool cp,byte[] dest){
         return new LocalVariableAttribute(cp, tag, dest);
     }
 }

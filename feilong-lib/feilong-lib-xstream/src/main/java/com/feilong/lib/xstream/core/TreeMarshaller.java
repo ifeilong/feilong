@@ -115,6 +115,11 @@ public class TreeMarshaller implements MarshallingContext{
 
     public static class CircularReferenceException extends ConversionException{
 
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -6229538552445227832L;
+
         public CircularReferenceException(String msg){
             super(msg);
         }

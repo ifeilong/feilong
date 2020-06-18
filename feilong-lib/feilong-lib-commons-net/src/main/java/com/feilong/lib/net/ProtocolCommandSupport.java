@@ -24,7 +24,7 @@ import com.feilong.lib.net.util.ListenerList;
 
 /***
  * ProtocolCommandSupport is a convenience class for managing a list of
- * ProtocolCommandListeners and firing ProtocolCommandEvents.  You can
+ * ProtocolCommandListeners and firing ProtocolCommandEvents. You can
  * simply delegate ProtocolCommandEvent firing and listener
  * registering/unregistering tasks to this class.
  *
@@ -33,46 +33,46 @@ import com.feilong.lib.net.util.ListenerList;
  * @see ProtocolCommandListener
  ***/
 
-public class ProtocolCommandSupport implements Serializable
-{
-    private static final long serialVersionUID = -8017692739988399978L;
+public class ProtocolCommandSupport implements Serializable{
 
-    private final Object __source;
+    private static final long  serialVersionUID = -8017692739988399978L;
+
+    private final Object       __source;
+
     private final ListenerList __listeners;
 
     /***
      * Creates a ProtocolCommandSupport instance using the indicated source
      * as the source of ProtocolCommandEvents.
      *
-     * @param source  The source to use for all generated ProtocolCommandEvents.
+     * @param source
+     *            The source to use for all generated ProtocolCommandEvents.
      ***/
-    public ProtocolCommandSupport(Object source)
-    {
+    public ProtocolCommandSupport(Object source){
         __listeners = new ListenerList();
         __source = source;
     }
-
 
     /***
      * Fires a ProtocolCommandEvent signalling the sending of a command to all
      * registered listeners, invoking their
      * {@link com.feilong.lib.net.ProtocolCommandListener#protocolCommandSent protocolCommandSent() }
-     *  methods.
+     * methods.
      *
-     * @param command The string representation of the command type sent, not
-     *      including the arguments (e.g., "STAT" or "GET").
-     * @param message The entire command string verbatim as sent to the server,
-     *        including all arguments.
+     * @param command
+     *            The string representation of the command type sent, not
+     *            including the arguments (e.g., "STAT" or "GET").
+     * @param message
+     *            The entire command string verbatim as sent to the server,
+     *            including all arguments.
      ***/
-    public void fireCommandSent(String command, String message)
-    {
+    public void fireCommandSent(String command,String message){
         ProtocolCommandEvent event;
 
         event = new ProtocolCommandEvent(__source, command, message);
 
-        for (EventListener listener : __listeners)
-        {
-           ((ProtocolCommandListener)listener).protocolCommandSent(event);
+        for (EventListener listener : __listeners){
+            ((ProtocolCommandListener) listener).protocolCommandSent(event);
         }
     }
 
@@ -80,56 +80,53 @@ public class ProtocolCommandSupport implements Serializable
      * Fires a ProtocolCommandEvent signalling the reception of a command reply
      * to all registered listeners, invoking their
      * {@link com.feilong.lib.net.ProtocolCommandListener#protocolReplyReceived protocolReplyReceived() }
-     *  methods.
+     * methods.
      *
-     * @param replyCode The integer code indicating the natureof the reply.
-     *   This will be the protocol integer value for protocols
-     *   that use integer reply codes, or the reply class constant
-     *   corresponding to the reply for protocols like POP3 that use
-     *   strings like OK rather than integer codes (i.e., POP3Repy.OK).
-     * @param message The entire reply as received from the server.
+     * @param replyCode
+     *            The integer code indicating the natureof the reply.
+     *            This will be the protocol integer value for protocols
+     *            that use integer reply codes, or the reply class constant
+     *            corresponding to the reply for protocols like POP3 that use
+     *            strings like OK rather than integer codes (i.e., POP3Repy.OK).
+     * @param message
+     *            The entire reply as received from the server.
      ***/
-    public void fireReplyReceived(int replyCode, String message)
-    {
+    public void fireReplyReceived(int replyCode,String message){
         ProtocolCommandEvent event;
         event = new ProtocolCommandEvent(__source, replyCode, message);
 
-        for (EventListener listener : __listeners)
-        {
-            ((ProtocolCommandListener)listener).protocolReplyReceived(event);
+        for (EventListener listener : __listeners){
+            ((ProtocolCommandListener) listener).protocolReplyReceived(event);
         }
     }
 
     /***
      * Adds a ProtocolCommandListener.
      *
-     * @param listener  The ProtocolCommandListener to add.
+     * @param listener
+     *            The ProtocolCommandListener to add.
      ***/
-    public void addProtocolCommandListener(ProtocolCommandListener listener)
-    {
+    public void addProtocolCommandListener(ProtocolCommandListener listener){
         __listeners.addListener(listener);
     }
 
     /***
      * Removes a ProtocolCommandListener.
      *
-     * @param listener  The ProtocolCommandListener to remove.
+     * @param listener
+     *            The ProtocolCommandListener to remove.
      ***/
-    public void removeProtocolCommandListener(ProtocolCommandListener listener)
-    {
+    public void removeProtocolCommandListener(ProtocolCommandListener listener){
         __listeners.removeListener(listener);
     }
-
 
     /***
      * Returns the number of ProtocolCommandListeners currently registered.
      *
      * @return The number of ProtocolCommandListeners currently registered.
      ***/
-    public int getListenerCount()
-    {
+    public int getListenerCount(){
         return __listeners.getListenerCount();
     }
 
 }
-

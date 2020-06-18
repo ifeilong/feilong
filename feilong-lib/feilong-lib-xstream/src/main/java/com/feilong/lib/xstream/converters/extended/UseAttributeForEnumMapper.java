@@ -25,6 +25,7 @@ class UseAttributeForEnumMapper extends AttributeMapper{
     /**
      * @deprecated only used for Java 1.4 support
      */
+    @Deprecated
     public static boolean isEnum(Class type){
         while (type != null && type != Object.class){
             if (type.getName().equals("java.lang.Enum")){

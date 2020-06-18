@@ -102,7 +102,7 @@ public final class LinkedRuleBuilder{
      * @return a new {@link ObjectParamBuilder} instance.
      */
     public <T> ObjectParamBuilder<T> objectParam( /* @Nullable */T paramObj){
-        return addProvider(new ObjectParamBuilder<T>(keyPattern, namespaceURI, mainBinder, this, paramObj));
+        return addProvider(new ObjectParamBuilder<>(keyPattern, namespaceURI, mainBinder, this, paramObj));
     }
 
     /**
@@ -226,7 +226,7 @@ public final class LinkedRuleBuilder{
             mainBinder.addError("{ forPattern( \"%s\" ).addRule( R ) } NULL rule not valid", keyPattern);
         }
 
-        return this.addProvider(new ByRuleBuilder<R>(keyPattern, namespaceURI, mainBinder, this, rule));
+        return this.addProvider(new ByRuleBuilder<>(keyPattern, namespaceURI, mainBinder, this, rule));
     }
 
     /**
@@ -243,7 +243,7 @@ public final class LinkedRuleBuilder{
             mainBinder.addError("{ forPattern( \"%s\" ).addRuleCreatedBy() } null rule provider not valid", keyPattern);
         }
 
-        return addProvider(new ByRuleProviderBuilder<R>(keyPattern, namespaceURI, mainBinder, this, provider));
+        return addProvider(new ByRuleProviderBuilder<>(keyPattern, namespaceURI, mainBinder, this, provider));
     }
 
     /**

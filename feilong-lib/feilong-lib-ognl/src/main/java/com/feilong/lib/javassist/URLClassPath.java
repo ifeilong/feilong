@@ -93,8 +93,9 @@ public class URLClassPath implements ClassPath{
     public InputStream openClassfile(String classname){
         try{
             URLConnection con = openClassfile0(classname);
-            if (con != null)
+            if (con != null){
                 return con.getInputStream();
+            }
         }catch (IOException e){}
         return null; // not found
     }
@@ -145,15 +146,16 @@ public class URLClassPath implements ClassPath{
         int size = con.getContentLength();
         InputStream s = con.getInputStream();
         try{
-            if (size <= 0)
+            if (size <= 0){
                 b = ClassPoolTail.readStream(s);
-            else{
+            }else{
                 b = new byte[size];
                 int len = 0;
                 do{
                     int n = s.read(b, len, size - len);
-                    if (n < 0)
+                    if (n < 0){
                         throw new IOException("the stream was closed: " + classname);
+                    }
 
                     len += n;
                 }while (len < size);

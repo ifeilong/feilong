@@ -40,15 +40,16 @@ import com.feilong.lib.javassist.compiler.ast.ASTList;
 /**
  * Object creation (<code>new</code> expression).
  */
-public class NewExpr extends Expr {
+public class NewExpr extends Expr{
+
     String newTypeName;
-    int newPos;
+
+    int    newPos;
 
     /**
-     * Undocumented constructor.  Do not use; internal-use only.
+     * Undocumented constructor. Do not use; internal-use only.
      */
-    protected NewExpr(int pos, CodeIterator i, CtClass declaring,
-                      MethodInfo m, String type, int np) {
+    protected NewExpr(int pos, CodeIterator i, CtClass declaring, MethodInfo m, String type, int np){
         super(pos, i, declaring, m);
         newTypeName = type;
         newPos = np;
@@ -57,56 +58,59 @@ public class NewExpr extends Expr {
     /*
      * Not used
      * 
-    private int getNameAndType(ConstPool cp) {
-        int pos = currentPos;
-        int c = iterator.byteAt(pos);
-        int index = iterator.u16bitAt(pos + 1);
-
-        if (c == INVOKEINTERFACE)
-            return cp.getInterfaceMethodrefNameAndType(index);
-        else
-            return cp.getMethodrefNameAndType(index);
-    } */
+     * private int getNameAndType(ConstPool cp) {
+     * int pos = currentPos;
+     * int c = iterator.byteAt(pos);
+     * int index = iterator.u16bitAt(pos + 1);
+     * 
+     * if (c == INVOKEINTERFACE)
+     * return cp.getInterfaceMethodrefNameAndType(index);
+     * else
+     * return cp.getMethodrefNameAndType(index);
+     * }
+     */
 
     /**
      * Returns the method or constructor containing the <code>new</code>
      * expression represented by this object.
      */
     @Override
-    public CtBehavior where() { return super.where(); }
+    public CtBehavior where(){
+        return super.where();
+    }
 
     /**
      * Returns the line number of the source line containing the
      * <code>new</code> expression.
      *
-     * @return -1       if this information is not available.
+     * @return -1 if this information is not available.
      */
     @Override
-    public int getLineNumber() {
+    public int getLineNumber(){
         return super.getLineNumber();
     }
 
     /**
      * Returns the source file containing the <code>new</code> expression.
      *
-     * @return null     if this information is not available.
+     * @return null if this information is not available.
      */
     @Override
-    public String getFileName() {
+    public String getFileName(){
         return super.getFileName();
     }
 
     /**
      * Returns the class of the created object.
      */
-    private CtClass getCtClass() throws NotFoundException {
+    private CtClass getCtClass() throws NotFoundException{
         return thisClass.getClassPool().get(newTypeName);
     }
 
     /**
      * Returns the class name of the created object.
      */
-    public String getClassName() {
+    public String getClassName(){
         return newTypeName;
     }
 
@@ -120,16 +124,16 @@ public class NewExpr extends Expr {
      * @see com.feilong.lib.javassist.bytecode.Descriptor
      * @return the signature
      */
-    public String getSignature() {
+    public String getSignature(){
         ConstPool constPool = getConstPool();
-        int methodIndex = iterator.u16bitAt(currentPos + 1);   // constructor
+        int methodIndex = iterator.u16bitAt(currentPos + 1); // constructor
         return constPool.getMethodrefType(methodIndex);
     }
 
     /**
      * Returns the constructor called for creating the object.
      */
-    public CtConstructor getConstructor() throws NotFoundException {
+    public CtConstructor getConstructor() throws NotFoundException{
         ConstPool cp = getConstPool();
         int index = iterator.u16bitAt(currentPos + 1);
         String desc = cp.getMethodrefType(index);
@@ -143,79 +147,81 @@ public class NewExpr extends Expr {
      * the throws declaration allows the method to throw.
      */
     @Override
-    public CtClass[] mayThrow() {
+    public CtClass[] mayThrow(){
         return super.mayThrow();
     }
 
     /*
      * Returns the parameter types of the constructor.
+     * 
+     * public CtClass[] getParameterTypes() throws NotFoundException {
+     * ConstPool cp = getConstPool();
+     * int index = iterator.u16bitAt(currentPos + 1);
+     * String desc = cp.getMethodrefType(index);
+     * return Descriptor.getParameterTypes(desc, thisClass.getClassPool());
+     * }
+     */
 
-    public CtClass[] getParameterTypes() throws NotFoundException {
-        ConstPool cp = getConstPool();
-        int index = iterator.u16bitAt(currentPos + 1);
-        String desc = cp.getMethodrefType(index);
-        return Descriptor.getParameterTypes(desc, thisClass.getClassPool());
-    }
-    */
-
-    private int canReplace() throws CannotCompileException {
+    private int canReplace() throws CannotCompileException{
         int op = iterator.byteAt(newPos + 3);
-        if (op == Opcode.DUP)     // Typical single DUP or Javaflow DUP DUP2_X2 POP2
-            return ((iterator.byteAt(newPos + 4) == Opcode.DUP2_X2
-                 && iterator.byteAt(newPos + 5) == Opcode.POP2)) ? 6 : 4;
-        else if (op == Opcode.DUP_X1
-                 && iterator.byteAt(newPos + 4) == Opcode.SWAP)
+        if (op == Opcode.DUP){
+            return ((iterator.byteAt(newPos + 4) == Opcode.DUP2_X2 && iterator.byteAt(newPos + 5) == Opcode.POP2)) ? 6 : 4;
+        }else if (op == Opcode.DUP_X1 && iterator.byteAt(newPos + 4) == Opcode.SWAP){
             return 5;
-        else
-            return 3;   // for Eclipse.  The generated code may include no DUP.
+        }else{
+            return 3; // for Eclipse.  The generated code may include no DUP.
             // throw new CannotCompileException(
             //            "sorry, cannot edit NEW followed by no DUP");
+        }
     }
 
     /**
      * Replaces the <code>new</code> expression with the bytecode derived from
      * the given source text.
      *
-     * <p>$0 is available but the value is null.
+     * <p>
+     * $0 is available but the value is null.
      *
-     * @param statement         a Java statement except try-catch.
+     * @param statement
+     *            a Java statement except try-catch.
      */
     @Override
-    public void replace(String statement) throws CannotCompileException {
-        thisClass.getClassFile();   // to call checkModify().
+    public void replace(String statement) throws CannotCompileException{
+        thisClass.getClassFile(); // to call checkModify().
 
         final int bytecodeSize = 3;
         int pos = newPos;
 
         int newIndex = iterator.u16bitAt(pos + 1);
 
-        /* delete the preceding NEW and DUP (or DUP_X1, SWAP) instructions.
+        /*
+         * delete the preceding NEW and DUP (or DUP_X1, SWAP) instructions.
          */
         int codeSize = canReplace();
         int end = pos + codeSize;
-        for (int i = pos; i < end; ++i)
+        for (int i = pos; i < end; ++i){
             iterator.writeByte(NOP, i);
+        }
 
         ConstPool constPool = getConstPool();
         pos = currentPos;
-        int methodIndex = iterator.u16bitAt(pos + 1);   // constructor
+        int methodIndex = iterator.u16bitAt(pos + 1); // constructor
 
         String signature = constPool.getMethodrefType(methodIndex);
 
         Javac jc = new Javac(thisClass);
         ClassPool cp = thisClass.getClassPool();
         CodeAttribute ca = iterator.get();
-        try {
+        try{
             CtClass[] params = Descriptor.getParameterTypes(signature, cp);
             CtClass newType = cp.get(newTypeName);
             int paramVar = ca.getMaxLocals();
-            jc.recordParams(newTypeName, params,
-                            true, paramVar, withinStatic());
+            jc.recordParams(newTypeName, params, true, paramVar, withinStatic());
             int retVar = jc.recordReturnType(newType, true);
-            jc.recordProceed(new ProceedForNew(newType, newIndex,
-                                               methodIndex));
+            jc.recordProceed(new ProceedForNew(newType, newIndex, methodIndex));
 
-            /* Is $_ included in the source code?
+            /*
+             * Is $_ included in the source code?
              */
             checkResultValue(newType, statement);
 
@@ -224,47 +230,46 @@ public class NewExpr extends Expr {
             jc.recordLocalVariables(ca, pos);
 
             bytecode.addConstZero(newType);
-            bytecode.addStore(retVar, newType);     // initialize $_
+            bytecode.addStore(retVar, newType); // initialize $_
 
             jc.compileStmnt(statement);
-            if (codeSize > 3)   // if the original code includes DUP.
+            if (codeSize > 3){
                 bytecode.addAload(retVar);
+            }
 
             replace0(pos, bytecode, bytecodeSize);
-        }
-        catch (CompileError e) { throw new CannotCompileException(e); }
-        catch (NotFoundException e) { throw new CannotCompileException(e); }
-        catch (BadBytecode e) {
+        }catch (CompileError e){
+            throw new CannotCompileException(e);
+        }catch (NotFoundException e){
+            throw new CannotCompileException(e);
+        }catch (BadBytecode e){
             throw new CannotCompileException("broken method");
         }
     }
 
-    static class ProceedForNew implements ProceedHandler {
-        CtClass newType;
-        int newIndex, methodIndex;
+    static class ProceedForNew implements ProceedHandler{
 
-        ProceedForNew(CtClass nt, int ni, int mi) {
+        CtClass newType;
+
+        int     newIndex, methodIndex;
+
+        ProceedForNew(CtClass nt, int ni, int mi){
             newType = nt;
             newIndex = ni;
             methodIndex = mi;
         }
 
         @Override
-        public void doit(JvstCodeGen gen, Bytecode bytecode, ASTList args)
-            throws CompileError
-        {
+        public void doit(JvstCodeGen gen,Bytecode bytecode,ASTList args) throws CompileError{
             bytecode.addOpcode(NEW);
             bytecode.addIndex(newIndex);
             bytecode.addOpcode(DUP);
-            gen.atMethodCallCore(newType, MethodInfo.nameInit, args,
-                                 false, true, -1, null);
+            gen.atMethodCallCore(newType, MethodInfo.nameInit, args, false, true, -1, null);
             gen.setType(newType);
         }
 
         @Override
-        public void setReturnType(JvstTypeChecker c, ASTList args)
-            throws CompileError
-        {
+        public void setReturnType(JvstTypeChecker c,ASTList args) throws CompileError{
             c.atMethodCallCore(newType, MethodInfo.nameInit, args);
             c.setType(newType);
         }

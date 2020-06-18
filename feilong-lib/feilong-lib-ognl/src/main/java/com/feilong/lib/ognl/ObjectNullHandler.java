@@ -30,7 +30,7 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.util.*;
+import java.util.Map;
 
 /**
  * Implementation of NullHandler that returns null in all cases,

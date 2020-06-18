@@ -82,8 +82,9 @@ public class ByteArrayClassPath implements ClassPath{
      */
     @Override
     public InputStream openClassfile(String classname){
-        if (this.classname.equals(classname))
+        if (this.classname.equals(classname)){
             return new ByteArrayInputStream(classfile);
+        }
         return null;
     }
 

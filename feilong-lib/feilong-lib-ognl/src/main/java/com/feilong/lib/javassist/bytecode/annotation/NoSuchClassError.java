@@ -18,25 +18,27 @@ package com.feilong.lib.javassist.bytecode.annotation;
 
 /**
  * Thrown if the linkage fails.
- * It keeps the name of the class that caused this error. 
+ * It keeps the name of the class that caused this error.
  */
-public class NoSuchClassError extends Error {
+public class NoSuchClassError extends Error{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    private String className;
+
+    private String            className;
 
     /**
      * Constructs an exception.
      */
-    public NoSuchClassError(String className, Error cause) {
+    public NoSuchClassError(String className, Error cause){
         super(cause.toString(), cause);
         this.className = className;
     }
 
     /**
-     * Returns the name of the class not found. 
+     * Returns the name of the class not found.
      */
-    public String getClassName() {
+    public String getClassName(){
         return className;
     }
 }

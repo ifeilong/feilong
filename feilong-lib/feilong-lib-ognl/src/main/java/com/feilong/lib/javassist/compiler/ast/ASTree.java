@@ -21,31 +21,38 @@ import java.io.Serializable;
 import com.feilong.lib.javassist.compiler.CompileError;
 
 /**
- * Abstract Syntax Tree.  An ASTree object represents a node of
- * a binary tree.  If the node is a leaf node, both <code>getLeft()</code>
+ * Abstract Syntax Tree. An ASTree object represents a node of
+ * a binary tree. If the node is a leaf node, both <code>getLeft()</code>
  * and <code>getRight()</code> returns null.
  */
-public abstract class ASTree implements Serializable {
+public abstract class ASTree implements Serializable{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    public ASTree getLeft() { return null; }
+    public ASTree getLeft(){
+        return null;
+    }
 
-    public ASTree getRight() { return null; }
+    public ASTree getRight(){
+        return null;
+    }
 
-    public void setLeft(ASTree _left) {}
+    public void setLeft(ASTree _left){
+    }
 
-    public void setRight(ASTree _right) {}
+    public void setRight(ASTree _right){
+    }
 
     /**
-     * Is a method for the visitor pattern.  It calls
+     * Is a method for the visitor pattern. It calls
      * <code>atXXX()</code> on the given visitor, where
      * <code>XXX</code> is the class name of the node object.
      */
     public abstract void accept(Visitor v) throws CompileError;
 
     @Override
-    public String toString() {
+    public String toString(){
         StringBuffer sbuf = new StringBuffer();
         sbuf.append('<');
         sbuf.append(getTag());
@@ -54,10 +61,10 @@ public abstract class ASTree implements Serializable {
     }
 
     /**
-     * Returns the type of this node.  This method is used by
+     * Returns the type of this node. This method is used by
      * <code>toString()</code>.
      */
-    protected String getTag() {
+    protected String getTag(){
         String name = getClass().getName();
         return name.substring(name.lastIndexOf('.') + 1);
     }

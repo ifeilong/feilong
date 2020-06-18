@@ -14,6 +14,11 @@ package com.feilong.lib.ognl;
 public class ParseException extends Exception{
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -8305619217260038565L;
+
+    /**
      * This constructor is used by the method "generateParseException"
      * in the generated parser. Calling this constructor generates
      * a new object of this type with the fields "currentToken",
@@ -113,14 +118,14 @@ public class ParseException extends Exception{
         }
         StringBuffer expected = new StringBuffer();
         int maxSize = 0;
-        for (int i = 0; i < expectedTokenSequences.length; i++){
-            if (maxSize < expectedTokenSequences[i].length){
-                maxSize = expectedTokenSequences[i].length;
+        for (int[] expectedTokenSequence : expectedTokenSequences){
+            if (maxSize < expectedTokenSequence.length){
+                maxSize = expectedTokenSequence.length;
             }
-            for (int j = 0; j < expectedTokenSequences[i].length; j++){
-                expected.append(tokenImage[expectedTokenSequences[i][j]]).append(' ');
+            for (int j = 0; j < expectedTokenSequence.length; j++){
+                expected.append(tokenImage[expectedTokenSequence[j]]).append(' ');
             }
-            if (expectedTokenSequences[i][expectedTokenSequences[i].length - 1] != 0){
+            if (expectedTokenSequence[expectedTokenSequence.length - 1] != 0){
                 expected.append("...");
             }
             expected.append(eol).append("    ");
@@ -128,8 +133,9 @@ public class ParseException extends Exception{
         String retval = "Encountered \"";
         Token tok = currentToken.next;
         for (int i = 0; i < maxSize; i++){
-            if (i != 0)
+            if (i != 0){
                 retval += " ";
+            }
             if (tok.kind == 0){
                 retval += tokenImage[0];
                 break;

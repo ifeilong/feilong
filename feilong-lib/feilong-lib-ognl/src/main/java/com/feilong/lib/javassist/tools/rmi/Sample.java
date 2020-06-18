@@ -21,17 +21,17 @@ package com.feilong.lib.javassist.tools.rmi;
  * The class file of this class is read by the <code>StubGenerator</code>
  * class.
  */
-public class Sample {
-    private ObjectImporter importer;
-    private int objectId;
+public class Sample{
 
-    public Object forward(Object[] args, int identifier) {
+    private ObjectImporter importer;
+
+    private int            objectId;
+
+    public Object forward(Object[] args,int identifier){
         return importer.call(objectId, identifier, args);
     }
 
-    public static Object forwardStatic(Object[] args, int identifier)
-        throws RemoteException
-    {
+    public static Object forwardStatic(Object[] args,int identifier) throws RemoteException{
         throw new RemoteException("cannot call a static method.");
     }
 }

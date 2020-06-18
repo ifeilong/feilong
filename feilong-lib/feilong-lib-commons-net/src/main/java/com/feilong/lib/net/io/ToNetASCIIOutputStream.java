@@ -32,87 +32,85 @@ import java.io.OutputStream;
  *
  ***/
 
-public final class ToNetASCIIOutputStream extends FilterOutputStream
-{
+public final class ToNetASCIIOutputStream extends FilterOutputStream{
+
     private boolean __lastWasCR;
 
     /***
      * Creates a ToNetASCIIOutputStream instance that wraps an existing
      * OutputStream.
      *
-     * @param output  The OutputStream to wrap.
+     * @param output
+     *            The OutputStream to wrap.
      ***/
-    public ToNetASCIIOutputStream(OutputStream output)
-    {
+    public ToNetASCIIOutputStream(OutputStream output){
         super(output);
         __lastWasCR = false;
     }
 
-
     /***
-     * Writes a byte to the stream.    Note that a call to this method
+     * Writes a byte to the stream. Note that a call to this method
      * may result in multiple writes to the underlying input stream in order
      * to convert naked newlines to NETASCII line separators.
      * This is transparent to the programmer and is only mentioned for
      * completeness.
      *
-     * @param ch The byte to write.
-     * @throws IOException If an error occurs while writing to the underlying
-     *            stream.
+     * @param ch
+     *            The byte to write.
+     * @throws IOException
+     *             If an error occurs while writing to the underlying
+     *             stream.
      ***/
     @Override
-    public synchronized void write(int ch)
-    throws IOException
-    {
-        switch (ch)
-        {
-        case '\r':
-            __lastWasCR = true;
-            out.write('\r');
-            return ;
-        case '\n':
-            if (!__lastWasCR) {
+    public synchronized void write(int ch) throws IOException{
+        switch (ch) {
+            case '\r':
+                __lastWasCR = true;
                 out.write('\r');
-            }
-            //$FALL-THROUGH$
-        default:
-            __lastWasCR = false;
-            out.write(ch);
-            return ;
+                return;
+            case '\n':
+                if (!__lastWasCR){
+                    out.write('\r');
+                }
+                //$FALL-THROUGH$
+            default:
+                __lastWasCR = false;
+                out.write(ch);
+                return;
         }
     }
-
 
     /***
      * Writes a byte array to the stream.
      *
-     * @param buffer  The byte array to write.
-     * @throws IOException If an error occurs while writing to the underlying
-     *            stream.
+     * @param buffer
+     *            The byte array to write.
+     * @throws IOException
+     *             If an error occurs while writing to the underlying
+     *             stream.
      ***/
     @Override
-    public synchronized void write(byte buffer[])
-    throws IOException
-    {
+    public synchronized void write(byte buffer[]) throws IOException{
         write(buffer, 0, buffer.length);
     }
-
 
     /***
      * Writes a number of bytes from a byte array to the stream starting from
      * a given offset.
      *
-     * @param buffer  The byte array to write.
-     * @param offset  The offset into the array at which to start copying data.
-     * @param length  The number of bytes to write.
-     * @throws IOException If an error occurs while writing to the underlying
-     *            stream.
+     * @param buffer
+     *            The byte array to write.
+     * @param offset
+     *            The offset into the array at which to start copying data.
+     * @param length
+     *            The number of bytes to write.
+     * @throws IOException
+     *             If an error occurs while writing to the underlying
+     *             stream.
      ***/
     @Override
-    public synchronized void write(byte buffer[], int offset, int length)
-    throws IOException
-    {
-        while (length-- > 0) {
+    public synchronized void write(byte buffer[],int offset,int length) throws IOException{
+        while (length-- > 0){
             write(buffer[offset++]);
         }
     }

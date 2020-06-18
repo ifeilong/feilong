@@ -73,8 +73,9 @@ public class Viewer extends ClassLoader{
             String[] args2 = new String[args.length - 3];
             System.arraycopy(args, 3, args2, 0, args.length - 3);
             cl.run(args[2], args2);
-        }else
+        }else{
             System.err.println("Usage: java javassist.tools.web.Viewer <host> <port> class [args ...]");
+        }
     }
 
     /**
@@ -127,14 +128,17 @@ public class Viewer extends ClassLoader{
     @Override
     protected synchronized Class<?> loadClass(String name,boolean resolve) throws ClassNotFoundException{
         Class<?> c = findLoadedClass(name);
-        if (c == null)
+        if (c == null){
             c = findClass(name);
+        }
 
-        if (c == null)
+        if (c == null){
             throw new ClassNotFoundException(name);
+        }
 
-        if (resolve)
+        if (resolve){
             resolveClass(c);
+        }
 
         return c;
     }
@@ -153,15 +157,18 @@ public class Viewer extends ClassLoader{
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException{
         Class<?> c = null;
-        if (name.startsWith("java.") || name.startsWith("javax.") || name.equals("com.feilong.lib.javassist.tools.web.Viewer"))
+        if (name.startsWith("java.") || name.startsWith("javax.") || name.equals("com.feilong.lib.javassist.tools.web.Viewer")){
             c = findSystemClass(name);
+        }
 
-        if (c == null)
+        if (c == null){
             try{
                 byte[] b = fetchClass(name);
-                if (b != null)
+                if (b != null){
                     c = defineClass(name, b, 0, b.length);
+                }
             }catch (Exception e){}
+        }
 
         return c;
     }
@@ -177,9 +184,9 @@ public class Viewer extends ClassLoader{
         con.connect();
         int size = con.getContentLength();
         InputStream s = con.getInputStream();
-        if (size <= 0)
+        if (size <= 0){
             b = readStream(s);
-        else{
+        }else{
             b = new byte[size];
             int len = 0;
             do{

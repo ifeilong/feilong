@@ -21,11 +21,13 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Binary expression.
  *
- * <p>If the operator is +, the right node might be null.
+ * <p>
+ * If the operator is +, the right node might be null.
  * See TypeChecker.atBinExpr().
  */
-public class BinExpr extends Expr {
-    /* operator must be either of:
+public class BinExpr extends Expr{
+    /*
+     * operator must be either of:
      * ||, &&, |, ^, &, ==, !=, <=, >=, <, >,
      * <<, >>, >>>, +, -, *, /, %
      */
@@ -33,14 +35,16 @@ public class BinExpr extends Expr {
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    private BinExpr(int op, ASTree _head, ASTList _tail) {
+    private BinExpr(int op, ASTree _head, ASTList _tail){
         super(op, _head, _tail);
     }
 
-    public static BinExpr makeBin(int op, ASTree oprand1, ASTree oprand2) {
+    public static BinExpr makeBin(int op,ASTree oprand1,ASTree oprand2){
         return new BinExpr(op, oprand1, new ASTList(oprand2));
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atBinExpr(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atBinExpr(this);
+    }
 }

@@ -24,11 +24,17 @@ import java.util.Set;
 /**
  * @deprecated As of 1.4.8 use {@link java.util.LinkedHashMap}
  */
+@Deprecated
 public class OrderRetainingMap extends HashMap{
 
-    private ArraySet keyOrder   = new ArraySet();
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -7781170057857376152L;
 
-    private List     valueOrder = new ArrayList();
+    private ArraySet          keyOrder         = new ArraySet();
+
+    private List              valueOrder       = new ArrayList();
 
     public OrderRetainingMap(){
         super();
@@ -99,5 +105,10 @@ public class OrderRetainingMap extends HashMap{
     }
 
     private static class ArraySet extends ArrayList implements Set{
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -7907047018774961341L;
     }
 }

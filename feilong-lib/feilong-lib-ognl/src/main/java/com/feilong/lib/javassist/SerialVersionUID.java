@@ -23,7 +23,6 @@ import java.lang.reflect.Modifier;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.Comparator;
 
 import com.feilong.lib.javassist.bytecode.ClassFile;
 import com.feilong.lib.javassist.bytecode.Descriptor;
@@ -48,8 +47,9 @@ public class SerialVersionUID{
         }catch (NotFoundException e){}
 
         // check if the class is serializable.
-        if (!isSerializable(clazz))
+        if (!isSerializable(clazz)){
             return;
+        }
 
         // add field with default value.
         CtField field = new CtField(CtClass.longType, "serialVersionUID", clazz);
@@ -85,35 +85,32 @@ public class SerialVersionUID{
 
             // class modifiers.
             int classMods = clazz.getModifiers();
-            if ((classMods & Modifier.INTERFACE) != 0)
-                if (methods.length > 0)
+            if ((classMods & Modifier.INTERFACE) != 0){
+                if (methods.length > 0){
                     classMods = classMods | Modifier.ABSTRACT;
-                else
+                }else{
                     classMods = classMods & ~Modifier.ABSTRACT;
+                }
+            }
 
             out.writeInt(classMods);
 
             // interfaces.
             String[] interfaces = classFile.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++)
+            for (int i = 0; i < interfaces.length; i++){
                 interfaces[i] = javaName(interfaces[i]);
+            }
 
             Arrays.sort(interfaces);
-            for (int i = 0; i < interfaces.length; i++)
-                out.writeUTF(interfaces[i]);
+            for (String interface1 : interfaces){
+                out.writeUTF(interface1);
+            }
 
             // fields.
             CtField[] fields = clazz.getDeclaredFields();
-            Arrays.sort(fields, new Comparator<CtField>(){
+            Arrays.sort(fields, (field1,field2) -> field1.getName().compareTo(field2.getName()));
 
-                @Override
-                public int compare(CtField field1,CtField field2){
-                    return field1.getName().compareTo(field2.getName());
-                }
-            });
-
-            for (int i = 0; i < fields.length; i++){
-                CtField field = fields[i];
+            for (CtField field : fields){
                 int mods = field.getModifiers();
                 if (((mods & Modifier.PRIVATE) == 0) || ((mods & (Modifier.STATIC | Modifier.TRANSIENT)) == 0)){
                     out.writeUTF(field.getName());
@@ -131,16 +128,9 @@ public class SerialVersionUID{
 
             // constructors.
             CtConstructor[] constructors = clazz.getDeclaredConstructors();
-            Arrays.sort(constructors, new Comparator<CtConstructor>(){
+            Arrays.sort(constructors, (c1,c2) -> c1.getMethodInfo2().getDescriptor().compareTo(c2.getMethodInfo2().getDescriptor()));
 
-                @Override
-                public int compare(CtConstructor c1,CtConstructor c2){
-                    return c1.getMethodInfo2().getDescriptor().compareTo(c2.getMethodInfo2().getDescriptor());
-                }
-            });
-
-            for (int i = 0; i < constructors.length; i++){
-                CtConstructor constructor = constructors[i];
+            for (CtConstructor constructor : constructors){
                 int mods = constructor.getModifiers();
                 if ((mods & Modifier.PRIVATE) == 0){
                     out.writeUTF("<init>");
@@ -150,20 +140,16 @@ public class SerialVersionUID{
             }
 
             // methods.
-            Arrays.sort(methods, new Comparator<CtMethod>(){
-
-                @Override
-                public int compare(CtMethod m1,CtMethod m2){
-                    int value = m1.getName().compareTo(m2.getName());
-                    if (value == 0)
-                        value = m1.getMethodInfo2().getDescriptor().compareTo(m2.getMethodInfo2().getDescriptor());
-
-                    return value;
+            Arrays.sort(methods, (m1,m2) -> {
+                int value = m1.getName().compareTo(m2.getName());
+                if (value == 0){
+                    value = m1.getMethodInfo2().getDescriptor().compareTo(m2.getMethodInfo2().getDescriptor());
                 }
+
+                return value;
             });
 
-            for (int i = 0; i < methods.length; i++){
-                CtMethod method = methods[i];
+            for (CtMethod method : methods){
                 int mods = method.getModifiers() & (Modifier.PUBLIC | Modifier.PRIVATE | Modifier.PROTECTED | Modifier.STATIC
                                 | Modifier.FINAL | Modifier.SYNCHRONIZED | Modifier.NATIVE | Modifier.ABSTRACT | Modifier.STRICT);
                 if ((mods & Modifier.PRIVATE) == 0){
@@ -178,8 +164,9 @@ public class SerialVersionUID{
             MessageDigest digest = MessageDigest.getInstance("SHA");
             byte[] digested = digest.digest(bout.toByteArray());
             long hash = 0;
-            for (int i = Math.min(digested.length, 8) - 1; i >= 0; i--)
+            for (int i = Math.min(digested.length, 8) - 1; i >= 0; i--){
                 hash = (hash << 8) | (digested[i] & 0xFF);
+            }
 
             return hash;
         }catch (IOException e){

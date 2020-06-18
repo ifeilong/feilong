@@ -30,7 +30,8 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 /**
  * Object that implements Iterator from an Enumeration

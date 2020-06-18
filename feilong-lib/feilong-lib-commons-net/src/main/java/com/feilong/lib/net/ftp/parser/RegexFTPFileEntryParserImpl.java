@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package com.feilong.lib.net.ftp.parser;
 
 import java.util.regex.MatchResult;
@@ -32,41 +31,42 @@ import com.feilong.lib.net.ftp.FTPFileEntryParserImpl;
  *
  * This is the base class for all regular expression based FTPFileEntryParser classes
  */
-public abstract class RegexFTPFileEntryParserImpl extends
-        FTPFileEntryParserImpl {
+public abstract class RegexFTPFileEntryParserImpl extends FTPFileEntryParserImpl{
+
     /**
      * internal pattern the matcher tries to match, representing a file
      * entry
      */
-    private Pattern pattern = null;
+    private Pattern     pattern   = null;
 
     /**
      * internal match result used by the parser
      */
-    private MatchResult result = null;
+    private MatchResult result    = null;
 
     /**
-     * Internal PatternMatcher object used by the parser.  It has protected
+     * Internal PatternMatcher object used by the parser. It has protected
      * scope in case subclasses want to make use of it for their own purposes.
      */
-    protected Matcher _matcher_ = null;
+    protected Matcher   _matcher_ = null;
 
     /**
      * The constructor for a RegexFTPFileEntryParserImpl object.
      * The expression is compiled with flags = 0.
      *
-     * @param regex  The regular expression with which this object is
-     * initialized.
+     * @param regex
+     *            The regular expression with which this object is
+     *            initialized.
      *
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen in
-     * normal conditions.  It it is seen, this is a sign that a subclass has
-     * been created with a bad regular expression.   Since the parser must be
-     * created before use, this means that any bad parser subclasses created
-     * from this will bomb very quickly,  leading to easy detection.
+     *             Thrown if the regular expression is unparseable. Should not be seen in
+     *             normal conditions. It it is seen, this is a sign that a subclass has
+     *             been created with a bad regular expression. Since the parser must be
+     *             created before use, this means that any bad parser subclasses created
+     *             from this will bomb very quickly, leading to easy detection.
      */
 
-    public RegexFTPFileEntryParserImpl(String regex) {
+    public RegexFTPFileEntryParserImpl(String regex){
         super();
         compileRegex(regex, 0);
     }
@@ -74,19 +74,21 @@ public abstract class RegexFTPFileEntryParserImpl extends
     /**
      * The constructor for a RegexFTPFileEntryParserImpl object.
      *
-     * @param regex  The regular expression with which this object is
-     * initialized.
-     * @param flags the flags to apply, see {@link Pattern#compile(String, int)}. Use 0 for none.
+     * @param regex
+     *            The regular expression with which this object is
+     *            initialized.
+     * @param flags
+     *            the flags to apply, see {@link Pattern#compile(String, int)}. Use 0 for none.
      *
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen in
-     * normal conditions.  It it is seen, this is a sign that a subclass has
-     * been created with a bad regular expression.   Since the parser must be
-     * created before use, this means that any bad parser subclasses created
-     * from this will bomb very quickly,  leading to easy detection.
+     *             Thrown if the regular expression is unparseable. Should not be seen in
+     *             normal conditions. It it is seen, this is a sign that a subclass has
+     *             been created with a bad regular expression. Since the parser must be
+     *             created before use, this means that any bad parser subclasses created
+     *             from this will bomb very quickly, leading to easy detection.
      * @since 3.4
      */
-    public RegexFTPFileEntryParserImpl(String regex, final int flags) {
+    public RegexFTPFileEntryParserImpl(String regex, final int flags){
         super();
         compileRegex(regex, flags);
     }
@@ -95,14 +97,15 @@ public abstract class RegexFTPFileEntryParserImpl extends
      * Convenience method delegates to the internal MatchResult's matches()
      * method.
      *
-     * @param s the String to be matched
+     * @param s
+     *            the String to be matched
      * @return true if s matches this object's regular expression.
      */
 
-    public boolean matches(String s) {
+    public boolean matches(String s){
         this.result = null;
         _matcher_ = pattern.matcher(s);
-        if (_matcher_.matches()) {
+        if (_matcher_.matches()){
             this.result = _matcher_.toMatchResult();
         }
         return null != this.result;
@@ -114,8 +117,8 @@ public abstract class RegexFTPFileEntryParserImpl extends
      * @return the number of groups() in the internal MatchResult.
      */
 
-    public int getGroupCnt() {
-        if (this.result == null) {
+    public int getGroupCnt(){
+        if (this.result == null){
             return 0;
         }
         return this.result.groupCount();
@@ -125,14 +128,15 @@ public abstract class RegexFTPFileEntryParserImpl extends
      * Convenience method delegates to the internal MatchResult's group()
      * method.
      *
-     * @param matchnum match group number to be retrieved
+     * @param matchnum
+     *            match group number to be retrieved
      *
      * @return the content of the <code>matchnum'th</code> group of the internal
      *         match or null if this method is called without a match having
      *         been made.
      */
-    public String group(int matchnum) {
-        if (this.result == null) {
+    public String group(int matchnum){
+        if (this.result == null){
             return null;
         }
         return this.result.group(matchnum);
@@ -145,11 +149,10 @@ public abstract class RegexFTPFileEntryParserImpl extends
      * @return a string shows each match group by number.
      */
 
-    public String getGroupsAsString() {
+    public String getGroupsAsString(){
         StringBuilder b = new StringBuilder();
-        for (int i = 1; i <= this.result.groupCount(); i++) {
-            b.append(i).append(") ").append(this.result.group(i)).append(
-                    System.getProperty("line.separator"));
+        for (int i = 1; i <= this.result.groupCount(); i++){
+            b.append(i).append(") ").append(this.result.group(i)).append(System.getProperty("line.separator"));
         }
         return b.toString();
     }
@@ -157,27 +160,33 @@ public abstract class RegexFTPFileEntryParserImpl extends
     /**
      * Alter the current regular expression being utilised for entry parsing
      * and create a new {@link Pattern} instance.
-     * @param regex The new regular expression
-     * @return  true
+     * 
+     * @param regex
+     *            The new regular expression
+     * @return true
      * @since 2.0
-     * @throws IllegalArgumentException if the regex cannot be compiled
+     * @throws IllegalArgumentException
+     *             if the regex cannot be compiled
      */
-    public boolean setRegex(final String regex) {
+    public boolean setRegex(final String regex){
         compileRegex(regex, 0);
         return true;
     }
 
-
     /**
      * Alter the current regular expression being utilised for entry parsing
      * and create a new {@link Pattern} instance.
-     * @param regex The new regular expression
-     * @param flags the flags to apply, see {@link Pattern#compile(String, int)}. Use 0 for none.
-     * @return  true
+     * 
+     * @param regex
+     *            The new regular expression
+     * @param flags
+     *            the flags to apply, see {@link Pattern#compile(String, int)}. Use 0 for none.
+     * @return true
      * @since 3.4
-     * @throws IllegalArgumentException if the regex cannot be compiled
+     * @throws IllegalArgumentException
+     *             if the regex cannot be compiled
      */
-    public boolean setRegex(final String regex, final int flags) {
+    public boolean setRegex(final String regex,final int flags){
         compileRegex(regex, flags);
         return true;
     }
@@ -188,14 +197,17 @@ public abstract class RegexFTPFileEntryParserImpl extends
      * This is an internal method to do the work so the constructor does not
      * have to call an overrideable method.
      *
-     * @param regex the expression to compile
-     * @param flags the flags to apply, see {@link Pattern#compile(String, int)}. Use 0 for none.
-     * @throws IllegalArgumentException if the regex cannot be compiled
+     * @param regex
+     *            the expression to compile
+     * @param flags
+     *            the flags to apply, see {@link Pattern#compile(String, int)}. Use 0 for none.
+     * @throws IllegalArgumentException
+     *             if the regex cannot be compiled
      */
-    private void compileRegex(final String regex, final int flags) {
-        try {
+    private void compileRegex(final String regex,final int flags){
+        try{
             pattern = Pattern.compile(regex, flags);
-        } catch (PatternSyntaxException pse) {
+        }catch (PatternSyntaxException pse){
             throw new IllegalArgumentException("Unparseable regex supplied: " + regex);
         }
     }

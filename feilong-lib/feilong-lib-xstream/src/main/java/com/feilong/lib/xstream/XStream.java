@@ -497,19 +497,8 @@ public class XStream{
 
     private XStream(ReflectionProvider reflectionProvider, HierarchicalStreamDriver driver, ClassLoaderReference classLoader, Mapper mapper,
                     final DefaultConverterLookup defaultConverterLookup){
-        this(reflectionProvider, driver, classLoader, mapper, new ConverterLookup(){
-
-            @Override
-            public Converter lookupConverterForType(Class type){
-                return defaultConverterLookup.lookupConverterForType(type);
-            }
-        }, new ConverterRegistry(){
-
-            @Override
-            public void registerConverter(Converter converter,int priority){
-                defaultConverterLookup.registerConverter(converter, priority);
-            }
-        });
+        this(reflectionProvider, driver, classLoader, mapper, type -> defaultConverterLookup.lookupConverterForType(type),
+                        (converter,priority) -> defaultConverterLookup.registerConverter(converter, priority));
     }
 
     /**

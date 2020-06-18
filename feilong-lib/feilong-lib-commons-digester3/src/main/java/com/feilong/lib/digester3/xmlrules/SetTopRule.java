@@ -7,35 +7,29 @@ import com.feilong.lib.digester3.binder.SetTopBuilder;
 /**
  * 
  */
-final class SetTopRule
-    extends AbstractXmlMethodRule
-{
+final class SetTopRule extends AbstractXmlMethodRule{
 
     /**
      * @param targetRulesBinder
      * @param patternStack
      */
-    public SetTopRule( RulesBinder targetRulesBinder, PatternStack patternStack )
-    {
-        super( targetRulesBinder, patternStack );
+    public SetTopRule(RulesBinder targetRulesBinder, PatternStack patternStack){
+        super(targetRulesBinder, patternStack);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void bindRule( LinkedRuleBuilder linkedRuleBuilder, String methodName, String paramType,
-                             boolean exactMatch, boolean fireOnBegin )
-    {
-        SetTopBuilder builder = linkedRuleBuilder.setTop( methodName );
+    protected void bindRule(LinkedRuleBuilder linkedRuleBuilder,String methodName,String paramType,boolean exactMatch,boolean fireOnBegin){
+        SetTopBuilder builder = linkedRuleBuilder.setTop(methodName);
 
-        if ( paramType != null && paramType.length() > 0 )
-        {
-            builder.withParameterType( paramType );
+        if (paramType != null && paramType.length() > 0){
+            builder.withParameterType(paramType);
         }
 
-        builder.useExactMatch( exactMatch );
-        builder.fireOnBegin( fireOnBegin );
+        builder.useExactMatch(exactMatch);
+        builder.fireOnBegin(fireOnBegin);
     }
 
 }

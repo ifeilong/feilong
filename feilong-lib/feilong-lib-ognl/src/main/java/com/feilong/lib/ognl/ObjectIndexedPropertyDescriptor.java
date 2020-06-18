@@ -30,8 +30,9 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.beans.*;
-import java.lang.reflect.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
 
 /**
  * <p>

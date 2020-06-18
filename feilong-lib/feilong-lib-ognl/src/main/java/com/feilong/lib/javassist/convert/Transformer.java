@@ -31,27 +31,35 @@ import com.feilong.lib.javassist.bytecode.Opcode;
  *
  * @see com.feilong.lib.javassist.CodeConverter
  */
-public abstract class Transformer implements Opcode {
+public abstract class Transformer implements Opcode{
+
     private Transformer next;
 
-    public Transformer(Transformer t) {
+    public Transformer(Transformer t){
         next = t;
     }
 
-    public Transformer getNext() { return next; }
-
-    public void initialize(ConstPool cp, CodeAttribute attr) {}
-    
-    public void initialize(ConstPool cp, CtClass clazz, MethodInfo minfo) throws CannotCompileException { 
-    	initialize(cp, minfo.getCodeAttribute());
+    public Transformer getNext(){
+        return next;
     }
 
-    public void clean() {}
+    public void initialize(ConstPool cp,CodeAttribute attr){
+    }
 
-    public abstract int transform(CtClass clazz, int pos, CodeIterator it,
-                ConstPool cp) throws CannotCompileException, BadBytecode;
+    public void initialize(ConstPool cp,CtClass clazz,MethodInfo minfo) throws CannotCompileException{
+        initialize(cp, minfo.getCodeAttribute());
+    }
 
-    public int extraLocals() { return 0; }
+    public void clean(){
+    }
 
-    public int extraStack() { return 0; }
+    public abstract int transform(CtClass clazz,int pos,CodeIterator it,ConstPool cp) throws CannotCompileException,BadBytecode;
+
+    public int extraLocals(){
+        return 0;
+    }
+
+    public int extraStack(){
+        return 0;
+    }
 }

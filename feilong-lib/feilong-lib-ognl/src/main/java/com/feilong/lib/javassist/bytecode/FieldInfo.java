@@ -25,27 +25,39 @@ import java.util.List;
 /**
  * <code>field_info</code> structure.
  *
- * <p>The following code adds a public field <code>width</code>
+ * <p>
+ * The following code adds a public field <code>width</code>
  * of <code>int</code> type:
- * <blockquote><pre>
+ * <blockquote>
+ * 
+ * <pre>
  * ClassFile cf = ...
  * FieldInfo f = new FieldInfo(cf.getConstPool(), "width", "I");
  * f.setAccessFlags(AccessFlag.PUBLIC);
  * cf.addField(f);
- * </pre></blockquote>
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @see com.feilong.lib.javassist.CtField#getFieldInfo()
  */
-public final class FieldInfo {
-    ConstPool constPool;
-    int accessFlags;
-    int name;
-    String cachedName;
-    String cachedType;
-    int descriptor;
-    List<AttributeInfo> attribute;       // may be null.
+public final class FieldInfo{
 
-    private FieldInfo(ConstPool cp) {
+    ConstPool           constPool;
+
+    int                 accessFlags;
+
+    int                 name;
+
+    String              cachedName;
+
+    String              cachedType;
+
+    int                 descriptor;
+
+    List<AttributeInfo> attribute;  // may be null.
+
+    private FieldInfo(ConstPool cp){
         constPool = cp;
         accessFlags = 0;
         attribute = null;
@@ -54,20 +66,23 @@ public final class FieldInfo {
     /**
      * Constructs a <code>field_info</code> structure.
      *
-     * @param cp                a constant pool table
-     * @param fieldName         field name
-     * @param desc              field descriptor
+     * @param cp
+     *            a constant pool table
+     * @param fieldName
+     *            field name
+     * @param desc
+     *            field descriptor
      *
      * @see Descriptor
      */
-    public FieldInfo(ConstPool cp, String fieldName, String desc) {
+    public FieldInfo(ConstPool cp, String fieldName, String desc){
         this(cp);
         name = cp.addUtf8Info(fieldName);
         cachedName = fieldName;
         descriptor = cp.addUtf8Info(desc);
     }
 
-    FieldInfo(ConstPool cp, DataInputStream in) throws IOException {
+    FieldInfo(ConstPool cp, DataInputStream in) throws IOException{
         this(cp);
         read(in);
     }
@@ -76,7 +91,7 @@ public final class FieldInfo {
      * Returns a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return getName() + " " + getDescriptor();
     }
 
@@ -86,40 +101,38 @@ public final class FieldInfo {
      * This is used for garbage collecting the items of removed fields
      * and methods.
      *
-     * @param cp    the destination
+     * @param cp
+     *            the destination
      */
-    void compact(ConstPool cp) {
+    void compact(ConstPool cp){
         name = cp.addUtf8Info(getName());
         descriptor = cp.addUtf8Info(getDescriptor());
         attribute = AttributeInfo.copyAll(attribute, cp);
         constPool = cp;
     }
 
-    void prune(ConstPool cp) {
-        List<AttributeInfo> newAttributes = new ArrayList<AttributeInfo>();
-        AttributeInfo invisibleAnnotations
-            = getAttribute(AnnotationsAttribute.invisibleTag);
-        if (invisibleAnnotations != null) {
+    void prune(ConstPool cp){
+        List<AttributeInfo> newAttributes = new ArrayList<>();
+        AttributeInfo invisibleAnnotations = getAttribute(AnnotationsAttribute.invisibleTag);
+        if (invisibleAnnotations != null){
             invisibleAnnotations = invisibleAnnotations.copy(cp, null);
             newAttributes.add(invisibleAnnotations);
-         }
+        }
 
-        AttributeInfo visibleAnnotations
-            = getAttribute(AnnotationsAttribute.visibleTag);
-        if (visibleAnnotations != null) {
+        AttributeInfo visibleAnnotations = getAttribute(AnnotationsAttribute.visibleTag);
+        if (visibleAnnotations != null){
             visibleAnnotations = visibleAnnotations.copy(cp, null);
             newAttributes.add(visibleAnnotations);
         }
 
-        AttributeInfo signature
-            = getAttribute(SignatureAttribute.tag);
-        if (signature != null) {
+        AttributeInfo signature = getAttribute(SignatureAttribute.tag);
+        if (signature != null){
             signature = signature.copy(cp, null);
             newAttributes.add(signature);
         }
 
         int index = getConstantValue();
-        if (index != 0) {
+        if (index != 0){
             index = constPool.copy(index, cp, null);
             newAttributes.add(new ConstantAttribute(cp, index));
         }
@@ -134,24 +147,25 @@ public final class FieldInfo {
      * Returns the constant pool table used
      * by this <code>field_info</code>.
      */
-    public ConstPool getConstPool() {
+    public ConstPool getConstPool(){
         return constPool;
     }
 
     /**
      * Returns the field name.
      */
-    public String getName() {
-       if (cachedName == null)
-           cachedName = constPool.getUtf8Info(name);
+    public String getName(){
+        if (cachedName == null){
+            cachedName = constPool.getUtf8Info(name);
+        }
 
-       return cachedName;
+        return cachedName;
     }
 
     /**
      * Sets the field name.
      */
-    public void setName(String newName) {
+    public void setName(String newName){
         name = constPool.addUtf8Info(newName);
         cachedName = newName;
     }
@@ -161,7 +175,7 @@ public final class FieldInfo {
      *
      * @see AccessFlag
      */
-    public int getAccessFlags() {
+    public int getAccessFlags(){
         return accessFlags;
     }
 
@@ -170,7 +184,7 @@ public final class FieldInfo {
      *
      * @see AccessFlag
      */
-    public void setAccessFlags(int acc) {
+    public void setAccessFlags(int acc){
         accessFlags = acc;
     }
 
@@ -179,7 +193,7 @@ public final class FieldInfo {
      *
      * @see Descriptor
      */
-    public String getDescriptor() {
+    public String getDescriptor(){
         return constPool.getUtf8Info(descriptor);
     }
 
@@ -188,41 +202,44 @@ public final class FieldInfo {
      *
      * @see Descriptor
      */
-    public void setDescriptor(String desc) {
-        if (!desc.equals(getDescriptor()))
+    public void setDescriptor(String desc){
+        if (!desc.equals(getDescriptor())){
             descriptor = constPool.addUtf8Info(desc);
+        }
     }
 
     /**
      * Finds a ConstantValue attribute and returns the index into
      * the <code>constant_pool</code> table.
      *
-     * @return 0    if a ConstantValue attribute is not found.
+     * @return 0 if a ConstantValue attribute is not found.
      */
-    public int getConstantValue() {
-        if ((accessFlags & AccessFlag.STATIC) == 0)
+    public int getConstantValue(){
+        if ((accessFlags & AccessFlag.STATIC) == 0){
             return 0;
+        }
 
-        ConstantAttribute attr
-            = (ConstantAttribute)getAttribute(ConstantAttribute.tag);
-        if (attr == null)
+        ConstantAttribute attr = (ConstantAttribute) getAttribute(ConstantAttribute.tag);
+        if (attr == null){
             return 0;
+        }
         return attr.getConstantValue();
     }
 
     /**
-     * Returns all the attributes.    The returned <code>List</code> object
-     * is shared with this object.  If you add a new attribute to the list,
+     * Returns all the attributes. The returned <code>List</code> object
+     * is shared with this object. If you add a new attribute to the list,
      * the attribute is also added to the field represented by this
-     * object.  If you remove an attribute from the list, it is also removed
+     * object. If you remove an attribute from the list, it is also removed
      * from the field.
      *
      * @return a list of <code>AttributeInfo</code> objects.
      * @see AttributeInfo
      */
-    public List<AttributeInfo> getAttributes() {
-        if (attribute == null)
-            attribute = new ArrayList<AttributeInfo>();
+    public List<AttributeInfo> getAttributes(){
+        if (attribute == null){
+            attribute = new ArrayList<>();
+        }
 
         return attribute;
     }
@@ -231,60 +248,65 @@ public final class FieldInfo {
      * Returns the attribute with the specified name.
      * It returns null if the specified attribute is not found.
      *
-     * <p>An attribute name can be obtained by, for example,
+     * <p>
+     * An attribute name can be obtained by, for example,
      * {@link AnnotationsAttribute#visibleTag} or
-     * {@link AnnotationsAttribute#invisibleTag}. 
+     * {@link AnnotationsAttribute#invisibleTag}.
      * </p>
      * 
-     * @param name      attribute name
+     * @param name
+     *            attribute name
      * @see #getAttributes()
      */
-    public AttributeInfo getAttribute(String name) {
+    public AttributeInfo getAttribute(String name){
         return AttributeInfo.lookup(attribute, name);
     }
 
     /**
      * Removes an attribute with the specified name.
      *
-     * @param name      attribute name.
-     * @return          the removed attribute or null.
+     * @param name
+     *            attribute name.
+     * @return the removed attribute or null.
      * @since 3.21
      */
-    public AttributeInfo removeAttribute(String name) {
+    public AttributeInfo removeAttribute(String name){
         return AttributeInfo.remove(attribute, name);
     }
 
     /**
-     * Appends an attribute.  If there is already an attribute with
+     * Appends an attribute. If there is already an attribute with
      * the same name, the new one substitutes for it.
      *
      * @see #getAttributes()
      */
-    public void addAttribute(AttributeInfo info) {
-        if (attribute == null)
-            attribute = new ArrayList<AttributeInfo>();
+    public void addAttribute(AttributeInfo info){
+        if (attribute == null){
+            attribute = new ArrayList<>();
+        }
 
         AttributeInfo.remove(attribute, info.getName());
         attribute.add(info);
     }
 
-    private void read(DataInputStream in) throws IOException {
+    private void read(DataInputStream in) throws IOException{
         accessFlags = in.readUnsignedShort();
         name = in.readUnsignedShort();
         descriptor = in.readUnsignedShort();
         int n = in.readUnsignedShort();
-        attribute = new ArrayList<AttributeInfo>();
-        for (int i = 0; i < n; ++i)
+        attribute = new ArrayList<>();
+        for (int i = 0; i < n; ++i){
             attribute.add(AttributeInfo.read(constPool, in));
+        }
     }
 
-    void write(DataOutputStream out) throws IOException {
+    void write(DataOutputStream out) throws IOException{
         out.writeShort(accessFlags);
         out.writeShort(name);
         out.writeShort(descriptor);
-        if (attribute == null)
+        if (attribute == null){
             out.writeShort(0);
-        else {
+        }else{
             out.writeShort(attribute.size());
             AttributeInfo.writeAll(attribute, out);
         }

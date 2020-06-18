@@ -22,76 +22,90 @@ import com.feilong.lib.javassist.compiler.TokenId;
 /**
  * Double constant.
  */
-public class DoubleConst extends ASTree {
+public class DoubleConst extends ASTree{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    protected double value;
-    protected int type;
 
-    public DoubleConst(double v, int tokenId) { value = v; type = tokenId; }
+    protected double          value;
 
-    public double get() { return value; }
+    protected int             type;
 
-    public void set(double v) { value = v; }
+    public DoubleConst(double v, int tokenId){
+        value = v;
+        type = tokenId;
+    }
 
-    /* Returns DoubleConstant or FloatConstant
+    public double get(){
+        return value;
+    }
+
+    public void set(double v){
+        value = v;
+    }
+
+    /*
+     * Returns DoubleConstant or FloatConstant
      */
-    public int getType() { return type; }
+    public int getType(){
+        return type;
+    }
 
     @Override
-    public String toString() { return Double.toString(value); }
+    public String toString(){
+        return Double.toString(value);
+    }
 
     @Override
-    public void accept(Visitor v) throws CompileError {
+    public void accept(Visitor v) throws CompileError{
         v.atDoubleConst(this);
     }
 
-    public ASTree compute(int op, ASTree right) {
-        if (right instanceof IntConst)
-            return compute0(op, (IntConst)right);
-        else if (right instanceof DoubleConst)
-            return compute0(op, (DoubleConst)right);
-        else
+    public ASTree compute(int op,ASTree right){
+        if (right instanceof IntConst){
+            return compute0(op, (IntConst) right);
+        }else if (right instanceof DoubleConst){
+            return compute0(op, (DoubleConst) right);
+        }else{
             return null;
+        }
     }
 
-    private DoubleConst compute0(int op, DoubleConst right) {
+    private DoubleConst compute0(int op,DoubleConst right){
         int newType;
-        if (this.type == TokenId.DoubleConstant
-            || right.type == TokenId.DoubleConstant)
+        if (this.type == TokenId.DoubleConstant || right.type == TokenId.DoubleConstant){
             newType = TokenId.DoubleConstant;
-        else
+        }else{
             newType = TokenId.FloatConstant;
+        }
 
         return compute(op, this.value, right.value, newType);
     }
 
-    private DoubleConst compute0(int op, IntConst right) {
+    private DoubleConst compute0(int op,IntConst right){
         return compute(op, this.value, right.value, this.type);
     }
 
-    private static DoubleConst compute(int op, double value1, double value2,
-                                       int newType)
-    {
+    private static DoubleConst compute(int op,double value1,double value2,int newType){
         double newValue;
         switch (op) {
-        case '+' :
-            newValue = value1 + value2;
-            break;
-        case '-' :
-            newValue = value1 - value2;
-            break;
-        case '*' :
-            newValue = value1 * value2;
-            break;
-        case '/' :
-            newValue = value1 / value2;
-            break;
-        case '%' :
-            newValue = value1 % value2;
-            break;
-        default :
-            return null;
+            case '+':
+                newValue = value1 + value2;
+                break;
+            case '-':
+                newValue = value1 - value2;
+                break;
+            case '*':
+                newValue = value1 * value2;
+                break;
+            case '/':
+                newValue = value1 / value2;
+                break;
+            case '%':
+                newValue = value1 % value2;
+                break;
+            default:
+                return null;
         }
 
         return new DoubleConst(newValue, newType);

@@ -15,6 +15,7 @@ package com.feilong.lib.xstream.io;
  * @since 1.4.2
  * @deprecated As of 1.4.11, this interface will be merged into parent with version 1.5.0.
  */
+@Deprecated
 public interface ExtendedHierarchicalStreamReader extends HierarchicalStreamReader{
 
     /**

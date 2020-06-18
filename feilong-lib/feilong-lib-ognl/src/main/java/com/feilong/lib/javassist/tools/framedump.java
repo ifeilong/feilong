@@ -21,25 +21,32 @@ import com.feilong.lib.javassist.bytecode.analysis.FramePrinter;
 
 /**
  * framedump is a tool for viewing a merged combination of the instructions and frame state
- *  of all methods in a class.
+ * of all methods in a class.
  *
- * <p>For example,
- * <pre>% java javassist.tools.framedump foo.class</pre>
+ * <p>
+ * For example,
+ * 
+ * <pre>
+ * % java javassist.tools.framedump foo.class
+ * </pre>
  */
-public class framedump {
-    private framedump() {}
+public class framedump{
+
+    private framedump(){
+    }
 
     /**
      * Main method.
      *
-     * @param args <code>args[0]</code> is the class file name.
+     * @param args
+     *            <code>args[0]</code> is the class file name.
      */
-    public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
+    public static void main(String[] args) throws Exception{
+        if (args.length != 1){
             System.err.println("Usage: java javassist.tools.framedump <fully-qualified class name>");
             return;
         }
-        
+
         ClassPool pool = ClassPool.getDefault();
         CtClass clazz = pool.get(args[0]);
         System.out.println("Frame Dump of " + clazz.getName() + ":");

@@ -36,8 +36,9 @@ public class ISO8601SqlTimestampConverter extends ISO8601DateConverter{
         int nanos = 0;
         if (idxFraction > 0){
             int idx;
-            for (idx = idxFraction + 1; Character.isDigit(str.charAt(idx)); ++idx)
+            for (idx = idxFraction + 1; Character.isDigit(str.charAt(idx)); ++idx){
                 ;
+            }
             nanos = Integer.parseInt(str.substring(idxFraction + 1, idx));
             str = str.substring(0, idxFraction) + str.substring(idx);
         }

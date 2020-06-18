@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTXor extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4455956619770873409L;
+
     public ASTXor(int id){
         super(id);
     }
@@ -52,8 +57,9 @@ class ASTXor extends NumericExpression{
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         Object result = _children[0].getValue(context, source);
-        for (int i = 1; i < _children.length; ++i)
+        for (int i = 1; i < _children.length; ++i){
             result = OgnlOps.binaryXor(result, _children[i].getValue(context, source));
+        }
         return result;
     }
 

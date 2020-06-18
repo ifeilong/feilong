@@ -42,7 +42,12 @@ public class OgnlException extends Exception{
     // cache initCause method - if available..to be used during throwable constructor
     // to properly setup superclass.
 
-    static Method _initCause;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7126968273583084747L;
+
+    static Method             _initCause;
     static{
         try{
             _initCause = OgnlException.class.getMethod("initCause", new Class[] { Throwable.class });
@@ -133,8 +138,9 @@ public class OgnlException extends Exception{
      */
     @Override
     public String toString(){
-        if (_reason == null)
+        if (_reason == null){
             return super.toString();
+        }
 
         return super.toString() + " [" + _reason + "]";
     }

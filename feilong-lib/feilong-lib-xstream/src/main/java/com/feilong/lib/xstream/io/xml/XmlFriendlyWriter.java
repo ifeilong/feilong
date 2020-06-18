@@ -19,6 +19,7 @@ package com.feilong.lib.xstream.io.xml;
  * @since 1.3
  * @deprecated As of 1.4
  */
+@Deprecated
 public interface XmlFriendlyWriter{
 
     /**
@@ -29,5 +30,6 @@ public interface XmlFriendlyWriter{
      * @return An escaped name with original characters replaced
      * @deprecated As of 1.4
      */
+    @Deprecated
     String escapeXmlName(String name);
 }

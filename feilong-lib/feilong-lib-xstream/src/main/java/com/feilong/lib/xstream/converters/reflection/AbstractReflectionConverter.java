@@ -275,6 +275,11 @@ public abstract class AbstractReflectionConverter implements Converter,Caching{
         final Class resultType = result.getClass();
         final Set seenFields = new HashSet(){
 
+            /**
+             * 
+             */
+            private static final long serialVersionUID = -2760462656944390472L;
+
             @Override
             public boolean add(Object e){
                 if (!super.add(e)){
@@ -554,6 +559,11 @@ public abstract class AbstractReflectionConverter implements Converter,Caching{
 
     public static class DuplicateFieldException extends ConversionException{
 
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 4001152602743628195L;
+
         public DuplicateFieldException(String msg){
             super("Duplicate field " + msg);
             add("field", msg);
@@ -561,6 +571,11 @@ public abstract class AbstractReflectionConverter implements Converter,Caching{
     }
 
     public static class UnknownFieldException extends ConversionException{
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 8343312024265219010L;
 
         public UnknownFieldException(String type, String field){
             super("No such field " + type + "." + field);
@@ -641,7 +656,12 @@ public abstract class AbstractReflectionConverter implements Converter,Caching{
 
     private static class ArraysList extends ArrayList{
 
-        final Class physicalFieldType;
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -7645472918513821321L;
+
+        final Class               physicalFieldType;
 
         ArraysList(Class physicalFieldType){
             this.physicalFieldType = physicalFieldType;

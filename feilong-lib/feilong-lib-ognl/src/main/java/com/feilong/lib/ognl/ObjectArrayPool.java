@@ -37,6 +37,7 @@ package com.feilong.lib.ognl;
  * 
  * @deprecated object-pooling now relies on the jvm garbage collection
  */
+@Deprecated
 public final class ObjectArrayPool extends Object{
 
     public ObjectArrayPool(){
@@ -99,6 +100,7 @@ public final class ObjectArrayPool extends Object{
      *            an Object array to recycle (not used).
      * @deprecated object-pooling now relies on the jvm garbage collection
      */
+    @Deprecated
     public void recycle(Object[] value){
         // no need of recycling, we rely on the garbage collection efficiency
     }

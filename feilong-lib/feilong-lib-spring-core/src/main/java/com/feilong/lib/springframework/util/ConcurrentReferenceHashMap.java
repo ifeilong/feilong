@@ -468,6 +468,11 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     @SuppressWarnings("serial")
     protected final class Segment extends ReentrantLock{
 
+        /**
+         * 
+         */
+        private static final long          serialVersionUID = 4335858192660193435L;
+
         private final ReferenceManager     referenceManager;
 
         private final int                  initialSize;
@@ -482,7 +487,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
          * The total number of references contained in this segment. This includes chained
          * references and references that have been garbage collected but not purged.
          */
-        private volatile int               count = 0;
+        private volatile int               count            = 0;
 
         /**
          * The threshold when resizing of the references should occur. When {@code count}
@@ -541,7 +546,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
                     @Override
                     public void add(V value){
                         @SuppressWarnings("unchecked")
-                        Entry<K, V> newEntry = new Entry<K, V>((K) key, value);
+                        Entry<K, V> newEntry = new Entry<>((K) key, value);
                         Reference<K, V> newReference = Segment.this.referenceManager.createReference(newEntry, hash, head);
                         Segment.this.references[index] = newReference;
                         Segment.this.count++;
@@ -589,7 +594,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
                     int countAfterRestructure = this.count;
                     Set<Reference<K, V>> toPurge = Collections.emptySet();
                     if (ref != null){
-                        toPurge = new HashSet<Reference<K, V>>();
+                        toPurge = new HashSet<>();
                         while (ref != null){
                             toPurge.add(ref);
                             ref = this.referenceManager.pollForPurge();
@@ -976,7 +981,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      */
     protected class ReferenceManager{
 
-        private final ReferenceQueue<Entry<K, V>> queue = new ReferenceQueue<Entry<K, V>>();
+        private final ReferenceQueue<Entry<K, V>> queue = new ReferenceQueue<>();
 
         /**
          * Factory method used to create a new {@link Reference}.
@@ -991,9 +996,9 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
          */
         public Reference<K, V> createReference(Entry<K, V> entry,int hash,Reference<K, V> next){
             if (ConcurrentReferenceHashMap.this.referenceType == ReferenceType.WEAK){
-                return new WeakEntryReference<K, V>(entry, hash, next, this.queue);
+                return new WeakEntryReference<>(entry, hash, next, this.queue);
             }
-            return new SoftEntryReference<K, V>(entry, hash, next, this.queue);
+            return new SoftEntryReference<>(entry, hash, next, this.queue);
         }
 
         /**

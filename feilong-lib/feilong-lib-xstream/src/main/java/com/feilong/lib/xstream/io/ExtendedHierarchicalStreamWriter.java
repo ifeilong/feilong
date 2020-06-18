@@ -15,6 +15,7 @@ package com.feilong.lib.xstream.io;
  * @author Paul Hammant
  * @deprecated As of 1.4.11, this interface will be merged into parent with version 1.5.0.
  */
+@Deprecated
 public interface ExtendedHierarchicalStreamWriter extends HierarchicalStreamWriter{
 
     void startNode(String name,Class clazz);

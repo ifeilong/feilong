@@ -25,12 +25,13 @@ import com.feilong.lib.javassist.bytecode.Descriptor;
 import com.feilong.lib.javassist.bytecode.StackMap;
 import com.feilong.lib.javassist.bytecode.StackMapTable;
 
-final public class TransformNew extends Transformer {
-    private int nested;
+final public class TransformNew extends Transformer{
+
+    private int    nested;
+
     private String classname, trapClass, trapMethod;
 
-    public TransformNew(Transformer next,
-                 String classname, String trapClass, String trapMethod) {
+    public TransformNew(Transformer next, String classname, String trapClass, String trapMethod){
         super(next);
         this.classname = classname;
         this.trapClass = trapClass;
@@ -38,34 +39,32 @@ final public class TransformNew extends Transformer {
     }
 
     @Override
-    public void initialize(ConstPool cp, CodeAttribute attr) {
+    public void initialize(ConstPool cp,CodeAttribute attr){
         nested = 0;
     }
 
     /**
      * Replace a sequence of
-     *    NEW classname
-     *    DUP
-     *    ...
-     *    INVOKESPECIAL
+     * NEW classname
+     * DUP
+     * ...
+     * INVOKESPECIAL
      * with
-     *    NOP
-     *    NOP
-     *    ...
-     *    INVOKESTATIC trapMethod in trapClass
+     * NOP
+     * NOP
+     * ...
+     * INVOKESTATIC trapMethod in trapClass
      */
     @Override
-    public int transform(CtClass clazz, int pos, CodeIterator iterator,
-                         ConstPool cp) throws CannotCompileException
-    {
+    public int transform(CtClass clazz,int pos,CodeIterator iterator,ConstPool cp) throws CannotCompileException{
         int index;
         int c = iterator.byteAt(pos);
-        if (c == NEW) {
+        if (c == NEW){
             index = iterator.u16bitAt(pos + 1);
-            if (cp.getClassInfo(index).equals(classname)) {
-                if (iterator.byteAt(pos + 3) != DUP)
-                    throw new CannotCompileException(
-                                "NEW followed by no DUP was found");
+            if (cp.getClassInfo(index).equals(classname)){
+                if (iterator.byteAt(pos + 3) != DUP){
+                    throw new CannotCompileException("NEW followed by no DUP was found");
+                }
 
                 iterator.writeByte(NOP, pos);
                 iterator.writeByte(NOP, pos + 1);
@@ -73,21 +72,20 @@ final public class TransformNew extends Transformer {
                 iterator.writeByte(NOP, pos + 3);
                 ++nested;
 
-                StackMapTable smt
-                    = (StackMapTable)iterator.get().getAttribute(StackMapTable.tag);
-                if (smt != null)
+                StackMapTable smt = (StackMapTable) iterator.get().getAttribute(StackMapTable.tag);
+                if (smt != null){
                     smt.removeNew(pos);
+                }
 
-                StackMap sm
-                    = (StackMap)iterator.get().getAttribute(StackMap.tag);
-                if (sm != null)
+                StackMap sm = (StackMap) iterator.get().getAttribute(StackMap.tag);
+                if (sm != null){
                     sm.removeNew(pos);
+                }
             }
-        }
-        else if (c == INVOKESPECIAL) {
+        }else if (c == INVOKESPECIAL){
             index = iterator.u16bitAt(pos + 1);
             int typedesc = cp.isConstructor(classname, index);
-            if (typedesc != 0 && nested > 0) {
+            if (typedesc != 0 && nested > 0){
                 int methodref = computeMethodref(typedesc, cp);
                 iterator.writeByte(INVOKESTATIC, pos);
                 iterator.write16bit(methodref, pos + 1);
@@ -98,13 +96,10 @@ final public class TransformNew extends Transformer {
         return pos;
     }
 
-    private int computeMethodref(int typedesc, ConstPool cp) {
+    private int computeMethodref(int typedesc,ConstPool cp){
         int classIndex = cp.addClassInfo(trapClass);
         int mnameIndex = cp.addUtf8Info(trapMethod);
-        typedesc = cp.addUtf8Info(
-                Descriptor.changeReturnType(classname,
-                                            cp.getUtf8Info(typedesc)));
-        return cp.addMethodrefInfo(classIndex,
-                        cp.addNameAndTypeInfo(mnameIndex, typedesc));
+        typedesc = cp.addUtf8Info(Descriptor.changeReturnType(classname, cp.getUtf8Info(typedesc)));
+        return cp.addMethodrefInfo(classIndex, cp.addNameAndTypeInfo(mnameIndex, typedesc));
     }
 }

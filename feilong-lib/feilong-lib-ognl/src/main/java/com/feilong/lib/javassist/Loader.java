@@ -259,8 +259,8 @@ public class Loader extends ClassLoader{
     }
 
     private void init(ClassPool cp){
-        notDefinedHere = new HashMap<String, ClassLoader>();
-        notDefinedPackages = new Vector<String>();
+        notDefinedHere = new HashMap<>();
+        notDefinedPackages = new Vector<>();
         source = cp;
         translator = null;
         domain = null;
@@ -277,10 +277,11 @@ public class Loader extends ClassLoader{
      * in that package and the sub packages are delegated.
      */
     public void delegateLoadingOf(String classname){
-        if (classname.endsWith("."))
+        if (classname.endsWith(".")){
             notDefinedPackages.addElement(classname);
-        else
+        }else{
             notDefinedHere.put(classname, this);
+        }
     }
 
     /**
@@ -354,8 +355,9 @@ public class Loader extends ClassLoader{
      *            to the target {@code main()}.
      */
     public void run(String[] args) throws Throwable{
-        if (args.length >= 1)
+        if (args.length >= 1){
             run(args[0], Arrays.copyOfRange(args, 1, args.length));
+        }
     }
 
     /**
@@ -383,17 +385,21 @@ public class Loader extends ClassLoader{
         name = name.intern();
         synchronized (name){
             Class<?> c = findLoadedClass(name);
-            if (c == null)
+            if (c == null){
                 c = loadClassByDelegation(name);
+            }
 
-            if (c == null)
+            if (c == null){
                 c = findClass(name);
+            }
 
-            if (c == null)
+            if (c == null){
                 c = delegateToParent(name);
+            }
 
-            if (resolve)
+            if (resolve){
                 resolveClass(c);
+            }
 
             return c;
         }
@@ -418,8 +424,9 @@ public class Loader extends ClassLoader{
         byte[] classfile;
         try{
             if (source != null){
-                if (translator != null)
+                if (translator != null){
                     translator.onLoad(source, name);
+                }
 
                 try{
                     classfile = source.get(name).toBytecode();
@@ -429,8 +436,9 @@ public class Loader extends ClassLoader{
             }else{
                 String jarname = "/" + name.replace('.', '/') + ".class";
                 InputStream in = this.getClass().getResourceAsStream(jarname);
-                if (in == null)
+                if (in == null){
                     return null;
+                }
 
                 classfile = ClassPoolTail.readStream(in);
             }
@@ -441,17 +449,19 @@ public class Loader extends ClassLoader{
         int i = name.lastIndexOf('.');
         if (i != -1){
             String pname = name.substring(0, i);
-            if (isDefinedPackage(pname))
+            if (isDefinedPackage(pname)){
                 try{
                     definePackage(pname, null, null, null, null, null, null, null);
                 }catch (IllegalArgumentException e){
                     // ignore.  maybe the package object for the same
                     // name has been created just right away.
                 }
+            }
         }
 
-        if (domain == null)
+        if (domain == null){
             return defineClass(name, classfile, 0, classfile.length);
+        }
         return defineClass(name, classfile, 0, classfile.length, domain);
     }
 
@@ -472,29 +482,35 @@ public class Loader extends ClassLoader{
          */
 
         Class<?> c = null;
-        if (doDelegation)
+        if (doDelegation){
             if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("sun.") || name.startsWith("com.sun.")
-                            || name.startsWith("org.w3c.") || name.startsWith("org.xml.") || notDelegated(name))
+                            || name.startsWith("org.w3c.") || name.startsWith("org.xml.") || notDelegated(name)){
                 c = delegateToParent(name);
+            }
+        }
 
         return c;
     }
 
     private boolean notDelegated(String name){
-        if (notDefinedHere.containsKey(name))
+        if (notDefinedHere.containsKey(name)){
             return true;
+        }
 
-        for (String pack : notDefinedPackages)
-            if (name.startsWith(pack))
+        for (String pack : notDefinedPackages){
+            if (name.startsWith(pack)){
                 return true;
+            }
+        }
 
         return false;
     }
 
     protected Class<?> delegateToParent(String classname) throws ClassNotFoundException{
         ClassLoader cl = getParent();
-        if (cl != null)
+        if (cl != null){
             return cl.loadClass(classname);
+        }
         return findSystemClass(classname);
     }
 }

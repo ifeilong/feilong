@@ -19,19 +19,26 @@ package com.feilong.lib.javassist.tools.web;
 /**
  * Thrown when receiving an invalid HTTP request.
  */
-public class BadHttpRequest extends Exception {
+public class BadHttpRequest extends Exception{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    private Exception e;
 
-    public BadHttpRequest() { e = null; }
+    private Exception         e;
 
-    public BadHttpRequest(Exception _e) { e = _e; }
+    public BadHttpRequest(){
+        e = null;
+    }
+
+    public BadHttpRequest(Exception _e){
+        e = _e;
+    }
 
     @Override
-    public String toString() {
-        if (e == null)
+    public String toString(){
+        if (e == null){
             return super.toString();
+        }
         return e.toString();
     }
 }

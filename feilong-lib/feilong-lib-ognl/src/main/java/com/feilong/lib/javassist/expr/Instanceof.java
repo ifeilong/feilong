@@ -38,12 +38,12 @@ import com.feilong.lib.javassist.compiler.ast.ASTList;
 /**
  * Instanceof operator.
  */
-public class Instanceof extends Expr {
+public class Instanceof extends Expr{
+
     /**
-     * Undocumented constructor.  Do not use; internal-use only.
+     * Undocumented constructor. Do not use; internal-use only.
      */
-    protected Instanceof(int pos, CodeIterator i, CtClass declaring,
-                         MethodInfo m) {
+    protected Instanceof(int pos, CodeIterator i, CtClass declaring, MethodInfo m){
         super(pos, i, declaring, m);
     }
 
@@ -52,16 +52,18 @@ public class Instanceof extends Expr {
      * expression represented by this object.
      */
     @Override
-    public CtBehavior where() { return super.where(); }
+    public CtBehavior where(){
+        return super.where();
+    }
 
     /**
      * Returns the line number of the source line containing the
      * instanceof expression.
      *
-     * @return -1       if this information is not available.
+     * @return -1 if this information is not available.
      */
     @Override
-    public int getLineNumber() {
+    public int getLineNumber(){
         return super.getLineNumber();
     }
 
@@ -69,10 +71,10 @@ public class Instanceof extends Expr {
      * Returns the source file containing the
      * instanceof expression.
      *
-     * @return null     if this information is not available.
+     * @return null if this information is not available.
      */
     @Override
-    public String getFileName() {
+    public String getFileName(){
         return super.getFileName();
     }
 
@@ -81,7 +83,7 @@ public class Instanceof extends Expr {
      * the type name on the right hand side
      * of the instanceof operator.
      */
-    public CtClass getType() throws NotFoundException {
+    public CtClass getType() throws NotFoundException{
         ConstPool cp = getConstPool();
         int pos = currentPos;
         int index = iterator.u16bitAt(pos + 1);
@@ -96,7 +98,7 @@ public class Instanceof extends Expr {
      * the throws declaration allows the method to throw.
      */
     @Override
-    public CtClass[] mayThrow() {
+    public CtClass[] mayThrow(){
         return super.mayThrow();
     }
 
@@ -104,13 +106,15 @@ public class Instanceof extends Expr {
      * Replaces the instanceof operator with the bytecode derived from
      * the given source text.
      *
-     * <p>$0 is available but the value is <code>null</code>.
+     * <p>
+     * $0 is available but the value is <code>null</code>.
      *
-     * @param statement         a Java statement except try-catch.
+     * @param statement
+     *            a Java statement except try-catch.
      */
     @Override
-    public void replace(String statement) throws CannotCompileException {
-        thisClass.getClassFile();   // to call checkModify().
+    public void replace(String statement) throws CannotCompileException{
+        thisClass.getClassFile(); // to call checkModify().
         @SuppressWarnings("unused")
         ConstPool constPool = getConstPool();
         int pos = currentPos;
@@ -120,21 +124,20 @@ public class Instanceof extends Expr {
         ClassPool cp = thisClass.getClassPool();
         CodeAttribute ca = iterator.get();
 
-        try {
-            CtClass[] params
-                = new CtClass[] { cp.get(javaLangObject) };
+        try{
+            CtClass[] params = new CtClass[] { cp.get(javaLangObject) };
             CtClass retType = CtClass.booleanType;
 
             int paramVar = ca.getMaxLocals();
-            jc.recordParams(javaLangObject, params, true, paramVar,
-                            withinStatic());
+            jc.recordParams(javaLangObject, params, true, paramVar, withinStatic());
             int retVar = jc.recordReturnType(retType, true);
             jc.recordProceed(new ProceedForInstanceof(index));
 
             // because $type is not the return type...
             jc.recordType(getType());
 
-            /* Is $_ included in the source code?
+            /*
+             * Is $_ included in the source code?
              */
             checkResultValue(retType, statement);
 
@@ -143,37 +146,37 @@ public class Instanceof extends Expr {
             jc.recordLocalVariables(ca, pos);
 
             bytecode.addConstZero(retType);
-            bytecode.addStore(retVar, retType);     // initialize $_
+            bytecode.addStore(retVar, retType); // initialize $_
 
             jc.compileStmnt(statement);
             bytecode.addLoad(retVar, retType);
 
             replace0(pos, bytecode, 3);
-        }
-        catch (CompileError e) { throw new CannotCompileException(e); }
-        catch (NotFoundException e) { throw new CannotCompileException(e); }
-        catch (BadBytecode e) {
+        }catch (CompileError e){
+            throw new CannotCompileException(e);
+        }catch (NotFoundException e){
+            throw new CannotCompileException(e);
+        }catch (BadBytecode e){
             throw new CannotCompileException("broken method");
         }
     }
 
-    /* boolean $proceed(Object obj)
+    /*
+     * boolean $proceed(Object obj)
      */
-    static class ProceedForInstanceof implements ProceedHandler {
+    static class ProceedForInstanceof implements ProceedHandler{
+
         int index;
 
-        ProceedForInstanceof(int i) {
+        ProceedForInstanceof(int i){
             index = i;
         }
 
         @Override
-        public void doit(JvstCodeGen gen, Bytecode bytecode, ASTList args)
-            throws CompileError
-        {
-            if (gen.getMethodArgsLength(args) != 1)
-                throw new CompileError(Javac.proceedName
-                        + "() cannot take more than one parameter "
-                        + "for instanceof");
+        public void doit(JvstCodeGen gen,Bytecode bytecode,ASTList args) throws CompileError{
+            if (gen.getMethodArgsLength(args) != 1){
+                throw new CompileError(Javac.proceedName + "() cannot take more than one parameter " + "for instanceof");
+            }
 
             gen.atMethodArgs(args, new int[1], new int[1], new String[1]);
             bytecode.addOpcode(Opcode.INSTANCEOF);
@@ -182,9 +185,7 @@ public class Instanceof extends Expr {
         }
 
         @Override
-        public void setReturnType(JvstTypeChecker c, ASTList args)
-            throws CompileError
-        {
+        public void setReturnType(JvstTypeChecker c,ASTList args) throws CompileError{
             c.atMethodArgs(args, new int[1], new int[1], new String[1]);
             c.setType(CtClass.booleanType);
         }

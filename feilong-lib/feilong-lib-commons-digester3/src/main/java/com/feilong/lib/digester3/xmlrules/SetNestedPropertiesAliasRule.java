@@ -8,22 +8,18 @@ import com.feilong.lib.digester3.binder.NestedPropertiesBuilder;
 /**
  *
  */
-final class SetNestedPropertiesAliasRule
-    extends Rule
-{
+final class SetNestedPropertiesAliasRule extends Rule{
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void begin( String namespace, String name, Attributes attributes )
-        throws Exception
-    {
-        String elementName = attributes.getValue( "attr-name" );
-        String propertyName = attributes.getValue( "prop-name" );
+    public void begin(String namespace,String name,Attributes attributes) throws Exception{
+        String elementName = attributes.getValue("attr-name");
+        String propertyName = attributes.getValue("prop-name");
 
         NestedPropertiesBuilder builder = getDigester().peek();
-        builder.addAlias( elementName ).forProperty( propertyName );
+        builder.addAlias(elementName).forProperty(propertyName);
     }
 
 }

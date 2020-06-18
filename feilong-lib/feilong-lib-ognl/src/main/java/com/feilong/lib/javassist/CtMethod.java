@@ -167,8 +167,9 @@ public final class CtMethod extends CtBehavior{
      * @since 3.6
      */
     public static CtMethod make(MethodInfo minfo,CtClass declaring) throws CannotCompileException{
-        if (declaring.getClassFile2().getConstPool() != minfo.getConstPool())
+        if (declaring.getClassFile2().getConstPool() != minfo.getConstPool()){
             throw new CannotCompileException("bad declaring class");
+        }
 
         return new CtMethod(minfo, declaring);
     }
@@ -196,8 +197,9 @@ public final class CtMethod extends CtBehavior{
      * This method is also called by CtClassType.getMethods0().
      */
     final String getStringRep(){
-        if (cachedStringRep == null)
+        if (cachedStringRep == null){
             cachedStringRep = methodInfo.getName() + Descriptor.getParamDescriptor(methodInfo.getDescriptor());
+        }
 
         return cachedStringRep;
     }
@@ -252,8 +254,9 @@ public final class CtMethod extends CtBehavior{
     @Override
     public boolean isEmpty(){
         CodeAttribute ca = getMethodInfo2().getCodeAttribute();
-        if (ca == null) // abstract or native
+        if (ca == null){
             return (getModifiers() & Modifier.ABSTRACT) != 0;
+        }
 
         CodeIterator it = ca.iterator();
         try{

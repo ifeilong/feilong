@@ -112,13 +112,15 @@ public class ClassMap extends HashMap<String, String>{
      */
     @Override
     public String put(String oldname,String newname){
-        if (oldname == newname)
+        if (oldname == newname){
             return oldname;
+        }
 
         String oldname2 = toJvmName(oldname);
         String s = get(oldname2);
-        if (s == null || !s.equals(oldname2))
+        if (s == null || !s.equals(oldname2)){
             return super.put(oldname2, toJvmName(newname));
+        }
         return s;
     }
 
@@ -134,13 +136,15 @@ public class ClassMap extends HashMap<String, String>{
      *            the substituted class name.
      */
     public void putIfNone(String oldname,String newname){
-        if (oldname == newname)
+        if (oldname == newname){
             return;
+        }
 
         String oldname2 = toJvmName(oldname);
         String s = get(oldname2);
-        if (s == null)
+        if (s == null){
             super.put(oldname2, toJvmName(newname));
+        }
     }
 
     protected final String put0(String oldname,String newname){
@@ -161,8 +165,9 @@ public class ClassMap extends HashMap<String, String>{
     @Override
     public String get(Object jvmClassName){
         String found = super.get(jvmClassName);
-        if (found == null && parent != null)
+        if (found == null && parent != null){
             return parent.get(jvmClassName);
+        }
         return found;
     }
 

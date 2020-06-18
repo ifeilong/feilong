@@ -423,14 +423,16 @@ public class CodeConverter{
     public void redirectMethodCall(CtMethod origMethod,CtMethod substMethod) throws CannotCompileException{
         String d1 = origMethod.getMethodInfo2().getDescriptor();
         String d2 = substMethod.getMethodInfo2().getDescriptor();
-        if (!d1.equals(d2))
+        if (!d1.equals(d2)){
             throw new CannotCompileException("signature mismatch: " + substMethod.getLongName());
+        }
 
         int mod1 = origMethod.getModifiers();
         int mod2 = substMethod.getModifiers();
         if (Modifier.isStatic(mod1) != Modifier.isStatic(mod2) || (Modifier.isPrivate(mod1) && !Modifier.isPrivate(mod2))
-                        || origMethod.getDeclaringClass().isInterface() != substMethod.getDeclaringClass().isInterface())
+                        || origMethod.getDeclaringClass().isInterface() != substMethod.getDeclaringClass().isInterface()){
             throw new CannotCompileException("invoke-type mismatch " + substMethod.getLongName());
+        }
 
         transformers = new TransformCall(transformers, origMethod, substMethod);
     }
@@ -578,17 +580,20 @@ public class CodeConverter{
     protected void doit(CtClass clazz,MethodInfo minfo,ConstPool cp) throws CannotCompileException{
         Transformer t;
         CodeAttribute codeAttr = minfo.getCodeAttribute();
-        if (codeAttr == null || transformers == null)
+        if (codeAttr == null || transformers == null){
             return;
-        for (t = transformers; t != null; t = t.getNext())
+        }
+        for (t = transformers; t != null; t = t.getNext()){
             t.initialize(cp, clazz, minfo);
+        }
 
         CodeIterator iterator = codeAttr.iterator();
         while (iterator.hasNext()){
             try{
                 int pos = iterator.next();
-                for (t = transformers; t != null; t = t.getNext())
+                for (t = transformers; t != null; t = t.getNext()){
                     pos = t.transform(clazz, pos, iterator, cp);
+                }
             }catch (BadBytecode e){
                 throw new CannotCompileException(e);
             }
@@ -598,22 +603,27 @@ public class CodeConverter{
         int stack = 0;
         for (t = transformers; t != null; t = t.getNext()){
             int s = t.extraLocals();
-            if (s > locals)
+            if (s > locals){
                 locals = s;
+            }
 
             s = t.extraStack();
-            if (s > stack)
+            if (s > stack){
                 stack = s;
+            }
         }
 
-        for (t = transformers; t != null; t = t.getNext())
+        for (t = transformers; t != null; t = t.getNext()){
             t.clean();
+        }
 
-        if (locals > 0)
+        if (locals > 0){
             codeAttr.setMaxLocals(codeAttr.getMaxLocals() + locals);
+        }
 
-        if (stack > 0)
+        if (stack > 0){
             codeAttr.setMaxStack(codeAttr.getMaxStack() + stack);
+        }
 
         try{
             minfo.rebuildStackMapIf6(clazz.getClassPool(), clazz.getClassFile2());

@@ -216,8 +216,8 @@ public class XStreamer{
                     throws IOException,ClassNotFoundException{
         final XStream outer = new XStream(driver);
         XStream.setupDefaultSecurity(outer);
-        for (int i = 0; i < permissions.length; ++i){
-            outer.addPermission(permissions[i]);
+        for (TypePermission permission : permissions){
+            outer.addPermission(permission);
         }
         final HierarchicalStreamReader reader = driver.createReader(xml);
         final ObjectInputStream configIn = outer.createObjectInputStream(reader);

@@ -292,8 +292,9 @@ public abstract class CtClass{
      * Note: this method is overridden by CtClassType
      */
     void checkModify() throws RuntimeException{
-        if (isFrozen())
+        if (isFrozen()){
             throw new RuntimeException(getName() + " class is frozen");
+        }
 
         // isModified() must return true after this method is invoked.
     }
@@ -365,8 +366,9 @@ public abstract class CtClass{
     public final String getSimpleName(){
         String qname = qualifiedName;
         int index = qname.lastIndexOf('.');
-        if (index < 0)
+        if (index < 0){
             return qname;
+        }
         return qname.substring(index + 1);
     }
 
@@ -376,8 +378,9 @@ public abstract class CtClass{
     public final String getPackageName(){
         String qname = qualifiedName;
         int index = qname.lastIndexOf('.');
-        if (index < 0)
+        if (index < 0){
             return null;
+        }
         return qname.substring(0, index);
     }
 
@@ -389,8 +392,9 @@ public abstract class CtClass{
      */
     public void setName(String name){
         checkModify();
-        if (name != null)
+        if (name != null){
             qualifiedName = name;
+        }
     }
 
     /**
@@ -840,12 +844,13 @@ public abstract class CtClass{
     @Deprecated
     public final CtMethod getEnclosingMethod() throws NotFoundException{
         CtBehavior b = getEnclosingBehavior();
-        if (b == null)
+        if (b == null){
             return null;
-        else if (b instanceof CtMethod)
+        }else if (b instanceof CtMethod){
             return (CtMethod) b;
-        else
+        }else{
             throw new NotFoundException(b.getLongName() + " is enclosing " + getName());
+        }
     }
 
     /**
@@ -1423,8 +1428,9 @@ public abstract class CtClass{
      */
     public Class<?> toClass(ClassLoader loader,ProtectionDomain domain) throws CannotCompileException{
         ClassPool cp = getClassPool();
-        if (loader == null)
+        if (loader == null){
             loader = cp.getClassLoader();
+        }
 
         return cp.toClass(this, null, loader, domain);
     }
@@ -1460,8 +1466,9 @@ public abstract class CtClass{
     public void detach(){
         ClassPool cp = getClassPool();
         CtClass obj = cp.removeCached(getName());
-        if (obj != this)
+        if (obj != this){
             cp.cacheCtClass(getName(), obj, false);
+        }
     }
 
     /**
@@ -1608,8 +1615,9 @@ public abstract class CtClass{
         int pos = filename.lastIndexOf(File.separatorChar);
         if (pos > 0){
             String dir = filename.substring(0, pos);
-            if (!dir.equals("."))
+            if (!dir.equals(".")){
                 new File(dir).mkdirs();
+            }
         }
 
         return new DataOutputStream(new BufferedOutputStream(new DelayedFileOutputStream(filename)));
@@ -1659,8 +1667,9 @@ public abstract class CtClass{
         }
 
         private void init() throws IOException{
-            if (file == null)
+            if (file == null){
                 file = new FileOutputStream(filename);
+            }
         }
 
         @Override

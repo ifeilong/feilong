@@ -93,17 +93,20 @@ public class MapPropertyAccessor implements PropertyAccessor{
 
     @Override
     public String getSourceAccessor(OgnlContext context,Object target,Object index){
-        Node currentNode = ((OgnlContext) context).getCurrentNode().jjtGetParent();
+        Node currentNode = context.getCurrentNode().jjtGetParent();
         boolean indexedAccess = false;
 
-        if (currentNode == null)
+        if (currentNode == null){
             throw new RuntimeException("node is null for '" + index + "'");
+        }
 
-        if (!(currentNode instanceof ASTProperty))
+        if (!(currentNode instanceof ASTProperty)){
             currentNode = currentNode.jjtGetParent();
+        }
 
-        if (currentNode instanceof ASTProperty)
+        if (currentNode instanceof ASTProperty){
             indexedAccess = ((ASTProperty) currentNode).isIndexedAccess();
+        }
 
         String indexStr = index.toString();
 
@@ -141,14 +144,15 @@ public class MapPropertyAccessor implements PropertyAccessor{
         if (String.class.isInstance(index)){
             String key = (indexStr.indexOf('"') >= 0 ? indexStr.replaceAll("\"", "") : indexStr);
 
-            if (key.equals("size"))
+            if (key.equals("size")){
                 return "";
-            else if (key.equals("keys") || key.equals("keySet"))
+            }else if (key.equals("keys") || key.equals("keySet")){
                 return "";
-            else if (key.equals("values"))
+            }else if (key.equals("values")){
                 return "";
-            else if (key.equals("isEmpty"))
+            }else if (key.equals("isEmpty")){
                 return "";
+            }
         }
 
         return ".put(" + indexStr + ", $3)";

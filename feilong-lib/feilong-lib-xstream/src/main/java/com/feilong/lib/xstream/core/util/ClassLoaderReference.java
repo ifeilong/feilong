@@ -20,6 +20,7 @@ package com.feilong.lib.xstream.core.util;
  * @since 1.1.1
  * @deprecated As of 1.4.5 use {@link com.feilong.lib.xstream.core.ClassLoaderReference} instead
  */
+@Deprecated
 public class ClassLoaderReference extends ClassLoader{
 
     private transient ClassLoader reference;
@@ -29,6 +30,7 @@ public class ClassLoaderReference extends ClassLoader{
      *             {@link com.feilong.lib.xstream.core.ClassLoaderReference#ClassLoaderReference(ClassLoader)}
      *             instead
      */
+    @Deprecated
     public ClassLoaderReference(ClassLoader reference){
         this.reference = reference;
     }
@@ -38,6 +40,7 @@ public class ClassLoaderReference extends ClassLoader{
      *             {@link com.feilong.lib.xstream.core.ClassLoaderReference#getReference()}
      *             .loadClass(String) instead
      */
+    @Deprecated
     @Override
     public Class loadClass(String name) throws ClassNotFoundException{
         return reference.loadClass(name);
@@ -48,6 +51,7 @@ public class ClassLoaderReference extends ClassLoader{
      *             {@link com.feilong.lib.xstream.core.ClassLoaderReference#getReference()}
      *             instead
      */
+    @Deprecated
     public ClassLoader getReference(){
         return reference;
     }
@@ -57,6 +61,7 @@ public class ClassLoaderReference extends ClassLoader{
      *             {@link com.feilong.lib.xstream.core.ClassLoaderReference#setReference(ClassLoader)}
      *             instead
      */
+    @Deprecated
     public void setReference(ClassLoader reference){
         this.reference = reference;
     }
@@ -71,5 +76,5 @@ public class ClassLoaderReference extends ClassLoader{
             return new ClassLoaderReference(new CompositeClassLoader());
         }
 
-    };
+    }
 }

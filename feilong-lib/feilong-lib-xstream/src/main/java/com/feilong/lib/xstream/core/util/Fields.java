@@ -29,10 +29,10 @@ public class Fields{
         Field field = null;
         try{
             final Field[] fields = definedIn.getDeclaredFields();
-            for (int i = 0; i < fields.length; ++i){
-                if (Modifier.isStatic(fields[i].getModifiers()) == isStatic){
-                    if (fieldType.isAssignableFrom(fields[i].getType())){
-                        field = fields[i];
+            for (Field field2 : fields){
+                if (Modifier.isStatic(field2.getModifiers()) == isStatic){
+                    if (fieldType.isAssignableFrom(field2.getType())){
+                        field = field2;
                     }
                 }
             }

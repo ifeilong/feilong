@@ -105,11 +105,11 @@ public final class DateMorpher extends AbstractObjectMorpher<Date>{
         String strValue = (String) value;
         SimpleDateFormat dateParser = null;
 
-        for (int i = 0; i < formats.length; i++){
+        for (String format : formats){
             if (dateParser == null){
-                dateParser = new SimpleDateFormat(formats[i], locale);
+                dateParser = new SimpleDateFormat(format, locale);
             }else{
-                dateParser.applyPattern(formats[i]);
+                dateParser.applyPattern(format);
             }
             dateParser.setLenient(lenient);
             try{

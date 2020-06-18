@@ -78,6 +78,7 @@ public class NamedCollectionConverter extends CollectionConverter{
      * @deprecated As of 1.4.11 use {@link #writeCompleteItem(Object, MarshallingContext, HierarchicalStreamWriter)}
      *             instead.
      */
+    @Deprecated
     @Override
     protected void writeItem(Object item,MarshallingContext context,HierarchicalStreamWriter writer){
         final Class itemType = item == null ? Mapper.Null.class : item.getClass();

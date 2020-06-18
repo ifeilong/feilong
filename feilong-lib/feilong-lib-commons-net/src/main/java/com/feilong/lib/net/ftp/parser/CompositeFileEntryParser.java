@@ -28,13 +28,13 @@ import com.feilong.lib.net.ftp.FTPFileEntryParserImpl;
  * If the cached parser wont match due to the server changed the dirstyle,
  * a new matching parser will be searched.
  */
-public class CompositeFileEntryParser extends FTPFileEntryParserImpl
-{
-    private final FTPFileEntryParser[] ftpFileEntryParsers;
-    private FTPFileEntryParser cachedFtpFileEntryParser;
+public class CompositeFileEntryParser extends FTPFileEntryParserImpl{
 
-    public CompositeFileEntryParser(FTPFileEntryParser[] ftpFileEntryParsers)
-    {
+    private final FTPFileEntryParser[] ftpFileEntryParsers;
+
+    private FTPFileEntryParser         cachedFtpFileEntryParser;
+
+    public CompositeFileEntryParser(FTPFileEntryParser[] ftpFileEntryParsers){
         super();
 
         this.cachedFtpFileEntryParser = null;
@@ -42,23 +42,16 @@ public class CompositeFileEntryParser extends FTPFileEntryParserImpl
     }
 
     @Override
-    public FTPFile parseFTPEntry(String listEntry)
-    {
-        if (cachedFtpFileEntryParser != null)
-        {
+    public FTPFile parseFTPEntry(String listEntry){
+        if (cachedFtpFileEntryParser != null){
             FTPFile matched = cachedFtpFileEntryParser.parseFTPEntry(listEntry);
-            if (matched != null)
-            {
+            if (matched != null){
                 return matched;
             }
-        }
-        else
-        {
-            for (FTPFileEntryParser ftpFileEntryParser : ftpFileEntryParsers)
-            {
+        }else{
+            for (FTPFileEntryParser ftpFileEntryParser : ftpFileEntryParsers){
                 FTPFile matched = ftpFileEntryParser.parseFTPEntry(listEntry);
-                if (matched != null)
-                {
+                if (matched != null){
                     cachedFtpFileEntryParser = ftpFileEntryParser;
                     return matched;
                 }

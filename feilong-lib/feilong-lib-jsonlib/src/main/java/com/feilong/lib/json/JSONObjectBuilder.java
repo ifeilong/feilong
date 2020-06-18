@@ -110,9 +110,8 @@ public class JSONObjectBuilder{
             Collection<String> exclusions = jsonConfig.getMergedExcludes();
             PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 
-            for (int i = 0; i < dynaPropertys.length; i++){
+            for (DynaProperty dynaProperty : dynaPropertys){
                 boolean bypass = false;
-                DynaProperty dynaProperty = dynaPropertys[i];
                 String key = dynaProperty.getName();
                 if (exclusions.contains(key)){
                     continue;
@@ -197,9 +196,7 @@ public class JSONObjectBuilder{
      * @return the JSON object
      */
     private static JSONObject fromBean(Object bean,JsonConfig jsonConfig){
-        return build(
-                        bean,
-                        jsonObject -> DefaultBeanProcesser.process(bean, jsonObject, jsonConfig));
+        return build(bean, jsonObject -> DefaultBeanProcesser.process(bean, jsonObject, jsonConfig));
     }
 
     //---------------------------------------------------------------

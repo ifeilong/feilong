@@ -51,12 +51,12 @@ public abstract class ReflectionUtils{
      * Cache for {@link Class#getDeclaredMethods()} plus equivalent default methods
      * from Java 8 based interfaces, allowing for fast iteration.
      */
-    private static final Map<Class<?>, Method[]> declaredMethodsCache = new ConcurrentReferenceHashMap<Class<?>, Method[]>(256);
+    private static final Map<Class<?>, Method[]> declaredMethodsCache = new ConcurrentReferenceHashMap<>(256);
 
     /**
      * Cache for {@link Class#getDeclaredFields()}, allowing for fast iteration.
      */
-    private static final Map<Class<?>, Field[]>  declaredFieldsCache  = new ConcurrentReferenceHashMap<Class<?>, Field[]>(256);
+    private static final Map<Class<?>, Field[]>  declaredFieldsCache  = new ConcurrentReferenceHashMap<>(256);
 
     /**
      * Attempt to find a {@link Field field} on the supplied {@link Class} with the
@@ -318,7 +318,7 @@ public abstract class ReflectionUtils{
             for (Method ifcMethod : ifc.getMethods()){
                 if (!Modifier.isAbstract(ifcMethod.getModifiers())){
                     if (result == null){
-                        result = new ArrayList<Method>();
+                        result = new ArrayList<>();
                     }
                     result.add(ifcMethod);
                 }

@@ -27,50 +27,50 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author Shigeru Chiba
  */
-public class AnnotationMemberValue extends MemberValue {
+public class AnnotationMemberValue extends MemberValue{
+
     Annotation value;
 
     /**
-     * Constructs an annotation member.  The initial value is not specified.
+     * Constructs an annotation member. The initial value is not specified.
      */
-    public AnnotationMemberValue(ConstPool cp) {
+    public AnnotationMemberValue(ConstPool cp){
         this(null, cp);
     }
 
     /**
-     * Constructs an annotation member.  The initial value is specified by
+     * Constructs an annotation member. The initial value is specified by
      * the first parameter.
      */
-    public AnnotationMemberValue(Annotation a, ConstPool cp) {
+    public AnnotationMemberValue(Annotation a, ConstPool cp){
         super('@', cp);
         value = a;
     }
 
     @Override
-    Object getValue(ClassLoader cl, ClassPool cp, Method m)
-        throws ClassNotFoundException
-    {
+    Object getValue(ClassLoader cl,ClassPool cp,Method m) throws ClassNotFoundException{
         return AnnotationImpl.make(cl, getType(cl), cp, value);
     }
 
     @Override
-    Class<?> getType(ClassLoader cl) throws ClassNotFoundException {
-        if (value == null)
+    Class<?> getType(ClassLoader cl) throws ClassNotFoundException{
+        if (value == null){
             throw new ClassNotFoundException("no type specified");
+        }
         return loadClass(cl, value.getTypeName());
     }
 
     /**
      * Obtains the value.
      */
-    public Annotation getValue() {
+    public Annotation getValue(){
         return value;
     }
 
     /**
      * Sets the value of this member.
      */
-    public void setValue(Annotation newValue) {
+    public void setValue(Annotation newValue){
         value = newValue;
     }
 
@@ -78,7 +78,7 @@ public class AnnotationMemberValue extends MemberValue {
      * Obtains the string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return value.toString();
     }
 
@@ -86,7 +86,7 @@ public class AnnotationMemberValue extends MemberValue {
      * Writes the value.
      */
     @Override
-    public void write(AnnotationsWriter writer) throws IOException {
+    public void write(AnnotationsWriter writer) throws IOException{
         writer.annotationValue();
         value.write(writer);
     }
@@ -95,7 +95,7 @@ public class AnnotationMemberValue extends MemberValue {
      * Accepts a visitor.
      */
     @Override
-    public void accept(MemberValueVisitor visitor) {
+    public void accept(MemberValueVisitor visitor){
         visitor.visitAnnotationMemberValue(this);
     }
 }

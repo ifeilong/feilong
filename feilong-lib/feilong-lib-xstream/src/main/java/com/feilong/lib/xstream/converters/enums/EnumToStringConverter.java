@@ -50,7 +50,7 @@ public class EnumToStringConverter<T extends Enum<T>> extends AbstractSingleValu
     private static <T extends Enum<T>> Map<String, T> extractStringMap(Class<T> type){
         checkType(type);
         EnumSet<T> values = EnumSet.allOf(type);
-        Map<String, T> strings = new HashMap<String, T>(values.size());
+        Map<String, T> strings = new HashMap<>(values.size());
         for (T value : values){
             if (strings.put(value.toString(), value) != null){
                 throw new InitializationException(
@@ -67,7 +67,7 @@ public class EnumToStringConverter<T extends Enum<T>> extends AbstractSingleValu
     }
 
     private static <T extends Enum<T>> EnumMap<T, String> buildValueMap(Class<T> type,Map<String, T> strings){
-        EnumMap<T, String> values = new EnumMap<T, String>(type);
+        EnumMap<T, String> values = new EnumMap<>(type);
         for (Map.Entry<String, T> entry : strings.entrySet()){
             values.put(entry.getValue(), entry.getKey());
         }

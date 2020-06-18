@@ -42,9 +42,11 @@ public class FactoryHelper{
      *             if a given type is not a primitive type.
      */
     public static final int typeIndex(Class<?> type){
-        for (int i = 0; i < primitiveTypes.length; i++)
-            if (primitiveTypes[i] == type)
+        for (int i = 0; i < primitiveTypes.length; i++){
+            if (primitiveTypes[i] == type){
                 return i;
+            }
+        }
 
         throw new RuntimeException("bad type:" + type.getName());
     }
@@ -176,8 +178,9 @@ public class FactoryHelper{
         int pos = filename.lastIndexOf(File.separatorChar);
         if (pos > 0){
             String dir = filename.substring(0, pos);
-            if (!dir.equals("."))
+            if (!dir.equals(".")){
                 new File(dir).mkdirs();
+            }
         }
 
         DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));

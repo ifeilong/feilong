@@ -23,36 +23,31 @@ import com.feilong.lib.javassist.bytecode.CodeAttribute;
 import com.feilong.lib.javassist.bytecode.CodeIterator;
 import com.feilong.lib.javassist.bytecode.ConstPool;
 
-final public class TransformWriteField extends TransformReadField {
-    public TransformWriteField(Transformer next, CtField field,
-                               String methodClassname, String methodName)
-    {
+final public class TransformWriteField extends TransformReadField{
+
+    public TransformWriteField(Transformer next, CtField field, String methodClassname, String methodName){
         super(next, field, methodClassname, methodName);
     }
 
     @Override
-    public int transform(CtClass tclazz, int pos, CodeIterator iterator,
-                         ConstPool cp) throws BadBytecode
-    {
+    public int transform(CtClass tclazz,int pos,CodeIterator iterator,ConstPool cp) throws BadBytecode{
         int c = iterator.byteAt(pos);
-        if (c == PUTFIELD || c == PUTSTATIC) {
+        if (c == PUTFIELD || c == PUTSTATIC){
             int index = iterator.u16bitAt(pos + 1);
-            String typedesc = isField(tclazz.getClassPool(), cp,
-                                fieldClass, fieldname, isPrivate, index);
-            if (typedesc != null) {
-                if (c == PUTSTATIC) {
+            String typedesc = isField(tclazz.getClassPool(), cp, fieldClass, fieldname, isPrivate, index);
+            if (typedesc != null){
+                if (c == PUTSTATIC){
                     CodeAttribute ca = iterator.get();
                     iterator.move(pos);
                     char c0 = typedesc.charAt(0);
-                    if (c0 == 'J' || c0 == 'D') {       // long or double
+                    if (c0 == 'J' || c0 == 'D'){ // long or double
                         // insertGap() may insert 4 bytes.
                         pos = iterator.insertGap(3);
                         iterator.writeByte(ACONST_NULL, pos);
                         iterator.writeByte(DUP_X2, pos + 1);
                         iterator.writeByte(POP, pos + 2);
                         ca.setMaxStack(ca.getMaxStack() + 2);
-                    }
-                    else {
+                    }else{
                         // insertGap() may insert 4 bytes.
                         pos = iterator.insertGap(2);
                         iterator.writeByte(ACONST_NULL, pos);

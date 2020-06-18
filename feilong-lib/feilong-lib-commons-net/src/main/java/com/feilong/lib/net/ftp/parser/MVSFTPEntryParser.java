@@ -31,16 +31,21 @@ import com.feilong.lib.net.ftp.FTPFile;
  * @see com.feilong.lib.net.ftp.FTPFileEntryParser FTPFileEntryParser (for
  *      usage instructions)
  */
-public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
+public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
 
-    static final int UNKNOWN_LIST_TYPE = -1;
-    static final int FILE_LIST_TYPE = 0;
-    static final int MEMBER_LIST_TYPE = 1;
-    static final int UNIX_LIST_TYPE = 2;
-    static final int JES_LEVEL_1_LIST_TYPE = 3;
-    static final int JES_LEVEL_2_LIST_TYPE = 4;
+    static final int           UNKNOWN_LIST_TYPE      = -1;
 
-    private int isType = UNKNOWN_LIST_TYPE;
+    static final int           FILE_LIST_TYPE         = 0;
+
+    static final int           MEMBER_LIST_TYPE       = 1;
+
+    static final int           UNIX_LIST_TYPE         = 2;
+
+    static final int           JES_LEVEL_1_LIST_TYPE  = 3;
+
+    static final int           JES_LEVEL_2_LIST_TYPE  = 4;
+
+    private int                isType                 = UNKNOWN_LIST_TYPE;
 
     /**
      * Fallback parser for Unix-style listings
@@ -51,72 +56,77 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * Dates are ignored for file lists, but are used for member lists where
      * possible
      */
-    static final String DEFAULT_DATE_FORMAT = "yyyy/MM/dd HH:mm"; // 2001/09/18
-                                                                    // 13:52
+    static final String        DEFAULT_DATE_FORMAT    = "yyyy/MM/dd HH:mm";               // 2001/09/18
+                                                                  // 13:52
 
     /**
      * Matches these entries:
+     * 
      * <pre>
      *  Volume Unit    Referred Ext Used Recfm Lrecl BlkSz Dsorg Dsname
      *  B10142 3390   2006/03/20  2   31  F       80    80  PS   MDI.OKL.WORK
      * </pre>
      */
-    static final String FILE_LIST_REGEX = "\\S+\\s+" + // volume
-                                                                // ignored
-            "\\S+\\s+" + // unit - ignored
-            "\\S+\\s+" + // access date - ignored
-            "\\S+\\s+" + // extents -ignored
-            "\\S+\\s+" + // used - ignored
-            "[FV]\\S*\\s+" + // recfm - must start with F or V
-            "\\S+\\s+" + // logical record length -ignored
-            "\\S+\\s+" + // block size - ignored
-            "(PS|PO|PO-E)\\s+" + // Dataset organisation. Many exist
-            // but only support: PS, PO, PO-E
-            "(\\S+)\\s*"; // Dataset Name (file name)
+    static final String        FILE_LIST_REGEX        = "\\S+\\s+" +                      // volume
+                                                       // ignored
+                    "\\S+\\s+" +                                                          // unit - ignored
+                    "\\S+\\s+" +                                                          // access date - ignored
+                    "\\S+\\s+" +                                                          // extents -ignored
+                    "\\S+\\s+" +                                                          // used - ignored
+                    "[FV]\\S*\\s+" +                                                      // recfm - must start with F or V
+                    "\\S+\\s+" +                                                          // logical record length -ignored
+                    "\\S+\\s+" +                                                          // block size - ignored
+                    "(PS|PO|PO-E)\\s+" +                                                  // Dataset organisation. Many exist
+                    // but only support: PS, PO, PO-E
+                    "(\\S+)\\s*";                                                         // Dataset Name (file name)
 
     /**
      * Matches these entries:
+     * 
      * <pre>
      *   Name      VV.MM   Created       Changed      Size  Init   Mod   Id
      *   TBSHELF   01.03 2002/09/12 2002/10/11 09:37    11    11     0 KIL001
      * </pre>
      */
-    static final String MEMBER_LIST_REGEX = "(\\S+)\\s+" + // name
-            "\\S+\\s+" + // version, modification (ignored)
-            "\\S+\\s+" + // create date (ignored)
-            "(\\S+)\\s+" + // modification date
-            "(\\S+)\\s+" + // modification time
-            "\\S+\\s+" + // size in lines (ignored)
-            "\\S+\\s+" + // size in lines at creation(ignored)
-            "\\S+\\s+" + // lines modified (ignored)
-            "\\S+\\s*"; // id of user who modified (ignored)
+    static final String        MEMBER_LIST_REGEX      = "(\\S+)\\s+" +                    // name
+                    "\\S+\\s+" +                                                          // version, modification (ignored)
+                    "\\S+\\s+" +                                                          // create date (ignored)
+                    "(\\S+)\\s+" +                                                        // modification date
+                    "(\\S+)\\s+" +                                                        // modification time
+                    "\\S+\\s+" +                                                          // size in lines (ignored)
+                    "\\S+\\s+" +                                                          // size in lines at creation(ignored)
+                    "\\S+\\s+" +                                                          // lines modified (ignored)
+                    "\\S+\\s*";                                                           // id of user who modified (ignored)
 
     /**
      * Matches these entries, note: no header:
+     * 
      * <pre>
      *   IBMUSER1  JOB01906  OUTPUT    3 Spool Files
      *   012345678901234567890123456789012345678901234
      *             1         2         3         4
      * </pre>
      */
-    static final String JES_LEVEL_1_LIST_REGEX =
-            "(\\S+)\\s+" + // job name ignored
-            "(\\S+)\\s+" + // job number
-            "(\\S+)\\s+" + // job status (OUTPUT,INPUT,ACTIVE)
-            "(\\S+)\\s+" + // number of spool files
-            "(\\S+)\\s+" + // Text "Spool" ignored
-            "(\\S+)\\s*" // Text "Files" ignored
+    static final String        JES_LEVEL_1_LIST_REGEX = "(\\S+)\\s+" +                    // job name ignored
+                    "(\\S+)\\s+" +                                                        // job number
+                    "(\\S+)\\s+" +                                                        // job status (OUTPUT,INPUT,ACTIVE)
+                    "(\\S+)\\s+" +                                                        // number of spool files
+                    "(\\S+)\\s+" +                                                        // Text "Spool" ignored
+                    "(\\S+)\\s*"                                                          // Text "Files" ignored
     ;
 
     /**
      * JES INTERFACE LEVEL 2 parser
      * Matches these entries:
+     * 
      * <pre>
      * JOBNAME  JOBID    OWNER    STATUS CLASS
      * IBMUSER1 JOB01906 IBMUSER  OUTPUT A        RC=0000 3 spool files
      * IBMUSER  TSU01830 IBMUSER  OUTPUT TSU      ABEND=522 3 spool files
      * </pre>
+     * 
      * Sample output from FTP session:
+     * 
      * <pre>
      * ftp> quote site filetype=jes
      * 200 SITE command was accepted
@@ -142,13 +152,12 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * </pre>
      */
 
-    static final String JES_LEVEL_2_LIST_REGEX =
-            "(\\S+)\\s+" + // job name ignored
-            "(\\S+)\\s+" + // job number
-            "(\\S+)\\s+" + // owner ignored
-            "(\\S+)\\s+" + // job status (OUTPUT,INPUT,ACTIVE) ignored
-            "(\\S+)\\s+" + // job class ignored
-            "(\\S+).*" // rest ignored
+    static final String        JES_LEVEL_2_LIST_REGEX = "(\\S+)\\s+" +                    // job name ignored
+                    "(\\S+)\\s+" +                                                        // job number
+                    "(\\S+)\\s+" +                                                        // owner ignored
+                    "(\\S+)\\s+" +                                                        // job status (OUTPUT,INPUT,ACTIVE) ignored
+                    "(\\S+)\\s+" +                                                        // job class ignored
+                    "(\\S+).*"                                                            // rest ignored
     ;
 
     /*
@@ -242,7 +251,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * The sole constructor for a MVSFTPEntryParser object.
      *
      */
-    public MVSFTPEntryParser() {
+    public MVSFTPEntryParser(){
         super(""); // note the regex is set in preParse.
         super.configure(null); // configure parser with default configurations
     }
@@ -259,26 +268,26 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * @return An FTPFile instance corresponding to the supplied entry
      */
     @Override
-    public FTPFile parseFTPEntry(String entry) {
+    public FTPFile parseFTPEntry(String entry){
         boolean isParsed = false;
         FTPFile f = new FTPFile();
 
-        if (isType == FILE_LIST_TYPE) {
+        if (isType == FILE_LIST_TYPE){
             isParsed = parseFileList(f, entry);
-        } else if (isType == MEMBER_LIST_TYPE) {
+        }else if (isType == MEMBER_LIST_TYPE){
             isParsed = parseMemberList(f, entry);
-            if (!isParsed) {
+            if (!isParsed){
                 isParsed = parseSimpleEntry(f, entry);
             }
-        } else if (isType == UNIX_LIST_TYPE) {
+        }else if (isType == UNIX_LIST_TYPE){
             isParsed = parseUnixList(f, entry);
-        } else if (isType == JES_LEVEL_1_LIST_TYPE) {
+        }else if (isType == JES_LEVEL_1_LIST_TYPE){
             isParsed = parseJeslevel1List(f, entry);
-        } else if (isType == JES_LEVEL_2_LIST_TYPE) {
+        }else if (isType == JES_LEVEL_2_LIST_TYPE){
             isParsed = parseJeslevel2List(f, entry);
         }
 
-        if (!isParsed) {
+        if (!isParsed){
             f = null;
         }
 
@@ -307,25 +316,24 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      *
      * @param file
      *            will be updated with Name, Type, Timestamp if parsed.
-     * @param entry zosDirectoryEntry
+     * @param entry
+     *            zosDirectoryEntry
      * @return true: entry was parsed, false: entry was not parsed.
      */
-    private boolean parseFileList(FTPFile file, String entry) {
-        if (matches(entry)) {
+    private boolean parseFileList(FTPFile file,String entry){
+        if (matches(entry)){
             file.setRawListing(entry);
             String name = group(2);
             String dsorg = group(1);
             file.setName(name);
 
             // DSORG
-            if ("PS".equals(dsorg)) {
+            if ("PS".equals(dsorg)){
                 file.setType(FTPFile.FILE_TYPE);
-            }
-            else if ("PO".equals(dsorg) || "PO-E".equals(dsorg)) {
+            }else if ("PO".equals(dsorg) || "PO-E".equals(dsorg)){
                 // regex already ruled out anything other than PO or PO-E
                 file.setType(FTPFile.DIRECTORY_TYPE);
-            }
-            else {
+            }else{
                 return false;
             }
 
@@ -339,6 +347,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * Parse entries within a partitioned dataset.
      *
      * Format of a memberlist within a PDS:
+     * 
      * <pre>
      *    0         1        2          3        4     5     6      7    8
      *   Name      VV.MM   Created       Changed      Size  Init   Mod   Id
@@ -358,19 +367,20 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      *
      * @param file
      *            will be updated with Name, Type and Timestamp if parsed.
-     * @param entry zosDirectoryEntry
+     * @param entry
+     *            zosDirectoryEntry
      * @return true: entry was parsed, false: entry was not parsed.
      */
-    private boolean parseMemberList(FTPFile file, String entry) {
-        if (matches(entry)) {
+    private boolean parseMemberList(FTPFile file,String entry){
+        if (matches(entry)){
             file.setRawListing(entry);
             String name = group(1);
             String datestr = group(2) + " " + group(3);
             file.setName(name);
             file.setType(FTPFile.FILE_TYPE);
-            try {
+            try{
                 file.setTimestamp(super.parseTimestamp(datestr));
-            } catch (ParseException e) {
+            }catch (ParseException e){
                 e.printStackTrace();
                 // just ignore parsing errors.
                 // TODO check this is ok
@@ -391,8 +401,8 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * @param entry
      * @return true if the entry string is non-null and non-empty
      */
-    private boolean parseSimpleEntry(FTPFile file, String entry) {
-        if (entry != null && entry.trim().length() > 0) {
+    private boolean parseSimpleEntry(FTPFile file,String entry){
+        if (entry != null && entry.trim().length() > 0){
             file.setRawListing(entry);
             String name = entry.split(" ")[0];
             file.setName(name);
@@ -409,9 +419,9 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * @param entry
      * @return true: entry is parsed, false: entry could not be parsed.
      */
-    private boolean parseUnixList(FTPFile file, String entry) {
+    private boolean parseUnixList(FTPFile file,String entry){
         file = unixFTPEntryParser.parseFTPEntry(entry);
-        if (file == null) {
+        if (file == null){
             return false;
         }
         return true;
@@ -419,6 +429,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
 
     /**
      * Matches these entries, note: no header:
+     * 
      * <pre>
      * [1]      [2]      [3]   [4] [5]
      * IBMUSER1 JOB01906 OUTPUT 3 Spool Files
@@ -431,16 +442,17 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * [3] Job status (INPUT,ACTIVE,OUTPUT)
      * [4] Number of sysout files
      * [5] The string "Spool Files"
-     *</pre>
+     * </pre>
      *
      * @param file
      *            will be updated with Name, Type and Timestamp if parsed.
-     * @param entry zosDirectoryEntry
+     * @param entry
+     *            zosDirectoryEntry
      * @return true: entry was parsed, false: entry was not parsed.
      */
-    private boolean parseJeslevel1List(FTPFile file, String entry) {
-        if (matches(entry)) {
-            if (group(3).equalsIgnoreCase("OUTPUT")) {
+    private boolean parseJeslevel1List(FTPFile file,String entry){
+        if (matches(entry)){
+            if (group(3).equalsIgnoreCase("OUTPUT")){
                 file.setRawListing(entry);
                 String name = group(2); /* Job Number, used by GET */
                 file.setName(name);
@@ -454,6 +466,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
 
     /**
      * Matches these entries:
+     * 
      * <pre>
      * [1]      [2]      [3]     [4]    [5]
      * JOBNAME  JOBID    OWNER   STATUS CLASS
@@ -473,12 +486,13 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      *
      * @param file
      *            will be updated with Name, Type and Timestamp if parsed.
-     * @param entry zosDirectoryEntry
+     * @param entry
+     *            zosDirectoryEntry
      * @return true: entry was parsed, false: entry was not parsed.
      */
-    private boolean parseJeslevel2List(FTPFile file, String entry) {
-        if (matches(entry)) {
-            if (group(4).equalsIgnoreCase("OUTPUT")) {
+    private boolean parseJeslevel2List(FTPFile file,String entry){
+        if (matches(entry)){
+            if (group(4).equalsIgnoreCase("OUTPUT")){
                 file.setRawListing(entry);
                 String name = group(2); /* Job Number, used by GET */
                 file.setName(name);
@@ -497,36 +511,36 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * z/OS-MVS File lists
      * z/OS-MVS Member lists
      * unix file lists
+     * 
      * @since 2.0
      */
     @Override
-    public List<String> preParse(List<String> orig) {
+    public List<String> preParse(List<String> orig){
         // simply remove the header line. Composite logic will take care of the
         // two different types of
         // list in short order.
-        if (orig != null && orig.size() > 0) {
+        if (orig != null && orig.size() > 0){
             String header = orig.get(0);
-            if (header.indexOf("Volume") >= 0 && header.indexOf("Dsname") >= 0) {
+            if (header.indexOf("Volume") >= 0 && header.indexOf("Dsname") >= 0){
                 setType(FILE_LIST_TYPE);
                 super.setRegex(FILE_LIST_REGEX);
-            } else if (header.indexOf("Name") >= 0 && header.indexOf("Id") >= 0) {
+            }else if (header.indexOf("Name") >= 0 && header.indexOf("Id") >= 0){
                 setType(MEMBER_LIST_TYPE);
                 super.setRegex(MEMBER_LIST_REGEX);
-            } else if (header.indexOf("total") == 0) {
+            }else if (header.indexOf("total") == 0){
                 setType(UNIX_LIST_TYPE);
                 unixFTPEntryParser = new UnixFTPEntryParser();
-            } else if (header.indexOf("Spool Files") >= 30) {
+            }else if (header.indexOf("Spool Files") >= 30){
                 setType(JES_LEVEL_1_LIST_TYPE);
                 super.setRegex(JES_LEVEL_1_LIST_REGEX);
-            } else if (header.indexOf("JOBNAME") == 0
-                    && header.indexOf("JOBID") > 8) {// header contains JOBNAME JOBID OWNER // STATUS CLASS
+            }else if (header.indexOf("JOBNAME") == 0 && header.indexOf("JOBID") > 8){// header contains JOBNAME JOBID OWNER // STATUS CLASS
                 setType(JES_LEVEL_2_LIST_TYPE);
                 super.setRegex(JES_LEVEL_2_LIST_REGEX);
-            } else {
+            }else{
                 setType(UNKNOWN_LIST_TYPE);
             }
 
-            if (isType != JES_LEVEL_1_LIST_TYPE) { // remove header is necessary
+            if (isType != JES_LEVEL_1_LIST_TYPE){ // remove header is necessary
                 orig.remove(0);
             }
         }
@@ -536,9 +550,11 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
 
     /**
      * Explicitly set the type of listing being processed.
-     * @param type The listing type.
+     * 
+     * @param type
+     *            The listing type.
      */
-    void setType(int type) {
+    void setType(int type){
         isType = type;
     }
 
@@ -546,9 +562,8 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {
      * @return
      */
     @Override
-    protected FTPClientConfig getDefaultConfiguration() {
-        return new FTPClientConfig(FTPClientConfig.SYST_MVS,
-                DEFAULT_DATE_FORMAT, null);
+    protected FTPClientConfig getDefaultConfiguration(){
+        return new FTPClientConfig(FTPClientConfig.SYST_MVS, DEFAULT_DATE_FORMAT, null);
     }
 
 }

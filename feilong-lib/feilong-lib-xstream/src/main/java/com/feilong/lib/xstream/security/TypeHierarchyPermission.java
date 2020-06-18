@@ -25,8 +25,9 @@ public class TypeHierarchyPermission implements TypePermission{
 
     @Override
     public boolean allows(Class type){
-        if (type == null)
+        if (type == null){
             return false;
+        }
         return this.type.isAssignableFrom(type);
     }
 

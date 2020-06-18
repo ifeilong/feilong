@@ -15,6 +15,11 @@ import com.feilong.lib.xstream.XStreamException;
 
 public class StreamException extends XStreamException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -7851633675108453472L;
+
     public StreamException(Throwable e){
         super(e);
     }

@@ -42,6 +42,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTSelectFirst extends SimpleNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1752137116361873833L;
+
     public ASTSelectFirst(int id){
         super(id);
     }

@@ -35,8 +35,9 @@ public class WildcardTypePermission extends RegExpTypePermission{
     }
 
     private static String[] getRegExpPatterns(final String[] wildcards){
-        if (wildcards == null)
+        if (wildcards == null){
             return null;
+        }
         final String[] regexps = new String[wildcards.length];
         for (int i = 0; i < wildcards.length; ++i){
             final String wildcardExpression = wildcards[i];

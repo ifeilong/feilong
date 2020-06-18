@@ -42,9 +42,14 @@ import com.feilong.lib.ognl.enhance.ExpressionCompiler;
  */
 public class ASTCtor extends SimpleNode{
 
-    private String  className;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4509147220372167063L;
 
-    private boolean isArray;
+    private String            className;
+
+    private boolean           isArray;
 
     public ASTCtor(int id){
         super(id);
@@ -168,8 +173,9 @@ public class ASTCtor extends SimpleNode{
                 context.setCurrentAccessor(ctorValue.getClass());
             }
 
-            if (isArray)
+            if (isArray){
                 context.put("_ctorClass", clazz);
+            }
 
         }catch (Throwable t){
             throw OgnlOps.castToRuntime(t);
@@ -218,11 +224,13 @@ public class ASTCtor extends SimpleNode{
 
                             cast = (String) context.remove(ExpressionCompiler.PRE_CAST);
                         }
-                        if (cast == null)
+                        if (cast == null){
                             cast = "";
+                        }
 
-                        if (!ASTConst.class.isInstance(_children[i]))
+                        if (!ASTConst.class.isInstance(_children[i])){
                             value = cast + value;
+                        }
 
                         values[i] = objValue;
                         expressions[i] = value;
@@ -235,26 +243,28 @@ public class ASTCtor extends SimpleNode{
                     Constructor ctor = null;
                     Class[] ctorParamTypes = null;
 
-                    for (int i = 0; i < cons.length; i++){
-                        Class[] ctorTypes = cons[i].getParameterTypes();
+                    for (Constructor con : cons){
+                        Class[] ctorTypes = con.getParameterTypes();
 
                         if (OgnlRuntime.areArgsCompatible(values, ctorTypes)
                                         && (ctor == null || OgnlRuntime.isMoreSpecific(ctorTypes, ctorParamTypes))){
-                            ctor = cons[i];
+                            ctor = con;
                             ctorParamTypes = ctorTypes;
                         }
                     }
 
-                    if (ctor == null)
+                    if (ctor == null){
                         ctor = OgnlRuntime.getConvertedConstructorAndArgs(
                                         context,
                                         clazz,
                                         OgnlRuntime.getConstructors(clazz),
                                         values,
                                         new Object[values.length]);
+                    }
 
-                    if (ctor == null)
+                    if (ctor == null){
                         throw new NoSuchMethodException("Unable to find constructor appropriate for arguments in class: " + clazz);
+                    }
 
                     ctorParamTypes = ctor.getParameterTypes();
 
@@ -270,8 +280,9 @@ public class ASTCtor extends SimpleNode{
                         if (types[i].isPrimitive()){
 
                             String literal = OgnlRuntime.getNumericLiteral(types[i]);
-                            if (literal != null)
+                            if (literal != null){
                                 value += literal;
+                            }
                         }
 
                         if (ctorParamTypes[i] != types[i]){
@@ -283,11 +294,12 @@ public class ASTCtor extends SimpleNode{
                             }else if (!ASTConst.class.isInstance(_children[i])
                                             || (ASTConst.class.isInstance(_children[i]) && !types[i].isPrimitive())){
 
-                                if (!types[i].isArray() && types[i].isPrimitive() && !ctorParamTypes[i].isPrimitive())
+                                if (!types[i].isArray() && types[i].isPrimitive() && !ctorParamTypes[i].isPrimitive()){
                                     value = "new " + ExpressionCompiler.getCastString(OgnlRuntime.getPrimitiveWrapperClass(types[i])) + "("
                                                     + value + ")";
-                                else
+                                }else{
                                     value = " ($w) " + value;
+                                }
                             }
                         }
 

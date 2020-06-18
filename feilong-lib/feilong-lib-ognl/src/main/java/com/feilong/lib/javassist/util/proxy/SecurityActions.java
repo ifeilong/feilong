@@ -55,68 +55,48 @@ class SecurityActions extends SecurityManager{
     }
 
     static Method[] getDeclaredMethods(final Class<?> clazz){
-        if (System.getSecurityManager() == null)
+        if (System.getSecurityManager() == null){
             return clazz.getDeclaredMethods();
-        else{
-            return AccessController.doPrivileged(new PrivilegedAction<Method[]>(){
-
-                @Override
-                public Method[] run(){
-                    return clazz.getDeclaredMethods();
-                }
-            });
+        }else{
+            return AccessController.doPrivileged((PrivilegedAction<Method[]>) () -> clazz.getDeclaredMethods());
         }
     }
 
     static Constructor<?>[] getDeclaredConstructors(final Class<?> clazz){
-        if (System.getSecurityManager() == null)
+        if (System.getSecurityManager() == null){
             return clazz.getDeclaredConstructors();
-        else{
-            return AccessController.doPrivileged(new PrivilegedAction<Constructor<?>[]>(){
-
-                @Override
-                public Constructor<?>[] run(){
-                    return clazz.getDeclaredConstructors();
-                }
-            });
+        }else{
+            return AccessController.doPrivileged((PrivilegedAction<Constructor<?>[]>) () -> clazz.getDeclaredConstructors());
         }
     }
 
     static MethodHandle getMethodHandle(final Class<?> clazz,final String name,final Class<?>[] params) throws NoSuchMethodException{
         try{
-            return AccessController.doPrivileged(new PrivilegedExceptionAction<MethodHandle>(){
-
-                @Override
-                public MethodHandle run() throws IllegalAccessException,NoSuchMethodException,SecurityException{
-                    Method rmet = clazz.getDeclaredMethod(name, params);
-                    rmet.setAccessible(true);
-                    MethodHandle meth = MethodHandles.lookup().unreflect(rmet);
-                    rmet.setAccessible(false);
-                    return meth;
-                }
+            return AccessController.doPrivileged((PrivilegedExceptionAction<MethodHandle>) () -> {
+                Method rmet = clazz.getDeclaredMethod(name, params);
+                rmet.setAccessible(true);
+                MethodHandle meth = MethodHandles.lookup().unreflect(rmet);
+                rmet.setAccessible(false);
+                return meth;
             });
         }catch (PrivilegedActionException e){
-            if (e.getCause() instanceof NoSuchMethodException)
+            if (e.getCause() instanceof NoSuchMethodException){
                 throw (NoSuchMethodException) e.getCause();
+            }
             throw new RuntimeException(e.getCause());
         }
     }
 
     static Method getDeclaredMethod(final Class<?> clazz,final String name,final Class<?>[] types) throws NoSuchMethodException{
-        if (System.getSecurityManager() == null)
+        if (System.getSecurityManager() == null){
             return clazz.getDeclaredMethod(name, types);
-        else{
+        }else{
             try{
-                return AccessController.doPrivileged(new PrivilegedExceptionAction<Method>(){
-
-                    @Override
-                    public Method run() throws Exception{
-                        return clazz.getDeclaredMethod(name, types);
-                    }
-                });
+                return AccessController.doPrivileged((PrivilegedExceptionAction<Method>) () -> clazz.getDeclaredMethod(name, types));
             }catch (PrivilegedActionException e){
-                if (e.getCause() instanceof NoSuchMethodException)
+                if (e.getCause() instanceof NoSuchMethodException){
                     throw (NoSuchMethodException) e.getCause();
+                }
 
                 throw new RuntimeException(e.getCause());
             }
@@ -124,20 +104,15 @@ class SecurityActions extends SecurityManager{
     }
 
     static Constructor<?> getDeclaredConstructor(final Class<?> clazz,final Class<?>[] types) throws NoSuchMethodException{
-        if (System.getSecurityManager() == null)
+        if (System.getSecurityManager() == null){
             return clazz.getDeclaredConstructor(types);
-        else{
+        }else{
             try{
-                return AccessController.doPrivileged(new PrivilegedExceptionAction<Constructor<?>>(){
-
-                    @Override
-                    public Constructor<?> run() throws Exception{
-                        return clazz.getDeclaredConstructor(types);
-                    }
-                });
+                return AccessController.doPrivileged((PrivilegedExceptionAction<Constructor<?>>) () -> clazz.getDeclaredConstructor(types));
             }catch (PrivilegedActionException e){
-                if (e.getCause() instanceof NoSuchMethodException)
+                if (e.getCause() instanceof NoSuchMethodException){
                     throw (NoSuchMethodException) e.getCause();
+                }
 
                 throw new RuntimeException(e.getCause());
             }
@@ -145,36 +120,29 @@ class SecurityActions extends SecurityManager{
     }
 
     static void setAccessible(final AccessibleObject ao,final boolean accessible){
-        if (System.getSecurityManager() == null)
+        if (System.getSecurityManager() == null){
             ao.setAccessible(accessible);
-        else{
-            AccessController.doPrivileged(new PrivilegedAction<Void>(){
-
-                @Override
-                public Void run(){
-                    ao.setAccessible(accessible);
-                    return null;
-                }
+        }else{
+            AccessController.doPrivileged((PrivilegedAction<Void>) () -> {
+                ao.setAccessible(accessible);
+                return null;
             });
         }
     }
 
     static void set(final Field fld,final Object target,final Object value) throws IllegalAccessException{
-        if (System.getSecurityManager() == null)
+        if (System.getSecurityManager() == null){
             fld.set(target, value);
-        else{
+        }else{
             try{
-                AccessController.doPrivileged(new PrivilegedExceptionAction<Void>(){
-
-                    @Override
-                    public Void run() throws Exception{
-                        fld.set(target, value);
-                        return null;
-                    }
+                AccessController.doPrivileged((PrivilegedExceptionAction<Void>) () -> {
+                    fld.set(target, value);
+                    return null;
                 });
             }catch (PrivilegedActionException e){
-                if (e.getCause() instanceof NoSuchMethodException)
+                if (e.getCause() instanceof NoSuchMethodException){
                     throw (IllegalAccessException) e.getCause();
+                }
                 throw new RuntimeException(e.getCause());
             }
         }
@@ -182,28 +150,26 @@ class SecurityActions extends SecurityManager{
 
     static TheUnsafe getSunMiscUnsafeAnonymously() throws ClassNotFoundException{
         try{
-            return AccessController.doPrivileged(new PrivilegedExceptionAction<TheUnsafe>(){
-
-                @Override
-                public TheUnsafe run() throws ClassNotFoundException,NoSuchFieldException,SecurityException,IllegalArgumentException,
-                                IllegalAccessException{
-                    Class<?> unsafe = Class.forName("sun.misc.Unsafe");
-                    Field theUnsafe = unsafe.getDeclaredField("theUnsafe");
-                    theUnsafe.setAccessible(true);
-                    TheUnsafe usf = stack.new TheUnsafe(unsafe, theUnsafe.get(null));
-                    theUnsafe.setAccessible(false);
-                    disableWarning(usf);
-                    return usf;
-                }
+            return AccessController.doPrivileged((PrivilegedExceptionAction<TheUnsafe>) () -> {
+                Class<?> unsafe = Class.forName("sun.misc.Unsafe");
+                Field theUnsafe = unsafe.getDeclaredField("theUnsafe");
+                theUnsafe.setAccessible(true);
+                TheUnsafe usf = stack.new TheUnsafe(unsafe, theUnsafe.get(null));
+                theUnsafe.setAccessible(false);
+                disableWarning(usf);
+                return usf;
             });
         }catch (PrivilegedActionException e){
-            if (e.getCause() instanceof ClassNotFoundException)
+            if (e.getCause() instanceof ClassNotFoundException){
                 throw (ClassNotFoundException) e.getCause();
-            if (e.getCause() instanceof NoSuchFieldException)
+            }
+            if (e.getCause() instanceof NoSuchFieldException){
                 throw new ClassNotFoundException("No such instance.", e.getCause());
+            }
             if (e.getCause() instanceof IllegalAccessException || e.getCause() instanceof IllegalAccessException
-                            || e.getCause() instanceof SecurityException)
+                            || e.getCause() instanceof SecurityException){
                 throw new ClassNotFoundException("Security denied access.", e.getCause());
+            }
             throw new RuntimeException(e.getCause());
         }
     }
@@ -228,7 +194,7 @@ class SecurityActions extends SecurityManager{
 
         final Object                    theUnsafe;
 
-        final Map<String, List<Method>> methods = new HashMap<String, List<Method>>();
+        final Map<String, List<Method>> methods = new HashMap<>();
 
         TheUnsafe(Class<?> c, Object o){
             this.unsafe = c;
@@ -238,8 +204,9 @@ class SecurityActions extends SecurityManager{
                     methods.put(m.getName(), Collections.singletonList(m));
                     continue;
                 }
-                if (methods.get(m.getName()).size() == 1)
-                    methods.put(m.getName(), new ArrayList<Method>(methods.get(m.getName())));
+                if (methods.get(m.getName()).size() == 1){
+                    methods.put(m.getName(), new ArrayList<>(methods.get(m.getName())));
+                }
                 methods.get(m.getName()).add(m);
             }
         }
@@ -269,8 +236,9 @@ class SecurityActions extends SecurityManager{
      */
     static void disableWarning(TheUnsafe tu){
         try{
-            if (ClassFile.MAJOR_VERSION < ClassFile.JAVA_9)
+            if (ClassFile.MAJOR_VERSION < ClassFile.JAVA_9){
                 return;
+            }
             Class<?> cls = Class.forName("jdk.internal.module.IllegalAccessLogger");
             Field logger = cls.getDeclaredField("logger");
             tu.call("putObjectVolatile", cls, tu.call("staticFieldOffset", logger), null);

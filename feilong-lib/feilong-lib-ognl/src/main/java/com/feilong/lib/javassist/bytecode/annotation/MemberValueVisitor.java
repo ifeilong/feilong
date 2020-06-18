@@ -22,18 +22,31 @@ package com.feilong.lib.javassist.bytecode.annotation;
  * @see MemberValue#accept(MemberValueVisitor)
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  */
-public interface MemberValueVisitor {
-   public void visitAnnotationMemberValue(AnnotationMemberValue node);
-   public void visitArrayMemberValue(ArrayMemberValue node);
-   public void visitBooleanMemberValue(BooleanMemberValue node);
-   public void visitByteMemberValue(ByteMemberValue node);
-   public void visitCharMemberValue(CharMemberValue node);
-   public void visitDoubleMemberValue(DoubleMemberValue node);
-   public void visitEnumMemberValue(EnumMemberValue node);
-   public void visitFloatMemberValue(FloatMemberValue node);
-   public void visitIntegerMemberValue(IntegerMemberValue node);
-   public void visitLongMemberValue(LongMemberValue node);
-   public void visitShortMemberValue(ShortMemberValue node);
-   public void visitStringMemberValue(StringMemberValue node);
-   public void visitClassMemberValue(ClassMemberValue node);
+public interface MemberValueVisitor{
+
+    public void visitAnnotationMemberValue(AnnotationMemberValue node);
+
+    public void visitArrayMemberValue(ArrayMemberValue node);
+
+    public void visitBooleanMemberValue(BooleanMemberValue node);
+
+    public void visitByteMemberValue(ByteMemberValue node);
+
+    public void visitCharMemberValue(CharMemberValue node);
+
+    public void visitDoubleMemberValue(DoubleMemberValue node);
+
+    public void visitEnumMemberValue(EnumMemberValue node);
+
+    public void visitFloatMemberValue(FloatMemberValue node);
+
+    public void visitIntegerMemberValue(IntegerMemberValue node);
+
+    public void visitLongMemberValue(LongMemberValue node);
+
+    public void visitShortMemberValue(ShortMemberValue node);
+
+    public void visitStringMemberValue(StringMemberValue node);
+
+    public void visitClassMemberValue(ClassMemberValue node);
 }

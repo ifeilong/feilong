@@ -109,8 +109,9 @@ public class HotSwapAgent{
      * The entry point invoked when this agent is started after the JVM starts.
      */
     public static void agentmain(String agentArgs,Instrumentation inst) throws Throwable{
-        if (!inst.isRedefineClassesSupported())
+        if (!inst.isRedefineClassesSupported()){
             throw new RuntimeException("this JVM does not support redefinition of classes");
+        }
 
         instrumentation = inst;
     }
@@ -130,8 +131,9 @@ public class HotSwapAgent{
     public static void redefine(Class<?>[] oldClasses,CtClass[] newClasses) throws NotFoundException,IOException,CannotCompileException{
         startAgent();
         ClassDefinition[] defs = new ClassDefinition[oldClasses.length];
-        for (int i = 0; i < oldClasses.length; i++)
+        for (int i = 0; i < oldClasses.length; i++){
             defs[i] = new ClassDefinition(oldClasses[i], newClasses[i].toBytecode());
+        }
 
         try{
             instrumentation.redefineClasses(defs);
@@ -147,8 +149,9 @@ public class HotSwapAgent{
      * It attempts to dynamically start the agent if necessary.
      */
     private static void startAgent() throws NotFoundException{
-        if (instrumentation != null)
+        if (instrumentation != null){
             return;
+        }
 
         try{
             File agentJar = createJarFile();
@@ -163,8 +166,9 @@ public class HotSwapAgent{
         }
 
         for (int sec = 0; sec < 10 /* sec */; sec++){
-            if (instrumentation != null)
+            if (instrumentation != null){
                 return;
+            }
 
             try{
                 Thread.sleep(1000);
@@ -210,8 +214,9 @@ public class HotSwapAgent{
             jos.write(clazz.toBytecode());
             jos.closeEntry();
         }finally{
-            if (jos != null)
+            if (jos != null){
                 jos.close();
+            }
         }
 
         return jar;

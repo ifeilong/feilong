@@ -17,6 +17,7 @@ package com.feilong.lib.xstream.mapper;
  * @since 1.3
  * @deprecated As of 1.4.5, minimal JDK version will be 1.7 for next major release
  */
+@Deprecated
 public interface AnnotationConfiguration{
 
     void autodetectAnnotations(boolean mode);

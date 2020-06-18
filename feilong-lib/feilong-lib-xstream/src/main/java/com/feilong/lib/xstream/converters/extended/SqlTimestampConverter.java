@@ -65,8 +65,9 @@ public class SqlTimestampConverter extends AbstractSingleValueConverter{
             buffer.append('.');
             final String nanos = String.valueOf(timestamp.getNanos() + 1000000000);
             int last = 10;
-            while (last > 2 && nanos.charAt(last - 1) == '0')
+            while (last > 2 && nanos.charAt(last - 1) == '0'){
                 --last;
+            }
             buffer.append(nanos.subSequence(1, last));
         }
         return buffer.toString();

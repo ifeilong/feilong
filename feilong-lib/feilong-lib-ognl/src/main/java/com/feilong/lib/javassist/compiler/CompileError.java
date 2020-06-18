@@ -19,39 +19,44 @@ package com.feilong.lib.javassist.compiler;
 import com.feilong.lib.javassist.CannotCompileException;
 import com.feilong.lib.javassist.NotFoundException;
 
-public class CompileError extends Exception {
+public class CompileError extends Exception{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    private Lex lex;
-    private String reason;
 
-    public CompileError(String s, Lex l) {
+    private Lex               lex;
+
+    private String            reason;
+
+    public CompileError(String s, Lex l){
         reason = s;
         lex = l;
     }
 
-    public CompileError(String s) {
+    public CompileError(String s){
         reason = s;
         lex = null;
     }
 
-    public CompileError(CannotCompileException e) {
+    public CompileError(CannotCompileException e){
         this(e.getReason());
     }
 
-    public CompileError(NotFoundException e) {
+    public CompileError(NotFoundException e){
         this("cannot find " + e.getMessage());
     }
 
-    public Lex getLex() { return lex; }
+    public Lex getLex(){
+        return lex;
+    }
 
     @Override
-    public String getMessage() {
+    public String getMessage(){
         return reason;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "compile error: " + reason;
     }
 }

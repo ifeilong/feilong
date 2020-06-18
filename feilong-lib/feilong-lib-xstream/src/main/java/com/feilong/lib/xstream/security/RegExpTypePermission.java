@@ -30,19 +30,23 @@ public class RegExpTypePermission implements TypePermission{
     public boolean allows(final Class type){
         if (type != null){
             final String name = type.getName();
-            for (int i = 0; i < patterns.length; ++i)
-                if (patterns[i].matcher(name).matches())
+            for (Pattern pattern : patterns){
+                if (pattern.matcher(name).matches()){
                     return true;
+                }
+            }
         }
         return false;
     }
 
     private static Pattern[] getPatterns(final String[] patterns){
-        if (patterns == null)
+        if (patterns == null){
             return null;
+        }
         final Pattern[] array = new Pattern[patterns.length];
-        for (int i = 0; i < array.length; ++i)
+        for (int i = 0; i < array.length; ++i){
             array[i] = Pattern.compile(patterns[i]);
+        }
         return array;
     }
 }

@@ -55,7 +55,7 @@ public class LoaderClassPath implements ClassPath{
      * Creates a search path representing a class loader.
      */
     public LoaderClassPath(ClassLoader cl){
-        clref = new WeakReference<ClassLoader>(cl);
+        clref = new WeakReference<>(cl);
     }
 
     @Override
@@ -72,8 +72,9 @@ public class LoaderClassPath implements ClassPath{
     public InputStream openClassfile(String classname) throws NotFoundException{
         String cname = classname.replace('.', '/') + ".class";
         ClassLoader cl = clref.get();
-        if (cl == null)
+        if (cl == null){
             return null; // not found
+        }
         InputStream is = cl.getResourceAsStream(cname);
         return is;
     }
@@ -89,8 +90,9 @@ public class LoaderClassPath implements ClassPath{
     public URL find(String classname){
         String cname = classname.replace('.', '/') + ".class";
         ClassLoader cl = clref.get();
-        if (cl == null)
+        if (cl == null){
             return null; // not found
+        }
         URL url = cl.getResource(cname);
         return url;
     }

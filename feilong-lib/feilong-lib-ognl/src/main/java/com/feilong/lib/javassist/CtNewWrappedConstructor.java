@@ -20,6 +20,7 @@ import com.feilong.lib.javassist.CtMethod.ConstParameter;
 import com.feilong.lib.javassist.bytecode.Bytecode;
 import com.feilong.lib.javassist.bytecode.ClassFile;
 import com.feilong.lib.javassist.bytecode.Descriptor;
+import com.feilong.lib.javassist.bytecode.Opcode;
 
 class CtNewWrappedConstructor extends CtNewWrappedMethod{
 
@@ -77,18 +78,20 @@ class CtNewWrappedConstructor extends CtNewWrappedMethod{
                 desc = cparam.constDescriptor();
             }
 
-            if (stacksize < stacksize2)
+            if (stacksize < stacksize2){
                 stacksize = stacksize2;
+            }
 
             code.addInvokespecial(superclazz, "<init>", desc);
         }
 
-        if (wrappedBody == null)
-            code.add(Bytecode.RETURN);
-        else{
+        if (wrappedBody == null){
+            code.add(Opcode.RETURN);
+        }else{
             stacksize2 = makeBody0(declaring, classfile, wrappedBody, false, parameters, CtClass.voidType, cparam, code);
-            if (stacksize < stacksize2)
+            if (stacksize < stacksize2){
                 stacksize = stacksize2;
+            }
         }
 
         code.setMaxStack(stacksize);

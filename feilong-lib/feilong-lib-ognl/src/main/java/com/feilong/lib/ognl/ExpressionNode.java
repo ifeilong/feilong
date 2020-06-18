@@ -38,6 +38,11 @@ import com.feilong.lib.ognl.enhance.ExpressionCompiler;
  */
 public abstract class ExpressionNode extends SimpleNode{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 9023679891625339997L;
+
     public ExpressionNode(int i){
         super(i);
     }
@@ -114,12 +119,14 @@ public abstract class ExpressionNode extends SimpleNode{
                         pre = (String) context.get("_currentChain");
                     }
 
-                    if (pre == null)
+                    if (pre == null){
                         pre = "";
+                    }
 
                     String cast = (String) context.remove(ExpressionCompiler.PRE_CAST);
-                    if (cast == null)
+                    if (cast == null){
                         cast = "";
+                    }
 
                     value = cast + ExpressionCompiler.getRootExpression(_children[i], context.getRoot(), context) + pre + value;
                 }

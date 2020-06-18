@@ -98,6 +98,7 @@ public class SerializableConverter extends AbstractReflectionConverter{
     /**
      * @deprecated As of 1.4.5 use {@link #SerializableConverter(Mapper, ReflectionProvider, ClassLoaderReference)}
      */
+    @Deprecated
     public SerializableConverter(Mapper mapper, ReflectionProvider reflectionProvider, ClassLoader classLoader){
         this(mapper, reflectionProvider, new ClassLoaderReference(classLoader));
     }
@@ -105,6 +106,7 @@ public class SerializableConverter extends AbstractReflectionConverter{
     /**
      * @deprecated As of 1.4 use {@link #SerializableConverter(Mapper, ReflectionProvider, ClassLoaderReference)}
      */
+    @Deprecated
     public SerializableConverter(Mapper mapper, ReflectionProvider reflectionProvider){
         this(mapper, new UnserializableParentsReflectionProvider(reflectionProvider), new ClassLoaderReference(null));
     }
@@ -194,8 +196,7 @@ public class SerializableConverter extends AbstractReflectionConverter{
                 }
 
                 ObjectStreamField[] fields = objectStreamClass.getFields();
-                for (int i = 0; i < fields.length; i++){
-                    ObjectStreamField field = fields[i];
+                for (ObjectStreamField field : fields){
                     Object value = readField(field, currentType[0], source);
                     if (value != null){
                         if (!writtenClassWrapper[0]){
@@ -433,15 +434,11 @@ public class SerializableConverter extends AbstractReflectionConverter{
 
             @Override
             public void registerValidation(final ObjectInputValidation validation,int priority){
-                context.addCompletionCallback(new Runnable(){
-
-                    @Override
-                    public void run(){
-                        try{
-                            validation.validateObject();
-                        }catch (InvalidObjectException e){
-                            throw new ObjectAccessException("Cannot validate object", e);
-                        }
+                context.addCompletionCallback(() -> {
+                    try{
+                        validation.validateObject();
+                    }catch (InvalidObjectException e){
+                        throw new ObjectAccessException("Cannot validate object", e);
                     }
                 }, priority);
             }
@@ -503,13 +500,9 @@ public class SerializableConverter extends AbstractReflectionConverter{
 
         @Override
         public void visitSerializableFields(final Object object,final Visitor visitor){
-            wrapped.visitSerializableFields(object, new Visitor(){
-
-                @Override
-                public void visit(String name,Class type,Class definedIn,Object value){
-                    if (!Serializable.class.isAssignableFrom(definedIn)){
-                        visitor.visit(name, type, definedIn, value);
-                    }
+            wrapped.visitSerializableFields(object, (name,type,definedIn,value) -> {
+                if (!Serializable.class.isAssignableFrom(definedIn)){
+                    visitor.visit(name, type, definedIn, value);
                 }
             });
         }

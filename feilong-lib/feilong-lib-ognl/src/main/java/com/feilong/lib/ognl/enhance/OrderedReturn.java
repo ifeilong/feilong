@@ -2,22 +2,20 @@ package com.feilong.lib.ognl.enhance;
 
 import com.feilong.lib.ognl.Node;
 
-
 /**
- * Marks an ognl expression {@link Node} as needing to have the return portion of a 
+ * Marks an ognl expression {@link Node} as needing to have the return portion of a
  * getter method happen in a specific part of the generated expression vs just having
  * the whole expression returned in one chunk.
  */
-public interface OrderedReturn
-{
-    
+public interface OrderedReturn{
+
     /**
      * Get the core expression to execute first before any return foo logic is started.
      * 
      * @return The core standalone expression that shouldn't be pre-pended with a return keyword.
      */
     String getCoreExpression();
-    
+
     /**
      * Gets the last expression to be pre-pended with a return &lt;expression&gt; block.
      * 

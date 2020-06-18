@@ -48,6 +48,7 @@ public class JavaFieldConverter implements Converter{
     /**
      * @deprecated As of 1.4.5 use {@link #JavaFieldConverter(ClassLoaderReference)}
      */
+    @Deprecated
     public JavaFieldConverter(ClassLoader classLoader){
         this(new ClassLoaderReference(classLoader));
     }

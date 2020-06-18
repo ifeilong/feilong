@@ -34,32 +34,30 @@ import com.feilong.lib.net.ftp.FTPClientConfig;
  *
  * This is a sample of VMS LIST output
  *
- *  "1-JUN.LIS;1              9/9           2-JUN-1998 07:32:04  [GROUP,OWNER]    (RWED,RWED,RWED,RE)",
- *  "1-JUN.LIS;2              9/9           2-JUN-1998 07:32:04  [GROUP,OWNER]    (RWED,RWED,RWED,RE)",
- *  "DATA.DIR;1               1/9           2-JUN-1998 07:32:04  [GROUP,OWNER]    (RWED,RWED,RWED,RE)",
+ * "1-JUN.LIS;1 9/9 2-JUN-1998 07:32:04 [GROUP,OWNER] (RWED,RWED,RWED,RE)",
+ * "1-JUN.LIS;2 9/9 2-JUN-1998 07:32:04 [GROUP,OWNER] (RWED,RWED,RWED,RE)",
+ * "DATA.DIR;1 1/9 2-JUN-1998 07:32:04 [GROUP,OWNER] (RWED,RWED,RWED,RE)",
  * <P>
  *
  * @version $Id$
  *
  * @see com.feilong.lib.net.ftp.FTPFileEntryParser FTPFileEntryParser (for usage instructions)
  */
-public class VMSVersioningFTPEntryParser extends VMSFTPEntryParser
-{
+public class VMSVersioningFTPEntryParser extends VMSFTPEntryParser{
 
-    private final Pattern _preparse_pattern_;
-    private static final String PRE_PARSE_REGEX =
-        "(.*?);([0-9]+)\\s*.*";
+    private final Pattern       _preparse_pattern_;
+
+    private static final String PRE_PARSE_REGEX = "(.*?);([0-9]+)\\s*.*";
 
     /**
      * Constructor for a VMSFTPEntryParser object.
      *
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen
-     * under normal conditions.  It it is seen, this is a sign that
-     * <code>REGEX</code> is  not a valid regular expression.
+     *             Thrown if the regular expression is unparseable. Should not be seen
+     *             under normal conditions. It it is seen, this is a sign that
+     *             <code>REGEX</code> is not a valid regular expression.
      */
-    public VMSVersioningFTPEntryParser()
-    {
+    public VMSVersioningFTPEntryParser(){
         this(null);
     }
 
@@ -67,57 +65,54 @@ public class VMSVersioningFTPEntryParser extends VMSFTPEntryParser
      * This constructor allows the creation of a VMSVersioningFTPEntryParser
      * object with something other than the default configuration.
      *
-     * @param config The {@link FTPClientConfig configuration} object used to
-     * configure this parser.
+     * @param config
+     *            The {@link FTPClientConfig configuration} object used to
+     *            configure this parser.
      * @throws IllegalArgumentException
-     * Thrown if the regular expression is unparseable.  Should not be seen
-     * under normal conditions.  It it is seen, this is a sign that
-     * <code>REGEX</code> is  not a valid regular expression.
+     *             Thrown if the regular expression is unparseable. Should not be seen
+     *             under normal conditions. It it is seen, this is a sign that
+     *             <code>REGEX</code> is not a valid regular expression.
      * @since 1.4
      */
-    public VMSVersioningFTPEntryParser(FTPClientConfig config)
-    {
+    public VMSVersioningFTPEntryParser(FTPClientConfig config){
         super();
         configure(config);
-        try
-        {
+        try{
             //_preparse_matcher_ = new Perl5Matcher();
             _preparse_pattern_ = Pattern.compile(PRE_PARSE_REGEX);
-        }
-        catch (PatternSyntaxException pse)
-        {
-            throw new IllegalArgumentException (
-                "Unparseable regex supplied:  " + PRE_PARSE_REGEX);
+        }catch (PatternSyntaxException pse){
+            throw new IllegalArgumentException("Unparseable regex supplied:  " + PRE_PARSE_REGEX);
         }
 
-   }
+    }
 
     /**
      * Implement hook provided for those implementers (such as
      * VMSVersioningFTPEntryParser, and possibly others) which return
      * multiple files with the same name to remove the duplicates ..
      *
-     * @param original Original list
+     * @param original
+     *            Original list
      *
      * @return Original list purged of duplicates
      */
     @Override
-    public List<String> preParse(List<String> original) {
-        HashMap<String, Integer> existingEntries = new HashMap<String, Integer>();
+    public List<String> preParse(List<String> original){
+        HashMap<String, Integer> existingEntries = new HashMap<>();
         ListIterator<String> iter = original.listIterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext()){
             String entry = iter.next().trim();
             MatchResult result = null;
             Matcher _preparse_matcher_ = _preparse_pattern_.matcher(entry);
-            if (_preparse_matcher_.matches()) {
+            if (_preparse_matcher_.matches()){
                 result = _preparse_matcher_.toMatchResult();
                 String name = result.group(1);
                 String version = result.group(2);
                 Integer nv = Integer.valueOf(version);
                 Integer existing = existingEntries.get(name);
-                if (null != existing) {
-                    if (nv.intValue() < existing.intValue()) {
-                        iter.remove();  // removes older version from original list.
+                if (null != existing){
+                    if (nv.intValue() < existing.intValue()){
+                        iter.remove(); // removes older version from original list.
                         continue;
                     }
                 }
@@ -129,18 +124,18 @@ public class VMSVersioningFTPEntryParser extends VMSFTPEntryParser
         // version number for each name that were listed after the largest.
         // we now must remove those with smaller than the largest version number
         // for each name that were found before the largest
-        while (iter.hasPrevious()) {
+        while (iter.hasPrevious()){
             String entry = iter.previous().trim();
             MatchResult result = null;
             Matcher _preparse_matcher_ = _preparse_pattern_.matcher(entry);
-            if (_preparse_matcher_.matches()) {
+            if (_preparse_matcher_.matches()){
                 result = _preparse_matcher_.toMatchResult();
                 String name = result.group(1);
                 String version = result.group(2);
                 Integer nv = Integer.valueOf(version);
                 Integer existing = existingEntries.get(name);
-                if (null != existing) {
-                    if (nv.intValue() < existing.intValue()) {
+                if (null != existing){
+                    if (nv.intValue() < existing.intValue()){
                         iter.remove(); // removes older version from original list.
                     }
                 }
@@ -150,18 +145,18 @@ public class VMSVersioningFTPEntryParser extends VMSFTPEntryParser
         return original;
     }
 
-
     @Override
-    protected boolean isVersioning() {
+    protected boolean isVersioning(){
         return true;
     }
 
 }
 
-/* Emacs configuration
- * Local variables:        **
- * mode:             java  **
- * c-basic-offset:   4     **
- * indent-tabs-mode: nil   **
- * End:                    **
+/*
+ * Emacs configuration
+ * Local variables: **
+ * mode: java **
+ * c-basic-offset: 4 **
+ * indent-tabs-mode: nil **
+ * End: **
  */

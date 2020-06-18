@@ -32,39 +32,40 @@ import com.feilong.lib.javassist.LoaderClassPath;
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
  * @version $Revision: 1.4 $
  */
-public class ScopedClassPoolRepositoryImpl implements ScopedClassPoolRepository {
+public class ScopedClassPoolRepositoryImpl implements ScopedClassPoolRepository{
+
     /** The instance */
-    private static final ScopedClassPoolRepositoryImpl instance = new ScopedClassPoolRepositoryImpl();
+    private static final ScopedClassPoolRepositoryImpl instance      = new ScopedClassPoolRepositoryImpl();
 
     /** Whether to prune */
-    private boolean prune = true;
+    private boolean                                    prune         = true;
 
     /** Whether to prune when added to the classpool's cache */
-    boolean pruneWhenCached;
+    boolean                                            pruneWhenCached;
 
     /** The registered classloaders */
-    protected Map<ClassLoader,ScopedClassPool> registeredCLs = Collections
-            .synchronizedMap(new WeakHashMap<ClassLoader,ScopedClassPool>());
+    protected Map<ClassLoader, ScopedClassPool>        registeredCLs = Collections
+                    .synchronizedMap(new WeakHashMap<ClassLoader, ScopedClassPool>());
 
     /** The default class pool */
-    protected ClassPool classpool;
+    protected ClassPool                                classpool;
 
     /** The factory for creating class pools */
-    protected ScopedClassPoolFactory factory = new ScopedClassPoolFactoryImpl();
+    protected ScopedClassPoolFactory                   factory       = new ScopedClassPoolFactoryImpl();
 
     /**
      * Get the instance.
      * 
      * @return the instance.
      */
-    public static ScopedClassPoolRepository getInstance() {
+    public static ScopedClassPoolRepository getInstance(){
         return instance;
     }
 
     /**
      * Singleton.
      */
-    private ScopedClassPoolRepositoryImpl() {
+    private ScopedClassPoolRepositoryImpl(){
         classpool = ClassPool.getDefault();
         // FIXME This doesn't look correct
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -77,36 +78,40 @@ public class ScopedClassPoolRepositoryImpl implements ScopedClassPoolRepository 
      * @return the prune.
      */
     @Override
-    public boolean isPrune() {
+    public boolean isPrune(){
         return prune;
     }
 
     /**
      * Set the prune attribute.
      * 
-     * @param prune     a new value.
+     * @param prune
+     *            a new value.
      */
     @Override
-    public void setPrune(boolean prune) {
+    public void setPrune(boolean prune){
         this.prune = prune;
     }
 
     /**
      * Create a scoped classpool.
      * 
-     * @param cl    the classloader.
-     * @param src   the original classpool.
+     * @param cl
+     *            the classloader.
+     * @param src
+     *            the original classpool.
      * @return the classpool
      */
     @Override
-    public ScopedClassPool createScopedClassPool(ClassLoader cl, ClassPool src) {
+    public ScopedClassPool createScopedClassPool(ClassLoader cl,ClassPool src){
         return factory.create(cl, src, this);
     }
 
     @Override
-    public ClassPool findClassPool(ClassLoader cl) {
-        if (cl == null)
+    public ClassPool findClassPool(ClassLoader cl){
+        if (cl == null){
             return registerClassLoader(ClassLoader.getSystemClassLoader());
+        }
 
         return registerClassLoader(cl);
     }
@@ -114,18 +119,19 @@ public class ScopedClassPoolRepositoryImpl implements ScopedClassPoolRepository 
     /**
      * Register a classloader.
      * 
-     * @param ucl       the classloader.
+     * @param ucl
+     *            the classloader.
      * @return the classpool
      */
     @Override
-    public ClassPool registerClassLoader(ClassLoader ucl) {
-        synchronized (registeredCLs) {
+    public ClassPool registerClassLoader(ClassLoader ucl){
+        synchronized (registeredCLs){
             // FIXME: Probably want to take this method out later
             // so that AOP framework can be independent of JMX
             // This is in here so that we can remove a UCL from the ClassPool as
             // a
             // ClassPool.classpath
-            if (registeredCLs.containsKey(ucl)) {
+            if (registeredCLs.containsKey(ucl)){
                 return registeredCLs.get(ucl);
             }
             ScopedClassPool pool = createScopedClassPool(ucl, classpool);
@@ -138,7 +144,7 @@ public class ScopedClassPoolRepositoryImpl implements ScopedClassPoolRepository 
      * Get the registered classloaders.
      */
     @Override
-    public Map<ClassLoader,ScopedClassPool> getRegisteredCLs() {
+    public Map<ClassLoader, ScopedClassPool> getRegisteredCLs(){
         clearUnregisteredClassLoaders();
         return registeredCLs;
     }
@@ -148,46 +154,50 @@ public class ScopedClassPoolRepositoryImpl implements ScopedClassPoolRepository 
      * undeployed (as in JBoss)
      */
     @Override
-    public void clearUnregisteredClassLoaders() {
+    public void clearUnregisteredClassLoaders(){
         List<ClassLoader> toUnregister = null;
-        synchronized (registeredCLs) {
-            for (Map.Entry<ClassLoader,ScopedClassPool> reg:registeredCLs.entrySet()) {
-                if (reg.getValue().isUnloadedClassLoader()) {
+        synchronized (registeredCLs){
+            for (Map.Entry<ClassLoader, ScopedClassPool> reg : registeredCLs.entrySet()){
+                if (reg.getValue().isUnloadedClassLoader()){
                     ClassLoader cl = reg.getValue().getClassLoader();
-                    if (cl != null) {
-                        if (toUnregister == null)
-                            toUnregister = new ArrayList<ClassLoader>();
+                    if (cl != null){
+                        if (toUnregister == null){
+                            toUnregister = new ArrayList<>();
+                        }
                         toUnregister.add(cl);
                     }
                     registeredCLs.remove(reg.getKey());
                 }
             }
-            if (toUnregister != null)
-                for (ClassLoader cl:toUnregister)
+            if (toUnregister != null){
+                for (ClassLoader cl : toUnregister){
                     unregisterClassLoader(cl);
+                }
+            }
         }
     }
 
     @Override
-    public void unregisterClassLoader(ClassLoader cl) {
-        synchronized (registeredCLs) {
+    public void unregisterClassLoader(ClassLoader cl){
+        synchronized (registeredCLs){
             ScopedClassPool pool = registeredCLs.remove(cl);
-            if (pool != null)
+            if (pool != null){
                 pool.close();
+            }
         }
     }
 
-    public void insertDelegate(ScopedClassPoolRepository delegate) {
+    public void insertDelegate(ScopedClassPoolRepository delegate){
         // Noop - this is the end
     }
 
     @Override
-    public void setClassPoolFactory(ScopedClassPoolFactory factory) {
+    public void setClassPoolFactory(ScopedClassPoolFactory factory){
         this.factory = factory;
     }
 
     @Override
-    public ScopedClassPoolFactory getClassPoolFactory() {
+    public ScopedClassPoolFactory getClassPoolFactory(){
         return factory;
     }
 }

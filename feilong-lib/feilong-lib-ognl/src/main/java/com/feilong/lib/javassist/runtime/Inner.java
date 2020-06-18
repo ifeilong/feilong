@@ -21,5 +21,5 @@ package com.feilong.lib.javassist.runtime;
  * This support class is required at runtime
  * only if the method calls a private constructor in the enclosing class.
  */
-public class Inner {
+public class Inner{
 }

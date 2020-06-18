@@ -119,7 +119,7 @@ public class Digester extends DefaultHandler{
     /**
      * The stack of body text string buffers for surrounding elements.
      */
-    private final Stack<StringBuilder>           bodyTexts             = new Stack<StringBuilder>();
+    private final Stack<StringBuilder>           bodyTexts             = new Stack<>();
 
     /**
      * Stack whose elements are List objects, each containing a list of Rule objects as returned from Rules.getMatch().
@@ -129,7 +129,7 @@ public class Digester extends DefaultHandler{
      *
      * @since 1.6
      */
-    private final Stack<List<Rule>>              matches               = new Stack<List<Rule>>();
+    private final Stack<List<Rule>>              matches               = new Stack<>();
 
     /**
      * The class loader to use for instantiating application objects. If not specified, the context class loader, or the
@@ -151,7 +151,7 @@ public class Digester extends DefaultHandler{
     /**
      * The URLs of entityValidator that have been registered, keyed by the public identifier that corresponds.
      */
-    private final HashMap<String, URL>           entityValidator       = new HashMap<String, URL>();
+    private final HashMap<String, URL>           entityValidator       = new HashMap<>();
 
     /**
      * The application-supplied error handler that is notified when parsing warnings, errors, or fatal errors occur.
@@ -191,7 +191,7 @@ public class Digester extends DefaultHandler{
      * the most current one. (This architecture is required because documents can declare nested uses of the same prefix
      * for different Namespace URIs).
      */
-    private final HashMap<String, Stack<String>> namespaces            = new HashMap<String, Stack<String>>();
+    private final HashMap<String, Stack<String>> namespaces            = new HashMap<>();
 
     /**
      * Do we want a "XInclude aware" parser.
@@ -203,7 +203,7 @@ public class Digester extends DefaultHandler{
      *
      * @since 2.0
      */
-    private final Stack<Object[]>                params                = new Stack<Object[]>();
+    private final Stack<Object[]>                params                = new Stack<>();
 
     /**
      * The SAXParser we will use to parse the input stream.
@@ -241,7 +241,7 @@ public class Digester extends DefaultHandler{
     /**
      * The object stack being constructed.
      */
-    private final Stack<Object>                  stack                 = new Stack<Object>();
+    private final Stack<Object>                  stack                 = new Stack<>();
 
     /**
      * Do we want to use the Context ClassLoader when loading classes for instantiating new objects. Default is
@@ -266,7 +266,7 @@ public class Digester extends DefaultHandler{
     private Substitutor                          substitutor;
 
     /** Stacks used for interrule communication, indexed by name String */
-    private final HashMap<String, Stack<Object>> stacksByName          = new HashMap<String, Stack<Object>>();
+    private final HashMap<String, Stack<Object>> stacksByName          = new HashMap<>();
 
     /**
      * If not null, then calls by the parser to this object's characters, startElement, endElement and
@@ -735,7 +735,7 @@ public class Digester extends DefaultHandler{
         if (!namespaceAware){
             LOGGER.warn("Digester is not namespace aware");
         }
-        Map<String, String> currentNamespaces = new HashMap<String, String>();
+        Map<String, String> currentNamespaces = new HashMap<>();
         for (Map.Entry<String, Stack<String>> nsEntry : namespaces.entrySet()){
             try{
                 currentNamespaces.put(nsEntry.getKey(), nsEntry.getValue().peek());
@@ -835,9 +835,8 @@ public class Digester extends DefaultHandler{
             if (substitutor != null){
                 bodyText = substitutor.substitute(bodyText);
             }
-            for (int i = 0; i < rules.size(); i++){
+            for (Rule rule : rules){
                 try{
-                    Rule rule = rules.get(i);
                     LOGGER.debug("  Fire body() for " + rule);
                     rule.body(namespaceURI, name, bodyText);
                 }catch (Exception e){
@@ -989,9 +988,8 @@ public class Digester extends DefaultHandler{
             if (substitutor != null){
                 list = substitutor.substitute(list);
             }
-            for (int i = 0; i < rules.size(); i++){
+            for (Rule rule : rules){
                 try{
-                    Rule rule = rules.get(i);
                     LOGGER.debug("  Fire begin() for " + rule);
                     rule.begin(namespaceURI, name, list);
                 }catch (Exception e){
@@ -1017,7 +1015,7 @@ public class Digester extends DefaultHandler{
         // Register this prefix mapping
         Stack<String> stack = namespaces.get(prefix);
         if (stack == null){
-            stack = new Stack<String>();
+            stack = new Stack<>();
             namespaces.put(prefix, stack);
         }
         stack.push(namespaceURI);
@@ -1215,14 +1213,7 @@ public class Digester extends DefaultHandler{
      * @since 3.1
      */
     public <T> Future<T> asyncParse(final InputStream input){
-        return asyncParse(new Callable<T>(){
-
-            @Override
-            public T call() throws Exception{
-                return Digester.this.<T> parse(input);
-            }
-
-        });
+        return asyncParse(() -> Digester.this.<T> parse(input));
     }
 
     /**
@@ -1261,7 +1252,7 @@ public class Digester extends DefaultHandler{
      * potentially locked JAR files on Windows.
      * </p>
      */
-    protected List<InputSource> inputSources = new ArrayList<InputSource>(5);
+    protected List<InputSource> inputSources = new ArrayList<>(5);
 
     /**
      * Given a URL, return an InputSource that reads from that URL.
@@ -1489,7 +1480,7 @@ public class Digester extends DefaultHandler{
 
         Stack<Object> namedStack = stacksByName.get(stackName);
         if (namedStack == null){
-            namedStack = new Stack<Object>();
+            namedStack = new Stack<>();
             stacksByName.put(stackName, namedStack);
         }
         namedStack.push(value);

@@ -4,7 +4,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Map;
 
-public class BootstrapMethodsAttribute extends AttributeInfo {
+public class BootstrapMethodsAttribute extends AttributeInfo{
+
     /**
      * The name of this attribute <code>"BootstrapMethods"</code>.
      */
@@ -13,14 +14,17 @@ public class BootstrapMethodsAttribute extends AttributeInfo {
     /**
      * An element of <code>bootstrap_methods</code>.
      */
-    public static class BootstrapMethod {
+    public static class BootstrapMethod{
+
         /**
          * Constructs an element of <code>bootstrap_methods</code>.
          *
-         * @param method        <code>bootstrap_method_ref</code>.
-         * @param args          <code>bootstrap_arguments</code>.
+         * @param method
+         *            <code>bootstrap_method_ref</code>.
+         * @param args
+         *            <code>bootstrap_arguments</code>.
          */
-        public BootstrapMethod(int method, int[] args) {
+        public BootstrapMethod(int method, int[] args){
             methodRef = method;
             arguments = args;
         }
@@ -29,7 +33,7 @@ public class BootstrapMethodsAttribute extends AttributeInfo {
          * <code>bootstrap_method_ref</code>.
          * The value at this index must be a <code>CONSTANT_MethodHandle_info</code>.
          */
-        public int methodRef;
+        public int   methodRef;
 
         /**
          * <code>bootstrap_arguments</code>.
@@ -37,34 +41,35 @@ public class BootstrapMethodsAttribute extends AttributeInfo {
         public int[] arguments;
     }
 
-    BootstrapMethodsAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    BootstrapMethodsAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
     /**
      * Constructs a BootstrapMethods attribute.
      *
-     * @param cp                a constant pool table.
-     * @param methods           the contents.
+     * @param cp
+     *            a constant pool table.
+     * @param methods
+     *            the contents.
      */
-    public BootstrapMethodsAttribute(ConstPool cp, BootstrapMethod[] methods) {
+    public BootstrapMethodsAttribute(ConstPool cp, BootstrapMethod[] methods){
         super(cp, tag);
         int size = 2;
-        for (int i = 0; i < methods.length; i++)
-            size += 4 + methods[i].arguments.length * 2;
+        for (BootstrapMethod method : methods){
+            size += 4 + method.arguments.length * 2;
+        }
 
         byte[] data = new byte[size];
-        ByteArray.write16bit(methods.length, data, 0);    // num_bootstrap_methods
+        ByteArray.write16bit(methods.length, data, 0); // num_bootstrap_methods
         int pos = 2;
-        for (int i = 0; i < methods.length; i++) {
-            ByteArray.write16bit(methods[i].methodRef, data, pos);
-            ByteArray.write16bit(methods[i].arguments.length, data, pos + 2);
-            int[] args = methods[i].arguments;
+        for (BootstrapMethod method : methods){
+            ByteArray.write16bit(method.methodRef, data, pos);
+            ByteArray.write16bit(method.arguments.length, data, pos + 2);
+            int[] args = method.arguments;
             pos += 4;
-            for (int k = 0; k < args.length; k++) {
-                ByteArray.write16bit(args[k], data, pos);
+            for (int arg : args){
+                ByteArray.write16bit(arg, data, pos);
                 pos += 2;
             }
         }
@@ -75,21 +80,21 @@ public class BootstrapMethodsAttribute extends AttributeInfo {
     /**
      * Obtains <code>bootstrap_methods</code> in this attribute.
      *
-     * @return an array of <code>BootstrapMethod</code>.  Since it
-     *          is a fresh copy, modifying the returned array does not
-     *          affect the original contents of this attribute.
+     * @return an array of <code>BootstrapMethod</code>. Since it
+     *         is a fresh copy, modifying the returned array does not
+     *         affect the original contents of this attribute.
      */
-    public BootstrapMethod[] getMethods() {
+    public BootstrapMethod[] getMethods(){
         byte[] data = this.get();
         int num = ByteArray.readU16bit(data, 0);
         BootstrapMethod[] methods = new BootstrapMethod[num];
         int pos = 2;
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < num; i++){
             int ref = ByteArray.readU16bit(data, pos);
             int len = ByteArray.readU16bit(data, pos + 2);
             int[] args = new int[len];
             pos += 4;
-            for (int k = 0; k < len; k++) {
+            for (int k = 0; k < len; k++){
                 args[k] = ByteArray.readU16bit(data, pos);
                 pos += 2;
             }
@@ -101,22 +106,25 @@ public class BootstrapMethodsAttribute extends AttributeInfo {
     }
 
     /**
-     * Makes a copy.  Class names are replaced according to the
+     * Makes a copy. Class names are replaced according to the
      * given <code>Map</code> object.
      *
-     * @param newCp     the constant pool table used by the new copy.
-     * @param classnames        pairs of replaced and substituted
-     *                          class names.
+     * @param newCp
+     *            the constant pool table used by the new copy.
+     * @param classnames
+     *            pairs of replaced and substituted
+     *            class names.
      */
     @Override
-    public AttributeInfo copy(ConstPool newCp, Map<String,String> classnames) {
+    public AttributeInfo copy(ConstPool newCp,Map<String, String> classnames){
         BootstrapMethod[] methods = getMethods();
         ConstPool thisCp = getConstPool();
-        for (int i = 0; i < methods.length; i++) {
-            BootstrapMethod m = methods[i];
+        for (BootstrapMethod method : methods){
+            BootstrapMethod m = method;
             m.methodRef = thisCp.copy(m.methodRef, newCp, classnames);
-            for (int k = 0; k < m.arguments.length; k++)
+            for (int k = 0; k < m.arguments.length; k++){
                 m.arguments[k] = thisCp.copy(m.arguments[k], newCp, classnames);
+            }
         }
 
         return new BootstrapMethodsAttribute(newCp, methods);

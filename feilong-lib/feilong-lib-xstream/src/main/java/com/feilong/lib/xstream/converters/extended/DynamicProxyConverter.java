@@ -13,7 +13,6 @@ package com.feilong.lib.xstream.converters.extended;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,17 +42,12 @@ public class DynamicProxyConverter implements Converter{
 
     private static final Field             HANDLER = Fields.locate(Proxy.class, InvocationHandler.class, false);
 
-    private static final InvocationHandler DUMMY   = new InvocationHandler(){
-
-                                                       @Override
-                                                       public Object invoke(Object proxy,Method method,Object[] args) throws Throwable{
-                                                           return null;
-                                                       }
-                                                   };
+    private static final InvocationHandler DUMMY   = (proxy,method,args) -> null;
 
     /**
      * @deprecated As of 1.4.5 use {@link #DynamicProxyConverter(Mapper, ClassLoaderReference)}
      */
+    @Deprecated
     public DynamicProxyConverter(Mapper mapper){
         this(mapper, DynamicProxyConverter.class.getClassLoader());
     }
@@ -75,6 +69,7 @@ public class DynamicProxyConverter implements Converter{
     /**
      * @deprecated As of 1.4.5 use {@link #DynamicProxyConverter(Mapper, ClassLoaderReference)}
      */
+    @Deprecated
     public DynamicProxyConverter(Mapper mapper, ClassLoader classLoader){
         this(mapper, new ClassLoaderReference(classLoader));
     }
@@ -99,8 +94,7 @@ public class DynamicProxyConverter implements Converter{
 
     private void addInterfacesToXml(Object source,HierarchicalStreamWriter writer){
         Class[] interfaces = source.getClass().getInterfaces();
-        for (int i = 0; i < interfaces.length; i++){
-            Class currentInterface = interfaces[i];
+        for (Class currentInterface : interfaces){
             writer.startNode("interface");
             writer.setValue(mapper.serializedClass(currentInterface));
             writer.endNode();

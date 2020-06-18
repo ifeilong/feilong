@@ -41,11 +41,16 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTStaticMethod extends SimpleNode implements NodeType{
 
-    private String _className;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1433345643690497288L;
 
-    private String _methodName;
+    private String            _className;
 
-    private Class  _getterClass;
+    private String            _methodName;
+
+    private Class             _getterClass;
 
     public ASTStaticMethod(int id){
         super(id);
@@ -67,8 +72,9 @@ public class ASTStaticMethod extends SimpleNode implements NodeType{
         Object root = context.getRoot();
 
         try{
-            for (int i = 0, icount = args.length; i < icount; ++i)
+            for (int i = 0, icount = args.length; i < icount; ++i){
                 args[i] = _children[i].getValue(context, root);
+            }
 
             return OgnlRuntime.callStaticMethod(context, _className, _methodName, args);
         }finally{
@@ -111,8 +117,9 @@ public class ASTStaticMethod extends SimpleNode implements NodeType{
             Class clazz = OgnlRuntime.classForName(context, _className);
             Method m = OgnlRuntime.getMethod(context, clazz, _methodName, _children, true);
 
-            if (clazz == null || m == null)
+            if (clazz == null || m == null){
                 throw new UnsupportedCompilationException("Unable to find class/method combo " + _className + " / " + _methodName);
+            }
 
             if (!context.getMemberAccess().isAccessible(context, clazz, m, _methodName)){
                 throw new UnsupportedCompilationException(
@@ -133,8 +140,9 @@ public class ASTStaticMethod extends SimpleNode implements NodeType{
                     Object value = _children[i].getValue(context, context.getRoot());
                     String parmString = _children[i].toGetSourceString(context, context.getRoot());
 
-                    if (parmString == null || parmString.trim().length() < 1)
+                    if (parmString == null || parmString.trim().length() < 1){
                         parmString = "null";
+                    }
 
                     // to undo type setting of constants when used as method parameters
                     if (ASTConst.class.isInstance(_children[i])){
@@ -148,15 +156,18 @@ public class ASTStaticMethod extends SimpleNode implements NodeType{
                         cast = (String) context.remove(ExpressionCompiler.PRE_CAST);
                     }
 
-                    if (cast == null)
+                    if (cast == null){
                         cast = "";
+                    }
 
-                    if (!ASTConst.class.isInstance(_children[i]))
+                    if (!ASTConst.class.isInstance(_children[i])){
                         parmString = cast + parmString;
+                    }
 
                     Class valueClass = value != null ? value.getClass() : null;
-                    if (NodeType.class.isAssignableFrom(_children[i].getClass()))
+                    if (NodeType.class.isAssignableFrom(_children[i].getClass())){
                         valueClass = ((NodeType) _children[i]).getGetterClass();
+                    }
 
                     if (valueClass != parms[i]){
                         if (parms[i].isArray()){

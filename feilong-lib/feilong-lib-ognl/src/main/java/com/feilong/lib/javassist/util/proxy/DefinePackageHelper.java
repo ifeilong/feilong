@@ -62,7 +62,7 @@ public class DefinePackageHelper{
                         URL sealBase) throws IllegalArgumentException{
             throw new RuntimeException("define package has been disabled for jigsaw");
         }
-    };
+    }
 
     private static class Java7 extends Helper{
 
@@ -71,8 +71,9 @@ public class DefinePackageHelper{
         private final MethodHandle    definePackage = getDefinePackageMethodHandle();
 
         private MethodHandle getDefinePackageMethodHandle(){
-            if (stack.getCallerClass() != this.getClass())
+            if (stack.getCallerClass() != this.getClass()){
                 throw new IllegalAccessError("Access denied for caller.");
+            }
             try{
                 return SecurityActions.getMethodHandle(
                                 ClassLoader.class,
@@ -102,8 +103,9 @@ public class DefinePackageHelper{
                         String implVersion,
                         String implVendor,
                         URL sealBase) throws IllegalArgumentException{
-            if (stack.getCallerClass() != DefinePackageHelper.class)
+            if (stack.getCallerClass() != DefinePackageHelper.class){
                 throw new IllegalAccessError("Access denied for caller.");
+            }
             try{
                 return (Package) definePackage.invokeWithArguments(
                                 loader,
@@ -116,10 +118,12 @@ public class DefinePackageHelper{
                                 implVendor,
                                 sealBase);
             }catch (Throwable e){
-                if (e instanceof IllegalArgumentException)
+                if (e instanceof IllegalArgumentException){
                     throw (IllegalArgumentException) e;
-                if (e instanceof RuntimeException)
+                }
+                if (e instanceof RuntimeException){
                     throw (RuntimeException) e;
+                }
             }
             return null;
         }
@@ -132,8 +136,9 @@ public class DefinePackageHelper{
         private final Method          definePackage = getDefinePackageMethod();
 
         private Method getDefinePackageMethod(){
-            if (stack.getCallerClass() != this.getClass())
+            if (stack.getCallerClass() != this.getClass()){
                 throw new IllegalAccessError("Access denied for caller.");
+            }
             try{
                 return SecurityActions.getDeclaredMethod(
                                 ClassLoader.class,
@@ -163,8 +168,9 @@ public class DefinePackageHelper{
                         String implVersion,
                         String implVendor,
                         URL sealBase) throws IllegalArgumentException{
-            if (stack.getCallerClass() != DefinePackageHelper.class)
+            if (stack.getCallerClass() != DefinePackageHelper.class){
                 throw new IllegalAccessError("Access denied for caller.");
+            }
             try{
                 definePackage.setAccessible(true);
                 return (Package) definePackage.invoke(
@@ -173,17 +179,19 @@ public class DefinePackageHelper{
             }catch (Throwable e){
                 if (e instanceof InvocationTargetException){
                     Throwable t = ((InvocationTargetException) e).getTargetException();
-                    if (t instanceof IllegalArgumentException)
+                    if (t instanceof IllegalArgumentException){
                         throw (IllegalArgumentException) t;
+                    }
                 }
-                if (e instanceof RuntimeException)
+                if (e instanceof RuntimeException){
                     throw (RuntimeException) e;
+                }
             }finally{
                 definePackage.setAccessible(false);
             }
             return null;
         }
-    };
+    }
 
     private static final Helper privileged = ClassFile.MAJOR_VERSION >= ClassFile.JAVA_9 ? new Java9()
                     : ClassFile.MAJOR_VERSION >= ClassFile.JAVA_7 ? new Java7() : new JavaOther();

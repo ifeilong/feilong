@@ -24,7 +24,9 @@ import com.feilong.lib.javassist.compiler.ast.ASTList;
  *
  * @see com.feilong.lib.javassist.compiler.JvstCodeGen#setProceedHandler(ProceedHandler, String)
  */
-public interface ProceedHandler {
-    void doit(JvstCodeGen gen, Bytecode b, ASTList args) throws CompileError;
-    void setReturnType(JvstTypeChecker c, ASTList args) throws CompileError;
+public interface ProceedHandler{
+
+    void doit(JvstCodeGen gen,Bytecode b,ASTList args) throws CompileError;
+
+    void setReturnType(JvstTypeChecker c,ASTList args) throws CompileError;
 }

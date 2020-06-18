@@ -30,7 +30,8 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Map;
 
 /**
  * Implementation of PropertyAccessor that provides "property" reference to

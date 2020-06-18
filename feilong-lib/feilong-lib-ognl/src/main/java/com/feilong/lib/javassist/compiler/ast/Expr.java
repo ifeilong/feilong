@@ -22,8 +22,9 @@ import com.feilong.lib.javassist.compiler.TokenId;
 /**
  * Expression.
  */
-public class Expr extends ASTList implements TokenId {
-    /* operator must be either of:
+public class Expr extends ASTList implements TokenId{
+    /*
+     * operator must be either of:
      * (unary) +, (unary) -, ++, --, !, ~,
      * ARRAY, . (dot), MEMBER (static member access).
      * Otherwise, the object should be an instance of a subclass.
@@ -31,59 +32,71 @@ public class Expr extends ASTList implements TokenId {
 
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    protected int operatorId;
 
-    Expr(int op, ASTree _head, ASTList _tail) {
+    protected int             operatorId;
+
+    Expr(int op, ASTree _head, ASTList _tail){
         super(_head, _tail);
         operatorId = op;
     }
 
-    Expr(int op, ASTree _head) {
+    Expr(int op, ASTree _head){
         super(_head);
         operatorId = op;
     }
 
-    public static Expr make(int op, ASTree oprand1, ASTree oprand2) {
+    public static Expr make(int op,ASTree oprand1,ASTree oprand2){
         return new Expr(op, oprand1, new ASTList(oprand2));
     }
 
-    public static Expr make(int op, ASTree oprand1) {
+    public static Expr make(int op,ASTree oprand1){
         return new Expr(op, oprand1);
     }
 
-    public int getOperator() { return operatorId; }
+    public int getOperator(){
+        return operatorId;
+    }
 
-    public void setOperator(int op) { operatorId = op; }
+    public void setOperator(int op){
+        operatorId = op;
+    }
 
-    public ASTree oprand1() { return getLeft(); }
+    public ASTree oprand1(){
+        return getLeft();
+    }
 
-    public void setOprand1(ASTree expr) {
+    public void setOprand1(ASTree expr){
         setLeft(expr);
     }
 
-    public ASTree oprand2() { return getRight().getLeft(); }
+    public ASTree oprand2(){
+        return getRight().getLeft();
+    }
 
-    public void setOprand2(ASTree expr) {
+    public void setOprand2(ASTree expr){
         getRight().setLeft(expr);
     }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atExpr(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atExpr(this);
+    }
 
-    public String getName() {
+    public String getName(){
         int id = operatorId;
-        if (id < 128)
-            return String.valueOf((char)id);
-        else if (NEQ <= id && id <= ARSHIFT_E)
+        if (id < 128){
+            return String.valueOf((char) id);
+        }else if (NEQ <= id && id <= ARSHIFT_E){
             return opNames[id - NEQ];
-        else if (id == INSTANCEOF)
+        }else if (id == INSTANCEOF){
             return "instanceof";
-        else
+        }else{
             return String.valueOf(id);
+        }
     }
 
     @Override
-    protected String getTag() {
+    protected String getTag(){
         return "op:" + getName();
     }
 }

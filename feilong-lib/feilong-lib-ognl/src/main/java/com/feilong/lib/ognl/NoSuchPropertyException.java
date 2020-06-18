@@ -39,9 +39,14 @@ package com.feilong.lib.ognl;
  */
 public class NoSuchPropertyException extends OgnlException{
 
-    private Object target;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 887515561208245132L;
 
-    private Object name;
+    private Object            target;
+
+    private Object            name;
 
     public NoSuchPropertyException(Object target, Object name){
         super(getReason(target, name));
@@ -56,12 +61,13 @@ public class NoSuchPropertyException extends OgnlException{
     static String getReason(Object target,Object name){
         String ret = null;
 
-        if (target == null)
+        if (target == null){
             ret = "null";
-        else if (target instanceof Class)
+        }else if (target instanceof Class){
             ret = ((Class) target).getName();
-        else
+        }else{
             ret = target.getClass().getName();
+        }
 
         ret += "." + name;
 

@@ -29,11 +29,12 @@ import com.feilong.lib.javassist.bytecode.MethodInfo;
  *
  * @see NewExpr
  */
-public class ConstructorCall extends MethodCall {
+public class ConstructorCall extends MethodCall{
+
     /**
-     * Undocumented constructor.  Do not use; internal-use only.
+     * Undocumented constructor. Do not use; internal-use only.
      */
-    protected ConstructorCall(int pos, CodeIterator i, CtClass decl, MethodInfo m) {
+    protected ConstructorCall(int pos, CodeIterator i, CtClass decl, MethodInfo m){
         super(pos, i, decl, m);
     }
 
@@ -41,7 +42,7 @@ public class ConstructorCall extends MethodCall {
      * Returns <code>"super"</code> or "<code>"this"</code>.
      */
     @Override
-    public String getMethodName() {
+    public String getMethodName(){
         return isSuper() ? "super" : "this";
     }
 
@@ -51,14 +52,14 @@ public class ConstructorCall extends MethodCall {
      * @see #getConstructor()
      */
     @Override
-    public CtMethod getMethod() throws NotFoundException {
+    public CtMethod getMethod() throws NotFoundException{
         throw new NotFoundException("this is a constructor call.  Call getConstructor().");
     }
 
     /**
      * Returns the called constructor.
      */
-    public CtConstructor getConstructor() throws NotFoundException {
+    public CtConstructor getConstructor() throws NotFoundException{
         return getCtClass().getConstructor(getSignature());
     }
 
@@ -67,7 +68,7 @@ public class ConstructorCall extends MethodCall {
      * but <code>super()</code> (a constructor declared in the super class).
      */
     @Override
-    public boolean isSuper() {
+    public boolean isSuper(){
         return super.isSuper();
     }
 }

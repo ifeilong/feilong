@@ -82,14 +82,7 @@ public class WeakCache extends AbstractMap{
 
     @Override
     public boolean containsValue(final Object value){
-        Boolean result = (Boolean) iterate(new Visitor(){
-
-            @Override
-            public Object visit(Object element){
-                return element.equals(value) ? Boolean.TRUE : null;
-            }
-
-        }, 0);
+        Boolean result = (Boolean) iterate(element -> element.equals(value) ? Boolean.TRUE : null, 0);
         return result == Boolean.TRUE;
     }
 
@@ -100,14 +93,9 @@ public class WeakCache extends AbstractMap{
         }
         final int i[] = new int[1];
         i[0] = 0;
-        iterate(new Visitor(){
-
-            @Override
-            public Object visit(Object element){
-                ++i[0];
-                return null;
-            }
-
+        iterate(element -> {
+            ++i[0];
+            return null;
         }, 0);
         return i[0];
     }
@@ -116,14 +104,9 @@ public class WeakCache extends AbstractMap{
     public Collection values(){
         final Collection collection = new ArrayList();
         if (map.size() != 0){
-            iterate(new Visitor(){
-
-                @Override
-                public Object visit(Object element){
-                    collection.add(element);
-                    return null;
-                }
-
+            iterate(element -> {
+                collection.add(element);
+                return null;
             }, 0);
         }
         return collection;
@@ -133,33 +116,28 @@ public class WeakCache extends AbstractMap{
     public Set entrySet(){
         final Set set = new HashSet();
         if (map.size() != 0){
-            iterate(new Visitor(){
+            iterate(element -> {
+                final Map.Entry entry = (Map.Entry) element;
+                set.add(new Map.Entry(){
 
-                @Override
-                public Object visit(Object element){
-                    final Map.Entry entry = (Map.Entry) element;
-                    set.add(new Map.Entry(){
+                    @Override
+                    public Object getKey(){
+                        return entry.getKey();
+                    }
 
-                        @Override
-                        public Object getKey(){
-                            return entry.getKey();
-                        }
+                    @Override
+                    public Object getValue(){
+                        return ((Reference) entry.getValue()).get();
+                    }
 
-                        @Override
-                        public Object getValue(){
-                            return ((Reference) entry.getValue()).get();
-                        }
+                    @Override
+                    public Object setValue(Object value){
+                        Reference reference = (Reference) entry.setValue(createReference(value));
+                        return reference != null ? reference.get() : null;
+                    }
 
-                        @Override
-                        public Object setValue(Object value){
-                            Reference reference = (Reference) entry.setValue(createReference(value));
-                            return reference != null ? reference.get() : null;
-                        }
-
-                    });
-                    return null;
-                }
-
+                });
+                return null;
             }, 2);
         }
         return set;

@@ -53,8 +53,9 @@ public class CannotCompileException extends Exception{
      * Gets a long message if it is available.
      */
     public String getReason(){
-        if (message != null)
+        if (message != null){
             return message;
+        }
         return this.toString();
     }
 

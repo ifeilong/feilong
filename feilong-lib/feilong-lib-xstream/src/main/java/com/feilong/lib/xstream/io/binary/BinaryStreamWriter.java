@@ -12,15 +12,14 @@
 package com.feilong.lib.xstream.io.binary;
 
 import java.io.DataOutputStream;
-import java.io.OutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.feilong.lib.xstream.io.ExtendedHierarchicalStreamWriter;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.io.StreamException;
-
-import java.util.HashMap;
 
 /**
  * @since 1.2

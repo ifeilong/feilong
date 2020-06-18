@@ -28,16 +28,20 @@ import com.feilong.lib.javassist.bytecode.annotation.MemberValue;
 /**
  * A class representing <code>AnnotationDefault_attribute</code>.
  *
- * <p>For example, if you declare the following annotation type:
+ * <p>
+ * For example, if you declare the following annotation type:
  *
  * <pre>
- * &#64;interface Author {
- *   String name() default "Shakespeare";
- *   int age() default 99;
+ * &#64;interface Author{
+ * 
+ *     String name() default "Shakespeare";
+ * 
+ *     int age() default 99;
  * }
  * </pre>
  *
- * <p>The defautl values of <code>name</code> and <code>age</code>
+ * <p>
+ * The defautl values of <code>name</code> and <code>age</code>
  * are stored as annotation default attributes in <code>Author.class</code>.
  * The following code snippet obtains the default value of <code>name</code>:
  * 
@@ -52,7 +56,8 @@ import com.feilong.lib.javassist.bytecode.annotation.MemberValue;
  * MemberValue value = ada.getDefaultValue());    // default value of age
  * </pre>
  *
- * <p>If the following statement is executed after the code above,
+ * <p>
+ * If the following statement is executed after the code above,
  * the default value of age is set to 80:
  *
  * <pre>
@@ -63,7 +68,8 @@ import com.feilong.lib.javassist.bytecode.annotation.MemberValue;
  * @see com.feilong.lib.javassist.bytecode.annotation.MemberValue
  */
 
-public class AnnotationDefaultAttribute extends AttributeInfo {
+public class AnnotationDefaultAttribute extends AttributeInfo{
+
     /**
      * The name of the <code>AnnotationDefault</code> attribute.
      */
@@ -72,12 +78,14 @@ public class AnnotationDefaultAttribute extends AttributeInfo {
     /**
      * Constructs an <code>AnnotationDefault_attribute</code>.
      *
-     * @param cp            constant pool
-     * @param info          the contents of this attribute.  It does not
-     *                      include <code>attribute_name_index</code> or
-     *                      <code>attribute_length</code>.
+     * @param cp
+     *            constant pool
+     * @param info
+     *            the contents of this attribute. It does not
+     *            include <code>attribute_name_index</code> or
+     *            <code>attribute_length</code>.
      */
-    public AnnotationDefaultAttribute(ConstPool cp, byte[] info) {
+    public AnnotationDefaultAttribute(ConstPool cp, byte[] info){
         super(cp, tag, info);
     }
 
@@ -85,19 +93,19 @@ public class AnnotationDefaultAttribute extends AttributeInfo {
      * Constructs an empty <code>AnnotationDefault_attribute</code>.
      * The default value can be set by <code>setDefaultValue()</code>.
      *
-     * @param cp            constant pool
+     * @param cp
+     *            constant pool
      * @see #setDefaultValue(com.feilong.lib.javassist.bytecode.annotation.MemberValue)
      */
-    public AnnotationDefaultAttribute(ConstPool cp) {
+    public AnnotationDefaultAttribute(ConstPool cp){
         this(cp, new byte[] { 0, 0 });
     }
 
     /**
-     * @param n     the attribute name.
+     * @param n
+     *            the attribute name.
      */
-    AnnotationDefaultAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    AnnotationDefaultAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
@@ -105,14 +113,12 @@ public class AnnotationDefaultAttribute extends AttributeInfo {
      * Copies this attribute and returns a new copy.
      */
     @Override
-    public AttributeInfo copy(ConstPool newCp, Map<String,String> classnames) {
-        AnnotationsAttribute.Copier copier
-            = new AnnotationsAttribute.Copier(info, constPool, newCp, classnames);
-        try {
+    public AttributeInfo copy(ConstPool newCp,Map<String, String> classnames){
+        AnnotationsAttribute.Copier copier = new AnnotationsAttribute.Copier(info, constPool, newCp, classnames);
+        try{
             copier.memberValue(0);
             return new AnnotationDefaultAttribute(newCp, copier.close());
-        }
-        catch (Exception e) {
+        }catch (Exception e){
             throw new RuntimeException(e.toString());
         }
     }
@@ -120,43 +126,40 @@ public class AnnotationDefaultAttribute extends AttributeInfo {
     /**
      * Obtains the default value represented by this attribute.
      */
-    public MemberValue getDefaultValue()
-    {
-       try {
-           return new AnnotationsAttribute.Parser(info, constPool)
-                                          .parseMemberValue();
-       }
-       catch (Exception e) {
-           throw new RuntimeException(e.toString());
-       }
+    public MemberValue getDefaultValue(){
+        try{
+            return new AnnotationsAttribute.Parser(info, constPool).parseMemberValue();
+        }catch (Exception e){
+            throw new RuntimeException(e.toString());
+        }
     }
 
     /**
      * Changes the default value represented by this attribute.
      *
-     * @param value         the new value.
+     * @param value
+     *            the new value.
      * @see com.feilong.lib.javassist.bytecode.annotation.Annotation#createMemberValue(ConstPool, CtClass)
      */
-    public void setDefaultValue(MemberValue value) {
+    public void setDefaultValue(MemberValue value){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         AnnotationsWriter writer = new AnnotationsWriter(output, constPool);
-        try {
+        try{
             value.write(writer);
             writer.close();
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);      // should never reach here.
+        }catch (IOException e){
+            throw new RuntimeException(e); // should never reach here.
         }
 
         set(output.toByteArray());
-        
+
     }
 
     /**
      * Returns a string representation of this object.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return getDefaultValue().toString();
     }
 }

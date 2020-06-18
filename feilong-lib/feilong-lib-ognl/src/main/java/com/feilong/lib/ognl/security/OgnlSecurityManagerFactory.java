@@ -15,23 +15,24 @@ import java.security.SecureClassLoader;
  * @author Yasser Zamani
  * @since 3.1.24
  */
-public class OgnlSecurityManagerFactory extends SecureClassLoader {
+public class OgnlSecurityManagerFactory extends SecureClassLoader{
+
     private static Object ognlSecurityManager;
 
-    private Class<?> ognlSecurityManagerClass;
+    private Class<?>      ognlSecurityManagerClass;
 
-    public static Object getOgnlSecurityManager() {
-        if (ognlSecurityManager == null) {
-            synchronized (SecurityManager.class) {
-                if (ognlSecurityManager == null) {
+    public static Object getOgnlSecurityManager(){
+        if (ognlSecurityManager == null){
+            synchronized (SecurityManager.class){
+                if (ognlSecurityManager == null){
                     SecurityManager sm = System.getSecurityManager();
-                    if (sm == null || !sm.getClass().getName().equals(OgnlSecurityManager.class.getName())) {
-                        try {
+                    if (sm == null || !sm.getClass().getName().equals(OgnlSecurityManager.class.getName())){
+                        try{
                             ognlSecurityManager = new OgnlSecurityManagerFactory().build(sm);
-                        } catch (Exception ignored) {
+                        }catch (Exception ignored){
                             // not expected at all; anyway keep and return null as ognlSecurityManager
                         }
-                    } else {
+                    }else{
                         ognlSecurityManager = sm;
                     }
                 }
@@ -40,29 +41,28 @@ public class OgnlSecurityManagerFactory extends SecureClassLoader {
         return ognlSecurityManager;
     }
 
-    private OgnlSecurityManagerFactory() throws IOException {
+    private OgnlSecurityManagerFactory() throws IOException{
         super(OgnlSecurityManagerFactory.class.getClassLoader());
 
         PermissionCollection pc = new AllPermission().newPermissionCollection();
         pc.add(new AllPermission()); // grant all permissions to simulate JDK itself SecurityManager
         ProtectionDomain pd = new ProtectionDomain(null, pc);
 
-        byte[] byteArray = toByteArray(getParent().getResourceAsStream(
-                OgnlSecurityManager.class.getName().replace('.', '/') + ".class"));
+        byte[] byteArray = toByteArray(getParent().getResourceAsStream(OgnlSecurityManager.class.getName().replace('.', '/') + ".class"));
         ognlSecurityManagerClass = defineClass(null, byteArray, 0, byteArray.length, pd);
     }
 
-    private Object build(SecurityManager parentSecurityManager) throws NoSuchMethodException, IllegalAccessException,
-            InvocationTargetException, InstantiationException {
+    private Object build(SecurityManager parentSecurityManager)
+                    throws NoSuchMethodException,IllegalAccessException,InvocationTargetException,InstantiationException{
 
         return ognlSecurityManagerClass.getConstructor(SecurityManager.class).newInstance(parentSecurityManager);
     }
 
-    private static byte[] toByteArray(InputStream input) throws IOException {
+    private static byte[] toByteArray(InputStream input) throws IOException{
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         int n;
         byte[] buffer = new byte[4096];
-        while(-1 != (n = input.read(buffer))) {
+        while (-1 != (n = input.read(buffer))){
             output.write(buffer, 0, n);
         }
 

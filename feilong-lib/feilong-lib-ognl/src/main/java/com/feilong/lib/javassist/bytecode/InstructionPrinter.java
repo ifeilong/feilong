@@ -24,41 +24,43 @@ import com.feilong.lib.javassist.CtMethod;
  *
  * @author Jason T. Greene
  */
-public class InstructionPrinter implements Opcode {
+public class InstructionPrinter implements Opcode{
 
     private final static String opcodes[] = Mnemonic.OPCODE;
-    private final PrintStream stream;
+
+    private final PrintStream   stream;
 
     /**
      * Constructs a <code>InstructionPrinter</code> object.
      */
-    public InstructionPrinter(PrintStream stream) {
+    public InstructionPrinter(PrintStream stream){
         this.stream = stream;
     }
 
     /**
      * Prints the bytecode instructions of a given method.
      */
-    public static void print(CtMethod method, PrintStream stream) {
+    public static void print(CtMethod method,PrintStream stream){
         (new InstructionPrinter(stream)).print(method);
     }
 
     /**
      * Prints the bytecode instructions of a given method.
      */
-    public void print(CtMethod method) {
+    public void print(CtMethod method){
         MethodInfo info = method.getMethodInfo2();
         ConstPool pool = info.getConstPool();
         CodeAttribute code = info.getCodeAttribute();
-        if (code == null)
+        if (code == null){
             return;
+        }
 
         CodeIterator iterator = code.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()){
             int pos;
-            try {
+            try{
                 pos = iterator.next();
-            } catch (BadBytecode e) {
+            }catch (BadBytecode e){
                 throw new RuntimeException(e);
             }
 
@@ -68,13 +70,14 @@ public class InstructionPrinter implements Opcode {
 
     /**
      * Gets a string representation of the bytecode instruction at the specified
-     * position. 
+     * position.
      */
-    public static String instructionString(CodeIterator iter, int pos, ConstPool pool) {
+    public static String instructionString(CodeIterator iter,int pos,ConstPool pool){
         int opcode = iter.byteAt(pos);
 
-        if (opcode > opcodes.length || opcode < 0)
-            throw new IllegalArgumentException("Invalid opcode, opcode: " + opcode + " pos: "+ pos);
+        if (opcode > opcodes.length || opcode < 0){
+            throw new IllegalArgumentException("Invalid opcode, opcode: " + opcode + " pos: " + pos);
+        }
 
         String opstring = opcodes[opcode];
         switch (opcode) {
@@ -84,8 +87,8 @@ public class InstructionPrinter implements Opcode {
                 return opstring + " " + iter.s16bitAt(pos + 1);
             case LDC:
                 return opstring + " " + ldc(pool, iter.byteAt(pos + 1));
-            case LDC_W :
-            case LDC2_W :
+            case LDC_W:
+            case LDC2_W:
                 return opstring + " " + ldc(pool, iter.u16bitAt(pos + 1));
             case ILOAD:
             case LLOAD:
@@ -152,14 +155,13 @@ public class InstructionPrinter implements Opcode {
                 return opstring + " " + classInfo(pool, iter.u16bitAt(pos + 1));
             case GOTO_W:
             case JSR_W:
-                return opstring + " " + (iter.s32bitAt(pos + 1)+ pos);
+                return opstring + " " + (iter.s32bitAt(pos + 1) + pos);
             default:
                 return opstring;
         }
     }
 
-
-    private static String wide(CodeIterator iter, int pos) {
+    private static String wide(CodeIterator iter,int pos){
         int opcode = iter.byteAt(pos + 1);
         int index = iter.u16bitAt(pos + 2);
         switch (opcode) {
@@ -181,8 +183,7 @@ public class InstructionPrinter implements Opcode {
         }
     }
 
-
-    private static String arrayInfo(int type) {
+    private static String arrayInfo(int type){
         switch (type) {
             case T_BOOLEAN:
                 return "boolean";
@@ -205,36 +206,26 @@ public class InstructionPrinter implements Opcode {
         }
     }
 
-
-    private static String classInfo(ConstPool pool, int index) {
+    private static String classInfo(ConstPool pool,int index){
         return "#" + index + " = Class " + pool.getClassInfo(index);
     }
 
-
-    private static String interfaceMethodInfo(ConstPool pool, int index) {
-        return "#" + index + " = Method "
-                + pool.getInterfaceMethodrefClassName(index) + "."
-                + pool.getInterfaceMethodrefName(index) + "("
-                + pool.getInterfaceMethodrefType(index) + ")";
+    private static String interfaceMethodInfo(ConstPool pool,int index){
+        return "#" + index + " = Method " + pool.getInterfaceMethodrefClassName(index) + "." + pool.getInterfaceMethodrefName(index) + "("
+                        + pool.getInterfaceMethodrefType(index) + ")";
     }
 
-    private static String methodInfo(ConstPool pool, int index) {
-        return "#" + index + " = Method "
-                + pool.getMethodrefClassName(index) + "."
-                + pool.getMethodrefName(index) + "("
-                + pool.getMethodrefType(index) + ")";
+    private static String methodInfo(ConstPool pool,int index){
+        return "#" + index + " = Method " + pool.getMethodrefClassName(index) + "." + pool.getMethodrefName(index) + "("
+                        + pool.getMethodrefType(index) + ")";
     }
 
-
-    private static String fieldInfo(ConstPool pool, int index) {
-        return "#" + index + " = Field "
-            + pool.getFieldrefClassName(index) + "."
-            + pool.getFieldrefName(index) + "("
-            + pool.getFieldrefType(index) + ")";
+    private static String fieldInfo(ConstPool pool,int index){
+        return "#" + index + " = Field " + pool.getFieldrefClassName(index) + "." + pool.getFieldrefName(index) + "("
+                        + pool.getFieldrefType(index) + ")";
     }
 
-
-    private static String lookupSwitch(CodeIterator iter, int pos) {
+    private static String lookupSwitch(CodeIterator iter,int pos){
         StringBuffer buffer = new StringBuffer("lookupswitch {\n");
         int index = (pos & ~3) + 4;
         // default
@@ -242,7 +233,7 @@ public class InstructionPrinter implements Opcode {
         int npairs = iter.s32bitAt(index += 4);
         int end = npairs * 8 + (index += 4);
 
-        for (; index < end; index += 8) {
+        for (; index < end; index += 8){
             int match = iter.s32bitAt(index);
             int target = iter.s32bitAt(index + 4) + pos;
             buffer.append("\t\t").append(match).append(": ").append(target).append("\n");
@@ -252,8 +243,7 @@ public class InstructionPrinter implements Opcode {
         return buffer.toString();
     }
 
-
-    private static String tableSwitch(CodeIterator iter, int pos) {
+    private static String tableSwitch(CodeIterator iter,int pos){
         StringBuffer buffer = new StringBuffer("tableswitch {\n");
         int index = (pos & ~3) + 4;
         // default
@@ -263,7 +253,7 @@ public class InstructionPrinter implements Opcode {
         int end = (high - low + 1) * 4 + (index += 4);
 
         // Offset table
-        for (int key = low; index < end; index += 4, key++) {
+        for (int key = low; index < end; index += 4, key++){
             int target = iter.s32bitAt(index) + pos;
             buffer.append("\t\t").append(key).append(": ").append(target).append("\n");
         }
@@ -272,8 +262,7 @@ public class InstructionPrinter implements Opcode {
         return buffer.toString();
     }
 
-
-    private static String ldc(ConstPool pool, int index) {
+    private static String ldc(ConstPool pool,int index){
         int tag = pool.getTag(index);
         switch (tag) {
             case ConstPool.CONST_String:

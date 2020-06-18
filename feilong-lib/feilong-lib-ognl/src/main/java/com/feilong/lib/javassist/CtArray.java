@@ -57,8 +57,9 @@ final class CtArray extends CtClass{
             // java.lang.Cloneable and java.io.Serializable.
             // If the JVM is CLDC, intfs is empty.
             interfaces = new CtClass[intfs.length];
-            for (int i = 0; i < intfs.length; i++)
+            for (int i = 0; i < intfs.length; i++){
                 interfaces[i] = pool.get(intfs[i].getName());
+            }
         }
 
         return interfaces;
@@ -66,17 +67,21 @@ final class CtArray extends CtClass{
 
     @Override
     public boolean subtypeOf(CtClass clazz) throws NotFoundException{
-        if (super.subtypeOf(clazz))
+        if (super.subtypeOf(clazz)){
             return true;
+        }
 
         String cname = clazz.getName();
-        if (cname.equals(javaLangObject))
+        if (cname.equals(javaLangObject)){
             return true;
+        }
 
         CtClass[] intfs = getInterfaces();
-        for (int i = 0; i < intfs.length; i++)
-            if (intfs[i].subtypeOf(clazz))
+        for (CtClass intf : intfs){
+            if (intf.subtypeOf(clazz)){
                 return true;
+            }
+        }
 
         return clazz.isArray() && getComponentType().subtypeOf(clazz.getComponentType());
     }

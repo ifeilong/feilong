@@ -115,8 +115,9 @@ public class Path{
         if (pathAsString == null){
             StringBuffer buffer = new StringBuffer();
             for (int i = 0; i < chunks.length; i++){
-                if (i > 0)
+                if (i > 0){
                     buffer.append('/');
+                }
                 buffer.append(chunks[i]);
             }
             pathAsString = buffer.toString();
@@ -128,8 +129,9 @@ public class Path{
         if (pathExplicit == null){
             StringBuffer buffer = new StringBuffer();
             for (int i = 0; i < chunks.length; i++){
-                if (i > 0)
+                if (i > 0){
                     buffer.append('/');
+                }
                 String chunk = chunks[i];
                 buffer.append(chunk);
                 int length = chunk.length();
@@ -147,17 +149,21 @@ public class Path{
 
     @Override
     public boolean equals(Object o){
-        if (this == o)
+        if (this == o){
             return true;
-        if (!(o instanceof Path))
+        }
+        if (!(o instanceof Path)){
             return false;
+        }
 
         final Path other = (Path) o;
-        if (chunks.length != other.chunks.length)
+        if (chunks.length != other.chunks.length){
             return false;
+        }
         for (int i = 0; i < chunks.length; i++){
-            if (!chunks[i].equals(other.chunks[i]))
+            if (!chunks[i].equals(other.chunks[i])){
                 return false;
+            }
         }
 
         return true;
@@ -166,8 +172,8 @@ public class Path{
     @Override
     public int hashCode(){
         int result = 543645643;
-        for (int i = 0; i < chunks.length; i++){
-            result = 29 * result + chunks[i].hashCode();
+        for (String chunk : chunks){
+            result = 29 * result + chunk.hashCode();
         }
         return result;
     }
@@ -204,12 +210,11 @@ public class Path{
     public Path apply(Path relativePath){
         FastStack absoluteStack = new FastStack(16);
 
-        for (int i = 0; i < chunks.length; i++){
-            absoluteStack.push(chunks[i]);
+        for (String chunk : chunks){
+            absoluteStack.push(chunk);
         }
 
-        for (int i = 0; i < relativePath.chunks.length; i++){
-            String relativeChunk = relativePath.chunks[i];
+        for (String relativeChunk : relativePath.chunks){
             if (relativeChunk.equals("..")){
                 absoluteStack.pop();
             }else if (!relativeChunk.equals(".")){

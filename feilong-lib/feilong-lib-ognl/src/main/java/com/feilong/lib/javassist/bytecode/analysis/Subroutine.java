@@ -26,43 +26,46 @@ import java.util.Set;
  *
  * @author Jason T. Greene
  */
-public class Subroutine {
-    //private Set callers = new HashSet();
-    private List<Integer> callers = new ArrayList<Integer>();
-    private Set<Integer> access = new HashSet<Integer>();
-    private int start;
+public class Subroutine{
 
-    public Subroutine(int start, int caller) {
+    //private Set callers = new HashSet();
+    private List<Integer> callers = new ArrayList<>();
+
+    private Set<Integer>  access  = new HashSet<>();
+
+    private int           start;
+
+    public Subroutine(int start, int caller){
         this.start = start;
         callers.add(caller);
     }
 
-    public void addCaller(int caller) {
+    public void addCaller(int caller){
         callers.add(caller);
     }
 
-    public int start() {
+    public int start(){
         return start;
     }
 
-    public void access(int index) {
+    public void access(int index){
         access.add(index);
     }
 
-    public boolean isAccessed(int index) {
+    public boolean isAccessed(int index){
         return access.contains(index);
     }
 
-    public Collection<Integer> accessed() {
+    public Collection<Integer> accessed(){
         return access;
     }
 
-    public Collection<Integer> callers() {
+    public Collection<Integer> callers(){
         return callers;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "start = " + start + " callers = " + callers.toString();
     }
 }

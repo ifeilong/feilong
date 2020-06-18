@@ -44,8 +44,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         // Otherwise, it's an octal number.  Find the backslash and convert.
         while (image.charAt(--ofs) != '\\'){}
         int value = 0;
-        while (++ofs < image.length())
+        while (++ofs < image.length()){
             value = (value << 3) | (image.charAt(ofs) - '0');
+        }
         return (char) value;
     }
 
@@ -54,10 +55,12 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         String s = image.toString();
         int base = 10;
 
-        if (s.charAt(0) == '0')
+        if (s.charAt(0) == '0'){
             base = (s.length() > 1 && (s.charAt(1) == 'x' || s.charAt(1) == 'X')) ? 16 : 8;
-        if (base == 16)
+        }
+        if (base == 16){
             s = s.substring(2); // Trim the 0x off the front
+        }
         switch (s.charAt(s.length() - 1)) {
             case 'l':
             case 'L':
@@ -114,12 +117,15 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     jjmatchedKind = 64;
                     return 1;
                 }
-                if ((active0 & 0x400000000000000L) != 0L)
+                if ((active0 & 0x400000000000000L) != 0L){
                     return 1;
-                if ((active0 & 0x10000000000000L) != 0L)
+                }
+                if ((active0 & 0x10000000000000L) != 0L){
                     return 3;
-                if ((active0 & 0x80000000000L) != 0L)
+                }
+                if ((active0 & 0x80000000000L) != 0L){
                     return 9;
+                }
                 return -1;
             case 1:
                 if ((active0 & 0x201c00550045500L) != 0L){
@@ -129,8 +135,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     }
                     return 1;
                 }
-                if ((active0 & 0x4000d510040L) != 0L)
+                if ((active0 & 0x4000d510040L) != 0L){
                     return 1;
+                }
                 return -1;
             case 2:
                 if ((active0 & 0x1c40400004000L) != 0L){
@@ -138,12 +145,14 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     jjmatchedPos = 2;
                     return 1;
                 }
-                if ((active0 & 0x200000155041500L) != 0L)
+                if ((active0 & 0x200000155041500L) != 0L){
                     return 1;
+                }
                 return -1;
             case 3:
-                if ((active0 & 0x1400400004000L) != 0L)
+                if ((active0 & 0x1400400004000L) != 0L){
                     return 1;
+                }
                 if ((active0 & 0x840000000000L) != 0L){
                     jjmatchedKind = 64;
                     jjmatchedPos = 3;
@@ -151,8 +160,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 }
                 return -1;
             case 4:
-                if ((active0 & 0x800000000000L) != 0L)
+                if ((active0 & 0x800000000000L) != 0L){
                     return 1;
+                }
                 if ((active0 & 0x40000000000L) != 0L){
                     jjmatchedKind = 64;
                     jjmatchedPos = 4;
@@ -309,22 +319,25 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         }
         switch (curChar) {
             case 38:
-                if ((active0 & 0x80L) != 0L)
+                if ((active0 & 0x80L) != 0L){
                     return jjStopAtPos(1, 7);
+                }
                 break;
             case 60:
-                if ((active0 & 0x20000000L) != 0L)
+                if ((active0 & 0x20000000L) != 0L){
                     return jjStopAtPos(1, 29);
+                }
                 break;
             case 61:
-                if ((active0 & 0x8000L) != 0L)
+                if ((active0 & 0x8000L) != 0L){
                     return jjStopAtPos(1, 15);
-                else if ((active0 & 0x20000L) != 0L)
+                }else if ((active0 & 0x20000L) != 0L){
                     return jjStopAtPos(1, 17);
-                else if ((active0 & 0x800000L) != 0L)
+                }else if ((active0 & 0x800000L) != 0L){
                     return jjStopAtPos(1, 23);
-                else if ((active0 & 0x2000000L) != 0L)
+                }else if ((active0 & 0x2000000L) != 0L){
                     return jjStopAtPos(1, 25);
+                }
                 break;
             case 62:
                 if ((active0 & 0x80000000L) != 0L){
@@ -347,12 +360,14 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
             case 111:
                 return jjMoveStringLiteralDfa2_0(active0, 0x10001400L);
             case 113:
-                if ((active0 & 0x10000L) != 0L)
+                if ((active0 & 0x10000L) != 0L){
                     return jjStartNfaWithStates_0(1, 16, 1);
+                }
                 break;
             case 114:
-                if ((active0 & 0x40L) != 0L)
+                if ((active0 & 0x40L) != 0L){
                     return jjStartNfaWithStates_0(1, 6, 1);
+                }
                 return jjMoveStringLiteralDfa2_0(active0, 0x4400000000000L);
             case 115:
                 return jjMoveStringLiteralDfa2_0(active0, 0x400000000L);
@@ -368,8 +383,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
             case 117:
                 return jjMoveStringLiteralDfa2_0(active0, 0x1000000000000L);
             case 124:
-                if ((active0 & 0x20L) != 0L)
+                if ((active0 & 0x20L) != 0L){
                     return jjStopAtPos(1, 5);
+                }
                 break;
             default:
                 break;
@@ -378,8 +394,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa2_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(0, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -388,52 +405,60 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         }
         switch (curChar) {
             case 62:
-                if ((active0 & 0x200000000L) != 0L)
+                if ((active0 & 0x200000000L) != 0L){
                     return jjStopAtPos(2, 33);
+                }
                 break;
             case 100:
-                if ((active0 & 0x100L) != 0L)
+                if ((active0 & 0x100L) != 0L){
                     return jjStartNfaWithStates_0(2, 8, 1);
+                }
                 break;
             case 101:
-                if ((active0 & 0x1000000L) != 0L)
+                if ((active0 & 0x1000000L) != 0L){
                     return jjStartNfaWithStates_0(2, 24, 1);
-                else if ((active0 & 0x4000000L) != 0L)
+                }else if ((active0 & 0x4000000L) != 0L){
                     return jjStartNfaWithStates_0(2, 26, 1);
+                }
                 break;
             case 104:
                 return jjMoveStringLiteralDfa3_0(active0, 0x2000400000000L);
             case 108:
-                if ((active0 & 0x40000000L) != 0L)
+                if ((active0 & 0x40000000L) != 0L){
                     return jjStartNfaWithStates_0(2, 30, 1);
+                }
                 return jjMoveStringLiteralDfa3_0(active0, 0x1800000000000L);
             case 110:
                 return jjMoveStringLiteralDfa3_0(active0, 0x4000L);
             case 111:
                 return jjMoveStringLiteralDfa3_0(active0, 0x4000000000000L);
             case 113:
-                if ((active0 & 0x40000L) != 0L)
+                if ((active0 & 0x40000L) != 0L){
                     return jjStartNfaWithStates_0(2, 18, 1);
+                }
                 break;
             case 114:
-                if ((active0 & 0x400L) != 0L)
+                if ((active0 & 0x400L) != 0L){
                     return jjStartNfaWithStates_0(2, 10, 1);
-                else if ((active0 & 0x1000L) != 0L)
+                }else if ((active0 & 0x1000L) != 0L){
                     return jjStartNfaWithStates_0(2, 12, 1);
-                else if ((active0 & 0x100000000L) != 0L)
+                }else if ((active0 & 0x100000000L) != 0L){
                     return jjStartNfaWithStates_0(2, 32, 1);
+                }
                 break;
             case 115:
                 return jjMoveStringLiteralDfa3_0(active0, 0x40000000000L);
             case 116:
-                if ((active0 & 0x10000000L) != 0L)
+                if ((active0 & 0x10000000L) != 0L){
                     return jjStartNfaWithStates_0(2, 28, 1);
+                }
                 break;
             case 117:
                 return jjMoveStringLiteralDfa3_0(active0, 0x400000000000L);
             case 119:
-                if ((active0 & 0x200000000000000L) != 0L)
+                if ((active0 & 0x200000000000000L) != 0L){
                     return jjStartNfaWithStates_0(2, 57, 1);
+                }
                 break;
             default:
                 break;
@@ -442,8 +467,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa3_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(1, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -452,24 +478,28 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         }
         switch (curChar) {
             case 100:
-                if ((active0 & 0x4000L) != 0L)
+                if ((active0 & 0x4000L) != 0L){
                     return jjStartNfaWithStates_0(3, 14, 1);
+                }
                 break;
             case 101:
-                if ((active0 & 0x400000000000L) != 0L)
+                if ((active0 & 0x400000000000L) != 0L){
                     return jjStartNfaWithStates_0(3, 46, 1);
+                }
                 break;
             case 105:
                 return jjMoveStringLiteralDfa4_0(active0, 0x2000000000000L);
             case 108:
-                if ((active0 & 0x1000000000000L) != 0L)
+                if ((active0 & 0x1000000000000L) != 0L){
                     return jjStartNfaWithStates_0(3, 48, 1);
+                }
                 break;
             case 111:
                 return jjMoveStringLiteralDfa4_0(active0, 0x4000000000000L);
             case 114:
-                if ((active0 & 0x400000000L) != 0L)
+                if ((active0 & 0x400000000L) != 0L){
                     return jjStartNfaWithStates_0(3, 34, 1);
+                }
                 break;
             case 115:
                 return jjMoveStringLiteralDfa4_0(active0, 0x800000000000L);
@@ -482,8 +512,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa4_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(2, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -494,16 +525,19 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
             case 97:
                 return jjMoveStringLiteralDfa5_0(active0, 0x40000000000L);
             case 101:
-                if ((active0 & 0x800000000000L) != 0L)
+                if ((active0 & 0x800000000000L) != 0L){
                     return jjStartNfaWithStates_0(4, 47, 1);
+                }
                 break;
             case 115:
-                if ((active0 & 0x2000000000000L) != 0L)
+                if ((active0 & 0x2000000000000L) != 0L){
                     return jjStopAtPos(4, 49);
+                }
                 break;
             case 116:
-                if ((active0 & 0x4000000000000L) != 0L)
+                if ((active0 & 0x4000000000000L) != 0L){
                     return jjStopAtPos(4, 50);
+                }
                 break;
             default:
                 break;
@@ -512,8 +546,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa5_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(3, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -530,8 +565,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa6_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(4, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -548,8 +584,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa7_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(5, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -566,8 +603,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa8_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(6, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -584,8 +622,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     }
 
     private int jjMoveStringLiteralDfa9_0(long old0,long active0){
-        if (((active0 &= old0)) == 0L)
+        if (((active0 &= old0)) == 0L){
             return jjStartNfa_0(7, old0, 0L);
+        }
         try{
             curChar = input_stream.readChar();
         }catch (java.io.IOException e){
@@ -594,8 +633,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         }
         switch (curChar) {
             case 102:
-                if ((active0 & 0x40000000000L) != 0L)
+                if ((active0 & 0x40000000000L) != 0L){
                     return jjStartNfaWithStates_0(9, 42, 1);
+                }
                 break;
             default:
                 break;
@@ -635,139 +675,173 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         //int j; // not used
         int kind = 0x7fffffff;
         for (;;){
-            if (++jjround == 0x7fffffff)
+            if (++jjround == 0x7fffffff){
                 ReInitRounds();
+            }
             if (curChar < 64){
                 long l = 1L << curChar;
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if ((0x3ff000000000000L & l) != 0L)
+                            if ((0x3ff000000000000L & l) != 0L){
                                 jjCheckNAddStates(0, 5);
-                            else if (curChar == 46)
+                            }else if (curChar == 46){
                                 jjCheckNAdd(9);
-                            else if (curChar == 36){
-                                if (kind > 64)
+                            }else if (curChar == 36){
+                                if (kind > 64){
                                     kind = 64;
+                                }
                                 jjCheckNAdd(1);
                             }
                             if ((0x3fe000000000000L & l) != 0L){
-                                if (kind > 80)
+                                if (kind > 80){
                                     kind = 80;
+                                }
                                 jjCheckNAddTwoStates(6, 7);
                             }else if (curChar == 48){
-                                if (kind > 80)
+                                if (kind > 80){
                                     kind = 80;
+                                }
                                 jjCheckNAddStates(6, 8);
                             }
                             break;
                         case 1:
-                            if ((0x3ff001000000000L & l) == 0L)
+                            if ((0x3ff001000000000L & l) == 0L){
                                 break;
-                            if (kind > 64)
+                            }
+                            if (kind > 64){
                                 kind = 64;
+                            }
                             jjCheckNAdd(1);
                             break;
                         case 3:
-                            if ((0x41000000000L & l) != 0L)
+                            if ((0x41000000000L & l) != 0L){
                                 jjstateSet[jjnewStateCnt++] = 4;
+                            }
                             break;
                         case 5:
-                            if ((0x3fe000000000000L & l) == 0L)
+                            if ((0x3fe000000000000L & l) == 0L){
                                 break;
-                            if (kind > 80)
+                            }
+                            if (kind > 80){
                                 kind = 80;
+                            }
                             jjCheckNAddTwoStates(6, 7);
                             break;
                         case 6:
-                            if ((0x3ff000000000000L & l) == 0L)
+                            if ((0x3ff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 80)
+                            }
+                            if (kind > 80){
                                 kind = 80;
+                            }
                             jjCheckNAddTwoStates(6, 7);
                             break;
                         case 8:
-                            if (curChar == 46)
+                            if (curChar == 46){
                                 jjCheckNAdd(9);
+                            }
                             break;
                         case 9:
-                            if ((0x3ff000000000000L & l) == 0L)
+                            if ((0x3ff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 81)
+                            }
+                            if (kind > 81){
                                 kind = 81;
+                            }
                             jjCheckNAddStates(9, 11);
                             break;
                         case 11:
-                            if ((0x280000000000L & l) != 0L)
+                            if ((0x280000000000L & l) != 0L){
                                 jjCheckNAdd(12);
+                            }
                             break;
                         case 12:
-                            if ((0x3ff000000000000L & l) == 0L)
+                            if ((0x3ff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 81)
+                            }
+                            if (kind > 81){
                                 kind = 81;
+                            }
                             jjCheckNAddTwoStates(12, 13);
                             break;
                         case 14:
-                            if ((0x3ff000000000000L & l) != 0L)
+                            if ((0x3ff000000000000L & l) != 0L){
                                 jjCheckNAddStates(0, 5);
+                            }
                             break;
                         case 15:
-                            if ((0x3ff000000000000L & l) != 0L)
+                            if ((0x3ff000000000000L & l) != 0L){
                                 jjCheckNAddTwoStates(15, 16);
+                            }
                             break;
                         case 16:
-                            if (curChar != 46)
+                            if (curChar != 46){
                                 break;
-                            if (kind > 81)
+                            }
+                            if (kind > 81){
                                 kind = 81;
+                            }
                             jjCheckNAddStates(12, 14);
                             break;
                         case 17:
-                            if ((0x3ff000000000000L & l) == 0L)
+                            if ((0x3ff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 81)
+                            }
+                            if (kind > 81){
                                 kind = 81;
+                            }
                             jjCheckNAddStates(12, 14);
                             break;
                         case 18:
-                            if ((0x3ff000000000000L & l) != 0L)
+                            if ((0x3ff000000000000L & l) != 0L){
                                 jjCheckNAddTwoStates(18, 19);
+                            }
                             break;
                         case 20:
-                            if ((0x280000000000L & l) != 0L)
+                            if ((0x280000000000L & l) != 0L){
                                 jjCheckNAdd(21);
+                            }
                             break;
                         case 21:
-                            if ((0x3ff000000000000L & l) == 0L)
+                            if ((0x3ff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 81)
+                            }
+                            if (kind > 81){
                                 kind = 81;
+                            }
                             jjCheckNAddTwoStates(21, 13);
                             break;
                         case 22:
-                            if ((0x3ff000000000000L & l) != 0L)
+                            if ((0x3ff000000000000L & l) != 0L){
                                 jjCheckNAddTwoStates(22, 13);
+                            }
                             break;
                         case 23:
-                            if (curChar != 48)
+                            if (curChar != 48){
                                 break;
-                            if (kind > 80)
+                            }
+                            if (kind > 80){
                                 kind = 80;
+                            }
                             jjCheckNAddStates(6, 8);
                             break;
                         case 24:
-                            if ((0xff000000000000L & l) == 0L)
+                            if ((0xff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 80)
+                            }
+                            if (kind > 80){
                                 kind = 80;
+                            }
                             jjCheckNAddTwoStates(24, 7);
                             break;
                         case 26:
-                            if ((0x3ff000000000000L & l) == 0L)
+                            if ((0x3ff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 80)
+                            }
+                            if (kind > 80){
                                 kind = 80;
+                            }
                             jjCheckNAddTwoStates(26, 7);
                             break;
                         default:
@@ -780,56 +854,70 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     switch (jjstateSet[--i]) {
                         case 0:
                             if ((0x7fffffe87fffffeL & l) != 0L){
-                                if (kind > 64)
+                                if (kind > 64){
                                     kind = 64;
+                                }
                                 jjCheckNAdd(1);
-                            }else if (curChar == 91)
+                            }else if (curChar == 91){
                                 jjstateSet[jjnewStateCnt++] = 3;
+                            }
                             break;
                         case 1:
-                            if ((0x7fffffe87fffffeL & l) == 0L)
+                            if ((0x7fffffe87fffffeL & l) == 0L){
                                 break;
-                            if (kind > 64)
+                            }
+                            if (kind > 64){
                                 kind = 64;
+                            }
                             jjCheckNAdd(1);
                             break;
                         case 2:
-                            if (curChar == 91)
+                            if (curChar == 91){
                                 jjstateSet[jjnewStateCnt++] = 3;
+                            }
                             break;
                         case 3:
-                            if ((0x1000000040000000L & l) != 0L)
+                            if ((0x1000000040000000L & l) != 0L){
                                 jjstateSet[jjnewStateCnt++] = 4;
+                            }
                             break;
                         case 4:
-                            if (curChar == 93)
+                            if (curChar == 93){
                                 kind = 67;
+                            }
                             break;
                         case 7:
-                            if ((0x110000001100L & l) != 0L && kind > 80)
+                            if ((0x110000001100L & l) != 0L && kind > 80){
                                 kind = 80;
+                            }
                             break;
                         case 10:
-                            if ((0x2000000020L & l) != 0L)
+                            if ((0x2000000020L & l) != 0L){
                                 jjAddStates(15, 16);
+                            }
                             break;
                         case 13:
-                            if ((0x5400000054L & l) != 0L && kind > 81)
+                            if ((0x5400000054L & l) != 0L && kind > 81){
                                 kind = 81;
+                            }
                             break;
                         case 19:
-                            if ((0x2000000020L & l) != 0L)
+                            if ((0x2000000020L & l) != 0L){
                                 jjAddStates(17, 18);
+                            }
                             break;
                         case 25:
-                            if ((0x100000001000000L & l) != 0L)
+                            if ((0x100000001000000L & l) != 0L){
                                 jjCheckNAdd(26);
+                            }
                             break;
                         case 26:
-                            if ((0x7e0000007eL & l) == 0L)
+                            if ((0x7e0000007eL & l) == 0L){
                                 break;
-                            if (kind > 80)
+                            }
+                            if (kind > 80){
                                 kind = 80;
+                            }
                             jjCheckNAddTwoStates(26, 7);
                             break;
                         default:
@@ -837,7 +925,7 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     }
                 }while (i != startsAt);
             }else{
-                int hiByte = (int) (curChar >> 8);
+                int hiByte = curChar >> 8;
                 int i1 = hiByte >> 6;
                 long l1 = 1L << (hiByte & 077);
                 int i2 = (curChar & 0xff) >> 6;
@@ -846,10 +934,12 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     switch (jjstateSet[--i]) {
                         case 0:
                         case 1:
-                            if (!jjCanMove_0(hiByte, i1, i2, l1, l2))
+                            if (!jjCanMove_0(hiByte, i1, i2, l1, l2)){
                                 break;
-                            if (kind > 64)
+                            }
+                            if (kind > 64){
                                 kind = 64;
+                            }
                             jjCheckNAdd(1);
                             break;
                         default:
@@ -863,8 +953,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 kind = 0x7fffffff;
             }
             ++curPos;
-            if ((i = jjnewStateCnt) == (startsAt = 27 - (jjnewStateCnt = startsAt)))
+            if ((i = jjnewStateCnt) == (startsAt = 27 - (jjnewStateCnt = startsAt))){
                 return curPos;
+            }
             try{
                 curChar = input_stream.readChar();
             }catch (java.io.IOException e){
@@ -906,34 +997,41 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         //int j; // not used
         int kind = 0x7fffffff;
         for (;;){
-            if (++jjround == 0x7fffffff)
+            if (++jjround == 0x7fffffff){
                 ReInitRounds();
+            }
             if (curChar < 64){
                 long l = 1L << curChar;
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if (kind > 75)
+                            if (kind > 75){
                                 kind = 75;
+                            }
                             break;
                         case 1:
-                            if ((0x8400000000L & l) != 0L && kind > 74)
+                            if ((0x8400000000L & l) != 0L && kind > 74){
                                 kind = 74;
+                            }
                             break;
                         case 2:
-                            if ((0xf000000000000L & l) != 0L)
+                            if ((0xf000000000000L & l) != 0L){
                                 jjstateSet[jjnewStateCnt++] = 3;
+                            }
                             break;
                         case 3:
-                            if ((0xff000000000000L & l) == 0L)
+                            if ((0xff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 74)
+                            }
+                            if (kind > 74){
                                 kind = 74;
+                            }
                             jjstateSet[jjnewStateCnt++] = 4;
                             break;
                         case 4:
-                            if ((0xff000000000000L & l) != 0L && kind > 74)
+                            if ((0xff000000000000L & l) != 0L && kind > 74){
                                 kind = 74;
+                            }
                             break;
                         default:
                             break;
@@ -945,25 +1043,29 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     switch (jjstateSet[--i]) {
                         case 0:
                             if ((0xfffffffeefffffffL & l) != 0L){
-                                if (kind > 75)
+                                if (kind > 75){
                                     kind = 75;
-                            }else if (curChar == 92)
+                                }
+                            }else if (curChar == 92){
                                 jjAddStates(19, 21);
+                            }
                             break;
                         case 1:
-                            if ((0x14404510000000L & l) != 0L && kind > 74)
+                            if ((0x14404510000000L & l) != 0L && kind > 74){
                                 kind = 74;
+                            }
                             break;
                         case 5:
-                            if ((0xfffffffeefffffffL & l) != 0L && kind > 75)
+                            if ((0xfffffffeefffffffL & l) != 0L && kind > 75){
                                 kind = 75;
+                            }
                             break;
                         default:
                             break;
                     }
                 }while (i != startsAt);
             }else{
-                int hiByte = (int) (curChar >> 8);
+                int hiByte = curChar >> 8;
                 int i1 = hiByte >> 6;
                 long l1 = 1L << (hiByte & 077);
                 int i2 = (curChar & 0xff) >> 6;
@@ -971,8 +1073,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if (jjCanMove_1(hiByte, i1, i2, l1, l2) && kind > 75)
+                            if (jjCanMove_1(hiByte, i1, i2, l1, l2) && kind > 75){
                                 kind = 75;
+                            }
                             break;
                         default:
                             break;
@@ -985,8 +1088,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 kind = 0x7fffffff;
             }
             ++curPos;
-            if ((i = jjnewStateCnt) == (startsAt = 6 - (jjnewStateCnt = startsAt)))
+            if ((i = jjnewStateCnt) == (startsAt = 6 - (jjnewStateCnt = startsAt))){
                 return curPos;
+            }
             try{
                 curChar = input_stream.readChar();
             }catch (java.io.IOException e){
@@ -1024,34 +1128,41 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         //int j; // not used
         int kind = 0x7fffffff;
         for (;;){
-            if (++jjround == 0x7fffffff)
+            if (++jjround == 0x7fffffff){
                 ReInitRounds();
+            }
             if (curChar < 64){
                 long l = 1L << curChar;
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if ((0xffffff7fffffffffL & l) != 0L && kind > 72)
+                            if ((0xffffff7fffffffffL & l) != 0L && kind > 72){
                                 kind = 72;
+                            }
                             break;
                         case 1:
-                            if ((0x8400000000L & l) != 0L && kind > 71)
+                            if ((0x8400000000L & l) != 0L && kind > 71){
                                 kind = 71;
+                            }
                             break;
                         case 2:
-                            if ((0xf000000000000L & l) != 0L)
+                            if ((0xf000000000000L & l) != 0L){
                                 jjstateSet[jjnewStateCnt++] = 3;
+                            }
                             break;
                         case 3:
-                            if ((0xff000000000000L & l) == 0L)
+                            if ((0xff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 71)
+                            }
+                            if (kind > 71){
                                 kind = 71;
+                            }
                             jjstateSet[jjnewStateCnt++] = 4;
                             break;
                         case 4:
-                            if ((0xff000000000000L & l) != 0L && kind > 71)
+                            if ((0xff000000000000L & l) != 0L && kind > 71){
                                 kind = 71;
+                            }
                             break;
                         default:
                             break;
@@ -1063,25 +1174,29 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     switch (jjstateSet[--i]) {
                         case 0:
                             if ((0xffffffffefffffffL & l) != 0L){
-                                if (kind > 72)
+                                if (kind > 72){
                                     kind = 72;
-                            }else if (curChar == 92)
+                                }
+                            }else if (curChar == 92){
                                 jjAddStates(19, 21);
+                            }
                             break;
                         case 1:
-                            if ((0x14404510000000L & l) != 0L && kind > 71)
+                            if ((0x14404510000000L & l) != 0L && kind > 71){
                                 kind = 71;
+                            }
                             break;
                         case 5:
-                            if ((0xffffffffefffffffL & l) != 0L && kind > 72)
+                            if ((0xffffffffefffffffL & l) != 0L && kind > 72){
                                 kind = 72;
+                            }
                             break;
                         default:
                             break;
                     }
                 }while (i != startsAt);
             }else{
-                int hiByte = (int) (curChar >> 8);
+                int hiByte = curChar >> 8;
                 int i1 = hiByte >> 6;
                 long l1 = 1L << (hiByte & 077);
                 int i2 = (curChar & 0xff) >> 6;
@@ -1089,8 +1204,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if (jjCanMove_1(hiByte, i1, i2, l1, l2) && kind > 72)
+                            if (jjCanMove_1(hiByte, i1, i2, l1, l2) && kind > 72){
                                 kind = 72;
+                            }
                             break;
                         default:
                             break;
@@ -1103,8 +1219,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 kind = 0x7fffffff;
             }
             ++curPos;
-            if ((i = jjnewStateCnt) == (startsAt = 6 - (jjnewStateCnt = startsAt)))
+            if ((i = jjnewStateCnt) == (startsAt = 6 - (jjnewStateCnt = startsAt))){
                 return curPos;
+            }
             try{
                 curChar = input_stream.readChar();
             }catch (java.io.IOException e){
@@ -1142,34 +1259,41 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
         //int j; // not used
         int kind = 0x7fffffff;
         for (;;){
-            if (++jjround == 0x7fffffff)
+            if (++jjround == 0x7fffffff){
                 ReInitRounds();
+            }
             if (curChar < 64){
                 long l = 1L << curChar;
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if ((0xfffffffbffffffffL & l) != 0L && kind > 78)
+                            if ((0xfffffffbffffffffL & l) != 0L && kind > 78){
                                 kind = 78;
+                            }
                             break;
                         case 1:
-                            if ((0x8400000000L & l) != 0L && kind > 77)
+                            if ((0x8400000000L & l) != 0L && kind > 77){
                                 kind = 77;
+                            }
                             break;
                         case 2:
-                            if ((0xf000000000000L & l) != 0L)
+                            if ((0xf000000000000L & l) != 0L){
                                 jjstateSet[jjnewStateCnt++] = 3;
+                            }
                             break;
                         case 3:
-                            if ((0xff000000000000L & l) == 0L)
+                            if ((0xff000000000000L & l) == 0L){
                                 break;
-                            if (kind > 77)
+                            }
+                            if (kind > 77){
                                 kind = 77;
+                            }
                             jjstateSet[jjnewStateCnt++] = 4;
                             break;
                         case 4:
-                            if ((0xff000000000000L & l) != 0L && kind > 77)
+                            if ((0xff000000000000L & l) != 0L && kind > 77){
                                 kind = 77;
+                            }
                             break;
                         default:
                             break;
@@ -1181,25 +1305,29 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     switch (jjstateSet[--i]) {
                         case 0:
                             if ((0xffffffffefffffffL & l) != 0L){
-                                if (kind > 78)
+                                if (kind > 78){
                                     kind = 78;
-                            }else if (curChar == 92)
+                                }
+                            }else if (curChar == 92){
                                 jjAddStates(19, 21);
+                            }
                             break;
                         case 1:
-                            if ((0x14404510000000L & l) != 0L && kind > 77)
+                            if ((0x14404510000000L & l) != 0L && kind > 77){
                                 kind = 77;
+                            }
                             break;
                         case 5:
-                            if ((0xffffffffefffffffL & l) != 0L && kind > 78)
+                            if ((0xffffffffefffffffL & l) != 0L && kind > 78){
                                 kind = 78;
+                            }
                             break;
                         default:
                             break;
                     }
                 }while (i != startsAt);
             }else{
-                int hiByte = (int) (curChar >> 8);
+                int hiByte = curChar >> 8;
                 int i1 = hiByte >> 6;
                 long l1 = 1L << (hiByte & 077);
                 int i2 = (curChar & 0xff) >> 6;
@@ -1207,8 +1335,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 do{
                     switch (jjstateSet[--i]) {
                         case 0:
-                            if (jjCanMove_1(hiByte, i1, i2, l1, l2) && kind > 78)
+                            if (jjCanMove_1(hiByte, i1, i2, l1, l2) && kind > 78){
                                 kind = 78;
+                            }
                             break;
                         default:
                             break;
@@ -1221,8 +1350,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                 kind = 0x7fffffff;
             }
             ++curPos;
-            if ((i = jjnewStateCnt) == (startsAt = 6 - (jjnewStateCnt = startsAt)))
+            if ((i = jjnewStateCnt) == (startsAt = 6 - (jjnewStateCnt = startsAt))){
                 return curPos;
+            }
             try{
                 curChar = input_stream.readChar();
             }catch (java.io.IOException e){
@@ -1246,8 +1376,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
             case 61:
                 return ((jjbitVec6[i2] & l2) != 0L);
             default:
-                if ((jjbitVec0[i1] & l1) != 0L)
+                if ((jjbitVec0[i1] & l1) != 0L){
                     return true;
+                }
                 return false;
         }
     }
@@ -1257,8 +1388,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
             case 0:
                 return ((jjbitVec8[i2] & l2) != 0L);
             default:
-                if ((jjbitVec7[i1] & l1) != 0L)
+                if ((jjbitVec7[i1] & l1) != 0L){
                     return true;
+                }
                 return false;
         }
     }
@@ -1471,8 +1603,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
      *            the JavaCharStream to parse.
      */
     public OgnlParserTokenManager(JavaCharStream stream){
-        if (JavaCharStream.staticFlag)
+        if (JavaCharStream.staticFlag){
             throw new Error("ERROR: Cannot use a static CharStream class with a non-static lexical analyzer.");
+        }
         input_stream = stream;
     }
 
@@ -1505,8 +1638,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
     private void ReInitRounds(){
         int i;
         jjround = 0x80000001;
-        for (i = 27; i-- > 0;)
+        for (i = 27; i-- > 0;){
             jjrounds[i] = 0x80000000;
+        }
     }
 
     /**
@@ -1531,12 +1665,13 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
      *             (an unchecked Error exception) if the lexical state is invalid.
      */
     public void SwitchTo(int lexState){
-        if (lexState >= 4 || lexState < 0)
+        if (lexState >= 4 || lexState < 0){
             throw new TokenMgrError(
                             "Error: Ignoring invalid lexical state : " + lexState + ". State unchanged.",
                             TokenMgrError.INVALID_LEXICAL_STATE);
-        else
+        }else{
             curLexState = lexState;
+        }
     }
 
     protected Token jjFillToken(){
@@ -1599,8 +1734,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     case 0:
                         try{
                             input_stream.backup(0);
-                            while (curChar <= 32 && (0x100003600L & (1L << curChar)) != 0L)
+                            while (curChar <= 32 && (0x100003600L & (1L << curChar)) != 0L){
                                 curChar = input_stream.BeginToken();
+                            }
                         }catch (java.io.IOException e1){
                             continue EOFLoop;
                         }
@@ -1625,22 +1761,26 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                         break;
                 }
                 if (jjmatchedKind != 0x7fffffff){
-                    if (jjmatchedPos + 1 < curPos)
+                    if (jjmatchedPos + 1 < curPos){
                         input_stream.backup(curPos - jjmatchedPos - 1);
+                    }
                     if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L){
                         matchedToken = jjFillToken();
                         TokenLexicalActions(matchedToken);
-                        if (jjnewLexState[jjmatchedKind] != -1)
+                        if (jjnewLexState[jjmatchedKind] != -1){
                             curLexState = jjnewLexState[jjmatchedKind];
+                        }
                         return matchedToken;
                     }else if ((jjtoSkip[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L){
-                        if (jjnewLexState[jjmatchedKind] != -1)
+                        if (jjnewLexState[jjmatchedKind] != -1){
                             curLexState = jjnewLexState[jjmatchedKind];
+                        }
                         continue EOFLoop;
                     }
                     MoreLexicalActions();
-                    if (jjnewLexState[jjmatchedKind] != -1)
+                    if (jjnewLexState[jjmatchedKind] != -1){
                         curLexState = jjnewLexState[jjmatchedKind];
+                    }
                     curPos = 0;
                     jjmatchedKind = 0x7fffffff;
                     try{
@@ -1661,8 +1801,9 @@ public class OgnlParserTokenManager implements OgnlParserConstants{
                     if (curChar == '\n' || curChar == '\r'){
                         error_line++;
                         error_column = 0;
-                    }else
+                    }else{
                         error_column++;
+                    }
                 }
                 if (!EOFSeen){
                     input_stream.backup(1);

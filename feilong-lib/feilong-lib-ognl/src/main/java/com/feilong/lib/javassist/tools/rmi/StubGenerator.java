@@ -84,7 +84,7 @@ public class StubGenerator implements Translator{
      * Constructs a stub-code generator.
      */
     public StubGenerator(){
-        proxyClasses = new Hashtable<String, CtClass>();
+        proxyClasses = new Hashtable<>();
     }
 
     /**
@@ -138,8 +138,9 @@ public class StubGenerator implements Translator{
      */
     public synchronized boolean makeProxyClass(Class<?> clazz) throws CannotCompileException,NotFoundException{
         String classname = clazz.getName();
-        if (proxyClasses.get(classname) != null)
+        if (proxyClasses.get(classname) != null){
             return false;
+        }
         CtClass ctclazz = produceProxyClass(classPool.get(classname), clazz);
         proxyClasses.put(classname, ctclazz);
         modifySuperclass(ctclazz);
@@ -148,8 +149,9 @@ public class StubGenerator implements Translator{
 
     private CtClass produceProxyClass(CtClass orgclass,Class<?> orgRtClass) throws CannotCompileException,NotFoundException{
         int modify = orgclass.getModifiers();
-        if (Modifier.isAbstract(modify) || Modifier.isNative(modify) || !Modifier.isPublic(modify))
+        if (Modifier.isAbstract(modify) || Modifier.isNative(modify) || !Modifier.isPublic(modify)){
             throw new CannotCompileException(orgclass.getName() + " must be public, non-native, and non-abstract.");
+        }
 
         CtClass proxy = classPool.makeClass(orgclass.getName(), orgclass.getSuperclass());
 
@@ -179,9 +181,9 @@ public class StubGenerator implements Translator{
 
     private CtClass toCtClass(Class<?> rtclass) throws NotFoundException{
         String name;
-        if (!rtclass.isArray())
+        if (!rtclass.isArray()){
             name = rtclass.getName();
-        else{
+        }else{
             StringBuffer sbuf = new StringBuffer();
             do{
                 sbuf.append("[]");
@@ -197,8 +199,9 @@ public class StubGenerator implements Translator{
     private CtClass[] toCtClass(Class<?>[] rtclasses) throws NotFoundException{
         int n = rtclasses.length;
         CtClass[] ctclasses = new CtClass[n];
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < n; ++i){
             ctclasses[i] = toCtClass(rtclasses[i]);
+        }
 
         return ctclasses;
     }
@@ -212,13 +215,14 @@ public class StubGenerator implements Translator{
         for (int i = 0; i < ms.length; ++i){
             Method m = ms[i];
             int mod = m.getModifiers();
-            if (m.getDeclaringClass() != Object.class && !Modifier.isFinal(mod))
+            if (m.getDeclaringClass() != Object.class && !Modifier.isFinal(mod)){
                 if (Modifier.isPublic(mod)){
                     CtMethod body;
-                    if (Modifier.isStatic(mod))
+                    if (Modifier.isStatic(mod)){
                         body = forwardStaticMethod;
-                    else
+                    }else{
                         body = forwardMethod;
+                    }
 
                     wmethod = CtNewMethod.wrapped(
                                     toCtClass(m.getReturnType()),
@@ -230,9 +234,11 @@ public class StubGenerator implements Translator{
                                     proxy);
                     wmethod.setModifiers(mod);
                     proxy.addMethod(wmethod);
-                }else if (!Modifier.isProtected(mod) && !Modifier.isPrivate(mod))
+                }else if (!Modifier.isProtected(mod) && !Modifier.isPrivate(mod)){
                     // if package method
                     throw new CannotCompileException("the methods must be public, protected, or private.");
+                }
+            }
         }
     }
 
@@ -243,8 +249,9 @@ public class StubGenerator implements Translator{
         CtClass superclazz;
         for (;; orgclass = superclazz){
             superclazz = orgclass.getSuperclass();
-            if (superclazz == null)
+            if (superclazz == null){
                 break;
+            }
 
             try{
                 superclazz.getDeclaredConstructor(null);

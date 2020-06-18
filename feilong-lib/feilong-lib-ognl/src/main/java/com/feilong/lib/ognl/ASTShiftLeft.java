@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTShiftLeft extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6867404314759519123L;
+
     public ASTShiftLeft(int id){
         super(id);
     }

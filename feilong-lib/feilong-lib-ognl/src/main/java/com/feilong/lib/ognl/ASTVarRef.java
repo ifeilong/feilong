@@ -39,13 +39,18 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTVarRef extends SimpleNode implements NodeType,OrderedReturn{
 
-    private String   _name;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8421017529924242773L;
 
-    protected Class  _getterClass;
+    private String            _name;
 
-    protected String _core;
+    protected Class           _getterClass;
 
-    protected String _last;
+    protected String          _core;
+
+    protected String          _last;
 
     public ASTVarRef(int id){
         super(id);
@@ -109,8 +114,9 @@ public class ASTVarRef extends SimpleNode implements NodeType,OrderedReturn{
         context.setCurrentObject(value);
         //context.setRoot(context.get(_name));
 
-        if (context.getCurrentObject() == null)
+        if (context.getCurrentObject() == null){
             throw new UnsupportedCompilationException("Current context object is null, can't compile var reference.");
+        }
 
         String pre = "";
         String post = "";

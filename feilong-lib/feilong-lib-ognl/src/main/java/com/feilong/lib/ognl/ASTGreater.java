@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTGreater extends ComparisonExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6745815515201817074L;
+
     public ASTGreater(int id){
         super(id);
     }

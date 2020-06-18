@@ -39,6 +39,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTAnd extends BooleanExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5143646722310582198L;
+
     public ASTAnd(int id){
         super(id);
     }
@@ -59,8 +64,9 @@ public class ASTAnd extends BooleanExpression{
         for (int i = 0; i <= last; ++i){
             result = _children[i].getValue(context, source);
 
-            if (i != last && !OgnlOps.booleanValue(result))
+            if (i != last && !OgnlOps.booleanValue(result)){
                 break;
+            }
         }
 
         return result;
@@ -73,8 +79,9 @@ public class ASTAnd extends BooleanExpression{
         for (int i = 0; i < last; ++i){
             Object v = _children[i].getValue(context, target);
 
-            if (!OgnlOps.booleanValue(v))
+            if (!OgnlOps.booleanValue(v)){
                 return;
+            }
         }
 
         _children[last].setValue(context, target, value);
@@ -92,8 +99,9 @@ public class ASTAnd extends BooleanExpression{
 
     @Override
     public String toGetSourceString(OgnlContext context,Object target){
-        if (_children.length != 2)
+        if (_children.length != 2){
             throw new UnsupportedCompilationException("Can only compile boolean expressions with two children.");
+        }
 
         String result = "";
 
@@ -104,12 +112,14 @@ public class ASTAnd extends BooleanExpression{
                 throw new UnsupportedCompilationException("And expression can't be compiled until all conditions are true.");
             }
 
-            if (!OgnlRuntime.isBoolean(first) && !context.getCurrentType().isPrimitive())
+            if (!OgnlRuntime.isBoolean(first) && !context.getCurrentType().isPrimitive()){
                 first = OgnlRuntime.getCompiler().createLocalReference(context, first, context.getCurrentType());
+            }
 
             String second = OgnlRuntime.getChildSource(context, target, _children[1]);
-            if (!OgnlRuntime.isBoolean(second) && !context.getCurrentType().isPrimitive())
+            if (!OgnlRuntime.isBoolean(second) && !context.getCurrentType().isPrimitive()){
                 second = OgnlRuntime.getCompiler().createLocalReference(context, second, context.getCurrentType());
+            }
 
             result += "(ognl.OgnlOps.booleanValue(" + first + ")";
 
@@ -136,12 +146,14 @@ public class ASTAnd extends BooleanExpression{
 
     @Override
     public String toSetSourceString(OgnlContext context,Object target){
-        if (_children.length != 2)
+        if (_children.length != 2){
             throw new UnsupportedCompilationException("Can only compile boolean expressions with two children.");
+        }
 
         String pre = (String) context.get("_currentChain");
-        if (pre == null)
+        if (pre == null){
             pre = "";
+        }
 
         String result = "";
 
@@ -159,10 +171,11 @@ public class ASTAnd extends BooleanExpression{
             String second = ExpressionCompiler.getRootExpression(_children[1], context.getRoot(), context) + pre
                             + _children[1].toSetSourceString(context, target);
 
-            if (!OgnlRuntime.isBoolean(first))
+            if (!OgnlRuntime.isBoolean(first)){
                 result += "if(ognl.OgnlOps.booleanValue(" + first + ")){";
-            else
+            }else{
                 result += "if(" + first + "){";
+            }
 
             result += second;
             result += "; } ";

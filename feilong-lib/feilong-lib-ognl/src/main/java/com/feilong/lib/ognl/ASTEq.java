@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTEq extends ComparisonExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1492757042022702310L;
+
     public ASTEq(int id){
         super(id);
     }

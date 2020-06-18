@@ -52,9 +52,11 @@ public class EnumConverter implements Converter{
             return Enum.valueOf(type, name);
         }catch (IllegalArgumentException e){
             // failed to find it, do a case insensitive match
-            for (Enum c : (Enum[]) type.getEnumConstants())
-                if (c.name().equalsIgnoreCase(name))
+            for (Enum c : (Enum[]) type.getEnumConstants()){
+                if (c.name().equalsIgnoreCase(name)){
                     return c;
+                }
+            }
             // all else failed
             throw e;
         }

@@ -38,6 +38,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 class ASTIn extends SimpleNode implements NodeType{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5622406544582508027L;
+
     public ASTIn(int id){
         super(id);
     }

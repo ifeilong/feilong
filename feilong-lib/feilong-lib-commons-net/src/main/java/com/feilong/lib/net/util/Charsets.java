@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
  *
  * @since 3.3
  */
-public class Charsets {
+public class Charsets{
 
     /**
      * Returns a charset object for the given charset name.
@@ -34,7 +34,7 @@ public class Charsets {
      *            default charset.
      * @return A charset object for the named charset
      */
-    public static Charset toCharset(String charsetName) {
+    public static Charset toCharset(String charsetName){
         return charsetName == null ? Charset.defaultCharset() : Charset.forName(charsetName);
     }
 
@@ -44,11 +44,12 @@ public class Charsets {
      * @param charsetName
      *            The name of the requested charset; may be a canonical name, an alias, or null.
      *            If null, return the default charset.
-     * @param defaultCharsetName the charset name to use if the requested charset is null
+     * @param defaultCharsetName
+     *            the charset name to use if the requested charset is null
      *
      * @return A charset object for the named charset
      */
-    public static Charset toCharset(String charsetName, String defaultCharsetName) {
+    public static Charset toCharset(String charsetName,String defaultCharsetName){
         return charsetName == null ? Charset.forName(defaultCharsetName) : Charset.forName(charsetName);
     }
 }

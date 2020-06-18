@@ -26,7 +26,8 @@ import com.feilong.lib.javassist.ClassPool;
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
  * @version $Revision: 1.4 $
  */
-public interface ScopedClassPoolRepository {
+public interface ScopedClassPoolRepository{
+
     /**
      * Records a factory.
      */
@@ -47,23 +48,27 @@ public interface ScopedClassPoolRepository {
     /**
      * Sets the prune flag.
      * 
-     * @param prune     a new value.
+     * @param prune
+     *            a new value.
      */
     void setPrune(boolean prune);
 
     /**
      * Create a scoped classpool.
      * 
-     * @param cl    the classloader.
-     * @param src   the original classpool.
+     * @param cl
+     *            the classloader.
+     * @param src
+     *            the original classpool.
      * @return the classpool.
      */
-    ScopedClassPool createScopedClassPool(ClassLoader cl, ClassPool src);
+    ScopedClassPool createScopedClassPool(ClassLoader cl,ClassPool src);
 
     /**
      * Finds a scoped classpool registered under the passed in classloader.
      * 
-     * @param cl    the classloader.
+     * @param cl
+     *            the classloader.
      * @return the classpool.
      */
     ClassPool findClassPool(ClassLoader cl);
@@ -71,7 +76,8 @@ public interface ScopedClassPoolRepository {
     /**
      * Register a classloader.
      * 
-     * @param ucl   the classloader.
+     * @param ucl
+     *            the classloader.
      * @return the classpool.
      */
     ClassPool registerClassLoader(ClassLoader ucl);
@@ -81,7 +87,7 @@ public interface ScopedClassPoolRepository {
      * 
      * @return the registered classloaders.
      */
-    Map<ClassLoader,ScopedClassPool> getRegisteredCLs();
+    Map<ClassLoader, ScopedClassPool> getRegisteredCLs();
 
     /**
      * This method will check to see if a register classloader has been
@@ -92,7 +98,8 @@ public interface ScopedClassPoolRepository {
     /**
      * Unregisters a classpool and unregisters its classloader.
      * 
-     * @param cl    the classloader the pool is stored under.
+     * @param cl
+     *            the classloader the pool is stored under.
      */
     void unregisterClassLoader(ClassLoader cl);
 }

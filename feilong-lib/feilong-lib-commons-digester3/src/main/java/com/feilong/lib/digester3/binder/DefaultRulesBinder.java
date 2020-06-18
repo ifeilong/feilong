@@ -36,7 +36,7 @@ final class DefaultRulesBinder implements RulesBinder{
     /**
      * Errors that can occur during binding time or rules creation.
      */
-    private final List<ErrorMessage> errors            = new ArrayList<ErrorMessage>();
+    private final List<ErrorMessage> errors            = new ArrayList<>();
 
     /**
      *

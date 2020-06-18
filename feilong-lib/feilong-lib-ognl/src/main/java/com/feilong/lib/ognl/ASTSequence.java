@@ -39,11 +39,16 @@ import com.feilong.lib.ognl.enhance.OrderedReturn;
  */
 public class ASTSequence extends SimpleNode implements NodeType,OrderedReturn{
 
-    private Class  _getterClass;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3625866781587550417L;
 
-    private String _lastExpression;
+    private Class             _getterClass;
 
-    private String _coreExpression;
+    private String            _lastExpression;
+
+    private String            _coreExpression;
 
     public ASTSequence(int id){
         super(id);
@@ -61,8 +66,8 @@ public class ASTSequence extends SimpleNode implements NodeType,OrderedReturn{
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         Object result = null;
-        for (int i = 0; i < _children.length; ++i){
-            result = _children[i].getValue(context, source);
+        for (Node element : _children){
+            result = element.getValue(context, source);
         }
 
         return result; // The result is just the last one we saw.
@@ -131,8 +136,9 @@ public class ASTSequence extends SimpleNode implements NodeType,OrderedReturn{
 
             if (i > 0 && ASTProperty.class.isInstance(_children[i]) && seqValue != null && seqValue.trim().length() > 0){
                 String pre = (String) context.get("_currentChain");
-                if (pre == null)
+                if (pre == null){
                     pre = "";
+                }
 
                 seqValue = ExpressionCompiler.getRootExpression(_children[i], context.getRoot(), context) + pre + seqValue;
                 context.setCurrentAccessor(context.getRoot().getClass());
@@ -143,15 +149,17 @@ public class ASTSequence extends SimpleNode implements NodeType,OrderedReturn{
                 _lastExpression = seqValue;
             }
 
-            if (seqValue != null && seqValue.trim().length() > 0 && (i + 1) < _children.length)
+            if (seqValue != null && seqValue.trim().length() > 0 && (i + 1) < _children.length){
                 result += seqValue + ";";
-            else if (seqValue != null && seqValue.trim().length() > 0)
+            }else if (seqValue != null && seqValue.trim().length() > 0){
                 result += seqValue;
+            }
 
             // set last known type from last child with a type
 
-            if (NodeType.class.isInstance(_children[i]) && ((NodeType) _children[i]).getGetterClass() != null)
+            if (NodeType.class.isInstance(_children[i]) && ((NodeType) _children[i]).getGetterClass() != null){
                 _lastType = (NodeType) _children[i];
+            }
         }
 
         if (_lastType != null){

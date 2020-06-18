@@ -24,16 +24,15 @@ import com.feilong.lib.javassist.ClassPool;
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
  * @version $Revision: 1.4 $
  */
-public interface ScopedClassPoolFactory {
-    /**
-     * Makes an instance.
-     */
-    ScopedClassPool create(ClassLoader cl, ClassPool src,
-                           ScopedClassPoolRepository repository);
+public interface ScopedClassPoolFactory{
 
     /**
      * Makes an instance.
      */
-    ScopedClassPool create(ClassPool src,
-                           ScopedClassPoolRepository repository);
+    ScopedClassPool create(ClassLoader cl,ClassPool src,ScopedClassPoolRepository repository);
+
+    /**
+     * Makes an instance.
+     */
+    ScopedClassPool create(ClassPool src,ScopedClassPoolRepository repository);
 }

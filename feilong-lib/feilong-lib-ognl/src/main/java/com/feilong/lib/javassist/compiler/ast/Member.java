@@ -22,22 +22,30 @@ import com.feilong.lib.javassist.compiler.CompileError;
 /**
  * Member name.
  */
-public class Member extends Symbol {
+public class Member extends Symbol{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
+
     // cache maintained by fieldAccess() in TypeChecker.
     // this is used to obtain the value of a static final field.
-    private CtField field;
+    private CtField           field;
 
-    public Member(String name) {
+    public Member(String name){
         super(name);
         field = null;
     }
 
-    public void setField(CtField f) { field = f; }
+    public void setField(CtField f){
+        field = f;
+    }
 
-    public CtField getField() { return field; }
+    public CtField getField(){
+        return field;
+    }
 
     @Override
-    public void accept(Visitor v) throws CompileError { v.atMember(this); }
+    public void accept(Visitor v) throws CompileError{
+        v.atMember(this);
+    }
 }

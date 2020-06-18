@@ -26,28 +26,31 @@ import java.lang.reflect.InvocationTargetException;
  * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject#trapMethodcall(int, Object[])
  * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject#invoke(Object, int, Object[])
  */
-public class CannotInvokeException extends RuntimeException {
+public class CannotInvokeException extends RuntimeException{
 
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    private Throwable err = null;
+
+    private Throwable         err              = null;
 
     /**
-     * Returns the cause of this exception.  It may return null.
+     * Returns the cause of this exception. It may return null.
      */
-    public Throwable getReason() { return err; }
+    public Throwable getReason(){
+        return err;
+    }
 
     /**
      * Constructs a CannotInvokeException with an error message.
      */
-    public CannotInvokeException(String reason) {
+    public CannotInvokeException(String reason){
         super(reason);
     }
 
     /**
      * Constructs a CannotInvokeException with an InvocationTargetException.
      */
-    public CannotInvokeException(InvocationTargetException e) {
+    public CannotInvokeException(InvocationTargetException e){
         super("by " + e.getTargetException().toString());
         err = e.getTargetException();
     }
@@ -55,7 +58,7 @@ public class CannotInvokeException extends RuntimeException {
     /**
      * Constructs a CannotInvokeException with an IllegalAccessException.
      */
-    public CannotInvokeException(IllegalAccessException e) {
+    public CannotInvokeException(IllegalAccessException e){
         super("by " + e.toString());
         err = e;
     }
@@ -63,7 +66,7 @@ public class CannotInvokeException extends RuntimeException {
     /**
      * Constructs a CannotInvokeException with an ClassNotFoundException.
      */
-    public CannotInvokeException(ClassNotFoundException e) {
+    public CannotInvokeException(ClassNotFoundException e){
         super("by " + e.toString());
         err = e;
     }

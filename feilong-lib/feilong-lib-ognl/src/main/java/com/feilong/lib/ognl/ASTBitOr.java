@@ -36,6 +36,11 @@ package com.feilong.lib.ognl;
  */
 class ASTBitOr extends NumericExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8172467837516033900L;
+
     public ASTBitOr(int id){
         super(id);
     }
@@ -52,8 +57,9 @@ class ASTBitOr extends NumericExpression{
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         Object result = _children[0].getValue(context, source);
-        for (int i = 1; i < _children.length; ++i)
+        for (int i = 1; i < _children.length; ++i){
             result = OgnlOps.binaryOr(result, _children[i].getValue(context, source));
+        }
         return result;
     }
 

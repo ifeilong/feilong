@@ -25,7 +25,8 @@ import java.util.Map;
  *
  * @since 3.11
  */
-public class LocalVariableTypeAttribute extends LocalVariableAttribute {
+public class LocalVariableTypeAttribute extends LocalVariableAttribute{
+
     /**
      * The name of the attribute <code>"LocalVariableTypeTable"</code>.
      */
@@ -34,33 +35,31 @@ public class LocalVariableTypeAttribute extends LocalVariableAttribute {
     /**
      * Constructs an empty LocalVariableTypeTable.
      */
-    public LocalVariableTypeAttribute(ConstPool cp) {
+    public LocalVariableTypeAttribute(ConstPool cp){
         super(cp, tag, new byte[2]);
         ByteArray.write16bit(0, info, 0);
     }
 
-    LocalVariableTypeAttribute(ConstPool cp, int n, DataInputStream in)
-        throws IOException
-    {
+    LocalVariableTypeAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }
 
-    private LocalVariableTypeAttribute(ConstPool cp, byte[] dest) {
+    private LocalVariableTypeAttribute(ConstPool cp, byte[] dest){
         super(cp, tag, dest);
     }
 
     @Override
-    String renameEntry(String desc, String oldname, String newname) {
+    String renameEntry(String desc,String oldname,String newname){
         return SignatureAttribute.renameClass(desc, oldname, newname);
     }
 
     @Override
-    String renameEntry(String desc, Map<String,String> classnames) {
+    String renameEntry(String desc,Map<String, String> classnames){
         return SignatureAttribute.renameClass(desc, classnames);
     }
 
     @Override
-    LocalVariableAttribute makeThisAttr(ConstPool cp, byte[] dest) {
+    LocalVariableAttribute makeThisAttr(ConstPool cp,byte[] dest){
         return new LocalVariableTypeAttribute(cp, dest);
     }
 }

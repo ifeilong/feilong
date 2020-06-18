@@ -22,6 +22,11 @@ import com.feilong.lib.xstream.XStreamException;
  */
 public class CannotResolveClassException extends XStreamException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3475159271666844422L;
+
     public CannotResolveClassException(String className){
         super(className);
     }

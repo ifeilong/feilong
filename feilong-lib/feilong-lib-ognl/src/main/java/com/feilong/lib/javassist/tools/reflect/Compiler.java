@@ -111,22 +111,26 @@ public class Compiler{
             if (entries[i].metaobject != null || entries[i].classobject != null){
                 String metaobj, classobj;
 
-                if (entries[i].metaobject == null)
+                if (entries[i].metaobject == null){
                     metaobj = "com.feilong.lib.javassist.tools.reflect.Metaobject";
-                else
+                }else{
                     metaobj = entries[i].metaobject;
+                }
 
-                if (entries[i].classobject == null)
+                if (entries[i].classobject == null){
                     classobj = "com.feilong.lib.javassist.tools.reflect.ClassMetaobject";
-                else
+                }else{
                     classobj = entries[i].classobject;
+                }
 
-                if (!implementor.makeReflective(c, pool.get(metaobj), pool.get(classobj)))
+                if (!implementor.makeReflective(c, pool.get(metaobj), pool.get(classobj))){
                     System.err.println("Warning: " + c.getName() + " is reflective.  It was not changed.");
+                }
 
                 System.err.println(c.getName() + ": " + metaobj + ", " + classobj);
-            }else
+            }else{
                 System.err.println(c.getName() + ": not reflective");
+            }
         }
 
         for (int i = 0; i < n; ++i){
@@ -139,19 +143,21 @@ public class Compiler{
         int n = -1;
         for (int i = 0; i < args.length; ++i){
             String a = args[i];
-            if (a.equals("-m"))
-                if (n < 0 || i + 1 > args.length)
+            if (a.equals("-m")){
+                if (n < 0 || i + 1 > args.length){
                     return -1;
-                else
+                }else{
                     result[n].metaobject = args[++i];
-            else if (a.equals("-c"))
-                if (n < 0 || i + 1 > args.length)
+                }
+            }else if (a.equals("-c")){
+                if (n < 0 || i + 1 > args.length){
                     return -1;
-                else
+                }else{
                     result[n].classobject = args[++i];
-            else if (a.charAt(0) == '-')
+                }
+            }else if (a.charAt(0) == '-'){
                 return -1;
-            else{
+            }else{
                 CompiledClass cc = new CompiledClass();
                 cc.classname = a;
                 cc.metaobject = null;

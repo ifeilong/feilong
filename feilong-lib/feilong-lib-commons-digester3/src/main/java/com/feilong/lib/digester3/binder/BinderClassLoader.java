@@ -31,7 +31,7 @@ final class BinderClassLoader extends ClassLoader{
 
     private static final Map<String, Class<?>> PRIMITIVE_TYPES;
     static{
-        HashMap<String, Class<?>> primitiveTypes = new HashMap<String, Class<?>>();
+        HashMap<String, Class<?>> primitiveTypes = new HashMap<>();
         primitiveTypes.put("boolean", boolean.class);
         primitiveTypes.put("byte", byte.class);
         primitiveTypes.put("short", short.class);
@@ -44,14 +44,7 @@ final class BinderClassLoader extends ClassLoader{
     }
 
     public static BinderClassLoader createBinderClassLoader(final ClassLoader adaptedClassLoader){
-        PrivilegedAction<BinderClassLoader> action = new PrivilegedAction<BinderClassLoader>(){
-
-            @Override
-            public BinderClassLoader run(){
-                return new BinderClassLoader(adaptedClassLoader);
-            }
-
-        };
+        PrivilegedAction<BinderClassLoader> action = () -> new BinderClassLoader(adaptedClassLoader);
 
         if (getSecurityManager() != null){
             return doPrivileged(action);

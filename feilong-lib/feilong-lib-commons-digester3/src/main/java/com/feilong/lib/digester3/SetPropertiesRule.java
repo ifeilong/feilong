@@ -137,7 +137,7 @@ public class SetPropertiesRule extends Rule{
 
     // ----------------------------------------------------- Instance Variables
 
-    private final Map<String, String> aliases               = new HashMap<String, String>();
+    private final Map<String, String> aliases               = new HashMap<>();
 
     /**
      * Used to determine whether the parsing should fail if an property specified in the XML is missing from the bean.
@@ -153,7 +153,7 @@ public class SetPropertiesRule extends Rule{
     @Override
     public void begin(String namespace,String name,Attributes attributes) throws Exception{
         // Build a set of attribute names and corresponding values
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = new HashMap<>();
 
         for (int i = 0; i < attributes.getLength(); i++){
             String attributeName = attributes.getLocalName(i);

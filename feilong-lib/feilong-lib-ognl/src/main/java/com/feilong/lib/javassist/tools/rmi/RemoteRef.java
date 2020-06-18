@@ -17,21 +17,24 @@
 package com.feilong.lib.javassist.tools.rmi;
 
 /**
- * Remote reference.  This class is internally used for sending a remote
+ * Remote reference. This class is internally used for sending a remote
  * reference through a network stream.
  */
-public class RemoteRef implements java.io.Serializable {
+public class RemoteRef implements java.io.Serializable{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    public int oid;
-    public String classname;
 
-    public RemoteRef(int i) {
+    public int                oid;
+
+    public String             classname;
+
+    public RemoteRef(int i){
         oid = i;
         classname = null;
     }
 
-    public RemoteRef(int i, String name) {
+    public RemoteRef(int i, String name){
         oid = i;
         classname = name;
     }

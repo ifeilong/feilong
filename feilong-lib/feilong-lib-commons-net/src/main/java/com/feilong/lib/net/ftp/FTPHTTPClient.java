@@ -150,7 +150,7 @@ public class FTPHTTPClient extends FTPClient{
         }
         output.write(CRLF);
 
-        List<String> response = new ArrayList<String>();
+        List<String> response = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(input, getCharset()));
 
         for (String line = reader.readLine(); line != null && line.length() > 0; line = reader.readLine()){

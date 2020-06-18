@@ -39,6 +39,11 @@ import com.feilong.lib.ognl.enhance.UnsupportedCompilationException;
  */
 public class ASTOr extends BooleanExpression{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7596444666625791738L;
+
     public ASTOr(int id){
         super(id);
     }
@@ -58,8 +63,9 @@ public class ASTOr extends BooleanExpression{
         int last = _children.length - 1;
         for (int i = 0; i <= last; ++i){
             result = _children[i].getValue(context, source);
-            if (i != last && OgnlOps.booleanValue(result))
+            if (i != last && OgnlOps.booleanValue(result)){
                 break;
+            }
         }
         return result;
     }
@@ -69,8 +75,9 @@ public class ASTOr extends BooleanExpression{
         int last = _children.length - 1;
         for (int i = 0; i < last; ++i){
             Object v = _children[i].getValue(context, target);
-            if (OgnlOps.booleanValue(v))
+            if (OgnlOps.booleanValue(v)){
                 return;
+            }
         }
         _children[last].setValue(context, target, value);
     }
@@ -87,22 +94,25 @@ public class ASTOr extends BooleanExpression{
 
     @Override
     public String toGetSourceString(OgnlContext context,Object target){
-        if (_children.length != 2)
+        if (_children.length != 2){
             throw new UnsupportedCompilationException("Can only compile boolean expressions with two children.");
+        }
 
         String result = "(";
 
         try{
 
             String first = OgnlRuntime.getChildSource(context, target, _children[0]);
-            if (!OgnlRuntime.isBoolean(first))
+            if (!OgnlRuntime.isBoolean(first)){
                 first = OgnlRuntime.getCompiler().createLocalReference(context, first, context.getCurrentType());
+            }
 
             Class firstType = context.getCurrentType();
 
             String second = OgnlRuntime.getChildSource(context, target, _children[1]);
-            if (!OgnlRuntime.isBoolean(second))
+            if (!OgnlRuntime.isBoolean(second)){
                 second = OgnlRuntime.getCompiler().createLocalReference(context, second, context.getCurrentType());
+            }
 
             Class secondType = context.getCurrentType();
 
@@ -133,12 +143,14 @@ public class ASTOr extends BooleanExpression{
 
     @Override
     public String toSetSourceString(OgnlContext context,Object target){
-        if (_children.length != 2)
+        if (_children.length != 2){
             throw new UnsupportedCompilationException("Can only compile boolean expressions with two children.");
+        }
 
         String pre = (String) context.get("_currentChain");
-        if (pre == null)
+        if (pre == null){
             pre = "";
+        }
 
         String result = "";
 
@@ -148,15 +160,17 @@ public class ASTOr extends BooleanExpression{
 
             String first = ExpressionCompiler.getRootExpression(_children[0], context.getRoot(), context) + pre
                             + _children[0].toGetSourceString(context, target);
-            if (!OgnlRuntime.isBoolean(first))
+            if (!OgnlRuntime.isBoolean(first)){
                 first = OgnlRuntime.getCompiler().createLocalReference(context, first, Object.class);
+            }
 
             _children[1].getValue(context, target);
 
             String second = ExpressionCompiler.getRootExpression(_children[1], context.getRoot(), context) + pre
                             + _children[1].toSetSourceString(context, target);
-            if (!OgnlRuntime.isBoolean(second))
+            if (!OgnlRuntime.isBoolean(second)){
                 second = OgnlRuntime.getCompiler().createLocalReference(context, second, context.getCurrentType());
+            }
 
             result += "ognl.OgnlOps.booleanValue(" + first + ")";
 

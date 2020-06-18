@@ -15,6 +15,11 @@ import com.feilong.lib.xstream.converters.ErrorWritingException;
 
 public class ObjectAccessException extends ErrorWritingException{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6631181499133646532L;
+
     public ObjectAccessException(String message){
         super(message);
     }

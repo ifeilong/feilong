@@ -30,15 +30,15 @@ import javax.net.ssl.X509TrustManager;
  *
  * @since 3.0
  */
-public final class TrustManagerUtils
-{
-    private static final X509Certificate[] EMPTY_X509CERTIFICATE_ARRAY = new X509Certificate[]{};
+public final class TrustManagerUtils{
 
-    private static class TrustManager implements X509TrustManager {
+    private static final X509Certificate[] EMPTY_X509CERTIFICATE_ARRAY = new X509Certificate[] {};
+
+    private static class TrustManager implements X509TrustManager{
 
         private final boolean checkServerValidity;
 
-        TrustManager(boolean checkServerValidity) {
+        TrustManager(boolean checkServerValidity){
             this.checkServerValidity = checkServerValidity;
         }
 
@@ -46,18 +46,14 @@ public final class TrustManagerUtils
          * Never generates a CertificateException.
          */
         @Override
-        public void checkClientTrusted(X509Certificate[] certificates, String authType)
-        {
+        public void checkClientTrusted(X509Certificate[] certificates,String authType){
             return;
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] certificates, String authType)
-            throws CertificateException
-        {
-            if (checkServerValidity) {
-                for (X509Certificate certificate : certificates)
-                {
+        public void checkServerTrusted(X509Certificate[] certificates,String authType) throws CertificateException{
+            if (checkServerValidity){
+                for (X509Certificate certificate : certificates){
                     certificate.checkValidity();
                 }
             }
@@ -67,15 +63,14 @@ public final class TrustManagerUtils
          * @return an empty array of certificates
          */
         @Override
-        public X509Certificate[] getAcceptedIssuers()
-        {
+        public X509Certificate[] getAcceptedIssuers(){
             return EMPTY_X509CERTIFICATE_ARRAY;
         }
     }
 
-    private static final X509TrustManager ACCEPT_ALL=new TrustManager(false);
+    private static final X509TrustManager ACCEPT_ALL            = new TrustManager(false);
 
-    private static final X509TrustManager CHECK_SERVER_VALIDITY=new TrustManager(true);
+    private static final X509TrustManager CHECK_SERVER_VALIDITY = new TrustManager(true);
 
     /**
      * Generate a TrustManager that performs no checks.
@@ -100,14 +95,17 @@ public final class TrustManagerUtils
      * Return the default TrustManager provided by the JVM.
      * <p>
      * This should be the same as the default used by
-     *  {@link javax.net.ssl.SSLContext#init(javax.net.ssl.KeyManager[], javax.net.ssl.TrustManager[], java.security.SecureRandom)
+     * {@link javax.net.ssl.SSLContext#init(javax.net.ssl.KeyManager[], javax.net.ssl.TrustManager[], java.security.SecureRandom)
      * SSLContext#init(KeyManager[], TrustManager[], SecureRandom)}
      * when the TrustManager parameter is set to {@code null}
-     * @param keyStore the KeyStore to use, may be {@code null}
+     * 
+     * @param keyStore
+     *            the KeyStore to use, may be {@code null}
      * @return the default TrustManager
-     * @throws GeneralSecurityException if an error occurs
+     * @throws GeneralSecurityException
+     *             if an error occurs
      */
-    public static X509TrustManager getDefaultTrustManager(KeyStore keyStore) throws GeneralSecurityException {
+    public static X509TrustManager getDefaultTrustManager(KeyStore keyStore) throws GeneralSecurityException{
         String defaultAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
         TrustManagerFactory instance = TrustManagerFactory.getInstance(defaultAlgorithm);
         instance.init(keyStore);

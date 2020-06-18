@@ -19,9 +19,14 @@ package com.feilong.lib.xstream.converters.reflection;
  */
 public class MissingFieldException extends ObjectAccessException{
 
-    private final String fieldName;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2195464861195893752L;
 
-    private final String className;
+    private final String      fieldName;
+
+    private final String      className;
 
     /**
      * Construct a MissingFieldException.

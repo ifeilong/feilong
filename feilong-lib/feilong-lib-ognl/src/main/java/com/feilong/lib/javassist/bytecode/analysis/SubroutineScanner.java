@@ -32,14 +32,15 @@ import com.feilong.lib.javassist.bytecode.Opcode;
  *
  * @author Jason T. Greene
  */
-public class SubroutineScanner implements Opcode {
+public class SubroutineScanner implements Opcode{
 
-    private Subroutine[] subroutines;
-    Map<Integer,Subroutine> subTable = new HashMap<Integer,Subroutine>();
-    Set<Integer> done = new HashSet<Integer>();
+    private Subroutine[]     subroutines;
 
+    Map<Integer, Subroutine> subTable = new HashMap<>();
 
-    public Subroutine[] scan(MethodInfo method) throws BadBytecode {
+    Set<Integer>             done     = new HashSet<>();
+
+    public Subroutine[] scan(MethodInfo method) throws BadBytecode{
         CodeAttribute code = method.getCodeAttribute();
         CodeIterator iter = code.iterator();
 
@@ -50,7 +51,7 @@ public class SubroutineScanner implements Opcode {
         scan(0, iter, null);
 
         ExceptionTable exceptions = code.getExceptionTable();
-        for (int i = 0; i < exceptions.size(); i++) {
+        for (int i = 0; i < exceptions.size(); i++){
             int handler = exceptions.handlerPc(i);
             // If an exception is thrown in subroutine, the handler
             // is part of the same subroutine.
@@ -60,10 +61,11 @@ public class SubroutineScanner implements Opcode {
         return subroutines;
     }
 
-    private void scan(int pos, CodeIterator iter, Subroutine sub) throws BadBytecode {
+    private void scan(int pos,CodeIterator iter,Subroutine sub) throws BadBytecode{
         // Skip already processed blocks
-        if (done.contains(pos))
+        if (done.contains(pos)){
             return;
+        }
 
         done.add(pos);
 
@@ -71,59 +73,61 @@ public class SubroutineScanner implements Opcode {
         iter.move(pos);
 
         boolean next;
-        do {
+        do{
             pos = iter.next();
             next = scanOp(pos, iter, sub) && iter.hasNext();
-        } while (next);
+        }while (next);
 
         iter.move(old);
     }
 
-    private boolean scanOp(int pos, CodeIterator iter, Subroutine sub) throws BadBytecode {
+    private boolean scanOp(int pos,CodeIterator iter,Subroutine sub) throws BadBytecode{
         subroutines[pos] = sub;
 
         int opcode = iter.byteAt(pos);
 
-        if (opcode == TABLESWITCH) {
+        if (opcode == TABLESWITCH){
             scanTableSwitch(pos, iter, sub);
 
             return false;
         }
 
-        if (opcode == LOOKUPSWITCH) {
+        if (opcode == LOOKUPSWITCH){
             scanLookupSwitch(pos, iter, sub);
 
             return false;
         }
 
         // All forms of return and throw end current code flow
-        if (Util.isReturn(opcode) || opcode == RET || opcode == ATHROW)
+        if (Util.isReturn(opcode) || opcode == RET || opcode == ATHROW){
             return false;
+        }
 
-        if (Util.isJumpInstruction(opcode)) {
+        if (Util.isJumpInstruction(opcode)){
             int target = Util.getJumpTarget(pos, iter);
-            if (opcode == JSR || opcode == JSR_W) {
+            if (opcode == JSR || opcode == JSR_W){
                 Subroutine s = subTable.get(target);
-                if (s == null) {
+                if (s == null){
                     s = new Subroutine(target, pos);
                     subTable.put(target, s);
                     scan(target, iter, s);
-                } else {
+                }else{
                     s.addCaller(pos);
                 }
-            } else {
+            }else{
                 scan(target, iter, sub);
 
                 // GOTO ends current code flow
-                if (Util.isGoto(opcode))
+                if (Util.isGoto(opcode)){
                     return false;
+                }
             }
         }
 
         return true;
     }
 
-    private void scanLookupSwitch(int pos, CodeIterator iter, Subroutine sub) throws BadBytecode {
+    private void scanLookupSwitch(int pos,CodeIterator iter,Subroutine sub) throws BadBytecode{
         int index = (pos & ~3) + 4;
         // default
         scan(pos + iter.s32bitAt(index), iter, sub);
@@ -131,13 +135,13 @@ public class SubroutineScanner implements Opcode {
         int end = npairs * 8 + (index += 4);
 
         // skip "match"
-        for (index += 4; index < end; index += 8) {
+        for (index += 4; index < end; index += 8){
             int target = iter.s32bitAt(index) + pos;
             scan(target, iter, sub);
         }
     }
 
-    private void scanTableSwitch(int pos, CodeIterator iter, Subroutine sub) throws BadBytecode {
+    private void scanTableSwitch(int pos,CodeIterator iter,Subroutine sub) throws BadBytecode{
         // Skip 4 byte alignment padding
         int index = (pos & ~3) + 4;
         // default
@@ -147,11 +151,10 @@ public class SubroutineScanner implements Opcode {
         int end = (high - low + 1) * 4 + (index += 4);
 
         // Offset table
-        for (; index < end; index += 4) {
+        for (; index < end; index += 4){
             int target = iter.s32bitAt(index) + pos;
             scan(target, iter, sub);
         }
     }
-
 
 }

@@ -18,25 +18,35 @@ package com.feilong.lib.javassist.compiler;
 
 import com.feilong.lib.javassist.compiler.ast.ASTree;
 
-public class NoFieldException extends CompileError {
+public class NoFieldException extends CompileError{
+
     /** default serialVersionUID */
     private static final long serialVersionUID = 1L;
-    private String fieldName;
-    private ASTree expr;
 
-    /* NAME must be JVM-internal representation.
+    private String            fieldName;
+
+    private ASTree            expr;
+
+    /*
+     * NAME must be JVM-internal representation.
      */
-    public NoFieldException(String name, ASTree e) {
+    public NoFieldException(String name, ASTree e){
         super("no such field: " + name);
         fieldName = name;
         expr = e;
     }
 
-    /* The returned name should be JVM-internal representation.
+    /*
+     * The returned name should be JVM-internal representation.
      */
-    public String getField() { return fieldName; }
+    public String getField(){
+        return fieldName;
+    }
 
-    /* Returns the expression where this exception is thrown.
+    /*
+     * Returns the expression where this exception is thrown.
      */
-    public ASTree getExpr() { return expr; }
+    public ASTree getExpr(){
+        return expr;
+    }
 }

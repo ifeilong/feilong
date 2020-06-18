@@ -21,7 +21,8 @@ package com.feilong.lib.javassist.tools.reflect;
  * This interface is implicitly implemented by the reflective
  * class.
  */
-public interface Metalevel {
+public interface Metalevel{
+
     /**
      * Obtains the class metaobject associated with this object.
      */

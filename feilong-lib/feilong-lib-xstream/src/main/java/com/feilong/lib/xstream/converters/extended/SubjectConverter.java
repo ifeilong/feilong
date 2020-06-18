@@ -10,6 +10,11 @@
  */
 package com.feilong.lib.xstream.converters.extended;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import javax.security.auth.Subject;
 
 import com.feilong.lib.xstream.converters.MarshallingContext;
@@ -18,11 +23,6 @@ import com.feilong.lib.xstream.converters.collections.AbstractCollectionConverte
 import com.feilong.lib.xstream.io.HierarchicalStreamReader;
 import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
 import com.feilong.lib.xstream.mapper.Mapper;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Converts a {@link Subject} instance. Note, that this Converter does only convert the contained Principals as
@@ -59,19 +59,19 @@ public class SubjectConverter extends AbstractCollectionConverter{
             writeCompleteItem(principal, context, writer);
         }
         writer.endNode();
-    };
+    }
 
     protected void marshalPublicCredentials(Set pubCredentials,HierarchicalStreamWriter writer,MarshallingContext context){
-    };
+    }
 
     protected void marshalPrivateCredentials(Set privCredentials,HierarchicalStreamWriter writer,MarshallingContext context){
-    };
+    }
 
     protected void marshalReadOnly(boolean readOnly,HierarchicalStreamWriter writer){
         writer.startNode("readOnly");
         writer.setValue(String.valueOf(readOnly));
         writer.endNode();
-    };
+    }
 
     @Override
     public Object unmarshal(HierarchicalStreamReader reader,UnmarshallingContext context){
@@ -84,22 +84,22 @@ public class SubjectConverter extends AbstractCollectionConverter{
 
     protected Set unmarshalPrincipals(HierarchicalStreamReader reader,UnmarshallingContext context){
         return populateSet(reader, context);
-    };
+    }
 
     protected Set unmarshalPublicCredentials(HierarchicalStreamReader reader,UnmarshallingContext context){
         return Collections.EMPTY_SET;
-    };
+    }
 
     protected Set unmarshalPrivateCredentials(HierarchicalStreamReader reader,UnmarshallingContext context){
         return Collections.EMPTY_SET;
-    };
+    }
 
     protected boolean unmarshalReadOnly(HierarchicalStreamReader reader){
         reader.moveDown();
         boolean readOnly = Boolean.getBoolean(reader.getValue());
         reader.moveUp();
         return readOnly;
-    };
+    }
 
     protected Set populateSet(HierarchicalStreamReader reader,UnmarshallingContext context){
         Set set = new HashSet();

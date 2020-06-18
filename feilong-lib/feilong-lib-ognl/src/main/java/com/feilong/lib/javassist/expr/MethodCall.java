@@ -35,22 +35,23 @@ import com.feilong.lib.javassist.compiler.Javac;
 /**
  * Method invocation (caller-side expression).
  */
-public class MethodCall extends Expr {
+public class MethodCall extends Expr{
+
     /**
-     * Undocumented constructor.  Do not use; internal-use only.
+     * Undocumented constructor. Do not use; internal-use only.
      */
-    protected MethodCall(int pos, CodeIterator i, CtClass declaring,
-                         MethodInfo m) {
+    protected MethodCall(int pos, CodeIterator i, CtClass declaring, MethodInfo m){
         super(pos, i, declaring, m);
     }
 
-    private int getNameAndType(ConstPool cp) {
+    private int getNameAndType(ConstPool cp){
         int pos = currentPos;
         int c = iterator.byteAt(pos);
         int index = iterator.u16bitAt(pos + 1);
 
-        if (c == INVOKEINTERFACE)
+        if (c == INVOKEINTERFACE){
             return cp.getInterfaceMethodrefNameAndType(index);
+        }
         return cp.getMethodrefNameAndType(index);
     }
 
@@ -59,26 +60,28 @@ public class MethodCall extends Expr {
      * expression represented by this object.
      */
     @Override
-    public CtBehavior where() { return super.where(); }
+    public CtBehavior where(){
+        return super.where();
+    }
 
     /**
      * Returns the line number of the source line containing the
      * method call.
      *
-     * @return -1       if this information is not available.
+     * @return -1 if this information is not available.
      */
     @Override
-    public int getLineNumber() {
+    public int getLineNumber(){
         return super.getLineNumber();
     }
 
     /**
      * Returns the source file containing the method call.
      *
-     * @return null     if this information is not available.
+     * @return null if this information is not available.
      */
     @Override
-    public String getFileName() {
+    public String getFileName(){
         return super.getFileName();
     }
 
@@ -86,7 +89,7 @@ public class MethodCall extends Expr {
      * Returns the class of the target object,
      * which the method is called on.
      */
-    protected CtClass getCtClass() throws NotFoundException {
+    protected CtClass getCtClass() throws NotFoundException{
         return thisClass.getClassPool().get(getClassName());
     }
 
@@ -94,7 +97,7 @@ public class MethodCall extends Expr {
      * Returns the class name of the target object,
      * which the method is called on.
      */
-    public String getClassName() {
+    public String getClassName(){
         String cname;
 
         ConstPool cp = getConstPool();
@@ -102,21 +105,23 @@ public class MethodCall extends Expr {
         int c = iterator.byteAt(pos);
         int index = iterator.u16bitAt(pos + 1);
 
-        if (c == INVOKEINTERFACE)
+        if (c == INVOKEINTERFACE){
             cname = cp.getInterfaceMethodrefClassName(index);
-        else
+        }else{
             cname = cp.getMethodrefClassName(index);
+        }
 
-         if (cname.charAt(0) == '[')
-             cname = Descriptor.toClassName(cname);
+        if (cname.charAt(0) == '['){
+            cname = Descriptor.toClassName(cname);
+        }
 
-         return cname;
+        return cname;
     }
 
     /**
-     * Returns the name of the called method. 
+     * Returns the name of the called method.
      */
-    public String getMethodName() {
+    public String getMethodName(){
         ConstPool cp = getConstPool();
         int nt = getNameAndType(cp);
         return cp.getUtf8Info(cp.getNameAndTypeName(nt));
@@ -125,7 +130,7 @@ public class MethodCall extends Expr {
     /**
      * Returns the called method.
      */
-    public CtMethod getMethod() throws NotFoundException {
+    public CtMethod getMethod() throws NotFoundException{
         return getCtClass().getMethod(getMethodName(), getSignature());
     }
 
@@ -139,7 +144,7 @@ public class MethodCall extends Expr {
      * @see com.feilong.lib.javassist.bytecode.Descriptor
      * @since 3.1
      */
-    public String getSignature() {
+    public String getSignature(){
         ConstPool cp = getConstPool();
         int nt = getNameAndType(cp);
         return cp.getUtf8Info(cp.getNameAndTypeDescriptor(nt));
@@ -152,7 +157,7 @@ public class MethodCall extends Expr {
      * the throws declaration allows the method to throw.
      */
     @Override
-    public CtClass[] mayThrow() {
+    public CtClass[] mayThrow(){
         return super.mayThrow();
     }
 
@@ -160,40 +165,41 @@ public class MethodCall extends Expr {
      * Returns true if the called method is of a superclass of the current
      * class.
      */
-    public boolean isSuper() {
-        return iterator.byteAt(currentPos) == INVOKESPECIAL
-            && !where().getDeclaringClass().getName().equals(getClassName());
+    public boolean isSuper(){
+        return iterator.byteAt(currentPos) == INVOKESPECIAL && !where().getDeclaringClass().getName().equals(getClassName());
     }
 
     /*
      * Returns the parameter types of the called method.
-
-    public CtClass[] getParameterTypes() throws NotFoundException {
-        return Descriptor.getParameterTypes(getMethodDesc(),
-                                            thisClass.getClassPool());
-    }
-    */
+     * 
+     * public CtClass[] getParameterTypes() throws NotFoundException {
+     * return Descriptor.getParameterTypes(getMethodDesc(),
+     * thisClass.getClassPool());
+     * }
+     */
 
     /*
      * Returns the return type of the called method.
-
-    public CtClass getReturnType() throws NotFoundException {
-        return Descriptor.getReturnType(getMethodDesc(),
-                                        thisClass.getClassPool());
-    }
-    */
+     * 
+     * public CtClass getReturnType() throws NotFoundException {
+     * return Descriptor.getReturnType(getMethodDesc(),
+     * thisClass.getClassPool());
+     * }
+     */
 
     /**
      * Replaces the method call with the bytecode derived from
      * the given source text.
      *
-     * <p>$0 is available even if the called method is static.
+     * <p>
+     * $0 is available even if the called method is static.
      *
-     * @param statement         a Java statement except try-catch.
+     * @param statement
+     *            a Java statement except try-catch.
      */
     @Override
-    public void replace(String statement) throws CannotCompileException {
-        thisClass.getClassFile();   // to call checkModify().
+    public void replace(String statement) throws CannotCompileException{
+        thisClass.getClassFile(); // to call checkModify().
         ConstPool constPool = getConstPool();
         int pos = currentPos;
         int index = iterator.u16bitAt(pos + 1);
@@ -201,41 +207,39 @@ public class MethodCall extends Expr {
         String classname, methodname, signature;
         int opcodeSize;
         int c = iterator.byteAt(pos);
-        if (c == INVOKEINTERFACE) {
+        if (c == INVOKEINTERFACE){
             opcodeSize = 5;
             classname = constPool.getInterfaceMethodrefClassName(index);
             methodname = constPool.getInterfaceMethodrefName(index);
             signature = constPool.getInterfaceMethodrefType(index);
-        }
-        else if (c == INVOKESTATIC
-                 || c == INVOKESPECIAL || c == INVOKEVIRTUAL) {
+        }else if (c == INVOKESTATIC || c == INVOKESPECIAL || c == INVOKEVIRTUAL){
             opcodeSize = 3;
             classname = constPool.getMethodrefClassName(index);
             methodname = constPool.getMethodrefName(index);
             signature = constPool.getMethodrefType(index);
-        }
-        else
+        }else{
             throw new CannotCompileException("not method invocation");
+        }
 
         Javac jc = new Javac(thisClass);
         ClassPool cp = thisClass.getClassPool();
         CodeAttribute ca = iterator.get();
-        try {
+        try{
             CtClass[] params = Descriptor.getParameterTypes(signature, cp);
             CtClass retType = Descriptor.getReturnType(signature, cp);
             int paramVar = ca.getMaxLocals();
-            jc.recordParams(classname, params,
-                            true, paramVar, withinStatic());
+            jc.recordParams(classname, params, true, paramVar, withinStatic());
             int retVar = jc.recordReturnType(retType, true);
-            if (c == INVOKESTATIC)
+            if (c == INVOKESTATIC){
                 jc.recordStaticProceed(classname, methodname);
-            else if (c == INVOKESPECIAL)
-                jc.recordSpecialProceed(Javac.param0Name, classname,
-                                        methodname, signature, index);
-            else
+            }else if (c == INVOKESPECIAL){
+                jc.recordSpecialProceed(Javac.param0Name, classname, methodname, signature, index);
+            }else{
                 jc.recordProceed(Javac.param0Name, methodname);
+            }
 
-            /* Is $_ included in the source code?
+            /*
+             * Is $_ included in the source code?
              */
             checkResultValue(retType, statement);
 
@@ -243,20 +247,22 @@ public class MethodCall extends Expr {
             storeStack(params, c == INVOKESTATIC, paramVar, bytecode);
             jc.recordLocalVariables(ca, pos);
 
-            if (retType != CtClass.voidType) {
+            if (retType != CtClass.voidType){
                 bytecode.addConstZero(retType);
-                bytecode.addStore(retVar, retType);     // initialize $_
+                bytecode.addStore(retVar, retType); // initialize $_
             }
 
             jc.compileStmnt(statement);
-            if (retType != CtClass.voidType)
+            if (retType != CtClass.voidType){
                 bytecode.addLoad(retVar, retType);
+            }
 
             replace0(pos, bytecode, opcodeSize);
-        }
-        catch (CompileError e) { throw new CannotCompileException(e); }
-        catch (NotFoundException e) { throw new CannotCompileException(e); }
-        catch (BadBytecode e) {
+        }catch (CompileError e){
+            throw new CannotCompileException(e);
+        }catch (NotFoundException e){
+            throw new CannotCompileException(e);
+        }catch (BadBytecode e){
             throw new CannotCompileException("broken method");
         }
     }

@@ -15,7 +15,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
-import java.util.Comparator;
 import java.util.List;
 
 import com.feilong.lib.xstream.converters.reflection.ObjectAccessException;
@@ -84,13 +83,9 @@ public class DependencyInjectionFactory{
             // sort available ctors according their arity
             final Constructor[] ctors = type.getConstructors();
             if (ctors.length > 1){
-                Arrays.sort(ctors, new Comparator(){
-
-                    @Override
-                    public int compare(final Object o1,final Object o2){
-                        return ((Constructor) o2).getParameterTypes().length - ((Constructor) o1).getParameterTypes().length;
-                    }
-                });
+                Arrays.sort(
+                                ctors,
+                                (o1,o2) -> ((Constructor) o2).getParameterTypes().length - ((Constructor) o1).getParameterTypes().length);
             }
 
             final TypedValue[] typedDependencies = new TypedValue[dependencies.length];
@@ -157,17 +152,17 @@ public class DependencyInjectionFactory{
                     System.arraycopy(typedDependencies, 0, deps, 0, deps.length);
                     matchingDependencies.clear();
                     usedDeps = 0;
-                    for (int j = 0; j < parameterTypes.length; j++){
+                    for (Class parameterType : parameterTypes){
                         int assignable = -1;
                         for (int k = 0; k < deps.length; k++){
                             if (deps[k] == null){
                                 continue;
                             }
-                            if (deps[k].type == parameterTypes[j]){
+                            if (deps[k].type == parameterType){
                                 assignable = k;
                                 // optimal match
                                 break;
-                            }else if (parameterTypes[j].isAssignableFrom(deps[k].type)){
+                            }else if (parameterType.isAssignableFrom(deps[k].type)){
                                 // use most specific type
                                 if (assignable < 0 || deps[assignable].type != deps[k].type
                                                 && deps[assignable].type.isAssignableFrom(deps[k].type)){
