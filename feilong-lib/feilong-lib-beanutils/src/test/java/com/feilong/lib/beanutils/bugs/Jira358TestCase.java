@@ -20,30 +20,29 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.feilong.lib.beanutils.PropertyUtils;
-import com.feilong.lib.beanutils.TestBean;
-
 /**
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-358">https://issues.apache.org/jira/browse/BEANUTILS-358</a>
  */
-public class Jira358TestCase extends TestCase {
+public class Jira358TestCase extends TestCase{
 
     /**
      * Create a test case with the specified name.
      *
-     * @param name The name of the test
+     * @param name
+     *            The name of the test
      */
-    public Jira358TestCase(final String name) {
+    public Jira358TestCase(final String name){
         super(name);
     }
 
     /**
      * Run the Test.
      *
-     * @param args Arguments
+     * @param args
+     *            Arguments
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args){
         junit.textui.TestRunner.run(suite());
     }
 
@@ -52,7 +51,7 @@ public class Jira358TestCase extends TestCase {
      *
      * @return a test suite
      */
-    public static Test suite() {
+    public static Test suite(){
         return (new TestSuite(Jira358TestCase.class));
     }
 
@@ -62,7 +61,7 @@ public class Jira358TestCase extends TestCase {
      * @throws java.lang.Exception
      */
     @Override
-    protected void setUp() throws Exception {
+    protected void setUp() throws Exception{
         super.setUp();
     }
 
@@ -72,35 +71,7 @@ public class Jira358TestCase extends TestCase {
      * @throws java.lang.Exception
      */
     @Override
-    protected void tearDown() throws Exception {
+    protected void tearDown() throws Exception{
         super.tearDown();
-    }
-
-    /**
-     * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
-     */
-    public void testPropertyUtils_getIndexedProperty_Array() throws Exception {
-
-        final TestBean bean = new TestBean();
-        try {
-            PropertyUtils.getIndexedProperty(bean, "intArray", bean.getIntArray().length);
-            fail("Expected ArrayIndexOutOfBoundsException");
-        } catch (final ArrayIndexOutOfBoundsException e) {
-            // expected result
-        }
-    }
-
-    /**
-     * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
-     */
-    public void testPropertyUtils_getIndexedProperty_List() throws Exception {
-
-        final TestBean bean = new TestBean();
-        try {
-            PropertyUtils.getIndexedProperty(bean, "listIndexed", bean.getListIndexed().size());
-            fail("Expected IndexOutOfBoundsException");
-        } catch (final IndexOutOfBoundsException e) {
-            // expected result
-        }
     }
 }

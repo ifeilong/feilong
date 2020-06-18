@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.BeanUtilsBean;
-import com.feilong.lib.beanutils.SuppressPropertiesBeanIntrospector;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -81,7 +80,6 @@ public class Jira157TestCase extends TestCase{
     protected void setUp() throws Exception{
         super.setUp();
         BeanUtilsBean custom = new BeanUtilsBean();
-        custom.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         BeanUtilsBean.setInstance(custom);
     }
 

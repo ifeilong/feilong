@@ -30,6 +30,8 @@ interface JsonHook<T extends JSON> {
      *
      * @param t
      *            the t
+     * @throws Exception
+     *             the exception
      */
     void handle(T t) throws Exception;
 }

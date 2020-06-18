@@ -40,15 +40,15 @@ public class CrmAddpointCommandJsonTest extends AbstractTest{
 
         //---------------------------------------------------------------
 
-        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
+        JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
 
-        jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(
+        javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(
                         toMap(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE));
 
         //---------------------------------------------------------------
 
         assertThat(
-                        JsonUtil.format(crmAddpointCommand, jsonFormatConfig), //
+                        JsonUtil.format(crmAddpointCommand, javaToJsonConfig), //
                         allOf(//
                                         containsString("\"OpenId\": \"feilong888888ky\""),
                                         containsString("\"ConsumptionChannel\": \"feilongstore\""),

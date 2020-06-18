@@ -17,6 +17,7 @@ package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -36,8 +37,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
-import com.feilong.io.entity.MimeType;
 import com.feilong.core.Validate;
+import com.feilong.io.entity.MimeType;
 
 /**
  * {@link javax.servlet.http.HttpServletResponse HttpServletResponse} 工具类.
@@ -387,7 +388,7 @@ public final class ResponseUtil{
      */
     public static void write(HttpServletResponse response,Object content){
         String contentType = null;
-        String characterEncoding = null;
+        String characterEncoding = UTF8;
         write(response, content, contentType, characterEncoding);
     }
 
@@ -415,12 +416,9 @@ public final class ResponseUtil{
         if (isNotNullOrEmpty(contentType)){
             response.setContentType(contentType);
         }
-        if (isNotNullOrEmpty(characterEncoding)){
-            response.setCharacterEncoding(characterEncoding);
-        }
+        response.setCharacterEncoding(defaultIfNullOrEmpty(characterEncoding, UTF8));
 
         //---------------------------------------------------------------
-
         try{
             PrintWriter printWriter = response.getWriter();
             printWriter.print(content);

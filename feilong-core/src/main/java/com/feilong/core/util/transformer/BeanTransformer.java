@@ -19,9 +19,9 @@ import java.io.Serializable;
 
 import org.apache.commons.collections4.Transformer;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.core.Validate;
 
 /**
  * 将传入的bean转成指定类型 <code>toBeanType</code> 的Bean 的转换器.
@@ -36,7 +36,7 @@ import com.feilong.core.Validate;
  *            输入类型
  * @param <O>
  *            输出类型
- * @see com.feilong.lib.beanutils.BeanToPropertyValueTransformer
+ * @see "org.apache.commons.beanutils.BeanToPropertyValueTransformer"
  * @since 1.10.1
  */
 public class BeanTransformer<I, O> implements Transformer<I, O>,Serializable{

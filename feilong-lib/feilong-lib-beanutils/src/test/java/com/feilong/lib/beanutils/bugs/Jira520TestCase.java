@@ -18,7 +18,6 @@ package com.feilong.lib.beanutils.bugs;
 
 import com.feilong.lib.beanutils.AlphaBean;
 import com.feilong.lib.beanutils.BeanUtilsBean;
-import com.feilong.lib.beanutils.SuppressPropertiesBeanIntrospector;
 
 import junit.framework.TestCase;
 
@@ -27,29 +26,19 @@ import junit.framework.TestCase;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-520">https://issues.apache.org/jira/browse/BEANUTILS-520</a>
  */
-public class Jira520TestCase extends TestCase {
+public class Jira520TestCase extends TestCase{
+
     /**
      * By default opt-in to security that does not allow access to "class".
      */
-    public void testSuppressClassPropertyByDefault() throws Exception {
+    public void testSuppressClassPropertyByDefault() throws Exception{
         final BeanUtilsBean bub = new BeanUtilsBean();
         final AlphaBean bean = new AlphaBean();
-        try {
+        try{
             bub.getProperty(bean, "class");
             fail("Could access class property!");
-        } catch (final NoSuchMethodException ex) {
+        }catch (final NoSuchMethodException ex){
             // ok
         }
-    }
-
-    /**
-     * Allow opt-out to make your app less secure but allow access to "class".
-     */
-    public void testAllowAccessToClassProperty() throws Exception {
-        final BeanUtilsBean bub = new BeanUtilsBean();
-        bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
-        final AlphaBean bean = new AlphaBean();
-        String result = bub.getProperty(bean, "class");
-        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils.AlphaBean", result);
     }
 }

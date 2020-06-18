@@ -27,7 +27,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @param <T>
  *            the generic type
  * @see "org.apache.commons.beanutils.BeanPredicate"
- * @see com.feilong.lib.beanutils.BeanPropertyValueEqualsPredicate
+ * @see "org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate"
  * @see com.feilong.lib.collection4.functors.ComparatorPredicate
  * @since 1.8.0
  */

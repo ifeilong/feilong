@@ -26,10 +26,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.lang3.ClassUtils;
-import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -242,7 +242,7 @@ public final class PropertyUtil{
      *             如果在copy的过程中,有任何的checkedException,将会被转成该异常返回
      * @see #setProperty(Object, String, Object)
      * @see BeanUtil#copyProperties(Object, Object, String...)
-     * @see com.feilong.lib.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     * @see "org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)"
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
      *      BeanUtils,Cglib BeanCopier)</a>
      * @since 1.4.1

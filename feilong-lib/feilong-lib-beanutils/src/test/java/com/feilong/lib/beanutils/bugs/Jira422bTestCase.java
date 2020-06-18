@@ -16,12 +16,6 @@
  */
 package com.feilong.lib.beanutils.bugs;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
-import com.feilong.lib.beanutils.PropertyUtils;
-
 /**
  * Variant of {@link Jira422TestCase} that is compatible with BEANUTILS-492
  *
@@ -29,50 +23,34 @@ import com.feilong.lib.beanutils.PropertyUtils;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">BEANUTILS-422</a>
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */
-public class Jira422bTestCase {
-
-    @Test
-    public void testRootBean() throws Exception {
-        final RootBeanB bean = new FirstChildBeanB();
-        final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
-        assertEquals(String.class.getName(), propertyType.getName());
-    }
-
-
-    @Test
-    public void testSecondChildBean() throws Exception {
-        final RootBeanB bean = new SecondChildBeanB();
-        final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
-        assertEquals(String.class.getName(), propertyType.getName());
-    }
+public class Jira422bTestCase{
 
 }
 
-
-class RootBeanB {
+class RootBeanB{
 
     private String[] file;
 
-    public String[] getFile() {
+    public String[] getFile(){
         return file;
     }
 
-    public void setFile(final String[] file) {
+    public void setFile(final String[] file){
         this.file = file;
     }
 
-    public String getFile(final int i) {
+    public String getFile(final int i){
         return file[i];
     }
 
-    public void setFile(final int i, final String file) {
+    public void setFile(final int i,final String file){
         this.file[i] = file;
     }
 
 }
 
-class FirstChildBeanB extends RootBeanB {
+class FirstChildBeanB extends RootBeanB{
 }
 
-class SecondChildBeanB extends RootBeanB {
+class SecondChildBeanB extends RootBeanB{
 }

@@ -18,11 +18,10 @@ package com.feilong.lib.beanutils.bugs;
 
 import java.beans.PropertyDescriptor;
 
-import junit.framework.TestCase;
-
 import com.feilong.lib.beanutils.FluentIntrospectionTestBean;
-import com.feilong.lib.beanutils.FluentPropertyBeanIntrospector;
 import com.feilong.lib.beanutils.PropertyUtilsBean;
+
+import junit.framework.TestCase;
 
 /**
  * Write methods for PropertyDescriptors created during custom introspection are lost. See
@@ -31,18 +30,18 @@ import com.feilong.lib.beanutils.PropertyUtilsBean;
  *
  * @version $Id$
  */
-public class Jira456TestCase extends TestCase {
+public class Jira456TestCase extends TestCase{
+
     /** Constant for the name of the test property. */
     private static final String TEST_PROP = "fluentGetProperty";
 
     /** The PropertyUtilsBean used by the tests. */
-    private PropertyUtilsBean pub;
+    private PropertyUtilsBean   pub;
 
     @Override
-    protected void setUp() throws Exception {
+    protected void setUp() throws Exception{
         super.setUp();
         pub = new PropertyUtilsBean();
-        pub.addBeanIntrospector(new FluentPropertyBeanIntrospector());
     }
 
     /**
@@ -50,9 +49,10 @@ public class Jira456TestCase extends TestCase {
      * property. This simulates that the write method reference is freed by the GC.
      *
      * @return the bean instance used for testing
-     * @throws Exception if an error occurs
+     * @throws Exception
+     *             if an error occurs
      */
-    private FluentIntrospectionTestBean clearWriteMethodRef() throws Exception {
+    private FluentIntrospectionTestBean clearWriteMethodRef() throws Exception{
         final FluentIntrospectionTestBean bean = new FluentIntrospectionTestBean();
         final PropertyDescriptor pd = pub.getPropertyDescriptor(bean, TEST_PROP);
 
@@ -64,7 +64,7 @@ public class Jira456TestCase extends TestCase {
     /**
      * Tests whether a lost write method is automatically recovered and can be invoked.
      */
-    public void testWriteMethodRecover() throws Exception {
+    public void testWriteMethodRecover() throws Exception{
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         final String value = "Test value";
         pub.setProperty(bean, TEST_PROP, value);
@@ -75,7 +75,7 @@ public class Jira456TestCase extends TestCase {
      * Tests whether a property is recognized as writable even if the reference to its
      * write method was freed.
      */
-    public void testPropertyIsWritable() throws Exception {
+    public void testPropertyIsWritable() throws Exception{
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         assertTrue("Not writable", pub.isWriteable(bean, TEST_PROP));
     }

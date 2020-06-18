@@ -22,9 +22,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.FluentPropertyBeanIntrospector;
-import com.feilong.lib.beanutils.PropertyUtilsBean;
-
 import junit.framework.TestCase;
 
 /**
@@ -32,18 +29,19 @@ import junit.framework.TestCase;
  *
  * @version $Id$
  */
-public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
+public class FluentPropertyBeanIntrospectorTestCase extends TestCase{
+
     /**
      * Puts all property descriptors into a map so that they can be accessed by
      * property name.
      *
-     * @param descs the array with descriptors
+     * @param descs
+     *            the array with descriptors
      * @return a map with property names as keys
      */
-    private static Map<String, PropertyDescriptor> createDescriptorMap(
-            final PropertyDescriptor[] descs) {
+    private static Map<String, PropertyDescriptor> createDescriptorMap(final PropertyDescriptor[] descs){
         final Map<String, PropertyDescriptor> map = new HashMap<String, PropertyDescriptor>();
-        for (final PropertyDescriptor pd : descs) {
+        for (final PropertyDescriptor pd : descs){
             map.put(pd.getName(), pd);
         }
         return map;
@@ -53,12 +51,13 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * Convenience method for obtaining a specific property descriptor and
      * checking whether it exists.
      *
-     * @param props the map with property descriptors
-     * @param name the name of the desired descriptor
+     * @param props
+     *            the map with property descriptors
+     * @param name
+     *            the name of the desired descriptor
      * @return the descriptor from the map
      */
-    private static PropertyDescriptor fetchDescriptor(
-            final Map<String, PropertyDescriptor> props, final String name) {
+    private static PropertyDescriptor fetchDescriptor(final Map<String, PropertyDescriptor> props,final String name){
         assertTrue("Property not found: " + name, props.containsKey(name));
         return props.get(name);
     }
@@ -66,11 +65,11 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
     /**
      * Tries to create an instance without a prefix for write methods.
      */
-    public void testInitNoPrefix() {
-        try {
+    public void testInitNoPrefix(){
+        try{
             new FluentPropertyBeanIntrospector(null);
             fail("Missing prefix for write methods not detected!");
-        } catch (final IllegalArgumentException iex) {
+        }catch (final IllegalArgumentException iex){
             // ok
         }
     }
@@ -78,12 +77,10 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
     /**
      * Tests whether correct property descriptors are detected.
      */
-    public void testIntrospection() throws IntrospectionException {
+    public void testIntrospection() throws IntrospectionException{
         final PropertyUtilsBean pu = new PropertyUtilsBean();
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
-        pu.addBeanIntrospector(introspector);
-        final Map<String, PropertyDescriptor> props = createDescriptorMap(pu
-                .getPropertyDescriptors(FluentIntrospectionTestBean.class));
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(pu.getPropertyDescriptors(FluentIntrospectionTestBean.class));
         PropertyDescriptor pd = fetchDescriptor(props, "name");
         assertNotNull("No read method for name", pd.getReadMethod());
         assertNotNull("No write method for name", pd.getWriteMethod());
@@ -92,41 +89,37 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         assertNull("Read method for fluentProperty", pd.getReadMethod());
         assertNotNull("No write method for fluentProperty", pd.getWriteMethod());
         pd = fetchDescriptor(props, "fluentGetProperty");
-        assertNotNull("No read method for fluentGetProperty",
-                pd.getReadMethod());
-        assertNotNull("No write method for fluentGetProperty",
-                pd.getWriteMethod());
+        assertNotNull("No read method for fluentGetProperty", pd.getReadMethod());
+        assertNotNull("No write method for fluentGetProperty", pd.getWriteMethod());
     }
 
-    public void testIntrospectionCaps() throws Exception {
-	    final PropertyUtilsBean pu = new PropertyUtilsBean();
+    public void testIntrospectionCaps() throws Exception{
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
 
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
 
-	    pu.addBeanIntrospector(introspector);
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(pu.getPropertyDescriptors(CapsBean.class));
 
-	    final Map<String, PropertyDescriptor> props = createDescriptorMap(
-			pu.getPropertyDescriptors(CapsBean.class));
+        PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
 
-	    PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
+        assertNotNull("missing property", aDescriptor);
 
-	    assertNotNull("missing property", aDescriptor);
+        assertNotNull("No read method for uri", aDescriptor.getReadMethod());
+        assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
 
-	    assertNotNull("No read method for uri", aDescriptor.getReadMethod());
-	    assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
-
-	    assertNull("Should not find mis-capitalized property", props.get("uRI"));
+        assertNull("Should not find mis-capitalized property", props.get("uRI"));
     }
 
-	public static final class CapsBean {
-		private URI mURI;
+    public static final class CapsBean{
 
-		public URI getURI() {
-			return mURI;
-		}
+        private URI mURI;
 
-		public void setURI(final URI theURI) {
-			mURI = theURI;
-		}
-	}
+        public URI getURI(){
+            return mURI;
+        }
+
+        public void setURI(final URI theURI){
+            mURI = theURI;
+        }
+    }
 }

@@ -107,30 +107,6 @@ public class Jira61TestCase extends TestCase{
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for simple properties.
-     */
-    public void testIssue_BEANUTILS_61_PropertyUtils_isReadable(){
-        boolean result = false;
-
-        try{
-            result = PropertyUtils.isReadable(wrapDynaBean, "simpleReadOnly");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("simpleReadOnly Threw exception: " + t);
-        }
-        assertTrue("PropertyUtils.isReadable(bean, \"simpleReadOnly\") returned " + result, result);
-
-        try{
-            result = PropertyUtils.isReadable(wrapDynaBean, "simpleWriteOnly");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("simpleWriteOnly Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"simpleWriteOnly\") returned " + result, result);
-    }
-
-    /**
      * Test {@link PropertyUtils#isWriteable(Object, String)}
      * for simple properties.
      */
@@ -152,54 +128,6 @@ public class Jira61TestCase extends TestCase{
             fail("simpleWriteOnly Threw exception: " + t);
         }
         assertTrue("PropertyUtils.isWriteable(bean, \"simpleWriteOnly\") returned " + result, result);
-    }
-
-    /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for indexed properties.
-     */
-    public void testIssue_BEANUTILS_61_PropertyUtils_isReadable_Indexed(){
-        boolean result = false;
-
-        try{
-            result = PropertyUtils.isReadable(wrapDynaBean, "indexedReadOnly");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("indexedReadOnly Threw exception: " + t);
-        }
-        assertTrue("PropertyUtils.isReadable(bean, \"indexedReadOnly\") returned " + result, result);
-
-        try{
-            result = PropertyUtils.isReadable(wrapDynaBean, "indexedWriteOnly");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("indexedWriteOnly Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"indexedWriteOnly\") returned " + result, result);
-    }
-
-    /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for mapped properties.
-     */
-    public void testIssue_BEANUTILS_61_PropertyUtils_isReadable_Mapped(){
-        boolean result = false;
-
-        try{
-            result = PropertyUtils.isReadable(wrapDynaBean, "mappedReadOnly");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("mappedReadOnly Threw exception: " + t);
-        }
-        assertTrue("PropertyUtils.isReadable(bean, \"mappedReadOnly\") returned " + result, result);
-
-        try{
-            result = PropertyUtils.isReadable(wrapDynaBean, "mappedWriteOnly");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("mappedWriteOnly Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"mappedWriteOnly\") returned " + result, result);
     }
 
     /**

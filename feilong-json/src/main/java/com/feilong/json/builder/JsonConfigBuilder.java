@@ -204,11 +204,14 @@ public final class JsonConfigBuilder{
      * <blockquote>
      * <ol>
      * <li>{@link CycleDetectionStrategy#LENIENT} 避免循环引用</li>
+     * 
      * <li>no IgnoreDefaultExcludes,默认过滤几个key "class", "declaringClass","metaClass"</li>
+     * 
      * <li>
      * {@link DateJsonValueProcessor},如果是日期,自动渲染成 {@link DatePattern#COMMON_DATE_AND_TIME} 格式类型,如有需要可以使用
      * {@link JavaToJsonConfig#setPropertyNameAndJsonValueProcessorMap(Map)}覆盖此属性
      * </li>
+     * 
      * <li>AllowNonStringKeys,允许非 string类型的key</li>
      * </ol>
      * </blockquote>

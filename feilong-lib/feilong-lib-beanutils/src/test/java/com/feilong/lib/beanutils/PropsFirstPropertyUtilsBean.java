@@ -20,8 +20,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.PropertyUtilsBean;
-
 /**
  * A PropertyUtilsBean which customises the behaviour of the
  * setNestedProperty and getNestedProperty methods to look for
@@ -29,9 +27,9 @@ import com.feilong.lib.beanutils.PropertyUtilsBean;
  *
  * @version $Id$
  */
-public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
+public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean{
 
-    public PropsFirstPropertyUtilsBean() {
+    public PropsFirstPropertyUtilsBean(){
         super();
     }
 
@@ -42,33 +40,13 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * be correctly handled.
      */
     @Override
-    protected Object getPropertyOfMapBean(final Map<?, ?> bean, final String propertyName)
-    throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
+    protected void setPropertyOfMapBean(final Map<String, Object> bean,final String propertyName,final Object value)
+                    throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
         final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
-        if (descriptor == null) {
-            // no simple property exists so return the value from the map
-            return bean.get(propertyName);
-        } else {
-            // a simple property exists so return its value instead.
-            return getSimpleProperty(bean, propertyName);
-        }
-    }
-
-    /**
-     * Note: this is a *very rough* override of this method. In particular,
-     * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
-     * propertyName, so propertyNames like "a(b)" or "a[3]" will not
-     * be correctly handled.
-     */
-    @Override
-    protected void setPropertyOfMapBean(final Map<String, Object> bean, final String propertyName, final Object value)
-        throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
-        if (descriptor == null) {
+        if (descriptor == null){
             // no simple property exists so put the value into the map
             bean.put(propertyName, value);
-        } else {
+        }else{
             // a simple property exists so set that instead.
             setSimpleProperty(bean, propertyName, value);
         }

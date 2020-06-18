@@ -19,9 +19,6 @@ package com.feilong.lib.beanutils.bugs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.lib.beanutils.PropertyUtils;
-import com.feilong.lib.beanutils.bugs.other.Jira87BeanFactory;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -95,20 +92,5 @@ public class Jira87TestCase extends TestCase{
     @Override
     protected void tearDown() throws Exception{
         super.tearDown();
-    }
-
-    /**
-     * Interface definition with a mapped property
-     */
-    public void testJira87(){
-
-        final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
-        try{
-            // N.B. The test impl. returns the key value
-            assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
     }
 }

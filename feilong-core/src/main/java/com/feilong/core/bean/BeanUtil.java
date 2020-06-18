@@ -27,9 +27,9 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
 
+import com.feilong.core.Validate;
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.LazyDynaBean;
-import com.feilong.core.Validate;
 import com.feilong.lib.lang3.reflect.FieldUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -330,7 +330,7 @@ public final class BeanUtil{
      *             有任何异常,转成{@link BeanOperationException}返回
      * @see com.feilong.lib.beanutils.BeanUtils#setProperty(Object, String, Object)
      * @see com.feilong.lib.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
-     * @see com.feilong.lib.beanutils.PropertyUtils#setProperty(Object, String, Object)
+     * @see "org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)"
      * @see com.feilong.core.bean.PropertyUtil#setProperty(Object, String, Object)
      */
     private static void setProperty(Object bean,String propertyName,Object value){
@@ -367,7 +367,7 @@ public final class BeanUtil{
      * @throws BeanOperationException
      *             在调用 {@link BeanUtils#getProperty(Object, String)}过程中有任何异常,转成{@link BeanOperationException}返回
      * @see com.feilong.lib.beanutils.BeanUtils#getProperty(Object, String)
-     * @see com.feilong.lib.beanutils.PropertyUtils#getProperty(Object, String)
+     * @see "org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)"
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @since 1.9.0 change access to private
      */
@@ -423,7 +423,7 @@ public final class BeanUtil{
      * @throws BeanOperationException
      *             在调用api有任何异常,转成{@link BeanOperationException}返回
      * @see com.feilong.lib.beanutils.BeanUtils#cloneBean(Object)
-     * @see com.feilong.lib.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     * @see "org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)"
      * @see com.feilong.lib.lang3.SerializationUtils#clone(java.io.Serializable)
      * @see com.feilong.lib.lang3.ObjectUtils#clone(Object)
      * @see com.feilong.lib.lang3.ObjectUtils#cloneIfPossible(Object)

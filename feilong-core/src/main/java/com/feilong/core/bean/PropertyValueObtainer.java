@@ -84,7 +84,6 @@ public final class PropertyValueObtainer{
      */
     @SuppressWarnings("unchecked")
     private static <T> T getDataUseApache(Object bean,String propertyName){
-        //---------------------------------------------------------------
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
@@ -148,7 +147,7 @@ public final class PropertyValueObtainer{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see PropertyUtil#getProperty(Object, String)
-     * @see com.feilong.lib.beanutils.BeanToPropertyValueTransformer
+     * @see "org.apache.commons.beanutils.BeanToPropertyValueTransformer"
      * @since 1.0.8
      */
     public static <T, O, K extends Collection<T>> K getPropertyValueCollection(

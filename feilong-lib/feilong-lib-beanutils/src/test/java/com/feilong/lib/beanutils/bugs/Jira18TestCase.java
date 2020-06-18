@@ -93,21 +93,6 @@ public class Jira18TestCase extends TestCase{
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for simple properties.
-     */
-    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable(){
-        boolean result = false;
-        try{
-            result = PropertyUtils.isReadable(bean, "simple");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"simple\") returned true", result);
-    }
-
-    /**
      * Test {@link PropertyUtils#isWriteable(Object, String)}
      * for simple properties.
      */
@@ -123,21 +108,6 @@ public class Jira18TestCase extends TestCase{
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for indexed properties.
-     */
-    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Indexed(){
-        boolean result = false;
-        try{
-            result = PropertyUtils.isReadable(bean, "indexed");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"indexed\") returned true", result);
-    }
-
-    /**
      * Test {@link PropertyUtils#isWriteable(Object, String)}
      * for indexed properties.
      */
@@ -150,21 +120,6 @@ public class Jira18TestCase extends TestCase{
             fail("Threw exception: " + t);
         }
         assertFalse("PropertyUtils.isWriteable(bean, \"indexed\") returned true", result);
-    }
-
-    /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for Mapped properties.
-     */
-    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Mapped(){
-        boolean result = false;
-        try{
-            result = PropertyUtils.isReadable(bean, "mapped");
-        }catch (final Throwable t){
-            LOGGER.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"mapped\") returned true", result);
     }
 
     /**

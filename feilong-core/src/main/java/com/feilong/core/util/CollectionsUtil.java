@@ -2232,8 +2232,9 @@ public final class CollectionsUtil{
      *            <ol>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>inputBeanIterable</code> bean 没有的属性名字,将会抛出异常</li>
      *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>inputBeanIterable</code>
-     *            bean有,但是<code>outputListBeanType</code>没有的属性名字,会抛出异常,see{@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)
-     *            copyProperties} Line2078</li>
+     *            bean有,但是<code>outputListBeanType</code>没有的属性名字,会抛出异常,see
+     *            org.apache.commons.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties Line2078
+     *            </li>
      *            </ol>
      * @return 如果 <code>inputBeanIterable</code> 是null,返回 null<br>
      *         如果 <code>inputBeanIterable</code> 中有元素是null,那么返回的list对应位置的元素也是null<br>

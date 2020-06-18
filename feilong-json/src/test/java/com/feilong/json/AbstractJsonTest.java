@@ -20,7 +20,6 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.now;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
 import com.feilong.store.member.UserInfo;
@@ -28,10 +27,8 @@ import com.feilong.test.AbstractTest;
 
 public abstract class AbstractJsonTest extends AbstractTest{
 
-    /** The Constant USER. */
     protected static final User   USER             = getUserForJsonTest();
 
-    /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */
     protected static final String USER_JSON_STRING = JsonUtil.format(USER, 0, 0);
 
     //---------------------------------------------------------------
@@ -58,8 +55,6 @@ public abstract class AbstractJsonTest extends AbstractTest{
 
         user.setUserAddresses(toArray(userAddress1, userAddress2));
         user.setUserAddresseList(toList(userAddress1, userAddress2));
-
         return user;
     }
-
 }

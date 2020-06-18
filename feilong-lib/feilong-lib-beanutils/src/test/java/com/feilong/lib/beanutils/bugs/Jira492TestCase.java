@@ -41,50 +41,50 @@ import com.feilong.lib.beanutils.bugs.other.Jira492IndexedListsSupport.IndexedBe
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */
-public class Jira492TestCase {
+public class Jira492TestCase{
 
-    private final BeanUtilsBean beanUtils = new BeanUtilsBean();
+    private final BeanUtilsBean     beanUtils     = new BeanUtilsBean();
 
     private final PropertyUtilsBean propertyUtils = new PropertyUtilsBean();
 
-    private IndexedBean bean;
+    private IndexedBean             bean;
 
     @Before
-    public void makeBean() {
+    public void makeBean(){
         bean = new IndexedBean();
         bean.setSomeList(Arrays.asList("item0", "item1"));
     }
 
     @Test
-    public void getIndexedProperty() throws Exception {
+    public void getIndexedProperty() throws Exception{
         assertEquals("item0", beanUtils.getIndexedProperty(bean, "someList", 0));
         assertEquals("item1", beanUtils.getIndexedProperty(bean, "someList[1]"));
     }
 
     @Test
-    public void getPropertySubScript() throws Exception {
+    public void getPropertySubScript() throws Exception{
         assertEquals("item0", beanUtils.getProperty(bean, "someList[0]"));
         assertEquals("item1", beanUtils.getProperty(bean, "someList[1]"));
     }
 
     @Test
-    public void setIndexedProperty() throws Exception {
+    public void setIndexedProperty() throws Exception{
         beanUtils.setProperty(bean, "someList[1]", "item1-modified");
         assertEquals("item1-modified", beanUtils.getIndexedProperty(bean, "someList", 1));
     }
 
     @Test
-    public void getProperty() throws Exception {
+    public void getProperty() throws Exception{
         assertEquals("item0", beanUtils.getProperty(bean, "someList"));
     }
 
     @Test
-    public void getPropertyUnconverted() throws Exception {
+    public void getPropertyUnconverted() throws Exception{
         Object someList = propertyUtils.getProperty(bean, "someList");
         assertTrue("Did not retrieve list", someList instanceof List);
     }
 
-    public void getArrayProperty() throws Exception {
+    public void getArrayProperty() throws Exception{
         String[] arr = beanUtils.getArrayProperty(bean, "someList");
         assertEquals(2, arr.length);
         assertEquals("item0", arr[0]);
@@ -92,31 +92,20 @@ public class Jira492TestCase {
     }
 
     @Test
-    public void describe() throws Exception {
+    public void describe() throws Exception{
         Map<String, String> described = beanUtils.describe(bean);
         // Only first element survives as a String
         assertEquals("item0", described.get("someList"));
     }
 
     @Test
-    public void getPropertyType() throws Exception {
-        if (supportsIndexedLists()) {
-            // legacy behaviour (< Java 8)
-            assertEquals(String.class, propertyUtils.getPropertyType(bean, "someList[0]"));
-        } else {
-            assertEquals(List.class, propertyUtils.getPropertyType(bean, "someList"));
-        }
-    }
-
-    @Test
-    public void getPropertyDescriptor() throws Exception {
+    public void getPropertyDescriptor() throws Exception{
         PropertyDescriptor propDesc = propertyUtils.getPropertyDescriptor(bean, "someList");
-        if (supportsIndexedLists()) {
+        if (supportsIndexedLists()){
             // Java 7 or earlier? (BEANUTILS-492)
             IndexedPropertyDescriptor indexed = (IndexedPropertyDescriptor) propDesc;
             assertEquals(String.class, indexed.getIndexedReadMethod().getReturnType());
         }
     }
-
 
 }
