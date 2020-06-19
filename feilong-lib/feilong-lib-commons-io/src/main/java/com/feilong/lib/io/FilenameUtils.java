@@ -96,6 +96,8 @@ public class FilenameUtils{
      */
     private static final char WINDOWS_SEPARATOR   = '\\';
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the index of the last directory separator character.
      * <p>

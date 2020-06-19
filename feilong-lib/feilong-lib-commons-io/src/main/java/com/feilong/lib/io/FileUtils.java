@@ -359,23 +359,6 @@ public class FileUtils{
 
     //-----------------------------------------------------------------------
     /**
-     * Converts an array of file extensions to suffixes for use
-     * with IOFileFilters.
-     *
-     * @param extensions
-     *            an array of extensions. Format: {"java", "xml"}
-     * @return an array of suffixes. Format: {".java", ".xml"}
-     */
-    private static String[] toSuffixes(final String[] extensions){
-        final String[] suffixes = new String[extensions.length];
-        for (int i = 0; i < extensions.length; i++){
-            suffixes[i] = "." + extensions[i];
-        }
-        return suffixes;
-    }
-
-    //-----------------------------------------------------------------------
-    /**
      * Convert from a <code>URL</code> to a <code>File</code>.
      * <p>
      * From version 1.1 this method will decode the URL.
@@ -959,26 +942,6 @@ public class FileUtils{
                 }
             }
         }
-    }
-
-    /**
-     * Makes any necessary but nonexistent parent directories for a given File. If the parent directory cannot be
-     * created then an IOException is thrown.
-     *
-     * @param file
-     *            file with parent to create, must not be {@code null}
-     * @throws NullPointerException
-     *             if the file is {@code null}
-     * @throws IOException
-     *             if the parent directory cannot be created
-     * @since 2.5
-     */
-    public static void forceMkdirParent(final File file) throws IOException{
-        final File parent = file.getParentFile();
-        if (parent == null){
-            return;
-        }
-        forceMkdir(parent);
     }
 
     //-----------------------------------------------------------------------

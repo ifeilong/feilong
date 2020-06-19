@@ -54,20 +54,6 @@ public class StringBuilderWriter extends Writer implements Serializable{
     }
 
     /**
-     * Constructs a new instance with the specified {@link StringBuilder}.
-     *
-     * <p>
-     * If {@code builder} is null a new instance with default capacity will be created.
-     * </p>
-     *
-     * @param builder
-     *            The String builder. May be null.
-     */
-    public StringBuilderWriter(final StringBuilder builder){
-        this.builder = builder != null ? builder : new StringBuilder();
-    }
-
-    /**
      * Appends a single character to this Writer.
      *
      * @param value

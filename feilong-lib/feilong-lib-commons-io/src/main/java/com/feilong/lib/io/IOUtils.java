@@ -57,9 +57,7 @@ import com.feilong.lib.io.output.StringBuilderWriter;
  * The various copy methods all delegate the actual copying to one of the following methods:
  * <ul>
  * <li>{@link #copyLarge(InputStream, OutputStream, byte[])}</li>
- * <li>{@link #copyLarge(InputStream, OutputStream, long, long, byte[])}</li>
  * <li>{@link #copyLarge(Reader, Writer, char[])}</li>
- * <li>{@link #copyLarge(Reader, Writer, long, long, char[])}</li>
  * </ul>
  * For example, {@link #copy(InputStream, OutputStream)} calls {@link #copyLarge(InputStream, OutputStream)}
  * which calls {@link #copy(InputStream, OutputStream, int)} which creates the buffer and calls
