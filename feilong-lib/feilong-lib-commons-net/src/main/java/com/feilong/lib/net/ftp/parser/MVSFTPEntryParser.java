@@ -57,7 +57,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
      * possible
      */
     static final String        DEFAULT_DATE_FORMAT    = "yyyy/MM/dd HH:mm";               // 2001/09/18
-                                                                  // 13:52
+    // 13:52
 
     /**
      * Matches these entries:
@@ -68,7 +68,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
      * </pre>
      */
     static final String        FILE_LIST_REGEX        = "\\S+\\s+" +                      // volume
-                                                       // ignored
+    // ignored
                     "\\S+\\s+" +                                                          // unit - ignored
                     "\\S+\\s+" +                                                          // access date - ignored
                     "\\S+\\s+" +                                                          // extents -ignored

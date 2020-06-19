@@ -93,7 +93,7 @@ public final class Util{
      *             the CopyStreamException getTotalBytesTransferred() and
      *             getIOException() methods.
      ***/
-    public static final long copyStream(
+    public static long copyStream(
                     InputStream source,
                     OutputStream dest,
                     int bufferSize,
@@ -181,7 +181,7 @@ public final class Util{
      *             the CopyStreamException getTotalBytesTransferred() and
      *             getIOException() methods.
      ***/
-    public static final long copyStream(InputStream source,OutputStream dest,int bufferSize,long streamSize,CopyStreamListener listener)
+    public static long copyStream(InputStream source,OutputStream dest,int bufferSize,long streamSize,CopyStreamListener listener)
                     throws CopyStreamException{
         return copyStream(source, dest, bufferSize, streamSize, listener, true);
     }
@@ -212,7 +212,7 @@ public final class Util{
      *             the CopyStreamException getTotalBytesTransferred() and
      *             getIOException() methods.
      ***/
-    public static final long copyStream(InputStream source,OutputStream dest,int bufferSize) throws CopyStreamException{
+    public static long copyStream(InputStream source,OutputStream dest,int bufferSize) throws CopyStreamException{
         return copyStream(source, dest, bufferSize, CopyStreamEvent.UNKNOWN_STREAM_SIZE, null);
     }
 
@@ -227,7 +227,7 @@ public final class Util{
      * @throws CopyStreamException
      *             on error
      ***/
-    public static final long copyStream(InputStream source,OutputStream dest) throws CopyStreamException{
+    public static long copyStream(InputStream source,OutputStream dest) throws CopyStreamException{
         return copyStream(source, dest, DEFAULT_COPY_BUFFER_SIZE);
     }
 
@@ -270,7 +270,7 @@ public final class Util{
      *             the CopyStreamException getTotalBytesTransferred() and
      *             getIOException() methods.
      ***/
-    public static final long copyReader(Reader source,Writer dest,int bufferSize,long streamSize,CopyStreamListener listener)
+    public static long copyReader(Reader source,Writer dest,int bufferSize,long streamSize,CopyStreamListener listener)
                     throws CopyStreamException{
         int numChars;
         long total = 0;
@@ -333,7 +333,7 @@ public final class Util{
      *             the CopyStreamException getTotalBytesTransferred() and
      *             getIOException() methods.
      ***/
-    public static final long copyReader(Reader source,Writer dest,int bufferSize) throws CopyStreamException{
+    public static long copyReader(Reader source,Writer dest,int bufferSize) throws CopyStreamException{
         return copyReader(source, dest, bufferSize, CopyStreamEvent.UNKNOWN_STREAM_SIZE, null);
     }
 
@@ -348,7 +348,7 @@ public final class Util{
      * @throws CopyStreamException
      *             on error
      ***/
-    public static final long copyReader(Reader source,Writer dest) throws CopyStreamException{
+    public static long copyReader(Reader source,Writer dest) throws CopyStreamException{
         return copyReader(source, dest, DEFAULT_COPY_BUFFER_SIZE);
     }
 

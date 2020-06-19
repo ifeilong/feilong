@@ -32,7 +32,6 @@ import java.util.EventObject;
  * @see ProtocolCommandListener
  * @see ProtocolCommandSupport
  ***/
-
 public class ProtocolCommandEvent extends EventObject{
 
     private static final long serialVersionUID = 403743538418947240L;

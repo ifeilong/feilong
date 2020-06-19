@@ -37,11 +37,11 @@ import com.feilong.lib.net.ftp.FTPFile;
  */
 public class UnixFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
 
-    static final String                 DEFAULT_DATE_FORMAT           = "MMM d yyyy";                                                  //Nov 9 2001
+    static final String                 DEFAULT_DATE_FORMAT           = "MMM d yyyy";                                                     //Nov 9 2001
 
-    static final String                 DEFAULT_RECENT_DATE_FORMAT    = "MMM d HH:mm";                                                 //Nov 9 20:06
+    static final String                 DEFAULT_RECENT_DATE_FORMAT    = "MMM d HH:mm";                                                    //Nov 9 20:06
 
-    static final String                 NUMERIC_DATE_FORMAT           = "yyyy-MM-dd HH:mm";                                            //2001-11-09 20:06
+    static final String                 NUMERIC_DATE_FORMAT           = "yyyy-MM-dd HH:mm";                                               //2001-11-09 20:06
 
     // Suffixes used in Japanese listings after the numeric values
     private static final String         JA_MONTH                      = "\u6708";
@@ -50,9 +50,9 @@ public class UnixFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
 
     private static final String         JA_YEAR                       = "\u5e74";
 
-    private static final String         DEFAULT_DATE_FORMAT_JA        = "M'" + JA_MONTH + "' d'" + JA_DAY + "' yyyy'" + JA_YEAR + "'"; //6月 3日 2003年
+    private static final String         DEFAULT_DATE_FORMAT_JA        = "M'" + JA_MONTH + "' d'" + JA_DAY + "' yyyy'" + JA_YEAR + "'";    //6月 3日 2003年
 
-    private static final String         DEFAULT_RECENT_DATE_FORMAT_JA = "M'" + JA_MONTH + "' d'" + JA_DAY + "' HH:mm";                 //8月 17日 20:10
+    private static final String         DEFAULT_RECENT_DATE_FORMAT_JA = "M'" + JA_MONTH + "' d'" + JA_DAY + "' HH:mm";                    //8月 17日 20:10
 
     /**
      * Some Linux distributions are now shipping an FTP server which formats
@@ -96,131 +96,131 @@ public class UnixFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
      * this is not allowed for here as does not appear to be shown by FTP servers
      * {@code @} file has extended attributes
      */
-    private static final String         REGEX                         = "([bcdelfmpSs-])"                                              // file type
-                    + "(((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-])))\\+?"                                    // permissions
+    private static final String         REGEX                         = "([bcdelfmpSs-])"                                                 // file type
+                    + "(((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-])))\\+?"                                       // permissions
 
-                    + "\\s*"                                                                                                           // separator TODO why allow it to be omitted??
+                    + "\\s*"                                                                                                              // separator TODO why allow it to be omitted??
 
-                    + "(\\d+)"                                                                                                         // link count
+                    + "(\\d+)"                                                                                                            // link count
 
-                    + "\\s+"                                                                                                           // separator
+                    + "\\s+"                                                                                                              // separator
 
-                    + "(?:(\\S+(?:\\s\\S+)*?)\\s+)?"                                                                                   // owner name (optional spaces)
-                    + "(?:(\\S+(?:\\s\\S+)*)\\s+)?"                                                                                    // group name (optional spaces)
-                    + "(\\d+(?:,\\s*\\d+)?)"                                                                                           // size or n,m
+                    + "(?:(\\S+(?:\\s\\S+)*?)\\s+)?"                                                                                      // owner name (optional spaces)
+                    + "(?:(\\S+(?:\\s\\S+)*)\\s+)?"                                                                                       // group name (optional spaces)
+                    + "(\\d+(?:,\\s*\\d+)?)"                                                                                              // size or n,m
 
-                    + "\\s+"                                                                                                           // separator
+                    + "\\s+"                                                                                                              // separator
 
-                                                                                                                                       /*
-                                                                                                                                        * numeric
-                                                                                                                                        * or
-                                                                                                                                        * standard
-                                                                                                                                        * format
-                                                                                                                                        * date:
-                                                                                                                                        * yyyy
-                                                                                                                                        * -
-                                                                                                                                        * mm
-                                                                                                                                        * -
-                                                                                                                                        * dd
-                                                                                                                                        * (expecting
-                                                                                                                                        * hh
-                                                                                                                                        * :
-                                                                                                                                        * mm
-                                                                                                                                        * to
-                                                                                                                                        * follow)
-                                                                                                                                        * MMM
-                                                                                                                                        * [d
-                                                                                                                                        * ]d
-                                                                                                                                        * [d
-                                                                                                                                        * ]d
-                                                                                                                                        * MMM
-                                                                                                                                        * N.
-                                                                                                                                        * B.
-                                                                                                                                        * use
-                                                                                                                                        * non
-                                                                                                                                        * -
-                                                                                                                                        * space
-                                                                                                                                        * for
-                                                                                                                                        * MMM
-                                                                                                                                        * to
-                                                                                                                                        * allow
-                                                                                                                                        * for
-                                                                                                                                        * languages
-                                                                                                                                        * such
-                                                                                                                                        * as
-                                                                                                                                        * German
-                                                                                                                                        * which
-                                                                                                                                        * use
-                                                                                                                                        * diacritics
-                                                                                                                                        * (e
-                                                                                                                                        * .
-                                                                                                                                        * g.
-                                                                                                                                        * umlaut)
-                                                                                                                                        * in
-                                                                                                                                        * some
-                                                                                                                                        * abbreviations.
-                                                                                                                                        * Japanese
-                                                                                                                                        * uses
-                                                                                                                                        * numeric
-                                                                                                                                        * day
-                                                                                                                                        * and
-                                                                                                                                        * month
-                                                                                                                                        * with
-                                                                                                                                        * suffixes
-                                                                                                                                        * to
-                                                                                                                                        * distinguish
-                                                                                                                                        * them
-                                                                                                                                        * [d
-                                                                                                                                        * ]
-                                                                                                                                        * dXX
-                                                                                                                                        * [d
-                                                                                                                                        * ]
-                                                                                                                                        * dZZ
-                                                                                                                                        */
-                    + "(" + "(?:\\d+[-/]\\d+[-/]\\d+)" +                                                                               // yyyy-mm-dd
-                    "|(?:\\S{3}\\s+\\d{1,2})" +                                                                                        // MMM [d]d
-                    "|(?:\\d{1,2}\\s+\\S{3})" +                                                                                        // [d]d MMM
+                                                                                                                                          /*
+                                                                                                                                           * numeric
+                                                                                                                                           * or
+                                                                                                                                           * standard
+                                                                                                                                           * format
+                                                                                                                                           * date:
+                                                                                                                                           * yyyy
+                                                                                                                                           * -
+                                                                                                                                           * mm
+                                                                                                                                           * -
+                                                                                                                                           * dd
+                                                                                                                                           * (expecting
+                                                                                                                                           * hh
+                                                                                                                                           * :
+                                                                                                                                           * mm
+                                                                                                                                           * to
+                                                                                                                                           * follow)
+                                                                                                                                           * MMM
+                                                                                                                                           * [d
+                                                                                                                                           * ]d
+                                                                                                                                           * [d
+                                                                                                                                           * ]d
+                                                                                                                                           * MMM
+                                                                                                                                           * N.
+                                                                                                                                           * B.
+                                                                                                                                           * use
+                                                                                                                                           * non
+                                                                                                                                           * -
+                                                                                                                                           * space
+                                                                                                                                           * for
+                                                                                                                                           * MMM
+                                                                                                                                           * to
+                                                                                                                                           * allow
+                                                                                                                                           * for
+                                                                                                                                           * languages
+                                                                                                                                           * such
+                                                                                                                                           * as
+                                                                                                                                           * German
+                                                                                                                                           * which
+                                                                                                                                           * use
+                                                                                                                                           * diacritics
+                                                                                                                                           * (e
+                                                                                                                                           * .
+                                                                                                                                           * g.
+                                                                                                                                           * umlaut)
+                                                                                                                                           * in
+                                                                                                                                           * some
+                                                                                                                                           * abbreviations.
+                                                                                                                                           * Japanese
+                                                                                                                                           * uses
+                                                                                                                                           * numeric
+                                                                                                                                           * day
+                                                                                                                                           * and
+                                                                                                                                           * month
+                                                                                                                                           * with
+                                                                                                                                           * suffixes
+                                                                                                                                           * to
+                                                                                                                                           * distinguish
+                                                                                                                                           * them
+                                                                                                                                           * [d
+                                                                                                                                           * ]
+                                                                                                                                           * dXX
+                                                                                                                                           * [d
+                                                                                                                                           * ]
+                                                                                                                                           * dZZ
+                                                                                                                                           */
+                    + "(" + "(?:\\d+[-/]\\d+[-/]\\d+)" +                                                                                  // yyyy-mm-dd
+                    "|(?:\\S{3}\\s+\\d{1,2})" +                                                                                           // MMM [d]d
+                    "|(?:\\d{1,2}\\s+\\S{3})" +                                                                                           // [d]d MMM
                     "|(?:\\d{1,2}" + JA_MONTH + "\\s+\\d{1,2}" + JA_DAY + ")" + ")"
 
-                    + "\\s+"                                                                                                           // separator
+                    + "\\s+"                                                                                                              // separator
 
-                                                                                                                                       /*
-                                                                                                                                        * year
-                                                                                                                                        * (for
-                                                                                                                                        * non
-                                                                                                                                        * -
-                                                                                                                                        * recent
-                                                                                                                                        * standard
-                                                                                                                                        * format)
-                                                                                                                                        * -
-                                                                                                                                        * yyyy
-                                                                                                                                        * or
-                                                                                                                                        * time
-                                                                                                                                        * (for
-                                                                                                                                        * numeric
-                                                                                                                                        * or
-                                                                                                                                        * recent
-                                                                                                                                        * standard
-                                                                                                                                        * format)
-                                                                                                                                        * [h
-                                                                                                                                        * ]h
-                                                                                                                                        * :
-                                                                                                                                        * mm
-                                                                                                                                        * or
-                                                                                                                                        * Japanese
-                                                                                                                                        * year
-                                                                                                                                        * -
-                                                                                                                                        * yyyyXX
-                                                                                                                                        */
-                    + "((?:\\d+(?::\\d+)?)|(?:\\d{4}" + JA_YEAR + "))"                                                                 // (20)
+                                                                                                                                          /*
+                                                                                                                                           * year
+                                                                                                                                           * (for
+                                                                                                                                           * non
+                                                                                                                                           * -
+                                                                                                                                           * recent
+                                                                                                                                           * standard
+                                                                                                                                           * format)
+                                                                                                                                           * -
+                                                                                                                                           * yyyy
+                                                                                                                                           * or
+                                                                                                                                           * time
+                                                                                                                                           * (for
+                                                                                                                                           * numeric
+                                                                                                                                           * or
+                                                                                                                                           * recent
+                                                                                                                                           * standard
+                                                                                                                                           * format)
+                                                                                                                                           * [h
+                                                                                                                                           * ]h
+                                                                                                                                           * :
+                                                                                                                                           * mm
+                                                                                                                                           * or
+                                                                                                                                           * Japanese
+                                                                                                                                           * year
+                                                                                                                                           * -
+                                                                                                                                           * yyyyXX
+                                                                                                                                           */
+                    + "((?:\\d+(?::\\d+)?)|(?:\\d{4}" + JA_YEAR + "))"                                                                    // (20)
 
-                    + "\\s"                                                                                                            // separator
+                    + "\\s"                                                                                                               // separator
 
-                    + "(.*)";                                                                                                          // the rest (21)
+                    + "(.*)";                                                                                                             // the rest (21)
 
     // if true, leading spaces are trimmed from file names
     // this was the case for the original implementation
-    final boolean                       trimLeadingSpaces;                                                                             // package protected for access from test code
+    final boolean                       trimLeadingSpaces;                                                                                // package protected for access from test code
 
     /**
      * The default constructor for a UnixFTPEntryParser object.

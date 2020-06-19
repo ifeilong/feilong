@@ -31,9 +31,9 @@ import com.feilong.lib.net.ftp.FTPFile;
  */
 public class MacOsPeterFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
 
-    static final String         DEFAULT_DATE_FORMAT        = "MMM d yyyy";                                           //Nov 9 2001
+    static final String         DEFAULT_DATE_FORMAT        = "MMM d yyyy";                                              //Nov 9 2001
 
-    static final String         DEFAULT_RECENT_DATE_FORMAT = "MMM d HH:mm";                                          //Nov 9 20:06
+    static final String         DEFAULT_RECENT_DATE_FORMAT = "MMM d HH:mm";                                             //Nov 9 20:06
 
     /**
      * this is the regular expression used by this parser.
@@ -55,38 +55,46 @@ public class MacOsPeterFTPEntryParser extends ConfigurableFTPFileEntryParserImpl
      * state)
      * e z/OS external link bit
      */
-    private static final String REGEX                      = "([bcdelfmpSs-])"                                       // type (1)
-                    + "(((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-])))\\+?\\s+"              // permission
-                    + "(" + "(folder\\s+)" + "|" + "((\\d+)\\s+(\\d+)\\s+)"                                          // resource size & data size
-                    + ")" + "(\\d+)\\s+"                                                                             // size
-                                                                                                                     /*
-                                                                                                                      * numeric or standard
-                                                                                                                      * format date:
-                                                                                                                      * yyyy-mm-dd
-                                                                                                                      * (expecting hh:mm to
-                                                                                                                      * follow)
-                                                                                                                      * MMM [d]d
-                                                                                                                      * [d]d MMM
-                                                                                                                      * N.B. use non-space
-                                                                                                                      * for MMM to allow for
-                                                                                                                      * languages such as
-                                                                                                                      * German which use
-                                                                                                                      * diacritics (e.g.
-                                                                                                                      * umlaut) in some
-                                                                                                                      * abbreviations.
-                                                                                                                      */
+    private static final String REGEX                      = "([bcdelfmpSs-])"                                          // type (1)
+                    + "(((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-])))\\+?\\s+"                 // permission
+                    + "(" + "(folder\\s+)" + "|" + "((\\d+)\\s+(\\d+)\\s+)"                                             // resource size & data size
+                    + ")" + "(\\d+)\\s+"                                                                                // size
+                                                                                                                        /*
+                                                                                                                         * numeric or
+                                                                                                                         * standard
+                                                                                                                         * format date:
+                                                                                                                         * yyyy-mm-dd
+                                                                                                                         * (expecting hh:mm
+                                                                                                                         * to
+                                                                                                                         * follow)
+                                                                                                                         * MMM [d]d
+                                                                                                                         * [d]d MMM
+                                                                                                                         * N.B. use
+                                                                                                                         * non-space
+                                                                                                                         * for MMM to allow
+                                                                                                                         * for
+                                                                                                                         * languages such as
+                                                                                                                         * German which use
+                                                                                                                         * diacritics (e.g.
+                                                                                                                         * umlaut) in some
+                                                                                                                         * abbreviations.
+                                                                                                                         */
                     + "((?:\\d+[-/]\\d+[-/]\\d+)|(?:\\S{3}\\s+\\d{1,2})|(?:\\d{1,2}\\s+\\S{3}))\\s+"
-                                                                                                                     /*
-                                                                                                                      * year (for non-recent
-                                                                                                                      * standard format) -
-                                                                                                                      * yyyy
-                                                                                                                      * or time (for numeric
-                                                                                                                      * or recent standard
-                                                                                                                      * format) [h]h:mm
-                                                                                                                      */
+                                                                                                                        /*
+                                                                                                                         * year (for
+                                                                                                                         * non-recent
+                                                                                                                         * standard format)
+                                                                                                                         * -
+                                                                                                                         * yyyy
+                                                                                                                         * or time (for
+                                                                                                                         * numeric
+                                                                                                                         * or recent
+                                                                                                                         * standard
+                                                                                                                         * format) [h]h:mm
+                                                                                                                         */
                     + "(\\d+(?::\\d+)?)\\s+"
 
-                    + "(\\S*)(\\s*.*)";                                                                              // the rest
+                    + "(\\S*)(\\s*.*)";                                                                                 // the rest
 
     /**
      * The default constructor for a UnixFTPEntryParser object.

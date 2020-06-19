@@ -51,7 +51,7 @@ public interface CopyStreamListener extends EventListener{
      *            The CopyStreamEvent fired by the copying of a block of
      *            bytes.
      */
-    public void bytesTransferred(CopyStreamEvent event);
+    void bytesTransferred(CopyStreamEvent event);
 
     /**
      * This method is not part of the JavaBeans model and is used by the
@@ -70,5 +70,5 @@ public interface CopyStreamListener extends EventListener{
      *            This may be equal to CopyStreamEvent.UNKNOWN_STREAM_SIZE if
      *            the size is unknown.
      */
-    public void bytesTransferred(long totalBytesTransferred,int bytesTransferred,long streamSize);
+    void bytesTransferred(long totalBytesTransferred,int bytesTransferred,long streamSize);
 }

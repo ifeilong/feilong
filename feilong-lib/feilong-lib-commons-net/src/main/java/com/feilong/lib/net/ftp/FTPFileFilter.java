@@ -32,5 +32,5 @@ public interface FTPFileFilter{
      *            entry to be checked for inclusion. May be <code>null</code>.
      * @return <code>true</code> if the file is to be included, <code>false</code> otherwise
      */
-    public boolean accept(FTPFile file);
+    boolean accept(FTPFile file);
 }

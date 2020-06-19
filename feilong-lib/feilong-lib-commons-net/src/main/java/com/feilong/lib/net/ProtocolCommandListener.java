@@ -46,7 +46,7 @@ public interface ProtocolCommandListener extends EventListener{
      * @param event
      *            The ProtocolCommandEvent fired.
      ***/
-    public void protocolCommandSent(ProtocolCommandEvent event);
+    void protocolCommandSent(ProtocolCommandEvent event);
 
     /***
      * This method is invoked by a ProtocolCommandEvent source after
@@ -55,6 +55,6 @@ public interface ProtocolCommandListener extends EventListener{
      * @param event
      *            The ProtocolCommandEvent fired.
      ***/
-    public void protocolReplyReceived(ProtocolCommandEvent event);
+    void protocolReplyReceived(ProtocolCommandEvent event);
 
 }
