@@ -343,7 +343,7 @@ public abstract class SocketClient{
         _output_ = null;
     }
 
-    private void closeQuietly(Socket socket){
+    private static void closeQuietly(Socket socket){
         if (socket != null){
             try{
                 socket.close();
@@ -353,7 +353,7 @@ public abstract class SocketClient{
         }
     }
 
-    private void closeQuietly(Closeable close){
+    private static void closeQuietly(Closeable close){
         if (close != null){
             try{
                 close.close();
@@ -421,9 +421,8 @@ public abstract class SocketClient{
                 return false;
             }
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     /**

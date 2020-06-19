@@ -1360,10 +1360,9 @@ public class FTPClient extends FTP implements Configurable{
             }
             // Get a random port between the min and max port range
             return __random.nextInt(__activeMaxPort - __activeMinPort + 1) + __activeMinPort;
-        }else{
-            // default port
-            return 0;
         }
+        // default port
+        return 0;
     }
 
     /**
@@ -1375,10 +1374,9 @@ public class FTPClient extends FTP implements Configurable{
     private InetAddress getHostAddress(){
         if (__activeExternalHost != null){
             return __activeExternalHost;
-        }else{
-            // default local address
-            return getLocalAddress();
         }
+        // default local address
+        return getLocalAddress();
     }
 
     /**
@@ -1392,9 +1390,8 @@ public class FTPClient extends FTP implements Configurable{
     private InetAddress getReportHostAddress(){
         if (__reportActiveExternalHost != null){
             return __reportActiveExternalHost;
-        }else{
-            return getHostAddress();
         }
+        return getHostAddress();
     }
 
     /**
@@ -2452,9 +2449,8 @@ public class FTPClient extends FTP implements Configurable{
         boolean success = FTPReply.isPositiveCompletion(sendCommand(command, params));
         if (success){
             return getReplyStrings();
-        }else{
-            return null;
         }
+        return null;
     }
 
     /**
@@ -2481,9 +2477,8 @@ public class FTPClient extends FTP implements Configurable{
             }
             String entry = reply.substring(1); // skip leading space for parser
             return MLSxEntryParser.parseEntry(entry);
-        }else{
-            return null;
         }
+        return null;
     }
 
     /**
@@ -3417,9 +3412,8 @@ public class FTPClient extends FTP implements Configurable{
                 sb.append("-a ");
                 sb.append(pathname);
                 return sb.toString();
-            }else{
-                return "-a";
             }
+            return "-a";
         }
 
         return pathname;

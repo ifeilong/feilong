@@ -33,7 +33,6 @@ import java.net.Socket;
  *
  * @see SocketOutputStream
  ***/
-
 public class SocketInputStream extends FilterInputStream{
 
     private final Socket __socket;

@@ -401,7 +401,7 @@ public class MVSFTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
      * @param entry
      * @return true if the entry string is non-null and non-empty
      */
-    private boolean parseSimpleEntry(FTPFile file,String entry){
+    private static boolean parseSimpleEntry(FTPFile file,String entry){
         if (entry != null && entry.trim().length() > 0){
             file.setRawListing(entry);
             String name = entry.split(" ")[0];

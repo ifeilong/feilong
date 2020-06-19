@@ -101,9 +101,8 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl{
                 file.setRawListing(entry);
                 file.setName(entry.substring(1));
                 return file;
-            }else{
-                return null; // Invalid - no pathname
             }
+            return null; // Invalid - no pathname
 
         }
         String parts[] = entry.split(" ", 2); // Path may contain space
@@ -215,7 +214,7 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl{
     //              perm-fact    = "Perm" "=" *pvals
     //              pvals        = "a" / "c" / "d" / "e" / "f" /
     //                             "l" / "m" / "p" / "r" / "w"
-    private void doUnixPerms(FTPFile file,String valueLowerCase){
+    private static void doUnixPerms(FTPFile file,String valueLowerCase){
         for (char c : valueLowerCase.toCharArray()){
             // TODO these are mostly just guesses at present
             switch (c) {

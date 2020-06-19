@@ -613,7 +613,7 @@ public class FTPSClient extends FTPClient{
      *            Data Channel Protection Level.
      * @return True - A set point is right / False - A set point is not right
      */
-    private boolean checkPROTValue(String prot){
+    private static boolean checkPROTValue(String prot){
         for (String element : PROT_COMMAND_VALUE){
             if (element.equals(prot)){
                 return true;
@@ -837,9 +837,8 @@ public class FTPSClient extends FTPClient{
     public int execADAT(byte[] data) throws IOException{
         if (data != null){
             return sendCommand(CMD_ADAT, Base64.encodeBase64StringUnChunked(data));
-        }else{
-            return sendCommand(CMD_ADAT);
         }
+        return sendCommand(CMD_ADAT);
     }
 
     /**
@@ -855,17 +854,6 @@ public class FTPSClient extends FTPClient{
      */
     public int execCCC() throws IOException{
         int repCode = sendCommand(CMD_CCC);
-        // This will be performed by sendCommand(String, String)
-        //        if (FTPReply.isPositiveCompletion(repCode)) {
-        //            _socket_.close();
-        //            _socket_ = plainSocket;
-        //            _controlInput_ = new BufferedReader(
-        //                new InputStreamReader(
-        //                    _socket_.getInputStream(), getControlEncoding()));
-        //            _controlOutput_ = new BufferedWriter(
-        //                new OutputStreamWriter(
-        //                    _socket_.getOutputStream(), getControlEncoding()));
-        //        }
         return repCode;
     }
 
@@ -883,9 +871,8 @@ public class FTPSClient extends FTPClient{
     public int execMIC(byte[] data) throws IOException{
         if (data != null){
             return sendCommand(CMD_MIC, Base64.encodeBase64StringUnChunked(data));
-        }else{
-            return sendCommand(CMD_MIC, ""); // perhaps "=" or just sendCommand(String)?
         }
+        return sendCommand(CMD_MIC, ""); // perhaps "=" or just sendCommand(String)?
     }
 
     /**
@@ -902,9 +889,8 @@ public class FTPSClient extends FTPClient{
     public int execCONF(byte[] data) throws IOException{
         if (data != null){
             return sendCommand(CMD_CONF, Base64.encodeBase64StringUnChunked(data));
-        }else{
-            return sendCommand(CMD_CONF, ""); // perhaps "=" or just sendCommand(String)?
         }
+        return sendCommand(CMD_CONF, ""); // perhaps "=" or just sendCommand(String)?
     }
 
     /**
@@ -921,9 +907,8 @@ public class FTPSClient extends FTPClient{
     public int execENC(byte[] data) throws IOException{
         if (data != null){
             return sendCommand(CMD_ENC, Base64.encodeBase64StringUnChunked(data));
-        }else{
-            return sendCommand(CMD_ENC, ""); // perhaps "=" or just sendCommand(String)?
         }
+        return sendCommand(CMD_ENC, ""); // perhaps "=" or just sendCommand(String)?
     }
 
     /**
@@ -937,9 +922,8 @@ public class FTPSClient extends FTPClient{
     public byte[] parseADATReply(String reply){
         if (reply == null){
             return null;
-        }else{
-            return Base64.decodeBase64(extractPrefixedData("ADAT=", reply));
         }
+        return Base64.decodeBase64(extractPrefixedData("ADAT=", reply));
     }
 
     /**
@@ -951,7 +935,7 @@ public class FTPSClient extends FTPClient{
      *            where to find the prefix
      * @return the remainder of the string after the prefix, or null if the prefix was not present.
      */
-    private String extractPrefixedData(String prefix,String reply){
+    private static String extractPrefixedData(String prefix,String reply){
         int idx = reply.indexOf(prefix);
         if (idx == -1){
             return null;

@@ -377,11 +377,8 @@ public class OS400FTPEntryParser extends ConfigurableFTPFileEntryParserImpl{
      * @return <code>true</code> for <code>null</code> or empty values,
      *         else <code>false</code>.
      */
-    private boolean isNullOrEmpty(String string){
-        if (string == null || string.length() == 0){
-            return true;
-        }
-        return false;
+    private static boolean isNullOrEmpty(String string){
+        return string == null || string.length() == 0;
     }
 
     /**
