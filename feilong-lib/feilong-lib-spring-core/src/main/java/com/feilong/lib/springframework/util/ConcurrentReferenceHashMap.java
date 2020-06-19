@@ -103,73 +103,12 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 
     /**
      * Create a new {@code ConcurrentReferenceHashMap} instance.
-     */
-    public ConcurrentReferenceHashMap(){
-        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL, DEFAULT_REFERENCE_TYPE);
-    }
-
-    /**
-     * Create a new {@code ConcurrentReferenceHashMap} instance.
      * 
      * @param initialCapacity
      *            the initial capacity of the map
      */
     public ConcurrentReferenceHashMap(int initialCapacity){
         this(initialCapacity, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL, DEFAULT_REFERENCE_TYPE);
-    }
-
-    /**
-     * Create a new {@code ConcurrentReferenceHashMap} instance.
-     * 
-     * @param initialCapacity
-     *            the initial capacity of the map
-     * @param loadFactor
-     *            the load factor. When the average number of references per table
-     *            exceeds this value resize will be attempted
-     */
-    public ConcurrentReferenceHashMap(int initialCapacity, float loadFactor){
-        this(initialCapacity, loadFactor, DEFAULT_CONCURRENCY_LEVEL, DEFAULT_REFERENCE_TYPE);
-    }
-
-    /**
-     * Create a new {@code ConcurrentReferenceHashMap} instance.
-     * 
-     * @param initialCapacity
-     *            the initial capacity of the map
-     * @param concurrencyLevel
-     *            the expected number of threads that will concurrently
-     *            write to the map
-     */
-    public ConcurrentReferenceHashMap(int initialCapacity, int concurrencyLevel){
-        this(initialCapacity, DEFAULT_LOAD_FACTOR, concurrencyLevel, DEFAULT_REFERENCE_TYPE);
-    }
-
-    /**
-     * Create a new {@code ConcurrentReferenceHashMap} instance.
-     * 
-     * @param initialCapacity
-     *            the initial capacity of the map
-     * @param referenceType
-     *            the reference type used for entries (soft or weak)
-     */
-    public ConcurrentReferenceHashMap(int initialCapacity, ReferenceType referenceType){
-        this(initialCapacity, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL, referenceType);
-    }
-
-    /**
-     * Create a new {@code ConcurrentReferenceHashMap} instance.
-     * 
-     * @param initialCapacity
-     *            the initial capacity of the map
-     * @param loadFactor
-     *            the load factor. When the average number of references per
-     *            table exceeds this value, resize will be attempted.
-     * @param concurrencyLevel
-     *            the expected number of threads that will concurrently
-     *            write to the map
-     */
-    public ConcurrentReferenceHashMap(int initialCapacity, float loadFactor, int concurrencyLevel){
-        this(initialCapacity, loadFactor, concurrencyLevel, DEFAULT_REFERENCE_TYPE);
     }
 
     /**
@@ -206,10 +145,6 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 
     protected final float getLoadFactor(){
         return this.loadFactor;
-    }
-
-    protected final int getSegmentsSize(){
-        return this.segments.length;
     }
 
     protected final Segment getSegment(int index){

@@ -25,7 +25,6 @@ package com.feilong.lib.springframework.util;
  * @author Rob Harrop
  * @author Sam Brannen
  * @since 1.1
- * @see TypeUtils
  * @see ReflectionUtils
  */
 public abstract class ClassUtils{

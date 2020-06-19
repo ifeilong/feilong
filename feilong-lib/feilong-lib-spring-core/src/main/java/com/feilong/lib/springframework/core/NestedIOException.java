@@ -37,7 +37,6 @@ import java.io.IOException;
  * @see org.springframework.core.NestedCheckedException
  * @see org.springframework.core.NestedRuntimeException
  */
-@SuppressWarnings("serial")
 public class NestedIOException extends IOException{
 
     /**
@@ -49,16 +48,6 @@ public class NestedIOException extends IOException{
         // Eagerly load the NestedExceptionUtils class to avoid classloader deadlock
         // issues on OSGi when calling getMessage(). Reported by Don Brown; SPR-5607.
         NestedExceptionUtils.class.getName();
-    }
-
-    /**
-     * Construct a {@code NestedIOException} with the specified detail message.
-     * 
-     * @param msg
-     *            the detail message
-     */
-    public NestedIOException(String msg){
-        super(msg);
     }
 
     /**
