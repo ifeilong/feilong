@@ -183,18 +183,15 @@ public final class IOWriteUtil{
         FileWriteMode useFileWriteMode = defaultIfNullOrEmpty(fileWriteMode, COVER);
 
         //---------------------------------------------------------------
-
         FileUtil.createDirectoryByFilePath(filePath);
 
         //---------------------------------------------------------------
-
         InputStream inputStream = InputStreamUtil.newByteArrayInputStream(content, useEncode);
         OutputStream outputStream = FileUtil.getFileOutputStream(filePath, useFileWriteMode);
 
         //---------------------------------------------------------------
         write(inputStream, outputStream);
         //---------------------------------------------------------------
-
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);
             String size = FileUtil.getFileFormatSize(file);

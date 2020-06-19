@@ -16,10 +16,10 @@
 package com.feilong.io;
 
 import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 import static com.feilong.io.entity.FileWriteMode.APPEND;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,10 +35,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
 import com.feilong.lib.io.FileUtils;
-import com.feilong.core.Validate;
 import com.feilong.lib.lang3.tuple.Pair;
 
 /**
@@ -464,7 +464,6 @@ public final class FileUtil{
             LOGGER.trace("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
-
         //----------------do with 不存在-----------------------------------------------
         String absolutePath = directoryFile.getAbsolutePath();
 
