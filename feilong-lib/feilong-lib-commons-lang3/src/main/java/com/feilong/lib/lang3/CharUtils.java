@@ -37,8 +37,6 @@ public class CharUtils{
 
     private static final String[] CHAR_STRING_ARRAY = new String[128];
 
-    private static final char[]   HEX_DIGITS        = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-
     /**
      * Linefeed character LF ({@code '\n'}, Unicode 000a).
      *
@@ -126,27 +124,5 @@ public class CharUtils{
             return null;
         }
         return toString(ch.charValue());
-    }
-
-    /**
-     * <p>
-     * Checks whether the character is ASCII 7 bit printable.
-     * </p>
-     *
-     * <pre>
-     *   CharUtils.isAsciiPrintable('a')  = true
-     *   CharUtils.isAsciiPrintable('A')  = true
-     *   CharUtils.isAsciiPrintable('3')  = true
-     *   CharUtils.isAsciiPrintable('-')  = true
-     *   CharUtils.isAsciiPrintable('\n') = false
-     *   CharUtils.isAsciiPrintable('&copy;') = false
-     * </pre>
-     *
-     * @param ch
-     *            the character to check
-     * @return true if between 32 and 126 inclusive
-     */
-    public static boolean isAsciiPrintable(final char ch){
-        return ch >= 32 && ch < 127;
     }
 }

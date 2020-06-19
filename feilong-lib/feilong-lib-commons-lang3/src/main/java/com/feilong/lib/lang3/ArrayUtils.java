@@ -176,6 +176,8 @@ public class ArrayUtils{
      */
     public static final int         INDEX_NOT_FOUND              = -1;
 
+    //---------------------------------------------------------------
+
     /**
      * <p>
      * Copies the given array and adds the given element at the end of the new array.

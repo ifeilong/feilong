@@ -20,10 +20,10 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.WeakHashMap;
 
 import com.feilong.lib.lang3.ClassUtils;
-import com.feilong.lib.lang3.ObjectUtils;
 
 /**
  * <p>
@@ -651,7 +651,7 @@ public abstract class ToStringStyle implements Serializable{
      * @since 2.2
      */
     protected void appendCyclicObject(final StringBuffer buffer,final String fieldName,final Object value){
-        ObjectUtils.identityToString(buffer, value);
+        buffer.append(Objects.toString(value));
     }
 
     /**

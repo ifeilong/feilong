@@ -35,30 +35,6 @@ import java.util.Map;
  */
 public class EnumUtils{
 
-    private static final String S_DOES_NOT_SEEM_TO_BE_AN_ENUM_TYPE = "%s does not seem to be an Enum type";
-
-    private static final String ENUM_CLASS_MUST_BE_DEFINED         = "EnumClass must be defined.";
-
-    /**
-     * Validate {@code enumClass}.
-     * 
-     * @param <E>
-     *            the type of the enumeration
-     * @param enumClass
-     *            to check
-     * @return {@code enumClass}
-     * @throws NullPointerException
-     *             if {@code enumClass} is {@code null}
-     * @throws IllegalArgumentException
-     *             if {@code enumClass} is not an enum class
-     * @since 3.2
-     */
-    private static <E extends Enum<E>> Class<E> asEnum(final Class<E> enumClass){
-        Validate.notNull(enumClass, ENUM_CLASS_MUST_BE_DEFINED);
-        Validate.isTrue(enumClass.isEnum(), S_DOES_NOT_SEEM_TO_BE_AN_ENUM_TYPE, enumClass);
-        return enumClass;
-    }
-
     /**
      * <p>
      * Gets the enum for the class, returning {@code null} if not found.
@@ -209,52 +185,6 @@ public class EnumUtils{
             map.put(e.name(), e);
         }
         return map;
-    }
-
-    /**
-     * <p>
-     * Checks if the specified name is a valid enum for the class.
-     * </p>
-     *
-     * <p>
-     * This method differs from {@link Enum#valueOf} in that checks if the name is
-     * a valid enum without needing to catch the exception.
-     * </p>
-     *
-     * @param <E>
-     *            the type of the enumeration
-     * @param enumClass
-     *            the class of the enum to query, not null
-     * @param enumName
-     *            the enum name, null returns false
-     * @return true if the enum name is valid, otherwise false
-     */
-    public static <E extends Enum<E>> boolean isValidEnum(final Class<E> enumClass,final String enumName){
-        return getEnum(enumClass, enumName) != null;
-    }
-
-    /**
-     * <p>
-     * Checks if the specified name is a valid enum for the class.
-     * </p>
-     *
-     * <p>
-     * This method differs from {@link Enum#valueOf} in that checks if the name is
-     * a valid enum without needing to catch the exception
-     * and performs case insensitive matching of the name.
-     * </p>
-     *
-     * @param <E>
-     *            the type of the enumeration
-     * @param enumClass
-     *            the class of the enum to query, not null
-     * @param enumName
-     *            the enum name, null returns false
-     * @return true if the enum name is valid, otherwise false
-     * @since 3.8
-     */
-    public static <E extends Enum<E>> boolean isValidEnumIgnoreCase(final Class<E> enumClass,final String enumName){
-        return getEnumIgnoreCase(enumClass, enumName) != null;
     }
 
 }

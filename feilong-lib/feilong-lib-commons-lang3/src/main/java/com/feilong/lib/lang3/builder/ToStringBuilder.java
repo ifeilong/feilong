@@ -16,7 +16,6 @@
  */
 package com.feilong.lib.lang3.builder;
 
-import com.feilong.lib.lang3.ObjectUtils;
 import com.feilong.lib.lang3.Validate;
 
 /**
@@ -1205,23 +1204,6 @@ public class ToStringBuilder implements Builder<String>{
      */
     public ToStringBuilder append(final String fieldName,final short[] array,final boolean fullDetail){
         style.append(buffer, fieldName, array, Boolean.valueOf(fullDetail));
-        return this;
-    }
-
-    /**
-     * <p>
-     * Appends with the same format as the default <code>Object toString()
-     * </code> method. Appends the class name followed by
-     * {@link System#identityHashCode(java.lang.Object)}.
-     * </p>
-     *
-     * @param srcObject
-     *            the {@code Object} whose class name and id to output
-     * @return this
-     * @since 2.0
-     */
-    public ToStringBuilder appendAsObjectToString(final Object srcObject){
-        ObjectUtils.identityToString(this.getStringBuffer(), srcObject);
         return this;
     }
 

@@ -1614,7 +1614,6 @@ public class StringUtils{
      * StringUtils.defaultString("bat", "NULL") = "bat"
      * </pre>
      *
-     * @see ObjectUtils#toString(Object,String)
      * @see String#valueOf(Object)
      * @param str
      *            the String to check, may be null
