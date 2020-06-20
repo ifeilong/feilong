@@ -296,7 +296,7 @@ public class JvstCodeGen extends MemberCodeGen{
         }
 
         bytecode.addGetstatic((String) names[0], (String) names[1], "Ljavassist/runtime/Cflow;");
-        bytecode.addInvokevirtual("com.feilong.lib.javassist.runtime.Cflow", "value", "()I");
+        bytecode.addInvokevirtual(com.feilong.lib.javassist.runtime.Cflow.class.getName(), "value", "()I");
         exprType = INT;
         arrayDim = 0;
         className = null;

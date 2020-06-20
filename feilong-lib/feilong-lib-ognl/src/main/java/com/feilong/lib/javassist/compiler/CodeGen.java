@@ -1795,7 +1795,7 @@ public abstract class CodeGen extends Visitor implements Opcode,TokenId{
 
         bytecode.growStack(1);
         bytecode.addInvokestatic(
-                        "com.feilong.lib.javassist.runtime.DotClass",
+                        com.feilong.lib.javassist.runtime.DotClass.class.getName(),
                         "fail",
                         "(Ljava/lang/ClassNotFoundException;)" + "Ljava/lang/NoClassDefFoundError;");
         bytecode.addOpcode(ATHROW);

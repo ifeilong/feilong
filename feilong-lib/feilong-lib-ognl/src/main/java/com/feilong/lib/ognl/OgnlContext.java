@@ -120,22 +120,6 @@ public class OgnlContext extends Object implements Map{
     private Map<String, LocalReference> _localReferenceMap     = null;
 
     /**
-     * Constructs a new OgnlContext with the given class resolver, type converter and member access.
-     * If any of these parameters is null the default will be used, except <span class="strong">memberAccess which must be non-null</span>.
-     * 
-     * @param classResolver
-     *            the ClassResolver for a new OgnlContext.
-     * @param typeConverter
-     *            the TypeConverter for a new OgnlContext.
-     * @param memberAccess
-     *            the MemberAccess for a new OgnlContext. <span class="strong">Must be non-null</span>.
-     */
-    public OgnlContext(ClassResolver classResolver, TypeConverter typeConverter, MemberAccess memberAccess){
-        // No 'values' map has been specified, so we create one of the default size: 23 entries
-        this(memberAccess, classResolver, typeConverter, new HashMap(23));
-    }
-
-    /**
      * Constructs a new OgnlContext with the given member access, class resolver, type converter and values.
      * If any of these parameters is null the default will be used, except <span class="strong">memberAccess which must be non-null</span>.
      * 
@@ -170,27 +154,6 @@ public class OgnlContext extends Object implements Map{
         }else{
             throw new IllegalArgumentException("MemberAccess implementation must be provided - null not permitted!");
         }
-    }
-
-    /**
-     * Set (put) the provided value map content into the existing values Map for this OgnlContext.
-     * 
-     * @param value
-     *            a Map of additional values to put into this OgnlContext.
-     */
-    public void setValues(Map value){
-        for (Object k : value.keySet()){
-            _values.put(k, value.get(k));
-        }
-    }
-
-    /**
-     * Get the values Map for this OgnlContext.
-     * 
-     * @return Map of values for this OgnlContext.
-     */
-    public Map getValues(){
-        return _values;
     }
 
     public ClassResolver getClassResolver(){
@@ -286,9 +249,8 @@ public class OgnlContext extends Object implements Map{
 
         if (_accessorStack.size() > 1){
             return _accessorStack.get(_accessorStack.size() - 2);
-        }else{
-            return null;
         }
+        return null;
     }
 
     public Class getFirstAccessor(){

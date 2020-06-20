@@ -163,44 +163,6 @@ public class Metaobject implements Serializable{
     }
 
     /**
-     * Is invoked when public fields of the base-level
-     * class are read and the runtime system intercepts it.
-     * This method simply returns the value of the field.
-     *
-     * <p>
-     * Every subclass of this class should redefine this method.
-     */
-    public Object trapFieldRead(String name){
-        Class<?> jc = getClassMetaobject().getJavaClass();
-        try{
-            return jc.getField(name).get(getObject());
-        }catch (NoSuchFieldException e){
-            throw new RuntimeException(e.toString());
-        }catch (IllegalAccessException e){
-            throw new RuntimeException(e.toString());
-        }
-    }
-
-    /**
-     * Is invoked when public fields of the base-level
-     * class are modified and the runtime system intercepts it.
-     * This method simply sets the field to the given value.
-     *
-     * <p>
-     * Every subclass of this class should redefine this method.
-     */
-    public void trapFieldWrite(String name,Object value){
-        Class<?> jc = getClassMetaobject().getJavaClass();
-        try{
-            jc.getField(name).set(getObject(), value);
-        }catch (NoSuchFieldException e){
-            throw new RuntimeException(e.toString());
-        }catch (IllegalAccessException e){
-            throw new RuntimeException(e.toString());
-        }
-    }
-
-    /**
      * Is invoked when base-level method invocation is intercepted.
      * This method simply executes the intercepted method invocation
      * with the original parameters and returns the resulting value.

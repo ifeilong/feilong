@@ -85,7 +85,6 @@ import com.feilong.lib.javassist.NotFoundException;
  * class files should be replaced.
  *
  * @see com.feilong.lib.javassist.tools.reflect.Reflection
- * @see com.feilong.lib.javassist.tools.reflect.Compiler
  * @see com.feilong.lib.javassist.Loader
  */
 public class Loader extends com.feilong.lib.javassist.Loader{
@@ -114,7 +113,7 @@ public class Loader extends com.feilong.lib.javassist.Loader{
      */
     public Loader() throws CannotCompileException,NotFoundException{
         super();
-        delegateLoadingOf("com.feilong.lib.javassist.tools.reflect.Loader");
+        delegateLoadingOf(com.feilong.lib.javassist.tools.reflect.Loader.class.getName());
 
         reflection = new Reflection();
         ClassPool pool = ClassPool.getDefault();
@@ -138,7 +137,6 @@ public class Loader extends com.feilong.lib.javassist.Loader{
      *            <code>ClassMetaobject</code>.
      * @return <code>false</code> if the class is already reflective.
      *
-     * @see com.feilong.lib.javassist.tools.reflect.Metaobject
      * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject
      */
     public boolean makeReflective(String clazz,String metaobject,String metaclass) throws CannotCompileException,NotFoundException{

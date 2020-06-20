@@ -193,16 +193,14 @@ public class ASTMethod extends SimpleNode implements OrderedReturn,NodeType{
 
                     return _coreExpression;
                 }
-
                 return "";
-            }else{
-
-                _getterClass = m.getReturnType();
             }
+
+            _getterClass = m.getReturnType();
 
             // TODO:  This is a hacky workaround until javassist supports varargs method invocations
 
-            boolean varArgs = OgnlRuntime.isJdk15() && m.isVarArgs();
+            boolean varArgs = m.isVarArgs();
 
             if (varArgs){
                 throw new UnsupportedCompilationException("Javassist does not currently support varargs method calls");
@@ -354,7 +352,7 @@ public class ASTMethod extends SimpleNode implements OrderedReturn,NodeType{
             _getterClass = wrapper;
         }
 
-        boolean varArgs = OgnlRuntime.isJdk15() && m.isVarArgs();
+        boolean varArgs = m.isVarArgs();
 
         if (varArgs){
             throw new UnsupportedCompilationException("Javassist does not currently support varargs method calls");

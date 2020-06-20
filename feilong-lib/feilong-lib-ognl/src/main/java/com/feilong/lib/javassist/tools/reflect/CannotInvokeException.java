@@ -22,7 +22,6 @@ import java.lang.reflect.InvocationTargetException;
  * Thrown when method invocation using the reflection API has thrown
  * an exception.
  *
- * @see com.feilong.lib.javassist.tools.reflect.Metaobject#trapMethodcall(int, Object[])
  * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject#trapMethodcall(int, Object[])
  * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject#invoke(Object, int, Object[])
  */

@@ -26,7 +26,6 @@
 		</filter>
 	</appender>
 
-
 	<!--
 		priority已经由level代替 
 		category已经由logger代替。 

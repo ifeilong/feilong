@@ -42,7 +42,6 @@ import java.util.Arrays;
  * ClassMetaobject cm = ((Metalevel) reflectiveObject)._getClass();
  * </pre>
  *
- * @see com.feilong.lib.javassist.tools.reflect.Metaobject
  * @see com.feilong.lib.javassist.tools.reflect.Metalevel
  */
 public class ClassMetaobject implements Serializable{
@@ -303,7 +302,6 @@ public class ClassMetaobject implements Serializable{
      * @param identifier
      *            the identifier index
      *            given to <code>trapMethodcall()</code> etc.
-     * @see Metaobject#trapMethodcall(int,Object[])
      * @see #trapMethodcall(int,Object[])
      */
     public final Method getMethod(int identifier){

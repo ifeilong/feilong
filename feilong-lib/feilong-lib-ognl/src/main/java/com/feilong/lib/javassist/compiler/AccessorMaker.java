@@ -45,7 +45,7 @@ public class AccessorMaker{
 
     private final Map<String, Object> accessors;
 
-    static final String               lastParamType = "com.feilong.lib.javassist.runtime.Inner";
+    static final String               lastParamType = com.feilong.lib.javassist.runtime.Inner.class.getName();
 
     public AccessorMaker(CtClass c){
         clazz = c;

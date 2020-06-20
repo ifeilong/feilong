@@ -46,7 +46,6 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.math.BigDecimal;
@@ -91,6 +90,8 @@ import com.feilong.lib.ognl.security.UserMethod;
  * @author Drew Davidson (drew@ognl.org)
  */
 public class OgnlRuntime{
+
+    private static final String  classNameClassPool         = com.feilong.lib.javassist.ClassPool.class.getName();
 
     /**
      * Constant expression used to indicate that a given method / property couldn't be found
@@ -147,23 +148,9 @@ public class OgnlRuntime{
     private static final String  IS_PREFIX                  = "is";
 
     /**
-     * Prefix padding for hexadecimal numbers to HEX_LENGTH.
-     */
-    private static final Map     HEX_PADDING                = new HashMap();
-
-    private static final int     HEX_LENGTH                 = 8;
-
-    /**
      * Returned by <CODE>getUniqueDescriptor()</CODE> when the object is <CODE>null</CODE>.
      */
     private static final String  NULL_OBJECT_STRING         = "<null>";
-
-    /**
-     * Used to store the result of determining if current jvm is 1.5 language compatible.
-     */
-    private static boolean       _jdk15                     = false;
-
-    private static boolean       _jdkChecked                = false;
 
     /**
      * Control usage of JDK9+ access handler using the JVM option:
@@ -450,7 +437,7 @@ public class OgnlRuntime{
      */
     static{
         try{
-            Class.forName("com.feilong.lib.javassist.ClassPool");
+            Class.forName(classNameClassPool);
             _compiler = new ExpressionCompiler();
         }catch (ClassNotFoundException e){
             throw new IllegalArgumentException("Javassist library is missing in classpath! Please add missed dependency!", e);
@@ -707,44 +694,6 @@ public class OgnlRuntime{
         }
     }
 
-    /**
-     * Checks if the current jvm is java language &gt;= 1.5 compatible.
-     *
-     * @return True if jdk15 features are present.
-     */
-    public static boolean isJdk15(){
-        if (_jdkChecked){
-            return _jdk15;
-        }
-
-        try{
-            Class.forName("java.lang.annotation.Annotation");
-            _jdk15 = true;
-        }catch (Exception e){ /* ignore */ }
-
-        _jdkChecked = true;
-
-        return _jdk15;
-    }
-
-    /**
-     * Get the Major Java Version detected by OGNL.
-     *
-     * @return Detected Major Java Version, or 5 (minimum supported version for OGNL) if unable to detect.
-     */
-    public static int getMajorJavaVersion(){
-        return _majorJavaVersion;
-    }
-
-    /**
-     * Check if the detected Major Java Version is 9 or higher (JDK 9+).
-     *
-     * @return Return true if the Detected Major Java version is 9 or higher, otherwise false.
-     */
-    public static boolean isJdk9Plus(){
-        return _jdk9Plus;
-    }
-
     public static String getNumericValueGetter(Class type){
         return (String) NUMERIC_VALUES.get(type);
     }
@@ -753,24 +702,12 @@ public class OgnlRuntime{
         return (Class) PRIMITIVE_WRAPPER_CLASSES.get(primitiveClass);
     }
 
-    public static String getNumericCast(Class type){
-        return (String) NUMERIC_CASTS.get(type);
-    }
-
     public static String getNumericLiteral(Class type){
         return (String) NUMERIC_LITERALS.get(type);
     }
 
-    public static void setCompiler(OgnlExpressionCompiler compiler){
-        _compiler = compiler;
-    }
-
     public static OgnlExpressionCompiler getCompiler(){
         return _compiler;
-    }
-
-    public static void compileExpression(OgnlContext context,Node expression,Object root) throws Exception{
-        _compiler.compileExpression(context, expression, root);
     }
 
     /**
@@ -787,171 +724,20 @@ public class OgnlRuntime{
     }
 
     /**
-     * Returns the base name (the class name without the package name prepended) of the object
-     * given.
-     * 
-     * @param o
-     *            the Object from which to retrieve its base classname.
-     * @return the base classname of o's Class.
-     */
-    public static String getBaseName(Object o){
-        return (o == null) ? null : getClassBaseName(o.getClass());
-    }
-
-    /**
      * Returns the base name (the class name without the package name prepended) of the class given.
      * 
      * @param c
      *            the Class from which to retrieve its name.
      * @return the base classname of c.
      */
-    public static String getClassBaseName(Class c){
+    private static String getClassBaseName(Class c){
         String s = c.getName();
 
         return s.substring(s.lastIndexOf('.') + 1);
     }
 
-    public static String getClassName(Object o,boolean fullyQualified){
-        if (!(o instanceof Class)){
-            o = o.getClass();
-        }
-
-        return getClassName((Class) o, fullyQualified);
-    }
-
-    public static String getClassName(Class c,boolean fullyQualified){
+    private static String getClassName(Class c,boolean fullyQualified){
         return fullyQualified ? c.getName() : getClassBaseName(c);
-    }
-
-    /**
-     * Returns the package name of the object's class.
-     * 
-     * @param o
-     *            the Object from which to retrieve its Class package name.
-     * @return the package name of o's Class.
-     */
-    public static String getPackageName(Object o){
-        return (o == null) ? null : getClassPackageName(o.getClass());
-    }
-
-    /**
-     * Returns the package name of the class given.
-     * 
-     * @param c
-     *            the Class from which to retrieve its package name.
-     * @return the package name of c.
-     */
-    public static String getClassPackageName(Class c){
-        String s = c.getName();
-        int i = s.lastIndexOf('.');
-
-        return (i < 0) ? null : s.substring(0, i);
-    }
-
-    /**
-     * Returns a "pointer" string in the usual format for these things - 0x&lt;hex digits&gt;.
-     * 
-     * @param num
-     *            the int to convert into a "pointer" string in hex format.
-     * @return the String representing num as a "pointer" string in hex format.
-     */
-    public static String getPointerString(int num){
-        StringBuffer result = new StringBuffer();
-        String hex = Integer.toHexString(num), pad;
-        Integer l = new Integer(hex.length());
-
-        // result.append(HEX_PREFIX);
-        if ((pad = (String) HEX_PADDING.get(l)) == null){
-            StringBuffer pb = new StringBuffer();
-
-            for (int i = hex.length(); i < HEX_LENGTH; i++){
-                pb.append('0');
-            }
-            pad = new String(pb);
-            HEX_PADDING.put(l, pad);
-        }
-        result.append(pad);
-        result.append(hex);
-        return new String(result);
-    }
-
-    /**
-     * Returns a "pointer" string in the usual format for these things - 0x&lt;hex digits&gt; for the
-     * object given. This will always return a unique value for each object.
-     * 
-     * @param o
-     *            the Object to convert into a "pointer" string in hex format.
-     * @return the String representing o as a "pointer" string in hex format.
-     */
-    public static String getPointerString(Object o){
-        return getPointerString((o == null) ? 0 : System.identityHashCode(o));
-    }
-
-    /**
-     * Returns a unique descriptor string that includes the object's class and a unique integer
-     * identifier. If fullyQualified is true then the class name will be fully qualified to include
-     * the package name, else it will be just the class' base name.
-     * 
-     * @param object
-     *            the Object for which a unique descriptor string is desired.
-     * @param fullyQualified
-     *            true if the descriptor string is fully-qualified (package name), false for just the Class' base name.
-     * @return the unique descriptor String for the object, qualified as per fullyQualified parameter.
-     */
-    public static String getUniqueDescriptor(Object object,boolean fullyQualified){
-        StringBuffer result = new StringBuffer();
-
-        if (object != null){
-            if (object instanceof Proxy){
-                Class interfaceClass = object.getClass().getInterfaces()[0];
-
-                result.append(getClassName(interfaceClass, fullyQualified));
-                result.append('^');
-                object = Proxy.getInvocationHandler(object);
-            }
-            result.append(getClassName(object, fullyQualified));
-            result.append('@');
-            result.append(getPointerString(object));
-        }else{
-            result.append(NULL_OBJECT_STRING);
-        }
-        return new String(result);
-    }
-
-    /**
-     * Returns a unique descriptor string that includes the object's class' base name and a unique
-     * integer identifier.
-     * 
-     * @param object
-     *            the Object for which a unique descriptor string is desired.
-     * @return the unique descriptor String for the object, NOT fully-qualified.
-     */
-    public static String getUniqueDescriptor(Object object){
-        return getUniqueDescriptor(object, false);
-    }
-
-    /**
-     * Utility to convert a List into an Object[] array. If the list is zero elements this will
-     * return a constant array; toArray() on List always returns a new object and this is wasteful
-     * for our purposes.
-     * 
-     * @param list
-     *            the List to convert into an Object array.
-     * @return the array of Objects from the list.
-     */
-    public static Object[] toArray(List list){
-        Object[] result;
-        int size = list.size();
-
-        if (size == 0){
-            result = NoArguments;
-        }else{
-            result = getObjectArrayPool().create(list.size());
-            for (int i = 0; i < size; i++){
-                result[i] = list.get(i);
-            }
-        }
-        return result;
     }
 
     /**
@@ -961,7 +747,7 @@ public class OgnlRuntime{
      *            the Method whose parameter types are being queried.
      * @return the array of Class elements representing m's parameters. May be null if m does not utilize parameters.
      */
-    public static Class[] getParameterTypes(Method m){
+    private static Class[] getParameterTypes(Method m){
         synchronized (_methodParameterTypesCache){
             Class[] result;
 
@@ -983,7 +769,7 @@ public class OgnlRuntime{
      *            The method to find types for.
      * @return Array of parameter types for the given method.
      */
-    public static Class[] findParameterTypes(Class type,Method m){
+    private static Class[] findParameterTypes(Class type,Method m){
         Type[] genTypes = m.getGenericParameterTypes();
         Class[] types = new Class[genTypes.length];
 
@@ -1000,7 +786,7 @@ public class OgnlRuntime{
             return types;
         }
 
-        if (type == null || !isJdk15()){
+        if (type == null){
             return getParameterTypes(m);
         }
 
@@ -1069,32 +855,6 @@ public class OgnlRuntime{
             }
         }
 
-        /*
-         * for (int i=0; i < var.getBounds().length; i++)
-         * {
-         * Type t = var.getBounds()[i];
-         * Class resolvedType = null;
-         * 
-         * if (ParameterizedType.class.isInstance(t))
-         * {
-         * ParameterizedType pparam = (ParameterizedType)t;
-         * for (int e=0; e < pparam.getActualTypeArguments().length; e++)
-         * {
-         * if (!TypeVariable.class.isInstance(pparam.getActualTypeArguments()[e]))
-         * continue;
-         * 
-         * resolvedType = resolveType(pparam, (TypeVariable)pparam.getActualTypeArguments()[e], declaredTypes);
-         * }
-         * } else
-         * {
-         * resolvedType = findType(param.getActualTypeArguments(), (Class)t);
-         * }
-         * 
-         * if (resolvedType != null)
-         * return resolvedType;
-         * }
-         */
-
         return null;
     }
 
@@ -1115,7 +875,7 @@ public class OgnlRuntime{
      *            the Constructor whose parameter types are being queried.
      * @return the array of Class elements representing c's parameters. May be null if c does not utilize parameters.
      */
-    public static Class[] getParameterTypes(Constructor c){
+    private static Class[] getParameterTypes(Constructor c){
         Class[] result;
         if ((result = (Class[]) _ctorParameterTypesCache.get(c)) == null){
             synchronized (_ctorParameterTypesCache){
@@ -1128,32 +888,13 @@ public class OgnlRuntime{
     }
 
     /**
-     * Gets the SecurityManager that OGNL uses to determine permissions for invoking methods.
-     *
-     * @return SecurityManager for OGNL
-     */
-    public static SecurityManager getSecurityManager(){
-        return _securityManager;
-    }
-
-    /**
-     * Sets the SecurityManager that OGNL uses to determine permissions for invoking methods.
-     *
-     * @param value
-     *            SecurityManager to set
-     */
-    public static void setSecurityManager(SecurityManager value){
-        _securityManager = value;
-    }
-
-    /**
      * Permission will be named "invoke.&lt;declaring-class&gt;.&lt;method-name&gt;".
      * 
      * @param method
      *            the Method whose Permission is being requested.
      * @return the Permission for method named "invoke.&lt;declaring-class&gt;.&lt;method-name&gt;".
      */
-    public static Permission getPermission(Method method){
+    private static Permission getPermission(Method method){
         Permission result;
         Class mc = method.getDeclaringClass();
 
@@ -1171,7 +912,7 @@ public class OgnlRuntime{
         return result;
     }
 
-    public static Object invokeMethod(Object target,Method method,Object[] argsArray)
+    private static Object invokeMethod(Object target,Method method,Object[] argsArray)
                     throws InvocationTargetException,IllegalAccessException{
         boolean syncInvoke;
         boolean checkPermission;
@@ -1344,7 +1085,7 @@ public class OgnlRuntime{
      *            an object that is being passed to a method
      * @return the class to use to look up the method
      */
-    public static final Class getArgClass(Object arg){
+    private static final Class getArgClass(Object arg){
         if (arg == null){
             return null;
         }
@@ -1376,7 +1117,7 @@ public class OgnlRuntime{
         return c;
     }
 
-    public static Class[] getArgClasses(Object[] args){
+    private static Class[] getArgClasses(Object[] args){
         if (args == null){
             return null;
         }
@@ -1399,7 +1140,7 @@ public class OgnlRuntime{
      *            the Class for which object's type-compatibility is being checked.
      * @return true if object is type-compatible with c.
      */
-    public static final boolean isTypeCompatible(Object object,Class c){
+    private static final boolean isTypeCompatible(Object object,Class c){
         if (object == null){
             return true;
         }
@@ -1413,7 +1154,7 @@ public class OgnlRuntime{
         return true;
     }
 
-    public static final boolean isTypeCompatible(Class parameterClass,Class methodArgumentClass,int index,ArgsCompatbilityReport report){
+    private static final boolean isTypeCompatible(Class parameterClass,Class methodArgumentClass,int index,ArgsCompatbilityReport report){
         if (parameterClass == null){
             // happens when we cannot determine parameter...
             report.score += 500;
@@ -1483,20 +1224,6 @@ public class OgnlRuntime{
             }
         }
         return false; // dosn't match.
-        /*
-         * boolean result = true;
-         * 
-         * if (parameterClass != null) {
-         * if (methodArgumentClass.isPrimitive()) {
-         * if (parameterClass != methodArgumentClass) {
-         * result = false;
-         * }
-         * } else if (!methodArgumentClass.isAssignableFrom(parameterClass)) {
-         * result = false;
-         * }
-         * }
-         * return result;
-         */
     }
 
     /**
@@ -1504,7 +1231,7 @@ public class OgnlRuntime{
      * is, whether the given array of objects can be passed as arguments to a method or constructor
      * whose parameter types are the given array of classes.
      */
-    public static class ArgsCompatbilityReport{
+    private static class ArgsCompatbilityReport{
 
         int       score;
 
@@ -1531,8 +1258,8 @@ public class OgnlRuntime{
         return true;
     }
 
-    public static ArgsCompatbilityReport areArgsCompatible(Class[] args,Class[] classes,Method m){
-        boolean varArgs = m != null && isJdk15() && m.isVarArgs();
+    private static ArgsCompatbilityReport areArgsCompatible(Class[] args,Class[] classes,Method m){
+        boolean varArgs = m != null && m.isVarArgs();
 
         if (args == null || args.length == 0){ // handle methods without arguments
             if (classes == null || classes.length == 0){
@@ -1616,36 +1343,6 @@ public class OgnlRuntime{
         return false;
     }
 
-    public static String getModifierString(int modifiers){
-        String result;
-
-        if (Modifier.isPublic(modifiers)){
-            result = "public";
-        }else if (Modifier.isProtected(modifiers)){
-            result = "protected";
-        }else if (Modifier.isPrivate(modifiers)){
-            result = "private";
-        }else{
-            result = "";
-        }
-        if (Modifier.isStatic(modifiers)){
-            result = "static " + result;
-        }
-        if (Modifier.isFinal(modifiers)){
-            result = "final " + result;
-        }
-        if (Modifier.isNative(modifiers)){
-            result = "native " + result;
-        }
-        if (Modifier.isSynchronized(modifiers)){
-            result = "synchronized " + result;
-        }
-        if (Modifier.isTransient(modifiers)){
-            result = "transient " + result;
-        }
-        return result;
-    }
-
     public static Class classForName(OgnlContext context,String className) throws ClassNotFoundException{
         Class result = (Class) _primitiveTypes.get(className);
 
@@ -1682,11 +1379,11 @@ public class OgnlRuntime{
         return NUMERIC_DEFAULTS.get(forClass);
     }
 
-    public static Object getConvertedType(OgnlContext context,Object target,Member member,String propertyName,Object value,Class type){
+    private static Object getConvertedType(OgnlContext context,Object target,Member member,String propertyName,Object value,Class type){
         return context.getTypeConverter().convertValue(context, target, member, propertyName, value, type);
     }
 
-    public static boolean getConvertedTypes(
+    private static boolean getConvertedTypes(
                     OgnlContext context,
                     Object target,
                     Member member,
@@ -1765,7 +1462,7 @@ public class OgnlRuntime{
      *
      * @return Best method match or null if none could be found.
      */
-    public static Method getAppropriateMethod(
+    private static Method getAppropriateMethod(
                     OgnlContext context,
                     Object source,
                     Object target,
@@ -1806,7 +1503,7 @@ public class OgnlRuntime{
         return result;
     }
 
-    public static Method getConvertedMethodAndArgs(
+    private static Method getConvertedMethodAndArgs(
                     OgnlContext context,
                     Object target,
                     String propertyName,
@@ -1905,7 +1602,7 @@ public class OgnlRuntime{
                 }else{
                     // two methods with same score - direct compare to find the better one...
                     // legacy wins over varargs
-                    if (isJdk15() && (m.isVarArgs() || mm.mMethod.isVarArgs())){
+                    if ((m.isVarArgs() || mm.mMethod.isVarArgs())){
                         if (m.isVarArgs() && !mm.mMethod.isVarArgs()){
                             // keep with current
                         }else if (!m.isVarArgs() && mm.mMethod.isVarArgs()){
@@ -2018,7 +1715,7 @@ public class OgnlRuntime{
 
             Object[] convertedArgs = actualArgs;
 
-            if (isJdk15() && method.isVarArgs()){
+            if (method.isVarArgs()){
                 Class[] parmTypes = method.getParameterTypes();
 
                 // split arguments in to two dimensional array for varargs reflection invocation
@@ -2096,31 +1793,6 @@ public class OgnlRuntime{
      *            The object to invoke the method on.
      * @param methodName
      *            Name of the method - as in "getValue" or "add", etc..
-     * @param propertyName
-     *            Name of the property to call instead?
-     * @param args
-     *            Optional arguments needed for method.
-     * @return Result of invoking method.
-     *
-     * @deprecated Use {@link #callMethod(OgnlContext, Object, String, Object[])} instead.
-     * @throws OgnlException
-     *             For lots of different reasons.
-     */
-    @Deprecated
-    public static Object callMethod(OgnlContext context,Object target,String methodName,String propertyName,Object[] args)
-                    throws OgnlException{
-        return callMethod(context, target, methodName == null ? propertyName : methodName, args);
-    }
-
-    /**
-     * Invokes the specified method against the target object.
-     *
-     * @param context
-     *            The current execution context.
-     * @param target
-     *            The object to invoke the method on.
-     * @param methodName
-     *            Name of the method - as in "getValue" or "add", etc..
      * @param args
      *            Optional arguments needed for method.
      * @return Result of invoking method.
@@ -2185,31 +1857,6 @@ public class OgnlRuntime{
     }
 
     /**
-     * Don't use this method as it doesn't check member access rights via {@link MemberAccess} interface
-     * 
-     * @param context
-     *            the current execution context.
-     * @param target
-     *            the object to invoke the property name get on.
-     * @param propertyName
-     *            the name of the property to be retrieved from target.
-     * @return the result invoking property retrieval of propertyName for target.
-     * @throws OgnlException
-     *             for lots of different reasons.
-     * @throws IllegalAccessException
-     *             if access not permitted.
-     * @throws NoSuchMethodException
-     *             if no property accessor exists.
-     * @throws IntrospectionException
-     *             on errors using {@link Introspector}.
-     */
-    @Deprecated
-    public static final Object getMethodValue(OgnlContext context,Object target,String propertyName)
-                    throws OgnlException,IllegalAccessException,NoSuchMethodException,IntrospectionException{
-        return getMethodValue(context, target, propertyName, false);
-    }
-
-    /**
      * If the checkAccessAndExistence flag is true this method will check to see if the method
      * exists and if it is accessible according to the context's MemberAccess. If neither test
      * passes this will return NotFound.
@@ -2259,33 +1906,6 @@ public class OgnlRuntime{
         return result;
     }
 
-    /**
-     * Don't use this method as it doesn't check member access rights via {@link MemberAccess} interface
-     * 
-     * @param context
-     *            the current execution context.
-     * @param target
-     *            the object to invoke the property name get on.
-     * @param propertyName
-     *            the name of the property to be set for target.
-     * @param value
-     *            the value to set for propertyName of target.
-     * @return true if the operation succeeded, false otherwise.
-     * @throws OgnlException
-     *             for lots of different reasons.
-     * @throws IllegalAccessException
-     *             if access not permitted.
-     * @throws NoSuchMethodException
-     *             if no property accessor exists.
-     * @throws IntrospectionException
-     *             on errors using {@link Introspector}.
-     */
-    @Deprecated
-    public static boolean setMethodValue(OgnlContext context,Object target,String propertyName,Object value)
-                    throws OgnlException,IllegalAccessException,NoSuchMethodException,IntrospectionException{
-        return setMethodValue(context, target, propertyName, value, false);
-    }
-
     public static boolean setMethodValue(OgnlContext context,Object target,String propertyName,Object value,boolean checkAccessAndExistence)
                     throws OgnlException,IllegalAccessException,NoSuchMethodException,IntrospectionException{
         boolean result = true;
@@ -2326,7 +1946,7 @@ public class OgnlRuntime{
         return result;
     }
 
-    public static Map getMethods(Class targetClass,boolean staticMethods){
+    private static Map getMethods(Class targetClass,boolean staticMethods){
         ClassCache cache = (staticMethods ? _staticMethodCache : _instanceMethodCache);
         Map result;
 
@@ -2419,52 +2039,11 @@ public class OgnlRuntime{
                         && method.getDeclaringClass().isInterface();
     }
 
-    public static Map getAllMethods(Class targetClass,boolean staticMethods){
-        ClassCache cache = (staticMethods ? _staticMethodCache : _instanceMethodCache);
-        Map result;
-
-        if ((result = (Map) cache.get(targetClass)) == null){
-            synchronized (cache){
-                if ((result = (Map) cache.get(targetClass)) == null){
-                    result = new HashMap(23);
-
-                    for (Class c = targetClass; c != null; c = c.getSuperclass()){
-                        Method[] ma = c.getMethods();
-
-                        for (Method element : ma){
-                            // skip over synthetic methods
-
-                            if (!isMethodCallable(element)){
-                                continue;
-                            }
-
-                            if (Modifier.isStatic(element.getModifiers()) == staticMethods){
-                                List ml = (List) result.get(element.getName());
-
-                                if (ml == null){
-                                    result.put(element.getName(), ml = new ArrayList());
-                                }
-
-                                ml.add(element);
-                            }
-                        }
-                    }
-                    cache.put(targetClass, result);
-                }
-            }
-        }
-        return result;
-    }
-
     public static List getMethods(Class targetClass,String name,boolean staticMethods){
         return (List) getMethods(targetClass, staticMethods).get(name);
     }
 
-    public static List getAllMethods(Class targetClass,String name,boolean staticMethods){
-        return (List) getAllMethods(targetClass, staticMethods).get(name);
-    }
-
-    public static Map getFields(Class targetClass){
+    private static Map getFields(Class targetClass){
         Map result;
 
         if ((result = (Map) _fieldCache.get(targetClass)) == null){
@@ -2538,24 +2117,6 @@ public class OgnlRuntime{
         return result;
     }
 
-    /**
-     * Don't use this method as it doesn't check member access rights via {@link MemberAccess} interface
-     * 
-     * @param context
-     *            the current execution context.
-     * @param target
-     *            the object to invoke the property name get on.
-     * @param propertyName
-     *            the name of the property to be set for target.
-     * @return the result invoking field retrieval of propertyName for target.
-     * @throws NoSuchFieldException
-     *             if the field does not exist.
-     */
-    @Deprecated
-    public static Object getFieldValue(OgnlContext context,Object target,String propertyName) throws NoSuchFieldException{
-        return getFieldValue(context, target, propertyName, false);
-    }
-
     public static Object getFieldValue(OgnlContext context,Object target,String propertyName,boolean checkAccessAndExistence)
                     throws NoSuchFieldException{
         Object result = null;
@@ -2618,15 +2179,15 @@ public class OgnlRuntime{
         return result;
     }
 
-    public static boolean isFieldAccessible(OgnlContext context,Object target,Class inClass,String propertyName){
+    private static boolean isFieldAccessible(OgnlContext context,Object target,Class inClass,String propertyName){
         return isFieldAccessible(context, target, getField(inClass, propertyName), propertyName);
     }
 
-    public static boolean isFieldAccessible(OgnlContext context,Object target,Field field,String propertyName){
+    private static boolean isFieldAccessible(OgnlContext context,Object target,Field field,String propertyName){
         return context.getMemberAccess().isAccessible(context, target, field, propertyName);
     }
 
-    public static boolean hasField(OgnlContext context,Object target,Class inClass,String propertyName){
+    private static boolean hasField(OgnlContext context,Object target,Class inClass,String propertyName){
         Field f = getField(inClass, propertyName);
 
         return (f != null) && isFieldAccessible(context, target, f, propertyName);
@@ -2666,7 +2227,7 @@ public class OgnlRuntime{
              */
             if (fieldName.equals("class")){
                 return c;
-            }else if (OgnlRuntime.isJdk15() && c.isEnum()){
+            }else if (c.isEnum()){
                 try{
                     return Enum.valueOf(c, fieldName);
                 }catch (IllegalArgumentException e){
@@ -2739,7 +2300,7 @@ public class OgnlRuntime{
         }
     }
 
-    public static List getDeclaredMethods(Class targetClass,String propertyName,boolean findSets){
+    private static List getDeclaredMethods(Class targetClass,String propertyName,boolean findSets){
         List result = null;
         ClassCache cache = _declaredMethods[findSets ? 0 : 1];
 
@@ -2822,7 +2383,7 @@ public class OgnlRuntime{
      * @return True if the method should be callable, false otherwise.
      */
     static boolean isMethodCallable(Method m){
-        if ((isJdk15() && m.isSynthetic()) || Modifier.isVolatile(m.getModifiers())){
+        if (m.isSynthetic() || Modifier.isVolatile(m.getModifiers())){
             return false;
         }
 
@@ -2844,7 +2405,7 @@ public class OgnlRuntime{
      * @throws IntrospectionException
      *             on errors using {@link Introspector}.
      */
-    public static Method getGetMethod(OgnlContext context,Class targetClass,String propertyName)
+    private static Method getGetMethod(OgnlContext context,Class targetClass,String propertyName)
                     throws IntrospectionException,OgnlException{
         // Cache is a map in two levels, so we provide two keys (see comments in ClassPropertyMethodCache below)
         Method method = cacheGetMethod.get(targetClass, propertyName);
@@ -2924,11 +2485,11 @@ public class OgnlRuntime{
         return result;
     }
 
-    public static boolean isMethodAccessible(OgnlContext context,Object target,Method method,String propertyName){
+    private static boolean isMethodAccessible(OgnlContext context,Object target,Method method,String propertyName){
         return (method != null) && context.getMemberAccess().isAccessible(context, target, method, propertyName);
     }
 
-    public static boolean hasGetMethod(OgnlContext context,Object target,Class targetClass,String propertyName)
+    private static boolean hasGetMethod(OgnlContext context,Object target,Class targetClass,String propertyName)
                     throws IntrospectionException,OgnlException{
         return isMethodAccessible(context, target, getGetMethod(context, targetClass, propertyName), propertyName);
     }
@@ -2948,7 +2509,7 @@ public class OgnlRuntime{
      * @throws OgnlException
      *             for lots of different reasons.
      */
-    public static Method getSetMethod(OgnlContext context,Class targetClass,String propertyName)
+    private static Method getSetMethod(OgnlContext context,Class targetClass,String propertyName)
                     throws IntrospectionException,OgnlException{
         // Cache is a map in two levels, so we provide two keys (see comments in ClassPropertyMethodCache below)
         Method method = cacheSetMethod.get(targetClass, propertyName);
@@ -3029,7 +2590,7 @@ public class OgnlRuntime{
         return result;
     }
 
-    public static final boolean hasSetMethod(OgnlContext context,Object target,Class targetClass,String propertyName)
+    private static final boolean hasSetMethod(OgnlContext context,Object target,Class targetClass,String propertyName)
                     throws IntrospectionException,OgnlException{
         return isMethodAccessible(context, target, getSetMethod(context, targetClass, propertyName), propertyName);
     }
@@ -3247,45 +2808,6 @@ public class OgnlRuntime{
             }
         }
         return m;
-    }
-
-    public static PropertyDescriptor[] getPropertyDescriptorsArray(Class targetClass) throws IntrospectionException{
-        PropertyDescriptor[] result = null;
-
-        if (targetClass != null){
-            if ((result = (PropertyDescriptor[]) _propertyDescriptorCache.get(targetClass)) == null){
-                synchronized (_propertyDescriptorCache){
-                    if ((result = (PropertyDescriptor[]) _propertyDescriptorCache.get(targetClass)) == null){
-                        _propertyDescriptorCache.put(targetClass, result = Introspector.getBeanInfo(targetClass).getPropertyDescriptors());
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Gets the property descriptor with the given name for the target class given.
-     *
-     * @param targetClass
-     *            Class for which property descriptor is desired
-     * @param name
-     *            Name of property
-     * @return PropertyDescriptor of the named property or null if the class has no property with
-     *         the given name
-     * @throws IntrospectionException
-     *             on errors using {@link Introspector}.
-     */
-    public static PropertyDescriptor getPropertyDescriptorFromArray(Class targetClass,String name) throws IntrospectionException{
-        PropertyDescriptor result = null;
-        PropertyDescriptor[] pda = getPropertyDescriptorsArray(targetClass);
-
-        for (int i = 0, icount = pda.length; (result == null) && (i < icount); i++){
-            if (pda[i].getName().compareTo(name) == 0){
-                result = pda[i];
-            }
-        }
-        return result;
     }
 
     public static void setMethodAccessor(Class cls,MethodAccessor accessor){
@@ -3556,7 +3078,7 @@ public class OgnlRuntime{
 
         for (Object method : methods){
             Method m = (Method) method;
-            boolean varArgs = isJdk15() && m.isVarArgs();
+            boolean varArgs = m.isVarArgs();
 
             if (parms.length != m.getParameterTypes().length && !varArgs){
                 continue;
@@ -3790,7 +3312,8 @@ public class OgnlRuntime{
 
             for (PropertyDescriptor pd : pds){
 
-                if (pd.getName().equalsIgnoreCase(name) || pd.getName().toLowerCase().equals(name.toLowerCase())
+                if (pd.getName().equalsIgnoreCase(name) //
+                                || pd.getName().toLowerCase().equals(name.toLowerCase())//
                                 || pd.getName().toLowerCase().endsWith(name.toLowerCase())){
                     return pd;
                 }

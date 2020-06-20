@@ -58,19 +58,14 @@ public class OgnlException extends Exception{
     /**
      * The root evaluation of the expression when the exception was thrown
      */
-    private Evaluation _evaluation;
+    private Evaluation      _evaluation;
 
     /**
      * Why this exception was thrown.
      * 
      * @serial
      */
-    private Throwable  _reason;
-
-    /** Constructs an OgnlException with no message or encapsulated exception. */
-    public OgnlException(){
-        this(null, null);
-    }
+    private final Throwable _reason;
 
     /**
      * Constructs an OgnlException with the given message but no encapsulated exception.
@@ -100,25 +95,6 @@ public class OgnlException extends Exception{
             }catch (Exception t){ /** ignore */
             }
         }
-    }
-
-    /**
-     * Returns the encapsulated exception, or null if there is none.
-     * 
-     * @return the encapsulated exception
-     */
-    public Throwable getReason(){
-        return _reason;
-    }
-
-    /**
-     * Returns the Evaluation that was the root evaluation when the exception was
-     * thrown.
-     * 
-     * @return The {@link Evaluation}.
-     */
-    public Evaluation getEvaluation(){
-        return _evaluation;
     }
 
     /**

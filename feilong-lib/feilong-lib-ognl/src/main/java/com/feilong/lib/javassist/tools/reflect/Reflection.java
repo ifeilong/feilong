@@ -77,7 +77,6 @@ import com.feilong.lib.javassist.bytecode.MethodInfo;
  * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject
  * @see com.feilong.lib.javassist.tools.reflect.Metaobject
  * @see com.feilong.lib.javassist.tools.reflect.Loader
- * @see com.feilong.lib.javassist.tools.reflect.Compiler
  */
 public class Reflection implements Translator{
 
@@ -95,9 +94,9 @@ public class Reflection implements Translator{
 
     static final String     writePrefix              = "_w_";
 
-    static final String     metaobjectClassName      = "com.feilong.lib.javassist.tools.reflect.Metaobject";
+    static final String     metaobjectClassName      = com.feilong.lib.javassist.tools.reflect.Metaobject.class.getName();
 
-    static final String     classMetaobjectClassName = "com.feilong.lib.javassist.tools.reflect.ClassMetaobject";
+    static final String     classMetaobjectClassName = com.feilong.lib.javassist.tools.reflect.ClassMetaobject.class.getName();
 
     protected CtMethod      trapMethod, trapStaticMethod;
 
@@ -128,9 +127,9 @@ public class Reflection implements Translator{
     @Override
     public void start(ClassPool pool) throws NotFoundException{
         classPool = pool;
-        final String msg = "com.feilong.lib.javassist.tools.reflect.Sample is not found or broken.";
+        String classname = "com.feilong.lib.javassist.tools.reflect.Sample";
         try{
-            CtClass c = classPool.get("com.feilong.lib.javassist.tools.reflect.Sample");
+            CtClass c = classPool.get(classname);
             rebuildClassFile(c.getClassFile());
             trapMethod = c.getDeclaredMethod("trap");
             trapStaticMethod = c.getDeclaredMethod("trapStatic");
@@ -138,9 +137,9 @@ public class Reflection implements Translator{
             trapWrite = c.getDeclaredMethod("trapWrite");
             readParam = new CtClass[] { classPool.get("java.lang.Object") };
         }catch (NotFoundException e){
-            throw new RuntimeException(msg);
+            throw new RuntimeException(classname + "  is not found or broken.");
         }catch (BadBytecode e){
-            throw new RuntimeException(msg);
+            throw new RuntimeException(classname + "  is not found or broken.");
         }
     }
 
@@ -167,7 +166,6 @@ public class Reflection implements Translator{
      *            the class name of the class metaobject.
      * @return <code>false</code> if the class is already reflective.
      *
-     * @see com.feilong.lib.javassist.tools.reflect.Metaobject
      * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject
      */
     public boolean makeReflective(String classname,String metaobject,String metaclass) throws CannotCompileException,NotFoundException{
@@ -191,7 +189,6 @@ public class Reflection implements Translator{
      *            <code>ClassMetaobject</code>.
      * @return <code>false</code> if the class is already reflective.
      *
-     * @see com.feilong.lib.javassist.tools.reflect.Metaobject
      * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject
      */
     public boolean makeReflective(Class<?> clazz,Class<?> metaobject,Class<?> metaclass) throws CannotCompileException,NotFoundException{
@@ -216,7 +213,6 @@ public class Reflection implements Translator{
      *            <code>ClassMetaobject</code>.
      * @return <code>false</code> if the class is already reflective.
      *
-     * @see com.feilong.lib.javassist.tools.reflect.Metaobject
      * @see com.feilong.lib.javassist.tools.reflect.ClassMetaobject
      */
     public boolean makeReflective(CtClass clazz,CtClass metaobject,CtClass metaclass)
@@ -259,7 +255,7 @@ public class Reflection implements Translator{
         }
         clazz.setAttribute("Reflective", new byte[0]);
 
-        CtClass mlevel = classPool.get("com.feilong.lib.javassist.tools.reflect.Metalevel");
+        CtClass mlevel = classPool.get(com.feilong.lib.javassist.tools.reflect.Metalevel.class.getName());
         boolean addMeta = !clazz.subtypeOf(mlevel);
         if (addMeta){
             clazz.addInterface(mlevel);
@@ -268,21 +264,21 @@ public class Reflection implements Translator{
         processMethods(clazz, addMeta);
         processFields(clazz);
 
-        CtField f;
+        CtField ctField;
         if (addMeta){
-            f = new CtField(classPool.get("com.feilong.lib.javassist.tools.reflect.Metaobject"), metaobjectField, clazz);
-            f.setModifiers(Modifier.PROTECTED);
-            clazz.addField(f, CtField.Initializer.byNewWithParams(metaobject));
+            ctField = new CtField(classPool.get(com.feilong.lib.javassist.tools.reflect.Metaobject.class.getName()), metaobjectField, clazz);
+            ctField.setModifiers(Modifier.PROTECTED);
+            clazz.addField(ctField, CtField.Initializer.byNewWithParams(metaobject));
 
-            clazz.addMethod(CtNewMethod.getter(metaobjectGetter, f));
-            clazz.addMethod(CtNewMethod.setter(metaobjectSetter, f));
+            clazz.addMethod(CtNewMethod.getter(metaobjectGetter, ctField));
+            clazz.addMethod(CtNewMethod.setter(metaobjectSetter, ctField));
         }
 
-        f = new CtField(classPool.get("com.feilong.lib.javassist.tools.reflect.ClassMetaobject"), classobjectField, clazz);
-        f.setModifiers(Modifier.PRIVATE | Modifier.STATIC);
-        clazz.addField(f, CtField.Initializer.byNew(metaclass, new String[] { clazz.getName() }));
+        ctField = new CtField(classPool.get(com.feilong.lib.javassist.tools.reflect.ClassMetaobject.class.getName()), classobjectField, clazz);
+        ctField.setModifiers(Modifier.PRIVATE | Modifier.STATIC);
+        clazz.addField(ctField, CtField.Initializer.byNew(metaclass, new String[] { clazz.getName() }));
 
-        clazz.addMethod(CtNewMethod.getter(classobjectAccessor, f));
+        clazz.addMethod(CtNewMethod.getter(classobjectAccessor, ctField));
         return true;
     }
 
@@ -306,16 +302,16 @@ public class Reflection implements Translator{
             return; // from a reflective class.
         }
 
-        CtMethod m2;
+        CtMethod ctMethod;
         if (m.getDeclaringClass() == clazz){
             if (Modifier.isNative(mod)){
                 return;
             }
 
-            m2 = m;
+            ctMethod = m;
             if (Modifier.isFinal(mod)){
                 mod &= ~Modifier.FINAL;
-                m2.setModifiers(mod);
+                ctMethod.setModifiers(mod);
             }
         }else{
             if (Modifier.isFinal(mod)){
@@ -323,12 +319,12 @@ public class Reflection implements Translator{
             }
 
             mod &= ~Modifier.NATIVE;
-            m2 = CtNewMethod.delegator(findOriginal(m, dontSearch), clazz);
-            m2.setModifiers(mod);
-            clazz.addMethod(m2);
+            ctMethod = CtNewMethod.delegator(findOriginal(m, dontSearch), clazz);
+            ctMethod.setModifiers(mod);
+            clazz.addMethod(ctMethod);
         }
 
-        m2.setName(ClassMetaobject.methodPrefix + identifier + "_" + name);
+        ctMethod.setName(ClassMetaobject.methodPrefix + identifier + "_" + name);
 
         if (Modifier.isStatic(mod)){
             body = trapStaticMethod;

@@ -34,15 +34,15 @@ import java.security.PrivilegedExceptionAction;
 class SerializedProxy implements Serializable{
 
     /** default serialVersionUID */
-    private static final long serialVersionUID = 1L;
+    private static final long   serialVersionUID = 1L;
 
-    private String            superClass;
+    private final String        superClass;
 
-    private String[]          interfaces;
+    private final String[]      interfaces;
 
-    private byte[]            filterSignature;
+    private final byte[]        filterSignature;
 
-    private MethodHandler     handler;
+    private final MethodHandler handler;
 
     SerializedProxy(Class<?> proxy, byte[] sig, MethodHandler h){
         filterSignature = sig;
@@ -89,10 +89,11 @@ class SerializedProxy implements Serializable{
                 infs[i] = loadClass(interfaces[i]);
             }
 
-            ProxyFactory f = new ProxyFactory();
-            f.setSuperclass(loadClass(superClass));
-            f.setInterfaces(infs);
-            Proxy proxy = (Proxy) f.createClass(filterSignature).getConstructor().newInstance();
+            ProxyFactory proxyFactory = new ProxyFactory();
+            proxyFactory.setSuperclass(loadClass(superClass));
+            proxyFactory.setInterfaces(infs);
+
+            Proxy proxy = (Proxy) proxyFactory.createClass(filterSignature).getConstructor().newInstance();
             proxy.setHandler(handler);
             return proxy;
         }catch (NoSuchMethodException e){

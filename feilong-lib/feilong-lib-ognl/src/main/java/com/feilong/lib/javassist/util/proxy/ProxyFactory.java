@@ -196,7 +196,7 @@ public class ProxyFactory{
 
     private MethodFilter                    methodFilter;
 
-    private MethodHandler                   handler;                                                                               // retained for legacy usage
+    private MethodHandler                   handler;                                                                                       // retained for legacy usage
 
     private List<Map.Entry<String, Method>> signatureMethods;
 
@@ -276,7 +276,7 @@ public class ProxyFactory{
 
     private static final String             HANDLER                  = "handler";
 
-    private static final String             NULL_INTERCEPTOR_HOLDER  = "com.feilong.lib.javassist.util.proxy.RuntimeSupport";
+    private static final String             NULL_INTERCEPTOR_HOLDER  = com.feilong.lib.javassist.util.proxy.RuntimeSupport.class.getName();
 
     private static final String             DEFAULT_INTERCEPTOR      = "default_interceptor";
 
@@ -1665,7 +1665,7 @@ public class ProxyFactory{
         Bytecode code = new Bytecode(cp, 0, 1);
         code.addAload(0);
         code.addInvokestatic(
-                        "com.feilong.lib.javassist.util.proxy.RuntimeSupport",
+                        com.feilong.lib.javassist.util.proxy.RuntimeSupport.class.getName(),
                         "makeSerializedProxy",
                         "(Ljava/lang/Object;)Ljavassist/util/proxy/SerializedProxy;");
         code.addOpcode(Opcode.ARETURN);

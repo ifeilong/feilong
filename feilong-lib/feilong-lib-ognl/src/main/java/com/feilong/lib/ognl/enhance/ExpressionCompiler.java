@@ -14,8 +14,6 @@ import com.feilong.lib.javassist.ClassPool;
 import com.feilong.lib.javassist.CtClass;
 import com.feilong.lib.javassist.CtField;
 import com.feilong.lib.javassist.CtMethod;
-import com.feilong.lib.javassist.CtNewConstructor;
-import com.feilong.lib.javassist.CtNewMethod;
 import com.feilong.lib.javassist.LoaderClassPath;
 import com.feilong.lib.javassist.NotFoundException;
 import com.feilong.lib.ognl.ASTAnd;
@@ -402,102 +400,6 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         return ret;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see ognl.enhance.OgnlExpressionCompiler#compileExpression(ognl.OgnlContext, ognl.Node, java.lang.Object)
-     */
-    @Override
-    public void compileExpression(OgnlContext context,Node expression,Object root) throws Exception{
-        //        System.out.println("Compiling expr class " + expression.getClass().getName() + " and root " + root);
-
-        if (expression.getAccessor() != null){
-            return;
-        }
-
-        String getBody, setBody;
-
-        EnhancedClassLoader loader = getClassLoader(context);
-        ClassPool pool = getClassPool(context, loader);
-
-        CtClass newClass = pool.makeClass(expression.getClass().getName() + expression.hashCode() + _classCounter++ + "Accessor");
-        newClass.addInterface(getCtClass(ExpressionAccessor.class));
-
-        CtClass ognlClass = getCtClass(OgnlContext.class);
-        CtClass objClass = getCtClass(Object.class);
-
-        CtMethod valueGetter = new CtMethod(objClass, "get", new CtClass[] { ognlClass, objClass }, newClass);
-        CtMethod valueSetter = new CtMethod(CtClass.voidType, "set", new CtClass[] { ognlClass, objClass, objClass }, newClass);
-
-        CtField nodeMember = null; // will only be set if uncompilable exception is thrown
-
-        CtClass nodeClass = getCtClass(Node.class);
-        CtMethod setExpression = null;
-
-        try{
-
-            getBody = generateGetter(context, newClass, objClass, pool, valueGetter, expression, root);
-
-        }catch (UnsupportedCompilationException uc){
-            //uc.printStackTrace();
-
-            nodeMember = new CtField(nodeClass, "_node", newClass);
-            newClass.addField(nodeMember);
-
-            getBody = generateOgnlGetter(newClass, valueGetter, nodeMember);
-
-            if (setExpression == null){
-                setExpression = CtNewMethod.setter("setExpression", nodeMember);
-                newClass.addMethod(setExpression);
-            }
-        }
-
-        try{
-
-            setBody = generateSetter(context, newClass, objClass, pool, valueSetter, expression, root);
-
-        }catch (UnsupportedCompilationException uc){
-
-            //uc.printStackTrace();
-
-            if (nodeMember == null){
-                nodeMember = new CtField(nodeClass, "_node", newClass);
-                newClass.addField(nodeMember);
-            }
-
-            setBody = generateOgnlSetter(newClass, valueSetter, nodeMember);
-
-            if (setExpression == null){
-                setExpression = CtNewMethod.setter("setExpression", nodeMember);
-                newClass.addMethod(setExpression);
-            }
-        }
-
-        try{
-            newClass.addConstructor(CtNewConstructor.defaultConstructor(newClass));
-
-            Class clazz = pool.toClass(newClass);
-            newClass.detach();
-
-            expression.setAccessor((ExpressionAccessor) clazz.newInstance());
-
-            // need to set expression on node if the field was just defined.
-
-            if (nodeMember != null){
-                expression.getAccessor().setExpression(expression);
-            }
-
-        }catch (Throwable t){
-            //t.printStackTrace();
-
-            throw new RuntimeException(
-                            "Error compiling expression on object " + root + " with expression node " + expression + " getter body: "
-                                            + getBody + " setter body: " + setBody,
-                            t);
-        }
-
-    }
-
     protected String generateGetter(
                     OgnlContext context,
                     CtClass newClass,
@@ -600,10 +502,10 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
 
             //            System.out.println("adding method " + ref.getName() + " with body:\n" + body + " and return type: " + ref.getType());
 
-            CtMethod method = new CtMethod(pool.get(getCastString(ref.getType())), ref.getName(), params, clazz);
-            method.setBody(body);
+            CtMethod ctMethod = new CtMethod(pool.get(getCastString(ref.getType())), ref.getName(), params, clazz);
+            ctMethod.setBody(body);
 
-            clazz.addMethod(method);
+            clazz.addMethod(ctMethod);
 
             it.remove();
         }

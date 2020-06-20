@@ -36,13 +36,4 @@ public interface ExpressionAccessor{
      *            The new value to set if this expression references a settable property.
      */
     void set(OgnlContext context,Object target,Object value);
-
-    /**
-     * Used to set the original root expression node on instances where the compiled version
-     * has to fall back to interpreted syntax because of compilation failures.
-     *
-     * @param expression
-     *            The root expression node used to generate this accessor.
-     */
-    void setExpression(Node expression);
 }

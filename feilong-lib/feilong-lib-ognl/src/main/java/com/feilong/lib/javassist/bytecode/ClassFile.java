@@ -478,7 +478,7 @@ public final class ClassFile{
      * @param newname
      *            the substituted class name
      */
-    public final void renameClass(String oldname,String newname){
+    public void renameClass(String oldname,String newname){
         if (oldname.equals(newname)){
             return;
         }
@@ -514,7 +514,7 @@ public final class ClassFile{
      *            representation like <code>java/lang/Object</code>.
      * @see #renameClass(String,String)
      */
-    public final void renameClass(Map<String, String> classnames){
+    public void renameClass(Map<String, String> classnames){
         String jvmNewThisName = classnames.get(Descriptor.toJvmName(thisclassname));
         if (jvmNewThisName != null){
             thisclassname = Descriptor.toJavaName(jvmNewThisName);
@@ -540,7 +540,7 @@ public final class ClassFile{
      * Internal-use only.
      * <code>CtClass.getRefClasses()</code> calls this method.
      */
-    public final void getRefClasses(Map<String, String> classnames){
+    public void getRefClasses(Map<String, String> classnames){
         constPool.renameClass(classnames);
 
         AttributeInfo.getRefClasses(attributes, classnames);
@@ -645,7 +645,7 @@ public final class ClassFile{
      *
      * @since 3.13
      */
-    public final void addField2(FieldInfo finfo){
+    public void addField2(FieldInfo finfo){
         fields.add(finfo);
     }
 
@@ -711,7 +711,7 @@ public final class ClassFile{
      *
      * @since 3.13
      */
-    public final void addMethod2(MethodInfo minfo){
+    public void addMethod2(MethodInfo minfo){
         methods.add(minfo);
     }
 

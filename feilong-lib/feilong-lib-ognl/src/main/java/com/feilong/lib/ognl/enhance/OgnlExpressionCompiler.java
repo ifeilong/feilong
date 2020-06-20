@@ -17,26 +17,6 @@ public interface OgnlExpressionCompiler{
     String ROOT_TYPE = "-ognl-root-type";
 
     /**
-     * The core method executed to compile a specific expression. It is expected that this expression
-     * always return a {@link Node} with a non null {@link com.feilong.lib.ognl.Node#getAccessor()} instance - unless an exception
-     * is thrown by the method or the statement wasn't compilable in this instance because of missing/null objects
-     * in the expression. These instances may in some cases continue to call this compilation method until the expression
-     * is resolvable.
-     * 
-     * @param context
-     *            The context of execution.
-     * @param expression
-     *            The pre-parsed root expression node to compile.
-     * @param root
-     *            The root object for the expression - may be null in many instances so some implementations
-     *            may exit
-     * @throws Exception
-     *             If an error occurs compiling the expression and no strategy has been implemented to handle incremental
-     *             expression compilation for incomplete expression members.
-     */
-    void compileExpression(OgnlContext context,Node expression,Object root) throws Exception;
-
-    /**
      * Gets a javassist safe class string for the given class instance. This is especially
      * useful for handling array vs. normal class casting strings.
      *

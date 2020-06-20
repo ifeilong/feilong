@@ -340,49 +340,6 @@ public class Digester extends DefaultHandler{
     }
 
     /**
-     * Returns a flag indicating whether the requested feature is supported by the underlying implementation of
-     * <code>org.xml.sax.XMLReader</code>. See <a href="http://www.saxproject.org">the saxproject website</a> for
-     * information about the standard SAX2 feature flags.
-     *
-     * @param feature
-     *            Name of the feature to inquire about
-     * @return true, if the requested feature is supported by the underlying implementation of
-     *         <code>org.xml.sax.XMLReader</code>, false otherwise
-     * @exception ParserConfigurationException
-     *                if a parser configuration error occurs
-     * @exception SAXNotRecognizedException
-     *                if the property name is not recognized
-     * @exception SAXNotSupportedException
-     *                if the property name is recognized but not supported
-     */
-    public boolean getFeature(String feature) throws ParserConfigurationException,SAXNotRecognizedException,SAXNotSupportedException{
-        return (getFactory().getFeature(feature));
-    }
-
-    /**
-     * Sets a flag indicating whether the requested feature is supported by the underlying implementation of
-     * <code>org.xml.sax.XMLReader</code>. See <a href="http://www.saxproject.org">the saxproject website</a> for
-     * information about the standard SAX2 feature flags. In order to be effective, this method must be called
-     * <strong>before</strong> the <code>getParser()</code> method is called for the first time, either directly or
-     * indirectly.
-     *
-     * @param feature
-     *            Name of the feature to set the status for
-     * @param value
-     *            The new value for this feature
-     * @exception ParserConfigurationException
-     *                if a parser configuration error occurs
-     * @exception SAXNotRecognizedException
-     *                if the property name is not recognized
-     * @exception SAXNotSupportedException
-     *                if the property name is recognized but not supported
-     */
-    public void setFeature(String feature,boolean value)
-                    throws ParserConfigurationException,SAXNotRecognizedException,SAXNotSupportedException{
-        getFactory().setFeature(feature, value);
-    }
-
-    /**
      * Return the current rule match path
      *
      * @return the current rule match path
@@ -1031,13 +988,7 @@ public class Digester extends DefaultHandler{
         LOGGER.debug("notationDecl(" + name + "," + publicId + "," + systemId + ")");
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void unparsedEntityDecl(String name,String publicId,String systemId,String notation){
-        LOGGER.debug("unparsedEntityDecl(" + name + "," + publicId + "," + systemId + "," + notation + ")");
-    }
+    
 
     // ----------------------------------------------- EntityResolver Methods
 
@@ -1513,61 +1464,6 @@ public class Digester extends DefaultHandler{
         }
 
         result = this.<T> npeSafeCast(namedStack.pop());
-        return result;
-    }
-
-    /**
-     * <p>
-     * Gets the top object from the stack with the given name. This method does not remove the object from the stack.
-     * </p>
-     * <p>
-     * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
-     * </p>
-     *
-     * @param <T>
-     *            the type used to auto-cast the returned object to the assigned variable type
-     * @param stackName
-     *            the name of the stack to be peeked
-     * @return the top <code>Object</code> on the stack or null if the stack is either empty or has not been created yet
-     * @since 1.6
-     */
-    public <T> T peek(String stackName){
-        return this.<T> npeSafeCast(peek(stackName, 0));
-    }
-
-    /**
-     * <p>
-     * Gets the top object from the stack with the given name. This method does not remove the object from the stack.
-     * </p>
-     * <p>
-     * <strong>Note:</strong> a stack is considered empty if no objects have been pushed onto it yet.
-     * </p>
-     *
-     * @param <T>
-     *            the type used to auto-cast the returned object to the assigned variable type
-     * @param stackName
-     *            the name of the stack to be peeked
-     * @param n
-     *            Index of the desired element, where 0 is the top of the stack, 1 is the next element down, and so on.
-     * @return the specified <code>Object</code> on the stack.
-     * @since 1.6
-     */
-    public <T> T peek(String stackName,int n){
-        T result = null;
-        Stack<Object> namedStack = stacksByName.get(stackName);
-        if (namedStack == null){
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("Stack '" + stackName + "' is empty");
-            }
-            throw new EmptyStackException();
-        }
-
-        int index = (namedStack.size() - 1) - n;
-        if (index < 0){
-            throw new EmptyStackException();
-        }
-        result = this.<T> npeSafeCast(namedStack.get(index));
-
         return result;
     }
 

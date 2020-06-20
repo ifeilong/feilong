@@ -66,85 +66,70 @@ public abstract class CtClass{
      * @see #debugWriteFile(String)
      * @since 3.16
      */
-    public static String       debugDump = null;
+    public static String       debugDump      = null;
 
     /**
      * The version number of this release.
      */
-    public static final String version   = "3.24.1-GA";
+    public static final String version        = "3.24.1-GA";
 
-    /**
-     * Prints the version number and the copyright notice.
-     *
-     * <p>
-     * The following command invokes this method:
-     *
-     * <pre>
-     * java -jar javassist.jar
-     * </pre>
-     */
-    public static void main(String[] args){
-        System.out.println("Javassist version " + CtClass.version);
-        System.out.println("Copyright (C) 1999-2018 Shigeru Chiba." + " All Rights Reserved.");
-    }
-
-    static final String   javaLangObject = "java.lang.Object";
+    static final String        javaLangObject = "java.lang.Object";
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>boolean</code> type.
      */
-    public static CtClass booleanType;
+    public static CtClass      booleanType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>char</code> type.
      */
-    public static CtClass charType;
+    public static CtClass      charType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>byte</code> type.
      */
-    public static CtClass byteType;
+    public static CtClass      byteType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>short</code> type.
      */
-    public static CtClass shortType;
+    public static CtClass      shortType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>int</code> type.
      */
-    public static CtClass intType;
+    public static CtClass      intType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>long</code> type.
      */
-    public static CtClass longType;
+    public static CtClass      longType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>float</code> type.
      */
-    public static CtClass floatType;
+    public static CtClass      floatType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>double</code> type.
      */
-    public static CtClass doubleType;
+    public static CtClass      doubleType;
 
     /**
      * The <code>CtClass</code> object representing
      * the <code>void</code> type.
      */
-    public static CtClass voidType;
+    public static CtClass      voidType;
 
-    static CtClass[]      primitiveTypes;
+    static CtClass[]           primitiveTypes;
 
     static{
         primitiveTypes = new CtClass[9];

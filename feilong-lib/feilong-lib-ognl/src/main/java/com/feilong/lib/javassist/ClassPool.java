@@ -17,7 +17,6 @@
 package com.feilong.lib.javassist;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -137,30 +136,6 @@ public class ClassPool{
     private static final int INIT_HASH_SIZE             = 191;
 
     private ArrayList        importedPackages;
-
-    /**
-     * Creates a root class pool. No parent class pool is specified.
-     */
-    public ClassPool(){
-        this(null);
-    }
-
-    /**
-     * Creates a root class pool. If <code>useDefaultPath</code> is
-     * true, <code>appendSystemPath()</code> is called. Otherwise,
-     * this constructor is equivalent to the constructor taking no
-     * parameter.
-     *
-     * @param useDefaultPath
-     *            true if the system search path is
-     *            appended.
-     */
-    public ClassPool(boolean useDefaultPath){
-        this(null);
-        if (useDefaultPath){
-            appendSystemPath();
-        }
-    }
 
     /**
      * Creates a class pool.
@@ -301,7 +276,7 @@ public class ClassPool{
      *            For example, "java.util" is valid but "java.util." is wrong.
      * @since 3.1
      */
-    public void importPackage(String packageName){
+    private void importPackage(String packageName){
         importedPackages.add(packageName);
     }
 
@@ -312,7 +287,7 @@ public class ClassPool{
      * @see #importPackage(String)
      * @since 3.1
      */
-    public void clearImportedPackages(){
+    private void clearImportedPackages(){
         importedPackages = new ArrayList();
         importedPackages.add("java.lang");
     }
@@ -325,27 +300,6 @@ public class ClassPool{
      */
     public Iterator<String> getImportedPackages(){
         return importedPackages.iterator();
-    }
-
-    /**
-     * Records a class name that never exists.
-     * For example, a package name can be recorded by this method.
-     * This would improve execution performance
-     * since <code>get()</code> quickly throw an exception
-     * without searching the class path at all
-     * if the given name is an invalid name recorded by this method.
-     * Note that searching the class path takes relatively long time.
-     *
-     * <p>
-     * The current implementation of this method performs nothing.
-     *
-     * @param name
-     *            an invalid class name (separeted by dots).
-     * @deprecated
-     */
-    @Deprecated
-    public void recordInvalidClassName(String name){
-        // source.recordInvalidClassName(name);
     }
 
     /**
@@ -379,41 +333,6 @@ public class ClassPool{
         }
 
         return (Object[]) cflow.get(name);
-    }
-
-    /**
-     * Reads a class file and constructs a <code>CtClass</code>
-     * object with a new name.
-     * This method is useful if you want to generate a new class as a copy
-     * of another class (except the class name). For example,
-     *
-     * <pre>
-     * getAndRename("Point", "Pair")
-     * </pre>
-     *
-     * returns a <code>CtClass</code> object representing <code>Pair</code>
-     * class. The definition of <code>Pair</code> is the same as that of
-     * <code>Point</code> class except the class name since <code>Pair</code>
-     * is defined by reading <code>Point.class</code>.
-     *
-     * @param orgName
-     *            the original (fully-qualified) class name
-     * @param newName
-     *            the new class name
-     */
-    public CtClass getAndRename(String orgName,String newName) throws NotFoundException{
-        CtClass clazz = get0(orgName, false);
-        if (clazz == null){
-            throw new NotFoundException(orgName);
-        }
-
-        if (clazz instanceof CtClassType){
-            ((CtClassType) clazz).setClassPool(this);
-        }
-
-        clazz.setName(newName); // indirectly calls
-                                // classNameChanged() in this class
-        return clazz;
     }
 
     /*
@@ -468,43 +387,6 @@ public class ClassPool{
     }
 
     /**
-     * Reads a class file from the source and returns a reference
-     * to the <code>CtClass</code>
-     * object representing that class file.
-     * This method is equivalent to <code>get</code> except
-     * that it returns <code>null</code> when a class file is
-     * not found and it never throws an exception.
-     *
-     * @param classname
-     *            a fully-qualified class name.
-     * @return a <code>CtClass</code> object or <code>null</code>.
-     * @see #get(String)
-     * @see #find(String)
-     * @since 3.13
-     */
-    public CtClass getOrNull(String classname){
-        CtClass clazz = null;
-        if (classname == null){
-            clazz = null;
-        }else{
-            try{
-                /*
-                 * ClassPool.get0() never throws an exception
-                 * but its subclass may implement get0 that
-                 * may throw an exception.
-                 */
-                clazz = get0(classname, true);
-            }catch (NotFoundException e){}
-        }
-
-        if (clazz != null){
-            clazz.incGetCounter();
-        }
-
-        return clazz;
-    }
-
-    /**
      * Returns a <code>CtClass</code> object with the given name.
      * This is almost equivalent to <code>get(String)</code> except
      * that classname can be an array-type "descriptor" (an encoded
@@ -529,9 +411,8 @@ public class ClassPool{
     public CtClass getCtClass(String classname) throws NotFoundException{
         if (classname.charAt(0) == '['){
             return Descriptor.toCtClass(classname, this);
-        }else{
-            return get(classname);
         }
+        return get(classname);
     }
 
     /**
@@ -589,9 +470,8 @@ public class ClassPool{
             String base = classname.substring(0, classname.indexOf('['));
             if ((!useCache || getCached(base) == null) && find(base) == null){
                 return null;
-            }else{
-                return new CtArray(classname, this);
             }
+            return new CtArray(classname, this);
         }else if (find(classname) == null){
             return null;
         }else{
@@ -695,20 +575,6 @@ public class ClassPool{
     }
 
     /**
-     * Reads a class file and obtains a compile-time method.
-     *
-     * @param classname
-     *            the class name
-     * @param methodname
-     *            the method name
-     * @see CtClass#getDeclaredMethod(String)
-     */
-    public CtMethod getMethod(String classname,String methodname) throws NotFoundException{
-        CtClass c = get(classname);
-        return c.getDeclaredMethod(methodname);
-    }
-
-    /**
      * Creates a new class (or interface) from the given class file.
      * If there already exists a class with the same name, the new class
      * overwrites that previous class.
@@ -799,7 +665,7 @@ public class ClassPool{
      *            and there is a frozen class with the same name.
      * @since 3.20
      */
-    public CtClass makeClass(ClassFile classfile,boolean ifNotFrozen) throws RuntimeException{
+    private CtClass makeClass(ClassFile classfile,boolean ifNotFrozen) throws RuntimeException{
         compress();
         CtClass clazz = new CtClassType(classfile, this);
         clazz.checkModify();
@@ -838,10 +704,9 @@ public class ClassPool{
         CtClass found = checkNotExists(classname);
         if (found != null){
             return found;
-        }else{
-            cacheCtClass(classname, clazz, true);
-            return clazz;
         }
+        cacheCtClass(classname, clazz, true);
+        return clazz;
     }
 
     /**
@@ -863,7 +728,7 @@ public class ClassPool{
      * @throws RuntimeException
      *             if the existing class is frozen.
      */
-    public CtClass makeClass(String classname) throws RuntimeException{
+    private CtClass makeClass(String classname) throws RuntimeException{
         return makeClass(classname, null);
     }
 
@@ -911,62 +776,6 @@ public class ClassPool{
     }
 
     /**
-     * Creates a new public interface.
-     * If there already exists a class/interface with the same name,
-     * the new interface overwrites that previous one.
-     *
-     * @param name
-     *            a fully-qualified interface name.
-     * @throws RuntimeException
-     *             if the existing interface is frozen.
-     */
-    public CtClass makeInterface(String name) throws RuntimeException{
-        return makeInterface(name, null);
-    }
-
-    /**
-     * Creates a new public interface.
-     * If there already exists a class/interface with the same name,
-     * the new interface overwrites that previous one.
-     *
-     * @param name
-     *            a fully-qualified interface name.
-     * @param superclass
-     *            the super interface.
-     * @throws RuntimeException
-     *             if the existing interface is frozen.
-     */
-    public synchronized CtClass makeInterface(String name,CtClass superclass) throws RuntimeException{
-        checkNotFrozen(name);
-        CtClass clazz = new CtNewClass(name, this, true, superclass);
-        cacheCtClass(name, clazz, true);
-        return clazz;
-    }
-
-    /**
-     * Creates a new annotation.
-     * If there already exists a class/interface with the same name,
-     * the new interface overwrites that previous one.
-     *
-     * @param name
-     *            a fully-qualified interface name.
-     *            Or null if the annotation has no super interface.
-     * @throws RuntimeException
-     *             if the existing interface is frozen.
-     * @since 3.19
-     */
-    public CtClass makeAnnotation(String name) throws RuntimeException{
-        try{
-            CtClass cc = makeInterface(name, get("java.lang.annotation.Annotation"));
-            cc.setModifiers(cc.getModifiers() | Modifier.ANNOTATION);
-            return cc;
-        }catch (NotFoundException e){
-            // should never happen.
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    /**
      * Appends the system search path to the end of the
      * search path. The system search path
      * usually includes the platform library, extension
@@ -1007,24 +816,6 @@ public class ClassPool{
     }
 
     /**
-     * Inserts a directory or a jar (or zip) file at the head of the
-     * search path.
-     *
-     * @param pathname
-     *            the path name of the directory or jar file.
-     *            It must not end with a path separator ("/").
-     *            If the path name ends with "/*", then all the
-     *            jar files matching the path name are inserted.
-     *
-     * @return the inserted class path.
-     * @throws NotFoundException
-     *             if the jar file is not found.
-     */
-    public ClassPath insertClassPath(String pathname) throws NotFoundException{
-        return source.insertClassPath(pathname);
-    }
-
-    /**
      * Appends a directory or a jar (or zip) file to the end of the
      * search path.
      *
@@ -1049,36 +840,6 @@ public class ClassPool{
      */
     public void removeClassPath(ClassPath cp){
         source.removeClassPath(cp);
-    }
-
-    /**
-     * Appends directories and jar files for search.
-     *
-     * <p>
-     * The elements of the given path list must be separated by colons
-     * in Unix or semi-colons in Windows.
-     *
-     * @param pathlist
-     *            a (semi)colon-separated list of
-     *            the path names of directories and jar files.
-     *            The directory name must not end with a path
-     *            separator ("/").
-     * @throws NotFoundException
-     *             if a jar file is not found.
-     */
-    public void appendPathList(String pathlist) throws NotFoundException{
-        char sep = File.pathSeparatorChar;
-        int i = 0;
-        for (;;){
-            int j = pathlist.indexOf(sep, i);
-            if (j < 0){
-                appendClassPath(pathlist.substring(i));
-                break;
-            }else{
-                appendClassPath(pathlist.substring(i, j));
-                i = j + 1;
-            }
-        }
     }
 
     /**

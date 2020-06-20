@@ -156,23 +156,6 @@ public class AnnotationsAttribute extends AttributeInfo{
     }
 
     /**
-     * Constructs an empty
-     * <code>Runtime(In)VisibleAnnotations_attribute</code>.
-     * A new annotation can be later added to the created attribute
-     * by <code>setAnnotations()</code>.
-     *
-     * @param cp
-     *            constant pool
-     * @param attrname
-     *            attribute name (<code>visibleTag</code> or
-     *            <code>invisibleTag</code>).
-     * @see #setAnnotations(Annotation[])
-     */
-    public AnnotationsAttribute(ConstPool cp, String attrname){
-        this(cp, attrname, new byte[] { 0, 0 });
-    }
-
-    /**
      * @param n
      *            the attribute name.
      */

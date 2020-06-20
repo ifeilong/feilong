@@ -34,59 +34,6 @@ import com.feilong.lib.javassist.bytecode.StackMapTable;
  * Stack map maker.
  */
 public class MapMaker extends Tracer{
-    /*
-     * public static void main(String[] args) throws Exception {
-     * boolean useMain2 = args[0].equals("0");
-     * if (useMain2 && args.length > 1) {
-     * main2(args);
-     * return;
-     * }
-     * 
-     * for (int i = 0; i < args.length; i++)
-     * main1(args[i]);
-     * }
-     * 
-     * public static void main1(String className) throws Exception {
-     * ClassPool cp = ClassPool.getDefault();
-     * //javassist.CtClass cc = cp.get(className);
-     * javassist.CtClass cc = cp.makeClass(new java.io.FileInputStream(className));
-     * System.out.println(className);
-     * ClassFile cf = cc.getClassFile();
-     * java.util.List minfos = cf.getMethods();
-     * for (int i = 0; i < minfos.size(); i++) {
-     * MethodInfo minfo = (MethodInfo)minfos.get(i);
-     * CodeAttribute ca = minfo.getCodeAttribute();
-     * if (ca != null)
-     * ca.setAttribute(make(cp, minfo));
-     * }
-     * 
-     * cc.writeFile("tmp");
-     * }
-     * 
-     * public static void main2(String[] args) throws Exception {
-     * ClassPool cp = ClassPool.getDefault();
-     * //javassist.CtClass cc = cp.get(args[1]);
-     * javassist.CtClass cc = cp.makeClass(new java.io.FileInputStream(args[1]));
-     * MethodInfo minfo;
-     * if (args[2].equals("_init_"))
-     * minfo = cc.getDeclaredConstructors()[0].getMethodInfo();
-     * // minfo = cc.getClassInitializer().getMethodInfo();
-     * else
-     * minfo = cc.getDeclaredMethod(args[2]).getMethodInfo();
-     * 
-     * CodeAttribute ca = minfo.getCodeAttribute();
-     * if (ca == null) {
-     * System.out.println("abstarct method");
-     * return;
-     * }
-     * 
-     * TypedBlock[] blocks = TypedBlock.makeBlocks(minfo, ca, false);
-     * MapMaker mm = new MapMaker(cp, minfo, ca);
-     * mm.make(blocks, ca.getCode());
-     * for (int i = 0; i < blocks.length; i++)
-     * System.out.println(blocks[i]);
-     * }
-     */
 
     /**
      * Computes the stack map table of the given method and returns it.

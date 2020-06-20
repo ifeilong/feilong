@@ -167,10 +167,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
         Method m = null;
 
         try{
-            /*
-             * System.out.println("astproperty is indexed? : " + isIndexedAccess() + " child: " + _children[0].getClass().getName()
-             * + " target: " + target.getClass().getName() + " current object: " + context.getCurrentObject().getClass().getName());
-             */
 
             if (isIndexedAccess()){
                 Object value = _children[0].getValue(context, context.getRoot());
@@ -208,43 +204,30 @@ public class ASTProperty extends SimpleNode implements NodeType{
                     context.setCurrentAccessor(OgnlRuntime.getCompiler().getSuperOrInterfaceClass(m, m.getDeclaringClass()));
 
                     return "." + m.getName() + "(" + srcString + ")";
-                }else{
-                    PropertyAccessor p = OgnlRuntime.getPropertyAccessor(target.getClass());
-
-                    //                    System.out.println("child value : " + _children[0].getValue(context, context.getCurrentObject()) + " using propaccessor " + p.getClass().getName()
-                    //                        + " and srcString " + srcString + " on target: " +  target);
-
-                    Object currObj = context.getCurrentObject();
-                    Class currType = context.getCurrentType();
-                    Class prevType = context.getPreviousType();
-
-                    Object indexVal = p.getProperty(context, target, value);
-
-                    // reset current object for accessor
-
-                    context.setCurrentObject(currObj);
-                    context.setCurrentType(currType);
-                    context.setPreviousType(prevType);
-
-                    /*
-                     * System.out.println("astprop srcString: " + srcString
-                     * + " from child class " + _children[0].getClass().getName()
-                     * + " and indexVal " + indexVal
-                     * + " propertyAccessor : " + p.getClass().getName() + " context obj " + context.getCurrentObject()
-                     * + " context obj is array? : " + context.getCurrentObject().getClass().isArray()
-                     * + " current type: " + context.getCurrentType());
-                     */
-
-                    if (ASTConst.class.isInstance(_children[0]) && Number.class.isInstance(context.getCurrentObject())){
-                        context.setCurrentType(OgnlRuntime.getPrimitiveWrapperClass(context.getCurrentObject().getClass()));
-                    }
-
-                    result = p.getSourceAccessor(context, target, srcString);
-                    _getterClass = context.getCurrentType();
-                    context.setCurrentObject(indexVal);
-
-                    return result;
                 }
+                PropertyAccessor p = OgnlRuntime.getPropertyAccessor(target.getClass());
+
+                Object currObj = context.getCurrentObject();
+                Class currType = context.getCurrentType();
+                Class prevType = context.getPreviousType();
+
+                Object indexVal = p.getProperty(context, target, value);
+
+                // reset current object for accessor
+
+                context.setCurrentObject(currObj);
+                context.setCurrentType(currType);
+                context.setPreviousType(prevType);
+
+                if (ASTConst.class.isInstance(_children[0]) && Number.class.isInstance(context.getCurrentObject())){
+                    context.setCurrentType(OgnlRuntime.getPrimitiveWrapperClass(context.getCurrentObject().getClass()));
+                }
+
+                result = p.getSourceAccessor(context, target, srcString);
+                _getterClass = context.getCurrentType();
+                context.setCurrentObject(indexVal);
+
+                return result;
             }
 
             String name = ((ASTConst) _children[0]).getValue().toString();
@@ -297,13 +280,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
                     context.put("_indexedMethod", m);
                 }
             }else{
-
-                /*
-                 * System.out.println("astproperty trying to get " + name + " on object target: " +
-                 * context.getCurrentObject().getClass().getName()
-                 * + " current type " + context.getCurrentType() + " current accessor " + context.getCurrentAccessor()
-                 * + " prev type " + context.getPreviousType() + " prev accessor " + context.getPreviousAccessor());
-                 */
 
                 PropertyAccessor pa = OgnlRuntime.getPropertyAccessor(context.getCurrentObject().getClass());
 
@@ -441,55 +417,35 @@ public class ASTProperty extends SimpleNode implements NodeType{
                     if (!lastChild){
                         context.setCurrentObject(indexedValue);
                         return "." + m.getName() + "(" + srcString + ")";
-                    }else{
-                        return "." + m.getName() + "(" + srcString + ", $3)";
                     }
-                }else{
-                    PropertyAccessor p = OgnlRuntime.getPropertyAccessor(target.getClass());
-
-                    Object currObj = context.getCurrentObject();
-                    Class currType = context.getCurrentType();
-                    Class prevType = context.getPreviousType();
-
-                    Object indexVal = p.getProperty(context, target, value);
-
-                    // reset current object for accessor
-
-                    context.setCurrentObject(currObj);
-                    context.setCurrentType(currType);
-                    context.setPreviousType(prevType);
-
-                    if (ASTConst.class.isInstance(_children[0]) && Number.class.isInstance(context.getCurrentObject())){
-                        context.setCurrentType(OgnlRuntime.getPrimitiveWrapperClass(context.getCurrentObject().getClass()));
-                    }
-
-                    result = lastChild(context) ? p.getSourceSetter(context, target, srcString)
-                                    : p.getSourceAccessor(context, target, srcString);
-
-                    /*
-                     * System.out.println("ASTProperty using propertyaccessor and isLastChild? " + lastChild(context)
-                     * + " generated source of: " + result + " using accessor class: " + p.getClass().getName());
-                     */
-
-                    //result = p.getSourceAccessor(context, target, srcString);
-                    _getterClass = context.getCurrentType();
-                    context.setCurrentObject(indexVal);
-
-                    /*
-                     * PropertyAccessor p = OgnlRuntime.getPropertyAccessor(target.getClass());
-                     * 
-                     * if (ASTConst.class.isInstance(_children[0]) && Number.class.isInstance(context.getCurrentObject()))
-                     * {
-                     * context.setCurrentType(OgnlRuntime.getPrimitiveWrapperClass(context.getCurrentObject().getClass()));
-                     * }
-                     * 
-                     * result = p.getSourceSetter(context, target, srcString);
-                     * 
-                     * context.setCurrentObject(value);
-                     * context.setCurrentType(_getterClass);
-                     */
-                    return result;
+                    return "." + m.getName() + "(" + srcString + ", $3)";
                 }
+                PropertyAccessor p = OgnlRuntime.getPropertyAccessor(target.getClass());
+
+                Object currObj = context.getCurrentObject();
+                Class currType = context.getCurrentType();
+                Class prevType = context.getPreviousType();
+
+                Object indexVal = p.getProperty(context, target, value);
+
+                // reset current object for accessor
+
+                context.setCurrentObject(currObj);
+                context.setCurrentType(currType);
+                context.setPreviousType(prevType);
+
+                if (ASTConst.class.isInstance(_children[0]) && Number.class.isInstance(context.getCurrentObject())){
+                    context.setCurrentType(OgnlRuntime.getPrimitiveWrapperClass(context.getCurrentObject().getClass()));
+                }
+
+                result = lastChild(context) ? p.getSourceSetter(context, target, srcString)
+                                : p.getSourceAccessor(context, target, srcString);
+
+                //result = p.getSourceAccessor(context, target, srcString);
+                _getterClass = context.getCurrentType();
+                context.setCurrentObject(indexVal);
+
+                return result;
             }
 
             String name = ((ASTConst) _children[0]).getValue().toString();
@@ -561,12 +517,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
             }else{
                 PropertyAccessor pa = OgnlRuntime.getPropertyAccessor(context.getCurrentObject().getClass());
 
-                /*
-                 * System.out.println("astproperty trying to set " + name + " on object target: " +
-                 * context.getCurrentObject().getClass().getName()
-                 * + " using propertyaccessor type: " + pa);
-                 */
-
                 if (target != null){
                     _setterClass = target.getClass();
                 }
@@ -579,8 +529,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
                         result = "";
                     }else if (pa != null){
                         Object currObj = context.getCurrentObject();
-                        //Class currType = context.getCurrentType();
-                        //Class prevType = context.getPreviousType();
 
                         String srcString = _children[0].toGetSourceString(context, context.getRoot());
 
@@ -589,8 +537,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
                         }
 
                         context.setCurrentObject(currObj);
-                        //context.setCurrentType(currType);
-                        //context.setPreviousType(prevType);
 
                         if (!lastChild(context)){
                             result = pa.getSourceAccessor(context, context.getCurrentObject(), srcString);

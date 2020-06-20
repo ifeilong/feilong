@@ -264,7 +264,7 @@ public class Loader extends ClassLoader{
         source = cp;
         translator = null;
         domain = null;
-        delegateLoadingOf("com.feilong.lib.javassist.Loader");
+        delegateLoadingOf(com.feilong.lib.javassist.Loader.class.getName());
     }
 
     /**
@@ -318,28 +318,6 @@ public class Loader extends ClassLoader{
         source = cp;
         translator = t;
         t.start(cp);
-    }
-
-    /**
-     * Loads a class with an instance of <code>Loader</code>
-     * and calls <code>main()</code> of that class.
-     *
-     * <p>
-     * This method calls <code>run()</code>.
-     *
-     * @param args
-     *            command line parameters.
-     *            <br>
-     *            &nbsp;&nbsp;{@code args[0]} is the class name to be loaded.
-     *            <br>
-     *            &nbsp;&nbsp;{@code args[1..n]} are parameters passed
-     *            to the target {@code main()}.
-     *
-     * @see com.feilong.lib.javassist.Loader#run(String[])
-     */
-    public static void main(String[] args) throws Throwable{
-        Loader cl = new Loader();
-        cl.run(args);
     }
 
     /**

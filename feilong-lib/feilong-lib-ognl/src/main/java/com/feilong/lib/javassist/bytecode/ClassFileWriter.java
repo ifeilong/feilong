@@ -255,19 +255,19 @@ public class ClassFileWriter{
      * };
      * </pre>
      */
-    public static interface AttributeWriter{
+    public interface AttributeWriter{
 
         /**
          * Returns the number of attributes that this writer will
          * write.
          */
-        public int size();
+        int size();
 
         /**
          * Writes all the contents of the attributes. The binary representation
          * of the contents is an array of <code>attribute_info</code>.
          */
-        public void write(DataOutputStream out) throws IOException;
+        void write(DataOutputStream out) throws IOException;
     }
 
     static void writeAttribute(ByteStream bs,AttributeWriter aw,int attrCount){
