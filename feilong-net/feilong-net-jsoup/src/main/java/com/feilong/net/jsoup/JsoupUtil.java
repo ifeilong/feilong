@@ -19,12 +19,18 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 
 import java.io.IOException;
 
+import javax.net.ssl.SSLContext;
+
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.feilong.core.Validate;
+import com.feilong.lib.lang3.StringUtils;
+import com.feilong.net.SSLContextBuilder;
+import com.feilong.net.SSLProtocol;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -102,8 +108,6 @@ public final class JsoupUtil{
      */
     public static Document parse(String html){
         Validate.notNull(html, "html can't be null!");
-
-        //---------------------------------------------------------------
         return Jsoup.parse(html);
     }
 
@@ -125,8 +129,17 @@ public final class JsoupUtil{
      * @see org.jsoup.Connection#get()
      */
     public static Document getDocument(String urlString,String userAgent){
+        Validate.notBlank(urlString, "urlString can't be blank!");
         try{
-            return Jsoup.connect(urlString).userAgent(userAgent).timeout(DEFAULT_TIMEOUT_MILLIS).get();
+            Connection connection = Jsoup.connect(urlString)//
+                            .userAgent(userAgent)//
+                            .timeout(DEFAULT_TIMEOUT_MILLIS);
+            if (StringUtils.startsWithIgnoreCase(urlString, "https://")){
+                SSLContext build = SSLContextBuilder.build(SSLProtocol.TLSv12);
+                //since 3.0.7
+                connection.sslSocketFactory(build.getSocketFactory());
+            }
+            return connection.get();
         }catch (IOException e){
             throw new JsoupUtilException(Slf4jUtil.format("urlString:[{}],userAgent:[{}]", urlString, userAgent), e);
         }
@@ -151,7 +164,7 @@ public final class JsoupUtil{
     public static Elements getElementsBySelect(String url,String selectQuery){
         Validate.notBlank(url, "url can't be blank!");
         Validate.notBlank(selectQuery, "selectQuery can't be blank!");
-        //---------------------------------------------------------------
+
         Document document = getDocument(url);
         return document.select(selectQuery);
     }
@@ -176,7 +189,6 @@ public final class JsoupUtil{
         Validate.notBlank(url, "url can't be blank!");
         Validate.notBlank(id, "id can't be blank!");
 
-        //---------------------------------------------------------------
         Document document = getDocument(url);
         return document.getElementById(id);
     }
