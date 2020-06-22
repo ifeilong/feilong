@@ -230,16 +230,13 @@ public final class JSONObject implements JSON{
     }
 
     /**
-     * Produce a JSONArray containing the names of the elements of this
-     * JSONObject.
+     * Produce a JSONArray containing the names of the elements of this JSONObject.
      *
      * @param jsonConfig
      *            the json config
-     * @return A JSONArray containing the key strings, or null if the JSONObject
-     *         is empty.
+     * @return A JSONArray containing the key strings, or null if the JSONObject is empty.
      */
     public List<String> names(JsonConfig jsonConfig){
-
         List<String> list = newArrayList();
 
         Set<String> keys = keys();

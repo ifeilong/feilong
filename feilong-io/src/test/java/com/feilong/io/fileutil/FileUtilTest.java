@@ -26,8 +26,6 @@ import org.junit.Test;
 
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
-import com.feilong.io.FileUtil;
-import com.feilong.json.JsonUtil;
 import com.feilong.test.AbstractTest;
 
 public class FileUtilTest extends AbstractTest{
@@ -64,14 +62,6 @@ public class FileUtilTest extends AbstractTest{
         for (int i = 0; i < files.length; i++){
             LOGGER.debug(files[i].getCanonicalPath());
         }
-    }
-
-    @Test
-    public void testToURLs(){
-        URL[] urLs = FileUtil.toURLs(
-                        "/Users/feilong/.m2/settings.xml", //
-                        "/Users/feilong/.m2/settings.xml");
-        LOGGER.debug(JsonUtil.format(urLs));
     }
 
 }

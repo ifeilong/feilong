@@ -54,9 +54,9 @@ public class ProcessValueUtil{
      */
     static Object processArrayValue(Object value,JsonConfig jsonConfig){
         if (value != null){
-
-            //Finds a JsonValueProcessor registered to the target type.<br>
+            //Finds a JsonValueProcessor registered to the target type. 
             //Returns null if none is registered.<br>
+
             //[Java -&gt; JSON]
             JsonValueProcessor jsonValueProcessor = jsonConfig.getTypeMap().get(value.getClass());
             if (jsonValueProcessor != null){
@@ -66,6 +66,8 @@ public class ProcessValueUtil{
                 }
             }
         }
+
+        //---------------------------------------------------------------
 
         if (value instanceof JSONTokener){
             return JSONTokenerParser.toJSONArray((JSONTokener) value, jsonConfig);

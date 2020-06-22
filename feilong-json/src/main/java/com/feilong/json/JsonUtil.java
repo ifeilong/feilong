@@ -674,12 +674,10 @@ public final class JsonUtil{
         if (null == obj){
             return EMPTY;
         }
-
         //since 1.14.0
         if (JsonHelper.isCommonString(obj)){
             return (String) obj;
         }
-
         //---------------------------------------------------------------
         JavaToJsonConfig useJavaToJsonConfig = JavaToJsonConfigBuilder.buildUseJavaToJsonConfig(obj, javaToJsonConfig);
         JsonConfig jsonConfig = JsonConfigBuilder.build(obj, useJavaToJsonConfig);

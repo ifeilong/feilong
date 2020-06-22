@@ -20,6 +20,8 @@ import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 
@@ -52,6 +54,30 @@ public final class JsonConfigBuilder{
      */
     private static final String[]                          SENSITIVE_WORDS_PROPERTY_NAMES     = { "password", "key" };
 
+    /**
+     * 直接转成 string 字符串的类型.
+     * 
+     * @since 3.0.7
+     */
+    private static final Class<?>[]                        TO_STRING_JSON_VALUE_CLASSS        = {
+                                                                                                  //since 1.13.0                                                                                   
+                                                                                                  File.class,
+
+                                                                                                  //since 1.13.0
+                                                                                                  //see https://github.com/venusdrogon/feilong-json/issues/24
+                                                                                                  BigDecimal.class,
+
+                                                                                                  //3.0.7 https://github.com/ifeilong/feilong/issues/282
+                                                                                                  URL.class,
+                                                                                                  URI.class,
+
+                                                                                                  //since 1.14.0 
+                                                                                                  //@see https://github.com/venusdrogon/feilong-json/issues/29 json format 支持 javax.xml.datatype.XMLGregorianCalendar
+                                                                                                  //@see com.fasterxml.jackson.databind.ext.CoreXMLSerializers.XMLGregorianCalendarSerializer   
+                                                                                                  javax.xml.datatype.XMLGregorianCalendar.class
+
+    };
+
     //---------------------------------------------------------------
 
     /**
@@ -59,28 +85,24 @@ public final class JsonConfigBuilder{
      * 
      * @since 3.0.0
      */
-    private static final Map<Class<?>, JsonValueProcessor> DEFAULT_CLASS_JSON_VALUE_PROCESSOR = toMapUseEntrys(                        //
+    private static final Map<Class<?>, JsonValueProcessor> DEFAULT_CLASS_JSON_VALUE_PROCESSOR = toMapUseEntrys(                                                                                                      //
                     // 注册日期处理器
                     Pair.of(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE),
-                    //since 1.13.0
-                    Pair.of(File.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE),
-                    //since 1.13.0
-                    //see https://github.com/venusdrogon/feilong-json/issues/24
-                    Pair.of(BigDecimal.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE),
-
-                    //since 1.14.0 
-                    //@see https://github.com/venusdrogon/feilong-json/issues/29 json format 支持 javax.xml.datatype.XMLGregorianCalendar
-                    //@see com.fasterxml.jackson.databind.ext.CoreXMLSerializers.XMLGregorianCalendarSerializer
-                    Pair.of(javax.xml.datatype.XMLGregorianCalendar.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE),
 
                     //since 1.14.0 
                     //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
                     Pair.of(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE));
 
+    static{
+        for (Class<?> klass : TO_STRING_JSON_VALUE_CLASSS){
+            DEFAULT_CLASS_JSON_VALUE_PROCESSOR.put(klass, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
+        }
+    }
+
     //---------------------------------------------------------------
 
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
-    public static final JsonConfig                         DEFAULT_JAVA_TO_JSON_CONFIG        = buildDefaultJavaToJsonConfig();
+    public static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG = buildDefaultJavaToJsonConfig();
 
     //---------------------------------------------------------------
 
@@ -225,8 +247,6 @@ public final class JsonConfigBuilder{
      */
     static JsonConfig buildDefaultJavaToJsonConfig(){
         JsonConfig jsonConfig = new JsonConfig();
-
-        //---------------------------------------------------------------
         for (Map.Entry<Class<?>, JsonValueProcessor> entry : DEFAULT_CLASS_JSON_VALUE_PROCESSOR.entrySet()){
             jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
         }

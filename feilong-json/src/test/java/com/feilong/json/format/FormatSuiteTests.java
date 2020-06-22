@@ -35,6 +35,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 FormatBeanFileTest.class,
                 FormatBeanXMLGregorianCalendarTest.class,
+                FormatUriTest.class,
+                FormatUrlTest.class,
 
                 FormatStringTest.class,
                 FormatBeanExcludesTest.class,

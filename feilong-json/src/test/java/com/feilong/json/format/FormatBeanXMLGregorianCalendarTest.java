@@ -29,13 +29,14 @@ import com.feilong.json.entity.BeanWithXMLGregorianCalendar;
 
 public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
 
+    @SuppressWarnings("restriction")
+    private final XMLGregorianCalendar xmlGregorianCalendar = com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl.LEAP_YEAR_DEFAULT;
+
     @Test
     public void test(){
         BeanWithXMLGregorianCalendar bean = new BeanWithXMLGregorianCalendar();
         bean.setName("jim");
 
-        @SuppressWarnings("restriction")
-        XMLGregorianCalendar xmlGregorianCalendar = com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl.LEAP_YEAR_DEFAULT;
         bean.setBirthDate(xmlGregorianCalendar);
 
         String format = JsonUtil.format(bean);
@@ -46,6 +47,19 @@ public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
                                         containsString("\"name\": \"jim\"")
                         //
                         ));
+    }
+
+    @Test
+    public void test2(){
+        String format = JsonUtil.format(xmlGregorianCalendar);
+        LOGGER.debug(format);
+        //        assertThat(
+        //                        format,
+        //                        allOf(//
+        //                                        containsString("\"birthDate\": \"0400-01-01T00:00:00\""),
+        //                                        containsString("\"name\": \"jim\"")
+        //                        //
+        //                        ));
     }
 
 }
