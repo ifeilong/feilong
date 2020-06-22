@@ -39,6 +39,9 @@ public class ExcelRequestFileCreator implements RequestFileCreator{
 
     //---------------------------------------------------------------
 
+    /**
+     * @deprecated
+     */
     @Deprecated
     private String             sheetName;
 

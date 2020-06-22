@@ -19,14 +19,7 @@ import org.junit.Test;
 
 import com.feilong.io.FileUtil;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 1.11.5
- */
 public class IsExistFileTest{
-
-    //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testIsExistFileTestNull(){

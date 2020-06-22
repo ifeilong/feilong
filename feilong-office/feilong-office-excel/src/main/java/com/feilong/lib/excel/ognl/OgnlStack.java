@@ -94,7 +94,7 @@ public class OgnlStack{
             if (expr.indexOf("top") >= 0){
                 //contains top evaluation
                 context.put("__top", obj);
-                expr = expr.replaceAll("top", "#__top");
+                expr = expr.replace("top", "#__top");
             }
             try{
                 Object expression = getExpression(expr);

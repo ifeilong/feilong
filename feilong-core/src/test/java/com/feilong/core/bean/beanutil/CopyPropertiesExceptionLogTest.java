@@ -24,15 +24,10 @@ import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.beanutil.entity.AccessExceptionProperty;
 import com.feilong.store.member.User;
 
-/**
- * The Class BeanUtilCopyPropertiesTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class CopyPropertiesExceptionLogTest{
 
     @Test
-    public void testCopyPropertiesNoDateLocaleConverter(){
+    public void testNoDateLocaleConverter(){
         User user = new User();
         user.setDate(now());
 

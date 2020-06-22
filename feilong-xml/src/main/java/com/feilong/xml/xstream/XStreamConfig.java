@@ -41,7 +41,7 @@ public final class XStreamConfig{
      * @see PrettyPrintWriter
      * @see CompactWriter
      */
-    private boolean                   isPrettyPrint            = true;
+    private boolean                 isPrettyPrint            = true;
 
     //---------------------------------------------------------------
 
@@ -50,14 +50,14 @@ public final class XStreamConfig{
      * 
      * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
      */
-    private Class<?>[]                processAnnotationsTypes;
+    private Class<?>[]              processAnnotationsTypes;
 
     /**
      * 转换器.
      * 
      * @since 1.10.7
      */
-    private List<? extends Converter> converterList;
+    private List<Converter>         converterList;
 
     //---------------------------------------------------------------
 
@@ -66,10 +66,10 @@ public final class XStreamConfig{
      * 
      * @see com.feilong.lib.xstream.XStream#alias(String, Class)
      */
-    private Map<String, Class<?>>     aliasMap                 = newHashMap();
+    private Map<String, Class<?>>   aliasMap                 = newHashMap();
 
     /** 隐式集合 隐藏,隐藏,比如下面有list,泛型中的第二个参数 Class 是 ownerType. */
-    private Map<String, Class<?>>     implicitCollectionMap    = newHashMap();
+    private Map<String, Class<?>>   implicitCollectionMap    = newHashMap();
 
     /**
      * Associate a default implementation of a class with an object.
@@ -105,7 +105,7 @@ public final class XStreamConfig{
      * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
-    private Map<Class<?>, Class<?>>   defaultImplementationMap = newHashMap();
+    private Map<Class<?>, Class<?>> defaultImplementationMap = newHashMap();
 
     //---------------------------------------------------------------
 
@@ -196,7 +196,7 @@ public final class XStreamConfig{
      * @return the converterList
      * @since 1.10.7
      */
-    public List<? extends Converter> getConverterList(){
+    public List<Converter> getConverterList(){
         return converterList;
     }
 
@@ -207,7 +207,7 @@ public final class XStreamConfig{
      *            the converterList to set
      * @since 1.10.7
      */
-    public void setConverterList(List<? extends Converter> converterList){
+    public void setConverterList(List<Converter> converterList){
         this.converterList = converterList;
     }
 

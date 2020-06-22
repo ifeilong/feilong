@@ -19,9 +19,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Map;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
 import javax.xml.ws.WebServiceException;
 
 import org.apache.cxf.endpoint.Client;
@@ -30,8 +28,8 @@ import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.core.Validate;
+import com.feilong.json.JsonUtil;
 
 /**
  * 使用{@link JaxWsDynamicClientFactory} 动态调用 WebService服务.
@@ -106,14 +104,8 @@ public class JaxWsDynamicClientUtil{
      * @since 1.10.3
      */
     public static void setDefaultHostnameVerifierTrue(){
-        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
-
-            @Override
-            public boolean verify(String hostname,SSLSession session){
-                // ip address of the service URL(like.23.28.244.244)
-                return true;
-            }
-        });
+        //// ip address of the service URL(like.23.28.244.244)
+        HttpsURLConnection.setDefaultHostnameVerifier((hostname,session) -> true);
     }
 
     //---------------------------------------------------------------
@@ -156,8 +148,6 @@ public class JaxWsDynamicClientUtil{
 
         //----------------------------------------------------------------------------
         Client client = createClient(wsdlUrl);
-
-        //-----------------------------------------------------------------------------
         try{
             Object[] obj = client.invoke(operationName, params);
             return (T) obj[0];
@@ -181,7 +171,6 @@ public class JaxWsDynamicClientUtil{
         Client client = dynamicClientFactory.createClient(wsdlUrl);
 
         //----------------------------------------------------------------------------
-
         //封装 TLSClientParameters
         ClientUtil.wrap(client);
         return client;

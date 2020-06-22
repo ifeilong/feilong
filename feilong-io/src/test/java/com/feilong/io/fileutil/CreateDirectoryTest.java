@@ -15,21 +15,21 @@
  */
 package com.feilong.io.fileutil;
 
+import static com.feilong.core.lang.SystemUtil.USER_HOME;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import com.feilong.core.lang.SystemUtil;
 import com.feilong.io.FileUtil;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 1.11.5
- */
 public class CreateDirectoryTest{
 
     @Test
     public void testCreateDirectory(){
-        FileUtil.createDirectory(SystemUtil.USER_HOME + "/feilong/logs/createDirectory/test/test");
+        String directory = USER_HOME + "/feilong/logs/createDirectory/test/test";
+        FileUtil.createDirectory(directory);
+
+        assertTrue(FileUtil.isExistFile(directory));
     }
 
     //---------------------------------------------------------------

@@ -38,11 +38,9 @@ public class FormatSizeUtilTest extends AbstractTest{
     }
 
     //---------------------------------------------------------------
-
     @Test
     public void testGetFileSizes1(){
         String testFile = "/Users/feilong/.m2/settings.xml";
-
         File file = new File(testFile);
 
         long fileSizes = FileUtil.getFileSize(file);
@@ -65,5 +63,4 @@ public class FormatSizeUtilTest extends AbstractTest{
         LOGGER.debug(FileUtil.formatSize(8981528));
         //LOGGER.debug(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
     }
-
 }

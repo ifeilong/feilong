@@ -15,6 +15,8 @@
  */
 package com.feilong.io.fileutil;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -30,19 +32,18 @@ import com.feilong.test.AbstractTest;
 
 public class FileUtilTest extends AbstractTest{
 
-    /** The string. */
     private final String fString = "/home/webuser/feilong_int/johnData/${date}/feilongid_pix_${typeName}.csv";
 
     @Test
     public void testGetP(){
         File file = new File(fString);
-        LOGGER.debug(file.getAbsolutePath());
-        LOGGER.debug(file.getParent());
+        assertEquals(fString, file.getAbsolutePath());
+        assertEquals("/home/webuser/feilong_int/johnData/${date}", file.getParent());
     }
 
     @Test
     public void testGetP1(){
-        URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
+        URL resource = ClassLoaderUtil.getResource("org.junit.Before");
         URI uri = URLUtil.toURI(resource);
         File esapiDirectory = new File(uri);
         LOGGER.debug(esapiDirectory.getAbsolutePath());
@@ -56,18 +57,20 @@ public class FileUtilTest extends AbstractTest{
      */
     @Test
     public void listFiles() throws IOException{
-        String localPath = "E:\\DataCommon\\test";
+        String localPath = "/Users/feilong/feilong/logs";
         // 读取localPath目录下的全部properties文件
         File file = new File(localPath);
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++){
-            LOGGER.debug("File:" + files[i].getCanonicalPath());
+            LOGGER.debug(files[i].getCanonicalPath());
         }
     }
 
     @Test
     public void testToURLs(){
-        URL[] urLs = FileUtil.toURLs("/Users/feilong/.m2/settings.xml", "/Users/feilong/.m2/settings.xml");
+        URL[] urLs = FileUtil.toURLs(
+                        "/Users/feilong/.m2/settings.xml", //
+                        "/Users/feilong/.m2/settings.xml");
         LOGGER.debug(JsonUtil.format(urLs));
     }
 

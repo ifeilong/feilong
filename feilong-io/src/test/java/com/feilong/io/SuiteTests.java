@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.io.entity.FileInfoEntityTest;
 import com.feilong.io.filenameutil.FilenameUtilSuiteTests;
 import com.feilong.io.fileutil.FileUtilSuiteTests;
 import com.feilong.io.inputstreamutil.InputStreamUtilSuiteTests;
@@ -37,6 +38,7 @@ import com.feilong.io.readerutil.ReaderUtilSuiteTests;
                 IOReaderUtilSuiteTests.class,
                 ReaderUtilSuiteTests.class,
 
+                FileInfoEntityTest.class,
                 MimeTypeUtilTest.class,
 
 })

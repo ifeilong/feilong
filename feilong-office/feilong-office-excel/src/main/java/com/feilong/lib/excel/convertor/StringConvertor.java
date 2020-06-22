@@ -35,7 +35,7 @@ public class StringConvertor extends AbstractChoiceConvertor<String>{
             if (value instanceof Double //
                             && str.length() > 2//
                             && str.lastIndexOf(".0") == (str.length() - 2)){
-                str = str.substring(0, str.length() - 2);
+                return str.substring(0, str.length() - 2);
             }
         }
         return str;

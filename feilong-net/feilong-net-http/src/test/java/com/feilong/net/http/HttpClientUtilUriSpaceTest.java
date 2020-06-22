@@ -28,6 +28,5 @@ public class HttpClientUtilUriSpaceTest extends AbstractTest{
         HttpClientUtil.get(uri);
 
         LOGGER.info("get over");
-
     }
 }

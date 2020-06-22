@@ -53,14 +53,6 @@ public class FileInfoEntity implements Serializable{
 
     //---------------------------------------------------------------
 
-    /** 格式化显示的时间默认 yy-mm hh:ss. */
-    private String            formatLastModified;
-
-    /** 格式化显示的size. */
-    private String            formatSize;
-
-    //---------------------------------------------------------------
-
     /**
      * Instantiates a new file info entity.
      *
@@ -91,6 +83,26 @@ public class FileInfoEntity implements Serializable{
         this.lastModified = lastModified;
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 格式化显示的时间默认 yy-mm hh:ss.
+     * 
+     * @return the formatLastModified
+     */
+    public String getFormatLastModified(){
+        Date date = new Date(lastModified);
+        return DateUtil.toString(date, COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
+    }
+
+    /**
+     * 格式化显示的size
+     * 
+     * @return the formatSize
+     */
+    public String getFormatSize(){
+        return FileUtil.formatSize(size);
+    }
     //---------------------------------------------------------------
 
     /**
@@ -171,24 +183,4 @@ public class FileInfoEntity implements Serializable{
         this.lastModified = lastModified;
     }
 
-    /**
-     * Gets the 格式化显示的size.
-     * 
-     * @return the formatSize
-     */
-    public String getFormatSize(){
-        formatSize = FileUtil.formatSize(size);
-        return formatSize;
-    }
-
-    /**
-     * Gets the 格式化显示的时间默认 yy-mm hh:ss.
-     * 
-     * @return the formatLastModified
-     */
-    public String getFormatLastModified(){
-        Date date = new Date(lastModified);
-        formatLastModified = DateUtil.toString(date, COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
-        return formatLastModified;
-    }
 }

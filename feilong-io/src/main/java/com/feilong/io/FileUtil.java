@@ -596,9 +596,6 @@ public final class FileUtil{
      */
     public static boolean isExistFile(String filePath){
         Validate.notBlank(filePath, "filePath can't be blank!");
-
-        //---------------------------------------------------------------
-
         File file = new File(filePath);
         return file.exists();
     }

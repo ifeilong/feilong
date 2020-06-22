@@ -53,5 +53,4 @@ class DataToCollectionUtil{
         }
         return (Collection<?>) value;
     }
-
 }
