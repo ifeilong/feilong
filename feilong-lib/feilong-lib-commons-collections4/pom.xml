@@ -4,9 +4,9 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-lib</artifactId>
-		<version>3.0.7</version>
+		<version>3.0.8</version>
 	</parent>
-	<artifactId>feilong-lib-commons-collections4</artifactId>
 
+	<artifactId>feilong-lib-commons-collections4</artifactId>
 
 </project>

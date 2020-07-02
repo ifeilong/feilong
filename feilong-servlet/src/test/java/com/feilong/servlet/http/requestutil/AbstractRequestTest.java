@@ -15,660 +15,622 @@
  */
 package com.feilong.servlet.http.requestutil;
 
+import com.feilong.test.AbstractTest;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpUpgradeHandler;
-import javax.servlet.http.Part;
+public abstract class AbstractRequestTest extends AbstractTest {
 
-import com.feilong.test.AbstractTest;
-
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.0
- */
-public abstract class AbstractRequestTest extends AbstractTest{
-
-    /**
-     * @return
-     * @since 3.0.0
-     */
-    protected HttpServletResponse buildResponse(){
-        return new HttpServletResponse(){
+    protected HttpServletResponse buildResponse() {
+        return new HttpServletResponse() {
 
             @Override
-            public void setLocale(Locale loc){
+            public void setLocale(Locale loc) {
 
             }
 
             @Override
-            public void setContentType(String type){
+            public void setContentType(String type) {
 
             }
 
             @Override
-            public void setContentLength(int len){
+            public void setContentLength(int len) {
 
             }
 
             @Override
-            public void setCharacterEncoding(String charset){
+            public void setCharacterEncoding(String charset) {
 
             }
 
             @Override
-            public void setBufferSize(int size){
+            public void setBufferSize(int size) {
 
             }
 
             @Override
-            public void resetBuffer(){
+            public void resetBuffer() {
 
             }
 
             @Override
-            public void reset(){
+            public void reset() {
 
             }
 
             @Override
-            public boolean isCommitted(){
+            public boolean isCommitted() {
 
                 return false;
             }
 
             @Override
-            public PrintWriter getWriter() throws IOException{
+            public PrintWriter getWriter() {
 
                 return null;
             }
 
             @Override
-            public ServletOutputStream getOutputStream() throws IOException{
+            public ServletOutputStream getOutputStream() {
 
                 return null;
             }
 
             @Override
-            public Locale getLocale(){
+            public Locale getLocale() {
 
                 return null;
             }
 
             @Override
-            public String getContentType(){
+            public String getContentType() {
 
                 return null;
             }
 
             @Override
-            public String getCharacterEncoding(){
+            public String getCharacterEncoding() {
 
                 return null;
             }
 
             @Override
-            public int getBufferSize(){
+            public int getBufferSize() {
 
                 return 0;
             }
 
             @Override
-            public void flushBuffer() throws IOException{
+            public void flushBuffer() {
 
             }
 
             @Override
-            public void setStatus(int sc,String sm){
+            public void setStatus(int sc, String sm) {
 
             }
 
             @Override
-            public void setStatus(int sc){
+            public void setStatus(int sc) {
 
             }
 
             @Override
-            public void setIntHeader(String name,int value){
+            public void setIntHeader(String name, int value) {
 
             }
 
             @Override
-            public void setHeader(String name,String value){
+            public void setHeader(String name, String value) {
 
             }
 
             @Override
-            public void setDateHeader(String name,long date){
+            public void setDateHeader(String name, long date) {
 
             }
 
             @Override
-            public void sendRedirect(String location) throws IOException{
+            public void sendRedirect(String location) {
 
             }
 
             @Override
-            public void sendError(int sc,String msg) throws IOException{
+            public void sendError(int sc, String msg) {
 
             }
 
             @Override
-            public void sendError(int sc) throws IOException{
+            public void sendError(int sc) {
 
             }
 
             @Override
-            public int getStatus(){
+            public int getStatus() {
 
                 return 0;
             }
 
             @Override
-            public Collection<String> getHeaders(String name){
+            public Collection<String> getHeaders(String name) {
 
                 return null;
             }
 
             @Override
-            public Collection<String> getHeaderNames(){
+            public Collection<String> getHeaderNames() {
 
                 return null;
             }
 
             @Override
-            public String getHeader(String name){
+            public String getHeader(String name) {
 
                 return null;
             }
 
             @Override
-            public String encodeUrl(String url){
+            public String encodeUrl(String url) {
 
                 return null;
             }
 
             @Override
-            public String encodeURL(String url){
+            public String encodeURL(String url) {
 
                 return null;
             }
 
             @Override
-            public String encodeRedirectUrl(String url){
+            public String encodeRedirectUrl(String url) {
 
                 return null;
             }
 
             @Override
-            public String encodeRedirectURL(String url){
+            public String encodeRedirectURL(String url) {
 
                 return null;
             }
 
             @Override
-            public boolean containsHeader(String name){
+            public boolean containsHeader(String name) {
 
                 return false;
             }
 
             @Override
-            public void addIntHeader(String name,int value){
+            public void addIntHeader(String name, int value) {
 
             }
 
             @Override
-            public void addHeader(String name,String value){
+            public void addHeader(String name, String value) {
 
             }
 
             @Override
-            public void addDateHeader(String name,long date){
+            public void addDateHeader(String name, long date) {
 
             }
 
             @Override
-            public void addCookie(Cookie cookie){
+            public void addCookie(Cookie cookie) {
 
             }
 
             @Override
-            public void setContentLengthLong(long len){
-                // TODO Auto-generated method stub
+            public void setContentLengthLong(long len) {
 
             }
         };
     }
 
-    /**
-     * @return
-     * @since 3.0.0
-     */
-    protected HttpServletRequest buildRequest(){
-        return new HttpServletRequest(){
+    protected HttpServletRequest buildRequest() {
+        return new HttpServletRequest() {
 
             @Override
-            public AsyncContext startAsync(ServletRequest servletRequest,ServletResponse servletResponse) throws IllegalStateException{
+            public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
                 return null;
             }
 
             @Override
-            public AsyncContext startAsync() throws IllegalStateException{
+            public AsyncContext startAsync() throws IllegalStateException {
                 return null;
             }
 
             @Override
-            public void setCharacterEncoding(String env) throws UnsupportedEncodingException{
+            public void setCharacterEncoding(String env) {
 
             }
 
             @Override
-            public void setAttribute(String name,Object o){
+            public void setAttribute(String name, Object o) {
 
             }
 
             @Override
-            public void removeAttribute(String name){
+            public void removeAttribute(String name) {
 
             }
 
             @Override
-            public boolean isSecure(){
+            public boolean isSecure() {
                 return false;
             }
 
             @Override
-            public boolean isAsyncSupported(){
+            public boolean isAsyncSupported() {
                 return false;
             }
 
             @Override
-            public boolean isAsyncStarted(){
+            public boolean isAsyncStarted() {
                 return false;
             }
 
             @Override
-            public ServletContext getServletContext(){
+            public ServletContext getServletContext() {
 
                 return null;
             }
 
             @Override
-            public int getServerPort(){
+            public int getServerPort() {
 
                 return 0;
             }
 
             @Override
-            public String getServerName(){
+            public String getServerName() {
 
                 return null;
             }
 
             @Override
-            public String getScheme(){
+            public String getScheme() {
 
                 return null;
             }
 
             @Override
-            public RequestDispatcher getRequestDispatcher(String path){
+            public RequestDispatcher getRequestDispatcher(String path) {
 
                 return null;
             }
 
             @Override
-            public int getRemotePort(){
+            public int getRemotePort() {
 
                 return 0;
             }
 
             @Override
-            public String getRemoteHost(){
+            public String getRemoteHost() {
 
                 return null;
             }
 
             @Override
-            public String getRemoteAddr(){
+            public String getRemoteAddr() {
 
                 return null;
             }
 
             @Override
-            public String getRealPath(String path){
+            public String getRealPath(String path) {
 
                 return null;
             }
 
             @Override
-            public BufferedReader getReader() throws IOException{
+            public BufferedReader getReader() {
 
                 return null;
             }
 
             @Override
-            public String getProtocol(){
+            public String getProtocol() {
 
                 return null;
             }
 
             @Override
-            public String[] getParameterValues(String name){
+            public String[] getParameterValues(String name) {
 
                 return null;
             }
 
             @Override
-            public Enumeration<String> getParameterNames(){
+            public Enumeration<String> getParameterNames() {
 
                 return null;
             }
 
             @Override
-            public Map<String, String[]> getParameterMap(){
+            public Map<String, String[]> getParameterMap() {
 
                 return null;
             }
 
             @Override
-            public String getParameter(String name){
+            public String getParameter(String name) {
 
                 return null;
             }
 
             @Override
-            public Enumeration<Locale> getLocales(){
+            public Enumeration<Locale> getLocales() {
 
                 return null;
             }
 
             @Override
-            public Locale getLocale(){
+            public Locale getLocale() {
 
                 return null;
             }
 
             @Override
-            public int getLocalPort(){
+            public int getLocalPort() {
 
                 return 0;
             }
 
             @Override
-            public String getLocalName(){
+            public String getLocalName() {
 
                 return null;
             }
 
             @Override
-            public String getLocalAddr(){
+            public String getLocalAddr() {
 
                 return null;
             }
 
             @Override
-            public ServletInputStream getInputStream() throws IOException{
+            public ServletInputStream getInputStream() {
+                return null;
+            }
+
+            @Override
+            public DispatcherType getDispatcherType() {
 
                 return null;
             }
 
             @Override
-            public DispatcherType getDispatcherType(){
+            public String getContentType() {
 
                 return null;
             }
 
             @Override
-            public String getContentType(){
-
-                return null;
-            }
-
-            @Override
-            public int getContentLength(){
+            public int getContentLength() {
 
                 return 0;
             }
 
             @Override
-            public String getCharacterEncoding(){
+            public String getCharacterEncoding() {
 
                 return null;
             }
 
             @Override
-            public Enumeration<String> getAttributeNames(){
+            public Enumeration<String> getAttributeNames() {
 
                 return null;
             }
 
             @Override
-            public Object getAttribute(String name){
+            public Object getAttribute(String name) {
 
                 return null;
             }
 
             @Override
-            public AsyncContext getAsyncContext(){
+            public AsyncContext getAsyncContext() {
 
                 return null;
             }
 
             @Override
-            public void logout() throws ServletException{
+            public void logout() {
 
             }
 
             @Override
-            public void login(String username,String password) throws ServletException{
+            public void login(String username, String password) {
 
             }
 
             @Override
-            public boolean isUserInRole(String role){
+            public boolean isUserInRole(String role) {
+                return false;
+            }
+
+            @Override
+            public boolean isRequestedSessionIdValid() {
 
                 return false;
             }
 
             @Override
-            public boolean isRequestedSessionIdValid(){
+            public boolean isRequestedSessionIdFromUrl() {
 
                 return false;
             }
 
             @Override
-            public boolean isRequestedSessionIdFromUrl(){
+            public boolean isRequestedSessionIdFromURL() {
 
                 return false;
             }
 
             @Override
-            public boolean isRequestedSessionIdFromURL(){
+            public boolean isRequestedSessionIdFromCookie() {
 
                 return false;
             }
 
             @Override
-            public boolean isRequestedSessionIdFromCookie(){
-
-                return false;
-            }
-
-            @Override
-            public Principal getUserPrincipal(){
+            public Principal getUserPrincipal() {
 
                 return null;
             }
 
             @Override
-            public HttpSession getSession(boolean create){
+            public HttpSession getSession(boolean create) {
 
                 return null;
             }
 
             @Override
-            public HttpSession getSession(){
+            public HttpSession getSession() {
 
                 return null;
             }
 
             @Override
-            public String getServletPath(){
+            public String getServletPath() {
 
                 return null;
             }
 
             @Override
-            public String getRequestedSessionId(){
+            public String getRequestedSessionId() {
 
                 return null;
             }
 
             @Override
-            public StringBuffer getRequestURL(){
+            public StringBuffer getRequestURL() {
 
                 return null;
             }
 
             @Override
-            public String getRequestURI(){
+            public String getRequestURI() {
 
                 return null;
             }
 
             @Override
-            public String getRemoteUser(){
+            public String getRemoteUser() {
 
                 return null;
             }
 
             @Override
-            public String getQueryString(){
+            public String getQueryString() {
 
                 return null;
             }
 
             @Override
-            public String getPathTranslated(){
+            public String getPathTranslated() {
 
                 return null;
             }
 
             @Override
-            public String getPathInfo(){
+            public String getPathInfo() {
 
                 return null;
             }
 
             @Override
-            public Collection<Part> getParts() throws IOException,ServletException{
+            public Collection<Part> getParts() {
+                return null;
+            }
+
+            @Override
+            public Part getPart(String name) {
+                return null;
+            }
+
+            @Override
+            public String getMethod() {
 
                 return null;
             }
 
             @Override
-            public Part getPart(String name) throws IOException,ServletException{
-
-                return null;
-            }
-
-            @Override
-            public String getMethod(){
-
-                return null;
-            }
-
-            @Override
-            public int getIntHeader(String name){
+            public int getIntHeader(String name) {
 
                 return 0;
             }
 
             @Override
-            public Enumeration<String> getHeaders(String name){
+            public Enumeration<String> getHeaders(String name) {
 
                 return null;
             }
 
             @Override
-            public Enumeration<String> getHeaderNames(){
+            public Enumeration<String> getHeaderNames() {
 
                 return null;
             }
 
             @Override
-            public String getHeader(String name){
+            public String getHeader(String name) {
 
                 return null;
             }
 
             @Override
-            public long getDateHeader(String name){
+            public long getDateHeader(String name) {
 
                 return 0;
             }
 
             @Override
-            public Cookie[] getCookies(){
+            public Cookie[] getCookies() {
 
                 return null;
             }
 
             @Override
-            public String getContextPath(){
+            public String getContextPath() {
 
                 return null;
             }
 
             @Override
-            public String getAuthType(){
+            public String getAuthType() {
 
                 return null;
             }
 
             @Override
-            public boolean authenticate(HttpServletResponse response) throws IOException,ServletException{
-
+            public boolean authenticate(HttpServletResponse response) {
                 return false;
             }
 
             @Override
-            public long getContentLengthLong(){
-                // TODO Auto-generated method stub
+            public long getContentLengthLong() {
                 return 0;
             }
 
             @Override
-            public String changeSessionId(){
-                // TODO Auto-generated method stub
+            public String changeSessionId() {
                 return null;
             }
 
             @Override
-            public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) throws IOException,ServletException{
-                // TODO Auto-generated method stub
+            public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) {
                 return null;
             }
         };

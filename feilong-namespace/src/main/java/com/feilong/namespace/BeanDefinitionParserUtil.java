@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 import com.feilong.core.Validate;
 
 /**
- * The Class BeanDefinitionParserUtil.
+ * BeanDefinitionParser 工具类.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0

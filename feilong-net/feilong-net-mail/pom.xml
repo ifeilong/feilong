@@ -5,17 +5,12 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-net-parent</artifactId>
-		<version>3.0.7</version>
+		<version>3.0.8</version>
 	</parent>
 
 	<artifactId>feilong-net-mail</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-io</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
 
 		<!--feilong-template -->
 		<dependency>
@@ -23,13 +18,6 @@
 			<artifactId>feilong-template</artifactId>
 			<version>${version.feilong-platform}</version>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- feilong-json -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-json</artifactId>
-			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- -->

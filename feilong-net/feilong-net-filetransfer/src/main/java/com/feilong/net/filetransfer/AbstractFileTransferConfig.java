@@ -18,17 +18,17 @@ package com.feilong.net.filetransfer;
 import com.feilong.json.SensitiveWords;
 
 /**
- * The Class AbstractFileTransferConfig.
+ * 抽象的文件传输配置.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
 public abstract class AbstractFileTransferConfig{
 
-    /** The host name. */
+    /** 地址. */
     private String  hostName;
 
-    /** The port. */
+    /** 端口号. */
     private Integer port;
 
     //---------------------------------------------------------------
@@ -100,19 +100,19 @@ public abstract class AbstractFileTransferConfig{
     }
 
     /**
-     * 获得 the port.
+     * 获得 端口号.
      *
-     * @return the port
+     * @return the 端口号
      */
     public Integer getPort(){
         return port;
     }
 
     /**
-     * 设置 the port.
+     * 设置 端口号.
      *
      * @param port
-     *            the port to set
+     *            the new 端口号
      */
     public void setPort(Integer port){
         this.port = port;

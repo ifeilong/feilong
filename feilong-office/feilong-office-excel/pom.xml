@@ -4,17 +4,11 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-office-parent</artifactId>
-		<version>3.0.7</version>
+		<version>3.0.8</version>
 	</parent>
 	<artifactId>feilong-office-excel</artifactId>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>feilong-io</artifactId>
-			<version>${version.feilong-platform}</version>
-		</dependency>
 
 		<!-- ***************************** poi ***************************** -->
 		<!-- poi HSSF is our port of the Microsoft Excel 97(-2007) file format (BIFF8) to pure Java. -->

@@ -15,8 +15,10 @@
  */
 package com.feilong.net.filetransfer.sftp;
 
+import java.net.SocketOptions;
 import java.util.Properties;
 
+import com.feilong.core.TimeInterval;
 import com.feilong.net.filetransfer.AbstractFileTransferConfig;
 
 /**
@@ -30,8 +32,23 @@ public class SFTPFileTransferConfig extends AbstractFileTransferConfig{
     /** The ssh config. */
     private Properties sshConfig;
 
-    /** The connect timeout. */
-    private int        sessionTimeout = 0;
+    /**
+     * 超时时间,用于设置 Socket setSoTimeout ,单位 毫秒, 可以使用 {@link TimeInterval}常量.
+     * 
+     * <p>
+     * Enable/disable {@link SocketOptions#SO_TIMEOUT SO_TIMEOUT} With this option set to a non-zero timeout, a read() call on the
+     * InputStream associated with this Socket will block for only this amount of time.
+     * 
+     * If the timeout expires, a <B>java.net.SocketTimeoutException</B> is raised, though the Socket is still valid.
+     * 
+     * The option <B>must</B> be enabled prior to entering the blocking operation to have effect.
+     * </p>
+     * 
+     * 如果是0,将不设置超时时间.
+     * 
+     * @since 3.0.8 将默认超时0 ,改成 3 秒
+     */
+    private int        sessionTimeout = 3 * TimeInterval.MILLISECOND_PER_SECONDS;
 
     //---------------------------------------------------------------
 
@@ -55,22 +72,45 @@ public class SFTPFileTransferConfig extends AbstractFileTransferConfig{
     }
 
     /**
-     * 获得 the connect timeout.
+     * 超时时间,用于设置 Socket setSoTimeout ,单位 毫秒, 可以使用 {@link TimeInterval}常量.
+     * 
+     * <p>
+     * Enable/disable {@link SocketOptions#SO_TIMEOUT SO_TIMEOUT} With this option set to a non-zero timeout, a read() call on the
+     * InputStream associated with this Socket will block for only this amount of time.
+     * 
+     * If the timeout expires, a <B>java.net.SocketTimeoutException</B> is raised, though the Socket is still valid.
+     * 
+     * The option <B>must</B> be enabled prior to entering the blocking operation to have effect.
+     * </p>
+     * 
+     * 如果是0,将不设置超时时间.
      *
-     * @return the sessionTimeout
+     * @return the 超时时间,用于设置 Socket setSoTimeout ,单位 毫秒, 可以使用 {@link TimeInterval}常量
+     * @since 3.0.8 将默认超时0 ,改成 3 秒
      */
     public int getSessionTimeout(){
         return sessionTimeout;
     }
 
     /**
-     * 设置 the connect timeout.
+     * 超时时间,用于设置 Socket setSoTimeout ,单位 毫秒, 可以使用 {@link TimeInterval}常量.
+     * 
+     * <p>
+     * Enable/disable {@link SocketOptions#SO_TIMEOUT SO_TIMEOUT} With this option set to a non-zero timeout, a read() call on the
+     * InputStream associated with this Socket will block for only this amount of time.
+     * 
+     * If the timeout expires, a <B>java.net.SocketTimeoutException</B> is raised, though the Socket is still valid.
+     * 
+     * The option <B>must</B> be enabled prior to entering the blocking operation to have effect.
+     * </p>
+     * 
+     * 如果是0,将不设置超时时间.
      *
      * @param sessionTimeout
-     *            the sessionTimeout to set
+     *            the new 超时时间,用于设置 Socket setSoTimeout ,单位 毫秒, 可以使用 {@link TimeInterval}常量
+     * @since 3.0.8 将默认超时0 ,改成 3 秒
      */
     public void setSessionTimeout(int sessionTimeout){
         this.sessionTimeout = sessionTimeout;
     }
-
 }

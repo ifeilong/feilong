@@ -44,71 +44,72 @@ import com.jcraft.jsch.SftpException;
 
 /**
  * SFTP工具类.
- * 
+ *
  * <p>
- * 注:依赖于jsch.
+ * sftp是Secure File Transfer Protocol的缩写,安全文件传送协议。 <br>
+ * 可以为传输文件提供一种安全的加密方法。 sftp 与 ftp 有着几乎一样的语法和功能。
  * </p>
- * 
+ *
+ * <p>
+ * 注意:需要自行依赖 jsch.
+ * </p>
+ *
  * <pre class="code">
-{@code
-        <dependency>
-            <groupId>com.jcraft</groupId>
-            <artifactId>jsch</artifactId>
-        </dependency>
-}
+ * {@code
+ * <dependency>
+ * <groupId>com.jcraft</groupId>
+ * <artifactId>jsch</artifactId>
+ * </dependency>
+ * }
  * </pre>
- * 
- * <p>
- * sftp是Secure File Transfer Protocol的缩写,安全文件传送协议。可以为传输文件提供一种安全的加密方法。sftp 与 ftp 有着几乎一样的语法和功能。SFTP 为 SSH的一部分,是一种传输档案至 Blogger
- * 伺服器的安全方式。其实在SSH软件包中,已经包含了一个叫作SFTP(Secure File Transfer Protocol)的安全文件传输子系统
- * </p>
- * 
+ *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
-public class SFTPFileTransfer extends AbstractFileTransfer{
+public class SFTPFileTransfer extends AbstractFileTransfer {
 
-    /** The Constant LOGGER. */
-    private static final Logger    LOGGER    = LoggerFactory.getLogger(SFTPFileTransfer.class);
+    /**
+     * The Constant LOGGER.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SFTPFileTransfer.class);
 
-    /** The sftp file transfer config. */
+    /**
+     * The sftp file transfer config.
+     */
     private SFTPFileTransferConfig sftpFileTransferConfig;
 
     //---------------------------------------------------------------
 
-    /** The channel sftp. */
-    private ChannelSftp            channelSftp;
+    /**
+     * The channel sftp.
+     */
+    private ChannelSftp channelSftp;
 
-    /** The session. */
-    private Session                session;
+    /**
+     * The session.
+     */
+    private Session session;
 
     //---------------------------------------------------------------
 
     /**
-     * The type.
-     * 
-     * @see com.jcraft.jsch.Channel#getChannel(String)
-     */
-    private static final String    TYPE_SFTP = "sftp";
-
-    /**
      * 创建 链接.
-     * 
+     *
      * @return true, if successful
      */
     @Override
-    protected boolean connect(){
+    protected boolean connect() {
         // If the client is already connected, disconnect
-        if (channelSftp != null){
+        if (channelSftp != null) {
             LOGGER.warn("channelSftp is not null,will disconnect first....");
             disconnect();
         }
-        try{
-            session = SFTPUtil.connectSession(sftpFileTransferConfig);
+        try {
+            session = SFTPUtil.connect(sftpFileTransferConfig);
 
-            LOGGER.trace("open [{}] session channel...", TYPE_SFTP);
-            channelSftp = (ChannelSftp) session.openChannel(TYPE_SFTP);
+            LOGGER.trace("open [sftp] session channel...");
+            channelSftp = (ChannelSftp) session.openChannel("sftp");
 
             LOGGER.trace("channel connecting...");
             channelSftp.connect();
@@ -118,31 +119,9 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
             logAfterConnected(isSuccess, session);
 
-            //---------------------------------------------------------------
             return isSuccess;
-        }catch (Exception e){
-            String message = Slf4jUtil.format("sftpFileTransferConfig:{}", JsonUtil.format(sftpFileTransferConfig));
-            throw new FileTransferException(message, e);
-        }
-    }
-
-    /**
-     * Log after connected.
-     *
-     * @param isSuccess
-     *            the is success
-     * @param session
-     *            the session
-     * @since 1.10.4
-     */
-    private void logAfterConnected(boolean isSuccess,Session session){
-        if (LOGGER.isInfoEnabled()){
-            String buildSessionPrettyString = SftpSessionUtil.buildSessionPrettyString(session);
-
-            String sessionInfo = JsonUtil.format(SftpSessionUtil.getMapForLog(session));
-            String pattern = "connect [{}]--------[{}]{}";
-
-            logInfoOrError(isSuccess, pattern, buildSessionPrettyString, buildResultString(isSuccess), sessionInfo);
+        } catch (Exception e) {
+            throw new FileTransferException(Slf4jUtil.format("sftpFileTransferConfig:{}", JsonUtil.format(sftpFileTransferConfig)), e);
         }
     }
 
@@ -150,22 +129,22 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
      * 关闭链接.
      */
     @Override
-    protected void disconnect(){
-        if (channelSftp != null){
+    protected void disconnect() {
+        if (channelSftp != null) {
             channelSftp.exit();
 
             //---------------------------------------------------------------
-            if (LOGGER.isTraceEnabled()){
+            if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace(StringUtils.center("channelSftp exit", 50, "------"));
             }
         }
-        if (session != null){
+        if (session != null) {
             String buildSessionPrettyString = SftpSessionUtil.buildSessionPrettyString(session);
 
             session.disconnect();
 
             //---------------------------------------------------------------
-            if (LOGGER.isInfoEnabled()){
+            if (LOGGER.isInfoEnabled()) {
                 String message = Slf4jUtil.format(" session disconnect: [{}]", buildSessionPrettyString);
                 LOGGER.info(StringUtils.center(message, 50, "------"));
             }
@@ -175,54 +154,47 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.FileTransfer#getLsFileMap(java.lang.String)
      */
     @Override
-    protected Map<String, FileInfoEntity> getLsFileMap(String remotePath){
+    protected Map<String, FileInfoEntity> getLsFileMap(String remotePath) {
         Map<String, FileInfoEntity> map = newHashMap();
 
-        try{
+        try {
             @SuppressWarnings("unchecked")
             List<LsEntry> lsEntryList = channelSftp.ls(remotePath);
-            for (int i = 0; i < lsEntryList.size(); i++){
-                LsEntry lsEntry = lsEntryList.get(i);
+            for (LsEntry lsEntry : lsEntryList) {
                 String fileName = lsEntry.getFilename();
 
                 if (".".equals(fileName)// 本文件夹
-                                || "..".equals(fileName)// 上层目录 均过滤掉,否则会影响 delete
-                ){
+                        || "..".equals(fileName)// 上层目录均过滤掉
+                ) {
                     continue;
                 }
                 map.put(fileName, buildFileInfoEntity(remotePath, fileName, lsEntry.getAttrs()));
             }
             return map;
-        }catch (SftpException e){
-            String message = Slf4jUtil.format("remotePath:[{}]", remotePath);
-            throw new FileTransferException(message, e);
+        } catch (SftpException e) {
+            throw new FileTransferException(Slf4jUtil.format("remotePath:[{}]", remotePath), e);
         }
     }
 
     /**
-     * Builds the file info entity.
+     * 构造 FileInfoEntity.
      *
-     * @param remotePath
-     *            the remote path
-     * @param fileName
-     *            the file name
-     * @param attrs
-     *            the attrs
+     * @param remotePath 远程路径
+     * @param fileName   下面的文件
+     * @param attrs      the attrs
      * @return the file info entity
      * @since 1.7.1
      */
-    private FileInfoEntity buildFileInfoEntity(String remotePath,String fileName,SftpATTRS attrs){
-        boolean isDirectory = isDirectory(remotePath + "/" + fileName);
-        LOGGER.debug("fileName:{}", fileName);
-
+    private FileInfoEntity buildFileInfoEntity(String remotePath, String fileName, SftpATTRS attrs) {
         FileInfoEntity fileInfoEntity = new FileInfoEntity();
-        fileInfoEntity.setFileType(isDirectory ? DIRECTORY : FILE);
+        fileInfoEntity.setFileType(isDirectory(remotePath + "/" + fileName) ? DIRECTORY : FILE);
         fileInfoEntity.setName(fileName);
         fileInfoEntity.setSize(attrs.getSize());
+
         // returns the last modification time.
         fileInfoEntity.setLastModified(toLong(attrs.getMTime()));
         return fileInfoEntity;
@@ -230,19 +202,19 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.AbstractFileTransfer#mkdir(java.lang.String)
      */
     @Override
-    protected boolean mkdir(String remoteDirectory){
-        try{
+    protected boolean mkdir(String remoteDirectory) {
+        try {
             LOGGER.debug("begin mkdir:[{}]~~", remoteDirectory);
 
             channelSftp.mkdir(remoteDirectory);
 
             LOGGER.debug("mkdir:[{}] over~~", remoteDirectory);
             return true;
-        }catch (SftpException e){
+        } catch (SftpException e) {
             String message = Slf4jUtil.format("can't mkdir,remoteDirectory:[{}]", remoteDirectory);
             throw new FileTransferException(message, e);
         }
@@ -250,26 +222,26 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.filetransfer.AbstractFileTransfer#tryCd(java.lang.String)
      */
     @Override
-    protected void tryCd(String remoteDirectory) throws Exception{
+    protected void tryCd(String remoteDirectory) throws Exception {
         LOGGER.debug("cd:[{}]", remoteDirectory);
         channelSftp.cd(remoteDirectory);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.filetransfer.FileTransfer#upload(java.io.FileInputStream, java.lang.String)
      */
     @Override
-    protected boolean upload(FileInputStream fileInputStream,String toFileName){
-        try{
+    protected boolean upload(FileInputStream fileInputStream, String toFileName) {
+        try {
             channelSftp.put(fileInputStream, toFileName);
             return true;
-        }catch (SftpException e){
+        } catch (SftpException e) {
             String message = Slf4jUtil.format("can't upload fileInputStream,toFileName:[{}]", toFileName);
             throw new FileTransferException(message, e);
         }
@@ -278,19 +250,18 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     /**
      * 判断路径是否是文件夹.
      *
-     * @param remoteFile
-     *            远程路径
+     * @param remoteFile 远程路径
      * @return 如果是文件夹返回true
      */
     @Override
-    protected boolean isDirectory(String remoteFile){
-        try{
+    protected boolean isDirectory(String remoteFile) {
+        try {
             SftpATTRS sftpATTRS = channelSftp.stat(remoteFile);
 
             boolean isDir = sftpATTRS.isDir();
             LOGGER.debug("remoteFile:[{}] is [{}]", remoteFile, isDir ? "directory" : "file");
             return isDir;
-        }catch (SftpException e){
+        } catch (SftpException e) {
             String message = Slf4jUtil.format("remoteFile:[{}] ", remoteFile);
             throw new FileTransferException(message, e);
         }
@@ -298,15 +269,15 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.FileTransfer#rmdir(java.lang.String)
      */
     @Override
-    protected boolean rmdir(String remotePath){
-        try{
+    protected boolean rmdir(String remotePath) {
+        try {
             channelSftp.rmdir(remotePath);
             return true;
-        }catch (SftpException e){
+        } catch (SftpException e) {
             String message = Slf4jUtil.format("remotePath:[{}]", remotePath);
             throw new FileTransferException(message, e);
         }
@@ -314,15 +285,15 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.FileTransfer#rm(java.lang.String)
      */
     @Override
-    protected boolean rm(String remotePath){
-        try{
+    protected boolean rm(String remotePath) {
+        try {
             channelSftp.rm(remotePath);
             return true;
-        }catch (SftpException e){
+        } catch (SftpException e) {
             String message = Slf4jUtil.format("remotePath:[{}]", remotePath);
             throw new FileTransferException(message, e);
         }
@@ -330,15 +301,15 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.feilong.tools.net.FileTransfer#_downRemoteSingleFile(java.lang.String, java.lang.String)
      */
     @Override
-    protected boolean downRemoteSingleFile(String remoteSingleFile,String filePath){
-        try (OutputStream outputStream = FileUtil.getFileOutputStream(filePath)){//use try-with-resources
+    protected boolean downRemoteSingleFile(String remoteSingleFile, String filePath) {
+        try (OutputStream outputStream = FileUtil.getFileOutputStream(filePath)) {//use try-with-resources
             channelSftp.get(remoteSingleFile, outputStream);
             return true;
-        }catch (SftpException | IOException e){
+        } catch (SftpException | IOException e) {
             String message = Slf4jUtil.format("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath);
             throw new FileTransferException(message, e);
         }
@@ -347,12 +318,31 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     //---------------------------------------------------------------
 
     /**
+     * Log after connected.
+     *
+     * @param isSuccess  the is success
+     * @param useSession the session
+     * @since 1.10.4
+     */
+    private static void logAfterConnected(boolean isSuccess, Session useSession) {
+        if (LOGGER.isInfoEnabled()) {
+            String sessionPrettyString = SftpSessionUtil.buildSessionPrettyString(useSession);
+
+            String sessionInfo = JsonUtil.format(SftpSessionUtil.getMapForLog(useSession));
+            String pattern = "connect [{}]---[{}]{}";
+
+            logInfoOrError(isSuccess, pattern, sessionPrettyString, toResultString(isSuccess), sessionInfo);
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
      * 设置 sftp file transfer config.
      *
-     * @param sftpFileTransferConfig
-     *            the sftpFileTransferConfig to set
+     * @param sftpFileTransferConfig the sftpFileTransferConfig to set
      */
-    public void setSftpFileTransferConfig(SFTPFileTransferConfig sftpFileTransferConfig){
+    public void setSftpFileTransferConfig(SFTPFileTransferConfig sftpFileTransferConfig) {
         this.sftpFileTransferConfig = sftpFileTransferConfig;
     }
 

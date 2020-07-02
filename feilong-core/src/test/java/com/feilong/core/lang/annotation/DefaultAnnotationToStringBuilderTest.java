@@ -32,30 +32,31 @@ import com.feilong.lib.lang3.reflect.FieldUtils;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
-public class DefaultAnnotationToStringBuilderTest{
+public class DefaultAnnotationToStringBuilderTest {
 
     /** The annotation to string builder. */
     private final AnnotationToStringBuilder annotationToStringBuilder = DefaultAnnotationToStringBuilder.instance();
 
-    /**
-     * Test.
-     */
     @Test
-    public void test(){
+    public void test() {
         assertEquals(EMPTY, annotationToStringBuilder.build(null));
     }
 
-    /**
-     * Test 1.
-     */
     @Test
-    public void test1(){
+    public void test1() {
         Field field = FieldUtils.getDeclaredField(DangaMemCachedConfig.class, "serverList", true);
         Alias alias = field.getAnnotation(Alias.class);
 
-        assertEquals(
-                        "@com.feilong.core.bean.Alias(name=memcached.serverlist, sampleValue=172.20.31.23:11211,172.20.31.22:11211)",
-                        annotationToStringBuilder.build(alias));
+        String actual = annotationToStringBuilder.build(alias);
+
+        try {
+            //for eclipse
+            assertEquals("@com.feilong.core.bean.Alias(name=memcached.serverlist, sampleValue=172.20.31.23:11211,172.20.31.22:11211)", actual);
+        } catch (Throwable e) {
+            //for idea
+            assertEquals("@com.feilong.core.bean.Alias(sampleValue=172.20.31.23:11211,172.20.31.22:11211, name=memcached.serverlist)", actual);
+        }
+
     }
 
 }

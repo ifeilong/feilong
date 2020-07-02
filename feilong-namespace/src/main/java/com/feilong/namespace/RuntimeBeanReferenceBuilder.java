@@ -57,9 +57,7 @@ public class RuntimeBeanReferenceBuilder{
         String beanName = parserContext.getReaderContext().generateBeanName(beanDefinition);
 
         //---------------------------------------------------------------
-
         LOGGER.debug("generateBeanName:[{}]", beanName);
-
         //---------------------------------------------------------------
         parserContext.registerBeanComponent(new BeanComponentDefinition(beanDefinition, beanName));
 

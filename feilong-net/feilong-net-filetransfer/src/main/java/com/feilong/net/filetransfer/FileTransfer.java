@@ -160,6 +160,56 @@ public interface FileTransfer{
     //----------------------------读取-----------------------------------------------------
     /**
      * 获得某特定文件夹下面指定文件名相关信息.
+     * 
+     * <p>
+     * 注意:该方法不支持级联, 只支持获取 remotePath 下面的一级目录或者文件
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 比如 /upload/test/HERSCHEL 下面有 文件夹 test ,以及 sales_20200601101812.txt ,ST_20200601101812.txt 两个文件
+     * 
+     * <pre class="code">
+     * String remoteAbsolutePath = "/upload/test/HERSCHEL";
+     * LOGGER.debug(JsonUtil.format(fileTransfer.getFileEntityMap(remoteAbsolutePath)));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+            "ST_20200601101812.txt":         {
+                "fileType": "FILE",
+                "formatLastModified": "01-19 17:56",
+                "formatSize": "23.23KB",
+                "lastModified": 1590977895,
+                "name": "ST_20200601101812.txt",
+                "size": 23788
+            },
+            "sales_20200601101812.txt":         {
+                "fileType": "FILE",
+                "formatLastModified": "01-19 17:56",
+                "formatSize": "185.78KB",
+                "lastModified": 1590977894,
+                "name": "sales_20200601101812.txt",
+                "size": 190240
+            },
+            "test":         {
+                "fileType": "DIRECTORY",
+                "formatLastModified": "01-19 18:38",
+                "formatSize": "4KB",
+                "lastModified": 1593510879,
+                "name": "test",
+                "size": 4096
+            }
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param remotePath
      *            远程地址
@@ -168,6 +218,9 @@ public interface FileTransfer{
      * @return 如果 <code>remotePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>remotePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>fileNames</code> 是null 或者是 empty,那么返回这个 <code>remotePath</code> 下面所有的文件<br>
+     *         如果 <code>remotePath</code> 不存在,会抛出异常,示例 com.feilong.net.filetransfer.FileTransferException:
+     *         remotePath:[/home/appuser/2013-12-04-1938],cause by:[2: No such file] <br>
+     *         如果 <code>remotePath</code> 是个空的文件夹,会返回 empty MAP
      */
     Map<String, FileInfoEntity> getFileEntityMap(String remotePath,String...fileNames);
 }

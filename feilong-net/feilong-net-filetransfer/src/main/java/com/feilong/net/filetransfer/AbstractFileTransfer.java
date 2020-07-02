@@ -18,8 +18,8 @@ package com.feilong.net.filetransfer;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
-import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.io.entity.FileType.DIRECTORY;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,13 +31,13 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -176,20 +176,16 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     @Override
     public Map<String, FileInfoEntity> getFileEntityMap(String remotePath,String...fileNames){
         Validate.notBlank(remotePath, "remotePath can't be blank!");
-
         //---------------------------------------------------------------
         boolean isConnectSuccess = connect();
         if (!isConnectSuccess){
             return null;
         }
-
         //---------------------------------------------------------------
         Map<String, FileInfoEntity> lsFileMap = getLsFileMap(remotePath);
-        Map<String, FileInfoEntity> fileEntityMap = MapUtil.getSubMap(lsFileMap, fileNames);
-
-        //---------------------------------------------------------------
         disconnect();
-        return fileEntityMap;
+
+        return MapUtil.getSubMap(lsFileMap, fileNames);
     }
 
     //---------------------------------------------------------------
@@ -367,7 +363,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 LOGGER.trace("remotePath:[{}] is [not directory],will rm....", remotePath);
                 isSuccess = rm(remotePath);
 
-                logInfoOrError(isSuccess, "remove remotePath:[{}] [{}]", remotePath, buildResultString(isSuccess));
+                logInfoOrError(isSuccess, "remove remotePath:[{}] [{}]", remotePath, toResultString(isSuccess));
             }
         }
         return isSuccess;
@@ -433,10 +429,10 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      *            the begin date
      * @since 1.10.4
      */
-    private void logAfterDownRemoteSingleFile(String remotePath,boolean isSuccess,String filePath,Date beginDate){
+    private static void logAfterDownRemoteSingleFile(String remotePath,boolean isSuccess,String filePath,Date beginDate){
         if (LOGGER.isInfoEnabled()){
             String pattern = "downRemoteSingleFile remotePath:[{}] to [{}] [{}], use time: [{}]";
-            logInfoOrError(isSuccess, pattern, remotePath, filePath, buildResultString(isSuccess), formatDuration(beginDate));
+            logInfoOrError(isSuccess, pattern, remotePath, filePath, toResultString(isSuccess), formatDuration(beginDate));
         }
     }
 
@@ -450,7 +446,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @return the string
      * @since 1.10.4
      */
-    protected String buildResultString(boolean isSuccess){
+    protected static String toResultString(boolean isSuccess){
         return isSuccess ? "success" : "fail!!";
     }
 
@@ -464,10 +460,9 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @param args
      *            the args
      */
-    protected void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
+    protected static void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
         if (LOGGER.isInfoEnabled()){
             String message = Slf4jUtil.format(messagePattern, args);
-
             if (isSuccess){
                 LOGGER.info(message);
             }else{
@@ -539,7 +534,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
 
         boolean isSuccess = upload(fileInputStream, localFileName);
 
-        logInfoOrError(isSuccess, "put [{}] to [{}] [{}]", localFileFullPath, remoteDirectory, buildResultString(isSuccess));
+        logInfoOrError(isSuccess, "put [{}] to [{}] [{}]", localFileFullPath, remoteDirectory, toResultString(isSuccess));
 
         IOUtil.closeQuietly(fileInputStream);
         return isSuccess;
@@ -565,7 +560,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             String dirNameToCreate = localFileName;
             boolean isSuccess = mkdir(dirNameToCreate);
 
-            logInfoOrError(isSuccess, "mkdir:[{}] [{}]~~~~", dirNameToCreate, buildResultString(isSuccess));
+            logInfoOrError(isSuccess, "mkdir:[{}] [{}]~~~~", dirNameToCreate, toResultString(isSuccess));
         }
 
         //---------------------------------------------------------------

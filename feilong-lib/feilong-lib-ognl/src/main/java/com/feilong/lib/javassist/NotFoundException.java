@@ -28,7 +28,4 @@ public class NotFoundException extends Exception{
         super(msg);
     }
 
-    public NotFoundException(String msg, Exception e){
-        super(msg + " because of " + e.toString());
-    }
 }

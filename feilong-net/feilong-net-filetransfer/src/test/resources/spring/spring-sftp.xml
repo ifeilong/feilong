@@ -7,7 +7,6 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd 	
 		">
 
-
 	<util:properties id="p_sftp" location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-sftp-adidas.properties"></util:properties>
 	<!-- <util:properties id="p_sftp" location="file:E:\DataCommon\Files\Java\config\fileTransfer-sftp.properties"></util:properties> -->
 	<util:properties id="p_sftp-sshConfig" location="classpath:config/fileTransfer-sftp-sshConfig.properties"></util:properties>

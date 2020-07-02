@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:feilong="http://www.feilong.com/schema/feilong" xmlns:util="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd 	
+    http://www.feilong.com/schema/feilong http://www.feilong.com/schema/feilong/feilong.xsd
+    ">
+
+    <util:properties id="p_sftp"
+                     location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-sftp-gap.properties"/>
+
+    <feilong:sftpFileTransfer id="sftpFileTransfer" hostName="#{p_sftp['fileTransfer.sftp.hostName']}"
+                              userName="#{p_sftp['fileTransfer.sftp.userName']}"
+                              password="#{p_sftp['fileTransfer.sftp.password']}"
+                              port="#{p_sftp['fileTransfer.sftp.port']}"
+                              sessionTimeout="8000"
+    />
+
+</beans>

@@ -7,8 +7,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd 	
 		">
 
-	<util:properties id="p_sftp" location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-sftp-adidas.properties"/>
-	<util:properties id="p_sftp-sshConfig" location="classpath:config/fileTransfer-sftp-sshConfig.properties"/>
+	<util:properties id="p_sftp" location="file:/Users/feilong/Development/DataCommon/Files/Java/config/fileTransfer-sftp-gap.properties"/>
 
 	<!-- sftp scope="prototype" -->
 	<bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
@@ -20,14 +19,8 @@
 					<value><![CDATA[#{p_sftp['fileTransfer.sftp.password']}]]></value>
 				</property>
 				<property name="port" value="#{p_sftp['fileTransfer.sftp.port']}" />
-
-				<property name="sessionTimeout" value="#{p_sftp['fileTransfer.sftp.sessionTimeout']}" />
-				<property name="sshConfig" ref="p_sftp-sshConfig" />
 			</bean>
 		</property>
 	</bean>
-
-	<bean class="com.feilong.net.filetransfer.MultiSFTPFileTransferDownloadServer1" />
-	<bean class="com.feilong.net.filetransfer.MultiSFTPFileTransferDownloadServer2" />
 
 </beans>

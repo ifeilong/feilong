@@ -17,8 +17,6 @@ package com.feilong.core.lang.annotation;
 
 import java.lang.annotation.Annotation;
 
-import com.feilong.lib.lang3.StringUtils;
-
 /**
  * 将 {@link Annotation} 转成 {@link String} 的接口.
  *
@@ -37,7 +35,7 @@ public interface AnnotationToStringBuilder<T extends Annotation> {
      *
      * @param annotation
      *            the annotation
-     * @return 如果 <code>annotation</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>annotation</code> 是null,返回 EMPTY String<br>
      */
     String build(T annotation);
 }
