@@ -19,11 +19,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * The Class FeiLongCollectionsUtilSuiteTests.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({
 
@@ -37,6 +32,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectIterableTest.class,
                 CollectIterableBeanTypeTest.class,
                 CollectIteratorTest.class,
+
+                ExistTest.class,
+                ExistWithMapTest.class,
+                ExistWithPredicateTest.class,
 
                 FindTest.class,
                 FindWithMapTest.class,

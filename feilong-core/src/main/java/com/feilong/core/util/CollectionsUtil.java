@@ -55,17 +55,17 @@ import com.feilong.lib.collection4.ListUtils;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
- * 
+ *
  * <h3>Collections Framework关系图:</h3>
- * 
+ *
  * <blockquote>
  * <p>
  * <img src="http://venusdrogon.github.io/feilong-platform/mysource/Collections-Framework.png" alt="Collections Framework关系图">
  * </p>
  * </blockquote>
- * 
+ *
  * <h3>关于 {@link java.util.Collection}:</h3>
- * 
+ *
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
@@ -86,9 +86,9 @@ import com.feilong.lib.collection4.ListUtils;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * <h3>关于 {@link java.util.List}:</h3>
- * 
+ *
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
@@ -155,11 +155,11 @@ import com.feilong.lib.collection4.ListUtils;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * <hr>
- * 
+ *
  * <h3>关于 {@link Set }:</h3>
- * 
+ *
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
@@ -217,11 +217,11 @@ import com.feilong.lib.collection4.ListUtils;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * <hr>
- * 
+ *
  * <h3>关于 {@link java.util.Queue Queue}:</h3>
- * 
+ *
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
@@ -238,9 +238,9 @@ import com.feilong.lib.collection4.ListUtils;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * <h3><a href="http://stamen.iteye.com/blog/2003458">SET-MAP现代诗一首</a></h3>
- * 
+ *
  * <blockquote>
  * <ul>
  * <li>天下人都知道Set,Map不能重复</li>
@@ -249,14 +249,14 @@ import com.feilong.lib.collection4.ListUtils;
  * <li>20%人知道Map添加重复键时,旧键不会被覆盖,而值会覆盖</li>
  * </ul>
  * </blockquote>
- * 
+ *
  * <h3>guava 实用方法:</h3>
  * <blockquote>
  * <ol>
  * <li>com.google.common.collect.Iterables.concat({@code Iterable<? extends Iterable<? extends T>>})</li>
  * </ol>
  * </blockquote>
- * 
+ *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see java.util.Collections
  * @see com.feilong.lib.collection4.ListUtils
@@ -269,6 +269,7 @@ import com.feilong.lib.collection4.ListUtils;
  * @see "com.google.common.collect.Iterators"
  * @see "com.google.common.collect.Iterables"
  * @since 1.0.2
+ * 
  * @since jdk1.5
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
@@ -320,11 +321,11 @@ public final class CollectionsUtil{
 
     /**
      * 返回object 元素的大小.
-     * 
+     *
      * <p>
      * 支持object 如下类型:
      * </p>
-     * 
+     *
      * <ul>
      * <li>Collection - the collection size
      * <li>Map - the map size
@@ -333,7 +334,7 @@ public final class CollectionsUtil{
      * <li>Iterable - the number of elements remaining in the iterator
      * <li>Enumeration - the number of elements remaining in the enumeration
      * </ul>
-     * 
+     *
      * 如果 <code>object</code> 不是上述类型,将抛出异常 {@link IllegalArgumentException} <br>
      *
      * @param object
@@ -394,41 +395,41 @@ public final class CollectionsUtil{
 
     /**
      * 循环将<code>beanIterable</code>每个元素的每个指定属性 <code>propertyName</code>的值改成 <code>propertyValue</code>.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * 对于以下购物车全选的代码:
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * <span style="color:green">//找到需要处理的对象list</span>
      * List{@code <ShoppingCartLineCommand>} toDoNeedChangeCheckedCommandList = select(
      *                 needChangeCheckedCommandList,
      *                 toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
-     * 
+     *
      * <span style="color:green">// 将状态修改成对应状态</span>
      * for (ShoppingCartLineCommand shoppingCartLineCommand : toDoNeedChangeCheckedCommandList){
      *     shoppingCartLineCommand.setSettlementState(1);
      * }
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>此时你还可以:</b>
-     * 
+     *
      * <pre class="code">
      * <span style="color:green">//找到需要处理的对象list</span>
      * List{@code <ShoppingCartLineCommand>} toDoNeedChangeCheckedCommandList = select(
      *                 needChangeCheckedCommandList,
      *                 toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
-     * 
+     *
      * <span style="color:green">// 将状态修改成对应状态</span>
      * CollectionsUtil.forEach(toDoNeedChangeCheckedCommandList, "settlementState", 1);
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -436,7 +437,7 @@ public final class CollectionsUtil{
      * <li>如果 <code>beanIterable</code> 中有元素是null,将跳过去</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the element type
      * @param beanIterable
@@ -462,28 +463,28 @@ public final class CollectionsUtil{
 
     /**
      * 添加所有的{@link Iterable}元素到指定的<code>objectCollection</code>,如果 {@code iterable}是null将忽略.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <String>} list = toList("xinge", "feilong1");
      * CollectionsUtil.addAllIgnoreNull(list, null); = false
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>重构:</h3>
-     * 
+     *
      * <blockquote>
      * <p>
      * 对于以下代码:
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
      *     Set{@code <String>} set = new HashSet{@code <>}();
      *     if ({@code null != lines && lines.size() > 0}){
@@ -495,13 +496,13 @@ public final class CollectionsUtil{
      *     }
      *     return set;
      * }
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>可以重构成:</b>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
      *     if (isNullOrEmpty(lines)){
      *         return Collections.emptySet();
@@ -513,12 +514,12 @@ public final class CollectionsUtil{
      *     return set;
      * }
      * </pre>
-     * 
+     *
      * <p>
      * 重构之后,方法的复杂度会更小,阅读性更高
      * </p>
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the type of object the {@link Collection} contains
      * @param objectCollection
@@ -541,15 +542,15 @@ public final class CollectionsUtil{
 
     /**
      * 添加 <code>element</code>元素到指定的<code>objectCollection</code>,如果 <code>element</code> 是null或者 empty将忽略.
-     * 
+     *
      * <h3>重构:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * 对于以下代码:
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <Object[]>} dataList = new ArrayList{@code <>}();
      * for (T bean : iterable){
      *     Object[] objectArray = toObjectArray(bean, propertyNameList);
@@ -558,22 +559,22 @@ public final class CollectionsUtil{
      *     }
      * }
      * return dataList;
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>可以重构成:</b>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <Object[]>} dataList = new ArrayList{@code <>}();
      * for (T bean : iterable){
      *     addIgnoreNullOrEmpty(dataList, toObjectArray(bean, propertyNameList));
      * }
      * return dataList;
      * </pre>
-     * 
+     *
      * 重构之后,方法的复杂度会更小,阅读性更高
-     * 
+     *
      * </blockquote>
      *
      * @param <T>
@@ -598,25 +599,25 @@ public final class CollectionsUtil{
 
     /**
      * 在<code>list</code>中,查找第一个属性 <code>propertyName</code> 值是指定值 <code>propertyValue</code> 对象的索引位置.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
-     * 
+     *
      * CollectionsUtil.indexOf(list, "name", "张飞")                          =   0
-     * 
+     *
      * CollectionsUtil.indexOf(null, "age", 24)                             =   -1
      * CollectionsUtil.indexOf(new ArrayList{@code <User>}(), "age", 24)    =   -1
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -652,7 +653,7 @@ public final class CollectionsUtil{
 
     /**
      * 从 <code>objectCollection</code>中删除所有的 <code>removeCollection</code> <span style="color:red">(原集合对象不变)</span>.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -661,26 +662,26 @@ public final class CollectionsUtil{
      * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从list中删除 "feilong2","feilong1"元素
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <String>} list = toList("xinge", "feilong1", "feilong2", "feilong2");
      * List{@code <String>} removeList = CollectionsUtil.removeAll(list, toList("feilong2", "feilong1"));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * ["xinge"]
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -704,38 +705,38 @@ public final class CollectionsUtil{
 
     /**
      * 从 <code>objectCollection</code>中删除所有的 <code>null</code>元素 <span style="color:red">(原集合对象不变)</span>.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
-     * 
+     *
      * <ol>
      * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
      * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
      * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
      * </ol>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从list中删除 null 元素
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <String>} list = toList("xinge", <span style="color:red">null</span>, "feilong2", <span style=
     "color:red">null</span>, "feilong2");
      * List{@code <String>} removeList = CollectionsUtil.removeAllNull(list);
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * "xinge", "feilong2", "feilong2"
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -757,7 +758,7 @@ public final class CollectionsUtil{
     //---------------------------------------------------------------
     /**
      * 从 <code>objectCollection</code>中 删除<code>removeElements</code> <span style="color:red">(原集合对象不变)</span>.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -766,38 +767,38 @@ public final class CollectionsUtil{
      * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElements</code> 的元素加入到新的list返回.</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("xinge");
      * list.add("feilong1");
      * list.add("feilong2");
      * list.add("feilong2");
-     * 
+     *
      * LOGGER.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * ["xinge","feilong1"]
      * </pre>
-     * 
+     *
      * 此时,原来的list不变:
-     * 
+     *
      * <pre class="code">
      * LOGGER.info(JsonUtil.format(list));
      * </pre>
-     * 
+     *
      * 输出 :
-     * 
+     *
      * <pre class="code">
      * ["xinge","feilong1","feilong2","feilong2"]
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -823,28 +824,28 @@ public final class CollectionsUtil{
     //---------------------------------------------------------------
     /**
      * 去重,返回没有重复元素的新list <span style="color:red">(原集合对象不变)</span>.
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("feilong1");
      * list.add("feilong2");
      * list.add("feilong2");
      * list.add("feilong3");
-     * 
+     *
      * LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * ["feilong1","feilong2","feilong3"]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
@@ -872,23 +873,23 @@ public final class CollectionsUtil{
 
     /**
      * 去重,返回指定属性 propertyName的值没有重复元素的新list <span style="color:red">(原集合对象不变)</span>.
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * User user1 = new User(1L);
      * User user2 = new User(1L);
      * List{@code <User>} list = toList(user1, user2);
-     * 
+     *
      * List{@code <User>} removeDuplicate = CollectionsUtil.removeDuplicate(list, "id");
-     * 
+     *
      * assertThat(removeDuplicate, contains(user1));
      * assertSame(1, removeDuplicate.size());
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
@@ -929,31 +930,31 @@ public final class CollectionsUtil{
 
     /**
      * 去重,返回指定属性 propertyNames 组合的值都不重复元素的新list <span style="color:red">(原集合对象不变)</span>.
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * User user1 = new User(1L);
      * user1.setUserInfo(new UserInfo(15));
-     * 
+     *
      * User user2 = new User(1L);
      * user2.setUserInfo(new UserInfo(16));
-     * 
+     *
      * User user3 = new User(1L);
      * user3.setUserInfo(new UserInfo(15));
-     * 
+     *
      * List{@code <User>} list = toList(user1, user2, user3);
-     * 
+     *
      * List{@code <User>} removeDuplicate = CollectionsUtil.removeDuplicate(list, "id", "userInfo.age");
-     * 
+     *
      * assertThat(removeDuplicate, contains(user1, user2));
      * assertSame(2, removeDuplicate.size());
      * </pre>
-     * 
-     * 
+     *
+     *
      * </blockquote>
-     * 
+     *
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
@@ -1050,178 +1051,178 @@ public final class CollectionsUtil{
 
     /**
      * 循环集合 <code>beanIterable</code>,取到对象指定的属性 <code>propertyName</code>的值,拼成List({@link ArrayList}).
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 获取user list每个元素的id属性值,组成新的list返回
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <User>} list = toList(//
      *                 new User(2L),
      *                 new User(5L),
      *                 new User(5L));
-     * 
+     *
      * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, "id");
      * LOGGER.debug(JsonUtil.format(resultList));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [2,5,5]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>对于参数 <code>propertyName</code>:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * 对于以下的数据结构:
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * <span style="color:green">//***************list****************************************</span>
      * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <>}();
-     * 
+     *
      * UserAddress userAddress = new UserAddress();
      * userAddress.setAddress("中南海");
      * userAddresseList.add(userAddress);
-     * 
+     *
      * <span style="color:green">//***************map****************************************</span>
      * Map{@code <String, String>} attrMap = new HashMap{@code <>}();
      * attrMap.put("蜀国", "赵子龙");
      * attrMap.put("魏国", "张文远");
      * attrMap.put("吴国", "甘兴霸");
-     * 
+     *
      * //---------------------------------------------------------------
      * UserInfo userInfo1 = new UserInfo();
      * userInfo1.setAge(28);
-     * 
+     *
      * User user1 = new User(2L);
      * user1.setLoves(new String[] { "sanguo1", "xiaoshuo1" });
      * user1.setUserInfo(userInfo1);
      * user1.setAttrMap(attrMap);
      * user1.setUserAddresseList(userAddresseList);
-     * 
+     *
      * //---------------------------------------------------------------
      * UserInfo userInfo2 = new UserInfo();
      * userInfo2.setAge(null);
-     * 
+     *
      * User user2 = new User(3L);
      * user2.setLoves(new String[] { "sanguo2", "xiaoshuo2" });
      * user2.setUserInfo(userInfo2);
      * user2.setAttrMap(attrMap);
      * user2.setUserAddresseList(userAddresseList);
-     * 
+     *
      * List{@code <User>} userList = toList(user1,user2);
      * </pre>
-     * 
+     *
      * <p>
      * <b>以下情况:</b>
      * </p>
-     * 
+     *
      * <pre class="code">
      * <span style="color:green">//数组,取userList 每个元素的 loves属性第2个元素的值</span>
      * CollectionsUtil.getPropertyValueList(userList, <b>"loves[1]"</b>)                   =   ["xiaoshuo1","xiaoshuo2"]
     
      * <span style="color:green">//级联对象,取userList 每个元素的 userInfo属性的 age 属性的值</span>
      * CollectionsUtil.getPropertyValueList(userList, <b>"userInfo.age"</b>)               =   [28,null]
-     * 
+     *
      * <span style="color:green">//Map,取userList 每个元素的 attrMap属性中的key是 "蜀国" 的值</span>
      * CollectionsUtil.getPropertyValueList(userList, <b>"attrMap(蜀国)"</b>)                =   ["赵子龙","赵子龙"]
-     * 
+     *
      * <span style="color:green">//集合,取userList 每个元素的 userAddresseList属性中的第一个元素</span>
      * CollectionsUtil.getPropertyValueList(userList, <b>"userAddresseList[0]"</b>)        = [{"address": "中南海"},{"address": "中南海"}]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>关于参数 beanIterable</h3>
      * <blockquote>
      * 支持以下类型:
      * <dl>
      * <dt>bean Iterable</dt>
      * <dd>诸如List{@code <User>},Set{@code <User>}等</dd>
-     * 
+     *
      * <dt>map Iterable</dt>
      * <dd>
      * 比如 {@code List<Map<String, String>>}
-     * 
+     *
      * 示例:
-     * 
+     *
      * <pre>
      * List{@code <Map<String, String>>} list = newArrayList();
      * list.add(toMap("key", "value1"));
      * list.add(toMap("key", "value2"));
      * list.add(toMap("key", "value3"));
-     * 
+     *
      * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "(key)");
      * assertThat(resultList, contains("value1", "value2", "value3"));
      * </pre>
-     * 
+     *
      * </dd>
-     * 
+     *
      * <dt>list Iterable</dt>
      * <dd>
      * 比如 {@code  List<List<String>>}
-     * 
+     *
      * 示例:
-     * 
+     *
      * <pre>
      * List{@code <List<String>>} list = newArrayList();
      * list.add(toList("小明", "18"));
      * list.add(toList("小宏", "18"));
      * list.add(toList("小振", "18"));
-     * 
+     *
      * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "[0]");
      * assertThat(resultList, contains("小明", "小宏", "小振"));
      * </pre>
-     * 
+     *
      * </dd>
-     * 
+     *
      * <dt>数组 Iterable</dt>
      * <dd>
      * 比如 {@code  List<String[]>}
-     * 
+     *
      * 示例:
-     * 
+     *
      * <pre>
      * List{@code <String[]>} list = newArrayList();
      * list.add(toArray("三国", "水浒"));
      * list.add(toArray("西游", "金瓶梅"));
-     * 
+     *
      * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "[0]");
      * assertThat(resultList, contains("三国", "西游"));
      * </pre>
-     * 
+     *
      * </dd>
      * </dl>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * @param <T>
      *            返回集合类型 generic type
      * @param <O>
      *            可迭代对象类型 generic type
      * @param beanIterable
      *            支持
-     * 
+     *
      *            <ul>
      *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
      *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
      *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
      *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
      *            </ul>
-     * 
+     *
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -1240,32 +1241,32 @@ public final class CollectionsUtil{
 
     /**
      * 解析迭代集合 <code>beanIterable</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}({@link LinkedHashSet}).
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>返回的是 {@link LinkedHashSet},顺序是参数 <code>beanIterable</code> 元素的顺序</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(2L));
      * list.add(new User(5L));
      * list.add(new User(5L));
-     * 
+     *
      * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id")));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [2,5]
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <T>
@@ -1274,7 +1275,7 @@ public final class CollectionsUtil{
      *            the generic type
      * @param beanIterable
      *            支持
-     * 
+     *
      *            <ul>
      *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
      *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
@@ -1301,7 +1302,7 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>beanIterable</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为value,组成map返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -1309,21 +1310,21 @@ public final class CollectionsUtil{
      * <li>如果有元素 <code>keyPropertyName</code>属性值相同,那么后面的值会覆盖前面的值</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
-     * 
+     *
      * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * {
      * "张飞": 23,
@@ -1331,30 +1332,30 @@ public final class CollectionsUtil{
      * "刘备": 25
      * }
      * </pre>
-     * 
+     *
      * <hr>
      * <p>
      * 如果有元素 <code>keyPropertyName</code>属性值相同,那么后面的值会覆盖前面的值
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("张飞", 25));
-     * 
+     *
      * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * {
      * "张飞": 25,
      * "关羽": 24,
      * }
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <K>
@@ -1393,39 +1394,188 @@ public final class CollectionsUtil{
         }
         return map;
     }
-    //*************************find****************************************************************
+
+    //---------------------------------------------------------------
 
     /**
-     * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称值是 <code>propertyValue</code> 的对应元素.
-     * 
+     * 判断<code>iterable</code>中,是否存在 <code>propertyName</code>属性名称值是 <code>propertyValue</code> 的元素.
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <p>
-     * <b>场景:</b> 从list中查找name是 关羽 的User对象
+     * <b>场景:</b> list中查找是否存在name是 关羽 的User对象
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      * list.add(new User("关羽", 50));
-     * 
+     *
+     * LOGGER.info(CollectionsUtil.exist(list, "name", "关羽"));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * true
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param propertyValue
+     *            指定的值
+     * @return 如果 <code>iterable</code>是null, 返回false<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回false
+     * @since 3.0.8
+     */
+    public static <O, V> boolean exist(Iterable<O> beanIterable,String propertyName,V propertyValue){
+        return null != find(beanIterable, propertyName, propertyValue);
+    }
+
+    /**
+     * 判断是否存在 <code>iterable</code>中, <code>propertyName</code>属性名称和值是 <code>propertyValue</code>是 propertyNameAndPropertyValueMap 的对应元素.
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <p>
+     * <b>场景:</b> 判断list中是否存在 name是 关羽,且年龄是24 的User对象
+     * </p>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("关羽", 50));
+     *
+     * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.exist(list, map)));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * true
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyNameAndPropertyValueMap
+     *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回false
+     * @since 3.0.8
+     */
+    public static <O> boolean exist(Iterable<O> beanIterable,Map<String, ?> propertyNameAndPropertyValueMap){
+        return null != find(beanIterable, propertyNameAndPropertyValueMap);
+    }
+
+    /**
+     * 判断是否存在匹配<code>predicate</code> 的元素.
+     *
+     * <h3>示例:</h3>
+     *
+     * <blockquote>
+     *
+     * <p>
+     * <b>场景:</b> 从list中查找name是 关羽,并且 age等于30的User对象是否存在
+     * </p>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 new User("关羽", 30));
+     *
+     * Map{@code <String, Object>} map = new HashMap{@code <>}();
+     * map.put("name", "关羽");
+     * map.put("age", 30);
+     *
+     * Predicate{@code <User>} predicate = BeanPredicateUtil.equalPredicate(map);
+     *
+     * LOGGER.debug(JsonUtil.format(CollectionsUtil.exist(list, predicate)));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * true
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param iterable
+     *            the iterable to search, may be null
+     * @param predicate
+     *            the predicate to use, may not be null
+     * @return 如果 <code>predicate</code> 是 null,将抛出{@link NullPointerException} <br>
+     *         如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>iterable</code>中没有相关元素匹配 <code>predicate</code>,返回false
+     * @since 3.0.8
+     */
+    public static <O> boolean exist(Iterable<O> iterable,Predicate<O> predicate){
+        return null != find(iterable, predicate);
+    }
+
+    //*************************find****************************************************************
+    /**
+     * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称值是 <code>propertyValue</code> 的对应元素.
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <p>
+     * <b>场景:</b> 从list中查找name是 关羽 的User对象
+     * </p>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("关羽", 50));
+     *
      * LOGGER.info(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * {
      * "age": 24,
      * "name": "关羽"
      * }
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -1457,36 +1607,36 @@ public final class CollectionsUtil{
 
     /**
      * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称和值是 <code>propertyValue</code>是 propertyNameAndPropertyValueMap 的对应元素.
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从list中查找name是 关羽,且年龄是24 的User对象
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      * list.add(new User("关羽", 50));
-     * 
+     *
      * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
      * LOGGER.info(JsonUtil.format(CollectionsUtil.find(list, map)));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * {
      * "age": 24,
      * "name": "关羽"
      * }
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -1517,43 +1667,43 @@ public final class CollectionsUtil{
 
     /**
      * 迭代查找匹配<code>predicate</code> 的第一个元素并返回.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从list中查找name是 关羽,并且 age等于30的User对象
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = toList(//
      *                 new User("张飞", 23),
      *                 new User("关羽", 24),
      *                 new User("刘备", 25),
      *                 new User("关羽", 30));
-     * 
+     *
      * Map{@code <String, Object>} map = new HashMap{@code <>}();
      * map.put("name", "关羽");
      * map.put("age", 30);
-     * 
+     *
      * Predicate{@code <User>} predicate = BeanPredicateUtil.equalPredicate(map);
-     * 
+     *
      * User user = CollectionsUtil.find(list, predicate);
      * LOGGER.debug(JsonUtil.format(user));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * {
      * "age": 30,
      * "name": "关羽"
      * }
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -1582,33 +1732,33 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>beanIterable</code>,获得元素 <code>bean</code>的 <code>propertyName</code>的值,判断是否在<code>propertyValues</code>
      * 数组中;如果在,将该对象存入list中返回.
-     * 
+     *
      * <h3>注意:</h3>
-     * 
+     *
      * <blockquote>
      * <p>
      * 查询的结果的顺序按照原来 <code>beanIterable</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValues</code>
      * 顺序排序的话,可以将结果再调用{@link SortUtil#sortListByFixedOrderPropertyValueArray(List, String, Object...)}
      * </p>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
-     * 
+     *
      * String[] array = { "刘备", "关羽" };
      * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", array)));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
        [{
                "age": 24,
@@ -1618,7 +1768,7 @@ public final class CollectionsUtil{
                "name": "刘备"
        }]
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -1647,7 +1797,7 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>beanIterable</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否在<code>propertyValueList</code>
      * 集合中;如果在,将该对象存入list中返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -1656,29 +1806,29 @@ public final class CollectionsUtil{
      * <li>和该方法正好相反的是 {@link #selectRejected(Iterable, String, Collection)}</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 查询 name属性是"张飞"或者是"刘备"的 User list
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
-     * 
+     *
      * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
      * propertyValueList.add("张飞");
      * propertyValueList.add("刘备");
      * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", propertyValueList)));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
     [{
                 "age": 23,
@@ -1687,32 +1837,32 @@ public final class CollectionsUtil{
                 "age": 25,
                 "name": "刘备"
      }]
-     * 
+     *
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>重构:</h3>
-     * 
+     *
      * <blockquote>
      * <p>
      * 对于以下代码:
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * <span style="color:green">// 当前店铺 的物流方式Id set</span>
      * Set{@code <Long>} distributionModeIdSet = new HashSet{@code <>}();
      * for (TemeplateDistributionMode tdCmd : temeplateDistributionModeList){
      *     distributionModeIdSet.add(tdCmd.getDistributionModeId());
      * }
-     * 
+     *
      * <span style="color:green">// 拿到所有的物流方式 列表</span>
      * List{@code <DistributionCommand>} distributionCommandList = freigthMemoryManager.getDistributionList();
-     * 
+     *
      * <span style="color:green">// 根据 物流方式ID 找出 支持本商铺的 DistributionCommand</span>
      * List{@code <DistributionCommand>} curShopDistributionCommandList = new ArrayList{@code <>}();
-     * 
+     *
      * for (Long modeId : distributionModeIdSet){
      *     for (DistributionCommand distributionCmd : distributionCommandList){
      *         if (modeId.equals(distributionCmd.getDistributionModeId())){
@@ -1721,21 +1871,21 @@ public final class CollectionsUtil{
      *     }
      * }
      * </pre>
-     * 
+     *
      * <b>可以重构成:</b>
-     * 
+     *
      * <pre class="code">
      * <span style="color:green">// 当前店铺 的物流方式Id set</span>
      * Set{@code <Long>} distributionModeIdSet = CollectionsUtil.getPropertyValueSet(temeplateDistributionModeList, "distributionModeId");
      * <span style="color:green">// 拿到所有的物流方式 列表</span>
      * List{@code <DistributionCommand>} distributionCommandList = freigthMemoryManager.getDistributionList();
-     * 
+     *
      * <span style="color:green">// 根据 物流方式ID 找出 支持本商铺的 DistributionCommand</span>
      * List{@code <DistributionCommand>} curShopDistributionCommandList = CollectionsUtil.select(distributionCommandList, "distributionModeId", distributionModeIdSet);
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the generic type
      * @param <V>
@@ -1762,21 +1912,21 @@ public final class CollectionsUtil{
 
     /**
      * 按照指定的 {@link Predicate},返回查询出来的集合.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>和该方法正好相反的是 {@link #selectRejected(Iterable, Predicate)}</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例1:</h3>
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 查找等于 1的元素
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <Long>} list = new ArrayList{@code <>}();
      * list.add(1L);
@@ -1785,36 +1935,36 @@ public final class CollectionsUtil{
      * list.add(3L);
      * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate{@code <Long>}(1L))));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [1,1]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>示例2:</h3>
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 查找大于 10的元素
      * </p>
-     * 
+     *
      * <pre class="code">
      * Comparator{@code <Integer>} comparator = ComparatorUtils.naturalComparator();
      * Predicate{@code <Integer>} predicate = new ComparatorPredicate{@code <Integer>}(10, comparator, Criterion.LESS);
-     * 
+     *
      * List{@code <Integer>} select = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
      * LOGGER.debug(JsonUtil.format(select, 0, 0));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [30,55,88,12]
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -1845,34 +1995,34 @@ public final class CollectionsUtil{
      * <code>propertyValues</code> 时候的list.
      *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 查询name 不是刘备 也不是张飞的 User list元素
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
-     * 
+     *
      * List{@code <User>} selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
      * LOGGER.info(JsonUtil.format(selectRejected));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [{
      * "age": 24,
      * "name": "关羽"
      * }]
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -1901,40 +2051,40 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>beanIterable</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否不在<code>propertyValueList</code>
      * 集合中;<span style="color:red">如果不在</span>,将该对象存入list中返回.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 查询 name属性是不是"张飞",也不是"刘备"的 User list
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
-     * 
+     *
      * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
      * propertyValueList.add("张飞");
      * propertyValueList.add("刘备");
      * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", propertyValueList)));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [{
      * "age": 24,
      * "name": "关羽"
      * }]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -1968,33 +2118,33 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>beanIterable</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,<span style="color:red">如果不匹配</span>
      * ,将该对象存入list中返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>和该方法正好相反的是 {@link #select(Iterable, Predicate)}</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从list中查找不等于1的元素
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <Long>} list = toList(1L, 1L, 2L, 3L);
      * CollectionsUtil.selectRejected(list, new EqualPredicate{@code <Long>}(1L))
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * 2L, 3L
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -2016,83 +2166,83 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象,返回<b>新的list</b>.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("xinge");
      * list.add("feilong1");
      * list.add("feilong2");
      * list.add("feilong2");
-     * 
+     *
      * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
      * List{@code <Object>} collect = CollectionsUtil.collect(list, nullTransformer);
      * LOGGER.info(JsonUtil.format(collect, 0, 0));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [null,null,null,null]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>更多的,使用这个方法来处理两个不同类型的转换:</h3>
-     * 
+     *
      * <blockquote>
      * <p>
      * 比如购物车功能,有游客购物车<b>CookieShoppingCartLine</b>以及内存购物车对象
      * <b>ShoppingCartLineCommand</b>,两个数据结构部分元素相同,<br>
      * 用户登陆需要把<b>cookie</b>中的购物车转成内存购物车<b>ShoppingCartLineCommand</b> list,这时我们可以先创建<b>ToShoppingCartLineCommandTransformer</b>
      * </p>
-     * 
+     *
      * <p>
      * 代码示例:
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * class <b>ToShoppingCartLineCommandTransformer</b> implements <b>Transformer</b>{@code <CookieShoppingCartLine, ShoppingCartLineCommand>}{
-     * 
+     *
      *     private static final String[] COPY_PROPERTY_NAMES = {"skuId","extentionCode","quantity","createTime","settlementState","lineGroup" };
-     * 
+     *
      *     public ShoppingCartLineCommand <b>transform</b>(CookieShoppingCartLine cookieShoppingCartLine){
      *         <span style="color:green">// 将cookie中的购物车 转换为 shoppingCartLineCommand</span>
      *         ShoppingCartLineCommand shoppingLineCommand = new ShoppingCartLineCommand();
      *         PropertyUtil.copyProperties(shoppingLineCommand, cookieShoppingCartLine, COPY_PROPERTY_NAMES);
-     * 
+     *
      *         shoppingLineCommand.setId(cookieShoppingCartLine.getId());
      *         shoppingLineCommand.setGift(null == cookieShoppingCartLine.getIsGift() ? false : cookieShoppingCartLine.getIsGift());
-     * 
+     *
      *         return shoppingLineCommand;
      *     }
      * }
-     * 
+     *
      * </pre>
-     * 
+     *
      * <p>
      * 然后调用:
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * public List{@code <ShoppingCartLineCommand>} load(HttpServletRequest request){
      *     <span style="color:green">// 获取cookie中的购物车行集合</span>
      *     List{@code <CookieShoppingCartLine>} cookieShoppingCartLineList = getCookieShoppingCartLines(request);
      *     if (isNullOrEmpty(cookieShoppingCartLineList)){
      *         return null;
      *     }
-     * 
+     *
      *     return CollectionsUtil.collect(cookieShoppingCartLineList, new ToShoppingCartLineCommandTransformer());
      * }
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <O>
@@ -2117,64 +2267,64 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>inputBeanIterable</code>,将每个元素使用转换程成新的 outputListBeanType 类型对象(如有需要只copy传入的<code>includePropertyNames</code>属性)
      * 返回<b>新的list</b>.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
      * 已知有以下两个类 User 和 Customer
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * public class User{
-     * 
-     *     // The id. 
+     *
+     *     // The id.
      *     private Long id = 0L;
-     * 
-     *     //** The name. 
+     *
+     *     //** The name.
      *     private String name = "feilong";
-     * 
-     *     //** 年龄. 
+     *
+     *     //** 年龄.
      *     private Integer age;
-     * 
+     *
      *     //setter /getter
-     * 
+     *
      *     public User(Long id, String name){
      *         this.id = id;
      *         this.name = name;
      *     }
-     * 
+     *
      * }
-     * 
+     *
      * </pre>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * public class Customer{
-     * 
-     *     //** The id. 
+     *
+     *     //** The id.
      *     private long id;
-     * 
-     *     //* The name. 
+     *
+     *     //* The name.
      *     private String name;
-     * 
+     *
      *     //setter /getter
-     * 
+     *
      * }
-     * 
+     *
      * </pre>
-     * 
+     *
      * 此时有以下的 List{@code <User>} 需要转换成List{@code <Customer>}
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * List{@code <User>} list = toList(//
      *                 new User(23L, "张飞"),
      *                 new User(24L, "关羽"),
      *                 new User(25L, "刘备"));
      * </pre>
-     * 
+     *
      * <b>以前你需要如此这般写:</b>
-     * 
+     *
      * <pre class="code">
      * List{@code <Customer>} customerList = new ArrayList{@code <>}();
      * for (User user : list){
@@ -2184,33 +2334,33 @@ public final class CollectionsUtil{
      *     customerList.add(customer);
      * }
      * </pre>
-     * 
+     *
      * <p>
      * 如果属性很多,书写代码很繁琐
      * </p>
-     * 
+     *
      * <p>
      * 此时你可以这么写:
      * </p>
-     * 
+     *
      * <pre class="code">
      *  List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class);
      * </pre>
-     * 
+     *
      * <p>
      * 一行代码搞定集合转换问题
      * </p>
-     * 
+     *
      * <p>
      * 如果你只想转换id属性,你可以:
      * </p>
-     * 
+     *
      * <pre class="code">
      *  List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class,"id");
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -2251,31 +2401,31 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>inputIterator</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
-     * 
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 一个简单的将list中的所有元素转成null
      * </p>
-     * 
+     *
      * <pre class="code">
      * List{@code <String>} list = toList("xinge", "feilong1", "feilong2", "feilong2");
-     * 
+     *
      * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
      * List{@code <Object>} collect = CollectionsUtil.collect(list.iterator(), nullTransformer);
      * LOGGER.info(JsonUtil.format(collect, 0, 0));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * [null,null,null,null]
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the type of object in the output collection
      * @param <T>
@@ -2298,41 +2448,41 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>beanIterable</code>,以 元素的 <code>propertyName</code>属性值为key,相同值的元素组成list作为value,封装成map返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * 
+     *
      * <li>
      * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素对象中 <code>propertyName</code>的值,value是<code>beanIterable</code>
      * 中的元素对象;
      * </li>
-     * 
+     *
      * <li>顺序是 <code>beanIterable</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
-     * 
+     *
      * <li>属性<code>propertyName</code>值相同的元素,组成集合 list</li>
      * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Iterable, String)}方法</li>
      * </ol>
      * </blockquote>
-     * 
-     * 
+     *
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = toList(
      *                 new User("张飞", 23),
      *                 new User("刘备", 25),
      *                 new User("刘备", 30));
-     * 
+     *
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name");
      * LOGGER.debug(JsonUtil.format(map));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
     {
         "张飞": [ {
@@ -2351,7 +2501,7 @@ public final class CollectionsUtil{
         ]
     }
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <T>
@@ -2376,32 +2526,32 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>beanIterable</code>,找到符合条件的 <code>includePredicate</code>的元素,以元素的 <code>propertyName</code>
      * 属性值为key,相同值的元素组成list作为value,封装成map返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * 
+     *
      * <li>
      * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素对象中 <code>propertyName</code>的值,value是<code>beanIterable</code>
      * 中的元素对象;
      * </li>
-     * 
+     *
      * <li>
      * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}
      * </li>
-     * 
+     *
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 将age {@code >} 20的User,按照name 进行 group
      * </p>
-     * 
+     *
      * <pre class="code">
         List{@code <User>} list = new ArrayList{@code <>}();
         list.add(new User("张飞", 10));
@@ -2419,9 +2569,9 @@ public final class CollectionsUtil{
         });
         LOGGER.info(JsonUtil.format(map));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
     {
         "张飞": [{
@@ -2438,19 +2588,19 @@ public final class CollectionsUtil{
         ]
     }
      * </pre>
-     * 
+     *
      * <p>
      * 当然,对于上述代码,你还可以优化成:
      * </p>
-     * 
+     *
      * <pre class="code">
      * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name", comparatorPredicate);
      * </pre>
-     * 
+     *
      * 参见
      * {@link BeanPredicateUtil#comparatorPredicate(String, Comparable, com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion)}
-     * 
+     *
      * </blockquote>
      *
      * @param <T>
@@ -2489,7 +2639,7 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>beanIterable</code>,将元素使用<code>keyTransformer</code>转成key,相同值的元素组成list作为value,封装成map返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -2497,27 +2647,27 @@ public final class CollectionsUtil{
      * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
      * <code>beanIterable</code>中的元素对象(相同key值,组成list);
      * </li>
-     * 
+     *
      * <li>
      * 返回的{@link LinkedHashMap}顺序,是 <code>beanIterable</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}
      * </li>
-     * 
+     *
      * </ol>
      * </blockquote>
-     * 
-     * 
+     *
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从user list中,提取user的姓名的姓为key,user组成list,返回map
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * User mateng55 = new User("马腾", 55);
      * User machao28 = new User("马超", 28);
      * User madai27 = new User("马岱", 27);
@@ -2528,27 +2678,27 @@ public final class CollectionsUtil{
      * User guanping32 = new User("关平", 32);
      * User guansuo31 = new User("关索", 31);
      * User guanxing20 = new User("关兴", 18);
-     * 
+     *
      * <span style="color:green">//---------------------------------------------------------------</span>
      * List{@code <User>} list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
-     * 
+     *
      * <span style="color:green">//---------------------------------------------------------------</span>
-     * 
+     *
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list,new Transformer{@code <User, String>}(){
-     * 
+     *
      *     &#64;Override
      *     public String transform(User user){
      *         <span style="color:green">//提取名字 的姓</span>
      *         return user.getName().substring(0, 1);
      *     }
      * });
-     * 
+     *
      * LOGGER.debug(JsonUtil.format(map));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
     {
         "马":[{
@@ -2589,7 +2739,7 @@ public final class CollectionsUtil{
         ]
     }
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <T>
@@ -2612,7 +2762,7 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>beanIterable</code>,找到符合条件的 <code>includePredicate</code>的元素,将元素使用<code>keyTransformer</code>转成key
      * ,相同值的元素组成list作为value,封装成map返回.
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -2620,27 +2770,27 @@ public final class CollectionsUtil{
      * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
      * <code>beanIterable</code>中的元素对象(相同key值,组成list);
      * </li>
-     * 
+     *
      * <li>
      * 返回的{@link LinkedHashMap}顺序,是 <code>beanIterable</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}
      * </li>
-     * 
+     *
      * </ol>
      * </blockquote>
-     * 
-     * 
+     *
+     *
      * <h3>示例:</h3>
-     * 
+     *
      * <blockquote>
-     * 
+     *
      * <p>
      * <b>场景:</b> 从user list中,提取 年龄 大于20的user,user的姓名的姓为key,user组成list,返回map
      * </p>
-     * 
+     *
      * <pre class="code">
-     * 
+     *
      * User mateng55 = new User("马腾", 55);
      * User machao28 = new User("马超", 28);
      * User madai27 = new User("马岱", 27);
@@ -2651,28 +2801,28 @@ public final class CollectionsUtil{
      * User guanping32 = new User("关平", 32);
      * User guansuo31 = new User("关索", 31);
      * User guanxing20 = new User("关兴", 18);
-     * 
+     *
      * <span style="color:green">//---------------------------------------------------------------</span>
      * List{@code <User>} list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
-     * 
+     *
      * <span style="color:green">//---------------------------------------------------------------</span>
-     * 
+     *
      * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, comparatorPredicate, new Transformer{@code <User, String>}(){
-     * 
+     *
      *     &#64;Override
      *     public String transform(User user){
      *         <span style="color:green">//提取名字 的姓</span>
      *         return user.getName().substring(0, 1);
      *     }
      * });
-     * 
+     *
      * LOGGER.debug(JsonUtil.format(map));
-     * 
+     *
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
     {
             "马":[{
@@ -2708,7 +2858,7 @@ public final class CollectionsUtil{
                 }]
         }
      * </pre>
-     * 
+     *
      * </blockquote>
      *
      * @param <T>
@@ -2748,37 +2898,37 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>iterable</code>,以元素的 <code>propertyName</code>属性值为key,元素为value,封装成map返回(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
-     * 
+     *
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>返回的{@link LinkedHashMap},key是 <code>iterable</code>中的元素对象中 <code>propertyName</code>的值,value是
      * <code>beanIterable</code>中的元素对象;</li>
-     * 
+     *
      * <li>顺序是 <code>beanIterable</code> <code>propertyName</code>的值 顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
-     * 
+     *
      * <li>间接的可以做到基于某个属性值去重的效果</li>
      * <li>如果value需要是集合的话,可以调用 {@link #group(Iterable, String)}方法</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * <h3>示例:</h3>
      * <blockquote>
-     * 
+     *
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("刘备", 25));
      * list.add(new User("刘备", 30));
-     * 
+     *
      * Map{@code <String, User>} map = CollectionsUtil.groupOne(list, "name");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
-     * 
+     *
      * <b>返回:</b>
-     * 
+     *
      * <pre class="code">
      * {
         "张飞":         {
@@ -2791,9 +2941,9 @@ public final class CollectionsUtil{
         }
     }
      * </pre>
-     * 
+     *
      * </blockquote>
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param <O>
@@ -2833,7 +2983,7 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code ArrayList} instance .
-     * 
+     *
      * @param <E>
      *            the element type
      * @return the array list
@@ -2845,7 +2995,7 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code LinkedList} instance .
-     * 
+     *
      * @param <E>
      *            the element type
      * @return the linked list
@@ -2857,7 +3007,7 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code CopyOnWriteArrayList} instance .
-     * 
+     *
      * @param <E>
      *            the element type
      * @return a new, empty {@code CopyOnWriteArrayList}
@@ -2871,7 +3021,7 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code newHashSet} instance .
-     * 
+     *
      * @param <E>
      *            the element type
      * @return the hash set
