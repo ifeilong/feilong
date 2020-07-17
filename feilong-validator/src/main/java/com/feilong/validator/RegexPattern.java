@@ -218,10 +218,12 @@ import java.util.regex.Pattern;
  * <td>[^a-z]</td>
  * <td>负值字符范围.匹配任何不在指定范围内的任意字符.例如,'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符.</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>\b</td>
  * <td>匹配一个单词边界,也就是指单词和空格间的位置.例如, 'er\b' 可以匹配"never" 中的 'er',但不能匹配 "verb" 中的 'er'.</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>\B</td>
  * <td>匹配非单词边界.'er\B' 能匹配 "verb" 中的 'er',但不能匹配 "never" 中的 'er'.</td>

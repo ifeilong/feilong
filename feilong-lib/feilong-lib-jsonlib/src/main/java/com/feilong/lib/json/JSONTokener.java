@@ -163,13 +163,15 @@ public class JSONTokener{
     }
 
     /**
-     * Return the characters up to the next close quote character. Backslash
-     * processing is done. The formal JSON format does not allow strings in
-     * single quotes, but an implementation is allowed to accept them.
+     * Return the characters up to the next close quote character.
+     * 
+     * Backslash processing is done.
+     * 
+     * The formal JSON format does not allow strings in single quotes, but an implementation is allowed to accept them.
      *
      * @param quote
-     *            The quoting character, either <code>"</code>&nbsp;<small>(double
-     *            quote)</small> or <code>'</code>&nbsp;<small>(single quote)</small>.
+     *            The quoting character, either <code>"</code>&nbsp;<small>(double quote)</small> or <code>'</code>&nbsp;<small>(single
+     *            quote)</small>.
      * @return A String.
      */
     private String nextString(char quote){

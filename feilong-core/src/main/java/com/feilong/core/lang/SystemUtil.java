@@ -148,14 +148,9 @@ import com.feilong.core.bean.ConvertUtil;
  * <td>java.library.path</td>
  * <td>D:\\Program Files\\Java\\jdk1.6.0_37\\bin;C:\\Windows\\Sun\\Java\\bin;C:\\Windows\\system32;C:\\Windows;D:/Program
  * Files/Java/jre6/bin/client;D:/Program Files/Java/jre6/bin;D:/Program Files/Java/jre6/lib/i386;C:\\Program Files (x86)\\NVIDIA
- * Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Common
- * Files\\NetSarang;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;
- * C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files
+ * Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files
  * (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\ATI Technologies\\ATI.ACE\\Core-Static;C:\\Program
- * Files\\TortoiseSVN\\bin;D:\\Program Files\\Java\\jdk1.6.0_37\\bin;D:\\FeiLong Soft;D:\\FeiLong Soft\\Essential\\run;D:\\FeiLong
- * Soft\\Essential\\Development\\apache-ant-1.9.3\\bin;D:\\FeiLong Soft\\Essential\\Development\\apache-maven-3.2.1\\bin;D:\\FeiLong
- * Soft\\Datebase\\postgresql\\postgresql-9.2.4-1-windows-x64-binaries\\bin;;D:\\FeiLong
- * Soft\\Essential\\Development\\eclipse-jee-kepler-SR2-win32;;.</td>
+ * Files\\TortoiseSVN\\bin;.</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>java.runtime.name</td>

@@ -21,7 +21,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
+
+                MyTestMain.class,
                 GetDocumentTest.class
+
         //                
 })
 public class SuiteTests{

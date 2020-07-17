@@ -17,11 +17,6 @@ package com.feilong.net.jsoup;
 
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.6
- */
 public class GetDocumentTest{
 
     /**

@@ -15,6 +15,8 @@
  */
 package com.feilong.net.jsoup;
 
+import static org.junit.Assert.assertEquals;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
@@ -29,15 +31,13 @@ public class MyTestMain extends AbstractTest{
     public void test(){
         String html = "<html><head><title> 开源中国社区 </title></head>" + "<body><p> 这里是 jsoup 项目的相关文章 </p></body></html>";
         Document doc = Jsoup.parse(html);
-        LOGGER.debug(doc.text());
-        // 输出 : 
-        // <p><a href="http://www.oschina.net/" rel="nofollow"> 开源中国社区 </a></p> 
+        assertEquals("开源中国社区 这里是 jsoup 项目的相关文章", doc.text());
     }
 
     @Test
     public void testMyTestMain(){
         String unsafe = "<p><a href='http://www.oschina.net/' onclick='stealCookies()'>  开源中国社区 </a></p>";
         String safe = Jsoup.clean(unsafe, Whitelist.basic());
-        LOGGER.debug(safe);
+        assertEquals("<p><a href=\"http://www.oschina.net/\" rel=\"nofollow\"> 开源中国社区 </a></p>", safe);
     }
 }
