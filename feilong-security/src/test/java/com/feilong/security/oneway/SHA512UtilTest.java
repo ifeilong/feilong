@@ -17,12 +17,24 @@ package com.feilong.security.oneway;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
+import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
 public class SHA512UtilTest extends AbstractSecurityTest{
+
+    @Test
+    public void encodeFile() throws IOException{
+        String encodeFile = SHA512Util.encodeFile(LOCATION);
+        assertEquals(
+                        "ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff",
+                        encodeFile);
+        assertEquals(encodeFile, DigestUtils.sha512Hex(InputStreamUtil.getInputStream(LOCATION)));
+    }
 
     @Test
     public void encode121(){
@@ -32,6 +44,23 @@ public class SHA512UtilTest extends AbstractSecurityTest{
     @Test
     public void encode12(){
         LOGGER.debug(debugSecurityValue(SHA512Util.encode("2284208963")));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testSHA512UtilTestNull(){
+        SHA512Util.encodeFile(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA512UtilTestEmpty(){
+        SHA512Util.encodeFile("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA512UtilTestBlank(){
+        SHA512Util.encodeFile(" ");
     }
 
 }

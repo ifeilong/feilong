@@ -15,15 +15,23 @@
  */
 package com.feilong.security.oneway;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+
 import org.junit.Test;
 
 import com.feilong.security.AbstractSecurityTest;
 
 public class Sm3UtilTest extends AbstractSecurityTest{
 
-    /**
-     * Encode11.
-     */
+    @Test
+    public void encodeFile() throws IOException{
+        String encodeFile = Sm3Util.encodeFile(LOCATION);
+        assertEquals("55e12e91650d2fec56ec74e1d3e4ddbfce2ef3a65890c2a19ecf88a307e76a23", encodeFile);
+        //assertEquals(encodeFile, DigestUtils.sha256Hex(InputStreamUtil.getInputStream(location)));
+    }
+
     @Test
     public void encode11(){
         String json = "{\"name\":\"Marydon\",\"website\":\"http://www.cnblogs.com/Marydon20170307\"}";
@@ -34,5 +42,22 @@ public class Sm3UtilTest extends AbstractSecurityTest{
     public void encode112(){
         String json = "你好";
         LOGGER.debug(debugSecurityValue(Sm3Util.encode(json)));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testSm3UtilTestNull(){
+        Sm3Util.encodeFile(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSm3UtilTestEmpty(){
+        Sm3Util.encodeFile("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSm3UtilTestBlank(){
+        Sm3Util.encodeFile(" ");
     }
 }

@@ -18,13 +18,11 @@ package com.feilong.security.oneway;
 import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.SystemUtil;
+import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
@@ -32,22 +30,17 @@ public class MD5UtilTest extends AbstractSecurityTest{
 
     @Test
     public void encodeFile() throws IOException{
-        String filepath = SystemUtil.USER_HOME + "/.gitconfig";
-        String encodeFile = MD5Util.encodeFile(filepath);
-
-        File file = new File(filepath);
-        FileInputStream fileInputStream = new FileInputStream(file);
-        String md5Hex = DigestUtils.md5Hex(fileInputStream);
-
-        assertEquals("cbc5db20a011961d6c72cb4f84b2a9b2", md5Hex);
-        assertEquals(encodeFile, md5Hex);
-
+        String encodeFile = MD5Util.encodeFile(LOCATION);
+        assertEquals("098f6bcd4621d373cade4e832627b4f6", encodeFile);
+        assertEquals(encodeFile, DigestUtils.md5Hex(InputStreamUtil.getInputStream(LOCATION)));
     }
 
     @Test
     public void encode121(){
         assertEquals(DigestUtils.md5Hex("2284208963"), MD5Util.encode("2284208963"));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Encode11.
@@ -70,4 +63,22 @@ public class MD5UtilTest extends AbstractSecurityTest{
                         MD5Util.encode("1230000000456AAAAAAAAAAAAAAAIDR1120/01/2010 01:01:0112345678901234561234567890123456")
                                         .toUpperCase());
     }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testMD5UtilTestNull(){
+        MD5Util.encodeFile(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA1UtilTestEmpty(){
+        MD5Util.encodeFile("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMD5UtilTestBlank(){
+        MD5Util.encodeFile(" ");
+    }
+
 }

@@ -17,12 +17,22 @@ package com.feilong.security.oneway;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
+import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
 public class SHA256UtilTest extends AbstractSecurityTest{
+
+    @Test
+    public void encodeFile() throws IOException{
+        String encodeFile = SHA256Util.encodeFile(LOCATION);
+        assertEquals("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", encodeFile);
+        assertEquals(encodeFile, DigestUtils.sha256Hex(InputStreamUtil.getInputStream(LOCATION)));
+    }
 
     @Test
     public void encode121(){
@@ -32,6 +42,23 @@ public class SHA256UtilTest extends AbstractSecurityTest{
     @Test
     public void encode12(){
         LOGGER.debug(debugSecurityValue(SHA256Util.encode("2284208963")));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testSHA256UtilTestNull(){
+        SHA256Util.encodeFile(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA256UtilTestEmpty(){
+        SHA256Util.encodeFile("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA256UtilTestBlank(){
+        SHA256Util.encodeFile(" ");
     }
 
 }

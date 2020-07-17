@@ -18,6 +18,12 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-io</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
 		<!-- feilong-json -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

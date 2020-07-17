@@ -15,6 +15,8 @@
  */
 package com.feilong.security;
 
+import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
+
 import com.feilong.test.AbstractTest;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -31,6 +33,8 @@ public abstract class AbstractSecurityTest extends AbstractTest{
 
     /** 默认加密解密的key. */
     protected static final String KEY        = "feilong";
+
+    protected static final String LOCATION   = CLASSPATH_URL_PREFIX + "/forSecurityFile.txt";
 
     //---------------------------------------------------------------
 

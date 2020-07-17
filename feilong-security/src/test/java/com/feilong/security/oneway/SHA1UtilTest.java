@@ -17,40 +17,21 @@ package com.feilong.security.oneway;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.SystemUtil;
+import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
-/**
- * The Class SHA1UtilTest.
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @version 1.0 2011-2-7 上午01:12:36
- */
 public class SHA1UtilTest extends AbstractSecurityTest{
 
-    /**
-     * Encode file.
-     * 
-     * @throws IOException
-     */
     @Test
     public void encodeFile() throws IOException{
-        String filepath = SystemUtil.USER_HOME + "/.gitconfig";
-        String encodeFile = SHA1Util.encodeFile(filepath);
-
-        LOGGER.debug(debugSecurityValue(encodeFile));//9163e830c3a3e74bc70d9744f33642cb46f951ba
-
-        File file = new File(filepath);
-        FileInputStream fileInputStream = new FileInputStream(file);
-
-        assertEquals(encodeFile, DigestUtils.sha1Hex(fileInputStream));
+        String encodeFile = SHA1Util.encodeFile(LOCATION);
+        assertEquals("a94a8fe5ccb19ba61c4c0873d391e987982fbbd3", encodeFile);
+        assertEquals(encodeFile, DigestUtils.sha1Hex(InputStreamUtil.getInputStream(LOCATION)));
     }
 
     @Test
@@ -63,9 +44,6 @@ public class SHA1UtilTest extends AbstractSecurityTest{
         LOGGER.debug(debugSecurityValue(SHA1Util.encode("2284208963")));
     }
 
-    /**
-     * Encode1.
-     */
     @Test
     public void encode1(){
         LOGGER.debug(debugSecurityValue(SHA1Util.encode("521000")));
@@ -84,6 +62,23 @@ public class SHA1UtilTest extends AbstractSecurityTest{
                         + "addssadsaadasdasdasdasaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdaaddssadsaadasdasdasdasdasdasdasdadasaddssadsaadasdasdasdadasdasdasdadasaddssadsaadasdasdasda"
                         + "sdasdasdadasaddssadsaad";
         LOGGER.debug(debugSecurityValue(SHA1Util.encode(origin)));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testSHA1UtilTestNull(){
+        SHA1Util.encodeFile(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA1UtilTestEmpty(){
+        SHA1Util.encodeFile("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA1UtilTestBlank(){
+        SHA1Util.encodeFile(" ");
     }
 
 }

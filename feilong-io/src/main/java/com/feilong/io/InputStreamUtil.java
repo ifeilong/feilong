@@ -67,17 +67,15 @@ public final class InputStreamUtil{
      * The handle should always be a reusable resource descriptor,allowing for multiple {@link Resource#getInputStream()} calls.
      * <p>
      * 
-     * <ul>
-     * <li>支持全路径, 比如. "file:C:/test.dat".</li>
-     * <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
-     * <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
-     * <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
-     * </ul>
-     * <p>
      * Note that a Resource handle does not imply an existing resource; you need to invoke {@link Resource#exists} to check for existence.
      *
      * @param location
-     *            the url or path
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
      * @return the input stream
      * @since 3.0.0
      */

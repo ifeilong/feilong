@@ -15,15 +15,14 @@
  */
 package com.feilong.security.oneway;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.lang.StringUtil;
-import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
+import com.feilong.io.InputStreamUtil;
+import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -138,12 +137,16 @@ final class OnewayEncryption{
      *
      * @param onewayType
      *            the oneway type
-     * @param filePath
-     *            文件路径 {@link java.io.File#File(String)}
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>filePath</code> 文件不存在,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>filePath</code> 不是一个文件,抛出 {@link IllegalArgumentException}<br>
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @return 如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#File(String)
      * @see #getMessageDigest(OnewayType)
      * @see java.io.FileInputStream#read(byte[], int, int)
@@ -151,21 +154,18 @@ final class OnewayEncryption{
      * @see java.security.MessageDigest#digest()
      * @see com.feilong.lib.codec.digest.DigestUtils#updateDigest(MessageDigest, InputStream)
      */
-    public static String encodeFile(OnewayType onewayType,String filePath){
-        Validate.notBlank(filePath, "filePath can't be null/empty!");
+    public static String encodeFile(OnewayType onewayType,String location){
+        Validate.notNull(onewayType, "onewayType can't be null!");
+        Validate.notBlank(location, "location can't be null/empty!");
 
-        File file = new File(filePath);
-        Validate.isTrue(file.exists(), "file:" + filePath + " don't exists!");
-        Validate.isTrue(file.isFile(), filePath + " is not a File!");
+        try (InputStream inputStream = InputStreamUtil.getInputStream(location)){
 
-        //---------------------------------------------------------------
-        //XXX  FileUtil.getFileInputStream
-        try (FileInputStream fileInputStream = new FileInputStream(file)){
             MessageDigest messageDigest = getMessageDigest(onewayType);
-            byte[] bytes = DigestUtils.updateDigest(messageDigest, fileInputStream).digest();
+            byte[] bytes = DigestUtils.updateDigest(messageDigest, inputStream).digest();
             return ByteUtil.bytesToHexStringLowerCase(bytes);//这个值和上面的一样
+
         }catch (Exception e){
-            throw new EncryptionException(Slf4jUtil.format("onewayType:[{}],filePath:[{}]", onewayType, filePath), e);
+            throw new EncryptionException(Slf4jUtil.format("onewayType:[{}],filePath:[{}]", onewayType, location), e);
         }
     }
 

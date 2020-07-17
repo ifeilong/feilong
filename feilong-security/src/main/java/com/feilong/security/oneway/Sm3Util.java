@@ -104,16 +104,22 @@ public final class Sm3Util{
     /**
      * 计算文件的单向加密值.
      * 
-     * @param filePath
-     *            文件路径 {@link java.io.File#File(String)}
-     * @return the string
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encodeFile(OnewayType, String)
      * @see com.feilong.lib.codec.digest.DigestUtils#sha384Hex(java.io.InputStream)
      */
-    public static String encodeFile(String filePath){
-        return OnewayEncryption.encodeFile(ONEWAYTYPE, filePath);
+    public static String encodeFile(String location){
+        return OnewayEncryption.encodeFile(ONEWAYTYPE, location);
     }
 
 }

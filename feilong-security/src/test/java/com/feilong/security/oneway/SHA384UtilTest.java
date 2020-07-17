@@ -17,12 +17,22 @@ package com.feilong.security.oneway;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
+import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
 
 public class SHA384UtilTest extends AbstractSecurityTest{
+
+    @Test
+    public void encodeFile() throws IOException{
+        String encodeFile = SHA384Util.encodeFile(LOCATION);
+        assertEquals("768412320f7b0aa5812fce428dc4706b3cae50e02a64caa16a782249bfe8efc4b7ef1ccb126255d196047dfedf17a0a9", encodeFile);
+        assertEquals(encodeFile, DigestUtils.sha384Hex(InputStreamUtil.getInputStream(LOCATION)));
+    }
 
     @Test
     public void encode121(){
@@ -32,6 +42,23 @@ public class SHA384UtilTest extends AbstractSecurityTest{
     @Test
     public void encode12(){
         LOGGER.debug(debugSecurityValue(SHA384Util.encode("2284208963")));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testSHA384UtilTestNull(){
+        SHA384Util.encodeFile(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA384UtilTestEmpty(){
+        SHA384Util.encodeFile("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSHA384UtilTestBlank(){
+        SHA384Util.encodeFile(" ");
     }
 
 }
