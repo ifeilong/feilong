@@ -27,21 +27,52 @@ import com.feilong.net.filetransfer.sftp.SFTPFileTransfer;
 /**
  * 用来构造 {@link com.feilong.net.filetransfer.sftp.SFTPFileTransfer}.
  * 
- * // <!-- sftp scope="prototype" -->
- * // <bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
- * // <property name="sftpFileTransferConfig">
- * // <bean class="com.feilong.net.filetransfer.sftp.SFTPFileTransferConfig">
- * // <property name="hostName" value="#{p_sftp['fileTransfer.sftp.hostName']}" />
- * // <property name="userName" value="#{p_sftp['fileTransfer.sftp.userName']}" />
- * // <property name="password">
- * // <value><![CDATA[#{p_sftp['fileTransfer.sftp.password']}]]></value>
- * // </property>
- * // <property name="port" value="#{p_sftp['fileTransfer.sftp.port']}" />
- * // </bean>
- * // </property>
- * // </bean>
+ * <h3>重构:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 对于以下代码:
+ * </p>
+ * 
+ * <pre class="code">
+{@code 
+    <bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
+        <property name="sftpFileTransferConfig">
+            <bean class="com.feilong.net.filetransfer.sftp.SFTPFileTransferConfig">
+                <property name="hostName" value="*****" />
+                <property name="userName" value="*****" />
+                <property name="password">
+                    <value><![CDATA[*****]]></value>
+                </property>
+                <property name="port" value="*****" />
+
+                <property name="sessionTimeout" value="*****" />
+                <property name="sshConfig" ref="p_sftp-sshConfig" />
+            </bean>
+        </property>
+    </bean>
+}
+ * </pre>
+ * 
+ * <b>可以重构成:</b>
+ * 
+ * <pre class="code">
+ * {@code 
+    <feilong:sftpFileTransfer id="sftpFileTransfer" hostName="*****"
+                              userName="*****"
+                              password="*****"
+                              port="*****"
+                              sessionTimeout="8000"
+    />
+   }
+ * 
+ * </pre>
+ * 
+ * 
+ * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * 
  * @since 3.0.8
  */
 public class SftpFileTransferBeanDefinitionParser extends AbstractBeanDefinitionParser{

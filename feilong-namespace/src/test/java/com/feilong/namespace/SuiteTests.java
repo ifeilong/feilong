@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                WxworkBotTagTest.class,
                 CookieAccessorTagTest.class,
                 SimpleHttpTypeBeanPropertyTagTest.class,
                 AllTagTest.class,

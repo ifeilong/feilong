@@ -26,6 +26,7 @@ import com.feilong.namespace.parser.CookieAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SessionAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SessionKeyAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SftpFileTransferBeanDefinitionParser;
+import com.feilong.namespace.parser.WxworkBotBeanDefinitionParser;
 import com.feilong.namespace.parser.SimpleHttpTypeBeanPropertyBeanDefinitionParser;
 
 /**
@@ -42,13 +43,16 @@ public class FeilongNamespaceHandler extends org.springframework.beans.factory.x
 
                     Pair.of("accessor-session", new SessionAccessorBeanDefinitionParser()),
                     Pair.of("accessor-sessionkey", new SessionKeyAccessorBeanDefinitionParser()),
-                    Pair.of("accessor-cookie",new CookieAccessorBeanDefinitionParser()),
+                    Pair.of("accessor-cookie", new CookieAccessorBeanDefinitionParser()),
 
                     //SimpleHttpTypeBeanProperty
-                    Pair.of("httpTypeBeanProperty",new SimpleHttpTypeBeanPropertyBeanDefinitionParser()),
+                    Pair.of("httpTypeBeanProperty", new SimpleHttpTypeBeanPropertyBeanDefinitionParser()),
 
                     //since 3.0.8
-                    Pair.of("sftpFileTransfer",new SftpFileTransferBeanDefinitionParser())
+                    Pair.of("sftpFileTransfer", new SftpFileTransferBeanDefinitionParser()),
+
+                    //since 3.0.9
+                    Pair.of("wxworkBot", new WxworkBotBeanDefinitionParser())
     //
     );
 
