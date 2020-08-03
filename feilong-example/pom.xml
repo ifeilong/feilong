@@ -1,0 +1,207 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.ifeilong</groupId>
+	<artifactId>feilong-example</artifactId>
+	<version>3.0.9</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- https://github.com/spring-projects/spring-framework/releases -->
+		<version.spring>5.2.7.RELEASE</version.spring>
+
+
+		<!-- https://junit.org/junit4/ -->
+		<version.junit>4.13</version.junit>
+		<version.hamcrest-library>1.3</version.hamcrest-library>
+
+		<!-- http://logging.apache.org/log4j/1.2/download.html -->
+		<version.log4j>1.2.17</version.log4j>
+
+		<!-- https://logback.qos.ch/news.html -->
+		<version.logback>1.2.3</version.logback>
+		<!-- http://www.slf4j.org/news.html -->
+		<version.slf4j>1.7.30</version.slf4j>
+
+		<!-- http://hc.apache.org/downloads.cgi -->
+		<version.httpcomponents>4.5.12</version.httpcomponents>
+
+
+
+
+		<native2ascii-maven-plugin.pattern>**/*.properties</native2ascii-maven-plugin.pattern>
+		<native2ascii-maven-plugin.encoding>utf-8</native2ascii-maven-plugin.encoding>
+
+		<v.maven-surefire-plugin>2.22.2</v.maven-surefire-plugin>
+		<v.maven-compiler-plugin>3.8.1</v.maven-compiler-plugin>
+		<v.native2ascii-maven-plugin>2.0.1</v.native2ascii-maven-plugin>
+
+		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
+		<maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>
+		<maven-compiler-plugin.encoding>utf-8</maven-compiler-plugin.encoding>
+	</properties>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>${version.httpcomponents}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.httpcomponents</groupId>
+					<artifactId>httpclient</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${version.httpcomponents}</version>
+		</dependency>
+
+		<!-- spring-beans version 不限制 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${version.spring}</version>
+		</dependency>
+
+		<!-- spring-context version 不限制 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${version.spring}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${version.spring}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version.slf4j}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${version.slf4j}</version>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${version.log4j}</version>
+		</dependency>
+
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- hamcrest-library -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>${version.hamcrest-library}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- maven-compiler-plugin -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${v.maven-compiler-plugin}</version>
+				<configuration>
+					<!-- 指定高版本的源码和编译后的字节码文件 -->
+					<source>${maven-compiler-plugin.source}</source>
+					<target>${maven-compiler-plugin.target}</target>
+					<encoding>${maven-compiler-plugin.encoding}</encoding>
+					<!-- <verbose>true</verbose> -->
+					<detail>true</detail>
+				</configuration>
+			</plugin>
+
+			<!-- maven-surefire-plugin -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${v.maven-surefire-plugin}</version>
+				<configuration>
+					<!-- 跳过测试 -->
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- native2ascii-maven-plugin 国际化插件 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>${v.native2ascii-maven-plugin}</version>
+
+				<executions>
+					<execution>
+						<id>native2ascii-resources</id>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<phase>process-resources</phase><!-- default -->
+						<configuration>
+							<srcDir>src/main/resources</srcDir><!-- default -->
+							<targetDir>${project.build.outputDirectory}</targetDir>
+
+							<encoding>${native2ascii-maven-plugin.encoding}</encoding>
+							<includes>
+								<include>${native2ascii-maven-plugin.pattern}</include>
+							</includes>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>native2ascii-testResources</id>
+						<goals>
+							<goal>testResources</goal>
+						</goals>
+						<phase>process-test-resources</phase><!-- default -->
+						<configuration>
+							<srcDir>src/test/resources</srcDir><!-- default -->
+							<targetDir>${project.build.testOutputDirectory}</targetDir>
+
+							<encoding>${native2ascii-maven-plugin.encoding}</encoding>
+							<includes>
+								<include>${native2ascii-maven-plugin.pattern}</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>
