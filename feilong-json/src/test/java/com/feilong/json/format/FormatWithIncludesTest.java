@@ -16,48 +16,127 @@
 package com.feilong.json.format;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 
 import java.util.List;
 
 import org.junit.Test;
 
 import com.feilong.json.AbstractJsonTest;
+import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.json.util.PropertyFilter;
 import com.feilong.store.member.User;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 1.12.6
- */
 public class FormatWithIncludesTest extends AbstractJsonTest{
 
+    private final List<User> list = buildList();
+
+    //---------------------------------------------------------------
+
     @Test
-    public void testFormatWithIncludes1(){
-        User user1 = new User("feilong1", 24);
-        user1.setNickNames(toArray("xin.jin", "shuai.ge"));
-        User user2 = new User("feilong2", 240);
-        user2.setNickNames(toArray("xin.jin", "shuai.ge"));
+    public void test(){
+        String formatWithIncludes = JsonUtil.formatWithIncludes(list, "name", "age");
+        // LOGGER.debug(formatWithIncludes);
 
-        List<User> list = toList(user1, user2);
-
-        LOGGER.debug(JsonUtil.formatWithIncludes(list, "name", "age"));
-
-        String[] array = { "id", "name" };
-        LOGGER.debug(JsonUtil.formatWithIncludes(toArray(user1, user2), array));
-
-        LOGGER.debug(JsonUtil.formatWithIncludes(toList("2,5,8", "2,5,9")));
-        LOGGER.debug(JsonUtil.formatWithIncludes(user1));
+        assertThat(
+                        formatWithIncludes,
+                        allOf(
+                                        containsString(
+                                                        "[\n" + "                {\n" + "            \"age\": 24,\n"
+                                                                        + "            \"name\": \"feilong1\"\n" + "        },\n"
+                                                                        + "                {\n" + "            \"age\": 240,\n"
+                                                                        + "            \"name\": null\n" + "        }\n" + "    ]")));
     }
 
-    /**
-     * TestJsonUtilTest.
-     */
+    //---------------------------------------------------------------
+
+    @Test
+    public void test22222(){
+        JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+        javaToJsonConfig.setIncludes("name", "age");
+        javaToJsonConfig.setIsIgnoreNullValueElement(true);
+
+        String formatWithIncludes = JsonUtil.format(list, javaToJsonConfig);
+
+        // LOGGER.debug(formatWithIncludes);
+        assertThat(
+                        formatWithIncludes,
+                        allOf(
+                                        containsString(
+                                                        "[\n" + "                {\n" + "            \"age\": 24,\n"
+                                                                        + "            \"name\": \"feilong1\"\n" + "        },\n"
+                                                                        + "        {\"age\": 240}\n" + "    ]")));
+    }
+
+    @Test
+    public void test22222222(){
+        JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+        javaToJsonConfig.setIncludes("name", "age");
+        javaToJsonConfig.setIsIgnoreNullValueElement(true);
+        javaToJsonConfig.setPropertyFilter(new PropertyFilter(){
+
+            @Override
+            public boolean apply(Object source,String name,Object value){
+                if ("age".equals(name) && toInteger(value) < 100){
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        String formatWithIncludes = JsonUtil.format(list, javaToJsonConfig);
+
+        //LOGGER.debug(formatWithIncludes);
+        assertThat(
+                        formatWithIncludes,
+                        allOf(containsString("[\n" + "        {\"name\": \"feilong1\"},\n" + "        {\"age\": 240}\n" + "    ]")));
+    }
+
+    @Test
+    public void test222(){
+        String[] array = { "id", "name" };
+        String formatWithIncludes = JsonUtil.formatWithIncludes(toArray(list, User.class), array);
+
+        assertThat(
+                        formatWithIncludes,
+                        allOf(
+                                        containsString(
+                                                        "[\n" + "                {\n" + "            \"id\": 0,\n"
+                                                                        + "            \"name\": \"feilong1\"\n" + "        },\n"
+                                                                        + "                {\n" + "            \"id\": 0,\n"
+                                                                        + "            \"name\": null\n" + "        }\n" + "    ]")));
+
+    }
+
+    private List<User> buildList(){
+        User user1 = new User("feilong1", 24);
+        user1.setNickNames(toArray("xin.jin", "shuai.ge"));
+        User user2 = new User((String) null, 240);
+        user2.setNickNames(toArray("xin.jin", "shuai.ge"));
+
+        return toList(user1, user2);
+    }
+
+    @Test
+    public void test1(){
+        String formatWithIncludes = JsonUtil.formatWithIncludes(toList("2,5,8", "2,5,9"));
+        //LOGGER.debug(formatWithIncludes);
+
+        assertThat(formatWithIncludes, allOf(containsString("\"2,5,8\""), containsString("\"2,5,9\"")));
+    }
+
     @Test
     public void testFormatWithIncludes(){
         Object[][] objects = { { "feilong shoe", "500", 1 }, { "feilong shoe2", "5000", 1 } };
-        LOGGER.debug(JsonUtil.formatWithIncludes(objects));
+        String formatWithIncludes = JsonUtil.formatWithIncludes(objects);
+        //LOGGER.debug(formatWithIncludes);
+
+        assertThat(formatWithIncludes, allOf(containsString("\"feilong shoe\",")));
     }
 
 }

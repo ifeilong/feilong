@@ -1,22 +1,20 @@
 package com.feilong.json.format.sdk;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.JavaToJsonConfig;
-import com.feilong.json.JsonHelper;
 import com.feilong.json.JsonUtil;
-import com.feilong.json.builder.JavaToJsonConfigBuilder;
-import com.feilong.json.builder.JsonConfigBuilder;
-import com.feilong.lib.json.JSON;
-import com.feilong.lib.json.JsonConfig;
 
-public class Test2{
+public class PropertyFilterTest{
 
-    private static final Logger       LOGGER        = LoggerFactory.getLogger(Test2.class);
+    private static final Logger       LOGGER        = LoggerFactory.getLogger(PropertyFilterTest.class);
 
     private static final OrderDetails ORDER_DETAILS = build();
 
@@ -36,38 +34,18 @@ public class Test2{
 
             return false;
         });
-        LOGGER.debug(JsonUtil.format(ORDER_DETAILS, javaToJsonConfig));
+        String format = JsonUtil.format(ORDER_DETAILS, javaToJsonConfig);
+        LOGGER.debug(format);
+
+        assertThat(
+                        format,
+                        allOf(
+                                        containsString("{\"chargeDetials\": \"24121\"}"), //
+                                        containsString("\"discountAmt\": \"8888\"")));
 
     }
 
     //---------------------------------------------------------------
-
-    private JsonConfig buildJsonConfig(Object obj){
-        JavaToJsonConfig useJavaToJsonConfig = JavaToJsonConfigBuilder.buildUseJavaToJsonConfig(obj, null);
-        //useJavaToJsonConfig.setIsIgnoreNullValueElement(false);
-
-        JsonConfig jsonConfig = JsonConfigBuilder.build(obj, useJavaToJsonConfig);
-
-        jsonConfig.setJsonPropertyFilter((source,name,value) -> {
-
-            if ("discountDetials".equals(name)){
-                DiscountDetials discountDetials = (DiscountDetials) value;
-
-                if ("0".equals(discountDetials.getDiscountInfo().getDiscountAmt())){
-                    return true;
-                }
-            }
-
-            return false;
-        });
-        return jsonConfig;
-    }
-
-    private void format(JsonConfig jsonConfig,Object obj){
-        JSON json = JsonHelper.toJSON(obj, jsonConfig);
-
-        LOGGER.debug(json.toString(4, 4));
-    }
 
     private static OrderDetails build(){
         OrderDetails orderDetails = new OrderDetails();

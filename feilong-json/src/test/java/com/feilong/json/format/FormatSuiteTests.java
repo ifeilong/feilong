@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.json.format.sdk.PropertyFilterTest;
+
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
@@ -42,6 +44,11 @@ import org.junit.runners.Suite.SuiteClasses;
                 FormatBeanExcludesTest.class,
 
                 FormatBeanSortBeanPropertyTest.class,
+
+                //---------------------------------------------------------------
+                //filter
+                PropertyFilterTest.class,
+                FormatWithIncludesTest.class,
         //
 })
 public class FormatSuiteTests{
