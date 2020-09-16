@@ -15,6 +15,8 @@
  */
 package com.feilong.json.builder;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import com.feilong.lib.json.util.PropertyFilter;
 
 /**
@@ -49,10 +51,14 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
      * @see net.sf.json.util.PropertyFilter#apply(java.lang.Object, java.lang.String, java.lang.Object)
      */
     @Override
+    //返回true 会被过滤
+    // [source] the owner of the property
+    // [name] the name of the property
+    // [value] the value of the property
     public boolean apply(Object source,String name,Object value){
-        // [source] the owner of the property
-        // [name] the name of the property
-        // [value] the value of the property
+        if (isNullOrEmpty(propertyNames)){
+            return false;
+        }
         return !com.feilong.lib.lang3.ArrayUtils.contains(propertyNames, name);
     }
 }

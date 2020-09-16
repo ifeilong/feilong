@@ -130,7 +130,7 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(FormatterUtil.formatToSimpleTable(map));
+            LOGGER.debug("HttpResponse header info:[{}]", FormatterUtil.formatToSimpleTable(map));
         }
         return map;
     }

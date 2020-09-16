@@ -18,28 +18,28 @@ package com.feilong.lib.json.filters;
 
 import com.feilong.lib.json.util.PropertyFilter;
 
+/**
+ * The Class OrPropertyFilter.
+ */
 public class OrPropertyFilter implements PropertyFilter{
 
-    /** The filter 1. */
-    private final PropertyFilter filter1;
-
-    /** The filter 2. */
-    private final PropertyFilter filter2;
+    /** The property filters. */
+    private final PropertyFilter[] propertyFilters;
 
     //---------------------------------------------------------------
 
     /**
      * Instantiates a new or property filter.
      *
-     * @param filter1
-     *            the filter 1
-     * @param filter2
-     *            the filter 2
+     * @param propertyFilters
+     *            the property filters
+     * @since 3.0.10 changge to 动态参数
      */
-    public OrPropertyFilter(PropertyFilter filter1, PropertyFilter filter2){
-        this.filter1 = filter1;
-        this.filter2 = filter2;
+    public OrPropertyFilter(PropertyFilter...propertyFilters){
+        this.propertyFilters = propertyFilters;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Apply.
@@ -53,9 +53,13 @@ public class OrPropertyFilter implements PropertyFilter{
      * @return true, if successful
      */
     @Override
+    //或者的关系,  只要有一个是true ,那么就返回true
     public boolean apply(Object source,String name,Object value){
-        return (filter1 != null && filter1.apply(source, name, value)) || //
-                        (filter2 != null && filter2.apply(source, name, value));
-
+        for (PropertyFilter propertyFilter : propertyFilters){
+            if (propertyFilter != null && propertyFilter.apply(source, name, value)){
+                return true;
+            }
+        }
+        return false;
     }
 }

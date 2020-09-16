@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 是否忽略的工具类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -39,9 +40,17 @@ public class IsIgnoreUtil{
     }
 
     //---------------------------------------------------------------
-
+    /**
+     * 是否忽略.
+     * 
+     * @param beanClass
+     * @param propertyDescriptor
+     * @param exclusions
+     * @return 如果忽略 返回true
+     */
     public static boolean isIgnore(Class<?> beanClass,PropertyDescriptor propertyDescriptor,Collection<String> exclusions){
         String key = propertyDescriptor.getName();
+        //如果属性名字在排除清单里面, 那么忽略
         if (exclusions.contains(key)){
             return true;
         }
@@ -49,6 +58,7 @@ public class IsIgnoreUtil{
         //---------------------------------------------------------------
         Method readMethod = null;
         try{
+            //如果调用 read方法出了异常, 那么忽略
             readMethod = propertyDescriptor.getReadMethod();
         }catch (Exception e){
             // bug 2565295
@@ -57,6 +67,7 @@ public class IsIgnoreUtil{
         }
 
         //---------------------------------------------------------------
+        //如果 read方法是null ,也忽略
         if (readMethod == null){
             LOGGER.trace("Property '{}' of {} has no read method. SKIPPED", key, beanClass);
             return true;

@@ -104,7 +104,7 @@ public final class JsonHelper{
      * @see "org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)"
      * @see com.feilong.lib.json.JSONSerializer#toJSON(Object)
      */
-    static JSON toJSON(Object obj,JsonConfig jsonConfig){
+    public static JSON toJSON(Object obj,JsonConfig jsonConfig){
         JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JAVA_TO_JSON_CONFIG);
 
         if (isNeedConvertToJSONArray(obj)){

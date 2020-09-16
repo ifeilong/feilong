@@ -20,11 +20,6 @@ import java.util.Collection;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.json.util.PropertyFilter;
 
-/**
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.3
- */
 public class JSONTokenerParser{
 
     static JSONObject toJSONObject(JSONTokener jsonTokener,JsonConfig jsonConfig){
@@ -32,6 +27,7 @@ public class JSONTokenerParser{
             throw jsonTokener.syntaxError("A JSONObject text must begin with '{'");
         }
 
+        //排除的属性
         Collection<String> exclusions = jsonConfig.getMergedExcludes();
         PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
 

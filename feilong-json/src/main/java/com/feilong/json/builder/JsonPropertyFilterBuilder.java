@@ -15,7 +15,6 @@
  */
 package com.feilong.json.builder;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 import com.feilong.json.JavaToJsonConfig;
@@ -23,7 +22,7 @@ import com.feilong.lib.json.filters.OrPropertyFilter;
 import com.feilong.lib.json.util.PropertyFilter;
 
 /**
- * The Class JsonPropertyFilterBuilder.
+ * 专门用来构造 {@link PropertyFilter} .
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.0.0
@@ -48,28 +47,11 @@ class JsonPropertyFilterBuilder{
      * @see com.feilong.lib.json.filters.AndPropertyFilter
      */
     static PropertyFilter build(JavaToJsonConfig useJavaToJsonConfig){
-        boolean isIgnoreNullValueElement = useJavaToJsonConfig.getIsIgnoreNullValueElement();
-        //包含
         String[] includes = useJavaToJsonConfig.getIncludes();
-        //---------------------------------------------------------------
-        //不忽视
-        if (!isIgnoreNullValueElement){
-            if (isNotNullOrEmpty(includes)){//不忽视 但是需要输出指定参数
-                return new ArrayContainsPropertyNamesPropertyFilter(includes);
-            }
-            return null;
-        }
-
-        //---------------------------------------------------------------
-        //忽视
-        if (isNullOrEmpty(includes)){
-            //仅仅忽视
-            return IgnoreNullValueElementPropertyFilter.INSTANCE;
-        }
-
         return new OrPropertyFilter(//    
-                        IgnoreNullValueElementPropertyFilter.INSTANCE, //如果是 null value 就不输出
-                        new ArrayContainsPropertyNamesPropertyFilter(includes) //如果不在元素内 也不输出
+                        useJavaToJsonConfig.getIsIgnoreNullValueElement() ? IgnoreNullValueElementPropertyFilter.INSTANCE : null,
+                        useJavaToJsonConfig.getPropertyFilter(),
+                        isNullOrEmpty(includes) ? null : new ArrayContainsPropertyNamesPropertyFilter(includes) //如果不在元素内 也不输出
         );
     }
 }

@@ -20,6 +20,7 @@ import java.util.Map;
 import com.feilong.json.builder.JsonConfigBuilder;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
+import com.feilong.lib.json.util.PropertyFilter;
 
 /**
  * java格式化成json的一些配置.
@@ -270,6 +271,18 @@ public class JavaToJsonConfig extends AbstractConfig{
      */
     private Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap;
 
+    //---------------------------------------------------------------
+
+    /**
+     * 过滤器, 对应{@link com.feilong.lib.json.JsonConfig#getJsonPropertyFilter()} ,
+     * 
+     * <ol>
+     * <li>如果返回true,该属性将会被过滤</li>
+     * </ol>
+     * 
+     * @since 3.0.10
+     */
+    private PropertyFilter                       propertyFilter;
     //---------------------------------------------------------------
 
     /**
@@ -838,6 +851,35 @@ public class JavaToJsonConfig extends AbstractConfig{
      */
     public void setIsIgnoreNullValueElement(boolean isIgnoreNullValueElement){
         this.isIgnoreNullValueElement = isIgnoreNullValueElement;
+    }
+
+    /**
+     * 过滤器, 对应{@link com.feilong.lib.json.JsonConfig#getJsonPropertyFilter()} ,
+     * 
+     * <ol>
+     * <li>如果返回true,该属性将会被过滤</li>
+     * </ol>
+     *
+     * @return the propertyFilter
+     * @since 3.0.10
+     */
+    public PropertyFilter getPropertyFilter(){
+        return propertyFilter;
+    }
+
+    /**
+     * 过滤器, 对应{@link com.feilong.lib.json.JsonConfig#getJsonPropertyFilter()} ,
+     * 
+     * <ol>
+     * <li>如果返回true,该属性将会被过滤</li>
+     * </ol>
+     *
+     * @param propertyFilter
+     *            the propertyFilter to set
+     * @since 3.0.10
+     */
+    public void setPropertyFilter(PropertyFilter propertyFilter){
+        this.propertyFilter = propertyFilter;
     }
 
 }
