@@ -70,6 +70,20 @@ public class HttpRequest{
     //---------------------------------------------------------------
 
     /**
+     * 是否uri trim.
+     * <p>
+     * 有时候程序员在配置uri 的时候,会误操作 uri 前后会多出空格, 这样会导致一些功能不work,要排查好久, <br>
+     * 理论上uri前后是没有空格的, 所以默认为true ,会自动去除前后的空格; <br>
+     * 如果真的有特殊需求, 可以设置为false
+     * </p>
+     * 
+     * @since 3.0.10
+     */
+    private boolean             isTrimUri          = true;
+
+    //---------------------------------------------------------------
+
+    /**
      * The Constructor.
      * 
      * @since 1.5.4
@@ -172,6 +186,16 @@ public class HttpRequest{
         if (isNullOrEmpty(uri)){
             return EMPTY;
         }
+
+        //---------------------------------------------------------------
+
+        //since 3.0.10
+        if (isTrimUri){
+            uri = uri.trim();
+        }
+
+        //---------------------------------------------------------------
+
         //since 1.14.0
         if (uri.contains(SPACE)){
             //W3C标准规定， 当Content-Type为application/x-www-form-urlencoded时，URL中查询参数名和参数值中空格要用加号+替代，
@@ -282,5 +306,40 @@ public class HttpRequest{
      */
     public void setRequestBody(String requestBody){
         this.requestBody = requestBody;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 是否uri trim.
+     * 
+     * <p>
+     * 有时候程序员在配置uri 的时候,会误操作 uri 前后会多出空格, 这样会导致一些功能不work,要排查好久, <br>
+     * 理论上uri前后是没有空格的, 所以默认为true ,会自动去除前后的空格; <br>
+     * 如果真的有特殊需求, 可以设置为false
+     * </p>
+     * 
+     * @param isTrimUri
+     *            the isTrimUri to set
+     * @since 3.0.10
+     */
+    public void setIsTrimUri(boolean isTrimUri){
+        this.isTrimUri = isTrimUri;
+    }
+
+    /**
+     * 是否uri trim.
+     * 
+     * <p>
+     * 有时候程序员在配置uri 的时候,会误操作 uri 前后会多出空格, 这样会导致一些功能不work,要排查好久, <br>
+     * 理论上uri前后是没有空格的, 所以默认为true ,会自动去除前后的空格; <br>
+     * 如果真的有特殊需求, 可以设置为false
+     * </p>
+     * 
+     * @return the isTrimUri
+     * @since 3.0.10
+     */
+    public boolean getIsTrimUri(){
+        return isTrimUri;
     }
 }

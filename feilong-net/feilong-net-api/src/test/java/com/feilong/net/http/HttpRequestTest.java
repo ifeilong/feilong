@@ -39,4 +39,17 @@ public class HttpRequestTest{
         HttpRequest httpRequest = new HttpRequest("https://github.com/ifei long/fei long");
         assertEquals("https://github.com/ifei%20long/fei%20long", httpRequest.getUri());
     }
+
+    @Test
+    public void test1222(){
+        HttpRequest httpRequest = new HttpRequest("https://github.com/ifeilong/fei long ");
+        assertEquals("https://github.com/ifeilong/fei%20long", httpRequest.getUri());
+    }
+
+    @Test
+    public void test12333(){
+        HttpRequest httpRequest = new HttpRequest("https://github.com/ifei long/fei long ");
+        httpRequest.setIsTrimUri(false);
+        assertEquals("https://github.com/ifei%20long/fei%20long%20", httpRequest.getUri());
+    }
 }
