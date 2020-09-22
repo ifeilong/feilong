@@ -16,6 +16,7 @@
 package com.feilong.net.filetransfer;
 
 import com.feilong.json.SensitiveWords;
+import com.feilong.net.UriProcessor;
 
 /**
  * 抽象的文件传输配置.
@@ -48,7 +49,8 @@ public abstract class AbstractFileTransferConfig{
      * @return the hostName
      */
     public String getHostName(){
-        return hostName;
+        //since 3.0.10
+        return UriProcessor.process(hostName, true);
     }
 
     /**

@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
+import com.feilong.net.UriProcessor;
 
 /**
  * 使用{@link JaxWsDynamicClientFactory} 动态调用 WebService服务.
@@ -140,6 +141,9 @@ public class JaxWsDynamicClientUtil{
     @SuppressWarnings("unchecked")
     public static <T> T call(String wsdlUrl,String operationName,Object...params){
         Validate.notBlank(wsdlUrl, "wsdlUrl can't be blank!");
+
+        //since 3.0.10
+        wsdlUrl = UriProcessor.process(wsdlUrl, true);
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             Map<String, Object> traceMap = getTraceMapForLog(wsdlUrl, operationName, params);
@@ -159,8 +163,11 @@ public class JaxWsDynamicClientUtil{
     //---------------------------------------------------------------
 
     /**
+     * 创建 client.
+     *
      * @param wsdlUrl
-     * @return
+     *            the wsdl url
+     * @return the client
      * @since 1.14.0
      */
     static Client createClient(String wsdlUrl){

@@ -16,6 +16,7 @@
 package com.feilong.net.mail.entity;
 
 import com.feilong.json.SensitiveWords;
+import com.feilong.net.UriProcessor;
 
 /**
  * 父类配置.
@@ -120,7 +121,8 @@ public abstract class BaseConfig implements SessionConfig{
      */
     @Override
     public String getServerHost(){
-        return serverHost;
+        //since 3.0.10 host通常是没有前后空格的
+        return UriProcessor.process(serverHost, true);
     }
 
     /**

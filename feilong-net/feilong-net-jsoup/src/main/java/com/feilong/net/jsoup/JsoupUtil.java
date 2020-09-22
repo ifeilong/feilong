@@ -31,6 +31,7 @@ import com.feilong.core.Validate;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.net.SSLContextBuilder;
 import com.feilong.net.SSLProtocol;
+import com.feilong.net.UriProcessor;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -130,6 +131,10 @@ public final class JsoupUtil{
      */
     public static Document getDocument(String urlString,String userAgent){
         Validate.notBlank(urlString, "urlString can't be blank!");
+
+        //since 3.0.10
+        urlString = UriProcessor.process(urlString, true);
+        //---------------------------------------------------------------
         try{
             Connection connection = Jsoup.connect(urlString)//
                             .userAgent(userAgent)//

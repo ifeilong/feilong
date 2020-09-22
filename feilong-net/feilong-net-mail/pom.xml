@@ -12,6 +12,13 @@
 
 	<dependencies>
 
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-api</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
 		<!--feilong-template -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

@@ -16,15 +16,12 @@
 package com.feilong.net.http;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.StringUtil.EMPTY;
-import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.net.http.HttpMethodType.GET;
 
 import java.util.Map;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.ParamUtil;
+import com.feilong.net.UriProcessor;
 
 /**
  * http 请求信息.
@@ -181,33 +178,7 @@ public class HttpRequest{
      * @see <a href="https://github.com/venusdrogon/feilong-net/issues/66">HttpClient uri 中如果有空格会报错</a>
      */
     public String getUri(){
-        //这种改造 系统工作量最小
-        //since 1.14.0
-        if (isNullOrEmpty(uri)){
-            return EMPTY;
-        }
-
-        //---------------------------------------------------------------
-
-        //since 3.0.10
-        if (isTrimUri){
-            uri = uri.trim();
-        }
-
-        //---------------------------------------------------------------
-
-        //since 1.14.0
-        if (uri.contains(SPACE)){
-            //W3C标准规定， 当Content-Type为application/x-www-form-urlencoded时，URL中查询参数名和参数值中空格要用加号+替代，
-            //所以几乎所有使用该规范的浏览器在表单提交后，URL查询参数中空格都会被编成加号+。
-
-            //而在另一份规范(RFC 2396，定义URI)里, URI里的保留字符都需转义成%HH格式(Section 3.4 Query Component)，因此空格会被编码成%20，加号+本身也作为保留字而被编成%2B，
-            //对于某些遵循RFC 2396标准的应用来说，它可能不接受查询字符串中出现加号+，认为它是非法字符。
-
-            //所以一个安全的举措是URL中统一使用%20来编码空格字符。
-            uri = StringUtil.replace(uri, SPACE, "%20"); //参见 org.springframework.util.ResourceUtils.toURI(String)
-        }
-        return uri;
+        return UriProcessor.process(uri, isTrimUri);
     }
 
     /**

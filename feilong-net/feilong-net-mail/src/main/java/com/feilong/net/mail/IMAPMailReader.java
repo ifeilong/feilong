@@ -84,7 +84,7 @@ public class IMAPMailReader implements MailReader{
 
         //---------------------------------------------------------------
 
-        String mailServerHost = mailReaderConfig.getServerHost();
+        String serverHost = mailReaderConfig.getServerHost();
         String userName = mailReaderConfig.getUserName();
         String password = mailReaderConfig.getPassword();
 
@@ -97,7 +97,7 @@ public class IMAPMailReader implements MailReader{
         Folder folder = null;
         try{
             store = session.getStore(PROTOCOL);
-            store.connect(mailServerHost, userName, password);
+            store.connect(serverHost, userName, password);
 
             folder = getFolder(store);
             //---------------------------------------------------------------
