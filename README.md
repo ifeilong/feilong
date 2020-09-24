@@ -30,7 +30,7 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 
 ## :dragon: Maven使用配置
 
-feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/search?q=feilong
+feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/com.github.ifeilong/feilong
 
 ### `maven 配置` 
 
