@@ -24,10 +24,10 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
-
 import com.feilong.lib.beanutils.MappedPropertyDescriptor;
 import com.feilong.lib.beanutils.memoryleaktests.MemoryLeakTestCase;
+
+import junit.framework.TestCase;
 
 /**
  * Test case for Jira issue# BEANUTILS-347.
@@ -35,7 +35,7 @@ import com.feilong.lib.beanutils.memoryleaktests.MemoryLeakTestCase;
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-347">https://issues.apache.org/jira/browse/BEANUTILS-347</a>
  */
-public class Jira347TestCase extends TestCase {
+public class Jira347TestCase extends TestCase{
 
     /**
      * Tests that MappedPropertyDescriptor does not throw an exception while re-creating a Method reference after it
@@ -49,10 +49,10 @@ public class Jira347TestCase extends TestCase {
      * If the constructor of the MappedPropertyDescriptor would recognize the situation (of the first param not being of type String)
      * this would be fine as well.
      */
-    public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
+    public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception{
         final String className = "org.apache.commons.beanutils.MappedPropertyTestBean";
         final ClassLoader loader = newClassLoader();
-        final Class<?> beanClass    = loader.loadClass(className);
+        final Class<?> beanClass = loader.loadClass(className);
         beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
@@ -64,23 +64,21 @@ public class Jira347TestCase extends TestCase {
 
         // now start the test
         MappedPropertyDescriptor descriptor = null;
-        try {
-          descriptor = new MappedPropertyDescriptor("anyMapped", beanClass);
-        }
-        catch (final IntrospectionException e) {
-          // this would be fine as well
+        try{
+            descriptor = new MappedPropertyDescriptor("anyMapped", beanClass);
+        }catch (final IntrospectionException e){
+            // this would be fine as well
         }
 
-        if (descriptor != null) {
+        if (descriptor != null){
             final String m1 = getMappedWriteMethod(descriptor);
-             forceGarbageCollection();
-             try {
-                 final String m2 = getMappedWriteMethod(descriptor);
-                 assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
-             }
-             catch (final RuntimeException e) {
-                 fail("getMappedWriteMethod threw an exception after garbage collection " + e);
-             }
+            forceGarbageCollection();
+            try{
+                final String m2 = getMappedWriteMethod(descriptor);
+                assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
+            }catch (final RuntimeException e){
+                fail("getMappedWriteMethod threw an exception after garbage collection " + e);
+            }
         }
     }
 
@@ -93,7 +91,7 @@ public class Jira347TestCase extends TestCase {
      *
      * @return the string representation or null if mapped write method does not exist
      */
-    private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor) {
+    private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor){
         final Method m = descriptor.getMappedWriteMethod();
         return m == null ? null : m.toString();
     }
@@ -101,28 +99,27 @@ public class Jira347TestCase extends TestCase {
     /**
      * Try to force the garbage collector to run by filling up memory and calling System.gc().
      */
-    private void forceGarbageCollection() throws Exception {
+    private void forceGarbageCollection() throws Exception{
         // Fill up memory
         final SoftReference<Object> ref = new SoftReference<Object>(new Object());
         int count = 0;
-        while(ref.get() != null && count++ < 5) {
+        while (ref.get() != null && count++ < 5){
             ArrayList<Object> list = new ArrayList<Object>();
-            try {
+            try{
                 long i = 0;
-                while (true && ref.get() != null) {
-                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+                while (true && ref.get() != null){
+                    list.add(
+                                    "A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String "
+                                                    + (i++));
                 }
-            } catch (final Throwable ignored) {
-            }
+            }catch (final Throwable ignored){}
             list.clear();
             list = null;
-            // System.out.println("Count " + count + " : " + getMemoryStats());
             System.gc();
             Thread.sleep(1000);
         }
-        // System.out.println("After GC: " + getMemoryStats());
 
-        if (ref.get() != null) {
+        if (ref.get() != null){
             throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
         }
     }
@@ -130,25 +127,23 @@ public class Jira347TestCase extends TestCase {
     /**
      * Create a new class loader instance.
      */
-    private static URLClassLoader newClassLoader() throws MalformedURLException {
+    private static URLClassLoader newClassLoader() throws MalformedURLException{
 
         final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
-        //System.out.println("dataFilePath: " + dataFilePath);
-        final String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils.memoryleaktests.pojotests".length());
-        //System.out.println("location: " + location);
+        final String location = "file://" + dataFilePath
+                        .substring(0, dataFilePath.length() - "org.apache.commons.beanutils.memoryleaktests.pojotests".length());
 
         final StringBuilder newString = new StringBuilder();
-        for (int i=0;i<location.length();i++) {
-            if (location.charAt(i)=='\\') {
+        for (int i = 0; i < location.length(); i++){
+            if (location.charAt(i) == '\\'){
                 newString.append("/");
-            } else {
+            }else{
                 newString.append(location.charAt(i));
             }
         }
         final String classLocation = newString.toString();
-        //System.out.println("classlocation: " + classLocation);
 
-        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
+        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[] { new URL(classLocation) }, null);
         return theLoader;
     }
 }

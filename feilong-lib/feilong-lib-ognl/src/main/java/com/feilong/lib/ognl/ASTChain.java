@@ -282,15 +282,8 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
         try{
             if ((_children != null) && (_children.length > 0)){
                 for (int i = 0; i < _children.length; i++){
-                    /*
-                     * System.out.println("astchain child: " + _children[i].getClass().getName()
-                     * + " with current object target " + context.getCurrentObject()
-                     * + " current type: " + context.getCurrentType());
-                     */
 
                     String value = _children[i].toGetSourceString(context, context.getCurrentObject());
-
-                    //                    System.out.println("astchain child returned >>  " + value + "  <<");
 
                     if (ASTCtor.class.isInstance(_children[i])){
                         constructor = true;
@@ -300,19 +293,12 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
                         _lastType = (NodeType) _children[i];
                     }
 
-                    //                    System.out.println("Astchain i: " + i + " currentobj : " + context.getCurrentObject() + " and root: " + context.getRoot());
                     if (!ASTVarRef.class.isInstance(_children[i]) && !constructor
                                     && !(OrderedReturn.class.isInstance(_children[i])
                                                     && ((OrderedReturn) _children[i]).getLastExpression() != null)
                                     && (_parent == null || !ASTSequence.class.isInstance(_parent))){
                         value = OgnlRuntime.getCompiler().castExpression(context, _children[i], value);
                     }
-
-                    /*
-                     * System.out.println("astchain value now : " + value + " with index " + i
-                     * + " current type " + context.getCurrentType() + " current accessor " + context.getCurrentAccessor()
-                     * + " prev type " + context.getPreviousType() + " prev accessor " + context.getPreviousAccessor());
-                     */
 
                     if (OrderedReturn.class.isInstance(_children[i]) && ((OrderedReturn) _children[i]).getLastExpression() != null){
                         ordered = true;
@@ -383,17 +369,12 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
                 }
 
                 for (int i = 0; i < _children.length; i++){
-                    //                    System.out.println("astchain setsource child[" + i + "] : " + _children[i].getClass().getName());
 
                     if (i == (_children.length - 1)){
                         context.put("_lastChild", "true");
                     }
 
                     String value = _children[i].toSetSourceString(context, context.getCurrentObject());
-                    //if (value == null || value.trim().length() <= 0)
-                    //  return "";
-
-                    //                    System.out.println("astchain setter child returned >>  " + value + "  <<");
 
                     if (ASTCtor.class.isInstance(_children[i])){
                         constructor = true;
@@ -409,16 +390,6 @@ public class ASTChain extends SimpleNode implements NodeType,OrderedReturn{
                                     && (_parent == null || !ASTSequence.class.isInstance(_parent))){
                         value = OgnlRuntime.getCompiler().castExpression(context, _children[i], value);
                     }
-
-                    //                    System.out.println("astchain setter after cast value is: " + value);
-
-                    /*
-                     * if (!constructor && !OrderedReturn.class.isInstance(_children[i])
-                     * && (_parent == null || !ASTSequence.class.isInstance(_parent)))
-                     * {
-                     * value = OgnlRuntime.getCompiler().castExpression(context, _children[i], value);
-                     * }
-                     */
 
                     if (ASTOr.class.isInstance(_children[i]) || ASTAnd.class.isInstance(_children[i])
                                     || ASTCtor.class.isInstance(_children[i]) || ASTStaticField.class.isInstance(_children[i])){

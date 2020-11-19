@@ -30,9 +30,6 @@ import com.feilong.lib.lang3.StringUtils;
 
 public class ToDateTest{
 
-    /**
-     * TestToDateTest.
-     */
     @Test
     public void testToDateTest(){
         Date date = toDate("2020-05-26T01:52:07Z", "yyyy-MM-dd'T'HH:mm:ss'Z'");

@@ -176,16 +176,12 @@ class ASTAdd extends NumericExpression{
                         expr = "null";
                     }
 
-                    //System.out.println("astadd child class: " + _children[i].getClass().getName() + " and return expr: " + expr);
-
                     if (ASTProperty.class.isInstance(_children[i])){
                         expr = ExpressionCompiler.getRootExpression(_children[i], context.getRoot(), context) + expr;
                         context.setCurrentAccessor(context.getRoot().getClass());
                     }else if (ASTMethod.class.isInstance(_children[i])){
                         String chain = (String) context.get("_currentChain");
                         String rootExpr = ExpressionCompiler.getRootExpression(_children[i], context.getRoot(), context);
-
-                        //System.out.println("astadd chains is >>" + chain + "<< and rootExpr is >>" + rootExpr + "<<");
 
                         // dirty fix for overly aggressive casting dot operations
                         if (rootExpr.endsWith(".") && chain != null && chain.startsWith(").")){
@@ -232,7 +228,6 @@ class ASTAdd extends NumericExpression{
                                         && !ASTStaticField.class.isInstance(_children[i]) && !ASTStaticMethod.class.isInstance(_children[i])
                                         && !ASTTest.class.isInstance(_children[i])){
                             if (lastType != null && String.class.isAssignableFrom(lastType.getGetterClass())){
-                                //System.out.println("Input expr >>" + expr + "<<");
                                 if (expr.indexOf("&quot;") >= 0){
                                     expr = expr.replaceAll("&quot;", "\"");
                                 }
@@ -240,7 +235,6 @@ class ASTAdd extends NumericExpression{
                                     expr = expr.replaceAll("\"", "'");
                                 }
                                 expr = "\"" + expr + "\"";
-                                //System.out.println("Expr now >>" + expr + "<<");
                             }
                         }
                     }

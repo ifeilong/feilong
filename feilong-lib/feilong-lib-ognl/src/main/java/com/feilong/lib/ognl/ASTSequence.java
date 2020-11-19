@@ -127,7 +127,6 @@ public class ASTSequence extends SimpleNode implements NodeType,OrderedReturn{
         NodeType _lastType = null;
 
         for (int i = 0; i < _children.length; ++i){
-            //System.out.println("astsequence child : " + _children[i].getClass().getName());
             String seqValue = _children[i].toGetSourceString(context, target);
 
             if ((i + 1) < _children.length && ASTOr.class.isInstance(_children[i])){

@@ -216,9 +216,6 @@ public class ObjectPropertyAccessor implements PropertyAccessor{
                                 (currentObjectStr.indexOf('"') >= 0 ? currentObjectStr.replaceAll("\"", "") : currentObjectStr));
             }
 
-            //System.out.println("tried to get read method from target: " + target.getClass() + " with methodName:" + methodName + " result: " + m);
-            // try to get field if no method could be found
-
             if (m == null){
                 try{
                     if (String.class.isAssignableFrom(index.getClass()) && !target.getClass().isArray()){

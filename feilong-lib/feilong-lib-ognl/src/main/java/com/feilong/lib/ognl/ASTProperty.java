@@ -360,11 +360,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
             throw new UnsupportedCompilationException("Current target is null.");
         }
 
-        /*
-         * System.out.println("astproperty(setter) is indexed? : " + isIndexedAccess() + " child: " + _children[0].getClass().getName()
-         * + " target: " + target.getClass().getName() + " children length: " + _children.length);
-         */
-
         try{
 
             if (isIndexedAccess()){
@@ -388,8 +383,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
                 if (ASTConst.class.isInstance(_children[0]) && String.class.isInstance(context.getCurrentObject())){
                     srcString = "\"" + srcString + "\"";
                 }
-
-                //                System.out.println("astproperty setter using indexed value " + value + " and srcString: " + srcString);
 
                 if (context.get("_indexedMethod") != null){
                     m = (Method) context.remove("_indexedMethod");
@@ -449,8 +442,6 @@ public class ASTProperty extends SimpleNode implements NodeType{
             }
 
             String name = ((ASTConst) _children[0]).getValue().toString();
-
-            //            System.out.println(" astprop(setter) : trying to set " + name + " on object target " + context.getCurrentObject().getClass().getName());
 
             if (!Iterator.class.isAssignableFrom(context.getCurrentObject().getClass())
                             || (Iterator.class.isAssignableFrom(context.getCurrentObject().getClass()) && name.indexOf("next") < 0)){

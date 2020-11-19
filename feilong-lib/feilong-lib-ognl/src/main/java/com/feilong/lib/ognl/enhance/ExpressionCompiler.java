@@ -195,15 +195,6 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
             return body;
         }
 
-        /*
-         * System.out.println("castExpression() with expression " + expression + " expr class: " + expression.getClass() +
-         * " currentType is: " + context.getCurrentType()
-         * + " previousType: " + context.getPreviousType()
-         * + "\n current Accessor: " + context.getCurrentAccessor()
-         * + " previous Accessor: " + context.getPreviousAccessor()
-         * + " current object " + context.getCurrentObject());
-         */
-
         ExpressionCompiler.addCastString(context, "((" + ExpressionCompiler.getCastString(context.getCurrentAccessor()) + ")");
 
         return ")" + body;
@@ -458,7 +449,6 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
             body = body.replaceAll("\\.\\.", ".");
         }
 
-        //        System.out.println("Getter Body: ===================================\n" + body);
         valueGetter.setBody(body);
         newClass.addMethod(valueGetter);
 
@@ -499,8 +489,6 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
             if (body.indexOf("..") >= 0){
                 body = body.replaceAll("\\.\\.", ".");
             }
-
-            //            System.out.println("adding method " + ref.getName() + " with body:\n" + body + " and return type: " + ref.getType());
 
             CtMethod ctMethod = new CtMethod(pool.get(getCastString(ref.getType())), ref.getName(), params, clazz);
             ctMethod.setBody(body);
@@ -553,8 +541,6 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
         if (body.indexOf("..") >= 0){
             body = body.replaceAll("\\.\\.", ".");
         }
-
-        //        System.out.println("Setter Body: ===================================\n" + body);
 
         valueSetter.setBody(body);
         newClass.addMethod(valueSetter);

@@ -136,8 +136,6 @@ public class ArrayPropertyAccessor extends ObjectPropertyAccessor implements Pro
 
         // need to convert to primitive for list index access
 
-        // System.out.println("index class " + index.getClass() + " current type " + context.getCurrentType() + " current object class " + context.getCurrentObject().getClass());
-
         if (context.getCurrentType() != null && !context.getCurrentType().isPrimitive()
                         && Number.class.isAssignableFrom(context.getCurrentType())){
             indexStr += "." + OgnlRuntime.getNumericValueGetter(context.getCurrentType());

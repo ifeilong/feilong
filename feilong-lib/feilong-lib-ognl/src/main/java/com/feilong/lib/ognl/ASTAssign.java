@@ -104,8 +104,6 @@ class ASTAssign extends SimpleNode{
 
             result = first + second + ")";
 
-            // System.out.println("building ordered ret from child[0] with result of:" + result);
-
             result = OgnlRuntime.getCompiler().createLocalReference(
                             context,
                             "ognl.OgnlOps.returnValue(($w)" + result + ", ($w)" + ((OrderedReturn) _children[0]).getLastExpression() + ")",
