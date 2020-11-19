@@ -4,17 +4,17 @@
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong-example</artifactId>
-	<version>3.0.10</version>
+	<version>3.0.11</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- https://github.com/spring-projects/spring-framework/releases -->
-		<version.spring>5.2.7.RELEASE</version.spring>
+		<version.spring>5.2.11.RELEASE</version.spring>
 
 
 		<!-- https://junit.org/junit4/ -->
-		<version.junit>4.13</version.junit>
+		<version.junit>4.13.1</version.junit>
 		<version.hamcrest-library>1.3</version.hamcrest-library>
 
 		<!-- http://logging.apache.org/log4j/1.2/download.html -->
