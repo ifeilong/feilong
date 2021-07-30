@@ -48,7 +48,7 @@ public class HttpRequest{
 
     //---------------------------------------------------------------
 
-    /** 请求参数. */
+    /** http 请求 key-value 参数map. */
     private Map<String, String> paramMap;
 
     /** 请求头信息. */
@@ -122,7 +122,7 @@ public class HttpRequest{
      * @param uri
      *            the uri
      * @param paramMap
-     *            the param map
+     *            http 请求 key-value 参数map
      * @param httpMethodType
      *            the http method type
      * @since 1.5.4
@@ -140,7 +140,7 @@ public class HttpRequest{
      * @param uri
      *            the uri
      * @param paramMap
-     *            the param map
+     *            http 请求 key-value 参数map
      * @param httpMethodType
      *            <span style="color:red">不区分大小写</span>, 比如get,Get,GET都可以,但是需要对应 {@link HttpMethodType}的支持的枚举值
      * @since 1.5.4
@@ -215,19 +215,19 @@ public class HttpRequest{
     //---------------------------------------------------------------
 
     /**
-     * 获得 请求参数.
+     * 获得 http 请求 key-value 参数map.
      *
-     * @return the paramMap
+     * @return http 请求 key-value 参数map
      */
     public Map<String, String> getParamMap(){
         return paramMap;
     }
 
     /**
-     * 设置 请求参数.
+     * 设置 http 请求 key-value 参数map.
      *
      * @param paramMap
-     *            the paramMap to set
+     *            http 请求 key-value 参数map
      */
     public void setParamMap(Map<String, String> paramMap){
         this.paramMap = paramMap;

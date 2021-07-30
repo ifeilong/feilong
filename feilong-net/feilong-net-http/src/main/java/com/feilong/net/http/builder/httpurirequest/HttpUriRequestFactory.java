@@ -100,12 +100,18 @@ public class HttpUriRequestFactory{
     }
 
     //---------------------------------------------------------------
-
-    private static HttpGet buildGet(HttpRequest httpRequest){
+    /**
+     * 基于 httpRequest 来构造uri.
+     *
+     * @param httpRequest
+     *            the http request
+     * @return the uri
+     * @since 3.0.11
+     */
+    private static URI buildURI(HttpRequest httpRequest){
         URIBuilder uriBuilder = URIBuilderBuilder.build(httpRequest);
         try{
-            URI buildUri = uriBuilder.build();
-            return new HttpGet(buildUri);
+            return uriBuilder.build();
         }catch (URISyntaxException e){
             String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest, true));
             throw new UncheckedHttpException(message, e);
@@ -114,16 +120,42 @@ public class HttpUriRequestFactory{
 
     //---------------------------------------------------------------
 
+    /**
+     * Builds the get.
+     *
+     * @param httpRequest
+     *            the http request
+     * @return the http get
+     */
+    private static HttpGet buildGet(HttpRequest httpRequest){
+        return new HttpGet(buildURI(httpRequest));
+    }
+
+    /**
+     * Builds the post.
+     *
+     * @param httpRequest
+     *            the http request
+     * @return the http post
+     */
     private static HttpPost buildPost(HttpRequest httpRequest){
-        HttpPost httpPost = new HttpPost(httpRequest.getUri());
+        HttpPost httpPost = new HttpPost(buildURI(httpRequest));
         httpPost.setEntity(HttpEntityBuilder.build(httpRequest));
         return httpPost;
     }
 
     //---------------------------------------------------------------
 
+    /**
+     * Builds the put.
+     *
+     * @param httpRequest
+     *            the http request
+     * @return the http put
+     */
     private static HttpPut buildPut(HttpRequest httpRequest){
-        HttpPut httpPut = new HttpPut(httpRequest.getUri());
+        HttpPut httpPut = new HttpPut(buildURI(httpRequest));
+
         httpPut.setEntity(HttpEntityBuilder.build(httpRequest));
         return httpPut;
     }
