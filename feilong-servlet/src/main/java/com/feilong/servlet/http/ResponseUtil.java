@@ -419,8 +419,7 @@ public final class ResponseUtil{
         response.setCharacterEncoding(defaultIfNullOrEmpty(characterEncoding, UTF8));
 
         //---------------------------------------------------------------
-        try{
-            PrintWriter printWriter = response.getWriter();
+        try (PrintWriter printWriter = response.getWriter()){
             printWriter.print(content);
             printWriter.flush();
 
