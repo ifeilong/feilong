@@ -21,7 +21,10 @@ import java.util.Map;
 import com.feilong.excel.reader.ReadStatus;
 
 /**
- * The Interface ExcelReader.
+ * excel 读取接口.
+ * 
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @since 3.0.10
  */
 public interface ExcelReader extends ExcelConfig{
 

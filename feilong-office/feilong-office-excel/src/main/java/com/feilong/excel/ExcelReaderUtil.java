@@ -67,36 +67,47 @@ public class ExcelReaderUtil{
      * @param sheetDefinitionLocation
      *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
-     *            sheet 比如 trainCourseSheet
+     *            sheet名字 比如 trainCourseSheet
      * @param dataName
      *            configuration 里面名字是 trainCourseSheet的, 配置的dataName,比如 trainSignUpSheet
      * @param sheetNo
      *            第几个sheet,从0开始,比如1
      * @return the list
      */
-    public static <T> List<T> read(String excelLocation,String sheetDefinitionLocation,String sheetName,String dataName,int sheetNo){
+    public static <T> List<T> read(
+                    String excelLocation,
+                    String sheetDefinitionLocation,//
+                    String sheetName,
+                    String dataName,
+                    int sheetNo){
         return read(excelLocation, toArray(sheetDefinitionLocation), sheetName, dataName, sheetNo);
     }
 
     /**
-     * Read data.
+     * 读取数据.
      *
      * @param excelLocation
-     *            the excel location
+     *            比如 "E:\\Workspaces\\train\\Java培训报名12.xls"
      * @param sheetDefinitionLocation
-     *            the sheet definition path
+     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
      * @param sheetName
-     *            the sheet name
+     *            sheet名字 比如 trainCourseSheet
      * @param sheetNo
-     *            the sheet no
+     *            第几个sheet,从0开始,比如1
      * @return the map
      */
-    public static Map<String, Object> readData(String excelLocation,String sheetDefinitionLocation,String sheetName,int sheetNo){
+    public static Map<String, Object> readData(
+                    String excelLocation,
+                    String sheetDefinitionLocation,//
+                    String sheetName,
+                    int sheetNo){
         ExcelReader excelReader = build(sheetDefinitionLocation, sheetName);
 
         InputStream inputStream = InputStreamUtil.getInputStream(excelLocation);
         return readData(excelReader, inputStream, sheetNo);
     }
+
+    //---------------------------------------------------------------
 
     private static ExcelReader build(String sheetDefinitionLocation,String sheetName){
         Map<String, ExcelSheet> sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionLocation);
@@ -186,13 +197,13 @@ public class ExcelReaderUtil{
         if (isNotNullOrEmpty(dataName)){
             return (List<T>) beans.get(dataName);
         }
-
         if (size(beans) == 1){
             return (List<T>) (toList(beans.values()).get(0));
         }
-
         throw new DefaultRuntimeException("dataName:[{}],keys:[{}] can't be null/empty!", dataName, beans.keySet());
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Read data.
@@ -206,24 +217,23 @@ public class ExcelReaderUtil{
      * @return the map
      */
     private static Map<String, Object> readData(ExcelReader excelReader,InputStream inputStream,int sheetNo){
-        Map<String, Object> beans = newLinkedHashMap();
-
-        ReadStatus readStatus = excelReader.readSheet(inputStream, sheetNo, beans);
+        Map<String, Object> returnBeanMap = newLinkedHashMap();
+        ReadStatus readStatus = excelReader.readSheet(inputStream, sheetNo, returnBeanMap);
 
         int status = readStatus.getStatus();
-        if (status != ReadStatus.STATUS_SUCCESS){
-            List<Exception> exceptions = readStatus.getExceptions();
-
-            String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
-            String message = Slf4jUtil.format(
-                            pattern,
-                            readStatus.getStatus(),
-                            readStatus.getMessage(),
-                            exceptions.size(),
-                            exceptions.get(0).getStackTrace());
-            throw new DefaultRuntimeException(message);
+        if (status == ReadStatus.STATUS_SUCCESS){
+            return returnBeanMap;
         }
-        return beans;
-    }
 
+        //---------------------------------------------------------------
+        List<Exception> exceptions = readStatus.getExceptions();
+        String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
+        throw new DefaultRuntimeException(
+                        Slf4jUtil.format(
+                                        pattern,
+                                        status,
+                                        readStatus.getMessage(), //
+                                        exceptions.size(),
+                                        exceptions.get(0).getStackTrace()));
+    }
 }

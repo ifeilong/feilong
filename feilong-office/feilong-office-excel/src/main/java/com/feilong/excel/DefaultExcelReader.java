@@ -35,7 +35,7 @@ import com.feilong.excel.util.CloneUtil;
 import com.feilong.lib.excel.ognl.OgnlStack;
 
 /**
- * The Class DefaultExcelReader.
+ * 默认的excel 读取操作.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see ExcelManipulatorFactory
@@ -181,15 +181,6 @@ public class DefaultExcelReader extends AbstractExcelConfig implements ExcelRead
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * Checks if is skip errors.
-     *
-     * @return true, if is skip errors
-     */
-    public boolean isSkipErrors(){
-        return skipErrors;
-    }
 
     /**
      * Sets the skip errors.

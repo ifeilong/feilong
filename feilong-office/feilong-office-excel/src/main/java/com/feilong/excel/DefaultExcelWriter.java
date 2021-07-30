@@ -33,7 +33,7 @@ import com.feilong.excel.writer.WorkbookWriter;
 import com.feilong.io.InputStreamUtil;
 
 /**
- * The Class DefaultExcelWriter.
+ * 默认的excel 写操作.
  * 
  * @see ExcelManipulatorFactory
  */

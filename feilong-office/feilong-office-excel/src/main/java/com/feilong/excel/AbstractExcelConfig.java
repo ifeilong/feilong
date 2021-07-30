@@ -16,6 +16,7 @@
 package com.feilong.excel;
 
 /**
+ * 抽象的父类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
