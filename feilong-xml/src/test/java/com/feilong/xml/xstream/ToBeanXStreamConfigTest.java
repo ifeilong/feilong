@@ -15,10 +15,10 @@
  */
 package com.feilong.xml.xstream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
@@ -41,16 +41,5 @@ public class ToBeanXStreamConfigTest extends AbstractTest{
     }
 
     //---------------------------------------------------------------
-
-    @Test
-    public void testToXML(){
-        User user = new User(1L);
-
-        XStreamConfig toXmlConfig = new XStreamConfig();
-        toXmlConfig.getAliasMap().put("user", User.class);
-
-        LOGGER.debug(XmlUtil.toXML(user, toXmlConfig));
-        LOGGER.debug(XmlUtil.toXML(user, null));
-    }
 
 }

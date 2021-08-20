@@ -102,4 +102,15 @@ public class ToXmlTest extends AbstractTest{
         map.put("notify_url", "");
         LOGGER.debug(XmlUtil.toXML(map, (XStreamConfig) null));
     }
+
+    @Test
+    public void testToXML(){
+        User user = new User(1L);
+
+        XStreamConfig toXmlConfig = new XStreamConfig();
+        toXmlConfig.getAliasMap().put("user", User.class);
+
+        LOGGER.debug(XmlUtil.toXML(user, toXmlConfig));
+        LOGGER.debug(XmlUtil.toXML(user, null));
+    }
 }
