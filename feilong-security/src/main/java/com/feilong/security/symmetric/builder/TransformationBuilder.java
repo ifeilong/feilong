@@ -20,8 +20,8 @@ import com.feilong.security.symmetric.CipherMode;
 import com.feilong.security.symmetric.CipherPadding;
 
 /**
- * The Class TransformationBuilder.
  * 转换的名称,例如 DES/CBC/PKCS5Padding.
+ * 
  * <p>
  * 有关标准转换名称的信息,请参见 Java Cryptography Architecture Reference Guide 的附录 A.
  * </p>

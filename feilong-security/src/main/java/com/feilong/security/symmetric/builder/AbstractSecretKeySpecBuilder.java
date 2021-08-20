@@ -20,7 +20,7 @@ import java.security.Key;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * The Class DefaultKeyBuilder.
+ * 抽象的 KeyBuilder.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -29,9 +29,11 @@ public abstract class AbstractSecretKeySpecBuilder implements KeyBuilder{
 
     @Override
     public Key build(String algorithm,String keyString){
-        byte[] keyBytes = buildKeyBytes(keyString);
+        byte[] keyBytes = buildKeyBytes(algorithm, keyString);
         return new SecretKeySpec(keyBytes, algorithm);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the key bytes.
@@ -40,5 +42,5 @@ public abstract class AbstractSecretKeySpecBuilder implements KeyBuilder{
      *            the key string
      * @return the byte[]
      */
-    protected abstract byte[] buildKeyBytes(String keyString);
+    protected abstract byte[] buildKeyBytes(String algorithm,String keyString);
 }

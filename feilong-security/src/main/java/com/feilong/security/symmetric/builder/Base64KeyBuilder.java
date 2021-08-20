@@ -18,7 +18,7 @@ package com.feilong.security.symmetric.builder;
 import com.feilong.lib.codec.binary.Base64;
 
 /**
- * The Class Base64KeyBuilder.
+ * key进行简单的base64处理.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.0
@@ -30,7 +30,7 @@ public class Base64KeyBuilder extends AbstractSecretKeySpecBuilder{
 
     //---------------------------------------------------------------
     @Override
-    protected byte[] buildKeyBytes(String keyString){
+    protected byte[] buildKeyBytes(String algorithm,String keyString){
         return Base64.decodeBase64(keyString);
     }
 }

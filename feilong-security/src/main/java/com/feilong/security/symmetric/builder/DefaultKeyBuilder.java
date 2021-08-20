@@ -30,7 +30,7 @@ public class DefaultKeyBuilder extends AbstractSecretKeySpecBuilder{
     //---------------------------------------------------------------
 
     @Override
-    protected byte[] buildKeyBytes(String keyString){
+    protected byte[] buildKeyBytes(String algorithm,String keyString){
         return keyString.getBytes();
     }
 }
