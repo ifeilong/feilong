@@ -36,11 +36,11 @@ public class OgnlSecurityManager extends SecurityManager{
 
     private static final Class<?> FILE_PERMISSION_CLASS   = FilePermission.class;
 
-    private SecurityManager       parentSecurityManager;
+    private final SecurityManager parentSecurityManager;
 
-    private List<Long>            residents               = new ArrayList<>();
+    private final List<Long>      residents               = new ArrayList<>();
 
-    private SecureRandom          rnd                     = new SecureRandom();
+    private final SecureRandom    rnd                     = new SecureRandom();
 
     public OgnlSecurityManager(SecurityManager parentSecurityManager){
         this.parentSecurityManager = parentSecurityManager;
@@ -55,9 +55,8 @@ public class OgnlSecurityManager extends SecurityManager{
                     // TODO: might be risky but we have to - fix it if any POC discovered
                     // relax a bit with containers class loaders lazy class load
                     return false;
-                }else{
-                    isInsideClassLoader = false;
                 }
+                isInsideClassLoader = false;
             }
             if (OGNL_SANDBOX_CLASS_NAME.equals(c.getName())){
                 return true;
@@ -93,9 +92,8 @@ public class OgnlSecurityManager extends SecurityManager{
                 if (install()){
                     residents.add(token);
                     return token;
-                }else{
-                    return null;
                 }
+                return null;
             }
             residents.add(token);
             return token;

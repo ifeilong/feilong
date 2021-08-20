@@ -99,14 +99,14 @@
 		<version.jstl>1.2</version.jstl>
 
 		<!-- https://junit.org/junit4/ -->
-		<version.junit>4.13.1</version.junit>
+		<version.junit>4.13.2</version.junit>
 		<version.hamcrest-library>1.3</version.hamcrest-library>
 
 		<!-- http://logging.apache.org/log4j/1.2/download.html -->
 		<version.log4j>1.2.17</version.log4j>
 
 		<!-- https://logback.qos.ch/news.html -->
-		<version.logback>1.2.3</version.logback>
+		<version.logback>1.2.5</version.logback>
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
 
@@ -118,7 +118,7 @@
 		<version.ooxml-schemas>1.4</version.ooxml-schemas>
 
 		<!-- http://www.slf4j.org/news.html -->
-		<version.slf4j>1.7.30</version.slf4j>
+		<version.slf4j>1.7.32</version.slf4j>
 
 		<!-- http://velocity.apache.org/news.html -->
 		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
