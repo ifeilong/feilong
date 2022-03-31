@@ -60,7 +60,7 @@
 		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
 
 		<!-- https://github.com/spring-projects/spring-framework/releases -->
-		<version.spring>5.2.11.RELEASE</version.spring>
+		<version.spring>5.3.18</version.spring>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
