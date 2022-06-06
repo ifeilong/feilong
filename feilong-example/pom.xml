@@ -28,9 +28,6 @@
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<version.httpcomponents>4.5.13</version.httpcomponents>
 
-
-
-
 		<native2ascii-maven-plugin.pattern>**/*.properties</native2ascii-maven-plugin.pattern>
 		<native2ascii-maven-plugin.encoding>utf-8</native2ascii-maven-plugin.encoding>
 

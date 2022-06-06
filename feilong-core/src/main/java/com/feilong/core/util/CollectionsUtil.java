@@ -939,6 +939,11 @@ public final class CollectionsUtil{
      * 去重,返回指定属性 propertyNames 组合的值都不重复元素的新list <span style="color:red">(原集合对象不变)</span>.
      *
      * <h3>示例:</h3>
+     * 
+     * <p>
+     * 以下3个user id都是1, 年龄分别是 15 ,16,15; 现在要把id以及年龄都一样的数据去重
+     * </p>
+     * 
      * <blockquote>
      *
      * <pre class="code">
@@ -966,6 +971,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * <ol>
      * <li>如果原 <code>objectCollection</code> 是有序的,那么返回的结果参照原 <code>objectCollection</code>元素顺序</li>
+     * <li>出现<code>propertyName</code> 值重复的话,只保留第一个元素</li>
      * <li>原 <code>objectCollection</code>不变</li>
      * </ol>
      * </blockquote>
@@ -979,6 +985,7 @@ public final class CollectionsUtil{
      *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      * @return 如果 <code>propertyNames</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyNames</code> 只有1个元素,那么调用 {@link #removeDuplicate(Collection, String)} 返回<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
      * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
@@ -995,12 +1002,19 @@ public final class CollectionsUtil{
             return Collections.<O> emptyList();
         }
 
+        //提高性能 since 3.1.0
+        if (propertyNames.length == 1){
+            return removeDuplicate(objectCollection, propertyNames[0]);
+        }
+
         //---------------------------------------------------------------
         //用来识别是否重复
         List<Map<String, Object>> mapList = newArrayList();
 
         //用来存放返回list
         List<O> returnList = new ArrayList<>(size(objectCollection));
+
+        //---------------------------------------------------------------
         for (O o : objectCollection){
             Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
             boolean isNotExist = !isExist(mapList, propertyNameAndValueMap, propertyNames);
