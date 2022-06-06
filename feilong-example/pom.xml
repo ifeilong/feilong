@@ -4,13 +4,13 @@
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong-example</artifactId>
-	<version>3.0.11</version>
+	<version>3.1.0</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- https://github.com/spring-projects/spring-framework/releases -->
-		<version.spring>5.2.11.RELEASE</version.spring>
+		<version.spring>5.2.22.RELEASE</version.spring>
 
 
 		<!-- https://junit.org/junit4/ -->
@@ -21,9 +21,9 @@
 		<version.log4j>1.2.17</version.log4j>
 
 		<!-- https://logback.qos.ch/news.html -->
-		<version.logback>1.2.5</version.logback>
+		<version.logback>1.2.11</version.logback>
 		<!-- http://www.slf4j.org/news.html -->
-		<version.slf4j>1.7.32</version.slf4j>
+		<version.slf4j>1.7.36</version.slf4j>
 
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<version.httpcomponents>4.5.13</version.httpcomponents>
@@ -35,7 +35,7 @@
 		<native2ascii-maven-plugin.encoding>utf-8</native2ascii-maven-plugin.encoding>
 
 		<v.maven-surefire-plugin>2.22.2</v.maven-surefire-plugin>
-		<v.maven-compiler-plugin>3.8.1</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.9.0</v.maven-compiler-plugin>
 		<v.native2ascii-maven-plugin>2.0.1</v.native2ascii-maven-plugin>
 
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
