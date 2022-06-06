@@ -23,11 +23,12 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 
 import com.feilong.lib.lang3.tuple.Pair;
 import com.feilong.namespace.parser.CookieAccessorBeanDefinitionParser;
+import com.feilong.namespace.parser.DingtalkBotBeanDefinitionParser;
 import com.feilong.namespace.parser.SessionAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SessionKeyAccessorBeanDefinitionParser;
 import com.feilong.namespace.parser.SftpFileTransferBeanDefinitionParser;
-import com.feilong.namespace.parser.WxworkBotBeanDefinitionParser;
 import com.feilong.namespace.parser.SimpleHttpTypeBeanPropertyBeanDefinitionParser;
+import com.feilong.namespace.parser.WxworkBotBeanDefinitionParser;
 
 /**
  * The Class FeilongNamespaceHandler.
@@ -52,7 +53,10 @@ public class FeilongNamespaceHandler extends org.springframework.beans.factory.x
                     Pair.of("sftpFileTransfer", new SftpFileTransferBeanDefinitionParser()),
 
                     //since 3.0.9
-                    Pair.of("wxworkBot", new WxworkBotBeanDefinitionParser())
+                    Pair.of("wxworkBot", new WxworkBotBeanDefinitionParser()),
+
+                    //since 3.1.0
+                    Pair.of("dingtalkBot", new DingtalkBotBeanDefinitionParser())
     //
     );
 

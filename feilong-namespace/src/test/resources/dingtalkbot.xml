@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:feilong="http://www.feilong.com/schema/feilong" xmlns:util="http://www.springframework.org/schema/util"
+
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd 	
+    http://www.feilong.com/schema/feilong http://www.feilong.com/schema/feilong/feilong.xsd
+    ">
+
+	<feilong:dingtalkBot id="dingtalkBot" accessToken="a99ef44aad3b80810d86529e9fb16902255a5928908f13fa15e9dbd75c7749d2"
+		secret="SECd2325d14c67a3ec585568e00b49d749c7094a2a1579beb86369d88a5b161c981" defaultTitle="aaa" />
+
+</beans>

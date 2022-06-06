@@ -293,11 +293,11 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<!-- com.feilong.net.wxwork.bot.DefaultWxworkBot -->
+	<!-- com.feilong.net.bot.wxwork.DefaultWxworkBot -->
 	<xsd:element name="wxworkBot">
 		<xsd:annotation>
-			<xsd:documentation source="java:com.feilong.net.wxwork.bot.DefaultWxworkBot">
-                <![CDATA[Defines a com.feilong.net.wxwork.bot.DefaultWxworkBot bean. ]]>
+			<xsd:documentation source="java:com.feilong.net.bot.wxwork.DefaultWxworkBot">
+                <![CDATA[Defines a com.feilong.net.bot.wxwork.DefaultWxworkBot bean. ]]>
 			</xsd:documentation>
 		</xsd:annotation>
 
@@ -305,6 +305,8 @@
 
 			<xsd:complexContent>
 				<xsd:extension base="beans:identifiedType">
+
+
 					<xsd:attribute name="key" type="xsd:string" use="required">
 						<xsd:annotation>
 							<xsd:documentation>
@@ -315,6 +317,53 @@
 
 				</xsd:extension>
 			</xsd:complexContent>
+		</xsd:complexType>
+
+	</xsd:element>
+
+
+	<!-- com.feilong.net.bot.dingtalk.DefaultDingTalkBot -->
+	<xsd:element name="dingtalkBot">
+		<xsd:annotation>
+			<xsd:documentation source="java:com.feilong.net.bot.dingtalk.DefaultDingTalkBot">
+                <![CDATA[Defines a com.feilong.net.bot.dingtalk.DefaultDingTalkBot bean. ]]>
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:complexType>
+
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+
+
+					<xsd:attribute name="accessToken" type="xsd:string" use="required">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[指定 钉钉机器人的 accessToken]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="secret" type="xsd:string" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[指定 安全密钥,可选;如果机器人配置了密钥模式,必须要]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="defaultTitle" type="xsd:string" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[指定 markdown默认title]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+				</xsd:extension>
+			</xsd:complexContent>
+
+
 		</xsd:complexType>
 
 	</xsd:element>

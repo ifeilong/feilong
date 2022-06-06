@@ -18,10 +18,10 @@ package com.feilong.namespace.parser;
 import org.springframework.beans.factory.xml.AbstractSimpleBeanDefinitionParser;
 import org.w3c.dom.Element;
 
-import com.feilong.net.bot.wxwork.DefaultWxworkBot;
+import com.feilong.net.bot.dingtalk.DefaultDingTalkBot;
 
 /**
- * 用来构造 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot}.
+ * 用来构造 {@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}.
  * 
  * <b>使用:</b>
  * 
@@ -39,7 +39,7 @@ import com.feilong.net.bot.wxwork.DefaultWxworkBot;
  * 
  * @since 3.0.9
  */
-public class WxworkBotBeanDefinitionParser extends AbstractSimpleBeanDefinitionParser{
+public class DingtalkBotBeanDefinitionParser extends AbstractSimpleBeanDefinitionParser{
 
     /*
      * (non-Javadoc)
@@ -48,7 +48,7 @@ public class WxworkBotBeanDefinitionParser extends AbstractSimpleBeanDefinitionP
      */
     @Override
     protected Class<?> getBeanClass(Element element){
-        return DefaultWxworkBot.class;
+        return DefaultDingTalkBot.class;
     }
 
 }

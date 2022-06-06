@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import com.feilong.net.bot.wxwork.WxworkBot;
 
 @ContextConfiguration(locations = { "classpath*:wxbot.xml" })
-public class WxworkBotTagTest extends AbstractJUnit4SpringContextTests{
+public class WxworkBotTest extends AbstractJUnit4SpringContextTests{
 
     @Autowired
     @Qualifier("wxworkBot")
@@ -21,6 +21,6 @@ public class WxworkBotTagTest extends AbstractJUnit4SpringContextTests{
 
     @Test
     public void test(){
-        assertTrue(wxworkBot.sendMessage("lalalal"));
+        assertTrue(wxworkBot.sendMessage("hello world"));
     }
 }
