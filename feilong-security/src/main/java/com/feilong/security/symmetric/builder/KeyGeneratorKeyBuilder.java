@@ -27,7 +27,7 @@ import com.feilong.core.DefaultRuntimeException;
  * 基于 {@link KeyGenerator} 的KeyBuilder .
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.0.11
+ * @since 3.1.0
  */
 public class KeyGeneratorKeyBuilder extends AbstractSecretKeySpecBuilder{
 

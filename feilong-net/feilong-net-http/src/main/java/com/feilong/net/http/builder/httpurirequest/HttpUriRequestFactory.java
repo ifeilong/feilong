@@ -106,7 +106,7 @@ public class HttpUriRequestFactory{
      * @param httpRequest
      *            the http request
      * @return the uri
-     * @since 3.0.11
+     * @since 3.1.0
      */
     private static URI buildURI(HttpRequest httpRequest){
         URIBuilder uriBuilder = URIBuilderBuilder.build(httpRequest);
