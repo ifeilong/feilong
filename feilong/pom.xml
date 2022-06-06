@@ -38,19 +38,19 @@
 		<!-- **********************end maven-compiler-plugin config******************************************* -->
 
 		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
-		<v.maven-compiler-plugin>3.9.0</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.10.1</v.maven-compiler-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.2.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.3.0</v.maven-dependency-plugin>
 		<v.maven-deploy-plugin>2.8.2</v.maven-deploy-plugin>
 
 		<v.maven-install-plugin>2.5.2</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-javadoc-plugin>3.3.0</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.4.0</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-jar-plugin>3.2.1</v.maven-jar-plugin>
+		<v.maven-jar-plugin>3.2.2</v.maven-jar-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-source-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -155,6 +155,13 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-net-bot-wxwork</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+
+		<!--feilong-net-bot-dingtalk -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>feilong-net-bot-dingtalk</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 

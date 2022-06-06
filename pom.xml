@@ -137,7 +137,7 @@
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-compiler-plugin>3.9.0</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.10.1</v.maven-compiler-plugin>
 
 		<v.maven-changes-plugin>2.12.1</v.maven-changes-plugin>
 
@@ -148,16 +148,16 @@
 		<!-- <v.maven-checkstyle-plugin>2.17</v.maven-checkstyle-plugin> -->
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.2.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.3.0</v.maven-dependency-plugin>
 		<v.maven-deploy-plugin>2.8.2</v.maven-deploy-plugin>
 
 		<v.maven-install-plugin>2.5.2</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-javadoc-plugin>3.3.0</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.4.0</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-jar-plugin>3.2.1</v.maven-jar-plugin>
+		<v.maven-jar-plugin>3.2.2</v.maven-jar-plugin>
 
 		<v.maven-jxr-plugin>2.5</v.maven-jxr-plugin>
 		<!-- http://maven.apache.org/plugins/maven-pmd-plugin/check-mojo.html -->
@@ -165,12 +165,12 @@
 
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
-		<v.maven-plugin-plugin>3.6.1</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.6.4</v.maven-plugin-plugin>
 
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
-		<v.maven-scm-plugin>1.12.0</v.maven-scm-plugin>
+		<v.maven-scm-plugin>1.12.2</v.maven-scm-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-site-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MSITE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -209,13 +209,13 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.9.0</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.11.0</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
-		<v.maven-project-info-reports-plugin>3.2.1</v.maven-project-info-reports-plugin>
+		<v.maven-project-info-reports-plugin>3.3.0</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
-		<v.jacoco-maven-plugin>0.8.7</v.jacoco-maven-plugin>
+		<v.jacoco-maven-plugin>0.8.8</v.jacoco-maven-plugin>
 
 		<!-- **********************end plugins version******************************************* -->
 
