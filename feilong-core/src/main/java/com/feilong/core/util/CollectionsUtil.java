@@ -872,9 +872,14 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 去重,返回指定属性 propertyName的值没有重复元素的新list <span style="color:red">(原集合对象不变)</span>.
+     * 去重,返回 objectCollection 指定属性 propertyName 没有重复值的新list <span style="color:red">(原集合对象不变)</span>.
      *
      * <h3>示例:</h3>
+     * 
+     * <p>
+     * 有以下两个user 对象, id值都是1,这时去重,只保留一个
+     * </p>
+     * 
      * <blockquote>
      *
      * <pre class="code">
@@ -894,6 +899,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * <ol>
      * <li>如果原 <code>objectCollection</code> 是有序的,那么返回的结果参照原 <code>objectCollection</code>元素顺序</li>
+     * <li>出现<code>propertyName</code> 值重复的话,只保留第一个元素</li>
      * <li>原 <code>objectCollection</code>不变</li>
      * </ol>
      * </blockquote>
@@ -905,8 +911,9 @@ public final class CollectionsUtil{
      * @param propertyName
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),<br>
      *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
-     * @return 如果 <code>propertyNames</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
+     * @return 如果 <code>propertyName</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
      *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则调用 {@link #group(Iterable, String)},将map 的values转成list返回<br>
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
      * @see "org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)"
