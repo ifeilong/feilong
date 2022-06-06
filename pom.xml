@@ -4,7 +4,7 @@
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong-parent</artifactId>
-	<version>3.0.11</version>
+	<version>3.1.0</version>
 
 	<packaging>pom</packaging>
 
@@ -50,7 +50,7 @@
 	<!--****************************定义属性 properties************************************* -->
 	<properties>
 		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
-		<version.feilong-platform>3.0.11</version.feilong-platform>
+		<version.feilong-platform>3.1.0</version.feilong-platform>
 		<version.feilong-common-test>4.1.0</version.feilong-common-test>
 
 		<!-- 让整个项目统一字符集编码 -->
@@ -106,7 +106,7 @@
 		<version.log4j>1.2.17</version.log4j>
 
 		<!-- https://logback.qos.ch/news.html -->
-		<version.logback>1.2.5</version.logback>
+		<version.logback>1.2.11</version.logback>
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
 
@@ -124,30 +124,20 @@
 		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
 		<version.velocity-engine>2.2</version.velocity-engine>
 
-		<!--
-			http://tiles.apache.org/framework/whats-new.html
-
-			Removals in Tiles 3.0
-			Upgraded from JavaSE 5.0 to JavaSE 6.0.
-			Upgraded from Servlet 2.4 and JSP 2.0 to Servlet 2.5 and JSP 2.1.
-			Changed the Java API to adopt the Request API. The XML files and taglibs are compatible with tiles 2.2.
-			Dropped the parameter based configuration that was deprecated in 2.2.
-		-->
-		<version.tiles>3.0.8</version.tiles>
 		<!--*********************end dependency plugins version************************************ -->
 
 		<!--*********************begin plugins version************************************ -->
 		<!-- http://maven.apache.org/plugins/maven-antrun-plugin/ -->
-		<v.maven-antrun-plugin>3.0.0</v.maven-antrun-plugin>
+		<v.maven-antrun-plugin>3.1.0</v.maven-antrun-plugin>
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
 		<v.maven-assembly-plugin>3.3.0</v.maven-assembly-plugin>
 
-		<v.maven-clean-plugin>3.1.0</v.maven-clean-plugin>
+		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-compiler-plugin>3.8.1</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.9.0</v.maven-compiler-plugin>
 
 		<v.maven-changes-plugin>2.12.1</v.maven-changes-plugin>
 
@@ -158,16 +148,16 @@
 		<!-- <v.maven-checkstyle-plugin>2.17</v.maven-checkstyle-plugin> -->
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.1.2</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.2.0</v.maven-dependency-plugin>
 		<v.maven-deploy-plugin>2.8.2</v.maven-deploy-plugin>
 
 		<v.maven-install-plugin>2.5.2</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-javadoc-plugin>3.2.0</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.3.0</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-jar-plugin>3.2.0</v.maven-jar-plugin>
+		<v.maven-jar-plugin>3.2.1</v.maven-jar-plugin>
 
 		<v.maven-jxr-plugin>2.5</v.maven-jxr-plugin>
 		<!-- http://maven.apache.org/plugins/maven-pmd-plugin/check-mojo.html -->
@@ -175,16 +165,16 @@
 
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
-		<v.maven-plugin-plugin>3.6.0</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.6.1</v.maven-plugin-plugin>
 
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
-		<v.maven-scm-plugin>1.11.2</v.maven-scm-plugin>
+		<v.maven-scm-plugin>1.12.0</v.maven-scm-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-site-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MSITE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-site-plugin>3.9.1</v.maven-site-plugin>
+		<v.maven-site-plugin>3.10.0</v.maven-site-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-source-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -201,7 +191,7 @@
 
 		<!-- http://maven.apache.org/plugins/maven-war-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MWAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-war-plugin>3.3.1</v.maven-war-plugin>
+		<v.maven-war-plugin>3.3.2</v.maven-war-plugin>
 
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
 
@@ -219,13 +209,13 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.8.1</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.9.0</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
-		<v.maven-project-info-reports-plugin>3.1.1</v.maven-project-info-reports-plugin>
+		<v.maven-project-info-reports-plugin>3.2.1</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
-		<v.jacoco-maven-plugin>0.8.6</v.jacoco-maven-plugin>
+		<v.jacoco-maven-plugin>0.8.7</v.jacoco-maven-plugin>
 
 		<!-- **********************end plugins version******************************************* -->
 
@@ -545,29 +535,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>log4j-over-slf4j</artifactId>
 				<version>${version.slf4j}</version>
-			</dependency>
-
-			<!--************************* tiles******************* -->
-			<dependency>
-				<groupId>org.apache.tiles</groupId>
-				<artifactId>tiles-core</artifactId>
-				<version>${version.tiles}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.slf4j</groupId>
-						<artifactId>jcl-over-slf4j</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.tiles</groupId>
-				<artifactId>tiles-api</artifactId>
-				<version>${version.tiles}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.tiles</groupId>
-				<artifactId>tiles-jsp</artifactId>
-				<version>${version.tiles}</version>
 			</dependency>
 
 			<!-- jstl -->
