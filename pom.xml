@@ -106,7 +106,7 @@
 		<version.log4j>1.2.17</version.log4j>
 
 		<!-- https://logback.qos.ch/news.html -->
-		<version.logback>1.2.5</version.logback>
+		<version.logback>1.2.9</version.logback>
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
 
