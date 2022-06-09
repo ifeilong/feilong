@@ -16,6 +16,9 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+
+import java.util.Objects;
 
 import com.feilong.core.Validate;
 
@@ -145,7 +148,7 @@ public final class ObjectUtil{
     }
 
     /**
-     * Returns a default value if the object passed is {@code null}.
+     * 如果 <code>object</code> 是null,返回默认值 <code>defaultValue</code>.
      *
      * <pre>
      * ObjectUtil.defaultIfNull(null, null)      = null
@@ -161,7 +164,7 @@ public final class ObjectUtil{
      *            the {@code Object} to test, may be {@code null}
      * @param defaultValue
      *            the default value to return, may be {@code null}
-     * @return {@code object} if it is not {@code null}, defaultValue otherwise
+     * @return 如果 <code>object</code> 是null,返回 <code>defaultValue</code>,否则返回 <code>object</code>
      * @since 3.0.0
      */
     public static <T> T defaultIfNull(final T object,final T defaultValue){
@@ -286,4 +289,49 @@ public final class ObjectUtil{
         Validate.notNull(object, "object can't be null!");
         return isArray(object) && object.getClass().getComponentType().isPrimitive();//原始型的
     }
+
+    //---------------------------------------------------------------
+    /**
+     * <p>
+     * 对比 given {@code t} to a vararg of {@code searchTargets},
+     * 如果 {@code true} if the {@code t} is equal to any of the {@code searchTargets}.
+     * </p>
+     * 
+     * <p>
+     * 比 apache commons-lang3 StringUtils#equalsAny 适用面更广
+     * </p>
+     *
+     * <pre>
+     * ObjectUtil.equalsAny(null, (CharSequence[]) null) = false
+     * ObjectUtil.equalsAny(null, null, null)    = true
+     * ObjectUtil.equalsAny(null, "abc", "def")  = false
+     * ObjectUtil.equalsAny("abc", null, "def")  = false
+     * ObjectUtil.equalsAny("abc", "abc", "def") = true
+     * ObjectUtil.equalsAny("abc", "ABC", "DEF") = false
+     * ObjectUtil.equalsAny(5, 5, 6) = true
+     * </pre>
+     *
+     * @param t
+     *            to compare, may be {@code null}.
+     * @param searchTargets
+     *            a vararg of t, may be {@code null}.
+     * @return {@code true} 如果 t is equal to any other element of {@code searchTargets};
+     *         {@code false} if {@code searchTargets} is null or contains no matches.
+     * @see com.feilong.lib.lang3.StringUtils#equalsAny(CharSequence, CharSequence...)
+     * @since 3.1.0
+     */
+    @SafeVarargs
+    public static <T> boolean equalsAny(T t,T...searchTargets){
+        if (isNullOrEmpty(searchTargets)){
+            return false;
+        }
+        //---------------------------------------------------------------
+        for (T target : searchTargets){
+            if (Objects.equals(t, target)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

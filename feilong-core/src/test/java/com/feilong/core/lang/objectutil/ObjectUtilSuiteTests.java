@@ -31,6 +31,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 DefaultIfNullOrEmptyParameterizedTest.class,
                 DefaultIfNullParameterizedTest.class,
 
+                EqualsAnyTest.class,
+
                 ObjectUtilTest.class, })
 public class ObjectUtilSuiteTests{
 
