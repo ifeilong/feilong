@@ -1054,7 +1054,7 @@ public final class RequestUtil{
      *
      * @param request
      *            the request
-     * @return 如果没有ua,那么返回false;否则判断ua 里面是否包含 micromessenger 值
+     * @return 如果没有userAgent,那么返回false;否则判断ua 里面是否包含 micromessenger 值
      * @see <a href="http://www.cnblogs.com/dengxinglin/archive/2013/05/29/3106004.html">微信浏览器的HTTP_USER_AGENT</a>
      * @see <a href="https://www.zhihu.com/question/21507953">如何在服务器端判断请求的客户端是微信调用的浏览器？</a>
      * @since 1.10.4
@@ -1080,12 +1080,35 @@ public final class RequestUtil{
     /**
      * 判断一个请求是否是 <b>微信小程序</b> 的请求.
      * 
+     * <p>
+     * <span style="color:red">注意:此方法目前android weixin userAgent 会带特殊字符,IOS环境没有,{@link <a href=
+     * "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>}
+     * 请谨慎使用,为了将来扩展,暂时保留此方法</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>Mozilla/5.0 (Linux; Android 10; AGS3-AL00 Build/HUAWEIAGS3-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0
+     * Chrome/86.0.4240.99 XWEB/3225 MMWEBSDK/20220505 Safari/537.36 MMWEBID/8510 MicroMessenger/8.0.23.2160(0x280017A6) WeChat/arm64 Weixin
+     * Android Tablet NetType/WIFI Language/zh_CN ABI/arm64 <span style="color:green">MiniProgramEnv</span>/android</li>
+     * 
+     * <li>Mozilla/5.0 (Linux; Android 10; TAS-AN00 Build/HUAWEITAS-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0
+     * Chrome/86.0.4240.99 XWEB/3225 MMWEBSDK/20220505 Mobile Safari/537.36 MMWEBID/5189 MicroMessenger/8.0.23.2160(0x2800173B) WeChat/arm64
+     * Weixin NetType/WIFI Language/zh_CN ABI/arm64 <span style="color:green">MiniProgramEnv</span>/android</li>
+     * </ol>
+     * 
+     * 可以发现微信小程序 即带有为 MicroMessenger 还带有 MiniProgramEnv,并且有版本号,也可以判断手机类型为iPhone还是Android
+     * </blockquote>
+     * 
      * @param request
      *            the request
-     * @return 如果没有ua,那么返回false;否则判断ua 里面是否包含 micromessenger 值
+     * @return 如果没有userAgent,那么返回false;否则判断ua 里面是否包含 miniprogram 值
      * @see <a href=
      *      "https://developers.weixin.qq.com/miniprogram/dev/component/web-view.html">从微信7.0.0开始，可以通过判断userAgent中包含miniProgram字样来判断小程序
      *      web-view 环境</a>
+     * @see <a href=
+     *      "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>
      * @since 3.1.0
      * @since 微信7.0.0(2018-12-21)
      */
