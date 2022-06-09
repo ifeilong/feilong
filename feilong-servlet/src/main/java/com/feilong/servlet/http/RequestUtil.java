@@ -1118,7 +1118,13 @@ public final class RequestUtil{
 
     /**
      * 判断一个请求 不是 <b>微信小程序</b> 的请求.
-     *
+     * 
+     * <p>
+     * <span style="color:red">注意:此方法目前android weixin userAgent 会带特殊字符,IOS环境没有,{@link <a href=
+     * "https://developers.weixin.qq.com/community/develop/doc/000488d0378078a7f926fd36456c00?_at=1581959544792">ios微信web-view的user-agent缺失miniprogram</a>}
+     * 请谨慎使用,为了将来扩展,暂时保留此方法</span>
+     * </p>
+     * 
      * @param request
      *            the request
      * @return 如果不是微信小程序请求,那么返回true , 否则返回false
