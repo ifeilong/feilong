@@ -20,7 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongObjectUtilSuiteTests.
+ * The Class ObjectUtilSuiteTests.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsArrayParameterizedTest.class,
                 IsPrimitiveArrayParameterizedTest.class,
                 DefaultIfNullOrEmptyParameterizedTest.class,
+                DefaultIfNullParameterizedTest.class,
 
                 ObjectUtilTest.class, })
 public class ObjectUtilSuiteTests{
