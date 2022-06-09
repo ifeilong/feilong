@@ -1034,14 +1034,15 @@ public final class RequestUtil{
     //---------------------------------------------------------------
 
     /**
-     * 判断一个请求是否是微信浏览器的请求.
+     * 判断一个请求是否是 <b>微信浏览器</b> 的请求.
      * 
      * <h3>说明:</h3>
      * 
      * <blockquote>
      * <ol>
-     * <li>在iPhone下，返回<br>
-     * Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9B176 MicroMessenger/4.3.2</li>
+     * <li>在iPhone下 (iphone11 IOS15.4.1 wechat8.0.22)，返回<br>
+     * Mozilla/5.0 (iPhone; CPU iPhone OS 15_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+     * <span style="color:green">MicroMessenger</span>/8.0.22(0x18001628)</li>
      * 
      * <li>在Android下，返回<br>
      * Mozilla/5.0 (Linux; U; Android 2.3.6; zh-cn; GT-S5660 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile
@@ -1059,12 +1060,83 @@ public final class RequestUtil{
      * @since 1.10.4
      */
     public static boolean isWechatRequest(HttpServletRequest request){
-        String userAgent = getHeaderUserAgent(request);
+        return userAgentContainsString(request, "micromessenger");
+    }
+
+    /**
+     * 判断一个请求不是 <b>微信浏览器</b> 的请求.
+     * 
+     * @param request
+     * @return 如果不是微信浏览器请求的,那么返回true , 否则返回false
+     * @see #isWechatRequest(HttpServletRequest)
+     * @since 3.1.0
+     */
+    public static boolean isNotWechatRequest(HttpServletRequest request){
+        return !isWechatRequest(request);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 判断一个请求是否是 <b>微信小程序</b> 的请求.
+     * 
+     * @param request
+     *            the request
+     * @return 如果没有ua,那么返回false;否则判断ua 里面是否包含 micromessenger 值
+     * @see <a href=
+     *      "https://developers.weixin.qq.com/miniprogram/dev/component/web-view.html">从微信7.0.0开始，可以通过判断userAgent中包含miniProgram字样来判断小程序
+     *      web-view 环境</a>
+     * @since 3.1.0
+     * @since 微信7.0.0(2018-12-21)
+     */
+    public static boolean isWechatMiniProgramRequest(HttpServletRequest request){
+        return userAgentContainsString(request, "miniprogram");
+    }
+
+    /**
+     * 判断一个请求 不是 <b>微信小程序</b> 的请求.
+     *
+     * @param request
+     *            the request
+     * @return 如果不是微信小程序请求,那么返回true , 否则返回false
+     * @see <a href=
+     *      "https://developers.weixin.qq.com/miniprogram/dev/component/web-view.html">从微信7.0.0开始，可以通过判断userAgent中包含miniProgram字样来判断小程序
+     *      web-view 环境</a>
+     * @see #isWechatMiniProgramRequest(HttpServletRequest)
+     * @since 3.1.0
+     * @since 微信7.0.0(2018-12-21)
+     */
+    public static boolean isNotWechatMiniProgramRequest(HttpServletRequest request){
+        return !isWechatMiniProgramRequest(request);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 判断header 中是否包含指定的字符串(忽视大小写).
+     * 
+     * @param request
+     * @param s
+     *            指定的字符串
+     * @return
+     *         如果 <code>userAgent</code> 是null或者empty,返回false<br>
+     *         如果 <code>userAgent</code> 包含指定字符串(忽视大小写),返回true;否则返回false
+     * @since 3.1.0
+     */
+    private static boolean userAgentContainsString(HttpServletRequest request,String s){
+        String userAgent = RequestUtil.getHeaderUserAgent(request);
         if (isNullOrEmpty(userAgent)){
             return false;
         }
 
-        return (userAgent.toLowerCase()).contains("micromessenger");
+        boolean contains = userAgent.toLowerCase().contains(s.toLowerCase());
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("userAgent:{},isContains[\"{}\"]:[{}]", userAgent, s, contains);
+        }
+        //---------------------------------------------------------------
+        return contains;
     }
 
     /**
