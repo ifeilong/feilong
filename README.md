@@ -12,6 +12,18 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 
 ## feilong 优点:
 
+![](http://i.imgur.com/NCuo13D.png)
+
+**对比1:**
+
+![](http://i.imgur.com/rJnESSq.png)
+
+**对比2:**
+
+![](http://i.imgur.com/FG9ty3Q.png)
+
+- [使用 feilong-core 的理由](https://github.com/ifeilong/feilong/wiki/Reasons-for-use-feilong-core)
+
 1. 有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
 1. 有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
 1. 不必要的`Exception` 转成了`RuntimeException`,减少不必要的代码
@@ -38,14 +50,14 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>3.0.10</version>
+	<version>3.1.0</version>
 </dependency>
 ```
 
 ### `Gradle 配置` 
 
 ```
-com.github.ifeilong:feilong:3.0.10
+com.github.ifeilong:feilong:3.1.0
 ```
 
 ### `非Maven项目`
@@ -97,6 +109,16 @@ feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含
 ## :memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
+
+## :memo: 常见问题
+
+- [使用 feilong-core 的理由](https://github.com/ifeilong/feilong/wiki/Reasons-for-use-feilong-core)
+- [feilong3 VS feilong core2 对比](https://github.com/ifeilong/feilong/wiki/feilong3 VS feilong core2 对比)
+- [feilong VS hutool对比](https://github.com/ifeilong/feilong/wiki/feilong VS hutool对比)
+
+## :memo: 常用组件/功能
+
+- [使用feilong发企业微信机器人](https://github.com/ifeilong/feilong/wiki/使用feilong发企业微信机器人)
 
 ## :panda_face: 提bug反馈或建议
 
