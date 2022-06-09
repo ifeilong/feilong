@@ -113,8 +113,8 @@ feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含
 ## :memo: 常见问题
 
 - [使用 feilong-core 的理由](https://github.com/ifeilong/feilong/wiki/Reasons-for-use-feilong-core)
-- [feilong3 VS feilong core2 对比](https://github.com/ifeilong/feilong/wiki/feilong3 VS feilong core2 对比)
-- [feilong VS hutool对比](https://github.com/ifeilong/feilong/wiki/feilong VS hutool对比)
+- [feilong3 VS feilong core2 对比](https://github.com/ifeilong/feilong/wiki/feilong3%20VS%20feilong%20core2%20%E5%AF%B9%E6%AF%94)
+- [feilong VS hutool对比](https://github.com/ifeilong/feilong/wiki/feilong%20VS%20hutool%E5%AF%B9%E6%AF%94)
 
 ## :memo: 常用组件/功能
 
