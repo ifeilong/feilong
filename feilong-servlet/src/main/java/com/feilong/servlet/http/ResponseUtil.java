@@ -298,7 +298,11 @@ public final class ResponseUtil{
 
     /**
      * 以text的方式输出.
-     *
+     * 
+     * <p>
+     * 默认 utf-8编码格式输出,如果你需要修改编码格式,可以使用 {@link #writeText(HttpServletResponse, Object, String)}方法
+     * </p>
+     * 
      * @param response
      *            HttpServletResponse
      * @param text
@@ -313,23 +317,24 @@ public final class ResponseUtil{
 
     /**
      * 以text的方式输出.
-     *
+     * 
+     * <p>
+     * 如果 <code>characterEncoding</code> 是null或者blank,默认使用utf-8
+     * </p>
+     * 
      * @param response
      *            HttpServletResponse
      * @param text
      *            json字符串
      * @param characterEncoding
      *            编码<br>
-     *            如果 <code>characterEncoding</code> 是null,抛出 {@link NullPointerException}<br>
-     *            如果 <code>characterEncoding</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *            如果 <code>characterEncoding</code> 是null或者blank,默认使用utf-8
      * @see #write(HttpServletResponse, Object, String, String)
      * @see com.feilong.io.entity.MimeType#TXT
      * @since 1.10.6
      */
     public static void writeText(HttpServletResponse response,Object text,String characterEncoding){
-        Validate.notBlank(characterEncoding, "characterEncoding can't be blank!");
-
-        String contentType = MimeType.TXT.getMime() + ";charset=" + characterEncoding;
+        String contentType = MimeType.TXT.getMime() + ";charset=" + defaultIfNullOrEmpty(characterEncoding, UTF8);
         write(response, text, contentType, characterEncoding);
     }
 
@@ -337,6 +342,10 @@ public final class ResponseUtil{
 
     /**
      * 以json的方式输出.
+     * 
+     * <p>
+     * 默认 utf-8编码格式输出,如果你需要修改编码格式,可以使用 {@link #writeJson(HttpServletResponse, Object, String)}方法
+     * </p>
      *
      * @param response
      *            HttpServletResponse
@@ -352,6 +361,10 @@ public final class ResponseUtil{
 
     /**
      * 以json的方式输出.
+     * 
+     * <p>
+     * 如果 <code>characterEncoding</code> 是null或者blank,默认使用utf-8
+     * </p>
      *
      * @param response
      *            HttpServletResponse
@@ -359,16 +372,13 @@ public final class ResponseUtil{
      *            json字符串
      * @param characterEncoding
      *            编码<br>
-     *            如果 <code>characterEncoding</code> 是null,抛出 {@link NullPointerException}<br>
-     *            如果 <code>characterEncoding</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *            如果 <code>characterEncoding</code> 是null或者blank,默认使用utf-8
      * @see #write(HttpServletResponse, Object, String, String)
      * @see com.feilong.io.entity.MimeType#JSON
      * @since 1.0.9
      */
     public static void writeJson(HttpServletResponse response,Object json,String characterEncoding){
-        Validate.notBlank(characterEncoding, "characterEncoding can't be blank!");
-
-        String contentType = MimeType.JSON.getMime() + ";charset=" + characterEncoding;
+        String contentType = MimeType.JSON.getMime() + ";charset=" + defaultIfNullOrEmpty(characterEncoding, UTF8);
         write(response, json, contentType, characterEncoding);
     }
 
@@ -376,7 +386,11 @@ public final class ResponseUtil{
 
     /**
      * 输出.
-     *
+     * 
+     * <p>
+     * 默认 utf-8编码格式输出,如果你需要修改编码格式,可以使用 {@link #write(HttpServletResponse, Object, String, String)}方法
+     * </p>
+     * 
      * @param response
      *            HttpServletResponse
      * @param content
@@ -404,8 +418,8 @@ public final class ResponseUtil{
      *            如果不为null或者empty,将会设置 {@link ServletResponse#setContentType(String)}
      * @param characterEncoding
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量;<br>
-     *            可以为null或者empty; <br>
-     *            如果不为null或者empty,将会设置 {@link ServletResponse#setCharacterEncoding(String)}
+     *            可以为null或者empty,默认使用utf-8; <br>
+     *            被用于设置 {@link ServletResponse#setCharacterEncoding(String)}
      * @see javax.servlet.ServletResponse#getWriter()
      * @see java.io.PrintWriter#print(Object)
      * @see java.io.PrintWriter#flush()
