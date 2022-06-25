@@ -355,6 +355,72 @@ public final class DateUtil{
     }
 
     /**
+     * 获得今天的 <code>00:00:00.000</code>时间.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * //如果今天是 2011-01-01 10:20:20
+     * DateUtil.getFirstDateOfToday()  =2011-01-01 00:00:00
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 今天的 <code>00:00:00.000</code>时间.
+     * @see com.feilong.lib.lang3.time.DateUtils#truncate(Date, int)
+     * @since 3.1.1
+     */
+    public static Date getFirstDateOfToday(){
+        return getFirstDateOfThisDay(now());
+    }
+
+    /**
+     * 获得昨天的 <code>00:00:00.000</code>时间.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * //如果今天是 2011-01-02 10:20:20
+     * DateUtil.getFirstDateOfYesterday()  =2011-01-01 00:00:00
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 昨天的 <code>00:00:00.000</code>时间.
+     * @see com.feilong.lib.lang3.time.DateUtils#truncate(Date, int)
+     * @since 3.1.1
+     */
+    public static Date getFirstDateOfYesterday(){
+        return getFirstDateOfThisDay(addDay(now(), -1));
+    }
+
+    /**
+     * 获得明天的 <code>00:00:00.000</code>时间.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * //如果今天是 2011-01-02 10:20:20
+     * DateUtil.getFirstDateOfYesterday()  =2011-01-03 00:00:00
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 明天的 <code>00:00:00.000</code>时间.
+     * @see com.feilong.lib.lang3.time.DateUtils#truncate(Date, int)
+     * @since 3.1.1
+     */
+    public static Date getFirstDateOfTomorrow(){
+        return getFirstDateOfThisDay(addDay(now(), 1));
+    }
+
+    /**
      * 获得指定日期<code>date</code>的 <code>23:59:59.999</code>时间.
      * 
      * <h3>示例:</h3>
@@ -375,6 +441,69 @@ public final class DateUtil{
     public static Date getLastDateOfThisDay(Date date){
         Calendar calendar = toCalendar(date);
         return CalendarUtil.toDate(resetDayEnd(calendar));
+    }
+
+    /**
+     * 获得昨天的 <code>23:59:59.999</code>时间.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     *  // 如果今天是 2011-01-02 10:20:20
+     * DateUtil.getLastDateOfYesterday()=2011-01-01 23:59:59.999
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 今天的 <code>23:59:59.999</code>时间.
+     * @since 3.1.1
+     */
+    public static Date getLastDateOfYesterday(){
+        return getLastDateOfThisDay(addDay(now(), -1));
+    }
+
+    /**
+     * 获得明天的 <code>23:59:59.999</code>时间.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     *  // 如果今天是 2011-01-01 10:20:20
+     * DateUtil.getLastDateOfTomorrow()=2011-01-02 23:59:59.999
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 今天的 <code>23:59:59.999</code>时间.
+     * @since 3.1.1
+     */
+    public static Date getLastDateOfTomorrow(){
+        return getLastDateOfThisDay(addDay(now(), 1));
+    }
+
+    /**
+     * 获得今天的 <code>23:59:59.999</code>时间.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     *  // 如果今天是 2011-01-01 10:20:20
+     * DateUtil.getLastDateOfThisDay()=2011-01-01 23:59:59.999
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 今天的 <code>23:59:59.999</code>时间.
+     * @since 3.1.1
+     */
+    public static Date getLastDateOfToday(){
+        return getLastDateOfThisDay(now());
     }
 
     //--------------------------week-------------------------------------
