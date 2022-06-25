@@ -29,4 +29,9 @@ public class OverloadStaticMethod{
     private static String agePrivate(Integer age){
         return "static age Integer:" + age;
     }
+
+    @SuppressWarnings("unused")
+    private static <T> String agePrivateWithClass(String age,Class<T> klass){
+        return "static age Integer:" + age;
+    }
 }

@@ -33,4 +33,15 @@ public class InvokeStaticMethodWithParamsPrivateTest{
         assertEquals("static age Integer:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "agePrivate", 5));
     }
 
+    @Test
+    public void test1(){
+        assertEquals(
+                        "static age Integer:5",
+                        MethodUtil.invokeStaticMethod(
+                                        OverloadStaticMethod.class,
+                                        "agePrivateWithClass",
+                                        "5",
+                                        InvokeStaticMethodWithParamsPrivateTest.class));
+    }
+
 }
