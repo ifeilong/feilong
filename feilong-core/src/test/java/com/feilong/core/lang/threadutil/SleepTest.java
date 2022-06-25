@@ -42,6 +42,11 @@ public class SleepTest extends AbstractTest{
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void testNegativeSleepSeconds(){
+        ThreadUtil.sleepSeconds(-10);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void testNegative12(){
         ThreadUtil.sleep(-1L);
     }
