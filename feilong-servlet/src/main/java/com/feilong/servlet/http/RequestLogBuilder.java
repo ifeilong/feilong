@@ -17,8 +17,8 @@ package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION_TYPE;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_MESSAGE;
@@ -37,7 +37,6 @@ import static com.feilong.servlet.http.RequestAttributes.INCLUDE_REQUEST_URI;
 import static com.feilong.servlet.http.RequestAttributes.INCLUDE_SERVLET_PATH;
 import static com.feilong.servlet.http.entity.RequestLogSwitch.NORMAL;
 
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -132,7 +131,7 @@ class RequestLogBuilder implements Builder<Map<String, Object>>{
 
         // _headerMap
         if (opRequestLogSwitch.getShowHeaders()){
-            map.put("headerInfos", getHeaderMap());
+            map.put("headerInfos", RequestUtil.getHeaderMap(request));
         }
 
         // _cookieMap
@@ -548,38 +547,6 @@ class RequestLogBuilder implements Builder<Map<String, Object>>{
         map.put("request.getQueryString()", request.getQueryString());
 
         map.put("getQueryStringLog", getQueryStringLog());
-        return map;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 遍历显示request的header 用于debug.
-     * 
-     * <p>
-     * 将 request header name 和value 封装到map.
-     * </p>
-     * 
-     * <pre>
-    {@code
-        "headerInfo":         {
-            "accept-encoding": "gzip,deflate",
-            "connection": "Keep-Alive",
-            "host": "127.0.0.1:8084",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21"
-        },
-    }
-     * </pre>
-     * 
-     * @return the header map
-     */
-    private Map<String, String> getHeaderMap(){
-        Map<String, String> map = new TreeMap<>();
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()){
-            String name = headerNames.nextElement();
-            map.put(name, request.getHeader(name));
-        }
         return map;
     }
 

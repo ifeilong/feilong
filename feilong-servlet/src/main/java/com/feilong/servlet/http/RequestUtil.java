@@ -1031,6 +1031,42 @@ public final class RequestUtil{
         return request.getHeader(ORIGIN);
     }
 
+    /**
+     * 遍历显示request的header.
+     * 
+     * <p>
+     * 将 request header name 和value 封装到TreeMap.
+     * </p>
+     * 
+     * <pre>
+    {@code
+        "headerInfo":         {
+            "accept-encoding": "gzip,deflate",
+            "connection": "Keep-Alive",
+            "host": "127.0.0.1:8084",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21"
+        },
+    }
+     * </pre>
+     * 
+     * @param request
+     * @return the header map 按照名字顺序返回
+     * @since 3.1.0
+     */
+    public static Map<String, String> getHeaderMap(HttpServletRequest request){
+        Enumeration<String> headerNames = request.getHeaderNames();
+        if (isNullOrEmpty(headerNames)){
+            return emptyMap();
+        }
+
+        Map<String, String> map = new TreeMap<>();
+        while (headerNames.hasMoreElements()){
+            String name = headerNames.nextElement();
+            map.put(name, request.getHeader(name));
+        }
+        return map;
+    }
+
     //---------------------------------------------------------------
 
     /**
