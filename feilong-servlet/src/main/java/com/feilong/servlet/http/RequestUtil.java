@@ -16,6 +16,7 @@
 package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.ISO_8859_1;
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
@@ -643,6 +644,25 @@ public final class RequestUtil{
         String requestURL = getRequestURL(request);
         String queryString = request.getQueryString();
         return isNullOrEmpty(queryString) ? requestURL : requestURL + QUESTIONMARK + decodeISO88591String(queryString, charsetType);
+    }
+
+    /**
+     * 获得请求的全地址.
+     * 
+     * <ul>
+     * <li>如果request不含queryString,直接返回 requestURL(比如post请求)</li>
+     * <li>如果request含queryString,直接返回 requestURL+编码后的queryString</li>
+     * </ul>
+     * 
+     * 字符编码,默认使用 {@link CharsetType#UTF8}
+     * 
+     * @param request
+     *            the request
+     * @return 如:http://localhost:8080/feilong/requestdemo.jsp?id=2
+     * @since 3.1.1
+     */
+    public static String getRequestFullURL(HttpServletRequest request){
+        return getRequestFullURL(request, UTF8);
     }
 
     //---------------------------------------------------------------
