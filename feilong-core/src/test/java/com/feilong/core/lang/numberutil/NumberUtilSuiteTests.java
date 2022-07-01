@@ -19,11 +19,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * The Class FeiLongNumberUtilSuiteTests.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses({
                 NumberUtilTest.class,
@@ -44,8 +39,15 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetDivideValueTest.class,
                 GetDivideValueParameterizedTest.class,
 
+                //-------------GetProgress--------------------------------------------------
+
                 GetProgressTest.class,
                 GetProgressParameterizedTest.class,
+
+                GetProgressDefaultPatternTest.class,
+                GetProgressDefaultPatternParameterizedTest.class,
+
+                //---------------------------------------------------------------
 
                 ToStringTest.class,
                 ToStringParameterizedTest.class,
@@ -60,7 +62,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsLessThanOrEqualsParameterizedTest.class,
                 IsEqualsTest.class,
                 IsEqualsParameterizedTest.class,
-        //
+//
 })
 public class NumberUtilSuiteTests{
 

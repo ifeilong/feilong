@@ -25,8 +25,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import com.feilong.core.NumberPattern;
-import com.feilong.core.text.NumberFormatUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.text.NumberFormatUtil;
 import com.feilong.lib.lang3.math.NumberUtils;
 
 /**
@@ -827,6 +827,44 @@ public final class NumberUtil{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,使用百分比两位小数点 {@link NumberPattern#PERCENT_WITH_2POINT} 转成指定的字符串格式.
+     * 
+     * <p>
+     * 常用于友好的显示 <b>下载进度</b>,<code>执行进度</code>等等场景
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * NumberUtil.getProgress(5, 5)  = "100.00%"
+     * NumberUtil.getProgress(2, 3)  = "66.67%"
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param current
+     *            当前量
+     * @param total
+     *            总量
+     * @return 如果 <code>current</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>total</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 {@code current <= 0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code total <= 0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code current > total},抛出 {@link IllegalArgumentException}<br>
+     * @see NumberPattern
+     * @see #getDivideValue(Number, Number, int)
+     * @see #toString(Number, String)
+     * @since 3.1.1
+     */
+    public static String getProgress(Number current,Number total){
+        return getProgress(current, total, NumberPattern.PERCENT_WITH_2POINT);
+    }
 
     /**
      * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,然后转成指定的字符串格式 <code>numberPattern</code>).
