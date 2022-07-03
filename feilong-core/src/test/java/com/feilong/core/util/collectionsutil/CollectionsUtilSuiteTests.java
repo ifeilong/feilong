@@ -54,10 +54,12 @@ import org.junit.runners.Suite.SuiteClasses;
                 GroupWithTransformerAndPredicateTest.class,
                 GroupOneTest.class,
 
+                SelectWithMapTest.class,
                 SelectPredicateTest.class,
                 SelectArrayTest.class,
                 SelectCollectionTest.class,
 
+                SelectRejectedMapTest.class,
                 SelectRejectedArrayTest.class,
                 SelectRejectedCollectionTest.class,
                 SelectRejectedPredicateTest.class,
@@ -75,7 +77,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 SelectNotNullOrEmptyStringPredicateTest.class,
 
                 SizeTest.class,
-        //
+//
 })
 public class CollectionsUtilSuiteTests{
 

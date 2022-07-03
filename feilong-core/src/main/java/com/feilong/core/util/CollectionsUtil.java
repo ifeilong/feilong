@@ -1932,6 +1932,66 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 找到 <code>iterable</code>中,属性和属性值都是propertyNameAndPropertyValueMap的对应元素.
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <p>
+     * <b>场景:</b> 从list中查找name是 关羽,且年龄是24 的User对象
+     * </p>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * 
+     * <span style="color:green">list.add(new User("关羽", 24));</span>
+     * list.add(new User("刘备", 25));
+     * <span style="color:green">list.add(new User("关羽", 24));</span>
+     * list.add(new User("关羽", 50));
+     *
+     * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, map)));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * [{
+     * "age": 24,
+     * "name": "关羽"
+     * }, 
+     * {
+     * "age": 24,
+     * "name": "关羽"
+     * }]
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyNameAndPropertyValueMap
+     *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>iterable</code>查找不到<code>propertyNameAndPropertyValueMap</code>,返回空集合
+     * @see #select(Iterable, Predicate)
+     * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
+     * @since 3.1.1
+     */
+    public static <O> List<O> select(Iterable<O> beanIterable,Map<String, ?> propertyNameAndPropertyValueMap){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : select(beanIterable, BeanPredicateUtil.<O> equalPredicate(propertyNameAndPropertyValueMap));
+    }
+
+    /**
      * 按照指定的 {@link Predicate},返回查询出来的集合.
      *
      * <h3>说明:</h3>
@@ -2002,7 +2062,7 @@ public final class CollectionsUtil{
      *            <li>....</li>
      *            </ul>
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)}
+     *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)},如果查不到返回空集合
      * @see com.feilong.lib.collection4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Iterable<O> beanIterable,Predicate<O> predicate){
@@ -2134,6 +2194,68 @@ public final class CollectionsUtil{
     public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,Collection<V> propertyValueList){
         return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
                         : selectRejected(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
+    }
+
+    /**
+     * 找到 <code>iterable</code>中,属性和属性值都<span style="color:green">不是</span>propertyNameAndPropertyValueMap的对应元素.
+     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     *
+     * <p>
+     * <b>场景:</b> 从list中查找name是 不是关羽,且年龄不是24 的User对象
+     * </p>
+     *
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * 
+     * <span style="color:green">list.add(new User("关羽", 24));</span>
+     * list.add(new User("刘备", 25));
+     * <span style="color:green">list.add(new User("关羽", 24));</span>
+     * list.add(new User("关羽", 50));
+     *
+     * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(list, map)));
+     * </pre>
+     *
+     * <b>返回:</b>
+     *
+     * <pre class="code">
+     * [{
+     * "age": 23,
+     * "name": "张飞"
+     * }, 
+     * {
+     * "age": 25,
+     * "name": "刘备"
+     * },{
+     * "age": 50,
+     * "name": "关羽"
+     * }]
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyNameAndPropertyValueMap
+     *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
+     * @see #selectRejected(Iterable, Predicate)
+     * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
+     * @since 3.1.1
+     */
+    public static <O> List<O> selectRejected(Iterable<O> beanIterable,Map<String, ?> propertyNameAndPropertyValueMap){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : selectRejected(beanIterable, BeanPredicateUtil.<O> equalPredicate(propertyNameAndPropertyValueMap));
     }
 
     /**

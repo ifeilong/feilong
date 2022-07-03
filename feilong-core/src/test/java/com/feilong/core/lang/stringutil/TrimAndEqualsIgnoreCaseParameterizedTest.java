@@ -31,7 +31,7 @@ public class TrimAndEqualsIgnoreCaseParameterizedTest extends Abstract2ParamsAnd
     @Parameters(name = "index:{index}:StringUtil.trimAndEqualsIgnoreCase({0}, {1})={2}")
     public static Iterable<Object[]> data(){
         return toList(//
-                        toArray(null, null, true),
+                        toArray((String) null, null, true),
                         toArray(null, EMPTY, false),
                         toArray(EMPTY, null, false),
 

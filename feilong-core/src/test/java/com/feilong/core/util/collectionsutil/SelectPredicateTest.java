@@ -15,13 +15,15 @@
  */
 package com.feilong.core.util.collectionsutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.select;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,25 +37,14 @@ import com.feilong.core.util.predicate.BeanPredicate;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
-import com.feilong.lib.collection4.functors.EqualPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
+import com.feilong.lib.collection4.functors.EqualPredicate;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.CollectionsUtil.select;
-
-/**
- * The Class CollectionsUtilSelectPredicateTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class SelectPredicateTest{
 
-    /**
-     * Test collections util select predicate test.
-     */
     @Test
-    public void testCollectionsUtilSelectPredicateTest(){
+    public void testSelectPredicateTest(){
         User zhangfei1 = new User("zhangfei", 22);
         User zhangfei2 = new User("zhangFei", 22);
         User zhangfei3 = new User("Zhangfei", 22);
@@ -63,27 +54,28 @@ public class SelectPredicateTest{
 
         List<User> list = toList(zhangfei1, zhangfei2, zhangfei3, zhangfeinull, guanyu, liubei);
 
-        List<User> select = select(list, new BeanPredicate<User>(
-                        "name", //
-                        EqualPredicate.equalPredicate("zhangfei", IgnoreCaseEquator.INSTANCE)));
+        List<User> select = select(
+                        list,
+                        new BeanPredicate<User>(
+                                        "name", //
+                                        EqualPredicate.equalPredicate("zhangfei", IgnoreCaseEquator.INSTANCE)));
 
-        assertThat(select, allOf(//
-                        hasItem(zhangfei1),
-                        hasItem(zhangfei2),
-                        hasItem(zhangfei3),
+        assertThat(
+                        select,
+                        allOf(//
+                                        hasItem(zhangfei1),
+                                        hasItem(zhangfei2),
+                                        hasItem(zhangfei3),
 
-                        not(hasItem(zhangfeinull)),
-                        not(hasItem(guanyu)),
-                        not(hasItem(liubei))
-        //
-        ));
+                                        not(hasItem(zhangfeinull)),
+                                        not(hasItem(guanyu)),
+                                        not(hasItem(liubei))
+                        //
+                        ));
     }
 
-    /**
-     * Test collections util select predicate test 1.
-     */
     @Test
-    public void testCollectionsUtilSelectPredicateTest1(){
+    public void testSelectPredicateTest1(){
         User zhangfei1 = new User("zhangfei", 22);
         User zhangfei2 = new User("zhangFei", 22);
         User zhangfei3 = new User("Zhangfei", 22);
@@ -95,21 +87,20 @@ public class SelectPredicateTest{
 
         List<User> select = select(list, BeanPredicateUtil.<User> equalIgnoreCasePredicate("name", "zhangfei"));
 
-        assertThat(select, allOf(//
-                        hasItem(zhangfei1),
-                        hasItem(zhangfei2),
-                        hasItem(zhangfei3),
+        assertThat(
+                        select,
+                        allOf(//
+                                        hasItem(zhangfei1),
+                                        hasItem(zhangfei2),
+                                        hasItem(zhangfei3),
 
-                        not(hasItem(zhangfeinull)),
-                        not(hasItem(guanyu)),
-                        not(hasItem(liubei))
-        //
-        ));
+                                        not(hasItem(zhangfeinull)),
+                                        not(hasItem(guanyu)),
+                                        not(hasItem(liubei))
+                        //
+                        ));
     }
 
-    /**
-     * Test select predicate.
-     */
     @Test
     public void testSelectPredicate(){
         //查询 >10 的元素
@@ -119,28 +110,24 @@ public class SelectPredicateTest{
         assertThat(result, contains(30, 55, 88, 12));
     }
 
-    /**
-     * Test select predicate 1.
-     */
     @Test
     public void testSelectPredicateEqualPredicate(){
         List<Long> list = toList(1L, 1L, 2L, 3L);
         assertThat(CollectionsUtil.select(list, new EqualPredicate<Long>(1L)), contains(1L, 1L));
     }
 
-    /**
-     * Test select predicate null collection.
-     */
     @Test
     public void testSelectPredicateNullCollection(){
         assertEquals(emptyList(), CollectionsUtil.select(null, new EqualPredicate<Long>(1L)));
     }
 
-    /**
-     * Test select predicate empty collection.
-     */
     @Test
     public void testSelectPredicateEmptyCollection(){
         assertEquals(emptyList(), CollectionsUtil.select(new ArrayList<Long>(), new EqualPredicate<Long>(1L)));
+    }
+
+    @Test
+    public void testSelectNotFindPredicate(){
+        assertEquals(emptyList(), CollectionsUtil.select(toList(5L, 8L), new EqualPredicate<Long>(1L)));
     }
 }
