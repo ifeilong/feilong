@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 FormatParameterizedTest.class,
+                TrimAndEqualsIgnoreCaseParameterizedTest.class,
 
                 GetBytesTest.class,
                 GetBytesAndCharsetNameTest.class,
@@ -41,7 +42,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 SubstringWithoutLastLastStringTest.class,
                 TokenizeToStringArrayTest.class,
                 TokenizeToStringArrayWithArgsTest.class,
-        //
+//
 })
 public class StringUtilSuiteTests{
 

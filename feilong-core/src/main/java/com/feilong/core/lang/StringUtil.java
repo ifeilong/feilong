@@ -1056,4 +1056,27 @@ public final class StringUtil{
         return null == format ? EMPTY : String.format(format, args);
     }
     // [end]
+
+    /**
+     * 将两个字符串,去空格之后忽视大小写对比.
+     * 
+     * 
+     * <pre class="code">
+     * StringUtil.trimAndEqualsIgnoreCase(null, null)   = true
+     * StringUtil.trimAndEqualsIgnoreCase(null, "")     = false
+     * StringUtil.trimAndEqualsIgnoreCase("", "  ")     = true
+     * StringUtil.trimAndEqualsIgnoreCase("", null)     = false
+     * StringUtil.trimAndEqualsIgnoreCase("feilong  ", "   feilong")     = true
+     * </pre>
+     *
+     * @param s1
+     *            第1个字符串
+     * @param s2
+     *            第2个字符串
+     * @return 如果 <code>s1, s2</code> 都是null,返回 true<br>
+     * @since 3.1.1
+     */
+    public static boolean trimAndEqualsIgnoreCase(String s1,String s2){
+        return StringUtils.equalsIgnoreCase(StringUtils.trim(s1), StringUtils.trim(s2));
+    }
 }
