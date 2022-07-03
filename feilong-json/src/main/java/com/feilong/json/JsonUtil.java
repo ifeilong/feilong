@@ -364,6 +364,57 @@ public final class JsonUtil{
     //---------------------------------------------------------------
 
     /**
+     * 将对象格式化成json字符串,并且 toString(0, 0) 输出.
+     * 
+     * <p>
+     * =com.feilong.json.JsonUtil.format(Object, 0, 0)
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * 
+     * user.setPassword("123456");
+     * user.setId(8L);
+     * user.setName("feilong");
+     * user.setDate(now());
+     * user.setMoney(toBigDecimal("99999999.00"));
+     * 
+     * user.setLoves(toArray("桔子", "香蕉"));
+     * user.setUserInfo(new UserInfo(10));
+     * 
+     * UserAddress userAddress1 = new UserAddress("上海市地址1");
+     * UserAddress userAddress2 = new UserAddress("上海市地址2");
+     * 
+     * user.setUserAddresses(toArray(userAddress1, userAddress2));
+     * user.setUserAddresseList(toList(userAddress1, userAddress2));
+     * 
+     * LOGGER.debug(JsonUtil.toString(USER));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {"date":"2022-07-03 16:23:00","userInfo":{"age":10},"loves":["桔子","香蕉"],"userAddresses":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"attrMap":null,"ageInt":0,"password":"123456","money":"99999999.00","name":"feilong","userAddresseList":[{"address":"上海市地址1"},{"address":"上海市地址2"}],"id":8,"age":null,"nickNames":[]}
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 3.1.1
+     */
+    public static String toString(Object obj){
+        return format(obj, 0, 0);
+    }
+
+    /**
      * 将对象格式化 成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且 toString(4, 4) 输出.
      * 
      * <p>
