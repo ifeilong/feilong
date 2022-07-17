@@ -169,11 +169,11 @@ public final class PropertyUtil{
      * 
      * private ContactCommand toContactCommand(ShippingInfoSubForm shippingInfoSubForm){
      *     ContactCommand contactCommand = new ContactCommand();
-     *     contactCommand.setCountryId(shippingInfoSubForm.getCountryId());
-     *     contactCommand.setProvinceId(shippingInfoSubForm.getProvinceId());
-     *     contactCommand.setCityId(shippingInfoSubForm.getCityId());
-     *     contactCommand.setAreaId(shippingInfoSubForm.getAreaId());
-     *     contactCommand.setTownId(shippingInfoSubForm.getTownId());
+     *     <span style="color:green">contactCommand.setCountryId(shippingInfoSubForm.getCountryId());</span>
+     *     <span style="color:green">contactCommand.setProvinceId(shippingInfoSubForm.getProvinceId());</span>
+     *     <span style="color:green">contactCommand.setCityId(shippingInfoSubForm.getCityId());</span>
+     *     <span style="color:green">contactCommand.setAreaId(shippingInfoSubForm.getAreaId());</span>
+     *     <span style="color:green">contactCommand.setTownId(shippingInfoSubForm.getTownId());</span>
      *     return contactCommand;
      * }
      * 
@@ -185,7 +185,8 @@ public final class PropertyUtil{
      * 
      * private ContactCommand toContactCommand(ShippingInfoSubForm shippingInfoSubForm){
      *     ContactCommand contactCommand = new ContactCommand();
-     *     PropertyUtil.copyProperties(contactCommand, shippingInfoSubForm, "countryId", "provinceId", "cityId", "areaId", "townId");
+     *     <span style=
+    "color:green">PropertyUtil.copyProperties(contactCommand, shippingInfoSubForm, "countryId", "provinceId", "cityId", "areaId", "townId");</span>
      *     return contactCommand;
      * }
      * </pre>

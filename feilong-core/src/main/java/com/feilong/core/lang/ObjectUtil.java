@@ -21,6 +21,9 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import java.util.Objects;
 
 import com.feilong.core.Validate;
+import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.reflect.ConstructorUtil;
+import com.feilong.lib.beanutils.PropertyUtils;
 
 /**
  * {@link Object} 工具类.
@@ -46,6 +49,81 @@ public final class ObjectUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * 新建klass实例, 并将fromObj中的 指定属于 includePropertyNames 设置到新建的实例中.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public IPage{@code <EarphoneforestInfoVo>} select(EarphoneforestInfoQueryForm earphoneforestInfoQueryForm){
+     *     Page{@code <EarphoneforestInfoVo>} page = new Page<>(earphoneforestInfoQueryForm.getPageNo(), earphoneforestInfoQueryForm.getPageSize());
+     * 
+     *     <span style=
+    "color:green">EarphoneforestInfoQueryRequest earphoneforestInfoQueryRequest = new EarphoneforestInfoQueryRequest();</span>
+     *     <span style="color:green">PropertyUtil.copyProperties(earphoneforestInfoQueryRequest, earphoneforestInfoQueryForm);</span>
+     * 
+     *     IPage{@code <EarphoneforestInfoVo>} iPage = earphoneforestInfoMapper.select(page, earphoneforestInfoQueryRequest);
+     *     return iPage;
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * public IPage{@code <EarphoneforestInfoVo>} select(EarphoneforestInfoQueryForm earphoneforestInfoQueryForm){
+     *     Page{@code <EarphoneforestInfoVo>} page = new Page<>(earphoneforestInfoQueryForm.getPageNo(), earphoneforestInfoQueryForm.getPageSize());
+     * 
+     *      <span style=
+    "color:green">EarphoneforestInfoQueryRequest earphoneforestInfoQueryRequest=newFrom(EarphoneforestInfoQueryRequest.class,earphoneforestInfoQueryForm);</span>
+     *     return earphoneforestInfoMapper.select(page,earphoneforestInfoQueryRequest);
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     * @param klass
+     *            可以被实例化的类
+     * @param fromObj
+     *            原始对象
+     * @param includePropertyNames
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
+     *            如果是null或者empty,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}<br>
+     *            <ol>
+     *            <li>如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
+     *            {@link PropertyUtil#getProperty(Object, String)}再{@link PropertyUtil#setProperty(Object, String, Object)}到<code>toObj</code>对象中</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,会抛出异常,see
+     *            {@link com.feilong.lib.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties}
+     *            Line2078</li>
+     *            </ol>
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fromObj</code> 是null,直接返回 klass 的实例<br>
+     *         如果 <code>includePropertyNames</code> 是null或者empty,将复制全部属性<br>
+     * 
+     * @see com.feilong.core.lang.reflect.ConstructorUtil#newInstance(Class, Object...)
+     * @see com.feilong.core.bean.PropertyUtil#copyProperties(Object, Object, String...)
+     * @since 3.1.1
+     */
+    public static <T> T newFrom(final Class<T> klass,Object fromObj,String...includePropertyNames){
+        Validate.notNull(klass, "klass can't be null!");
+
+        T t = ConstructorUtil.newInstance(klass);
+        if (null == fromObj){
+            return t;
+        }
+
+        PropertyUtil.copyProperties(t, fromObj, includePropertyNames);
+        return t;
     }
 
     //---------------------------------------------------------------
