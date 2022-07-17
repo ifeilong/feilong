@@ -3137,6 +3137,23 @@ public final class CollectionsUtil{
     }
 
     /**
+     * Constructs a list containing the elements of the specified collection, in the order they are returned by the collection's
+     * iterator.
+     *
+     * @param <E>
+     *            the element type
+     * @param collection
+     *            the collection whose elements are to be placed into this list
+     * @return the list
+     * @throws NullPointerException
+     *             if the specified collection is null
+     * @since 3.1.1
+     */
+    public static <E> List<E> newArrayList(Collection<? extends E> collection){
+        return new ArrayList<>(collection);
+    }
+
+    /**
      * 创建 a <i>mutable</i>, empty {@code LinkedList} instance .
      *
      * @param <E>
@@ -3149,6 +3166,24 @@ public final class CollectionsUtil{
     }
 
     /**
+     * Constructs a list containing the elements of the specified
+     * collection, in the order they are returned by the collection's
+     * iterator.
+     *
+     * @param <E>
+     *            the element type
+     * @param collection
+     *            the collection whose elements are to be placed into this list
+     * @return the list
+     * @throws NullPointerException
+     *             if the specified collection is null
+     * @since 3.1.1
+     */
+    public static <E> List<E> newLinkedList(Collection<? extends E> collection){
+        return new LinkedList<>(collection);
+    }
+
+    /**
      * 创建 a <i>mutable</i>, empty {@code CopyOnWriteArrayList} instance .
      *
      * @param <E>
@@ -3158,6 +3193,23 @@ public final class CollectionsUtil{
      */
     public static <E> List<E> newCopyOnWriteArrayList(){
         return new CopyOnWriteArrayList<>();
+    }
+
+    /**
+     * Creates a list containing the elements of the specified collection, in the order they are returned by the collection's
+     * iterator.
+     *
+     * @param <E>
+     *            the element type
+     * @param collection
+     *            the collection of initially held elements
+     * @return the list
+     * @throws NullPointerException
+     *             if the specified collection is null
+     * @since 3.1.1
+     */
+    public static <E> List<E> newCopyOnWriteArrayList(Collection<? extends E> collection){
+        return new CopyOnWriteArrayList<>(collection);
     }
 
     //--------------------set-------------------------------------------
@@ -3175,6 +3227,31 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 创建 a <i>mutable</i>, empty {@code newHashSet} instance .
+     * 
+     * Constructs a new set containing the elements in the specified collection.
+     * 
+     * <p>
+     * The <tt>HashMap</tt> is created with default load factor
+     * (0.75) and an initial capacity sufficient to contain the elements in
+     * the specified collection.
+     * </p>
+     *
+     * @param <E>
+     *            the element type
+     * @param collection
+     *            the collection
+     * @return the hash set
+     * @throws NullPointerException
+     *             if the specified collection is null
+     * @see java.util.HashSet#HashSet(Collection)
+     * @since 3.1.1
+     */
+    public static <E> Set<E> newHashSet(Collection<? extends E> collection){
+        return new HashSet<>(collection);
+    }
+
+    /**
      * 创建 a <i>mutable</i>, empty {@code LinkedHashSet} instance .
      *
      * @param <E>
@@ -3184,6 +3261,28 @@ public final class CollectionsUtil{
      */
     public static <E> Set<E> newLinkedHashSet(){
         return new LinkedHashSet<>();
+    }
+
+    /**
+     * Constructs a new linked hash set with the same elements as the specified collection.
+     * 
+     * <p>
+     * The linked hash set is created with an initial
+     * capacity sufficient to hold the elements in the specified collection
+     * and the default load factor (0.75).
+     * </p>
+     *
+     * @param <E>
+     *            the element type
+     * @param collection
+     *            the collection
+     * @return a new, empty {@code LinkedHashSet}
+     * @throws NullPointerException
+     *             if the specified collection is null
+     * @since 3.1.1
+     */
+    public static <E> Set<E> newLinkedHashSet(Collection<? extends E> collection){
+        return new LinkedHashSet<>(collection);
     }
 
 }
