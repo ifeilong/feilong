@@ -17,13 +17,13 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Constructor;
 
-import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.lang3.reflect.ConstructorUtils;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * 使用反射方法请求构造函数创建新实例的工具类,可以简化程序中使用反射方式创建对象的代码,focused on constructors.
+ * 使用反射请求构造函数创建新实例的工具类,focused on constructors.
  * 
  * <h3>方法介绍:</h3>
  * 
@@ -33,7 +33,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>{@link #newInstance(Class, Object[], Class[])} 获得实例</li>
  * </ol>
  * 
- * 上面三个方法,底层均调用了 {@link ConstructorUtils#invokeConstructor(Class, Object[], Class[])} ,此方法 会
+ * 上面2个方法,底层均调用了 {@link ConstructorUtils#invokeConstructor(Class, Object[], Class[])} ,此方法 会
  * {@link ConstructorUtils#getMatchingAccessibleConstructor(Class, Class...)} 自动根据类型活动最匹配的构造函数,并且将异常转成了 {@link ReflectException} 以便调用的时候使用
  * 
  * <p>
@@ -42,12 +42,12 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * </blockquote>
  * 
- * <h3>如果不想使用自动匹配的特性</h3>
+ * <h3>如果不想使用自动匹配的特性,</h3>
  * 
  * <blockquote>
  * 
  * <p>
- * 您可以使用原生方法,下面两个是 获得精准的构造函数并实例,如果参数类型不匹配,那么就会抛异常
+ * 您可以使用原生方法,下面两个是获得精准的构造函数并实例,如果参数类型不匹配,那么就会抛异常
  * </p>
  * 
  * <ol>
@@ -55,7 +55,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>{@link ConstructorUtils#invokeExactConstructor(Class, Object[], Class[])} 获得实例</li>
  * </ol>
  * 
- * 下面还有三个方法是,获得构造函数而不实例
+ * 下面还有3个方法是获得构造函数而不实例
  * <ol>
  * <li>{@link ConstructorUtils#getAccessibleConstructor(Constructor)}</li>
  * <li>{@link ConstructorUtils#getAccessibleConstructor(Class, Class...)}</li>
