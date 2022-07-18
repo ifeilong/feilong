@@ -16,10 +16,12 @@
 package com.feilong.json.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.equalsAny;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
@@ -158,7 +160,7 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
         }
 
         //---------------------------------------------------------------
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = build(klass);
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = buildObject(javaBean);
         cache.put(klass, propertyNameAndJsonValueProcessorMap);
         return propertyNameAndJsonValueProcessorMap;
     }
@@ -173,8 +175,22 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
      * @return the map
      * @since 1.11.5
      */
-    private static Map<String, JsonValueProcessor> build(Class<?> klass){
+    private static Map<String, JsonValueProcessor> buildObject(Object javaBean){
+        Class<?> klass = javaBean.getClass();
+        if (equalsAny(klass, DontFindAnnotaionHelper.BASE_CLASS_ARRAY)){
+            return emptyMap();
+        }
+        if (equalsAny(klass, DontFindAnnotaionHelper.ARRAY_CLASS_ARRAY)){
+            return emptyMap();
+        }
+        if (ClassUtil.isInstanceAnyClass(javaBean, DontFindAnnotaionHelper.COMMON_CLASS_ARRAY)){
+            return emptyMap();
+        }
+
         List<String> list = getWithAnnotationName(klass, SensitiveWords.class);
+        if (isNullOrEmpty(list)){
+            return emptyMap();
+        }
         //---------------------------------------------------------------------------------------------------------
         //敏感字段
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
