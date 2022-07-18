@@ -104,6 +104,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 FormatDurationLongTest.class,
                 FormatDurationDateTest.class,
 
+                GetIntervalMonthTest.class,
+                GetIntervalMonthParameterizedTest.class,
+
                 GetIntervalWeekTest.class,
                 GetIntervalWeekParameterizedTest.class,
 
@@ -122,7 +125,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetIntervalTimeTest.class,
                 GetIntervalTimeParameterizedTest.class,
 
-        //                
+//                
 })
 public class DateUtilSuiteTests{
 

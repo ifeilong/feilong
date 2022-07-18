@@ -44,7 +44,7 @@ public class GetIntervalTimeParameterizedTest extends Abstract3ParamsAndResultPa
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalTime(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateUtil.getIntervalTime(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
                         ConvertUtil.<Object> toArray(

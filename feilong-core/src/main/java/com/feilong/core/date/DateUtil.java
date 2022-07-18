@@ -18,6 +18,7 @@ package com.feilong.core.date;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_DAY;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MONTH;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_WEEK;
 import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
@@ -1763,7 +1764,7 @@ public final class DateUtil{
      * <ul>
      * <li>DateUtils#isSameDay(Date, Date) ,893毫秒;</li>
      * <li>isEquals(date, new Date(), DatePattern.COMMON_DATE),1秒335毫秒</li>
-     * <li>DateExtensionUtil.getDayStartAndEndPair 1秒185毫秒</li>
+     * <li>DateUtil.getDayStartAndEndPair 1秒185毫秒</li>
      * </ul>
      * </blockquote>
      *
@@ -2324,6 +2325,66 @@ public final class DateUtil{
     // [start]interval时间间隔
 
     /**
+     * 获得相差的月数(<span style="color:red">绝对值</span>).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * <ul>
+     * <li>值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_MONTH}</li>
+     * <li>当两者时间差不足1个月,返回0</li>
+     * <li>此方法1个月按照30天计算的</li>
+     * </ul>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.getIntervalMonth(
+     *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
+     *      toDate("2014-02-01 00:00:00",COMMON_DATE_AND_TIME)) = 1
+     * 
+     * DateUtil.getIntervalMonth(
+     *      toDate("2016-08-01",COMMON_DATE),
+     *      toDate("2016-08-07",COMMON_DATE)) = 0
+     * 
+     * DateUtil.getIntervalMonth(
+     *      toDate("2016-08-21",COMMON_DATE),
+     *      toDate("2016-08-21",COMMON_DATE)) = 0
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param date1
+     *            第一个时间
+     * @param date2
+     *            第二个时间
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
+     * @see #getIntervalMonth(long)
+     * @since 3.1.1
+     */
+    public static int getIntervalMonth(Date date1,Date date2){
+        return getIntervalMonth(getIntervalTime(date1, date2));
+    }
+
+    /**
+     * 获得相差的月数.
+     *
+     * @param spaceTime
+     *            the space time
+     * @return the interval week
+     * @see com.feilong.core.TimeInterval#MILLISECOND_PER_MONTH
+     * @since 3.1.1
+     */
+    private static int getIntervalMonth(long spaceTime){
+        return (int) (spaceTime / (MILLISECOND_PER_MONTH));
+    }
+
+    /**
      * 获得相差的星期数(<span style="color:red">绝对值</span>).
      * 
      * <h3>说明:</h3>
@@ -2341,19 +2402,19 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalWeek(
+     * DateUtil.getIntervalWeek(
      *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2014-02-01 00:00:00",COMMON_DATE_AND_TIME)) = 4
      * 
-     * DateExtensionUtil.getIntervalWeek(
+     * DateUtil.getIntervalWeek(
      *      toDate("2016-08-01",COMMON_DATE),
      *      toDate("2016-08-07",COMMON_DATE)) = 0
      * 
-     * DateExtensionUtil.getIntervalWeek(
+     * DateUtil.getIntervalWeek(
      *      toDate("2016-08-01",COMMON_DATE),
      *      toDate("2016-08-08",COMMON_DATE)) = 1
      *      
-     * DateExtensionUtil.getIntervalWeek(
+     * DateUtil.getIntervalWeek(
      *      toDate("2016-08-21",COMMON_DATE),
      *      toDate("2016-08-21",COMMON_DATE)) = 0
      * </pre>
@@ -2409,23 +2470,23 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalDay(
+     * DateUtil.getIntervalDay(
      *      toDate("2008-08-24",COMMON_DATE),
      *      toDate("2008-08-27",COMMON_DATE)) = 3
      * 
-     * DateExtensionUtil.getIntervalDay(
+     * DateUtil.getIntervalDay(
      *      toDate("2016-08-21 12:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2016-08-22 11:00:00",COMMON_DATE_AND_TIME)) = 0
      * 
-     * DateExtensionUtil.getIntervalDay(
+     * DateUtil.getIntervalDay(
      *      toDate("2016-08-21",COMMON_DATE),
      *      toDate("2016-08-22",COMMON_DATE)) = 1
      *      
-     * DateExtensionUtil.getIntervalDay(
+     * DateUtil.getIntervalDay(
      *      toDate("2016-02-28",COMMON_DATE),
      *      toDate("2016-03-02",COMMON_DATE)) = 3
      * 
-     * DateExtensionUtil.getIntervalDay(
+     * DateUtil.getIntervalDay(
      *      toDate("2016-08-31",COMMON_DATE),
      *      toDate("2016-09-02",COMMON_DATE)) = 2
      * 
@@ -2483,19 +2544,19 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalHour(
+     * DateUtil.getIntervalHour(
      *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2014-01-01 01:00:00",COMMON_DATE_AND_TIME)) = 1
      * 
-     * DateExtensionUtil.getIntervalHour(
+     * DateUtil.getIntervalHour(
      *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2014-01-01 00:59:00",COMMON_DATE_AND_TIME)) = 0
      * 
-     * DateExtensionUtil.getIntervalHour(
+     * DateUtil.getIntervalHour(
      *      toDate("2014-01-01 00:59:00",COMMON_DATE_AND_TIME),
      *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME)) = 0
      *      
-     * DateExtensionUtil.getIntervalHour(
+     * DateUtil.getIntervalHour(
      *      toDate("2016-08-21 23:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2016-08-22 01:00:00",COMMON_DATE_AND_TIME)) = 2
      * </pre>
@@ -2551,19 +2612,19 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalMinute(
+     * DateUtil.getIntervalMinute(
      *      toDate("2008-08-24 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2008-08-24 01:00:00",COMMON_DATE_AND_TIME)) = 60
      * 
-     * DateExtensionUtil.getIntervalMinute(
+     * DateUtil.getIntervalMinute(
      *      toDate("2008-08-24 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2008-08-24 00:00:00",COMMON_DATE_AND_TIME)) = 0
      * 
-     * DateExtensionUtil.getIntervalMinute(
+     * DateUtil.getIntervalMinute(
      *      toDate("2008-08-24 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2008-08-24 00:00:50",COMMON_DATE_AND_TIME)) = 0
      * 
-     * DateExtensionUtil.getIntervalMinute(
+     * DateUtil.getIntervalMinute(
      *      toDate("2008-08-24 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2008-08-23 00:00:00",COMMON_DATE_AND_TIME)) = SECONDS_PER_DAY / 60
      * </pre>
@@ -2618,11 +2679,11 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalSecond(
+     * DateUtil.getIntervalSecond(
      *      toDate("2016-08-22 00:00:00",COMMON_DATE_AND_TIME),
      *      toDate("2016-08-22 00:00:08",COMMON_DATE_AND_TIME)) = 8
      * 
-     * DateExtensionUtil.getIntervalSecond(
+     * DateUtil.getIntervalSecond(
      *      toDate("2016-08-21 23:59:20",COMMON_DATE_AND_TIME),
      *      toDate("2016-08-22 00:00:20",COMMON_DATE_AND_TIME)) = 60
      * </pre>
@@ -2671,11 +2732,11 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalTime(
+     * DateUtil.getIntervalTime(
      *      toDate("2016-07-16 15:21:00",COMMON_DATE_AND_TIME),
      *      toDate("2016-07-16 15:21:01",COMMON_DATE_AND_TIME)) = 1000
      * 
-     * DateExtensionUtil.getIntervalTime(
+     * DateUtil.getIntervalTime(
      *      toDate("2016-07-16 15:21:00",COMMON_DATE_AND_TIME),
      *      toDate("2016-07-16 15:22:00",COMMON_DATE_AND_TIME)) = 60000
      * </pre>
@@ -2700,4 +2761,5 @@ public final class DateUtil{
     }
 
     // [end]
+
 }

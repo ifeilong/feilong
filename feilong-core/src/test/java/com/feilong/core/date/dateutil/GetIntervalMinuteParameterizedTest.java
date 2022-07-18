@@ -36,7 +36,7 @@ public class GetIntervalMinuteParameterizedTest extends Abstract3ParamsAndResult
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalMinute(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateUtil.getIntervalMinute(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
                         ConvertUtil.<Object> toArray("2008-08-24 00:00:00", "2008-08-24 01:00:00", COMMON_DATE_AND_TIME, 1 * 60),

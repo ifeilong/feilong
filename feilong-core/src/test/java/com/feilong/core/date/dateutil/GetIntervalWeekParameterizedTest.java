@@ -36,7 +36,7 @@ public class GetIntervalWeekParameterizedTest extends Abstract3ParamsAndResultPa
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalWeek(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateUtil.getIntervalWeek(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
                         ConvertUtil.<Object> toArray("2014-01-01 00:00:00", "2014-02-01 00:00:00", COMMON_DATE_AND_TIME, 4),

@@ -35,7 +35,7 @@ public class GetIntervalHourParameterizedTest extends Abstract3ParamsAndResultPa
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalHour(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateUtil.getIntervalHour(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
                         ConvertUtil.<Object> toArray("2014-01-01 00:00:00", "2014-01-01 01:00:00", COMMON_DATE_AND_TIME, 1),

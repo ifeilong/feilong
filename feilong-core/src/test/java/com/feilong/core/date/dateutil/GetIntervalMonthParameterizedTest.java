@@ -15,11 +15,11 @@
  */
 package com.feilong.core.date.dateutil;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.getIntervalSecond;
+import static com.feilong.core.date.DateUtil.getIntervalMonth;
 import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
@@ -29,31 +29,24 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
-public class GetIntervalSecondParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, Integer>{
+public class GetIntervalMonthParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, Integer>{
 
-    /**
-     * Data.
-     *
-     * @return the iterable
-     */
-    @Parameters(name = "index:{index}:DateUtil.getIntervalSecond(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateUtil.getIntervalMonth(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
-                        ConvertUtil.<Object> toArray("2016-08-22 00:00:00", "2016-08-22 00:00:08", COMMON_DATE_AND_TIME, 8),
+                        ConvertUtil.<Object> toArray("2020-11-20", "2022-07-18", COMMON_DATE, 20),
 
                         //0
-                        toArray("2017-07-29 03:18:16.026", "2017-07-29 03:18:16.026", COMMON_DATE_AND_TIME_WITH_MILLISECOND, 0),
-                        toArray("2017-07-29 03:18:16.026", "2017-07-29 03:18:16.086", COMMON_DATE_AND_TIME_WITH_MILLISECOND, 0),
-                        toArray("2016-08-21 23:59:20", "2016-08-22 00:00:20", COMMON_DATE_AND_TIME, 60)
+                        toArray("2017-07-29", "2017-08-19", COMMON_DATE, 0),
+                        toArray("2014-01-01 00:00:00", "2014-02-01 00:00:00", COMMON_DATE_AND_TIME, 1),
+
+                        toArray("2017-07-29", "2017-09-19", COMMON_DATE, 1)
         //  
         );
     }
 
-    /**
-     * Test get interval minute.
-     */
     @Test
-    public void testGetIntervalMinute(){
-        assertEquals(expectedValue, (Integer) getIntervalSecond(toDate(input1, input3), toDate(input2, input3)));
+    public void test(){
+        assertEquals(expectedValue, (Integer) getIntervalMonth(toDate(input1, input3), toDate(input2, input3)));
     }
 }

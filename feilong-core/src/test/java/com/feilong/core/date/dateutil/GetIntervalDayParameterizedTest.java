@@ -36,7 +36,7 @@ public class GetIntervalDayParameterizedTest extends Abstract3ParamsAndResultPar
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalDay(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateUtil.getIntervalDay(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
                         ConvertUtil.<Object> toArray("2008-08-24", "2008-08-27", COMMON_DATE, 3),
