@@ -51,8 +51,8 @@ public class HttpClientBuilder{
 
     //---------------------------------------------------------------
     /**
-     * 设置缓存
-     * 
+     * 设置缓存.
+     *
      * @since 2.1.0
      */
     private static Map<ConnectionConfig, HttpClient> cache  = newConcurrentHashMap(10);
@@ -155,6 +155,8 @@ public class HttpClientBuilder{
         //---------------------------------------------------------------
         RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig);
         customHttpClientBuilder.setDefaultRequestConfig(requestConfig);
+
+        //customHttpClientBuilder.setRetryHandler(null);
 
         //---------------------------------------------------------------
         //CloseableHttpClient
