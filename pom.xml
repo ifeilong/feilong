@@ -126,8 +126,6 @@
 		<!--*********************end dependency plugins version************************************ -->
 
 		<!--*********************begin plugins version************************************ -->
-		<!-- http://maven.apache.org/plugins/maven-antrun-plugin/ -->
-		<v.maven-antrun-plugin>3.1.1</v.maven-antrun-plugin>
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
 		<v.maven-assembly-plugin>3.4.1</v.maven-assembly-plugin>
@@ -947,11 +945,6 @@
 		<!-- pluginManagement -->
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>${v.maven-antrun-plugin}</version>
-				</plugin>
-
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>${v.maven-assembly-plugin}</version>
