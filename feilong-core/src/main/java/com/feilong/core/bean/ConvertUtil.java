@@ -245,7 +245,7 @@ public final class ConvertUtil{
 
     static{
         //初始化注册器.
-        ConvertUtil.registerStandardDefaultNull();
+        registerStandardDefaultNull();
     }
 
     //---------------------------------------------------------------
