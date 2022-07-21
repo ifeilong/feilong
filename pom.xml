@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ifeilong</groupId>
@@ -131,7 +130,7 @@
 		<v.maven-antrun-plugin>3.1.1</v.maven-antrun-plugin>
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
-		<v.maven-assembly-plugin>3.3.0</v.maven-assembly-plugin>
+		<v.maven-assembly-plugin>3.4.1</v.maven-assembly-plugin>
 
 		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
 
@@ -149,9 +148,12 @@
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
 		<v.maven-dependency-plugin>3.3.0</v.maven-dependency-plugin>
-		<v.maven-deploy-plugin>2.8.2</v.maven-deploy-plugin>
 
-		<v.maven-install-plugin>2.5.2</v.maven-install-plugin>
+		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
+		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
+
+		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
+		<v.maven-install-plugin>3.0.0</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-javadoc-plugin>3.4.0</v.maven-javadoc-plugin>
@@ -212,7 +214,7 @@
 		<v.versions-maven-plugin>2.11.0</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
-		<v.maven-project-info-reports-plugin>3.3.0</v.maven-project-info-reports-plugin>
+		<v.maven-project-info-reports-plugin>3.4.0</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
 		<v.jacoco-maven-plugin>0.8.8</v.jacoco-maven-plugin>
@@ -635,9 +637,9 @@
 						<goals>
 							<goal>resources</goal>
 						</goals>
-						<phase>process-resources</phase><!-- default -->
+						<phase>process-resources</phase> <!-- default -->
 						<configuration>
-							<srcDir>src/main/resources</srcDir><!-- default -->
+							<srcDir>src/main/resources</srcDir> <!-- default -->
 							<targetDir>${project.build.outputDirectory}</targetDir>
 
 							<encoding>${native2ascii-maven-plugin.encoding}</encoding>
@@ -652,9 +654,9 @@
 						<goals>
 							<goal>testResources</goal>
 						</goals>
-						<phase>process-test-resources</phase><!-- default -->
+						<phase>process-test-resources</phase> <!-- default -->
 						<configuration>
-							<srcDir>src/test/resources</srcDir><!-- default -->
+							<srcDir>src/test/resources</srcDir> <!-- default -->
 							<targetDir>${project.build.testOutputDirectory}</targetDir>
 
 							<encoding>${native2ascii-maven-plugin.encoding}</encoding>
@@ -735,7 +737,7 @@
 					<stylesheetfile>${maven-javadoc-plugin.stylesheetfile}</stylesheetfile>
 
 					<docfilessubdirs>true</docfilessubdirs>
-                    <!---->
+					
 					<javadocDirectory>${maven-javadoc-plugin.javadocDirectory}</javadocDirectory>
 					<javadocVersion>${maven-javadoc-plugin.javadocVersion}</javadocVersion>
 
@@ -759,7 +761,7 @@
 					<footer>${project.name} ${project.version} API</footer>
 
 					<bottom>
-                        <![CDATA[Copyright &copy; {inceptionYear}-{currentYear} by feilong]]>
+						<![CDATA[Copyright &copy; {inceptionYear}-{currentYear} by feilong]]>
 					</bottom>
 
 				</configuration>
@@ -896,7 +898,7 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<locales>en</locales><!-- zh_CN -->
+					<locales>en</locales> <!-- zh_CN -->
 					<generateSitemap>true</generateSitemap>
 					<outputDirectory>${maven-site-plugin.outputDirectory}</outputDirectory>
 				</configuration>

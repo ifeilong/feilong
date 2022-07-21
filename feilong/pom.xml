@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ifeilong</groupId>
@@ -42,9 +41,12 @@
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
 		<v.maven-dependency-plugin>3.3.0</v.maven-dependency-plugin>
-		<v.maven-deploy-plugin>2.8.2</v.maven-deploy-plugin>
 
-		<v.maven-install-plugin>2.5.2</v.maven-install-plugin>
+		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
+		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
+
+		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
+		<v.maven-install-plugin>3.0.0</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-javadoc-plugin>3.4.0</v.maven-javadoc-plugin>
