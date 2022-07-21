@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
@@ -10,25 +9,25 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-context</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-servlet</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-office-excel</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-net-mail</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -41,7 +40,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-office-zip</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

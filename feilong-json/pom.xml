@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-jsonlib</artifactId>
-			<version>${project.version}</version>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 	</dependencies>

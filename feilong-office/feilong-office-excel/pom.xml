@@ -33,13 +33,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-ognl</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-commons-digester3</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

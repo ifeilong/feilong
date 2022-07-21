@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ifeilong</groupId>
@@ -44,9 +43,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong</artifactId>
-			<version>${project.version}</version>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
@@ -168,9 +167,9 @@
 						<goals>
 							<goal>resources</goal>
 						</goals>
-						<phase>process-resources</phase><!-- default -->
+						<phase>process-resources</phase> <!-- default -->
 						<configuration>
-							<srcDir>src/main/resources</srcDir><!-- default -->
+							<srcDir>src/main/resources</srcDir> <!-- default -->
 							<targetDir>${project.build.outputDirectory}</targetDir>
 
 							<encoding>${native2ascii-maven-plugin.encoding}</encoding>
@@ -185,9 +184,9 @@
 						<goals>
 							<goal>testResources</goal>
 						</goals>
-						<phase>process-test-resources</phase><!-- default -->
+						<phase>process-test-resources</phase> <!-- default -->
 						<configuration>
-							<srcDir>src/test/resources</srcDir><!-- default -->
+							<srcDir>src/test/resources</srcDir> <!-- default -->
 							<targetDir>${project.build.testOutputDirectory}</targetDir>
 
 							<encoding>${native2ascii-maven-plugin.encoding}</encoding>

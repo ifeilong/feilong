@@ -12,14 +12,14 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-beanutils</artifactId>
-			<version>${project.version}</version>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-commons-lang3</artifactId>
-			<version>${project.version}</version>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 	</dependencies>

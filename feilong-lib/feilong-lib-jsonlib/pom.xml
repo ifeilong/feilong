@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-beanutils</artifactId>
-			<version>${project.version}</version>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 	</dependencies>

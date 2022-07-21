@@ -9,24 +9,13 @@
 
 	<artifactId>feilong-lib-beanutils</artifactId>
 
-	<inceptionYear>2000</inceptionYear>
-	<description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
-	<url>https://commons.apache.org/proper/commons-beanutils/</url>
-
-
-	<issueManagement>
-		<system>jira</system>
-		<url>https://issues.apache.org/jira/browse/BEANUTILS</url>
-	</issueManagement>
-
-
 	<dependencies>
 	
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-lib-commons-collections4</artifactId>
-			<version>${project.version}</version>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 	</dependencies>

@@ -18,7 +18,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-security</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

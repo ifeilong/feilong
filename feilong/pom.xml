@@ -273,7 +273,7 @@
 
 		<!-- feilong-component -->
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>feilong-component</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
