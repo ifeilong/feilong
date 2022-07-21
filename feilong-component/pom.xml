@@ -9,25 +9,25 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-context</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-servlet</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-excel</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-mail</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -40,7 +40,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-zip</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

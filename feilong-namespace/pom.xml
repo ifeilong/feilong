@@ -12,35 +12,35 @@
 
 		<!--feilong-context -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-context</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-accessor -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-accessor</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-net-filetransfer -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-filetransfer</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-net-bot-wxwork -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-bot-wxwork</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-net-bot-dingtalk -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-bot-dingtalk</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

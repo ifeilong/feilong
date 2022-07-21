@@ -33,19 +33,19 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-ognl</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-commons-digester3</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core-extension</artifactId>
 			<version>${version.feilong-platform}</version>
 			<scope>test</scope>

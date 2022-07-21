@@ -13,7 +13,7 @@
 	
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-commons-collections4</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

@@ -13,14 +13,14 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-json -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-json</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -33,7 +33,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core-extension</artifactId>
 			<version>${version.feilong-platform}</version>
 			<optional>true</optional>

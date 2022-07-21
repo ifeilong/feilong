@@ -25,13 +25,13 @@
 		</dependency>
 		<!-- commons-beanutils -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-beanutils</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 		<!-- feilong-lib-commons-lang3 -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-commons-lang3</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

@@ -11,26 +11,26 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-json -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-json</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-formatter</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-io</artifactId>
 			<version>${version.feilong-platform}</version>
 			<scope>test</scope>

@@ -11,7 +11,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-servlet</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

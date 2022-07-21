@@ -11,27 +11,27 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-servlet</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- 用于 version生成 -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-security</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-template -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-template</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -61,7 +61,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core-extension</artifactId>
 			<version>${version.feilong-platform}</version>
 			<scope>test</scope>

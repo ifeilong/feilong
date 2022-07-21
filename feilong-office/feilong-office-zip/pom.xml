@@ -12,7 +12,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-lib-commons-compress</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

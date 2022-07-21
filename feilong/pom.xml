@@ -93,103 +93,103 @@
 	<dependencies>
 		<!--feilong-core -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-core-extension</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-context -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-context</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-servlet -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-servlet</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-taglib -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-taglib</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-formatter -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-formatter</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-accessor -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-accessor</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-io -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-io</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-httpclient4 -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-http</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-net-bot-wxwork -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-bot-wxwork</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-net-bot-dingtalk -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-bot-dingtalk</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-net-mail -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-mail</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-template</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-json -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-json</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-validator -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-validator</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -198,7 +198,7 @@
 
 		<!--feilong-net-filetransfer -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-filetransfer</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -206,7 +206,7 @@
 
 		<!-- feilong-net-jsoup -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-jsoup</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -215,14 +215,14 @@
 
 		<!-- feilong-tools -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-tools</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!--feilong-office-zip -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-zip</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
@@ -231,49 +231,49 @@
 
 		<!-- feilong-security -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-security</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-office-csv -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-csv</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-office-excel -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-office-excel</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-xml -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-xml</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-net-cxf -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-net-cxf</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-namespace -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-namespace</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
 		<!-- feilong-component -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-component</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>

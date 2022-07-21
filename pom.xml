@@ -298,7 +298,7 @@
 
 		<!-- feilong-common-test -->
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.github.ifeilong</groupId>
 			<artifactId>feilong-common-test</artifactId>
 			<version>${version.feilong-common-test}</version>
 			<scope>test</scope>
