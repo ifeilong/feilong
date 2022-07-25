@@ -23,6 +23,28 @@ import com.feilong.security.EncryptionException;
 /**
  * 国产哈希算法.
  * 
+ * <h3>说明:</h3>
+ * 
+ * <p>
+ * 需要自行依赖 bcprov-jdk15on jar
+ * </p>
+ * 
+ * <blockquote>
+ * 
+ * 
+ * <pre>
+{@code
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.70</version>
+    </dependency>
+}
+ * </pre>
+ * 
+ * 
+ * </blockquote>
+ * 
  * <pre class="code">
  * SM3是中华人民共和国政府采用的一种密码散列函数标准，由国家密码管理局于2010年12月17日发布。
  * 相关标准为“GM/T 0004-2012 《SM3密码杂凑算法》”。
@@ -32,7 +54,8 @@ import com.feilong.security.EncryptionException;
  * </pre>
  * 
  * <pre class="code">
- * 检验你的实现是否正确:
+ * 你可以使用以下代码来检验你的实现是否正确:
+ * 
  * Sm3Util.encode(&quot;你好&quot;) = 78e5c78c5322ca174089e58dc7790acf8ce9d542bee6ae4a5a0797d5e356be61
  * </pre>
  * 

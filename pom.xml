@@ -72,7 +72,7 @@
 		<!--*********************begin dependency plugins version************************************ -->
 
 		<!-- http://www.bouncycastle.org/java.html -->
-		<version.bcprov-jdk15on>1.55</version.bcprov-jdk15on>
+		<version.bcprov-jdk15on>1.70</version.bcprov-jdk15on>
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
 		<version.commons-fileupload>1.4</version.commons-fileupload>
