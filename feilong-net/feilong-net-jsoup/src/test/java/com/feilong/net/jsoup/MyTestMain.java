@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 import org.junit.Test;
 
 import com.feilong.test.AbstractTest;
@@ -37,7 +37,7 @@ public class MyTestMain extends AbstractTest{
     @Test
     public void testMyTestMain(){
         String unsafe = "<p><a href='http://www.oschina.net/' onclick='stealCookies()'>  开源中国社区 </a></p>";
-        String safe = Jsoup.clean(unsafe, Whitelist.basic());
+        String safe = Jsoup.clean(unsafe, Safelist.basic());
         assertEquals("<p><a href=\"http://www.oschina.net/\" rel=\"nofollow\"> 开源中国社区 </a></p>", safe);
     }
 }
