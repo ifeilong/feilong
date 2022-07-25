@@ -106,7 +106,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<!-- 
 		log4j-slf4j-impl用于SLF4J 1.7.x 或更早版本，
 		log4j-slf4j18-impl用于SLF4J 1.8.x或更新版本。 

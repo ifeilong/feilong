@@ -101,11 +101,16 @@
 		<version.junit>4.13.2</version.junit>
 		<version.hamcrest-library>1.3</version.hamcrest-library>
 
-		<!-- http://logging.apache.org/log4j/1.2/download.html -->
-		<version.log4j>1.2.17</version.log4j>
 
-		<!-- https://logback.qos.ch/news.html -->
+		<!-- log -->
+		<!-- http://www.slf4j.org/news.html -->
+		<version.slf4j>1.7.36</version.slf4j>
+		<!-- https://logging.apache.org/log4j/2.x/index.html-->
+		<version.log4j2>2.18.0</version.log4j2>
+
+		<!-- https://logback.qos.ch/news.html 同一版本 -->
 		<version.logback>1.2.11</version.logback>
+
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
 
@@ -115,9 +120,6 @@
 		<version.poi>4.1.2</version.poi>
 		<!-- 新版poi需要这个jar -->
 		<version.ooxml-schemas>1.4</version.ooxml-schemas>
-
-		<!-- http://www.slf4j.org/news.html -->
-		<version.slf4j>1.7.32</version.slf4j>
 
 		<!-- http://velocity.apache.org/news.html -->
 		<!-- Velocity Engine 2.1 now requires Java 1.8+. -->
@@ -272,10 +274,12 @@
 
 
 	<dependencies>
+
 		<!--******** slf4j******** -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
+			<version>${version.slf4j}</version>
 		</dependency>
 
 		<!--******************** test************************* -->
@@ -302,17 +306,41 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- slf4j-log4j12 -->
+
+		<!--  log  -->
+
+		<!--log4j2核心包-->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${version.log4j2}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${version.log4j2}</version>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- log4j -->
+		<!-- 
+		log4j-slf4j-impl用于SLF4J 1.7.x 或更早版本，
+		log4j-slf4j18-impl用于SLF4J 1.8.x或更新版本。 
+		-->
+		<!--用于与slf4j保持桥接-->
+		<!--<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j18-impl</artifactId>
+			<version>${version.log4j2}</version>
+			<scope>test</scope>
+		</dependency>
+		-->
+
+		<!-- log4j2和slf4j桥接依赖-->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${version.log4j2}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -471,38 +499,6 @@
 			</dependency>
 
 			<!-- *********************json******************************* -->
-
-			<!--******** slf4j******** -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${version.slf4j}</version>
-			</dependency>
-
-			<!-- ***********log4j *************** -->
-			<!-- slf4j-log4j12 -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${version.slf4j}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.slf4j</groupId>
-						<artifactId>slf4j-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>log4j</groupId>
-						<artifactId>log4j</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<!-- log4j -->
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${version.log4j}</version>
-			</dependency>
 
 			<!--******** logback ******** -->
 			<dependency>
@@ -735,7 +731,7 @@
 					<stylesheetfile>${maven-javadoc-plugin.stylesheetfile}</stylesheetfile>
 
 					<docfilessubdirs>true</docfilessubdirs>
-					
+
 					<javadocDirectory>${maven-javadoc-plugin.javadocDirectory}</javadocDirectory>
 					<javadocVersion>${maven-javadoc-plugin.javadocVersion}</javadocVersion>
 

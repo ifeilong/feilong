@@ -11,10 +11,7 @@
 <!-- https://logging.apache.org/log4j/2.x/manual/configuration.html#ConfigurationSyntax -->
 
 <!-- monitorInterval="600" -->
-<Configuration status="info" strict="true" xmlns="http://logging.apache.org/log4j/2.0/config"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config 
-           https://raw.githubusercontent.com/apache/logging-log4j2/log4j-2.8.2/log4j-core/src/main/resources/Log4j-config.xsd">
+<Configuration status="info" strict="true">
 
 	<!-- Appenders:定义日志输出目的地，内容和格式等 -->
 	<Appenders>
@@ -38,6 +35,28 @@
 
 		<Logger name="org.apache.commons.digester.Digester" level="warn" />
 		<Logger name="org.apache.commons.digester3" level="info" />
+		<Logger name="com.feilong.core.lang.ThreadUtil" level="info" />
+		<Logger name="com.feilong.taglib.display.pager.PagerBuilder" level="info" />
+		<Logger name="com.feilong.taglib.display.TagCacheManager" level="info" />
+		<Logger name="com.feilong.taglib.display.httpconcat.HttpConcatUtil" level="info" />
+		<Logger name="com.feilong.core.net.URIUtil" level="info" />
+		<Logger name="com.feilong.json.jsonlib.builder.PropertyStrategyWrapper" level="error" />
+		<Logger name="org.apache.velocity" level="info" />
+		<Logger name="org.apache" level="info" />
+		<Logger name="org.apache.commons.beanutils" level="info" />
+		<Logger name="com.feilong.lib.beanutils" level="info" />
+		<Logger name="org.apache.velocity.runtime.log" level="warn" />
+		<Logger name="org.apache.commons.digester.Digester" level="warn" />
+		<Logger name="org.apache.commons.digester3" level="info" />
+		<Logger name="org.springframework" level="info" />
+		<Logger name="com.feilong.tools.security" level="debug" />
+		<Logger name="org.apache.http.impl.conn.LoggingManagedHttpClientConnection" level="info" />
+		<Logger name="org.apache.http.headers" level="info" />
+		<Logger name="org.apache.http.wire" level="info" />
+		<Logger name="org.apache.http.conn.ssl.SSLConnectionSocketFactory" level="info" />
+		<Logger name="httpclient.wire" level="info" />
+		<Logger name="org.apache.http.impl.conn.Wire" level="info" />
+		<Logger name="org.apache.commons.httpclient.Wire" level="info" />
 
 
 		<!-- Root:日志默认打印到控制台 -->

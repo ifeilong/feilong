@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- status:Log4j2内部日志的输出级别,设置为TRACE对学习Log4j2非常有用 -->
+<!-- monitorInterval:定时检测配置文件的修改,有变化则自动重新加载配置,时间单位为秒,最小间隔为5s -->
+<!-- <Configuration strict="true" xmlns="http://logging.apache.org/log4j/2.0/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config
+	https://raw.githubusercontent.com/apache/logging-log4j2/master/log4j-core/src/main/resources/Log4j-config.xsd">
+-->
+
+<!-- https://logging.apache.org/log4j/2.x/manual/configuration.html#ConfigurationSyntax -->
+
+<!-- monitorInterval="600" -->
+<Configuration status="info" strict="true">
+
+	<!-- Appenders:定义日志输出目的地，内容和格式等 -->
+	<Appenders>
+		<!-- Console:日志输出到控制台标准输出 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<!-- pattern:日期,线程名,日志级别,日志名称,日志信息,换行 -->
+			<PatternLayout pattern="%d{HH:mm:ss} %-5p (%F:%L) [%M()] %m%n" />
+		</Console>
+	</Appenders>
+
+	<!-- Loggers:定义日志级别和使用的Appenders -->
+	<Loggers>
+
+		<Logger name="com.feilong" level="debug">
+		</Logger>
+		<Logger name="com.feilong.tools.security" level="debug" />
+		<Logger name="com.feilong.lib.beanutils" level="info" />
+
+		<Logger name="org.springframework" level="info" />
+		<Logger name="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" level="info" />
+
+		<Logger name="org.apache.commons.digester.Digester" level="warn" />
+		<Logger name="org.apache.commons.digester3" level="info" />
+		<Logger name="com.feilong.core.lang.ThreadUtil" level="info" />
+		<Logger name="com.feilong.taglib.display.pager.PagerBuilder" level="info" />
+		<Logger name="com.feilong.taglib.display.TagCacheManager" level="info" />
+		<Logger name="com.feilong.taglib.display.httpconcat.HttpConcatUtil" level="info" />
+		<Logger name="com.feilong.core.net.URIUtil" level="info" />
+		<Logger name="com.feilong.json.jsonlib.builder.PropertyStrategyWrapper" level="error" />
+		<Logger name="org.apache.velocity" level="info" />
+		<Logger name="org.apache" level="info" />
+		<Logger name="org.apache.commons.beanutils" level="info" />
+		<Logger name="com.feilong.lib.beanutils" level="info" />
+		<Logger name="org.apache.velocity.runtime.log" level="warn" />
+		<Logger name="org.apache.commons.digester.Digester" level="warn" />
+		<Logger name="org.apache.commons.digester3" level="info" />
+		<Logger name="org.springframework" level="info" />
+		<Logger name="com.feilong.tools.security" level="debug" />
+		<Logger name="org.apache.http.impl.conn.LoggingManagedHttpClientConnection" level="info" />
+		<Logger name="org.apache.http.headers" level="info" />
+		<Logger name="org.apache.http.wire" level="info" />
+		<Logger name="org.apache.http.conn.ssl.SSLConnectionSocketFactory" level="info" />
+		<Logger name="httpclient.wire" level="info" />
+		<Logger name="org.apache.http.impl.conn.Wire" level="info" />
+		<Logger name="org.apache.commons.httpclient.Wire" level="info" />
+		<Logger name="org.springframework.beans.factory.support" level="info" />
+
+		<Logger name="com.feilong.tools.net.AbstractFileTransfer" level="debug" />
+		<Logger name="org.apache.commons.httpclient.HttpMethodBase" level="warn" />
+		<Logger name="org.apache.commons.httpclient.HttpParser" level="warn" />
+		<Logger name="org.apache.commons.httpclient.HttpConnection" level="warn" />
+		<Logger name="org.apache.commons.httpclient.HttpClient" level="info" />
+		<Logger name="org.apache.commons.httpclient.params.DefaultHttpParams" level="info" />
+
+
+		<!-- Root:日志默认打印到控制台 -->
+		<!-- level日志级别: ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF -->
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+		</Root>
+
+	</Loggers>
+</Configuration>
