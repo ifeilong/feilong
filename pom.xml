@@ -130,7 +130,7 @@
 		<!--*********************begin plugins version************************************ -->
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
-		<v.maven-assembly-plugin>3.4.1</v.maven-assembly-plugin>
+		<v.maven-assembly-plugin>3.4.2</v.maven-assembly-plugin>
 
 		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
 
