@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--status:Log4j2内部日志的输出级别,设置为TRACE对学习Log4j2非常有用 -->
+<!--monitorInterval:定时检测配置文件的修改,有变化则自动重新加载配置,时间单位为秒,最小间隔为5s -->
+<Configuration status="WARN" monitorInterval="600">
+	<!--properties:设置全局变量 -->
+	<properties>
+		<!--LOG_HOME:指定当前日志存放的目录 -->
+		<property name="LOG_HOME">logs</property>
+		<!--FILE_NAME:指定日志文件的名称 -->
+		<property name="FILE_NAME">test</property>
+	</properties>
+	
+	<!--Appenders:定义日志输出目的地，内容和格式等 -->
+	<Appenders>
+		<!--Console:日志输出到控制台标准输出 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<!--pattern:日期,线程名,日志级别,日志名称,日志信息,换行 -->
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%L] - %msg%n" />
+		</Console>
+		<!--RollingFile:日志输出到文件,下面的文件都使用相对路径 -->
+		<!--fileName:当前日志输出的文件名称 -->
+		<!--filePattern:备份日志文件名称，备份目录为logs下面以年月命名的目录，备份时使用gz格式压缩 -->
+		<RollingFile name="RollingFile" fileName="${LOG_HOME}/${FILE_NAME}.log"
+			filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%L] - %msg%n" />
+			<!--Policies:触发策略决定何时执行备份 -->
+			<Policies>
+				<!--TimeBasedTriggeringPolicy:日志文件按照时间备份 -->
+				<!--interval:每1天生成一个新文件，时间单位需要结合filePattern时间%d{yyyy-MM-dd} -->
+				<!--同理，如果要每1小时生成一个新文件，则改成%d{yyyy-MM-ddHH} -->
+				<!--modulate:对备份日志的生成时间纠偏，纠偏以0为基准进行，"0+interval"决定启动后第一次备份时间 -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<!--SizeBasedTriggeringPolicy:日志文件按照大小备份 -->
+				<!--size:指定日志文件最大为100MB，单位可以为KB、MB或GB -->
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<!--DefaultRolloverStrategy:翻转策略决定如何执行备份 -->
+			<!--max:最多保存5个备份文件，结合时间使用后，在每个时间段内最多有5个备份，多出来的会被覆盖 -->
+			<!--compressionLevel:配置日志压缩级别，范围0-9，0不压缩，1压缩速度最快，9压缩率最好，目前只对于zip压缩文件类型有效 -->
+			<DefaultRolloverStrategy max="5" compressionLevel="1">
+				<!--Delete:删除匹配到的过期备份文件 -->
+				<!--maxDepth:由于备份文件保存在${LOG_HOME}/$${date:yyyy-MM},所以目录深度设置为2 -->
+				<Delete basePath="${LOG_HOME}" maxDepth="2">
+					<!--IfFileName:匹配文件名称 -->
+					<!--glob:匹配2级目录深度下的以.log.gz结尾的备份文件 -->
+					<IfFileName glob="*/*.log.gz" />
+					<!--IfLastModified:匹配文件修改时间 -->
+					<!--age:匹配超过180天的文件，单位D、H、M、S分别表示天、小时、分钟、秒 -->
+					<IfLastModified age="180D" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	<!--Loggers:定义日志级别和使用的Appenders -->
+	<Loggers>
+		<!--name: 打印日志的类的包路径 -->
+		<!--additivity: true当前的Logger打印的日志附加到Root，false仅仅打印到RollingFile -->
+		<Logger name="org.apache.logging.log4j" level="ERROR" additivity="true">
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+		<!--Root:日志默认打印到控制台 -->
+		<!--level日志级别: ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF -->
+		<Root level="ERROR">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
