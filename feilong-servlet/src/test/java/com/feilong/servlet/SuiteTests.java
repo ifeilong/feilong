@@ -26,11 +26,13 @@ import com.feilong.servlet.http.requestutil.RequstUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
+                ServletContextUtilTest.class,
+
                 CookieUtilTest.class,
                 IsStaticResourceParameterizedTest.class,
                 GetClientIPTest.class,
                 RequstUtilSuiteTests.class
-        //
+//
 })
 public class SuiteTests{
 

@@ -16,7 +16,10 @@
 package com.feilong.servlet;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.getValue;
 import static java.util.Collections.emptyMap;
 
 import java.util.Collections;
@@ -36,16 +39,14 @@ import com.feilong.lib.lang3.ArrayUtils;
  */
 public final class ServletContextUtil{
 
-    /** The Constant EXCLUDE_KEYS. */
-    public static final String[] EXCLUDE_KEYS = {
-                                                  "org.apache.catalina.jsp_classpath",
-                                                  "org.apache.catalina.resources",
-                                                  "org.apache.jasper.compiler.ELInterpreter",
-                                                  "org.apache.jasper.compiler.TldLocationsCache",
-                                                  "org.apache.jasper.runtime.JspApplicationContextImpl",
-                                                  "org.apache.tomcat.InstanceManager",
-                                                  "org.apache.tomcat.JarScanner",
-                                                  "org.apache.tomcat.util.scan.MergedWebXml" };
+    /**
+     * 查servletcontext 属性忽略的的key.
+     * 
+     * @since 3.2.0
+     */
+    public static final String[] IGNORE_KEYS = tokenizeToStringArray(
+                    getValue(getResourceBundle("config/feilong-servletcontext-ignoreKeys"), "feilong.servletcontext.ignoreKeys"),
+                    ",");
 
     //---------------------------------------------------------------
 
@@ -55,7 +56,6 @@ public final class ServletContextUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
-    //---------------------------------------------------------------
 
     /**
      * servletContext.log servletContext相关信息,一般启动时调用.
@@ -116,7 +116,7 @@ public final class ServletContextUtil{
         Map<String, Object> map = new TreeMap<>();
         while (attributeNames.hasMoreElements()){
             String name = attributeNames.nextElement();
-            if (ignoreContainerAttribute && ArrayUtils.contains(EXCLUDE_KEYS, name)){
+            if (ignoreContainerAttribute && ArrayUtils.contains(IGNORE_KEYS, name)){
                 continue;
             }
             map.put(name, servletContext.getAttribute(name));

@@ -101,7 +101,7 @@ public class ServletContextAttributeLoggingListener implements ServletContextAtt
         if (LOGGER.isInfoEnabled()){
             String name = servletContextAttributeEvent.getName();
 
-            if (isNotNullOrEmpty(name) && ArrayUtils.contains(ServletContextUtil.EXCLUDE_KEYS, name)){
+            if (isNotNullOrEmpty(name) && ArrayUtils.contains(ServletContextUtil.IGNORE_KEYS, name)){
                 return;
             }
 
