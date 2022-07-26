@@ -87,6 +87,61 @@ public final class Validator{
     //---------------------------------------------------------------
 
     /**
+     * 判断内部任何对象 <code>values</code> 是不是 null或者empty.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Validator.isAnyNullOrEmpty((String) null)    = true
+     * Validator.isAnyNullOrEmpty((Object[]) null)  = false
+     * 
+     * Validator.isAnyNullOrEmpty(null, "foo")      = true
+     * Validator.isAnyNullOrEmpty(null, null)       = true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>对于empty的判断,使用以下逻辑:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
+     * {@link com.feilong.lib.lang3.StringUtils#isBlank(CharSequence)};</li>
+     * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
+     * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
+     * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
+     * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
+     * <li><code>数组</code>{@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param values
+     *            元素可以是{@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},{@link CharSequence},
+     *            以及所有数组类型(包括原始类型数组)
+     * @return 如果values是null,返回false<br>
+     *         如果values是empty也返回false<br>
+     *         逻辑和 StringUtils#isAnyBlank(CharSequence...) 保持一致
+     *         其他情况返回false<br>
+     * @see com.feilong.lib.lang3.StringUtils#isAnyBlank(CharSequence...)
+     * @since 3.2.0
+     */
+    public static boolean isAnyNullOrEmpty(Object...values){
+        if (isNullOrEmpty(values)){
+            return false;
+        }
+        for (Object value : values){
+            //有一个是null或者empty 就返回true
+            if (isNullOrEmpty(value)){
+                return true;
+            }
+        }
+        //表示所有元素都不是null 或者empty
+        return false;
+    }
+
+    /**
      * 判断对象 <code>value</code> 是不是 null或者empty.
      * 
      * <h3>示例:</h3>

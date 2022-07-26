@@ -35,6 +35,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 DefaultRuntimeExceptionTest.class,
 
                 ValidatorTest.class,
+                IsAnyNullOrEmptyTest.class,
                 ValidatorIsNullOrEmptyParameterizedTest.class,
                 ValidatorIsNotNullOrEmptyParameterizedTest.class, })
 public class CoreTests{

@@ -15,14 +15,14 @@
  */
 package com.feilong.core;
 
+import static com.feilong.core.bean.ConvertUtil.toEnumeration;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import com.feilong.store.member.User;
 import com.feilong.test.TestUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toEnumeration;
 
 /**
  * The Class ValidatorData.
@@ -89,6 +89,8 @@ public class ValidatorData{
                                         }
 
         };
+
+        //---------------------------------------------------------------
 
         Object[] notNullOrEmptyElement = {
                                            new Integer[] { 2 }, //
