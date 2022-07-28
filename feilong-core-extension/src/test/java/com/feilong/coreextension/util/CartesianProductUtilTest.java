@@ -49,7 +49,7 @@ public class CartesianProductUtilTest extends AbstractTest{
                         toList(1, 2),
                         toList(5),
                         toList(4, 8));
-        String format = JsonUtil.format(result, 0, 0);
+        String format = JsonUtil.toString(result);
         assertEquals(
                         "[[1,1,5,4],[2,2,5,8],[3,1,5,4],[1,2,5,8],[2,1,5,4],[3,2,5,8],[1,1,5,4],[2,2,5,8],[3,1,5,4],[1,2,5,8],[2,1,5,4],[3,2,5,8]]",
                         format);

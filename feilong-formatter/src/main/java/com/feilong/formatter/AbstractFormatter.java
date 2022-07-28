@@ -173,7 +173,7 @@ abstract class AbstractFormatter{
         //取到所有需要被提取的属性名 list
         List<String> propertyNameList = getPropertyValueList(formatterColumnEntityList, "propertyName");
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyNameList:{}", JsonUtil.format(propertyNameList, 0, 0));
+            LOGGER.trace("propertyNameList:{}", JsonUtil.toString(propertyNameList));
         }
 
         //---------------------------------------------------------------

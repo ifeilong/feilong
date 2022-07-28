@@ -52,7 +52,7 @@ public class RequestBodyTest extends AbstractTest{
     private void test(String uri){
         HttpRequest httpRequest = new HttpRequest(uri, toMap("country", "china"), HttpMethodType.POST);
 
-        httpRequest.setRequestBody(JsonUtil.format(httpRequest, 0, 0));
+        httpRequest.setRequestBody(JsonUtil.toString(httpRequest));
         LOGGER.debug(HttpClientUtil.getResponseBodyAsString(httpRequest));
     }
 }

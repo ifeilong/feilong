@@ -29,7 +29,7 @@ public abstract class AbstractJsonTest extends AbstractTest{
 
     protected static final User   USER             = getUserForJsonTest();
 
-    protected static final String USER_JSON_STRING = JsonUtil.format(USER, 0, 0);
+    protected static final String USER_JSON_STRING = JsonUtil.toString(USER);
 
     //---------------------------------------------------------------
 

@@ -34,7 +34,7 @@ public class FormatBeanSortBeanPropertyTest extends AbstractTest{
     public void test(){
         //参见 https://github.com/venusdrogon/feilong-json/issues/30
         Address user = new Address("china", "shanghai", "216000", "wenshui wanrong.lu 888");
-        String format = JsonUtil.format(user, 0, 0);
+        String format = JsonUtil.toString(user);
         assertEquals("{\"country\":\"china\",\"zipCode\":\"216000\",\"city\":\"shanghai\",\"addr\":\"wenshui wanrong.lu 888\"}", format);
     }
 

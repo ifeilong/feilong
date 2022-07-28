@@ -177,7 +177,7 @@ public final class JsonUtil{
      * </p>
      * 
      * <p>
-     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JavaToJsonConfig, int, int)}
+     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #toString(Object)}
      * </p>
      * </blockquote>
      * 

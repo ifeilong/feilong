@@ -17,8 +17,8 @@ package com.feilong.formatter.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.CollectionsUtil.select;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.CollectionsUtil.select;
 
 import java.util.List;
 import java.util.Map;
@@ -26,10 +26,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 
 /**
  * 格式化构造器的父类, 含有公共方法.
@@ -105,7 +105,7 @@ public abstract class AbstractFormatterBuilder implements FormatterBuilder{
      */
     protected static Object[] buildLineData(Map<String, Object> propertyValueMap,BeanFormatterConfig beanFormatterConfig){
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyValueMap:{}", JsonUtil.format(propertyValueMap, 0, 0));
+            LOGGER.trace("propertyValueMap:{}", JsonUtil.toString(propertyValueMap));
         }
 
         //---------------------------------------------------------------

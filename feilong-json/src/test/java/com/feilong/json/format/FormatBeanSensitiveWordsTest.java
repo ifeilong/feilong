@@ -30,7 +30,7 @@ public class FormatBeanSensitiveWordsTest extends AbstractTest{
         BeanWithSensitiveWords beanWithSensitiveWords = new BeanWithSensitiveWords("34567889", "sadadad&^%", "567");
         beanWithSensitiveWords.setCvv2("456");
 
-        String result = JsonUtil.format(beanWithSensitiveWords, 0, 0);
+        String result = JsonUtil.toString(beanWithSensitiveWords);
 
         assertTrue(result.contains("\"key\":\"******\""));
         assertTrue(result.contains("\"cvv\":\"******\""));

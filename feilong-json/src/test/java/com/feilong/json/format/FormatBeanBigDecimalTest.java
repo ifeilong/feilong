@@ -30,21 +30,21 @@ public class FormatBeanBigDecimalTest{
         MyBigDecimalBean myBigDecimalBean = new MyBigDecimalBean();
         myBigDecimalBean.setMoney(toBigDecimal("99999999.00"));
 
-        assertTrue(JsonUtil.format(myBigDecimalBean, 0, 0).contains("\"money\":\"99999999.00\""));
+        assertTrue(JsonUtil.toString(myBigDecimalBean).contains("\"money\":\"99999999.00\""));
     }
 
     @Test
     public void test1(){
         MyBigDecimalBean myBigDecimalBean = new MyBigDecimalBean();
         myBigDecimalBean.setMoney(toBigDecimal("99999999.0000"));
-        assertTrue(JsonUtil.format(myBigDecimalBean, 0, 0).contains("\"money\":\"99999999.0000\""));
+        assertTrue(JsonUtil.toString(myBigDecimalBean).contains("\"money\":\"99999999.0000\""));
     }
 
     @Test
     public void test12(){
         MyBigDecimalBean myBigDecimalBean = new MyBigDecimalBean();
         myBigDecimalBean.setMoney(toBigDecimal("99999999.0"));
-        assertTrue(JsonUtil.format(myBigDecimalBean, 0, 0).contains("\"money\":\"99999999.0\""));
+        assertTrue(JsonUtil.toString(myBigDecimalBean).contains("\"money\":\"99999999.0\""));
     }
 
 }

@@ -30,9 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 import com.feilong.servlet.http.entity.CookieEntity;
 
 /**
@@ -271,7 +271,7 @@ public final class CookieUtil{
         for (Cookie cookie : cookies){
             if (cookie.getName().equals(cookieName)){
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("[getCookie],cookieName:[{}],cookie info:[{}]", cookieName, JsonUtil.format(cookie, 0, 0));
+                    LOGGER.debug("[getCookie],cookieName:[{}],cookie info:[{}]", cookieName, JsonUtil.toString(cookie));
                 }
                 return cookie;
             }
@@ -426,7 +426,7 @@ public final class CookieUtil{
         validateCookieEntity(cookieEntity);//校验
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("[addCookie],cookieName:[{}],cookieEntity info:[{}]", cookieEntity.getName(), JsonUtil.format(cookieEntity, 0, 0));
+            LOGGER.debug("[addCookie],cookieName:[{}],cookieEntity info:[{}]", cookieEntity.getName(), JsonUtil.toString(cookieEntity));
         }
         response.addCookie(toCookie(cookieEntity));
     }
@@ -470,7 +470,7 @@ public final class CookieUtil{
             //如果长度超过4000,浏览器可能不支持
             if (isNotNullOrEmpty(value) && value.length() > 4000){
                 String pattern = "cookie value:{},length:{},more than [4000]!!!some browser may be not support!!!!!,cookieEntity info :{}";
-                LOGGER.warn(pattern, value, value.length(), JsonUtil.format(cookieEntity, 0, 0));
+                LOGGER.warn(pattern, value, value.length(), JsonUtil.toString(cookieEntity));
             }
         }
     }

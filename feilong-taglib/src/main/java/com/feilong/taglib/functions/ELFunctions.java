@@ -106,11 +106,11 @@ public final class ELFunctions{
      * @param obj
      *            the obj
      * @return the string
-     * @see com.feilong.json.JsonUtil#format(Object, int, int)
+     * @see com.feilong.json.JsonUtil#toString(Object)
      */
     public static String toJsonString(Object obj){
         try{
-            return JsonUtil.format(obj, 0, 0);
+            return JsonUtil.toString(obj);
         }catch (Exception e){
             LOGGER.error("json format:" + obj.toString(), e);
         }

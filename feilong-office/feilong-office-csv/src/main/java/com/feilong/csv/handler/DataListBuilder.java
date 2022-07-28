@@ -16,10 +16,10 @@
 package com.feilong.csv.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.util.List;
 import java.util.Map;
@@ -64,7 +64,7 @@ public class DataListBuilder{
     public static <T> List<Object[]> build(Iterable<T> iterable,List<CsvColumnEntity> csvColumnEntityList){
         List<String> propertyNameList = getPropertyValueList(csvColumnEntityList, "propertyName");
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyNameList:{}", JsonUtil.format(propertyNameList, 0, 0));
+            LOGGER.trace("propertyNameList:{}", JsonUtil.toString(propertyNameList));
         }
 
         //---------------------------------------------------------------
@@ -92,7 +92,7 @@ public class DataListBuilder{
         PropertyUtil.copyProperties(propertyValueMap, bean, ConvertUtil.toStrings(propertyNameList));
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyValueMap:{}", JsonUtil.format(propertyValueMap, 0, 0));
+            LOGGER.trace("propertyValueMap:{}", JsonUtil.toString(propertyValueMap));
         }
 
         //---------------------------------------------------------------

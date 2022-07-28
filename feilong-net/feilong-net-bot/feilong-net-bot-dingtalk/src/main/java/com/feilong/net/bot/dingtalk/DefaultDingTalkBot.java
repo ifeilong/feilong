@@ -192,7 +192,7 @@ public class DefaultDingTalkBot implements DingTalkBot{
 
         //---------------------------------------------------------------
         httpRequest.setParamMap(map);
-        httpRequest.setRequestBody(JsonUtil.format(botMessage, 0, 0));
+        httpRequest.setRequestBody(JsonUtil.toString(botMessage));
 
         //必须是 json
         httpRequest.setHeaderMap(toMap("Content-Type", MimeType.JSON.getMime()));

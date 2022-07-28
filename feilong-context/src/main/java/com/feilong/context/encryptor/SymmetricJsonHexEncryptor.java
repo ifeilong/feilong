@@ -59,7 +59,7 @@ public class SymmetricJsonHexEncryptor<T extends Encryptorable> implements Encry
      */
     @Override
     public String encrypt(T bean){
-        String json = JsonUtil.format(bean, 0, 0);
+        String json = JsonUtil.toString(bean);
 
         SymmetricEncryption symmetricEncryption = build();
         return symmetricEncryption.encryptHex(json, charsetName);

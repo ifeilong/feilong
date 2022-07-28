@@ -63,7 +63,7 @@ public class PostTest extends AbstractTest{
         HttpRequest httpRequest = new HttpRequest(uri, HttpMethodType.POST);
         httpRequest.setHeaderMap(toMap("Content-Type", MimeType.JSON.getMime()));
 
-        httpRequest.setRequestBody(JsonUtil.format(toMap("name", "feilong"), 0, 0));
+        httpRequest.setRequestBody(JsonUtil.toString(toMap("name", "feilong")));
 
         String result = HttpClientUtil.getResponseBodyAsString(httpRequest);
         LOGGER.debug(result);
