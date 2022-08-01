@@ -153,7 +153,7 @@
 		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
-		<v.maven-install-plugin>3.0.0</v.maven-install-plugin>
+		<v.maven-install-plugin>3.0.1</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-javadoc-plugin>3.4.0</v.maven-javadoc-plugin>
@@ -188,7 +188,7 @@
 		<v.maven-release-plugin>2.5.3</v.maven-release-plugin>
 
 		<!-- https://issues.apache.org/jira/browse/MRESOURCES/?selectedTab=com.atlassian.jira.jira-projects-plugin:changelog-panel -->
-		<v.maven-resources-plugin>3.2.0</v.maven-resources-plugin>
+		<v.maven-resources-plugin>3.3.0</v.maven-resources-plugin>
 		<v.maven-gpg-plugin>1.6</v.maven-gpg-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-war-plugin/index.html -->
