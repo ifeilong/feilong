@@ -87,7 +87,7 @@
 		<version.jsch>0.1.55</version.jsch>
 
 		<!-- https://jsoup.org/news/ -->
-		<version.jsoup>1.15.2</version.jsoup>
+		<version.jsoup>1.15.3</version.jsoup>
 
 		<version.javamail>1.4.7</version.javamail>
 		<version.javax.mail>1.6.2</version.javax.mail>
