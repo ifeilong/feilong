@@ -27,15 +27,21 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 EncodeParameterizedTest.class,
+                EncodeDefaultUtf8ParameterizedTest.class,
+
                 EncodeUriTest.class,
 
                 HasQueryTest.class,
+
                 DecodeTest.class,
+                DecodeDefaultUtf8Test.class,
+
                 DecodeParameterizedTest.class,
+                DecodeDefaultUtf8ParameterizedTest.class,
 
                 CreateTest.class,
                 CreateWithCharsetTypeTest.class,
-        //                
+//                
 })
 public class FeiLongURIUtilSuiteTests{
 

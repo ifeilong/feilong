@@ -15,6 +15,7 @@
  */
 package com.feilong.core.net;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -35,9 +36,9 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.
@@ -393,6 +394,48 @@ public final class URIUtil{
     // [start] encode/decode
 
     /**
+     * 使用 <code>utf-8</code>,将普通的字符串转成<code>application/x-www-form-urlencoded</code>格式的字符串.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 
+     * <p>
+     * 使用以下规则:
+     * </p>
+     * 
+     * <ul>
+     * <li>字母/数字字符保持不变, ("a-z"、"A-Z" 和 "0-9") .</li>
+     * <li>特殊字符 "."、"-"、"*" 和 "_" 保持不变.</li>
+     * <li>空格字符 " " 转换为一个加号 "+".</li>
+     * <li>% 转换为 %25</li>
+     * 
+     * <li>
+     * 所有其他字符都是不安全的,因此首先使用一些编码机制将它们转换为一个或多个字节,然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示,其中 xy 为该字节的两位十六进制表示形式.
+     * </li>
+     * 
+     * </ul>
+     * 
+     * </li>
+     * 
+     * <li>不要用 {@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
+     * @param value
+     *            the value
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see URLEncoder#encode(String, String)
+     * @see <a href="http://www.freeformatter.com/url-encoder.html">URL Encoder / Decoder</a>
+     * @since 3.2.1
+     */
+    public static String encode(String value){
+        return encode(value, UTF8);
+    }
+
+    /**
      * 使用指定的编码 <code>charsetType</code>,将普通的字符串转成<code>application/x-www-form-urlencoded</code>格式的字符串.
      * 
      * <h3>说明:</h3>
@@ -435,6 +478,41 @@ public final class URIUtil{
      */
     public static String encode(String value,String charsetType){
         return encodeOrDecode(value, charsetType, true);
+    }
+
+    /**
+     * 使用默认的<code>utf-8</code> 来解码一个 <code>application/x-www-form-urlencoded</code> 格式的字符串 .
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * 
+     * <li>不要用{@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
+     * 
+     * <li>
+     * <a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>
+     * 建议指出,{@link CharsetType#UTF8}应该被使用.不这样做可能会带来兼容性能.
+     * </li>
+     * 
+     * <li>
+     * 如果字符串最后的字符是 "%" 符号,那么URLDecoder将会抛出 exception;如果 "%" 符号在字符串中间,那么不会抛出异常.
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
+     * @param value
+     *            需要被解码的值
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
+     *      URLDecoder: Incomplete trailing escape (%) pattern</a>
+     * @see java.net.URLDecoder#decode(String, String)
+     * @see "org.springframework.web.util.UriUtils#decode(String, String)"
+     * @since 3.2.1
+     */
+    public static String decode(String value){
+        return decode(value, UTF8);
     }
 
     /**
