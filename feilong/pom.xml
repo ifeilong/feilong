@@ -3,7 +3,7 @@
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>3.2.0</version>
+	<version>3.2.1</version>
 
 	<packaging>jar</packaging>
 
@@ -21,7 +21,7 @@
 
 	<properties>
 		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
-		<version.feilong-platform>3.2.0</version.feilong-platform>
+		<version.feilong-platform>3.2.1</version.feilong-platform>
 
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
