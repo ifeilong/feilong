@@ -15,17 +15,16 @@
  */
 package com.feilong.core.util.collectionsutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilAddIgnoreNullOrEmptyTest.
@@ -79,6 +78,15 @@ public class AddIgnoreNullOrEmptyTest{
         List<String> list = toList("xinge", "feilong1");
         assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, ""));
         assertThat(list, contains("xinge", "feilong1"));
+    }
+
+    @Test
+    public void testAddIgnoreNullOrEmptyEmptyElement12(){
+        List<String> list = toList("xinge", "feilong1");
+
+        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "44", null));
+
+        assertThat(list, contains("xinge", "feilong1", "44"));
     }
 
 }
