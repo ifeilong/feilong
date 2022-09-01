@@ -26,9 +26,9 @@ import com.feilong.context.converter.builder.AliasBeanBuilder;
 import com.feilong.context.converter.builder.BeanBuilder;
 import com.feilong.context.converter.builder.CommonBeanBuilder;
 import com.feilong.context.converter.builder.NameAndValueMapBuilder;
+import com.feilong.core.Validate;
 import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 
 /**
  * map 构造器之后转成bean ,定义了两个标准方法,也是核心步骤:
@@ -120,7 +120,7 @@ public class MapBuilderStringToBeanConverter<T> extends AbstractBeanClassStringT
         Map<String, String> nameAndValueMap = nameAndValueMapBuilder.build(inputString);
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will build [{}], use data:{}", beanClass.getName(), JsonUtil.format(sortMapByKeyAsc(nameAndValueMap)));
+            LOGGER.debug("will build [{}], use data:{}", beanClass.getName(), JsonUtil.toString(sortMapByKeyAsc(nameAndValueMap)));
         }
         //---------------------将nameAndValueMap转成对象.------------------------------------------
         return beanBuilder.build(nameAndValueMap, ConstructorUtil.newInstance(beanClass));

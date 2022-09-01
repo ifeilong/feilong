@@ -75,7 +75,7 @@ public class PagerTagExtraInfo extends BaseTEI{
     public ValidationMessage[] validate(TagData tagData){
         if (LOGGER.isDebugEnabled()){
             Map<String, Object> map = getTagDataAttributeMap(tagData);
-            LOGGER.debug(JsonUtil.format(map));
+            LOGGER.debug(JsonUtil.toString(map));
         }
         return super.validate(tagData);
     }

@@ -38,6 +38,6 @@ public class JsonStringFormatter extends AbstractStringFormatter{
      */
     @Override
     protected String doFormat(String str){
-        return JsonUtil.format(str);
+        return JsonUtil.toString(str);
     }
 }

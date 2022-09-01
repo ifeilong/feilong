@@ -25,8 +25,8 @@ import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.core.Validate;
+import com.feilong.json.JsonUtil;
 
 /**
  * {@link VelocityEngine} 构造器.
@@ -69,7 +69,7 @@ class VelocityEngineBuilder{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will use [{}] init velocity, properties:{}", configFileInClassPath, JsonUtil.format(toMap(properties)));
+            LOGGER.debug("will use [{}] init velocity, properties:{}", configFileInClassPath, JsonUtil.toString(toMap(properties)));
         }
         //---------------------------------------------------------------
         // 单列模式 Velocity.init(properties); RuntimeSingleton.isInitialized()

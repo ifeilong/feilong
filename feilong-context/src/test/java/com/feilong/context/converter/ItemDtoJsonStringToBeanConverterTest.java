@@ -35,7 +35,7 @@ public class ItemDtoJsonStringToBeanConverterTest extends AbstractTest{
         ItemDto itemDto = new ItemDto();
         itemDto.setCity("上海");
 
-        String json = JsonUtil.format(itemDto);
+        String json = JsonUtil.toString(itemDto);
         StringToBeanConverter<ItemDto> converter = new JsonStringToBeanConverter<>(ItemDto.class);
 
         ItemDto convert = converter.convert(json);

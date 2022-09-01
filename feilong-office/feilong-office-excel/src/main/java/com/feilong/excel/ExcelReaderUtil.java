@@ -187,7 +187,7 @@ public class ExcelReaderUtil{
             map.put("sheetNo", sheetNo);
             map.put("list size", size(list));
             map.put("use time", formatDuration(beginDate));
-            LOGGER.info("use time: [{}]", JsonUtil.format(map));
+            LOGGER.info("use time: [{}]", JsonUtil.toString(map));
         }
         return list;
     }

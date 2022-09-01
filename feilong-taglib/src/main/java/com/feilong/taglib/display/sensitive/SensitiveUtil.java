@@ -21,9 +21,9 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 
 /**
  * 敏感词工具类.
@@ -114,7 +114,7 @@ public final class SensitiveUtil{
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("value:[{}],sensitiveConfig:{}", value, JsonUtil.format(sensitiveConfig));
+            LOGGER.trace("value:[{}],sensitiveConfig:{}", value, JsonUtil.toString(sensitiveConfig));
         }
 
         //---------------------------------------------------------------

@@ -78,7 +78,7 @@ class ExcelSheetMapBuilder{
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             String pattern = "parse sheetDefinitionLocations:[{}],sheetDefinitionsMap:[{}]";
-            LOGGER.debug(pattern, sheetDefinitionLocations, JsonUtil.format(sheetDefinitionsMap));
+            LOGGER.debug(pattern, sheetDefinitionLocations, JsonUtil.toString(sheetDefinitionsMap));
         }
         //---------------------------------------------------------------
         return sheetDefinitionsMap;

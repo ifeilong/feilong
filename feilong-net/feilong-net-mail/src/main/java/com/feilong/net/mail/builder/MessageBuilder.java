@@ -85,7 +85,7 @@ public class MessageBuilder{
             BodySetter.setBody(message, mailSendRequest);
         }catch (MessagingException e){
             //since 1.13.2 update exception message
-            throw new MailException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.format(mailSendRequest)), e);
+            throw new MailException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.toString(mailSendRequest)), e);
         }
         return message;
     }

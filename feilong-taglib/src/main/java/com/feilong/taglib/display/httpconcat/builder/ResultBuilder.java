@@ -73,8 +73,8 @@ public class ResultBuilder{
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(
                             "after standard info:[{}],itemSrcList:[{}],concatSupport:[{}]",
-                            JsonUtil.format(standardHttpConcatParam),
-                            JsonUtil.format(itemSrcList),
+                            JsonUtil.toString(standardHttpConcatParam),
+                            JsonUtil.toString(itemSrcList),
                             concatSupport);
         }
 

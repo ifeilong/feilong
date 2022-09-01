@@ -129,7 +129,7 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
 
             //---------------------------------------------------------------
             String pattern = "tag:[{}],exception message:[{}],request info:{},but need render page,pls check!";
-            LOGGER.error(Slf4jUtil.format(pattern, getClass().getSimpleName(), e.getMessage(), JsonUtil.format(map)), e);
+            LOGGER.error(Slf4jUtil.format(pattern, getClass().getSimpleName(), e.getMessage(), JsonUtil.toString(map)), e);
         }
     }
 

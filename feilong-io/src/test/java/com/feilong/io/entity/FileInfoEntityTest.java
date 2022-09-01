@@ -41,14 +41,14 @@ public class FileInfoEntityTest{
         Date now = toDate("2020-06-21 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
 
         FileInfoEntity fileInfoEntity = new FileInfoEntity("feilongstore_china_cancel20130910.csv", FILE, 25655L, getTime(now));
-        String format = JsonUtil.format(fileInfoEntity);
+        String format = JsonUtil.toString(fileInfoEntity);
 
         assertThat(
                         format,
                         allOf(
-                                        containsString("\"formatSize\": \"25.5KB\""), //
-                                        containsString("\"fileType\": \"FILE\""),
-                                        containsString("\"formatLastModified\": \"06-21 00:00\"")
+                                        containsString("\"formatSize\":\"25.5KB\""), //
+                                        containsString("\"fileType\":\"FILE\""),
+                                        containsString("\"formatLastModified\":\"06-21 00:00\"")
 
                         //
                         ));

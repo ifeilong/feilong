@@ -96,7 +96,7 @@ public class DataFileEmailComponent<T extends Data> implements Task<Void>,UseTim
             return null;
         }
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(dataList));
+            LOGGER.debug(JsonUtil.toString(dataList));
         }
         //--------------2.转成Excel/CVS-------------------------------------------------
         //文件生成

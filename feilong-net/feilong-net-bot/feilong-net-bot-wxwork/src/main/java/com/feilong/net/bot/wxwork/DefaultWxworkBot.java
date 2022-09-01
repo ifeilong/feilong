@@ -92,7 +92,7 @@ public class DefaultWxworkBot implements WxworkBot{
         String url = BOT_WEBHOOK_URL + "?key=" + key;
 
         HttpRequest httpRequest = new HttpRequest(url, POST);
-        httpRequest.setRequestBody(JsonUtil.format(botMessage));
+        httpRequest.setRequestBody(JsonUtil.toString(botMessage));
 
         String json = getResponseBodyAsString(httpRequest, new ConnectionConfig(2 * MILLISECOND_PER_MINUTE));
         return JsonUtil.toBean(json, WxworkResponse.class);

@@ -100,9 +100,9 @@ public class ServletContextLoggingListener implements ServletContextListener{
 
             LOGGER.info(
                             "servletContext [Initialized],base info:[{}],[attribute] info:[{}],[initParameter] info:[{}]",
-                            JsonUtil.format(ServletContextUtil.getServletContextInfoMapForLog(servletContext)),
+                            JsonUtil.toString(ServletContextUtil.getServletContextInfoMapForLog(servletContext)),
                             JsonUtil.formatSimpleMap(ServletContextUtil.getAttributeMap(servletContext)),
-                            JsonUtil.format(ServletContextUtil.getInitParameterMap(servletContext)));
+                            JsonUtil.toString(ServletContextUtil.getInitParameterMap(servletContext)));
         }
     }
 
@@ -120,7 +120,7 @@ public class ServletContextLoggingListener implements ServletContextListener{
 
             LOGGER.info(
                             "servletContext [Destroyed] info:[{}] ",
-                            JsonUtil.format(ServletContextUtil.getServletContextInfoMapForLog(servletContext)));
+                            JsonUtil.toString(ServletContextUtil.getServletContextInfoMapForLog(servletContext)));
         }
     }
 }

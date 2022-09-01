@@ -18,12 +18,12 @@ package com.feilong.taglib.display.pager;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_NAVIGATION_PAGE_NUMBER;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 import static com.feilong.taglib.display.pager.command.PagerConstants.I18N_FEILONG_PAGER;
@@ -86,7 +86,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         String content = TemplateUtil.parseTemplate(pagerParams.getVmPath(), vmParamMap);
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.format(vmParamMap), content);
+            LOGGER.trace("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.toString(vmParamMap), content);
         }
         return content;
     }

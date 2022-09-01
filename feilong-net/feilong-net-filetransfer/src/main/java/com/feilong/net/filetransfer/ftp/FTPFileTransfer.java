@@ -115,7 +115,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             String message = Slf4jUtil.format(
                             "login:[{}],params:[{}],port:[{}]~~~",
                             loginResult,
-                            JsonUtil.format(ftpFileTransferConfig),
+                            JsonUtil.toString(ftpFileTransferConfig),
                             ftpClient.getDefaultPort());
             LOGGER.debug(message);
 
@@ -148,7 +148,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             LOGGER.info("connect:[{}]", true);
             return true;
         }catch (Exception e){
-            String message = Slf4jUtil.format("ftpFileTransferConfig:{}", JsonUtil.format(ftpFileTransferConfig));
+            String message = Slf4jUtil.format("ftpFileTransferConfig:{}", JsonUtil.toString(ftpFileTransferConfig));
             throw new FileTransferException(message, e);
         }
     }

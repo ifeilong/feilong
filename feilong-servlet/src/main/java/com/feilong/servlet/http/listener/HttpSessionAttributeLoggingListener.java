@@ -50,7 +50,7 @@ public class HttpSessionAttributeLoggingListener implements HttpSessionAttribute
                             "name:[{}],value:[{}] added to [session],now session info:[{}] ",
                             httpSessionBindingEvent.getName(),
                             httpSessionBindingEvent.getValue(),
-                            JsonUtil.format(SessionUtil.getSessionInfoMapForLog(session)));
+                            JsonUtil.toString(SessionUtil.getSessionInfoMapForLog(session)));
 
         }
     }
@@ -89,7 +89,7 @@ public class HttpSessionAttributeLoggingListener implements HttpSessionAttribute
                             "name:[{}],value:[{}] replaced to [session],now session info:[{}] ",
                             httpSessionBindingEvent.getName(),
                             httpSessionBindingEvent.getValue(),
-                            JsonUtil.format(SessionUtil.getSessionInfoMapForLog(session)));
+                            JsonUtil.toString(SessionUtil.getSessionInfoMapForLog(session)));
 
         }
     }

@@ -50,7 +50,7 @@ class LogBuilder{
 
             map.put(typeName, value);
             map.put("valueLength", "" + value.length());
-            LOGGER.debug(JsonUtil.format(map));
+            LOGGER.debug(JsonUtil.toString(map));
         }
     }
 
@@ -63,7 +63,7 @@ class LogBuilder{
             map.put(typeName, needDecryptValue);
             map.put("original", original);
 
-            LOGGER.debug(JsonUtil.format(map));
+            LOGGER.debug(JsonUtil.toString(map));
         }
     }
 
@@ -75,7 +75,7 @@ class LogBuilder{
         map.put("keyString", hided(keyString));
         map.put(typeName, value);
         map.put("charsetName", charsetName);
-        return JsonUtil.format(map);
+        return JsonUtil.toString(map);
     }
 
     private static String hided(String keyString){

@@ -22,9 +22,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.taglib.display.SimpleTagParamCacheManager;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerAndContent;
@@ -166,7 +166,7 @@ public final class PagerBuilder{
 
         //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("input [pagerParams] info:{}", JsonUtil.format(pagerParams));
+            LOGGER.trace("input [pagerParams] info:{}", JsonUtil.toString(pagerParams));
         }
 
         return SimpleTagParamCacheManager.getContent(pagerParams, PagerCacheContentBuilder.INSTANCE);

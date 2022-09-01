@@ -82,7 +82,7 @@ class SheetWriter{
                     Map<ExcelBlock, List<CellRangeAddress>> mergedRegionsMap,
                     OgnlStack ognlStack){
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("excelBlock:{}", JsonUtil.format(excelBlock));
+            LOGGER.debug("excelBlock:{}", JsonUtil.toString(excelBlock));
         }
         //---------------------------------------------------------------
         Date blockBeginDate = new Date();

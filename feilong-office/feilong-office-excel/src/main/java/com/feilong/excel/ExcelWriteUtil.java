@@ -147,7 +147,7 @@ public class ExcelWriteUtil{
 
         if (LOGGER.isDebugEnabled()){
             Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName);
-            LOGGER.debug("will write excel,params info:[{}]", JsonUtil.format(map));
+            LOGGER.debug("will write excel,params info:[{}]", JsonUtil.toString(map));
         }
         //---------------------------------------------------------------
         OutputStream outputStream = FileUtil.getFileOutputStream(useOutputFileName);
@@ -159,7 +159,7 @@ public class ExcelWriteUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             Map<String, Object> map = buildMap(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName, beginDate);
-            LOGGER.info("write [SUCCESS],params info:[{}]", JsonUtil.format(map));
+            LOGGER.info("write [SUCCESS],params info:[{}]", JsonUtil.toString(map));
         }
 
         return useOutputFileName;

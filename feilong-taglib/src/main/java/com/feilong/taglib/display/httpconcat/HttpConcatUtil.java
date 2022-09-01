@@ -101,7 +101,7 @@ public final class HttpConcatUtil{
     public static String getWriteContent(HttpConcatParam httpConcatParam){
         Validate.notNull(httpConcatParam, "httpConcatParam can't be null!");
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("input httpConcatParam info:[{}]", JsonUtil.format(httpConcatParam));
+            LOGGER.trace("input httpConcatParam info:[{}]", JsonUtil.toString(httpConcatParam));
         }
 
         //---------------------------------------------------------------
@@ -126,7 +126,7 @@ public final class HttpConcatUtil{
             if (LOGGER.isWarnEnabled()){
                 LOGGER.warn(
                                 "need itemSrcList to create links but isNullOrEmpty,return [empty],httpConcatParam info:[{}]",
-                                JsonUtil.format(httpConcatParam));
+                                JsonUtil.toString(httpConcatParam));
             }
             return EMPTY;
         }

@@ -147,7 +147,7 @@ public class JaxWsDynamicClientUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             Map<String, Object> traceMap = getTraceMapForLog(wsdlUrl, operationName, params);
-            LOGGER.info("will call webservice,input infos:{}", JsonUtil.format(traceMap));
+            LOGGER.info("will call webservice,input infos:{}", JsonUtil.toString(traceMap));
         }
 
         //----------------------------------------------------------------------------

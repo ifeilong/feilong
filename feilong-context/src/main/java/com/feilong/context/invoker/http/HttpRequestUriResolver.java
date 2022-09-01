@@ -22,10 +22,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 import com.feilong.template.TemplateUtil;
 
 /**
@@ -70,7 +70,7 @@ class HttpRequestUriResolver{
         //---------------------------------------------------------------
         String result = parse(uri, request);
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parse uri:[{}],request:[{}],result:[{}]", uri, JsonUtil.format(request), result);
+            LOGGER.debug("parse uri:[{}],request:[{}],result:[{}]", uri, JsonUtil.toString(request), result);
         }
         return result;
     }

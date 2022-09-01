@@ -129,7 +129,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
         //---------------------------------------------------------------
         //带 httpPropertiesMap的
-        return format("{},http system properties:[{}]", commonResult, JsonUtil.format(httpPropertiesMap));
+        return format("{},http system properties:[{}]", commonResult, JsonUtil.toString(httpPropertiesMap));
     }
 
     //---------------------------------------------------------------

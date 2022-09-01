@@ -20,8 +20,8 @@ import javax.mail.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.core.Validate;
+import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.builder.MessageBuilder;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.MailSendRequest;
@@ -81,8 +81,8 @@ public final class DefaultMailSender implements MailSender{
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(
                             "mailSenderConfig:{},mailSendConnectionConfig:[{}]",
-                            JsonUtil.format(mailSendRequest),
-                            JsonUtil.format(mailSendConnectionConfig));
+                            JsonUtil.toString(mailSendRequest),
+                            JsonUtil.toString(mailSendConnectionConfig));
         }
 
         //---------------------------------------------------------------

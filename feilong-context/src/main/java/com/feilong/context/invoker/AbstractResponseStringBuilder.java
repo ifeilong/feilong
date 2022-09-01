@@ -133,7 +133,7 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
     private void logMessage(T request,String responseString){
         if (LOGGER.isDebugEnabled()){
             String response = formatResponse(responseString);
-            LOGGER.debug("request:[{}],responseString:[{}]", JsonUtil.format(request), response);
+            LOGGER.debug("request:[{}],responseString:[{}]", JsonUtil.toString(request), response);
         }
     }
 
@@ -155,7 +155,7 @@ public abstract class AbstractResponseStringBuilder<T> implements ResponseString
             String response = formatResponse(responseString);
             LOGGER.info(
                             "request:[{}],responseString:[{}],after use rebuilder:[{}],will return:[{}]",
-                            JsonUtil.format(request),
+                            JsonUtil.toString(request),
                             response,
                             rebuilder.getClass().getCanonicalName(),
                             rebuildResult);

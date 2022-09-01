@@ -592,7 +592,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(lsFileMap));
+            LOGGER.debug(JsonUtil.toString(lsFileMap));
         }
         //---------------------------------------------------------------
 

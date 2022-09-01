@@ -77,7 +77,7 @@ public class JsonStringToBeanConverter<T> extends AbstractStringToBeanConverter<
 
     @Override
     protected String formatValue(String value){
-        return JsonUtil.format(value);
+        return JsonUtil.toString(value);
     }
 
     //---------------------------------------------------------------

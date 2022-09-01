@@ -74,12 +74,12 @@ public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends R
         String invokerResponseString = responseStringBuilder.build(request);
         //如果得到不响应的字符串, 将抛出异常
         if (isNullOrEmpty(invokerResponseString)){
-            throw new InvokerResponseBlankException("invokerResponse can't be null/empty!,request:[{}]", JsonUtil.format(request));
+            throw new InvokerResponseBlankException("invokerResponse can't be null/empty!,request:[{}]", JsonUtil.toString(request));
         }
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.format(request), invokerResponseString);
+            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponseString);
         }
         return stringToBeanConverter.convert(invokerResponseString);
     }

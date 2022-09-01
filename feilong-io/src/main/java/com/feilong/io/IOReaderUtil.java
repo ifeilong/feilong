@@ -613,7 +613,7 @@ public final class IOReaderUtil{
         ReaderConfig useReaderConfig = defaultIfNull(readerConfig, ReaderConfig.DEFAULT);
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(useReaderConfig));
+            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.toString(useReaderConfig));
         }
 
         //---------------------------------------------------------------
@@ -639,7 +639,7 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             String format = "end read reader:[{}],readerConfig:[{}],use time: [{}]";
-            LOGGER.info(format, reader, JsonUtil.format(useReaderConfig), formatDuration(beginDate));
+            LOGGER.info(format, reader, JsonUtil.toString(useReaderConfig), formatDuration(beginDate));
         }
         return set;
     }

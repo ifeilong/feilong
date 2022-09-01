@@ -89,7 +89,7 @@ class SFTPUtil{
         Validate.notBlank(userName, "userName can't be blank!");
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will use [sftpFileTransferConfig]:[{}] to create session", JsonUtil.format(sftpFileTransferConfig));
+            LOGGER.debug("will use [sftpFileTransferConfig]:[{}] to create session", JsonUtil.toString(sftpFileTransferConfig));
         }
         //---------------------------------------------------------------
         JSch jsch = new JSch();

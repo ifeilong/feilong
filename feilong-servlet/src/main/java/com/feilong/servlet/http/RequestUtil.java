@@ -875,7 +875,7 @@ public final class RequestUtil{
      */
     private static String getClientIp(Map<String, String> map){
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("ips:{}", JsonUtil.format(map));
+            LOGGER.trace("ips:{}", JsonUtil.toString(map));
         }
         //---------------------------------------------------------------
         for (Map.Entry<String, String> entry : map.entrySet()){

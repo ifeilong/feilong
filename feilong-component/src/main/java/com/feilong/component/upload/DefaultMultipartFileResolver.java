@@ -70,7 +70,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(MultipartFileUtil.getMultipartFileInfoMapForLogMap(multipartFile)));
+            LOGGER.debug(JsonUtil.toString(MultipartFileUtil.getMultipartFileInfoMapForLogMap(multipartFile)));
         }
 
         try (InputStream inputStream = multipartFile.getInputStream()){

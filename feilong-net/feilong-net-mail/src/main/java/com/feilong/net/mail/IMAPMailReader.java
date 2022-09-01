@@ -79,7 +79,7 @@ public class IMAPMailReader implements MailReader{
     @Override
     public List<MailInfo> read(MailReaderConfig mailReaderConfig,Integer newstIndex,SearchTerm searchTerm){
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.format(mailReaderConfig), JsonUtil.format(searchTerm));
+            LOGGER.debug("input mailReaderConfig:[{}],searchTerm:[{}]", JsonUtil.toString(mailReaderConfig), JsonUtil.toString(searchTerm));
         }
 
         //---------------------------------------------------------------
@@ -166,7 +166,7 @@ public class IMAPMailReader implements MailReader{
         folder.open(Folder.READ_ONLY);
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("folder info :{}", JsonUtil.format(FolderUtil.getMapForLog(folder)));
+            LOGGER.debug("folder info :{}", JsonUtil.toString(FolderUtil.getMapForLog(folder)));
         }
         return folder;
     }

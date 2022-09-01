@@ -80,7 +80,7 @@ public abstract class AbstractFormatterBuilder implements FormatterBuilder{
                         : formatterColumnEntityList;
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("before sort:{}", JsonUtil.format(useFormatterColumnEntityList));
+            LOGGER.trace("before sort:{}", JsonUtil.toString(useFormatterColumnEntityList));
         }
 
         //---------------------------------------------------------------
@@ -88,7 +88,7 @@ public abstract class AbstractFormatterBuilder implements FormatterBuilder{
                         .sortFormatterColumnEntityList(useFormatterColumnEntityList, useBeanFormatterConfig);
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("after sort:{}", JsonUtil.format(result));
+            LOGGER.trace("after sort:{}", JsonUtil.toString(result));
         }
         return result;
     }

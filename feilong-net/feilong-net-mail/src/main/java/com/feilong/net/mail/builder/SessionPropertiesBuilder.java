@@ -60,7 +60,7 @@ public class SessionPropertiesBuilder{
         String serverHost = sessionConfig.getServerHost();
         if (isNullOrEmpty(serverHost)){
             throw new IllegalArgumentException(
-                            Slf4jUtil.format("serverHost can't be null/empty! sessionConfig:[{}]", JsonUtil.format(sessionConfig)));
+                            Slf4jUtil.format("serverHost can't be null/empty! sessionConfig:[{}]", JsonUtil.toString(sessionConfig)));
         }
 
         //---------------------------------------------------------------

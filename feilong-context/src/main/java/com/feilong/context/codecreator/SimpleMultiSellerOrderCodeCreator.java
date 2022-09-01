@@ -119,7 +119,7 @@ public class SimpleMultiSellerOrderCodeCreator implements MultiSellerOrderCodeCr
                             result,
                             buyerId,
                             sellerId,
-                            JsonUtil.format(simpleMultiSellerOrderCodeCreatorConfig));
+                            JsonUtil.toString(simpleMultiSellerOrderCodeCreatorConfig));
         }
         return result;
 

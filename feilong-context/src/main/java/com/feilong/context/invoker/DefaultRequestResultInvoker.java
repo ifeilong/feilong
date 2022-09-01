@@ -115,12 +115,12 @@ public class DefaultRequestResultInvoker<T extends ResponseCommand, R extends In
     public N doHandler(R request){
         String invokerResponse = responseStringBuilder.build(request);
         if (isNullOrEmpty(invokerResponse)){
-            throw new InvokerResponseBlankException("invokerResponse can't be null/empty!,request:[{}]", JsonUtil.format(request));
+            throw new InvokerResponseBlankException("invokerResponse can't be null/empty!,request:[{}]", JsonUtil.toString(request));
         }
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.format(request), invokerResponse);
+            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponse);
         }
 
         //---------------------------------------------------------------

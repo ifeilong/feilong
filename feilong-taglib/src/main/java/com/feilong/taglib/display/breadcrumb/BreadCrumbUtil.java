@@ -104,7 +104,7 @@ public class BreadCrumbUtil{
         List<BreadCrumbEntity<Object>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
         Validate.notEmpty(breadCrumbEntityList, "breadCrumbEntityList can't be null/empty!");
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input breadCrumbParams info:[{}]", JsonUtil.format(breadCrumbParams));
+            LOGGER.debug("input breadCrumbParams info:[{}]", JsonUtil.toString(breadCrumbParams));
         }
 
         //---------------------------------------------------------------
@@ -203,7 +203,10 @@ public class BreadCrumbUtil{
         BreadCrumbEntity<T> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
         if (isNullOrEmpty(currentBreadCrumbEntity)){
             if (LOGGER.isWarnEnabled()){
-                LOGGER.warn("when currentPath:{},in breadCrumbEntityList:[{}],can't find", currentPath, JsonUtil.format(breadCrumbParams));
+                LOGGER.warn(
+                                "when currentPath:{},in breadCrumbEntityList:[{}],can't find",
+                                currentPath,
+                                JsonUtil.toString(breadCrumbParams));
             }
 
             return emptyList();

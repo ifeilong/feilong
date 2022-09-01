@@ -17,9 +17,9 @@ package com.feilong.context;
 
 import java.util.Map;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.core.Validate;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -50,7 +50,7 @@ public final class BeanLogMessageBuilder{
         Validate.notNull(obj, "obj can't be null!");
 
         Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(obj);
-        return build(obj, JsonUtil.format(map));
+        return build(obj, JsonUtil.toString(map));
     }
 
     //---------------------------------------------------------------

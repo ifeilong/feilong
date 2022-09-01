@@ -551,7 +551,7 @@ public class XmlUtil{
 
         if (LOGGER.isDebugEnabled()){
             String pattern = "class:[{}],bean:[{}],xStreamConfig:[{}]";
-            LOGGER.debug(pattern, bean.getClass().getSimpleName(), JsonUtil.format(bean), JsonUtil.format(xStreamConfig));
+            LOGGER.debug(pattern, bean.getClass().getSimpleName(), JsonUtil.toString(bean), JsonUtil.toString(xStreamConfig));
         }
         return XStreamUtil.toXML(bean, xStreamConfig);
     }
@@ -771,7 +771,7 @@ public class XmlUtil{
      */
     public static <T> T toBean(String xml,XStreamConfig xStreamConfig){
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input params info,xml:[{}],xStreamConfig:[{}]", xml, JsonUtil.format(xStreamConfig));
+            LOGGER.debug("input params info,xml:[{}],xStreamConfig:[{}]", xml, JsonUtil.toString(xStreamConfig));
         }
         //---------------------------------------------------------------
         if (isNullOrEmpty(xml)){
