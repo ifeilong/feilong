@@ -1520,6 +1520,30 @@ public final class DateUtil{
         }
     }
 
+    /**
+     * 将时间字符串 <code>dateString</code> 使用 {@link DatePattern#COMMON_DATE} 默认模式转换成date类型.
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Date date = toDate("2022-09-01");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param dateString
+     *            时间字符串
+     * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see com.feilong.lib.lang3.time.DateUtils#parseDate(String, String...)
+     * @since 3.2.1
+     */
+    public static Date toDate(String dateString){
+        return toDate(dateString, DatePattern.COMMON_DATE);
+    }
+
     // [end]
 
     // [start]toCalendar
