@@ -15,6 +15,9 @@
  */
 package com.feilong.core.net;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import java.io.File;
@@ -29,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * {@link URL} 工具类.
@@ -294,5 +298,141 @@ public final class URLUtil{
             String message = format("context:[{}],spec:[{}]", context, spec);
             throw new URIParseException(message, e);
         }
+    }
+
+    /**
+     * 判断给定的url地址, 如果没有指定的(http:// 或者 https://)协议前缀(忽视大小写),拼接前缀<code>perfix</code>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * if (userInfo.getLogoPic() != null && !"".equals(userInfo.getLogoPic())){
+     *     <span style="color:green">// 微信登录头像地址是绝对路径</span>
+     *     <span style="color:green">// 公司登录头像地址是相对路径</span>
+     *     if (userInfo.getLogoPic().startsWith("http://")){
+     *         result.setUserLogoPic(userInfo.getLogoPic());
+     *     }else{
+     *         result.setUserLogoPic(coverPerfix + userInfo.getLogoPic());
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * String userLogoPic = URLUtil.ifNoHttpOrHttpsProtocolPrependPre(userInfo.getLogoPic(), coverPerfix);
+     * if (isNotNullOrEmpty(userLogoPic)){
+     *     result.setUserLogoPic(userLogoPic);
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param url
+     *            给定的url地址
+     * @param perfix
+     *            追加的前缀
+     * @return 如果 <code>url</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>perfix</code> 是null或者empty,直接返回 <code>url</code><br>
+     * @see com.feilong.lib.lang3.StringUtils#prependIfMissing(String, CharSequence, CharSequence...)
+     * @see com.feilong.lib.lang3.StringUtils#prependIfMissingIgnoreCase(String, CharSequence, CharSequence...)
+     * @since 3.2.1
+     */
+    public static String ifNoHttpOrHttpsProtocolPrependPre(String url,String perfix){
+        return ifNoProtocolPrependPre(url, toArray("http://", "https://"), perfix);
+    }
+
+    /**
+     * 判断给定的url地址, 如果没有指定的协议前缀(比如http:// 或者 https://)(忽视大小写),拼接前缀<code>perfix</code>
+     * 
+     * <p>
+     * 通常可以直接使用 {@link #ifNoHttpOrHttpsProtocolPrependPre(String, String)}方法
+     * </p>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * if (userInfo.getLogoPic() != null && !"".equals(userInfo.getLogoPic())){
+     *     <span style="color:green">// 微信登录头像地址是绝对路径</span>
+     *     <span style="color:green">// 公司登录头像地址是相对路径</span>
+     *     if (userInfo.getLogoPic().startsWith("http://")){
+     *         result.setUserLogoPic(userInfo.getLogoPic());
+     *     }else{
+     *         result.setUserLogoPic(coverPerfix + userInfo.getLogoPic());
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * String userLogoPic = URLUtil.ifNoProtocolPrependPre(userInfo.getLogoPic(), toArray("https://"), coverPerfix);
+     * if (isNotNullOrEmpty(userLogoPic)){
+     *     result.setUserLogoPic(userLogoPic);
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param url
+     *            给定的url地址
+     * @param protocolPres
+     *            比如传http https, 会循环判断 ,有其中的任意一个将不会拼接, 忽视大小写
+     * @param perfix
+     *            追加的前缀
+     * @return 如果 <code>url</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * 
+     *         如果 <code>protocols</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>protocols</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>perfix</code> 是null或者empty,直接返回 <code>url</code><br>
+     * @see com.feilong.lib.lang3.StringUtils#prependIfMissing(String, CharSequence, CharSequence...)
+     * @see com.feilong.lib.lang3.StringUtils#prependIfMissingIgnoreCase(String, CharSequence, CharSequence...)
+     * @since 3.2.1
+     */
+    public static String ifNoProtocolPrependPre(String url,String[] protocolPres,String perfix){
+        if (isNullOrEmpty(url)){
+            return EMPTY;
+        }
+
+        Validate.notEmpty(protocolPres, "protocolPres can't be null/empty!,url:%s,perfix:%s", url, perfix);
+
+        if (isNullOrEmpty(perfix)){
+            return url;
+        }
+
+        //---------------------------------------------------------------
+        //是否前置拼接
+        boolean isPrependPre = true;
+        for (String protocolPre : protocolPres){
+
+            //如果有协议里面的 就表示不拼接
+            if (StringUtils.startsWithIgnoreCase(url, protocolPre)){
+                isPrependPre = false;
+                break;
+            }
+        }
+
+        //如果不前置拼接 那么返回 url
+        if (!isPrependPre){
+            return url;
+        }
+
+        //---------------------------------------------------------------
+        return perfix + url;
     }
 }

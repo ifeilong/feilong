@@ -30,7 +30,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToURITest.class,
                 ToURLTest.class,
                 OpenStreamTest.class,
-        //                
+
+                IfNoProtocolPrependPreTest.class,
+                IfNoHttpOrHttpsProtocolPrependPreTest.class,
+//                
 })
 public class FeiLongURLUtilSuiteTests{
 
