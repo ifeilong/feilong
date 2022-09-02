@@ -156,7 +156,8 @@
 		<v.maven-install-plugin>3.0.1</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-javadoc-plugin>3.4.0</v.maven-javadoc-plugin>
+		<!-- https://maven.apache.org/plugins/maven-javadoc-plugin/index.html -->
+		<v.maven-javadoc-plugin>3.4.1</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-jar-plugin>3.2.2</v.maven-jar-plugin>
