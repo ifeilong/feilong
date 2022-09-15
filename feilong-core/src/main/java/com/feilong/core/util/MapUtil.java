@@ -38,6 +38,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.MapUtils;
@@ -1222,6 +1223,95 @@ public final class MapUtil{
     //---------------------------------------------------------------
 
     /**
+     * 提取 key 交集, 但是值不同的map
+     * 
+     * <p>
+     * 从targetMap 中, 提取key在toBeComparedMap,但是值即使转换成相同类型后还是不相等的数据
+     * </p>
+     * 
+     * <p>
+     * 注意, 返回的是基于targetMap走的, 值的类型也是 targetMap value 类型
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<Long, Long> targetMap = newLinkedHashMap();
+     * <span style="color:red">targetMap.put(1L, 88L);</span>
+     * targetMap.put(2L, 99L);
+     * 
+     * Map<Long, Integer> toBeComparedMap = newLinkedHashMap();
+     * <span style="color:red">toBeComparedMap.put(1L, 66);</span>
+     * toBeComparedMap.put(2L, 99);
+     * toBeComparedMap.put(8L, 55);
+     * 
+     * Map<Long, Long> extractSubMap = MapUtil.extractIntersectionKeyDifferentValueMap(targetMap, toBeComparedMap);
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * (1L, 88L) 一条记录
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * 
+     * @param <T>
+     * @param <V>
+     * @param <I>
+     * @param targetMap
+     * @param toBeComparedMap
+     * @return 如果 <code>targetMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>toBeComparedMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @since 2022-09-15
+     */
+    public static <T, V, I> Map<T, V> extractIntersectionKeyDifferentValueMap(Map<T, V> targetMap,Map<T, I> toBeComparedMap){
+        if (isNullOrEmpty(targetMap)){
+            return emptyMap();
+        }
+        if (isNullOrEmpty(toBeComparedMap)){
+            return emptyMap();
+        }
+
+        //---------------------------------------------------------------
+        Map<T, V> returnMap = newHashMap();
+        for (Map.Entry<T, V> entry : targetMap.entrySet()){
+            T key = entry.getKey();
+
+            //---------------------------------------------------------------
+
+            V targetValue = entry.getValue();
+            I toBeComparedValue = toBeComparedMap.get(key);
+
+            //两个值相同, 跳过 (含都是null , 或者类型直接相同)
+            if (targetValue == toBeComparedValue){
+                continue;
+            }
+
+            //有一个是null, 设置值
+            if (null == targetValue || null == toBeComparedValue){
+                returnMap.put(key, targetValue);
+                continue;
+            }
+
+            //---------------------------------------------------------------
+            //两个值都不是null
+
+            //相等忽略
+            if (ConvertUtil.convert(toBeComparedValue, targetValue.getClass()).equals(targetValue)){ //类型自动转换后对比
+                continue;
+            }
+            returnMap.put(key, targetValue);
+        }
+        return returnMap;
+    }
+
+    /**
      * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
      * 
      * <h3>说明:</h3>
@@ -1965,5 +2055,7 @@ public final class MapUtil{
         //This is the calculation used in JDK8 to resize when a putAll happens it seems to be the most conservative calculation we can make.  
         return (int) (size / 0.75f) + 1;//0.75 is the default load factor
     }
+
+    //---------------------------------------------------------------
 
 }

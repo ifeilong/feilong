@@ -36,6 +36,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ExtractSubMapTest.class,
                 ExtractSubMapIncludeKeysTest.class,
+                ExtractIntersectionKeyDifferentValueMapTest.class,
 
                 NewHashMapTest.class,
                 NewTreeMapTest.class,
@@ -54,7 +55,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 RemoveKeysTest.class,
                 GetTest.class,
-        //
+//
 })
 public class MapUtilSuiteTests{
 
