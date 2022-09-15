@@ -60,21 +60,21 @@ class URIBuilderBuilder{
      * @return the URI builder
      */
     static URIBuilder build(HttpRequest httpRequest){
+        String uri = httpRequest.getUri();
+        Map<String, String> paramMap = httpRequest.getParamMap();
+
         try{
-            String uri = httpRequest.getUri();
             URIBuilder uriBuilder = new URIBuilder(uri);
 
-            Map<String, String> paramMap = httpRequest.getParamMap();
             if (isNullOrEmpty(paramMap)){
-
                 if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("httpRequest [paramMap] is isNullOrEmpty,skip!,httpRequest info:[{}]", JsonUtil.format(httpRequest, true));
+                    LOGGER.trace("httpRequest [paramMap] isNullOrEmpty,skip!,httpRequestInfo:[{}]", JsonUtil.toString(httpRequest, true));
                 }
                 return uriBuilder;
             }
             return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
-            String message = format("httpRequest:[{}]", JsonUtil.format(httpRequest, true));
+            String message = format("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
             throw new UncheckedHttpException(message, e);
         }
     }
@@ -95,9 +95,8 @@ class URIBuilderBuilder{
         for (Map.Entry<String, String> entry : paramMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
-            }
+
+            LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
             uriBuilder.setParameter(key, value);
         }
         return uriBuilder;

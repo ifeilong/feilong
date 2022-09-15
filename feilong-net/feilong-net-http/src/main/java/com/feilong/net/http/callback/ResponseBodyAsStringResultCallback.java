@@ -57,8 +57,8 @@ public class ResponseBodyAsStringResultCallback implements ResultCallback<String
         if (LOGGER.isInfoEnabled()){
             LOGGER.info(
                             "request:[{}],useConnectionConfig:[{}],resultString:[{}]",
-                            JsonUtil.format(httpRequest, true),
-                            JsonUtil.format(useConnectionConfig, true),
+                            JsonUtil.toString(httpRequest, true),
+                            JsonUtil.toString(useConnectionConfig, true),
                             StringOverLengthJsonValueProcessor.format(resultString, 1000));
         }
         return resultString;

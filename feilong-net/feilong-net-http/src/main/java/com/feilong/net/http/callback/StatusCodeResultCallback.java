@@ -56,8 +56,8 @@ public class StatusCodeResultCallback implements ResultCallback<Integer>{
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace(
                             "httpRequest:[{}],connectionConfig:[{}],statusCode:[{}]",
-                            JsonUtil.format(httpRequest, true),
-                            JsonUtil.format(useConnectionConfig, true),
+                            JsonUtil.toString(httpRequest, true),
+                            JsonUtil.toString(useConnectionConfig, true),
                             statusCode);
         }
         return statusCode;

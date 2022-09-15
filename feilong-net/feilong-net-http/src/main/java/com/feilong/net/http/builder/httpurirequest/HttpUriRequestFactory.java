@@ -113,7 +113,7 @@ public class HttpUriRequestFactory{
         try{
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.format(httpRequest, true));
+            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
             throw new UncheckedHttpException(message, e);
         }
     }

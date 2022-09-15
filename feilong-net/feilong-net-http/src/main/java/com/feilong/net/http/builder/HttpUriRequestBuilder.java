@@ -67,8 +67,8 @@ public final class HttpUriRequestBuilder{
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace(
                             "httpRequest info:[{}],connectionConfig:[{}]",
-                            JsonUtil.format(httpRequest, true),
-                            JsonUtil.format(connectionConfig, true));
+                            JsonUtil.toString(httpRequest, true),
+                            JsonUtil.toString(connectionConfig, true));
         }
         //---------------------------------------------------------------
         HttpUriRequest httpUriRequest = HttpUriRequestFactory.create(httpRequest, connectionConfig);

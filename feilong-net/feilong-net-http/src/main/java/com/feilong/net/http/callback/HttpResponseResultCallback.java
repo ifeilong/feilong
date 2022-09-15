@@ -70,11 +70,11 @@ public class HttpResponseResultCallback implements ResultCallback<com.feilong.ne
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             String pattern = "request:[{}],useConnectionConfig:[{}],response:[{}]";
-            String response = JsonUtil.format(
+            String response = JsonUtil.toString(
                             resultResponse,
                             new JavaToJsonConfig(toMap("resultString", (JsonValueProcessor) new StringOverLengthJsonValueProcessor())));
 
-            LOGGER.info(pattern, JsonUtil.format(httpRequest, true), JsonUtil.format(useConnectionConfig, true), response);
+            LOGGER.info(pattern, JsonUtil.toString(httpRequest, true), JsonUtil.toString(useConnectionConfig, true), response);
         }
         return resultResponse;
     }
