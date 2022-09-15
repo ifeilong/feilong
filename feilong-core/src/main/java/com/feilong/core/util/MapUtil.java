@@ -1260,15 +1260,19 @@ public final class MapUtil{
      * 
      * </blockquote>
      * 
-     * 
      * @param <T>
+     *            key 类型
      * @param <V>
+     *            目标map value 类型
      * @param <I>
+     *            待比较的map value 类型, 可以和目标map value 类型相同或者不同, 如果不同自动转换比较
      * @param targetMap
+     *            目标map
      * @param toBeComparedMap
+     *            待比较的map
      * @return 如果 <code>targetMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>toBeComparedMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     * @since 2022-09-15
+     * @since 3.2.3
      */
     public static <T, V, I> Map<T, V> extractIntersectionKeyDifferentValueMap(Map<T, V> targetMap,Map<T, I> toBeComparedMap){
         if (isNullOrEmpty(targetMap)){
@@ -1284,6 +1288,10 @@ public final class MapUtil{
             T key = entry.getKey();
 
             //---------------------------------------------------------------
+            //不存在的key 就跳过
+            if (!toBeComparedMap.containsKey(key)){
+                continue;
+            }
 
             V targetValue = entry.getValue();
             I toBeComparedValue = toBeComparedMap.get(key);

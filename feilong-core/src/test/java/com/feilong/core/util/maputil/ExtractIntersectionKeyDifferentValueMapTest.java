@@ -29,11 +29,17 @@ import static org.junit.Assert.assertTrue;
 import java.util.Map;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.MapUtil;
 
 public class ExtractIntersectionKeyDifferentValueMapTest{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExtractIntersectionKeyDifferentValueMapTest.class);
+
+    //---------------------------------------------------------------
     /**
      * Test extract sub map 3.
      */
@@ -53,12 +59,14 @@ public class ExtractIntersectionKeyDifferentValueMapTest{
         assertTrue(size(extractSubMap) == 1);
     }
 
+    @Test
     public void extractIntersectionKeyDifferentValueMap2(){
         Map<Long, Long> targetMap = newLinkedHashMap();
         targetMap.put(1L, 88L);
         targetMap.put(2L, 99L);
         targetMap.put(20L, null);
         targetMap.put(30L, 30L);
+        targetMap.put(50L, 50L);
         targetMap.put(40L, null);
 
         Map<Long, Integer> toBeComparedMap = newLinkedHashMap();
@@ -69,9 +77,26 @@ public class ExtractIntersectionKeyDifferentValueMapTest{
         toBeComparedMap.put(40L, 1000);
 
         Map<Long, Long> extractSubMap = MapUtil.extractIntersectionKeyDifferentValueMap(targetMap, toBeComparedMap);
+
+        //---------------------------------------------------------------
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(extractSubMap.toString());
+        }
+
+        //---------------------------------------------------------------
+
         assertThat(
                         extractSubMap,
-                        allOf(hasEntry(1L, 88L), hasEntry(40L, null), hasEntry(30L, 30L), not(hasEntry(2L, 99L)), not(hasEntry(8L, 55L))));
+                        allOf(
+                                        hasEntry(1L, 88L),
+                                        hasEntry(40L, null),
+                                        hasEntry(30L, 30L),
+
+                                        not(hasEntry(20L, null)),
+                                        not(hasEntry(2L, 99L)),
+                                        not(hasEntry(50L, 50L)),
+                                        not(hasEntry(8L, 55L))));
         assertTrue(size(extractSubMap) == 3);
     }
 
