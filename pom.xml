@@ -76,6 +76,7 @@
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
 		<version.commons-fileupload>1.4</version.commons-fileupload>
+		<version.commons-lang3>3.12.0</version.commons-lang3>
 
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<!-- https://downloads.apache.org/httpcomponents/httpclient/RELEASE_NOTES-4.5.x.txt -->
@@ -350,6 +351,12 @@
 	<!--*********************dependencyManagement****************************** -->
 	<dependencyManagement>
 		<dependencies>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${version.commons-lang3}</version>
+			</dependency>
 
 			<!-- *******************spring********************************* -->
 
