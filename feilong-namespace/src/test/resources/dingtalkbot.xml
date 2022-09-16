@@ -7,8 +7,9 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd 	
     http://www.feilong.com/schema/feilong http://www.feilong.com/schema/feilong/feilong.xsd
     ">
+	<!--https://oapi.dingtalk.com/robot/send?access_token=6900a7c9f0fe687831b8a88142340cce36b7409b2dacc0c673001ad5694b7f9a -->
 
-	<feilong:dingtalkBot id="dingtalkBot" accessToken="a99ef44aad3b80810d86529e9fb16902255a5928908f13fa15e9dbd75c7749d2"
-		secret="SECd2325d14c67a3ec585568e00b49d749c7094a2a1579beb86369d88a5b161c981" defaultTitle="aaa" />
+	<feilong:dingtalkBot id="dingtalkBot" accessToken="6900a7c9f0fe687831b8a88142340cce36b7409b2dacc0c673001ad5694b7f9a"
+		secret="SEC391fc22c04ee9eb613ef63f93c4eb193d4e845aa3ef8bc3d40966e46b116feb7" defaultTitle="aaa" isAsync="true" />
 
 </beans>

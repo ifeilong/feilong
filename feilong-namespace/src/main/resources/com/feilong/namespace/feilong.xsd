@@ -306,11 +306,26 @@
 			<xsd:complexContent>
 				<xsd:extension base="beans:identifiedType">
 
-
 					<xsd:attribute name="key" type="xsd:string" use="required">
 						<xsd:annotation>
 							<xsd:documentation>
                                 <![CDATA[指定 企业微信机器人的 key]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="isAsync" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[是否异步,默认false,表示是同步]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="isCatchException" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[是否捕获异常,默认false,表示不捕获异常]]>
 							</xsd:documentation>
 						</xsd:annotation>
 					</xsd:attribute>
@@ -356,6 +371,22 @@
 						<xsd:annotation>
 							<xsd:documentation>
                                 <![CDATA[指定 markdown默认title]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="isAsync" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[是否异步,默认false,表示是同步]]>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="isCatchException" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>
+                                <![CDATA[是否捕获异常,默认false,表示不捕获异常]]>
 							</xsd:documentation>
 						</xsd:annotation>
 					</xsd:attribute>

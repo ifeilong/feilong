@@ -20,8 +20,12 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.net.http.HttpClientUtil.getResponseBodyAsString;
 import static com.feilong.net.http.HttpMethodType.POST;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
+import com.feilong.net.bot.AbstractBot;
 import com.feilong.net.bot.message.BotMessage;
 import com.feilong.net.bot.wxwork.message.WxworkResponse;
 import com.feilong.net.bot.wxwork.message.markdown.Markdown;
@@ -31,6 +35,7 @@ import com.feilong.net.bot.wxwork.message.news.News;
 import com.feilong.net.bot.wxwork.message.news.WxworkNewsMessage;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 默认的微信机器人.
@@ -38,8 +43,12 @@ import com.feilong.net.http.HttpRequest;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 3.1.0 change packagename from com.feilong.net.bot.wxwork to com.feilong.net.bot.wxwork
  */
-public class DefaultWxworkBot implements WxworkBot{
+public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
 
+    /** The Constant log. */
+    private static final Logger LOGGER          = LoggerFactory.getLogger(DefaultWxworkBot.class);
+
+    //---------------------------------------------------------------
     private static final String BOT_WEBHOOK_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send";
 
     /** The key. */
@@ -68,7 +77,7 @@ public class DefaultWxworkBot implements WxworkBot{
     //---------------------------------------------------------------
 
     @Override
-    public boolean sendMessage(String content){
+    protected boolean doSendMessage(String content){
         Validate.notBlank(content, "content can't be blank!");
         WxworkResponse wxworkResponse = pushMessage(new WxworkMarkdownMessage(new Markdown(content)));
         return wxworkResponse.getIsSuccess();
@@ -76,10 +85,32 @@ public class DefaultWxworkBot implements WxworkBot{
 
     @Override
     public WxworkResponse sendNewsMessage(Article...articles){
-        Validate.notEmpty(articles, "articles can't be null/empty!");
+        if (!isAsync){
+            LOGGER.info("[SyncSendNewsMessage]articles:[{}]", JsonUtil.toString(articles));
+            return doSendWxNewsMessage(articles);
+        }
 
-        News news = new News(toList(articles));
-        return pushMessage(new WxworkNewsMessage(news));
+        //异步
+        new Thread(() -> {
+            LOGGER.info("[AsyncSendNewsMessage]articles:[{}]", JsonUtil.toString(articles));
+            doSendWxNewsMessage(articles);
+        }).start();
+
+        return null;
+    }
+
+    private WxworkResponse doSendWxNewsMessage(Article...articles){
+        try{
+            Validate.notEmpty(articles, "articles can't be null/empty!");
+            News news = new News(toList(articles));
+            return pushMessage(new WxworkNewsMessage(news));
+        }catch (Exception e){
+            if (!isCatchException){
+                throw e;
+            }
+            LOGGER.error(Slf4jUtil.format("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
+            return null;
+        }
     }
 
     //---------------------------------------------------------------

@@ -19,6 +19,7 @@ import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.net.http.HttpClientUtil.getResponseBodyAsString;
 import static com.feilong.net.http.HttpMethodType.POST;
@@ -28,11 +29,14 @@ import java.util.Map;
 
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.codec.binary.Base64;
+import com.feilong.net.bot.AbstractBot;
 import com.feilong.net.bot.dingtalk.message.At;
 import com.feilong.net.bot.dingtalk.message.markdown.DingtalkMarkdownMessage;
 import com.feilong.net.bot.dingtalk.message.markdown.Markdown;
@@ -40,6 +44,7 @@ import com.feilong.net.bot.message.BotMessage;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.security.EncryptionException;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 默认的钉钉机器人.
@@ -47,8 +52,12 @@ import com.feilong.security.EncryptionException;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.1.0
  */
-public class DefaultDingTalkBot implements DingTalkBot{
+public class DefaultDingTalkBot extends AbstractBot implements DingTalkBot{
 
+    /** The Constant log. */
+    private static final Logger LOGGER          = LoggerFactory.getLogger(DefaultDingTalkBot.class);
+
+    //---------------------------------------------------------------
     /** The Constant BOT_WEBHOOK_URL. */
     private static final String BOT_WEBHOOK_URL = "https://oapi.dingtalk.com/robot/send";
 
@@ -108,16 +117,9 @@ public class DefaultDingTalkBot implements DingTalkBot{
     }
     //---------------------------------------------------------------
 
-    /**
-     * Send message.
-     *
-     * @param content
-     *            the content
-     * @return true, if successful
-     */
     @Override
-    public boolean sendMessage(String content){
-        return sendMessage(null, content);
+    protected boolean doSendMessage(String content){
+        return doSendDingtalkMessage(null, content, EMPTY_STRING_ARRAY);
     }
 
     /**
@@ -133,12 +135,37 @@ public class DefaultDingTalkBot implements DingTalkBot{
      */
     @Override
     public boolean sendMessage(String title,String content,String...atMobiles){
+        if (!isAsync){
+            LOGGER.info("[SyncSendDingTalkMessage]title:[{}],content:[{}],atMobiles:[{}]", title, content, atMobiles);
+            return doSendMessage(title, content, atMobiles);
+        }
+
+        //异步
+        new Thread(() -> {
+            LOGGER.info("[AsyncSendDingTalkMessage]title:[{}],content:[{}],atMobiles:[{}]", title, content, atMobiles);
+            doSendMessage(title, content, atMobiles);
+        }).start();
+
+        return true;
+    }
+
+    private boolean doSendMessage(String title,String content,String...atMobiles){
+        try{
+            return doSendDingtalkMessage(title, content, atMobiles);
+        }catch (Exception e){
+            if (!isCatchException){
+                throw e;
+            }
+            LOGGER.error(Slf4jUtil.format("title:[{}],content:[{}],atMobiles:[{}]", title, content, atMobiles), e);
+            return false;
+        }
+    }
+
+    private boolean doSendDingtalkMessage(String title,String content,String...atMobiles){
         Validate.notBlank(content, "content can't be blank!");
 
         Markdown markdown = new Markdown(defaultIfNullOrEmpty(title, defaultTitle), content);
-
         DingtalkMarkdownMessage botMessage = new DingtalkMarkdownMessage(markdown);
-
         if (isNotNullOrEmpty(atMobiles)){
             At at = new At(true);
             at.setAtMobiles(atMobiles);
@@ -199,7 +226,8 @@ public class DefaultDingTalkBot implements DingTalkBot{
 
         //---------------------------------------------------------------
 
-        String json = getResponseBodyAsString(httpRequest, new ConnectionConfig(2 * MILLISECOND_PER_MINUTE));
+        int connectTimeout = 2 * MILLISECOND_PER_MINUTE;
+        String json = getResponseBodyAsString(httpRequest, new ConnectionConfig(connectTimeout));
         DingtalkResponse dingtalkResponse = JsonUtil.toBean(json, DingtalkResponse.class);
         return dingtalkResponse.getIsSuccess();
     }

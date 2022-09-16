@@ -1,6 +1,5 @@
 package com.feilong.namespace;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import com.feilong.core.lang.ThreadUtil;
 import com.feilong.net.bot.dingtalk.DingTalkBot;
 
 @ContextConfiguration(locations = { "classpath*:dingtalkbot.xml" })
@@ -37,7 +37,9 @@ public class DingtalkBotTagTest extends AbstractJUnit4SpringContextTests{
                         "- **喝酒** \n" + //
                         "- [百度](http://baidu.com) \n" + //
                         "- *唱歌* @金鑫 \n";
-        boolean result = dingTalkBot.sendMessage("测试测试", content, "15001841318");
-        assertEquals(true, result);
+        dingTalkBot.sendMessage("测试测试", content, "15001841318");
+
+        ThreadUtil.sleepSeconds(3);
+
     }
 }
