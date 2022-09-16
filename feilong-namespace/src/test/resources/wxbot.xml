@@ -8,6 +8,6 @@
     http://www.feilong.com/schema/feilong http://www.feilong.com/schema/feilong/feilong.xsd
     ">
 
-	<feilong:wxworkBot id="wxworkBot" key="80fa900e-c601-41a9-987c-ffa48f1d9e27" />
+	<feilong:wxworkBot id="wxworkBot" key="6f050e5b-5c0e-4ad4-be42-705e8c24cd50" />
 
 </beans>

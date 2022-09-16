@@ -195,6 +195,22 @@ public final class ConnectionConfig{
     private boolean                      turnOffHostnameVerifier = true;
 
     //---------------------------------------------------------------
+
+    /**
+     * 是否超时重试.
+     * 
+     * @since 3.3.0
+     */
+    private boolean                      isTimeoutRetry          = true;
+
+    /**
+     * 超时重试次数,默认3次.
+     * 
+     * @since 3.3.0
+     */
+    private int                          timeoutRetryCount       = 3;
+
+    //---------------------------------------------------------------
     /**
      * Instantiates a new connection config.
      * 
@@ -581,6 +597,48 @@ public final class ConnectionConfig{
         this.maxConnTotal = maxConnTotal;
     }
 
+    /**
+     * 获得 是否超时重试.
+     *
+     * @return the isTimeoutRetry
+     * @since 3.3.0
+     */
+    public boolean getIsTimeoutRetry(){
+        return isTimeoutRetry;
+    }
+
+    /**
+     * 获得 超时重试次数,默认3次.
+     *
+     * @return the timeoutRetryCount
+     * @since 3.3.0
+     */
+    public int getTimeoutRetryCount(){
+        return timeoutRetryCount;
+    }
+
+    /**
+     * 设置 是否超时重试.
+     *
+     * @param isTimeoutRetry
+     *            the isTimeoutRetry to set
+     * @since 3.3.0
+     */
+    public void setIsTimeoutRetry(boolean isTimeoutRetry){
+        this.isTimeoutRetry = isTimeoutRetry;
+    }
+
+    /**
+     * 设置 超时重试次数,默认3次.
+     *
+     * @param timeoutRetryCount
+     *            the timeoutRetryCount to set
+     * @since 3.3.0
+     */
+    public void setTimeoutRetryCount(int timeoutRetryCount){
+        this.timeoutRetryCount = timeoutRetryCount;
+    }
+
     //---------------------------------------------------------------
     /**
      * Equals.
@@ -626,14 +684,13 @@ public final class ConnectionConfig{
 
                         .append(this.maxConnPerRoute, t.getMaxConnPerRoute())//
                         .append(this.maxConnTotal, t.getMaxConnTotal())//
+
+                        .append(this.timeoutRetryCount, t.getTimeoutRetryCount())//since 3.3.0
+                        .append(this.isTimeoutRetry, t.getIsTimeoutRetry())//since 3.3.0
+
                         .isEquals();
     }
 
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
     /*
      * (non-Javadoc)
      * 
@@ -647,6 +704,9 @@ public final class ConnectionConfig{
                         .append(readTimeout)//
                         .append(turnOffHostnameVerifier)//
                         .append(contentCharset)//
+
+                        .append(timeoutRetryCount)//since 3.3.0
+                        .append(isTimeoutRetry)//since 3.3.0
 
                         .append(userName)//
                         .append(password)//

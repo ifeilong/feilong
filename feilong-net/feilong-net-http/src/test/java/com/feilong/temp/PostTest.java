@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
+import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpClientUtil;
 import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
@@ -33,6 +34,34 @@ public class PostTest extends AbstractTest{
     public void testGetResponseBodyAsString(){
         String uri = "http://127.0.0.1:8084/post";
         LOGGER.debug(HttpClientUtil.get(uri));
+    }
+
+    @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+    public void testGetResponseBodyAsStr22ing(){
+        String uri = "http://test.mapemall.com/pay/redirect/doku";
+        LOGGER.debug(HttpClientUtil.get(uri));
+    }
+
+    @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+    public void testGetResponseBodyAs222Str22ing(){
+        String uri = "http://test.mapemall.com/pay/redirect/doku";
+
+        ConnectionConfig connectionConfig = new ConnectionConfig();
+        connectionConfig.setTimeoutRetryCount(1);
+        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, connectionConfig));
+    }
+
+    @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+    public void testGetResponseBodyAs222Str22in222g(){
+        String uri = "http://test.mapemall.com/pay/redirect/doku";
+
+        ConnectionConfig connectionConfig = new ConnectionConfig();
+        connectionConfig.setTimeoutRetryCount(0);
+        //    connectionConfig.setTimeoutRetryCount(1);
+        LOGGER.debug(HttpClientUtil.getResponseBodyAsString(uri, connectionConfig));
     }
 
     @Test

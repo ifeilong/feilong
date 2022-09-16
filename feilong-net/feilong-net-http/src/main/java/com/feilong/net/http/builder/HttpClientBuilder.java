@@ -97,7 +97,7 @@ public class HttpClientBuilder{
                 cache.put(useConnectionConfig, httpClient);
 
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + cache.size() + "]", 120, "-"));
+                    LOGGER.debug(StringUtils.center("build new httpClient and set to cache,cache size:[" + cache.size() + "]", 100, "-"));
                 }
             }
         }
@@ -156,11 +156,29 @@ public class HttpClientBuilder{
         RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig);
         customHttpClientBuilder.setDefaultRequestConfig(requestConfig);
 
-        //customHttpClientBuilder.setRetryHandler(null);
+        //since 3.3.0 设置重试策略
+        setRetryHandler(customHttpClientBuilder, connectionConfig);
 
         //---------------------------------------------------------------
         //CloseableHttpClient
         return customHttpClientBuilder.build();
+    }
+
+    /**
+     * 设置重试策略
+     * 
+     * @param customHttpClientBuilder
+     * @param connectionConfig
+     * @since 3.3.0
+     */
+    private static void setRetryHandler(
+                    org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
+                    ConnectionConfig connectionConfig){
+        boolean isTimeoutRetry = connectionConfig.getIsTimeoutRetry();
+        int timeoutRetryCount = connectionConfig.getTimeoutRetryCount();
+        if (isTimeoutRetry && timeoutRetryCount > 1){
+            customHttpClientBuilder.setRetryHandler(new SpecialHttpRequestRetryHandler(timeoutRetryCount));
+        }
     }
 
 }
