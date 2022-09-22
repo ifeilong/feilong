@@ -329,6 +329,32 @@ public final class DateUtil{
         return nowString(DatePattern.TIMESTAMP);
     }
 
+    /**
+     * 将 自 1970年1月1 日 00:00:00 GMT 以来,此 此时此刻 对象表示的毫秒数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * new Date().getTime()
+     * </pre>
+     * 
+     * 可以简写(使用静态导入 static import更精简)
+     * 
+     * <pre class="code">
+     * DateUtil.nowTime()
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @return 自 1970年1月1 日 00:00:00 GMT 以来,此 此时此刻 对象表示的毫秒数.
+     * @since 3.3.1
+     */
+    public static long nowTime(){
+        return getTime(now());
+    }
+
     //------------------------day---------------------------------------
 
     /**
