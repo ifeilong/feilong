@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.PropertyDescriptorUtil.getSpringPropertyDescriptor;
 import static com.feilong.core.bean.PropertyDescriptorUtil.isUseSpringOperate;
 import static com.feilong.core.util.CollectionsUtil.first;
@@ -154,6 +155,49 @@ public final class PropertyValueObtainer{
                     Iterable<O> beanIterable,
                     String propertyName,
                     K returnCollection){
+        return getPropertyValueCollection(beanIterable, propertyName, returnCollection, null);
+    }
+
+    /**
+     * 循环<code>beanIterable</code>,调用 {@link PropertyUtil#getProperty(Object, String)} 获得 propertyName的值,将值进行类型转换成
+     * <code>returnElementClass</code> ,塞到 <code>returnCollection</code> 中返回.
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param <K>
+     *            the key type
+     * @param beanIterable
+     *            支持
+     * 
+     *            <ul>
+     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
+     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
+     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
+     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
+     *            </ul>
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param returnCollection
+     *            the return collection
+     * @param returnElementClass
+     *            如果 <code>returnElementClass</code> 是null,表示不需要类型转换
+     * @return 如果 <code>returnCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beanIterable</code> 是null或者empty,返回 <code>returnCollection</code><br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>returnElementClass</code> 是null,表示不需要类型转换<br>
+     * @see PropertyUtil#getProperty(Object, String)
+     * @see "org.apache.commons.beanutils.BeanToPropertyValueTransformer"
+     * @since 3.3.1
+     */
+    public static <T, O, K extends Collection<T>> K getPropertyValueCollection(
+                    Iterable<O> beanIterable,
+                    String propertyName,
+                    K returnCollection,
+                    Class<T> returnElementClass){
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         //---------------------------------------------------------------
@@ -163,19 +207,40 @@ public final class PropertyValueObtainer{
         if (isUseSpringOperate(klass, propertyName)){
             PropertyDescriptor propertyDescriptor = getSpringPropertyDescriptor(klass, propertyName);
             for (O bean : beanIterable){
-                returnCollection.add(PropertyValueObtainer.<T, O> getValue(bean, propertyDescriptor));
+                returnCollection.add(
+                                convertValue(PropertyValueObtainer.<Object, O> getValue(bean, propertyDescriptor), returnElementClass));
             }
             return returnCollection;
         }
 
         //---------------------------------------------------------------
         for (O bean : beanIterable){
-            returnCollection.add(PropertyUtil.<T> getProperty(bean, propertyName));
+            returnCollection.add(convertValue(PropertyUtil.<Object> getProperty(bean, propertyName), returnElementClass));
         }
         return returnCollection;
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 将 value 转成returnElementClass 类型.
+     *
+     * @param <T>
+     *            the generic type
+     * @param value
+     *            the value
+     * @param returnElementClass
+     *            the return element class
+     * @return 如果 <code>returnElementClass</code> 是null,表示不需要转换,直接返回 value<br>
+     * @since 3.3.1
+     */
+    @SuppressWarnings("unchecked")
+    private static <T> T convertValue(Object value,Class<T> returnElementClass){
+        if (null == returnElementClass){
+            return (T) value;
+        }
+        return convert(value, returnElementClass);
+    }
 
     /**
      * Gets the value.

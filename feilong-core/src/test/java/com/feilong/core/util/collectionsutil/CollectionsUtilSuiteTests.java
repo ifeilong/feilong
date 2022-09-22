@@ -46,6 +46,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetPropertyValueListBeanTest.class,
                 GetPropertyValueListPropertyNameTest.class,
 
+                GetPropertyValueListBeanWithReturnElementClassTest.class,
+                GetPropertyValueSetWithReturnElementClassTest.class,
+                GetPropertyValueListWithReturnElementClassTest.class,
+
                 GetPropertyValueSetTest.class,
                 GetPropertyValueMapTest.class,
 

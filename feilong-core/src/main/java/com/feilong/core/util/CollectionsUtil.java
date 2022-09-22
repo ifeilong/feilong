@@ -1364,10 +1364,159 @@ public final class CollectionsUtil{
      * @since jdk1.5
      */
     public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName){
+        return getPropertyValueList(beanIterable, propertyName, null);
+    }
+
+    /**
+     * 循环集合 <code>beanIterable</code>,取到对象指定的属性 <code>propertyName</code>的值,将值转换成
+     * <code>returnElementClass</code>类型,拼成List({@link ArrayList}).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 获取user list每个元素的id属性值,转成String类型,组成新的list返回
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User(2L),
+     *                 new User(5L),
+     *                 new User(5L));
+     * 
+     * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "id",String.class);
+     * LOGGER.debug(JsonUtil.format(resultList));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * ["2","5","5"]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <String>} albumIdList = newArrayList();
+     * for (SingleBookPo singleBookPo : albums){
+     *     albumIdList.add(singleBookPo.getAlbumId().toString());
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * CollectionsUtil.getPropertyValueList(albums, "albumId", String.class);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>关于参数 beanIterable</h3>
+     * <blockquote>
+     * 支持以下类型:
+     * <dl>
+     * <dt>bean Iterable</dt>
+     * <dd>诸如List{@code <User>},Set{@code <User>}等</dd>
+     * 
+     * <dt>map Iterable</dt>
+     * <dd>
+     * 比如 {@code List<Map<String, String>>}
+     * 
+     * 示例:
+     * 
+     * <pre>
+     * List{@code <Map<String, String>>} list = newArrayList();
+     * list.add(toMap("key", "1"));
+     * list.add(toMap("key", "2"));
+     * list.add(toMap("key", "3"));
+     * 
+     * List{@code <Integer>} resultList = CollectionsUtil.getPropertyValueList(list, "(key)",Integer.class);
+     * assertThat(resultList, contains(1, 2, 3));
+     * </pre>
+     * 
+     * </dd>
+     * 
+     * <dt>list Iterable</dt>
+     * <dd>
+     * 比如 {@code  List<List<String>>}
+     * 
+     * 示例:
+     * 
+     * <pre>
+     * List{@code <List<String>>} list = newArrayList();
+     * list.add(toList("小明", "18"));
+     * list.add(toList("小宏", "19"));
+     * list.add(toList("小振", "20"));
+     * 
+     * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, "[1]",Long.class);
+     * assertThat(resultList, contains(18L, 19L, 20L));
+     * </pre>
+     * 
+     * </dd>
+     * 
+     * <dt>数组 Iterable</dt>
+     * <dd>
+     * 比如 {@code  List<String[]>}
+     * 
+     * 示例:
+     * 
+     * <pre>
+     * List{@code <String[]>} list = newArrayList();
+     * list.add(toArray("三国", "水浒"));
+     * list.add(toArray("西游", "金瓶梅"));
+     * 
+     * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "[0]",String.class);
+     * assertThat(resultList, contains("三国", "西游"));
+     * </pre>
+     * 
+     * </dd>
+     * </dl>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            返回集合类型 generic type
+     * @param <O>
+     *            可迭代对象类型 generic type
+     * @param beanIterable
+     *            支持
+     * 
+     *            <ul>
+     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
+     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
+     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
+     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
+     *            </ul>
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param returnElementClass
+     *            如果 <code>returnElementClass</code> 是null,表示不需要类型转换
+     * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty ArrayList<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>returnElementClass</code> 是null,表示不需要类型转换
+     * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection, Class)
+     * @since 3.3.1
+     */
+    public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName,Class<T> returnElementClass){
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptyList();
         }
-        return PropertyValueObtainer.getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(size(beanIterable)));
+        return PropertyValueObtainer
+                        .getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(size(beanIterable)), returnElementClass);
     }
 
     /**
@@ -1423,10 +1572,99 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     public static <T, O> Set<T> getPropertyValueSet(Iterable<O> beanIterable,String propertyName){
+        return getPropertyValueSet(beanIterable, propertyName, null);
+    }
+
+    /**
+     * 解析迭代集合 <code>beanIterable</code> ,取到对象指定的属性 <code>propertyName</code>的值,将值转换成
+     * <code>returnElementClass</code>类型,拼成{@link Set}({@link LinkedHashSet}).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashSet},顺序是参数 <code>beanIterable</code> 元素的顺序</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
+     * 
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id",String.class)));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * ["2","5"]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Set{@code <String>} albumIdSet = newHashSet();
+     * for (SingleBookPo singleBookPo : albums){
+     *     albumIdSet.add(singleBookPo.getAlbumId().toString());
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * CollectionsUtil.getPropertyValueSet(albums, "albumId", String.class);
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            支持
+     * 
+     *            <ul>
+     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
+     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
+     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
+     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
+     *            </ul>
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param returnElementClass
+     *            如果 <code>returnElementClass</code> 是null,表示不需要类型转换
+     * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty {@link LinkedHashSet}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>returnElementClass</code> 是null,表示不需要类型转换
+     * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection, Class)
+     * @since 3.3.1
+     */
+    public static <T, O> Set<T> getPropertyValueSet(Iterable<O> beanIterable,String propertyName,Class<T> returnElementClass){
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptySet();
         }
-        return PropertyValueObtainer.getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(size(beanIterable)));
+        return PropertyValueObtainer.getPropertyValueCollection(
+                        beanIterable,
+                        propertyName,
+                        new LinkedHashSet<T>(size(beanIterable)),
+                        returnElementClass);
     }
 
     //----------------------------getPropertyValueMap-----------------------------------
