@@ -632,6 +632,79 @@ public final class CollectionsUtil{
         return result;
     }
 
+    /**
+     * 在condition 是true的情况下, 添加 <code>element</code>元素到指定的<code>objectCollection</code>.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 对于以下代码:
+     * 
+     * <pre class="code">
+     * 
+     * if (lib.getEnableXimaTeach() == 1){
+     *     bookIds.add(ximaTeach);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * addIfCondition(bookIds, ximaTeach, lib.getEnableXimaTeach() == 1);
+     * </pre>
+     * 
+     * 重构之后,一行可以搞定,代码阅读性更高
+     * 
+     * </blockquote>
+     * 
+     * <h3>什么情况下condition是true, 但是没有添加进<code>objectCollection</code>:</h3>
+     * 
+     * <blockquote>
+     * (Returns false if this collection does not permit duplicates and already contains the specified element.) <br>
+     * 
+     * 如果 <code>objectCollection</code>是个不允许重复元素,并且已经有了要加入的元素, 那么就添加不进去
+     * 
+     * 
+     * <p>
+     * Collections that support this operation may place limitations on what elements may be added to this collection. In particular, some
+     * collections will refuse to add null elements, and others will impose restrictions on the type of elements that may be added.
+     * Collection classes should clearly specify in their documentation any restrictions on what elements may be added.
+     * </p>
+     * 
+     * <p>
+     * If a collection refuses to add a particular element for any reason other than that it already contains the element, it must throw an
+     * exception (rather than returning false). This preserves the invariant that a collection always contains the specified element after
+     * this call returns.
+     * </p>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param objectCollection
+     *            the collection to add to, 不能为null
+     * @param element
+     *            需要添加的元素
+     * @param condition
+     *            the condition,仅当条件是true的情况下才会添加
+     * @return a boolean 标识 <code>objectCollection</code> 是否改变,如果改变了,返回true.<br>
+     *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>condition</code> 是false,直接返回false<br>
+     *         否则调用<code>objectCollection.add(object)</code>
+     * @see com.feilong.lib.collection4.CollectionUtils#addIgnoreNull(Collection, Object)
+     * @since 3.3.1
+     */
+    public static <T> boolean addIfCondition(final Collection<T> objectCollection,final T element,boolean condition){
+        Validate.notNull(objectCollection, "objectCollection can't be null!");
+        if (!condition){
+            return false;
+        }
+        return objectCollection.add(element);
+    }
+
     //---------------------------------------------------------------
 
     /**
