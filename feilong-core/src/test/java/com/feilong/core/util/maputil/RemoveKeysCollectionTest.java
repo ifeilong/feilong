@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
@@ -22,18 +23,14 @@ import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-/**
- * The Class MapUtilRemoveKeysTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
-public class RemoveKeysTest{
+public class RemoveKeysCollectionTest{
 
     /**
      * Test remove keys.
@@ -45,7 +42,7 @@ public class RemoveKeysTest{
         map.put("age", "18");
         map.put("country", "china");
 
-        Map<String, String> removeKeys = MapUtil.removeKeys(map, "country");
+        Map<String, String> removeKeys = MapUtil.removeKeys(map, toList("country"));
         assertThat(removeKeys, allOf(hasEntry("name", "feilong"), hasEntry("age", "18"), not(hasEntry("country", "china"))));
     }
 
@@ -58,19 +55,7 @@ public class RemoveKeysTest{
         map.put("name", "feilong");
         map.put("age", "18");
         map.put("country", "china");
-        assertEquals(map, MapUtil.removeKeys(map, (String) null));
-    }
-
-    /**
-     * Test remove keys empty keys.
-     */
-    @Test
-    public void testRemoveKeysEmptyKeys(){
-        Map<String, String> map = newLinkedHashMap(3);
-        map.put("name", "feilong");
-        map.put("age", "18");
-        map.put("country", "china");
-        assertEquals(map, MapUtil.removeKeys(map));
+        assertEquals(map, MapUtil.removeKeys(map, (List<String>) null));
     }
 
     /**
@@ -82,8 +67,8 @@ public class RemoveKeysTest{
         map.put("name", "feilong");
         map.put("age", "18");
         map.put("country", "china");
-        assertEquals(map, MapUtil.removeKeys(map, (String) null));
-        assertEquals(map, MapUtil.removeKeys(map, "name1"));
+        assertEquals(map, MapUtil.removeKeys(map, (List<String>) null));
+        assertEquals(map, MapUtil.removeKeys(map, toList("name1")));
     }
 
     /**
@@ -91,6 +76,6 @@ public class RemoveKeysTest{
      */
     @Test
     public void testRemoveKeysNullMap(){
-        assertEquals(null, MapUtil.removeKeys(null, "country"));
+        assertEquals(null, MapUtil.removeKeys(null, toList("country")));
     }
 }

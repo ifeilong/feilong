@@ -25,6 +25,7 @@ import static java.util.Collections.emptyMap;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -956,7 +957,8 @@ public final class MapUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> <b>不变</b></li>
+     * <li>原 <code>map</code> <span style="color:green"><b>不变</b></span>, 如果你希望原map直接改变,可以调用 {@link #removeKeys(Map, Object...)}或者
+     * {@link #removeKeys(Map, Collection)}</li>
      * <li>此方法可以提取{@link Collections#unmodifiableMap(Map)}</li>
      * <li>返回值为 {@link LinkedHashMap},key的顺序按照参数 <code>map</code>的顺序</li>
      * </ol>
@@ -1015,7 +1017,8 @@ public final class MapUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> <b>不变</b></li>
+     * <li>原 <code>map</code> <span style="color:green"><b>不变</b></span>, 如果你希望原map直接改变,可以调用 {@link #removeKeys(Map, Object...)}或者
+     * {@link #removeKeys(Map, Collection)}</li></li>
      * <li>此方法可以提取{@link Collections#unmodifiableMap(Map)}</li>
      * <li>返回值为 {@link LinkedHashMap},key的顺序按照参数 <code>map</code>的顺序</li>
      * </ol>
@@ -1159,6 +1162,91 @@ public final class MapUtil{
 
         //---------------------------------------------------------------
         for (K key : keys){
+            if (map.containsKey(key)){
+                map.remove(key);
+            }else{
+                LOGGER.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
+            }
+        }
+        return map;
+    }
+
+    /**
+     * 删除 <code>map</code> 的指定的 <code>keyList</code>.
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 
+     * <p>
+     * 原 <code>map</code><span style="color:red">会改变</span>,
+     * </p>
+     * <p>
+     * 如果你只是需要从原map中获取非指定的<code>keyList</code>,你可以调用
+     * {@link #getSubMapExcludeKeys(Map, Object...)} 或者{@link #getSubMapExcludeKeys(Map, Iterable)} 方法
+     * </p>
+     * </li>
+     * 
+     * <li>此方法<b>删除不了</b> {@link Collections#unmodifiableMap(Map)}</li>
+     * <li>如果 <code>map</code>包含key,那么直接调用 {@link Map#remove(Object)}</li>
+     * <li>如果不包含,那么输出debug级别日志</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = newLinkedHashMap(3);
+     * 
+     * map.put("name", "feilong");
+     * map.put("age", "18");
+     * map.put("country", "china");
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.removeKeys(map, toList("country"))));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "name": "feilong",
+     * "age": "18"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param keyList
+     *            the keys
+     * @return 如果 <code>map</code> 是null,返回null<br>
+     *         如果 <code>keyList</code> 是null或者empty,直接返回 <code>map</code><br>
+     * @since 3.3.1
+     */
+    public static <K, V> Map<K, V> removeKeys(Map<K, V> map,Collection<K> keyList){
+        if (null == map){
+            return null;
+        }
+
+        //---------------------------------------------------------------
+        if (isNullOrEmpty(keyList)){
+            return map;
+        }
+
+        //---------------------------------------------------------------
+        for (K key : keyList){
             if (map.containsKey(key)){
                 map.remove(key);
             }else{
@@ -2063,7 +2151,5 @@ public final class MapUtil{
         //This is the calculation used in JDK8 to resize when a putAll happens it seems to be the most conservative calculation we can make.  
         return (int) (size / 0.75f) + 1;//0.75 is the default load factor
     }
-
-    //---------------------------------------------------------------
 
 }

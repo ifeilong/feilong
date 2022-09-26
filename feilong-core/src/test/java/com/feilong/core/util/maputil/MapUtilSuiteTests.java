@@ -54,6 +54,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 PutIfValueNotNullOrEmptyTest.class,
 
                 RemoveKeysTest.class,
+                RemoveKeysCollectionTest.class,
+
                 GetTest.class,
 //
 })
