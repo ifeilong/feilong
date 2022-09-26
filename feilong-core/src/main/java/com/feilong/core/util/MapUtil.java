@@ -490,6 +490,7 @@ public final class MapUtil{
      *            the key type
      * @param <V>
      *            the value type
+     * @param <T>
      * @param singleValueMap
      *            the name and value map
      * @param arrayComponentType
@@ -500,7 +501,7 @@ public final class MapUtil{
      * @since 3.3.1
      */
     //由于泛型类型擦除,不显性传参会报错  参见https://github.com/ifeilong/feilong/issues/65
-    public static <K, V> Map<K, V[]> toArrayValueMap(Map<K, V> singleValueMap,Class<V> arrayComponentType){
+    public static <K, V, T> Map<K, V[]> toArrayValueMap(Map<K, T> singleValueMap,Class<V> arrayComponentType){
         if (isNullOrEmpty(singleValueMap)){
             return emptyMap();
         }
@@ -508,8 +509,12 @@ public final class MapUtil{
         Validate.notNull(arrayComponentType, "arrayComponentType can't be null!");
 
         Map<K, V[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
-        for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
-            arrayValueMap.put(entry.getKey(), toArray(toList(entry.getValue()), arrayComponentType));
+        for (Map.Entry<K, T> entry : singleValueMap.entrySet()){
+            V convert = ConvertUtil.convert(entry.getValue(), arrayComponentType);
+
+            //避免 Object[] 问题
+            V[] array = toArray(toList(convert), arrayComponentType);
+            arrayValueMap.put(entry.getKey(), array);
         }
         return arrayValueMap;
     }

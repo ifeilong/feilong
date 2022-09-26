@@ -80,6 +80,26 @@ public class ToArrayValueMapClassTest{
         assertThat(arrayValueMap, allOf(hasEntry("age", toArray(18)), hasEntry("high", toArray(180))));
     }
 
+    @Test
+    public void testToArrayValueMapString(){
+        Map<String, Integer> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("age", 18);
+        singleValueMap.put("high", 180);
+
+        Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap, String.class);
+        assertThat(arrayValueMap, allOf(hasEntry("age", toArray("18")), hasEntry("high", toArray("180"))));
+    }
+
+    @Test
+    public void testToArrayValueMapLong(){
+        Map<String, Integer> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("age", 18);
+        singleValueMap.put("high", 180);
+
+        Map<String, Long[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap, Long.class);
+        assertThat(arrayValueMap, allOf(hasEntry("age", toArray(18L)), hasEntry("high", toArray(180L))));
+    }
+
     /**
      * Test to array value map 1.
      */
