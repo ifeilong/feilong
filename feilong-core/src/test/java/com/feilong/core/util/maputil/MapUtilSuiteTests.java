@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 ToSingleValueMapTest.class,
+                ToArrayValueMapClassTest.class,
                 ToArrayValueMapTest.class,
 
                 GetSubMapTest.class,

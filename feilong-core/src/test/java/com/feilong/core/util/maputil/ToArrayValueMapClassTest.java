@@ -1,0 +1,96 @@
+/*
+ * Copyright (C) 2008 feilong
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.feilong.core.util.maputil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Test;
+
+import com.feilong.core.util.MapUtil;
+
+public class ToArrayValueMapClassTest{
+
+    /**
+     * Test to array value map null.
+     */
+    @Test
+    public void testToArrayValueMapNull(){
+        assertEquals(emptyMap(), MapUtil.toArrayValueMap(null, String.class));
+    }
+
+    /**
+     * Test to array value map empty.
+     */
+    @Test
+    public void testToArrayValueMapEmpty(){
+        assertEquals(emptyMap(), MapUtil.toArrayValueMap(new HashMap<String, String>(), String.class));
+    }
+
+    /**
+     * Test to array value map.
+     */
+    @Test
+    public void testToArrayValueMap(){
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap, String.class);
+        assertThat(arrayValueMap, allOf(hasEntry("province", toArray("江苏省")), hasEntry("city", toArray("南通市"))));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testToArrayValueMapNPE(){
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        MapUtil.toArrayValueMap(singleValueMap, null);
+    }
+
+    @Test
+    public void testToArrayValueMap1222(){
+        Map<String, Integer> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("age", 18);
+        singleValueMap.put("high", 180);
+
+        Map<String, Integer[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap, Integer.class);
+        assertThat(arrayValueMap, allOf(hasEntry("age", toArray(18)), hasEntry("high", toArray(180))));
+    }
+
+    /**
+     * Test to array value map 1.
+     */
+    @Test
+    public void testToArrayValueMap1(){
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("province", null);
+        singleValueMap.put("city", "南通市");
+
+        Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap, String.class);
+        assertThat(arrayValueMap, allOf(hasEntry("province", toArray((String) null)), hasEntry("city", toArray("南通市"))));
+    }
+
+}

@@ -19,6 +19,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static java.util.Collections.emptyMap;
@@ -448,12 +449,67 @@ public final class MapUtil{
      * @since 1.6.2
      */
     public static <K> Map<K, String[]> toArrayValueMap(Map<K, String> singleValueMap){
+        return toArrayValueMap(singleValueMap, String.class);
+    }
+
+    /**
+     * 将单值的<code>singleValueMap</code> 转成多值的map.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <>}();
+     * 
+     * singleValueMap.put("province", "江苏省");
+     * singleValueMap.put("city", "南通市");
+     * 
+     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap,String.class)));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "province": ["江苏省"],
+     * "city": ["南通市"]
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashMap},保证顺序和参数 <code>singleValueMap</code>顺序相同</li>
+     * <li>和该方法正好相反的是 {@link #toSingleValueMap(Map)}</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param singleValueMap
+     *            the name and value map
+     * @param arrayComponentType
+     *            显性的指定value类型
+     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么返回 {@link Collections#emptyMap()}<br>
+     *         否则迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
+     *         如果 <code>arrayComponentType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 3.3.1
+     */
+    //由于泛型类型擦除,不显性传参会报错  参见https://github.com/ifeilong/feilong/issues/65
+    public static <K, V> Map<K, V[]> toArrayValueMap(Map<K, V> singleValueMap,Class<V> arrayComponentType){
         if (isNullOrEmpty(singleValueMap)){
             return emptyMap();
         }
-        Map<K, String[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
-        for (Map.Entry<K, String> entry : singleValueMap.entrySet()){
-            arrayValueMap.put(entry.getKey(), toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组
+
+        Validate.notNull(arrayComponentType, "arrayComponentType can't be null!");
+
+        Map<K, V[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
+        for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
+            arrayValueMap.put(entry.getKey(), toArray(toList(entry.getValue()), arrayComponentType));
         }
         return arrayValueMap;
     }
