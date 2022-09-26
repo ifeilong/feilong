@@ -26,7 +26,9 @@ import java.io.Serializable;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see ViewCommand
  * @since 1.11.3
+ * @deprecated 移动到feilong-spring since 3.3.1
  */
+@Deprecated
 public interface SubViewCommand extends Serializable{
 
 }
