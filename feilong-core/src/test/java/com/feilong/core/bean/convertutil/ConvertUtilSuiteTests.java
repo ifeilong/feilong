@@ -33,7 +33,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToArrayVarargsTest.class,
 
                 ToBigDecimalParameterizedTest.class,
+                ToBigDecimalDefaultValueParameterizedTest.class,
                 ToBooleanParameterizedTest.class,
+                ToBooleanDefaultValueParameterizedTest.class,
                 ToEnumerationTest.class,
 
                 ToIntegerDefaultValueParameterizedTest.class,
@@ -49,6 +51,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ToLocaleTest.class,
 
+                ToLongDefaultValueParameterizedTest.class,
                 ToLongParameterizedTest.class,
                 ToLongsParameterizedTest.class,
 
@@ -71,7 +74,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToStringsTest.class,
 
                 ToSetVarargsTest.class,
-        //
+//
 })
 public class ConvertUtilSuiteTests{
 

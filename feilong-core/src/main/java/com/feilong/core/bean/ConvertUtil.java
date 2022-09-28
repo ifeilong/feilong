@@ -344,7 +344,67 @@ public final class ConvertUtil{
      * @see java.lang.Boolean#parseBoolean(String)
      */
     public static Boolean toBoolean(Object toBeConvertedValue){
-        return new BooleanConverter(null).convert(Boolean.class, toBeConvertedValue);
+        return toBoolean(toBeConvertedValue, null);
+    }
+
+    /**
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link Boolean}类型,如果结果是null或者转换异常 使用默认值.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ConvertUtil.toBoolean(null,null)      =   null
+     * 
+     * ConvertUtil.toBoolean(1L,null)        =   true
+     * ConvertUtil.toBoolean("1",null)       =   true
+     * ConvertUtil.toBoolean("9",null)       =   null
+     * ConvertUtil.toBoolean("1,2,3",null)   =   null
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>逻辑及规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ul>
+     * <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
+     * <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
+     * <li>其他抛出 conversionException, 但是在
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
+     * Throwable)} 方法里面返回默认值 是 null
+     * </ul>
+     * 
+     * <p>
+     * 你也可以调用 {@link com.feilong.lib.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
+     * BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>和 {@link Boolean#parseBoolean(String)}的区别:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) 并且 String.equalsIgnoreCase("true")</code> 返回 true
+     * </p>
+     * </blockquote>
+     *
+     * @param toBeConvertedValue
+     *            object
+     * @param defaultValue
+     *            the default value
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 <code>defaultValue</code> <br>
+     * @see #convert(Object, Class)
+     * @see com.feilong.lib.beanutils.converters.BooleanConverter
+     * @see com.feilong.lib.lang3.BooleanUtils
+     * @see java.lang.Boolean#parseBoolean(String)
+     * @since 3.3.2
+     */
+    public static Boolean toBoolean(Object toBeConvertedValue,Boolean defaultValue){
+        return new BooleanConverter(defaultValue).convert(Boolean.class, toBeConvertedValue);
     }
 
     //----------------------toInteger-----------------------------------------
@@ -589,7 +649,95 @@ public final class ConvertUtil{
      * @see com.feilong.lib.lang3.math.NumberUtils#toLong(String)
      */
     public static Long toLong(Object toBeConvertedValue){
-        return new LongConverter(null).convert(Long.class, toBeConvertedValue);
+        return toLong(toBeConvertedValue, null);
+    }
+
+    /**
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link Long}类型,如果转换不了返回默认值 <code>defaultValue</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.Long(null,null)               = null
+     * ConvertUtil.Long(null,1L)                  = 1L
+     * ConvertUtil.Long("aaaa",1L)                = 1L
+     * ConvertUtil.Long(8L,1L)                    = 8L
+     * ConvertUtil.Long("8",1L)                   = 8L
+     * ConvertUtil.Long(new BigDecimal("8"),1L)   = 8L
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLong(new String[] { "1", "2", "3" }, 8L) = 1L
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLong(toList("1", "2"), 8L) = 1L
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
+     * 该方法非常适用 获取request请求的分页参数
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 原来的写法:
+     * 
+     * <pre class="code">
+     * 
+     * public static Long getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     try{
+     *         Long pageNo = Long.parseLong(pageNoString);
+     *         return pageNo;
+     *     }catch (Exception e){
+     *         LOGGER.error(e.getClass().getName(), e);
+     *     }
+     *     return 1L; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * 现在可以更改成:
+     * 
+     * <pre class="code">
+     * 
+     * public static Long getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     return ConvertUtil.toLong(pageNoString, 1L);
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param toBeConvertedValue
+     *            值
+     * @param defaultValue
+     *            默认值
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 <code>defaultValue</code> <br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
+     * @see com.feilong.lib.beanutils.converters.IntegerConverter
+     * @since 3.3.2
+     */
+    public static Long toLong(Object toBeConvertedValue,Long defaultValue){
+        return new LongConverter(defaultValue).convert(Long.class, toBeConvertedValue);
     }
 
     //------------------------toBigDecimal---------------------------------------
@@ -659,7 +807,78 @@ public final class ConvertUtil{
      * @see com.feilong.lib.beanutils.converters.BigDecimalConverter
      */
     public static BigDecimal toBigDecimal(Object toBeConvertedValue){
-        return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
+        return toBigDecimal(toBeConvertedValue, null);
+    }
+
+    /**
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link java.math.BigDecimal},如果有异常或者是null 使用默认值 <code>defaultValue</code> .
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(null,null)                     = null
+     * ConvertUtil.toBigDecimal("aaaa",null)                   = null
+     * ConvertUtil.toBigDecimal(8,null)                        = BigDecimal.valueOf(8)
+     * ConvertUtil.toBigDecimal("8",null)                      = BigDecimal.valueOf(8)
+     * ConvertUtil.toBigDecimal(new BigDecimal("8"),null)      = BigDecimal.valueOf(8)
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(new String[] { "1", "2", "3" }, null) = BigDecimal.valueOf(1)
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(toList("1", "2"), null) = BigDecimal.valueOf(1)
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK API<br>
+     * </p>
+     * 
+     * <ul>
+     * <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
+     * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
+     * </ul>
+     * 
+     * <p>
+     * 本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
+     * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal}
+     * </p>
+     * </blockquote>
+     *
+     * @param toBeConvertedValue
+     *            值
+     * @param defaultValue
+     *            the default value
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 null
+     * @see #convert(Object, Class)
+     * @see com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     * @see com.feilong.lib.beanutils.converters.BigDecimalConverter
+     * @since 3.3.2
+     */
+    public static BigDecimal toBigDecimal(Object toBeConvertedValue,BigDecimal defaultValue){
+        return new BigDecimalConverter(defaultValue).convert(BigDecimal.class, toBeConvertedValue);
     }
 
     //---------------------------------------------------------------
