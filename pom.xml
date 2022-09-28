@@ -106,11 +106,12 @@
 		<!-- log -->
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.36</version.slf4j>
-		<!-- https://logging.apache.org/log4j/2.x/index.html-->
-		<version.log4j2>2.18.0</version.log4j2>
 
-		<!-- https://logback.qos.ch/news.html 同一版本 -->
-		<version.logback>1.4.0</version.logback>
+		<!-- https://logging.apache.org/log4j/2.x/changes-report.html#a2.19.0-->
+		<version.log4j2>2.19.0</version.log4j2>
+
+		<!-- https://logback.qos.ch/news.html 统一版本 -->
+		<version.logback>1.4.1</version.logback>
 
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>

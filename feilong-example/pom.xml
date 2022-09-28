@@ -19,8 +19,9 @@
 
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.36</version.slf4j>
-		<!-- https://logging.apache.org/log4j/2.x/index.html-->
-		<version.log4j2>2.18.0</version.log4j2>
+
+		<!-- https://logging.apache.org/log4j/2.x/changes-report.html#a2.19.0-->
+		<version.log4j2>2.19.0</version.log4j2>
 
 		<!-- http://hc.apache.org/downloads.cgi -->
 		<version.httpcomponents>4.5.13</version.httpcomponents>
