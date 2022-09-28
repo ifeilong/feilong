@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
@@ -213,6 +214,27 @@ public final class StringUtil{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * Constructs a new <code>String</code> by decoding the specified array of bytes using the given charset.
+     * 
+     * <p>
+     * 默认使用 {@link CharsetType#UTF8}
+     * </p>
+     *
+     * @param bytes
+     *            The bytes to be decoded into characters, may be <code>null</code>
+     * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
+     *         or <code>null</code> if the input byte array was <code>null</code>.
+     * @see String#String(byte[], String)
+     * @see "org.apache.commons.lang3.StringUtils#toString(byte[], String)"
+     * @see com.feilong.lib.lang3.StringUtils#toEncodedString(byte[], Charset)
+     * @see "org.apache.commons.codec.binary.StringUtils#newString(byte[], String)"
+     * @since 3.3.2
+     */
+    public static String newString(byte[] bytes){
+        return newString(bytes, UTF8);
+    }
 
     /**
      * Constructs a new <code>String</code> by decoding the specified array of bytes using the given charset.
