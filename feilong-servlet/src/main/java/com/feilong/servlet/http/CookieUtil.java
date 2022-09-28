@@ -17,6 +17,8 @@ package com.feilong.servlet.http;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+import static com.feilong.core.bean.ConvertUtil.toLong;
 import static java.util.Collections.emptyMap;
 
 import java.util.Collections;
@@ -243,6 +245,44 @@ public final class CookieUtil{
         Cookie cookie = getCookie(request, cookieName);
         return null == cookie ? null : getReadValue(cookie);
     }
+
+    /**
+     * 取指定<code>cookieName</code>的 {@link Cookie}值转成Integer类型返回.
+     *
+     * @param request
+     *            the request
+     * @param cookieName
+     *            cookie名字,{@link Cookie#getName()},名称区分大小写,比如 JSESSIONID 如果改成 jsessionid 将取不到值
+     * @return 如果取不到cookie,返回 <code>null</code>;<br>
+     *         否则,返回 {@link Cookie#getValue()} Integer 类型
+     * @see #getCookie(HttpServletRequest, String)
+     * @see Cookie#getValue()
+     * @since 3.3.2
+     */
+    public static Integer getCookieIntegerValue(HttpServletRequest request,String cookieName){
+        String cookieValue = getCookieValue(request, cookieName);
+        return null == cookieValue ? null : toInteger(cookieValue);
+    }
+
+    /**
+     * 取指定<code>cookieName</code>的 {@link Cookie}值转成Long类型返回.
+     *
+     * @param request
+     *            the request
+     * @param cookieName
+     *            cookie名字,{@link Cookie#getName()},名称区分大小写,比如 JSESSIONID 如果改成 jsessionid 将取不到值
+     * @return 如果取不到cookie,返回 <code>null</code>;<br>
+     *         否则,返回 {@link Cookie#getValue()} Long 类型
+     * @see #getCookie(HttpServletRequest, String)
+     * @see Cookie#getValue()
+     * @since 3.3.2
+     */
+    public static Long getCookieLongValue(HttpServletRequest request,String cookieName){
+        String cookieValue = getCookieValue(request, cookieName);
+        return null == cookieValue ? null : toLong(cookieValue);
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 {@link Cookie}对象.
