@@ -214,7 +214,7 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.11.0</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.12.0</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
 		<v.maven-project-info-reports-plugin>3.4.1</v.maven-project-info-reports-plugin>
