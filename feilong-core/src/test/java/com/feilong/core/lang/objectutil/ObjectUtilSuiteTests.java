@@ -30,6 +30,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsPrimitiveArrayParameterizedTest.class,
                 DefaultIfNullOrEmptyParameterizedTest.class,
                 DefaultIfNullParameterizedTest.class,
+                DefaultIfNullOrLessThanOneParameterizedTest.class,
+                DefaultPageNoParameterizedTest.class,
 
                 EqualsAnyTest.class,
                 NewFromTest.class,
