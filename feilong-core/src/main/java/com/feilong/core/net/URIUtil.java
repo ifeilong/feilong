@@ -29,6 +29,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -565,6 +566,9 @@ public final class URIUtil{
      *            true 为encode,false为 decode
      * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
+     * @see java.net.URLEncoder#encode(String, String)
+     * @see java.net.URLDecoder#decode(String, String)
+     * @see org.springframework.util.StringUtils#uriDecode(String, Charset)
      * @since 1.6.2
      */
     private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
