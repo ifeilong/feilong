@@ -494,6 +494,111 @@ public final class RequestUtil{
     }
 
     /**
+     * 将request full相关属性,数据转成json格式 以便log显示(目前仅作log使用).
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Object>} requestInfoMapForLog = RequestUtil.getRequestInfoFullMapForLog(request);
+     * LOGGER.debug(JsonUtil.format(requestInfoMapForLog));
+     * </pre>
+     * 
+     * 输出结果:
+     * 
+     * <pre class="code">
+    {
+    "requestFullURL": "http://wws.feilong.com/feilongtest/book/index/undefined",
+    "requestMethod": "GET",
+    "parameters": {
+        "libId": [
+            "1"
+        ]
+    },
+    "requestIdentity": {
+        "clientIP": "223.104.178.121",
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; JAD-AL50 Build/HUAWEIJAD-AL50; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/4317 MMWEBSDK/20220903 Mobile Safari/537.36 MMWEBID/4791 MicroMessenger/8.0.28.2240(0x28001C3B) WeChat/arm64 Weixin NetType/4G Language/zh_CN ABI/arm64",
+        "sessionId": null
+    },
+    "headerInfos": {
+        "accept-encoding": "gzip, deflate",
+        "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
+        "connection": "close",
+        "content-length": "0",
+        "cookie": "freeFlowType=0; minorProtectionStatus=0; pcdnFree=0",
+        "host": "wws.feilong.com",
+        "referer": "https://wws.feilong.com/wws-lib/book/index/315?libId=6585",
+        "sec-fetch-dest": "image",
+        "sec-fetch-mode": "no-cors",
+        "sec-fetch-site": "same-origin",
+        "user-agent": "Mozilla/5.0 (Linux; Android 10; JAD-AL50 Build/HUAWEIJAD-AL50; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/4317 MMWEBSDK/20220903 Mobile Safari/537.36 MMWEBID/4791 MicroMessenger/8.0.28.2240(0x28001C3B) WeChat/arm64 Weixin NetType/4G Language/zh_CN ABI/arm64",
+        "x-forwarded-for": "223.104.178.121",
+        "x-real-ip": "223.104.178.121",
+        "x-real-port": "15014",
+        "x-requested-with": "com.tencent.mm"
+    },
+    "cookieInfos": {
+        "domain": ".feilong.com",
+        "freeFlowType": "0",
+        "minorProtectionStatus": "0",
+        "path": "/",
+        "pcdnFree": "0",
+        "trackType": "H5"
+    },
+    "urlInfos": {
+        "request.getContextPath()": "/feilongtest",
+        "request.getServletPath()": "",
+        "request.getPathInfo()": "/book/index/undefined",
+        "request.getPathTranslated()": "/usr/local/tomcat/webapps/feilongtest/book/index/undefined",
+        "request.getRequestURI()": "/feilongtest//book/index/undefined",
+        "request.getRequestURL()": "http://wws.feilong.com/feilongtest//book/index/undefined",
+        "request.getQueryString()": null,
+        "getQueryStringLog": null
+    },
+    "elseInfos": {
+        "request.getScheme()": "http",
+        "request.getProtocol()": "HTTP/1.1",
+        "request.getAuthType()": null,
+        "request.getCharacterEncoding()": "UTF-8",
+        "request.getContentType()": null,
+        "request.getContentLength()": "0",
+        "request.getLocale()": "zh_CN",
+        "request.getLocalName()": "feilongtest-64fd6b8bc7-dhmck",
+        "request.getRemoteUser()": null,
+        "request.isRequestedSessionIdFromCookie()": false,
+        "request.isRequestedSessionIdFromURL()": false,
+        "request.isRequestedSessionIdValid()": false,
+        "request.isSecure()": false,
+        "request.getUserPrincipal()": null
+    },
+    "ipInfos": {
+        "getClientIp": "223.104.178.121",
+        "request.getLocalAddr()": "10.204.193.105",
+        "request.getRemoteAddr()": "192.168.58.182",
+        "request.getRemoteHost()": "192.168.58.182",
+        "request.getServerName()": "wws.feilong.com"
+    },
+    "portInfos": {
+        "request.getLocalPort()": "9582",
+        "request.getRemotePort()": "2980",
+        "request.getServerPort()": "80"
+    }
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param request
+     *            the request
+     * @return the request string for log
+     * @see RequestLogBuilder#RequestLogBuilder(HttpServletRequest, RequestLogSwitch)
+     * @since 3.3.2
+     */
+    public static Map<String, Object> getRequestInfoFullMapForLog(HttpServletRequest request){
+        return getRequestInfoMapForLog(request, RequestLogSwitch.FULL);
+    }
+
+    /**
      * 将request 相关属性,数据转成json格式 以便log显示(目前仅作log使用).
      * 
      * <h3>示例:</h3>
