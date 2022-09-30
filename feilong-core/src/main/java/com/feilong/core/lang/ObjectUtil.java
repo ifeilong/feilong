@@ -67,7 +67,7 @@ public final class ObjectUtil{
      *     Page{@code <EarphoneforestInfoVo>} page = new Page<>(earphoneforestInfoQueryForm.getPageNo(), earphoneforestInfoQueryForm.getPageSize());
      * 
      *     <span style=
-    "color:green">EarphoneforestInfoQueryRequest earphoneforestInfoQueryRequest = new EarphoneforestInfoQueryRequest();</span>
+     *     "color:green">EarphoneforestInfoQueryRequest earphoneforestInfoQueryRequest = new EarphoneforestInfoQueryRequest();</span>
      *     <span style="color:green">PropertyUtil.copyProperties(earphoneforestInfoQueryRequest, earphoneforestInfoQueryForm);</span>
      * 
      *     IPage{@code <EarphoneforestInfoVo>} iPage = earphoneforestInfoMapper.select(page, earphoneforestInfoQueryRequest);
@@ -83,14 +83,15 @@ public final class ObjectUtil{
      *     Page{@code <EarphoneforestInfoVo>} page = new Page<>(earphoneforestInfoQueryForm.getPageNo(), earphoneforestInfoQueryForm.getPageSize());
      * 
      *      <span style=
-    "color:green">EarphoneforestInfoQueryRequest earphoneforestInfoQueryRequest=newFrom(EarphoneforestInfoQueryRequest.class,earphoneforestInfoQueryForm);</span>
+     *     "color:green">EarphoneforestInfoQueryRequest earphoneforestInfoQueryRequest=newFrom(EarphoneforestInfoQueryRequest.class,earphoneforestInfoQueryForm);</span>
      *     return earphoneforestInfoMapper.select(page,earphoneforestInfoQueryRequest);
      * }
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <T>
+     *            the generic type
      * @param klass
      *            可以被实例化的类
      * @param fromObj
@@ -109,7 +110,6 @@ public final class ObjectUtil{
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fromObj</code> 是null,直接返回 klass 的实例<br>
      *         如果 <code>includePropertyNames</code> 是null或者empty,将复制全部属性<br>
-     * 
      * @see com.feilong.core.lang.reflect.ConstructorUtil#newInstance(Class, Object...)
      * @see com.feilong.core.bean.PropertyUtil#copyProperties(Object, Object, String...)
      * @since 3.1.1
@@ -249,6 +249,103 @@ public final class ObjectUtil{
         return object != null ? object : defaultValue;
     }
 
+    /**
+     * 如果 <code>pageNo</code> 是null或者{@code <}1,返回默认值 <code>1</code>.
+     * 
+     * <p>
+     * 用于分页处理页面的场景
+     * </p>
+     * 
+     * <pre>
+     * ObjectUtil.defaultPageNo(null)      = 1
+     * ObjectUtil.defaultPageNo(0 )        = 1
+     * ObjectUtil.defaultPageNo(8) = 8
+     * </pre>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * page = defaultIfNull(page, 1);
+     * searchQuery.setPageIndex(page <= 0 ? 1 : page);
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * searchQuery.setPageIndex(defaultPageNo(page));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param pageNo
+     *            the page no
+     * @return 如果 <code>pageNo</code> 是null或者{@code <}1,返回 <code>1</code>,否则返回 <code>pageNo</code>
+     * @since 3.3.2
+     */
+    public static Integer defaultPageNo(Integer pageNo){
+        return defaultIfNullOrLessThanOne(pageNo, 1);
+    }
+
+    /**
+     * 如果 <code>i</code> 是null或者{@code <}1,返回默认值 <code>defaultValue</code>.
+     * 
+     * <p>
+     * 常用于分页处理页面的场景
+     * </p>
+     * 
+     * <pre>
+     * ObjectUtil.defaultIfNullOrLessThanOne(null, null)      = null
+     * ObjectUtil.defaultIfNullOrLessThanOne(null, 1)        = 1
+     * ObjectUtil.defaultIfNullOrLessThanOne(0, 2)        = 2
+     * ObjectUtil.defaultIfNullOrLessThanOne(8, 2) = 8
+     * </pre>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * page = defaultIfNull(page, 1);
+     * searchQuery.setPageIndex(page <= 0 ? 1 : page);
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * searchQuery.setPageIndex(defaultIfNullOrLessThanOne(page, 1));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param i
+     *            the i
+     * @param defaultValue
+     *            the default value to return, may be {@code null}
+     * @return 如果 <code>i</code> 是null或者{@code <}1,返回 <code>defaultValue</code>,否则返回 <code>object</code>
+     * @since 3.3.2
+     */
+    public static Integer defaultIfNullOrLessThanOne(Integer i,Integer defaultValue){
+        if (null == i){
+            return defaultValue;
+        }
+        if (i < 1){
+            return defaultValue;
+        }
+        return i;
+    }
+
     //---------------------------------------------------------------
 
     /**
@@ -378,7 +475,7 @@ public final class ObjectUtil{
      * <p>
      * 比 apache commons-lang3 StringUtils#equalsAny 适用面更广
      * </p>
-     *
+     * 
      * <pre>
      * ObjectUtil.equalsAny(null, (CharSequence[]) null) = false
      * ObjectUtil.equalsAny(null, null, null)    = true
@@ -389,6 +486,8 @@ public final class ObjectUtil{
      * ObjectUtil.equalsAny(5, 5, 6) = true
      * </pre>
      *
+     * @param <T>
+     *            the generic type
      * @param t
      *            to compare, may be {@code null}.
      * @param searchTargets
