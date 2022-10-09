@@ -36,8 +36,14 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ValidatorTest.class,
                 IsAnyNullOrEmptyTest.class,
+
+                ValidatorIsNullOrZeroParameterizedTest.class,
+                ValidatorIsNotNullOrZeroParameterizedTest.class,
+
                 ValidatorIsNullOrEmptyParameterizedTest.class,
-                ValidatorIsNotNullOrEmptyParameterizedTest.class, })
+                ValidatorIsNotNullOrEmptyParameterizedTest.class,
+
+})
 public class CoreTests{
 
 }

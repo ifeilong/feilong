@@ -21,6 +21,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.lang3.StringUtils;
 
@@ -269,6 +270,64 @@ public final class Validator{
      */
     public static boolean isNotNullOrEmpty(Object value){
         return !isNullOrEmpty(value);
+    }
+
+    /**
+     * 判断对象 <code>value</code> 是否是null或者是0.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 常用来做行数或者接口数据总数的判断,
+     * </p>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Long countTrack = bookVo.getCountTrack();//可能是0
+     * if (Objects.equals(0L, countTrack)){
+     *     return 0;
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * if (isNullOrZero(countTrack)){
+     *     return 0;
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param value
+     *            the value
+     * @return 如果是null,返回true<br>
+     *         如果是0也返回true<br>
+     *         其他情况返回false<br>
+     * @see #isNullOrEmpty(Object)
+     * @since 3.3.3
+     */
+    public static boolean isNullOrZero(Number value){
+        return null == value || NumberUtil.isEquals(value, 0);
+    }
+
+    /**
+     * 判断对象 <code>value</code> 是否不是null且不是0.,调用 !{@link #isNullOrZero(Number)} 方法 .
+     *
+     * @param value
+     *            the value
+     * @return 如果是null,返回false<br>
+     *         如果是0也返回false<br>
+     *         其他情况返回true<br>
+     * @see #isNullOrEmpty(Object)
+     * @since 3.3.3
+     */
+    public static boolean isNotNullOrZero(Number value){
+        return !isNullOrZero(value);
     }
 
     //---------------------------------------------------------------
