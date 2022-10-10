@@ -1431,13 +1431,38 @@ public final class DateUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Date format = new SimpleDateFormat("yyyyMMdd").parse(libBorrowUserPo.getSurplusTime());
+     * String surplusTime = new SimpleDateFormat("yyyy-MM-dd").format(format);
+     * 
+     * libBorrowUserPo.setSurplusTime(surplusTime);
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * libBorrowUserPo.setSurplusTime(DateUtil.toString(libBorrowUserPo.getSurplusTime(), "yyyyMMdd", "yyyy-MM-dd"));
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param dateString
-     *            日期字符串
+     *            日期字符串 比如 20221010
      * @param oldPattern
-     *            老的格式
+     *            老的格式 比如 yyyyMMdd
      * @param newPattern
-     *            新的格式
+     *            新的格式 比如 yyyy-MM-dd
      * @return 如果 <code>dateString</code> 是null或者empty,返回 null<br>
      *         如果 <code>oldPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>oldPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
