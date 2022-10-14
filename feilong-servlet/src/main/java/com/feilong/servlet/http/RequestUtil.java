@@ -22,6 +22,7 @@ import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -1164,17 +1165,18 @@ public final class RequestUtil{
      * </p>
      * 
      * <pre>
-    {@code
-        "headerInfo":         {
-            "accept-encoding": "gzip,deflate",
-            "connection": "Keep-Alive",
-            "host": "127.0.0.1:8084",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21"
-        },
-    }
+     *     {@code
+     *         "headerInfo":         {
+     *             "accept-encoding": "gzip,deflate",
+     *             "connection": "Keep-Alive",
+     *             "host": "127.0.0.1:8084",
+     *             "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21"
+     *         },
+     *     }
      * </pre>
-     * 
+     *
      * @param request
+     *            the request
      * @return the header map 按照名字顺序返回
      * @since 3.1.0
      */
@@ -1226,8 +1228,9 @@ public final class RequestUtil{
 
     /**
      * 判断一个请求不是 <b>微信浏览器</b> 的请求.
-     * 
+     *
      * @param request
+     *            the request
      * @return 如果不是微信浏览器请求的,那么返回true , 否则返回false
      * @see #isWechatRequest(HttpServletRequest)
      * @since 3.1.0
@@ -1304,12 +1307,12 @@ public final class RequestUtil{
 
     /**
      * 判断header 中是否包含指定的字符串(忽视大小写).
-     * 
+     *
      * @param request
+     *            the request
      * @param s
      *            指定的字符串
-     * @return
-     *         如果 <code>userAgent</code> 是null或者empty,返回false<br>
+     * @return 如果 <code>userAgent</code> 是null或者empty,返回false<br>
      *         如果 <code>userAgent</code> 包含指定字符串(忽视大小写),返回true;否则返回false
      * @since 3.1.0
      */
@@ -1404,6 +1407,53 @@ public final class RequestUtil{
      */
     public static String getParameter(HttpServletRequest request,String paramName){
         return request.getParameter(paramName);
+    }
+
+    /**
+     * 获得request中的请求参数值,如果不存在或者是empty,那么使用默认值 <code>defaultValue</code>.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * private static String buildQrChannel(HttpServletRequest request){
+     *     // 添加二维码渠道
+     *     String qrChannel = request.getParameter("_qr_channel");
+     *     if (Strings.isNullOrEmpty(qrChannel)){
+     *         return "0";
+     *     }
+     *     return qrChannel;
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * private static String buildQrChannel(HttpServletRequest request){
+     *     return RequestUtil.getParameterDefaultValue(request, "_qr_channel", "0");
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param request
+     *            当前请求
+     * @param paramName
+     *            参数名称
+     * @param defaultValue
+     *            如果参数值是空或者empty,使用默认值
+     * @return 获得request中的请求参数值
+     * @since 3.3.3
+     */
+    public static String getParameterDefaultValue(HttpServletRequest request,String paramName,String defaultValue){
+        return defaultIfNullOrEmpty(getParameter(request, paramName), defaultValue);
     }
 
     /**
