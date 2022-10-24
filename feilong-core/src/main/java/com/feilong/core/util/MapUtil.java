@@ -1634,7 +1634,8 @@ public final class MapUtil{
 
     /**
      * New concurrent hash map.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>()} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1648,7 +1649,8 @@ public final class MapUtil{
 
     /**
      * New concurrent hash map.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(map)} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1746,7 +1748,8 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(toInitialCapacity(expectedSize))} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1766,7 +1769,8 @@ public final class MapUtil{
 
     /**
      * New tree map.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>()} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1781,7 +1785,8 @@ public final class MapUtil{
 
     /**
      * New tree map.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>(map)} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1853,7 +1858,8 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>()} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1869,7 +1875,8 @@ public final class MapUtil{
 
     /**
      * New hash map.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(map)} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -1967,7 +1974,8 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(toInitialCapacity(expectedSize))} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -2042,7 +2050,8 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>()} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -2058,7 +2067,8 @@ public final class MapUtil{
 
     /**
      * New linked hash map.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(map)} 的写法
      * @param <K>
      *            the key type
      * @param <V>
@@ -2157,6 +2167,8 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(toInitialCapacity(expectedSize))} 的写法
      * 
      * @param <K>
      *            the key type
