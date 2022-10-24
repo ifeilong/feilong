@@ -1793,6 +1793,40 @@ public final class CollectionsUtil{
      * </pre>
      *
      * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+    
+     * Long soundId = singleBookQueryRequest.getSoundId();
+     * List{@code <SoundVo>} soundVoList = soundVoListBuilderFactory
+     *                 .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
+     * boolean isContain = false;
+     * for (SoundVo soundVo : soundVoList){
+     *     if (soundVo.getSoundId().equals(soundId)){
+     *         isContain = true;
+     *         break;
+     *     }
+     * }
+     * </pre>
+     * 
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * Long soundId = singleBookQueryRequest.getSoundId();
+     * List{@code <SoundVo>} soundVoList = soundVoListBuilderFactory
+     *                 .querySoundVoByMaterial(libraryPo, materialId, forceSetPaidUrl, doNotCheckNumberLimit, pageIndex);
+     * <span style="color:green">boolean isContain = CollectionsUtil.exist(soundVoList, "soundId", soundId);</span>
+     * </pre>
+     * 
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
