@@ -3508,7 +3508,8 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code ArrayList} instance .
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new ArrayList<>()} 的写法
      * @param <E>
      *            the element type
      * @return the array list
@@ -3521,7 +3522,9 @@ public final class CollectionsUtil{
     /**
      * Constructs a list containing the elements of the specified collection, in the order they are returned by the collection's
      * iterator.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new ArrayList<>(collection)} 的写法
+     * 
      * @param <E>
      *            the element type
      * @param collection
@@ -3537,7 +3540,8 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code LinkedList} instance .
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedList<>()} 的写法
      * @param <E>
      *            the element type
      * @return the linked list
@@ -3551,7 +3555,8 @@ public final class CollectionsUtil{
      * Constructs a list containing the elements of the specified
      * collection, in the order they are returned by the collection's
      * iterator.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedList<>(collection)} 的写法
      * @param <E>
      *            the element type
      * @param collection
@@ -3567,7 +3572,8 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code CopyOnWriteArrayList} instance .
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new CopyOnWriteArrayList<>()} 的写法
      * @param <E>
      *            the element type
      * @return a new, empty {@code CopyOnWriteArrayList}
@@ -3580,7 +3586,8 @@ public final class CollectionsUtil{
     /**
      * Creates a list containing the elements of the specified collection, in the order they are returned by the collection's
      * iterator.
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new CopyOnWriteArrayList<>(collection)} 的写法
      * @param <E>
      *            the element type
      * @param collection
@@ -3598,7 +3605,8 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code newHashSet} instance .
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new HashSet<>()} 的写法
      * @param <E>
      *            the element type
      * @return the hash set
@@ -3618,7 +3626,8 @@ public final class CollectionsUtil{
      * (0.75) and an initial capacity sufficient to contain the elements in
      * the specified collection.
      * </p>
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new HashSet<>(collection)} 的写法
      * @param <E>
      *            the element type
      * @param collection
@@ -3635,7 +3644,8 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code LinkedHashSet} instance .
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashSet<>()} 的写法
      * @param <E>
      *            the element type
      * @return a new, empty {@code LinkedHashSet}
@@ -3653,7 +3663,8 @@ public final class CollectionsUtil{
      * capacity sufficient to hold the elements in the specified collection
      * and the default load factor (0.75).
      * </p>
-     *
+     * 
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashSet<>(collection)} 的写法
      * @param <E>
      *            the element type
      * @param collection
