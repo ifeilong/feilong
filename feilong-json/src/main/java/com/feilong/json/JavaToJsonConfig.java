@@ -21,6 +21,8 @@ import com.feilong.json.builder.JsonConfigBuilder;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.PropertyFilter;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * java格式化成json的一些配置.
@@ -880,6 +882,17 @@ public class JavaToJsonConfig extends AbstractConfig{
      */
     public void setPropertyFilter(PropertyFilter propertyFilter){
         this.propertyFilter = propertyFilter;
+    }
+
+    //---------------------------------------------------------------
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
 }

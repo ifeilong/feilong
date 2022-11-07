@@ -24,9 +24,8 @@ import org.junit.Test;
 
 public class GetTimeTest{
 
-    @Test(expected = NullPointerException.class)
     public void testGetTimeNullDate(){
-        getTime(null);
+        assertEquals(null, getTime(null));
     }
 
     /**
@@ -34,6 +33,6 @@ public class GetTimeTest{
      */
     @Test
     public void testGetTime(){
-        assertEquals(1340900880000L, getTime(toDate("2012-06-29 00:28:00", COMMON_DATE_AND_TIME)));
+        assertEquals((Object) 1340900880000L, getTime(toDate("2012-06-29 00:28:00", COMMON_DATE_AND_TIME)));
     }
 }

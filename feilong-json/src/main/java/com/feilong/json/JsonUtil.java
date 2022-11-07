@@ -837,6 +837,8 @@ public final class JsonUtil{
         if (null == obj){
             return EMPTY;
         }
+
+        //---------------------------------------------------------------
         //since 1.14.0
         if (JsonHelper.isCommonString(obj)){
             return (String) obj;
@@ -845,9 +847,14 @@ public final class JsonUtil{
         JavaToJsonConfig useJavaToJsonConfig = JavaToJsonConfigBuilder.buildUseJavaToJsonConfig(obj, javaToJsonConfig);
         JsonConfig jsonConfig = JsonConfigBuilder.build(obj, useJavaToJsonConfig);
 
-        //---------------------------------------------------------------
-        JSON json = JsonHelper.toJSON(obj, jsonConfig);
-        return json.toString(indentFactor, indent);
+        try{
+            JSON json = JsonHelper.toJSON(obj, jsonConfig);
+            return json.toString(indentFactor, indent);
+        }catch (Exception e){
+            String pattern = "obj:[{}],javaToJsonConfig:[{}],indentFactor:[{}],indent:[{}],[{}],returnNull";
+            LOGGER.error(pattern, obj, javaToJsonConfig, indentFactor, indent, e.getMessage(), e);
+            return null;
+        }
     }
 
     //---------------------------------------------------------------

@@ -42,6 +42,12 @@ public class FormatMapTest extends AbstractJsonTest{
     }
 
     @Test
+    public void testJsonMapNullKey(){
+        Map<String, String> nullMap = toMap("null", "1234");
+        assertEquals(null, JsonUtil.format(nullMap));
+    }
+
+    @Test
     public void testHashtable(){
         Hashtable<String, Object> hashtable = new Hashtable<>();
         hashtable.put("a", "a");
