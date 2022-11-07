@@ -95,7 +95,7 @@ public class ToMapTest{
      */
     @Test
     public void testToMapNullJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(null));
+        assertEquals(null, JsonUtil.toMap(null));
     }
 
     /**
@@ -103,7 +103,7 @@ public class ToMapTest{
      */
     @Test
     public void testToMapEmptyJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(""));
+        assertEquals(null, JsonUtil.toMap(""));
     }
 
     /**
@@ -111,7 +111,7 @@ public class ToMapTest{
      */
     @Test
     public void testToMapBlankJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(" "));
+        assertEquals(null, JsonUtil.toMap(" "));
     }
 
     /**

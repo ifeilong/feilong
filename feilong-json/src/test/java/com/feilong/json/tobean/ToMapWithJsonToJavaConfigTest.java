@@ -86,7 +86,7 @@ public class ToMapWithJsonToJavaConfigTest{
      */
     @Test
     public void testToMapNullJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(null, new JsonToJavaConfig(Person.class)));
+        assertEquals(null, JsonUtil.toMap(null, new JsonToJavaConfig(Person.class)));
     }
 
     /**
@@ -94,12 +94,12 @@ public class ToMapWithJsonToJavaConfigTest{
      */
     @Test
     public void testToMapEmptyJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap("", new JsonToJavaConfig(Person.class)));
+        assertEquals(null, JsonUtil.toMap("", new JsonToJavaConfig(Person.class)));
     }
 
     @Test
     public void testToMapBlankJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(" ", new JsonToJavaConfig(Person.class)));
+        assertEquals(null, JsonUtil.toMap(" ", new JsonToJavaConfig(Person.class)));
     }
 
     /**

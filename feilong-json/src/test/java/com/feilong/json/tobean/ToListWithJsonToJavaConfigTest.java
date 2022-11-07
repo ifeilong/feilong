@@ -61,6 +61,18 @@ public class ToListWithJsonToJavaConfigTest{
         assertEquals(null, JsonUtil.toList(null, new JsonToJavaConfig(Person.class)));
     }
 
+    @Test
+    public void testToListNullJson1(){
+        assertEquals(null, JsonUtil.toList("", new JsonToJavaConfig(Person.class)));
+    }
+
+    @Test
+    public void testToListNullJson2(){
+        assertEquals(null, JsonUtil.toList(" ", new JsonToJavaConfig(Person.class)));
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Test to array null json to java config.
      */

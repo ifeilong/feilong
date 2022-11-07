@@ -46,6 +46,16 @@ public class ToListTest{
         assertEquals(null, JsonUtil.toList(null, Person.class));
     }
 
+    @Test
+    public void testToListNullJson1(){
+        assertEquals(null, JsonUtil.toList("", Person.class));
+    }
+
+    @Test
+    public void testToListNullJson12(){
+        assertEquals(null, JsonUtil.toList(" ", Person.class));
+    }
+
     @Test(expected = JsonToJavaException.class)
     public void testToList11(){
         String json = "{'name11':'get'},{'nam112e':'set'}";

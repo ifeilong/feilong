@@ -22,9 +22,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static java.util.Collections.emptyMap;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -981,16 +979,18 @@ public final class JsonUtil{
      * @param jsonToJavaConfig
      *            the json to java config
      * @return 如果 <code>json</code> 是null,返回 null<br>
+     *         如果 <code>json</code> 是empty,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toBean(String, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @since 1.9.4
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> T[] toArray(String json,JsonToJavaConfig jsonToJavaConfig){
-        if (null == json){
+        if (isNullOrEmpty(json)){
             return null;
         }
 
@@ -1071,13 +1071,15 @@ public final class JsonUtil{
      * @param rootClass
      *            the klass,see {@link com.feilong.lib.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null<br>
+     *         如果 <code>json</code> 是empty,返回 null<br>
      *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(String, JsonToJavaConfig)
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> List<T> toList(String json,Class<T> rootClass){
-        if (null == json){
+        if (isNullOrEmpty(json)){
             return null;
         }
         Validate.notNull(rootClass, "rootClass can't be null!");
@@ -1157,16 +1159,18 @@ public final class JsonUtil{
      * @param jsonToJavaConfig
      *            the json to java config
      * @return 如果 <code>json</code> 是null,返回 null<br>
+     *         如果 <code>json</code> 是empty,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * 
      * @see com.feilong.lib.json.JSONArray#getJSONObject(int)
      * @see #toBean(String, JsonToJavaConfig)
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     @SuppressWarnings("squid:S1168") //Empty arrays and collections should be returned instead of null
     public static <T> List<T> toList(String json,JsonToJavaConfig jsonToJavaConfig){
-        if (null == json){
+        if (isNullOrEmpty(json)){
             return null;
         }
         //---------------------------------------------------------------
@@ -1257,11 +1261,12 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            the json
-     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>json</code> 是null或者empty,返回 null<br>
      *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      * @see #toMap(String, JsonToJavaConfig)
      * @since 1.5.0
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     public static <T> Map<String, T> toMap(String json){
         return toMap(json, null);
@@ -1318,17 +1323,18 @@ public final class JsonUtil{
      *            e.g. {'data1':{'name':'get'},'data2':{'name':'set'}}
      * @param jsonToJavaConfig
      *            the json to java config
-     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>json</code> 是null或者empty,返回 null<br>
      *         如果 <code>json</code> 不是Map格式的json字符串,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
      * @see #toBean(String, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     public static <T> Map<String, T> toMap(String json,JsonToJavaConfig jsonToJavaConfig){
         LOGGER.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
         if (isNullOrEmpty(json)){
-            return emptyMap();
+            return null;
         }
 
         //如果 json 是字符串 ,但是不是对象类型的字符串
@@ -1403,13 +1409,15 @@ public final class JsonUtil{
      * @param rootClass
      *            e.g. Person.class,see {@link com.feilong.lib.json.JsonConfig#setRootClass(Class)}
      * @return 如果<code>json</code> 是null,那么返回 null <br>
+     *         如果 <code>json</code> 是empty,返回 null<br>
      *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.lib.json.JsonConfig#setRootClass(Class)
      * @see #toBean(String, JsonToJavaConfig)
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     public static <T> T toBean(String json,Class<T> rootClass){
-        if (null == json){
+        if (isNullOrEmpty(json)){
             return null;
         }
 
@@ -1485,11 +1493,13 @@ public final class JsonUtil{
      * @param jsonToJavaConfig
      *            the json to java config
      * @return 如果<code>json</code> 是null,那么返回 null<br>
+     *         如果 <code>json</code> 是empty,返回 null<br>
      *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.lib.json.JsonConfig#setRootClass(Class)
      * @since 1.9.4
      * @since 3.0.6 change param type from Object to String
+     * @since 3.3.4 如果 <code>json</code> 是null或者empty,返回 null
      */
     public static <T> T toBean(String json,JsonToJavaConfig jsonToJavaConfig){
         return objectToBean(json, jsonToJavaConfig);
@@ -1520,7 +1530,7 @@ public final class JsonUtil{
 
     @SuppressWarnings("unchecked")
     private static <T> T objectToBean(Object json,JsonToJavaConfig jsonToJavaConfig){
-        if (null == json){
+        if (isNullOrEmpty(json)){
             return null;
         }
         //---------------------------------------------------------------

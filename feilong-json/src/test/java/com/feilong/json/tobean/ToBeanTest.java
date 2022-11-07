@@ -75,6 +75,16 @@ public class ToBeanTest{
         assertEquals(null, JsonUtil.toBean(null, Person.class));
     }
 
+    @Test
+    public void testToBeanNullJson1(){
+        assertEquals(null, JsonUtil.toBean("", Person.class));
+    }
+
+    @Test
+    public void testToBeanNullJson12(){
+        assertEquals(null, JsonUtil.toBean(" ", Person.class));
+    }
+
     @Test(expected = JsonToJavaException.class)
     public void testToBean11(){
         String json = "2{'name11':'get'},{'nam112e':'set'}";

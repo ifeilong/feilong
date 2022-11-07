@@ -90,6 +90,20 @@ public class ToArrayWithJsonToJavaConfigTest{
         assertArrayEquals(null, objArr);
     }
 
+    @Test
+    public void testToArrayNullJson1(){
+        Person[] objArr = JsonUtil.toArray("", new JsonToJavaConfig(Person.class));
+        assertArrayEquals(null, objArr);
+    }
+
+    @Test
+    public void testToArrayNullJson12(){
+        Person[] objArr = JsonUtil.toArray(" ", new JsonToJavaConfig(Person.class));
+        assertArrayEquals(null, objArr);
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Test to array null json to java config.
      */

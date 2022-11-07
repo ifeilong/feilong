@@ -164,6 +164,18 @@ public class ToBeanWithJsonToJavaConfigTest{
         assertEquals(null, user);
     }
 
+    @Test
+    public void testToBeanNullJson2(){
+        User user = JsonUtil.toBean("", new JsonToJavaConfig(User.class));
+        assertEquals(null, user);
+    }
+
+    @Test
+    public void testToBeanNullJson23(){
+        User user = JsonUtil.toBean(" ", new JsonToJavaConfig(User.class));
+        assertEquals(null, user);
+    }
+
     /**
      * Test to bean null json to java config.
      */
