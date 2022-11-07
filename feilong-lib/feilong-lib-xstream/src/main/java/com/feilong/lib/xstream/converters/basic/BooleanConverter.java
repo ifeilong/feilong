@@ -59,9 +59,8 @@ public class BooleanConverter extends AbstractSingleValueConverter{
     public Object fromString(final String str){
         if (caseSensitive){
             return positive.equals(str) ? Boolean.TRUE : Boolean.FALSE;
-        }else{
-            return positive.equalsIgnoreCase(str) ? Boolean.TRUE : Boolean.FALSE;
         }
+        return positive.equalsIgnoreCase(str) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override

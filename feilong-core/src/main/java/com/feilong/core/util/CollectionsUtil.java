@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.bean.PropertyValueObtainer;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.closure.BeanPropertyValueChangeClosure;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.core.util.transformer.BeanTransformer;
@@ -389,6 +390,63 @@ public final class CollectionsUtil{
      */
     public static <T> T get(final Iterable<T> iterable,final int index){
         return IterableUtils.get(iterable, index);
+    }
+
+    /**
+     * 循环 <code>iterable</code>, 判断元素和参数 <code>element</code> 去空且忽视大小写后是否相等, 如果有相等的,那么返回true.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * CollectionsUtil.containsTrimAndIgnoreCase(toList("track", "debug"), " debug") = true
+     * CollectionsUtil.containsTrimAndIgnoreCase(toList("track", "DEBUG"), " debug") = true
+     * CollectionsUtil.containsTrimAndIgnoreCase(toList("track", " debug"), " debug") = true
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * return (StringUtil.trimAndEqualsIgnoreCase(logLevel, "track") //
+     *                 || StringUtil.trimAndEqualsIgnoreCase(logLevel, "debug"));
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * return CollectionsUtil.containsTrimAndIgnoreCase(toList("track", "debug"), logLevel);
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param iterable
+     *            the iterable
+     * @param element
+     *            the element
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 false<br>
+     * @since 3.3.4
+     */
+    public static boolean containsTrimAndIgnoreCase(final Iterable<String> iterable,final String element){
+        if (isNullOrEmpty(iterable)){
+            return false;
+        }
+        for (String string : iterable){
+            if (StringUtil.trimAndEqualsIgnoreCase(string, element)){
+                return true;
+            }
+        }
+        return false;
     }
 
     //---------------------------------------------------------------
@@ -3508,12 +3566,12 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code ArrayList} instance .
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new ArrayList<>()} 的写法
+     *
      * @param <E>
      *            the element type
      * @return the array list
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new ArrayList<>()} 的写法
      */
     public static <E> List<E> newArrayList(){
         return new ArrayList<>();
@@ -3522,9 +3580,7 @@ public final class CollectionsUtil{
     /**
      * Constructs a list containing the elements of the specified collection, in the order they are returned by the collection's
      * iterator.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new ArrayList<>(collection)} 的写法
-     * 
+     *
      * @param <E>
      *            the element type
      * @param collection
@@ -3533,6 +3589,7 @@ public final class CollectionsUtil{
      * @throws NullPointerException
      *             if the specified collection is null
      * @since 3.1.1
+     * @apiNote 可以使用静态导入,简化 {@code new ArrayList<>(collection)} 的写法
      */
     public static <E> List<E> newArrayList(Collection<? extends E> collection){
         return new ArrayList<>(collection);
@@ -3540,12 +3597,12 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code LinkedList} instance .
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedList<>()} 的写法
+     *
      * @param <E>
      *            the element type
      * @return the linked list
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedList<>()} 的写法
      */
     public static <E> List<E> newLinkedList(){
         return new LinkedList<>();
@@ -3555,8 +3612,7 @@ public final class CollectionsUtil{
      * Constructs a list containing the elements of the specified
      * collection, in the order they are returned by the collection's
      * iterator.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedList<>(collection)} 的写法
+     *
      * @param <E>
      *            the element type
      * @param collection
@@ -3565,6 +3621,7 @@ public final class CollectionsUtil{
      * @throws NullPointerException
      *             if the specified collection is null
      * @since 3.1.1
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedList<>(collection)} 的写法
      */
     public static <E> List<E> newLinkedList(Collection<? extends E> collection){
         return new LinkedList<>(collection);
@@ -3572,12 +3629,12 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code CopyOnWriteArrayList} instance .
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new CopyOnWriteArrayList<>()} 的写法
+     *
      * @param <E>
      *            the element type
      * @return a new, empty {@code CopyOnWriteArrayList}
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new CopyOnWriteArrayList<>()} 的写法
      */
     public static <E> List<E> newCopyOnWriteArrayList(){
         return new CopyOnWriteArrayList<>();
@@ -3586,8 +3643,7 @@ public final class CollectionsUtil{
     /**
      * Creates a list containing the elements of the specified collection, in the order they are returned by the collection's
      * iterator.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new CopyOnWriteArrayList<>(collection)} 的写法
+     *
      * @param <E>
      *            the element type
      * @param collection
@@ -3596,6 +3652,7 @@ public final class CollectionsUtil{
      * @throws NullPointerException
      *             if the specified collection is null
      * @since 3.1.1
+     * @apiNote 可以使用静态导入,简化 {@code new CopyOnWriteArrayList<>(collection)} 的写法
      */
     public static <E> List<E> newCopyOnWriteArrayList(Collection<? extends E> collection){
         return new CopyOnWriteArrayList<>(collection);
@@ -3605,12 +3662,12 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code newHashSet} instance .
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new HashSet<>()} 的写法
+     *
      * @param <E>
      *            the element type
      * @return the hash set
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new HashSet<>()} 的写法
      */
     public static <E> Set<E> newHashSet(){
         return new HashSet<>();
@@ -3626,8 +3683,7 @@ public final class CollectionsUtil{
      * (0.75) and an initial capacity sufficient to contain the elements in
      * the specified collection.
      * </p>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new HashSet<>(collection)} 的写法
+     *
      * @param <E>
      *            the element type
      * @param collection
@@ -3637,6 +3693,7 @@ public final class CollectionsUtil{
      *             if the specified collection is null
      * @see java.util.HashSet#HashSet(Collection)
      * @since 3.1.1
+     * @apiNote 可以使用静态导入,简化 {@code new HashSet<>(collection)} 的写法
      */
     public static <E> Set<E> newHashSet(Collection<? extends E> collection){
         return new HashSet<>(collection);
@@ -3644,12 +3701,12 @@ public final class CollectionsUtil{
 
     /**
      * 创建 a <i>mutable</i>, empty {@code LinkedHashSet} instance .
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashSet<>()} 的写法
+     *
      * @param <E>
      *            the element type
      * @return a new, empty {@code LinkedHashSet}
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashSet<>()} 的写法
      */
     public static <E> Set<E> newLinkedHashSet(){
         return new LinkedHashSet<>();
@@ -3663,8 +3720,7 @@ public final class CollectionsUtil{
      * capacity sufficient to hold the elements in the specified collection
      * and the default load factor (0.75).
      * </p>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashSet<>(collection)} 的写法
+     *
      * @param <E>
      *            the element type
      * @param collection
@@ -3673,6 +3729,7 @@ public final class CollectionsUtil{
      * @throws NullPointerException
      *             if the specified collection is null
      * @since 3.1.1
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashSet<>(collection)} 的写法
      */
     public static <E> Set<E> newLinkedHashSet(Collection<? extends E> collection){
         return new LinkedHashSet<>(collection);
