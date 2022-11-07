@@ -43,6 +43,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 TokenizeToStringArrayTest.class,
                 TokenizeToStringArrayWithArgsTest.class,
 
+                ToSingleValueMapTest.class,
+                ToSingleValueMapConvertTest.class,
                 ToMultiValueMapTest.class,
 //
 })

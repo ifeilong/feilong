@@ -845,6 +845,113 @@ public final class StringUtil{
     }
 
     // [end]
+    /**
+     * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988,455 这种等号后面的值,使用逗号分隔成list.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<String, String> map = StringUtil.toSingleValueMap("1=2;89=100;200=230");
+     * 
+     * assertThat(
+     *                 map,
+     *                 allOf(//
+     *                                 hasEntry("1", "2"),
+     *                                 hasEntry("89", "100"),
+     *                                 hasEntry("200", "230")));
+     * 
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     * 
+     * @apiNote 自动去除空格,忽略空
+     * @param config
+     *            189=988;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
+     * @since 3.3.4
+     */
+    public static Map<String, String> toSingleValueMap(String config){
+        return toSingleValueMap(config, String.class, String.class);
+    }
+
+    /**
+     * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988,455 这种等号后面的值,使用逗号分隔成list.
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<Integer, Integer> map = StringUtil.toSingleValueMap("1=2;89=100;200=230", Integer.class, Integer.class);
+     * 
+     * assertThat(
+     *                 map,
+     *                 allOf(//
+     *                                 hasEntry(1, 2),
+     *                                 hasEntry(89, 100),
+     *                                 hasEntry(200, 230)));
+     * 
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     * 
+     * @apiNote 自动去除空格,忽略空
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param config
+     *            189=988;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @param keyClass
+     *            key转换的类型,比如上面的背景中, 189 可以转换成String Long Integer
+     * @param valueElementClass
+     *            value转换的类型,比如上面的背景中, 455 可以转换成String Long Integer
+     * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
+     *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 3.3.4
+     */
+    public static <T, V> Map<T, V> toSingleValueMap(String config,Class<T> keyClass,Class<V> valueElementClass){
+
+        if (isNullOrEmpty(config)){
+            return emptyMap();
+        }
+
+        Validate.notNull(keyClass, "keyClass can't be null!");
+        Validate.notNull(valueElementClass, "valueElementClass can't be null!");
+
+        //---------------------------------------------------------------
+
+        String[] entrys = StringUtil.tokenizeToStringArray(config, ";");
+        if (isNullOrEmpty(entrys)){
+            return emptyMap();
+        }
+
+        Map<T, V> map = newHashMap();
+        for (String keyAndValueString : entrys){
+            if (isNullOrEmpty(keyAndValueString)){
+                continue;
+            }
+
+            String[] keyAndValues = StringUtil.tokenizeToStringArray(keyAndValueString, "=");
+            if (size(keyAndValues) != 2){
+                continue;
+            }
+
+            //---------------------------------------------------------------
+            map.put(
+                            convert(keyAndValues[0], keyClass), //
+                            convert(keyAndValues[1], valueElementClass));
+        }
+        return map;
+    }
 
     /**
      * 将 189=988,900;200=455;这种格式的字符串转换成map , map的key 是189,200 这种, value 是988,900,455 这种等号后面的值,使用逗号分隔成list.
