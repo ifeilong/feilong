@@ -15,6 +15,9 @@
  */
 package com.feilong.tools.slf4j;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.containsTrimAndIgnoreCase;
+
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 
@@ -82,5 +85,95 @@ public final class Slf4jUtil{
     public static String format(String messagePattern,Object...args){
         FormattingTuple formattingTuple = MessageFormatter.arrayFormat(messagePattern, args);
         return formattingTuple.getMessage();
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 判断指定的logvel 是否小于等于debug级别.
+     * 
+     * <p>
+     * 使用场景: 可以使用配置中心来控制类的日志级别, 而不需要每次修改log4j xml 或者logback xml 配置文件再重新发布
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Slf4jUtil.isEnabledDebug("debug") = true;
+     * Slf4jUtil.isEnabledDebug("debug ") = true;
+     * Slf4jUtil.isEnabledDebug(" debug ") = true;
+     * Slf4jUtil.isEnabledDebug(" DEBUG ") = true;
+     * Slf4jUtil.isEnabledDebug(" track ") = true;
+     * Slf4jUtil.isEnabledDebug(" TRACK ") = true;
+     * Slf4jUtil.isEnabledDebug("TRACK") = true;
+     * 
+     * Slf4jUtil.isEnabledDebug("info") = false;
+     * Slf4jUtil.isEnabledDebug("INFO") = false;
+     * Slf4jUtil.isEnabledDebug("error") = false;
+     * Slf4jUtil.isEnabledDebug("ERROR") = false;
+     * 
+     * Slf4jUtil.isEnabledDebug("track1111") = false;
+     * Slf4jUtil.isEnabledDebug("debug1111") = false;
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param logLevel
+     *            the log level
+     * @return 如果 <code>logLevel</code> 是null,返回false<br>
+     *         如果 <code>logLevel</code> 是empty,返回false<br>
+     * @since 3.3.4
+     */
+    public static boolean isEnabledDebug(String logLevel){
+        return containsTrimAndIgnoreCase(toList("track", "debug"), logLevel);
+    }
+
+    /**
+     * 判断指定的logvel 是否小于等于info级别.
+     * 
+     * <p>
+     * 使用场景: 可以使用配置中心来控制类的日志级别, 而不需要每次修改log4j xml 或者logback xml 配置文件再重新发布
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Slf4jUtil.isEnabledDebug("debug") = true;
+     * Slf4jUtil.isEnabledDebug("debug ") = true;
+     * Slf4jUtil.isEnabledDebug(" debug ") = true;
+     * Slf4jUtil.isEnabledDebug(" DEBUG ") = true;
+     * Slf4jUtil.isEnabledDebug(" track ") = true;
+     * Slf4jUtil.isEnabledDebug(" TRACK ") = true;
+     * Slf4jUtil.isEnabledDebug("TRACK") = true;
+     * 
+     * Slf4jUtil.isEnabledDebug("info") = true;
+     * Slf4jUtil.isEnabledDebug("INFO") = true;
+     * 
+     * Slf4jUtil.isEnabledDebug("error") = false;
+     * Slf4jUtil.isEnabledDebug("ERROR") = false;
+     * 
+     * Slf4jUtil.isEnabledDebug("track1111") = false;
+     * Slf4jUtil.isEnabledDebug("debug1111") = false;
+     * Slf4jUtil.isEnabledDebug("info1111") = false;
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param logLevel
+     *            the log level
+     * @return 如果 <code>logLevel</code> 是null,返回false<br>
+     *         如果 <code>logLevel</code> 是empty,返回false<br>
+     * @since 3.3.4
+     */
+    public static boolean isEnabledInfo(String logLevel){
+        return containsTrimAndIgnoreCase(toList("track", "debug", "info"), logLevel);
     }
 }

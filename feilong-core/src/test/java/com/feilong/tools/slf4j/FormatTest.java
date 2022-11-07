@@ -24,7 +24,7 @@ import org.junit.Test;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
-public class Slf4jUtilTest{
+public class FormatTest{
 
     /**
      * Test.

@@ -13,35 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong;
+package com.feilong.tools.slf4j;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.CoreTests;
-import com.feilong.core.bean.BeanSuiteTests;
-import com.feilong.core.date.DateSuiteTests;
-import com.feilong.core.lang.LangSuiteTests;
-import com.feilong.core.net.NetSuiteTests;
-import com.feilong.core.text.TextSuiteTests;
-import com.feilong.core.util.UtilSuiteTests;
-import com.feilong.tools.slf4j.Slf4jUtilSuiteTests;
-
 @RunWith(Suite.class)
 @SuiteClasses({
-                CoreTests.class,
+                IsEnabledDebugParameterizedTest.class,
+                IsEnabledInfoParameterizedTest.class,
 
-                Slf4jUtilSuiteTests.class,
-
-                BeanSuiteTests.class,
-                DateSuiteTests.class,
-                LangSuiteTests.class,
-                TextSuiteTests.class,
-                NetSuiteTests.class,
-                UtilSuiteTests.class
+                FormatTest.class,
 //
 })
-public class SuiteTests{
+public class Slf4jUtilSuiteTests{
 
 }
