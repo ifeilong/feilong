@@ -42,6 +42,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 SubstringWithoutLastLastStringTest.class,
                 TokenizeToStringArrayTest.class,
                 TokenizeToStringArrayWithArgsTest.class,
+
+                ToMultiValueMapTest.class,
 //
 })
 public class StringUtilSuiteTests{

@@ -17,9 +17,14 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.CollectionsUtil.size;
+import static com.feilong.core.util.MapUtil.newHashMap;
+import static java.util.Collections.emptyMap;
 
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
@@ -840,6 +845,83 @@ public final class StringUtil{
     }
 
     // [end]
+
+    /**
+     * 将 189=988,900;200=455;这种格式的字符串转换成map , map的key 是189,200 这种, value 是988,900,455 这种等号后面的值,使用逗号分隔成list.
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<Integer, List<Integer>> multiValueMap = StringUtil.toMultiValueMap("1=2;89=100,99;200=230,999", Integer.class, Integer.class);
+     * 
+     * assertThat(
+     *                 multiValueMap,
+     *                 allOf(//
+     *                                 hasEntry(1, toList(2)),
+     *                                 hasEntry(89, toList(100, 99)),
+     *                                 hasEntry(200, toList(230, 999))));
+     * 
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     * 
+     * @apiNote 自动去除空格,忽略空
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param config
+     *            189=988,900;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @param keyClass
+     *            key转换的类型,比如上面的背景中, 189 可以转换成String Long Integer
+     * @param valueElementClass
+     *            value转换的类型,比如上面的背景中, 455 可以转换成String Long Integer
+     * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
+     *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 3.3.4
+     */
+    public static <T, V> Map<T, List<V>> toMultiValueMap(String config,Class<T> keyClass,Class<V> valueElementClass){
+        if (isNullOrEmpty(config)){
+            return emptyMap();
+        }
+
+        Validate.notNull(keyClass, "keyClass can't be null!");
+        Validate.notNull(valueElementClass, "valueElementClass can't be null!");
+
+        //---------------------------------------------------------------
+        String[] entrys = tokenizeToStringArray(config, ";");
+        if (isNullOrEmpty(entrys)){
+            return emptyMap();
+        }
+
+        //---------------------------------------------------------------
+
+        Map<T, List<V>> map = newHashMap();
+        for (String entry : entrys){
+            if (isNullOrEmpty(entry)){
+                continue;
+            }
+
+            String[] keyAndValuesMapping = tokenizeToStringArray(entry, "=");
+            if (size(keyAndValuesMapping) != 2){
+                continue;
+            }
+
+            //---------------------------------------------------------------
+            T key = convert(keyAndValuesMapping[0], keyClass);
+
+            String[] values = StringUtil.tokenizeToStringArray(keyAndValuesMapping[1], ",");
+            List<V> valueList = toList(toArray(values, valueElementClass));
+
+            map.put(key, valueList);
+        }
+        return map;
+    }
 
     // [start]format
 
