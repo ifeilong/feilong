@@ -1371,14 +1371,35 @@ public final class DateUtil{
      * 
      * </blockquote>
      * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Date multiSingleCreateAt = singleBookPo.getMultiSingleCreateAt();
+     * bookVo.setCreateAtTimestamp(null == multiSingleCreateAt ? null : DateUtil.getTime(multiSingleCreateAt));
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * bookVo.setCreateAtTimestamp(DateUtil.getTime(singleBookPo.getMultiSingleCreateAt());
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param date
      *            任意时间
      * @return {@link Date#getTime()} <br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date</code> 是null,返回null<br>
+     * @since 3.3.4 如果 <code>date</code> 是null,返回null
      */
-    public static long getTime(Date date){
-        Validate.notNull(date, "date can't be null!");
-        return date.getTime();
+    public static Long getTime(Date date){
+        return null == date ? null : date.getTime();
     }
 
     // [end]

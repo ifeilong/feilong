@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toLong;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -23,9 +25,6 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toLong;
 
 /**
  * The Class ConvertUtilToLongParameterizedTest.
@@ -44,6 +43,8 @@ public class ToLongParameterizedTest extends Abstract1ParamAndResultParameterize
         Object[][] objects = new Object[][] { //
                                               { null, null },
                                               { "aaaa", null },
+                                              { "", null },
+                                              { "   ", null },
 
                                               { "1", 1L },
                                               { 8, 8L },
@@ -62,9 +63,6 @@ public class ToLongParameterizedTest extends Abstract1ParamAndResultParameterize
         return toList(objects);
     }
 
-    /**
-     * Test to long.
-     */
     @Test
     public void testToLong(){
         assertEquals(expectedValue, toLong(input1));

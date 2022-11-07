@@ -309,31 +309,33 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>逻辑及规则:</h3>
+     * @apiNote
+     *          <h3>逻辑及规则:</h3>
      * 
-     * <blockquote>
+     *          <blockquote>
      * 
-     * <ul>
-     * <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
-     * <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
-     * <li>其他抛出 conversionException, 但是在
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
-     * Throwable)} 方法里面返回默认值 是 null
-     * </ul>
+     *          <ul>
+     *          <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
+     *          <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
+     *          <li>其他抛出 conversionException, 但是在
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class,
+     *          Object,
+     *          Throwable)} 方法里面返回默认值 是 null
+     *          </ul>
      * 
-     * <p>
-     * 你也可以调用 {@link com.feilong.lib.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
-     * BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
-     * </p>
-     * </blockquote>
+     *          <p>
+     *          你也可以调用 {@link com.feilong.lib.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
+     *          BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
+     *          </p>
+     *          </blockquote>
      * 
-     * <h3>和 {@link Boolean#parseBoolean(String)}的区别:</h3>
+     *          <h3>和 {@link Boolean#parseBoolean(String)}的区别:</h3>
      * 
-     * <blockquote>
-     * <p>
-     * {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) 并且 String.equalsIgnoreCase("true")</code> 返回 true
-     * </p>
-     * </blockquote>
+     *          <blockquote>
+     *          <p>
+     *          {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) 并且 String.equalsIgnoreCase("true")</code> 返回 true
+     *          </p>
+     *          </blockquote>
      * 
      * @param toBeConvertedValue
      *            object
@@ -366,31 +368,33 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>逻辑及规则:</h3>
+     * @apiNote
+     *          <h3>逻辑及规则:</h3>
      * 
-     * <blockquote>
+     *          <blockquote>
      * 
-     * <ul>
-     * <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
-     * <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
-     * <li>其他抛出 conversionException, 但是在
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
-     * Throwable)} 方法里面返回默认值 是 null
-     * </ul>
+     *          <ul>
+     *          <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
+     *          <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
+     *          <li>其他抛出 conversionException, 但是在
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class,
+     *          Object,
+     *          Throwable)} 方法里面返回默认值 是 null
+     *          </ul>
      * 
-     * <p>
-     * 你也可以调用 {@link com.feilong.lib.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
-     * BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
-     * </p>
-     * </blockquote>
+     *          <p>
+     *          你也可以调用 {@link com.feilong.lib.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
+     *          BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
+     *          </p>
+     *          </blockquote>
      * 
-     * <h3>和 {@link Boolean#parseBoolean(String)}的区别:</h3>
+     *          <h3>和 {@link Boolean#parseBoolean(String)}的区别:</h3>
      * 
-     * <blockquote>
-     * <p>
-     * {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) 并且 String.equalsIgnoreCase("true")</code> 返回 true
-     * </p>
-     * </blockquote>
+     *          <blockquote>
+     *          <p>
+     *          {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) 并且 String.equalsIgnoreCase("true")</code> 返回 true
+     *          </p>
+     *          </blockquote>
      *
      * @param toBeConvertedValue
      *            object
@@ -423,27 +427,12 @@ public final class ConvertUtil{
      * ConvertUtil.toInteger(8L)                    = 8
      * ConvertUtil.toInteger("8")                   = 8
      * ConvertUtil.toInteger(new BigDecimal("8"))   = 8
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
-     * </p>
-     * 
-     * <pre class="code">
+     * ConvertUtil.toInteger(toList("1", "2")) = 1
      * ConvertUtil.toInteger(new String[] { "1", "2", "3" }) = 1
      * </pre>
      * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
-     * </p>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toInteger(toList("1", "2")) = 1
-     * </pre>
-     * 
      * </blockquote>
+     * 
      * 
      * <p>
      * 该方法非常适用 获取request请求的分页参数
@@ -498,7 +487,26 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * @apiNote
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toInteger(new String[] { "1", "2", "3" }) = 1
+     *          </pre>
+     * 
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toInteger(toList("1", "2")) = 1
+     *          </pre>
+     * 
      * @param toBeConvertedValue
      *            值
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
@@ -527,24 +535,6 @@ public final class ConvertUtil{
      * ConvertUtil.toInteger(8L,1)                    = 8
      * ConvertUtil.toInteger("8",1)                   = 8
      * ConvertUtil.toInteger(new BigDecimal("8"),1)   = 8
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
-     * </p>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toInteger(new String[] { "1", "2", "3" }, 8) = 1
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
-     * </p>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toInteger(toList("1", "2"), 8) = 1
      * </pre>
      * 
      * </blockquote>
@@ -585,7 +575,27 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * 
+     * @apiNote
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toInteger(new String[] { "1", "2", "3" }, 8) = 1
+     *          </pre>
+     * 
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toInteger(toList("1", "2"), 8) = 1
+     *          </pre>
+     * 
      * @param toBeConvertedValue
      *            值
      * @param defaultValue
@@ -613,30 +623,36 @@ public final class ConvertUtil{
      * <pre class="code">
      * ConvertUtil.toLong(null)                     = null
      * ConvertUtil.toLong("aaaa")                   = null
+     * ConvertUtil.toLong("")                   = null
+     * ConvertUtil.toLong("    ")                   = null
      * ConvertUtil.toLong(8)                        = 8L
      * ConvertUtil.toLong("8")                      = 8L
      * ConvertUtil.toLong(new BigDecimal("8"))      = 8L
-     * </pre>
      * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
-     * </p>
-     * 
-     * <pre class="code">
      * ConvertUtil.toLong(new String[] { "1", "2", "3" }) = 1L
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
-     * </p>
-     * 
-     * <pre class="code">
      * ConvertUtil.toLong(toList("1", "2")) = 1L
      * </pre>
      * 
      * </blockquote>
+     * 
+     * @apiNote
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toLong(new String[] { "1", "2", "3" }) = 1L
+     *          </pre>
+     * 
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toLong(toList("1", "2")) = 1L
+     *          </pre>
      * 
      * @param toBeConvertedValue
      *            包含数字的对象.
@@ -666,23 +682,7 @@ public final class ConvertUtil{
      * ConvertUtil.Long(8L,1L)                    = 8L
      * ConvertUtil.Long("8",1L)                   = 8L
      * ConvertUtil.Long(new BigDecimal("8"),1L)   = 8L
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
-     * </p>
-     * 
-     * <pre class="code">
      * ConvertUtil.toLong(new String[] { "1", "2", "3" }, 8L) = 1L
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
-     * </p>
-     * 
-     * <pre class="code">
      * ConvertUtil.toLong(toList("1", "2"), 8L) = 1L
      * </pre>
      * 
@@ -724,7 +724,26 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * @apiNote
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toLong(new String[] { "1", "2", "3" }, 8L) = 1L
+     *          </pre>
+     * 
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     *          </p>
+     * 
+     *          <pre class="code">
+     *          ConvertUtil.toLong(toList("1", "2"), 8L) = 1L
+     *          </pre>
+     * 
      * @param toBeConvertedValue
      *            值
      * @param defaultValue
@@ -755,46 +774,50 @@ public final class ConvertUtil{
      * ConvertUtil.toBigDecimal(8)                        = BigDecimal.valueOf(8)
      * ConvertUtil.toBigDecimal("8")                      = BigDecimal.valueOf(8)
      * ConvertUtil.toBigDecimal(new BigDecimal("8"))      = BigDecimal.valueOf(8)
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
-     * </p>
-     * 
-     * <pre class="code">
      * ConvertUtil.toBigDecimal(new String[] { "1", "2", "3" }) = BigDecimal.valueOf(1)
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
-     * </p>
-     * 
-     * <pre class="code">
      * ConvertUtil.toBigDecimal(toList("1", "2")) = BigDecimal.valueOf(1)
      * </pre>
      * 
-     * </blockquote>
+     * @apiNote
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     *          </p>
      * 
-     * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
+     *          <pre class="code">
+     *          ConvertUtil.toBigDecimal(new String[] { "1", "2", "3" }) = BigDecimal.valueOf(1)
+     *          </pre>
      * 
-     * <blockquote>
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     *          </p>
      * 
-     * <p>
-     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK API<br>
-     * </p>
+     *          <pre class="code">
+     *          ConvertUtil.toBigDecimal(toList("1", "2")) = BigDecimal.valueOf(1)
+     *          </pre>
      * 
-     * <ul>
-     * <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
-     * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
-     * </ul>
+     *          </blockquote>
      * 
-     * <p>
-     * 本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
-     * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal}
-     * </p>
-     * </blockquote>
+     *          <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
+     * 
+     *          <blockquote>
+     * 
+     *          <p>
+     *          <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK
+     *          API<br>
+     *          </p>
+     * 
+     *          <ul>
+     *          <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
+     *          <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
+     *          </ul>
+     * 
+     *          <p>
+     *          本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
+     *          NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal}
+     *          </p>
+     *          </blockquote>
      * 
      * @param toBeConvertedValue
      *            值
@@ -823,46 +846,50 @@ public final class ConvertUtil{
      * ConvertUtil.toBigDecimal(8,null)                        = BigDecimal.valueOf(8)
      * ConvertUtil.toBigDecimal("8",null)                      = BigDecimal.valueOf(8)
      * ConvertUtil.toBigDecimal(new BigDecimal("8"),null)      = BigDecimal.valueOf(8)
-     * </pre>
-     * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
-     * </p>
-     * 
-     * <pre class="code">
+     * ConvertUtil.toBigDecimal(toList("1", "2"), null) = BigDecimal.valueOf(1)
      * ConvertUtil.toBigDecimal(new String[] { "1", "2", "3" }, null) = BigDecimal.valueOf(1)
      * </pre>
      * 
-     * <p>
-     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
-     * </p>
+     * @apiNote
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} L227:
+     *          </p>
      * 
-     * <pre class="code">
-     * ConvertUtil.toBigDecimal(toList("1", "2"), null) = BigDecimal.valueOf(1)
-     * </pre>
+     *          <pre class="code">
+     *          ConvertUtil.toBigDecimal(new String[] { "1", "2", "3" }, null) = BigDecimal.valueOf(1)
+     *          </pre>
      * 
-     * </blockquote>
+     *          <p>
+     *          如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#convertArray(Object)} Line234:
+     *          </p>
      * 
-     * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
+     *          <pre class="code">
+     *          ConvertUtil.toBigDecimal(toList("1", "2"), null) = BigDecimal.valueOf(1)
+     *          </pre>
      * 
-     * <blockquote>
+     *          </blockquote>
      * 
-     * <p>
-     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK API<br>
-     * </p>
+     *          <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
      * 
-     * <ul>
-     * <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
-     * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
-     * </ul>
+     *          <blockquote>
      * 
-     * <p>
-     * 本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
-     * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal}
-     * </p>
-     * </blockquote>
+     *          <p>
+     *          <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK
+     *          API<br>
+     *          </p>
+     * 
+     *          <ul>
+     *          <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
+     *          <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
+     *          </ul>
+     * 
+     *          <p>
+     *          本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
+     *          NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal}
+     *          </p>
+     *          </blockquote>
      *
      * @param toBeConvertedValue
      *            值
@@ -887,113 +914,131 @@ public final class ConvertUtil{
     /**
      * 将 <code>toBeConvertedValue</code> 转成{@link Integer} 数组.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * 
-     * <p>
-     * 核心实现,参见 {@link ArrayConverter#convertToType(Class, Object)}
-     * </p>
-     * 
-     * <dl>
-     * <dt>如果参数 <code>toBeConvertedValue</code>是 <code>数组</code> 或者 {@link Collection}</dt>
-     * 
-     * <dd>
-     * <p>
-     * 参见{@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
-     * ArrayConverter#convertToType(Class,Object)}<br>
-     * 
-     * 会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
-     * </p>
-     * 
      * <h4>示例:</h4>
      * 
      * <pre class="code">
      * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
      * ConvertUtil.toIntegers(toList("1", "2", "3"))    = [1,2,3]
-     * </pre>
-     * 
-     * </dd>
-     * 
-     * <dt>如果参数 <code>toBeConvertedValue</code>不是<code>数组</code>也不是{@link Collection}</dt>
-     * 
-     * <dd>
-     * <p>
-     * 那么首先会调用 {@link ArrayConverter#convertToCollection(Class, Object)} 将 <code>toBeConvertedValue</code>转成集合,转换逻辑参见
-     * {@link ArrayConverter#convertToCollection(Class, Object)}:
-     * </p>
-     * 
-     * <ol>
-     * <li>如果 <code>toBeConvertedValue</code>是{@link Number}, {@link Boolean} 或者 {@link java.util.Date} ,那么构造只有一个
-     * <code>toBeConvertedValue</code> 元素的 List返回.</li>
-     * <li>其他类型将转成字符串,然后调用 {@link ArrayConverter#parseElements(Class, String)}转成list.
-     * 
-     * <p>
-     * 具体转换逻辑为:
-     * </p>
-     * 
-     * <ul>
-     * <li>字符串期望是一个逗号分隔的字符串.</li>
-     * <li>字符串可以被'{' 开头 和 '}'结尾的分隔符包裹,程序内部会自动截取.</li>
-     * <li>会去除前后空白.</li>
-     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
-     * valid.</li>
-     * </ul>
-     * 
-     * </li>
-     * </ol>
-     * 
-     * <p>
-     * 得到list之后,会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
-     * </p>
-     * 
-     * <h4>示例:</h4>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toIntegers("1,2,3")                  = new Integer[] { 1, 2, 3 }
+     * <span style="color:green">ConvertUtil.toIntegers("1,2,3")                  = new Integer[] { 1, 2, 3 }</span>
      * ConvertUtil.toIntegers("{1,2,3}")                = new Integer[] { 1, 2, 3 }
      * ConvertUtil.toIntegers("{ 1 ,2,3}")              = new Integer[] { 1, 2, 3 }
      * ConvertUtil.toIntegers("1,2, 3")                 = new Integer[] { 1, 2, 3 }
      * ConvertUtil.toIntegers("1,2 , 3")                = new Integer[] { 1, 2, 3 }
-     * </pre>
-     * 
-     * </dd>
-     * 
-     * </dl>
-     * 
-     * <p>
-     * 每个元素转换成 Integer的时候,会调用
-     * {@link com.feilong.lib.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
-     * </p>
-     * 
-     * <blockquote>
-     * 
-     * <dl>
-     * <dt>1.如果 元素是 Number类型</dt>
-     * <dd>那么会调用 {@link com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
-     * 
-     * <dt>2.如果 元素是 Boolean类型</dt>
-     * <dd>那么 true被转成1,false 转成 0</dd>
-     * 
-     * <dt>3.其他情况</dt>
-     * <dd>将元素转成字符串,并trim,再进行转换</dd>
-     * 
-     * <dt>4.元素是null的情况</dt>
-     * <dd>如果有元素是null,那么会调用 {@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
-     * </dd>
-     * </dl>
-     * 
-     * <h4>示例:</h4>
-     * 
-     * <pre class="code">
      * ConvertUtil.toIntegers(toList("1", "2", <span style="color:red">" 3"</span>))        = new Integer[] { 1, 2, 3 }
      * ConvertUtil.toIntegers(toArray(true, false, false))                                  = new Integer[] { 1, 0, 0 }
      * ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" })                         = new Integer[] {}
      * </pre>
      * 
-     * </blockquote>
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
      * 
-     * </blockquote>
+     *          <p>
+     *          核心实现,参见 {@link ArrayConverter#convertToType(Class, Object)}
+     *          </p>
+     * 
+     *          <dl>
+     *          <dt>如果参数 <code>toBeConvertedValue</code>是 <code>数组</code> 或者 {@link Collection}</dt>
+     * 
+     *          <dd>
+     *          <p>
+     *          参见{@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     *          ArrayConverter#convertToType(Class,Object)}<br>
+     * 
+     *          会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     *          </p>
+     * 
+     *          <h4>示例:</h4>
+     * 
+     *          <pre class="code">
+     * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
+     * ConvertUtil.toIntegers(toList("1", "2", "3"))    = [1,2,3]
+     *          </pre>
+     * 
+     *          </dd>
+     * 
+     *          <dt>如果参数 <code>toBeConvertedValue</code>不是<code>数组</code>也不是{@link Collection}</dt>
+     * 
+     *          <dd>
+     *          <p>
+     *          那么首先会调用 {@link ArrayConverter#convertToCollection(Class, Object)} 将 <code>toBeConvertedValue</code>转成集合,转换逻辑参见
+     *          {@link ArrayConverter#convertToCollection(Class, Object)}:
+     *          </p>
+     * 
+     *          <ol>
+     *          <li>如果 <code>toBeConvertedValue</code>是{@link Number}, {@link Boolean} 或者 {@link java.util.Date} ,那么构造只有一个
+     *          <code>toBeConvertedValue</code> 元素的 List返回.</li>
+     *          <li>其他类型将转成字符串,然后调用 {@link ArrayConverter#parseElements(Class, String)}转成list.
+     * 
+     *          <p>
+     *          具体转换逻辑为:
+     *          </p>
+     * 
+     *          <ul>
+     *          <li>字符串期望是一个逗号分隔的字符串.</li>
+     *          <li>字符串可以被'{' 开头 和 '}'结尾的分隔符包裹,程序内部会自动截取.</li>
+     *          <li>会去除前后空白.</li>
+     *          <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape
+     *          sequences are
+     *          valid.</li>
+     *          </ul>
+     * 
+     *          </li>
+     *          </ol>
+     * 
+     *          <p>
+     *          得到list之后,会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     *          </p>
+     * 
+     *          <h4>示例:</h4>
+     * 
+     *          <pre class="code">
+     * ConvertUtil.toIntegers("1,2,3")                  = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("{1,2,3}")                = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("{ 1 ,2,3}")              = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("1,2, 3")                 = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("1,2 , 3")                = new Integer[] { 1, 2, 3 }
+     *          </pre>
+     * 
+     *          </dd>
+     * 
+     *          </dl>
+     * 
+     *          <p>
+     *          每个元素转换成 Integer的时候,会调用
+     *          {@link com.feilong.lib.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
+     *          </p>
+     * 
+     *          <blockquote>
+     * 
+     *          <dl>
+     *          <dt>1.如果 元素是 Number类型</dt>
+     *          <dd>那么会调用 {@link com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
+     * 
+     *          <dt>2.如果 元素是 Boolean类型</dt>
+     *          <dd>那么 true被转成1,false 转成 0</dd>
+     * 
+     *          <dt>3.其他情况</dt>
+     *          <dd>将元素转成字符串,并trim,再进行转换</dd>
+     * 
+     *          <dt>4.元素是null的情况</dt>
+     *          <dd>如果有元素是null,那么会调用 {@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty
+     *          Integer 数组
+     *          </dd>
+     *          </dl>
+     * 
+     *          <h4>示例:</h4>
+     * 
+     *          <pre class="code">
+     * ConvertUtil.toIntegers(toList("1", "2", <span style="color:red">" 3"</span>))        = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers(toArray(true, false, false))                                  = new Integer[] { 1, 0, 0 }
+     * ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" })                         = new Integer[] {}
+     *          </pre>
+     * 
+     *          </blockquote>
+     * 
+     *          </blockquote>
      * 
      * @param toBeConvertedValue
      *            需要被转换的值
@@ -1008,113 +1053,23 @@ public final class ConvertUtil{
     /**
      * 将 <code>toBeConvertedValue</code> 转成Long 数组.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * 
-     * <p>
-     * 核心实现,参见 {@link ArrayConverter#convertToType(Class, Object)}
-     * </p>
-     * 
-     * <dl>
-     * <dt>如果参数 <code>toBeConvertedValue</code>是 <code>数组</code> 或者 {@link Collection}</dt>
-     * 
-     * <dd>
-     * <p>
-     * 参见{@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
-     * ArrayConverter#convertToType(Class,Object)}<br>
-     * 
-     * 会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
-     * </p>
-     * 
      * <h4>示例:</h4>
      * 
      * <pre class="code">
      * ConvertUtil.toLongs(new String[] { "1", "2", "3" }       = [1L,2L,3L]
      * ConvertUtil.toLongs(toList("1", "2", "3"))               = [1L,2L,3L]
-     * </pre>
      * 
-     * </dd>
-     * 
-     * <dt>如果参数 <code>toBeConvertedValue</code>不是<code>数组</code>也不是{@link Collection}</dt>
-     * 
-     * <dd>
-     * <p>
-     * 那么首先会调用 {@link ArrayConverter#convertToCollection(Class, Object)} 将 <code>toBeConvertedValue</code>转成集合,转换逻辑参见
-     * {@link ArrayConverter#convertToCollection(Class, Object)}:
-     * </p>
-     * 
-     * <ol>
-     * <li>如果 <code>toBeConvertedValue</code>是{@link Number}, {@link Boolean} 或者 {@link java.util.Date} ,那么构造只有一个
-     * <code>toBeConvertedValue</code> 元素的 List返回.</li>
-     * <li>其他类型将转成字符串,然后调用 {@link ArrayConverter#parseElements(Class, String)}转成list.
-     * 
-     * <p>
-     * 具体转换逻辑为:
-     * </p>
-     * 
-     * <ul>
-     * <li>字符串期望是一个逗号分隔的字符串.</li>
-     * <li>字符串可以被'{' 开头 和 '}'结尾的分隔符包裹,程序内部会自动截取.</li>
-     * <li>会去除前后空白.</li>
-     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
-     * valid.</li>
-     * </ul>
-     * 
-     * </li>
-     * </ol>
-     * 
-     * <p>
-     * 得到list之后,会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
-     * </p>
-     * 
-     * <h4>示例:</h4>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toLongs("1,2,3")                  = new Long[] { 1L, 2L, 3L }
+     * <span style="color:green">ConvertUtil.toLongs("1,2,3")                  = new Long[] { 1L, 2L, 3L }</span>
      * ConvertUtil.toLongs("{1,2,3}")                = new Long[] { 1L, 2L, 3L }
+     * 
      * ConvertUtil.toLongs("{ 1 ,2,3}")              = new Long[] { 1L, 2L, 3L }
-     * ConvertUtil.toLongs("1,2, 3")                 = new Long[] { 1L, 2L, 3L }
+     * <span style="color:green">ConvertUtil.toLongs("1,2, 3")                 = new Long[] { 1L, 2L, 3L }</span>
      * ConvertUtil.toLongs("1,2 , 3")                = new Long[] { 1L, 2L, 3L }
-     * </pre>
      * 
-     * </dd>
-     * 
-     * </dl>
-     * 
-     * <p>
-     * 每个元素转换成 Integer的时候,会调用
-     * {@link com.feilong.lib.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
-     * </p>
-     * 
-     * <blockquote>
-     * 
-     * <dl>
-     * <dt>1.如果 元素是 Number类型</dt>
-     * <dd>那么会调用 {@link com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
-     * 
-     * <dt>2.如果 元素是 Boolean类型</dt>
-     * <dd>那么 true被转成1L,false 转成 0L</dd>
-     * 
-     * <dt>3.其他情况</dt>
-     * <dd>将元素转成字符串,并trim,再进行转换</dd>
-     * 
-     * <dt>4.元素是null的情况</dt>
-     * <dd>如果有元素是null,那么会调用 {@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
-     * {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
-     * </dd>
-     * </dl>
-     * 
-     * <h4>示例:</h4>
-     * 
-     * <pre class="code">
      * ConvertUtil.toLongs(toList("1", "2", <span style="color:red">" 3"</span>))        = new Long[] { 1L, 2L, 3L }
      * ConvertUtil.toLongs(toArray(true, false, false))                                  = new Long[] { 1L, 0L, 0L }
      * ConvertUtil.toLongs(new String[] { "1", null, "2", "3" })                         = new Long[] {}
      * </pre>
-     * 
-     * </blockquote>
-     * 
-     * </blockquote>
      * 
      * <h3>特别适合以下形式的代码:</h3>
      * 
@@ -1146,6 +1101,117 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
+     * 
+     *          <p>
+     *          核心实现,参见 {@link ArrayConverter#convertToType(Class, Object)}
+     *          </p>
+     * 
+     *          <dl>
+     *          <dt>如果参数是 <code>数组</code> 或者 <code>Collection</code></dt>
+     * 
+     *          <dd>
+     *          <p>
+     *          参见{@link com.feilong.lib.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     *          ArrayConverter#convertToType(Class,Object)}<br>
+     * 
+     *          会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     *          </p>
+     * 
+     *          <h4>示例:</h4>
+     * 
+     *          <pre class="code">
+     * ConvertUtil.toLongs(new String[] { "1", "2", "3" }       = [1L,2L,3L]
+     * ConvertUtil.toLongs(toList("1", "2", "3"))               = [1L,2L,3L]
+     *          </pre>
+     * 
+     *          </dd>
+     * 
+     *          <dt>如果参数不是<code>数组</code>也不是 <code>Collection</code></dt>
+     * 
+     *          <dd>
+     *          <p>
+     *          那么首先会调用 {@link ArrayConverter#convertToCollection(Class, Object)} 将 <code>toBeConvertedValue</code>转成集合,转换逻辑参见
+     *          {@link ArrayConverter#convertToCollection(Class, Object)}:
+     *          </p>
+     * 
+     *          <ol>
+     *          <li>如果 <code>toBeConvertedValue</code>是{@link Number}, {@link Boolean} 或者 {@link java.util.Date} ,那么构造只有一个
+     *          <code>toBeConvertedValue</code> 元素的 List返回.</li>
+     *          <li>其他类型将转成字符串,然后调用 {@link ArrayConverter#parseElements(Class, String)}转成list.
+     * 
+     *          <p>
+     *          具体转换逻辑为:
+     *          </p>
+     * 
+     *          <ul>
+     *          <li>字符串期望是一个逗号分隔的字符串.</li>
+     *          <li>字符串可以被'{' 开头 和 '}'结尾的分隔符包裹,程序内部会自动截取.</li>
+     *          <li>会去除前后空白.</li>
+     *          <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape
+     *          sequences are
+     *          valid.</li>
+     *          </ul>
+     * 
+     *          </li>
+     *          </ol>
+     * 
+     *          <p>
+     *          得到list之后,会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     *          </p>
+     * 
+     *          <h4>示例:</h4>
+     * 
+     *          <pre class="code">
+     * ConvertUtil.toLongs("1,2,3")                  = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("{1,2,3}")                = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("{ 1 ,2,3}")              = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("1,2, 3")                 = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("1,2 , 3")                = new Long[] { 1L, 2L, 3L }
+     *          </pre>
+     * 
+     *          </dd>
+     * 
+     *          </dl>
+     * 
+     *          <p>
+     *          每个元素转换成 Long的时候,会调用
+     *          {@link com.feilong.lib.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
+     *          </p>
+     * 
+     *          <blockquote>
+     * 
+     *          <dl>
+     *          <dt>1.如果元素是 Number类型</dt>
+     *          <dd>那么会调用 {@link com.feilong.lib.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
+     * 
+     *          <dt>2.如果元素是 Boolean类型</dt>
+     *          <dd>那么true被转成1L,false 转成 0L</dd>
+     * 
+     *          <dt>3.其他情况</dt>
+     *          <dd>将元素转成字符串,并trim,再进行转换</dd>
+     * 
+     *          <dt>4.元素是null的情况</dt>
+     *          <dd>如果有元素是null,那么会调用 {@link com.feilong.lib.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
+     *          {@link com.feilong.lib.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Long
+     *          数组
+     *          </dd>
+     *          </dl>
+     * 
+     *          <h4>示例:</h4>
+     * 
+     *          <pre class="code">
+     * ConvertUtil.toLongs(toList("1", "2", <span style="color:red">" 3"</span>))        = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs(toArray(true, false, false))                                  = new Long[] { 1L, 0L, 0L }
+     * ConvertUtil.toLongs(new String[] { "1", null, "2", "3" })                         = new Long[] {}
+     *          </pre>
+     * 
+     *          </blockquote>
+     * 
+     *          </blockquote>
+     * 
      * @param toBeConvertedValue
      *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
@@ -1155,6 +1221,32 @@ public final class ConvertUtil{
      */
     public static Long[] toLongs(Object toBeConvertedValue){
         return convert(toBeConvertedValue, Long[].class);
+    }
+
+    /**
+     * 
+     * @param toBeConvertedValue
+     * @return
+     * @since 3.3.4
+     */
+    public static List<Long> toLongList(Object toBeConvertedValue){
+        if (null == toBeConvertedValue){
+            return null;
+        }
+        return toList(toLongs(toBeConvertedValue));
+    }
+
+    /**
+     * 
+     * @param toBeConvertedValue
+     * @return
+     * @since 3.3.4
+     */
+    public static List<Integer> toIntegerList(Object toBeConvertedValue){
+        if (null == toBeConvertedValue){
+            return null;
+        }
+        return toList(toIntegers(toBeConvertedValue));
     }
 
     //---------------------------------------------------------------
@@ -1243,14 +1335,15 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>说明</h3>
-     * <blockquote>
+     * @apiNote
+     *          <h3>说明</h3>
+     *          <blockquote>
      * 
-     * <ol>
-     * <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
-     * <li>最后一个元素后面不拼接拼接符</li>
-     * </ol>
-     * </blockquote>
+     *          <ol>
+     *          <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>最后一个元素后面不拼接拼接符</li>
+     *          </ol>
+     *          </blockquote>
      *
      * @param collection
      *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
@@ -1305,14 +1398,15 @@ public final class ConvertUtil{
      * </ol>
      * </blockquote>
      * 
-     * <h3>说明</h3>
-     * <blockquote>
+     * @apiNote
+     *          <h3>说明</h3>
+     *          <blockquote>
      * 
-     * <ol>
-     * <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
-     * <li>最后一个元素后面不拼接拼接符</li>
-     * </ol>
-     * </blockquote>
+     *          <ol>
+     *          <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>最后一个元素后面不拼接拼接符</li>
+     *          </ol>
+     *          </blockquote>
      *
      * @param arrays
      *            支持包装类型,<b>不直接支持</b>原始类型
@@ -1378,49 +1472,50 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>关于 default {@link ToStringConfig}:</h3>
-     * <blockquote>
+     * @apiNote
+     *          <h3>关于 default {@link ToStringConfig}:</h3>
+     *          <blockquote>
      * 
-     * <p>
-     * 如果参数 <code>toStringConfig</code> 是null,则使用默认的规则:<br>
-     * </p>
+     *          <p>
+     *          如果参数 <code>toStringConfig</code> 是null,则使用默认的规则:<br>
+     *          </p>
      * 
-     * <ol>
-     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
-     * <li>拼接null或者empty元素</li>
-     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
-     * <li>最后一个元素后面不拼接拼接符</li>
-     * </ol>
-     * </blockquote>
+     *          <ol>
+     *          <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     *          <li>拼接null或者empty元素</li>
+     *          <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>最后一个元素后面不拼接拼接符</li>
+     *          </ol>
+     *          </blockquote>
      * 
-     * <h3>关于 {@link ToStringConfig} prefix(since 1.12.9):</h3>
-     * <blockquote>
+     *          <h3>关于 {@link ToStringConfig} prefix(since 1.12.9):</h3>
+     *          <blockquote>
      * 
-     * <p>
-     * 如果你需要在拼接每个元素的时候,给每个元素加上前缀, 比如 solr 查询, 运营人员配置了一些商品code ,<code>1533312,1533292,1785442</code>, 此时你需要生成
-     * <code>code:1533312 OR code:1533292 OR code:1785442</code> 字符串去solr 中查询
-     * </p>
+     *          <p>
+     *          如果你需要在拼接每个元素的时候,给每个元素加上前缀, 比如 solr 查询, 运营人员配置了一些商品code ,<code>1533312,1533292,1785442</code>, 此时你需要生成
+     *          <code>code:1533312 OR code:1533292 OR code:1785442</code> 字符串去solr 中查询
+     *          </p>
      * 
-     * <p>
-     * 此时你可以这么调用
-     * </p>
+     *          <p>
+     *          此时你可以这么调用
+     *          </p>
      * 
-     * <pre>
+     *          <pre>
      * 
      * String configItemCodes = "1533312,1533292,1785442";
      * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(configItemCodes, ",");
      * List{@code <String>} list = toList(tokenizeToStringArray);
      * ToStringConfig toStringConfig = new ToStringConfig(" OR ", false, "code:");
      * String string = ConvertUtil.toString(list, toStringConfig);
-     * </pre>
+     *          </pre>
      * 
-     * <b>返回: </b>
+     *          <b>返回: </b>
      * 
-     * <p>
-     * code:1533312 OR code:1533292 OR code:1785442
-     * </p>
+     *          <p>
+     *          code:1533312 OR code:1533292 OR code:1785442
+     *          </p>
      * 
-     * </blockquote>
+     *          </blockquote>
      * 
      * @param collection
      *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
@@ -1474,48 +1569,49 @@ public final class ConvertUtil{
      * </ol>
      * </blockquote>
      * 
-     * <h3>关于 default {@link ToStringConfig}:</h3>
-     * <blockquote>
+     * @apiNote
+     *          <h3>关于 default {@link ToStringConfig}:</h3>
+     *          <blockquote>
      * 
-     * <p>
-     * 如果参数 <code>toStringConfig</code> 是null,则使用默认的规则:<br>
-     * </p>
+     *          <p>
+     *          如果参数 <code>toStringConfig</code> 是null,则使用默认的规则:<br>
+     *          </p>
      * 
-     * <ol>
-     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
-     * <li>拼接null或者empty元素</li>
-     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
-     * <li>最后一个元素后面不拼接拼接符</li>
-     * </ol>
-     * </blockquote>
+     *          <ol>
+     *          <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     *          <li>拼接null或者empty元素</li>
+     *          <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     *          <li>最后一个元素后面不拼接拼接符</li>
+     *          </ol>
+     *          </blockquote>
      * 
-     * <h3>关于 {@link ToStringConfig} prefix(since 1.12.9):</h3>
-     * <blockquote>
+     *          <h3>关于 {@link ToStringConfig} prefix(since 1.12.9):</h3>
+     *          <blockquote>
      * 
-     * <p>
-     * 如果你需要在拼接每个元素的时候,给每个元素加上前缀, 比如 solr 查询, 运营人员配置了一些商品code ,<code>1533312,1533292,1785442</code>, 此时你需要生成
-     * <code>code:1533312 OR code:1533292 OR code:1785442</code> 字符串去solr 中查询
-     * </p>
+     *          <p>
+     *          如果你需要在拼接每个元素的时候,给每个元素加上前缀, 比如 solr 查询, 运营人员配置了一些商品code ,<code>1533312,1533292,1785442</code>, 此时你需要生成
+     *          <code>code:1533312 OR code:1533292 OR code:1785442</code> 字符串去solr 中查询
+     *          </p>
      * 
-     * <p>
-     * 此时你可以这么调用
-     * </p>
+     *          <p>
+     *          此时你可以这么调用
+     *          </p>
      * 
-     * <pre>
+     *          <pre>
      * 
      * String configItemCodes = "1533312,1533292,1785442";
      * String{@code []} tokenizeToStringArray = StringUtil.tokenizeToStringArray(configItemCodes, ",");
      * ToStringConfig toStringConfig = new ToStringConfig(" OR ", false, "code:");
      * String string = ConvertUtil.toString(tokenizeToStringArray, toStringConfig);
-     * </pre>
+     *          </pre>
      * 
-     * <b>返回: </b>
+     *          <b>返回: </b>
      * 
-     * <p>
-     * code:1533312 OR code:1533292 OR code:1785442
-     * </p>
+     *          <p>
+     *          code:1533312 OR code:1533292 OR code:1785442
+     *          </p>
      * 
-     * </blockquote>
+     *          </blockquote>
      * 
      * @param arrays
      *            支持包装类型,<b>不直接支持</b>原始类型
@@ -1568,13 +1664,6 @@ public final class ConvertUtil{
     /**
      * 将集合 <code>collection</code> 转成<code>Enumeration</code>.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>一般情况,你可能不需要这个方法,不过在一些API的时候,需要<code>Enumeration</code>参数,此时调用这个方法来进行转换会比较方便</li>
-     * </ol>
-     * </blockquote>
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -1585,6 +1674,13 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
+     *          <ol>
+     *          <li>一般情况,你可能不需要这个方法,不过在一些API的时候,需要<code>Enumeration</code>参数,此时调用这个方法来进行转换会比较方便</li>
+     *          </ol>
+     *          </blockquote>
      * @param <T>
      *            the generic type
      * @param collection
@@ -1808,24 +1904,25 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>返回的map 经过了 {@link SortUtil#sortMapByKeyAsc(Map)}排序处理,方便输出日志</li>
-     * </ol>
-     * </blockquote>
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
+     *          <ol>
+     *          <li>返回的map 经过了 {@link SortUtil#sortMapByKeyAsc(Map)}排序处理,方便输出日志</li>
+     *          </ol>
+     *          </blockquote>
      * 
-     * <h3>关于 <code>Properties</code></h3>
+     *          <h3>关于 <code>Properties</code></h3>
      * 
-     * <blockquote>
-     * <p>
-     * Properties 是 Map的实现类 ,其 key和value 是String 类型.
-     * </p>
+     *          <blockquote>
+     *          <p>
+     *          Properties 是 Map的实现类 ,其 key和value 是String 类型.
+     *          </p>
      * 
-     * <p>
-     * 因此Properties 可以强制转换成map
-     * </p>
-     * </blockquote>
+     *          <p>
+     *          因此Properties 可以强制转换成map
+     *          </p>
+     *          </blockquote>
      * 
      * @param properties
      *            the properties
@@ -1843,19 +1940,6 @@ public final class ConvertUtil{
 
     /**
      * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <String, Integer>} 类型.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
-     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
-     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
-     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <String, String>} (key和value 使用不同的转换器)</li>
-     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <String, Integer[]>} (单值转数组)</li>
-     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <String[], Long[]>} (数组转数组)</li>
-     * </ol>
-     * </blockquote>
-     * 
      * 
      * <h3>示例:</h3>
      * 
@@ -1931,7 +2015,19 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
+     *          <ol>
+     *          <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
+     *          <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
+     *          <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
+     *          <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <String, String>} (key和value 使用不同的转换器)</li>
+     *          <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <String, Integer[]>} (单值转数组)</li>
+     *          <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <String[], Long[]>} (数组转数组)</li>
+     *          </ol>
+     *          </blockquote>
      * @param <K>
      *            the key type
      * @param <V>
@@ -1954,19 +2050,6 @@ public final class ConvertUtil{
 
     /**
      * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <Integer, Integer>} 类型.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
-     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
-     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
-     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <Integer, String>} (key和value 使用不同的转换器)</li>
-     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>} (单值转数组)</li>
-     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>} (数组转数组)</li>
-     * </ol>
-     * </blockquote>
-     * 
      * 
      * <h3>示例:</h3>
      * 
@@ -2043,6 +2126,18 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
+     *          <ol>
+     *          <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
+     *          <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
+     *          <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
+     *          <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <Integer, String>} (key和value 使用不同的转换器)</li>
+     *          <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>} (单值转数组)</li>
+     *          <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>} (数组转数组)</li>
+     *          </ol>
+     *          </blockquote>
      * @param <K>
      *            the key type
      * @param <V>
