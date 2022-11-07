@@ -175,7 +175,7 @@
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
-		<v.maven-scm-plugin>1.12.2</v.maven-scm-plugin>
+		<v.maven-scm-plugin>1.13.0</v.maven-scm-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-site-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MSITE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
