@@ -111,7 +111,7 @@
 		<version.log4j2>2.19.0</version.log4j2>
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
-		<version.logback>1.4.3</version.logback>
+		<version.logback>1.4.4</version.logback>
 
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
