@@ -41,6 +41,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToIntegerDefaultValueParameterizedTest.class,
                 ToIntegerParameterizedTest.class,
                 ToIntegersParameterizedTest.class,
+                ToIntegerListTest.class,
+                ToIntegerListParameterizedTest.class,
 
                 ToIteratorTest.class,
 
@@ -54,6 +56,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToLongDefaultValueParameterizedTest.class,
                 ToLongParameterizedTest.class,
                 ToLongsParameterizedTest.class,
+                ToLongListTest.class,
+                ToLongListParameterizedTest.class,
 
                 ToMapArrayTest.class,
                 ToMapCollectionTest.class,
