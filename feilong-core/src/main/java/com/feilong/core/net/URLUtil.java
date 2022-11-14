@@ -284,16 +284,104 @@ public final class URLUtil{
      *            要解析规范的上下文
      * @param spec
      *            the <code>String</code> to parse as a URL.
-     * @return 如果 <code>spec</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>spec</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return 如果 <code>spec</code> 是null或者blank,直接返回 <code>context.toString()</code><br>
      * @since 1.4.0
      */
     public static String getUnionUrl(URL context,String spec){
-        Validate.notBlank(spec, "spec can't be null!");
+        try{
+            if (isNullOrEmpty(spec)){
+                return context.toString();
+            }
+            return new URL(context, spec).toString();
+        }catch (Exception e){
+            String message = format("context:[{}],spec:[{}]", context, spec);
+            throw new URIParseException(message, e);
+        }
+    }
 
+    /**
+     * 获取联合url,通过在指定的上下文中对给定的 spec 进行解析创建 URL,新的 URL 从给定的上下文 URL 和 spec 参数创建.
+     * 
+     * <p style="color:red">
+     * 网站地址拼接,请使用这个method, 如果文件上传到OSS, OSS返回了两段, 1段是domain,另一段是后面的部分
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * URIUtil.getUnionUrl("http://www.feilong.com/", "/1173348/")    =  http://www.feilong.com/1173348/
+     * URIUtil.getUnionUrl("http://www.feilong.com/", "1173348/")    =  http://www.feilong.com/1173348/
+     * URIUtil.getUnionUrl("http://www.feilong.com/", "/1173348")    =  http://www.feilong.com/1173348
+     * URIUtil.getUnionUrl("http://www.feilong.com/", "1173348")    =  http://www.feilong.com/1173348
+     * 
+     * URIUtil.getUnionUrl("http://www.feilong.com", "/1173348/")    =  http://www.feilong.com/1173348/
+     * URIUtil.getUnionUrl("http://www.feilong.com", "/1173348")    =  http://www.feilong.com/1173348
+     * URIUtil.getUnionUrl("http://www.feilong.com", "1173348/")    =  http://www.feilong.com/1173348/
+     * URIUtil.getUnionUrl("http://www.feilong.com", "1173348")    =  http://www.feilong.com/1173348
+     * 
+     * URIUtil.getUnionUrl("http://www.feilong.com/", "storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URIUtil.getUnionUrl("http://www.feilong.com/", "/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URIUtil.getUnionUrl("http://www.feilong.com", "/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * URIUtil.getUnionUrl("http://www.feilong.com", "storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png")    =  http://www.feilong.com/storages/60c4-audiotest/2B/5A/Ga9gAAkKOi.png
+     * </pre>
+     * 
+     * @apiNote 底层调用的是 {@link java.net.URL#URL(URL, String)}
+     * 
+     *          Creates a URL by parsing the given spec within a specified context.
+     *
+     *          The new URL is created from the given context URL and the spec argument as described in RFC2396 &quot;Uniform Resource
+     *          Identifiers :
+     *          Generic * Syntax&quot; :
+     *          <blockquote>
+     * 
+     *          <pre>
+     *          &lt;scheme&gt;://&lt;authority&gt;&lt;path&gt;?&lt;query&gt;#&lt;fragment&gt;
+     *          </pre>
+     * 
+     *          </blockquote>
+     * 
+     *          The reference is parsed into the scheme, authority, path, query and fragment parts. If the path component is empty and the
+     *          scheme, authority, and query components are undefined, then the new URL is a reference to the current document. Otherwise,
+     *          the
+     *          fragment and query parts present in the spec are used in the new URL.
+     * 
+     *          <p>
+     *          If the scheme component is defined in the given spec and does not match the scheme of the context, then the new URL is
+     *          created as an absolute
+     *          URL based on the spec alone. Otherwise the scheme component is inherited from the context URL.
+     *          <p>
+     *          If the authority component is present in the spec then the spec is treated as absolute and the spec authority and path will
+     *          replace the context authority and path. If the authority component is absent in the spec then the authority of the new URL
+     *          will be inherited from the context.
+     * 
+     *          <p>
+     *          If the spec's path component begins with a slash character &quot;/&quot; then the path is treated as absolute and the spec
+     *          path replaces the context path.
+     *          <p>
+     *          Otherwise, the path is treated as a relative path and is appended to the context path, as described in RFC2396.
+     *          Also, in this case, the path is canonicalized through the removal of directory changes made by occurrences of &quot;..&quot;
+     *          and &quot;.&quot;.
+     *          <p>
+     *          </blockquote>
+     * 
+     * @param context
+     *            要解析规范的上下文
+     * @param spec
+     *            the <code>String</code> to parse as a URL.
+     * @return 如果 <code>spec</code> 是null或者blank,直接返回 <code>context</code><br>
+     * @since 3.3.5
+     */
+    public static String getUnionUrl(String context,String spec){
+        if (isNullOrEmpty(spec)){
+            return context;
+        }
         //---------------------------------------------------------------
         try{
-            return new URL(context, spec).toString();
+            URL contextUrl = new URL(context);
+            return getUnionUrl(contextUrl, spec);
         }catch (Exception e){
             String message = format("context:[{}],spec:[{}]", context, spec);
             throw new URIParseException(message, e);

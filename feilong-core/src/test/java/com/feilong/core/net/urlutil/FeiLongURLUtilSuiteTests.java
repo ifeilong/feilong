@@ -27,7 +27,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 GetUnionUrlTest.class,
+                GetUnionUrlStringTest.class,
+                GetUnionUrlStringParameterizedTest.class,
+
                 ToURITest.class,
+
                 ToURLTest.class,
                 OpenStreamTest.class,
 

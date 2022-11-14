@@ -58,19 +58,19 @@ public class GetUnionUrlTest extends AbstractTest{
 
     //---------------------------------------------------------------
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetUnionUrlTestNull(){
-        URLUtil.getUnionUrl(url, null);
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/", URLUtil.getUnionUrl(url, null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetUnionUrlTestEmpty(){
-        URLUtil.getUnionUrl(url, "");
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/", URLUtil.getUnionUrl(url, ""));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetUnionUrlTestBlank(){
-        URLUtil.getUnionUrl(url, " ");
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/", URLUtil.getUnionUrl(url, " "));
     }
 
 }
