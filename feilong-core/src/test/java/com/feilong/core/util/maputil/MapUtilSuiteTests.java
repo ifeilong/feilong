@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToArrayValueMapClassTest.class,
                 ToArrayValueMapTest.class,
 
+                GetSubSumValueTest.class,
                 GetSubMapTest.class,
                 GetSubMapIterableTest.class,
                 GetSubMapExcludeKeysTest.class,

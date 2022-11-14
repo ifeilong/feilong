@@ -17,11 +17,13 @@ package com.feilong.core.util;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
 
 import java.math.BigDecimal;
@@ -784,6 +786,57 @@ public final class MapUtil{
         return map;
     }
 
+    //---------------------------------------------------------------
+    /**
+     * 提取map中指定的key 的value,累加起来,按照制定的<code>klass</code>类型返回.
+     * 
+     * <h3>使用场景:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * // 数据库中所有的专辑和声音的map,注意value 是integer类型
+     * Map{@code <Long, Integer>} allAlbumIdAndTrackCountMap = albumCountService.selectAllAlbumIdAndTrackCountMap();
+     * 
+     * //当前图书馆下面所有的专辑
+     * Set{@code <Long>} allCommonAlbumIdSet = libraryBookService.getAlbumIdSet(libId);
+     * 
+     *  // 需要统计这个图书馆下面所有专辑的声音加起来的总和
+     *  <span style="color:green">// 此时integer 会越界, 需要转成Long 类型</span>
+     * Long trackCount = MapUtil.getSubSumValue(allAlbumIdAndTrackCountMap, allCommonAlbumIdSet, Long.class);
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     * @param <T>
+     * @param <C>
+     * @param map
+     * @param keys
+     * @param klass
+     * @return 如果 <code>map</code>或者<code>keys</code> 是null或者empty,返回0<br>
+     *         如果 <code>keys</code> 有对应的value 是null,将忽略不累加<br>
+     *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 3.3.5
+     */
+    public static <K, T extends Number, C extends Number> C getSubSumValue(Map<K, T> map,Iterable<K> keys,Class<C> klass){
+        if (isNullOrEmpty(map) || isNullOrEmpty(keys)){
+            return convert(0, klass);
+        }
+        Validate.notNull(klass, "klass can't be null!");
+
+        //---------------------------------------------------------------
+        BigDecimal resultValue = ZERO;
+        for (K key : keys){
+            T v = map.get(key);
+            if (null != v){
+                resultValue = NumberUtil.getAddValue(resultValue, v);
+            }
+        }
+        return convert(resultValue, klass);
+    }
     //---------------------------------------------------------------
 
     /**
