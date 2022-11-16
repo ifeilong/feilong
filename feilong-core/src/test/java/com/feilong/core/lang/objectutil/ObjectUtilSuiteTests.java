@@ -28,7 +28,13 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
                 IsArrayParameterizedTest.class,
                 IsPrimitiveArrayParameterizedTest.class,
+
                 DefaultIfNullOrEmptyParameterizedTest.class,
+
+                DefaultEmptySetIfNullParameterizedTest.class,
+                DefaultEmptyListIfNullParameterizedTest.class,
+                DefaultEmptyMapIfNullParameterizedTest.class,
+
                 DefaultIfNullParameterizedTest.class,
                 DefaultIfNullOrLessThanOneParameterizedTest.class,
                 DefaultPageNoParameterizedTest.class,

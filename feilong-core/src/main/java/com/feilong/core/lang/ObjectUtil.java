@@ -17,8 +17,14 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import com.feilong.core.Validate;
 import com.feilong.core.bean.PropertyUtil;
@@ -248,6 +254,67 @@ public final class ObjectUtil{
     public static <T> T defaultIfNull(final T object,final T defaultValue){
         return object != null ? object : defaultValue;
     }
+
+    /**
+     * 如果 <code>list</code> 是null,返回默认值 {@link java.util.Collections#emptyList()}.
+     *
+     * <pre>
+     * ObjectUtil.defaultEmptyListIfNull(null) = emptyList();
+     * ObjectUtil.defaultEmptyListIfNull(toList(1)) = toList(1);
+     * </pre>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param list
+     *            the {@code Object} to test, may be {@code null}
+     * @return 如果 <code>list</code> 是null,返回默认值 {@link java.util.Collections#emptyList()}.
+     * @since 3.3.5
+     */
+    public static <T> List<T> defaultEmptyListIfNull(final List<T> list){
+        return defaultIfNull(list, emptyList());
+    }
+
+    /**
+     * 如果 <code>set</code> 是null,返回默认值 {@link java.util.Collections#emptySet()}.
+     *
+     * <pre>
+     * ObjectUtil.defaultEmptySetIfNull(null) = emptySet();
+     * ObjectUtil.defaultEmptySetIfNull(toSet(1)) = toSet(1);
+     * </pre>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param set
+     *            the {@code Object} to test, may be {@code null}
+     * @return 如果 <code>set</code> 是null,返回默认值 {@link java.util.Collections#emptySet()}.
+     * @since 3.3.5
+     */
+    public static <T> Set<T> defaultEmptySetIfNull(final Set<T> set){
+        return defaultIfNull(set, emptySet());
+    }
+
+    /**
+     * 如果 <code>map</code> 是null,返回默认值 {@link java.util.Collections#emptyMap()}.
+     * 
+     * <pre>
+     * ObjectUtil.defaultEmptyMapIfNull(null) = emptyMap();
+     * ObjectUtil.defaultEmptyMapIfNull(toMap("name", "zhangfei")) = toMap("name", "zhangfei");
+     * </pre>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回默认值 {@link java.util.Collections#emptyMap()}.
+     * @since 3.3.5
+     */
+    public static <K, V> Map<K, V> defaultEmptyMapIfNull(final Map<K, V> map){
+        return defaultIfNull(map, emptyMap());
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 如果 <code>pageNo</code> 是null或者{@code <}1,返回默认值 <code>1</code>.
