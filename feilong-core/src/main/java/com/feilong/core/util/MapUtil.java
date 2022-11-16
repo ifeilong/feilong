@@ -493,6 +493,7 @@ public final class MapUtil{
      * @param <V>
      *            the value type
      * @param <T>
+     *            the generic type
      * @param singleValueMap
      *            the name and value map
      * @param arrayComponentType
@@ -809,13 +810,19 @@ public final class MapUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <K>
+     *            the key type
      * @param <T>
+     *            the generic type
      * @param <C>
+     *            the generic type
      * @param map
+     *            the map
      * @param keys
+     *            the keys
      * @param klass
+     *            the klass
      * @return 如果 <code>map</code>或者<code>keys</code> 是null或者empty,返回0<br>
      *         如果 <code>keys</code> 有对应的value 是null,将忽略不累加<br>
      *         如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
@@ -1687,14 +1694,14 @@ public final class MapUtil{
 
     /**
      * New concurrent hash map.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>()} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
      *            the value type
      * @return a new, empty {@code ConcurrentHashMap}
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>()} 的写法
      */
     public static <K, V> Map<K, V> newConcurrentHashMap(){
         return new ConcurrentHashMap<>();
@@ -1702,8 +1709,7 @@ public final class MapUtil{
 
     /**
      * New concurrent hash map.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(map)} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -1712,6 +1718,7 @@ public final class MapUtil{
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
+     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(map)} 的写法
      */
     public static <K, V> Map<K, V> newConcurrentHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -1801,8 +1808,7 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(toInitialCapacity(expectedSize))} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -1813,6 +1819,7 @@ public final class MapUtil{
      * @throws IllegalArgumentException
      *             如果 expectedSize{@code  < }0
      * @since 1.11.1
+     * @apiNote 可以使用静态导入,简化 {@code new ConcurrentHashMap<>(toInitialCapacity(expectedSize))} 的写法
      */
     public static <K, V> Map<K, V> newConcurrentHashMap(int expectedSize){
         return new ConcurrentHashMap<>(toInitialCapacity(expectedSize));
@@ -1822,14 +1829,14 @@ public final class MapUtil{
 
     /**
      * New tree map.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>()} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
      *            the value type
      * @return a new, empty {@code ConcurrentHashMap}
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>()} 的写法
      */
     @SuppressWarnings("rawtypes")
     public static <K extends Comparable, V> Map<K, V> newTreeMap(){
@@ -1838,8 +1845,7 @@ public final class MapUtil{
 
     /**
      * New tree map.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>(map)} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -1848,6 +1854,7 @@ public final class MapUtil{
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
+     * @apiNote 可以使用静态导入,简化 {@code new TreeMap<>(map)} 的写法
      */
     public static <K extends Comparable, V> Map<K, V> newTreeMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -1902,7 +1909,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(); <span style=
-    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -1911,8 +1918,7 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>()} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -1921,6 +1927,7 @@ public final class MapUtil{
      * @see "com.google.common.collect.Maps#newHashMap()"
      * @see java.util.HashMap#HashMap()
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>()} 的写法
      */
     public static <K, V> Map<K, V> newHashMap(){
         return new HashMap<>();
@@ -1928,8 +1935,7 @@ public final class MapUtil{
 
     /**
      * New hash map.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(map)} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -1938,6 +1944,7 @@ public final class MapUtil{
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
+     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(map)} 的写法
      */
     public static <K, V> Map<K, V> newHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -1995,7 +2002,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(16);<span style=
-    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -2019,7 +2026,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(100);<span style=
-    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -2027,8 +2034,7 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(toInitialCapacity(expectedSize))} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -2041,6 +2047,7 @@ public final class MapUtil{
      * @see "com.google.common.collect.Maps#newHashMapWithExpectedSize(int)"
      * @see java.util.HashMap#HashMap(int)
      * @since 1.7.1
+     * @apiNote 可以使用静态导入,简化 {@code new HashMap<>(toInitialCapacity(expectedSize))} 的写法
      */
     public static <K, V> Map<K, V> newHashMap(int expectedSize){
         return new HashMap<>(toInitialCapacity(expectedSize));
@@ -2094,7 +2101,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>();<span style=
-    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -2103,8 +2110,7 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>()} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -2113,6 +2119,7 @@ public final class MapUtil{
      * @see "com.google.common.collect.Maps#newLinkedHashMapWithExpectedSize(int)"
      * @see java.util.LinkedHashMap#LinkedHashMap()
      * @since 1.10.7
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>()} 的写法
      */
     public static <K, V> Map<K, V> newLinkedHashMap(){
         return new LinkedHashMap<>();
@@ -2120,8 +2127,7 @@ public final class MapUtil{
 
     /**
      * New linked hash map.
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(map)} 的写法
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -2130,6 +2136,7 @@ public final class MapUtil{
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.14.0
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(map)} 的写法
      */
     public static <K, V> Map<K, V> newLinkedHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -2187,7 +2194,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(16);<span style=
-    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -2212,7 +2219,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(100);<span style=
-    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -2220,9 +2227,7 @@ public final class MapUtil{
      * 
      * </ol>
      * </blockquote>
-     * 
-     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(toInitialCapacity(expectedSize))} 的写法
-     * 
+     *
      * @param <K>
      *            the key type
      * @param <V>
@@ -2235,6 +2240,7 @@ public final class MapUtil{
      * @see "com.google.common.collect.Maps#newLinkedHashMapWithExpectedSize(int)"
      * @see java.util.LinkedHashMap#LinkedHashMap(int)
      * @since 1.7.1
+     * @apiNote 可以使用静态导入,简化 {@code new LinkedHashMap<>(toInitialCapacity(expectedSize))} 的写法
      */
     public static <K, V> Map<K, V> newLinkedHashMap(int expectedSize){
         return new LinkedHashMap<>(toInitialCapacity(expectedSize));
