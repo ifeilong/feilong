@@ -170,7 +170,7 @@
 
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
-		<v.maven-plugin-plugin>3.6.4</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.7.0</v.maven-plugin-plugin>
 
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
