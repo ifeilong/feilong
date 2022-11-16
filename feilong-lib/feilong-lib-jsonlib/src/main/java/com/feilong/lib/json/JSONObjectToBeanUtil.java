@@ -16,7 +16,7 @@
 package com.feilong.lib.json;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultEmptyMapIfNull;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.lib.json.util.PropertySetStrategy.setProperty;
@@ -198,7 +198,7 @@ public class JSONObjectToBeanUtil{
             return;
         }
 
-        Map<String, Class<?>> configClassMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
+        Map<String, Class<?>> configClassMap = defaultEmptyMapIfNull(jsonConfig.getClassMap());
         String name = triple.getLeft();
         //---------------------------------------------------------------
         if (value instanceof JSONArray){
@@ -243,7 +243,7 @@ public class JSONObjectToBeanUtil{
     }
 
     private static void toBeanDoWithMap(Object bean,String name,Class<?> type,Object value,String key,JsonConfig jsonConfig){
-        Map<String, Class<?>> configClassMap = defaultIfNull(jsonConfig.getClassMap(), emptyMap());
+        Map<String, Class<?>> configClassMap = defaultEmptyMapIfNull(jsonConfig.getClassMap());
 
         // no type info available for conversion
         if (JSONUtils.isNull(value)){

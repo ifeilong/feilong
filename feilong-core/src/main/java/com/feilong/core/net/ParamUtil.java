@@ -22,7 +22,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultEmptyMapIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.net.URIUtil.decode;
 import static com.feilong.core.net.URIUtil.encode;
@@ -948,7 +948,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     static String addParameterArrayValueMap(String uriString,String queryString,Map<String, String[]> arrayValueMap,String charsetType){
-        Map<String, String[]> safeArrayValueMap = defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
+        Map<String, String[]> safeArrayValueMap = defaultEmptyMapIfNull(arrayValueMap);
 
         Map<String, String[]> arrayParamValuesMap = newLinkedHashMap(safeArrayValueMap.size());
         //先提取queryString map

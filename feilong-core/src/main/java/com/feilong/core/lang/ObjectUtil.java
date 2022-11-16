@@ -231,6 +231,8 @@ public final class ObjectUtil{
         return isNotNullOrEmpty(object) ? object : defaultValue;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 如果 <code>object</code> 是null,返回默认值 <code>defaultValue</code>.
      *
@@ -254,6 +256,8 @@ public final class ObjectUtil{
     public static <T> T defaultIfNull(final T object,final T defaultValue){
         return object != null ? object : defaultValue;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 如果 <code>list</code> 是null,返回默认值 {@link java.util.Collections#emptyList()}.
