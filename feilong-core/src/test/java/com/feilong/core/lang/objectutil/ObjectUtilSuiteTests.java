@@ -36,6 +36,11 @@ import org.junit.runners.Suite.SuiteClasses;
                 DefaultEmptyMapIfNullParameterizedTest.class,
                 DefaultEmptyStringIfNullParameterizedTest.class,
 
+                DefaultNewArrayListIfNullParameterizedTest.class,
+                DefaultNewHashMapIfNullParameterizedTest.class,
+                DefaultNewHashSetIfNullParameterizedTest.class,
+                DefaultNewLinkedHashMapIfNullParameterizedTest.class,
+
                 DefaultIfNullParameterizedTest.class,
                 DefaultIfNullOrLessThanOneParameterizedTest.class,
                 DefaultPageNoParameterizedTest.class,

@@ -18,6 +18,10 @@ package com.feilong.core.lang;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.CollectionsUtil.newHashSet;
+import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
@@ -300,18 +304,19 @@ public final class ObjectUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
-     * @apiNote 实现代码:
-     *          defaultIfNull(str, EMPTY);
-     * 
+     *
      * @param str
      *            the str
      * @return 如果 <code>str</code> 是null,返回默认值 {@link com.feilong.core.lang.StringUtil#EMPTY}.
      * @since 3.3.6
+     * @apiNote 实现代码:
+     *          defaultIfNull(str, EMPTY);
      */
     public static String defaultEmptyStringIfNull(final String str){
         return defaultIfNull(str, EMPTY);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 如果 <code>list</code> 是null,返回默认值 {@link java.util.Collections#emptyList()}.
@@ -370,6 +375,87 @@ public final class ObjectUtil{
      */
     public static <K, V> Map<K, V> defaultEmptyMapIfNull(final Map<K, V> map){
         return defaultIfNull(map, emptyMap());
+    }
+
+    //---------------------------------------------------------------
+    /**
+     * 如果 <code>list</code> 是null,返回默认值 {@link com.feilong.core.util.CollectionsUtil#newArrayList()}.
+     *
+     * <pre>
+     * ObjectUtil.defaultNewArrayListIfNull(null) = newArrayList();
+     * ObjectUtil.defaultNewArrayListIfNull(toList(1)) = toList(1);
+     * </pre>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param list
+     *            the {@code Object} to test, may be {@code null}
+     * @return 如果 <code>list</code> 是null,返回默认值 {@link com.feilong.core.util.CollectionsUtil#newArrayList()}.
+     * @since 3.3.6
+     */
+    public static <T> List<T> defaultNewArrayListIfNull(final List<T> list){
+        return defaultIfNull(list, newArrayList());
+    }
+
+    /**
+     * 如果 <code>set</code> 是null,返回默认值 {@link com.feilong.core.util.CollectionsUtil#newHashSet()}.
+     *
+     * <pre>
+     * ObjectUtil.defaultNewHashSetIfNull(null) = newHashSet();
+     * ObjectUtil.defaultNewHashSetIfNull(toSet(1)) = toSet(1);
+     * </pre>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param set
+     *            the {@code Object} to test, may be {@code null}
+     * @return 如果 <code>set</code> 是null,返回默认值 {@link com.feilong.core.util.CollectionsUtil#newHashSet()}.
+     * @since 3.3.6
+     */
+    public static <T> Set<T> defaultNewHashSetIfNull(final Set<T> set){
+        return defaultIfNull(set, newHashSet());
+    }
+
+    /**
+     * 如果 <code>map</code> 是null,返回默认值 {@link com.feilong.core.util.MapUtil#newHashMap()}.
+     * 
+     * <pre>
+     * ObjectUtil.defaultNewHashMapIfNull(null) = newHashMap();
+     * ObjectUtil.defaultNewHashMapIfNull(toMap("name", "zhangfei")) = toMap("name", "zhangfei");
+     * </pre>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回默认值 {@link com.feilong.core.util.MapUtil#newHashMap()}.
+     * @since 3.3.6
+     */
+    public static <K, V> Map<K, V> defaultNewHashMapIfNull(final Map<K, V> map){
+        return defaultIfNull(map, newHashMap());
+    }
+
+    /**
+     * 如果 <code>map</code> 是null,返回默认值 {@link com.feilong.core.util.MapUtil#newLinkedHashMap()}.
+     * 
+     * <pre>
+     * ObjectUtil.defaultNewLinkedHashMapIfNull(null) = newLinkedHashMap();
+     * ObjectUtil.defaultNewLinkedHashMapIfNull(toMap("name", "zhangfei")) = toMap("name", "zhangfei");
+     * </pre>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回默认值 {@link com.feilong.core.util.MapUtil#newLinkedHashMap()}.
+     * @since 3.3.6
+     */
+    public static <K, V> Map<K, V> defaultNewLinkedHashMapIfNull(final Map<K, V> map){
+        return defaultIfNull(map, newLinkedHashMap());
     }
 
     //---------------------------------------------------------------
