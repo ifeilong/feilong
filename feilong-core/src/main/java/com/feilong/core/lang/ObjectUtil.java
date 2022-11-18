@@ -17,6 +17,7 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
@@ -258,6 +259,59 @@ public final class ObjectUtil{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 如果 <code>str</code> 是null,返回默认值 {@link com.feilong.core.lang.StringUtil#EMPTY}.
+     * 
+     * <pre>
+     * ObjectUtil.defaultEmptyStringIfNull(null) = EMPTY;
+     * ObjectUtil.defaultEmptyStringIfNull("a") = "a";
+     * </pre>
+     * 
+     * <h3>适合场景:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 比如以下字符串拼接的代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * return Slf4jUtil.format(
+     *                 "{}-{} {}_{}_{}.svg", //
+     *                 villageConfig.getId(),
+     *                 defaultIfNull(categoryId, EMPTY),
+     *                 defaultIfNull(villageConfig.getTitle(), EMPTY),
+     *                 defaultIfNull(categoryName, EMPTY),
+     *                 villageQrCodeGeneratorVO.getDataTime());
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * return Slf4jUtil.format(
+     *                 "{}-{} {}_{}_{}.svg", //
+     *                 villageConfig.getId(),
+     *                 <span style="color:green">defaultEmptyStringIfNull(categoryId),</span>
+     *                 <span style="color:green">defaultEmptyStringIfNull(villageConfig.getTitle()),</span>
+     *                 <span style="color:green">defaultEmptyStringIfNull(categoryName),</span>
+     *                 villageQrCodeGeneratorVO.getDataTime());
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @apiNote 实现代码:
+     *          defaultIfNull(str, EMPTY);
+     * 
+     * @param str
+     *            the str
+     * @return 如果 <code>str</code> 是null,返回默认值 {@link com.feilong.core.lang.StringUtil#EMPTY}.
+     * @since 3.3.6
+     */
+    public static String defaultEmptyStringIfNull(final String str){
+        return defaultIfNull(str, EMPTY);
+    }
 
     /**
      * 如果 <code>list</code> 是null,返回默认值 {@link java.util.Collections#emptyList()}.
