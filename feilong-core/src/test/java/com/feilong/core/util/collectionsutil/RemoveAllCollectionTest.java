@@ -15,16 +15,16 @@
  */
 package com.feilong.core.util.collectionsutil;
 
-import static org.hamcrest.Matchers.contains;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilRemoveAllCollectionTest.
@@ -56,8 +56,9 @@ public class RemoveAllCollectionTest{
     /**
      * Test remove all collection null remove collection.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testRemoveAllCollectionNullRemoveCollection(){
-        CollectionsUtil.removeAll(toList("feilong2"), null);
+        List<String> list = toList("feilong2");
+        assertEquals(list, CollectionsUtil.removeAll(list, null));
     }
 }

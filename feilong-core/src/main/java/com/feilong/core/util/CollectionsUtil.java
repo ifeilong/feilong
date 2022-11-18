@@ -858,16 +858,19 @@ public final class CollectionsUtil{
      *            the collection from which items are removed (in the returned collection)
      * @param removeCollection
      *            the items to be removed from the returned <code>collection</code>
-     * @return 从 <code>objectCollection</code>中排除掉 <code>removeCollection</code> 元素的新的 list
-     * @throws NullPointerException
-     *             如果 <code>objectCollection</code> 是null,或者 <code>removeCollection</code> 是null
+     * @return 从 <code>objectCollection</code>中排除掉 <code>removeCollection</code> 元素的新的 list <br>
+     *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>removeCollection</code> 是null,直接返回 <code>objectCollection</code>
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
+     * @since 3.3.6 如果 <code>removeCollection</code> 是null,直接返回 <code>objectCollection</code>
      */
     public static <O> List<O> removeAll(Collection<O> objectCollection,Collection<O> removeCollection){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
-        Validate.notNull(removeCollection, "removeCollection can't be null!");
+        if (null == removeCollection){
+            return toList(objectCollection);
+        }
         return ListUtils.removeAll(objectCollection, removeCollection);
     }
 
