@@ -46,7 +46,7 @@
 		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
-		<v.maven-install-plugin>3.0.1</v.maven-install-plugin>
+		<v.maven-install-plugin>3.1.0</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-javadoc-plugin>3.4.1</v.maven-javadoc-plugin>
