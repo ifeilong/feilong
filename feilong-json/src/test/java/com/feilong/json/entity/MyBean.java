@@ -19,6 +19,8 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.util.List;
 
+import com.feilong.store.member.Person;
+
 /**
  * The Class MyBean.
  *
@@ -29,6 +31,8 @@ public class MyBean{
 
     /** The id. */
     private Long         id;
+
+    private Person       person;
 
     /** The data. */
     private List<Object> data = newArrayList();
@@ -71,6 +75,21 @@ public class MyBean{
      */
     public void setId(Long id){
         this.id = id;
+    }
+
+    /**
+     * @param person
+     *            the person to set
+     */
+    public void setPerson(Person person){
+        this.person = person;
+    }
+
+    /**
+     * @return the person
+     */
+    public Person getPerson(){
+        return person;
     }
 
 }
