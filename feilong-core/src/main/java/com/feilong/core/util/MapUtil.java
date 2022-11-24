@@ -324,6 +324,93 @@ public final class MapUtil{
         return com.feilong.lib.collection4.CollectionUtils.get(map, index);
     }
 
+    /**
+     * 获取value.
+     * 
+     * <p>
+     * 取值前,判断了map是否是null,如果是null直接返回null
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+    MapUtil.get(null, "name")) = null
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * if (isNullOrEmpty(singleValueMap)){
+     *     return null;
+     * }
+     * return singleValueMap.get(entryId);
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * return MapUtil.get(singleValueMapentryId, entryId);
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @return 如果 <code>map</code> 是null,返回 null<br>
+     * @since 3.3.7
+     */
+    public static <K, V> V get(Map<K, V> map,K key){
+        if (null == map){
+            return null;
+        }
+        return map.get(key);
+    }
+
+    /**
+     * 获取value.
+     * 
+     * <p>
+     * 取值前,判断了map是否是null,如果是null直接返回null
+     * </p>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @param defaultValue
+     *            the default value
+     * @return 如果 <code>map</code> 是null,返回 null<br>
+     * @since 3.3.7
+     */
+    public static <K, V> V getOrDefault(Map<K, V> map,K key,V defaultValue){
+        if (null == map){
+            return null;
+        }
+        return map.getOrDefault(key, defaultValue);
+    }
+
     //---------------------------------------------------------------
 
     /**

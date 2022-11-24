@@ -59,6 +59,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 RemoveKeysCollectionTest.class,
 
                 GetTest.class,
+
+                GetByKeyTest.class,
+                GetOrDefaultTest.class,
 //
 })
 public class MapUtilSuiteTests{
