@@ -42,6 +42,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 SubstringWithoutLastLastStringTest.class,
                 TokenizeToStringArrayTest.class,
                 TokenizeToStringArrayWithArgsTest.class,
+                TokenizeToArrayContainsParameterizedTest.class,
+                TokenizeToArrayContainsDelimitersParameterizedTest.class,
 
                 ToSingleValueMapTest.class,
                 ToSingleValueMapConvertTest.class,

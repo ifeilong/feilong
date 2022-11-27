@@ -36,7 +36,6 @@ public class ToArrayStringArrayClassTest{
      * To t test.
      */
     @Test
-    
     public void testConvert1(){
         assertEquals((Serializable) null, ConvertUtil.toArray((String[]) null, Serializable.class));
     }
@@ -45,7 +44,6 @@ public class ToArrayStringArrayClassTest{
      * Test convert3.
      */
     @Test(expected = NullPointerException.class)
-    
     public void testConvert3(){
         String[] strings = toArray("");
         ConvertUtil.toArray(strings, null);
@@ -55,7 +53,6 @@ public class ToArrayStringArrayClassTest{
      * Test convert array.
      */
     @Test
-    
     public void testConvertArray(){
         String[] ss = { "2", "1" };
         assertArrayEquals(new Long[] { 2L, 1L }, toArray(ss, Long.class));

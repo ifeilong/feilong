@@ -31,11 +31,13 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.text.StrSubstitutor;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -721,8 +723,9 @@ public final class StringUtil{
      * </p>
      * 
      * <p>
-     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},本方法默认使用参数 trimTokens = true;
-     * ignoreEmptyTokens = true;
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},<br>
+     * 本方法默认使用参数 <span style="color:green">trimTokens = true;</span> <br>
+     * <span style="color:green">ignoreEmptyTokens = true;</span>
      * </p>
      * 
      * <h3>示例:</h3>
@@ -750,15 +753,7 @@ public final class StringUtil{
      * 
      * </blockquote>
      * 
-     * <h3>说明:</h3>
      * 
-     * <blockquote>
-     * <p>
-     * 给定的delimiters字符串支持任意数量的分隔字符characters. <br>
-     * 每一个characters可以用来分隔tokens.一个delimiter分隔符常常是一个single字符;<br>
-     * 如果你要使用多字符 multi-character delimiters分隔, 你可以考虑使用<code>delimitedListToStringArray</code>
-     * </p>
-     * </blockquote>
      * 
      * @param str
      *            需要被分隔的字符串
@@ -774,6 +769,16 @@ public final class StringUtil{
      * 
      * @see #tokenizeToStringArray(String, String, boolean, boolean)
      * @since 1.0.7
+     * @apiNote
+     *          <h3>说明:</h3>
+     * 
+     *          <blockquote>
+     *          <p>
+     *          给定的delimiters字符串支持任意数量的分隔字符characters. <br>
+     *          每一个characters可以用来分隔tokens.一个delimiter分隔符常常是一个single字符;<br>
+     *          如果你要使用多字符 multi-character delimiters分隔, 你可以考虑使用<code>delimitedListToStringArray</code>
+     *          </p>
+     *          </blockquote>
      */
     public static String[] tokenizeToStringArray(String str,String delimiters){
         boolean trimTokens = true;
@@ -830,7 +835,8 @@ public final class StringUtil{
             return EMPTY_STRING_ARRAY;
         }
 
-        List<String> tokens = newArrayList();
+        //---------------------------------------------------------------
+        List<String> tokenList = newArrayList();
 
         StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         while (stringTokenizer.hasMoreTokens()){
@@ -838,13 +844,104 @@ public final class StringUtil{
             token = trimTokens ? token.trim() : token;//去空
 
             if (!ignoreEmptyTokens || token.length() > 0){
-                tokens.add(token);
+                tokenList.add(token);
             }
         }
-        return toArray(tokens, String.class);
+        return toArray(tokenList, String.class);
     }
 
     // [end]
+
+    /**
+     * 
+     * 将配置类型的逗号分隔字符串分割转换成数组,然后自动转换成element一样的类型,判断是否包含.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * String redMultiBookIds = staticConfig.getRedMultiBookIds();
+     * if (isNullOrEmpty(redMultiBookIds)){
+     *     return 0;
+     * }
+     * 
+     * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(redMultiBookIds, ",");
+     * boolean contains = Arrays.asList(tokenizeToStringArray).contains("" + entryId);
+     * return contains ? 1 : 0;
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * String redMultiBookIds = staticConfig.getRedMultiBookIds();
+     * if (isNullOrEmpty(redMultiBookIds)){
+     *     return 0;
+     * }
+     * 
+     * boolean contains = StringUtil.tokenizeToStringArrayContains(redMultiBookIds, entryId);
+     * return contains ? 1 : 0;
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param config
+     *            the config
+     * @param element
+     *            the element
+     * @return 如果 <code>config</code> 是null或者empty,返回false<br>
+     *         如果 <code>element</code> 是null,返回false<br>
+     *         否则将config 使用逗号分隔成字符串数组,然后逐个转换成element类型,如果相等,返回true ,否则false
+     * @since 3.3.7
+     */
+    public static <T> boolean tokenizeToArrayContains(String config,T element){
+        return tokenizeToArrayContains(config, ",", element);
+    }
+
+    /**
+     * 将配置类型的逗号分隔字符串分割转换成数组,然后自动转换成element一样的类型,判断是否包含.
+     *
+     * @param <T>
+     *            the generic type
+     * @param config
+     *            the config
+     * @param delimiters
+     *            the delimiters
+     * @param element
+     *            the element
+     * @return 如果 <code>config</code> 是null或者empty,返回false<br>
+     *         如果 <code>element</code> 是null,返回false<br>
+     *         否则将config 使用逗号分隔成字符串数组,然后逐个转换成element类型,如果相等,返回true ,否则false
+     * @since 3.3.7
+     */
+    public static <T> boolean tokenizeToArrayContains(String config,String delimiters,T element){
+        if (isNullOrEmpty(config)){
+            return false;
+        }
+        if (null == element){
+            return false;
+        }
+        //---------------------------------------------------------------
+        String[] array = StringUtil.tokenizeToStringArray(config, delimiters);
+        if (isNullOrEmpty(array)){
+            return false;
+        }
+        //---------------------------------------------------------------
+        Class<T> klass = (Class<T>) element.getClass();
+        for (String str : array){
+            T convertValue = ConvertUtil.convert(str, klass);
+            if (Objects.equals(convertValue, element)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988,455 这种等号后面的值,使用逗号分隔成list.
      * 
@@ -867,13 +964,13 @@ public final class StringUtil{
      * 
      * 
      * </blockquote>
-     * 
-     * @apiNote 自动去除空格,忽略空
+     *
      * @param config
      *            189=988;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
      * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
      *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
      * @since 3.3.4
+     * @apiNote 自动去除空格,忽略空
      */
     public static Map<String, String> toSingleValueMap(String config){
         return toSingleValueMap(config, String.class, String.class);
@@ -900,8 +997,7 @@ public final class StringUtil{
      * 
      * 
      * </blockquote>
-     * 
-     * @apiNote 自动去除空格,忽略空
+     *
      * @param <T>
      *            the generic type
      * @param <V>
@@ -917,6 +1013,7 @@ public final class StringUtil{
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.3.4
+     * @apiNote 自动去除空格,忽略空
      */
     public static <T, V> Map<T, V> toSingleValueMap(String config,Class<T> keyClass,Class<V> valueElementClass){
 
@@ -974,8 +1071,7 @@ public final class StringUtil{
      * 
      * 
      * </blockquote>
-     * 
-     * @apiNote 自动去除空格,忽略空
+     *
      * @param <T>
      *            the generic type
      * @param <V>
@@ -991,6 +1087,7 @@ public final class StringUtil{
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.3.4
+     * @apiNote 自动去除空格,忽略空
      */
     public static <T, V> Map<T, List<V>> toMultiValueMap(String config,Class<T> keyClass,Class<V> valueElementClass){
         if (isNullOrEmpty(config)){
