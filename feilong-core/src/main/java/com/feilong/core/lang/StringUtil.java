@@ -1395,7 +1395,7 @@ public final class StringUtil{
      *            the char sequence
      * @return 如果 <code>charSequence</code> 是null,返回 {@link #EMPTY}<br>
      *         如果 <code>charSequence</code> 是empty,,返回 {@link #EMPTY}<br>
-     * @since 3.3.7
+     * @since 3.3.8
      */
     public static String clean(CharSequence charSequence){
         if (isNullOrEmpty(charSequence)){
@@ -1439,7 +1439,7 @@ public final class StringUtil{
      * @param charSequence
      *            the char sequence
      * @return the string
-     * @since 3.3.7
+     * @since 3.3.8
      */
     public static String removeSpecialSpace(CharSequence charSequence){
         String string = ConvertUtil.toString(charSequence);

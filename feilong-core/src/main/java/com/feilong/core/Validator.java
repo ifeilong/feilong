@@ -248,7 +248,7 @@ public final class Validator{
      * 
      * @param charSequence
      * @return
-     * @since 3.3.7
+     * @since 3.3.8
      */
     private static boolean handleSpace(CharSequence charSequence){
         String removeSpecialSpace = StringUtil.removeSpecialSpace(charSequence);
