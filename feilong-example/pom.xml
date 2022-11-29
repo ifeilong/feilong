@@ -3,10 +3,10 @@
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong-example</artifactId>
-	<version>3.3.7</version>
+	<version>3.3.8</version>
 
 	<properties>
-		<version.feilong-platform>3.3.7</version.feilong-platform>
+		<version.feilong-platform>3.3.8</version.feilong-platform>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- https://github.com/spring-projects/spring-framework/releases -->
