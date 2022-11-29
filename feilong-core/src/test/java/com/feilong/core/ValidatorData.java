@@ -40,7 +40,14 @@ public class ValidatorData{
     public static Iterable<Object[]> buildData(){
         Object[] nullOrEmptyElement = {
                                         null,
-                                        "", //
+
+                                        "", // 普通半角空格 ASCII码为32，String.trim()可以去掉。
+                                        "　", //全角空格
+
+                                        " ", //不间断空格 \u00A0
+                                        " ", //\u2007
+                                        " ", //\u202F
+
                                         "   ",
 
                                         new StringBuffer(),

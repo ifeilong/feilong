@@ -15,6 +15,7 @@
  */
 package com.feilong.core;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -22,8 +23,6 @@ import org.junit.Test;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class ValidatorTest.
@@ -46,13 +45,25 @@ public class ValidatorTest{
         assertEquals(true, isNullOrEmpty(users));
     }
 
-    /**
-     * Test is null or empty 1.
-     */
     @Test
     public void testIsNullOrEmpty1(){
         assertEquals(true, StringUtils.isBlank(new StringBuilder("  ")));
         assertEquals(true, isNullOrEmpty(new StringBuilder("  ")));
+    }
+
+    @Test
+    public void testu00A0(){
+        assertEquals(true, isNullOrEmpty(" "));//\u00A0
+    }
+
+    @Test
+    public void testu2007(){
+        assertEquals(true, isNullOrEmpty(" "));//\u2007
+    }
+
+    @Test
+    public void testu202F(){
+        assertEquals(true, isNullOrEmpty(" "));//\u202F
     }
 
 }

@@ -16,6 +16,7 @@
 
 package com.feilong.lib.json;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 
@@ -31,7 +32,6 @@ import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.processors.PropertyNameProcessor;
 import com.feilong.lib.json.util.JavaIdentifierTransformer;
 import com.feilong.lib.json.util.PropertyFilter;
-import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.builder.ToStringBuilder;
 import com.feilong.lib.lang3.builder.ToStringStyle;
 
@@ -208,7 +208,7 @@ public class JsonConfig{
     public Collection<String> getMergedExcludes(){
         Collection<String> exclusions = new HashSet<>();
         for (String exclusion : excludes){
-            if (!StringUtils.isBlank(exclusion)){
+            if (isNotNullOrEmpty(exclusion)){
                 exclusions.add(exclusion.trim());
             }
         }

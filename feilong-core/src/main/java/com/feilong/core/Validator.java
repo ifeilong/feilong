@@ -21,6 +21,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.lang3.StringUtils;
@@ -225,7 +226,12 @@ public final class Validator{
         }
         // 字符串
         if (value instanceof CharSequence){
-            return StringUtils.isBlank((CharSequence) value);
+            CharSequence charSequence = (CharSequence) value;
+            boolean blank = StringUtils.isBlank(charSequence);
+            if (blank){
+                return true;
+            }
+            return handleSpace(charSequence);
         }
 
         //---------------------------------------------------------------
@@ -235,6 +241,33 @@ public final class Validator{
             return CollectionUtils.sizeIsEmpty(value);
         }
         return false;
+    }
+
+    /**
+     * 处理空格
+     * 
+     * @param charSequence
+     * @return
+     * @since 3.3.7
+     */
+    private static boolean handleSpace(CharSequence charSequence){
+        String string = ConvertUtil.toString(charSequence);
+        //不间断空格 as a space,but often not adjusted   see https://github.com/ifeilong/feilong/issues/56
+        string = string.replace('\u00A0', ' ');
+
+        //字符U+2007---U+200A和U+202F在Unicode标准中没有给它们分配精确的宽度，字符的显示实现可能会与预期的宽度有很大偏差。
+        //此外，在出版软件中使用相同名称的概念时，比如“窄空格”，其含义可能会有很大的不同。
+        //例如，
+        //在 InDesign 软件中，“thin space窄空格”是1/8 em (即0.125 em，与建议的0.2 em 相反) ，
+        //而“hair space发际空格”只有1/24 em (即大约0.042 em，而窄空格标志的宽度通常在0.1em和0.2 em之间变化)。
+        //figure space
+        string = string.replace('\u2007', ' ');
+
+        //narrow no-break space
+        //比不间断空格(或者空格)都窄
+        string = string.replace('\u202F', ' ');
+
+        return StringUtils.isBlank(string);
     }
 
     //---------------------------------------------------------------

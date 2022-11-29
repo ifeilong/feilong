@@ -15,14 +15,13 @@
  */
 package com.feilong.core;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractBooleanParameterizedTest;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class ObjectUtilIsPrimitiveArrayParameterizedTest.
@@ -45,7 +44,7 @@ public class ValidatorIsNullOrEmptyParameterizedTest extends AbstractBooleanPara
      * Test is null or empty.
      */
     @Test
-    public void testIsNullOrEmpty(){
+    public void test(){
         assertEquals(expectedValue, isNullOrEmpty(input));
     }
 }
