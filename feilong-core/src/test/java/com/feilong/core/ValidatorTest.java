@@ -66,4 +66,9 @@ public class ValidatorTest{
         assertEquals(true, isNullOrEmpty(" "));//\u202F
     }
 
+    @Test
+    public void testu202F1(){
+        System.out.println("a" + '\b' + "c");
+    }
+
 }

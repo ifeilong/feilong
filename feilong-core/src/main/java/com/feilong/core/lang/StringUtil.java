@@ -1387,4 +1387,77 @@ public final class StringUtil{
     public static boolean trimAndEqualsIgnoreCase(String s1,String s2){
         return StringUtils.equalsIgnoreCase(StringUtils.trim(s1), StringUtils.trim(s2));
     }
+
+    /**
+     * 清除charSequence 中一些特殊符号, 目前会清除 backspace (\b), 三个特殊空格 \u00A0,\u2007,\u202F.
+     *
+     * @param charSequence
+     *            the char sequence
+     * @return 如果 <code>charSequence</code> 是null,返回 {@link #EMPTY}<br>
+     *         如果 <code>charSequence</code> 是empty,,返回 {@link #EMPTY}<br>
+     * @since 3.3.7
+     */
+    public static String clean(CharSequence charSequence){
+        if (isNullOrEmpty(charSequence)){
+            return EMPTY;
+        }
+
+        //---------------------------------------------------------------
+        String string = removeSpecialSpace(charSequence);
+
+        //去空格
+        string = StringUtils.trim(string);
+
+        //        反斜杠（\）在字符串内有特殊含义，用来表示一些特殊字符，所以又称为转义符。
+        //        \0:null(\u0000)
+        //        \b ：后退键（\u0008）
+        //        \f ：换页符（\u000C）
+        //        n ：换行符（000A）
+        //        r ：回车键（000D）
+        //        \t ：制表符（\u0009）
+        //        \v ：垂直制表符（\u000B）
+        //        \' ：单引号（\u0027）
+        //        \" ：双引号（\u0022）
+        //        \\ ：反斜杠（\u005C）
+        //        '\251' // "©"
+        //        '\xA9' // "©"
+        //        '\u00A9' // "©"
+
+        //后退键 backspace see https://github.com/ifeilong/feilong/issues/55
+        string = com.feilong.lib.lang3.StringUtils.remove(string, '\u0008');
+
+        return string;
+    }
+
+    /**
+     * 删除特殊空格.
+     * 
+     * <p>
+     * \u00A0,\u2007,\u202F
+     * </p>
+     *
+     * @param charSequence
+     *            the char sequence
+     * @return the string
+     * @since 3.3.7
+     */
+    public static String removeSpecialSpace(CharSequence charSequence){
+        String string = ConvertUtil.toString(charSequence);
+        //不间断空格 as a space,but often not adjusted   see https://github.com/ifeilong/feilong/issues/56
+        string = com.feilong.lib.lang3.StringUtils.remove(string, '\u00A0');
+
+        //字符U+2007---U+200A和U+202F在Unicode标准中没有给它们分配精确的宽度，字符的显示实现可能会与预期的宽度有很大偏差。
+        //此外，在出版软件中使用相同名称的概念时，比如“窄空格”，其含义可能会有很大的不同。
+        //例如，
+        //在 InDesign 软件中，“thin space窄空格”是1/8 em (即0.125 em，与建议的0.2 em 相反) ，
+        //而“hair space发际空格”只有1/24 em (即大约0.042 em，而窄空格标志的宽度通常在0.1em和0.2 em之间变化)。
+        //figure space
+        string = com.feilong.lib.lang3.StringUtils.remove(string, '\u2007');
+
+        //narrow no-break space
+        //比不间断空格(或者空格)都窄
+        string = com.feilong.lib.lang3.StringUtils.remove(string, '\u202F');
+
+        return string;
+    }
 }

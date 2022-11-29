@@ -33,6 +33,12 @@ public class ReadToStringFileInputStreamTest extends AbstractReadFileToStringTes
         assertEquals("feilong 我爱你\n" + "feilong", readFileToString);
     }
 
+    @Test
+    public void testReadFile1(){
+        String readFileToString = IOReaderUtil.readToString("classpath:backspace.txt", UTF8);
+        assertEquals("a\bc", readFileToString);
+    }
+
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)

@@ -29,6 +29,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 FormatParameterizedTest.class,
                 TrimAndEqualsIgnoreCaseParameterizedTest.class,
 
+                CleanTest.class,
+
                 GetBytesTest.class,
                 GetBytesAndCharsetNameTest.class,
 
