@@ -17,7 +17,7 @@ package com.feilong.core;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * 默认的 RuntimeException.
@@ -199,7 +199,7 @@ public class DefaultRuntimeException extends RuntimeException{
      *            the args
      */
     public DefaultRuntimeException(String messagePattern, Object...args){
-        super(Slf4jUtil.format(messagePattern, args));
+        super(StringUtil.formatPattern(messagePattern, args));
     }
 
     //---------------------------------------------------------------

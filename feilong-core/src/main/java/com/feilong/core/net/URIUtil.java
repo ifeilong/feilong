@@ -22,7 +22,6 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.lib.lang3.StringUtils.INDEX_NOT_FOUND;
 import static com.feilong.lib.lang3.StringUtils.isEmpty;
-import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -220,7 +219,7 @@ public final class URIUtil{
         try{
             return URI.create(uri);
         }catch (Exception e){
-            throw new URIParseException(format("input uri:[{}]", uri), e);
+            throw new URIParseException(StringUtil.formatPattern("input uri:[{}]", uri), e);
         }
     }
 
@@ -584,7 +583,7 @@ public final class URIUtil{
             return encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType);
         }catch (Exception e){
             String pattern = "[{}] value:[{}],use charset:[{}]";
-            String message = format(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType);
+            String message = StringUtil.formatPattern(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType);
             throw new URIParseException(message, e);
         }
     }

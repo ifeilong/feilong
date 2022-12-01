@@ -21,10 +21,10 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import java.util.Properties;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.SessionConfig;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class SessionPropertiesBuilder.
@@ -60,7 +60,9 @@ public class SessionPropertiesBuilder{
         String serverHost = sessionConfig.getServerHost();
         if (isNullOrEmpty(serverHost)){
             throw new IllegalArgumentException(
-                            Slf4jUtil.format("serverHost can't be null/empty! sessionConfig:[{}]", JsonUtil.toString(sessionConfig)));
+                            StringUtil.formatPattern(
+                                            "serverHost can't be null/empty! sessionConfig:[{}]",
+                                            JsonUtil.toString(sessionConfig)));
         }
 
         //---------------------------------------------------------------

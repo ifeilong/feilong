@@ -27,6 +27,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 FormatParameterizedTest.class,
+                FormatPatternTest.class,
+                FormatPatternParameterizedTest.class,
+
                 TrimAndEqualsIgnoreCaseParameterizedTest.class,
 
                 CleanTest.class,

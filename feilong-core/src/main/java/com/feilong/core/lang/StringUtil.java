@@ -35,12 +35,14 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
+
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.text.StrSubstitutor;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link String}工具类,可以查询,截取,format.
@@ -300,7 +302,7 @@ public final class StringUtil{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
             String pattern = "value:[{}],charsetName:[{}],suggest you use [{}] constants";
-            String message = Slf4jUtil.format(pattern, value, charsetName, CharsetType.class.getCanonicalName());
+            String message = StringUtil.formatPattern(pattern, value, charsetName, CharsetType.class.getCanonicalName());
             throw new UncheckedIOException(message, e);
         }
     }
@@ -1363,6 +1365,59 @@ public final class StringUtil{
     public static String format(String format,Object...args){
         return null == format ? EMPTY : String.format(format, args);
     }
+
+    /**
+     * 格式化字符串,此方法是抽取slf4j的核心方法.
+     * 
+     * <p>
+     * 在java中,常会拼接字符串生成新的字符串值,在字符串拼接过程中容易写错或者位置写错<br>
+     * <br>
+     * slf4j的log支持格式化输出log,比如:<br>
+     * </p>
+     * 
+     * <ul>
+     * <li>LOGGER.debug("{}","feilong");</li>
+     * <li>LOGGER.info("{},{}","feilong","hello");</li>
+     * </ul>
+     * 
+     * 这些写法非常简洁且有效,不易出错
+     * 
+     * <br>
+     * 因此,你可以在代码中出现这样的写法:
+     * 
+     * <pre class="code">
+     * throw new IllegalArgumentException(StringUtil.formatPattern(
+     *  "callbackUrl:[{}] ,length:[{}] can't {@code >}{}",
+     *  callbackUrl,
+     *  callbackUrlLength,
+     *  callbackUrlMaxLength)
+     * </pre>
+     * 
+     * 又或者
+     * 
+     * <pre class="code">
+     * return StringUtil.formatPattern("{} [{}]", encode, encode.length());
+     * </pre>
+     * 
+     * @param messagePattern
+     *            message的格式,比如 callbackUrl:[{}] ,length:[{}]
+     * @param args
+     *            参数
+     * @return 如果 <code>messagePattern</code> 是null,返回 null<br>
+     *         如果 <code>args</code> 是null,返回 <code>messagePattern</code><br>
+     * @see org.slf4j.helpers.FormattingTuple
+     * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
+     * @see org.slf4j.helpers.FormattingTuple#getMessage()
+     * @since 3.3.8
+     */
+    public static String formatPattern(String messagePattern,Object...args){
+        if (null == messagePattern){
+            return EMPTY;
+        }
+        FormattingTuple formattingTuple = MessageFormatter.arrayFormat(messagePattern, args);
+        return formattingTuple.getMessage();
+    }
+
     // [end]
 
     /**

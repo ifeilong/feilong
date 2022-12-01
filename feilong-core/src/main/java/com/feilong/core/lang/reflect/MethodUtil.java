@@ -20,10 +20,10 @@ import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.reflect.MethodUtils;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 使用反射的方式执行调用bean中的方法.
@@ -353,7 +353,7 @@ public final class MethodUtil{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
             String pattern = "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, object, methodName, args, parameterTypes);
+            String message = StringUtil.formatPattern(pattern, object, methodName, args, parameterTypes);
             throw new ReflectException(message, e);
         }
     }
@@ -626,6 +626,6 @@ public final class MethodUtil{
      */
     private static String buildMessage(Class<?> klass,String staticMethodName,Object[] args,Class<?>[] parameterTypes){
         String pattern = "invokeStaticMethod Exception,class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
-        return Slf4jUtil.format(pattern, klass.getName(), staticMethodName, args, parameterTypes);
+        return StringUtil.formatPattern(pattern, klass.getName(), staticMethodName, args, parameterTypes);
     }
 }

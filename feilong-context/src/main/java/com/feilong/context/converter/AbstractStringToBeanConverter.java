@@ -22,7 +22,7 @@ import static java.lang.System.lineSeparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * 抽象的将 字符串转成 bean 的转换器.
@@ -75,7 +75,7 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
             try{
                 LOGGER.debug("input String:[{}],after format:{} {}", value, lineSeparator(), formatValue(value));
             }catch (Exception e){
-                String message = Slf4jUtil.format("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
+                String message = StringUtil.formatPattern("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
                 throw new IllegalArgumentException(message, e);
             }
         }

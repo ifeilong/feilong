@@ -25,7 +25,6 @@ import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 单向加密算法.
@@ -165,7 +164,7 @@ final class OnewayEncryption{
             return ByteUtil.bytesToHexStringLowerCase(bytes);//这个值和上面的一样
 
         }catch (Exception e){
-            throw new EncryptionException(Slf4jUtil.format("onewayType:[{}],filePath:[{}]", onewayType, location), e);
+            throw new EncryptionException(StringUtil.formatPattern("onewayType:[{}],filePath:[{}]", onewayType, location), e);
         }
     }
 

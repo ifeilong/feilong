@@ -28,11 +28,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.net.SSLContextBuilder;
 import com.feilong.net.SSLProtocol;
 import com.feilong.net.UriProcessor;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * Jsoup 的工具类.
@@ -146,7 +146,7 @@ public final class JsoupUtil{
             }
             return connection.get();
         }catch (IOException e){
-            throw new JsoupUtilException(Slf4jUtil.format("urlString:[{}],userAgent:[{}]", urlString, userAgent), e);
+            throw new JsoupUtilException(StringUtil.formatPattern("urlString:[{}],userAgent:[{}]", urlString, userAgent), e);
         }
     }
 

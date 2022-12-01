@@ -30,7 +30,7 @@ import javax.mail.internet.MimeUtility;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class InternetAddressUtil.
@@ -170,7 +170,7 @@ public final class InternetAddressUtil{
             return new InternetAddress(fromAddress);
         }catch (AddressException | UnsupportedEncodingException e){
             //since 1.13.2
-            throw new DefaultRuntimeException(Slf4jUtil.format("personal:[{}],fromAddress:[{}]", personal, fromAddress), e);
+            throw new DefaultRuntimeException(StringUtil.formatPattern("personal:[{}],fromAddress:[{}]", personal, fromAddress), e);
         }
     }
 

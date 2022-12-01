@@ -24,9 +24,9 @@ import java.util.Map;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.ognl.Ognl;
 import com.feilong.lib.ognl.OgnlException;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class OgnlStack.
@@ -100,7 +100,7 @@ public class OgnlStack{
                 Object expression = getExpression(expr);
                 return Ognl.getValue(expression, OgnlContextBuilder.build(context), obj);
             }catch (Exception e){
-                throw new DefaultRuntimeException(Slf4jUtil.format("expr:[{}],obj:[{}]", expr, obj), e);
+                throw new DefaultRuntimeException(StringUtil.formatPattern("expr:[{}],obj:[{}]", expr, obj), e);
             }
         }
         return null;

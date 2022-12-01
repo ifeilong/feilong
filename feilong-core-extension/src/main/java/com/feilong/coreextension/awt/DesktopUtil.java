@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URI;
 
-import com.feilong.core.net.URIUtil;
 import com.feilong.core.Validate;
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
+import com.feilong.core.net.URIUtil;
 
 /**
  * {@link java.awt.Desktop}允许 Java应用程序启动已在本机桌面上注册的关联应用程序,以及处理 URI 或文件 .
@@ -54,35 +54,33 @@ public final class DesktopUtil{
      * 使用系统默认浏览器,打开url.
      * 
      * <p>
-     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>urlPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
-     * @param url
+     * @param urlPattern
      *            url地址
      * @param args
      *            the args
-     * @see #desktopAction(String, Action)
      */
-    public static void browse(String url,Object...args){
-        desktopAction(Slf4jUtil.format(url, args), Action.BROWSE);
+    public static void browse(String urlPattern,Object...args){
+        desktopAction(urlPattern, Action.BROWSE, args);
     }
 
     /**
      * 启动关联应用程序来打开文件..
      * <p>
-     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>urlPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
-     * @param url
+     * @param urlPattern
      *            url地址
      * @param args
      *            the args
-     * @see #desktopAction(String, Action)
      */
-    public static void open(String url,Object...args){
-        desktopAction(Slf4jUtil.format(url, args), Action.OPEN);
+    public static void open(String urlPattern,Object...args){
+        desktopAction(urlPattern, Action.OPEN, args);
     }
 
     //---------------------------------------------------------------
@@ -90,37 +88,36 @@ public final class DesktopUtil{
     /**
      * 发送邮件.
      * <p>
-     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>urlPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
-     * @param mailtoURLPattern
+     * @param urlPattern
      *            the mail
      * @param args
      *            the args
      * @see java.awt.Desktop#mail(URI)
-     * @see #desktopAction(String, Action)
      */
-    public static void mail(String mailtoURLPattern,Object...args){
-        desktopAction(Slf4jUtil.format(mailtoURLPattern, args), Action.MAIL);
+    public static void mail(String urlPattern,Object...args){
+        desktopAction(urlPattern, Action.MAIL, args);
     }
 
     /**
      * 打印.
      * 
      * <p>
-     * 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>url</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>urlPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>urlPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
-     * @param url
+     * @param urlPattern
      *            the url
      * @param args
      *            the args
      * @since 1.2.0
      */
-    public static void print(String url,Object...args){
-        desktopAction(Slf4jUtil.format(url, args), Action.PRINT);
+    public static void print(String urlPattern,Object...args){
+        desktopAction(urlPattern, Action.PRINT, args);
     }
 
     //---------------------------------------------------------------
@@ -139,11 +136,13 @@ public final class DesktopUtil{
      *            the action
      * @since 1.2.0
      */
-    private static void desktopAction(String url,Action action){
-        Validate.notBlank(url, "url can't be blank!");
+    private static void desktopAction(String urlPattern,Action action,Object...args){
+        Validate.notBlank(urlPattern, "urlPattern can't be blank!");
         Validate.notNull(action, "action can't be null!");
 
         //---------------------------------------------------------------
+        String url = StringUtil.formatPattern(urlPattern, args);
+
         Desktop desktop = getDesktop(action);
 
         try{
@@ -164,10 +163,10 @@ public final class DesktopUtil{
                     desktop.print(new File(url));
                     break;
                 default:
-                    throw new UnsupportedOperationException(Slf4jUtil.format("[{}] not support!", action));
+                    throw new UnsupportedOperationException(StringUtil.formatPattern("[{}] not support!", action));
             }
         }catch (IOException e){
-            throw new UncheckedIOException(Slf4jUtil.format("[{}],[{}]", url, action), e);
+            throw new UncheckedIOException(StringUtil.formatPattern("[{}],[{}]", url, action), e);
         }
     }
 

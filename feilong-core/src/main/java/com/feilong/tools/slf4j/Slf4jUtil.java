@@ -18,8 +18,7 @@ package com.feilong.tools.slf4j;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.CollectionsUtil.containsTrimAndIgnoreCase;
 
-import org.slf4j.helpers.FormattingTuple;
-import org.slf4j.helpers.MessageFormatter;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * 对 slf4j 的封装提取.
@@ -81,10 +80,12 @@ public final class Slf4jUtil{
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.FormattingTuple#getMessage()
      * @since 1.6.0
+     * @deprecated since 3.3.8 pls use {@link StringUtil#formatPattern(String, Object...)} see
+     *             https://github.com/ifeilong/feilong/issues/479
      */
+    @Deprecated
     public static String format(String messagePattern,Object...args){
-        FormattingTuple formattingTuple = MessageFormatter.arrayFormat(messagePattern, args);
-        return formattingTuple.getMessage();
+        return StringUtil.formatPattern(messagePattern, args);
     }
 
     //---------------------------------------------------------------

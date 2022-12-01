@@ -36,9 +36,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateUtil;
 import com.feilong.core.Validate;
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.date.DateUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * {@link javax.servlet.http.HttpSession HttpSession} 工具类.
@@ -400,6 +400,6 @@ public final class SessionUtil{
     private static String toPrettyMessage(long creationTime){
         Date creationTimeDate = new Date(creationTime);
         String dateString = DateUtil.toString(creationTimeDate, COMMON_DATE_AND_TIME_WITH_MILLISECOND);
-        return Slf4jUtil.format("[{}],intervalToNow:[{}]", dateString, formatDuration(creationTimeDate));
+        return StringUtil.formatPattern("[{}],intervalToNow:[{}]", dateString, formatDuration(creationTimeDate));
     }
 }

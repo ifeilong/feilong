@@ -33,10 +33,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.lib.lang3.reflect.FieldUtils;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * focus on {@link Field} 反射工具类.
@@ -252,7 +252,7 @@ public final class FieldUtil{
             return (T) FieldUtils.readField(obj, fieldName, true);
         }catch (Exception e){
             String pattern = "getFieldValue exception,ownerObj:[{}],fieldName:[{}]";
-            throw new ReflectException(Slf4jUtil.format(pattern, obj, fieldName), e);
+            throw new ReflectException(StringUtil.formatPattern(pattern, obj, fieldName), e);
         }
     }
 }

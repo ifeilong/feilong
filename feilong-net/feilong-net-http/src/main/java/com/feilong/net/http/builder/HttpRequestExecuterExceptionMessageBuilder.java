@@ -17,7 +17,6 @@ package com.feilong.net.http.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
-import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import java.net.SocketTimeoutException;
 import java.util.Map;
@@ -27,6 +26,7 @@ import javax.net.ssl.SSLException;
 import org.apache.http.client.HttpClient;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.JsonUtil;
@@ -74,7 +74,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
         }
         //---------------------------------------------------------------
         //带自定义头 handlerMessage
-        return format("[{}],{}", handlerMessage, result);
+        return StringUtil.formatPattern("[{}],{}", handlerMessage, result);
     }
 
     //---------------------------------------------------------------
@@ -122,14 +122,15 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
         //---------------------------------------------------------------
         String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
-        String commonResult = format(pattern, JsonUtil.toString(httpRequest, true), JsonUtil.toString(useConnectionConfig, true));
+        String commonResult = StringUtil
+                        .formatPattern(pattern, JsonUtil.toString(httpRequest, true), JsonUtil.toString(useConnectionConfig, true));
         if (isNullOrEmpty(httpPropertiesMap)){
             return commonResult;
         }
 
         //---------------------------------------------------------------
         //带 httpPropertiesMap的
-        return format("{},http system properties:[{}]", commonResult, JsonUtil.toString(httpPropertiesMap));
+        return StringUtil.formatPattern("{},http system properties:[{}]", commonResult, JsonUtil.toString(httpPropertiesMap));
     }
 
     //---------------------------------------------------------------

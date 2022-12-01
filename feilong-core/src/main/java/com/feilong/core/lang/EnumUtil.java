@@ -18,11 +18,10 @@ package com.feilong.core.lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.Enum} 工具类.
@@ -242,7 +241,7 @@ public final class EnumUtil{
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             String messagePattern = "[{}],propertyName:[{}],value:[{}],ignoreCase:[{}],constants not found";
-            LOGGER.debug(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+            LOGGER.debug(StringUtil.formatPattern(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
         }
         return null;
     }

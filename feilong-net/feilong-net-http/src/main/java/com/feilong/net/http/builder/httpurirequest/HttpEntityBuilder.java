@@ -28,10 +28,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.entity.StringEntity;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link HttpEntity} 构造器.
@@ -85,7 +85,7 @@ final class HttpEntityBuilder{
         try{
             return new UrlEncodedFormEntity(nameValuePairList, UTF8);
         }catch (UnsupportedEncodingException e){
-            String message = Slf4jUtil.format("paramMap:[{}]", JsonUtil.toString(paramMap));
+            String message = StringUtil.formatPattern("paramMap:[{}]", JsonUtil.toString(paramMap));
             throw new UncheckedHttpException(message, e);
         }
     }

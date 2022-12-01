@@ -24,9 +24,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 默认基于 {@link Thread} 数组的执行实现.
@@ -158,7 +158,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      */
     private static <T> String buildThreadGroupName(List<T> list,PartitionRunnableBuilder<T> partitionRunnableBuilder){
         Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!");
-        return Slf4jUtil.format("ThreadGroup-{}-{}", getName(partitionRunnableBuilder), list.size());
+        return StringUtil.formatPattern("ThreadGroup-{}-{}", getName(partitionRunnableBuilder), list.size());
     }
 
     /**
@@ -226,7 +226,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      */
     private static <T> String buildThreadName(int batchNumber,PartitionRunnableBuilder<T> partitionRunnableBuilder){
         Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!");
-        return Slf4jUtil.format("Thread-{}-{}", getName(partitionRunnableBuilder), batchNumber);
+        return StringUtil.formatPattern("Thread-{}-{}", getName(partitionRunnableBuilder), batchNumber);
     }
 
 }

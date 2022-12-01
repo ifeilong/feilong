@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.codec.binary.Base64;
@@ -44,7 +45,6 @@ import com.feilong.net.bot.message.BotMessage;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.security.EncryptionException;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 默认的钉钉机器人.
@@ -156,7 +156,7 @@ public class DefaultDingTalkBot extends AbstractBot implements DingTalkBot{
             if (!isCatchException){
                 throw e;
             }
-            LOGGER.error(Slf4jUtil.format("title:[{}],content:[{}],atMobiles:[{}]", title, content, atMobiles), e);
+            LOGGER.error(StringUtil.formatPattern("title:[{}],content:[{}],atMobiles:[{}]", title, content, atMobiles), e);
             return false;
         }
     }

@@ -23,11 +23,11 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.csv.entity.BeanCsvConfig;
 import com.feilong.io.FileUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
 public class CsvBeanWriteTest{
@@ -58,7 +58,7 @@ public class CsvBeanWriteTest{
 
     private String buildUrl(String type,String fileName){
         String pattern = "{}/feilong/{}/{}";
-        return Slf4jUtil.format(pattern, SystemUtil.USER_HOME, type, fileName);
+        return StringUtil.formatPattern(pattern, SystemUtil.USER_HOME, type, fileName);
     }
 
     @Test

@@ -28,10 +28,10 @@ import java.util.Map;
 import org.apache.commons.beanutils.DynaBean;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.beanutils.BeanUtils;
 import com.feilong.lib.beanutils.LazyDynaBean;
 import com.feilong.lib.lang3.reflect.FieldUtils;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 对 {@link com.feilong.lib.beanutils.BeanUtils}的再次封装.
@@ -296,7 +296,7 @@ public final class BeanUtil{
                 return;
             }catch (Exception e){
                 String pattern = "copyProperties exception,toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
-                throw new BeanOperationException(Slf4jUtil.format(pattern, toObj, fromObj, includePropertyNames), e);
+                throw new BeanOperationException(StringUtil.formatPattern(pattern, toObj, fromObj, includePropertyNames), e);
             }
         }
 
@@ -338,7 +338,7 @@ public final class BeanUtil{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             String pattern = "setProperty exception,bean:[{}],propertyName:[{}],value:[{}]";
-            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName, value), e);
+            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName, value), e);
         }
     }
 
@@ -380,7 +380,7 @@ public final class BeanUtil{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
-            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName), e);
+            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName), e);
         }
     }
 
@@ -437,7 +437,7 @@ public final class BeanUtil{
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
-            String message = Slf4jUtil.format("cloneBean exception,bean:[{}]]", bean);
+            String message = StringUtil.formatPattern("cloneBean exception,bean:[{}]]", bean);
             throw new BeanOperationException(message, e);
         }
     }
@@ -699,7 +699,7 @@ public final class BeanUtil{
             BeanUtils.populate(bean, properties);
             return bean;
         }catch (Exception e){
-            String message = Slf4jUtil.format("can't populate:[{}] to bean:{}", properties, bean);
+            String message = StringUtil.formatPattern("can't populate:[{}] to bean:{}", properties, bean);
             throw new BeanOperationException(message, e);
         }
     }

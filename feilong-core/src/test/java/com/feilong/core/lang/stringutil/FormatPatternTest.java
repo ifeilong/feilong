@@ -13,36 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.slf4j;
+package com.feilong.core.lang.stringutil;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-/**
- * The Class Slf4jUtilTest.
- * 
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
-public class FormatTest{
+import com.feilong.core.lang.StringUtil;
 
-    /**
-     * Test.
-     */
+public class FormatPatternTest{
+
     @Test
     public void testFormat(){
-        assertEquals(null, Slf4jUtil.format(null, "今天", "aaaa"));
-        assertEquals("", Slf4jUtil.format("", (Object) null));
-        assertEquals("", Slf4jUtil.format(""));
-        assertEquals("{}", Slf4jUtil.format("{}"));
+        assertEquals("", StringUtil.formatPattern(""));
+        assertEquals("{}", StringUtil.formatPattern("{}"));
     }
 
-    /**
-     * Test.
-     */
-    @Test
-    public void testFormat1(){
-        assertEquals("今天,aaaa", Slf4jUtil.format("{},{}", "今天", "aaaa"));
-        assertEquals("", Slf4jUtil.format("", "今天", "aaaa"));
-    }
 }

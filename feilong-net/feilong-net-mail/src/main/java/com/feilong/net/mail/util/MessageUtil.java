@@ -39,7 +39,6 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.net.mail.entity.MailInfo;
 import com.feilong.net.mail.exception.MailException;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class MessageUtil.
@@ -114,7 +113,7 @@ public final class MessageUtil{
             mailInfo.setSubject(subject);
             return mailInfo;
         }catch (Exception e){
-            throw new MailException(Slf4jUtil.format("from:[{}],subject:[{}]", from, subject), e);
+            throw new MailException(StringUtil.formatPattern("from:[{}],subject:[{}]", from, subject), e);
         }
     }
 

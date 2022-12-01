@@ -32,13 +32,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
 import com.feilong.io.IOUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 通用的文件传输.
@@ -290,7 +290,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             tryCd(remoteDirectory);
             return true;
         }catch (Exception e){
-            String message = Slf4jUtil.format("can't cd:[{}]", remoteDirectory);
+            String message = StringUtil.formatPattern("can't cd:[{}]", remoteDirectory);
             throw new FileTransferException(message, e);
         }
     }
@@ -462,7 +462,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     protected static void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
         if (LOGGER.isInfoEnabled()){
-            String message = Slf4jUtil.format(messagePattern, args);
+            String message = StringUtil.formatPattern(messagePattern, args);
             if (isSuccess){
                 LOGGER.info(message);
             }else{

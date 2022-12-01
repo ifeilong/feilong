@@ -22,10 +22,10 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.InternetAddressUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 设置相关接收方, 含 TO,抄送CC,密送 BCC.
@@ -114,7 +114,9 @@ public final class RecipientsSetter{
             }
         }catch (MessagingException e){
             //since 1.13.2
-            throw new DefaultRuntimeException(Slf4jUtil.format("addressArray:[{}],recipientType:[{}]", addressArray, recipientType), e);
+            throw new DefaultRuntimeException(
+                            StringUtil.formatPattern("addressArray:[{}],recipientType:[{}]", addressArray, recipientType),
+                            e);
         }
     }
 }

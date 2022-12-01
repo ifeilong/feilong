@@ -20,11 +20,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({
+@SuiteClasses({ //
                 IsEnabledDebugParameterizedTest.class,
                 IsEnabledInfoParameterizedTest.class,
 
-                FormatTest.class,
 //
 })
 public class Slf4jUtilSuiteTests{

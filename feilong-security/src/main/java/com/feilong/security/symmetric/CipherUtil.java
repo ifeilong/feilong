@@ -24,8 +24,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.security.EncryptionException;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link Cipher} 类为加密和解密提供密码功能.它构成了 Java Cryptographic Extension (JCE) 框架的核心..
@@ -149,7 +149,7 @@ public class CipherUtil{
             return cipher.doFinal(bytes);
         }catch (NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException
                         | InvalidKeyException e){
-            throw new EncryptionException(Slf4jUtil.format("opmode:[{}],transformation:[{}]", opmode, transformation), e);
+            throw new EncryptionException(StringUtil.formatPattern("opmode:[{}],transformation:[{}]", opmode, transformation), e);
         }
     }
 }

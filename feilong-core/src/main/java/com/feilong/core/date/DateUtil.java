@@ -51,10 +51,10 @@ import java.util.Map;
 import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.time.DateFormatUtils;
 import com.feilong.lib.lang3.time.DateUtils;
 import com.feilong.lib.lang3.tuple.Pair;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
@@ -1588,7 +1588,7 @@ public final class DateUtil{
             return DateUtils.parseDate(dateString, datePatterns);
         }catch (ParseException e){
             String pattern = "dateString:[{}],use patterns:[{}],parse to date exception,message:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, datePatterns, e.getMessage()), e);
+            throw new IllegalArgumentException(StringUtil.formatPattern(pattern, dateString, datePatterns, e.getMessage()), e);
         }
     }
 

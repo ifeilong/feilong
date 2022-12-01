@@ -20,7 +20,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import java.util.Map;
 
 import com.feilong.core.Validate;
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 import com.jcraft.jsch.Session;
 
 /**
@@ -29,10 +29,10 @@ import com.jcraft.jsch.Session;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.4
  */
-class SftpSessionUtil {
+class SftpSessionUtil{
 
     /** Don't let anyone instantiate this class. */
-    private SftpSessionUtil() {
+    private SftpSessionUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -43,14 +43,15 @@ class SftpSessionUtil {
     /**
      * Builds the session pretty string.
      *
-     * @param session the session
+     * @param session
+     *            the session
      *
      * @return the string
      */
-    static String buildSessionPrettyString(Session session) {
+    static String buildSessionPrettyString(Session session){
         Validate.notNull(session, "session can't be null!");
 
-        return Slf4jUtil.format("{}@{}:{}", session.getUserName(), session.getHost(), session.getPort());
+        return StringUtil.formatPattern("{}@{}:{}", session.getUserName(), session.getHost(), session.getPort());
     }
 
     //---------------------------------------------------------------
@@ -58,11 +59,12 @@ class SftpSessionUtil {
     /**
      * Gets the map for log.
      *
-     * @param session the session
+     * @param session
+     *            the session
      *
      * @return the map for log
      */
-    static Map<String, Object> getMapForLog(Session session) {
+    static Map<String, Object> getMapForLog(Session session){
         Map<String, Object> map = newLinkedHashMap();
         map.put("serverVersion", session.getServerVersion());
         map.put("clientVersion", session.getClientVersion());

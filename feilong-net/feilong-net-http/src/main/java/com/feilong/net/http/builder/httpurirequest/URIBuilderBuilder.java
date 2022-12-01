@@ -16,7 +16,6 @@
 package com.feilong.net.http.builder.httpurirequest;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import java.util.Map;
 
@@ -24,6 +23,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
@@ -74,7 +74,7 @@ class URIBuilderBuilder{
             }
             return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
-            String message = format("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
+            String message = StringUtil.formatPattern("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
             throw new UncheckedHttpException(message, e);
         }
     }

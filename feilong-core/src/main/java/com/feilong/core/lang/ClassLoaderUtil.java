@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.net.URLUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.ClassLoader ClassLoader}工具类.
@@ -347,7 +346,7 @@ public final class ClassLoaderUtil{
      */
     private static String getLogInfo(String resourceName,ClassLoader classLoader,boolean isFouned){
         String message = "{}found [{}],in ClassLoader:[{}]";
-        return Slf4jUtil.format(message, isFouned ? "" : "not ", resourceName, formatClassLoader(classLoader));
+        return StringUtil.formatPattern(message, isFouned ? "" : "not ", resourceName, formatClassLoader(classLoader));
     }
 
     /**

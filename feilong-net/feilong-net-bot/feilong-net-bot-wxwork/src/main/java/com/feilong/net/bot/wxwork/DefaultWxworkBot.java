@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.bot.AbstractBot;
 import com.feilong.net.bot.message.BotMessage;
@@ -35,7 +36,6 @@ import com.feilong.net.bot.wxwork.message.news.News;
 import com.feilong.net.bot.wxwork.message.news.WxworkNewsMessage;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 默认的微信机器人.
@@ -108,7 +108,7 @@ public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
             if (!isCatchException){
                 throw e;
             }
-            LOGGER.error(Slf4jUtil.format("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
+            LOGGER.error(StringUtil.formatPattern("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
             return null;
         }
     }

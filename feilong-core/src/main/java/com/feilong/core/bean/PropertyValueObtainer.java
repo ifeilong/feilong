@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 属性值获取器.
@@ -89,7 +89,7 @@ public final class PropertyValueObtainer{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
-            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName), e);
+            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName), e);
         }
     }
 
@@ -113,7 +113,7 @@ public final class PropertyValueObtainer{
             return getValue(bean, propertyDescriptor);
         }catch (Exception e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
-            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName), e);
+            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName), e);
         }
     }
 

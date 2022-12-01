@@ -18,7 +18,7 @@ package com.feilong.net.bot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * 通用.
@@ -83,14 +83,14 @@ public abstract class AbstractBot implements Bot{
     @Override
     public boolean sendMessage(String content){
         if (!isAsync){
-            String type = Slf4jUtil.format("[SyncSend[{}]Message]", this.getClass().getSimpleName());
+            String type = StringUtil.formatPattern("[SyncSend[{}]Message]", this.getClass().getSimpleName());
             LOGGER.info("{},content:[{}]", type, content);
             return handleSendMessage(content, type);
         }
 
         //异步
         new Thread(() -> {
-            String type = Slf4jUtil.format("[AsyncSend[{}]Message]", this.getClass().getSimpleName());
+            String type = StringUtil.formatPattern("[AsyncSend[{}]Message]", this.getClass().getSimpleName());
             LOGGER.info("{},content:[{}]", type, content);
             handleSendMessage(content, type);
         }).start();
@@ -105,7 +105,7 @@ public abstract class AbstractBot implements Bot{
             if (!isCatchException){
                 throw e;
             }
-            LOGGER.error(Slf4jUtil.format("[{}],typecontent:[{}],returnFalse", type, content), e);
+            LOGGER.error(StringUtil.formatPattern("[{}],typecontent:[{}],returnFalse", type, content), e);
             return false;
         }
     }

@@ -20,9 +20,9 @@ import static java.lang.System.lineSeparator;
 
 import java.util.Map;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.taglib.display.CacheContentBuilder;
 import com.feilong.taglib.display.LocaleSupportUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 用来构造输出 option内容.
@@ -83,7 +83,7 @@ public class OptionCacheContentBuilder implements CacheContentBuilder<OptionPara
         //主要为了国际化使用, 页面显示的时候,显示为  "<option value="edu.option1">初中</option>"
         //存储到数据库的时候 值存储的是  edu.option1
         //而 显示的时候,使用 spring message 标签显示
-        return Slf4jUtil.format(OPTION_PATTERN, key, selectedStatus, value);
+        return StringUtil.formatPattern(OPTION_PATTERN, key, selectedStatus, value);
     }
 
 }

@@ -30,8 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.feilong.context.fileparser.FileParser;
 import com.feilong.context.fileparser.RequestFileParserDetector;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.io.FilenameUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 public class UploadController{
 
@@ -69,8 +69,10 @@ public class UploadController{
         for (int i = 0; i < multipartFiles.length; ++i){
             MultipartFile multipartFile = multipartFiles[i];
             if (!multipartFile.isEmpty()){
-                fileNames[i] = Slf4jUtil
-                                .format("{}.{}", nowTimestamp() + "-" + i, FilenameUtil.getExtension(multipartFile.getOriginalFilename()));//文件后缀
+                fileNames[i] = StringUtil.formatPattern(
+                                "{}.{}",
+                                nowTimestamp() + "-" + i,
+                                FilenameUtil.getExtension(multipartFile.getOriginalFilename()));//文件后缀
             }
         }
         return fileNames;

@@ -17,7 +17,6 @@ package com.feilong.zip;
 
 import static com.feilong.core.date.DateUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
-import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +27,9 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.io.IOWriteUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
+import com.feilong.io.IOWriteUtil;
 
 /**
  * 抽象的解压缩.
@@ -71,7 +71,7 @@ public abstract class AbstractUnzipHandler implements UnzipHandler{
         try{
             handle(unZipFilePath, outputDirectory);
         }catch (IOException e){
-            String message = format("unZipFilePath:[{}],outputDirectory:[{}]", unZipFilePath, outputDirectory);
+            String message = StringUtil.formatPattern("unZipFilePath:[{}],outputDirectory:[{}]", unZipFilePath, outputDirectory);
             throw new UncheckedIOException(message, e);
         }
 

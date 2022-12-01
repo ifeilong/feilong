@@ -17,9 +17,8 @@ package com.feilong.core.lang;
 
 import java.lang.reflect.Modifier;
 
-import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.core.Validate;
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.reflect.ReflectException;
 
 /**
  * {@link java.lang.Class} 工具类.
@@ -446,7 +445,7 @@ public final class ClassUtil{
         try{
             return com.feilong.lib.lang3.ClassUtils.getClass(className);
         }catch (Exception e){
-            throw new ReflectException(Slf4jUtil.format("className:[{}]", className), e);
+            throw new ReflectException(StringUtil.formatPattern("className:[{}]", className), e);
         }
     }
 

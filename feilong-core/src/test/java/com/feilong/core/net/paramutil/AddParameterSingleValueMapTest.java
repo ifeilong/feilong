@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class ParamUtilAddParameterSingleValueMapTest.
@@ -82,7 +82,8 @@ public class AddParameterSingleValueMapTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        String expected = Slf4jUtil.format(PATH + "?a=b&city={}&name=feilong&province={}", encode("南通市", UTF8), encode("江苏省", UTF8));
+        String expected = StringUtil
+                        .formatPattern(PATH + "?a=b&city={}&name=feilong&province={}", encode("南通市", UTF8), encode("江苏省", UTF8));
         assertEquals(expected, addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 

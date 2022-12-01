@@ -27,9 +27,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 需要在spring相关xml里面配置
@@ -76,7 +76,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
         try (InputStream inputStream = multipartFile.getInputStream()){
             return IOWriteUtil.write(inputStream, directoryName, fileName);
         }catch (IOException e){
-            throw new UncheckedIOException(Slf4jUtil.format("directoryName:[{}],fileName:[{}]", directoryName, fileName), e);
+            throw new UncheckedIOException(StringUtil.formatPattern("directoryName:[{}],fileName:[{}]", directoryName, fileName), e);
         }
     }
 

@@ -36,6 +36,7 @@ import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.builder.JavaToJsonConfigBuilder;
 import com.feilong.json.builder.JsonConfigBuilder;
@@ -52,7 +53,6 @@ import com.feilong.lib.json.JSONObjectToBeanUtil;
 import com.feilong.lib.json.JsonConfig;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * json处理工具类.
@@ -1562,7 +1562,7 @@ public final class JsonUtil{
      * @since 1.11.5
      */
     private static String buildJsonToJavaExceptionMessage(String json,JsonToJavaConfig jsonToJavaConfig){
-        return Slf4jUtil.format("input json:{},jsonToJavaConfig:{}", json, format(jsonToJavaConfig, true));
+        return StringUtil.formatPattern("input json:{},jsonToJavaConfig:{}", json, format(jsonToJavaConfig, true));
     }
 
     // [end]

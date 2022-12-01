@@ -22,6 +22,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.SessionFactory;
 import com.feilong.net.mail.builder.setter.BodySetter;
@@ -31,7 +32,6 @@ import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.exception.MailException;
 import com.feilong.net.mail.util.InternetAddressUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 专门用来构造 {@link Message}.
@@ -85,7 +85,7 @@ public class MessageBuilder{
             BodySetter.setBody(message, mailSendRequest);
         }catch (MessagingException e){
             //since 1.13.2 update exception message
-            throw new MailException(Slf4jUtil.format("mailSenderConfig:[{}]", JsonUtil.toString(mailSendRequest)), e);
+            throw new MailException(StringUtil.formatPattern("mailSenderConfig:[{}]", JsonUtil.toString(mailSendRequest)), e);
         }
         return message;
     }

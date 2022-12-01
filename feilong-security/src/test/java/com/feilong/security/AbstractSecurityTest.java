@@ -17,8 +17,8 @@ package com.feilong.security;
 
 import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractTest;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class BaseSecurityTest.
@@ -46,6 +46,6 @@ public abstract class AbstractSecurityTest extends AbstractTest{
      * @return the string
      */
     protected String debugSecurityValue(String encode){
-        return Slf4jUtil.format(" {} [{}]", encode, encode.length());
+        return StringUtil.formatPattern(" {} [{}]", encode, encode.length());
     }
 }

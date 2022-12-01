@@ -19,8 +19,8 @@ import java.lang.reflect.Constructor;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.reflect.ConstructorUtils;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 使用反射请求构造函数创建新实例的工具类,focused on constructors.
@@ -176,7 +176,7 @@ public final class ConstructorUtil{
             return ConstructorUtils.invokeConstructor(klass, parameterValues, parameterTypes);
         }catch (Exception e){
             String pattern = "invokeConstructor exception,class:[{}].args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, klass, parameterValues, parameterTypes);
+            String message = StringUtil.formatPattern(pattern, klass, parameterValues, parameterTypes);
             throw new ReflectException(message, e);
         }
     }

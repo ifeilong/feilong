@@ -39,12 +39,12 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.SheetNamesUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 进行 excel 输出的工具类.
@@ -167,7 +167,7 @@ public class ExcelWriteUtil{
 
     private static String buildDefaultOutputFileName(String templateLocation,String[] sheetNames,Map<String, ExcelSheet> sheetDefinitions){
         String pattern = USER_HOME + "/feilong/excel/{}{}.{}";
-        return Slf4jUtil.format(
+        return StringUtil.formatPattern(
                         pattern,
                         buildFileName(sheetNames, sheetDefinitions),
                         nowTimestamp(),

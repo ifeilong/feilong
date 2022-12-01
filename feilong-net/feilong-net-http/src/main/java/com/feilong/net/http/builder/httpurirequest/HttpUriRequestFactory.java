@@ -26,6 +26,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.NotImplementedException;
 import com.feilong.net.UncheckedHttpException;
@@ -33,7 +34,6 @@ import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.RequestConfigBuilder;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * A factory for creating {@link HttpUriRequest} objects.
@@ -113,7 +113,7 @@ public class HttpUriRequestFactory{
         try{
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            String message = Slf4jUtil.format("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
+            String message = StringUtil.formatPattern("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
             throw new UncheckedHttpException(message, e);
         }
     }

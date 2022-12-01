@@ -19,7 +19,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * 
@@ -115,7 +115,7 @@ public class LogAndBotCombination{
      *            the arguments
      */
     private static void log(Logger logger,Bot bot,String type,String pattern,Object...arguments){
-        String format = Slf4jUtil.format(pattern, arguments);
+        String format = StringUtil.formatPattern(pattern, arguments);
 
         if (null != logger){
             log(logger, type, pattern, arguments);

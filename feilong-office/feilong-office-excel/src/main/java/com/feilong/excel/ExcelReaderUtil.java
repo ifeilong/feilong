@@ -31,11 +31,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.ReadStatus;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 专门用来读取 excel 的.
@@ -229,7 +229,7 @@ public class ExcelReaderUtil{
         List<Exception> exceptions = readStatus.getExceptions();
         String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
         throw new DefaultRuntimeException(
-                        Slf4jUtil.format(
+                        StringUtil.formatPattern(
                                         pattern,
                                         status,
                                         readStatus.getMessage(), //

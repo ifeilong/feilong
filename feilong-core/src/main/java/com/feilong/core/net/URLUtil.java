@@ -18,7 +18,6 @@ package com.feilong.core.net;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.StringUtil.EMPTY;
-import static com.feilong.tools.slf4j.Slf4jUtil.format;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
 
 /**
@@ -205,7 +205,7 @@ public final class URLUtil{
         try{
             return new File(filePath).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (Exception e){
-            throw new URIParseException(format("filePath:[{}]", filePath), e);
+            throw new URIParseException(StringUtil.formatPattern("filePath:[{}]", filePath), e);
         }
     }
 
@@ -230,7 +230,7 @@ public final class URLUtil{
         try{
             return url.toURI();
         }catch (URISyntaxException e){
-            throw new URIParseException(format("input url:[{}]", url), e);
+            throw new URIParseException(StringUtil.formatPattern("input url:[{}]", url), e);
         }
     }
 
@@ -255,7 +255,7 @@ public final class URLUtil{
         try{
             return url == null ? null : url.openStream();
         }catch (IOException e){
-            throw new UncheckedIOException(format("openStream url:[{}]", url), e);
+            throw new UncheckedIOException(StringUtil.formatPattern("openStream url:[{}]", url), e);
         }
     }
 
@@ -294,7 +294,7 @@ public final class URLUtil{
             }
             return new URL(context, spec).toString();
         }catch (Exception e){
-            String message = format("context:[{}],spec:[{}]", context, spec);
+            String message = StringUtil.formatPattern("context:[{}],spec:[{}]", context, spec);
             throw new URIParseException(message, e);
         }
     }
@@ -383,7 +383,7 @@ public final class URLUtil{
             URL contextUrl = new URL(context);
             return getUnionUrl(contextUrl, spec);
         }catch (Exception e){
-            String message = format("context:[{}],spec:[{}]", context, spec);
+            String message = StringUtil.formatPattern("context:[{}],spec:[{}]", context, spec);
             throw new URIParseException(message, e);
         }
     }

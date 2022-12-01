@@ -16,10 +16,10 @@
 package com.feilong.core.net.paramutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.net.ParamUtil.addParameterArrayValueMap;
 import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class ParamUtilAddParameterArrayValueMapTest.
@@ -52,7 +52,7 @@ public class AddParameterArrayValueMapTest{
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
         assertEquals(
-                        Slf4jUtil.format(
+                        StringUtil.formatPattern(
                                         PATH + "?receiver={}&receiver={}&province={}&city={}",
                                         encode("鑫哥", UTF8),
                                         encode("feilong", UTF8),
@@ -73,7 +73,7 @@ public class AddParameterArrayValueMapTest{
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
         assertEquals(
-                        Slf4jUtil.format(PATH + "?a=b&province={}&city={}", encode("江苏省", UTF8), encode("南通市", UTF8)),
+                        StringUtil.formatPattern(PATH + "?a=b&province={}&city={}", encode("江苏省", UTF8), encode("南通市", UTF8)),
                         addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
@@ -89,7 +89,7 @@ public class AddParameterArrayValueMapTest{
         keyAndArrayMap.put("city", new String[] { "南通市", "无锡" });
 
         assertEquals(
-                        Slf4jUtil.format(
+                        StringUtil.formatPattern(
                                         PATH + "?a=b&city={}&city={}&province={}",
                                         encode("南通市", UTF8),
                                         encode("无锡", UTF8),
