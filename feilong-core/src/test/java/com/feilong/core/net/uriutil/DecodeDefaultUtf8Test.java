@@ -27,15 +27,9 @@ import com.feilong.core.net.URIUtil;
  */
 public class DecodeDefaultUtf8Test{
 
-    @Test
-    public void testDecodeBlankValue(){
-
-    }
-
     /**
      * Test last percent.
      */
-    // @Test
     @Test(expected = URIParseException.class)
     public void testLastPercent(){
         URIUtil.decode("%");

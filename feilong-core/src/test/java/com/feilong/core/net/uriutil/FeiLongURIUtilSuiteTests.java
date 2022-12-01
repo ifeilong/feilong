@@ -35,6 +35,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 DecodeTest.class,
                 DecodeDefaultUtf8Test.class,
+                DecodeDefaultUtf8OrDefaultParameterizedTest.class,
 
                 DecodeParameterizedTest.class,
                 DecodeDefaultUtf8ParameterizedTest.class,

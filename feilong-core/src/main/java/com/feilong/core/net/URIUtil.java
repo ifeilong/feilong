@@ -516,6 +516,88 @@ public final class URIUtil{
     }
 
     /**
+     * 使用默认的<code>utf-8</code> 来解码一个 <code>application/x-www-form-urlencoded</code> 格式的字符串,如果有异常,返回默认值 <code>defaultValue</code>.
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * 
+     * <li>不要用{@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
+     * 
+     * <li>
+     * <a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>
+     * 建议指出,{@link CharsetType#UTF8}应该被使用.不这样做可能会带来兼容性能.
+     * </li>
+     * 
+     * <li>
+     * 如果字符串最后的字符是 "%" 符号,那么URLDecoder将会抛出 exception;如果 "%" 符号在字符串中间,那么不会抛出异常.
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     *
+     * @param value
+     *            需要被解码的值
+     * @param defaultValue
+     *            the default value
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
+     *      URLDecoder: Incomplete trailing escape (%) pattern</a>
+     * @see java.net.URLDecoder#decode(String, String)
+     * @see "org.springframework.web.util.UriUtils#decode(String, String)"
+     * @since 3.3.8
+     */
+    public static String decodeIfExceptionDefault(String value,String defaultValue){
+        return decodeIfExceptionDefault(value, UTF8, defaultValue);
+    }
+
+    /**
+     * 使用指定的编码格式 <code>charsetType</code> 来解码一个 <code>application/x-www-form-urlencoded</code> 格式的字符串,如果有异常,返回默认值 <code>defaultValue</code>.
+     * .
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * 
+     * <li>不要用{@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
+     * 
+     * <li>
+     * <a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>
+     * 建议指出,{@link CharsetType#UTF8}应该被使用.不这样做可能会带来兼容性能.
+     * </li>
+     * 
+     * <li>
+     * 如果字符串最后的字符是 "%" 符号,那么URLDecoder将会抛出 exception;如果 "%" 符号在字符串中间,那么不会抛出异常.
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     *
+     * @param value
+     *            需要被解码的值
+     * @param charsetType
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
+     * @param defaultValue
+     *            the default value
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
+     * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
+     *      URLDecoder: Incomplete trailing escape (%) pattern</a>
+     * @see java.net.URLDecoder#decode(String, String)
+     * @see "org.springframework.web.util.UriUtils#decode(String, String)"
+     * @since 3.3.8
+     */
+    public static String decodeIfExceptionDefault(String value,String charsetType,String defaultValue){
+        try{
+            return encodeOrDecode(value, charsetType, false);
+        }catch (Exception e){
+            return defaultValue;
+        }
+    }
+
+    /**
      * 使用指定的编码格式 <code>charsetType</code> 来解码一个 <code>application/x-www-form-urlencoded</code> 格式的字符串 .
      * 
      * <h3>说明:</h3>
