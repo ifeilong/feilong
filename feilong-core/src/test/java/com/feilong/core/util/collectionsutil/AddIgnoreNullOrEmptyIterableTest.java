@@ -16,6 +16,7 @@
 package com.feilong.core.util.collectionsutil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toSet;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -26,20 +27,13 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 
-/**
- * The Class CollectionsUtilAddIgnoreNullOrEmptyTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
-public class AddIgnoreNullOrEmptyTest{
+public class AddIgnoreNullOrEmptyIterableTest{
 
-    /**
-     * Test add ignore null or empty 2.
-     */
     @Test
     public void testAddIgnoreNullOrEmpty2(){
         List<String> list = toList("xinge", "feilong1");
-        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge"));
+
+        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, toList("xinge")));
         assertThat(list, contains("xinge", "feilong1", "xinge"));
     }
     //*************CollectionsUtil.addIgnoreNullOrEmpty(Collection<Object>, Object)**********
@@ -49,15 +43,7 @@ public class AddIgnoreNullOrEmptyTest{
      */
     @Test(expected = NullPointerException.class)
     public void testAddIgnoreNullOrEmptyNullObjectCollection(){
-        CollectionsUtil.addIgnoreNullOrEmpty(null, (Object[]) null);
-    }
-
-    /**
-     * Test add ignore null or empty 1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddIgnoreNullOrEmptyNullObjectCollection1(){
-        CollectionsUtil.addIgnoreNullOrEmpty(null, "");
+        CollectionsUtil.addIgnoreNullOrEmpty(null, (List<String>) null);
     }
 
     /**
@@ -66,7 +52,9 @@ public class AddIgnoreNullOrEmptyTest{
     @Test
     public void testAddIgnoreNullOrEmptyEmptyElement(){
         List<String> list = toList("xinge", "feilong1");
-        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, "  "));
+
+        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, toList("  ")));
+
         assertThat(list, contains("xinge", "feilong1"));
     }
 
@@ -76,7 +64,7 @@ public class AddIgnoreNullOrEmptyTest{
     @Test
     public void testAddIgnoreNullOrEmptyEmptyElement1(){
         List<String> list = toList("xinge", "feilong1");
-        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, ""));
+        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, toList("")));
         assertThat(list, contains("xinge", "feilong1"));
     }
 
@@ -84,8 +72,15 @@ public class AddIgnoreNullOrEmptyTest{
     public void testAddIgnoreNullOrEmptyEmptyElement12(){
         List<String> list = toList("xinge", "feilong1");
 
-        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "44", null));
+        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, toSet("44", null)));
 
+        assertThat(list, contains("xinge", "feilong1", "44"));
+    }
+
+    @Test
+    public void testAddIgnoreNullOrEmptyEmptyElementList(){
+        List<String> list = toList("xinge", "feilong1");
+        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, toList("44", null)));
         assertThat(list, contains("xinge", "feilong1", "44"));
     }
 

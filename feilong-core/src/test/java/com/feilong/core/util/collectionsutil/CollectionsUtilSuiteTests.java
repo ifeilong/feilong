@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 AddAllIgnoreNullTest.class,
                 AddIgnoreNullOrEmptyTest.class,
+                AddIgnoreNullOrEmptyIterableTest.class,
                 AddIfConditionTest.class,
 
                 IndexOfTest.class,
