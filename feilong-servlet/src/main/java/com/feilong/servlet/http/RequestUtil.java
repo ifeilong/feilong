@@ -22,6 +22,8 @@ import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
@@ -48,6 +50,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -947,6 +950,57 @@ public final class RequestUtil{
     //--------------------------Header-------------------------------------
 
     /**
+     * 取指定<code>headerName</code>的 header 值.
+     * 
+     * @param request
+     *            the request
+     * @param headerName
+     *            headerName 名字,不区分大小写
+     * @return 如果请求不包含指定名称的标头，则此方法返回null;<br>
+     *         如果有多个具有相同名称的头，此方法将返回请求中的第一个头
+     * @since 3.3.9
+     */
+    public static String getHeader(HttpServletRequest request,String headerName){
+        return request.getHeader(headerName);
+    }
+
+    /**
+     * 取指定<code>headerName</code>的 header 值转成Integer类型返回.
+     *
+     * @param request
+     *            the request
+     * @param headerName
+     *            headerName 名字,不区分大小写
+     * @return 如果请求不包含指定名称的标头，则此方法返回null;<br>
+     *         如果有多个具有相同名称的头，此方法将返回请求中的第一个头
+     *         否则,返回 header value Integer 类型
+     * @see Cookie#getValue()
+     * @since 3.3.9
+     */
+    public static Integer getHeaderIntegerValue(HttpServletRequest request,String headerName){
+        String value = getHeader(request, headerName);
+        return toInteger(value);
+    }
+
+    /**
+     * 取指定<code>cookieName</code>的 {@link Cookie}值转成Long类型返回.
+     *
+     * @param request
+     *            the request
+     * @param headerName
+     *            headerName 名字,不区分大小写
+     * @return 如果请求不包含指定名称的标头，则此方法返回null;<br>
+     *         如果有多个具有相同名称的头，此方法将返回请求中的第一个头
+     *         否则,返回 header value Long 类型
+     * @see Cookie#getValue()
+     * @since 3.3.9
+     */
+    public static Long getHeaderLongValue(HttpServletRequest request,String headerName){
+        String value = getHeader(request, headerName);
+        return toLong(value);
+    }
+
+    /**
      * 获得客户端真实ip地址.
      * 
      * <p>
@@ -965,7 +1019,7 @@ public final class RequestUtil{
         Map<String, String> map = newLinkedHashMap();
         for (String ipHeaderName : IP_HEADER_NAMES){
             //The header name is case insensitive (不区分大小写)
-            map.put(ipHeaderName, request.getHeader(ipHeaderName));
+            map.put(ipHeaderName, getHeader(request, ipHeaderName));
         }
         map.put("request.getRemoteAddr()", request.getRemoteAddr());
         return getClientIp(map);
@@ -1015,7 +1069,7 @@ public final class RequestUtil{
      * @see HttpHeaders#USER_AGENT
      */
     public static String getHeaderUserAgent(HttpServletRequest request){
-        return request.getHeader(USER_AGENT);
+        return getHeader(request, USER_AGENT);
     }
 
     /**
@@ -1140,7 +1194,7 @@ public final class RequestUtil{
      * @see <a href="http://www.blogjava.net/jiangjf/archive/2014/01/27/201339.html">关于referer的获取问题</a>
      */
     public static String getHeaderReferer(HttpServletRequest request){
-        return request.getHeader(REFERER);
+        return getHeader(request, REFERER);
     }
 
     /**
@@ -1154,7 +1208,7 @@ public final class RequestUtil{
      * @see HttpHeaders#ORIGIN
      */
     public static String getHeaderOrigin(HttpServletRequest request){
-        return request.getHeader(ORIGIN);
+        return getHeader(request, ORIGIN);
     }
 
     /**
@@ -1189,7 +1243,7 @@ public final class RequestUtil{
         Map<String, String> map = new TreeMap<>();
         while (headerNames.hasMoreElements()){
             String name = headerNames.nextElement();
-            map.put(name, request.getHeader(name));
+            map.put(name, getHeader(request, name));
         }
         return map;
     }
@@ -1317,7 +1371,7 @@ public final class RequestUtil{
      * @since 3.1.0
      */
     private static boolean userAgentContainsString(HttpServletRequest request,String s){
-        String userAgent = RequestUtil.getHeaderUserAgent(request);
+        String userAgent = getHeaderUserAgent(request);
         if (isNullOrEmpty(userAgent)){
             return false;
         }
@@ -1341,7 +1395,7 @@ public final class RequestUtil{
      * @see "http://en.wikipedia.org/wiki/X-Requested-With#Requested-With"
      */
     public static boolean isAjaxRequest(HttpServletRequest request){
-        String header = request.getHeader(X_REQUESTED_WITH);
+        String header = getHeader(request, X_REQUESTED_WITH);
         return isNotNullOrEmpty(header) && header.equalsIgnoreCase(X_REQUESTED_WITH_VALUE_AJAX);
     }
 
