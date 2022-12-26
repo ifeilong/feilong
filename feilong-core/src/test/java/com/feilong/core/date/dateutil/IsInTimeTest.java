@@ -15,15 +15,13 @@
  */
 package com.feilong.core.date.dateutil;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.date.DateUtil.isInTime;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.isInTime;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
  * The Class DateUtilIsInTimeTest.
@@ -45,7 +43,7 @@ public class IsInTimeTest{
                                         toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME)));
 
         assertSame(
-                        false,
+                        true,
                         isInTime(
                                         toDate("2016-06-12", COMMON_DATE),
                                         toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME),

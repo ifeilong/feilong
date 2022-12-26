@@ -1723,6 +1723,10 @@ public final class DateUtil{
     /**
      * 判断当前时间 是否在格式是<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
      * 
+     * <p>
+     * 判断逻辑 <span style="color:green">date{@code >=}beginDate &&date {@code <=}endDate</span>
+     * </p>
+     * 
      * <h3>使用场景:</h3>
      * <blockquote>
      * 比如当日达,判断下单的时间是否是 08:00-16:00 之间, 超过这个时间段的订单不能下
@@ -1752,6 +1756,11 @@ public final class DateUtil{
 
     /**
      * 判断指定时间 <code>date</code>, 是否在格式是<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <p>
+     * 判断逻辑 <span style="color:green">date{@code >=}beginDate &&date {@code <=}endDate</span>
+     * </p>
+     * 
      * 
      * <h3>使用场景:</h3>
      * <blockquote>
@@ -1806,6 +1815,10 @@ public final class DateUtil{
     /**
      * 判断指定日期 <code>date</code> 是否在 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
      * 
+     * <p>
+     * 判断逻辑 <span style="color:green">date{@code >=}beginDate &&date {@code <=}endDate</span>
+     * </p>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -1832,7 +1845,11 @@ public final class DateUtil{
         Validate.notNull(beginDate, "beginDate can't be null!");
         Validate.notNull(endDate, "endDate can't be null!");
         //底层 用的是  date> beginDate && date <endDate
-        return date.after(beginDate) && date.before(endDate);
+        //return date.after(beginDate) && date.before(endDate);
+
+        //date>=beginDate &&date <=endDate
+        return (date.compareTo(beginDate) == 0 || date.compareTo(beginDate) == 1)
+                        && (date.compareTo(endDate) == 0 || date.compareTo(endDate) == -1);
     }
 
     //---------------------------------------------------------------
