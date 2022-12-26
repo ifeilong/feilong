@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang.reflect;
 
-import static com.feilong.core.bean.ConvertUtil.convert;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -26,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
+import com.feilong.core.lang.ClassUtil;
 
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
@@ -243,6 +242,7 @@ public final class TypeUtil{
      * @since 1.1.1
      */
     private static Class<?>[] extractActualTypeArgumentClassArray(ParameterizedType parameterizedType){
+        //com.feilong.core.lang.reflect.typeutil.BaseSolrRepositorySecondImpl<com.feilong.core.lang.reflect.typeutil.SkuItem, com.feilong.core.lang.reflect.typeutil.SkuItem3<java.lang.Long>>
         Validate.notNull(parameterizedType, "parameterizedType can't be null/empty!");
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("parameterizedType info:[{}]", parameterizedType);
@@ -256,6 +256,35 @@ public final class TypeUtil{
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, ToStringConfig.DEFAULT_CONNECTOR));
         }
-        return convert(actualTypeArguments, Class[].class);
+        return toClassArray(actualTypeArguments);
+    }
+
+    /**
+     * @param actualTypeArguments
+     * @return
+     * @since 3.3.9
+     */
+    private static Class<?>[] toClassArray(Type[] actualTypeArguments){
+        Class<?>[] classArray = new Class[actualTypeArguments.length];
+        for (int i = 0; i < actualTypeArguments.length; ++i){
+            Type type = actualTypeArguments[i];
+            classArray[i] = toClass(type);
+        }
+        return classArray;
+        //        return convert(actualTypeArguments, Class[].class);
+        //不能强转, 这种第二个参数是ParameterizedType 类型, 会报错
+        // com.feilong.core.lang.reflect.typeutil.BaseSolrRepositorySecondImpl<com.feilong.core.lang.reflect.typeutil.SkuItem, com.feilong.core.lang.reflect.typeutil.SkuItem3<java.lang.Long>>
+
+    }
+
+    private static Class<?> toClass(Type type){
+        if (ClassUtil.isInstance(type, Class.class)){
+            return (Class<?>) type;
+        }
+
+        if (ClassUtil.isInstance(type, ParameterizedType.class)){
+            return (Class<?>) (((ParameterizedType) type).getRawType());
+        }
+        throw new UnsupportedOperationException("" + type + " not support!");
     }
 }

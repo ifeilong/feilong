@@ -15,24 +15,22 @@
  */
 package com.feilong.core.lang.reflect.typeutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.TypeUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-
-/**
- * The Class TypeUtilGetGenericSuperclassParameterizedRawTypesTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class GetGenericSuperclassParameterizedRawTypesTest{
 
-    /**
-     * Test get generic superclass parameterized raw types.
-     */
+    @Test
+    public void test3(){
+        Class<?>[] rawTypes = TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl3.class);
+        assertArrayEquals(toArray(SkuItem.class, SkuItem3.class), rawTypes);
+    }
+
+    //---------------------------------------------------------------
     @Test
     public void testGetGenericSuperclassParameterizedRawTypes(){
         Class<?>[] genericSuperclassParameterizedRawTypes = TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl.class);

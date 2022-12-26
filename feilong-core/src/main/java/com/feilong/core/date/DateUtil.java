@@ -1721,37 +1721,6 @@ public final class DateUtil{
     // [start]isInTime 时间区间内
 
     /**
-     * 判断指定日期 <code>date</code> 是否在 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00") = true
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param date
-     *            指定日期
-     * @param beginDate
-     *            开始时间
-     * @param endDate
-     *            结束时间
-     * @return 如果 <code>date</code> 在 <code>beginDate</code>之后, 并且指定日期 <code>date</code> 在 <code>endDate</code>之前,返回true<br>
-     * @throws NullPointerException
-     *             如果 <code>date</code> 是null,或者 <code>beginDate</code> 是null 或者 <code>endDate</code> 是null
-     * @see Date#after(Date)
-     * @see Date#before(Date)
-     */
-    public static boolean isInTime(Date date,Date beginDate,Date endDate){
-        Validate.notNull(date, "date can't be null!");
-        Validate.notNull(beginDate, "beginDate can't be null!");
-        Validate.notNull(endDate, "endDate can't be null!");
-        return date.after(beginDate) && date.before(endDate);
-    }
-
-    /**
      * 判断当前时间 是否在格式是<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
      * 
      * <h3>使用场景:</h3>
@@ -1832,6 +1801,37 @@ public final class DateUtil{
         Date endDate = toDate(endDateString, datePattern);
 
         return isInTime(compareDate, beginDate, endDate);
+    }
+
+    /**
+     * 判断指定日期 <code>date</code> 是否在 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00") = true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            指定日期
+     * @param beginDate
+     *            开始时间
+     * @param endDate
+     *            结束时间
+     * @return 如果 <code>date</code> 在 <code>beginDate</code>之后, 并且指定日期 <code>date</code> 在 <code>endDate</code>之前,返回true<br>
+     * @throws NullPointerException
+     *             如果 <code>date</code> 是null,或者 <code>beginDate</code> 是null 或者 <code>endDate</code> 是null
+     * @see Date#after(Date)
+     * @see Date#before(Date)
+     */
+    public static boolean isInTime(Date date,Date beginDate,Date endDate){
+        Validate.notNull(date, "date can't be null!");
+        Validate.notNull(beginDate, "beginDate can't be null!");
+        Validate.notNull(endDate, "endDate can't be null!");
+        return date.after(beginDate) && date.before(endDate);
     }
 
     //---------------------------------------------------------------

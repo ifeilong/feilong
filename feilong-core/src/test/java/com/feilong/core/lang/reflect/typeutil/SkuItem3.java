@@ -22,33 +22,26 @@ import java.io.Serializable;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
-public class SkuItem implements Serializable{
+public class SkuItem3<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 8190409138133199386L;
 
-    /** showOrder 显示顺序. */
-    private float             showOrder;
-
-    //---------------------------------------------------------------
+    private T                 t;
 
     /**
-     * 获得 showOrder 显示顺序.
-     *
-     * @return the showOrder
+     * @return the t
      */
-    public float getShowOrder(){
-        return showOrder;
+    public T getT(){
+        return t;
     }
 
     /**
-     * 设置 showOrder 显示顺序.
-     *
-     * @param showOrder
-     *            the showOrder to set
+     * @param t
+     *            the t to set
      */
-    public void setShowOrder(float showOrder){
-        this.showOrder = showOrder;
+    public void setT(T t){
+        this.t = t;
     }
 
 }
