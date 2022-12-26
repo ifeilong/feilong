@@ -1831,7 +1831,91 @@ public final class DateUtil{
         Validate.notNull(date, "date can't be null!");
         Validate.notNull(beginDate, "beginDate can't be null!");
         Validate.notNull(endDate, "endDate can't be null!");
+        //底层 用的是  date> beginDate && date <endDate
         return date.after(beginDate) && date.before(endDate);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 判断当前时间 不在<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <h3>使用场景:</h3>
+     * <blockquote>
+     * 比如判断图书馆不在有效期,如果不在有效期前端会给出提示
+     * </blockquote>
+     *
+     * @param beginDateString
+     *            开始时间
+     * @param endDateString
+     *            结束时间
+     * @param datePattern
+     *            the date pattern
+     * @return 如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>endDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>endDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see #isInTime(Date, String, String, String)
+     * @since 3.3.9
+     */
+    public static boolean isNotInTime(String beginDateString,String endDateString,String datePattern){
+        return !isInTime(beginDateString, endDateString, datePattern);
+    }
+
+    /**
+     * 判断指定时间 <code>date</code>, 不在格式是<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <h3>使用场景:</h3>
+     * <blockquote>
+     * 比如判断图书馆不在有效期,如果不在有效期前端会给出提示
+     * </blockquote>
+     *
+     * @param date
+     *            the date
+     * @param beginDateString
+     *            开始时间
+     * @param endDateString
+     *            结束时间
+     * @param datePattern
+     *            the date pattern
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>endDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>endDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see #isInTime(Date, Date, Date)
+     * @since 3.3.9
+     */
+    public static boolean isNotInTime(Date date,String beginDateString,String endDateString,String datePattern){
+        return !isInTime(date, beginDateString, endDateString, datePattern);
+    }
+
+    /**
+     * 判断指定日期 <code>date</code> 不在 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * @param date
+     *            指定日期
+     * @param beginDate
+     *            开始时间
+     * @param endDate
+     *            结束时间
+     * @return 如果 <code>date</code> 不在 <code>beginDate</code>和 <code>endDate</code>之间,返回true<br>
+     * @throws NullPointerException
+     *             如果 <code>date</code> 是null,或者 <code>beginDate</code> 是null 或者 <code>endDate</code> 是null
+     * @see Date#after(Date)
+     * @see Date#before(Date)
+     * @since 3.3.9
+     */
+    public static boolean isNotInTime(Date date,Date beginDate,Date endDate){
+        return !isInTime(date, beginDate, endDate);
     }
 
     //---------------------------------------------------------------

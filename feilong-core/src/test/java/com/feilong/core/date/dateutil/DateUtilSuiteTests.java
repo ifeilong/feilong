@@ -79,6 +79,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsInTimeStringTest.class,
                 IsInTimeDateStringTest.class,
 
+                IsNotInTimeTest.class,
+                IsNotInTimeDateStringTest.class,
+                IsNotInTimeStringTest.class,
+
                 IsBeforeTest.class,
                 IsAfterTest.class,
                 IsEqualsTest.class,
