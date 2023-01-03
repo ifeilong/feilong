@@ -28,7 +28,7 @@
 
 		<maven-javadoc-plugin.outputDirectory>${project.build.directory}/apidocs</maven-javadoc-plugin.outputDirectory>
 
-		<version.feilong-common-test>4.1.0</version.feilong-common-test>
+		<version.feilong-common-test>4.1.1</version.feilong-common-test>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
@@ -40,7 +40,7 @@
 		<v.maven-compiler-plugin>3.10.1</v.maven-compiler-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.3.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.4.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>

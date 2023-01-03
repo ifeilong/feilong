@@ -50,7 +50,7 @@
 	<properties>
 		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
 		<version.feilong-platform>3.3.9</version.feilong-platform>
-		<version.feilong-common-test>4.1.0</version.feilong-common-test>
+		<version.feilong-common-test>4.1.1</version.feilong-common-test>
 
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -111,7 +111,7 @@
 		<version.log4j2>2.19.0</version.log4j2>
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
-		<version.logback>1.4.4</version.logback>
+		<version.logback>1.4.5</version.logback>
 
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
@@ -148,8 +148,9 @@
 		<!-- CheckStyle能够帮助Java开发人员准守某些编码规范的工具。它能够自动检查代码。 -->
 		<!-- <v.maven-checkstyle-plugin>2.17</v.maven-checkstyle-plugin> -->
 
+		<!-- https://issues.apache.org/jira/projects/MDEP?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released -->
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.3.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.4.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
@@ -215,7 +216,7 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.13.0</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.14.2</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
 		<v.maven-project-info-reports-plugin>3.4.1</v.maven-project-info-reports-plugin>
