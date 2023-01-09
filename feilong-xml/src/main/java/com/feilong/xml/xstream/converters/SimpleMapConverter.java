@@ -23,15 +23,15 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 import com.feilong.core.Validate;
-import com.feilong.lib.xstream.XStream;
-import com.feilong.lib.xstream.converters.Converter;
-import com.feilong.lib.xstream.converters.MarshallingContext;
-import com.feilong.lib.xstream.converters.UnmarshallingContext;
-import com.feilong.lib.xstream.io.HierarchicalStreamReader;
-import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
-import com.feilong.lib.xstream.io.naming.NameCoder;
-import com.feilong.lib.xstream.io.naming.NoNameCoder;
-import com.feilong.lib.xstream.io.xml.XmlFriendlyNameCoder;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.naming.NameCoder;
+import com.thoughtworks.xstream.io.naming.NoNameCoder;
+import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 
 /**
  * 简单的map 输出.

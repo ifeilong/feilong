@@ -23,12 +23,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.lib.xstream.XStream;
-import com.feilong.lib.xstream.io.naming.NoNameCoder;
-import com.feilong.lib.xstream.io.xml.DomDriver;
 import com.feilong.store.member.User;
 import com.feilong.test.AbstractTest;
 import com.feilong.xml.XmlUtil;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.naming.NoNameCoder;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ToXmlTest extends AbstractTest{
 

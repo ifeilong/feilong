@@ -20,9 +20,12 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.lib.xstream.converters.Converter;
-import com.feilong.lib.xstream.io.xml.CompactWriter;
-import com.feilong.lib.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.io.xml.CompactWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.mapper.ClassAliasingMapper;
+import com.thoughtworks.xstream.mapper.DefaultImplementationsMapper;
 
 /**
  * XStream相关配置.
@@ -120,7 +123,7 @@ public final class XStreamConfig{
      * Instantiates a new x stream config.
      *
      * @param aliasMap
-     *            别名,see {@link com.feilong.lib.xstream.XStream#alias(String, Class)}
+     *            别名,see {@link XStream#alias(String, Class)}
      */
     public XStreamConfig(Map<String, Class<?>> aliasMap){
         this.aliasMap = aliasMap;
@@ -143,7 +146,7 @@ public final class XStreamConfig{
      *
      * @param processAnnotationsTypes
      *            哪个类的注解需要被激活.<br>
-     *            see {@link com.feilong.lib.xstream.XStream#processAnnotations(Class[])}
+     *            see {@link XStream#processAnnotations(Class[])}
      */
     public XStreamConfig(Class<?>...processAnnotationsTypes){
         this.processAnnotationsTypes = processAnnotationsTypes;
@@ -154,7 +157,7 @@ public final class XStreamConfig{
      * 获得 别名.
      *
      * @return the aliasMap
-     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
+     * @see XStream#alias(String, Class)
      */
     public Map<String, Class<?>> getAliasMap(){
         return aliasMap;
@@ -165,7 +168,7 @@ public final class XStreamConfig{
      *
      * @param aliasMap
      *            the aliasMap to set
-     * @see com.feilong.lib.xstream.XStream#alias(String, Class)
+     * @see XStream#alias(String, Class)
      */
     public void setAliasMap(Map<String, Class<?>> aliasMap){
         this.aliasMap = aliasMap;
@@ -215,7 +218,7 @@ public final class XStreamConfig{
      * 哪个类的注解需要被激活.
      *
      * @return 哪个类的注解需要被激活
-     * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
+     * @see XStream#processAnnotations(Class[])
      */
     public Class<?>[] getProcessAnnotationsTypes(){
         return processAnnotationsTypes;
@@ -226,7 +229,7 @@ public final class XStreamConfig{
      *
      * @param processAnnotationsTypes
      *            哪个类的注解需要被激活
-     * @see com.feilong.lib.xstream.XStream#processAnnotations(Class[])
+     * @see XStream#processAnnotations(Class[])
      */
     public void setProcessAnnotationsTypes(Class<?>[] processAnnotationsTypes){
         this.processAnnotationsTypes = processAnnotationsTypes;
@@ -289,9 +292,9 @@ public final class XStreamConfig{
      * </blockquote>
      *
      * @return the defaultImplementationMap
-     * @see com.feilong.lib.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
-     * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
-     * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
+     * @see ClassAliasingMapper#serializedClass(Class)
+     * @see XStream#addDefaultImplementation(Class, Class)
+     * @see DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
     public Map<Class<?>, Class<?>> getDefaultImplementationMap(){
@@ -329,9 +332,9 @@ public final class XStreamConfig{
      * 
      * @param defaultImplementationMap
      *            the defaultImplementationMap to set
-     * @see com.feilong.lib.xstream.mapper.ClassAliasingMapper#serializedClass(Class)
-     * @see com.feilong.lib.xstream.XStream#addDefaultImplementation(Class, Class)
-     * @see com.feilong.lib.xstream.mapper.DefaultImplementationsMapper#serializedClass(Class)
+     * @see ClassAliasingMapper#serializedClass(Class)
+     * @see XStream#addDefaultImplementation(Class, Class)
+     * @see DefaultImplementationsMapper#serializedClass(Class)
      * @since 1.10.7
      */
     public void setDefaultImplementationMap(Map<Class<?>, Class<?>> defaultImplementationMap){

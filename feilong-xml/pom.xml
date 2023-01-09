@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-parent</artifactId>
-		<version>3.3.10</version>
+		<version>3.4.0</version>
 	</parent>
 
 	<artifactId>feilong-xml</artifactId>
@@ -36,9 +36,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ifeilong</groupId>
-			<artifactId>feilong-lib-xstream</artifactId>
-			<version>${version.feilong-platform}</version>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 	</dependencies>

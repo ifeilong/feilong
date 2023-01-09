@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>3.3.10</version>
+	<version>3.4.0</version>
 
 	<packaging>jar</packaging>
 
@@ -21,7 +22,7 @@
 
 	<properties>
 		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
-		<version.feilong-platform>3.3.10</version.feilong-platform>
+		<version.feilong-platform>3.4.0</version.feilong-platform>
 
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,6 +68,12 @@
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
 		<v.nexus-staging-maven-plugin>1.6.8</v.nexus-staging-maven-plugin>
+
+		<!-- http://x-stream.github.io/ -->
+		<!-- This maintenance release addresses the security vulnerabilities CVE-2022-40151 and CVE-2022-41966, causing a Denial of Service by raising a stack overflow.
+			It also provides new converters for Optional and Atomic types. -->
+		<!--<version.xstream>1.4.20</version.xstream> -->
+
 
 		<!-- **********************begin maven-surefire-plugin config******************************************* -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
@@ -278,6 +285,14 @@
 			<version>${version.feilong-platform}</version>
 		</dependency>
 
+		<!-- xstream
+			<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>${version.xstream}</version>
+			<optional>true</optional>
+			</dependency>
+		-->
 	</dependencies>
 
 
@@ -287,6 +302,26 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>${v.maven-shade-plugin}</version>
+
+				<!--
+					<configuration>
+					put your configurations here
+					只包含该项目代码中用到的jar,在父项目中引入了，但在当前模块中没有用到就会被删掉
+					<minimizeJar>true</minimizeJar>
+					重新定位类位置，就好像类是自己写的一样，修改别人jar包的package
+					<relocations>
+					<relocation>
+					<pattern>com.alibaba.fastjson</pattern>
+					<shadedPattern>com.gavinzh.learn.fastjson</shadedPattern>
+					<excludes>
+					这些类和包不会被改变
+					<exclude>com.alibaba.fastjson.not.Exists</exclude>
+					<exclude>com.alibaba.fastjson.not.exists.*</exclude>
+					</excludes>
+					</relocation>
+					</relocations>
+					</configuration> -->
+
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -331,6 +366,73 @@
 						</configuration>
 					</execution>
 				</executions>
+
+				<!--
+
+					<executions>
+					<execution>
+					<configuration>
+					创建一个你自己的标识符，位置在原有名称之后
+					<shadedArtifactAttached>true</shadedArtifactAttached>
+					<shadedClassifierName>gavinzh</shadedClassifierName>
+					在打包过程中对文件做一些处理工作
+					<transformers>
+					在META-INF/MANIFEST.MF文件中添加key: value 可以设置Main方法
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+					<manifestEntries>
+					<mainClass>com.gavinzh.learn.shade.Main</mainClass>
+					<Build-Number>123</Build-Number>
+					<Built-By>your name</Built-By>
+					<X-Compile-Source-JDK>1.7</X-Compile-Source-JDK>
+					<X-Compile-Target-JDK>1.7</X-Compile-Target-JDK>
+					</manifestEntries>
+					</transformer>
+					阻止META-INF/LICENSE和META-INF/LICENSE.txt
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer" />
+					合并所有notice文件
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+					<addHeader>true</addHeader>
+					</transformer>
+					如果多个jar包在META-INF文件夹下含有相同的文件，那么需要将他们合并到一个文件里
+					<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+					<resource>META-INF/spring.handlers</resource>
+					</transformer>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+					<resource>META-INF/spring.schemas</resource>
+					</transformer>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+					<resource>META-INF/spring.factories</resource>
+					</transformer>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+					<resource>META-INF/spring.tld</resource>
+					</transformer>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+					<resource>META-INF/spring-form.tld</resource>
+					</transformer>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+					<resource>META-INF/spring.tooling</resource>
+					</transformer>
+					如果多个jar包在META-INF文件夹下含有相同的xml文件，则需要聚合他们
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />
+					排除掉指定资源文件
+					<transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+					<resource>.no_need</resource>
+					</transformer>
+					将项目下的文件file额外加到resource中
+					<transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+					<resource>META-INF/pom_test</resource>
+					<file>pom.xml</file>
+					</transformer>
+					整合spi服务中META-INF/services/文件夹的相关配置
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+					</transformers>
+					</configuration>
+					<phase>package</phase>
+					<goals>
+					<goal>shade</goal>
+					</goals>
+					</execution>
+					</executions> -->
 			</plugin>
 
 			<!-- maven-compiler-plugin -->

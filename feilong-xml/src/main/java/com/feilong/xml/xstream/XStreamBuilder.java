@@ -23,14 +23,14 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.lib.xstream.XStream;
-import com.feilong.lib.xstream.converters.Converter;
-import com.feilong.lib.xstream.io.HierarchicalStreamDriver;
-import com.feilong.lib.xstream.io.HierarchicalStreamWriter;
-import com.feilong.lib.xstream.io.naming.NoNameCoder;
-import com.feilong.lib.xstream.io.xml.CompactWriter;
-import com.feilong.lib.xstream.io.xml.DomDriver;
-import com.feilong.lib.xstream.security.AnyTypePermission;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.naming.NoNameCoder;
+import com.thoughtworks.xstream.io.xml.CompactWriter;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.AnyTypePermission;
 
 /**
  * 基于 {@link XStreamConfig} 构造 {@link XStream}.
@@ -152,6 +152,7 @@ public final class XStreamBuilder{
         XStream xstream = new XStream(buildHierarchicalStreamDriver(xStreamConfig));
         //since 1.4.7
         xstream.addPermission(AnyTypePermission.ANY);
+
         //自动探测注解
         xstream.autodetectAnnotations(true);
 

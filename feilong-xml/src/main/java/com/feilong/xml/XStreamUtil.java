@@ -15,9 +15,9 @@
  */
 package com.feilong.xml;
 
-import com.feilong.lib.xstream.XStream;
 import com.feilong.xml.xstream.XStreamBuilder;
 import com.feilong.xml.xstream.XStreamConfig;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * 

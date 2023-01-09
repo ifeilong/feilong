@@ -4,10 +4,11 @@ import static com.feilong.core.CharsetType.UTF8;
 
 import org.junit.Test;
 
-import com.feilong.lib.xstream.XStream;
-import com.feilong.lib.xstream.io.naming.NoNameCoder;
-import com.feilong.lib.xstream.io.xml.DomDriver;
 import com.feilong.test.AbstractTest;
+import com.feilong.xml.XmlUtil;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.naming.NoNameCoder;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class XstreamTempTest extends AbstractTest{
 
@@ -23,7 +24,7 @@ public class XstreamTempTest extends AbstractTest{
         String request = objectToXml(requestTest);
         LOGGER.debug(request);
 
-        Response responseTest = xmlToObject(request, Response.class);
+        Response responseTest = XmlUtil.toBean(request, Response.class);
         LOGGER.debug("" + responseTest);
     }
 
@@ -43,26 +44,6 @@ public class XstreamTempTest extends AbstractTest{
         xStream.processAnnotations(obj.getClass());
         return xStream.toXML(obj);
 
-    }
-
-    /**
-     * 将xml转换为bean
-     * 
-     * @param <T>
-     *            泛型
-     * @param xml
-     *            要转换为bean的xml
-     * @param cls
-     *            bean对应的Class
-     * @return xml转换为bean
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T xmlToObject(String xml,Class<T> cls){
-        XStream xstream = new XStream(new DomDriver());//new DomDriver()
-
-        //xstream使用注解转换
-        xstream.processAnnotations(cls);
-        return (T) xstream.fromXML(xml);
     }
 
 }

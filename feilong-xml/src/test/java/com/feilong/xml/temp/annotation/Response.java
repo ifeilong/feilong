@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.feilong.lib.lang3.builder.ToStringBuilder;
 import com.feilong.lib.lang3.builder.ToStringStyle;
-import com.feilong.lib.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("Response")
 public class Response{
