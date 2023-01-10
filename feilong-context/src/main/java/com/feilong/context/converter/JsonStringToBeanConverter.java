@@ -19,8 +19,66 @@ import com.feilong.json.JsonToJavaConfig;
 import com.feilong.json.JsonUtil;
 
 /**
- * json的转换.
+ * json 字符串结果转换成bean.
+ * 
+ * <p>
+ * <b>场景:</b>
+ * 比如doku 支付方式, 在GeneratePayCode流程中,返回的结果json字符串是
+ * </p>
+ * 
+ * <pre class="code">
+ * 原始结果:
+   {
+   "res_pay_code":"00001014",
+   "res_pairing_code":"280618203138833110",
+   "res_response_msg":"SUCCESS",
+   "res_payment_code":"5511",
+   "res_response_code":"0000",
+   "res_session_id":"888"
+   }
+ * </pre>
  *
+ * 此时有java bean
+ * 
+ * <pre class="code">
+ * public class DokuGeneratePayCodeResultCommand implements GeneratePayCodeResultCommand{
+ * 
+ *     private String resPayCode;
+ * 
+ *     private String resPairingCode;
+ * 
+ *     private String resResponseMsg;
+ * 
+ *     private String resPaymentCode;
+ * 
+ *     private String resResponseCode;
+ * 
+ *     private String resSessionId;
+ * 
+ *     //setter getter省略
+ * }
+ * </pre>
+ * 
+ * 返回的json字符串属性带有下划线, 而javabean 是标准的驼峰命名,你可以使用以下配置:
+ * 
+ * <pre>
+{@code
+<property name="stringToBeanConverter">
+    <bean class="com.feilong.context.converter.JsonStringToBeanConverter">
+       <property name="jsonToJavaConfig">
+           <bean class="com.feilong.json.jsonlib.JsonToJavaConfig" p:rootClass=
+"com.feilong.netpay.doku.generatepaycode.DokuGeneratePayCodeResultCommand">
+                <property name="javaIdentifierTransformer">
+                      <bean class="com.feilong.json.jsonlib.transformer.SeparatorToCamelCaseJavaIdentifierTransformer" />
+                </property>
+            </bean>
+        </property>
+     </bean>
+</property>
+}
+ * </pre>
+ * 
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
