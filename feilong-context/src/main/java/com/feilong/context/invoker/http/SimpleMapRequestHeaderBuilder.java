@@ -19,7 +19,45 @@ import java.util.Map;
 
 /**
  * 简单的 map式的.
- *
+ * 
+ * <h3>配置实例:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 对于以下简单的header:
+ * </p>
+ * 
+ * <pre>
+ * public class PixiboDataIntegrationRequestHeaderBuilder implements RequestHeaderBuilder{@code <Object>}{
+ * 
+ *     public Map{@code <String, String>} build(Object request){
+ *         return ConvertUtil.toMap(HttpHeaders.CONTENT_TYPE, MimeType.JSON.getMime());
+ *     }
+ * }
+ * </pre>
+ * 
+ * 
+ * <p>
+ * 可以复用SimpleMapRequestHeaderBuilder ,不需要单独建一个类
+ * </p>
+ * 
+ * <pre>
+{@code
+<property name="requestHeaderBuilder">
+    <bean class="com.feilong.context.invoker.http.SimpleMapRequestHeaderBuilder">
+        <property name="headerMap">
+        <map>
+                <entry key="Content-Type" value="application/json"/>
+            </map>
+         </property>
+      </bean>
+</property>
+
+}
+ * </pre>
+ * 
+ * </blockquote>
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
@@ -33,6 +71,29 @@ public class SimpleMapRequestHeaderBuilder<T> implements RequestHeaderBuilder<T>
 
     //---------------------------------------------------------------
 
+    public SimpleMapRequestHeaderBuilder(){
+    }
+
+    /**
+     * Instantiates a new simple map request header builder.
+     *
+     * @param headerMap
+     *            the header map
+     */
+    public SimpleMapRequestHeaderBuilder(Map<String, String> headerMap){
+        super();
+        this.headerMap = headerMap;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the.
+     *
+     * @param request
+     *            the request
+     * @return the map
+     */
     /*
      * (non-Javadoc)
      * 
@@ -44,6 +105,7 @@ public class SimpleMapRequestHeaderBuilder<T> implements RequestHeaderBuilder<T>
     }
 
     //---------------------------------------------------------------
+
     /**
      * 获得 header map.
      *
