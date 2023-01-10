@@ -36,7 +36,6 @@ import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.codec.binary.Base64;
 import com.feilong.net.bot.AbstractBot;
 import com.feilong.net.bot.dingtalk.message.At;
 import com.feilong.net.bot.dingtalk.message.markdown.DingtalkMarkdownMessage;
@@ -44,6 +43,7 @@ import com.feilong.net.bot.dingtalk.message.markdown.Markdown;
 import com.feilong.net.bot.message.BotMessage;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
+import com.feilong.security.Base64Util;
 import com.feilong.security.EncryptionException;
 
 /**
@@ -248,7 +248,7 @@ public class DefaultDingTalkBot extends AbstractBot implements DingTalkBot{
 
             byte[] signData = hmacUtils.hmac(timestamp + "\n" + secret);
 
-            return URLEncoder.encode(new String(Base64.encodeBase64(signData)), UTF8);
+            return URLEncoder.encode(Base64Util.encodeBase64(signData), UTF8);
         }catch (Exception e){
             throw new EncryptionException(e);
         }

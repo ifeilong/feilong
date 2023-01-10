@@ -21,7 +21,6 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
@@ -29,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
+import com.feilong.security.Base64Util;
 
 /**
  * 专门用来封装请求头 {@link org.apache.http.HttpMessage#setHeader(String, String)}.
@@ -117,9 +117,9 @@ public final class HttpRequestHeadersPacker{
         String password = connectionConfig.getPassword();
 
         if (isNotNullOrEmpty(userName) && isNotNullOrEmpty(password)){
-            String auth = userName + ":" + password;
+            String authString = userName + ":" + password;
 
-            String authHeader = "Basic " + new String(Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII)));
+            String authHeader = "Basic " + Base64Util.encodeBase64(authString, StandardCharsets.US_ASCII);
 
             httpUriRequest.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
         }
