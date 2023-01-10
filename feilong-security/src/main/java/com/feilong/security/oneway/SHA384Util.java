@@ -82,6 +82,23 @@ public final class SHA384Util{
         return OnewayEncryption.encode(ONEWAYTYPE, origin, charsetName);
     }
 
+    /**
+     * 使用sha384算法 单向加密 inputBytes.
+     * 
+     * <p>
+     * 加密之后的转成<span style="color:green">小写的</span>16进制,长度32位的字符串
+     * </p>
+     *
+     * @param inputBytes
+     *            the input bytes
+     * @return 加密之后的转成 <span style="color:green">小写的</span>16进制字符串
+     * @see OnewayEncryption#encode(OnewayType, byte[])
+     * @since 3.4.0
+     */
+    public static String encode(byte[] inputBytes){
+        return OnewayEncryption.encode(ONEWAYTYPE, inputBytes);
+    }
+
     //---------------------------------------------------------------
 
     /**
