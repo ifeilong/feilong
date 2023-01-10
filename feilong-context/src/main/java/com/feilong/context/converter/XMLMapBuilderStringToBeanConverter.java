@@ -22,8 +22,56 @@ import com.feilong.context.converter.builder.XmlNodeNameAndValueMapBuilder;
 import com.feilong.xml.XmlUtil;
 
 /**
- * xml的转换.
+ * xml格式的字符串转换成bean.
+ * 
+ * <p>
+ * <b>场景:</b>
+ * 比如(交易关闭接口(close_trade)),返回的结果字符串是
+ * </p>
+ * 
+ * 原始结果:
+ * 
+ * <pre>
+{@code
+<alipay>
+    <is_success>F</is_success>
+    <error>TRADE_STATUS_NOT_AVAILD</error>
+</alipay>
+}
+ * </pre>
  *
+ * 此时有java bean
+ * 
+ * <pre class="code">
+ * public class AlipayCloseResultCommand extends AlipaySimpleResult implements CloseResultCommand{
+ * 
+ *     private String originalResult;
+ * 
+ *     //setter getter省略
+ * }
+ * </pre>
+ * 
+ * 你可以使用以下配置:
+ * 
+ * <pre>
+{@code
+<property name="stringToBeanConverter">
+
+    <bean class="com.feilong.context.converter.XMLMapBuilderStringToBeanConverter">
+        <property name="beanClass" value="com.feilong.netpay.alipay.close.AlipayCloseResultCommand" />
+
+        <property name="nameAndValueMapBuilder">
+            <bean class="com.feilong.context.converter.builder.XmlNodeNameAndValueMapBuilder" p:xpathExpression="/alipay/*" />
+        </property>
+
+        <property name="beanBuilder">
+            <bean class="com.feilong.context.converter.builder.CommonBeanBuilder" />
+        </property>
+    </bean>
+</property>
+}
+ * </pre>
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  *            the generic type
