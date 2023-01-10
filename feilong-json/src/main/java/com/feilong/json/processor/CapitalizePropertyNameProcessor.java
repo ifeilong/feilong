@@ -20,7 +20,106 @@ import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 将指定类型下面所有属性名字<b>首字母变大写</b>的处理器.
- *
+ * 
+ * <h3>说明:</h3>
+ * <blockquote>
+ * 
+ * 我们这边的代码
+ * 
+ * <pre class="code">
+ * public class CrmAddpointCommand implements Serializable{
+ * 
+ *     <span style="color:green">// 用户编码</span>
+ *     private String openId;
+ * 
+ *     <span style="color:green">// 渠道：Tmall - 天猫 JD - 京东</span>
+ *     private String consumptionChannel;
+ * 
+ *     <span style="color:green">// 淘宝/京东买家账号</span>
+ *     private String buyerId;
+ * 
+ *     <span style="color:green">// 电商订单编号 </span>
+ *     private String orderCode;
+ * 
+ *     <span style="color:green">// setter getter</span>
+ * }
+ * 
+ * </pre>
+ * 
+ * 符合标准的java代码规范,如果直接使用 {@link com.feilong.json.JsonUtil#format(Object)}
+ * 
+ * <pre class="code">
+ * 
+ * public void testJsonTest(){
+ *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+ * 
+ *     crmAddpointCommand.setBuyerId("123456");
+ *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+ *     crmAddpointCommand.setOpenId("feilong888888ky");
+ *     crmAddpointCommand.setOrderCode("fl123456");
+ * 
+ *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+ * }
+ * 
+ * </pre>
+ * 
+ * <b>输出结果:</b>
+ * 
+ * <pre class="code">
+ * {
+ * "orderCode": "fl123456",
+ * "buyerId": "123456",
+ * "consumptionChannel": "feilongstore",
+ * "openId": "feilong888888ky"
+ * }
+ * 
+ * </pre>
+ * 
+ * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
+ * 
+ * <p>
+ * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png" alt="json">
+ * </p>
+ * 
+ * 此时,你可以使用
+ * 
+ * <pre class="code">
+ * 
+ * public void testJsonTest(){
+ *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+ * 
+ *     crmAddpointCommand.setBuyerId("123456");
+ *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+ *     crmAddpointCommand.setOpenId("feilong888888ky");
+ *     crmAddpointCommand.setOrderCode("fl123456");
+ * 
+ *         //---------------------------------------------------------------
+ * 
+ *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * 
+ *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
+ *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
+ * 
+ *     <span style=
+"color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+ * 
+ *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
+ * }
+ * </pre>
+ * 
+ * <b>输出结果:</b>
+ * 
+ * <pre class="code">
+ * {
+ * "<span style="color:red">O</span>rderCode": "fl123456",
+ * "<span style="color:red">B</span>uyerId": "123456",
+ * "<span style="color:red">C</span>onsumptionChannel": "feilongstore",
+ * "<span style="color:red">O</span>penId": "feilong888888ky"
+ * }
+ * </pre>
+ * 
+ * </blockquote>
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
  * @since 1.9.3

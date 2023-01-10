@@ -20,6 +20,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.json.format.FormatSuiteTests;
+import com.feilong.json.processor.AlbumBrowseRecordJsonTest;
+import com.feilong.json.processor.CrmAddpointCommandJsonTest;
 import com.feilong.json.processor.JsonValueProcessorSuiteTests;
 import com.feilong.json.tobean.ToBeanSuiteTests;
 import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
@@ -41,7 +43,10 @@ import com.feilong.lib.json.util.PropertySetStrategyTest;
 
                 PropertySetStrategyTest.class,
 
-        //
+                AlbumBrowseRecordJsonTest.class,
+                CrmAddpointCommandJsonTest.class
+
+//
 })
 public class SuiteTests{
 
