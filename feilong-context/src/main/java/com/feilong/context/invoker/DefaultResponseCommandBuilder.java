@@ -29,7 +29,7 @@ import com.feilong.json.JsonUtil;
  * <h3>代码流程:</h3>
  * <blockquote>
  * <ol>
- * <li>第1步,通过 调用 {@link ResponseStringBuilder} 来得到响应字符串</li>
+ * <li>第1步,通过调用 {@link ResponseStringBuilder} 来得到响应字符串</li>
  * <li>第2步,将得到的字符串,使用 {@link StringToBeanConverter} 来转换成对象</li>
  * </ol>
  * </blockquote>
@@ -56,14 +56,6 @@ public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends R
     protected StringToBeanConverter<T> stringToBeanConverter;
 
     //---------------------------------------------------------------
-
-    /**
-     * Builds the.
-     *
-     * @param request
-     *            the request
-     * @return the t
-     */
     /*
      * (non-Javadoc)
      * 
@@ -71,17 +63,17 @@ public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends R
      */
     @Override
     public T build(R request){
-        String invokerResponseString = responseStringBuilder.build(request);
+        String responseString = responseStringBuilder.build(request);
         //如果得到不响应的字符串, 将抛出异常
-        if (isNullOrEmpty(invokerResponseString)){
-            throw new InvokerResponseBlankException("invokerResponse can't be null/empty!,request:[{}]", JsonUtil.toString(request));
+        if (isNullOrEmpty(responseString)){
+            throw new InvokerResponseBlankException("responseString can't be null/empty!,request:[{}]", JsonUtil.toString(request));
         }
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("NetpayRequest:[{}],invokerResponse:[{}]", JsonUtil.toString(request), invokerResponseString);
+            LOGGER.info("requestDataInfo:[{}],responseString:[{}]", JsonUtil.toString(request), responseString);
         }
-        return stringToBeanConverter.convert(invokerResponseString);
+        return stringToBeanConverter.convert(responseString);
     }
 
     //---------------------------------------------------------------
