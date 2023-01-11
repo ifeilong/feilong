@@ -49,7 +49,15 @@ class HttpRequestUriResolver{
     //---------------------------------------------------------------
 
     /**
-     * Resolve.
+     * 使用 request 来解析uri.
+     * 
+     * 目前uri 支持3种类型
+     * 
+     * <ol>
+     * <li>固定的, 比如https://api.xxxx.com//openxxxxx-app/album_browse_records</li>
+     * <li>动态的简单占位符,比如 https://api.sandbox.midtrans.com/v2/%s/status</li>
+     * <li>动态的,复杂模版,比如 https://api.sandbox.midtrans.com/v2/${defaultCloseRequest.tradeNo}/cancel,使用Velocity 来解析</li>
+     * </ol>
      *
      * @param <T>
      *            the generic type
@@ -67,10 +75,16 @@ class HttpRequestUriResolver{
     static <T> String resolve(String uri,T request){
         Validate.notBlank(uri, "uri can't be blank!");
 
+        //是不是format 或者模版url,如果不是,那么直接返回
+        boolean isFormatOrTemplateUri = StringUtils.containsAny(uri, "%s", "${");
+        if (!isFormatOrTemplateUri){
+            return uri;
+        }
+
         //---------------------------------------------------------------
         String result = parse(uri, request);
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parse uri:[{}],request:[{}],result:[{}]", uri, JsonUtil.toString(request), result);
+            LOGGER.debug("parseUri:[{}],request:[{}],result:[{}]", uri, JsonUtil.toString(request), result);
         }
         return result;
     }
@@ -93,14 +107,17 @@ class HttpRequestUriResolver{
      */
     private static <T> String parse(String uri,T request){
         //since 1.14.0
+        //常用于只有1个参数的 简单动态url 解析, 比如https://api.sandbox.midtrans.com/v2/%s/status
+        //参数是 56677 这种字符串查询订单状态
         if (uri.contains("%s")){
             return StringUtil.format(uri, request);
         }
 
         //---------------------------------------------------------------
         //use Velocity
+        //适用于 https://api.sandbox.midtrans.com/v2/${defaultCloseRequest.tradeNo}/cancel
         if (uri.contains("${")){
-            return resolveTemplate(uri, request);
+            return resolveTemplateUri(uri, request);
         }
         //---------------------------------------------------------------
         return uri;
@@ -109,29 +126,30 @@ class HttpRequestUriResolver{
     //---------------------------------------------------------------
 
     /**
-     * Resolve template.
+     * 动态的,复杂模版,比如 https://api.sandbox.midtrans.com/v2/${defaultCloseRequest.tradeNo}/cancel,使用Velocity 来解析.
+     * 
+     * 其中 Velocity key 是 指定参数T request 的class SimpleName 首字母小写
      *
      * @param <T>
      *            the generic type
      * @param uri
-     *            the uri
+     *            支持复杂模版,比如 https://api.sandbox.midtrans.com/v2/${defaultCloseRequest.tradeNo}/cancel
      * @param request
      *            the request
      * @return the string
      */
-    private static <T> String resolveTemplate(String uri,T request){
+    private static <T> String resolveTemplateUri(String uri,T request){
         Validate.notNull(request, "request can't be null!");
 
         //---------------------------------------------------------------
-
         //key 是类名首字母小写
         String attributeName = StringUtils.uncapitalize(request.getClass().getSimpleName());
-        Map<String, T> map = toMap(attributeName, request);
+        Map<String, T> templateParams = toMap(attributeName, request);
 
-        String result = TemplateUtil.parseString(uri, map);
+        String result = TemplateUtil.parseString(uri, templateParams);
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parse uri:[{}],use map:[{}],result:[{}]", uri, JsonUtil.formatSimpleMap(map), result);
+            LOGGER.debug("parseTemplateUri:[{}],useTemplateParams:[{}],result:[{}]", uri, JsonUtil.formatSimpleMap(templateParams), result);
         }
         return result;
     }
