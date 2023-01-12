@@ -39,12 +39,11 @@ public class DefaultHttpRequestBuilder<T> implements HttpRequestBuilder<T>{
     private HttpTypeBeanProperty    httpTypeBeanProperty;
 
     //---------------------------------------------------------------
+    /** 请求头构造器. */
+    private RequestHeaderBuilder<T> requestHeaderBuilder;
 
     /** 请求参数构造器. */
     private RequestParamsBuilder<T> requestParamsBuilder;
-
-    /** 请求头构造器. */
-    private RequestHeaderBuilder<T> requestHeaderBuilder;
 
     /** 请求体构造器. */
     private RequestBodyBuilder<T>   requestBodyBuilder;

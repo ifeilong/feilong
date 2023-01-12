@@ -15,13 +15,7 @@
  */
 package com.feilong.context.invoker;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.context.converter.StringToBeanConverter;
-import com.feilong.json.JsonUtil;
 
 /**
  * 默认的响应结果对象构造器.
@@ -42,39 +36,14 @@ import com.feilong.json.JsonUtil;
  * @see DefaultRequestResultInvoker
  * @since 1.11.3
  */
-public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends ResponseCommand> implements ResponseCommandBuilder<R, T>{
-
-    /** The Constant LOGGER. */
-    private static final Logger        LOGGER = LoggerFactory.getLogger(DefaultResponseCommandBuilder.class);
-
-    //---------------------------------------------------------------
+public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends ResponseCommand>
+                extends AbstractResponseCommandBuilder<R, T>{
 
     /** 响应结果字符串构造器. */
-    protected ResponseStringBuilder<R> responseStringBuilder;
+    private ResponseStringBuilder<R> responseStringBuilder;
 
     /** 字符串转换成bean 转换器. */
-    protected StringToBeanConverter<T> stringToBeanConverter;
-
-    //---------------------------------------------------------------
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.context.invoker.ResponseCommandBuilder#build(com.feilong.context.invoker.InvokerRequest)
-     */
-    @Override
-    public T build(R request){
-        String responseString = responseStringBuilder.build(request);
-        //如果得到不响应的字符串, 将抛出异常
-        if (isNullOrEmpty(responseString)){
-            throw new InvokerResponseBlankException("responseString can't be null/empty!,request:[{}]", JsonUtil.toString(request));
-        }
-
-        //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("requestDataInfo:[{}],responseString:[{}]", JsonUtil.toString(request), responseString);
-        }
-        return stringToBeanConverter.convert(responseString);
-    }
+    private StringToBeanConverter<T> stringToBeanConverter;
 
     //---------------------------------------------------------------
 
@@ -96,6 +65,28 @@ public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends R
      */
     public void setStringToBeanConverter(StringToBeanConverter<T> stringToBeanConverter){
         this.stringToBeanConverter = stringToBeanConverter;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得 响应结果字符串构造器.
+     *
+     * @return the 响应结果字符串构造器
+     */
+    @Override
+    protected ResponseStringBuilder<R> createResponseStringBuilder(){
+        return responseStringBuilder;
+    }
+
+    /**
+     * 获得 字符串转换成bean 转换器.
+     *
+     * @return the 字符串转换成bean 转换器
+     */
+    @Override
+    protected StringToBeanConverter<T> createStringToBeanConverter(){
+        return stringToBeanConverter;
     }
 
 }
