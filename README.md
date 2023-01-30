@@ -34,7 +34,8 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 
 ## feilong 的历史
 
-- feilong since 2008, 开始时应对开发过程中不断重复的代码进行了封装,进而在公司进行推广
+feilong since 2008, 起初应对开发过程中不断重复的代码进行了封装,进而在公司内部推广
+
 - `2016-09-22` 开源了 `feilong-core` https://www.oschina.net/p/feilong-core
 - `2016-10-31` 开源了 `feilong-taglib` https://www.oschina.net/p/feilong-taglib
 - `2020-5-26` 开源了 `feilong` https://www.oschina.net/p/feilong
@@ -50,14 +51,14 @@ feilong 自从3.0.0开始,发布中央仓库 https://search.maven.org/artifact/c
 <dependency>
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>3.4.0</version>
+	<version>3.4.1</version>
 </dependency>
 ```
 
 ### `Gradle 配置` 
 
 ```
-com.github.ifeilong:feilong:3.4.0
+com.github.ifeilong:feilong:3.4.1
 ```
 
 ### `非Maven项目`
@@ -66,7 +67,7 @@ com.github.ifeilong:feilong:3.4.0
 
 **注意:**
 - feilong 3 需要 JDK8+，对Android平台没有测试，不能保证所有工具类或工具方法可用。 
-- 如果你的项目使用 JDK7，请使用 feilong core 2.1.0 版本
+- 如果你的项目使用 JDK7，请使用 [feilong-core 2.1.0](https://github.com/ifeilong/feilong-core)  版本
 
 ## How to install?
 
