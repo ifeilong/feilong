@@ -32,6 +32,13 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 
 详细的帮助文档 http://feilong-core.mydoc.io/
 
+
+## :memo: 常用组件/功能
+
+- [使用feilong发企业微信机器人](https://github.com/ifeilong/feilong/wiki/使用feilong发企业微信机器人)
+
+
+
 ## feilong 的历史
 
 feilong since 2008, 起初应对开发过程中不断重复的代码进行了封装,进而在公司内部推广
@@ -116,10 +123,6 @@ feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含
 - [使用 feilong 的理由](https://github.com/ifeilong/feilong/wiki/Reasons-for-use-feilong-core)
 - [feilong3 VS feilong core2 对比](https://github.com/ifeilong/feilong/wiki/feilong3%20VS%20feilong%20core2%20%E5%AF%B9%E6%AF%94)
 - [feilong VS hutool对比](https://github.com/ifeilong/feilong/wiki/feilong%20VS%20hutool%E5%AF%B9%E6%AF%94)
-
-## :memo: 常用组件/功能
-
-- [使用feilong发企业微信机器人](https://github.com/ifeilong/feilong/wiki/使用feilong发企业微信机器人)
 
 ## :panda_face: 提bug反馈或建议
 
