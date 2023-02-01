@@ -38,7 +38,6 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 - [使用feilong发企业微信机器人](https://github.com/ifeilong/feilong/wiki/使用feilong发企业微信机器人)
 
 
-
 ## feilong 的历史
 
 feilong since 2008, 起初应对开发过程中不断重复的代码进行了封装,进而在公司内部推广
@@ -84,9 +83,9 @@ com.github.ifeilong:feilong:3.4.1
 git clone https://github.com/ifeilong/feilong.git --depth 1
 mvn install
 ```
-## 子项目地址
+## 子模块介绍
 
-module | 描述
+module | 介绍
 :----  | :---------
 feilong-core |  核心包
 feilong-validator |  常用的校验, 包含可配置式的手机号码, 邮编等等
@@ -116,7 +115,7 @@ feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含
 
 ## :memo: 说明
 
-1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
+1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置 [版权说明](https://github.com/ifeilong/feilong/blob/master/LICENSE) ;
 
 ## :memo: 常见问题
 
@@ -126,7 +125,7 @@ feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含
 
 ## :panda_face: 提bug反馈或建议
 
-提交问题反馈  Github issue https://github.com/ifeilong/feilong/issues
+提交问题反馈 [Github issue](https://github.com/ifeilong/feilong/issues)
 
 ## :cyclone: feilong 即时交流
 
