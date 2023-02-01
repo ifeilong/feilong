@@ -154,7 +154,7 @@
 
 		<!-- https://issues.apache.org/jira/projects/MDEP?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released -->
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.4.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.5.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
@@ -176,7 +176,8 @@
 
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
-		<v.maven-plugin-plugin>3.7.0</v.maven-plugin-plugin>
+		<!-- https://issues.apache.org/jira/projects/MPLUGIN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<v.maven-plugin-plugin>3.7.1</v.maven-plugin-plugin>
 
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->

@@ -41,7 +41,7 @@
 		<v.maven-compiler-plugin>3.10.1</v.maven-compiler-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.4.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.5.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
