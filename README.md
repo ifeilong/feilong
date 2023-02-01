@@ -123,17 +123,10 @@ feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含
 
 ## :panda_face: 提bug反馈或建议
 
-提交问题反馈
-
-- Github issue https://github.com/ifeilong/feilong/issues
-- 码云Gitee issue https://gitee.com/ifeilong/feilong/issues
+提交问题反馈  Github issue https://github.com/ifeilong/feilong/issues
 
 ## :cyclone: feilong 即时交流
 
-微信公众号 feilong飞龙
-
-|![](https://ifeilong.oss-cn-beijing.aliyuncs.com/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png)
-
-|QQ 群 `243306798`
-|:---------
-|![](http://i.imgur.com/cIfglCa.png)
+|QQ 群 `243306798` | 微信公众号 feilong飞龙
+|:---------|:---------
+|![](http://i.imgur.com/cIfglCa.png)  |![](https://ifeilong.oss-cn-beijing.aliyuncs.com/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png)
