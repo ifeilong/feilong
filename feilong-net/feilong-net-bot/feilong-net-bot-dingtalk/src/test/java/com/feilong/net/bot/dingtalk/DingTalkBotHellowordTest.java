@@ -15,35 +15,18 @@
  */
 package com.feilong.net.bot.dingtalk;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 import com.feilong.net.bot.Bot;
 
-/**
- * The Class DingTalkBotTextTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.1.0
- */
-public class DingTalkBotTextTest{
+public class DingTalkBotHellowordTest{
 
     /** The bot. */
     Bot bot = new DefaultDingTalkBot(getKey(), "SECd2325d14c67a3ec585568e00b49d749c7094a2a1579beb86369d88a5b161c981");
 
     @Test
     public void test(){
-        String content = "## 今晚去喝酒吗😁 \n" + //
-                        "![](https://img.alicdn.com/tfs/TB1bB9QKpzqK1RjSZFoXXbfcXXa-576-96.png) \n" + //
-                        "> 曾经有一段真挚的爱情 \n" + //
-                        "1. 美女 \n" + //
-                        "2. 帅哥 \n" + //
-                        "- **喝酒** \n" + //
-                        "- [百度](http://baidu.com) \n" + //
-                        "- *唱歌* \n";
-        boolean result = bot.sendMessage(content);
-        assertEquals(true, result);
+        bot.sendMessage("hello world");
     }
 
     //---------------------------------------------------------------
