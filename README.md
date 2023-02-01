@@ -87,29 +87,29 @@ mvn install
 
 module | 介绍
 :----  | :---------
-feilong-core |  核心包
+feilong-core |  核心包 (推荐)
 feilong-validator |  常用的校验, 包含可配置式的手机号码, 邮编等等
 feilong-json  | json format以及tobean toMap等常见操作
-feilong-io | 文件常见操作
-feilong-servlet | 基于http servlet 的封装,含常见request,response操作快捷封装
+feilong-io | 文件常见操作 
+feilong-servlet | 基于http servlet 的封装,含常见request,response操作快捷封装  (推荐)
 feilong-accessor | 便捷式使用session ,cookie
 feilong-formatter | 将Map,bean,list format成友好形式
-feilong-net-http | http封装操作
+feilong-net-http | http封装操作  (推荐)
 feilong-net-jsoup | jsoup操作
-feilong-net-filetransfer | ftp/sftp操作
+feilong-net-filetransfer | ftp/sftp操作   (推荐)
 feilong-template | 模板操作,如velocity
 feilong-net-mail | 发送邮件,接收邮件操作
 feilong-net-cxf | cxf操作
 feilong-xml  | xml format以及tobean toMap等常见操作
 feilong-security | 加密解密操作
-feilong-context | 上下文操作
+feilong-context | 上下文操作  (推荐)
 feilong-namespace | 可以spring xml 来配置的便捷操作
-feilong-taglib | jsp 自定义标签
+feilong-taglib | jsp 自定义标签 (将会废弃)
 feilong-tools | 可用性操作
 feilong-office-csv | csv生成操作
 feilong-office-excel | excel操作,xml配置式来生成和读取excel文件
 feilong-office-zip | 压缩解压缩操作
-feilong-component  | 组件式操作,含配置式即可获取数据-->转成excel-->打成zip压缩包-->发送邮件
+feilong-component  | 组件式操作,含配置式即可获取数据-->转成excel-->打成zip压缩包-->发送邮件   (推荐)
 feilong | 一体化total jar包,包含上述所有功能
 feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含所有optional jar依赖
 
