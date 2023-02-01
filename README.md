@@ -42,9 +42,9 @@ Reduce development, Release ideas (灵感从重复简单的代码中释放出来
 
 since 2008, 起初应对开发过程中不断重复的代码进行了封装,进而在公司内部推广
 
-- `2016-09-22` 开源了 `feilong-core` https://www.oschina.net/p/feilong-core  (2020年停止更新维护)
-- `2016-10-31` 开源了 `feilong-taglib` https://www.oschina.net/p/feilong-taglib (2020年停止更新维护)
-- `2020-05-26` 开源了 `feilong` https://www.oschina.net/p/feilong
+- `2016-09-22` 开源了 [feilong-core](https://www.oschina.net/p/feilong-core) (2020年停止更新维护)
+- `2016-10-31` 开源了 [feilong-taglib](https://www.oschina.net/p/feilong-taglib) (2020年停止更新维护)
+- `2020-05-26` 开源了 [feilong](https://www.oschina.net/p/feilong) 
 
 
 ## :dragon: Maven使用配置
