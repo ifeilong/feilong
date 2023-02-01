@@ -224,7 +224,7 @@
 		<v.versions-maven-plugin>2.14.2</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
-		<v.maven-project-info-reports-plugin>3.4.1</v.maven-project-info-reports-plugin>
+		<v.maven-project-info-reports-plugin>3.4.2</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
 		<v.jacoco-maven-plugin>0.8.8</v.jacoco-maven-plugin>
