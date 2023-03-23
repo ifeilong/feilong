@@ -59,7 +59,22 @@
 		<v.sonar-maven-plugin>3.7.0.1746</v.sonar-maven-plugin>
 
 		<!-- https://github.com/spring-projects/spring-framework/releases -->
-		<version.spring>5.2.22.RELEASE</version.spring>
+		<!-- https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
+		<!-- 
+		Spring Framework版本	JDK版本  Spring Framework各版本的生命周期如下：
+		
+			6.0.x	JDK 17-21
+			
+			5.3.x	JDK 8-19   第 5 代的最后一个特性分支，在 JDK 8、JDK 11、JDK 17 上提供长期支持
+			5.2.x	JDK 8-15  将积极支持到 2021 年底
+			
+			5.1.x	JDK 8-12 不再受到积极支持，自 2020 年 12 月起被 5.2.x 和 5.3.x 取代
+			5.0.x	JDK 8-10 不再受到积极支持，自 2020 年 12 月起被 5.2.x 和 5.3.x 取代
+			4.3.x	JDK 6-8 于2020 年 12 月 31 日停止维护
+			
+			3.2.x	于 2016 年 12 月 31 日停止维护
+ 		-->
+		<version.spring>5.3.26</version.spring>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
@@ -88,7 +103,7 @@
 		<version.jsch>0.1.55</version.jsch>
 
 		<!-- https://jsoup.org/news/ -->
-		<version.jsoup>1.15.3</version.jsoup>
+		<version.jsoup>1.15.4</version.jsoup>
 
 		<version.javamail>1.4.7</version.javamail>
 		<version.javax.mail>1.6.2</version.javax.mail>
@@ -111,7 +126,8 @@
 		<version.log4j2>2.20.0</version.log4j2>
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
-		<version.logback>1.4.5</version.logback>
+		<!-- 1.3 对应jdk 8    1.4 对应jdk11 -->
+		<version.logback>1.3.6</version.logback>
 
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
