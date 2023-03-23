@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.ifeilong</groupId>
 	<artifactId>feilong</artifactId>
-	<version>3.4.2</version>
+	<version>3.5.0</version>
 
 	<packaging>jar</packaging>
 
@@ -22,7 +21,7 @@
 
 	<properties>
 		<!-- 不要使用${project.version}, 因为如果真实项目生成的版本不是1.7.0的时候,比如是 0.0.1版本,那么就引用不到feilong包 -->
-		<version.feilong-platform>3.4.2</version.feilong-platform>
+		<version.feilong-platform>3.5.0</version.feilong-platform>
 
 		<!-- 让整个项目统一字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,7 +37,7 @@
 		<!-- **********************end maven-compiler-plugin config******************************************* -->
 
 		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
-		
+
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-compiler-plugin>3.11.0</v.maven-compiler-plugin>
@@ -346,11 +345,13 @@
 							-->
 							<keepDependenciesWithProvidedScope>false</keepDependenciesWithProvidedScope>
 
-							<!-- 如果不加这个参数,那么生成的pom会少很多依赖,商城依赖这个feilong,会发现少 velocity等jar
-
-								When true, transitive deps of removed dependencies are promoted to direct dependencies.
-								This should allow the drop in replacement of the removed deps with the new shaded jar and everything should still work. -->
-							<!-- <promoteTransitiveDependencies>true</promoteTransitiveDependencies> -->
+							<!-- 如果不加这个参数,那么生成的pom会少很多依赖,商城依赖这个feilong,会发现少 velocity等jar -->
+							<!--
+							
+							 When true, transitive deps of removed dependencies are promoted to direct dependencies.
+								This should allow the drop in replacement of the removed deps with the new shaded jar and everything should still work. 
+								-->
+							<promoteTransitiveDependencies>true</promoteTransitiveDependencies>
 
 							<!-- 使用maven的maven-shade-plugin插件时需要注意的一个问题 -->
 							<!-- http://blog.csdn.net/thc1987/article/details/44176481 -->
@@ -359,8 +360,11 @@
 							<artifactSet>
 								<includes>
 									<include>com.github.ifeilong:*:*</include>
-									<!-- add slf4j-api -->
-									<include>org.slf4j:slf4j-api:*</include>
+
+									<!-- add slf4j-api  -->
+									<!-- https://github.com/ifeilong/feilong/issues/515 不需要加入  -->
+									<!-- <include>org.slf4j:slf4j-api:*</include> -->
+
 									<!-- <include>org.apache.commons:commons-lang3:*</include>
 										<include>org.apache.commons:commons-collections4:*</include>
 										<include>commons-io:commons-io:*</include> -->
