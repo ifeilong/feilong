@@ -194,7 +194,7 @@
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MPLUGIN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-plugin-plugin>3.7.1</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.8.1</v.maven-plugin-plugin>
 
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
@@ -209,10 +209,14 @@
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<v.maven-source-plugin>3.2.1</v.maven-source-plugin>
 
-		<!--http://maven.apache.org/surefire/maven-surefire-plugin/ -->
-		<!--https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
+		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<v.maven-surefire-plugin>2.22.2</v.maven-surefire-plugin>
-		<v.maven-release-plugin>2.5.3</v.maven-release-plugin>
+		
+		
+		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
+		<!-- https://issues.apache.org/jira/projects/MRELEASE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<v.maven-release-plugin>3.0.0</v.maven-release-plugin>
 
 		<!-- https://issues.apache.org/jira/browse/MRESOURCES/?selectedTab=com.atlassian.jira.jira-projects-plugin:changelog-panel -->
 		<v.maven-resources-plugin>3.3.0</v.maven-resources-plugin>
