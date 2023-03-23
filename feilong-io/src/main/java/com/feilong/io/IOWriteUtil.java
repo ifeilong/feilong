@@ -421,7 +421,7 @@ public final class IOWriteUtil{
         Date beginDate = now();
 
         int loopCount = 0;
-        int sumSize = 0;
+        long sumSize = 0;
         ByteBuffer byteBuffer = ByteBuffer.allocate(bufferLength);
 
         try (ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
