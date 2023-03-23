@@ -714,7 +714,7 @@ public final class FileUtil{
      * @see com.feilong.lib.io.FileUtils#ONE_KB
      */
     public static String formatSize(long fileSize){
-        Validate.isTrue(fileSize >= 0, "fileSize :[%s] must >=0");
+        Validate.isTrue(fileSize >= 0, "fileSize :[%s] must >=0", fileSize);
         if (fileSize < ONE_KB){
             return fileSize + "Bytes";
         }
