@@ -159,7 +159,7 @@
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-compiler-plugin>3.10.1</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.11.0</v.maven-compiler-plugin>
 
 		<v.maven-changes-plugin>2.12.1</v.maven-changes-plugin>
 
@@ -174,7 +174,8 @@
 		<v.maven-dependency-plugin>3.5.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
-		<v.maven-deploy-plugin>3.0.0</v.maven-deploy-plugin>
+		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<v.maven-deploy-plugin>3.1.0</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MINSTALL?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -196,10 +197,11 @@
 		<!-- https://issues.apache.org/jira/projects/MPLUGIN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<v.maven-plugin-plugin>3.8.1</v.maven-plugin-plugin>
 
-		<!-- https://maven.apache.org/scm/ -->
-		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
-		<v.maven-scm-plugin>1.13.0</v.maven-scm-plugin>
+		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
+		<!-- https://maven.apache.org/scm/ -->
+		<!-- https://issues.apache.org/jira/projects/SCM?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
+		<v.maven-scm-plugin>2.0.0</v.maven-scm-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-site-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MSITE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -209,9 +211,10 @@
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<v.maven-source-plugin>3.2.1</v.maven-source-plugin>
 
+		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>2.22.2</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.0.0</v.maven-surefire-plugin>
 		
 		
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
@@ -242,7 +245,7 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.14.2</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.15.0</v.versions-maven-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
 		<v.maven-project-info-reports-plugin>3.4.2</v.maven-project-info-reports-plugin>
