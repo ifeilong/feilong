@@ -27,11 +27,13 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.HttpCoreContext;
 import org.apache.http.util.Args;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 
 /**
@@ -99,35 +101,59 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
         Args.notNull(exception, "Exception parameter");
         Args.notNull(context, "HTTP context");
 
+        //---------------------------------------------------------------
+
         int retryCount = getRetryCount();
         String exceptionName = exception.getClass().getName();
-
         Class<? extends IOException>[] retriableClasses = getRetriableClasses();
+
+        //---------------------------------------------------------------
+
+        String commonLogMessage = getCommonLogMessage(executionCount, retryCount, context, exceptionName, retriableClasses);
+
         if (executionCount > retryCount){
-            String pattern = "[retryRequestMoreCount[{}/{}]],exception:[{}],RETRIABLE_CLASSES:[{}],executionCount > retryCount, returnFalse;";
-            LOGGER.debug(pattern, executionCount, retryCount, exceptionName, retriableClasses);
+            LOGGER.info("retryRequestMoreCount{},executionCount > retryCount,returnFalse", commonLogMessage);
             // Do not retry if over max retry count
             return false;
         }
 
-        String pattern = "[retryRequestIn[{}/{}]],exception:[{}],RETRIABLE_CLASSES:[{}]";
-        LOGGER.debug(pattern, executionCount, retryCount, exceptionName, retriableClasses);
+        //---------------------------------------------------------------
+        LOGGER.debug("retryRequestIn{}", commonLogMessage);
 
         //---------------------------------------------------------------
         if (ArrayUtils.contains(retriableClasses, exception.getClass())){
-            pattern = "[retryRequestContains[{}/{}]],exception:[{}],RETRIABLE_CLASSES:[{}],returnTrue";
-            LOGGER.info(pattern, executionCount, retryCount, exceptionName, retriableClasses);
+            LOGGER.info("retryRequestContains{},returnTrueWillRetryRequest", commonLogMessage);
             return true;
         }
         if (ClassUtil.isInstanceAnyClass(exception, retriableClasses)){
-            pattern = "[retryRequestInstance[{}/{}]],exception:[{}],RETRIABLE_CLASSES:[{}],returnTrue";
-            LOGGER.info(pattern, executionCount, retryCount, exceptionName, retriableClasses);
+            LOGGER.info("retryRequestInstance{},returnTrueWillRetryRequest", commonLogMessage);
             return true;
         }
 
         //---------------------------------------------------------------
         return super.retryRequest(exception, executionCount, context);
     }
+
+    private static String getCommonLogMessage(
+                    int executionCount,
+                    int retryCount,
+                    HttpContext context,
+                    String exceptionName,
+                    Class<? extends IOException>[] retriableClasses){
+        return StringUtil.formatPattern(
+                        "[{}/{}]],[{}],exception:[{}],RETRIABLE_CLASSES:[{}],requestInfo:[{}]",
+                        executionCount,
+                        retryCount,
+
+                        context.getAttribute(HttpCoreContext.HTTP_TARGET_HOST),
+                        exceptionName,
+                        retriableClasses,
+                        context.getAttribute(HttpCoreContext.HTTP_REQUEST)
+        //
+        );
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 retriable classes.

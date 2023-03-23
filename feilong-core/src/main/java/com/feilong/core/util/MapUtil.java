@@ -1151,7 +1151,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                LOGGER.debug("map don't contains key:[{}],but has keys:[{}]", key, map.keySet());
+                LOGGER.debug("mapDon'tContainsKey:[{}],butHasKeys:{}", key, map.keySet());
             }
         }
         return returnMap;
