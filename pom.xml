@@ -75,7 +75,7 @@
 		<version.bcprov-jdk15on>1.70</version.bcprov-jdk15on>
 
 		<!--http://commons.apache.org/proper/commons-fileupload/changes-report.html#a1.4 -->
-		<version.commons-fileupload>1.4</version.commons-fileupload>
+		<version.commons-fileupload>1.5</version.commons-fileupload>
 		<version.commons-lang3>3.12.0</version.commons-lang3>
 
 		<!-- http://hc.apache.org/downloads.cgi -->
@@ -107,8 +107,8 @@
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.36</version.slf4j>
 
-		<!-- https://logging.apache.org/log4j/2.x/changes-report.html#a2.19.0-->
-		<version.log4j2>2.19.0</version.log4j2>
+		<!-- https://logging.apache.org/log4j/2.x/release-notes/index.html -->
+		<version.log4j2>2.20.0</version.log4j2>
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
 		<version.logback>1.4.5</version.logback>
@@ -136,7 +136,8 @@
 		<!--*********************begin plugins version************************************ -->
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
-		<v.maven-assembly-plugin>3.4.2</v.maven-assembly-plugin>
+		<!-- https://issues.apache.org/jira/projects/MASSEMBLY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
+		<v.maven-assembly-plugin>3.5.0</v.maven-assembly-plugin>
 
 		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
 
@@ -165,7 +166,7 @@
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<!-- https://maven.apache.org/plugins/maven-javadoc-plugin/index.html -->
-		<v.maven-javadoc-plugin>3.4.1</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.5.0</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-jar-plugin>3.3.0</v.maven-jar-plugin>

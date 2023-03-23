@@ -28,7 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                IOWriteUtilInputStreamTest.class,
+                WriteInputAndOutStreamTest.class,
                 WriteDirectoryAndFileTest.class,
 
 })
