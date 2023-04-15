@@ -18,12 +18,8 @@ package com.feilong.net.http.callback;
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 
@@ -33,16 +29,13 @@ import com.feilong.net.http.HttpRequest;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
-public class StatusCodeResultCallback implements ResultCallback<Integer>{
-
-    private static final Logger                  LOGGER   = LoggerFactory.getLogger(StatusCodeResultCallback.class);
+public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
 
     /** Static instance. */
     // the static instance works for all types
     public static final StatusCodeResultCallback INSTANCE = new StatusCodeResultCallback();
 
     //---------------------------------------------------------------
-
     @Override
     public Integer on(
                     HttpRequest httpRequest,
@@ -50,17 +43,14 @@ public class StatusCodeResultCallback implements ResultCallback<Integer>{
                     HttpResponse httpResponse,
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
-        StatusLine statusLine = httpResponse.getStatusLine();
-        int statusCode = statusLine.getStatusCode();
-        //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace(
-                            "httpRequest:[{}],connectionConfig:[{}],statusCode:[{}]",
-                            JsonUtil.toString(httpRequest, true),
-                            JsonUtil.toString(useConnectionConfig, true),
-                            statusCode);
-        }
-        return statusCode;
+
+        com.feilong.net.http.HttpResponse feilongHttpResponse = buildHttpResponse(
+                        httpRequest,
+                        httpUriRequest,
+                        httpResponse,
+                        useConnectionConfig,
+                        beginDate);
+        return feilongHttpResponse.getStatusCode();
     }
 
 }

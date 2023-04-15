@@ -18,9 +18,9 @@ package com.feilong.json.processor;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.json.JsonConfig;
-import com.feilong.core.Validate;
 
 /**
  * 如果字符串格式jsonvalue的值超过指定的长度 <code>maxLength</code>,将省略显示 <code>overLengthMaskString</code>,以控制输出的字符串长度.
@@ -121,15 +121,11 @@ public class StringOverLengthJsonValueProcessor extends AbstractJsonValueProcess
         if (null == value){
             return EMPTY;
         }
-
         Validate.isTrue(maxLength > 0, "maxLength:[%s] must > 0", maxLength);
-
         String useOverLengthMaskString = defaultIfNull(overLengthMaskString, DEFAULT_OVERLENGTH_MASKSTRING);
 
         //---------------------------------------------------------------
-
         String string = value.toString();
-
         if (string.length() <= maxLength){
             return string;
         }

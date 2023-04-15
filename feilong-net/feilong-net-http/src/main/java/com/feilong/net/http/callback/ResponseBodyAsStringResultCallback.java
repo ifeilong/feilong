@@ -15,18 +15,16 @@
  */
 package com.feilong.net.http.callback;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
+
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
-import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
-import com.feilong.net.http.builder.HttpResponseUtil;
 
 /**
  * 通常用来解析接口返回的字符串 的 {@link ResultCallback}.
@@ -34,10 +32,7 @@ import com.feilong.net.http.builder.HttpResponseUtil;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 2.1.0
  */
-public class ResponseBodyAsStringResultCallback implements ResultCallback<String>{
-
-    /** The Constant LOGGER. */
-    private static final Logger                            LOGGER   = LoggerFactory.getLogger(ResponseBodyAsStringResultCallback.class);
+public class ResponseBodyAsStringResultCallback extends AbstractResultCallback<String>{
 
     /** Static instance. */
     // the static instance works for all types
@@ -52,16 +47,17 @@ public class ResponseBodyAsStringResultCallback implements ResultCallback<String
                     HttpResponse httpResponse,
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
-        String resultString = HttpResponseUtil.getResultString(httpResponse);
-        //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "request:[{}],useConnectionConfig:[{}],resultString:[{}]",
-                            JsonUtil.toString(httpRequest, true),
-                            JsonUtil.toString(useConnectionConfig, true),
-                            StringOverLengthJsonValueProcessor.format(resultString, 1000));
+        com.feilong.net.http.HttpResponse feilongHttpResponse = buildHttpResponse(
+                        httpRequest,
+                        httpUriRequest,
+                        httpResponse,
+                        useConnectionConfig,
+                        beginDate);
+
+        if (isNullOrEmpty(feilongHttpResponse)){
+            return EMPTY;
         }
-        return resultString;
+        return feilongHttpResponse.getResultString();
     }
 
 }
