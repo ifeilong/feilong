@@ -943,11 +943,22 @@ public final class NumberUtil{
      * 
      * <h3>说明:</h3>
      * <blockquote>
+     * 
      * <ol>
-     * <li>被舍入部分{@code >=}0.5向上,否则向下<br>
-     * </li>
+     * <li>被舍入部分{@code >=}0.5向上,否则向下</li>
      * <li>{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2</li>
+     * 
+     * <li>
+     * 不要直接使用 jdk 原生的 setScale方法, 比如
+     * 
+     * <p>
+     * //异常,BigDecimal对象的小数位超出了保留的小数位,且保留的小数位后面出现非0的数值,<span style="color:red">会抛出 Rounding necessary 异常</span><br>
+     * BigDecimal bigDecimal4 = new BigDecimal("1.9395");<br>
+     * bigDecimal4.setScale(2);<br>
+     * </p>
+     * </li>
      * </ol>
+     * 
      * </blockquote>
      * 
      * @param value
@@ -994,6 +1005,26 @@ public final class NumberUtil{
      * NumberUtil.setScale(0, 1,null)           = toBigDecimal("0.0")
      * NumberUtil.setScale(0, 2,null)           = toBigDecimal("0.00")
      * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>被舍入部分{@code >=}0.5向上,否则向下</li>
+     * <li>{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2</li>
+     * 
+     * <li>
+     * 不要直接使用 jdk 原生的 setScale方法, 比如
+     * 
+     * <p>
+     * //异常,BigDecimal对象的小数位超出了保留的小数位,且保留的小数位后面出现非0的数值,<span style="color:red">会抛出 Rounding necessary 异常</span><br>
+     * BigDecimal bigDecimal4 = new BigDecimal("1.9395");<br>
+     * bigDecimal4.setScale(2);<br>
+     * </p>
+     * </li>
+     * </ol>
      * 
      * </blockquote>
      * 
