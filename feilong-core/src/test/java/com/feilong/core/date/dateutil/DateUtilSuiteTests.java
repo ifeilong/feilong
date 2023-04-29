@@ -89,6 +89,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsTodayTest.class,
 
                 ToDateTest.class,
+                ToDateLongTest.class,
                 ToDateNoPatternTest.class,
 
                 ToStringTest.class,

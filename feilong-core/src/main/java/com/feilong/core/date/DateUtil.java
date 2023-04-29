@@ -1593,6 +1593,30 @@ public final class DateUtil{
     }
 
     /**
+     * 将 <code>time</code> 使用 new Date 成date类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Date date = toDate(1682787143647L); //北京时间 2023-04-30 00:52:23
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param time
+     *            自1970年1月1日00:00:00 GMT以来的毫秒。
+     * @return 如果 <code>time</code> 是null,返回null<br>
+     *         否则返回 new Date(time)
+     * @since 3.5.0
+     */
+    public static Date toDate(Long time){
+        return null == time ? null : new Date(time);
+    }
+
+    /**
      * 将时间字符串 <code>dateString</code> 使用 {@link DatePattern#COMMON_DATE} 默认模式转换成date类型.
      * <h3>示例:</h3>
      * 

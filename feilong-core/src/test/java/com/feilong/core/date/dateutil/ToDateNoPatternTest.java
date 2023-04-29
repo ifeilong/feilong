@@ -38,7 +38,7 @@ public class ToDateNoPatternTest{
      */
     @Test(expected = NullPointerException.class)
     public void testToDateNull(){
-        toDate(null);
+        toDate((String) null);
     }
 
     /**
