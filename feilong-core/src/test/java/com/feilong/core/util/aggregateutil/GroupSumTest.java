@@ -54,6 +54,24 @@ public class GroupSumTest{
                                         hasEntry("关羽", toBigDecimal(20))));
     }
 
+    @Test
+    public void testGroupSum12(){
+        List<UserWithStringAge> list = toList(//
+                        new UserWithStringAge("张飞", "20"),
+                        new UserWithStringAge("关羽", "20"),
+                        new UserWithStringAge("刘备", "20"),
+                        new UserWithStringAge("刘备", ""),
+                        new UserWithStringAge("刘备", "20"));
+
+        Map<String, BigDecimal> map = AggregateUtil.groupSum(list, "name", "ageString");
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("刘备", toBigDecimal(40)),
+                                        hasEntry("张飞", toBigDecimal(20)),
+                                        hasEntry("关羽", toBigDecimal(20))));
+    }
+
     //---------------------------------------------------------------
 
     /**

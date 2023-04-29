@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.aggregateutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -26,15 +27,7 @@ import org.junit.Test;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class AggregateUtilAvgTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class AvgTest{
-    //*******************AggregateUtil.avg(Collection<User>, String, int)********************************
 
     /**
      * Test avg.
@@ -48,6 +41,28 @@ public class AvgTest{
 
         assertEquals(new BigDecimal("4.00"), AggregateUtil.avg(list, "id", 2));
     }
+
+    @Test
+    public void testAvgNullLine(){
+        List<User> list = toList(//
+                        new User(2L),
+                        new User((Long) null),
+                        new User(5L));
+
+        assertEquals(new BigDecimal("2.33"), AggregateUtil.avg(list, "id", 2));
+    }
+
+    @Test
+    public void testAvgStringAge(){
+        List<UserWithStringAge> list = toList(//
+                        new UserWithStringAge("4"),
+                        new UserWithStringAge(""),
+                        new UserWithStringAge("5"));
+
+        assertEquals(new BigDecimal("3.00"), AggregateUtil.avg(list, "ageString", 2));
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Test avg null collection.

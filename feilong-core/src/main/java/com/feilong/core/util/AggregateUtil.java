@@ -21,7 +21,6 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
 
 import java.math.BigDecimal;
@@ -62,7 +61,7 @@ public final class AggregateUtil{
     //-------------------------avg--------------------------------------
 
     /**
-     * 算术平均值.
+     * 计算bean list,bean指定属性值的算术平均值.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -80,6 +79,44 @@ public final class AggregateUtil{
      * </pre>
      * 
      * <b>返回:</b> 4.00
+     * 
+     * <p>
+     * 如果有对象属性值是空, 会以0代替计算
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User(2L));
+     * list.add(new User(null));
+     * list.add(new User(5L));
+     * AggregateUtil.avg(list, "id", 2)
+     * </pre>
+     * 
+     * <b>返回:</b> 2.33
+     * 
+     * <p>
+     * 如果值是非 number 类型的,会自动转换,比如
+     * </p>
+     * 
+     * <pre class="code">
+     * public class UserWithStringAge extends User{
+     * 
+     *     //string 类型的年龄
+     *     private String ageString;
+     *     //setter/getter 省略
+     * }
+     * </pre>
+     * 
+     * <pre class="code">
+    List{@code <UserWithStringAge>} list = toList(//
+                        new UserWithStringAge("4"),
+                        new UserWithStringAge(""),
+                        new UserWithStringAge("5"));
+     * AggregateUtil.avg(list, "ageString", 2)
+     * </pre>
+     * 
+     * <b>返回:</b> 3.00
+     * 
      * </blockquote>
      *
      * @param <O>
@@ -106,13 +143,6 @@ public final class AggregateUtil{
     /**
      * 算术平均值.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>返回的 {@link LinkedHashMap},key是 <code>propertyNames</code>的元素,value是基于这个属性名称获得的值的平均值;key的顺序是依照 <code>propertyNames</code>元素的顺序
-     * </li>
-     * </ol>
-     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -142,6 +172,15 @@ public final class AggregateUtil{
      * }
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的 {@link LinkedHashMap},key是 <code>propertyNames</code>的元素,value是基于这个属性名称获得的值的平均值;key的顺序是依照 <code>propertyNames</code>元素的顺序
+     * </li>
+     * </ol>
      * </blockquote>
      * 
      * @param <O>
@@ -179,13 +218,6 @@ public final class AggregateUtil{
 
     /**
      * 总和,计算集合对象<code>beanIterable</code> 内指定的属性名 <code>propertyName</code> 值的总和.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
-     * </ol>
-     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -239,6 +271,14 @@ public final class AggregateUtil{
      * 
      * </blockquote>
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
+     * <li>如果通过反射某个元素值是非Number 类型,会先自动转换成BigDecimal,再进行累加</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param beanIterable
@@ -259,12 +299,6 @@ public final class AggregateUtil{
     /**
      * 迭代<code>beanIterable</code>,提取 符合 <code>includePredicate</code>的元素的指定 <code>propertyName</code> 元素的值 ,累计总和.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
-     * </ol>
-     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -305,7 +339,15 @@ public final class AggregateUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
+     * <li>如果通过反射某个元素值是非Number 类型,会先自动转换成BigDecimal,再进行累加</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param beanIterable
@@ -330,12 +372,7 @@ public final class AggregateUtil{
     /**
      * 求和,分别计算集合对象<code>beanIterable</code> 内指定的不同属性名 <code>propertyNames</code> 值的总和.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
-     * </ol>
-     * </blockquote>
+     * 
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -365,7 +402,15 @@ public final class AggregateUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
+     * <li>如果通过反射某个元素值是非Number 类型,会先自动转换成BigDecimal,再进行累加</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param beanIterable
@@ -436,6 +481,7 @@ public final class AggregateUtil{
      *            the include predicate
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果通过反射某个元素值是非Number 类型,会先自动转换成BigDecimal,再进行累加<br>
      *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
      *         如果<code>beanIterable</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
      * @throws NullPointerException
@@ -458,12 +504,17 @@ public final class AggregateUtil{
             for (String propertyName : propertyNames){
                 //如果通过反射某个元素值是null,则使用默认值0 代替
                 BigDecimal addValue = NumberUtil.getAddValue(
-                                defaultIfNull(sumMap.get(propertyName), 0),
-                                defaultIfNull(PropertyUtil.<Number> getProperty(obj, propertyName), 0));
+                                defaultIfNull(sumMap.get(propertyName), 0), //
+                                extractValue(obj, propertyName));
                 sumMap.put(propertyName, addValue);
             }
         }
         return sumMap;
+    }
+
+    private static <O> Number extractValue(O obj,String propertyName){
+        Object value = PropertyUtil.getProperty(obj, propertyName);
+        return isNullOrEmpty(value) ? BigDecimal.ZERO : toBigDecimal(value);
     }
 
     //---------------------------------------------------------------
@@ -517,6 +568,7 @@ public final class AggregateUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果通过反射某个元素值是非Number 类型,会先自动转换成BigDecimal,再进行累加<br>
      *         如果 <code>keyPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>keyPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>sumPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
@@ -577,6 +629,7 @@ public final class AggregateUtil{
      *            the include predicate
      * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果通过反射某个元素值是非Number 类型,会先自动转换成BigDecimal,再进行累加<br>
      *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
      *         如果 <code>beanIterable</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
      * 
@@ -606,8 +659,7 @@ public final class AggregateUtil{
             }
 
             T keyPropertyValue = PropertyUtil.<T> getProperty(obj, keyPropertyName);
-            BigDecimal value = toBigDecimal(defaultIfNull(PropertyUtil.<Number> getProperty(obj, sumPropertyName), ZERO));
-            MapUtil.putSumValue(map, keyPropertyValue, value);
+            MapUtil.putSumValue(map, keyPropertyValue, extractValue(obj, sumPropertyName));
         }
         return map;
     }
@@ -1017,13 +1069,6 @@ public final class AggregateUtil{
      * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,分别统计 <code>propertyNames</code>的值出现的次数,统计的时候支持使用
      * <code>propertyValueAndTransformerMap</code> 属性值的转换.
      * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>名字,子map的key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值的顺序</li>
-     * </ol>
-     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -1085,7 +1130,15 @@ public final class AggregateUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>名字,子map的key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值的顺序</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param beanIterable
@@ -1157,7 +1210,6 @@ public final class AggregateUtil{
                     Map<String, Map<Object, Integer>> resultMap,
                     O bean){
         for (String propertyName : propertyNames){
-
             //取map,如果没有构造一个
             Map<Object, Integer> propertyNameGroupCountMap = defaultIfNull(
                             resultMap.get(propertyName),
@@ -1167,7 +1219,6 @@ public final class AggregateUtil{
             MapUtil.putSumValue(propertyNameGroupCountMap, value, 1);
 
             //---------------------------------------------------------------
-
             resultMap.put(propertyName, propertyNameGroupCountMap);
         }
     }
@@ -1188,12 +1239,11 @@ public final class AggregateUtil{
      * @return the string
      * @since 1.10.7
      */
-    private static <O, T> Object convertValue(
+    private static <O> Object convertValue(
                     O obj,
                     String propertyName,
                     Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap){
-        T value = PropertyUtil.<T> getProperty(obj, propertyName);
-
+        Object value = PropertyUtil.getProperty(obj, propertyName);
         if (isNullOrEmpty(propertyValueAndTransformerMap)){
             return value;
         }
@@ -1203,7 +1253,6 @@ public final class AggregateUtil{
         if (null == transformer){
             return value;
         }
-
         //---------------------------------------------------------------
         return transformer.transform(value);
     }

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.aggregateutil;
 
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -25,15 +27,12 @@ import org.junit.Test;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 /**
  * The Class AggregateUtilSumTest.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  */
 public class SumTest{
-    //***************AggregateUtil.sum(Collection<User>, String)*******************************
 
     /**
      * Test sum.
@@ -45,6 +44,24 @@ public class SumTest{
                         new User(5L),
                         new User(5L));
         assertEquals(new BigDecimal(12L), AggregateUtil.sum(list, "id"));
+    }
+
+    @Test
+    public void testSum1(){
+        List<User> list = toList(//
+                        new User(2L),
+                        new User((Long) null),
+                        new User(5L));
+        assertEquals(new BigDecimal(7L), AggregateUtil.sum(list, "id"));
+    }
+
+    @Test
+    public void testSum12(){
+        List<UserWithStringAge> list = toList(//
+                        new UserWithStringAge("2.2"),
+                        new UserWithStringAge((String) null),
+                        new UserWithStringAge("5"));
+        assertEquals(toBigDecimal("7.2"), AggregateUtil.sum(list, "ageString"));
     }
 
     /**
