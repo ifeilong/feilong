@@ -351,18 +351,30 @@ public final class CollectionsUtil{
     /**
      * Shortcut for {@code get(iterator, 0)}.
      * <p>
-     * Returns the <code>first</code> value in the <code>iterable</code>'s {@link Iterator}, throwing
-     * <code>IndexOutOfBoundsException</code> if there is no such element.
+     * 返回 <code>iterable</code> {@link Iterator} 里面的第一个元素,如果没有,会抛出 <code>IndexOutOfBoundsException</code> .
      * </p>
      * <p>
-     * If the {@link Iterable} is a {@link List}, then it will use {@link List#get(int)}.
+     * 如果 {@link Iterable}是个 {@link List}, 会使用 {@link List#get(int)}.
      * </p>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * CollectionsUtil.first(toList(1, 2, 3)); = 1
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the type of object in the {@link Iterable}.
      * @param iterable
      *            the {@link Iterable} to get a value from, may be null
-     * @return the first object
+     * @return 如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the request is invalid
      * @since 3.0.6
@@ -372,10 +384,42 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 返回 <code>iterable</code> {@link Iterator} 里面的最后元素,如果没有,会抛出 <code>IndexOutOfBoundsException</code> .
+     * <p>
+     * 如果 {@link Iterable}是个 {@link List}, 会使用 {@link List#get(int)}.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * CollectionsUtil.last(toList(1, 2, 3)); = 3
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the type of object in the {@link Iterable}.
+     * @param iterable
+     *            the {@link Iterable} to get a value from, may be null
+     * @return 如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
+     * @throws IndexOutOfBoundsException
+     *             if the request is invalid
+     * @since 3.5.0
+     */
+    public static <T> T last(final Iterable<T> iterable){
+        return get(iterable, size(iterable) - 1);
+    }
+
+    /**
      * Returns the <code>index</code>-th value in the <code>iterable</code>'s {@link Iterator}, throwing
      * <code>IndexOutOfBoundsException</code> if there is no such element.
      * <p>
-     * If the {@link Iterable} is a {@link List}, then it will use {@link List#get(int)}.
+     * 如果 {@link Iterable}是个 {@link List}, 会使用 {@link List#get(int)}.
+     * </p>
      *
      * @param <T>
      *            the type of object in the {@link Iterable}.
@@ -383,12 +427,13 @@ public final class CollectionsUtil{
      *            the {@link Iterable} to get a value from, may be null
      * @param index
      *            the index to get
-     * @return the object at the specified index
+     * @return 如果 <code>iterable</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
      * @since 3.0.6
      */
     public static <T> T get(final Iterable<T> iterable,final int index){
+        Validate.notNull(iterable, "iterable can't be null!");
         return IterableUtils.get(iterable, index);
     }
 

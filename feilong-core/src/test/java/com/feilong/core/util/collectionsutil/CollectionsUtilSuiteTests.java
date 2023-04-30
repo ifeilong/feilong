@@ -84,6 +84,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 SelectRegexStringPredicateTest.class,
                 SelectNotNullOrEmptyStringPredicateTest.class,
 
+                FirstTest.class,
+                LastTest.class,
                 SizeTest.class,
 //
 })
