@@ -51,6 +51,8 @@ public class GetSubtractValueParameterizedTest extends Abstract2ParamsAndResultP
                         toArray(1000, toArray(50, 100), toBigDecimal(850)),
                         toArray(-1000, toArray(-50, 100), toBigDecimal(-1050)),
                         toArray(1000, toArray(99.5, 99.0), toBigDecimal(801.5)),
+                        toArray(1000, toArray(99.5, 99.000), toBigDecimal(801.500)),
+                        toArray(1000, toArray(99.50, 99.0000), toBigDecimal(801.5000)),
 
                         toArray(2, toArray(1.1), toBigDecimal(0.9))
 

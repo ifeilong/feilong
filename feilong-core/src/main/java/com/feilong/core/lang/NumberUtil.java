@@ -657,6 +657,10 @@ public final class NumberUtil{
     /**
      * 所有数加起来.
      * 
+     * <p>
+     * 关于精度: 返回结果的精度等于精度最大的元素的精度,比如 NumberUtil.getAddValue(2, 4, 5.00000) = 11.00000
+     * </p>
+     * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -670,9 +674,10 @@ public final class NumberUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.getAddValue(2, 4, 5)              =   11
-     * NumberUtil.getAddValue(new BigDecimal(6), 5) =   11
-     * NumberUtil.getAddValue(new BigDecimal(6), null) =   6
+     * NumberUtil.getAddValue(2, 4, 5)                  =   11
+     * NumberUtil.getAddValue(2, 4, 5.00000)            =   11.00000
+     * NumberUtil.getAddValue(new BigDecimal(6), 5)     =   11
+     * NumberUtil.getAddValue(new BigDecimal(6), null)  =   6
      * </pre>
      * 
      * </blockquote>
@@ -726,6 +731,17 @@ public final class NumberUtil{
 
     /**
      * 所有数相减.
+     * 
+     * <p>
+     * 关于精度: 返回结果的精度等于精度最大的元素的精度,比如 NumberUtil.getSubtractValue(1000, 99.5, 99.0000) = 801.5000
+     * </p>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持跳过null 元素相加 (since 1.11.5)</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 

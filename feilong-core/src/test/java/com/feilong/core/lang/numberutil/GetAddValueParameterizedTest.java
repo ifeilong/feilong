@@ -42,6 +42,7 @@ public class GetAddValueParameterizedTest extends Abstract1ParamAndResultParamet
                         ConvertUtil.<Object> toArray(toArray(new BigDecimal(6), 5), toBigDecimal(11)),
 
                         toArray(toArray(2, 4, 5), toBigDecimal(11)),
+                        toArray(toArray(2, 4, 5.00000), toBigDecimal(11.00000)),
 
                         toArray(toArray(null, 4, 5), toBigDecimal(9)),
                         toArray(toArray(2, null, 5), toBigDecimal(7)),
