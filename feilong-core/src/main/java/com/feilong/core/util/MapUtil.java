@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -212,6 +213,86 @@ public final class MapUtil{
     }
 
     //---------------------------------------------------------------
+    /**
+     * If the specified key is not already associated with a value (or is mapped
+     * to {@code null}), attempts to compute its value using the given mapping
+     * function and enters it into this map unless {@code null}.
+     * 
+     * <p>
+     * 由于jdk1.8 <a href="https://blog.csdn.net/wu_weijie/article/details/121899160">性能有坑 | 慎用 Java 8 ConcurrentHashMap 的 computeIfAbsent</a>
+     * ConcurrentHashMap 的 computeIfAbsent有性能问题,所有封装此方法
+     * </p>
+     * 
+     * <p>
+     * If the function returns {@code null} no mapping is recorded. If
+     * the function itself throws an (unchecked) exception, the
+     * exception is rethrown, and no mapping is recorded. The most
+     * common usage is to construct a new object serving as an initial
+     * mapped value or memoized result, as in:
+     * 
+     * <pre>
+     *  {@code
+     * map.computeIfAbsent(key, k -> new Value(f(k)));
+     * }
+     * </pre>
+     * 
+     * <p>
+     * Or to implement a multi-value map, {@code Map<K,Collection<V>>},
+     * supporting multiple values per key:
+     * 
+     * <pre>
+     *  {@code
+     * map.computeIfAbsent(key, k -> new HashSet<V>()).add(v);
+     * }
+     * </pre>
+     *
+     * @implSpec 默认实现:
+     * 
+     *           <pre>
+     * 
+     *           {@code
+     *         V result = map.get(key);
+     *         if (null != mappingFunction){
+     *             return result;
+     *           }
+     *           return map.computeIfAbsent(key, mappingFunction);
+     *           }
+     *           </pre>
+     * 
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param key
+     *            key with which the specified value is to be associated
+     * @param mappingFunction
+     *            the function to compute a value
+     * @return the current (existing or computed) value associated with the specified key, or null if the computed value is null
+     * @throws NullPointerException
+     *             如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *             if the specified key is null and this map does not support null keys, or the mappingFunction is null
+     * @throws UnsupportedOperationException
+     *             if the {@code put} operation is not supported by this map
+     *             (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
+     * @throws ClassCastException
+     *             if the class of the specified key or value prevents it from being stored in this map
+     *             (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
+     * @see <a href="https://blog.csdn.net/wu_weijie/article/details/121899160">性能有坑 | 慎用 Java 8 ConcurrentHashMap 的 computeIfAbsent</a>
+     * @see <a href="https://bugs.openjdk.org/browse/JDK-8161372">ConcurrentHashMap.computeIfAbsent(k,f) locks bin when k present</a>
+     * @since jdk 1.8
+     * @since 3.5.0
+     */
+    public static <K, V> V computeIfAbsent(Map<K, V> map,K key,Function<? super K, ? extends V> mappingFunction){
+        Validate.notNull(map, "map can't be null!");
+
+        V result = map.get(key);
+        if (null != result){
+            return result;
+        }
+        return map.computeIfAbsent(key, mappingFunction);
+    }
 
     /**
      * 根据索引来获得map 的entry.
