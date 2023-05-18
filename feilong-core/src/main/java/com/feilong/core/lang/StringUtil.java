@@ -20,6 +20,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toSet;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.CollectionsUtil.size;
@@ -29,9 +30,11 @@ import static java.util.Collections.emptyMap;
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -776,6 +779,112 @@ public final class StringUtil{
     public static String[] tokenizeToStringArray(String str){
         String delimiters = ";, ";
         return tokenizeToStringArray(str, delimiters);
+    }
+
+    /**
+     * 使用<span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span> 分隔给定的字符串,转成Set,去除 tokens的空格并且忽略empty tokens.
+     * 
+     * <p>
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
+     * </p>
+     * 
+     * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},<br>
+     * 本方法默认使用参数 <span style="color:green">trimTokens = true;</span> <br>
+     * <span style="color:green">ignoreEmptyTokens = true;</span>,<br>
+     * <span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+     * String[] set = StringUtil.tokenizeToSet(str);
+     * LOGGER.info(JsonUtil.format(set));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [
+     * "jin.xin",
+     * "feilong",
+     * "jinxin",
+     * "venusdrogon",
+     * "jim"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param str
+     *            需要被分隔的字符串
+     * @return 如果 <code>str</code> 是null或者empty,返回 {@link Collections#emptySet()}<br>
+     * @see java.util.StringTokenizer
+     * @see String#trim()
+     * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
+     * @see "org.springframework.util.StringUtils#tokenizeToStringArray"
+     * 
+     * @see #tokenizeToStringArray(String, String, boolean, boolean)
+     * @since 3.5.0
+     */
+    public static Set<String> tokenizeToSet(String str){
+        String[] stringArray = tokenizeToStringArray(str);
+        return toSet(stringArray);
+    }
+
+    /**
+     * 使用<span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span> 分隔给定的字符串,转成List,去除 tokens的空格并且忽略empty tokens.
+     * 
+     * <p>
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
+     * </p>
+     * 
+     * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},<br>
+     * 本方法默认使用参数 <span style="color:green">trimTokens = true;</span> <br>
+     * <span style="color:green">ignoreEmptyTokens = true;</span>,<br>
+     * <span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+     * String[] list = StringUtil.tokenizeToList(str);
+     * LOGGER.info(JsonUtil.format(list));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [
+     * "jin.xin",
+     * "feilong",
+     * "jinxin",
+     * "venusdrogon",
+     * "jim"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param str
+     *            需要被分隔的字符串
+     * @return 如果 <code>str</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @see java.util.StringTokenizer
+     * @see String#trim()
+     * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
+     * @see "org.springframework.util.StringUtils#tokenizeToStringArray"
+     * 
+     * @see #tokenizeToStringArray(String, String, boolean, boolean)
+     * @since 3.5.0
+     */
+    public static List<String> tokenizeToList(String str){
+        String[] stringArray = tokenizeToStringArray(str);
+        return toList(stringArray);
     }
 
     /**
