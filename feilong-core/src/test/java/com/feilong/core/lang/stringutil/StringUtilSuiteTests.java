@@ -45,7 +45,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 SubstringStartIndexAndLengthParameterizedTest.class,
                 SubstringWithoutLastLastLengthTest.class,
                 SubstringWithoutLastLastStringTest.class,
-                TokenizeToStringArrayTest.class,
+
+                TokenizeToStringArrayParameterizedTest.class,
+                TokenizeToStringArrayDefaultDelimitersParameterizedTest.class,
+
                 TokenizeToStringArrayWithArgsTest.class,
                 TokenizeToArrayContainsParameterizedTest.class,
                 TokenizeToArrayContainsDelimitersParameterizedTest.class,

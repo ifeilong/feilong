@@ -281,6 +281,7 @@ public final class MapUtil{
      *             (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      * @see <a href="https://blog.csdn.net/wu_weijie/article/details/121899160">性能有坑 | 慎用 Java 8 ConcurrentHashMap 的 computeIfAbsent</a>
      * @see <a href="https://bugs.openjdk.org/browse/JDK-8161372">ConcurrentHashMap.computeIfAbsent(k,f) locks bin when k present</a>
+     * @see <a href="http://www.noahpan.cn/post/2444452045/">JDK1.8 ConcurrentHashMap#computeIfAbsent慎用</a>
      * @since jdk 1.8
      * @since 3.5.0
      */

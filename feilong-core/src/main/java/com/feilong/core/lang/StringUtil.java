@@ -41,6 +41,7 @@ import org.slf4j.helpers.MessageFormatter;
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.util.RegexUtil;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.lib.lang3.text.StrSubstitutor;
 
@@ -467,11 +468,17 @@ public final class StringUtil{
      * @return 如果 <code>content</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>content</code> 中,没有 regex匹配的字符串或者格式,返回<code>content</code><br>
      * @see <a href="http://stamen.iteye.com/blog/2028256">String字符串替换的一个诡异问题</a>
+     * @see <a href="https://blog.csdn.net/hadues/article/details/128002667">Java中String对象的replaceAll方法调用性能优化小技巧</a>
      * @see java.lang.String#replaceAll(String, String)
      * @since jdk 1.4
      */
     public static String replaceAll(CharSequence content,String regex,String replacement){
-        return null == content ? EMPTY : content.toString().replaceAll(regex, replacement);
+        //        return null == content ? EMPTY : content.toString().replaceAll(regex, replacement);
+        if (null == content){
+            return EMPTY;
+        }
+        Pattern pattern = RegexUtil.buildPattern(regex, 0);
+        return pattern.matcher(content).replaceAll(replacement);
     }
 
     /**
@@ -716,6 +723,60 @@ public final class StringUtil{
     // [end]
 
     // [start]tokenizeToStringArray
+
+    /**
+     * 使用<span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span> 分隔给定的字符串到字符串数组,去除 tokens的空格并且忽略empty tokens.
+     * 
+     * <p>
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
+     * </p>
+     * 
+     * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},<br>
+     * 本方法默认使用参数 <span style="color:green">trimTokens = true;</span> <br>
+     * <span style="color:green">ignoreEmptyTokens = true;</span>,<br>
+     * <span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+     * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str);
+     * LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [
+     * "jin.xin",
+     * "feilong",
+     * "jinxin",
+     * "venusdrogon",
+     * "jim"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param str
+     *            需要被分隔的字符串
+     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtil#EMPTY_STRING_ARRAY}<br>
+     *         如果 <code>str</code> 是blank,返回 {@link ArrayUtil#EMPTY_STRING_ARRAY}<br>
+     * @see java.util.StringTokenizer
+     * @see String#trim()
+     * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
+     * @see "org.springframework.util.StringUtils#tokenizeToStringArray"
+     * 
+     * @see #tokenizeToStringArray(String, String, boolean, boolean)
+     * @since 3.5.0
+     */
+    public static String[] tokenizeToStringArray(String str){
+        String delimiters = ";, ";
+        return tokenizeToStringArray(str, delimiters);
+    }
 
     /**
      * 使用StringTokenizer分隔给定的字符串到字符串数组,去除 tokens的空格并且忽略empty tokens.
