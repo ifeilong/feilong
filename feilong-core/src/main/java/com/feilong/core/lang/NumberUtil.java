@@ -790,6 +790,57 @@ public final class NumberUtil{
         return result;
     }
 
+    /**
+     * 数相减.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getSubtractValue(null, 2, 2)                 =   NullPointerException
+     * 
+     * NumberUtil.getSubtractValue(0, 2, 0)                 =   -2
+     * NumberUtil.getSubtractValue(0, 2, 2)                 =   -2.00
+     * 
+     * NumberUtil.getSubtractValue(0,null,0)                  =   0
+     * NumberUtil.getSubtractValue(0,null,2)                  =   0.00
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param beSubtractedValue
+     *            被减数,如 100-10, 其中的100 就是被减数
+     * @param subtraction
+     *            减数,如 100-10, 其中的10 就是减数
+     * @param scale
+     *            设置精度
+     *            <h3>说明:</h3>
+     *            <blockquote>
+     * 
+     *            <ol>
+     *            <li>被舍入部分{@code >=}0.5向上,否则向下</li>
+     *            <li>{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2</li>
+     * 
+     *            <li>
+     *            不要直接使用 jdk 原生的 setScale方法, 比如
+     * 
+     *            <p>
+     *            //异常,BigDecimal对象的小数位超出了保留的小数位,且保留的小数位后面出现非0的数值,<span style="color:red">会抛出 Rounding necessary 异常</span><br>
+     *            BigDecimal bigDecimal4 = new BigDecimal("1.9395");<br>
+     *            bigDecimal4.setScale(2);<br>
+     *            </p>
+     *            </li>
+     *            </ol>
+     * @return 如果 <code>beSubtractedValue</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>subtraction</code> 是null,直接将<code>beSubtractedValue</code> 转成BigDecimal设置精度并返回<br>
+     * @since 3.5.0
+     */
+    public static BigDecimal getSubtractValueWithScale(Number beSubtractedValue,Number subtraction,int scale){
+        BigDecimal subtractValue = getSubtractValue(beSubtractedValue, subtraction);
+        return setScale(subtractValue, scale);
+    }
+
     // [end]
 
     /**

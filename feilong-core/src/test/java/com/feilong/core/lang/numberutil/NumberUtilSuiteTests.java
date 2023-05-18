@@ -32,6 +32,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 GetSubtractValueTest.class,
                 GetSubtractValueParameterizedTest.class,
+                GetSubtractValueWithScaleTest.class,
+                GetSubtractValueWithScaleParameterizedTest.class,
 
                 GetMultiplyValueTest.class,
                 GetMultiplyValueParameterizedTest.class,
