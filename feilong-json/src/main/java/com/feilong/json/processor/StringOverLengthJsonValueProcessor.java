@@ -17,6 +17,7 @@ package com.feilong.json.processor;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static java.lang.System.lineSeparator;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
@@ -122,8 +123,6 @@ public class StringOverLengthJsonValueProcessor extends AbstractJsonValueProcess
             return EMPTY;
         }
         Validate.isTrue(maxLength > 0, "maxLength:[%s] must > 0", maxLength);
-        String useOverLengthMaskString = defaultIfNull(overLengthMaskString, DEFAULT_OVERLENGTH_MASKSTRING);
-
         //---------------------------------------------------------------
         String string = value.toString();
         if (string.length() <= maxLength){
@@ -131,7 +130,10 @@ public class StringOverLengthJsonValueProcessor extends AbstractJsonValueProcess
         }
 
         //---------------------------------------------------------------
-        return StringUtil.substring(string, 0, maxLength) + useOverLengthMaskString;
+        String useOverLengthMaskString = defaultIfNull(overLengthMaskString, DEFAULT_OVERLENGTH_MASKSTRING);
+
+        //see https://github.com/ifeilong/feilong/issues/563 jsonutil 如果截取, 加上换行
+        return StringUtil.substring(string, 0, maxLength) + useOverLengthMaskString + lineSeparator();
     }
 
     //---------------------------------------------------------------
