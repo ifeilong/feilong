@@ -127,7 +127,7 @@
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
 		<!-- 1.3 对应jdk 8    1.4 对应jdk11 -->
-		<version.logback>1.3.6</version.logback>
+		<version.logback>1.3.7</version.logback>
 
 
 		<version.aspectjweaver>1.6.8</version.aspectjweaver>
@@ -153,7 +153,7 @@
 
 		<!-- http://maven.apache.org/components/plugins/maven-assembly-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MASSEMBLY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-assembly-plugin>3.5.0</v.maven-assembly-plugin>
+		<v.maven-assembly-plugin>3.6.0</v.maven-assembly-plugin>
 
 		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
 
@@ -171,7 +171,7 @@
 
 		<!-- https://issues.apache.org/jira/projects/MDEP?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released -->
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.5.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.6.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -195,7 +195,7 @@
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MPLUGIN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-plugin-plugin>3.8.1</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.9.0</v.maven-plugin-plugin>
 
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
@@ -219,7 +219,7 @@
 		
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MRELEASE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-release-plugin>3.0.0</v.maven-release-plugin>
+		<v.maven-release-plugin>3.0.1</v.maven-release-plugin>
 
 		<!-- https://issues.apache.org/jira/browse/MRESOURCES/?selectedTab=com.atlassian.jira.jira-projects-plugin:changelog-panel -->
 		<v.maven-resources-plugin>3.3.0</v.maven-resources-plugin>
