@@ -270,6 +270,6 @@ public final class RegexUtil{
      */
     public static Pattern buildPattern(final String regexPattern,final int flags){
         String key = regexPattern + "@" + flags;
-        return PATTERN_CACHE.computeIfAbsent(key, k -> Pattern.compile(regexPattern, flags));
+        return MapUtil.computeIfAbsent(PATTERN_CACHE, key, k -> Pattern.compile(regexPattern, flags));
     }
 }

@@ -431,7 +431,7 @@ public final class StringUtil{
      * 
      * <pre class="code">
      * 
-     * <span style="color:green">//分隔字符串并添加引号.</span>
+     * <span style="color:green">//分隔字符串并添加单引号.</span>
      * public void splitAndAddYinHao(){
      *     String a = "12345,56789,1123456";
      *     String[] aStrings = a.split(",");
