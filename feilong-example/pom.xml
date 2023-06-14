@@ -47,13 +47,13 @@
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.0.0</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.1.2</v.maven-surefire-plugin>
 		
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-compiler-plugin>3.11.0</v.maven-compiler-plugin>
 		
-		<v.native2ascii-maven-plugin>2.0.1</v.native2ascii-maven-plugin>
+		<v.native2ascii-maven-plugin>2.1.0</v.native2ascii-maven-plugin>
 
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
 		<maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>

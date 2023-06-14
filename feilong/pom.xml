@@ -47,10 +47,10 @@
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-deploy-plugin>3.1.0</v.maven-deploy-plugin>
+		<v.maven-deploy-plugin>3.1.1</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
-		<v.maven-install-plugin>3.1.0</v.maven-install-plugin>
+		<v.maven-install-plugin>3.1.1</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-javadoc-plugin>3.5.0</v.maven-javadoc-plugin>
@@ -60,12 +60,13 @@
 
 		<!-- http://maven.apache.org/plugins/maven-source-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<!-- 升级到3.3.0 feilong shade 会报错 org.apache.maven.plugins:maven-source-plugin:3.3.0:jar (attach-sources) on project feilong: Presumably you have configured maven-source-plugn to execute twice times in your build. You have to configure a classifier for at least on of them. -->
 		<v.maven-source-plugin>3.2.1</v.maven-source-plugin>
 
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.0.0</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.1.2</v.maven-surefire-plugin>
 
 		<v.maven-gpg-plugin>1.6</v.maven-gpg-plugin>
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
@@ -338,6 +339,7 @@
 
 							<!-- When true, it will attempt to create a sources jar as well -->
 							<createSourcesJar>true</createSourcesJar>
+							<!-- <shadeSourcesContent>true</shadeSourcesContent>-->
 
 							<!--
 								When true, dependencies are kept in the pom but with scope 'provided';
