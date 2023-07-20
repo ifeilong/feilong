@@ -155,7 +155,9 @@
 		<!-- https://issues.apache.org/jira/projects/MASSEMBLY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-assembly-plugin>3.6.0</v.maven-assembly-plugin>
 
-		<v.maven-clean-plugin>3.2.0</v.maven-clean-plugin>
+		<!-- https://maven.apache.org/components/plugins/maven-clean-plugin/ -->
+		<!-- https://issues.apache.org/jira/projects/MCLEAN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
+		<v.maven-clean-plugin>3.3.1</v.maven-clean-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
@@ -216,8 +218,8 @@
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<v.maven-surefire-plugin>3.1.2</v.maven-surefire-plugin>
-		
-		
+
+
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MRELEASE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
 		<v.maven-release-plugin>3.0.1</v.maven-release-plugin>
@@ -228,7 +230,7 @@
 
 		<!-- http://maven.apache.org/plugins/maven-war-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MWAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-war-plugin>3.3.2</v.maven-war-plugin>
+		<v.maven-war-plugin>3.4.0</v.maven-war-plugin>
 
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
 
