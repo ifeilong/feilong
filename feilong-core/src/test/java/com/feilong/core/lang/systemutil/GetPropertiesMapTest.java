@@ -15,9 +15,9 @@
  */
 package com.feilong.core.lang.systemutil;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
@@ -25,9 +25,6 @@ import com.feilong.core.lang.SystemUtil;
 
 public class GetPropertiesMapTest{
 
-    /**
-     * Test get properties map for log.
-     */
     @Test
     public void testGetPropertiesMap(){
         assertThat(

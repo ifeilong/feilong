@@ -13,25 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.systemutil;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasKey;
+package com.feilong.tools.log4j2;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.SystemUtil;
+/**
+ * 
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @since 3.5.1
+ */
+public class LogPatternTest{
 
-public class GetEnvMapTest{
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogPatternTest.class);
 
+    /**
+     * TestLogPatternTest.
+     */
     @Test
-    public void testGetEnvMap(){
-
-        assertThat(
-                        SystemUtil.getEnvMap(),
-                        allOf(//
-                                        hasKey("PATH")));
-
+    public void testLogPatternTest(){
+        LOGGER.info("1111");
+        LOGGER.info("1111");
+        LOGGER.info("1111");
+        LOGGER.info("1111");
     }
+
 }

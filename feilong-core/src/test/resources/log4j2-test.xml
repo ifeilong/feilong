@@ -11,7 +11,12 @@
 <!-- https://logging.apache.org/log4j/2.x/manual/configuration.html#ConfigurationSyntax -->
 
 <!-- monitorInterval="600" -->
-<Configuration status="info" strict="true">
+
+<!-- Use of the packages attribute is deprecated and will be removed in Log4j 3.0.
+	Plugins should be processed with the Log4j annotation processor.
+	A comma separated list of package names to search for plugins.
+	Plugins are only loaded once per classloader so changing this value may not have any effect upon reconfiguration. -->
+<Configuration status="info" strict="true" packages="com.feilong.tools.log4j2.aaa,com.feilong.tools.log4j2.bbb">
 
 	<!-- Appenders:定义日志输出目的地，内容和格式等 -->
 	<Appenders>
@@ -20,13 +25,21 @@
 			<!-- pattern:日期,线程名,日志级别,日志名称,日志信息,换行 -->
 			<PatternLayout pattern="%d{HH:mm:ss} %-5p (%F:%L) [%M()] %m%n" />
 		</Console>
+
+		<!-- Console:日志输出到控制台标准输出 -->
+		<Console name="Console1" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss} %-5p (%F:%L) [%M()] %aaa %bbb %m%n" />
+		</Console>
 	</Appenders>
 
 	<!-- Loggers:定义日志级别和使用的Appenders -->
 	<Loggers>
 
-		<Logger name="com.feilong" level="debug">
+		<Logger name="com.feilong.tools.log4j2.LogPatternTest" level="debug" additivity="false">
+			<AppenderRef ref="Console1" />
 		</Logger>
+
+		<Logger name="com.feilong" level="debug" />
 		<Logger name="com.feilong.tools.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
 
