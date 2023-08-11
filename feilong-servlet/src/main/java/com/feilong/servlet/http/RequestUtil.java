@@ -40,7 +40,6 @@ import static java.util.Collections.emptyMap;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
@@ -1247,7 +1246,37 @@ public final class RequestUtil{
         }
         return map;
     }
+    //---------------------------------------------------------------
 
+    /**
+     * 判断一个请求是不是get method.
+     * 
+     * @param request
+     *            the request
+     * @return 如果没有request,那么返回false;否则判断request.getMethod() 是不是get (忽略大小写)
+     * @since 3.5.1
+     */
+    public static boolean isGetMethod(HttpServletRequest request){
+        if (null == request){
+            return false;
+        }
+        return StringUtils.equalsIgnoreCase("get", request.getMethod());
+    }
+
+    /**
+     * 判断一个请求是不是post method.
+     * 
+     * @param request
+     *            the request
+     * @return 如果没有request,那么返回false;否则判断request.getMethod() 是不是post (忽略大小写)
+     * @since 3.5.1
+     */
+    public static boolean isPostMethod(HttpServletRequest request){
+        if (null == request){
+            return false;
+        }
+        return StringUtils.equalsIgnoreCase("post", request.getMethod());
+    }
     //---------------------------------------------------------------
 
     /**
@@ -1279,6 +1308,8 @@ public final class RequestUtil{
     public static boolean isWechatRequest(HttpServletRequest request){
         return userAgentContainsString(request, "micromessenger");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断一个请求不是 <b>微信浏览器</b> 的请求.
@@ -1537,6 +1568,7 @@ public final class RequestUtil{
      *      </a>
      * @since 1.10.6
      * @since 1.14.2 add 多次获取特性
+     * @since 3.5.1 如果出现异常返回空字符串 ""
      */
     public static String getRequestBody(HttpServletRequest request){
         //since 1.14.2
@@ -1562,9 +1594,8 @@ public final class RequestUtil{
      * @param request
      *            the request
      * @return the string
-     * @throws UncheckedIOException
-     *             the unchecked IO exception
      * @since 1.14.2
+     * @since 3.5.1 如果出现异常返回空字符串 ""
      */
     private static String parseBody(HttpServletRequest request){
         try{
@@ -1574,8 +1605,10 @@ public final class RequestUtil{
             //Either this method or getInputStream may be called to read the body, not both.
             BufferedReader reader = request.getReader();
             return ReaderUtil.toString(reader);
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
+        }catch (Exception e){
+            //throw new UncheckedIOException(e);
+            LOGGER.warn("parseBodyException", e);
+            return EMPTY;
         }
     }
 }
