@@ -140,6 +140,9 @@ public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandl
                     HttpContext context,
                     String exceptionName,
                     Class<? extends IOException>[] retriableClasses){
+        //[2/3],[http://test.mapemall.com],exception:[org.apache.http.conn.ConnectTimeoutException],
+        //RETRIABLE_CLASSES:[[class java.net.SocketTimeoutException, class org.apache.http.conn.ConnectTimeoutException]],
+        //requestInfo:[POST /pay/redirect/doku?PAYMENTCHANNEL=01 HTTP/1.1 [User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21, Content-Length: 17, Content-Type: application/x-www-form-urlencoded; charset=UTF-8, Host: test.mapemall.com, Connection: Keep-Alive, Accept-Encoding: gzip,deflate]]
         return StringUtil.formatPattern(
                         "[{}/{}]],[{}],exception:[{}],RETRIABLE_CLASSES:[{}],requestInfo:[{}]",
                         executionCount,
