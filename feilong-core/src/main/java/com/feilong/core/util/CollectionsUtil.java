@@ -865,6 +865,55 @@ public final class CollectionsUtil{
         return objectCollection.add(element);
     }
 
+    /**
+     * 在condition 是true的情况下, 设置<code>objectList</code>指定index为 <code>element</code>元素.
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 对于以下代码:
+     * 
+     * <pre class="code">
+     * 
+     * String reason = getCategoryReason(appId, classifyCopyrightStrategyConfig);
+     * if (isNotNullOrEmpty(reason)){
+     *     result.set(6, reason);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * setIfCondition(result, 6, reason, isNotNullOrEmpty(reason));
+     * </pre>
+     * 
+     * 重构之后,一行可以搞定,代码阅读性更高
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param objectList
+     *            the collection to set, 不能为null
+     * @param index
+     *            the index
+     * @param element
+     *            需要添加的元素
+     * @param condition
+     *            the condition,仅当条件是true的情况下才会 set
+     * @since 3.5.1
+     */
+    public static <T> void setIfCondition(final List<T> objectList,int index,final T element,boolean condition){
+        Validate.notNull(objectList, "objectList can't be null!");
+        if (!condition){
+            return;
+        }
+        objectList.set(index, element);
+    }
+
     //---------------------------------------------------------------
 
     /**
