@@ -19,6 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -94,6 +95,10 @@ public class HttpUriRequestFactory{
             case PUT:
                 return buildPut(httpRequest);
 
+            //since 3.5.1
+            case PATCH:
+                return buildPatch(httpRequest);
+
             default:
                 throw new NotImplementedException(httpMethodType + " is not implemented!");
         }
@@ -158,5 +163,20 @@ public class HttpUriRequestFactory{
 
         httpPut.setEntity(HttpEntityBuilder.build(httpRequest));
         return httpPut;
+    }
+
+    /**
+     * Builds the put.
+     *
+     * @param httpRequest
+     *            the http request
+     * @return the http put
+     * @since 3.5.1
+     */
+    private static HttpPatch buildPatch(HttpRequest httpRequest){
+        HttpPatch httpPatch = new HttpPatch(buildURI(httpRequest));
+
+        httpPatch.setEntity(HttpEntityBuilder.build(httpRequest));
+        return httpPatch;
     }
 }

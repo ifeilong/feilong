@@ -594,7 +594,28 @@ public final class HttpClientUtil{
     public static String get(String uri,Map<String, String> requestParamMap){
         Validate.notBlank(uri, "uri can't be blank!");
 
-        return getResponseBodyAsString(new HttpRequest(uri, requestParamMap, HttpMethodType.GET));
+        return get(uri, requestParamMap, null);
+    }
+
+    /**
+     * 发送 get 请求,获得请求的响应内容.
+     *
+     * @param uri
+     *            请求的uri地址
+     * @param requestParamMap
+     *            the request param map
+     * @param headerMap
+     *            the header map
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 3.5.1
+     */
+    public static String get(String uri,Map<String, String> requestParamMap,Map<String, String> headerMap){
+        Validate.notBlank(uri, "uri can't be blank!");
+
+        HttpRequest httpRequest = new HttpRequest(uri, requestParamMap, HttpMethodType.GET);
+        httpRequest.setHeaderMap(headerMap);
+        return getResponseBodyAsString(httpRequest);
     }
 
     //---------------------------------------------------------------
@@ -707,43 +728,6 @@ public final class HttpClientUtil{
 
     /**
      * 发送 put 请求,获得请求的响应内容.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * <b>场景:</b> 发信息给百度,并得到相应字符串
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * public void testGetResponseBodyAsString(){
-     *     String urlString = "http://www.baidu.com";
-     * 
-     *     LOGGER.debug(HttpClientUtil.put(urlString, null));
-     * }
-     * 
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre>
-     *     {@code
-     *     <!DOCTYPE html>
-     *     <!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv=
-    X-UA-Compatible content=
-     *     IE=Edge><meta content=always name=
-     *     referrer><link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css><title>百度一下，你就知道</title></head> <body link
-     *     =#0000cc> <div id=wrapper> <div id=head> <div class=head_wrapper> <div id=
-     *     u1> <a href=http://news.baidu.com name=tj_trnews class=mnav>新闻</a> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123</a> <a href=http://map.baidu.com name=tj_trmap class=mnav>地图</a> <a href=http://v.baidu.com name=tj_trvideo class=mnav>视频</a> <a href=http://tieba.baidu.com name=tj_trtieba class=mnav>贴吧</a> <noscript> <a href=http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb>登录</a> </noscript> <script>document.write('<a href="http://www.baidu.com/bdorz/login.gif?login&tpl=mn&u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&")+ "bdorz_come=1")+ '" name="tj_login" class="lb">登录</a>');</script> <a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;">更多产品</a> </div> </div> </div> <div id
-     *     =ftCon> <div id=ftConw> <p id=lh> <a href=http://home.baidu.com>关于百度</a> <a href=http://ir.baidu.com>About Baidu</a> </p> <p id=
-     *     cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读</a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈</a>&nbsp;京ICP证030173号&nbsp;  </p> </div> </div> </div> </body> </html>
-     *     
-     *     }
-     * </pre>
-     * 
-     * </blockquote>
      *
      * @param uri
      *            请求的uri地址
@@ -756,6 +740,26 @@ public final class HttpClientUtil{
     public static String put(String uri,Map<String, String> requestParamMap){
         Validate.notBlank(uri, "uri can't be blank!");
         return getResponseBodyAsString(new HttpRequest(uri, requestParamMap, HttpMethodType.PUT));
+    }
+
+    /**
+     * 发送 put 请求,获得请求的响应内容.
+     *
+     * @param uri
+     *            请求的uri地址
+     * @param requestParamMap
+     *            the request param map
+     * @param headerMap
+     *            the header map
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 3.5.1
+     */
+    public static String put(String uri,Map<String, String> requestParamMap,Map<String, String> headerMap){
+        Validate.notBlank(uri, "uri can't be blank!");
+        HttpRequest httpRequest = new HttpRequest(uri, requestParamMap, HttpMethodType.PUT);
+        httpRequest.setHeaderMap(headerMap);
+        return getResponseBodyAsString(httpRequest);
     }
 
     //---------------------------------------------------------------
@@ -919,6 +923,26 @@ public final class HttpClientUtil{
     }
 
     /**
+     * 发送 post 请求,获得请求的响应内容.
+     *
+     * @param uri
+     *            请求的uri地址
+     * @param requestParamMap
+     *            the request param map
+     * @param headerMap
+     *            the header map
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 3.5.1
+     */
+    public static String post(String uri,Map<String, String> requestParamMap,Map<String, String> headerMap){
+        Validate.notBlank(uri, "uri can't be blank!");
+        HttpRequest httpRequest = new HttpRequest(uri, requestParamMap, HttpMethodType.POST);
+        httpRequest.setHeaderMap(headerMap);
+        return getResponseBodyAsString(httpRequest);
+    }
+
+    /**
      * 发送 Post 请求,并且设置 RequestBody ,获得请求的响应内容.
      * 
      * <h3>示例:</h3>
@@ -993,6 +1017,46 @@ public final class HttpClientUtil{
         Validate.notBlank(uri, "uri can't be blank!");
 
         HttpRequest httpRequest = new HttpRequest(uri, null, HttpMethodType.POST);
+        httpRequest.setHeaderMap(headerMap);
+        httpRequest.setRequestBody(requestBody);
+        return getResponseBodyAsString(httpRequest);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 发送 patch 请求,并且设置 RequestBody ,以及 headerMap,获得请求的响应内容.
+     *
+     * @param uri
+     *            the uri
+     * @param requestBody
+     *            the request body
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 3.5.1
+     */
+    public static String patch(String uri,String requestBody){
+        Validate.notBlank(uri, "uri can't be blank!");
+        return patch(uri, requestBody, null);
+    }
+
+    /**
+     * 发送 patch 请求,并且设置 RequestBody ,以及 headerMap,获得请求的响应内容.
+     *
+     * @param uri
+     *            the uri
+     * @param requestBody
+     *            the request body
+     * @param headerMap
+     *            the header map
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 3.5.1
+     */
+    public static String patch(String uri,String requestBody,Map<String, String> headerMap){
+        Validate.notBlank(uri, "uri can't be blank!");
+
+        HttpRequest httpRequest = new HttpRequest(uri, null, HttpMethodType.PATCH);
         httpRequest.setHeaderMap(headerMap);
         httpRequest.setRequestBody(requestBody);
         return getResponseBodyAsString(httpRequest);

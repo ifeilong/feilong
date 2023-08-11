@@ -202,7 +202,71 @@ public enum HttpMethodType{
      * @since 1.12.5
      * @since http1.1
      */
-    PUT("put");
+    PUT("put"),
+
+    /**
+     * PATCH方式,PATCH方法用于资源的部分内容的更新.
+     * 
+     * <p>
+     * 而PUT方法已经被定义为用一个请求体去修改一个完整的资源。并且不能重复做部分更改，否则代理和缓存、甚至服务器或者客户端都会得到有问题的操作结果。
+     * 至此，PATCH方法有了被完全定义的必要。
+     * PATCH在请求中定义了一个描述修改的实体集合，如果被请求修改的资源不存在，服务器可能会创建一个新的资源。
+     * </p>
+     * 
+     * <p>
+     * The PATCH method requests that a set of changes described in the request entity be applied to the resource identified by the Request-
+     * URI. The set of changes is represented in a format called a “patch document” identified by a media type. If the Request-URI does not
+     * point to an existing resource, the server MAY create a new resource, depending on the patch document type (whether it can logically
+     * modify a null resource) and permissions, etc.The difference between the PUT and PATCH requests is reflected in the way the server
+     * processes the enclosed entity to modify the resource identified by the Request-URI. In a PUT request, the enclosed entity is
+     * considered to be a modified version of the resource stored on the origin server, and the client is requesting that the stored version
+     * be replaced. With PATCH, however, the enclosed entity contains a set of instructions describing how a resource currently residing on
+     * the origin server should be modified to produce a new version. The PATCH method affects the resource identified by the Request-URI,
+     * and it also MAY have side effects on other resources; i.e., new resources may be created, or existing ones modified, by the
+     * application of a PATCH.
+     * </p>
+     * 
+     * <p>
+     * PUT与PATCH的区别反映在服务器内部修改资源的方式中。
+     * The difference between the PUT and PATCH requests is reflected in the way the server processes the enclosed entity to modify the
+     * resource
+     * identified by the Request-URI. In a PUT request, the enclosed entity is considered to be a modified version of the resource stored on
+     * the
+     * origin server, and the client is requesting that the stored version be replaced. With PATCH, however, the enclosed entity contains a
+     * set
+     * of instructions describing how a resource currently residing on the origin server should be modified to produce a new version. The
+     * PATCH
+     * method affects the resource identified by the Request-URI, and it also MAY have side effects on other resources; i.e., new resources
+     * may be created, or existing ones modified, by the application of a PATCH.
+     * </p>
+     * 
+     * <p>
+     * 简单来说就是：
+     * 
+     * PATCH方法用于资源的部分内容的更新；
+     * PUT用于更新某个较为完整的资源；
+     * </p>
+     * 
+     * HTTP Patch 的主要目的是对现有资源进行部分更新，而不是完全替换或删除它们。
+     * 
+     * 与 HTTP PUT 方法不同，HTTP Patch 允许客户端发送仅包含要更新的部分数据的请求，而不需要提供整个资源的内容。这在一些情况下非常有用，例如：
+     * 
+     * <ul>
+     * <li>部分更新： 当你只想更新资源的特定属性或字段时，而不想影响其他属性。</li>
+     * <li>避免冲突： 如果多个客户端正在并发更新同一资源，使用部分更新可以减少冲突的可能性，因为不需要完全替换资源。</li>
+     * <li>节省带宽： 如果资源很大，只需要更新其中的一小部分，可以减少数据传输量。</li>
+     * <li>原子操作： 使用部分更新可以实现原子操作，确保多个属性在一次请求中更新，从而避免不一致状态。</li>
+     * </ul>
+     * <p>
+     * 在 HTTP Patch 请求中，客户端通常发送一个包含要应用于资源的更改的表示形式的请求。服务器会解释这些更改，并尝试将它们应用于资源。
+     * 需要注意的是，HTTP Patch 方法的确切行为取决于服务器的实现，因此在使用时需要查阅相关文档或规范来了解服务器如何处理部分更新。
+     * </p>
+     * 
+     * 
+     * @since 3.5.1
+     * @since http1.1
+     */
+    PATCH("patch");
 
     //---------------------------------------------------------------
 
