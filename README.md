@@ -113,6 +113,10 @@ feilong-component  | 组件式操作,含配置式即可获取数据-->转成exce
 feilong | 一体化total jar包,包含上述所有功能
 feilong-with-optional | 一体化total jar包,包含上述所有功能,且包含所有optional jar依赖
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ifeilong/feilong&type=Timeline)](https://star-history.com/#ifeilong/feilong&Timeline)
+
 ## :memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置 [版权说明](https://github.com/ifeilong/feilong/blob/master/LICENSE) ;
