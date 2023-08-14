@@ -110,8 +110,16 @@ public final class WebSpringUtil{
      * @since 1.10.0
      */
     public static HttpServletRequest getRequest(){
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return servletRequestAttributes.getRequest();
+        try{
+            //the RequestAttributes currently bound to the thread, or null if none bound
+            ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (null == servletRequestAttributes){
+                return null;
+            }
+            return servletRequestAttributes.getRequest();
+        }catch (Throwable e){
+            return null;
+        }
     }
 
     //---------------------------------------------------------------
