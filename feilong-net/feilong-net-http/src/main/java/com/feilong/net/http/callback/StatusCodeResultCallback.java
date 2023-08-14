@@ -18,8 +18,12 @@ package com.feilong.net.http.callback;
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.json.JsonUtil;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 
@@ -30,6 +34,11 @@ import com.feilong.net.http.HttpRequest;
  * @since 2.1.0
  */
 public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
+
+    /** The Constant log. */
+    private static final Logger                  LOGGER   = LoggerFactory.getLogger(StatusCodeResultCallback.class);
+
+    //---------------------------------------------------------------
 
     /** Static instance. */
     // the static instance works for all types
@@ -44,13 +53,20 @@ public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
 
-        com.feilong.net.http.HttpResponse feilongHttpResponse = buildHttpResponse(
-                        httpRequest,
-                        httpUriRequest,
-                        httpResponse,
-                        useConnectionConfig,
-                        beginDate);
-        return feilongHttpResponse.getStatusCode();
+        //只需要http status code see https://github.com/ifeilong/feilong/issues/584
+        StatusLine statusLine = httpResponse.getStatusLine();
+        int statusCode = statusLine.getStatusCode();
+
+        //---------------------------------------------------------------
+
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(
+                            "request:[{}],useConnectionConfig:[{}],statusCode:[{}]",
+                            JsonUtil.toString(httpRequest, true),
+                            JsonUtil.toString(useConnectionConfig, true),
+                            httpResponse.getStatusLine());
+        }
+        return statusCode;
     }
 
 }
