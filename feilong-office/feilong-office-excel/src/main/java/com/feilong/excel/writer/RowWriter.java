@@ -17,12 +17,11 @@ package com.feilong.excel.writer;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +80,7 @@ class RowWriter{
     }
 
     private static void writeCells(Sheet sheet,ExcelBlock excelBlock,int rowOffset,Map<String, CellStyle> styleMap,OgnlStack ognlStack){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         int rowIndex = 0;
         for (ExcelCell excelCell : excelBlock.getCells()){
@@ -94,7 +93,11 @@ class RowWriter{
             setCellStyle(sheet, styleMap, ognlStack, excelCell, rowIndex, col);
         }
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("write row:[{}] over,rowOffset:[{}],use time: [{}]", rowIndex, rowOffset, formatDuration(beginDate));
+            LOGGER.trace(
+                            "write row:[{}] over,rowOffset:[{}],use time: [{}]",
+                            rowIndex,
+                            rowOffset,
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

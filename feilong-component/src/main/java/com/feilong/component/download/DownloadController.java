@@ -15,11 +15,10 @@
  */
 package com.feilong.component.download;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +58,7 @@ public class DownloadController{
 
     @RequestMapping(value = "/download",method = { GET, POST })
     public void download(HttpServletRequest request,HttpServletResponse response){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         RequestFileCreator requestFileCreator = requestFileCreatorDetector.detect(request);
 
@@ -71,8 +70,12 @@ public class DownloadController{
         int incrementAndGet = counter.incrementAndGet();
 
         if (LOGGER.isInfoEnabled()){
-            String pattern = "download times:[{}],requestFileCreator:[{}],use time: [{}]";
-            LOGGER.info(pattern, incrementAndGet, requestFileCreator.getClass().getSimpleName(), formatDuration(beginDate));
+            String pattern = "download times:[{}],requestFileCreator:[{}],useTime: [{}]";
+            LOGGER.info(
+                            pattern,
+                            incrementAndGet,
+                            requestFileCreator.getClass().getSimpleName(),
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 }

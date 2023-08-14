@@ -15,12 +15,10 @@
  */
 package com.feilong.core.lang.thread;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.lib.lang3.ClassUtils.getSimpleName;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,13 +90,13 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
         }
 
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         actualExecute(list, eachSize, paramsMap, partitionRunnableBuilder);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("end [{}],use time:[{}]", partitionRunnableBuilderName, formatDuration(beginDate));
+            LOGGER.info("end [{}],use time:[{}]", partitionRunnableBuilderName, formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

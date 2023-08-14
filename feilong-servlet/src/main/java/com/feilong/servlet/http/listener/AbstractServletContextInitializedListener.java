@@ -15,9 +15,7 @@
  */
 package com.feilong.servlet.http.listener;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
-
-import java.util.Date;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -47,12 +45,12 @@ public abstract class AbstractServletContextInitializedListener implements Servl
      */
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         initialized(servletContextEvent);
 
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("[{}] initialized use time: [{}]", getClass().getName(), formatDuration(beginDate));
+            LOGGER.info("[{}] initialized use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

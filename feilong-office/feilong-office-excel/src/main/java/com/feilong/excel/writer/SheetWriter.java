@@ -15,13 +15,12 @@
  */
 package com.feilong.excel.writer;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +55,7 @@ class SheetWriter{
     //---------------------------------------------------------------
 
     public static void write(Sheet sheet,ExcelSheet excelSheet,Map<String, CellStyle> styleMap,Object ognlData){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         OgnlStack ognlStack = new OgnlStack(ognlData);
         setSheetName(sheet, excelSheet, ognlStack);
@@ -69,7 +68,7 @@ class SheetWriter{
         }
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatDuration(beginDate));
+            LOGGER.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 
@@ -85,7 +84,7 @@ class SheetWriter{
             LOGGER.debug("excelBlock:{}", JsonUtil.toString(excelBlock));
         }
         //---------------------------------------------------------------
-        Date blockBeginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
         //循环
         if (excelBlock.isLoop()){
             List<CellRangeAddress> cellRangeAddressList = mergedRegionsMap.get(excelBlock);
@@ -101,7 +100,7 @@ class SheetWriter{
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             String pattern = "write sheet block:[{}]-[{}], use time: [{}]";
-            LOGGER.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDuration(blockBeginDate));
+            LOGGER.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

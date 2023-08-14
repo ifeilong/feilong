@@ -17,13 +17,11 @@ package com.feilong.taglib;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
@@ -65,7 +63,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
      * Execute.
      */
     protected void execute(){
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         HttpServletRequest request = getHttpServletRequest();
 
@@ -80,7 +78,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
         if (LOGGER.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String tagLog = isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
-            String useTime = formatDuration(beginDate);
+            String useTime = formatDurationUseBeginTimeMillis(beginTimeMillis);
             LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), tagLog, useTime);
         }
     }

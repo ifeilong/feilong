@@ -16,10 +16,8 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.bean.ConvertUtil.toLong;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -326,14 +324,18 @@ public final class ThreadUtil{
         Validate.isTrue(threadCount > 0, "threadCount must > 0");
 
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         Thread[] threads = buildThreadArray(runnable, threadCount);
         ThreadUtil.startAndJoin(threads);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("runnable:[{}],threadCount:[{}],total use time:{}", runnable, threadCount, formatDuration(beginDate));
+            LOGGER.info(
+                            "runnable:[{}],threadCount:[{}],total use time:{}",
+                            runnable,
+                            threadCount,
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

@@ -15,10 +15,9 @@
  */
 package com.feilong.excel.writer;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static java.util.Collections.emptyMap;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +28,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.excel.ExcelDefinition;
 import com.feilong.excel.definition.ExcelSheet;
-import com.feilong.core.Validate;
 
 /**
  * The Class StyleMapBuilder.
@@ -75,7 +74,7 @@ class StyleMapBuilder{
         Validate.isTrue(styleSheetPosition.intValue() >= excelSheetsSize, "Style Sheet can not be one Template Sheet.");
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         Map<String, CellStyle> styleMap = new HashMap<>();
         Sheet sheet = workbook.getSheetAt(styleSheetPosition);
@@ -89,7 +88,10 @@ class StyleMapBuilder{
         workbook.removeSheetAt(styleSheetPosition);
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("buildStyleMap use time: [{}],StyleMap size:[{}]", formatDuration(beginDate), styleMap.size());
+            LOGGER.debug(
+                            "buildStyleMap use time: [{}],StyleMap size:[{}]",
+                            formatDurationUseBeginTimeMillis(beginTimeMillis),
+                            styleMap.size());
         }
         return styleMap;
     }

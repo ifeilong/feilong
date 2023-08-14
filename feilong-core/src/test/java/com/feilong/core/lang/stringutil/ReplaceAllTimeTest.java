@@ -15,9 +15,8 @@
  */
 package com.feilong.core.lang.stringutil;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
-import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
@@ -59,30 +58,30 @@ public class ReplaceAllTimeTest{
     }
 
     private void extracted(){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         for (int i = 0, j = j2; i < j; ++i){
             StringUtil.replaceAll(content, regex, replacement);
             //             pattern.matcher(content).replaceAll(replacement);
         }
-        LOGGER.info("new use time: [{}]", formatDuration(beginDate));
+        LOGGER.info("new use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
     }
 
     private void extractedOrg(){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
         for (int i = 0, j = j2; i < j; ++i){
             //            StringUtil.replaceAll(content, regex, "");
             content.replaceAll(regex, replacement);
         }
-        LOGGER.info("org use time: [{}]", formatDuration(beginDate));
+        LOGGER.info("org use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
     }
 
     private void extractedApache(){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
         for (int i = 0, j = 10000; i < j; ++i){
             StringUtils.replace(content, regex, replacement);
         }
-        LOGGER.info("apache use time: [{}]", formatDuration(beginDate));
+        LOGGER.info("apache use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
     }
 
 }

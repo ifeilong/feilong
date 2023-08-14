@@ -24,10 +24,10 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RandomUtil;
-import com.feilong.core.Validate;
 
 /**
  * 默认的code 生成器.

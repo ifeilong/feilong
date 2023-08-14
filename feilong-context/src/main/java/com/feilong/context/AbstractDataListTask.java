@@ -16,9 +16,8 @@
 package com.feilong.context;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -56,7 +55,7 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
      */
     @Override
     public Void run(){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         String taskName = this.getClass().getName();
         //---------------------------------------------------------------
@@ -67,7 +66,11 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
             //如果没有,那么就简单的日志
             if (LOGGER.isInfoEnabled()){
                 String name = dataListQuery.getClass().getName();
-                LOGGER.info("[{}],use dataListQuery:[{}] query no data list,use time: [{}]", taskName, name, formatDuration(beginDate));
+                LOGGER.info(
+                                "[{}],use dataListQuery:[{}] query no data list,use time: [{}]",
+                                taskName,
+                                name,
+                                formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
             return null;
         }
@@ -78,7 +81,11 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("[{}],dataList size:[{}],use time: [{}]", taskName, dataList.size(), formatDuration(beginDate));
+            LOGGER.info(
+                            "[{}],dataList size:[{}],useTime: [{}]",
+                            taskName,
+                            dataList.size(),
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
         return null;
     }

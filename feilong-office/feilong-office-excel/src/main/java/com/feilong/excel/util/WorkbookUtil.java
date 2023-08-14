@@ -15,13 +15,12 @@
  */
 package com.feilong.excel.util;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
-import java.util.Date;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -65,11 +64,11 @@ public class WorkbookUtil{
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
         try{
             Workbook workbook = WorkbookFactory.create(inputStream);
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("create workbook from [{}],use time: [{}]", inputStream, formatDuration(beginDate));
+                LOGGER.debug("create workbook from [{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
             return workbook;
         }catch (EncryptedDocumentException e){
@@ -97,11 +96,11 @@ public class WorkbookUtil{
         Validate.notNull(outputStream, "outputStream can't be null!");
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
         try{
             workbook.write(outputStream);
             if (LOGGER.isInfoEnabled()){
-                LOGGER.info("write workbook to outputStream use time: [{}]", formatDuration(beginDate));
+                LOGGER.info("write workbook to outputStream use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

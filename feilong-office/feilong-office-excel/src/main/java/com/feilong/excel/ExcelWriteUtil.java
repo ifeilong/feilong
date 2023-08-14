@@ -18,7 +18,7 @@ package com.feilong.excel;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
@@ -29,7 +29,6 @@ import static java.util.Collections.emptyMap;
 
 import java.io.OutputStream;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +133,7 @@ public class ExcelWriteUtil{
 
                     Map<String, Object> beans,
                     String outputFileName){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         Validate.notBlank(templateLocation, "templateLocation can't be blank!");
         Validate.notBlank(sheetDefinitionLocation, "sheetDefinitionLocation can't be blank!");
@@ -158,7 +157,13 @@ public class ExcelWriteUtil{
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            Map<String, Object> map = buildMap(templateLocation, sheetDefinitionLocation, sheetNames, beans, useOutputFileName, beginDate);
+            Map<String, Object> map = buildMap(
+                            templateLocation,
+                            sheetDefinitionLocation,
+                            sheetNames,
+                            beans,
+                            useOutputFileName,
+                            beginTimeMillis);
             LOGGER.info("write [SUCCESS],params info:[{}]", JsonUtil.toString(map));
         }
 
@@ -252,9 +257,9 @@ public class ExcelWriteUtil{
 
                     Map<String, Object> beans,
                     String outputFileName,
-                    Date beginDate){
+                    long beginTimeMillis){
         Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName);
-        map.put("useTime", formatDuration(beginDate));
+        map.put("useTime", formatDurationUseBeginTimeMillis(beginTimeMillis));
         return map;
     }
 

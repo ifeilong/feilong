@@ -18,8 +18,7 @@ package com.feilong.io;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
@@ -35,7 +34,6 @@ import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.Date;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -295,7 +293,7 @@ public final class IOReaderUtil{
             LOGGER.debug("start read fileInputStream:[{}] to String,use charsetName:[{}]", fileInputStream, charsetName);
         }
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
         //---------------------------------------------------------------
@@ -319,7 +317,10 @@ public final class IOReaderUtil{
             //---------------------------------------------------------------
             String result = sb.toString();
             if (LOGGER.isInfoEnabled()){
-                LOGGER.info("end read fileInputStream:[{}],use time: [{}]", fileInputStream, formatDuration(beginDate));
+                LOGGER.info(
+                                "end read fileInputStream:[{}],use time: [{}]",
+                                fileInputStream,
+                                formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
             return result;
         }catch (IOException e){
@@ -382,7 +383,7 @@ public final class IOReaderUtil{
     public static String readToString(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("start read inputStream:[{}] to String,use charsetName:[{}]", inputStream, charsetName);
@@ -391,7 +392,7 @@ public final class IOReaderUtil{
         try{
             String result = InputStreamUtil.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
             if (LOGGER.isInfoEnabled()){
-                LOGGER.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDuration(beginDate));
+                LOGGER.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
             return result;
         }finally{
@@ -617,7 +618,7 @@ public final class IOReaderUtil{
         }
 
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
         Set<String> set = newLinkedHashSet();
         //---------------------------------------------------------------
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
@@ -639,7 +640,7 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             String format = "end read reader:[{}],readerConfig:[{}],use time: [{}]";
-            LOGGER.info(format, reader, JsonUtil.toString(useReaderConfig), formatDuration(beginDate));
+            LOGGER.info(format, reader, JsonUtil.toString(useReaderConfig), formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
         return set;
     }
@@ -793,7 +794,7 @@ public final class IOReaderUtil{
             LOGGER.debug("start resolverFile reader:[{}], lineNumberReaderResolver:[{}]", reader, lineNumberReaderResolver);
         }
 
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
         //---------------------------------------------------------------
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
             String line = null;
@@ -812,7 +813,7 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             String format = "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]";
-            LOGGER.info(format, reader, lineNumberReaderResolver, formatDuration(beginDate));
+            LOGGER.info(format, reader, lineNumberReaderResolver, formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 }

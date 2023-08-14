@@ -17,15 +17,13 @@ package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -194,7 +192,7 @@ public final class ResponseDownloadUtil{
                     Number contentLength,
                     HttpServletRequest request,
                     HttpServletResponse response){
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
         String length = FileUtil.formatSize(contentLength.longValue());
         LOGGER.info("begin download~~,saveFileName:[{}],contentLength:[{}]", saveFileName, length);
         try{
@@ -202,7 +200,7 @@ public final class ResponseDownloadUtil{
             IOWriteUtil.write(inputStream, outputStream);
             if (LOGGER.isInfoEnabled()){
                 String pattern = "end download,saveFileName:[{}],contentLength:[{}],time use:[{}]";
-                LOGGER.info(pattern, saveFileName, length, formatDuration(beginDate));
+                LOGGER.info(pattern, saveFileName, length, formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
         }catch (IOException e){
             /*

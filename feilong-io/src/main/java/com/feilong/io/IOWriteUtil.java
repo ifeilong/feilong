@@ -16,8 +16,7 @@
 package com.feilong.io;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.io.entity.FileWriteMode.COVER;
 
@@ -33,7 +32,6 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,7 +175,7 @@ public final class IOWriteUtil{
         Validate.notBlank(filePath, "filePath can't be null/empty!");
 
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         String useEncode = defaultIfNullOrEmpty(charsetType, UTF8);
         FileWriteMode useFileWriteMode = defaultIfNullOrEmpty(fileWriteMode, COVER);
@@ -196,7 +194,7 @@ public final class IOWriteUtil{
             File file = new File(filePath);
             String size = FileUtil.getFileFormatSize(file);
             String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
-            String useTime = formatDuration(beginDate);
+            String useTime = formatDurationUseBeginTimeMillis(beginTimeMillis);
             LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
         }
     }
@@ -266,7 +264,7 @@ public final class IOWriteUtil{
         Validate.notBlank(fileName, "fileName can't be blank!");
 
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         //---------------------------------------------------------------
         //since 1.12.9
@@ -288,7 +286,11 @@ public final class IOWriteUtil{
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
-            LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), formatDuration(beginDate));
+            LOGGER.info(
+                            messagePattern,
+                            FileUtil.getFileFormatSize(file),
+                            file.getAbsolutePath(),
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
         return filePath;
     }
@@ -418,7 +420,7 @@ public final class IOWriteUtil{
         Validate.notNull(inputStream, "inputStream can't be null!");
         Validate.notNull(outputStream, "outputStream can't be null!");
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         int loopCount = 0;
         long sumSize = 0;
@@ -437,7 +439,12 @@ public final class IOWriteUtil{
             //---------------------------------------------------------------
             if (LOGGER.isDebugEnabled()){
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
-                LOGGER.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, formatDuration(beginDate));
+                LOGGER.debug(
+                                pattern,
+                                FileUtil.formatSize(sumSize),
+                                bufferLength,
+                                loopCount,
+                                formatDurationUseBeginTimeMillis(beginTimeMillis));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

@@ -17,10 +17,7 @@ package com.feilong.formatter;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
-
-import java.util.Date;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -106,8 +103,11 @@ public class SimpleBeanFormattterTest extends AbstractTest{
 
     @After
     public void after(){
-        Date beginDate = now();
+
+        long beginTimeMillis = System.currentTimeMillis();
+
         LOGGER.debug(FormatterUtil.formatToSimpleTable(ITERABLE_DATA, beanFormatterConfig));
-        LOGGER.info("use time: [{}]", formatDuration(beginDate));
+        LOGGER.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+
     }
 }

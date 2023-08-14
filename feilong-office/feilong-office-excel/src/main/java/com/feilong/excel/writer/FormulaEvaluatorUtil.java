@@ -15,9 +15,8 @@
  */
 package com.feilong.excel.writer;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,7 +56,7 @@ public class FormulaEvaluatorUtil{
      *            the wb
      */
     public static void reCalculate(Workbook workbook){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
         for (int sheetNum = 0; sheetNum < workbook.getNumberOfSheets(); sheetNum++){
@@ -73,7 +72,7 @@ public class FormulaEvaluatorUtil{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("reCalculate workbook use time: [{}]", formatDuration(beginDate));
+            LOGGER.debug("reCalculate workbook use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
 
     }

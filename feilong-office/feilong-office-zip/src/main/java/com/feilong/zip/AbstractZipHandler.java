@@ -15,12 +15,10 @@
  */
 package com.feilong.zip;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +56,7 @@ public abstract class AbstractZipHandler implements ZipHandler{
         Validate.notBlank(outputZipPath, "outputZipPath can't be blank!");
 
         //---------------------------------------------------------------
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("begin zip:[{}] to outputZipPath:[{}]", tobeZipFilePath, outputZipPath);
         }
@@ -72,7 +70,11 @@ public abstract class AbstractZipHandler implements ZipHandler{
         }
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("use time:[{}],end zip:[{}],outputZipPath:[{}]", formatDuration(beginDate), tobeZipFilePath, outputZipPath);
+            LOGGER.info(
+                            "use time:[{}],end zip:[{}],outputZipPath:[{}]",
+                            formatDurationUseBeginTimeMillis(beginTimeMillis),
+                            tobeZipFilePath,
+                            outputZipPath);
         }
     }
 

@@ -18,12 +18,11 @@ package com.feilong.excel;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -176,7 +175,7 @@ public class ExcelReaderUtil{
      * @since 1.0.9
      */
     private static <T> List<T> read(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
-        Date beginDate = new Date();
+        long beginTimeMillis = System.currentTimeMillis();
 
         Map<String, Object> beans = readData(excelReader, inputStream, sheetNo);
         //--------------------------------------------------------------- 
@@ -186,7 +185,7 @@ public class ExcelReaderUtil{
             map.put("dataName", dataName);
             map.put("sheetNo", sheetNo);
             map.put("list size", size(list));
-            map.put("use time", formatDuration(beginDate));
+            map.put("use time", formatDurationUseBeginTimeMillis(beginTimeMillis));
             LOGGER.info("use time: [{}]", JsonUtil.toString(map));
         }
         return list;

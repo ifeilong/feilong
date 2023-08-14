@@ -15,13 +15,12 @@
  */
 package com.feilong.excel;
 
-import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +59,7 @@ class ExcelSheetMapBuilder{
         for (String sheetDefinitionPath : sheetDefinitionLocations){
             Validate.notBlank(sheetDefinitionPath, "sheetDefinitionPath can't be blank!");
             try{
-                Date beginDate = new Date();
+                long beginTimeMillis = System.currentTimeMillis();
                 List<ExcelSheet> excelSheetList = ExcelSheetListBuilder.build(sheetDefinitionPath);
                 for (ExcelSheet excelSheet : excelSheetList){
                     sheetDefinitionsMap.put(defaultIfNullOrEmpty(excelSheet.getName(), EMPTY), excelSheet);
@@ -68,7 +67,11 @@ class ExcelSheetMapBuilder{
                 //---------------------------------------------------------------
                 if (LOGGER.isDebugEnabled()){
                     int size = size(excelSheetList);
-                    LOGGER.debug("parse [{}],sheetList size:[{}],use time: [{}]", sheetDefinitionPath, size, formatDuration(beginDate));
+                    LOGGER.debug(
+                                    "parse [{}],sheetList size:[{}],use time: [{}]",
+                                    sheetDefinitionPath,
+                                    size,
+                                    formatDurationUseBeginTimeMillis(beginTimeMillis));
                 }
             }catch (Exception e){
                 throw new DefaultRuntimeException("parse [" + sheetDefinitionPath + "] fail", e);

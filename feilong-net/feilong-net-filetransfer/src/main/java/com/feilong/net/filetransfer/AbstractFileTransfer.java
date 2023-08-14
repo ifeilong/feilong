@@ -16,15 +16,13 @@
 package com.feilong.net.filetransfer;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -402,14 +400,14 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 isSuccess = downloadDontClose(remotePath + "/" + key, filePath);
             }
         }else{
-            Date beginDate = now();
+            long beginTimeMillis = System.currentTimeMillis();
 
             // 下载到本地的文件路径
             LOGGER.trace("remotePath:[{}] will be download to [{}]", remotePath, filePath);
             FileUtil.createDirectoryByFilePath(filePath);
             isSuccess = downRemoteSingleFile(remotePath, filePath);
 
-            logAfterDownRemoteSingleFile(remotePath, isSuccess, filePath, beginDate);
+            logAfterDownRemoteSingleFile(remotePath, isSuccess, filePath, beginTimeMillis);
         }
         return isSuccess;
     }
@@ -429,10 +427,16 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      *            the begin date
      * @since 1.10.4
      */
-    private static void logAfterDownRemoteSingleFile(String remotePath,boolean isSuccess,String filePath,Date beginDate){
+    private static void logAfterDownRemoteSingleFile(String remotePath,boolean isSuccess,String filePath,long beginTimeMillis){
         if (LOGGER.isInfoEnabled()){
             String pattern = "downRemoteSingleFile remotePath:[{}] to [{}] [{}], use time: [{}]";
-            logInfoOrError(isSuccess, pattern, remotePath, filePath, toResultString(isSuccess), formatDuration(beginDate));
+            logInfoOrError(
+                            isSuccess,
+                            pattern,
+                            remotePath,
+                            filePath,
+                            toResultString(isSuccess),
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 

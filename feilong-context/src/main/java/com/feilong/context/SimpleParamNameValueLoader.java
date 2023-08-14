@@ -20,8 +20,8 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.bean.ConvertUtil;
 
 /**
  * 简单的基于参数名字配置的条件.

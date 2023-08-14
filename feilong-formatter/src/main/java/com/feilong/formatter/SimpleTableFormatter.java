@@ -16,18 +16,16 @@
 package com.feilong.formatter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ArrayUtil.newArray;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.SPACE;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.lib.collection4.CollectionUtils.addIgnoreNull;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.lib.lang3.StringUtils.defaultString;
 import static java.lang.System.lineSeparator;
 
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -161,7 +159,7 @@ public class SimpleTableFormatter extends AbstractFormatter{
      */
     @Override
     public String format(String[] columnTitles,List<Object[]> dataList){
-        Date beginDate = now();
+        long beginTimeMillis = System.currentTimeMillis();
 
         //---------------------------------------------------------------
         List<Object[]> rows = combinRowsData(columnTitles, dataList);
@@ -182,7 +180,7 @@ public class SimpleTableFormatter extends AbstractFormatter{
         }
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("format use time:[{}]", formatDuration(beginDate));
+            LOGGER.debug("format use time:[{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
         return lineSeparator() + sb.toString();
     }
