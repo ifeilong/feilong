@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
+import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.UriProcessor;
 
 /**
@@ -156,7 +157,7 @@ public class JaxWsDynamicClientUtil{
             Object[] obj = client.invoke(operationName, params);
             return (T) obj[0];
         }catch (Exception e){
-            throw new WebServiceException(e);
+            throw new UncheckedHttpException(e);
         }
     }
 
