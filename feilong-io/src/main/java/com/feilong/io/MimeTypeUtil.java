@@ -16,14 +16,12 @@
 package com.feilong.io;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.net.FileNameMap;
 import java.net.URLConnection;
 import java.util.Map;
-
-import javax.activation.MimetypesFileTypeMap;
 
 import com.feilong.io.entity.MimeType;
 
@@ -81,7 +79,7 @@ public final class MimeTypeUtil{
      * <p>
      * I tried Apache Tika but it is huge with tons of dependencies, <br>
      * URLConnection doesn't use the bytes of the files, <br>
-     * {@link MimetypesFileTypeMap} also just looks at files names,and I couldn't move to Java 7.
+     * {@link javax.activation.MimetypesFileTypeMap} also just looks at files names,and I couldn't move to Java 7.
      * </p>
      * 
      * @param fileName
