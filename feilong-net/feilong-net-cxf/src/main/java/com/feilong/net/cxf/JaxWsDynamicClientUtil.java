@@ -20,7 +20,6 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.xml.ws.WebServiceException;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.dynamic.DynamicClientFactory;
@@ -136,8 +135,8 @@ public class JaxWsDynamicClientUtil{
      *         如果 <code>wsdlUrl</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * 
      *         The return values that matche the parts of the output message of the operation
-     * @throws WebServiceException
-     *             the web service exception
+     * @throws UncheckedHttpException
+     *             如果出现异常, 抛出UncheckedHttpException
      */
     @SuppressWarnings("unchecked")
     public static <T> T call(String wsdlUrl,String operationName,Object...params){
