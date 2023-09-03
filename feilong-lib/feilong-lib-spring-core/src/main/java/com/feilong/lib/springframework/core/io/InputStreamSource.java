@@ -19,13 +19,11 @@ package com.feilong.lib.springframework.core.io;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.annotation.Resource;
-
 /**
  * Simple interface for objects that are sources for an {@link InputStream}.
  *
  * <p>
- * This is the base interface for Spring's more extensive {@link Resource} interface.
+ * This is the base interface for Spring's more extensive {@link javax.annotation.Resource} interface.
  *
  * <p>
  * For single-use streams, {@link InputStreamResource} can be used for any
@@ -38,9 +36,6 @@ import javax.annotation.Resource;
  * @author Juergen Hoeller
  * @since 20.01.2004
  * @see java.io.InputStream
- * @see Resource
- * @see InputStreamResource
- * @see ByteArrayResource
  */
 public interface InputStreamSource{
 

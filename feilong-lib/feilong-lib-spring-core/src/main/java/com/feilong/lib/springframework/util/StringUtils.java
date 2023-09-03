@@ -70,7 +70,6 @@ public abstract class StringUtils{
      *            the {@code String} to check (may be {@code null})
      * @return {@code true} if the {@code String} is not {@code null} and has length
      * @see #hasLength(CharSequence)
-     * @see #hasText(String)
      */
     public static boolean hasLength(String str){
         return (str != null && !str.isEmpty());
@@ -87,7 +86,6 @@ public abstract class StringUtils{
      *            the {@code String} to check (may be {@code null})
      * @return {@code true} if the {@code String} is not {@code null}, its
      *         length is greater than 0, and it does not contain whitespace only
-     * @see #hasText(CharSequence)
      */
     public static boolean hasText(String str){
         return (hasLength(str) && containsText(str));
