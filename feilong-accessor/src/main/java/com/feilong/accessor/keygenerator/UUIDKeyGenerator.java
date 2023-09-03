@@ -33,7 +33,7 @@ public class UUIDKeyGenerator implements KeyGenerator{
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.framework.accessor.KeyGenerator#generator(java.io.Serializable, javax.servlet.http.HttpServletRequest)
+     * @see com.feilong.accessor.keygenerator.KeyGenerator#generator(java.io.Serializable, javax.servlet.http.HttpServletRequest)
      */
     @Override
     public String generator(Serializable serializable,HttpServletRequest request){
