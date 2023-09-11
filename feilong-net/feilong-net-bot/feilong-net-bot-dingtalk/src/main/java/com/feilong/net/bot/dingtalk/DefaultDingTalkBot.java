@@ -50,6 +50,9 @@ import com.feilong.security.EncryptionException;
  * 默认的钉钉机器人.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @see <a href=
+ *      "https://developers.dingtalk.com/document/robots/custom-robot-access-1?spm=ding_open_doc.document.0.0.6d9d10afLWgSfH#topic-2026027">如何配置群机器人？</a>
+ * 
  * @since 3.1.0
  */
 public class DefaultDingTalkBot extends AbstractBot implements DingTalkBot{

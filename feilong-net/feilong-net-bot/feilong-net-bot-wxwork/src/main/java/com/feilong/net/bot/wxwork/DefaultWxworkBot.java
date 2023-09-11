@@ -38,9 +38,10 @@ import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 
 /**
- * 默认的微信机器人.
+ * 默认的企业微信机器人.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://work.weixin.qq.com/help?person_id=1&doc_id=13376">如何配置群机器人？</a>
  * @since 3.1.0 change packagename from com.feilong.net.bot.wxwork to com.feilong.net.bot.wxwork
  */
 public class DefaultWxworkBot extends AbstractBot implements WxworkBot{

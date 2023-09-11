@@ -15,10 +15,10 @@
  */
 package com.feilong.net.bot;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.lang.StringUtil;
 
 /**
  * 通用.
@@ -35,8 +35,138 @@ public abstract class AbstractBot implements Bot{
     /** 是否异步,默认false,表示是同步. */
     protected boolean           isAsync          = false;
 
-    /** 是否捕获异常,默认false,表示不捕获异常. */
+    /**
+     * 是否捕获异常,默认false,表示不捕获异常.
+     * 
+     * @deprecated since 3.5.2 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
+     */
+    @Deprecated
     protected boolean           isCatchException = false;
+
+    /**
+     * 当出现异常, 是否抛出异常.
+     * 
+     * <p>
+     * 默认false,表示不抛出exception; 如果是true 那么会抛出异常,需要自定捕获异常处理.
+     * </p>
+     * 
+     * @since 3.5.2
+     * 
+     */
+    protected boolean           isThrowException = false;
+
+    //---------------------------------------------------------------
+
+    /**
+     * Send message.
+     *
+     * @param content
+     *            the content
+     * @return true, if successful
+     */
+    @Override
+    public boolean sendMessage(String content){
+        if (!isAsync){
+            String type = formatPattern("[SyncSend[{}]Message]", this.getClass().getSimpleName());
+            LOGGER.info("{},content:[{}]", type, content);
+            return handleSendMessage(content, type);
+        }
+
+        //异步
+        new Thread(() -> {
+            String type = formatPattern("[AsyncSend[{}]Message]", this.getClass().getSimpleName());
+            LOGGER.info("{},content:[{}]", type, content);
+            handleSendMessage(content, type);
+        }).start();
+
+        return true;
+    }
+
+    /**
+     * Handle send message.
+     *
+     * @param content
+     *            the content
+     * @param type
+     *            the type
+     * @return true, if successful
+     */
+    protected boolean handleSendMessage(String content,String type){
+        try{
+            return doSendMessage(content);
+        }catch (Exception e){
+            if (!isCatchException || isThrowException){
+                throw e;
+            }
+
+            //只打印log 方便排查问题
+            LOGGER.error(formatPattern("[{}],typecontent:[{}],returnFalse", type, content), e);
+            return false;
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Do send message.
+     *
+     * @param content
+     *            the content
+     * @return true, if successful
+     */
+    protected abstract boolean doSendMessage(String content);
+
+    /**
+     * 获得 是否捕获异常,默认false,表示不捕获异常.
+     *
+     * @return the isCatchException
+     * @deprecated since 3.5.2 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
+     */
+    @Deprecated
+    public boolean getIsCatchException(){
+        return isCatchException;
+    }
+
+    /**
+     * 设置 是否捕获异常,默认false,表示不捕获异常.
+     *
+     * @param isCatchException
+     *            the isCatchException to set
+     * @deprecated since 3.5.2 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
+     */
+    @Deprecated
+    public void setIsCatchException(boolean isCatchException){
+        this.isCatchException = isCatchException;
+    }
+
+    /**
+     * 当出现异常, 是否抛出异常.
+     * 
+     * <p>
+     * 默认false,表示不抛出exception; 如果是true 那么会抛出异常,需要自定捕获异常处理.
+     * </p>
+     * 
+     * @return 默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
+     * @since 3.5.2
+     */
+    public boolean getIsThrowException(){
+        return isThrowException;
+    }
+
+    /**
+     * 当出现异常, 是否抛出异常.
+     * 
+     * <p>
+     * 默认false,表示不抛出exception; 如果是true 那么会抛出异常,需要自定捕获异常处理.
+     * </p>
+     *
+     * @param isThrowException
+     *            默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
+     * @since 3.5.2
+     */
+    public void setIsThrowException(boolean isThrowException){
+        this.isThrowException = isThrowException;
+    }
 
     //---------------------------------------------------------------
 
@@ -58,60 +188,5 @@ public abstract class AbstractBot implements Bot{
     public void setIsAsync(boolean isAsync){
         this.isAsync = isAsync;
     }
-
-    /**
-     * 获得 是否捕获异常,默认false,表示不捕获异常.
-     *
-     * @return the isCatchException
-     */
-    public boolean getIsCatchException(){
-        return isCatchException;
-    }
-
-    /**
-     * 设置 是否捕获异常,默认false,表示不捕获异常.
-     *
-     * @param isCatchException
-     *            the isCatchException to set
-     */
-    public void setIsCatchException(boolean isCatchException){
-        this.isCatchException = isCatchException;
-    }
-
-    //---------------------------------------------------------------
-
-    @Override
-    public boolean sendMessage(String content){
-        if (!isAsync){
-            String type = StringUtil.formatPattern("[SyncSend[{}]Message]", this.getClass().getSimpleName());
-            LOGGER.info("{},content:[{}]", type, content);
-            return handleSendMessage(content, type);
-        }
-
-        //异步
-        new Thread(() -> {
-            String type = StringUtil.formatPattern("[AsyncSend[{}]Message]", this.getClass().getSimpleName());
-            LOGGER.info("{},content:[{}]", type, content);
-            handleSendMessage(content, type);
-        }).start();
-
-        return true;
-    }
-
-    protected boolean handleSendMessage(String content,String type){
-        try{
-            return doSendMessage(content);
-        }catch (Exception e){
-            if (!isCatchException){
-                throw e;
-            }
-            LOGGER.error(StringUtil.formatPattern("[{}],typecontent:[{}],returnFalse", type, content), e);
-            return false;
-        }
-    }
-
-    //---------------------------------------------------------------
-
-    protected abstract boolean doSendMessage(String content);
 
 }

@@ -39,8 +39,13 @@ public class DingTalkBotBuilder{
         defaultDingTalkBot.setAccessToken(accessToken);
         defaultDingTalkBot.setDefaultTitle(defaultTitle);
         defaultDingTalkBot.setSecret(secret);
+
+        //是否异步,默认false,表示是同步.
         defaultDingTalkBot.setIsAsync(true);
-        defaultDingTalkBot.setIsCatchException(true);
+
+        //当出现异常, 是否抛出异常.
+        //默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
+        defaultDingTalkBot.setIsThrowException(false);
         return defaultDingTalkBot;
     }
 }
