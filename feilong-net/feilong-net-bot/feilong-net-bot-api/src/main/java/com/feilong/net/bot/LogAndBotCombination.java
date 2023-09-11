@@ -15,11 +15,15 @@
  */
 package com.feilong.net.bot;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.util.Objects;
 
 import org.slf4j.Logger;
 
-import com.feilong.core.lang.StringUtil;
+import com.feilong.core.lang.ClassUtil;
+import com.feilong.lib.lang3.ArrayUtils;
 
 /**
  * 
@@ -35,12 +39,13 @@ import com.feilong.core.lang.StringUtil;
 public class LogAndBotCombination{
 
     /**
-     * Debug.
+     * Debug级别输出日志以及发送机器人.
      *
      * @param logger
      *            the log
      * @param bot
-     *            the ding talk bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -51,12 +56,13 @@ public class LogAndBotCombination{
     }
 
     /**
-     * Info.
+     * Info级别输出日志以及发送机器人.
      *
      * @param logger
      *            the log
      * @param bot
-     *            the ding talk bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -67,12 +73,13 @@ public class LogAndBotCombination{
     }
 
     /**
-     * Warn.
+     * Warn级别输出日志以及发送机器人.
      *
      * @param logger
      *            the log
      * @param bot
-     *            the ding talk bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -83,12 +90,13 @@ public class LogAndBotCombination{
     }
 
     /**
-     * Error.
+     * Error级别输出日志以及发送机器人.
      *
      * @param logger
      *            the log
      * @param bot
-     *            the ding talk bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
      * @param pattern
      *            the pattern
      * @param arguments
@@ -106,7 +114,8 @@ public class LogAndBotCombination{
      * @param logger
      *            the log
      * @param bot
-     *            the bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
      * @param type
      *            the type
      * @param pattern
@@ -115,17 +124,41 @@ public class LogAndBotCombination{
      *            the arguments
      */
     private static void log(Logger logger,Bot bot,String type,String pattern,Object...arguments){
-        String format = StringUtil.formatPattern(pattern, arguments);
-
         if (null != logger){
             log(logger, type, pattern, arguments);
         }
 
         //---------------------------------------------------------------
+        sendBot(bot, pattern, arguments);
+    }
 
-        if (null != bot){
-            bot.sendMessage(format);
+    private static void sendBot(Bot bot,String pattern,Object...arguments){
+        if (null == bot){
+            return;
         }
+
+        //---------------------------------------------------------------
+        String sendMessage = createSendMessage(pattern, arguments);
+        bot.sendMessage(sendMessage);
+    }
+
+    private static String createSendMessage(String pattern,Object...arguments){
+        //这isNullOrEmpty 里面已经判断了length是否=0
+        if (isNullOrEmpty(arguments)){
+            return formatPattern(pattern, arguments);
+        }
+
+        //---------------------------------------------------------------
+        //获取最后一个
+        Object lastOneArgument = arguments[arguments.length - 1];
+        //如果最后一个参数是 Throwable 类型
+        if (ClassUtil.isInstance(lastOneArgument, Throwable.class)){
+
+            //起始索引包含，结束索引不包含。空数组输入产生空输出。
+            return formatPattern(pattern, ArrayUtils.subarray(arguments, 0, arguments.length - 1));
+        }
+        //---------------------------------------------------------------
+        return formatPattern(pattern, arguments);
     }
 
     /**
