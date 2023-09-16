@@ -96,7 +96,7 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("end [{}],use time:[{}]", partitionRunnableBuilderName, formatDurationUseBeginTimeMillis(beginTimeMillis));
+            LOGGER.info("end [{}],useTime:[{}]", partitionRunnableBuilderName, formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 
