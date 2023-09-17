@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.thread;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.partition;
 
 import java.util.List;
@@ -24,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.util.CollectionsUtil;
 
@@ -53,9 +53,18 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      * @param <T>
      *            the generic type
      * @param list
-     *            the list
+     *            执行解析的list
+     * 
+     *            <p>
+     *            比如 100000个 User,不能为null或者empty
+     *            </p>
      * @param eachSize
-     *            the each size
+     *            每个线程执行多少个对象
+     * 
+     *            <p>
+     *            比如 一个线程解析 1000个 User, 那么程序内部 会自动创建 100000/1000个 线程去解析;<br>
+     *            必须{@code >}0
+     *            </p>
      * @param paramsMap
      *            the params map
      * @param partitionRunnableBuilder
@@ -92,9 +101,18 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      * @param <T>
      *            the generic type
      * @param list
-     *            the list
+     *            执行解析的list
+     * 
+     *            <p>
+     *            比如 100000个 User,不能为null或者empty
+     *            </p>
      * @param eachSize
-     *            the per size
+     *            每个线程执行多少个对象
+     * 
+     *            <p>
+     *            比如 一个线程解析 1000个 User, 那么程序内部 会自动创建 100000/1000个 线程去解析;<br>
+     *            必须{@code >}0
+     *            </p>
      * @param paramsMap
      *            the params map
      * @param partitionRunnableBuilder
@@ -132,8 +150,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
         }
 
         //---------------------------------------------------------------
-
-        LOGGER.info("total list size:[{}],build [{}] threads,perSize:[{}]", list.size(), threads.length, eachSize);
+        LOGGER.info("totalListSize:[{}],build [{}] threads,perHandleSize:[{}]", list.size(), threads.length, eachSize);
         return threads;
     }
 
@@ -151,14 +168,18 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      * @param <T>
      *            the generic type
      * @param list
-     *            the list
+     *            执行解析的list
+     * 
+     *            <p>
+     *            比如 100000个 User,不能为null或者empty
+     *            </p>
      * @param partitionRunnableBuilder
      *            the group runnable builder
      * @return the string
      */
     private static <T> String buildThreadGroupName(List<T> list,PartitionRunnableBuilder<T> partitionRunnableBuilder){
         Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!");
-        return StringUtil.formatPattern("ThreadGroup-{}-{}", getName(partitionRunnableBuilder), list.size());
+        return formatPattern("ThreadGroup-{}-{}", getName(partitionRunnableBuilder), list.size());
     }
 
     /**
@@ -226,7 +247,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
      */
     private static <T> String buildThreadName(int batchNumber,PartitionRunnableBuilder<T> partitionRunnableBuilder){
         Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!");
-        return StringUtil.formatPattern("Thread-{}-{}", getName(partitionRunnableBuilder), batchNumber);
+        return formatPattern("Thread-{}-{}", getName(partitionRunnableBuilder), batchNumber);
     }
 
 }

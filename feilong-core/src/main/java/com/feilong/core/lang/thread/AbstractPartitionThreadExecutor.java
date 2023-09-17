@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 
 /**
- * 抽象实现.
+ * 抽象实现 (模板方法设计模式).
  * 
  * <p>
  * 含公共校验以及日志
@@ -49,11 +49,17 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
      * @param <T>
      *            the generic type
      * @param list
-     *            the list
+     *            执行解析的list
+     *            <p>
+     *            比如 100000个 User
+     *            </p>
      * @param eachSize
-     *            the each size
+     *            每个线程执行多少个对象
+     *            <p>
+     *            比如 一个线程解析 1000个 User, 那么程序内部 会自动创建 100000/1000个 线程去解析;
+     *            </p>
      * @param partitionRunnableBuilder
-     *            the partition runnable builder
+     *            每个线程做的事情
      */
     @Override
     public <T> void execute(List<T> list,int eachSize,PartitionRunnableBuilder<T> partitionRunnableBuilder){
@@ -63,18 +69,27 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
     //---------------------------------------------------------------
 
     /**
-     * Execute.
+     * 执行.
      *
      * @param <T>
      *            the generic type
      * @param list
-     *            the list
+     *            执行解析的list
+     *            <p>
+     *            比如 100000个 User
+     *            </p>
      * @param eachSize
-     *            the each size
+     *            每个线程执行多少个对象
+     *            <p>
+     *            比如 一个线程解析 1000个 User, 那么程序内部 会自动创建 100000/1000个 线程去解析;
+     *            </p>
      * @param paramsMap
-     *            the params map
+     *            自定义的相关参数
+     *            <p>
+     *            自定义的 <code>partitionRunnableBuilder</code>中使用,可能为null
+     *            </p>
      * @param partitionRunnableBuilder
-     *            the partition runnable builder
+     *            每个线程做的事情
      */
     @Override
     public <T> void execute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionRunnableBuilder<T> partitionRunnableBuilder){
@@ -86,7 +101,7 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
         //---------------------------------------------------------------
         String partitionRunnableBuilderName = getName(partitionRunnableBuilder);
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("begin [{}],list size:[{}],eachSize:[{}]", partitionRunnableBuilderName, list.size(), eachSize);
+            LOGGER.info("begin [{}],listSize:[{}],eachSize:[{}]", partitionRunnableBuilderName, list.size(), eachSize);
         }
 
         //---------------------------------------------------------------

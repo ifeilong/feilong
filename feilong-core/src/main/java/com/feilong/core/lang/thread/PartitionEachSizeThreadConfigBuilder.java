@@ -19,8 +19,8 @@ import static com.feilong.core.bean.ConvertUtil.toInteger;
 
 import java.math.RoundingMode;
 
-import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.lang.NumberUtil;
 
 /**
  * 用来计算 each size 大小的.
@@ -95,7 +95,9 @@ public class PartitionEachSizeThreadConfigBuilder implements PartitionEachSizeBu
             return toInteger(NumberUtil.getDivideValue(totalSize, maxThreadCount, 0, RoundingMode.UP));
         }
 
-        //否则返回  threadCount
+        //---------------------------------------------------------------
+
+        //否则返回 threadCount
         return threadCount;
     }
 
