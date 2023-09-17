@@ -26,6 +26,7 @@ import com.feilong.core.lang.LangSuiteTests;
 import com.feilong.core.net.NetSuiteTests;
 import com.feilong.core.text.TextSuiteTests;
 import com.feilong.core.util.UtilSuiteTests;
+import com.feilong.tools.log.LogHelperAutoTest;
 import com.feilong.tools.slf4j.Slf4jUtilSuiteTests;
 
 @RunWith(Suite.class)
@@ -33,6 +34,7 @@ import com.feilong.tools.slf4j.Slf4jUtilSuiteTests;
                 CoreTests.class,
 
                 Slf4jUtilSuiteTests.class,
+                LogHelperAutoTest.class,
 
                 BeanSuiteTests.class,
                 DateSuiteTests.class,
