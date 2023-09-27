@@ -27,7 +27,19 @@ import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.entity.BeanWithXMLGregorianCalendar;
 
+/**
+ * 
+ * 
+ * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @since 3.5.2
+ * @deprecated JDK17 运行不通过cannot access class com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl (in module java.xml)
+ *             because module java.xml does not export com.sun.org.apache.xerces.internal.jaxp.datatype to unnamed module @0x37a71e93
+ * 
+ */
+@Deprecated
 public class FormatBeanXMLGregorianCalendarTest extends AbstractJsonTest{
+
+    //    cannot access class com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl (in module java.xml) because module java.xml does not export com.sun.org.apache.xerces.internal.jaxp.datatype to unnamed module @0x37a71e93
 
     @SuppressWarnings("restriction")
     private final XMLGregorianCalendar xmlGregorianCalendar = com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl.LEAP_YEAR_DEFAULT;
