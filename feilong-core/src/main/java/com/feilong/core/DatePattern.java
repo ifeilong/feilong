@@ -384,7 +384,7 @@ public final class DatePattern{
      * </p>
      * 
      * <p>
-     * 注意:不同的jdk版本,输出结果可能不一样, 比如jdk14,结果是 <span style="color:red">01-22(周四)</span>
+     * <span style="color:red">注意:不同的jdk版本,输出结果可能不一样, 比如jdk14,结果是 <span style="color:red">01-22(周四)</span></span>
      * </p>
      */
     public static final String MONTH_AND_DAY_WITH_WEEK                      = "MM-dd(E)";
@@ -469,7 +469,7 @@ public final class DatePattern{
      * </p>
      * 
      * <p>
-     * 注意:不同的jdk版本,输出结果可能不一样, 比如jdk14,结果是 <span style="color:red">周五 12月</span> 27 22:13:55 CST 2013
+     * <span style="color:red">注意:不同的jdk版本,输出结果可能不一样, 比如jdk14,结果是 <span style="color:red">周五 12月</span> 27 22:13:55 CST 2013</span>
      * </p>
      * 
      * 
