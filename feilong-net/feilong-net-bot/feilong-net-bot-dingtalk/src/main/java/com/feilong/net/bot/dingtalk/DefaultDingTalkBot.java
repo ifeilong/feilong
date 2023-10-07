@@ -27,8 +27,6 @@ import static com.feilong.net.http.HttpMethodType.POST;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import org.apache.commons.codec.digest.HmacAlgorithms;
-import org.apache.commons.codec.digest.HmacUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +34,8 @@ import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.codec.digest.HmacAlgorithms;
+import com.feilong.lib.codec.digest.HmacUtils;
 import com.feilong.net.bot.AbstractBot;
 import com.feilong.net.bot.dingtalk.message.At;
 import com.feilong.net.bot.dingtalk.message.markdown.DingtalkMarkdownMessage;

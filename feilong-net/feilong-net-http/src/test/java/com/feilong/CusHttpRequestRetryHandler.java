@@ -19,18 +19,16 @@ import java.io.IOException;
 
 import javax.net.ssl.SSLHandshakeException;
 
-import org.apache.http.HttpEntityEnclosingRequest;
-import org.apache.http.HttpRequest;
-import org.apache.http.NoHttpResponseException;
-import org.apache.http.client.methods.HttpExecutionAware;
-import org.apache.http.client.methods.HttpRequestWrapper;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.conn.routing.HttpRoute;
-import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
-import org.apache.http.protocol.ExecutionContext;
-import org.apache.http.protocol.HttpContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.feilong.lib.org.apache.http.HttpEntityEnclosingRequest;
+import com.feilong.lib.org.apache.http.HttpRequest;
+import com.feilong.lib.org.apache.http.NoHttpResponseException;
+import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
+import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
+import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
+import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
+import com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import com.feilong.lib.org.apache.http.protocol.ExecutionContext;
+import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
  * 
@@ -39,17 +37,16 @@ import org.slf4j.LoggerFactory;
  * 
  *        Builds the.
  *
- * @see org.apache.http.impl.client.DefaultHttpRequestRetryHandler#retryRequest(IOException, int, HttpContext)
- * @see org.apache.http.impl.execchain.RetryExec#execute(HttpRoute, HttpRequestWrapper, HttpClientContext, HttpExecutionAware)
+ * @see com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler#retryRequest(IOException, int, HttpContext)
+ * @see com.feilong.lib.org.apache.http.impl.execchain.RetryExec#execute(HttpRoute, HttpRequestWrapper, HttpClientContext,
+ *      HttpExecutionAware)
  * 
- * @see org.apache.http.impl.client.DefaultHttpRequestRetryHandler
- * @see org.apache.http.impl.client.StandardHttpRequestRetryHandler
+ * @see com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler
+ * @see com.feilong.lib.org.apache.http.impl.client.StandardHttpRequestRetryHandler
  * @since 3.1.1
  * 
  */
 public class CusHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CusHttpRequestRetryHandler.class);
 
     @Override
     public boolean retryRequest(IOException exception,int executionCount,HttpContext context){

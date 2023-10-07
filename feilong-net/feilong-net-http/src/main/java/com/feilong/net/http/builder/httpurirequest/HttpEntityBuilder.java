@@ -23,13 +23,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.entity.StringEntity;
-
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.org.apache.http.HttpEntity;
+import com.feilong.lib.org.apache.http.NameValuePair;
+import com.feilong.lib.org.apache.http.client.entity.UrlEncodedFormEntity;
+import com.feilong.lib.org.apache.http.entity.StringEntity;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
 

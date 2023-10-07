@@ -23,8 +23,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import com.feilong.lib.org.apache.http.NameValuePair;
+import com.feilong.lib.org.apache.http.message.BasicNameValuePair;
 
 /**
  * 将Map{@code <String, String>} 转成 List{@code <NameValuePair>} 的构造器.
@@ -49,8 +49,8 @@ final class NameValuePairBuilder{
      * @param paramMap
      *            the param map
      * @return 如果 <code>paramMap</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     * @see org.apache.http.NameValuePair
-     * @see org.apache.http.message.BasicNameValuePair
+     * @see com.feilong.lib.org.apache.http.NameValuePair
+     * @see com.feilong.lib.org.apache.http.message.BasicNameValuePair
      */
     static List<NameValuePair> build(Map<String, String> paramMap){
         if (isNullOrEmpty(paramMap)){

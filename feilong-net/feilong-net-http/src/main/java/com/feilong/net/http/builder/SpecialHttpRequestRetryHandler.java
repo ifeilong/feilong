@@ -20,21 +20,21 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
-import org.apache.http.client.methods.HttpExecutionAware;
-import org.apache.http.client.methods.HttpRequestWrapper;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.conn.routing.HttpRoute;
-import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.HttpCoreContext;
-import org.apache.http.util.Args;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.ArrayUtils;
+import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
+import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
+import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
+import com.feilong.lib.org.apache.http.conn.ConnectTimeoutException;
+import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
+import com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import com.feilong.lib.org.apache.http.protocol.HttpContext;
+import com.feilong.lib.org.apache.http.protocol.HttpCoreContext;
+import com.feilong.lib.org.apache.http.util.Args;
 
 /**
  * 重试策略.
@@ -45,10 +45,10 @@ import com.feilong.lib.lang3.ArrayUtils;
  * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @see org.apache.http.impl.client.DefaultHttpRequestRetryHandler#retryRequest(IOException, int, HttpContext)
- * @see org.apache.http.impl.execchain.RetryExec#execute(HttpRoute, HttpRequestWrapper, HttpClientContext, HttpExecutionAware)
- * @see org.apache.http.impl.client.DefaultHttpRequestRetryHandler
- * @see org.apache.http.impl.client.StandardHttpRequestRetryHandler
+ * @see com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler#retryRequest(IOException, int, HttpContext)
+ * @see com.feilong.lib.org.apache.http.impl.execchain.RetryExec#execute(HttpRoute, HttpRequestWrapper, HttpClientContext, HttpExecutionAware)
+ * @see com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler
+ * @see com.feilong.lib.org.apache.http.impl.client.StandardHttpRequestRetryHandler
  * @since 3.3.0
  */
 public class SpecialHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{

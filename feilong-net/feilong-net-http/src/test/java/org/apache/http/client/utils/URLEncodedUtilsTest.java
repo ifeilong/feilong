@@ -20,10 +20,11 @@ import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
+import com.feilong.lib.org.apache.http.NameValuePair;
+import com.feilong.lib.org.apache.http.client.utils.URLEncodedUtils;
+import com.feilong.lib.org.apache.http.message.BasicNameValuePair;
 import com.feilong.test.AbstractTest;
 
 /**

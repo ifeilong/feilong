@@ -20,11 +20,10 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
 import java.util.Date;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpUriRequest;
-
 import com.feilong.core.Validate;
+import com.feilong.lib.org.apache.http.HttpResponse;
+import com.feilong.lib.org.apache.http.client.HttpClient;
+import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;

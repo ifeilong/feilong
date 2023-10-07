@@ -21,17 +21,17 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.lib.org.apache.http.HttpHeaders;
+import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.security.Base64Util;
 
 /**
- * 专门用来封装请求头 {@link org.apache.http.HttpMessage#setHeader(String, String)}.
+ * 专门用来封装请求头 {@link com.feilong.lib.org.apache.http.HttpMessage#setHeader(String, String)}.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.6

@@ -21,15 +21,15 @@ import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.lang3.StringUtils;
+import com.feilong.lib.org.apache.http.client.HttpClient;
+import com.feilong.lib.org.apache.http.client.config.RequestConfig;
+import com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory;
+import com.feilong.lib.org.apache.http.impl.client.CloseableHttpClient;
+import com.feilong.lib.org.apache.http.impl.client.HttpClients;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.packer.SSLPacker;
 
@@ -38,9 +38,9 @@ import com.feilong.net.http.packer.SSLPacker;
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * 
- * @see org.apache.http.impl.client.HttpClients#createDefault()
- * @see org.apache.http.impl.client.HttpClients#custom()
- * @see org.apache.http.impl.client.HttpClientBuilder#create()
+ * @see com.feilong.lib.org.apache.http.impl.client.HttpClients#createDefault()
+ * @see com.feilong.lib.org.apache.http.impl.client.HttpClients#custom()
+ * @see com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder#create()
  * @since 1.10.6
  * @since 1.11.0 change class Access Modifiers
  */
@@ -115,14 +115,14 @@ public class HttpClientBuilder{
      * @param layeredConnectionSocketFactory
      *            the layered connection socket factory
      * @return 如果 <code>layeredConnectionSocketFactory</code> 不是null,将会设置
-     *         {@link org.apache.http.impl.client.HttpClientBuilder#setSSLSocketFactory(LayeredConnectionSocketFactory)}<br>
-     * @see org.apache.http.impl.client.HttpClientBuilder#build()
+     *         {@link com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder#setSSLSocketFactory(LayeredConnectionSocketFactory)}<br>
+     * @see com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder#build()
      */
     public static HttpClient build(ConnectionConfig connectionConfig,LayeredConnectionSocketFactory layeredConnectionSocketFactory){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
 
         //---------------------------------------------------------------
-        org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
+        com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder = HttpClients.custom();
 
         SSLPacker.pack(customHttpClientBuilder, useConnectionConfig, layeredConnectionSocketFactory);
 
@@ -172,7 +172,7 @@ public class HttpClientBuilder{
      * @since 3.3.0
      */
     private static void setRetryHandler(
-                    org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
+                    com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
                     ConnectionConfig connectionConfig){
         boolean isTimeoutRetry = connectionConfig.getIsTimeoutRetry();
         int timeoutRetryCount = connectionConfig.getTimeoutRetryCount();

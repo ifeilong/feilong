@@ -24,19 +24,19 @@
 		</dependency>
 
 
-		<!--httpmime -->
+		<!--httpmime 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
 			<optional>true</optional>
-		</dependency>
+		</dependency>-->
 
-		<!--httpclient -->
+		<!--httpclient 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<optional>true</optional>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 </project>

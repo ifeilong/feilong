@@ -27,10 +27,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +34,10 @@ import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
 import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.lib.json.processors.JsonValueProcessor;
+import com.feilong.lib.org.apache.http.Header;
+import com.feilong.lib.org.apache.http.HttpResponse;
+import com.feilong.lib.org.apache.http.StatusLine;
+import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.HttpResponseUtil;

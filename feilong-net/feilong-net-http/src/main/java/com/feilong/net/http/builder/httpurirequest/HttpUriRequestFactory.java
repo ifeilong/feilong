@@ -18,18 +18,17 @@ package com.feilong.net.http.builder.httpurirequest;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPatch;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URIBuilder;
-
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.NotImplementedException;
+import com.feilong.lib.org.apache.http.client.methods.HttpGet;
+import com.feilong.lib.org.apache.http.client.methods.HttpPatch;
+import com.feilong.lib.org.apache.http.client.methods.HttpPost;
+import com.feilong.lib.org.apache.http.client.methods.HttpPut;
+import com.feilong.lib.org.apache.http.client.methods.HttpRequestBase;
+import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
+import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpMethodType;

@@ -23,13 +23,12 @@ import java.util.Map;
 
 import javax.net.ssl.SSLException;
 
-import org.apache.http.client.HttpClient;
-
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.org.apache.http.client.HttpClient;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 

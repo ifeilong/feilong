@@ -19,11 +19,10 @@ import static com.feilong.core.CharsetType.UTF8;
 
 import java.io.IOException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
-import org.apache.http.util.EntityUtils;
-
+import com.feilong.lib.org.apache.http.HttpEntity;
+import com.feilong.lib.org.apache.http.HttpResponse;
+import com.feilong.lib.org.apache.http.ParseException;
+import com.feilong.lib.org.apache.http.util.EntityUtils;
 import com.feilong.net.UncheckedHttpException;
 
 /**

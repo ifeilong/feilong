@@ -19,12 +19,12 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 
 import java.util.Map;
 
-import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
 

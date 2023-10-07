@@ -17,9 +17,8 @@ package com.feilong.net.http.packer;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-
+import com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory;
+import com.feilong.lib.org.apache.http.conn.ssl.NoopHostnameVerifier;
 import com.feilong.net.SSLProtocol;
 import com.feilong.net.http.ConnectionConfig;
 
@@ -50,11 +49,11 @@ public final class SSLPacker{
      * @param layeredConnectionSocketFactory
      *            the layered connection socket factory
      *
-     * @see org.apache.http.conn.ssl.NoopHostnameVerifier
+     * @see com.feilong.lib.org.apache.http.conn.ssl.NoopHostnameVerifier
      * @see javax.net.ssl.HostnameVerifier
      */
     public static void pack(
-                    org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
+                    com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder customHttpClientBuilder,
                     ConnectionConfig connectionConfig,
                     LayeredConnectionSocketFactory layeredConnectionSocketFactory){
         if (null != layeredConnectionSocketFactory){

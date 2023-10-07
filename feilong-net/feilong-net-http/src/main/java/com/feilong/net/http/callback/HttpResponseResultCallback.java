@@ -17,9 +17,8 @@ package com.feilong.net.http.callback;
 
 import java.util.Date;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
-
+import com.feilong.lib.org.apache.http.HttpResponse;
+import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 

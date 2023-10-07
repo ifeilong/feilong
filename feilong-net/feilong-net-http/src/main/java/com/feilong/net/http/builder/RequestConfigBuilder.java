@@ -19,11 +19,10 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 
-import org.apache.http.HttpHost;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.config.RequestConfig.Builder;
-
+import com.feilong.lib.org.apache.http.HttpHost;
+import com.feilong.lib.org.apache.http.client.config.CookieSpecs;
+import com.feilong.lib.org.apache.http.client.config.RequestConfig;
+import com.feilong.lib.org.apache.http.client.config.RequestConfig.Builder;
 import com.feilong.net.http.ConnectionConfig;
 
 /**
@@ -51,7 +50,7 @@ public final class RequestConfigBuilder{
      * @return the request config
      * @see Builder
      * @see RequestConfig
-     * @see org.apache.http.client.config.CookieSpecs
+     * @see com.feilong.lib.org.apache.http.client.config.CookieSpecs
      */
     public static RequestConfig build(ConnectionConfig connectionConfig){
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);

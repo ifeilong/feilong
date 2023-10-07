@@ -68,7 +68,7 @@
 			<artifactId>feilong</artifactId>
 			<version>${version.feilong-platform}</version>
 		</dependency>
-
+<!--
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
@@ -79,13 +79,13 @@
 					<artifactId>httpclient</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
+		</dependency>-->
+<!--
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>${version.httpcomponents}</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- spring-beans version 不限制 -->
 		<dependency>
