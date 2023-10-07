@@ -43,7 +43,9 @@ public final class ServletContextUtil{
      * 查servletcontext 属性忽略的的key.
      * 
      * @since 3.2.0
+     * @deprecated pls use {@link #getIgnoreKeys()}
      */
+    @Deprecated
     public static final String[] IGNORE_KEYS = tokenizeToStringArray(
                     getValue(getResourceBundle("config/feilong-servletcontext-ignoreKeys"), "feilong.servletcontext.ignoreKeys"),
                     ",");
@@ -150,5 +152,17 @@ public final class ServletContextUtil{
             map.put(name, servletContext.getInitParameter(name));
         }
         return map;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获取要忽略的keys.
+     *
+     * @return the ignore keys
+     * @since 3.5.2
+     */
+    public static String[] getIgnoreKeys(){
+        return IGNORE_KEYS;
     }
 }
