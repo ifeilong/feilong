@@ -38,7 +38,7 @@ public abstract class AbstractBot implements Bot{
     /**
      * 是否捕获异常,默认false,表示不捕获异常.
      * 
-     * @deprecated since 3.5.2 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
+     * @deprecated since 4.0.0 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
      */
     @Deprecated
     protected boolean           isCatchException = false;
@@ -50,7 +50,7 @@ public abstract class AbstractBot implements Bot{
      * 默认false,表示不抛出exception; 如果是true 那么会抛出异常,需要自定捕获异常处理.
      * </p>
      * 
-     * @since 3.5.2
+     * @since 4.0.0
      * 
      */
     protected boolean           isThrowException = false;
@@ -120,7 +120,7 @@ public abstract class AbstractBot implements Bot{
      * 获得 是否捕获异常,默认false,表示不捕获异常.
      *
      * @return the isCatchException
-     * @deprecated since 3.5.2 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
+     * @deprecated since 4.0.0 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
      */
     @Deprecated
     public boolean getIsCatchException(){
@@ -132,7 +132,7 @@ public abstract class AbstractBot implements Bot{
      *
      * @param isCatchException
      *            the isCatchException to set
-     * @deprecated since 3.5.2 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
+     * @deprecated since 4.0.0 请使用 {@link #isThrowException} 如果两个值都设置以 {@link #isThrowException} 为准
      */
     @Deprecated
     public void setIsCatchException(boolean isCatchException){
@@ -147,7 +147,7 @@ public abstract class AbstractBot implements Bot{
      * </p>
      * 
      * @return 默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
-     * @since 3.5.2
+     * @since 4.0.0
      */
     public boolean getIsThrowException(){
         return isThrowException;
@@ -162,7 +162,7 @@ public abstract class AbstractBot implements Bot{
      *
      * @param isThrowException
      *            默认false,表示抛出, 会抛出exception;如果是true 那么不会抛出异常.
-     * @since 3.5.2
+     * @since 4.0.0
      */
     public void setIsThrowException(boolean isThrowException){
         this.isThrowException = isThrowException;

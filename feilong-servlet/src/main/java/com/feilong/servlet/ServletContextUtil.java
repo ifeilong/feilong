@@ -160,7 +160,7 @@ public final class ServletContextUtil{
      * 获取要忽略的keys.
      *
      * @return the ignore keys
-     * @since 3.5.2
+     * @since 4.0.0
      */
     public static String[] getIgnoreKeys(){
         return IGNORE_KEYS;

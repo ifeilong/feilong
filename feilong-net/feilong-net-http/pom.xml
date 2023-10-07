@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.github.ifeilong</groupId>
 		<artifactId>feilong-net-parent</artifactId>
-		<version>3.5.2</version>
+		<version>4.0.0</version>
 	</parent>
 
 	<artifactId>feilong-net-http</artifactId>
@@ -43,6 +43,13 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<!--httpclient -->
+
+		<dependency>
+			<groupId>com.github.ifeilong</groupId>
+			<artifactId>feilong-lib-httpclient4</artifactId>
+			<version>${version.feilong-platform}</version>
 		</dependency>
 
 

@@ -31,7 +31,7 @@ import com.feilong.json.entity.BeanWithXMLGregorianCalendar;
  * 
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.5.2
+ * @since 4.0.0
  * @deprecated JDK17 运行不通过cannot access class com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl (in module java.xml)
  *             because module java.xml does not export com.sun.org.apache.xerces.internal.jaxp.datatype to unnamed module @0x37a71e93
  * 

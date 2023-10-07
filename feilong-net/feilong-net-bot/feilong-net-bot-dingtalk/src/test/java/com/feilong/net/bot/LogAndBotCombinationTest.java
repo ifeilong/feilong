@@ -25,7 +25,7 @@ import com.feilong.net.bot.dingtalk.DingTalkBotBuilder;
 /**
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.5.2
+ * @since 4.0.0
  */
 public class LogAndBotCombinationTest{
 

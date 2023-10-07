@@ -5,5 +5,5 @@
     <artifactId>feilong-lib</artifactId>
     <version>4.0.0</version>
   </parent>
-  <artifactId>feilong-lib-spring-core</artifactId>
+  <artifactId>feilong-lib-httpclient4</artifactId>
 </project>

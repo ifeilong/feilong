@@ -29,7 +29,7 @@ import com.feilong.lib.lang3.StringUtils;
  * 日志辅助类.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 3.5.2
+ * @since 4.0.0
  */
 public class LogHelper{
 
@@ -38,7 +38,7 @@ public class LogHelper{
      * 
      * @param processLogParamEntity
      * @return 如果 <code>processLogParamEntity</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @since 3.5.2
+     * @since 4.0.0
      */
     public static String getProcessLog(ProcessLogParamEntity processLogParamEntity){
         if (isNullOrEmpty(processLogParamEntity)){
@@ -130,7 +130,7 @@ public class LogHelper{
      * @param itemName
      * @param itemValue
      * @param itemValueLenth
-     * @since 3.5.2
+     * @since 4.0.0
      */
     private static void appendItem(StringBuilder sb,String itemName,String itemValue,int itemValueLenth){
         sb.append(itemName);
@@ -145,7 +145,7 @@ public class LogHelper{
      *            值
      * @param itemValueLenth
      *            left pad 长度
-     * @since 3.5.2
+     * @since 4.0.0
      */
     private static void appendItem(StringBuilder sb,String itemValue,int itemValueLenth){
         sb.append(StringUtils.leftPad(itemValue, itemValueLenth));

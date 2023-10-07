@@ -108,7 +108,7 @@ public final class WebSpringUtil{
      * @see org.springframework.web.servlet.mvc.method.annotation.ServletRequestMethodArgumentResolver
      * @see org.springframework.web.util.WebUtils#getNativeRequest(ServletRequest, Class)
      * @since 1.10.0
-     * @since 3.5.2 加上异常处理,如果出现异常返回null
+     * @since 4.0.0 加上异常处理,如果出现异常返回null
      */
     public static HttpServletRequest getRequest(){
         try{
