@@ -165,12 +165,6 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
     private static final Logger              log                                  = LoggerFactory
                     .getLogger(SSLConnectionSocketFactory.class);
 
-    public static final String               TLS                                  = "TLS";
-
-    public static final String               SSL                                  = "SSL";
-
-    public static final String               SSLV2                                = "SSLv2";
-
     /**
      * @deprecated Use {@link AllowAllHostnameVerifier#INSTANCE}.
      */
