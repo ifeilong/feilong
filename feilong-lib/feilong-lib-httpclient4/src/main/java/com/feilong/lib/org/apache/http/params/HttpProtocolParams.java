@@ -118,26 +118,26 @@ public final class HttpProtocolParams implements CoreProtocolPNames{
      * @return HTTP protocol version.
      */
     public static ProtocolVersion getVersion(final HttpParams params){
-        Args.notNull(params, "HTTP parameters");
-        final Object param = params.getParameter(CoreProtocolPNames.PROTOCOL_VERSION);
-        if (param == null){
-            return HttpVersion.HTTP_1_1;
-        }
-        return (ProtocolVersion) param;
+        //        Args.notNull(params, "HTTP parameters");
+        //        final Object param = params.getParameter(CoreProtocolPNames.PROTOCOL_VERSION);
+        //        if (param == null){
+        return HttpVersion.HTTP_1_1;
+        //        }
+        //        return (ProtocolVersion) param;
     }
 
-    /**
-     * Sets value of the {@link CoreProtocolPNames#PROTOCOL_VERSION} parameter.
-     *
-     * @param params
-     *            HTTP parameters.
-     * @param version
-     *            HTTP protocol version.
-     */
-    public static void setVersion(final HttpParams params,final ProtocolVersion version){
-        Args.notNull(params, "HTTP parameters");
-        params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, version);
-    }
+    //    /**
+    //     * Sets value of the {@link CoreProtocolPNames#PROTOCOL_VERSION} parameter.
+    //     *
+    //     * @param params
+    //     *            HTTP parameters.
+    //     * @param version
+    //     *            HTTP protocol version.
+    //     */
+    //    public static void setVersion(final HttpParams params,final ProtocolVersion version){
+    //        Args.notNull(params, "HTTP parameters");
+    //        params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, version);
+    //    }
 
     /**
      * Obtains value of the {@link CoreProtocolPNames#USER_AGENT} parameter.

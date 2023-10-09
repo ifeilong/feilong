@@ -1298,6 +1298,8 @@ public class HttpClientBuilder{
             }
             connManagerCopy = poolingmgr;
         }
+
+        //---------------------------------------------------------------
         ConnectionReuseStrategy reuseStrategyCopy = this.reuseStrategy;
         if (reuseStrategyCopy == null){
             if (systemProperties){
@@ -1311,6 +1313,8 @@ public class HttpClientBuilder{
                 reuseStrategyCopy = DefaultClientConnectionReuseStrategy.INSTANCE;
             }
         }
+
+        //---------------------------------------------------------------
         ConnectionKeepAliveStrategy keepAliveStrategyCopy = this.keepAliveStrategy;
         if (keepAliveStrategyCopy == null){
             keepAliveStrategyCopy = DefaultConnectionKeepAliveStrategy.INSTANCE;
@@ -1332,6 +1336,7 @@ public class HttpClientBuilder{
             }
         }
 
+        //---------------------------------------------------------------
         String userAgentCopy = this.userAgent;
         if (userAgentCopy == null){
             if (systemProperties){
@@ -1341,6 +1346,8 @@ public class HttpClientBuilder{
                 userAgentCopy = DEFAULT_USER_AGENT;
             }
         }
+
+        //---------------------------------------------------------------
 
         ClientExecChain execChain = createMainExec(
                         requestExecCopy,
@@ -1353,6 +1360,8 @@ public class HttpClientBuilder{
                         userTokenHandlerCopy);
 
         execChain = decorateMainExec(execChain);
+
+        //---------------------------------------------------------------
 
         HttpProcessor httpprocessorCopy = this.httpprocessor;
         if (httpprocessorCopy == null){
@@ -1416,6 +1425,8 @@ public class HttpClientBuilder{
             }
             httpprocessorCopy = b.build();
         }
+
+        //---------------------------------------------------------------
         execChain = new ProtocolExec(execChain, httpprocessorCopy);
 
         execChain = decorateProtocolExec(execChain);
@@ -1516,6 +1527,8 @@ public class HttpClientBuilder{
             }
             closeablesCopy.add(() -> cm.shutdown());
         }
+
+        //---------------------------------------------------------------
 
         return new InternalHttpClient(
                         execChain,

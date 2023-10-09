@@ -61,7 +61,7 @@ public abstract class HttpRequestBase extends AbstractExecutionAwareRequest impl
 
     @Override
     public ProtocolVersion getProtocolVersion(){
-        return version != null ? version : HttpProtocolParams.getVersion(getParams());
+        return version != null ? version : HttpProtocolParams.getVersion(null);
     }
 
     /**

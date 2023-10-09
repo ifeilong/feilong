@@ -52,6 +52,8 @@ public final class HttpVersion extends ProtocolVersion{
     /** The protocol name. */
     public static final String      HTTP             = "HTTP";
 
+    //---------------------------------------------------------------
+
     /** HTTP protocol version 0.9 */
     public static final HttpVersion HTTP_0_9         = new HttpVersion(0, 9);
 
@@ -60,6 +62,8 @@ public final class HttpVersion extends ProtocolVersion{
 
     /** HTTP protocol version 1.1 */
     public static final HttpVersion HTTP_1_1         = new HttpVersion(1, 1);
+
+    //---------------------------------------------------------------
 
     /**
      * Create an HTTP protocol version designator.

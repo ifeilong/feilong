@@ -98,13 +98,15 @@ public class RetryExec implements ClientExecChain{
                 }
 
                 //---------------------------------------------------------------
-                log.info(
-                                "execCount:[{}],IOException ( {} ) caught when processing request to {}: {},will use {} determines if need retry",
-                                execCount,
-                                ex.getClass().getName(),
-                                route,
-                                ex.getMessage(),
-                                retryHandler.getClass().getName());
+                if (log.isDebugEnabled()){
+                    log.debug(
+                                    "execCount:[{}],IOException:[{}], caught when processing request to {}: {},will use [{}] determines if need retry",
+                                    execCount,
+                                    ex.getClass().getName(),
+                                    route,
+                                    ex.getMessage(),
+                                    retryHandler.getClass().getName());
+                }
 
                 if (retryHandler.retryRequest(ex, execCount, context)){
                     if (log.isDebugEnabled()){
@@ -113,7 +115,7 @@ public class RetryExec implements ClientExecChain{
 
                     if (log.isInfoEnabled()){
                         log.info(
-                                        "execCount:[{}],IOException ( {} ) caught when processing request to {}: {},retryHandler :[{}] need retry",
+                                        "execCount:[{}], IOException:[{}] caught when processing request to {}: {},retryHandler :[{}] need retry",
                                         execCount,
                                         ex.getClass().getName(),
                                         route,

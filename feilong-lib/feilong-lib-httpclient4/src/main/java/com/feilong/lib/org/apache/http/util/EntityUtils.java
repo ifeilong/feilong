@@ -35,10 +35,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
-import com.feilong.lib.org.apache.http.HeaderElement;
 import com.feilong.lib.org.apache.http.HttpEntity;
 import com.feilong.lib.org.apache.http.HttpResponse;
-import com.feilong.lib.org.apache.http.NameValuePair;
 import com.feilong.lib.org.apache.http.ParseException;
 import com.feilong.lib.org.apache.http.entity.ContentType;
 import com.feilong.lib.org.apache.http.protocol.HTTP;
@@ -93,6 +91,8 @@ public final class EntityUtils{
             }
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Updates an entity in a response by first consuming an existing entity, then setting the new one.
@@ -149,63 +149,6 @@ public final class EntityUtils{
         }finally{
             inStream.close();
         }
-    }
-
-    /**
-     * Obtains character set of the entity, if known.
-     *
-     * @param entity
-     *            must not be null
-     * @return the character set, or null if not found
-     * @throws ParseException
-     *             if header elements cannot be parsed
-     * @throws IllegalArgumentException
-     *             if entity is null
-     *
-     * @deprecated (4.1.3) use {@link ContentType#getOrDefault(HttpEntity)}
-     */
-    @Deprecated
-    public static String getContentCharSet(final HttpEntity entity) throws ParseException{
-        Args.notNull(entity, "Entity");
-        String charset = null;
-        if (entity.getContentType() != null){
-            final HeaderElement values[] = entity.getContentType().getElements();
-            if (values.length > 0){
-                final NameValuePair param = values[0].getParameterByName("charset");
-                if (param != null){
-                    charset = param.getValue();
-                }
-            }
-        }
-        return charset;
-    }
-
-    /**
-     * Obtains MIME type of the entity, if known.
-     *
-     * @param entity
-     *            must not be null
-     * @return the character set, or null if not found
-     * @throws ParseException
-     *             if header elements cannot be parsed
-     * @throws IllegalArgumentException
-     *             if entity is null
-     *
-     * @since 4.1
-     *
-     * @deprecated (4.1.3) use {@link ContentType#getOrDefault(HttpEntity)}
-     */
-    @Deprecated
-    public static String getContentMimeType(final HttpEntity entity) throws ParseException{
-        Args.notNull(entity, "Entity");
-        String mimeType = null;
-        if (entity.getContentType() != null){
-            final HeaderElement values[] = entity.getContentType().getElements();
-            if (values.length > 0){
-                mimeType = values[0].getName();
-            }
-        }
-        return mimeType;
     }
 
     private static String toString(final HttpEntity entity,final ContentType contentType) throws IOException{
@@ -332,5 +275,62 @@ public final class EntityUtils{
         Args.notNull(entity, "Entity");
         return toString(entity, ContentType.get(entity));
     }
+
+    //    /**
+    //     * Obtains character set of the entity, if known.
+    //     *
+    //     * @param entity
+    //     *            must not be null
+    //     * @return the character set, or null if not found
+    //     * @throws ParseException
+    //     *             if header elements cannot be parsed
+    //     * @throws IllegalArgumentException
+    //     *             if entity is null
+    //     *
+    //     * @deprecated (4.1.3) use {@link ContentType#getOrDefault(HttpEntity)}
+    //     */
+    //    @Deprecated
+    //    public static String getContentCharSet(final HttpEntity entity) throws ParseException{
+    //        Args.notNull(entity, "Entity");
+    //        String charset = null;
+    //        if (entity.getContentType() != null){
+    //            final HeaderElement values[] = entity.getContentType().getElements();
+    //            if (values.length > 0){
+    //                final NameValuePair param = values[0].getParameterByName("charset");
+    //                if (param != null){
+    //                    charset = param.getValue();
+    //                }
+    //            }
+    //        }
+    //        return charset;
+    //    }
+
+    //    /**
+    //     * Obtains MIME type of the entity, if known.
+    //     *
+    //     * @param entity
+    //     *            must not be null
+    //     * @return the character set, or null if not found
+    //     * @throws ParseException
+    //     *             if header elements cannot be parsed
+    //     * @throws IllegalArgumentException
+    //     *             if entity is null
+    //     *
+    //     * @since 4.1
+    //     *
+    //     * @deprecated (4.1.3) use {@link ContentType#getOrDefault(HttpEntity)}
+    //     */
+    //    @Deprecated
+    //    public static String getContentMimeType(final HttpEntity entity) throws ParseException{
+    //        Args.notNull(entity, "Entity");
+    //        String mimeType = null;
+    //        if (entity.getContentType() != null){
+    //            final HeaderElement values[] = entity.getContentType().getElements();
+    //            if (values.length > 0){
+    //                mimeType = values[0].getName();
+    //            }
+    //        }
+    //        return mimeType;
+    //    }
 
 }

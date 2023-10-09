@@ -68,6 +68,8 @@ public final class ContentType implements Serializable{
 
     private static final long                     serialVersionUID            = -7768694718232371896L;
 
+    //---------------------------------------------------------------
+
     // constants
     public static final ContentType               APPLICATION_ATOM_XML        = create("application/atom+xml", Consts.ISO_8859_1);
 
@@ -110,6 +112,8 @@ public final class ContentType implements Serializable{
     public static final ContentType               TEXT_XML                    = create("text/xml", Consts.ISO_8859_1);
 
     public static final ContentType               WILDCARD                    = create("*/*", (Charset) null);
+
+    //---------------------------------------------------------------
 
     private static final Map<String, ContentType> CONTENT_TYPE_MAP;
     static{

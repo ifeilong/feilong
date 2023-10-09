@@ -51,6 +51,16 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
 
     private final int      off, len;
 
+    //---------------------------------------------------------------
+
+    public ByteArrayEntity(final byte[] b){
+        this(b, null);
+    }
+
+    public ByteArrayEntity(final byte[] b, final int off, final int len){
+        this(b, off, len, null);
+    }
+
     /**
      * @since 4.2
      */
@@ -84,13 +94,7 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
         }
     }
 
-    public ByteArrayEntity(final byte[] b){
-        this(b, null);
-    }
-
-    public ByteArrayEntity(final byte[] b, final int off, final int len){
-        this(b, off, len, null);
-    }
+    //---------------------------------------------------------------
 
     @Override
     public boolean isRepeatable(){
@@ -129,4 +133,4 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
         return super.clone();
     }
 
-} // class ByteArrayEntity
+}

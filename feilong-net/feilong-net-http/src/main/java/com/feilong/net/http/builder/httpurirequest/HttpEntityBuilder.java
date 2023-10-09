@@ -36,6 +36,7 @@ import com.feilong.net.http.HttpRequest;
  * {@link HttpEntity} 构造器.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @see com.feilong.lib.org.apache.http.client.entity.EntityBuilder
  * @since 1.10.6
  */
 final class HttpEntityBuilder{
