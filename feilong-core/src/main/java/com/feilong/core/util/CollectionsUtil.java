@@ -37,6 +37,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
@@ -1578,6 +1580,76 @@ public final class CollectionsUtil{
     public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName){
         return getPropertyValueList(beanIterable, propertyName, null);
     }
+
+    /**
+     * 循环集合 <code>beanIterable</code>,用对象指定的 <code>mapper</code>的值,拼成List({@link ArrayList}).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 获取user list每个元素的id属性值,组成新的list返回
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User(2L),
+     *                 new User(5L),
+     *                 new User(5L));
+     * 
+     * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, User::getId);
+     * LOGGER.debug(JsonUtil.format(resultList));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [2,5,5]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @implSpec
+     *           <p>
+     *           默认实现:
+     *           </p>
+     * 
+     *           <pre>
+     * {@code
+                beanIterable.stream()//
+                        .map(mapper)//
+                        .collect(Collectors.toList())
+     * }
+     * </pre>
+     *
+     * @param <T>
+     *            返回集合类型 generic type
+     * @param <O>
+     *            可迭代对象类型 generic type
+     * @param beanIterable
+     *            the bean iterable
+     * @param mapper
+     *            the mapper
+     * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty ArrayList<br>
+     *         如果 <code>mapper</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.0.0
+     * 
+     */
+    public static <T, O> List<T> getPropertyValueList(Collection<O> beanIterable,Function<O, T> mapper){
+        if (null == beanIterable){
+            return emptyList();
+        }
+        //---------------------------------------------------------------
+        Validate.notNull(mapper, "mapper can't be null!");
+        return beanIterable.stream()//
+                        .map(mapper)//
+                        .collect(Collectors.toList());
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 循环集合 <code>beanIterable</code>,取到对象指定的属性 <code>propertyName</code>的值,将值转换成
