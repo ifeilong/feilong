@@ -72,19 +72,6 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 		</dependency>
-		<!-- 2.10. 使用 HTTP 功能 -->
-
-		<!--httpmime 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpmime</artifactId>
-		</dependency>-->
-
-		<!--httpclient 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>-->
 
 		<!-- 2.11. 使用 CXF 功能 -->
 		<dependency>
