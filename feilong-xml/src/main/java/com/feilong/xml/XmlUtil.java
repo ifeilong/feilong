@@ -53,6 +53,27 @@ import com.thoughtworks.xstream.XStream;
  * Convenience methods for working with the DOM API, in particular for working with DOM Nodes and DOM Elements.
  * </p>
  * 
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>本类有使用xstream解析,首先自己项目需要依赖 xstream,<span style="color:green">版本号自行使用最新的版本</span>
+ * 
+ * <pre class="code">
+ * {@code
+ <dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>1.4.20</version> 
+      </dependency>
+ * }
+ * </pre>
+ * 
+ * </li>
+ * </ol>
+ * </blockquote>
+ * 
+ * 
+ * 
  * 将object转成xml字符串.
  * 
  * <h3>使用示例:</h3>
@@ -367,6 +388,27 @@ public class XmlUtil{
     /**
      * 将 map 转成 xml 字符串.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>首先自己项目需要依赖 xstream,<span style="color:green">版本号自行使用最新的版本</span>
+     * 
+     * <pre class="code">
+     * {@code
+     <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.20</version> 
+          </dependency>
+     * }
+     * </pre>
+     * 
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -564,6 +606,20 @@ public class XmlUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
+     * <li>
+     * 首先自己项目需要依赖 xstream,<span style="color:green">版本号自行使用最新的版本</span>
+     * 
+     * <pre class="code">
+     * {@code
+     <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.20</version> 
+          </dependency>
+     * }
+     * </pre>
+     * 
+     * </li>
      * <li>内部封装了 {@link XStream#ignoreUnknownElements()} 忽略了不存在的字段</li>
      * </ol>
      * </blockquote>

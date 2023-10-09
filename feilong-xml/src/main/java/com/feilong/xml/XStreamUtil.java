@@ -20,6 +20,7 @@ import com.feilong.xml.xstream.XStreamConfig;
 import com.thoughtworks.xstream.XStream;
 
 /**
+ * xstream 工具类
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 3.0.3
