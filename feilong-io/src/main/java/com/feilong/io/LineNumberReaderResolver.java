@@ -20,7 +20,9 @@ package com.feilong.io;
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.4.1
+ * @since 4.0.0 mark '@FunctionalInterface'
  */
+@FunctionalInterface // 该注解加不加,对于接口是不是函数式接口没有影响;只是提醒编译器去检查该接口是否仅包含一个抽象方法
 public interface LineNumberReaderResolver{
 
     /**

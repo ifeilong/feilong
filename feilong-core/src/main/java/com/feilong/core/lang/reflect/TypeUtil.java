@@ -182,12 +182,12 @@ public final class TypeUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得 generic interfaces parameterized type.
+     * 获得 generic 接口 parameterized type.
      *
      * @param klass
      *            the klass
      * @param extractInterfaceClass
-     *            the extract interface class
+     *            待提取的接口
      * @return 如果 klass没有泛型接口,返回null
      * @see java.lang.Class#getGenericInterfaces()
      * @see java.lang.reflect.ParameterizedType#getRawType()

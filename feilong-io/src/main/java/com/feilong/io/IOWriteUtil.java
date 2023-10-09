@@ -385,7 +385,7 @@ public final class IOWriteUtil{
      * </p>
      * 
      * <p>
-     * The NIO APIs include the following features:
+     * NIO APIs 包含以下特性:
      * </p>
      * 
      * <ol>

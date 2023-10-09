@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.classutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -27,8 +28,6 @@ import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ClassUtilIsInterfaceParameterizedTest.
@@ -56,9 +55,6 @@ public class IsInterfaceParameterizedTest extends Abstract1ParamAndResultParamet
         return toList(objects);
     }
 
-    /**
-     * Test is interface.
-     */
     @Test
     public void testIsInterface(){
         assertEquals(expectedValue, ClassUtil.isInterface(input1));
