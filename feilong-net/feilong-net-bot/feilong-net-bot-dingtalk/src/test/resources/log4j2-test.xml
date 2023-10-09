@@ -28,6 +28,7 @@
 		<Logger name="com.feilong" level="debug" />
 		<Logger name="com.feilong.tools.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
+		<Logger name="com.feilong.lib" level="info" />
 
 		<Logger name="com.feilong.core.lang.ThreadUtil" level="info" />
 		<Logger name="com.feilong.taglib.display.pager.PagerBuilder" level="info" />

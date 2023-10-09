@@ -70,6 +70,7 @@
 		<Logger name="org.apache.http.conn.ssl.SSLConnectionSocketFactory" level="info" />
 		<Logger name="httpclient.wire" level="info" />
 		<Logger name="org.apache.http.impl.conn.Wire" level="info" />
+		<Logger name="com.feilong.lib.org.apache.http.impl.conn.Wire" level="info" />
 		<Logger name="org.apache.commons.httpclient.Wire" level="info" />
 		<Logger name="org.springframework.beans.factory.support" level="info" />
 
