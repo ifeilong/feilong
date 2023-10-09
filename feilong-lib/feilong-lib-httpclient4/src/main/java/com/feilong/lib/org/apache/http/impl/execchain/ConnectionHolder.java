@@ -107,8 +107,8 @@ class ConnectionHolder implements ConnectionReleaseTrigger,Cancellable,Closeable
                         this.managedConn.close();
                         log.debug("Connection discarded");
                     }catch (final IOException ex){
-                        if (this.log.isDebugEnabled()){
-                            this.log.debug(ex.getMessage(), ex);
+                        if (log.isDebugEnabled()){
+                            log.debug(ex.getMessage(), ex);
                         }
                     }finally{
                         this.manager.releaseConnection(this.managedConn, null, 0, TimeUnit.MILLISECONDS);
@@ -131,8 +131,8 @@ class ConnectionHolder implements ConnectionReleaseTrigger,Cancellable,Closeable
                     this.managedConn.shutdown();
                     log.debug("Connection discarded");
                 }catch (final IOException ex){
-                    if (this.log.isDebugEnabled()){
-                        this.log.debug(ex.getMessage(), ex);
+                    if (log.isDebugEnabled()){
+                        log.debug(ex.getMessage(), ex);
                     }
                 }finally{
                     this.manager.releaseConnection(this.managedConn, null, 0, TimeUnit.MILLISECONDS);

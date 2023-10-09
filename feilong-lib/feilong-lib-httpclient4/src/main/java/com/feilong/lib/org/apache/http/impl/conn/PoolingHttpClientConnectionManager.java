@@ -247,8 +247,8 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
     @Override
     public ConnectionRequest requestConnection(final HttpRoute route,final Object state){
         Args.notNull(route, "HTTP route");
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Connection request: " + format(route, state) + formatStats(route));
+        if (log.isDebugEnabled()){
+            log.debug("Connection request: " + format(route, state) + formatStats(route));
         }
         Asserts.check(!this.isShutDown.get(), "Connection pool shut down");
         final Future<CPoolEntry> future = this.pool.lease(route, state, null);
@@ -289,8 +289,8 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
                 throw new ExecutionException(new CancellationException("Operation cancelled"));
             }
             Asserts.check(entry.getConnection() != null, "Pool entry with no connection");
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Connection leased: " + format(entry) + formatStats(entry.getRoute()));
+            if (log.isDebugEnabled()){
+                log.debug("Connection leased: " + format(entry) + formatStats(entry.getRoute()));
             }
             return CPoolProxy.newProxy(entry);
         }catch (final TimeoutException ex){
@@ -312,21 +312,21 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
                     final TimeUnit effectiveUnit = timeUnit != null ? timeUnit : TimeUnit.MILLISECONDS;
                     entry.setState(state);
                     entry.updateExpiry(keepalive, effectiveUnit);
-                    if (this.log.isDebugEnabled()){
+                    if (log.isDebugEnabled()){
                         final String s;
                         if (keepalive > 0){
                             s = "for " + (double) effectiveUnit.toMillis(keepalive) / 1000 + " seconds";
                         }else{
                             s = "indefinitely";
                         }
-                        this.log.debug("Connection " + format(entry) + " can be kept alive " + s);
+                        log.debug("Connection " + format(entry) + " can be kept alive " + s);
                     }
                     conn.setSocketTimeout(0);
                 }
             }finally{
                 this.pool.release(entry, conn.isOpen() && entry.isRouteComplete());
-                if (this.log.isDebugEnabled()){
-                    this.log.debug("Connection released: " + format(entry) + formatStats(entry.getRoute()));
+                if (log.isDebugEnabled()){
+                    log.debug("Connection released: " + format(entry) + formatStats(entry.getRoute()));
                 }
             }
         }
@@ -376,7 +376,7 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
     @Override
     public void shutdown(){
         if (this.isShutDown.compareAndSet(false, true)){
-            this.log.debug("Connection manager is shutting down");
+            log.debug("Connection manager is shutting down");
             try{
                 this.pool.enumLeased(new PoolEntryCallback<HttpRoute, ManagedHttpClientConnection>(){
 
@@ -397,23 +397,23 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
                 });
                 this.pool.shutdown();
             }catch (final IOException ex){
-                this.log.debug("I/O exception shutting down connection manager", ex);
+                log.debug("I/O exception shutting down connection manager", ex);
             }
-            this.log.debug("Connection manager shut down");
+            log.debug("Connection manager shut down");
         }
     }
 
     @Override
     public void closeIdleConnections(final long idleTimeout,final TimeUnit timeUnit){
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Closing connections idle longer than " + idleTimeout + " " + timeUnit);
+        if (log.isDebugEnabled()){
+            log.debug("Closing connections idle longer than " + idleTimeout + " " + timeUnit);
         }
         this.pool.closeIdle(idleTimeout, timeUnit);
     }
 
     @Override
     public void closeExpiredConnections(){
-        this.log.debug("Closing expired connections");
+        log.debug("Closing expired connections");
         this.pool.closeExpired();
     }
 

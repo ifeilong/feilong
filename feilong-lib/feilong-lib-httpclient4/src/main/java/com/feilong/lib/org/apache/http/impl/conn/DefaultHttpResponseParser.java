@@ -148,8 +148,8 @@ public class DefaultHttpResponseParser extends AbstractMessageParser<HttpRespons
                 // Giving up
                 throw new ProtocolException("The server failed to respond with a " + "valid HTTP response");
             }
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Garbage in response: " + this.lineBuf.toString());
+            if (log.isDebugEnabled()){
+                log.debug("Garbage in response: " + this.lineBuf.toString());
             }
             count++;
         }while (true);

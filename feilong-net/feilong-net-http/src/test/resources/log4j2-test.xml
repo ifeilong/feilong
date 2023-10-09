@@ -25,8 +25,8 @@
 	<!-- Loggers:定义日志级别和使用的Appenders -->
 	<Loggers>
 
-		<Logger name="com.feilong" level="debug">
-		</Logger>
+		<Logger name="com.feilong" level="debug"/>
+		<Logger name="com.feilong.lib" level="info" />
 		<Logger name="com.feilong.tools.security" level="debug" />
 		<Logger name="com.feilong.lib.beanutils" level="info" />
 
@@ -45,7 +45,6 @@
 		<Logger name="org.apache.velocity" level="info" />
 		<Logger name="org.apache" level="info" />
 		<Logger name="org.apache.commons.beanutils" level="info" />
-		<Logger name="com.feilong.lib.beanutils" level="info" />
 		<Logger name="org.apache.velocity.runtime.log" level="warn" />
 		<Logger name="org.apache.commons.digester.Digester" level="warn" />
 		<Logger name="org.apache.commons.digester3" level="info" />

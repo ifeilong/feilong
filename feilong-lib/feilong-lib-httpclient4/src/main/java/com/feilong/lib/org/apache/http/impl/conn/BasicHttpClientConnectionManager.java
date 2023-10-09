@@ -210,12 +210,12 @@ public class BasicHttpClientConnectionManager implements HttpClientConnectionMan
 
     private synchronized void closeConnection(){
         if (this.conn != null){
-            this.log.debug("Closing connection");
+            log.debug("Closing connection");
             try{
                 this.conn.close();
             }catch (final IOException iox){
-                if (this.log.isDebugEnabled()){
-                    this.log.debug("I/O exception closing connection", iox);
+                if (log.isDebugEnabled()){
+                    log.debug("I/O exception closing connection", iox);
                 }
             }
             this.conn = null;
@@ -224,8 +224,8 @@ public class BasicHttpClientConnectionManager implements HttpClientConnectionMan
 
     private void checkExpiry(){
         if (this.conn != null && System.currentTimeMillis() >= this.expiry){
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Connection expired @ " + new Date(this.expiry));
+            if (log.isDebugEnabled()){
+                log.debug("Connection expired @ " + new Date(this.expiry));
             }
             closeConnection();
         }
@@ -233,8 +233,8 @@ public class BasicHttpClientConnectionManager implements HttpClientConnectionMan
 
     synchronized HttpClientConnection getConnection(final HttpRoute route,final Object state){
         Asserts.check(!this.isShutdown.get(), "Connection manager has been shut down");
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Get connection for route " + route);
+        if (log.isDebugEnabled()){
+            log.debug("Get connection for route " + route);
         }
         Asserts.check(!this.leased, "Connection is still allocated");
         if (!LangUtils.equals(this.route, route) || !LangUtils.equals(this.state, state)){
@@ -259,8 +259,8 @@ public class BasicHttpClientConnectionManager implements HttpClientConnectionMan
                     final TimeUnit timeUnit){
         Args.notNull(conn, "Connection");
         Asserts.check(conn == this.conn, "Connection not obtained from this manager");
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Releasing connection " + conn);
+        if (log.isDebugEnabled()){
+            log.debug("Releasing connection " + conn);
         }
         if (this.isShutdown.get()){
             return;
@@ -275,14 +275,14 @@ public class BasicHttpClientConnectionManager implements HttpClientConnectionMan
             }else{
                 this.state = state;
                 this.conn.setSocketTimeout(0);
-                if (this.log.isDebugEnabled()){
+                if (log.isDebugEnabled()){
                     final String s;
                     if (keepalive > 0){
                         s = "for " + keepalive + " " + timeUnit;
                     }else{
                         s = "indefinitely";
                     }
-                    this.log.debug("Connection can be kept alive " + s);
+                    log.debug("Connection can be kept alive " + s);
                 }
                 if (keepalive > 0){
                     this.expiry = this.updated + timeUnit.toMillis(keepalive);
@@ -355,12 +355,12 @@ public class BasicHttpClientConnectionManager implements HttpClientConnectionMan
     public void shutdown(){
         if (this.isShutdown.compareAndSet(false, true)){
             if (this.conn != null){
-                this.log.debug("Shutting down connection");
+                log.debug("Shutting down connection");
                 try{
                     this.conn.shutdown();
                 }catch (final IOException iox){
-                    if (this.log.isDebugEnabled()){
-                        this.log.debug("I/O exception shutting down connection", iox);
+                    if (log.isDebugEnabled()){
+                        log.debug("I/O exception shutting down connection", iox);
                     }
                 }
                 this.conn = null;

@@ -133,14 +133,14 @@ public class DefaultHttpClientConnectionOperator implements HttpClientConnection
             conn.bind(sock);
 
             final InetSocketAddress remoteAddress = new InetSocketAddress(address, port);
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Connecting to " + remoteAddress);
+            if (log.isDebugEnabled()){
+                log.debug("Connecting to " + remoteAddress);
             }
             try{
                 sock = sf.connectSocket(connectTimeout, sock, host, remoteAddress, localAddress, context);
                 conn.bind(sock);
-                if (this.log.isDebugEnabled()){
-                    this.log.debug("Connection established " + conn);
+                if (log.isDebugEnabled()){
+                    log.debug("Connection established " + conn);
                 }
                 return;
             }catch (final SocketTimeoutException ex){
@@ -158,8 +158,8 @@ public class DefaultHttpClientConnectionOperator implements HttpClientConnection
                     throw ex;
                 }
             }
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Connect to " + remoteAddress + " timed out. " + "Connection will be retried using another IP address");
+            if (log.isDebugEnabled()){
+                log.debug("Connect to " + remoteAddress + " timed out. " + "Connection will be retried using another IP address");
             }
         }
     }

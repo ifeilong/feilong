@@ -141,8 +141,8 @@ public class DefaultRedirectStrategy implements RedirectStrategy{
             throw new ProtocolException("Received redirect response " + response.getStatusLine() + " but no location header");
         }
         final String location = locationHeader.getValue();
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Redirect requested to location '" + location + "'");
+        if (log.isDebugEnabled()){
+            log.debug("Redirect requested to location '" + location + "'");
         }
 
         final RequestConfig config = clientContext.getRequestConfig();

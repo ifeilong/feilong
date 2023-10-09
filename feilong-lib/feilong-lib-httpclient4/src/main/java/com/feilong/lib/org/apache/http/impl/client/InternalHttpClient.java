@@ -198,7 +198,7 @@ class InternalHttpClient extends CloseableHttpClient implements Configurable{
                 try{
                     closeable.close();
                 }catch (final IOException ex){
-                    this.log.error(ex.getMessage(), ex);
+                    log.error(ex.getMessage(), ex);
                 }
             }
         }

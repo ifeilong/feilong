@@ -370,8 +370,8 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
             if (connectTimeout > 0 && sock.getSoTimeout() == 0){
                 sock.setSoTimeout(connectTimeout);
             }
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Connecting socket to " + remoteAddress + " with timeout " + connectTimeout);
+            if (log.isDebugEnabled()){
+                log.debug("Connecting socket to " + remoteAddress + " with timeout " + connectTimeout);
             }
             sock.connect(remoteAddress, connectTimeout);
         }catch (final IOException ex){
@@ -383,7 +383,7 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
         // Setup SSL layering if necessary
         if (sock instanceof SSLSocket){
             final SSLSocket sslsock = (SSLSocket) sock;
-            this.log.debug("Starting handshake");
+            log.debug("Starting handshake");
             sslsock.startHandshake();
             verifyHostname(sslsock, host.getHostName());
             return sock;
@@ -425,13 +425,13 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
             }
         }
 
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Enabled protocols: " + Arrays.asList(sslsock.getEnabledProtocols()));
-            this.log.debug("Enabled cipher suites:" + Arrays.asList(sslsock.getEnabledCipherSuites()));
+        if (log.isDebugEnabled()){
+            log.debug("Enabled protocols: " + Arrays.asList(sslsock.getEnabledProtocols()));
+            log.debug("Enabled cipher suites:" + Arrays.asList(sslsock.getEnabledCipherSuites()));
         }
 
         prepareSocket(sslsock);
-        this.log.debug("Starting handshake");
+        log.debug("Starting handshake");
         sslsock.startHandshake();
         verifyHostname(sslsock, target);
         return sslsock;
@@ -460,10 +460,10 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
                 throw new SSLHandshakeException("SSL session not available");
             }
 
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Secure session established");
-                this.log.debug(" negotiated protocol: " + session.getProtocol());
-                this.log.debug(" negotiated cipher suite: " + session.getCipherSuite());
+            if (log.isDebugEnabled()){
+                log.debug("Secure session established");
+                log.debug("     negotiated protocol: " + session.getProtocol());
+                log.debug("     negotiated cipher suite: " + session.getCipherSuite());
 
                 try{
 
@@ -471,7 +471,7 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
                     final X509Certificate x509 = (X509Certificate) certs[0];
                     final X500Principal peer = x509.getSubjectX500Principal();
 
-                    this.log.debug(" peer principal: " + peer.toString());
+                    log.debug(" peer principal: " + peer.toString());
                     final Collection<List<?>> altNames1 = x509.getSubjectAlternativeNames();
                     if (altNames1 != null){
                         final List<String> altNames = new ArrayList<String>();
@@ -480,11 +480,11 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
                                 altNames.add((String) aC.get(1));
                             }
                         }
-                        this.log.debug(" peer alternative names: " + altNames);
+                        log.debug(" peer alternative names: " + altNames);
                     }
 
                     final X500Principal issuer = x509.getIssuerX500Principal();
-                    this.log.debug(" issuer principal: " + issuer.toString());
+                    log.debug(" issuer principal: " + issuer.toString());
                     final Collection<List<?>> altNames2 = x509.getIssuerAlternativeNames();
                     if (altNames2 != null){
                         final List<String> altNames = new ArrayList<String>();
@@ -493,7 +493,7 @@ public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactor
                                 altNames.add((String) aC.get(1));
                             }
                         }
-                        this.log.debug(" issuer alternative names: " + altNames);
+                        log.debug(" issuer alternative names: " + altNames);
                     }
                 }catch (final Exception ignore){}
             }

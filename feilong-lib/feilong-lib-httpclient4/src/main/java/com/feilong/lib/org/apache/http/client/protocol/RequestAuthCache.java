@@ -74,25 +74,25 @@ public class RequestAuthCache implements HttpRequestInterceptor{
 
         final AuthCache authCache = clientContext.getAuthCache();
         if (authCache == null){
-            this.log.debug("Auth cache not set in the context");
+            log.debug("Auth cache not set in the context");
             return;
         }
 
         final CredentialsProvider credsProvider = clientContext.getCredentialsProvider();
         if (credsProvider == null){
-            this.log.debug("Credentials provider not set in the context");
+            log.debug("Credentials provider not set in the context");
             return;
         }
 
         final RouteInfo route = clientContext.getHttpRoute();
         if (route == null){
-            this.log.debug("Route info not set in the context");
+            log.debug("Route info not set in the context");
             return;
         }
 
         HttpHost target = clientContext.getTargetHost();
         if (target == null){
-            this.log.debug("Target host not set in the context");
+            log.debug("Target host not set in the context");
             return;
         }
 
@@ -124,8 +124,8 @@ public class RequestAuthCache implements HttpRequestInterceptor{
                     final AuthState authState,
                     final CredentialsProvider credsProvider){
         final String schemeName = authScheme.getSchemeName();
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Re-using cached '" + schemeName + "' auth scheme for " + host);
+        if (log.isDebugEnabled()){
+            log.debug("Re-using cached '" + schemeName + "' auth scheme for " + host);
         }
 
         final AuthScope authScope = new AuthScope(host, AuthScope.ANY_REALM, schemeName);
@@ -134,7 +134,7 @@ public class RequestAuthCache implements HttpRequestInterceptor{
         if (creds != null){
             authState.update(authScheme, creds);
         }else{
-            this.log.debug("No credentials for preemptive authentication");
+            log.debug("No credentials for preemptive authentication");
         }
     }
 

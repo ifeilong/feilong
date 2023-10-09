@@ -92,25 +92,25 @@ public class RetryExec implements ClientExecChain{
                 return this.requestExecutor.execute(route, request, context, execAware);
             }catch (final IOException ex){
                 if (execAware != null && execAware.isAborted()){
-                    this.log.debug("Request has been aborted");
+                    log.debug("Request has been aborted");
                     throw ex;
                 }
                 if (retryHandler.retryRequest(ex, execCount, context)){
-                    if (this.log.isInfoEnabled()){
-                        this.log.info(
+                    if (log.isInfoEnabled()){
+                        log.info(
                                         "I/O exception (" + ex.getClass().getName() + ") caught when processing request to " + route + ": "
                                                         + ex.getMessage());
                     }
-                    if (this.log.isDebugEnabled()){
-                        this.log.debug(ex.getMessage(), ex);
+                    if (log.isDebugEnabled()){
+                        log.debug(ex.getMessage(), ex);
                     }
                     if (!RequestEntityProxy.isRepeatable(request)){
-                        this.log.debug("Cannot retry non-repeatable request");
+                        log.debug("Cannot retry non-repeatable request");
                         throw new NonRepeatableRequestException("Cannot retry request " + "with a non-repeatable request entity", ex);
                     }
                     request.setHeaders(origheaders);
-                    if (this.log.isInfoEnabled()){
-                        this.log.info("Retrying request to " + route);
+                    if (log.isInfoEnabled()){
+                        log.info("Retrying request to " + route);
                     }
                 }else{
                     if (ex instanceof NoHttpResponseException){

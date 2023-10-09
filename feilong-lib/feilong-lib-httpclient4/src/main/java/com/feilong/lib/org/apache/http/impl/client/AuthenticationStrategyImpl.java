@@ -161,12 +161,12 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
         final Queue<AuthOption> options = new LinkedList<AuthOption>();
         final Lookup<AuthSchemeProvider> registry = clientContext.getAuthSchemeRegistry();
         if (registry == null){
-            this.log.debug("Auth scheme registry not set in the context");
+            log.debug("Auth scheme registry not set in the context");
             return options;
         }
         final CredentialsProvider credsProvider = clientContext.getCredentialsProvider();
         if (credsProvider == null){
-            this.log.debug("Credentials provider not set in the context");
+            log.debug("Credentials provider not set in the context");
             return options;
         }
         final RequestConfig config = clientContext.getRequestConfig();
@@ -174,8 +174,8 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
         if (authPrefs == null){
             authPrefs = DEFAULT_SCHEME_PRIORITY;
         }
-        if (this.log.isDebugEnabled()){
-            this.log.debug("Authentication schemes in the order of preference: " + authPrefs);
+        if (log.isDebugEnabled()){
+            log.debug("Authentication schemes in the order of preference: " + authPrefs);
         }
 
         for (final String id : authPrefs){
@@ -183,8 +183,8 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
             if (challenge != null){
                 final AuthSchemeProvider authSchemeProvider = registry.lookup(id);
                 if (authSchemeProvider == null){
-                    if (this.log.isWarnEnabled()){
-                        this.log.warn("Authentication scheme " + id + " not supported");
+                    if (log.isWarnEnabled()){
+                        log.warn("Authentication scheme " + id + " not supported");
                         // Try again
                     }
                     continue;
@@ -199,8 +199,8 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
                     options.add(new AuthOption(authScheme, credentials));
                 }
             }else{
-                if (this.log.isDebugEnabled()){
-                    this.log.debug("Challenge for " + id + " authentication scheme not available");
+                if (log.isDebugEnabled()){
+                    log.debug("Challenge for " + id + " authentication scheme not available");
                     // Try again
                 }
             }
@@ -222,8 +222,8 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
                 authCache = new BasicAuthCache();
                 clientContext.setAuthCache(authCache);
             }
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Caching '" + authScheme.getSchemeName() + "' auth scheme for " + authhost);
+            if (log.isDebugEnabled()){
+                log.debug("Caching '" + authScheme.getSchemeName() + "' auth scheme for " + authhost);
             }
             authCache.put(authhost, authScheme);
         }
@@ -246,8 +246,8 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
 
         final AuthCache authCache = clientContext.getAuthCache();
         if (authCache != null){
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Clearing cached auth scheme for " + authhost);
+            if (log.isDebugEnabled()){
+                log.debug("Clearing cached auth scheme for " + authhost);
             }
             authCache.remove(authhost);
         }

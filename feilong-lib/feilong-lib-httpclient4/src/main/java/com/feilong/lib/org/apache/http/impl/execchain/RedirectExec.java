@@ -146,19 +146,19 @@ public class RedirectExec implements ClientExecChain{
                     if (!currentRoute.getTargetHost().equals(newTarget)){
                         final AuthState targetAuthState = context.getTargetAuthState();
                         if (targetAuthState != null){
-                            this.log.debug("Resetting target auth state");
+                            log.debug("Resetting target auth state");
                             targetAuthState.reset();
                         }
                         final AuthState proxyAuthState = context.getProxyAuthState();
                         if (proxyAuthState != null && proxyAuthState.isConnectionBased()){
-                            this.log.debug("Resetting proxy auth state");
+                            log.debug("Resetting proxy auth state");
                             proxyAuthState.reset();
                         }
                     }
 
                     currentRoute = this.routePlanner.determineRoute(newTarget, currentRequest, context);
-                    if (this.log.isDebugEnabled()){
-                        this.log.debug("Redirecting to '" + uri + "' via " + currentRoute);
+                    if (log.isDebugEnabled()){
+                        log.debug("Redirecting to '" + uri + "' via " + currentRoute);
                     }
                     EntityUtils.consume(response.getEntity());
                     response.close();
@@ -177,7 +177,7 @@ public class RedirectExec implements ClientExecChain{
                 try{
                     EntityUtils.consume(response.getEntity());
                 }catch (final IOException ioex){
-                    this.log.debug("I/O error while releasing connection", ioex);
+                    log.debug("I/O error while releasing connection", ioex);
                 }finally{
                     response.close();
                 }

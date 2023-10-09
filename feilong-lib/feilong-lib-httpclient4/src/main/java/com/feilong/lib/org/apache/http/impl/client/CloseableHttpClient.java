@@ -247,7 +247,7 @@ public abstract class CloseableHttpClient implements HttpClient,Closeable{
             }catch (final Exception t2){
                 // Log this exception. The original exception is more
                 // important and will be thrown to the caller.
-                this.log.warn("Error consuming content after an exception.", t2);
+                log.warn("Error consuming content after an exception.", t2);
             }
             throw t;
         }finally{

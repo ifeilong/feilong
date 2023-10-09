@@ -39,6 +39,63 @@ package com.feilong.net;
  * TLS 1.0通常被标示为SSL 3.1，TLS 1.1为SSL 3.2，TLS 1.2为SSL 3.3。
  * </p>
  * 
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">协议</th>
+ * <th align="left">时间</th>
+ * <th align="left">建议</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>SSLv1</td>
+ * <td>/</td>
+ * <td>/</td>
+ * <td>实际从未公开发布</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>SSLv2</td>
+ * <td>1995</td>
+ * <td>弃用</td>
+ * <td>IETF已于2011年弃用</td>
+ * </tr>
+ * 
+ * 
+ * <tr valign="top">
+ * <td>SSLv3</td>
+ * <td>1996</td>
+ * <td>弃用</td>
+ * <td>IETF已于2015年弃用</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>TLSv1.0</td>
+ * <td>1999</td>
+ * <td>兼容</td>
+ * <td>-</td>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>TLSv1.1</td>
+ * <td>2006</td>
+ * <td>兼容</td>
+ * <td>-</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>TLSv1.2</td>
+ * <td>2008</td>
+ * <td>主推</td>
+ * <td>目前最新可用版本</td>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>TLSv1.3</td>
+ * <td>/</td>
+ * <td>/</td>
+ * <td>2016开始草案制定</td>
+ * </tr>
+ * 
+ * </table>
+ * 
  * </blockquote>
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>

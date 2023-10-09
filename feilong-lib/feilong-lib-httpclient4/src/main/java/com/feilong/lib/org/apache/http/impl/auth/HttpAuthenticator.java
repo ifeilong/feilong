@@ -98,7 +98,7 @@ public class HttpAuthenticator{
                     final AuthState authState,
                     final HttpContext context){
         try{
-            if (this.log.isDebugEnabled()){
+            if (log.isDebugEnabled()){
                 log.debug(host.toHostString() + " requested authentication");
             }
             final Map<String, Header> challenges = authStrategy.getChallenges(host, response, context);
@@ -117,7 +117,7 @@ public class HttpAuthenticator{
                 case CHALLENGED:
                 case HANDSHAKE:
                     if (authScheme == null){
-                        this.log.debug("Auth scheme is null");
+                        log.debug("Auth scheme is null");
                         authStrategy.authFailed(host, null, context);
                         authState.reset();
                         authState.setState(AuthProtocolState.FAILURE);
@@ -128,10 +128,10 @@ public class HttpAuthenticator{
                         final String id = authScheme.getSchemeName();
                         final Header challenge = challenges.get(id.toLowerCase(Locale.ROOT));
                         if (challenge != null){
-                            this.log.debug("Authorization challenge processed");
+                            log.debug("Authorization challenge processed");
                             authScheme.processChallenge(challenge);
                             if (authScheme.isComplete()){
-                                this.log.debug("Authentication failed");
+                                log.debug("Authentication failed");
                                 authStrategy.authFailed(host, authState.getAuthScheme(), context);
                                 authState.reset();
                                 authState.setState(AuthProtocolState.FAILURE);
@@ -146,8 +146,8 @@ public class HttpAuthenticator{
             }
             final Queue<AuthOption> authOptions = authStrategy.select(challenges, host, response, context);
             if (authOptions != null && !authOptions.isEmpty()){
-                if (this.log.isDebugEnabled()){
-                    this.log.debug("Selected authentication options: " + authOptions);
+                if (log.isDebugEnabled()){
+                    log.debug("Selected authentication options: " + authOptions);
                 }
                 authState.setState(AuthProtocolState.CHALLENGED);
                 authState.update(authOptions);
@@ -155,8 +155,8 @@ public class HttpAuthenticator{
             }
             return false;
         }catch (final MalformedChallengeException ex){
-            if (this.log.isWarnEnabled()){
-                this.log.warn("Malformed challenge: " + ex.getMessage());
+            if (log.isWarnEnabled()){
+                log.warn("Malformed challenge: " + ex.getMessage());
             }
             authState.reset();
             return false;
@@ -184,8 +184,8 @@ public class HttpAuthenticator{
                         authScheme = authOption.getAuthScheme();
                         creds = authOption.getCredentials();
                         authState.update(authScheme, creds);
-                        if (this.log.isDebugEnabled()){
-                            this.log.debug(
+                        if (log.isDebugEnabled()){
+                            log.debug(
                                             "Generating response to an authentication challenge using " + authScheme.getSchemeName()
                                                             + " scheme");
                         }
@@ -194,8 +194,8 @@ public class HttpAuthenticator{
                             request.addHeader(header);
                             break;
                         }catch (final AuthenticationException ex){
-                            if (this.log.isWarnEnabled()){
-                                this.log.warn(authScheme + " authentication error: " + ex.getMessage());
+                            if (log.isWarnEnabled()){
+                                log.warn(authScheme + " authentication error: " + ex.getMessage());
                             }
                         }
                     }
@@ -208,8 +208,8 @@ public class HttpAuthenticator{
                 final Header header = doAuth(authScheme, creds, request, context);
                 request.addHeader(header);
             }catch (final AuthenticationException ex){
-                if (this.log.isErrorEnabled()){
-                    this.log.error(authScheme + " authentication error: " + ex.getMessage());
+                if (log.isErrorEnabled()){
+                    log.error(authScheme + " authentication error: " + ex.getMessage());
                 }
             }
         }

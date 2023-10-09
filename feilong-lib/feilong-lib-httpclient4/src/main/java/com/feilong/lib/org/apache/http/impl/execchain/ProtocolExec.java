@@ -121,8 +121,8 @@ public class ProtocolExec implements ClientExecChain{
             try{
                 uri = URI.create(uriString);
             }catch (final IllegalArgumentException ex){
-                if (this.log.isDebugEnabled()){
-                    this.log.debug(
+                if (log.isDebugEnabled()){
+                    log.debug(
                                     "Unable to parse '" + uriString + "' as a valid URI; "
                                                     + "request URI and Host header may be inconsistent",
                                     ex);
@@ -143,8 +143,8 @@ public class ProtocolExec implements ClientExecChain{
             if (port != -1){
                 virtualHost = new HttpHost(virtualHost.getHostName(), port, virtualHost.getSchemeName());
             }
-            if (this.log.isDebugEnabled()){
-                this.log.debug("Using virtual host" + virtualHost);
+            if (log.isDebugEnabled()){
+                log.debug("Using virtual host" + virtualHost);
             }
         }
 
