@@ -44,29 +44,30 @@ import java.net.URI;
  *
  * @since 4.0
  */
-public class HttpPut extends HttpEntityEnclosingRequestBase {
+public class HttpPut extends HttpEntityEnclosingRequestBase{
 
     public final static String METHOD_NAME = "PUT";
 
-    public HttpPut() {
+    public HttpPut(){
         super();
     }
 
-    public HttpPut(final URI uri) {
+    public HttpPut(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpPut(final String uri) {
+    public HttpPut(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

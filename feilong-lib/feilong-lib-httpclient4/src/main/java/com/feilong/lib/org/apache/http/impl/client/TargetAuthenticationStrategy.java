@@ -42,16 +42,16 @@ import com.feilong.lib.org.apache.http.client.config.RequestConfig;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class TargetAuthenticationStrategy extends AuthenticationStrategyImpl {
+public class TargetAuthenticationStrategy extends AuthenticationStrategyImpl{
 
     public static final TargetAuthenticationStrategy INSTANCE = new TargetAuthenticationStrategy();
 
-    public TargetAuthenticationStrategy() {
+    public TargetAuthenticationStrategy(){
         super(HttpStatus.SC_UNAUTHORIZED, AUTH.WWW_AUTH);
     }
 
     @Override
-    Collection<String> getPreferredAuthSchemes(final RequestConfig config) {
+    Collection<String> getPreferredAuthSchemes(final RequestConfig config){
         return config.getTargetPreferredAuthSchemes();
     }
 

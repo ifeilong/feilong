@@ -36,7 +36,7 @@ import java.security.cert.X509Certificate;
  *
  * @since 4.4
  */
-public interface TrustStrategy {
+public interface TrustStrategy{
 
     /**
      * Determines whether the certificate chain can be trusted without consulting the trust manager
@@ -46,12 +46,15 @@ public interface TrustStrategy {
      * Please note that, if this method returns {@code false}, the trust manager configured
      * in the actual SSL context can still clear the certificate as trusted.
      *
-     * @param chain the peer certificate chain
-     * @param authType the authentication type based on the client certificate
+     * @param chain
+     *            the peer certificate chain
+     * @param authType
+     *            the authentication type based on the client certificate
      * @return {@code true} if the certificate can be trusted without verification by
-     *   the trust manager, {@code false} otherwise.
-     * @throws CertificateException thrown if the certificate is not trusted or invalid.
+     *         the trust manager, {@code false} otherwise.
+     * @throws CertificateException
+     *             thrown if the certificate is not trusted or invalid.
      */
-    boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException;
+    boolean isTrusted(X509Certificate[] chain,String authType) throws CertificateException;
 
 }

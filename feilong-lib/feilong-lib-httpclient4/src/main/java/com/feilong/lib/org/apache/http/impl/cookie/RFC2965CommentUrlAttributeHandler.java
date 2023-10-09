@@ -43,33 +43,31 @@ import com.feilong.lib.org.apache.http.cookie.SetCookie2;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RFC2965CommentUrlAttributeHandler implements CommonCookieAttributeHandler {
+public class RFC2965CommentUrlAttributeHandler implements CommonCookieAttributeHandler{
 
-      public RFC2965CommentUrlAttributeHandler() {
-          super();
-      }
-
-      @Override
-      public void parse(final SetCookie cookie, final String commenturl)
-              throws MalformedCookieException {
-          if (cookie instanceof SetCookie2) {
-              final SetCookie2 cookie2 = (SetCookie2) cookie;
-              cookie2.setCommentURL(commenturl);
-          }
-      }
-
-      @Override
-      public void validate(final Cookie cookie, final CookieOrigin origin)
-              throws MalformedCookieException {
-      }
-
-      @Override
-      public boolean match(final Cookie cookie, final CookieOrigin origin) {
-          return true;
-      }
+    public RFC2965CommentUrlAttributeHandler(){
+        super();
+    }
 
     @Override
-    public String getAttributeName() {
+    public void parse(final SetCookie cookie,final String commenturl) throws MalformedCookieException{
+        if (cookie instanceof SetCookie2){
+            final SetCookie2 cookie2 = (SetCookie2) cookie;
+            cookie2.setCommentURL(commenturl);
+        }
+    }
+
+    @Override
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
+    }
+
+    @Override
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
+        return true;
+    }
+
+    @Override
+    public String getAttributeName(){
         return ClientCookie.COMMENTURL_ATTR;
     }
 

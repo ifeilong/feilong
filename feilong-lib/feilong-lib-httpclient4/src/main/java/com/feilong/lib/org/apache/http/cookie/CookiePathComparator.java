@@ -49,34 +49,34 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class CookiePathComparator implements Serializable, Comparator<Cookie> {
+public class CookiePathComparator implements Serializable,Comparator<Cookie>{
 
-    public static final CookiePathComparator INSTANCE = new CookiePathComparator();
+    public static final CookiePathComparator INSTANCE         = new CookiePathComparator();
 
-    private static final long serialVersionUID = 7523645369616405818L;
+    private static final long                serialVersionUID = 7523645369616405818L;
 
-    private String normalizePath(final Cookie cookie) {
+    private String normalizePath(final Cookie cookie){
         String path = cookie.getPath();
-        if (path == null) {
+        if (path == null){
             path = "/";
         }
-        if (!path.endsWith("/")) {
+        if (!path.endsWith("/")){
             path = path + '/';
         }
         return path;
     }
 
     @Override
-    public int compare(final Cookie c1, final Cookie c2) {
+    public int compare(final Cookie c1,final Cookie c2){
         final String path1 = normalizePath(c1);
         final String path2 = normalizePath(c2);
-        if (path1.equals(path2)) {
+        if (path1.equals(path2)){
             return 0;
-        } else if (path1.startsWith(path2)) {
+        }else if (path1.startsWith(path2)){
             return -1;
-        } else if (path2.startsWith(path1)) {
+        }else if (path2.startsWith(path1)){
             return 1;
-        } else {
+        }else{
             // Does not really matter
             return 0;
         }

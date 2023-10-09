@@ -46,26 +46,26 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  */
 @Obsolete
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NetscapeDraftSpecProvider implements CookieSpecProvider {
+public class NetscapeDraftSpecProvider implements CookieSpecProvider{
 
-    private final String[] datepatterns;
+    private final String[]      datepatterns;
 
     private volatile CookieSpec cookieSpec;
 
-    public NetscapeDraftSpecProvider(final String[] datepatterns) {
+    public NetscapeDraftSpecProvider(final String[] datepatterns){
         super();
         this.datepatterns = datepatterns;
     }
 
-    public NetscapeDraftSpecProvider() {
+    public NetscapeDraftSpecProvider(){
         this(null);
     }
 
     @Override
-    public CookieSpec create(final HttpContext context) {
-        if (cookieSpec == null) {
-            synchronized (this) {
-                if (cookieSpec == null) {
+    public CookieSpec create(final HttpContext context){
+        if (cookieSpec == null){
+            synchronized (this){
+                if (cookieSpec == null){
                     this.cookieSpec = new NetscapeDraftSpec(this.datepatterns);
                 }
             }

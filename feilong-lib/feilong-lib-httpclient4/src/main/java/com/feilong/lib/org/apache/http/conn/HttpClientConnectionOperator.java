@@ -43,19 +43,16 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.4
  */
-public interface HttpClientConnectionOperator {
+public interface HttpClientConnectionOperator{
 
     void connect(
-            ManagedHttpClientConnection conn,
-            HttpHost host,
-            InetSocketAddress localAddress,
-            int connectTimeout,
-            SocketConfig socketConfig,
-            HttpContext context) throws IOException;
+                    ManagedHttpClientConnection conn,
+                    HttpHost host,
+                    InetSocketAddress localAddress,
+                    int connectTimeout,
+                    SocketConfig socketConfig,
+                    HttpContext context) throws IOException;
 
-    void upgrade(
-            ManagedHttpClientConnection conn,
-            HttpHost host,
-            HttpContext context) throws IOException;
+    void upgrade(ManagedHttpClientConnection conn,HttpHost host,HttpContext context) throws IOException;
 
 }

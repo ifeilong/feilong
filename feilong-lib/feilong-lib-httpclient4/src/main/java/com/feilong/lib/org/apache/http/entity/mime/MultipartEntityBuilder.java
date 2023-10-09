@@ -51,46 +51,48 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
-public class MultipartEntityBuilder {
+public class MultipartEntityBuilder{
 
     /**
      * The pool of ASCII chars to be used for generating a multipart boundary.
      */
-    private final static char[] MULTIPART_CHARS =
-            "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    .toCharArray();
+    private final static char[] MULTIPART_CHARS = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
     private final static String DEFAULT_SUBTYPE = "form-data";
 
-    private ContentType contentType;
-    private HttpMultipartMode mode = HttpMultipartMode.STRICT;
-    private String boundary = null;
-    private Charset charset = null;
-    private List<FormBodyPart> bodyParts = null;
+    private ContentType         contentType;
 
-    public static MultipartEntityBuilder create() {
+    private HttpMultipartMode   mode            = HttpMultipartMode.STRICT;
+
+    private String              boundary        = null;
+
+    private Charset             charset         = null;
+
+    private List<FormBodyPart>  bodyParts       = null;
+
+    public static MultipartEntityBuilder create(){
         return new MultipartEntityBuilder();
     }
 
-    MultipartEntityBuilder() {
+    MultipartEntityBuilder(){
     }
 
-    public MultipartEntityBuilder setMode(final HttpMultipartMode mode) {
+    public MultipartEntityBuilder setMode(final HttpMultipartMode mode){
         this.mode = mode;
         return this;
     }
 
-    public MultipartEntityBuilder setLaxMode() {
+    public MultipartEntityBuilder setLaxMode(){
         this.mode = HttpMultipartMode.BROWSER_COMPATIBLE;
         return this;
     }
 
-    public MultipartEntityBuilder setStrictMode() {
+    public MultipartEntityBuilder setStrictMode(){
         this.mode = HttpMultipartMode.STRICT;
         return this;
     }
 
-    public MultipartEntityBuilder setBoundary(final String boundary) {
+    public MultipartEntityBuilder setBoundary(final String boundary){
         this.boundary = boundary;
         return this;
     }
@@ -98,7 +100,7 @@ public class MultipartEntityBuilder {
     /**
      * @since 4.4
      */
-    public MultipartEntityBuilder setMimeSubtype(final String subType) {
+    public MultipartEntityBuilder setMimeSubtype(final String subType){
         Args.notBlank(subType, "MIME subtype");
         this.contentType = ContentType.create("multipart/" + subType);
         return this;
@@ -110,20 +112,20 @@ public class MultipartEntityBuilder {
      * @deprecated (4.5) Use {@link #setContentType(com.feilong.lib.org.apache.http.entity.ContentType)}.
      */
     @Deprecated
-    public MultipartEntityBuilder seContentType(final ContentType contentType) {
+    public MultipartEntityBuilder seContentType(final ContentType contentType){
         return setContentType(contentType);
     }
 
     /**
      * @since 4.5
      */
-    public MultipartEntityBuilder setContentType(final ContentType contentType) {
+    public MultipartEntityBuilder setContentType(final ContentType contentType){
         Args.notNull(contentType, "Content type");
         this.contentType = contentType;
         return this;
     }
 
-    public MultipartEntityBuilder setCharset(final Charset charset) {
+    public MultipartEntityBuilder setCharset(final Charset charset){
         this.charset = charset;
         return this;
     }
@@ -131,96 +133,91 @@ public class MultipartEntityBuilder {
     /**
      * @since 4.4
      */
-    public MultipartEntityBuilder addPart(final FormBodyPart bodyPart) {
-        if (bodyPart == null) {
+    public MultipartEntityBuilder addPart(final FormBodyPart bodyPart){
+        if (bodyPart == null){
             return this;
         }
-        if (this.bodyParts == null) {
-            this.bodyParts = new ArrayList<FormBodyPart>();
+        if (this.bodyParts == null){
+            this.bodyParts = new ArrayList<>();
         }
         this.bodyParts.add(bodyPart);
         return this;
     }
 
-    public MultipartEntityBuilder addPart(final String name, final ContentBody contentBody) {
+    public MultipartEntityBuilder addPart(final String name,final ContentBody contentBody){
         Args.notNull(name, "Name");
         Args.notNull(contentBody, "Content body");
         return addPart(FormBodyPartBuilder.create(name, contentBody).build());
     }
 
-    public MultipartEntityBuilder addTextBody(
-            final String name, final String text, final ContentType contentType) {
+    public MultipartEntityBuilder addTextBody(final String name,final String text,final ContentType contentType){
         return addPart(name, new StringBody(text, contentType));
     }
 
-    public MultipartEntityBuilder addTextBody(
-            final String name, final String text) {
+    public MultipartEntityBuilder addTextBody(final String name,final String text){
         return addTextBody(name, text, ContentType.DEFAULT_TEXT);
     }
 
-    public MultipartEntityBuilder addBinaryBody(
-            final String name, final byte[] b, final ContentType contentType, final String filename) {
+    public MultipartEntityBuilder addBinaryBody(final String name,final byte[] b,final ContentType contentType,final String filename){
         return addPart(name, new ByteArrayBody(b, contentType, filename));
     }
 
-    public MultipartEntityBuilder addBinaryBody(
-            final String name, final byte[] b) {
+    public MultipartEntityBuilder addBinaryBody(final String name,final byte[] b){
         return addBinaryBody(name, b, ContentType.DEFAULT_BINARY, null);
     }
 
-    public MultipartEntityBuilder addBinaryBody(
-            final String name, final File file, final ContentType contentType, final String filename) {
+    public MultipartEntityBuilder addBinaryBody(final String name,final File file,final ContentType contentType,final String filename){
         return addPart(name, new FileBody(file, contentType, filename));
     }
 
-    public MultipartEntityBuilder addBinaryBody(
-            final String name, final File file) {
+    public MultipartEntityBuilder addBinaryBody(final String name,final File file){
         return addBinaryBody(name, file, ContentType.DEFAULT_BINARY, file != null ? file.getName() : null);
     }
 
     public MultipartEntityBuilder addBinaryBody(
-            final String name, final InputStream stream, final ContentType contentType,
-            final String filename) {
+                    final String name,
+                    final InputStream stream,
+                    final ContentType contentType,
+                    final String filename){
         return addPart(name, new InputStreamBody(stream, contentType, filename));
     }
 
-    public MultipartEntityBuilder addBinaryBody(final String name, final InputStream stream) {
+    public MultipartEntityBuilder addBinaryBody(final String name,final InputStream stream){
         return addBinaryBody(name, stream, ContentType.DEFAULT_BINARY, null);
     }
 
-    private String generateBoundary() {
+    private String generateBoundary(){
         final StringBuilder buffer = new StringBuilder();
         final Random rand = new Random();
         final int count = rand.nextInt(11) + 30; // a random size from 30 to 40
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++){
             buffer.append(MULTIPART_CHARS[rand.nextInt(MULTIPART_CHARS.length)]);
         }
         return buffer.toString();
     }
 
-    MultipartFormEntity buildEntity() {
+    MultipartFormEntity buildEntity(){
         String boundaryCopy = boundary;
-        if (boundaryCopy == null && contentType != null) {
+        if (boundaryCopy == null && contentType != null){
             boundaryCopy = contentType.getParameter("boundary");
         }
-        if (boundaryCopy == null) {
+        if (boundaryCopy == null){
             boundaryCopy = generateBoundary();
         }
         Charset charsetCopy = charset;
-        if (charsetCopy == null && contentType != null) {
+        if (charsetCopy == null && contentType != null){
             charsetCopy = contentType.getCharset();
         }
-        final List<NameValuePair> paramsList = new ArrayList<NameValuePair>(2);
+        final List<NameValuePair> paramsList = new ArrayList<>(2);
         paramsList.add(new BasicNameValuePair("boundary", boundaryCopy));
-        if (charsetCopy != null) {
+        if (charsetCopy != null){
             paramsList.add(new BasicNameValuePair("charset", charsetCopy.name()));
         }
         final NameValuePair[] params = paramsList.toArray(new NameValuePair[paramsList.size()]);
-        final ContentType contentTypeCopy = contentType != null ?
-                contentType.withParameters(params) :
-                ContentType.create("multipart/" + DEFAULT_SUBTYPE, params);
-        final List<FormBodyPart> bodyPartsCopy = bodyParts != null ? new ArrayList<FormBodyPart>(bodyParts) :
-                Collections.<FormBodyPart>emptyList();
+        final ContentType contentTypeCopy = contentType != null ? contentType.withParameters(params)
+                        : ContentType.create("multipart/" + DEFAULT_SUBTYPE, params);
+        final List<FormBodyPart> bodyPartsCopy = bodyParts != null ? new ArrayList<>(bodyParts)
+                        : Collections.<FormBodyPart> emptyList();
         final HttpMultipartMode modeCopy = mode != null ? mode : HttpMultipartMode.STRICT;
         final AbstractMultipartForm form;
         switch (modeCopy) {
@@ -236,7 +233,7 @@ public class MultipartEntityBuilder {
         return new MultipartFormEntity(form, contentTypeCopy, form.getTotalLength());
     }
 
-    public HttpEntity build() {
+    public HttpEntity build(){
         return buildEntity();
     }
 

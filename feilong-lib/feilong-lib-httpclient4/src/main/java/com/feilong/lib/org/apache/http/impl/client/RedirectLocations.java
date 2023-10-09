@@ -41,28 +41,29 @@ import java.util.Set;
  *
  * @since 4.0
  */
-public class RedirectLocations extends AbstractList<Object> {
+public class RedirectLocations extends AbstractList<Object>{
 
-    private final Set<URI> unique;
+    private final Set<URI>  unique;
+
     private final List<URI> all;
 
-    public RedirectLocations() {
+    public RedirectLocations(){
         super();
-        this.unique = new HashSet<URI>();
-        this.all = new ArrayList<URI>();
+        this.unique = new HashSet<>();
+        this.all = new ArrayList<>();
     }
 
     /**
      * Test if the URI is present in the collection.
      */
-    public boolean contains(final URI uri) {
+    public boolean contains(final URI uri){
         return this.unique.contains(uri);
     }
 
     /**
      * Adds a new URI to the collection.
      */
-    public void add(final URI uri) {
+    public void add(final URI uri){
         this.unique.add(uri);
         this.all.add(uri);
     }
@@ -70,13 +71,13 @@ public class RedirectLocations extends AbstractList<Object> {
     /**
      * Removes a URI from the collection.
      */
-    public boolean remove(final URI uri) {
+    public boolean remove(final URI uri){
         final boolean removed = this.unique.remove(uri);
-        if (removed) {
+        if (removed){
             final Iterator<URI> it = this.all.iterator();
-            while (it.hasNext()) {
+            while (it.hasNext()){
                 final URI current = it.next();
-                if (current.equals(uri)) {
+                if (current.equals(uri)){
                     it.remove();
                 }
             }
@@ -91,8 +92,8 @@ public class RedirectLocations extends AbstractList<Object> {
      *
      * @since 4.1
      */
-    public List<URI> getAll() {
-        return new ArrayList<URI>(this.all);
+    public List<URI> getAll(){
+        return new ArrayList<>(this.all);
     }
 
     /**
@@ -107,7 +108,7 @@ public class RedirectLocations extends AbstractList<Object> {
      * @since 4.3
      */
     @Override
-    public URI get(final int index) {
+    public URI get(final int index){
         return this.all.get(index);
     }
 
@@ -120,7 +121,7 @@ public class RedirectLocations extends AbstractList<Object> {
      * @since 4.3
      */
     @Override
-    public int size() {
+    public int size(){
         return this.all.size();
     }
 
@@ -146,11 +147,11 @@ public class RedirectLocations extends AbstractList<Object> {
      * @since 4.3
      */
     @Override
-    public Object set(final int index, final Object element) {
+    public Object set(final int index,final Object element){
         final URI removed = this.all.set(index, (URI) element);
         this.unique.remove(removed);
         this.unique.add((URI) element);
-        if (this.all.size() != this.unique.size()) {
+        if (this.all.size() != this.unique.size()){
             this.unique.addAll(this.all);
         }
         return removed;
@@ -178,7 +179,7 @@ public class RedirectLocations extends AbstractList<Object> {
      * @since 4.3
      */
     @Override
-    public void add(final int index, final Object element) {
+    public void add(final int index,final Object element){
         this.all.add(index, (URI) element);
         this.unique.add((URI) element);
     }
@@ -197,10 +198,10 @@ public class RedirectLocations extends AbstractList<Object> {
      * @since 4.3
      */
     @Override
-    public URI remove(final int index) {
+    public URI remove(final int index){
         final URI removed = this.all.remove(index);
         this.unique.remove(removed);
-        if (this.all.size() != this.unique.size()) {
+        if (this.all.size() != this.unique.size()){
             this.unique.addAll(this.all);
         }
         return removed;
@@ -212,12 +213,13 @@ public class RedirectLocations extends AbstractList<Object> {
      * contains at least one element {@code e} such that
      * {@code (o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))}.
      *
-     * @param o element whose presence in this collection is to be tested
+     * @param o
+     *            element whose presence in this collection is to be tested
      * @return {@code true} if this collection contains the specified
      *         element
      */
     @Override
-    public boolean contains(final Object o) {
+    public boolean contains(final Object o){
         return this.unique.contains(o);
     }
 

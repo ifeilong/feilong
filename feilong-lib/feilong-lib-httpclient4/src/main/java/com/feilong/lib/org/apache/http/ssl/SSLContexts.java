@@ -37,7 +37,7 @@ import javax.net.ssl.SSLContext;
  *
  * @since 4.4
  */
-public class SSLContexts {
+public class SSLContexts{
 
     /**
      * Creates default factory based on the standard JSSE trust material
@@ -46,14 +46,14 @@ public class SSLContexts {
      *
      * @return the default SSL socket factory
      */
-    public static SSLContext createDefault() throws SSLInitializationException {
-        try {
+    public static SSLContext createDefault() throws SSLInitializationException{
+        try{
             final SSLContext sslContext = SSLContext.getInstance(SSLContextBuilder.TLS);
             sslContext.init(null, null, null);
             return sslContext;
-        } catch (final NoSuchAlgorithmException ex) {
+        }catch (final NoSuchAlgorithmException ex){
             throw new SSLInitializationException(ex.getMessage(), ex);
-        } catch (final KeyManagementException ex) {
+        }catch (final KeyManagementException ex){
             throw new SSLInitializationException(ex.getMessage(), ex);
         }
     }
@@ -67,10 +67,10 @@ public class SSLContexts {
      *
      * @return default system SSL context
      */
-    public static SSLContext createSystemDefault() throws SSLInitializationException {
-        try {
+    public static SSLContext createSystemDefault() throws SSLInitializationException{
+        try{
             return SSLContext.getDefault();
-        } catch (final NoSuchAlgorithmException ex) {
+        }catch (final NoSuchAlgorithmException ex){
             return createDefault();
         }
     }
@@ -80,7 +80,7 @@ public class SSLContexts {
      *
      * @return default system SSL context
      */
-    public static SSLContextBuilder custom() {
+    public static SSLContextBuilder custom(){
         return SSLContextBuilder.create();
     }
 

@@ -48,26 +48,26 @@ import java.net.URI;
  *
  * @since 4.2
  */
-public class HttpPatch extends HttpEntityEnclosingRequestBase {
+public class HttpPatch extends HttpEntityEnclosingRequestBase{
 
     public final static String METHOD_NAME = "PATCH";
 
-    public HttpPatch() {
+    public HttpPatch(){
         super();
     }
 
-    public HttpPatch(final URI uri) {
+    public HttpPatch(final URI uri){
         super();
         setURI(uri);
     }
 
-    public HttpPatch(final String uri) {
+    public HttpPatch(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

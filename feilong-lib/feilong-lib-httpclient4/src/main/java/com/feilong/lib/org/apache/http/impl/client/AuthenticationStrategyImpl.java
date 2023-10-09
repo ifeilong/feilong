@@ -114,7 +114,7 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
                     throws MalformedChallengeException{
         Args.notNull(response, "HTTP response");
         final Header[] headers = response.getHeaders(this.headerName);
-        final Map<String, Header> map = new HashMap<String, Header>(headers.length);
+        final Map<String, Header> map = new HashMap<>(headers.length);
         for (final Header header : headers){
             final CharArrayBuffer buffer;
             int pos;
@@ -158,7 +158,7 @@ abstract class AuthenticationStrategyImpl implements AuthenticationStrategy{
         Args.notNull(context, "HTTP context");
         final HttpClientContext clientContext = HttpClientContext.adapt(context);
 
-        final Queue<AuthOption> options = new LinkedList<AuthOption>();
+        final Queue<AuthOption> options = new LinkedList<>();
         final Lookup<AuthSchemeProvider> registry = clientContext.getAuthSchemeRegistry();
         if (registry == null){
             log.debug("Auth scheme registry not set in the context");

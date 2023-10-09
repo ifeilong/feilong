@@ -27,30 +27,29 @@
 
 package com.feilong.lib.org.apache.http;
 
-
 /**
  * Signals an unsupported version of the HTTP protocol.
  *
  * @since 4.0
  */
-public class UnsupportedHttpVersionException extends ProtocolException {
+public class UnsupportedHttpVersionException extends ProtocolException{
 
     private static final long serialVersionUID = -1348448090193107031L;
-
 
     /**
      * Creates an exception without a detail message.
      */
-    public UnsupportedHttpVersionException() {
+    public UnsupportedHttpVersionException(){
         super();
     }
 
     /**
      * Creates an exception with the specified detail message.
      *
-     * @param message The exception detail message
+     * @param message
+     *            The exception detail message
      */
-    public UnsupportedHttpVersionException(final String message) {
+    public UnsupportedHttpVersionException(final String message){
         super(message);
     }
 

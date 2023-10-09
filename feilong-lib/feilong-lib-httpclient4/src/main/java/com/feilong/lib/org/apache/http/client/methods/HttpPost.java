@@ -41,40 +41,41 @@ import java.net.URI;
  * the Request-URI in the Request-Line. POST is designed to allow a uniform
  * method to cover the following functions:
  * <ul>
- *   <li>Annotation of existing resources</li>
- *   <li>Posting a message to a bulletin board, newsgroup, mailing list, or
- *     similar group of articles</li>
- *   <li>Providing a block of data, such as the result of submitting a form,
- *     to a data-handling process</li>
- *   <li>Extending a database through an append operation</li>
+ * <li>Annotation of existing resources</li>
+ * <li>Posting a message to a bulletin board, newsgroup, mailing list, or
+ * similar group of articles</li>
+ * <li>Providing a block of data, such as the result of submitting a form,
+ * to a data-handling process</li>
+ * <li>Extending a database through an append operation</li>
  * </ul>
  * </blockquote>
  *
  * @since 4.0
  */
-public class HttpPost extends HttpEntityEnclosingRequestBase {
+public class HttpPost extends HttpEntityEnclosingRequestBase{
 
     public final static String METHOD_NAME = "POST";
 
-    public HttpPost() {
+    public HttpPost(){
         super();
     }
 
-    public HttpPost(final URI uri) {
+    public HttpPost(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpPost(final String uri) {
+    public HttpPost(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

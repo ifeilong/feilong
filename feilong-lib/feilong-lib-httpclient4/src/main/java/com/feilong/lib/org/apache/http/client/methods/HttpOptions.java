@@ -44,51 +44,52 @@ import com.feilong.lib.org.apache.http.util.Args;
  * <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>:
  * </p>
  * <blockquote>
- *  The OPTIONS method represents a request for information about the
- *  communication options available on the request/response chain
- *  identified by the Request-URI. This method allows the client to
- *  determine the options and/or requirements associated with a resource,
- *  or the capabilities of a server, without implying a resource action
- *  or initiating a resource retrieval.
+ * The OPTIONS method represents a request for information about the
+ * communication options available on the request/response chain
+ * identified by the Request-URI. This method allows the client to
+ * determine the options and/or requirements associated with a resource,
+ * or the capabilities of a server, without implying a resource action
+ * or initiating a resource retrieval.
  * </blockquote>
  *
  * @since 4.0
  */
-public class HttpOptions extends HttpRequestBase {
+public class HttpOptions extends HttpRequestBase{
 
     public final static String METHOD_NAME = "OPTIONS";
 
-    public HttpOptions() {
+    public HttpOptions(){
         super();
     }
 
-    public HttpOptions(final URI uri) {
+    public HttpOptions(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpOptions(final String uri) {
+    public HttpOptions(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 
-    public Set<String> getAllowedMethods(final HttpResponse response) {
+    public Set<String> getAllowedMethods(final HttpResponse response){
         Args.notNull(response, "HTTP response");
 
         final HeaderIterator it = response.headerIterator("Allow");
-        final Set<String> methods = new HashSet<String>();
-        while (it.hasNext()) {
+        final Set<String> methods = new HashSet<>();
+        while (it.hasNext()){
             final Header header = it.nextHeader();
             final HeaderElement[] elements = header.getElements();
-            for (final HeaderElement element : elements) {
+            for (final HeaderElement element : elements){
                 methods.add(element.getName());
             }
         }

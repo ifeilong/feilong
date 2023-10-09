@@ -32,9 +32,10 @@ package com.feilong.lib.org.apache.http;
  *
  * @since 4.0
  */
-public class HttpException extends Exception {
+public class HttpException extends Exception{
 
-    private static final int FIRST_VALID_CHAR = 32;
+    private static final int  FIRST_VALID_CHAR = 32;
+
     private static final long serialVersionUID = -5437299376222011036L;
 
     /**
@@ -44,30 +45,30 @@ public class HttpException extends Exception {
      *            the source string.
      * @return a converted string.
      */
-    static String clean(final String message) {
+    static String clean(final String message){
         final char[] chars = message.toCharArray();
         int i;
         // First check to see if need to allocate a new StringBuilder
-        for (i = 0; i < chars.length; i++) {
-            if (chars[i] < FIRST_VALID_CHAR) {
+        for (i = 0; i < chars.length; i++){
+            if (chars[i] < FIRST_VALID_CHAR){
                 break;
             }
         }
-        if (i == chars.length) {
+        if (i == chars.length){
             return message;
         }
         final StringBuilder builder = new StringBuilder(chars.length * 2);
-        for (i = 0; i < chars.length; i++) {
+        for (i = 0; i < chars.length; i++){
             final char ch = chars[i];
-            if (ch < FIRST_VALID_CHAR) {
+            if (ch < FIRST_VALID_CHAR){
                 builder.append("[0x");
                 final String hexString = Integer.toHexString(i);
-                if (hexString.length() == 1) {
+                if (hexString.length() == 1){
                     builder.append("0");
                 }
                 builder.append(hexString);
                 builder.append("]");
-            } else {
+            }else{
                 builder.append(ch);
             }
         }
@@ -77,7 +78,7 @@ public class HttpException extends Exception {
     /**
      * Creates a new HttpException with a {@code null} detail message.
      */
-    public HttpException() {
+    public HttpException(){
         super();
     }
 
@@ -87,7 +88,7 @@ public class HttpException extends Exception {
      * @param message
      *            the exception detail message
      */
-    public HttpException(final String message) {
+    public HttpException(final String message){
         super(clean(message));
     }
 
@@ -101,7 +102,7 @@ public class HttpException extends Exception {
      *            {@code null} if the cause is unavailable, unknown, or not a
      *            {@code Throwable}
      */
-    public HttpException(final String message, final Throwable cause) {
+    public HttpException(final String message, final Throwable cause){
         super(clean(message));
         initCause(cause);
     }

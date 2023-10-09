@@ -42,28 +42,29 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class HttpDateGenerator {
+public class HttpDateGenerator{
 
     /** Date format pattern used to generate the header in RFC 1123 format. */
-    public static final
-        String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
+    public static final String   PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
     /** The time zone to use in the date header. */
-    public static final TimeZone GMT = TimeZone.getTimeZone("GMT");
+    public static final TimeZone GMT             = TimeZone.getTimeZone("GMT");
 
-    private final DateFormat dateformat;
-    private long dateAsLong = 0L;
-    private String dateAsText = null;
+    private final DateFormat     dateformat;
 
-    public HttpDateGenerator() {
+    private long                 dateAsLong      = 0L;
+
+    private String               dateAsText      = null;
+
+    public HttpDateGenerator(){
         super();
         this.dateformat = new SimpleDateFormat(PATTERN_RFC1123, Locale.US);
         this.dateformat.setTimeZone(GMT);
     }
 
-    public synchronized String getCurrentDate() {
+    public synchronized String getCurrentDate(){
         final long now = System.currentTimeMillis();
-        if (now - this.dateAsLong > 1000) {
+        if (now - this.dateAsLong > 1000){
             // Generate new date string
             this.dateAsText = this.dateformat.format(new Date(now));
             this.dateAsLong = now;

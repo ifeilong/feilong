@@ -42,41 +42,38 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RFC2109VersionHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class RFC2109VersionHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
-    public RFC2109VersionHandler() {
+    public RFC2109VersionHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (value == null) {
+        if (value == null){
             throw new MalformedCookieException("Missing value for version attribute");
         }
-        if (value.trim().isEmpty()) {
+        if (value.trim().isEmpty()){
             throw new MalformedCookieException("Blank value for version attribute");
         }
-        try {
-           cookie.setVersion(Integer.parseInt(value));
-        } catch (final NumberFormatException e) {
-            throw new MalformedCookieException("Invalid version: "
-                + e.getMessage());
+        try{
+            cookie.setVersion(Integer.parseInt(value));
+        }catch (final NumberFormatException e){
+            throw new MalformedCookieException("Invalid version: " + e.getMessage());
         }
     }
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (cookie.getVersion() < 0) {
+        if (cookie.getVersion() < 0){
             throw new CookieRestrictionViolationException("Cookie version may not be negative");
         }
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.VERSION_ATTR;
     }
 

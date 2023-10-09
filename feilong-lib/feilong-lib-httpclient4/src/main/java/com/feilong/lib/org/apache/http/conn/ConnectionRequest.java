@@ -39,7 +39,7 @@ import com.feilong.lib.org.apache.http.concurrent.Cancellable;
  *
  * @since 4.3
  */
-public interface ConnectionRequest extends Cancellable {
+public interface ConnectionRequest extends Cancellable{
 
     /**
      * Obtains a connection within a given time.
@@ -51,19 +51,20 @@ public interface ConnectionRequest extends Cancellable {
      * before this began, an {@link InterruptedException} will
      * be thrown.
      *
-     * @param timeout   the timeout, 0 or negative for no timeout
-     * @param timeUnit     the unit for the {@code timeout},
-     *                  may be {@code null} only if there is no timeout
+     * @param timeout
+     *            the timeout, 0 or negative for no timeout
+     * @param timeUnit
+     *            the unit for the {@code timeout},
+     *            may be {@code null} only if there is no timeout
      *
-     * @return  a connection that can be used to communicate
-     *          along the given route
+     * @return a connection that can be used to communicate
+     *         along the given route
      *
      * @throws ConnectionPoolTimeoutException
-     *         in case of a timeout
+     *             in case of a timeout
      * @throws InterruptedException
-     *         if the calling thread is interrupted while waiting
+     *             if the calling thread is interrupted while waiting
      */
-    HttpClientConnection get(long timeout, TimeUnit timeUnit)
-        throws InterruptedException, ExecutionException, ConnectionPoolTimeoutException;
+    HttpClientConnection get(long timeout,TimeUnit timeUnit) throws InterruptedException,ExecutionException,ConnectionPoolTimeoutException;
 
 }

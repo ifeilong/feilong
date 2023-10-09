@@ -36,33 +36,34 @@ import java.net.UnknownHostException;
  *
  * @since 4.1
  *
- * @deprecated (4.2)  use {@link SchemeLayeredSocketFactory}
+ * @deprecated (4.2) use {@link SchemeLayeredSocketFactory}
  */
 @Deprecated
-public interface LayeredSchemeSocketFactory extends SchemeSocketFactory {
+public interface LayeredSchemeSocketFactory extends SchemeSocketFactory{
 
     /**
      * Returns a socket connected to the given host that is layered over an
-     * existing socket.  Used primarily for creating secure sockets through
+     * existing socket. Used primarily for creating secure sockets through
      * proxies.
      *
-     * @param socket the existing socket
-     * @param target    the name of the target host.
-     * @param port      the port to connect to on the target host
-     * @param autoClose a flag for closing the underling socket when the created
-     * socket is closed
+     * @param socket
+     *            the existing socket
+     * @param target
+     *            the name of the target host.
+     * @param port
+     *            the port to connect to on the target host
+     * @param autoClose
+     *            a flag for closing the underling socket when the created
+     *            socket is closed
      *
      * @return Socket a new socket
      *
-     * @throws IOException if an I/O error occurs while creating the socket
-     * @throws UnknownHostException if the IP address of the host cannot be
-     * determined
+     * @throws IOException
+     *             if an I/O error occurs while creating the socket
+     * @throws UnknownHostException
+     *             if the IP address of the host cannot be
+     *             determined
      */
-    Socket createLayeredSocket(
-        Socket socket,
-        String target,
-        int port,
-        boolean autoClose
-    ) throws IOException, UnknownHostException;
+    Socket createLayeredSocket(Socket socket,String target,int port,boolean autoClose) throws IOException,UnknownHostException;
 
 }

@@ -39,7 +39,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.0
  */
-public interface ConnectionReuseStrategy {
+public interface ConnectionReuseStrategy{
 
     /**
      * Decides whether a connection can be kept open after a request.
@@ -60,13 +60,14 @@ public interface ConnectionReuseStrategy {
      * </p>
      *
      * @param response
-     *          The last response received over that connection.
-     * @param context   the context in which the connection is being
-     *          used.
+     *            The last response received over that connection.
+     * @param context
+     *            the context in which the connection is being
+     *            used.
      *
      * @return {@code true} if the connection is allowed to be reused, or
      *         {@code false} if it MUST NOT be reused
      */
-    boolean keepAlive(HttpResponse response, HttpContext context);
+    boolean keepAlive(HttpResponse response,HttpContext context);
 
 }

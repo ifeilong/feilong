@@ -31,7 +31,7 @@ package com.feilong.lib.org.apache.http.conn.util;
  *
  * @since 4.5
  */
-public enum DomainType {
+public enum DomainType{
 
     UNKNOWN, ICANN, PRIVATE
 

@@ -37,85 +37,85 @@ import java.util.Set;
  * @since 4.0
  *
  * @deprecated (4.3) use configuration classes provided 'org.apache.http.config'
- *  and 'org.apache.http.client.config'
+ *             and 'org.apache.http.client.config'
  */
 @Deprecated
-public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames {
+public abstract class AbstractHttpParams implements HttpParams,HttpParamsNames{
 
     /**
      * Instantiates parameters.
      */
-    protected AbstractHttpParams() {
+    protected AbstractHttpParams(){
         super();
     }
 
     @Override
-    public long getLongParameter(final String name, final long defaultValue) {
+    public long getLongParameter(final String name,final long defaultValue){
         final Object param = getParameter(name);
-        if (param == null) {
+        if (param == null){
             return defaultValue;
         }
-        return ((Long) param).longValue();
+        return ((Long) param);
     }
 
     @Override
-    public HttpParams setLongParameter(final String name, final long value) {
+    public HttpParams setLongParameter(final String name,final long value){
         setParameter(name, Long.valueOf(value));
         return this;
     }
 
     @Override
-    public int getIntParameter(final String name, final int defaultValue) {
+    public int getIntParameter(final String name,final int defaultValue){
         final Object param = getParameter(name);
-        if (param == null) {
+        if (param == null){
             return defaultValue;
         }
-        return ((Integer) param).intValue();
+        return ((Integer) param);
     }
 
     @Override
-    public HttpParams setIntParameter(final String name, final int value) {
+    public HttpParams setIntParameter(final String name,final int value){
         setParameter(name, Integer.valueOf(value));
         return this;
     }
 
     @Override
-    public double getDoubleParameter(final String name, final double defaultValue) {
+    public double getDoubleParameter(final String name,final double defaultValue){
         final Object param = getParameter(name);
-        if (param == null) {
+        if (param == null){
             return defaultValue;
         }
-        return ((Double) param).doubleValue();
+        return ((Double) param);
     }
 
     @Override
-    public HttpParams setDoubleParameter(final String name, final double value) {
+    public HttpParams setDoubleParameter(final String name,final double value){
         setParameter(name, Double.valueOf(value));
         return this;
     }
 
     @Override
-    public boolean getBooleanParameter(final String name, final boolean defaultValue) {
+    public boolean getBooleanParameter(final String name,final boolean defaultValue){
         final Object param = getParameter(name);
-        if (param == null) {
+        if (param == null){
             return defaultValue;
         }
-        return ((Boolean) param).booleanValue();
+        return ((Boolean) param);
     }
 
     @Override
-    public HttpParams setBooleanParameter(final String name, final boolean value) {
+    public HttpParams setBooleanParameter(final String name,final boolean value){
         setParameter(name, value ? Boolean.TRUE : Boolean.FALSE);
         return this;
     }
 
     @Override
-    public boolean isParameterTrue(final String name) {
+    public boolean isParameterTrue(final String name){
         return getBooleanParameter(name, false);
     }
 
     @Override
-    public boolean isParameterFalse(final String name) {
+    public boolean isParameterFalse(final String name){
         return !getBooleanParameter(name, false);
     }
 
@@ -125,7 +125,8 @@ public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames 
      * Dummy implementation - must be overridden by subclasses.
      *
      * @since 4.2
-     * @throws UnsupportedOperationException - always
+     * @throws UnsupportedOperationException
+     *             - always
      */
     @Override
     public Set<String> getNames(){

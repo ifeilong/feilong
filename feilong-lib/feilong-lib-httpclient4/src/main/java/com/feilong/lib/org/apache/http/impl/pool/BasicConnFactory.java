@@ -61,77 +61,74 @@ import com.feilong.lib.org.apache.http.util.Asserts;
  */
 @SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnection> {
+public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnection>{
 
-    private final SocketFactory plainfactory;
-    private final SSLSocketFactory sslfactory;
-    private final int connectTimeout;
-    private final SocketConfig sconfig;
+    private final SocketFactory                                         plainfactory;
+
+    private final SSLSocketFactory                                      sslfactory;
+
+    private final int                                                   connectTimeout;
+
+    private final SocketConfig                                          sconfig;
+
     private final HttpConnectionFactory<? extends HttpClientConnection> connFactory;
 
     /**
      * @deprecated (4.3) use
-     *   {@link BasicConnFactory#BasicConnFactory(SocketFactory, SSLSocketFactory, int,
-     *     SocketConfig, ConnectionConfig)}.
+     *             {@link BasicConnFactory#BasicConnFactory(SocketFactory, SSLSocketFactory, int,
+     *             SocketConfig, ConnectionConfig)}.
      */
     @Deprecated
-    public BasicConnFactory(final SSLSocketFactory sslfactory, final HttpParams params) {
+    public BasicConnFactory(final SSLSocketFactory sslfactory, final HttpParams params){
         super();
         Args.notNull(params, "HTTP params");
         this.plainfactory = null;
         this.sslfactory = sslfactory;
         this.connectTimeout = params.getIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 0);
         this.sconfig = HttpParamConfig.getSocketConfig(params);
-        this.connFactory = new DefaultBHttpClientConnectionFactory(
-                HttpParamConfig.getConnectionConfig(params));
+        this.connFactory = new DefaultBHttpClientConnectionFactory(HttpParamConfig.getConnectionConfig(params));
     }
 
     /**
      * @deprecated (4.3) use
-     *   {@link BasicConnFactory#BasicConnFactory(int, SocketConfig, ConnectionConfig)}.
+     *             {@link BasicConnFactory#BasicConnFactory(int, SocketConfig, ConnectionConfig)}.
      */
     @Deprecated
-    public BasicConnFactory(final HttpParams params) {
+    public BasicConnFactory(final HttpParams params){
         this(null, params);
     }
 
     /**
      * @since 4.3
      */
-    public BasicConnFactory(
-            final SocketFactory plainfactory,
-            final SSLSocketFactory sslfactory,
-            final int connectTimeout,
-            final SocketConfig sconfig,
-            final ConnectionConfig cconfig) {
+    public BasicConnFactory(final SocketFactory plainfactory, final SSLSocketFactory sslfactory, final int connectTimeout,
+                    final SocketConfig sconfig, final ConnectionConfig cconfig){
         super();
         this.plainfactory = plainfactory;
         this.sslfactory = sslfactory;
         this.connectTimeout = connectTimeout;
         this.sconfig = sconfig != null ? sconfig : SocketConfig.DEFAULT;
-        this.connFactory = new DefaultBHttpClientConnectionFactory(
-                cconfig != null ? cconfig : ConnectionConfig.DEFAULT);
+        this.connFactory = new DefaultBHttpClientConnectionFactory(cconfig != null ? cconfig : ConnectionConfig.DEFAULT);
     }
 
     /**
      * @since 4.3
      */
-    public BasicConnFactory(
-            final int connectTimeout, final SocketConfig sconfig, final ConnectionConfig cconfig) {
+    public BasicConnFactory(final int connectTimeout, final SocketConfig sconfig, final ConnectionConfig cconfig){
         this(null, null, connectTimeout, sconfig, cconfig);
     }
 
     /**
      * @since 4.3
      */
-    public BasicConnFactory(final SocketConfig sconfig, final ConnectionConfig cconfig) {
+    public BasicConnFactory(final SocketConfig sconfig, final ConnectionConfig cconfig){
         this(null, null, 0, sconfig, cconfig);
     }
 
     /**
      * @since 4.3
      */
-    public BasicConnFactory() {
+    public BasicConnFactory(){
         this(null, null, 0, SocketConfig.DEFAULT, ConnectionConfig.DEFAULT);
     }
 
@@ -139,7 +136,7 @@ public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnect
      * @deprecated (4.3) no longer used.
      */
     @Deprecated
-    protected HttpClientConnection create(final Socket socket, final HttpParams params) throws IOException {
+    protected HttpClientConnection create(final Socket socket,final HttpParams params) throws IOException{
         final int bufsize = params.getIntParameter(CoreConnectionPNames.SOCKET_BUFFER_SIZE, 8 * 1024);
         final DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(bufsize);
         conn.bind(socket);
@@ -147,54 +144,50 @@ public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnect
     }
 
     @Override
-    public HttpClientConnection create(final HttpHost host) throws IOException {
+    public HttpClientConnection create(final HttpHost host) throws IOException{
         final String scheme = host.getSchemeName();
         final Socket socket;
-        if ("http".equalsIgnoreCase(scheme)) {
-            socket = this.plainfactory != null ? this.plainfactory.createSocket() :
-                    new Socket();
-        } else if ("https".equalsIgnoreCase(scheme)) {
-            socket = (this.sslfactory != null ? this.sslfactory :
-                    SSLSocketFactory.getDefault()).createSocket();
-        } else {
+        if ("http".equalsIgnoreCase(scheme)){
+            socket = this.plainfactory != null ? this.plainfactory.createSocket() : new Socket();
+        }else if ("https".equalsIgnoreCase(scheme)){
+            socket = (this.sslfactory != null ? this.sslfactory : SSLSocketFactory.getDefault()).createSocket();
+        }else{
             throw new IOException(scheme + " scheme is not supported");
         }
         final String hostname = host.getHostName();
         int port = host.getPort();
-        if (port == -1) {
-            if (host.getSchemeName().equalsIgnoreCase("http")) {
+        if (port == -1){
+            if (host.getSchemeName().equalsIgnoreCase("http")){
                 port = 80;
-            } else if (host.getSchemeName().equalsIgnoreCase("https")) {
+            }else if (host.getSchemeName().equalsIgnoreCase("https")){
                 port = 443;
             }
         }
         socket.setSoTimeout(this.sconfig.getSoTimeout());
-        if (this.sconfig.getSndBufSize() > 0) {
+        if (this.sconfig.getSndBufSize() > 0){
             socket.setSendBufferSize(this.sconfig.getSndBufSize());
         }
-        if (this.sconfig.getRcvBufSize() > 0) {
+        if (this.sconfig.getRcvBufSize() > 0){
             socket.setReceiveBufferSize(this.sconfig.getRcvBufSize());
         }
         socket.setTcpNoDelay(this.sconfig.isTcpNoDelay());
         final int linger = this.sconfig.getSoLinger();
-        if (linger >= 0) {
+        if (linger >= 0){
             socket.setSoLinger(true, linger);
         }
         socket.setKeepAlive(this.sconfig.isSoKeepAlive());
         // Run this under a doPrivileged to support lib users that run under a SecurityManager this allows granting connect permissions
         // only to this library
         final InetSocketAddress address = new InetSocketAddress(hostname, port);
-        try {
-            AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
-                @Override
-                public Object run() throws IOException {
-                    socket.connect(address, BasicConnFactory.this.connectTimeout);
-                    return null;
-                }
+        try{
+            AccessController.doPrivileged((PrivilegedExceptionAction<Object>) () -> {
+                socket.connect(address, BasicConnFactory.this.connectTimeout);
+                return null;
             });
-        } catch (final PrivilegedActionException e) {
-            Asserts.check(e.getCause() instanceof IOException,
-                    "method contract violation only checked exceptions are wrapped: " + e.getCause());
+        }catch (final PrivilegedActionException e){
+            Asserts.check(
+                            e.getCause() instanceof IOException,
+                            "method contract violation only checked exceptions are wrapped: " + e.getCause());
             // only checked exceptions are wrapped - error and RTExceptions are rethrown by doPrivileged
             throw (IOException) e.getCause();
         }

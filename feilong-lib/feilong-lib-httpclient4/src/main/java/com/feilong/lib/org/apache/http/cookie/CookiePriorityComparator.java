@@ -42,25 +42,25 @@ import com.feilong.lib.org.apache.http.impl.cookie.BasicClientCookie;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class CookiePriorityComparator implements Comparator<Cookie> {
+public class CookiePriorityComparator implements Comparator<Cookie>{
 
     public static final CookiePriorityComparator INSTANCE = new CookiePriorityComparator();
 
-    private int getPathLength(final Cookie cookie) {
+    private int getPathLength(final Cookie cookie){
         final String path = cookie.getPath();
         return path != null ? path.length() : 1;
     }
 
     @Override
-    public int compare(final Cookie c1, final Cookie c2) {
+    public int compare(final Cookie c1,final Cookie c2){
         final int l1 = getPathLength(c1);
         final int l2 = getPathLength(c2);
         //TODO: update this class once Cookie interface has been expended with #getCreationTime method
         final int result = l2 - l1;
-        if (result == 0 && c1 instanceof BasicClientCookie && c2 instanceof BasicClientCookie) {
+        if (result == 0 && c1 instanceof BasicClientCookie && c2 instanceof BasicClientCookie){
             final Date d1 = ((BasicClientCookie) c1).getCreationDate();
             final Date d2 = ((BasicClientCookie) c2).getCreationDate();
-            if (d1 != null && d2 != null) {
+            if (d1 != null && d2 != null){
                 return (int) (d1.getTime() - d2.getTime());
             }
         }

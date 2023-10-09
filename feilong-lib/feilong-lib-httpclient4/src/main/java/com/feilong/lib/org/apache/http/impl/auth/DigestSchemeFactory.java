@@ -45,29 +45,29 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @SuppressWarnings("deprecation")
-public class DigestSchemeFactory implements AuthSchemeFactory, AuthSchemeProvider {
+public class DigestSchemeFactory implements AuthSchemeFactory,AuthSchemeProvider{
 
     private final Charset charset;
 
     /**
      * @since 4.3
      */
-    public DigestSchemeFactory(final Charset charset) {
+    public DigestSchemeFactory(final Charset charset){
         super();
         this.charset = charset;
     }
 
-    public DigestSchemeFactory() {
+    public DigestSchemeFactory(){
         this(null);
     }
 
     @Override
-    public AuthScheme newInstance(final HttpParams params) {
+    public AuthScheme newInstance(final HttpParams params){
         return new DigestScheme();
     }
 
     @Override
-    public AuthScheme create(final HttpContext context) {
+    public AuthScheme create(final HttpContext context){
         return new DigestScheme(this.charset);
     }
 

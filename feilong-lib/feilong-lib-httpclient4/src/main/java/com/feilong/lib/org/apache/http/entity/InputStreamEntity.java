@@ -39,31 +39,37 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class InputStreamEntity extends AbstractHttpEntity {
+public class InputStreamEntity extends AbstractHttpEntity{
 
     private final InputStream content;
-    private final long length;
+
+    private final long        length;
 
     /**
      * Creates an entity with an unknown length.
      * Equivalent to {@code new InputStreamEntity(inStream, -1)}.
      *
-     * @param inStream input stream
-     * @throws IllegalArgumentException if {@code inStream} is {@code null}
+     * @param inStream
+     *            input stream
+     * @throws IllegalArgumentException
+     *             if {@code inStream} is {@code null}
      * @since 4.3
      */
-    public InputStreamEntity(final InputStream inStream) {
+    public InputStreamEntity(final InputStream inStream){
         this(inStream, -1);
     }
 
     /**
      * Creates an entity with a specified content length.
      *
-     * @param inStream input stream
-     * @param length of the input stream, {@code -1} if unknown
-     * @throws IllegalArgumentException if {@code inStream} is {@code null}
+     * @param inStream
+     *            input stream
+     * @param length
+     *            of the input stream, {@code -1} if unknown
+     * @throws IllegalArgumentException
+     *             if {@code inStream} is {@code null}
      */
-    public InputStreamEntity(final InputStream inStream, final long length) {
+    public InputStreamEntity(final InputStream inStream, final long length){
         this(inStream, length, null);
     }
 
@@ -71,33 +77,40 @@ public class InputStreamEntity extends AbstractHttpEntity {
      * Creates an entity with a content type and unknown length.
      * Equivalent to {@code new InputStreamEntity(inStream, -1, contentType)}.
      *
-     * @param inStream input stream
-     * @param contentType content type
-     * @throws IllegalArgumentException if {@code inStream} is {@code null}
+     * @param inStream
+     *            input stream
+     * @param contentType
+     *            content type
+     * @throws IllegalArgumentException
+     *             if {@code inStream} is {@code null}
      * @since 4.3
      */
-    public InputStreamEntity(final InputStream inStream, final ContentType contentType) {
+    public InputStreamEntity(final InputStream inStream, final ContentType contentType){
         this(inStream, -1, contentType);
     }
 
     /**
-     * @param inStream input stream
-     * @param length of the input stream, {@code -1} if unknown
-     * @param contentType for specifying the {@code Content-Type} header, may be {@code null}
-     * @throws IllegalArgumentException if {@code inStream} is {@code null}
+     * @param inStream
+     *            input stream
+     * @param length
+     *            of the input stream, {@code -1} if unknown
+     * @param contentType
+     *            for specifying the {@code Content-Type} header, may be {@code null}
+     * @throws IllegalArgumentException
+     *             if {@code inStream} is {@code null}
      * @since 4.2
      */
-    public InputStreamEntity(final InputStream inStream, final long length, final ContentType contentType) {
+    public InputStreamEntity(final InputStream inStream, final long length, final ContentType contentType){
         super();
         this.content = Args.notNull(inStream, "Source input stream");
         this.length = length;
-        if (contentType != null) {
+        if (contentType != null){
             setContentType(contentType.toString());
         }
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return false;
     }
 
@@ -105,53 +118,53 @@ public class InputStreamEntity extends AbstractHttpEntity {
      * @return the content length or {@code -1} if unknown
      */
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return this.length;
     }
 
     @Override
-    public InputStream getContent() throws IOException {
+    public InputStream getContent() throws IOException{
         return this.content;
     }
 
     /**
      * Writes bytes from the {@code InputStream} this entity was constructed
-     * with to an {@code OutputStream}.  The content length
-     * determines how many bytes are written.  If the length is unknown ({@code -1}), the
+     * with to an {@code OutputStream}. The content length
+     * determines how many bytes are written. If the length is unknown ({@code -1}), the
      * stream will be completely consumed (to the end of the stream).
      *
      */
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         Args.notNull(outStream, "Output stream");
         final InputStream inStream = this.content;
-        try {
+        try{
             final byte[] buffer = new byte[OUTPUT_BUFFER_SIZE];
             int readLen;
-            if (this.length < 0) {
+            if (this.length < 0){
                 // consume until EOF
-                while ((readLen = inStream.read(buffer)) != -1) {
+                while ((readLen = inStream.read(buffer)) != -1){
                     outStream.write(buffer, 0, readLen);
                 }
-            } else {
+            }else{
                 // consume no more than length
                 long remaining = this.length;
-                while (remaining > 0) {
-                    readLen = inStream.read(buffer, 0, (int)Math.min(OUTPUT_BUFFER_SIZE, remaining));
-                    if (readLen == -1) {
+                while (remaining > 0){
+                    readLen = inStream.read(buffer, 0, (int) Math.min(OUTPUT_BUFFER_SIZE, remaining));
+                    if (readLen == -1){
                         break;
                     }
                     outStream.write(buffer, 0, readLen);
                     remaining -= readLen;
                 }
             }
-        } finally {
+        }finally{
             inStream.close();
         }
     }
 
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return true;
     }
 

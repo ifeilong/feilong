@@ -27,9 +27,9 @@
 package com.feilong.lib.org.apache.http.annotation;
 
 /**
- Defines types of threading behavior enforced at runtime.
+ * Defines types of threading behavior enforced at runtime.
  */
-public enum ThreadingBehavior {
+public enum ThreadingBehavior{
 
     /**
      * Instances of classes with the given contract are expected to be fully immutable

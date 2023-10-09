@@ -37,12 +37,13 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @deprecated (4.3) use {@link CookieSpecProvider}
  */
 @Deprecated
-public interface CookieSpecFactory {
+public interface CookieSpecFactory{
 
     /**
      * Creates an instance of {@link CookieSpec} using given HTTP parameters.
      *
-     * @param params HTTP parameters.
+     * @param params
+     *            HTTP parameters.
      *
      * @return cookie spec.
      */

@@ -50,69 +50,61 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
  * Default {@link ManagedHttpClientConnection} implementation.
+ * 
  * @since 4.3
  */
-public class DefaultManagedHttpClientConnection extends DefaultBHttpClientConnection
-                                 implements ManagedHttpClientConnection, HttpContext {
+public class DefaultManagedHttpClientConnection extends DefaultBHttpClientConnection implements ManagedHttpClientConnection,HttpContext{
 
-    private final String id;
+    private final String              id;
+
     private final Map<String, Object> attributes;
 
-    private volatile boolean shutdown;
+    private volatile boolean          shutdown;
 
-    public DefaultManagedHttpClientConnection(
-            final String id,
-            final int bufferSize,
-            final int fragmentSizeHint,
-            final CharsetDecoder charDecoder,
-            final CharsetEncoder charEncoder,
-            final MessageConstraints constraints,
-            final ContentLengthStrategy incomingContentStrategy,
-            final ContentLengthStrategy outgoingContentStrategy,
-            final HttpMessageWriterFactory<HttpRequest> requestWriterFactory,
-            final HttpMessageParserFactory<HttpResponse> responseParserFactory) {
-        super(bufferSize, fragmentSizeHint, charDecoder, charEncoder,
-                constraints, incomingContentStrategy, outgoingContentStrategy,
-                requestWriterFactory, responseParserFactory);
+    public DefaultManagedHttpClientConnection(final String id, final int bufferSize, final int fragmentSizeHint,
+                    final CharsetDecoder charDecoder, final CharsetEncoder charEncoder, final MessageConstraints constraints,
+                    final ContentLengthStrategy incomingContentStrategy, final ContentLengthStrategy outgoingContentStrategy,
+                    final HttpMessageWriterFactory<HttpRequest> requestWriterFactory,
+                    final HttpMessageParserFactory<HttpResponse> responseParserFactory){
+        super(bufferSize, fragmentSizeHint, charDecoder, charEncoder, constraints, incomingContentStrategy, outgoingContentStrategy,
+                        requestWriterFactory, responseParserFactory);
         this.id = id;
-        this.attributes = new ConcurrentHashMap<String, Object>();
+        this.attributes = new ConcurrentHashMap<>();
     }
 
-    public DefaultManagedHttpClientConnection(
-            final String id,
-            final int bufferSize) {
+    public DefaultManagedHttpClientConnection(final String id, final int bufferSize){
         this(id, bufferSize, bufferSize, null, null, null, null, null, null, null);
     }
 
     @Override
-    public String getId() {
+    public String getId(){
         return this.id;
     }
 
     @Override
-    public void shutdown() throws IOException {
+    public void shutdown() throws IOException{
         this.shutdown = true;
         super.shutdown();
     }
 
     @Override
-    public Object getAttribute(final String id) {
+    public Object getAttribute(final String id){
         return this.attributes.get(id);
     }
 
     @Override
-    public Object removeAttribute(final String id) {
+    public Object removeAttribute(final String id){
         return this.attributes.remove(id);
     }
 
     @Override
-    public void setAttribute(final String id, final Object obj) {
+    public void setAttribute(final String id,final Object obj){
         this.attributes.put(id, obj);
     }
 
     @Override
-    public void bind(final Socket socket) throws IOException {
-        if (this.shutdown) {
+    public void bind(final Socket socket) throws IOException{
+        if (this.shutdown){
             socket.close(); // allow this to throw...
             // ...but if it doesn't, explicitly throw one ourselves.
             throw new InterruptedIOException("Connection already shutdown");
@@ -121,12 +113,12 @@ public class DefaultManagedHttpClientConnection extends DefaultBHttpClientConnec
     }
 
     @Override
-    public Socket getSocket() {
+    public Socket getSocket(){
         return super.getSocket();
     }
 
     @Override
-    public SSLSession getSSLSession() {
+    public SSLSession getSSLSession(){
         final Socket socket = super.getSocket();
         return socket instanceof SSLSocket ? ((SSLSocket) socket).getSession() : null;
     }

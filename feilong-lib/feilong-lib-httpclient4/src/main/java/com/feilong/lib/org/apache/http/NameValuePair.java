@@ -38,7 +38,7 @@ package com.feilong.lib.org.apache.http;
  *
  * @since 4.0
  */
-public interface NameValuePair {
+public interface NameValuePair{
 
     /**
      * Gets the name of this pair.

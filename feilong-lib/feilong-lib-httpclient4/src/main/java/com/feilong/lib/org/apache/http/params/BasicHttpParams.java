@@ -45,43 +45,43 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.0
  *
  * @deprecated (4.3) use configuration classes provided 'org.apache.http.config'
- *  and 'org.apache.http.client.config'
+ *             and 'org.apache.http.client.config'
  */
 @Deprecated
 @Contract(threading = ThreadingBehavior.SAFE)
-public class BasicHttpParams extends AbstractHttpParams implements Serializable, Cloneable {
+public class BasicHttpParams extends AbstractHttpParams implements Serializable,Cloneable{
 
-    private static final long serialVersionUID = -7086398485908701455L;
+    private static final long         serialVersionUID = -7086398485908701455L;
 
     /** Map of HTTP parameters that this collection contains. */
-    private final Map<String, Object> parameters = new ConcurrentHashMap<String, Object>();
+    private final Map<String, Object> parameters       = new ConcurrentHashMap<>();
 
-    public BasicHttpParams() {
+    public BasicHttpParams(){
         super();
     }
 
     @Override
-    public Object getParameter(final String name) {
+    public Object getParameter(final String name){
         return this.parameters.get(name);
     }
 
     @Override
-    public HttpParams setParameter(final String name, final Object value) {
-        if (name == null) {
+    public HttpParams setParameter(final String name,final Object value){
+        if (name == null){
             return this;
         }
-        if (value != null) {
+        if (value != null){
             this.parameters.put(name, value);
-        } else {
+        }else{
             this.parameters.remove(name);
         }
         return this;
     }
 
     @Override
-    public boolean removeParameter(final String name) {
+    public boolean removeParameter(final String name){
         //this is to avoid the case in which the key has a null value
-        if (this.parameters.containsKey(name)) {
+        if (this.parameters.containsKey(name)){
             this.parameters.remove(name);
             return true;
         }
@@ -91,11 +91,13 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
     /**
      * Assigns the value to all the parameter with the given names
      *
-     * @param names array of parameter names
-     * @param value parameter value
+     * @param names
+     *            array of parameter names
+     * @param value
+     *            parameter value
      */
-    public void setParameters(final String[] names, final Object value) {
-        for (final String name : names) {
+    public void setParameters(final String[] names,final Object value){
+        for (final String name : names){
             setParameter(name, value);
         }
     }
@@ -108,10 +110,11 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
      * <p>
      * Also @see {@link #isParameterSetLocally(String)}
      *
-     * @param name parameter name
+     * @param name
+     *            parameter name
      * @return true if parameter is defined and non-null
      */
-    public boolean isParameterSet(final String name) {
+    public boolean isParameterSet(final String name){
         return getParameter(name) != null;
     }
 
@@ -122,17 +125,18 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
      * <p>
      * Also @see {@link #isParameterSet(String)}
      *
-     * @param name parameter name
+     * @param name
+     *            parameter name
      * @return true if parameter is defined and non-null
      */
-    public boolean isParameterSetLocally(final String name) {
+    public boolean isParameterSetLocally(final String name){
         return this.parameters.get(name) != null;
     }
 
     /**
      * Removes all parameters from this collection.
      */
-    public void clear() {
+    public void clear(){
         this.parameters.clear();
     }
 
@@ -140,16 +144,17 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
      * Creates a copy of these parameters.
      * This implementation calls {@link #clone()}.
      *
-     * @return  a new set of params holding a copy of the
-     *          <i>local</i> parameters in this object.
+     * @return a new set of params holding a copy of the
+     *         <i>local</i> parameters in this object.
      *
-     * @throws UnsupportedOperationException if the clone() fails
+     * @throws UnsupportedOperationException
+     *             if the clone() fails
      */
     @Override
-    public HttpParams copy() {
-        try {
+    public HttpParams copy(){
+        try{
             return (HttpParams) clone();
-        } catch (final CloneNotSupportedException ex) {
+        }catch (final CloneNotSupportedException ex){
             throw new UnsupportedOperationException("Cloning not supported");
         }
     }
@@ -159,7 +164,7 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
      * Uses {@link #copyParams(HttpParams)} to copy the parameters.
      */
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         final BasicHttpParams clone = (BasicHttpParams) super.clone();
         copyParams(clone);
         return clone;
@@ -169,11 +174,12 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
      * Copies the locally defined parameters to the argument parameters.
      * This method is called from {@link #clone()}.
      *
-     * @param target    the parameters to which to copy
+     * @param target
+     *            the parameters to which to copy
      * @since 4.2
      */
-    public void copyParams(final HttpParams target) {
-        for (final Map.Entry<String, Object> me : this.parameters.entrySet()) {
+    public void copyParams(final HttpParams target){
+        for (final Map.Entry<String, Object> me : this.parameters.entrySet()){
             target.setParameter(me.getKey(), me.getValue());
         }
     }
@@ -188,12 +194,12 @@ public class BasicHttpParams extends AbstractHttpParams implements Serializable,
      * @since 4.2
      */
     @Override
-    public Set<String> getNames() {
-        return new HashSet<String>(this.parameters.keySet());
+    public Set<String> getNames(){
+        return new HashSet<>(this.parameters.keySet());
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "[parameters=" + parameters + "]";
     }
 }

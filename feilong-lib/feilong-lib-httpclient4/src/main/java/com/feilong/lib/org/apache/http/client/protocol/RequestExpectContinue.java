@@ -54,27 +54,25 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RequestExpectContinue implements HttpRequestInterceptor {
+public class RequestExpectContinue implements HttpRequestInterceptor{
 
-    public RequestExpectContinue() {
+    public RequestExpectContinue(){
         super();
     }
 
     @Override
-    public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
 
-        if (!request.containsHeader(HTTP.EXPECT_DIRECTIVE)) {
-            if (request instanceof HttpEntityEnclosingRequest) {
+        if (!request.containsHeader(HTTP.EXPECT_DIRECTIVE)){
+            if (request instanceof HttpEntityEnclosingRequest){
                 final ProtocolVersion ver = request.getRequestLine().getProtocolVersion();
-                final HttpEntity entity = ((HttpEntityEnclosingRequest)request).getEntity();
+                final HttpEntity entity = ((HttpEntityEnclosingRequest) request).getEntity();
                 // Do not send the expect header if request body is known to be empty
-                if (entity != null
-                        && entity.getContentLength() != 0 && !ver.lessEquals(HttpVersion.HTTP_1_0)) {
+                if (entity != null && entity.getContentLength() != 0 && !ver.lessEquals(HttpVersion.HTTP_1_0)){
                     final HttpClientContext clientContext = HttpClientContext.adapt(context);
                     final RequestConfig config = clientContext.getRequestConfig();
-                    if (config.isExpectContinueEnabled()) {
+                    if (config.isExpectContinueEnabled()){
                         request.addHeader(HTTP.EXPECT_DIRECTIVE, HTTP.EXPECT_CONTINUE);
                     }
                 }

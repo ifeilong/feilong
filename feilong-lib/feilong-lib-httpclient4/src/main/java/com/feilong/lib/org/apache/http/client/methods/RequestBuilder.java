@@ -66,204 +66,211 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
-public class RequestBuilder {
+public class RequestBuilder{
 
-    private String method;
-    private Charset charset;
-    private ProtocolVersion version;
-    private URI uri;
-    private HeaderGroup headerGroup;
-    private HttpEntity entity;
+    private String              method;
+
+    private Charset             charset;
+
+    private ProtocolVersion     version;
+
+    private URI                 uri;
+
+    private HeaderGroup         headerGroup;
+
+    private HttpEntity          entity;
+
     private List<NameValuePair> parameters;
-    private RequestConfig config;
 
-    RequestBuilder(final String method) {
+    private RequestConfig       config;
+
+    RequestBuilder(final String method){
         super();
         this.charset = Consts.UTF_8;
         this.method = method;
     }
 
-    RequestBuilder(final String method, final URI uri) {
+    RequestBuilder(final String method, final URI uri){
         super();
         this.method = method;
         this.uri = uri;
     }
 
-    RequestBuilder(final String method, final String uri) {
+    RequestBuilder(final String method, final String uri){
         super();
         this.method = method;
         this.uri = uri != null ? URI.create(uri) : null;
     }
 
-    RequestBuilder() {
+    RequestBuilder(){
         this(null);
     }
 
-    public static RequestBuilder create(final String method) {
+    public static RequestBuilder create(final String method){
         Args.notBlank(method, "HTTP method");
         return new RequestBuilder(method);
     }
 
-    public static RequestBuilder get() {
+    public static RequestBuilder get(){
         return new RequestBuilder(HttpGet.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder get(final URI uri) {
+    public static RequestBuilder get(final URI uri){
         return new RequestBuilder(HttpGet.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder get(final String uri) {
+    public static RequestBuilder get(final String uri){
         return new RequestBuilder(HttpGet.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder head() {
+    public static RequestBuilder head(){
         return new RequestBuilder(HttpHead.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder head(final URI uri) {
+    public static RequestBuilder head(final URI uri){
         return new RequestBuilder(HttpHead.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder head(final String uri) {
+    public static RequestBuilder head(final String uri){
         return new RequestBuilder(HttpHead.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder patch() {
+    public static RequestBuilder patch(){
         return new RequestBuilder(HttpPatch.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder patch(final URI uri) {
+    public static RequestBuilder patch(final URI uri){
         return new RequestBuilder(HttpPatch.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder patch(final String uri) {
+    public static RequestBuilder patch(final String uri){
         return new RequestBuilder(HttpPatch.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder post() {
+    public static RequestBuilder post(){
         return new RequestBuilder(HttpPost.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder post(final URI uri) {
+    public static RequestBuilder post(final URI uri){
         return new RequestBuilder(HttpPost.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder post(final String uri) {
+    public static RequestBuilder post(final String uri){
         return new RequestBuilder(HttpPost.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder put() {
+    public static RequestBuilder put(){
         return new RequestBuilder(HttpPut.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder put(final URI uri) {
+    public static RequestBuilder put(final URI uri){
         return new RequestBuilder(HttpPut.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder put(final String uri) {
+    public static RequestBuilder put(final String uri){
         return new RequestBuilder(HttpPut.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder delete() {
+    public static RequestBuilder delete(){
         return new RequestBuilder(HttpDelete.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder delete(final URI uri) {
+    public static RequestBuilder delete(final URI uri){
         return new RequestBuilder(HttpDelete.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder delete(final String uri) {
+    public static RequestBuilder delete(final String uri){
         return new RequestBuilder(HttpDelete.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder trace() {
+    public static RequestBuilder trace(){
         return new RequestBuilder(HttpTrace.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder trace(final URI uri) {
+    public static RequestBuilder trace(final URI uri){
         return new RequestBuilder(HttpTrace.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder trace(final String uri) {
+    public static RequestBuilder trace(final String uri){
         return new RequestBuilder(HttpTrace.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder options() {
+    public static RequestBuilder options(){
         return new RequestBuilder(HttpOptions.METHOD_NAME);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder options(final URI uri) {
+    public static RequestBuilder options(final URI uri){
         return new RequestBuilder(HttpOptions.METHOD_NAME, uri);
     }
 
     /**
      * @since 4.4
      */
-    public static RequestBuilder options(final String uri) {
+    public static RequestBuilder options(final String uri){
         return new RequestBuilder(HttpOptions.METHOD_NAME, uri);
     }
 
-    public static RequestBuilder copy(final HttpRequest request) {
+    public static RequestBuilder copy(final HttpRequest request){
         Args.notNull(request, "HTTP request");
         return new RequestBuilder().doCopy(request);
     }
 
-    private RequestBuilder doCopy(final HttpRequest request) {
-        if (request == null) {
+    private RequestBuilder doCopy(final HttpRequest request){
+        if (request == null){
             return this;
         }
         method = request.getRequestLine().getMethod();
         version = request.getRequestLine().getProtocolVersion();
 
-        if (headerGroup == null) {
+        if (headerGroup == null){
             headerGroup = new HeaderGroup();
         }
         headerGroup.clear();
@@ -272,34 +279,32 @@ public class RequestBuilder {
         parameters = null;
         entity = null;
 
-        if (request instanceof HttpEntityEnclosingRequest) {
+        if (request instanceof HttpEntityEnclosingRequest){
             final HttpEntity originalEntity = ((HttpEntityEnclosingRequest) request).getEntity();
             final ContentType contentType = ContentType.get(originalEntity);
-            if (contentType != null &&
-                    contentType.getMimeType().equals(ContentType.APPLICATION_FORM_URLENCODED.getMimeType())) {
-                try {
+            if (contentType != null && contentType.getMimeType().equals(ContentType.APPLICATION_FORM_URLENCODED.getMimeType())){
+                try{
                     charset = contentType.getCharset();
                     final List<NameValuePair> formParams = URLEncodedUtils.parse(originalEntity);
-                    if (!formParams.isEmpty()) {
+                    if (!formParams.isEmpty()){
                         parameters = formParams;
                     }
-                } catch (final IOException ignore) {
-                }
-            } else {
+                }catch (final IOException ignore){}
+            }else{
                 entity = originalEntity;
             }
         }
 
         final URI originalUri;
-        if (request instanceof HttpUriRequest) {
+        if (request instanceof HttpUriRequest){
             uri = ((HttpUriRequest) request).getURI();
-        } else {
+        }else{
             uri = URI.create(request.getRequestLine().getUri());
         }
 
-        if (request instanceof Configurable) {
+        if (request instanceof Configurable){
             config = ((Configurable) request).getConfig();
-        } else {
+        }else{
             config = null;
         }
         return this;
@@ -308,7 +313,7 @@ public class RequestBuilder {
     /**
      * @since 4.4
      */
-    public RequestBuilder setCharset(final Charset charset) {
+    public RequestBuilder setCharset(final Charset charset){
         this.charset = charset;
         return this;
     }
@@ -316,214 +321,209 @@ public class RequestBuilder {
     /**
      * @since 4.4
      */
-    public Charset getCharset() {
+    public Charset getCharset(){
         return charset;
     }
 
-    public String getMethod() {
+    public String getMethod(){
         return method;
     }
 
-    public ProtocolVersion getVersion() {
+    public ProtocolVersion getVersion(){
         return version;
     }
 
-    public RequestBuilder setVersion(final ProtocolVersion version) {
+    public RequestBuilder setVersion(final ProtocolVersion version){
         this.version = version;
         return this;
     }
 
-    public URI getUri() {
+    public URI getUri(){
         return uri;
     }
 
-    public RequestBuilder setUri(final URI uri) {
+    public RequestBuilder setUri(final URI uri){
         this.uri = uri;
         return this;
     }
 
-    public RequestBuilder setUri(final String uri) {
+    public RequestBuilder setUri(final String uri){
         this.uri = uri != null ? URI.create(uri) : null;
         return this;
     }
 
-    public Header getFirstHeader(final String name) {
+    public Header getFirstHeader(final String name){
         return headerGroup != null ? headerGroup.getFirstHeader(name) : null;
     }
 
-    public Header getLastHeader(final String name) {
+    public Header getLastHeader(final String name){
         return headerGroup != null ? headerGroup.getLastHeader(name) : null;
     }
 
-    public Header[] getHeaders(final String name) {
+    public Header[] getHeaders(final String name){
         return headerGroup != null ? headerGroup.getHeaders(name) : null;
     }
 
-    public RequestBuilder addHeader(final Header header) {
-        if (headerGroup == null) {
+    public RequestBuilder addHeader(final Header header){
+        if (headerGroup == null){
             headerGroup = new HeaderGroup();
         }
         headerGroup.addHeader(header);
         return this;
     }
 
-    public RequestBuilder addHeader(final String name, final String value) {
-        if (headerGroup == null) {
+    public RequestBuilder addHeader(final String name,final String value){
+        if (headerGroup == null){
             headerGroup = new HeaderGroup();
         }
         this.headerGroup.addHeader(new BasicHeader(name, value));
         return this;
     }
 
-    public RequestBuilder removeHeader(final Header header) {
-        if (headerGroup == null) {
+    public RequestBuilder removeHeader(final Header header){
+        if (headerGroup == null){
             headerGroup = new HeaderGroup();
         }
         headerGroup.removeHeader(header);
         return this;
     }
 
-    public RequestBuilder removeHeaders(final String name) {
-        if (name == null || headerGroup == null) {
+    public RequestBuilder removeHeaders(final String name){
+        if (name == null || headerGroup == null){
             return this;
         }
-        for (final HeaderIterator i = headerGroup.iterator(); i.hasNext(); ) {
+        for (final HeaderIterator i = headerGroup.iterator(); i.hasNext();){
             final Header header = i.nextHeader();
-            if (name.equalsIgnoreCase(header.getName())) {
+            if (name.equalsIgnoreCase(header.getName())){
                 i.remove();
             }
         }
         return this;
     }
 
-    public RequestBuilder setHeader(final Header header) {
-        if (headerGroup == null) {
+    public RequestBuilder setHeader(final Header header){
+        if (headerGroup == null){
             headerGroup = new HeaderGroup();
         }
         this.headerGroup.updateHeader(header);
         return this;
     }
 
-    public RequestBuilder setHeader(final String name, final String value) {
-        if (headerGroup == null) {
+    public RequestBuilder setHeader(final String name,final String value){
+        if (headerGroup == null){
             headerGroup = new HeaderGroup();
         }
         this.headerGroup.updateHeader(new BasicHeader(name, value));
         return this;
     }
 
-    public HttpEntity getEntity() {
+    public HttpEntity getEntity(){
         return entity;
     }
 
-    public RequestBuilder setEntity(final HttpEntity entity) {
+    public RequestBuilder setEntity(final HttpEntity entity){
         this.entity = entity;
         return this;
     }
 
-    public List<NameValuePair> getParameters() {
-        return parameters != null ? new ArrayList<NameValuePair>(parameters) :
-            new ArrayList<NameValuePair>();
+    public List<NameValuePair> getParameters(){
+        return parameters != null ? new ArrayList<>(parameters) : new ArrayList<>();
     }
 
-    public RequestBuilder addParameter(final NameValuePair nvp) {
+    public RequestBuilder addParameter(final NameValuePair nvp){
         Args.notNull(nvp, "Name value pair");
-        if (parameters == null) {
-            parameters = new LinkedList<NameValuePair>();
+        if (parameters == null){
+            parameters = new LinkedList<>();
         }
         parameters.add(nvp);
         return this;
     }
 
-    public RequestBuilder addParameter(final String name, final String value) {
+    public RequestBuilder addParameter(final String name,final String value){
         return addParameter(new BasicNameValuePair(name, value));
     }
 
-    public RequestBuilder addParameters(final NameValuePair... nvps) {
-        for (final NameValuePair nvp: nvps) {
+    public RequestBuilder addParameters(final NameValuePair...nvps){
+        for (final NameValuePair nvp : nvps){
             addParameter(nvp);
         }
         return this;
     }
 
-    public RequestConfig getConfig() {
+    public RequestConfig getConfig(){
         return config;
     }
 
-    public RequestBuilder setConfig(final RequestConfig config) {
+    public RequestBuilder setConfig(final RequestConfig config){
         this.config = config;
         return this;
     }
 
-    public HttpUriRequest build() {
+    public HttpUriRequest build(){
         final HttpRequestBase result;
         URI uriNotNull = this.uri != null ? this.uri : URI.create("/");
         HttpEntity entityCopy = this.entity;
-        if (parameters != null && !parameters.isEmpty()) {
-            if (entityCopy == null && (HttpPost.METHOD_NAME.equalsIgnoreCase(method)
-                    || HttpPut.METHOD_NAME.equalsIgnoreCase(method))) {
+        if (parameters != null && !parameters.isEmpty()){
+            if (entityCopy == null && (HttpPost.METHOD_NAME.equalsIgnoreCase(method) || HttpPut.METHOD_NAME.equalsIgnoreCase(method))){
                 entityCopy = new UrlEncodedFormEntity(parameters, charset != null ? charset : HTTP.DEF_CONTENT_CHARSET);
-            } else {
-                try {
-                    uriNotNull = new URIBuilder(uriNotNull)
-                      .setCharset(this.charset)
-                      .addParameters(parameters)
-                      .build();
-                } catch (final URISyntaxException ex) {
+            }else{
+                try{
+                    uriNotNull = new URIBuilder(uriNotNull).setCharset(this.charset).addParameters(parameters).build();
+                }catch (final URISyntaxException ex){
                     // should never happen
                 }
             }
         }
-        if (entityCopy == null) {
+        if (entityCopy == null){
             result = new InternalRequest(method);
-        } else {
+        }else{
             final InternalEntityEclosingRequest request = new InternalEntityEclosingRequest(method);
             request.setEntity(entityCopy);
             result = request;
         }
         result.setProtocolVersion(this.version);
         result.setURI(uriNotNull);
-        if (this.headerGroup != null) {
+        if (this.headerGroup != null){
             result.setHeaders(this.headerGroup.getAllHeaders());
         }
         result.setConfig(this.config);
         return result;
     }
 
-    static class InternalRequest extends HttpRequestBase {
+    static class InternalRequest extends HttpRequestBase{
 
         private final String method;
 
-        InternalRequest(final String method) {
+        InternalRequest(final String method){
             super();
             this.method = method;
         }
 
         @Override
-        public String getMethod() {
+        public String getMethod(){
             return this.method;
         }
 
     }
 
-    static class InternalEntityEclosingRequest extends HttpEntityEnclosingRequestBase {
+    static class InternalEntityEclosingRequest extends HttpEntityEnclosingRequestBase{
 
         private final String method;
 
-        InternalEntityEclosingRequest(final String method) {
+        InternalEntityEclosingRequest(final String method){
             super();
             this.method = method;
         }
 
         @Override
-        public String getMethod() {
+        public String getMethod(){
             return this.method;
         }
 
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder builder = new StringBuilder();
         builder.append("RequestBuilder [method=");
         builder.append(method);

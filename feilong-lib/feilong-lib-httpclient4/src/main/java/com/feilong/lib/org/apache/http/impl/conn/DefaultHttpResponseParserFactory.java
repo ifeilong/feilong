@@ -45,34 +45,30 @@ import com.feilong.lib.org.apache.http.message.LineParser;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultHttpResponseParserFactory implements HttpMessageParserFactory<HttpResponse> {
+public class DefaultHttpResponseParserFactory implements HttpMessageParserFactory<HttpResponse>{
 
     public static final DefaultHttpResponseParserFactory INSTANCE = new DefaultHttpResponseParserFactory();
 
-    private final LineParser lineParser;
-    private final HttpResponseFactory responseFactory;
+    private final LineParser                             lineParser;
 
-    public DefaultHttpResponseParserFactory(
-            final LineParser lineParser,
-            final HttpResponseFactory responseFactory) {
+    private final HttpResponseFactory                    responseFactory;
+
+    public DefaultHttpResponseParserFactory(final LineParser lineParser, final HttpResponseFactory responseFactory){
         super();
         this.lineParser = lineParser != null ? lineParser : BasicLineParser.INSTANCE;
-        this.responseFactory = responseFactory != null ? responseFactory
-                : DefaultHttpResponseFactory.INSTANCE;
+        this.responseFactory = responseFactory != null ? responseFactory : DefaultHttpResponseFactory.INSTANCE;
     }
 
-    public DefaultHttpResponseParserFactory(
-            final HttpResponseFactory responseFactory) {
+    public DefaultHttpResponseParserFactory(final HttpResponseFactory responseFactory){
         this(null, responseFactory);
     }
 
-    public DefaultHttpResponseParserFactory() {
+    public DefaultHttpResponseParserFactory(){
         this(null, null);
     }
 
     @Override
-    public HttpMessageParser<HttpResponse> create(final SessionInputBuffer buffer,
-            final MessageConstraints constraints) {
+    public HttpMessageParser<HttpResponse> create(final SessionInputBuffer buffer,final MessageConstraints constraints){
         return new DefaultHttpResponseParser(buffer, lineParser, responseFactory, constraints);
     }
 

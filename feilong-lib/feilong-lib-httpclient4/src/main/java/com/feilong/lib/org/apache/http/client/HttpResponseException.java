@@ -33,25 +33,25 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  *
  * @since 4.0
  */
-public class HttpResponseException extends ClientProtocolException {
+public class HttpResponseException extends ClientProtocolException{
 
     private static final long serialVersionUID = -7186627969477257933L;
 
-    private final int statusCode;
-    private final String reasonPhrase;
+    private final int         statusCode;
 
-    public HttpResponseException(final int statusCode, final String reasonPhrase) {
-        super(String.format("status code: %d" +
-                (TextUtils.isBlank(reasonPhrase) ? "" : ", reason phrase: %s"), statusCode, reasonPhrase));
+    private final String      reasonPhrase;
+
+    public HttpResponseException(final int statusCode, final String reasonPhrase){
+        super(String.format("status code: %d" + (TextUtils.isBlank(reasonPhrase) ? "" : ", reason phrase: %s"), statusCode, reasonPhrase));
         this.statusCode = statusCode;
         this.reasonPhrase = reasonPhrase;
     }
 
-    public int getStatusCode() {
+    public int getStatusCode(){
         return this.statusCode;
     }
 
-    public String getReasonPhrase() {
+    public String getReasonPhrase(){
         return this.reasonPhrase;
     }
 

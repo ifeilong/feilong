@@ -42,16 +42,16 @@ import com.feilong.lib.org.apache.http.client.config.RequestConfig;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class ProxyAuthenticationStrategy extends AuthenticationStrategyImpl {
+public class ProxyAuthenticationStrategy extends AuthenticationStrategyImpl{
 
     public static final ProxyAuthenticationStrategy INSTANCE = new ProxyAuthenticationStrategy();
 
-    public ProxyAuthenticationStrategy() {
+    public ProxyAuthenticationStrategy(){
         super(HttpStatus.SC_PROXY_AUTHENTICATION_REQUIRED, AUTH.PROXY_AUTH);
     }
 
     @Override
-    Collection<String> getPreferredAuthSchemes(final RequestConfig config) {
+    Collection<String> getPreferredAuthSchemes(final RequestConfig config){
         return config.getProxyPreferredAuthSchemes();
     }
 

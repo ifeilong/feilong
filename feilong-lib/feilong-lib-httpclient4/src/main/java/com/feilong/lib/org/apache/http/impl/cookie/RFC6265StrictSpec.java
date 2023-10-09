@@ -40,28 +40,21 @@ import com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class RFC6265StrictSpec extends RFC6265CookieSpecBase {
+public class RFC6265StrictSpec extends RFC6265CookieSpecBase{
 
-    final static String[] DATE_PATTERNS = {
-        DateUtils.PATTERN_RFC1123,
-        DateUtils.PATTERN_RFC1036,
-        DateUtils.PATTERN_ASCTIME
-    };
+    final static String[] DATE_PATTERNS = { DateUtils.PATTERN_RFC1123, DateUtils.PATTERN_RFC1036, DateUtils.PATTERN_ASCTIME };
 
-    public RFC6265StrictSpec() {
-        super(new BasicPathHandler(),
-                new BasicDomainHandler(),
-                new BasicMaxAgeHandler(),
-                new BasicSecureHandler(),
-                new BasicExpiresHandler(DATE_PATTERNS));
+    public RFC6265StrictSpec(){
+        super(new BasicPathHandler(), new BasicDomainHandler(), new BasicMaxAgeHandler(), new BasicSecureHandler(),
+                        new BasicExpiresHandler(DATE_PATTERNS));
     }
 
-    RFC6265StrictSpec(final CommonCookieAttributeHandler... handlers) {
+    RFC6265StrictSpec(final CommonCookieAttributeHandler...handlers){
         super(handlers);
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "rfc6265-strict";
     }
 

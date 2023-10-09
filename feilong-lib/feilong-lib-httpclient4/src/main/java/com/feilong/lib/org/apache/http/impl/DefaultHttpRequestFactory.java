@@ -43,38 +43,25 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class DefaultHttpRequestFactory implements HttpRequestFactory {
+public class DefaultHttpRequestFactory implements HttpRequestFactory{
 
-    public static final DefaultHttpRequestFactory INSTANCE = new DefaultHttpRequestFactory();
+    public static final DefaultHttpRequestFactory INSTANCE                   = new DefaultHttpRequestFactory();
 
-    private static final String[] RFC2616_COMMON_METHODS = {
-        "GET"
-    };
+    private static final String[]                 RFC2616_COMMON_METHODS     = { "GET" };
 
-    private static final String[] RFC2616_ENTITY_ENC_METHODS = {
-        "POST",
-        "PUT"
-    };
+    private static final String[]                 RFC2616_ENTITY_ENC_METHODS = { "POST", "PUT" };
 
-    private static final String[] RFC2616_SPECIAL_METHODS = {
-        "HEAD",
-        "OPTIONS",
-        "DELETE",
-        "TRACE",
-        "CONNECT"
-    };
+    private static final String[]                 RFC2616_SPECIAL_METHODS    = { "HEAD", "OPTIONS", "DELETE", "TRACE", "CONNECT" };
 
-    private static final String[] RFC5789_ENTITY_ENC_METHODS = {
-        "PATCH"
-    };
+    private static final String[]                 RFC5789_ENTITY_ENC_METHODS = { "PATCH" };
 
-    public DefaultHttpRequestFactory() {
+    public DefaultHttpRequestFactory(){
         super();
     }
 
-    private static boolean isOneOf(final String[] methods, final String method) {
-        for (final String method2 : methods) {
-            if (method2.equalsIgnoreCase(method)) {
+    private static boolean isOneOf(final String[] methods,final String method){
+        for (final String method2 : methods){
+            if (method2.equalsIgnoreCase(method)){
                 return true;
             }
         }
@@ -82,37 +69,34 @@ public class DefaultHttpRequestFactory implements HttpRequestFactory {
     }
 
     @Override
-    public HttpRequest newHttpRequest(final RequestLine requestline)
-            throws MethodNotSupportedException {
+    public HttpRequest newHttpRequest(final RequestLine requestline) throws MethodNotSupportedException{
         Args.notNull(requestline, "Request line");
         final String method = requestline.getMethod();
-        if (isOneOf(RFC2616_COMMON_METHODS, method)) {
+        if (isOneOf(RFC2616_COMMON_METHODS, method)){
             return new BasicHttpRequest(requestline);
-        } else if (isOneOf(RFC2616_ENTITY_ENC_METHODS, method)) {
+        }else if (isOneOf(RFC2616_ENTITY_ENC_METHODS, method)){
             return new BasicHttpEntityEnclosingRequest(requestline);
-        } else if (isOneOf(RFC2616_SPECIAL_METHODS, method)) {
+        }else if (isOneOf(RFC2616_SPECIAL_METHODS, method)){
             return new BasicHttpRequest(requestline);
-        } else if (isOneOf(RFC5789_ENTITY_ENC_METHODS, method)) {
+        }else if (isOneOf(RFC5789_ENTITY_ENC_METHODS, method)){
             return new BasicHttpEntityEnclosingRequest(requestline);
-        } else {
+        }else{
             throw new MethodNotSupportedException(method + " method not supported");
         }
     }
 
     @Override
-    public HttpRequest newHttpRequest(final String method, final String uri)
-            throws MethodNotSupportedException {
-        if (isOneOf(RFC2616_COMMON_METHODS, method)) {
+    public HttpRequest newHttpRequest(final String method,final String uri) throws MethodNotSupportedException{
+        if (isOneOf(RFC2616_COMMON_METHODS, method)){
             return new BasicHttpRequest(method, uri);
-        } else if (isOneOf(RFC2616_ENTITY_ENC_METHODS, method)) {
+        }else if (isOneOf(RFC2616_ENTITY_ENC_METHODS, method)){
             return new BasicHttpEntityEnclosingRequest(method, uri);
-        } else if (isOneOf(RFC2616_SPECIAL_METHODS, method)) {
+        }else if (isOneOf(RFC2616_SPECIAL_METHODS, method)){
             return new BasicHttpRequest(method, uri);
-        } else if (isOneOf(RFC5789_ENTITY_ENC_METHODS, method)) {
+        }else if (isOneOf(RFC5789_ENTITY_ENC_METHODS, method)){
             return new BasicHttpEntityEnclosingRequest(method, uri);
-        } else {
-            throw new MethodNotSupportedException(method
-                    + " method not supported");
+        }else{
+            throw new MethodNotSupportedException(method + " method not supported");
         }
     }
 

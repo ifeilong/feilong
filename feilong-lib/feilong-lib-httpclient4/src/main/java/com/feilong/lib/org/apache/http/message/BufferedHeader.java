@@ -41,14 +41,14 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.0
  */
-public class BufferedHeader implements FormattedHeader, Cloneable, Serializable {
+public class BufferedHeader implements FormattedHeader,Cloneable,Serializable{
 
-    private static final long serialVersionUID = -2768352615787625448L;
+    private static final long     serialVersionUID = -2768352615787625448L;
 
     /**
      * Header name.
      */
-    private final String name;
+    private final String          name;
 
     /**
      * The buffer containing the entire header line.
@@ -58,73 +58,70 @@ public class BufferedHeader implements FormattedHeader, Cloneable, Serializable 
     /**
      * The beginning of the header value in the buffer
      */
-    private final int valuePos;
-
+    private final int             valuePos;
 
     /**
      * Creates a new header from a buffer.
      * The name of the header will be parsed immediately,
      * the value only if it is accessed.
      *
-     * @param buffer    the buffer containing the header to represent
+     * @param buffer
+     *            the buffer containing the header to represent
      *
-     * @throws ParseException   in case of a parse error
+     * @throws ParseException
+     *             in case of a parse error
      */
-    public BufferedHeader(final CharArrayBuffer buffer)
-        throws ParseException {
+    public BufferedHeader(final CharArrayBuffer buffer) throws ParseException{
 
         super();
         Args.notNull(buffer, "Char array buffer");
         final int colon = buffer.indexOf(':');
-        if (colon == -1) {
-            throw new ParseException
-                ("Invalid header: " + buffer.toString());
+        if (colon == -1){
+            throw new ParseException("Invalid header: " + buffer.toString());
         }
         final String s = buffer.substringTrimmed(0, colon);
-        if (s.isEmpty()) {
-            throw new ParseException
-                ("Invalid header: " + buffer.toString());
+        if (s.isEmpty()){
+            throw new ParseException("Invalid header: " + buffer.toString());
         }
         this.buffer = buffer;
         this.name = s;
         this.valuePos = colon + 1;
     }
 
-
     @Override
-    public String getName() {
+    public String getName(){
         return this.name;
     }
 
     @Override
-    public String getValue() {
+    public String getValue(){
         return this.buffer.substringTrimmed(this.valuePos, this.buffer.length());
     }
 
     @Override
-    public HeaderElement[] getElements() throws ParseException {
+    public HeaderElement[] getElements() throws ParseException{
         final ParserCursor cursor = new ParserCursor(0, this.buffer.length());
         cursor.updatePos(this.valuePos);
         return BasicHeaderValueParser.INSTANCE.parseElements(this.buffer, cursor);
     }
 
     @Override
-    public int getValuePos() {
+    public int getValuePos(){
         return this.valuePos;
     }
 
     @Override
-    public CharArrayBuffer getBuffer() {
+    public CharArrayBuffer getBuffer(){
         return this.buffer;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return this.buffer.toString();
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         // buffer is considered immutable
         // no need to make a copy of it
         return super.clone();

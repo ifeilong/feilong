@@ -38,7 +38,7 @@ import com.feilong.lib.org.apache.http.HttpRequest;
  *
  * @since 4.0
  */
-public interface HttpUriRequest extends HttpRequest {
+public interface HttpUriRequest extends HttpRequest{
 
     /**
      * Returns the HTTP method this request uses, such as {@code GET},
@@ -69,8 +69,9 @@ public interface HttpUriRequest extends HttpRequest {
     /**
      * Aborts execution of the request.
      *
-     * @throws UnsupportedOperationException if the abort operation
-     *   is not supported / cannot be implemented.
+     * @throws UnsupportedOperationException
+     *             if the abort operation
+     *             is not supported / cannot be implemented.
      */
     void abort() throws UnsupportedOperationException;
 
@@ -78,7 +79,7 @@ public interface HttpUriRequest extends HttpRequest {
      * Tests if the request execution has been aborted.
      *
      * @return {@code true} if the request execution has been aborted,
-     *   {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     boolean isAborted();
 

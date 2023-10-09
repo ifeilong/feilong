@@ -38,15 +38,17 @@ import com.feilong.lib.org.apache.http.HttpResponse;
  * @since 4.2
  *
  */
-public interface ConnectionBackoffStrategy {
+public interface ConnectionBackoffStrategy{
 
     /**
      * Determines whether seeing the given {@code Throwable} as
      * a result of request execution should result in a backoff
      * signal.
-     * @param t the {@code Throwable} that happened
+     * 
+     * @param t
+     *            the {@code Throwable} that happened
      * @return {@code true} if a backoff signal should be
-     *   given
+     *         given
      */
     boolean shouldBackoff(Throwable t);
 
@@ -56,9 +58,11 @@ public interface ConnectionBackoffStrategy {
      * signal. Implementations MUST restrict themselves to examining
      * the response header and MUST NOT consume any of the response
      * body, if any.
-     * @param resp the {@code HttpResponse} that was received
+     * 
+     * @param resp
+     *            the {@code HttpResponse} that was received
      * @return {@code true} if a backoff signal should be
-     *   given
+     *         given
      */
     boolean shouldBackoff(HttpResponse resp);
 }

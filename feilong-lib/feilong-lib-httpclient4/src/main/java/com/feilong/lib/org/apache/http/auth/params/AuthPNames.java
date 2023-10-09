@@ -33,11 +33,11 @@ package com.feilong.lib.org.apache.http.auth.params;
  * @since 4.0
  *
  * @deprecated (4.3) use {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}
- *   and constructor parameters of
- *   {@link com.feilong.lib.org.apache.http.auth.AuthSchemeProvider}s.
-*/
+ *             and constructor parameters of
+ *             {@link com.feilong.lib.org.apache.http.auth.AuthSchemeProvider}s.
+ */
 @Deprecated
-public interface AuthPNames {
+public interface AuthPNames{
 
     /**
      * Defines the charset to be used when encoding
@@ -49,26 +49,26 @@ public interface AuthPNames {
 
     /**
      * Defines the order of preference for supported
-     *  {@link com.feilong.lib.org.apache.http.auth.AuthScheme}s when authenticating with
-     *  the target host.
+     * {@link com.feilong.lib.org.apache.http.auth.AuthScheme}s when authenticating with
+     * the target host.
      * <p>
      * This parameter expects a value of type {@link java.util.Collection}. The
      * collection is expected to contain {@link String} instances representing
      * a name of an authentication scheme as returned by
      * {@link com.feilong.lib.org.apache.http.auth.AuthScheme#getSchemeName()}.
      */
-    String TARGET_AUTH_PREF = "http.auth.target-scheme-pref";
+    String TARGET_AUTH_PREF   = "http.auth.target-scheme-pref";
 
     /**
      * Defines the order of preference for supported
-     *  {@link com.feilong.lib.org.apache.http.auth.AuthScheme}s when authenticating with the
-     *  proxy host.
+     * {@link com.feilong.lib.org.apache.http.auth.AuthScheme}s when authenticating with the
+     * proxy host.
      * <p>
      * This parameter expects a value of type {@link java.util.Collection}. The
      * collection is expected to contain {@link String} instances representing
      * a name of an authentication scheme as returned by
      * {@link com.feilong.lib.org.apache.http.auth.AuthScheme#getSchemeName()}.
      */
-    String PROXY_AUTH_PREF = "http.auth.proxy-scheme-pref";
+    String PROXY_AUTH_PREF    = "http.auth.proxy-scheme-pref";
 
 }

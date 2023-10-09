@@ -44,7 +44,7 @@ import com.feilong.lib.org.apache.http.HttpEntity;
  *
  * @since 4.1
  */
-public class DeflateDecompressingEntity extends DecompressingEntity {
+public class DeflateDecompressingEntity extends DecompressingEntity{
 
     /**
      * Creates a new {@link DeflateDecompressingEntity} which will wrap the specified
@@ -53,7 +53,7 @@ public class DeflateDecompressingEntity extends DecompressingEntity {
      * @param entity
      *            a non-null {@link HttpEntity} to be wrapped
      */
-    public DeflateDecompressingEntity(final HttpEntity entity) {
+    public DeflateDecompressingEntity(final HttpEntity entity){
         super(entity, DeflateInputStreamFactory.getInstance());
     }
 

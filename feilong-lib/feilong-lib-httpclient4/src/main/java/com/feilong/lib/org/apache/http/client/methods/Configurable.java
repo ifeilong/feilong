@@ -34,7 +34,7 @@ import com.feilong.lib.org.apache.http.client.config.RequestConfig;
  *
  * @since 4.3
  */
-public interface Configurable {
+public interface Configurable{
 
     /**
      * Returns actual request configuration.

@@ -48,29 +48,30 @@ import java.net.URI;
  *
  * @since 4.0
  */
-public class HttpHead extends HttpRequestBase {
+public class HttpHead extends HttpRequestBase{
 
     public final static String METHOD_NAME = "HEAD";
 
-    public HttpHead() {
+    public HttpHead(){
         super();
     }
 
-    public HttpHead(final URI uri) {
+    public HttpHead(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpHead(final String uri) {
+    public HttpHead(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

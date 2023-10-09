@@ -45,74 +45,66 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class RFC6265CookieSpecProvider implements CookieSpecProvider {
+public class RFC6265CookieSpecProvider implements CookieSpecProvider{
 
-    public enum CompatibilityLevel {
-        STRICT,
-        RELAXED,
-        IE_MEDIUM_SECURITY
+    public enum CompatibilityLevel{
+        STRICT, RELAXED, IE_MEDIUM_SECURITY
     }
 
-    private final CompatibilityLevel compatibilityLevel;
+    private final CompatibilityLevel  compatibilityLevel;
+
     private final PublicSuffixMatcher publicSuffixMatcher;
 
-    private volatile CookieSpec cookieSpec;
+    private volatile CookieSpec       cookieSpec;
 
-    public RFC6265CookieSpecProvider(
-            final CompatibilityLevel compatibilityLevel,
-            final PublicSuffixMatcher publicSuffixMatcher) {
+    public RFC6265CookieSpecProvider(final CompatibilityLevel compatibilityLevel, final PublicSuffixMatcher publicSuffixMatcher){
         super();
         this.compatibilityLevel = compatibilityLevel != null ? compatibilityLevel : CompatibilityLevel.RELAXED;
         this.publicSuffixMatcher = publicSuffixMatcher;
     }
 
-    public RFC6265CookieSpecProvider(final PublicSuffixMatcher publicSuffixMatcher) {
+    public RFC6265CookieSpecProvider(final PublicSuffixMatcher publicSuffixMatcher){
         this(CompatibilityLevel.RELAXED, publicSuffixMatcher);
     }
 
-    public RFC6265CookieSpecProvider() {
+    public RFC6265CookieSpecProvider(){
         this(CompatibilityLevel.RELAXED, null);
     }
 
     @Override
-    public CookieSpec create(final HttpContext context) {
-        if (cookieSpec == null) {
-            synchronized (this) {
-                if (cookieSpec == null) {
+    public CookieSpec create(final HttpContext context){
+        if (cookieSpec == null){
+            synchronized (this){
+                if (cookieSpec == null){
                     switch (this.compatibilityLevel) {
                         case STRICT:
                             this.cookieSpec = new RFC6265StrictSpec(
-                                    new BasicPathHandler(),
-                                    PublicSuffixDomainFilter.decorate(
-                                            new BasicDomainHandler(), this.publicSuffixMatcher),
-                                    new BasicMaxAgeHandler(),
-                                    new BasicSecureHandler(),
-                                    new BasicExpiresHandler(RFC6265StrictSpec.DATE_PATTERNS));
+                                            new BasicPathHandler(),
+                                            PublicSuffixDomainFilter.decorate(new BasicDomainHandler(), this.publicSuffixMatcher),
+                                            new BasicMaxAgeHandler(),
+                                            new BasicSecureHandler(),
+                                            new BasicExpiresHandler(RFC6265StrictSpec.DATE_PATTERNS));
                             break;
                         case IE_MEDIUM_SECURITY:
-                            this.cookieSpec = new RFC6265LaxSpec(
-                                    new BasicPathHandler() {
-                                        @Override
-                                        public void validate(
-                                                final Cookie cookie,
-                                                final CookieOrigin origin) throws MalformedCookieException {
-                                            // No validation
-                                        }
-                                    },
-                                    PublicSuffixDomainFilter.decorate(
-                                            new BasicDomainHandler(), this.publicSuffixMatcher),
-                                    new BasicMaxAgeHandler(),
-                                    new BasicSecureHandler(),
-                                    new BasicExpiresHandler(RFC6265StrictSpec.DATE_PATTERNS));
+                            this.cookieSpec = new RFC6265LaxSpec(new BasicPathHandler(){
+
+                                @Override
+                                public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
+                                    // No validation
+                                }
+                            },
+                                            PublicSuffixDomainFilter.decorate(new BasicDomainHandler(), this.publicSuffixMatcher),
+                                            new BasicMaxAgeHandler(),
+                                            new BasicSecureHandler(),
+                                            new BasicExpiresHandler(RFC6265StrictSpec.DATE_PATTERNS));
                             break;
                         default:
                             this.cookieSpec = new RFC6265LaxSpec(
-                                    new BasicPathHandler(),
-                                    PublicSuffixDomainFilter.decorate(
-                                            new BasicDomainHandler(), this.publicSuffixMatcher),
-                                    new LaxMaxAgeHandler(),
-                                    new BasicSecureHandler(),
-                                    new LaxExpiresHandler());
+                                            new BasicPathHandler(),
+                                            PublicSuffixDomainFilter.decorate(new BasicDomainHandler(), this.publicSuffixMatcher),
+                                            new LaxMaxAgeHandler(),
+                                            new BasicSecureHandler(),
+                                            new LaxExpiresHandler());
                     }
                 }
             }

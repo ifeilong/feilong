@@ -35,34 +35,37 @@ import com.feilong.lib.org.apache.http.ProtocolException;
  *
  * @since 4.0
  */
-public class MalformedChallengeException extends ProtocolException {
+public class MalformedChallengeException extends ProtocolException{
 
     private static final long serialVersionUID = 814586927989932284L;
 
     /**
      * Creates a new MalformedChallengeException with a {@code null} detail message.
      */
-    public MalformedChallengeException() {
+    public MalformedChallengeException(){
         super();
     }
 
     /**
      * Creates a new MalformedChallengeException with the specified message.
      *
-     * @param message the exception detail message
+     * @param message
+     *            the exception detail message
      */
-    public MalformedChallengeException(final String message) {
+    public MalformedChallengeException(final String message){
         super(message);
     }
 
     /**
      * Creates a new MalformedChallengeException with the specified detail message and cause.
      *
-     * @param message the exception detail message
-     * @param cause the {@code Throwable} that caused this exception, or {@code null}
-     * if the cause is unavailable, unknown, or not a {@code Throwable}
+     * @param message
+     *            the exception detail message
+     * @param cause
+     *            the {@code Throwable} that caused this exception, or {@code null}
+     *            if the cause is unavailable, unknown, or not a {@code Throwable}
      */
-    public MalformedChallengeException(final String message, final Throwable cause) {
+    public MalformedChallengeException(final String message, final Throwable cause){
         super(message, cause);
     }
 }

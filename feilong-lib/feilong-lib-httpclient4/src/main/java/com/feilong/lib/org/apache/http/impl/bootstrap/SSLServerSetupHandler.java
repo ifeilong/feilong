@@ -38,7 +38,7 @@ import javax.net.ssl.SSLServerSocket;
  * @see javax.net.ssl.SSLSession
  * @since 4.4
  */
-public interface SSLServerSetupHandler {
+public interface SSLServerSetupHandler{
 
     void initialize(SSLServerSocket socket) throws SSLException;
 

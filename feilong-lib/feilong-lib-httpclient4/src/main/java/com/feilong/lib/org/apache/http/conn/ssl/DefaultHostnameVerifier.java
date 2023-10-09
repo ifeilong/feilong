@@ -136,8 +136,7 @@ public final class DefaultHostnameVerifier implements HostnameVerifier{
     }
 
     static void matchIPAddress(final String host,final List<SubjectName> subjectAlts) throws SSLException{
-        for (int i = 0; i < subjectAlts.size(); i++){
-            final SubjectName subjectAlt = subjectAlts.get(i);
+        for (final SubjectName subjectAlt : subjectAlts){
             if (subjectAlt.getType() == SubjectName.IP){
                 if (host.equals(subjectAlt.getValue())){
                     return;
@@ -150,8 +149,7 @@ public final class DefaultHostnameVerifier implements HostnameVerifier{
 
     static void matchIPv6Address(final String host,final List<SubjectName> subjectAlts) throws SSLException{
         final String normalisedHost = normaliseAddress(host);
-        for (int i = 0; i < subjectAlts.size(); i++){
-            final SubjectName subjectAlt = subjectAlts.get(i);
+        for (final SubjectName subjectAlt : subjectAlts){
             if (subjectAlt.getType() == SubjectName.IP){
                 final String normalizedSubjectAlt = normaliseAddress(subjectAlt.getValue());
                 if (normalisedHost.equals(normalizedSubjectAlt)){
@@ -166,8 +164,7 @@ public final class DefaultHostnameVerifier implements HostnameVerifier{
     static void matchDNSName(final String host,final List<SubjectName> subjectAlts,final PublicSuffixMatcher publicSuffixMatcher)
                     throws SSLException{
         final String normalizedHost = DnsUtils.normalize(host);
-        for (int i = 0; i < subjectAlts.size(); i++){
-            final SubjectName subjectAlt = subjectAlts.get(i);
+        for (final SubjectName subjectAlt : subjectAlts){
             if (subjectAlt.getType() == SubjectName.DNS){
                 final String normalizedSubjectAlt = DnsUtils.normalize(subjectAlt.getValue());
                 if (matchIdentityStrict(normalizedHost, normalizedSubjectAlt, publicSuffixMatcher)){
@@ -217,10 +214,7 @@ public final class DefaultHostnameVerifier implements HostnameVerifier{
         if (asteriskIdx != -1){
             final String prefix = identity.substring(0, asteriskIdx);
             final String suffix = identity.substring(asteriskIdx + 1);
-            if (!prefix.isEmpty() && !host.startsWith(prefix)){
-                return false;
-            }
-            if (!suffix.isEmpty() && !host.endsWith(suffix)){
+            if ((!prefix.isEmpty() && !host.startsWith(prefix)) || (!suffix.isEmpty() && !host.endsWith(suffix))){
                 return false;
             }
             // Additional sanity checks on content selected by wildcard can be done here
@@ -317,7 +311,7 @@ public final class DefaultHostnameVerifier implements HostnameVerifier{
             if (entries == null){
                 return Collections.emptyList();
             }
-            final List<SubjectName> result = new ArrayList<SubjectName>();
+            final List<SubjectName> result = new ArrayList<>();
             for (final List<?> entry : entries){
                 final Integer type = entry.size() >= 2 ? (Integer) entry.get(0) : null;
                 if (type != null){

@@ -33,7 +33,7 @@ package com.feilong.lib.org.apache.http.conn.ssl;
  *
  * @since 4.1
  */
-public interface TrustStrategy extends com.feilong.lib.org.apache.http.ssl.TrustStrategy {
+public interface TrustStrategy extends com.feilong.lib.org.apache.http.ssl.TrustStrategy{
 
     // Empty! Inherits from org.apache.http.ssl.TrustStrategy.
 

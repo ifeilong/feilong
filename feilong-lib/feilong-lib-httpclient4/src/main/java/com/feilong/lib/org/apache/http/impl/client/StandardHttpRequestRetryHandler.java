@@ -47,16 +47,16 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class StandardHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler {
+public class StandardHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{
 
     private final Map<String, Boolean> idempotentMethods;
 
     /**
      * Default constructor
      */
-    public StandardHttpRequestRetryHandler(final int retryCount, final boolean requestSentRetryEnabled) {
+    public StandardHttpRequestRetryHandler(final int retryCount, final boolean requestSentRetryEnabled){
         super(retryCount, requestSentRetryEnabled);
-        this.idempotentMethods = new ConcurrentHashMap<String, Boolean>();
+        this.idempotentMethods = new ConcurrentHashMap<>();
         this.idempotentMethods.put("GET", Boolean.TRUE);
         this.idempotentMethods.put("HEAD", Boolean.TRUE);
         this.idempotentMethods.put("PUT", Boolean.TRUE);
@@ -68,12 +68,12 @@ public class StandardHttpRequestRetryHandler extends DefaultHttpRequestRetryHand
     /**
      * Default constructor
      */
-    public StandardHttpRequestRetryHandler() {
+    public StandardHttpRequestRetryHandler(){
         this(3, false);
     }
 
     @Override
-    protected boolean handleAsIdempotent(final HttpRequest request) {
+    protected boolean handleAsIdempotent(final HttpRequest request){
         final String method = request.getRequestLine().getMethod().toUpperCase(Locale.ROOT);
         final Boolean b = this.idempotentMethods.get(method);
         return b != null && b.booleanValue();

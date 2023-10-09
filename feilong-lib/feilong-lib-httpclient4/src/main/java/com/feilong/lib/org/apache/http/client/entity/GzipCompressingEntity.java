@@ -71,37 +71,37 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class GzipCompressingEntity extends HttpEntityWrapper {
+public class GzipCompressingEntity extends HttpEntityWrapper{
 
     private static final String GZIP_CODEC = "gzip";
 
-    public GzipCompressingEntity(final HttpEntity entity) {
+    public GzipCompressingEntity(final HttpEntity entity){
         super(entity);
     }
 
     @Override
-    public Header getContentEncoding() {
+    public Header getContentEncoding(){
         return new BasicHeader(HTTP.CONTENT_ENCODING, GZIP_CODEC);
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return -1;
     }
 
     @Override
-    public boolean isChunked() {
+    public boolean isChunked(){
         // force content chunking
         return true;
     }
 
     @Override
-    public InputStream getContent() throws IOException {
+    public InputStream getContent() throws IOException{
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         Args.notNull(outStream, "Output stream");
         final GZIPOutputStream gzip = new GZIPOutputStream(outStream);
         wrappedEntity.writeTo(gzip);

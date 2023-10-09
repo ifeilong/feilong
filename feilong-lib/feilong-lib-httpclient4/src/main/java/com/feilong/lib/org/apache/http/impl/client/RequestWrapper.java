@@ -54,33 +54,35 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @deprecated (4.3) do not use.
  */
 @Deprecated
-public class RequestWrapper extends AbstractHttpMessage implements HttpUriRequest {
+public class RequestWrapper extends AbstractHttpMessage implements HttpUriRequest{
 
     private final HttpRequest original;
 
-    private URI uri;
-    private String method;
-    private ProtocolVersion version;
-    private int execCount;
+    private URI               uri;
 
-    public RequestWrapper(final HttpRequest request) throws ProtocolException {
+    private String            method;
+
+    private ProtocolVersion   version;
+
+    private int               execCount;
+
+    public RequestWrapper(final HttpRequest request) throws ProtocolException{
         super();
         Args.notNull(request, "HTTP request");
         this.original = request;
         setParams(request.getParams());
         setHeaders(request.getAllHeaders());
         // Make a copy of the original URI
-        if (request instanceof HttpUriRequest) {
+        if (request instanceof HttpUriRequest){
             this.uri = ((HttpUriRequest) request).getURI();
             this.method = ((HttpUriRequest) request).getMethod();
             this.version = null;
-        } else {
+        }else{
             final RequestLine requestLine = request.getRequestLine();
-            try {
+            try{
                 this.uri = new URI(requestLine.getUri());
-            } catch (final URISyntaxException ex) {
-                throw new ProtocolException("Invalid request URI: "
-                        + requestLine.getUri(), ex);
+            }catch (final URISyntaxException ex){
+                throw new ProtocolException("Invalid request URI: " + requestLine.getUri(), ex);
             }
             this.method = requestLine.getMethod();
             this.version = request.getProtocolVersion();
@@ -88,80 +90,79 @@ public class RequestWrapper extends AbstractHttpMessage implements HttpUriReques
         this.execCount = 0;
     }
 
-    public void resetHeaders() {
+    public void resetHeaders(){
         // Make a copy of original headers
         this.headergroup.clear();
         setHeaders(this.original.getAllHeaders());
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return this.method;
     }
 
-    public void setMethod(final String method) {
+    public void setMethod(final String method){
         Args.notNull(method, "Method name");
         this.method = method;
     }
 
     @Override
-    public ProtocolVersion getProtocolVersion() {
-        if (this.version == null) {
+    public ProtocolVersion getProtocolVersion(){
+        if (this.version == null){
             this.version = HttpProtocolParams.getVersion(getParams());
         }
         return this.version;
     }
 
-    public void setProtocolVersion(final ProtocolVersion version) {
+    public void setProtocolVersion(final ProtocolVersion version){
         this.version = version;
     }
 
-
     @Override
-    public URI getURI() {
+    public URI getURI(){
         return this.uri;
     }
 
-    public void setURI(final URI uri) {
+    public void setURI(final URI uri){
         this.uri = uri;
     }
 
     @Override
-    public RequestLine getRequestLine() {
+    public RequestLine getRequestLine(){
         final ProtocolVersion ver = getProtocolVersion();
         String uritext = null;
-        if (uri != null) {
+        if (uri != null){
             uritext = uri.toASCIIString();
         }
-        if (uritext == null || uritext.isEmpty()) {
+        if (uritext == null || uritext.isEmpty()){
             uritext = "/";
         }
         return new BasicRequestLine(getMethod(), uritext, ver);
     }
 
     @Override
-    public void abort() throws UnsupportedOperationException {
+    public void abort() throws UnsupportedOperationException{
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean isAborted() {
+    public boolean isAborted(){
         return false;
     }
 
-    public HttpRequest getOriginal() {
+    public HttpRequest getOriginal(){
         return this.original;
     }
 
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return true;
     }
 
-    public int getExecCount() {
+    public int getExecCount(){
         return this.execCount;
     }
 
-    public void incrementExecCount() {
+    public void incrementExecCount(){
         this.execCount++;
     }
 

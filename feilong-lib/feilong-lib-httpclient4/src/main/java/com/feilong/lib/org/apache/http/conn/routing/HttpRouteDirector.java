@@ -34,41 +34,42 @@ package com.feilong.lib.org.apache.http.conn.routing;
  *
  * @since 4.0
  */
-public interface HttpRouteDirector {
+public interface HttpRouteDirector{
 
     /** Indicates that the route can not be established at all. */
-    int UNREACHABLE = -1;
+    int UNREACHABLE    = -1;
 
     /** Indicates that the route is complete. */
-    int COMPLETE = 0;
+    int COMPLETE       = 0;
 
     /** Step: open connection to target. */
     int CONNECT_TARGET = 1;
 
     /** Step: open connection to proxy. */
-    int CONNECT_PROXY = 2;
+    int CONNECT_PROXY  = 2;
 
     /** Step: tunnel through proxy to target. */
-    int TUNNEL_TARGET = 3;
+    int TUNNEL_TARGET  = 3;
 
     /** Step: tunnel through proxy to other proxy. */
-    int TUNNEL_PROXY = 4;
+    int TUNNEL_PROXY   = 4;
 
     /** Step: layer protocol (over tunnel). */
     int LAYER_PROTOCOL = 5;
 
-
     /**
      * Provides the next step.
      *
-     * @param plan      the planned route
-     * @param fact      the currently established route, or
-     *                  {@code null} if nothing is established
+     * @param plan
+     *            the planned route
+     * @param fact
+     *            the currently established route, or
+     *            {@code null} if nothing is established
      *
-     * @return  one of the constants defined in this interface, indicating
-     *          either the next step to perform, or success, or failure.
-     *          0 is for success, a negative value for failure.
+     * @return one of the constants defined in this interface, indicating
+     *         either the next step to perform, or success, or failure.
+     *         0 is for success, a negative value for failure.
      */
-    int nextStep(RouteInfo plan, RouteInfo fact);
+    int nextStep(RouteInfo plan,RouteInfo fact);
 
 }

@@ -34,23 +34,24 @@ package com.feilong.lib.org.apache.http.conn;
  *
  * @since 4.0
  */
-public class ConnectionPoolTimeoutException extends ConnectTimeoutException {
+public class ConnectionPoolTimeoutException extends ConnectTimeoutException{
 
     private static final long serialVersionUID = -7898874842020245128L;
 
     /**
      * Creates a ConnectTimeoutException with a {@code null} detail message.
      */
-    public ConnectionPoolTimeoutException() {
+    public ConnectionPoolTimeoutException(){
         super();
     }
 
     /**
      * Creates a ConnectTimeoutException with the specified detail message.
      *
-     * @param message The exception detail message
+     * @param message
+     *            The exception detail message
      */
-    public ConnectionPoolTimeoutException(final String message) {
+    public ConnectionPoolTimeoutException(final String message){
         super(message);
     }
 

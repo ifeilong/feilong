@@ -40,7 +40,7 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.1
  */
-public class ByteArrayBody extends AbstractContentBody {
+public class ByteArrayBody extends AbstractContentBody{
 
     /**
      * The contents of the file contained in this part.
@@ -55,22 +55,25 @@ public class ByteArrayBody extends AbstractContentBody {
     /**
      * Creates a new ByteArrayBody.
      *
-     * @param data The contents of the file contained in this part.
-     * @param mimeType The MIME type of the file contained in this part.
-     * @param filename The name of the file contained in this part.
+     * @param data
+     *            The contents of the file contained in this part.
+     * @param mimeType
+     *            The MIME type of the file contained in this part.
+     * @param filename
+     *            The name of the file contained in this part.
      *
      * @deprecated (4.3) use {@link ByteArrayBody#ByteArrayBody(byte[], ContentType, String)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public ByteArrayBody(final byte[] data, final String mimeType, final String filename) {
+    public ByteArrayBody(final byte[] data, final String mimeType, final String filename){
         this(data, ContentType.create(mimeType), filename);
     }
 
     /**
      * @since 4.3
      */
-    public ByteArrayBody(final byte[] data, final ContentType contentType, final String filename) {
+    public ByteArrayBody(final byte[] data, final ContentType contentType, final String filename){
         super(contentType);
         Args.notNull(data, "byte[]");
         this.data = data;
@@ -80,35 +83,37 @@ public class ByteArrayBody extends AbstractContentBody {
     /**
      * Creates a new ByteArrayBody.
      *
-     * @param data The contents of the file contained in this part.
-     * @param filename The name of the file contained in this part.
+     * @param data
+     *            The contents of the file contained in this part.
+     * @param filename
+     *            The name of the file contained in this part.
      */
-    public ByteArrayBody(final byte[] data, final String filename) {
+    public ByteArrayBody(final byte[] data, final String filename){
         this(data, "application/octet-stream", filename);
     }
 
     @Override
-    public String getFilename() {
+    public String getFilename(){
         return filename;
     }
 
     @Override
-    public void writeTo(final OutputStream out) throws IOException {
+    public void writeTo(final OutputStream out) throws IOException{
         out.write(data);
     }
 
     @Override
-    public String getCharset() {
+    public String getCharset(){
         return null;
     }
 
     @Override
-    public String getTransferEncoding() {
+    public String getTransferEncoding(){
         return MIME.ENC_BINARY;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return data.length;
     }
 

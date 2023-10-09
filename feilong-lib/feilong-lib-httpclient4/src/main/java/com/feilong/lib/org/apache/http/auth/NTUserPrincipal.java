@@ -41,51 +41,51 @@ import com.feilong.lib.org.apache.http.util.LangUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NTUserPrincipal implements Principal, Serializable {
+public class NTUserPrincipal implements Principal,Serializable{
 
     private static final long serialVersionUID = -6870169797924406894L;
 
-    private final String username;
-    private final String domain;
-    private final String ntname;
+    private final String      username;
 
-    public NTUserPrincipal(
-            final String domain,
-            final String username) {
+    private final String      domain;
+
+    private final String      ntname;
+
+    public NTUserPrincipal(final String domain, final String username){
         super();
         Args.notNull(username, "User name");
         this.username = username;
-        if (domain != null) {
+        if (domain != null){
             this.domain = domain.toUpperCase(Locale.ROOT);
-        } else {
+        }else{
             this.domain = null;
         }
-        if (this.domain != null && !this.domain.isEmpty()) {
+        if (this.domain != null && !this.domain.isEmpty()){
             final StringBuilder buffer = new StringBuilder();
             buffer.append(this.domain);
             buffer.append('\\');
             buffer.append(this.username);
             this.ntname = buffer.toString();
-        } else {
+        }else{
             this.ntname = this.username;
         }
     }
 
     @Override
-    public String getName() {
+    public String getName(){
         return this.ntname;
     }
 
-    public String getDomain() {
+    public String getDomain(){
         return this.domain;
     }
 
-    public String getUsername() {
+    public String getUsername(){
         return this.username;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int hash = LangUtils.HASH_SEED;
         hash = LangUtils.hashCode(hash, this.username);
         hash = LangUtils.hashCode(hash, this.domain);
@@ -93,14 +93,13 @@ public class NTUserPrincipal implements Principal, Serializable {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object o){
+        if (this == o){
             return true;
         }
-        if (o instanceof NTUserPrincipal) {
+        if (o instanceof NTUserPrincipal){
             final NTUserPrincipal that = (NTUserPrincipal) o;
-            if (LangUtils.equals(this.username, that.username)
-                    && LangUtils.equals(this.domain, that.domain)) {
+            if (LangUtils.equals(this.username, that.username) && LangUtils.equals(this.domain, that.domain)){
                 return true;
             }
         }
@@ -108,7 +107,7 @@ public class NTUserPrincipal implements Principal, Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return this.ntname;
     }
 

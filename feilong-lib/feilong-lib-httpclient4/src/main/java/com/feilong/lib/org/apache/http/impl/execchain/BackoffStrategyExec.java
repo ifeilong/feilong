@@ -46,16 +46,16 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class BackoffStrategyExec implements ClientExecChain {
+public class BackoffStrategyExec implements ClientExecChain{
 
-    private final ClientExecChain requestExecutor;
+    private final ClientExecChain           requestExecutor;
+
     private final ConnectionBackoffStrategy connectionBackoffStrategy;
-    private final BackoffManager backoffManager;
 
-    public BackoffStrategyExec(
-            final ClientExecChain requestExecutor,
-            final ConnectionBackoffStrategy connectionBackoffStrategy,
-            final BackoffManager backoffManager) {
+    private final BackoffManager            backoffManager;
+
+    public BackoffStrategyExec(final ClientExecChain requestExecutor, final ConnectionBackoffStrategy connectionBackoffStrategy,
+                    final BackoffManager backoffManager){
         super();
         Args.notNull(requestExecutor, "HTTP client request executor");
         Args.notNull(connectionBackoffStrategy, "Connection backoff strategy");
@@ -67,37 +67,37 @@ public class BackoffStrategyExec implements ClientExecChain {
 
     @Override
     public CloseableHttpResponse execute(
-            final HttpRoute route,
-            final HttpRequestWrapper request,
-            final HttpClientContext context,
-            final HttpExecutionAware execAware) throws IOException, HttpException {
+                    final HttpRoute route,
+                    final HttpRequestWrapper request,
+                    final HttpClientContext context,
+                    final HttpExecutionAware execAware) throws IOException,HttpException{
         Args.notNull(route, "HTTP route");
         Args.notNull(request, "HTTP request");
         Args.notNull(context, "HTTP context");
         CloseableHttpResponse out = null;
-        try {
+        try{
             out = this.requestExecutor.execute(route, request, context, execAware);
-        } catch (final Exception ex) {
-            if (out != null) {
+        }catch (final Exception ex){
+            if (out != null){
                 out.close();
             }
-            if (this.connectionBackoffStrategy.shouldBackoff(ex)) {
+            if (this.connectionBackoffStrategy.shouldBackoff(ex)){
                 this.backoffManager.backOff(route);
             }
-            if (ex instanceof RuntimeException) {
+            if (ex instanceof RuntimeException){
                 throw (RuntimeException) ex;
             }
-            if (ex instanceof HttpException) {
+            if (ex instanceof HttpException){
                 throw (HttpException) ex;
             }
-            if (ex instanceof IOException) {
+            if (ex instanceof IOException){
                 throw (IOException) ex;
             }
             throw new UndeclaredThrowableException(ex);
         }
-        if (this.connectionBackoffStrategy.shouldBackoff(out)) {
+        if (this.connectionBackoffStrategy.shouldBackoff(out)){
             this.backoffManager.backOff(route);
-        } else {
+        }else{
             this.backoffManager.probe(route);
         }
         return out;

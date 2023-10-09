@@ -36,9 +36,9 @@ import com.feilong.lib.org.apache.http.auth.AuthScheme;
  *
  * @since 4.1
  */
-public interface AuthCache {
+public interface AuthCache{
 
-    void put(HttpHost host, AuthScheme authScheme);
+    void put(HttpHost host,AuthScheme authScheme);
 
     AuthScheme get(HttpHost host);
 

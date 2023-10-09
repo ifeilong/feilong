@@ -43,17 +43,12 @@ import com.feilong.lib.org.apache.http.client.methods.HttpPost;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class LaxRedirectStrategy extends DefaultRedirectStrategy {
+public class LaxRedirectStrategy extends DefaultRedirectStrategy{
 
     public static final LaxRedirectStrategy INSTANCE = new LaxRedirectStrategy();
 
-    public LaxRedirectStrategy() {
-        super(new String[] {
-            HttpGet.METHOD_NAME,
-            HttpPost.METHOD_NAME,
-            HttpHead.METHOD_NAME,
-            HttpDelete.METHOD_NAME
-        });
+    public LaxRedirectStrategy(){
+        super(new String[] { HttpGet.METHOD_NAME, HttpPost.METHOD_NAME, HttpHead.METHOD_NAME, HttpDelete.METHOD_NAME });
     }
 
 }

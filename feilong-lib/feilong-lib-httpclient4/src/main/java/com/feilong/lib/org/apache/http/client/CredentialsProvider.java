@@ -39,24 +39,27 @@ import com.feilong.lib.org.apache.http.auth.Credentials;
  *
  * @since 4.0
  */
-public interface CredentialsProvider {
+public interface CredentialsProvider{
 
     /**
      * Sets the {@link Credentials credentials} for the given authentication
      * scope. Any previous credentials for the given scope will be overwritten.
      *
-     * @param authscope the {@link AuthScope authentication scope}
-     * @param credentials the authentication {@link Credentials credentials}
-     * for the given scope.
+     * @param authscope
+     *            the {@link AuthScope authentication scope}
+     * @param credentials
+     *            the authentication {@link Credentials credentials}
+     *            for the given scope.
      *
      * @see #getCredentials(AuthScope)
      */
-    void setCredentials(AuthScope authscope, Credentials credentials);
+    void setCredentials(AuthScope authscope,Credentials credentials);
 
     /**
      * Get the {@link Credentials credentials} for the given authentication scope.
      *
-     * @param authscope the {@link AuthScope authentication scope}
+     * @param authscope
+     *            the {@link AuthScope authentication scope}
      * @return the credentials
      *
      * @see #setCredentials(AuthScope, Credentials)

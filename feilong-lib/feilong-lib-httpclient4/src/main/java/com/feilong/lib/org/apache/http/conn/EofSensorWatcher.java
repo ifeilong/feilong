@@ -35,41 +35,41 @@ import java.io.InputStream;
  *
  * @since 4.0
  */
-public interface EofSensorWatcher {
+public interface EofSensorWatcher{
 
     /**
      * Indicates that EOF is detected.
      *
-     * @param wrapped   the underlying stream which has reached EOF
+     * @param wrapped
+     *            the underlying stream which has reached EOF
      *
-     * @return  {@code true} if {@code wrapped} should be closed,
-     *          {@code false} if it should be left alone
+     * @return {@code true} if {@code wrapped} should be closed,
+     *         {@code false} if it should be left alone
      *
      * @throws IOException
-     *         in case of an IO problem, for example if the watcher itself
-     *         closes the underlying stream. The caller will leave the
-     *         wrapped stream alone, as if {@code false} was returned.
+     *             in case of an IO problem, for example if the watcher itself
+     *             closes the underlying stream. The caller will leave the
+     *             wrapped stream alone, as if {@code false} was returned.
      */
-    boolean eofDetected(InputStream wrapped)
-        throws IOException;
+    boolean eofDetected(InputStream wrapped) throws IOException;
 
     /**
      * Indicates that the {@link EofSensorInputStream stream} is closed.
      * This method will be called only if EOF was <i>not</i> detected
      * before closing. Otherwise, {@link #eofDetected eofDetected} is called.
      *
-     * @param wrapped   the underlying stream which has not reached EOF
+     * @param wrapped
+     *            the underlying stream which has not reached EOF
      *
-     * @return  {@code true} if {@code wrapped} should be closed,
-     *          {@code false} if it should be left alone
+     * @return {@code true} if {@code wrapped} should be closed,
+     *         {@code false} if it should be left alone
      *
      * @throws IOException
-     *         in case of an IO problem, for example if the watcher itself
-     *         closes the underlying stream. The caller will leave the
-     *         wrapped stream alone, as if {@code false} was returned.
+     *             in case of an IO problem, for example if the watcher itself
+     *             closes the underlying stream. The caller will leave the
+     *             wrapped stream alone, as if {@code false} was returned.
      */
-    boolean streamClosed(InputStream wrapped)
-        throws IOException;
+    boolean streamClosed(InputStream wrapped) throws IOException;
 
     /**
      * Indicates that the {@link EofSensorInputStream stream} is aborted.
@@ -80,17 +80,17 @@ public interface EofSensorWatcher {
      * IOException to be thrown to make sure the input stream gets shut down.
      * </p>
      *
-     * @param wrapped   the underlying stream which has not reached EOF
+     * @param wrapped
+     *            the underlying stream which has not reached EOF
      *
-     * @return  {@code true} if {@code wrapped} should be closed,
-     *          {@code false} if it should be left alone
+     * @return {@code true} if {@code wrapped} should be closed,
+     *         {@code false} if it should be left alone
      *
      * @throws IOException
-     *         in case of an IO problem, for example if the watcher itself
-     *         closes the underlying stream. The caller will leave the
-     *         wrapped stream alone, as if {@code false} was returned.
+     *             in case of an IO problem, for example if the watcher itself
+     *             closes the underlying stream. The caller will leave the
+     *             wrapped stream alone, as if {@code false} was returned.
      */
-    boolean streamAbort(InputStream wrapped)
-        throws IOException;
+    boolean streamAbort(InputStream wrapped) throws IOException;
 
 }

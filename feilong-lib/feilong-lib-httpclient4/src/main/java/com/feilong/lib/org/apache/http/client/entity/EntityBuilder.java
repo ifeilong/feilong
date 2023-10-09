@@ -51,39 +51,48 @@ import com.feilong.lib.org.apache.http.entity.StringEntity;
  * of the following methods only the last one will have effect:
  * </p>
  * <ul>
- *   <li>{@link #setText(String)}</li>
- *   <li>{@link #setBinary(byte[])}</li>
- *   <li>{@link #setStream(java.io.InputStream)}</li>
- *   <li>{@link #setSerializable(java.io.Serializable)}</li>
- *   <li>{@link #setParameters(java.util.List)}</li>
- *   <li>{@link #setParameters(com.feilong.lib.org.apache.http.NameValuePair...)}</li>
- *   <li>{@link #setFile(java.io.File)}</li>
+ * <li>{@link #setText(String)}</li>
+ * <li>{@link #setBinary(byte[])}</li>
+ * <li>{@link #setStream(java.io.InputStream)}</li>
+ * <li>{@link #setSerializable(java.io.Serializable)}</li>
+ * <li>{@link #setParameters(java.util.List)}</li>
+ * <li>{@link #setParameters(com.feilong.lib.org.apache.http.NameValuePair...)}</li>
+ * <li>{@link #setFile(java.io.File)}</li>
  * </ul>
  *
  * @since 4.3
  */
-public class EntityBuilder {
+public class EntityBuilder{
 
-    private String text;
-    private byte[] binary;
-    private InputStream stream;
+    private String              text;
+
+    private byte[]              binary;
+
+    private InputStream         stream;
+
     private List<NameValuePair> parameters;
-    private Serializable serializable;
-    private File file;
-    private ContentType contentType;
-    private String contentEncoding;
-    private boolean chunked;
-    private boolean gzipCompress;
 
-    EntityBuilder() {
+    private Serializable        serializable;
+
+    private File                file;
+
+    private ContentType         contentType;
+
+    private String              contentEncoding;
+
+    private boolean             chunked;
+
+    private boolean             gzipCompress;
+
+    EntityBuilder(){
         super();
     }
 
-    public static EntityBuilder create() {
+    public static EntityBuilder create(){
         return new EntityBuilder();
     }
 
-    private void clearContent() {
+    private void clearContent(){
         this.text = null;
         this.binary = null;
         this.stream = null;
@@ -95,7 +104,7 @@ public class EntityBuilder {
     /**
      * Returns entity content as a string if set using {@link #setText(String)} method.
      */
-    public String getText() {
+    public String getText(){
         return text;
     }
 
@@ -110,7 +119,7 @@ public class EntityBuilder {
      * <li>{@link #setFile(java.io.File)}</li>
      * </ul>
      */
-    public EntityBuilder setText(final String text) {
+    public EntityBuilder setText(final String text){
         clearContent();
         this.text = text;
         return this;
@@ -120,7 +129,7 @@ public class EntityBuilder {
      * Returns entity content as a byte array if set using
      * {@link #setBinary(byte[])} method.
      */
-    public byte[] getBinary() {
+    public byte[] getBinary(){
         return binary;
     }
 
@@ -136,7 +145,7 @@ public class EntityBuilder {
      * <li>{@link #setFile(java.io.File)}</li>
      * </ul>
      */
-    public EntityBuilder setBinary(final byte[] binary) {
+    public EntityBuilder setBinary(final byte[] binary){
         clearContent();
         this.binary = binary;
         return this;
@@ -146,7 +155,7 @@ public class EntityBuilder {
      * Returns entity content as a {@link InputStream} if set using
      * {@link #setStream(java.io.InputStream)} method.
      */
-    public InputStream getStream() {
+    public InputStream getStream(){
         return stream;
     }
 
@@ -162,7 +171,7 @@ public class EntityBuilder {
      * <li>{@link #setFile(java.io.File)}</li>
      * </ul>
      */
-    public EntityBuilder setStream(final InputStream stream) {
+    public EntityBuilder setStream(final InputStream stream){
         clearContent();
         this.stream = stream;
         return this;
@@ -173,7 +182,7 @@ public class EntityBuilder {
      * {@link #setParameters(java.util.List)} or
      * {@link #setParameters(com.feilong.lib.org.apache.http.NameValuePair...)} methods.
      */
-    public List<NameValuePair> getParameters() {
+    public List<NameValuePair> getParameters(){
         return parameters;
     }
 
@@ -188,7 +197,7 @@ public class EntityBuilder {
      * <li>{@link #setFile(java.io.File)}</li>
      * </ul>
      */
-    public EntityBuilder setParameters(final List<NameValuePair> parameters) {
+    public EntityBuilder setParameters(final List<NameValuePair> parameters){
         clearContent();
         this.parameters = parameters;
         return this;
@@ -204,7 +213,7 @@ public class EntityBuilder {
      * <li>{@link #setFile(java.io.File)}</li>
      * </ul>
      */
-    public EntityBuilder setParameters(final NameValuePair... parameters) {
+    public EntityBuilder setParameters(final NameValuePair...parameters){
         return setParameters(Arrays.asList(parameters));
     }
 
@@ -212,7 +221,7 @@ public class EntityBuilder {
      * Returns entity content as a {@link Serializable} if set using
      * {@link #setSerializable(java.io.Serializable)} method.
      */
-    public Serializable getSerializable() {
+    public Serializable getSerializable(){
         return serializable;
     }
 
@@ -227,7 +236,7 @@ public class EntityBuilder {
      * <li>{@link #setFile(java.io.File)}</li>
      * </ul>
      */
-    public EntityBuilder setSerializable(final Serializable serializable) {
+    public EntityBuilder setSerializable(final Serializable serializable){
         clearContent();
         this.serializable = serializable;
         return this;
@@ -237,7 +246,7 @@ public class EntityBuilder {
      * Returns entity content as a {@link File} if set using
      * {@link #setFile(java.io.File)} method.
      */
-    public File getFile() {
+    public File getFile(){
         return file;
     }
 
@@ -252,7 +261,7 @@ public class EntityBuilder {
      * <li>{@link #setSerializable(java.io.Serializable)}</li>
      * </ul>
      */
-    public EntityBuilder setFile(final File file) {
+    public EntityBuilder setFile(final File file){
         clearContent();
         this.file = file;
         return this;
@@ -261,14 +270,14 @@ public class EntityBuilder {
     /**
      * Returns {@link ContentType} of the entity, if set.
      */
-    public ContentType getContentType() {
+    public ContentType getContentType(){
         return contentType;
     }
 
     /**
      * Sets {@link ContentType} of the entity.
      */
-    public EntityBuilder setContentType(final ContentType contentType) {
+    public EntityBuilder setContentType(final ContentType contentType){
         this.contentType = contentType;
         return this;
     }
@@ -276,14 +285,14 @@ public class EntityBuilder {
     /**
      * Returns content encoding of the entity, if set.
      */
-    public String getContentEncoding() {
+    public String getContentEncoding(){
         return contentEncoding;
     }
 
     /**
      * Sets content encoding of the entity.
      */
-    public EntityBuilder setContentEncoding(final String contentEncoding) {
+    public EntityBuilder setContentEncoding(final String contentEncoding){
         this.contentEncoding = contentEncoding;
         return this;
     }
@@ -291,14 +300,14 @@ public class EntityBuilder {
     /**
      * Returns {@code true} if entity is to be chunk coded, {@code false} otherwise.
      */
-    public boolean isChunked() {
+    public boolean isChunked(){
         return chunked;
     }
 
     /**
      * Makes entity chunk coded.
      */
-    public EntityBuilder chunked() {
+    public EntityBuilder chunked(){
         this.chunked = true;
         return this;
     }
@@ -306,50 +315,49 @@ public class EntityBuilder {
     /**
      * Returns {@code true} if entity is to be GZIP compressed, {@code false} otherwise.
      */
-    public boolean isGzipCompress() {
+    public boolean isGzipCompress(){
         return gzipCompress;
     }
 
     /**
      * Makes entity GZIP compressed.
      */
-    public EntityBuilder gzipCompress() {
+    public EntityBuilder gzipCompress(){
         this.gzipCompress = true;
         return this;
     }
 
-    private ContentType getContentOrDefault(final ContentType def) {
+    private ContentType getContentOrDefault(final ContentType def){
         return this.contentType != null ? this.contentType : def;
     }
 
     /**
      * Creates new instance of {@link HttpEntity} based on the current state.
      */
-    public HttpEntity build() {
+    public HttpEntity build(){
         final AbstractHttpEntity e;
-        if (this.text != null) {
+        if (this.text != null){
             e = new StringEntity(this.text, getContentOrDefault(ContentType.DEFAULT_TEXT));
-        } else if (this.binary != null) {
+        }else if (this.binary != null){
             e = new ByteArrayEntity(this.binary, getContentOrDefault(ContentType.DEFAULT_BINARY));
-        } else if (this.stream != null) {
+        }else if (this.stream != null){
             e = new InputStreamEntity(this.stream, -1, getContentOrDefault(ContentType.DEFAULT_BINARY));
-        } else if (this.parameters != null) {
-            e = new UrlEncodedFormEntity(this.parameters,
-                    this.contentType != null ? this.contentType.getCharset() : null);
-        } else if (this.serializable != null) {
+        }else if (this.parameters != null){
+            e = new UrlEncodedFormEntity(this.parameters, this.contentType != null ? this.contentType.getCharset() : null);
+        }else if (this.serializable != null){
             e = new SerializableEntity(this.serializable);
             e.setContentType(ContentType.DEFAULT_BINARY.toString());
-        } else if (this.file != null) {
+        }else if (this.file != null){
             e = new FileEntity(this.file, getContentOrDefault(ContentType.DEFAULT_BINARY));
-        } else {
+        }else{
             e = new BasicHttpEntity();
         }
-        if (e.getContentType() != null && this.contentType != null) {
+        if (e.getContentType() != null && this.contentType != null){
             e.setContentType(this.contentType.toString());
         }
         e.setContentEncoding(this.contentEncoding);
         e.setChunked(this.chunked);
-        if (this.gzipCompress) {
+        if (this.gzipCompress){
             return new GzipCompressingEntity(e);
         }
         return e;

@@ -49,31 +49,31 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public abstract class CookieSpecBase extends AbstractCookieSpec {
+public abstract class CookieSpecBase extends AbstractCookieSpec{
 
-    public CookieSpecBase() {
+    public CookieSpecBase(){
         super();
     }
 
     /**
      * @since 4.4
      */
-    protected CookieSpecBase(final HashMap<String, CookieAttributeHandler> map) {
+    protected CookieSpecBase(final HashMap<String, CookieAttributeHandler> map){
         super(map);
     }
 
     /**
      * @since 4.4
      */
-    protected CookieSpecBase(final CommonCookieAttributeHandler... handlers) {
+    protected CookieSpecBase(final CommonCookieAttributeHandler...handlers){
         super(handlers);
     }
 
-    protected static String getDefaultPath(final CookieOrigin origin) {
+    protected static String getDefaultPath(final CookieOrigin origin){
         String defaultPath = origin.getPath();
         int lastSlashIndex = defaultPath.lastIndexOf('/');
-        if (lastSlashIndex >= 0) {
-            if (lastSlashIndex == 0) {
+        if (lastSlashIndex >= 0){
+            if (lastSlashIndex == 0){
                 //Do not remove the very first slash
                 lastSlashIndex = 1;
             }
@@ -82,17 +82,16 @@ public abstract class CookieSpecBase extends AbstractCookieSpec {
         return defaultPath;
     }
 
-    protected static String getDefaultDomain(final CookieOrigin origin) {
+    protected static String getDefaultDomain(final CookieOrigin origin){
         return origin.getHost();
     }
 
-    protected List<Cookie> parse(final HeaderElement[] elems, final CookieOrigin origin)
-                throws MalformedCookieException {
-        final List<Cookie> cookies = new ArrayList<Cookie>(elems.length);
-        for (final HeaderElement headerelement : elems) {
+    protected List<Cookie> parse(final HeaderElement[] elems,final CookieOrigin origin) throws MalformedCookieException{
+        final List<Cookie> cookies = new ArrayList<>(elems.length);
+        for (final HeaderElement headerelement : elems){
             final String name = headerelement.getName();
             final String value = headerelement.getValue();
-            if (name == null || name.isEmpty()) {
+            if (name == null || name.isEmpty()){
                 continue;
             }
 
@@ -102,14 +101,14 @@ public abstract class CookieSpecBase extends AbstractCookieSpec {
 
             // cycle through the parameters
             final NameValuePair[] attribs = headerelement.getParameters();
-            for (int j = attribs.length - 1; j >= 0; j--) {
+            for (int j = attribs.length - 1; j >= 0; j--){
                 final NameValuePair attrib = attribs[j];
                 final String s = attrib.getName().toLowerCase(Locale.ROOT);
 
                 cookie.setAttribute(s, attrib.getValue());
 
                 final CookieAttributeHandler handler = findAttribHandler(s);
-                if (handler != null) {
+                if (handler != null){
                     handler.parse(cookie, attrib.getValue());
                 }
             }
@@ -119,21 +118,20 @@ public abstract class CookieSpecBase extends AbstractCookieSpec {
     }
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
-        for (final CookieAttributeHandler handler: getAttribHandlers()) {
+        for (final CookieAttributeHandler handler : getAttribHandlers()){
             handler.validate(cookie, origin);
         }
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
-        for (final CookieAttributeHandler handler: getAttribHandlers()) {
-            if (!handler.match(cookie, origin)) {
+        for (final CookieAttributeHandler handler : getAttribHandlers()){
+            if (!handler.match(cookie, origin)){
                 return false;
             }
         }

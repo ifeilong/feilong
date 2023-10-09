@@ -38,7 +38,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * or populate the outgoing message with one specific header or a group of
  * related headers.
  * <p>
- *  Protocol Interceptors can also manipulate content entities enclosed with messages.
+ * Protocol Interceptors can also manipulate content entities enclosed with messages.
  * Usually this is accomplished by using the 'Decorator' pattern where a wrapper
  * entity class is used to decorate the original entity.
  * <p>
@@ -48,7 +48,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.0
  */
-public interface HttpRequestInterceptor {
+public interface HttpRequestInterceptor{
 
     /**
      * Processes a request.
@@ -56,13 +56,16 @@ public interface HttpRequestInterceptor {
      * sent to the server. On the server side, this step is performed
      * on incoming messages before the message body is evaluated.
      *
-     * @param request   the request to preprocess
-     * @param context   the context for the request
+     * @param request
+     *            the request to preprocess
+     * @param context
+     *            the context for the request
      *
-     * @throws HttpException in case of an HTTP protocol violation
-     * @throws IOException in case of an I/O error
+     * @throws HttpException
+     *             in case of an HTTP protocol violation
+     * @throws IOException
+     *             in case of an I/O error
      */
-    void process(HttpRequest request, HttpContext context)
-        throws HttpException, IOException;
+    void process(HttpRequest request,HttpContext context) throws HttpException,IOException;
 
 }

@@ -40,17 +40,17 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NoopHostnameVerifier implements HostnameVerifier {
+public class NoopHostnameVerifier implements HostnameVerifier{
 
     public static final NoopHostnameVerifier INSTANCE = new NoopHostnameVerifier();
 
     @Override
-    public boolean verify(final String s, final SSLSession sslSession) {
+    public boolean verify(final String s,final SSLSession sslSession){
         return true;
     }
 
     @Override
-    public final String toString() {
+    public final String toString(){
         return "NO_OP";
     }
 

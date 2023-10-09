@@ -40,23 +40,23 @@ import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
  * @deprecated (4.3) replaced by {@link HttpClientConnectionManager}.
  */
 @Deprecated
-public interface HttpRoutedConnection extends HttpInetConnection {
+public interface HttpRoutedConnection extends HttpInetConnection{
 
     /**
      * Indicates whether this connection is secure.
      * The return value is well-defined only while the connection is open.
      * It may change even while the connection is open.
      *
-     * @return  {@code true} if this connection is secure,
-     *          {@code false} otherwise
+     * @return {@code true} if this connection is secure,
+     *         {@code false} otherwise
      */
     boolean isSecure();
 
     /**
      * Obtains the current route of this connection.
      *
-     * @return  the route established so far, or
-     *          {@code null} if not connected
+     * @return the route established so far, or
+     *         {@code null} if not connected
      */
     HttpRoute getRoute();
 
@@ -74,8 +74,8 @@ public interface HttpRoutedConnection extends HttpInetConnection {
      * for example depending on the chosen cipher suite.
      * </p>
      *
-     * @return  the underlying SSL session if available,
-     *          {@code null} otherwise
+     * @return the underlying SSL session if available,
+     *         {@code null} otherwise
      */
     SSLSession getSSLSession();
 

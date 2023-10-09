@@ -73,75 +73,84 @@ import com.feilong.lib.org.apache.http.util.NetUtils;
  *
  * @since 4.0
  */
-public class BHttpConnectionBase implements HttpInetConnection {
+public class BHttpConnectionBase implements HttpInetConnection{
 
-    private final SessionInputBufferImpl inBuffer;
-    private final SessionOutputBufferImpl outbuffer;
-    private final MessageConstraints messageConstraints;
+    private final SessionInputBufferImpl    inBuffer;
+
+    private final SessionOutputBufferImpl   outbuffer;
+
+    private final MessageConstraints        messageConstraints;
+
     private final HttpConnectionMetricsImpl connMetrics;
-    private final ContentLengthStrategy incomingContentStrategy;
-    private final ContentLengthStrategy outgoingContentStrategy;
-    private final AtomicReference<Socket> socketHolder;
+
+    private final ContentLengthStrategy     incomingContentStrategy;
+
+    private final ContentLengthStrategy     outgoingContentStrategy;
+
+    private final AtomicReference<Socket>   socketHolder;
 
     /**
      * Creates new instance of BHttpConnectionBase.
      *
-     * @param bufferSize buffer size. Must be a positive number.
-     * @param fragmentSizeHint fragment size hint.
-     * @param charDecoder decoder to be used for decoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for byte to char conversion.
-     * @param charEncoder encoder to be used for encoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for char to byte conversion.
-     * @param messageConstraints Message constraints. If {@code null}
-     *   {@link MessageConstraints#DEFAULT} will be used.
-     * @param incomingContentStrategy incoming content length strategy. If {@code null}
-     *   {@link LaxContentLengthStrategy#INSTANCE} will be used.
-     * @param outgoingContentStrategy outgoing content length strategy. If {@code null}
-     *   {@link StrictContentLengthStrategy#INSTANCE} will be used.
+     * @param bufferSize
+     *            buffer size. Must be a positive number.
+     * @param fragmentSizeHint
+     *            fragment size hint.
+     * @param charDecoder
+     *            decoder to be used for decoding HTTP protocol elements.
+     *            If {@code null} simple type cast will be used for byte to char conversion.
+     * @param charEncoder
+     *            encoder to be used for encoding HTTP protocol elements.
+     *            If {@code null} simple type cast will be used for char to byte conversion.
+     * @param messageConstraints
+     *            Message constraints. If {@code null}
+     *            {@link MessageConstraints#DEFAULT} will be used.
+     * @param incomingContentStrategy
+     *            incoming content length strategy. If {@code null}
+     *            {@link LaxContentLengthStrategy#INSTANCE} will be used.
+     * @param outgoingContentStrategy
+     *            outgoing content length strategy. If {@code null}
+     *            {@link StrictContentLengthStrategy#INSTANCE} will be used.
      */
-    protected BHttpConnectionBase(
-            final int bufferSize,
-            final int fragmentSizeHint,
-            final CharsetDecoder charDecoder,
-            final CharsetEncoder charEncoder,
-            final MessageConstraints messageConstraints,
-            final ContentLengthStrategy incomingContentStrategy,
-            final ContentLengthStrategy outgoingContentStrategy) {
+    protected BHttpConnectionBase(final int bufferSize, final int fragmentSizeHint, final CharsetDecoder charDecoder,
+                    final CharsetEncoder charEncoder, final MessageConstraints messageConstraints,
+                    final ContentLengthStrategy incomingContentStrategy, final ContentLengthStrategy outgoingContentStrategy){
         super();
         Args.positive(bufferSize, "Buffer size");
         final HttpTransportMetricsImpl inTransportMetrics = new HttpTransportMetricsImpl();
         final HttpTransportMetricsImpl outTransportMetrics = new HttpTransportMetricsImpl();
-        this.inBuffer = new SessionInputBufferImpl(inTransportMetrics, bufferSize, -1,
-                messageConstraints != null ? messageConstraints : MessageConstraints.DEFAULT, charDecoder);
-        this.outbuffer = new SessionOutputBufferImpl(outTransportMetrics, bufferSize, fragmentSizeHint,
-                charEncoder);
+        this.inBuffer = new SessionInputBufferImpl(
+                        inTransportMetrics,
+                        bufferSize,
+                        -1,
+                        messageConstraints != null ? messageConstraints : MessageConstraints.DEFAULT,
+                        charDecoder);
+        this.outbuffer = new SessionOutputBufferImpl(outTransportMetrics, bufferSize, fragmentSizeHint, charEncoder);
         this.messageConstraints = messageConstraints;
         this.connMetrics = new HttpConnectionMetricsImpl(inTransportMetrics, outTransportMetrics);
-        this.incomingContentStrategy = incomingContentStrategy != null ? incomingContentStrategy :
-            LaxContentLengthStrategy.INSTANCE;
-        this.outgoingContentStrategy = outgoingContentStrategy != null ? outgoingContentStrategy :
-            StrictContentLengthStrategy.INSTANCE;
-        this.socketHolder = new AtomicReference<Socket>();
+        this.incomingContentStrategy = incomingContentStrategy != null ? incomingContentStrategy : LaxContentLengthStrategy.INSTANCE;
+        this.outgoingContentStrategy = outgoingContentStrategy != null ? outgoingContentStrategy : StrictContentLengthStrategy.INSTANCE;
+        this.socketHolder = new AtomicReference<>();
     }
 
-    protected void ensureOpen() throws IOException {
+    protected void ensureOpen() throws IOException{
         final Socket socket = this.socketHolder.get();
-        if (socket == null) {
+        if (socket == null){
             throw new ConnectionClosedException();
         }
-        if (!this.inBuffer.isBound()) {
+        if (!this.inBuffer.isBound()){
             this.inBuffer.bind(getSocketInputStream(socket));
         }
-        if (!this.outbuffer.isBound()) {
+        if (!this.outbuffer.isBound()){
             this.outbuffer.bind(getSocketOutputStream(socket));
         }
     }
 
-    protected InputStream getSocketInputStream(final Socket socket) throws IOException {
+    protected InputStream getSocketInputStream(final Socket socket) throws IOException{
         return socket.getInputStream();
     }
 
-    protected OutputStream getSocketOutputStream(final Socket socket) throws IOException {
+    protected OutputStream getSocketOutputStream(final Socket socket) throws IOException{
         return socket.getOutputStream();
     }
 
@@ -152,129 +161,127 @@ public class BHttpConnectionBase implements HttpInetConnection {
      * After this method's execution the connection status will be reported
      * as open and the {@link #isOpen()} will return {@code true}.
      *
-     * @param socket the socket.
-     * @throws IOException in case of an I/O error.
+     * @param socket
+     *            the socket.
+     * @throws IOException
+     *             in case of an I/O error.
      */
-    protected void bind(final Socket socket) throws IOException {
+    protected void bind(final Socket socket) throws IOException{
         Args.notNull(socket, "Socket");
         this.socketHolder.set(socket);
         this.inBuffer.bind(null);
         this.outbuffer.bind(null);
     }
 
-    protected SessionInputBuffer getSessionInputBuffer() {
+    protected SessionInputBuffer getSessionInputBuffer(){
         return this.inBuffer;
     }
 
-    protected SessionOutputBuffer getSessionOutputBuffer() {
+    protected SessionOutputBuffer getSessionOutputBuffer(){
         return this.outbuffer;
     }
 
-    protected void doFlush() throws IOException {
+    protected void doFlush() throws IOException{
         this.outbuffer.flush();
     }
 
     @Override
-    public boolean isOpen() {
+    public boolean isOpen(){
         return this.socketHolder.get() != null;
     }
 
-    protected Socket getSocket() {
+    protected Socket getSocket(){
         return this.socketHolder.get();
     }
 
-    protected OutputStream createOutputStream(
-            final long len,
-            final SessionOutputBuffer outbuffer) {
-        if (len == ContentLengthStrategy.CHUNKED) {
+    protected OutputStream createOutputStream(final long len,final SessionOutputBuffer outbuffer){
+        if (len == ContentLengthStrategy.CHUNKED){
             return new ChunkedOutputStream(2048, outbuffer);
-        } else if (len == ContentLengthStrategy.IDENTITY) {
+        }else if (len == ContentLengthStrategy.IDENTITY){
             return new IdentityOutputStream(outbuffer);
-        } else {
+        }else{
             return new ContentLengthOutputStream(outbuffer, len);
         }
     }
 
-    protected OutputStream prepareOutput(final HttpMessage message) throws HttpException {
+    protected OutputStream prepareOutput(final HttpMessage message) throws HttpException{
         final long len = this.outgoingContentStrategy.determineLength(message);
         return createOutputStream(len, this.outbuffer);
     }
 
-    protected InputStream createInputStream(
-            final long len,
-            final SessionInputBuffer inBuffer) {
-        if (len == ContentLengthStrategy.CHUNKED) {
+    protected InputStream createInputStream(final long len,final SessionInputBuffer inBuffer){
+        if (len == ContentLengthStrategy.CHUNKED){
             return new ChunkedInputStream(inBuffer, this.messageConstraints);
-        } else if (len == ContentLengthStrategy.IDENTITY) {
+        }else if (len == ContentLengthStrategy.IDENTITY){
             return new IdentityInputStream(inBuffer);
-        } else if (len == 0L) {
+        }else if (len == 0L){
             return EmptyInputStream.INSTANCE;
-        } else {
+        }else{
             return new ContentLengthInputStream(inBuffer, len);
         }
     }
 
-    protected HttpEntity prepareInput(final HttpMessage message) throws HttpException {
+    protected HttpEntity prepareInput(final HttpMessage message) throws HttpException{
         final BasicHttpEntity entity = new BasicHttpEntity();
 
         final long len = this.incomingContentStrategy.determineLength(message);
         final InputStream inStream = createInputStream(len, this.inBuffer);
-        if (len == ContentLengthStrategy.CHUNKED) {
+        if (len == ContentLengthStrategy.CHUNKED){
             entity.setChunked(true);
             entity.setContentLength(-1);
             entity.setContent(inStream);
-        } else if (len == ContentLengthStrategy.IDENTITY) {
+        }else if (len == ContentLengthStrategy.IDENTITY){
             entity.setChunked(false);
             entity.setContentLength(-1);
             entity.setContent(inStream);
-        } else {
+        }else{
             entity.setChunked(false);
             entity.setContentLength(len);
             entity.setContent(inStream);
         }
 
         final Header contentTypeHeader = message.getFirstHeader(HTTP.CONTENT_TYPE);
-        if (contentTypeHeader != null) {
+        if (contentTypeHeader != null){
             entity.setContentType(contentTypeHeader);
         }
         final Header contentEncodingHeader = message.getFirstHeader(HTTP.CONTENT_ENCODING);
-        if (contentEncodingHeader != null) {
+        if (contentEncodingHeader != null){
             entity.setContentEncoding(contentEncodingHeader);
         }
         return entity;
     }
 
     @Override
-    public InetAddress getLocalAddress() {
+    public InetAddress getLocalAddress(){
         final Socket socket = this.socketHolder.get();
         return socket != null ? socket.getLocalAddress() : null;
     }
 
     @Override
-    public int getLocalPort() {
+    public int getLocalPort(){
         final Socket socket = this.socketHolder.get();
         return socket != null ? socket.getLocalPort() : -1;
     }
 
     @Override
-    public InetAddress getRemoteAddress() {
+    public InetAddress getRemoteAddress(){
         final Socket socket = this.socketHolder.get();
         return socket != null ? socket.getInetAddress() : null;
     }
 
     @Override
-    public int getRemotePort() {
+    public int getRemotePort(){
         final Socket socket = this.socketHolder.get();
         return socket != null ? socket.getPort() : -1;
     }
 
     @Override
-    public void setSocketTimeout(final int timeout) {
+    public void setSocketTimeout(final int timeout){
         final Socket socket = this.socketHolder.get();
-        if (socket != null) {
-            try {
+        if (socket != null){
+            try{
                 socket.setSoTimeout(timeout);
-            } catch (final SocketException ignore) {
+            }catch (final SocketException ignore){
                 // It is not quite clear from the Sun's documentation if there are any
                 // other legitimate cases for a socket exception to be thrown when setting
                 // SO_TIMEOUT besides the socket being already closed
@@ -283,12 +290,12 @@ public class BHttpConnectionBase implements HttpInetConnection {
     }
 
     @Override
-    public int getSocketTimeout() {
+    public int getSocketTimeout(){
         final Socket socket = this.socketHolder.get();
-        if (socket != null) {
-            try {
+        if (socket != null){
+            try{
                 return socket.getSoTimeout();
-            } catch (final SocketException ignore) {
+            }catch (final SocketException ignore){
                 // ignore
             }
         }
@@ -296,45 +303,44 @@ public class BHttpConnectionBase implements HttpInetConnection {
     }
 
     @Override
-    public void shutdown() throws IOException {
+    public void shutdown() throws IOException{
         final Socket socket = this.socketHolder.getAndSet(null);
-        if (socket != null) {
+        if (socket != null){
             // force abortive close (RST)
-            try {
+            try{
                 socket.setSoLinger(true, 0);
-            } catch (final IOException ex) {
-            } finally {
+            }catch (final IOException ex){}finally{
                 socket.close();
             }
         }
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         final Socket socket = this.socketHolder.getAndSet(null);
-        if (socket != null) {
-            try {
+        if (socket != null){
+            try{
                 this.inBuffer.clear();
                 this.outbuffer.flush();
-            } finally {
+            }finally{
                 socket.close();
             }
         }
     }
 
-    private int fillInputBuffer(final int timeout) throws IOException {
+    private int fillInputBuffer(final int timeout) throws IOException{
         final Socket socket = this.socketHolder.get();
         final int oldtimeout = socket.getSoTimeout();
-        try {
+        try{
             socket.setSoTimeout(timeout);
             return this.inBuffer.fillBuffer();
-        } finally {
+        }finally{
             socket.setSoTimeout(oldtimeout);
         }
     }
 
-    protected boolean awaitInput(final int timeout) throws IOException {
-        if (this.inBuffer.hasBufferedData()) {
+    protected boolean awaitInput(final int timeout) throws IOException{
+        if (this.inBuffer.hasBufferedData()){
             return true;
         }
         fillInputBuffer(timeout);
@@ -342,41 +348,41 @@ public class BHttpConnectionBase implements HttpInetConnection {
     }
 
     @Override
-    public boolean isStale() {
-        if (!isOpen()) {
+    public boolean isStale(){
+        if (!isOpen()){
             return true;
         }
-        try {
+        try{
             final int bytesRead = fillInputBuffer(1);
             return bytesRead < 0;
-        } catch (final SocketTimeoutException ex) {
+        }catch (final SocketTimeoutException ex){
             return false;
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             return true;
         }
     }
 
-    protected void incrementRequestCount() {
+    protected void incrementRequestCount(){
         this.connMetrics.incrementRequestCount();
     }
 
-    protected void incrementResponseCount() {
+    protected void incrementResponseCount(){
         this.connMetrics.incrementResponseCount();
     }
 
     @Override
-    public HttpConnectionMetrics getMetrics() {
+    public HttpConnectionMetrics getMetrics(){
         return this.connMetrics;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final Socket socket = this.socketHolder.get();
-        if (socket != null) {
+        if (socket != null){
             final StringBuilder buffer = new StringBuilder();
             final SocketAddress remoteAddress = socket.getRemoteSocketAddress();
             final SocketAddress localAddress = socket.getLocalSocketAddress();
-            if (remoteAddress != null && localAddress != null) {
+            if (remoteAddress != null && localAddress != null){
                 NetUtils.formatAddress(buffer, localAddress);
                 buffer.append("<->");
                 NetUtils.formatAddress(buffer, remoteAddress);

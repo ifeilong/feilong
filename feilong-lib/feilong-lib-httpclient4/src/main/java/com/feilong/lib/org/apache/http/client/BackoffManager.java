@@ -36,7 +36,7 @@ import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
  * @since 4.2
  *
  */
-public interface BackoffManager {
+public interface BackoffManager{
 
     /**
      * Called when we have decided that the result of

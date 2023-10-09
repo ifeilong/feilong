@@ -44,15 +44,15 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @SuppressWarnings("deprecation")
-public class NTLMSchemeFactory implements AuthSchemeFactory, AuthSchemeProvider {
+public class NTLMSchemeFactory implements AuthSchemeFactory,AuthSchemeProvider{
 
     @Override
-    public AuthScheme newInstance(final HttpParams params) {
+    public AuthScheme newInstance(final HttpParams params){
         return new NTLMScheme();
     }
 
     @Override
-    public AuthScheme create(final HttpContext context) {
+    public AuthScheme create(final HttpContext context){
         return new NTLMScheme();
     }
 

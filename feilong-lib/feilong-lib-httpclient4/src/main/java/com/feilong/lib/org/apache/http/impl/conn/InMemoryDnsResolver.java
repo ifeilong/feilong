@@ -61,7 +61,7 @@ public class InMemoryDnsResolver implements DnsResolver{
      * collection held in-memory.
      */
     public InMemoryDnsResolver(){
-        dnsMap = new ConcurrentHashMap<String, InetAddress[]>();
+        dnsMap = new ConcurrentHashMap<>();
     }
 
     /**

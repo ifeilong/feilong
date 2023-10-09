@@ -34,29 +34,29 @@ import com.feilong.lib.org.apache.http.io.HttpTransportMetrics;
  *
  * @since 4.0
  */
-public class HttpTransportMetricsImpl implements HttpTransportMetrics {
+public class HttpTransportMetricsImpl implements HttpTransportMetrics{
 
     private long bytesTransferred = 0;
 
-    public HttpTransportMetricsImpl() {
+    public HttpTransportMetricsImpl(){
         super();
     }
 
     @Override
-    public long getBytesTransferred() {
+    public long getBytesTransferred(){
         return this.bytesTransferred;
     }
 
-    public void setBytesTransferred(final long count) {
+    public void setBytesTransferred(final long count){
         this.bytesTransferred = count;
     }
 
-    public void incrementBytesTransferred(final long count) {
+    public void incrementBytesTransferred(final long count){
         this.bytesTransferred += count;
     }
 
     @Override
-    public void reset() {
+    public void reset(){
         this.bytesTransferred = 0;
     }
 

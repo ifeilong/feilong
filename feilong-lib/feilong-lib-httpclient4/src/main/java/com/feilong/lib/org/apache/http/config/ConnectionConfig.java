@@ -41,24 +41,24 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class ConnectionConfig implements Cloneable {
+public class ConnectionConfig implements Cloneable{
 
     public static final ConnectionConfig DEFAULT = new Builder().build();
 
-    private final int bufferSize;
-    private final int fragmentSizeHint;
-    private final Charset charset;
-    private final CodingErrorAction malformedInputAction;
-    private final CodingErrorAction unmappableInputAction;
-    private final MessageConstraints messageConstraints;
+    private final int                    bufferSize;
 
-    ConnectionConfig(
-            final int bufferSize,
-            final int fragmentSizeHint,
-            final Charset charset,
-            final CodingErrorAction malformedInputAction,
-            final CodingErrorAction unmappableInputAction,
-            final MessageConstraints messageConstraints) {
+    private final int                    fragmentSizeHint;
+
+    private final Charset                charset;
+
+    private final CodingErrorAction      malformedInputAction;
+
+    private final CodingErrorAction      unmappableInputAction;
+
+    private final MessageConstraints     messageConstraints;
+
+    ConnectionConfig(final int bufferSize, final int fragmentSizeHint, final Charset charset, final CodingErrorAction malformedInputAction,
+                    final CodingErrorAction unmappableInputAction, final MessageConstraints messageConstraints){
         super();
         this.bufferSize = bufferSize;
         this.fragmentSizeHint = fragmentSizeHint;
@@ -68,126 +68,118 @@ public class ConnectionConfig implements Cloneable {
         this.messageConstraints = messageConstraints;
     }
 
-    public int getBufferSize() {
+    public int getBufferSize(){
         return bufferSize;
     }
 
-    public int getFragmentSizeHint() {
+    public int getFragmentSizeHint(){
         return fragmentSizeHint;
     }
 
-    public Charset getCharset() {
+    public Charset getCharset(){
         return charset;
     }
 
-    public CodingErrorAction getMalformedInputAction() {
+    public CodingErrorAction getMalformedInputAction(){
         return malformedInputAction;
     }
 
-    public CodingErrorAction getUnmappableInputAction() {
+    public CodingErrorAction getUnmappableInputAction(){
         return unmappableInputAction;
     }
 
-    public MessageConstraints getMessageConstraints() {
+    public MessageConstraints getMessageConstraints(){
         return messageConstraints;
     }
 
     @Override
-    protected ConnectionConfig clone() throws CloneNotSupportedException {
+    protected ConnectionConfig clone() throws CloneNotSupportedException{
         return (ConnectionConfig) super.clone();
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder builder = new StringBuilder();
-        builder.append("[bufferSize=").append(this.bufferSize)
-                .append(", fragmentSizeHint=").append(this.fragmentSizeHint)
-                .append(", charset=").append(this.charset)
-                .append(", malformedInputAction=").append(this.malformedInputAction)
-                .append(", unmappableInputAction=").append(this.unmappableInputAction)
-                .append(", messageConstraints=").append(this.messageConstraints)
-                .append("]");
+        builder.append("[bufferSize=").append(this.bufferSize).append(", fragmentSizeHint=").append(this.fragmentSizeHint)
+                        .append(", charset=").append(this.charset).append(", malformedInputAction=").append(this.malformedInputAction)
+                        .append(", unmappableInputAction=").append(this.unmappableInputAction).append(", messageConstraints=")
+                        .append(this.messageConstraints).append("]");
         return builder.toString();
     }
 
-    public static ConnectionConfig.Builder custom() {
+    public static ConnectionConfig.Builder custom(){
         return new Builder();
     }
 
-    public static ConnectionConfig.Builder copy(final ConnectionConfig config) {
+    public static ConnectionConfig.Builder copy(final ConnectionConfig config){
         Args.notNull(config, "Connection config");
-        return new Builder()
-            .setBufferSize(config.getBufferSize())
-            .setCharset(config.getCharset())
-            .setFragmentSizeHint(config.getFragmentSizeHint())
-            .setMalformedInputAction(config.getMalformedInputAction())
-            .setUnmappableInputAction(config.getUnmappableInputAction())
-            .setMessageConstraints(config.getMessageConstraints());
+        return new Builder().setBufferSize(config.getBufferSize()).setCharset(config.getCharset())
+                        .setFragmentSizeHint(config.getFragmentSizeHint()).setMalformedInputAction(config.getMalformedInputAction())
+                        .setUnmappableInputAction(config.getUnmappableInputAction()).setMessageConstraints(config.getMessageConstraints());
     }
 
-    public static class Builder {
+    public static class Builder{
 
-        private int bufferSize;
-        private int fragmentSizeHint;
-        private Charset charset;
-        private CodingErrorAction malformedInputAction;
-        private CodingErrorAction unmappableInputAction;
+        private int                bufferSize;
+
+        private int                fragmentSizeHint;
+
+        private Charset            charset;
+
+        private CodingErrorAction  malformedInputAction;
+
+        private CodingErrorAction  unmappableInputAction;
+
         private MessageConstraints messageConstraints;
 
-        Builder() {
+        Builder(){
             this.fragmentSizeHint = -1;
         }
 
-        public Builder setBufferSize(final int bufferSize) {
+        public Builder setBufferSize(final int bufferSize){
             this.bufferSize = bufferSize;
             return this;
         }
 
-        public Builder setFragmentSizeHint(final int fragmentSizeHint) {
+        public Builder setFragmentSizeHint(final int fragmentSizeHint){
             this.fragmentSizeHint = fragmentSizeHint;
             return this;
         }
 
-        public Builder setCharset(final Charset charset) {
+        public Builder setCharset(final Charset charset){
             this.charset = charset;
             return this;
         }
 
-        public Builder setMalformedInputAction(final CodingErrorAction malformedInputAction) {
+        public Builder setMalformedInputAction(final CodingErrorAction malformedInputAction){
             this.malformedInputAction = malformedInputAction;
-            if (malformedInputAction != null && this.charset == null) {
+            if (malformedInputAction != null && this.charset == null){
                 this.charset = Consts.ASCII;
             }
             return this;
         }
 
-        public Builder setUnmappableInputAction(final CodingErrorAction unmappableInputAction) {
+        public Builder setUnmappableInputAction(final CodingErrorAction unmappableInputAction){
             this.unmappableInputAction = unmappableInputAction;
-            if (unmappableInputAction != null && this.charset == null) {
+            if (unmappableInputAction != null && this.charset == null){
                 this.charset = Consts.ASCII;
             }
             return this;
         }
 
-        public Builder setMessageConstraints(final MessageConstraints messageConstraints) {
+        public Builder setMessageConstraints(final MessageConstraints messageConstraints){
             this.messageConstraints = messageConstraints;
             return this;
         }
 
-        public ConnectionConfig build() {
+        public ConnectionConfig build(){
             Charset cs = charset;
-            if (cs == null && (malformedInputAction != null || unmappableInputAction != null)) {
+            if (cs == null && (malformedInputAction != null || unmappableInputAction != null)){
                 cs = Consts.ASCII;
             }
             final int bufSize = this.bufferSize > 0 ? this.bufferSize : 8 * 1024;
-            final int fragmentHintSize  = this.fragmentSizeHint >= 0 ? this.fragmentSizeHint : bufSize;
-            return new ConnectionConfig(
-                    bufSize,
-                    fragmentHintSize,
-                    cs,
-                    malformedInputAction,
-                    unmappableInputAction,
-                    messageConstraints);
+            final int fragmentHintSize = this.fragmentSizeHint >= 0 ? this.fragmentSizeHint : bufSize;
+            return new ConnectionConfig(bufSize, fragmentHintSize, cs, malformedInputAction, unmappableInputAction, messageConstraints);
         }
 
     }

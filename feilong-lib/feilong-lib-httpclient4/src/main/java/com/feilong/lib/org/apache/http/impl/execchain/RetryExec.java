@@ -86,6 +86,7 @@ public class RetryExec implements ClientExecChain{
         Args.notNull(route, "HTTP route");
         Args.notNull(request, "HTTP request");
         Args.notNull(context, "HTTP context");
+
         final Header[] origheaders = request.getAllHeaders();
         for (int execCount = 1;; execCount++){
             try{
@@ -95,23 +96,39 @@ public class RetryExec implements ClientExecChain{
                     log.debug("Request has been aborted");
                     throw ex;
                 }
+
+                //---------------------------------------------------------------
+                log.info(
+                                "execCount:[{}],IOException ( {} ) caught when processing request to {}: {},will use {} determines if need retry",
+                                execCount,
+                                ex.getClass().getName(),
+                                route,
+                                ex.getMessage(),
+                                retryHandler.getClass().getName());
+
                 if (retryHandler.retryRequest(ex, execCount, context)){
-                    if (log.isInfoEnabled()){
-                        log.info(
-                                        "I/O exception (" + ex.getClass().getName() + ") caught when processing request to " + route + ": "
-                                                        + ex.getMessage());
-                    }
                     if (log.isDebugEnabled()){
                         log.debug(ex.getMessage(), ex);
                     }
+
+                    if (log.isInfoEnabled()){
+                        log.info(
+                                        "execCount:[{}],IOException ( {} ) caught when processing request to {}: {},retryHandler :[{}] need retry",
+                                        execCount,
+                                        ex.getClass().getName(),
+                                        route,
+                                        ex.getMessage(),
+                                        retryHandler.getClass().getName());
+                    }
+
+                    //---------------------------------------------------------------
                     if (!RequestEntityProxy.isRepeatable(request)){
                         log.debug("Cannot retry non-repeatable request");
                         throw new NonRepeatableRequestException("Cannot retry request " + "with a non-repeatable request entity", ex);
                     }
                     request.setHeaders(origheaders);
-                    if (log.isInfoEnabled()){
-                        log.info("Retrying request to " + route);
-                    }
+
+                    log.info("Retrying request to {}", route);
                 }else{
                     if (ex instanceof NoHttpResponseException){
                         final NoHttpResponseException updatedex = new NoHttpResponseException(

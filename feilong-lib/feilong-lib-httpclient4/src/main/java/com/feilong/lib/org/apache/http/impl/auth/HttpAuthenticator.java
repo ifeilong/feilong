@@ -185,9 +185,7 @@ public class HttpAuthenticator{
                         creds = authOption.getCredentials();
                         authState.update(authScheme, creds);
                         if (log.isDebugEnabled()){
-                            log.debug(
-                                            "Generating response to an authentication challenge using " + authScheme.getSchemeName()
-                                                            + " scheme");
+                            log.debug("Generating response to an authentication challenge using " + authScheme.getSchemeName() + " scheme");
                         }
                         try{
                             final Header header = doAuth(authScheme, creds, request, context);

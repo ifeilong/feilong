@@ -36,12 +36,12 @@ import java.security.cert.X509Certificate;
  *
  * @since 4.5.4
  */
-public class TrustAllStrategy implements TrustStrategy {
+public class TrustAllStrategy implements TrustStrategy{
 
     public static final TrustAllStrategy INSTANCE = new TrustAllStrategy();
 
     @Override
-    public boolean isTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
+    public boolean isTrusted(final X509Certificate[] chain,final String authType) throws CertificateException{
         return true;
     }
 

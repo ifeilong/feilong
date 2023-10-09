@@ -41,17 +41,17 @@ import java.io.OutputStream;
  * depending on where their {@link #getContent content} originates:
  * <ul>
  * <li><b>streamed</b>: The content is received from a stream, or
- *     generated on the fly. In particular, this category includes
- *     entities being received from a {@link HttpConnection connection}.
- *     {@link #isStreaming Streamed} entities are generally not
- *      {@link #isRepeatable repeatable}.
- *     </li>
+ * generated on the fly. In particular, this category includes
+ * entities being received from a {@link HttpConnection connection}.
+ * {@link #isStreaming Streamed} entities are generally not
+ * {@link #isRepeatable repeatable}.
+ * </li>
  * <li><b>self-contained</b>: The content is in memory or obtained by
- *     means that are independent from a connection or other entity.
- *     Self-contained entities are generally {@link #isRepeatable repeatable}.
- *     </li>
+ * means that are independent from a connection or other entity.
+ * Self-contained entities are generally {@link #isRepeatable repeatable}.
+ * </li>
  * <li><b>wrapping</b>: The content is obtained from another entity.
- *     </li>
+ * </li>
  * </ul>
  * This distinction is important for connection management with incoming
  * entities. For entities that are created by an application and only sent
@@ -62,12 +62,13 @@ import java.io.OutputStream;
  *
  * @since 4.0
  */
-public interface HttpEntity {
+public interface HttpEntity{
 
     /**
      * Tells if the entity is capable of producing its data more than once.
      * A repeatable entity's getContent() and writeTo(OutputStream) methods
      * can be called more than once whereas a non-repeatable entity's can not.
+     * 
      * @return true if the entity is repeatable, false otherwise.
      */
     boolean isRepeatable();
@@ -83,18 +84,18 @@ public interface HttpEntity {
      * but should respect the primary purpose.
      * </p>
      *
-     * @return  {@code true} if chunked encoding is preferred for this
-     *          entity, or {@code false} if it is not
+     * @return {@code true} if chunked encoding is preferred for this
+     *         entity, or {@code false} if it is not
      */
     boolean isChunked();
 
     /**
      * Tells the length of the content, if known.
      *
-     * @return  the number of bytes of the content, or
-     *          a negative number if unknown. If the content length is known
-     *          but exceeds {@link java.lang.Long#MAX_VALUE Long.MAX_VALUE},
-     *          a negative number is returned.
+     * @return the number of bytes of the content, or
+     *         a negative number if unknown. If the content length is known
+     *         but exceeds {@link java.lang.Long#MAX_VALUE Long.MAX_VALUE},
+     *         a negative number is returned.
      */
     long getContentLength();
 
@@ -104,8 +105,8 @@ public interface HttpEntity {
      * or the one that was received with the entity. It can include a
      * charset attribute.
      *
-     * @return  the Content-Type header for this entity, or
-     *          {@code null} if the content type is unknown
+     * @return the Content-Type header for this entity, or
+     *         {@code null} if the content type is unknown
      */
     Header getContentType();
 
@@ -116,8 +117,8 @@ public interface HttpEntity {
      * Wrapping entities that modify the content encoding should
      * adjust this header accordingly.
      *
-     * @return  the Content-Encoding header for this entity, or
-     *          {@code null} if the content encoding is unknown
+     * @return the Content-Encoding header for this entity, or
+     *         {@code null} if the content encoding is unknown
      */
     Header getContentEncoding();
 
@@ -136,13 +137,14 @@ public interface HttpEntity {
      *
      * @return content stream of the entity.
      *
-     * @throws IOException if the stream could not be created
+     * @throws IOException
+     *             if the stream could not be created
      * @throws UnsupportedOperationException
-     *  if entity content cannot be represented as {@link java.io.InputStream}.
+     *             if entity content cannot be represented as {@link java.io.InputStream}.
      *
      * @see #isRepeatable()
      */
-    InputStream getContent() throws IOException, UnsupportedOperationException;
+    InputStream getContent() throws IOException,UnsupportedOperationException;
 
     /**
      * Writes the entity content out to the output stream.
@@ -151,9 +153,11 @@ public interface HttpEntity {
      * all allocated resources are properly deallocated when this method
      * returns.
      *
-     * @param outStream the output stream to write entity content to
+     * @param outStream
+     *            the output stream to write entity content to
      *
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
     void writeTo(OutputStream outStream) throws IOException;
 
@@ -164,8 +168,8 @@ public interface HttpEntity {
      * {@code false}. Wrapping entities should delegate this call
      * to the wrapped entity.
      *
-     * @return  {@code true} if the entity content is streamed,
-     *          {@code false} otherwise
+     * @return {@code true} if the entity content is streamed,
+     *         {@code false} otherwise
      */
     boolean isStreaming(); // don't expect an exception here
 
@@ -187,7 +191,8 @@ public interface HttpEntity {
      * needs to be consumed completely in order to re-use the connection
      * with keep-alive.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException
+     *             if an I/O error occurs.
      *
      * @deprecated (4.1) Use {@link com.feilong.lib.org.apache.http.util.EntityUtils#consume(HttpEntity)}
      *

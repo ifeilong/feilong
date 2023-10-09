@@ -43,20 +43,24 @@ import com.feilong.lib.org.apache.http.HttpResponse;
  *
  * @since 4.0
  */
-public interface HttpRequestHandler {
+public interface HttpRequestHandler{
 
     /**
      * Handles the request and produces a response to be sent back to
      * the client.
      *
-     * @param request the HTTP request.
-     * @param response the HTTP response.
-     * @param context the HTTP execution context.
-     * @throws IOException in case of an I/O error.
-     * @throws HttpException in case of HTTP protocol violation or a processing
-     *   problem.
+     * @param request
+     *            the HTTP request.
+     * @param response
+     *            the HTTP response.
+     * @param context
+     *            the HTTP execution context.
+     * @throws IOException
+     *             in case of an I/O error.
+     * @throws HttpException
+     *             in case of HTTP protocol violation or a processing
+     *             problem.
      */
-    void handle(HttpRequest request, HttpResponse response, HttpContext context)
-            throws HttpException, IOException;
+    void handle(HttpRequest request,HttpResponse response,HttpContext context) throws HttpException,IOException;
 
 }

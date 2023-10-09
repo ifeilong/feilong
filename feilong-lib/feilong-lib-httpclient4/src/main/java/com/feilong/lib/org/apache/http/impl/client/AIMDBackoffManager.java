@@ -35,94 +35,108 @@ import com.feilong.lib.org.apache.http.pool.ConnPoolControl;
 import com.feilong.lib.org.apache.http.util.Args;
 
 /**
- * <p>The {@code AIMDBackoffManager} applies an additive increase,
+ * <p>
+ * The {@code AIMDBackoffManager} applies an additive increase,
  * multiplicative decrease (AIMD) to managing a dynamic limit to
  * the number of connections allowed to a given host. You may want
  * to experiment with the settings for the cooldown periods and the
- * backoff factor to get the adaptive behavior you want.</p>
+ * backoff factor to get the adaptive behavior you want.
+ * </p>
  *
- * <p>Generally speaking, shorter cooldowns will lead to more steady-state
+ * <p>
+ * Generally speaking, shorter cooldowns will lead to more steady-state
  * variability but faster reaction times, while longer cooldowns
  * will lead to more stable equilibrium behavior but slower reaction
- * times.</p>
+ * times.
+ * </p>
  *
- * <p>Similarly, higher backoff factors promote greater
+ * <p>
+ * Similarly, higher backoff factors promote greater
  * utilization of available capacity at the expense of fairness
  * among clients. Lower backoff factors allow equal distribution of
  * capacity among clients (fairness) to happen faster, at the
- * expense of having more server capacity unused in the short term.</p>
+ * expense of having more server capacity unused in the short term.
+ * </p>
  *
  * @since 4.2
  */
-public class AIMDBackoffManager implements BackoffManager {
+public class AIMDBackoffManager implements BackoffManager{
 
     private final ConnPoolControl<HttpRoute> connPerRoute;
-    private final Clock clock;
-    private final Map<HttpRoute,Long> lastRouteProbes;
-    private final Map<HttpRoute,Long> lastRouteBackoffs;
-    private long coolDown = 5 * 1000L;
-    private double backoffFactor = 0.5;
-    private int cap = 2; // Per RFC 2616 sec 8.1.4
+
+    private final Clock                      clock;
+
+    private final Map<HttpRoute, Long>       lastRouteProbes;
+
+    private final Map<HttpRoute, Long>       lastRouteBackoffs;
+
+    private long                             coolDown      = 5 * 1000L;
+
+    private double                           backoffFactor = 0.5;
+
+    private int                              cap           = 2;        // Per RFC 2616 sec 8.1.4
 
     /**
      * Creates an {@code AIMDBackoffManager} to manage
      * per-host connection pool sizes represented by the
      * given {@link ConnPoolControl}.
-     * @param connPerRoute per-host routing maximums to
-     *   be managed
+     * 
+     * @param connPerRoute
+     *            per-host routing maximums to
+     *            be managed
      */
-    public AIMDBackoffManager(final ConnPoolControl<HttpRoute> connPerRoute) {
+    public AIMDBackoffManager(final ConnPoolControl<HttpRoute> connPerRoute){
         this(connPerRoute, new SystemClock());
     }
 
-    AIMDBackoffManager(final ConnPoolControl<HttpRoute> connPerRoute, final Clock clock) {
+    AIMDBackoffManager(final ConnPoolControl<HttpRoute> connPerRoute, final Clock clock){
         this.clock = clock;
         this.connPerRoute = connPerRoute;
-        this.lastRouteProbes = new HashMap<HttpRoute,Long>();
-        this.lastRouteBackoffs = new HashMap<HttpRoute,Long>();
+        this.lastRouteProbes = new HashMap<>();
+        this.lastRouteBackoffs = new HashMap<>();
     }
 
     @Override
-    public void backOff(final HttpRoute route) {
-        synchronized(connPerRoute) {
+    public void backOff(final HttpRoute route){
+        synchronized (connPerRoute){
             final int curr = connPerRoute.getMaxPerRoute(route);
             final Long lastUpdate = getLastUpdate(lastRouteBackoffs, route);
             final long now = clock.getCurrentTime();
-            if (now - lastUpdate.longValue() < coolDown) {
+            if (now - lastUpdate.longValue() < coolDown){
                 return;
             }
             connPerRoute.setMaxPerRoute(route, getBackedOffPoolSize(curr));
-            lastRouteBackoffs.put(route, Long.valueOf(now));
+            lastRouteBackoffs.put(route, now);
         }
     }
 
-    private int getBackedOffPoolSize(final int curr) {
-        if (curr <= 1) {
+    private int getBackedOffPoolSize(final int curr){
+        if (curr <= 1){
             return 1;
         }
-        return (int)(Math.floor(backoffFactor * curr));
+        return (int) (Math.floor(backoffFactor * curr));
     }
 
     @Override
-    public void probe(final HttpRoute route) {
-        synchronized(connPerRoute) {
+    public void probe(final HttpRoute route){
+        synchronized (connPerRoute){
             final int curr = connPerRoute.getMaxPerRoute(route);
             final int max = (curr >= cap) ? cap : curr + 1;
             final Long lastProbe = getLastUpdate(lastRouteProbes, route);
             final Long lastBackoff = getLastUpdate(lastRouteBackoffs, route);
             final long now = clock.getCurrentTime();
-            if (now - lastProbe.longValue() < coolDown || now - lastBackoff.longValue() < coolDown) {
+            if (now - lastProbe.longValue() < coolDown || now - lastBackoff.longValue() < coolDown){
                 return;
             }
             connPerRoute.setMaxPerRoute(route, max);
-            lastRouteProbes.put(route, Long.valueOf(now));
+            lastRouteProbes.put(route, now);
         }
     }
 
-    private Long getLastUpdate(final Map<HttpRoute,Long> updates, final HttpRoute route) {
+    private Long getLastUpdate(final Map<HttpRoute, Long> updates,final HttpRoute route){
         Long lastUpdate = updates.get(route);
-        if (lastUpdate == null) {
-            lastUpdate = Long.valueOf(0L);
+        if (lastUpdate == null){
+            lastUpdate = 0L;
         }
         return lastUpdate;
     }
@@ -134,9 +148,11 @@ public class AIMDBackoffManager implements BackoffManager {
      * case of non-integer outcomes to ensure we actually
      * decrease the pool size. Pool sizes are never decreased
      * below 1, however. Defaults to 0.5.
-     * @param d must be between 0.0 and 1.0, exclusive.
+     * 
+     * @param d
+     *            must be between 0.0 and 1.0, exclusive.
      */
-    public void setBackoffFactor(final double d) {
+    public void setBackoffFactor(final double d){
         Args.check(d > 0.0 && d < 1.0, "Backoff factor must be 0.0 < f < 1.0");
         backoffFactor = d;
     }
@@ -146,9 +162,11 @@ public class AIMDBackoffManager implements BackoffManager {
      * adjustments in pool sizes for a given host, to allow
      * enough time for the adjustments to take effect. Defaults
      * to 5000L (5 seconds).
-     * @param l must be positive
+     * 
+     * @param l
+     *            must be positive
      */
-    public void setCooldownMillis(final long l) {
+    public void setCooldownMillis(final long l){
         Args.positive(coolDown, "Cool down");
         coolDown = l;
     }
@@ -156,9 +174,11 @@ public class AIMDBackoffManager implements BackoffManager {
     /**
      * Sets the absolute maximum per-host connection pool size to
      * probe up to; defaults to 2 (the default per-host max).
-     * @param cap must be &gt;= 1
+     * 
+     * @param cap
+     *            must be &gt;= 1
      */
-    public void setPerHostConnectionCap(final int cap) {
+    public void setPerHostConnectionCap(final int cap){
         Args.positive(cap, "Per host connection cap");
         this.cap = cap;
     }

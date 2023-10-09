@@ -31,8 +31,9 @@ package com.feilong.lib.org.apache.http.pool;
  * maximum total number of connections or maximum connections per route
  * allowed.
  *
- * @param <T> the route type that represents the opposite endpoint of a pooled
- *   connection.
+ * @param <T>
+ *            the route type that represents the opposite endpoint of a pooled
+ *            connection.
  * @since 4.2
  */
 public interface ConnPoolControl<T> {
@@ -45,7 +46,7 @@ public interface ConnPoolControl<T> {
 
     int getDefaultMaxPerRoute();
 
-    void setMaxPerRoute(final T route, int max);
+    void setMaxPerRoute(final T route,int max);
 
     int getMaxPerRoute(final T route);
 

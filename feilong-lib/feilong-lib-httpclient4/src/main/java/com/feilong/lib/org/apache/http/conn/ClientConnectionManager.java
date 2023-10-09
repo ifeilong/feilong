@@ -48,12 +48,12 @@ import com.feilong.lib.org.apache.http.conn.scheme.SchemeRegistry;
  * @deprecated (4.3) replaced by {@link HttpClientConnectionManager}.
  */
 @Deprecated
-public interface ClientConnectionManager {
+public interface ClientConnectionManager{
 
     /**
      * Obtains the scheme registry used by this manager.
      *
-     * @return  the scheme registry, never {@code null}
+     * @return the scheme registry, never {@code null}
      */
     SchemeRegistry getSchemeRegistry();
 
@@ -62,25 +62,28 @@ public interface ClientConnectionManager {
      * {@link ManagedClientConnection} can be obtained or the request can be
      * aborted.
      */
-    ClientConnectionRequest requestConnection(HttpRoute route, Object state);
+    ClientConnectionRequest requestConnection(HttpRoute route,Object state);
 
     /**
      * Releases a connection for use by others.
      * You may optionally specify how long the connection is valid
-     * to be reused.  Values &lt;= 0 are considered to be valid forever.
+     * to be reused. Values &lt;= 0 are considered to be valid forever.
      * If the connection is not marked as reusable, the connection will
      * not be reused regardless of the valid duration.
      *
      * If the connection has been released before,
      * the call will be ignored.
      *
-     * @param conn      the connection to release
-     * @param validDuration the duration of time this connection is valid for reuse
-     * @param timeUnit the unit of time validDuration is measured in
+     * @param conn
+     *            the connection to release
+     * @param validDuration
+     *            the duration of time this connection is valid for reuse
+     * @param timeUnit
+     *            the unit of time validDuration is measured in
      *
      * @see #closeExpiredConnections()
      */
-    void releaseConnection(ManagedClientConnection conn, long validDuration, TimeUnit timeUnit);
+    void releaseConnection(ManagedClientConnection conn,long validDuration,TimeUnit timeUnit);
 
     /**
      * Closes idle connections in the pool.
@@ -91,12 +94,14 @@ public interface ClientConnectionManager {
      *
      * All expired connections will also be closed.
      *
-     * @param idletime  the idle time of connections to be closed
-     * @param timeUnit     the unit for the {@code idletime}
+     * @param idletime
+     *            the idle time of connections to be closed
+     * @param timeUnit
+     *            the unit for the {@code idletime}
      *
      * @see #closeExpiredConnections()
      */
-    void closeIdleConnections(long idletime, TimeUnit timeUnit);
+    void closeIdleConnections(long idletime,TimeUnit timeUnit);
 
     /**
      * Closes all expired connections in the pool.

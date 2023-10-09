@@ -35,58 +35,62 @@ import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 
 /**
- *  Immutable class encapsulating request configuration items.
- *  The default setting for stale connection checking changed
- *  to false, and the feature was deprecated starting with version 4.4.
+ * Immutable class encapsulating request configuration items.
+ * The default setting for stale connection checking changed
+ * to false, and the feature was deprecated starting with version 4.4.
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RequestConfig implements Cloneable {
+public class RequestConfig implements Cloneable{
 
     public static final RequestConfig DEFAULT = new Builder().build();
 
-    private final boolean expectContinueEnabled;
-    private final HttpHost proxy;
-    private final InetAddress localAddress;
-    private final boolean staleConnectionCheckEnabled;
-    private final String cookieSpec;
-    private final boolean redirectsEnabled;
-    private final boolean relativeRedirectsAllowed;
-    private final boolean circularRedirectsAllowed;
-    private final int maxRedirects;
-    private final boolean authenticationEnabled;
-    private final Collection<String> targetPreferredAuthSchemes;
-    private final Collection<String> proxyPreferredAuthSchemes;
-    private final int connectionRequestTimeout;
-    private final int connectTimeout;
-    private final int socketTimeout;
-    private final boolean contentCompressionEnabled;
-    private final boolean normalizeUri;
+    private final boolean             expectContinueEnabled;
+
+    private final HttpHost            proxy;
+
+    private final InetAddress         localAddress;
+
+    private final boolean             staleConnectionCheckEnabled;
+
+    private final String              cookieSpec;
+
+    private final boolean             redirectsEnabled;
+
+    private final boolean             relativeRedirectsAllowed;
+
+    private final boolean             circularRedirectsAllowed;
+
+    private final int                 maxRedirects;
+
+    private final boolean             authenticationEnabled;
+
+    private final Collection<String>  targetPreferredAuthSchemes;
+
+    private final Collection<String>  proxyPreferredAuthSchemes;
+
+    private final int                 connectionRequestTimeout;
+
+    private final int                 connectTimeout;
+
+    private final int                 socketTimeout;
+
+    private final boolean             contentCompressionEnabled;
+
+    private final boolean             normalizeUri;
 
     /**
      * Intended for CDI compatibility
-    */
-    protected RequestConfig() {
+     */
+    protected RequestConfig(){
         this(false, null, null, false, null, false, false, false, 0, false, null, null, 0, 0, 0, true, true);
     }
 
-    RequestConfig(
-            final boolean expectContinueEnabled,
-            final HttpHost proxy,
-            final InetAddress localAddress,
-            final boolean staleConnectionCheckEnabled,
-            final String cookieSpec,
-            final boolean redirectsEnabled,
-            final boolean relativeRedirectsAllowed,
-            final boolean circularRedirectsAllowed,
-            final int maxRedirects,
-            final boolean authenticationEnabled,
-            final Collection<String> targetPreferredAuthSchemes,
-            final Collection<String> proxyPreferredAuthSchemes,
-            final int connectionRequestTimeout,
-            final int connectTimeout,
-            final int socketTimeout,
-            final boolean contentCompressionEnabled,
-            final boolean normalizeUri) {
+    RequestConfig(final boolean expectContinueEnabled, final HttpHost proxy, final InetAddress localAddress,
+                    final boolean staleConnectionCheckEnabled, final String cookieSpec, final boolean redirectsEnabled,
+                    final boolean relativeRedirectsAllowed, final boolean circularRedirectsAllowed, final int maxRedirects,
+                    final boolean authenticationEnabled, final Collection<String> targetPreferredAuthSchemes,
+                    final Collection<String> proxyPreferredAuthSchemes, final int connectionRequestTimeout, final int connectTimeout,
+                    final int socketTimeout, final boolean contentCompressionEnabled, final boolean normalizeUri){
         super();
         this.expectContinueEnabled = expectContinueEnabled;
         this.proxy = proxy;
@@ -129,7 +133,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code false}
      * </p>
      */
-    public boolean isExpectContinueEnabled() {
+    public boolean isExpectContinueEnabled(){
         return expectContinueEnabled;
     }
 
@@ -139,7 +143,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code null}
      * </p>
      */
-    public HttpHost getProxy() {
+    public HttpHost getProxy(){
         return proxy;
     }
 
@@ -154,7 +158,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code null}
      * </p>
      */
-    public InetAddress getLocalAddress() {
+    public InetAddress getLocalAddress(){
         return localAddress;
     }
 
@@ -168,10 +172,10 @@ public class RequestConfig implements Cloneable {
      * </p>
      *
      * @deprecated (4.4) Use {@link
-     *   com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager#getValidateAfterInactivity()}
+     *             com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager#getValidateAfterInactivity()}
      */
     @Deprecated
-    public boolean isStaleConnectionCheckEnabled() {
+    public boolean isStaleConnectionCheckEnabled(){
         return staleConnectionCheckEnabled;
     }
 
@@ -182,7 +186,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code null}
      * </p>
      */
-    public String getCookieSpec() {
+    public String getCookieSpec(){
         return cookieSpec;
     }
 
@@ -192,7 +196,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code true}
      * </p>
      */
-    public boolean isRedirectsEnabled() {
+    public boolean isRedirectsEnabled(){
         return redirectsEnabled;
     }
 
@@ -203,7 +207,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code true}
      * </p>
      */
-    public boolean isRelativeRedirectsAllowed() {
+    public boolean isRelativeRedirectsAllowed(){
         return relativeRedirectsAllowed;
     }
 
@@ -215,7 +219,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code false}
      * </p>
      */
-    public boolean isCircularRedirectsAllowed() {
+    public boolean isCircularRedirectsAllowed(){
         return circularRedirectsAllowed;
     }
 
@@ -226,7 +230,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code 50}
      * </p>
      */
-    public int getMaxRedirects() {
+    public int getMaxRedirects(){
         return maxRedirects;
     }
 
@@ -236,7 +240,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code true}
      * </p>
      */
-    public boolean isAuthenticationEnabled() {
+    public boolean isAuthenticationEnabled(){
         return authenticationEnabled;
     }
 
@@ -247,7 +251,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code null}
      * </p>
      */
-    public Collection<String> getTargetPreferredAuthSchemes() {
+    public Collection<String> getTargetPreferredAuthSchemes(){
         return targetPreferredAuthSchemes;
     }
 
@@ -258,7 +262,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code null}
      * </p>
      */
-    public Collection<String> getProxyPreferredAuthSchemes() {
+    public Collection<String> getProxyPreferredAuthSchemes(){
         return proxyPreferredAuthSchemes;
     }
 
@@ -273,7 +277,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code -1}
      * </p>
      */
-    public int getConnectionRequestTimeout() {
+    public int getConnectionRequestTimeout(){
         return connectionRequestTimeout;
     }
 
@@ -287,7 +291,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code -1}
      * </p>
      */
-    public int getConnectTimeout() {
+    public int getConnectTimeout(){
         return connectTimeout;
     }
 
@@ -303,7 +307,7 @@ public class RequestConfig implements Cloneable {
      * Default: {@code -1}
      * </p>
      */
-    public int getSocketTimeout() {
+    public int getSocketTimeout(){
         return socketTimeout;
     }
 
@@ -317,7 +321,7 @@ public class RequestConfig implements Cloneable {
      * @deprecated (4.5) Use {@link #isContentCompressionEnabled()}
      */
     @Deprecated
-    public boolean isDecompressionEnabled() {
+    public boolean isDecompressionEnabled(){
         return contentCompressionEnabled;
     }
 
@@ -329,7 +333,7 @@ public class RequestConfig implements Cloneable {
      *
      * @since 4.5
      */
-    public boolean isContentCompressionEnabled() {
+    public boolean isContentCompressionEnabled(){
         return contentCompressionEnabled;
     }
 
@@ -341,17 +345,17 @@ public class RequestConfig implements Cloneable {
      *
      * @since 4.5.8
      */
-    public boolean isNormalizeUri() {
+    public boolean isNormalizeUri(){
         return normalizeUri;
     }
 
     @Override
-    protected RequestConfig clone() throws CloneNotSupportedException {
+    protected RequestConfig clone() throws CloneNotSupportedException{
         return (RequestConfig) super.clone();
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder builder = new StringBuilder();
         builder.append("[");
         builder.append("expectContinueEnabled=").append(expectContinueEnabled);
@@ -374,54 +378,62 @@ public class RequestConfig implements Cloneable {
         return builder.toString();
     }
 
-    public static RequestConfig.Builder custom() {
+    public static RequestConfig.Builder custom(){
         return new Builder();
     }
 
     @SuppressWarnings("deprecation")
-    public static RequestConfig.Builder copy(final RequestConfig config) {
-        return new Builder()
-            .setExpectContinueEnabled(config.isExpectContinueEnabled())
-            .setProxy(config.getProxy())
-            .setLocalAddress(config.getLocalAddress())
-            .setStaleConnectionCheckEnabled(config.isStaleConnectionCheckEnabled())
-            .setCookieSpec(config.getCookieSpec())
-            .setRedirectsEnabled(config.isRedirectsEnabled())
-            .setRelativeRedirectsAllowed(config.isRelativeRedirectsAllowed())
-            .setCircularRedirectsAllowed(config.isCircularRedirectsAllowed())
-            .setMaxRedirects(config.getMaxRedirects())
-            .setAuthenticationEnabled(config.isAuthenticationEnabled())
-            .setTargetPreferredAuthSchemes(config.getTargetPreferredAuthSchemes())
-            .setProxyPreferredAuthSchemes(config.getProxyPreferredAuthSchemes())
-            .setConnectionRequestTimeout(config.getConnectionRequestTimeout())
-            .setConnectTimeout(config.getConnectTimeout())
-            .setSocketTimeout(config.getSocketTimeout())
-            .setDecompressionEnabled(config.isDecompressionEnabled())
-            .setContentCompressionEnabled(config.isContentCompressionEnabled())
-            .setNormalizeUri(config.isNormalizeUri());
+    public static RequestConfig.Builder copy(final RequestConfig config){
+        return new Builder().setExpectContinueEnabled(config.isExpectContinueEnabled()).setProxy(config.getProxy())
+                        .setLocalAddress(config.getLocalAddress()).setStaleConnectionCheckEnabled(config.isStaleConnectionCheckEnabled())
+                        .setCookieSpec(config.getCookieSpec()).setRedirectsEnabled(config.isRedirectsEnabled())
+                        .setRelativeRedirectsAllowed(config.isRelativeRedirectsAllowed())
+                        .setCircularRedirectsAllowed(config.isCircularRedirectsAllowed()).setMaxRedirects(config.getMaxRedirects())
+                        .setAuthenticationEnabled(config.isAuthenticationEnabled())
+                        .setTargetPreferredAuthSchemes(config.getTargetPreferredAuthSchemes())
+                        .setProxyPreferredAuthSchemes(config.getProxyPreferredAuthSchemes())
+                        .setConnectionRequestTimeout(config.getConnectionRequestTimeout()).setConnectTimeout(config.getConnectTimeout())
+                        .setSocketTimeout(config.getSocketTimeout()).setDecompressionEnabled(config.isDecompressionEnabled())
+                        .setContentCompressionEnabled(config.isContentCompressionEnabled()).setNormalizeUri(config.isNormalizeUri());
     }
 
-    public static class Builder {
+    public static class Builder{
 
-        private boolean expectContinueEnabled;
-        private HttpHost proxy;
-        private InetAddress localAddress;
-        private boolean staleConnectionCheckEnabled;
-        private String cookieSpec;
-        private boolean redirectsEnabled;
-        private boolean relativeRedirectsAllowed;
-        private boolean circularRedirectsAllowed;
-        private int maxRedirects;
-        private boolean authenticationEnabled;
+        private boolean            expectContinueEnabled;
+
+        private HttpHost           proxy;
+
+        private InetAddress        localAddress;
+
+        private boolean            staleConnectionCheckEnabled;
+
+        private String             cookieSpec;
+
+        private boolean            redirectsEnabled;
+
+        private boolean            relativeRedirectsAllowed;
+
+        private boolean            circularRedirectsAllowed;
+
+        private int                maxRedirects;
+
+        private boolean            authenticationEnabled;
+
         private Collection<String> targetPreferredAuthSchemes;
-        private Collection<String> proxyPreferredAuthSchemes;
-        private int connectionRequestTimeout;
-        private int connectTimeout;
-        private int socketTimeout;
-        private boolean contentCompressionEnabled;
-        private boolean normalizeUri;
 
-        Builder() {
+        private Collection<String> proxyPreferredAuthSchemes;
+
+        private int                connectionRequestTimeout;
+
+        private int                connectTimeout;
+
+        private int                socketTimeout;
+
+        private boolean            contentCompressionEnabled;
+
+        private boolean            normalizeUri;
+
+        Builder(){
             super();
             this.staleConnectionCheckEnabled = false;
             this.redirectsEnabled = true;
@@ -435,125 +447,125 @@ public class RequestConfig implements Cloneable {
             this.normalizeUri = true;
         }
 
-        public Builder setExpectContinueEnabled(final boolean expectContinueEnabled) {
+        public Builder setExpectContinueEnabled(final boolean expectContinueEnabled){
             this.expectContinueEnabled = expectContinueEnabled;
             return this;
         }
 
-        public Builder setProxy(final HttpHost proxy) {
+        public Builder setProxy(final HttpHost proxy){
             this.proxy = proxy;
             return this;
         }
 
-        public Builder setLocalAddress(final InetAddress localAddress) {
+        public Builder setLocalAddress(final InetAddress localAddress){
             this.localAddress = localAddress;
             return this;
         }
 
         /**
          * @deprecated (4.4) Use {@link
-         *   com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager#setValidateAfterInactivity(int)}
+         *             com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionManager#setValidateAfterInactivity(int)}
          */
         @Deprecated
-        public Builder setStaleConnectionCheckEnabled(final boolean staleConnectionCheckEnabled) {
+        public Builder setStaleConnectionCheckEnabled(final boolean staleConnectionCheckEnabled){
             this.staleConnectionCheckEnabled = staleConnectionCheckEnabled;
             return this;
         }
 
-        public Builder setCookieSpec(final String cookieSpec) {
+        public Builder setCookieSpec(final String cookieSpec){
             this.cookieSpec = cookieSpec;
             return this;
         }
 
-        public Builder setRedirectsEnabled(final boolean redirectsEnabled) {
+        public Builder setRedirectsEnabled(final boolean redirectsEnabled){
             this.redirectsEnabled = redirectsEnabled;
             return this;
         }
 
-        public Builder setRelativeRedirectsAllowed(final boolean relativeRedirectsAllowed) {
+        public Builder setRelativeRedirectsAllowed(final boolean relativeRedirectsAllowed){
             this.relativeRedirectsAllowed = relativeRedirectsAllowed;
             return this;
         }
 
-        public Builder setCircularRedirectsAllowed(final boolean circularRedirectsAllowed) {
+        public Builder setCircularRedirectsAllowed(final boolean circularRedirectsAllowed){
             this.circularRedirectsAllowed = circularRedirectsAllowed;
             return this;
         }
 
-        public Builder setMaxRedirects(final int maxRedirects) {
+        public Builder setMaxRedirects(final int maxRedirects){
             this.maxRedirects = maxRedirects;
             return this;
         }
 
-        public Builder setAuthenticationEnabled(final boolean authenticationEnabled) {
+        public Builder setAuthenticationEnabled(final boolean authenticationEnabled){
             this.authenticationEnabled = authenticationEnabled;
             return this;
         }
 
-        public Builder setTargetPreferredAuthSchemes(final Collection<String> targetPreferredAuthSchemes) {
+        public Builder setTargetPreferredAuthSchemes(final Collection<String> targetPreferredAuthSchemes){
             this.targetPreferredAuthSchemes = targetPreferredAuthSchemes;
             return this;
         }
 
-        public Builder setProxyPreferredAuthSchemes(final Collection<String> proxyPreferredAuthSchemes) {
+        public Builder setProxyPreferredAuthSchemes(final Collection<String> proxyPreferredAuthSchemes){
             this.proxyPreferredAuthSchemes = proxyPreferredAuthSchemes;
             return this;
         }
 
-        public Builder setConnectionRequestTimeout(final int connectionRequestTimeout) {
+        public Builder setConnectionRequestTimeout(final int connectionRequestTimeout){
             this.connectionRequestTimeout = connectionRequestTimeout;
             return this;
         }
 
-        public Builder setConnectTimeout(final int connectTimeout) {
+        public Builder setConnectTimeout(final int connectTimeout){
             this.connectTimeout = connectTimeout;
             return this;
         }
 
-        public Builder setSocketTimeout(final int socketTimeout) {
+        public Builder setSocketTimeout(final int socketTimeout){
             this.socketTimeout = socketTimeout;
             return this;
         }
 
         /**
          * @deprecated (4.5) Set {@link #setContentCompressionEnabled(boolean)} to {@code false} and
-         * add the {@code Accept-Encoding} request header.
+         *             add the {@code Accept-Encoding} request header.
          */
         @Deprecated
-        public Builder setDecompressionEnabled(final boolean decompressionEnabled) {
+        public Builder setDecompressionEnabled(final boolean decompressionEnabled){
             this.contentCompressionEnabled = decompressionEnabled;
             return this;
         }
 
-        public Builder setContentCompressionEnabled(final boolean contentCompressionEnabled) {
+        public Builder setContentCompressionEnabled(final boolean contentCompressionEnabled){
             this.contentCompressionEnabled = contentCompressionEnabled;
             return this;
         }
 
-        public Builder setNormalizeUri(final boolean normalizeUri) {
+        public Builder setNormalizeUri(final boolean normalizeUri){
             this.normalizeUri = normalizeUri;
             return this;
         }
 
-        public RequestConfig build() {
+        public RequestConfig build(){
             return new RequestConfig(
-                    expectContinueEnabled,
-                    proxy,
-                    localAddress,
-                    staleConnectionCheckEnabled,
-                    cookieSpec,
-                    redirectsEnabled,
-                    relativeRedirectsAllowed,
-                    circularRedirectsAllowed,
-                    maxRedirects,
-                    authenticationEnabled,
-                    targetPreferredAuthSchemes,
-                    proxyPreferredAuthSchemes,
-                    connectionRequestTimeout,
-                    connectTimeout,
-                    socketTimeout,
-                    contentCompressionEnabled,
-                    normalizeUri);
+                            expectContinueEnabled,
+                            proxy,
+                            localAddress,
+                            staleConnectionCheckEnabled,
+                            cookieSpec,
+                            redirectsEnabled,
+                            relativeRedirectsAllowed,
+                            circularRedirectsAllowed,
+                            maxRedirects,
+                            authenticationEnabled,
+                            targetPreferredAuthSchemes,
+                            proxyPreferredAuthSchemes,
+                            connectionRequestTimeout,
+                            connectTimeout,
+                            socketTimeout,
+                            contentCompressionEnabled,
+                            normalizeUri);
         }
 
     }

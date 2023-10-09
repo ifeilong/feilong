@@ -44,7 +44,7 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class HttpEntityWrapper implements HttpEntity {
+public class HttpEntityWrapper implements HttpEntity{
 
     /** The wrapped entity. */
     protected HttpEntity wrappedEntity;
@@ -52,62 +52,61 @@ public class HttpEntityWrapper implements HttpEntity {
     /**
      * Creates a new entity wrapper.
      *
-     * @param wrappedEntity the entity to wrap.
+     * @param wrappedEntity
+     *            the entity to wrap.
      */
-    public HttpEntityWrapper(final HttpEntity wrappedEntity) {
+    public HttpEntityWrapper(final HttpEntity wrappedEntity){
         super();
         this.wrappedEntity = Args.notNull(wrappedEntity, "Wrapped entity");
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return wrappedEntity.isRepeatable();
     }
 
     @Override
-    public boolean isChunked() {
+    public boolean isChunked(){
         return wrappedEntity.isChunked();
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return wrappedEntity.getContentLength();
     }
 
     @Override
-    public Header getContentType() {
+    public Header getContentType(){
         return wrappedEntity.getContentType();
     }
 
     @Override
-    public Header getContentEncoding() {
+    public Header getContentEncoding(){
         return wrappedEntity.getContentEncoding();
     }
 
     @Override
-    public InputStream getContent()
-        throws IOException {
+    public InputStream getContent() throws IOException{
         return wrappedEntity.getContent();
     }
 
     @Override
-    public void writeTo(final OutputStream outStream)
-        throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         wrappedEntity.writeTo(outStream);
     }
 
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return wrappedEntity.isStreaming();
     }
 
     /**
      * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
-     * otherwise call {@link #writeTo(OutputStream)} which is required to free the resources.
+     *             otherwise call {@link #writeTo(OutputStream)} which is required to free the resources.
      */
     @Override
     @Deprecated
-    public void consumeContent() throws IOException {
+    public void consumeContent() throws IOException{
         wrappedEntity.consumeContent();
     }
 

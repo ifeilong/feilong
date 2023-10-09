@@ -41,65 +41,64 @@ import com.feilong.lib.org.apache.http.message.BasicHeader;
 import com.feilong.lib.org.apache.http.protocol.HTTP;
 
 @SuppressWarnings("deprecation")
-class MultipartFormEntity implements HttpEntity {
+class MultipartFormEntity implements HttpEntity{
 
     private final AbstractMultipartForm multipart;
-    private final Header contentType;
-    private final long contentLength;
 
-    MultipartFormEntity(
-            final AbstractMultipartForm multipart,
-            final ContentType contentType,
-            final long contentLength) {
+    private final Header                contentType;
+
+    private final long                  contentLength;
+
+    MultipartFormEntity(final AbstractMultipartForm multipart, final ContentType contentType, final long contentLength){
         super();
         this.multipart = multipart;
         this.contentType = new BasicHeader(HTTP.CONTENT_TYPE, contentType.toString());
         this.contentLength = contentLength;
     }
 
-    AbstractMultipartForm getMultipart() {
+    AbstractMultipartForm getMultipart(){
         return this.multipart;
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return this.contentLength != -1;
     }
 
     @Override
-    public boolean isChunked() {
+    public boolean isChunked(){
         return !isRepeatable();
     }
 
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return !isRepeatable();
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return this.contentLength;
     }
 
     @Override
-    public Header getContentType() {
+    public Header getContentType(){
         return this.contentType;
     }
 
     @Override
-    public Header getContentEncoding() {
+    public Header getContentEncoding(){
         return null;
     }
 
     @Override
-    public void consumeContent() {
+    public void consumeContent(){
     }
 
     @Override
-    public InputStream getContent() throws IOException {
-        if (this.contentLength < 0) {
+    public InputStream getContent() throws IOException{
+        if (this.contentLength < 0){
             throw new ContentTooLongException("Content length is unknown");
-        } else if (this.contentLength > 25 * 1024) {
+        }else if (this.contentLength > 25 * 1024){
             throw new ContentTooLongException("Content length is too long: " + this.contentLength);
         }
         final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -109,7 +108,7 @@ class MultipartFormEntity implements HttpEntity {
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         this.multipart.writeTo(outStream);
     }
 

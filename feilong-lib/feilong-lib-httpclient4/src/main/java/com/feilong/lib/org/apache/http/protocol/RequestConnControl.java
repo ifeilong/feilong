@@ -45,23 +45,22 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RequestConnControl implements HttpRequestInterceptor {
+public class RequestConnControl implements HttpRequestInterceptor{
 
-    public RequestConnControl() {
+    public RequestConnControl(){
         super();
     }
 
     @Override
-    public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
 
         final String method = request.getRequestLine().getMethod();
-        if (method.equalsIgnoreCase("CONNECT")) {
+        if (method.equalsIgnoreCase("CONNECT")){
             return;
         }
 
-        if (!request.containsHeader(HTTP.CONN_DIRECTIVE)) {
+        if (!request.containsHeader(HTTP.CONN_DIRECTIVE)){
             // Default policy is to keep connection alive
             // whenever possible
             request.addHeader(HTTP.CONN_DIRECTIVE, HTTP.CONN_KEEP_ALIVE);

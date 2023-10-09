@@ -32,7 +32,7 @@ package com.feilong.lib.org.apache.http.io;
  *
  * @since 4.1
  */
-public interface BufferInfo {
+public interface BufferInfo{
 
     /**
      * Return length data stored in the buffer

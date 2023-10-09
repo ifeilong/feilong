@@ -50,20 +50,21 @@ import com.feilong.lib.org.apache.http.cookie.CookieIdentityComparator;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class BasicCookieStore implements CookieStore, Serializable {
+public class BasicCookieStore implements CookieStore,Serializable{
 
-    private static final long serialVersionUID = -7581093305228232025L;
+    private static final long       serialVersionUID = -7581093305228232025L;
 
-    private final TreeSet<Cookie> cookies;
+    private final TreeSet<Cookie>   cookies;
+
     private transient ReadWriteLock lock;
 
-    public BasicCookieStore() {
+    public BasicCookieStore(){
         super();
-        this.cookies = new TreeSet<Cookie>(new CookieIdentityComparator());
+        this.cookies = new TreeSet<>(new CookieIdentityComparator());
         this.lock = new ReentrantReadWriteLock();
     }
 
-    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(final ObjectInputStream stream) throws IOException,ClassNotFoundException{
         stream.defaultReadObject();
 
         /* Reinstantiate transient fields. */
@@ -75,22 +76,23 @@ public class BasicCookieStore implements CookieStore, Serializable {
      * If the given cookie has already expired it will not be added, but existing
      * values will still be removed.
      *
-     * @param cookie the {@link Cookie cookie} to be added
+     * @param cookie
+     *            the {@link Cookie cookie} to be added
      *
      * @see #addCookies(Cookie[])
      *
      */
     @Override
-    public void addCookie(final Cookie cookie) {
-        if (cookie != null) {
+    public void addCookie(final Cookie cookie){
+        if (cookie != null){
             lock.writeLock().lock();
-            try {
+            try{
                 // first remove any old cookie that is equivalent
                 cookies.remove(cookie);
-                if (!cookie.isExpired(new Date())) {
+                if (!cookie.isExpired(new Date())){
                     cookies.add(cookie);
                 }
-            } finally {
+            }finally{
                 lock.writeLock().unlock();
             }
         }
@@ -101,14 +103,15 @@ public class BasicCookieStore implements CookieStore, Serializable {
      * in the given array order. If any of the given cookies has already expired it will
      * not be added, but existing values will still be removed.
      *
-     * @param cookies the {@link Cookie cookies} to be added
+     * @param cookies
+     *            the {@link Cookie cookies} to be added
      *
      * @see #addCookie(Cookie)
      *
      */
-    public void addCookies(final Cookie[] cookies) {
-        if (cookies != null) {
-            for (final Cookie cookie : cookies) {
+    public void addCookies(final Cookie[] cookies){
+        if (cookies != null){
+            for (final Cookie cookie : cookies){
                 this.addCookie(cookie);
             }
         }
@@ -121,12 +124,12 @@ public class BasicCookieStore implements CookieStore, Serializable {
      * @return an array of {@link Cookie cookies}.
      */
     @Override
-    public List<Cookie> getCookies() {
+    public List<Cookie> getCookies(){
         lock.readLock().lock();
-        try {
+        try{
             //create defensive copy so it won't be concurrently modified
-            return new ArrayList<Cookie>(cookies);
-        } finally {
+            return new ArrayList<>(cookies);
+        }finally{
             lock.readLock().unlock();
         }
     }
@@ -140,21 +143,21 @@ public class BasicCookieStore implements CookieStore, Serializable {
      * @see Cookie#isExpired(Date)
      */
     @Override
-    public boolean clearExpired(final Date date) {
-        if (date == null) {
+    public boolean clearExpired(final Date date){
+        if (date == null){
             return false;
         }
         lock.writeLock().lock();
-        try {
+        try{
             boolean removed = false;
-            for (final Iterator<Cookie> it = cookies.iterator(); it.hasNext(); ) {
-                if (it.next().isExpired(date)) {
+            for (final Iterator<Cookie> it = cookies.iterator(); it.hasNext();){
+                if (it.next().isExpired(date)){
                     it.remove();
                     removed = true;
                 }
             }
             return removed;
-        } finally {
+        }finally{
             lock.writeLock().unlock();
         }
     }
@@ -163,21 +166,21 @@ public class BasicCookieStore implements CookieStore, Serializable {
      * Clears all cookies.
      */
     @Override
-    public void clear() {
+    public void clear(){
         lock.writeLock().lock();
-        try {
+        try{
             cookies.clear();
-        } finally {
+        }finally{
             lock.writeLock().unlock();
         }
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         lock.readLock().lock();
-        try {
+        try{
             return cookies.toString();
-        } finally {
+        }finally{
             lock.readLock().unlock();
         }
     }

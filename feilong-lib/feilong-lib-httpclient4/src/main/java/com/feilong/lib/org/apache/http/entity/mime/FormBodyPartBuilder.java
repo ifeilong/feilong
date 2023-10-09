@@ -40,112 +40,114 @@ import com.feilong.lib.org.apache.http.util.Asserts;
  *
  * @since 4.4
  */
-public class FormBodyPartBuilder {
+public class FormBodyPartBuilder{
 
-    private String name;
-    private ContentBody body;
+    private String       name;
+
+    private ContentBody  body;
+
     private final Header header;
 
-    public static FormBodyPartBuilder create(final String name, final ContentBody body) {
+    public static FormBodyPartBuilder create(final String name,final ContentBody body){
         return new FormBodyPartBuilder(name, body);
     }
 
-    public static FormBodyPartBuilder create() {
+    public static FormBodyPartBuilder create(){
         return new FormBodyPartBuilder();
     }
 
-    FormBodyPartBuilder(final String name, final ContentBody body) {
+    FormBodyPartBuilder(final String name, final ContentBody body){
         this();
         this.name = name;
         this.body = body;
     }
 
-    FormBodyPartBuilder() {
+    FormBodyPartBuilder(){
         this.header = new Header();
     }
 
-    public FormBodyPartBuilder setName(final String name) {
+    public FormBodyPartBuilder setName(final String name){
         this.name = name;
         return this;
     }
 
-    public FormBodyPartBuilder setBody(final ContentBody body) {
+    public FormBodyPartBuilder setBody(final ContentBody body){
         this.body = body;
         return this;
     }
 
-    public FormBodyPartBuilder addField(final String name, final String value) {
+    public FormBodyPartBuilder addField(final String name,final String value){
         Args.notNull(name, "Field name");
         this.header.addField(new MinimalField(name, value));
         return this;
     }
 
-    public FormBodyPartBuilder setField(final String name, final String value) {
+    public FormBodyPartBuilder setField(final String name,final String value){
         Args.notNull(name, "Field name");
         this.header.setField(new MinimalField(name, value));
         return this;
     }
 
-    public FormBodyPartBuilder removeFields(final String name) {
+    public FormBodyPartBuilder removeFields(final String name){
         Args.notNull(name, "Field name");
         this.header.removeFields(name);
         return this;
     }
 
-    public FormBodyPart build() {
+    public FormBodyPart build(){
         Asserts.notBlank(this.name, "Name");
         Asserts.notNull(this.body, "Content body");
         final Header headerCopy = new Header();
         final List<MinimalField> fields = this.header.getFields();
-        for (final MinimalField field: fields) {
+        for (final MinimalField field : fields){
             headerCopy.addField(field);
         }
-        if (headerCopy.getField(MIME.CONTENT_DISPOSITION) == null) {
+        if (headerCopy.getField(MIME.CONTENT_DISPOSITION) == null){
             final StringBuilder buffer = new StringBuilder();
             buffer.append("form-data; name=\"");
             buffer.append(encodeForHeader(this.name));
             buffer.append("\"");
-            if (this.body.getFilename() != null) {
+            if (this.body.getFilename() != null){
                 buffer.append("; filename=\"");
                 buffer.append(encodeForHeader(this.body.getFilename()));
                 buffer.append("\"");
             }
             headerCopy.addField(new MinimalField(MIME.CONTENT_DISPOSITION, buffer.toString()));
         }
-        if (headerCopy.getField(MIME.CONTENT_TYPE) == null) {
+        if (headerCopy.getField(MIME.CONTENT_TYPE) == null){
             final ContentType contentType;
-            if (body instanceof AbstractContentBody) {
+            if (body instanceof AbstractContentBody){
                 contentType = ((AbstractContentBody) body).getContentType();
-            } else {
+            }else{
                 contentType = null;
             }
-            if (contentType != null) {
+            if (contentType != null){
                 headerCopy.addField(new MinimalField(MIME.CONTENT_TYPE, contentType.toString()));
-            } else {
+            }else{
                 final StringBuilder buffer = new StringBuilder();
                 buffer.append(this.body.getMimeType()); // MimeType cannot be null
-                if (this.body.getCharset() != null) { // charset may legitimately be null
+                if (this.body.getCharset() != null){ // charset may legitimately be null
                     buffer.append("; charset=");
                     buffer.append(this.body.getCharset());
                 }
                 headerCopy.addField(new MinimalField(MIME.CONTENT_TYPE, buffer.toString()));
             }
         }
-        if (headerCopy.getField(MIME.CONTENT_TRANSFER_ENC) == null) {
+        if (headerCopy.getField(MIME.CONTENT_TRANSFER_ENC) == null){
             // TE cannot be null
             headerCopy.addField(new MinimalField(MIME.CONTENT_TRANSFER_ENC, body.getTransferEncoding()));
         }
         return new FormBodyPart(this.name, this.body, headerCopy);
     }
 
-    private static String encodeForHeader(final String headerName) {
-        if (headerName == null) {
+    private static String encodeForHeader(final String headerName){
+        if (headerName == null){
             return null;
         }
         final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < headerName.length(); i++) {
+        for (int i = 0; i < headerName.length(); i++){
             final char x = headerName.charAt(i);
-            if (x == '"' || x == '\\' || x == '\r') {
+            if (x == '"' || x == '\\' || x == '\r'){
                 sb.append("\\");
             }
             sb.append(x);

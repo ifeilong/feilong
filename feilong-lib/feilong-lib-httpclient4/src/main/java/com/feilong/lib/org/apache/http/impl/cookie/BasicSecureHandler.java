@@ -41,28 +41,27 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicSecureHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class BasicSecureHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
-    public BasicSecureHandler() {
+    public BasicSecureHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
         cookie.setSecure(true);
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
         return !cookie.isSecure() || origin.isSecure();
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.SECURE_ATTR;
     }
 

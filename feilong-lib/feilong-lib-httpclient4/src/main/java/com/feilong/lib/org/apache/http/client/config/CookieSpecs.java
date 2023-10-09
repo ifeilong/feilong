@@ -32,7 +32,7 @@ package com.feilong.lib.org.apache.http.client.config;
  *
  * @since 4.3
  */
-public final class CookieSpecs {
+public final class CookieSpecs{
 
     /**
      * The policy that provides high degree of compatibility
@@ -46,19 +46,19 @@ public final class CookieSpecs {
     /**
      * The Netscape cookie draft compliant policy.
      */
-    public static final String NETSCAPE = "netscape";
+    public static final String NETSCAPE              = "netscape";
 
     /**
      * The RFC 6265 compliant policy (interoprability profile).
      */
-    public static final String STANDARD = "standard";
+    public static final String STANDARD              = "standard";
 
     /**
      * The RFC 6265 compliant policy (strict profile).
      *
      * @since 4.4
      */
-    public static final String STANDARD_STRICT = "standard-strict";
+    public static final String STANDARD_STRICT       = "standard-strict";
 
     /**
      * The default 'best match' policy.
@@ -66,21 +66,21 @@ public final class CookieSpecs {
      * @deprecated (4.4) use {link #DEFAULT}.
      */
     @Deprecated
-    public static final String BEST_MATCH = "best-match";
+    public static final String BEST_MATCH            = "best-match";
 
     /**
      * The default policy. This policy provides a higher degree of compatibility
      * with common cookie management of popular HTTP agents for non-standard
      * (Netscape style) cookies.
      */
-    public static final String DEFAULT = "default";
+    public static final String DEFAULT               = "default";
 
     /**
      * The policy that ignores cookies.
      */
-    public static final String IGNORE_COOKIES = "ignoreCookies";
+    public static final String IGNORE_COOKIES        = "ignoreCookies";
 
-    private CookieSpecs() {
+    private CookieSpecs(){
     }
 
 }

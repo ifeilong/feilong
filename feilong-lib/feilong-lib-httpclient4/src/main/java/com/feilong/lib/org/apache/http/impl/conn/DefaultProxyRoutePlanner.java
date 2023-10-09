@@ -43,24 +43,21 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultProxyRoutePlanner extends DefaultRoutePlanner {
+public class DefaultProxyRoutePlanner extends DefaultRoutePlanner{
 
     private final HttpHost proxy;
 
-    public DefaultProxyRoutePlanner(final HttpHost proxy, final SchemePortResolver schemePortResolver) {
+    public DefaultProxyRoutePlanner(final HttpHost proxy, final SchemePortResolver schemePortResolver){
         super(schemePortResolver);
         this.proxy = Args.notNull(proxy, "Proxy host");
     }
 
-    public DefaultProxyRoutePlanner(final HttpHost proxy) {
+    public DefaultProxyRoutePlanner(final HttpHost proxy){
         this(proxy, null);
     }
 
     @Override
-    protected HttpHost determineProxy(
-        final HttpHost target,
-        final HttpRequest request,
-        final HttpContext context) throws HttpException {
+    protected HttpHost determineProxy(final HttpHost target,final HttpRequest request,final HttpContext context) throws HttpException{
         return proxy;
     }
 

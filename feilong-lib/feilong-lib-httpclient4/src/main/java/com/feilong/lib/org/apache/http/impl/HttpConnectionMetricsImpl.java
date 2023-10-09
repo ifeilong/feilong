@@ -38,98 +38,98 @@ import com.feilong.lib.org.apache.http.io.HttpTransportMetrics;
  *
  * @since 4.0
  */
-public class HttpConnectionMetricsImpl implements HttpConnectionMetrics {
+public class HttpConnectionMetricsImpl implements HttpConnectionMetrics{
 
-    public static final String REQUEST_COUNT = "http.request-count";
-    public static final String RESPONSE_COUNT = "http.response-count";
-    public static final String SENT_BYTES_COUNT = "http.sent-bytes-count";
-    public static final String RECEIVED_BYTES_COUNT = "http.received-bytes-count";
+    public static final String         REQUEST_COUNT        = "http.request-count";
+
+    public static final String         RESPONSE_COUNT       = "http.response-count";
+
+    public static final String         SENT_BYTES_COUNT     = "http.sent-bytes-count";
+
+    public static final String         RECEIVED_BYTES_COUNT = "http.received-bytes-count";
 
     private final HttpTransportMetrics inTransportMetric;
+
     private final HttpTransportMetrics outTransportMetric;
-    private long requestCount = 0;
-    private long responseCount = 0;
+
+    private long                       requestCount         = 0;
+
+    private long                       responseCount        = 0;
 
     /**
      * The cache map for all metrics values.
      */
-    private Map<String, Object> metricsCache;
+    private Map<String, Object>        metricsCache;
 
-    public HttpConnectionMetricsImpl(
-            final HttpTransportMetrics inTransportMetric,
-            final HttpTransportMetrics outTransportMetric) {
+    public HttpConnectionMetricsImpl(final HttpTransportMetrics inTransportMetric, final HttpTransportMetrics outTransportMetric){
         super();
         this.inTransportMetric = inTransportMetric;
         this.outTransportMetric = outTransportMetric;
     }
 
-    /* ------------------  Public interface method -------------------------- */
+    /* ------------------ Public interface method -------------------------- */
 
     @Override
-    public long getReceivedBytesCount() {
+    public long getReceivedBytesCount(){
         return this.inTransportMetric != null ? this.inTransportMetric.getBytesTransferred() : -1;
     }
 
     @Override
-    public long getSentBytesCount() {
+    public long getSentBytesCount(){
         return this.outTransportMetric != null ? this.outTransportMetric.getBytesTransferred() : -1;
     }
 
     @Override
-    public long getRequestCount() {
+    public long getRequestCount(){
         return this.requestCount;
     }
 
-    public void incrementRequestCount() {
+    public void incrementRequestCount(){
         this.requestCount++;
     }
 
     @Override
-    public long getResponseCount() {
+    public long getResponseCount(){
         return this.responseCount;
     }
 
-    public void incrementResponseCount() {
+    public void incrementResponseCount(){
         this.responseCount++;
     }
 
     @Override
-    public Object getMetric(final String metricName) {
+    public Object getMetric(final String metricName){
         Object value = null;
-        if (this.metricsCache != null) {
+        if (this.metricsCache != null){
             value = this.metricsCache.get(metricName);
         }
-        if (value == null) {
-            if (REQUEST_COUNT.equals(metricName)) {
+        if (value == null){
+            if (REQUEST_COUNT.equals(metricName)){
                 value = Long.valueOf(requestCount);
-            } else if (RESPONSE_COUNT.equals(metricName)) {
+            }else if (RESPONSE_COUNT.equals(metricName)){
                 value = Long.valueOf(responseCount);
-            } else if (RECEIVED_BYTES_COUNT.equals(metricName)) {
-                return this.inTransportMetric != null
-                                ? Long.valueOf(this.inTransportMetric.getBytesTransferred())
-                                : null;
-            } else if (SENT_BYTES_COUNT.equals(metricName)) {
-                return this.outTransportMetric != null
-                                ? Long.valueOf(this.outTransportMetric.getBytesTransferred())
-                                : null;
+            }else if (RECEIVED_BYTES_COUNT.equals(metricName)){
+                return this.inTransportMetric != null ? Long.valueOf(this.inTransportMetric.getBytesTransferred()) : null;
+            }else if (SENT_BYTES_COUNT.equals(metricName)){
+                return this.outTransportMetric != null ? Long.valueOf(this.outTransportMetric.getBytesTransferred()) : null;
             }
         }
         return value;
     }
 
-    public void setMetric(final String metricName, final Object obj) {
-        if (this.metricsCache == null) {
-            this.metricsCache = new HashMap<String, Object>();
+    public void setMetric(final String metricName,final Object obj){
+        if (this.metricsCache == null){
+            this.metricsCache = new HashMap<>();
         }
         this.metricsCache.put(metricName, obj);
     }
 
     @Override
-    public void reset() {
-        if (this.outTransportMetric != null) {
+    public void reset(){
+        if (this.outTransportMetric != null){
             this.outTransportMetric.reset();
         }
-        if (this.inTransportMetric != null) {
+        if (this.inTransportMetric != null){
             this.inTransportMetric.reset();
         }
         this.requestCount = 0;

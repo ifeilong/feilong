@@ -38,16 +38,15 @@ import com.feilong.lib.org.apache.http.cookie.MalformedCookieException;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public abstract class AbstractCookieAttributeHandler implements CookieAttributeHandler {
+public abstract class AbstractCookieAttributeHandler implements CookieAttributeHandler{
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         // Do nothing
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         // Always match
         return true;
     }

@@ -37,12 +37,12 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NoopUserTokenHandler implements UserTokenHandler {
+public class NoopUserTokenHandler implements UserTokenHandler{
 
     public static final NoopUserTokenHandler INSTANCE = new NoopUserTokenHandler();
 
     @Override
-    public Object getUserToken(final HttpContext context) {
+    public Object getUserToken(final HttpContext context){
         return null;
     }
 

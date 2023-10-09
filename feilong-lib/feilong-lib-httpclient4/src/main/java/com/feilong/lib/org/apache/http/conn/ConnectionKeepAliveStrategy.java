@@ -39,7 +39,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.0
  */
-public interface ConnectionKeepAliveStrategy {
+public interface ConnectionKeepAliveStrategy{
 
     /**
      * Returns the duration of time which this connection can be safely kept
@@ -49,7 +49,7 @@ public interface ConnectionKeepAliveStrategy {
      *
      * When coupled with a {@link com.feilong.lib.org.apache.http.ConnectionReuseStrategy}, if
      * {@link com.feilong.lib.org.apache.http.ConnectionReuseStrategy#keepAlive(
-     *   HttpResponse, HttpContext)} returns true, this allows you to control
+     * HttpResponse, HttpContext)} returns true, this allows you to control
      * how long the reuse will last. If keepAlive returns false, this should
      * have no meaningful impact
      *
@@ -61,6 +61,6 @@ public interface ConnectionKeepAliveStrategy {
      * @return the duration in ms for which it is safe to keep the connection
      *         idle, or &lt;=0 if no suggested duration.
      */
-    long getKeepAliveDuration(HttpResponse response, HttpContext context);
+    long getKeepAliveDuration(HttpResponse response,HttpContext context);
 
 }

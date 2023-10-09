@@ -45,9 +45,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RFC2965VersionAttributeHandler implements CommonCookieAttributeHandler {
+public class RFC2965VersionAttributeHandler implements CommonCookieAttributeHandler{
 
-    public RFC2965VersionAttributeHandler() {
+    public RFC2965VersionAttributeHandler(){
         super();
     }
 
@@ -55,20 +55,18 @@ public class RFC2965VersionAttributeHandler implements CommonCookieAttributeHand
      * Parse cookie version attribute.
      */
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (value == null) {
-            throw new MalformedCookieException(
-                    "Missing value for version attribute");
+        if (value == null){
+            throw new MalformedCookieException("Missing value for version attribute");
         }
         int version = -1;
-        try {
+        try{
             version = Integer.parseInt(value);
-        } catch (final NumberFormatException e) {
+        }catch (final NumberFormatException e){
             version = -1;
         }
-        if (version < 0) {
+        if (version < 0){
             throw new MalformedCookieException("Invalid cookie version.");
         }
         cookie.setVersion(version);
@@ -78,25 +76,22 @@ public class RFC2965VersionAttributeHandler implements CommonCookieAttributeHand
      * validate cookie version attribute. Version attribute is REQUIRED.
      */
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (cookie instanceof SetCookie2) {
-            if (cookie instanceof ClientCookie
-                    && !((ClientCookie) cookie).containsAttribute(ClientCookie.VERSION_ATTR)) {
-                throw new CookieRestrictionViolationException(
-                        "Violates RFC 2965. Version attribute is required.");
+        if (cookie instanceof SetCookie2){
+            if (cookie instanceof ClientCookie && !((ClientCookie) cookie).containsAttribute(ClientCookie.VERSION_ATTR)){
+                throw new CookieRestrictionViolationException("Violates RFC 2965. Version attribute is required.");
             }
         }
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         return true;
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.VERSION_ATTR;
     }
 

@@ -42,27 +42,27 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.2
  */
-public class SPNegoScheme extends GGSSchemeBase {
+public class SPNegoScheme extends GGSSchemeBase{
 
     private static final String SPNEGO_OID = "1.3.6.1.5.5.2";
 
     /**
      * @since 4.4
      */
-    public SPNegoScheme(final boolean stripPort, final boolean useCanonicalHostname) {
+    public SPNegoScheme(final boolean stripPort, final boolean useCanonicalHostname){
         super(stripPort, useCanonicalHostname);
     }
 
-    public SPNegoScheme(final boolean stripPort) {
+    public SPNegoScheme(final boolean stripPort){
         super(stripPort);
     }
 
-    public SPNegoScheme() {
+    public SPNegoScheme(){
         super();
     }
 
     @Override
-    public String getSchemeName() {
+    public String getSchemeName(){
         return "Negotiate";
     }
 
@@ -70,29 +70,31 @@ public class SPNegoScheme extends GGSSchemeBase {
      * Produces SPNEGO authorization Header based on token created by
      * processChallenge.
      *
-     * @param credentials not used by the SPNEGO scheme.
-     * @param request The request being authenticated
+     * @param credentials
+     *            not used by the SPNEGO scheme.
+     * @param request
+     *            The request being authenticated
      *
-     * @throws AuthenticationException if authentication string cannot
-     *   be generated due to an authentication failure
+     * @throws AuthenticationException
+     *             if authentication string cannot
+     *             be generated due to an authentication failure
      *
      * @return SPNEGO authentication Header
      */
     @Override
-    public Header authenticate(
-            final Credentials credentials,
-            final HttpRequest request,
-            final HttpContext context) throws AuthenticationException {
+    public Header authenticate(final Credentials credentials,final HttpRequest request,final HttpContext context)
+                    throws AuthenticationException{
         return super.authenticate(credentials, request, context);
     }
 
-    @Override @SuppressWarnings("deprecation")
-    protected byte[] generateToken(final byte[] input, final String authServer) throws GSSException {
+    @Override
+    @SuppressWarnings("deprecation")
+    protected byte[] generateToken(final byte[] input,final String authServer) throws GSSException{
         return super.generateToken(input, authServer);
     }
 
     @Override
-    protected byte[] generateToken(final byte[] input, final String authServer, final Credentials credentials) throws GSSException {
+    protected byte[] generateToken(final byte[] input,final String authServer,final Credentials credentials) throws GSSException{
         return generateGSSToken(input, new Oid(SPNEGO_OID), authServer, credentials);
     }
 
@@ -103,7 +105,7 @@ public class SPNegoScheme extends GGSSchemeBase {
      * @return {@code null}
      */
     @Override
-    public String getParameter(final String name) {
+    public String getParameter(final String name){
         Args.notNull(name, "Parameter name");
         return null;
     }
@@ -115,7 +117,7 @@ public class SPNegoScheme extends GGSSchemeBase {
      * @return {@code null}
      */
     @Override
-    public String getRealm() {
+    public String getRealm(){
         return null;
     }
 
@@ -125,7 +127,7 @@ public class SPNegoScheme extends GGSSchemeBase {
      * @return {@code true}.
      */
     @Override
-    public boolean isConnectionBased() {
+    public boolean isConnectionBased(){
         return true;
     }
 

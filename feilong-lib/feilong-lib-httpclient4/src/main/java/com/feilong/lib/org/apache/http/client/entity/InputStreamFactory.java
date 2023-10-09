@@ -34,7 +34,7 @@ import java.io.InputStream;
  *
  * @since 4.4
  */
-public interface InputStreamFactory {
+public interface InputStreamFactory{
 
     InputStream create(InputStream inStream) throws IOException;
 

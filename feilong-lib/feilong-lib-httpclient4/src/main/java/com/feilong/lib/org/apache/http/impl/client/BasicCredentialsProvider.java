@@ -42,22 +42,20 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class BasicCredentialsProvider implements CredentialsProvider {
+public class BasicCredentialsProvider implements CredentialsProvider{
 
     private final ConcurrentHashMap<AuthScope, Credentials> credMap;
 
     /**
      * Default constructor.
      */
-    public BasicCredentialsProvider() {
+    public BasicCredentialsProvider(){
         super();
-        this.credMap = new ConcurrentHashMap<AuthScope, Credentials>();
+        this.credMap = new ConcurrentHashMap<>();
     }
 
     @Override
-    public void setCredentials(
-            final AuthScope authscope,
-            final Credentials credentials) {
+    public void setCredentials(final AuthScope authscope,final Credentials credentials){
         Args.notNull(authscope, "Authentication scope");
         credMap.put(authscope, credentials);
     }
@@ -65,29 +63,29 @@ public class BasicCredentialsProvider implements CredentialsProvider {
     /**
      * Find matching {@link Credentials credentials} for the given authentication scope.
      *
-     * @param map the credentials hash map
-     * @param authscope the {@link AuthScope authentication scope}
+     * @param map
+     *            the credentials hash map
+     * @param authscope
+     *            the {@link AuthScope authentication scope}
      * @return the credentials
      *
      */
-    private static Credentials matchCredentials(
-            final Map<AuthScope, Credentials> map,
-            final AuthScope authscope) {
+    private static Credentials matchCredentials(final Map<AuthScope, Credentials> map,final AuthScope authscope){
         // see if we get a direct hit
         Credentials creds = map.get(authscope);
-        if (creds == null) {
+        if (creds == null){
             // Nope.
             // Do a full scan
-            int bestMatchFactor  = -1;
-            AuthScope bestMatch  = null;
-            for (final AuthScope current: map.keySet()) {
+            int bestMatchFactor = -1;
+            AuthScope bestMatch = null;
+            for (final AuthScope current : map.keySet()){
                 final int factor = authscope.match(current);
-                if (factor > bestMatchFactor) {
+                if (factor > bestMatchFactor){
                     bestMatchFactor = factor;
                     bestMatch = current;
                 }
             }
-            if (bestMatch != null) {
+            if (bestMatch != null){
                 creds = map.get(bestMatch);
             }
         }
@@ -95,18 +93,18 @@ public class BasicCredentialsProvider implements CredentialsProvider {
     }
 
     @Override
-    public Credentials getCredentials(final AuthScope authscope) {
+    public Credentials getCredentials(final AuthScope authscope){
         Args.notNull(authscope, "Authentication scope");
         return matchCredentials(this.credMap, authscope);
     }
 
     @Override
-    public void clear() {
+    public void clear(){
         this.credMap.clear();
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return credMap.toString();
     }
 

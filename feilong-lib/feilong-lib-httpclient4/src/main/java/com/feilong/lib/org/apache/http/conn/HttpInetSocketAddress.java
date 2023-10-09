@@ -41,24 +41,24 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @deprecated (4.3)
  */
 @Deprecated
-public class HttpInetSocketAddress extends InetSocketAddress {
+public class HttpInetSocketAddress extends InetSocketAddress{
 
     private static final long serialVersionUID = -6650701828361907957L;
 
-    private final HttpHost httphost;
+    private final HttpHost    httphost;
 
-    public HttpInetSocketAddress(final HttpHost httphost, final InetAddress addr, final int port) {
+    public HttpInetSocketAddress(final HttpHost httphost, final InetAddress addr, final int port){
         super(addr, port);
         Args.notNull(httphost, "HTTP host");
         this.httphost = httphost;
     }
 
-    public HttpHost getHttpHost() {
+    public HttpHost getHttpHost(){
         return this.httphost;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return this.httphost.getHostName() + ":" + getPort();
     }
 

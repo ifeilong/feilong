@@ -36,12 +36,12 @@ import com.feilong.lib.org.apache.http.conn.DnsResolver;
  *
  * @since 4.2
  */
-public class SystemDefaultDnsResolver implements DnsResolver {
+public class SystemDefaultDnsResolver implements DnsResolver{
 
     public static final SystemDefaultDnsResolver INSTANCE = new SystemDefaultDnsResolver();
 
     @Override
-    public InetAddress[] resolve(final String host) throws UnknownHostException {
+    public InetAddress[] resolve(final String host) throws UnknownHostException{
         return InetAddress.getAllByName(host);
     }
 

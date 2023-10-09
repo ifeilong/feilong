@@ -37,14 +37,15 @@ import com.feilong.lib.org.apache.http.cookie.Cookie;
  *
  * @since 4.0
  */
-public interface CookieStore {
+public interface CookieStore{
 
     /**
      * Adds an {@link Cookie}, replacing any existing equivalent cookies.
      * If the given cookie has already expired it will not be added, but existing
      * values will still be removed.
      *
-     * @param cookie the {@link Cookie cookie} to be added
+     * @param cookie
+     *            the {@link Cookie cookie} to be added
      */
     void addCookie(Cookie cookie);
 

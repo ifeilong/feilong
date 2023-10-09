@@ -42,27 +42,27 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class TokenParser {
+public class TokenParser{
 
-    public static BitSet INIT_BITSET(final int ... b) {
+    public static BitSet INIT_BITSET(final int...b){
         final BitSet bitset = new BitSet();
-        for (final int aB : b) {
+        for (final int aB : b){
             bitset.set(aB);
         }
         return bitset;
     }
 
     /** US-ASCII CR, carriage return (13) */
-    public static final char CR = '\r';
+    public static final char CR     = '\r';
 
     /** US-ASCII LF, line feed (10) */
-    public static final char LF = '\n';
+    public static final char LF     = '\n';
 
     /** US-ASCII SP, space (32) */
-    public static final char SP = ' ';
+    public static final char SP     = ' ';
 
     /** US-ASCII HT, horizontal-tab (9) */
-    public static final char HT = '\t';
+    public static final char HT     = '\t';
 
     /** Double quote */
     public static final char DQUOTE = '\"';
@@ -70,7 +70,7 @@ public class TokenParser {
     /** Backward slash / escape character */
     public static final char ESCAPE = '\\';
 
-    public static boolean isWhitespace(final char ch) {
+    public static boolean isWhitespace(final char ch){
         return ch == SP || ch == HT || ch == CR || ch == LF;
     }
 
@@ -80,23 +80,26 @@ public class TokenParser {
      * Extracts from the sequence of chars a token terminated with any of the given delimiters
      * discarding semantically insignificant whitespace characters.
      *
-     * @param buf buffer with the sequence of chars to be parsed
-     * @param cursor defines the bounds and current position of the buffer
-     * @param delimiters set of delimiting characters. Can be {@code null} if the token
-     *  is not delimited by any character.
+     * @param buf
+     *            buffer with the sequence of chars to be parsed
+     * @param cursor
+     *            defines the bounds and current position of the buffer
+     * @param delimiters
+     *            set of delimiting characters. Can be {@code null} if the token
+     *            is not delimited by any character.
      */
-    public String parseToken(final CharArrayBuffer buf, final ParserCursor cursor, final BitSet delimiters) {
+    public String parseToken(final CharArrayBuffer buf,final ParserCursor cursor,final BitSet delimiters){
         final StringBuilder dst = new StringBuilder();
         boolean whitespace = false;
-        while (!cursor.atEnd()) {
+        while (!cursor.atEnd()){
             final char current = buf.charAt(cursor.getPos());
-            if (delimiters != null && delimiters.get(current)) {
+            if (delimiters != null && delimiters.get(current)){
                 break;
-            } else if (isWhitespace(current)) {
+            }else if (isWhitespace(current)){
                 skipWhiteSpace(buf, cursor);
                 whitespace = true;
-            } else {
-                if (whitespace && dst.length() > 0) {
+            }else{
+                if (whitespace && dst.length() > 0){
                     dst.append(' ');
                 }
                 copyContent(buf, cursor, delimiters, dst);
@@ -111,29 +114,32 @@ public class TokenParser {
      * terminated with any of the given delimiters discarding semantically insignificant
      * whitespace characters.
      *
-     * @param buf buffer with the sequence of chars to be parsed
-     * @param cursor defines the bounds and current position of the buffer
-     * @param delimiters set of delimiting characters. Can be {@code null} if the value
-     *  is not delimited by any character.
+     * @param buf
+     *            buffer with the sequence of chars to be parsed
+     * @param cursor
+     *            defines the bounds and current position of the buffer
+     * @param delimiters
+     *            set of delimiting characters. Can be {@code null} if the value
+     *            is not delimited by any character.
      */
-    public String parseValue(final CharArrayBuffer buf, final ParserCursor cursor, final BitSet delimiters) {
+    public String parseValue(final CharArrayBuffer buf,final ParserCursor cursor,final BitSet delimiters){
         final StringBuilder dst = new StringBuilder();
         boolean whitespace = false;
-        while (!cursor.atEnd()) {
+        while (!cursor.atEnd()){
             final char current = buf.charAt(cursor.getPos());
-            if (delimiters != null && delimiters.get(current)) {
+            if (delimiters != null && delimiters.get(current)){
                 break;
-            } else if (isWhitespace(current)) {
+            }else if (isWhitespace(current)){
                 skipWhiteSpace(buf, cursor);
                 whitespace = true;
-            } else if (current == DQUOTE) {
-                if (whitespace && dst.length() > 0) {
+            }else if (current == DQUOTE){
+                if (whitespace && dst.length() > 0){
                     dst.append(' ');
                 }
                 copyQuotedContent(buf, cursor, dst);
                 whitespace = false;
-            } else {
-                if (whitespace && dst.length() > 0) {
+            }else{
+                if (whitespace && dst.length() > 0){
                     dst.append(' ');
                 }
                 copyUnquotedContent(buf, cursor, delimiters, dst);
@@ -147,16 +153,18 @@ public class TokenParser {
      * Skips semantically insignificant whitespace characters and moves the cursor to the closest
      * non-whitespace character.
      *
-     * @param buf buffer with the sequence of chars to be parsed
-     * @param cursor defines the bounds and current position of the buffer
+     * @param buf
+     *            buffer with the sequence of chars to be parsed
+     * @param cursor
+     *            defines the bounds and current position of the buffer
      */
-    public void skipWhiteSpace(final CharArrayBuffer buf, final ParserCursor cursor) {
+    public void skipWhiteSpace(final CharArrayBuffer buf,final ParserCursor cursor){
         int pos = cursor.getPos();
         final int indexFrom = cursor.getPos();
         final int indexTo = cursor.getUpperBound();
-        for (int i = indexFrom; i < indexTo; i++) {
+        for (int i = indexFrom; i < indexTo; i++){
             final char current = buf.charAt(i);
-            if (!isWhitespace(current)) {
+            if (!isWhitespace(current)){
                 break;
             }
             pos++;
@@ -168,20 +176,23 @@ public class TokenParser {
      * Transfers content into the destination buffer until a whitespace character or any of
      * the given delimiters is encountered.
      *
-     * @param buf buffer with the sequence of chars to be parsed
-     * @param cursor defines the bounds and current position of the buffer
-     * @param delimiters set of delimiting characters. Can be {@code null} if the value
-     *  is delimited by a whitespace only.
-     * @param dst destination buffer
+     * @param buf
+     *            buffer with the sequence of chars to be parsed
+     * @param cursor
+     *            defines the bounds and current position of the buffer
+     * @param delimiters
+     *            set of delimiting characters. Can be {@code null} if the value
+     *            is delimited by a whitespace only.
+     * @param dst
+     *            destination buffer
      */
-    public void copyContent(final CharArrayBuffer buf, final ParserCursor cursor, final BitSet delimiters,
-            final StringBuilder dst) {
+    public void copyContent(final CharArrayBuffer buf,final ParserCursor cursor,final BitSet delimiters,final StringBuilder dst){
         int pos = cursor.getPos();
         final int indexFrom = cursor.getPos();
         final int indexTo = cursor.getUpperBound();
-        for (int i = indexFrom; i < indexTo; i++) {
+        for (int i = indexFrom; i < indexTo; i++){
             final char current = buf.charAt(i);
-            if ((delimiters != null && delimiters.get(current)) || isWhitespace(current)) {
+            if ((delimiters != null && delimiters.get(current)) || isWhitespace(current)){
                 break;
             }
             pos++;
@@ -191,24 +202,26 @@ public class TokenParser {
     }
 
     /**
-     * Transfers content into the destination buffer until a whitespace character,  a quote,
+     * Transfers content into the destination buffer until a whitespace character, a quote,
      * or any of the given delimiters is encountered.
      *
-     * @param buf buffer with the sequence of chars to be parsed
-     * @param cursor defines the bounds and current position of the buffer
-     * @param delimiters set of delimiting characters. Can be {@code null} if the value
-     *  is delimited by a whitespace or a quote only.
-     * @param dst destination buffer
+     * @param buf
+     *            buffer with the sequence of chars to be parsed
+     * @param cursor
+     *            defines the bounds and current position of the buffer
+     * @param delimiters
+     *            set of delimiting characters. Can be {@code null} if the value
+     *            is delimited by a whitespace or a quote only.
+     * @param dst
+     *            destination buffer
      */
-    public void copyUnquotedContent(final CharArrayBuffer buf, final ParserCursor cursor,
-            final BitSet delimiters, final StringBuilder dst) {
+    public void copyUnquotedContent(final CharArrayBuffer buf,final ParserCursor cursor,final BitSet delimiters,final StringBuilder dst){
         int pos = cursor.getPos();
         final int indexFrom = cursor.getPos();
         final int indexTo = cursor.getUpperBound();
-        for (int i = indexFrom; i < indexTo; i++) {
+        for (int i = indexFrom; i < indexTo; i++){
             final char current = buf.charAt(i);
-            if ((delimiters != null && delimiters.get(current))
-                    || isWhitespace(current) || current == DQUOTE) {
+            if ((delimiters != null && delimiters.get(current)) || isWhitespace(current) || current == DQUOTE){
                 break;
             }
             pos++;
@@ -220,41 +233,43 @@ public class TokenParser {
     /**
      * Transfers content enclosed with quote marks into the destination buffer.
      *
-     * @param buf buffer with the sequence of chars to be parsed
-     * @param cursor defines the bounds and current position of the buffer
-     * @param dst destination buffer
+     * @param buf
+     *            buffer with the sequence of chars to be parsed
+     * @param cursor
+     *            defines the bounds and current position of the buffer
+     * @param dst
+     *            destination buffer
      */
-    public void copyQuotedContent(final CharArrayBuffer buf, final ParserCursor cursor,
-            final StringBuilder dst) {
-        if (cursor.atEnd()) {
+    public void copyQuotedContent(final CharArrayBuffer buf,final ParserCursor cursor,final StringBuilder dst){
+        if (cursor.atEnd()){
             return;
         }
         int pos = cursor.getPos();
         int indexFrom = cursor.getPos();
         final int indexTo = cursor.getUpperBound();
         char current = buf.charAt(pos);
-        if (current != DQUOTE) {
+        if (current != DQUOTE){
             return;
         }
         pos++;
         indexFrom++;
         boolean escaped = false;
-        for (int i = indexFrom; i < indexTo; i++, pos++) {
+        for (int i = indexFrom; i < indexTo; i++, pos++){
             current = buf.charAt(i);
-            if (escaped) {
-                if (current != DQUOTE && current != ESCAPE) {
+            if (escaped){
+                if (current != DQUOTE && current != ESCAPE){
                     dst.append(ESCAPE);
                 }
                 dst.append(current);
                 escaped = false;
-            } else {
-                if (current == DQUOTE) {
+            }else{
+                if (current == DQUOTE){
                     pos++;
                     break;
                 }
-                if (current == ESCAPE) {
+                if (current == ESCAPE){
                     escaped = true;
-                } else if (current != CR && current != LF) {
+                }else if (current != CR && current != LF){
                     dst.append(current);
                 }
             }

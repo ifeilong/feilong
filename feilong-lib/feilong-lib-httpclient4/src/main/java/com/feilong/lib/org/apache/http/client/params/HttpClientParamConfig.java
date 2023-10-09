@@ -44,58 +44,67 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @since 4.3
  */
 @Deprecated
-public final class HttpClientParamConfig {
+public final class HttpClientParamConfig{
 
-    private HttpClientParamConfig() {
+    private HttpClientParamConfig(){
     }
 
     @SuppressWarnings("unchecked")
-    public static RequestConfig getRequestConfig(final HttpParams params) {
+    public static RequestConfig getRequestConfig(final HttpParams params){
         return getRequestConfig(params, RequestConfig.DEFAULT);
     }
 
     @SuppressWarnings("unchecked")
-    public static RequestConfig getRequestConfig(final HttpParams params, final RequestConfig defaultConfig) {
+    public static RequestConfig getRequestConfig(final HttpParams params,final RequestConfig defaultConfig){
         final RequestConfig.Builder builder = RequestConfig.copy(defaultConfig)
-                .setSocketTimeout(params.getIntParameter(
-                        CoreConnectionPNames.SO_TIMEOUT, defaultConfig.getSocketTimeout()))
-                .setStaleConnectionCheckEnabled(params.getBooleanParameter(
-                        CoreConnectionPNames.STALE_CONNECTION_CHECK, defaultConfig.isStaleConnectionCheckEnabled()))
-                .setConnectTimeout(params.getIntParameter(
-                        CoreConnectionPNames.CONNECTION_TIMEOUT, defaultConfig.getConnectTimeout()))
-                .setExpectContinueEnabled(params.getBooleanParameter(
-                        CoreProtocolPNames.USE_EXPECT_CONTINUE, defaultConfig.isExpectContinueEnabled()))
-                .setAuthenticationEnabled(params.getBooleanParameter(
-                        ClientPNames.HANDLE_AUTHENTICATION, defaultConfig.isAuthenticationEnabled()))
-                .setCircularRedirectsAllowed(params.getBooleanParameter(
-                        ClientPNames.ALLOW_CIRCULAR_REDIRECTS, defaultConfig.isCircularRedirectsAllowed()))
-                .setConnectionRequestTimeout((int) params.getLongParameter(
-                        ClientPNames.CONN_MANAGER_TIMEOUT, defaultConfig.getConnectionRequestTimeout()))
-                .setMaxRedirects(params.getIntParameter(
-                        ClientPNames.MAX_REDIRECTS, defaultConfig.getMaxRedirects()))
-                .setRedirectsEnabled(params.getBooleanParameter(
-                        ClientPNames.HANDLE_REDIRECTS, defaultConfig.isRedirectsEnabled()))
-                .setRelativeRedirectsAllowed(!params.getBooleanParameter(
-                        ClientPNames.REJECT_RELATIVE_REDIRECT, !defaultConfig.isRelativeRedirectsAllowed()));
+                        .setSocketTimeout(params.getIntParameter(CoreConnectionPNames.SO_TIMEOUT, defaultConfig.getSocketTimeout()))
+                        .setStaleConnectionCheckEnabled(
+                                        params.getBooleanParameter(
+                                                        CoreConnectionPNames.STALE_CONNECTION_CHECK,
+                                                        defaultConfig.isStaleConnectionCheckEnabled()))
+                        .setConnectTimeout(
+                                        params.getIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, defaultConfig.getConnectTimeout()))
+                        .setExpectContinueEnabled(
+                                        params.getBooleanParameter(
+                                                        CoreProtocolPNames.USE_EXPECT_CONTINUE,
+                                                        defaultConfig.isExpectContinueEnabled()))
+                        .setAuthenticationEnabled(
+                                        params.getBooleanParameter(
+                                                        ClientPNames.HANDLE_AUTHENTICATION,
+                                                        defaultConfig.isAuthenticationEnabled()))
+                        .setCircularRedirectsAllowed(
+                                        params.getBooleanParameter(
+                                                        ClientPNames.ALLOW_CIRCULAR_REDIRECTS,
+                                                        defaultConfig.isCircularRedirectsAllowed()))
+                        .setConnectionRequestTimeout(
+                                        (int) params.getLongParameter(
+                                                        ClientPNames.CONN_MANAGER_TIMEOUT,
+                                                        defaultConfig.getConnectionRequestTimeout()))
+                        .setMaxRedirects(params.getIntParameter(ClientPNames.MAX_REDIRECTS, defaultConfig.getMaxRedirects()))
+                        .setRedirectsEnabled(params.getBooleanParameter(ClientPNames.HANDLE_REDIRECTS, defaultConfig.isRedirectsEnabled()))
+                        .setRelativeRedirectsAllowed(
+                                        !params.getBooleanParameter(
+                                                        ClientPNames.REJECT_RELATIVE_REDIRECT,
+                                                        !defaultConfig.isRelativeRedirectsAllowed()));
 
         final HttpHost proxy = (HttpHost) params.getParameter(ConnRoutePNames.DEFAULT_PROXY);
-        if (proxy != null) {
+        if (proxy != null){
             builder.setProxy(proxy);
         }
         final InetAddress localAddress = (InetAddress) params.getParameter(ConnRoutePNames.LOCAL_ADDRESS);
-        if (localAddress != null) {
+        if (localAddress != null){
             builder.setLocalAddress(localAddress);
         }
         final Collection<String> targetAuthPrefs = (Collection<String>) params.getParameter(AuthPNames.TARGET_AUTH_PREF);
-        if (targetAuthPrefs != null) {
+        if (targetAuthPrefs != null){
             builder.setTargetPreferredAuthSchemes(targetAuthPrefs);
         }
         final Collection<String> proxySuthPrefs = (Collection<String>) params.getParameter(AuthPNames.PROXY_AUTH_PREF);
-        if (proxySuthPrefs != null) {
+        if (proxySuthPrefs != null){
             builder.setProxyPreferredAuthSchemes(proxySuthPrefs);
         }
         final String cookiePolicy = (String) params.getParameter(ClientPNames.COOKIE_POLICY);
-        if (cookiePolicy != null) {
+        if (cookiePolicy != null){
             builder.setCookieSpec(cookiePolicy);
         }
         return builder.build();

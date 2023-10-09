@@ -37,9 +37,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  * <br>
  * Patterns may have three formats:
  * <ul>
- *   <li>{@code *}</li>
- *   <li>{@code *&lt;uri&gt;}</li>
- *   <li>{@code &lt;uri&gt;*}</li>
+ * <li>{@code *}</li>
+ * <li>{@code *&lt;uri&gt;}</li>
+ * <li>{@code &lt;uri&gt;*}</li>
  * </ul>
  * <br>
  * This class can be used to map an instance of
@@ -50,16 +50,16 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class UriHttpRequestHandlerMapper implements HttpRequestHandlerMapper {
+public class UriHttpRequestHandlerMapper implements HttpRequestHandlerMapper{
 
     private final UriPatternMatcher<HttpRequestHandler> matcher;
 
-    protected UriHttpRequestHandlerMapper(final UriPatternMatcher<HttpRequestHandler> matcher) {
+    protected UriHttpRequestHandlerMapper(final UriPatternMatcher<HttpRequestHandler> matcher){
         super();
         this.matcher = Args.notNull(matcher, "Pattern matcher");
     }
 
-    public UriHttpRequestHandlerMapper() {
+    public UriHttpRequestHandlerMapper(){
         this(new UriPatternMatcher<HttpRequestHandler>());
     }
 
@@ -67,10 +67,12 @@ public class UriHttpRequestHandlerMapper implements HttpRequestHandlerMapper {
      * Registers the given {@link HttpRequestHandler} as a handler for URIs
      * matching the given pattern.
      *
-     * @param pattern the pattern to register the handler for.
-     * @param handler the handler.
+     * @param pattern
+     *            the pattern to register the handler for.
+     * @param handler
+     *            the handler.
      */
-    public void register(final String pattern, final HttpRequestHandler handler) {
+    public void register(final String pattern,final HttpRequestHandler handler){
         Args.notNull(pattern, "Pattern");
         Args.notNull(handler, "Handler");
         matcher.register(pattern, handler);
@@ -79,23 +81,24 @@ public class UriHttpRequestHandlerMapper implements HttpRequestHandlerMapper {
     /**
      * Removes registered handler, if exists, for the given pattern.
      *
-     * @param pattern the pattern to unregister the handler for.
+     * @param pattern
+     *            the pattern to unregister the handler for.
      */
-    public void unregister(final String pattern) {
+    public void unregister(final String pattern){
         matcher.unregister(pattern);
     }
 
     /**
      * Extracts request path from the given {@link HttpRequest}
      */
-    protected String getRequestPath(final HttpRequest request) {
+    protected String getRequestPath(final HttpRequest request){
         String uriPath = request.getRequestLine().getUri();
         int index = uriPath.indexOf('?');
-        if (index != -1) {
+        if (index != -1){
             uriPath = uriPath.substring(0, index);
-        } else {
+        }else{
             index = uriPath.indexOf('#');
-            if (index != -1) {
+            if (index != -1){
                 uriPath = uriPath.substring(0, index);
             }
         }
@@ -105,11 +108,12 @@ public class UriHttpRequestHandlerMapper implements HttpRequestHandlerMapper {
     /**
      * Looks up a handler matching the given request URI.
      *
-     * @param request the request
+     * @param request
+     *            the request
      * @return handler or {@code null} if no match is found.
      */
     @Override
-    public HttpRequestHandler lookup(final HttpRequest request) {
+    public HttpRequestHandler lookup(final HttpRequest request){
         Args.notNull(request, "HTTP request");
         return matcher.lookup(getRequestPath(request));
     }

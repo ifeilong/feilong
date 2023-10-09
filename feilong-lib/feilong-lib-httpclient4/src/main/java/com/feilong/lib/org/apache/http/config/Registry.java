@@ -40,25 +40,25 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public final class Registry<I> implements Lookup<I> {
+public final class Registry<I> implements Lookup<I>{
 
     private final Map<String, I> map;
 
-    Registry(final Map<String, I> map) {
+    Registry(final Map<String, I> map){
         super();
-        this.map = new ConcurrentHashMap<String, I>(map);
+        this.map = new ConcurrentHashMap<>(map);
     }
 
     @Override
-    public I lookup(final String key) {
-        if (key == null) {
+    public I lookup(final String key){
+        if (key == null){
             return null;
         }
         return map.get(key.toLowerCase(Locale.ROOT));
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return map.toString();
     }
 

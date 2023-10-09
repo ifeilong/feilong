@@ -46,23 +46,23 @@ import com.feilong.lib.org.apache.http.io.HttpMessageWriterFactory;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultBHttpServerConnectionFactory
-        implements HttpConnectionFactory<DefaultBHttpServerConnection> {
+public class DefaultBHttpServerConnectionFactory implements HttpConnectionFactory<DefaultBHttpServerConnection>{
 
     public static final DefaultBHttpServerConnectionFactory INSTANCE = new DefaultBHttpServerConnectionFactory();
 
-    private final ConnectionConfig cconfig;
-    private final ContentLengthStrategy incomingContentStrategy;
-    private final ContentLengthStrategy outgoingContentStrategy;
-    private final HttpMessageParserFactory<HttpRequest> requestParserFactory;
-    private final HttpMessageWriterFactory<HttpResponse> responseWriterFactory;
+    private final ConnectionConfig                          cconfig;
 
-    public DefaultBHttpServerConnectionFactory(
-            final ConnectionConfig cconfig,
-            final ContentLengthStrategy incomingContentStrategy,
-            final ContentLengthStrategy outgoingContentStrategy,
-            final HttpMessageParserFactory<HttpRequest> requestParserFactory,
-            final HttpMessageWriterFactory<HttpResponse> responseWriterFactory) {
+    private final ContentLengthStrategy                     incomingContentStrategy;
+
+    private final ContentLengthStrategy                     outgoingContentStrategy;
+
+    private final HttpMessageParserFactory<HttpRequest>     requestParserFactory;
+
+    private final HttpMessageWriterFactory<HttpResponse>    responseWriterFactory;
+
+    public DefaultBHttpServerConnectionFactory(final ConnectionConfig cconfig, final ContentLengthStrategy incomingContentStrategy,
+                    final ContentLengthStrategy outgoingContentStrategy, final HttpMessageParserFactory<HttpRequest> requestParserFactory,
+                    final HttpMessageWriterFactory<HttpResponse> responseWriterFactory){
         super();
         this.cconfig = cconfig != null ? cconfig : ConnectionConfig.DEFAULT;
         this.incomingContentStrategy = incomingContentStrategy;
@@ -71,33 +71,32 @@ public class DefaultBHttpServerConnectionFactory
         this.responseWriterFactory = responseWriterFactory;
     }
 
-    public DefaultBHttpServerConnectionFactory(
-            final ConnectionConfig cconfig,
-            final HttpMessageParserFactory<HttpRequest> requestParserFactory,
-            final HttpMessageWriterFactory<HttpResponse> responseWriterFactory) {
+    public DefaultBHttpServerConnectionFactory(final ConnectionConfig cconfig,
+                    final HttpMessageParserFactory<HttpRequest> requestParserFactory,
+                    final HttpMessageWriterFactory<HttpResponse> responseWriterFactory){
         this(cconfig, null, null, requestParserFactory, responseWriterFactory);
     }
 
-    public DefaultBHttpServerConnectionFactory(final ConnectionConfig cconfig) {
+    public DefaultBHttpServerConnectionFactory(final ConnectionConfig cconfig){
         this(cconfig, null, null, null, null);
     }
 
-    public DefaultBHttpServerConnectionFactory() {
+    public DefaultBHttpServerConnectionFactory(){
         this(null, null, null, null, null);
     }
 
     @Override
-    public DefaultBHttpServerConnection createConnection(final Socket socket) throws IOException {
+    public DefaultBHttpServerConnection createConnection(final Socket socket) throws IOException{
         final DefaultBHttpServerConnection conn = new DefaultBHttpServerConnection(
-                this.cconfig.getBufferSize(),
-                this.cconfig.getFragmentSizeHint(),
-                ConnSupport.createDecoder(this.cconfig),
-                ConnSupport.createEncoder(this.cconfig),
-                this.cconfig.getMessageConstraints(),
-                this.incomingContentStrategy,
-                this.outgoingContentStrategy,
-                this.requestParserFactory,
-                this.responseWriterFactory);
+                        this.cconfig.getBufferSize(),
+                        this.cconfig.getFragmentSizeHint(),
+                        ConnSupport.createDecoder(this.cconfig),
+                        ConnSupport.createEncoder(this.cconfig),
+                        this.cconfig.getMessageConstraints(),
+                        this.incomingContentStrategy,
+                        this.outgoingContentStrategy,
+                        this.requestParserFactory,
+                        this.responseWriterFactory);
         conn.bind(socket);
         return conn;
     }

@@ -35,64 +35,65 @@ import java.io.OutputStream;
  *
  * @since 4.3
  */
-class LoggingOutputStream extends OutputStream {
+class LoggingOutputStream extends OutputStream{
 
     private final OutputStream out;
-    private final Wire wire;
 
-    public LoggingOutputStream(final OutputStream out, final Wire wire) {
+    private final Wire         wire;
+
+    public LoggingOutputStream(final OutputStream out, final Wire wire){
         super();
         this.out = out;
         this.wire = wire;
     }
 
     @Override
-    public void write(final int b) throws IOException {
-        try {
+    public void write(final int b) throws IOException{
+        try{
             wire.output(b);
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             wire.output("[write] I/O error: " + ex.getMessage());
             throw ex;
         }
     }
 
     @Override
-    public void write(final byte[] b) throws IOException {
-        try {
+    public void write(final byte[] b) throws IOException{
+        try{
             wire.output(b);
             out.write(b);
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             wire.output("[write] I/O error: " + ex.getMessage());
             throw ex;
         }
     }
 
     @Override
-    public void write(final byte[] b, final int off, final int len) throws IOException {
-        try {
+    public void write(final byte[] b,final int off,final int len) throws IOException{
+        try{
             wire.output(b, off, len);
             out.write(b, off, len);
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             wire.output("[write] I/O error: " + ex.getMessage());
             throw ex;
         }
     }
 
     @Override
-    public void flush() throws IOException {
-        try {
+    public void flush() throws IOException{
+        try{
             out.flush();
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             wire.output("[flush] I/O error: " + ex.getMessage());
             throw ex;
         }
     }
 
     @Override
-    public void close() throws IOException {
-        try {
+    public void close() throws IOException{
+        try{
             out.close();
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             wire.output("[close] I/O error: " + ex.getMessage());
             throw ex;
         }

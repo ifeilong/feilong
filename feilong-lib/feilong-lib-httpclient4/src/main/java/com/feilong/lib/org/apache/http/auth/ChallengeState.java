@@ -31,7 +31,7 @@ package com.feilong.lib.org.apache.http.auth;
  *
  * @since 4.2
  */
-public enum ChallengeState {
+public enum ChallengeState{
 
     TARGET, PROXY
 

@@ -52,60 +52,59 @@ import com.feilong.lib.org.apache.http.protocol.HTTP;
  * @deprecated (4.3) do not use.
  */
 @Deprecated
-public class EntityEnclosingRequestWrapper extends RequestWrapper
-    implements HttpEntityEnclosingRequest {
+public class EntityEnclosingRequestWrapper extends RequestWrapper implements HttpEntityEnclosingRequest{
 
     private HttpEntity entity;
-    private boolean consumed;
 
-    public EntityEnclosingRequestWrapper(final HttpEntityEnclosingRequest request)
-        throws ProtocolException {
+    private boolean    consumed;
+
+    public EntityEnclosingRequestWrapper(final HttpEntityEnclosingRequest request) throws ProtocolException{
         super(request);
         setEntity(request.getEntity());
     }
 
     @Override
-    public HttpEntity getEntity() {
+    public HttpEntity getEntity(){
         return this.entity;
     }
 
     @Override
-    public void setEntity(final HttpEntity entity) {
+    public void setEntity(final HttpEntity entity){
         this.entity = entity != null ? new EntityWrapper(entity) : null;
         this.consumed = false;
     }
 
     @Override
-    public boolean expectContinue() {
+    public boolean expectContinue(){
         final Header expect = getFirstHeader(HTTP.EXPECT_DIRECTIVE);
         return expect != null && HTTP.EXPECT_CONTINUE.equalsIgnoreCase(expect.getValue());
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return this.entity == null || this.entity.isRepeatable() || !this.consumed;
     }
 
-    class EntityWrapper extends HttpEntityWrapper {
+    class EntityWrapper extends HttpEntityWrapper{
 
-        EntityWrapper(final HttpEntity entity) {
+        EntityWrapper(final HttpEntity entity){
             super(entity);
         }
 
         @Override
-        public void consumeContent() throws IOException {
+        public void consumeContent() throws IOException{
             consumed = true;
             super.consumeContent();
         }
 
         @Override
-        public InputStream getContent() throws IOException {
+        public InputStream getContent() throws IOException{
             consumed = true;
             return super.getContent();
         }
 
         @Override
-        public void writeTo(final OutputStream outStream) throws IOException {
+        public void writeTo(final OutputStream outStream) throws IOException{
             consumed = true;
             super.writeTo(outStream);
         }

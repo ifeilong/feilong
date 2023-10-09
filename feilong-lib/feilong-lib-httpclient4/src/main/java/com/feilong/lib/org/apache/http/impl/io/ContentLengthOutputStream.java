@@ -41,12 +41,12 @@ import com.feilong.lib.org.apache.http.util.Args;
  * long.
  * <p>
  * Note that this class NEVER closes the underlying stream, even when close
- * gets called.  Instead, the stream will be marked as closed and no further
+ * gets called. Instead, the stream will be marked as closed and no further
  * output will be permitted.
  *
  * @since 4.0
  */
-public class ContentLengthOutputStream extends OutputStream {
+public class ContentLengthOutputStream extends OutputStream{
 
     /**
      * Wrapped session output buffer.
@@ -57,57 +57,62 @@ public class ContentLengthOutputStream extends OutputStream {
      * The maximum number of bytes that can be written the stream. Subsequent
      * write operations will be ignored.
      */
-    private final long contentLength;
+    private final long                contentLength;
 
     /** Total bytes written */
-    private long total;
+    private long                      total;
 
     /** True if the stream is closed. */
-    private boolean closed;
+    private boolean                   closed;
 
     /**
      * Wraps a session output buffer and cuts off output after a defined number
      * of bytes.
      *
-     * @param out The session output buffer
-     * @param contentLength The maximum number of bytes that can be written to
-     * the stream. Subsequent write operations will be ignored.
+     * @param out
+     *            The session output buffer
+     * @param contentLength
+     *            The maximum number of bytes that can be written to
+     *            the stream. Subsequent write operations will be ignored.
      *
      * @since 4.0
      */
-    public ContentLengthOutputStream(final SessionOutputBuffer out, final long contentLength) {
+    public ContentLengthOutputStream(final SessionOutputBuffer out, final long contentLength){
         super();
         this.out = Args.notNull(out, "Session output buffer");
         this.contentLength = Args.notNegative(contentLength, "Content length");
     }
 
     /**
-     * <p>Does not close the underlying socket output.</p>
+     * <p>
+     * Does not close the underlying socket output.
+     * </p>
      *
-     * @throws IOException If an I/O problem occurs.
+     * @throws IOException
+     *             If an I/O problem occurs.
      */
     @Override
-    public void close() throws IOException {
-        if (!this.closed) {
+    public void close() throws IOException{
+        if (!this.closed){
             this.closed = true;
             this.out.flush();
         }
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() throws IOException{
         this.out.flush();
     }
 
     @Override
-    public void write(final byte[] b, final int off, final int len) throws IOException {
-        if (this.closed) {
+    public void write(final byte[] b,final int off,final int len) throws IOException{
+        if (this.closed){
             throw new IOException("Attempted write to closed stream.");
         }
-        if (this.total < this.contentLength) {
+        if (this.total < this.contentLength){
             final long max = this.contentLength - this.total;
             int chunk = len;
-            if (chunk > max) {
+            if (chunk > max){
                 chunk = (int) max;
             }
             this.out.write(b, off, chunk);
@@ -116,16 +121,16 @@ public class ContentLengthOutputStream extends OutputStream {
     }
 
     @Override
-    public void write(final byte[] b) throws IOException {
+    public void write(final byte[] b) throws IOException{
         write(b, 0, b.length);
     }
 
     @Override
-    public void write(final int b) throws IOException {
-        if (this.closed) {
+    public void write(final int b) throws IOException{
+        if (this.closed){
             throw new IOException("Attempted write to closed stream.");
         }
-        if (this.total < this.contentLength) {
+        if (this.total < this.contentLength){
             this.out.write(b);
             this.total++;
         }

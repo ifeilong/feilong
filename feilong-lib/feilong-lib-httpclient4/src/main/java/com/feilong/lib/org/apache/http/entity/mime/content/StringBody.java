@@ -48,7 +48,7 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class StringBody extends AbstractContentBody {
+public class StringBody extends AbstractContentBody{
 
     private final byte[] content;
 
@@ -56,16 +56,13 @@ public class StringBody extends AbstractContentBody {
      * @since 4.1
      *
      * @deprecated (4.3) use {@link StringBody#StringBody(String, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public static StringBody create(
-            final String text,
-            final String mimeType,
-            final Charset charset) throws IllegalArgumentException {
-        try {
+    public static StringBody create(final String text,final String mimeType,final Charset charset) throws IllegalArgumentException{
+        try{
             return new StringBody(text, mimeType, charset);
-        } catch (final UnsupportedEncodingException ex) {
+        }catch (final UnsupportedEncodingException ex){
             throw new IllegalArgumentException("Charset " + charset + " is not supported", ex);
         }
     }
@@ -74,11 +71,10 @@ public class StringBody extends AbstractContentBody {
      * @since 4.1
      *
      * @deprecated (4.3) use {@link StringBody#StringBody(String, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public static StringBody create(
-            final String text, final Charset charset) throws IllegalArgumentException {
+    public static StringBody create(final String text,final Charset charset) throws IllegalArgumentException{
         return create(text, null, charset);
     }
 
@@ -86,30 +82,31 @@ public class StringBody extends AbstractContentBody {
      * @since 4.1
      *
      * @deprecated (4.3) use {@link StringBody#StringBody(String, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public static StringBody create(final String text) throws IllegalArgumentException {
+    public static StringBody create(final String text) throws IllegalArgumentException{
         return create(text, null, null);
     }
 
     /**
      * Create a StringBody from the specified text, MIME type and character set.
      *
-     * @param text to be used for the body, not {@code null}
-     * @param mimeType the MIME type, not {@code null}
-     * @param charset the character set, may be {@code null}, in which case the US-ASCII charset is used
+     * @param text
+     *            to be used for the body, not {@code null}
+     * @param mimeType
+     *            the MIME type, not {@code null}
+     * @param charset
+     *            the character set, may be {@code null}, in which case the US-ASCII charset is used
      * @throws UnsupportedEncodingException
-     * @throws IllegalArgumentException if the {@code text} parameter is null
+     * @throws IllegalArgumentException
+     *             if the {@code text} parameter is null
      *
      * @deprecated (4.3) use {@link StringBody#StringBody(String, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public StringBody(
-            final String text,
-            final String mimeType,
-            final Charset charset) throws UnsupportedEncodingException {
+    public StringBody(final String text, final String mimeType, final Charset charset) throws UnsupportedEncodingException{
         this(text, ContentType.create(mimeType, charset != null ? charset : Consts.ASCII));
     }
 
@@ -117,16 +114,19 @@ public class StringBody extends AbstractContentBody {
      * Create a StringBody from the specified text and character set.
      * The MIME type is set to "text/plain".
      *
-     * @param text to be used for the body, not {@code null}
-     * @param charset the character set, may be {@code null}, in which case the US-ASCII charset is used
+     * @param text
+     *            to be used for the body, not {@code null}
+     * @param charset
+     *            the character set, may be {@code null}, in which case the US-ASCII charset is used
      * @throws UnsupportedEncodingException
-     * @throws IllegalArgumentException if the {@code text} parameter is null
+     * @throws IllegalArgumentException
+     *             if the {@code text} parameter is null
      *
      * @deprecated (4.3) use {@link StringBody#StringBody(String, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public StringBody(final String text, final Charset charset) throws UnsupportedEncodingException {
+    public StringBody(final String text, final Charset charset) throws UnsupportedEncodingException{
         this(text, "text/plain", charset);
     }
 
@@ -135,59 +135,59 @@ public class StringBody extends AbstractContentBody {
      * The MIME type is set to "text/plain".
      * The {@linkplain Consts#ASCII ASCII} charset is used.
      *
-     * @param text to be used for the body, not {@code null}
+     * @param text
+     *            to be used for the body, not {@code null}
      * @throws UnsupportedEncodingException
-     * @throws IllegalArgumentException if the {@code text} parameter is null
+     * @throws IllegalArgumentException
+     *             if the {@code text} parameter is null
      *
      * @deprecated (4.3) use {@link StringBody#StringBody(String, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public StringBody(final String text) throws UnsupportedEncodingException {
+    public StringBody(final String text) throws UnsupportedEncodingException{
         this(text, "text/plain", Consts.ASCII);
     }
 
     /**
      * @since 4.3
      */
-    public StringBody(final String text, final ContentType contentType) {
+    public StringBody(final String text, final ContentType contentType){
         super(contentType);
         Args.notNull(text, "Text");
         final Charset charset = contentType.getCharset();
         this.content = text.getBytes(charset != null ? charset : Consts.ASCII);
     }
 
-    public Reader getReader() {
+    public Reader getReader(){
         final Charset charset = getContentType().getCharset();
-        return new InputStreamReader(
-                new ByteArrayInputStream(this.content),
-                charset != null ? charset : Consts.ASCII);
+        return new InputStreamReader(new ByteArrayInputStream(this.content), charset != null ? charset : Consts.ASCII);
     }
 
     @Override
-    public void writeTo(final OutputStream out) throws IOException {
+    public void writeTo(final OutputStream out) throws IOException{
         Args.notNull(out, "Output stream");
         final InputStream in = new ByteArrayInputStream(this.content);
         final byte[] tmp = new byte[4096];
         int l;
-        while ((l = in.read(tmp)) != -1) {
+        while ((l = in.read(tmp)) != -1){
             out.write(tmp, 0, l);
         }
         out.flush();
     }
 
     @Override
-    public String getTransferEncoding() {
+    public String getTransferEncoding(){
         return MIME.ENC_8BIT;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return this.content.length;
     }
 
     @Override
-    public String getFilename() {
+    public String getFilename(){
         return null;
     }
 

@@ -35,7 +35,7 @@ package com.feilong.lib.org.apache.http.io;
  * @deprecated (4.3) no longer used.
  */
 @Deprecated
-public interface EofSensor {
+public interface EofSensor{
 
     boolean isEof();
 

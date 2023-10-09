@@ -41,12 +41,13 @@ import com.feilong.lib.org.apache.http.params.HttpProtocolParams;
  * @since 4.0
  */
 @SuppressWarnings("deprecation")
-public abstract class HttpRequestBase extends AbstractExecutionAwareRequest
-    implements HttpUriRequest, Configurable {
+public abstract class HttpRequestBase extends AbstractExecutionAwareRequest implements HttpUriRequest,Configurable{
 
     private ProtocolVersion version;
-    private URI uri;
-    private RequestConfig config;
+
+    private URI             uri;
+
+    private RequestConfig   config;
 
     @Override
     public abstract String getMethod();
@@ -54,12 +55,12 @@ public abstract class HttpRequestBase extends AbstractExecutionAwareRequest
     /**
      * @since 4.3
      */
-    public void setProtocolVersion(final ProtocolVersion version) {
+    public void setProtocolVersion(final ProtocolVersion version){
         this.version = version;
     }
 
     @Override
-    public ProtocolVersion getProtocolVersion() {
+    public ProtocolVersion getProtocolVersion(){
         return version != null ? version : HttpProtocolParams.getVersion(getParams());
     }
 
@@ -70,43 +71,42 @@ public abstract class HttpRequestBase extends AbstractExecutionAwareRequest
      * is not updated if the request is redirected to another location.
      */
     @Override
-    public URI getURI() {
+    public URI getURI(){
         return this.uri;
     }
 
     @Override
-    public RequestLine getRequestLine() {
+    public RequestLine getRequestLine(){
         final String method = getMethod();
         final ProtocolVersion ver = getProtocolVersion();
         final URI uriCopy = getURI(); // avoids possible window where URI could be changed
         String uritext = null;
-        if (uriCopy != null) {
+        if (uriCopy != null){
             uritext = uriCopy.toASCIIString();
         }
-        if (uritext == null || uritext.isEmpty()) {
+        if (uritext == null || uritext.isEmpty()){
             uritext = "/";
         }
         return new BasicRequestLine(method, uritext, ver);
     }
 
-
     @Override
-    public RequestConfig getConfig() {
+    public RequestConfig getConfig(){
         return config;
     }
 
-    public void setConfig(final RequestConfig config) {
+    public void setConfig(final RequestConfig config){
         this.config = config;
     }
 
-    public void setURI(final URI uri) {
+    public void setURI(final URI uri){
         this.uri = uri;
     }
 
     /**
      * @since 4.2
      */
-    public void started() {
+    public void started(){
     }
 
     /**
@@ -115,12 +115,12 @@ public abstract class HttpRequestBase extends AbstractExecutionAwareRequest
      *
      * @since 4.2
      */
-    public void releaseConnection() {
+    public void releaseConnection(){
         reset();
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return getMethod() + " " + getURI() + " " + getProtocolVersion();
     }
 

@@ -41,48 +41,48 @@ import com.feilong.lib.org.apache.http.impl.cookie.RFC6265CookieSpecProvider;
 /**
  * @since 4.5
  */
-public final class CookieSpecRegistries {
+public final class CookieSpecRegistries{
 
     /**
      * Creates a builder containing the default registry entries, using the provided public suffix matcher.
      */
-    public static RegistryBuilder<CookieSpecProvider> createDefaultBuilder(final PublicSuffixMatcher publicSuffixMatcher) {
+    public static RegistryBuilder<CookieSpecProvider> createDefaultBuilder(final PublicSuffixMatcher publicSuffixMatcher){
         final CookieSpecProvider defaultProvider = new DefaultCookieSpecProvider(publicSuffixMatcher);
         final CookieSpecProvider laxStandardProvider = new RFC6265CookieSpecProvider(
-                RFC6265CookieSpecProvider.CompatibilityLevel.RELAXED, publicSuffixMatcher);
+                        RFC6265CookieSpecProvider.CompatibilityLevel.RELAXED,
+                        publicSuffixMatcher);
         final CookieSpecProvider strictStandardProvider = new RFC6265CookieSpecProvider(
-                RFC6265CookieSpecProvider.CompatibilityLevel.STRICT, publicSuffixMatcher);
-        return RegistryBuilder.<CookieSpecProvider>create()
-                .register(CookieSpecs.DEFAULT, defaultProvider)
-                .register("best-match", defaultProvider)
-                .register("compatibility", defaultProvider)
-                .register(CookieSpecs.STANDARD, laxStandardProvider)
-                .register(CookieSpecs.STANDARD_STRICT, strictStandardProvider)
-                .register(CookieSpecs.NETSCAPE, new NetscapeDraftSpecProvider())
-                .register(CookieSpecs.IGNORE_COOKIES, new IgnoreSpecProvider());
+                        RFC6265CookieSpecProvider.CompatibilityLevel.STRICT,
+                        publicSuffixMatcher);
+        return RegistryBuilder.<CookieSpecProvider> create().register(CookieSpecs.DEFAULT, defaultProvider)
+                        .register("best-match", defaultProvider).register("compatibility", defaultProvider)
+                        .register(CookieSpecs.STANDARD, laxStandardProvider).register(CookieSpecs.STANDARD_STRICT, strictStandardProvider)
+                        .register(CookieSpecs.NETSCAPE, new NetscapeDraftSpecProvider())
+                        .register(CookieSpecs.IGNORE_COOKIES, new IgnoreSpecProvider());
     }
 
     /**
      * Creates a builder containing the default registry entries with the default public suffix matcher.
      */
-    public static RegistryBuilder<CookieSpecProvider> createDefaultBuilder() {
+    public static RegistryBuilder<CookieSpecProvider> createDefaultBuilder(){
         return createDefaultBuilder(PublicSuffixMatcherLoader.getDefault());
     }
 
     /**
      * Creates the default registry, using the default public suffix matcher.
      */
-    public static Lookup<CookieSpecProvider> createDefault() {
+    public static Lookup<CookieSpecProvider> createDefault(){
         return createDefault(PublicSuffixMatcherLoader.getDefault());
     }
 
     /**
      * Creates the default registry with the provided public suffix matcher
      */
-    public static Lookup<CookieSpecProvider> createDefault(final PublicSuffixMatcher publicSuffixMatcher) {
+    public static Lookup<CookieSpecProvider> createDefault(final PublicSuffixMatcher publicSuffixMatcher){
         return createDefaultBuilder(publicSuffixMatcher).build();
     }
 
-    private CookieSpecRegistries() {}
+    private CookieSpecRegistries(){
+    }
 
 }

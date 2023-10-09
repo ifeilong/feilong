@@ -45,25 +45,24 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class DefaultCookieSpecProvider implements CookieSpecProvider {
+public class DefaultCookieSpecProvider implements CookieSpecProvider{
 
-    public enum CompatibilityLevel {
-        DEFAULT,
-        IE_MEDIUM_SECURITY
+    public enum CompatibilityLevel{
+        DEFAULT, IE_MEDIUM_SECURITY
     }
 
-    private final CompatibilityLevel compatibilityLevel;
+    private final CompatibilityLevel  compatibilityLevel;
+
     private final PublicSuffixMatcher publicSuffixMatcher;
-    private final String[] datepatterns;
-    private final boolean oneHeader;
 
-    private volatile CookieSpec cookieSpec;
+    private final String[]            datepatterns;
 
-    public DefaultCookieSpecProvider(
-            final CompatibilityLevel compatibilityLevel,
-            final PublicSuffixMatcher publicSuffixMatcher,
-            final String[] datepatterns,
-            final boolean oneHeader) {
+    private final boolean             oneHeader;
+
+    private volatile CookieSpec       cookieSpec;
+
+    public DefaultCookieSpecProvider(final CompatibilityLevel compatibilityLevel, final PublicSuffixMatcher publicSuffixMatcher,
+                    final String[] datepatterns, final boolean oneHeader){
         super();
         this.compatibilityLevel = compatibilityLevel != null ? compatibilityLevel : CompatibilityLevel.DEFAULT;
         this.publicSuffixMatcher = publicSuffixMatcher;
@@ -71,60 +70,56 @@ public class DefaultCookieSpecProvider implements CookieSpecProvider {
         this.oneHeader = oneHeader;
     }
 
-    public DefaultCookieSpecProvider(
-            final CompatibilityLevel compatibilityLevel,
-            final PublicSuffixMatcher publicSuffixMatcher) {
+    public DefaultCookieSpecProvider(final CompatibilityLevel compatibilityLevel, final PublicSuffixMatcher publicSuffixMatcher){
         this(compatibilityLevel, publicSuffixMatcher, null, false);
     }
 
-    public DefaultCookieSpecProvider(final PublicSuffixMatcher publicSuffixMatcher) {
+    public DefaultCookieSpecProvider(final PublicSuffixMatcher publicSuffixMatcher){
         this(CompatibilityLevel.DEFAULT, publicSuffixMatcher, null, false);
     }
 
-    public DefaultCookieSpecProvider() {
+    public DefaultCookieSpecProvider(){
         this(CompatibilityLevel.DEFAULT, null, null, false);
     }
 
     @Override
-    public CookieSpec create(final HttpContext context) {
-        if (cookieSpec == null) {
-            synchronized (this) {
-                if (cookieSpec == null) {
-                    final RFC2965Spec strict = new RFC2965Spec(this.oneHeader,
-                            new RFC2965VersionAttributeHandler(),
-                            new BasicPathHandler(),
-                            PublicSuffixDomainFilter.decorate(
-                                    new RFC2965DomainAttributeHandler(), this.publicSuffixMatcher),
-                            new RFC2965PortAttributeHandler(),
-                            new BasicMaxAgeHandler(),
-                            new BasicSecureHandler(),
-                            new BasicCommentHandler(),
-                            new RFC2965CommentUrlAttributeHandler(),
-                            new RFC2965DiscardAttributeHandler());
-                    final RFC2109Spec obsoleteStrict = new RFC2109Spec(this.oneHeader,
-                            new RFC2109VersionHandler(),
-                            new BasicPathHandler(),
-                            PublicSuffixDomainFilter.decorate(
-                                    new RFC2109DomainHandler(), this.publicSuffixMatcher),
-                            new BasicMaxAgeHandler(),
-                            new BasicSecureHandler(),
-                            new BasicCommentHandler());
+    public CookieSpec create(final HttpContext context){
+        if (cookieSpec == null){
+            synchronized (this){
+                if (cookieSpec == null){
+                    final RFC2965Spec strict = new RFC2965Spec(
+                                    this.oneHeader,
+                                    new RFC2965VersionAttributeHandler(),
+                                    new BasicPathHandler(),
+                                    PublicSuffixDomainFilter.decorate(new RFC2965DomainAttributeHandler(), this.publicSuffixMatcher),
+                                    new RFC2965PortAttributeHandler(),
+                                    new BasicMaxAgeHandler(),
+                                    new BasicSecureHandler(),
+                                    new BasicCommentHandler(),
+                                    new RFC2965CommentUrlAttributeHandler(),
+                                    new RFC2965DiscardAttributeHandler());
+                    final RFC2109Spec obsoleteStrict = new RFC2109Spec(
+                                    this.oneHeader,
+                                    new RFC2109VersionHandler(),
+                                    new BasicPathHandler(),
+                                    PublicSuffixDomainFilter.decorate(new RFC2109DomainHandler(), this.publicSuffixMatcher),
+                                    new BasicMaxAgeHandler(),
+                                    new BasicSecureHandler(),
+                                    new BasicCommentHandler());
                     final NetscapeDraftSpec netscapeDraft = new NetscapeDraftSpec(
-                            PublicSuffixDomainFilter.decorate(
-                                    new BasicDomainHandler(), this.publicSuffixMatcher),
-                            this.compatibilityLevel == CompatibilityLevel.IE_MEDIUM_SECURITY ?
-                                    new BasicPathHandler() {
+                                    PublicSuffixDomainFilter.decorate(new BasicDomainHandler(), this.publicSuffixMatcher),
+                                    this.compatibilityLevel == CompatibilityLevel.IE_MEDIUM_SECURITY ? new BasicPathHandler(){
+
                                         @Override
-                                        public void validate(
-                                                final Cookie cookie,
-                                                final CookieOrigin origin) throws MalformedCookieException {
+                                        public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
                                             // No validation
                                         }
                                     } : new BasicPathHandler(),
-                            new BasicSecureHandler(),
-                            new BasicCommentHandler(),
-                            new BasicExpiresHandler(this.datepatterns != null ? this.datepatterns.clone() :
-                                    new String[]{NetscapeDraftSpec.EXPIRES_PATTERN}));
+                                    new BasicSecureHandler(),
+                                    new BasicCommentHandler(),
+                                    new BasicExpiresHandler(
+                                                    this.datepatterns != null ? this.datepatterns.clone()
+                                                                    : new String[] { NetscapeDraftSpec.EXPIRES_PATTERN }));
                     this.cookieSpec = new DefaultCookieSpec(strict, obsoleteStrict, netscapeDraft);
                 }
             }

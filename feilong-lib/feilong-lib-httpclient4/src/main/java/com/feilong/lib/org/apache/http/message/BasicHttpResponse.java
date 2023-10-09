@@ -45,30 +45,37 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  *
  * @since 4.0
  */
-public class BasicHttpResponse extends AbstractHttpMessage implements HttpResponse {
+public class BasicHttpResponse extends AbstractHttpMessage implements HttpResponse{
 
-    private StatusLine          statusline;
-    private ProtocolVersion     ver;
-    private int                 code;
-    private String              reasonPhrase;
-    private HttpEntity          entity;
+    private StatusLine                statusline;
+
+    private ProtocolVersion           ver;
+
+    private int                       code;
+
+    private String                    reasonPhrase;
+
+    private HttpEntity                entity;
+
     private final ReasonPhraseCatalog reasonCatalog;
-    private Locale              locale;
+
+    private Locale                    locale;
 
     /**
      * Creates a new response.
      * This is the constructor to which all others map.
      *
-     * @param statusline        the status line
-     * @param catalog           the reason phrase catalog, or
-     *                          {@code null} to disable automatic
-     *                          reason phrase lookup
-     * @param locale            the locale for looking up reason phrases, or
-     *                          {@code null} for the system locale
+     * @param statusline
+     *            the status line
+     * @param catalog
+     *            the reason phrase catalog, or
+     *            {@code null} to disable automatic
+     *            reason phrase lookup
+     * @param locale
+     *            the locale for looking up reason phrases, or
+     *            {@code null} for the system locale
      */
-    public BasicHttpResponse(final StatusLine statusline,
-                             final ReasonPhraseCatalog catalog,
-                             final Locale locale) {
+    public BasicHttpResponse(final StatusLine statusline, final ReasonPhraseCatalog catalog, final Locale locale){
         super();
         this.statusline = Args.notNull(statusline, "Status line");
         this.ver = statusline.getProtocolVersion();
@@ -83,9 +90,10 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
      * The response will not have a reason phrase catalog and
      * use the system default locale.
      *
-     * @param statusline        the status line
+     * @param statusline
+     *            the status line
      */
-    public BasicHttpResponse(final StatusLine statusline) {
+    public BasicHttpResponse(final StatusLine statusline){
         super();
         this.statusline = Args.notNull(statusline, "Status line");
         this.ver = statusline.getProtocolVersion();
@@ -100,14 +108,15 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
      * The response will not have a reason phrase catalog and
      * use the system default locale.
      *
-     * @param ver       the protocol version of the response
-     * @param code      the status code of the response
-     * @param reason    the reason phrase to the status code, or
-     *                  {@code null}
+     * @param ver
+     *            the protocol version of the response
+     * @param code
+     *            the status code of the response
+     * @param reason
+     *            the reason phrase to the status code, or
+     *            {@code null}
      */
-    public BasicHttpResponse(final ProtocolVersion ver,
-                             final int code,
-                             final String reason) {
+    public BasicHttpResponse(final ProtocolVersion ver, final int code, final String reason){
         super();
         Args.notNegative(code, "Status code");
         this.statusline = null;
@@ -118,39 +127,38 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
         this.locale = null;
     }
 
-
     // non-javadoc, see interface HttpMessage
     @Override
-    public ProtocolVersion getProtocolVersion() {
+    public ProtocolVersion getProtocolVersion(){
         return this.ver;
     }
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public StatusLine getStatusLine() {
-        if (this.statusline == null) {
+    public StatusLine getStatusLine(){
+        if (this.statusline == null){
             this.statusline = new BasicStatusLine(
-                    this.ver != null ? this.ver : HttpVersion.HTTP_1_1,
-                    this.code,
-                    this.reasonPhrase != null ? this.reasonPhrase : getReason(this.code));
+                            this.ver != null ? this.ver : HttpVersion.HTTP_1_1,
+                            this.code,
+                            this.reasonPhrase != null ? this.reasonPhrase : getReason(this.code));
         }
         return this.statusline;
     }
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public HttpEntity getEntity() {
+    public HttpEntity getEntity(){
         return this.entity;
     }
 
     @Override
-    public Locale getLocale() {
+    public Locale getLocale(){
         return this.locale;
     }
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public void setStatusLine(final StatusLine statusline) {
+    public void setStatusLine(final StatusLine statusline){
         this.statusline = Args.notNull(statusline, "Status line");
         this.ver = statusline.getProtocolVersion();
         this.code = statusline.getStatusCode();
@@ -159,7 +167,7 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public void setStatusLine(final ProtocolVersion ver, final int code) {
+    public void setStatusLine(final ProtocolVersion ver,final int code){
         Args.notNegative(code, "Status code");
         this.statusline = null;
         this.ver = ver;
@@ -169,8 +177,7 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public void setStatusLine(
-            final ProtocolVersion ver, final int code, final String reason) {
+    public void setStatusLine(final ProtocolVersion ver,final int code,final String reason){
         Args.notNegative(code, "Status code");
         this.statusline = null;
         this.ver = ver;
@@ -180,7 +187,7 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public void setStatusCode(final int code) {
+    public void setStatusCode(final int code){
         Args.notNegative(code, "Status code");
         this.statusline = null;
         this.code = code;
@@ -189,19 +196,19 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public void setReasonPhrase(final String reason) {
+    public void setReasonPhrase(final String reason){
         this.statusline = null;
         this.reasonPhrase = TextUtils.isBlank(reason) ? null : reason;
     }
 
     // non-javadoc, see interface HttpResponse
     @Override
-    public void setEntity(final HttpEntity entity) {
+    public void setEntity(final HttpEntity entity){
         this.entity = entity;
     }
 
     @Override
-    public void setLocale(final Locale locale) {
+    public void setLocale(final Locale locale){
         this.locale = Args.notNull(locale, "Locale");
         this.statusline = null;
     }
@@ -211,22 +218,23 @@ public class BasicHttpResponse extends AbstractHttpMessage implements HttpRespon
      * This method evaluates the currently set catalog and locale.
      * It also handles a missing catalog.
      *
-     * @param code      the status code for which to look up the reason
+     * @param code
+     *            the status code for which to look up the reason
      *
-     * @return  the reason phrase, or {@code null} if there is none
+     * @return the reason phrase, or {@code null} if there is none
      */
-    protected String getReason(final int code) {
-        return this.reasonCatalog != null ? this.reasonCatalog.getReason(code,
-                this.locale != null ? this.locale : Locale.getDefault()) : null;
+    protected String getReason(final int code){
+        return this.reasonCatalog != null ? this.reasonCatalog.getReason(code, this.locale != null ? this.locale : Locale.getDefault())
+                        : null;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder sb = new StringBuilder();
         sb.append(getStatusLine());
         sb.append(' ');
         sb.append(this.headergroup);
-        if (this.entity != null) {
+        if (this.entity != null){
             sb.append(' ');
             sb.append(this.entity);
         }

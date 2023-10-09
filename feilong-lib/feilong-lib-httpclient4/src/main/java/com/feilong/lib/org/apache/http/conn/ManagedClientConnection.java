@@ -46,16 +46,15 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @deprecated (4.3) replaced by {@link HttpClientConnectionManager}.
  */
 @Deprecated
-public interface ManagedClientConnection extends
-    HttpRoutedConnection, ManagedHttpClientConnection, ConnectionReleaseTrigger {
+public interface ManagedClientConnection extends HttpRoutedConnection,ManagedHttpClientConnection,ConnectionReleaseTrigger{
 
     /**
      * Indicates whether this connection is secure.
      * The return value is well-defined only while the connection is open.
      * It may change even while the connection is open.
      *
-     * @return  {@code true} if this connection is secure,
-     *          {@code false} otherwise
+     * @return {@code true} if this connection is secure,
+     *         {@code false} otherwise
      */
     @Override
     boolean isSecure();
@@ -63,8 +62,8 @@ public interface ManagedClientConnection extends
     /**
      * Obtains the current route of this connection.
      *
-     * @return  the route established so far, or
-     *          {@code null} if not connected
+     * @return the route established so far, or
+     *         {@code null} if not connected
      */
     @Override
     HttpRoute getRoute();
@@ -83,8 +82,8 @@ public interface ManagedClientConnection extends
      * for example depending on the chosen cipher suite.
      * </p>
      *
-     * @return  the underlying SSL session if available,
-     *          {@code null} otherwise
+     * @return the underlying SSL session if available,
+     *         {@code null} otherwise
      */
     @Override
     SSLSession getSSLSession();
@@ -92,15 +91,18 @@ public interface ManagedClientConnection extends
     /**
      * Opens this connection according to the given route.
      *
-     * @param route     the route along which to open. It will be opened to
-     *                  the first proxy if present, or directly to the target.
-     * @param context   the context for opening this connection
-     * @param params    the parameters for opening this connection
+     * @param route
+     *            the route along which to open. It will be opened to
+     *            the first proxy if present, or directly to the target.
+     * @param context
+     *            the context for opening this connection
+     * @param params
+     *            the parameters for opening this connection
      *
-     * @throws IOException      in case of a problem
+     * @throws IOException
+     *             in case of a problem
      */
-    void open(HttpRoute route, HttpContext context, HttpParams params)
-        throws IOException;
+    void open(HttpRoute route,HttpContext context,HttpParams params) throws IOException;
 
     /**
      * Indicates that a tunnel to the target has been established.
@@ -114,14 +116,16 @@ public interface ManagedClientConnection extends
      * layering a new protocol over the connection.
      * </p>
      *
-     * @param secure    {@code true} if the tunnel should be considered
-     *                  secure, {@code false} otherwise
-     * @param params    the parameters for tunnelling this connection
+     * @param secure
+     *            {@code true} if the tunnel should be considered
+     *            secure, {@code false} otherwise
+     * @param params
+     *            the parameters for tunnelling this connection
      *
-     * @throws IOException  in case of a problem
+     * @throws IOException
+     *             in case of a problem
      */
-    void tunnelTarget(boolean secure, HttpParams params)
-        throws IOException;
+    void tunnelTarget(boolean secure,HttpParams params) throws IOException;
 
     /**
      * Indicates that a tunnel to an intermediate proxy has been established.
@@ -131,20 +135,23 @@ public interface ManagedClientConnection extends
      * when establishing the connection. Tunnelling of the last proxy to the
      * target is optional and would be indicated via {@link #tunnelTarget}.
      *
-     * @param next      the proxy to which the tunnel was established.
-     *                  This is <i>not</i> the proxy <i>through</i> which
-     *                  the tunnel was established, but the new end point
-     *                  of the tunnel. The tunnel does <i>not</i> yet
-     *                  reach to the target, use {@link #tunnelTarget}
-     *                  to indicate an end-to-end tunnel.
-     * @param secure    {@code true} if the connection should be
-     *                  considered secure, {@code false} otherwise
-     * @param params    the parameters for tunnelling this connection
+     * @param next
+     *            the proxy to which the tunnel was established.
+     *            This is <i>not</i> the proxy <i>through</i> which
+     *            the tunnel was established, but the new end point
+     *            of the tunnel. The tunnel does <i>not</i> yet
+     *            reach to the target, use {@link #tunnelTarget}
+     *            to indicate an end-to-end tunnel.
+     * @param secure
+     *            {@code true} if the connection should be
+     *            considered secure, {@code false} otherwise
+     * @param params
+     *            the parameters for tunnelling this connection
      *
-     * @throws IOException  in case of a problem
+     * @throws IOException
+     *             in case of a problem
      */
-    void tunnelProxy(HttpHost next, boolean secure, HttpParams params)
-        throws IOException;
+    void tunnelProxy(HttpHost next,boolean secure,HttpParams params) throws IOException;
 
     /**
      * Layers a new protocol on top of a {@link #tunnelTarget tunnelled}
@@ -154,13 +161,15 @@ public interface ManagedClientConnection extends
      * It is not guaranteed that the layered connection is
      * {@link #isSecure secure}.
      *
-     * @param context   the context for layering on top of this connection
-     * @param params    the parameters for layering on top of this connection
+     * @param context
+     *            the context for layering on top of this connection
+     * @param params
+     *            the parameters for layering on top of this connection
      *
-     * @throws IOException      in case of a problem
+     * @throws IOException
+     *             in case of a problem
      */
-    void layerProtocol(HttpContext context, HttpParams params)
-        throws IOException;
+    void layerProtocol(HttpContext context,HttpParams params) throws IOException;
 
     /**
      * Marks this connection as being in a reusable communication state.
@@ -200,9 +209,9 @@ public interface ManagedClientConnection extends
      * See {@link #markReusable markReusable} and
      * {@link #unmarkReusable unmarkReusable} for details.
      *
-     * @return  {@code true} if this connection is marked as being in
-     *          a reusable communication state,
-     *          {@code false} otherwise
+     * @return {@code true} if this connection is marked as being in
+     *         a reusable communication state,
+     *         {@code false} otherwise
      */
     boolean isMarkedReusable();
 
@@ -210,7 +219,8 @@ public interface ManagedClientConnection extends
      * Assigns a state object to this connection. Connection managers may make
      * use of the connection state when allocating persistent connections.
      *
-     * @param state The state object
+     * @param state
+     *            The state object
      */
     void setState(Object state);
 
@@ -229,6 +239,6 @@ public interface ManagedClientConnection extends
      * is typically after the headers (and any response body, if present) is
      * fully consumed.
      */
-    void setIdleDuration(long duration, TimeUnit unit);
+    void setIdleDuration(long duration,TimeUnit unit);
 
 }

@@ -31,27 +31,27 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.util.Args;
-
-import java.util.Set;
 
 /**
  * Maintains a map of objects keyed by a request URI pattern.
  * <br>
  * Patterns may have three formats:
  * <ul>
- *   <li>{@code *}</li>
- *   <li>{@code *<uri>}</li>
- *   <li>{@code <uri>*}</li>
+ * <li>{@code *}</li>
+ * <li>{@code *<uri>}</li>
+ * <li>{@code <uri>*}</li>
  * </ul>
  * <br>
  * This class can be used to resolve an object matching a particular request
  * URI.
  *
- * @param <T> The type of registered objects.
+ * @param <T>
+ *            The type of registered objects.
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
@@ -59,30 +59,32 @@ public class UriPatternMatcher<T> {
 
     private final Map<String, T> map;
 
-    public UriPatternMatcher() {
+    public UriPatternMatcher(){
         super();
-        this.map = new LinkedHashMap<String, T>();
+        this.map = new LinkedHashMap<>();
     }
 
     /**
      * Returns a {@link Set} view of the mappings contained in this matcher.
      *
-     * @return  a set view of the mappings contained in this matcher.
+     * @return a set view of the mappings contained in this matcher.
      *
      * @see Map#entrySet()
      * @since 4.4.9
      */
-    public synchronized Set<Entry<String, T>> entrySet() {
-        return new HashSet<Entry<String, T>>(map.entrySet());
+    public synchronized Set<Entry<String, T>> entrySet(){
+        return new HashSet<>(map.entrySet());
     }
 
     /**
      * Registers the given object for URIs matching the given pattern.
      *
-     * @param pattern the pattern to register the handler for.
-     * @param obj the object.
+     * @param pattern
+     *            the pattern to register the handler for.
+     * @param obj
+     *            the object.
      */
-    public synchronized void register(final String pattern, final T obj) {
+    public synchronized void register(final String pattern,final T obj){
         Args.notNull(pattern, "URI request pattern");
         this.map.put(pattern, obj);
     }
@@ -90,10 +92,11 @@ public class UriPatternMatcher<T> {
     /**
      * Removes registered object, if exists, for the given pattern.
      *
-     * @param pattern the pattern to unregister.
+     * @param pattern
+     *            the pattern to unregister.
      */
-    public synchronized void unregister(final String pattern) {
-        if (pattern == null) {
+    public synchronized void unregister(final String pattern){
+        if (pattern == null){
             return;
         }
         this.map.remove(pattern);
@@ -103,7 +106,7 @@ public class UriPatternMatcher<T> {
      * @deprecated (4.1) do not use
      */
     @Deprecated
-    public synchronized void setHandlers(final Map<String, T> map) {
+    public synchronized void setHandlers(final Map<String, T> map){
         Args.notNull(map, "Map of handlers");
         this.map.clear();
         this.map.putAll(map);
@@ -113,7 +116,7 @@ public class UriPatternMatcher<T> {
      * @deprecated (4.1) do not use
      */
     @Deprecated
-    public synchronized void setObjects(final Map<String, T> map) {
+    public synchronized void setObjects(final Map<String, T> map){
         Args.notNull(map, "Map of handlers");
         this.map.clear();
         this.map.putAll(map);
@@ -123,29 +126,29 @@ public class UriPatternMatcher<T> {
      * @deprecated (4.1) do not use
      */
     @Deprecated
-    public synchronized Map<String, T> getObjects() {
+    public synchronized Map<String, T> getObjects(){
         return this.map;
     }
 
     /**
      * Looks up an object matching the given request path.
      *
-     * @param path the request path
+     * @param path
+     *            the request path
      * @return object or {@code null} if no match is found.
      */
-    public synchronized T lookup(final String path) {
+    public synchronized T lookup(final String path){
         Args.notNull(path, "Request path");
         // direct match?
         T obj = this.map.get(path);
-        if (obj == null) {
+        if (obj == null){
             // pattern match?
             String bestMatch = null;
-            for (final String pattern : this.map.keySet()) {
-                if (matchUriRequestPattern(pattern, path)) {
+            for (final String pattern : this.map.keySet()){
+                if (matchUriRequestPattern(pattern, path)){
                     // we have a match. is it any better?
-                    if (bestMatch == null
-                            || (bestMatch.length() < pattern.length())
-                            || (bestMatch.length() == pattern.length() && pattern.endsWith("*"))) {
+                    if (bestMatch == null || (bestMatch.length() < pattern.length())
+                                    || (bestMatch.length() == pattern.length() && pattern.endsWith("*"))){
                         obj = this.map.get(pattern);
                         bestMatch = pattern;
                     }
@@ -158,22 +161,23 @@ public class UriPatternMatcher<T> {
     /**
      * Tests if the given request path matches the given pattern.
      *
-     * @param pattern the pattern
-     * @param path the request path
+     * @param pattern
+     *            the pattern
+     * @param path
+     *            the request path
      * @return {@code true} if the request URI matches the pattern,
-     *   {@code false} otherwise.
+     *         {@code false} otherwise.
      */
-    protected boolean matchUriRequestPattern(final String pattern, final String path) {
-        if (pattern.equals("*")) {
+    protected boolean matchUriRequestPattern(final String pattern,final String path){
+        if (pattern.equals("*")){
             return true;
         }
-        return
-           (pattern.endsWith("*") && path.startsWith(pattern.substring(0, pattern.length() - 1))) ||
-           (pattern.startsWith("*") && path.endsWith(pattern.substring(1, pattern.length())));
+        return (pattern.endsWith("*") && path.startsWith(pattern.substring(0, pattern.length() - 1)))
+                        || (pattern.startsWith("*") && path.endsWith(pattern.substring(1, pattern.length())));
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return this.map.toString();
     }
 

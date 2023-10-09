@@ -38,34 +38,32 @@ import com.feilong.lib.org.apache.http.config.ConnectionConfig;
  *
  * @since 4.3
  */
-public final class ConnSupport {
+public final class ConnSupport{
 
-    public static CharsetDecoder createDecoder(final ConnectionConfig cconfig) {
-        if (cconfig == null) {
+    public static CharsetDecoder createDecoder(final ConnectionConfig cconfig){
+        if (cconfig == null){
             return null;
         }
         final Charset charset = cconfig.getCharset();
         final CodingErrorAction malformed = cconfig.getMalformedInputAction();
         final CodingErrorAction unmappable = cconfig.getUnmappableInputAction();
-        if (charset != null) {
-            return charset.newDecoder()
-                    .onMalformedInput(malformed != null ? malformed : CodingErrorAction.REPORT)
-                    .onUnmappableCharacter(unmappable != null ? unmappable: CodingErrorAction.REPORT);
+        if (charset != null){
+            return charset.newDecoder().onMalformedInput(malformed != null ? malformed : CodingErrorAction.REPORT)
+                            .onUnmappableCharacter(unmappable != null ? unmappable : CodingErrorAction.REPORT);
         }
         return null;
     }
 
-    public static CharsetEncoder createEncoder(final ConnectionConfig cconfig) {
-        if (cconfig == null) {
+    public static CharsetEncoder createEncoder(final ConnectionConfig cconfig){
+        if (cconfig == null){
             return null;
         }
         final Charset charset = cconfig.getCharset();
-        if (charset != null) {
+        if (charset != null){
             final CodingErrorAction malformed = cconfig.getMalformedInputAction();
             final CodingErrorAction unmappable = cconfig.getUnmappableInputAction();
-            return charset.newEncoder()
-                .onMalformedInput(malformed != null ? malformed : CodingErrorAction.REPORT)
-                .onUnmappableCharacter(unmappable != null ? unmappable: CodingErrorAction.REPORT);
+            return charset.newEncoder().onMalformedInput(malformed != null ? malformed : CodingErrorAction.REPORT)
+                            .onUnmappableCharacter(unmappable != null ? unmappable : CodingErrorAction.REPORT);
         }
         return null;
     }

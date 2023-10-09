@@ -35,15 +35,15 @@ import com.feilong.lib.org.apache.http.client.ConnectionBackoffStrategy;
  *
  * @since 4.2
  */
-public class NullBackoffStrategy implements ConnectionBackoffStrategy {
+public class NullBackoffStrategy implements ConnectionBackoffStrategy{
 
     @Override
-    public boolean shouldBackoff(final Throwable t) {
+    public boolean shouldBackoff(final Throwable t){
         return false;
     }
 
     @Override
-    public boolean shouldBackoff(final HttpResponse resp) {
+    public boolean shouldBackoff(final HttpResponse resp){
         return false;
     }
 }

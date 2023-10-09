@@ -46,34 +46,34 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 @Contract(threading = ThreadingBehavior.SAFE)
 @Deprecated
-public final class SchemeRegistry {
+public final class SchemeRegistry{
 
     /** The available schemes in this registry. */
-    private final ConcurrentHashMap<String,Scheme> registeredSchemes;
+    private final ConcurrentHashMap<String, Scheme> registeredSchemes;
 
     /**
      * Creates a new, empty scheme registry.
      */
-    public SchemeRegistry() {
+    public SchemeRegistry(){
         super();
-        registeredSchemes = new ConcurrentHashMap<String,Scheme>();
+        registeredSchemes = new ConcurrentHashMap<>();
     }
 
     /**
      * Obtains a scheme by name.
      *
-     * @param name      the name of the scheme to look up (in lowercase)
+     * @param name
+     *            the name of the scheme to look up (in lowercase)
      *
-     * @return  the scheme, never {@code null}
+     * @return the scheme, never {@code null}
      *
      * @throws IllegalStateException
-     *          if the scheme with the given name is not registered
+     *             if the scheme with the given name is not registered
      */
-    public Scheme getScheme(final String name) {
+    public Scheme getScheme(final String name){
         final Scheme found = get(name);
-        if (found == null) {
-            throw new IllegalStateException
-                ("Scheme '"+name+"' not registered.");
+        if (found == null){
+            throw new IllegalStateException("Scheme '" + name + "' not registered.");
         }
         return found;
     }
@@ -82,14 +82,15 @@ public final class SchemeRegistry {
      * Obtains the scheme for a host.
      * Convenience method for {@code getScheme(host.getSchemeName())}
      *
-     * @param host the host for which to obtain the scheme
+     * @param host
+     *            the host for which to obtain the scheme
      *
      * @return the scheme for the given host, never {@code null}
      *
      * @throws IllegalStateException
-     *          if a scheme with the respective name is not registered
+     *             if a scheme with the respective name is not registered
      */
-    public Scheme getScheme(final HttpHost host) {
+    public Scheme getScheme(final HttpHost host){
         Args.notNull(host, "Host");
         return getScheme(host.getSchemeName());
     }
@@ -97,12 +98,13 @@ public final class SchemeRegistry {
     /**
      * Obtains a scheme by name, if registered.
      *
-     * @param name      the name of the scheme to look up (in lowercase)
+     * @param name
+     *            the name of the scheme to look up (in lowercase)
      *
-     * @return  the scheme, or
-     *          {@code null} if there is none by this name
+     * @return the scheme, or
+     *         {@code null} if there is none by this name
      */
-    public Scheme get(final String name) {
+    public Scheme get(final String name){
         Args.notNull(name, "Scheme name");
         // leave it to the caller to use the correct name - all lowercase
         //name = name.toLowerCase(Locale.ENGLISH);
@@ -115,12 +117,13 @@ public final class SchemeRegistry {
      * The scheme can later be retrieved by its name
      * using {@link #getScheme(String) getScheme} or {@link #get get}.
      *
-     * @param sch       the scheme to register
+     * @param sch
+     *            the scheme to register
      *
-     * @return  the scheme previously registered with that name, or
-     *          {@code null} if none was registered
+     * @return the scheme previously registered with that name, or
+     *         {@code null} if none was registered
      */
-    public Scheme register(final Scheme sch) {
+    public Scheme register(final Scheme sch){
         Args.notNull(sch, "Scheme");
         final Scheme old = registeredSchemes.put(sch.getName(), sch);
         return old;
@@ -129,12 +132,13 @@ public final class SchemeRegistry {
     /**
      * Unregisters a scheme.
      *
-     * @param name      the name of the scheme to unregister (in lowercase)
+     * @param name
+     *            the name of the scheme to unregister (in lowercase)
      *
-     * @return  the unregistered scheme, or
-     *          {@code null} if there was none
+     * @return the unregistered scheme, or
+     *         {@code null} if there was none
      */
-    public Scheme unregister(final String name) {
+    public Scheme unregister(final String name){
         Args.notNull(name, "Scheme name");
         // leave it to the caller to use the correct name - all lowercase
         //name = name.toLowerCase(Locale.ENGLISH);
@@ -145,20 +149,21 @@ public final class SchemeRegistry {
     /**
      * Obtains the names of the registered schemes.
      *
-     * @return  List containing registered scheme names.
+     * @return List containing registered scheme names.
      */
-    public List<String> getSchemeNames() {
-        return new ArrayList<String>(registeredSchemes.keySet());
+    public List<String> getSchemeNames(){
+        return new ArrayList<>(registeredSchemes.keySet());
     }
 
     /**
      * Populates the internal collection of registered {@link Scheme protocol schemes}
      * with the content of the map passed as a parameter.
      *
-     * @param map protocol schemes
+     * @param map
+     *            protocol schemes
      */
-    public void setItems(final Map<String, Scheme> map) {
-        if (map == null) {
+    public void setItems(final Map<String, Scheme> map){
+        if (map == null){
             return;
         }
         registeredSchemes.clear();
@@ -166,4 +171,3 @@ public final class SchemeRegistry {
     }
 
 }
-

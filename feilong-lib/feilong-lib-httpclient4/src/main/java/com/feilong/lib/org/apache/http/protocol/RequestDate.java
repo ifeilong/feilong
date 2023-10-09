@@ -45,20 +45,18 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class RequestDate implements HttpRequestInterceptor {
+public class RequestDate implements HttpRequestInterceptor{
 
     private static final HttpDateGenerator DATE_GENERATOR = new HttpDateGenerator();
 
-    public RequestDate() {
+    public RequestDate(){
         super();
     }
 
     @Override
-    public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
-        if ((request instanceof HttpEntityEnclosingRequest) &&
-            !request.containsHeader(HTTP.DATE_HEADER)) {
+        if ((request instanceof HttpEntityEnclosingRequest) && !request.containsHeader(HTTP.DATE_HEADER)){
             final String httpdate = DATE_GENERATOR.getCurrentDate();
             request.setHeader(HTTP.DATE_HEADER, httpdate);
         }

@@ -33,34 +33,37 @@ package com.feilong.lib.org.apache.http.impl.auth;
  *
  * @since 4.0
  */
-public class UnsupportedDigestAlgorithmException extends RuntimeException {
+public class UnsupportedDigestAlgorithmException extends RuntimeException{
 
     private static final long serialVersionUID = 319558534317118022L;
 
     /**
      * Creates a new UnsupportedAuthAlgoritmException with a {@code null} detail message.
      */
-    public UnsupportedDigestAlgorithmException() {
+    public UnsupportedDigestAlgorithmException(){
         super();
     }
 
     /**
      * Creates a new UnsupportedAuthAlgoritmException with the specified message.
      *
-     * @param message the exception detail message
+     * @param message
+     *            the exception detail message
      */
-    public UnsupportedDigestAlgorithmException(final String message) {
+    public UnsupportedDigestAlgorithmException(final String message){
         super(message);
     }
 
     /**
      * Creates a new UnsupportedAuthAlgoritmException with the specified detail message and cause.
      *
-     * @param message the exception detail message
-     * @param cause the {@code Throwable} that caused this exception, or {@code null}
-     * if the cause is unavailable, unknown, or not a {@code Throwable}
+     * @param message
+     *            the exception detail message
+     * @param cause
+     *            the {@code Throwable} that caused this exception, or {@code null}
+     *            if the cause is unavailable, unknown, or not a {@code Throwable}
      */
-    public UnsupportedDigestAlgorithmException(final String message, final Throwable cause) {
+    public UnsupportedDigestAlgorithmException(final String message, final Throwable cause){
         super(message, cause);
     }
 }

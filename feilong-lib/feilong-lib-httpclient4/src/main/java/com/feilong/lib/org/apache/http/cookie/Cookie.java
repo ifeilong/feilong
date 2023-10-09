@@ -42,7 +42,7 @@ import com.feilong.lib.org.apache.http.annotation.Obsolete;
  *
  * @since 4.0
  */
-public interface Cookie {
+public interface Cookie{
 
     /**
      * Returns the name.
@@ -77,9 +77,12 @@ public interface Cookie {
     /**
      * Returns the expiration {@link Date} of the cookie, or {@code null}
      * if none exists.
-     * <p><strong>Note:</strong> the object returned by this method is
+     * <p>
+     * <strong>Note:</strong> the object returned by this method is
      * considered immutable. Changing it (e.g. using setTime()) could result
-     * in undefined behaviour. Do so at your peril. </p>
+     * in undefined behaviour. Do so at your peril.
+     * </p>
+     * 
      * @return Expiration {@link Date}, or {@code null}.
      */
     Date getExpiryDate();
@@ -120,8 +123,8 @@ public interface Cookie {
     /**
      * Indicates whether this cookie requires a secure connection.
      *
-     * @return  {@code true} if this cookie should only be sent
-     *          over secure connections, {@code false} otherwise.
+     * @return {@code true} if this cookie should only be sent
+     *         over secure connections, {@code false} otherwise.
      */
     boolean isSecure();
 
@@ -136,7 +139,9 @@ public interface Cookie {
 
     /**
      * Returns true if this cookie has expired.
-     * @param date Current time
+     * 
+     * @param date
+     *            Current time
      *
      * @return {@code true} if the cookie has expired.
      */
@@ -145,4 +150,3 @@ public interface Cookie {
     //TODO: RFC 6265 requires cookies to track their creation time; add #getCreationDate()
 
 }
-

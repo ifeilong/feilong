@@ -36,14 +36,14 @@ import com.feilong.lib.org.apache.http.HttpRequest;
  * An authentication scheme should be able to support the following
  * functions:
  * <ul>
- *   <li>Parse and process the challenge sent by the target server
- *       in response to request for a protected resource
- *   <li>Provide its textual designation
- *   <li>Provide its parameters, if available
- *   <li>Provide the realm this authentication scheme is applicable to,
- *       if available
- *   <li>Generate authorization string for the given set of credentials
- *       and the HTTP request in response to the authorization challenge.
+ * <li>Parse and process the challenge sent by the target server
+ * in response to request for a protected resource
+ * <li>Provide its textual designation
+ * <li>Provide its parameters, if available
+ * <li>Provide the realm this authentication scheme is applicable to,
+ * if available
+ * <li>Generate authorization string for the given set of credentials
+ * and the HTTP request in response to the authorization challenge.
  * </ul>
  * <p>
  * Authentication schemes may be stateful involving a series of
@@ -55,14 +55,15 @@ import com.feilong.lib.org.apache.http.HttpRequest;
  * @since 4.0
  */
 
-public interface AuthScheme {
+public interface AuthScheme{
 
     /**
      * Processes the given challenge token. Some authentication schemes
      * may involve multiple challenge-response exchanges. Such schemes must be able
      * to maintain the state information when dealing with sequential challenges
      *
-     * @param header the challenge header
+     * @param header
+     *            the challenge header
      */
     void processChallenge(final Header header) throws MalformedChallengeException;
 
@@ -76,7 +77,8 @@ public interface AuthScheme {
     /**
      * Returns authentication parameter with the given name, if available.
      *
-     * @param name The name of the parameter to be returned
+     * @param name
+     *            The name of the parameter to be returned
      *
      * @return the parameter with the given name
      */
@@ -96,7 +98,7 @@ public interface AuthScheme {
      * connection basis instead of usual per request basis
      *
      * @return {@code true} if the scheme is connection based, {@code false}
-     * if the scheme is request based.
+     *         if the scheme is request based.
      */
     boolean isConnectionBased();
 
@@ -107,24 +109,26 @@ public interface AuthScheme {
      * challenges have been processed in their entirety.
      *
      * @return {@code true} if the authentication process has been completed,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     boolean isComplete();
 
     /**
      * Produces an authorization string for the given set of {@link Credentials}.
      *
-     * @param credentials The set of credentials to be used for athentication
-     * @param request The request being authenticated
-     * @throws AuthenticationException if authorization string cannot
-     *   be generated due to an authentication failure
+     * @param credentials
+     *            The set of credentials to be used for athentication
+     * @param request
+     *            The request being authenticated
+     * @throws AuthenticationException
+     *             if authorization string cannot
+     *             be generated due to an authentication failure
      *
      * @return the authorization string
      *
-     * @deprecated (4.1)  Use {@link ContextAwareAuthScheme#authenticate(Credentials, HttpRequest, org.apache.http.protocol.HttpContext)}
+     * @deprecated (4.1) Use {@link ContextAwareAuthScheme#authenticate(Credentials, HttpRequest, org.apache.http.protocol.HttpContext)}
      */
     @Deprecated
-    Header authenticate(Credentials credentials, HttpRequest request)
-            throws AuthenticationException;
+    Header authenticate(Credentials credentials,HttpRequest request) throws AuthenticationException;
 
 }

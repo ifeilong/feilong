@@ -34,28 +34,31 @@ import java.io.IOException;
  *
  * @since 4.2
  */
-public class ContentTooLongException extends IOException {
+public class ContentTooLongException extends IOException{
 
     private static final long serialVersionUID = -924287689552495383L;
 
     /**
      * Creates a new ContentTooLongException with the specified detail message.
      *
-     * @param message exception message
+     * @param message
+     *            exception message
      */
-    public ContentTooLongException(final String message) {
+    public ContentTooLongException(final String message){
         super(message);
     }
 
     /**
      * Constructs a new ContentTooLongException with the specified detail message.
      *
-     * @param format The exception detail message format; see {@link String#format(String, Object...)}.
-     * @param args The exception detail message arguments; see {@link String#format(String, Object...)}.
+     * @param format
+     *            The exception detail message format; see {@link String#format(String, Object...)}.
+     * @param args
+     *            The exception detail message arguments; see {@link String#format(String, Object...)}.
      *
      * @since 4.4.11
      */
-    public ContentTooLongException(final String format, final Object... args) {
+    public ContentTooLongException(final String format, final Object...args){
         super(HttpException.clean(String.format(format, args)));
     }
 

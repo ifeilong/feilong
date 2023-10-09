@@ -34,14 +34,14 @@ import java.io.IOException;
  *
  * @since 4.3
  */
-public class UnsupportedSchemeException extends IOException {
+public class UnsupportedSchemeException extends IOException{
 
     private static final long serialVersionUID = 3597127619218687636L;
 
     /**
      * Creates a UnsupportedSchemeException with the specified detail message.
      */
-    public UnsupportedSchemeException(final String message) {
+    public UnsupportedSchemeException(final String message){
         super(message);
     }
 

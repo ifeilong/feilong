@@ -32,68 +32,67 @@ import java.io.InputStream;
 /**
  * Lazy init InputStream wrapper.
  */
-class LazyDecompressingInputStream extends InputStream {
+class LazyDecompressingInputStream extends InputStream{
 
-    private final InputStream wrappedStream;
+    private final InputStream        wrappedStream;
+
     private final InputStreamFactory inputStreamFactory;
 
-    private InputStream wrapperStream;
+    private InputStream              wrapperStream;
 
-    public LazyDecompressingInputStream(
-            final InputStream wrappedStream,
-            final InputStreamFactory inputStreamFactory) {
+    public LazyDecompressingInputStream(final InputStream wrappedStream, final InputStreamFactory inputStreamFactory){
         this.wrappedStream = wrappedStream;
         this.inputStreamFactory = inputStreamFactory;
     }
 
-    private void initWrapper() throws IOException {
-        if (wrapperStream == null) {
+    private void initWrapper() throws IOException{
+        if (wrapperStream == null){
             wrapperStream = inputStreamFactory.create(wrappedStream);
         }
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         initWrapper();
         return wrapperStream.read();
     }
 
     @Override
-    public int read(final byte[] b) throws IOException {
+    public int read(final byte[] b) throws IOException{
         initWrapper();
         return wrapperStream.read(b);
     }
 
     @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
+    public int read(final byte[] b,final int off,final int len) throws IOException{
         initWrapper();
         return wrapperStream.read(b, off, len);
     }
 
     @Override
-    public long skip(final long n) throws IOException {
+    public long skip(final long n) throws IOException{
         initWrapper();
         return wrapperStream.skip(n);
     }
 
     @Override
-    public boolean markSupported() {
+    public boolean markSupported(){
         return false;
     }
 
     @Override
-    public int available() throws IOException {
+    public int available() throws IOException{
         initWrapper();
         return wrapperStream.available();
     }
 
     @Override
-    public void close() throws IOException {
-        try {
-            if (wrapperStream != null) {
+    public void close() throws IOException{
+        try{
+            if (wrapperStream != null){
                 wrapperStream.close();
             }
-        } finally {
+        }finally{
             wrappedStream.close();
         }
     }

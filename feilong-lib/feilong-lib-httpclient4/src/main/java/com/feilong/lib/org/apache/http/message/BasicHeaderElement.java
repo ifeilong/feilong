@@ -37,30 +37,32 @@ import com.feilong.lib.org.apache.http.util.LangUtils;
  *
  * @since 4.0
  */
-public class BasicHeaderElement implements HeaderElement, Cloneable {
+public class BasicHeaderElement implements HeaderElement,Cloneable{
 
-    private final String name;
-    private final String value;
+    private final String          name;
+
+    private final String          value;
+
     private final NameValuePair[] parameters;
 
     /**
      * Constructor with name, value and parameters.
      *
-     * @param name header element name
-     * @param value header element value. May be {@code null}
-     * @param parameters header element parameters. May be {@code null}.
-     *   Parameters are copied by reference, not by value
+     * @param name
+     *            header element name
+     * @param value
+     *            header element value. May be {@code null}
+     * @param parameters
+     *            header element parameters. May be {@code null}.
+     *            Parameters are copied by reference, not by value
      */
-    public BasicHeaderElement(
-            final String name,
-            final String value,
-            final NameValuePair[] parameters) {
+    public BasicHeaderElement(final String name, final String value, final NameValuePair[] parameters){
         super();
         this.name = Args.notNull(name, "Name");
         this.value = value;
-        if (parameters != null) {
+        if (parameters != null){
             this.parameters = parameters;
-        } else {
+        }else{
             this.parameters = new NameValuePair[] {};
         }
     }
@@ -68,45 +70,47 @@ public class BasicHeaderElement implements HeaderElement, Cloneable {
     /**
      * Constructor with name and value.
      *
-     * @param name header element name
-     * @param value header element value. May be {@code null}
+     * @param name
+     *            header element name
+     * @param value
+     *            header element value. May be {@code null}
      */
-    public BasicHeaderElement(final String name, final String value) {
-       this(name, value, null);
+    public BasicHeaderElement(final String name, final String value){
+        this(name, value, null);
     }
 
     @Override
-    public String getName() {
+    public String getName(){
         return this.name;
     }
 
     @Override
-    public String getValue() {
+    public String getValue(){
         return this.value;
     }
 
     @Override
-    public NameValuePair[] getParameters() {
+    public NameValuePair[] getParameters(){
         return this.parameters.clone();
     }
 
     @Override
-    public int getParameterCount() {
+    public int getParameterCount(){
         return this.parameters.length;
     }
 
     @Override
-    public NameValuePair getParameter(final int index) {
+    public NameValuePair getParameter(final int index){
         // ArrayIndexOutOfBoundsException is appropriate
         return this.parameters[index];
     }
 
     @Override
-    public NameValuePair getParameterByName(final String name) {
+    public NameValuePair getParameterByName(final String name){
         Args.notNull(name, "Name");
         NameValuePair found = null;
-        for (final NameValuePair current : this.parameters) {
-            if (current.getName().equalsIgnoreCase(name)) {
+        for (final NameValuePair current : this.parameters){
+            if (current.getName().equalsIgnoreCase(name)){
                 found = current;
                 break;
             }
@@ -115,39 +119,38 @@ public class BasicHeaderElement implements HeaderElement, Cloneable {
     }
 
     @Override
-    public boolean equals(final Object object) {
-        if (this == object) {
+    public boolean equals(final Object object){
+        if (this == object){
             return true;
         }
-        if (object instanceof HeaderElement) {
+        if (object instanceof HeaderElement){
             final BasicHeaderElement that = (BasicHeaderElement) object;
-            return this.name.equals(that.name)
-                && LangUtils.equals(this.value, that.value)
-                && LangUtils.equals(this.parameters, that.parameters);
+            return this.name.equals(that.name) && LangUtils.equals(this.value, that.value)
+                            && LangUtils.equals(this.parameters, that.parameters);
         }
         return false;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int hash = LangUtils.HASH_SEED;
         hash = LangUtils.hashCode(hash, this.name);
         hash = LangUtils.hashCode(hash, this.value);
-        for (final NameValuePair parameter : this.parameters) {
+        for (final NameValuePair parameter : this.parameters){
             hash = LangUtils.hashCode(hash, parameter);
         }
         return hash;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append(this.name);
-        if (this.value != null) {
+        if (this.value != null){
             buffer.append("=");
             buffer.append(this.value);
         }
-        for (final NameValuePair parameter : this.parameters) {
+        for (final NameValuePair parameter : this.parameters){
             buffer.append("; ");
             buffer.append(parameter);
         }
@@ -155,11 +158,10 @@ public class BasicHeaderElement implements HeaderElement, Cloneable {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         // parameters array is considered immutable
         // no need to make a copy of it
         return super.clone();
     }
 
 }
-

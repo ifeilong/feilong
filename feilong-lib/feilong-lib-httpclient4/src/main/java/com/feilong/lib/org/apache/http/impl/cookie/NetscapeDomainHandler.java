@@ -45,81 +45,75 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NetscapeDomainHandler extends BasicDomainHandler {
+public class NetscapeDomainHandler extends BasicDomainHandler{
 
-    public NetscapeDomainHandler() {
+    public NetscapeDomainHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (TextUtils.isBlank(value)) {
+        if (TextUtils.isBlank(value)){
             throw new MalformedCookieException("Blank or null value for domain attribute");
         }
         cookie.setDomain(value);
     }
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         final String host = origin.getHost();
         final String domain = cookie.getDomain();
-        if (!host.equals(domain) && !BasicDomainHandler.domainMatch(domain, host)) {
+        if (!host.equals(domain) && !BasicDomainHandler.domainMatch(domain, host)){
             throw new CookieRestrictionViolationException(
-                    "Illegal domain attribute \"" + domain + "\". Domain of origin: \"" + host + "\"");
+                            "Illegal domain attribute \"" + domain + "\". Domain of origin: \"" + host + "\"");
         }
-        if (host.contains(".")) {
+        if (host.contains(".")){
             final int domainParts = new StringTokenizer(domain, ".").countTokens();
 
-            if (isSpecialDomain(domain)) {
-                if (domainParts < 2) {
-                    throw new CookieRestrictionViolationException("Domain attribute \""
-                        + domain
-                        + "\" violates the Netscape cookie specification for "
-                        + "special domains");
+            if (isSpecialDomain(domain)){
+                if (domainParts < 2){
+                    throw new CookieRestrictionViolationException(
+                                    "Domain attribute \"" + domain + "\" violates the Netscape cookie specification for "
+                                                    + "special domains");
                 }
-            } else {
-                if (domainParts < 3) {
-                    throw new CookieRestrictionViolationException("Domain attribute \""
-                        + domain
-                        + "\" violates the Netscape cookie specification");
+            }else{
+                if (domainParts < 3){
+                    throw new CookieRestrictionViolationException(
+                                    "Domain attribute \"" + domain + "\" violates the Netscape cookie specification");
                 }
             }
         }
     }
 
-   /**
-    * Checks if the given domain is in one of the seven special
-    * top level domains defined by the Netscape cookie specification.
-    * @param domain The domain.
-    * @return True if the specified domain is "special"
-    */
-   private static boolean isSpecialDomain(final String domain) {
-       final String ucDomain = domain.toUpperCase(Locale.ROOT);
-       return ucDomain.endsWith(".COM")
-               || ucDomain.endsWith(".EDU")
-               || ucDomain.endsWith(".NET")
-               || ucDomain.endsWith(".GOV")
-               || ucDomain.endsWith(".MIL")
-               || ucDomain.endsWith(".ORG")
-               || ucDomain.endsWith(".INT");
-   }
-
-   @Override
-   public boolean match(final Cookie cookie, final CookieOrigin origin) {
-       Args.notNull(cookie, "Cookie");
-       Args.notNull(origin, "Cookie origin");
-       final String host = origin.getHost();
-       final String domain = cookie.getDomain();
-       if (domain == null) {
-           return false;
-       }
-       return host.endsWith(domain);
-   }
+    /**
+     * Checks if the given domain is in one of the seven special
+     * top level domains defined by the Netscape cookie specification.
+     * 
+     * @param domain
+     *            The domain.
+     * @return True if the specified domain is "special"
+     */
+    private static boolean isSpecialDomain(final String domain){
+        final String ucDomain = domain.toUpperCase(Locale.ROOT);
+        return ucDomain.endsWith(".COM") || ucDomain.endsWith(".EDU") || ucDomain.endsWith(".NET") || ucDomain.endsWith(".GOV")
+                        || ucDomain.endsWith(".MIL") || ucDomain.endsWith(".ORG") || ucDomain.endsWith(".INT");
+    }
 
     @Override
-    public String getAttributeName() {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
+        Args.notNull(cookie, "Cookie");
+        Args.notNull(origin, "Cookie origin");
+        final String host = origin.getHost();
+        final String domain = cookie.getDomain();
+        if (domain == null){
+            return false;
+        }
+        return host.endsWith(domain);
+    }
+
+    @Override
+    public String getAttributeName(){
         return ClientCookie.DOMAIN_ATTR;
     }
 

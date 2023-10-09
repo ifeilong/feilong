@@ -36,34 +36,37 @@ import com.feilong.lib.org.apache.http.ProtocolException;
  *
  * @since 4.0
  */
-public class MalformedCookieException extends ProtocolException {
+public class MalformedCookieException extends ProtocolException{
 
     private static final long serialVersionUID = -6695462944287282185L;
 
     /**
      * Creates a new MalformedCookieException with a {@code null} detail message.
      */
-    public MalformedCookieException() {
+    public MalformedCookieException(){
         super();
     }
 
     /**
      * Creates a new MalformedCookieException with a specified message string.
      *
-     * @param message The exception detail message
+     * @param message
+     *            The exception detail message
      */
-    public MalformedCookieException(final String message) {
+    public MalformedCookieException(final String message){
         super(message);
     }
 
     /**
      * Creates a new MalformedCookieException with the specified detail message and cause.
      *
-     * @param message the exception detail message
-     * @param cause the {@code Throwable} that caused this exception, or {@code null}
-     * if the cause is unavailable, unknown, or not a {@code Throwable}
+     * @param message
+     *            the exception detail message
+     * @param cause
+     *            the {@code Throwable} that caused this exception, or {@code null}
+     *            if the cause is unavailable, unknown, or not a {@code Throwable}
      */
-    public MalformedCookieException(final String message, final Throwable cause) {
+    public MalformedCookieException(final String message, final Throwable cause){
         super(message, cause);
     }
 }

@@ -56,7 +56,7 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.0
  */
-public interface LineFormatter {
+public interface LineFormatter{
 
     /**
      * Formats a protocol version.
@@ -67,44 +67,48 @@ public interface LineFormatter {
      * Because of these differing conventions, it is not named
      * {@code formatProtocolVersion}.
      *
-     * @param buffer    a buffer to which to append, or {@code null}
-     * @param version   the protocol version to format
+     * @param buffer
+     *            a buffer to which to append, or {@code null}
+     * @param version
+     *            the protocol version to format
      *
-     * @return  a buffer with the formatted protocol version appended.
-     *          The caller is allowed to modify the result buffer.
-     *          If the {@code buffer} argument is not {@code null},
-     *          the returned buffer is the argument buffer.
+     * @return a buffer with the formatted protocol version appended.
+     *         The caller is allowed to modify the result buffer.
+     *         If the {@code buffer} argument is not {@code null},
+     *         the returned buffer is the argument buffer.
      */
-    CharArrayBuffer appendProtocolVersion(CharArrayBuffer buffer,
-                                          ProtocolVersion version);
+    CharArrayBuffer appendProtocolVersion(CharArrayBuffer buffer,ProtocolVersion version);
 
     /**
      * Formats a request line.
      *
-     * @param buffer    a buffer available for formatting, or
-     *                  {@code null}.
-     *                  The buffer will be cleared before use.
-     * @param reqline   the request line to format
+     * @param buffer
+     *            a buffer available for formatting, or
+     *            {@code null}.
+     *            The buffer will be cleared before use.
+     * @param reqline
+     *            the request line to format
      *
-     * @return  the formatted request line
+     * @return the formatted request line
      */
-    CharArrayBuffer formatRequestLine(CharArrayBuffer buffer,
-                                      RequestLine reqline);
+    CharArrayBuffer formatRequestLine(CharArrayBuffer buffer,RequestLine reqline);
 
     /**
      * Formats a status line.
      *
-     * @param buffer    a buffer available for formatting, or
-     *                  {@code null}.
-     *                  The buffer will be cleared before use.
-     * @param statline  the status line to format
+     * @param buffer
+     *            a buffer available for formatting, or
+     *            {@code null}.
+     *            The buffer will be cleared before use.
+     * @param statline
+     *            the status line to format
      *
-     * @return  the formatted status line
+     * @return the formatted status line
      *
-     * @throws com.feilong.lib.org.apache.http.ParseException        in case of a parse error
+     * @throws com.feilong.lib.org.apache.http.ParseException
+     *             in case of a parse error
      */
-    CharArrayBuffer formatStatusLine(CharArrayBuffer buffer,
-                                     StatusLine statline);
+    CharArrayBuffer formatStatusLine(CharArrayBuffer buffer,StatusLine statline);
 
     /**
      * Formats a header.
@@ -116,17 +120,19 @@ public interface LineFormatter {
      * See the class comment for details about the buffer argument.
      * </p>
      *
-     * @param buffer    a buffer available for formatting, or
-     *                  {@code null}.
-     *                  The buffer will be cleared before use.
-     * @param header    the header to format
+     * @param buffer
+     *            a buffer available for formatting, or
+     *            {@code null}.
+     *            The buffer will be cleared before use.
+     * @param header
+     *            the header to format
      *
-     * @return  a buffer holding the formatted header, never {@code null}.
-     *          The returned buffer may be different from the argument buffer.
+     * @return a buffer holding the formatted header, never {@code null}.
+     *         The returned buffer may be different from the argument buffer.
      *
-     * @throws com.feilong.lib.org.apache.http.ParseException        in case of a parse error
+     * @throws com.feilong.lib.org.apache.http.ParseException
+     *             in case of a parse error
      */
-    CharArrayBuffer formatHeader(CharArrayBuffer buffer,
-                                 Header header);
+    CharArrayBuffer formatHeader(CharArrayBuffer buffer,Header header);
 
 }

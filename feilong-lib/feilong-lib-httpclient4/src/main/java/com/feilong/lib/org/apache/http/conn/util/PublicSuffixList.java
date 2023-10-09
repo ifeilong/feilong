@@ -43,37 +43,39 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public final class PublicSuffixList {
+public final class PublicSuffixList{
 
-    private final DomainType type;
+    private final DomainType   type;
+
     private final List<String> rules;
+
     private final List<String> exceptions;
 
     /**
      * @since 4.5
      */
-    public PublicSuffixList(final DomainType type, final List<String> rules, final List<String> exceptions) {
+    public PublicSuffixList(final DomainType type, final List<String> rules, final List<String> exceptions){
         this.type = Args.notNull(type, "Domain type");
         this.rules = Collections.unmodifiableList(Args.notNull(rules, "Domain suffix rules"));
-        this.exceptions = Collections.unmodifiableList(exceptions != null ? exceptions : Collections.<String>emptyList());
+        this.exceptions = Collections.unmodifiableList(exceptions != null ? exceptions : Collections.<String> emptyList());
     }
 
-    public PublicSuffixList(final List<String> rules, final List<String> exceptions) {
+    public PublicSuffixList(final List<String> rules, final List<String> exceptions){
         this(DomainType.UNKNOWN, rules, exceptions);
     }
 
     /**
      * @since 4.5
      */
-    public DomainType getType() {
+    public DomainType getType(){
         return type;
     }
 
-    public List<String> getRules() {
+    public List<String> getRules(){
         return rules;
     }
 
-    public List<String> getExceptions() {
+    public List<String> getExceptions(){
         return exceptions;
     }
 

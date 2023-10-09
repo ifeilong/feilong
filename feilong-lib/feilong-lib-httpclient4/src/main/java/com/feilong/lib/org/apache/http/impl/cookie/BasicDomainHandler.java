@@ -46,25 +46,24 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicDomainHandler implements CommonCookieAttributeHandler {
+public class BasicDomainHandler implements CommonCookieAttributeHandler{
 
-    public BasicDomainHandler() {
+    public BasicDomainHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (TextUtils.isBlank(value)) {
+        if (TextUtils.isBlank(value)){
             throw new MalformedCookieException("Blank or null value for domain attribute");
         }
         // Ignore domain attributes ending with '.' per RFC 6265, 4.1.2.3
-        if (value.endsWith(".")) {
+        if (value.endsWith(".")){
             return;
         }
         String domain = value;
-        if (domain.startsWith(".")) {
+        if (domain.startsWith(".")){
             domain = domain.substring(1);
         }
         domain = domain.toLowerCase(Locale.ROOT);
@@ -72,8 +71,7 @@ public class BasicDomainHandler implements CommonCookieAttributeHandler {
     }
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
         // Validate the cookies domain attribute.  NOTE:  Domains without
@@ -83,27 +81,24 @@ public class BasicDomainHandler implements CommonCookieAttributeHandler {
         // back to the origin-server.
         final String host = origin.getHost();
         final String domain = cookie.getDomain();
-        if (domain == null) {
+        if (domain == null){
             throw new CookieRestrictionViolationException("Cookie 'domain' may not be null");
         }
-        if (!host.equals(domain) && !domainMatch(domain, host)) {
+        if (!host.equals(domain) && !domainMatch(domain, host)){
             throw new CookieRestrictionViolationException(
-                    "Illegal 'domain' attribute \"" + domain + "\". Domain of origin: \"" + host + "\"");
+                            "Illegal 'domain' attribute \"" + domain + "\". Domain of origin: \"" + host + "\"");
         }
     }
 
-    static boolean domainMatch(final String domain, final String host) {
-        if (InetAddressUtils.isIPv4Address(host) || InetAddressUtils.isIPv6Address(host)) {
+    static boolean domainMatch(final String domain,final String host){
+        if (InetAddressUtils.isIPv4Address(host) || InetAddressUtils.isIPv6Address(host)){
             return false;
         }
         final String normalizedDomain = domain.startsWith(".") ? domain.substring(1) : domain;
-        if (host.endsWith(normalizedDomain)) {
+        if (host.endsWith(normalizedDomain)){
             final int prefix = host.length() - normalizedDomain.length();
             // Either a full match or a prefix endidng with a '.'
-            if (prefix == 0) {
-                return true;
-            }
-            if (prefix > 1 && host.charAt(prefix - 1) == '.') {
+            if ((prefix == 0) || (prefix > 1 && host.charAt(prefix - 1) == '.')){
                 return true;
             }
         }
@@ -111,23 +106,23 @@ public class BasicDomainHandler implements CommonCookieAttributeHandler {
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
         final String host = origin.getHost();
         String domain = cookie.getDomain();
-        if (domain == null) {
+        if (domain == null){
             return false;
         }
-        if (domain.startsWith(".")) {
+        if (domain.startsWith(".")){
             domain = domain.substring(1);
         }
         domain = domain.toLowerCase(Locale.ROOT);
-        if (host.equals(domain)) {
+        if (host.equals(domain)){
             return true;
         }
-        if (cookie instanceof ClientCookie) {
-            if (((ClientCookie) cookie).containsAttribute(ClientCookie.DOMAIN_ATTR)) {
+        if (cookie instanceof ClientCookie){
+            if (((ClientCookie) cookie).containsAttribute(ClientCookie.DOMAIN_ATTR)){
                 return domainMatch(domain, host);
             }
         }
@@ -135,7 +130,7 @@ public class BasicDomainHandler implements CommonCookieAttributeHandler {
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.DOMAIN_ATTR;
     }
 

@@ -56,41 +56,50 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.3
  */
-public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
+public class SessionInputBufferImpl implements SessionInputBuffer,BufferInfo{
 
     private final HttpTransportMetricsImpl metrics;
-    private final byte[] buffer;
-    private final ByteArrayBuffer lineBuffer;
-    private final int minChunkLimit;
-    private final MessageConstraints constraints;
-    private final CharsetDecoder decoder;
 
-    private InputStream inStream;
-    private int bufferPos;
-    private int bufferLen;
-    private CharBuffer cbuf;
+    private final byte[]                   buffer;
+
+    private final ByteArrayBuffer          lineBuffer;
+
+    private final int                      minChunkLimit;
+
+    private final MessageConstraints       constraints;
+
+    private final CharsetDecoder           decoder;
+
+    private InputStream                    inStream;
+
+    private int                            bufferPos;
+
+    private int                            bufferLen;
+
+    private CharBuffer                     cbuf;
 
     /**
      * Creates new instance of SessionInputBufferImpl.
      *
-     * @param metrics HTTP transport metrics.
-     * @param bufferSize buffer size. Must be a positive number.
-     * @param minChunkLimit size limit below which data chunks should be buffered in memory
-     *   in order to minimize native method invocations on the underlying network socket.
-     *   The optimal value of this parameter can be platform specific and defines a trade-off
-     *   between performance of memory copy operations and that of native method invocation.
-     *   If negative default chunk limited will be used.
-     * @param constraints Message constraints. If {@code null}
-     *   {@link MessageConstraints#DEFAULT} will be used.
-     * @param charDecoder CharDecoder to be used for decoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for byte to char conversion.
+     * @param metrics
+     *            HTTP transport metrics.
+     * @param bufferSize
+     *            buffer size. Must be a positive number.
+     * @param minChunkLimit
+     *            size limit below which data chunks should be buffered in memory
+     *            in order to minimize native method invocations on the underlying network socket.
+     *            The optimal value of this parameter can be platform specific and defines a trade-off
+     *            between performance of memory copy operations and that of native method invocation.
+     *            If negative default chunk limited will be used.
+     * @param constraints
+     *            Message constraints. If {@code null}
+     *            {@link MessageConstraints#DEFAULT} will be used.
+     * @param charDecoder
+     *            CharDecoder to be used for decoding HTTP protocol elements.
+     *            If {@code null} simple type cast will be used for byte to char conversion.
      */
-    public SessionInputBufferImpl(
-            final HttpTransportMetricsImpl metrics,
-            final int bufferSize,
-            final int minChunkLimit,
-            final MessageConstraints constraints,
-            final CharsetDecoder charDecoder) {
+    public SessionInputBufferImpl(final HttpTransportMetricsImpl metrics, final int bufferSize, final int minChunkLimit,
+                    final MessageConstraints constraints, final CharsetDecoder charDecoder){
         Args.notNull(metrics, "HTTP transport metrcis");
         Args.positive(bufferSize, "Buffer size");
         this.metrics = metrics;
@@ -103,45 +112,43 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         this.decoder = charDecoder;
     }
 
-    public SessionInputBufferImpl(
-            final HttpTransportMetricsImpl metrics,
-            final int bufferSize) {
+    public SessionInputBufferImpl(final HttpTransportMetricsImpl metrics, final int bufferSize){
         this(metrics, bufferSize, bufferSize, null, null);
     }
 
-    public void bind(final InputStream inputStream) {
+    public void bind(final InputStream inputStream){
         this.inStream = inputStream;
     }
 
-    public boolean isBound() {
+    public boolean isBound(){
         return this.inStream != null;
     }
 
     @Override
-    public int capacity() {
+    public int capacity(){
         return this.buffer.length;
     }
 
     @Override
-    public int length() {
+    public int length(){
         return this.bufferLen - this.bufferPos;
     }
 
     @Override
-    public int available() {
+    public int available(){
         return capacity() - length();
     }
 
-    private int streamRead(final byte[] b, final int off, final int len) throws IOException {
+    private int streamRead(final byte[] b,final int off,final int len) throws IOException{
         Asserts.notNull(this.inStream, "Input stream");
         return this.inStream.read(b, off, len);
     }
 
-    public int fillBuffer() throws IOException {
+    public int fillBuffer() throws IOException{
         // compact the buffer if necessary
-        if (this.bufferPos > 0) {
+        if (this.bufferPos > 0){
             final int len = this.bufferLen - this.bufferPos;
-            if (len > 0) {
+            if (len > 0){
                 System.arraycopy(this.buffer, this.bufferPos, this.buffer, 0, len);
             }
             this.bufferPos = 0;
@@ -151,7 +158,7 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         final int off = this.bufferLen;
         final int len = this.buffer.length - off;
         readLen = streamRead(this.buffer, off, len);
-        if (readLen == -1) {
+        if (readLen == -1){
             return -1;
         }
         this.bufferLen = off + readLen;
@@ -159,21 +166,21 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         return readLen;
     }
 
-    public boolean hasBufferedData() {
+    public boolean hasBufferedData(){
         return this.bufferPos < this.bufferLen;
     }
 
-    public void clear() {
+    public void clear(){
         this.bufferPos = 0;
         this.bufferLen = 0;
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         int noRead;
-        while (!hasBufferedData()) {
+        while (!hasBufferedData()){
             noRead = fillBuffer();
-            if (noRead == -1) {
+            if (noRead == -1){
                 return -1;
             }
         }
@@ -181,11 +188,11 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
     }
 
     @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
-        if (b == null) {
+    public int read(final byte[] b,final int off,final int len) throws IOException{
+        if (b == null){
             return 0;
         }
-        if (hasBufferedData()) {
+        if (hasBufferedData()){
             final int chunk = Math.min(len, this.bufferLen - this.bufferPos);
             System.arraycopy(this.buffer, this.bufferPos, b, off, chunk);
             this.bufferPos += chunk;
@@ -193,17 +200,17 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         }
         // If the remaining capacity is big enough, read directly from the
         // underlying input stream bypassing the buffer.
-        if (len > this.minChunkLimit) {
+        if (len > this.minChunkLimit){
             final int readLen = streamRead(b, off, len);
-            if (readLen > 0) {
+            if (readLen > 0){
                 this.metrics.incrementBytesTransferred(readLen);
             }
             return readLen;
         }
         // otherwise read to the buffer first
-        while (!hasBufferedData()) {
+        while (!hasBufferedData()){
             final int noRead = fillBuffer();
-            if (noRead == -1) {
+            if (noRead == -1){
                 return -1;
             }
         }
@@ -214,8 +221,8 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
     }
 
     @Override
-    public int read(final byte[] b) throws IOException {
-        if (b == null) {
+    public int read(final byte[] b) throws IOException{
+        if (b == null){
             return 0;
         }
         return read(b, 0, b.length);
@@ -232,37 +239,38 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
      * This method treats a lone LF as a valid line delimiters in addition
      * to CR-LF required by the HTTP specification.
      *
-     * @param      charbuffer   the line buffer.
-     * @return     one line of characters
-     * @throws  IOException  if an I/O error occurs.
+     * @param charbuffer
+     *            the line buffer.
+     * @return one line of characters
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     @Override
-    public int readLine(final CharArrayBuffer charbuffer) throws IOException {
+    public int readLine(final CharArrayBuffer charbuffer) throws IOException{
         Args.notNull(charbuffer, "Char array buffer");
         final int maxLineLen = this.constraints.getMaxLineLength();
         int noRead = 0;
         boolean retry = true;
-        while (retry) {
+        while (retry){
             // attempt to find end of line (LF)
             int pos = -1;
-            for (int i = this.bufferPos; i < this.bufferLen; i++) {
-                if (this.buffer[i] == HTTP.LF) {
+            for (int i = this.bufferPos; i < this.bufferLen; i++){
+                if (this.buffer[i] == HTTP.LF){
                     pos = i;
                     break;
                 }
             }
 
-            if (maxLineLen > 0) {
-                final int currentLen = this.lineBuffer.length()
-                        + (pos >= 0 ? pos : this.bufferLen) - this.bufferPos;
-                if (currentLen >= maxLineLen) {
+            if (maxLineLen > 0){
+                final int currentLen = this.lineBuffer.length() + (pos >= 0 ? pos : this.bufferLen) - this.bufferPos;
+                if (currentLen >= maxLineLen){
                     throw new MessageConstraintException("Maximum line length limit exceeded");
                 }
             }
 
-            if (pos != -1) {
+            if (pos != -1){
                 // end of line found.
-                if (this.lineBuffer.isEmpty()) {
+                if (this.lineBuffer.isEmpty()){
                     // the entire line is preset in the read buffer
                     return lineFromReadBuffer(charbuffer, pos);
                 }
@@ -270,20 +278,20 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
                 final int len = pos + 1 - this.bufferPos;
                 this.lineBuffer.append(this.buffer, this.bufferPos, len);
                 this.bufferPos = pos + 1;
-            } else {
+            }else{
                 // end of line not found
-                if (hasBufferedData()) {
+                if (hasBufferedData()){
                     final int len = this.bufferLen - this.bufferPos;
                     this.lineBuffer.append(this.buffer, this.bufferPos, len);
                     this.bufferPos = this.bufferLen;
                 }
                 noRead = fillBuffer();
-                if (noRead == -1) {
+                if (noRead == -1){
                     retry = false;
                 }
             }
         }
-        if (noRead == -1 && this.lineBuffer.isEmpty()) {
+        if (noRead == -1 && this.lineBuffer.isEmpty()){
             // indicate the end of stream
             return -1;
         }
@@ -301,64 +309,62 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
      * to CR-LF required by the HTTP specification.
      *
      * @return HTTP line as a string
-     * @throws  IOException  if an I/O error occurs.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
-    private int lineFromLineBuffer(final CharArrayBuffer charbuffer)
-            throws IOException {
+    private int lineFromLineBuffer(final CharArrayBuffer charbuffer) throws IOException{
         // discard LF if found
         int len = this.lineBuffer.length();
-        if (len > 0) {
-            if (this.lineBuffer.byteAt(len - 1) == HTTP.LF) {
+        if (len > 0){
+            if (this.lineBuffer.byteAt(len - 1) == HTTP.LF){
                 len--;
             }
             // discard CR if found
-            if (len > 0) {
-                if (this.lineBuffer.byteAt(len - 1) == HTTP.CR) {
+            if (len > 0){
+                if (this.lineBuffer.byteAt(len - 1) == HTTP.CR){
                     len--;
                 }
             }
         }
-        if (this.decoder == null) {
+        if (this.decoder == null){
             charbuffer.append(this.lineBuffer, 0, len);
-        } else {
-            final ByteBuffer bbuf =  ByteBuffer.wrap(this.lineBuffer.buffer(), 0, len);
+        }else{
+            final ByteBuffer bbuf = ByteBuffer.wrap(this.lineBuffer.buffer(), 0, len);
             len = appendDecoded(charbuffer, bbuf);
         }
         this.lineBuffer.clear();
         return len;
     }
 
-    private int lineFromReadBuffer(final CharArrayBuffer charbuffer, final int position)
-            throws IOException {
+    private int lineFromReadBuffer(final CharArrayBuffer charbuffer,final int position) throws IOException{
         int pos = position;
         final int off = this.bufferPos;
         int len;
         this.bufferPos = pos + 1;
-        if (pos > off && this.buffer[pos - 1] == HTTP.CR) {
+        if (pos > off && this.buffer[pos - 1] == HTTP.CR){
             // skip CR if found
             pos--;
         }
         len = pos - off;
-        if (this.decoder == null) {
+        if (this.decoder == null){
             charbuffer.append(this.buffer, off, len);
-        } else {
-            final ByteBuffer bbuf =  ByteBuffer.wrap(this.buffer, off, len);
+        }else{
+            final ByteBuffer bbuf = ByteBuffer.wrap(this.buffer, off, len);
             len = appendDecoded(charbuffer, bbuf);
         }
         return len;
     }
 
-    private int appendDecoded(
-            final CharArrayBuffer charbuffer, final ByteBuffer bbuf) throws IOException {
-        if (!bbuf.hasRemaining()) {
+    private int appendDecoded(final CharArrayBuffer charbuffer,final ByteBuffer bbuf) throws IOException{
+        if (!bbuf.hasRemaining()){
             return 0;
         }
-        if (this.cbuf == null) {
+        if (this.cbuf == null){
             this.cbuf = CharBuffer.allocate(1024);
         }
         this.decoder.reset();
         int len = 0;
-        while (bbuf.hasRemaining()) {
+        while (bbuf.hasRemaining()){
             final CoderResult result = this.decoder.decode(bbuf, this.cbuf, true);
             len += handleDecodingResult(result, charbuffer, bbuf);
         }
@@ -368,16 +374,13 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         return len;
     }
 
-    private int handleDecodingResult(
-            final CoderResult result,
-            final CharArrayBuffer charbuffer,
-            final ByteBuffer bbuf) throws IOException {
-        if (result.isError()) {
+    private int handleDecodingResult(final CoderResult result,final CharArrayBuffer charbuffer,final ByteBuffer bbuf) throws IOException{
+        if (result.isError()){
             result.throwException();
         }
         this.cbuf.flip();
         final int len = this.cbuf.remaining();
-        while (this.cbuf.hasRemaining()) {
+        while (this.cbuf.hasRemaining()){
             charbuffer.append(this.cbuf.get());
         }
         this.cbuf.compact();
@@ -385,19 +388,19 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
     }
 
     @Override
-    public String readLine() throws IOException {
+    public String readLine() throws IOException{
         final CharArrayBuffer charbuffer = new CharArrayBuffer(64);
         final int readLen = readLine(charbuffer);
         return readLen != -1 ? charbuffer.toString() : null;
     }
 
     @Override
-    public boolean isDataAvailable(final int timeout) throws IOException {
+    public boolean isDataAvailable(final int timeout) throws IOException{
         return hasBufferedData();
     }
 
     @Override
-    public HttpTransportMetrics getMetrics() {
+    public HttpTransportMetrics getMetrics(){
         return this.metrics;
     }
 

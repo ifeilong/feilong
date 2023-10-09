@@ -49,49 +49,48 @@ import com.feilong.lib.org.apache.http.util.Asserts;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public abstract class AbstractCookieSpec implements CookieSpec {
+public abstract class AbstractCookieSpec implements CookieSpec{
 
     /**
-    * Stores attribute name -> attribute handler mappings
-    */
+     * Stores attribute name -> attribute handler mappings
+     */
     private final Map<String, CookieAttributeHandler> attribHandlerMap;
 
     /**
      * Default constructor
-     * */
-    public AbstractCookieSpec() {
+     */
+    public AbstractCookieSpec(){
         super();
-        this.attribHandlerMap = new ConcurrentHashMap<String, CookieAttributeHandler>(10);
+        this.attribHandlerMap = new ConcurrentHashMap<>(10);
     }
 
     /**
      * @since 4.4
      */
-    protected AbstractCookieSpec(final HashMap<String, CookieAttributeHandler> map) {
+    protected AbstractCookieSpec(final HashMap<String, CookieAttributeHandler> map){
         super();
         Asserts.notNull(map, "Attribute handler map");
-        this.attribHandlerMap = new ConcurrentHashMap<String, CookieAttributeHandler>(map);
+        this.attribHandlerMap = new ConcurrentHashMap<>(map);
     }
 
     /**
      * @since 4.4
      */
-    protected AbstractCookieSpec(final CommonCookieAttributeHandler... handlers) {
+    protected AbstractCookieSpec(final CommonCookieAttributeHandler...handlers){
         super();
-        this.attribHandlerMap = new ConcurrentHashMap<String, CookieAttributeHandler>(handlers.length);
-        for (final CommonCookieAttributeHandler handler: handlers) {
+        this.attribHandlerMap = new ConcurrentHashMap<>(handlers.length);
+        for (final CommonCookieAttributeHandler handler : handlers){
             this.attribHandlerMap.put(handler.getAttributeName(), handler);
         }
     }
 
     /**
      * @deprecated (4.4) use {@link #AbstractCookieSpec(java.util.HashMap)} or
-     *  {@link #AbstractCookieSpec(com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler...)}
-     *  constructors instead.
+     *             {@link #AbstractCookieSpec(com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler...)}
+     *             constructors instead.
      */
     @Deprecated
-    public void registerAttribHandler(
-            final String name, final CookieAttributeHandler handler) {
+    public void registerAttribHandler(final String name,final CookieAttributeHandler handler){
         Args.notNull(name, "Attribute name");
         Args.notNull(handler, "Attribute handler");
         this.attribHandlerMap.put(name, handler);
@@ -102,10 +101,11 @@ public abstract class AbstractCookieSpec implements CookieSpec {
      * given attribute. Returns {@code null} if no attribute handler is
      * found for the specified attribute.
      *
-     * @param name attribute name. e.g. Domain, Path, etc.
+     * @param name
+     *            attribute name. e.g. Domain, Path, etc.
      * @return an attribute handler or {@code null}
      */
-    protected CookieAttributeHandler findAttribHandler(final String name) {
+    protected CookieAttributeHandler findAttribHandler(final String name){
         return this.attribHandlerMap.get(name);
     }
 
@@ -113,18 +113,19 @@ public abstract class AbstractCookieSpec implements CookieSpec {
      * Gets attribute handler {@link CookieAttributeHandler} for the
      * given attribute.
      *
-     * @param name attribute name. e.g. Domain, Path, etc.
-     * @throws IllegalStateException if handler not found for the
-     *          specified attribute.
+     * @param name
+     *            attribute name. e.g. Domain, Path, etc.
+     * @throws IllegalStateException
+     *             if handler not found for the
+     *             specified attribute.
      */
-    protected CookieAttributeHandler getAttribHandler(final String name) {
+    protected CookieAttributeHandler getAttribHandler(final String name){
         final CookieAttributeHandler handler = findAttribHandler(name);
-        Asserts.check(handler != null, "Handler not registered for " +
-                name + " attribute");
+        Asserts.check(handler != null, "Handler not registered for " + name + " attribute");
         return handler;
     }
 
-    protected Collection<CookieAttributeHandler> getAttribHandlers() {
+    protected Collection<CookieAttributeHandler> getAttribHandlers(){
         return this.attribHandlerMap.values();
     }
 

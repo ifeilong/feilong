@@ -145,7 +145,7 @@ public abstract class AbstractVerifier implements X509HostnameVerifier{
     @Override
     public final void verify(final String host,final X509Certificate cert) throws SSLException{
         final List<SubjectName> allSubjectAltNames = DefaultHostnameVerifier.getSubjectAltNames(cert);
-        final List<String> subjectAlts = new ArrayList<String>();
+        final List<String> subjectAlts = new ArrayList<>();
         if (InetAddressUtils.isIPv4Address(host) || InetAddressUtils.isIPv6Address(host)){
             for (final SubjectName subjectName : allSubjectAltNames){
                 if (subjectName.getType() == SubjectName.IP){
@@ -271,7 +271,7 @@ public abstract class AbstractVerifier implements X509HostnameVerifier{
         if (subjectAltNames == null){
             return null;
         }
-        final List<String> dnsAlts = new ArrayList<String>();
+        final List<String> dnsAlts = new ArrayList<>();
         for (final SubjectName subjectName : subjectAltNames){
             if (subjectName.getType() == SubjectName.DNS){
                 dnsAlts.add(subjectName.getValue());

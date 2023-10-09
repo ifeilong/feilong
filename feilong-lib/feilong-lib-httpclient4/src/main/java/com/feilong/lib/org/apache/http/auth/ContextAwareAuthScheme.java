@@ -31,7 +31,7 @@ import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
- * This interface represents an extended  authentication scheme
+ * This interface represents an extended authentication scheme
  * that requires access to {@link HttpContext} in order to
  * generate an authorization string.
  *
@@ -40,23 +40,24 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.1
  */
 
-public interface ContextAwareAuthScheme extends AuthScheme {
+public interface ContextAwareAuthScheme extends AuthScheme{
 
     /**
      * Produces an authorization string for the given set of
      * {@link Credentials}.
      *
-     * @param credentials The set of credentials to be used for athentication
-     * @param request The request being authenticated
-     * @param context HTTP context
-     * @throws AuthenticationException if authorization string cannot
-     *   be generated due to an authentication failure
+     * @param credentials
+     *            The set of credentials to be used for athentication
+     * @param request
+     *            The request being authenticated
+     * @param context
+     *            HTTP context
+     * @throws AuthenticationException
+     *             if authorization string cannot
+     *             be generated due to an authentication failure
      *
      * @return the authorization string
      */
-    Header authenticate(
-            Credentials credentials,
-            HttpRequest request,
-            HttpContext context) throws AuthenticationException;
+    Header authenticate(Credentials credentials,HttpRequest request,HttpContext context) throws AuthenticationException;
 
 }

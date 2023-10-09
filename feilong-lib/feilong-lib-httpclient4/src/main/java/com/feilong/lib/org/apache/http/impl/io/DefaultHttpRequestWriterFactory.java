@@ -42,23 +42,23 @@ import com.feilong.lib.org.apache.http.message.LineFormatter;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultHttpRequestWriterFactory implements HttpMessageWriterFactory<HttpRequest> {
+public class DefaultHttpRequestWriterFactory implements HttpMessageWriterFactory<HttpRequest>{
 
     public static final DefaultHttpRequestWriterFactory INSTANCE = new DefaultHttpRequestWriterFactory();
 
-    private final LineFormatter lineFormatter;
+    private final LineFormatter                         lineFormatter;
 
-    public DefaultHttpRequestWriterFactory(final LineFormatter lineFormatter) {
+    public DefaultHttpRequestWriterFactory(final LineFormatter lineFormatter){
         super();
         this.lineFormatter = lineFormatter != null ? lineFormatter : BasicLineFormatter.INSTANCE;
     }
 
-    public DefaultHttpRequestWriterFactory() {
+    public DefaultHttpRequestWriterFactory(){
         this(null);
     }
 
     @Override
-    public HttpMessageWriter<HttpRequest> create(final SessionOutputBuffer buffer) {
+    public HttpMessageWriter<HttpRequest> create(final SessionOutputBuffer buffer){
         return new DefaultHttpRequestWriter(buffer, lineFormatter);
     }
 

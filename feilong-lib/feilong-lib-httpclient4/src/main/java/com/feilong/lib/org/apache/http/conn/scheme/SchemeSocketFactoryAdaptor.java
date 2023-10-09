@@ -40,26 +40,26 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @deprecated (4.1) do not use
  */
 @Deprecated
-class SchemeSocketFactoryAdaptor implements SchemeSocketFactory {
+class SchemeSocketFactoryAdaptor implements SchemeSocketFactory{
 
     private final SocketFactory factory;
 
-    SchemeSocketFactoryAdaptor(final SocketFactory factory) {
+    SchemeSocketFactoryAdaptor(final SocketFactory factory){
         super();
         this.factory = factory;
     }
 
     @Override
     public Socket connectSocket(
-            final Socket sock,
-            final InetSocketAddress remoteAddress,
-            final InetSocketAddress localAddress,
-            final HttpParams params) throws IOException, UnknownHostException, ConnectTimeoutException {
+                    final Socket sock,
+                    final InetSocketAddress remoteAddress,
+                    final InetSocketAddress localAddress,
+                    final HttpParams params) throws IOException,UnknownHostException,ConnectTimeoutException{
         final String host = remoteAddress.getHostName();
         final int port = remoteAddress.getPort();
         InetAddress local = null;
         int localPort = 0;
-        if (localAddress != null) {
+        if (localAddress != null){
             local = localAddress.getAddress();
             localPort = localAddress.getPort();
         }
@@ -67,34 +67,33 @@ class SchemeSocketFactoryAdaptor implements SchemeSocketFactory {
     }
 
     @Override
-    public Socket createSocket(final HttpParams params) throws IOException {
+    public Socket createSocket(final HttpParams params) throws IOException{
         return this.factory.createSocket();
     }
 
     @Override
-    public boolean isSecure(final Socket sock) throws IllegalArgumentException {
+    public boolean isSecure(final Socket sock) throws IllegalArgumentException{
         return this.factory.isSecure(sock);
     }
 
-    public SocketFactory getFactory() {
+    public SocketFactory getFactory(){
         return this.factory;
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
+    public boolean equals(final Object obj){
+        if (obj == null){
             return false;
         }
-        if (this == obj) {
+        if (this == obj){
             return true;
         }
-        return obj instanceof SchemeSocketFactoryAdaptor
-                        ? this.factory.equals(((SchemeSocketFactoryAdaptor) obj).factory)
+        return obj instanceof SchemeSocketFactoryAdaptor ? this.factory.equals(((SchemeSocketFactoryAdaptor) obj).factory)
                         : this.factory.equals(obj);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return this.factory.hashCode();
     }
 

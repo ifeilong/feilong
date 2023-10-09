@@ -35,38 +35,45 @@ import java.io.IOException;
  *
  * @since 4.0
  */
-public interface HttpClientConnection extends HttpConnection {
+public interface HttpClientConnection extends HttpConnection{
 
     /**
      * Checks if response data is available from the connection. May wait for
      * the specified time until some data becomes available. Note that some
      * implementations may completely ignore the timeout parameter.
      *
-     * @param timeout the maximum time in milliseconds to wait for data
+     * @param timeout
+     *            the maximum time in milliseconds to wait for data
      * @return true if data is available; false if there was no data available
      *         even after waiting for {@code timeout} milliseconds.
-     * @throws IOException if an error happens on the connection
+     * @throws IOException
+     *             if an error happens on the connection
      */
-    boolean isResponseAvailable(int timeout)
-        throws IOException;
+    boolean isResponseAvailable(int timeout) throws IOException;
 
     /**
      * Sends the request line and all headers over the connection.
-     * @param request the request whose headers to send.
-     * @throws HttpException in case of HTTP protocol violation
-     * @throws IOException in case of an I/O error
+     * 
+     * @param request
+     *            the request whose headers to send.
+     * @throws HttpException
+     *             in case of HTTP protocol violation
+     * @throws IOException
+     *             in case of an I/O error
      */
-    void sendRequestHeader(HttpRequest request)
-        throws HttpException, IOException;
+    void sendRequestHeader(HttpRequest request) throws HttpException,IOException;
 
     /**
      * Sends the request entity over the connection.
-     * @param request the request whose entity to send.
-     * @throws HttpException in case of HTTP protocol violation
-     * @throws IOException in case of an I/O error
+     * 
+     * @param request
+     *            the request whose entity to send.
+     * @throws HttpException
+     *             in case of HTTP protocol violation
+     * @throws IOException
+     *             in case of an I/O error
      */
-    void sendRequestEntity(HttpEntityEnclosingRequest request)
-        throws HttpException, IOException;
+    void sendRequestEntity(HttpEntityEnclosingRequest request) throws HttpException,IOException;
 
     /**
      * Receives the request line and headers of the next response available from
@@ -75,27 +82,31 @@ public interface HttpClientConnection extends HttpConnection {
      *
      * @return a new HttpResponse object with status line and headers
      *         initialized.
-     * @throws HttpException in case of HTTP protocol violation
-     * @throws IOException in case of an I/O error
+     * @throws HttpException
+     *             in case of HTTP protocol violation
+     * @throws IOException
+     *             in case of an I/O error
      */
-    HttpResponse receiveResponseHeader()
-        throws HttpException, IOException;
+    HttpResponse receiveResponseHeader() throws HttpException,IOException;
 
     /**
      * Receives the next response entity available from this connection and
      * attaches it to an existing HttpResponse object.
      *
-     * @param response the response to attach the entity to
-     * @throws HttpException in case of HTTP protocol violation
-     * @throws IOException in case of an I/O error
+     * @param response
+     *            the response to attach the entity to
+     * @throws HttpException
+     *             in case of HTTP protocol violation
+     * @throws IOException
+     *             in case of an I/O error
      */
-    void receiveResponseEntity(HttpResponse response)
-        throws HttpException, IOException;
+    void receiveResponseEntity(HttpResponse response) throws HttpException,IOException;
 
     /**
      * Writes out all pending buffered data over the open connection.
      *
-     * @throws IOException in case of an I/O error
+     * @throws IOException
+     *             in case of an I/O error
      */
     void flush() throws IOException;
 

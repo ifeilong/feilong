@@ -42,45 +42,46 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @SuppressWarnings("deprecation")
-public class KerberosSchemeFactory implements AuthSchemeFactory, AuthSchemeProvider {
+public class KerberosSchemeFactory implements AuthSchemeFactory,AuthSchemeProvider{
 
     private final boolean stripPort;
+
     private final boolean useCanonicalHostname;
 
     /**
      * @since 4.4
      */
-    public KerberosSchemeFactory(final boolean stripPort, final boolean useCanonicalHostname) {
+    public KerberosSchemeFactory(final boolean stripPort, final boolean useCanonicalHostname){
         super();
         this.stripPort = stripPort;
         this.useCanonicalHostname = useCanonicalHostname;
     }
 
-    public KerberosSchemeFactory(final boolean stripPort) {
+    public KerberosSchemeFactory(final boolean stripPort){
         super();
         this.stripPort = stripPort;
         this.useCanonicalHostname = true;
     }
 
-    public KerberosSchemeFactory() {
+    public KerberosSchemeFactory(){
         this(true, true);
     }
 
-    public boolean isStripPort() {
+    public boolean isStripPort(){
         return stripPort;
     }
 
-    public boolean isUseCanonicalHostname() {
+    public boolean isUseCanonicalHostname(){
         return useCanonicalHostname;
     }
 
     @Override
-    public AuthScheme newInstance(final HttpParams params) {
+    public AuthScheme newInstance(final HttpParams params){
         return new KerberosScheme(this.stripPort, this.useCanonicalHostname);
     }
 
     @Override
-    public AuthScheme create(final HttpContext context) {
+    public AuthScheme create(final HttpContext context){
         return new KerberosScheme(this.stripPort, this.useCanonicalHostname);
     }
 

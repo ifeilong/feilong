@@ -36,67 +36,70 @@ import com.feilong.lib.org.apache.http.cookie.SetCookie2;
  *
  * @since 4.0
  */
-public class BasicClientCookie2 extends BasicClientCookie implements SetCookie2 {
+public class BasicClientCookie2 extends BasicClientCookie implements SetCookie2{
 
     private static final long serialVersionUID = -7744598295706617057L;
 
-    private String commentURL;
-    private int[] ports;
-    private boolean discard;
+    private String            commentURL;
+
+    private int[]             ports;
+
+    private boolean           discard;
 
     /**
      * Default Constructor taking a name and a value. The value may be null.
      *
-     * @param name The name.
-     * @param value The value.
+     * @param name
+     *            The name.
+     * @param value
+     *            The value.
      */
-    public BasicClientCookie2(final String name, final String value) {
+    public BasicClientCookie2(final String name, final String value){
         super(name, value);
     }
 
     @Override
-    public int[] getPorts() {
+    public int[] getPorts(){
         return this.ports;
     }
 
     @Override
-    public void setPorts(final int[] ports) {
+    public void setPorts(final int[] ports){
         this.ports = ports;
     }
 
     @Override
-    public String getCommentURL() {
+    public String getCommentURL(){
         return this.commentURL;
     }
 
     @Override
-    public void setCommentURL(final String commentURL) {
+    public void setCommentURL(final String commentURL){
         this.commentURL = commentURL;
     }
 
     @Override
-    public void setDiscard(final boolean discard) {
+    public void setDiscard(final boolean discard){
         this.discard = discard;
     }
 
     @Override
-    public boolean isPersistent() {
+    public boolean isPersistent(){
         return !this.discard && super.isPersistent();
     }
 
     @Override
-    public boolean isExpired(final Date date) {
+    public boolean isExpired(final Date date){
         return this.discard || super.isExpired(date);
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         final BasicClientCookie2 clone = (BasicClientCookie2) super.clone();
-        if (this.ports != null) {
+        if (this.ports != null){
             clone.ports = this.ports.clone();
         }
         return clone;
     }
 
 }
-

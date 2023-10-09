@@ -43,31 +43,30 @@ import com.feilong.lib.org.apache.http.cookie.MalformedCookieException;
  * @since 4.1
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class IgnoreSpec extends CookieSpecBase {
+public class IgnoreSpec extends CookieSpecBase{
 
     @Override
-    public int getVersion() {
+    public int getVersion(){
         return 0;
     }
 
     @Override
-    public List<Cookie> parse(final Header header, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public List<Cookie> parse(final Header header,final CookieOrigin origin) throws MalformedCookieException{
         return Collections.emptyList();
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         return false;
     }
 
     @Override
-    public List<Header> formatCookies(final List<Cookie> cookies) {
+    public List<Header> formatCookies(final List<Cookie> cookies){
         return Collections.emptyList();
     }
 
     @Override
-    public Header getVersionHeader() {
+    public Header getVersionHeader(){
         return null;
     }
 }

@@ -35,28 +35,28 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.entity.ContentLengthStrategy;
 
 /**
- * Decorator for  {@link ContentLengthStrategy} implementations that disallows the use of
+ * Decorator for {@link ContentLengthStrategy} implementations that disallows the use of
  * identity transfer encoding.
  *
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DisallowIdentityContentLengthStrategy implements ContentLengthStrategy {
+public class DisallowIdentityContentLengthStrategy implements ContentLengthStrategy{
 
-    public static final DisallowIdentityContentLengthStrategy INSTANCE =
-        new DisallowIdentityContentLengthStrategy(new LaxContentLengthStrategy(0));
+    public static final DisallowIdentityContentLengthStrategy INSTANCE = new DisallowIdentityContentLengthStrategy(
+                    new LaxContentLengthStrategy(0));
 
-    private final ContentLengthStrategy contentLengthStrategy;
+    private final ContentLengthStrategy                       contentLengthStrategy;
 
-    public DisallowIdentityContentLengthStrategy(final ContentLengthStrategy contentLengthStrategy) {
+    public DisallowIdentityContentLengthStrategy(final ContentLengthStrategy contentLengthStrategy){
         super();
         this.contentLengthStrategy = contentLengthStrategy;
     }
 
     @Override
-    public long determineLength(final HttpMessage message) throws HttpException {
+    public long determineLength(final HttpMessage message) throws HttpException{
         final long result = this.contentLengthStrategy.determineLength(message);
-        if (result == ContentLengthStrategy.IDENTITY) {
+        if (result == ContentLengthStrategy.IDENTITY){
             throw new ProtocolException("Identity transfer encoding cannot be used");
         }
         return result;

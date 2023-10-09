@@ -40,26 +40,26 @@ import com.feilong.lib.org.apache.http.HttpRequest;
  *
  * @since 4.3
  */
-class RequestEntityProxy implements HttpEntity  {
+class RequestEntityProxy implements HttpEntity{
 
-    static void enhance(final HttpEntityEnclosingRequest request) {
+    static void enhance(final HttpEntityEnclosingRequest request){
         final HttpEntity entity = request.getEntity();
-        if (entity != null && !entity.isRepeatable() && !isEnhanced(entity)) {
+        if (entity != null && !entity.isRepeatable() && !isEnhanced(entity)){
             request.setEntity(new RequestEntityProxy(entity));
         }
     }
 
-    static boolean isEnhanced(final HttpEntity entity) {
+    static boolean isEnhanced(final HttpEntity entity){
         return entity instanceof RequestEntityProxy;
     }
 
-    static boolean isRepeatable(final HttpRequest request) {
-        if (request instanceof HttpEntityEnclosingRequest) {
+    static boolean isRepeatable(final HttpRequest request){
+        if (request instanceof HttpEntityEnclosingRequest){
             final HttpEntity entity = ((HttpEntityEnclosingRequest) request).getEntity();
-            if (entity != null) {
-                if (isEnhanced(entity)) {
+            if (entity != null){
+                if (isEnhanced(entity)){
                     final RequestEntityProxy proxy = (RequestEntityProxy) entity;
-                    if (!proxy.isConsumed()) {
+                    if (!proxy.isConsumed()){
                         return true;
                     }
                 }
@@ -70,70 +70,71 @@ class RequestEntityProxy implements HttpEntity  {
     }
 
     private final HttpEntity original;
-    private boolean consumed = false;
 
-    RequestEntityProxy(final HttpEntity original) {
+    private boolean          consumed = false;
+
+    RequestEntityProxy(final HttpEntity original){
         super();
         this.original = original;
     }
 
-    public HttpEntity getOriginal() {
+    public HttpEntity getOriginal(){
         return original;
     }
 
-    public boolean isConsumed() {
+    public boolean isConsumed(){
         return consumed;
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return original.isRepeatable();
     }
 
     @Override
-    public boolean isChunked() {
+    public boolean isChunked(){
         return original.isChunked();
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return original.getContentLength();
     }
 
     @Override
-    public Header getContentType() {
+    public Header getContentType(){
         return original.getContentType();
     }
 
     @Override
-    public Header getContentEncoding() {
+    public Header getContentEncoding(){
         return original.getContentEncoding();
     }
 
     @Override
-    public InputStream getContent() throws IOException, IllegalStateException {
+    public InputStream getContent() throws IOException,IllegalStateException{
         return original.getContent();
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         consumed = true;
         original.writeTo(outStream);
     }
 
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return original.isStreaming();
     }
 
     @Override
-    public void consumeContent() throws IOException {
+    public void consumeContent() throws IOException{
         consumed = true;
         original.consumeContent();
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder sb = new StringBuilder("RequestEntityProxy{");
         sb.append(original);
         sb.append('}');

@@ -45,29 +45,30 @@ import java.net.URI;
  *
  * @since 4.0
  */
-public class HttpGet extends HttpRequestBase {
+public class HttpGet extends HttpRequestBase{
 
     public final static String METHOD_NAME = "GET";
 
-    public HttpGet() {
+    public HttpGet(){
         super();
     }
 
-    public HttpGet(final URI uri) {
+    public HttpGet(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpGet(final String uri) {
+    public HttpGet(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

@@ -39,31 +39,33 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @since 4.2
  *
  * @deprecated (4.3) use {@link
- *   com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory}
+ *             com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory}
  */
 @Deprecated
-public interface SchemeLayeredSocketFactory extends SchemeSocketFactory {
+public interface SchemeLayeredSocketFactory extends SchemeSocketFactory{
 
     /**
      * Returns a socket connected to the given host that is layered over an
-     * existing socket.  Used primarily for creating secure sockets through
+     * existing socket. Used primarily for creating secure sockets through
      * proxies.
      *
-     * @param socket the existing socket
-     * @param target    the name of the target host.
-     * @param port      the port to connect to on the target host
-     * @param params    HTTP parameters
+     * @param socket
+     *            the existing socket
+     * @param target
+     *            the name of the target host.
+     * @param port
+     *            the port to connect to on the target host
+     * @param params
+     *            HTTP parameters
      *
      * @return Socket a new socket
      *
-     * @throws IOException if an I/O error occurs while creating the socket
-     * @throws UnknownHostException if the IP address of the host cannot be
-     * determined
+     * @throws IOException
+     *             if an I/O error occurs while creating the socket
+     * @throws UnknownHostException
+     *             if the IP address of the host cannot be
+     *             determined
      */
-    Socket createLayeredSocket(
-        Socket socket,
-        String target,
-        int port,
-        HttpParams params) throws IOException, UnknownHostException;
+    Socket createLayeredSocket(Socket socket,String target,int port,HttpParams params) throws IOException,UnknownHostException;
 
 }

@@ -33,29 +33,29 @@ package com.feilong.lib.org.apache.http.auth;
  *
  * @since 4.0
  */
-public final class AUTH {
+public final class AUTH{
 
     /**
      * The www authenticate challange header.
      */
-    public static final String WWW_AUTH = "WWW-Authenticate";
+    public static final String WWW_AUTH        = "WWW-Authenticate";
 
     /**
      * The www authenticate response header.
      */
-    public static final String WWW_AUTH_RESP = "Authorization";
+    public static final String WWW_AUTH_RESP   = "Authorization";
 
     /**
      * The proxy authenticate challange header.
      */
-    public static final String PROXY_AUTH = "Proxy-Authenticate";
+    public static final String PROXY_AUTH      = "Proxy-Authenticate";
 
     /**
      * The proxy authenticate response header.
      */
     public static final String PROXY_AUTH_RESP = "Proxy-Authorization";
 
-    private AUTH() {
+    private AUTH(){
     }
 
 }

@@ -47,42 +47,41 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 @SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class RequestDefaultHeaders implements HttpRequestInterceptor {
+public class RequestDefaultHeaders implements HttpRequestInterceptor{
 
     private final Collection<? extends Header> defaultHeaders;
 
     /**
      * @since 4.3
      */
-    public RequestDefaultHeaders(final Collection<? extends Header> defaultHeaders) {
+    public RequestDefaultHeaders(final Collection<? extends Header> defaultHeaders){
         super();
         this.defaultHeaders = defaultHeaders;
     }
 
-    public RequestDefaultHeaders() {
+    public RequestDefaultHeaders(){
         this(null);
     }
 
     @Override
-    public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
 
         final String method = request.getRequestLine().getMethod();
-        if (method.equalsIgnoreCase("CONNECT")) {
+        if (method.equalsIgnoreCase("CONNECT")){
             return;
         }
 
         // Add default headers
         @SuppressWarnings("unchecked")
-        Collection<? extends Header> defHeaders = (Collection<? extends Header>)
-            request.getParams().getParameter(ClientPNames.DEFAULT_HEADERS);
-        if (defHeaders == null) {
+        Collection<? extends Header> defHeaders = (Collection<? extends Header>) request.getParams()
+                        .getParameter(ClientPNames.DEFAULT_HEADERS);
+        if (defHeaders == null){
             defHeaders = this.defaultHeaders;
         }
 
-        if (defHeaders != null) {
-            for (final Header defHeader : defHeaders) {
+        if (defHeaders != null){
+            for (final Header defHeader : defHeaders){
                 request.addHeader(defHeader);
             }
         }

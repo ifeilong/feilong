@@ -34,34 +34,37 @@ import com.feilong.lib.org.apache.http.ProtocolException;
  *
  * @since 4.0
  */
-public class RedirectException extends ProtocolException {
+public class RedirectException extends ProtocolException{
 
     private static final long serialVersionUID = 4418824536372559326L;
 
     /**
      * Creates a new RedirectException with a {@code null} detail message.
      */
-    public RedirectException() {
+    public RedirectException(){
         super();
     }
 
     /**
      * Creates a new RedirectException with the specified detail message.
      *
-     * @param message The exception detail message
+     * @param message
+     *            The exception detail message
      */
-    public RedirectException(final String message) {
+    public RedirectException(final String message){
         super(message);
     }
 
     /**
      * Creates a new RedirectException with the specified detail message and cause.
      *
-     * @param message the exception detail message
-     * @param cause the {@code Throwable} that caused this exception, or {@code null}
-     * if the cause is unavailable, unknown, or not a {@code Throwable}
+     * @param message
+     *            the exception detail message
+     * @param cause
+     *            the {@code Throwable} that caused this exception, or {@code null}
+     *            if the cause is unavailable, unknown, or not a {@code Throwable}
      */
-    public RedirectException(final String message, final Throwable cause) {
+    public RedirectException(final String message, final Throwable cause){
         super(message, cause);
     }
 }

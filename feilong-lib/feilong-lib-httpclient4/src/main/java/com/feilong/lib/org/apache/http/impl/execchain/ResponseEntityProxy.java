@@ -43,130 +43,130 @@ import com.feilong.lib.org.apache.http.entity.HttpEntityWrapper;
  *
  * @since 4.3
  */
-class ResponseEntityProxy extends HttpEntityWrapper implements EofSensorWatcher {
+class ResponseEntityProxy extends HttpEntityWrapper implements EofSensorWatcher{
 
     private final ConnectionHolder connHolder;
 
-    public static void enchance(final HttpResponse response, final ConnectionHolder connHolder) {
+    public static void enchance(final HttpResponse response,final ConnectionHolder connHolder){
         final HttpEntity entity = response.getEntity();
-        if (entity != null && entity.isStreaming() && connHolder != null) {
+        if (entity != null && entity.isStreaming() && connHolder != null){
             response.setEntity(new ResponseEntityProxy(entity, connHolder));
         }
     }
 
-    ResponseEntityProxy(final HttpEntity entity, final ConnectionHolder connHolder) {
+    ResponseEntityProxy(final HttpEntity entity, final ConnectionHolder connHolder){
         super(entity);
         this.connHolder = connHolder;
     }
 
-    private void cleanup() throws IOException {
-        if (this.connHolder != null) {
+    private void cleanup() throws IOException{
+        if (this.connHolder != null){
             this.connHolder.close();
         }
     }
 
-    private void abortConnection() {
-        if (this.connHolder != null) {
+    private void abortConnection(){
+        if (this.connHolder != null){
             this.connHolder.abortConnection();
         }
     }
 
-    public void releaseConnection() {
-        if (this.connHolder != null) {
+    public void releaseConnection(){
+        if (this.connHolder != null){
             this.connHolder.releaseConnection();
         }
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return false;
     }
 
     @Override
-    public InputStream getContent() throws IOException {
+    public InputStream getContent() throws IOException{
         return new EofSensorInputStream(this.wrappedEntity.getContent(), this);
     }
 
     @Override
-    public void consumeContent() throws IOException {
+    public void consumeContent() throws IOException{
         releaseConnection();
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
-        try {
-            if (outStream != null) {
+    public void writeTo(final OutputStream outStream) throws IOException{
+        try{
+            if (outStream != null){
                 this.wrappedEntity.writeTo(outStream);
             }
             releaseConnection();
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             abortConnection();
             throw ex;
-        } catch (final RuntimeException ex) {
+        }catch (final RuntimeException ex){
             abortConnection();
             throw ex;
-        } finally {
+        }finally{
             cleanup();
         }
     }
 
     @Override
-    public boolean eofDetected(final InputStream wrapped) throws IOException {
-        try {
+    public boolean eofDetected(final InputStream wrapped) throws IOException{
+        try{
             // there may be some cleanup required, such as
             // reading trailers after the response body:
-            if (wrapped != null) {
+            if (wrapped != null){
                 wrapped.close();
             }
             releaseConnection();
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             abortConnection();
             throw ex;
-        } catch (final RuntimeException ex) {
+        }catch (final RuntimeException ex){
             abortConnection();
             throw ex;
-        } finally {
+        }finally{
             cleanup();
         }
         return false;
     }
 
     @Override
-    public boolean streamClosed(final InputStream wrapped) throws IOException {
-        try {
+    public boolean streamClosed(final InputStream wrapped) throws IOException{
+        try{
             final boolean open = connHolder != null && !connHolder.isReleased();
             // this assumes that closing the stream will
             // consume the remainder of the response body:
-            try {
-                if (wrapped != null) {
+            try{
+                if (wrapped != null){
                     wrapped.close();
                 }
                 releaseConnection();
-            } catch (final SocketException ex) {
-                if (open) {
+            }catch (final SocketException ex){
+                if (open){
                     throw ex;
                 }
             }
-        } catch (final IOException ex) {
+        }catch (final IOException ex){
             abortConnection();
             throw ex;
-        } catch (final RuntimeException ex) {
+        }catch (final RuntimeException ex){
             abortConnection();
             throw ex;
-        } finally {
+        }finally{
             cleanup();
         }
         return false;
     }
 
     @Override
-    public boolean streamAbort(final InputStream wrapped) throws IOException {
+    public boolean streamAbort(final InputStream wrapped) throws IOException{
         cleanup();
         return false;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder sb = new StringBuilder("ResponseEntityProxy{");
         sb.append(wrappedEntity);
         sb.append('}');

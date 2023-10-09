@@ -42,14 +42,14 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 // don't use FilterInputStream as the base class, we'd have to
 // override markSupported(), mark(), and reset() to disable them
-public class EofSensorInputStream extends InputStream implements ConnectionReleaseTrigger {
+public class EofSensorInputStream extends InputStream implements ConnectionReleaseTrigger{
 
     /**
      * The wrapped input stream, while accessible.
      * The value changes to {@code null} when the wrapped stream
      * becomes inaccessible.
      */
-    protected InputStream wrappedStream;
+    protected InputStream          wrappedStream;
 
     /**
      * Indicates whether this stream itself is closed.
@@ -61,7 +61,7 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      *
      * @see #isReadAllowed isReadAllowed
      */
-    private boolean selfClosed;
+    private boolean                selfClosed;
 
     /** The watcher to be notified, if any. */
     private final EofSensorWatcher eofWatcher;
@@ -73,51 +73,53 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      * Otherwise, the watcher decides whether the underlying stream
      * should be closed before detaching from it.
      *
-     * @param in        the wrapped stream
-     * @param watcher   the watcher for events, or {@code null} for
-     *                  auto-close behavior without notification
+     * @param in
+     *            the wrapped stream
+     * @param watcher
+     *            the watcher for events, or {@code null} for
+     *            auto-close behavior without notification
      */
-    public EofSensorInputStream(final InputStream in,
-                                final EofSensorWatcher watcher) {
+    public EofSensorInputStream(final InputStream in, final EofSensorWatcher watcher){
         Args.notNull(in, "Wrapped stream");
         wrappedStream = in;
         selfClosed = false;
         eofWatcher = watcher;
     }
 
-    boolean isSelfClosed() {
+    boolean isSelfClosed(){
         return selfClosed;
     }
 
-    InputStream getWrappedStream() {
+    InputStream getWrappedStream(){
         return wrappedStream;
     }
 
     /**
      * Checks whether the underlying stream can be read from.
      *
-     * @return  {@code true} if the underlying stream is accessible,
-     *          {@code false} if this stream is in EOF mode and
-     *          detached from the underlying stream
+     * @return {@code true} if the underlying stream is accessible,
+     *         {@code false} if this stream is in EOF mode and
+     *         detached from the underlying stream
      *
-     * @throws IOException      if this stream is already closed
+     * @throws IOException
+     *             if this stream is already closed
      */
-    protected boolean isReadAllowed() throws IOException {
-        if (selfClosed) {
+    protected boolean isReadAllowed() throws IOException{
+        if (selfClosed){
             throw new IOException("Attempted read on closed stream.");
         }
         return (wrappedStream != null);
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         int readLen = -1;
 
-        if (isReadAllowed()) {
-            try {
+        if (isReadAllowed()){
+            try{
                 readLen = wrappedStream.read();
                 checkEOF(readLen);
-            } catch (final IOException ex) {
+            }catch (final IOException ex){
                 checkAbort();
                 throw ex;
             }
@@ -127,14 +129,14 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
     }
 
     @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
+    public int read(final byte[] b,final int off,final int len) throws IOException{
         int readLen = -1;
 
-        if (isReadAllowed()) {
-            try {
-                readLen = wrappedStream.read(b,  off,  len);
+        if (isReadAllowed()){
+            try{
+                readLen = wrappedStream.read(b, off, len);
                 checkEOF(readLen);
-            } catch (final IOException ex) {
+            }catch (final IOException ex){
                 checkAbort();
                 throw ex;
             }
@@ -144,19 +146,19 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
     }
 
     @Override
-    public int read(final byte[] b) throws IOException {
+    public int read(final byte[] b) throws IOException{
         return read(b, 0, b.length);
     }
 
     @Override
-    public int available() throws IOException {
+    public int available() throws IOException{
         int a = 0; // not -1
 
-        if (isReadAllowed()) {
-            try {
+        if (isReadAllowed()){
+            try{
                 a = wrappedStream.available();
                 // no checkEOF() here, available() can't trigger EOF
-            } catch (final IOException ex) {
+            }catch (final IOException ex){
                 checkAbort();
                 throw ex;
             }
@@ -166,7 +168,7 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         // tolerate multiple calls to close()
         selfClosed = true;
         checkClose();
@@ -183,25 +185,26 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      * notifications from this stream.
      * </p>
      *
-     * @param eof       the result of the calling read operation.
-     *                  A negative value indicates that EOF is reached.
+     * @param eof
+     *            the result of the calling read operation.
+     *            A negative value indicates that EOF is reached.
      *
      * @throws IOException
-     *          in case of an IO problem on closing the underlying stream
+     *             in case of an IO problem on closing the underlying stream
      */
-    protected void checkEOF(final int eof) throws IOException {
+    protected void checkEOF(final int eof) throws IOException{
 
         final InputStream toCheckStream = wrappedStream;
-        if ((toCheckStream != null) && (eof < 0)) {
-            try {
+        if ((toCheckStream != null) && (eof < 0)){
+            try{
                 boolean scws = true; // should close wrapped stream?
-                if (eofWatcher != null) {
+                if (eofWatcher != null){
                     scws = eofWatcher.eofDetected(toCheckStream);
                 }
-                if (scws) {
+                if (scws){
                     toCheckStream.close();
                 }
-            } finally {
+            }finally{
                 wrappedStream = null;
             }
         }
@@ -216,21 +219,21 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      * multiple notifications to the watcher.
      *
      * @throws IOException
-     *          in case of an IO problem on closing the underlying stream
+     *             in case of an IO problem on closing the underlying stream
      */
-    protected void checkClose() throws IOException {
+    protected void checkClose() throws IOException{
 
         final InputStream toCloseStream = wrappedStream;
-        if (toCloseStream != null) {
-            try {
+        if (toCloseStream != null){
+            try{
                 boolean scws = true; // should close wrapped stream?
-                if (eofWatcher != null) {
+                if (eofWatcher != null){
                     scws = eofWatcher.streamClosed(toCloseStream);
                 }
-                if (scws) {
+                if (scws){
                     toCloseStream.close();
                 }
-            } finally {
+            }finally{
                 wrappedStream = null;
             }
         }
@@ -247,21 +250,21 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      * multiple notifications to the watcher.
      *
      * @throws IOException
-     *          in case of an IO problem on closing the underlying stream
+     *             in case of an IO problem on closing the underlying stream
      */
-    protected void checkAbort() throws IOException {
+    protected void checkAbort() throws IOException{
 
         final InputStream toAbortStream = wrappedStream;
-        if (toAbortStream != null) {
-            try {
+        if (toAbortStream != null){
+            try{
                 boolean scws = true; // should close wrapped stream?
-                if (eofWatcher != null) {
+                if (eofWatcher != null){
                     scws = eofWatcher.streamAbort(toAbortStream);
                 }
-                if (scws) {
+                if (scws){
                     toAbortStream.close();
                 }
-            } finally {
+            }finally{
                 wrappedStream = null;
             }
         }
@@ -271,7 +274,7 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      * Same as {@link #close close()}.
      */
     @Override
-    public void releaseConnection() throws IOException {
+    public void releaseConnection() throws IOException{
         close();
     }
 
@@ -283,11 +286,10 @@ public class EofSensorInputStream extends InputStream implements ConnectionRelea
      * the stream.
      */
     @Override
-    public void abortConnection() throws IOException {
+    public void abortConnection() throws IOException{
         // tolerate multiple calls
         selfClosed = true;
         checkAbort();
     }
 
 }
-

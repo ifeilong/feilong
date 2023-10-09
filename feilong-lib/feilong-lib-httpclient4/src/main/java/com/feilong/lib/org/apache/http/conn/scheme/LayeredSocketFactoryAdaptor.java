@@ -35,19 +35,18 @@ import java.net.UnknownHostException;
  * @deprecated (4.1) do not use
  */
 @Deprecated
-class LayeredSocketFactoryAdaptor extends SocketFactoryAdaptor implements LayeredSocketFactory {
+class LayeredSocketFactoryAdaptor extends SocketFactoryAdaptor implements LayeredSocketFactory{
 
     private final LayeredSchemeSocketFactory factory;
 
-    LayeredSocketFactoryAdaptor(final LayeredSchemeSocketFactory factory) {
+    LayeredSocketFactoryAdaptor(final LayeredSchemeSocketFactory factory){
         super(factory);
         this.factory = factory;
     }
 
     @Override
-    public Socket createSocket(
-            final Socket socket,
-            final String host, final int port, final boolean autoClose) throws IOException, UnknownHostException {
+    public Socket createSocket(final Socket socket,final String host,final int port,final boolean autoClose)
+                    throws IOException,UnknownHostException{
         return this.factory.createLayeredSocket(socket, host, port, autoClose);
     }
 

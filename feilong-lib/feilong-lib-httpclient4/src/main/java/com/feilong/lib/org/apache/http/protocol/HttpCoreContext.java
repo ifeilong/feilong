@@ -39,7 +39,7 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
-public class HttpCoreContext implements HttpContext {
+public class HttpCoreContext implements HttpContext{
 
     /**
      * Attribute name of a {@link com.feilong.lib.org.apache.http.HttpConnection} object that
@@ -72,79 +72,77 @@ public class HttpCoreContext implements HttpContext {
      */
     public static final String HTTP_REQ_SENT    = "http.request_sent";
 
-    public static HttpCoreContext create() {
+    public static HttpCoreContext create(){
         return new HttpCoreContext(new BasicHttpContext());
     }
 
-    public static HttpCoreContext adapt(final HttpContext context) {
+    public static HttpCoreContext adapt(final HttpContext context){
         Args.notNull(context, "HTTP context");
-        return context instanceof HttpCoreContext
-                        ? (HttpCoreContext) context
-                        : new HttpCoreContext(context);
+        return context instanceof HttpCoreContext ? (HttpCoreContext) context : new HttpCoreContext(context);
     }
 
     private final HttpContext context;
 
-    public HttpCoreContext(final HttpContext context) {
+    public HttpCoreContext(final HttpContext context){
         super();
         this.context = context;
     }
 
-    public HttpCoreContext() {
+    public HttpCoreContext(){
         super();
         this.context = new BasicHttpContext();
     }
 
     @Override
-    public Object getAttribute(final String id) {
+    public Object getAttribute(final String id){
         return context.getAttribute(id);
     }
 
     @Override
-    public void setAttribute(final String id, final Object obj) {
+    public void setAttribute(final String id,final Object obj){
         context.setAttribute(id, obj);
     }
 
     @Override
-    public Object removeAttribute(final String id) {
+    public Object removeAttribute(final String id){
         return context.removeAttribute(id);
     }
 
-    public <T> T getAttribute(final String attribname, final Class<T> clazz) {
+    public <T> T getAttribute(final String attribname,final Class<T> clazz){
         Args.notNull(clazz, "Attribute class");
         final Object obj = getAttribute(attribname);
-        if (obj == null) {
+        if (obj == null){
             return null;
         }
         return clazz.cast(obj);
     }
 
-    public <T extends HttpConnection> T getConnection(final Class<T> clazz) {
+    public <T extends HttpConnection> T getConnection(final Class<T> clazz){
         return getAttribute(HTTP_CONNECTION, clazz);
     }
 
-    public HttpConnection getConnection() {
+    public HttpConnection getConnection(){
         return getAttribute(HTTP_CONNECTION, HttpConnection.class);
     }
 
-    public HttpRequest getRequest() {
+    public HttpRequest getRequest(){
         return getAttribute(HTTP_REQUEST, HttpRequest.class);
     }
 
-    public boolean isRequestSent() {
+    public boolean isRequestSent(){
         final Boolean b = getAttribute(HTTP_REQ_SENT, Boolean.class);
         return b != null && b.booleanValue();
     }
 
-    public HttpResponse getResponse() {
+    public HttpResponse getResponse(){
         return getAttribute(HTTP_RESPONSE, HttpResponse.class);
     }
 
-    public void setTargetHost(final HttpHost host) {
+    public void setTargetHost(final HttpHost host){
         setAttribute(HTTP_TARGET_HOST, host);
     }
 
-    public HttpHost getTargetHost() {
+    public HttpHost getTargetHost(){
         return getAttribute(HTTP_TARGET_HOST, HttpHost.class);
     }
 

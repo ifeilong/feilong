@@ -64,7 +64,6 @@ import com.feilong.lib.org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import com.feilong.lib.org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import com.feilong.lib.org.apache.http.pool.ConnFactory;
 import com.feilong.lib.org.apache.http.pool.ConnPoolControl;
-import com.feilong.lib.org.apache.http.pool.PoolEntry;
 import com.feilong.lib.org.apache.http.pool.PoolEntryCallback;
 import com.feilong.lib.org.apache.http.pool.PoolStats;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
@@ -378,22 +377,17 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
         if (this.isShutDown.compareAndSet(false, true)){
             log.debug("Connection manager is shutting down");
             try{
-                this.pool.enumLeased(new PoolEntryCallback<HttpRoute, ManagedHttpClientConnection>(){
-
-                    @Override
-                    public void process(final PoolEntry<HttpRoute, ManagedHttpClientConnection> entry){
-                        final ManagedHttpClientConnection connection = entry.getConnection();
-                        if (connection != null){
-                            try{
-                                connection.shutdown();
-                            }catch (final IOException iox){
-                                if (log.isDebugEnabled()){
-                                    log.debug("I/O exception shutting down connection", iox);
-                                }
+                this.pool.enumLeased(entry -> {
+                    final ManagedHttpClientConnection connection = entry.getConnection();
+                    if (connection != null){
+                        try{
+                            connection.shutdown();
+                        }catch (final IOException iox){
+                            if (log.isDebugEnabled()){
+                                log.debug("I/O exception shutting down connection", iox);
                             }
                         }
                     }
-
                 });
                 this.pool.shutdown();
             }catch (final IOException ex){
@@ -540,8 +534,8 @@ public class PoolingHttpClientConnectionManager implements HttpClientConnectionM
 
         ConfigData(){
             super();
-            this.socketConfigMap = new ConcurrentHashMap<HttpHost, SocketConfig>();
-            this.connectionConfigMap = new ConcurrentHashMap<HttpHost, ConnectionConfig>();
+            this.socketConfigMap = new ConcurrentHashMap<>();
+            this.connectionConfigMap = new ConcurrentHashMap<>();
         }
 
         public SocketConfig getDefaultSocketConfig(){

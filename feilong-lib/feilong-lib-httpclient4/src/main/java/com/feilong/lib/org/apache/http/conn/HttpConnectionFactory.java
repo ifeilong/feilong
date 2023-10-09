@@ -36,6 +36,6 @@ import com.feilong.lib.org.apache.http.config.ConnectionConfig;
  */
 public interface HttpConnectionFactory<T, C extends HttpConnection> {
 
-    C create(T route, ConnectionConfig config);
+    C create(T route,ConnectionConfig config);
 
 }

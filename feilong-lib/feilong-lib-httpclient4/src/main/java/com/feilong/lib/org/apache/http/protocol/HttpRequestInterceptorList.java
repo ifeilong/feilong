@@ -41,38 +41,42 @@ import com.feilong.lib.org.apache.http.HttpRequestInterceptor;
  * @deprecated (4.3)
  */
 @Deprecated
-public interface HttpRequestInterceptorList {
+public interface HttpRequestInterceptorList{
 
     /**
      * Appends a request interceptor to this list.
      *
-     * @param interceptor the request interceptor to add
+     * @param interceptor
+     *            the request interceptor to add
      */
     void addRequestInterceptor(HttpRequestInterceptor interceptor);
 
     /**
      * Inserts a request interceptor at the specified index.
      *
-     * @param interceptor the request interceptor to add
-     * @param index     the index to insert the interceptor at
+     * @param interceptor
+     *            the request interceptor to add
+     * @param index
+     *            the index to insert the interceptor at
      */
-    void addRequestInterceptor(HttpRequestInterceptor interceptor, int index);
+    void addRequestInterceptor(HttpRequestInterceptor interceptor,int index);
 
     /**
      * Obtains the current size of this list.
      *
-     * @return  the number of request interceptors in this list
+     * @return the number of request interceptors in this list
      */
     int getRequestInterceptorCount();
 
     /**
      * Obtains a request interceptor from this list.
      *
-     * @param index     the index of the interceptor to obtain,
-     *                  0 for first
+     * @param index
+     *            the index of the interceptor to obtain,
+     *            0 for first
      *
-     * @return  the interceptor at the given index, or
-     *          {@code null} if the index is out of range
+     * @return the interceptor at the given index, or
+     *         {@code null} if the index is out of range
      */
     HttpRequestInterceptor getRequestInterceptor(int index);
 
@@ -84,7 +88,8 @@ public interface HttpRequestInterceptorList {
     /**
      * Removes all request interceptor of the specified class
      *
-     * @param clazz  the class of the instances to be removed.
+     * @param clazz
+     *            the class of the instances to be removed.
      */
     void removeRequestInterceptorByClass(Class<? extends HttpRequestInterceptor> clazz);
 
@@ -95,9 +100,9 @@ public interface HttpRequestInterceptorList {
      * If the argument list includes elements that are not request
      * interceptors, the behavior is implementation dependent.
      *
-     * @param list the list of request interceptors
+     * @param list
+     *            the list of request interceptors
      */
     void setInterceptors(List<?> list);
 
 }
-

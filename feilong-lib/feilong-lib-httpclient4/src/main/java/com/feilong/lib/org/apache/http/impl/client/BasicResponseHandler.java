@@ -43,26 +43,25 @@ import com.feilong.lib.org.apache.http.util.EntityUtils;
  * <p>
  * If this is used with
  * {@link com.feilong.lib.org.apache.http.client.HttpClient#execute(
- *  org.apache.http.client.methods.HttpUriRequest, com.feilong.lib.org.apache.http.client.ResponseHandler)},
+ * org.apache.http.client.methods.HttpUriRequest, com.feilong.lib.org.apache.http.client.ResponseHandler)},
  * HttpClient may handle redirects (3xx responses) internally.
  * </p>
  *
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicResponseHandler extends AbstractResponseHandler<String> {
+public class BasicResponseHandler extends AbstractResponseHandler<String>{
 
     /**
      * Returns the entity as a body as a String.
      */
     @Override
-    public String handleEntity(final HttpEntity entity) throws IOException {
+    public String handleEntity(final HttpEntity entity) throws IOException{
         return EntityUtils.toString(entity);
     }
 
     @Override
-    public String handleResponse(
-            final HttpResponse response) throws HttpResponseException, IOException {
+    public String handleResponse(final HttpResponse response) throws HttpResponseException,IOException{
         return super.handleResponse(response);
     }
 

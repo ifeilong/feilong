@@ -40,12 +40,12 @@ import com.feilong.lib.org.apache.http.util.Args;
  * unlimited length.
  * <p>
  * Note that this class NEVER closes the underlying stream, even when close
- * gets called.  Instead, the stream will be marked as closed and no further
+ * gets called. Instead, the stream will be marked as closed and no further
  * output will be permitted.
  *
  * @since 4.0
  */
-public class IdentityOutputStream extends OutputStream {
+public class IdentityOutputStream extends OutputStream{
 
     /**
      * Wrapped session output buffer.
@@ -53,47 +53,50 @@ public class IdentityOutputStream extends OutputStream {
     private final SessionOutputBuffer out;
 
     /** True if the stream is closed. */
-    private boolean closed = false;
+    private boolean                   closed = false;
 
-    public IdentityOutputStream(final SessionOutputBuffer out) {
+    public IdentityOutputStream(final SessionOutputBuffer out){
         super();
         this.out = Args.notNull(out, "Session output buffer");
     }
 
     /**
-     * <p>Does not close the underlying socket output.</p>
+     * <p>
+     * Does not close the underlying socket output.
+     * </p>
      *
-     * @throws IOException If an I/O problem occurs.
+     * @throws IOException
+     *             If an I/O problem occurs.
      */
     @Override
-    public void close() throws IOException {
-        if (!this.closed) {
+    public void close() throws IOException{
+        if (!this.closed){
             this.closed = true;
             this.out.flush();
         }
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() throws IOException{
         this.out.flush();
     }
 
     @Override
-    public void write(final byte[] b, final int off, final int len) throws IOException {
-        if (this.closed) {
+    public void write(final byte[] b,final int off,final int len) throws IOException{
+        if (this.closed){
             throw new IOException("Attempted write to closed stream.");
         }
         this.out.write(b, off, len);
     }
 
     @Override
-    public void write(final byte[] b) throws IOException {
+    public void write(final byte[] b) throws IOException{
         write(b, 0, b.length);
     }
 
     @Override
-    public void write(final int b) throws IOException {
-        if (this.closed) {
+    public void write(final int b) throws IOException{
+        if (this.closed){
             throw new IOException("Attempted write to closed stream.");
         }
         this.out.write(b);

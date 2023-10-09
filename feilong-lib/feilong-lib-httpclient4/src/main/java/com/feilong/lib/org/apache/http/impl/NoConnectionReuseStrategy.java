@@ -39,16 +39,16 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NoConnectionReuseStrategy implements ConnectionReuseStrategy {
+public class NoConnectionReuseStrategy implements ConnectionReuseStrategy{
 
     public static final NoConnectionReuseStrategy INSTANCE = new NoConnectionReuseStrategy();
 
-    public NoConnectionReuseStrategy() {
+    public NoConnectionReuseStrategy(){
         super();
     }
 
     @Override
-    public boolean keepAlive(final HttpResponse response, final HttpContext context) {
+    public boolean keepAlive(final HttpResponse response,final HttpContext context){
         return false;
     }
 

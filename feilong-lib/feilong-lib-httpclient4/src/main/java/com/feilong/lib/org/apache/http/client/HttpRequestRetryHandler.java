@@ -41,20 +41,23 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.0
  */
-public interface HttpRequestRetryHandler {
+public interface HttpRequestRetryHandler{
 
     /**
      * Determines if a method should be retried after an IOException
      * occurs during execution.
      *
-     * @param exception the exception that occurred
-     * @param executionCount the number of times this method has been
-     * unsuccessfully executed
-     * @param context the context for the request execution
+     * @param exception
+     *            the exception that occurred
+     * @param executionCount
+     *            the number of times this method has been
+     *            unsuccessfully executed
+     * @param context
+     *            the context for the request execution
      *
      * @return {@code true} if the method should be retried, {@code false}
-     * otherwise
+     *         otherwise
      */
-    boolean retryRequest(IOException exception, int executionCount, HttpContext context);
+    boolean retryRequest(IOException exception,int executionCount,HttpContext context);
 
 }

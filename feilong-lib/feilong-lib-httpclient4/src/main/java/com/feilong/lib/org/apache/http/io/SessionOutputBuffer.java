@@ -40,7 +40,7 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.0
  */
-public interface SessionOutputBuffer {
+public interface SessionOutputBuffer{
 
     /**
      * Writes {@code len} bytes from the specified byte array
@@ -50,27 +50,35 @@ public interface SessionOutputBuffer {
      * {@code off+len} is greater than the length of the array
      * {@code b}, then an {@code IndexOutOfBoundsException} is thrown.
      *
-     * @param      b     the data.
-     * @param      off   the start offset in the data.
-     * @param      len   the number of bytes to write.
-     * @throws  IOException  if an I/O error occurs.
+     * @param b
+     *            the data.
+     * @param off
+     *            the start offset in the data.
+     * @param len
+     *            the number of bytes to write.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
-    void write(byte[] b, int off, int len) throws IOException;
+    void write(byte[] b,int off,int len) throws IOException;
 
     /**
      * Writes {@code b.length} bytes from the specified byte array
      * to this session buffer.
      *
-     * @param      b   the data.
-     * @throws  IOException  if an I/O error occurs.
+     * @param b
+     *            the data.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     void write(byte[] b) throws IOException;
 
     /**
      * Writes the specified byte to this session buffer.
      *
-     * @param      b   the {@code byte}.
-     * @throws  IOException  if an I/O error occurs.
+     * @param b
+     *            the {@code byte}.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     void write(int b) throws IOException;
 
@@ -81,8 +89,10 @@ public interface SessionOutputBuffer {
      * The choice of a char encoding and line delimiter sequence is up to the
      * specific implementations of this interface.
      *
-     * @param      s   the line.
-     * @throws  IOException  if an I/O error occurs.
+     * @param s
+     *            the line.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     void writeLine(String s) throws IOException;
 
@@ -93,8 +103,10 @@ public interface SessionOutputBuffer {
      * The choice of a char encoding and line delimiter sequence is up to the
      * specific implementations of this interface.
      *
-     * @param      buffer   the buffer containing chars of the line.
-     * @throws  IOException  if an I/O error occurs.
+     * @param buffer
+     *            the buffer containing chars of the line.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     void writeLine(CharArrayBuffer buffer) throws IOException;
 
@@ -106,7 +118,8 @@ public interface SessionOutputBuffer {
      * stream, such bytes should immediately be written to their
      * intended destination.
      *
-     * @throws  IOException  if an I/O error occurs.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     void flush() throws IOException;
 

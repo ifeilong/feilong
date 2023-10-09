@@ -32,6 +32,7 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
 /**
  * HTTP messages consist of requests from client to server and responses
  * from server to client.
+ * 
  * <pre>
  *     HTTP-message   = Request | Response     ; HTTP/1.1 messages
  * </pre>
@@ -43,6 +44,7 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * preceding the CRLF) indicating the end of the header fields,
  * and possibly a message-body.
  * </p>
+ * 
  * <pre>
  *      generic-message = start-line
  *                        *(message-header CRLF)
@@ -54,7 +56,7 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @since 4.0
  */
 @SuppressWarnings("deprecation")
-public interface HttpMessage {
+public interface HttpMessage{
 
     /**
      * Returns the protocol version this message is compatible with.
@@ -65,7 +67,8 @@ public interface HttpMessage {
      * Checks if a certain header is present in this message. Header values are
      * ignored.
      *
-     * @param name the header name to check for.
+     * @param name
+     *            the header name to check for.
      * @return true if at least one header with this name is present.
      */
     boolean containsHeader(String name);
@@ -75,7 +78,8 @@ public interface HttpMessage {
      * are ignored. Headers are orderd in the sequence they will be sent over a
      * connection.
      *
-     * @param name the name of the headers to return.
+     * @param name
+     *            the name of the headers to return.
      * @return the headers whose name property equals {@code name}.
      */
     Header[] getHeaders(String name);
@@ -87,9 +91,10 @@ public interface HttpMessage {
      * If there is no matching header in the message {@code null} is
      * returned.
      *
-     * @param name the name of the header to return.
+     * @param name
+     *            the name of the header to return.
      * @return the first header whose name property equals {@code name}
-     *   or {@code null} if no such header could be found.
+     *         or {@code null} if no such header could be found.
      */
     Header getFirstHeader(String name);
 
@@ -99,9 +104,10 @@ public interface HttpMessage {
      * last element of {@link #getHeaders(String)} is returned. If there is no
      * matching header in the message {@code null} is returned.
      *
-     * @param name the name of the header to return.
+     * @param name
+     *            the name of the header to return.
      * @return the last header whose name property equals {@code name}.
-     *   or {@code null} if no such header could be found.
+     *         or {@code null} if no such header could be found.
      */
     Header getLastHeader(String name);
 
@@ -117,7 +123,8 @@ public interface HttpMessage {
      * Adds a header to this message. The header will be appended to the end of
      * the list.
      *
-     * @param header the header to append.
+     * @param header
+     *            the header to append.
      */
     void addHeader(Header header);
 
@@ -125,16 +132,19 @@ public interface HttpMessage {
      * Adds a header to this message. The header will be appended to the end of
      * the list.
      *
-     * @param name the name of the header.
-     * @param value the value of the header.
+     * @param name
+     *            the name of the header.
+     * @param value
+     *            the value of the header.
      */
-    void addHeader(String name, String value);
+    void addHeader(String name,String value);
 
     /**
      * Overwrites the first header with the same name. The new header will be appended to
      * the end of the list, if no header with the given name can be found.
      *
-     * @param header the header to set.
+     * @param header
+     *            the header to set.
      */
     void setHeader(Header header);
 
@@ -142,29 +152,34 @@ public interface HttpMessage {
      * Overwrites the first header with the same name. The new header will be appended to
      * the end of the list, if no header with the given name can be found.
      *
-     * @param name the name of the header.
-     * @param value the value of the header.
+     * @param name
+     *            the name of the header.
+     * @param value
+     *            the value of the header.
      */
-    void setHeader(String name, String value);
+    void setHeader(String name,String value);
 
     /**
      * Overwrites all the headers in the message.
      *
-     * @param headers the array of headers to set.
+     * @param headers
+     *            the array of headers to set.
      */
     void setHeaders(Header[] headers);
 
     /**
      * Removes a header from this message.
      *
-     * @param header the header to remove.
+     * @param header
+     *            the header to remove.
      */
     void removeHeader(Header header);
 
     /**
      * Removes all headers with a certain name from this message.
      *
-     * @param name The name of the headers to remove.
+     * @param name
+     *            The name of the headers to remove.
      */
     void removeHeaders(String name);
 
@@ -179,30 +194,35 @@ public interface HttpMessage {
     /**
      * Returns an iterator of the headers with a given name.
      *
-     * @param name      the name of the headers over which to iterate, or
-     *                  {@code null} for all headers
+     * @param name
+     *            the name of the headers over which to iterate, or
+     *            {@code null} for all headers
      *
      * @return Iterator that returns Header objects with the argument name
      *         in the sequence they are sent over a connection.
      */
     HeaderIterator headerIterator(String name);
 
+    //---------------------------------------------------------------
+
     /**
      * Returns the parameters effective for this message as set by
      * {@link #setParams(HttpParams)}.
      *
      * @deprecated (4.3) use configuration classes provided 'org.apache.http.config'
-     *  and 'org.apache.http.client.config'
+     *             and 'org.apache.http.client.config'
      */
     @Deprecated
     HttpParams getParams();
 
     /**
      * Provides parameters to be used for the processing of this message.
-     * @param params the parameters
+     * 
+     * @param params
+     *            the parameters
      *
      * @deprecated (4.3) use configuration classes provided 'org.apache.http.config'
-     *  and 'org.apache.http.client.config'
+     *             and 'org.apache.http.client.config'
      */
     @Deprecated
     void setParams(HttpParams params);

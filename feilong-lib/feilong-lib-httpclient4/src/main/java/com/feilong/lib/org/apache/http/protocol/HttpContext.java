@@ -32,7 +32,7 @@ package com.feilong.lib.org.apache.http.protocol;
  * that can be used to map an attribute name to an attribute value.
  * <p>
  * The primary purpose of the HTTP context is to facilitate information sharing
- * among various  logically related components. HTTP context can be used
+ * among various logically related components. HTTP context can be used
  * to store a processing state for one message or several consecutive messages.
  * Multiple logically related messages can participate in a logical session
  * if the same context is reused between consecutive messages.
@@ -45,15 +45,16 @@ package com.feilong.lib.org.apache.http.protocol;
  *
  * @since 4.0
  */
-public interface HttpContext {
+public interface HttpContext{
 
     /** The prefix reserved for use by HTTP components. "http." */
-    String RESERVED_PREFIX  = "http.";
+    String RESERVED_PREFIX = "http.";
 
     /**
      * Obtains attribute with the given name.
      *
-     * @param id the attribute name.
+     * @param id
+     *            the attribute name.
      * @return attribute value, or {@code null} if not set.
      */
     Object getAttribute(String id);
@@ -61,15 +62,18 @@ public interface HttpContext {
     /**
      * Sets value of the attribute with the given name.
      *
-     * @param id the attribute name.
-     * @param obj the attribute value.
+     * @param id
+     *            the attribute name.
+     * @param obj
+     *            the attribute value.
      */
-    void setAttribute(String id, Object obj);
+    void setAttribute(String id,Object obj);
 
     /**
      * Removes attribute with the given name from the context.
      *
-     * @param id the attribute name.
+     * @param id
+     *            the attribute name.
      * @return attribute value, or {@code null} if not set.
      */
     Object removeAttribute(String id);

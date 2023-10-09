@@ -32,9 +32,10 @@ package com.feilong.lib.org.apache.http;
  * a name / value pair and a number of optional name / value parameters.
  * <p>
  * Some HTTP headers (such as the set-cookie header) have values that
- * can be decomposed into multiple elements.  Such headers must be in the
+ * can be decomposed into multiple elements. Such headers must be in the
  * following form:
  * </p>
+ * 
  * <pre>
  * header  = [ element ] *( "," [ element ] )
  * element = name [ "=" [ value ] ] *( ";" [ param ] )
@@ -57,7 +58,7 @@ package com.feilong.lib.org.apache.http;
  *
  * @since 4.0
  */
-public interface HeaderElement {
+public interface HeaderElement{
 
     /**
      * Returns header element name.
@@ -83,7 +84,8 @@ public interface HeaderElement {
     /**
      * Returns the first parameter with the given name.
      *
-     * @param name parameter name
+     * @param name
+     *            parameter name
      *
      * @return name / value pair
      */
@@ -99,10 +101,10 @@ public interface HeaderElement {
     /**
      * Returns parameter with the given index.
      *
-     * @param index index
+     * @param index
+     *            index
      * @return name / value pair
      */
     NameValuePair getParameter(int index);
 
 }
-

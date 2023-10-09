@@ -41,29 +41,31 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @deprecated Do not use.
  */
 @Deprecated
-class SocketFactoryAdaptor implements SocketFactory {
+class SocketFactoryAdaptor implements SocketFactory{
 
     private final SchemeSocketFactory factory;
 
-    SocketFactoryAdaptor(final SchemeSocketFactory factory) {
+    SocketFactoryAdaptor(final SchemeSocketFactory factory){
         super();
         this.factory = factory;
     }
 
     @Override
-    public Socket createSocket() throws IOException {
+    public Socket createSocket() throws IOException{
         final HttpParams params = new BasicHttpParams();
         return this.factory.createSocket(params);
     }
 
     @Override
     public Socket connectSocket(
-            final Socket socket,
-            final String host, final int port,
-            final InetAddress localAddress, final int localPort,
-            final HttpParams params) throws IOException, UnknownHostException, ConnectTimeoutException {
+                    final Socket socket,
+                    final String host,
+                    final int port,
+                    final InetAddress localAddress,
+                    final int localPort,
+                    final HttpParams params) throws IOException,UnknownHostException,ConnectTimeoutException{
         InetSocketAddress local = null;
-        if (localAddress != null || localPort > 0) {
+        if (localAddress != null || localPort > 0){
             local = new InetSocketAddress(localAddress, localPort > 0 ? localPort : 0);
         }
         final InetAddress remoteAddress = InetAddress.getByName(host);
@@ -72,29 +74,27 @@ class SocketFactoryAdaptor implements SocketFactory {
     }
 
     @Override
-    public boolean isSecure(final Socket socket) throws IllegalArgumentException {
+    public boolean isSecure(final Socket socket) throws IllegalArgumentException{
         return this.factory.isSecure(socket);
     }
 
-    public SchemeSocketFactory getFactory() {
+    public SchemeSocketFactory getFactory(){
         return this.factory;
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
+    public boolean equals(final Object obj){
+        if (obj == null){
             return false;
         }
-        if (this == obj) {
+        if (this == obj){
             return true;
         }
-        return obj instanceof SocketFactoryAdaptor
-                        ? this.factory.equals(((SocketFactoryAdaptor) obj).factory)
-                        : this.factory.equals(obj);
+        return obj instanceof SocketFactoryAdaptor ? this.factory.equals(((SocketFactoryAdaptor) obj).factory) : this.factory.equals(obj);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return this.factory.hashCode();
     }
 

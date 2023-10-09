@@ -1,34 +1,6 @@
-/*
- * ====================================================================
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- * ====================================================================
- *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the Apache Software Foundation.  For more
- * information on the Apache Software Foundation, please see
- * <http://www.apache.org/>.
- *
- */
-
 package com.feilong.lib.org.apache.http.impl.client;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -166,122 +138,187 @@ public class HttpClientBuilder{
      */
     public static final String                  DEFAULT_USER_AGENT     = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21";
 
+    /** The request exec. */
     private HttpRequestExecutor                 requestExec;
 
+    /** The hostname verifier. */
     private HostnameVerifier                    hostnameVerifier;
 
+    /** The ssl socket factory. */
     private LayeredConnectionSocketFactory      sslSocketFactory;
 
+    /** The ssl context. */
     private SSLContext                          sslContext;
 
+    /** The conn manager. */
     private HttpClientConnectionManager         connManager;
 
+    /** The conn manager shared. */
     private boolean                             connManagerShared;
 
+    /** The scheme port resolver. */
     private SchemePortResolver                  schemePortResolver;
 
+    /** The reuse strategy. */
     private ConnectionReuseStrategy             reuseStrategy;
 
+    /** The keep alive strategy. */
     private ConnectionKeepAliveStrategy         keepAliveStrategy;
 
+    /** The target auth strategy. */
     private AuthenticationStrategy              targetAuthStrategy;
 
+    /** The proxy auth strategy. */
     private AuthenticationStrategy              proxyAuthStrategy;
 
+    /** The user token handler. */
     private UserTokenHandler                    userTokenHandler;
 
+    /** The httpprocessor. */
     private HttpProcessor                       httpprocessor;
 
+    /** The dns resolver. */
     private DnsResolver                         dnsResolver;
 
+    /** The request first. */
     private LinkedList<HttpRequestInterceptor>  requestFirst;
 
+    /** The request last. */
     private LinkedList<HttpRequestInterceptor>  requestLast;
 
+    /** The response first. */
     private LinkedList<HttpResponseInterceptor> responseFirst;
 
+    /** The response last. */
     private LinkedList<HttpResponseInterceptor> responseLast;
 
+    /** The retry handler. */
     private HttpRequestRetryHandler             retryHandler;
 
+    /** The route planner. */
     private HttpRoutePlanner                    routePlanner;
 
+    /** The redirect strategy. */
     private RedirectStrategy                    redirectStrategy;
 
+    /** The connection backoff strategy. */
     private ConnectionBackoffStrategy           connectionBackoffStrategy;
 
+    /** The backoff manager. */
     private BackoffManager                      backoffManager;
 
+    /** The service unavail strategy. */
     private ServiceUnavailableRetryStrategy     serviceUnavailStrategy;
 
+    /** The auth scheme registry. */
     private Lookup<AuthSchemeProvider>          authSchemeRegistry;
 
+    /** The cookie spec registry. */
     private Lookup<CookieSpecProvider>          cookieSpecRegistry;
 
+    /** The content decoder map. */
     private Map<String, InputStreamFactory>     contentDecoderMap;
 
+    /** The cookie store. */
     private CookieStore                         cookieStore;
 
+    /** The credentials provider. */
     private CredentialsProvider                 credentialsProvider;
 
+    /** The user agent. */
     private String                              userAgent;
 
+    /** The proxy. */
     private HttpHost                            proxy;
 
+    /** The default headers. */
     private Collection<? extends Header>        defaultHeaders;
 
+    /** The default socket config. */
     private SocketConfig                        defaultSocketConfig;
 
+    /** The default connection config. */
     private ConnectionConfig                    defaultConnectionConfig;
 
+    /** The default request config. */
     private RequestConfig                       defaultRequestConfig;
 
+    /** The evict expired connections. */
     private boolean                             evictExpiredConnections;
 
+    /** The evict idle connections. */
     private boolean                             evictIdleConnections;
 
+    /** The max idle time. */
     private long                                maxIdleTime;
 
+    /** The max idle time unit. */
     private TimeUnit                            maxIdleTimeUnit;
 
+    /** The system properties. */
     private boolean                             systemProperties;
 
+    /** The redirect handling disabled. */
     private boolean                             redirectHandlingDisabled;
 
+    /** The automatic retries disabled. */
     private boolean                             automaticRetriesDisabled;
 
+    /** The content compression disabled. */
     private boolean                             contentCompressionDisabled;
 
+    /** The cookie management disabled. */
     private boolean                             cookieManagementDisabled;
 
+    /** The auth caching disabled. */
     private boolean                             authCachingDisabled;
 
+    /** The connection state disabled. */
     private boolean                             connectionStateDisabled;
 
+    /** The default user agent disabled. */
     private boolean                             defaultUserAgentDisabled;
 
+    /** The max conn total. */
     private int                                 maxConnTotal           = 0;
 
+    /** The max conn per route. */
     private int                                 maxConnPerRoute        = 0;
 
+    /** The conn time to live. */
     private long                                connTimeToLive         = -1;
 
+    /** The conn time to live time unit. */
     private TimeUnit                            connTimeToLiveTimeUnit = TimeUnit.MILLISECONDS;
 
+    /** The closeables. */
     private List<Closeable>                     closeables;
 
+    /** The public suffix matcher. */
     private PublicSuffixMatcher                 publicSuffixMatcher;
 
+    /**
+     * 创建.
+     *
+     * @return the http client builder
+     */
     public static HttpClientBuilder create(){
         return new HttpClientBuilder();
     }
 
+    /**
+     * Instantiates a new http client builder.
+     */
     protected HttpClientBuilder(){
         super();
     }
 
     /**
      * Assigns {@link HttpRequestExecutor} instance.
+     *
+     * @param requestExec
+     *            the request exec
+     * @return the http client builder
      */
     public final HttpClientBuilder setRequestExecutor(final HttpRequestExecutor requestExec){
         this.requestExec = requestExec;
@@ -296,6 +333,9 @@ public class HttpClientBuilder{
      * com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory)} methods.
      * </p>
      *
+     * @param hostnameVerifier
+     *            the hostname verifier
+     * @return the http client builder
      * @deprecated (4.4)
      */
     @Deprecated
@@ -312,6 +352,9 @@ public class HttpClientBuilder{
      * com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory)} methods.
      * </p>
      *
+     * @param hostnameVerifier
+     *            the hostname verifier
+     * @return the http client builder
      * @since 4.4
      */
     public final HttpClientBuilder setSSLHostnameVerifier(final HostnameVerifier hostnameVerifier){
@@ -323,9 +366,11 @@ public class HttpClientBuilder{
      * Assigns file containing public suffix matcher. Instances of this class can be created
      * with {@link com.feilong.lib.org.apache.http.conn.util.PublicSuffixMatcherLoader}.
      *
+     * @param publicSuffixMatcher
+     *            the public suffix matcher
+     * @return the http client builder
      * @see com.feilong.lib.org.apache.http.conn.util.PublicSuffixMatcher
      * @see com.feilong.lib.org.apache.http.conn.util.PublicSuffixMatcherLoader
-     *
      * @since 4.4
      */
     public final HttpClientBuilder setPublicSuffixMatcher(final PublicSuffixMatcher publicSuffixMatcher){
@@ -341,6 +386,9 @@ public class HttpClientBuilder{
      * com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory)} methods.
      * </p>
      *
+     * @param sslcontext
+     *            the sslcontext
+     * @return the http client builder
      * @deprecated (4.5) use {@link #setSSLContext(SSLContext)}
      */
     @Deprecated
@@ -355,6 +403,10 @@ public class HttpClientBuilder{
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} and the {@link #setSSLSocketFactory(
      * com.feilong.lib.org.apache.http.conn.socket.LayeredConnectionSocketFactory)} methods.
      * </p>
+     *
+     * @param sslContext
+     *            the ssl context
+     * @return the http client builder
      */
     public final HttpClientBuilder setSSLContext(final SSLContext sslContext){
         this.sslContext = sslContext;
@@ -367,6 +419,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setConnectionManager(
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} method.
      * </p>
+     *
+     * @param sslSocketFactory
+     *            the ssl socket factory
+     * @return the http client builder
      */
     public final HttpClientBuilder setSSLSocketFactory(final LayeredConnectionSocketFactory sslSocketFactory){
         this.sslSocketFactory = sslSocketFactory;
@@ -379,6 +435,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setConnectionManager(
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} method.
      * </p>
+     *
+     * @param maxConnTotal
+     *            the max conn total
+     * @return the http client builder
      */
     public final HttpClientBuilder setMaxConnTotal(final int maxConnTotal){
         this.maxConnTotal = maxConnTotal;
@@ -391,6 +451,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setConnectionManager(
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} method.
      * </p>
+     *
+     * @param maxConnPerRoute
+     *            the max conn per route
+     * @return the http client builder
      */
     public final HttpClientBuilder setMaxConnPerRoute(final int maxConnPerRoute){
         this.maxConnPerRoute = maxConnPerRoute;
@@ -403,6 +467,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setConnectionManager(
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} method.
      * </p>
+     *
+     * @param config
+     *            the config
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultSocketConfig(final SocketConfig config){
         this.defaultSocketConfig = config;
@@ -415,6 +483,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setConnectionManager(
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} method.
      * </p>
+     *
+     * @param config
+     *            the config
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultConnectionConfig(final ConnectionConfig config){
         this.defaultConnectionConfig = config;
@@ -428,6 +500,11 @@ public class HttpClientBuilder{
      * com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager)} method.
      * </p>
      *
+     * @param connTimeToLive
+     *            the conn time to live
+     * @param connTimeToLiveTimeUnit
+     *            the conn time to live time unit
+     * @return the http client builder
      * @since 4.4
      */
     public final HttpClientBuilder setConnectionTimeToLive(final long connTimeToLive,final TimeUnit connTimeToLiveTimeUnit){
@@ -438,6 +515,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link HttpClientConnectionManager} instance.
+     *
+     * @param connManager
+     *            the conn manager
+     * @return the http client builder
      */
     public final HttpClientBuilder setConnectionManager(final HttpClientConnectionManager connManager){
         this.connManager = connManager;
@@ -456,7 +537,7 @@ public class HttpClientBuilder{
      * @param shared
      *            defines whether or not the connection manager can be shared
      *            by multiple clients.
-     *
+     * @return the http client builder
      * @since 4.4
      */
     public final HttpClientBuilder setConnectionManagerShared(final boolean shared){
@@ -466,6 +547,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link ConnectionReuseStrategy} instance.
+     *
+     * @param reuseStrategy
+     *            the reuse strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setConnectionReuseStrategy(final ConnectionReuseStrategy reuseStrategy){
         this.reuseStrategy = reuseStrategy;
@@ -474,6 +559,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link ConnectionKeepAliveStrategy} instance.
+     *
+     * @param keepAliveStrategy
+     *            the keep alive strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setKeepAliveStrategy(final ConnectionKeepAliveStrategy keepAliveStrategy){
         this.keepAliveStrategy = keepAliveStrategy;
@@ -483,6 +572,10 @@ public class HttpClientBuilder{
     /**
      * Assigns {@link AuthenticationStrategy} instance for target
      * host authentication.
+     *
+     * @param targetAuthStrategy
+     *            the target auth strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setTargetAuthenticationStrategy(final AuthenticationStrategy targetAuthStrategy){
         this.targetAuthStrategy = targetAuthStrategy;
@@ -492,6 +585,10 @@ public class HttpClientBuilder{
     /**
      * Assigns {@link AuthenticationStrategy} instance for proxy
      * authentication.
+     *
+     * @param proxyAuthStrategy
+     *            the proxy auth strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setProxyAuthenticationStrategy(final AuthenticationStrategy proxyAuthStrategy){
         this.proxyAuthStrategy = proxyAuthStrategy;
@@ -504,6 +601,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #disableConnectionState()}
      * method.
      * </p>
+     *
+     * @param userTokenHandler
+     *            the user token handler
+     * @return the http client builder
      */
     public final HttpClientBuilder setUserTokenHandler(final UserTokenHandler userTokenHandler){
         this.userTokenHandler = userTokenHandler;
@@ -512,6 +613,8 @@ public class HttpClientBuilder{
 
     /**
      * Disables connection state tracking.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder disableConnectionState(){
         connectionStateDisabled = true;
@@ -520,6 +623,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link SchemePortResolver} instance.
+     *
+     * @param schemePortResolver
+     *            the scheme port resolver
+     * @return the http client builder
      */
     public final HttpClientBuilder setSchemePortResolver(final SchemePortResolver schemePortResolver){
         this.schemePortResolver = schemePortResolver;
@@ -532,6 +639,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
      * </p>
+     *
+     * @param userAgent
+     *            the user agent
+     * @return the http client builder
      */
     public final HttpClientBuilder setUserAgent(final String userAgent){
         this.userAgent = userAgent;
@@ -544,6 +655,10 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
      * </p>
+     *
+     * @param defaultHeaders
+     *            the default headers
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultHeaders(final Collection<? extends Header> defaultHeaders){
         this.defaultHeaders = defaultHeaders;
@@ -556,13 +671,17 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
      * </p>
+     *
+     * @param itcp
+     *            the itcp
+     * @return the http client builder
      */
     public final HttpClientBuilder addInterceptorFirst(final HttpResponseInterceptor itcp){
         if (itcp == null){
             return this;
         }
         if (responseFirst == null){
-            responseFirst = new LinkedList<HttpResponseInterceptor>();
+            responseFirst = new LinkedList<>();
         }
         responseFirst.addFirst(itcp);
         return this;
@@ -574,13 +693,17 @@ public class HttpClientBuilder{
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
      * </p>
+     *
+     * @param itcp
+     *            the itcp
+     * @return the http client builder
      */
     public final HttpClientBuilder addInterceptorLast(final HttpResponseInterceptor itcp){
         if (itcp == null){
             return this;
         }
         if (responseLast == null){
-            responseLast = new LinkedList<HttpResponseInterceptor>();
+            responseLast = new LinkedList<>();
         }
         responseLast.addLast(itcp);
         return this;
@@ -591,13 +714,17 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
+     *
+     * @param itcp
+     *            the itcp
+     * @return the http client builder
      */
     public final HttpClientBuilder addInterceptorFirst(final HttpRequestInterceptor itcp){
         if (itcp == null){
             return this;
         }
         if (requestFirst == null){
-            requestFirst = new LinkedList<HttpRequestInterceptor>();
+            requestFirst = new LinkedList<>();
         }
         requestFirst.addFirst(itcp);
         return this;
@@ -608,13 +735,17 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
+     *
+     * @param itcp
+     *            the itcp
+     * @return the http client builder
      */
     public final HttpClientBuilder addInterceptorLast(final HttpRequestInterceptor itcp){
         if (itcp == null){
             return this;
         }
         if (requestLast == null){
-            requestLast = new LinkedList<HttpRequestInterceptor>();
+            requestLast = new LinkedList<>();
         }
         requestLast.addLast(itcp);
         return this;
@@ -625,6 +756,8 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder disableCookieManagement(){
         this.cookieManagementDisabled = true;
@@ -636,6 +769,8 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder disableContentCompression(){
         contentCompressionDisabled = true;
@@ -647,6 +782,8 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
      * com.feilong.lib.org.apache.http.protocol.HttpProcessor)} method.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder disableAuthCaching(){
         this.authCachingDisabled = true;
@@ -655,6 +792,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link HttpProcessor} instance.
+     *
+     * @param httpprocessor
+     *            the httpprocessor
+     * @return the http client builder
      */
     public final HttpClientBuilder setHttpProcessor(final HttpProcessor httpprocessor){
         this.httpprocessor = httpprocessor;
@@ -665,6 +806,10 @@ public class HttpClientBuilder{
      * Assigns {@link DnsResolver} instance.
      * <p>
      * Please note this value can be overridden by the {@link #setConnectionManager(HttpClientConnectionManager)} method.
+     *
+     * @param dnsResolver
+     *            the dns resolver
+     * @return the http client builder
      */
     public final HttpClientBuilder setDnsResolver(final DnsResolver dnsResolver){
         this.dnsResolver = dnsResolver;
@@ -676,6 +821,10 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #disableAutomaticRetries()}
      * method.
+     *
+     * @param retryHandler
+     *            the retry handler
+     * @return the http client builder
      */
     public final HttpClientBuilder setRetryHandler(final HttpRequestRetryHandler retryHandler){
         this.retryHandler = retryHandler;
@@ -684,6 +833,8 @@ public class HttpClientBuilder{
 
     /**
      * Disables automatic request recovery and re-execution.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder disableAutomaticRetries(){
         automaticRetriesDisabled = true;
@@ -695,6 +846,10 @@ public class HttpClientBuilder{
      * <p>
      * Please note this value can be overridden by the {@link #setRoutePlanner(
      * com.feilong.lib.org.apache.http.conn.routing.HttpRoutePlanner)} method.
+     *
+     * @param proxy
+     *            the proxy
+     * @return the http client builder
      */
     public final HttpClientBuilder setProxy(final HttpHost proxy){
         this.proxy = proxy;
@@ -703,6 +858,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link HttpRoutePlanner} instance.
+     *
+     * @param routePlanner
+     *            the route planner
+     * @return the http client builder
      */
     public final HttpClientBuilder setRoutePlanner(final HttpRoutePlanner routePlanner){
         this.routePlanner = routePlanner;
@@ -716,6 +875,10 @@ public class HttpClientBuilder{
      * method.
      * </p>
      * `
+     *
+     * @param redirectStrategy
+     *            the redirect strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setRedirectStrategy(final RedirectStrategy redirectStrategy){
         this.redirectStrategy = redirectStrategy;
@@ -724,6 +887,8 @@ public class HttpClientBuilder{
 
     /**
      * Disables automatic redirect handling.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder disableRedirectHandling(){
         redirectHandlingDisabled = true;
@@ -732,6 +897,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link ConnectionBackoffStrategy} instance.
+     *
+     * @param connectionBackoffStrategy
+     *            the connection backoff strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setConnectionBackoffStrategy(final ConnectionBackoffStrategy connectionBackoffStrategy){
         this.connectionBackoffStrategy = connectionBackoffStrategy;
@@ -740,6 +909,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link BackoffManager} instance.
+     *
+     * @param backoffManager
+     *            the backoff manager
+     * @return the http client builder
      */
     public final HttpClientBuilder setBackoffManager(final BackoffManager backoffManager){
         this.backoffManager = backoffManager;
@@ -748,6 +921,10 @@ public class HttpClientBuilder{
 
     /**
      * Assigns {@link ServiceUnavailableRetryStrategy} instance.
+     *
+     * @param serviceUnavailStrategy
+     *            the service unavail strategy
+     * @return the http client builder
      */
     public final HttpClientBuilder setServiceUnavailableRetryStrategy(final ServiceUnavailableRetryStrategy serviceUnavailStrategy){
         this.serviceUnavailStrategy = serviceUnavailStrategy;
@@ -757,6 +934,10 @@ public class HttpClientBuilder{
     /**
      * Assigns default {@link CookieStore} instance which will be used for
      * request execution if not explicitly set in the client execution context.
+     *
+     * @param cookieStore
+     *            the cookie store
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultCookieStore(final CookieStore cookieStore){
         this.cookieStore = cookieStore;
@@ -767,6 +948,10 @@ public class HttpClientBuilder{
      * Assigns default {@link CredentialsProvider} instance which will be used
      * for request execution if not explicitly set in the client execution
      * context.
+     *
+     * @param credentialsProvider
+     *            the credentials provider
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultCredentialsProvider(final CredentialsProvider credentialsProvider){
         this.credentialsProvider = credentialsProvider;
@@ -777,6 +962,10 @@ public class HttpClientBuilder{
      * Assigns default {@link com.feilong.lib.org.apache.http.auth.AuthScheme} registry which will
      * be used for request execution if not explicitly set in the client execution
      * context.
+     *
+     * @param authSchemeRegistry
+     *            the auth scheme registry
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultAuthSchemeRegistry(final Lookup<AuthSchemeProvider> authSchemeRegistry){
         this.authSchemeRegistry = authSchemeRegistry;
@@ -788,8 +977,10 @@ public class HttpClientBuilder{
      * be used for request execution if not explicitly set in the client execution
      * context.
      *
+     * @param cookieSpecRegistry
+     *            the cookie spec registry
+     * @return the http client builder
      * @see com.feilong.lib.org.apache.http.impl.client.CookieSpecRegistries
-     *
      */
     public final HttpClientBuilder setDefaultCookieSpecRegistry(final Lookup<CookieSpecProvider> cookieSpecRegistry){
         this.cookieSpecRegistry = cookieSpecRegistry;
@@ -799,6 +990,10 @@ public class HttpClientBuilder{
     /**
      * Assigns a map of {@link com.feilong.lib.org.apache.http.client.entity.InputStreamFactory}s
      * to be used for automatic content decompression.
+     *
+     * @param contentDecoderMap
+     *            the content decoder map
+     * @return the http client builder
      */
     public final HttpClientBuilder setContentDecoderRegistry(final Map<String, InputStreamFactory> contentDecoderMap){
         this.contentDecoderMap = contentDecoderMap;
@@ -809,6 +1004,10 @@ public class HttpClientBuilder{
      * Assigns default {@link RequestConfig} instance which will be used
      * for request execution if not explicitly set in the client execution
      * context.
+     *
+     * @param config
+     *            the config
+     * @return the http client builder
      */
     public final HttpClientBuilder setDefaultRequestConfig(final RequestConfig config){
         this.defaultRequestConfig = config;
@@ -818,6 +1017,8 @@ public class HttpClientBuilder{
     /**
      * Use system properties when creating and configuring default
      * implementations.
+     *
+     * @return the http client builder
      */
     public final HttpClientBuilder useSystemProperties(){
         this.systemProperties = true;
@@ -837,9 +1038,9 @@ public class HttpClientBuilder{
      * Please note this method may not be used when the instance of HttpClient is created
      * inside an EJB container.
      *
+     * @return the http client builder
      * @see #setConnectionManagerShared(boolean)
      * @see com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager#closeExpiredConnections()
-     *
      * @since 4.4
      */
     public final HttpClientBuilder evictExpiredConnections(){
@@ -860,19 +1061,17 @@ public class HttpClientBuilder{
      * Please note this method may not be used when the instance of HttpClient is created
      * inside an EJB container.
      *
-     * @see #setConnectionManagerShared(boolean)
-     * @see com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager#closeExpiredConnections()
-     *
      * @param maxIdleTime
      *            maximum time persistent connections can stay idle while kept alive
      *            in the connection pool. Connections whose inactivity period exceeds this value will
      *            get closed and evicted from the pool.
      * @param maxIdleTimeUnit
      *            time unit for the above parameter.
-     *
-     * @deprecated (4.5) use {@link #evictIdleConnections(long, TimeUnit)}
-     *
+     * @return the http client builder
+     * @see #setConnectionManagerShared(boolean)
+     * @see com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager#closeExpiredConnections()
      * @since 4.4
+     * @deprecated (4.5) use {@link #evictIdleConnections(long, TimeUnit)}
      */
     @Deprecated
     public final HttpClientBuilder evictIdleConnections(final Long maxIdleTime,final TimeUnit maxIdleTimeUnit){
@@ -892,16 +1091,15 @@ public class HttpClientBuilder{
      * Please note this method may not be used when the instance of HttpClient is created
      * inside an EJB container.
      *
-     * @see #setConnectionManagerShared(boolean)
-     * @see com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager#closeExpiredConnections()
-     *
      * @param maxIdleTime
      *            maximum time persistent connections can stay idle while kept alive
      *            in the connection pool. Connections whose inactivity period exceeds this value will
      *            get closed and evicted from the pool.
      * @param maxIdleTimeUnit
      *            time unit for the above parameter.
-     *
+     * @return the http client builder
+     * @see #setConnectionManagerShared(boolean)
+     * @see com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager#closeExpiredConnections()
      * @since 4.4
      */
     public final HttpClientBuilder evictIdleConnections(final long maxIdleTime,final TimeUnit maxIdleTimeUnit){
@@ -914,6 +1112,7 @@ public class HttpClientBuilder{
     /**
      * Disables the default user agent set by this builder if none has been provided by the user.
      *
+     * @return the http client builder
      * @since 4.5.7
      */
     public final HttpClientBuilder disableDefaultUserAgent(){
@@ -930,6 +1129,23 @@ public class HttpClientBuilder{
      * For internal use.
      * </p>
      *
+     * @param requestExec
+     *            the request exec
+     * @param connManager
+     *            the conn manager
+     * @param reuseStrategy
+     *            the reuse strategy
+     * @param keepAliveStrategy
+     *            the keep alive strategy
+     * @param proxyHttpProcessor
+     *            the proxy http processor
+     * @param targetAuthStrategy
+     *            the target auth strategy
+     * @param proxyAuthStrategy
+     *            the proxy auth strategy
+     * @param userTokenHandler
+     *            the user token handler
+     * @return the client exec chain
      * @since 4.4
      */
     protected ClientExecChain createMainExec(
@@ -954,6 +1170,10 @@ public class HttpClientBuilder{
 
     /**
      * For internal use.
+     *
+     * @param mainExec
+     *            the main exec
+     * @return the client exec chain
      */
     protected ClientExecChain decorateMainExec(final ClientExecChain mainExec){
         return mainExec;
@@ -961,6 +1181,10 @@ public class HttpClientBuilder{
 
     /**
      * For internal use.
+     *
+     * @param protocolExec
+     *            the protocol exec
+     * @return the client exec chain
      */
     protected ClientExecChain decorateProtocolExec(final ClientExecChain protocolExec){
         return protocolExec;
@@ -968,17 +1192,27 @@ public class HttpClientBuilder{
 
     /**
      * For internal use.
+     *
+     * @param closeable
+     *            the closeable
      */
     protected void addCloseable(final Closeable closeable){
         if (closeable == null){
             return;
         }
         if (closeables == null){
-            closeables = new ArrayList<Closeable>();
+            closeables = new ArrayList<>();
         }
         closeables.add(closeable);
     }
 
+    /**
+     * Split.
+     *
+     * @param s
+     *            the s
+     * @return the string[]
+     */
     private static String[] split(final String s){
         if (TextUtils.isBlank(s)){
             return null;
@@ -986,6 +1220,11 @@ public class HttpClientBuilder{
         return s.split(" *, *");
     }
 
+    /**
+     * Builds the.
+     *
+     * @return the closeable http client
+     */
     public CloseableHttpClient build(){
         // Create main request executor
         // We copy the instance fields to avoid changing them, and rename to avoid accidental use of the wrong version
@@ -1141,7 +1380,7 @@ public class HttpClientBuilder{
             }
             if (!contentCompressionDisabled){
                 if (contentDecoderMap != null){
-                    final List<String> encodings = new ArrayList<String>(contentDecoderMap.keySet());
+                    final List<String> encodings = new ArrayList<>(contentDecoderMap.keySet());
                     Collections.sort(encodings);
                     b.add(new RequestAcceptEncoding(encodings));
                 }else{
@@ -1251,10 +1490,10 @@ public class HttpClientBuilder{
             }
         }
 
-        List<Closeable> closeablesCopy = closeables != null ? new ArrayList<Closeable>(closeables) : null;
+        List<Closeable> closeablesCopy = closeables != null ? new ArrayList<>(closeables) : null;
         if (!this.connManagerShared){
             if (closeablesCopy == null){
-                closeablesCopy = new ArrayList<Closeable>(1);
+                closeablesCopy = new ArrayList<>(1);
             }
             final HttpClientConnectionManager cm = connManagerCopy;
 
@@ -1265,29 +1504,17 @@ public class HttpClientBuilder{
                                 maxIdleTimeUnit != null ? maxIdleTimeUnit : TimeUnit.SECONDS,
                                 maxIdleTime,
                                 maxIdleTimeUnit);
-                closeablesCopy.add(new Closeable(){
-
-                    @Override
-                    public void close() throws IOException{
-                        connectionEvictor.shutdown();
-                        try{
-                            connectionEvictor.awaitTermination(1L, TimeUnit.SECONDS);
-                        }catch (final InterruptedException interrupted){
-                            Thread.currentThread().interrupt();
-                        }
+                closeablesCopy.add(() -> {
+                    connectionEvictor.shutdown();
+                    try{
+                        connectionEvictor.awaitTermination(1L, TimeUnit.SECONDS);
+                    }catch (final InterruptedException interrupted){
+                        Thread.currentThread().interrupt();
                     }
-
                 });
                 connectionEvictor.start();
             }
-            closeablesCopy.add(new Closeable(){
-
-                @Override
-                public void close() throws IOException{
-                    cm.shutdown();
-                }
-
-            });
+            closeablesCopy.add(() -> cm.shutdown());
         }
 
         return new InternalHttpClient(

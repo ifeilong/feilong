@@ -33,11 +33,14 @@ package com.feilong.lib.org.apache.http.cookie;
  *
  * @since 4.0
  */
-public interface SM {
+public interface SM{
 
-    String COOKIE            = "Cookie";
-    String COOKIE2           = "Cookie2";
-    String SET_COOKIE        = "Set-Cookie";
-    String SET_COOKIE2       = "Set-Cookie2";
+    String COOKIE      = "Cookie";
+
+    String COOKIE2     = "Cookie2";
+
+    String SET_COOKIE  = "Set-Cookie";
+
+    String SET_COOKIE2 = "Set-Cookie2";
 
 }

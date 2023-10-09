@@ -33,7 +33,7 @@ import com.feilong.lib.org.apache.http.HttpHost;
  *
  * @since 4.3
  */
-public interface SchemePortResolver {
+public interface SchemePortResolver{
 
     /**
      * Returns the actual port for the host based on the protocol scheme.

@@ -38,28 +38,28 @@ import com.feilong.lib.org.apache.http.message.LineFormatter;
  *
  * @since 4.3
  */
-public class DefaultHttpRequestWriter extends AbstractMessageWriter<HttpRequest> {
+public class DefaultHttpRequestWriter extends AbstractMessageWriter<HttpRequest>{
 
     /**
      * Creates an instance of DefaultHttpRequestWriter.
      *
-     * @param buffer the session output buffer.
-     * @param formatter the line formatter If {@code null}
-     *   {@link com.feilong.lib.org.apache.http.message.BasicLineFormatter#INSTANCE}
-     *   will be used.
+     * @param buffer
+     *            the session output buffer.
+     * @param formatter
+     *            the line formatter If {@code null}
+     *            {@link com.feilong.lib.org.apache.http.message.BasicLineFormatter#INSTANCE}
+     *            will be used.
      */
-    public DefaultHttpRequestWriter(
-            final SessionOutputBuffer buffer,
-            final LineFormatter formatter) {
+    public DefaultHttpRequestWriter(final SessionOutputBuffer buffer, final LineFormatter formatter){
         super(buffer, formatter);
     }
 
-    public DefaultHttpRequestWriter(final SessionOutputBuffer buffer) {
+    public DefaultHttpRequestWriter(final SessionOutputBuffer buffer){
         this(buffer, null);
     }
 
     @Override
-    protected void writeHeadLine(final HttpRequest message) throws IOException {
+    protected void writeHeadLine(final HttpRequest message) throws IOException{
         lineFormatter.formatRequestLine(this.lineBuf, message.getRequestLine());
         this.sessionBuffer.writeLine(this.lineBuf);
     }

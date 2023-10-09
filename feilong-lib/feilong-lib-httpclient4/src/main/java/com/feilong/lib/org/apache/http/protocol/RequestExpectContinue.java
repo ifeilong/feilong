@@ -50,7 +50,7 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @SuppressWarnings("deprecation")
-public class RequestExpectContinue implements HttpRequestInterceptor {
+public class RequestExpectContinue implements HttpRequestInterceptor{
 
     private final boolean activeByDefault;
 
@@ -58,33 +58,31 @@ public class RequestExpectContinue implements HttpRequestInterceptor {
      * @deprecated (4.3) use {@link com.feilong.lib.org.apache.http.protocol.RequestExpectContinue#RequestExpectContinue(boolean)}
      */
     @Deprecated
-    public RequestExpectContinue() {
+    public RequestExpectContinue(){
         this(false);
     }
 
     /**
      * @since 4.3
      */
-    public RequestExpectContinue(final boolean activeByDefault) {
+    public RequestExpectContinue(final boolean activeByDefault){
         super();
         this.activeByDefault = activeByDefault;
     }
 
     @Override
-    public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
 
-        if (!request.containsHeader(HTTP.EXPECT_DIRECTIVE)) {
-            if (request instanceof HttpEntityEnclosingRequest) {
+        if (!request.containsHeader(HTTP.EXPECT_DIRECTIVE)){
+            if (request instanceof HttpEntityEnclosingRequest){
                 final ProtocolVersion ver = request.getRequestLine().getProtocolVersion();
-                final HttpEntity entity = ((HttpEntityEnclosingRequest)request).getEntity();
+                final HttpEntity entity = ((HttpEntityEnclosingRequest) request).getEntity();
                 // Do not send the expect header if request body is known to be empty
-                if (entity != null
-                        && entity.getContentLength() != 0 && !ver.lessEquals(HttpVersion.HTTP_1_0)) {
-                    final boolean active = request.getParams().getBooleanParameter(
-                            CoreProtocolPNames.USE_EXPECT_CONTINUE, this.activeByDefault);
-                    if (active) {
+                if (entity != null && entity.getContentLength() != 0 && !ver.lessEquals(HttpVersion.HTTP_1_0)){
+                    final boolean active = request.getParams()
+                                    .getBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, this.activeByDefault);
+                    if (active){
                         request.addHeader(HTTP.EXPECT_DIRECTIVE, HTTP.EXPECT_CONTINUE);
                     }
                 }

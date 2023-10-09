@@ -37,14 +37,15 @@ package com.feilong.lib.org.apache.http.protocol;
  * @deprecated see {@link HttpRequestHandlerMapper}
  */
 @Deprecated
-public interface HttpRequestHandlerResolver {
+public interface HttpRequestHandlerResolver{
 
     /**
      * Looks up a handler matching the given request URI.
      *
-     * @param requestURI the request URI
+     * @param requestURI
+     *            the request URI
      * @return HTTP request handler or {@code null} if no match
-     * is found.
+     *         is found.
      */
     HttpRequestHandler lookup(String requestURI);
 

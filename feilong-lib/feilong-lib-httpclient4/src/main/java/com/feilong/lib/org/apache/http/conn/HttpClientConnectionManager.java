@@ -49,7 +49,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.3
  */
-public interface HttpClientConnectionManager {
+public interface HttpClientConnectionManager{
 
     /**
      * Returns a new {@link ConnectionRequest}, from which a
@@ -60,25 +60,27 @@ public interface HttpClientConnectionManager {
      * in the closed state. The consumer of that connection is responsible
      * for fully establishing the route the to the connection target
      * by calling {@link #connect(com.feilong.lib.org.apache.http.HttpClientConnection,
-     *   com.feilong.lib.org.apache.http.conn.routing.HttpRoute, int,
-     *   com.feilong.lib.org.apache.http.protocol.HttpContext) connect} in order to connect
+     * com.feilong.lib.org.apache.http.conn.routing.HttpRoute, int,
+     * com.feilong.lib.org.apache.http.protocol.HttpContext) connect} in order to connect
      * directly to the target or to the first proxy hop, optionally calling
      * {@link #upgrade(com.feilong.lib.org.apache.http.HttpClientConnection,
-     *   com.feilong.lib.org.apache.http.conn.routing.HttpRoute,
-     *   com.feilong.lib.org.apache.http.protocol.HttpContext) upgrade} method to upgrade
+     * com.feilong.lib.org.apache.http.conn.routing.HttpRoute,
+     * com.feilong.lib.org.apache.http.protocol.HttpContext) upgrade} method to upgrade
      * the connection after having executed {@code CONNECT} method to
      * all intermediate proxy hops and and finally calling {@link #routeComplete(
-     *  com.feilong.lib.org.apache.http.HttpClientConnection,
-     *  com.feilong.lib.org.apache.http.conn.routing.HttpRoute,
-     *  com.feilong.lib.org.apache.http.protocol.HttpContext) routeComplete} to mark the route
-     *  as fully completed.
+     * com.feilong.lib.org.apache.http.HttpClientConnection,
+     * com.feilong.lib.org.apache.http.conn.routing.HttpRoute,
+     * com.feilong.lib.org.apache.http.protocol.HttpContext) routeComplete} to mark the route
+     * as fully completed.
      * </p>
      *
-     * @param route HTTP route of the requested connection.
-     * @param state expected state of the connection or {@code null}
-     *              if the connection is not expected to carry any state.
+     * @param route
+     *            HTTP route of the requested connection.
+     * @param state
+     *            expected state of the connection or {@code null}
+     *            if the connection is not expected to carry any state.
      */
-    ConnectionRequest requestConnection(HttpRoute route, Object state);
+    ConnectionRequest requestConnection(HttpRoute route,Object state);
 
     /**
      * Releases the connection back to the manager making it potentially
@@ -87,60 +89,62 @@ public interface HttpClientConnectionManager {
      * defined using {@code validDuration} and {@code timeUnit}
      * parameters.
      *
-     * @param conn      the managed connection to release.
-     * @param validDuration the duration of time this connection is valid for reuse.
-     * @param timeUnit the time unit.
+     * @param conn
+     *            the managed connection to release.
+     * @param validDuration
+     *            the duration of time this connection is valid for reuse.
+     * @param timeUnit
+     *            the time unit.
      *
      * @see #closeExpiredConnections()
      */
-    void releaseConnection(
-            HttpClientConnection conn, Object newState, long validDuration, TimeUnit timeUnit);
+    void releaseConnection(HttpClientConnection conn,Object newState,long validDuration,TimeUnit timeUnit);
 
     /**
      * Connects the underlying connection socket to the connection target in case
      * of a direct route or to the first proxy hop in case of a route via a proxy
      * (or multiple proxies).
      *
-     * @param conn the managed connection.
-     * @param route the route of the connection.
-     * @param connectTimeout connect timeout in milliseconds.
-     * @param context the actual HTTP context.
+     * @param conn
+     *            the managed connection.
+     * @param route
+     *            the route of the connection.
+     * @param connectTimeout
+     *            connect timeout in milliseconds.
+     * @param context
+     *            the actual HTTP context.
      * @throws IOException
      */
-    void connect(
-            HttpClientConnection conn,
-            HttpRoute route,
-            int connectTimeout,
-            HttpContext context) throws IOException;
+    void connect(HttpClientConnection conn,HttpRoute route,int connectTimeout,HttpContext context) throws IOException;
 
     /**
      * Upgrades the underlying connection socket to TLS/SSL (or another layering
      * protocol) after having executed {@code CONNECT} method to all
      * intermediate proxy hops
      *
-     * @param conn the managed connection.
-     * @param route the route of the connection.
-     * @param context the actual HTTP context.
+     * @param conn
+     *            the managed connection.
+     * @param route
+     *            the route of the connection.
+     * @param context
+     *            the actual HTTP context.
      * @throws IOException
      */
-    void upgrade(
-            HttpClientConnection conn,
-            HttpRoute route,
-            HttpContext context) throws IOException;
+    void upgrade(HttpClientConnection conn,HttpRoute route,HttpContext context) throws IOException;
 
     /**
      * Marks the connection as fully established with all its intermediate
      * hops completed.
      *
-     * @param conn the managed connection.
-     * @param route the route of the connection.
-     * @param context the actual HTTP context.
+     * @param conn
+     *            the managed connection.
+     * @param route
+     *            the route of the connection.
+     * @param context
+     *            the actual HTTP context.
      * @throws IOException
      */
-    void routeComplete(
-            HttpClientConnection conn,
-            HttpRoute route,
-            HttpContext context) throws IOException;
+    void routeComplete(HttpClientConnection conn,HttpRoute route,HttpContext context) throws IOException;
 
     /**
      * Closes idle connections in the pool.
@@ -154,12 +158,14 @@ public interface HttpClientConnectionManager {
      * All expired connections will also be closed.
      * </p>
      *
-     * @param idletime  the idle time of connections to be closed
-     * @param timeUnit     the unit for the {@code idletime}
+     * @param idletime
+     *            the idle time of connections to be closed
+     * @param timeUnit
+     *            the unit for the {@code idletime}
      *
      * @see #closeExpiredConnections()
      */
-    void closeIdleConnections(long idletime, TimeUnit timeUnit);
+    void closeIdleConnections(long idletime,TimeUnit timeUnit);
 
     /**
      * Closes all expired connections in the pool.

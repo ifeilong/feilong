@@ -37,42 +37,41 @@ import com.feilong.lib.org.apache.http.protocol.HttpService;
 /**
  * @since 4.4
  */
-class Worker implements Runnable {
+class Worker implements Runnable{
 
-    private final HttpService httpservice;
+    private final HttpService          httpservice;
+
     private final HttpServerConnection conn;
-    private final ExceptionLogger exceptionLogger;
 
-    Worker(
-            final HttpService httpservice,
-            final HttpServerConnection conn,
-            final ExceptionLogger exceptionLogger) {
+    private final ExceptionLogger      exceptionLogger;
+
+    Worker(final HttpService httpservice, final HttpServerConnection conn, final ExceptionLogger exceptionLogger){
         super();
         this.httpservice = httpservice;
         this.conn = conn;
         this.exceptionLogger = exceptionLogger;
     }
 
-    public HttpServerConnection getConnection() {
+    public HttpServerConnection getConnection(){
         return this.conn;
     }
 
     @Override
-    public void run() {
-        try {
+    public void run(){
+        try{
             final BasicHttpContext localContext = new BasicHttpContext();
             final HttpCoreContext context = HttpCoreContext.adapt(localContext);
-            while (!Thread.interrupted() && this.conn.isOpen()) {
+            while (!Thread.interrupted() && this.conn.isOpen()){
                 this.httpservice.handleRequest(this.conn, context);
                 localContext.clear();
             }
             this.conn.close();
-        } catch (final Exception ex) {
+        }catch (final Exception ex){
             this.exceptionLogger.log(ex);
-        } finally {
-            try {
+        }finally{
+            try{
                 this.conn.shutdown();
-            } catch (final IOException ex) {
+            }catch (final IOException ex){
                 this.exceptionLogger.log(ex);
             }
         }

@@ -39,13 +39,15 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class FormBodyPart {
+public class FormBodyPart{
 
-    private final String name;
-    private final Header header;
+    private final String      name;
+
+    private final Header      header;
+
     private final ContentBody body;
 
-    FormBodyPart(final String name, final ContentBody body, final Header header) {
+    FormBodyPart(final String name, final ContentBody body, final Header header){
         super();
         Args.notNull(name, "Name");
         Args.notNull(body, "Body");
@@ -58,7 +60,7 @@ public class FormBodyPart {
      * @deprecated (4.4) use {@link com.feilong.lib.org.apache.http.entity.mime.FormBodyPartBuilder}.
      */
     @Deprecated
-    public FormBodyPart(final String name, final ContentBody body) {
+    public FormBodyPart(final String name, final ContentBody body){
         super();
         Args.notNull(name, "Name");
         Args.notNull(body, "Body");
@@ -71,19 +73,19 @@ public class FormBodyPart {
         generateTransferEncoding(body);
     }
 
-    public String getName() {
+    public String getName(){
         return this.name;
     }
 
-    public ContentBody getBody() {
+    public ContentBody getBody(){
         return this.body;
     }
 
-    public Header getHeader() {
+    public Header getHeader(){
         return this.header;
     }
 
-    public void addField(final String name, final String value) {
+    public void addField(final String name,final String value){
         Args.notNull(name, "Field name");
         this.header.addField(new MinimalField(name, value));
     }
@@ -92,12 +94,12 @@ public class FormBodyPart {
      * @deprecated (4.4) use {@link com.feilong.lib.org.apache.http.entity.mime.FormBodyPartBuilder}.
      */
     @Deprecated
-    protected void generateContentDisp(final ContentBody body) {
+    protected void generateContentDisp(final ContentBody body){
         final StringBuilder buffer = new StringBuilder();
         buffer.append("form-data; name=\"");
         buffer.append(getName());
         buffer.append("\"");
-        if (body.getFilename() != null) {
+        if (body.getFilename() != null){
             buffer.append("; filename=\"");
             buffer.append(body.getFilename());
             buffer.append("\"");
@@ -109,19 +111,19 @@ public class FormBodyPart {
      * @deprecated (4.4) use {@link com.feilong.lib.org.apache.http.entity.mime.FormBodyPartBuilder}.
      */
     @Deprecated
-    protected void generateContentType(final ContentBody body) {
+    protected void generateContentType(final ContentBody body){
         final ContentType contentType;
-        if (body instanceof AbstractContentBody) {
+        if (body instanceof AbstractContentBody){
             contentType = ((AbstractContentBody) body).getContentType();
-        } else {
+        }else{
             contentType = null;
         }
-        if (contentType != null) {
+        if (contentType != null){
             addField(MIME.CONTENT_TYPE, contentType.toString());
-        } else {
+        }else{
             final StringBuilder buffer = new StringBuilder();
             buffer.append(body.getMimeType()); // MimeType cannot be null
-            if (body.getCharset() != null) { // charset may legitimately be null
+            if (body.getCharset() != null){ // charset may legitimately be null
                 buffer.append("; charset=");
                 buffer.append(body.getCharset());
             }
@@ -133,7 +135,7 @@ public class FormBodyPart {
      * @deprecated (4.4) use {@link com.feilong.lib.org.apache.http.entity.mime.FormBodyPartBuilder}.
      */
     @Deprecated
-    protected void generateTransferEncoding(final ContentBody body) {
+    protected void generateTransferEncoding(final ContentBody body){
         addField(MIME.CONTENT_TRANSFER_ENC, body.getTransferEncoding()); // TE cannot be null
     }
 

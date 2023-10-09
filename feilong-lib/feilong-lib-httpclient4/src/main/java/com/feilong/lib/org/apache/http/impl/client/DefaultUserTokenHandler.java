@@ -56,31 +56,31 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class DefaultUserTokenHandler implements UserTokenHandler {
+public class DefaultUserTokenHandler implements UserTokenHandler{
 
     public static final DefaultUserTokenHandler INSTANCE = new DefaultUserTokenHandler();
 
     @Override
-    public Object getUserToken(final HttpContext context) {
+    public Object getUserToken(final HttpContext context){
 
         final HttpClientContext clientContext = HttpClientContext.adapt(context);
 
         Principal userPrincipal = null;
 
         final AuthState targetAuthState = clientContext.getTargetAuthState();
-        if (targetAuthState != null) {
+        if (targetAuthState != null){
             userPrincipal = getAuthPrincipal(targetAuthState);
-            if (userPrincipal == null) {
+            if (userPrincipal == null){
                 final AuthState proxyAuthState = clientContext.getProxyAuthState();
                 userPrincipal = getAuthPrincipal(proxyAuthState);
             }
         }
 
-        if (userPrincipal == null) {
+        if (userPrincipal == null){
             final HttpConnection conn = clientContext.getConnection();
-            if (conn.isOpen() && conn instanceof ManagedHttpClientConnection) {
+            if (conn.isOpen() && conn instanceof ManagedHttpClientConnection){
                 final SSLSession sslsession = ((ManagedHttpClientConnection) conn).getSSLSession();
-                if (sslsession != null) {
+                if (sslsession != null){
                     userPrincipal = sslsession.getLocalPrincipal();
                 }
             }
@@ -89,11 +89,11 @@ public class DefaultUserTokenHandler implements UserTokenHandler {
         return userPrincipal;
     }
 
-    private static Principal getAuthPrincipal(final AuthState authState) {
+    private static Principal getAuthPrincipal(final AuthState authState){
         final AuthScheme scheme = authState.getAuthScheme();
-        if (scheme != null && scheme.isComplete() && scheme.isConnectionBased()) {
+        if (scheme != null && scheme.isComplete() && scheme.isConnectionBased()){
             final Credentials creds = authState.getCredentials();
-            if (creds != null) {
+            if (creds != null){
                 return creds.getUserPrincipal();
             }
         }

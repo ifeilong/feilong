@@ -33,10 +33,10 @@ package com.feilong.lib.org.apache.http.cookie.params;
  * @since 4.0
  *
  * @deprecated (4.3) use constructor parameters of {@link
- *   com.feilong.lib.org.apache.http.cookie.CookieSpecProvider}s.
+ *             com.feilong.lib.org.apache.http.cookie.CookieSpecProvider}s.
  */
 @Deprecated
-public interface CookieSpecPNames {
+public interface CookieSpecPNames{
 
     /**
      * Defines valid date patterns to be used for parsing non-standard
@@ -50,7 +50,7 @@ public interface CookieSpecPNames {
      * with the syntax of {@link java.text.SimpleDateFormat}.
      * </p>
      */
-    String DATE_PATTERNS = "http.protocol.cookie-datepatterns";
+    String DATE_PATTERNS        = "http.protocol.cookie-datepatterns";
 
     /**
      * Defines whether cookies should be forced into a single

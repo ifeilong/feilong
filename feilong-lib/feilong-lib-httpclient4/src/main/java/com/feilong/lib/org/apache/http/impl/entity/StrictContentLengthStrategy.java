@@ -49,21 +49,22 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class StrictContentLengthStrategy implements ContentLengthStrategy {
+public class StrictContentLengthStrategy implements ContentLengthStrategy{
 
     public static final StrictContentLengthStrategy INSTANCE = new StrictContentLengthStrategy();
 
-    private final int implicitLen;
+    private final int                               implicitLen;
 
     /**
      * Creates {@code StrictContentLengthStrategy} instance with the given length used per default
      * when content length is not explicitly specified in the message.
      *
-     * @param implicitLen implicit content length.
+     * @param implicitLen
+     *            implicit content length.
      *
      * @since 4.2
      */
-    public StrictContentLengthStrategy(final int implicitLen) {
+    public StrictContentLengthStrategy(final int implicitLen){
         super();
         this.implicitLen = implicitLen;
     }
@@ -72,43 +73,40 @@ public class StrictContentLengthStrategy implements ContentLengthStrategy {
      * Creates {@code StrictContentLengthStrategy} instance. {@link ContentLengthStrategy#IDENTITY}
      * is used per default when content length is not explicitly specified in the message.
      */
-    public StrictContentLengthStrategy() {
+    public StrictContentLengthStrategy(){
         this(IDENTITY);
     }
 
     @Override
-    public long determineLength(final HttpMessage message) throws HttpException {
+    public long determineLength(final HttpMessage message) throws HttpException{
         Args.notNull(message, "HTTP message");
         // Although Transfer-Encoding is specified as a list, in practice
         // it is either missing or has the single value "chunked". So we
         // treat it as a single-valued header here.
         final Header transferEncodingHeader = message.getFirstHeader(HTTP.TRANSFER_ENCODING);
-        if (transferEncodingHeader != null) {
+        if (transferEncodingHeader != null){
             final String s = transferEncodingHeader.getValue();
-            if (HTTP.CHUNK_CODING.equalsIgnoreCase(s)) {
-                if (message.getProtocolVersion().lessEquals(HttpVersion.HTTP_1_0)) {
-                    throw new ProtocolException(
-                            "Chunked transfer encoding not allowed for " +
-                            message.getProtocolVersion());
+            if (HTTP.CHUNK_CODING.equalsIgnoreCase(s)){
+                if (message.getProtocolVersion().lessEquals(HttpVersion.HTTP_1_0)){
+                    throw new ProtocolException("Chunked transfer encoding not allowed for " + message.getProtocolVersion());
                 }
                 return CHUNKED;
-            } else if (HTTP.IDENTITY_CODING.equalsIgnoreCase(s)) {
+            }else if (HTTP.IDENTITY_CODING.equalsIgnoreCase(s)){
                 return IDENTITY;
-            } else {
-                throw new ProtocolException(
-                        "Unsupported transfer encoding: " + s);
+            }else{
+                throw new ProtocolException("Unsupported transfer encoding: " + s);
             }
         }
         final Header contentLengthHeader = message.getFirstHeader(HTTP.CONTENT_LEN);
-        if (contentLengthHeader != null) {
+        if (contentLengthHeader != null){
             final String s = contentLengthHeader.getValue();
-            try {
+            try{
                 final long len = Long.parseLong(s);
-                if (len < 0) {
+                if (len < 0){
                     throw new ProtocolException("Negative content length: " + s);
                 }
                 return len;
-            } catch (final NumberFormatException e) {
+            }catch (final NumberFormatException e){
                 throw new ProtocolException("Invalid content length: " + s);
             }
         }

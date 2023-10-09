@@ -32,11 +32,12 @@ import com.feilong.lib.org.apache.http.impl.conn.PoolingHttpClientConnectionMana
 
 /**
  * Factory methods for {@link CloseableHttpClient} instances.
+ * 
  * @since 4.3
  */
-public class HttpClients {
+public class HttpClients{
 
-    private HttpClients() {
+    private HttpClients(){
         super();
     }
 
@@ -44,7 +45,7 @@ public class HttpClients {
      * Creates builder object for construction of custom
      * {@link CloseableHttpClient} instances.
      */
-    public static HttpClientBuilder custom() {
+    public static HttpClientBuilder custom(){
         return HttpClientBuilder.create();
     }
 
@@ -52,7 +53,7 @@ public class HttpClients {
      * Creates {@link CloseableHttpClient} instance with default
      * configuration.
      */
-    public static CloseableHttpClient createDefault() {
+    public static CloseableHttpClient createDefault(){
         return HttpClientBuilder.create().build();
     }
 
@@ -60,7 +61,7 @@ public class HttpClients {
      * Creates {@link CloseableHttpClient} instance with default
      * configuration based on system properties.
      */
-    public static CloseableHttpClient createSystem() {
+    public static CloseableHttpClient createSystem(){
         return HttpClientBuilder.create().useSystemProperties().build();
     }
 
@@ -68,7 +69,7 @@ public class HttpClients {
      * Creates {@link CloseableHttpClient} instance that implements
      * the most basic HTTP protocol support.
      */
-    public static CloseableHttpClient createMinimal() {
+    public static CloseableHttpClient createMinimal(){
         return new MinimalHttpClient(new PoolingHttpClientConnectionManager());
     }
 
@@ -76,7 +77,7 @@ public class HttpClients {
      * Creates {@link CloseableHttpClient} instance that implements
      * the most basic HTTP protocol support.
      */
-    public static CloseableHttpClient createMinimal(final HttpClientConnectionManager connManager) {
+    public static CloseableHttpClient createMinimal(final HttpClientConnectionManager connManager){
         return new MinimalHttpClient(connManager);
     }
 

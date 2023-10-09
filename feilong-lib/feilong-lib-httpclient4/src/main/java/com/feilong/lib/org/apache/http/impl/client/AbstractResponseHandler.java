@@ -45,14 +45,14 @@ import com.feilong.lib.org.apache.http.util.EntityUtils;
  * <p>
  * If this is used with
  * {@link com.feilong.lib.org.apache.http.client.HttpClient#execute(
- *  org.apache.http.client.methods.HttpUriRequest, ResponseHandler)},
+ * org.apache.http.client.methods.HttpUriRequest, ResponseHandler)},
  * HttpClient may handle redirects (3xx responses) internally.
  * </p>
  *
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public abstract class AbstractResponseHandler<T> implements ResponseHandler<T> {
+public abstract class AbstractResponseHandler<T> implements ResponseHandler<T>{
 
     /**
      * Read the entity from the response body and pass it to the entity handler
@@ -61,14 +61,12 @@ public abstract class AbstractResponseHandler<T> implements ResponseHandler<T> {
      * status code), throws an {@link HttpResponseException}.
      */
     @Override
-    public T handleResponse(final HttpResponse response)
-            throws HttpResponseException, IOException {
+    public T handleResponse(final HttpResponse response) throws HttpResponseException,IOException{
         final StatusLine statusLine = response.getStatusLine();
         final HttpEntity entity = response.getEntity();
-        if (statusLine.getStatusCode() >= 300) {
+        if (statusLine.getStatusCode() >= 300){
             EntityUtils.consume(entity);
-            throw new HttpResponseException(statusLine.getStatusCode(),
-                    statusLine.getReasonPhrase());
+            throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
         }
         return entity == null ? null : handleEntity(entity);
     }

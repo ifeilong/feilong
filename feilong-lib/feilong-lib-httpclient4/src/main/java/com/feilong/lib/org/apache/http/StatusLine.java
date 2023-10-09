@@ -32,6 +32,7 @@ package com.feilong.lib.org.apache.http;
  * of the protocol version followed by a numeric status code and its
  * associated textual phrase, with each element separated by SP
  * characters. No CR or LF is allowed except in the final CRLF sequence.
+ * 
  * <pre>
  *     Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF
  * </pre>
@@ -41,7 +42,7 @@ package com.feilong.lib.org.apache.http;
  *
  * @since 4.0
  */
-public interface StatusLine {
+public interface StatusLine{
 
     ProtocolVersion getProtocolVersion();
 

@@ -51,61 +51,50 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultRoutePlanner implements HttpRoutePlanner {
+public class DefaultRoutePlanner implements HttpRoutePlanner{
 
     private final SchemePortResolver schemePortResolver;
 
-    public DefaultRoutePlanner(final SchemePortResolver schemePortResolver) {
+    public DefaultRoutePlanner(final SchemePortResolver schemePortResolver){
         super();
-        this.schemePortResolver = schemePortResolver != null ? schemePortResolver :
-            DefaultSchemePortResolver.INSTANCE;
+        this.schemePortResolver = schemePortResolver != null ? schemePortResolver : DefaultSchemePortResolver.INSTANCE;
     }
 
     @Override
-    public HttpRoute determineRoute(
-            final HttpHost host,
-            final HttpRequest request,
-            final HttpContext context) throws HttpException {
+    public HttpRoute determineRoute(final HttpHost host,final HttpRequest request,final HttpContext context) throws HttpException{
         Args.notNull(request, "Request");
-        if (host == null) {
+        if (host == null){
             throw new ProtocolException("Target host is not specified");
         }
         final HttpClientContext clientContext = HttpClientContext.adapt(context);
         final RequestConfig config = clientContext.getRequestConfig();
         final InetAddress local = config.getLocalAddress();
         HttpHost proxy = config.getProxy();
-        if (proxy == null) {
+        if (proxy == null){
             proxy = determineProxy(host, request, context);
         }
 
         final HttpHost target;
-        if (host.getPort() <= 0) {
-            try {
-                target = new HttpHost(
-                        host.getHostName(),
-                        this.schemePortResolver.resolve(host),
-                        host.getSchemeName());
-            } catch (final UnsupportedSchemeException ex) {
+        if (host.getPort() <= 0){
+            try{
+                target = new HttpHost(host.getHostName(), this.schemePortResolver.resolve(host), host.getSchemeName());
+            }catch (final UnsupportedSchemeException ex){
                 throw new HttpException(ex.getMessage());
             }
-        } else {
+        }else{
             target = host;
         }
         final boolean secure = target.getSchemeName().equalsIgnoreCase("https");
-        return proxy == null
-                        ? new HttpRoute(target, local, secure)
-                        : new HttpRoute(target, local, proxy, secure);
+        return proxy == null ? new HttpRoute(target, local, secure) : new HttpRoute(target, local, proxy, secure);
     }
 
     /**
      * This implementation returns null.
      *
-     * @throws HttpException may be thrown if overridden
+     * @throws HttpException
+     *             may be thrown if overridden
      */
-    protected HttpHost determineProxy(
-            final HttpHost target,
-            final HttpRequest request,
-            final HttpContext context) throws HttpException {
+    protected HttpHost determineProxy(final HttpHost target,final HttpRequest request,final HttpContext context) throws HttpException{
         return null;
     }
 

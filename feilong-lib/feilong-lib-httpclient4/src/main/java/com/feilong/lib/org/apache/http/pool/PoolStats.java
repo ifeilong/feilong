@@ -40,16 +40,19 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class PoolStats implements Serializable {
+public class PoolStats implements Serializable{
 
     private static final long serialVersionUID = -2807686144795228544L;
 
-    private final int leased;
-    private final int pending;
-    private final int available;
-    private final int max;
+    private final int         leased;
 
-    public PoolStats(final int leased, final int pending, final int free, final int max) {
+    private final int         pending;
+
+    private final int         available;
+
+    private final int         max;
+
+    public PoolStats(final int leased, final int pending, final int free, final int max){
         super();
         this.leased = leased;
         this.pending = pending;
@@ -66,7 +69,7 @@ public class PoolStats implements Serializable {
      *
      * @return the number of persistent connections.
      */
-    public int getLeased() {
+    public int getLeased(){
         return this.leased;
     }
 
@@ -76,7 +79,7 @@ public class PoolStats implements Serializable {
      *
      * @return the number of connection requests being blocked awaiting a free connection.
      */
-    public int getPending() {
+    public int getPending(){
         return this.pending;
     }
 
@@ -88,7 +91,7 @@ public class PoolStats implements Serializable {
      *
      * @return number idle persistent connections.
      */
-    public int getAvailable() {
+    public int getAvailable(){
         return this.available;
     }
 
@@ -97,12 +100,12 @@ public class PoolStats implements Serializable {
      *
      * @return the maximum number of allowed persistent connections.
      */
-    public int getMax() {
+    public int getMax(){
         return this.max;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append("[leased: ");
         buffer.append(this.leased);

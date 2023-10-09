@@ -40,22 +40,18 @@ import com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class RFC6265LaxSpec extends RFC6265CookieSpecBase {
+public class RFC6265LaxSpec extends RFC6265CookieSpecBase{
 
-    public RFC6265LaxSpec() {
-        super(new BasicPathHandler(),
-                new BasicDomainHandler(),
-                new LaxMaxAgeHandler(),
-                new BasicSecureHandler(),
-                new LaxExpiresHandler());
+    public RFC6265LaxSpec(){
+        super(new BasicPathHandler(), new BasicDomainHandler(), new LaxMaxAgeHandler(), new BasicSecureHandler(), new LaxExpiresHandler());
     }
 
-    RFC6265LaxSpec(final CommonCookieAttributeHandler... handlers) {
+    RFC6265LaxSpec(final CommonCookieAttributeHandler...handlers){
         super(handlers);
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "rfc6265-lax";
     }
 

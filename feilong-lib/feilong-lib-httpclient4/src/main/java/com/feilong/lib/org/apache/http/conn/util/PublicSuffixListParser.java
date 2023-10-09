@@ -42,9 +42,9 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public final class PublicSuffixListParser {
+public final class PublicSuffixListParser{
 
-    public PublicSuffixListParser() {
+    public PublicSuffixListParser(){
     }
 
     /**
@@ -53,34 +53,33 @@ public final class PublicSuffixListParser {
      * When creating the reader from the file, make sure to use the correct encoding
      * (the original list is in UTF-8).
      *
-     * @param reader the data reader. The caller is responsible for closing the reader.
-     * @throws java.io.IOException on error while reading from list
+     * @param reader
+     *            the data reader. The caller is responsible for closing the reader.
+     * @throws java.io.IOException
+     *             on error while reading from list
      */
-    public PublicSuffixList parse(final Reader reader) throws IOException {
-        final List<String> rules = new ArrayList<String>();
-        final List<String> exceptions = new ArrayList<String>();
+    public PublicSuffixList parse(final Reader reader) throws IOException{
+        final List<String> rules = new ArrayList<>();
+        final List<String> exceptions = new ArrayList<>();
         final BufferedReader r = new BufferedReader(reader);
 
         String line;
-        while ((line = r.readLine()) != null) {
-            if (line.isEmpty()) {
-                continue;
-            }
-            if (line.startsWith("//")) {
+        while ((line = r.readLine()) != null){
+            if (line.isEmpty() || line.startsWith("//")){
                 continue; //entire lines can also be commented using //
             }
-            if (line.startsWith(".")) {
+            if (line.startsWith(".")){
                 line = line.substring(1); // A leading dot is optional
             }
             // An exclamation mark (!) at the start of a rule marks an exception to a previous wildcard rule
             final boolean isException = line.startsWith("!");
-            if (isException) {
+            if (isException){
                 line = line.substring(1);
             }
 
-            if (isException) {
+            if (isException){
                 exceptions.add(line);
-            } else {
+            }else{
                 rules.add(line);
             }
         }
@@ -93,13 +92,15 @@ public final class PublicSuffixListParser {
      * When creating the reader from the file, make sure to use the correct encoding
      * (the original list is in UTF-8).
      *
-     * @param reader the data reader. The caller is responsible for closing the reader.
-     * @throws java.io.IOException on error while reading from list
+     * @param reader
+     *            the data reader. The caller is responsible for closing the reader.
+     * @throws java.io.IOException
+     *             on error while reading from list
      *
      * @since 4.5
      */
-    public List<PublicSuffixList> parseByType(final Reader reader) throws IOException {
-        final List<PublicSuffixList> result = new ArrayList<PublicSuffixList>(2);
+    public List<PublicSuffixList> parseByType(final Reader reader) throws IOException{
+        final List<PublicSuffixList> result = new ArrayList<>(2);
 
         final BufferedReader r = new BufferedReader(reader);
 
@@ -107,21 +108,21 @@ public final class PublicSuffixListParser {
         List<String> rules = null;
         List<String> exceptions = null;
         String line;
-        while ((line = r.readLine()) != null) {
-            if (line.isEmpty()) {
+        while ((line = r.readLine()) != null){
+            if (line.isEmpty()){
                 continue;
             }
-            if (line.startsWith("//")) {
+            if (line.startsWith("//")){
 
-                if (domainType == null) {
-                    if (line.contains("===BEGIN ICANN DOMAINS===")) {
+                if (domainType == null){
+                    if (line.contains("===BEGIN ICANN DOMAINS===")){
                         domainType = DomainType.ICANN;
-                    } else if (line.contains("===BEGIN PRIVATE DOMAINS===")) {
+                    }else if (line.contains("===BEGIN PRIVATE DOMAINS===")){
                         domainType = DomainType.PRIVATE;
                     }
-                } else {
-                    if (line.contains("===END ICANN DOMAINS===") || line.contains("===END PRIVATE DOMAINS===")) {
-                        if (rules != null) {
+                }else{
+                    if (line.contains("===END ICANN DOMAINS===") || line.contains("===END PRIVATE DOMAINS===")){
+                        if (rules != null){
                             result.add(new PublicSuffixList(domainType, rules, exceptions));
                         }
                         domainType = null;
@@ -132,27 +133,27 @@ public final class PublicSuffixListParser {
 
                 continue; //entire lines can also be commented using //
             }
-            if (domainType == null) {
+            if (domainType == null){
                 continue;
             }
 
-            if (line.startsWith(".")) {
+            if (line.startsWith(".")){
                 line = line.substring(1); // A leading dot is optional
             }
             // An exclamation mark (!) at the start of a rule marks an exception to a previous wildcard rule
             final boolean isException = line.startsWith("!");
-            if (isException) {
+            if (isException){
                 line = line.substring(1);
             }
 
-            if (isException) {
-                if (exceptions == null) {
-                    exceptions = new ArrayList<String>();
+            if (isException){
+                if (exceptions == null){
+                    exceptions = new ArrayList<>();
                 }
                 exceptions.add(line);
-            } else {
-                if (rules == null) {
-                    rules = new ArrayList<String>();
+            }else{
+                if (rules == null){
+                    rules = new ArrayList<>();
                 }
                 rules.add(line);
             }

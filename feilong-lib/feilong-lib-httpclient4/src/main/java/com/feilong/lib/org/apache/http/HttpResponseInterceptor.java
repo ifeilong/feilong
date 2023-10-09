@@ -48,7 +48,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.0
  */
-public interface HttpResponseInterceptor {
+public interface HttpResponseInterceptor{
 
     /**
      * Processes a response.
@@ -56,13 +56,16 @@ public interface HttpResponseInterceptor {
      * sent to the client. On the client side, this step is performed
      * on incoming messages before the message body is evaluated.
      *
-     * @param response  the response to postprocess
-     * @param context   the context for the request
+     * @param response
+     *            the response to postprocess
+     * @param context
+     *            the context for the request
      *
-     * @throws HttpException in case of an HTTP protocol violation
-     * @throws IOException in case of an I/O error
+     * @throws HttpException
+     *             in case of an HTTP protocol violation
+     * @throws IOException
+     *             in case of an I/O error
      */
-    void process(HttpResponse response, HttpContext context)
-        throws HttpException, IOException;
+    void process(HttpResponse response,HttpContext context) throws HttpException,IOException;
 
 }

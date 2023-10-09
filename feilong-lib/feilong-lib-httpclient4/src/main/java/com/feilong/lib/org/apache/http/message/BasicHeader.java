@@ -42,34 +42,37 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicHeader implements Header, Cloneable, Serializable {
+public class BasicHeader implements Header,Cloneable,Serializable{
 
     private static final HeaderElement[] EMPTY_HEADER_ELEMENTS = new HeaderElement[] {};
 
-    private static final long serialVersionUID = -5427236326487562174L;
+    private static final long            serialVersionUID      = -5427236326487562174L;
 
-    private final String name;
-    private final String value;
+    private final String                 name;
+
+    private final String                 value;
 
     /**
      * Constructs with name and value.
      *
-     * @param name the header name
-     * @param value the header value
+     * @param name
+     *            the header name
+     * @param value
+     *            the header value
      */
-    public BasicHeader(final String name, final String value) {
+    public BasicHeader(final String name, final String value){
         this.name = Args.notNull(name, "Name");
         this.value = value;
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
 
     @Override
-    public HeaderElement[] getElements() throws ParseException {
-        if (this.getValue() != null) {
+    public HeaderElement[] getElements() throws ParseException{
+        if (this.getValue() != null){
             // result intentionally not cached, it's probably not used again
             return BasicHeaderValueParser.parseElements(this.getValue(), null);
         }
@@ -77,17 +80,17 @@ public class BasicHeader implements Header, Cloneable, Serializable {
     }
 
     @Override
-    public String getName() {
+    public String getName(){
         return name;
     }
 
     @Override
-    public String getValue() {
+    public String getValue(){
         return value;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         // no need for non-default formatting in toString()
         return BasicLineFormatter.INSTANCE.formatHeader(null, this).toString();
     }

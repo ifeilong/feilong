@@ -69,35 +69,44 @@ import com.feilong.lib.org.apache.http.util.Args;
  * Please note: the default Oracle JSSE implementation of {@link SSLContext#init(KeyManager[], TrustManager[], SecureRandom)}
  * accepts multiple key and trust managers, however only only first matching type is ever used.
  * See for example:
- * <a href="http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html#init%28javax.net.ssl.KeyManager[],%20javax.net.ssl.TrustManager[],%20java.security.SecureRandom%29">
+ * <a href=
+ * "http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html#init%28javax.net.ssl.KeyManager[],%20javax.net.ssl.TrustManager[],%20java.security.SecureRandom%29">
  * SSLContext.html#init
  * </a>
  * <p>
  * TODO Specify which Oracle JSSE versions the above has been verified.
- *  </p>
+ * </p>
+ * 
  * @since 4.4
  */
-public class SSLContextBuilder {
+public class SSLContextBuilder{
 
-    static final String TLS   = "TLS";
+    static final String             TLS                          = "TLS";
 
-    private String protocol;
-    private final Set<KeyManager> keyManagers;
-    private String keyManagerFactoryAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
-    private String keyStoreType = KeyStore.getDefaultType();
+    private String                  protocol;
+
+    private final Set<KeyManager>   keyManagers;
+
+    private String                  keyManagerFactoryAlgorithm   = KeyManagerFactory.getDefaultAlgorithm();
+
+    private String                  keyStoreType                 = KeyStore.getDefaultType();
+
     private final Set<TrustManager> trustManagers;
-    private String trustManagerFactoryAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
-    private SecureRandom secureRandom;
-    private Provider provider;
 
-    public static SSLContextBuilder create() {
+    private String                  trustManagerFactoryAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+
+    private SecureRandom            secureRandom;
+
+    private Provider                provider;
+
+    public static SSLContextBuilder create(){
         return new SSLContextBuilder();
     }
 
-    public SSLContextBuilder() {
+    public SSLContextBuilder(){
         super();
-        this.keyManagers = new LinkedHashSet<KeyManager>();
-        this.trustManagers = new LinkedHashSet<TrustManager>();
+        this.keyManagers = new LinkedHashSet<>();
+        this.trustManagers = new LinkedHashSet<>();
     }
 
     /**
@@ -116,7 +125,7 @@ public class SSLContextBuilder {
      * @deprecated Use {@link #setProtocol(String)}.
      */
     @Deprecated
-    public SSLContextBuilder useProtocol(final String protocol) {
+    public SSLContextBuilder useProtocol(final String protocol){
         this.protocol = protocol;
         return this;
     }
@@ -136,22 +145,22 @@ public class SSLContextBuilder {
      *      Cryptography Architecture Standard Algorithm Name Documentation</a>
      * @since 4.4.7
      */
-    public SSLContextBuilder setProtocol(final String protocol) {
+    public SSLContextBuilder setProtocol(final String protocol){
         this.protocol = protocol;
         return this;
     }
 
-    public SSLContextBuilder setSecureRandom(final SecureRandom secureRandom) {
+    public SSLContextBuilder setSecureRandom(final SecureRandom secureRandom){
         this.secureRandom = secureRandom;
         return this;
     }
 
-    public SSLContextBuilder setProvider(final Provider provider) {
+    public SSLContextBuilder setProvider(final Provider provider){
         this.provider = provider;
         return this;
     }
 
-    public SSLContextBuilder setProvider(final String name) {
+    public SSLContextBuilder setProvider(final String name){
         this.provider = Security.getProvider(name);
         return this;
     }
@@ -171,7 +180,7 @@ public class SSLContextBuilder {
      *      Cryptography Architecture Standard Algorithm Name Documentation</a>
      * @since 4.4.7
      */
-    public SSLContextBuilder setKeyStoreType(final String keyStoreType) {
+    public SSLContextBuilder setKeyStoreType(final String keyStoreType){
         this.keyStoreType = keyStoreType;
         return this;
     }
@@ -191,7 +200,7 @@ public class SSLContextBuilder {
      *      Cryptography Architecture Standard Algorithm Name Documentation</a>
      * @since 4.4.7
      */
-    public SSLContextBuilder setKeyManagerFactoryAlgorithm(final String keyManagerFactoryAlgorithm) {
+    public SSLContextBuilder setKeyManagerFactoryAlgorithm(final String keyManagerFactoryAlgorithm){
         this.keyManagerFactoryAlgorithm = keyManagerFactoryAlgorithm;
         return this;
     }
@@ -211,24 +220,22 @@ public class SSLContextBuilder {
      *      Cryptography Architecture Standard Algorithm Name Documentation</a>
      * @since 4.4.7
      */
-    public SSLContextBuilder setTrustManagerFactoryAlgorithm(final String trustManagerFactoryAlgorithm) {
+    public SSLContextBuilder setTrustManagerFactoryAlgorithm(final String trustManagerFactoryAlgorithm){
         this.trustManagerFactoryAlgorithm = trustManagerFactoryAlgorithm;
         return this;
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final KeyStore truststore,
-            final TrustStrategy trustStrategy) throws NoSuchAlgorithmException, KeyStoreException {
-        final TrustManagerFactory tmfactory = TrustManagerFactory
-                .getInstance(trustManagerFactoryAlgorithm == null ? TrustManagerFactory.getDefaultAlgorithm()
-                        : trustManagerFactoryAlgorithm);
+    public SSLContextBuilder loadTrustMaterial(final KeyStore truststore,final TrustStrategy trustStrategy)
+                    throws NoSuchAlgorithmException,KeyStoreException{
+        final TrustManagerFactory tmfactory = TrustManagerFactory.getInstance(
+                        trustManagerFactoryAlgorithm == null ? TrustManagerFactory.getDefaultAlgorithm() : trustManagerFactoryAlgorithm);
         tmfactory.init(truststore);
         final TrustManager[] tms = tmfactory.getTrustManagers();
-        if (tms != null) {
-            if (trustStrategy != null) {
-                for (int i = 0; i < tms.length; i++) {
+        if (tms != null){
+            if (trustStrategy != null){
+                for (int i = 0; i < tms.length; i++){
                     final TrustManager tm = tms[i];
-                    if (tm instanceof X509TrustManager) {
+                    if (tm instanceof X509TrustManager){
                         tms[i] = new TrustManagerDelegate((X509TrustManager) tm, trustStrategy);
                     }
                 }
@@ -238,73 +245,62 @@ public class SSLContextBuilder {
         return this;
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final TrustStrategy trustStrategy) throws NoSuchAlgorithmException, KeyStoreException {
+    public SSLContextBuilder loadTrustMaterial(final TrustStrategy trustStrategy) throws NoSuchAlgorithmException,KeyStoreException{
         return loadTrustMaterial(null, trustStrategy);
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final File file,
-            final char[] storePassword,
-            final TrustStrategy trustStrategy) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+    public SSLContextBuilder loadTrustMaterial(final File file,final char[] storePassword,final TrustStrategy trustStrategy)
+                    throws NoSuchAlgorithmException,KeyStoreException,CertificateException,IOException{
         Args.notNull(file, "Truststore file");
         final KeyStore trustStore = KeyStore.getInstance(keyStoreType);
         final FileInputStream inStream = new FileInputStream(file);
-        try {
+        try{
             trustStore.load(inStream, storePassword);
-        } finally {
+        }finally{
             inStream.close();
         }
         return loadTrustMaterial(trustStore, trustStrategy);
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final File file,
-            final char[] storePassword) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+    public SSLContextBuilder loadTrustMaterial(final File file,final char[] storePassword)
+                    throws NoSuchAlgorithmException,KeyStoreException,CertificateException,IOException{
         return loadTrustMaterial(file, storePassword, null);
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final File file) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+    public SSLContextBuilder loadTrustMaterial(final File file)
+                    throws NoSuchAlgorithmException,KeyStoreException,CertificateException,IOException{
         return loadTrustMaterial(file, null);
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final URL url,
-            final char[] storePassword,
-            final TrustStrategy trustStrategy) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+    public SSLContextBuilder loadTrustMaterial(final URL url,final char[] storePassword,final TrustStrategy trustStrategy)
+                    throws NoSuchAlgorithmException,KeyStoreException,CertificateException,IOException{
         Args.notNull(url, "Truststore URL");
         final KeyStore trustStore = KeyStore.getInstance(keyStoreType);
         final InputStream inStream = url.openStream();
-        try {
+        try{
             trustStore.load(inStream, storePassword);
-        } finally {
+        }finally{
             inStream.close();
         }
         return loadTrustMaterial(trustStore, trustStrategy);
     }
 
-    public SSLContextBuilder loadTrustMaterial(
-            final URL url,
-            final char[] storePassword) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+    public SSLContextBuilder loadTrustMaterial(final URL url,final char[] storePassword)
+                    throws NoSuchAlgorithmException,KeyStoreException,CertificateException,IOException{
         return loadTrustMaterial(url, storePassword, null);
     }
 
-    public SSLContextBuilder loadKeyMaterial(
-            final KeyStore keystore,
-            final char[] keyPassword,
-            final PrivateKeyStrategy aliasStrategy)
-            throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableKeyException {
-        final KeyManagerFactory kmfactory = KeyManagerFactory
-                .getInstance(keyManagerFactoryAlgorithm == null ? KeyManagerFactory.getDefaultAlgorithm()
-                        : keyManagerFactoryAlgorithm);
+    public SSLContextBuilder loadKeyMaterial(final KeyStore keystore,final char[] keyPassword,final PrivateKeyStrategy aliasStrategy)
+                    throws NoSuchAlgorithmException,KeyStoreException,UnrecoverableKeyException{
+        final KeyManagerFactory kmfactory = KeyManagerFactory.getInstance(
+                        keyManagerFactoryAlgorithm == null ? KeyManagerFactory.getDefaultAlgorithm() : keyManagerFactoryAlgorithm);
         kmfactory.init(keystore, keyPassword);
         final KeyManager[] kms = kmfactory.getKeyManagers();
-        if (kms != null) {
-            if (aliasStrategy != null) {
-                for (int i = 0; i < kms.length; i++) {
+        if (kms != null){
+            if (aliasStrategy != null){
+                for (int i = 0; i < kms.length; i++){
                     final KeyManager km = kms[i];
-                    if (km instanceof X509ExtendedKeyManager) {
+                    if (km instanceof X509ExtendedKeyManager){
                         kms[i] = new KeyManagerDelegate((X509ExtendedKeyManager) km, aliasStrategy);
                     }
                 }
@@ -314,198 +310,185 @@ public class SSLContextBuilder {
         return this;
     }
 
-    public SSLContextBuilder loadKeyMaterial(
-            final KeyStore keystore,
-            final char[] keyPassword) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableKeyException {
+    public SSLContextBuilder loadKeyMaterial(final KeyStore keystore,final char[] keyPassword)
+                    throws NoSuchAlgorithmException,KeyStoreException,UnrecoverableKeyException{
         return loadKeyMaterial(keystore, keyPassword, null);
     }
 
     public SSLContextBuilder loadKeyMaterial(
-            final File file,
-            final char[] storePassword,
-            final char[] keyPassword,
-            final PrivateKeyStrategy aliasStrategy) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableKeyException, CertificateException, IOException {
+                    final File file,
+                    final char[] storePassword,
+                    final char[] keyPassword,
+                    final PrivateKeyStrategy aliasStrategy)
+                    throws NoSuchAlgorithmException,KeyStoreException,UnrecoverableKeyException,CertificateException,IOException{
         Args.notNull(file, "Keystore file");
         final KeyStore identityStore = KeyStore.getInstance(keyStoreType);
         final FileInputStream inStream = new FileInputStream(file);
-        try {
+        try{
             identityStore.load(inStream, storePassword);
-        } finally {
+        }finally{
             inStream.close();
         }
         return loadKeyMaterial(identityStore, keyPassword, aliasStrategy);
     }
 
-    public SSLContextBuilder loadKeyMaterial(
-            final File file,
-            final char[] storePassword,
-            final char[] keyPassword) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableKeyException, CertificateException, IOException {
+    public SSLContextBuilder loadKeyMaterial(final File file,final char[] storePassword,final char[] keyPassword)
+                    throws NoSuchAlgorithmException,KeyStoreException,UnrecoverableKeyException,CertificateException,IOException{
         return loadKeyMaterial(file, storePassword, keyPassword, null);
     }
 
     public SSLContextBuilder loadKeyMaterial(
-            final URL url,
-            final char[] storePassword,
-            final char[] keyPassword,
-            final PrivateKeyStrategy aliasStrategy) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableKeyException, CertificateException, IOException {
+                    final URL url,
+                    final char[] storePassword,
+                    final char[] keyPassword,
+                    final PrivateKeyStrategy aliasStrategy)
+                    throws NoSuchAlgorithmException,KeyStoreException,UnrecoverableKeyException,CertificateException,IOException{
         Args.notNull(url, "Keystore URL");
         final KeyStore identityStore = KeyStore.getInstance(keyStoreType);
         final InputStream inStream = url.openStream();
-        try {
+        try{
             identityStore.load(inStream, storePassword);
-        } finally {
+        }finally{
             inStream.close();
         }
         return loadKeyMaterial(identityStore, keyPassword, aliasStrategy);
     }
 
-    public SSLContextBuilder loadKeyMaterial(
-            final URL url,
-            final char[] storePassword,
-            final char[] keyPassword) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableKeyException, CertificateException, IOException {
+    public SSLContextBuilder loadKeyMaterial(final URL url,final char[] storePassword,final char[] keyPassword)
+                    throws NoSuchAlgorithmException,KeyStoreException,UnrecoverableKeyException,CertificateException,IOException{
         return loadKeyMaterial(url, storePassword, keyPassword, null);
     }
 
     protected void initSSLContext(
-            final SSLContext sslContext,
-            final Collection<KeyManager> keyManagers,
-            final Collection<TrustManager> trustManagers,
-            final SecureRandom secureRandom) throws KeyManagementException {
+                    final SSLContext sslContext,
+                    final Collection<KeyManager> keyManagers,
+                    final Collection<TrustManager> trustManagers,
+                    final SecureRandom secureRandom) throws KeyManagementException{
         sslContext.init(
-                !keyManagers.isEmpty() ? keyManagers.toArray(new KeyManager[keyManagers.size()]) : null,
-                !trustManagers.isEmpty() ? trustManagers.toArray(new TrustManager[trustManagers.size()]) : null,
-                secureRandom);
+                        !keyManagers.isEmpty() ? keyManagers.toArray(new KeyManager[keyManagers.size()]) : null,
+                        !trustManagers.isEmpty() ? trustManagers.toArray(new TrustManager[trustManagers.size()]) : null,
+                        secureRandom);
     }
 
-    public SSLContext build() throws NoSuchAlgorithmException, KeyManagementException {
+    public SSLContext build() throws NoSuchAlgorithmException,KeyManagementException{
         final SSLContext sslContext;
         final String protocolStr = this.protocol != null ? this.protocol : TLS;
-        if (this.provider != null) {
+        if (this.provider != null){
             sslContext = SSLContext.getInstance(protocolStr, this.provider);
-        } else {
+        }else{
             sslContext = SSLContext.getInstance(protocolStr);
         }
         initSSLContext(sslContext, keyManagers, trustManagers, secureRandom);
         return sslContext;
     }
 
-    static class TrustManagerDelegate implements X509TrustManager {
+    static class TrustManagerDelegate implements X509TrustManager{
 
         private final X509TrustManager trustManager;
-        private final TrustStrategy trustStrategy;
 
-        TrustManagerDelegate(final X509TrustManager trustManager, final TrustStrategy trustStrategy) {
+        private final TrustStrategy    trustStrategy;
+
+        TrustManagerDelegate(final X509TrustManager trustManager, final TrustStrategy trustStrategy){
             super();
             this.trustManager = trustManager;
             this.trustStrategy = trustStrategy;
         }
 
         @Override
-        public void checkClientTrusted(
-                final X509Certificate[] chain, final String authType) throws CertificateException {
+        public void checkClientTrusted(final X509Certificate[] chain,final String authType) throws CertificateException{
             this.trustManager.checkClientTrusted(chain, authType);
         }
 
         @Override
-        public void checkServerTrusted(
-                final X509Certificate[] chain, final String authType) throws CertificateException {
-            if (!this.trustStrategy.isTrusted(chain, authType)) {
+        public void checkServerTrusted(final X509Certificate[] chain,final String authType) throws CertificateException{
+            if (!this.trustStrategy.isTrusted(chain, authType)){
                 this.trustManager.checkServerTrusted(chain, authType);
             }
         }
 
         @Override
-        public X509Certificate[] getAcceptedIssuers() {
+        public X509Certificate[] getAcceptedIssuers(){
             return this.trustManager.getAcceptedIssuers();
         }
 
     }
 
-    static class KeyManagerDelegate extends X509ExtendedKeyManager {
+    static class KeyManagerDelegate extends X509ExtendedKeyManager{
 
         private final X509ExtendedKeyManager keyManager;
-        private final PrivateKeyStrategy aliasStrategy;
 
-        KeyManagerDelegate(final X509ExtendedKeyManager keyManager, final PrivateKeyStrategy aliasStrategy) {
+        private final PrivateKeyStrategy     aliasStrategy;
+
+        KeyManagerDelegate(final X509ExtendedKeyManager keyManager, final PrivateKeyStrategy aliasStrategy){
             super();
             this.keyManager = keyManager;
             this.aliasStrategy = aliasStrategy;
         }
 
         @Override
-        public String[] getClientAliases(
-                final String keyType, final Principal[] issuers) {
+        public String[] getClientAliases(final String keyType,final Principal[] issuers){
             return this.keyManager.getClientAliases(keyType, issuers);
         }
 
-        public Map<String, PrivateKeyDetails> getClientAliasMap(
-                final String[] keyTypes, final Principal[] issuers) {
-            final Map<String, PrivateKeyDetails> validAliases = new HashMap<String, PrivateKeyDetails>();
-            for (final String keyType: keyTypes) {
+        public Map<String, PrivateKeyDetails> getClientAliasMap(final String[] keyTypes,final Principal[] issuers){
+            final Map<String, PrivateKeyDetails> validAliases = new HashMap<>();
+            for (final String keyType : keyTypes){
                 final String[] aliases = this.keyManager.getClientAliases(keyType, issuers);
-                if (aliases != null) {
-                    for (final String alias: aliases) {
-                        validAliases.put(alias,
-                                new PrivateKeyDetails(keyType, this.keyManager.getCertificateChain(alias)));
+                if (aliases != null){
+                    for (final String alias : aliases){
+                        validAliases.put(alias, new PrivateKeyDetails(keyType, this.keyManager.getCertificateChain(alias)));
                     }
                 }
             }
             return validAliases;
         }
 
-        public Map<String, PrivateKeyDetails> getServerAliasMap(
-                final String keyType, final Principal[] issuers) {
-            final Map<String, PrivateKeyDetails> validAliases = new HashMap<String, PrivateKeyDetails>();
+        public Map<String, PrivateKeyDetails> getServerAliasMap(final String keyType,final Principal[] issuers){
+            final Map<String, PrivateKeyDetails> validAliases = new HashMap<>();
             final String[] aliases = this.keyManager.getServerAliases(keyType, issuers);
-            if (aliases != null) {
-                for (final String alias: aliases) {
-                    validAliases.put(alias,
-                            new PrivateKeyDetails(keyType, this.keyManager.getCertificateChain(alias)));
+            if (aliases != null){
+                for (final String alias : aliases){
+                    validAliases.put(alias, new PrivateKeyDetails(keyType, this.keyManager.getCertificateChain(alias)));
                 }
             }
             return validAliases;
         }
 
         @Override
-        public String chooseClientAlias(
-                final String[] keyTypes, final Principal[] issuers, final Socket socket) {
+        public String chooseClientAlias(final String[] keyTypes,final Principal[] issuers,final Socket socket){
             final Map<String, PrivateKeyDetails> validAliases = getClientAliasMap(keyTypes, issuers);
             return this.aliasStrategy.chooseAlias(validAliases, socket);
         }
 
         @Override
-        public String[] getServerAliases(
-                final String keyType, final Principal[] issuers) {
+        public String[] getServerAliases(final String keyType,final Principal[] issuers){
             return this.keyManager.getServerAliases(keyType, issuers);
         }
 
         @Override
-        public String chooseServerAlias(
-                final String keyType, final Principal[] issuers, final Socket socket) {
+        public String chooseServerAlias(final String keyType,final Principal[] issuers,final Socket socket){
             final Map<String, PrivateKeyDetails> validAliases = getServerAliasMap(keyType, issuers);
             return this.aliasStrategy.chooseAlias(validAliases, socket);
         }
 
         @Override
-        public X509Certificate[] getCertificateChain(final String alias) {
+        public X509Certificate[] getCertificateChain(final String alias){
             return this.keyManager.getCertificateChain(alias);
         }
 
         @Override
-        public PrivateKey getPrivateKey(final String alias) {
+        public PrivateKey getPrivateKey(final String alias){
             return this.keyManager.getPrivateKey(alias);
         }
 
         @Override
-        public String chooseEngineClientAlias(
-                final String[] keyTypes, final Principal[] issuers, final SSLEngine sslEngine) {
+        public String chooseEngineClientAlias(final String[] keyTypes,final Principal[] issuers,final SSLEngine sslEngine){
             final Map<String, PrivateKeyDetails> validAliases = getClientAliasMap(keyTypes, issuers);
             return this.aliasStrategy.chooseAlias(validAliases, null);
         }
 
         @Override
-        public String chooseEngineServerAlias(
-                final String keyType, final Principal[] issuers, final SSLEngine sslEngine) {
+        public String chooseEngineServerAlias(final String keyType,final Principal[] issuers,final SSLEngine sslEngine){
             final Map<String, PrivateKeyDetails> validAliases = getServerAliasMap(keyType, issuers);
             return this.aliasStrategy.chooseAlias(validAliases, null);
         }
@@ -513,11 +496,10 @@ public class SSLContextBuilder {
     }
 
     @Override
-    public String toString() {
-        return "[provider=" + provider + ", protocol=" + protocol + ", keyStoreType=" + keyStoreType
-                + ", keyManagerFactoryAlgorithm=" + keyManagerFactoryAlgorithm + ", keyManagers=" + keyManagers
-                + ", trustManagerFactoryAlgorithm=" + trustManagerFactoryAlgorithm + ", trustManagers=" + trustManagers
-                + ", secureRandom=" + secureRandom + "]";
+    public String toString(){
+        return "[provider=" + provider + ", protocol=" + protocol + ", keyStoreType=" + keyStoreType + ", keyManagerFactoryAlgorithm="
+                        + keyManagerFactoryAlgorithm + ", keyManagers=" + keyManagers + ", trustManagerFactoryAlgorithm="
+                        + trustManagerFactoryAlgorithm + ", trustManagers=" + trustManagers + ", secureRandom=" + secureRandom + "]";
     }
 
 }

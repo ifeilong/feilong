@@ -38,7 +38,7 @@ import com.feilong.lib.org.apache.http.annotation.Obsolete;
  *
  * @since 4.0
  */
-public interface SetCookie2 extends SetCookie {
+public interface SetCookie2 extends SetCookie{
 
     /**
      * If a user agent (web browser) presents this cookie to a user, the
@@ -65,4 +65,3 @@ public interface SetCookie2 extends SetCookie {
     void setDiscard(boolean discard);
 
 }
-

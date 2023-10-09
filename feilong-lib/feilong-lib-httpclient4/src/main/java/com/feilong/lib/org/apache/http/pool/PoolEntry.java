@@ -43,38 +43,48 @@ import com.feilong.lib.org.apache.http.util.Args;
  * a connection state (usually a security principal or a unique token identifying
  * the user whose credentials have been used while establishing the connection).
  *
- * @param <T> the route type that represents the opposite endpoint of a pooled
- *   connection.
- * @param <C> the connection type.
+ * @param <T>
+ *            the route type that represents the opposite endpoint of a pooled
+ *            connection.
+ * @param <C>
+ *            the connection type.
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
 public abstract class PoolEntry<T, C> {
 
-    private final String id;
-    private final T route;
-    private final C conn;
-    private final long created;
-    private final long validityDeadline;
+    private final String    id;
 
-    private long updated;
+    private final T         route;
 
-    private long expiry;
+    private final C         conn;
+
+    private final long      created;
+
+    private final long      validityDeadline;
+
+    private long            updated;
+
+    private long            expiry;
 
     private volatile Object state;
 
     /**
      * Creates new {@code PoolEntry} instance.
      *
-     * @param id unique identifier of the pool entry. May be {@code null}.
-     * @param route route to the opposite endpoint.
-     * @param conn the connection.
-     * @param timeToLive maximum time to live. May be zero if the connection
-     *   does not have an expiry deadline.
-     * @param timeUnit time unit.
+     * @param id
+     *            unique identifier of the pool entry. May be {@code null}.
+     * @param route
+     *            route to the opposite endpoint.
+     * @param conn
+     *            the connection.
+     * @param timeToLive
+     *            maximum time to live. May be zero if the connection
+     *            does not have an expiry deadline.
+     * @param timeUnit
+     *            time unit.
      */
-    public PoolEntry(final String id, final T route, final C conn,
-            final long timeToLive, final TimeUnit timeUnit) {
+    public PoolEntry(final String id, final T route, final C conn, final long timeToLive, final TimeUnit timeUnit){
         super();
         Args.notNull(route, "Route");
         Args.notNull(conn, "Connection");
@@ -84,11 +94,11 @@ public abstract class PoolEntry<T, C> {
         this.conn = conn;
         this.created = System.currentTimeMillis();
         this.updated = this.created;
-        if (timeToLive > 0) {
+        if (timeToLive > 0){
             final long deadline = this.created + timeUnit.toMillis(timeToLive);
             // If the above overflows then default to Long.MAX_VALUE
             this.validityDeadline = deadline > 0 ? deadline : Long.MAX_VALUE;
-        } else {
+        }else{
             this.validityDeadline = Long.MAX_VALUE;
         }
         this.expiry = this.validityDeadline;
@@ -97,34 +107,37 @@ public abstract class PoolEntry<T, C> {
     /**
      * Creates new {@code PoolEntry} instance without an expiry deadline.
      *
-     * @param id unique identifier of the pool entry. May be {@code null}.
-     * @param route route to the opposite endpoint.
-     * @param conn the connection.
+     * @param id
+     *            unique identifier of the pool entry. May be {@code null}.
+     * @param route
+     *            route to the opposite endpoint.
+     * @param conn
+     *            the connection.
      */
-    public PoolEntry(final String id, final T route, final C conn) {
+    public PoolEntry(final String id, final T route, final C conn){
         this(id, route, conn, 0, TimeUnit.MILLISECONDS);
     }
 
-    public String getId() {
+    public String getId(){
         return this.id;
     }
 
-    public T getRoute() {
+    public T getRoute(){
         return this.route;
     }
 
-    public C getConnection() {
+    public C getConnection(){
         return this.conn;
     }
 
-    public long getCreated() {
+    public long getCreated(){
         return this.created;
     }
 
     /**
      * @since 4.4
      */
-    public long getValidityDeadline() {
+    public long getValidityDeadline(){
         return this.validityDeadline;
     }
 
@@ -132,39 +145,39 @@ public abstract class PoolEntry<T, C> {
      * @deprecated use {@link #getValidityDeadline()}
      */
     @Deprecated
-    public long getValidUnit() {
+    public long getValidUnit(){
         return this.validityDeadline;
     }
 
-    public Object getState() {
+    public Object getState(){
         return this.state;
     }
 
-    public void setState(final Object state) {
+    public void setState(final Object state){
         this.state = state;
     }
 
-    public synchronized long getUpdated() {
+    public synchronized long getUpdated(){
         return this.updated;
     }
 
-    public synchronized long getExpiry() {
+    public synchronized long getExpiry(){
         return this.expiry;
     }
 
-    public synchronized void updateExpiry(final long time, final TimeUnit timeUnit) {
+    public synchronized void updateExpiry(final long time,final TimeUnit timeUnit){
         Args.notNull(timeUnit, "Time unit");
         this.updated = System.currentTimeMillis();
         final long newExpiry;
-        if (time > 0) {
+        if (time > 0){
             newExpiry = this.updated + timeUnit.toMillis(time);
-        } else {
+        }else{
             newExpiry = Long.MAX_VALUE;
         }
         this.expiry = Math.min(newExpiry, this.validityDeadline);
     }
 
-    public synchronized boolean isExpired(final long now) {
+    public synchronized boolean isExpired(final long now){
         return now >= this.expiry;
     }
 
@@ -180,7 +193,7 @@ public abstract class PoolEntry<T, C> {
     public abstract boolean isClosed();
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append("[id:");
         buffer.append(this.id);

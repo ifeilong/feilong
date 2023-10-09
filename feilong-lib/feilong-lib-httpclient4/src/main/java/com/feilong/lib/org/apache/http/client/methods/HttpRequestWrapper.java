@@ -49,74 +49,79 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @SuppressWarnings("deprecation")
-public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRequest {
+public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRequest{
 
     private final HttpRequest original;
-    private final HttpHost target;
-    private final String method;
-    private RequestLine requestLine;
-    private ProtocolVersion version;
-    private URI uri;
 
-    private HttpRequestWrapper(final HttpRequest request, final HttpHost target) {
+    private final HttpHost    target;
+
+    private final String      method;
+
+    private RequestLine       requestLine;
+
+    private ProtocolVersion   version;
+
+    private URI               uri;
+
+    private HttpRequestWrapper(final HttpRequest request, final HttpHost target){
         super();
         this.original = Args.notNull(request, "HTTP request");
         this.target = target;
         this.version = this.original.getRequestLine().getProtocolVersion();
         this.method = this.original.getRequestLine().getMethod();
-        if (request instanceof HttpUriRequest) {
+        if (request instanceof HttpUriRequest){
             this.uri = ((HttpUriRequest) request).getURI();
-        } else {
+        }else{
             this.uri = null;
         }
         setHeaders(request.getAllHeaders());
     }
 
     @Override
-    public ProtocolVersion getProtocolVersion() {
+    public ProtocolVersion getProtocolVersion(){
         return this.version != null ? this.version : this.original.getProtocolVersion();
     }
 
-    public void setProtocolVersion(final ProtocolVersion version) {
+    public void setProtocolVersion(final ProtocolVersion version){
         this.version = version;
         this.requestLine = null;
     }
 
     @Override
-    public URI getURI() {
+    public URI getURI(){
         return this.uri;
     }
 
-    public void setURI(final URI uri) {
+    public void setURI(final URI uri){
         this.uri = uri;
         this.requestLine = null;
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return method;
     }
 
     @Override
-    public void abort() throws UnsupportedOperationException {
+    public void abort() throws UnsupportedOperationException{
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean isAborted() {
+    public boolean isAborted(){
         return false;
     }
 
     @Override
-    public RequestLine getRequestLine() {
-        if (this.requestLine == null) {
+    public RequestLine getRequestLine(){
+        if (this.requestLine == null){
             String requestUri;
-            if (this.uri != null) {
+            if (this.uri != null){
                 requestUri = this.uri.toASCIIString();
-            } else {
+            }else{
                 requestUri = this.original.getRequestLine().getUri();
             }
-            if (requestUri == null || requestUri.isEmpty()) {
+            if (requestUri == null || requestUri.isEmpty()){
                 requestUri = "/";
             }
             this.requestLine = new BasicRequestLine(this.method, requestUri, getProtocolVersion());
@@ -124,44 +129,43 @@ public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRe
         return this.requestLine;
     }
 
-    public HttpRequest getOriginal() {
+    public HttpRequest getOriginal(){
         return this.original;
     }
 
     /**
      * @since 4.4
      */
-    public HttpHost getTarget() {
+    public HttpHost getTarget(){
         return target;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return getRequestLine() + " " + this.headergroup;
     }
 
-    static class HttpEntityEnclosingRequestWrapper extends HttpRequestWrapper
-        implements HttpEntityEnclosingRequest {
+    static class HttpEntityEnclosingRequestWrapper extends HttpRequestWrapper implements HttpEntityEnclosingRequest{
 
         private HttpEntity entity;
 
-        HttpEntityEnclosingRequestWrapper(final HttpEntityEnclosingRequest request, final HttpHost target) {
+        HttpEntityEnclosingRequestWrapper(final HttpEntityEnclosingRequest request, final HttpHost target){
             super(request, target);
             this.entity = request.getEntity();
         }
 
         @Override
-        public HttpEntity getEntity() {
+        public HttpEntity getEntity(){
             return this.entity;
         }
 
         @Override
-        public void setEntity(final HttpEntity entity) {
+        public void setEntity(final HttpEntity entity){
             this.entity = entity;
         }
 
         @Override
-        public boolean expectContinue() {
+        public boolean expectContinue(){
             final Header expect = getFirstHeader(HTTP.EXPECT_DIRECTIVE);
             return expect != null && HTTP.EXPECT_CONTINUE.equalsIgnoreCase(expect.getValue());
         }
@@ -171,38 +175,39 @@ public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRe
     /**
      * Creates a mutable wrapper of the original request.
      *
-     * @param request original request
+     * @param request
+     *            original request
      * @return mutable request wrappering the original one
      */
-    public static HttpRequestWrapper wrap(final HttpRequest request) {
+    public static HttpRequestWrapper wrap(final HttpRequest request){
         return wrap(request, null);
     }
-
 
     /**
      * Creates a mutable wrapper of the original request.
      *
-     * @param request original request
-     * @param target original target, if explicitly specified
+     * @param request
+     *            original request
+     * @param target
+     *            original target, if explicitly specified
      * @return mutable request wrappering the original one
      * @since 4.4
      */
-    public static HttpRequestWrapper wrap(final HttpRequest request, final HttpHost target) {
+    public static HttpRequestWrapper wrap(final HttpRequest request,final HttpHost target){
         Args.notNull(request, "HTTP request");
         return request instanceof HttpEntityEnclosingRequest
-                        ? new HttpEntityEnclosingRequestWrapper(
-                                        (HttpEntityEnclosingRequest) request, target)
+                        ? new HttpEntityEnclosingRequestWrapper((HttpEntityEnclosingRequest) request, target)
                         : new HttpRequestWrapper(request, target);
     }
 
     /**
      * @deprecated (4.3) use
-     *   {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
+     *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
      */
     @Override
     @Deprecated
-    public HttpParams getParams() {
-        if (this.params == null) {
+    public HttpParams getParams(){
+        if (this.params == null){
             this.params = original.getParams().copy();
         }
         return this.params;

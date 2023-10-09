@@ -40,49 +40,52 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public final class CookieOrigin {
+public final class CookieOrigin{
 
-    private final String host;
-    private final int port;
-    private final String path;
+    private final String  host;
+
+    private final int     port;
+
+    private final String  path;
+
     private final boolean secure;
 
-    public CookieOrigin(final String host, final int port, final String path, final boolean secure) {
+    public CookieOrigin(final String host, final int port, final String path, final boolean secure){
         super();
         Args.notBlank(host, "Host");
         Args.notNegative(port, "Port");
         Args.notNull(path, "Path");
         this.host = host.toLowerCase(Locale.ROOT);
         this.port = port;
-        if (!TextUtils.isBlank(path)) {
+        if (!TextUtils.isBlank(path)){
             this.path = path;
-        } else {
+        }else{
             this.path = "/";
         }
         this.secure = secure;
     }
 
-    public String getHost() {
+    public String getHost(){
         return this.host;
     }
 
-    public String getPath() {
+    public String getPath(){
         return this.path;
     }
 
-    public int getPort() {
+    public int getPort(){
         return this.port;
     }
 
-    public boolean isSecure() {
+    public boolean isSecure(){
         return this.secure;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append('[');
-        if (this.secure) {
+        if (this.secure){
             buffer.append("(secure)");
         }
         buffer.append(this.host);

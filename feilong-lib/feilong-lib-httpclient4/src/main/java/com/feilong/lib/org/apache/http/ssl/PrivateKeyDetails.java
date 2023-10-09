@@ -36,27 +36,28 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.4
  */
-public final class PrivateKeyDetails {
+public final class PrivateKeyDetails{
 
-    private final String type;
+    private final String            type;
+
     private final X509Certificate[] certChain;
 
-    public PrivateKeyDetails(final String type, final X509Certificate[] certChain) {
+    public PrivateKeyDetails(final String type, final X509Certificate[] certChain){
         super();
         this.type = Args.notNull(type, "Private key type");
         this.certChain = certChain;
     }
 
-    public String getType() {
+    public String getType(){
         return type;
     }
 
-    public X509Certificate[] getCertChain() {
+    public X509Certificate[] getCertChain(){
         return certChain;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return type + ':' + Arrays.toString(certChain);
     }
 

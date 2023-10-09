@@ -40,11 +40,11 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class KerberosCredentials implements Credentials, Serializable {
+public class KerberosCredentials implements Credentials,Serializable{
 
-    private static final long serialVersionUID = 487421613855550713L;
+    private static final long   serialVersionUID = 487421613855550713L;
 
-    /** GSSCredential  */
+    /** GSSCredential */
     private final GSSCredential gssCredential;
 
     /**
@@ -52,21 +52,21 @@ public class KerberosCredentials implements Credentials, Serializable {
      *
      * @param gssCredential
      */
-    public KerberosCredentials(final GSSCredential gssCredential) {
+    public KerberosCredentials(final GSSCredential gssCredential){
         this.gssCredential = gssCredential;
     }
 
-    public GSSCredential getGSSCredential() {
+    public GSSCredential getGSSCredential(){
         return gssCredential;
     }
 
     @Override
-    public Principal getUserPrincipal() {
+    public Principal getUserPrincipal(){
         return null;
     }
 
     @Override
-    public String getPassword() {
+    public String getPassword(){
         return null;
     }
 

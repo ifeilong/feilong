@@ -56,37 +56,36 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class ResponseContentEncoding implements HttpResponseInterceptor {
+public class ResponseContentEncoding implements HttpResponseInterceptor{
 
-    public static final String UNCOMPRESSED = "http.client.response.uncompressed";
+    public static final String               UNCOMPRESSED = "http.client.response.uncompressed";
 
     private final Lookup<InputStreamFactory> decoderRegistry;
-    private final boolean ignoreUnknown;
+
+    private final boolean                    ignoreUnknown;
 
     /**
      * @since 4.5
      */
-    public ResponseContentEncoding(final Lookup<InputStreamFactory> decoderRegistry, final boolean ignoreUnknown) {
-        this.decoderRegistry = decoderRegistry != null ? decoderRegistry :
-            RegistryBuilder.<InputStreamFactory>create()
-                    .register("gzip", GZIPInputStreamFactory.getInstance())
-                    .register("x-gzip", GZIPInputStreamFactory.getInstance())
-                    .register("deflate", DeflateInputStreamFactory.getInstance())
-                    .build();
+    public ResponseContentEncoding(final Lookup<InputStreamFactory> decoderRegistry, final boolean ignoreUnknown){
+        this.decoderRegistry = decoderRegistry != null ? decoderRegistry
+                        : RegistryBuilder.<InputStreamFactory> create().register("gzip", GZIPInputStreamFactory.getInstance())
+                                        .register("x-gzip", GZIPInputStreamFactory.getInstance())
+                                        .register("deflate", DeflateInputStreamFactory.getInstance()).build();
         this.ignoreUnknown = ignoreUnknown;
     }
 
     /**
      * @since 4.5
      */
-    public ResponseContentEncoding(final boolean ignoreUnknown) {
+    public ResponseContentEncoding(final boolean ignoreUnknown){
         this(null, ignoreUnknown);
     }
 
     /**
      * @since 4.4
      */
-    public ResponseContentEncoding(final Lookup<InputStreamFactory> decoderRegistry) {
+    public ResponseContentEncoding(final Lookup<InputStreamFactory> decoderRegistry){
         this(decoderRegistry, true);
     }
 
@@ -98,34 +97,32 @@ public class ResponseContentEncoding implements HttpResponseInterceptor {
      * <li>deflate - see {@link com.feilong.lib.org.apache.http.client.entity.DeflateInputStream}</li>
      * </ul>
      */
-    public ResponseContentEncoding() {
+    public ResponseContentEncoding(){
         this(null);
     }
 
     @Override
-    public void process(
-            final HttpResponse response,
-            final HttpContext context) throws HttpException, IOException {
+    public void process(final HttpResponse response,final HttpContext context) throws HttpException,IOException{
         final HttpEntity entity = response.getEntity();
 
         final HttpClientContext clientContext = HttpClientContext.adapt(context);
         final RequestConfig requestConfig = clientContext.getRequestConfig();
         // entity can be null in case of 304 Not Modified, 204 No Content or similar
         // check for zero length entity.
-        if (requestConfig.isContentCompressionEnabled() && entity != null && entity.getContentLength() != 0) {
+        if (requestConfig.isContentCompressionEnabled() && entity != null && entity.getContentLength() != 0){
             final Header ceheader = entity.getContentEncoding();
-            if (ceheader != null) {
+            if (ceheader != null){
                 final HeaderElement[] codecs = ceheader.getElements();
-                for (final HeaderElement codec : codecs) {
+                for (final HeaderElement codec : codecs){
                     final String codecname = codec.getName().toLowerCase(Locale.ROOT);
                     final InputStreamFactory decoderFactory = decoderRegistry.lookup(codecname);
-                    if (decoderFactory != null) {
+                    if (decoderFactory != null){
                         response.setEntity(new DecompressingEntity(response.getEntity(), decoderFactory));
                         response.removeHeaders("Content-Length");
                         response.removeHeaders("Content-Encoding");
                         response.removeHeaders("Content-MD5");
-                    } else {
-                        if (!"identity".equals(codecname) && !ignoreUnknown) {
+                    }else{
+                        if (!"identity".equals(codecname) && !ignoreUnknown){
                             throw new HttpException("Unsupported Content-Encoding: " + codec.getName());
                         }
                     }

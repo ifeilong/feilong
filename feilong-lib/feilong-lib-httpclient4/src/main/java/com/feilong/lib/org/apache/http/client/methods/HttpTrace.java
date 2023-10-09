@@ -36,40 +36,41 @@ import java.net.URI;
  * <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>:
  * </p>
  * <blockquote>
- *  The TRACE method is used to invoke a remote, application-layer loop-
- *  back of the request message. The final recipient of the request
- *  SHOULD reflect the message received back to the client as the
- *  entity-body of a 200 (OK) response. The final recipient is either the
- *  origin server or the first proxy or gateway to receive a Max-Forwards
- *  value of zero (0) in the request (see section 14.31). A TRACE request
- *  MUST NOT include an entity.
+ * The TRACE method is used to invoke a remote, application-layer loop-
+ * back of the request message. The final recipient of the request
+ * SHOULD reflect the message received back to the client as the
+ * entity-body of a 200 (OK) response. The final recipient is either the
+ * origin server or the first proxy or gateway to receive a Max-Forwards
+ * value of zero (0) in the request (see section 14.31). A TRACE request
+ * MUST NOT include an entity.
  * </blockquote>
  *
  * @since 4.0
  */
-public class HttpTrace extends HttpRequestBase {
+public class HttpTrace extends HttpRequestBase{
 
     public final static String METHOD_NAME = "TRACE";
 
-    public HttpTrace() {
+    public HttpTrace(){
         super();
     }
 
-    public HttpTrace(final URI uri) {
+    public HttpTrace(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpTrace(final String uri) {
+    public HttpTrace(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

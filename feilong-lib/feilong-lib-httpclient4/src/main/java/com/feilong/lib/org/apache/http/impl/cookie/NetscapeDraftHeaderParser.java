@@ -48,53 +48,49 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NetscapeDraftHeaderParser {
+public class NetscapeDraftHeaderParser{
 
-    public final static NetscapeDraftHeaderParser DEFAULT = new NetscapeDraftHeaderParser();
+    public final static NetscapeDraftHeaderParser DEFAULT         = new NetscapeDraftHeaderParser();
 
-    private final static char PARAM_DELIMITER                = ';';
+    private final static char                     PARAM_DELIMITER = ';';
 
     // IMPORTANT!
     // These private static variables must be treated as immutable and never exposed outside this class
-    private static final BitSet TOKEN_DELIMS = TokenParser.INIT_BITSET('=', PARAM_DELIMITER);
-    private static final BitSet VALUE_DELIMS = TokenParser.INIT_BITSET(PARAM_DELIMITER);
+    private static final BitSet                   TOKEN_DELIMS    = TokenParser.INIT_BITSET('=', PARAM_DELIMITER);
 
-    private final TokenParser tokenParser;
+    private static final BitSet                   VALUE_DELIMS    = TokenParser.INIT_BITSET(PARAM_DELIMITER);
 
-    public NetscapeDraftHeaderParser() {
+    private final TokenParser                     tokenParser;
+
+    public NetscapeDraftHeaderParser(){
         super();
         this.tokenParser = TokenParser.INSTANCE;
     }
 
-    public HeaderElement parseHeader(
-            final CharArrayBuffer buffer,
-            final ParserCursor cursor) throws ParseException {
+    public HeaderElement parseHeader(final CharArrayBuffer buffer,final ParserCursor cursor) throws ParseException{
         Args.notNull(buffer, "Char array buffer");
         Args.notNull(cursor, "Parser cursor");
         final NameValuePair nvp = parseNameValuePair(buffer, cursor);
-        final List<NameValuePair> params = new ArrayList<NameValuePair>();
-        while (!cursor.atEnd()) {
+        final List<NameValuePair> params = new ArrayList<>();
+        while (!cursor.atEnd()){
             final NameValuePair param = parseNameValuePair(buffer, cursor);
             params.add(param);
         }
-        return new BasicHeaderElement(
-                nvp.getName(),
-                nvp.getValue(), params.toArray(new NameValuePair[params.size()]));
+        return new BasicHeaderElement(nvp.getName(), nvp.getValue(), params.toArray(new NameValuePair[params.size()]));
     }
 
-    private NameValuePair parseNameValuePair(
-            final CharArrayBuffer buffer, final ParserCursor cursor) {
+    private NameValuePair parseNameValuePair(final CharArrayBuffer buffer,final ParserCursor cursor){
         final String name = tokenParser.parseToken(buffer, cursor, TOKEN_DELIMS);
-        if (cursor.atEnd()) {
+        if (cursor.atEnd()){
             return new BasicNameValuePair(name, null);
         }
         final int delim = buffer.charAt(cursor.getPos());
         cursor.updatePos(cursor.getPos() + 1);
-        if (delim != '=') {
+        if (delim != '='){
             return new BasicNameValuePair(name, null);
         }
         final String value = tokenParser.parseToken(buffer, cursor, VALUE_DELIMS);
-        if (!cursor.atEnd()) {
+        if (!cursor.atEnd()){
             cursor.updatePos(cursor.getPos() + 1);
         }
         return new BasicNameValuePair(name, value);

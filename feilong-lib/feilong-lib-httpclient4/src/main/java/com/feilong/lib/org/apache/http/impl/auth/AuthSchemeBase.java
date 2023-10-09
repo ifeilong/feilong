@@ -52,7 +52,7 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.0
  */
-public abstract class AuthSchemeBase implements ContextAwareAuthScheme {
+public abstract class AuthSchemeBase implements ContextAwareAuthScheme{
 
     protected ChallengeState challengeState;
 
@@ -65,12 +65,12 @@ public abstract class AuthSchemeBase implements ContextAwareAuthScheme {
      * @deprecated (4.3) do not use.
      */
     @Deprecated
-    public AuthSchemeBase(final ChallengeState challengeState) {
+    public AuthSchemeBase(final ChallengeState challengeState){
         super();
         this.challengeState = challengeState;
     }
 
-    public AuthSchemeBase() {
+    public AuthSchemeBase(){
         super();
     }
 
@@ -79,71 +79,69 @@ public abstract class AuthSchemeBase implements ContextAwareAuthScheme {
      * may involve multiple challenge-response exchanges. Such schemes must be able
      * to maintain the state information when dealing with sequential challenges
      *
-     * @param header the challenge header
+     * @param header
+     *            the challenge header
      *
-     * @throws MalformedChallengeException is thrown if the authentication challenge
-     * is malformed
+     * @throws MalformedChallengeException
+     *             is thrown if the authentication challenge
+     *             is malformed
      */
     @Override
-    public void processChallenge(final Header header) throws MalformedChallengeException {
+    public void processChallenge(final Header header) throws MalformedChallengeException{
         Args.notNull(header, "Header");
         final String authheader = header.getName();
-        if (authheader.equalsIgnoreCase(AUTH.WWW_AUTH)) {
+        if (authheader.equalsIgnoreCase(AUTH.WWW_AUTH)){
             this.challengeState = ChallengeState.TARGET;
-        } else if (authheader.equalsIgnoreCase(AUTH.PROXY_AUTH)) {
+        }else if (authheader.equalsIgnoreCase(AUTH.PROXY_AUTH)){
             this.challengeState = ChallengeState.PROXY;
-        } else {
+        }else{
             throw new MalformedChallengeException("Unexpected header name: " + authheader);
         }
 
         final CharArrayBuffer buffer;
         int pos;
-        if (header instanceof FormattedHeader) {
+        if (header instanceof FormattedHeader){
             buffer = ((FormattedHeader) header).getBuffer();
             pos = ((FormattedHeader) header).getValuePos();
-        } else {
+        }else{
             final String s = header.getValue();
-            if (s == null) {
+            if (s == null){
                 throw new MalformedChallengeException("Header value is null");
             }
             buffer = new CharArrayBuffer(s.length());
             buffer.append(s);
             pos = 0;
         }
-        while (pos < buffer.length() && HTTP.isWhitespace(buffer.charAt(pos))) {
+        while (pos < buffer.length() && HTTP.isWhitespace(buffer.charAt(pos))){
             pos++;
         }
         final int beginIndex = pos;
-        while (pos < buffer.length() && !HTTP.isWhitespace(buffer.charAt(pos))) {
+        while (pos < buffer.length() && !HTTP.isWhitespace(buffer.charAt(pos))){
             pos++;
         }
         final int endIndex = pos;
         final String s = buffer.substring(beginIndex, endIndex);
-        if (!s.equalsIgnoreCase(getSchemeName())) {
+        if (!s.equalsIgnoreCase(getSchemeName())){
             throw new MalformedChallengeException("Invalid scheme identifier: " + s);
         }
 
         parseChallenge(buffer, pos, buffer.length());
     }
 
-
     @Override
     @SuppressWarnings("deprecation")
-    public Header authenticate(
-            final Credentials credentials,
-            final HttpRequest request,
-            final HttpContext context) throws AuthenticationException {
+    public Header authenticate(final Credentials credentials,final HttpRequest request,final HttpContext context)
+                    throws AuthenticationException{
         return authenticate(credentials, request);
     }
 
-    protected abstract void parseChallenge(
-            CharArrayBuffer buffer, int beginIndex, int endIndex) throws MalformedChallengeException;
+    protected abstract void parseChallenge(CharArrayBuffer buffer,int beginIndex,int endIndex) throws MalformedChallengeException;
 
     /**
      * Returns {@code true} if authenticating against a proxy, {@code false}
      * otherwise.
      */
-    public boolean isProxy() {
+    public boolean isProxy(){
         return this.challengeState != null && this.challengeState == ChallengeState.PROXY;
     }
 
@@ -152,12 +150,12 @@ public abstract class AuthSchemeBase implements ContextAwareAuthScheme {
      *
      * @since 4.2
      */
-    public ChallengeState getChallengeState() {
+    public ChallengeState getChallengeState(){
         return this.challengeState;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final String name = getSchemeName();
         return name != null ? name.toUpperCase(Locale.ROOT) : super.toString();
     }

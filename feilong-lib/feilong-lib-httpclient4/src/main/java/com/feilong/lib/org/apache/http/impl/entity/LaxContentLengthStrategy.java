@@ -49,21 +49,22 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class LaxContentLengthStrategy implements ContentLengthStrategy {
+public class LaxContentLengthStrategy implements ContentLengthStrategy{
 
     public static final LaxContentLengthStrategy INSTANCE = new LaxContentLengthStrategy();
 
-    private final int implicitLen;
+    private final int                            implicitLen;
 
     /**
      * Creates {@code LaxContentLengthStrategy} instance with the given length used per default
      * when content length is not explicitly specified in the message.
      *
-     * @param implicitLen implicit content length.
+     * @param implicitLen
+     *            implicit content length.
      *
      * @since 4.2
      */
-    public LaxContentLengthStrategy(final int implicitLen) {
+    public LaxContentLengthStrategy(final int implicitLen){
         super();
         this.implicitLen = implicitLen;
     }
@@ -72,48 +73,44 @@ public class LaxContentLengthStrategy implements ContentLengthStrategy {
      * Creates {@code LaxContentLengthStrategy} instance. {@link ContentLengthStrategy#IDENTITY}
      * is used per default when content length is not explicitly specified in the message.
      */
-    public LaxContentLengthStrategy() {
+    public LaxContentLengthStrategy(){
         this(IDENTITY);
     }
 
     @Override
-    public long determineLength(final HttpMessage message) throws HttpException {
+    public long determineLength(final HttpMessage message) throws HttpException{
         Args.notNull(message, "HTTP message");
 
         final Header transferEncodingHeader = message.getFirstHeader(HTTP.TRANSFER_ENCODING);
         // We use Transfer-Encoding if present and ignore Content-Length.
         // RFC2616, 4.4 item number 3
-        if (transferEncodingHeader != null) {
+        if (transferEncodingHeader != null){
             final HeaderElement[] encodings;
-            try {
+            try{
                 encodings = transferEncodingHeader.getElements();
-            } catch (final ParseException px) {
-                throw new ProtocolException
-                    ("Invalid Transfer-Encoding header value: " +
-                     transferEncodingHeader, px);
+            }catch (final ParseException px){
+                throw new ProtocolException("Invalid Transfer-Encoding header value: " + transferEncodingHeader, px);
             }
             // The chunked encoding must be the last one applied RFC2616, 14.41
             final int len = encodings.length;
-            if (HTTP.IDENTITY_CODING.equalsIgnoreCase(transferEncodingHeader.getValue())) {
+            if (HTTP.IDENTITY_CODING.equalsIgnoreCase(transferEncodingHeader.getValue())){
                 return IDENTITY;
-            } else if ((len > 0) && (HTTP.CHUNK_CODING.equalsIgnoreCase(
-                    encodings[len - 1].getName()))) {
+            }else if ((len > 0) && (HTTP.CHUNK_CODING.equalsIgnoreCase(encodings[len - 1].getName()))){
                 return CHUNKED;
-            } else {
+            }else{
                 return IDENTITY;
             }
         }
         final Header contentLengthHeader = message.getFirstHeader(HTTP.CONTENT_LEN);
-        if (contentLengthHeader != null) {
+        if (contentLengthHeader != null){
             long contentLen = -1;
             final Header[] headers = message.getHeaders(HTTP.CONTENT_LEN);
-            for (int i = headers.length - 1; i >= 0; i--) {
+            for (int i = headers.length - 1; i >= 0; i--){
                 final Header header = headers[i];
-                try {
+                try{
                     contentLen = Long.parseLong(header.getValue());
                     break;
-                } catch (final NumberFormatException ignore) {
-                }
+                }catch (final NumberFormatException ignore){}
                 // See if we can have better luck with another header, if present
             }
             return contentLen >= 0 ? contentLen : IDENTITY;

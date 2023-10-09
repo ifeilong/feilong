@@ -33,7 +33,7 @@ package com.feilong.lib.org.apache.http.cookie;
  *
  * @since 4.1
  */
-public class CookieRestrictionViolationException extends MalformedCookieException {
+public class CookieRestrictionViolationException extends MalformedCookieException{
 
     private static final long serialVersionUID = 7371235577078589013L;
 
@@ -41,7 +41,7 @@ public class CookieRestrictionViolationException extends MalformedCookieExceptio
      * Creates a new CookeFormatViolationException with a {@code null} detail
      * message.
      */
-    public CookieRestrictionViolationException() {
+    public CookieRestrictionViolationException(){
         super();
     }
 
@@ -49,9 +49,10 @@ public class CookieRestrictionViolationException extends MalformedCookieExceptio
      * Creates a new CookeRestrictionViolationException with a specified
      * message string.
      *
-     * @param message The exception detail message
+     * @param message
+     *            The exception detail message
      */
-    public CookieRestrictionViolationException(final String message) {
+    public CookieRestrictionViolationException(final String message){
         super(message);
     }
 

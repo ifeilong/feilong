@@ -27,7 +27,6 @@
 
 package com.feilong.lib.org.apache.http.config;
 
-
 /**
  * Generic lookup by low-case string ID.
  *

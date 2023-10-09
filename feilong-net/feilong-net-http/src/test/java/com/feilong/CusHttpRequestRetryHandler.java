@@ -44,8 +44,9 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @see com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler
  * @see com.feilong.lib.org.apache.http.impl.client.StandardHttpRequestRetryHandler
  * @since 3.1.1
- * 
+ * @deprecated 没有用
  */
+@Deprecated
 public class CusHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{
 
     @Override
@@ -62,6 +63,8 @@ public class CusHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{
             // 不要重试SSL握手异常
             return false;
         }
+
+        //---------------------------------------------------------------
         HttpRequest request = (HttpRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
         boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);
         if (idempotent){

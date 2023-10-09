@@ -32,25 +32,27 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @since 4.4
  */
-class ThreadFactoryImpl implements ThreadFactory {
+class ThreadFactoryImpl implements ThreadFactory{
 
-    private final String namePrefix;
+    private final String      namePrefix;
+
     private final ThreadGroup group;
-    private final AtomicLong count;
 
-    ThreadFactoryImpl(final String namePrefix, final ThreadGroup group) {
+    private final AtomicLong  count;
+
+    ThreadFactoryImpl(final String namePrefix, final ThreadGroup group){
         this.namePrefix = namePrefix;
         this.group = group;
         this.count = new AtomicLong();
     }
 
-    ThreadFactoryImpl(final String namePrefix) {
+    ThreadFactoryImpl(final String namePrefix){
         this(namePrefix, null);
     }
 
     @Override
-    public Thread newThread(final Runnable target) {
-        return new Thread(this.group, target, this.namePrefix + "-"  + this.count.incrementAndGet());
+    public Thread newThread(final Runnable target){
+        return new Thread(this.group, target, this.namePrefix + "-" + this.count.incrementAndGet());
     }
 
 }

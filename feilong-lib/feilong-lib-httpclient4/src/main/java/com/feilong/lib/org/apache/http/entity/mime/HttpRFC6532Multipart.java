@@ -39,31 +39,26 @@ import java.util.List;
  *
  * @since 4.3
  */
-class HttpRFC6532Multipart extends AbstractMultipartForm {
+class HttpRFC6532Multipart extends AbstractMultipartForm{
 
     private final List<FormBodyPart> parts;
 
-    public HttpRFC6532Multipart(
-            final Charset charset,
-            final String boundary,
-            final List<FormBodyPart> parts) {
+    public HttpRFC6532Multipart(final Charset charset, final String boundary, final List<FormBodyPart> parts){
         super(charset, boundary);
         this.parts = parts;
     }
 
     @Override
-    public List<FormBodyPart> getBodyParts() {
+    public List<FormBodyPart> getBodyParts(){
         return this.parts;
     }
 
     @Override
-    protected void formatMultipartHeader(
-        final FormBodyPart part,
-        final OutputStream out) throws IOException {
+    protected void formatMultipartHeader(final FormBodyPart part,final OutputStream out) throws IOException{
 
         // For RFC6532, we output all fields with UTF-8 encoding.
         final Header header = part.getHeader();
-        for (final MinimalField field: header) {
+        for (final MinimalField field : header){
             writeField(field, MIME.UTF8_CHARSET, out);
         }
     }

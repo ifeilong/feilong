@@ -39,36 +39,34 @@ import com.feilong.lib.org.apache.http.protocol.HTTP;
  *
  * @since 4.0
  */
-public class BasicHttpEntityEnclosingRequest
-            extends BasicHttpRequest implements HttpEntityEnclosingRequest {
+public class BasicHttpEntityEnclosingRequest extends BasicHttpRequest implements HttpEntityEnclosingRequest{
 
     private HttpEntity entity;
 
-    public BasicHttpEntityEnclosingRequest(final String method, final String uri) {
+    public BasicHttpEntityEnclosingRequest(final String method, final String uri){
         super(method, uri);
     }
 
-    public BasicHttpEntityEnclosingRequest(final String method, final String uri,
-            final ProtocolVersion ver) {
+    public BasicHttpEntityEnclosingRequest(final String method, final String uri, final ProtocolVersion ver){
         super(method, uri, ver);
     }
 
-    public BasicHttpEntityEnclosingRequest(final RequestLine requestline) {
+    public BasicHttpEntityEnclosingRequest(final RequestLine requestline){
         super(requestline);
     }
 
     @Override
-    public HttpEntity getEntity() {
+    public HttpEntity getEntity(){
         return this.entity;
     }
 
     @Override
-    public void setEntity(final HttpEntity entity) {
+    public void setEntity(final HttpEntity entity){
         this.entity = entity;
     }
 
     @Override
-    public boolean expectContinue() {
+    public boolean expectContinue(){
         final Header expect = getFirstHeader(HTTP.EXPECT_DIRECTIVE);
         return expect != null && HTTP.EXPECT_CONTINUE.equalsIgnoreCase(expect.getValue());
     }

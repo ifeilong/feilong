@@ -44,30 +44,30 @@ import java.net.URI;
  *
  * @since 4.0
  */
-public class HttpDelete extends HttpRequestBase {
+public class HttpDelete extends HttpRequestBase{
 
     public final static String METHOD_NAME = "DELETE";
 
-
-    public HttpDelete() {
+    public HttpDelete(){
         super();
     }
 
-    public HttpDelete(final URI uri) {
+    public HttpDelete(final URI uri){
         super();
         setURI(uri);
     }
 
     /**
-     * @throws IllegalArgumentException if the uri is invalid.
+     * @throws IllegalArgumentException
+     *             if the uri is invalid.
      */
-    public HttpDelete(final String uri) {
+    public HttpDelete(final String uri){
         super();
         setURI(URI.create(uri));
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return METHOD_NAME;
     }
 

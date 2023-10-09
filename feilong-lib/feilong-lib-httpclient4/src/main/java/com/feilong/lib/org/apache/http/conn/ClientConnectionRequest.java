@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  * @deprecated (4.3) replaced by {@link ConnectionRequest}.
  */
 @Deprecated
-public interface ClientConnectionRequest {
+public interface ClientConnectionRequest{
 
     /**
      * Obtains a connection within a given time.
@@ -50,20 +50,21 @@ public interface ClientConnectionRequest {
      * before this began, an {@link InterruptedException} will
      * be thrown.
      *
-     * @param timeout   the timeout, 0 or negative for no timeout
-     * @param timeUnit     the unit for the {@code timeout},
-     *                  may be {@code null} only if there is no timeout
+     * @param timeout
+     *            the timeout, 0 or negative for no timeout
+     * @param timeUnit
+     *            the unit for the {@code timeout},
+     *            may be {@code null} only if there is no timeout
      *
-     * @return  a connection that can be used to communicate
-     *          along the given route
+     * @return a connection that can be used to communicate
+     *         along the given route
      *
      * @throws ConnectionPoolTimeoutException
-     *         in case of a timeout
+     *             in case of a timeout
      * @throws InterruptedException
-     *         if the calling thread is interrupted while waiting
+     *             if the calling thread is interrupted while waiting
      */
-    ManagedClientConnection getConnection(long timeout, TimeUnit timeUnit)
-        throws InterruptedException, ConnectionPoolTimeoutException;
+    ManagedClientConnection getConnection(long timeout,TimeUnit timeUnit) throws InterruptedException,ConnectionPoolTimeoutException;
 
     /**
      * Aborts the call to {@link #getConnection(long, TimeUnit)},

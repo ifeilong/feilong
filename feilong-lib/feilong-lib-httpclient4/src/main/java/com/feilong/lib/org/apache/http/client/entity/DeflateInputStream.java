@@ -34,19 +34,19 @@ import java.util.zip.InflaterInputStream;
 import java.util.zip.ZipException;
 
 /**
- * Deflate input stream.    This class includes logic needed for various Rfc's in order
+ * Deflate input stream. This class includes logic needed for various Rfc's in order
  * to reasonably implement the "deflate" compression style.
  */
-public class DeflateInputStream extends InputStream {
+public class DeflateInputStream extends InputStream{
 
     private final InputStream sourceStream;
 
-    public DeflateInputStream(final InputStream wrapped) throws IOException {
+    public DeflateInputStream(final InputStream wrapped) throws IOException{
 
         final PushbackInputStream pushback = new PushbackInputStream(wrapped, 2);
         final int i1 = pushback.read();
         final int i2 = pushback.read();
-        if (i1 == -1 || i2 == -1) {
+        if (i1 == -1 || i2 == -1){
             throw new ZipException("Unexpected end of stream");
         }
 
@@ -58,7 +58,7 @@ public class DeflateInputStream extends InputStream {
         final int compressionMethod = b1 & 0xF;
         final int compressionInfo = b1 >> 4 & 0xF;
         final int b2 = i2 & 0xFF;
-        if (compressionMethod == 8 && compressionInfo <= 7 && ((b1 << 8) | b2) % 31 == 0) {
+        if (compressionMethod == 8 && compressionInfo <= 7 && ((b1 << 8) | b2) % 31 == 0){
             nowrap = false;
         }
         sourceStream = new DeflateStream(pushback, new Inflater(nowrap));
@@ -68,7 +68,7 @@ public class DeflateInputStream extends InputStream {
      * Read a byte.
      */
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         return sourceStream.read();
     }
 
@@ -76,7 +76,7 @@ public class DeflateInputStream extends InputStream {
      * Read lots of bytes.
      */
     @Override
-    public int read(final byte[] b) throws IOException {
+    public int read(final byte[] b) throws IOException{
         return sourceStream.read(b);
     }
 
@@ -84,7 +84,7 @@ public class DeflateInputStream extends InputStream {
      * Read lots of specific bytes.
      */
     @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
+    public int read(final byte[] b,final int off,final int len) throws IOException{
         return sourceStream.read(b, off, len);
     }
 
@@ -92,7 +92,7 @@ public class DeflateInputStream extends InputStream {
      * Skip
      */
     @Override
-    public long skip(final long n) throws IOException {
+    public long skip(final long n) throws IOException{
         return sourceStream.skip(n);
     }
 
@@ -100,7 +100,7 @@ public class DeflateInputStream extends InputStream {
      * Get available.
      */
     @Override
-    public int available() throws IOException {
+    public int available() throws IOException{
         return sourceStream.available();
     }
 
@@ -108,7 +108,7 @@ public class DeflateInputStream extends InputStream {
      * Mark.
      */
     @Override
-    public void mark(final int readLimit) {
+    public void mark(final int readLimit){
         sourceStream.mark(readLimit);
     }
 
@@ -116,7 +116,7 @@ public class DeflateInputStream extends InputStream {
      * Reset.
      */
     @Override
-    public void reset() throws IOException {
+    public void reset() throws IOException{
         sourceStream.reset();
     }
 
@@ -124,7 +124,7 @@ public class DeflateInputStream extends InputStream {
      * Check if mark is supported.
      */
     @Override
-    public boolean markSupported() {
+    public boolean markSupported(){
         return sourceStream.markSupported();
     }
 
@@ -132,21 +132,21 @@ public class DeflateInputStream extends InputStream {
      * Close.
      */
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         sourceStream.close();
     }
 
-    static class DeflateStream extends InflaterInputStream {
+    static class DeflateStream extends InflaterInputStream{
 
         private boolean closed = false;
 
-        public DeflateStream(final InputStream in, final Inflater inflater) {
+        public DeflateStream(final InputStream in, final Inflater inflater){
             super(in, inflater);
         }
 
         @Override
-        public void close() throws IOException {
-            if (closed) {
+        public void close() throws IOException{
+            if (closed){
                 return;
             }
             closed = true;
@@ -157,4 +157,3 @@ public class DeflateInputStream extends InputStream {
     }
 
 }
-

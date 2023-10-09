@@ -41,27 +41,27 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.2
  */
-public class KerberosScheme extends GGSSchemeBase {
+public class KerberosScheme extends GGSSchemeBase{
 
     private static final String KERBEROS_OID = "1.2.840.113554.1.2.2";
 
     /**
      * @since 4.4
      */
-    public KerberosScheme(final boolean stripPort, final boolean useCanonicalHostname) {
+    public KerberosScheme(final boolean stripPort, final boolean useCanonicalHostname){
         super(stripPort, useCanonicalHostname);
     }
 
-    public KerberosScheme(final boolean stripPort) {
+    public KerberosScheme(final boolean stripPort){
         super(stripPort);
     }
 
-    public KerberosScheme() {
+    public KerberosScheme(){
         super();
     }
 
     @Override
-    public String getSchemeName() {
+    public String getSchemeName(){
         return "Kerberos";
     }
 
@@ -69,29 +69,31 @@ public class KerberosScheme extends GGSSchemeBase {
      * Produces KERBEROS authorization Header based on token created by
      * processChallenge.
      *
-     * @param credentials not used by the KERBEROS scheme.
-     * @param request The request being authenticated
+     * @param credentials
+     *            not used by the KERBEROS scheme.
+     * @param request
+     *            The request being authenticated
      *
-     * @throws AuthenticationException if authentication string cannot
-     *   be generated due to an authentication failure
+     * @throws AuthenticationException
+     *             if authentication string cannot
+     *             be generated due to an authentication failure
      *
      * @return KERBEROS authentication Header
      */
     @Override
-    public Header authenticate(
-            final Credentials credentials,
-            final HttpRequest request,
-            final HttpContext context) throws AuthenticationException {
+    public Header authenticate(final Credentials credentials,final HttpRequest request,final HttpContext context)
+                    throws AuthenticationException{
         return super.authenticate(credentials, request, context);
     }
 
-    @Override @SuppressWarnings("deprecation")
-    protected byte[] generateToken(final byte[] input, final String authServer) throws GSSException {
+    @Override
+    @SuppressWarnings("deprecation")
+    protected byte[] generateToken(final byte[] input,final String authServer) throws GSSException{
         return super.generateToken(input, authServer);
     }
 
     @Override
-    protected byte[] generateToken(final byte[] input, final String authServer, final Credentials credentials) throws GSSException {
+    protected byte[] generateToken(final byte[] input,final String authServer,final Credentials credentials) throws GSSException{
         return generateGSSToken(input, new Oid(KERBEROS_OID), authServer, credentials);
     }
 
@@ -102,7 +104,7 @@ public class KerberosScheme extends GGSSchemeBase {
      * @return {@code null}
      */
     @Override
-    public String getParameter(final String name) {
+    public String getParameter(final String name){
         Args.notNull(name, "Parameter name");
         return null;
     }
@@ -114,7 +116,7 @@ public class KerberosScheme extends GGSSchemeBase {
      * @return {@code null}
      */
     @Override
-    public String getRealm() {
+    public String getRealm(){
         return null;
     }
 
@@ -124,7 +126,7 @@ public class KerberosScheme extends GGSSchemeBase {
      * @return {@code true}.
      */
     @Override
-    public boolean isConnectionBased() {
+    public boolean isConnectionBased(){
         return true;
     }
 

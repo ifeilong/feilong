@@ -49,16 +49,13 @@ import com.feilong.lib.org.apache.http.params.CoreProtocolPNames;
  * @since 4.0
  *
  * @deprecated (4.3) use
- *   {@link com.feilong.lib.org.apache.http.client.config.RequestConfig},
- *   {@link com.feilong.lib.org.apache.http.config.ConnectionConfig},
- *   {@link com.feilong.lib.org.apache.http.config.SocketConfig}
+ *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig},
+ *             {@link com.feilong.lib.org.apache.http.config.ConnectionConfig},
+ *             {@link com.feilong.lib.org.apache.http.config.SocketConfig}
  */
 @Deprecated
-public interface AllClientPNames extends
-    CoreConnectionPNames, CoreProtocolPNames,
-    ClientPNames, AuthPNames, CookieSpecPNames,
-    ConnConnectionPNames, ConnManagerPNames, ConnRoutePNames {
+public interface AllClientPNames extends CoreConnectionPNames,CoreProtocolPNames,ClientPNames,AuthPNames,CookieSpecPNames,
+                ConnConnectionPNames,ConnManagerPNames,ConnRoutePNames{
 
     // no additional definitions
 }
-

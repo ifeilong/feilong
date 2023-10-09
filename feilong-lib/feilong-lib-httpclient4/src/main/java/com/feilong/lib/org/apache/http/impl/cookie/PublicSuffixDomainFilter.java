@@ -46,37 +46,37 @@ import com.feilong.lib.org.apache.http.util.Args;
  * cross-site attack types by preventing cookies from apparent domains that are not publicly
  * available.
  *
- *  @see com.feilong.lib.org.apache.http.conn.util.PublicSuffixList
- *  @see com.feilong.lib.org.apache.http.conn.util.PublicSuffixMatcher
+ * @see com.feilong.lib.org.apache.http.conn.util.PublicSuffixList
+ * @see com.feilong.lib.org.apache.http.conn.util.PublicSuffixMatcher
  *
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class PublicSuffixDomainFilter implements CommonCookieAttributeHandler {
+public class PublicSuffixDomainFilter implements CommonCookieAttributeHandler{
 
     private final CommonCookieAttributeHandler handler;
-    private final PublicSuffixMatcher publicSuffixMatcher;
-    private final Map<String, Boolean> localDomainMap;
 
-    private static Map<String, Boolean> createLocalDomainMap() {
-        final ConcurrentHashMap<String, Boolean> map = new ConcurrentHashMap<String, Boolean>();
-        map.put(".localhost.", Boolean.TRUE);  // RFC 6761
-        map.put(".test.", Boolean.TRUE);       // RFC 6761
-        map.put(".local.", Boolean.TRUE);      // RFC 6762
+    private final PublicSuffixMatcher          publicSuffixMatcher;
+
+    private final Map<String, Boolean>         localDomainMap;
+
+    private static Map<String, Boolean> createLocalDomainMap(){
+        final ConcurrentHashMap<String, Boolean> map = new ConcurrentHashMap<>();
+        map.put(".localhost.", Boolean.TRUE); // RFC 6761
+        map.put(".test.", Boolean.TRUE); // RFC 6761
+        map.put(".local.", Boolean.TRUE); // RFC 6762
         map.put(".local", Boolean.TRUE);
         map.put(".localdomain", Boolean.TRUE);
         return map;
     }
 
-    public PublicSuffixDomainFilter(
-            final CommonCookieAttributeHandler handler, final PublicSuffixMatcher publicSuffixMatcher) {
+    public PublicSuffixDomainFilter(final CommonCookieAttributeHandler handler, final PublicSuffixMatcher publicSuffixMatcher){
         this.handler = Args.notNull(handler, "Cookie handler");
         this.publicSuffixMatcher = Args.notNull(publicSuffixMatcher, "Public suffix matcher");
         this.localDomainMap = createLocalDomainMap();
     }
 
-    public PublicSuffixDomainFilter(
-            final CommonCookieAttributeHandler handler, final PublicSuffixList suffixList) {
+    public PublicSuffixDomainFilter(final CommonCookieAttributeHandler handler, final PublicSuffixList suffixList){
         Args.notNull(handler, "Cookie handler");
         Args.notNull(suffixList, "Public suffix list");
         this.handler = handler;
@@ -88,22 +88,22 @@ public class PublicSuffixDomainFilter implements CommonCookieAttributeHandler {
      * Never matches if the cookie's domain is from the blacklist.
      */
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         final String host = cookie.getDomain();
-        if (host == null) {
+        if (host == null){
             return false;
         }
         final int i = host.indexOf('.');
-        if (i >= 0) {
+        if (i >= 0){
             final String domain = host.substring(i);
-            if (!this.localDomainMap.containsKey(domain)) {
-                if (this.publicSuffixMatcher.matches(host)) {
+            if (!this.localDomainMap.containsKey(domain)){
+                if (this.publicSuffixMatcher.matches(host)){
                     return false;
                 }
             }
-        } else {
-            if (!host.equalsIgnoreCase(origin.getHost())) {
-                if (this.publicSuffixMatcher.matches(host)) {
+        }else{
+            if (!host.equalsIgnoreCase(origin.getHost())){
+                if (this.publicSuffixMatcher.matches(host)){
                     return false;
                 }
             }
@@ -112,22 +112,23 @@ public class PublicSuffixDomainFilter implements CommonCookieAttributeHandler {
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         handler.parse(cookie, value);
     }
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         handler.validate(cookie, origin);
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return handler.getAttributeName();
     }
 
     public static CommonCookieAttributeHandler decorate(
-            final CommonCookieAttributeHandler handler, final PublicSuffixMatcher publicSuffixMatcher) {
+                    final CommonCookieAttributeHandler handler,
+                    final PublicSuffixMatcher publicSuffixMatcher){
         Args.notNull(handler, "Cookie attribute handler");
         return publicSuffixMatcher != null ? new PublicSuffixDomainFilter(handler, publicSuffixMatcher) : handler;
     }

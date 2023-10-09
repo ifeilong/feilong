@@ -40,9 +40,9 @@ import com.feilong.lib.org.apache.http.util.EntityUtils;
  *
  * @since 4.2
  */
-public class HttpClientUtils {
+public class HttpClientUtils{
 
-    private HttpClientUtils() {
+    private HttpClientUtils(){
     }
 
     /**
@@ -52,11 +52,11 @@ public class HttpClientUtils {
      *
      * <pre>
      * HttpResponse httpResponse = null;
-     * try {
+     * try{
      *     httpResponse = httpClient.execute(httpGet);
-     * } catch (Exception e) {
+     * }catch (Exception e){
      *     // error handling
-     * } finally {
+     * }finally{
      *     HttpClientUtils.closeQuietly(httpResponse);
      * }
      * </pre>
@@ -67,14 +67,13 @@ public class HttpClientUtils {
      *
      * @since 4.2
      */
-    public static void closeQuietly(final HttpResponse response) {
-        if (response != null) {
+    public static void closeQuietly(final HttpResponse response){
+        if (response != null){
             final HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                try {
+            if (entity != null){
+                try{
                     EntityUtils.consume(entity);
-                } catch (final IOException ex) {
-                }
+                }catch (final IOException ex){}
             }
         }
     }
@@ -86,11 +85,11 @@ public class HttpClientUtils {
      *
      * <pre>
      * HttpResponse httpResponse = null;
-     * try {
+     * try{
      *     httpResponse = httpClient.execute(httpGet);
-     * } catch (Exception e) {
+     * }catch (Exception e){
      *     // error handling
-     * } finally {
+     * }finally{
      *     HttpClientUtils.closeQuietly(httpResponse);
      * }
      * </pre>
@@ -101,16 +100,15 @@ public class HttpClientUtils {
      *
      * @since 4.3
      */
-    public static void closeQuietly(final CloseableHttpResponse response) {
-        if (response != null) {
-            try {
-                try {
+    public static void closeQuietly(final CloseableHttpResponse response){
+        if (response != null){
+            try{
+                try{
                     EntityUtils.consume(response.getEntity());
-                } finally {
+                }finally{
                     response.close();
                 }
-            } catch (final IOException ignore) {
-            }
+            }catch (final IOException ignore){}
         }
     }
 
@@ -122,12 +120,12 @@ public class HttpClientUtils {
      *
      * <pre>
      * HttpClient httpClient = HttpClients.createDefault();
-     * try {
-     *   httpClient.execute(request);
-     * } catch (Exception e) {
-     *   // error handling
-     * } finally {
-     *   HttpClientUtils.closeQuietly(httpClient);
+     * try{
+     *     httpClient.execute(request);
+     * }catch (Exception e){
+     *     // error handling
+     * }finally{
+     *     HttpClientUtils.closeQuietly(httpClient);
      * }
      * </pre>
      *
@@ -135,13 +133,12 @@ public class HttpClientUtils {
      *            the HttpClient to close, may be null or already closed.
      * @since 4.2
      */
-    public static void closeQuietly(final HttpClient httpClient) {
-        if (httpClient != null) {
-            if (httpClient instanceof Closeable) {
-                try {
+    public static void closeQuietly(final HttpClient httpClient){
+        if (httpClient != null){
+            if (httpClient instanceof Closeable){
+                try{
                     ((Closeable) httpClient).close();
-                } catch (final IOException ignore) {
-                }
+                }catch (final IOException ignore){}
             }
         }
     }

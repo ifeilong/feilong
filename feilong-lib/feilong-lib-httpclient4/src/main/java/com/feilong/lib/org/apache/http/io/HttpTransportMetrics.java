@@ -33,7 +33,7 @@ package com.feilong.lib.org.apache.http.io;
  *
  * @since 4.0
  */
-public interface HttpTransportMetrics {
+public interface HttpTransportMetrics{
 
     /**
      * Returns the number of bytes transferred.

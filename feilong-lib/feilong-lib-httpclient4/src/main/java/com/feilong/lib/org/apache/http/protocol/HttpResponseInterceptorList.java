@@ -41,38 +41,42 @@ import com.feilong.lib.org.apache.http.HttpResponseInterceptor;
  * @deprecated (4.3)
  */
 @Deprecated
-public interface HttpResponseInterceptorList {
+public interface HttpResponseInterceptorList{
 
     /**
      * Appends a response interceptor to this list.
      *
-     * @param interceptor the response interceptor to add
+     * @param interceptor
+     *            the response interceptor to add
      */
     void addResponseInterceptor(HttpResponseInterceptor interceptor);
 
     /**
      * Inserts a response interceptor at the specified index.
      *
-     * @param interceptor the response interceptor to add
-     * @param index     the index to insert the interceptor at
+     * @param interceptor
+     *            the response interceptor to add
+     * @param index
+     *            the index to insert the interceptor at
      */
-    void addResponseInterceptor(HttpResponseInterceptor interceptor, int index);
+    void addResponseInterceptor(HttpResponseInterceptor interceptor,int index);
 
     /**
      * Obtains the current size of this list.
      *
-     * @return  the number of response interceptors in this list
+     * @return the number of response interceptors in this list
      */
     int getResponseInterceptorCount();
 
     /**
      * Obtains a response interceptor from this list.
      *
-     * @param index     the index of the interceptor to obtain,
-     *                  0 for first
+     * @param index
+     *            the index of the interceptor to obtain,
+     *            0 for first
      *
-     * @return  the interceptor at the given index, or
-     *          {@code null} if the index is out of range
+     * @return the interceptor at the given index, or
+     *         {@code null} if the index is out of range
      */
     HttpResponseInterceptor getResponseInterceptor(int index);
 
@@ -84,7 +88,8 @@ public interface HttpResponseInterceptorList {
     /**
      * Removes all response interceptor of the specified class
      *
-     * @param clazz  the class of the instances to be removed.
+     * @param clazz
+     *            the class of the instances to be removed.
      */
     void removeResponseInterceptorByClass(Class<? extends HttpResponseInterceptor> clazz);
 
@@ -95,9 +100,9 @@ public interface HttpResponseInterceptorList {
      * If the argument list includes elements that are not response
      * interceptors, the behavior is implementation dependent.
      *
-     * @param list the list of response interceptors
+     * @param list
+     *            the list of response interceptors
      */
     void setInterceptors(List<?> list);
 
 }
-

@@ -34,11 +34,12 @@ import com.feilong.lib.org.apache.http.annotation.Obsolete;
 
 /**
  * Defines the cookie management specification.
- * <p>Cookie management specification must define
+ * <p>
+ * Cookie management specification must define
  * <ul>
- *   <li> rules of parsing "Set-Cookie" header
- *   <li> rules of validation of parsed cookies
- *   <li>  formatting of "Cookie" header
+ * <li>rules of parsing "Set-Cookie" header
+ * <li>rules of validation of parsed cookies
+ * <li>formatting of "Cookie" header
  * </ul>
  * for a given host, port and path of origin
  * <p>
@@ -47,7 +48,7 @@ import com.feilong.lib.org.apache.http.annotation.Obsolete;
  *
  * @since 4.0
  */
-public interface CookieSpec {
+public interface CookieSpec{
 
     /**
      * Returns version of the state management this cookie specification
@@ -59,47 +60,59 @@ public interface CookieSpec {
     int getVersion();
 
     /**
-      * Parse the {@code "Set-Cookie"} Header into an array of Cookies.
-      *
-      * <p>This method will not perform the validation of the resultant
-      * {@link Cookie}s</p>
-      *
-      * @see #validate
-      *
-      * @param header the {@code Set-Cookie} received from the server
-      * @param origin details of the cookie origin
-      * @return an array of {@code Cookie}s parsed from the header
-      * @throws MalformedCookieException if an exception occurs during parsing
-      */
-    List<Cookie> parse(Header header, CookieOrigin origin) throws MalformedCookieException;
+     * Parse the {@code "Set-Cookie"} Header into an array of Cookies.
+     *
+     * <p>
+     * This method will not perform the validation of the resultant
+     * {@link Cookie}s
+     * </p>
+     *
+     * @see #validate
+     *
+     * @param header
+     *            the {@code Set-Cookie} received from the server
+     * @param origin
+     *            details of the cookie origin
+     * @return an array of {@code Cookie}s parsed from the header
+     * @throws MalformedCookieException
+     *             if an exception occurs during parsing
+     */
+    List<Cookie> parse(Header header,CookieOrigin origin) throws MalformedCookieException;
 
     /**
-      * Validate the cookie according to validation rules defined by the
-      *  cookie specification.
-      *
-      * @param cookie the Cookie to validate
-      * @param origin details of the cookie origin
-      * @throws MalformedCookieException if the cookie is invalid
-      */
-    void validate(Cookie cookie, CookieOrigin origin) throws MalformedCookieException;
+     * Validate the cookie according to validation rules defined by the
+     * cookie specification.
+     *
+     * @param cookie
+     *            the Cookie to validate
+     * @param origin
+     *            details of the cookie origin
+     * @throws MalformedCookieException
+     *             if the cookie is invalid
+     */
+    void validate(Cookie cookie,CookieOrigin origin) throws MalformedCookieException;
 
     /**
      * Determines if a Cookie matches the target location.
      *
-     * @param cookie the Cookie to be matched
-     * @param origin the target to test against
+     * @param cookie
+     *            the Cookie to be matched
+     * @param origin
+     *            the target to test against
      *
      * @return {@code true} if the cookie should be submitted with a request
-     *  with given attributes, {@code false} otherwise.
+     *         with given attributes, {@code false} otherwise.
      */
-    boolean match(Cookie cookie, CookieOrigin origin);
+    boolean match(Cookie cookie,CookieOrigin origin);
 
     /**
      * Create {@code "Cookie"} headers for an array of Cookies.
      *
-     * @param cookies the Cookies format into a Cookie header
+     * @param cookies
+     *            the Cookies format into a Cookie header
      * @return a Header for the given Cookies.
-     * @throws IllegalArgumentException if an input parameter is illegal
+     * @throws IllegalArgumentException
+     *             if an input parameter is illegal
      */
     List<Header> formatCookies(List<Cookie> cookies);
 

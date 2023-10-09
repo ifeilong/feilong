@@ -50,20 +50,17 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @Deprecated
-public class BrowserCompatHostnameVerifier extends AbstractVerifier {
+public class BrowserCompatHostnameVerifier extends AbstractVerifier{
 
     public static final BrowserCompatHostnameVerifier INSTANCE = new BrowserCompatHostnameVerifier();
 
     @Override
-    public final void verify(
-            final String host,
-            final String[] cns,
-            final String[] subjectAlts) throws SSLException {
+    public final void verify(final String host,final String[] cns,final String[] subjectAlts) throws SSLException{
         verify(host, cns, subjectAlts, false);
     }
 
     @Override
-    public final String toString() {
+    public final String toString(){
         return "BROWSER_COMPATIBLE";
     }
 

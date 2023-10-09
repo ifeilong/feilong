@@ -39,36 +39,34 @@ import com.feilong.lib.org.apache.http.protocol.HTTP;
  *
  * @since 4.0
  */
-public abstract class HttpEntityEnclosingRequestBase
-    extends HttpRequestBase implements HttpEntityEnclosingRequest {
+public abstract class HttpEntityEnclosingRequestBase extends HttpRequestBase implements HttpEntityEnclosingRequest{
 
     private HttpEntity entity;
 
-    public HttpEntityEnclosingRequestBase() {
+    public HttpEntityEnclosingRequestBase(){
         super();
     }
 
     @Override
-    public HttpEntity getEntity() {
+    public HttpEntity getEntity(){
         return this.entity;
     }
 
     @Override
-    public void setEntity(final HttpEntity entity) {
+    public void setEntity(final HttpEntity entity){
         this.entity = entity;
     }
 
     @Override
-    public boolean expectContinue() {
+    public boolean expectContinue(){
         final Header expect = getFirstHeader(HTTP.EXPECT_DIRECTIVE);
         return expect != null && HTTP.EXPECT_CONTINUE.equalsIgnoreCase(expect.getValue());
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        final HttpEntityEnclosingRequestBase clone =
-            (HttpEntityEnclosingRequestBase) super.clone();
-        if (this.entity != null) {
+    public Object clone() throws CloneNotSupportedException{
+        final HttpEntityEnclosingRequestBase clone = (HttpEntityEnclosingRequestBase) super.clone();
+        if (this.entity != null){
             clone.entity = CloneUtils.cloneObject(this.entity);
         }
         return clone;

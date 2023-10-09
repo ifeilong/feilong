@@ -39,21 +39,21 @@ import com.feilong.lib.org.apache.http.protocol.HTTP;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpCoreContext;
 
-public class DefaultClientConnectionReuseStrategy extends DefaultConnectionReuseStrategy {
+public class DefaultClientConnectionReuseStrategy extends DefaultConnectionReuseStrategy{
 
     public static final DefaultClientConnectionReuseStrategy INSTANCE = new DefaultClientConnectionReuseStrategy();
 
     @Override
-    public boolean keepAlive(final HttpResponse response, final HttpContext context) {
+    public boolean keepAlive(final HttpResponse response,final HttpContext context){
 
         final HttpRequest request = (HttpRequest) context.getAttribute(HttpCoreContext.HTTP_REQUEST);
-        if (request != null) {
+        if (request != null){
             final Header[] connHeaders = request.getHeaders(HttpHeaders.CONNECTION);
-            if (connHeaders.length != 0) {
+            if (connHeaders.length != 0){
                 final TokenIterator ti = new BasicTokenIterator(new BasicHeaderIterator(connHeaders, null));
-                while (ti.hasNext()) {
+                while (ti.hasNext()){
                     final String token = ti.nextToken();
-                    if (HTTP.CONN_CLOSE.equalsIgnoreCase(token)) {
+                    if (HTTP.CONN_CLOSE.equalsIgnoreCase(token)){
                         return false;
                     }
                 }

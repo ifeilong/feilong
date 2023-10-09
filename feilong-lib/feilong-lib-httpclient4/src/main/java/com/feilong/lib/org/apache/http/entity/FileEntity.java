@@ -40,20 +40,22 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class FileEntity extends AbstractHttpEntity implements Cloneable {
+public class FileEntity extends AbstractHttpEntity implements Cloneable{
 
     protected final File file;
 
     /**
      * Creates a new instance.
      *
-     * @param file The file to serve.
-     * @param contentType  The content type for the given {@code file}.
+     * @param file
+     *            The file to serve.
+     * @param contentType
+     *            The content type for the given {@code file}.
      *
      * @deprecated (4.1.3) {@link #FileEntity(File, ContentType)}
      */
     @Deprecated
-    public FileEntity(final File file, final String contentType) {
+    public FileEntity(final File file, final String contentType){
         super();
         this.file = Args.notNull(file, "File");
         setContentType(contentType);
@@ -62,15 +64,17 @@ public class FileEntity extends AbstractHttpEntity implements Cloneable {
     /**
      * Creates a new instance.
      *
-     * @param file The file to serve.
-     * @param contentType  The content type for the given {@code file}.
+     * @param file
+     *            The file to serve.
+     * @param contentType
+     *            The content type for the given {@code file}.
      *
      * @since 4.2
      */
-    public FileEntity(final File file, final ContentType contentType) {
+    public FileEntity(final File file, final ContentType contentType){
         super();
         this.file = Args.notNull(file, "File");
-        if (contentType != null) {
+        if (contentType != null){
             setContentType(contentType.toString());
         }
     }
@@ -78,42 +82,43 @@ public class FileEntity extends AbstractHttpEntity implements Cloneable {
     /**
      * Creates a new instance.
      *
-     * @param file The file to serve.
+     * @param file
+     *            The file to serve.
      *
      * @since 4.2
      */
-    public FileEntity(final File file) {
+    public FileEntity(final File file){
         super();
         this.file = Args.notNull(file, "File");
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return true;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return this.file.length();
     }
 
     @Override
-    public InputStream getContent() throws IOException {
+    public InputStream getContent() throws IOException{
         return new FileInputStream(this.file);
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         Args.notNull(outStream, "Output stream");
         final InputStream inStream = new FileInputStream(this.file);
-        try {
+        try{
             final byte[] tmp = new byte[OUTPUT_BUFFER_SIZE];
             int l;
-            while ((l = inStream.read(tmp)) != -1) {
+            while ((l = inStream.read(tmp)) != -1){
                 outStream.write(tmp, 0, l);
             }
             outStream.flush();
-        } finally {
+        }finally{
             inStream.close();
         }
     }
@@ -124,12 +129,12 @@ public class FileEntity extends AbstractHttpEntity implements Cloneable {
      * @return {@code false}
      */
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return false;
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         // File instance is considered immutable
         // No need to make a copy of it
         return super.clone();

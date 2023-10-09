@@ -33,7 +33,7 @@ package com.feilong.lib.org.apache.http.cookie;
  *
  * @since 4.4
  */
-public interface CommonCookieAttributeHandler extends CookieAttributeHandler {
+public interface CommonCookieAttributeHandler extends CookieAttributeHandler{
 
     String getAttributeName();
 

@@ -32,31 +32,31 @@ package com.feilong.lib.org.apache.http.client.config;
  *
  * @since 4.3
  */
-public final class AuthSchemes {
+public final class AuthSchemes{
 
     /**
      * Basic authentication scheme as defined in RFC 2617 (considered inherently
      * insecure, but most widely supported).
      */
-    public static final String BASIC = "Basic";
+    public static final String BASIC    = "Basic";
 
     /**
      * Digest authentication scheme as defined in RFC 2617.
      */
-    public static final String DIGEST = "Digest";
+    public static final String DIGEST   = "Digest";
 
     /**
      * The NTLM authentication scheme is a proprietary Microsoft Windows
      * authentication protocol as defined in [MS-NLMP].
      */
-    public static final String NTLM = "NTLM";
+    public static final String NTLM     = "NTLM";
 
     /**
      * SPNEGO authentication scheme as defined in RFC 4559 and RFC 4178
      * (considered to be the most secure among currently supported
      * authentication schemes if Kerberos is selected).
      */
-    public static final String SPNEGO = "Negotiate";
+    public static final String SPNEGO   = "Negotiate";
 
     /**
      * Kerberos authentication scheme as defined in RFC 4120
@@ -68,9 +68,9 @@ public final class AuthSchemes {
     /**
      * CredSSP authentication scheme defined in [MS-CSSP].
      */
-    public static final String CREDSSP = "CredSSP";
+    public static final String CREDSSP  = "CredSSP";
 
-    private AuthSchemes() {
+    private AuthSchemes(){
     }
 
 }

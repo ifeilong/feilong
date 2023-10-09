@@ -34,12 +34,13 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public final class AuthOption {
+public final class AuthOption{
 
-    private final AuthScheme authScheme;
+    private final AuthScheme  authScheme;
+
     private final Credentials creds;
 
-    public AuthOption(final AuthScheme authScheme, final Credentials creds) {
+    public AuthOption(final AuthScheme authScheme, final Credentials creds){
         super();
         Args.notNull(authScheme, "Auth scheme");
         Args.notNull(creds, "User credentials");
@@ -47,18 +48,17 @@ public final class AuthOption {
         this.creds = creds;
     }
 
-    public AuthScheme getAuthScheme() {
+    public AuthScheme getAuthScheme(){
         return this.authScheme;
     }
 
-    public Credentials getCredentials() {
+    public Credentials getCredentials(){
         return this.creds;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return this.authScheme.toString();
     }
 
 }
-

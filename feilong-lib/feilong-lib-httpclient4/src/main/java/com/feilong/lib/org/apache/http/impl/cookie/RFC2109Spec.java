@@ -59,98 +59,82 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  */
 @Obsolete
 @Contract(threading = ThreadingBehavior.SAFE)
-public class RFC2109Spec extends CookieSpecBase {
+public class RFC2109Spec extends CookieSpecBase{
 
-    final static String[] DATE_PATTERNS = {
-        DateUtils.PATTERN_RFC1123,
-        DateUtils.PATTERN_RFC1036,
-        DateUtils.PATTERN_ASCTIME
-    };
+    final static String[] DATE_PATTERNS = { DateUtils.PATTERN_RFC1123, DateUtils.PATTERN_RFC1036, DateUtils.PATTERN_ASCTIME };
 
     private final boolean oneHeader;
 
     /** Default constructor */
-    public RFC2109Spec(final String[] datepatterns, final boolean oneHeader) {
-        super(new RFC2109VersionHandler(),
-                new BasicPathHandler() {
+    public RFC2109Spec(final String[] datepatterns, final boolean oneHeader){
+        super(new RFC2109VersionHandler(), new BasicPathHandler(){
 
-                    @Override
-                    public void validate(
-                            final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
-                        if (!match(cookie, origin)) {
-                            throw new CookieRestrictionViolationException(
-                                    "Illegal 'path' attribute \"" + cookie.getPath()
-                                            + "\". Path of origin: \"" + origin.getPath() + "\"");
-                        }
-                    }
+            @Override
+            public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
+                if (!match(cookie, origin)){
+                    throw new CookieRestrictionViolationException(
+                                    "Illegal 'path' attribute \"" + cookie.getPath() + "\". Path of origin: \"" + origin.getPath() + "\"");
+                }
+            }
 
-                },
-                new RFC2109DomainHandler(),
-                new BasicMaxAgeHandler(),
-                new BasicSecureHandler(),
-                new BasicCommentHandler(),
-                new BasicExpiresHandler(
-                        datepatterns != null ? datepatterns.clone() : DATE_PATTERNS));
+        }, new RFC2109DomainHandler(), new BasicMaxAgeHandler(), new BasicSecureHandler(), new BasicCommentHandler(),
+                        new BasicExpiresHandler(datepatterns != null ? datepatterns.clone() : DATE_PATTERNS));
         this.oneHeader = oneHeader;
     }
 
     /** Default constructor */
-    public RFC2109Spec() {
+    public RFC2109Spec(){
         this(null, false);
     }
 
-    protected RFC2109Spec(final boolean oneHeader,
-                          final CommonCookieAttributeHandler... handlers) {
+    protected RFC2109Spec(final boolean oneHeader, final CommonCookieAttributeHandler...handlers){
         super(handlers);
         this.oneHeader = oneHeader;
     }
 
     @Override
-    public List<Cookie> parse(final Header header, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public List<Cookie> parse(final Header header,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(header, "Header");
         Args.notNull(origin, "Cookie origin");
-        if (!header.getName().equalsIgnoreCase(SM.SET_COOKIE)) {
-            throw new MalformedCookieException("Unrecognized cookie header '"
-                    + header.toString() + "'");
+        if (!header.getName().equalsIgnoreCase(SM.SET_COOKIE)){
+            throw new MalformedCookieException("Unrecognized cookie header '" + header.toString() + "'");
         }
         final HeaderElement[] elems = header.getElements();
         return parse(elems, origin);
     }
 
     @Override
-    public void validate(final Cookie cookie, final CookieOrigin origin)
-            throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
         final String name = cookie.getName();
-        if (name.indexOf(' ') != -1) {
+        if (name.indexOf(' ') != -1){
             throw new CookieRestrictionViolationException("Cookie name may not contain blanks");
         }
-        if (name.startsWith("$")) {
+        if (name.startsWith("$")){
             throw new CookieRestrictionViolationException("Cookie name may not start with $");
         }
         super.validate(cookie, origin);
     }
 
     @Override
-    public List<Header> formatCookies(final List<Cookie> cookies) {
+    public List<Header> formatCookies(final List<Cookie> cookies){
         Args.notEmpty(cookies, "List of cookies");
         final List<Cookie> cookieList;
-        if (cookies.size() > 1) {
+        if (cookies.size() > 1){
             // Create a mutable copy and sort the copy.
-            cookieList = new ArrayList<Cookie>(cookies);
+            cookieList = new ArrayList<>(cookies);
             Collections.sort(cookieList, CookiePathComparator.INSTANCE);
-        } else {
+        }else{
             cookieList = cookies;
         }
         return this.oneHeader ? doFormatOneHeader(cookieList) : doFormatManyHeaders(cookieList);
     }
 
-    private List<Header> doFormatOneHeader(final List<Cookie> cookies) {
+    private List<Header> doFormatOneHeader(final List<Cookie> cookies){
         int version = Integer.MAX_VALUE;
         // Pick the lowest common denominator
-        for (final Cookie cookie : cookies) {
-            if (cookie.getVersion() < version) {
+        for (final Cookie cookie : cookies){
+            if (cookie.getVersion() < version){
                 version = cookie.getVersion();
             }
         }
@@ -159,19 +143,19 @@ public class RFC2109Spec extends CookieSpecBase {
         buffer.append(": ");
         buffer.append("$Version=");
         buffer.append(Integer.toString(version));
-        for (final Cookie cooky : cookies) {
+        for (final Cookie cooky : cookies){
             buffer.append("; ");
             final Cookie cookie = cooky;
             formatCookieAsVer(buffer, cookie, version);
         }
-        final List<Header> headers = new ArrayList<Header>(1);
+        final List<Header> headers = new ArrayList<>(1);
         headers.add(new BufferedHeader(buffer));
         return headers;
     }
 
-    private List<Header> doFormatManyHeaders(final List<Cookie> cookies) {
-        final List<Header> headers = new ArrayList<Header>(cookies.size());
-        for (final Cookie cookie : cookies) {
+    private List<Header> doFormatManyHeaders(final List<Cookie> cookies){
+        final List<Header> headers = new ArrayList<>(cookies.size());
+        for (final Cookie cookie : cookies){
             final int version = cookie.getVersion();
             final CharArrayBuffer buffer = new CharArrayBuffer(40);
             buffer.append("Cookie: ");
@@ -188,21 +172,25 @@ public class RFC2109Spec extends CookieSpecBase {
      * Return a name/value string suitable for sending in a {@code "Cookie"}
      * header as defined in RFC 2109 for backward compatibility with cookie
      * version 0
-     * @param buffer The char array buffer to use for output
-     * @param name The cookie name
-     * @param value The cookie value
-     * @param version The cookie version
+     * 
+     * @param buffer
+     *            The char array buffer to use for output
+     * @param name
+     *            The cookie name
+     * @param value
+     *            The cookie value
+     * @param version
+     *            The cookie version
      */
-    protected void formatParamAsVer(final CharArrayBuffer buffer,
-            final String name, final String value, final int version) {
+    protected void formatParamAsVer(final CharArrayBuffer buffer,final String name,final String value,final int version){
         buffer.append(name);
         buffer.append("=");
-        if (value != null) {
-            if (version > 0) {
+        if (value != null){
+            if (version > 0){
                 buffer.append('\"');
                 buffer.append(value);
                 buffer.append('\"');
-            } else {
+            }else{
                 buffer.append(value);
             }
         }
@@ -211,23 +199,24 @@ public class RFC2109Spec extends CookieSpecBase {
     /**
      * Return a string suitable for sending in a {@code "Cookie"} header
      * as defined in RFC 2109 for backward compatibility with cookie version 0
-     * @param buffer The char array buffer to use for output
-     * @param cookie The {@link Cookie} to be formatted as string
-     * @param version The version to use.
+     * 
+     * @param buffer
+     *            The char array buffer to use for output
+     * @param cookie
+     *            The {@link Cookie} to be formatted as string
+     * @param version
+     *            The version to use.
      */
-    protected void formatCookieAsVer(final CharArrayBuffer buffer,
-            final Cookie cookie, final int version) {
+    protected void formatCookieAsVer(final CharArrayBuffer buffer,final Cookie cookie,final int version){
         formatParamAsVer(buffer, cookie.getName(), cookie.getValue(), version);
-        if (cookie.getPath() != null) {
-            if (cookie instanceof ClientCookie
-                    && ((ClientCookie) cookie).containsAttribute(ClientCookie.PATH_ATTR)) {
+        if (cookie.getPath() != null){
+            if (cookie instanceof ClientCookie && ((ClientCookie) cookie).containsAttribute(ClientCookie.PATH_ATTR)){
                 buffer.append("; ");
                 formatParamAsVer(buffer, "$Path", cookie.getPath(), version);
             }
         }
-        if (cookie.getDomain() != null) {
-            if (cookie instanceof ClientCookie
-                    && ((ClientCookie) cookie).containsAttribute(ClientCookie.DOMAIN_ATTR)) {
+        if (cookie.getDomain() != null){
+            if (cookie instanceof ClientCookie && ((ClientCookie) cookie).containsAttribute(ClientCookie.DOMAIN_ATTR)){
                 buffer.append("; ");
                 formatParamAsVer(buffer, "$Domain", cookie.getDomain(), version);
             }
@@ -235,17 +224,17 @@ public class RFC2109Spec extends CookieSpecBase {
     }
 
     @Override
-    public int getVersion() {
+    public int getVersion(){
         return 1;
     }
 
     @Override
-    public Header getVersionHeader() {
+    public Header getVersionHeader(){
         return null;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "rfc2109";
     }
 

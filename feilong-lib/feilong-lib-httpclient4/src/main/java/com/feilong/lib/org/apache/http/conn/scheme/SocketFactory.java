@@ -41,56 +41,59 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  *
  * @since 4.0
  *
- * @deprecated (4.1)  use {@link SchemeSocketFactory}
+ * @deprecated (4.1) use {@link SchemeSocketFactory}
  */
 @Deprecated
-public interface SocketFactory {
+public interface SocketFactory{
 
     /**
      * Creates a new, unconnected socket.
      * The socket should subsequently be passed to
      * {@link #connectSocket connectSocket}.
      *
-     * @return  a new socket
+     * @return a new socket
      *
-     * @throws IOException if an I/O error occurs while creating the socket
+     * @throws IOException
+     *             if an I/O error occurs while creating the socket
      */
-    Socket createSocket()
-        throws IOException;
+    Socket createSocket() throws IOException;
 
     /**
      * Connects a socket to the given host.
      *
-     * @param sock      the socket to connect, as obtained from
-     *                  {@link #createSocket createSocket}.
-     *                  {@code null} indicates that a new socket
-     *                  should be created and connected.
-     * @param host      the host to connect to
-     * @param port      the port to connect to on the host
-     * @param localAddress the local address to bind the socket to, or
-     *                  {@code null} for any
-     * @param localPort the port on the local machine,
-     *                  0 or a negative number for any
-     * @param params    additional {@link HttpParams parameters} for connecting
+     * @param sock
+     *            the socket to connect, as obtained from
+     *            {@link #createSocket createSocket}.
+     *            {@code null} indicates that a new socket
+     *            should be created and connected.
+     * @param host
+     *            the host to connect to
+     * @param port
+     *            the port to connect to on the host
+     * @param localAddress
+     *            the local address to bind the socket to, or
+     *            {@code null} for any
+     * @param localPort
+     *            the port on the local machine,
+     *            0 or a negative number for any
+     * @param params
+     *            additional {@link HttpParams parameters} for connecting
      *
-     * @return  the connected socket. The returned object may be different
-     *          from the {@code sock} argument if this factory supports
-     *          a layered protocol.
+     * @return the connected socket. The returned object may be different
+     *         from the {@code sock} argument if this factory supports
+     *         a layered protocol.
      *
-     * @throws IOException if an I/O error occurs
-     * @throws UnknownHostException if the IP address of the target host
-     *          can not be determined
-     * @throws ConnectTimeoutException if the socket cannot be connected
-     *          within the time limit defined in the {@code params}
+     * @throws IOException
+     *             if an I/O error occurs
+     * @throws UnknownHostException
+     *             if the IP address of the target host
+     *             can not be determined
+     * @throws ConnectTimeoutException
+     *             if the socket cannot be connected
+     *             within the time limit defined in the {@code params}
      */
-    Socket connectSocket(
-        Socket sock,
-        String host,
-        int port,
-        InetAddress localAddress,
-        int localPort,
-        HttpParams params
-    ) throws IOException, UnknownHostException, ConnectTimeoutException;
+    Socket connectSocket(Socket sock,String host,int port,InetAddress localAddress,int localPort,HttpParams params)
+                    throws IOException,UnknownHostException,ConnectTimeoutException;
 
     /**
      * Checks whether a socket provides a secure connection.
@@ -108,21 +111,21 @@ public interface SocketFactory {
      * the cipher suite chosen for the connection.
      * </p>
      *
-     * @param sock      the connected socket to check
+     * @param sock
+     *            the connected socket to check
      *
-     * @return  {@code true} if the connection of the socket
-     *          should be considered secure, or
-     *          {@code false} if it should not
+     * @return {@code true} if the connection of the socket
+     *         should be considered secure, or
+     *         {@code false} if it should not
      *
      * @throws IllegalArgumentException
-     *  if the argument is invalid, for example because it is
-     *  not a connected socket or was created by a different
-     *  socket factory.
-     *  Note that socket factories are <i>not</i> required to
-     *  check these conditions, they may simply return a default
-     *  value when called with an invalid socket argument.
+     *             if the argument is invalid, for example because it is
+     *             not a connected socket or was created by a different
+     *             socket factory.
+     *             Note that socket factories are <i>not</i> required to
+     *             check these conditions, they may simply return a default
+     *             value when called with an invalid socket argument.
      */
-    boolean isSecure(Socket sock)
-        throws IllegalArgumentException;
+    boolean isSecure(Socket sock) throws IllegalArgumentException;
 
 }

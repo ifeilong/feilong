@@ -29,9 +29,9 @@ package com.feilong.lib.org.apache.http.impl.cookie;
 
 import com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler;
 
-class RFC6265CookieSpecBase extends RFC6265CookieSpec {
+class RFC6265CookieSpecBase extends RFC6265CookieSpec{
 
-    RFC6265CookieSpecBase(final CommonCookieAttributeHandler... handlers) {
+    RFC6265CookieSpecBase(final CommonCookieAttributeHandler...handlers){
         super(handlers);
     }
 

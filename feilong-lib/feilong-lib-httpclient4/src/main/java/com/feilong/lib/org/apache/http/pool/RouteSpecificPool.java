@@ -37,48 +37,51 @@ import com.feilong.lib.org.apache.http.util.Asserts;
 
 abstract class RouteSpecificPool<T, C, E extends PoolEntry<T, C>> {
 
-    private final T route;
-    private final Set<E> leased;
-    private final LinkedList<E> available;
+    private final T                     route;
+
+    private final Set<E>                leased;
+
+    private final LinkedList<E>         available;
+
     private final LinkedList<Future<E>> pending;
 
-    RouteSpecificPool(final T route) {
+    RouteSpecificPool(final T route){
         super();
         this.route = route;
-        this.leased = new HashSet<E>();
-        this.available = new LinkedList<E>();
-        this.pending = new LinkedList<Future<E>>();
+        this.leased = new HashSet<>();
+        this.available = new LinkedList<>();
+        this.pending = new LinkedList<>();
     }
 
     protected abstract E createEntry(C conn);
 
-    public final T getRoute() {
+    public final T getRoute(){
         return route;
     }
 
-    public int getLeasedCount() {
+    public int getLeasedCount(){
         return this.leased.size();
     }
 
-    public int getPendingCount() {
+    public int getPendingCount(){
         return this.pending.size();
     }
 
-    public int getAvailableCount() {
+    public int getAvailableCount(){
         return this.available.size();
     }
 
-    public int getAllocatedCount() {
+    public int getAllocatedCount(){
         return this.available.size() + this.leased.size();
     }
 
-    public E getFree(final Object state) {
-        if (!this.available.isEmpty()) {
-            if (state != null) {
+    public E getFree(final Object state){
+        if (!this.available.isEmpty()){
+            if (state != null){
                 final Iterator<E> it = this.available.iterator();
-                while (it.hasNext()) {
+                while (it.hasNext()){
                     final E entry = it.next();
-                    if (state.equals(entry.getState())) {
+                    if (state.equals(entry.getState())){
                         it.remove();
                         this.leased.add(entry);
                         return entry;
@@ -86,9 +89,9 @@ abstract class RouteSpecificPool<T, C, E extends PoolEntry<T, C>> {
                 }
             }
             final Iterator<E> it = this.available.iterator();
-            while (it.hasNext()) {
+            while (it.hasNext()){
                 final E entry = it.next();
-                if (entry.getState() == null) {
+                if (entry.getState() == null){
                     it.remove();
                     this.leased.add(entry);
                     return entry;
@@ -98,71 +101,71 @@ abstract class RouteSpecificPool<T, C, E extends PoolEntry<T, C>> {
         return null;
     }
 
-    public E getLastUsed() {
+    public E getLastUsed(){
         return this.available.isEmpty() ? null : this.available.getLast();
     }
 
-    public boolean remove(final E entry) {
+    public boolean remove(final E entry){
         Args.notNull(entry, "Pool entry");
-        if (!this.available.remove(entry)) {
-            if (!this.leased.remove(entry)) {
+        if (!this.available.remove(entry)){
+            if (!this.leased.remove(entry)){
                 return false;
             }
         }
         return true;
     }
 
-    public void free(final E entry, final boolean reusable) {
+    public void free(final E entry,final boolean reusable){
         Args.notNull(entry, "Pool entry");
         final boolean found = this.leased.remove(entry);
         Asserts.check(found, "Entry %s has not been leased from this pool", entry);
-        if (reusable) {
+        if (reusable){
             this.available.addFirst(entry);
         }
     }
 
-    public E add(final C conn) {
+    public E add(final C conn){
         final E entry = createEntry(conn);
         this.leased.add(entry);
         return entry;
     }
 
-    public void queue(final Future<E> future) {
-        if (future == null) {
+    public void queue(final Future<E> future){
+        if (future == null){
             return;
         }
         this.pending.add(future);
     }
 
-    public Future<E> nextPending() {
+    public Future<E> nextPending(){
         return this.pending.poll();
     }
 
-    public void unqueue(final Future<E> future) {
-        if (future == null) {
+    public void unqueue(final Future<E> future){
+        if (future == null){
             return;
         }
 
         this.pending.remove(future);
     }
 
-    public void shutdown() {
-        for (final Future<E> future: this.pending) {
+    public void shutdown(){
+        for (final Future<E> future : this.pending){
             future.cancel(true);
         }
         this.pending.clear();
-        for (final E entry: this.available) {
+        for (final E entry : this.available){
             entry.close();
         }
         this.available.clear();
-        for (final E entry: this.leased) {
+        for (final E entry : this.leased){
             entry.close();
         }
         this.leased.clear();
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append("[route: ");
         buffer.append(this.route);

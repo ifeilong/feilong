@@ -33,14 +33,14 @@ package com.feilong.lib.org.apache.http.impl.conn;
  *
  * @since 4.1
  */
-public class ConnectionShutdownException extends IllegalStateException {
+public class ConnectionShutdownException extends IllegalStateException{
 
     private static final long serialVersionUID = 5868657401162844497L;
 
     /**
      * Creates a new ConnectionShutdownException with a {@code null} detail message.
      */
-    public ConnectionShutdownException() {
+    public ConnectionShutdownException(){
         super();
     }
 

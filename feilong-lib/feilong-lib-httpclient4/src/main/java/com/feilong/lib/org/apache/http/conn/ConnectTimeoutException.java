@@ -41,16 +41,16 @@ import com.feilong.lib.org.apache.http.HttpHost;
  *
  * @since 4.0
  */
-public class ConnectTimeoutException extends InterruptedIOException {
+public class ConnectTimeoutException extends InterruptedIOException{
 
     private static final long serialVersionUID = -4816682903149535989L;
 
-    private final HttpHost host;
+    private final HttpHost    host;
 
     /**
      * Creates a ConnectTimeoutException with a {@code null} detail message.
      */
-    public ConnectTimeoutException() {
+    public ConnectTimeoutException(){
         super();
         this.host = null;
     }
@@ -58,7 +58,7 @@ public class ConnectTimeoutException extends InterruptedIOException {
     /**
      * Creates a ConnectTimeoutException with the specified detail message.
      */
-    public ConnectTimeoutException(final String message) {
+    public ConnectTimeoutException(final String message){
         super(message);
         this.host = null;
     }
@@ -68,16 +68,10 @@ public class ConnectTimeoutException extends InterruptedIOException {
      *
      * @since 4.3
      */
-    public ConnectTimeoutException(
-            final IOException cause,
-            final HttpHost host,
-            final InetAddress... remoteAddresses) {
-        super("Connect to " +
-                (host != null ? host.toHostString() : "remote host") +
-                (remoteAddresses != null && remoteAddresses.length > 0 ?
-                        " " + Arrays.asList(remoteAddresses) : "") +
-                ((cause != null && cause.getMessage() != null) ?
-                        " failed: " + cause.getMessage() : " timed out"));
+    public ConnectTimeoutException(final IOException cause, final HttpHost host, final InetAddress...remoteAddresses){
+        super("Connect to " + (host != null ? host.toHostString() : "remote host")
+                        + (remoteAddresses != null && remoteAddresses.length > 0 ? " " + Arrays.asList(remoteAddresses) : "")
+                        + ((cause != null && cause.getMessage() != null) ? " failed: " + cause.getMessage() : " timed out"));
         this.host = host;
         initCause(cause);
     }
@@ -85,7 +79,7 @@ public class ConnectTimeoutException extends InterruptedIOException {
     /**
      * @since 4.3
      */
-    public HttpHost getHost() {
+    public HttpHost getHost(){
         return host;
     }
 

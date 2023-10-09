@@ -26,7 +26,7 @@
  */
 package com.feilong.lib.org.apache.http.auth;
 
-public enum AuthProtocolState {
+public enum AuthProtocolState{
 
     UNCHALLENGED, CHALLENGED, HANDSHAKE, FAILURE, SUCCESS
 

@@ -44,207 +44,207 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
 /**
  * @since 4.3
  */
-class CPoolProxy implements ManagedHttpClientConnection, HttpContext {
+class CPoolProxy implements ManagedHttpClientConnection,HttpContext{
 
     private volatile CPoolEntry poolEntry;
 
-    CPoolProxy(final CPoolEntry entry) {
+    CPoolProxy(final CPoolEntry entry){
         super();
         this.poolEntry = entry;
     }
 
-    CPoolEntry getPoolEntry() {
+    CPoolEntry getPoolEntry(){
         return this.poolEntry;
     }
 
-    CPoolEntry detach() {
+    CPoolEntry detach(){
         final CPoolEntry local = this.poolEntry;
         this.poolEntry = null;
         return local;
     }
 
-    ManagedHttpClientConnection getConnection() {
+    ManagedHttpClientConnection getConnection(){
         final CPoolEntry local = this.poolEntry;
-        if (local == null) {
+        if (local == null){
             return null;
         }
         return local.getConnection();
     }
 
-    ManagedHttpClientConnection getValidConnection() {
+    ManagedHttpClientConnection getValidConnection(){
         final ManagedHttpClientConnection conn = getConnection();
-        if (conn == null) {
+        if (conn == null){
             throw new ConnectionShutdownException();
         }
         return conn;
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         final CPoolEntry local = this.poolEntry;
-        if (local != null) {
+        if (local != null){
             local.closeConnection();
         }
     }
 
     @Override
-    public void shutdown() throws IOException {
+    public void shutdown() throws IOException{
         final CPoolEntry local = this.poolEntry;
-        if (local != null) {
+        if (local != null){
             local.shutdownConnection();
         }
     }
 
     @Override
-    public boolean isOpen() {
+    public boolean isOpen(){
         final CPoolEntry local = this.poolEntry;
         return local != null ? !local.isClosed() : false;
     }
 
     @Override
-    public boolean isStale() {
+    public boolean isStale(){
         final HttpClientConnection conn = getConnection();
         return conn != null ? conn.isStale() : true;
     }
 
     @Override
-    public void setSocketTimeout(final int timeout) {
+    public void setSocketTimeout(final int timeout){
         getValidConnection().setSocketTimeout(timeout);
     }
 
     @Override
-    public int getSocketTimeout() {
+    public int getSocketTimeout(){
         return getValidConnection().getSocketTimeout();
     }
 
     @Override
-    public String getId() {
+    public String getId(){
         return getValidConnection().getId();
     }
 
     @Override
-    public void bind(final Socket socket) throws IOException {
+    public void bind(final Socket socket) throws IOException{
         getValidConnection().bind(socket);
     }
 
     @Override
-    public Socket getSocket() {
+    public Socket getSocket(){
         return getValidConnection().getSocket();
     }
 
     @Override
-    public SSLSession getSSLSession() {
+    public SSLSession getSSLSession(){
         return getValidConnection().getSSLSession();
     }
 
     @Override
-    public boolean isResponseAvailable(final int timeout) throws IOException {
+    public boolean isResponseAvailable(final int timeout) throws IOException{
         return getValidConnection().isResponseAvailable(timeout);
     }
 
     @Override
-    public void sendRequestHeader(final HttpRequest request) throws HttpException, IOException {
+    public void sendRequestHeader(final HttpRequest request) throws HttpException,IOException{
         getValidConnection().sendRequestHeader(request);
     }
 
     @Override
-    public void sendRequestEntity(final HttpEntityEnclosingRequest request) throws HttpException, IOException {
+    public void sendRequestEntity(final HttpEntityEnclosingRequest request) throws HttpException,IOException{
         getValidConnection().sendRequestEntity(request);
     }
 
     @Override
-    public HttpResponse receiveResponseHeader() throws HttpException, IOException {
+    public HttpResponse receiveResponseHeader() throws HttpException,IOException{
         return getValidConnection().receiveResponseHeader();
     }
 
     @Override
-    public void receiveResponseEntity(final HttpResponse response) throws HttpException, IOException {
+    public void receiveResponseEntity(final HttpResponse response) throws HttpException,IOException{
         getValidConnection().receiveResponseEntity(response);
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() throws IOException{
         getValidConnection().flush();
     }
 
     @Override
-    public HttpConnectionMetrics getMetrics() {
+    public HttpConnectionMetrics getMetrics(){
         return getValidConnection().getMetrics();
     }
 
     @Override
-    public InetAddress getLocalAddress() {
+    public InetAddress getLocalAddress(){
         return getValidConnection().getLocalAddress();
     }
 
     @Override
-    public int getLocalPort() {
+    public int getLocalPort(){
         return getValidConnection().getLocalPort();
     }
 
     @Override
-    public InetAddress getRemoteAddress() {
+    public InetAddress getRemoteAddress(){
         return getValidConnection().getRemoteAddress();
     }
 
     @Override
-    public int getRemotePort() {
+    public int getRemotePort(){
         return getValidConnection().getRemotePort();
     }
 
     @Override
-    public Object getAttribute(final String id) {
+    public Object getAttribute(final String id){
         final ManagedHttpClientConnection conn = getValidConnection();
         return conn instanceof HttpContext ? ((HttpContext) conn).getAttribute(id) : null;
     }
 
     @Override
-    public void setAttribute(final String id, final Object obj) {
+    public void setAttribute(final String id,final Object obj){
         final ManagedHttpClientConnection conn = getValidConnection();
-        if (conn instanceof HttpContext) {
+        if (conn instanceof HttpContext){
             ((HttpContext) conn).setAttribute(id, obj);
         }
     }
 
     @Override
-    public Object removeAttribute(final String id) {
+    public Object removeAttribute(final String id){
         final ManagedHttpClientConnection conn = getValidConnection();
         return conn instanceof HttpContext ? ((HttpContext) conn).removeAttribute(id) : null;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder sb = new StringBuilder("CPoolProxy{");
         final ManagedHttpClientConnection conn = getConnection();
-        if (conn != null) {
+        if (conn != null){
             sb.append(conn);
-        } else {
+        }else{
             sb.append("detached");
         }
         sb.append('}');
         return sb.toString();
     }
 
-    public static HttpClientConnection newProxy(final CPoolEntry poolEntry) {
+    public static HttpClientConnection newProxy(final CPoolEntry poolEntry){
         return new CPoolProxy(poolEntry);
     }
 
-    private static CPoolProxy getProxy(final HttpClientConnection conn) {
-        if (!CPoolProxy.class.isInstance(conn)) {
+    private static CPoolProxy getProxy(final HttpClientConnection conn){
+        if (!CPoolProxy.class.isInstance(conn)){
             throw new IllegalStateException("Unexpected connection proxy class: " + conn.getClass());
         }
         return CPoolProxy.class.cast(conn);
     }
 
-    public static CPoolEntry getPoolEntry(final HttpClientConnection proxy) {
+    public static CPoolEntry getPoolEntry(final HttpClientConnection proxy){
         final CPoolEntry entry = getProxy(proxy).getPoolEntry();
-        if (entry == null) {
+        if (entry == null){
             throw new ConnectionShutdownException();
         }
         return entry;
     }
 
-    public static CPoolEntry detach(final HttpClientConnection conn) {
+    public static CPoolEntry detach(final HttpClientConnection conn){
         return getProxy(conn).detach();
     }
 

@@ -40,42 +40,43 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.4
  */
-public class DecompressingEntity extends HttpEntityWrapper {
+public class DecompressingEntity extends HttpEntityWrapper{
 
     /**
      * Default buffer size.
      */
-    private static final int BUFFER_SIZE = 1024 * 2;
+    private static final int         BUFFER_SIZE = 1024 * 2;
 
     private final InputStreamFactory inputStreamFactory;
+
     /**
      * {@link #getContent()} method must return the same {@link InputStream}
      * instance when DecompressingEntity is wrapping a streaming entity.
      */
-    private InputStream content;
+    private InputStream              content;
 
     /**
      * Creates a new {@link DecompressingEntity}.
      *
-     * @param wrapped the non-null {@link HttpEntity} to be wrapped
-     * @param inputStreamFactory factory to create decompressing stream.
+     * @param wrapped
+     *            the non-null {@link HttpEntity} to be wrapped
+     * @param inputStreamFactory
+     *            factory to create decompressing stream.
      */
-    public DecompressingEntity(
-            final HttpEntity wrapped,
-            final InputStreamFactory inputStreamFactory) {
+    public DecompressingEntity(final HttpEntity wrapped, final InputStreamFactory inputStreamFactory){
         super(wrapped);
         this.inputStreamFactory = inputStreamFactory;
     }
 
-    private InputStream getDecompressingStream() throws IOException {
+    private InputStream getDecompressingStream() throws IOException{
         final InputStream in = wrappedEntity.getContent();
         return new LazyDecompressingInputStream(in, inputStreamFactory);
     }
 
     @Override
-    public InputStream getContent() throws IOException {
-        if (wrappedEntity.isStreaming()) {
-            if (content == null) {
+    public InputStream getContent() throws IOException{
+        if (wrappedEntity.isStreaming()){
+            if (content == null){
                 content = getDecompressingStream();
             }
             return content;
@@ -84,28 +85,28 @@ public class DecompressingEntity extends HttpEntityWrapper {
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         Args.notNull(outStream, "Output stream");
         final InputStream inStream = getContent();
-        try {
+        try{
             final byte[] buffer = new byte[BUFFER_SIZE];
             int l;
-            while ((l = inStream.read(buffer)) != -1) {
+            while ((l = inStream.read(buffer)) != -1){
                 outStream.write(buffer, 0, l);
             }
-        } finally {
+        }finally{
             inStream.close();
         }
     }
 
     @Override
-    public Header getContentEncoding() {
+    public Header getContentEncoding(){
         /* Content encoding is now 'identity' */
         return null;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         /* length of decompressed content is not known */
         return -1;
     }

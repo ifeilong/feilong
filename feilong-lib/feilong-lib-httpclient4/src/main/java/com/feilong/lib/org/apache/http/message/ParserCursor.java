@@ -30,24 +30,26 @@ package com.feilong.lib.org.apache.http.message;
 /**
  * This class represents a context of a parsing operation:
  * <ul>
- *  <li>the current position the parsing operation is expected to start at</li>
- *  <li>the bounds limiting the scope of the parsing operation</li>
+ * <li>the current position the parsing operation is expected to start at</li>
+ * <li>the bounds limiting the scope of the parsing operation</li>
  * </ul>
  *
  * @since 4.0
  */
-public class ParserCursor {
+public class ParserCursor{
 
     private final int lowerBound;
-    private final int upperBound;
-    private int pos;
 
-    public ParserCursor(final int lowerBound, final int upperBound) {
+    private final int upperBound;
+
+    private int       pos;
+
+    public ParserCursor(final int lowerBound, final int upperBound){
         super();
-        if (lowerBound < 0) {
+        if (lowerBound < 0){
             throw new IndexOutOfBoundsException("Lower bound cannot be negative");
         }
-        if (lowerBound > upperBound) {
+        if (lowerBound > upperBound){
             throw new IndexOutOfBoundsException("Lower bound cannot be greater then upper bound");
         }
         this.lowerBound = lowerBound;
@@ -55,34 +57,34 @@ public class ParserCursor {
         this.pos = lowerBound;
     }
 
-    public int getLowerBound() {
+    public int getLowerBound(){
         return this.lowerBound;
     }
 
-    public int getUpperBound() {
+    public int getUpperBound(){
         return this.upperBound;
     }
 
-    public int getPos() {
+    public int getPos(){
         return this.pos;
     }
 
-    public void updatePos(final int pos) {
-        if (pos < this.lowerBound) {
-            throw new IndexOutOfBoundsException("pos: "+pos+" < lowerBound: "+this.lowerBound);
+    public void updatePos(final int pos){
+        if (pos < this.lowerBound){
+            throw new IndexOutOfBoundsException("pos: " + pos + " < lowerBound: " + this.lowerBound);
         }
-        if (pos > this.upperBound) {
-            throw new IndexOutOfBoundsException("pos: "+pos+" > upperBound: "+this.upperBound);
+        if (pos > this.upperBound){
+            throw new IndexOutOfBoundsException("pos: " + pos + " > upperBound: " + this.upperBound);
         }
         this.pos = pos;
     }
 
-    public boolean atEnd() {
+    public boolean atEnd(){
         return this.pos >= this.upperBound;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append('[');
         buffer.append(Integer.toString(this.lowerBound));

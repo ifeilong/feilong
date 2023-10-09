@@ -43,13 +43,13 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class DefaultServiceUnavailableRetryStrategy implements ServiceUnavailableRetryStrategy {
+public class DefaultServiceUnavailableRetryStrategy implements ServiceUnavailableRetryStrategy{
 
     /**
      * Maximum number of allowed retries if the server responds with a HTTP code
      * in our retry code list. Default value is 1.
      */
-    private final int maxRetries;
+    private final int  maxRetries;
 
     /**
      * Retry interval between subsequent requests, in milliseconds. Default
@@ -57,7 +57,7 @@ public class DefaultServiceUnavailableRetryStrategy implements ServiceUnavailabl
      */
     private final long retryInterval;
 
-    public DefaultServiceUnavailableRetryStrategy(final int maxRetries, final int retryInterval) {
+    public DefaultServiceUnavailableRetryStrategy(final int maxRetries, final int retryInterval){
         super();
         Args.positive(maxRetries, "Max retries");
         Args.positive(retryInterval, "Retry interval");
@@ -65,18 +65,17 @@ public class DefaultServiceUnavailableRetryStrategy implements ServiceUnavailabl
         this.retryInterval = retryInterval;
     }
 
-    public DefaultServiceUnavailableRetryStrategy() {
+    public DefaultServiceUnavailableRetryStrategy(){
         this(1, 1000);
     }
 
     @Override
-    public boolean retryRequest(final HttpResponse response, final int executionCount, final HttpContext context) {
-        return executionCount <= maxRetries &&
-            response.getStatusLine().getStatusCode() == HttpStatus.SC_SERVICE_UNAVAILABLE;
+    public boolean retryRequest(final HttpResponse response,final int executionCount,final HttpContext context){
+        return executionCount <= maxRetries && response.getStatusLine().getStatusCode() == HttpStatus.SC_SERVICE_UNAVAILABLE;
     }
 
     @Override
-    public long getRetryInterval() {
+    public long getRetryInterval(){
         return retryInterval;
     }
 

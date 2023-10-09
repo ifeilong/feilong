@@ -41,17 +41,17 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicRequestLine implements RequestLine, Cloneable, Serializable {
+public class BasicRequestLine implements RequestLine,Cloneable,Serializable{
 
-    private static final long serialVersionUID = 2810581718468737193L;
+    private static final long     serialVersionUID = 2810581718468737193L;
 
     private final ProtocolVersion protoversion;
-    private final String method;
-    private final String uri;
 
-    public BasicRequestLine(final String method,
-                            final String uri,
-                            final ProtocolVersion version) {
+    private final String          method;
+
+    private final String          uri;
+
+    public BasicRequestLine(final String method, final String uri, final ProtocolVersion version){
         super();
         this.method = Args.notNull(method, "Method");
         this.uri = Args.notNull(uri, "URI");
@@ -59,28 +59,28 @@ public class BasicRequestLine implements RequestLine, Cloneable, Serializable {
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         return this.method;
     }
 
     @Override
-    public ProtocolVersion getProtocolVersion() {
+    public ProtocolVersion getProtocolVersion(){
         return this.protoversion;
     }
 
     @Override
-    public String getUri() {
+    public String getUri(){
         return this.uri;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         // no need for non-default formatting in toString()
         return BasicLineFormatter.INSTANCE.formatRequestLine(null, this).toString();
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
 

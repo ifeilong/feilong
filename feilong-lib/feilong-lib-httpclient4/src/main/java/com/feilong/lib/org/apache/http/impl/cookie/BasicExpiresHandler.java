@@ -42,33 +42,31 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicExpiresHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class BasicExpiresHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
     /** Valid date patterns */
     private final String[] datePatterns;
 
-    public BasicExpiresHandler(final String[] datePatterns) {
+    public BasicExpiresHandler(final String[] datePatterns){
         Args.notNull(datePatterns, "Array of date patterns");
         this.datePatterns = datePatterns.clone();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (value == null) {
+        if (value == null){
             throw new MalformedCookieException("Missing value for 'expires' attribute");
         }
         final Date expiry = DateUtils.parseDate(value, this.datePatterns);
-        if (expiry == null) {
-            throw new MalformedCookieException("Invalid 'expires' attribute: "
-                    + value);
+        if (expiry == null){
+            throw new MalformedCookieException("Invalid 'expires' attribute: " + value);
         }
         cookie.setExpiryDate(expiry);
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.EXPIRES_ATTR;
     }
 

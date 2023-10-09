@@ -34,7 +34,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.3
  */
-public interface CookieSpecProvider {
+public interface CookieSpecProvider{
 
     /**
      * Creates an instance of {@link CookieSpec}.

@@ -47,29 +47,29 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public final class PublicSuffixMatcher {
+public final class PublicSuffixMatcher{
 
     private final Map<String, DomainType> rules;
+
     private final Map<String, DomainType> exceptions;
 
-    public PublicSuffixMatcher(final Collection<String> rules, final Collection<String> exceptions) {
+    public PublicSuffixMatcher(final Collection<String> rules, final Collection<String> exceptions){
         this(DomainType.UNKNOWN, rules, exceptions);
     }
 
     /**
      * @since 4.5
      */
-    public PublicSuffixMatcher(
-            final DomainType domainType, final Collection<String> rules, final Collection<String> exceptions) {
-        Args.notNull(domainType,  "Domain type");
-        Args.notNull(rules,  "Domain suffix rules");
-        this.rules = new ConcurrentHashMap<String, DomainType>(rules.size());
-        for (final String rule: rules) {
+    public PublicSuffixMatcher(final DomainType domainType, final Collection<String> rules, final Collection<String> exceptions){
+        Args.notNull(domainType, "Domain type");
+        Args.notNull(rules, "Domain suffix rules");
+        this.rules = new ConcurrentHashMap<>(rules.size());
+        for (final String rule : rules){
             this.rules.put(rule, domainType);
         }
-        this.exceptions = new ConcurrentHashMap<String, DomainType>();
-        if (exceptions != null) {
-            for (final String exception: exceptions) {
+        this.exceptions = new ConcurrentHashMap<>();
+        if (exceptions != null){
+            for (final String exception : exceptions){
                 this.exceptions.put(exception, domainType);
             }
         }
@@ -78,33 +78,33 @@ public final class PublicSuffixMatcher {
     /**
      * @since 4.5
      */
-    public PublicSuffixMatcher(final Collection<PublicSuffixList> lists) {
-        Args.notNull(lists,  "Domain suffix lists");
-        this.rules = new ConcurrentHashMap<String, DomainType>();
-        this.exceptions = new ConcurrentHashMap<String, DomainType>();
-        for (final PublicSuffixList list: lists) {
+    public PublicSuffixMatcher(final Collection<PublicSuffixList> lists){
+        Args.notNull(lists, "Domain suffix lists");
+        this.rules = new ConcurrentHashMap<>();
+        this.exceptions = new ConcurrentHashMap<>();
+        for (final PublicSuffixList list : lists){
             final DomainType domainType = list.getType();
             final List<String> rules = list.getRules();
-            for (final String rule: rules) {
+            for (final String rule : rules){
                 this.rules.put(rule, domainType);
             }
             final List<String> exceptions = list.getExceptions();
-            if (exceptions != null) {
-                for (final String exception: exceptions) {
+            if (exceptions != null){
+                for (final String exception : exceptions){
                     this.exceptions.put(exception, domainType);
                 }
             }
         }
     }
 
-    private static DomainType findEntry(final Map<String, DomainType> map, final String rule) {
-        if (map == null) {
+    private static DomainType findEntry(final Map<String, DomainType> map,final String rule){
+        if (map == null){
             return null;
         }
         return map.get(rule);
     }
 
-    private static boolean match(final DomainType domainType, final DomainType expectedType) {
+    private static boolean match(final DomainType domainType,final DomainType expectedType){
         return domainType != null && (expectedType == null || domainType.equals(expectedType));
     }
 
@@ -115,7 +115,7 @@ public final class PublicSuffixMatcher {
      * @param domain
      * @return domain root
      */
-    public String getDomainRoot(final String domain) {
+    public String getDomainRoot(final String domain){
         return getDomainRoot(domain, null);
     }
 
@@ -124,31 +124,29 @@ public final class PublicSuffixMatcher {
      * if given domain represents a public suffix.
      *
      * @param domain
-     * @param expectedType expected domain type or {@code null} if any.
+     * @param expectedType
+     *            expected domain type or {@code null} if any.
      * @return domain root
      *
      * @since 4.5
      */
-    public String getDomainRoot(final String domain, final DomainType expectedType) {
-        if (domain == null) {
-            return null;
-        }
-        if (domain.startsWith(".")) {
+    public String getDomainRoot(final String domain,final DomainType expectedType){
+        if ((domain == null) || domain.startsWith(".")){
             return null;
         }
         final String normalized = DnsUtils.normalize(domain);
         String segment = normalized;
         String result = null;
-        while (segment != null) {
+        while (segment != null){
             // An exception rule takes priority over any other matching rule.
             final String key = IDN.toUnicode(segment);
             final DomainType exceptionRule = findEntry(exceptions, key);
-            if (match(exceptionRule, expectedType)) {
+            if (match(exceptionRule, expectedType)){
                 return segment;
             }
             final DomainType domainRule = findEntry(rules, key);
-            if (match(domainRule, expectedType)) {
-                if (domainRule == DomainType.PRIVATE) {
+            if (match(domainRule, expectedType)){
+                if (domainRule == DomainType.PRIVATE){
                     return segment;
                 }
                 return result;
@@ -157,10 +155,10 @@ public final class PublicSuffixMatcher {
             final int nextdot = segment.indexOf('.');
             final String nextSegment = nextdot != -1 ? segment.substring(nextdot + 1) : null;
 
-            if (nextSegment != null) {
+            if (nextSegment != null){
                 final DomainType wildcardDomainRule = findEntry(rules, "*." + IDN.toUnicode(nextSegment));
-                if (match(wildcardDomainRule, expectedType)) {
-                    if (wildcardDomainRule == DomainType.PRIVATE) {
+                if (match(wildcardDomainRule, expectedType)){
+                    if (wildcardDomainRule == DomainType.PRIVATE){
                         return segment;
                     }
                     return result;
@@ -171,7 +169,7 @@ public final class PublicSuffixMatcher {
         }
 
         // If no expectations then this result is good.
-        if (expectedType == null || expectedType == DomainType.UNKNOWN) {
+        if (expectedType == null || expectedType == DomainType.UNKNOWN){
             return result;
         }
 
@@ -182,7 +180,7 @@ public final class PublicSuffixMatcher {
     /**
      * Tests whether the given domain matches any of entry from the public suffix list.
      */
-    public boolean matches(final String domain) {
+    public boolean matches(final String domain){
         return matches(domain, null);
     }
 
@@ -190,17 +188,17 @@ public final class PublicSuffixMatcher {
      * Tests whether the given domain matches any of entry from the public suffix list.
      *
      * @param domain
-     * @param expectedType expected domain type or {@code null} if any.
+     * @param expectedType
+     *            expected domain type or {@code null} if any.
      * @return {@code true} if the given domain matches any of the public suffixes.
      *
      * @since 4.5
      */
-    public boolean matches(final String domain, final DomainType expectedType) {
-        if (domain == null) {
+    public boolean matches(final String domain,final DomainType expectedType){
+        if (domain == null){
             return false;
         }
-        final String domainRoot = getDomainRoot(
-                domain.startsWith(".") ? domain.substring(1) : domain, expectedType);
+        final String domainRoot = getDomainRoot(domain.startsWith(".") ? domain.substring(1) : domain, expectedType);
         return domainRoot == null;
     }
 

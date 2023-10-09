@@ -51,52 +51,49 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class SystemDefaultRoutePlanner extends DefaultRoutePlanner {
+public class SystemDefaultRoutePlanner extends DefaultRoutePlanner{
 
     private final ProxySelector proxySelector;
 
     /**
-     * @param proxySelector the proxy selector, or {@code null} for the system default
+     * @param proxySelector
+     *            the proxy selector, or {@code null} for the system default
      */
-    public SystemDefaultRoutePlanner(
-            final SchemePortResolver schemePortResolver,
-            final ProxySelector proxySelector) {
+    public SystemDefaultRoutePlanner(final SchemePortResolver schemePortResolver, final ProxySelector proxySelector){
         super(schemePortResolver);
         this.proxySelector = proxySelector;
     }
 
     /**
-     * @param proxySelector the proxy selector, or {@code null} for the system default
+     * @param proxySelector
+     *            the proxy selector, or {@code null} for the system default
      */
-    public SystemDefaultRoutePlanner(final ProxySelector proxySelector) {
+    public SystemDefaultRoutePlanner(final ProxySelector proxySelector){
         this(null, proxySelector);
     }
 
     @Override
-    protected HttpHost determineProxy(
-            final HttpHost    target,
-            final HttpRequest request,
-            final HttpContext context) throws HttpException {
+    protected HttpHost determineProxy(final HttpHost target,final HttpRequest request,final HttpContext context) throws HttpException{
         final URI targetURI;
-        try {
+        try{
             targetURI = new URI(target.toURI());
-        } catch (final URISyntaxException ex) {
+        }catch (final URISyntaxException ex){
             throw new HttpException("Cannot convert host to URI: " + target, ex);
         }
         ProxySelector proxySelectorInstance = this.proxySelector;
-        if (proxySelectorInstance == null) {
+        if (proxySelectorInstance == null){
             proxySelectorInstance = ProxySelector.getDefault();
         }
-        if (proxySelectorInstance == null) {
+        if (proxySelectorInstance == null){
             //The proxy selector can be "unset", so we must be able to deal with a null selector
             return null;
         }
         final List<Proxy> proxies = proxySelectorInstance.select(targetURI);
         final Proxy p = chooseProxy(proxies);
         HttpHost result = null;
-        if (p.type() == Proxy.Type.HTTP) {
+        if (p.type() == Proxy.Type.HTTP){
             // convert the socket address to an HttpHost
-            if (!(p.address() instanceof InetSocketAddress)) {
+            if (!(p.address() instanceof InetSocketAddress)){
                 throw new HttpException("Unable to handle non-Inet proxy address: " + p.address());
             }
             final InetSocketAddress isa = (InetSocketAddress) p.address();
@@ -107,35 +104,34 @@ public class SystemDefaultRoutePlanner extends DefaultRoutePlanner {
         return result;
     }
 
-    private String getHost(final InetSocketAddress isa) {
+    private String getHost(final InetSocketAddress isa){
 
         //@@@ Will this work with literal IPv6 addresses, or do we
         //@@@ need to wrap these in [] for the string representation?
         //@@@ Having it in this method at least allows for easy workarounds.
-       return isa.isUnresolved() ?
-            isa.getHostName() : isa.getAddress().getHostAddress();
+        return isa.isUnresolved() ? isa.getHostName() : isa.getAddress().getHostAddress();
 
     }
 
-    private Proxy chooseProxy(final List<Proxy> proxies) {
+    private Proxy chooseProxy(final List<Proxy> proxies){
         Proxy result = null;
         // check the list for one we can use
-        for (int i=0; (result == null) && (i < proxies.size()); i++) {
+        for (int i = 0; (result == null) && (i < proxies.size()); i++){
             final Proxy p = proxies.get(i);
             switch (p.type()) {
 
-            case DIRECT:
-            case HTTP:
-                result = p;
-                break;
+                case DIRECT:
+                case HTTP:
+                    result = p;
+                    break;
 
-            case SOCKS:
-                // SOCKS hosts are not handled on the route level.
-                // The socket may make use of the SOCKS host though.
-                break;
+                case SOCKS:
+                    // SOCKS hosts are not handled on the route level.
+                    // The socket may make use of the SOCKS host though.
+                    break;
             }
         }
-        if (result == null) {
+        if (result == null){
             //@@@ log as warning or info that only a socks proxy is available?
             // result can only be null if all proxies are socks proxies
             // socks proxies are not handled on the route planning level

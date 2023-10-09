@@ -56,86 +56,85 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
-public class DefaultBHttpClientConnection extends BHttpConnectionBase
-                                                   implements HttpClientConnection {
+public class DefaultBHttpClientConnection extends BHttpConnectionBase implements HttpClientConnection{
 
     private final HttpMessageParser<HttpResponse> responseParser;
-    private final HttpMessageWriter<HttpRequest> requestWriter;
+
+    private final HttpMessageWriter<HttpRequest>  requestWriter;
 
     /**
      * Creates new instance of DefaultBHttpClientConnection.
      *
-     * @param bufferSize buffer size. Must be a positive number.
-     * @param fragmentSizeHint fragment size hint.
-     * @param charDecoder decoder to be used for decoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for byte to char conversion.
-     * @param charEncoder encoder to be used for encoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for char to byte conversion.
-     * @param constraints Message constraints. If {@code null}
-     *   {@link MessageConstraints#DEFAULT} will be used.
-     * @param incomingContentStrategy incoming content length strategy. If {@code null}
-     *   {@link com.feilong.lib.org.apache.http.impl.entity.LaxContentLengthStrategy#INSTANCE} will be used.
-     * @param outgoingContentStrategy outgoing content length strategy. If {@code null}
-     *   {@link com.feilong.lib.org.apache.http.impl.entity.StrictContentLengthStrategy#INSTANCE} will be used.
-     * @param requestWriterFactory request writer factory. If {@code null}
-     *   {@link DefaultHttpRequestWriterFactory#INSTANCE} will be used.
-     * @param responseParserFactory response parser factory. If {@code null}
-     *   {@link DefaultHttpResponseParserFactory#INSTANCE} will be used.
+     * @param bufferSize
+     *            buffer size. Must be a positive number.
+     * @param fragmentSizeHint
+     *            fragment size hint.
+     * @param charDecoder
+     *            decoder to be used for decoding HTTP protocol elements.
+     *            If {@code null} simple type cast will be used for byte to char conversion.
+     * @param charEncoder
+     *            encoder to be used for encoding HTTP protocol elements.
+     *            If {@code null} simple type cast will be used for char to byte conversion.
+     * @param constraints
+     *            Message constraints. If {@code null}
+     *            {@link MessageConstraints#DEFAULT} will be used.
+     * @param incomingContentStrategy
+     *            incoming content length strategy. If {@code null}
+     *            {@link com.feilong.lib.org.apache.http.impl.entity.LaxContentLengthStrategy#INSTANCE} will be used.
+     * @param outgoingContentStrategy
+     *            outgoing content length strategy. If {@code null}
+     *            {@link com.feilong.lib.org.apache.http.impl.entity.StrictContentLengthStrategy#INSTANCE} will be used.
+     * @param requestWriterFactory
+     *            request writer factory. If {@code null}
+     *            {@link DefaultHttpRequestWriterFactory#INSTANCE} will be used.
+     * @param responseParserFactory
+     *            response parser factory. If {@code null}
+     *            {@link DefaultHttpResponseParserFactory#INSTANCE} will be used.
      */
-    public DefaultBHttpClientConnection(
-            final int bufferSize,
-            final int fragmentSizeHint,
-            final CharsetDecoder charDecoder,
-            final CharsetEncoder charEncoder,
-            final MessageConstraints constraints,
-            final ContentLengthStrategy incomingContentStrategy,
-            final ContentLengthStrategy outgoingContentStrategy,
-            final HttpMessageWriterFactory<HttpRequest> requestWriterFactory,
-            final HttpMessageParserFactory<HttpResponse> responseParserFactory) {
-        super(bufferSize, fragmentSizeHint, charDecoder, charEncoder,
-                constraints, incomingContentStrategy, outgoingContentStrategy);
-        this.requestWriter = (requestWriterFactory != null ? requestWriterFactory :
-            DefaultHttpRequestWriterFactory.INSTANCE).create(getSessionOutputBuffer());
-        this.responseParser = (responseParserFactory != null ? responseParserFactory :
-            DefaultHttpResponseParserFactory.INSTANCE).create(getSessionInputBuffer(), constraints);
+    public DefaultBHttpClientConnection(final int bufferSize, final int fragmentSizeHint, final CharsetDecoder charDecoder,
+                    final CharsetEncoder charEncoder, final MessageConstraints constraints,
+                    final ContentLengthStrategy incomingContentStrategy, final ContentLengthStrategy outgoingContentStrategy,
+                    final HttpMessageWriterFactory<HttpRequest> requestWriterFactory,
+                    final HttpMessageParserFactory<HttpResponse> responseParserFactory){
+        super(bufferSize, fragmentSizeHint, charDecoder, charEncoder, constraints, incomingContentStrategy, outgoingContentStrategy);
+        this.requestWriter = (requestWriterFactory != null ? requestWriterFactory : DefaultHttpRequestWriterFactory.INSTANCE)
+                        .create(getSessionOutputBuffer());
+        this.responseParser = (responseParserFactory != null ? responseParserFactory : DefaultHttpResponseParserFactory.INSTANCE)
+                        .create(getSessionInputBuffer(), constraints);
     }
 
-    public DefaultBHttpClientConnection(
-            final int bufferSize,
-            final CharsetDecoder charDecoder,
-            final CharsetEncoder charEncoder,
-            final MessageConstraints constraints) {
+    public DefaultBHttpClientConnection(final int bufferSize, final CharsetDecoder charDecoder, final CharsetEncoder charEncoder,
+                    final MessageConstraints constraints){
         this(bufferSize, bufferSize, charDecoder, charEncoder, constraints, null, null, null, null);
     }
 
-    public DefaultBHttpClientConnection(final int bufferSize) {
+    public DefaultBHttpClientConnection(final int bufferSize){
         this(bufferSize, bufferSize, null, null, null, null, null, null, null);
     }
 
-    protected void onResponseReceived(final HttpResponse response) {
+    protected void onResponseReceived(final HttpResponse response){
     }
 
-    protected void onRequestSubmitted(final HttpRequest request) {
+    protected void onRequestSubmitted(final HttpRequest request){
     }
 
     @Override
-    public void bind(final Socket socket) throws IOException {
+    public void bind(final Socket socket) throws IOException{
         super.bind(socket);
     }
 
     @Override
-    public boolean isResponseAvailable(final int timeout) throws IOException {
+    public boolean isResponseAvailable(final int timeout) throws IOException{
         ensureOpen();
-        try {
+        try{
             return awaitInput(timeout);
-        } catch (final SocketTimeoutException ex) {
+        }catch (final SocketTimeoutException ex){
             return false;
         }
     }
 
     @Override
-    public void sendRequestHeader(final HttpRequest request)
-            throws HttpException, IOException {
+    public void sendRequestHeader(final HttpRequest request) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
         ensureOpen();
         this.requestWriter.write(request);
@@ -144,12 +143,11 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
     }
 
     @Override
-    public void sendRequestEntity(final HttpEntityEnclosingRequest request)
-            throws HttpException, IOException {
+    public void sendRequestEntity(final HttpEntityEnclosingRequest request) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
         ensureOpen();
         final HttpEntity entity = request.getEntity();
-        if (entity == null) {
+        if (entity == null){
             return;
         }
         final OutputStream outStream = prepareOutput(request);
@@ -158,19 +156,18 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
     }
 
     @Override
-    public HttpResponse receiveResponseHeader() throws HttpException, IOException {
+    public HttpResponse receiveResponseHeader() throws HttpException,IOException{
         ensureOpen();
         final HttpResponse response = this.responseParser.parse();
         onResponseReceived(response);
-        if (response.getStatusLine().getStatusCode() >= HttpStatus.SC_OK) {
+        if (response.getStatusLine().getStatusCode() >= HttpStatus.SC_OK){
             incrementResponseCount();
         }
         return response;
     }
 
     @Override
-    public void receiveResponseEntity(
-            final HttpResponse response) throws HttpException, IOException {
+    public void receiveResponseEntity(final HttpResponse response) throws HttpException,IOException{
         Args.notNull(response, "HTTP response");
         ensureOpen();
         final HttpEntity entity = prepareInput(response);
@@ -178,7 +175,7 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() throws IOException{
         ensureOpen();
         doFlush();
     }

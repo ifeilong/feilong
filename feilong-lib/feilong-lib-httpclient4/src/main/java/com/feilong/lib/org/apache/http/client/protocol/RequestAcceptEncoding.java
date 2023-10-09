@@ -47,42 +47,40 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.1
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RequestAcceptEncoding implements HttpRequestInterceptor {
+public class RequestAcceptEncoding implements HttpRequestInterceptor{
 
     private final String acceptEncoding;
 
     /**
      * @since 4.4
      */
-    public RequestAcceptEncoding(final List<String> encodings) {
-        if (encodings != null && !encodings.isEmpty()) {
+    public RequestAcceptEncoding(final List<String> encodings){
+        if (encodings != null && !encodings.isEmpty()){
             final StringBuilder buf = new StringBuilder();
-            for (int i = 0; i < encodings.size(); i++) {
-                if (i > 0) {
+            for (int i = 0; i < encodings.size(); i++){
+                if (i > 0){
                     buf.append(",");
                 }
                 buf.append(encodings.get(i));
             }
             this.acceptEncoding = buf.toString();
-        } else {
+        }else{
             this.acceptEncoding = "gzip,deflate";
         }
     }
 
-    public RequestAcceptEncoding() {
+    public RequestAcceptEncoding(){
         this(null);
     }
 
     @Override
-    public void process(
-            final HttpRequest request,
-            final HttpContext context) throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
 
         final HttpClientContext clientContext = HttpClientContext.adapt(context);
         final RequestConfig requestConfig = clientContext.getRequestConfig();
 
         /* Signal support for Accept-Encoding transfer encodings. */
-        if (!request.containsHeader("Accept-Encoding") && requestConfig.isContentCompressionEnabled()) {
+        if (!request.containsHeader("Accept-Encoding") && requestConfig.isContentCompressionEnabled()){
             request.addHeader("Accept-Encoding", acceptEncoding);
         }
     }

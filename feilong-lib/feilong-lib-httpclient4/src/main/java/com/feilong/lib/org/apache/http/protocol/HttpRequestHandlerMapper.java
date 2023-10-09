@@ -36,14 +36,15 @@ import com.feilong.lib.org.apache.http.HttpRequest;
  *
  * @since 4.3
  */
-public interface HttpRequestHandlerMapper {
+public interface HttpRequestHandlerMapper{
 
     /**
      * Looks up a handler matching the given request.
      *
-     * @param request the request to map to a handler
+     * @param request
+     *            the request to map to a handler
      * @return HTTP request handler or {@code null} if no match
-     * is found.
+     *         is found.
      */
     HttpRequestHandler lookup(HttpRequest request);
 

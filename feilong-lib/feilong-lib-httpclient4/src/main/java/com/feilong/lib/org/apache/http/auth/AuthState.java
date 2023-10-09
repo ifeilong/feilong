@@ -35,24 +35,24 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class AuthState {
+public class AuthState{
 
     /** Actual state of authentication protocol */
     private AuthProtocolState state;
 
     /** Actual authentication scheme */
-    private AuthScheme authScheme;
+    private AuthScheme        authScheme;
 
     /** Actual authentication scope */
-    private AuthScope authScope;
+    private AuthScope         authScope;
 
     /** Credentials selected for authentication */
-    private Credentials credentials;
+    private Credentials       credentials;
 
     /** Available auth options */
     private Queue<AuthOption> authOptions;
 
-    public AuthState() {
+    public AuthState(){
         super();
         this.state = AuthProtocolState.UNCHALLENGED;
     }
@@ -62,7 +62,7 @@ public class AuthState {
      *
      * @since 4.2
      */
-    public void reset() {
+    public void reset(){
         this.state = AuthProtocolState.UNCHALLENGED;
         this.authOptions = null;
         this.authScheme = null;
@@ -73,40 +73,42 @@ public class AuthState {
     /**
      * @since 4.2
      */
-    public AuthProtocolState getState() {
+    public AuthProtocolState getState(){
         return this.state;
     }
 
     /**
      * @since 4.2
      */
-    public void setState(final AuthProtocolState state) {
+    public void setState(final AuthProtocolState state){
         this.state = state != null ? state : AuthProtocolState.UNCHALLENGED;
     }
 
     /**
      * Returns actual {@link AuthScheme}. May be null.
      */
-    public AuthScheme getAuthScheme() {
+    public AuthScheme getAuthScheme(){
         return this.authScheme;
     }
 
     /**
      * Returns actual {@link Credentials}. May be null.
      */
-    public Credentials getCredentials() {
+    public Credentials getCredentials(){
         return this.credentials;
     }
 
     /**
      * Updates the auth state with {@link AuthScheme} and {@link Credentials}.
      *
-     * @param authScheme auth scheme. May not be null.
-     * @param credentials user crednetials. May not be null.
+     * @param authScheme
+     *            auth scheme. May not be null.
+     * @param credentials
+     *            user crednetials. May not be null.
      *
      * @since 4.2
      */
-    public void update(final AuthScheme authScheme, final Credentials credentials) {
+    public void update(final AuthScheme authScheme,final Credentials credentials){
         Args.notNull(authScheme, "Auth scheme");
         Args.notNull(credentials, "Credentials");
         this.authScheme = authScheme;
@@ -119,7 +121,7 @@ public class AuthState {
      *
      * @since 4.2
      */
-    public Queue<AuthOption> getAuthOptions() {
+    public Queue<AuthOption> getAuthOptions(){
         return this.authOptions;
     }
 
@@ -129,7 +131,7 @@ public class AuthState {
      *
      * @since 4.2
      */
-    public boolean hasAuthOptions() {
+    public boolean hasAuthOptions(){
         return this.authOptions != null && !this.authOptions.isEmpty();
     }
 
@@ -138,18 +140,19 @@ public class AuthState {
      *
      * @since 4.5.6
      */
-    public boolean isConnectionBased() {
+    public boolean isConnectionBased(){
         return this.authScheme != null && this.authScheme.isConnectionBased();
     }
 
     /**
      * Updates the auth state with a queue of {@link AuthOption}s.
      *
-     * @param authOptions a queue of auth options. May not be null or empty.
+     * @param authOptions
+     *            a queue of auth options. May not be null or empty.
      *
      * @since 4.2
      */
-    public void update(final Queue<AuthOption> authOptions) {
+    public void update(final Queue<AuthOption> authOptions){
         Args.notEmpty(authOptions, "Queue of auth options");
         this.authOptions = authOptions;
         this.authScheme = null;
@@ -159,10 +162,10 @@ public class AuthState {
     /**
      * Invalidates the authentication state by resetting its parameters.
      *
-     * @deprecated (4.2)  use {@link #reset()}
+     * @deprecated (4.2) use {@link #reset()}
      */
     @Deprecated
-    public void invalidate() {
+    public void invalidate(){
         reset();
     }
 
@@ -170,20 +173,21 @@ public class AuthState {
      * @deprecated (4.2) do not use
      */
     @Deprecated
-    public boolean isValid() {
+    public boolean isValid(){
         return this.authScheme != null;
     }
 
     /**
      * Assigns the given {@link AuthScheme authentication scheme}.
      *
-     * @param authScheme the {@link AuthScheme authentication scheme}
+     * @param authScheme
+     *            the {@link AuthScheme authentication scheme}
      *
-     * @deprecated (4.2)  use {@link #update(AuthScheme, Credentials)}
+     * @deprecated (4.2) use {@link #update(AuthScheme, Credentials)}
      */
     @Deprecated
-    public void setAuthScheme(final AuthScheme authScheme) {
-        if (authScheme == null) {
+    public void setAuthScheme(final AuthScheme authScheme){
+        if (authScheme == null){
             reset();
             return;
         }
@@ -193,12 +197,13 @@ public class AuthState {
     /**
      * Sets user {@link Credentials} to be used for authentication
      *
-     * @param credentials User credentials
+     * @param credentials
+     *            User credentials
      *
-     * @deprecated (4.2)  use {@link #update(AuthScheme, Credentials)}
+     * @deprecated (4.2) use {@link #update(AuthScheme, Credentials)}
      */
     @Deprecated
-    public void setCredentials(final Credentials credentials) {
+    public void setCredentials(final Credentials credentials){
         this.credentials = credentials;
     }
 
@@ -207,33 +212,34 @@ public class AuthState {
      *
      * @return actual authentication scope if available, {@code null} otherwise
      *
-     * @deprecated (4.2)  do not use.
+     * @deprecated (4.2) do not use.
      */
     @Deprecated
-    public AuthScope getAuthScope() {
+    public AuthScope getAuthScope(){
         return this.authScope;
     }
 
     /**
      * Sets actual {@link AuthScope}.
      *
-     * @param authScope Authentication scope
+     * @param authScope
+     *            Authentication scope
      *
-     * @deprecated (4.2)  do not use.
+     * @deprecated (4.2) do not use.
      */
     @Deprecated
-    public void setAuthScope(final AuthScope authScope) {
+    public void setAuthScope(final AuthScope authScope){
         this.authScope = authScope;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append("state:").append(this.state).append(";");
-        if (this.authScheme != null) {
+        if (this.authScheme != null){
             buffer.append("auth scheme:").append(this.authScheme.getSchemeName()).append(";");
         }
-        if (this.credentials != null) {
+        if (this.credentials != null){
             buffer.append("credentials present");
         }
         return buffer.toString();

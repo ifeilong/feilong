@@ -45,26 +45,29 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class SerializableEntity extends AbstractHttpEntity {
+public class SerializableEntity extends AbstractHttpEntity{
 
-    private byte[] objSer;
+    private byte[]       objSer;
 
     private Serializable objRef;
 
     /**
      * Creates new instance of this class.
      *
-     * @param ser input
-     * @param bufferize tells whether the content should be
-     *        stored in an internal buffer
-     * @throws IOException in case of an I/O error
+     * @param ser
+     *            input
+     * @param bufferize
+     *            tells whether the content should be
+     *            stored in an internal buffer
+     * @throws IOException
+     *             in case of an I/O error
      */
-    public SerializableEntity(final Serializable ser, final boolean bufferize) throws IOException {
+    public SerializableEntity(final Serializable ser, final boolean bufferize) throws IOException{
         super();
         Args.notNull(ser, "Source object");
-        if (bufferize) {
+        if (bufferize){
             createBytes(ser);
-        } else {
+        }else{
             this.objRef = ser;
         }
     }
@@ -72,17 +75,18 @@ public class SerializableEntity extends AbstractHttpEntity {
     /**
      * Creates new instance of this class.
      *
-     * @param serializable The object to serialize.
+     * @param serializable
+     *            The object to serialize.
      *
      * @since 4.3
      */
-    public SerializableEntity(final Serializable serializable) {
+    public SerializableEntity(final Serializable serializable){
         super();
         Args.notNull(serializable, "Source object");
         this.objRef = serializable;
     }
 
-    private void createBytes(final Serializable ser) throws IOException {
+    private void createBytes(final Serializable ser) throws IOException{
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final ObjectOutputStream out = new ObjectOutputStream(baos);
         out.writeObject(ser);
@@ -91,36 +95,36 @@ public class SerializableEntity extends AbstractHttpEntity {
     }
 
     @Override
-    public InputStream getContent() throws IOException, IllegalStateException {
-        if (this.objSer == null) {
+    public InputStream getContent() throws IOException,IllegalStateException{
+        if (this.objSer == null){
             createBytes(this.objRef);
         }
         return new ByteArrayInputStream(this.objSer);
     }
 
     @Override
-    public long getContentLength() {
-        return this.objSer ==  null ? -1 : this.objSer.length;
+    public long getContentLength(){
+        return this.objSer == null ? -1 : this.objSer.length;
     }
 
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return true;
     }
 
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return this.objSer == null;
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         Args.notNull(outStream, "Output stream");
-        if (this.objSer == null) {
+        if (this.objSer == null){
             final ObjectOutputStream out = new ObjectOutputStream(outStream);
             out.writeObject(this.objRef);
             out.flush();
-        } else {
+        }else{
             outStream.write(this.objSer);
             outStream.flush();
         }

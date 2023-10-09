@@ -41,9 +41,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicStatusLine implements StatusLine, Cloneable, Serializable {
+public class BasicStatusLine implements StatusLine,Cloneable,Serializable{
 
-    private static final long serialVersionUID = -2443303766890459269L;
+    private static final long     serialVersionUID = -2443303766890459269L;
 
     // ----------------------------------------------------- Instance Variables
 
@@ -51,22 +51,24 @@ public class BasicStatusLine implements StatusLine, Cloneable, Serializable {
     private final ProtocolVersion protoVersion;
 
     /** The status code. */
-    private final int statusCode;
+    private final int             statusCode;
 
     /** The reason phrase. */
-    private final String reasonPhrase;
+    private final String          reasonPhrase;
 
     // ----------------------------------------------------------- Constructors
     /**
      * Creates a new status line with the given version, status, and reason.
      *
-     * @param version           the protocol version of the response
-     * @param statusCode        the status code of the response
-     * @param reasonPhrase      the reason phrase to the status code, or
-     *                          {@code null}
+     * @param version
+     *            the protocol version of the response
+     * @param statusCode
+     *            the status code of the response
+     * @param reasonPhrase
+     *            the reason phrase to the status code, or
+     *            {@code null}
      */
-    public BasicStatusLine(final ProtocolVersion version, final int statusCode,
-                           final String reasonPhrase) {
+    public BasicStatusLine(final ProtocolVersion version, final int statusCode, final String reasonPhrase){
         super();
         this.protoVersion = Args.notNull(version, "Version");
         this.statusCode = Args.notNegative(statusCode, "Status code");
@@ -76,28 +78,28 @@ public class BasicStatusLine implements StatusLine, Cloneable, Serializable {
     // --------------------------------------------------------- Public Methods
 
     @Override
-    public int getStatusCode() {
+    public int getStatusCode(){
         return this.statusCode;
     }
 
     @Override
-    public ProtocolVersion getProtocolVersion() {
+    public ProtocolVersion getProtocolVersion(){
         return this.protoVersion;
     }
 
     @Override
-    public String getReasonPhrase() {
+    public String getReasonPhrase(){
         return this.reasonPhrase;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         // no need for non-default formatting in toString()
         return BasicLineFormatter.INSTANCE.formatStatusLine(null, this).toString();
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
 

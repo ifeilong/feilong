@@ -37,13 +37,13 @@ import java.util.Iterator;
  *
  * @since 4.0
  */
-public interface TokenIterator extends Iterator<Object> {
+public interface TokenIterator extends Iterator<Object>{
 
     /**
      * Indicates whether there is another token in this iteration.
      *
-     * @return  {@code true} if there is another token,
-     *          {@code false} otherwise
+     * @return {@code true} if there is another token,
+     *         {@code false} otherwise
      */
     @Override
     boolean hasNext();
@@ -53,7 +53,7 @@ public interface TokenIterator extends Iterator<Object> {
      * This method should only be called while {@link #hasNext hasNext}
      * is true.
      *
-     * @return  the next token in this iteration
+     * @return the next token in this iteration
      */
     String nextToken();
 

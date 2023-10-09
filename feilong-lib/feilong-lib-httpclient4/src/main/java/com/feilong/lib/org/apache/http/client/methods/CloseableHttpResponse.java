@@ -36,5 +36,5 @@ import com.feilong.lib.org.apache.http.HttpResponse;
  *
  * @since 4.3
  */
-public interface CloseableHttpResponse extends HttpResponse, Closeable {
+public interface CloseableHttpResponse extends HttpResponse,Closeable{
 }

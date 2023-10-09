@@ -44,7 +44,6 @@ import com.feilong.lib.org.apache.http.auth.AuthState;
 import com.feilong.lib.org.apache.http.auth.Credentials;
 import com.feilong.lib.org.apache.http.client.config.AuthSchemes;
 import com.feilong.lib.org.apache.http.client.config.RequestConfig;
-import com.feilong.lib.org.apache.http.client.params.HttpClientParamConfig;
 import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.client.protocol.RequestClientConnControl;
 import com.feilong.lib.org.apache.http.config.ConnectionConfig;
@@ -65,7 +64,6 @@ import com.feilong.lib.org.apache.http.impl.conn.ManagedHttpClientConnectionFact
 import com.feilong.lib.org.apache.http.impl.execchain.TunnelRefusedException;
 import com.feilong.lib.org.apache.http.message.BasicHttpRequest;
 import com.feilong.lib.org.apache.http.params.BasicHttpParams;
-import com.feilong.lib.org.apache.http.params.HttpParamConfig;
 import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.BasicHttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
@@ -82,32 +80,38 @@ import com.feilong.lib.org.apache.http.util.EntityUtils;
  * ProxyClient can be used to establish a tunnel via an HTTP proxy.
  */
 @SuppressWarnings("deprecation")
-public class ProxyClient {
+public class ProxyClient{
 
     private final HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connFactory;
-    private final ConnectionConfig connectionConfig;
-    private final RequestConfig requestConfig;
-    private final HttpProcessor httpProcessor;
-    private final HttpRequestExecutor requestExec;
-    private final ProxyAuthenticationStrategy proxyAuthStrategy;
-    private final HttpAuthenticator authenticator;
-    private final AuthState proxyAuthState;
-    private final AuthSchemeRegistry authSchemeRegistry;
-    private final ConnectionReuseStrategy reuseStrategy;
+
+    private final ConnectionConfig                                              connectionConfig;
+
+    private final RequestConfig                                                 requestConfig;
+
+    private final HttpProcessor                                                 httpProcessor;
+
+    private final HttpRequestExecutor                                           requestExec;
+
+    private final ProxyAuthenticationStrategy                                   proxyAuthStrategy;
+
+    private final HttpAuthenticator                                             authenticator;
+
+    private final AuthState                                                     proxyAuthState;
+
+    private final AuthSchemeRegistry                                            authSchemeRegistry;
+
+    private final ConnectionReuseStrategy                                       reuseStrategy;
 
     /**
      * @since 4.3
      */
-    public ProxyClient(
-            final HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connFactory,
-            final ConnectionConfig connectionConfig,
-            final RequestConfig requestConfig) {
+    public ProxyClient(final HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connFactory,
+                    final ConnectionConfig connectionConfig, final RequestConfig requestConfig){
         super();
         this.connFactory = connFactory != null ? connFactory : ManagedHttpClientConnectionFactory.INSTANCE;
         this.connectionConfig = connectionConfig != null ? connectionConfig : ConnectionConfig.DEFAULT;
         this.requestConfig = requestConfig != null ? requestConfig : RequestConfig.DEFAULT;
-        this.httpProcessor = new ImmutableHttpProcessor(
-                new RequestTargetHost(), new RequestClientConnControl(), new RequestUserAgent());
+        this.httpProcessor = new ImmutableHttpProcessor(new RequestTargetHost(), new RequestClientConnControl(), new RequestUserAgent());
         this.requestExec = new HttpRequestExecutor();
         this.proxyAuthStrategy = new ProxyAuthenticationStrategy();
         this.authenticator = new HttpAuthenticator();
@@ -121,24 +125,24 @@ public class ProxyClient {
         this.reuseStrategy = new DefaultConnectionReuseStrategy();
     }
 
-    /**
-     * @deprecated (4.3) use {@link ProxyClient#ProxyClient(HttpConnectionFactory, ConnectionConfig, RequestConfig)}
-     */
-    @Deprecated
-    public ProxyClient(final HttpParams params) {
-        this(null,
-                HttpParamConfig.getConnectionConfig(params),
-                HttpClientParamConfig.getRequestConfig(params));
-    }
+    //    /**
+    //     * @deprecated (4.3) use {@link ProxyClient#ProxyClient(HttpConnectionFactory, ConnectionConfig, RequestConfig)}
+    //     */
+    //    @Deprecated
+    //    public ProxyClient(final HttpParams params) {
+    //        this(null,
+    //                HttpParamConfig.getConnectionConfig(params),
+    //                HttpClientParamConfig.getRequestConfig(params));
+    //    }
 
     /**
      * @since 4.3
      */
-    public ProxyClient(final RequestConfig requestConfig) {
+    public ProxyClient(final RequestConfig requestConfig){
         this(null, null, requestConfig);
     }
 
-    public ProxyClient() {
+    public ProxyClient(){
         this(null, null, null);
     }
 
@@ -146,7 +150,7 @@ public class ProxyClient {
      * @deprecated (4.3) do not use.
      */
     @Deprecated
-    public HttpParams getParams() {
+    public HttpParams getParams(){
         return new BasicHttpParams();
     }
 
@@ -154,33 +158,31 @@ public class ProxyClient {
      * @deprecated (4.3) do not use.
      */
     @Deprecated
-    public AuthSchemeRegistry getAuthSchemeRegistry() {
+    public AuthSchemeRegistry getAuthSchemeRegistry(){
         return this.authSchemeRegistry;
     }
 
-    public Socket tunnel(
-            final HttpHost proxy,
-            final HttpHost target,
-            final Credentials credentials) throws IOException, HttpException {
+    public Socket tunnel(final HttpHost proxy,final HttpHost target,final Credentials credentials) throws IOException,HttpException{
         Args.notNull(proxy, "Proxy host");
         Args.notNull(target, "Target host");
         Args.notNull(credentials, "Credentials");
         HttpHost host = target;
-        if (host.getPort() <= 0) {
+        if (host.getPort() <= 0){
             host = new HttpHost(host.getHostName(), 80, host.getSchemeName());
         }
         final HttpRoute route = new HttpRoute(
-                host,
-                this.requestConfig.getLocalAddress(),
-                proxy, false, TunnelType.TUNNELLED, LayerType.PLAIN);
+                        host,
+                        this.requestConfig.getLocalAddress(),
+                        proxy,
+                        false,
+                        TunnelType.TUNNELLED,
+                        LayerType.PLAIN);
 
-        final ManagedHttpClientConnection conn = this.connFactory.create(
-                route, this.connectionConfig);
+        final ManagedHttpClientConnection conn = this.connFactory.create(route, this.connectionConfig);
         final HttpContext context = new BasicHttpContext();
         HttpResponse response;
 
-        final HttpRequest connect = new BasicHttpRequest(
-                "CONNECT", host.toHostString(), HttpVersion.HTTP_1_1);
+        final HttpRequest connect = new BasicHttpRequest("CONNECT", host.toHostString(), HttpVersion.HTTP_1_1);
 
         final BasicCredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(new AuthScope(proxy), credentials);
@@ -197,8 +199,8 @@ public class ProxyClient {
 
         this.requestExec.preProcess(connect, this.httpProcessor, context);
 
-        for (;;) {
-            if (!conn.isOpen()) {
+        for (;;){
+            if (!conn.isOpen()){
                 final Socket socket = new Socket(proxy.getHostName(), proxy.getPort());
                 conn.bind(socket);
             }
@@ -208,45 +210,41 @@ public class ProxyClient {
             response = this.requestExec.execute(connect, conn, context);
 
             final int status = response.getStatusLine().getStatusCode();
-            if (status < 200) {
-                throw new HttpException("Unexpected response to CONNECT request: " +
-                        response.getStatusLine());
+            if (status < 200){
+                throw new HttpException("Unexpected response to CONNECT request: " + response.getStatusLine());
             }
-            if (this.authenticator.isAuthenticationRequested(proxy, response,
-                    this.proxyAuthStrategy, this.proxyAuthState, context)) {
-                if (this.authenticator.handleAuthChallenge(proxy, response,
-                        this.proxyAuthStrategy, this.proxyAuthState, context)) {
+            if (this.authenticator.isAuthenticationRequested(proxy, response, this.proxyAuthStrategy, this.proxyAuthState, context)){
+                if (this.authenticator.handleAuthChallenge(proxy, response, this.proxyAuthStrategy, this.proxyAuthState, context)){
                     // Retry request
-                    if (this.reuseStrategy.keepAlive(response, context)) {
+                    if (this.reuseStrategy.keepAlive(response, context)){
                         // Consume response content
                         final HttpEntity entity = response.getEntity();
                         EntityUtils.consume(entity);
-                    } else {
+                    }else{
                         conn.close();
                     }
                     // discard previous auth header
                     connect.removeHeaders(AUTH.PROXY_AUTH_RESP);
-                } else {
+                }else{
                     break;
                 }
-            } else {
+            }else{
                 break;
             }
         }
 
         final int status = response.getStatusLine().getStatusCode();
 
-        if (status > 299) {
+        if (status > 299){
 
             // Buffer response content
             final HttpEntity entity = response.getEntity();
-            if (entity != null) {
+            if (entity != null){
                 response.setEntity(new BufferedHttpEntity(entity));
             }
 
             conn.close();
-            throw new TunnelRefusedException("CONNECT refused by proxy: " +
-                    response.getStatusLine(), response);
+            throw new TunnelRefusedException("CONNECT refused by proxy: " + response.getStatusLine(), response);
         }
         return conn.getSocket();
     }

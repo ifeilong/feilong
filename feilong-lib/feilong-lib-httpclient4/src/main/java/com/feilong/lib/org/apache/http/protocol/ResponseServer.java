@@ -43,28 +43,27 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class ResponseServer implements HttpResponseInterceptor {
+public class ResponseServer implements HttpResponseInterceptor{
 
     private final String originServer;
 
     /**
      * @since 4.3
      */
-    public ResponseServer(final String originServer) {
+    public ResponseServer(final String originServer){
         super();
         this.originServer = originServer;
     }
 
-    public ResponseServer() {
+    public ResponseServer(){
         this(null);
     }
 
     @Override
-    public void process(final HttpResponse response, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpResponse response,final HttpContext context) throws HttpException,IOException{
         Args.notNull(response, "HTTP response");
-        if (!response.containsHeader(HTTP.SERVER_HEADER)) {
-            if (this.originServer != null) {
+        if (!response.containsHeader(HTTP.SERVER_HEADER)){
+            if (this.originServer != null){
                 response.addHeader(HTTP.SERVER_HEADER, this.originServer);
             }
         }

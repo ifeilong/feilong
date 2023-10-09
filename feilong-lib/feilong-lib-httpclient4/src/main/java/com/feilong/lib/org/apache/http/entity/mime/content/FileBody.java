@@ -44,22 +44,20 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class FileBody extends AbstractContentBody {
+public class FileBody extends AbstractContentBody{
 
-    private final File file;
+    private final File   file;
+
     private final String filename;
 
     /**
      * @since 4.1
      *
      * @deprecated (4.3) use {@link FileBody#FileBody(File, ContentType, String)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public FileBody(final File file,
-                    final String filename,
-                    final String mimeType,
-                    final String charset) {
+    public FileBody(final File file, final String filename, final String mimeType, final String charset){
         this(file, ContentType.create(mimeType, charset), filename);
     }
 
@@ -67,32 +65,30 @@ public class FileBody extends AbstractContentBody {
      * @since 4.1
      *
      * @deprecated (4.3) use {@link FileBody#FileBody(File, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public FileBody(final File file,
-                    final String mimeType,
-                    final String charset) {
+    public FileBody(final File file, final String mimeType, final String charset){
         this(file, null, mimeType, charset);
     }
 
     /**
      * @deprecated (4.3) use {@link FileBody#FileBody(File, ContentType)}
-     *   or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public FileBody(final File file, final String mimeType) {
+    public FileBody(final File file, final String mimeType){
         this(file, ContentType.create(mimeType), null);
     }
 
-    public FileBody(final File file) {
+    public FileBody(final File file){
         this(file, ContentType.DEFAULT_BINARY, file != null ? file.getName() : null);
     }
 
     /**
      * @since 4.3
      */
-    public FileBody(final File file, final ContentType contentType, final String filename) {
+    public FileBody(final File file, final ContentType contentType, final String filename){
         super(contentType);
         Args.notNull(file, "File");
         this.file = file;
@@ -102,46 +98,46 @@ public class FileBody extends AbstractContentBody {
     /**
      * @since 4.3
      */
-    public FileBody(final File file, final ContentType contentType) {
+    public FileBody(final File file, final ContentType contentType){
         this(file, contentType, file != null ? file.getName() : null);
     }
 
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() throws IOException{
         return new FileInputStream(this.file);
     }
 
     @Override
-    public void writeTo(final OutputStream out) throws IOException {
+    public void writeTo(final OutputStream out) throws IOException{
         Args.notNull(out, "Output stream");
         final InputStream in = new FileInputStream(this.file);
-        try {
+        try{
             final byte[] tmp = new byte[4096];
             int l;
-            while ((l = in.read(tmp)) != -1) {
+            while ((l = in.read(tmp)) != -1){
                 out.write(tmp, 0, l);
             }
             out.flush();
-        } finally {
+        }finally{
             in.close();
         }
     }
 
     @Override
-    public String getTransferEncoding() {
+    public String getTransferEncoding(){
         return MIME.ENC_BINARY;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return this.file.length();
     }
 
     @Override
-    public String getFilename() {
+    public String getFilename(){
         return filename;
     }
 
-    public File getFile() {
+    public File getFile(){
         return this.file;
     }
 

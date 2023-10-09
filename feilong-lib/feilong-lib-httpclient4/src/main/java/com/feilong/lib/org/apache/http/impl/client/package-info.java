@@ -30,22 +30,23 @@
  * <p>
  * The usual execution flow can be demonstrated by the code snippet below:
  * </p>
+ * 
  * <pre>
  * CloseableHttpClient httpclient = HttpClients.createDefault();
- * try {
- *      HttpGet httpGet = new HttpGet("http://targethost/homepage");
- *      CloseableHttpResponse response = httpclient.execute(httpGet);
- *      try {
- *          System.out.println(response.getStatusLine());
- *          HttpEntity entity = response.getEntity();
- *          // do something useful with the response body
- *          // and ensure it is fully consumed
- *          EntityUtils.consume(entity);
- *      } finally {
- *          response.close();
- *      }
- * } finally {
- *      httpclient.close();
+ * try{
+ *     HttpGet httpGet = new HttpGet("http://targethost/homepage");
+ *     CloseableHttpResponse response = httpclient.execute(httpGet);
+ *     try{
+ *         System.out.println(response.getStatusLine());
+ *         HttpEntity entity = response.getEntity();
+ *         // do something useful with the response body
+ *         // and ensure it is fully consumed
+ *         EntityUtils.consume(entity);
+ *     }finally{
+ *         response.close();
+ *     }
+ * }finally{
+ *     httpclient.close();
  * }
  * </pre>
  */

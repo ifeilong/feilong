@@ -32,7 +32,6 @@ import java.io.IOException;
 import com.feilong.lib.org.apache.http.conn.ClientConnectionRequest;
 import com.feilong.lib.org.apache.http.conn.ConnectionReleaseTrigger;
 
-
 /**
  * Interface representing an HTTP request that can be aborted by shutting
  * down the underlying HTTP connection.
@@ -42,7 +41,7 @@ import com.feilong.lib.org.apache.http.conn.ConnectionReleaseTrigger;
  * @deprecated (4.3) use {@link HttpExecutionAware}
  */
 @Deprecated
-public interface AbortableHttpRequest {
+public interface AbortableHttpRequest{
 
     /**
      * Sets the {@link com.feilong.lib.org.apache.http.conn.ClientConnectionRequest}
@@ -57,7 +56,7 @@ public interface AbortableHttpRequest {
      * Sets the {@link ConnectionReleaseTrigger} callback that can
      * be used to abort an active connection.
      * Typically, this will be the
-     *   {@link com.feilong.lib.org.apache.http.conn.ManagedClientConnection} itself.
+     * {@link com.feilong.lib.org.apache.http.conn.ManagedClientConnection} itself.
      * If the request is already aborted, throws an {@link IOException}.
      */
     void setReleaseTrigger(ConnectionReleaseTrigger releaseTrigger) throws IOException;
@@ -79,4 +78,3 @@ public interface AbortableHttpRequest {
     void abort();
 
 }
-

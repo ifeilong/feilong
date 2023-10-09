@@ -41,37 +41,38 @@ import com.feilong.lib.org.apache.http.util.Asserts;
  *
  * @since 4.0
  */
-public class BasicHttpEntity extends AbstractHttpEntity {
+public class BasicHttpEntity extends AbstractHttpEntity{
 
     private InputStream content;
-    private long length;
+
+    private long        length;
 
     /**
      * Creates a new basic entity.
      * The content is initially missing, the content length
      * is set to a negative number.
      */
-    public BasicHttpEntity() {
+    public BasicHttpEntity(){
         super();
         this.length = -1;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return this.length;
     }
 
     /**
      * Obtains the content, once only.
      *
-     * @return  the content, if this is the first call to this method
-     *          since {@link #setContent setContent} has been called
+     * @return the content, if this is the first call to this method
+     *         since {@link #setContent setContent} has been called
      *
      * @throws IllegalStateException
-     *          if the content has not been provided
+     *             if the content has not been provided
      */
     @Override
-    public InputStream getContent() throws IllegalStateException {
+    public InputStream getContent() throws IllegalStateException{
         Asserts.check(this.content != null, "Content has not been provided");
         return this.content;
     }
@@ -82,47 +83,49 @@ public class BasicHttpEntity extends AbstractHttpEntity {
      * @return {@code false}
      */
     @Override
-    public boolean isRepeatable() {
+    public boolean isRepeatable(){
         return false;
     }
 
     /**
      * Specifies the length of the content.
      *
-     * @param len       the number of bytes in the content, or
-     *                  a negative number to indicate an unknown length
+     * @param len
+     *            the number of bytes in the content, or
+     *            a negative number to indicate an unknown length
      */
-    public void setContentLength(final long len) {
+    public void setContentLength(final long len){
         this.length = len;
     }
 
     /**
      * Specifies the content.
      *
-     * @param inStream          the stream to return with the next call to
-     *                          {@link #getContent getContent}
+     * @param inStream
+     *            the stream to return with the next call to
+     *            {@link #getContent getContent}
      */
-    public void setContent(final InputStream inStream) {
+    public void setContent(final InputStream inStream){
         this.content = inStream;
     }
 
     @Override
-    public void writeTo(final OutputStream outStream) throws IOException {
+    public void writeTo(final OutputStream outStream) throws IOException{
         Args.notNull(outStream, "Output stream");
         final InputStream inStream = getContent();
-        try {
+        try{
             int l;
             final byte[] tmp = new byte[OUTPUT_BUFFER_SIZE];
-            while ((l = inStream.read(tmp)) != -1) {
+            while ((l = inStream.read(tmp)) != -1){
                 outStream.write(tmp, 0, l);
             }
-        } finally {
+        }finally{
             inStream.close();
         }
     }
 
     @Override
-    public boolean isStreaming() {
+    public boolean isStreaming(){
         return this.content != null && this.content != EmptyInputStream.INSTANCE;
     }
 

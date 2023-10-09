@@ -40,38 +40,38 @@ import com.feilong.lib.org.apache.http.util.LangUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public final class BasicUserPrincipal implements Principal, Serializable {
+public final class BasicUserPrincipal implements Principal,Serializable{
 
     private static final long serialVersionUID = -2266305184969850467L;
 
-    private final String username;
+    private final String      username;
 
-    public BasicUserPrincipal(final String username) {
+    public BasicUserPrincipal(final String username){
         super();
         Args.notNull(username, "User name");
         this.username = username;
     }
 
     @Override
-    public String getName() {
+    public String getName(){
         return this.username;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int hash = LangUtils.HASH_SEED;
         hash = LangUtils.hashCode(hash, this.username);
         return hash;
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object o){
+        if (this == o){
             return true;
         }
-        if (o instanceof BasicUserPrincipal) {
+        if (o instanceof BasicUserPrincipal){
             final BasicUserPrincipal that = (BasicUserPrincipal) o;
-            if (LangUtils.equals(this.username, that.username)) {
+            if (LangUtils.equals(this.username, that.username)){
                 return true;
             }
         }
@@ -79,7 +79,7 @@ public final class BasicUserPrincipal implements Principal, Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append("[principal: ");
         buffer.append(this.username);
@@ -88,4 +88,3 @@ public final class BasicUserPrincipal implements Principal, Serializable {
     }
 
 }
-

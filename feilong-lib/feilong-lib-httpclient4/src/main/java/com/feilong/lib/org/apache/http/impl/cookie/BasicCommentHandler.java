@@ -39,21 +39,20 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicCommentHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class BasicCommentHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
-    public BasicCommentHandler() {
+    public BasicCommentHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
         cookie.setComment(value);
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.COMMENT_ATTR;
     }
 

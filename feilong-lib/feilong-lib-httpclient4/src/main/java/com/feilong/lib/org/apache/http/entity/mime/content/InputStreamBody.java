@@ -42,30 +42,31 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public class InputStreamBody extends AbstractContentBody {
+public class InputStreamBody extends AbstractContentBody{
 
     private final InputStream in;
-    private final String filename;
+
+    private final String      filename;
 
     /**
      * @since 4.1
      *
      * @deprecated (4.3) use {@link InputStreamBody#InputStreamBody(InputStream, ContentType,
-     *  String)} or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
+     *             String)} or {@link com.feilong.lib.org.apache.http.entity.mime.MultipartEntityBuilder}
      */
     @Deprecated
-    public InputStreamBody(final InputStream in, final String mimeType, final String filename) {
+    public InputStreamBody(final InputStream in, final String mimeType, final String filename){
         this(in, ContentType.create(mimeType), filename);
     }
 
-    public InputStreamBody(final InputStream in, final String filename) {
+    public InputStreamBody(final InputStream in, final String filename){
         this(in, ContentType.DEFAULT_BINARY, filename);
     }
 
     /**
      * @since 4.3
      */
-    public InputStreamBody(final InputStream in, final ContentType contentType, final String filename) {
+    public InputStreamBody(final InputStream in, final ContentType contentType, final String filename){
         super(contentType);
         Args.notNull(in, "Input stream");
         this.in = in;
@@ -75,41 +76,41 @@ public class InputStreamBody extends AbstractContentBody {
     /**
      * @since 4.3
      */
-    public InputStreamBody(final InputStream in, final ContentType contentType) {
+    public InputStreamBody(final InputStream in, final ContentType contentType){
         this(in, contentType, null);
     }
 
-    public InputStream getInputStream() {
+    public InputStream getInputStream(){
         return this.in;
     }
 
     @Override
-    public void writeTo(final OutputStream out) throws IOException {
+    public void writeTo(final OutputStream out) throws IOException{
         Args.notNull(out, "Output stream");
-        try {
+        try{
             final byte[] tmp = new byte[4096];
             int l;
-            while ((l = this.in.read(tmp)) != -1) {
+            while ((l = this.in.read(tmp)) != -1){
                 out.write(tmp, 0, l);
             }
             out.flush();
-        } finally {
+        }finally{
             this.in.close();
         }
     }
 
     @Override
-    public String getTransferEncoding() {
+    public String getTransferEncoding(){
         return MIME.ENC_BINARY;
     }
 
     @Override
-    public long getContentLength() {
+    public long getContentLength(){
         return -1;
     }
 
     @Override
-    public String getFilename() {
+    public String getFilename(){
         return this.filename;
     }
 

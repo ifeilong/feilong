@@ -36,14 +36,14 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-public abstract class AbstractContentBody implements ContentBody {
+public abstract class AbstractContentBody implements ContentBody{
 
     private final ContentType contentType;
 
     /**
      * @since 4.3
      */
-    public AbstractContentBody(final ContentType contentType) {
+    public AbstractContentBody(final ContentType contentType){
         super();
         Args.notNull(contentType, "Content type");
         this.contentType = contentType;
@@ -53,46 +53,46 @@ public abstract class AbstractContentBody implements ContentBody {
      * @deprecated (4.3) use {@link AbstractContentBody#AbstractContentBody(ContentType)}
      */
     @Deprecated
-    public AbstractContentBody(final String mimeType) {
+    public AbstractContentBody(final String mimeType){
         this(ContentType.parse(mimeType));
     }
 
     /**
      * @since 4.3
      */
-    public ContentType getContentType() {
+    public ContentType getContentType(){
         return this.contentType;
     }
 
     @Override
-    public String getMimeType() {
+    public String getMimeType(){
         return this.contentType.getMimeType();
     }
 
     @Override
-    public String getMediaType() {
+    public String getMediaType(){
         final String mimeType = this.contentType.getMimeType();
         final int i = mimeType.indexOf('/');
-        if (i != -1) {
+        if (i != -1){
             return mimeType.substring(0, i);
-        } else {
+        }else{
             return mimeType;
         }
     }
 
     @Override
-    public String getSubType() {
+    public String getSubType(){
         final String mimeType = this.contentType.getMimeType();
         final int i = mimeType.indexOf('/');
-        if (i != -1) {
+        if (i != -1){
             return mimeType.substring(i + 1);
-        } else {
+        }else{
             return null;
         }
     }
 
     @Override
-    public String getCharset() {
+    public String getCharset(){
         final Charset charset = this.contentType.getCharset();
         return charset != null ? charset.name() : null;
     }

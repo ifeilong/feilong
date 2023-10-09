@@ -44,12 +44,15 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * and schedules them using the provided executor service. Scheduled calls may be cancelled.
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class FutureRequestExecutionService implements Closeable {
+public class FutureRequestExecutionService implements Closeable{
 
-    private final HttpClient httpclient;
-    private final ExecutorService executorService;
+    private final HttpClient                    httpclient;
+
+    private final ExecutorService               executorService;
+
     private final FutureRequestExecutionMetrics metrics = new FutureRequestExecutionMetrics();
-    private final AtomicBoolean closed = new AtomicBoolean(false);
+
+    private final AtomicBoolean                 closed  = new AtomicBoolean(false);
 
     /**
      * Create a new FutureRequestExecutionService.
@@ -64,9 +67,7 @@ public class FutureRequestExecutionService implements Closeable {
      *            any executorService will do here. E.g.
      *            {@link java.util.concurrent.Executors#newFixedThreadPool(int)}
      */
-    public FutureRequestExecutionService(
-            final HttpClient httpclient,
-            final ExecutorService executorService) {
+    public FutureRequestExecutionService(final HttpClient httpclient, final ExecutorService executorService){
         this.httpclient = httpclient;
         this.executorService = executorService;
     }
@@ -83,9 +84,9 @@ public class FutureRequestExecutionService implements Closeable {
      * @return HttpAsyncClientFutureTask for the scheduled request.
      */
     public <T> HttpRequestFutureTask<T> execute(
-            final HttpUriRequest request,
-            final HttpContext context,
-            final ResponseHandler<T> responseHandler) {
+                    final HttpUriRequest request,
+                    final HttpContext context,
+                    final ResponseHandler<T> responseHandler){
         return execute(request, context, responseHandler, null);
     }
 
@@ -106,18 +107,22 @@ public class FutureRequestExecutionService implements Closeable {
      * @return HttpAsyncClientFutureTask for the scheduled request.
      */
     public <T> HttpRequestFutureTask<T> execute(
-            final HttpUriRequest request,
-            final HttpContext context,
-            final ResponseHandler<T> responseHandler,
-            final FutureCallback<T> callback) {
-        if(closed.get()) {
+                    final HttpUriRequest request,
+                    final HttpContext context,
+                    final ResponseHandler<T> responseHandler,
+                    final FutureCallback<T> callback){
+        if (closed.get()){
             throw new IllegalStateException("Close has been called on this httpclient instance.");
         }
         metrics.getScheduledConnections().incrementAndGet();
-        final HttpRequestTaskCallable<T> callable = new HttpRequestTaskCallable<T>(
-            httpclient, request, context, responseHandler, callback, metrics);
-        final HttpRequestFutureTask<T> httpRequestFutureTask = new HttpRequestFutureTask<T>(
-            request, callable);
+        final HttpRequestTaskCallable<T> callable = new HttpRequestTaskCallable<>(
+                        httpclient,
+                        request,
+                        context,
+                        responseHandler,
+                        callback,
+                        metrics);
+        final HttpRequestFutureTask<T> httpRequestFutureTask = new HttpRequestFutureTask<>(request, callable);
         executorService.execute(httpRequestFutureTask);
 
         return httpRequestFutureTask;
@@ -127,15 +132,15 @@ public class FutureRequestExecutionService implements Closeable {
      * @return metrics gathered for this instance.
      * @see FutureRequestExecutionMetrics
      */
-    public FutureRequestExecutionMetrics metrics() {
+    public FutureRequestExecutionMetrics metrics(){
         return metrics;
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         closed.set(true);
         executorService.shutdownNow();
-        if (httpclient instanceof Closeable) {
+        if (httpclient instanceof Closeable){
             ((Closeable) httpclient).close();
         }
     }

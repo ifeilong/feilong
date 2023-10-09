@@ -45,28 +45,26 @@ import com.feilong.lib.org.apache.http.message.LineParser;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultHttpRequestParserFactory implements HttpMessageParserFactory<HttpRequest> {
+public class DefaultHttpRequestParserFactory implements HttpMessageParserFactory<HttpRequest>{
 
     public static final DefaultHttpRequestParserFactory INSTANCE = new DefaultHttpRequestParserFactory();
 
-    private final LineParser lineParser;
-    private final HttpRequestFactory requestFactory;
+    private final LineParser                            lineParser;
 
-    public DefaultHttpRequestParserFactory(final LineParser lineParser,
-            final HttpRequestFactory requestFactory) {
+    private final HttpRequestFactory                    requestFactory;
+
+    public DefaultHttpRequestParserFactory(final LineParser lineParser, final HttpRequestFactory requestFactory){
         super();
         this.lineParser = lineParser != null ? lineParser : BasicLineParser.INSTANCE;
-        this.requestFactory = requestFactory != null ? requestFactory
-                : DefaultHttpRequestFactory.INSTANCE;
+        this.requestFactory = requestFactory != null ? requestFactory : DefaultHttpRequestFactory.INSTANCE;
     }
 
-    public DefaultHttpRequestParserFactory() {
+    public DefaultHttpRequestParserFactory(){
         this(null, null);
     }
 
     @Override
-    public HttpMessageParser<HttpRequest> create(final SessionInputBuffer buffer,
-            final MessageConstraints constraints) {
+    public HttpMessageParser<HttpRequest> create(final SessionInputBuffer buffer,final MessageConstraints constraints){
         return new DefaultHttpRequestParser(buffer, lineParser, requestFactory, constraints);
     }
 

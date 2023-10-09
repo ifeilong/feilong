@@ -39,7 +39,6 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.config.Lookup;
 import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.ExecutionContext;
-import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.util.Args;
 
 /**
@@ -53,13 +52,13 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 @Contract(threading = ThreadingBehavior.SAFE)
 @Deprecated
-public final class CookieSpecRegistry implements Lookup<CookieSpecProvider> {
+public final class CookieSpecRegistry implements Lookup<CookieSpecProvider>{
 
-    private final ConcurrentHashMap<String,CookieSpecFactory> registeredSpecs;
+    private final ConcurrentHashMap<String, CookieSpecFactory> registeredSpecs;
 
-    public CookieSpecRegistry() {
+    public CookieSpecRegistry(){
         super();
-        this.registeredSpecs = new ConcurrentHashMap<String,CookieSpecFactory>();
+        this.registeredSpecs = new ConcurrentHashMap<>();
     }
 
     /**
@@ -68,13 +67,15 @@ public final class CookieSpecRegistry implements Lookup<CookieSpecProvider> {
      * This nameis the same one used to retrieve the {@link CookieSpecFactory}
      * from {@link #getCookieSpec(String)}.
      *
-     * @param name the identifier for this specification
-     * @param factory the {@link CookieSpecFactory} class to register
+     * @param name
+     *            the identifier for this specification
+     * @param factory
+     *            the {@link CookieSpecFactory} class to register
      *
      * @see #getCookieSpec(String)
      */
-    public void register(final String name, final CookieSpecFactory factory) {
-         Args.notNull(name, "Name");
+    public void register(final String name,final CookieSpecFactory factory){
+        Args.notNull(name, "Name");
         Args.notNull(factory, "Cookie spec factory");
         registeredSpecs.put(name.toLowerCase(Locale.ENGLISH), factory);
     }
@@ -82,30 +83,33 @@ public final class CookieSpecRegistry implements Lookup<CookieSpecProvider> {
     /**
      * Unregisters the {@link CookieSpecFactory} with the given ID.
      *
-     * @param id the identifier of the {@link CookieSpec cookie specification} to unregister
+     * @param id
+     *            the identifier of the {@link CookieSpec cookie specification} to unregister
      */
-    public void unregister(final String id) {
-         Args.notNull(id, "Id");
-         registeredSpecs.remove(id.toLowerCase(Locale.ENGLISH));
+    public void unregister(final String id){
+        Args.notNull(id, "Id");
+        registeredSpecs.remove(id.toLowerCase(Locale.ENGLISH));
     }
 
     /**
      * Gets the {@link CookieSpec cookie specification} with the given ID.
      *
-     * @param name the {@link CookieSpec cookie specification} identifier
-     * @param params the {@link HttpParams HTTP parameters} for the cookie
-     *  specification.
+     * @param name
+     *            the {@link CookieSpec cookie specification} identifier
+     * @param params
+     *            the {@link HttpParams HTTP parameters} for the cookie
+     *            specification.
      *
      * @return {@link CookieSpec cookie specification}
      *
-     * @throws IllegalStateException if a policy with the given name cannot be found
+     * @throws IllegalStateException
+     *             if a policy with the given name cannot be found
      */
-    public CookieSpec getCookieSpec(final String name, final HttpParams params)
-        throws IllegalStateException {
+    public CookieSpec getCookieSpec(final String name,final HttpParams params) throws IllegalStateException{
 
         Args.notNull(name, "Name");
         final CookieSpecFactory factory = registeredSpecs.get(name.toLowerCase(Locale.ENGLISH));
-        if (factory != null) {
+        if (factory != null){
             return factory.newInstance(params);
         }
         throw new IllegalStateException("Unsupported cookie spec: " + name);
@@ -114,14 +118,15 @@ public final class CookieSpecRegistry implements Lookup<CookieSpecProvider> {
     /**
      * Gets the {@link CookieSpec cookie specification} with the given name.
      *
-     * @param name the {@link CookieSpec cookie specification} identifier
+     * @param name
+     *            the {@link CookieSpec cookie specification} identifier
      *
      * @return {@link CookieSpec cookie specification}
      *
-     * @throws IllegalStateException if a policy with the given name cannot be found
+     * @throws IllegalStateException
+     *             if a policy with the given name cannot be found
      */
-    public CookieSpec getCookieSpec(final String name)
-        throws IllegalStateException {
+    public CookieSpec getCookieSpec(final String name) throws IllegalStateException{
         return getCookieSpec(name, null);
     }
 
@@ -135,17 +140,18 @@ public final class CookieSpecRegistry implements Lookup<CookieSpecProvider> {
      * @return list of registered cookie spec names
      */
     public List<String> getSpecNames(){
-        return new ArrayList<String>(registeredSpecs.keySet());
+        return new ArrayList<>(registeredSpecs.keySet());
     }
 
     /**
      * Populates the internal collection of registered {@link CookieSpec cookie
      * specs} with the content of the map passed as a parameter.
      *
-     * @param map cookie specs
+     * @param map
+     *            cookie specs
      */
-    public void setItems(final Map<String, CookieSpecFactory> map) {
-        if (map == null) {
+    public void setItems(final Map<String, CookieSpecFactory> map){
+        if (map == null){
             return;
         }
         registeredSpecs.clear();
@@ -153,16 +159,10 @@ public final class CookieSpecRegistry implements Lookup<CookieSpecProvider> {
     }
 
     @Override
-    public CookieSpecProvider lookup(final String name) {
-        return new CookieSpecProvider() {
-
-            @Override
-            public CookieSpec create(final HttpContext context) {
-                final HttpRequest request = (HttpRequest) context.getAttribute(
-                        ExecutionContext.HTTP_REQUEST);
-                return getCookieSpec(name, request.getParams());
-            }
-
+    public CookieSpecProvider lookup(final String name){
+        return context -> {
+            final HttpRequest request = (HttpRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
+            return getCookieSpec(name, request.getParams());
         };
     }
 

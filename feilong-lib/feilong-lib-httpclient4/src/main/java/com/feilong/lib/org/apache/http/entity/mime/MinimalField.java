@@ -32,27 +32,28 @@ package com.feilong.lib.org.apache.http.entity.mime;
  *
  * @since 4.0
  */
-public class MinimalField {
+public class MinimalField{
 
     private final String name;
+
     private final String value;
 
-    public MinimalField(final String name, final String value) {
+    public MinimalField(final String name, final String value){
         super();
         this.name = name;
         this.value = value;
     }
 
-    public String getName() {
+    public String getName(){
         return this.name;
     }
 
-    public String getBody() {
+    public String getBody(){
         return this.value;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         final StringBuilder buffer = new StringBuilder();
         buffer.append(this.name);
         buffer.append(": ");

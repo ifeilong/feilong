@@ -65,54 +65,53 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy {
+public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy{
 
     public static final DefaultConnectionReuseStrategy INSTANCE = new DefaultConnectionReuseStrategy();
 
-    public DefaultConnectionReuseStrategy() {
+    public DefaultConnectionReuseStrategy(){
         super();
     }
 
     // see interface ConnectionReuseStrategy
     @Override
-    public boolean keepAlive(final HttpResponse response,
-                             final HttpContext context) {
+    public boolean keepAlive(final HttpResponse response,final HttpContext context){
         Args.notNull(response, "HTTP response");
         Args.notNull(context, "HTTP context");
 
         // If a HTTP 204 No Content response contains a Content-length with value > 0 or Transfer-Encoding,
         // don't reuse the connection. This is to avoid getting out-of-sync if a misbehaved HTTP server
         // returns content as part of a HTTP 204 response.
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_NO_CONTENT){
             final Header clh = response.getFirstHeader(HTTP.CONTENT_LEN);
-            if (clh != null) {
-                try {
+            if (clh != null){
+                try{
                     final int contentLen = Integer.parseInt(clh.getValue());
-                    if (contentLen > 0) {
+                    if (contentLen > 0){
                         return false;
                     }
-                } catch (final NumberFormatException ex) {
+                }catch (final NumberFormatException ex){
                     // fall through
                 }
             }
 
             final Header teh = response.getFirstHeader(HTTP.TRANSFER_ENCODING);
-            if (teh != null) {
+            if (teh != null){
                 return false;
             }
         }
 
         final HttpRequest request = (HttpRequest) context.getAttribute(HttpCoreContext.HTTP_REQUEST);
-        if (request != null) {
-            try {
+        if (request != null){
+            try{
                 final TokenIterator ti = new BasicTokenIterator(request.headerIterator(HttpHeaders.CONNECTION));
-                while (ti.hasNext()) {
+                while (ti.hasNext()){
                     final String token = ti.nextToken();
-                    if (HTTP.CONN_CLOSE.equalsIgnoreCase(token)) {
+                    if (HTTP.CONN_CLOSE.equalsIgnoreCase(token)){
                         return false;
                     }
                 }
-            } catch (final ParseException px) {
+            }catch (final ParseException px){
                 // invalid connection header. do not re-use
                 return false;
             }
@@ -122,25 +121,25 @@ public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy {
         // be indicated by closing the connection, there is no keep-alive.
         final ProtocolVersion ver = response.getStatusLine().getProtocolVersion();
         final Header teh = response.getFirstHeader(HTTP.TRANSFER_ENCODING);
-        if (teh != null) {
-            if (!HTTP.CHUNK_CODING.equalsIgnoreCase(teh.getValue())) {
+        if (teh != null){
+            if (!HTTP.CHUNK_CODING.equalsIgnoreCase(teh.getValue())){
                 return false;
             }
-        } else {
-            if (canResponseHaveBody(request, response)) {
+        }else{
+            if (canResponseHaveBody(request, response)){
                 final Header[] clhs = response.getHeaders(HTTP.CONTENT_LEN);
                 // Do not reuse if not properly content-length delimited
-                if (clhs.length == 1) {
+                if (clhs.length == 1){
                     final Header clh = clhs[0];
-                    try {
+                    try{
                         final long contentLen = Long.parseLong(clh.getValue());
-                        if (contentLen < 0) {
+                        if (contentLen < 0){
                             return false;
                         }
-                    } catch (final NumberFormatException ex) {
+                    }catch (final NumberFormatException ex){
                         return false;
                     }
-                } else {
+                }else{
                     return false;
                 }
             }
@@ -150,7 +149,7 @@ public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy {
         // the "Proxy-Connection" header. The latter is an unspecified and
         // broken but unfortunately common extension of HTTP.
         HeaderIterator headerIterator = response.headerIterator(HTTP.CONN_DIRECTIVE);
-        if (!headerIterator.hasNext()) {
+        if (!headerIterator.hasNext()){
             headerIterator = response.headerIterator("Proxy-Connection");
         }
 
@@ -177,25 +176,25 @@ public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy {
         // it takes precedence and indicates a non-persistent connection.
         // If there is no "close" but a "keep-alive", we take the hint.
 
-        if (headerIterator.hasNext()) {
-            try {
+        if (headerIterator.hasNext()){
+            try{
                 final TokenIterator ti = new BasicTokenIterator(headerIterator);
                 boolean keepalive = false;
-                while (ti.hasNext()) {
+                while (ti.hasNext()){
                     final String token = ti.nextToken();
-                    if (HTTP.CONN_CLOSE.equalsIgnoreCase(token)) {
+                    if (HTTP.CONN_CLOSE.equalsIgnoreCase(token)){
                         return false;
-                    } else if (HTTP.CONN_KEEP_ALIVE.equalsIgnoreCase(token)) {
+                    }else if (HTTP.CONN_KEEP_ALIVE.equalsIgnoreCase(token)){
                         // continue the loop, there may be a "close" afterwards
                         keepalive = true;
                     }
                 }
-                if (keepalive) {
+                if (keepalive){
                     return true;
-                // neither "close" nor "keep-alive", use default policy
+                    // neither "close" nor "keep-alive", use default policy
                 }
 
-            } catch (final ParseException px) {
+            }catch (final ParseException px){
                 // invalid connection header. do not re-use
                 return false;
             }
@@ -205,29 +204,27 @@ public class DefaultConnectionReuseStrategy implements ConnectionReuseStrategy {
         return !ver.lessEquals(HttpVersion.HTTP_1_0);
     }
 
-
     /**
      * Creates a token iterator from a header iterator.
      * This method can be overridden to replace the implementation of
      * the token iterator.
      *
-     * @param hit       the header iterator
+     * @param hit
+     *            the header iterator
      *
-     * @return  the token iterator
+     * @return the token iterator
      */
-    protected TokenIterator createTokenIterator(final HeaderIterator hit) {
+    protected TokenIterator createTokenIterator(final HeaderIterator hit){
         return new BasicTokenIterator(hit);
     }
 
-    private boolean canResponseHaveBody(final HttpRequest request, final HttpResponse response) {
-        if (request != null && request.getRequestLine().getMethod().equalsIgnoreCase("HEAD")) {
+    private boolean canResponseHaveBody(final HttpRequest request,final HttpResponse response){
+        if (request != null && request.getRequestLine().getMethod().equalsIgnoreCase("HEAD")){
             return false;
         }
         final int status = response.getStatusLine().getStatusCode();
-        return status >= HttpStatus.SC_OK
-            && status != HttpStatus.SC_NO_CONTENT
-            && status != HttpStatus.SC_NOT_MODIFIED
-            && status != HttpStatus.SC_RESET_CONTENT;
+        return status >= HttpStatus.SC_OK && status != HttpStatus.SC_NO_CONTENT && status != HttpStatus.SC_NOT_MODIFIED
+                        && status != HttpStatus.SC_RESET_CONTENT;
     }
 
 }

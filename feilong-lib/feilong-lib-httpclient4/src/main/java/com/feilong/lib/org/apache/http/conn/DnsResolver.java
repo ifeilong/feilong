@@ -35,7 +35,7 @@ import java.net.UnknownHostException;
  *
  * @since 4.2
  */
-public interface DnsResolver {
+public interface DnsResolver{
 
     /**
      * Returns the IP address for the specified host name, or null if the given

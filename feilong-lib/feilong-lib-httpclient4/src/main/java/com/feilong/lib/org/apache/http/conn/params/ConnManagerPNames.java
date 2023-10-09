@@ -32,9 +32,9 @@ package com.feilong.lib.org.apache.http.conn.params;
  * @since 4.0
  *
  * @deprecated (4.1) use configuration methods of the specific connection manager implementation.
-*/
+ */
 @Deprecated
-public interface ConnManagerPNames {
+public interface ConnManagerPNames{
 
     /**
      * Defines the timeout in milliseconds used when retrieving an instance of
@@ -43,7 +43,7 @@ public interface ConnManagerPNames {
      * <p>
      * This parameter expects a value of type {@link Long}.
      */
-    String TIMEOUT = "http.conn-manager.timeout";
+    String TIMEOUT                   = "http.conn-manager.timeout";
 
     /**
      * Defines the maximum number of connections per route.
@@ -62,6 +62,6 @@ public interface ConnManagerPNames {
      * <p>
      * This parameter expects a value of type {@link Integer}.
      */
-    String MAX_TOTAL_CONNECTIONS = "http.conn-manager.max-total";
+    String MAX_TOTAL_CONNECTIONS     = "http.conn-manager.max-total";
 
 }

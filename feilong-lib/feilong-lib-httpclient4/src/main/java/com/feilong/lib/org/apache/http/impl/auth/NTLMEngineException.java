@@ -34,31 +34,34 @@ import com.feilong.lib.org.apache.http.auth.AuthenticationException;
  *
  * @since 4.0
  */
-public class NTLMEngineException extends AuthenticationException {
+public class NTLMEngineException extends AuthenticationException{
 
     private static final long serialVersionUID = 6027981323731768824L;
 
-    public NTLMEngineException() {
+    public NTLMEngineException(){
         super();
     }
 
     /**
      * Creates a new NTLMEngineException with the specified message.
      *
-     * @param message the exception detail message
+     * @param message
+     *            the exception detail message
      */
-    public NTLMEngineException(final String message) {
+    public NTLMEngineException(final String message){
         super(message);
     }
 
     /**
      * Creates a new NTLMEngineException with the specified detail message and cause.
      *
-     * @param message the exception detail message
-     * @param cause the {@code Throwable} that caused this exception, or {@code null}
-     * if the cause is unavailable, unknown, or not a {@code Throwable}
+     * @param message
+     *            the exception detail message
+     * @param cause
+     *            the {@code Throwable} that caused this exception, or {@code null}
+     *            if the cause is unavailable, unknown, or not a {@code Throwable}
      */
-    public NTLMEngineException(final String message, final Throwable cause) {
+    public NTLMEngineException(final String message, final Throwable cause){
         super(message, cause);
     }
 

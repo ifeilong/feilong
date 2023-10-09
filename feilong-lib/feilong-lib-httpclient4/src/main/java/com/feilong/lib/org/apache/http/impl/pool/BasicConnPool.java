@@ -50,11 +50,11 @@ import com.feilong.lib.org.apache.http.pool.ConnFactory;
  */
 @SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
-public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnection, BasicPoolEntry> {
+public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnection, BasicPoolEntry>{
 
     private static final AtomicLong COUNTER = new AtomicLong();
 
-    public BasicConnPool(final ConnFactory<HttpHost, HttpClientConnection> connFactory) {
+    public BasicConnPool(final ConnFactory<HttpHost, HttpClientConnection> connFactory){
         super(connFactory, 2, 20);
     }
 
@@ -62,33 +62,31 @@ public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnecti
      * @deprecated (4.3) use {@link BasicConnPool#BasicConnPool(SocketConfig, ConnectionConfig)}
      */
     @Deprecated
-    public BasicConnPool(final HttpParams params) {
+    public BasicConnPool(final HttpParams params){
         super(new BasicConnFactory(params), 2, 20);
     }
 
     /**
      * @since 4.3
      */
-    public BasicConnPool(final SocketConfig sconfig, final ConnectionConfig cconfig) {
+    public BasicConnPool(final SocketConfig sconfig, final ConnectionConfig cconfig){
         super(new BasicConnFactory(sconfig, cconfig), 2, 20);
     }
 
     /**
      * @since 4.3
      */
-    public BasicConnPool() {
+    public BasicConnPool(){
         super(new BasicConnFactory(SocketConfig.DEFAULT, ConnectionConfig.DEFAULT), 2, 20);
     }
 
     @Override
-    protected BasicPoolEntry createEntry(
-            final HttpHost host,
-            final HttpClientConnection conn) {
+    protected BasicPoolEntry createEntry(final HttpHost host,final HttpClientConnection conn){
         return new BasicPoolEntry(Long.toString(COUNTER.getAndIncrement()), host, conn);
     }
 
     @Override
-    protected boolean validate(final BasicPoolEntry entry) {
+    protected boolean validate(final BasicPoolEntry entry){
         return !entry.getConnection().isStale();
     }
 

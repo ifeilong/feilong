@@ -32,10 +32,10 @@ package com.feilong.lib.org.apache.http.conn.params;
  * @since 4.0
  *
  * @deprecated (4.1) use custom {@link
- *   com.feilong.lib.org.apache.http.impl.conn.DefaultHttpResponseParser} implementation.
+ *             com.feilong.lib.org.apache.http.impl.conn.DefaultHttpResponseParser} implementation.
  */
 @Deprecated
-public interface ConnConnectionPNames {
+public interface ConnConnectionPNames{
 
     /**
      * Defines the maximum number of ignorable lines before we expect
@@ -55,9 +55,9 @@ public interface ConnConnectionPNames {
      * </p>
      *
      * @deprecated (4.1) Use custom {@link
-     *   com.feilong.lib.org.apache.http.impl.conn.DefaultHttpResponseParser} implementation
+     *             com.feilong.lib.org.apache.http.impl.conn.DefaultHttpResponseParser} implementation
      */
-    @Deprecated String MAX_STATUS_LINE_GARBAGE = "http.connection.max-status-line-garbage";
-
+    @Deprecated
+    String MAX_STATUS_LINE_GARBAGE = "http.connection.max-status-line-garbage";
 
 }

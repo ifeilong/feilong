@@ -33,34 +33,37 @@ package com.feilong.lib.org.apache.http.auth;
  *
  * @since 4.0
  */
-public class InvalidCredentialsException extends AuthenticationException {
+public class InvalidCredentialsException extends AuthenticationException{
 
     private static final long serialVersionUID = -4834003835215460648L;
 
     /**
      * Creates a new InvalidCredentialsException with a {@code null} detail message.
      */
-    public InvalidCredentialsException() {
+    public InvalidCredentialsException(){
         super();
     }
 
     /**
      * Creates a new InvalidCredentialsException with the specified message.
      *
-     * @param message the exception detail message
+     * @param message
+     *            the exception detail message
      */
-    public InvalidCredentialsException(final String message) {
+    public InvalidCredentialsException(final String message){
         super(message);
     }
 
     /**
      * Creates a new InvalidCredentialsException with the specified detail message and cause.
      *
-     * @param message the exception detail message
-     * @param cause the {@code Throwable} that caused this exception, or {@code null}
-     * if the cause is unavailable, unknown, or not a {@code Throwable}
+     * @param message
+     *            the exception detail message
+     * @param cause
+     *            the {@code Throwable} that caused this exception, or {@code null}
+     *            if the cause is unavailable, unknown, or not a {@code Throwable}
      */
-    public InvalidCredentialsException(final String message, final Throwable cause) {
+    public InvalidCredentialsException(final String message, final Throwable cause){
         super(message, cause);
     }
 }

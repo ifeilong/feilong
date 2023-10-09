@@ -44,36 +44,35 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class LaxMaxAgeHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class LaxMaxAgeHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
     private final static Pattern MAX_AGE_PATTERN = Pattern.compile("^\\-?[0-9]+$");
 
-    public LaxMaxAgeHandler() {
+    public LaxMaxAgeHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (TextUtils.isBlank(value)) {
+        if (TextUtils.isBlank(value)){
             return;
         }
         final Matcher matcher = MAX_AGE_PATTERN.matcher(value);
-        if (matcher.matches()) {
+        if (matcher.matches()){
             final int age;
-            try {
+            try{
                 age = Integer.parseInt(value);
-            } catch (final NumberFormatException e) {
+            }catch (final NumberFormatException e){
                 return;
             }
-            final Date expiryDate = age >= 0 ? new Date(System.currentTimeMillis() + age * 1000L) :
-                    new Date(Long.MIN_VALUE);
+            final Date expiryDate = age >= 0 ? new Date(System.currentTimeMillis() + age * 1000L) : new Date(Long.MIN_VALUE);
             cookie.setExpiryDate(expiryDate);
         }
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.MAX_AGE_ATTR;
     }
 

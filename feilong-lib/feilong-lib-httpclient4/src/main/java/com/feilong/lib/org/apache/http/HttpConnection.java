@@ -35,7 +35,7 @@ import java.io.IOException;
  *
  * @since 4.0
  */
-public interface HttpConnection extends Closeable {
+public interface HttpConnection extends Closeable{
 
     /**
      * Closes this connection gracefully.
@@ -49,6 +49,7 @@ public interface HttpConnection extends Closeable {
 
     /**
      * Checks if this connection is open.
+     * 
      * @return true if it is open, false if it is closed.
      */
     boolean isOpen();
@@ -64,16 +65,17 @@ public interface HttpConnection extends Closeable {
      * method may block for a small amount of time before returning a result.
      * It is therefore an <i>expensive</i> operation.
      *
-     * @return  {@code true} if attempts to use this connection are
-     *          likely to succeed, or {@code false} if they are likely
-     *          to fail and this connection should be closed
+     * @return {@code true} if attempts to use this connection are
+     *         likely to succeed, or {@code false} if they are likely
+     *         to fail and this connection should be closed
      */
     boolean isStale();
 
     /**
      * Sets the socket timeout value.
      *
-     * @param timeout timeout value in milliseconds
+     * @param timeout
+     *            timeout value in milliseconds
      */
     void setSocketTimeout(int timeout);
 
@@ -81,8 +83,8 @@ public interface HttpConnection extends Closeable {
      * Returns the socket timeout value.
      *
      * @return positive value in milliseconds if a timeout is set,
-     * {@code 0} if timeout is disabled or {@code -1} if
-     * timeout is undefined.
+     *         {@code 0} if timeout is disabled or {@code -1} if
+     *         timeout is undefined.
      */
     int getSocketTimeout();
 

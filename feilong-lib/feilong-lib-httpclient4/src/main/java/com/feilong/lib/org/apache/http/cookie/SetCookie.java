@@ -40,7 +40,7 @@ import com.feilong.lib.org.apache.http.annotation.Obsolete;
  *
  * @since 4.0
  */
-public interface SetCookie extends Cookie {
+public interface SetCookie extends Cookie{
 
     void setValue(String value);
 
@@ -57,21 +57,25 @@ public interface SetCookie extends Cookie {
 
     /**
      * Sets expiration date.
-     * <p><strong>Note:</strong> the object returned by this method is considered
+     * <p>
+     * <strong>Note:</strong> the object returned by this method is considered
      * immutable. Changing it (e.g. using setTime()) could result in undefined
-     * behaviour. Do so at your peril.</p>
+     * behaviour. Do so at your peril.
+     * </p>
      *
-     * @param expiryDate the {@link Date} after which this cookie is no longer valid.
+     * @param expiryDate
+     *            the {@link Date} after which this cookie is no longer valid.
      *
      * @see Cookie#getExpiryDate
      *
      */
-    void setExpiryDate (Date expiryDate);
+    void setExpiryDate(Date expiryDate);
 
     /**
      * Sets the domain attribute.
      *
-     * @param domain The value of the domain attribute
+     * @param domain
+     *            The value of the domain attribute
      *
      * @see Cookie#getDomain
      */
@@ -80,7 +84,8 @@ public interface SetCookie extends Cookie {
     /**
      * Sets the path attribute.
      *
-     * @param path The value of the path attribute
+     * @param path
+     *            The value of the path attribute
      *
      * @see Cookie#getPath
      *
@@ -91,21 +96,23 @@ public interface SetCookie extends Cookie {
      * Sets the secure attribute of the cookie.
      * <p>
      * When {@code true} the cookie should only be sent
-     * using a secure protocol (https).  This should only be set when
+     * using a secure protocol (https). This should only be set when
      * the cookie's originating server used a secure protocol to set the
      * cookie's value.
      *
-     * @param secure The value of the secure attribute
+     * @param secure
+     *            The value of the secure attribute
      *
      * @see #isSecure()
      */
-    void setSecure (boolean secure);
+    void setSecure(boolean secure);
 
     /**
      * Sets the version of the cookie specification to which this
      * cookie conforms.
      *
-     * @param version the version of the cookie.
+     * @param version
+     *            the version of the cookie.
      *
      * @see Cookie#getVersion
      */
@@ -113,4 +120,3 @@ public interface SetCookie extends Cookie {
     void setVersion(int version);
 
 }
-

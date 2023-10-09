@@ -36,17 +36,19 @@ import com.feilong.lib.org.apache.http.HttpHost;
  *
  * @since 4.0
  */
-public interface RouteInfo {
+public interface RouteInfo{
 
     /**
      * The tunnelling type of a route.
-     * Plain routes are established by   connecting to the target or
+     * Plain routes are established by connecting to the target or
      * the first proxy.
      * Tunnelled routes are established by connecting to the first proxy
      * and tunnelling through all proxies to the target.
      * Routes without a proxy cannot be tunnelled.
      */
-    public enum TunnelType { PLAIN, TUNNELLED }
+    public enum TunnelType{
+        PLAIN, TUNNELLED
+    }
 
     /**
      * The layering type of a route.
@@ -62,7 +64,9 @@ public interface RouteInfo {
      * But we don't want to exclude that use case.
      * </p>
      */
-    public enum LayerType  { PLAIN, LAYERED }
+    public enum LayerType{
+        PLAIN, LAYERED
+    }
 
     /**
      * Obtains the target host.
@@ -74,8 +78,8 @@ public interface RouteInfo {
     /**
      * Obtains the local address to connect from.
      *
-     * @return  the local address,
-     *          or {@code null}
+     * @return the local address,
+     *         or {@code null}
      */
     InetAddress getLocalAddress();
 
@@ -84,7 +88,7 @@ public interface RouteInfo {
      * A direct route has one hop. A route through a proxy has two hops.
      * A route through a chain of <i>n</i> proxies has <i>n+1</i> hops.
      *
-     * @return  the number of hops in this route
+     * @return the number of hops in this route
      */
     int getHopCount();
 
@@ -95,14 +99,15 @@ public interface RouteInfo {
      * For a route through exactly one proxy, target of hop 0 is the proxy
      * and target of hop 1 is the target host.
      *
-     * @param hop       index of the hop for which to get the target,
-     *                  0 for first
+     * @param hop
+     *            index of the hop for which to get the target,
+     *            0 for first
      *
-     * @return  the target of the given hop
+     * @return the target of the given hop
      *
      * @throws IllegalArgumentException
-     *  if the argument is negative or not less than
-     *  {@link #getHopCount getHopCount()}
+     *             if the argument is negative or not less than
+     *             {@link #getHopCount getHopCount()}
      */
     HttpHost getHopTarget(int hop);
 
@@ -118,7 +123,7 @@ public interface RouteInfo {
      * Obtains the tunnel type of this route.
      * If there is a proxy chain, only end-to-end tunnels are considered.
      *
-     * @return  the tunnelling type
+     * @return the tunnelling type
      */
     TunnelType getTunnelType();
 
@@ -126,9 +131,9 @@ public interface RouteInfo {
      * Checks whether this route is tunnelled through a proxy.
      * If there is a proxy chain, only end-to-end tunnels are considered.
      *
-     * @return  {@code true} if tunnelled end-to-end through at least
-     *          one proxy,
-     *          {@code false} otherwise
+     * @return {@code true} if tunnelled end-to-end through at least
+     *         one proxy,
+     *         {@code false} otherwise
      */
     boolean isTunnelled();
 
@@ -137,7 +142,7 @@ public interface RouteInfo {
      * In the presence of proxies, only layering over an end-to-end tunnel
      * is considered.
      *
-     * @return  the layering type
+     * @return the layering type
      */
     LayerType getLayerType();
 
@@ -146,16 +151,16 @@ public interface RouteInfo {
      * In the presence of proxies, only layering over an end-to-end tunnel
      * is considered.
      *
-     * @return  {@code true} if layered,
-     *          {@code false} otherwise
+     * @return {@code true} if layered,
+     *         {@code false} otherwise
      */
     boolean isLayered();
 
     /**
      * Checks whether this route is secure.
      *
-     * @return  {@code true} if secure,
-     *          {@code false} otherwise
+     * @return {@code true} if secure,
+     *         {@code false} otherwise
      */
     boolean isSecure();
 

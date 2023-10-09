@@ -31,10 +31,10 @@ package com.feilong.lib.org.apache.http.impl.client;
  *
  * @since 4.2
  */
-class SystemClock implements Clock {
+class SystemClock implements Clock{
 
     @Override
-    public long getCurrentTime() {
+    public long getCurrentTime(){
         return System.currentTimeMillis();
     }
 

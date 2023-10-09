@@ -34,30 +34,31 @@ import com.feilong.lib.org.apache.http.HttpResponse;
 /**
  * Defines an interface to verify whether an incoming HTTP request meets
  * the target server's expectations.
- *<p>
+ * <p>
  * The Expect request-header field is used to indicate that particular
  * server behaviors are required by the client.
- *</p>
- *<pre>
+ * </p>
+ * 
+ * <pre>
  *    Expect       =  "Expect" ":" 1#expectation
  *
  *    expectation  =  "100-continue" | expectation-extension
  *    expectation-extension =  token [ "=" ( token | quoted-string )
  *                             *expect-params ]
  *    expect-params =  ";" token [ "=" ( token | quoted-string ) ]
- *</pre>
- *<p>
+ * </pre>
+ * <p>
  * A server that does not understand or is unable to comply with any of
  * the expectation values in the Expect field of a request MUST respond
  * with appropriate error status. The server MUST respond with a 417
  * (Expectation Failed) status if any of the expectations cannot be met
  * or, if there are other problems with the request, some other 4xx
  * status.
- *</p>
+ * </p>
  *
  * @since 4.0
  */
-public interface HttpExpectationVerifier {
+public interface HttpExpectationVerifier{
 
     /**
      * Verifies whether the given request meets the server's expectations.
@@ -70,12 +71,15 @@ public interface HttpExpectationVerifier {
      * terminate without modifying the response object. Per default the status
      * code of the response object will be set to {@code 100}.
      *
-     * @param request the HTTP request.
-     * @param response the HTTP response.
-     * @param context the HTTP context.
-     * @throws HttpException in case of an HTTP protocol violation.
+     * @param request
+     *            the HTTP request.
+     * @param response
+     *            the HTTP response.
+     * @param context
+     *            the HTTP context.
+     * @throws HttpException
+     *             in case of an HTTP protocol violation.
      */
-    void verify(HttpRequest request, HttpResponse response, HttpContext context)
-            throws HttpException;
+    void verify(HttpRequest request,HttpResponse response,HttpContext context) throws HttpException;
 
 }

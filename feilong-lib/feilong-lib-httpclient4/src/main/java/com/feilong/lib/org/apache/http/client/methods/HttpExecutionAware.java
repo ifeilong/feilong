@@ -35,7 +35,7 @@ import com.feilong.lib.org.apache.http.concurrent.Cancellable;
  *
  * @since 4.3
  */
-public interface HttpExecutionAware {
+public interface HttpExecutionAware{
 
     boolean isAborted();
 
@@ -45,4 +45,3 @@ public interface HttpExecutionAware {
     void setCancellable(Cancellable cancellable);
 
 }
-

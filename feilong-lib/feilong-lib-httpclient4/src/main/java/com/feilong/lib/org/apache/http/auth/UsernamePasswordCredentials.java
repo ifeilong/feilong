@@ -41,42 +41,45 @@ import com.feilong.lib.org.apache.http.util.LangUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class UsernamePasswordCredentials implements Credentials, Serializable {
+public class UsernamePasswordCredentials implements Credentials,Serializable{
 
-    private static final long serialVersionUID = 243343858802739403L;
+    private static final long        serialVersionUID = 243343858802739403L;
 
     private final BasicUserPrincipal principal;
-    private final String password;
+
+    private final String             password;
 
     /**
      * The constructor with the username and password combined string argument.
      *
-     * @param usernamePassword the username:password formed string
+     * @param usernamePassword
+     *            the username:password formed string
      * @see #toString
      * @deprecated (4.5) will be replaced with {@code String}, {@code char[]} in 5.0
      */
     @Deprecated
-    public UsernamePasswordCredentials(final String usernamePassword) {
+    public UsernamePasswordCredentials(final String usernamePassword){
         super();
         Args.notNull(usernamePassword, "Username:password string");
         final int atColon = usernamePassword.indexOf(':');
-        if (atColon >= 0) {
+        if (atColon >= 0){
             this.principal = new BasicUserPrincipal(usernamePassword.substring(0, atColon));
             this.password = usernamePassword.substring(atColon + 1);
-        } else {
+        }else{
             this.principal = new BasicUserPrincipal(usernamePassword);
             this.password = null;
         }
     }
 
-
     /**
      * The constructor with the username and password arguments.
      *
-     * @param userName the user name
-     * @param password the password
+     * @param userName
+     *            the user name
+     * @param password
+     *            the password
      */
-    public UsernamePasswordCredentials(final String userName, final String password) {
+    public UsernamePasswordCredentials(final String userName, final String password){
         super();
         Args.notNull(userName, "Username");
         this.principal = new BasicUserPrincipal(userName);
@@ -84,32 +87,32 @@ public class UsernamePasswordCredentials implements Credentials, Serializable {
     }
 
     @Override
-    public Principal getUserPrincipal() {
+    public Principal getUserPrincipal(){
         return this.principal;
     }
 
-    public String getUserName() {
+    public String getUserName(){
         return this.principal.getName();
     }
 
     @Override
-    public String getPassword() {
+    public String getPassword(){
         return password;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return this.principal.hashCode();
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object o){
+        if (this == o){
             return true;
         }
-        if (o instanceof UsernamePasswordCredentials) {
+        if (o instanceof UsernamePasswordCredentials){
             final UsernamePasswordCredentials that = (UsernamePasswordCredentials) o;
-            if (LangUtils.equals(this.principal, that.principal)) {
+            if (LangUtils.equals(this.principal, that.principal)){
                 return true;
             }
         }
@@ -117,9 +120,8 @@ public class UsernamePasswordCredentials implements Credentials, Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return this.principal.toString();
     }
 
 }
-

@@ -41,35 +41,32 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicMaxAgeHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class BasicMaxAgeHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
-    public BasicMaxAgeHandler() {
+    public BasicMaxAgeHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value)
-            throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (value == null) {
+        if (value == null){
             throw new MalformedCookieException("Missing value for 'max-age' attribute");
         }
         final int age;
-        try {
+        try{
             age = Integer.parseInt(value);
-        } catch (final NumberFormatException e) {
-            throw new MalformedCookieException ("Invalid 'max-age' attribute: "
-                    + value);
+        }catch (final NumberFormatException e){
+            throw new MalformedCookieException("Invalid 'max-age' attribute: " + value);
         }
-        if (age < 0) {
-            throw new MalformedCookieException ("Negative 'max-age' attribute: "
-                    + value);
+        if (age < 0){
+            throw new MalformedCookieException("Negative 'max-age' attribute: " + value);
         }
         cookie.setExpiryDate(new Date(System.currentTimeMillis() + age * 1000L));
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.MAX_AGE_ATTR;
     }
 

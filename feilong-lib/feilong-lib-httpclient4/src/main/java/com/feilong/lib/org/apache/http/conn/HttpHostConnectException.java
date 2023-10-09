@@ -39,18 +39,18 @@ import com.feilong.lib.org.apache.http.HttpHost;
  *
  * @since 4.0
  */
-public class HttpHostConnectException extends ConnectException {
+public class HttpHostConnectException extends ConnectException{
 
     private static final long serialVersionUID = -3194482710275220224L;
 
-    private final HttpHost host;
+    private final HttpHost    host;
 
     /**
      * @deprecated (4.3) use {@link #HttpHostConnectException(java.io.IOException, com.feilong.lib.org.apache.http.HttpHost,
-     *   java.net.InetAddress...)}
+     *             java.net.InetAddress...)}
      */
     @Deprecated
-    public HttpHostConnectException(final HttpHost host, final ConnectException cause) {
+    public HttpHostConnectException(final HttpHost host, final ConnectException cause){
         this(cause, host, (InetAddress[]) null);
     }
 
@@ -59,21 +59,15 @@ public class HttpHostConnectException extends ConnectException {
      *
      * @since 4.3
      */
-    public HttpHostConnectException(
-            final IOException cause,
-            final HttpHost host,
-            final InetAddress... remoteAddresses) {
-        super("Connect to " +
-                (host != null ? host.toHostString() : "remote host") +
-                (remoteAddresses != null && remoteAddresses .length > 0 ?
-                        " " + Arrays.asList(remoteAddresses) : "") +
-                ((cause != null && cause.getMessage() != null) ?
-                        " failed: " + cause.getMessage() : " refused"));
+    public HttpHostConnectException(final IOException cause, final HttpHost host, final InetAddress...remoteAddresses){
+        super("Connect to " + (host != null ? host.toHostString() : "remote host")
+                        + (remoteAddresses != null && remoteAddresses.length > 0 ? " " + Arrays.asList(remoteAddresses) : "")
+                        + ((cause != null && cause.getMessage() != null) ? " failed: " + cause.getMessage() : " refused"));
         this.host = host;
         initCause(cause);
     }
 
-    public HttpHost getHost() {
+    public HttpHost getHost(){
         return this.host;
     }
 

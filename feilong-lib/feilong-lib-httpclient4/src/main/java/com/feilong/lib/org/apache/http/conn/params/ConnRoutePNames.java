@@ -34,7 +34,7 @@ package com.feilong.lib.org.apache.http.conn.params;
  * @deprecated (4.3) use {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
  */
 @Deprecated
-public interface ConnRoutePNames {
+public interface ConnRoutePNames{
 
     /**
      * Parameter for the default proxy.
@@ -73,7 +73,6 @@ public interface ConnRoutePNames {
      * {@link com.feilong.lib.org.apache.http.conn.routing.HttpRoute HttpRoute}.
      * </p>
      */
-    String FORCED_ROUTE = "http.route.forced-route";
+    String FORCED_ROUTE  = "http.route.forced-route";
 
 }
-

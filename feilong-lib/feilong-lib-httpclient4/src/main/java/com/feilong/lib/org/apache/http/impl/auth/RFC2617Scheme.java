@@ -56,12 +56,13 @@ import com.feilong.lib.org.apache.http.util.CharsetUtils;
  * @since 4.0
  */
 @SuppressWarnings("deprecation")
-public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializable {
+public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializable{
 
-    private static final long serialVersionUID = -2845454858205884623L;
+    private static final long         serialVersionUID = -2845454858205884623L;
 
     private final Map<String, String> params;
-    private transient Charset credentialsCharset;
+
+    private transient Charset         credentialsCharset;
 
     /**
      * Creates an instance of {@code RFC2617Scheme} with the given challenge
@@ -72,49 +73,47 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
      * @deprecated (4.3) do not use.
      */
     @Deprecated
-    public RFC2617Scheme(final ChallengeState challengeState) {
+    public RFC2617Scheme(final ChallengeState challengeState){
         super(challengeState);
-        this.params = new HashMap<String, String>();
+        this.params = new HashMap<>();
         this.credentialsCharset = Consts.ASCII;
     }
 
     /**
      * @since 4.3
      */
-    public RFC2617Scheme(final Charset credentialsCharset) {
+    public RFC2617Scheme(final Charset credentialsCharset){
         super();
-        this.params = new HashMap<String, String>();
+        this.params = new HashMap<>();
         this.credentialsCharset = credentialsCharset != null ? credentialsCharset : Consts.ASCII;
     }
 
-    public RFC2617Scheme() {
+    public RFC2617Scheme(){
         this(Consts.ASCII);
     }
-
 
     /**
      * @since 4.3
      */
-    public Charset getCredentialsCharset() {
+    public Charset getCredentialsCharset(){
         return credentialsCharset != null ? credentialsCharset : Consts.ASCII;
     }
 
-    String getCredentialsCharset(final HttpRequest request) {
+    String getCredentialsCharset(final HttpRequest request){
         String charset = (String) request.getParams().getParameter(AuthPNames.CREDENTIAL_CHARSET);
-        if (charset == null) {
+        if (charset == null){
             charset = getCredentialsCharset().name();
         }
         return charset;
     }
 
     @Override
-    protected void parseChallenge(
-            final CharArrayBuffer buffer, final int pos, final int len) throws MalformedChallengeException {
+    protected void parseChallenge(final CharArrayBuffer buffer,final int pos,final int len) throws MalformedChallengeException{
         final HeaderValueParser parser = BasicHeaderValueParser.INSTANCE;
         final ParserCursor cursor = new ParserCursor(pos, buffer.length());
         final HeaderElement[] elements = parser.parseElements(buffer, cursor);
         this.params.clear();
-        for (final HeaderElement element : elements) {
+        for (final HeaderElement element : elements){
             this.params.put(element.getName().toLowerCase(Locale.ROOT), element.getValue());
         }
     }
@@ -124,20 +123,21 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
      *
      * @return the map of authentication parameters
      */
-    protected Map<String, String> getParameters() {
+    protected Map<String, String> getParameters(){
         return this.params;
     }
 
     /**
      * Returns authentication parameter with the given name, if available.
      *
-     * @param name The name of the parameter to be returned
+     * @param name
+     *            The name of the parameter to be returned
      *
      * @return the parameter with the given name
      */
     @Override
-    public String getParameter(final String name) {
-        if (name == null) {
+    public String getParameter(final String name){
+        if (name == null){
             return null;
         }
         return this.params.get(name.toLowerCase(Locale.ROOT));
@@ -149,27 +149,27 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
      * @return the authentication realm
      */
     @Override
-    public String getRealm() {
+    public String getRealm(){
         return getParameter("realm");
     }
 
-    private void writeObject(final ObjectOutputStream out) throws IOException {
+    private void writeObject(final ObjectOutputStream out) throws IOException{
         out.defaultWriteObject();
         out.writeUTF(this.credentialsCharset.name());
         out.writeObject(this.challengeState);
     }
 
     @SuppressWarnings("unchecked")
-    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(final ObjectInputStream in) throws IOException,ClassNotFoundException{
         in.defaultReadObject();
         this.credentialsCharset = CharsetUtils.get(in.readUTF());
-        if (this.credentialsCharset == null) {
+        if (this.credentialsCharset == null){
             this.credentialsCharset = Consts.ASCII;
         }
         this.challengeState = (ChallengeState) in.readObject();
     }
 
-    private void readObjectNoData() throws ObjectStreamException {
+    private void readObjectNoData() throws ObjectStreamException{
     }
 
 }

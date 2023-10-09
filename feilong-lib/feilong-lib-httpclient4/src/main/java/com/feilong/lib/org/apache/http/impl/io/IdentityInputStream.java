@@ -41,47 +41,48 @@ import com.feilong.lib.org.apache.http.util.Args;
  * unlimited length.
  * <p>
  * Note that this class NEVER closes the underlying stream, even when close
- * gets called.  Instead, it will read until the end of the stream (until
+ * gets called. Instead, it will read until the end of the stream (until
  * {@code -1} is returned).
  *
  * @since 4.0
  */
-public class IdentityInputStream extends InputStream {
+public class IdentityInputStream extends InputStream{
 
     private final SessionInputBuffer in;
 
-    private boolean closed = false;
+    private boolean                  closed = false;
 
     /**
      * Wraps session input stream and reads input until the the end of stream.
      *
-     * @param in The session input buffer
+     * @param in
+     *            The session input buffer
      */
-    public IdentityInputStream(final SessionInputBuffer in) {
+    public IdentityInputStream(final SessionInputBuffer in){
         super();
         this.in = Args.notNull(in, "Session input buffer");
     }
 
     @Override
-    public int available() throws IOException {
-        if (this.in instanceof BufferInfo) {
+    public int available() throws IOException{
+        if (this.in instanceof BufferInfo){
             return ((BufferInfo) this.in).length();
         }
         return 0;
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException{
         this.closed = true;
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() throws IOException{
         return this.closed ? -1 : this.in.read();
     }
 
     @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
+    public int read(final byte[] b,final int off,final int len) throws IOException{
         return this.closed ? -1 : this.in.read(b, off, len);
     }
 

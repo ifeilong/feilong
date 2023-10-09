@@ -50,12 +50,12 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class SystemDefaultCredentialsProvider implements CredentialsProvider {
+public class SystemDefaultCredentialsProvider implements CredentialsProvider{
 
     private static final Map<String, String> SCHEME_MAP;
 
-    static {
-        SCHEME_MAP = new ConcurrentHashMap<String, String>();
+    static{
+        SCHEME_MAP = new ConcurrentHashMap<>();
         SCHEME_MAP.put(AuthSchemes.BASIC.toUpperCase(Locale.ROOT), "Basic");
         SCHEME_MAP.put(AuthSchemes.DIGEST.toUpperCase(Locale.ROOT), "Digest");
         SCHEME_MAP.put(AuthSchemes.NTLM.toUpperCase(Locale.ROOT), "NTLM");
@@ -63,8 +63,8 @@ public class SystemDefaultCredentialsProvider implements CredentialsProvider {
         SCHEME_MAP.put(AuthSchemes.KERBEROS.toUpperCase(Locale.ROOT), "Kerberos");
     }
 
-    private static String translateScheme(final String key) {
-        if (key == null) {
+    private static String translateScheme(final String key){
+        if (key == null){
             return null;
         }
         final String s = SCHEME_MAP.get(key);
@@ -76,105 +76,98 @@ public class SystemDefaultCredentialsProvider implements CredentialsProvider {
     /**
      * Default constructor.
      */
-    public SystemDefaultCredentialsProvider() {
+    public SystemDefaultCredentialsProvider(){
         super();
         this.internal = new BasicCredentialsProvider();
     }
 
     @Override
-    public void setCredentials(final AuthScope authscope, final Credentials credentials) {
+    public void setCredentials(final AuthScope authscope,final Credentials credentials){
         internal.setCredentials(authscope, credentials);
     }
 
     private static PasswordAuthentication getSystemCreds(
-            final String protocol,
-            final AuthScope authscope,
-            final Authenticator.RequestorType requestorType) {
+                    final String protocol,
+                    final AuthScope authscope,
+                    final Authenticator.RequestorType requestorType){
         return Authenticator.requestPasswordAuthentication(
-                authscope.getHost(),
-                null,
-                authscope.getPort(),
-                protocol,
-                null,
-                translateScheme(authscope.getScheme()),
-                null,
-                requestorType);
+                        authscope.getHost(),
+                        null,
+                        authscope.getPort(),
+                        protocol,
+                        null,
+                        translateScheme(authscope.getScheme()),
+                        null,
+                        requestorType);
     }
 
     @Override
-    public Credentials getCredentials(final AuthScope authscope) {
+    public Credentials getCredentials(final AuthScope authscope){
         Args.notNull(authscope, "Auth scope");
         final Credentials localcreds = internal.getCredentials(authscope);
-        if (localcreds != null) {
+        if (localcreds != null){
             return localcreds;
         }
         final String host = authscope.getHost();
-        if (host != null) {
+        if (host != null){
             final HttpHost origin = authscope.getOrigin();
             final String protocol = origin != null ? origin.getSchemeName() : (authscope.getPort() == 443 ? "https" : "http");
             PasswordAuthentication systemcreds = getSystemCreds(protocol, authscope, Authenticator.RequestorType.SERVER);
-            if (systemcreds == null) {
+            if (systemcreds == null){
                 systemcreds = getSystemCreds(protocol, authscope, Authenticator.RequestorType.PROXY);
             }
-            if (systemcreds == null) {
+            if (systemcreds == null){
                 // Look for values given using http.proxyUser/http.proxyPassword or
                 // https.proxyUser/https.proxyPassword. We cannot simply use the protocol from
                 // the origin since a proxy retrieved from https.proxyHost/https.proxyPort will
                 // still use http as protocol
                 systemcreds = getProxyCredentials("http", authscope);
-                if (systemcreds == null) {
+                if (systemcreds == null){
                     systemcreds = getProxyCredentials("https", authscope);
                 }
             }
-            if (systemcreds != null) {
+            if (systemcreds != null){
                 final String domain = System.getProperty("http.auth.ntlm.domain");
-                if (domain != null) {
-                    return new NTCredentials(
-                            systemcreds.getUserName(),
-                            new String(systemcreds.getPassword()),
-                            null, domain);
+                if (domain != null){
+                    return new NTCredentials(systemcreds.getUserName(), new String(systemcreds.getPassword()), null, domain);
                 }
                 return AuthSchemes.NTLM.equalsIgnoreCase(authscope.getScheme())
                                 // Domain may be specified in a fully qualified user name
-                                ? new NTCredentials(systemcreds.getUserName(),
-                                                new String(systemcreds.getPassword()), null, null)
-                                : new UsernamePasswordCredentials(systemcreds.getUserName(),
-                                                new String(systemcreds.getPassword()));
+                                ? new NTCredentials(systemcreds.getUserName(), new String(systemcreds.getPassword()), null, null)
+                                : new UsernamePasswordCredentials(systemcreds.getUserName(), new String(systemcreds.getPassword()));
             }
         }
         return null;
     }
 
-    private static PasswordAuthentication getProxyCredentials(final String protocol, final AuthScope authscope) {
+    private static PasswordAuthentication getProxyCredentials(final String protocol,final AuthScope authscope){
         final String proxyHost = System.getProperty(protocol + ".proxyHost");
-        if (proxyHost == null) {
+        if (proxyHost == null){
             return null;
         }
         final String proxyPort = System.getProperty(protocol + ".proxyPort");
-        if (proxyPort == null) {
+        if (proxyPort == null){
             return null;
         }
 
-        try {
+        try{
             final AuthScope systemScope = new AuthScope(proxyHost, Integer.parseInt(proxyPort));
-            if (authscope.match(systemScope) >= 0) {
+            if (authscope.match(systemScope) >= 0){
                 final String proxyUser = System.getProperty(protocol + ".proxyUser");
-                if (proxyUser == null) {
+                if (proxyUser == null){
                     return null;
                 }
                 final String proxyPassword = System.getProperty(protocol + ".proxyPassword");
 
-                return new PasswordAuthentication(proxyUser,
-                        proxyPassword != null ? proxyPassword.toCharArray() : new char[] {});
+                return new PasswordAuthentication(proxyUser, proxyPassword != null ? proxyPassword.toCharArray() : new char[] {});
             }
-        } catch (final NumberFormatException ex) {
-        }
+        }catch (final NumberFormatException ex){}
 
         return null;
     }
 
     @Override
-    public void clear() {
+    public void clear(){
         internal.clear();
     }
 

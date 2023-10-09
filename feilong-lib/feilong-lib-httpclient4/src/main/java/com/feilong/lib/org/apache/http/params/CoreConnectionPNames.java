@@ -33,22 +33,23 @@ package com.feilong.lib.org.apache.http.params;
  * @since 4.0
  *
  * @deprecated (4.3) use configuration classes provided 'org.apache.http.config'
- *  and 'org.apache.http.client.config'
+ *             and 'org.apache.http.client.config'
  */
 @Deprecated
-public interface CoreConnectionPNames {
+public interface CoreConnectionPNames{
 
     /**
      * Defines the socket timeout ({@code SO_TIMEOUT}) in milliseconds,
-     * which is the timeout for waiting for data  or, put differently,
+     * which is the timeout for waiting for data or, put differently,
      * a maximum period inactivity between two consecutive data packets).
      * A timeout value of zero is interpreted as an infinite timeout.
      * <p>
      * This parameter expects a value of type {@link Integer}.
      * </p>
+     * 
      * @see java.net.SocketOptions#SO_TIMEOUT
      */
-    String SO_TIMEOUT = "http.socket.timeout";
+    String SO_TIMEOUT             = "http.socket.timeout";
 
     /**
      * Determines whether Nagle's algorithm is to be used. The Nagle's algorithm
@@ -60,9 +61,10 @@ public interface CoreConnectionPNames {
      * <p>
      * This parameter expects a value of type {@link Boolean}.
      * </p>
+     * 
      * @see java.net.SocketOptions#TCP_NODELAY
      */
-    String TCP_NODELAY = "http.tcp.nodelay";
+    String TCP_NODELAY            = "http.tcp.nodelay";
 
     /**
      * Determines the size of the internal socket buffer used to buffer data
@@ -71,7 +73,7 @@ public interface CoreConnectionPNames {
      * This parameter expects a value of type {@link Integer}.
      * </p>
      */
-    String SOCKET_BUFFER_SIZE = "http.socket.buffer-size";
+    String SOCKET_BUFFER_SIZE     = "http.socket.buffer-size";
 
     /**
      * Sets SO_LINGER with the specified linger time in seconds. The maximum
@@ -81,9 +83,10 @@ public interface CoreConnectionPNames {
      * <p>
      * This parameter expects a value of type {@link Integer}.
      * </p>
+     * 
      * @see java.net.SocketOptions#SO_LINGER
      */
-    String SO_LINGER = "http.socket.linger";
+    String SO_LINGER              = "http.socket.linger";
 
     /**
      * Defines whether the socket can be bound even though a previous connection is
@@ -91,11 +94,12 @@ public interface CoreConnectionPNames {
      * <p>
      * This parameter expects a value of type {@link Boolean}.
      * </p>
+     * 
      * @see java.net.Socket#setReuseAddress(boolean)
      *
      * @since 4.1
      */
-    String SO_REUSEADDR = "http.socket.reuseaddr";
+    String SO_REUSEADDR           = "http.socket.reuseaddr";
 
     /**
      * Determines the timeout in milliseconds until a connection is established.
@@ -107,7 +111,7 @@ public interface CoreConnectionPNames {
      * This parameter expects a value of type {@link Integer}.
      * </p>
      */
-    String CONNECTION_TIMEOUT = "http.connection.timeout";
+    String CONNECTION_TIMEOUT     = "http.connection.timeout";
 
     /**
      * Determines whether stale connection check is to be used. The stale
@@ -128,7 +132,7 @@ public interface CoreConnectionPNames {
      * This parameter expects a value of type {@link Integer}.
      * </p>
      */
-    String MAX_LINE_LENGTH = "http.connection.max-line-length";
+    String MAX_LINE_LENGTH        = "http.connection.max-line-length";
 
     /**
      * Determines the maximum HTTP header count allowed. If set to a positive
@@ -139,7 +143,7 @@ public interface CoreConnectionPNames {
      * This parameter expects a value of type {@link Integer}.
      * </p>
      */
-    String MAX_HEADER_COUNT = "http.connection.max-header-count";
+    String MAX_HEADER_COUNT       = "http.connection.max-header-count";
 
     /**
      * Defines the size limit below which data chunks should be buffered in a session I/O buffer
@@ -152,8 +156,7 @@ public interface CoreConnectionPNames {
      *
      * @since 4.1
      */
-    String MIN_CHUNK_LIMIT = "http.connection.min-chunk-limit";
-
+    String MIN_CHUNK_LIMIT        = "http.connection.min-chunk-limit";
 
     /**
      * Defines whether or not TCP is to send automatically a keepalive probe to the peer
@@ -162,9 +165,10 @@ public interface CoreConnectionPNames {
      * <p>
      * This parameter expects a value of type {@link Boolean}.
      * </p>
+     * 
      * @see java.net.SocketOptions#SO_KEEPALIVE
      * @since 4.2
      */
-    String SO_KEEPALIVE = "http.socket.keepalive";
+    String SO_KEEPALIVE           = "http.socket.keepalive";
 
 }

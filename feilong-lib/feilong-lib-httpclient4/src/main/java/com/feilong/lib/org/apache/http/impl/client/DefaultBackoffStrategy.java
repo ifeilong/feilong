@@ -40,17 +40,16 @@ import com.feilong.lib.org.apache.http.client.ConnectionBackoffStrategy;
  *
  * @since 4.2
  */
-public class DefaultBackoffStrategy implements ConnectionBackoffStrategy {
+public class DefaultBackoffStrategy implements ConnectionBackoffStrategy{
 
     @Override
-    public boolean shouldBackoff(final Throwable t) {
+    public boolean shouldBackoff(final Throwable t){
         return t instanceof SocketTimeoutException || t instanceof ConnectException;
     }
 
     @Override
-    public boolean shouldBackoff(final HttpResponse resp) {
-        return resp.getStatusLine().getStatusCode() == 429 ||
-            resp.getStatusLine().getStatusCode() == HttpStatus.SC_SERVICE_UNAVAILABLE;
+    public boolean shouldBackoff(final HttpResponse resp){
+        return resp.getStatusLine().getStatusCode() == 429 || resp.getStatusLine().getStatusCode() == HttpStatus.SC_SERVICE_UNAVAILABLE;
     }
 
 }

@@ -36,10 +36,11 @@ import com.feilong.lib.org.apache.http.HttpMessage;
  *
  * @since 4.0
  */
-public interface ContentLengthStrategy {
+public interface ContentLengthStrategy{
 
-    int IDENTITY         = -1;
-    int CHUNKED          = -2;
+    int IDENTITY = -1;
+
+    int CHUNKED  = -2;
 
     /**
      * Returns length of the given message in bytes. The returned value
@@ -47,10 +48,12 @@ public interface ContentLengthStrategy {
      * message will be delimited by the end of connection, or {@link #CHUNKED}
      * if the message is chunk coded
      *
-     * @param message HTTP message
+     * @param message
+     *            HTTP message
      * @return content length, {@link #IDENTITY}, or {@link #CHUNKED}
      *
-     * @throws HttpException in case of HTTP protocol violation
+     * @throws HttpException
+     *             in case of HTTP protocol violation
      */
     long determineLength(HttpMessage message) throws HttpException;
 

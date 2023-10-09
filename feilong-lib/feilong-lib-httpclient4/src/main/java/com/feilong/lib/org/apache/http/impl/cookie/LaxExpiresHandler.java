@@ -50,31 +50,32 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class LaxExpiresHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler {
+public class LaxExpiresHandler extends AbstractCookieAttributeHandler implements CommonCookieAttributeHandler{
 
-    static final TimeZone UTC = TimeZone.getTimeZone("UTC");
+    static final TimeZone       UTC = TimeZone.getTimeZone("UTC");
 
     private static final BitSet DELIMS;
-    static {
+    static{
         final BitSet bitSet = new BitSet();
         bitSet.set(0x9);
-        for (int b = 0x20; b <= 0x2f; b++) {
+        for (int b = 0x20; b <= 0x2f; b++){
             bitSet.set(b);
         }
-        for (int b = 0x3b; b <= 0x40; b++) {
+        for (int b = 0x3b; b <= 0x40; b++){
             bitSet.set(b);
         }
-        for (int b = 0x5b; b <= 0x60; b++) {
+        for (int b = 0x5b; b <= 0x60; b++){
             bitSet.set(b);
         }
-        for (int b = 0x7b; b <= 0x7e; b++) {
+        for (int b = 0x7b; b <= 0x7e; b++){
             bitSet.set(b);
         }
         DELIMS = bitSet;
     }
+
     private static final Map<String, Integer> MONTHS;
-    static {
-        final ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<String, Integer>(12);
+    static{
+        final ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>(12);
         map.put("jan", Calendar.JANUARY);
         map.put("feb", Calendar.FEBRUARY);
         map.put("mar", Calendar.MARCH);
@@ -90,23 +91,23 @@ public class LaxExpiresHandler extends AbstractCookieAttributeHandler implements
         MONTHS = map;
     }
 
-    private final static Pattern TIME_PATTERN = Pattern.compile(
-            "^([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})([^0-9].*)?$");
-    private final static Pattern DAY_OF_MONTH_PATTERN = Pattern.compile(
-            "^([0-9]{1,2})([^0-9].*)?$");
-    private final static Pattern MONTH_PATTERN = Pattern.compile(
-            "^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(.*)?$", Pattern.CASE_INSENSITIVE);
-    private final static Pattern YEAR_PATTERN = Pattern.compile(
-            "^([0-9]{2,4})([^0-9].*)?$");
+    private final static Pattern TIME_PATTERN         = Pattern.compile("^([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})([^0-9].*)?$");
 
-    public LaxExpiresHandler() {
+    private final static Pattern DAY_OF_MONTH_PATTERN = Pattern.compile("^([0-9]{1,2})([^0-9].*)?$");
+
+    private final static Pattern MONTH_PATTERN        = Pattern
+                    .compile("^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(.*)?$", Pattern.CASE_INSENSITIVE);
+
+    private final static Pattern YEAR_PATTERN         = Pattern.compile("^([0-9]{2,4})([^0-9].*)?$");
+
+    public LaxExpiresHandler(){
         super();
     }
 
     @Override
-    public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+    public void parse(final SetCookie cookie,final String value) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
-        if (TextUtils.isBlank(value)) {
+        if (TextUtils.isBlank(value)){
             return;
         }
         final ParserCursor cursor = new ParserCursor(0, value.length());
@@ -114,63 +115,63 @@ public class LaxExpiresHandler extends AbstractCookieAttributeHandler implements
 
         int second = 0, minute = 0, hour = 0, day = 0, month = 0, year = 0;
         boolean foundTime = false, foundDayOfMonth = false, foundMonth = false, foundYear = false;
-        try {
-            while (!cursor.atEnd()) {
+        try{
+            while (!cursor.atEnd()){
                 skipDelims(value, cursor);
                 content.setLength(0);
                 copyContent(value, cursor, content);
 
-                if (content.length() == 0) {
+                if (content.length() == 0){
                     break;
                 }
-                if (!foundTime) {
+                if (!foundTime){
                     final Matcher matcher = TIME_PATTERN.matcher(content);
-                    if (matcher.matches()) {
+                    if (matcher.matches()){
                         foundTime = true;
                         hour = Integer.parseInt(matcher.group(1));
                         minute = Integer.parseInt(matcher.group(2));
-                        second =Integer.parseInt(matcher.group(3));
+                        second = Integer.parseInt(matcher.group(3));
                         continue;
                     }
                 }
-                if (!foundDayOfMonth) {
+                if (!foundDayOfMonth){
                     final Matcher matcher = DAY_OF_MONTH_PATTERN.matcher(content);
-                    if (matcher.matches()) {
+                    if (matcher.matches()){
                         foundDayOfMonth = true;
                         day = Integer.parseInt(matcher.group(1));
                         continue;
                     }
                 }
-                if (!foundMonth) {
+                if (!foundMonth){
                     final Matcher matcher = MONTH_PATTERN.matcher(content);
-                    if (matcher.matches()) {
+                    if (matcher.matches()){
                         foundMonth = true;
                         month = MONTHS.get(matcher.group(1).toLowerCase(Locale.ROOT));
                         continue;
                     }
                 }
-                if (!foundYear) {
+                if (!foundYear){
                     final Matcher matcher = YEAR_PATTERN.matcher(content);
-                    if (matcher.matches()) {
+                    if (matcher.matches()){
                         foundYear = true;
                         year = Integer.parseInt(matcher.group(1));
                         continue;
                     }
                 }
             }
-        } catch (final NumberFormatException ignore) {
+        }catch (final NumberFormatException ignore){
             throw new MalformedCookieException("Invalid 'expires' attribute: " + value);
         }
-        if (!foundTime || !foundDayOfMonth || !foundMonth || !foundYear) {
+        if (!foundTime || !foundDayOfMonth || !foundMonth || !foundYear){
             throw new MalformedCookieException("Invalid 'expires' attribute: " + value);
         }
-        if (year >= 70 && year <= 99) {
+        if (year >= 70 && year <= 99){
             year = 1900 + year;
         }
-        if (year >= 0 && year <= 69) {
+        if (year >= 0 && year <= 69){
             year = 2000 + year;
         }
-        if (day < 1 || day > 31 || year < 1601 || hour > 23 || minute > 59 || second > 59) {
+        if (day < 1 || day > 31 || year < 1601 || hour > 23 || minute > 59 || second > 59){
             throw new MalformedCookieException("Invalid 'expires' attribute: " + value);
         }
 
@@ -186,28 +187,28 @@ public class LaxExpiresHandler extends AbstractCookieAttributeHandler implements
         cookie.setExpiryDate(c.getTime());
     }
 
-    private void skipDelims(final CharSequence buf, final ParserCursor cursor) {
+    private void skipDelims(final CharSequence buf,final ParserCursor cursor){
         int pos = cursor.getPos();
         final int indexFrom = cursor.getPos();
         final int indexTo = cursor.getUpperBound();
-        for (int i = indexFrom; i < indexTo; i++) {
+        for (int i = indexFrom; i < indexTo; i++){
             final char current = buf.charAt(i);
-            if (DELIMS.get(current)) {
+            if (DELIMS.get(current)){
                 pos++;
-            } else {
+            }else{
                 break;
             }
         }
         cursor.updatePos(pos);
     }
 
-    private void copyContent(final CharSequence buf, final ParserCursor cursor, final StringBuilder dst) {
+    private void copyContent(final CharSequence buf,final ParserCursor cursor,final StringBuilder dst){
         int pos = cursor.getPos();
         final int indexFrom = cursor.getPos();
         final int indexTo = cursor.getUpperBound();
-        for (int i = indexFrom; i < indexTo; i++) {
+        for (int i = indexFrom; i < indexTo; i++){
             final char current = buf.charAt(i);
-            if (DELIMS.get(current)) {
+            if (DELIMS.get(current)){
                 break;
             }
             pos++;
@@ -217,7 +218,7 @@ public class LaxExpiresHandler extends AbstractCookieAttributeHandler implements
     }
 
     @Override
-    public String getAttributeName() {
+    public String getAttributeName(){
         return ClientCookie.EXPIRES_ATTR;
     }
 

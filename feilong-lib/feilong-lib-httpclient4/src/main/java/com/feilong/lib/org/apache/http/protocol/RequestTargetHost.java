@@ -50,40 +50,39 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class RequestTargetHost implements HttpRequestInterceptor {
+public class RequestTargetHost implements HttpRequestInterceptor{
 
-    public RequestTargetHost() {
+    public RequestTargetHost(){
         super();
     }
 
     @Override
-    public void process(final HttpRequest request, final HttpContext context)
-            throws HttpException, IOException {
+    public void process(final HttpRequest request,final HttpContext context) throws HttpException,IOException{
         Args.notNull(request, "HTTP request");
 
         final HttpCoreContext coreContext = HttpCoreContext.adapt(context);
 
         final ProtocolVersion ver = request.getRequestLine().getProtocolVersion();
         final String method = request.getRequestLine().getMethod();
-        if (method.equalsIgnoreCase("CONNECT") && ver.lessEquals(HttpVersion.HTTP_1_0)) {
+        if (method.equalsIgnoreCase("CONNECT") && ver.lessEquals(HttpVersion.HTTP_1_0)){
             return;
         }
 
-        if (!request.containsHeader(HTTP.TARGET_HOST)) {
+        if (!request.containsHeader(HTTP.TARGET_HOST)){
             HttpHost targetHost = coreContext.getTargetHost();
-            if (targetHost == null) {
+            if (targetHost == null){
                 final HttpConnection conn = coreContext.getConnection();
-                if (conn instanceof HttpInetConnection) {
+                if (conn instanceof HttpInetConnection){
                     // Populate the context with a default HTTP host based on the
                     // inet address of the target host
                     final InetAddress address = ((HttpInetConnection) conn).getRemoteAddress();
                     final int port = ((HttpInetConnection) conn).getRemotePort();
-                    if (address != null) {
+                    if (address != null){
                         targetHost = new HttpHost(address.getHostName(), port);
                     }
                 }
-                if (targetHost == null) {
-                    if (ver.lessEquals(HttpVersion.HTTP_1_0)) {
+                if (targetHost == null){
+                    if (ver.lessEquals(HttpVersion.HTTP_1_0)){
                         return;
                     }
                     throw new ProtocolException("Target host missing");

@@ -39,7 +39,7 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.5.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class DeflateInputStreamFactory implements InputStreamFactory {
+public class DeflateInputStreamFactory implements InputStreamFactory{
 
     /**
      * Singleton instance.
@@ -51,12 +51,12 @@ public class DeflateInputStreamFactory implements InputStreamFactory {
      *
      * @return the singleton instance.
      */
-    public static DeflateInputStreamFactory getInstance() {
+    public static DeflateInputStreamFactory getInstance(){
         return INSTANCE;
     }
 
     @Override
-    public InputStream create(final InputStream inputStream) throws IOException {
+    public InputStream create(final InputStream inputStream) throws IOException{
         return new DeflateInputStream(inputStream);
     }
 

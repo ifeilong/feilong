@@ -38,7 +38,7 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
-public @interface Contract {
+public @interface Contract{
 
     ThreadingBehavior threading() default ThreadingBehavior.UNSAFE;
 

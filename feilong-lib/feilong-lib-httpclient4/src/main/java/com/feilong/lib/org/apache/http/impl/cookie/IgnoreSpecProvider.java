@@ -39,19 +39,19 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class IgnoreSpecProvider implements CookieSpecProvider {
+public class IgnoreSpecProvider implements CookieSpecProvider{
 
     private volatile CookieSpec cookieSpec;
 
-    public IgnoreSpecProvider() {
+    public IgnoreSpecProvider(){
         super();
     }
 
     @Override
-    public CookieSpec create(final HttpContext context) {
-        if (cookieSpec == null) {
-            synchronized (this) {
-                if (cookieSpec == null) {
+    public CookieSpec create(final HttpContext context){
+        if (cookieSpec == null){
+            synchronized (this){
+                if (cookieSpec == null){
                     this.cookieSpec = new IgnoreSpec();
                 }
             }

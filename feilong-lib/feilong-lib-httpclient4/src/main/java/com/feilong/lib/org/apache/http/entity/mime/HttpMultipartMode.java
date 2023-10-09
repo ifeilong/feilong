@@ -31,7 +31,7 @@ package com.feilong.lib.org.apache.http.entity.mime;
  *
  * @since 4.0
  */
-public enum HttpMultipartMode {
+public enum HttpMultipartMode{
 
     /** RFC 822, RFC 2045, RFC 2046 compliant */
     STRICT,

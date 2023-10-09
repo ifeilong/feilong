@@ -34,7 +34,7 @@ import com.feilong.lib.org.apache.http.HttpEntity;
  *
  * @since 4.1
  */
-public class GzipDecompressingEntity extends DecompressingEntity {
+public class GzipDecompressingEntity extends DecompressingEntity{
 
     /**
      * Creates a new {@link GzipDecompressingEntity} which will wrap the specified
@@ -43,7 +43,7 @@ public class GzipDecompressingEntity extends DecompressingEntity {
      * @param entity
      *            the non-null {@link HttpEntity} to be wrapped
      */
-    public GzipDecompressingEntity(final HttpEntity entity) {
+    public GzipDecompressingEntity(final HttpEntity entity){
         super(entity, GZIPInputStreamFactory.getInstance());
     }
 

@@ -40,7 +40,7 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
  * @since 4.5.4
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class GZIPInputStreamFactory implements InputStreamFactory {
+public class GZIPInputStreamFactory implements InputStreamFactory{
 
     /**
      * Singleton instance.
@@ -52,12 +52,12 @@ public class GZIPInputStreamFactory implements InputStreamFactory {
      *
      * @return the singleton instance.
      */
-    public static GZIPInputStreamFactory getInstance() {
+    public static GZIPInputStreamFactory getInstance(){
         return INSTANCE;
     }
 
     @Override
-    public InputStream create(final InputStream inputStream) throws IOException {
+    public InputStream create(final InputStream inputStream) throws IOException{
         return new GZIPInputStream(inputStream);
     }
 

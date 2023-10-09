@@ -51,85 +51,80 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  * @since 4.4
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public class DefaultCookieSpec implements CookieSpec {
+public class DefaultCookieSpec implements CookieSpec{
 
-    private final RFC2965Spec strict;
-    private final RFC2109Spec obsoleteStrict;
+    private final RFC2965Spec       strict;
+
+    private final RFC2109Spec       obsoleteStrict;
+
     private final NetscapeDraftSpec netscapeDraft;
 
-    DefaultCookieSpec(
-            final RFC2965Spec strict,
-            final RFC2109Spec obsoleteStrict,
-            final NetscapeDraftSpec netscapeDraft) {
+    DefaultCookieSpec(final RFC2965Spec strict, final RFC2109Spec obsoleteStrict, final NetscapeDraftSpec netscapeDraft){
         this.strict = strict;
         this.obsoleteStrict = obsoleteStrict;
         this.netscapeDraft = netscapeDraft;
     }
 
-    public DefaultCookieSpec(
-            final String[] datepatterns,
-            final boolean oneHeader) {
-        this.strict = new RFC2965Spec(oneHeader,
-                new RFC2965VersionAttributeHandler(),
-                new BasicPathHandler(),
-                new RFC2965DomainAttributeHandler(),
-                new RFC2965PortAttributeHandler(),
-                new BasicMaxAgeHandler(),
-                new BasicSecureHandler(),
-                new BasicCommentHandler(),
-                new RFC2965CommentUrlAttributeHandler(),
-                new RFC2965DiscardAttributeHandler());
-        this.obsoleteStrict = new RFC2109Spec(oneHeader,
-                new RFC2109VersionHandler(),
-                new BasicPathHandler(),
-                new RFC2109DomainHandler(),
-                new BasicMaxAgeHandler(),
-                new BasicSecureHandler(),
-                new BasicCommentHandler());
+    public DefaultCookieSpec(final String[] datepatterns, final boolean oneHeader){
+        this.strict = new RFC2965Spec(
+                        oneHeader,
+                        new RFC2965VersionAttributeHandler(),
+                        new BasicPathHandler(),
+                        new RFC2965DomainAttributeHandler(),
+                        new RFC2965PortAttributeHandler(),
+                        new BasicMaxAgeHandler(),
+                        new BasicSecureHandler(),
+                        new BasicCommentHandler(),
+                        new RFC2965CommentUrlAttributeHandler(),
+                        new RFC2965DiscardAttributeHandler());
+        this.obsoleteStrict = new RFC2109Spec(
+                        oneHeader,
+                        new RFC2109VersionHandler(),
+                        new BasicPathHandler(),
+                        new RFC2109DomainHandler(),
+                        new BasicMaxAgeHandler(),
+                        new BasicSecureHandler(),
+                        new BasicCommentHandler());
         this.netscapeDraft = new NetscapeDraftSpec(
-                new BasicDomainHandler(),
-                new BasicPathHandler(),
-                new BasicSecureHandler(),
-                new BasicCommentHandler(),
-                new BasicExpiresHandler(
-                        datepatterns != null ? datepatterns.clone() : new String[]{NetscapeDraftSpec.EXPIRES_PATTERN}));
+                        new BasicDomainHandler(),
+                        new BasicPathHandler(),
+                        new BasicSecureHandler(),
+                        new BasicCommentHandler(),
+                        new BasicExpiresHandler(
+                                        datepatterns != null ? datepatterns.clone() : new String[] { NetscapeDraftSpec.EXPIRES_PATTERN }));
     }
 
-    public DefaultCookieSpec() {
+    public DefaultCookieSpec(){
         this(null, false);
     }
 
     @Override
-    public List<Cookie> parse(
-            final Header header,
-            final CookieOrigin origin) throws MalformedCookieException {
+    public List<Cookie> parse(final Header header,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(header, "Header");
         Args.notNull(origin, "Cookie origin");
         HeaderElement[] hElems = header.getElements();
         boolean versioned = false;
         boolean netscape = false;
-        for (final HeaderElement hElem: hElems) {
-            if (hElem.getParameterByName("version") != null) {
+        for (final HeaderElement hElem : hElems){
+            if (hElem.getParameterByName("version") != null){
                 versioned = true;
             }
-            if (hElem.getParameterByName("expires") != null) {
-               netscape = true;
+            if (hElem.getParameterByName("expires") != null){
+                netscape = true;
             }
         }
-        if (netscape || !versioned) {
+        if (netscape || !versioned){
             // Need to parse the header again, because Netscape style cookies do not correctly
             // support multiple header elements (comma cannot be treated as an element separator)
             final NetscapeDraftHeaderParser parser = NetscapeDraftHeaderParser.DEFAULT;
             final CharArrayBuffer buffer;
             final ParserCursor cursor;
-            if (header instanceof FormattedHeader) {
+            if (header instanceof FormattedHeader){
                 buffer = ((FormattedHeader) header).getBuffer();
-                cursor = new ParserCursor(
-                        ((FormattedHeader) header).getValuePos(),
-                        buffer.length());
-            } else {
+                cursor = new ParserCursor(((FormattedHeader) header).getValuePos(), buffer.length());
+            }else{
                 final String hValue = header.getValue();
-                if (hValue == null) {
+                if (hValue == null){
                     throw new MalformedCookieException("Header value is null");
                 }
                 buffer = new CharArrayBuffer(hValue.length());
@@ -139,73 +134,65 @@ public class DefaultCookieSpec implements CookieSpec {
             hElems = new HeaderElement[] { parser.parseHeader(buffer, cursor) };
             return netscapeDraft.parse(hElems, origin);
         }
-        return SM.SET_COOKIE2.equals(header.getName())
-                        ? strict.parse(hElems, origin)
-                        : obsoleteStrict.parse(hElems, origin);
+        return SM.SET_COOKIE2.equals(header.getName()) ? strict.parse(hElems, origin) : obsoleteStrict.parse(hElems, origin);
     }
 
     @Override
-    public void validate(
-            final Cookie cookie,
-            final CookieOrigin origin) throws MalformedCookieException {
+    public void validate(final Cookie cookie,final CookieOrigin origin) throws MalformedCookieException{
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
-        if (cookie.getVersion() > 0) {
-            if (cookie instanceof SetCookie2) {
+        if (cookie.getVersion() > 0){
+            if (cookie instanceof SetCookie2){
                 strict.validate(cookie, origin);
-            } else {
+            }else{
                 obsoleteStrict.validate(cookie, origin);
             }
-        } else {
+        }else{
             netscapeDraft.validate(cookie, origin);
         }
     }
 
     @Override
-    public boolean match(final Cookie cookie, final CookieOrigin origin) {
+    public boolean match(final Cookie cookie,final CookieOrigin origin){
         Args.notNull(cookie, "Cookie");
         Args.notNull(origin, "Cookie origin");
-        if (cookie.getVersion() > 0) {
-            return cookie instanceof SetCookie2
-                            ? strict.match(cookie, origin)
-                            : obsoleteStrict.match(cookie, origin);
+        if (cookie.getVersion() > 0){
+            return cookie instanceof SetCookie2 ? strict.match(cookie, origin) : obsoleteStrict.match(cookie, origin);
         }
         return netscapeDraft.match(cookie, origin);
     }
 
     @Override
-    public List<Header> formatCookies(final List<Cookie> cookies) {
+    public List<Header> formatCookies(final List<Cookie> cookies){
         Args.notNull(cookies, "List of cookies");
         int version = Integer.MAX_VALUE;
         boolean isSetCookie2 = true;
-        for (final Cookie cookie: cookies) {
-            if (!(cookie instanceof SetCookie2)) {
+        for (final Cookie cookie : cookies){
+            if (!(cookie instanceof SetCookie2)){
                 isSetCookie2 = false;
             }
-            if (cookie.getVersion() < version) {
+            if (cookie.getVersion() < version){
                 version = cookie.getVersion();
             }
         }
-        if (version > 0) {
-            return isSetCookie2
-                            ? strict.formatCookies(cookies)
-                            : obsoleteStrict.formatCookies(cookies);
+        if (version > 0){
+            return isSetCookie2 ? strict.formatCookies(cookies) : obsoleteStrict.formatCookies(cookies);
         }
         return netscapeDraft.formatCookies(cookies);
     }
 
     @Override
-    public int getVersion() {
+    public int getVersion(){
         return strict.getVersion();
     }
 
     @Override
-    public Header getVersionHeader() {
+    public Header getVersionHeader(){
         return null;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "default";
     }
 

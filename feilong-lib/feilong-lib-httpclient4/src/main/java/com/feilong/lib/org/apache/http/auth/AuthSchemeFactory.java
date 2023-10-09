@@ -37,12 +37,13 @@ import com.feilong.lib.org.apache.http.params.HttpParams;
  * @deprecated (4.3) use {@link AuthSchemeProvider}
  */
 @Deprecated
-public interface AuthSchemeFactory {
+public interface AuthSchemeFactory{
 
     /**
      * Creates an instance of {@link AuthScheme} using given HTTP parameters.
      *
-     * @param params HTTP parameters.
+     * @param params
+     *            HTTP parameters.
      *
      * @return auth scheme.
      */

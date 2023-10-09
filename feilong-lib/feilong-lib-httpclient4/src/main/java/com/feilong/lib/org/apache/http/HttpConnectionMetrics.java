@@ -32,7 +32,7 @@ package com.feilong.lib.org.apache.http;
  *
  * @since 4.0
  */
-public interface HttpConnectionMetrics {
+public interface HttpConnectionMetrics{
 
     /**
      * Returns the number of requests transferred over the connection,
@@ -61,10 +61,11 @@ public interface HttpConnectionMetrics {
     /**
      * Return the value for the specified metric.
      *
-     *@param metricName the name of the metric to query.
+     * @param metricName
+     *            the name of the metric to query.
      *
-     *@return the object representing the metric requested,
-     *        {@code null} if the metric cannot not found.
+     * @return the object representing the metric requested,
+     *         {@code null} if the metric cannot not found.
      */
     Object getMetric(String metricName);
 

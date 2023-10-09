@@ -64,98 +64,93 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
 @SuppressWarnings("deprecation")
-class MinimalHttpClient extends CloseableHttpClient {
+class MinimalHttpClient extends CloseableHttpClient{
 
     private final HttpClientConnectionManager connManager;
-    private final MinimalClientExec requestExecutor;
-    private final HttpParams params;
 
-    public MinimalHttpClient(
-            final HttpClientConnectionManager connManager) {
+    private final MinimalClientExec           requestExecutor;
+
+    private final HttpParams                  params;
+
+    public MinimalHttpClient(final HttpClientConnectionManager connManager){
         super();
         this.connManager = Args.notNull(connManager, "HTTP connection manager");
         this.requestExecutor = new MinimalClientExec(
-                new HttpRequestExecutor(),
-                connManager,
-                DefaultConnectionReuseStrategy.INSTANCE,
-                DefaultConnectionKeepAliveStrategy.INSTANCE);
+                        new HttpRequestExecutor(),
+                        connManager,
+                        DefaultConnectionReuseStrategy.INSTANCE,
+                        DefaultConnectionKeepAliveStrategy.INSTANCE);
         this.params = new BasicHttpParams();
     }
 
     @Override
-    protected CloseableHttpResponse doExecute(
-            final HttpHost target,
-            final HttpRequest request,
-            final HttpContext context) throws IOException, ClientProtocolException {
+    protected CloseableHttpResponse doExecute(final HttpHost target,final HttpRequest request,final HttpContext context)
+                    throws IOException,ClientProtocolException{
         Args.notNull(target, "Target host");
         Args.notNull(request, "HTTP request");
         HttpExecutionAware execAware = null;
-        if (request instanceof HttpExecutionAware) {
+        if (request instanceof HttpExecutionAware){
             execAware = (HttpExecutionAware) request;
         }
-        try {
+        try{
             final HttpRequestWrapper wrapper = HttpRequestWrapper.wrap(request);
-            final HttpClientContext localcontext = HttpClientContext.adapt(
-                context != null ? context : new BasicHttpContext());
+            final HttpClientContext localcontext = HttpClientContext.adapt(context != null ? context : new BasicHttpContext());
             final HttpRoute route = new HttpRoute(target);
             RequestConfig config = null;
-            if (request instanceof Configurable) {
+            if (request instanceof Configurable){
                 config = ((Configurable) request).getConfig();
             }
-            if (config != null) {
+            if (config != null){
                 localcontext.setRequestConfig(config);
             }
             return this.requestExecutor.execute(route, wrapper, localcontext, execAware);
-        } catch (final HttpException httpException) {
+        }catch (final HttpException httpException){
             throw new ClientProtocolException(httpException);
         }
     }
 
     @Override
-    public HttpParams getParams() {
+    public HttpParams getParams(){
         return this.params;
     }
 
     @Override
-    public void close() {
+    public void close(){
         this.connManager.shutdown();
     }
 
     @Override
-    public ClientConnectionManager getConnectionManager() {
+    public ClientConnectionManager getConnectionManager(){
 
-        return new ClientConnectionManager() {
+        return new ClientConnectionManager(){
 
             @Override
-            public void shutdown() {
+            public void shutdown(){
                 connManager.shutdown();
             }
 
             @Override
-            public ClientConnectionRequest requestConnection(
-                    final HttpRoute route, final Object state) {
+            public ClientConnectionRequest requestConnection(final HttpRoute route,final Object state){
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public void releaseConnection(
-                    final ManagedClientConnection conn,
-                    final long validDuration, final TimeUnit timeUnit) {
+            public void releaseConnection(final ManagedClientConnection conn,final long validDuration,final TimeUnit timeUnit){
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public SchemeRegistry getSchemeRegistry() {
+            public SchemeRegistry getSchemeRegistry(){
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public void closeIdleConnections(final long idletime, final TimeUnit timeUnit) {
+            public void closeIdleConnections(final long idletime,final TimeUnit timeUnit){
                 connManager.closeIdleConnections(idletime, timeUnit);
             }
 
             @Override
-            public void closeExpiredConnections() {
+            public void closeExpiredConnections(){
                 connManager.closeExpiredConnections();
             }
 
