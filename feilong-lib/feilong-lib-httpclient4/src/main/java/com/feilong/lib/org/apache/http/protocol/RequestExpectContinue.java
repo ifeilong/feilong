@@ -38,7 +38,6 @@ import com.feilong.lib.org.apache.http.HttpVersion;
 import com.feilong.lib.org.apache.http.ProtocolVersion;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
-import com.feilong.lib.org.apache.http.params.CoreProtocolPNames;
 import com.feilong.lib.org.apache.http.util.Args;
 
 /**
@@ -53,14 +52,14 @@ import com.feilong.lib.org.apache.http.util.Args;
 public class RequestExpectContinue implements HttpRequestInterceptor{
 
     private final boolean activeByDefault;
-
-    /**
-     * @deprecated (4.3) use {@link com.feilong.lib.org.apache.http.protocol.RequestExpectContinue#RequestExpectContinue(boolean)}
-     */
-    @Deprecated
-    public RequestExpectContinue(){
-        this(false);
-    }
+    //
+    //    /**
+    //     * @deprecated (4.3) use {@link com.feilong.lib.org.apache.http.protocol.RequestExpectContinue#RequestExpectContinue(boolean)}
+    //     */
+    //    @Deprecated
+    //    public RequestExpectContinue(){
+    //        this(false);
+    //    }
 
     /**
      * @since 4.3
@@ -80,8 +79,9 @@ public class RequestExpectContinue implements HttpRequestInterceptor{
                 final HttpEntity entity = ((HttpEntityEnclosingRequest) request).getEntity();
                 // Do not send the expect header if request body is known to be empty
                 if (entity != null && entity.getContentLength() != 0 && !ver.lessEquals(HttpVersion.HTTP_1_0)){
-                    final boolean active = request.getParams()
-                                    .getBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, this.activeByDefault);
+                    final boolean active = this.activeByDefault;
+                    //                    final boolean active = request.getParams()
+                    //                                    .getBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, this.activeByDefault);
                     if (active){
                         request.addHeader(HTTP.EXPECT_DIRECTIVE, HTTP.EXPECT_CONTINUE);
                     }

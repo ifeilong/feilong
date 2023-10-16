@@ -47,12 +47,10 @@ import com.feilong.lib.org.apache.http.client.methods.CloseableHttpResponse;
 import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
 import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
-import com.feilong.lib.org.apache.http.client.params.ClientPNames;
 import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.client.utils.URIUtils;
 import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
 import com.feilong.lib.org.apache.http.impl.client.BasicCredentialsProvider;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.HttpCoreContext;
 import com.feilong.lib.org.apache.http.protocol.HttpProcessor;
 import com.feilong.lib.org.apache.http.util.Args;
@@ -135,8 +133,10 @@ public class ProtocolExec implements ClientExecChain{
         // Re-write request URI if needed
         rewriteRequestURI(request, route, context.getRequestConfig().isNormalizeUri());
 
-        final HttpParams params = request.getParams();
-        HttpHost virtualHost = (HttpHost) params.getParameter(ClientPNames.VIRTUAL_HOST);
+        //        final HttpParams params = request.getParams();
+        HttpHost virtualHost = null;
+
+        //        HttpHost virtualHost = (HttpHost) params.getParameter(ClientPNames.VIRTUAL_HOST);
         // HTTPCLIENT-1092 - add the port if necessary
         if (virtualHost != null && virtualHost.getPort() == -1){
             final int port = route.getTargetHost().getPort();

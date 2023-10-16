@@ -38,7 +38,6 @@ import com.feilong.lib.org.apache.http.ProtocolVersion;
 import com.feilong.lib.org.apache.http.RequestLine;
 import com.feilong.lib.org.apache.http.message.AbstractHttpMessage;
 import com.feilong.lib.org.apache.http.message.BasicRequestLine;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.HTTP;
 import com.feilong.lib.org.apache.http.util.Args;
 
@@ -200,17 +199,17 @@ public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRe
                         : new HttpRequestWrapper(request, target);
     }
 
-    /**
-     * @deprecated (4.3) use
-     *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
-     */
-    @Override
-    @Deprecated
-    public HttpParams getParams(){
-        if (this.params == null){
-            this.params = original.getParams().copy();
-        }
-        return this.params;
-    }
+    //    /**
+    //     * @deprecated (4.3) use
+    //     *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public HttpParams getParams(){
+    //        if (this.params == null){
+    //            this.params = original.getParams().copy();
+    //        }
+    //        return this.params;
+    //    }
 
 }

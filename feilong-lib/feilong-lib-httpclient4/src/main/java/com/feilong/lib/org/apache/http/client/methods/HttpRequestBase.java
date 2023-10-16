@@ -29,11 +29,11 @@ package com.feilong.lib.org.apache.http.client.methods;
 
 import java.net.URI;
 
+import com.feilong.lib.org.apache.http.HttpVersion;
 import com.feilong.lib.org.apache.http.ProtocolVersion;
 import com.feilong.lib.org.apache.http.RequestLine;
 import com.feilong.lib.org.apache.http.client.config.RequestConfig;
 import com.feilong.lib.org.apache.http.message.BasicRequestLine;
-import com.feilong.lib.org.apache.http.params.HttpProtocolParams;
 
 /**
  * Base implementation of {@link HttpUriRequest}.
@@ -61,7 +61,7 @@ public abstract class HttpRequestBase extends AbstractExecutionAwareRequest impl
 
     @Override
     public ProtocolVersion getProtocolVersion(){
-        return version != null ? version : HttpProtocolParams.getVersion(null);
+        return version != null ? version : HttpVersion.HTTP_1_1;
     }
 
     /**

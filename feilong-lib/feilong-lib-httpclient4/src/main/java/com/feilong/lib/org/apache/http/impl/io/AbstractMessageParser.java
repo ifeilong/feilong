@@ -42,8 +42,6 @@ import com.feilong.lib.org.apache.http.io.HttpMessageParser;
 import com.feilong.lib.org.apache.http.io.SessionInputBuffer;
 import com.feilong.lib.org.apache.http.message.BasicLineParser;
 import com.feilong.lib.org.apache.http.message.LineParser;
-import com.feilong.lib.org.apache.http.params.HttpParamConfig;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.util.Args;
 import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
 
@@ -72,30 +70,30 @@ public abstract class AbstractMessageParser<T extends HttpMessage> implements Ht
 
     private T                           message;
 
-    /**
-     * Creates an instance of AbstractMessageParser.
-     *
-     * @param buffer
-     *            the session input buffer.
-     * @param parser
-     *            the line parser.
-     * @param params
-     *            HTTP parameters.
-     *
-     * @deprecated (4.3) use {@link AbstractMessageParser#AbstractMessageParser(SessionInputBuffer,
-     *             LineParser, MessageConstraints)}
-     */
-    @Deprecated
-    public AbstractMessageParser(final SessionInputBuffer buffer, final LineParser parser, final HttpParams params){
-        super();
-        Args.notNull(buffer, "Session input buffer");
-        Args.notNull(params, "HTTP parameters");
-        this.sessionBuffer = buffer;
-        this.messageConstraints = HttpParamConfig.getMessageConstraints(params);
-        this.lineParser = (parser != null) ? parser : BasicLineParser.INSTANCE;
-        this.headerLines = new ArrayList<>();
-        this.state = HEAD_LINE;
-    }
+    //    /**
+    //     * Creates an instance of AbstractMessageParser.
+    //     *
+    //     * @param buffer
+    //     *            the session input buffer.
+    //     * @param parser
+    //     *            the line parser.
+    //     * @param params
+    //     *            HTTP parameters.
+    //     *
+    //     * @deprecated (4.3) use {@link AbstractMessageParser#AbstractMessageParser(SessionInputBuffer,
+    //     *             LineParser, MessageConstraints)}
+    //     */
+    //    @Deprecated
+    //    public AbstractMessageParser(final SessionInputBuffer buffer, final LineParser parser, final HttpParams params){
+    //        super();
+    //        Args.notNull(buffer, "Session input buffer");
+    //        Args.notNull(params, "HTTP parameters");
+    //        this.sessionBuffer = buffer;
+    //        this.messageConstraints = HttpParamConfig.getMessageConstraints(params);
+    //        this.lineParser = (parser != null) ? parser : BasicLineParser.INSTANCE;
+    //        this.headerLines = new ArrayList<>();
+    //        this.state = HEAD_LINE;
+    //    }
 
     /**
      * Creates new instance of AbstractMessageParser.

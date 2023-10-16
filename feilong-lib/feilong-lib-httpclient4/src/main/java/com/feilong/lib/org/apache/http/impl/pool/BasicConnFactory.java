@@ -43,13 +43,8 @@ import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.config.ConnectionConfig;
 import com.feilong.lib.org.apache.http.config.SocketConfig;
-import com.feilong.lib.org.apache.http.impl.DefaultBHttpClientConnection;
 import com.feilong.lib.org.apache.http.impl.DefaultBHttpClientConnectionFactory;
-import com.feilong.lib.org.apache.http.params.CoreConnectionPNames;
-import com.feilong.lib.org.apache.http.params.HttpParamConfig;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.pool.ConnFactory;
-import com.feilong.lib.org.apache.http.util.Args;
 import com.feilong.lib.org.apache.http.util.Asserts;
 
 /**
@@ -73,30 +68,30 @@ public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnect
 
     private final HttpConnectionFactory<? extends HttpClientConnection> connFactory;
 
-    /**
-     * @deprecated (4.3) use
-     *             {@link BasicConnFactory#BasicConnFactory(SocketFactory, SSLSocketFactory, int,
-     *             SocketConfig, ConnectionConfig)}.
-     */
-    @Deprecated
-    public BasicConnFactory(final SSLSocketFactory sslfactory, final HttpParams params){
-        super();
-        Args.notNull(params, "HTTP params");
-        this.plainfactory = null;
-        this.sslfactory = sslfactory;
-        this.connectTimeout = params.getIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 0);
-        this.sconfig = HttpParamConfig.getSocketConfig(params);
-        this.connFactory = new DefaultBHttpClientConnectionFactory(HttpParamConfig.getConnectionConfig(params));
-    }
-
-    /**
-     * @deprecated (4.3) use
-     *             {@link BasicConnFactory#BasicConnFactory(int, SocketConfig, ConnectionConfig)}.
-     */
-    @Deprecated
-    public BasicConnFactory(final HttpParams params){
-        this(null, params);
-    }
+    //    /**
+    //     * @deprecated (4.3) use
+    //     *             {@link BasicConnFactory#BasicConnFactory(SocketFactory, SSLSocketFactory, int,
+    //     *             SocketConfig, ConnectionConfig)}.
+    //     */
+    //    @Deprecated
+    //    public BasicConnFactory(final SSLSocketFactory sslfactory, final HttpParams params){
+    //        super();
+    //        Args.notNull(params, "HTTP params");
+    //        this.plainfactory = null;
+    //        this.sslfactory = sslfactory;
+    //        this.connectTimeout = params.getIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 0);
+    //        this.sconfig = HttpParamConfig.getSocketConfig(params);
+    //        this.connFactory = new DefaultBHttpClientConnectionFactory(HttpParamConfig.getConnectionConfig(params));
+    //    }
+    //
+    //    /**
+    //     * @deprecated (4.3) use
+    //     *             {@link BasicConnFactory#BasicConnFactory(int, SocketConfig, ConnectionConfig)}.
+    //     */
+    //    @Deprecated
+    //    public BasicConnFactory(final HttpParams params){
+    //        this(null, params);
+    //    }
 
     /**
      * @since 4.3
@@ -132,16 +127,16 @@ public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnect
         this(null, null, 0, SocketConfig.DEFAULT, ConnectionConfig.DEFAULT);
     }
 
-    /**
-     * @deprecated (4.3) no longer used.
-     */
-    @Deprecated
-    protected HttpClientConnection create(final Socket socket,final HttpParams params) throws IOException{
-        final int bufsize = params.getIntParameter(CoreConnectionPNames.SOCKET_BUFFER_SIZE, 8 * 1024);
-        final DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(bufsize);
-        conn.bind(socket);
-        return conn;
-    }
+    //    /**
+    //     * @deprecated (4.3) no longer used.
+    //     */
+    //    @Deprecated
+    //    protected HttpClientConnection create(final Socket socket,final HttpParams params) throws IOException{
+    //        final int bufsize = params.getIntParameter(CoreConnectionPNames.SOCKET_BUFFER_SIZE, 8 * 1024);
+    //        final DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(bufsize);
+    //        conn.bind(socket);
+    //        return conn;
+    //    }
 
     @Override
     public HttpClientConnection create(final HttpHost host) throws IOException{

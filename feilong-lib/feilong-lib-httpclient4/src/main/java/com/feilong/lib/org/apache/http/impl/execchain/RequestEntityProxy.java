@@ -126,12 +126,12 @@ class RequestEntityProxy implements HttpEntity{
     public boolean isStreaming(){
         return original.isStreaming();
     }
-
-    @Override
-    public void consumeContent() throws IOException{
-        consumed = true;
-        original.consumeContent();
-    }
+    //
+    //    @Override
+    //    public void consumeContent() throws IOException{
+    //        consumed = true;
+    //        original.consumeContent();
+    //    }
 
     @Override
     public String toString(){

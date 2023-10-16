@@ -36,7 +36,6 @@ import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.HttpRequestInterceptor;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
-import com.feilong.lib.org.apache.http.client.params.ClientPNames;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.util.Args;
 
@@ -74,8 +73,9 @@ public class RequestDefaultHeaders implements HttpRequestInterceptor{
 
         // Add default headers
         @SuppressWarnings("unchecked")
-        Collection<? extends Header> defHeaders = (Collection<? extends Header>) request.getParams()
-                        .getParameter(ClientPNames.DEFAULT_HEADERS);
+        Collection<? extends Header> defHeaders = null;
+        //        (Collection<? extends Header>) request.getParams()
+        //                        .getParameter(ClientPNames.DEFAULT_HEADERS);
         if (defHeaders == null){
             defHeaders = this.defaultHeaders;
         }

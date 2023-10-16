@@ -87,10 +87,10 @@ class ResponseEntityProxy extends HttpEntityWrapper implements EofSensorWatcher{
         return new EofSensorInputStream(this.wrappedEntity.getContent(), this);
     }
 
-    @Override
-    public void consumeContent() throws IOException{
-        releaseConnection();
-    }
+    //    @Override
+    //    public void consumeContent() throws IOException{
+    //        releaseConnection();
+    //    }
 
     @Override
     public void writeTo(final OutputStream outStream) throws IOException{

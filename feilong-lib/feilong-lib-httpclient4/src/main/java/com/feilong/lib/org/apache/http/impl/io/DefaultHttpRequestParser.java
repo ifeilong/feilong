@@ -40,8 +40,6 @@ import com.feilong.lib.org.apache.http.impl.DefaultHttpRequestFactory;
 import com.feilong.lib.org.apache.http.io.SessionInputBuffer;
 import com.feilong.lib.org.apache.http.message.LineParser;
 import com.feilong.lib.org.apache.http.message.ParserCursor;
-import com.feilong.lib.org.apache.http.params.HttpParams;
-import com.feilong.lib.org.apache.http.util.Args;
 import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
 
 /**
@@ -57,30 +55,30 @@ public class DefaultHttpRequestParser extends AbstractMessageParser<HttpRequest>
 
     private final CharArrayBuffer    lineBuf;
 
-    /**
-     * Creates an instance of this class.
-     *
-     * @param buffer
-     *            the session input buffer.
-     * @param lineParser
-     *            the line parser.
-     * @param requestFactory
-     *            the factory to use to create
-     *            {@link HttpRequest}s.
-     * @param params
-     *            HTTP parameters.
-     *
-     * @deprecated (4.3) use
-     *             {@link DefaultHttpRequestParser#DefaultHttpRequestParser(SessionInputBuffer, LineParser,
-     *             HttpRequestFactory, MessageConstraints)}
-     */
-    @Deprecated
-    public DefaultHttpRequestParser(final SessionInputBuffer buffer, final LineParser lineParser, final HttpRequestFactory requestFactory,
-                    final HttpParams params){
-        super(buffer, lineParser, params);
-        this.requestFactory = Args.notNull(requestFactory, "Request factory");
-        this.lineBuf = new CharArrayBuffer(128);
-    }
+    //    /**
+    //     * Creates an instance of this class.
+    //     *
+    //     * @param buffer
+    //     *            the session input buffer.
+    //     * @param lineParser
+    //     *            the line parser.
+    //     * @param requestFactory
+    //     *            the factory to use to create
+    //     *            {@link HttpRequest}s.
+    //     * @param params
+    //     *            HTTP parameters.
+    //     *
+    //     * @deprecated (4.3) use
+    //     *             {@link DefaultHttpRequestParser#DefaultHttpRequestParser(SessionInputBuffer, LineParser,
+    //     *             HttpRequestFactory, MessageConstraints)}
+    //     */
+    //    @Deprecated
+    //    public DefaultHttpRequestParser(final SessionInputBuffer buffer, final LineParser lineParser, final HttpRequestFactory requestFactory,
+    //                    final HttpParams params){
+    //        super(buffer, lineParser, params);
+    //        this.requestFactory = Args.notNull(requestFactory, "Request factory");
+    //        this.lineBuf = new CharArrayBuffer(128);
+    //    }
 
     /**
      * Creates new instance of DefaultHttpRequestParser.

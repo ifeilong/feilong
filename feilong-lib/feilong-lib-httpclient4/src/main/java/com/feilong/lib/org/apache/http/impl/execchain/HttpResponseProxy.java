@@ -37,7 +37,6 @@ import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.ProtocolVersion;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.CloseableHttpResponse;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 
 /**
  * A proxy class for {@link com.feilong.lib.org.apache.http.HttpResponse} that can be used to release client connection
@@ -189,15 +188,15 @@ class HttpResponseProxy implements CloseableHttpResponse{
         return original.headerIterator(name);
     }
 
-    @Override
-    public HttpParams getParams(){
-        return original.getParams();
-    }
-
-    @Override
-    public void setParams(final HttpParams params){
-        original.setParams(params);
-    }
+    //    @Override
+    //    public HttpParams getParams(){
+    //        return original.getParams();
+    //    }
+    //
+    //    @Override
+    //    public void setParams(final HttpParams params){
+    //        original.setParams(params);
+    //    }
 
     @Override
     public String toString(){

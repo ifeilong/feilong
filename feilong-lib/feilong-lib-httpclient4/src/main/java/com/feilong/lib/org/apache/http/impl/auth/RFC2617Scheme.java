@@ -41,7 +41,6 @@ import com.feilong.lib.org.apache.http.HeaderElement;
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.auth.ChallengeState;
 import com.feilong.lib.org.apache.http.auth.MalformedChallengeException;
-import com.feilong.lib.org.apache.http.auth.params.AuthPNames;
 import com.feilong.lib.org.apache.http.message.BasicHeaderValueParser;
 import com.feilong.lib.org.apache.http.message.HeaderValueParser;
 import com.feilong.lib.org.apache.http.message.ParserCursor;
@@ -100,11 +99,12 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
     }
 
     String getCredentialsCharset(final HttpRequest request){
-        String charset = (String) request.getParams().getParameter(AuthPNames.CREDENTIAL_CHARSET);
-        if (charset == null){
-            charset = getCredentialsCharset().name();
-        }
-        return charset;
+        //        String charset = 
+        //                        (String) request.getParams().getParameter(AuthPNames.CREDENTIAL_CHARSET);
+        //        if (charset == null){
+        return getCredentialsCharset().name();
+        //        }
+        //        return charset;
     }
 
     @Override

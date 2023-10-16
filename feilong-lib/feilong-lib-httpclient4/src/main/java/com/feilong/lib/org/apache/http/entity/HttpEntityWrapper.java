@@ -100,14 +100,14 @@ public class HttpEntityWrapper implements HttpEntity{
         return wrappedEntity.isStreaming();
     }
 
-    /**
-     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
-     *             otherwise call {@link #writeTo(OutputStream)} which is required to free the resources.
-     */
-    @Override
-    @Deprecated
-    public void consumeContent() throws IOException{
-        wrappedEntity.consumeContent();
-    }
+    //    /**
+    //     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
+    //     *             otherwise call {@link #writeTo(OutputStream)} which is required to free the resources.
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public void consumeContent() throws IOException{
+    //        wrappedEntity.consumeContent();
+    //    }
 
 }

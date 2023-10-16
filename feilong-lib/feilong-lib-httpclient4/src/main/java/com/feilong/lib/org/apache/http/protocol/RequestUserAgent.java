@@ -34,8 +34,6 @@ import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.HttpRequestInterceptor;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
-import com.feilong.lib.org.apache.http.params.CoreProtocolPNames;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.util.Args;
 
 /**
@@ -64,10 +62,10 @@ public class RequestUserAgent implements HttpRequestInterceptor{
         Args.notNull(request, "HTTP request");
         if (!request.containsHeader(HTTP.USER_AGENT)){
             String s = null;
-            final HttpParams params = request.getParams();
-            if (params != null){
-                s = (String) params.getParameter(CoreProtocolPNames.USER_AGENT);
-            }
+            //            final HttpParams params = request.getParams();
+            //            if (params != null){
+            //                s = (String) params.getParameter(CoreProtocolPNames.USER_AGENT);
+            //            }
             if (s == null){
                 s = this.userAgent;
             }

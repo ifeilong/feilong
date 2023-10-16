@@ -44,8 +44,6 @@ import com.feilong.lib.org.apache.http.impl.io.AbstractMessageParser;
 import com.feilong.lib.org.apache.http.io.SessionInputBuffer;
 import com.feilong.lib.org.apache.http.message.LineParser;
 import com.feilong.lib.org.apache.http.message.ParserCursor;
-import com.feilong.lib.org.apache.http.params.HttpParams;
-import com.feilong.lib.org.apache.http.util.Args;
 import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
 
 /**
@@ -63,18 +61,18 @@ public class DefaultHttpResponseParser extends AbstractMessageParser<HttpRespons
 
     private final CharArrayBuffer     lineBuf;
 
-    /**
-     * @deprecated (4.3) use {@link DefaultHttpResponseParser#DefaultHttpResponseParser(
-     *             SessionInputBuffer, LineParser, HttpResponseFactory, MessageConstraints)}
-     */
-    @Deprecated
-    public DefaultHttpResponseParser(final SessionInputBuffer buffer, final LineParser parser, final HttpResponseFactory responseFactory,
-                    final HttpParams params){
-        super(buffer, parser, params);
-        Args.notNull(responseFactory, "Response factory");
-        this.responseFactory = responseFactory;
-        this.lineBuf = new CharArrayBuffer(128);
-    }
+    //    /**
+    //     * @deprecated (4.3) use {@link DefaultHttpResponseParser#DefaultHttpResponseParser(
+    //     *             SessionInputBuffer, LineParser, HttpResponseFactory, MessageConstraints)}
+    //     */
+    //    @Deprecated
+    //    public DefaultHttpResponseParser(final SessionInputBuffer buffer, final LineParser parser, final HttpResponseFactory responseFactory,
+    //                    final HttpParams params){
+    //        super(buffer, parser, params);
+    //        Args.notNull(responseFactory, "Response factory");
+    //        this.responseFactory = responseFactory;
+    //        this.lineBuf = new CharArrayBuffer(128);
+    //    }
 
     /**
      * Creates new instance of DefaultHttpResponseParser.

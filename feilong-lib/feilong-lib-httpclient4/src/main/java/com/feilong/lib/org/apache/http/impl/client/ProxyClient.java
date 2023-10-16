@@ -38,11 +38,9 @@ import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.HttpVersion;
 import com.feilong.lib.org.apache.http.auth.AUTH;
-import com.feilong.lib.org.apache.http.auth.AuthSchemeRegistry;
 import com.feilong.lib.org.apache.http.auth.AuthScope;
 import com.feilong.lib.org.apache.http.auth.AuthState;
 import com.feilong.lib.org.apache.http.auth.Credentials;
-import com.feilong.lib.org.apache.http.client.config.AuthSchemes;
 import com.feilong.lib.org.apache.http.client.config.RequestConfig;
 import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.client.protocol.RequestClientConnControl;
@@ -54,12 +52,7 @@ import com.feilong.lib.org.apache.http.conn.routing.RouteInfo.LayerType;
 import com.feilong.lib.org.apache.http.conn.routing.RouteInfo.TunnelType;
 import com.feilong.lib.org.apache.http.entity.BufferedHttpEntity;
 import com.feilong.lib.org.apache.http.impl.DefaultConnectionReuseStrategy;
-import com.feilong.lib.org.apache.http.impl.auth.BasicSchemeFactory;
-import com.feilong.lib.org.apache.http.impl.auth.DigestSchemeFactory;
 import com.feilong.lib.org.apache.http.impl.auth.HttpAuthenticator;
-import com.feilong.lib.org.apache.http.impl.auth.KerberosSchemeFactory;
-import com.feilong.lib.org.apache.http.impl.auth.NTLMSchemeFactory;
-import com.feilong.lib.org.apache.http.impl.auth.SPNegoSchemeFactory;
 import com.feilong.lib.org.apache.http.impl.conn.ManagedHttpClientConnectionFactory;
 import com.feilong.lib.org.apache.http.impl.execchain.TunnelRefusedException;
 import com.feilong.lib.org.apache.http.message.BasicHttpRequest;
@@ -98,7 +91,7 @@ public class ProxyClient{
 
     private final AuthState                                                     proxyAuthState;
 
-    private final AuthSchemeRegistry                                            authSchemeRegistry;
+    //    private final AuthSchemeRegistry                                            authSchemeRegistry;
 
     private final ConnectionReuseStrategy                                       reuseStrategy;
 
@@ -116,12 +109,12 @@ public class ProxyClient{
         this.proxyAuthStrategy = new ProxyAuthenticationStrategy();
         this.authenticator = new HttpAuthenticator();
         this.proxyAuthState = new AuthState();
-        this.authSchemeRegistry = new AuthSchemeRegistry();
-        this.authSchemeRegistry.register(AuthSchemes.BASIC, new BasicSchemeFactory());
-        this.authSchemeRegistry.register(AuthSchemes.DIGEST, new DigestSchemeFactory());
-        this.authSchemeRegistry.register(AuthSchemes.NTLM, new NTLMSchemeFactory());
-        this.authSchemeRegistry.register(AuthSchemes.SPNEGO, new SPNegoSchemeFactory());
-        this.authSchemeRegistry.register(AuthSchemes.KERBEROS, new KerberosSchemeFactory());
+        //        this.authSchemeRegistry = new AuthSchemeRegistry();
+        //        this.authSchemeRegistry.register(AuthSchemes.BASIC, new BasicSchemeFactory());
+        //        this.authSchemeRegistry.register(AuthSchemes.DIGEST, new DigestSchemeFactory());
+        //        this.authSchemeRegistry.register(AuthSchemes.NTLM, new NTLMSchemeFactory());
+        //        this.authSchemeRegistry.register(AuthSchemes.SPNEGO, new SPNegoSchemeFactory());
+        //        this.authSchemeRegistry.register(AuthSchemes.KERBEROS, new KerberosSchemeFactory());
         this.reuseStrategy = new DefaultConnectionReuseStrategy();
     }
 
@@ -154,13 +147,13 @@ public class ProxyClient{
         return new BasicHttpParams();
     }
 
-    /**
-     * @deprecated (4.3) do not use.
-     */
-    @Deprecated
-    public AuthSchemeRegistry getAuthSchemeRegistry(){
-        return this.authSchemeRegistry;
-    }
+    //    /**
+    //     * @deprecated (4.3) do not use.
+    //     */
+    //    @Deprecated
+    //    public AuthSchemeRegistry getAuthSchemeRegistry(){
+    //        return this.authSchemeRegistry;
+    //    }
 
     public Socket tunnel(final HttpHost proxy,final HttpHost target,final Credentials credentials) throws IOException,HttpException{
         Args.notNull(proxy, "Proxy host");
@@ -194,7 +187,7 @@ public class ProxyClient{
         context.setAttribute(HttpClientContext.HTTP_ROUTE, route);
         context.setAttribute(HttpClientContext.PROXY_AUTH_STATE, this.proxyAuthState);
         context.setAttribute(HttpClientContext.CREDS_PROVIDER, credsProvider);
-        context.setAttribute(HttpClientContext.AUTHSCHEME_REGISTRY, this.authSchemeRegistry);
+        //        context.setAttribute(HttpClientContext.AUTHSCHEME_REGISTRY, this.authSchemeRegistry);
         context.setAttribute(HttpClientContext.REQUEST_CONFIG, this.requestConfig);
 
         this.requestExec.preProcess(connect, this.httpProcessor, context);

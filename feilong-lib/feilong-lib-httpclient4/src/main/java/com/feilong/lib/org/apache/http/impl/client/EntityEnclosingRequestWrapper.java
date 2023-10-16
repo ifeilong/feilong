@@ -91,11 +91,11 @@ public class EntityEnclosingRequestWrapper extends RequestWrapper implements Htt
             super(entity);
         }
 
-        @Override
-        public void consumeContent() throws IOException{
-            consumed = true;
-            super.consumeContent();
-        }
+        //        @Override
+        //        public void consumeContent() throws IOException{
+        //            consumed = true;
+        //            super.consumeContent();
+        //        }
 
         @Override
         public InputStream getContent() throws IOException{

@@ -50,8 +50,6 @@ import com.feilong.lib.org.apache.http.client.methods.CloseableHttpResponse;
 import com.feilong.lib.org.apache.http.client.methods.Configurable;
 import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
 import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
-import com.feilong.lib.org.apache.http.client.params.ClientPNames;
-import com.feilong.lib.org.apache.http.client.params.HttpClientParamConfig;
 import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.config.Lookup;
 import com.feilong.lib.org.apache.http.conn.ClientConnectionManager;
@@ -64,7 +62,6 @@ import com.feilong.lib.org.apache.http.conn.scheme.SchemeRegistry;
 import com.feilong.lib.org.apache.http.cookie.CookieSpecProvider;
 import com.feilong.lib.org.apache.http.impl.execchain.ClientExecChain;
 import com.feilong.lib.org.apache.http.params.HttpParams;
-import com.feilong.lib.org.apache.http.params.HttpParamsNames;
 import com.feilong.lib.org.apache.http.protocol.BasicHttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.util.Args;
@@ -120,9 +117,9 @@ class InternalHttpClient extends CloseableHttpClient implements Configurable{
 
     private HttpRoute determineRoute(final HttpHost target,final HttpRequest request,final HttpContext context) throws HttpException{
         HttpHost host = target;
-        if (host == null){
-            host = (HttpHost) request.getParams().getParameter(ClientPNames.DEFAULT_HOST);
-        }
+        //        if (host == null){
+        //            host = (HttpHost) request.getParams().getParameter(ClientPNames.DEFAULT_HOST);
+        //        }
         return this.routePlanner.determineRoute(host, request, context);
     }
 
@@ -165,16 +162,16 @@ class InternalHttpClient extends CloseableHttpClient implements Configurable{
             if (request instanceof Configurable){
                 config = ((Configurable) request).getConfig();
             }
-            if (config == null){
-                final HttpParams params = request.getParams();
-                if (params instanceof HttpParamsNames){
-                    if (!((HttpParamsNames) params).getNames().isEmpty()){
-                        config = HttpClientParamConfig.getRequestConfig(params, this.defaultConfig);
-                    }
-                }else{
-                    config = HttpClientParamConfig.getRequestConfig(params, this.defaultConfig);
-                }
-            }
+            //            if (config == null){
+            //                final HttpParams params = request.getParams();
+            //                if (params instanceof HttpParamsNames){
+            //                    if (!((HttpParamsNames) params).getNames().isEmpty()){
+            //                        config = HttpClientParamConfig.getRequestConfig(params, this.defaultConfig);
+            //                    }
+            //                }else{
+            //                    config = HttpClientParamConfig.getRequestConfig(params, this.defaultConfig);
+            //                }
+            //            }
             if (config != null){
                 localcontext.setRequestConfig(config);
             }

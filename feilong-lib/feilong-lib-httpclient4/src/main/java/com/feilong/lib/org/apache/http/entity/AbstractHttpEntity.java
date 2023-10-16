@@ -27,8 +27,6 @@
 
 package com.feilong.lib.org.apache.http.entity;
 
-import java.io.IOException;
-
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpEntity;
 import com.feilong.lib.org.apache.http.message.BasicHeader;
@@ -179,17 +177,19 @@ public abstract class AbstractHttpEntity implements HttpEntity{
     public void setChunked(final boolean b){
         this.chunked = b;
     }
+    //
+    //    /**
+    //     * The default implementation does not consume anything.
+    //     *
+    //     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
+    //     *             otherwise call {@link #writeTo(java.io.OutputStream)} which is required to free the resources.
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public void consumeContent() throws IOException{
+    //    }
 
-    /**
-     * The default implementation does not consume anything.
-     *
-     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
-     *             otherwise call {@link #writeTo(java.io.OutputStream)} which is required to free the resources.
-     */
-    @Override
-    @Deprecated
-    public void consumeContent() throws IOException{
-    }
+    //---------------------------------------------------------------
 
     @Override
     public String toString(){

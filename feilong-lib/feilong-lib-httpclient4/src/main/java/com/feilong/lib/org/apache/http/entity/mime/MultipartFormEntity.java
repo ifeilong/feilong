@@ -89,10 +89,10 @@ class MultipartFormEntity implements HttpEntity{
     public Header getContentEncoding(){
         return null;
     }
-
-    @Override
-    public void consumeContent(){
-    }
+    //
+    //    @Override
+    //    public void consumeContent(){
+    //    }
 
     @Override
     public InputStream getContent() throws IOException{

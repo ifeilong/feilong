@@ -31,13 +31,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import com.feilong.lib.org.apache.http.HttpRequest;
+import com.feilong.lib.org.apache.http.HttpVersion;
 import com.feilong.lib.org.apache.http.ProtocolException;
 import com.feilong.lib.org.apache.http.ProtocolVersion;
 import com.feilong.lib.org.apache.http.RequestLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.lib.org.apache.http.message.AbstractHttpMessage;
 import com.feilong.lib.org.apache.http.message.BasicRequestLine;
-import com.feilong.lib.org.apache.http.params.HttpProtocolParams;
 import com.feilong.lib.org.apache.http.util.Args;
 
 /**
@@ -70,7 +70,7 @@ public class RequestWrapper extends AbstractHttpMessage implements HttpUriReques
         super();
         Args.notNull(request, "HTTP request");
         this.original = request;
-        setParams(request.getParams());
+        //        setParams(request.getParams());
         setHeaders(request.getAllHeaders());
         // Make a copy of the original URI
         if (request instanceof HttpUriRequest){
@@ -109,7 +109,7 @@ public class RequestWrapper extends AbstractHttpMessage implements HttpUriReques
     @Override
     public ProtocolVersion getProtocolVersion(){
         if (this.version == null){
-            this.version = HttpProtocolParams.getVersion(getParams());
+            this.version = HttpVersion.HTTP_1_1;
         }
         return this.version;
     }

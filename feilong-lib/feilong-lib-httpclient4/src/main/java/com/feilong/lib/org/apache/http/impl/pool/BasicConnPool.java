@@ -34,7 +34,6 @@ import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.config.ConnectionConfig;
 import com.feilong.lib.org.apache.http.config.SocketConfig;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.pool.AbstractConnPool;
 import com.feilong.lib.org.apache.http.pool.ConnFactory;
 
@@ -58,13 +57,13 @@ public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnecti
         super(connFactory, 2, 20);
     }
 
-    /**
-     * @deprecated (4.3) use {@link BasicConnPool#BasicConnPool(SocketConfig, ConnectionConfig)}
-     */
-    @Deprecated
-    public BasicConnPool(final HttpParams params){
-        super(new BasicConnFactory(params), 2, 20);
-    }
+    //    /**
+    //     * @deprecated (4.3) use {@link BasicConnPool#BasicConnPool(SocketConfig, ConnectionConfig)}
+    //     */
+    //    @Deprecated
+    //    public BasicConnPool(final HttpParams params){
+    //        super(new BasicConnFactory(params), 2, 20);
+    //    }
 
     /**
      * @since 4.3
