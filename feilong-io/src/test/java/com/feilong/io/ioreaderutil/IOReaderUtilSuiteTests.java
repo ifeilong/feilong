@@ -22,6 +22,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                ReadToByteArrayTest.class,
+
                 ReadToStringFileInputStreamTest.class,
                 ReadToStringInputStreamTest.class,
 

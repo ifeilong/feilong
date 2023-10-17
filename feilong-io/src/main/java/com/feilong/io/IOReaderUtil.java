@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.json.JsonUtil;
+import com.feilong.lib.io.IOUtils;
 import com.feilong.lib.lang3.StringUtils;
 import com.feilong.validator.ValidatorUtil;
 
@@ -72,6 +73,35 @@ public final class IOReaderUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 获得内容直接转成字节数组.
+     * 
+     * <p>
+     * <span style="color:red">方法内部已经关闭了相关流</span>
+     * </p>
+     *
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
+     * @since 4.0.1
+     */
+    public static byte[] readToByteArray(String location){
+        InputStream inputStream = getInputStream(location);
+        try{
+            return IOUtils.toByteArray(inputStream);
+        }catch (IOException e){
+            throw new UncheckedIOException("location:" + location, e);
+        }
+    }
     //---------------------------------------------------------------
 
     /**
@@ -174,14 +204,7 @@ public final class IOReaderUtil{
      * @since 1.14.0 rename from readFileToString
      */
     public static String readToString(String location,String charsetName){
-        Validate.notBlank(location, "location can't be blank!");
-
-        //---------------------------------------------------------------
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("will read location:[{}] to String,use charsetName:[{}]", location, charsetName);
-        }
-        //---------------------------------------------------------------
-        InputStream inputStream = InputStreamUtil.getInputStream(location);
+        InputStream inputStream = getInputStream(location);
         return readToString(inputStream, charsetName);
     }
 
@@ -485,8 +508,7 @@ public final class IOReaderUtil{
      * @since 1.14.0 rename from read
      */
     public static Set<String> readToSet(String location,ReaderConfig readerConfig){
-        Validate.notBlank(location, "location can't be blank!");
-        InputStream inputStream = InputStreamUtil.getInputStream(location);
+        InputStream inputStream = getInputStream(location);
         return readToSet(InputStreamUtil.toBufferedReader(inputStream, UTF8), readerConfig);
     }
 
@@ -680,7 +702,6 @@ public final class IOReaderUtil{
      * @since 1.4.1
      */
     public static void resolverFile(String location,LineNumberReaderResolver lineNumberReaderResolver){
-        Validate.notBlank(location, "location can't be blank!");
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
         //---------------------------------------------------------------
@@ -688,7 +709,7 @@ public final class IOReaderUtil{
             LOGGER.trace("will resolverFile location:[{}],use lineNumberReaderResolver:[{}]", location, lineNumberReaderResolver);
         }
         //---------------------------------------------------------------
-        InputStream inputStream = InputStreamUtil.getInputStream(location);
+        InputStream inputStream = getInputStream(location);
         resolverFile(InputStreamUtil.toBufferedReader(inputStream, UTF8), lineNumberReaderResolver);
     }
 
@@ -815,5 +836,22 @@ public final class IOReaderUtil{
             String format = "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]";
             LOGGER.info(format, reader, lineNumberReaderResolver, formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
+    }
+
+    /**
+     * @param location
+     * @param charsetName
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 4.0.1
+     */
+    private static InputStream getInputStream(String location){
+        Validate.notBlank(location, "location can't be blank!");
+        //---------------------------------------------------------------
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("will read location:[{}] to String", location);
+        }
+        //---------------------------------------------------------------
+        return InputStreamUtil.getInputStream(location);
     }
 }
