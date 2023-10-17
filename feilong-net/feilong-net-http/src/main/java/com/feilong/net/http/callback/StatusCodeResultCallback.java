@@ -20,11 +20,11 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JsonUtil;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
+import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpRequest;
 
 /**
@@ -62,8 +62,8 @@ public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
         if (LOGGER.isInfoEnabled()){
             LOGGER.info(
                             "request:[{}],useConnectionConfig:[{}],statusCode:[{}]",
-                            JsonUtil.toString(httpRequest, true),
-                            JsonUtil.toString(useConnectionConfig, true),
+                            HttpLogHelper.createHttpRequestLog(httpRequest),
+                            HttpLogHelper.createConnectionConfigLog(useConnectionConfig),
                             httpResponse.getStatusLine());
         }
         return statusCode;

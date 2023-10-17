@@ -37,22 +37,22 @@ public class HttpRequest{
      * 
      * @since 1.5.0
      */
-    public static final String  DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21";
+    public static final String   DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21";
 
     //---------------------------------------------------------------
     /** 请求的uri地址. */
-    private String              uri;
+    private String               uri;
 
     /** 请求method 类型,默认 {@link HttpMethodType#GET}. */
-    private HttpMethodType      httpMethodType     = GET;
+    private HttpMethodType       httpMethodType     = GET;
 
     //---------------------------------------------------------------
 
     /** http 请求 key-value 参数map. */
-    private Map<String, String> paramMap;
+    private Map<String, String>  paramMap;
 
     /** 请求头信息. */
-    private Map<String, String> headerMap;
+    private Map<String, String>  headerMap;
 
     //---------------------------------------------------------------
 
@@ -62,7 +62,16 @@ public class HttpRequest{
      * @see <a href="https://en.wikipedia.org/wiki/HTTP_message_body">HTTP_message_body</a>
      * @since 1.10.0
      */
-    private String              requestBody;
+    private String               requestBody;
+
+    /**
+     * 二进制数据:请求体可以包含二进制数据，如文件、图像、音频等。
+     * 
+     * 这些数据通常以字节流的形式传递。.
+     *
+     * @since 4.0.1
+     */
+    private RequestByteArrayBody requestByteArrayBody;
 
     //---------------------------------------------------------------
 
@@ -76,7 +85,7 @@ public class HttpRequest{
      * 
      * @since 3.0.10
      */
-    private boolean             isTrimUri          = true;
+    private boolean              isTrimUri          = true;
 
     //---------------------------------------------------------------
 
@@ -312,5 +321,26 @@ public class HttpRequest{
      */
     public boolean getIsTrimUri(){
         return isTrimUri;
+    }
+
+    /**
+     * 获得 二进制数据:请求体可以包含二进制数据，如文件、图像、音频等。 这些数据通常以字节流的形式传递。.
+     *
+     * @return the requestByteArrayBody
+     * @since 4.0.1
+     */
+    public RequestByteArrayBody getRequestByteArrayBody(){
+        return requestByteArrayBody;
+    }
+
+    /**
+     * 设置 二进制数据:请求体可以包含二进制数据，如文件、图像、音频等。 这些数据通常以字节流的形式传递。.
+     *
+     * @param requestByteArrayBody
+     *            the requestByteArrayBody to set
+     * @since 4.0.1
+     */
+    public void setRequestByteArrayBody(RequestByteArrayBody requestByteArrayBody){
+        this.requestByteArrayBody = requestByteArrayBody;
     }
 }

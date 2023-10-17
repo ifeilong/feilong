@@ -99,7 +99,7 @@ public final class HttpRequestExecuter{
             return httpClient.execute(httpUriRequest);
         }catch (Exception e){
             httpUriRequest.abort();
-            String message = HttpRequestExecuterExceptionMessageBuilder.build(httpClient, httpRequest, useConnectionConfig, e);
+            String message = HttpRequestExecuterExceptionMessageBuilder.build(httpRequest, useConnectionConfig, e);
             throw new UncheckedHttpException(message, e);
         }finally{
             //不能直接abort,否则内容查不出来

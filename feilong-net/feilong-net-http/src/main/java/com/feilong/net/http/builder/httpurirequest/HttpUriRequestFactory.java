@@ -20,7 +20,6 @@ import java.net.URISyntaxException;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.NotImplementedException;
 import com.feilong.lib.org.apache.http.client.methods.HttpGet;
 import com.feilong.lib.org.apache.http.client.methods.HttpPatch;
@@ -31,6 +30,7 @@ import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
+import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.RequestConfigBuilder;
@@ -62,7 +62,7 @@ public class HttpUriRequestFactory{
      * @return the http uri request
      * @see RequestConfigBuilder
      */
-    public static HttpUriRequest create(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+    public static HttpUriRequest create(HttpRequest httpRequest,@SuppressWarnings("unused") ConnectionConfig connectionConfig){
         HttpRequestBase httpRequestBase = create(httpRequest);
         // RequestConfig requestConfig = RequestConfigBuilder.build(connectionConfig)
         //httpRequestBase.setConfig(requestConfig)
@@ -117,7 +117,7 @@ public class HttpUriRequestFactory{
         try{
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            String message = StringUtil.formatPattern("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
+            String message = StringUtil.formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
             throw new UncheckedHttpException(message, e);
         }
     }

@@ -18,19 +18,25 @@ package com.feilong.net.http.builder.httpurirequest;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.ObjectUtil.defaultZero;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.org.apache.http.HttpEntity;
 import com.feilong.lib.org.apache.http.NameValuePair;
 import com.feilong.lib.org.apache.http.client.entity.UrlEncodedFormEntity;
+import com.feilong.lib.org.apache.http.entity.ByteArrayEntity;
+import com.feilong.lib.org.apache.http.entity.ContentType;
 import com.feilong.lib.org.apache.http.entity.StringEntity;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
+import com.feilong.net.http.RequestByteArrayBody;
 
 /**
  * {@link HttpEntity} 构造器.
@@ -61,12 +67,38 @@ final class HttpEntityBuilder{
         if (isNotNullOrEmpty(requestBody)){
             return new StringEntity(requestBody, UTF8);
         }
+        //---------------------------------------------------------------
 
+        //since 4.0.1
+        RequestByteArrayBody requestByteArrayBody = httpRequest.getRequestByteArrayBody();
+        if (null != requestByteArrayBody && isNotNullOrEmpty(requestByteArrayBody.getBuf())){
+            return toByteArrayEntity(requestByteArrayBody);
+        }
         //---------------------------------------------------------------
         return buildFormHttpEntity(httpRequest.getParamMap());
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 转成 ByteArrayEntity.
+     * 
+     * @param requestByteArrayBody
+     * @return
+     * @since 4.0.1
+     */
+    private static HttpEntity toByteArrayEntity(RequestByteArrayBody requestByteArrayBody){
+        byte[] buf = requestByteArrayBody.getBuf();
+        MimeType mimeType = requestByteArrayBody.getMimeType();
+
+        return new ByteArrayEntity(
+                        buf,
+                        defaultZero(requestByteArrayBody.getOff()),
+                        defaultIfNull(requestByteArrayBody.getLength(), buf.length),
+                        null == mimeType ? null : ContentType.create(mimeType.getMime())
+
+        );
+    }
 
     /**
      * Builds the form http entity.

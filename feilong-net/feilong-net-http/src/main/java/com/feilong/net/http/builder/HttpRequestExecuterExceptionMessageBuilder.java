@@ -28,8 +28,8 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.JsonUtil;
-import com.feilong.lib.org.apache.http.client.HttpClient;
 import com.feilong.net.http.ConnectionConfig;
+import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpRequest;
 
 /**
@@ -51,20 +51,19 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
     /**
      * Builds the message.
-     *
-     * @param httpClient
-     *            the http client
+     * 
      * @param httpRequest
      *            the http request
      * @param useConnectionConfig
      *            the use connection config
      * @param e
      *            the e
+     *
      * @return the string
      * @since 1.11.4
      * @since 1.14.0 rename from buildMessage
      */
-    static String build(HttpClient httpClient,HttpRequest httpRequest,ConnectionConfig useConnectionConfig,Exception e){
+    static String build(HttpRequest httpRequest,ConnectionConfig useConnectionConfig,Exception e){
         String handlerMessage = buildHandlerMessage(e, useConnectionConfig);
 
         String result = commonMessage(httpRequest, useConnectionConfig);
@@ -121,8 +120,10 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
         //---------------------------------------------------------------
         String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
-        String commonResult = StringUtil
-                        .formatPattern(pattern, JsonUtil.toString(httpRequest, true), JsonUtil.toString(useConnectionConfig, true));
+        String commonResult = StringUtil.formatPattern(
+                        pattern,
+                        HttpLogHelper.createHttpRequestLog(httpRequest),
+                        HttpLogHelper.createConnectionConfigLog(useConnectionConfig));
         if (isNullOrEmpty(httpPropertiesMap)){
             return commonResult;
         }

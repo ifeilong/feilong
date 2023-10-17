@@ -39,11 +39,13 @@ import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
+import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.HttpResponseUtil;
 
 /**
- *
+ * 抽象 ResultCallback.
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @param <T>
  * @since 3.5.0
@@ -56,7 +58,7 @@ public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
     //---------------------------------------------------------------
     protected com.feilong.net.http.HttpResponse buildHttpResponse(
                     HttpRequest httpRequest,
-                    HttpUriRequest httpUriRequest,
+                    @SuppressWarnings("unused") HttpUriRequest httpUriRequest,
                     HttpResponse httpResponse,
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
@@ -69,8 +71,8 @@ public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
 
             LOGGER.info(
                             "request:[{}],useConnectionConfig:[{}],statusCode:[{}],response:[{}]",
-                            JsonUtil.toString(httpRequest, true),
-                            JsonUtil.toString(useConnectionConfig, true),
+                            HttpLogHelper.createHttpRequestLog(httpRequest),
+                            HttpLogHelper.createConnectionConfigLog(useConnectionConfig),
                             httpResponse.getStatusLine(),
                             response);
         }

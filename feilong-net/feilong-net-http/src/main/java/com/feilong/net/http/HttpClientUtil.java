@@ -435,6 +435,92 @@ public final class HttpClientUtil{
         return HttpRequestExecuter.execute(httpRequest, connectionConfig, HttpResponseResultCallback.INSTANCE);
     }
 
+    /**
+     * 获得 {@link com.feilong.net.http.HttpResponse}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 发请求到百度
+     * </p>
+     * 
+     * <pre>
+     * 
+     * public void testGetResponseBodyAsString1(){
+     *     String urlString = "http://localhost:8081/member/login";
+     *     urlString = "http://www.baidu.com";
+     * 
+     *     HttpClientUtil.getHttpResponse(urlString);
+     * }
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre>
+    {@code
+    
+    response:[    {
+            "statusCode": 200,
+            "resultString": "<!DOCTYPE html>\r\n<!--STATUS OK--><html> <head><meta http-equiv=content-type content=text/html;charset=utf-8><meta http-equiv
+    =X-UA-Compatible content=
+    IE=Edge> <a href=http://www.hao123.com name=tj_trhao123 class=mnav>hao123<\/a>  <a href=http://ir.baidu.com>About Baidu<\/a> <\/p> <p id=
+    cp>&copy;2017&nbsp;Baidu&nbsp;<a href=http://www.baidu.com/duty/>使用百度前必读<\/a>&nbsp; <a href=http://jianyi.baidu.com/ class=cp-feedback>意见反馈<\/a>&nbsp;京ICP证030173号&nbsp;  <\/p> <\/div> <\/div> <\/div> <\/body> <\/html>\r\n",
+            "useTime": 1721,
+            "headerList":         [
+                            {
+                    "name": "Cache-Control",
+                    "value": "private, no-cache, no-store, proxy-revalidate, no-transform"
+                },
+                            {
+                    "name": "Connection",
+                    "value": "Keep-Alive"
+                },
+                            {
+                    "name": "Content-Type",
+                    "value": "text/html"
+                },
+                            {
+                    "name": "Date",
+                    "value": "Wed, 29 Nov 2017 14:41:32 GMT"
+                },
+                            {
+                    "name": "Last-Modified",
+                    "value": "Mon, 23 Jan 2017 13:28:36 GMT"
+                },
+                            {
+                    "name": "Pragma",
+                    "value": "no-cache"
+                },
+                            {
+                    "name": "Server",
+                    "value": "bfe/1.0.8.18"
+                },
+                            {
+                    "name": "Set-Cookie",
+                    "value": "BDORZ=27315; max-age=86400; domain=.baidu.com; path=/"
+                },
+                            {
+                    "name": "Transfer-Encoding",
+                    "value": "chunked"
+                }
+            ]
+        }]
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param httpRequest
+     *            the http request
+     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.0.1
+     */
+    public static com.feilong.net.http.HttpResponse getHttpResponse(HttpRequest httpRequest){
+        return getHttpResponse(httpRequest, null);
+    }
+
     //----------------------getResponseBodyAsString-----------------------------------------
 
     /**

@@ -23,10 +23,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.json.JsonUtil;
 import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.HttpRequest;
+import com.feilong.net.http.HttpLogHelper;
 
 /**
  * 将{@link HttpRequest} 转成 {@link URIBuilder} 的构造器.
@@ -68,13 +68,15 @@ class URIBuilderBuilder{
 
             if (isNullOrEmpty(paramMap)){
                 if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("httpRequest [paramMap] isNullOrEmpty,skip!,httpRequestInfo:[{}]", JsonUtil.toString(httpRequest, true));
+                    LOGGER.trace(
+                                    "httpRequest [paramMap] isNullOrEmpty,skip!,httpRequestInfo:[{}]",
+                                    HttpLogHelper.createHttpRequestLog(httpRequest));
                 }
                 return uriBuilder;
             }
             return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
-            String message = StringUtil.formatPattern("httpRequest:[{}]", JsonUtil.toString(httpRequest, true));
+            String message = StringUtil.formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
             throw new UncheckedHttpException(message, e);
         }
     }
