@@ -125,7 +125,6 @@ import com.feilong.lib.beanutils.converters.URLConverter;
  * @version $Id$
  * @since 1.7
  */
-
 public class ConvertUtilsBean{
 
     /** The Constant log. */
@@ -152,7 +151,10 @@ public class ConvertUtilsBean{
     /**
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
+     * 
+     * @deprecated 这种会影响全局, 后面版本会去掉,暂时没有替换的方法保留
      */
+    @Deprecated
     private final WeakFastHashMap<Class<?>, Converter> converters = new WeakFastHashMap<>();
 
     // ------------------------------------------------------- Constructors
@@ -648,7 +650,9 @@ public class ConvertUtilsBean{
      * @param clazz
      *            Destination class for conversions performed by this
      *            Converter
+     * @deprecated 这种会影响全局, 后面版本会去掉,暂时没有替换的方法保留
      */
+    @Deprecated
     public void register(final Converter converter,final Class<?> clazz){
 
         converters.put(clazz, converter);

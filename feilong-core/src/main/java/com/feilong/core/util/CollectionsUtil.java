@@ -440,6 +440,48 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 循环 <code>iterable</code>, 判断元素和参数 <code>element</code> 是否equals, 如果有equals,那么返回true,否则返回false.
+     * 
+     * <p>
+     * 使用循环每个元素,然后equals判断
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * CollectionsUtil.contains(toList("track", "debug"), "debug") = true
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     *
+     * @param iterable
+     *            the iterable
+     * @param element
+     *            the element
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 false<br>
+     * @see com.feilong.lib.collection4.IterableUtils#contains(Iterable, Object, org.apache.commons.collections4.Equator)
+     * @see com.feilong.lib.collection4.IterableUtils#contains(Iterable, Object)
+     * @since 4.0.1
+     */
+    public static <T> boolean contains(final Iterable<T> iterable,final T element){
+        if (isNullOrEmpty(iterable)){
+            return false;
+        }
+        for (T t : iterable){
+            if (Objects.equals(t, element)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 循环 <code>iterable</code>, 判断元素和参数 <code>element</code> 去空且忽视大小写后是否相等, 如果有相等的,那么返回true.
      * 
      * <h3>示例:</h3>

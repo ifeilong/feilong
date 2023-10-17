@@ -18,10 +18,8 @@
 package com.feilong.lib.beanutils;
 
 /**
- * <p>
  * Utility methods for converting String scalar values to objects of the
  * specified Class, String arrays to arrays of the specified Class.
- * </p>
  *
  * <p>
  * For more details, see <code>ConvertUtilsBean</code> which provides the
@@ -36,9 +34,7 @@ public class ConvertUtils{
     // --------------------------------------------------------- Public Classes
 
     /**
-     * <p>
      * Convert the specified value into a String.
-     * </p>
      *
      * <p>
      * For more details see <code>ConvertUtilsBean</code>.
@@ -55,10 +51,8 @@ public class ConvertUtils{
     }
 
     /**
-     * <p>
-     * Convert the specified value to an object of the specified class (if
-     * possible). Otherwise, return a String representation of the value.
-     * </p>
+     * Convert the specified value to an object of the specified class (if possible). Otherwise, return a String representation of the
+     * value.
      *
      * <p>
      * For more details see <code>ConvertUtilsBean</code>.
@@ -77,10 +71,7 @@ public class ConvertUtils{
     }
 
     /**
-     * <p>
-     * Convert an array of specified values to an array of objects of the
-     * specified class (if possible).
-     * </p>
+     * Convert an array of specified values to an array of objects of the specified class (if possible).
      *
      * <p>
      * For more details see <code>ConvertUtilsBean</code>.
@@ -99,10 +90,7 @@ public class ConvertUtils{
     }
 
     /**
-     * <p>
-     * Convert the value to an object of the specified class (if
-     * possible).
-     * </p>
+     * Convert the value to an object of the specified class (if possible).
      *
      * @param value
      *            Value to be converted (may be null)
@@ -119,8 +107,7 @@ public class ConvertUtils{
 
     /**
      * <p>
-     * Remove all registered {@link Converter}s, and re-establish the
-     * standard Converters.
+     * Remove all registered {@link Converter}s, and re-establish the standard Converters.
      * </p>
      *
      * <p>
@@ -128,7 +115,9 @@ public class ConvertUtils{
      * </p>
      *
      * @see ConvertUtilsBean#deregister()
+     * @deprecated 这种会影响全局, 后面版本会去掉,暂时没有替换的方法保留
      */
+    @Deprecated
     public static void deregister(){
         ConvertUtilsBean.getInstance().deregister();
     }
@@ -146,17 +135,17 @@ public class ConvertUtils{
      * @param clazz
      *            Class for which to remove a registered Converter
      * @see ConvertUtilsBean#deregister(Class)
+     * @deprecated 这种会影响全局, 后面版本会去掉,暂时没有替换的方法保留
      */
+    @Deprecated
     public static void deregister(final Class<?> clazz){
         ConvertUtilsBean.getInstance().deregister(clazz);
     }
 
     /**
-     * <p>
      * Look up and return any registered {@link Converter} for the specified
      * destination class; if there is no registered Converter, return
      * <code>null</code>.
-     * </p>
      *
      * <p>
      * For more details see <code>ConvertUtilsBean</code>.
@@ -187,7 +176,9 @@ public class ConvertUtils{
      *            Destination class for conversions performed by this
      *            Converter
      * @see ConvertUtilsBean#register(Converter, Class)
+     * @deprecated 这种会影响全局, 后面版本会去掉,暂时没有替换的方法保留
      */
+    @Deprecated
     public static void register(final Converter converter,final Class<?> clazz){
         ConvertUtilsBean.getInstance().register(converter, clazz);
     }

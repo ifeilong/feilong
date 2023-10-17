@@ -31,6 +31,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 IndexOfTest.class,
 
+                ContainsTest.class,
                 ContainsTrimAndIgnoreCaseTest.class,
 
                 CollectIterableTest.class,
