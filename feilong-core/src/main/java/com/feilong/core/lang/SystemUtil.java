@@ -350,9 +350,8 @@ public final class SystemUtil{
 
     // -----------------------------------------------------------------------
     /**
-     * <p>
      * Gets a System property, defaulting to {@code null} if the property cannot be read.
-     * </p>
+     * 
      * <p>
      * If a {@code SecurityException} is caught, the return value is {@code null} and a message is written to
      * {@code System.err}.
@@ -362,8 +361,9 @@ public final class SystemUtil{
      *            the system property name
      * @return the system property value or {@code null} if a security problem occurs
      * @since 3.0.0
+     * @since 4.0.1 change to public
      */
-    private static String getSystemProperty(final String property){
+    public static String getSystemProperty(final String property){
         try{
             return System.getProperty(property);
         }catch (final SecurityException ex){
