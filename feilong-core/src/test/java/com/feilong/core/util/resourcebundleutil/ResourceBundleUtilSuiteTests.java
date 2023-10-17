@@ -28,10 +28,13 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetValueWithResourceBundleParameterizedTest.class,
 
                 ToAliasBeanTest.class,
+                ToBeanBaseNameTest.class,
+                ToBeanResourceBundleTest.class,
+
                 ToMapTest.class,
                 ToMapBaseNamesTest.class,
                 ToPropertiesTest.class
-        //
+//
 })
 public class ResourceBundleUtilSuiteTests{
 

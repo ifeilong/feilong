@@ -85,6 +85,9 @@ public class ToAliasBeanTest{
                                         hasProperty("aliveCheck", is(false))
                         //
                         ));
+
+        //        ConvertUtils.deregister(String[].class);
+        ConvertUtils.deregister();
     }
 
     /**

@@ -16,7 +16,9 @@
 	Plugins should be processed with the Log4j annotation processor.
 	A comma separated list of package names to search for plugins.
 	Plugins are only loaded once per classloader so changing this value may not have any effect upon reconfiguration. -->
-<Configuration status="info" strict="true" packages="com.feilong.tools.log4j2.aaa,com.feilong.tools.log4j2.bbb">
+<Configuration status="info" strict="true" 
+packages="com.feilong.tools.log4j2.aaa,com.feilong.tools.log4j2.bbb"
+>
 
 	<!-- Appenders:定义日志输出目的地，内容和格式等 -->
 	<Appenders>

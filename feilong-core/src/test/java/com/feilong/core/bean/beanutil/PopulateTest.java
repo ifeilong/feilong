@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean.beanutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,6 +23,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Map;
 
@@ -30,18 +32,9 @@ import org.junit.Test;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class BeanUtilPopulateTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class PopulateTest{
 
-    /**
-     * Test populate.
-     */
     @Test
-    
     public void testPopulate(){
         User user = new User();
         user.setId(5L);
@@ -50,11 +43,26 @@ public class PopulateTest{
         assertThat(BeanUtil.populate(user, properties), allOf(hasProperty("id", is(8L))));
     }
 
-    /**
-     * Test populate bean not exists property name.
-     */
     @Test
-    
+    public void testPopulateAutoConvert(){
+        User user = new User();
+        user.setId(5L);
+
+        Map<String, Object> properties = toMap("id", "8");
+        assertThat(BeanUtil.populate(user, properties), allOf(hasProperty("id", is(8L))));
+    }
+
+    @Test
+    public void testPopulateAutoConvert1(){
+        User user = new User();
+
+        Map<String, Object> properties = toMap("loves", "女人,漂亮女人");
+        User populate = BeanUtil.populate(user, properties);
+
+        assertArrayEquals(toArray("女人", "漂亮女人"), populate.getLoves());
+    }
+
+    @Test
     public void testPopulateBeanNotExistsPropertyName(){
         User user = new User();
         user.setId(5L);
@@ -63,11 +71,7 @@ public class PopulateTest{
         assertThat(BeanUtil.populate(user, properties), allOf(hasProperty("id", is(5L))));
     }
 
-    /**
-     * Test populate bean with space exists property name.
-     */
     @Test
-    
     public void testPopulateBeanWithSpaceExistsPropertyName(){
         User user = new User();
         user.setId(5L);
@@ -76,11 +80,7 @@ public class PopulateTest{
         assertThat(BeanUtil.populate(user, properties), allOf(hasProperty("id", is(5L))));
     }
 
-    /**
-     * Test populate bean with null exists property name.
-     */
     @Test
-    
     public void testPopulateBeanWithNullExistsPropertyName(){
         User user = new User();
         user.setId(5L);
@@ -89,11 +89,7 @@ public class PopulateTest{
         assertThat(BeanUtil.populate(user, properties), allOf(hasProperty("id", is(5L))));
     }
 
-    /**
-     * Test populate map.
-     */
     @Test
-    
     public void testPopulateMap(){
         Map<String, Object> map = newHashMap();
         Map<String, Long> properties = toMap("id", 8L);
@@ -101,21 +97,15 @@ public class PopulateTest{
         assertThat(BeanUtil.populate(map, properties), allOf(hasEntry("id", (Object) 8L)));
     }
 
-    /**
-     * Test populate null bean.
-     */
+    //---------------------------------------------------------------
+
     @Test(expected = NullPointerException.class)
-    
     public void testPopulateNullBean(){
         Map<String, Long> map = toMap("id", 8L);
         BeanUtil.populate(null, map);
     }
 
-    /**
-     * Test populate null properties.
-     */
     @Test(expected = NullPointerException.class)
-    
     public void testPopulateNullProperties(){
         BeanUtil.populate(new User(), null);
     }

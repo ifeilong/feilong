@@ -17,9 +17,9 @@ package com.feilong.core.util;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 import static java.util.Collections.emptyMap;
 
 import java.io.IOException;
@@ -37,11 +37,11 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.
@@ -235,7 +235,8 @@ public final class ResourceBundleUtil{
      * </blockquote>
      *
      * @param baseNames
-     *            the base names
+     *            一个或者多个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @return 如果 <code>baseNames</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>baseNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 
@@ -624,6 +625,257 @@ public final class ResourceBundleUtil{
         Validate.notNull(resourceBundle, "resourceBundle can't be null/empty!");
         Validate.notNull(aliasBeanClass, "aliasBeanClass can't be null!");
         return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), toMap(resourceBundle));
+    }
+
+    /**
+     * 读取 <code>baseName</code> 转换成<code>bean</code>.
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>配置文件key要和bean 属性一一对应</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
+     * </p>
+     * 
+     * <pre class="code">
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
+     * serverList=172.20.3-1.23:11211,172.20.31.22:11211 
+     * memcached.minconnection=5
+     * memcached.maxconnection=250
+     * <span style="color:green">#关闭套接字缓存</span>
+     * memcached.nagle=false
+     * </pre>
+     * 
+     * <p>
+     * 有以下<b>aliasBean</b>信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class DangaMemCachedNoAliasConfig{
+     * 
+    private String[] serverList;
+    
+    private Integer  initConnection;
+    
+    private Integer  minConnection;
+    
+    private Boolean  nagle;
+     * 
+     *     <span style="color:green">//setter getter 略</span>
+     * }
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * DangaMemCachedNoAliasConfig config = ResourceBundleUtil.toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
+     * LOGGER.debug(JsonUtil.format(config));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+      [
+    maxConnection=250
+    minConnection=5
+    nagle=false
+    serverList={172.20.3-1.23,11211,172.20.31.22,11211}
+    ]
+     * </pre>
+     * 
+     * <p>
+     * 你会发现类型会自动转换,虽然properties里面存储key和value都是string,但是使用该方法,可以<b>自动类型转换</b>,转成bean里面声明的类型
+     * </p>
+     * 
+     * <p>
+     * 但是同时,你也会发现,上面的 serverList 期望值是 ["172.20.3-1.23:11211","172.20.31.22:11211"],但是和你的期望值不符合,<br>
+     * 因为, {@link com.feilong.lib.beanutils.converters.ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * </p>
+     * 
+     * <p>
+     * <b>你需要如此这般:</b>
+     * </p>
+     * 
+     * <pre class="code">
+     * ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
+     * char[] allowedChars = { ':' };
+     * arrayConverter.setAllowedChars(allowedChars);
+     * 
+     * ConvertUtils.register(arrayConverter, String[].class);
+     * 
+     * DangaMemCachedNoAliasConfig dangaMemCachedConfig = ResourceBundleUtil
+     *                 .toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
+     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     *         "maxConnection": 250,
+     *         "serverList":         [
+     *             "172.20.3-1.23:11211",
+     *             "172.20.31.22:11211"
+     *         ],
+     *         "minConnection": 5
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param baseName
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
+     * @param beanClass
+     *            the alias bean class
+     * @return the t
+     * @throws NullPointerException
+     *             如果 <code>baseName</code>或者 <code>beanClass</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code>是空
+     * @see BeanUtil#populateAliasBean(Object, Map)
+     * @since 4.0.1
+     */
+    public static <T> T toBean(String baseName,Class<T> beanClass){
+        Validate.notEmpty(baseName, "baseName can't be null/empty!");
+        Validate.notNull(beanClass, "beanClass can't be null!");
+
+        ResourceBundle resourceBundle = getResourceBundle(baseName);
+        return toBean(resourceBundle, beanClass);
+    }
+
+    /**
+     * 读取 <code>resourceBundle</code> 转换成<code>bean</code>.
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>配置文件key要和bean 属性一一对应</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
+     * </p>
+     * 
+     * <pre class="code">
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
+     * serverList=172.20.3-1.23:11211,172.20.31.22:11211 
+     * memcached.minconnection=5
+     * memcached.maxconnection=250
+     * <span style="color:green">#关闭套接字缓存</span>
+     * memcached.nagle=false
+     * </pre>
+     * 
+     * <p>
+     * 有以下<b>aliasBean</b>信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class DangaMemCachedNoAliasConfig{
+     * 
+    private String[] serverList;
+    
+    private Integer  initConnection;
+    
+    private Integer  minConnection;
+    
+    private Boolean  nagle;
+     * 
+     *     <span style="color:green">//setter getter 略</span>
+     * }
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * DangaMemCachedNoAliasConfig config = ResourceBundleUtil.toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
+     * LOGGER.debug(JsonUtil.format(config));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+      [
+    maxConnection=250
+    minConnection=5
+    nagle=false
+    serverList={172.20.3-1.23,11211,172.20.31.22,11211}
+    ]
+     * </pre>
+     * 
+     * <p>
+     * 你会发现类型会自动转换,虽然properties里面存储key和value都是string,但是使用该方法,可以<b>自动类型转换</b>,转成bean里面声明的类型
+     * </p>
+     * 
+     * <p>
+     * 但是同时,你也会发现,上面的 serverList 期望值是 ["172.20.3-1.23:11211","172.20.31.22:11211"],但是和你的期望值不符合,<br>
+     * 因为, {@link com.feilong.lib.beanutils.converters.ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * </p>
+     * 
+     * <p>
+     * <b>你需要如此这般:</b>
+     * </p>
+     * 
+     * <pre class="code">
+     * ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
+     * char[] allowedChars = { ':' };
+     * arrayConverter.setAllowedChars(allowedChars);
+     * 
+     * ConvertUtils.register(arrayConverter, String[].class);
+     * 
+     * DangaMemCachedNoAliasConfig dangaMemCachedConfig = ResourceBundleUtil
+     *                 .toBean("messages/memcachedBean", DangaMemCachedNoAliasConfig.class);
+     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     *         "maxConnection": 250,
+     *         "serverList":         [
+     *             "172.20.3-1.23:11211",
+     *             "172.20.31.22:11211"
+     *         ],
+     *         "minConnection": 5
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     * @param resourceBundle
+     * @param beanClass
+     * @return
+     * @since 4.0.1
+     */
+    public static <T> T toBean(ResourceBundle resourceBundle,Class<T> beanClass){
+        Validate.notNull(resourceBundle, "resourceBundle can't be null/empty!");
+        Validate.notNull(beanClass, "beanClass can't be null!");
+
+        Map<String, String> map = toMap(resourceBundle);
+        return BeanUtil.populate(newInstance(beanClass), map);
     }
 
     //----------------------------getResourceBundle-----------------------------------
