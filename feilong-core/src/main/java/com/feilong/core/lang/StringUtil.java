@@ -1028,6 +1028,30 @@ public final class StringUtil{
      * 
      * 将配置类型的逗号分隔字符串分割转换成数组,然后自动转换成element一样的类型,判断是否包含.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * StringUtil.tokenizeToArrayContains((String) null, null) = false;
+     * StringUtil.tokenizeToArrayContains(null, EMPTY) = false;
+     * StringUtil.tokenizeToArrayContains(EMPTY, null) = false;
+     * StringUtil.tokenizeToArrayContains(EMPTY, EMPTY) = false;
+     * StringUtil.tokenizeToArrayContains("   ", EMPTY) = false;
+     * 
+     * StringUtil.tokenizeToArrayContains("1,2,2,,3,4", "3") = true;
+     * StringUtil.tokenizeToArrayContains("1,2,2,,3,4", 3) = true;
+     * StringUtil.tokenizeToArrayContains("1,2,2,3,4", "1") = true;
+     * StringUtil.tokenizeToArrayContains("1,2,2,3,4", 1) = true;
+     * StringUtil.tokenizeToArrayContains("1,2,2,3,4", 1L) = true;
+     * StringUtil.tokenizeToArrayContains("1,2,2,3,4", toBigDecimal(1)) = true;
+     * StringUtil.tokenizeToArrayContains("1,2,2,3,4", Double.valueOf(1)) = true;
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <h3>重构:</h3>
      * 
      * <blockquote>

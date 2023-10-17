@@ -31,6 +31,7 @@ public class TokenizeToArrayContainsParameterizedTest extends Abstract2ParamsAnd
 
     @Parameters(name = "index:{index}:StringUtil.tokenizeToArrayContains({0}, {1})={2}")
     public static Iterable<Object[]> data(){
+        Integer i = 1;
         return toList(//
                         toArray((String) null, null, false),
                         toArray(null, EMPTY, false),
@@ -45,6 +46,8 @@ public class TokenizeToArrayContainsParameterizedTest extends Abstract2ParamsAnd
 
                         toArray("1,2,2,3,4", "1", true),
                         toArray("1,2,2,3,4", 1, true),
+                        toArray("1,2,2,3,4", i, true),
+                        toArray("1,2,2,3,4", (byte) 1, true),
                         toArray("1,2,2,3,4", 1L, true),
                         toArray("1,2,2,3,4", toBigDecimal(1), true),
 
