@@ -505,6 +505,31 @@ public final class ObjectUtil{
     }
 
     /**
+     * 如果 <code>i</code> 是null或者{@code <}0,返回默认值 <code>0</code>.
+     * 
+     * <pre>
+     * ObjectUtil.defaultZero(null)     = 0
+     * ObjectUtil.defaultZero(-1)       = 0
+     * ObjectUtil.defaultZero(0)        = 0
+     * ObjectUtil.defaultZero(8)        = 8
+     * </pre>
+     *
+     * @param i
+     *            i
+     * @return 如果 <code>i</code> 是null或者{@code <}0,返回 <code>0</code>,否则返回 <code>i</code>
+     * @since 4.0.1
+     */
+    public static Integer defaultZero(Integer i){
+        if (null == i){
+            return 0;
+        }
+        if (i < 0){
+            return 0;
+        }
+        return i;
+    }
+
+    /**
      * 如果 <code>i</code> 是null或者{@code <}1,返回默认值 <code>defaultValue</code>.
      * 
      * <p>
