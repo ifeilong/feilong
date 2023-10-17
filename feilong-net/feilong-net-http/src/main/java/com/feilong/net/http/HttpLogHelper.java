@@ -15,7 +15,13 @@
  */
 package com.feilong.net.http;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+
+import com.feilong.core.lang.StringUtil;
+import com.feilong.core.lang.SystemUtil;
+import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
+import com.feilong.json.processor.ToStringJsonValueProcessor;
 
 /**
  * 专注于辅助生成http日志.
@@ -33,8 +39,21 @@ public class HttpLogHelper{
      * @return the string
      */
     public static String createHttpRequestLog(HttpRequest httpRequest){
-        return JsonUtil.toString(httpRequest, true);
+
+        JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig(true);
+        javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(
+                        toMap("requestByteArrayBody", ToStringJsonValueProcessor.DEFAULT_INSTANCE));
+
+        //---------------------------------------------------------------
+        //环境变量
+        String formatEnable = SystemUtil.getEnv("feilong_httpRequest_format_enable");
+        if (StringUtil.trimAndEqualsIgnoreCase("true", formatEnable)){
+            return JsonUtil.format(httpRequest, javaToJsonConfig);
+        }
+        return JsonUtil.toString(httpRequest, javaToJsonConfig);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 创建 connection config log.
