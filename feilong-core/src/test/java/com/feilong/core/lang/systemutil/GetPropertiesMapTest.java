@@ -19,6 +19,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasKey;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 import com.feilong.core.lang.SystemUtil;
@@ -27,8 +29,9 @@ public class GetPropertiesMapTest{
 
     @Test
     public void testGetPropertiesMap(){
+        Map<String, String> propertiesMap = SystemUtil.getPropertiesMap();
         assertThat(
-                        SystemUtil.getPropertiesMap(),
+                        propertiesMap,
                         allOf(//
                                         hasKey("file.encoding"),
                                         hasKey("user.dir"),

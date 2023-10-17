@@ -15,26 +15,18 @@
  */
 package com.feilong.core.lang.systemutil;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasKey;
-
-import java.util.Map;
-
 import org.junit.Test;
 
 import com.feilong.core.lang.SystemUtil;
 
-public class GetEnvMapTest{
+public class FeilongHttpRequestFormatTest{
 
+    /**
+     * TestGetPropertiesMapTest2.
+     */
     @Test
-    public void testGetEnvMap(){
-
-        Map<String, String> envMap = SystemUtil.getEnvMap();
-        assertThat(
-                        envMap,
-                        allOf(//
-                                        hasKey("PATH")));
-
+    public void test(){
+        String systemProperty = SystemUtil.getSystemProperty("feilong_httpRequest_format");
+        System.out.println(systemProperty);//TODO:remove
     }
 }

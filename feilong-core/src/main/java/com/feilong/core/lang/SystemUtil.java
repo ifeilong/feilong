@@ -16,6 +16,7 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.ObjectUtil.defaultEmptyMapIfNull;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 import java.util.Map;
@@ -366,7 +367,7 @@ public final class SystemUtil{
     public static String getSystemProperty(final String property){
         try{
             return System.getProperty(property);
-        }catch (final SecurityException ex){
+        }catch (final Exception ex){
             // we are not allowed to look at this property
             return null;
         }
@@ -511,6 +512,37 @@ public final class SystemUtil{
      */
     public static Map<String, String> getEnvMap(){
         return sortMapByKeyAsc(System.getenv());
+    }
+
+    /**
+     * 读取环境变量.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <pre class="code">
+    
+    比如 .bash_profile  有以下变量设置
+    
+    feilong_httpRequest_format=true
+    
+    export feilong_httpRequest_format
+    
+    可以使用代码读取 com.feilong.core.lang.SystemUtil.getEnv("feilong_httpRequest_format")
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * true
+     * </pre>
+     * 
+     * @param key
+     * @return 如果读取不到返回null
+     * @since 4.0.1
+     */
+    public static String getEnv(String key){
+        return defaultEmptyMapIfNull(getEnvMap()).get(key);
     }
 
     //---------------------------------------------------------------
