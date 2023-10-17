@@ -54,6 +54,8 @@ public abstract class AbstractHttpEntity implements HttpEntity{
 
     protected boolean          chunked;
 
+    //---------------------------------------------------------------
+
     /**
      * Protected default constructor.
      * The contentType, contentEncoding and chunked attributes of the created object are set to
@@ -177,17 +179,6 @@ public abstract class AbstractHttpEntity implements HttpEntity{
     public void setChunked(final boolean b){
         this.chunked = b;
     }
-    //
-    //    /**
-    //     * The default implementation does not consume anything.
-    //     *
-    //     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
-    //     *             otherwise call {@link #writeTo(java.io.OutputStream)} which is required to free the resources.
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public void consumeContent() throws IOException{
-    //    }
 
     //---------------------------------------------------------------
 
@@ -216,5 +207,17 @@ public abstract class AbstractHttpEntity implements HttpEntity{
         sb.append(']');
         return sb.toString();
     }
+
+    //
+    //    /**
+    //     * The default implementation does not consume anything.
+    //     *
+    //     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
+    //     *             otherwise call {@link #writeTo(java.io.OutputStream)} which is required to free the resources.
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public void consumeContent() throws IOException{
+    //    }
 
 }

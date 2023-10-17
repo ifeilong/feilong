@@ -69,6 +69,8 @@ public abstract class AbstractMailSenderTest extends AbstractTest{
 
         mailSendRequest = BeanUtil.populate(mailSendRequest, map);
         mailSendConnectionConfig = BeanUtil.populate(mailSendConnectionConfig, map);
+
+        ConvertUtils.deregister();
     }
 
     private Map<String, String> buildData(){

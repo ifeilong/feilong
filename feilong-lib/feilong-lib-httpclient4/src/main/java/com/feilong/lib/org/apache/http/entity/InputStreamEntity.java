@@ -34,8 +34,7 @@ import java.io.OutputStream;
 import com.feilong.lib.org.apache.http.util.Args;
 
 /**
- * A streamed, non-repeatable entity that obtains its content from
- * an {@link InputStream}.
+ * A streamed, non-repeatable entity that obtains its content from an {@link InputStream}.
  *
  * @since 4.0
  */
@@ -44,6 +43,8 @@ public class InputStreamEntity extends AbstractHttpEntity{
     private final InputStream content;
 
     private final long        length;
+
+    //---------------------------------------------------------------
 
     /**
      * Creates an entity with an unknown length.
@@ -109,6 +110,8 @@ public class InputStreamEntity extends AbstractHttpEntity{
         }
     }
 
+    //---------------------------------------------------------------
+
     @Override
     public boolean isRepeatable(){
         return false;
@@ -126,6 +129,8 @@ public class InputStreamEntity extends AbstractHttpEntity{
     public InputStream getContent() throws IOException{
         return this.content;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Writes bytes from the {@code InputStream} this entity was constructed
@@ -162,6 +167,8 @@ public class InputStreamEntity extends AbstractHttpEntity{
             inStream.close();
         }
     }
+
+    //---------------------------------------------------------------
 
     @Override
     public boolean isStreaming(){

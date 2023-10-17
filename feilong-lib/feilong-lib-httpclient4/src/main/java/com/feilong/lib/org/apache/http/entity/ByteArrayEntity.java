@@ -41,15 +41,9 @@ import com.feilong.lib.org.apache.http.util.Args;
  */
 public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
 
-    /**
-     * @deprecated (4.2)
-     */
-    @Deprecated
-    protected final byte[] content;
+    private final byte[] b;
 
-    private final byte[]   b;
-
-    private final int      off, len;
+    private final int    off, len;
 
     //---------------------------------------------------------------
 
@@ -67,7 +61,6 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
     public ByteArrayEntity(final byte[] b, final ContentType contentType){
         super();
         Args.notNull(b, "Source byte array");
-        this.content = b;
         this.b = b;
         this.off = 0;
         this.len = this.b.length;
@@ -85,7 +78,6 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
         if ((off < 0) || (off > b.length) || (len < 0) || ((off + len) < 0) || ((off + len) > b.length)){
             throw new IndexOutOfBoundsException("off: " + off + " len: " + len + " b.length: " + b.length);
         }
-        this.content = b;
         this.b = b;
         this.off = off;
         this.len = len;
@@ -106,10 +98,14 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
         return this.len;
     }
 
+    //---------------------------------------------------------------
+
     @Override
     public InputStream getContent(){
         return new ByteArrayInputStream(this.b, this.off, this.len);
     }
+
+    //---------------------------------------------------------------
 
     @Override
     public void writeTo(final OutputStream outStream) throws IOException{
@@ -117,6 +113,8 @@ public class ByteArrayEntity extends AbstractHttpEntity implements Cloneable{
         outStream.write(this.b, this.off, this.len);
         outStream.flush();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Tells that this entity is not streaming.
