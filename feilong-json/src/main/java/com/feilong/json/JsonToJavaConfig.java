@@ -41,7 +41,50 @@ public class JsonToJavaConfig extends AbstractConfig{
     //---------------------------------------------------------------
 
     /**
-     * The class map.
+     * 用来设置复杂自定义对象转换.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 有以下两个bean
+     * 
+     * <pre class="code">
+     * 
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private Person person;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * 
+     * }
+     * 
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * }
+     * 
+     * 现在需要把这段json 转成MyBean
+     * 
+     * String json = "{'mybean':{'data':[{'name':'get'}]}}";
+     * 
+     * 代码写法如下:
+     * 
+     * Map{@code <String, Class<?>>} classMap = newHashMap();
+     * classMap.put("data", Person.class);
+     * 
+     * JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);
+     * jsonToJavaConfig.setClassMap(classMap);
+     * 
+     * MyBean myBean = JsonUtil.toBean(json, jsonToJavaConfig);
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @see com.feilong.lib.json.JsonConfig#setClassMap(Map)
      */
@@ -252,7 +295,50 @@ public class JsonToJavaConfig extends AbstractConfig{
      * @param rootClass
      *            the root class
      * @param classMap
-     *            the class map
+     *            用来设置复杂自定义对象转换.
+     * 
+     *            <h3>示例:</h3>
+     * 
+     *            <blockquote>
+     *            有以下两个bean
+     * 
+     *            <pre class="code">
+     * 
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private Person person;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * 
+     * }
+     * 
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * }
+     * 
+     * 现在需要把这段json 转成MyBean
+     * 
+     * String json = "{'mybean':{'data':[{'name':'get'}]}}";
+     * 
+     * 代码写法如下:
+     * 
+     * Map{@code <String, Class<?>>} classMap = newHashMap();
+     * classMap.put("data", Person.class);
+     * 
+     * JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);
+     * jsonToJavaConfig.setClassMap(classMap);
+     * 
+     * MyBean myBean = JsonUtil.toBean(json, jsonToJavaConfig);
+     *            </pre>
+     * 
+     *            </blockquote>
      */
     public JsonToJavaConfig(Class<?> rootClass, Map<String, Class<?>> classMap){
         super();
@@ -461,7 +547,52 @@ public class JsonToJavaConfig extends AbstractConfig{
     }
 
     /**
-     * Gets the class map.
+     * 用来设置复杂自定义对象转换.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 有以下两个bean
+     * 
+     * <pre class="code">
+     * 
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private Person person;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * 
+     * }
+     * 
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * }
+     * 
+     * 现在需要把这段json 转成MyBean
+     * 
+     * String json = "{'mybean':{'data':[{'name':'get'}]}}";
+     * 
+     * 代码写法如下:
+     * 
+     * Map{@code <String, Class<?>>} classMap = newHashMap();
+     * classMap.put("data", Person.class);
+     * 
+     * JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);
+     * jsonToJavaConfig.setClassMap(classMap);
+     * 
+     * MyBean myBean = JsonUtil.toBean(json, jsonToJavaConfig);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @see com.feilong.lib.json.JsonConfig#setClassMap(Map)
      *
      * @return the classMap
      */
@@ -470,7 +601,52 @@ public class JsonToJavaConfig extends AbstractConfig{
     }
 
     /**
-     * 设置 class map.
+     * 用来设置复杂自定义对象转换.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 有以下两个bean
+     * 
+     * <pre class="code">
+     * 
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private Person person;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * 
+     * }
+     * 
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     <span style="color:green">//setter/getter省略</span>
+     * }
+     * 
+     * 现在需要把这段json 转成MyBean
+     * 
+     * String json = "{'mybean':{'data':[{'name':'get'}]}}";
+     * 
+     * 代码写法如下:
+     * 
+     * Map{@code <String, Class<?>>} classMap = newHashMap();
+     * classMap.put("data", Person.class);
+     * 
+     * JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);
+     * jsonToJavaConfig.setClassMap(classMap);
+     * 
+     * MyBean myBean = JsonUtil.toBean(json, jsonToJavaConfig);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @see com.feilong.lib.json.JsonConfig#setClassMap(Map)
      *
      * @param classMap
      *            the classMap to set
