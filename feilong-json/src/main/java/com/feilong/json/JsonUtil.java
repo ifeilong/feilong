@@ -41,6 +41,7 @@ import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.builder.JavaToJsonConfigBuilder;
 import com.feilong.json.builder.JsonConfigBuilder;
 import com.feilong.json.builder.JsonToJavaConfigBuilder;
+import com.feilong.json.morpher.LongToDateMorpher;
 import com.feilong.json.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.lib.ezmorph.MorpherRegistry;
 import com.feilong.lib.ezmorph.object.DateMorpher;
@@ -113,7 +114,8 @@ public final class JsonUtil{
         // 注意:此处的代码不能移到 JsonHelper,否则json转成 java的时候 日期格式会出错
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
         morpherRegistry.registerMorpher(new DateMorpher(ConvertUtil.toArray(COMMON_DATE_AND_TIME, COMMON_TIME, COMMON_DATE)));
-
+        //since 4.0.2
+        morpherRegistry.registerMorpher(new LongToDateMorpher());
     }
 
     //---------------------------------------------------------------

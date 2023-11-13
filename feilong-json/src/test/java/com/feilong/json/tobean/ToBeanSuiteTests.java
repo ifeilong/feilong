@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToListTest.class,
                 ToListWithJsonToJavaConfigTest.class,
 
+                ToBeanLongToDateTest.class,
                 ToBeanTest.class,
                 ToBeanWithJsonToJavaConfigTest.class,
 
@@ -36,7 +37,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToBeanManyNoExistPropertyTest.class,
                 ToBeanNoExistPropertyTest.class,
 
-        //
+//
 })
 public class ToBeanSuiteTests{
 
