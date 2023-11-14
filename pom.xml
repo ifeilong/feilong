@@ -176,7 +176,7 @@
 
 		<!-- https://issues.apache.org/jira/projects/MDEP?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released -->
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.6.0</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.6.1</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
