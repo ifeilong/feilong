@@ -125,8 +125,8 @@
 		<!-- http://www.slf4j.org/news.html -->
 		<version.slf4j>1.7.36</version.slf4j>
 
-		<!-- https://logging.apache.org/log4j/2.x/release-notes/index.html -->
-		<version.log4j2>2.20.0</version.log4j2>
+		<!-- https://logging.apache.org/log4j/2.x/release-notes.html -->
+		<version.log4j2>2.21.1</version.log4j2>
 
 		<!-- https://logback.qos.ch/news.html 统一版本 -->
 		<!-- 1.3 对应jdk 8    1.4 对应jdk11 -->
