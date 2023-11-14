@@ -43,24 +43,6 @@ public class LocalVariableAttribute extends AttributeInfo{
         ByteArray.write16bit(0, info, 0);
     }
 
-    /**
-     * Constructs an empty LocalVariableTable.
-     *
-     * @param name
-     *            the attribute name.
-     *            <code>LocalVariableAttribute.tag</code> or
-     *            <code>LocalVariableAttribute.typeTag</code>.
-     * @see #tag
-     * @see #typeTag
-     * @since 3.1
-     * @deprecated
-     */
-    @Deprecated
-    public LocalVariableAttribute(ConstPool cp, String name){
-        super(cp, name, new byte[2]);
-        ByteArray.write16bit(0, info, 0);
-    }
-
     LocalVariableAttribute(ConstPool cp, int n, DataInputStream in) throws IOException{
         super(cp, n, in);
     }

@@ -42,21 +42,6 @@ public final class SetPropertiesBuilder extends AbstractBackToLinkedRuleBuilder<
      *
      * @param attributeName
      *            The attribute to match
-     * @param propertyName
-     *            The java bean property to be assigned the value
-     * @return this builder instance
-     * @deprecated
-     */
-    @Deprecated
-    public SetPropertiesBuilder addAlias(String attributeName,String propertyName){
-        return addAlias(attributeName).forProperty(propertyName);
-    }
-
-    /**
-     * Add an additional attribute name to property name mapping.
-     *
-     * @param attributeName
-     *            The attribute to match
      * @return the property alias builder
      * @since 3.2
      */

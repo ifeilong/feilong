@@ -32,9 +32,7 @@ import java.nio.charset.Charset;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.auth.AuthScheme;
-import com.feilong.lib.org.apache.http.auth.AuthSchemeFactory;
 import com.feilong.lib.org.apache.http.auth.AuthSchemeProvider;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
@@ -45,7 +43,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @SuppressWarnings("deprecation")
-public class DigestSchemeFactory implements AuthSchemeFactory,AuthSchemeProvider{
+public class DigestSchemeFactory implements AuthSchemeProvider{
 
     private final Charset charset;
 
@@ -61,10 +59,10 @@ public class DigestSchemeFactory implements AuthSchemeFactory,AuthSchemeProvider
         this(null);
     }
 
-    @Override
-    public AuthScheme newInstance(final HttpParams params){
-        return new DigestScheme();
-    }
+    //    @Override
+    //    public AuthScheme newInstance(final HttpParams params){
+    //        return new DigestScheme();
+    //    }
 
     @Override
     public AuthScheme create(final HttpContext context){

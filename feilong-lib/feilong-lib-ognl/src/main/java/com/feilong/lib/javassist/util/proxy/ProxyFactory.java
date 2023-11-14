@@ -196,7 +196,7 @@ public class ProxyFactory{
 
     private MethodFilter                    methodFilter;
 
-    private MethodHandler                   handler;                                                                                       // retained for legacy usage
+    private final MethodHandler             handler;                                                                                       // retained for legacy usage
 
     private List<Map.Entry<String, Method>> signatureMethods;
 
@@ -848,31 +848,6 @@ public class ProxyFactory{
         Class<?> c = createClass();
         Constructor<?> cons = c.getConstructor(paramTypes);
         return cons.newInstance(args);
-    }
-
-    /**
-     * Sets the default invocation handler. This invocation handler is shared
-     * among all the instances of a proxy class unless another is explicitly
-     * specified.
-     * 
-     * @deprecated since 3.12
-     *             use of this method is incompatible with proxy class caching.
-     *             instead clients should call method {@link Proxy#setHandler(MethodHandler)} to set the handler
-     *             for each newly created proxy instance.
-     *             calling this method will automatically disable caching of classes created by the proxy factory.
-     */
-    @Deprecated
-    public void setHandler(MethodHandler mi){
-        // if we were using the cache and the handler is non-null then we must stop caching
-        if (factoryUseCache && mi != null){
-            factoryUseCache = false;
-            // clear any currently held class so we don't try to reuse it or set its handler field
-            thisClass = null;
-        }
-        handler = mi;
-        // this retains the behaviour of the old code which resets any class we were holding on to
-        // this is probably not what is wanted
-        setField(DEFAULT_INTERCEPTOR, handler);
     }
 
     /**

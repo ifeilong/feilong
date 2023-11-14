@@ -170,15 +170,6 @@ public class ZipArchiveOutputStream extends ArchiveOutputStream{
      */
     static final String                               DEFAULT_ENCODING               = ZipEncodingHelper.UTF8;
 
-    /**
-     * General purpose flag, which indicates that file names are
-     * written in UTF-8.
-     * 
-     * @deprecated use {@link GeneralPurposeBit#UFT8_NAMES_FLAG} instead
-     */
-    @Deprecated
-    public static final int                           EFS_FLAG                       = GeneralPurposeBit.UFT8_NAMES_FLAG;
-
     private static final byte[]                       EMPTY                          = new byte[0];
 
     /**

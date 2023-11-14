@@ -34,7 +34,6 @@ import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.auth.AUTH;
 import com.feilong.lib.org.apache.http.auth.AuthenticationException;
-import com.feilong.lib.org.apache.http.auth.ChallengeState;
 import com.feilong.lib.org.apache.http.auth.Credentials;
 import com.feilong.lib.org.apache.http.auth.MalformedChallengeException;
 import com.feilong.lib.org.apache.http.message.BufferedHeader;
@@ -62,19 +61,6 @@ public class BasicScheme extends RFC2617Scheme{
     public BasicScheme(final Charset credentialsCharset){
         super(credentialsCharset);
         this.complete = false;
-    }
-
-    /**
-     * Creates an instance of {@code BasicScheme} with the given challenge
-     * state.
-     *
-     * @since 4.2
-     *
-     * @deprecated (4.3) do not use.
-     */
-    @Deprecated
-    public BasicScheme(final ChallengeState challengeState){
-        super(challengeState);
     }
 
     public BasicScheme(){

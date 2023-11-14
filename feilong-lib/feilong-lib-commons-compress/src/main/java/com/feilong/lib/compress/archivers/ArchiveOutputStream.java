@@ -153,18 +153,6 @@ public abstract class ArchiveOutputStream extends OutputStream{
      * Returns the current number of bytes written to this stream.
      * 
      * @return the number of written bytes
-     * @deprecated this method may yield wrong results for large
-     *             archives, use #getBytesWritten instead
-     */
-    @Deprecated
-    public int getCount(){
-        return (int) bytesWritten;
-    }
-
-    /**
-     * Returns the current number of bytes written to this stream.
-     * 
-     * @return the number of written bytes
      * @since 1.1
      */
     public long getBytesWritten(){

@@ -818,28 +818,6 @@ public abstract class CtClass{
 
     /**
      * Returns the immediately enclosing method of this class.
-     * This method works only with JDK 1.5 or later.
-     * 
-     * @return null if this class is not a local class or an anonymous
-     *         class.
-     * @deprecated The enclosing method might be a constructor.
-     *             Use {@link #getEnclosingBehavior()}.
-     * @see #getEnclosingBehavior()
-     */
-    @Deprecated
-    public final CtMethod getEnclosingMethod() throws NotFoundException{
-        CtBehavior b = getEnclosingBehavior();
-        if (b == null){
-            return null;
-        }else if (b instanceof CtMethod){
-            return (CtMethod) b;
-        }else{
-            throw new NotFoundException(b.getLongName() + " is enclosing " + getName());
-        }
-    }
-
-    /**
-     * Returns the immediately enclosing method of this class.
      * It might be not a method but a constructor.
      * This method works only with JDK 1.5 or later.
      *

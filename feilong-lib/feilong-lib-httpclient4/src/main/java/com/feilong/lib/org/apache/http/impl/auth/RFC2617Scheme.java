@@ -64,21 +64,6 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
     private transient Charset         credentialsCharset;
 
     /**
-     * Creates an instance of {@code RFC2617Scheme} with the given challenge
-     * state.
-     *
-     * @since 4.2
-     *
-     * @deprecated (4.3) do not use.
-     */
-    @Deprecated
-    public RFC2617Scheme(final ChallengeState challengeState){
-        super(challengeState);
-        this.params = new HashMap<>();
-        this.credentialsCharset = Consts.ASCII;
-    }
-
-    /**
      * @since 4.3
      */
     public RFC2617Scheme(final Charset credentialsCharset){

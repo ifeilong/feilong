@@ -29,9 +29,7 @@ package com.feilong.lib.org.apache.http.impl.auth;
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.auth.AuthScheme;
-import com.feilong.lib.org.apache.http.auth.AuthSchemeFactory;
 import com.feilong.lib.org.apache.http.auth.AuthSchemeProvider;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
@@ -42,7 +40,7 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 @SuppressWarnings("deprecation")
-public class KerberosSchemeFactory implements AuthSchemeFactory,AuthSchemeProvider{
+public class KerberosSchemeFactory implements AuthSchemeProvider{
 
     private final boolean stripPort;
 
@@ -74,11 +72,11 @@ public class KerberosSchemeFactory implements AuthSchemeFactory,AuthSchemeProvid
     public boolean isUseCanonicalHostname(){
         return useCanonicalHostname;
     }
-
-    @Override
-    public AuthScheme newInstance(final HttpParams params){
-        return new KerberosScheme(this.stripPort, this.useCanonicalHostname);
-    }
+    //
+    //    @Override
+    //    public AuthScheme newInstance(final HttpParams params){
+    //        return new KerberosScheme(this.stripPort, this.useCanonicalHostname);
+    //    }
 
     @Override
     public AuthScheme create(final HttpContext context){

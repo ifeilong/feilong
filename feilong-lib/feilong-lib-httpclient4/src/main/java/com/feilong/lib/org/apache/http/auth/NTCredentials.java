@@ -56,36 +56,6 @@ public class NTCredentials implements Credentials,Serializable{
     private final String          workstation;
 
     /**
-     * The constructor with the fully qualified username and password combined
-     * string argument.
-     *
-     * @param usernamePassword
-     *            the domain/username:password formed string
-     * @deprecated (4.5) will be replaced with {@code String}, {@code char[]} in 5.0
-     */
-    @Deprecated
-    public NTCredentials(final String usernamePassword){
-        super();
-        Args.notNull(usernamePassword, "Username:password string");
-        final String username;
-        final int atColon = usernamePassword.indexOf(':');
-        if (atColon >= 0){
-            username = usernamePassword.substring(0, atColon);
-            this.password = usernamePassword.substring(atColon + 1);
-        }else{
-            username = usernamePassword;
-            this.password = null;
-        }
-        final int atSlash = username.indexOf('/');
-        if (atSlash >= 0){
-            this.principal = new NTUserPrincipal(username.substring(0, atSlash).toUpperCase(Locale.ROOT), username.substring(atSlash + 1));
-        }else{
-            this.principal = new NTUserPrincipal(null, username.substring(atSlash + 1));
-        }
-        this.workstation = null;
-    }
-
-    /**
      * Constructor.
      * 
      * @param userName

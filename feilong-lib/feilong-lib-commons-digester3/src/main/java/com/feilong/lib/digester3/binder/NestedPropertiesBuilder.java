@@ -60,21 +60,6 @@ public final class NestedPropertiesBuilder extends AbstractBackToLinkedRuleBuild
      *
      * @param elementName
      *            The child xml element to match
-     * @param propertyName
-     *            The java bean property to be assigned the value
-     * @return this builder instance
-     * @deprecated
-     */
-    @Deprecated
-    public NestedPropertiesBuilder addAlias(String elementName,String propertyName){
-        return addAlias(elementName).forProperty(propertyName);
-    }
-
-    /**
-     * Allows element2property mapping to be overridden.
-     *
-     * @param elementName
-     *            The child xml element to match
      * @return the property alias builder
      * @since 3.2
      */

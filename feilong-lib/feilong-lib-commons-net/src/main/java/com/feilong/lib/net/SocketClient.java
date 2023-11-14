@@ -901,18 +901,6 @@ public abstract class SocketClient{
     }
 
     /**
-     * Gets the charset name.
-     *
-     * @return the charset.
-     * @since 3.3
-     * @deprecated Since the code now requires Java 1.6 as a mininmum
-     */
-    @Deprecated
-    public String getCharsetName(){
-        return charset.name();
-    }
-
-    /**
      * Gets the charset.
      *
      * @return the charset.

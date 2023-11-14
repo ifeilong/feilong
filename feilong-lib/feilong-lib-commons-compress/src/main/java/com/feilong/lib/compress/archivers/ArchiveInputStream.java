@@ -128,18 +128,6 @@ public abstract class ArchiveInputStream extends InputStream{
      * Returns the current number of bytes read from this stream.
      * 
      * @return the number of read bytes
-     * @deprecated this method may yield wrong results for large
-     *             archives, use #getBytesRead instead
-     */
-    @Deprecated
-    public int getCount(){
-        return (int) bytesRead;
-    }
-
-    /**
-     * Returns the current number of bytes read from this stream.
-     * 
-     * @return the number of read bytes
      * @since 1.1
      */
     public long getBytesRead(){

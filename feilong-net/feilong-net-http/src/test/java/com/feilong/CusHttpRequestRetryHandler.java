@@ -27,7 +27,6 @@ import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
 import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
 import com.feilong.lib.org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
-import com.feilong.lib.org.apache.http.protocol.ExecutionContext;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
@@ -65,7 +64,7 @@ public class CusHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler{
         }
 
         //---------------------------------------------------------------
-        HttpRequest request = (HttpRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
+        HttpRequest request = (HttpRequest) context.getAttribute("http.request");
         boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);
         if (idempotent){
             // 如果请求被认为是幂等的，那么就重试

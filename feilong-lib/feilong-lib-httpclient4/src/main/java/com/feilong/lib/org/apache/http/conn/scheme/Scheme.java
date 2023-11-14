@@ -109,40 +109,40 @@ public final class Scheme{
             this.socketFactory = factory;
         }
     }
-
-    /**
-     * Creates a new scheme.
-     * Whether the created scheme allows for layered connections
-     * depends on the class of {@code factory}.
-     *
-     * @param name
-     *            the scheme name, for example "http".
-     *            The name will be converted to lowercase.
-     * @param factory
-     *            the factory for creating sockets for communication
-     *            with this scheme
-     * @param port
-     *            the default port for this scheme
-     *
-     * @deprecated (4.1) Use {@link #Scheme(String, int, SchemeSocketFactory)}
-     */
-    @Deprecated
-    public Scheme(final String name, final SocketFactory factory, final int port){
-
-        Args.notNull(name, "Scheme name");
-        Args.notNull(factory, "Socket factory");
-        Args.check(port > 0 && port <= 0xffff, "Port is invalid");
-
-        this.name = name.toLowerCase(Locale.ENGLISH);
-        if (factory instanceof LayeredSocketFactory){
-            this.socketFactory = new SchemeLayeredSocketFactoryAdaptor((LayeredSocketFactory) factory);
-            this.layered = true;
-        }else{
-            this.socketFactory = new SchemeSocketFactoryAdaptor(factory);
-            this.layered = false;
-        }
-        this.defaultPort = port;
-    }
+    //
+    //    /**
+    //     * Creates a new scheme.
+    //     * Whether the created scheme allows for layered connections
+    //     * depends on the class of {@code factory}.
+    //     *
+    //     * @param name
+    //     *            the scheme name, for example "http".
+    //     *            The name will be converted to lowercase.
+    //     * @param factory
+    //     *            the factory for creating sockets for communication
+    //     *            with this scheme
+    //     * @param port
+    //     *            the default port for this scheme
+    //     *
+    //     * @deprecated (4.1) Use {@link #Scheme(String, int, SchemeSocketFactory)}
+    //     */
+    //    @Deprecated
+    //    public Scheme(final String name, final SocketFactory factory, final int port){
+    //
+    //        Args.notNull(name, "Scheme name");
+    //        Args.notNull(factory, "Socket factory");
+    //        Args.check(port > 0 && port <= 0xffff, "Port is invalid");
+    //
+    //        this.name = name.toLowerCase(Locale.ENGLISH);
+    //        if (factory instanceof LayeredSocketFactory){
+    //            this.socketFactory = new SchemeLayeredSocketFactoryAdaptor((LayeredSocketFactory) factory);
+    //            this.layered = true;
+    //        }else{
+    //            this.socketFactory = new SchemeSocketFactoryAdaptor(factory);
+    //            this.layered = false;
+    //        }
+    //        this.defaultPort = port;
+    //    }
 
     /**
      * Obtains the default port.
@@ -153,23 +153,23 @@ public final class Scheme{
         return defaultPort;
     }
 
-    /**
-     * Obtains the socket factory.
-     * If this scheme is {@link #isLayered layered}, the factory implements
-     * {@link LayeredSocketFactory LayeredSocketFactory}.
-     *
-     * @return the socket factory for this scheme
-     *
-     * @deprecated (4.1) Use {@link #getSchemeSocketFactory()}
-     */
-    @Deprecated
-    public SocketFactory getSocketFactory(){
-        if (this.socketFactory instanceof SchemeSocketFactoryAdaptor){
-            return ((SchemeSocketFactoryAdaptor) this.socketFactory).getFactory();
-        }
-        return this.layered ? new LayeredSocketFactoryAdaptor((LayeredSchemeSocketFactory) this.socketFactory)
-                        : new SocketFactoryAdaptor(this.socketFactory);
-    }
+    //    /**
+    //     * Obtains the socket factory.
+    //     * If this scheme is {@link #isLayered layered}, the factory implements
+    //     * {@link LayeredSocketFactory LayeredSocketFactory}.
+    //     *
+    //     * @return the socket factory for this scheme
+    //     *
+    //     * @deprecated (4.1) Use {@link #getSchemeSocketFactory()}
+    //     */
+    //    @Deprecated
+    //    public SocketFactory getSocketFactory(){
+    //        if (this.socketFactory instanceof SchemeSocketFactoryAdaptor){
+    //            return ((SchemeSocketFactoryAdaptor) this.socketFactory).getFactory();
+    //        }
+    //        return this.layered ? new LayeredSocketFactoryAdaptor((LayeredSchemeSocketFactory) this.socketFactory)
+    //                        : new SocketFactoryAdaptor(this.socketFactory);
+    //    }
 
     /**
      * Obtains the socket factory.

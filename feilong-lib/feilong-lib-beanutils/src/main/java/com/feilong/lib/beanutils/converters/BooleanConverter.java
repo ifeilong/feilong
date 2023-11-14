@@ -160,19 +160,19 @@ public final class BooleanConverter extends AbstractConverter{
      * @deprecated Use constructors without default value.
      */
     @Deprecated
-    public static final Object NO_DEFAULT   = new Object();
+    private static final Object NO_DEFAULT   = new Object();
 
     // ----------------------------------------------------- Instance Variables
 
     /**
      * The set of strings that are known to map to Boolean.TRUE.
      */
-    private String[]           trueStrings  = { "true", "yes", "y", "on", "1" };
+    private String[]            trueStrings  = { "true", "yes", "y", "on", "1" };
 
     /**
      * The set of strings that are known to map to Boolean.FALSE.
      */
-    private String[]           falseStrings = { "false", "no", "n", "off", "0" };
+    private String[]            falseStrings = { "false", "no", "n", "off", "0" };
 
     // --------------------------------------------------------- Protected Methods
 

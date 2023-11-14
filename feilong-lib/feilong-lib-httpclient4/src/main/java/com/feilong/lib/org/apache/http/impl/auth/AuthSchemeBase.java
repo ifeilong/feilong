@@ -56,20 +56,6 @@ public abstract class AuthSchemeBase implements ContextAwareAuthScheme{
 
     protected ChallengeState challengeState;
 
-    /**
-     * Creates an instance of {@code AuthSchemeBase} with the given challenge
-     * state.
-     *
-     * @since 4.2
-     *
-     * @deprecated (4.3) do not use.
-     */
-    @Deprecated
-    public AuthSchemeBase(final ChallengeState challengeState){
-        super();
-        this.challengeState = challengeState;
-    }
-
     public AuthSchemeBase(){
         super();
     }

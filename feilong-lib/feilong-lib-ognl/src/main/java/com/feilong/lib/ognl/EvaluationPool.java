@@ -30,8 +30,6 @@
 //--------------------------------------------------------------------------
 package com.feilong.lib.ognl;
 
-import java.util.List;
-
 public final class EvaluationPool extends Object{
 
     public EvaluationPool(){
@@ -76,18 +74,6 @@ public final class EvaluationPool extends Object{
     }
 
     /**
-     * Recycles an Evaluation
-     *
-     * @param value
-     *            an Evaluation to be recycled (not used).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public void recycle(Evaluation value){
-        // no need of recycling, we rely on the garbage collection efficiency
-    }
-
-    /**
      * Recycles an of Evaluation and all of it's siblings
      * and children.
      *
@@ -100,62 +86,4 @@ public final class EvaluationPool extends Object{
         // no need of recycling, we rely on the garbage collection efficiency
     }
 
-    /**
-     * Recycles a List of Evaluation objects
-     *
-     * @param value
-     *            a List of Evaluation objects to be recycled (not used).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public void recycleAll(List value){
-        // no need of recycling, we rely on the garbage collection efficiency
-    }
-
-    /**
-     * Returns the number of items in the pool
-     *
-     * @return the size of the Evaluation pool (always 0).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public int getSize(){
-        return 0;
-    }
-
-    /**
-     * Returns the number of items this pool has created since
-     * it's construction.
-     *
-     * @return the creation count for the Evaluation pool (always 0).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public int getCreatedCount(){
-        return 0;
-    }
-
-    /**
-     * Returns the number of items this pool has recovered from
-     * the pool since its construction.
-     *
-     * @return the recovered count for the Evaluation pool (always 0).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public int getRecoveredCount(){
-        return 0;
-    }
-
-    /**
-     * Returns the number of items this pool has recycled since
-     * it's construction.
-     *
-     * @return the recycled count for the Evaluation pool (always 0).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public int getRecycledCount(){
-        return 0;
-    }
 }

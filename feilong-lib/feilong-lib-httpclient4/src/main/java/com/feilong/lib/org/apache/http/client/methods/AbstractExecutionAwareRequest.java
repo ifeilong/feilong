@@ -26,19 +26,15 @@
  */
 package com.feilong.lib.org.apache.http.client.methods;
 
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.client.utils.CloneUtils;
 import com.feilong.lib.org.apache.http.concurrent.Cancellable;
-import com.feilong.lib.org.apache.http.conn.ClientConnectionRequest;
-import com.feilong.lib.org.apache.http.conn.ConnectionReleaseTrigger;
 import com.feilong.lib.org.apache.http.message.AbstractHttpMessage;
 
 @SuppressWarnings("deprecation")
-public abstract class AbstractExecutionAwareRequest extends AbstractHttpMessage
-                implements HttpExecutionAware,AbortableHttpRequest,Cloneable,HttpRequest{
+public abstract class AbstractExecutionAwareRequest extends AbstractHttpMessage implements HttpExecutionAware,Cloneable,HttpRequest{
 
     private final AtomicMarkableReference<Cancellable> cancellableRef;
 
@@ -47,35 +43,35 @@ public abstract class AbstractExecutionAwareRequest extends AbstractHttpMessage
         this.cancellableRef = new AtomicMarkableReference<>(null, false);
     }
 
-    /**
-     * @deprecated Use {@link #setCancellable(Cancellable)}
-     */
-    @Override
-    @Deprecated
-    public void setConnectionRequest(final ClientConnectionRequest connRequest){
-        setCancellable(() -> {
-            connRequest.abortRequest();
-            return true;
-        });
-    }
+    //    /**
+    //     * @deprecated Use {@link #setCancellable(Cancellable)}
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public void setConnectionRequest(final ClientConnectionRequest connRequest){
+    //        setCancellable(() -> {
+    //            connRequest.abortRequest();
+    //            return true;
+    //        });
+    //    }
 
-    /**
-     * @deprecated Use {@link #setCancellable(Cancellable)}
-     */
-    @Override
-    @Deprecated
-    public void setReleaseTrigger(final ConnectionReleaseTrigger releaseTrigger){
-        setCancellable(() -> {
-            try{
-                releaseTrigger.abortConnection();
-                return true;
-            }catch (final IOException ex){
-                return false;
-            }
-        });
-    }
+    //    /**
+    //     * @deprecated Use {@link #setCancellable(Cancellable)}
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public void setReleaseTrigger(final ConnectionReleaseTrigger releaseTrigger){
+    //        setCancellable(() -> {
+    //            try{
+    //                releaseTrigger.abortConnection();
+    //                return true;
+    //            }catch (final IOException ex){
+    //                return false;
+    //            }
+    //        });
+    //    }
 
-    @Override
+    //    @Override
     public void abort(){
         while (!cancellableRef.isMarked()){
             final Cancellable actualCancellable = cancellableRef.getReference();
@@ -109,16 +105,6 @@ public abstract class AbstractExecutionAwareRequest extends AbstractHttpMessage
         clone.headergroup = CloneUtils.cloneObject(this.headergroup);
         clone.params = CloneUtils.cloneObject(this.params);
         return clone;
-    }
-
-    /**
-     * @since 4.2
-     *
-     * @deprecated Do not use.
-     */
-    @Deprecated
-    public void completed(){
-        this.cancellableRef.set(null, false);
     }
 
     /**

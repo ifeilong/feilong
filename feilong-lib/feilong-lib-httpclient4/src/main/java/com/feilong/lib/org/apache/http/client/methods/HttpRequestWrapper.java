@@ -199,17 +199,4 @@ public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRe
                         : new HttpRequestWrapper(request, target);
     }
 
-    //    /**
-    //     * @deprecated (4.3) use
-    //     *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public HttpParams getParams(){
-    //        if (this.params == null){
-    //            this.params = original.getParams().copy();
-    //        }
-    //        return this.params;
-    //    }
-
 }
