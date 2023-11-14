@@ -20,7 +20,6 @@ package com.feilong.lib.beanutils.locale.converters;
 import java.math.BigInteger;
 
 import com.feilong.lib.beanutils.ConversionException;
-import com.feilong.lib.beanutils.locale.converters.BigIntegerLocaleConverter;
 
 /**
  * Test Case for the BigIntegerLocaleConverter class.

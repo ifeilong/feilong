@@ -20,8 +20,6 @@ package com.feilong.lib.beanutils.converters;
 import java.math.BigDecimal;
 
 import com.feilong.lib.beanutils.Converter;
-import com.feilong.lib.beanutils.converters.BigDecimalConverter;
-import com.feilong.lib.beanutils.converters.NumberConverter;
 
 import junit.framework.TestSuite;
 

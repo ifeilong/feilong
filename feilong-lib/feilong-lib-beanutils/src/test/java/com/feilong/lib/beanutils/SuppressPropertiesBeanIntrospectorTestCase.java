@@ -23,9 +23,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.feilong.lib.beanutils.IntrospectionContext;
-import com.feilong.lib.beanutils.SuppressPropertiesBeanIntrospector;
-
 import junit.framework.TestCase;
 
 /**

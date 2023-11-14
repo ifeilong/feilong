@@ -463,6 +463,8 @@ public class ProxyFactory{
 
     /**
      * Sets the interfaces of a proxy class.
+     * 
+     * @param ifs
      */
     public void setInterfaces(Class<?>[] ifs){
         interfaces = ifs;
@@ -1339,9 +1341,8 @@ public class ProxyFactory{
             for (int i = 0; i < methodTypes.length; i++){
                 if (methodTypes[i].getName().equals(targetMethodTypes[i].getName())){
                     continue;
-                }else{
-                    return false;
                 }
+                return false;
             }
             return true;
         }

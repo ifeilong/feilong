@@ -18,8 +18,6 @@ package com.feilong.net.bot.wxwork;
 import org.junit.After;
 
 import com.feilong.json.JsonUtil;
-import com.feilong.net.bot.wxwork.DefaultWxworkBot;
-import com.feilong.net.bot.wxwork.WxworkBot;
 import com.feilong.net.bot.wxwork.message.WxworkResponse;
 import com.feilong.test.AbstractTest;
 

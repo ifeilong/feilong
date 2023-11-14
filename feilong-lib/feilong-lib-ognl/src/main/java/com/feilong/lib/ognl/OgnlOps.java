@@ -603,9 +603,8 @@ public abstract class OgnlOps implements NumericTypes{
                     if (value instanceof Collection){
                         Collection vc = (Collection) value;
                         return vc.toArray(new Object[0]);
-                    }else{
-                        return new Object[] { value };
                     }
+                    return new Object[] { value };
                 }
             }else{
                 if ((toType == Integer.class) || (toType == Integer.TYPE)){

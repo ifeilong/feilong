@@ -24,11 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
 
-import com.feilong.lib.beanutils.BasicDynaClass;
-import com.feilong.lib.beanutils.DynaClass;
-import com.feilong.lib.beanutils.DynaProperty;
-import com.feilong.lib.beanutils.PropertyUtilsBean;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

@@ -16,12 +16,8 @@
  */
 package com.feilong.lib.beanutils;
 
-import junit.framework.TestCase;
-
-import com.feilong.lib.beanutils.DynaProperty;
-import com.feilong.lib.beanutils.LazyDynaClass;
-
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**

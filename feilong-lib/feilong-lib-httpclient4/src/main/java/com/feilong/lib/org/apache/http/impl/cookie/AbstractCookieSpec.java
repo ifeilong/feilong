@@ -37,7 +37,6 @@ import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler;
 import com.feilong.lib.org.apache.http.cookie.CookieAttributeHandler;
 import com.feilong.lib.org.apache.http.cookie.CookieSpec;
-import com.feilong.lib.org.apache.http.util.Args;
 import com.feilong.lib.org.apache.http.util.Asserts;
 
 /**
@@ -82,18 +81,6 @@ public abstract class AbstractCookieSpec implements CookieSpec{
         for (final CommonCookieAttributeHandler handler : handlers){
             this.attribHandlerMap.put(handler.getAttributeName(), handler);
         }
-    }
-
-    /**
-     * @deprecated (4.4) use {@link #AbstractCookieSpec(java.util.HashMap)} or
-     *             {@link #AbstractCookieSpec(com.feilong.lib.org.apache.http.cookie.CommonCookieAttributeHandler...)}
-     *             constructors instead.
-     */
-    @Deprecated
-    public void registerAttribHandler(final String name,final CookieAttributeHandler handler){
-        Args.notNull(name, "Attribute name");
-        Args.notNull(handler, "Attribute handler");
-        this.attribHandlerMap.put(name, handler);
     }
 
     /**

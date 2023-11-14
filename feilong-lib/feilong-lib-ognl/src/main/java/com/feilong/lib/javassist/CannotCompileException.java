@@ -47,7 +47,7 @@ public class CannotCompileException extends Exception{
         return this;
     }
 
-    private String message;
+    private final String message;
 
     /**
      * Gets a long message if it is available.
@@ -123,6 +123,9 @@ public class CannotCompileException extends Exception{
 
     /**
      * Constructs a CannotCompileException with a ClassFormatError.
+     * 
+     * @param e
+     * @param name
      */
     public CannotCompileException(ClassFormatError e, String name){
         this("invalid class format: " + name, e);

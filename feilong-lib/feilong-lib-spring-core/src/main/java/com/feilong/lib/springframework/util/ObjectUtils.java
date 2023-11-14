@@ -427,6 +427,9 @@ public abstract class ObjectUtils{
     /**
      * Return the same value as {@link Double#hashCode()}}.
      * 
+     * @param dbl
+     * @return
+     * 
      * @see Double#hashCode()
      */
     public static int hashCode(double dbl){

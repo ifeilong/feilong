@@ -129,8 +129,6 @@ public class ReflectionToStringBuilder extends ToStringBuilder{
      * @throws IllegalArgumentException
      *             if the Object is {@code null}
      *
-     * @see ToStringExclude
-     * @see ToStringSummary
      */
     public static String toString(final Object object){
         return toString(object, null, false, false, null);
@@ -164,8 +162,6 @@ public class ReflectionToStringBuilder extends ToStringBuilder{
      * @throws IllegalArgumentException
      *             if the Object or {@code ToStringStyle} is {@code null}
      *
-     * @see ToStringExclude
-     * @see ToStringSummary
      */
     public static String toString(final Object object,final ToStringStyle style){
         return toString(object, style, false, false, null);
@@ -205,8 +201,6 @@ public class ReflectionToStringBuilder extends ToStringBuilder{
      * @throws IllegalArgumentException
      *             if the Object is {@code null}
      *
-     * @see ToStringExclude
-     * @see ToStringSummary
      */
     public static String toString(final Object object,final ToStringStyle style,final boolean outputTransients){
         return toString(object, style, outputTransients, false, null);
@@ -253,8 +247,6 @@ public class ReflectionToStringBuilder extends ToStringBuilder{
      * @throws IllegalArgumentException
      *             if the Object is {@code null}
      *
-     * @see ToStringExclude
-     * @see ToStringSummary
      * @since 2.1
      */
     public static String toString(final Object object,final ToStringStyle style,final boolean outputTransients,final boolean outputStatics){
@@ -306,9 +298,6 @@ public class ReflectionToStringBuilder extends ToStringBuilder{
      * @return the String result
      * @throws IllegalArgumentException
      *             if the Object is {@code null}
-     *
-     * @see ToStringExclude
-     * @see ToStringSummary
      * @since 2.1
      */
     public static <T> String toString(
@@ -368,8 +357,6 @@ public class ReflectionToStringBuilder extends ToStringBuilder{
      * @throws IllegalArgumentException
      *             if the Object is {@code null}
      *
-     * @see ToStringExclude
-     * @see ToStringSummary
      * @since 3.6
      */
     public static <T> String toString(

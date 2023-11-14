@@ -380,10 +380,9 @@ public class ClassPool{
 
         if (clazz == null){
             throw new NotFoundException(classname);
-        }else{
-            clazz.incGetCounter();
-            return clazz;
         }
+        clazz.incGetCounter();
+        return clazz;
     }
 
     /**

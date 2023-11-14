@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.DynaClass;
 
 /**

@@ -1065,9 +1065,8 @@ public class MemberCodeGen extends CodeGen{
             if (!is_static){
                 if (inStaticMethod){
                     throw new CompileError("not available in a static method: " + name);
-                }else{
-                    bytecode.addAload(0); // this
                 }
+                bytecode.addAload(0); // this
             }
 
             resultStatic = is_static;

@@ -17,8 +17,6 @@ package com.feilong.net.http;
 
 import org.junit.Test;
 
-import com.feilong.net.http.HttpClientUtil;
-
 public class GetResponseTest{
 
     @Test(expected = NullPointerException.class)

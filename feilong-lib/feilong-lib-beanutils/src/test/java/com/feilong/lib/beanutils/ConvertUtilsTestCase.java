@@ -25,10 +25,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import com.feilong.lib.beanutils.ConversionException;
-import com.feilong.lib.beanutils.ConvertUtils;
-import com.feilong.lib.beanutils.ConvertUtilsBean;
-import com.feilong.lib.beanutils.Converter;
 import com.feilong.lib.beanutils.converters.DateConverter;
 
 import junit.framework.Test;

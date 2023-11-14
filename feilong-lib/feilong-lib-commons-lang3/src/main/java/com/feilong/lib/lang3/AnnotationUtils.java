@@ -16,11 +16,11 @@
  */
 package com.feilong.lib.lang3;
 
-import com.feilong.lib.lang3.builder.ToStringBuilder;
-import com.feilong.lib.lang3.builder.ToStringStyle;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * <p>

@@ -65,6 +65,10 @@ public class ConnectTimeoutException extends InterruptedIOException{
 
     /**
      * Creates a ConnectTimeoutException based on original {@link IOException}.
+     * 
+     * @param cause
+     * @param host
+     * @param remoteAddresses
      *
      * @since 4.3
      */

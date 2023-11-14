@@ -17,8 +17,6 @@
 
 package com.feilong.lib.beanutils.locale.converters;
 
-import com.feilong.lib.beanutils.locale.converters.DoubleLocaleConverter;
-
 /**
  * Test Case for the DoubleLocaleConverter class.
  *

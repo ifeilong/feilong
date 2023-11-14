@@ -412,11 +412,11 @@ public class ControlFlow{
      */
     public static class Node{
 
-        private Block  block;
+        private final Block block;
 
-        private Node   parent;
+        private Node        parent;
 
-        private Node[] children;
+        private Node[]      children;
 
         Node(Block b){
             block = b;
@@ -584,9 +584,9 @@ public class ControlFlow{
      */
     public static class Catcher{
 
-        private Block node;
+        private final Block node;
 
-        private int   typeIndex;
+        private final int   typeIndex;
 
         Catcher(BasicBlock.Catch c){
             node = (Block) c.body;
@@ -607,9 +607,8 @@ public class ControlFlow{
         public String type(){
             if (typeIndex == 0){
                 return "java.lang.Throwable";
-            }else{
-                return node.method.getConstPool().getClassInfo(typeIndex);
             }
+            return node.method.getConstPool().getClassInfo(typeIndex);
         }
     }
 }

@@ -23,9 +23,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.feilong.lib.beanutils.converters.DateTimeConverter;
-import com.feilong.lib.beanutils.converters.SqlTimestampConverter;
-
 import junit.framework.TestSuite;
 
 /**

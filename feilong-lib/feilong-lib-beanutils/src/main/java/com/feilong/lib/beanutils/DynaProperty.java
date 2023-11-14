@@ -219,9 +219,8 @@ public class DynaProperty implements Serializable{
 
         if (type == null){
             return (false);
-        }else{
-            return (Map.class.isAssignableFrom(type));
         }
+        return (Map.class.isAssignableFrom(type));
 
     }
 

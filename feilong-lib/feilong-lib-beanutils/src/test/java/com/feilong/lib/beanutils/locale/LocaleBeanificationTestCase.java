@@ -28,11 +28,6 @@ import com.feilong.lib.beanutils.ContextClassLoaderLocal;
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.PrimitiveBean;
-import com.feilong.lib.beanutils.locale.LocaleBeanUtils;
-import com.feilong.lib.beanutils.locale.LocaleBeanUtilsBean;
-import com.feilong.lib.beanutils.locale.LocaleConvertUtils;
-import com.feilong.lib.beanutils.locale.LocaleConvertUtilsBean;
-import com.feilong.lib.beanutils.locale.LocaleConverter;
 import com.feilong.lib.beanutils.locale.converters.LongLocaleConverter;
 
 import junit.framework.Test;
@@ -122,11 +117,10 @@ public class LocaleBeanificationTestCase extends TestCase{
             if (reference.get() == null){
                 break;
 
-            }else{
-                // create garbage:
-                final byte[] b = new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            final byte[] b = new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 

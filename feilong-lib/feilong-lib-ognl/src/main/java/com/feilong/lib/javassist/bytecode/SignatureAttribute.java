@@ -234,6 +234,8 @@ public class SignatureAttribute extends AttributeInfo{
 
         /**
          * Returns the super class.
+         * 
+         * @return
          */
         public ClassType getSuperClass(){
             return superClass;

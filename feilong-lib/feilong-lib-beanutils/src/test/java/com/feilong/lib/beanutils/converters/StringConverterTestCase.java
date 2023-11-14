@@ -17,7 +17,6 @@
 package com.feilong.lib.beanutils.converters;
 
 import com.feilong.lib.beanutils.ConversionException;
-import com.feilong.lib.beanutils.converters.StringConverter;
 
 import junit.framework.TestCase;
 

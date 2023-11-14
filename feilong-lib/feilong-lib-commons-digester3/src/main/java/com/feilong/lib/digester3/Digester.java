@@ -38,7 +38,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
@@ -987,8 +986,6 @@ public class Digester extends DefaultHandler{
     public void notationDecl(String name,String publicId,String systemId){
         LOGGER.debug("notationDecl(" + name + "," + publicId + "," + systemId + ")");
     }
-
-    
 
     // ----------------------------------------------- EntityResolver Methods
 

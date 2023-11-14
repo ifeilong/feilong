@@ -981,7 +981,7 @@ public class CtField extends CtMember{
 
     static class CodeInitializer extends CodeInitializer0{
 
-        private String expression;
+        private final String expression;
 
         CodeInitializer(String expr){
             expression = expr;
@@ -1005,7 +1005,7 @@ public class CtField extends CtMember{
 
     static class PtreeInitializer extends CodeInitializer0{
 
-        private ASTree expression;
+        private final ASTree expression;
 
         PtreeInitializer(ASTree expr){
             expression = expr;
@@ -1132,9 +1132,8 @@ public class CtField extends CtMember{
             if (stringParams == null){
                 if (withConstructorParams){
                     return "(Ljava/lang/Object;[Ljava/lang/Object;)V";
-                }else{
-                    return "(Ljava/lang/Object;)V";
                 }
+                return "(Ljava/lang/Object;)V";
             }
 
             if (withConstructorParams){
@@ -1228,9 +1227,8 @@ public class CtField extends CtMember{
             if (stringParams == null){
                 if (withConstructorParams){
                     return "(Ljava/lang/Object;[Ljava/lang/Object;)";
-                }else{
-                    return "(Ljava/lang/Object;)";
                 }
+                return "(Ljava/lang/Object;)";
             }
 
             if (withConstructorParams){

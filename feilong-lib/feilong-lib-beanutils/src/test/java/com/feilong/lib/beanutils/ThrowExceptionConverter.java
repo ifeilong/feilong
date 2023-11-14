@@ -18,8 +18,6 @@
 
 package com.feilong.lib.beanutils;
 
-import com.feilong.lib.beanutils.Converter;
-
 /**
  * Converter implementation that throws a <code>PassTestException</code>
  * when convert is called.

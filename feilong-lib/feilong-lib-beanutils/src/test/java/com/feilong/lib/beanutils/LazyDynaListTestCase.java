@@ -28,15 +28,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.beanutils.DynaBean;
 
-import com.feilong.lib.beanutils.BasicDynaBean;
-import com.feilong.lib.beanutils.BasicDynaClass;
-import com.feilong.lib.beanutils.DynaClass;
-import com.feilong.lib.beanutils.DynaProperty;
-import com.feilong.lib.beanutils.LazyDynaBean;
-import com.feilong.lib.beanutils.LazyDynaList;
-import com.feilong.lib.beanutils.LazyDynaMap;
-import com.feilong.lib.beanutils.WrapDynaBean;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

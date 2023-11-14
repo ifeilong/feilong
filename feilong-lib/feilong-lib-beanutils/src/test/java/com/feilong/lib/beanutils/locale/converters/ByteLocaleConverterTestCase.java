@@ -17,8 +17,6 @@
 
 package com.feilong.lib.beanutils.locale.converters;
 
-import com.feilong.lib.beanutils.locale.converters.ByteLocaleConverter;
-
 /**
  * Test Case for the ByteLocaleConverter class.
  *

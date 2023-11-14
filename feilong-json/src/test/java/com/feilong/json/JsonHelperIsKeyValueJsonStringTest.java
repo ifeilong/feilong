@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.json.JsonHelper;
 import com.feilong.store.member.User;
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 

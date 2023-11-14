@@ -24,12 +24,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.beanutils.DynaBean;
 
-import com.feilong.lib.beanutils.ConversionException;
-import com.feilong.lib.beanutils.LazyDynaBean;
-import com.feilong.lib.beanutils.LazyDynaClass;
-import com.feilong.lib.beanutils.LazyDynaMap;
-import com.feilong.lib.beanutils.PropertyUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

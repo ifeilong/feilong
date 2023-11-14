@@ -140,11 +140,11 @@ public abstract class TypeData{
      */
     protected static class BasicType extends TypeData{
 
-        private String name;
+        private final String name;
 
-        private int    typeTag;
+        private final int    typeTag;
 
-        private char   decodedName;
+        private final char   decodedName;
 
         public BasicType(String type, int tag, char decoded){
             name = type;
@@ -382,9 +382,8 @@ public abstract class TypeData{
             if (bt == null){
                 if (isNullType()){
                     return new NullType();
-                }else{
-                    return new ClassName(getName()).getArrayType(dim);
                 }
+                return new ClassName(getName()).getArrayType(dim);
             }
             return bt.getArrayType(dim);
         }
@@ -689,7 +688,7 @@ public abstract class TypeData{
      */
     public static class ArrayType extends AbsTypeVar{
 
-        private AbsTypeVar element;
+        private final AbsTypeVar element;
 
         private ArrayType(AbsTypeVar elementType){
             element = elementType;
@@ -783,7 +782,7 @@ public abstract class TypeData{
      */
     public static class ArrayElement extends AbsTypeVar{
 
-        private AbsTypeVar array;
+        private final AbsTypeVar array;
 
         private ArrayElement(AbsTypeVar a){ // a is never null
             array = a;
@@ -971,7 +970,7 @@ public abstract class TypeData{
      */
     public static class ClassName extends TypeData{
 
-        private String name; // dot separated.
+        private final String name; // dot separated.
 
         public ClassName(String n){
             name = n;

@@ -165,6 +165,8 @@ public class AttributeInfo{
      * Returns the length of this <code>attribute_info</code>
      * structure.
      * The returned value is <code>attribute_length + 6</code>.
+     * 
+     * @return
      */
     public int length(){
         return info.length + 6;
@@ -177,6 +179,8 @@ public class AttributeInfo{
      * <p>
      * This method is not available if the object is an instance
      * of <code>CodeAttribute</code>.
+     * 
+     * @return
      */
     public byte[] get(){
         return info;

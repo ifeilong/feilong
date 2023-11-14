@@ -378,9 +378,8 @@ public abstract class AbstractConverter implements Converter{
     protected Object getDefault(final Class<?> type){
         if (type.equals(String.class)){
             return null;
-        }else{
-            return defaultValue;
         }
+        return defaultValue;
     }
 
     /**

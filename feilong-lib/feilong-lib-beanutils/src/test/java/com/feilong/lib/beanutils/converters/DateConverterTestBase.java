@@ -26,7 +26,6 @@ import java.util.Locale;
 
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.Converter;
-import com.feilong.lib.beanutils.converters.DateTimeConverter;
 
 import junit.framework.TestCase;
 

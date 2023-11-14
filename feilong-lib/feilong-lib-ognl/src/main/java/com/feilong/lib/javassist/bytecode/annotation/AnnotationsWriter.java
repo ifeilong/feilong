@@ -62,9 +62,9 @@ import com.feilong.lib.javassist.bytecode.ConstPool;
  */
 public class AnnotationsWriter{
 
-    protected OutputStream output;
+    protected OutputStream  output;
 
-    private ConstPool      pool;
+    private final ConstPool pool;
 
     /**
      * Constructs with the given output stream.
@@ -213,6 +213,7 @@ public class AnnotationsWriter{
      *
      * @param value
      *            the constant value.
+     * @throws IOException
      */
     public void constValueIndex(short value) throws IOException{
         constValueIndex('S', pool.addIntegerInfo(value));
@@ -224,6 +225,7 @@ public class AnnotationsWriter{
      *
      * @param value
      *            the constant value.
+     * @throws IOException
      */
     public void constValueIndex(int value) throws IOException{
         constValueIndex('I', pool.addIntegerInfo(value));
@@ -268,6 +270,7 @@ public class AnnotationsWriter{
      *
      * @param value
      *            the constant value.
+     * @throws IOException
      */
     public void constValueIndex(String value) throws IOException{
         constValueIndex('s', pool.addUtf8Info(value));
@@ -282,6 +285,7 @@ public class AnnotationsWriter{
      * @param index
      *            <code>const_value_index</code>
      *            in <code>element_value</code>.
+     * @throws IOException
      */
     public void constValueIndex(int tag,int index) throws IOException{
         output.write(tag);

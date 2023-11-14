@@ -348,6 +348,8 @@ public final class ConstPool{
      * Reads the <code>class_index</code> field of the
      * <code>CONSTANT_Fieldref_info</code> structure
      * at the given index.
+     * 
+     * @param index
      *
      * @return the name of the class at that <code>class_index</code>.
      */
@@ -1088,6 +1090,8 @@ public final class ConstPool{
     /**
      * Adds a new <code>CONSTANT_Integer_info</code>
      * structure.
+     * 
+     * @param i
      *
      * @return the index of the added entry.
      */

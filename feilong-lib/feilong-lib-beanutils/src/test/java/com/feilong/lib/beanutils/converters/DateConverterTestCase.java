@@ -19,9 +19,6 @@ package com.feilong.lib.beanutils.converters;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.feilong.lib.beanutils.converters.DateConverter;
-import com.feilong.lib.beanutils.converters.DateTimeConverter;
-
 import junit.framework.TestSuite;
 
 /**

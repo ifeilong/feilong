@@ -191,10 +191,9 @@ public class FastHashMap extends HashMap{
     public int size(){
         if (fast){
             return (map.size());
-        }else{
-            synchronized (map){
-                return (map.size());
-            }
+        }
+        synchronized (map){
+            return (map.size());
         }
     }
 
@@ -207,10 +206,9 @@ public class FastHashMap extends HashMap{
     public boolean isEmpty(){
         if (fast){
             return (map.isEmpty());
-        }else{
-            synchronized (map){
-                return (map.isEmpty());
-            }
+        }
+        synchronized (map){
+            return (map.isEmpty());
         }
     }
 
@@ -245,10 +243,9 @@ public class FastHashMap extends HashMap{
     public boolean containsValue(Object value){
         if (fast){
             return (map.containsValue(value));
-        }else{
-            synchronized (map){
-                return (map.containsValue(value));
-            }
+        }
+        synchronized (map){
+            return (map.containsValue(value));
         }
     }
 
@@ -605,10 +602,9 @@ public class FastHashMap extends HashMap{
         public boolean containsAll(Collection o){
             if (fast){
                 return get(map).containsAll(o);
-            }else{
-                synchronized (map){
-                    return get(map).containsAll(o);
-                }
+            }
+            synchronized (map){
+                return get(map).containsAll(o);
             }
         }
 
@@ -626,10 +622,9 @@ public class FastHashMap extends HashMap{
         public Object[] toArray(){
             if (fast){
                 return get(map).toArray();
-            }else{
-                synchronized (map){
-                    return get(map).toArray();
-                }
+            }
+            synchronized (map){
+                return get(map).toArray();
             }
         }
 
@@ -640,10 +635,9 @@ public class FastHashMap extends HashMap{
             }
             if (fast){
                 return get(map).equals(o);
-            }else{
-                synchronized (map){
-                    return get(map).equals(o);
-                }
+            }
+            synchronized (map){
+                return get(map).equals(o);
             }
         }
 
@@ -651,10 +645,9 @@ public class FastHashMap extends HashMap{
         public int hashCode(){
             if (fast){
                 return get(map).hashCode();
-            }else{
-                synchronized (map){
-                    return get(map).hashCode();
-                }
+            }
+            synchronized (map){
+                return get(map).hashCode();
             }
         }
 

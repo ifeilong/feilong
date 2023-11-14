@@ -279,10 +279,9 @@ public abstract class AbstractConnPool<T, C, E extends PoolEntry<T, C>> implemen
                                     callback.completed(leasedEntry);
                                 }
                                 return leasedEntry;
-                            }else{
-                                release(leasedEntry, true);
-                                throw new ExecutionException(operationAborted());
                             }
+                            release(leasedEntry, true);
+                            throw new ExecutionException(operationAborted());
                         }catch (final IOException ex){
                             if (done.compareAndSet(false, true)){
                                 if (callback != null){

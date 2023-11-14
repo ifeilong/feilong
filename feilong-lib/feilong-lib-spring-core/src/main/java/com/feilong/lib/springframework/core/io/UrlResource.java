@@ -162,7 +162,7 @@ public class UrlResource extends AbstractFileResolvingResource{
      * @return the cleaned URL
      * @see com.feilong.lib.springframework.util.StringUtils#cleanPath
      */
-    private URL getCleanedUrl(URL originalUrl,String originalPath){
+    private static URL getCleanedUrl(URL originalUrl,String originalPath){
         try{
             return new URL(StringUtils.cleanPath(originalPath));
         }catch (MalformedURLException ex){

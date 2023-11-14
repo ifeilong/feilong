@@ -312,7 +312,6 @@ public abstract class StringUtils{
      *            the delimiter between elements (this is a single delimiter,
      *            rather than a bunch individual delimiter characters)
      * @return an array of the tokens in the list
-     * @see #tokenizeToStringArray
      */
     public static String[] delimitedListToStringArray(String str,String delimiter){
         return delimitedListToStringArray(str, delimiter, null);

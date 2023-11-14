@@ -64,6 +64,7 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
     private transient Charset         credentialsCharset;
 
     /**
+     * @param credentialsCharset
      * @since 4.3
      */
     public RFC2617Scheme(final Charset credentialsCharset){

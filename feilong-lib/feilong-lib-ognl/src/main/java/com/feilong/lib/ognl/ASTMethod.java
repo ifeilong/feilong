@@ -472,26 +472,25 @@ public class ASTMethod extends SimpleNode implements OrderedReturn,NodeType{
             if (ic == null){
                 componentType = Object.class; // fall back to object...
                 break;
+            }
+            if (componentType == null){
+                componentType = ic;
             }else{
-                if (componentType == null){
-                    componentType = ic;
-                }else{
-                    if (!componentType.isAssignableFrom(ic)){
-                        if (ic.isAssignableFrom(componentType)){
-                            componentType = ic; // just swap... ic is more generic...
-                        }else{
-                            Class pc;
-                            while ((pc = componentType.getSuperclass()) != null){ // TODO hmm - it could also be that an interface matches...
-                                if (pc.isAssignableFrom(ic)){
-                                    componentType = pc; // use this matching parent class
-                                    break;
-                                }
-                            }
-                            if (!componentType.isAssignableFrom(ic)){
-                                // parents didn't match. the types might be primitives. Fall back to object.
-                                componentType = Object.class;
+                if (!componentType.isAssignableFrom(ic)){
+                    if (ic.isAssignableFrom(componentType)){
+                        componentType = ic; // just swap... ic is more generic...
+                    }else{
+                        Class pc;
+                        while ((pc = componentType.getSuperclass()) != null){ // TODO hmm - it could also be that an interface matches...
+                            if (pc.isAssignableFrom(ic)){
+                                componentType = pc; // use this matching parent class
                                 break;
                             }
+                        }
+                        if (!componentType.isAssignableFrom(ic)){
+                            // parents didn't match. the types might be primitives. Fall back to object.
+                            componentType = Object.class;
+                            break;
                         }
                     }
                 }

@@ -1040,9 +1040,8 @@ public class CodeIterator implements Opcode{
             }else if (opcode == WIDE){
                 if (code[index + 1] == (byte) IINC){
                     return index + 6;
-                }else{
-                    return index + 4; // WIDE ...
                 }
+                return index + 4; // WIDE ...
             }
             int index2 = (index & ~3) + 8;
             if (opcode == LOOKUPSWITCH){

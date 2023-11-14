@@ -79,17 +79,15 @@ public class ASTRootVarRef extends ASTVarRef{
 
         if (_parent == null || (_getterClass != null && _getterClass.isArray())){
             return "";
-        }else{
-            return ExpressionCompiler.getRootExpression(this, target, context);
         }
+        return ExpressionCompiler.getRootExpression(this, target, context);
     }
 
     @Override
     public String toSetSourceString(OgnlContext context,Object target){
         if (_parent == null || (_getterClass != null && _getterClass.isArray())){
             return "";
-        }else{
-            return "$3";
         }
+        return "$3";
     }
 }

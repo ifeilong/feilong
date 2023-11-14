@@ -49,6 +49,7 @@ public class StringMemberValue extends MemberValue{
      *
      * @param str
      *            the initial value.
+     * @param cp
      */
     public StringMemberValue(String str, ConstPool cp){
         super('s', cp);

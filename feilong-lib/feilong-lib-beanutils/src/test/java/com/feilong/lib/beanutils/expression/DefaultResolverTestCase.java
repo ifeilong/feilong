@@ -16,8 +16,6 @@
  */
 package com.feilong.lib.beanutils.expression;
 
-import com.feilong.lib.beanutils.expression.DefaultResolver;
-
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 

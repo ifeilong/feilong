@@ -20,9 +20,6 @@ package com.feilong.lib.beanutils.converters;
 import java.sql.Date;
 import java.util.Calendar;
 
-import com.feilong.lib.beanutils.converters.DateTimeConverter;
-import com.feilong.lib.beanutils.converters.SqlDateConverter;
-
 import junit.framework.TestSuite;
 
 /**

@@ -52,6 +52,8 @@ public class IntegerMemberValue extends MemberValue{
      * This is for making a difference from the constructor that receives
      * an index into the constant pool table as the first parameter.
      * Note that the index is also int type.
+     * 
+     * @param cp
      *
      * @param value
      *            the initial value.

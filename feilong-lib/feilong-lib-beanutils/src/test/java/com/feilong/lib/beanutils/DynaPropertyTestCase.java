@@ -16,13 +16,11 @@
  */
 package com.feilong.lib.beanutils;
 
+import java.util.Collection;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import java.util.Collection;
-
-import com.feilong.lib.beanutils.DynaProperty;
 
 /**
  * Test case for {@link DynaProperty}.

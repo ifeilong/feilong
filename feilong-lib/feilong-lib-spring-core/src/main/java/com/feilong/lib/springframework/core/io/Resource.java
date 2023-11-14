@@ -35,14 +35,9 @@ import java.net.URL;
  * @see #getURL()
  * @see #getURI()
  * @see #getFile()
- * @see WritableResource
  * @see ContextResource
  * @see UrlResource
  * @see ClassPathResource
- * @see FileSystemResource
- * @see PathResource
- * @see ByteArrayResource
- * @see InputStreamResource
  * @since 28.12.2003
  */
 public interface Resource extends InputStreamSource{

@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.BeanUtils;
-import com.feilong.lib.beanutils.PropertyUtils;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

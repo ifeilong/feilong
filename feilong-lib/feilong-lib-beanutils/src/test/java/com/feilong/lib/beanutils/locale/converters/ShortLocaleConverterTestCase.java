@@ -17,8 +17,6 @@
 
 package com.feilong.lib.beanutils.locale.converters;
 
-import com.feilong.lib.beanutils.locale.converters.ShortLocaleConverter;
-
 /**
  * Test Case for the ShortLocaleConverter class.
  *

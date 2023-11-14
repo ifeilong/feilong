@@ -16,8 +16,6 @@
  */
 package com.feilong.lib.beanutils.bugs.other;
 
-import com.feilong.lib.beanutils.bugs.Jira87TestCase;
-
 /**
  * Factory which creates beans for {@link Jira87TestCase}.
  *

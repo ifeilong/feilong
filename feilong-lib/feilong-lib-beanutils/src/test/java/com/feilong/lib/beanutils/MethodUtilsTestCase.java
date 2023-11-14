@@ -21,13 +21,12 @@ import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+import com.feilong.lib.beanutils.priv.PrivateBeanFactory;
+import com.feilong.lib.beanutils.priv.PublicSubBean;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import com.feilong.lib.beanutils.MethodUtils;
-import com.feilong.lib.beanutils.priv.PrivateBeanFactory;
-import com.feilong.lib.beanutils.priv.PublicSubBean;
 
 /**
  * <p> Test case for <code>MethodUtils</code> </p>

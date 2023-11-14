@@ -56,6 +56,8 @@ public class CannotInvokeException extends RuntimeException{
 
     /**
      * Constructs a CannotInvokeException with an IllegalAccessException.
+     * 
+     * @param e
      */
     public CannotInvokeException(IllegalAccessException e){
         super("by " + e.toString());

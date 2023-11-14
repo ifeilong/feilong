@@ -22,8 +22,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.apache.commons.beanutils.DynaBean;
-
 /**
  * Utility methods for using Java Reflection APIs to facilitate generic
  * property getter and setter operations on Java objects.

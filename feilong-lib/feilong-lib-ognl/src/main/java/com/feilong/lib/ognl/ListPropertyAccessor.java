@@ -144,17 +144,14 @@ public class ListPropertyAccessor extends ObjectPropertyAccessor implements Prop
             String key = (indexStr.indexOf('"') >= 0 ? indexStr.replaceAll("\"", "") : indexStr);
             if (key.equals("size")){
                 return int.class;
-            }else{
-                if (key.equals("iterator")){
-                    return Iterator.class;
-                }else{
-                    if (key.equals("isEmpty") || key.equals("empty")){
-                        return boolean.class;
-                    }else{
-                        return super.getPropertyClass(context, target, index);
-                    }
-                }
             }
+            if (key.equals("iterator")){
+                return Iterator.class;
+            }
+            if (key.equals("isEmpty") || key.equals("empty")){
+                return boolean.class;
+            }
+            return super.getPropertyClass(context, target, index);
         }
 
         if (index instanceof Number){

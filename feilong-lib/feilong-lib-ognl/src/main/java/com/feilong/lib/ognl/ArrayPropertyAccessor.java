@@ -182,8 +182,7 @@ public class ArrayPropertyAccessor extends ObjectPropertyAccessor implements Pro
 
             return "[" + indexStr + "]=((" + wrapClass.getName() + ")ognl.OgnlOps.convertValue($3," + wrapClass.getName()
                             + ".class, true))." + OgnlRuntime.getNumericValueGetter(wrapClass);
-        }else{
-            return "[" + indexStr + "]=ognl.OgnlOps.convertValue($3," + type.getName() + ".class)";
         }
+        return "[" + indexStr + "]=ognl.OgnlOps.convertValue($3," + type.getName() + ".class)";
     }
 }

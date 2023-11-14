@@ -17,14 +17,17 @@
 
 package com.feilong.lib.beanutils.converters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.ref.WeakReference;
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import com.feilong.lib.beanutils.ConvertUtils;
 import com.feilong.lib.beanutils.Converter;
-import com.feilong.lib.beanutils.converters.FloatConverter;
 
 /**
  * This class provides a number of unit tests related to classloaders and

@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.ConversionException;
-import com.feilong.lib.beanutils.locale.converters.DateLocaleConverter;
 
 /**
  * Test Case for the DateLocaleConverter class.

@@ -189,10 +189,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V>{
     public int size(){
         if (fast){
             return (map.size());
-        }else{
-            synchronized (map){
-                return (map.size());
-            }
+        }
+        synchronized (map){
+            return (map.size());
         }
     }
 
@@ -224,10 +223,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V>{
     public boolean containsKey(final Object key){
         if (fast){
             return (map.containsKey(key));
-        }else{
-            synchronized (map){
-                return (map.containsKey(key));
-            }
+        }
+        synchronized (map){
+            return (map.containsKey(key));
         }
     }
 
@@ -322,10 +320,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V>{
                 map = temp;
                 return (result);
             }
-        }else{
-            synchronized (map){
-                return (map.remove(key));
-            }
+        }
+        synchronized (map){
+            return (map.remove(key));
         }
     }
 
@@ -554,10 +551,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V>{
                     map = temp;
                     return r;
                 }
-            }else{
-                synchronized (map){
-                    return get(map).remove(o);
-                }
+            }
+            synchronized (map){
+                return get(map).remove(o);
             }
         }
 
@@ -570,10 +566,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V>{
                     map = temp;
                     return r;
                 }
-            }else{
-                synchronized (map){
-                    return get(map).removeAll(o);
-                }
+            }
+            synchronized (map){
+                return get(map).removeAll(o);
             }
         }
 
@@ -630,10 +625,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V>{
         public boolean containsAll(final Collection<?> o){
             if (fast){
                 return get(map).containsAll(o);
-            }else{
-                synchronized (map){
-                    return get(map).containsAll(o);
-                }
+            }
+            synchronized (map){
+                return get(map).containsAll(o);
             }
         }
 

@@ -15,23 +15,21 @@
  */
 package com.feilong.core.util.collectionsutil;
 
-import com.feilong.core.util.CollectionsUtil;
-import com.feilong.store.member.User;
-import org.junit.Test;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
-public class ExistTest {
+import com.feilong.core.util.CollectionsUtil;
+import com.feilong.store.member.User;
+
+public class ExistTest{
 
     @Test
-    public void testExist() {
+    public void testExist(){
         User zhangfei = new User("张飞", 23);
         User guanyu24 = new User("关羽", 24);
         User liubei = new User("刘备", 25);
@@ -42,7 +40,7 @@ public class ExistTest {
     }
 
     @Test
-    public void testExistNotExist() {
+    public void testExistNotExist(){
         User zhangfei = new User("张飞", 23);
         List<User> list = toList(zhangfei);
 
@@ -52,22 +50,22 @@ public class ExistTest {
     //---------------------------------------------------------------
 
     @Test
-    public void testExistNullIterable() {
+    public void testExistNullIterable(){
         assertEquals(false, CollectionsUtil.exist(null, "name", "关羽"));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testExistNullPropertyName() {
+    public void testExistNullPropertyName(){
         CollectionsUtil.exist(new ArrayList<>(), null, "关羽");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testExistEmptyPropertyName() {
+    public void testExistEmptyPropertyName(){
         CollectionsUtil.exist(new ArrayList<>(), "", "关羽");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testExistBlankPropertyName() {
+    public void testExistBlankPropertyName(){
         CollectionsUtil.exist(new ArrayList<>(), " ", "关羽");
     }
 }

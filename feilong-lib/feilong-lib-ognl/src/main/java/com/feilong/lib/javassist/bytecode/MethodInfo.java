@@ -297,6 +297,8 @@ public class MethodInfo{
     /**
      * Sets a method descriptor.
      * 
+     * @param desc
+     * 
      * @see Descriptor
      */
     public void setDescriptor(String desc){

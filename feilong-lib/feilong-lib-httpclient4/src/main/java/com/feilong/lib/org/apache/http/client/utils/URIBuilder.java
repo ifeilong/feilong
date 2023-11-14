@@ -516,6 +516,9 @@ public class URIBuilder{
     /**
      * Sets URI fragment. The value is expected to be unescaped and may contain non ASCII
      * characters.
+     * 
+     * @param fragment
+     * @return
      */
     public URIBuilder setFragment(final String fragment){
         this.fragment = fragment;

@@ -148,11 +148,6 @@ public class OgnlRuntime{
     private static final String  IS_PREFIX                  = "is";
 
     /**
-     * Returned by <CODE>getUniqueDescriptor()</CODE> when the object is <CODE>null</CODE>.
-     */
-    private static final String  NULL_OBJECT_STRING         = "<null>";
-
-    /**
      * Control usage of JDK9+ access handler using the JVM option:
      * -Dognl.UseJDK9PlusAccessHandler=true
      * -Dognl.UseJDK9PlusAccessHandler=false
@@ -1184,10 +1179,9 @@ public class OgnlRuntime{
                     report.conversionNeeded[index] = true;
                     report.score += 30;
                     return true;
-                }else{
-                    // Okay, the items from the list *might* not match. we better don't do that...
-                    return false;
                 }
+                // Okay, the items from the list *might* not match. we better don't do that...
+                return false;
             }
         }else if (Collection.class.isAssignableFrom(methodArgumentClass)){
             if (parameterClass.isArray()){

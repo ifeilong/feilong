@@ -19,92 +19,100 @@ package com.feilong.lib.beanutils.bugs.other;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.bugs.Jira18TestCase;
-
 /**
  * Factory which creates <i>package</i> scope beans with
  * public methods for {@link Jira18TestCase}.
  *
  * @version $Id$
  */
-public class Jira18BeanFactory {
+public class Jira18BeanFactory{
 
     /**
      * Factory method which creates package friendly beans.
      *
      * @return The a package friendly bean with public methods
      */
-    public static Object createBean() {
+    public static Object createBean(){
         return new PackageFriendlyBean();
     }
 
     /* =============== Package Friendly Bean =============== */
-    static class PackageFriendlyBean {
+    static class PackageFriendlyBean{
 
-        private final String[] indexed = new String[] {"one", "two", "three"};
-        private String simple = "FOO";
-        private final Map<String, Object> mapped = new HashMap<String, Object>();
+        private final String[]            indexed = new String[] { "one", "two", "three" };
+
+        private String                    simple  = "FOO";
+
+        private final Map<String, Object> mapped  = new HashMap<String, Object>();
 
         /** Default Constructor */
-        public PackageFriendlyBean() {
+        public PackageFriendlyBean(){
             mapped.put("foo-key", "foo-value");
             mapped.put("bar-key", "bar-value");
         }
+
         /**
          * Return simple property.
          *
          * @return The simple value
          */
-        public String getSimple() {
+        public String getSimple(){
             return simple;
         }
 
         /**
          * Set simple property.
          *
-         * @param simple The simple value
+         * @param simple
+         *            The simple value
          */
-        public void setSimple(final String simple) {
+        public void setSimple(final String simple){
             this.simple = simple;
         }
 
         /**
          * Return indexed property.
          *
-         * @param index The index
+         * @param index
+         *            The index
          * @return The indexed value
          */
-        public String getIndexed(final int index) {
+        public String getIndexed(final int index){
             return indexed[index];
         }
 
         /**
          * Set indexed property.
          *
-         * @param index The index
-         * @param value The indexed value
+         * @param index
+         *            The index
+         * @param value
+         *            The indexed value
          */
-        public void setIndexed(final int index, final String value) {
+        public void setIndexed(final int index,final String value){
             this.indexed[index] = value;
         }
 
         /**
          * Return mapped property.
          *
-         * @param key The mapped key
+         * @param key
+         *            The mapped key
          * @return The mapped value
          */
-        public String getMapped(final String key) {
-            return (String)mapped.get(key);
+        public String getMapped(final String key){
+            return (String) mapped.get(key);
         }
 
         /**
          * Set mapped property.
          *
-         * @param key The mapped key
-         * @param value The mapped value
+         * @param key
+         *            The mapped key
+         * @param value
+         *            The mapped value
          */
-        public void setMapped(final String key, final String value) {
+        public void setMapped(final String key,final String value){
             mapped.put(key, value);
         }
 

@@ -20,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.beanutils.TestBean;
-import com.feilong.lib.beanutils.locale.LocaleBeanUtils;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -48,9 +48,8 @@ public class SoftValueHashMap<K, V> implements Map<K, V>{
         private static <K, V> SoftValueRef<K, V> create(K key,V val,ReferenceQueue<V> q){
             if (val == null){
                 return null;
-            }else{
-                return new SoftValueRef<>(key, val, q);
             }
+            return new SoftValueRef<>(key, val, q);
         }
 
     }
@@ -72,7 +71,7 @@ public class SoftValueHashMap<K, V> implements Map<K, V>{
     private Map<K, SoftValueRef<K, V>> hash;
 
     /* Reference queue for cleared WeakKeys */
-    private ReferenceQueue<V>          queue = new ReferenceQueue<>();
+    private final ReferenceQueue<V>    queue = new ReferenceQueue<>();
 
     /*
      * Remove all invalidated entries from the map, that is, remove all entries

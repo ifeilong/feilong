@@ -19,8 +19,6 @@ package com.feilong.lib.beanutils.bugs.other;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.feilong.lib.beanutils.bugs.Jira61TestCase;
-
 /**
  * Factory which creates beans for {@link Jira61TestCase}.
  *

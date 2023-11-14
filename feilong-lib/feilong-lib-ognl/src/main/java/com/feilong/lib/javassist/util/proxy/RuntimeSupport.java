@@ -241,6 +241,7 @@ public class RuntimeSupport{
      *            the descriptor of parameter types.
      * @param retType
      *            return type.
+     * @return
      */
     public static String makeDescriptor(String params,Class<?> retType){
         StringBuffer sbuf = new StringBuffer(params);

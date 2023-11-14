@@ -18,8 +18,6 @@
 package com.feilong.lib.beanutils.converters;
 
 import com.feilong.lib.beanutils.Converter;
-import com.feilong.lib.beanutils.converters.DoubleConverter;
-import com.feilong.lib.beanutils.converters.NumberConverter;
 
 import junit.framework.TestSuite;
 

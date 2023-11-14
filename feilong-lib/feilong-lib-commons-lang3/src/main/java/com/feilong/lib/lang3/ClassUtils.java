@@ -26,8 +26,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.lib.lang3.ClassUtils.Interfaces;
-
 /**
  * <p>
  * Operates on classes without using reflection.
@@ -49,21 +47,7 @@ import com.feilong.lib.lang3.ClassUtils.Interfaces;
  */
 public class ClassUtils{
 
-    private static final String EMPTY = "";
-
-    /**
-     * Inclusivity literals for {@link #hierarchy(Class, Interfaces)}.
-     * 
-     * @since 3.2
-     */
-    public enum Interfaces{
-
-        /** Includes interfaces. */
-        INCLUDE,
-
-        /** Excludes interfaces. */
-        EXCLUDE
-    }
+    private static final String                EMPTY                      = "";
 
     /**
      * The package separator character: {@code '&#x2e;' == {@value}}.

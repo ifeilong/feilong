@@ -16,9 +16,6 @@
  */
 package com.feilong.lib.beanutils;
 
-import com.feilong.lib.beanutils.BeanUtils;
-import com.feilong.lib.beanutils.MappedPropertyDescriptor;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

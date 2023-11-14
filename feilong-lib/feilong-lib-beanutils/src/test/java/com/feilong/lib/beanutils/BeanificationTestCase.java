@@ -22,14 +22,6 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import com.feilong.lib.beanutils.BeanUtils;
-import com.feilong.lib.beanutils.BeanUtilsBean;
-import com.feilong.lib.beanutils.ContextClassLoaderLocal;
-import com.feilong.lib.beanutils.ConvertUtils;
-import com.feilong.lib.beanutils.ConvertUtilsBean;
-import com.feilong.lib.beanutils.Converter;
-import com.feilong.lib.beanutils.PropertyUtilsBean;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -166,12 +158,11 @@ public class BeanificationTestCase extends TestCase{
             if (loaderReference.get() == null && testReference.get() == null){
                 break;
 
-            }else{
-                // create garbage:
-                @SuppressWarnings("unused")
-                final byte[] b = new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            @SuppressWarnings("unused")
+            final byte[] b = new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 

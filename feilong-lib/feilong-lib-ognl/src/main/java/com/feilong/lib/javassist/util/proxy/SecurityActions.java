@@ -57,9 +57,8 @@ class SecurityActions extends SecurityManager{
     static Method[] getDeclaredMethods(final Class<?> clazz){
         if (System.getSecurityManager() == null){
             return clazz.getDeclaredMethods();
-        }else{
-            return AccessController.doPrivileged((PrivilegedAction<Method[]>) () -> clazz.getDeclaredMethods());
         }
+        return AccessController.doPrivileged((PrivilegedAction<Method[]>) () -> clazz.getDeclaredMethods());
     }
 
     static Constructor<?>[] getDeclaredConstructors(final Class<?> clazz){
@@ -90,16 +89,15 @@ class SecurityActions extends SecurityManager{
     static Method getDeclaredMethod(final Class<?> clazz,final String name,final Class<?>[] types) throws NoSuchMethodException{
         if (System.getSecurityManager() == null){
             return clazz.getDeclaredMethod(name, types);
-        }else{
-            try{
-                return AccessController.doPrivileged((PrivilegedExceptionAction<Method>) () -> clazz.getDeclaredMethod(name, types));
-            }catch (PrivilegedActionException e){
-                if (e.getCause() instanceof NoSuchMethodException){
-                    throw (NoSuchMethodException) e.getCause();
-                }
-
-                throw new RuntimeException(e.getCause());
+        }
+        try{
+            return AccessController.doPrivileged((PrivilegedExceptionAction<Method>) () -> clazz.getDeclaredMethod(name, types));
+        }catch (PrivilegedActionException e){
+            if (e.getCause() instanceof NoSuchMethodException){
+                throw (NoSuchMethodException) e.getCause();
             }
+
+            throw new RuntimeException(e.getCause());
         }
     }
 

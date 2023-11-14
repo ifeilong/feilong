@@ -16,10 +16,10 @@
  */
 package com.feilong.lib.beanutils.bugs;
 
-import junit.framework.TestCase;
-
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.beanutils.TestBean;
+
+import junit.framework.TestCase;
 
 /**
  * Test case for Jira issue# BEANUTILS-92.

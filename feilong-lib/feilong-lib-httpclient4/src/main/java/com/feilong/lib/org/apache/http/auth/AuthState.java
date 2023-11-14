@@ -118,6 +118,8 @@ public class AuthState{
 
     /**
      * Returns available {@link AuthOption}s. May be null.
+     * 
+     * @return
      *
      * @since 4.2
      */
@@ -128,6 +130,8 @@ public class AuthState{
     /**
      * Returns {@code true} if {@link AuthOption}s are available, {@code false}
      * otherwise.
+     * 
+     * @return
      *
      * @since 4.2
      */

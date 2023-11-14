@@ -22,7 +22,6 @@ import java.util.Locale;
 
 import com.feilong.lib.beanutils.ConversionException;
 import com.feilong.lib.beanutils.locale.LocaleConvertUtils;
-import com.feilong.lib.beanutils.locale.converters.FloatLocaleConverter;
 
 /**
  * Test Case for the FloatLocaleConverter class.
