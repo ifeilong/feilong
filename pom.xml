@@ -160,7 +160,7 @@
 
 		<!-- https://maven.apache.org/components/plugins/maven-clean-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MCLEAN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-clean-plugin>3.3.1</v.maven-clean-plugin>
+		<v.maven-clean-plugin>3.3.2</v.maven-clean-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
