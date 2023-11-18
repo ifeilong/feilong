@@ -523,4 +523,127 @@ public final class URLUtil{
         //---------------------------------------------------------------
         return perfix + url;
     }
+
+    /**
+     * 将url http协议转成https协议.
+     * 
+     * <p>
+     * <b>场景:</b> 自己的资源<code>https:/http:</code>都支持,默认返回的是<code>http:</code>, 当合作方需要获取<code>https:</code>路径时候,做一次转换.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ifHttpChangeToHttps("") = ""
+     * ifHttpChangeToHttps(" ") = " "
+     * ifHttpChangeToHttps(null) = null
+     * ifHttpChangeToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps(" http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a?http") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a?http"
+     * ifHttpChangeToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "https://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps("//aod.baidu.com/storay41w-aacv2-48K.m4a") = "//aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param url
+     * @return 如果 <code>url</code> 是null或者是empty,直接返回 url<br>
+     *         如果 <code>url</code> 是以<code>https:</code>(忽视大小写) 开头,返回 trimUrl<br>
+     *         如果 <code>url</code> 是以<code>http:</code>开头,会将<code>http:</code>转成<code>https:</code>
+     *         其他情况返回trimUrl
+     * @since 4.0.3
+     */
+    public static String transformHttpToHttps(String url){
+        return transformProtocol(url, "http:", "https:");
+    }
+
+    /**
+     * 将url https协议转成http协议.
+     * 
+     * <p>
+     * <b>场景:</b> 自己的资源<code>https:/http:</code>都支持,默认返回的是<code>https:</code>, 当合作方需要获取<code>http:</code>路径时候,做一次转换.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ifHttpChangeToHttps("") = ""
+     * ifHttpChangeToHttps(" ") = " "
+     * ifHttpChangeToHttps(null) = null
+     * 
+     * ifHttpChangeToHttps("https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps("http://aod.baidu.com/storay41w-aacv2-48K.m4a?https") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a?https"
+     * ifHttpChangeToHttps(" https://aod.baidu.com/storay41w-aacv2-48K.m4a") = "http://aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * ifHttpChangeToHttps("//aod.baidu.com/storay41w-aacv2-48K.m4a") = "//aod.baidu.com/storay41w-aacv2-48K.m4a"
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param url
+     * @return 如果 <code>url</code> 是null或者是empty,直接返回 url<br>
+     *         如果 <code>url</code> 是以<code>http:</code>(忽视大小写) 开头,返回 trimUrl<br>
+     *         如果 <code>url</code> 是以<code>https:</code>开头,会将<code>https:</code>转成<code>http:</code>
+     *         其他情况返回trimUrl
+     * @since 4.0.3
+     */
+    public static String transformHttpsToHttp(String url){
+        return transformProtocol(url, "https:", "http:");
+    }
+
+    /**
+     * 转换协议.
+     * 
+     * 
+     * <p>
+     * <b>场景:</b> 自己的资源<code>oldProtocol/newProtocol</code>都支持,默认返回的是<code>oldProtocol</code>, 当合作方需要获取<code>newProtocol</code>路径时候,做一次转换.
+     * </p>
+     * 
+     * @param url
+     *            url
+     * @param oldProtocol
+     *            老的协议
+     * @param newProtocol
+     *            新的协议
+     * @return 如果 <code>url</code> 是null或者是empty,直接返回 url<br>
+     *         如果 <code>url</code> 是以newProtocol(忽视大小写) 开头,返回 trimUrl<br>
+     *         如果 <code>url</code> 是以<code>oldProtocol</code>开头,会将<code>oldProtocol</code>转成<code>newProtocol</code>
+     *         其他情况返回trimUrl
+     * @since 4.0.3
+     */
+    public static String transformProtocol(String url,String oldProtocol,String newProtocol){
+        //如果原始路径是null或者空白, 原样返回
+        if (isNullOrEmpty(url)){
+            return url;
+        }
+        //---------------------------------------------------------------
+        //去除空格
+        String trimUrl = url.trim();
+        //http://aod.cos.tx.baidu.com/storages/e5ee-audiofreehighqps/02/3E/GKwRINsFksuFAFVHdgEDy41w-aacv2-48K.m4a
+
+        //如果是以newProtocol开头, 原样返回
+        if (StringUtils.startsWithIgnoreCase(trimUrl, newProtocol)){
+            return trimUrl;
+        }
+
+        //---------------------------------------------------------------
+        //如果是以oldProtocol开头 
+        if (StringUtils.startsWithIgnoreCase(trimUrl, oldProtocol)){
+            //将第一个oldProtocol 转成 newProtocol
+            return StringUtils.replaceOnceIgnoreCase(trimUrl, oldProtocol, newProtocol);
+        }
+
+        //其他情况不变
+        return trimUrl;
+    }
 }

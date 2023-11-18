@@ -35,6 +35,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToURLTest.class,
                 OpenStreamTest.class,
 
+                TransformProtocolParameterizedTest.class,
+                TransformHttpToHttpsParameterizedTest.class,
+                TransformHttpsToHttpParameterizedTest.class,
+
                 IfNoProtocolPrependPreTest.class,
                 IfNoHttpOrHttpsProtocolPrependPreTest.class,
 //                
