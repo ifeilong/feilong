@@ -26,7 +26,9 @@ import java.util.Map;
  *            the generic type
  * @see com.feilong.core.lang.thread.DefaultPartitionRunnableBuilder
  * @since 2.0.0
+ * @since 4.0.3 mark '@FunctionalInterface'
  */
+@FunctionalInterface // 该注解加不加,对于接口是不是函数式接口没有影响;只是提醒编译器去检查该接口是否仅包含一个抽象方法
 public interface PartitionPerHandler<T> {
 
     /**
