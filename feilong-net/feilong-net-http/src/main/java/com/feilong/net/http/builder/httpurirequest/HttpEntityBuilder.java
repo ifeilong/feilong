@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.io.entity.MimeType;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.org.apache.http.HttpEntity;
 import com.feilong.lib.org.apache.http.NameValuePair;
@@ -89,13 +88,13 @@ final class HttpEntityBuilder{
      */
     private static HttpEntity toByteArrayEntity(RequestByteArrayBody requestByteArrayBody){
         byte[] buf = requestByteArrayBody.getBuf();
-        MimeType mimeType = requestByteArrayBody.getMimeType();
+        String mimeType = requestByteArrayBody.getMimeType();
 
         return new ByteArrayEntity(
                         buf,
                         defaultZero(requestByteArrayBody.getOff()),
                         defaultIfNull(requestByteArrayBody.getLength(), buf.length),
-                        null == mimeType ? null : ContentType.create(mimeType.getMime())
+                        null == mimeType ? null : ContentType.create(mimeType)
 
         );
     }

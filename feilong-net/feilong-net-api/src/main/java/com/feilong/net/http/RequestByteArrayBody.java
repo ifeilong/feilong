@@ -34,22 +34,26 @@ public class RequestByteArrayBody{
      * 
      * element <code>buf[pos]</code> is the next byte to be read.
      */
-    private byte[]   buf;
+    private byte[]  buf;
 
     //---------------------------------------------------------------
 
     /**
      * the offset in the buffer of the first byte to read.
      */
-    private Integer  off;
+    private Integer off;
 
     /**
      * the maximum number of bytes to read from the buffer.
      */
-    private Integer  length;
+    private Integer length;
 
-    /** The mime type. */
-    private MimeType mimeType;
+    /**
+     * The mime type.
+     * 
+     * @since 4.0.3 change toString
+     */
+    private String  mimeType;
 
     //---------------------------------------------------------------
 
@@ -89,6 +93,31 @@ public class RequestByteArrayBody{
         this.buf = buf;
         this.off = off;
         this.length = length;
+        this.mimeType = null == mimeType ? null : mimeType.getMime();
+    }
+
+    /**
+     * Instantiates a new request byte array body.
+     *
+     * @param buf
+     *            An array of bytes that was provided by the creator of the stream.
+     * 
+     *            Elements <code>buf[0]</code> through <code>buf[count-1]</code> are the only bytes that can ever be read from the stream;
+     * 
+     *            element <code>buf[pos]</code> is the next byte to be read.
+     * @param off
+     *            the off
+     * @param length
+     *            the length
+     * @param mimeType
+     *            the mime type
+     * @since 4.0.3
+     */
+    public RequestByteArrayBody(byte[] buf, Integer off, Integer length, String mimeType){
+        super();
+        this.buf = buf;
+        this.off = off;
+        this.length = length;
         this.mimeType = mimeType;
     }
 
@@ -105,6 +134,25 @@ public class RequestByteArrayBody{
      *            the mime type
      */
     public RequestByteArrayBody(byte[] buf, MimeType mimeType){
+        super();
+        this.buf = buf;
+        this.mimeType = null == mimeType ? null : mimeType.getMime();
+    }
+
+    /**
+     * Instantiates a new request byte array body.
+     *
+     * @param buf
+     *            An array of bytes that was provided by the creator of the stream.
+     * 
+     *            Elements <code>buf[0]</code> through <code>buf[count-1]</code> are the only bytes that can ever be read from the stream;
+     * 
+     *            element <code>buf[pos]</code> is the next byte to be read.
+     * @param mimeType
+     *            the mime type
+     * @since 4.0.3
+     */
+    public RequestByteArrayBody(byte[] buf, String mimeType){
         super();
         this.buf = buf;
         this.mimeType = mimeType;
@@ -170,21 +218,23 @@ public class RequestByteArrayBody{
     }
 
     /**
-     * Gets the mime type.
+     * 获得 mime type.
      *
      * @return the mimeType
+     * @since 4.0.3
      */
-    public MimeType getMimeType(){
+    public String getMimeType(){
         return mimeType;
     }
 
     /**
-     * Sets the mime type.
+     * 设置 mime type.
      *
      * @param mimeType
      *            the mimeType to set
+     * @since 4.0.3
      */
-    public void setMimeType(MimeType mimeType){
+    public void setMimeType(String mimeType){
         this.mimeType = mimeType;
     }
 
