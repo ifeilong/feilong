@@ -125,7 +125,7 @@ public class LogAndBotCombination{
      *            the arguments
      * @since 4.0.3
      */
-    public static void debug(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+    public static void debugWithSignName(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
         debug(logger, bot, joinPattern(signName, pattern), arguments);
     }
 
@@ -145,7 +145,7 @@ public class LogAndBotCombination{
      *            the arguments
      * @since 4.0.3
      */
-    public static void info(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+    public static void infoWithSignName(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
         info(logger, bot, joinPattern(signName, pattern), arguments);
     }
 
@@ -165,7 +165,7 @@ public class LogAndBotCombination{
      *            the arguments
      * @since 4.0.3
      */
-    public static void warn(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+    public static void warnWithSignName(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
         warn(logger, bot, joinPattern(signName, pattern), arguments);
     }
 
@@ -185,7 +185,7 @@ public class LogAndBotCombination{
      *            the arguments
      * @since 4.0.3
      */
-    public static void error(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+    public static void errorWithSignName(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
         error(logger, bot, joinPattern(signName, pattern), arguments);
     }
 
@@ -229,20 +229,6 @@ public class LogAndBotCombination{
         }
 
         //---------------------------------------------------------------
-        sendBot(bot, pattern, arguments);
-    }
-
-    /**
-     * Send bot.
-     *
-     * @param bot
-     *            the bot
-     * @param pattern
-     *            the pattern
-     * @param arguments
-     *            the arguments
-     */
-    private static void sendBot(Bot bot,String pattern,Object...arguments){
         if (null == bot){
             return;
         }
@@ -272,9 +258,8 @@ public class LogAndBotCombination{
         Object lastOneArgument = arguments[arguments.length - 1];
         //如果最后一个参数是 Throwable 类型
         if (ClassUtil.isInstance(lastOneArgument, Throwable.class)){
-
             //起始索引包含，结束索引不包含。空数组输入产生空输出。
-            return formatPattern(pattern, ArrayUtils.subarray(arguments, 0, arguments.length - 1));
+            return formatPatternExcludeLastArgument(pattern, arguments);
         }
         //---------------------------------------------------------------
         return formatPattern(pattern, arguments);
@@ -293,14 +278,56 @@ public class LogAndBotCombination{
      *            the arguments
      */
     private static void log(Logger logger,String type,String pattern,Object...arguments){
+        //这isNullOrEmpty 里面已经判断了length是否=0
+        if (isNullOrEmpty(arguments)){
+            logData(logger, type, pattern);
+            return;
+        }
+
+        //---------------------------------------------------------------
+        //获取最后一个
+        Object lastOneArgument = arguments[arguments.length - 1];
+        //如果最后一个参数是 Throwable 类型
+        if (ClassUtil.isInstance(lastOneArgument, Throwable.class)){
+            String message = formatPatternExcludeLastArgument(pattern, arguments);
+            if (Objects.equals(type, "debug")){
+                logger.debug(message, (Throwable) lastOneArgument);
+            }else if (Objects.equals(type, "info")){
+                logger.info(message, (Throwable) lastOneArgument);
+            }else if (Objects.equals(type, "warn")){
+                logger.warn(message, (Throwable) lastOneArgument);
+            }else if (Objects.equals(type, "error")){
+                logger.error(message, (Throwable) lastOneArgument);
+            }
+            return;
+        }
+        //---------------------------------------------------------------
+        String message = formatPattern(pattern, arguments);
+        logData(logger, type, message);
+    }
+
+    /**
+     * 剔除最后一个参数 format
+     * 
+     * @param pattern
+     * @param arguments
+     * @return
+     * @since 4.0.3
+     */
+    private static String formatPatternExcludeLastArgument(String pattern,Object...arguments){
+        //起始索引包含，结束索引不包含。空数组输入产生空输出。
+        return formatPattern(pattern, ArrayUtils.subarray(arguments, 0, arguments.length - 1));
+    }
+
+    private static void logData(Logger logger,String type,String message){
         if (Objects.equals(type, "debug")){
-            logger.debug(pattern, arguments);
+            logger.debug(message);
         }else if (Objects.equals(type, "info")){
-            logger.info(pattern, arguments);
+            logger.info(message);
         }else if (Objects.equals(type, "warn")){
-            logger.warn(pattern, arguments);
+            logger.warn(message);
         }else if (Objects.equals(type, "error")){
-            logger.error(pattern, arguments);
+            logger.error(message);
         }
     }
 }
