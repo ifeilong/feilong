@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.lang3.ArrayUtils;
+import com.feilong.lib.lang3.StringUtils;
 
 /**
  * 
@@ -109,6 +110,105 @@ public class LogAndBotCombination{
     //---------------------------------------------------------------
 
     /**
+     * Debug级别输出日志以及发送机器人.
+     *
+     * @param logger
+     *            the log
+     * @param bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     * @param signName
+     *            the sign name
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.0.3
+     */
+    public static void debug(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+        debug(logger, bot, joinPattern(signName, pattern), arguments);
+    }
+
+    /**
+     * Info级别输出日志以及发送机器人.
+     *
+     * @param logger
+     *            the log
+     * @param bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     * @param signName
+     *            the sign name
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.0.3
+     */
+    public static void info(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+        info(logger, bot, joinPattern(signName, pattern), arguments);
+    }
+
+    /**
+     * Warn级别输出日志以及发送机器人.
+     *
+     * @param logger
+     *            the log
+     * @param bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     * @param signName
+     *            the sign name
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.0.3
+     */
+    public static void warn(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+        warn(logger, bot, joinPattern(signName, pattern), arguments);
+    }
+
+    /**
+     * Error级别输出日志以及发送机器人.
+     *
+     * @param logger
+     *            the log
+     * @param bot
+     *            机器人, 目前支持微信机器人 {@link com.feilong.net.bot.wxwork.DefaultWxworkBot} 和
+     *            钉钉机器人{@link com.feilong.net.bot.dingtalk.DefaultDingTalkBot}
+     * @param signName
+     *            the sign name
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.0.3
+     */
+    public static void error(Logger logger,Bot bot,String signName,String pattern,Object...arguments){
+        error(logger, bot, joinPattern(signName, pattern), arguments);
+    }
+
+    /**
+     * Join pattern.
+     *
+     * @param signName
+     *            the sign name
+     * @param pattern
+     *            the pattern
+     * @return the string
+     * @since 4.0.3
+     */
+    private static String joinPattern(String signName,String pattern){
+        if (isNullOrEmpty(signName)){
+            return pattern;
+        }
+        return StringUtils.join("[", signName, "]", pattern);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
      * Log.
      *
      * @param logger
@@ -132,6 +232,16 @@ public class LogAndBotCombination{
         sendBot(bot, pattern, arguments);
     }
 
+    /**
+     * Send bot.
+     *
+     * @param bot
+     *            the bot
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     */
     private static void sendBot(Bot bot,String pattern,Object...arguments){
         if (null == bot){
             return;
@@ -142,6 +252,15 @@ public class LogAndBotCombination{
         bot.sendMessage(sendMessage);
     }
 
+    /**
+     * 创建 send message.
+     *
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @return the string
+     */
     private static String createSendMessage(String pattern,Object...arguments){
         //这isNullOrEmpty 里面已经判断了length是否=0
         if (isNullOrEmpty(arguments)){
