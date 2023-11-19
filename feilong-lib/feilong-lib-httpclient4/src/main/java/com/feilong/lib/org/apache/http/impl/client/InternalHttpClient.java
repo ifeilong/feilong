@@ -30,7 +30,6 @@ package com.feilong.lib.org.apache.http.impl.client;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,16 +51,11 @@ import com.feilong.lib.org.apache.http.client.methods.HttpExecutionAware;
 import com.feilong.lib.org.apache.http.client.methods.HttpRequestWrapper;
 import com.feilong.lib.org.apache.http.client.protocol.HttpClientContext;
 import com.feilong.lib.org.apache.http.config.Lookup;
-import com.feilong.lib.org.apache.http.conn.ClientConnectionManager;
-import com.feilong.lib.org.apache.http.conn.ClientConnectionRequest;
 import com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager;
-import com.feilong.lib.org.apache.http.conn.ManagedClientConnection;
 import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
 import com.feilong.lib.org.apache.http.conn.routing.HttpRoutePlanner;
-import com.feilong.lib.org.apache.http.conn.scheme.SchemeRegistry;
 import com.feilong.lib.org.apache.http.cookie.CookieSpecProvider;
 import com.feilong.lib.org.apache.http.impl.execchain.ClientExecChain;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.BasicHttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.util.Args;
@@ -200,49 +194,49 @@ class InternalHttpClient extends CloseableHttpClient implements Configurable{
             }
         }
     }
+    //
+    //    @Override
+    //    public HttpParams getParams(){
+    //        throw new UnsupportedOperationException();
+    //    }
 
-    @Override
-    public HttpParams getParams(){
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ClientConnectionManager getConnectionManager(){
-
-        return new ClientConnectionManager(){
-
-            @Override
-            public void shutdown(){
-                connManager.shutdown();
-            }
-
-            @Override
-            public ClientConnectionRequest requestConnection(final HttpRoute route,final Object state){
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public void releaseConnection(final ManagedClientConnection conn,final long validDuration,final TimeUnit timeUnit){
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public SchemeRegistry getSchemeRegistry(){
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public void closeIdleConnections(final long idletime,final TimeUnit timeUnit){
-                connManager.closeIdleConnections(idletime, timeUnit);
-            }
-
-            @Override
-            public void closeExpiredConnections(){
-                connManager.closeExpiredConnections();
-            }
-
-        };
-
-    }
+    //    @Override
+    //    public ClientConnectionManager getConnectionManager(){
+    //
+    //        return new ClientConnectionManager(){
+    //
+    //            @Override
+    //            public void shutdown(){
+    //                connManager.shutdown();
+    //            }
+    //
+    //            @Override
+    //            public ClientConnectionRequest requestConnection(final HttpRoute route,final Object state){
+    //                throw new UnsupportedOperationException();
+    //            }
+    //
+    //            @Override
+    //            public void releaseConnection(final ManagedClientConnection conn,final long validDuration,final TimeUnit timeUnit){
+    //                throw new UnsupportedOperationException();
+    //            }
+    //
+    //            @Override
+    //            public SchemeRegistry getSchemeRegistry(){
+    //                throw new UnsupportedOperationException();
+    //            }
+    //
+    //            @Override
+    //            public void closeIdleConnections(final long idletime,final TimeUnit timeUnit){
+    //                connManager.closeIdleConnections(idletime, timeUnit);
+    //            }
+    //
+    //            @Override
+    //            public void closeExpiredConnections(){
+    //                connManager.closeExpiredConnections();
+    //            }
+    //
+    //        };
+    //
+    //    }
 
 }

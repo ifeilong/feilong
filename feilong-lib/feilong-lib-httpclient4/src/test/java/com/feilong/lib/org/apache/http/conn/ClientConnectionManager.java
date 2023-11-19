@@ -29,9 +29,6 @@ package com.feilong.lib.org.apache.http.conn;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
-import com.feilong.lib.org.apache.http.conn.scheme.SchemeRegistry;
-
 /**
  * Management interface for {@link ManagedClientConnection client connections}.
  * The purpose of an HTTP connection manager is to serve as a factory for new
@@ -49,20 +46,20 @@ import com.feilong.lib.org.apache.http.conn.scheme.SchemeRegistry;
  */
 @Deprecated
 public interface ClientConnectionManager{
+    //
+    //    /**
+    //     * Obtains the scheme registry used by this manager.
+    //     *
+    //     * @return the scheme registry, never {@code null}
+    //     */
+    //    SchemeRegistry getSchemeRegistry();
 
-    /**
-     * Obtains the scheme registry used by this manager.
-     *
-     * @return the scheme registry, never {@code null}
-     */
-    SchemeRegistry getSchemeRegistry();
-
-    /**
-     * Returns a new {@link ClientConnectionRequest}, from which a
-     * {@link ManagedClientConnection} can be obtained or the request can be
-     * aborted.
-     */
-    ClientConnectionRequest requestConnection(HttpRoute route,Object state);
+    //    /**
+    //     * Returns a new {@link ClientConnectionRequest}, from which a
+    //     * {@link ManagedClientConnection} can be obtained or the request can be
+    //     * aborted.
+    //     */
+    //    ClientConnectionRequest requestConnection(HttpRoute route,Object state);
 
     /**
      * Releases a connection for use by others.

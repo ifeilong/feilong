@@ -393,11 +393,11 @@ public class SessionInputBufferImpl implements SessionInputBuffer,BufferInfo{
         final int readLen = readLine(charbuffer);
         return readLen != -1 ? charbuffer.toString() : null;
     }
-
-    @Override
-    public boolean isDataAvailable(final int timeout) throws IOException{
-        return hasBufferedData();
-    }
+    //
+    //    @Override
+    //    public boolean isDataAvailable(final int timeout) throws IOException{
+    //        return hasBufferedData();
+    //    }
 
     @Override
     public HttpTransportMetrics getMetrics(){

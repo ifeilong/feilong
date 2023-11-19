@@ -33,8 +33,6 @@ import com.feilong.lib.org.apache.http.HttpHost;
 import com.feilong.lib.org.apache.http.HttpRequest;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
-import com.feilong.lib.org.apache.http.conn.ClientConnectionManager;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 
 /**
@@ -48,30 +46,30 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
 @SuppressWarnings("deprecation")
 public interface HttpClient{
 
-    /**
-     * Obtains the parameters for this client.
-     * These parameters will become defaults for all requests being
-     * executed with this client, and for the parameters of
-     * dependent objects in this client.
-     *
-     * @return the default parameters
-     *
-     * @deprecated (4.3) use
-     *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
-     */
-    @Deprecated
-    HttpParams getParams();
+    //    /**
+    //     * Obtains the parameters for this client.
+    //     * These parameters will become defaults for all requests being
+    //     * executed with this client, and for the parameters of
+    //     * dependent objects in this client.
+    //     *
+    //     * @return the default parameters
+    //     *
+    //     * @deprecated (4.3) use
+    //     *             {@link com.feilong.lib.org.apache.http.client.config.RequestConfig}.
+    //     */
+    //    @Deprecated
+    //    HttpParams getParams();
 
-    /**
-     * Obtains the connection manager used by this client.
-     *
-     * @return the connection manager
-     *
-     * @deprecated (4.3) use
-     *             {@link com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder}.
-     */
-    @Deprecated
-    ClientConnectionManager getConnectionManager();
+    //    /**
+    //     * Obtains the connection manager used by this client.
+    //     *
+    //     * @return the connection manager
+    //     *
+    //     * @deprecated (4.3) use
+    //     *             {@link com.feilong.lib.org.apache.http.impl.client.HttpClientBuilder}.
+    //     */
+    //    @Deprecated
+    //    ClientConnectionManager getConnectionManager();
 
     /**
      * Executes HTTP request using the default context.
