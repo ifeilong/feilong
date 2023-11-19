@@ -150,7 +150,7 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
         }
 
         //---------------------------------------------------------------
-        LOGGER.info("totalListSize:[{}],build [{}] threads,perHandleSize:[{}]", list.size(), threads.length, eachSize);
+        LOGGER.info("totalListSize:[{}],build [{}] threads,inputPerHandleSize:[{}]", list.size(), threads.length, eachSize);
         return threads;
     }
 

@@ -101,7 +101,7 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
         //---------------------------------------------------------------
         String partitionRunnableBuilderName = getName(partitionRunnableBuilder);
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("begin [{}],listSize:[{}],eachSize:[{}]", partitionRunnableBuilderName, list.size(), eachSize);
+            LOGGER.info("begin [{}],listSize:[{}],inputEachSize:[{}]", partitionRunnableBuilderName, list.size(), eachSize);
         }
 
         //---------------------------------------------------------------
