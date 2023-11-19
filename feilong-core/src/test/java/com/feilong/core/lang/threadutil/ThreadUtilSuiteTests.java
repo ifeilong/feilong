@@ -34,11 +34,13 @@ import org.junit.runners.Suite.SuiteClasses;
                 ExecuteWithPartitionRunnableBuilderParamMapTest.class,
 
                 ExecuteConfigWithParamMapTest.class,
+                ExecuteConfigWithParamMapAndPartitionPerHandlerTest.class,
+                ExecuteOnlyPartitionPerHandlerTest.class,
                 ExecuteCountTest.class,
 
                 PartitionEachSizeBuilderParameterizedTest.class,
                 PartitionEachSizeBuilderTest.class
-        //
+//
 })
 public class ThreadUtilSuiteTests{
 
