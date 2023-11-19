@@ -19,6 +19,9 @@ import static com.feilong.core.bean.ConvertUtil.toInteger;
 
 import java.math.RoundingMode;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.core.Validate;
 import com.feilong.core.lang.NumberUtil;
 
@@ -30,6 +33,10 @@ import com.feilong.core.lang.NumberUtil;
  */
 public class PartitionEachSizeThreadConfigBuilder implements PartitionEachSizeBuilder{
 
+    /** The Constant log. */
+    private static final Logger   LOGGER = LoggerFactory.getLogger(PartitionEachSizeThreadConfigBuilder.class);
+
+    //---------------------------------------------------------------
     /** The partition thread config. */
     private PartitionThreadConfig partitionThreadConfig;
 
@@ -82,6 +89,13 @@ public class PartitionEachSizeThreadConfigBuilder implements PartitionEachSizeBu
         //---------------------------------------------------------------
         //如果 totalSize 小于等于  minPerThreadHandlerCount(每个线程最少处理数量), 那么直接返回totalSize ,也就是说接下来开 1 个线程就足够了
         if (totalSize <= minPerThreadHandlerCount){
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info(
+                                "[BuildThreadEachSize]totalSize[{}]<=minPerThreadHandlerCount[{}],returnTotalSize:[{}]",
+                                totalSize,
+                                minPerThreadHandlerCount,
+                                totalSize);
+            }
             return totalSize;
         }
 
@@ -92,12 +106,35 @@ public class PartitionEachSizeThreadConfigBuilder implements PartitionEachSizeBu
 
         //那么最大只能开启 4 个线程, 返回的每个线程处理的数量是 100/4 =25
         if (threadCount >= maxThreadCount){
-            return toInteger(NumberUtil.getDivideValue(totalSize, maxThreadCount, 0, RoundingMode.UP));
+            Integer eachSize = toInteger(NumberUtil.getDivideValue(totalSize, maxThreadCount, 0, RoundingMode.UP));
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info(
+                                "[BuildThreadEachSize](totalSize[{}]/minPerThreadHandlerCount[{}]=threadCount:{}) >= maxThreadCount:{},return (totalSize[{}]/maxThreadCount[{}]) = [{}]",
+                                totalSize,
+                                minPerThreadHandlerCount,
+                                threadCount,
+                                maxThreadCount,
+
+                                totalSize,
+                                maxThreadCount,
+
+                                eachSize);
+            }
+            return eachSize;
         }
 
         //---------------------------------------------------------------
 
         //否则返回 threadCount
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(
+                            "[BuildThreadEachSize]totalSize[{}], {} ,return (totalSize[{}]/minPerThreadHandlerCount[{}]=threadCount:{})",
+                            totalSize,
+                            partitionThreadConfig,
+                            totalSize,
+                            minPerThreadHandlerCount,
+                            threadCount);
+        }
         return threadCount;
     }
 
