@@ -17,6 +17,7 @@ package com.feilong.tools.log;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.NumberUtil.getMultiplyValue;
 import static com.feilong.core.lang.NumberUtil.getSubtractValueWithScale;
 import static com.feilong.core.lang.StringUtil.EMPTY;
@@ -100,11 +101,11 @@ public class LogHelper{
         long useTime = System.currentTimeMillis() - currentBeginTimeMillis;
         appendItem(sb, " ,perUseTimes: ", formatDuration(useTime), 12);
 
-        //已经完成
         Long allBeginTimeMillis = processLogParamEntity.getAllBeginTimeMillis();
+        //已经完成
         if (BooleanUtils.isTrue(isFinish)){
             if (null != allBeginTimeMillis){
-                appendItem(sb, " ,totalUseTimes: ", formatDuration(System.currentTimeMillis() - allBeginTimeMillis), 12);
+                appendItem(sb, " ,总耗时(totalUseTimes): ", formatDuration(System.currentTimeMillis() - allBeginTimeMillis), 12);
             }
             return;
         }
@@ -118,7 +119,10 @@ public class LogHelper{
                         useTime, //
                         getSubtractValueWithScale(all, current, 0), //相减剩余量
                         0).longValue();
-        appendItem(sb, " ,estimatedRemainingTime: ", formatDuration(estimatedRemainingTime), 12);
+
+        //since 4.0.4
+        appendItem(sb, " ,已经执行时间(elapsedTime): ", formatDurationUseBeginTimeMillis(allBeginTimeMillis), 12);
+        appendItem(sb, " ,预估剩余时间(estimatedRemainingTime): ", formatDuration(estimatedRemainingTime), 12);
     }
 
     //---------------------------------------------------------------
