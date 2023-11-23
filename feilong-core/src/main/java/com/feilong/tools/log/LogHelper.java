@@ -120,8 +120,10 @@ public class LogHelper{
                         getSubtractValueWithScale(all, current, 0), //相减剩余量
                         0).longValue();
 
-        //since 4.0.4
-        appendItem(sb, " ,已经执行时间(elapsedTime): ", formatDurationUseBeginTimeMillis(allBeginTimeMillis), 12);
+        if (null != allBeginTimeMillis){
+            //since 4.0.4
+            appendItem(sb, " ,已经执行时间(elapsedTime): ", formatDurationUseBeginTimeMillis(allBeginTimeMillis), 12);
+        }
         appendItem(sb, " ,预估剩余时间(estimatedRemainingTime): ", formatDuration(estimatedRemainingTime), 12);
     }
 
