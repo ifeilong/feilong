@@ -24,6 +24,7 @@ import com.feilong.json.processor.AlbumBrowseRecordJsonTest;
 import com.feilong.json.processor.CrmAddpointCommandJsonTest;
 import com.feilong.json.processor.JsonValueProcessorSuiteTests;
 import com.feilong.json.tobean.ToBeanSuiteTests;
+import com.feilong.json.tostring.ToStringSuiteTests;
 import com.feilong.json.transformer.JavaIdentifierTransformerSuiteTests;
 import com.feilong.lib.json.util.PropertySetStrategyTest;
 
@@ -37,6 +38,8 @@ import com.feilong.lib.json.util.PropertySetStrategyTest;
                 JsonValueProcessorSuiteTests.class,
 
                 FormatSuiteTests.class,
+                ToStringSuiteTests.class,
+
                 ToBeanSuiteTests.class,
 
                 JavaIdentifierTransformerSuiteTests.class,

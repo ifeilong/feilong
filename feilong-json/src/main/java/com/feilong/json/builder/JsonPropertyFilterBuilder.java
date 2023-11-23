@@ -48,8 +48,14 @@ class JsonPropertyFilterBuilder{
      */
     static PropertyFilter build(JavaToJsonConfig useJavaToJsonConfig){
         String[] includes = useJavaToJsonConfig.getIncludes();
+
+        //或者的关系,  只要有一个是true ,那么就返回true
         return new OrPropertyFilter(//    
-                        useJavaToJsonConfig.getIsIgnoreNullValueElement() ? IgnoreNullValueElementPropertyFilter.INSTANCE : null,
+                        useJavaToJsonConfig.getIsIgnoreNullValueElement()
+                                        ? new IgnoreNullValueElementPropertyFilter(
+                                                        useJavaToJsonConfig.getIfIgnoreNullValueElementIncludes())
+                                        : null,
+
                         useJavaToJsonConfig.getPropertyFilter(),
                         isNullOrEmpty(includes) ? null : new ArrayContainsPropertyNamesPropertyFilter(includes) //如果不在元素内 也不输出
         );

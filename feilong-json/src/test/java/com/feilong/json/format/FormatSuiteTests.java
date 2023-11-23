@@ -29,6 +29,7 @@ import com.feilong.json.format.sdk.PropertyFilterTest;
                 FormatBeanErrorPropertyTest.class,
 
                 FormatBeanIgnoreNullWithIsIgnoreNullValueElementTest.class,
+                FormatBeanIgnoreNullWithIsIgnoreNullValueElementAndIfIgnoreNullValueElementIncludesTest.class,
 
                 FormatBeanSensitiveWordsTest.class,
                 FormatBeanSensitiveWordsNoTest.class,

@@ -279,6 +279,25 @@ public final class JsonUtil{
         return format(obj, new JavaToJsonConfig(isIgnoreNullValueElement));
     }
 
+    /**
+     * 将对象 <code>obj</code> 格式化成json字符串,支持 <code>isIgnoreNullValueElement</code> 参数控制是否输出 null 值元素,如果isIgnoreNullValueElement设置为true,还可以使用
+     * ifIgnoreNullValueElementIncludes来控制需要强行输出的白名单.
+     * 
+     * @param obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param isIgnoreNullValueElement
+     *            是否忽略 null value 元素,true 表示忽略
+     * @param ifIgnoreNullValueElementIncludes
+     *            the if ignore null value element includes
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see #format(Object, JavaToJsonConfig)
+     * @see com.feilong.json.JavaToJsonConfig#JavaToJsonConfig(boolean)
+     * @since 4.0.4
+     */
+    public static String format(Object obj,boolean isIgnoreNullValueElement,String...ifIgnoreNullValueElementIncludes){
+        return format(obj, new JavaToJsonConfig(isIgnoreNullValueElement, ifIgnoreNullValueElementIncludes));
+    }
+
     //---------------------------------------------------------------
 
     /**
@@ -480,6 +499,25 @@ public final class JsonUtil{
      */
     public static String toString(Object obj,boolean isIgnoreNullValueElement){
         return toString(obj, new JavaToJsonConfig(isIgnoreNullValueElement));
+    }
+
+    /**
+     * 将对象 <code>obj</code> 格式化成json字符串,支持 <code>isIgnoreNullValueElement</code> 参数控制是否输出 null 值元素,如果isIgnoreNullValueElement设置为true,还可以使用
+     * ifIgnoreNullValueElementIncludes来控制需要强行输出的白名单.
+     *
+     * @param obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param isIgnoreNullValueElement
+     *            是否忽略 null value 元素,true 表示忽略
+     * @param ifIgnoreNullValueElementIncludes
+     *            the if ignore null value element includes
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see #format(Object, JavaToJsonConfig)
+     * @see com.feilong.json.JavaToJsonConfig#JavaToJsonConfig(boolean)
+     * @since 4.0.4
+     */
+    public static String toString(Object obj,boolean isIgnoreNullValueElement,String...ifIgnoreNullValueElementIncludes){
+        return toString(obj, new JavaToJsonConfig(isIgnoreNullValueElement, ifIgnoreNullValueElementIncludes));
     }
 
     /**
@@ -1530,6 +1568,17 @@ public final class JsonUtil{
         return noRootClass ? (T) value : objectToBean(value, jsonToJavaConfig);
     }
 
+    /**
+     * Object to bean.
+     *
+     * @param <T>
+     *            the generic type
+     * @param json
+     *            the json
+     * @param jsonToJavaConfig
+     *            the json to java config
+     * @return the t
+     */
     @SuppressWarnings("unchecked")
     private static <T> T objectToBean(Object json,JsonToJavaConfig jsonToJavaConfig){
         if (isNullOrEmpty(json)){

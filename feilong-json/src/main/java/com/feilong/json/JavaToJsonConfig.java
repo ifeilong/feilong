@@ -119,6 +119,17 @@ public class JavaToJsonConfig extends AbstractConfig{
      */
     private boolean                              isIgnoreNullValueElement    = false;
 
+    /**
+     * 如果忽略null value元素,白名单.
+     * 
+     * <p>
+     * 仅当isIgnoreNullValueElement=true才生效
+     * </p>
+     * 
+     * @since 4.0.4
+     */
+    private String[]                             ifIgnoreNullValueElementIncludes;
+
     //---------------------------------------------------------------
 
     /** 包含属性名称的数组. */
@@ -302,6 +313,21 @@ public class JavaToJsonConfig extends AbstractConfig{
     public JavaToJsonConfig(boolean isIgnoreNullValueElement){
         super();
         this.isIgnoreNullValueElement = isIgnoreNullValueElement;
+    }
+
+    /**
+     * Instantiates a new java to json config.
+     *
+     * @param isIgnoreNullValueElement
+     *            是否忽略 null value 元素,默认 false,表示不忽略.
+     * @param ifIgnoreNullValueElementIncludes
+     *            如果忽略null value元素,白名单.
+     * @since 4.0.4
+     */
+    public JavaToJsonConfig(boolean isIgnoreNullValueElement, String[] ifIgnoreNullValueElementIncludes){
+        super();
+        this.isIgnoreNullValueElement = isIgnoreNullValueElement;
+        this.ifIgnoreNullValueElementIncludes = ifIgnoreNullValueElementIncludes;
     }
 
     /**
@@ -884,7 +910,41 @@ public class JavaToJsonConfig extends AbstractConfig{
         this.propertyFilter = propertyFilter;
     }
 
+    /**
+     * 如果忽略null value元素,白名单.
+     * 
+     * <p>
+     * 仅当isIgnoreNullValueElement=true才生效
+     * </p>
+     *
+     * @return the ifIgnoreNullValueElementIncludes
+     * @since 4.0.4
+     */
+    public String[] getIfIgnoreNullValueElementIncludes(){
+        return ifIgnoreNullValueElementIncludes;
+    }
+
+    /**
+     * 如果忽略null value元素,白名单.
+     * 
+     * <p>
+     * 仅当isIgnoreNullValueElement=true才生效
+     * </p>
+     *
+     * @param ifIgnoreNullValueElementIncludes
+     *            the ifIgnoreNullValueElementIncludes to set
+     * @since 4.0.4
+     */
+    public void setIfIgnoreNullValueElementIncludes(String[] ifIgnoreNullValueElementIncludes){
+        this.ifIgnoreNullValueElementIncludes = ifIgnoreNullValueElementIncludes;
+    }
+
     //---------------------------------------------------------------
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     /*
      * (non-Javadoc)
      * 
