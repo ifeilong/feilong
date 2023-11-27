@@ -77,7 +77,7 @@ package com.feilong.lib.io;
  */
 public class FilenameUtils{
 
-    private static final int  NOT_FOUND           = -1;
+    public static final int   NOT_FOUND           = -1;
 
     /**
      * The extension separator character.

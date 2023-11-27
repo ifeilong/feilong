@@ -31,7 +31,7 @@ import com.feilong.lib.io.FilenameUtils;
 import com.feilong.lib.lang3.StringUtils;
 
 /**
- * The Class FilenameUtil.
+ * 专注于处理文件名字或者路径的工具类.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @see com.feilong.lib.io.FilenameUtils
@@ -150,6 +150,50 @@ public final class FilenameUtil{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 判断文件的扩展名是不是指定的扩展名中间的一个(忽略大小写比较).
+     * <p>
+     * This method obtains the extension as the textual part of the filename after the last dot. There must be no directory separator after
+     * the dot.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * isExtensionIgnoreCase("","avi") {@code -->} false
+     * isExtensionIgnoreCase(null,"avi") {@code -->} false
+     * isExtensionIgnoreCase("苍老师.avi","mp3", "avi") {@code -->} true
+     * isExtensionIgnoreCase("苍老师.avi", "avi") {@code -->} true
+     * isExtensionIgnoreCase("苍老师.avi", "mp3") {@code -->} false
+     * isExtensionIgnoreCase("苍老师.avi", "Avi") {@code -->} true
+     * isExtensionIgnoreCase("苍老师.avI", "Avi") {@code -->} true
+     * isExtensionIgnoreCase("/Users/苍老师", null) {@code -->} true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param filename
+     *            the filename to query, null returns false
+     * @param extensions
+     *            the extensions to check for, null checks for no extension
+     * @return true if the filename is one of the extensions (忽略大小写)
+     *         如果 <code>filename</code> 是null,返回false<br>
+     *         如果 <code>filename</code> 是blank,返回false<br>
+     * @since 4.0.5
+     */
+    public static boolean isExtensionIgnoreCase(String filename,String...extensions){
+        if (isNullOrEmpty(filename)){
+            return false;
+        }
+        if (extensions == null || extensions.length == 0){
+            return FilenameUtils.indexOfExtension(filename) == FilenameUtils.NOT_FOUND;
+        }
+        String fileExt = getExtension(filename);
+        return StringUtils.equalsAnyIgnoreCase(fileExt, extensions);
+    }
 
     /**
      * 获得文件后缀名(不带. 的后缀),并返回原样字母.

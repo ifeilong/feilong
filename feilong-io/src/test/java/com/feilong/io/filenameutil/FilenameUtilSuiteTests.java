@@ -28,6 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetParentPathListTest.class,
                 GetExtensionParameterizedTest.class,
 
+                IsExtensionIgnoreCaseParameterizedTest.class,
                 GetExtensionLowerCaseTest.class,
                 GetExtensionLowerCaseParameterizedTest.class
 
