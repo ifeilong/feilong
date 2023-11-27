@@ -57,7 +57,13 @@ public class PropertySetStrategy{
             if (ClassUtil.isInstance(e, NoSuchMethodException.class)){
                 LOGGER.warn("in class:[{}],can't find property:[{}],ignore~~", bean.getClass().getName(), key);
             }else{
-                LOGGER.warn(e.getMessage(), e);
+                //Cannot invoke CopyrightAlbumOpenPlatformEntity.setExpireDate on bean class 'class com.xxxxx.openapi.classify.sync.model.CopyrightAlbumOpenPlatformEntity' - java.lang.ClassCastException@5257f997 - had objects of type "java.lang.Integer" but expected signature "java.util.Date"
+                //java.lang.IllegalArgumentException: Cannot invoke com.xxxx.openapi.classify.sync.model.CopyrightAlbumOpenPlatformEntity.setExpireDate on bean class 'class com.xxxx.openapi.classify.sync.model.CopyrightAlbumOpenPlatformEntity' - java.lang.ClassCastException@5257f997 - had objects of type "java.lang.Integer" but expected signature "java.util.Date"
+                //since 4.0.5 change log
+                LOGGER.warn(
+                                "bean:[" + bean.getClass().getSimpleName() + " " + bean.toString() + "],key:[" + key + "],value:[" + value
+                                                + "] " + e.getMessage(),
+                                e);
             }
         }
     }
