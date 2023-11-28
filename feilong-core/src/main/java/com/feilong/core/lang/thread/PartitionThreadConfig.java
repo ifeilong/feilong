@@ -32,11 +32,19 @@ public class PartitionThreadConfig{
 
     //---------------------------------------------------------------
 
-    /** 启动最大线程数. */
-    private int                         maxThreadCount           = 100;
+    /**
+     * 启动最大线程数.
+     * 
+     * @since 4.0.6 change 100 to 20
+     */
+    private int                               maxThreadCount           = 20;
 
-    /** 每个线程最少处理数量. */
-    private int                         minPerThreadHandlerCount = 20;
+    /**
+     * 每个线程最少处理数量.
+     * 
+     * @since 4.0.6 change 20 to 1
+     */
+    private int                               minPerThreadHandlerCount = 1;
 
     //---------------------------------------------------------------
 

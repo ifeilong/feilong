@@ -86,6 +86,15 @@ public class PartitionEachSizeThreadConfigBuilder implements PartitionEachSizeBu
 
         Validate.isTrue(maxThreadCount > 0, "maxThreadCount must >0,totalSize:%s", maxThreadCount);
         Validate.isTrue(minPerThreadHandlerCount > 0, "minPerThreadHandlerCount must >0,totalSize:%s", minPerThreadHandlerCount);
+
+        //since 4.0.6 just log
+        if (LOGGER.isInfoEnabled() && maxThreadCount > 20){
+            LOGGER.info(
+                            "[BuildThreadEachSize]partitionThreadConfig:[{}],maxThreadCount[{}]>20; If the service thread configuration is not high, there may be risks",
+                            partitionThreadConfig,
+                            maxThreadCount);
+        }
+
         //---------------------------------------------------------------
         //如果 totalSize 小于等于  minPerThreadHandlerCount(每个线程最少处理数量), 那么直接返回totalSize ,也就是说接下来开 1 个线程就足够了
         if (totalSize <= minPerThreadHandlerCount){
