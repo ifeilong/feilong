@@ -16,7 +16,9 @@
 package com.feilong.core.lang.thread;
 
 import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.lang.ObjectUtil.defaultEmptyStringIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.lib.lang3.ClassUtils.getSimpleName;
 
 import java.util.List;
@@ -26,6 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.lang.ThreadUtil;
+import com.feilong.core.util.MapUtil;
 
 /**
  * 抽象实现 (模板方法设计模式).
@@ -93,15 +98,17 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
      */
     @Override
     public <T> void execute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionRunnableBuilder<T> partitionRunnableBuilder){
-        Validate.notEmpty(list, "list can't be null/empty!");
-        Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!");
+        String logKey = getLogKey(paramsMap);
 
-        Validate.isTrue(eachSize > 0, "eachSize must > 0");
+        Validate.notEmpty(list, "list can't be null/empty!%s", logKey);
+        Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!%s", logKey);
+
+        Validate.isTrue(eachSize > 0, "eachSize must > 0;%s", logKey);
 
         //---------------------------------------------------------------
         String partitionRunnableBuilderName = getName(partitionRunnableBuilder);
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("begin [{}],listSize:[{}],inputEachSize:[{}]", partitionRunnableBuilderName, list.size(), eachSize);
+            LOGGER.info("{} begin [{}],listSize:[{}],inputEachSize:[{}]", logKey, partitionRunnableBuilderName, list.size(), eachSize);
         }
 
         //---------------------------------------------------------------
@@ -111,7 +118,12 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("end [{}],useTime:[{}]", partitionRunnableBuilderName, formatDurationUseBeginTimeMillis(beginTimeMillis));
+
+            LOGGER.info(
+                            "{} end [{}],useTime:[{}]",
+                            logKey,
+                            partitionRunnableBuilderName,
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
     }
 
@@ -160,5 +172,16 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
      */
     protected static <T> String getName(PartitionRunnableBuilder<T> partitionRunnableBuilder){
         return defaultIfNullOrEmpty(getSimpleName(partitionRunnableBuilder.getClass()), partitionRunnableBuilder.getClass().getName());
+    }
+
+    static final String getLogKey(Map<String, ?> paramsMap){
+        if (null == paramsMap){
+            return EMPTY;
+        }
+        Object toBeConvertedValue = MapUtil.get(paramsMap, ThreadUtil.LOG_KEY_NAME_IN_MAP);
+        if (null == toBeConvertedValue){
+            return EMPTY;
+        }
+        return defaultEmptyStringIfNull(ConvertUtil.toString(toBeConvertedValue));
     }
 }

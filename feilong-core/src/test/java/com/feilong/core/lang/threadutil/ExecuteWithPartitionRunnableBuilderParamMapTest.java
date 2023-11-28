@@ -36,6 +36,7 @@ import com.feilong.core.lang.threadutil.entity.EmptyPartitionRunnableBuilder;
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.10.3
  */
+@Deprecated
 public class ExecuteWithPartitionRunnableBuilderParamMapTest extends AbstractExcuteTest{
 
     /**

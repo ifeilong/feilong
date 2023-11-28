@@ -25,6 +25,7 @@ import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.threadutil.entity.EmptyPartitionPerHandler;
 
+@Deprecated
 public class ExecuteWithPartitionPerHandlerTest extends AbstractExcuteTest{
 
     @Test

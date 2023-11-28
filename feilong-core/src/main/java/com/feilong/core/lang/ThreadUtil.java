@@ -17,7 +17,6 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,6 @@ import com.feilong.core.lang.thread.PartitionPerElementHandler;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 import com.feilong.core.lang.thread.PartitionThreadConfig;
-import com.feilong.core.util.MapUtil;
 
 /**
  * 线程相关工具类.
@@ -312,7 +310,7 @@ public final class ThreadUtil{
      * 
      *     public void run(){
      *         String uri = "http://127.0.0.1:8084?name=jinxin{@code &}age=18";
-     *         LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
+     *         HttpClientUtil.get(uri, toMap("country", "china"));
      *     }
      * }, 20);
      * 
@@ -407,7 +405,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -447,7 +444,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                     }
      *                 }
@@ -456,7 +452,6 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -667,7 +662,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -707,7 +701,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                     }
      *                 }
@@ -716,7 +709,6 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -778,7 +770,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -801,9 +792,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1040,7 +1029,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1076,14 +1064,12 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                 }
      *         }
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -1145,7 +1131,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -1168,9 +1153,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1279,7 +1262,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1308,13 +1290,11 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                 }
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -1376,7 +1356,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -1399,9 +1378,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1493,7 +1470,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1522,13 +1498,11 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                 }
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -1590,7 +1564,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -1613,9 +1586,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1709,7 +1680,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1738,13 +1708,11 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                 }
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -1806,7 +1774,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -1829,9 +1796,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1926,7 +1891,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -1955,13 +1919,11 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                 }
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -2023,7 +1985,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -2046,9 +2007,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -2146,7 +2105,6 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -2182,14 +2140,12 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      *                 }
      *         }
      * 
      *     });
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -2251,7 +2207,6 @@ public final class ThreadUtil{
      *                         try{
      *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
      *                         }
      * 
      *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
@@ -2274,9 +2229,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -2389,17 +2342,6 @@ public final class ThreadUtil{
             // clean up state...
             Thread.currentThread().interrupt();
         }
-    }
-
-    /**
-     * Gets the log key.
-     *
-     * @param paramsMap
-     *            the params map
-     * @return the log key
-     */
-    static final String getLogKey(Map<String, ?> paramsMap){
-        return null == paramsMap ? EMPTY : ("" + MapUtil.get(paramsMap, LOG_KEY_NAME_IN_MAP));
     }
 
 }

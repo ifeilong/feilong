@@ -49,7 +49,7 @@ public class PartitionEachSizeBuilderParameterizedTest
                                               { 100, new PartitionThreadConfig(2, 50), 50 },
 
                                               { 100, new PartitionThreadConfig(1, 50), 100 },
-                                              { 300000, new PartitionThreadConfig(), 3000 },
+                                              { 300000, new PartitionThreadConfig(), 15000 },
                                               { 300000, new PartitionThreadConfig(100, 100000), 3 },
 
                                               { 100, new PartitionThreadConfig(2, 30), 50 },

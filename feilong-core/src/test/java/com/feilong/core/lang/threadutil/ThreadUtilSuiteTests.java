@@ -33,6 +33,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ExecuteWithPartitionRunnableBuilderParamMapTest.class,
 
+                ExecuteUsePerElementOnlyPartitionPerElementHandlerTest.class,
+                ExecuteUsePerElementWithParamMapAndPartitionPerElementHandlerTest.class,
+                ExecuteUsePerElementConfigWithPartitionPerElementHandlerTest.class,
+
                 ExecuteConfigWithParamMapTest.class,
                 ExecuteConfigWithParamMapAndPartitionPerHandlerTest.class,
                 ExecuteOnlyPartitionPerHandlerTest.class,
