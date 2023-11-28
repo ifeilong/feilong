@@ -61,6 +61,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetTest.class,
 
                 GetByKeyTest.class,
+                GetDefaultEmptyStringIfNullTest.class,
                 GetOrDefaultTest.class,
 //
 })

@@ -22,7 +22,9 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toSet;
+import static com.feilong.core.lang.ObjectUtil.defaultEmptyStringIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
 
@@ -464,6 +466,51 @@ public final class MapUtil{
             return null;
         }
         return map.get(key);
+    }
+
+    /**
+     * 获取value.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>取值前,判断了map是否是null,如果是null直接返回""</li>
+     * <li>如果对应的value 是null,也会返回""</li>
+     * <li>值会自动转换成字符串</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * MapUtil.getDefaultEmptyStringIfNull(null, "name")) = ""
+     * MapUtil.getDefaultEmptyStringIfNull(toMap("name", "jim"), "name")) = "jim"
+     * MapUtil.getDefaultEmptyStringIfNull(toMap("name", "jim"), "name1")) = ""
+     * MapUtil.getDefaultEmptyStringIfNull(toMap("name", 7777), "name")) = "7777"
+     * MapUtil.getDefaultEmptyStringIfNull(toMap("name", 7777L), "name")) = "7777"
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @return 如果 <code>map</code> 是null,返回 EMPTY<br>
+     *         否则获取map中key的值, 转成字符串, 如果发现是null ,返回 EMPTY<br>
+     * @since 4.0.6
+     */
+    public static <K, V> String getDefaultEmptyStringIfNull(Map<K, V> map,K key){
+        if (null == map){
+            return EMPTY;
+        }
+        return defaultEmptyStringIfNull(ConvertUtil.toString(get(map, key)));
     }
 
     /**
