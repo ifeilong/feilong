@@ -33,4 +33,12 @@ public interface Bot{
      */
     boolean sendMessage(String content);
 
+    /**
+     * 获取该机器人的key(微信机器人是key属性, 钉钉是accessToken属性).
+     *
+     * @return the key
+     * @since 4.0.6
+     */
+    String getKey();
+
 }

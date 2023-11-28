@@ -294,4 +294,9 @@ public class DefaultDingTalkBot extends AbstractBot implements DingTalkBot{
         this.defaultTitle = defaultTitle;
     }
 
+    @Override
+    public String getKey(){
+        return accessToken;
+    }
+
 }
