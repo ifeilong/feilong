@@ -16,7 +16,6 @@
 package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.ISO_8859_1;
-import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.URIComponents.SCHEME_HTTP;
 import static com.feilong.core.URIComponents.SCHEME_HTTPS;
@@ -60,6 +59,7 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.EnumerationUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.ReaderUtil;
@@ -734,43 +734,80 @@ public final class RequestUtil{
         return isNotNullOrEmpty(servletPath) ? servletPath : request.getServletPath();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得请求的全地址.
      * 
-     * <ul>
-     * <li>如果request不含queryString,直接返回 requestURL(比如post请求)</li>
-     * <li>如果request含queryString,直接返回 requestURL+编码后的queryString</li>
-     * </ul>
+     * @param request
+     *            the request
+     * @return 如:http://localhost:8080/feilong/requestdemo.jsp?id=2
+     * @since 3.1.1
+     * @since 4.0.6 修改内部实现逻辑,原先直接使用request.getQueryString() 拼接,现在改成兼容非get类型,从参数中提取, see
+     *        {@link <a href="https://github.com/ifeilong/feilong/issues/76">post 请求 显示的full url不全 #76</a>}
+     */
+    public static String getRequestFullURL(HttpServletRequest request){
+        StringBuilder sb = new StringBuilder(getRequestURL(request));
+
+        //---------------------------------------------------------------
+        //提取参数,转成类似于queryString字符串.
+        String queryString = parseParamsToQueryString(request);
+        if (isNotNullOrEmpty(queryString)){
+            sb.append(QUESTIONMARK).append(queryString);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 获得请求的全地址.
      * 
      * @param request
      *            the request
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return 如:http://localhost:8080/feilong/requestdemo.jsp?id=2
+     * @since 4.0.6 修改内部实现逻辑,原先直接使用request.getQueryString() 拼接,现在改成兼容非get类型,从参数中提取, see
+     *        {@link <a href="https://github.com/ifeilong/feilong/issues/76">post 请求 显示的full url不全 #76</a>}
+     * @deprecated since 4.0.6这个不需要charsetType,直接使用 {@link #getRequestFullURL(HttpServletRequest)} 就好
      */
+    @Deprecated
     public static String getRequestFullURL(HttpServletRequest request,String charsetType){
-        String requestURL = getRequestURL(request);
-        String queryString = request.getQueryString();
-        return isNullOrEmpty(queryString) ? requestURL : requestURL + QUESTIONMARK + decodeISO88591String(queryString, charsetType);
+        return getRequestFullURL(request);
     }
 
     /**
-     * 获得请求的全地址.
+     * 提取参数,转成类似于queryString字符串.
      * 
      * <ul>
-     * <li>如果request不含queryString,直接返回 requestURL(比如post请求)</li>
-     * <li>如果request含queryString,直接返回 requestURL+编码后的queryString</li>
+     * <li>如果request是get 请求,那么直接返回 request.getQueryString()</li>
+     * <li>如果request不是get,那么提取参数组装成字符串返回</li>
      * </ul>
-     * 
-     * 字符编码,默认使用 {@link CharsetType#UTF8}
      * 
      * @param request
      *            the request
-     * @return 如:http://localhost:8080/feilong/requestdemo.jsp?id=2
-     * @since 3.1.1
+     * @return 如果 <code>request</code> 是null,返回 ""<br>
+     *         如果request是get 请求,那么直接返回 request.getQueryString()<br>
+     *         如果request不是get,那么提取参数组装成字符串返回</li>
+     * @see javax.servlet.http.HttpServletRequest#getMethod()
+     * @since 4.0.6
      */
-    public static String getRequestFullURL(HttpServletRequest request){
-        return getRequestFullURL(request, UTF8);
+    public static String parseParamsToQueryString(HttpServletRequest request){
+        if (null == request){
+            return EMPTY;
+        }
+        //---------------------------------------------------------------
+        String method = request.getMethod();
+        if ("get".equalsIgnoreCase(method)){
+            //request.getQueryString() : 返回 the query string that is contained in the request URL after the path.<br>
+            //This method returns null if the URL does not have a query string.<br>
+            // Same as the value of the CGI variable QUERY_STRING.<br>
+            // 它只对get方法得到的数据有效.
+            return request.getQueryString();
+        }
+        //---------------------------------------------------------------
+        Map<String, String[]> map = getParameterMap(request);
+        //内部判断是null
+        return ParamUtil.toQueryStringUseArrayValueMap(map);
     }
 
     //---------------------------------------------------------------

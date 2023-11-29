@@ -16,7 +16,6 @@
 package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.servlet.http.RequestAttributes.ERROR_EXCEPTION;
@@ -43,7 +42,6 @@ import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.lib.lang3.builder.Builder;
 import com.feilong.servlet.http.entity.RequestIdentity;
@@ -547,34 +545,8 @@ class RequestLogBuilder implements Builder<Map<String, Object>>{
         //Same as the value of the CGI variable QUERY_STRING. 
         map.put("request.getQueryString()", request.getQueryString());
 
-        map.put("getQueryStringLog", getQueryStringLog());
+        map.put("getQueryStringLog", RequestUtil.parseParamsToQueryString(request));
         return map;
     }
 
-    //---------------------------------------------------------------
-
-    /**
-     * 获取queryString (支持 post/get).
-     *
-     * @return the query string
-     * @see javax.servlet.http.HttpServletRequest#getMethod()
-     */
-    private String getQueryStringLog(){
-        // 返回 the name of the HTTP method with which this request was made,
-        // for example, GET, POST, or PUT.
-        // Same as the value of the CGI variable REQUEST_METHOD.
-        String method = request.getMethod();
-
-        if ("post".equalsIgnoreCase(method)){
-            Map<String, String[]> map = RequestUtil.getParameterMap(request);
-            if (isNotNullOrEmpty(map)){
-                return ParamUtil.toQueryStringUseArrayValueMap(map);
-            }
-        }
-        // 返回 the query string that is contained in the request URL after the path.
-        // This method returns null if the URL does not have a query string.
-        // Same as the value of the CGI variable QUERY_STRING.
-        // 它只对get方法得到的数据有效.
-        return request.getQueryString();
-    }
 }
