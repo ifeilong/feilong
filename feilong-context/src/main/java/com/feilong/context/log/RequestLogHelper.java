@@ -60,9 +60,9 @@ public final class RequestLogHelper{
     private static String getRequestInfo(){
         HttpServletRequest request = WebSpringUtil.getRequest();
         return formatPattern(
-                        "api:[{}],queryString:[{}]",
+                        "api:[{}],paramString:[{}]",
                         null == request ? EMPTY : RequestUtil.getRequestURL(request), //request.getPathInfo(),//可能是null
-                        null == request ? EMPTY : request.getQueryString());
+                        RequestUtil.parseParamsToQueryString(request));
     }
 
 }
