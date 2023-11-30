@@ -253,8 +253,9 @@
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
 		<v.versions-maven-plugin>2.16.0</v.versions-maven-plugin>
 
-		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
-		<v.maven-project-info-reports-plugin>3.4.5</v.maven-project-info-reports-plugin>
+		<!-- 生成项目总报告  -->
+		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/  -->
+		<v.maven-project-info-reports-plugin>3.5.0</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
 		<v.jacoco-maven-plugin>0.8.8</v.jacoco-maven-plugin>
