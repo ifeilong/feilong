@@ -241,6 +241,8 @@
 		<v.native2ascii-maven-plugin>2.1.0</v.native2ascii-maven-plugin>
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
+		
+		<!-- 用来将jar发布到中央仓库的 -->
 		<v.nexus-staging-maven-plugin>1.6.13</v.nexus-staging-maven-plugin>
 
 		<!-- taglist 检查报告 -->
@@ -1030,6 +1032,13 @@
 						<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
 						<helpPackageName>org.apache.maven.plugins.help</helpPackageName>
 					</configuration>
+				</plugin>
+				
+				
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${v.nexus-staging-maven-plugin}</version>
 				</plugin>
 
 			</plugins>

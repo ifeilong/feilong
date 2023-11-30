@@ -589,11 +589,6 @@
 					<version>${v.maven-javadoc-plugin}</version>
 				</plugin>
 
-				<plugin>
-					<groupId>org.sonatype.plugins</groupId>
-					<artifactId>nexus-staging-maven-plugin</artifactId>
-					<version>${v.nexus-staging-maven-plugin}</version>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
