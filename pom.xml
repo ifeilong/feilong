@@ -241,7 +241,7 @@
 		<v.native2ascii-maven-plugin>2.1.0</v.native2ascii-maven-plugin>
 
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
-		<v.nexus-staging-maven-plugin>1.6.8</v.nexus-staging-maven-plugin>
+		<v.nexus-staging-maven-plugin>1.6.13</v.nexus-staging-maven-plugin>
 
 		<!-- taglist 检查报告 -->
 		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>
