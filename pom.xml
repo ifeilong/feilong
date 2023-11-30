@@ -220,7 +220,7 @@
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.1.2</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.2.2</v.maven-surefire-plugin>
 
 
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
@@ -251,10 +251,11 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.16.0</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.16.2</v.versions-maven-plugin>
 
 		<!-- 生成项目总报告  -->
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/  -->
+		<!-- https://issues.apache.org/jira/projects/MPIR?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&status=released-unreleased  -->
 		<v.maven-project-info-reports-plugin>3.5.0</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->

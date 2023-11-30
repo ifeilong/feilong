@@ -66,7 +66,7 @@
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.1.2</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.2.2</v.maven-surefire-plugin>
 
 		<v.maven-gpg-plugin>1.6</v.maven-gpg-plugin>
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
