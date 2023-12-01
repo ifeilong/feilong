@@ -23,6 +23,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.lang.ObjectUtil.defaultEmptyStringIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.tokenizeToStringArray;
@@ -802,7 +803,10 @@ public final class RequestUtil{
             //This method returns null if the URL does not have a query string.<br>
             // Same as the value of the CGI variable QUERY_STRING.<br>
             // 它只对get方法得到的数据有效.
-            return request.getQueryString();
+
+            //a <code>String</code> containing the query string or <code>null</code> if the URL contains no query string. 
+            //The value is not decoded by the container.
+            return defaultEmptyStringIfNull(request.getQueryString());
         }
         //---------------------------------------------------------------
         Map<String, String[]> map = getParameterMap(request);
