@@ -19,6 +19,41 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.util.collectionsutil.add.AddAllIgnoreNullTest;
+import com.feilong.core.util.collectionsutil.add.AddIfConditionTest;
+import com.feilong.core.util.collectionsutil.add.AddIgnoreNullOrEmptyIterableTest;
+import com.feilong.core.util.collectionsutil.add.AddIgnoreNullOrEmptyTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueListBeanTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueListBeanWithReturnElementClassTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueListFunctionTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueListPropertyNameTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueListTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueListWithReturnElementClassTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueMapTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueSetTest;
+import com.feilong.core.util.collectionsutil.get.GetPropertyValueSetWithReturnElementClassTest;
+import com.feilong.core.util.collectionsutil.group.GroupOneTest;
+import com.feilong.core.util.collectionsutil.group.GroupWithPropertyNameAndPredicateTest;
+import com.feilong.core.util.collectionsutil.group.GroupWithPropertyNameTest;
+import com.feilong.core.util.collectionsutil.group.GroupWithTransformerAndPredicateTest;
+import com.feilong.core.util.collectionsutil.group.GroupWithTransformerTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveAllCollectionTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveAllNullTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveDuplicateOnePropertyNameTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveDuplicatePropertyNamesTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveDuplicateTest;
+import com.feilong.core.util.collectionsutil.remove.RemoveElementTest;
+import com.feilong.core.util.collectionsutil.select.SelectArrayTest;
+import com.feilong.core.util.collectionsutil.select.SelectCollectionTest;
+import com.feilong.core.util.collectionsutil.select.SelectNotNullOrEmptyStringPredicateTest;
+import com.feilong.core.util.collectionsutil.select.SelectPredicateTest;
+import com.feilong.core.util.collectionsutil.select.SelectRegexStringPredicateTest;
+import com.feilong.core.util.collectionsutil.select.SelectRejectedArrayTest;
+import com.feilong.core.util.collectionsutil.select.SelectRejectedCollectionTest;
+import com.feilong.core.util.collectionsutil.select.SelectRejectedMapTest;
+import com.feilong.core.util.collectionsutil.select.SelectRejectedPredicateTest;
+import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
+
 @RunWith(Suite.class)
 @SuiteClasses({
 
