@@ -55,6 +55,7 @@ import com.feilong.core.util.transformer.BeanTransformer;
 import com.feilong.lib.collection4.CollectionUtils;
 import com.feilong.lib.collection4.IterableUtils;
 import com.feilong.lib.collection4.ListUtils;
+import com.feilong.lib.lang3.tuple.Pair;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
@@ -766,6 +767,8 @@ public final class CollectionsUtil{
             return false;
         }
 
+        //---------------------------------------------------------------
+
         //默认没有改变
         boolean result = false;
         for (T element : elements){
@@ -1375,7 +1378,7 @@ public final class CollectionsUtil{
 
         //---------------------------------------------------------------
         //用来识别是否重复
-        List<Map<String, Object>> mapList = newArrayList();
+        List<Map<String, Object>> allValueMapList = newArrayList();
 
         //用来存放返回list
         List<O> returnList = new ArrayList<>(size(objectCollection));
@@ -1383,19 +1386,99 @@ public final class CollectionsUtil{
         //---------------------------------------------------------------
         for (O o : objectCollection){
             Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
-            boolean isNotExist = !isExist(mapList, propertyNameAndValueMap, propertyNames);
+            boolean isNotExist = !isExist(allValueMapList, propertyNameAndValueMap, propertyNames);
             if (isNotExist){
                 returnList.add(o);
-                mapList.add(propertyNameAndValueMap);
+                allValueMapList.add(propertyNameAndValueMap);
             }
         }
         return returnList;
     }
 
     /**
-     * 判断<code>mapList</code> 中,是否含有 指定 key-value 的map.
+     * 分隔集合,将新数据放left , 重复的数据放right.
+     * 
+     * <p>
+     * 请自行先进行排序处理
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 有 User 对象,两个属性 id和age
+     * 
+     * <pre class="code">
+     * 
+     * User user1 = new User(1L, 15);
+     * User user2 = new User(1L, 16);
+     * User user3 = new User(1L, 15);  //这条和第一条重复了
+     * List{@code <User>} list = toList(user1, user2, user3);
+     * 
+     * Pair{@code <List<User>, List<User>>} splitDuplicate = CollectionsUtil.splitDuplicate(list, "id", "age");
+     * 
+     * //left 保存的是不重复的数据
+     * List{@code <User>} newDuplicate = splitDuplicate.getLeft();
+       // right 保存的是和left有属性值重复的数据
+     * List{@code <User>} rightDuplicate = splitDuplicate.getRight();
+     * 
+     * assertSame(2, newDuplicate.size());
+     * assertThat(newDuplicate, contains(user1, user2));
+     * 
+     * assertSame(1, rightDuplicate.size());
+     * assertThat(rightDuplicate, contains(user3));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <O>
+     * @param objectCollection
+     *            the object collection
+     * @param propertyNames
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),<br>
+     *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
+     * @return 将新数据放left , 重复的数据放right.<br>
+     *         如果 <code>propertyNames</code> 是null或者empty,返回 null<br>
+     *         如果 <code>objectCollection</code> 是null或者empty,返回 null<br>
+     * @since 4.0.7
+     */
+    public static <O> Pair<List<O>, List<O>> splitDuplicate(Collection<O> objectCollection,String...propertyNames){
+        if (isNullOrEmpty(propertyNames)){
+            return null;
+        }
+        if (isNullOrEmpty(objectCollection)){
+            return null;
+        }
+
+        //---------------------------------------------------------------
+
+        //新数据
+        List<O> newList = new ArrayList<>(size(objectCollection));
+        //重复
+        List<O> duplicateList = new ArrayList<>(size(objectCollection));
+
+        //---------------------------------------------------------------
+
+        //用来识别是否重复
+        List<Map<String, Object>> allValueMapList = newArrayList();
+        for (O o : objectCollection){
+            Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
+            boolean isNotExist = !isExist(allValueMapList, propertyNameAndValueMap, propertyNames);
+            if (isNotExist){
+                newList.add(o);
+                allValueMapList.add(propertyNameAndValueMap);
+            }else{
+                duplicateList.add(o);
+            }
+        }
+        return Pair.of(newList, duplicateList);
+    }
+
+    /**
+     * 判断<code>allValueMapList</code> 中,是否含有指定 key-value 的map.
      *
-     * @param mapList
+     * @param allValueMapList
      *            the map list
      * @param propertyNameAndValueMap
      *            the property name and value map
@@ -1404,8 +1487,8 @@ public final class CollectionsUtil{
      * @return 存在,返回true
      * @since 2.1.0
      */
-    private static boolean isExist(List<Map<String, Object>> mapList,Map<String, Object> propertyNameAndValueMap,String...keys){
-        for (Map<String, Object> map : mapList){
+    private static boolean isExist(List<Map<String, Object>> allValueMapList,Map<String, Object> propertyNameAndValueMap,String...keys){
+        for (Map<String, Object> map : allValueMapList){
             if (eqauls(map, propertyNameAndValueMap, keys)){
                 return true;
             }

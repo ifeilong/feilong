@@ -116,6 +116,8 @@ import com.feilong.core.util.collectionsutil.select.SelectWithMapTest;
                 RemoveAllNullTest.class,
                 RemoveAllCollectionTest.class,
 
+                SplitDuplicatePropertyNamesTest.class,
+
                 ForEachTest.class,
 
                 SelectRegexStringPredicateTest.class,
