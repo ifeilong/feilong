@@ -200,7 +200,7 @@
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MPLUGIN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-plugin-plugin>3.9.0</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.10.2</v.maven-plugin-plugin>
 
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
