@@ -53,7 +53,7 @@
 		<v.maven-install-plugin>3.1.1</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-javadoc-plugin>3.6.2</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.6.3</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-jar-plugin>3.3.0</v.maven-jar-plugin>
