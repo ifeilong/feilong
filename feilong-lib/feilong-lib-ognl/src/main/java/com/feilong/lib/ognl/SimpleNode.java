@@ -237,7 +237,7 @@ public abstract class SimpleNode implements Node,Serializable{
                     eval.setException(evalException);
                 }
                 if ((evalException == null) && (context.getRootEvaluation() == null) && !context.getKeepLastEvaluation()){
-                    pool.recycleAll(eval);
+                    //                    pool.recycleAll(eval);
                 }
             }
         }else{
@@ -284,7 +284,7 @@ public abstract class SimpleNode implements Node,Serializable{
                     eval.setException(evalException);
                 }
                 if ((evalException == null) && (context.getRootEvaluation() == null) && !context.getKeepLastEvaluation()){
-                    pool.recycleAll(eval);
+                    //                    pool.recycleAll(eval);
                 }
             }
         }else{

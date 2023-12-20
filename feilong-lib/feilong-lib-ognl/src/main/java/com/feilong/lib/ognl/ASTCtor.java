@@ -124,9 +124,7 @@ public class ASTCtor extends SimpleNode{
             }
 
             return result;
-        }finally{
-            OgnlRuntime.getObjectArrayPool().recycle(args);
-        }
+        }finally{}
     }
 
     @Override

@@ -1756,9 +1756,7 @@ public class OgnlRuntime{
             reason = e;
         }catch (InvocationTargetException e){
             reason = e.getTargetException();
-        }finally{
-            _objectArrayPool.recycle(actualArgs);
-        }
+        }finally{}
 
         throw new MethodFailedException(source, methodName, reason);
     }
@@ -1842,9 +1840,7 @@ public class OgnlRuntime{
         }catch (InstantiationException e){
             reason = e;
         }finally{
-            if (actualArgs != args){
-                _objectArrayPool.recycle(actualArgs);
-            }
+            if (actualArgs != args){}
         }
 
         throw new MethodFailedException(className, "new", reason);
@@ -1917,9 +1913,7 @@ public class OgnlRuntime{
 
                 try{
                     callAppropriateMethod(context, target, target, m.getName(), propertyName, Collections.nCopies(1, m), args);
-                }finally{
-                    _objectArrayPool.recycle(args);
-                }
+                }finally{}
             }else{
                 result = false;
             }
@@ -2995,9 +2989,7 @@ public class OgnlRuntime{
             throw ex;
         }catch (Exception ex){
             throw new OgnlException("getting indexed property descriptor for '" + name + "'", ex);
-        }finally{
-            _objectArrayPool.recycle(args);
-        }
+        }finally{}
     }
 
     public static void setIndexedProperty(OgnlContext context,Object source,String name,Object index,Object value) throws OgnlException{
@@ -3023,9 +3015,7 @@ public class OgnlRuntime{
             throw ex;
         }catch (Exception ex){
             throw new OgnlException("getting indexed property descriptor for '" + name + "'", ex);
-        }finally{
-            _objectArrayPool.recycle(args);
-        }
+        }finally{}
     }
 
     public static EvaluationPool getEvaluationPool(){

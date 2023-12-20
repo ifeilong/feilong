@@ -339,30 +339,6 @@ public class JavaCharStream{
     }
 
     /**
-     * Get the current column number.
-     * 
-     * @return the current column number.
-     * @deprecated
-     * @see #getEndColumn
-     */
-    @Deprecated
-    public int getColumn(){
-        return bufcolumn[bufpos];
-    }
-
-    /**
-     * Get the current line number.
-     * 
-     * @return the current line number.
-     * @deprecated
-     * @see #getEndLine
-     */
-    @Deprecated
-    public int getLine(){
-        return bufline[bufpos];
-    }
-
-    /**
      * Get end column.
      * 
      * @return the end column number.

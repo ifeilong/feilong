@@ -575,14 +575,6 @@ class CtClassType extends CtClass{
         return hasAnnotationType(annotationName, getClassPool(), ainfo, ainfo2);
     }
 
-    /**
-     * @deprecated
-     */
-    @Deprecated
-    static boolean hasAnnotationType(Class<?> clz,ClassPool cp,AnnotationsAttribute a1,AnnotationsAttribute a2){
-        return hasAnnotationType(clz.getName(), cp, a1, a2);
-    }
-
     static boolean hasAnnotationType(String annotationTypeName,ClassPool cp,AnnotationsAttribute a1,AnnotationsAttribute a2){
         Annotation[] anno1, anno2;
 

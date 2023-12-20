@@ -73,17 +73,4 @@ public final class EvaluationPool extends Object{
         return new Evaluation(node, source, setOperation);
     }
 
-    /**
-     * Recycles an of Evaluation and all of it's siblings
-     * and children.
-     *
-     * @param value
-     *            an Evaluation to be recycled along with its siblings (not used).
-     * @deprecated object-pooling now relies on the jvm garbage collection
-     */
-    @Deprecated
-    public void recycleAll(Evaluation value){
-        // no need of recycling, we rely on the garbage collection efficiency
-    }
-
 }

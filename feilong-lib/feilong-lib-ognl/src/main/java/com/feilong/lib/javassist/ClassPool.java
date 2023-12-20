@@ -863,18 +863,11 @@ public class ClassPool{
      *
      * <p>
      * <b>Warining:</b>
-     * This method should not be used in Java 11 or later.
-     * Use {@link #toClass(CtClass,Class)}.
-     * </p>
-     *
-     * <p>
-     * <b>Warining:</b>
      * A Class object returned by this method may not
      * work with a security manager or a signed jar file because a
      * protection domain is not specified.
      * </p>
      *
-     * @see #toClass(CtClass,Class)
      * @see #toClass(CtClass,Class,java.lang.ClassLoader,ProtectionDomain)
      * @see #getClassLoader()
      */

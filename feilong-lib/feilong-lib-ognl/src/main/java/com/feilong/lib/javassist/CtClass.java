@@ -24,7 +24,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
-import java.security.ProtectionDomain;
 import java.util.Collection;
 
 import com.feilong.lib.javassist.bytecode.ClassFile;
@@ -1327,11 +1326,6 @@ public abstract class CtClass{
      * </pre>
      * 
      * </blockquote>
-     * <p>
-     * To avoid this message, use {@link #toClass(Class)}
-     * or {@link #toClass(java.lang.invoke.MethodHandles.Lookup)}.
-     * {@link #toClass()} will be unavailable in a future release.
-     * </p>
      *
      * <p>
      * <b>Warning:</b> A Class object returned by this method may not
@@ -1344,73 +1338,9 @@ public abstract class CtClass{
      * in <code>ClassPool</code>.
      * </p>
      *
-     * @see #toClass(java.lang.invoke.MethodHandles.Lookup)
-     * @see #toClass(Class)
-     * @see ClassPool#toClass(CtClass)
      */
     public Class<?> toClass() throws CannotCompileException{
         return getClassPool().toClass(this);
-    }
-
-    /**
-     * Converts this class to a <code>java.lang.Class</code> object.
-     * Once this method is called, further modifications are not allowed
-     * any more.
-     *
-     * <p>
-     * The class file represented by this <code>CtClass</code> is
-     * loaded by the given class loader to construct a
-     * <code>java.lang.Class</code> object. Since a private method
-     * on the class loader is invoked through the reflection API,
-     * the caller must have permissions to do that.
-     *
-     * <p>
-     * An easy way to obtain <code>ProtectionDomain</code> object is
-     * to call <code>getProtectionDomain()</code>
-     * in <code>java.lang.Class</code>. It returns the domain that
-     * the class belongs to.
-     *
-     * <p>
-     * This method is provided for convenience. If you need more
-     * complex functionality, you should write your own class loader.
-     *
-     * <p>
-     * Note: this method calls <code>toClass()</code>
-     * in <code>ClassPool</code>.
-     *
-     * @param loader
-     *            the class loader used to load this class.
-     *            If it is null, the class loader returned by
-     *            {@link ClassPool#getClassLoader()} is used.
-     * @param domain
-     *            the protection domain that the class belongs to.
-     *            If it is null, the default domain created
-     *            by <code>java.lang.ClassLoader</code> is used.
-     * @see ClassPool#toClass(CtClass,java.lang.ClassLoader)
-     * @since 3.3
-     */
-    public Class<?> toClass(ClassLoader loader,ProtectionDomain domain) throws CannotCompileException{
-        ClassPool cp = getClassPool();
-        if (loader == null){
-            loader = cp.getClassLoader();
-        }
-
-        return cp.toClass(this, null, loader, domain);
-    }
-
-    /**
-     * Converts this class to a <code>java.lang.Class</code> object.
-     *
-     * <p>
-     * <b>Warning:</b> A Class object returned by this method may not
-     * work with a security manager or a signed jar file because a
-     * protection domain is not specified.
-     *
-     * @deprecated Replaced by {@link #toClass(ClassLoader,ProtectionDomain)}
-     */
-    @Deprecated
-    public final Class<?> toClass(ClassLoader loader) throws CannotCompileException{
-        return getClassPool().toClass(this, null, loader, null);
     }
 
     /**
@@ -1491,7 +1421,6 @@ public abstract class CtClass{
      * @see ClassPool#doPruning
      *
      * @see #toBytecode()
-     * @see #toClass(Class)
      * @see #writeFile()
      * @see #instrument(CodeConverter)
      * @see #instrument(ExprEditor)

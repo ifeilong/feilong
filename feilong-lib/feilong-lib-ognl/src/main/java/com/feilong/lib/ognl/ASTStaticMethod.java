@@ -77,9 +77,7 @@ public class ASTStaticMethod extends SimpleNode implements NodeType{
             }
 
             return OgnlRuntime.callStaticMethod(context, _className, _methodName, args);
-        }finally{
-            OgnlRuntime.getObjectArrayPool().recycle(args);
-        }
+        }finally{}
     }
 
     @Override

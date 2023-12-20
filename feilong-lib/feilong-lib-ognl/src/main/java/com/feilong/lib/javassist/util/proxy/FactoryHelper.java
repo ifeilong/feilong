@@ -114,19 +114,6 @@ public class FactoryHelper{
 
     /**
      * Loads a class file by a given class loader.
-     * This method uses a default protection domain for the class
-     * but it may not work with a security manager or a signed jar file.
-     *
-     * @see #toClass(ClassFile,Class,ClassLoader,ProtectionDomain)
-     * @deprecated
-     */
-    @Deprecated
-    public static Class<?> toClass(ClassFile cf,ClassLoader loader) throws CannotCompileException{
-        return toClass(cf, null, loader, null);
-    }
-
-    /**
-     * Loads a class file by a given class loader.
      *
      * @param neighbor
      *            a class belonging to the same package that

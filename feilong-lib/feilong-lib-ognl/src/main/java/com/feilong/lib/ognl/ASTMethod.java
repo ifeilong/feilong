@@ -103,9 +103,7 @@ public class ASTMethod extends SimpleNode implements OrderedReturn,NodeType{
 
             return result;
 
-        }finally{
-            OgnlRuntime.getObjectArrayPool().recycle(args);
-        }
+        }finally{}
     }
 
     @Override

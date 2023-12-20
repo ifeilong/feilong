@@ -128,9 +128,8 @@ public abstract class Ognl{
      *            the context to which OGNL context will be added.
      * @return Context Map with the keys <CODE>root</CODE> and <CODE>context</CODE> set
      *         appropriately
-     * @deprecated will be removed soon
      */
-    @Deprecated
+    // @deprecated will be removed soon
     private static Map addDefaultContext(Object root,Map context){
         return addDefaultContext(root, null, null, null, context);
     }
