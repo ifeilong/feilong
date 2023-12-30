@@ -1723,46 +1723,46 @@ public class NumberUtils{
         return StringUtils.isNumeric(str);
     }
 
-    /**
-     * <p>
-     * Checks whether the String a valid Java number.
-     * </p>
-     *
-     * <p>
-     * Valid numbers include hexadecimal marked with the {@code 0x} or
-     * {@code 0X} qualifier, octal numbers, scientific notation and
-     * numbers marked with a type qualifier (e.g. 123L).
-     * </p>
-     *
-     * <p>
-     * Non-hexadecimal strings beginning with a leading zero are
-     * treated as octal values. Thus the string {@code 09} will return
-     * {@code false}, since {@code 9} is not a valid octal value.
-     * However, numbers beginning with {@code 0.} are treated as decimal.
-     * </p>
-     *
-     * <p>
-     * {@code null} and empty/blank {@code String} will return
-     * {@code false}.
-     * </p>
-     *
-     * <p>
-     * Note, {@link #createNumber(String)} should return a number for every
-     * input resulting in {@code true}.
-     * </p>
-     *
-     * @param str
-     *            the {@code String} to check
-     * @return {@code true} if the string is a correctly formatted number
-     * @since 3.3 the code supports hex {@code 0Xhhh} an
-     *        octal {@code 0ddd} validation
-     * @deprecated This feature will be removed in Lang 4.0,
-     *             use {@link NumberUtils#isCreatable(String)} instead
-     */
-    @Deprecated
-    public static boolean isNumber(final String str){
-        return isCreatable(str);
-    }
+    //    /**
+    //     * <p>
+    //     * Checks whether the String a valid Java number.
+    //     * </p>
+    //     *
+    //     * <p>
+    //     * Valid numbers include hexadecimal marked with the {@code 0x} or
+    //     * {@code 0X} qualifier, octal numbers, scientific notation and
+    //     * numbers marked with a type qualifier (e.g. 123L).
+    //     * </p>
+    //     *
+    //     * <p>
+    //     * Non-hexadecimal strings beginning with a leading zero are
+    //     * treated as octal values. Thus the string {@code 09} will return
+    //     * {@code false}, since {@code 9} is not a valid octal value.
+    //     * However, numbers beginning with {@code 0.} are treated as decimal.
+    //     * </p>
+    //     *
+    //     * <p>
+    //     * {@code null} and empty/blank {@code String} will return
+    //     * {@code false}.
+    //     * </p>
+    //     *
+    //     * <p>
+    //     * Note, {@link #createNumber(String)} should return a number for every
+    //     * input resulting in {@code true}.
+    //     * </p>
+    //     *
+    //     * @param str
+    //     *            the {@code String} to check
+    //     * @return {@code true} if the string is a correctly formatted number
+    //     * @since 3.3 the code supports hex {@code 0Xhhh} an
+    //     *        octal {@code 0ddd} validation
+    //     * @deprecated This feature will be removed in Lang 4.0,
+    //     *             use {@link NumberUtils#isCreatable(String)} instead
+    //     */
+    //    @Deprecated
+    //    public static boolean isNumber(final String str){
+    //        return isCreatable(str);
+    //    }
 
     /**
      * <p>

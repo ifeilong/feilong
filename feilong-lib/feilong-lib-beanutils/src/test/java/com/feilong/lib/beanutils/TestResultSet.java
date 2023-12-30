@@ -287,19 +287,7 @@ public class TestResultSet implements InvocationHandler{
         throw new UnsupportedOperationException();
     }
 
-    /** @deprecated */
-    @Deprecated
-    public BigDecimal getBigDecimal(final int columnIndex,final int scale) throws SQLException{
-        throw new UnsupportedOperationException();
-    }
-
     public BigDecimal getBigDecimal(final String columnName) throws SQLException{
-        throw new UnsupportedOperationException();
-    }
-
-    /** @deprecated */
-    @Deprecated
-    public BigDecimal getBigDecimal(final String columnName,final int scale) throws SQLException{
         throw new UnsupportedOperationException();
     }
 
@@ -488,18 +476,6 @@ public class TestResultSet implements InvocationHandler{
     }
 
     public int getType() throws SQLException{
-        throw new UnsupportedOperationException();
-    }
-
-    /** @deprecated */
-    @Deprecated
-    public InputStream getUnicodeStream(final int columnIndex) throws SQLException{
-        throw new UnsupportedOperationException();
-    }
-
-    /** @deprecated */
-    @Deprecated
-    public InputStream getUnicodeStream(final String columnName) throws SQLException{
         throw new UnsupportedOperationException();
     }
 

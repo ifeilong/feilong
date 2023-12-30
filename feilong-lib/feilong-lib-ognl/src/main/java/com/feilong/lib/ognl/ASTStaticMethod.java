@@ -68,7 +68,7 @@ public class ASTStaticMethod extends SimpleNode implements NodeType{
 
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
-        Object[] args = OgnlRuntime.getObjectArrayPool().create(jjtGetNumChildren());
+        Object[] args = ObjectArrayPool.create(jjtGetNumChildren());
         Object root = context.getRoot();
 
         try{

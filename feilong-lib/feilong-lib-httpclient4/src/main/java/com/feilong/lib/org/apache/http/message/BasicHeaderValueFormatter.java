@@ -50,11 +50,7 @@ public class BasicHeaderValueFormatter implements HeaderValueFormatter{
      * can be many instances of the class itself and of derived classes.
      * The instance here provides non-customized, default behavior.
      *
-     * @deprecated (4.3) use {@link #INSTANCE}
      */
-    @Deprecated
-    public final static BasicHeaderValueFormatter DEFAULT      = new BasicHeaderValueFormatter();
-
     public final static BasicHeaderValueFormatter INSTANCE     = new BasicHeaderValueFormatter();
 
     /**

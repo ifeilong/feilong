@@ -40,22 +40,18 @@ package com.feilong.lib.ognl;
 @Deprecated
 public final class ObjectArrayPool extends Object{
 
-    public ObjectArrayPool(){
-        super();
-    }
-
-    public Object[] create(int arraySize){
+    public static Object[] create(int arraySize){
         return new Object[arraySize];
     }
 
-    public Object[] create(Object singleton){
+    public static Object[] create(Object singleton){
         Object[] result = create(1);
 
         result[0] = singleton;
         return result;
     }
 
-    public Object[] create(Object object1,Object object2){
+    public static Object[] create(Object object1,Object object2){
         Object[] result = create(2);
 
         result[0] = object1;

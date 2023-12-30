@@ -80,7 +80,7 @@ public class ASTCtor extends SimpleNode{
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
         Object result, root = context.getRoot();
         int count = jjtGetNumChildren();
-        Object[] args = OgnlRuntime.getObjectArrayPool().create(count);
+        Object[] args = ObjectArrayPool.create(count);
 
         try{
             for (int i = 0; i < count; ++i){

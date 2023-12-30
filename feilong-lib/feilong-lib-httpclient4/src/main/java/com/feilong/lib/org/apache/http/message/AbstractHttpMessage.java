@@ -156,25 +156,4 @@ public abstract class AbstractHttpMessage implements HttpMessage{
     public HeaderIterator headerIterator(final String name){
         return this.headergroup.iterator(name);
     }
-    //
-    //    /**
-    //     * @deprecated (4.3) use constructor parameters of configuration API provided by HttpClient
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public HttpParams getParams(){
-    //        if (this.params == null){
-    //            this.params = new BasicHttpParams();
-    //        }
-    //        return this.params;
-    //    }
-    //
-    //    /**
-    //     * @deprecated (4.3) use constructor parameters of configuration API provided by HttpClient
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public void setParams(final HttpParams params){
-    //        this.params = Args.notNull(params, "HTTP parameters");
-    //    }
 }

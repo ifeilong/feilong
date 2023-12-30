@@ -43,34 +43,6 @@ public abstract class AbstractExecutionAwareRequest extends AbstractHttpMessage 
         this.cancellableRef = new AtomicMarkableReference<>(null, false);
     }
 
-    //    /**
-    //     * @deprecated Use {@link #setCancellable(Cancellable)}
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public void setConnectionRequest(final ClientConnectionRequest connRequest){
-    //        setCancellable(() -> {
-    //            connRequest.abortRequest();
-    //            return true;
-    //        });
-    //    }
-
-    //    /**
-    //     * @deprecated Use {@link #setCancellable(Cancellable)}
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public void setReleaseTrigger(final ConnectionReleaseTrigger releaseTrigger){
-    //        setCancellable(() -> {
-    //            try{
-    //                releaseTrigger.abortConnection();
-    //                return true;
-    //            }catch (final IOException ex){
-    //                return false;
-    //            }
-    //        });
-    //    }
-
     //    @Override
     public void abort(){
         while (!cancellableRef.isMarked()){

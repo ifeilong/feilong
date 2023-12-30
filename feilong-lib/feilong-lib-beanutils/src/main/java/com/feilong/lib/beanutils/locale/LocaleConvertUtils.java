@@ -19,8 +19,6 @@ package com.feilong.lib.beanutils.locale;
 
 import java.util.Locale;
 
-import com.feilong.lib.beanutils.FastHashMap;
-
 /**
  * <p>
  * Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -424,46 +422,4 @@ public class LocaleConvertUtils{
         return LocaleConvertUtilsBean.getInstance().lookup(clazz, locale);
     }
 
-    /**
-     * <p>
-     * Look up and return any registered FastHashMap instance for the specified locale.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>LocaleConvertUtilsBean</code>
-     * </p>
-     *
-     * @param locale
-     *            The Locale
-     * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
-     *         the specified locale.
-     * @see LocaleConvertUtilsBean#lookup(Locale)
-     * @deprecated This method will be modified to return a Map in the next release.
-     */
-    @Deprecated
-    protected static FastHashMap lookup(final Locale locale){
-        return LocaleConvertUtilsBean.getInstance().lookup(locale);
-    }
-
-    /**
-     * <p>
-     * Create all {@link LocaleConverter} types for specified locale.
-     * </p>
-     *
-     * <p>
-     * For more details see <code>LocaleConvertUtilsBean</code>
-     * </p>
-     *
-     * @param locale
-     *            The Locale
-     * @return The FastHashMap instance contains the all {@link LocaleConverter} types
-     *         for the specified locale.
-     * @see LocaleConvertUtilsBean#create(Locale)
-     * @deprecated This method will be modified to return a Map in the next release.
-     */
-    @Deprecated
-    protected static FastHashMap create(final Locale locale){
-
-        return LocaleConvertUtilsBean.getInstance().create(locale);
-    }
 }

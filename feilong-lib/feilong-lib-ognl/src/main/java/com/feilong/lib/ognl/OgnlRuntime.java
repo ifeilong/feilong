@@ -413,8 +413,6 @@ public class OgnlRuntime{
 
     static final EvaluationPool           _evaluationPool                   = new EvaluationPool();
 
-    static final ObjectArrayPool          _objectArrayPool                  = new ObjectArrayPool();
-
     static final Map<Method, Boolean>     _methodAccessCache                = new ConcurrentHashMap<>();
 
     static final Map<Method, Boolean>     _methodPermCache                  = new ConcurrentHashMap<>();
@@ -1682,7 +1680,7 @@ public class OgnlRuntime{
                     List methods,
                     Object[] args) throws MethodFailedException{
         Throwable reason = null;
-        Object[] actualArgs = _objectArrayPool.create(args.length);
+        Object[] actualArgs = ObjectArrayPool.create(args.length);
 
         try{
             Method method = getAppropriateMethod(context, source, target, propertyName, methodName, methods, args, actualArgs);
@@ -1820,7 +1818,7 @@ public class OgnlRuntime{
                 }
             }
             if (ctor == null){
-                actualArgs = _objectArrayPool.create(args.length);
+                actualArgs = ObjectArrayPool.create(args.length);
                 if ((ctor = getConvertedConstructorAndArgs(context, target, constructors, args, actualArgs)) == null){
                     throw new NoSuchMethodException();
                 }
@@ -1909,7 +1907,7 @@ public class OgnlRuntime{
 
         if (result){
             if (m != null){
-                Object[] args = _objectArrayPool.create(value);
+                Object[] args = ObjectArrayPool.create(value);
 
                 try{
                     callAppropriateMethod(context, target, target, m.getName(), propertyName, Collections.nCopies(1, m), args);
@@ -2967,7 +2965,7 @@ public class OgnlRuntime{
     }
 
     public static Object getIndexedProperty(OgnlContext context,Object source,String name,Object index) throws OgnlException{
-        Object[] args = _objectArrayPool.create(index);
+        Object[] args = ObjectArrayPool.create(index);
 
         try{
             PropertyDescriptor pd = getPropertyDescriptor((source == null) ? null : source.getClass(), name);
@@ -2993,7 +2991,7 @@ public class OgnlRuntime{
     }
 
     public static void setIndexedProperty(OgnlContext context,Object source,String name,Object index,Object value) throws OgnlException{
-        Object[] args = _objectArrayPool.create(index, value);
+        Object[] args = ObjectArrayPool.create(index, value);
 
         try{
             PropertyDescriptor pd = getPropertyDescriptor((source == null) ? null : source.getClass(), name);
@@ -3020,10 +3018,6 @@ public class OgnlRuntime{
 
     public static EvaluationPool getEvaluationPool(){
         return _evaluationPool;
-    }
-
-    public static ObjectArrayPool getObjectArrayPool(){
-        return _objectArrayPool;
     }
 
     public static Method getMethod(OgnlContext context,Class target,String name,Node[] children,boolean includeStatic) throws Exception{

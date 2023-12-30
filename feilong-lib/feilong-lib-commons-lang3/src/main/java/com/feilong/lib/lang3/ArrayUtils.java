@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import com.feilong.lib.lang3.builder.EqualsBuilder;
 import com.feilong.lib.lang3.builder.ToStringBuilder;
 import com.feilong.lib.lang3.builder.ToStringStyle;
 import com.feilong.lib.lang3.math.NumberUtils;
@@ -3307,27 +3306,6 @@ public class ArrayUtils{
      */
     public static boolean isEmpty(final short[] array){
         return getLength(array) == 0;
-    }
-
-    /**
-     * <p>
-     * Compares two arrays, using equals(), handling multi-dimensional arrays
-     * correctly.
-     *
-     * <p>
-     * Multi-dimensional primitive arrays are also handled correctly by this method.
-     *
-     * @param array1
-     *            the left hand array to compare, may be {@code null}
-     * @param array2
-     *            the right hand array to compare, may be {@code null}
-     * @return {@code true} if the arrays are equal
-     * @deprecated this method has been replaced by {@code java.util.Objects.deepEquals(Object, Object)} and will be
-     *             removed from future releases.
-     */
-    @Deprecated
-    public static boolean isEquals(final Object array1,final Object array2){
-        return new EqualsBuilder().append(array1, array2).isEquals();
     }
 
     /**

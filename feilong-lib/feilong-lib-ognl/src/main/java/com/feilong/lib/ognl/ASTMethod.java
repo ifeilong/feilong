@@ -85,7 +85,7 @@ public class ASTMethod extends SimpleNode implements OrderedReturn,NodeType{
 
     @Override
     protected Object getValueBody(OgnlContext context,Object source) throws OgnlException{
-        Object[] args = OgnlRuntime.getObjectArrayPool().create(jjtGetNumChildren());
+        Object[] args = ObjectArrayPool.create(jjtGetNumChildren());
 
         try{
             Object result, root = context.getRoot();
