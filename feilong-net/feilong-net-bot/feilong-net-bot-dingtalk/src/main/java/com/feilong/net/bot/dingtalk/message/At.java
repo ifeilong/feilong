@@ -15,6 +15,8 @@
  */
 package com.feilong.net.bot.dingtalk.message;
 
+import java.util.List;
+
 /**
  * 你需要at 谁?.
  *
@@ -24,19 +26,20 @@ package com.feilong.net.bot.dingtalk.message;
 public class At{
 
     /** 被@人的手机号。 注意在text内容里要有@人的手机号. */
-    private String[] atMobiles;
+    private String[]     atMobiles;
 
-    //    /**
-    //     * 被@人的用户userid
-    //     * <p>
-    //     * 发送消息是基于userid，这个userid跟钉钉账号还不一样，是钉钉开发者平台的userid。<br>
-    //     * 可以通过钉钉账号的信息来获取，这里使用的是get_userid用手机号获取方式；
-    //     * </p>
-    //     */
-    // private List<String> atUserIds;
+    /**
+     * 被@人的用户userid
+     * <p>
+     * 发送消息是基于userid，这个userid跟钉钉账号还不一样，是钉钉开发者平台的userid。<br>
+     * 可以通过钉钉账号的信息来获取，这里使用的是get_userid用手机号获取方式；
+     * </p>
+     * .
+     */
+    private List<String> atUserIds;
 
     /** 是否@所有人. */
-    private boolean  isAtAll;
+    private boolean      isAtAll;
 
     //---------------------------------------------------------------
 
@@ -45,6 +48,24 @@ public class At{
      */
     public At(){
         super();
+    }
+
+    /**
+     * Instantiates a new at.
+     *
+     * @param atMobiles
+     *            the at mobiles
+     * @param atUserIds
+     *            the at user ids
+     * @param isAtAll
+     *            the is at all
+     * @since 4.0.8
+     */
+    public At(String[] atMobiles, List<String> atUserIds, boolean isAtAll){
+        super();
+        this.atMobiles = atMobiles;
+        this.atUserIds = atUserIds;
+        this.isAtAll = isAtAll;
     }
 
     /**
@@ -96,5 +117,33 @@ public class At{
      */
     public String[] getAtMobiles(){
         return atMobiles;
+    }
+
+    /**
+     * 获得 被@人的用户userid .
+     * <p>
+     * 发送消息是基于userid，这个userid跟钉钉账号还不一样，是钉钉开发者平台的userid。<br>
+     * 可以通过钉钉账号的信息来获取，这里使用的是get_userid用手机号获取方式；
+     * </p>
+     *
+     *
+     * @return the atUserIds
+     */
+    public List<String> getAtUserIds(){
+        return atUserIds;
+    }
+
+    /**
+     * 设置 被@人的用户userid .
+     * <p>
+     * 发送消息是基于userid，这个userid跟钉钉账号还不一样，是钉钉开发者平台的userid。<br>
+     * 可以通过钉钉账号的信息来获取，这里使用的是get_userid用手机号获取方式；
+     * </p>
+     *
+     * @param atUserIds
+     *            the atUserIds to set
+     */
+    public void setAtUserIds(List<String> atUserIds){
+        this.atUserIds = atUserIds;
     }
 }

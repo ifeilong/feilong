@@ -36,6 +36,7 @@ import com.feilong.net.bot.Bot;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://open.dingtalk.com/document/orgapp/robot-overview">机器人</a>
  * @see <a href=
  *      "https://developers.dingtalk.com/document/robots/custom-robot-access-1?spm=ding_open_doc.document.0.0.6d9d10afLWgSfH#topic-2026027">如何配置群机器人？</a>
  * @since 3.1.0
@@ -54,7 +55,9 @@ public interface DingTalkBot extends Bot{
      * @return 成功返回true<br>
      *         如果 <code>content</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>content</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @deprecated pls use {@link #sendMessage(String, com.feilong.net.bot.message.MessageParams)}
      * @since 3.1.0
      */
+    @Deprecated
     boolean sendMessage(String title,String content,String...atMobiles);
 }
