@@ -43,7 +43,6 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  *
  * @since 4.0
  */
-@SuppressWarnings("deprecation")
 public interface HttpClient{
 
     //    /**

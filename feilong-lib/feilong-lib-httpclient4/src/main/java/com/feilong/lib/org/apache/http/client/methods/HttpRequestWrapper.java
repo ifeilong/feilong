@@ -47,7 +47,6 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.3
  */
-@SuppressWarnings("deprecation")
 public class HttpRequestWrapper extends AbstractHttpMessage implements HttpUriRequest{
 
     private final HttpRequest original;

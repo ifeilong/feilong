@@ -39,7 +39,6 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.2
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-@SuppressWarnings("deprecation")
 public class SPNegoSchemeFactory implements AuthSchemeProvider{
 
     private final boolean stripPort;

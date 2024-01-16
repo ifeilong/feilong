@@ -104,7 +104,6 @@ public class DefaultHttpRequestRetryHandler implements HttpRequestRetryHandler{
      * @param requestSentRetryEnabled
      *            true if it's OK to retry non-idempotent requests that have been sent
      */
-    @SuppressWarnings("unchecked")
     public DefaultHttpRequestRetryHandler(final int retryCount, final boolean requestSentRetryEnabled){
         this(retryCount, requestSentRetryEnabled,
                         Arrays.asList(

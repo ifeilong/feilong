@@ -44,7 +44,6 @@ import com.feilong.lib.org.apache.http.util.Args;
  *
  * @since 4.0
  */
-@SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 public class RequestDefaultHeaders implements HttpRequestInterceptor{
 
@@ -72,7 +71,6 @@ public class RequestDefaultHeaders implements HttpRequestInterceptor{
         }
 
         // Add default headers
-        @SuppressWarnings("unchecked")
         Collection<? extends Header> defHeaders = null;
         //        (Collection<? extends Header>) request.getParams()
         //                        .getParameter(ClientPNames.DEFAULT_HEADERS);

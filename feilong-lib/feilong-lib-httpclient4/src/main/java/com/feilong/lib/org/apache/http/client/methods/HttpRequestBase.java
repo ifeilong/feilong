@@ -40,7 +40,6 @@ import com.feilong.lib.org.apache.http.message.BasicRequestLine;
  *
  * @since 4.0
  */
-@SuppressWarnings("deprecation")
 public abstract class HttpRequestBase extends AbstractExecutionAwareRequest implements HttpUriRequest,Configurable{
 
     private ProtocolVersion version;

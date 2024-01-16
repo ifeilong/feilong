@@ -47,7 +47,6 @@ import com.feilong.lib.org.apache.http.pool.ConnFactory;
  * @see HttpHost
  * @since 4.2
  */
-@SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
 public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnection, BasicPoolEntry>{
 

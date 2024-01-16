@@ -49,7 +49,6 @@ public final class HttpClientParamConfig{
     private HttpClientParamConfig(){
     }
 
-    @SuppressWarnings("unchecked")
     public static RequestConfig getRequestConfig(final HttpParams params){
         return getRequestConfig(params, RequestConfig.DEFAULT);
     }

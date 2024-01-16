@@ -48,7 +48,6 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.2
  */
-@SuppressWarnings("deprecation")
 public class DefaultHttpRequestParser extends AbstractMessageParser<HttpRequest>{
 
     private final HttpRequestFactory requestFactory;

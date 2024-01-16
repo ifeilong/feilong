@@ -53,7 +53,6 @@ package com.feilong.lib.org.apache.http;
  *
  * @since 4.0
  */
-@SuppressWarnings("deprecation")
 public interface HttpMessage{
 
     /**

@@ -52,7 +52,6 @@ import com.feilong.lib.org.apache.http.util.CharArrayBuffer;
  *
  * @since 4.2
  */
-@SuppressWarnings("deprecation")
 public class DefaultHttpResponseParser extends AbstractMessageParser<HttpResponse>{
 
     private static final Logger       log = LoggerFactory.getLogger(DefaultHttpResponseParser.class);

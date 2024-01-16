@@ -158,7 +158,6 @@ import com.feilong.lib.org.apache.http.util.TextUtils;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-@SuppressWarnings("deprecation")
 public class SSLConnectionSocketFactory implements LayeredConnectionSocketFactory{
 
     /** The Constant log. */

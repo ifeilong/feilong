@@ -56,7 +56,6 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
-@SuppressWarnings("deprecation")
 class MinimalHttpClient extends CloseableHttpClient{
 
     private final HttpClientConnectionManager connManager;

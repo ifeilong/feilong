@@ -42,7 +42,6 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-@SuppressWarnings("deprecation")
 public class BasicSchemeFactory implements AuthSchemeProvider{
 
     private final Charset charset;

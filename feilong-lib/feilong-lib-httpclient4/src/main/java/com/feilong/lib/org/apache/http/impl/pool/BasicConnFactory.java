@@ -54,7 +54,6 @@ import com.feilong.lib.org.apache.http.util.Asserts;
  * @see HttpHost
  * @since 4.2
  */
-@SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
 public class BasicConnFactory implements ConnFactory<HttpHost, HttpClientConnection>{
 

@@ -55,7 +55,6 @@ public class ToBeanBaseNameTest{
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void testToBean1(){
         ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
         char[] allowedChars = { ':' };

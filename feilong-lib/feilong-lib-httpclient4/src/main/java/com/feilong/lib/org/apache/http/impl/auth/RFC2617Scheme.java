@@ -54,7 +54,6 @@ import com.feilong.lib.org.apache.http.util.CharsetUtils;
  *
  * @since 4.0
  */
-@SuppressWarnings("deprecation")
 public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializable{
 
     private static final long         serialVersionUID = -2845454858205884623L;
@@ -145,7 +144,6 @@ public abstract class RFC2617Scheme extends AuthSchemeBase implements Serializab
         out.writeObject(this.challengeState);
     }
 
-    @SuppressWarnings("unchecked")
     private void readObject(final ObjectInputStream in) throws IOException,ClassNotFoundException{
         in.defaultReadObject();
         this.credentialsCharset = CharsetUtils.get(in.readUTF());

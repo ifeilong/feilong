@@ -143,7 +143,6 @@ public abstract class GGSSchemeBase extends AuthSchemeBase{
      * @since 4.4
      */
     //TODO: make this method abstract
-    @SuppressWarnings("deprecation")
     protected byte[] generateToken(final byte[] input,final String authServer,final Credentials credentials) throws GSSException{
         return generateToken(input, authServer);
     }
@@ -212,7 +211,8 @@ public abstract class GGSSchemeBase extends AuthSchemeBase{
                     state = State.TOKEN_GENERATED;
                 }catch (final GSSException gsse){
                     state = State.FAILED;
-                    if (gsse.getMajor() == GSSException.DEFECTIVE_CREDENTIAL || gsse.getMajor() == GSSException.CREDENTIALS_EXPIRED || (gsse.getMajor() == GSSException.NO_CRED)){
+                    if (gsse.getMajor() == GSSException.DEFECTIVE_CREDENTIAL || gsse.getMajor() == GSSException.CREDENTIALS_EXPIRED
+                                    || (gsse.getMajor() == GSSException.NO_CRED)){
                         throw new InvalidCredentialsException(gsse.getMessage(), gsse);
                     }
                     if (gsse.getMajor() == GSSException.DEFECTIVE_TOKEN || gsse.getMajor() == GSSException.DUPLICATE_TOKEN

@@ -40,7 +40,6 @@ import com.feilong.lib.org.apache.http.entity.ContentType;
 import com.feilong.lib.org.apache.http.message.BasicHeader;
 import com.feilong.lib.org.apache.http.protocol.HTTP;
 
-@SuppressWarnings("deprecation")
 class MultipartFormEntity implements HttpEntity{
 
     private final AbstractMultipartForm multipart;

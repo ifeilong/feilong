@@ -382,7 +382,6 @@ public class RequestConfig implements Cloneable{
         return new Builder();
     }
 
-    @SuppressWarnings("deprecation")
     public static RequestConfig.Builder copy(final RequestConfig config){
         return new Builder().setExpectContinueEnabled(config.isExpectContinueEnabled()).setProxy(config.getProxy())
                         .setLocalAddress(config.getLocalAddress()).setStaleConnectionCheckEnabled(config.isStaleConnectionCheckEnabled())

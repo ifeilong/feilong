@@ -41,7 +41,6 @@ import com.feilong.lib.org.apache.http.protocol.HttpContext;
  * @since 4.1
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-@SuppressWarnings("deprecation")
 public class NTLMSchemeFactory implements AuthSchemeProvider{
 
     //    @Override
