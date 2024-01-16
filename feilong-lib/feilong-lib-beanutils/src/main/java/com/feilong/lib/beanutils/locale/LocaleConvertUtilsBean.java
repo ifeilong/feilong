@@ -626,7 +626,7 @@ public class LocaleConvertUtilsBean{
             return map.put(key, value);
         }
 
-        @SuppressWarnings({ "rawtypes", "unchecked" })
+        @SuppressWarnings({ "unchecked" })
         // we operate on very generic types (<Object, Object>), so there is
         // no need for doing type checks
         @Override

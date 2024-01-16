@@ -253,7 +253,6 @@ public class BeanComparator<T> implements Comparator<T>,Serializable{
      * @return the result of the comparison
      */
     private int internalCompare(final Object val1,final Object val2){
-        @SuppressWarnings("rawtypes")
         final
         // to make the compiler happy
         Comparator c = comparator;

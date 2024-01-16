@@ -60,7 +60,6 @@ public class Jira422TestCase{
 
 }
 
-@SuppressWarnings("rawtypes")
 class RootBean{
 
     private List file;

@@ -82,7 +82,6 @@ public class SoftValueHashMap<K, V> implements Map<K, V>{
         if (!hash.isEmpty()){
             while ((ref = queue.poll()) != null){
                 if (ref instanceof SoftValueRef){
-                    @SuppressWarnings("rawtypes")
                     SoftValueRef que = (SoftValueRef) ref;
                     if (ref == hash.get(que.key)){
                         // only remove if it is the *exact* same SoftValueRef

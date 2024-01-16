@@ -68,7 +68,7 @@ import com.feilong.lib.javassist.bytecode.Descriptor;
  * @see com.feilong.lib.javassist.CtClass
  * @see com.feilong.lib.javassist.ClassPath
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({ "unchecked" })
 public class ClassPool{
 
     /**
