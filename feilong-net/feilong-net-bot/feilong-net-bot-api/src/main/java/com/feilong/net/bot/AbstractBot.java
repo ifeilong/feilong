@@ -15,10 +15,15 @@
  */
 package com.feilong.net.bot;
 
+import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.core.Validate;
+import com.feilong.json.JsonUtil;
+import com.feilong.net.bot.message.MessageParams;
 
 /**
  * 通用.
@@ -66,41 +71,51 @@ public abstract class AbstractBot implements Bot{
      */
     @Override
     public boolean sendMessage(String content){
-        if (!isAsync){
-            String type = formatPattern("[SyncSend[{}]Message]", this.getClass().getSimpleName());
-            LOGGER.info("{},content:[{}]", type, content);
-            return handleSendMessage(content, type);
-        }
+        Validate.notNull(content, "content can't be null!");
+        return sendMessage(content, null);
+    }
 
+    @Override
+    public boolean sendMessage(String content,MessageParams inputMessageParams){
+        Validate.notNull(content, "content can't be null!");
+        MessageParams useMessageParams = defaultIfNull(inputMessageParams, new MessageParams());
+
+        String logPrefix = formatPattern(
+                        "[{}] content:[{}],useMessageParams:[{}]",
+                        !isAsync ? "SyncSendDingTalkMessage" : "AsyncSendDingTalkMessage",
+                        content,
+                        JsonUtil.toString(useMessageParams));
+        if (!isAsync){
+            LOGGER.info(logPrefix);
+            return handleSendMessage(logPrefix, content, useMessageParams);
+        }
+        //---------------------------------------------------------------
         //异步
         new Thread(() -> {
-            String type = formatPattern("[AsyncSend[{}]Message]", this.getClass().getSimpleName());
-            LOGGER.info("{},content:[{}]", type, content);
-            handleSendMessage(content, type);
+            LOGGER.info(logPrefix);
+            handleSendMessage(logPrefix, content, useMessageParams);
         }).start();
 
         return true;
     }
 
     /**
-     * Handle send message.
-     *
+     * @param logPrefix
      * @param content
-     *            the content
-     * @param type
-     *            the type
-     * @return true, if successful
+     * @param useMessageParams
+     * @return
+     * @since 4.0.8
      */
-    protected boolean handleSendMessage(String content,String type){
+    private boolean handleSendMessage(String logPrefix,String content,MessageParams useMessageParams){
         try{
-            return doSendMessage(content);
+            return doSendMessage(logPrefix, content, useMessageParams);
         }catch (Exception e){
             if (!isCatchException || isThrowException){
                 throw e;
             }
 
             //只打印log 方便排查问题
-            LOGGER.error(formatPattern("[{}],typecontent:[{}],returnFalse", type, content), e);
+            LOGGER.error(formatPattern("[{}],returnFalse", logPrefix), e);
             return false;
         }
     }
@@ -108,13 +123,12 @@ public abstract class AbstractBot implements Bot{
     //---------------------------------------------------------------
 
     /**
-     * Do send message.
-     *
      * @param content
-     *            the content
-     * @return true, if successful
+     * @param messageParams
+     * @return
+     * @since 4.0.8
      */
-    protected abstract boolean doSendMessage(String content);
+    protected abstract boolean doSendMessage(String logPrefix,String content,MessageParams messageParams);
 
     /**
      * 获得 是否捕获异常,默认false,表示不捕获异常.

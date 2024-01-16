@@ -18,6 +18,7 @@ package com.feilong.net.bot.dingtalk;
 import org.junit.Test;
 
 import com.feilong.net.bot.Bot;
+import com.feilong.net.bot.message.MessageParams;
 
 public class DingTalkBotHellowordTest{
 
@@ -25,8 +26,24 @@ public class DingTalkBotHellowordTest{
     Bot bot = new DefaultDingTalkBot(getKey(), "SECd2325d14c67a3ec585568e00b49d749c7094a2a1579beb86369d88a5b161c981");
 
     @Test
-    public void test(){
-        bot.sendMessage("hello world");
+    public void testAtMobiles(){
+        MessageParams messageParams = new MessageParams();
+        messageParams.setAtMobiles("15001841318");
+        bot.sendMessage("AtMobiles Hello world @15001841318", messageParams);
+    }
+
+    @Test
+    public void testAtAll(){
+        MessageParams messageParams = new MessageParams();
+        messageParams.setIsAtAll(true);
+        bot.sendMessage("AtAll Hello world @all", messageParams);
+    }
+
+    @Test
+    public void testAtAll1(){
+        MessageParams messageParams = new MessageParams();
+        messageParams.setIsAtAll(false);
+        bot.sendMessage("AtAll Hello world @all", messageParams);
     }
 
     //---------------------------------------------------------------

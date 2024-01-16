@@ -15,6 +15,8 @@
  */
 package com.feilong.net.bot;
 
+import com.feilong.net.bot.message.MessageParams;
+
 /**
  * 机器人接口.
  * 
@@ -32,6 +34,19 @@ public interface Bot{
      *         如果 <code>content</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     boolean sendMessage(String content);
+
+    /**
+     * 发消息.
+     * 
+     * @param content
+     * @param messageParams
+     * @return 如果 <code>content</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>content</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 4.0.8
+     */
+    boolean sendMessage(String content,MessageParams messageParams);
+
+    //---------------------------------------------------------------
 
     /**
      * 获取该机器人的key(微信机器人是key属性, 钉钉是accessToken属性).

@@ -15,43 +15,36 @@
  */
 package com.feilong.net.bot.wxwork;
 
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.net.http.HttpClientUtil.getResponseBodyAsString;
-import static com.feilong.net.http.HttpMethodType.POST;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.bot.AbstractBot;
-import com.feilong.net.bot.message.BotMessage;
+import com.feilong.net.bot.message.MessageParams;
 import com.feilong.net.bot.wxwork.message.WxworkResponse;
 import com.feilong.net.bot.wxwork.message.markdown.Markdown;
 import com.feilong.net.bot.wxwork.message.markdown.WxworkMarkdownMessage;
 import com.feilong.net.bot.wxwork.message.news.Article;
 import com.feilong.net.bot.wxwork.message.news.News;
 import com.feilong.net.bot.wxwork.message.news.WxworkNewsMessage;
-import com.feilong.net.http.ConnectionConfig;
-import com.feilong.net.http.HttpRequest;
 
 /**
  * 默认的企业微信机器人.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see <a href="https://work.weixin.qq.com/help?person_id=1&doc_id=13376">如何配置群机器人？</a>
+ * @see <a href="https://open.work.weixin.qq.com/help2/pc/14931?person_id=1&is_tencent=">如何配置群机器人？</a>
  * @since 3.1.0 change packagename from com.feilong.net.bot.wxwork to com.feilong.net.bot.wxwork
  */
 public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
 
     /** The Constant log. */
-    private static final Logger LOGGER          = LoggerFactory.getLogger(DefaultWxworkBot.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultWxworkBot.class);
 
     //---------------------------------------------------------------
-    private static final String BOT_WEBHOOK_URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send";
-
     /** The key. */
     private String              key;
 
@@ -78,9 +71,11 @@ public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
     //---------------------------------------------------------------
 
     @Override
-    protected boolean doSendMessage(String content){
+    protected boolean doSendMessage(String logPrefix,String content,MessageParams messageParams){
         Validate.notBlank(content, "content can't be blank!");
-        WxworkResponse wxworkResponse = pushMessage(new WxworkMarkdownMessage(new Markdown(content)));
+
+        WxworkMarkdownMessage wxworkMarkdownMessage = new WxworkMarkdownMessage(new Markdown(content));
+        WxworkResponse wxworkResponse = WxworkPushUtil.pushMessage(wxworkMarkdownMessage, key);
         return wxworkResponse.getIsSuccess();
     }
 
@@ -104,30 +99,14 @@ public class DefaultWxworkBot extends AbstractBot implements WxworkBot{
         try{
             Validate.notEmpty(articles, "articles can't be null/empty!");
             News news = new News(toList(articles));
-            return pushMessage(new WxworkNewsMessage(news));
+            return WxworkPushUtil.pushMessage(new WxworkNewsMessage(news), key);
         }catch (Exception e){
-            if (!isCatchException){
+            if (!isCatchException || isThrowException){
                 throw e;
             }
-            LOGGER.error(StringUtil.formatPattern("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
+            LOGGER.error(formatPattern("articles:[{}],returnFalse", JsonUtil.toString(articles)), e);
             return null;
         }
-    }
-
-    //---------------------------------------------------------------
-
-    private <T extends BotMessage> WxworkResponse pushMessage(T botMessage){
-        String msgtype = botMessage.getMsgtype();
-        Validate.notBlank(msgtype, "msgtype can't be blank!");
-
-        //---------------------------------------------------------------
-        String url = BOT_WEBHOOK_URL + "?key=" + key;
-
-        HttpRequest httpRequest = new HttpRequest(url, POST);
-        httpRequest.setRequestBody(JsonUtil.toString(botMessage));
-
-        String json = getResponseBodyAsString(httpRequest, new ConnectionConfig(2 * MILLISECOND_PER_MINUTE));
-        return JsonUtil.toBean(json, WxworkResponse.class);
     }
 
     //---------------------------------------------------------------
