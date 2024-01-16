@@ -45,8 +45,6 @@ import com.feilong.lib.org.apache.http.conn.HttpClientConnectionManager;
 import com.feilong.lib.org.apache.http.conn.routing.HttpRoute;
 import com.feilong.lib.org.apache.http.impl.DefaultConnectionReuseStrategy;
 import com.feilong.lib.org.apache.http.impl.execchain.MinimalClientExec;
-import com.feilong.lib.org.apache.http.params.BasicHttpParams;
-import com.feilong.lib.org.apache.http.params.HttpParams;
 import com.feilong.lib.org.apache.http.protocol.BasicHttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpContext;
 import com.feilong.lib.org.apache.http.protocol.HttpRequestExecutor;
@@ -65,7 +63,7 @@ class MinimalHttpClient extends CloseableHttpClient{
 
     private final MinimalClientExec           requestExecutor;
 
-    private final HttpParams                  params;
+    //    private final HttpParams                  params;
 
     public MinimalHttpClient(final HttpClientConnectionManager connManager){
         super();
@@ -75,7 +73,7 @@ class MinimalHttpClient extends CloseableHttpClient{
                         connManager,
                         DefaultConnectionReuseStrategy.INSTANCE,
                         DefaultConnectionKeepAliveStrategy.INSTANCE);
-        this.params = new BasicHttpParams();
+        //        this.params = new BasicHttpParams();
     }
 
     @Override

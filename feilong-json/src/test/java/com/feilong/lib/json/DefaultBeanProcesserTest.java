@@ -21,8 +21,6 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.now;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
@@ -34,8 +32,6 @@ import com.feilong.store.member.UserInfo;
  * @since 3.0.6
  */
 public class DefaultBeanProcesserTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultBeanProcesserTest.class);
 
     @Test
     public void test() throws Exception{

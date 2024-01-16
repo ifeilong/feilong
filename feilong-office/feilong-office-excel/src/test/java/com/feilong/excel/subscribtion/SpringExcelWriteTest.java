@@ -68,7 +68,7 @@ public class SpringExcelWriteTest extends AbstractJUnit4SpringContextTests{
 
     //---------------------------------------------------------------
 
-    private List<SubscribtionCommand> buildList(int length){
+    private static List<SubscribtionCommand> buildList(int length){
         List<SubscribtionCommand> list = newArrayList();
 
         for (int i = 1; i <= length; ++i){

@@ -812,7 +812,7 @@ final class NTLMEngineImpl implements NTLMEngine{
 
     static class Handle{
 
-        final private byte[]  exportedSessionKey;
+        //        final private byte[]  exportedSessionKey;
 
         private byte[]        signingKey;
 
@@ -827,7 +827,7 @@ final class NTLMEngineImpl implements NTLMEngine{
         int                   sequenceNumber = 0;
 
         Handle(final byte[] exportedSessionKey, final Mode mode, final boolean isConnection) throws NTLMEngineException{
-            this.exportedSessionKey = exportedSessionKey;
+            //            this.exportedSessionKey = exportedSessionKey;
             this.isConnection = isConnection;
             this.mode = mode;
             try{

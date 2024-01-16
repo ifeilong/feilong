@@ -630,7 +630,7 @@ public class ExpressionCompiler implements OgnlExpressionCompiler{
      * @throws NotFoundException
      *             When the class definition can't be found.
      */
-    protected CtClass getCtClass(Class searchClass) throws NotFoundException{
+    private CtClass getCtClass(Class searchClass) throws NotFoundException{
         return _pool.get(searchClass.getName());
     }
 

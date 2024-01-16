@@ -71,97 +71,97 @@ import junit.framework.TestSuite;
 public class PropertyUtilsTestCase extends TestCase{
 
     // ---------------------------------------------------- Instance Variables
-
-    /**
-     * The fully qualified class name of our private directly
-     * implemented interface.
-     */
-    private static final String       PRIVATE_DIRECT_CLASS   = "org.apache.commons.beanutils.priv.PrivateDirect";
-
-    /**
-     * The fully qualified class name of our private indirectly
-     * implemented interface.
-     */
-    private static final String       PRIVATE_INDIRECT_CLASS = "org.apache.commons.beanutils.priv.PrivateIndirect";
-
-    /**
-     * The fully qualified class name of our test bean class.
-     */
-    private static final String       TEST_BEAN_CLASS        = "org.apache.commons.beanutils.TestBean";
+    //
+    //    /**
+    //     * The fully qualified class name of our private directly
+    //     * implemented interface.
+    //     */
+    //    private static final String       PRIVATE_DIRECT_CLASS   = "org.apache.commons.beanutils.priv.PrivateDirect";
+    //
+    //    /**
+    //     * The fully qualified class name of our private indirectly
+    //     * implemented interface.
+    //     */
+    //    private static final String       PRIVATE_INDIRECT_CLASS = "org.apache.commons.beanutils.priv.PrivateIndirect";
+    //
+    //    /**
+    //     * The fully qualified class name of our test bean class.
+    //     */
+    //    private static final String       TEST_BEAN_CLASS        = "org.apache.commons.beanutils.TestBean";
 
     /**
      * The basic test bean for each test.
      */
-    protected TestBean                bean                   = null;
+    protected TestBean                bean                = null;
 
     /**
      * The "package private subclass" test bean for each test.
      */
-    protected TestBeanPackageSubclass beanPackageSubclass    = null;
+    protected TestBeanPackageSubclass beanPackageSubclass = null;
 
     /**
      * The test bean for private access tests.
      */
-    protected PrivateDirect           beanPrivate            = null;
+    protected PrivateDirect           beanPrivate         = null;
 
     /**
      * The test bean for private access tests of subclasses.
      */
-    protected PrivateDirect           beanPrivateSubclass    = null;
+    protected PrivateDirect           beanPrivateSubclass = null;
 
     /**
      * The "public subclass" test bean for each test.
      */
-    protected TestBeanPublicSubclass  beanPublicSubclass     = null;
+    protected TestBeanPublicSubclass  beanPublicSubclass  = null;
 
     /**
      * The set of properties that should be described.
      */
-    protected String                  describes[]            = {
-                                                                 "booleanProperty",
-                                                                 "booleanSecond",
-                                                                 "doubleProperty",
-                                                                 "floatProperty",
-                                                                 "intArray",
-                                                                 //      "intIndexed",
-                                                                 "intProperty",
-                                                                 "listIndexed",
-                                                                 "longProperty",
-                                                                 //      "mappedObjects",
-                                                                 //      "mappedProperty",
-                                                                 //      "mappedIntProperty",
-                                                                 "nested",
-                                                                 "nullProperty",
-                                                                 //      "readOnlyProperty",
-                                                                 "shortProperty",
-                                                                 "stringArray",
-                                                                 //      "stringIndexed",
-                                                                 "stringProperty" };
+    protected String                  describes[]         = {
+                                                              "booleanProperty",
+                                                              "booleanSecond",
+                                                              "doubleProperty",
+                                                              "floatProperty",
+                                                              "intArray",
+                                                              //      "intIndexed",
+                                                              "intProperty",
+                                                              "listIndexed",
+                                                              "longProperty",
+                                                              //      "mappedObjects",
+                                                              //      "mappedProperty",
+                                                              //      "mappedIntProperty",
+                                                              "nested",
+                                                              "nullProperty",
+                                                              //      "readOnlyProperty",
+                                                              "shortProperty",
+                                                              "stringArray",
+                                                              //      "stringIndexed",
+                                                              "stringProperty" };
 
     /**
      * The set of property names we expect to have returned when calling
      * <code>getPropertyDescriptors()</code>. You should update this list
      * when new properties are added to TestBean.
      */
-    protected final static String[]   properties             = {
-                                                                 "booleanProperty",
-                                                                 "booleanSecond",
-                                                                 "doubleProperty",
-                                                                 "dupProperty",
-                                                                 "floatProperty",
-                                                                 "intArray",
-                                                                 "intIndexed",
-                                                                 "intProperty",
-                                                                 "listIndexed",
-                                                                 "longProperty",
-                                                                 "nested",
-                                                                 "nullProperty",
-                                                                 "readOnlyProperty",
-                                                                 "shortProperty",
-                                                                 "stringArray",
-                                                                 "stringIndexed",
-                                                                 "stringProperty",
-                                                                 "writeOnlyProperty", };
+    protected final static String[]   properties          = {
+                                                              "booleanProperty",
+                                                              "booleanSecond",
+                                                              "doubleProperty",
+                                                              "dupProperty",
+                                                              "floatProperty",
+                                                              "intArray",
+                                                              "intIndexed",
+                                                              "intProperty",
+                                                              "listIndexed",
+                                                              "longProperty",
+                                                              "nested",
+                                                              "nullProperty",
+                                                              "readOnlyProperty",
+                                                              "shortProperty",
+                                                              "stringArray",
+                                                              "stringIndexed",
+                                                              "stringProperty",
+                                                              "writeOnlyProperty", };
 
     // ---------------------------------------------------------- Constructors
 

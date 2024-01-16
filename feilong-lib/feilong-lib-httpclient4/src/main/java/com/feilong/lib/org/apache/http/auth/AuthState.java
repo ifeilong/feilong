@@ -43,8 +43,8 @@ public class AuthState{
     /** Actual authentication scheme */
     private AuthScheme        authScheme;
 
-    /** Actual authentication scope */
-    private AuthScope         authScope;
+    //    /** Actual authentication scope */
+    //    private AuthScope         authScope;
 
     /** Credentials selected for authentication */
     private Credentials       credentials;
@@ -66,7 +66,7 @@ public class AuthState{
         this.state = AuthProtocolState.UNCHALLENGED;
         this.authOptions = null;
         this.authScheme = null;
-        this.authScope = null;
+        //        this.authScope = null;
         this.credentials = null;
     }
 

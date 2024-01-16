@@ -48,7 +48,6 @@ import com.feilong.lib.org.apache.http.util.Args;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-@SuppressWarnings("deprecation")
 public class RequestExpectContinue implements HttpRequestInterceptor{
 
     private final boolean activeByDefault;

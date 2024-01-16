@@ -29,9 +29,6 @@ package com.feilong.lib.org.apache.http.impl.conn;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.lib.org.apache.http.annotation.Contract;
 import com.feilong.lib.org.apache.http.annotation.ThreadingBehavior;
 import com.feilong.lib.org.apache.http.conn.ManagedHttpClientConnection;
@@ -47,9 +44,6 @@ import com.feilong.lib.org.apache.http.pool.PoolEntryCallback;
 class CPool extends AbstractConnPool<HttpRoute, ManagedHttpClientConnection, CPoolEntry>{
 
     private static final AtomicLong COUNTER = new AtomicLong();
-
-    /** The Constant log. */
-    private static final Logger     log     = LoggerFactory.getLogger(CPool.class);
 
     //---------------------------------------------------------------
     private final long              timeToLive;

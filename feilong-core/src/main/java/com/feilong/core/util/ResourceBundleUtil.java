@@ -867,7 +867,8 @@ public final class ResourceBundleUtil{
      * @param <T>
      * @param resourceBundle
      * @param beanClass
-     * @return
+     * @return 如果 <code>resourceBundle</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beanClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 4.0.1
      */
     public static <T> T toBean(ResourceBundle resourceBundle,Class<T> beanClass){

@@ -63,7 +63,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V>{
 
-    private static final int              DEFAULT_INITIAL_CAPACITY  = 16;
+    //    private static final int              DEFAULT_INITIAL_CAPACITY  = 16;
 
     private static final float            DEFAULT_LOAD_FACTOR       = 0.75f;
 

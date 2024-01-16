@@ -16,9 +16,6 @@
  */
 package com.feilong.lib.beanutils.bugs;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -39,9 +36,6 @@ import junit.framework.TestSuite;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-87">https://issues.apache.org/jira/browse/BEANUTILS-87</a>
  */
 public class Jira87TestCase extends TestCase{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Jira87TestCase.class);
 
     //---------------------------------------------------------------
 
