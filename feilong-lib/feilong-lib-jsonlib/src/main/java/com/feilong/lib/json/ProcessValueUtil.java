@@ -15,10 +15,10 @@
  */
 package com.feilong.lib.json;
 
-import static com.feilong.lib.json.ToStringUtil.ARRAY_END;
-import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_END;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_END_CHAR;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_END_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START_CHAR;
 
 import java.lang.annotation.Annotation;
 
@@ -144,10 +144,10 @@ public class ProcessValueUtil{
             String str = String.valueOf(value);
             if (JSONUtils.hasQuotes(str)){
                 String stripped = JSONUtils.stripQuotes(str);
-                if (stripped.startsWith(OBJECT_START) && stripped.endsWith(OBJECT_END)){
+                if (stripped.startsWith(ARRAY_START_CHAR) && stripped.endsWith(ARRAY_END_CHAR)){
                     return stripped;
                 }
-                if (stripped.startsWith(ARRAY_START) && stripped.endsWith(ARRAY_END)){
+                if (stripped.startsWith(OBJECT_START_CHAR) && stripped.endsWith(OBJECT_END_CHAR)){
                     return stripped;
                 }
                 return str;

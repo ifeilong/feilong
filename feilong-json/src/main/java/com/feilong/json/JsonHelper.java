@@ -17,10 +17,10 @@ package com.feilong.json;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.json.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
-import static com.feilong.lib.json.ToStringUtil.ARRAY_END;
-import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_END;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_END_CHAR;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_END_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START_CHAR;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -35,7 +35,6 @@ import com.feilong.lib.json.JSONObject;
 import com.feilong.lib.json.JSONObjectBuilder;
 import com.feilong.lib.json.JSONTokener;
 import com.feilong.lib.json.JsonConfig;
-import com.feilong.lib.json.ToStringUtil;
 import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.json.util.JSONUtils;
 import com.feilong.lib.lang3.ClassUtils;
@@ -140,7 +139,7 @@ public final class JsonHelper{
     private static boolean isNeedConvertToJSONArray(Object obj){
         if (obj instanceof String){
             String str = (String) obj;
-            if (str.startsWith(OBJECT_START) && str.endsWith(OBJECT_END)){// [] 格式的字符串 
+            if (str.startsWith(ARRAY_START_CHAR) && str.endsWith(ARRAY_END_CHAR)){// [] 格式的字符串 
                 return true;
             }
         }
@@ -177,10 +176,10 @@ public final class JsonHelper{
 
         //---------------------------------------------------------------
         String str = (String) obj;
-        if (str.startsWith(OBJECT_START) && str.endsWith(OBJECT_END)){// [] 格式的字符串 
+        if (str.startsWith(ARRAY_START_CHAR) && str.endsWith(ARRAY_END_CHAR)){// [] 格式的字符串 
             return false;
         }
-        if (str.startsWith(ARRAY_START) && str.endsWith(ARRAY_END)){// {} 格式的字符串 
+        if (str.startsWith(OBJECT_START_CHAR) && str.endsWith(OBJECT_END_CHAR)){// {} 格式的字符串 
             return false;
         }
         return true;
@@ -213,7 +212,7 @@ public final class JsonHelper{
 
         //---------------------------------------------------------------
         String str = (String) obj;
-        return str.startsWith(ToStringUtil.ARRAY_START) && str.endsWith(ToStringUtil.ARRAY_END);
+        return str.startsWith(OBJECT_START_CHAR) && str.endsWith(OBJECT_END_CHAR);
     }
 
     // [end]

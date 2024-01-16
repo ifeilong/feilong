@@ -16,8 +16,8 @@
 
 package com.feilong.lib.json;
 
-import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START_CHAR;
 
 import com.feilong.lib.json.util.JSONUtils;
 
@@ -139,10 +139,10 @@ public class JSONSerializer{
      *             if the string is not a valid JSON string
      */
     private static JSON toJSON(String string,JsonConfig jsonConfig){
-        if (string.startsWith(OBJECT_START)){
+        if (string.startsWith(ARRAY_START_CHAR)){
             return JSONArrayBuilder.build(string, jsonConfig);
         }
-        if (string.startsWith(ARRAY_START)){
+        if (string.startsWith(OBJECT_START_CHAR)){
             return JSONObjectBuilder.build(string, jsonConfig);
         }
         if ("null".equals(string)){

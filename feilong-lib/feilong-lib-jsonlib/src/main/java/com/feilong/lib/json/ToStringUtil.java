@@ -34,34 +34,34 @@ import com.feilong.lib.json.util.JSONUtils;
 public class ToStringUtil{
 
     /**
-     * The content start {@code '['}.
+     * json array 开始的字符 {@code ']'}.
      * 
-     * @since 3.0.6
+     * @since 4.0.8
      */
-    public static final String OBJECT_START = "[";
+    public static final String ARRAY_START_CHAR  = "[";
 
     /**
-     * The content end {@code ']'}.
+     * json array 结束的字符 {@code ']'}.
      * 
-     * @since 3.0.6
+     * @since 4.0.8
      */
-    public static final String OBJECT_END   = "]";
+    public static final String ARRAY_END_CHAR    = "]";
 
     //---------------------------------------------------------------
 
     /**
-     * The array start <code>'{'</code>.
+     * json object 开始的字符 <code>'{'</code>.
      * 
-     * @since 3.0.6
+     * @since 4.0.8
      */
-    public static final String ARRAY_START  = "{";
+    public static final String OBJECT_START_CHAR = "{";
 
     /**
-     * The array end {@code '}'}.
+     * json object 结束的字符 {@code '}'}.
      * 
-     * @since 3.0.6
+     * @since 4.0.8
      */
-    public static final String ARRAY_END    = "}";
+    public static final String OBJECT_END_CHAR   = "}";
 
     //---------------------------------------------------------------
 
@@ -75,7 +75,7 @@ public class ToStringUtil{
     //---------------------------------------------------------------
 
     static String toString(Map<String, Object> jsonKeyAndValueMap,int indentFactor,int indent){
-        StringBuilder sb = new StringBuilder(ARRAY_START);
+        StringBuilder sb = new StringBuilder(OBJECT_START_CHAR);
 
         //---------------------------------------------------------------
         if (jsonKeyAndValueMap.size() == 1){
@@ -118,12 +118,12 @@ public class ToStringUtil{
         }
 
         //---------------------------------------------------------------
-        sb.append(ARRAY_END);
+        sb.append(OBJECT_END_CHAR);
         return sb.toString();
     }
 
     static String toString(Map<String, Object> properties){
-        StringBuilder sb = new StringBuilder(ARRAY_START);
+        StringBuilder sb = new StringBuilder(OBJECT_START_CHAR);
 
         Iterator<String> keys = properties.keySet().iterator();
         while (keys.hasNext()){
@@ -138,12 +138,12 @@ public class ToStringUtil{
         }
 
         //---------------------------------------------------------------
-        sb.append(ARRAY_END);
+        sb.append(OBJECT_END_CHAR);
         return sb.toString();
     }
 
     static String toString(List<Object> elements,int indentFactor,int indent){
-        StringBuilder sb = new StringBuilder(OBJECT_START);
+        StringBuilder sb = new StringBuilder(ARRAY_START_CHAR);
 
         //---------------------------------------------------------------
         int len = elements.size();
@@ -171,7 +171,7 @@ public class ToStringUtil{
         }
 
         //---------------------------------------------------------------
-        sb.append(OBJECT_END);
+        sb.append(ARRAY_END_CHAR);
         return sb.toString();
     }
 
@@ -188,7 +188,7 @@ public class ToStringUtil{
      * @return a printable, displayable, transmittable representation of the array.
      */
     static String toString(List<Object> elements){
-        StringBuilder sb = new StringBuilder(OBJECT_START);
+        StringBuilder sb = new StringBuilder(ARRAY_START_CHAR);
 
         int len = elements.size();
         for (int i = 0; i < len; i += 1){
@@ -198,7 +198,7 @@ public class ToStringUtil{
             sb.append(valueToString(elements.get(i)));
         }
         //---------------------------------------------------------------
-        sb.append(OBJECT_END);
+        sb.append(ARRAY_END_CHAR);
         return sb.toString();
     }
 

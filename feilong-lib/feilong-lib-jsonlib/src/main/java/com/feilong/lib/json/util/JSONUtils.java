@@ -16,10 +16,10 @@
 
 package com.feilong.lib.json.util;
 
-import static com.feilong.lib.json.ToStringUtil.ARRAY_END;
-import static com.feilong.lib.json.ToStringUtil.ARRAY_START;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_END;
-import static com.feilong.lib.json.ToStringUtil.OBJECT_START;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_END_CHAR;
+import static com.feilong.lib.json.ToStringUtil.ARRAY_START_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_END_CHAR;
+import static com.feilong.lib.json.ToStringUtil.OBJECT_START_CHAR;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -364,8 +364,8 @@ public final class JSONUtils{
     public static boolean mayBeJSON(String string){
         return string != null && //
                         ("null".equals(string) || //
-                                        (string.startsWith(OBJECT_START) && string.endsWith(OBJECT_END)) || //
-                                        (string.startsWith(ARRAY_START) && string.endsWith(ARRAY_END)));
+                                        (string.startsWith(OBJECT_START_CHAR) && string.endsWith(OBJECT_END_CHAR)) || //
+                                        (string.startsWith(ARRAY_START_CHAR) && string.endsWith(ARRAY_END_CHAR)));
     }
 
     //---------------------------------------------------------------
