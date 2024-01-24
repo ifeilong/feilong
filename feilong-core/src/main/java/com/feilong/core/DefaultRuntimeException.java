@@ -16,8 +16,7 @@
 package com.feilong.core;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-
-import com.feilong.core.lang.StringUtil;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 /**
  * 默认的 RuntimeException.
@@ -199,7 +198,7 @@ public class DefaultRuntimeException extends RuntimeException{
      *            the args
      */
     public DefaultRuntimeException(String messagePattern, Object...args){
-        super(StringUtil.formatPattern(messagePattern, args));
+        super(formatPattern(messagePattern, args));
     }
 
     //---------------------------------------------------------------

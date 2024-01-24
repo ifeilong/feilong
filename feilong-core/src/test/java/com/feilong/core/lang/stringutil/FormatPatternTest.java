@@ -15,18 +15,17 @@
  */
 package com.feilong.core.lang.stringutil;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import com.feilong.core.lang.StringUtil;
 
 public class FormatPatternTest{
 
     @Test
     public void testFormat(){
-        assertEquals("", StringUtil.formatPattern(""));
-        assertEquals("{}", StringUtil.formatPattern("{}"));
+        assertEquals("", formatPattern(""));
+        assertEquals("{}", formatPattern("{}"));
     }
 
 }

@@ -15,9 +15,9 @@
  */
 package com.feilong.security;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.lib.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractTest;
 
 /**
@@ -46,6 +46,6 @@ public abstract class AbstractSecurityTest extends AbstractTest{
      * @return the string
      */
     protected String debugSecurityValue(String encode){
-        return StringUtil.formatPattern(" {} [{}]", encode, encode.length());
+        return formatPattern(" {} [{}]", encode, encode.length());
     }
 }

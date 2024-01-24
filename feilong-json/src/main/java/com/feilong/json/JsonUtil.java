@@ -20,6 +20,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_TIME;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -36,7 +37,6 @@ import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.builder.JavaToJsonConfigBuilder;
 import com.feilong.json.builder.JsonConfigBuilder;
@@ -1613,7 +1613,7 @@ public final class JsonUtil{
      * @since 1.11.5
      */
     private static String buildJsonToJavaExceptionMessage(String json,JsonToJavaConfig jsonToJavaConfig){
-        return StringUtil.formatPattern("input json:{},jsonToJavaConfig:{}", json, format(jsonToJavaConfig, true));
+        return formatPattern("input json:{},jsonToJavaConfig:{}", json, format(jsonToJavaConfig, true));
     }
 
     // [end]

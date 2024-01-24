@@ -16,13 +16,13 @@
 package com.feilong.net.mail.builder.setter;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 
 import com.feilong.core.DefaultRuntimeException;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.net.mail.entity.MailSendRequest;
 import com.feilong.net.mail.util.InternetAddressUtil;
@@ -114,9 +114,7 @@ public final class RecipientsSetter{
             }
         }catch (MessagingException e){
             //since 1.13.2
-            throw new DefaultRuntimeException(
-                            StringUtil.formatPattern("addressArray:[{}],recipientType:[{}]", addressArray, recipientType),
-                            e);
+            throw new DefaultRuntimeException(formatPattern("addressArray:[{}],recipientType:[{}]", addressArray, recipientType), e);
         }
     }
 }

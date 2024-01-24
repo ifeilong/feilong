@@ -16,6 +16,7 @@
 package com.feilong.net.filetransfer.ftp;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
@@ -30,7 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
@@ -112,7 +112,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             String password = ftpFileTransferConfig.getPassword();
             boolean loginResult = ftpClient.login(userName, password);
 
-            String message = StringUtil.formatPattern(
+            String message = formatPattern(
                             "login:[{}],params:[{}],port:[{}]~~~",
                             loginResult,
                             JsonUtil.toString(ftpFileTransferConfig),
@@ -148,7 +148,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             LOGGER.info("connect:[{}]", true);
             return true;
         }catch (Exception e){
-            String message = StringUtil.formatPattern("ftpFileTransferConfig:{}", JsonUtil.toString(ftpFileTransferConfig));
+            String message = formatPattern("ftpFileTransferConfig:{}", JsonUtil.toString(ftpFileTransferConfig));
             throw new FileTransferException(message, e);
         }
     }
@@ -214,7 +214,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
             return flag;
         }catch (IOException e){
-            String message = StringUtil.formatPattern("can't mkdir,remoteDirectory:[{}]", remoteDirectory);
+            String message = formatPattern("can't mkdir,remoteDirectory:[{}]", remoteDirectory);
             throw new FileTransferException(message, e);
         }
     }
@@ -237,7 +237,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
             return flag;
         }catch (IOException e){
-            String message = StringUtil.formatPattern("can't upload fileInputStream,toFileName:[{}]", toFileName);
+            String message = formatPattern("can't upload fileInputStream,toFileName:[{}]", toFileName);
             throw new FileTransferException(message, e);
         }
     }
@@ -259,7 +259,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
             return map;
         }catch (IOException e){
-            String message = StringUtil.formatPattern("remotePath:[{}]", remotePath);
+            String message = formatPattern("remotePath:[{}]", remotePath);
             throw new FileTransferException(message, e);
         }
     }
@@ -307,7 +307,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
             return flag;
         }catch (IOException e){
-            String message = StringUtil.formatPattern("remotePath:[{}]", remotePath);
+            String message = formatPattern("remotePath:[{}]", remotePath);
             throw new FileTransferException(message, e);
         }
     }
@@ -332,7 +332,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             }
             return flag;
         }catch (IOException e){
-            String message = StringUtil.formatPattern("remotePath:[{}]", remotePath);
+            String message = formatPattern("remotePath:[{}]", remotePath);
             throw new FileTransferException(message, e);
         }
     }
@@ -367,7 +367,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             bufferedOutputStream.flush();
             return success;
         }catch (IOException e){
-            String message = StringUtil.formatPattern("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath);
+            String message = formatPattern("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath);
             throw new FileTransferException(message, e);
         }
     }

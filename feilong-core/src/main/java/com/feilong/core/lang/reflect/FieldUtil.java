@@ -17,6 +17,7 @@ package com.feilong.core.lang.reflect;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.selectRejected;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
@@ -33,7 +34,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.lib.lang3.reflect.FieldUtils;
@@ -252,7 +252,7 @@ public final class FieldUtil{
             return (T) FieldUtils.readField(obj, fieldName, true);
         }catch (Exception e){
             String pattern = "getFieldValue exception,ownerObj:[{}],fieldName:[{}]";
-            throw new ReflectException(StringUtil.formatPattern(pattern, obj, fieldName), e);
+            throw new ReflectException(formatPattern(pattern, obj, fieldName), e);
         }
     }
 }

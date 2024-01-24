@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,6 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
@@ -129,7 +130,7 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
 
             //---------------------------------------------------------------
             String pattern = "tag:[{}],exception message:[{}],request info:{},but need render page,pls check!";
-            LOGGER.error(StringUtil.formatPattern(pattern, getClass().getSimpleName(), e.getMessage(), JsonUtil.toString(map)), e);
+            LOGGER.error(formatPattern(pattern, getClass().getSimpleName(), e.getMessage(), JsonUtil.toString(map)), e);
         }
     }
 

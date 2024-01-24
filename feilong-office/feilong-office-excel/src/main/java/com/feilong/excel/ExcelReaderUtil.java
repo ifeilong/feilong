@@ -19,6 +19,7 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -30,7 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.reader.ReadStatus;
 import com.feilong.io.InputStreamUtil;
@@ -228,7 +228,7 @@ public class ExcelReaderUtil{
         List<Exception> exceptions = readStatus.getExceptions();
         String pattern = "read excel exception,readStatus:[{}],getMessage:[{}],and exceptions size is:[{}],first exception is:\n{}";
         throw new DefaultRuntimeException(
-                        StringUtil.formatPattern(
+                        formatPattern(
                                         pattern,
                                         status,
                                         readStatus.getMessage(), //

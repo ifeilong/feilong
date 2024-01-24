@@ -15,12 +15,12 @@
  */
 package com.feilong.net.filetransfer.sftp;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.util.Map;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.jcraft.jsch.Session;
 
 /**
@@ -51,7 +51,7 @@ class SftpSessionUtil{
     static String buildSessionPrettyString(Session session){
         Validate.notNull(session, "session can't be null!");
 
-        return StringUtil.formatPattern("{}@{}:{}", session.getUserName(), session.getHost(), session.getPort());
+        return formatPattern("{}@{}:{}", session.getUserName(), session.getHost(), session.getPort());
     }
 
     //---------------------------------------------------------------

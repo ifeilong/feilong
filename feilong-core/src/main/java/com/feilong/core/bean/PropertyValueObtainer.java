@@ -18,6 +18,7 @@ package com.feilong.core.bean;
 import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.PropertyDescriptorUtil.getSpringPropertyDescriptor;
 import static com.feilong.core.bean.PropertyDescriptorUtil.isUseSpringOperate;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.first;
 
 import java.beans.PropertyDescriptor;
@@ -29,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 
 /**
@@ -89,7 +89,7 @@ public final class PropertyValueObtainer{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
-            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName), e);
+            throw new BeanOperationException(formatPattern(pattern, bean, propertyName), e);
         }
     }
 
@@ -113,7 +113,7 @@ public final class PropertyValueObtainer{
             return getValue(bean, propertyDescriptor);
         }catch (Exception e){
             String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
-            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName), e);
+            throw new BeanOperationException(formatPattern(pattern, bean, propertyName), e);
         }
     }
 

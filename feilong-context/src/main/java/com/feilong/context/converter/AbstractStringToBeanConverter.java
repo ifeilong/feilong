@@ -16,13 +16,11 @@
 package com.feilong.context.converter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.formatter.FormatterUtil.formatToSimpleTable;
-import static java.lang.System.lineSeparator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.lang.StringUtil;
 
 /**
  * 抽象的将 字符串转成 bean 的转换器.
@@ -73,9 +71,9 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
     private void preHandlerLog(String value){
         if (LOGGER.isDebugEnabled()){
             try{
-                LOGGER.debug("input String:[{}],after format:{} {}", value, lineSeparator(), formatValue(value));
+                LOGGER.debug("inputString:[{}],afterFormat: {}", value, formatValue(value));
             }catch (Exception e){
-                String message = StringUtil.formatPattern("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
+                String message = formatPattern("inputString:[{}] can't format,message:[{}]", value, e.getMessage());
                 throw new IllegalArgumentException(message, e);
             }
         }
@@ -112,8 +110,7 @@ public abstract class AbstractStringToBeanConverter<T> implements StringToBeanCo
      * @param inputString
      *            the input string
      */
-    @SuppressWarnings("unused")
-    protected void preHandler(String inputString){
+    protected void preHandler(@SuppressWarnings("unused") String inputString){
     }
 
     //---------------------------------------------------------------

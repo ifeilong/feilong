@@ -17,6 +17,7 @@ package com.feilong.excel.subscribtion;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.util.List;
@@ -28,7 +29,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.excel.ExcelWriter;
 import com.feilong.io.FileUtil;
@@ -51,7 +51,7 @@ public class SpringExcelWriteTest extends AbstractJUnit4SpringContextTests{
         List<SubscribtionCommand> alist = buildList(2);
         List<SubscribtionCommand> blist = alist;
 
-        String outputFileName = StringUtil.formatPattern(
+        String outputFileName = formatPattern(
                         SystemUtil.USER_HOME + "/feilong/excel/{}{}.{}",
                         "111",
                         nowTimestamp(),

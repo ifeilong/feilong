@@ -16,11 +16,11 @@
 package com.feilong.taglib.display.option;
 
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static java.lang.System.lineSeparator;
 
 import java.util.Map;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.taglib.display.CacheContentBuilder;
 import com.feilong.taglib.display.LocaleSupportUtil;
 
@@ -83,7 +83,7 @@ public class OptionCacheContentBuilder implements CacheContentBuilder<OptionPara
         //主要为了国际化使用, 页面显示的时候,显示为  "<option value="edu.option1">初中</option>"
         //存储到数据库的时候 值存储的是  edu.option1
         //而 显示的时候,使用 spring message 标签显示
-        return StringUtil.formatPattern(OPTION_PATTERN, key, selectedStatus, value);
+        return formatPattern(OPTION_PATTERN, key, selectedStatus, value);
     }
 
 }

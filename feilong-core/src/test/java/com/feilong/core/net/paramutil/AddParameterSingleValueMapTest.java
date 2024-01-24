@@ -18,6 +18,7 @@ package com.feilong.core.net.paramutil;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.net.ParamUtil.addParameterSingleValueMap;
 import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -27,8 +28,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-
-import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class ParamUtilAddParameterSingleValueMapTest.
@@ -82,8 +81,7 @@ public class AddParameterSingleValueMapTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        String expected = StringUtil
-                        .formatPattern(PATH + "?a=b&city={}&name=feilong&province={}", encode("南通市", UTF8), encode("江苏省", UTF8));
+        String expected = formatPattern(PATH + "?a=b&city={}&name=feilong&province={}", encode("南通市", UTF8), encode("江苏省", UTF8));
         assertEquals(expected, addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 

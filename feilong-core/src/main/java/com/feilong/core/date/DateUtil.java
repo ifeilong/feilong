@@ -27,6 +27,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.CalendarUtil.resetDayBegin;
 import static com.feilong.core.date.CalendarUtil.resetDayEnd;
 import static com.feilong.core.date.CalendarUtil.resetYearEnd;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static java.util.Calendar.DAY_OF_MONTH;
@@ -51,7 +52,6 @@ import java.util.Map;
 import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.time.DateFormatUtils;
 import com.feilong.lib.lang3.time.DateUtils;
 import com.feilong.lib.lang3.tuple.Pair;
@@ -1588,7 +1588,7 @@ public final class DateUtil{
             return DateUtils.parseDate(dateString, datePatterns);
         }catch (ParseException e){
             String pattern = "dateString:[{}],use patterns:[{}],parse to date exception,message:[{}]";
-            throw new IllegalArgumentException(StringUtil.formatPattern(pattern, dateString, datePatterns, e.getMessage()), e);
+            throw new IllegalArgumentException(formatPattern(pattern, dateString, datePatterns, e.getMessage()), e);
         }
     }
 

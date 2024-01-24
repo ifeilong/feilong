@@ -22,6 +22,7 @@ import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.lang.SystemUtil.USER_HOME;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -38,7 +39,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.excel.definition.ExcelSheet;
 import com.feilong.excel.util.SheetNamesUtil;
 import com.feilong.io.FileUtil;
@@ -172,7 +172,7 @@ public class ExcelWriteUtil{
 
     private static String buildDefaultOutputFileName(String templateLocation,String[] sheetNames,Map<String, ExcelSheet> sheetDefinitions){
         String pattern = USER_HOME + "/feilong/excel/{}{}.{}";
-        return StringUtil.formatPattern(
+        return formatPattern(
                         pattern,
                         buildFileName(sheetNames, sheetDefinitions),
                         nowTimestamp(),

@@ -16,6 +16,7 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.InputStream;
@@ -346,7 +347,7 @@ public final class ClassLoaderUtil{
      */
     private static String getLogInfo(String resourceName,ClassLoader classLoader,boolean isFouned){
         String message = "{}found [{}],in ClassLoader:[{}]";
-        return StringUtil.formatPattern(message, isFouned ? "" : "not ", resourceName, formatClassLoader(classLoader));
+        return formatPattern(message, isFouned ? "" : "not ", resourceName, formatClassLoader(classLoader));
     }
 
     /**

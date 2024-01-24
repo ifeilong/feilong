@@ -306,7 +306,7 @@ public final class StringUtil{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
             String pattern = "value:[{}],charsetName:[{}],suggest you use [{}] constants";
-            String message = StringUtil.formatPattern(pattern, value, charsetName, CharsetType.class.getCanonicalName());
+            String message = formatPattern(pattern, value, charsetName, CharsetType.class.getCanonicalName());
             throw new UncheckedIOException(message, e);
         }
     }

@@ -16,6 +16,7 @@
 package com.feilong.component.upload;
 
 import static com.feilong.core.date.DateUtil.nowTimestamp;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.lang.SystemUtil.USER_HOME;
 
 import java.util.List;
@@ -30,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.feilong.context.fileparser.FileParser;
 import com.feilong.context.fileparser.RequestFileParserDetector;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.io.FilenameUtil;
 
 public class UploadController{
@@ -69,7 +69,7 @@ public class UploadController{
         for (int i = 0; i < multipartFiles.length; ++i){
             MultipartFile multipartFile = multipartFiles[i];
             if (!multipartFile.isEmpty()){
-                fileNames[i] = StringUtil.formatPattern(
+                fileNames[i] = formatPattern(
                                 "{}.{}",
                                 nowTimestamp() + "-" + i,
                                 FilenameUtil.getExtension(multipartFile.getOriginalFilename()));//文件后缀

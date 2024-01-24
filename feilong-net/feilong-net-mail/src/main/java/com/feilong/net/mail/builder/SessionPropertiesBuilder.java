@@ -17,11 +17,11 @@ package com.feilong.net.mail.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.util.Properties;
 
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.entity.MailSendConnectionConfig;
 import com.feilong.net.mail.entity.SessionConfig;
@@ -60,9 +60,7 @@ public class SessionPropertiesBuilder{
         String serverHost = sessionConfig.getServerHost();
         if (isNullOrEmpty(serverHost)){
             throw new IllegalArgumentException(
-                            StringUtil.formatPattern(
-                                            "serverHost can't be null/empty! sessionConfig:[{}]",
-                                            JsonUtil.toString(sessionConfig)));
+                            formatPattern("serverHost can't be null/empty! sessionConfig:[{}]", JsonUtil.toString(sessionConfig)));
         }
 
         //---------------------------------------------------------------

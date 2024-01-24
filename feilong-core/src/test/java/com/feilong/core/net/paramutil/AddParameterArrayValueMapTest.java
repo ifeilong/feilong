@@ -17,6 +17,7 @@ package com.feilong.core.net.paramutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.net.ParamUtil.addParameterArrayValueMap;
 import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -26,8 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
-
-import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class ParamUtilAddParameterArrayValueMapTest.
@@ -52,7 +51,7 @@ public class AddParameterArrayValueMapTest{
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
         assertEquals(
-                        StringUtil.formatPattern(
+                        formatPattern(
                                         PATH + "?receiver={}&receiver={}&province={}&city={}",
                                         encode("鑫哥", UTF8),
                                         encode("feilong", UTF8),
@@ -73,7 +72,7 @@ public class AddParameterArrayValueMapTest{
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
         assertEquals(
-                        StringUtil.formatPattern(PATH + "?a=b&province={}&city={}", encode("江苏省", UTF8), encode("南通市", UTF8)),
+                        formatPattern(PATH + "?a=b&province={}&city={}", encode("江苏省", UTF8), encode("南通市", UTF8)),
                         addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
@@ -89,7 +88,7 @@ public class AddParameterArrayValueMapTest{
         keyAndArrayMap.put("city", new String[] { "南通市", "无锡" });
 
         assertEquals(
-                        StringUtil.formatPattern(
+                        formatPattern(
                                         PATH + "?a=b&city={}&city={}&province={}",
                                         encode("南通市", UTF8),
                                         encode("无锡", UTF8),

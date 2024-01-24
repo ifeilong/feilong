@@ -17,6 +17,7 @@ package com.feilong.core.util.comparator;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.lang.StringUtil.SPACE;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
@@ -119,8 +120,7 @@ public final class SortHelper{
         //空格
         String[] array = StringUtil.tokenizeToStringArray(propertyNameAndOrder.trim(), SPACE);
         if (array.length > 2){
-            String message = StringUtil
-                            .formatPattern("propertyNameAndOrder:[{}] has more than 1 space,must max 1 space", propertyNameAndOrder);
+            String message = formatPattern("propertyNameAndOrder:[{}] has more than 1 space,must max 1 space", propertyNameAndOrder);
             throw new IllegalArgumentException(message);
         }
 
@@ -130,7 +130,7 @@ public final class SortHelper{
             order = array[1];//排序因子
             if (!(order.equalsIgnoreCase(ASC) || order.equalsIgnoreCase(DESC))){
                 String pattern = "propertyNameAndOrder:[{}] 's order:[{}] must ignoreCase equals [asc or desc]";
-                throw new IllegalArgumentException(StringUtil.formatPattern(pattern, propertyNameAndOrder, order));
+                throw new IllegalArgumentException(formatPattern(pattern, propertyNameAndOrder, order));
             }
         }
 

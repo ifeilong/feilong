@@ -17,6 +17,7 @@ package com.feilong.net.mail.util;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.UnsupportedEncodingException;
@@ -30,7 +31,6 @@ import javax.mail.internet.MimeUtility;
 
 import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class InternetAddressUtil.
@@ -170,7 +170,7 @@ public final class InternetAddressUtil{
             return new InternetAddress(fromAddress);
         }catch (AddressException | UnsupportedEncodingException e){
             //since 1.13.2
-            throw new DefaultRuntimeException(StringUtil.formatPattern("personal:[{}],fromAddress:[{}]", personal, fromAddress), e);
+            throw new DefaultRuntimeException(formatPattern("personal:[{}],fromAddress:[{}]", personal, fromAddress), e);
         }
     }
 

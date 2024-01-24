@@ -15,11 +15,12 @@
  */
 package com.feilong.net.http.builder.httpurirequest;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.NotImplementedException;
 import com.feilong.lib.org.apache.http.client.methods.HttpGet;
 import com.feilong.lib.org.apache.http.client.methods.HttpPatch;
@@ -117,7 +118,7 @@ public class HttpUriRequestFactory{
         try{
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            String message = StringUtil.formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
+            String message = formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
             throw new UncheckedHttpException(message, e);
         }
     }

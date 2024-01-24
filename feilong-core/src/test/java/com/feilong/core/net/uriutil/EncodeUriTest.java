@@ -16,12 +16,12 @@
 package com.feilong.core.net.uriutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.net.URIUtil.encode;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.URIUtil;
 
 /**
@@ -41,7 +41,7 @@ public class EncodeUriTest{
     public void testEncodeUri(){
         String uriString = PATH + "?name=金鑫&name=飞龙&age=18";
         assertEquals(
-                        StringUtil.formatPattern(PATH + "?name={}&name={}&age=18", encode("金鑫", UTF8), encode("飞龙", UTF8)),
+                        formatPattern(PATH + "?name={}&name={}&age=18", encode("金鑫", UTF8), encode("飞龙", UTF8)),
                         URIUtil.encodeUri(uriString, UTF8));
     }
 
@@ -51,10 +51,10 @@ public class EncodeUriTest{
     @Test
     public void testEncodeUri1(){
         String pattern = "mailto:venus@163.com?subject={}&body={}";
-        String uriString = StringUtil.formatPattern(pattern, "你好", "我是飞天奔月<br>哈哈哈哈");
+        String uriString = formatPattern(pattern, "你好", "我是飞天奔月<br>哈哈哈哈");
 
         String result = URIUtil.encodeUri(uriString, UTF8);
-        assertEquals(StringUtil.formatPattern(pattern, encode("你好", UTF8), encode("我是飞天奔月<br>哈哈哈哈", UTF8)), result);
+        assertEquals(formatPattern(pattern, encode("你好", UTF8), encode("我是飞天奔月<br>哈哈哈哈", UTF8)), result);
     }
 
     /**

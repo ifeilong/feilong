@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -241,7 +243,7 @@ public final class EnumUtil{
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             String messagePattern = "[{}],propertyName:[{}],value:[{}],ignoreCase:[{}],constants not found";
-            LOGGER.debug(StringUtil.formatPattern(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+            LOGGER.debug(formatPattern(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
         }
         return null;
     }

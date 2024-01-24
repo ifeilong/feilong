@@ -17,6 +17,7 @@ package com.feilong.core.bean;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.beans.PropertyDescriptor;
@@ -28,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.beanutils.PropertyUtils;
 import com.feilong.lib.lang3.ClassUtils;
 
@@ -100,7 +100,7 @@ public final class PropertyUtil{
             return PropertyUtils.getPropertyDescriptors(klass);
         }catch (Exception e){
             String pattern = "getPropertyDescriptors exception,klass:[{}]";
-            throw new BeanOperationException(StringUtil.formatPattern(pattern, klass), e);
+            throw new BeanOperationException(formatPattern(pattern, klass), e);
         }
     }
 
@@ -260,7 +260,7 @@ public final class PropertyUtil{
                 return;
             }catch (Exception e){
                 String pattern = "copyProperties exception,toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
-                throw new BeanOperationException(StringUtil.formatPattern(pattern, toObj, fromObj, includePropertyNames), e);
+                throw new BeanOperationException(formatPattern(pattern, toObj, fromObj, includePropertyNames), e);
             }
         }
 
@@ -370,7 +370,7 @@ public final class PropertyUtil{
                 return PropertyUtils.describe(bean);
             }catch (Exception e){
                 String pattern = "describe exception,bean:[{}],propertyNames:[{}]";
-                throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyNames), e);
+                throw new BeanOperationException(formatPattern(pattern, bean, propertyNames), e);
             }
         }
 
@@ -449,7 +449,7 @@ public final class PropertyUtil{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             String pattern = "setProperty exception,bean:[{}],propertyName:[{}],value:[{}]";
-            throw new BeanOperationException(StringUtil.formatPattern(pattern, bean, propertyName, value), e);
+            throw new BeanOperationException(formatPattern(pattern, bean, propertyName, value), e);
         }
     }
 

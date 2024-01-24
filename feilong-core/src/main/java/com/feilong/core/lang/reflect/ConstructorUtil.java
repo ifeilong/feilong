@@ -15,11 +15,12 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.lang.reflect.Constructor;
 
 import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.reflect.ConstructorUtils;
 
 /**
@@ -176,7 +177,7 @@ public final class ConstructorUtil{
             return ConstructorUtils.invokeConstructor(klass, parameterValues, parameterTypes);
         }catch (Exception e){
             String pattern = "invokeConstructor exception,class:[{}].args:[{}],parameterTypes:[{}]";
-            String message = StringUtil.formatPattern(pattern, klass, parameterValues, parameterTypes);
+            String message = formatPattern(pattern, klass, parameterValues, parameterTypes);
             throw new ReflectException(message, e);
         }
     }

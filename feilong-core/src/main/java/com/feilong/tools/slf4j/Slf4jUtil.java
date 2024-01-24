@@ -16,6 +16,7 @@
 package com.feilong.tools.slf4j;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.containsTrimAndIgnoreCase;
 
 import com.feilong.core.lang.StringUtil;
@@ -85,7 +86,7 @@ public final class Slf4jUtil{
      */
     @Deprecated
     public static String format(String messagePattern,Object...args){
-        return StringUtil.formatPattern(messagePattern, args);
+        return formatPattern(messagePattern, args);
     }
 
     //---------------------------------------------------------------

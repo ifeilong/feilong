@@ -15,10 +15,11 @@
  */
 package com.feilong.context;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.util.Map;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.JsonUtil;
 
@@ -83,6 +84,6 @@ public final class BeanLogMessageBuilder{
      * @since 1.11.5
      */
     private static String build(Object obj,String mapInfo){
-        return StringUtil.formatPattern("[{}] field's value map:\n[{}]", obj.getClass().getCanonicalName(), mapInfo);
+        return formatPattern("[{}] field's value map:\n[{}]", obj.getClass().getCanonicalName(), mapInfo);
     }
 }

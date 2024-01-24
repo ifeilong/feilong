@@ -20,12 +20,12 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultZero;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.lib.org.apache.http.HttpEntity;
 import com.feilong.lib.org.apache.http.NameValuePair;
@@ -116,7 +116,7 @@ final class HttpEntityBuilder{
         try{
             return new UrlEncodedFormEntity(nameValuePairList, UTF8);
         }catch (UnsupportedEncodingException e){
-            String message = StringUtil.formatPattern("paramMap:[{}]", JsonUtil.toString(paramMap));
+            String message = formatPattern("paramMap:[{}]", JsonUtil.toString(paramMap));
             throw new UncheckedHttpException(message, e);
         }
     }

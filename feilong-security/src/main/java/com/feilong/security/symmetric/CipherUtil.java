@@ -15,6 +15,8 @@
  */
 package com.feilong.security.symmetric;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +26,6 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.security.EncryptionException;
 
 /**
@@ -149,7 +150,7 @@ public class CipherUtil{
             return cipher.doFinal(bytes);
         }catch (NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException
                         | InvalidKeyException e){
-            throw new EncryptionException(StringUtil.formatPattern("opmode:[{}],transformation:[{}]", opmode, transformation), e);
+            throw new EncryptionException(formatPattern("opmode:[{}],transformation:[{}]", opmode, transformation), e);
         }
     }
 }

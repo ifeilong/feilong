@@ -16,13 +16,13 @@
 package com.feilong.net.mail.builder;
 
 import static com.feilong.core.date.DateUtil.now;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.json.JsonUtil;
 import com.feilong.net.mail.SessionFactory;
 import com.feilong.net.mail.builder.setter.BodySetter;
@@ -85,7 +85,7 @@ public class MessageBuilder{
             BodySetter.setBody(message, mailSendRequest);
         }catch (MessagingException e){
             //since 1.13.2 update exception message
-            throw new MailException(StringUtil.formatPattern("mailSenderConfig:[{}]", JsonUtil.toString(mailSendRequest)), e);
+            throw new MailException(formatPattern("mailSenderConfig:[{}]", JsonUtil.toString(mailSendRequest)), e);
         }
         return message;
     }

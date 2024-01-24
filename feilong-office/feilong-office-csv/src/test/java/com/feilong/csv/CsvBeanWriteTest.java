@@ -18,12 +18,12 @@ package com.feilong.csv;
 import static com.feilong.core.CharsetType.GBK;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.csv.entity.BeanCsvConfig;
@@ -58,7 +58,7 @@ public class CsvBeanWriteTest{
 
     private String buildUrl(String type,String fileName){
         String pattern = "{}/feilong/{}/{}";
-        return StringUtil.formatPattern(pattern, SystemUtil.USER_HOME, type, fileName);
+        return formatPattern(pattern, SystemUtil.USER_HOME, type, fileName);
     }
 
     @Test

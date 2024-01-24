@@ -18,6 +18,7 @@ package com.feilong.net.filetransfer;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 
 import java.io.File;
@@ -30,7 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
@@ -288,7 +288,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             tryCd(remoteDirectory);
             return true;
         }catch (Exception e){
-            String message = StringUtil.formatPattern("can't cd:[{}]", remoteDirectory);
+            String message = formatPattern("can't cd:[{}]", remoteDirectory);
             throw new FileTransferException(message, e);
         }
     }
@@ -466,7 +466,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     protected static void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
         if (LOGGER.isInfoEnabled()){
-            String message = StringUtil.formatPattern(messagePattern, args);
+            String message = formatPattern(messagePattern, args);
             if (isSuccess){
                 LOGGER.info(message);
             }else{

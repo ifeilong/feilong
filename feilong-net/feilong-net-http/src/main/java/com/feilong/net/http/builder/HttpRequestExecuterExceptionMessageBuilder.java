@@ -17,6 +17,7 @@ package com.feilong.net.http.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.net.SocketTimeoutException;
 import java.util.Map;
@@ -24,7 +25,6 @@ import java.util.Map;
 import javax.net.ssl.SSLException;
 
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.JsonUtil;
@@ -72,7 +72,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
         }
         //---------------------------------------------------------------
         //带自定义头 handlerMessage
-        return StringUtil.formatPattern("[{}],{}", handlerMessage, result);
+        return formatPattern("[{}],{}", handlerMessage, result);
     }
 
     //---------------------------------------------------------------
@@ -120,7 +120,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
         //---------------------------------------------------------------
         String pattern = "httpRequest:[{}],useConnectionConfig:[{}]";
-        String commonResult = StringUtil.formatPattern(
+        String commonResult = formatPattern(
                         pattern,
                         HttpLogHelper.createHttpRequestLog(httpRequest),
                         HttpLogHelper.createConnectionConfigLog(useConnectionConfig));
@@ -130,7 +130,7 @@ public class HttpRequestExecuterExceptionMessageBuilder{
 
         //---------------------------------------------------------------
         //带 httpPropertiesMap的
-        return StringUtil.formatPattern("{},http system properties:[{}]", commonResult, JsonUtil.toString(httpPropertiesMap));
+        return formatPattern("{},http system properties:[{}]", commonResult, JsonUtil.toString(httpPropertiesMap));
     }
 
     //---------------------------------------------------------------

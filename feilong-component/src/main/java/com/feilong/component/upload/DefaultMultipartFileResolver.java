@@ -15,6 +15,7 @@
  */
 package com.feilong.component.upload;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 
 import java.io.IOException;
@@ -27,7 +28,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.json.JsonUtil;
 
@@ -76,7 +76,7 @@ public class DefaultMultipartFileResolver implements MultipartFileResolver{
         try (InputStream inputStream = multipartFile.getInputStream()){
             return IOWriteUtil.write(inputStream, directoryName, fileName);
         }catch (IOException e){
-            throw new UncheckedIOException(StringUtil.formatPattern("directoryName:[{}],fileName:[{}]", directoryName, fileName), e);
+            throw new UncheckedIOException(formatPattern("directoryName:[{}],fileName:[{}]", directoryName, fileName), e);
         }
     }
 

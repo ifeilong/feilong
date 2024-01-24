@@ -18,19 +18,19 @@ package com.feilong.core.lang.stringutil;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 public class FormatPatternParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, Object[], String>{
 
     @Test
     public void test(){
-        assertEquals(expectedValue, StringUtil.formatPattern(input1, input2));
+        assertEquals(expectedValue, formatPattern(input1, input2));
     }
 
     @Parameters(name = "index:{index}:StringUtil.formatPattern(\"{0}\", {1})=\"{2}\"")

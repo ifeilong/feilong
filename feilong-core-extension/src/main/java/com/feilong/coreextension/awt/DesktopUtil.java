@@ -16,6 +16,7 @@
 package com.feilong.coreextension.awt;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.awt.Desktop;
 import java.awt.Desktop.Action;
@@ -25,7 +26,6 @@ import java.io.UncheckedIOException;
 import java.net.URI;
 
 import com.feilong.core.Validate;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.URIUtil;
 
 /**
@@ -141,7 +141,7 @@ public final class DesktopUtil{
         Validate.notNull(action, "action can't be null!");
 
         //---------------------------------------------------------------
-        String url = StringUtil.formatPattern(urlPattern, args);
+        String url = formatPattern(urlPattern, args);
 
         Desktop desktop = getDesktop(action);
 
@@ -163,10 +163,10 @@ public final class DesktopUtil{
                     desktop.print(new File(url));
                     break;
                 default:
-                    throw new UnsupportedOperationException(StringUtil.formatPattern("[{}] not support!", action));
+                    throw new UnsupportedOperationException(formatPattern("[{}] not support!", action));
             }
         }catch (IOException e){
-            throw new UncheckedIOException(StringUtil.formatPattern("[{}],[{}]", url, action), e);
+            throw new UncheckedIOException(formatPattern("[{}],[{}]", url, action), e);
         }
     }
 

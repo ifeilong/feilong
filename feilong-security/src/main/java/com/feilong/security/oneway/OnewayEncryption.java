@@ -15,6 +15,8 @@
  */
 package com.feilong.security.oneway;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.io.InputStream;
 import java.security.MessageDigest;
 
@@ -164,7 +166,7 @@ final class OnewayEncryption{
             return ByteUtil.bytesToHexStringLowerCase(bytes);//这个值和上面的一样
 
         }catch (Exception e){
-            throw new EncryptionException(StringUtil.formatPattern("onewayType:[{}],filePath:[{}]", onewayType, location), e);
+            throw new EncryptionException(formatPattern("onewayType:[{}],filePath:[{}]", onewayType, location), e);
         }
     }
 

@@ -16,17 +16,17 @@
 package com.feilong.net.http.builder.httpurirequest;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
-import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.HttpLogHelper;
+import com.feilong.net.http.HttpRequest;
 
 /**
  * 将{@link HttpRequest} 转成 {@link URIBuilder} 的构造器.
@@ -76,7 +76,7 @@ class URIBuilderBuilder{
             }
             return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
-            String message = StringUtil.formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
+            String message = formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
             throw new UncheckedHttpException(message, e);
         }
     }

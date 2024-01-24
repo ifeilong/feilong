@@ -20,6 +20,7 @@ import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.lib.lang3.StringUtils.INDEX_NOT_FOUND;
 import static com.feilong.lib.lang3.StringUtils.isEmpty;
 
@@ -219,7 +220,7 @@ public final class URIUtil{
         try{
             return URI.create(uri);
         }catch (Exception e){
-            throw new URIParseException(StringUtil.formatPattern("input uri:[{}]", uri), e);
+            throw new URIParseException(formatPattern("input uri:[{}]", uri), e);
         }
     }
 
@@ -665,7 +666,7 @@ public final class URIUtil{
             return encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType);
         }catch (Exception e){
             String pattern = "[{}] value:[{}],use charset:[{}]";
-            String message = StringUtil.formatPattern(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType);
+            String message = formatPattern(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType);
             throw new URIParseException(message, e);
         }
     }

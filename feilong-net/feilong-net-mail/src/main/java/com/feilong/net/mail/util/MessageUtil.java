@@ -17,6 +17,7 @@ package com.feilong.net.mail.util;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -113,7 +114,7 @@ public final class MessageUtil{
             mailInfo.setSubject(subject);
             return mailInfo;
         }catch (Exception e){
-            throw new MailException(StringUtil.formatPattern("from:[{}],subject:[{}]", from, subject), e);
+            throw new MailException(formatPattern("from:[{}],subject:[{}]", from, subject), e);
         }
     }
 

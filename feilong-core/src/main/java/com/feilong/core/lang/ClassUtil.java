@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import java.lang.reflect.Modifier;
 
 import com.feilong.core.Validate;
@@ -445,7 +447,7 @@ public final class ClassUtil{
         try{
             return com.feilong.lib.lang3.ClassUtils.getClass(className);
         }catch (Exception e){
-            throw new ReflectException(StringUtil.formatPattern("className:[{}]", className), e);
+            throw new ReflectException(formatPattern("className:[{}]", className), e);
         }
     }
 
