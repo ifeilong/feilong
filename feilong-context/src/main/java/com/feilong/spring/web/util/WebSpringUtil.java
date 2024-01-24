@@ -109,11 +109,12 @@ public final class WebSpringUtil{
      * @see org.springframework.web.util.WebUtils#getNativeRequest(ServletRequest, Class)
      * @since 1.10.0
      * @since 4.0.0 加上异常处理,如果出现异常返回null
+     * @since 4.0.8 use call currentRequestAttributes instead of getRequestAttributes see https://github.com/ifeilong/feilong/issues/684
      */
     public static HttpServletRequest getRequest(){
         try{
             //the RequestAttributes currently bound to the thread, or null if none bound
-            ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             if (null == servletRequestAttributes){
                 return null;
             }
