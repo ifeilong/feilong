@@ -33,19 +33,27 @@ public class HttpLogHelper{
 
     /**
      * 创建 http request log.
+     * 
+     * <p>
+     * <b>场景:</b> 某些公司json格式化在日志系统中会换行显示, 可阅读性特别差, 因此使用JsonUtil.toString 代替JsonUtil.format; <br>
+     * 但是开发环境为了更快的发现以及排查问题需要使用JsonUtil.format;
+     * 
+     * <br>
+     * 目前通过设置环境变量 feilong_httpRequest_format_enable 来区分, 如果值是true(忽略大小写) 那么会使用format,否则使用tostring
+     * </p>
      *
      * @param httpRequest
      *            the http request
      * @return the string
+     * @see <a href="https://github.com/ifeilong/feilong/issues/602">支持http 根据不同环境 日志是format 还是tostring 输出</a>
      */
     public static String createHttpRequestLog(HttpRequest httpRequest){
-
         JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig(true);
         javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(
                         toMap("requestByteArrayBody", ToStringJsonValueProcessor.DEFAULT_INSTANCE));
 
         //---------------------------------------------------------------
-        //环境变量
+        //环境变量 see https://github.com/ifeilong/feilong/issues/602
         String formatEnable = SystemUtil.getEnv("feilong_httpRequest_format_enable");
         if (StringUtil.trimAndEqualsIgnoreCase("true", formatEnable)){
             return JsonUtil.format(httpRequest, javaToJsonConfig);

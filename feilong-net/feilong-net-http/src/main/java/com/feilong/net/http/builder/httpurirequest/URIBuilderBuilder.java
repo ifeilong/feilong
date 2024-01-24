@@ -97,8 +97,9 @@ class URIBuilderBuilder{
         for (Map.Entry<String, String> entry : paramMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
-
-            LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
+            if (LOGGER.isTraceEnabled()){
+                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
+            }
             uriBuilder.setParameter(key, value);
         }
         return uriBuilder;
