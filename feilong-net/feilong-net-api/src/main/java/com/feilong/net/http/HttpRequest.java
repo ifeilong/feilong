@@ -88,6 +88,16 @@ public class HttpRequest{
     private boolean              isTrimUri          = true;
 
     //---------------------------------------------------------------
+    /**
+     * 日志追踪上下文.
+     * <p>
+     * 所有的feilong http此次调用的log 都会拼上改日志字符串
+     * </p>
+     * 
+     * @since 4.0.8
+     */
+    private String               logTraceContext    = "";
+    //---------------------------------------------------------------
 
     /**
      * The Constructor.
@@ -342,5 +352,32 @@ public class HttpRequest{
      */
     public void setRequestByteArrayBody(RequestByteArrayBody requestByteArrayBody){
         this.requestByteArrayBody = requestByteArrayBody;
+    }
+
+    /**
+     * 日志追踪上下文.
+     * <p>
+     * 所有的feilong http此次调用的log 都会拼上改日志字符串
+     * </p>
+     *
+     * @return the logTraceContext
+     * @since 4.0.8
+     */
+    public String getLogTraceContext(){
+        return logTraceContext;
+    }
+
+    /**
+     * 日志追踪上下文.
+     * <p>
+     * 所有的feilong http此次调用的log 都会拼上改日志字符串
+     * </p>
+     *
+     * @param logTraceContext
+     *            the logTraceContext to set
+     * @since 4.0.8
+     */
+    public void setLogTraceContext(String logTraceContext){
+        this.logTraceContext = logTraceContext;
     }
 }

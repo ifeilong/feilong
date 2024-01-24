@@ -29,4 +29,16 @@ public class HttpClientUtilUriSpaceTest extends AbstractTest{
 
         LOGGER.info("get over");
     }
+
+    @Test
+    @SuppressWarnings("squid:S2699") //Tests should include assertions //https://stackoverflow.com/questions/10971968/turning-sonar-off-for-certain-code
+    public void test2(){
+        String uri = "https://www.baidu.com/item/BA8 900";
+
+        HttpRequest httpRequest = new HttpRequest(uri);
+        httpRequest.setLogTraceContext("feilong");
+        HttpClientUtil.getHttpResponse(httpRequest);
+
+        LOGGER.info("get over");
+    }
 }

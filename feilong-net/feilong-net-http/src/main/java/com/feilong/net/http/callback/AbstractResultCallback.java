@@ -17,10 +17,10 @@ package com.feilong.net.http.callback;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newTreeMap;
+import static com.feilong.net.http.HttpLogHelper.autoLog;
 import static java.util.Collections.emptyMap;
 
 import java.util.Collections;
@@ -30,16 +30,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.json.JavaToJsonConfig;
-import com.feilong.json.JsonUtil;
-import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
-import com.feilong.lib.json.processors.JsonValueProcessor;
 import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
-import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.HttpResponseUtil;
 
@@ -65,16 +60,15 @@ public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
         com.feilong.net.http.HttpResponse resultResponse = build(beginDate, httpResponse);
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            String response = JsonUtil.toString(
-                            resultResponse,
-                            new JavaToJsonConfig(toMap("resultString", (JsonValueProcessor) new StringOverLengthJsonValueProcessor(1000))));
-
             LOGGER.info(
-                            "request:[{}],useConnectionConfig:[{}],statusCode:[{}],response:[{}]",
-                            HttpLogHelper.createHttpRequestLog(httpRequest),
-                            HttpLogHelper.createConnectionConfigLog(useConnectionConfig),
-                            httpResponse.getStatusLine(),
-                            response);
+                            autoLog(
+                                            httpRequest,
+                                            resultResponse,
+                                            useConnectionConfig, //
+
+                                            "statusCode:[{}]",
+                                            httpResponse.getStatusLine()));
+
         }
         return resultResponse;
     }

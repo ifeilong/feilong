@@ -94,10 +94,10 @@ public final class HttpRequestHeadersPacker{
             String key = entry.getKey();
             String value = entry.getValue();
             httpUriRequest.setHeader(key, value);
-
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
-            }
+            //
+            //            if (LOGGER.isTraceEnabled()){
+            //                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
+            //            }
         }
     }
 

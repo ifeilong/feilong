@@ -15,7 +15,7 @@
  */
 package com.feilong.net.http.builder.httpurirequest;
 
-import static com.feilong.core.lang.StringUtil.formatPattern;
+import static com.feilong.net.http.HttpLogHelper.autoLog;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,7 +31,6 @@ import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
-import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpMethodType;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.RequestConfigBuilder;
@@ -118,8 +117,7 @@ public class HttpUriRequestFactory{
         try{
             return uriBuilder.build();
         }catch (URISyntaxException e){
-            String message = formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
-            throw new UncheckedHttpException(message, e);
+            throw new UncheckedHttpException(autoLog(httpRequest, ""), e);
         }
     }
 

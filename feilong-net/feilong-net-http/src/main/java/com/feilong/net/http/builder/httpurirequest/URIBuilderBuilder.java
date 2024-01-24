@@ -16,7 +16,7 @@
 package com.feilong.net.http.builder.httpurirequest;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.StringUtil.formatPattern;
+import static com.feilong.net.http.HttpLogHelper.autoLog;
 
 import java.util.Map;
 
@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.lib.org.apache.http.client.utils.URIBuilder;
 import com.feilong.net.UncheckedHttpException;
-import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpRequest;
 
 /**
@@ -68,16 +67,13 @@ class URIBuilderBuilder{
 
             if (isNullOrEmpty(paramMap)){
                 if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace(
-                                    "httpRequest [paramMap] isNullOrEmpty,skip!,httpRequestInfo:[{}]",
-                                    HttpLogHelper.createHttpRequestLog(httpRequest));
+                    LOGGER.trace(autoLog(httpRequest, "paramMapIsNullOrEmpty,skip!"));
                 }
                 return uriBuilder;
             }
             return buildWithParameters(uriBuilder, paramMap);
         }catch (Exception e){
-            String message = formatPattern("httpRequest:[{}]", HttpLogHelper.createHttpRequestLog(httpRequest));
-            throw new UncheckedHttpException(message, e);
+            throw new UncheckedHttpException(autoLog(httpRequest, ""), e);
         }
     }
 
@@ -97,9 +93,6 @@ class URIBuilderBuilder{
         for (Map.Entry<String, String> entry : paramMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace("httpUriRequest.setHeader({}, {})", key, value);
-            }
             uriBuilder.setParameter(key, value);
         }
         return uriBuilder;

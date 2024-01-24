@@ -15,6 +15,8 @@
  */
 package com.feilong.net.http.callback;
 
+import static com.feilong.net.http.HttpLogHelper.autoLog;
+
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -24,7 +26,6 @@ import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
 import com.feilong.net.http.ConnectionConfig;
-import com.feilong.net.http.HttpLogHelper;
 import com.feilong.net.http.HttpRequest;
 
 /**
@@ -52,19 +53,13 @@ public class StatusCodeResultCallback extends AbstractResultCallback<Integer>{
                     HttpResponse httpResponse,
                     ConnectionConfig useConnectionConfig,
                     Date beginDate){
-
         //只需要http status code see https://github.com/ifeilong/feilong/issues/584
         StatusLine statusLine = httpResponse.getStatusLine();
         int statusCode = statusLine.getStatusCode();
 
         //---------------------------------------------------------------
-
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "request:[{}],useConnectionConfig:[{}],statusCode:[{}]",
-                            HttpLogHelper.createHttpRequestLog(httpRequest),
-                            HttpLogHelper.createConnectionConfigLog(useConnectionConfig),
-                            httpResponse.getStatusLine());
+            LOGGER.info(autoLog(httpRequest, useConnectionConfig, "statusCode:[{}]", httpResponse.getStatusLine()));
         }
         return statusCode;
     }

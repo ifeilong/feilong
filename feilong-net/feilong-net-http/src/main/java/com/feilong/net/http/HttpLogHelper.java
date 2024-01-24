@@ -15,13 +15,17 @@
  */
 package com.feilong.net.http;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.SystemUtil;
 import com.feilong.json.JavaToJsonConfig;
 import com.feilong.json.JsonUtil;
+import com.feilong.json.processor.StringOverLengthJsonValueProcessor;
 import com.feilong.json.processor.ToStringJsonValueProcessor;
+import com.feilong.lib.json.processors.JsonValueProcessor;
 
 /**
  * 专注于辅助生成http日志.
@@ -30,6 +34,78 @@ import com.feilong.json.processor.ToStringJsonValueProcessor;
  * @since 4.0.1
  */
 public class HttpLogHelper{
+
+    /**
+     * 自动追加request简单信息.
+     *
+     * @param httpRequest
+     *            the http request
+     * @param messagePattern
+     *            the message pattern
+     * @param params
+     *            the params
+     * @return the string
+     * @since 4.0.8
+     */
+    public static String autoLog(HttpRequest httpRequest,String messagePattern,Object...params){
+        return autoLog(httpRequest, null, messagePattern, params);
+    }
+
+    /**
+     * 自动追加request简单信息.
+     *
+     * @param httpRequest
+     *            the http request
+     * @param connectionConfig
+     *            the connection config
+     * @param messagePattern
+     *            the message pattern
+     * @param params
+     *            the params
+     * @return the string
+     * @since 4.0.8
+     */
+    public static String autoLog(HttpRequest httpRequest,ConnectionConfig connectionConfig,String messagePattern,Object...params){
+        return autoLog(httpRequest, connectionConfig, null, messagePattern, params);
+    }
+
+    public static String autoLog(
+                    HttpRequest httpRequest,
+                    HttpResponse resultResponse,
+                    ConnectionConfig connectionConfig,
+                    String messagePattern,
+                    Object...params){
+        //"{}{},connectionConfigInfo:[{}],httpRequestInfo:[{}]",
+        StringBuilder sb = new StringBuilder();
+
+        //拼接 logTraceContext 日志
+        String logTraceContext = httpRequest.getLogTraceContext();
+        if (isNotNullOrEmpty(logTraceContext)){
+            sb.append("logTraceContext:[" + logTraceContext + "]");
+        }
+
+        //拼接业务日志
+        if (isNotNullOrEmpty(messagePattern)){
+            sb.append(formatPattern(messagePattern, params));
+        }
+
+        //拼接httpRequest 日志
+        sb.append(",httpRequestInfo:[" + createHttpRequestLog(httpRequest) + "]");
+
+        //拼接connectionConfig 日志
+        if (null != connectionConfig){
+            sb.append(",connectionConfigInfo:[" + createConnectionConfigLog(connectionConfig) + "]");
+        }
+
+        //拼接resultResponse 日志
+        if (null != resultResponse){
+            String response = JsonUtil.toString(
+                            resultResponse,
+                            new JavaToJsonConfig(toMap("resultString", (JsonValueProcessor) new StringOverLengthJsonValueProcessor(1000))));
+            sb.append(",HttpResponseInfo:[" + response + "]");
+        }
+        return sb.toString();
+    }
 
     /**
      * 创建 http request log.
@@ -46,8 +122,9 @@ public class HttpLogHelper{
      *            the http request
      * @return the string
      * @see <a href="https://github.com/ifeilong/feilong/issues/602">支持http 根据不同环境 日志是format 还是tostring 输出</a>
+     * @since 4.0.8 change to private
      */
-    public static String createHttpRequestLog(HttpRequest httpRequest){
+    private static String createHttpRequestLog(HttpRequest httpRequest){
         JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig(true);
         javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(
                         toMap("requestByteArrayBody", ToStringJsonValueProcessor.DEFAULT_INSTANCE));
@@ -70,7 +147,7 @@ public class HttpLogHelper{
      *            the use connection config
      * @return the string
      */
-    public static String createConnectionConfigLog(ConnectionConfig useConnectionConfig){
+    private static String createConnectionConfigLog(ConnectionConfig useConnectionConfig){
         return JsonUtil.toString(useConnectionConfig, true);
     }
 }
