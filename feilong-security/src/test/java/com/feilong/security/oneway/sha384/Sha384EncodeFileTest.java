@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.security.oneway;
+package com.feilong.security.oneway.sha384;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,24 +24,15 @@ import org.junit.Test;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
+import com.feilong.security.oneway.SHA384Util;
 
-public class SHA384UtilTest extends AbstractSecurityTest{
+public class Sha384EncodeFileTest extends AbstractSecurityTest{
 
     @Test
     public void encodeFile() throws IOException{
         String encodeFile = SHA384Util.encodeFile(LOCATION);
         assertEquals("768412320f7b0aa5812fce428dc4706b3cae50e02a64caa16a782249bfe8efc4b7ef1ccb126255d196047dfedf17a0a9", encodeFile);
         assertEquals(encodeFile, DigestUtils.sha384Hex(InputStreamUtil.getInputStream(LOCATION)));
-    }
-
-    @Test
-    public void encode121(){
-        assertEquals(DigestUtils.sha384Hex("2284208963"), SHA384Util.encode("2284208963"));
-    }
-
-    @Test
-    public void encode12(){
-        LOGGER.debug(debugSecurityValue(SHA384Util.encode("2284208963")));
     }
 
     //---------------------------------------------------------------
@@ -60,5 +51,4 @@ public class SHA384UtilTest extends AbstractSecurityTest{
     public void testSHA384UtilTestBlank(){
         SHA384Util.encodeFile(" ");
     }
-
 }
