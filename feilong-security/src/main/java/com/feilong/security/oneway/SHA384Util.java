@@ -104,7 +104,7 @@ public final class SHA384Util{
      *         如果 <code>origin</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
-     * @see OnewayEncryption#encode(OnewayType, String)
+     * @see OnewayEncryption#encodeUpperCase(OnewayType, String)
      * @see com.feilong.lib.codec.digest.DigestUtils#sha384Hex(String)
      * @since 4.0.8
      */

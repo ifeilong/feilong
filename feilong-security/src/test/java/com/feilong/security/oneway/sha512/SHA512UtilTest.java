@@ -13,28 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.security.oneway;
+package com.feilong.security.oneway.sha512;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
-import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
+import com.feilong.security.oneway.SHA512Util;
 
 public class SHA512UtilTest extends AbstractSecurityTest{
-
-    @Test
-    public void encodeFile() throws IOException{
-        String encodeFile = SHA512Util.encodeFile(LOCATION);
-        assertEquals(
-                        "ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff",
-                        encodeFile);
-        assertEquals(encodeFile, DigestUtils.sha512Hex(InputStreamUtil.getInputStream(LOCATION)));
-    }
 
     @Test
     public void encode121(){
@@ -48,19 +37,24 @@ public class SHA512UtilTest extends AbstractSecurityTest{
 
     //---------------------------------------------------------------
 
-    @Test(expected = NullPointerException.class)
-    public void testSHA512UtilTestNull(){
-        SHA512Util.encodeFile(null);
+    @Test
+    public void encodeUpperCase(){
+        assertEquals(
+                        "BA3253876AED6BC22D4A6FF53D8406C6AD864195ED144AB5C87621B6C233B548BAEAE6956DF346EC8C17F5EA10F35EE3CBC514797ED7DDD3145464E2A0BAB413",
+                        SHA512Util.encodeUpperCase("123456"));
+        assertEquals(
+                        "CF83E1357EEFB8BDF1542850D66D8007D620E4050B5715DC83F4A921D36CE9CE47D0D13C5D85F2B0FF8318D2877EEC2F63B931BD47417A81A538327AF927DA3E",
+                        SHA512Util.encodeUpperCase(""));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSHA512UtilTestEmpty(){
-        SHA512Util.encodeFile("");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSHA512UtilTestBlank(){
-        SHA512Util.encodeFile(" ");
+    @Test
+    public void encode(){
+        assertEquals(
+                        "ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413",
+                        SHA512Util.encode("123456"));
+        assertEquals(
+                        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e",
+                        SHA512Util.encode(""));
     }
 
 }
