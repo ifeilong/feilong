@@ -13,26 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.security.oneway;
+package com.feilong.security.oneway.sha256;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
-import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
+import com.feilong.security.oneway.SHA256Util;
 
 public class SHA256UtilTest extends AbstractSecurityTest{
-
-    @Test
-    public void encodeFile() throws IOException{
-        String encodeFile = SHA256Util.encodeFile(LOCATION);
-        assertEquals("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", encodeFile);
-        assertEquals(encodeFile, DigestUtils.sha256Hex(InputStreamUtil.getInputStream(LOCATION)));
-    }
 
     @Test
     public void encode121(){
@@ -40,25 +31,30 @@ public class SHA256UtilTest extends AbstractSecurityTest{
     }
 
     @Test
-    public void encode12(){
-        LOGGER.debug(debugSecurityValue(SHA256Util.encode("2284208963")));
+    public void encode1213(){
+        assertEquals(DigestUtils.sha256Hex("123456"), SHA256Util.encode("123456"));
+        assertEquals("8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92", SHA256Util.encode("123456"));
     }
 
     //---------------------------------------------------------------
 
-    @Test(expected = NullPointerException.class)
-    public void testSHA256UtilTestNull(){
-        SHA256Util.encodeFile(null);
+    @Test
+    public void encodeUpperCase(){
+        assertEquals("8D969EEF6ECAD3C29A3A629280E686CF0C3F5D5A86AFF3CA12020C923ADC6C92", SHA256Util.encodeUpperCase("123456"));
+        assertEquals("E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855", SHA256Util.encodeUpperCase(""));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSHA256UtilTestEmpty(){
-        SHA256Util.encodeFile("");
+    @Test
+    public void encode(){
+        assertEquals("8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92", SHA256Util.encode("123456"));
+        assertEquals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", SHA256Util.encode(""));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSHA256UtilTestBlank(){
-        SHA256Util.encodeFile(" ");
+    //---------------------------------------------------------------
+
+    @Test
+    public void encode12(){
+        LOGGER.debug(debugSecurityValue(SHA256Util.encode("2284208963")));
     }
 
 }
