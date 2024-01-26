@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.security.oneway;
+package com.feilong.security.oneway.sm3;
 
 import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
 
 import org.junit.Test;
 
 import com.feilong.security.AbstractSecurityTest;
+import com.feilong.security.oneway.Sm3Util;
 
 public class Sm3UtilTest extends AbstractSecurityTest{
-
-    @Test
-    public void encodeFile() throws IOException{
-        String encodeFile = Sm3Util.encodeFile(LOCATION);
-        assertEquals("55e12e91650d2fec56ec74e1d3e4ddbfce2ef3a65890c2a19ecf88a307e76a23", encodeFile);
-        //assertEquals(encodeFile, DigestUtils.sha256Hex(InputStreamUtil.getInputStream(location)));
-    }
 
     @Test
     public void encode11(){
@@ -44,20 +36,16 @@ public class Sm3UtilTest extends AbstractSecurityTest{
         LOGGER.debug(debugSecurityValue(Sm3Util.encode(json)));
     }
 
-    //---------------------------------------------------------------
-
-    @Test(expected = NullPointerException.class)
-    public void testSm3UtilTestNull(){
-        Sm3Util.encodeFile(null);
+    @Test
+    public void encodeUpperCase(){
+        assertEquals("207CF410532F92A47DEE245CE9B11FF71F578EBD763EB3BBEA44EBD043D018FB", Sm3Util.encodeUpperCase("123456"));
+        assertEquals("1AB21D8355CFA17F8E61194831E81A8F22BEC8C728FEFB747ED035EB5082AA2B", Sm3Util.encodeUpperCase(""));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSm3UtilTestEmpty(){
-        Sm3Util.encodeFile("");
+    @Test
+    public void encode(){
+        assertEquals("207cf410532f92a47dee245ce9b11ff71f578ebd763eb3bbea44ebd043d018fb", Sm3Util.encode("123456"));
+        assertEquals("1ab21d8355cfa17f8e61194831e81a8f22bec8c728fefb747ed035eb5082aa2b", Sm3Util.encode(""));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSm3UtilTestBlank(){
-        Sm3Util.encodeFile(" ");
-    }
 }

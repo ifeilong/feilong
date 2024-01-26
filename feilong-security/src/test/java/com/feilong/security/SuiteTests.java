@@ -33,6 +33,8 @@ import com.feilong.security.oneway.sha384.SHA384UtilTest;
 import com.feilong.security.oneway.sha384.Sha384EncodeFileTest;
 import com.feilong.security.oneway.sha512.SHA512UtilTest;
 import com.feilong.security.oneway.sha512.Sha512EncodeFileTest;
+import com.feilong.security.oneway.sm3.Sm3EncodeFileTest;
+import com.feilong.security.oneway.sm3.Sm3UtilTest;
 import com.feilong.security.symmetric.AesUtilTest;
 
 @RunWith(Suite.class)
@@ -56,6 +58,9 @@ import com.feilong.security.symmetric.AesUtilTest;
 
                 SHA512UtilTest.class,
                 Sha512EncodeFileTest.class,
+
+                Sm3UtilTest.class,
+                Sm3EncodeFileTest.class,
 
                 OnewayEncryptionParameterizedTest.class,
 

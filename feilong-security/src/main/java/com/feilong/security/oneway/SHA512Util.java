@@ -57,6 +57,7 @@ public final class SHA512Util{
      * <p>
      * 加密之后的转成<span style="color:green">小写的</span>16进制字符串
      * </p>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
