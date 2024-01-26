@@ -19,20 +19,27 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.security.oneway.MD5UtilParameterizedTest;
-import com.feilong.security.oneway.MD5UtilTest;
 import com.feilong.security.oneway.OnewayEncryptionParameterizedTest;
 import com.feilong.security.oneway.SHA1UtilTest;
 import com.feilong.security.oneway.SHA256UtilTest;
 import com.feilong.security.oneway.SHA384UtilTest;
 import com.feilong.security.oneway.SHA512UtilTest;
+import com.feilong.security.oneway.md5.Md5EncodeFileTest;
+import com.feilong.security.oneway.md5.Md5EncodeParameterizedTest;
+import com.feilong.security.oneway.md5.Md5EncodeTest;
+import com.feilong.security.oneway.md5.Md5EncodeUpperCaseParameterizedTest;
+import com.feilong.security.oneway.md5.Md5EncodeUpperCaseTest;
 import com.feilong.security.symmetric.AesUtilTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                MD5UtilTest.class,
-                MD5UtilParameterizedTest.class,
+                Md5EncodeTest.class,
+                Md5EncodeFileTest.class,
+                Md5EncodeParameterizedTest.class,
+
+                Md5EncodeUpperCaseTest.class,
+                Md5EncodeUpperCaseParameterizedTest.class,
 
                 SHA1UtilTest.class,
                 SHA256UtilTest.class,
@@ -44,7 +51,7 @@ import com.feilong.security.symmetric.AesUtilTest;
                 //---------------------------------------------------------------
 
                 AesUtilTest.class,
-        //                
+//                
 })
 public class SuiteTests{
 

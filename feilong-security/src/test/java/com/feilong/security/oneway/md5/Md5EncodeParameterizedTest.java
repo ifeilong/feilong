@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.security.oneway;
+package com.feilong.security.oneway.md5;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.lang.StringUtil.EMPTY;
@@ -22,9 +22,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.security.oneway.MD5Util;
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
-public class MD5UtilParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
+public class Md5EncodeParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
 
     /**
      * Data.
@@ -52,11 +53,8 @@ public class MD5UtilParameterizedTest extends Abstract1ParamAndResultParameteriz
 
     //---------------------------------------------------------------
 
-    /**
-     * Test to big decimal.
-     */
     @Test
-    public void testToBigDecimal(){
+    public void test(){
         assertEquals(expectedValue, MD5Util.encode(input1));
     }
 }

@@ -25,6 +25,7 @@ import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
 
@@ -62,6 +63,25 @@ final class OnewayEncryption{
     //---------------------------------------------------------------
 
     /**
+     * 使用算法单向加密字符串,返回大写格式.
+     *
+     * @param onewayType
+     *            单向加密
+     * @param origin
+     *            原始字符串,将使用默认的 {@link String#getBytes()} 转成字节数组<br>
+     *            如果需要string 转码,请自行调用value.getBytes(string chartsetname),再调用{@link #encode(OnewayType, byte[])}
+     * @return 加密之后的转成<span style="color:red">大写的</span>16进制字符串<br>
+     *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>origin</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see StringUtil#getBytes(String)
+     * @see #encode(OnewayType, byte[])
+     * @since 4.0.8
+     */
+    public static String encodeUpperCase(OnewayType onewayType,String origin){
+        return StringUtils.upperCase(encode(onewayType, origin));
+    }
+
+    /**
      * 使用算法 单向加密字符串.
      *
      * @param onewayType
@@ -69,7 +89,9 @@ final class OnewayEncryption{
      * @param origin
      *            原始字符串,将使用默认的 {@link String#getBytes()} 转成字节数组<br>
      *            如果需要string 转码,请自行调用value.getBytes(string chartsetname),再调用{@link #encode(OnewayType, byte[])}
-     * @return 加密之后的转成小写的16进制字符串
+     * @return 加密之后的转成<span style="color:red">小写的</span>16进制字符串<br>
+     *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>origin</code> 是null,抛出 {@link NullPointerException}<br>
      * @see StringUtil#getBytes(String)
      * @see #encode(OnewayType, byte[])
      */
@@ -88,7 +110,9 @@ final class OnewayEncryption{
      *            如果需要string 转码,请自行调用value.getBytes(string chartsetname),再调用{@link #encode(OnewayType, byte[])}
      * @param charsetName
      *            受支持的 {@link CharsetType} 名称,比如 utf-8
-     * @return 加密之后的转成小写的16进制字符串
+     * @return 加密之后的转成小写的16进制字符串<br>
+     *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>origin</code> 是null,抛出 {@link NullPointerException}<br>
      * @see StringUtil#getBytes(String, String)
      * @see #encode(OnewayType, byte[])
      */
@@ -113,7 +137,8 @@ final class OnewayEncryption{
      *            the oneway type
      * @param inputBytes
      *            the input bytes
-     * @return 加密之后的转成小写的16进制字符串
+     * @return 加密之后的转成<span style="color:red">小写的</span>16进制字符串<br>
+     *         如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getMessageDigest(OnewayType)
      * @see java.security.MessageDigest#digest(byte[])
      * @see ByteUtil#bytesToHexStringLowerCase(byte[])
@@ -177,7 +202,8 @@ final class OnewayEncryption{
      *
      * @param onewayType
      *            the oneway type
-     * @return {@link java.security.MessageDigest#getInstance(String)}
+     * @return 如果 <code>onewayType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         {@link java.security.MessageDigest#getInstance(String)}
      * @see java.security.MessageDigest#getInstance(String)
      * @see com.feilong.lib.codec.digest.DigestUtils#getDigest(String)
      */

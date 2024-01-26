@@ -13,27 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.security.oneway;
+package com.feilong.security.oneway.md5;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
-import com.feilong.io.InputStreamUtil;
 import com.feilong.lib.codec.digest.DigestUtils;
 import com.feilong.security.AbstractSecurityTest;
+import com.feilong.security.oneway.MD5Util;
 
-public class MD5UtilTest extends AbstractSecurityTest{
-
-    @Test
-    public void encodeFile() throws IOException{
-        String encodeFile = MD5Util.encodeFile(LOCATION);
-        assertEquals("098f6bcd4621d373cade4e832627b4f6", encodeFile);
-        assertEquals(encodeFile, DigestUtils.md5Hex(InputStreamUtil.getInputStream(LOCATION)));
-    }
+public class Md5EncodeTest extends AbstractSecurityTest{
 
     @Test
     public void encode121(){
@@ -64,21 +55,9 @@ public class MD5UtilTest extends AbstractSecurityTest{
                                         .toUpperCase());
     }
 
-    //---------------------------------------------------------------
-
     @Test(expected = NullPointerException.class)
-    public void testMD5UtilTestNull(){
-        MD5Util.encodeFile(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSHA1UtilTestEmpty(){
-        MD5Util.encodeFile("");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testMD5UtilTestBlank(){
-        MD5Util.encodeFile(" ");
+    public void encode(){
+        MD5Util.encode((String) null);
     }
 
 }
