@@ -20,7 +20,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.security.oneway.OnewayEncryptionParameterizedTest;
-import com.feilong.security.oneway.SHA1UtilTest;
 import com.feilong.security.oneway.SHA384UtilTest;
 import com.feilong.security.oneway.SHA512UtilTest;
 import com.feilong.security.oneway.md5.Md5EncodeFileTest;
@@ -28,6 +27,8 @@ import com.feilong.security.oneway.md5.Md5EncodeParameterizedTest;
 import com.feilong.security.oneway.md5.Md5EncodeTest;
 import com.feilong.security.oneway.md5.Md5EncodeUpperCaseParameterizedTest;
 import com.feilong.security.oneway.md5.Md5EncodeUpperCaseTest;
+import com.feilong.security.oneway.sha1.SHA1UtilTest;
+import com.feilong.security.oneway.sha1.Sha1EncodeFileTest;
 import com.feilong.security.oneway.sha256.SHA256UtilTest;
 import com.feilong.security.oneway.sha256.Sha256EncodeFileTest;
 import com.feilong.security.symmetric.AesUtilTest;
@@ -43,6 +44,7 @@ import com.feilong.security.symmetric.AesUtilTest;
                 Md5EncodeUpperCaseParameterizedTest.class,
 
                 SHA1UtilTest.class,
+                Sha1EncodeFileTest.class,
 
                 SHA256UtilTest.class,
                 Sha256EncodeFileTest.class,

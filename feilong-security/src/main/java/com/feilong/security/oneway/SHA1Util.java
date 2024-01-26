@@ -70,9 +70,20 @@ public final class SHA1Util{
      * 加密之后的转成<span style="color:green">小写的</span>16进制字符串
      * </p>
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * SHA1Util.encode("") = "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+     * SHA1Util.encode("123456") = "7c4a8d09ca3762af61e59520943dc26494f8941b"
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param origin
      *            原始字符串,将使用默认的 {@link String#getBytes()} 转成字节数组<br>
-     * @return 加密之后的转成小写的16进制字符串
+     * @return 加密之后的转成小写的16进制字符串 <br>
+     *         如果 <code>origin</code> 是null,抛出 {@link NullPointerException}<br>
      * @throws EncryptionException
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encode(OnewayType, String)
@@ -80,6 +91,37 @@ public final class SHA1Util{
      */
     public static String encode(String origin){
         return OnewayEncryption.encode(ONEWAYTYPE, origin);
+    }
+
+    /**
+     * 使用sha1算法 单向加密字符串(大写).
+     * 
+     * <p>
+     * 加密之后的转成<span style="color:green">大写的</span>16进制字符串
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * SHA1Util.encodeUpperCase("") = "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709"
+     * SHA1Util.encodeUpperCase("123456") = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param origin
+     *            原始字符串,将使用默认的 {@link String#getBytes()} 转成字节数组<br>
+     * @return 加密之后的转成大写的16进制字符串 <br>
+     *         如果 <code>origin</code> 是null,抛出 {@link NullPointerException}<br>
+     * @throws EncryptionException
+     *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
+     * @see OnewayEncryption#encode(OnewayType, String)
+     * @see com.feilong.lib.codec.digest.DigestUtils#sha1Hex(String)
+     * @since 4.0.8
+     */
+    public static String encodeUpperCase(String origin){
+        return OnewayEncryption.encodeUpperCase(ONEWAYTYPE, origin);
     }
 
     /**

@@ -129,6 +129,7 @@ public final class SHA256Util{
      *             如果在加密解密的过程中发生了异常,会以EncryptionException形式抛出
      * @see OnewayEncryption#encodeUpperCase(OnewayType, String)
      * @see com.feilong.lib.codec.digest.DigestUtils#sha256Hex(String)
+     * @since 4.0.8
      */
     public static String encodeUpperCase(String origin){
         return OnewayEncryption.encodeUpperCase(ONEWAYTYPE, origin);
