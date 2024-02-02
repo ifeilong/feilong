@@ -25,9 +25,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.codec.binary.Base64;
-import com.feilong.core.Validate;
 import com.feilong.security.ByteUtil;
 import com.feilong.security.EncryptionException;
 import com.feilong.security.symmetric.builder.DefaultKeyBuilder;

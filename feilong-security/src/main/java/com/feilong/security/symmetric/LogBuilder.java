@@ -27,7 +27,7 @@ import com.feilong.json.JsonUtil;
 import com.feilong.lib.lang3.StringUtils;
 
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
-class LogBuilder{
+public class LogBuilder{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogBuilder.class);
 
@@ -78,7 +78,11 @@ class LogBuilder{
         return JsonUtil.toString(map);
     }
 
-    private static String hided(String keyString){
+    public static String hided(String keyString){
+        if (null == keyString){
+            return null;
+        }
+        //---------------------------------------------------------------
         int length = keyString.length();
         if (length <= 3){
             return "*";
