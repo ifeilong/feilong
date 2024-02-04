@@ -50,8 +50,7 @@ import com.feilong.security.EncryptionException;
  * @see com.feilong.lib.codec.digest.DigestUtils
  * @see org.springframework.util.DigestUtils
  */
-//无访问控制符修饰的内容可以被同一个包中的类访问,
-final class OnewayEncryption{
+public final class OnewayEncryption{
 
     /** Don't let anyone instantiate this class. */
     private OnewayEncryption(){

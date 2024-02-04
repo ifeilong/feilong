@@ -74,15 +74,15 @@ package com.feilong.security.oneway;
  * </ol>
  * 
  * </blockquote>
- * 
+ *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @version 1.0.0 2012-3-25 上午7:19:44
  * @version 1.0.2 2013-1-14 20:27 增加 SHA-1、 SHA-256、SHA-384,和SHA-512
  * @see java.security.MessageDigestSpi
  * @see com.feilong.lib.codec.digest.MessageDigestAlgorithms
+ * @since 4.0.8 update to public
  */
-//无访问控制符修饰的内容可以被同一个包中的类访问,
-enum OnewayType{
+public enum OnewayType{
 
     /**
      * Message Digest algorithm 5,信息摘要算法.
@@ -104,7 +104,29 @@ enum OnewayType{
      * 据国家密码管理局表示，其安全性及效率与SHA-256相当。
      * </pre>
      * 
+     * <h3>说明:</h3>
+     * 
+     * <p>
+     * 需要自行依赖 bcprov-jdk15on jar
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        <dependency>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcprov-jdk15on</artifactId>
+          <version>1.70</version>
+        </dependency>
+    }
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     * 
      * @since 2.0.1
+     * @see Sm3Util
      */
     SM3("SM3"),
 
