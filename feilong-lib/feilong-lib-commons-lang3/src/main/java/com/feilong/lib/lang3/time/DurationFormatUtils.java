@@ -772,15 +772,6 @@ public class DurationFormatUtils{
             return this.value.hashCode();
         }
 
-        /**
-         * Represents this token as a String.
-         *
-         * @return String representation of the token
-         */
-        @Override
-        public String toString(){
-            return StringUtils.repeat(this.value.toString(), this.count);
-        }
     }
 
 }

@@ -15,27 +15,25 @@
  */
 package com.feilong.context.signer;
 
+import java.util.Map;
+
 /**
- * 签名器.
- * 
- * <p>
- * 一些get请求（不限get），如果只是简单的基本参数，容易被黑客或者用户频繁刷新连接，如果这个连接会有数据库操作的话，会对db产生压力<br>
- * 故，增加特殊参数判断.
- * </p>
+ * 常用于签名,验签签名器.
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- * @since 1.12.1
+ * @since 4.0.8
  */
 @FunctionalInterface // 该注解加不加,对于接口是不是函数式接口没有影响;只是提醒编译器去检查该接口是否仅包含一个抽象方法
-public interface Signer{
+public interface MapSigner{
 
     /**
      * Sign.
      *
-     * @param strs
-     *            需要被签名的字符串
-     * @return the string
+     * @param map
+     *            需要被签名的map
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      */
-    String sign(CharSequence...strs);
+    String sign(Map<String, String> map);
 
 }
