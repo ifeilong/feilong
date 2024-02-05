@@ -15,18 +15,17 @@
  */
 package com.feilong.core.lang.reflect.constructorutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class ConstructorUtilNewInstanceArgsAndParameterTypesTest.

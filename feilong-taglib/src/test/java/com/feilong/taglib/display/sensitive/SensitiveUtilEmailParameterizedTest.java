@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.sensitive;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.taglib.display.sensitive.SensitiveUtil.parse;
 import static org.junit.Assert.assertEquals;
 
@@ -22,8 +23,6 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * 

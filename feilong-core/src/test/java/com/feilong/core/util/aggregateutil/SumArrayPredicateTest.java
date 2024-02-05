@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.aggregateutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -30,8 +31,6 @@ import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class AggregateUtilSumArrayPredicateTest.

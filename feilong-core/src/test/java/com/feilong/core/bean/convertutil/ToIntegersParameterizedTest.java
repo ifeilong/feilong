@@ -15,16 +15,15 @@
  */
 package com.feilong.core.bean.convertutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toIntegers;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toIntegers;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToIntegerParameterizedTest.

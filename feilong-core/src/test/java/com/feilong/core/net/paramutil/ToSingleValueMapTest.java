@@ -18,10 +18,10 @@ package com.feilong.core.net.paramutil;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.net.ParamUtil.toSingleValueMap;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 

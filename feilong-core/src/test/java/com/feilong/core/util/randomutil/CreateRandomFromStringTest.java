@@ -15,8 +15,10 @@
  */
 package com.feilong.core.util.randomutil;
 
-import static org.hamcrest.Matchers.equalTo;
+import static com.feilong.core.Alphabet.DECIMAL;
+import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,9 +26,6 @@ import org.junit.Test;
 import com.feilong.core.util.RandomUtil;
 import com.feilong.test.rule.Repeat;
 import com.feilong.test.rule.RepeatRule;
-
-import static com.feilong.core.Alphabet.DECIMAL;
-import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
 
 /**
  * The Class RandomUtilTest.

@@ -15,6 +15,9 @@
  */
 package com.feilong.core.lang.stringutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -22,10 +25,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 
 /**
  * The Class StringUtilReplaceAllParameterizedTest.

@@ -18,8 +18,8 @@ package com.feilong.core.util.collectionsutil.get;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newHashMap;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 
 import java.util.List;
 import java.util.Map;

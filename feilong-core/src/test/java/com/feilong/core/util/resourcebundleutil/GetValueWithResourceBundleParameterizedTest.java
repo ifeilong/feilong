@@ -15,6 +15,9 @@
  */
 package com.feilong.core.util.resourcebundleutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ResourceBundle;
@@ -25,10 +28,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 
 /**
  * The Class ResourceBundleUtilGetValueWithResourceBundleParameterizedTest.

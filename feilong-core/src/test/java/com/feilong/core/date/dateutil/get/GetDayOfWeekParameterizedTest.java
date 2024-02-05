@@ -15,6 +15,10 @@
  */
 package com.feilong.core.date.dateutil.get;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateUtil.getDayOfWeek;
+import static com.feilong.core.date.DateUtil.toDate;
 import static java.util.Calendar.FRIDAY;
 import static java.util.Calendar.MONDAY;
 import static java.util.Calendar.SATURDAY;
@@ -27,12 +31,6 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.getDayOfWeek;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
  * The Class DateUtilGetYearParameterizedTest.

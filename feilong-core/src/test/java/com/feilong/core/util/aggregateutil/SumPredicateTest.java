@@ -15,11 +15,15 @@
  */
 package com.feilong.core.util.aggregateutil;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,11 +36,6 @@ import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.lib.collection4.PredicateUtils;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class AggregateUtilSumPredicateTest.

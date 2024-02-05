@@ -15,14 +15,13 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG;
 
 import java.util.Locale;
 
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class BasePagerTest.

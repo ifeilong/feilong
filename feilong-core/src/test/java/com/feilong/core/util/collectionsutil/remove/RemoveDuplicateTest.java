@@ -15,11 +15,12 @@
  */
 package com.feilong.core.util.collectionsutil.remove;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilRemoveDuplicateTest.

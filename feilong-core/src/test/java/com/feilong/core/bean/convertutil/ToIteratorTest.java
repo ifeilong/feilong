@@ -18,9 +18,9 @@ package com.feilong.core.bean.convertutil;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Enumeration;
 import java.util.Iterator;

@@ -16,10 +16,10 @@
 package com.feilong.core.util.randomutil;
 
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -21,10 +21,10 @@ import static com.feilong.core.util.SortUtil.sortList;
 import java.util.Comparator;
 import java.util.List;
 
+import com.feilong.core.Validate;
 import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.formatter.entity.BeanFormatterConfig;
 import com.feilong.formatter.entity.FormatterColumnEntity;
-import com.feilong.core.Validate;
 
 /**
  * 用来给 {@code List<FormatterColumnEntity> formatterColumnEntityList} 排序的工具类.

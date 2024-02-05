@@ -15,11 +15,12 @@
  */
 package com.feilong.core.bean.convertutil;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 import java.util.Properties;
@@ -27,8 +28,6 @@ import java.util.Properties;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ConvertUtilToPropertiesTest.

@@ -18,8 +18,8 @@ package com.feilong.core.util.comparator;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import com.feilong.core.util.RegexUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.util.RegexUtil;
 
 /**
  * 正则表达式分组 number group 比较器.

@@ -18,9 +18,9 @@ package com.feilong.core.util.resourcebundleutil;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 import java.util.ResourceBundle;

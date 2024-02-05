@@ -15,10 +15,11 @@
  */
 package com.feilong.core.util.collectionsutil.select;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +30,8 @@ import org.junit.Test;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.lib.collection4.ComparatorUtils;
 import com.feilong.lib.collection4.functors.ComparatorPredicate;
-import com.feilong.lib.collection4.functors.EqualPredicate;
 import com.feilong.lib.collection4.functors.ComparatorPredicate.Criterion;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
+import com.feilong.lib.collection4.functors.EqualPredicate;
 
 /**
  * The Class CollectionsUtilSelectRejectedPredicateTest.

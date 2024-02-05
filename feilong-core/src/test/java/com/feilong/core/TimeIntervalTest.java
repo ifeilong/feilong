@@ -15,10 +15,6 @@
  */
 package com.feilong.core;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_DAY;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
@@ -33,6 +29,9 @@ import static com.feilong.core.TimeInterval.SECONDS_PER_MONTH;
 import static com.feilong.core.TimeInterval.SECONDS_PER_SECOND;
 import static com.feilong.core.TimeInterval.SECONDS_PER_WEEK;
 import static com.feilong.core.TimeInterval.SECONDS_PER_YEAR;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 /**
  * The Class TimeIntervalTest.

@@ -19,8 +19,8 @@ import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.junit.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Iterator;

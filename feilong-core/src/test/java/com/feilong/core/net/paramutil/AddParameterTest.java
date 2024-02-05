@@ -16,9 +16,9 @@
 package com.feilong.core.net.paramutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.net.ParamUtil.addParameter;
 import static com.feilong.core.net.URIUtil.encode;
-import static com.feilong.core.lang.StringUtil.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;

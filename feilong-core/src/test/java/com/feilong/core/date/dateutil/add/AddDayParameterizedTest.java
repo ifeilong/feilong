@@ -15,6 +15,10 @@
  */
 package com.feilong.core.date.dateutil.add;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateUtil.addDay;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
@@ -23,12 +27,6 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.addDay;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
  * The Class DateUtilAddDayParameterizedTest.

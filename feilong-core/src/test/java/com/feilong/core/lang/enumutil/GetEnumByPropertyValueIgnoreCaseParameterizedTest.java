@@ -15,6 +15,10 @@
  */
 package com.feilong.core.lang.enumutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.entity.HttpMethodTestType.GET;
+import static com.feilong.core.entity.HttpMethodTestType.POST;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -24,11 +28,6 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.core.lang.EnumUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.entity.HttpMethodTestType.GET;
-import static com.feilong.core.entity.HttpMethodTestType.POST;
 
 /**
  * The Class EnumUtilGetEnumByPropertyValueIgnoreCaseParameterizedTest.

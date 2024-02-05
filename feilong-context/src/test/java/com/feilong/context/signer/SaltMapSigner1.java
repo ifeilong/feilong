@@ -15,7 +15,7 @@
  */
 package com.feilong.context.signer;
 
-import static com.feilong.context.signer.DefaultMapSigner.signLog;
+import static com.feilong.context.signer.AbstractMapSigner.signLog;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.security.symmetric.LogBuilder.hided;
 

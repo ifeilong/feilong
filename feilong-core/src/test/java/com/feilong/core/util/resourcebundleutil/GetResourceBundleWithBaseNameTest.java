@@ -15,15 +15,14 @@
  */
 package com.feilong.core.util.resourcebundleutil;
 
-import static org.hamcrest.Matchers.hasKey;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasKey;
 
 import java.util.ResourceBundle;
 
 import org.junit.Test;
-
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
  * The Class ResourceBundleUtilGetResourceBundleWithBaseNameTest.

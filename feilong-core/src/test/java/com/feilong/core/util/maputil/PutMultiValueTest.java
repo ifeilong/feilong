@@ -15,9 +15,11 @@
  */
 package com.feilong.core.util.maputil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 import java.util.Map;
@@ -25,9 +27,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * The Class MapUtilPutMultiValueTest.

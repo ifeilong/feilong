@@ -15,8 +15,8 @@
  */
 package com.feilong.core.util.randomutil;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Rule;
 import org.junit.Test;

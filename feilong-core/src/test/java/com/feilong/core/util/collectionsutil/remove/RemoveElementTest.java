@@ -17,8 +17,8 @@ package com.feilong.core.util.collectionsutil.remove;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 
 import java.util.ArrayList;
 import java.util.List;

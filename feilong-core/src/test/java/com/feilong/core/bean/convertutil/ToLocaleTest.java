@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean.convertutil;
 
+import static com.feilong.core.bean.ConvertUtil.toLocale;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
@@ -23,8 +24,6 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toLocale;
 
 /**
  * The Class ConvertUtilToLocaleTest.

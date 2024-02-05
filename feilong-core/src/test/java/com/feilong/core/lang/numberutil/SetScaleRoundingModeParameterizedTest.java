@@ -15,6 +15,9 @@
  */
 package com.feilong.core.lang.numberutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.math.RoundingMode.HALF_UP;
 import static org.junit.Assert.assertEquals;
 
@@ -27,10 +30,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class NumberUtilSetScaleRoundingModeParameterizedTest.

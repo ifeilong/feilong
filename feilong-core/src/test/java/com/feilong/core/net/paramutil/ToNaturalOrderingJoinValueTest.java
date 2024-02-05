@@ -15,8 +15,8 @@
  */
 package com.feilong.core.net.paramutil;
 
-import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;

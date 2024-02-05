@@ -15,9 +15,9 @@
  */
 package com.feilong.core.date.dateutil.get;
 
-import org.junit.Test;
-
 import static com.feilong.core.date.DateUtil.getDayOfWeek;
+
+import org.junit.Test;
 
 /**
  * The Class DateUtilGetDayOfWeekTest.

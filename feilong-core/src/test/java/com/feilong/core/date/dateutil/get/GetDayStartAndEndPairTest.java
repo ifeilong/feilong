@@ -15,12 +15,12 @@
  */
 package com.feilong.core.date.dateutil.get;
 
-import static com.feilong.core.date.DateUtil.getDayStartAndEndPair;
-import static com.feilong.core.date.DateUtil.getTodayStartAndEndPair;
-import static com.feilong.core.date.DateUtil.getYesterdayStartAndEndPair;
 import static com.feilong.core.date.DateUtil.addDay;
+import static com.feilong.core.date.DateUtil.getDayStartAndEndPair;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
+import static com.feilong.core.date.DateUtil.getTodayStartAndEndPair;
+import static com.feilong.core.date.DateUtil.getYesterdayStartAndEndPair;
 import static com.feilong.core.date.DateUtil.now;
 import static org.junit.Assert.assertEquals;
 

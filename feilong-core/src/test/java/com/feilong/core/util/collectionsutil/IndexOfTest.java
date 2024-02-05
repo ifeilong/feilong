@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -24,8 +25,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilIndexOfTest.

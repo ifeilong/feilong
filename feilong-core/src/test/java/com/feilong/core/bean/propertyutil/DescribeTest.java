@@ -17,10 +17,10 @@ package com.feilong.core.bean.propertyutil;
 
 import static com.feilong.core.date.DateUtil.now;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Date;
 import java.util.Map;

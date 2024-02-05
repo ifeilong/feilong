@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutil;
 
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -23,9 +25,6 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toInteger;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToIntegerParameterizedTest.

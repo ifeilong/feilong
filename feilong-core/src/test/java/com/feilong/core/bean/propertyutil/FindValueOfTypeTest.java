@@ -16,10 +16,10 @@
 package com.feilong.core.bean.propertyutil;
 
 import static com.feilong.core.date.DateUtil.now;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 

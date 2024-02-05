@@ -16,8 +16,8 @@
 package com.feilong.core.bean.propertyutil;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasProperty;
 
 import org.junit.Test;
 

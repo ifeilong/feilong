@@ -15,18 +15,17 @@
  */
 package com.feilong.core.util.resourcebundleutil;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toProperties;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Properties;
 
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toProperties;
 
 /**
  * The Class ResourceBundleUtilToPropertiesTest.

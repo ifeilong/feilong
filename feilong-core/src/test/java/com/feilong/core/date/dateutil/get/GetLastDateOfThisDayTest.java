@@ -15,15 +15,13 @@
  */
 package com.feilong.core.date.dateutil.get;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateUtilGetLastDateOfThisDayTest.

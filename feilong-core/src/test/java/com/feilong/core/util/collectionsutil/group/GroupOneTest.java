@@ -15,14 +15,15 @@
  */
 package com.feilong.core.util.collectionsutil.group;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilGroupOneTest.

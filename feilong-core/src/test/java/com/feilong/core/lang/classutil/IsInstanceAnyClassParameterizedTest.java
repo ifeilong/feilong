@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.classutil;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,9 +25,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.store.member.User;
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ClassUtilTest.

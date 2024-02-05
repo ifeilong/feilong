@@ -15,10 +15,10 @@
  */
 package com.feilong.core.lang.reflect.constructorutil;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 

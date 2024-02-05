@@ -21,8 +21,8 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.UncheckedIOException;
 
-import com.feilong.lib.io.IOUtils;
 import com.feilong.core.Validate;
+import com.feilong.lib.io.IOUtils;
 
 /**
  * {@link java.io.Reader} 工具类.

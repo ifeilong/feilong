@@ -15,18 +15,19 @@
  */
 package com.feilong.core.util.collectionsutil;
 
-import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.predicate.BeanPredicateUtil;
-import com.feilong.store.member.User;
-import org.apache.commons.collections4.Predicate;
-import org.junit.Test;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static org.junit.Assert.assertEquals;
+import org.apache.commons.collections4.Predicate;
+import org.junit.Test;
+
+import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.predicate.BeanPredicateUtil;
+import com.feilong.store.member.User;
 
 public class ExistWithPredicateTest {
 

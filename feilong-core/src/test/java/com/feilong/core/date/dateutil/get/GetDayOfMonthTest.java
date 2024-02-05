@@ -15,9 +15,9 @@
  */
 package com.feilong.core.date.dateutil.get;
 
-import org.junit.Test;
-
 import static com.feilong.core.date.DateUtil.getDayOfMonth;
+
+import org.junit.Test;
 
 /**
  * The Class DateUtilGetDayOfMonthTest.

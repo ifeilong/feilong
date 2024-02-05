@@ -15,15 +15,6 @@
  */
 package com.feilong.core.lang.numberutil;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-import org.junit.runners.Parameterized.Parameters;
-
-import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
-
 import static com.feilong.core.NumberPattern.NO_SCALE;
 import static com.feilong.core.NumberPattern.PERCENT_WITH_1POINT;
 import static com.feilong.core.NumberPattern.PERCENT_WITH_2POINT;
@@ -32,6 +23,14 @@ import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.runners.Parameterized.Parameters;
+
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.lang.NumberUtil;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class NumberUtilToStringParameterizedTest.

@@ -29,9 +29,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.lib.lang3.StringUtils;
-import com.feilong.core.Validate;
 
 /**
  * 解析邮箱地址工具类.

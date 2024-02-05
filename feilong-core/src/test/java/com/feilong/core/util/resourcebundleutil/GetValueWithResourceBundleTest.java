@@ -15,11 +15,11 @@
  */
 package com.feilong.core.util.resourcebundleutil;
 
+import static com.feilong.core.util.ResourceBundleUtil.getValue;
+
 import java.util.ResourceBundle;
 
 import org.junit.Test;
-
-import static com.feilong.core.util.ResourceBundleUtil.getValue;
 
 /**
  * The Class ResourceBundleUtilGetValueWithResourceBundleTest.

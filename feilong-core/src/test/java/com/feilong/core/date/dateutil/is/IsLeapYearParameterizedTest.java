@@ -15,6 +15,7 @@
  */
 package com.feilong.core.date.dateutil.is;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -22,8 +23,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.AbstractBooleanParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class DateUtilIsLeapYearTest.

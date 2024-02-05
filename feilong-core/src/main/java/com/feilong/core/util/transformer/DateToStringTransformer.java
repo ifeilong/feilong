@@ -21,8 +21,8 @@ import java.util.Date;
 import org.apache.commons.collections4.Transformer;
 
 import com.feilong.core.DatePattern;
-import com.feilong.core.date.DateUtil;
 import com.feilong.core.Validate;
+import com.feilong.core.date.DateUtil;
 
 /**
  * 日期转成字符串的转换器.
