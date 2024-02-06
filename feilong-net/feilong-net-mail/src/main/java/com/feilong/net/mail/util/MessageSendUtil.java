@@ -15,8 +15,12 @@
  */
 package com.feilong.net.mail.util;
 
+import static com.feilong.core.lang.StringUtil.EMPTY;
+import static com.feilong.core.lang.StringUtil.formatPattern;
+
 import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -56,8 +60,42 @@ public class MessageSendUtil{
             // 发送邮件
             Transport.send(message);
         }catch (MessagingException e){
-            throw new MailException(e);
+            throw new MailException(createLog(message), e);
         }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param message
+     * @return
+     * @throws MessagingException
+     * @since 4.0.8
+     */
+    private static String createLog(Message message){
+        String subject;
+        try{
+            subject = message.getSubject();
+        }catch (MessagingException e){
+            subject = EMPTY;
+        }
+
+        //---------------------------------------------------------------
+        Address[] allRecipients;
+        try{
+            allRecipients = message.getAllRecipients();
+        }catch (MessagingException e){
+            allRecipients = null;
+        }
+
+        //---------------------------------------------------------------
+        Address[] from;
+        try{
+            from = message.getFrom();
+        }catch (MessagingException e1){
+            from = null;
+        }
+        return formatPattern("from:[{}],Subject:[{}],allRecipients:[{}]", from, subject, allRecipients);
     }
 
     //---------------------------------------------------------------
