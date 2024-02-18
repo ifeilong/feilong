@@ -135,8 +135,9 @@ public final class JsonHelper{
      *            the obj
      * @return true, if is need convert to JSON array
      * @see com.feilong.lib.json.util.JSONUtils#isArray(Object)
+     * @since 4.1.0 change to public
      */
-    private static boolean isNeedConvertToJSONArray(Object obj){
+    public static boolean isNeedConvertToJSONArray(Object obj){
         if (obj instanceof String){
             String str = (String) obj;
             if (str.startsWith(ARRAY_START_CHAR) && str.endsWith(ARRAY_END_CHAR)){// [] 格式的字符串 
