@@ -74,7 +74,7 @@
 			
 			3.2.x	于 2016 年 12 月 31 日停止维护
  		-->
-		<version.spring>5.3.31</version.spring>
+		<version.spring>6.0.15</version.spring>
 
 		<!-- **********************begin maven-compiler-plugin config******************************************* -->
 		<maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
