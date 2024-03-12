@@ -48,7 +48,7 @@ public class HttpLogHelper{
      * @since 4.0.8
      */
     public static String autoLog(HttpRequest httpRequest,String messagePattern,Object...params){
-        return autoLog(httpRequest, null, messagePattern, params);
+        return autoLog(httpRequest, (ConnectionConfig) null, messagePattern, params);
     }
 
     /**
@@ -66,7 +66,7 @@ public class HttpLogHelper{
      * @since 4.0.8
      */
     public static String autoLog(HttpRequest httpRequest,ConnectionConfig connectionConfig,String messagePattern,Object...params){
-        return autoLog(httpRequest, connectionConfig, null, messagePattern, params);
+        return autoLog(httpRequest, null, connectionConfig, messagePattern, params);
     }
 
     public static String autoLog(
