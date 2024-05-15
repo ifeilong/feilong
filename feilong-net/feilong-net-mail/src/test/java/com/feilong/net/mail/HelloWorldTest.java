@@ -34,4 +34,8 @@ public class HelloWorldTest extends AbstractMailSenderTest{
     //    protected String getConfigFile(){
     //        return "mail-feilongtestemail.properties";
     //    }
+    @Override
+    protected String getConfigFile(){
+        return "mail-ximalayaopenapi.properties";
+    }
 }
