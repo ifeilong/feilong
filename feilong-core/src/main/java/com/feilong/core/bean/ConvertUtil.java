@@ -3161,6 +3161,89 @@ public final class ConvertUtil{
     //---------------------------------------------------------------
 
     /**
+     * 将 toBeConvertedValue 转成 string list.
+     * 
+     * <p>
+     * toBeConvertedValue 支持字符串,数组,集合
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">//逗号分隔的字符串</span>
+     * ConvertUtil.toStringList("1,2,3") = toList("1", "2", "3");
+     * ConvertUtil.toStringList("{1,2,3}") = toList("1", "2", "3");
+     * ConvertUtil.toStringList("{ 1 ,2,3}") = toList("1", "2", "3");
+     * 
+     * <span style="color:green">//逗号分隔的字符串 自动去空格</span>
+     * ConvertUtil.toStringList("1,2, 3") = toList("1", "2", "3");
+     * ConvertUtil.toStringList("1,2 , 3") = toList("1", "2", "3");
+     * 
+     * <span style="color:green">//Integer集合</span>
+     * ConvertUtil.toStringList(toList(1, 2, 3)) = toList("1", "2", "3");
+     * 
+     * <span style="color:green">//String 数组</span>
+     * ConvertUtil.toStringList(new String[] { "1", "2", "3" }) = toList("1", "2", "3");
+     * ConvertUtil.toStringList(toList(1, 2, 3)) = toList("1", "2", "3");
+     * 
+     * <span style="color:green">//String 集合</span>
+     * ConvertUtil.toStringList(toList("1", "2", "3")) = toList("1", "2", "3");
+     * <span style="color:red">//String集合 注意这里不会自动去空格</span>
+     * ConvertUtil.toStringList(toList("1", "2", " 3")) =toList("1", "2", " 3");
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * String recommendString = staticConfig.getAnchorRecommend();
+     * if (isNullOrEmpty(recommendString)){
+     *     return new SuccessResult(Lists.newArrayList());
+     * }
+     * 
+     * //---------------------------------------------------------------
+     * String[] recommendStr = recommendString.split(",");
+     * List{@code <String>} lString = Arrays.asList(recommendStr);
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toStringList(staticConfig.getAnchorRecommend());
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @apiNote
+     *          <h3>说明:</h3>
+     *          <blockquote>
+     *          <ol>
+     *          <li>此方法返回的list可以进行add等操作</li>
+     *          </ol>
+     *          </blockquote>
+     * 
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     * @since 4.1.0
+     */
+    public static List<String> toStringList(Object toBeConvertedValue){
+        return null == toBeConvertedValue ? null : toList(toStrings(toBeConvertedValue));
+    }
+
+    /**
      * 将 <code>toBeConvertedValue</code> 转成{@link String}数组.
      * 
      * <h3>说明:</h3>

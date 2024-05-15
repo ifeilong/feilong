@@ -59,6 +59,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToLongListTest.class,
                 ToLongListParameterizedTest.class,
 
+                ToStringListTest.class,
+                ToStringListParameterizedTest.class,
+
                 ToMapArrayTest.class,
                 ToMapCollectionTest.class,
                 ToMapKeyValueTest.class,
@@ -78,6 +81,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToStringsTest.class,
 
                 ToSetVarargsTest.class,
+
 //
 })
 public class ConvertUtilSuiteTests{
