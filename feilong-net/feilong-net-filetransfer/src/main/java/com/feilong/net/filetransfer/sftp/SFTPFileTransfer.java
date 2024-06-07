@@ -62,8 +62,76 @@ import com.jcraft.jsch.SftpException;
  * </dependency>
  * }
  * </pre>
+ * 
+ * <h3>使用方式示例:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre class="code">
+ * 
+ * SFTPFileTransferConfig sftpFileTransferConfig = new SFTPFileTransferConfig();
+ * sftpFileTransferConfig.setHostName("dts.xxxxx.com");
+ * sftpFileTransferConfig.setUserName("xxxxx");
+ * sftpFileTransferConfig.setPassword("xxxxxx");
+ * sftpFileTransferConfig.setPort(2222);
+ * 
+ * SFTPFileTransfer sftpFileTransfer = new SFTPFileTransfer();
+ * sftpFileTransfer.setSftpFileTransferConfig(sftpFileTransferConfig);
+ * 
+ * String dateString = DateUtil.toString(getFirstDateOfYesterday(), "yyyyMMdd");
+ * sftpFileTransfer.upload("/iot/" + dateString + "/", "/Users/Downloads/part-m-00001");
+ * 
+ * </pre>
+ * 
+ * <b>此外通常可以使用spring xml 配置:</b>
+ * 
+ * <pre>
+{@code
+ <util:properties id="p_sftp" location="file:/Users/xxxxx/fileTransfer-sftp-gap.properties"/>
+
+ <bean id="sftpFileTransfer" class="com.feilong.net.filetransfer.sftp.SFTPFileTransfer" scope="prototype">
+    <property name="sftpFileTransferConfig">
+           <bean class="com.feilong.net.filetransfer.sftp.SFTPFileTransferConfig">
+          }
+ * </pre>
+ * 
+ * <pre class="code">
+ * 
+   &lt;property name="hostName" value="#{p_sftp['fileTransfer.sftp.hostName']}" />
+      &lt;property name="userName" value="#{p_sftp['fileTransfer.sftp.userName']}" />
+      &lt;property name="password">
+          &lt;value>&lt;![CDATA[#{p_sftp['fileTransfer.sftp.password']}]]></value>
+      &lt;/property>
+      &lt;property name="port" value="#{p_sftp['fileTransfer.sftp.port']}" />
+  &lt;/bean>
+&lt;/property>
+</bean>
+ * 
+ * </pre>
+ * 
+ * 
+ * <b>然后调用代码:</b>
+ * 
+ * <pre class="code">
+ * 
+ * &#64;Autowired
+ * &#64;Qualifier("sftpFileTransfer")
+ * private FileTransfer fileTransfer;
+ * 
+ * private final String remoteDirectory = "/upload/Inbound/BuyableandDisplayable/";
+ * 
+ * &#64;Override
+ * &#64;Test
+ * public void upload(){
+ *     String singleLocalFileFullPath = "E:\\1.txt";
+ *     fileTransfer.upload(remoteDirectory, singleLocalFileFullPath);
+ * }
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * 
  * @since 1.0.5
  */
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
