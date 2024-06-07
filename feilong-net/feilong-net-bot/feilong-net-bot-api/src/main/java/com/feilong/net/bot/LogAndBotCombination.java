@@ -22,6 +22,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 
+import com.feilong.core.Validate;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.lib.lang3.ArrayUtils;
 import com.feilong.lib.lang3.StringUtils;
@@ -105,6 +106,92 @@ public class LogAndBotCombination{
      */
     public static void error(Logger logger,Bot bot,String pattern,Object...arguments){
         log(logger, bot, "error", pattern, arguments);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Debug级别输出日志以及发送机器人.
+     *
+     * @param combinationConfig
+     *            混合相关配置
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.1.0
+     */
+    public static void debug(CombinationConfig combinationConfig,String pattern,Object...arguments){
+        Validate.notNull(combinationConfig, "combinationConfig can't be null!");
+        debug(
+                        combinationConfig.getIsPrintLog() ? combinationConfig.getLogger() : null,
+                        combinationConfig.getIsSendBotMessage() ? combinationConfig.getBot() : null,
+
+                        joinPattern(combinationConfig.getSignName(), pattern),
+                        arguments);
+    }
+
+    /**
+     * Info级别输出日志以及发送机器人.
+     *
+     * @param combinationConfig
+     *            混合相关配置
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.1.0
+     */
+    public static void info(CombinationConfig combinationConfig,String pattern,Object...arguments){
+        Validate.notNull(combinationConfig, "combinationConfig can't be null!");
+        info(
+                        combinationConfig.getIsPrintLog() ? combinationConfig.getLogger() : null,
+                        combinationConfig.getIsSendBotMessage() ? combinationConfig.getBot() : null,
+
+                        joinPattern(combinationConfig.getSignName(), pattern),
+                        arguments);
+    }
+
+    /**
+     * Warn级别输出日志以及发送机器人.
+     *
+     * @param combinationConfig
+     *            混合相关配置
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.1.0
+     */
+    public static void warn(CombinationConfig combinationConfig,String pattern,Object...arguments){
+        Validate.notNull(combinationConfig, "combinationConfig can't be null!");
+        warn(
+                        combinationConfig.getIsPrintLog() ? combinationConfig.getLogger() : null,
+                        combinationConfig.getIsSendBotMessage() ? combinationConfig.getBot() : null,
+
+                        joinPattern(combinationConfig.getSignName(), pattern),
+                        arguments);
+    }
+
+    /**
+     * Error级别输出日志以及发送机器人.
+     *
+     * @param combinationConfig
+     *            混合相关配置
+     * @param pattern
+     *            the pattern
+     * @param arguments
+     *            the arguments
+     * @since 4.1.0
+     */
+    public static void error(CombinationConfig combinationConfig,String pattern,Object...arguments){
+        Validate.notNull(combinationConfig, "combinationConfig can't be null!");
+        error(
+                        combinationConfig.getIsPrintLog() ? combinationConfig.getLogger() : null,
+                        combinationConfig.getIsSendBotMessage() ? combinationConfig.getBot() : null,
+
+                        joinPattern(combinationConfig.getSignName(), pattern),
+                        arguments);
     }
 
     //---------------------------------------------------------------
@@ -307,11 +394,13 @@ public class LogAndBotCombination{
     }
 
     /**
-     * 剔除最后一个参数 format
-     * 
+     * 剔除最后一个参数 format.
+     *
      * @param pattern
+     *            the pattern
      * @param arguments
-     * @return
+     *            the arguments
+     * @return the string
      * @since 4.0.3
      */
     private static String formatPatternExcludeLastArgument(String pattern,Object...arguments){
@@ -319,6 +408,16 @@ public class LogAndBotCombination{
         return formatPattern(pattern, ArrayUtils.subarray(arguments, 0, arguments.length - 1));
     }
 
+    /**
+     * Log data.
+     *
+     * @param logger
+     *            the logger
+     * @param type
+     *            the type
+     * @param message
+     *            the message
+     */
     private static void logData(Logger logger,String type,String message){
         if (Objects.equals(type, "debug")){
             logger.debug(message);
