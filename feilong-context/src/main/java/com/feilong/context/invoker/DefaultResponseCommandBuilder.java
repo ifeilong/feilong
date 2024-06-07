@@ -35,9 +35,9 @@ import com.feilong.context.converter.StringToBeanConverter;
  *            响应的字符串转换成的对象
  * @see DefaultRequestResultInvoker
  * @since 1.11.3
+ * @since 4.1.0 remove T extends ResponseCommand
  */
-public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends ResponseCommand>
-                extends AbstractResponseCommandBuilder<R, T>{
+public class DefaultResponseCommandBuilder<R extends InvokerRequest, T> extends AbstractResponseCommandBuilder<R, T>{
 
     /** 响应结果字符串构造器. */
     private ResponseStringBuilder<R> responseStringBuilder;
@@ -83,9 +83,10 @@ public class DefaultResponseCommandBuilder<R extends InvokerRequest, T extends R
      * 获得 字符串转换成bean 转换器.
      *
      * @return the 字符串转换成bean 转换器
+     * @since 4.1.0 add param responseString
      */
     @Override
-    protected StringToBeanConverter<T> createStringToBeanConverter(){
+    protected StringToBeanConverter<T> createStringToBeanConverter(String responseString){
         return stringToBeanConverter;
     }
 

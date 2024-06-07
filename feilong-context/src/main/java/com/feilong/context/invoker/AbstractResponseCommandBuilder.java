@@ -41,9 +41,9 @@ import com.feilong.json.JsonUtil;
  *            响应的字符串转换成的对象
  * @see DefaultRequestResultInvoker
  * @since 3.4.1
+ * @since 4.1.0 remove T extends ResponseCommand
  */
-public abstract class AbstractResponseCommandBuilder<R extends InvokerRequest, T extends ResponseCommand>
-                implements ResponseCommandBuilder<R, T>{
+public abstract class AbstractResponseCommandBuilder<R extends InvokerRequest, T> implements ResponseCommandBuilder<R, T>{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractResponseCommandBuilder.class);
@@ -68,7 +68,7 @@ public abstract class AbstractResponseCommandBuilder<R extends InvokerRequest, T
             LOGGER.info("requestDataInfo:[{}],responseString:[{}]", JsonUtil.toString(request), responseString);
         }
 
-        StringToBeanConverter<T> stringToBeanConverter = createStringToBeanConverter();
+        StringToBeanConverter<T> stringToBeanConverter = createStringToBeanConverter(responseString);
         return stringToBeanConverter.convert(responseString);
     }
 
@@ -76,6 +76,13 @@ public abstract class AbstractResponseCommandBuilder<R extends InvokerRequest, T
 
     protected abstract ResponseStringBuilder<R> createResponseStringBuilder();
 
-    protected abstract StringToBeanConverter<T> createStringToBeanConverter();
+    /**
+     * 将字符串转成bean
+     * 
+     * @param responseString
+     * @return
+     * @since 4.1.0 add param responseString
+     */
+    protected abstract StringToBeanConverter<T> createStringToBeanConverter(String responseString);
 
 }
