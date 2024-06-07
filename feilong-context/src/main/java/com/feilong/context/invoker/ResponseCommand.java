@@ -18,7 +18,11 @@ package com.feilong.context.invoker;
 import java.io.Serializable;
 
 /**
- * <b>标识接口</b> ,标识网关返回转换的结果对象.
+ * 标识网关返回转换的结果对象.
+ * 
+ * <p>
+ * <b>标识接口</b>
+ * </p>
  * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.11.2
