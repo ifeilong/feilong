@@ -40,13 +40,7 @@ public class JsonStringToListConverterTest extends AbstractTest{
         List<ItemDto> convert = converter.convert(json);
 
         //---------------------------------------------------------------
-
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(convert));
-        }
-
-        //---------------------------------------------------------------
-
+        LOGGER.info(JsonUtil.format(convert));
         //        assertThat(convert, allOf(hasProperty("city", is("上海"))));
     }
 }

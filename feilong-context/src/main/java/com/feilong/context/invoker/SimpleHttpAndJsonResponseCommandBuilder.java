@@ -21,12 +21,15 @@ import java.util.Map;
 
 import com.feilong.context.beanproperty.SimpleHttpTypeBeanProperty;
 import com.feilong.context.converter.JsonStringToBeanConverter;
+import com.feilong.context.converter.JsonStringToListConverter;
 import com.feilong.context.converter.StringToBeanConverter;
 import com.feilong.context.invoker.http.DefaultHttpRequestBuilder;
 import com.feilong.context.invoker.http.HttpRequestBuilder;
 import com.feilong.context.invoker.http.HttpResponseStringBuilder;
 import com.feilong.context.invoker.http.RequestBodyBuilder;
 import com.feilong.context.invoker.http.SimpleMapRequestHeaderBuilder;
+import com.feilong.json.JsonHelper;
+import com.feilong.lib.lang3.StringUtils;
 import com.feilong.net.http.HttpMethodType;
 
 /**
@@ -41,9 +44,9 @@ import com.feilong.net.http.HttpMethodType;
  * @see HttpResponseStringBuilder
  * @see DefaultHttpRequestBuilder
  * @since 3.4.1
+ * @since 4.1.0 remove T extends ResponseCommand
  */
-public class SimpleHttpAndJsonResponseCommandBuilder<R extends InvokerRequest, T extends ResponseCommand>
-                extends AbstractResponseCommandBuilder<R, T>{
+public class SimpleHttpAndJsonResponseCommandBuilder<R extends InvokerRequest, T> extends AbstractResponseCommandBuilder<R, T>{
 
     /** 提交地址. */
     private String                  uri;
@@ -149,9 +152,13 @@ public class SimpleHttpAndJsonResponseCommandBuilder<R extends InvokerRequest, T
      * 获得 字符串转换成bean 转换器.
      *
      * @return the 字符串转换成bean 转换器
+     * @since 4.1.0 add param responseString
      */
     @Override
-    protected StringToBeanConverter<T> createStringToBeanConverter(){
+    protected StringToBeanConverter<T> createStringToBeanConverter(String responseString){
+        if (JsonHelper.isNeedConvertToJSONArray(StringUtils.trim(responseString))){
+            return new JsonStringToListConverter(responseCommandRootClass);
+        }
         return new JsonStringToBeanConverter<>(responseCommandRootClass);
     }
 

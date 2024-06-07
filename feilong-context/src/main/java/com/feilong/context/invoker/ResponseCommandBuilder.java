@@ -28,8 +28,9 @@ package com.feilong.context.invoker;
  * @param <T>
  *            响应的字符串转换成的对象
  * @since 1.11.3
+ * @since 4.1.0 remove T extends ResponseCommand
  */
-public interface ResponseCommandBuilder<R extends InvokerRequest, T extends ResponseCommand> {
+public interface ResponseCommandBuilder<R extends InvokerRequest, T> {
 
     /**
      * 通过发送请求,得到响应的对象.
