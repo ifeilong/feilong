@@ -36,11 +36,11 @@
 		<maven-compiler-plugin.encoding>${project.build.sourceEncoding}</maven-compiler-plugin.encoding>
 		<!-- **********************end maven-compiler-plugin config******************************************* -->
 
-		<v.maven-clean-plugin>3.3.2</v.maven-clean-plugin>
+		<v.maven-clean-plugin>3.4.0</v.maven-clean-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-compiler-plugin>3.11.0</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.13.0</v.maven-compiler-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
 		<v.maven-dependency-plugin>3.6.1</v.maven-dependency-plugin>
@@ -50,7 +50,7 @@
 		<v.maven-deploy-plugin>3.1.1</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
-		<v.maven-install-plugin>3.1.1</v.maven-install-plugin>
+		<v.maven-install-plugin>3.1.2</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-javadoc-plugin>3.6.3</v.maven-javadoc-plugin>

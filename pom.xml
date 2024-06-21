@@ -160,11 +160,11 @@
 
 		<!-- https://maven.apache.org/components/plugins/maven-clean-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MCLEAN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-clean-plugin>3.3.2</v.maven-clean-plugin>
+		<v.maven-clean-plugin>3.4.0</v.maven-clean-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-compiler-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MCOMPILER?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-compiler-plugin>3.11.0</v.maven-compiler-plugin>
+		<v.maven-compiler-plugin>3.13.0</v.maven-compiler-plugin>
 
 		<v.maven-changes-plugin>2.12.1</v.maven-changes-plugin>
 
@@ -184,7 +184,7 @@
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MINSTALL?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-install-plugin>3.1.1</v.maven-install-plugin>
+		<v.maven-install-plugin>3.1.2</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<!-- https://maven.apache.org/plugins/maven-javadoc-plugin/index.html -->
