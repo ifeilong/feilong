@@ -31,11 +31,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DefaultRuntimeException;
 import com.feilong.core.Validate;
 import com.feilong.core.util.MapUtil;
 import com.feilong.io.FileUtil;
 import com.feilong.io.FilenameUtil;
-import com.feilong.io.IOUtil;
 import com.feilong.io.entity.FileInfoEntity;
 import com.feilong.json.JsonUtil;
 
@@ -342,10 +342,6 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     /**
      * 将指定<code>fileInputStream</code>上传到指定的文件<code>toFileName</code>.
      * 
-     * <p>
-     * 该方法不会关闭<code>fileInputStream</code>,请自行关闭
-     * </p>
-     *
      * @param fileInputStream
      *            the file input stream
      * @param toFileName
@@ -568,14 +564,22 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     private boolean uploadFile(String localFileFullPath,String remoteDirectory,String localFileName){
         LOGGER.debug(log("begin put:[{}] to remoteDirectory:[{}]", localFileName, remoteDirectory));
 
-        FileInputStream fileInputStream = FileUtil.getFileInputStream(localFileFullPath);
+        //use try-with-resources
+        try (FileInputStream fileInputStream = FileUtil.getFileInputStream(localFileFullPath)){
+            boolean isSuccess = upload(fileInputStream, localFileName);
 
-        boolean isSuccess = upload(fileInputStream, localFileName);
+            logInfoOrError(isSuccess, "put [{}] to [{}] [{}]", localFileFullPath, remoteDirectory, toResultString(isSuccess));
 
-        logInfoOrError(isSuccess, "put [{}] to [{}] [{}]", localFileFullPath, remoteDirectory, toResultString(isSuccess));
-
-        IOUtil.closeQuietly(fileInputStream);
-        return isSuccess;
+            return isSuccess;
+        }catch (Exception e){
+            throw new DefaultRuntimeException(
+                            log(
+                                            "localFileFullPath:[{}] to remoteDirectory:[{}] localFileName:[{}]",
+                                            localFileFullPath,
+                                            remoteDirectory,
+                                            localFileName),
+                            e);
+        }
     }
 
     //---------------------------------------------------------------
