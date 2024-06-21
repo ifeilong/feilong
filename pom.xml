@@ -243,7 +243,8 @@
 		<v.site-maven-plugin>0.12</v.site-maven-plugin>
 		
 		<!-- 用来将jar发布到中央仓库的 -->
-		<v.nexus-staging-maven-plugin>1.6.13</v.nexus-staging-maven-plugin>
+		<!-- https://github.com/sonatype/nexus-maven-plugins/releases -->
+		<v.nexus-staging-maven-plugin>1.7.0</v.nexus-staging-maven-plugin>
 
 		<!-- taglist 检查报告 -->
 		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>
