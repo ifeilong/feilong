@@ -20,6 +20,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.core.bean.ConvertUtil.toProperties;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
+import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.util.Properties;
 
@@ -42,7 +43,6 @@ import com.jcraft.jsch.Session;
  */
 class SFTPUtil{
 
-    /** The Constant LOGGER. */
     private static final Logger     LOGGER                    = LoggerFactory.getLogger(SFTPUtil.class);
 
     /**
@@ -79,7 +79,7 @@ class SFTPUtil{
      * @throws JSchException
      *             the j sch exception
      */
-    static Session connect(SFTPFileTransferConfig sftpFileTransferConfig) throws JSchException{
+    static Session connect(SFTPFileTransferConfig sftpFileTransferConfig,String logTraceContext) throws JSchException{
         Validate.notNull(sftpFileTransferConfig, "sftpFileTransferConfig can't be null!");
 
         String hostName = sftpFileTransferConfig.getHostName();
@@ -89,7 +89,11 @@ class SFTPUtil{
         Validate.notBlank(userName, "userName can't be blank!");
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("will use [sftpFileTransferConfig]:[{}] to create session", JsonUtil.toString(sftpFileTransferConfig));
+            LOGGER.debug(
+                            log(
+                                            logTraceContext,
+                                            "will use [sftpFileTransferConfig]:[{}] to create session",
+                                            JsonUtil.toString(sftpFileTransferConfig)));
         }
         //---------------------------------------------------------------
         JSch jsch = new JSch();
@@ -104,8 +108,8 @@ class SFTPUtil{
         if (isNotNullOrEmpty(useConfig)){
             session.setConfig(useConfig);
         }
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(StringUtils.center("session connecting......", 50, "------"));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(StringUtils.center(log(logTraceContext, "session connecting......"), 50, "------"));
         }
 
         //---------------------------------------------------------------
@@ -133,5 +137,24 @@ class SFTPUtil{
         properties.putAll(DEFAULT_CONFIG_PROPERTIES);
         properties.putAll(customConfig);
         return properties;
+    }
+
+    /**
+     * 记录带特殊表示的日志,方便搜索日志.
+     * 
+     * @since 4.1.1
+     */
+    private static String log(String logTraceContext,String messagePattern,Object...params){
+        StringBuilder sb = new StringBuilder();
+        //拼接 logTraceContext 日志
+        if (isNotNullOrEmpty(logTraceContext)){
+            sb.append("logTraceContext:[" + logTraceContext + "] ");
+        }
+
+        //拼接业务日志
+        if (isNotNullOrEmpty(messagePattern)){
+            sb.append(formatPattern(messagePattern, params));
+        }
+        return sb.toString();
     }
 }

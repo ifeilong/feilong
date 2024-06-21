@@ -137,9 +137,6 @@ import com.jcraft.jsch.SftpException;
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class SFTPFileTransfer extends AbstractFileTransfer{
 
-    /**
-     * The Constant LOGGER.
-     */
     private static final Logger    LOGGER = LoggerFactory.getLogger(SFTPFileTransfer.class);
 
     /**
@@ -170,16 +167,16 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     protected boolean connect(){
         // If the client is already connected, disconnect
         if (channelSftp != null){
-            LOGGER.warn("channelSftp is not null,will disconnect first....");
+            LOGGER.warn(log("channelSftp is not null,will disconnect first...."));
             disconnect();
         }
         try{
-            session = SFTPUtil.connect(sftpFileTransferConfig);
+            session = SFTPUtil.connect(sftpFileTransferConfig, logTraceContext);
 
-            LOGGER.trace("open [sftp] session channel...");
+            LOGGER.info(log("open [sftp] session channel..."));
             channelSftp = (ChannelSftp) session.openChannel("sftp");
 
-            LOGGER.trace("channel connecting...");
+            LOGGER.info(log("channel connecting..."));
             channelSftp.connect();
 
             //---------------------------------------------------------------
@@ -189,7 +186,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
             return isSuccess;
         }catch (Exception e){
-            throw new FileTransferException(formatPattern("sftpFileTransferConfig:{}", JsonUtil.toString(sftpFileTransferConfig)), e);
+            throw new FileTransferException(log("sftpFileTransferConfig:{}", JsonUtil.toString(sftpFileTransferConfig)), e);
         }
     }
 
@@ -202,8 +199,8 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             channelSftp.exit();
 
             //---------------------------------------------------------------
-            if (LOGGER.isTraceEnabled()){
-                LOGGER.trace(StringUtils.center("channelSftp exit", 50, "------"));
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info(log(StringUtils.center("channelSftp exit", 50, "------")));
             }
         }
         if (session != null){
@@ -213,8 +210,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
 
             //---------------------------------------------------------------
             if (LOGGER.isInfoEnabled()){
-                String message = formatPattern(" session disconnect: [{}]", buildSessionPrettyString);
-                LOGGER.info(StringUtils.center(message, 50, "------"));
+                LOGGER.info(StringUtils.center(log("session disconnect: [{}]", buildSessionPrettyString), 50, "------"));
             }
         }
         channelSftp = null;
@@ -244,7 +240,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             }
             return map;
         }catch (SftpException e){
-            throw new FileTransferException(formatPattern("remotePath:[{}]", remotePath), e);
+            throw new FileTransferException(log("remotePath:[{}]", remotePath), e);
         }
     }
 
@@ -279,11 +275,11 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
     @Override
     protected boolean mkdir(String remoteDirectory){
         try{
-            LOGGER.debug("begin mkdir:[{}]~~", remoteDirectory);
+            LOGGER.debug(log("begin mkdir:[{}]~~", remoteDirectory));
 
             channelSftp.mkdir(remoteDirectory);
 
-            LOGGER.debug("mkdir:[{}] over~~", remoteDirectory);
+            LOGGER.info(log("mkdir:[{}] over~~", remoteDirectory));
             return true;
         }catch (SftpException e){
             String message = formatPattern("can't mkdir,remoteDirectory:[{}]", remoteDirectory);
@@ -298,7 +294,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
      */
     @Override
     protected void tryCd(String remoteDirectory) throws Exception{
-        LOGGER.debug("cd:[{}]", remoteDirectory);
+        LOGGER.debug(log("cd:[{}]", remoteDirectory));
         channelSftp.cd(remoteDirectory);
     }
 
@@ -313,8 +309,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             channelSftp.put(fileInputStream, toFileName);
             return true;
         }catch (SftpException e){
-            String message = formatPattern("can't upload fileInputStream,toFileName:[{}]", toFileName);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("can't upload fileInputStream,toFileName:[{}]", toFileName), e);
         }
     }
 
@@ -331,11 +326,10 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             SftpATTRS sftpATTRS = channelSftp.stat(remoteFile);
 
             boolean isDir = sftpATTRS.isDir();
-            LOGGER.debug("remoteFile:[{}] is [{}]", remoteFile, isDir ? "directory" : "file");
+            LOGGER.info(log("remoteFile:[{}] is [{}]", remoteFile, isDir ? "directory" : "file"));
             return isDir;
         }catch (SftpException e){
-            String message = formatPattern("remoteFile:[{}] ", remoteFile);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("remoteFile:[{}] ", remoteFile), e);
         }
     }
 
@@ -350,8 +344,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             channelSftp.rmdir(remotePath);
             return true;
         }catch (SftpException e){
-            String message = formatPattern("remotePath:[{}]", remotePath);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("remotePath:[{}]", remotePath), e);
         }
     }
 
@@ -366,8 +359,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             channelSftp.rm(remotePath);
             return true;
         }catch (SftpException e){
-            String message = formatPattern("remotePath:[{}]", remotePath);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("remotePath:[{}]", remotePath), e);
         }
     }
 
@@ -382,8 +374,7 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
             channelSftp.get(remoteSingleFile, outputStream);
             return true;
         }catch (SftpException | IOException e){
-            String message = formatPattern("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath), e);
         }
     }
 
@@ -398,8 +389,9 @@ public class SFTPFileTransfer extends AbstractFileTransfer{
      *            the session
      * @since 1.10.4
      */
-    private static void logAfterConnected(boolean isSuccess,Session useSession){
-        if (LOGGER.isInfoEnabled()){
+    private void logAfterConnected(boolean isSuccess,Session useSession){
+        //如果失败, 那么error级别日志
+        if (!isSuccess || LOGGER.isInfoEnabled()){
             String sessionPrettyString = SftpSessionUtil.buildSessionPrettyString(useSession);
 
             String sessionInfo = JsonUtil.toString(SftpSessionUtil.getMapForLog(useSession));

@@ -15,6 +15,7 @@
  */
 package com.feilong.net.filetransfer;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.StringUtil.EMPTY;
@@ -41,16 +42,28 @@ import com.feilong.json.JsonUtil;
 /**
  * 通用的文件传输.
  * 
+ * <p>
+ * 目前已经有ftp 和sftp的实现
+ * </p>
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.0.5
  */
 public abstract class AbstractFileTransfer implements FileTransfer{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFileTransfer.class);
+    private static final Logger LOGGER          = LoggerFactory.getLogger(AbstractFileTransfer.class);
+
+    /**
+     * 日志追踪上下文.
+     * <p>
+     * 所有的feilong http此次调用的log 都会拼上改日志字符串
+     * </p>
+     * 
+     * @since 4.1.1
+     */
+    protected String            logTraceContext = "";
 
     //---------------------------------------------------------------
-
     /*
      * (non-Javadoc)
      * 
@@ -58,23 +71,38 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     @Override
     public void download(String localAbsoluteDirectoryPath,String...remotePaths){
-        Validate.notEmpty(remotePaths, "remotePaths can't be null/empty!");
+        Validate.notEmpty(remotePaths, log("remotePaths can't be null/empty!"));
         for (String remotePath : remotePaths){
-            Validate.notBlank(remotePath, "remotePath can't be blank!");
+            Validate.notBlank(remotePath, log("remotePath can't be blank!"));
         }
-        Validate.notBlank(localAbsoluteDirectoryPath, "localAbsoluteDirectoryPath can't be blank!");
+        Validate.notBlank(localAbsoluteDirectoryPath, log("localAbsoluteDirectoryPath can't be blank!"));
 
         //---------------------------------------------------------------
-
-        boolean isConnectSuccess = connect();
-        if (isConnectSuccess){
-            for (String remotePath : remotePaths){
-                isConnectSuccess = downloadDontClose(remotePath, localAbsoluteDirectoryPath);
-                if (!isConnectSuccess){
-                    break;
+        try{
+            //开始连接
+            boolean isConnectSuccess = connect();
+            if (isConnectSuccess){
+                for (String remotePath : remotePaths){
+                    isConnectSuccess = downloadDontClose(remotePath, localAbsoluteDirectoryPath);
+                    if (!isConnectSuccess){
+                        LOGGER.warn(
+                                        log(
+                                                        "downloadDontCloseFail remotePath:[{}] localAbsoluteDirectoryPath:[{}],break",
+                                                        remotePath,
+                                                        localAbsoluteDirectoryPath));
+                        break;
+                    }
                 }
             }
-            // 关闭连接
+        }catch (Exception e){
+            throw new FileTransferException(
+                            log(
+                                            "downloadException,localAbsoluteDirectoryPath:[{}] remotePaths:[{}]",
+                                            localAbsoluteDirectoryPath,
+                                            remotePaths),
+                            e);
+        }finally{
+            //关闭连接
             disconnect();
         }
     }
@@ -88,34 +116,45 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     @Override
     public boolean upload(String remoteDirectory,String...batchLocalFileFullPaths){
-        Validate.notBlank(remoteDirectory, "remoteDirectory can't be blank!");
-        Validate.notEmpty(batchLocalFileFullPaths, "batchLocalFileFullPaths can't be null/empty!");
+        Validate.notBlank(remoteDirectory, log("remoteDirectory can't be blank!"));
+        Validate.notEmpty(batchLocalFileFullPaths, log("batchLocalFileFullPaths can't be null/empty!"));
         for (String localFileFullPath : batchLocalFileFullPaths){
-            Validate.notBlank(localFileFullPath, "localFileFullPath can't be blank!");
+            Validate.notBlank(localFileFullPath, log("localFileFullPath can't be blank!"));
 
             // 文件必需存在
-            Validate.isTrue(FileUtil.isExistFile(localFileFullPath), "localFileFullPath:" + localFileFullPath + "  not exist");
+            Validate.isTrue(FileUtil.isExistFile(localFileFullPath), log("localFileFullPath:" + localFileFullPath + "  not exist"));
         }
 
         //---------------------------------------------------------------
-        LOGGER.debug("will put:[{}] to:[{}]", batchLocalFileFullPaths, remoteDirectory);
-        boolean isConnectSuccess = connect();
+        LOGGER.debug(log("will put:[{}] to:[{}]", batchLocalFileFullPaths, remoteDirectory));
 
-        //XXX 远程文件夹不存在, 那么自动级联创建
-        checkOrMkdirs(remoteDirectory);
+        boolean isConnectSuccess = false;
+        try{
+            isConnectSuccess = connect();
 
-        if (isConnectSuccess){
-            for (String singleLocalFileFullPath : batchLocalFileFullPaths){
-                isConnectSuccess = uploadDontClose(singleLocalFileFullPath, remoteDirectory);
-                if (!isConnectSuccess){
-                    break;
+            //XXX 远程文件夹不存在, 那么自动级联创建
+            checkOrMkdirs(remoteDirectory);
+
+            if (isConnectSuccess){
+                for (String singleLocalFileFullPath : batchLocalFileFullPaths){
+                    isConnectSuccess = uploadDontClose(singleLocalFileFullPath, remoteDirectory);
+                    if (!isConnectSuccess){
+                        LOGGER.warn(log("put:[{}] to:[{}] uploadDontCloseFail,break", singleLocalFileFullPath, remoteDirectory));
+                        break;
+                    }
                 }
             }
-            // 关闭连接
+        }catch (Exception e){
+            throw new FileTransferException(
+                            log(
+                                            "uploadException,remoteDirectory:[{}] batchLocalFileFullPaths:[{}]",
+                                            remoteDirectory,
+                                            batchLocalFileFullPaths),
+                            e);
+        }finally{
             disconnect();
-            return isConnectSuccess;
         }
-        return false;
+        return isConnectSuccess;
     }
 
     //---------------------------------------------------------------
@@ -128,12 +167,12 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @since 1.7.1
      */
     protected void checkOrMkdirs(String remoteDirectory){
-        LOGGER.info("begin checkOrMkdirs remoteDirectory:[{}]", remoteDirectory);
+        LOGGER.info(log("begin checkOrMkdirs remoteDirectory:[{}]", remoteDirectory));
 
         try{
             tryCd(remoteDirectory);
         }catch (Exception e){
-            LOGGER.warn("can't cd:[{}],cause by:[{}],will try [mkdirs]~~", remoteDirectory, e.getMessage());
+            LOGGER.warn(log("can't cd:[{}],cause by:[{}],will try [mkdirs]~~", remoteDirectory, e.getMessage()));
             List<String> list = FilenameUtil.getParentPathList(remoteDirectory);
 
             Collections.reverse(list);//自顶而下
@@ -143,7 +182,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                 try{
                     tryCd(folder);
                 }catch (Exception e1){
-                    LOGGER.info("can't cd:[{}],cause by:[{}],will try mkdir", folder, e1.getMessage());
+                    LOGGER.info(log("can't cd:[{}],cause by:[{}],will try mkdir", folder, e1.getMessage()));
                     mkdir(folder);
                     cd(folder);
                 }
@@ -154,18 +193,14 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     //---------------------------------------------------------------
 
     /**
-     * Try cd.
+     * Gets the file entity map.
      *
-     * @param remoteDirectory
-     *            the remote directory
-     * @throws Exception
-     *             the exception
-     * @since 1.7.1
+     * @param remotePath
+     *            the remote path
+     * @param fileNames
+     *            the file names
+     * @return the file entity map
      */
-    protected abstract void tryCd(String remoteDirectory) throws Exception;
-
-    //---------------------------------------------------------------
-
     /*
      * (non-Javadoc)
      * 
@@ -173,21 +208,24 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     @Override
     public Map<String, FileInfoEntity> getFileEntityMap(String remotePath,String...fileNames){
-        Validate.notBlank(remotePath, "remotePath can't be blank!");
+        Validate.notBlank(remotePath, log("remotePath can't be blank!"));
         //---------------------------------------------------------------
-        boolean isConnectSuccess = connect();
-        if (!isConnectSuccess){
-            return null;
+        try{
+            boolean isConnectSuccess = connect();
+            if (!isConnectSuccess){
+                return null;
+            }
+            //---------------------------------------------------------------
+            Map<String, FileInfoEntity> lsFileMap = getLsFileMap(remotePath);
+            return MapUtil.getSubMap(lsFileMap, fileNames);
+        }catch (Exception e){
+            throw new FileTransferException(log("getFileEntityMapException,remotePath:[{}] fileNames:[{}]", remotePath, fileNames), e);
+        }finally{
+            disconnect();
         }
-        //---------------------------------------------------------------
-        Map<String, FileInfoEntity> lsFileMap = getLsFileMap(remotePath);
-        disconnect();
-
-        return MapUtil.getSubMap(lsFileMap, fileNames);
     }
 
     //---------------------------------------------------------------
-
     /*
      * (non-Javadoc)
      * 
@@ -195,27 +233,25 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      */
     @Override
     public boolean delete(String...remoteAbsolutePaths){
-        Validate.notEmpty(remoteAbsolutePaths, "remoteAbsolutePaths can't be null/empty!");
+        Validate.notEmpty(remoteAbsolutePaths, log("remoteAbsolutePaths can't be null/empty!"));
         for (String remoteAbsolutePath : remoteAbsolutePaths){
             // 一旦 有一个文件 null或者empty 抛错
-            Validate.notBlank(remoteAbsolutePath, "remoteAbsolutePath can't be blank!");
+            Validate.notBlank(remoteAbsolutePath, log("remoteAbsolutePath can't be blank!"));
             // 不支持 删除全部 危险
             if ("/".equals(remoteAbsolutePath)){
-                throw new UnsupportedOperationException("un supported delete '/'remotePath ");
+                throw new UnsupportedOperationException(log("un supported delete '/'remotePath "));
             }
         }
-
         //---------------------------------------------------------------
-
-        boolean isConnectSuccess = connect();
-        if (isConnectSuccess){
-            try{
+        try{
+            boolean isConnectSuccess = connect();
+            if (isConnectSuccess){
                 return deleteDontClose(remoteAbsolutePaths);
-            }catch (Exception e){
-                throw new FileTransferException("deleteDontClose exception", e);
-            }finally{
-                disconnect();
             }
+        }catch (Exception e){
+            throw new FileTransferException(log("deleteException,remoteAbsolutePaths:[{}]", remoteAbsolutePaths), e);
+        }finally{
+            disconnect();
         }
         return false;
     }
@@ -288,8 +324,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             tryCd(remoteDirectory);
             return true;
         }catch (Exception e){
-            String message = formatPattern("can't cd:[{}]", remoteDirectory);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("can't cd:[{}]", remoteDirectory), e);
         }
     }
 
@@ -344,7 +379,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         for (String remotePath : remoteAbsolutePaths){
             boolean isDirectory = isDirectory(remotePath);
             if (isDirectory){
-                LOGGER.debug("remotePath :[{}] is [directory],will removeDirectory.....", remotePath);
+                LOGGER.debug(log("remotePath :[{}] is [directory],will removeDirectory.....", remotePath));
 
                 Map<String, FileInfoEntity> map = getLsFileMap(remotePath);
 
@@ -355,10 +390,10 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                     deleteDontClose(joinPath(remotePath, key));
                 }
 
-                LOGGER.info("channelSftp rmdir,remotePath [{}]", remotePath);
+                LOGGER.info(log("channelSftp rmdir,remotePath [{}]", remotePath));
                 isSuccess = rmdir(remotePath);
             }else{
-                LOGGER.trace("remotePath:[{}] is [not directory],will rm....", remotePath);
+                LOGGER.debug(log("remotePath:[{}] is [not directory],will rm....", remotePath));
                 isSuccess = rm(remotePath);
 
                 logInfoOrError(isSuccess, "remove remotePath:[{}] [{}]", remotePath, toResultString(isSuccess));
@@ -389,7 +424,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
         //---------------------------------------------------------------
         // 如果远程路径是文件夹
         if (isDirectory(remotePath)){
-            LOGGER.debug("will create directory:[{}]", localAbsoluteDirectoryPath);
+            LOGGER.info(log("will create directory:[{}]", localAbsoluteDirectoryPath));
             FileUtil.createDirectory(localAbsoluteDirectoryPath);
 
             Map<String, FileInfoEntity> lsFileMap = getLsFileMap(remotePath);
@@ -403,7 +438,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
             long beginTimeMillis = System.currentTimeMillis();
 
             // 下载到本地的文件路径
-            LOGGER.trace("remotePath:[{}] will be download to [{}]", remotePath, filePath);
+            LOGGER.debug(log("remotePath:[{}] will be download to [{}]", remotePath, filePath));
             FileUtil.createDirectoryByFilePath(filePath);
             isSuccess = downRemoteSingleFile(remotePath, filePath);
 
@@ -423,21 +458,19 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      *            the is success
      * @param filePath
      *            the file path
-     * @param beginDate
-     *            the begin date
+     * @param beginTimeMillis
+     *            the begin time millis
      * @since 1.10.4
      */
-    private static void logAfterDownRemoteSingleFile(String remotePath,boolean isSuccess,String filePath,long beginTimeMillis){
-        if (LOGGER.isInfoEnabled()){
-            String pattern = "downRemoteSingleFile remotePath:[{}] to [{}] [{}], use time: [{}]";
-            logInfoOrError(
-                            isSuccess,
-                            pattern,
-                            remotePath,
-                            filePath,
-                            toResultString(isSuccess),
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
-        }
+    private void logAfterDownRemoteSingleFile(String remotePath,boolean isSuccess,String filePath,long beginTimeMillis){
+        String pattern = "downRemoteSingleFile remotePath:[{}] to [{}] [{}], use time: [{}]";
+        logInfoOrError(
+                        isSuccess,
+                        pattern,
+                        remotePath,
+                        filePath,
+                        toResultString(isSuccess),
+                        formatDurationUseBeginTimeMillis(beginTimeMillis));
     }
 
     //---------------------------------------------------------------
@@ -464,15 +497,16 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @param args
      *            the args
      */
-    protected static void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
-        if (LOGGER.isInfoEnabled()){
-            String message = formatPattern(messagePattern, args);
-            if (isSuccess){
-                LOGGER.info(message);
-            }else{
-                LOGGER.error(message);
+    protected void logInfoOrError(boolean isSuccess,String messagePattern,Object...args){
+        String message = formatPattern(messagePattern, args);
+        if (isSuccess){
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info(log(message));
             }
+        }else{
+            LOGGER.error(log(message));
         }
+
     }
 
     //---------------------------------------------------------------
@@ -495,18 +529,18 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     private boolean uploadDontClose(String localFileFullPath,String remoteDirectory){
         File localFile = new File(localFileFullPath);
 
-        LOGGER.trace("localFile absolutePath:[{}],remoteDirectory:[{}]", localFile.getAbsolutePath(), remoteDirectory);
+        LOGGER.debug(log("localFile absolutePath:[{}],remoteDirectory:[{}]", localFile.getAbsolutePath(), remoteDirectory));
 
         // 转移到FTP服务器目录
         boolean isSuccess = cd(remoteDirectory);
         if (!isSuccess){
-            LOGGER.error("cd:[{}] error~~~~", remoteDirectory);
+            LOGGER.error(log("cd:[{}] error~~~~", remoteDirectory));
             return false;
         }
 
         //---------------------------------------------------------------
 
-        LOGGER.debug("cd:[{}] success~~~~", remoteDirectory);
+        LOGGER.debug(log("cd:[{}] success~~~~", remoteDirectory));
         String localFileName = localFile.getName();
 
         if (localFile.isFile()){ // 文件
@@ -532,7 +566,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @since 1.7.1
      */
     private boolean uploadFile(String localFileFullPath,String remoteDirectory,String localFileName){
-        LOGGER.debug("begin put:[{}] to remoteDirectory:[{}]", localFileName, remoteDirectory);
+        LOGGER.debug(log("begin put:[{}] to remoteDirectory:[{}]", localFileName, remoteDirectory));
 
         FileInputStream fileInputStream = FileUtil.getFileInputStream(localFileFullPath);
 
@@ -596,7 +630,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.toString(lsFileMap));
+            LOGGER.debug(log(JsonUtil.toString(lsFileMap)));
         }
         //---------------------------------------------------------------
 
@@ -622,17 +656,17 @@ public abstract class AbstractFileTransfer implements FileTransfer{
      * @return true, if checks if is exists same name and type file
      * @since 1.7.1
      */
-    private static boolean isExistsSameNameAndTypeFile(File file,String fileName,FileInfoEntity fileInfoEntity){
+    private boolean isExistsSameNameAndTypeFile(File file,String fileName,FileInfoEntity fileInfoEntity){
         boolean isFile = file.isFile();
         String type = isFile ? "isFile" : "isDirectory";
-        LOGGER.debug("Input fileName:[{}],type:[{}]", fileName, type);
+        LOGGER.debug(log("Input fileName:[{}],type:[{}]", fileName, type));
 
         boolean isDirectoryFileInfoEntity = fileInfoEntity.getFileType() == DIRECTORY; // 远程是否是文件夹
         // 判断同类型
         boolean sameFile = isFile && !isDirectoryFileInfoEntity;
         boolean sameDirectory = file.isDirectory() && isDirectoryFileInfoEntity;
         if (sameFile || sameDirectory){
-            LOGGER.debug("hasSameNameAndTypeFile,filename:[{}],type:[{}]", type, fileName);
+            LOGGER.debug(log("hasSameNameAndTypeFile,filename:[{}],type:[{}]", type, fileName));
             return true;
         }
         return false;
@@ -652,4 +686,58 @@ public abstract class AbstractFileTransfer implements FileTransfer{
     private static String joinPath(String directoryPath,String ftpFileName){
         return directoryPath + (directoryPath.endsWith("/") ? EMPTY : "/") + ftpFileName;
     }
+
+    /**
+     * 记录带特殊表示的日志,方便搜索日志.
+     * 
+     * @since 4.1.1
+     */
+    protected String log(String messagePattern,Object...params){
+        StringBuilder sb = new StringBuilder();
+        //拼接 logTraceContext 日志
+        if (isNotNullOrEmpty(logTraceContext)){
+            sb.append("logTraceContext:[" + logTraceContext + "] ");
+        }
+
+        //拼接业务日志
+        if (isNotNullOrEmpty(messagePattern)){
+            sb.append(formatPattern(messagePattern, params));
+        }
+        return sb.toString();
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得 日志追踪上下文.
+     *
+     * @return the logTraceContext
+     */
+    public String getLogTraceContext(){
+        return logTraceContext;
+    }
+
+    /**
+     * 设置 日志追踪上下文.
+     *
+     * @param logTraceContext
+     *            the logTraceContext to set
+     */
+    public void setLogTraceContext(String logTraceContext){
+        this.logTraceContext = logTraceContext;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Try cd.
+     *
+     * @param remoteDirectory
+     *            the remote directory
+     * @throws Exception
+     *             the exception
+     * @since 1.7.1
+     */
+    protected abstract void tryCd(String remoteDirectory) throws Exception;
+
 }

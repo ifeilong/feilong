@@ -16,7 +16,6 @@
 package com.feilong.net.filetransfer.ftp;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
-import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
@@ -79,7 +78,6 @@ import com.feilong.net.filetransfer.FileTransferException;
 @SuppressWarnings("squid:S1192") //String literals should not be duplicated
 public class FTPFileTransfer extends AbstractFileTransfer{
 
-    /** The Constant LOGGER. */
     private static final Logger   LOGGER = LoggerFactory.getLogger(FTPFileTransfer.class);
 
     //---------------------------------------------------------------
@@ -106,13 +104,13 @@ public class FTPFileTransfer extends AbstractFileTransfer{
 
             //---------------------------------------------------------------
             ftpClient.connect(hostName, defaultIfNull(ftpFileTransferConfig.getPort(), 21));
-            LOGGER.debug("connect hostName:[{}]", hostName);
+            LOGGER.debug(log("connect hostName:[{}]", hostName));
 
             String userName = ftpFileTransferConfig.getUserName();
             String password = ftpFileTransferConfig.getPassword();
             boolean loginResult = ftpClient.login(userName, password);
 
-            String message = formatPattern(
+            String message = log(
                             "login:[{}],params:[{}],port:[{}]~~~",
                             loginResult,
                             JsonUtil.toString(ftpFileTransferConfig),
@@ -127,7 +125,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             //---------------------------------------------------------------
             int replyCode = ftpClient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(replyCode)){
-                LOGGER.error("FTP 服务拒绝连接！ReplyCode is:{},will ftpClient.disconnect()", replyCode);
+                LOGGER.error(log("FTP 服务拒绝连接！ReplyCode is:{},will ftpClient.disconnect()", replyCode));
                 ftpClient.disconnect();
                 return false;
             }
@@ -141,15 +139,14 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
             String systemName = ftpClient.getSystemType();
-            LOGGER.debug("ftpClient systemName:[{}]", systemName);
+            LOGGER.debug(log("ftpClient systemName:[{}]", systemName));
 
             //---------------------------------------------------------------
             // 没有异常则 确定成功
-            LOGGER.info("connect:[{}]", true);
+            LOGGER.info(log("connect:[{}]", true));
             return true;
         }catch (Exception e){
-            String message = formatPattern("ftpFileTransferConfig:{}", JsonUtil.toString(ftpFileTransferConfig));
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("ftpFileTransferConfig:{}", JsonUtil.toString(ftpFileTransferConfig)), e);
         }
     }
 
@@ -164,16 +161,16 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     protected void disconnect(){
         if (ftpClient != null && ftpClient.isConnected()){
             try{
-                LOGGER.info("ftpClient logout:[{}]", ftpClient.logout());
+                LOGGER.info(log("ftpClient logout:[{}]", ftpClient.logout()));
 
                 ftpClient.disconnect();
 
                 //---------------------------------------------------------------
                 if (LOGGER.isInfoEnabled()){
-                    LOGGER.info(StringUtils.center("ftpClient disconnect...", 50, "------"));
+                    LOGGER.info(StringUtils.center(log("ftpClient disconnect..."), 50, "------"));
                 }
             }catch (IOException e){
-                throw new FileTransferException("disconnect exception", e);
+                throw new FileTransferException(log("disconnectException"), e);
             }
         }
     }
@@ -190,9 +187,9 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         // 转移到FTP服务器目录
         boolean flag = ftpClient.changeWorkingDirectory(remoteDirectory);
         if (flag){
-            LOGGER.debug("cd [{}]", remoteDirectory);
+            LOGGER.debug(log("cd [{}]", remoteDirectory));
         }else{
-            throw new FileTransferException(StringUtils.trim(ftpClient.getReplyString().trim()));
+            throw new FileTransferException(log(StringUtils.trim(ftpClient.getReplyString().trim())));
         }
     }
 
@@ -208,14 +205,13 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         try{
             boolean flag = ftpClient.makeDirectory(remoteDirectory);
             if (flag){
-                LOGGER.info("mkdir [{}] success~~", remoteDirectory);
+                LOGGER.info(log("mkdir [{}] success~~", remoteDirectory));
             }else{
-                LOGGER.error("mkdir [{}] error,ReplyString :[{}]", remoteDirectory, ftpClient.getReplyString());
+                LOGGER.error(log("mkdir [{}] error,ReplyString :[{}]", remoteDirectory, ftpClient.getReplyString()));
             }
             return flag;
         }catch (IOException e){
-            String message = formatPattern("can't mkdir,remoteDirectory:[{}]", remoteDirectory);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("can't mkdir,remoteDirectory:[{}]", remoteDirectory), e);
         }
     }
 
@@ -231,14 +227,13 @@ public class FTPFileTransfer extends AbstractFileTransfer{
         try{
             boolean flag = ftpClient.storeFile(toFileName, fileInputStream);
             if (flag){
-                LOGGER.debug("put [{}] success~~", toFileName);
+                LOGGER.debug(log("put [{}] success~~", toFileName));
             }else{
-                LOGGER.error("store file error,ReplyString :{}", ftpClient.getReplyString());
+                LOGGER.error(log("store file error,ReplyString :{}", ftpClient.getReplyString()));
             }
             return flag;
         }catch (IOException e){
-            String message = formatPattern("can't upload fileInputStream,toFileName:[{}]", toFileName);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("can't upload fileInputStream,toFileName:[{}]", toFileName), e);
         }
     }
 
@@ -258,9 +253,8 @@ public class FTPFileTransfer extends AbstractFileTransfer{
                 map.put(ftpFile.getName(), buildFileInfoEntity(ftpFile));
             }
             return map;
-        }catch (IOException e){
-            String message = formatPattern("remotePath:[{}]", remotePath);
-            throw new FileTransferException(message, e);
+        }catch (Exception e){
+            throw new FileTransferException(log("remotePath:[{}]", remotePath), e);
         }
     }
 
@@ -294,21 +288,20 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     protected boolean rmdir(String remotePath){
         try{
             //XXX 不知道为什么, 此处需要先 cd / 否则 删除不了文件夹
-            LOGGER.info("ftpClient cwd root .....");
+            LOGGER.info(log("ftpClient cwd root ....."));
             cd("/");
 
             // if empty
             boolean flag = ftpClient.removeDirectory(remotePath);
 
             if (flag){
-                LOGGER.info("ftpClient removeDirectory,remotePath [{}]:[{}]", remotePath, flag);
+                LOGGER.info(log("ftpClient removeDirectory,remotePath [{}]:[{}]", remotePath, flag));
             }else{
-                LOGGER.warn("ftpClient removeDirectory,remotePath [{}]:[{}] ReplyCode:{}", remotePath, flag, ftpClient.getReplyCode());
+                LOGGER.warn(log("ftpClient removeDirectory,remotePath [{}]:[{}] ReplyCode:{}", remotePath, flag, ftpClient.getReplyCode()));
             }
             return flag;
         }catch (IOException e){
-            String message = formatPattern("remotePath:[{}]", remotePath);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("remotePath:[{}]", remotePath), e);
         }
     }
 
@@ -322,18 +315,17 @@ public class FTPFileTransfer extends AbstractFileTransfer{
     @Override
     protected boolean rm(String remotePath){
         try{
-            LOGGER.info("remotePath:[{}] is [not directory],deleteFile.....", remotePath);
+            LOGGER.info(log("remotePath:[{}] is [not directory],deleteFile.....", remotePath));
             boolean flag = ftpClient.deleteFile(remotePath);
 
             if (flag){
-                LOGGER.info("ftpClient deleteFile,remotePath[{}] : [{}]", remotePath, flag);
+                LOGGER.info(log("ftpClient deleteFile,remotePath[{}] : [{}]", remotePath, flag));
             }else{
-                LOGGER.warn("ftpClient deleteFile,remotePath[{}] : [{}] , ReplyCode:[{}]", remotePath, flag, ftpClient.getReplyCode());
+                LOGGER.warn(log("ftpClient deleteFile,remotePath[{}] : [{}] , ReplyCode:[{}]", remotePath, flag, ftpClient.getReplyCode()));
             }
             return flag;
-        }catch (IOException e){
-            String message = formatPattern("remotePath:[{}]", remotePath);
-            throw new FileTransferException(message, e);
+        }catch (Exception e){
+            throw new FileTransferException(log("remotePath:[{}]", remotePath), e);
         }
     }
 
@@ -367,8 +359,7 @@ public class FTPFileTransfer extends AbstractFileTransfer{
             bufferedOutputStream.flush();
             return success;
         }catch (IOException e){
-            String message = formatPattern("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath);
-            throw new FileTransferException(message, e);
+            throw new FileTransferException(log("remoteSingleFile:[{}],filePath:[{}]", remoteSingleFile, filePath), e);
         }
     }
 
