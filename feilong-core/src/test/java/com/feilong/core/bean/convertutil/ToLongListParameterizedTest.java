@@ -31,24 +31,31 @@ import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 public class ToLongListParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, List<Long>>{
 
-    /**
-     * Data.
-     *
-     * @return the iterable
-     */
-    @Parameters(name = "index:{index}: ConvertUtil.toLongList({0})={1}")
-    public static Iterable<Object[]> data(){
-        Object[][] objects = build();
-        return toList(objects);
-    }
+    //不支持
+    //{ "1-2-3", toList(1L, 2L, 3L) }, //- 
+    //{ "1.2.3", toList(1L, 2L, 3L) },// .
+    //{ "1：2： 3", toList(1L, 2L, 3L) }, //中文 冒号
+    //{ "1、2、3", toList(1L, 2L, 3L) }, //中文顿号 
 
-    /**
-     * @return
-     * @since 1.10.3
-     */
     private static Object[][] build(){
         return new Object[][] { //
-                                { "1,2,3", toList(1L, 2L, 3L) },
+                                { "1,2,3", toList(1L, 2L, 3L) }, //逗号
+                                { "1 2 3", toList(1L, 2L, 3L) }, //空格
+                                { "1;2;3", toList(1L, 2L, 3L) }, //分号
+                                { "1; 2;3", toList(1L, 2L, 3L) }, //分号
+                                { "1:2: 3", toList(1L, 2L, 3L) }, //冒号
+                                { "1:2, 3", toList(1L, 2L, 3L) }, //混用
+                                //  { "1、2、3", toList(1L, 2L, 3L) }, //冒号
+
+                                {
+                                  "     1\n"//
+                                                  + " 2\n"//
+                                                  + "3 \n"//
+                                                  + "",
+                                  toList(1L, 2L, 3L) }, //换行
+
+                                { "1@ 2@3", toList(1L, 2L, 3L) }, //@
+
                                 { "{1,2,3}", toList(1L, 2L, 3L) },
                                 { "{ 1 ,2,3}", toList(1L, 2L, 3L) },
                                 { "1,2, 3", toList(1L, 2L, 3L) },
@@ -66,6 +73,12 @@ public class ToLongListParameterizedTest extends Abstract1ParamAndResultParamete
                 //                                { new String[] { "1", null, "2", "3" }, toList(1L, null, 2L, 3L) },
 
         };
+    }
+
+    @Parameters(name = "index:{index}: ConvertUtil.toLongList({0})={1}")
+    public static Iterable<Object[]> data(){
+        Object[][] objects = build();
+        return toList(objects);
     }
 
     @Test

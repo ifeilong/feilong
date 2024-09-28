@@ -193,11 +193,13 @@ public final class ResponseDownloadUtil{
                     HttpServletRequest request,
                     HttpServletResponse response){
         long beginTimeMillis = System.currentTimeMillis();
-        String length = FileUtil.formatSize(contentLength.longValue());
+
+        String length = null == contentLength ? null : FileUtil.formatSize(contentLength.longValue());
         LOGGER.info("begin download~~,saveFileName:[{}],contentLength:[{}]", saveFileName, length);
         try{
             OutputStream outputStream = response.getOutputStream();
             IOWriteUtil.write(inputStream, outputStream);
+
             if (LOGGER.isInfoEnabled()){
                 String pattern = "end download,saveFileName:[{}],contentLength:[{}],time use:[{}]";
                 LOGGER.info(pattern, saveFileName, length, formatDurationUseBeginTimeMillis(beginTimeMillis));
