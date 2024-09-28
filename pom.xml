@@ -210,7 +210,7 @@
 
 		<!-- http://maven.apache.org/plugins/maven-site-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MSITE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-site-plugin>3.12.1</v.maven-site-plugin>
+		<v.maven-site-plugin>3.20.0</v.maven-site-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-source-plugin/download.cgi -->
 		<!-- https://issues.apache.org/jira/projects/MSOURCES?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -247,7 +247,7 @@
 		<v.nexus-staging-maven-plugin>1.7.0</v.nexus-staging-maven-plugin>
 
 		<!-- taglist 检查报告 -->
-		<v.taglist-maven-plugin>2.4</v.taglist-maven-plugin>
+		<v.taglist-maven-plugin>3.1.0</v.taglist-maven-plugin>
 
 		<v.license-maven-plugin>3.0</v.license-maven-plugin>
 
@@ -259,7 +259,7 @@
 		<!-- 生成项目总报告  -->
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/  -->
 		<!-- https://issues.apache.org/jira/projects/MPIR?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&status=released-unreleased  -->
-		<v.maven-project-info-reports-plugin>3.5.0</v.maven-project-info-reports-plugin>
+		<v.maven-project-info-reports-plugin>3.7.0</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
 		<v.jacoco-maven-plugin>0.8.8</v.jacoco-maven-plugin>
