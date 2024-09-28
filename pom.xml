@@ -176,7 +176,7 @@
 
 		<!-- https://issues.apache.org/jira/projects/MDEP?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released -->
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.6.1</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.8.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -188,7 +188,7 @@
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<!-- https://maven.apache.org/plugins/maven-javadoc-plugin/index.html -->
-		<v.maven-javadoc-plugin>3.6.3</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.10.0</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-jar-plugin>3.3.0</v.maven-jar-plugin>
@@ -206,7 +206,7 @@
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
 		<!-- https://maven.apache.org/scm/ -->
 		<!-- https://issues.apache.org/jira/projects/SCM?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-scm-plugin>2.0.1</v.maven-scm-plugin>
+		<v.maven-scm-plugin>2.1.0</v.maven-scm-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-site-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/MSITE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -220,7 +220,7 @@
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.2.3</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.5.0</v.maven-surefire-plugin>
 
 
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
@@ -254,7 +254,7 @@
 		<!-- 优雅地管理项目版本号 -->
 		<!-- http://www.mojohaus.org/versions-maven-plugin/ -->
 		<!-- https://github.com/mojohaus/versions-maven-plugin/releases -->
-		<v.versions-maven-plugin>2.16.2</v.versions-maven-plugin>
+		<v.versions-maven-plugin>2.17.1</v.versions-maven-plugin>
 
 		<!-- 生成项目总报告  -->
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/  -->

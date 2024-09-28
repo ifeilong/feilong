@@ -43,7 +43,7 @@
 		<v.maven-compiler-plugin>3.13.0</v.maven-compiler-plugin>
 
 		<!-- http://maven.apache.org/plugins/maven-dependency-plugin/index.html -->
-		<v.maven-dependency-plugin>3.6.1</v.maven-dependency-plugin>
+		<v.maven-dependency-plugin>3.8.0</v.maven-dependency-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -53,7 +53,7 @@
 		<v.maven-install-plugin>3.1.2</v.maven-install-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAVADOC?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
-		<v.maven-javadoc-plugin>3.6.3</v.maven-javadoc-plugin>
+		<v.maven-javadoc-plugin>3.10.0</v.maven-javadoc-plugin>
 
 		<!-- https://issues.apache.org/jira/projects/MJAR?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=all -->
 		<v.maven-jar-plugin>3.3.0</v.maven-jar-plugin>
@@ -66,7 +66,7 @@
 		<!-- 跑单元测试的 -->
 		<!-- http://maven.apache.org/surefire/maven-surefire-plugin/ -->
 		<!-- https://issues.apache.org/jira/projects/SUREFIRE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-surefire-plugin>3.2.3</v.maven-surefire-plugin>
+		<v.maven-surefire-plugin>3.5.0</v.maven-surefire-plugin>
 
 		<v.maven-gpg-plugin>1.6</v.maven-gpg-plugin>
 		<v.maven-shade-plugin>3.2.0</v.maven-shade-plugin>
