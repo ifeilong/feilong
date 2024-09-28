@@ -45,7 +45,7 @@ public class ToSingleValueMapConvertTest{
 
     @Test(expected = NullPointerException.class)
     public void toSingleValueMap12(){
-        StringUtil.toSingleValueMap("1=2", String.class, null);
+        StringUtil.toSingleValueMap("1=2", String.class, (Class) null);
     }
 
     //---------------------------------------------------------------

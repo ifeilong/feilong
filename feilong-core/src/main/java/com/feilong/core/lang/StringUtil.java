@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 
+import com.feilong.context.converter.StringToBeanConverter;
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validate;
 import com.feilong.core.bean.ConvertUtil;
@@ -1172,6 +1173,8 @@ public final class StringUtil{
         return false;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 189=988;200=455;这种格式的字符串转换成map , map的key 是189这种, value 是988,455 这种等号后面的值,使用逗号分隔成list.
      * 
@@ -1195,15 +1198,15 @@ public final class StringUtil{
      * 
      * </blockquote>
      *
-     * @param config
+     * @param configString
      *            189=988;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
-     * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
-     *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      * @since 3.3.4
      * @apiNote 自动去除空格,忽略空
      */
-    public static Map<String, String> toSingleValueMap(String config){
-        return toSingleValueMap(config, String.class, String.class);
+    public static Map<String, String> toSingleValueMap(String configString){
+        return toSingleValueMap(configString, String.class, String.class);
     }
 
     /**
@@ -1232,50 +1235,130 @@ public final class StringUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param config
+     * @param configString
      *            189=988;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
      * @param keyClass
      *            key转换的类型,比如上面的背景中, 189 可以转换成String Long Integer
      * @param valueElementClass
      *            value转换的类型,比如上面的背景中, 455 可以转换成String Long Integer
-     * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
-     *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.3.4
      * @apiNote 自动去除空格,忽略空
      */
-    public static <T, V> Map<T, V> toSingleValueMap(String config,Class<T> keyClass,Class<V> valueElementClass){
+    public static <T, V> Map<T, V> toSingleValueMap(String configString,Class<T> keyClass,Class<V> valueElementClass){
+        return toMap(configString, keyClass, (valueString) -> {
+            return convert(valueString, valueElementClass);
+        });
+    }
 
-        if (isNullOrEmpty(config)){
+    /**
+     * 将 73034693=0-50;11487680=0-43;51099626=0-50; 这种格式的字符串转换成map.
+     * 
+     * <p>
+     * map的key 是73034693这种, value 可以TrackQueryExtendParam对象
+     * 
+     * <pre class="code">
+     * public class TrackQueryExtendParam{
+     * 
+     *     // 单集编号 最小. 
+     *     private Integer minEpisodeNumber;
+     * 
+     *     // 单集编号 最大. 
+     *     private Integer maxEpisodeNumber;
+     * 
+     *     //setter/getter 省略
+     * }
+     * </pre>
+     * </p>
+     * 
+     * <h3>解析代码示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String configString = "73034693=0-50;\n"//
+     *                 + "11487680=0-43;\n"//
+     *                 + "51099626=0-50;";
+     * 
+     * Map{@code <Long, TrackQueryExtendParam>} map = StringUtil.toMap(configString, Long.class, (valueString) -> {
+     *                                                   String[] albumQueryParamsArray = StringUtil.tokenizeToStringArray(valueString, "-");
+     *                                                   if (isNullOrEmpty(albumQueryParamsArray)){
+     *                                                       return null;
+     *                                                   }
+     *                                                   try{
+     *                                                       //只有1个 
+     *                                                       if (1 == size(albumQueryParamsArray)){
+     *                                                           //默认 0-x
+     *                                                           Integer max = toInteger(albumQueryParamsArray[0]);
+     *                                                           return new TrackQueryExtendParam(0, max);
+     *                                                       }
+     * 
+     *                                                       Integer min = toInteger(albumQueryParamsArray[0]);
+     *                                                       Integer max = toInteger(albumQueryParamsArray[1]);
+     *                                                       return new TrackQueryExtendParam(min, max);
+     * 
+     *                                                   }catch (Exception e){
+     *                                                       return null;
+     *                                                   }
+     *                                               });
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param configString
+     *            73034693=0-50;11487680=0-43;51099626=0-50; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @param keyClass
+     *            key转换的类型,比如上面的背景中, 73034693 可以转换成String Long Integer
+     * @param valueStringToBeanConverter
+     *            value转换的类型
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
+     *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>stringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.1.2
+     * @apiNote 自动去除空格,忽略空
+     */
+    public static <T, V> Map<T, V> toMap(String configString,Class<T> keyClass,StringToBeanConverter<V> valueStringToBeanConverter){
+        if (isNullOrEmpty(configString)){
             return emptyMap();
         }
 
-        Validate.notNull(keyClass, "keyClass can't be null!");
-        Validate.notNull(valueElementClass, "valueElementClass can't be null!");
+        //entry之间的分隔符
+        String entryDelimiters = ";";
+        //key 和value之间的分隔符
+        String keyAndValueDelimiters = "=";
 
-        //---------------------------------------------------------------
-
-        String[] entrys = StringUtil.tokenizeToStringArray(config, ";");
+        String[] entrys = StringUtil.tokenizeToStringArray(configString, entryDelimiters);
         if (isNullOrEmpty(entrys)){
             return emptyMap();
         }
+        //---------------------------------------------------------------
+        Validate.notNull(keyClass, "keyClass can't be null!");
+        Validate.notNull(valueStringToBeanConverter, "stringToBeanConverter can't be null!");
 
+        //---------------------------------------------------------------
         Map<T, V> map = newHashMap();
         for (String keyAndValueString : entrys){
             if (isNullOrEmpty(keyAndValueString)){
                 continue;
             }
-
-            String[] keyAndValues = StringUtil.tokenizeToStringArray(keyAndValueString, "=");
+            String[] keyAndValues = StringUtil.tokenizeToStringArray(keyAndValueString, keyAndValueDelimiters);
             if (size(keyAndValues) != 2){
                 continue;
             }
-
             //---------------------------------------------------------------
-            map.put(
-                            convert(keyAndValues[0], keyClass), //
-                            convert(keyAndValues[1], valueElementClass));
+            T key = ConvertUtil.convert(keyAndValues[0], keyClass);
+            V value = valueStringToBeanConverter.convert(keyAndValues[1]);
+            map.put(key, value);
         }
         return map;
     }
@@ -1306,55 +1389,24 @@ public final class StringUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param config
+     * @param configString
      *            189=988,900;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
      * @param keyClass
      *            key转换的类型,比如上面的背景中, 189 可以转换成String Long Integer
      * @param valueElementClass
      *            value转换的类型,比如上面的背景中, 455 可以转换成String Long Integer
-     * @return 如果 <code>config</code> 是null,返回 emptyMap() <br>
-     *         如果 <code>config</code> 是empty,返回 emptyMap()<br>
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 3.3.4
      * @apiNote 自动去除空格,忽略空
      */
-    public static <T, V> Map<T, List<V>> toMultiValueMap(String config,Class<T> keyClass,Class<V> valueElementClass){
-        if (isNullOrEmpty(config)){
-            return emptyMap();
-        }
-
-        Validate.notNull(keyClass, "keyClass can't be null!");
-        Validate.notNull(valueElementClass, "valueElementClass can't be null!");
-
-        //---------------------------------------------------------------
-        String[] entrys = tokenizeToStringArray(config, ";");
-        if (isNullOrEmpty(entrys)){
-            return emptyMap();
-        }
-
-        //---------------------------------------------------------------
-
-        Map<T, List<V>> map = newHashMap();
-        for (String entry : entrys){
-            if (isNullOrEmpty(entry)){
-                continue;
-            }
-
-            String[] keyAndValuesMapping = tokenizeToStringArray(entry, "=");
-            if (size(keyAndValuesMapping) != 2){
-                continue;
-            }
-
-            //---------------------------------------------------------------
-            T key = convert(keyAndValuesMapping[0], keyClass);
-
-            String[] values = StringUtil.tokenizeToStringArray(keyAndValuesMapping[1], ",");
-            List<V> valueList = toList(toArray(values, valueElementClass));
-
-            map.put(key, valueList);
-        }
-        return map;
+    public static <T, V> Map<T, List<V>> toMultiValueMap(String configString,Class<T> keyClass,Class<V> valueElementClass){
+        return toMap(configString, keyClass, (valueString) -> {
+            String[] values = StringUtil.tokenizeToStringArray(valueString, ",");
+            return toList(toArray(values, valueElementClass));
+        });
     }
 
     // [start]format

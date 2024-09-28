@@ -61,6 +61,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToSingleValueMapTest.class,
                 ToSingleValueMapConvertTest.class,
                 ToMultiValueMapTest.class,
+                ToMapConvertTest.class,
 //
 })
 public class StringUtilSuiteTests{
