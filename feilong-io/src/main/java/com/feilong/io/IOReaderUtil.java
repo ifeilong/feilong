@@ -21,6 +21,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 
 import java.io.File;
@@ -34,6 +35,8 @@ import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -429,9 +432,13 @@ public final class IOReaderUtil{
     /**
      * 直接解析 {@code location} 成 {@link Set}.
      * 
-     * <p>
-     * 使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
      *
      * @param location
      *            <ul>
@@ -451,9 +458,245 @@ public final class IOReaderUtil{
     /**
      * 使用 {@link ReaderConfig}解析 {@link Reader}.
      * 
-     * <p>
-     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return codes;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.12.10
+     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.14.0 rename from read
+     */
+    public static Set<String> readToSet(String location,ReaderConfig readerConfig){
+        InputStream inputStream = getInputStream(location);
+        return readToSet(InputStreamUtil.toBufferedReader(inputStream, UTF8), readerConfig);
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return codes;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param file
+     *            the file
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.12.10
+     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.14.0 rename from read
+     */
+    public static Set<String> readToSet(File file,ReaderConfig readerConfig){
+        Validate.notNull(file, "file can't be null!");
+
+        try (Reader reader = new FileReader(file);){
+            return readToSet(reader, readerConfig);
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li><span style="color:red">会自动关闭 <code>reader</code></span></li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return codes;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param reader
+     *            the reader
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.12.10
+     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.14.0 rename from read
+     */
+    public static Set<String> readToSet(Reader reader,ReaderConfig readerConfig){
+        Set<String> set = newLinkedHashSet();
+        return readToCollection(reader, readerConfig, set);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 直接解析 {@code location} 成 {@link List}.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param location
+     *            <ul>
+     *            <li>支持全路径, 比如. "file:C:/test.dat".</li>
+     *            <li>支持classpath 伪路径, e.g. "classpath:test.dat".</li>
+     *            <li>支持相对路径, e.g. "WEB-INF/test.dat".</li>
+     *            <li>如果上述都找不到,会再次转成FileInputStream,比如 "/Users/feilong/feilong-io/src/test/resources/readFileToString.txt"</li>
+     *            </ul>
+     * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 4.1.2
+     */
+    public static List<String> readToList(String location){
+        return readToList(location, null);
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>如果你以前这么写代码:</h3>
      * 
@@ -503,21 +746,24 @@ public final class IOReaderUtil{
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 1.12.10
-     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     * @since 1.14.0 rename from read
+     * @since 4.1.2
      */
-    public static Set<String> readToSet(String location,ReaderConfig readerConfig){
+    public static List<String> readToList(String location,ReaderConfig readerConfig){
         InputStream inputStream = getInputStream(location);
-        return readToSet(InputStreamUtil.toBufferedReader(inputStream, UTF8), readerConfig);
+        return readToList(InputStreamUtil.toBufferedReader(inputStream, UTF8), readerConfig);
     }
 
     /**
      * 使用 {@link ReaderConfig}解析 {@link Reader}.
      * 
-     * <p>
-     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>如果你以前这么写代码:</h3>
      * 
@@ -562,15 +808,13 @@ public final class IOReaderUtil{
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.12.10
-     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     * @since 1.14.0 rename from read
+     * @since 4.1.2
      */
-    public static Set<String> readToSet(File file,ReaderConfig readerConfig){
+    public static List<String> readToList(File file,ReaderConfig readerConfig){
         Validate.notNull(file, "file can't be null!");
 
         try (Reader reader = new FileReader(file);){
-            return readToSet(reader, readerConfig);
+            return readToList(reader, readerConfig);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -579,9 +823,78 @@ public final class IOReaderUtil{
     /**
      * 使用 {@link ReaderConfig}解析 {@link Reader}.
      * 
-     * <p>
-     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li><span style="color:red">会自动关闭 <code>reader</code></span></li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * List{@code <String>} codes = newArrayList();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return codes;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToList(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param reader
+     *            the reader
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.1.2
+     */
+    public static List<String> readToList(Reader reader,ReaderConfig readerConfig){
+        List<String> list = newArrayList();
+        return readToCollection(reader, readerConfig, list);
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式</li>
+     * <li>如果readerConfig 是null,使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.</li>
+     * <li><span style="color:red">会自动关闭 <code>reader</code></span></li>
+     * <li>如果出现异常,返回 {@link UncheckedIOException}</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>如果你以前这么写代码:</h3>
      * 
@@ -609,39 +922,45 @@ public final class IOReaderUtil{
      * }finally{
      *     read.close();
      * }
-     * return set;
+     * return codes;
      * </pre>
      * 
      * 现在可以重构为:
      * 
      * <pre class="code">
-     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * return IOReaderUtil.readToCollection(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"), newLinkedHashSet());
      * </pre>
+     * 
+     * 此外建议,如果需要set可以使用{@link #readToSet(Reader, ReaderConfig)}, 如果需要list可以使用 {@link #readToList(Reader, ReaderConfig)}
      * 
      * </blockquote>
      *
+     * @param <T>
+     *            the generic type
      * @param reader
      *            the reader
      * @param readerConfig
      *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @param collection
+     *            the collection
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.12.10
-     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     * @since 1.14.0 rename from read
+     *         如果 <code>collection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>collection</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     * @since 4.1.2
      */
-    public static Set<String> readToSet(Reader reader,ReaderConfig readerConfig){
+    public static <T extends Collection<String>> T readToCollection(Reader reader,ReaderConfig readerConfig,T collection){
         Validate.notNull(reader, "reader can't be null!");
+        Validate.notNull(collection, "collection can't be null!");
 
         ReaderConfig useReaderConfig = defaultIfNull(readerConfig, ReaderConfig.DEFAULT);
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.toString(useReaderConfig));
+            LOGGER.debug("startReadReader:[{}], readerConfig:[{}]", reader, JsonUtil.toString(useReaderConfig));
         }
 
         //---------------------------------------------------------------
         long beginTimeMillis = System.currentTimeMillis();
-        Set<String> set = newLinkedHashSet();
         //---------------------------------------------------------------
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
             String line = null;
@@ -652,7 +971,7 @@ public final class IOReaderUtil{
                 if (isIgnoreLine(line, useReaderConfig)){
                     continue;
                 }
-                set.add(line);
+                collection.add(line);
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);
@@ -661,12 +980,24 @@ public final class IOReaderUtil{
         }
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            String format = "end read reader:[{}],readerConfig:[{}],use time: [{}]";
-            LOGGER.info(format, reader, JsonUtil.toString(useReaderConfig), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            LOGGER.info(
+                            "endReadReader:[{}],readerConfig:[{}],use time: [{}]",
+                            reader,
+                            JsonUtil.toString(useReaderConfig),
+                            formatDurationUseBeginTimeMillis(beginTimeMillis));
         }
-        return set;
+        return collection;
     }
 
+    /**
+     * Checks if is ignore line.
+     *
+     * @param line
+     *            the line
+     * @param readerConfig
+     *            the reader config
+     * @return true, if is ignore line
+     */
     private static boolean isIgnoreLine(String line,ReaderConfig readerConfig){
         String regexPattern = readerConfig.getRegexPattern();
         //不符合正则
@@ -839,8 +1170,10 @@ public final class IOReaderUtil{
     }
 
     /**
+     * Gets the input stream.
+     *
      * @param location
-     * @param charsetName
+     *            the location
      * @return 如果 <code>location</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>location</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 4.0.1

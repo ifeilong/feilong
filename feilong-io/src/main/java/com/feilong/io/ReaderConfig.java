@@ -20,6 +20,10 @@ import java.io.Serializable;
 /**
  * 读取文件的配置参数.
  * 
+ * <p>
+ * 默认的读取配置,忽略空白行,且去空格. {@link #DEFAULT}
+ * </p>
+ * 
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
  * @since 1.12.10
  */
@@ -33,7 +37,6 @@ public class ReaderConfig implements Serializable{
      * 
      * @since 1.14.0
      */
-    // the static instance works for all types
     public static final ReaderConfig DEFAULT          = new ReaderConfig();
 
     //---------------------------------------------------------------

@@ -38,8 +38,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ReadToSetTest.class,
                 ReadToSetFilePathAndReaderConfigTest.class,
-
                 ReadToSetFileAndReaderConfigTest.class,
+
+                ReadToListFileAndReaderConfigTest.class,
+                ReadToListFilePathAndReaderConfigTest.class,
+                ReadToListTest.class
 
 })
 public class IOReaderUtilSuiteTests{
