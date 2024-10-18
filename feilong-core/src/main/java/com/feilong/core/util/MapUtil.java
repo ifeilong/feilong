@@ -2342,6 +2342,68 @@ public final class MapUtil{
     }
 
     /**
+     * 基于keys 创建指定value的 {@code LinkedHashMap}实例.
+     * <h3>使用该方法的好处:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li><b>简化代码书写方式</b>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 以前你可能需要这么写代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <Long, Boolean>} map = newLinkedHashMap();
+     * for (Long albumId : albumIds){
+     *     map.put(albumId, true);
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 现在你可以使用
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <Long, Boolean>} map = MapUtil.newLinkedHashMap(albumIds,true);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param keys
+     *            如果 <code>keys</code> 是null,返回 emptyMap<br>
+     * @param value
+     *            the value
+     * @return 如果 <code>keys</code> 是null,返回 emptyMap<br>
+     * @see "com.google.common.collect.Maps#newLinkedHashMapWithExpectedSize(int)"
+     * @see java.util.LinkedHashMap#LinkedHashMap()
+     * @since 4.2.0
+     */
+    public static <K, V> Map<K, V> newLinkedHashMap(Iterable<K> keys,V value){
+        if (null == keys){
+            return emptyMap();
+        }
+        //---------------------------------------------------------------
+        Map<K, V> map = new LinkedHashMap<>();
+        for (K key : keys){
+            map.put(key, value);
+        }
+        return map;
+    }
+
+    /**
      * New linked hash map.
      *
      * @param <K>

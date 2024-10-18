@@ -43,6 +43,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 NewHashMapTest.class,
                 NewTreeMapTest.class,
                 NewLinkedHashMapTest.class,
+                NewLinkedHashMapKeysTest.class,
                 NewConcurrentHashMapTest.class,
 
                 InvertMapTest.class,
