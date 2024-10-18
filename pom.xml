@@ -180,7 +180,7 @@
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-deploy-plugin>3.1.1</v.maven-deploy-plugin>
+		<v.maven-deploy-plugin>3.1.3</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MINSTALL?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
@@ -200,7 +200,7 @@
 		<!-- 用来做maven 插件的 -->
 		<!-- http://maven.apache.org/plugin-tools/maven-plugin-plugin/project-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MPLUGIN?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-plugin-plugin>3.10.2</v.maven-plugin-plugin>
+		<v.maven-plugin-plugin>3.15.0</v.maven-plugin-plugin>
 
 		<!-- 目前主要用于 scm-checkin-all.sh 一键push脚本 -->
 		<!-- SCM Software Configuration Management 软件配置管理 where each SCM command is implemented as a plugin goal -->
@@ -225,7 +225,7 @@
 
 		<!-- https://maven.apache.org/maven-release/maven-release-plugin/plugin-info.html -->
 		<!-- https://issues.apache.org/jira/projects/MRELEASE?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-release-plugin>3.0.1</v.maven-release-plugin>
+		<v.maven-release-plugin>3.1.1</v.maven-release-plugin>
 
 		<!-- https://issues.apache.org/jira/browse/MRESOURCES/?selectedTab=com.atlassian.jira.jira-projects-plugin:changelog-panel -->
 		<v.maven-resources-plugin>3.3.1</v.maven-resources-plugin>

@@ -47,7 +47,7 @@
 
 		<!-- https://maven.apache.org/plugins/maven-deploy-plugin/index.html -->
 		<!-- https://issues.apache.org/jira/projects/MDEPLOY?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page&status=released-unreleased -->
-		<v.maven-deploy-plugin>3.1.1</v.maven-deploy-plugin>
+		<v.maven-deploy-plugin>3.1.3</v.maven-deploy-plugin>
 
 		<!-- https://maven.apache.org/plugins/maven-install-plugin/index.html -->
 		<v.maven-install-plugin>3.1.2</v.maven-install-plugin>
