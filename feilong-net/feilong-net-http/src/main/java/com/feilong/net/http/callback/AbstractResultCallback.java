@@ -34,6 +34,7 @@ import com.feilong.lib.org.apache.http.Header;
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.StatusLine;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
+import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 import com.feilong.net.http.builder.HttpResponseUtil;
@@ -112,5 +113,16 @@ public abstract class AbstractResultCallback<T> implements ResultCallback<T>{
             }
         }
         return map;
+    }
+
+    @Override
+    public T doException(
+                    HttpRequest httpRequest,
+                    HttpUriRequest httpUriRequest,
+                    ConnectionConfig useConnectionConfig,
+                    UncheckedHttpException e,
+                    Date beginDate){
+        //默认抛出异常
+        throw e;
     }
 }

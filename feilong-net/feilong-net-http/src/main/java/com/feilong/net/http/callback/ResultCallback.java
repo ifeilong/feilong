@@ -19,6 +19,7 @@ import java.util.Date;
 
 import com.feilong.lib.org.apache.http.HttpResponse;
 import com.feilong.lib.org.apache.http.client.methods.HttpUriRequest;
+import com.feilong.net.UncheckedHttpException;
 import com.feilong.net.http.ConnectionConfig;
 import com.feilong.net.http.HttpRequest;
 
@@ -45,7 +46,6 @@ import com.feilong.net.http.HttpRequest;
  * @see ResponseBodyAsStringResultCallback
  * @see StatusCodeResultCallback
  */
-@FunctionalInterface // 该注解加不加,对于接口是不是函数式接口没有影响;只是提醒编译器去检查该接口是否仅包含一个抽象方法
 public interface ResultCallback<T> {
 
     /**
@@ -72,5 +72,28 @@ public interface ResultCallback<T> {
                     HttpUriRequest httpUriRequest,
                     HttpResponse httpResponse,
                     ConnectionConfig useConnectionConfig,
+                    Date beginDate);
+
+    /**
+     * 如果出现了异常.
+     *
+     * @param httpRequest
+     *            the http request
+     * @param httpUriRequest
+     *            the http uri request
+     * @param useConnectionConfig
+     *            the use connection config
+     * @param e
+     *            the e
+     * @param beginDate
+     *            the begin date
+     * @return the t
+     * @since 4.2.0
+     */
+    T doException(
+                    HttpRequest httpRequest,
+                    HttpUriRequest httpUriRequest,
+                    ConnectionConfig useConnectionConfig,
+                    UncheckedHttpException e,
                     Date beginDate);
 }

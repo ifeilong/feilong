@@ -67,11 +67,17 @@ public final class HttpRequestExecuter{
         Date beginDate = now();
         ConnectionConfig useConnectionConfig = defaultIfNull(connectionConfig, ConnectionConfig.INSTANCE);
         HttpUriRequest httpUriRequest = HttpUriRequestBuilder.build(httpRequest, useConnectionConfig);
-        HttpResponse httpResponse = execute(httpRequest, httpUriRequest, useConnectionConfig);
 
-        //---------------------------------------------------------------
-        //回手掏
-        return resultCallback.on(httpRequest, httpUriRequest, httpResponse, useConnectionConfig, beginDate);
+        HttpResponse httpResponse = null;
+        try{
+            httpResponse = execute(httpRequest, httpUriRequest, useConnectionConfig);
+            //---------------------------------------------------------------
+            //回手掏
+            return resultCallback.on(httpRequest, httpUriRequest, httpResponse, useConnectionConfig, beginDate);
+
+        }catch (UncheckedHttpException e){
+            return resultCallback.doException(httpRequest, httpUriRequest, useConnectionConfig, e, beginDate);
+        }
     }
 
     //---------------------------------------------------------------

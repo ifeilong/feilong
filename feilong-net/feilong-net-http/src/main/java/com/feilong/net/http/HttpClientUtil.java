@@ -21,6 +21,7 @@ import java.util.Map;
 
 import com.feilong.core.Validate;
 import com.feilong.net.http.builder.HttpRequestExecuter;
+import com.feilong.net.http.callback.HttpFullInfoResultCallback;
 import com.feilong.net.http.callback.HttpResponseResultCallback;
 import com.feilong.net.http.callback.ResponseBodyAsStringResultCallback;
 import com.feilong.net.http.callback.StatusCodeResultCallback;
@@ -433,6 +434,19 @@ public final class HttpClientUtil{
     public static com.feilong.net.http.HttpResponse getHttpResponse(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
         return HttpRequestExecuter.execute(httpRequest, connectionConfig, HttpResponseResultCallback.INSTANCE);
+    }
+
+    /**
+     * http完整信息, 方便在外层做日志或者保存日志到数据库中.
+     * 
+     * @param httpRequest
+     * @param connectionConfig
+     * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 4.2.0
+     */
+    public static HttpFullInfo getHttpFullInfo(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+        Validate.notNull(httpRequest, "httpRequest can't be null!");
+        return HttpRequestExecuter.execute(httpRequest, connectionConfig, HttpFullInfoResultCallback.INSTANCE);
     }
 
     /**
