@@ -21,6 +21,8 @@ import static com.feilong.net.http.HttpMethodType.GET;
 import java.util.Map;
 
 import com.feilong.core.net.ParamUtil;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 import com.feilong.net.UriProcessor;
 
 /**
@@ -379,5 +381,17 @@ public class HttpRequest{
      */
     public void setLogTraceContext(String logTraceContext){
         this.logTraceContext = logTraceContext;
+    }
+
+    //---------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

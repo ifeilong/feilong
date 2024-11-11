@@ -18,6 +18,9 @@ package com.feilong.net.http;
 import java.io.Serializable;
 import java.util.Map;
 
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
+
 /**
  * 得到的 http response 结果信息.
  *
@@ -125,5 +128,16 @@ public class HttpResponse implements Serializable{
      */
     public void setHeaderMap(Map<String, String> headerMap){
         this.headerMap = headerMap;
+    }
+
+    //---------------------------------------------------------------
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
