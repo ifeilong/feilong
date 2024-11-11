@@ -33,6 +33,11 @@ public final class RequestLogHelper{
 
     /**
      * 自动追加request简单信息.
+     * 
+     * <p>
+     * 自动获取请求的路径和请求参数,前置追加类似于这种字符串
+     * api:[http://mpay.feilong.com/subscribe/h5],paramString:[app_key=876*******14ec5f3c&third_party_order_no=XML*******95315&timestamp=1733******111&sig=145ad********f84013467
+     * </p>
      *
      * @param messagePattern
      *            the message pattern
@@ -42,9 +47,37 @@ public final class RequestLogHelper{
      * @since 4.0.6
      */
     public static String autoRequestInfo(String messagePattern,Object...params){
+        HttpServletRequest request = WebSpringUtil.getRequest();
+        return autoRequestInfo(request, messagePattern, params);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 显性传入HttpServletRequest参数, 自动追加request简单信息.
+     * 
+     * <p>
+     * 此方法非常适用于filter里面, 因为filter先于springmvc无法自动获取HttpServletRequest对象
+     * </p>
+     * 
+     * <p>
+     * 自动获取请求的路径和请求参数,前置追加类似于这种字符串
+     * api:[http://mpay.feilong.com/subscribe/h5],paramString:[app_key=876*******14ec5f3c&third_party_order_no=XML*******95315&timestamp=1733******111&sig=145ad********f84013467
+     * </p>
+     *
+     * @param request
+     *            the request
+     * @param messagePattern
+     *            the message pattern
+     * @param params
+     *            the params
+     * @return the string
+     * @since 4.2.1
+     */
+    public static String autoRequestInfo(HttpServletRequest request,String messagePattern,Object...params){
         String message = formatPattern(messagePattern, params);
 
-        StringBuilder sb = new StringBuilder(getRequestInfo());
+        StringBuilder sb = new StringBuilder(getRequestInfo(request));
         if (isNotNullOrEmpty(message)){
             sb.append(",");
             sb.append(message);
@@ -52,13 +85,16 @@ public final class RequestLogHelper{
         return sb.toString();
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * Gets the request info.
-     *
+     * 自动生成api地址以及请求参数的log 字符串
+     * 
+     * @param request
+     *            the request
      * @return the request info
      */
-    private static String getRequestInfo(){
-        HttpServletRequest request = WebSpringUtil.getRequest();
+    private static String getRequestInfo(HttpServletRequest request){
         return formatPattern(
                         "api:[{}],paramString:[{}]",
                         null == request ? EMPTY : RequestUtil.getRequestURL(request), //request.getPathInfo(),//可能是null
