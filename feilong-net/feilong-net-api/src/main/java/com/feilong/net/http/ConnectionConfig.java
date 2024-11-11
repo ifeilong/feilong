@@ -24,6 +24,8 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.TimeInterval;
 import com.feilong.lib.lang3.builder.EqualsBuilder;
 import com.feilong.lib.lang3.builder.HashCodeBuilder;
+import com.feilong.lib.lang3.builder.ToStringBuilder;
+import com.feilong.lib.lang3.builder.ToStringStyle;
 
 /**
  * 连接参数配置,比如超时时间,代理等等.
@@ -640,13 +642,6 @@ public final class ConnectionConfig{
     }
 
     //---------------------------------------------------------------
-    /**
-     * Equals.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if successful
-     */
     /*
      * (non-Javadoc)
      * 
@@ -718,5 +713,17 @@ public final class ConnectionConfig{
                         .append(maxConnTotal)//
                         .toHashCode();
 
+    }
+
+    //---------------------------------------------------------------
+    /**
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     * @since 4.2.1
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }
