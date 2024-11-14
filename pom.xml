@@ -259,7 +259,7 @@
 		<!-- 生成项目总报告  -->
 		<!-- http://maven.apache.org/plugins/maven-project-info-reports-plugin/  -->
 		<!-- https://issues.apache.org/jira/projects/MPIR?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&status=released-unreleased  -->
-		<v.maven-project-info-reports-plugin>3.7.0</v.maven-project-info-reports-plugin>
+		<v.maven-project-info-reports-plugin>3.8.0</v.maven-project-info-reports-plugin>
 
 		<!-- https://github.com/jacoco/jacoco/releases -->
 		<v.jacoco-maven-plugin>0.8.8</v.jacoco-maven-plugin>
