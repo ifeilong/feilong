@@ -72,7 +72,7 @@ public final class RequestLogHelper{
      * @param params
      *            the params
      * @return the string
-     * @since 4.2.1
+     * @since 4.3.0
      */
     public static String autoRequestInfo(HttpServletRequest request,String messagePattern,Object...params){
         String message = formatPattern(messagePattern, params);

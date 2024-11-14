@@ -720,7 +720,7 @@ public final class ConnectionConfig{
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()
-     * @since 4.2.1
+     * @since 4.3.0
      */
     @Override
     public String toString(){
