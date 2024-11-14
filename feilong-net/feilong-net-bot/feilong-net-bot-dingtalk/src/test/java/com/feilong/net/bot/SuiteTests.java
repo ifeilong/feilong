@@ -20,9 +20,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.net.bot.dingtalk.DingTalkBotHellowordTest;
+import com.feilong.net.bot.dingtalk.DingTalkBotMarkDownStringTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ DingTalkBotHellowordTest.class
+@SuiteClasses({
+
+                DingTalkBotHellowordTest.class,
+                DingTalkBotMarkDownStringTest.class
 //
 })
 public class SuiteTests{
