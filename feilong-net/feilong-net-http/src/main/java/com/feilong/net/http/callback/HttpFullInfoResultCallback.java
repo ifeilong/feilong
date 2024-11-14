@@ -28,17 +28,24 @@ import com.feilong.net.http.HttpRequest;
  * 用来解析http完整信息 {@link com.feilong.net.http.HttpFullInfo} 的 {@link ResultCallback}.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @param <T>
  * @since 4.2.0
  */
-public class HttpFullInfoResultCallback extends AbstractResultCallback<HttpFullInfo>{
+public class HttpFullInfoResultCallback<T> extends AbstractResultCallback<HttpFullInfo<T>>{
 
-    /** Static instance. */
-    // the static instance works for all types
-    public static final HttpFullInfoResultCallback INSTANCE = new HttpFullInfoResultCallback();
+    private ResultBeanConverter<T> resultBeanConverter;
+
+    /**
+     * @param resultBeanConverter
+     */
+    public HttpFullInfoResultCallback(ResultBeanConverter<T> resultBeanConverter){
+        super();
+        this.resultBeanConverter = resultBeanConverter;
+    }
 
     //---------------------------------------------------------------
     @Override
-    public HttpFullInfo on(
+    public HttpFullInfo<T> on(
                     HttpRequest httpRequest,
                     HttpUriRequest httpUriRequest,
                     HttpResponse httpResponse,
@@ -51,23 +58,44 @@ public class HttpFullInfoResultCallback extends AbstractResultCallback<HttpFullI
                         httpResponse,
                         useConnectionConfig,
                         beginDate);
-        HttpFullInfo httpFullInfo = new HttpFullInfo(httpRequest, useConnectionConfig);
+        HttpFullInfo<T> httpFullInfo = new HttpFullInfo<T>(httpRequest, useConnectionConfig);
         httpFullInfo.setHttpResponse(feilongHttpResponse);
+
+        T resultBean = null == resultBeanConverter ? null
+                        : resultBeanConverter.convert(httpRequest, useConnectionConfig, feilongHttpResponse);
+        httpFullInfo.setResultBean(resultBean);
         return httpFullInfo;
     }
 
     //---------------------------------------------------------------
 
     @Override
-    public HttpFullInfo doException(
+    public HttpFullInfo<T> doException(
                     HttpRequest httpRequest,
                     HttpUriRequest httpUriRequest,
                     ConnectionConfig useConnectionConfig,
                     UncheckedHttpException e,
                     Date beginDate){
-        HttpFullInfo httpFullInfo = new HttpFullInfo(httpRequest, useConnectionConfig);
+        HttpFullInfo<T> httpFullInfo = new HttpFullInfo<T>(httpRequest, useConnectionConfig);
         httpFullInfo.setUncheckedHttpException(e);
         return httpFullInfo;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @return the resultBeanConverter
+     */
+    public ResultBeanConverter<T> getResultBeanConverter(){
+        return resultBeanConverter;
+    }
+
+    /**
+     * @param resultBeanConverter
+     *            the resultBeanConverter to set
+     */
+    public void setResultBeanConverter(ResultBeanConverter<T> resultBeanConverter){
+        this.resultBeanConverter = resultBeanConverter;
     }
 
 }

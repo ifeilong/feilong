@@ -24,6 +24,7 @@ import com.feilong.net.http.builder.HttpRequestExecuter;
 import com.feilong.net.http.callback.HttpFullInfoResultCallback;
 import com.feilong.net.http.callback.HttpResponseResultCallback;
 import com.feilong.net.http.callback.ResponseBodyAsStringResultCallback;
+import com.feilong.net.http.callback.ResultBeanConverter;
 import com.feilong.net.http.callback.StatusCodeResultCallback;
 
 /**
@@ -438,15 +439,28 @@ public final class HttpClientUtil{
 
     /**
      * http完整信息, 方便在外层做日志或者保存日志到数据库中.
-     * 
+     *
+     * @param <T>
+     *            the generic type
      * @param httpRequest
+     *            the http request
      * @param connectionConfig
+     *            the connection config
+     * @param resultBeanConverter
+     *            the result bean converter
      * @return 如果 <code>httpRequest</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>resultBeanConverter</code> 是null,那么返回的HttpFullInfo 属性resultBean 会是null <br>
      * @since 4.2.0
+     * @since 4.3.0 add resultBeanConverter param
      */
-    public static HttpFullInfo getHttpFullInfo(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+    public static <T> HttpFullInfo<T> getHttpFullInfo(
+                    HttpRequest httpRequest,
+                    ConnectionConfig connectionConfig,
+                    ResultBeanConverter<T> resultBeanConverter){
         Validate.notNull(httpRequest, "httpRequest can't be null!");
-        return HttpRequestExecuter.execute(httpRequest, connectionConfig, HttpFullInfoResultCallback.INSTANCE);
+
+        HttpFullInfoResultCallback<T> httpFullInfoResultCallback = new HttpFullInfoResultCallback<>(resultBeanConverter);
+        return HttpRequestExecuter.execute(httpRequest, connectionConfig, httpFullInfoResultCallback);
     }
 
     /**

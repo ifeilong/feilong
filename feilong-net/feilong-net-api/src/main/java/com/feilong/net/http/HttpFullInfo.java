@@ -23,9 +23,11 @@ import com.feilong.net.UncheckedHttpException;
  * http完整信息, 方便在外层做日志或者保存日志到数据库中.
  *
  * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
+ * @param <T>
+ *            the generic type
  * @since 4.2.0
  */
-public class HttpFullInfo implements Serializable{
+public class HttpFullInfo<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long      serialVersionUID = 4945181504153761835L;
@@ -45,6 +47,13 @@ public class HttpFullInfo implements Serializable{
 
     /** 如果有异常. */
     private UncheckedHttpException uncheckedHttpException;
+
+    /**
+     * 转换的bean.
+     * 
+     * @since 4.3.0
+     */
+    private T                      resultBean;
 
     //---------------------------------------------------------------
 
@@ -145,6 +154,27 @@ public class HttpFullInfo implements Serializable{
      */
     public void setUncheckedHttpException(UncheckedHttpException uncheckedHttpException){
         this.uncheckedHttpException = uncheckedHttpException;
+    }
+
+    /**
+     * 获得 转换的bean.
+     *
+     * @return the resultBean
+     * @since 4.3.0
+     */
+    public T getResultBean(){
+        return resultBean;
+    }
+
+    /**
+     * 设置 转换的bean.
+     *
+     * @param resultBean
+     *            the resultBean to set
+     * @since 4.3.0
+     */
+    public void setResultBean(T resultBean){
+        this.resultBean = resultBean;
     }
 
 }
