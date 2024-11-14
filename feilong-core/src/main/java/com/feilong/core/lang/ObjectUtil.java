@@ -582,6 +582,52 @@ public final class ObjectUtil{
         return i;
     }
 
+    /**
+     * 如果 <code>count</code> 是null或者{@code >}<code>defaultValue</code>,返回默认值 <code>defaultValue</code>,否则返回<code>i</code>.
+     * 
+     * <p>
+     * 常用于控制分页count传入的参数值,控制不要超过最大值, 比如限定一次最多只能获取50条数据
+     * </p>
+     * 
+     * <pre>
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(null, null)      = null
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(null, 10)        = 10
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(-1, 2)        = 2
+     * 
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(0, 2)        = 2
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(1, 2)        = 1
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(3, 2)        = 2
+     * 
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(8, 2) = 2
+     * ObjectUtil.defaultCountIfNullZeroOrGreaterThan(8, 10) = 8
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param count
+     *            the i
+     * @param defaultValue
+     *            the default value to return, may be {@code null}
+     * @return 如果 <code>count</code> 是null 返回 <code>defaultValue</code>
+     *         如果 <code>count</code> {@code <=} 0,返回 <code>defaultValue</code>
+     *         如果 <code>count</code> {@code >} defaultValue,返回 <code>defaultValue</code>
+     *         否则返回 <code>defaultValue</code>
+     * @since 4.3.0
+     */
+    public static Integer defaultCountIfNullZeroOrGreaterThan(Integer count,Integer defaultValue){
+        if (null == count){
+            return defaultValue;
+        }
+        if (count <= 0){
+            return defaultValue;
+        }
+        //commonParam.getCount() <= 0 ? 10 : (commonParam.getCount() > 10 ? 10 : commonParam.getCount())
+        if (count > defaultValue){
+            return defaultValue;
+        }
+        return count;
+    }
+
     //---------------------------------------------------------------
 
     /**

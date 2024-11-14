@@ -43,6 +43,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 DefaultIfNullParameterizedTest.class,
                 DefaultIfNullOrLessThanOneParameterizedTest.class,
+                DefaultCountIfNullZeroOrGreaterThanParameterizedTest.class,
                 DefaultPageNoParameterizedTest.class,
                 DefaultZeroParameterizedTest.class,
 
