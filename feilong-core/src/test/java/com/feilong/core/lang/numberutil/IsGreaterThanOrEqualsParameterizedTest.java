@@ -27,14 +27,9 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
-public class IsGatherThanOrEqualsParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Number, Number, Boolean>{
+public class IsGreaterThanOrEqualsParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Number, Number, Boolean>{
 
-    /**
-     * Data.
-     *
-     * @return the iterable
-     */
-    @Parameters(name = "index:{index},NumberUtil.isGatherThanOrEquals({0}, {1})={2}")
+    @Parameters(name = "index:{index},NumberUtil.isGreaterThanOrEquals({0}, {1})={2}")
     public static Iterable<Object[]> data(){
         return toList(
                         ConvertUtil.<Object> toArray(0, 0, true),
@@ -112,12 +107,9 @@ public class IsGatherThanOrEqualsParameterizedTest extends Abstract2ParamsAndRes
         );
     }
 
-    /**
-     * Test.
-     */
     @Test
-    public void testGetSubtractValue(){
-        assertEquals(expectedValue, NumberUtil.isGatherThanOrEquals(input1, input2));
+    public void test(){
+        assertEquals(expectedValue, NumberUtil.isGreaterThanOrEquals(input1, input2));
     }
 
 }

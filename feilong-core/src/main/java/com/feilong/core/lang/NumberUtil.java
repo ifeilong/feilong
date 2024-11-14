@@ -337,15 +337,15 @@ public final class NumberUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.isGatherThanOrEquals(0, 0)                    =true
+     * NumberUtil.isGreaterThanOrEquals(0, 0)                    =true
      * 
-     * NumberUtil.isGatherThanOrEquals(5, 4)                    =true
-     * NumberUtil.isGatherThanOrEquals(5, 4L)                   =true
-     * NumberUtil.isGatherThanOrEquals(5, 4.0f)                 =true
-     * NumberUtil.isGatherThanOrEquals(5, 4.0d)                 =true
-     * NumberUtil.isGatherThanOrEquals(5, toBigDecimal(4.0d))   =true
+     * NumberUtil.isGreaterThanOrEquals(5, 4)                    =true
+     * NumberUtil.isGreaterThanOrEquals(5, 4L)                   =true
+     * NumberUtil.isGreaterThanOrEquals(5, 4.0f)                 =true
+     * NumberUtil.isGreaterThanOrEquals(5, 4.0d)                 =true
+     * NumberUtil.isGreaterThanOrEquals(5, toBigDecimal(4.0d))   =true
      * 
-     * NumberUtil.isGatherThanOrEquals(toBigDecimal(5.0d), 4)   =true
+     * NumberUtil.isGreaterThanOrEquals(toBigDecimal(5.0d), 4)   =true
      * </pre>
      * 
      * </blockquote>
@@ -358,8 +358,9 @@ public final class NumberUtil{
      *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.10.7
+     * @since 4.3.0 rename from isGatherThanOrEquals 单词写错了
      */
-    public static boolean isGatherThanOrEquals(Number one,Number two){
+    public static boolean isGreaterThanOrEquals(Number one,Number two){
         int compareTo = compare(one, two);
         return compareTo == 1 || compareTo == 0;
     }

@@ -19,21 +19,21 @@ import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
 
-public class IsGatherThanOrEqualsTest{
+public class IsGreaterThanOrEqualsTest{
 
     @Test(expected = NullPointerException.class)
-    public void testIsGatherThanOrEqualsTestNull1(){
-        NumberUtil.isGatherThanOrEquals(null, 1);
+    public void testIsGreaterThanOrEqualsTestNull1(){
+        NumberUtil.isGreaterThanOrEquals(null, 1);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testIsGatherThanOrEqualsTestNull2(){
-        NumberUtil.isGatherThanOrEquals(1, null);
+    public void testIsGreaterThanOrEqualsTestNull2(){
+        NumberUtil.isGreaterThanOrEquals(1, null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testIsGatherThanOrEqualsTestNull3(){
-        NumberUtil.isGatherThanOrEquals(null, null);
+    public void testIsGreaterThanOrEqualsTestNull3(){
+        NumberUtil.isGreaterThanOrEquals(null, null);
     }
 
 }
