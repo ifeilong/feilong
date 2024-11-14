@@ -19,33 +19,21 @@ import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
 
-/**
- * The Class IsGatherThanTest.
- */
-public class IsGatherThanTest{
+public class IsGreaterThanTest{
 
-    /**
-     * Test is gather than test null 1.
-     */
     @Test(expected = NullPointerException.class)
-    public void testIsGatherThanTestNull1(){
-        NumberUtil.isGatherThan(null, 1);
+    public void testIsGreaterThanTestNull1(){
+        NumberUtil.isGreaterThan(null, 1);
     }
 
-    /**
-     * Test is gather than test null 2.
-     */
     @Test(expected = NullPointerException.class)
-    public void testIsGatherThanTestNull2(){
-        NumberUtil.isGatherThan(1, null);
+    public void testIsGreaterThanTestNull2(){
+        NumberUtil.isGreaterThan(1, null);
     }
 
-    /**
-     * Test is gather than test null 3.
-     */
     @Test(expected = NullPointerException.class)
-    public void testIsGatherThanTestNull3(){
-        NumberUtil.isGatherThan(null, null);
+    public void testIsGreaterThanTestNull3(){
+        NumberUtil.isGreaterThan(null, null);
     }
 
 }

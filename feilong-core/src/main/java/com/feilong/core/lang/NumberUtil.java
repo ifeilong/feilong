@@ -295,15 +295,15 @@ public final class NumberUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.isGatherThan(0, 0)                    =false
+     * NumberUtil.isGreaterThan(0, 0)                    =false
      * 
-     * NumberUtil.isGatherThan(5, 4)                    =true
-     * NumberUtil.isGatherThan(5, 4L)                   =true
-     * NumberUtil.isGatherThan(5, 4.0f)                 =true
-     * NumberUtil.isGatherThan(5, 4.0d)                 =true
-     * NumberUtil.isGatherThan(5, toBigDecimal(4.0d))   =true
+     * NumberUtil.isGreaterThan(5, 4)                    =true
+     * NumberUtil.isGreaterThan(5, 4L)                   =true
+     * NumberUtil.isGreaterThan(5, 4.0f)                 =true
+     * NumberUtil.isGreaterThan(5, 4.0d)                 =true
+     * NumberUtil.isGreaterThan(5, toBigDecimal(4.0d))   =true
      * 
-     * NumberUtil.isGatherThan(toBigDecimal(5.0d), 4)   =true
+     * NumberUtil.isGreaterThan(toBigDecimal(5.0d), 4)   =true
      * </pre>
      * 
      * </blockquote>
@@ -316,8 +316,9 @@ public final class NumberUtil{
      *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.10.7
+     * @since 4.3.0 rename from isGatherThan 单词写错了
      */
-    public static boolean isGatherThan(Number one,Number two){
+    public static boolean isGreaterThan(Number one,Number two){
         return compare(one, two) == 1;
     }
 

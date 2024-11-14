@@ -56,8 +56,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 IsGatherThanOrEqualsTest.class,
                 IsGatherThanOrEqualsParameterizedTest.class,
-                IsGatherThanTest.class,
-                IsGatherThanParameterizedTest.class,
+                IsGreaterThanTest.class,
+                IsGreaterThanParameterizedTest.class,
                 IsLessThanTest.class,
                 IsLessThanParameterizedTest.class,
                 IsLessThanOrEqualsTest.class,
