@@ -239,6 +239,44 @@ public final class ObjectUtil{
     //---------------------------------------------------------------
 
     /**
+     * 如果 <code>booleanValue</code> 是null,返回 <code>true</code>;非null时候原样返回.
+     *
+     * <pre>
+     * ObjectUtil.defaultTrueIfNull(null)      = true
+     * ObjectUtil.defaultTrueIfNull(true)      = true
+     * ObjectUtil.defaultTrueIfNull(false)     = false
+     * </pre>
+     *
+     * @param booleanValue
+     *            the {@code Object} to test, may be {@code null}
+     * @return 如果 <code>booleanValue</code> 是null,返回 <code>true</code>,否则返回 <code>booleanValue</code>
+     * @since 4.3.1
+     */
+    public static boolean defaultTrueIfNull(final Boolean booleanValue){
+        return booleanValue != null ? booleanValue : true;
+    }
+
+    /**
+     * 如果 <code>booleanValue</code> 是null,返回 <code>booleanValue</code>;非null时候原样返回.
+     *
+     * <pre>
+     * ObjectUtil.defaultFalseIfNull(null)      = false
+     * ObjectUtil.defaultFalseIfNull(true)      = true
+     * ObjectUtil.defaultFalseIfNull(false)      = false
+     * </pre>
+     *
+     * @param booleanValue
+     *            the {@code Object} to test, may be {@code null}
+     * @return 如果 <code>booleanValue</code> 是null,返回 <code>false</code>,否则返回 <code>booleanValue</code>
+     * @since 4.3.1
+     */
+    public static boolean defaultFalseIfNull(final Boolean booleanValue){
+        return booleanValue != null ? booleanValue : false;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
      * 如果 <code>object</code> 是null,返回默认值 <code>defaultValue</code>.
      *
      * <pre>

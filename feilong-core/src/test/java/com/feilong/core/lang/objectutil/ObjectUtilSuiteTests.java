@@ -26,6 +26,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+                DefaultTrueIfNullParameterizedTest.class,
+                DefaultFalseIfNullParameterizedTest.class,
+
                 IsArrayParameterizedTest.class,
                 IsPrimitiveArrayParameterizedTest.class,
 
