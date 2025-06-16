@@ -25,33 +25,19 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 
-/**
- * The Class ConvertUtilToArrayClassTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class ToArrayStringArrayClassTest{
 
-    /**
-     * To t test.
-     */
     @Test
     public void testConvert1(){
         assertEquals((Serializable) null, ConvertUtil.toArray((String[]) null, Serializable.class));
     }
 
-    /**
-     * Test convert3.
-     */
     @Test(expected = NullPointerException.class)
     public void testConvert3(){
         String[] strings = toArray("");
         ConvertUtil.toArray(strings, null);
     }
 
-    /**
-     * Test convert array.
-     */
     @Test
     public void testConvertArray(){
         String[] ss = { "2", "1" };

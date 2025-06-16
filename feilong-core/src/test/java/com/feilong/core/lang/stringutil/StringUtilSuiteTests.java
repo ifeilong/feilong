@@ -49,6 +49,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 TokenizeToSetDefaultDelimitersTest.class,
                 TokenizeToSetDefaultDelimitersParameterizedTest.class,
                 TokenizeToListDefaultDelimitersTest.class,
+                TokenizeToListWithConvertClassParameterizedTest.class,
                 TokenizeToListDefaultDelimitersParameterizedTest.class,
 
                 TokenizeToStringArrayParameterizedTest.class,

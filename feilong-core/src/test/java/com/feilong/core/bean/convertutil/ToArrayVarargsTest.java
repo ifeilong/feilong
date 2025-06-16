@@ -23,18 +23,9 @@ import org.junit.Test;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class ConvertUtilToArrayVarargsTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class ToArrayVarargsTest{
 
-    /**
-     * To array2.
-     */
     @Test
-    
     public void testToArray(){
         User user1 = new User();
         user1.setId(1L);
@@ -45,40 +36,24 @@ public class ToArrayVarargsTest{
         assertArrayEquals(users, toArray(user1, user2));
     }
 
-    /**
-     * Test to array1.
-     */
     @Test
-    
     public void testToArray1(){
         assertArrayEquals(new String[] { "xinge", "feilong" }, toArray("xinge", "feilong"));
     }
 
-    /**
-     * Test to array null.
-     */
     @Test
-    
     public void testToArrayNull(){
         Object[] array = ConvertUtil.toArray(null);
         assertArrayEquals(null, array);
     }
 
-    /**
-     * Test to array4.
-     */
     @Test
-    
     public void testToArray4(){
         assertArrayEquals(new String[] {}, ConvertUtil.<String> toArray());
         assertArrayEquals(new Integer[] {}, ConvertUtil.<Integer> toArray());
     }
 
-    /**
-     * Test to array null 1.
-     */
     @Test
-    
     public void testToArrayNull1(){
         String[] array = ConvertUtil.toArray((String) null);
         assertArrayEquals(new String[] { null }, array);

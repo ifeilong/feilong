@@ -23,9 +23,12 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 import static com.feilong.core.lang.ArrayUtil.EMPTY_STRING_ARRAY;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
 
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
@@ -921,6 +924,139 @@ public final class StringUtil{
         String[] stringArray = tokenizeToStringArray(str);
         return toList(stringArray);
     }
+
+    /**
+     * 使用<span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span> 分隔给定的字符串,转成Set,去除 tokens的空格并且忽略empty tokens, 然后将每个元素转换成指定的类型
+     * <code>perElementConvertClass</code> 对应的set.
+     * 
+     * <p>
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
+     * </p>
+     * 
+     * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},<br>
+     * 本方法默认使用参数 <span style="color:green">trimTokens = true;</span> <br>
+     * <span style="color:green">ignoreEmptyTokens = true;</span>,<br>
+     * <span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+     * Set<String> set = StringUtil.tokenizeToSet(str, String.class);
+     * LOGGER.info(JsonUtil.format(set));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [
+     * "jin.xin",
+     * "feilong",
+     * "jinxin",
+     * "venusdrogon",
+     * "jim"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     * @param str
+     *            需要被分隔的字符串
+     * @param perElementConvertClass
+     *            单元素要转换成的类型
+     * @return 如果 <code>str</code> 是null或者empty,返回 {@link Collections#emptySet()}<br>
+     * @see java.util.StringTokenizer
+     * @see String#trim()
+     * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
+     * @see "org.springframework.util.StringUtils#tokenizeToStringArray"
+     * 
+     * @see #tokenizeToStringArray(String, String, boolean, boolean)
+     * @since 4.3.1
+     */
+    public static <T> Set<T> tokenizeToSet(String str,Class<T> perElementConvertClass){
+        String[] stringArray = tokenizeToStringArray(str);
+        if (isNullOrEmpty(stringArray)){
+            return emptySet();
+        }
+        //---------------------------------------------------------------
+        Set<T> set = newLinkedHashSet();
+        for (String perElement : stringArray){
+            set.add(convert(perElement, perElementConvertClass));
+        }
+        return set;
+    }
+
+    /**
+     * 使用<span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span> 分隔给定的字符串,转成List,去除 tokens的空格并且忽略empty tokens, 然后将每个元素转换成指定的类型
+     * <code>perElementConvertClass</code> 对应的list.
+     * 
+     * <p>
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
+     * </p>
+     * 
+     * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},<br>
+     * 本方法默认使用参数 <span style="color:green">trimTokens = true;</span> <br>
+     * <span style="color:green">ignoreEmptyTokens = true;</span>,<br>
+     * <span style="color:green">默认分隔符 ;, (逗号,分号和空格)</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+     * List<String> list = StringUtil.tokenizeToList(str, String.class);
+     * LOGGER.info(JsonUtil.format(list));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [
+     * "jin.xin",
+     * "feilong",
+     * "jinxin",
+     * "venusdrogon",
+     * "jim"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     * 
+     * @param str
+     *            需要被分隔的字符串
+     * @param perElementConvertClass
+     *            单元素要转换成的类型
+     * @return 如果 <code>str</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @see java.util.StringTokenizer
+     * @see String#trim()
+     * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
+     * @see "org.springframework.util.StringUtils#tokenizeToStringArray"
+     * 
+     * @see #tokenizeToStringArray(String, String, boolean, boolean)
+     * @since 4.3.1
+     */
+    public static <T> List<T> tokenizeToList(String str,Class<T> perElementConvertClass){
+        String[] stringArray = tokenizeToStringArray(str);
+        if (isNullOrEmpty(stringArray)){
+            return emptyList();
+        }
+        //---------------------------------------------------------------
+        List<T> list = newArrayList();
+        for (String perElement : stringArray){
+            list.add(convert(perElement, perElementConvertClass));
+        }
+        return list;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 使用StringTokenizer分隔给定的字符串到字符串数组,去除 tokens的空格并且忽略empty tokens.

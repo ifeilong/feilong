@@ -23,37 +23,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-/**
- * The Class ConvertUtilToArrayCollectionClassTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class ToArrayCollectionClassTest{
 
-    /**
-     * To array.
-     */
     @Test
-    
     public void testToArray0(){
         List<String> list = toList("xinge", "feilong");
         assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
     }
 
-    /**
-     * Test to array null type.
-     */
     @Test(expected = NullPointerException.class)
-    
     public void testToArrayNullType(){
         toArray(toList("xinge", "feilong"), null);
     }
 
-    /**
-     * Test to array null value.
-     */
     @Test
-    
     public void testToArrayNullValue(){
         assertArrayEquals(null, toArray((List<String>) null, String.class));
     }

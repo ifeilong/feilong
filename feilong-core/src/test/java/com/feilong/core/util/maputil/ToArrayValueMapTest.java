@@ -30,17 +30,11 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-/**
- * The Class MapUtilToArrayValueMapTest.
- *
- * @author <a href="https://github.com/ifeilong/feilong">feilong</a>
- */
 public class ToArrayValueMapTest{
 
     /**
      * Test to array value map null.
      */
-    //*******************com.feilong.core.util.MapUtil.toArrayValueMap(Map<String, String>)************************************************************
     @Test
     public void testToArrayValueMapNull(){
         assertEquals(emptyMap(), MapUtil.toArrayValueMap(null));

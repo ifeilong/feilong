@@ -47,7 +47,6 @@ public class CopyPropertiesTest{
      * Test copy properties null value.
      */
     @Test
-    
     public void testCopyPropertiesNullValue(){
         User oldUser = new User();
         oldUser.setId(null);
@@ -58,11 +57,7 @@ public class CopyPropertiesTest{
         assertEquals(null, newUser.getId());
     }
 
-    /**
-     * Test copy properties all.
-     */
     @Test
-    
     public void testCopyPropertiesAll(){
         BigDecimal money = new BigDecimal(500000);
         String[] nickNames = toArray("feilong", "飞天奔月", "venusdrogon");
@@ -97,7 +92,6 @@ public class CopyPropertiesTest{
      * Test copy properties with array.
      */
     @Test
-    
     public void testCopyPropertiesWithArray(){
         String[] nickNames = toArray("feilong", "飞天奔月", "venusdrogon");
 
@@ -118,7 +112,6 @@ public class CopyPropertiesTest{
      * Test copy property to bean not exist properties.
      */
     @Test
-    
     public void testCopyPropertyToBeanNotExistProperties(){
         User user = new User();
         user.setId(5L);
