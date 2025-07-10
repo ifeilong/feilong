@@ -22,10 +22,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                ToStringBeanExcludesTest.class,
                 ToStringBeanIgnoreNullWithIsIgnoreNullValueElementAndIfIgnoreNullValueElementIncludesTest.class
 
 //
 })
+
 public class ToStringSuiteTests{
 
 }

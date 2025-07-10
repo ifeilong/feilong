@@ -433,6 +433,72 @@ public final class JsonUtil{
         return format(obj, 0, 0);
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 将对象 <code>obj</code> 格式化成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且 toString(0, 0) 输出.
+     * 
+     * <p>
+     * 和该方法对应的有,仅仅<b>包含</b>某些属性,see {@link #formatWithIncludes(Object, String...)}
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * 
+     * user.setPassword("123456");
+     * user.setId(8L);
+     * user.setName("feilong");
+     * user.setDate(now());
+     * user.setMoney(toBigDecimal("99999999.00"));
+     * 
+     * user.setLoves(toArray("桔子", "香蕉"));
+     * user.setUserInfo(new UserInfo(10));
+     * 
+     * UserAddress userAddress1 = new UserAddress("上海市地址1");
+     * UserAddress userAddress2 = new UserAddress("上海市地址2");
+     * 
+     * user.setUserAddresses(toArray(userAddress1, userAddress2));
+     * user.setUserAddresseList(toList(userAddress1, userAddress2));
+     * 
+     * LOGGER.debug(JsonUtil.toString(USER, "name", "loves", "attrMap", "userInfo", "userAddresses"));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     *  {
+        "userAddresseList":         [
+            {"address": "上海市地址1"},
+            {"address": "上海市地址2"}
+        ],
+        "date": "2016-07-17 16:04:35",
+        "password": "******",
+        "id": 8,
+        "age": 0,
+        "money": 99999999,
+        "nickNames": []
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param excludes
+     *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 4.3.1
+     */
+    public static String toString(Object obj,String...excludes){
+        return format(obj, excludes, 0, 0);
+    }
+
     /**
      * 将对象 <code>obj</code> 格式化成json字符串,支持 <code>isIgnoreNullValueElement</code> 参数控制是否输出 null 值元素.
      * 
@@ -521,6 +587,50 @@ public final class JsonUtil{
     }
 
     /**
+     * 使用配置 <code>JavaToJsonConfig</code> 来转成json字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * BeanWithSensitiveWordsCase beanWithSensitiveWordsCase = new BeanWithSensitiveWordsCase();
+     * beanWithSensitiveWordsCase.setCvv("12222");
+     * beanWithSensitiveWordsCase.setPattern("pattern");
+     * beanWithSensitiveWordsCase.setBeanWithSensitiveWordsCaseInput(new BeanWithSensitiveWordsCaseInput("2222222"));
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsMaskDefaultSensitiveWords(false);
+     * 
+     * String result = JsonUtil.toString(beanWithSensitiveWordsCase, javaToJsonConfig);
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {"cvv":"******","beanWithSensitiveWordsCaseInput":{"aaa":"2222222"},"pattern":"pattern"}
+     * </pre>
+     * 
+     * <p>
+     * 当然上述示例中,<code>password</code>属性默认就是由 {@link SensitiveWordsJsonValueProcessor} 来处理
+     * </p>
+     * 
+     * </blockquote>
+     *
+     * @param obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param javaToJsonConfig
+     *            the json format config
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 3.2.2
+     */
+    public static String toString(Object obj,JavaToJsonConfig javaToJsonConfig){
+        return format(obj, javaToJsonConfig, 0, 0);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
      * 将对象格式化 成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且 toString(4, 4) 输出.
      * 
      * <p>
@@ -584,6 +694,8 @@ public final class JsonUtil{
     public static String format(Object obj,String...excludes){
         return format(obj, excludes, 4, 4);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将对象格式化 成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
@@ -809,48 +921,6 @@ public final class JsonUtil{
      */
     public static String format(Object obj,JavaToJsonConfig javaToJsonConfig){
         return format(obj, javaToJsonConfig, 4, 4);
-    }
-
-    /**
-     * 使用配置 <code>JavaToJsonConfig</code> 来转成json字符串.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * BeanWithSensitiveWordsCase beanWithSensitiveWordsCase = new BeanWithSensitiveWordsCase();
-     * beanWithSensitiveWordsCase.setCvv("12222");
-     * beanWithSensitiveWordsCase.setPattern("pattern");
-     * beanWithSensitiveWordsCase.setBeanWithSensitiveWordsCaseInput(new BeanWithSensitiveWordsCaseInput("2222222"));
-     * 
-     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
-     * javaToJsonConfig.setIsMaskDefaultSensitiveWords(false);
-     * 
-     * String result = JsonUtil.toString(beanWithSensitiveWordsCase, javaToJsonConfig);
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-    {"cvv":"******","beanWithSensitiveWordsCaseInput":{"aaa":"2222222"},"pattern":"pattern"}
-     * </pre>
-     * 
-     * <p>
-     * 当然上述示例中,<code>password</code>属性默认就是由 {@link SensitiveWordsJsonValueProcessor} 来处理
-     * </p>
-     * 
-     * </blockquote>
-     *
-     * @param obj
-     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
-     * @param javaToJsonConfig
-     *            the json format config
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @since 3.2.2
-     */
-    public static String toString(Object obj,JavaToJsonConfig javaToJsonConfig){
-        return format(obj, javaToJsonConfig, 0, 0);
     }
 
     //---------------------------------------------------------------
