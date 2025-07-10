@@ -61,7 +61,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ToSingleValueMapTest.class,
                 ToSingleValueMapConvertTest.class,
+
                 ToMultiValueMapTest.class,
+                ToMultiValueMapValueElementClassTest.class,
+                ToMultiValueMapKeyClassAndValueElementClassTest.class,
+
                 ToMapConvertTest.class,
 //
 })

@@ -1338,6 +1338,7 @@ public final class StringUtil{
      *            189=988;200=455; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
      * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
      *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
      * @since 3.3.4
      * @apiNote 自动去除空格,忽略空
      */
@@ -1381,6 +1382,7 @@ public final class StringUtil{
      *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
      * @since 3.3.4
      * @apiNote 自动去除空格,忽略空
      */
@@ -1389,6 +1391,8 @@ public final class StringUtil{
             return convert(valueString, valueElementClass);
         });
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将 73034693=0-50;11487680=0-43;51099626=0-50; 这种格式的字符串转换成map.
@@ -1460,6 +1464,7 @@ public final class StringUtil{
      *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>stringToBeanConverter</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
      * @since 4.1.2
      * @apiNote 自动去除空格,忽略空
      */
@@ -1468,10 +1473,10 @@ public final class StringUtil{
             return emptyMap();
         }
 
+        //---------------------------------------------------------------
+
         //entry之间的分隔符
         String entryDelimiters = ";";
-        //key 和value之间的分隔符
-        String keyAndValueDelimiters = "=";
 
         String[] entrys = StringUtil.tokenizeToStringArray(configString, entryDelimiters);
         if (isNullOrEmpty(entrys)){
@@ -1482,12 +1487,17 @@ public final class StringUtil{
         Validate.notNull(valueStringToBeanConverter, "stringToBeanConverter can't be null!");
 
         //---------------------------------------------------------------
+
+        //key 和value之间的分隔符
+        String keyAndValueDelimiters = "=";
+
         Map<T, V> map = newHashMap();
         for (String keyAndValueString : entrys){
             if (isNullOrEmpty(keyAndValueString)){
                 continue;
             }
             String[] keyAndValues = StringUtil.tokenizeToStringArray(keyAndValueString, keyAndValueDelimiters);
+            //如果使用=号 分隔之后 value没值的 key-value 会被忽略
             if (size(keyAndValues) != 2){
                 continue;
             }
@@ -1497,6 +1507,79 @@ public final class StringUtil{
             map.put(key, value);
         }
         return map;
+    }
+
+    /**
+     * 将 asedeffrrfgg=张飞,关羽;asedcccccfgg=吕布;这种格式的字符串转换成map , map的key 是asedeffrrfgg,asedcccccfgg 这种, value 是张飞,关羽 吕布 这种等号后面的值,使用逗号分隔成list.
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<String, List<String>> multiValueMap = StringUtil.toMultiValueMap("1=2;89=100 ,99;200=230, 999");
+     * 
+     * assertThat(
+     *                 multiValueMap,
+     *                 allOf(//
+     *                                 hasEntry("1", toList("2")),
+     *                                 hasEntry("89", toList("100", "99")),
+     *                                 hasEntry("200", toList("230", "999"))));
+     * 
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     * 
+     * @param configString
+     *            asedeffrrfgg=张飞,关羽;asedcccccfgg=吕布; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
+     * @since 4.3.1
+     * @apiNote 自动去除空格,忽略空
+     */
+    public static Map<String, List<String>> toMultiValueMap(String configString){
+        return toMultiValueMap(configString, String.class, String.class);
+    }
+
+    /**
+     * 将 asedeffrrfgg=张飞,关羽;asedcccccfgg=吕布;这种格式的字符串转换成map , map的key 是asedeffrrfgg,asedcccccfgg 这种, value 是张飞,关羽 吕布 这种等号后面的值,使用逗号分隔成list.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<String, List<Integer>> multiValueMap = StringUtil.toMultiValueMap("1=2;89=100,99;200=230,999", Integer.class);
+     * 
+     * assertThat(
+     *                 multiValueMap,
+     *                 allOf(//
+     *                                 hasEntry("1", toList(2)),
+     *                                 hasEntry("89", toList(100, 99)),
+     *                                 hasEntry("200", toList(230, 999))));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <V>
+     * 
+     * @param configString
+     *            asedeffrrfgg=张飞,关羽;asedcccccfgg=吕布; 这种格式的配置字符串, 用分号分隔一组, 等号分隔key 和value
+     * @param valueElementClass
+     *            value转换的类型,比如上面的背景中, 张飞,关羽 可以转换成String 或者其他类型
+     * @return 如果 <code>configString</code> 是null,返回 emptyMap() <br>
+     *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
+     *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
+     * @since 4.3.1
+     * @apiNote 自动去除空格,忽略空
+     */
+    public static <V> Map<String, List<V>> toMultiValueMap(String configString,Class<V> valueElementClass){
+        return toMultiValueMap(configString, String.class, valueElementClass);
     }
 
     /**
@@ -1535,6 +1618,7 @@ public final class StringUtil{
      *         如果 <code>configString</code> 是empty,返回 emptyMap()<br>
      *         如果 <code>keyClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valueElementClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果使用=号 分隔之后 value没值的 key-value 会被忽略
      * @since 3.3.4
      * @apiNote 自动去除空格,忽略空
      */
@@ -1544,6 +1628,8 @@ public final class StringUtil{
             return toList(toArray(values, valueElementClass));
         });
     }
+
+    //---------------------------------------------------------------
 
     // [start]format
 

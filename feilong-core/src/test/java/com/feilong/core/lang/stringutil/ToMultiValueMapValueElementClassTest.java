@@ -32,20 +32,27 @@ import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
 
-public class ToMultiValueMapTest{
+public class ToMultiValueMapValueElementClassTest{
 
     @Test
     public void toMultiValueMap(){
-        assertEquals(emptyMap(), StringUtil.toMultiValueMap(""));
-        assertEquals(emptyMap(), StringUtil.toMultiValueMap(" "));
-        assertEquals(emptyMap(), StringUtil.toMultiValueMap(null));
+        assertEquals(emptyMap(), StringUtil.toMultiValueMap("", String.class));
+        assertEquals(emptyMap(), StringUtil.toMultiValueMap(" ", String.class));
+        assertEquals(emptyMap(), StringUtil.toMultiValueMap(null, String.class));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void toMultiValueMap12(){
+        StringUtil.toMultiValueMap("1=2", null);
     }
 
     //---------------------------------------------------------------
 
     @Test
     public void toMultiValueMap123(){
-        Map<String, List<String>> multiValueMap = StringUtil.toMultiValueMap("1=2");
+        Map<String, List<String>> multiValueMap = StringUtil.toMultiValueMap("1=2", String.class);
 
         for (Map.Entry<String, List<String>> entry : multiValueMap.entrySet()){
             String key = entry.getKey();
@@ -58,7 +65,7 @@ public class ToMultiValueMapTest{
 
     @Test
     public void toMultiValueMap1223(){
-        Map<String, List<String>> multiValueMap = StringUtil.toMultiValueMap("1=2;");
+        Map<String, List<String>> multiValueMap = StringUtil.toMultiValueMap("1=2;", String.class);
 
         for (Map.Entry<String, List<String>> entry : multiValueMap.entrySet()){
             String key = entry.getKey();
@@ -70,16 +77,40 @@ public class ToMultiValueMapTest{
     }
 
     @Test
+    public void toMultiValueMap1333223(){
+        Map<String, List<Long>> multiValueMap = StringUtil.toMultiValueMap("1=2;", Long.class);
+
+        for (Map.Entry<String, List<Long>> entry : multiValueMap.entrySet()){
+            String key = entry.getKey();
+            List<Long> value = entry.getValue();
+
+            assertEquals(key, "1");
+            assertThat(value, allOf(hasItem(2L)));
+        }
+    }
+
+    @Test
+    public void toMultiValueMap1333223Integer(){
+        Map<String, List<Integer>> multiValueMap = StringUtil.toMultiValueMap("1=2;", Integer.class);
+
+        for (Map.Entry<String, List<Integer>> entry : multiValueMap.entrySet()){
+            String key = entry.getKey();
+            List<Integer> value = entry.getValue();
+
+            assertEquals(key, "1");
+            assertThat(value, allOf(hasItem(2)));
+        }
+    }
+
+    @Test
     public void toMultiValueMap1333223Integer222(){
-        Map<String, List<String>> multiValueMap = StringUtil.toMultiValueMap("1=2;89=100 ,99;200=230, 999;300");
-
+        Map<String, List<Integer>> multiValueMap = StringUtil.toMultiValueMap("1=2;89=100 ,99;200=230, 999;300", Integer.class);
         assertTrue(3 == size(multiValueMap));
-
         assertThat(
                         multiValueMap,
                         allOf(//
-                                        hasEntry("1", toList("2")),
-                                        hasEntry("89", toList("100", "99")),
-                                        hasEntry("200", toList("230", "999"))));
+                                        hasEntry("1", toList(2)),
+                                        hasEntry("89", toList(100, 99)),
+                                        hasEntry("200", toList(230, 999))));
     }
 }
