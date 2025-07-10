@@ -55,7 +55,6 @@ public class ExcelReaderUtil{
     }
 
     //---------------------------------------------------------------
-
     /**
      * 获得 list.
      *
@@ -108,6 +107,15 @@ public class ExcelReaderUtil{
 
     //---------------------------------------------------------------
 
+    /**
+     * Builds the.
+     *
+     * @param sheetDefinitionLocation
+     *            the sheet definition location
+     * @param sheetName
+     *            the sheet name
+     * @return the excel reader
+     */
     private static ExcelReader build(String sheetDefinitionLocation,String sheetName){
         Map<String, ExcelSheet> sheetDefinitions = ExcelSheetMapBuilder.build(sheetDefinitionLocation);
         return buildExcelReader(sheetDefinitions, sheetName);
@@ -143,14 +151,14 @@ public class ExcelReaderUtil{
     /**
      * 获得 excel reader.
      *
-     * @param sheetDefinitionLocations
-     *            xml sheet相关配置文件, 如 sheets/train-course.xml,基于class path路径
-     * @param sheetName
-     *            the sheet
+     * @param sheetDefinitions
+     *            the sheet definitions
+     * @param sheetNames
+     *            the sheet names
      * @return the excel reader
      * @since 1.0.9
      */
-    private static ExcelReader buildExcelReader(Map<String, ExcelSheet> sheetDefinitions,String...sheetNames){
+    static ExcelReader buildExcelReader(Map<String, ExcelSheet> sheetDefinitions,String...sheetNames){
         ExcelDefinition build = ExcelDefinitionBuilder.build(sheetDefinitions, sheetNames);
         return new DefaultExcelReader(build);
 
@@ -174,7 +182,7 @@ public class ExcelReaderUtil{
      * @return the list< t>
      * @since 1.0.9
      */
-    private static <T> List<T> read(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
+    static <T> List<T> read(ExcelReader excelReader,InputStream inputStream,String dataName,int sheetNo){
         long beginTimeMillis = System.currentTimeMillis();
 
         Map<String, Object> beans = readData(excelReader, inputStream, sheetNo);
