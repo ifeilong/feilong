@@ -15,7 +15,7 @@
  */
 package com.feilong.excel.util;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,7 +63,7 @@ public class WorkbookUtil{
         try{
             Workbook workbook = WorkbookFactory.create(inputStream);
             if (log.isDebugEnabled()){
-                log.debug("create workbook from [{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
+                log.debug("create workbook from [{}],use time: [{}]", inputStream, formatElapsedTime(beginTimeMillis));
             }
             return workbook;
         }catch (EncryptedDocumentException e){
@@ -95,7 +95,7 @@ public class WorkbookUtil{
         try{
             workbook.write(outputStream);
             if (log.isInfoEnabled()){
-                log.info("write workbook to outputStream use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+                log.info("write workbook to outputStream use time: [{}]", formatElapsedTime(beginTimeMillis));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

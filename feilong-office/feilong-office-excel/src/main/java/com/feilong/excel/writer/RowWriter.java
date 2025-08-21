@@ -17,7 +17,7 @@ package com.feilong.excel.writer;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 import java.util.ArrayList;
@@ -92,7 +92,7 @@ class RowWriter{
                             "write row:[{}] over,rowOffset:[{}],use time: [{}]",
                             rowIndex,
                             rowOffset,
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+                            formatElapsedTime(beginTimeMillis));
         }
     }
 

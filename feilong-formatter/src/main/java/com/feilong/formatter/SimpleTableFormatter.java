@@ -16,7 +16,7 @@
 package com.feilong.formatter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ArrayUtil.newArray;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.SPACE;
@@ -173,7 +173,7 @@ public class SimpleTableFormatter extends AbstractFormatter{
         }
         //---------------------------------------------------------------
         if (log.isDebugEnabled()){
-            log.debug("format use time:[{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.debug("format use time:[{}]", formatElapsedTime(beginTimeMillis));
         }
         return lineSeparator() + sb.toString();
     }

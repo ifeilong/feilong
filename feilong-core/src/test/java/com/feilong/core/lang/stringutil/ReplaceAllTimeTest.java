@@ -15,7 +15,7 @@
  */
 package com.feilong.core.lang.stringutil;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import java.util.regex.Pattern;
 
@@ -59,7 +59,7 @@ public class ReplaceAllTimeTest{
             StringUtil.replaceAll(content, regex, replacement);
             //             pattern.matcher(content).replaceAll(replacement);
         }
-        log.info("new use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        log.info("new use time: [{}]", formatElapsedTime(beginTimeMillis));
     }
 
     private void extractedOrg(){
@@ -68,7 +68,7 @@ public class ReplaceAllTimeTest{
             //            StringUtil.replaceAll(content, regex, "");
             content.replaceAll(regex, replacement);
         }
-        log.info("org use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        log.info("org use time: [{}]", formatElapsedTime(beginTimeMillis));
     }
 
     private void extractedApache(){
@@ -76,7 +76,7 @@ public class ReplaceAllTimeTest{
         for (int i = 0, j = 10000; i < j; ++i){
             StringUtils.replace(content, regex, replacement);
         }
-        log.info("apache use time: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        log.info("apache use time: [{}]", formatElapsedTime(beginTimeMillis));
     }
 
 }

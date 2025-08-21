@@ -15,7 +15,7 @@
  */
 package com.feilong.excel.writer;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.excel.util.CellReferenceUtil.getCellRef;
@@ -64,7 +64,7 @@ class SheetWriter{
         }
         //---------------------------------------------------------------
         if (log.isDebugEnabled()){
-            log.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.debug("writeSheet:[{}], use time: [{}]", excelSheet.getName(), formatElapsedTime(beginTimeMillis));
         }
     }
 
@@ -96,7 +96,7 @@ class SheetWriter{
         //---------------------------------------------------------------
         if (log.isDebugEnabled()){
             String pattern = "write sheet block:[{}]-[{}], use time: [{}]";
-            log.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.debug(pattern, excelSheet.getName(), excelBlock.getDataName(), formatElapsedTime(beginTimeMillis));
         }
     }
 

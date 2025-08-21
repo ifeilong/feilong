@@ -17,7 +17,7 @@ package com.feilong.taglib;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 
 import java.io.IOException;
@@ -73,7 +73,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
         if (log.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String tagLog = isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
-            String useTime = formatDurationUseBeginTimeMillis(beginTimeMillis);
+            String useTime = formatElapsedTime(beginTimeMillis);
             log.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), tagLog, useTime);
         }
     }

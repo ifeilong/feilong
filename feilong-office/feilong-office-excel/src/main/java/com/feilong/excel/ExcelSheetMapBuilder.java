@@ -15,7 +15,7 @@
  */
 package com.feilong.excel;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.util.CollectionsUtil.size;
@@ -65,7 +65,7 @@ class ExcelSheetMapBuilder{
                                     "parse [{}],sheetList size:[{}],use time: [{}]",
                                     sheetDefinitionPath,
                                     size,
-                                    formatDurationUseBeginTimeMillis(beginTimeMillis));
+                                    formatElapsedTime(beginTimeMillis));
                 }
             }catch (Exception e){
                 throw new DefaultRuntimeException("parse [" + sheetDefinitionPath + "] fail", e);

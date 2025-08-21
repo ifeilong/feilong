@@ -15,7 +15,7 @@
  */
 package com.feilong.zip;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 
 import java.io.IOException;
@@ -67,7 +67,7 @@ public abstract class AbstractZipHandler implements ZipHandler{
         if (log.isInfoEnabled()){
             log.info(
                             "use time:[{}],end zip:[{}],outputZipPath:[{}]",
-                            formatDurationUseBeginTimeMillis(beginTimeMillis),
+                            formatElapsedTime(beginTimeMillis),
                             tobeZipFilePath,
                             outputZipPath);
         }

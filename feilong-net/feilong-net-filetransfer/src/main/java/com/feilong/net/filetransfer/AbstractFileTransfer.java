@@ -17,7 +17,7 @@ package com.feilong.net.filetransfer;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.StringUtil.EMPTY;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.io.entity.FileType.DIRECTORY;
@@ -462,7 +462,7 @@ public abstract class AbstractFileTransfer implements FileTransfer{
                         remotePath,
                         filePath,
                         toResultString(isSuccess),
-                        formatDurationUseBeginTimeMillis(beginTimeMillis));
+                        formatElapsedTime(beginTimeMillis));
     }
 
     //---------------------------------------------------------------

@@ -15,7 +15,7 @@
  */
 package com.feilong.component.download;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -69,7 +69,7 @@ public class DownloadController{
                             pattern,
                             incrementAndGet,
                             requestFileCreator.getClass().getSimpleName(),
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+                            formatElapsedTime(beginTimeMillis));
         }
     }
 }

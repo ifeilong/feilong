@@ -16,7 +16,7 @@
 package com.feilong.core.util.collectionsutil.get;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.util.CollectionsUtil.getPropertyValueList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
@@ -65,7 +65,7 @@ public class GetPropertyValueListPerformanceTest{
 
         }
         if (log.isInfoEnabled()){
-            log.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("useTime: [{}]", formatElapsedTime(beginTimeMillis));
         }
 
     }
@@ -92,7 +92,7 @@ public class GetPropertyValueListPerformanceTest{
 
         }
         if (log.isInfoEnabled()){
-            log.info("useTime: [{}]", formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("useTime: [{}]", formatElapsedTime(beginTimeMillis));
         }
 
     }

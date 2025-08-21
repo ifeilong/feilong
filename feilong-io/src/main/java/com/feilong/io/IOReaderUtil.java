@@ -18,7 +18,7 @@ package com.feilong.io;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNull;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
@@ -339,7 +339,7 @@ public final class IOReaderUtil{
                 log.info(
                                 "end read fileInputStream:[{}],use time: [{}]",
                                 fileInputStream,
-                                formatDurationUseBeginTimeMillis(beginTimeMillis));
+                                formatElapsedTime(beginTimeMillis));
             }
             return result;
         }catch (IOException e){
@@ -411,7 +411,7 @@ public final class IOReaderUtil{
         try{
             String result = InputStreamUtil.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
             if (log.isInfoEnabled()){
-                log.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDurationUseBeginTimeMillis(beginTimeMillis));
+                log.info("end read inputStream:[{}],use time: [{}]", inputStream, formatElapsedTime(beginTimeMillis));
             }
             return result;
         }finally{
@@ -977,7 +977,7 @@ public final class IOReaderUtil{
                             "endReadReader:[{}],readerConfig:[{}],use time: [{}]",
                             reader,
                             JsonUtil.toString(useReaderConfig),
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+                            formatElapsedTime(beginTimeMillis));
         }
         return collection;
     }
@@ -1158,7 +1158,7 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         if (log.isInfoEnabled()){
             String format = "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]";
-            log.info(format, reader, lineNumberReaderResolver, formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info(format, reader, lineNumberReaderResolver, formatElapsedTime(beginTimeMillis));
         }
     }
 

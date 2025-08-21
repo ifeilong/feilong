@@ -16,7 +16,7 @@
 package com.feilong.io;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.io.entity.FileWriteMode.COVER;
 
@@ -189,7 +189,7 @@ public final class IOWriteUtil{
             File file = new File(filePath);
             String size = FileUtil.getFileFormatSize(file);
             String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
-            String useTime = formatDurationUseBeginTimeMillis(beginTimeMillis);
+            String useTime = formatElapsedTime(beginTimeMillis);
             log.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
         }
     }
@@ -285,7 +285,7 @@ public final class IOWriteUtil{
                             messagePattern,
                             FileUtil.getFileFormatSize(file),
                             file.getAbsolutePath(),
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+                            formatElapsedTime(beginTimeMillis));
         }
         return filePath;
     }
@@ -439,7 +439,7 @@ public final class IOWriteUtil{
                                 FileUtil.formatSize(sumSize),
                                 bufferLength,
                                 loopCount,
-                                formatDurationUseBeginTimeMillis(beginTimeMillis));
+                                formatElapsedTime(beginTimeMillis));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

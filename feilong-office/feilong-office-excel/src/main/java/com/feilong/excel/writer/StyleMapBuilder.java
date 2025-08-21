@@ -15,7 +15,7 @@
  */
 package com.feilong.excel.writer;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static java.util.Collections.emptyMap;
 
 import java.util.HashMap;
@@ -84,7 +84,7 @@ class StyleMapBuilder{
         if (log.isDebugEnabled()){
             log.debug(
                             "buildStyleMap use time: [{}],StyleMap size:[{}]",
-                            formatDurationUseBeginTimeMillis(beginTimeMillis),
+                            formatElapsedTime(beginTimeMillis),
                             styleMap.size());
         }
         return styleMap;

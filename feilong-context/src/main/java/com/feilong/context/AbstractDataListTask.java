@@ -16,7 +16,7 @@
 package com.feilong.context;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
                                 "[{}],use dataListQuery:[{}] query no data list,use time: [{}]",
                                 taskName,
                                 name,
-                                formatDurationUseBeginTimeMillis(beginTimeMillis));
+                                formatElapsedTime(beginTimeMillis));
             }
             return null;
         }
@@ -74,7 +74,7 @@ public abstract class AbstractDataListTask<T extends Data> implements Task<Void>
 
         //---------------------------------------------------------------
         if (log.isInfoEnabled()){
-            log.info("[{}],dataList size:[{}],useTime: [{}]", taskName, dataList.size(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("[{}],dataList size:[{}],useTime: [{}]", taskName, dataList.size(), formatElapsedTime(beginTimeMillis));
         }
         return null;
     }

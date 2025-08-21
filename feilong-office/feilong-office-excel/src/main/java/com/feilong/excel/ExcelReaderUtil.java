@@ -18,7 +18,7 @@ package com.feilong.excel;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.CollectionsUtil.size;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -188,7 +188,7 @@ public class ExcelReaderUtil{
             map.put("dataName", dataName);
             map.put("sheetNo", sheetNo);
             map.put("list size", size(list));
-            map.put("use time", formatDurationUseBeginTimeMillis(beginTimeMillis));
+            map.put("use time", formatElapsedTime(beginTimeMillis));
             log.info("use time: [{}]", JsonUtil.toString(map));
         }
         return list;

@@ -18,7 +18,7 @@ package com.feilong.excel;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.date.DateUtil.nowTimestamp;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.lang.StringUtil.EMPTY;
@@ -252,7 +252,7 @@ public class ExcelWriteUtil{
                     String outputFileName,
                     long beginTimeMillis){
         Map<String, Object> map = build(templateLocation, sheetDefinitionLocation, sheetNames, beans, outputFileName);
-        map.put("useTime", formatDurationUseBeginTimeMillis(beginTimeMillis));
+        map.put("useTime", formatElapsedTime(beginTimeMillis));
         return map;
     }
 

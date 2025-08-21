@@ -19,7 +19,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.StringUtil.formatPattern;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -396,6 +396,6 @@ public final class SessionUtil{
     private static String toPrettyMessage(long creationTime){
         Date creationTimeDate = new Date(creationTime);
         String dateString = DateUtil.toString(creationTimeDate, COMMON_DATE_AND_TIME_WITH_MILLISECOND);
-        return formatPattern("[{}],intervalToNow:[{}]", dateString, formatDurationUseBeginTimeMillis(creationTime));
+        return formatPattern("[{}],intervalToNow:[{}]", dateString, formatElapsedTime(creationTime));
     }
 }

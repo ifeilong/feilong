@@ -17,7 +17,7 @@ package com.feilong.servlet.http;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import java.io.File;
 import java.io.IOException;
@@ -197,7 +197,7 @@ public final class ResponseDownloadUtil{
 
             if (log.isInfoEnabled()){
                 String pattern = "end download,saveFileName:[{}],contentLength:[{}],time use:[{}]";
-                log.info(pattern, saveFileName, length, formatDurationUseBeginTimeMillis(beginTimeMillis));
+                log.info(pattern, saveFileName, length, formatElapsedTime(beginTimeMillis));
             }
         }catch (IOException e){
             /*

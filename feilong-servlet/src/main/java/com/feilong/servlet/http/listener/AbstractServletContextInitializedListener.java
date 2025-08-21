@@ -15,7 +15,7 @@
  */
 package com.feilong.servlet.http.listener;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -44,7 +44,7 @@ public abstract class AbstractServletContextInitializedListener implements Servl
         initialized(servletContextEvent);
 
         if (log.isInfoEnabled()){
-            log.info("[{}] initialized use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("[{}] initialized use time: [{}]", getClass().getName(), formatElapsedTime(beginTimeMillis));
         }
     }
 

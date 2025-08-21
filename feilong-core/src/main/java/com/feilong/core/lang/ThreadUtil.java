@@ -16,7 +16,7 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.bean.ConvertUtil.toLong;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import java.util.List;
 import java.util.Map;
@@ -340,7 +340,7 @@ public final class ThreadUtil{
                             "runnable:[{}],threadCount:[{}],total use time:{}",
                             runnable,
                             threadCount,
-                            formatDurationUseBeginTimeMillis(beginTimeMillis));
+                            formatElapsedTime(beginTimeMillis));
         }
     }
 

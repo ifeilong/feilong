@@ -17,7 +17,7 @@ package com.feilong.tools.log;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.NumberUtil.getMultiplyValue;
 import static com.feilong.core.lang.NumberUtil.getSubtractValueWithScale;
 import static com.feilong.core.lang.StringUtil.EMPTY;
@@ -122,7 +122,7 @@ public class LogHelper{
 
         if (null != allBeginTimeMillis){
             //since 4.0.4
-            appendItem(sb, " ,已经执行时间(elapsedTime): ", formatDurationUseBeginTimeMillis(allBeginTimeMillis), 12);
+            appendItem(sb, " ,已经执行时间(elapsedTime): ", formatElapsedTime(allBeginTimeMillis), 12);
         }
         appendItem(sb, " ,预估剩余时间(estimatedRemainingTime): ", formatDuration(estimatedRemainingTime), 12);
     }

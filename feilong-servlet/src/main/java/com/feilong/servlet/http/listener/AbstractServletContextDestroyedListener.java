@@ -15,7 +15,7 @@
  */
 package com.feilong.servlet.http.listener;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -59,7 +59,7 @@ public abstract class AbstractServletContextDestroyedListener implements Servlet
         destroyed(servletContextEvent);
 
         if (log.isInfoEnabled()){
-            log.info("[{}] destroyed use time: [{}]", getClass().getName(), formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("[{}] destroyed use time: [{}]", getClass().getName(), formatElapsedTime(beginTimeMillis));
         }
     }
 

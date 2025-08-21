@@ -2370,8 +2370,58 @@ public final class DateUtil{
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
      * @since 3.5.1
+     * @deprecated pls use {@link #formatElapsedTime(long)} since 4.4.0
      */
+    @Deprecated
     public static String formatDurationUseBeginTimeMillis(long beginTimeMillis){
+        return formatElapsedTime(beginTimeMillis);
+    }
+
+    /**
+     * 将开始时间 <code>beginTimeMillis</code> 到当前时间
+     * <code>System.currentTimeMillis()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>常用于日志输出一段代码执行时长</li>
+     * <li>计算的是开始时间 <code>beginTimeMillis</code> 到当前时间 <code>System.currentTimeMillis()</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字,月和较大的格式不使用</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * long t1 = System.currentTimeMillis();
+     * 
+     * <span style="color:green">// do some logic</span>
+     * <span style="color:green">// balabala logic</span>
+     * 
+     * log.info("use time: [{}]", DateUtil.formatElapsedTime(t1));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>和 "org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 的区别:
+     * </h3>
+     * <blockquote>
+     * <ol>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 显示的是英文,该方法显示的是中文</li>
+     * <li>"org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)" 最小单位是秒,该方法最小单位是毫秒</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param beginTimeMillis
+     *            开始时间
+     * @return 比如 6天13小时3分钟53秒259毫秒
+     * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
+     *      in-java-e-g-format-hmmss</a>
+     * @since 4.4.0
+     */
+    public static String formatElapsedTime(long beginTimeMillis){
         return formatDuration(System.currentTimeMillis() - beginTimeMillis);
     }
 
@@ -2439,7 +2489,7 @@ public final class DateUtil{
      *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
      * @since 3.0.0 move from DateExtensionUtil
-     * @deprecated since 3.5.1 ,pls use {@link #formatDurationUseBeginTimeMillis(long)},免掉date开销,性能稍微高
+     * @deprecated since 3.5.1 ,pls use {@link #formatElapsedTime(long)},免掉date开销,性能稍微高
      */
     @Deprecated
     public static String formatDuration(Date beginDate){

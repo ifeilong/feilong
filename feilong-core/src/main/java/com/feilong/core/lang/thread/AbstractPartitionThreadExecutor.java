@@ -15,7 +15,7 @@
  */
 package com.feilong.core.lang.thread;
 
-import static com.feilong.core.date.DateUtil.formatDurationUseBeginTimeMillis;
+import static com.feilong.core.date.DateUtil.formatElapsedTime;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.lib.lang3.ClassUtils.getSimpleName;
 
@@ -110,7 +110,7 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
         //---------------------------------------------------------------
         if (log.isInfoEnabled()){
 
-            log.info("{} end [{}],useTime:[{}]", logKey, partitionRunnableBuilderName, formatDurationUseBeginTimeMillis(beginTimeMillis));
+            log.info("{} end [{}],useTime:[{}]", logKey, partitionRunnableBuilderName, formatElapsedTime(beginTimeMillis));
         }
     }
 
